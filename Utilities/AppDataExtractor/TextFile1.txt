@@ -1,0 +1,11 @@
+
+dataTypesDataTable.AddDataTypesRow(@"Number", true, false, true, @"NUMERIC").DataTypeId = 1;
+dataTypesDataTable.AddDataTypesRow(@"Text", false, true, false, @"TEXTINPUT").DataTypeId = 2;
+dataTypesDataTable.AddDataTypesRow(@"Date", true, false, true, @"DATEFORMAT").DataTypeId = 3;
+dataTypesDataTable.AddDataTypesRow(@"Time", true, false, false, @"DATEFORMAT").DataTypeId = 4;
+dataTypesDataTable.AddDataTypesRow(@"DateTime", true, false, false, @"DATEFORMAT").DataTypeId = 5;
+dataTypesDataTable.AddDataTypesRow(@"Boolean", false, false, false, @"YN").DataTypeId = 6;
+dataTypesDataTable.AddDataTypesRow(@"PhoneNumber", true, false, false, @"TEXTINPUT").DataTypeId = 7;
+dataTypesDataTable.AddDataTypesRow(@"YesNo", false, false, false, @"YN").DataTypeId = 8;
+dataTypesDataTable.AddDataTypesRow(@"Unknown", false, false, false, string.Empty).DataTypeId = 9;
+dataTypesDataTable.AddDataTypesRow(@"Object", false, false, false, @"DLLOBJECT").DataTypeId = 0;

@@ -1,0 +1,642 @@
+
+"Name"                  = 'Epi Info 7 Grammar'
+"Version"               = '2.0'
+"Author"                = 'Epi Info Rewrite Team LM-ESAS jhaines'
+"Case Sensitive"            = False 
+"Start Symbol"              = <Program>
+
+!----------------------------------------------------------------------------------------------------------------------------
+!-------------------------------- CHARACTER SETS ----------------------------------------------------------------------------
+{String Chars}          = {Printable}+ {Letter Extended} - ["]
+{Char Ch}               = {Printable}+ {Letter Extended} - ['']
+{WS}                    = {Whitespace}
+{ServerName}                = {AlphaNumeric} + ['-''_'] + {Letter Extended}
+!{DatabaseVar}          = {Printable} - ['.''!''`''['']''"']  - {WS} - {Control Codes}
+{ID Head}               = {Letter} + ['_''@'] + {Letter Extended}
+{ID Tail}               = {Alphanumeric} + ['_''@''#''$'] + {Letter Extended}
+!{Hex Digit}                = {Digit} + [abcdef] + [ABCDEF]
+{Url Chars}             = {Printable}+ {Letter Extended} - {WhiteSpace}
+{Valid Chars}               = {All Valid} - {CR} - {LF}
+!----------------------------------------------------------------------------------------------------------------------------
+!-------------------------------- TERMINALS ---------------------------------------------------------------------------------
+!             = ({CR}{LF})+|{CR}+ | {LF}+
+Whitespace                          = {WS}+
+String                              = '"'{String Chars}*'"' 
+File                = (''(({Letter}':')|('\\'{ServerName}+)|('..\'+)|([.]?'\'))((['\']?{Printable}+)*)'')|((({Letter}':')|('\\'{ServerName}+)|('..\'+)|([.]?'\'))((['\']?{Printable}+)*))
+Url                 = 'http://'{Url Chars}+
+
+!FileSpec               = ('FILESPEC' {Space}) ('UID=''"' {AlphaNumeric}+ '"'{Space}) ('PWD=''"' {AlphaNumeric}+ '"'{Space}) 'END'
+!                     |('FILESPEC' {Space}) ('PWD=''"' {AlphaNumeric}+ '"'{Space}) 'END'
+Identifier                        = {ID Head}{ID Tail}* | '['({ID Head}| '#')({ID Tail}|{WhiteSpace})*']'
+
+!Identifier                        = {ID Head}{ID Tail}* | '[' {ID Head}({Alphanumeric}?[_]?{Space}?)* ']'
+
+RealLiteral             != [+-]? {Digit}*'.'{Digit}+ ('E'[+-]? {Digit}+)?
+                                        = {Digit}*'.'{Digit}+ ('E'[+-]? {Digit}+)?
+                      | {Digit}+ 'E'[+-]? {Digit}+
+DecLiteral              != [+-]? {Digit}+ ([UL] | [U][L] | [L][U])?
+                                        = {Digit}+ ([UL] | [U][L] | [L][U])?
+HexLiteral              = '#'({Digit}[abcdef])+
+
+CharLiteral             = ''({Char Ch})''
+Boolean             = ('(+)') | ('(-)') | ('(.)')
+!Integer                = {Digit}+
+Date                    = ({Digit})?{Digit}[/-]({Digit})?{Digit}[/-]({Digit})?{Digit} ({Digit}{Digit})?
+Time                    = (([01]? {Digit}) | [2][01234]) ':' ([012345]?{Digit}) (':'[012345]?{Digit})?
+!ExcelRange              = {Letter} {Letter}? {Digit} {Digit}? {Digit}? {Digit}? {Digit}? ':' {Letter} {Letter}? {Digit} {Digit}? {Digit}? {Digit}? {Digit}? 
+!Percent             = {Digit}* ('.'{Digit}*)?'%'
+!DefinePromptString         = '("'{String Chars}*'")'
+Comment Line = '//'
+Comment Start = '/*'
+Comment End = '*/'
+!----------------------------------------------------------------------------------------------------------------------------
+!-------------------------------- RULES -------------------------------------------------------------------------------------
+
+
+<Program> ::= <CheckCodeBlocks> | !Eof
+
+
+!The requirment that there be only 1 of the  
+!    <DefineVariables_Statement>,
+!    <View_Checkcode_Statement>,
+!    <Record_Checkcode_Statement>
+!blocks will be handling in the implementation of the interpreter
+
+<CheckCodeBlocks> ::= <CheckCodeBlock> <CheckCodeBlocks> | <CheckCodeBlock> 
+
+<CheckCodeBlock> ::=   <DefineVariables_Statement>
+                                | <View_Checkcode_Statement>
+                                | <Record_Checkcode_Statement>
+                    | <Page_Checkcode_Statement>  
+                    | <Field_Checkcode_Statement>
+                    | <Subroutine_Statement> 
+
+<Statements>                ::= <Statements>  <Statement> | <Statement> 
+
+<Statement> ::=  <Always_Statement>
+        | <Assign_Statement>
+        | <Assign_DLL_Statement> 
+        | <Simple_Assign_Statement>
+        | <Let_Statement>
+        | <Auto_Search_Statement>
+        | <Beep_Statement>
+        | <Call_Statement>
+        | <Clear_Statement>
+        | <CMD_Line_Statement>
+        | <Simple_Dialog_Statement>
+        | <Numeric_Dialog_Implicit_Statement>
+        | <Numeric_Dialog_Explicit_Statement>
+        | <TextBox_Dialog_Statement>
+        | <Db_Values_Dialog_Statement>
+        | <YN_Dialog_Statement>
+        | <Db_Views_Dialog_Statement>
+        | <Databases_Dialog_Statement>
+        | <Db_Variables_Dialog_Statement>
+        | <Multiple_Choice_Dialog_Statement>
+        | <Dialog_Read_Statement>
+        | <Dialog_Write_Statement>
+        | <Dialog_Read_Filter_Statement>
+        | <Dialog_Write_Filter_Statement>
+        | <Dialog_Date_Statement>
+        | <Dialog_Time_Statement>
+        | <Dialog_DateTime_Statement>
+        | <Dialog_Date_Mask_Statement>
+        |<Disable_Statement> 
+        | <New_Record_Statement>
+        | <Simple_Execute_Statement>
+        |<Enable_Statement> 
+        | <Execute_File_Statement>
+        | <Execute_Url_Statement>
+        | <Execute_Wait_For_Exit_File_Statement>
+        | <Execute_Wait_For_Exit_String_Statement>
+        | <Execute_Wait_For_Exit_Url_Statement>
+        | <Execute_No_Wait_For_Exit_File_Statement>
+        | <Execute_No_Wait_For_Exit_String_Statement>
+        | <Execute_No_Wait_For_Exit_Url_Statement>
+        | <Exit_Statement>
+        | <File_Dialog_Statement>
+        | <Geocode_Statement>
+        | <Get_Path_Statement>
+        | <Go_To_Variable_Statement>
+        | <Go_To_Page_Statement>
+        | <Help_Statement> 
+        | <Hide_Some_Statement>
+        | <Hide_Except_Statement>
+        |<Highlight_Statement> 
+        | <If_Statement>
+        | <If_Else_Statement>
+                | <Quit_Statement>
+                | <Simple_Undefine_Statement>
+        | <All_Standard_Undefine_Statement>
+        | <All_Global_Undefine_Statement>
+                | <Unhide_Some_Statement>
+        | <Unhide_Except_Statement>
+        | <UnHighlight_Statement>
+                | <Wait_For_Statement>
+                | <Wait_For_Exit_Statement>
+                | <Wait_For_File_Exists_Statement>
+                |<Set_Required_Statement>
+                |<Set_Not_Required_Statement>
+                |<Save_Record_Statement>
+
+  
+
+<Literal> ::=  <Number>
+        | <Literal_Char>
+        | <Literal_String>
+        | <Literal_Date>
+        | <Literal_Time>
+        | <Literal_Date_Time>
+
+<Literal_Char> ::= CharLiteral
+<Literal_String> ::= String
+<Literal_Date> ::= Date
+<Literal_Time> ::= Time
+<Literal_Date_Time> ::= Date Time
+
+<Number> ::= <Real_Number>
+        | <Decimal_Number>
+        | <Hex_Number>
+<Real_Number> ::= RealLiteral
+<Decimal_Number> ::= DecLiteral
+<Hex_Number> ::= HexLiteral     
+
+!<QualifiedIdList> ::= <QualifiedIdList> <Qualified ID> | <Qualified ID>
+
+<IdentifierList> ::= Identifier <IdentifierList> 
+            | Identifier
+            | <GridFieldId> <IdentifierList> 
+            | <GridFieldId>
+
+<Qualified ID> ::= Identifier
+            | <Fully_Qualified_Id>
+            |<GridFieldId>
+
+<GridFieldId> ::= Identifier'[' <Number>',' Identifier ']'  
+            | Identifier '[' <Number> ',' <Number> ']' 
+            | Identifier '[' <Number> ',' <Literal_String> ']'
+
+<Fully_Qualified_Id> ::= Identifier '.' <Qualified ID>
+
+<Generic_String> ::= String
+
+<StringList> ::= <Generic_String>
+            | <Comma_Delimited_Strings>
+<Comma_Delimited_Strings> ::= <StringList> ',' <Generic_String>
+    
+!<IdString> ::= String
+!        | <IdString> String
+
+<VariableTypeIndicator>     ::= <Var_Type_Numeric>
+                    | <Var_Type_Text_Input>
+                    | <Var_Type_YN>
+                    | <Var_Type_Date>
+                    | !Null
+                    
+
+<Var_Type_Numeric> ::= 'NUMERIC'
+<Var_Type_Text_Input> ::= 'TEXTINPUT'
+<Var_Type_YN> ::= 'YN'
+<Var_Type_Date> ::= 'DATEFORMAT' | 'DATETIMEFORMAT' | 'TIMEFORMAT'
+
+
+!Zack for function*************************************************************
+!<FuncName1> ::= ABS
+!       |COS
+!       |DAY|DAYS
+!       |ENVIRON|EXISTS|EXP
+!       |FILEDATE|FINDTEXT|FORMAT
+!       |HOUR|HOURS
+!       |LN|LOG
+!       |MINUTES|Month|MONTHS
+!       |NUMTODATE|NUMTOTIME
+!       |RND|ROUND
+!       |SECOND|SECONDS|STEP|SUBSTRING|SIN
+!       |TRUNC|TXTTODATE|TXTTONUM|TAN
+!       |UPPERCASE
+!       |YEARS
+!       |COS '('<FunctionParameterList> ')'
+!       |DAY '('<FunctionParameterList> ')'
+!               |DAYS '('<FunctionParameterList> ')'
+!       |ENVIRON '('<FunctionParameterList> ')'
+!               |EXISTS '('<FunctionParameterList> ')'
+!              |EXP '('<FunctionParameterList> ')'
+!       |FILEDATE '('<FunctionParameterList> ')'
+!                |FINDTEXT '('<FunctionParameterList> ')'
+!                |FORMAT '('<FunctionParameterList> ')'
+!       |HOUR '('<FunctionParameterList> ')'
+!                |HOURS '('<FunctionParameterList> ')'
+!       |LN '('<FunctionParameterList> ')'
+!                |LOG '('<FunctionParameterList> ')'
+!       |MINUTES '('<FunctionParameterList> ')'
+!                |Month '('<FunctionParameterList> ')'
+!                |MONTHS '('<FunctionParameterList> ')'
+!       |NUMTODATE '('<FunctionParameterList> ')'
+!                |NUMTOTIME '('<FunctionParameterList> ')'
+!       |RND '('<FunctionParameterList> ')'
+!                |ROUND '('<FunctionParameterList> ')'
+!       |SECOND '('<FunctionParameterList> ')'
+!                |SECONDS '('<FunctionParameterList> ')'
+!                |STEP '('<FunctionParameterList> ')'
+!                |SUBSTRING '('<FunctionParameterList> ')'
+!                |SIN '('<FunctionParameterList> ')'
+!       |TRUNC '('<FunctionParameterList> ')'
+!                |TXTTODATE '('<FunctionParameterList> ')'
+!                |TXTTONUM '('<FunctionParameterList> ')'
+!                |TAN '('<FunctionParameterList> ')'
+!       |UPPERCASE  '('<FunctionParameterList> ')'
+!       |'YEARS' '('<FunctionParameterList> ')'
+!                |YEAR '('<FunctionParameterList> ')'
+
+
+<FuncName2> ::= SYSTEMTIME|SYSTEMDATE | RECORDCOUNT
+
+                 
+
+
+<FunctionCall> ::= <Qualified ID> '(' <FunctionParameterList> ')'
+               | FORMAT '(' <FunctionParameterList> ')'
+                | <FuncName2>
+!           | <FuncName1> '(' <FunctionCall> ')'
+<FunctionParameterList> ::= <EmptyFunctionParameterList> | <NonEmptyFunctionParameterList>
+<NonEmptyFunctionParameterList> ::= <MultipleFunctionParameterList> | <SingleFunctionParameterList>
+
+<MultipleFunctionParameterList> ::= <NonEmptyFunctionParameterList> ',' <Expression>
+<SingleFunctionParameterList> ::= <expression>
+<EmptyFunctionParameterList> ::=
+!Function End *******************************************************************
+
+
+!************************************************ Analysis Commands ********************************************************!
+
+!***            Always Statement                ***!
+<Always_Statement>                      ::= ALWAYS  <Statements>  END
+!***            End                     ***!
+
+
+
+! -------------------------- ASSIGN --------------------------------------------------
+<Assign_Statement>                      ::= ASSIGN <Qualified ID> '=' <Expression> 
+<Assign_DLL_Statement>                ::= ASSIGN <Qualified ID> '=' identifier'!'Identifier '(' <FunctionParameterList> ')'
+
+
+<Simple_Assign_Statement>                   ::= <Qualified ID> '=' <Expression>
+<Let_Statement>                         ::= LET <Qualified ID> '=' <Expression> 
+
+
+!***            AutoSearch Statement                ***!
+<Auto_Search_Statement>                     ::= AUTOSEARCH <IdentifierList> 
+                                            |AUTOSEARCH <IdentifierList> Always
+                                            |AUTOSEARCH <IdentifierList> DisplayList <IdentifierList> 
+                                            |AUTOSEARCH <IdentifierList> DisplayList <IdentifierList> Always
+!***            End                     ***!
+
+! -------------------------- BEEP --------------------------------------------------
+<Beep_Statement>                            ::= BEEP
+
+
+!***            Clear Statement             ***!
+<Clear_Statement>                       ::= CLEAR <IdentifierList>
+!***            End                     ***!
+
+
+!***            CMD Statement               ***!
+
+!<Simple_CMD_Statement>                      ::= CMD Identifier  <Statements> END
+<CMD_Line_Statement>                        ::= COMMANDLINE <CMDListOpt>
+
+<CMDListOpt>                            ::= <CMDLineOptString>
+                                | <CMDLineOptFile>
+                                | <CMDLineOptPGM>
+                                | <CMDLineOptView>
+                                | <CMDLineOptPGM> <CMDLineOptView>
+                                | <CMDLineOptView> <CMDLineOptPGM>
+                                
+
+<CMDLineOptFile>                        ::= File
+<CMDLineOptString>                      ::= File ':' String
+
+<CMDLineOptPGM>                     ::= <CMDLineOptProjectPGM>
+                                | <CMDLineOptFilePGM>
+<CMDLineOptProjectPGM>                  ::= PGMNAME '=' File ':' String
+<CMDLineOptFilePGM>                     ::= PGMNAME '=' File
+
+<CMDLineOptView>                        ::= VIEWNAME '=' File ':' String
+
+
+!***            End                 ***!
+
+!------------------------- DEFINE ------------------------------------------------------------
+!<Define_Standard_Variable_Statement>               ::= DEFINE Identifier <VariableTypeIndicator> <Define_Prompt>
+!<Define_Std_Var_Unparenthesised_Statement>         ::= DEFINE Identifier String
+!<Define_Std_Var_With_Scope_Statement>              ::= DEFINE Identifier STANDARD <VariableTypeIndicator> <Define_Prompt>
+!<Define_Global_Variable_Statement>                 ::= DEFINE Identifier GLOBAL <VariableTypeIndicator> <Define_Prompt>
+!<Define_Permanent_Variable_Statement>              ::= DEFINE Identifier PERMANENT <VariableTypeIndicator> <Define_Prompt>
+
+<Define_Variable_Statement>                     ::= DEFINE Identifier <Variable_Scope> <VariableTypeIndicator> <Define_Prompt>
+                                                   | DEFINE Identifier '=' <Expression>
+
+<Define_Dll_Statement>                      ::= DEFINE Identifier DLLOBJECT String | DEFINE Identifier NETOBJECT String
+
+<Define_Group_Statement>                        ::= DEFINE Identifier GROUPVAR <IdentifierList>
+
+<Define_Prompt>                         ::= '(' String ')'
+                                    | String
+                                    |!Null
+                                    
+
+<Variable_Scope>                            ::= STANDARD
+                                    | GLOBAL
+                                    | PERMANENT
+                                    | !Null
+                                    
+
+!***            End                     ***!
+
+!***            Define User Command Statement   ***!
+!<Simple_Cmd_Statement>                     ::= CMD 
+!***            End                 ***!
+
+
+!***            Dialog Statement            ***!
+<Simple_Dialog_Statement>                   ::= DIALOG String <TitleOpt> | DIALOG String
+<Numeric_Dialog_Implicit_Statement>                 ::= DIALOG String Identifier <TitleOpt>
+<TextBox_Dialog_Statement>                  ::= DIALOG String Identifier TEXTINPUT <MaskOpt> <TitleOpt>
+<Numeric_Dialog_Explicit_Statement>             ::= DIALOG String Identifier NUMERIC <MaskOpt> <TitleOpt>
+<Db_Values_Dialog_Statement>                    ::= DIALOG String Identifier DBVALUES Identifier Identifier <TitleOpt>
+<YN_Dialog_Statement>                       ::= DIALOG String Identifier YN <TitleOpt>
+<Db_Views_Dialog_Statement>                 ::= DIALOG String Identifier DBVIEWS <titleOpt>
+<Databases_Dialog_Statement>                    ::= DIALOG String Identifier DATABASES <TitleOpt>
+<Db_Variables_Dialog_Statement>                 ::= DIALOG String Identifier DBVARIABLES <TitleOpt>
+<Multiple_Choice_Dialog_Statement>              ::= DIALOG String Identifier <StringList> <TitleOpt>
+<Dialog_Read_Statement>                     ::= DIALOG String Identifier READ <TitleOpt>
+<Dialog_Write_Statement>                    ::= DIALOG String Identifier WRITE <TitleOpt>
+<Dialog_Read_Filter_Statement>              ::= DIALOG String Identifier READ String <TitleOpt>
+<Dialog_Write_Filter_Statement>                 ::= DIALOG String Identifier WRITE String <TitleOpt>
+<Dialog_Date_Statement>                     ::= DIALOG String Identifier DATEFORMAT <TitleOpt>
+<Dialog_Time_Statement>                     ::= DIALOG String Identifier TIMEFORMAT <TitleOpt>
+<Dialog_DateTime_Statement>                 ::= DIALOG String Identifier DATETIMEFORMAT <TitleOpt>
+<Dialog_Date_Mask_Statement>                    ::= DIALOG String Identifier DATEFORMAT String <TitleOpt> | DIALOG String Identifier DATETIMEFORMAT String <TitleOpt> | DIALOG String Identifier TIMEFORMAT String <TitleOpt>
+
+<TitleOpt>                          ::= <SimpleTitleOpt> 
+
+<SimpleTitleOpt>                        ::= TITLETEXT '=' String
+<MaskOpt>                           ::= String 
+!***            End                     ***!
+
+
+
+!-------------------------- EXECUTE ------------------------------------------------------
+<Simple_Execute_Statement>                  ::= EXECUTE String
+<Execute_File_Statement>                    ::= EXECUTE File
+<Execute_Url_Statement>                 ::= EXECUTE Url
+<Execute_Wait_For_Exit_File_Statement>          ::= EXECUTE WAITFOREXIT File
+<Execute_Wait_For_Exit_String_Statement>            ::= EXECUTE WAITFOREXIT String
+<Execute_Wait_For_Exit_Url_Statement>           ::= EXECUTE WAITFOREXIT Url
+<Execute_No_Wait_For_Exit_File_Statement>           ::= EXECUTE NOWAITFOREXIT File
+<Execute_No_Wait_For_Exit_String_Statement>     ::= EXECUTE NOWAITFOREXIT String
+<Execute_No_Wait_For_Exit_Url_Statement>            ::= EXECUTE NOWAITFOREXIT Url
+
+!***            Exit Statement          ***!
+
+<Exit_Statement>                        ::= EXIT
+
+!***            End                 ***!
+
+
+!***                GoTo Statement          ***!
+<Go_To_Variable_Statement>                  ::= GOTO  Identifier
+<Go_To_Page_Statement>                      ::= GOTO DecLiteral
+                                                                         | GOTO '-'DecLiteral| GOTO '+'DecLiteral
+!***                End                 ***!
+
+
+!***                Hide Statement          ***!
+<Hide_Some_Statement>                       ::= HIDE <IdentifierList>
+<Hide_Except_Statement>                         ::= HIDE '*' EXCEPT <IdentifierList>
+<Highlight_Statement>                       ::= HIGHLIGHT <IdentifierList>
+                                            | HIGHLIGHT '*' EXCEPT <IdentifierList>
+<UnHighlight_Statement>                       ::= UNHIGHLIGHT <IdentifierList>
+                                            | UNHIGHLIGHT '*' EXCEPT <IdentifierList> | UNHIGHLIGHT '*'
+<Enable_Statement>                       ::= ENABLE <IdentifierList>
+                                            | ENABLE '*' EXCEPT <IdentifierList>
+<Disable_Statement>                       ::= DISABLE <IdentifierList>
+                                            | DISABLE '*' EXCEPT <IdentifierList>
+<Set_Required_Statement>                       ::= Set-Required <IdentifierList> | Set-Required '*'                                            
+<Set_Not_Required_Statement>                       ::= Set-Not-Required <IdentifierList> | Set-Not-Required '*'
+                                               
+!***                End                 ***!
+
+
+! -------------------------------- IF-THEN-ELSE --------------------------------------------------
+<If_Statement>                  ::= IF <Expression> THEN  <Statements>  END-IF 
+                                    | IF <Expression> THEN  <Statements>  END
+
+<If_Else_Statement>                 ::= IF <Expression> THEN <Statements> ELSE  <Statements>  END-IF 
+                                    | IF <Expression> THEN  <Statements>  ELSE  <Statements>  END
+                                    | IF <Expression> THEN  <Statements> <Else_If_Statement>  END-IF 
+                                    | IF <Expression> THEN  <Statements>  <Else_If_Statement>  END
+
+<Else_If_Statement>          ::=  Else-If <Expression> Then <Statements>
+                                | Else-If <Expression> Then <Statements> Else <Statements>
+                                | Else-If <Expression> Then <Statements> <Else_If_Statement>
+
+
+!***            End                     ***!
+
+
+
+!***                NewRecord Statement         ***!
+<New_Record_Statement>                      ::= NewRecord
+!!***               End                 ***!
+
+
+
+!***            Run Statement           ***!
+!<Simple_Run_Statement>                      ::= RUNPGM Identifier
+!<Run_String_Statement>                      ::= RUNPGM String
+!<Run_File_PGM_Statement>                        ::= RUNPGM File
+!<Run_PGM_In_Db_Statement>                       ::= RUNPGM File ':' Identifier
+        
+!***            End                 ***!
+
+
+!***            Undefine Statement          ***!
+<Simple_Undefine_Statement>                     ::= UNDEFINE Identifier
+<All_Standard_Undefine_Statement>                   ::= UNDEFINE '*'    
+<All_Global_Undefine_Statement>                     ::= UNDEFINE '*' GLOBAL
+
+
+!***            End                     ***!
+
+
+!***                Unhide Statement            ***!
+<Unhide_Some_Statement> ::= UNHIDE <IdentifierList> | UNHIDE '*'
+<Unhide_Except_Statement> ::= UNHIDE '*' EXCEPT <IdentifierList>
+
+!***                End                 ***!
+
+
+!-------------------------------------------------------------Expression!
+<Expr List>                             ::= <Expression> ',' <Expr List>
+                                        | <Expression>
+
+<Expression>                            ::= <And Exp> OR <Expression>
+                                | <And Exp> XOR <Expression>
+                                        | <And Exp>
+
+<And Exp>                           ::= <Not Exp> AND <And Exp>
+                                        | <Not Exp>
+
+<Not Exp>                           ::= NOT <Compare Exp>
+                                        | <Compare Exp>
+
+<Compare Exp>                           ::=  <Concat Exp> LIKE String | <Concat Exp> LIKE Identifier
+                                | <Concat Exp> '=' <Compare Exp>
+                                        | <Concat Exp> '<>' <Compare Exp>
+                                        | <Concat Exp> '>' <Compare Exp>
+                                        | <Concat Exp> '>=' <Compare Exp>
+                                        | <Concat Exp> '<' <Compare Exp>
+                                        | <Concat Exp> '<=' <Compare Exp>
+                                        | <Concat Exp>
+
+<Concat Exp>                            ::= <Add Exp> '&' <Concat Exp>
+                                | <Add Exp>
+
+<Add Exp>                           ::= <Mult Exp> '+' <Add Exp>
+                                        | <Mult Exp> '-' <Add Exp>
+                                        | <Mult Exp>
+
+<Mult Exp>                          ::= <Pow Exp> '*' <Mult Exp>
+                                | <Pow Exp> '/' <Mult Exp>
+                                | <Pow Exp> MOD <Mult Exp>
+                                | <Pow Exp> '%' <Mult Exp>
+                                        | <Pow Exp>
+
+<Pow Exp>                           ::= <Negate Exp> '^' <Negate Exp>
+                                | <Negate Exp>
+
+<Negate Exp>                            ::= '-' <Value>
+                                                                | '+' <Value>
+                                        | <Value>
+
+<Value>                                 ::= <Qualified Id>
+                                        | <Literal>
+                                | Boolean 
+                                        | '(' <Expr List> ')'
+                                        |<FunctionCall>
+ 
+
+!------------------------------------------------------------- End Expression!
+
+
+
+!------------------------------------------------------------------------ Functions
+
+
+!***            Call Statement                  ***!
+<Call_Statement> ::= CALL Identifier
+
+!***            Dialog Statement Additional to Menu     ***!
+!<DialogFormatStatement> ::= DIALOG String Identifier FORMAT '=' String ',' <TitleOpt>
+!<DialogListStatement> ::= DIALOG String Identifier LIST '=' <List> <TitleOpt>
+!<DialogButtonsStatement> ::= DIALOG String Identifier BUTTONS '=' <List> <TitleOpt>
+!<DialogDateFormatStatement> ::= DIALOG String Identifier DATEFORMAT '=' String ',' <TitleOpt>
+
+
+!<ExecuteIdentifierOptStatement> ::= EXECUTE <IdentifierOpt>
+!<ExecuteFile1Statement> ::= EXECUTE <PathSymbol> Identifier <IdentifierOpt>
+!<ExecuteFile2Statement> ::= EXECUTE <PathSymbol> <FilePath> Identifier <IdentifierOpt>
+!<ExecuteFile3Statement> ::= EXECUTE '.\@@' Identifier '\' <SimpleFile>
+!<ExecuteTwoFiles1Statement> ::= EXECUTE '.\@@' Identifier '\' <SimpleFile> ';' <SimpleFile>
+!<ExecuteTwoFiles2Statement> ::= EXECUTE <PathSymbol> <FilePath> Identifier <IdentifierOpt> ';' <PathSymbol> Identifier '.' Identifier
+!<ExecuteFileStringStatement> ::= EXECUTE <IdentifierOpt> String
+!<ExecuteWebStatement> ::= EXECUTE <WebLink>
+
+!<List> ::= String ';' | String ';' <List>
+
+
+
+!***            FileDialog Statement            ***!
+<File_Dialog_Statement> ::= <FileDialogStrStatement>
+                        | <FileDialogVarStatement>
+
+<FileDialogStrStatement> ::= FILEDIALOG Identifier ',' String
+<FileDialogVarStatement> ::= FILEDIALOG Identifier
+
+!***            GetPath Statement           ***!
+<Get_Path_Statement> ::= <GetPathStrStatement>
+                        | <GetPathVarStatement>
+
+<GetPathStrStatement> ::= GETPATH Identifier String
+<GetPathVarStatement> ::= GETPATH Identifier
+
+
+!***            WaitFor Statement                       ***!
+<Wait_For_Statement> ::= WAITFOR <FileName> String
+
+!***            WaitForExit Statement                   ***!
+<Wait_For_Exit_Statement> ::= WAITFOREXIT <FileName> String
+
+!***            WaitForFileExists Statement             ***!
+<Wait_For_File_Exists_Statement> ::= <WaitForFileExistsStatement1>
+                        | <WaitForFileExistsStatement2>
+
+<WaitForFileExistsStatement1> ::= WAITFORFILEEXISTS <FileName> ',' DecLiteral
+<WaitForFileExistsStatement2> ::= WAITFORFILEEXISTS <FileName>
+
+<FileName> ::= File | String | <IdentifierOpt>
+
+<SimpleFile> ::= Identifier '.' Identifier
+
+<IdentifierOpt> ::= <SimpleFile> | <IdentifierOpt> '.' <SimpleFile>
+
+!<FilePath> ::= '\' Identifier <FilePath> 
+
+!<PathSymbol> ::= '.\' | '..\' | '\' | '@@' | '.\@@' | '..\@@'  
+
+! <ShortcutLink> ::= '#/' 
+
+!<WebLink> ::= <WebHeader> <IdentifierOpt> <WebPath> <WebFile>
+!<WebHeader> ::= HTTP '://' | HTTPS '://' | FTP '://'
+!<WebPath> ::= '/' Identifier <WebPath> 
+
+!<WebFile> ::= '/' | '/' <IdentifierOpt> 
+
+
+<Quit_Statement> ::= Quit
+
+!********* Check Code Blocks - Begin *********************************!
+ 
+<Define_Statement_Type> ::= <Define_Variable_Statement>
+                            | <Define_Dll_Statement>
+                            | <Define_Group_Statement> 
+
+
+<Define_Statement_Group> ::= <Define_Statement_Type> <Define_Statement_Group> | <Define_Statement_Type>
+
+<Begin_Before_statement> ::= Before <Statements> End-Before | Before End-Before | !Null
+<Begin_After_statement> ::= After <Statements> End-After  | After End-After | !Null
+<Begin_Click_statement> ::= Click <Statements> End-Click  | Click End-Click | !Null
+
+<DefineVariables_Statement> ::= DefineVariables <Define_Statement_Group> End-DefineVariables | DefineVariables End-DefineVariables
+
+
+<Field_Checkcode_Statement> ::=  Field Identifier <Begin_Before_statement> <Begin_After_statement> <Begin_Click_statement>  End-Field
+
+<View_Checkcode_Statement> ::= View <Begin_Before_statement> <Begin_After_statement> End-View | Form <Begin_Before_statement> <Begin_After_statement> End-Form
+<Record_Checkcode_Statement> ::= Record <Begin_Before_statement> <Begin_After_statement> End-Record
+
+<Page_Checkcode_Statement> ::= Page Identifier <Begin_Before_statement> <Begin_After_statement> End-Page
+
+!********* Check Code Blocks - End *********************************!
+
+<Geocode_Statement> ::= Geocode Identifier ',' Identifier ',' Identifier
+
+<Subroutine_Statement> ::= Sub Identifier <Statements> End-Sub | Sub Identifier End-Sub
+
+<Help_Statement> ::= HELP file String
+                  
+
+<Save_Record_Statement> ::= Save-Record
+

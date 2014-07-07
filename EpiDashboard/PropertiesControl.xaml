@@ -1,0 +1,172 @@
+﻿<UserControl x:Class="EpiDashboard.PropertiesControl"
+             x:Name="ucPropertiesControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+             mc:Ignorable="d" 
+             xmlns:EpiDashboard="clr-namespace:EpiDashboard"
+             Background="#00FFFFFF">
+    
+    <Grid>
+            <Grid x:Name="ConfigGrid" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5,5,5,5" >
+            <Rectangle Fill="#22000000" RadiusX="10" RadiusY="10" Margin="0,4,0,0" />
+                <Rectangle Fill="#775C90B2" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0,0,0,5" />
+                <Rectangle Fill="#DDFFFFFF" Stroke="DarkGray" RadiusX="5" RadiusY="5" Margin="5,5,5,10" />
+                <StackPanel Orientation="Vertical" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Top" >
+
+                <TextBlock Text="Canvas Properties" FontWeight="Bold" Margin="0, 0, 0, 10" />
+
+                <TextBlock Text="This gadget can be used to change the properties of the current canvas. Changing the data source is not advisable except for advanced users." TextWrapping="WrapWithOverflow" MaxWidth="430" HorizontalAlignment="Left" Margin="0, 0, 0, 10" />
+
+                <Grid x:Name="grdDataSource" Margin="0,0,0,8">
+                    <Rectangle Fill="#22000000" RadiusX="10" RadiusY="10" Margin="0,4,0,0" />
+                    <Rectangle Fill="#775C90B2" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0,0,0,5" />
+                    <Rectangle Fill="#DDFFFFFF" Stroke="DarkGray" RadiusX="5" RadiusY="5" Margin="5,5,5,10" />
+                    <Border Padding="10">
+                    <StackPanel>                       
+                        
+                    <TextBlock Text="Data Source Properties" FontWeight="Bold" Margin="0, 0, 0, 10" />
+                        <TextBlock x:Name="tblockProjectPath" Text="Current Project:" />
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="5"></ColumnDefinition>
+                                    <ColumnDefinition Width="22"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="txtProjectPath" Margin="0,0,0,8" />
+                                <Button x:Name="btnProjectPathBrowse" Content="..." Grid.Row="0" Grid.Column="2"  Margin="0,0,0,8" Click="btnProjectPathBrowse_Click" />
+                            </Grid>
+                        
+                            <TextBlock x:Name="tblockConnectionString" Text="Connection String:" />
+                    <TextBox x:Name="txtDataSource" Margin="0,0,0,8" />
+
+                            <TextBlock x:Name="tblockSQLQuery" Text="SQL query:" />
+                            <TextBox x:Name="txtSQLQuery" Margin="0,0,0,8" />
+
+                            <TextBlock x:Name="tblockTableName" Text="Table Name:" />
+                    <ComboBox x:Name="cmbTableName" Margin="0,0,0,8" IsEditable="True" />
+
+                            <CheckBox x:Name="checkboxEncryptConnectionString" Content="Encrypt connection string" Visibility="Collapsed" IsChecked="True" Margin="0,0,0,8" />
+                            <CheckBox x:Name="checkboxRecache" Content="Force data re-caching periodically" Visibility="Collapsed" IsChecked="False" Margin="0,0,0,8" />
+
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Grid x:Name="grdRelatedDataSources" Margin="0,0,0,8">
+                    <Rectangle Fill="#22000000" RadiusX="10" RadiusY="10" Margin="0,4,0,0" />
+                    <Rectangle Fill="#775C90B2" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0,0,0,5" />
+                    <Rectangle Fill="#DDFFFFFF" Stroke="DarkGray" RadiusX="5" RadiusY="5" Margin="5,5,5,10" />
+                    <Border Padding="10">
+                        <StackPanel>
+
+                            <TextBlock Text="Related Data Sources" FontWeight="Bold" Margin="0, 0, 0, 10" />
+                            <Grid x:Name="grdRelatedDataSourceList" Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="Images\x.png" Visibility="Collapsed" Width="16" Height="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBlock Text="C:\Epi Info 7\Projects\Sample\Sample.prj:MexMap95" Visibility="Collapsed" Grid.Row="0" Grid.Column="2" />
+                            </Grid>
+                            
+                            <Button Visibility="Collapsed" x:Name="btnAddRelatedData" Content="Add Related Data" Width="160" HorizontalAlignment="Left" />
+
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+
+                <Grid x:Name="grdOutput" Margin="0,0,0,8">
+                    <Rectangle Fill="#22000000" RadiusX="10" RadiusY="10" Margin="0,4,0,0" />
+                    <Rectangle Fill="#775C90B2" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0,0,0,5" />
+                    <Rectangle Fill="#DDFFFFFF" Stroke="DarkGray" RadiusX="5" RadiusY="5" Margin="5,5,5,10" />
+                    <Border Padding="10">
+                        <StackPanel>
+
+                            <TextBlock Text="HTML Output Properties" FontWeight="Bold" Margin="0, 0, 0, 10" />
+                            <TextBlock x:Name="tblockTitle" Text="Custom output title:" />
+                            <TextBox x:Name="txtTitle" Margin="0,0,0,8" />
+
+                            <TextBlock x:Name="tblockSummary" Text="Custom output summary:" />
+                            <TextBox x:Name="txtSummary" Margin="0,0,0,8"  VerticalScrollBarVisibility="Visible" TextWrapping="WrapWithOverflow" Height="44" MaxHeight="44" />
+
+                            <TextBlock x:Name="tblockConclusion" Text="Custom output conclusion:" />
+                            <TextBox x:Name="txtConclusion" Margin="0,0,0,8" VerticalScrollBarVisibility="Visible" TextWrapping="WrapWithOverflow" Height="44" MaxHeight="44" />
+
+                            <TextBlock x:Name="tblockCSS" Text="Custom style sheet:" Visibility="Collapsed" />
+                            <Grid Visibility="Collapsed">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="5"></ColumnDefinition>
+                                    <ColumnDefinition Width="22"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="txtCSS" Margin="0,0,0,8" IsEnabled="True" />
+                                <Button x:Name="btnCSSBrowse" Content="..." Grid.Row="0" Grid.Column="2"  Margin="0,0,0,8"  />
+                            </Grid>
+
+                            <CheckBox x:Name="checkboxGadgetHeadings" Content="Show gadget headings" IsChecked="True" Margin="0,0,0,8" />
+                            <CheckBox x:Name="checkboxGadgetSettings" Content="Show gadget settings" IsChecked="True" Margin="0,0,0,8" />
+                            <CheckBox x:Name="checkboxCanvasSummary" Content="Show canvas summary" IsChecked="True" Margin="0,0,0,8" />
+                            <CheckBox x:Name="checkboxAlternateColors" Content="Use alternating colors in tables" IsChecked="False" Margin="0,0,0,8" />
+                            <CheckBox x:Name="checkboxTopToBottom" Content="Display gadgets in top-to-bottom order" IsChecked="True" Margin="0,0,0,8" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Grid x:Name="grdInfo" Margin="0,0,0,8">
+                    <Rectangle Fill="#22000000" RadiusX="10" RadiusY="10" Margin="0,4,0,0" />
+                    <Rectangle Fill="#775C90B2" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0,0,0,5" />
+                    <Rectangle Fill="#DDFFFFFF" Stroke="DarkGray" RadiusX="5" RadiusY="5" Margin="5,5,5,10" />
+                    <Border Padding="10">
+                        <StackPanel>
+
+                            <TextBlock Text="Miscellaneous Information" FontWeight="Bold" Margin="0, 0, 0, 10" />
+                            <TextBlock x:Name="tblockRows" Text="2,255 unfiltered rows" Margin="0,0,0,8" />
+                            <TextBlock x:Name="tblockColumns" Text="252 columns" Margin="0,0,0,8" />
+                            <TextBlock x:Name="tblockCacheDateTime" Text="Data last cached at 12/16/2011 1:56 PM" Margin="0,0,0,8" />
+                            <TextBlock x:Name="tblockCacheTimeElapsed" Text="Took 4:32:32 to locally cache data" Margin="0,0,0,8" />
+                            <TextBlock x:Name="tblockCurrentEpiVersion" Text="Epi Info 7.0.0.0" Margin="0,0,0,8" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <StackPanel x:Name="pnlStatus" Margin="0,0,0,10">
+                    <StackPanel x:Name="pnlError" Height="Auto" Width="Auto" Background="Tomato" Visibility="Visible" Margin="0,0,0,2">
+                        <StackPanel x:Name="pnlErrorTop" Height="2" Width="Auto" Background="Red"/>
+                        <TextBlock x:Name="txtError" Text="Error: Exception occurred." TextWrapping="WrapWithOverflow" MaxWidth="410" Margin="5,5,5,5" HorizontalAlignment="Left" />
+                    </StackPanel>
+                    
+                    <StackPanel x:Name="pnlWarning" Height="Auto" Width="Auto" Background="Gold" Visibility="Visible" Margin="0,0,0,2">
+                        <StackPanel x:Name="pnlWarningTop" Height="2" Width="Auto" Background="Goldenrod"/>
+                        <TextBlock x:Name="txtWarning" Text="Warning: Changing data sources can result in unexpected behavior." TextWrapping="WrapWithOverflow" MaxWidth="410" Margin="5,5,5,5" HorizontalAlignment="Left" />
+                    </StackPanel>
+
+                    
+
+                    <StackPanel x:Name="pnlSave" Height="Auto" Width="Auto" Background="PaleGreen" Visibility="Visible" Margin="0,0,0,2">
+                        <StackPanel x:Name="pnlSaveTop" Height="2" Width="Auto" Background="Green"/>
+                        <TextBlock x:Name="txtSave" Visibility="Visible" Text="Changes have been saved." TextWrapping="WrapWithOverflow" MaxWidth="410" Margin="5,5,5,5" HorizontalAlignment="Left" />
+                    </StackPanel>
+                </StackPanel>
+                    
+                        <Grid Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="115"/>
+                                <ColumnDefinition Width="115"/>
+                                <ColumnDefinition Width="115"/>
+                            </Grid.ColumnDefinitions>
+                        
+                        <Button x:Name="btnSave" Width="100" Content="Save" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Click="btnSave_Click" />
+                        <Button x:Name="btnCancel" Width="100" Content="Close" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Click="btnCancel_Click" />
+                        </Grid>               
+
+                </StackPanel>                    
+        </Grid>
+        <Image x:Name="imgClose" Source="Images\x.png" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+    </Grid>
+    
+</UserControl>

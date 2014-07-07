@@ -1,0 +1,48 @@
+﻿/*
+	1. use the "find code block" to navigate and create code blocks.
+	2. all check code needs to appear inside of checkcode blocks.
+	
+	The following are examples:
+	
+DefineVariables
+	Define Age2 Numeric
+
+End-DefineVariables
+
+View
+	Before
+		Dialog "before view" TitleText="before view"
+	End-Before
+End-view
+
+record
+	Before
+		Dialog "before record" TitleText="before record"
+
+	End-before
+End-Record
+
+
+Page page1
+	Before
+		Dialog "before page" TitleText="before page"
+
+	End-Before
+end-page
+
+
+Field DateOfBirth
+	After
+		goto 1
+	End-After
+
+End-field
+
+Field GotoPage2Button
+	Click
+		goto 2
+	End-Click
+
+End-field
+
+*/

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="View" targetNamespace="http://tempuri.org/View.xsd" elementFormDefault="qualified"
+	xmlns="http://tempuri.org/View.xsd" xmlns:mstns="http://tempuri.org/View.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="View">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CheckCodeVariableDefinitions" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+				<xs:element name="CheckCodeA" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+				<xs:element name="CheckCodeB" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+				<xs:element name="CheckCodeRecordA" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+				<xs:element name="CheckCodeRecordB" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+				<xs:element name="Pages" minOccurs="1" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Page" minOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Fields" minOccurs="1" maxOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="LabelField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Control" type="Control" minOccurs="1" maxOccurs="1"></xs:element>
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="CommandButtonField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Control" type="Control" minOccurs="1" maxOccurs="1"></xs:element>
+																<xs:element name="CheckCodeA" type="xs:string" />
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="RelatedViewField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Control" type="Control" minOccurs="1" maxOccurs="1"></xs:element>
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="condition" type="xs:string" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="DateField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control" />
+																<xs:element name="CheckCodeA" type="xs:string" />
+																<xs:element name="CheckCodeB" type="xs:string" />
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="lower" type="xs:date" />
+															<xs:attribute name="upper" type="xs:date" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="DateTimeField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control"></xs:element>
+																<xs:element name="CheckCodeA" type="xs:string" />
+																<xs:element name="CheckCodeB" type="xs:string" />
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="pattern" type="xs:string" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="PhoneNumberField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control"></xs:element>
+																<xs:element name="CheckCodeA" type="xs:string" />
+																<xs:element name="CheckCodeB" type="xs:string" />
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="pattern" type="xs:string" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="NumberField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control"></xs:element>
+																<xs:element name="CheckCodeA" type="xs:string" />
+																<xs:element name="CheckCodeB" type="xs:string" />
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="pattern" type="xs:string" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+															<xs:attribute name="lower" type="xs:decimal" />
+															<xs:attribute name="upper" type="xs:decimal" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="ImageField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control"></xs:element>
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+															<xs:attribute name="shouldRetainImageSize" type="xs:boolean" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="YesNoField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control"></xs:element>
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="CheckBoxField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control"></xs:element>
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="DDLFieldOfLegalValues">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control"></xs:element>
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+															<xs:attribute name="isExclusiveTable" type="xs:boolean" />
+															<xs:attribute name="tableName" type="xs:string" />
+															<xs:attribute name="columnName" type="xs:string" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="DDLFieldOfCommentLegal">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control"></xs:element>
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+															<xs:attribute name="isExclusiveTable" type="xs:boolean" />
+															<xs:attribute name="tableName" type="xs:string" />
+															<xs:attribute name="columnName" type="xs:string" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="DDLFieldOfCodes">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control"></xs:element>
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+															<xs:attribute name="isExclusiveTable" type="xs:boolean" />
+															<xs:attribute name="tableName" type="xs:string" />
+															<xs:attribute name="columnName" type="xs:string" />
+															<xs:attribute name="codeColumnName" type="xs:string" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="GridField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control"></xs:element>
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="CodeField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control"></xs:element>
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="MirrorField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control"></xs:element>
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+															<xs:attribute name="mirroredFieldName" type="xs:string" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="OptionField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control" />
+																<xs:element name="CheckCodeA" type="xs:string" />
+																<xs:element name="Option" type="Option" minOccurs="2" />
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="textPosition" type="xs:string" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="SingleLineTextField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control" />
+																<xs:element name="CheckCodeA" type="xs:string" />
+																<xs:element name="CheckCodeB" type="xs:string" />
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="pattern" type="xs:string" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+															<xs:attribute name="size" type="xs:int" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="MultilineTextField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control" />
+																<xs:element name="CheckCodeA" type="xs:string" />
+																<xs:element name="CheckCodeB" type="xs:string" />
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="pattern" type="xs:string" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+															<xs:attribute name="size" type="xs:int" />
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="UpperCaseTextField">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Prompt" type="Prompt" />
+																<xs:element name="Control" type="Control" />
+																<xs:element name="CheckCodeA" type="xs:string" />
+																<xs:element name="CheckCodeB" type="xs:string" />
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="pattern" type="xs:string" />
+															<xs:attribute name="hasTabStop" type="xs:boolean" />
+															<xs:attribute name="tabIndex" type="xs:int" />
+															<xs:attribute name="isRequired" type="xs:boolean" />
+															<xs:attribute name="isReadOnly" type="xs:boolean" />
+															<xs:attribute name="shouldRepeatLast" type="xs:boolean" />
+															<xs:attribute name="size" type="xs:int" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="CheckCodeA" type="xs:string" />
+										<xs:element name="CheckCodeB" type="xs:string" />
+									</xs:sequence>
+									<xs:attribute name="name" type="xs:string" />
+									<xs:attribute name="position" type="xs:int" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required" />
+			<xs:attribute name="position" type="xs:int" />
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="Font">
+		<xs:sequence>
+			<xs:element name="font-script" type="xs:string" />
+		</xs:sequence>
+		<xs:attribute name="font-family" type="xs:string" />
+		<xs:attribute name="font-style" type="xs:string" />
+		<xs:attribute name="font-weight" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="Prompt">
+		<xs:sequence>
+			<xs:element name="font" type="Font"></xs:element>
+		</xs:sequence>
+		<xs:attribute name="text" type="xs:string" />
+		<xs:attribute name="top" type="xs:decimal" />
+		<xs:attribute name="left" type="xs:decimal" />
+	</xs:complexType>
+	<xs:complexType name="Control">
+		<xs:sequence>
+			<xs:element name="font" type="Font"></xs:element>
+		</xs:sequence>
+		<xs:attribute name="height" type="xs:decimal" />
+		<xs:attribute name="width" type="xs:decimal" />
+		<xs:attribute name="top" type="xs:decimal" />
+		<xs:attribute name="left" type="xs:decimal" />
+	</xs:complexType>
+	<xs:complexType name="Option">
+		<xs:sequence>
+			<xs:element name="text" type="xs:string" />
+		</xs:sequence>
+		<xs:attribute name="value" type="xs:string" />
+		<xs:attribute name="position" type="xs:int" />
+	</xs:complexType>
+</xs:schema>

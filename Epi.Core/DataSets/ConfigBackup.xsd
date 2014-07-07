@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Version" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:attribute name="EpiInfoVersion" type="xs:int" use="required" />
+            <xs:attribute name="ConfigVersion" type="xs:int" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Settings" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BackgroundImage" type="xs:string" default ="" />
+              <xs:element name="DefaultDataDriver" type="xs:string" />
+              <xs:element name="DefaultDataFormatForRead" type="xs:int" />
+              <xs:element name="EditorFontName" type="xs:string" />
+              <xs:element name="EditorFontSize" type="xs:decimal" />
+              <xs:element name="ControlFontName" type="xs:string" />
+              <xs:element name="ControlFontSize" type="xs:decimal" />
+              <xs:element name="FrameworkTcpPort" type="xs:int" />
+              <xs:element name="IncludeMissingValues" type="xs:boolean" />
+              <xs:element name="Language" type="xs:string" />
+              <xs:element name="MRUProjectsCount" type="xs:int" />
+              <xs:element name="MRUViewsCount" type="xs:int" />
+              <xs:element name="RecordProcessingScope" type="xs:int" />
+              <xs:element name="RepresentationOfMissing" type="xs:string" />
+              <xs:element name="RepresentationOfNo" type="xs:string" />
+              <xs:element name="RepresentationOfYes" type="xs:string" />
+              <xs:element name="ShowCompletePrompt" type="xs:boolean" />
+              <xs:element name="ShowGraphics" type="xs:boolean" />
+              <xs:element name="ShowHyperlinks" type="xs:boolean" />
+              <xs:element name="ShowPercents" type="xs:boolean" />
+              <xs:element name="ShowSelection" type="xs:boolean" />
+              <xs:element name="ShowTables" type="xs:boolean" />
+              <xs:element name="SnapToGrid" type="xs:boolean" />
+              <xs:element name="StatisticsLevel" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Views" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="RecentView">
+                <xs:complexType>
+                  <xs:attribute name="Name" type="xs:string" use="required" />
+                  <xs:attribute name="Location" type="xs:string" use="required" />
+                  <xs:attribute name="LastAccessed" type="xs:dateTime" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Projects" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="RecentProject">
+                <xs:complexType>
+                  <xs:attribute name="Name" type="xs:string" use="required" />
+                  <xs:attribute name="Location" type="xs:string" use="required" />
+                  <xs:attribute name="LastAccessed" type="xs:dateTime" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="CurrentProjectLocation" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Modules" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Module">
+                <xs:complexType>
+                  <xs:attribute name="Name" type="xs:string" use="required" />
+                  <xs:attribute name="Type" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Variables" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="PermanentVariable">
+                <xs:complexType>
+                  <xs:attribute name="Name" type="xs:string" use="required" />
+                  <xs:attribute name="Value" type="xs:string" use="required" />
+                  <xs:attribute name="DataType" type="xs:int" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Directories" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Configuration" type="xs:string" />
+              <xs:element name="Output" type="xs:string" />
+              <xs:element name="PHIN" type="xs:string" />
+              <xs:element name="Project" type="xs:string" />
+              <xs:element name="Templates" type="xs:string" />
+              <xs:element name="Working" type="xs:string" />
+              <xs:element name="Samples" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataDrivers" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="DataDriver">
+                <xs:complexType>
+                  <xs:attribute name="DisplayName" type="xs:string" use="required" />
+                  <xs:attribute name="Type" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Connections" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Database">
+                <xs:complexType>
+                  <xs:attribute name="Name" type="xs:string" use="required" />
+                  <xs:attribute name="DataDriver" type="xs:string" use="required" />
+                  <xs:attribute name="ConnectionString" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element maxOccurs="unbounded" name="File">
+                <xs:complexType>
+                  <xs:attribute name="Extension" type="xs:string" use="required" />
+                  <xs:attribute name="DataDriver" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

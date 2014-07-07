@@ -1,0 +1,554 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{89D4F1BD-B256-41B1-9586-A6EEFC58255D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Epi.WPF.Dashboard</RootNamespace>
+    <AssemblyName>Dashboard</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Build\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\build\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Epi.DataVisualization.Toolkit, Version=3.5.0.1, Culture=neutral, PublicKeyToken=141db00aea0d30bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>MS_WPF\Epi.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Epi.DataVisualization.Toolkit.PieExtension, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>MS_WPF\Epi.DataVisualization.Toolkit.PieExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>MS_WPF\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>MS_WPF\WPFToolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="ColumnDataType.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Controls\AscendingSortArrow.xaml.cs">
+      <DependentUpon>AscendingSortArrow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataDictionaryControl.xaml.cs">
+      <DependentUpon>DataDictionaryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FlatZoomButton.xaml.cs">
+      <DependentUpon>FlatZoomButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DescendingSortArrow.xaml.cs">
+      <DependentUpon>DescendingSortArrow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetDescriptionPanel.xaml.cs">
+      <DependentUpon>GadgetDescriptionPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetHeaderPanel.xaml.cs">
+      <DependentUpon>GadgetHeaderPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetInfoPanel.xaml.cs">
+      <DependentUpon>GadgetInfoPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetMessagePanel.xaml.cs">
+      <DependentUpon>GadgetMessagePanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetRefreshIcon.xaml.cs">
+      <DependentUpon>GadgetRefreshIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetStrataListPanel.xaml.cs">
+      <DependentUpon>GadgetStrataListPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetTwoByTwoPanel.xaml.cs">
+      <DependentUpon>GadgetTwoByTwoPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetWaitPanel.xaml.cs">
+      <DependentUpon>GadgetWaitPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ShadowRectangle.xaml.cs">
+      <DependentUpon>ShadowRectangle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SingleTableAnalysisPanel.xaml.cs">
+      <DependentUpon>SingleTableAnalysisPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StratifiedTableAnalysisPanel.xaml.cs">
+      <DependentUpon>StratifiedTableAnalysisPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardHelper.cs" />
+    <Compile Include="DashboardSharedStrings.Designer.cs">
+      <DependentUpon>DashboardSharedStrings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DataFilters.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="DescriptiveStatistics.cs" />
+    <Compile Include="Dialogs\ExportWindow.xaml.cs">
+      <DependentUpon>ExportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\MsgBox.cs" />
+    <Compile Include="Dialogs\NewCanvasWindow.xaml.cs">
+      <DependentUpon>NewCanvasWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilterCondition.cs" />
+    <Compile Include="GadgetRepositionEventArgs.cs" />
+    <Compile Include="Gadgets\Analysis\AberrationControl.xaml.cs">
+      <DependentUpon>AberrationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\CombinedFrequencyControl.xaml.cs">
+      <DependentUpon>CombinedFrequencyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\ComplexSampleFrequencyControl.xaml.cs">
+      <DependentUpon>ComplexSampleFrequencyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\ComplexSampleMeansControl.xaml.cs">
+      <DependentUpon>ComplexSampleMeansControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\ComplexSampleTablesControl.xaml.cs">
+      <DependentUpon>ComplexSampleTablesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\CrosstabControl.xaml.cs">
+      <DependentUpon>CrosstabControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\FrequencyControl.xaml.cs">
+      <DependentUpon>FrequencyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\LinearRegressionControl.xaml.cs">
+      <DependentUpon>LinearRegressionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\LineListControl.xaml.cs">
+      <DependentUpon>LineListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\LogisticRegressionControl.xaml.cs">
+      <DependentUpon>LogisticRegressionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\MeansControl.xaml.cs">
+      <DependentUpon>MeansControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\GadgetBase.cs" />
+    <Compile Include="Gadgets\GadgetParameters.cs" />
+    <Compile Include="Gadgets\IGadget.cs" />
+    <Compile Include="Gadgets\IStatCalcGadget.cs" />
+    <Compile Include="LineListSharedStrings.Designer.cs">
+      <DependentUpon>LineListSharedStrings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RelatedConnection.cs" />
+    <Compile Include="Rules\DashboardRules.cs" />
+    <Compile Include="Rules\DataAssignmentRule.cs" />
+    <Compile Include="Rules\DefectiveRuleException.cs" />
+    <Compile Include="Rules\IDashboardRule.cs" />
+    <Compile Include="Rules\Rule_ConditionalAssign.cs" />
+    <Compile Include="Rules\Rule_ExpressionAssign.cs" />
+    <Compile Include="Rules\Rule_Format.cs" />
+    <Compile Include="Rules\Rule_Recode.cs" />
+    <Compile Include="Rules\Rule_SimpleAssign.cs" />
+    <Compile Include="Rules\Rule_VariableGroup.cs" />
+    <Compile Include="Rules\SimpleAssignmentStrings.Designer.cs">
+      <DependentUpon>SimpleAssignmentStrings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Rules\SimpleAssignType.cs" />
+    <Compile Include="StrataGridListRow.cs" />
+    <Compile Include="TextBlockConfig.cs" />
+    <Compile Include="WaitCursor.xaml.cs">
+      <DependentUpon>WaitCursor.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\AscendingSortArrow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CircularButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CloseButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DataDictionaryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FlatZoomButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DescendingSortArrow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetDescriptionPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetHeaderPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetTwoByTwoPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetStrataListPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetWaitPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetInfoPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetMessagePanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetRefreshIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\InstructionsPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LoadingPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NotificationPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RefreshIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ShadowRectangle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SingleTableAnalysisPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SpinCursor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\StatusBarBordersButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\StratifiedTableAnalysisPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\VariablesControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DataFilterControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DashboardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ExportWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\NewCanvasWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gadgets\Analysis\AberrationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\CombinedFrequencyControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\ComplexSampleFrequencyControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\ComplexSampleMeansControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\ComplexSampleTablesControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\CrosstabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\FrequencyControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\MeansControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\LinearRegressionControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\LineListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\LogisticRegressionControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\CircularButton.xaml.cs">
+      <DependentUpon>CircularButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CloseButton.xaml.cs">
+      <DependentUpon>CloseButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataFilterControl.xaml.cs">
+      <DependentUpon>DataFilterControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragCanvas.cs" />
+    <Compile Include="Controls\InstructionsPanel.xaml.cs">
+      <DependentUpon>InstructionsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LoadingPanel.xaml.cs">
+      <DependentUpon>LoadingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NotificationPanel.xaml.cs">
+      <DependentUpon>NotificationPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RefreshIcon.xaml.cs">
+      <DependentUpon>RefreshIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SpinCursor.xaml.cs">
+      <DependentUpon>SpinCursor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatusBarBordersButton.xaml.cs">
+      <DependentUpon>StatusBarBordersButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VariablesControl.xaml.cs">
+      <DependentUpon>VariablesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardControl.xaml.cs">
+      <DependentUpon>DashboardControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="WaitCursor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="DashboardSharedStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DashboardSharedStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LineListSharedStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LineListSharedStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rules\SimpleAssignmentStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SimpleAssignmentStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
+      <Project>{EBD2B961-A952-4670-96CA-50BAA12C7F29}</Project>
+      <Name>Epi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.ImportExport\Epi.ImportExport.csproj">
+      <Project>{B5F72DDF-5349-4C03-9285-AE35110BA6CD}</Project>
+      <Name>Epi.ImportExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Statistics\Epi.Statistics.csproj">
+      <Project>{86B1B837-AE10-4833-97E5-DAEC7748F852}</Project>
+      <Name>Epi.Statistics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.WPF\Epi.WPF.csproj">
+      <Project>{FA5EE9C0-D290-4275-B8B7-5B58F3510EF6}</Project>
+      <Name>Epi.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EpiInfoPlugin\EpiInfo.Plugin.csproj">
+      <Project>{20C12C97-52CE-45C3-B563-3C15330C2A98}</Project>
+      <Name>EpiInfo.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatisticsRepository\StatisticsRepository.vbproj">
+      <Project>{05E53353-68CB-4E89-B477-169E070EAE5D}</Project>
+      <Name>StatisticsRepository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="App.ico" />
+    <Resource Include="Images\copy.png" />
+    <Resource Include="Images\db_add.png" />
+    <Resource Include="Images\filter1.png" />
+    <Resource Include="Images\refresh1.png" />
+    <Resource Include="Images\gadget.png" />
+    <Resource Include="Images\labels.png" />
+    <Resource Include="Images\save.png" />
+    <Resource Include="Images\saveHTML.png" />
+    <Resource Include="Images\watermark_logo.png" />
+    <Content Include="MS_WPF\Epi.DataVisualization.Toolkit.dll" />
+    <Content Include="MS_WPF\Epi.DataVisualization.Toolkit.PieExtension.dll" />
+    <Content Include="MS_WPF\System.Windows.Interactivity.dll" />
+    <Content Include="MS_WPF\WPFToolkit.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="ConfigSchema" targetNamespace="http://tempuri.org/ConfigSchema.xsd" elementFormDefault="qualified"
+	xmlns="http://tempuri.org/ConfigSchema.xsd" xmlns:mstns="http://tempuri.org/ConfigSchema.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:complexType name="ctAdd">
+		<xs:sequence />
+		<xs:attribute name="key" type="xs:string" />
+		<xs:attribute name="value" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="ctAppSettings">
+		<xs:sequence>
+			<xs:element name="add" type="ctAdd" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ctLanguages">
+		<xs:sequence>
+			<xs:element name="add" type="ctAdd" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ctProfiles">
+		<xs:sequence>
+			<xs:element name="add" type="ctAdd" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ctSection">
+		<xs:sequence />
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="type" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="ctConfigSections">
+		<xs:sequence>
+			<xs:element name="section" type="ctSection" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ctConfiguration">
+		<xs:sequence>
+			<xs:element name="configSections" type="ctConfigSections" minOccurs="1" maxOccurs="1" />
+			<xs:element name="appSettings" type="ctAppSettings" minOccurs="1" maxOccurs="1" />
+			<xs:element name="languages" type="ctLanguages" minOccurs="1" maxOccurs="1" />
+			<xs:element name="profiles" type="ctProfiles" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="configuration" type="ctConfiguration"></xs:element>
+</xs:schema>

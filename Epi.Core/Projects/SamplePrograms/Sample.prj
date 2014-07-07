@@ -1,0 +1,7 @@
+<Project id="7c1cb0f8-a148-3467-e3c3-7e8298900436" name="Sample" location="C:\_TFSCode\Epi Info 7\build\debug\Projects\SamplePrograms" description="" schemaVersion="102" epiVersion="" createDate="03/26/2012 10:05:55" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="/CMip3j3HV8RumZ8DOXlLCsNfxtHVPMPzQ5QwP6y4R8dqPQQ3Q3c2YBcemsDyfxVX81BH7jw0MJhXAnouih53BPkRaEew7m+pbZLqybNXuTxQSYHrQYVDJYtNMEoS+b+SXLgFatil2uMsiTtREHlcu3jAcis02kRBXmTw2+i4xheuNAwZgVJ6HYDYuqC9Z1S" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>

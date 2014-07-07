@@ -1,0 +1,77 @@
+==========================================================================================
+==========================================================================================
+HISTOGRAM 
+==========================================================================================
+==========================================================================================
+ 
+Histogram
+
+\\\\\\\\\
+\\\\\\\\\
+\\\\\\\\\
+\\\\\\\\\         \\\\\\\\\\
+\\\\\\\\\         \\\\\\\\\\
+\\\\\\\\\         \\\\\\\\\\
+\\\\\\\\\         \\\\\\\\\\
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|        |        |        |
+3        4        5        6
+
+
+Column
+
+\\\\\\\\\
+\\\\\\\\\
+\\\\\\\\\
+\\\\\\\\\         \\\\\\\\\\
+\\\\\\\\\         \\\\\\\\\\
+\\\\\\\\\         \\\\\\\\\\
+\\\\\\\\\         \\\\\\\\\\
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    |        |        |
+    3        4        5
+
+==========================================================================================
+==========================================================================================
+
+ANALYSIS GRAPH DIALOG 
+
+Interval (only avalible with Histogram)
+Interval
+[number][dropdown|v] (blank, Years, Quarters, Months, Weeks, Days, Hours, Minutes, Seconds)
+First Value
+[Auto]
+
+==========================================================================================
+==========================================================================================
+
+READ {C:\_TFSCode\Epi Info 7\Build\Debug\Projects\Sample\Sample.prj}:Oswego 
+LIST *
+FREQ DATEONSET WEIGHTVAR=ILL 
+GRAPH DATEONSET GRAPHTYPE="Epi Curve" XTITLE="Onset" YTITLE="Ill" DATEFORMAT="dd MMMM, yyyy" INTERVAL="2 Hours"
+GRAPH DATEONSET GRAPHTYPE="Epi Curve" XTITLE="Onset" YTITLE="Ill" DATEFORMAT="dd MMMM, yyyy" INTERVAL="2 Hours" STARTFROM="4/18/1940 9:00:00 PM"
+
+
+
+==========================================================================================
+==========================================================================================
+
+BONEYARD 
+
+==========================================================================================
+==========================================================================================
+
+READ {Projects\Sample\Sample.prj}:Oswego
+SELECT ILL = (+)
+DEFINE INCUBATION NUMERIC
+ASSIGN INCUBATION=HOURS(TIMESUPPER, DATEONSET)
+GRAPH INCUBATION GRAPHTYPE="Epi Curve" TITLETEXT="Epi Info 7 Oswego Tutorial"
+
+READ {Projects\Sample\Sample.prj}:Anderson
+GRAPH STIME GRAPHTYPE="Epi Curve" DATEFORMAT="dd MMMM, yyyy" INTERVAL="2 Hours"
+
+READ {Projects\Sample\Sample.prj}:Anderson
+GRAPH STIME GRAPHTYPE="Epi Curve" DATEFORMAT="dd MMMM, yyyy" INTERVAL="2 Hours" STARTFROM=0
+
+

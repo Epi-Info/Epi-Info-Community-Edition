@@ -1,0 +1,7 @@
+<Project id="426b5da9-216b-10e1-53da-e7ef342b5594" name="Salmonellosis" location="\\cdc\project\NCPHI_DISSS\Epi_Info\Epi_Info_Training\Training Curriculums\Epi Info 7 Curriculums\Salmonella\Updated Salmonellosis Database" description="" schemaVersion="102" epiVersion="" createDate="05/14/2014 08:41:18" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="zHDkaR2yI5Pbh2/LYHfZ7ljYKFwMFLb6TrxCvYEORi7Sj9EN3Tw6gyoykYAJDAPc7OVRe9tcGGyXMxPYw0KuianDxdqxGzc3YHVDpxz/f2WOkni+IgsNXBYWGhGAsUrsJKt1SBJ7pGZIWowPTmObUlP6XiOtWjMlUs0HMvDyr3s=" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>

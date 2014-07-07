@@ -1,0 +1,21 @@
+﻿<Template Name="Different Form Sizes" Description="" CreateDate="Monday, June 11, 2012 3:54:32 PM" Level="Project">
+  <Project Id="" Name="DifferentFormSizes" Location="" Description="" EpiVersion="" CreateDate="">
+    <CollectedData>
+      <Database Source="" DataDriver="" />
+    </CollectedData>
+    <Metadata Source="" />
+    <EnterMakeviewInterpreter Source="Epi.Core.EnterInterpreter" />
+    <View ViewId="1" Name="PortraitLetter" IsRelatedView="False" CheckCode="&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;" Width="768" Height="1028" Orientation="Portrait" LabelAlign="Vertical">
+      <Page PageId="1" Name="ProtraitLetterPage" Position="0" BackgroundId="0" ViewId="1" />
+    </View>
+    <View ViewId="2" Name="LandscapeLetter" IsRelatedView="False" CheckCode="&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;" Width="768" Height="993" Orientation="Landscape" LabelAlign="Vertical">
+      <Page PageId="2" Name="LandscapeLetterPage" Position="0" BackgroundId="0" ViewId="2" />
+    </View>
+    <View ViewId="3" Name="PortraitVGA" IsRelatedView="False" CheckCode="&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xA;&#xA;Field OpenNewRecord&#xA;&#x9;Click&#xA;&#x9;&#x9;NEWRECORD&#xA;&#x9;End-Click&#xA;End-Field&#xA;&#xA;Field OpenNewRecord1&#xA;&#x9;Click&#xA;&#x9;&#x9;NEWRECORD&#xA;&#x9;End-Click&#xA;End-Field&#xA;&#xA;Field PopulateRepeatFields&#xA;&#x9;Click&#xA;&#x9;&#x9;ASSIGN CheckBoxRepeat = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN CodesRepeat = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN CodesTargetRepeat = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN CommentLegalRepeat = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN LegalValuesRepeat = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN MultilineTextBoxRepeat = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN NumberFieldRepeat = TRUNC(SECONDS( SYSTEMDATE, SYSTEMTIME) MOD 60)&#xA;&#x9;&#x9;ASSIGN PhoneNumberRepeat = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN TextBoxRepeat = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN TextUppercaseRepeat = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#xA;&#x9;&#x9;ASSIGN TimeFieldRepeat = SYSTEMTIME&#xA;&#x9;&#x9;ASSIGN DateFieldRepeat = SYSTEMDATE&#xA;&#x9;&#x9;ASSIGN DateSlashTimeRepeat = SYSTEMTIME&#xA;&#xA;&#x9;&#x9;ASSIGN YesSlashNoRepeat = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#xA;&#x9;&#x9;ASSIGN YesSlashNoRepeat = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;End-Click&#xA;End-Field&#xA;&#xA;Field PopulateNoRepeatFields&#xA;&#x9;Click&#xA;&#x9;&#x9;ASSIGN CheckBox = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN Codes = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN CodesTarget = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN CommentLegal = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN LegalValues = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN MultilineTextBox = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN NumberField = TRUNC(SECONDS( SYSTEMDATE, SYSTEMTIME) MOD 60)&#xA;&#x9;&#x9;ASSIGN PhoneNumber = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN TextBox = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;&#x9;ASSIGN TextUppercase = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#xA;&#x9;&#x9;ASSIGN TimeField = SYSTEMTIME&#xA;&#x9;&#x9;ASSIGN DateField = SYSTEMDATE&#xA;&#x9;&#x9;ASSIGN DateSlashTime = SYSTEMTIME&#xA;&#xA;&#x9;&#x9;ASSIGN YesSlashNo = FORMAT( SYSTEMTIME, &quot;Long Time&quot;)&#xA;&#x9;End-Click&#xA;End-Field&#xA;&#xA;&#xA;&#xD;" Width="640" Height="480" Orientation="Portrait" LabelAlign="Vertical">
+      <Page PageId="3" Name="PortraitVGAPage" Position="0" BackgroundId="0" ViewId="3" />
+    </View>
+    <View ViewId="4" Name="LandscapeVGA" IsRelatedView="False" CheckCode="&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;" Width="640" Height="480" Orientation="Landscape" LabelAlign="Vertical">
+      <Page PageId="4" Name="LandscapeVGAPage" Position="0" BackgroundId="0" ViewId="4" />
+    </View>
+  </Project>
+</Template>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TableSchema" targetNamespace="http://tempuri.org/TableSchema.xsd" xmlns:mstns="http://tempuri.org/TableSchema.xsd" xmlns="http://tempuri.org/TableSchema.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TableSchema" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="TableSchema" msprop:Generator_DataSetName="TableSchema">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Tables" msdata:Locale="" msprop:Generator_UserTableName="Tables" msprop:Generator_RowDeletedName="TablesRowDeleted" msprop:Generator_TableClassName="TablesDataTable" msprop:Generator_RowChangedName="TablesRowChanged" msprop:Generator_RowClassName="TablesRow" msprop:Generator_RowChangingName="TablesRowChanging" msprop:Generator_RowEvArgName="TablesRowChangeEvent" msprop:Generator_RowEvHandlerName="TablesRowChangeEventHandler" msprop:Generator_TablePropName="_Tables" msprop:Generator_TableVarName="tableTables" msprop:Generator_RowDeletingName="TablesRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TABLE_CATALOG" msprop:Generator_UserColumnName="TABLE_CATALOG" msprop:Generator_ColumnPropNameInRow="TABLE_CATALOG" msprop:Generator_ColumnVarNameInTable="columnTABLE_CATALOG" msprop:Generator_ColumnPropNameInTable="TABLE_CATALOGColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="TABLE_SCHEMA" msprop:Generator_UserColumnName="TABLE_SCHEMA" msprop:Generator_ColumnPropNameInRow="TABLE_SCHEMA" msprop:Generator_ColumnVarNameInTable="columnTABLE_SCHEMA" msprop:Generator_ColumnPropNameInTable="TABLE_SCHEMAColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="TABLE_NAME" msprop:Generator_UserColumnName="TABLE_NAME" msprop:Generator_ColumnPropNameInRow="TABLE_NAME" msprop:Generator_ColumnVarNameInTable="columnTABLE_NAME" msprop:Generator_ColumnPropNameInTable="TABLE_NAMEColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="TABLE_TYPE" msprop:Generator_UserColumnName="TABLE_TYPE" msprop:Generator_ColumnPropNameInRow="TABLE_TYPE" msprop:Generator_ColumnVarNameInTable="columnTABLE_TYPE" msprop:Generator_ColumnPropNameInTable="TABLE_TYPEColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="TABLE_GUID" msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_UserColumnName="TABLE_GUID" msprop:Generator_ColumnPropNameInRow="TABLE_GUID" msprop:Generator_ColumnVarNameInTable="columnTABLE_GUID" msprop:Generator_ColumnPropNameInTable="TABLE_GUIDColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="DESCRIPTION" msprop:Generator_UserColumnName="DESCRIPTION" msprop:Generator_ColumnPropNameInRow="DESCRIPTION" msprop:Generator_ColumnVarNameInTable="columnDESCRIPTION" msprop:Generator_ColumnPropNameInTable="DESCRIPTIONColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="TABLE_PROPID" msprop:Generator_UserColumnName="TABLE_PROPID" msprop:Generator_ColumnPropNameInRow="TABLE_PROPID" msprop:Generator_ColumnVarNameInTable="columnTABLE_PROPID" msprop:Generator_ColumnPropNameInTable="TABLE_PROPIDColumn" type="xs:long" minOccurs="0" />
+              <xs:element name="DATE_CREATED" msprop:Generator_UserColumnName="DATE_CREATED" msprop:Generator_ColumnPropNameInRow="DATE_CREATED" msprop:Generator_ColumnVarNameInTable="columnDATE_CREATED" msprop:Generator_ColumnPropNameInTable="DATE_CREATEDColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DATE_MODIFIED" msprop:Generator_UserColumnName="DATE_MODIFIED" msprop:Generator_ColumnPropNameInRow="DATE_MODIFIED" msprop:Generator_ColumnVarNameInTable="columnDATE_MODIFIED" msprop:Generator_ColumnPropNameInTable="DATE_MODIFIEDColumn" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

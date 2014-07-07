@@ -1,0 +1,368 @@
+==========================================================================================
+==========================================================================================
+GRAPH
+==========================================================================================
+==========================================================================================
+
+READ {config:Sample.prj}:EstriolAndBirthweight
+GRAPH Estriol Birthweight GRAPHTYPE="Scatter" XTITLE="Estriol Level" YTITLE="Child Birthweight"
+
+==========================================================================================
+==========================================================================================
+READ {config:Sample.prj}::ADDFull 
+GRAPH GlobalRecordId GRAPHTYPE="Line" WEIGHTVAR=GPA
+==========================================================================================
+==========================================================================================
+
+READ {config:Sample.prj}:Anderson 
+KMSURVIVAL STIME = Rx * Status ( 1 ) GRAPHTYPE = "Survival Probability" 
+  
+READ {config:Sample.prj}:Anderson 
+COXPH STIME = Rx * Status ( 1 ) GRAPHTYPE = "Survival Probability" 
+
+==========================================================================================
+==========================================================================================
+ 
+READ {config:Sample.prj}:Oswego 
+GRAPH SEX GRAPHTYPE="Bar" STRATAVAR=CAKES
+GRAPH SEX COFFEE * ILL GRAPHTYPE="Bar" STRATAVAR=BROWNBREAD WEIGHTVAR=AVG(AGE)
+ 
+==========================================================================================
+==========================================================================================
+ 
+READ {config:Sample.prj}:Oswego 
+DEFINE AGEGROUP 
+RECODE AGE TO AGEGROUP 
+        LOVALUE - 1 = "<=1"
+        1 - 3 = "1 - 3"
+        4 - 5 = "4 - 5" 
+        5 - 11 = "5 - 11"
+        11 - 21 = "11 - 21"
+        21 - 31 = "21 - 31"
+        31 - 41 = "31 - 41"
+        41 - 51 = "41 - 51"
+        51 - 61 = "51 - 61"
+        61 - 71 = "61 - 71"
+        71 - 80 = "71 - 80"
+        80 - HIVALUE = ">80"
+END
+TYPEOUT "<Should not show category 4-5.>"
+GRAPH AGEGROUP GRAPHTYPE="Bar"
+
+==========================================================================================
+==========================================================================================
+FILTER MATRIX TEST (ALL COMBINATIONS OF INDEPENDENT VALUES, CROSTAB, STRATAVAR, WEIGHTVAR)
+==========================================================================================
+==========================================================================================
+ 
+READ {.\Projects\Sample\Sample.prj}:Oswego
+ 
+GRAPH BAKEDHAM GRAPHTYPE="Bar" 
+GRAPH BAKEDHAM COFFEE GRAPHTYPE="Bar"
+ 
+GRAPH BAKEDHAM * ILL GRAPHTYPE="Bar"
+GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar"
+ 
+GRAPH BAKEDHAM GRAPHTYPE="Bar" STRATAVAR=VANILLA 
+GRAPH BAKEDHAM COFFEE GRAPHTYPE="Bar" STRATAVAR=VANILLA 
+GRAPH BAKEDHAM * ILL GRAPHTYPE="Bar" STRATAVAR=VANILLA 
+GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar" STRATAVAR=VANILLA
+
+GRAPH BAKEDHAM GRAPHTYPE="Bar" WEIGHTVAR=VANILLA 
+GRAPH BAKEDHAM COFFEE GRAPHTYPE="Bar" WEIGHTVAR=VANILLA 
+GRAPH BAKEDHAM * ILL GRAPHTYPE="Bar" WEIGHTVAR=VANILLA 
+GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar" WEIGHTVAR=VANILLA 
+ 
+GRAPH BAKEDHAM GRAPHTYPE="Bar" WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM COFFEE GRAPHTYPE="Bar" WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM * ILL GRAPHTYPE="Bar" WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar" WEIGHTVAR=AVG(AGE)
+ 
+GRAPH BAKEDHAM GRAPHTYPE="Bar" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM COFFEE GRAPHTYPE="Bar" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM * ILL GRAPHTYPE="Bar" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE)
+ 
+==========================================================================================
+==========================================================================================
+AGGREGATE VALUES TEST (COUNT, SUM, AVERAGE, MAXIMUM, MINIMUM, COUNT%, SUM%)
+==========================================================================================
+==========================================================================================
+READ {.\Projects\Sample\Sample.prj}:Oswego
+ 
+GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar" STRATAVAR=VANILLA WEIGHTVAR=AGE
+GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar" STRATAVAR=VANILLA WEIGHTVAR=SUM(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar" STRATAVAR=VANILLA WEIGHTVAR=MAX(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar" STRATAVAR=VANILLA WEIGHTVAR=MIN(AGE)
+***GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar" STRATAVAR=VANILLA WEIGHTVAR=PERCENT(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar" STRATAVAR=VANILLA WEIGHTVAR=SUMPCT(AGE)
+
+==========================================================================================
+==========================================================================================
+DATA TYPES TEST
+==========================================================================================
+==========================================================================================
+READ {.\Projects\Sample\Sample.prj}:Oswego
+
+GRAPH VANILLA SEX BAKEDHAM DateOnset GraphType="Area" 
+GRAPH VANILLA SEX BAKEDHAM DateOnset GraphType="Bar" 
+GRAPH VANILLA SEX BAKEDHAM DateOnset GraphType="Bubble" 
+GRAPH VANILLA SEX BAKEDHAM DateOnset GraphType="Rotated Bar"
+GRAPH VANILLA SEX BAKEDHAM DateOnset GraphType="Scatter"
+
+TYPEOUT "The folloing graphs are not supported."
+GRAPH VANILLA SEX BAKEDHAM DateOnset GraphType="Line"
+GRAPH VANILLA SEX BAKEDHAM DateOnset GraphType="Pie"
+ 
+==========================================================================================
+==========================================================================================
+TITLES TEST
+==========================================================================================
+==========================================================================================
+ 
+READ {.\Projects\Sample\Sample.prj}:Anderson
+GRAPH STIME GraphType="Area" XTITLE="STIME" YTITLE="Count" TITLETEXT="Anderson"
+GRAPH STIME GraphType="Bar" XTITLE="STIME" YTITLE="Count" TITLETEXT="Anderson"
+GRAPH STIME GraphType="Bubble" XTITLE="STIME" YTITLE="Count" TITLETEXT="Anderson"
+GRAPH STIME GraphType="Line" XTITLE="STIME" YTITLE="Count" TITLETEXT="Anderson"
+GRAPH STIME GraphType="Pie" XTITLE="STIME" YTITLE="Count" TITLETEXT="Anderson"
+GRAPH STIME GraphType="Rotated Bar" XTITLE="STIME" YTITLE="Count" TITLETEXT="Anderson"
+GRAPH STIME GraphType="Scatter" XTITLE="STIME" YTITLE="Count" TITLETEXT="Anderson"
+
+==========================================================================================
+==========================================================================================
+GRAPH TYPE TEST
+==========================================================================================
+==========================================================================================
+ 
+READ {.\Projects\Sample\Sample.prj}:ADDFull 
+GRAPH DROPOUT REPEAT * GENDER GRAPHTYPE="Bar" 
+GRAPH DROPOUT REPEAT GRAPHTYPE="Bar" 
+GRAPH DROPOUT REPEAT * GENDER GRAPHTYPE="Line" 
+GRAPH DROPOUT REPEAT GRAPHTYPE="Line" 
+GRAPH DROPOUT REPEAT * GENDER GRAPHTYPE="Pie" 
+GRAPH DROPOUT REPEAT GRAPHTYPE="Pie" 
+
+READ {.\Projects\Sample\Sample.prj}:Oswego
+GRAPH BAKEDHAM COFFEE * ILL GraphType="Area" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GRAPHTYPE="Bar" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GraphType="Bubble" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GraphType="Line" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GraphType="Pie" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GraphType="Rotated Bar" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GraphType="Scatter" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE)
+GRAPH BAKEDHAM COFFEE * ILL GraphType="Weight Bar" STRATAVAR=VANILLA WEIGHTVAR=AVG(AGE) 
+
+==========================================================================================
+==========================================================================================
+
+READ {Projects\Sample\Sample.prj}:Oswego 
+GRAPH DATEONSET * ILL
+FREQ ILL
+FREQ DATEONSET WEIGHTVAR=ILL 
+GRAPH DATEONSET GRAPHTYPE="Line" WEIGHTVAR=ILL
+GRAPH DATEONSET * ILL GRAPHTYPE="Line"
+
+==========================================================================================
+==========================================================================================
+
+READ {Projects\Sample\Sample.prj}:Oswego
+SELECT ILL = (+)
+DEFINE INCUBATION NUMERIC
+ASSIGN INCUBATION=HOURS(TIMESUPPER, DATEONSET)
+GRAPH INCUBATION GRAPHTYPE="Epi Curve" TITLETEXT="Epi Info 7 Oswego Tutorial"
+
+==========================================================================================
+==========================================================================================
+
+
+READ 'C:\Epi_Info\Sample.mdb':Oswego
+GRAPH SEX GRAPHTYPE="Bar" STRATAVAR=CAKES
+GRAPH SEX COFFEE * ILL GRAPHTYPE="Bar" STRATAVAR=BROWNBREAD WEIGHTVAR=AVG(AGE)
+***GRAPH SEX GRAPHTYPE="Bar" STRATAVAR=BAKEDHAM MULTIGRAPH=2 * 1
+ 
+READ 'C:\Epi_Info\Sample.mdb':ADDFull
+***READ {C:\TFSCode\Epi Info 7\build\debug\Projects\Sample\Sample.prj}:ADDFull 
+FREQ  DROPOUT REPEAT STRATAVAR = GENDER WEIGHTVAR=IQ
+GRAPH  DROPOUT REPEAT STRATAVAR = GENDER WEIGHTVAR=IQ   
+GRAPH  DROPOUT REPEAT * ENGG GRAPHTYPE="Bubble" STRATAVAR = GENDER WEIGHTVAR=AVG(IQ) 
+ 
+==========================================================================================
+==========================================================================================
+
+READ {Projects/Sample/Sample.prj}:Oswego 
+DEFINE INCUBATION NUMERIC
+ASSIGN INCUBATION = MINUTES(TIMESUPPER,DATEONSET)/60 
+GRAPH INCUBATION GRAPHTYPE="Epi Curve" 
+
+
+==========================================================================================
+==========================================================================================
+READ {C:\Documents and Settings\ita3\Desktop\UserRegistrations.mdb}:[Registered Users] 
+READ {\\cdc\project\NCPHI_DISSS\Epi_Info\UserRegistration\UserRegistrations.mdb}:[Registered Users] 
+DEFINE REGDATE7 TEXTINPUT
+ASSIGN REGDATE7=FORMAT(RegistrationDate,"MMMM, yyyy")
+SELECT RegistrationDate >= 10/13/2011
+
+FREQ REGDATE7
+GRAPH REGDATE7 GRAPHTYPE="Pie"
+
+FREQ RegistrationDate
+GRAPH RegistrationDate GRAPHTYPE="Pie"
+
+==========================================================================================
+==========================================================================================
+
+
+
+==================
+CURRENT KNOWN DEFECTS
+==================
+As is a crossTab table, is there a yes/no order important? (VANILLA=Yes, VANILLA=No)
+"Ill=0" should read "Ill=No"
+DateFormat
+Percent [GetStatistics()]
+SumPercent [GetStatistics()]
+
+=================================================================
+READ 'C:\Epi_Info\Sample.mdb':ADDFull
+LIST *
+GRAPH GPA GRAPHTYPE="Bar" WEIGHTVAR=IQ
+=================================================================
+READ 'C:\Epi_Info\Sample.mdb':ADDFull
+DEFINE IQGROUP 
+RECODE IQ TO IQGROUP 
+	LOVALUE - 1 = "<=1"
+	1 - 21 = "001 - 21"
+	21 - 41 = "021 - 41"
+	41 - 61 = "041 - 61"
+	61 - 81 = "061 - 81"
+	81 - 101 = "081 - 101"
+	101 - 121 = "101 - 121"
+	121 - 141 = "121 - 141"
+	141 - 160 = "141 - 160"
+	160 - HIVALUE = "160"
+END
+GRAPH IQGROUP GRAPHTYPE="Bar" 
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=AVG(GPA)
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=MAX(GPA)
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=MIN(GPA)
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=SUM(GPA)
+-- below broken --
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=COUNT(GPA)
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=PERCENT(GPA)
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=SUMPCT(GPA)
+Removed percent and percent sum from the show value of dropdown of the analysis graph dialog.
+
+================================================================
+
+READ {Projects\Sample\Sample.prj}:ADDFull
+DEFINE IQGROUP 
+RECODE IQ TO IQGROUP 
+	LOVALUE - 1 = "<=1"
+	1 - 21 = ">1 - 21"
+	21 - 41 = ">21 - 41"
+	41 - 61 = ">41 - 61"
+	61 - 81 = ">61 - 81"
+	81 - 101 = ">81 - 101"
+	101 - 121 = ">101 - 121"
+	121 - 141 = ">121 - 141"
+	141 - 160 = ">141 - 160"
+	160 - HIVALUE = ">160"
+END
+***GRAPH IQGROUP GRAPHTYPE="Bar" 
+GRAPH IQGROUP WEIGHTVAR=AVG(GPA)
+GRAPH IQGROUP GRAPHTYPE="Histogram"  WEIGHTVAR=AVG(GPA)
+
+READ {Projects\Sample\Sample.prj}:Anderson 
+GRAPH Status TITLETEXT="title text" XTITLE="independent value label" YTITLE="dependent value label" WEIGHTVAR=AVG(STIME)
+
+=============================================================
+=============================================================
+START GRAPH OPTION TEST PROGRAMS
+=============================================================
+=============================================================
+
+READ {.\Projects\Sample\Sample.prj}:Anderson 
+KMSURVIVAL STIME = Rx * Status ( 1 ) GRAPHTYPE = "Survival Probability" 
+
+=============================================================
+=============================================================
+
+READ {.\Projects\Sample\Sample.prj}:Oswego 
+SELECT ILL= (+)
+
+FREQ  AGE 
+DEFINE agegroup 
+RECODE AGE TO agegroup 
+	LOVALUE - 1 = "<=1"
+	1 - 11 = ">1 - 11"
+	11 - 21 = ">11 - 21"
+	21 - 31 = ">21 - 31"
+	31 - 41 = ">31 - 41"
+	41 - 51 = ">41 - 51"
+	51 - 61 = ">51 - 61"
+	61 - 71 = ">61 - 71"
+	71 - 80 = ">71 - 80"
+	80 - HIVALUE = ">80"
+END
+GRAPH agegroup GRAPHTYPE="Bar" 
+
+=============================================================
+=============================================================
+
+=============================================================
+TITLE TEXT
+=============================================================
+READ {.\Projects\Sample\Sample.prj}:Anderson
+GRAPH STIME GraphType="Bar" XTITLE="STIME" YTITLE="Count" TITLETEXT="Anderson"
+=============================================================
+
+
+READ {Projects\Sample\Sample.prj}:Oswego 
+
+*** Simple column graph on numeric field
+FREQ AGE
+GRAPH AGE GRAPHTYPE="Column"
+
+*** Simple column graph on a YES/NO field
+FREQ BAKEDHAM
+GRAPH BAKEDHAM GRAPHTYPE="Column"
+
+*** Column Graph of Age, a numeric field, with one bar for each value of ILL, a Yes/No field
+FREQ AGE WEIGHTVAR=ILL
+GRAPH AGE * ILL GRAPHTYPE="Column"
+
+*** Column Graph of Sex, a text field, with one bar for each value of ILL, a Yes/No field
+FREQ SEX WEIGHTVAR=ILL 
+GRAPH SEX * ILL
+
+*** Column Graph of ILL, a Yes/No field, with one bar for each value of Sex, a text field
+GRAPH ILL * SEX
+
+*** Epi Curve of the DateOnset field, a Date/Time field
+GRAPH DATEONSET GRAPHTYPE="Epi Curve"
+
+*** Epi Curve of the TimeSupper field, a Date/Time field
+GRAPH TIMESUPPER GRAPHTYPE="Epi Curve"
+
+*** Epi Curve of the DateOnset field, a Date/Time field, showing one bar per value of Sex, a text field
+GRAPH DATEONSET * SEX GRAPHTYPE="Epi Curve"
+
+*** Epi Curve of the DateOnset field, a Date/Time field, showing one bar per value of ILL, a Yes/No field
+GRAPH DATEONSET * ILL GRAPHTYPE="Epi Curve"
+
+*** Epi Curve of the DateOnset field, a Date/Time field, with a weight variable set
+GRAPH DATEONSET GRAPHTYPE="Epi Curve" WEIGHTVAR=AGE
+
+*** Epi Curve of the DateOnset field, a Date/Time field, stratified by sex, with a weight variable set, and with a title
+GRAPH DATEONSET * SEX GRAPHTYPE="Epi Curve" WEIGHTVAR=AGE TITLETEXT="Epi Curve for Date of Symptom Onset by Sex"
+
+*** Epi Curve of the Age field, a numeric field
+GRAPH AGE GRAPHTYPE="Epi Curve" TITLETEXT="An Epi Curve on a numeric field -- The Age field"
+
+*** Epi Curve of a user-defined field that is storing the incubation period for this particular disease
+DEFINE INCUBATION NUMERIC
+ASSIGN INCUBATION = HOURS(TIMESUPPER, DATEONSET)
+GRAPH INCUBATION GRAPHTYPE="Epi Curve" TITLETEXT="An Epi Curve on a numeric field -- A User-Defined field for Incubation Period"

@@ -1,0 +1,111 @@
+﻿<ChartGadgets:ColumnChartGadgetBase x:Class="EpiDashboard.Gadgets.Charting.ColumnChartGadget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:EpiDashboard="clr-namespace:EpiDashboard"
+             xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+             xmlns:ChartGadgets="clr-namespace:EpiDashboard.Gadgets.Charting"
+             xmlns:charting="clr-namespace:ComponentArt.Win.DataVisualization.Charting;assembly=ComponentArt.Win.DataVisualization.Charting"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="600"
+                         SnapsToDevicePixels="True"
+             Style="{DynamicResource gadgetBaseStyle}" MouseRightButtonUp="ChartGadgetBase_MouseRightButtonUp">
+    <ChartGadgets:ColumnChartGadgetBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="pack://application:,,,/EpiDashboard;component/ResourceDictionary.xaml" />-->
+                <ResourceDictionary Source="../../ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        </ChartGadgets:ColumnChartGadgetBase.Resources>
+    <Grid>
+        <Border Name="borderAll" Style="{DynamicResource mainGadgetBorder}" Background="White" >
+            <Border.ContextMenu>
+                <ContextMenu x:Name="gadgetContextMenu">
+                    <MenuItem x:Name="mnuCopy" Header="Copy all chart data to clipboard"/>
+                    <MenuItem x:Name="mnuSendDataToHTML" Header="Send to web browser" />
+                    <Separator x:Name="separatorCurrentChart" />
+                    <!--<MenuItem x:Name="mnuSendDataToExcel" Header="Send data to Excel" />-->
+                    <MenuItem x:Name="mnuCurrentChart" StaysOpenOnClick="True" Header="Selected chart:" Background="LightGray"/>
+                    <MenuItem x:Name="mnuSaveSelectedChartAsImage" Header="Save chart as image..." Click="mnuSaveSelectedChartAsImage_Click" />
+                    <MenuItem x:Name="mnuCopySelectedChartImage" Header="Copy chart image to clipboard" Click="mnuCopySelectedChartImage_Click" />
+                    <MenuItem x:Name="mnuCopySelectedChartData" Header="Copy chart data to clipboard" Click="mnuCopySelectedChartData_Click" />
+                    <Separator/>
+                    <MenuItem x:Name="mnuSendToBack" Header="Send gadget to back"/>
+                    <MenuItem x:Name="mnuClose" Header="Close this gadget"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+
+            <Grid x:Name="grdMain">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsDescriptionButtonAvailable="False" IsFilterButtonAvailable="False" Text="Column Chart" />
+                <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel" Grid.Row="2" Text="" />
+                <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
+
+                <Controls:GadgetInfoPanel Grid.Row="4" Visibility="Collapsed" Margin="4" x:Name="infoPanel"></Controls:GadgetInfoPanel>
+                <StackPanel Grid.Row="7" x:Name="panelMain" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid x:Name="gridChartLayoutRoot">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock x:Name="tblockChartTitle" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Margin="0, 6, 0, 6" Visibility="Collapsed" />
+
+                        <Canvas x:Name="yAxisLabelCanvas" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="Auto" Margin="6, 0, -20, 0" >
+                            <TextBlock x:Name="tblockYAxisLabel" FontWeight="DemiBold" Canvas.Bottom="0" Canvas.Left="0" TextAlignment="Center" Margin="0,0,0,-20" Text="Count" Visibility="Collapsed" >                    
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>                                
+                                        <RotateTransform x:Name="rotate" Angle="270" />
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </Canvas>
+
+                        <TextBlock x:Name="tblockXAxisLabel" FontWeight="DemiBold" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0, 0, 0, 6" Visibility="Collapsed" />
+
+                        <!--<charting:XYChart x:Name="xyChart" XPath="S" Grid.Row="0" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated">
+                            <charting:XYChart.XAxisArea>
+                                <charting:AxisCoordinates x:Name="xAxisCoordinates" Angle="0" />
+                            </charting:XYChart.XAxisArea>
+                            <charting:XYChart.Axes>
+                                <charting:Axis Id="YAxis" x:Name="yAxis" UseReferenceValue="true" />
+                            </charting:XYChart.Axes>
+                            <charting:BarSeries x:Name="series0" Id="S0" YPath="Y" SeriesPath="X" ShowPointAnnotations="True" BarKind="Rectangle" />                        
+                        </charting:XYChart>-->
+                    </Grid>
+                </StackPanel>
+                <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{DynamicResource gadgetWaitPanelStyle}" />
+
+                <StackPanel Grid.Row="1" Grid.RowSpan="7" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" >
+                    <Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" >
+                        <Path x:Name="pathTriangle" 
+                              Margin="0,-2,90,0"
+                              Data="M 5 0 L 10 10 0 10 Z" Fill="{DynamicResource gadgetBackgroundBrush}" IsHitTestVisible="False" HorizontalAlignment="Right" VerticalAlignment="Top" Height="7" />
+
+                        <StackPanel Orientation="Vertical" Margin="25, 10, 25, 25" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed">
+
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</ChartGadgets:ColumnChartGadgetBase>

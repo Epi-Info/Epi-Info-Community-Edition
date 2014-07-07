@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Epi.Windows.Controls.ViewNode" Collapsed="true">
+    <Position X="2.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAACCAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\ViewNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.ComboBoxItem" Collapsed="true">
+    <Position X="18.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQEAAAEAAAAAAAAACAIAAAgCAAAAAA=</HashCode>
+      <FileName>Controls\ComboBoxItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.ComboBoxOfDatabaseFormats" Collapsed="true">
+    <Position X="5.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\ComboBoxOfDatabaseFormats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.ControlTracker" Collapsed="true">
+    <Position X="20.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAgAECCCJAgAABACBWAACACAgAGwIAAAAAAAQAAA=</HashCode>
+      <FileName>Controls\ControlTracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.DataGridComboBoxColumn" Collapsed="true">
+    <Position X="22.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAQQAAAAEAAAAAAAAAACAAEAMBAAAAA=</HashCode>
+      <FileName>Controls\DataGridComboBoxColumn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.MaskedTextBoxCell" Collapsed="true">
+    <Position X="18.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACQAAACAgAAAgAAAAAQAAAAgAACkICAACCAQAAggAA=</HashCode>
+      <FileName>Controls\DataGridMaskedTextBoxColumn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.MaskedTextBoxColumn" Collapsed="true">
+    <Position X="20.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACQAAACAgAAAgAAAAAQAAAAgAACgICAACCAAAAgwCA=</HashCode>
+      <FileName>Controls\DataGridMaskedTextBoxColumn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.MaskedTextBoxEditingControl" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAIACAICAIAAAkAAgAAAQAAAABAAQAMAAUAAAAAIBAA=</HashCode>
+      <FileName>Controls\DataGridMaskedTextBoxColumn.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Epi.Windows.Controls.DragableButton" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACJAAQQCAAABAgBAAABAAACAAAAADAAAABgACAAgAA=</HashCode>
+      <FileName>Controls\DragableButton.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Epi.Windows.Controls.DragableCheckBox" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACJAAQACAAgQAgAAAABAAACAAAABDAAAABgAAAAgAA=</HashCode>
+      <FileName>Controls\DragableCheckBox.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Epi.Windows.Controls.DragableComboBox" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACJAAQACAAAACgAIgABAAACAAAAADAAEABgAAAAgAA=</HashCode>
+      <FileName>Controls\DragableComboBox.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Epi.Windows.Controls.DragableGrid" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACLAASACAAAAAgAEAABAAACABAAADAAAABgAAAAgAA=</HashCode>
+      <FileName>Controls\DragableGrid.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Epi.Windows.Controls.DragableGroupBox" Collapsed="true">
+    <Position X="8.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gACBAgQACCAAAAgCAAABAgICAQAAQTBAAABgAAAAiAg=</HashCode>
+      <FileName>Controls\DragableGroupBox.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Windows.Controls.DragableGUIDField" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACJAAQCKAgAAAgAAAABAAACAAAAADAAAABgAAAAgAA=</HashCode>
+      <FileName>Controls\DragableGUIDField.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Epi.Windows.Controls.DragableLabel" Collapsed="true">
+    <Position X="2.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACJAASACgQAAAgAAAADAAACAAAAADAIAIBgCAAAgAA=</HashCode>
+      <FileName>Controls\DragableLabel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Windows.Controls.DragablePictureBox" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACJAAQQCAAABAgBAAABAAACAAAAADAAAABgACAAgAA=</HashCode>
+      <FileName>Controls\DragablePictureBox.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Epi.Windows.Controls.DragableTextBox" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCJAAQACAAAgAgAAABBAAACAAEAADAAAABgAAAAgAA=</HashCode>
+      <FileName>Controls\DragableTextBox.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.1" Collapsed="true" />
+  </Class>
+  <Class Name="Epi.Windows.Controls.FieldGroupBox" Collapsed="true">
+    <Position X="8.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\FieldGroupBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.FieldNode" Collapsed="true">
+    <Position X="7.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\FieldNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.LinkedFieldNode" Collapsed="true">
+    <Position X="9.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\LinkedFieldNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.LinkedRootNode" Collapsed="true">
+    <Position X="16.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\LinkedFieldNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.ListViewValuedItem" Collapsed="true">
+    <Position X="24" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Controls\ListViewValuedItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.LocalizedComboBox" Collapsed="true">
+    <Position X="5.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAA=</HashCode>
+      <FileName>Controls\LocalizedComboBox.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Windows.Controls.OpenFieldNode" Collapsed="true">
+    <Position X="5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\OpenFieldNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.FieldGroupNode" Collapsed="true">
+    <Position X="7.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\OpenFieldNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.PageNode" Collapsed="true">
+    <Position X="14" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\PageNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.PairedLabel" Collapsed="true">
+    <Position X="2.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controls\PairedLabel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.ProjectNode" Collapsed="true">
+    <Position X="11.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACgAAQAAAAAACAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Controls\ProjectNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.SettingsPanel" Collapsed="true">
+    <Position X="24" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QiRAOChygmMhEFAAaAC/RQiDIfpIDBQgBCCAWQEVAKk=</HashCode>
+      <FileName>Controls\SettingsPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.TransparentLabel" Collapsed="true">
+    <Position X="2.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\TransparentLabel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Windows.Controls.TreeValueNode" Collapsed="true">
+    <Position X="9.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAgA=</HashCode>
+      <FileName>Controls\TreeValueNode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Windows.FlickerFreeTreeView" Collapsed="true">
+    <Position X="22.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Controls\FlickerFreeTreeView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Epi.Windows.Controls.IFieldControl" Collapsed="true">
+    <Position X="20.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAgAAAABAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Controls\IControl.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Epi.Windows.Controls.IDragable" Collapsed="true">
+    <Position X="18.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\IDragable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Epi.Windows.Controls.ITranslatable" Collapsed="true">
+    <Position X="22.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Controls\ITranslatable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Epi.Windows.Controls.TreeNodeType" Collapsed="true">
+    <Position X="18.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAACAAAAAABAAAAAAAAAQAAIAA=</HashCode>
+      <FileName>Controls\TreeValueNode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

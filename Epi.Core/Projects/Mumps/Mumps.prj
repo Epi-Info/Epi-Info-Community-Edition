@@ -1,0 +1,7 @@
+<Project id="8f110443-e050-6501-92c7-885bfb88bdf2" name="Mumps" location="C:\TFSCode\Epi.Core\Projects\Mumps" description="" schemaVersion="102" epiVersion="" createDate="05/12/2011 06:22:46" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="/CMip3j3HV8RumZ8DOXlLCsNfxtHVPMPzQ5QwP6y4R8HklzHp5WfrIeS2eZrTpV7kdCBKTkdVqAVj8anRH1yQ+6izIENv1wNTg9ww6V3nVLUX/e/klKxVpDnc8twvGdWRUcVGuLrX+q//ElIJ+uFYw==" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>

@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="YEARS_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the difference in years between two dates. Only complete years are assigned. If the actual difference in years is 7.8, the assigned value will be a 7. The starting date should be the the earlier of the two dates, otherwise negative values will be assigned.</value>
+  </data>
+  <data name="MONTHS_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the difference in months between two dates. Only complete months are assigned. If the actual difference is 7.8, the assigned value will be a 7. The starting date should be the the earlier of the two dates, otherwise negative values will be assigned.</value>
+  </data>
+  <data name="DAYS_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the difference in days between two dates. Only complete days are assigned. If the actual difference is 7.8, the assigned value will be a 7. The starting date should be the the earlier of the two dates, otherwise negative values will be assigned.</value>
+  </data>
+  <data name="HOURS_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the difference in hours between two dates or date/times. Only complete hours are assigned. If the actual difference is 7.8, the assigned value will be a 7. The starting date/time should be the the earlier of the two date/times, otherwise negative values will be assigned.</value>
+  </data>
+  <data name="MINUTES_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the difference in minutes between two dates or date/times. Only complete minutes are assigned. If the actual difference is 23.8, the assigned value will be a 23. The starting date/time should be the the earlier of the two date/times, otherwise negative values will be assigned.</value>
+  </data>
+  <data name="ROUND_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Rounds a number to the given decimal place. If the number value is 8.3333333 and the decimal value is 2, then the result will be 8.33. A decimal value of 0 will force rounding to the nearest whole number.</value>
+  </data>
+  <data name="TEXT_TO_NUMBER_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Attempts to convert data stored as text into numeric data. Useful if numbers are stored in a text column and math operations need to be carried out on the data. Cannot convert alpha-numeric data, e.g. "A16" could not be converted.</value>
+  </data>
+  <data name="NUMBER_TO_TEXT_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Text
+    
+Attempts to convert data stored as a number into text.</value>
+  </data>
+  <data name="STRLEN_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the length (in characters) of data in the specified text field. A text value of 'Jane' would result in an assign value of 4. A text value of 'No data available' would result in an assign value of 17.</value>
+  </data>
+  <data name="FINDTEXT_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the starting position of a given character. A -1 is returned if the character was not found.</value>
+  </data>
+  <data name="SUBSTRING_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Text
+    
+Used to assign a field a portion of another field's text data. Useful for pulling out certain pieces of text from another field.</value>
+  </data>
+  <data name="UPPERCASE_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Text
+    
+Converts all characters in the given text field to upper case.</value>
+  </data>
+  <data name="LOWERCASE_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Text
+    
+Converts all characters in the given text field to lower case.</value>
+  </data>
+  <data name="ADD_DAYS_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Date/Time
+    
+Adds the specified number of whole days to a given date field. The assigned value will also be a date.</value>
+  </data>
+  <data name="STRIP_DATE_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Date/Time
+    
+Keeps the DATE component of a DATE TIME value in tact while making the TIME component 0. Same effect as a FLOOR(datetime) function. The assigned value will also be a date.</value>
+  </data>
+  <data name="DDL_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Boolean
+    
+Determines if the value in a given drop-down list field (Legal values, Comment legal) is present in the corresponding code table. Such a scenario may occur if the list values were modified after data entry had started, or after data merging. The assigned value will be a 'Yes' if the value is present and a 'No' if the value is not present. Missing values are always considered 'not present' in the code table.</value>
+  </data>
+  <data name="COUNT_CHECKED_CHECKBOXES_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Counts the number of checked checkboxes in a group. Any Yes/No fields in the group will be ignored. If the group is user-defined and includes boolean columns that are not part of an Epi Info 7 project, those boolean columns will be included.</value>
+  </data>
+  <data name="COUNT_YES_YESNOFIELDS_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Counts the number of Yes-marked Yes/No fields in a group. Any checkbox fields or other boolean columns in the group will be ignored.</value>
+  </data>
+  <data name="DETERMINE_IF_N_CHECKBOXES_CHECKED_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Boolean
+    
+Determine if more than the specified number of checkboxes are checked in a group. A 'Yes' will be returned if the condition is met. Any Yes/No fields in the group will be ignored. If the group is user-defined and includes boolean columns that are not part of an Epi Info 7 project, those boolean columns will be included.</value>
+  </data>
+  <data name="DETERMINE_IF_N_YESNOFIELDS_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Boolean
+    
+Determine if more than the specified number of Yes/No fields are marked Yes in a group. A 'Yes' will be returned if the condition is met. Any checkbox fields or other boolean columns in the group are ignored.</value>
+  </data>
+  <data name="COUNT_NUMERIC_BETWEEN_X_Y_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the number of numeric fields in a group that have values between (inclusive) the specified upper and lower boundaries. Any Yes/No fields in the group will be ignored.</value>
+  </data>
+  <data name="COUNT_NUMERIC_OUTSIDE_X_Y_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the number of numeric fields in a group that have values outside the specified upper and lower boundaries. Any Yes/No fields in the group will be ignored.</value>
+  </data>
+  <data name="SUM_NUMERIC_FIELDS_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the sum of all numeric fields in a group. If a group has four number fields with values 2, 8, and 10, and 16, the resulting assign value will be 36. Missing values in the group are not ignored and will result in an unknown sum. Can optionally be set to include Yes/No fields and Comment Legal fields that are within the group. A 'Yes' in a Yes/No field will count as a 1 and a 'No' will count as a 0. Comment Legal fields will be converted from text to their numeric equivalents and then treated as regular numeric fields, if possible.</value>
+  </data>
+  <data name="AVERAGE_NUMERIC_FIELDS_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the mean (average) of all numeric fields in a group. If a group has four number fields with values 2, 8, and 10, and 16, the resulting assign value will be 9. Missing values in the group are not ignored and will result in an unknown mean. Can optionally be set to include Yes/No fields and Comment Legal fields that are within the group. A 'Yes' in a Yes/No field will count as a 1 and a 'No' will count as a 0. Comment Legal fields will be converted from text to their numeric equivalents and then treated as regular numeric fields, if possible.</value>
+  </data>
+  <data name="MAX_NUMERIC_FIELDS_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the maximum value of all non-missing numeric fields in a group. If a group has four number fields with values -12, 8, and 10, and 24, the resulting assign value will be 24. Missing values in the group are ignored. Any Yes/No fields in the group will be ignored.</value>
+  </data>
+  <data name="MIN_NUMERIC_FIELDS_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Finds the minimum value of all non-missing numeric fields in a group. If a group has four number fields with values -12, -8, and 10, and 17, the resulting assign value will be -12. Missing values in the group are ignored. Any Yes/No fields in the group will be ignored.</value>
+  </data>
+  <data name="COUNT_MISSING_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Counts the number of fields in a group that have been left blank or contain NULL values in the database. If the group does not contain any fields then the assigned value will be a 0.</value>
+  </data>
+  <data name="COUNT_NOT_MISSING_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Numeric
+    
+Counts the number of fields in a group that have not been left blank and do not contain NULL values in the database. If the group does not contain any fields then the assigned value will be a 0.</value>
+  </data>
+  <data name="DETERMINE_IF_N_MISSING_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Boolean
+    
+Determines if more than the specified number of fields within a group contain missing values. A 'Yes' will be returned if the condition is met.</value>
+  </data>
+  <data name="PARAM_START_DATE" xml:space="preserve">
+    <value>Start date:</value>
+  </data>
+  <data name="PARAM_END_DATE" xml:space="preserve">
+    <value>End date:</value>
+  </data>
+  <data name="PARAM_TEXT_FIELD_TO_SEARCH" xml:space="preserve">
+    <value>Text field to search:</value>
+  </data>
+  <data name="PARAM_TEXT_TO_SEARCH_FOR" xml:space="preserve">
+    <value>The text string to search for:</value>
+  </data>
+  <data name="PARAM_NUMERIC_FIELD_TO_ROUND" xml:space="preserve">
+    <value>The numeric field to round:</value>
+  </data>
+  <data name="PARAM_ROUND_TO" xml:space="preserve">
+    <value>To number of decimal places to round to:</value>
+  </data>
+  <data name="PARAM_TEXT_FIELD" xml:space="preserve">
+    <value>Text field:</value>
+  </data>
+  <data name="PARAM_NUMBER_FIELD" xml:space="preserve">
+    <value>Number field:</value>
+  </data>
+  <data name="PARAM_FIRST_CHARACTER" xml:space="preserve">
+    <value>Position of the first character to extract:</value>
+  </data>
+  <data name="PARAM_NUMBER_OF_CHARACTERS" xml:space="preserve">
+    <value>Number of characters to extract:</value>
+  </data>
+  <data name="PARAM_DATE_FIELD" xml:space="preserve">
+    <value>Date field:</value>
+  </data>
+  <data name="PARAM_DAYS_TO_ADD" xml:space="preserve">
+    <value>Days to add (whole days only):</value>
+  </data>
+  <data name="PARAM_DDL_FIELD" xml:space="preserve">
+    <value>Drop-down list field:</value>
+  </data>
+  <data name="PARAM_GROUP_FIELD" xml:space="preserve">
+    <value>Group field:</value>
+  </data>
+  <data name="PARAM_COUNT" xml:space="preserve">
+    <value>Count:</value>
+  </data>
+  <data name="PARAM_UPPER_BOUND" xml:space="preserve">
+    <value>Upper bound:</value>
+  </data>
+  <data name="PARAM_LOWER_BOUND" xml:space="preserve">
+    <value>Lower bound:</value>
+  </data>
+  <data name="PARAM_INCLUDE_YESNO" xml:space="preserve">
+    <value>Include Yes/No fields:</value>
+  </data>
+  <data name="PARAM_INCLUDE_COMMENTLEGAL" xml:space="preserve">
+    <value>Include Comment Legal fields:</value>
+  </data>
+  <data name="ERROR_FIELD_ALREADY_EXISTS" xml:space="preserve">
+    <value>Destination field name already exists as a column in this data set. Please use another name.</value>
+  </data>
+  <data name="ERROR_FIELD_ALREADY_EXISTS_WITH_RECODED_DATA" xml:space="preserve">
+    <value>Destination field name already exists as a defined field with recoded values. Please use another field name.</value>
+  </data>
+  <data name="ERROR_PARAMS_BLANK" xml:space="preserve">
+    <value>One or more required parameters are blank.</value>
+  </data>
+  <data name="ERROR_TYPE_MISSING" xml:space="preserve">
+    <value>Assignment type is blank.</value>
+  </data>
+  <data name="ERROR_DESTINATION_FIELD_MISSING" xml:space="preserve">
+    <value>Destination field is blank.</value>
+  </data>
+  <data name="OVERWRITE_FIELD_DATA" xml:space="preserve">
+    <value>The destination field already exists. Do you want to overwrite the data in this field?</value>
+  </data>
+</root>

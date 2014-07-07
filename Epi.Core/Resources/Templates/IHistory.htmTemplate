@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Session History</title>
+    <style type="text/css">
+      H1
+      {
+      color:#365F91;
+      }
+      TABLE
+      {
+      border-collapse:collapse;
+      padding:5px;
+      }
+      TD
+      {
+      border-style:solid;
+      border-color:Black;
+      border-width:1px;
+      }
+      TH
+      {
+      border-style:solid;
+      border-color:Black;
+      border-width:1px;
+      padding-left:.3em;
+      padding-right:.3em;
+      background-color:#4a7ac9;
+      color:#FFFFFF;
+      }
+      TD.Stats
+      {
+      border-style:none;
+      border-width:0px;
+      padding-left:5px;
+      padding-right:5px;
+      padding-bottom:0px;
+      }
+      TH.Stats
+      {
+      border-style:none;
+      border-width:0px;
+      background-color:#4a7ac9;
+      color:#FFFFFF;
+      padding:5px;
+      }
+      HR
+      {
+      background-color:#d2451e;
+      }
+      DIV.PercentBar_Summary
+      {
+      filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr="Yellow",endColorStr=#ffd38e);
+      background-color:#fe9451;
+      height: 3px;
+      }
+
+      DIV.PercentBar_Totals
+      {
+      filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#ffd38e,endColorStr=#fe9451);
+      background-color:#fe9451;
+      height: 3px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h2 align="center">Session History</h2>
+    <h4 align="center">{0}</h4>
+    <hr/>
+    <br/>
+    <table id="tblLinks">
+      <tr>
+        <th>Time</th>
+        <th>Command</th>
+        <th>File</th>
+      </tr>
+      

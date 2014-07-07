@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="EpiDashboard.Controls.Charting.AberrationChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:EpiDashboard="clr-namespace:EpiDashboard"
+             xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+             xmlns:dvCharting="clr-namespace:ComponentArt.Win.DataVisualization.Charting;assembly=ComponentArt.Win.DataVisualization.Charting"
+             xmlns:dvCommon="clr-namespace:ComponentArt.Win.DataVisualization.Common;assembly=ComponentArt.Win.DataVisualization.Common" 
+             xmlns:dvUtils="clr-namespace:ComponentArt.Win.DataVisualization.Utils;assembly=ComponentArt.Win.DataVisualization.Common"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid x:Name="gridChartLayoutRoot" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="10" />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ContextMenu>
+            <ContextMenu x:Name="gadgetContextMenu">
+                <MenuItem x:Name="mnuSave" Header="Save chart as image..." Click="mnuSave_Click" />
+                <MenuItem x:Name="mnuCopyImage" Header="Copy chart image to clipboard" Click="mnuCopyImage_Click" />
+                <MenuItem x:Name="mnuCopyFullData" Header="Copy all data to clipboard" Click="mnuCopyFullData_Click" />
+                <MenuItem x:Name="mnuCopyAberrationData" Header="Copy aberration data to clipboard" Click="mnuCopyAberrationData_Click" />
+                <MenuItem x:Name="mnuSendDataToExcel" Header="Send aberration data to Excel" Click="mnuSendDataToExcel_Click" />
+            </ContextMenu>
+        </Grid.ContextMenu>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <TextBlock x:Name="tblockChartTitle" HorizontalAlignment="Center" FontSize="22" FontWeight="Bold" Margin="0, 6, 0, 6" />
+            <TextBlock x:Name="tblockIndicatorTitle" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Margin="0, 6, 0, 6" />
+        </StackPanel>
+
+        <Canvas x:Name="yAxisLabelCanvas" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="35" Height="Auto" Margin="6, 0, -20, 0" >
+            <TextBlock x:Name="tblockYAxisLabel" FontWeight="DemiBold" Canvas.Bottom="0" Canvas.Left="0" TextAlignment="Center" Margin="0,0,0,-20" Text="Count" Visibility="Collapsed" >                    
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>                                
+                                        <RotateTransform x:Name="rotate" Angle="270" />
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Canvas>
+
+        <!--<TextBlock x:Name="tblockXAxisLabel" FontWeight="DemiBold" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0, 0, 0, 6" Visibility="Collapsed" />-->
+
+        <dvCharting:XYChart x:Name="xyChart" Margin="1" Background="White" ProcessDataSourceInBackgroundThread="False" XPath="Date" Grid.Row="1" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated" AllowFractionalPointXRange="False" Visibility="Collapsed" AnimationCompleted="xyChart_AnimationCompleted" ChartVisualUpdated="xyChart_ChartVisualUpdated">
+            <dvCharting:XYChart.XAxisArea>
+                <dvCharting:AxisCoordinates x:Name="xAxisCoordinates" AxisId="XAxis" Angle="0" />
+                <!--<dvCharting:AxisScrollBar x:Name="xAxisScroller" AxisId="XAxis" Height="12" />-->
+
+                <dvCharting:ChartLabel HorizontalAlignment="Center">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center" x:Name="tblockXAxisLabel" FontWeight="DemiBold" Visibility="Collapsed" TextAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </dvCharting:ChartLabel>
+            </dvCharting:XYChart.XAxisArea>
+
+            <dvCharting:XYChart.YAxisArea>
+                <dvCharting:AxisCoordinates/>
+            </dvCharting:XYChart.YAxisArea>
+
+            <!--<dvCharting:XYChart.Axes>
+                                <dvCharting:Axis Id="YAxis" x:Name="yAxis" UseReferenceValue="true" />
+                                <dvCharting:Axis Id="XAxis" x:Name="xAxis" />
+                            </dvCharting:XYChart.Axes>-->
+
+            <dvCharting:LineSeries x:Name="series1" Id="S1" YPath="Expected" Label="Expected" LineKind="Auto" DashStyle="Dash" MarkerFill="Transparent" Color="Orange" />
+            <dvCharting:MarkerSeries x:Name="series2" Id="S2" YPath="Aberration" Label="Aberration" MarkerStroke="Black" MarkerSize="16" MarkerFill="Red" Color="Red" />
+            <dvCharting:LineSeries x:Name="series0" Id="S0" YPath="Actual" Label="Actual" LineKind="Auto" />
+
+            <!--<dvCharting:SeriesTracker SeriesId="S0, S1" MarkerSize="6" />-->
+
+        </dvCharting:XYChart>
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Background="Gray" Margin="80,0,80,0" x:Name="panelScroller">
+            <dvCharting:XAxisScrollBar x:Name="xAxisScrollBar" Height="20" VerticalAlignment="Top" Chart="{Binding ElementName=xyChart}" Visibility="Collapsed" />
+        </StackPanel>
+
+        <StackPanel x:Name="panelData" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"  Visibility="Collapsed">
+            <TextBlock x:Name="tblockAberrationsFound" Foreground="Red" FontWeight="Bold" Margin="4" HorizontalAlignment="Center">Aberrations</TextBlock>
+            <TextBlock x:Name="tblockNoAberrationsFound" Foreground="Red" FontWeight="Bold" Margin="4" HorizontalAlignment="Center">No aberrations detected</TextBlock>
+            <DataGrid
+                                  x:Name="dataGridMain" 
+                         ItemsSource="{Binding Path=., IsAsync=True, FallbackValue=...}"   
+                         ColumnHeaderHeight="25"
+                         AutoGenerateColumns="True"
+                                  BorderThickness="0"
+              CanUserAddRows="False"
+              CanUserDeleteRows="False"
+              CanUserReorderColumns="False"
+              CanUserResizeColumns="True"
+              CanUserResizeRows="False"
+              CanUserSortColumns="False"                                  
+              VerticalGridLinesBrush="#D5D5D5"
+              HorizontalGridLinesBrush="#D5D5D5"
+                                   BeginningEdit="dataGridMain_BeginningEdit"
+                                  HorizontalAlignment="Center"
+                                   />
+        </StackPanel>
+    </Grid>
+</UserControl>

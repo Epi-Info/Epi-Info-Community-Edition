@@ -1,0 +1,148 @@
+﻿<EpiDashboard:GadgetBase x:Class="EpiDashboard.Gadgets.Charting.AberrationChartGadget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:EpiDashboard="clr-namespace:EpiDashboard"
+             xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+             xmlns:ChartGadgets="clr-namespace:EpiDashboard.Gadgets.Charting"
+             xmlns:charting="clr-namespace:ComponentArt.Win.DataVisualization.Charting;assembly=ComponentArt.Win.DataVisualization.Charting"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="300">
+    <EpiDashboard:GadgetBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="pack://application:,,,/EpiDashboard;component/ResourceDictionary.xaml" />-->
+                <ResourceDictionary Source="../../ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </EpiDashboard:GadgetBase.Resources>
+    <Grid>
+        <Border Name="borderAll" Style="{DynamicResource mainGadgetBorder}" Background="White" >
+            <Border.ContextMenu>
+                <ContextMenu x:Name="gadgetContextMenu">
+                    <MenuItem x:Name="mnuCopy" Header="Copy data to clipboard"/>
+                    <MenuItem x:Name="mnuSendDataToHTML" Header="Send data to web browser">
+                        <!--<MenuItem.Icon>
+                            <Image Source="../../Images/saveHTML.png" />
+                        </MenuItem.Icon>-->
+                    </MenuItem>
+                    <MenuItem x:Name="mnuSendDataToExcel" Header="Send data to Excel" />
+                    <Separator/>
+                    <MenuItem x:Name="mnuSendToBack" Header="Send gadget to back"/>
+                    <MenuItem x:Name="mnuClose" Header="Close this gadget"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+
+            <Grid x:Name="grdMain">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsDescriptionButtonAvailable="False" IsFilterButtonAvailable="False" Text="Aberration Detection Chart" />
+                <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel" Grid.Row="2" Text="" />
+                <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
+
+                <Controls:GadgetInfoPanel Grid.Row="4" Visibility="Collapsed" Margin="4" x:Name="infoPanel"></Controls:GadgetInfoPanel>
+                <StackPanel Grid.Row="7" x:Name="panelMain" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+                </StackPanel>
+                <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{StaticResource gadgetWaitPanelStyle}" />
+
+                <StackPanel Grid.Row="1" Grid.RowSpan="7" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" >
+                    <!--<Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" >
+                        <Rectangle Style="{DynamicResource rectangleConfigOuter}" />
+                        <Rectangle Style="{DynamicResource rectangleConfigInner}" />
+
+                        <Path x:Name="pathTriangle" 
+                              Margin="0,-2,90,0"
+                              Data="M 5 0 L 10 10 0 10 Z" Fill="{DynamicResource gadgetBackgroundBrush}" IsHitTestVisible="False" HorizontalAlignment="Right" VerticalAlignment="Top" Height="7" />
+
+                        <StackPanel Orientation="Vertical" Margin="25, 10, 25, 25" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                            <TextBlock x:Name="tblockMainVariable" HorizontalAlignment="Left" TextAlignment="Center" Text="Date variable:" Margin="0,5,0,0"  />
+                            <ComboBox x:Name="cmbField" Width="140" HorizontalAlignment="Left" SelectedIndex="0" />
+
+                            <TextBlock x:Name="tblockWeightVariable" HorizontalAlignment="Left" TextAlignment="Center" Text="Count (Optional):" Margin="0,5,0,0"  />
+                            <ComboBox x:Name="cmbFieldWeight" Width="140" HorizontalAlignment="Left" SelectedIndex="0" />
+
+                            <TextBlock x:Name="tblockLagTimeDays" HorizontalAlignment="Left" TextAlignment="Center" Text="Lag time (days):" Margin="0,5,0,0"  />
+                            <TextBox x:Name="txtLagTime" Grid.Column="2" Grid.Row="5" Width="30" HorizontalAlignment="Left" Text="7" Margin="0, 0, 0, 00" PreviewTextInput="NumberBox_PreviewTextInput" TextChanged="txtLagTime_TextChanged"></TextBox>
+                            <TextBlock x:Name="tblockThresh" HorizontalAlignment="Left" TextAlignment="Center" Text="Threshold (Std. Deviations):" Margin="0,5,0,0"  />
+                            <TextBox x:Name="txtDeviations" Grid.Column="2" Grid.Row="5" Width="30" HorizontalAlignment="Left" Text="3" Margin="0, 0, 0, 00" PreviewTextInput="NumberBox_PreviewTextInput" TextChanged="txtDeviations_TextChanged"></TextBox>
+
+                            <TextBlock x:Name="tblockTimePeriod" HorizontalAlignment="Left" Text="Process records this many days prior:" Margin="0,5,0,0"  />
+                            <TextBox x:Name="txtTimePeriod" Width="30" HorizontalAlignment="Left" Text="365" Margin="0, 0, 0, 00" PreviewTextInput="NumberBox_PreviewTextInput" TextChanged="txtTimePeriod_TextChanged"></TextBox>
+
+                            <TextBlock x:Name="tblockStrataVariable" HorizontalAlignment="Left" TextAlignment="Center" Text="Indicators (Optional):" Margin="0,5,0,0"  />
+                            <ListBox x:Name="listboxFieldStrata" Width="180" Height="120" SelectionMode="Extended" HorizontalAlignment="Left" />
+
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="5"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock x:Name="tblockWidth" HorizontalAlignment="Left" TextAlignment="Center" Text="Width:" Margin="0,5,0,0"  />
+                                    <TextBox x:Name="txtWidth" Text="800" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock x:Name="tblockHeight" HorizontalAlignment="Left" TextAlignment="Center" Text="Height:" Margin="0,5,0,0"  />
+                                    <TextBox x:Name="txtHeight" Text="400" />
+                                </StackPanel>
+                            </Grid>
+
+                            <Expander Margin="0, 5, 0, 0" x:Name="expanderDisplayOptions">
+                                <Expander.Header>
+                                    <TextBlock>Display options</TextBlock>
+                                </Expander.Header>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+
+
+                                    <Border Style="{StaticResource configGroupBorderStyle}" Grid.Column="2">
+                                        <StackPanel Grid.Column="2">
+                                            <Label x:Name="lblLabels" FontWeight="Bold">Labels</Label>
+                                            <TextBlock x:Name="tblockYAxisLabelValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis label:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtYAxisLabelValue" HorizontalAlignment="Stretch" Text="Count" />
+
+                                            <TextBlock x:Name="tblockXAxisLabelType" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis label type:" Margin="0,5,0,0"  />
+                                            <ComboBox x:Name="cmbXAxisLabelType" Width="140" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cmbXAxisLabelType_SelectionChanged">
+                                                <ComboBox.Items>
+                                                    <ComboBoxItem>Automatic</ComboBoxItem>
+                                                    <ComboBoxItem>Field Prompt</ComboBoxItem>
+                                                    <ComboBoxItem>None</ComboBoxItem>
+                                                    <ComboBoxItem>Custom</ComboBoxItem>
+                                                </ComboBox.Items>
+                                            </ComboBox>
+
+                                            <TextBlock x:Name="tblockXAxisLabelValue" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis label:" Margin="0,5,0,0" />
+                                            <TextBox x:Name="txtXAxisLabelValue" HorizontalAlignment="Stretch" Text="" IsEnabled="False" />
+
+                                            <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart title:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtChartTitle" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
+                                        </StackPanel>
+                                    </Border>
+
+                                </Grid>
+                            </Expander>
+                            <Button x:Name="btnRun" Content="Run" Margin="0,20,0,0" Click="btnRun_Click" />
+                        </StackPanel>
+                    </Grid>-->
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</EpiDashboard:GadgetBase >

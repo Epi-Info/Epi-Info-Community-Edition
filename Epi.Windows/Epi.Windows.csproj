@@ -1,0 +1,676 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D120296B-493B-46AC-8657-4D32A9604231}</ProjectGuid>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Epi.Windows</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Epi.Windows</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\build\debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>..\build\debug\Epi.Windows.XML</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\build\release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\build\release\Epi.Windows.XML</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\build\linux\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\linux\Epi.Windows.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug %28Exclude EpiMap%29|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug %28Exclude EpiMap%29\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\debug\Epi.Windows.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Epi.Enter.ServiceApplication\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\debug\Epi.Windows.XML</DocumentationFile>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\build\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Linux\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug %28Exclude EpiMap%29|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug %28Exclude EpiMap%29\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Epi.Enter.ServiceApplication\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Epi.Web.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Web\Epi.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Program Files\Microsoft.NET\Primary Interop Assemblies\Microsoft.mshtml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0" />
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="ApplicationManager.cs" />
+    <Compile Include="CommandLine.cs" />
+    <Compile Include="Controls\ComboBoxItem.cs" />
+    <Compile Include="Controls\ControlTracker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SettingsPanelDateTime.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SettingsPanelDateTime.Designer.cs">
+      <DependentUpon>SettingsPanelDateTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TemplateFootprint.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DragableDatePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DataGridMaskedTextBoxColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DragableButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DragableCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DragableComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DragableGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DragableGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DragableGUIDField.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DragableLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DragablePictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DragableTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FieldGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FieldNode.cs" />
+    <Compile Include="Controls\FlickerFreeTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\IControl.cs" />
+    <Compile Include="Controls\IDragable.cs" />
+    <Compile Include="Controls\LinkedFieldNode.cs" />
+    <Compile Include="Controls\ListViewValuedItem.cs" />
+    <Compile Include="Controls\OpenFieldNode.cs" />
+    <Compile Include="Controls\PageNode.cs" />
+    <Compile Include="Controls\PairedLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ProjectNode.cs" />
+    <Compile Include="Controls\SettingsPanel.Designer.cs">
+      <DependentUpon>SettingsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TemplatesNode.cs" />
+    <Compile Include="Controls\TransparentLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TreeValueNode.cs" />
+    <Compile Include="Controls\ViewNode.cs" />
+    <Compile Include="Dialogs\AboutEpiInfoDialog.Designer.cs">
+      <DependentUpon>AboutEpiInfoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AdvancedReadDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AdvancedReadDialog.Designer.cs">
+      <DependentUpon>AdvancedReadDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TableToFormProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\TableToFormProgressDialog.Designer.cs">
+      <DependentUpon>TableToFormProgressDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ReadRelatedDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ReadRelatedDialog.Designer.cs">
+      <DependentUpon>ReadRelatedDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\InputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\InputDialog.Designer.cs">
+      <DependentUpon>InputDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ProjectFromTemplateDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ProjectFromTemplateDialog.Designer.cs">
+      <DependentUpon>ProjectFromTemplateDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\BaseReadDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BaseReadDialog.Designer.cs">
+      <DependentUpon>BaseReadDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ReplaceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ReplaceDialog.Designer.cs">
+      <DependentUpon>ReplaceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DataTablePropertiesDialog.Designer.cs">
+      <DependentUpon>DataTablePropertiesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DialogBase.Designer.cs">
+      <DependentUpon>DialogBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\LanguageSelectionDialog.Designer.cs">
+      <DependentUpon>LanguageSelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\OptionsDialog.Designer.cs">
+      <DependentUpon>OptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ProjectCreationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ProjectCreationDialog.Designer.cs">
+      <DependentUpon>ProjectCreationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SearchDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SearchDialog.Designer.cs">
+      <DependentUpon>SearchDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\UserDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UserDialog.Designer.cs">
+      <DependentUpon>UserDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ViewSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ViewSelectionDialog.Designer.cs">
+      <DependentUpon>ViewSelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Docking\DockContainer.Designer.cs">
+      <DependentUpon>DockContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Docking\DockManager.Designer.cs">
+      <DependentUpon>DockManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Docking\DockPanel.Designer.cs">
+      <DependentUpon>DockPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Docking\DockWindow.Designer.cs">
+      <DependentUpon>DockWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Docking\FlatButton.Designer.cs">
+      <DependentUpon>FlatButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Enums.cs" />
+    <Compile Include="Files.cs" />
+    <Compile Include="FormBase.Designer.cs">
+      <DependentUpon>FormBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IWindowsModule.cs" />
+    <Compile Include="IWizard.cs" />
+    <Compile Include="IWizardStep.cs" />
+    <Compile Include="ModuleContainer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controls\ComboBoxOfDatabaseFormats.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DataGridComboBoxColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ITranslatable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\LocalizedComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\SettingsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AboutEpiInfoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DataTablePropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DialogBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\LanguageSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\OptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Docking\DockContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockEventArgs.cs" />
+    <Compile Include="Docking\DockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Docking\DockForm.designer.cs">
+      <DependentUpon>DockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Docking\DockManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\DockWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Docking\Enums.cs" />
+    <Compile Include="Docking\FlatButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Docking\OverlayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Docking\OverlayForm.designer.cs">
+      <DependentUpon>OverlayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FontStandardization.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Localization.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MsgBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreenForm.Designer.cs">
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserKeyboardInput.cs" />
+    <Compile Include="WinUtil.cs" />
+    <EmbeddedResource Include="Controls\ComboBoxOfDatabaseFormats.resx">
+      <DependentUpon>ComboBoxOfDatabaseFormats.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SettingsPanelDateTime.resx">
+      <DependentUpon>SettingsPanelDateTime.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SettingsPanel.resx">
+      <DependentUpon>SettingsPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TemplateFootprint.resx">
+      <DependentUpon>TemplateFootprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AboutEpiInfoDialog.resx">
+      <DependentUpon>AboutEpiInfoDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AdvancedReadDialog.resx">
+      <DependentUpon>AdvancedReadDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\TableToFormProgressDialog.resx">
+      <DependentUpon>TableToFormProgressDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ReadRelatedDialog.resx">
+      <DependentUpon>ReadRelatedDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DataTablePropertiesDialog.resx">
+      <DependentUpon>DataTablePropertiesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DialogBase.resx">
+      <DependentUpon>DialogBase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\LanguageSelectionDialog.resx">
+      <DependentUpon>LanguageSelectionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsDialog.resx">
+      <DependentUpon>OptionsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ProjectFromTemplateDialog.resx">
+      <DependentUpon>ProjectFromTemplateDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BaseReadDialog.resx">
+      <DependentUpon>BaseReadDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docking\DockContainer.resx">
+      <DependentUpon>DockContainer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docking\DockForm.resx">
+      <DependentUpon>DockForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docking\DockManager.resx">
+      <DependentUpon>DockManager.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docking\DockPanel.resx">
+      <DependentUpon>DockPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docking\DockWindow.resx">
+      <DependentUpon>DockWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docking\FlatButton.resx">
+      <DependentUpon>FlatButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docking\OverlayForm.resx">
+      <DependentUpon>OverlayForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBase.resx">
+      <DependentUpon>FormBase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreenForm.resx">
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\DragableGroupBox.resx">
+      <DependentUpon>DragableGroupBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DragableLabel.resx">
+      <DependentUpon>DragableLabel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PairedLabel.resx">
+      <DependentUpon>PairedLabel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\InputDialog.resx">
+      <DependentUpon>InputDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ReplaceDialog.resx">
+      <DependentUpon>ReplaceDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ProjectCreationDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProjectCreationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SearchDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SearchDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UserDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>UserDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ViewSelectionDialog.resx">
+      <DependentUpon>ViewSelectionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Docking\img\DockAll.bmp" />
+    <EmbeddedResource Include="Docking\img\DockAll.png" />
+    <EmbeddedResource Include="Docking\img\DockBottom.bmp" />
+    <EmbeddedResource Include="Docking\img\DockCenter.bmp" />
+    <EmbeddedResource Include="Docking\img\DockLeft.bmp" />
+    <EmbeddedResource Include="Docking\img\DockRight.bmp" />
+    <EmbeddedResource Include="Docking\img\DockTop.bmp" />
+    <EmbeddedResource Include="Docking\img\FlatButton.bmp" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epi.Core.EnterInterpreter\Epi.Core.EnterInterpreter.csproj">
+      <Project>{E0BCCCB4-5DB8-4AE3-AFF1-F5BB3D6F2FEC}</Project>
+      <Name>Epi.Core.EnterInterpreter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Core.Interpreter\Epi.Core.AnalysisInterpreter.csproj">
+      <Project>{D8486FD0-2C53-4AED-92DB-347F081FE0AB}</Project>
+      <Name>Epi.Core.AnalysisInterpreter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
+      <Project>{EBD2B961-A952-4670-96CA-50BAA12C7F29}</Project>
+      <Name>Epi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.ImportExport\Epi.ImportExport.csproj">
+      <Project>{B5F72DDF-5349-4C03-9285-AE35110BA6CD}</Project>
+      <Name>Epi.ImportExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows.Globalization\Epi.Windows.Globalization.csproj">
+      <Project>{42A2EA6A-823C-4503-AD08-ED1D2FD6B762}</Project>
+      <Name>Epi.Windows.Globalization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EpiInfoPlugin\EpiInfo.Plugin.csproj">
+      <Project>{20C12C97-52CE-45C3-B563-3C15330C2A98}</Project>
+      <Name>EpiInfo.Plugin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Controls\Controls.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\watermark_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\App.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

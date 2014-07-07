@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="Epi.Fields.NumberColumn" Collapsed="true">
+    <Position X="6.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\Grid Columns\NumberColumn.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAEAEAYAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.PhoneNumberColumn" Collapsed="true">
+    <Position X="10.75" Y="9.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\Grid Columns\PhoneNumberColumn.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAEAEAYAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.UniqueKeyColumn" Collapsed="true">
+    <Position X="5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\Grid Columns\UniqueKeyColumn.cs</FileName>
+      <HashCode>AAAAAAAAAAAAgEEEAQAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.TextColumn" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\Grid Columns\TextColumn.cs</FileName>
+      <HashCode>AAAAAAAAAAAAgEAEAYAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.PatternableColumn" Collapsed="true">
+    <Position X="8.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\PatternableColumn.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.ContiguousColumn" Collapsed="true">
+    <Position X="7.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\Grid Columns\ContiguousColumn.cs</FileName>
+      <HashCode>AAAAEAAAABAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.GridColumnBase" Collapsed="true">
+    <Position X="3.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\Grid Columns\GridColumnBase.cs</FileName>
+      <HashCode>ABACAgAAACIAAEA0wQACIEUgABAEIAAYQAAACAEAAgA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.PredefinedColumn" Collapsed="true">
+    <Position X="3.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\Grid Columns\PredefinedColumn.cs</FileName>
+      <HashCode>AAAAAIAAAAIAAQAAACAAAAAAAABAAAARAAAAAQQAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.RecStatusColumn" Collapsed="true">
+    <Position X="2.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\Grid Columns\RecStatusColumn.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAEEEAYAAAAAAAAAAACABAAAAAAQAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.DateColumn" Collapsed="true">
+    <Position X="8.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\Grid Columns\DateColumn.cs</FileName>
+      <HashCode>AAAAAAAAAAAAgEAEAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.CheckBoxField" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="6" Width="2" />
+    <TypeIdentifier>
+      <FileName>Fields\CheckBoxField.cs</FileName>
+      <HashCode>AgCAAgBAAAAAgAAAkAAAQAAAAAlAAAAAEAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Epi.Fields.TextField" Collapsed="true">
+    <Position X="28.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\TextField.cs</FileName>
+      <HashCode>ABAAAABAAAAEAAAABIAAQAAAAAgAABAAAAAQAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.UpperCaseTextField" Collapsed="true">
+    <Position X="27.25" Y="12.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\UpperCaseTextField.cs</FileName>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.YesNoField" Collapsed="true">
+    <Position X="14.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\YesNoField.cs</FileName>
+      <HashCode>AgCAAgBAAAAAgAEAEAAAAAAAAAAAAAEAEAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.RelatedViewField" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\RelatedViewField.cs</FileName>
+      <HashCode>CgCABoBAAACAQACAAAAgAFAAAAkQAAAAEAAAAEIAgAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.RecStatusField" Collapsed="true">
+    <Position X="7" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\RecStatusField.cs</FileName>
+      <HashCode>AgAIAgBAAAAAgAEAAAAAAAAAAAEAACABEAAAAAYAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.ReadOnlyTextField" Collapsed="true">
+    <Position X="35.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\ReadOnlyTextField.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.PhoneNumberField" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\PhoneNumberField.cs</FileName>
+      <HashCode>AhCAAgBAAAAAgAAAAAAAQAAQAAgAEAAAEAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Epi.Fields.SingleLineTextField" Collapsed="true">
+    <Position X="27.25" Y="11" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\SingleLineTextField.cs</FileName>
+      <HashCode>AgCAAgAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.TableBasedDropDownColumn" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.5" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>Fields\Grid Columns\TableBasedDropdownColumn.cs</FileName>
+      <HashCode>KAAAACgEAAAAAAADAAAAAAAAAAAAAAABAAUAgAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.TimeField" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\TimeField.cs</FileName>
+      <HashCode>AACAAgBAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.LabelField" Collapsed="true">
+    <Position X="17.5" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\LabelField.cs</FileName>
+      <HashCode>AgCAAgBAAAAAAAAAAAAAAAAAAAEAAAAAEAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.PredefinedDataField" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\PredefinedDataField.cs</FileName>
+      <HashCode>AAAIAAAAAAIAAQAAACAISAAAAAhAAAARCAAAAQQAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.InputTextBoxField" Collapsed="true">
+    <Position X="34" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\InputTextBoxField.cs</FileName>
+      <HashCode>AAAAAAAAAAAAgAEAEAAAAAAAAAkAAAEAEAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.ContiguousTextBoxField" Collapsed="true">
+    <Position X="35" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>Fields\ContiguousTextBoxField.cs</FileName>
+      <HashCode>AAAAEAAAABAAAAAAAAAAAAABAAgAAQAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.Field" Collapsed="true">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\Field.cs</FileName>
+      <HashCode>AAgCIgBAACAAAAAAAAACAAQAAAkEAAAAQwABAAAAAiA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.RenderableField" Collapsed="true">
+    <Position X="16.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\RenderableField.cs</FileName>
+      <HashCode>AMCAACBAAAA0QICQEIACgAgAAAgAQAAAVAAAYEQAgEA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.GridField" Collapsed="true">
+    <Position X="20" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\GridField.cs</FileName>
+      <HashCode>AgCAAgBAAAAAAgAAAAIAAAAAgAEAAAAAGAIAAAoAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.FieldWithoutSeparatePrompt" Collapsed="true">
+    <Position X="13.25" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Fields\FieldWithoutSeparatePrompt.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.FieldWithSeparatePrompt" Collapsed="true">
+    <Position X="24.5" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>Fields\FieldWithSeparatePrompt.cs</FileName>
+      <HashCode>AAAAAIIAAAAAAAAAAAAAgAAAAAgAAAACAAAAAAAAAAE=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.DropDownField" Collapsed="true">
+    <Position X="18.5" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\DropDownField.cs</FileName>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.DDLFieldOfLegalValues" Collapsed="true">
+    <Position X="19.5" Y="11" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\DDLFieldOfLegalValues.cs</FileName>
+      <HashCode>IgCAAgBAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAIAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.DDLFieldOfCommentLegal" Collapsed="true">
+    <Position X="22" Y="11" Width="2" />
+    <TypeIdentifier>
+      <FileName>Fields\DDLFieldOfCommentLegal.cs</FileName>
+      <HashCode>AgCAAgBAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.DDLFieldOfCodes" Collapsed="true">
+    <Position X="17" Y="11" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\DDLFieldOfCodes.cs</FileName>
+      <HashCode>AgCAAgBAABAAAAAAAAAAAAAAAAAAAAAAEAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.DateTimeField" Collapsed="true">
+    <Position X="41" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\DateTimeField.cs</FileName>
+      <HashCode>AgCAAgBAAAAAAAEAAIAAAAAQAAgAEAAAEAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.DateField" Collapsed="true">
+    <Position X="36.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\DateField.cs</FileName>
+      <HashCode>AACAEgBAABAAAAAAAIAAAAABAAgAAQAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.CommandButtonField" Collapsed="true">
+    <Position X="7" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\CommandButtonField.cs</FileName>
+      <HashCode>AgCAAgBAAAAAAAAAAAAAAAgAAAkCAAAAEAAAAAoAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.ImageField" Collapsed="true">
+    <Position X="24.75" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Fields\ImageField.cs</FileName>
+      <HashCode>AgCAAgBAAAAAAAAAAIAAQAAAAAkAAAAAEEAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.InputFieldWithoutSeparatePrompt" Collapsed="true">
+    <Position X="13" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Fields\InputFieldWithoutSeparatePrompt.cs</FileName>
+      <HashCode>ABAIAAAAAAIAgQEQACAICAEgAAhAIAARCAAAAQEAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.InputFieldWithSeparatePrompt" Collapsed="true">
+    <Position X="24.5" Y="6.75" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Fields\InputFieldWithSeparatePrompt.cs</FileName>
+      <HashCode>ABAIAAAAAAIAgQEQACAICAEgAAhAIAARCAAAAQEAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.MirrorField" Collapsed="true">
+    <Position X="37.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\MirrorField.cs</FileName>
+      <HashCode>AgCAAgRAAAAEAAAABAAAAAAAAAkAAAAAEAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.MultilineTextField" Collapsed="true">
+    <Position X="29.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\MultilineTextField.cs</FileName>
+      <HashCode>AhCAAgBAAAAAgAAAAAAAAAAAAAAAAAAAEAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Fields.NumberField" Collapsed="true">
+    <Position X="34.25" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\NumberField.cs</FileName>
+      <HashCode>AgCAEgBAABAAgAAAAAAAAAARAAgAEQAAEAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.OptionField" Collapsed="true">
+    <Position X="12" Y="6" Width="2" />
+    <TypeIdentifier>
+      <FileName>Fields\OptionField.cs</FileName>
+      <HashCode>AkCAAgBAAAAAAAAAEAAAQAAAAAkAAAAAGAAAAApAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.UniqueKeyField" Collapsed="true">
+    <Position X="9.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\UniqueKeyField.cs</FileName>
+      <HashCode>AgAAAgBAAAAAgAEAAAAAAAAAAAEAAAAAEAAAAAYAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Epi.Fields.UniqueIdentifierField" Collapsed="true">
+    <Position X="11.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Fields\UniqueIdentifierField.cs</FileName>
+      <HashCode>AgAAAgBAAAAAgAEAAAAAAAAAAAEAAAAAEAAAAAYAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+</ClassDiagram>
