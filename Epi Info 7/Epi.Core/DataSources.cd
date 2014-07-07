@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="Epi.Data.IQuery">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAIAAAAAAAAA=</HashCode>
+      <FileName>Data\IQuery.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Epi.Data.IDbDriverFactory">
+    <Position X="5.75" Y="1" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQABgAAACAAAAAAAAAAAAIAAAAEAAAAgAA=</HashCode>
+      <FileName>Data\IDbDriverFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Epi.Data.IDbDriver">
+    <Position X="1.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BBwEAAIUACAICqCJJQAgElCDABECEAABACAARRIAAAE=</HashCode>
+      <FileName>Data\IDbDriver.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

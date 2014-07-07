@@ -1,0 +1,2828 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ABOUT_EPIINFO_LINE1" xml:space="preserve">
+    <value>Epi Info™ is a data collection, management, analysis, visualization, and reporting software for public health professionals. It is used worldwide for the rapid assessment of disease outbreaks; for the development of small to mid-sized disease surveillance systems; as ad hoc components integrated with other large scale or enterprise-wide public health information systems; and in the continuous education of public health professionals learning the science of epidemiology, tools, and techniques.</value>
+  </data>
+  <data name="ABOUT_EPIINFO_LINE2" xml:space="preserve">
+    <value>Epi Info™ is a trademark of the Centers for Disease Control and Prevention (CDC). The software is in the public domain and freely available for use, copying translation and distribution.</value>
+  </data>
+  <data name="ABOUT_EPIINFO_LINE3" xml:space="preserve">
+    <value>Core Team:
+______________________________________________
+
+José Aponte
+David Brown (McKing Consulting)
+Harold Collins
+John Copeland
+James Haines (McKing Consulting)
+Asad Islam (Team Leader)
+Gerald Jones
+Erik Knudsen
+Roger Mir
+David Nitschke
+Carol Worsham
+
+Special thanks to:
+______________________________________________
+
+Sara Bedrosian
+Douglas Bialecki
+Karl August Brendel, III
+Andy Dean
+Robert Fagan
+Gabriel Rainisch
+Donald Chris Smith
+
+EIS Epi Info™ 7 Workgroup:
+- Sudhir Bunga
+- Timothy Cunningham
+- Nancy Fleischer
+- Alyson Goodman
+- Asha Ivy
+- Jeffery Miller
+- Timothy Minniear (Chairperson)
+- Diane Morof
+- Cyrus Shahpar
+- Danielle Tack
+- Christopher Taylor
+- Ellen Yard
+
+PHPS Epi Info™ 7 Workgroup:
+- Tegan L. Callahan
+- Sarah Ekerholm
+- Coby E. Jansen
+- Amy V. Neuwelt
+- Cristina M. Rodriguez Hart
+- Tina J. Sang
+- Anna S. Talman (Chairperson)
+- Angela S. Tang
+- Sharron H. Wyatt
+
+Algorithms and Formulas:
+______________________________________________
+
+- StatCalc algorithms and formulas provided by OpenEpi.com.
+
+- Aberration detection algorithms provided by the CDC’s Early Aberration Reporting System (EARS).  For more information on EARS visit:  http://emergency.cdc.gov/surveillance/ears/ </value>
+  </data>
+  <data name="ADDITIONAL_INFORMATION" xml:space="preserve">
+    <value>Additional information:</value>
+  </data>
+  <data name="ANALYSIS" xml:space="preserve">
+    <value>Analysis</value>
+  </data>
+  <data name="BUILD" xml:space="preserve">
+    <value>Build</value>
+  </data>
+  <data name="CANNOT_ADD_FIELD_VIEW_MAX" xml:space="preserve">
+    <value>The maximum number of fields has been added to the current form so no more will be added.</value>
+  </data>
+  <data name="CANNOT_OPEN_PROJECT_FILE" xml:space="preserve">
+    <value>The project file could not be opened</value>
+  </data>
+  <data name="CANNOT_OPEN_VIEW_NO_DATA_TABLE" xml:space="preserve">
+    <value>The form could not be opened because it does not have a data table. Please open the form in Form Designer and create a data table to begin entering data</value>
+  </data>
+  <data name="CANNOT_OPEN_VIEW_RELATED" xml:space="preserve">
+    <value>The form could not be opened because it is related to a parent form. Please open the parent form to access the data in this form</value>
+  </data>
+  <data name="CANNOT_OPEN_VIEW_RELATED_NAMES" xml:space="preserve">
+    <value>The form could not be opened because it is related to a parent form. Please open the parent form "{0}" to access the data in this form.</value>
+  </data>
+  <data name="CHECK_CODE_EDITOR" xml:space="preserve">
+    <value>Check Code Editor</value>
+  </data>
+  <data name="UNDEFINED" xml:space="preserve">
+    <value>Undefined</value>
+  </data>
+  <data name="CONFIRM_FILE_DELETE" xml:space="preserve">
+    <value>Delete files? ({0})</value>
+  </data>
+  <data name="CONFIRM_PAGE_DELETE" xml:space="preserve">
+    <value>Are you sure you want to delete the following page? This action cannot be undone.</value>
+  </data>
+  <data name="CONFIRM_LANGUAGE_DELETE" xml:space="preserve">
+    <value>Are you sure that you want to remove the selected language from Epi Info? This action cannot be undone.</value>
+  </data>
+  <data name="LANGUAGE_READY" xml:space="preserve">
+    <value>Translation file is ready for use.</value>
+  </data>
+  <data name="LANGUAGE_REMOVAL_FAIL" xml:space="preserve">
+    <value>Unable to remove the selected language. The language files may currently be in use.</value>
+  </data>
+  <data name="PAGE_NAME" xml:space="preserve">
+    <value>Page Name: {0}</value>
+  </data>
+  <data name="CANNOT_CONNECT_TO_SQL_SERVER" xml:space="preserve">
+    <value>Cannot connect to SQL Server.</value>
+  </data>
+  <data name="CREATE_DIRECTORY" xml:space="preserve">
+    <value>The directory for the project location does not exist.  Would you like to create it?</value>
+  </data>
+  <data name="CREATE_NEW_PGM" xml:space="preserve">
+    <value>Creating a new PGM will clear the editor. Do you want to continue?</value>
+  </data>
+  <data name="CREATING_FIELD" xml:space="preserve">
+    <value>Creating field</value>
+  </data>
+  <data name="DATA_TRANSFER_IN_PROGRESS" xml:space="preserve">
+    <value>Data transfer in progress ...</value>
+  </data>
+  <data name="DATABASE_ALREADY_EXISTS_SQL" xml:space="preserve">
+    <value>The database specified already exists on the desired server. Please enter a different database.</value>
+  </data>
+  <data name="DATABASE_AREADY_EXISTS_ACCESS" xml:space="preserve">
+    <value>The database specified already exists at the desired location. Please enter a different database.</value>
+  </data>
+  <data name="DEFAULT_BACKROUND_IMAGE" xml:space="preserve">
+    <value>The background image will be set to the default image.</value>
+  </data>
+  <data name="DEFINE_CMD_VARIABLE_MISSING" xml:space="preserve">
+    <value>Define Command expects variable name</value>
+  </data>
+  <data name="DELETED_RECORD" xml:space="preserve">
+    <value>Deleted Record</value>
+  </data>
+  <data name="DEV" xml:space="preserve">
+    <value>DEV</value>
+  </data>
+  <data name="CANNOT_CLOSE_REQUIRED_FIELDS" xml:space="preserve">
+    <value>One or more required fields on the form have not been completed. Please fill in these fields before attempting to leave the record, save data, or close the form.</value>
+  </data>
+  <data name="CANNOT_CLOSE_RECORD_INVALID_DATA" xml:space="preserve">
+    <value>The form contains invalid data. Please correct the invalid data before attempting to leave the record, save data, or close the form.</value>
+  </data>
+  <data name="DIRECTORY_CREATED" xml:space="preserve">
+    <value>The directory specified for the project location was successfully created.</value>
+  </data>
+  <data name="DIRECTORY_FAILED" xml:space="preserve">
+    <value>The directory specified for the project location could not be created for the following reason: </value>
+  </data>
+  <data name="DIRECTORY_NOT_FOUND" xml:space="preserve">
+    <value>The following directory is not found</value>
+  </data>
+  <data name="DATA_DICTIONARY" xml:space="preserve">
+    <value>Data Dictionary</value>
+  </data>
+  <data name="DUPLICATE_VARIABLE_DEFINITION" xml:space="preserve">
+    <value>Duplicate variable definition</value>
+  </data>
+  <data name="EMPTY_VARNAME" xml:space="preserve">
+    <value>Please enter a variable name.</value>
+  </data>
+  <data name="ENTER" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="EPI_MAP" xml:space="preserve">
+    <value>Epi Map</value>
+  </data>
+  <data name="ERROR" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ERROR_LOADING_VIEW" xml:space="preserve">
+    <value>The form "{0}" could not be located in this project.</value>
+  </data>
+  <data name="ERROR_CRYPTO_KEYS" xml:space="preserve">
+    <value>There was a problem decrypting the connection information contained inside of the project file. The connection information may have been encrypted using a different set of keys.
+    
+Error details: {0}</value>
+  </data>
+  <data name="ERROR_IMPORT_PACKAGE_RELATED_FORM" xml:space="preserve">
+    <value>Data packages cannot be imported into related forms.</value>
+  </data>
+  <data name="ERROR_CREATE_PACKAGE_RELATED_FORM" xml:space="preserve">
+    <value>Data packages cannot be created for related forms.</value>
+  </data>
+  <data name="ERROR_IMPORT_FORM_RELATED_FORM" xml:space="preserve">
+    <value>Form-based data imports cannot be carried out on related forms.</value>
+  </data>
+  <data name="ERROR_LOADING_PROJECT" xml:space="preserve">
+    <value>The project could not be loaded.</value>
+  </data>
+  <data name="EXCEPTION_OCCURRED" xml:space="preserve">
+    <value>An exception has occurred.</value>
+  </data>
+  <data name="EXIT_ANALYSIS" xml:space="preserve">
+    <value>Are you sure you want to exit from Analysis?</value>
+  </data>
+  <data name="CLOSE_PROJECT" xml:space="preserve">
+    <value>Are you sure you want to close the current project?</value>
+  </data>
+  <data name="CLOSE_VIEW" xml:space="preserve">
+    <value>Are you sure you want to close the current form?</value>
+  </data>
+  <data name="FILE_NOT_FOUND" xml:space="preserve">
+    <value>The following file was not found</value>
+  </data>
+  <data name="DATASOURCE_NOT_FOUND" xml:space="preserve">
+    <value>The database file {0} could not be located for this project.</value>
+  </data>
+  <data name="FILE_NOT_VALID" xml:space="preserve">
+    <value>The following is not a valid file</value>
+  </data>
+  <data name="FEATURE_NOT_YET_IMPLEMENTED" xml:space="preserve">
+    <value>This feature will be available in a future version of Epi Info</value>
+  </data>
+  <data name="INFORMATION" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="TWO_BY_TWO_VALUES_TOO_FEW" xml:space="preserve">
+    <value>There is too little data to compute the 2x2 table.</value>
+  </data>
+  <data name="EXPOSURE_VALUES_TOO_MANY" xml:space="preserve">
+    <value>Exposure variable contains more than two values.</value>
+  </data>
+  <data name="EXPOSURE_VALUES_TOO_FEW" xml:space="preserve">
+    <value>Exposure variable contains less than two values.</value>
+  </data>
+  <data name="OUTCOME_VALUES_TOO_MANY" xml:space="preserve">
+    <value>Outcome variable contains more than two values.</value>
+  </data>
+  <data name="OUTCOME_VALUES_TOO_FEW" xml:space="preserve">
+    <value>Outcome variable contains less than two values.</value>
+  </data>
+  <data name="INSUFFICIENT_ARGUMENTS_SUPPLIED" xml:space="preserve">
+    <value>Insufficient arguments supplied</value>
+  </data>
+  <data name="INVALID_CURRENT_PROJECT" xml:space="preserve">
+    <value>Invalid current project</value>
+  </data>
+  <data name="INVALID_DATA_SOURCE" xml:space="preserve">
+    <value>Invalid data source</value>
+  </data>
+  <data name="DATA_TABLE_NAME_ALREADY_EXISTS" xml:space="preserve">
+    <value>Invalid data table name. A table named "{0}" already exists in this database.</value>
+  </data>
+  <data name="INVALID_PARAMETER_WAS_SUPPLIED" xml:space="preserve">
+    <value>Invalid parameters were supplied for the method</value>
+  </data>
+  <data name="INVALID_PROMPT_TEXT" xml:space="preserve">
+    <value>Invalid prompt text.  The maximum number of characters to be entered cannot exceed 2047 characters.</value>
+  </data>
+  <data name="FIELD_NAME_TOO_LONG" xml:space="preserve">
+    <value>Invalid field name.  The maximum number of characters to be entered cannot exceed 64 characters.</value>
+  </data>
+  <data name="INVALID_PROJECT_FILE" xml:space="preserve">
+    <value>Invalid project file</value>
+  </data>
+  <data name="INVALID_VIEW_ID" xml:space="preserve">
+    <value>Invalid form Id</value>
+  </data>
+  <data name="INVALID_VIEW_NAME" xml:space="preserve">
+    <value>Invalid form name:  Form names cannot contain spaces or non-alphanumeric characters.  Please enter a valid form name.</value>
+  </data>
+  <data name="INVALID_VIEW_NAME_RESERVED_WORD" xml:space="preserve">
+    <value>Invalid form name:  The name specified for this form is a reserved word. Please enter a different name for this form.</value>
+  </data>
+  <data name="INVALID_VIEW_NAME_DUPLICATE" xml:space="preserve">
+    <value>Invalid form name:  A form with this name already exists. Please enter a different name for this form.</value>
+  </data>
+  <data name="INVALID_VIEW_NAME_TOO_LONG" xml:space="preserve">
+    <value>Invalid form name:  A form's name cannot consist of more than 64 characters. Please enter a shorter name for this form.</value>
+  </data>
+  <data name="INVALID_PROJECT_NAME" xml:space="preserve">
+    <value>Invalid project name:  Project names cannot contain spaces or non-alphanumeric characters, other than underscores. Please enter a valid project name.</value>
+  </data>
+  <data name="INVALID_PROJECT_NAME_DUPLICATE" xml:space="preserve">
+    <value>Invalid project name:  A project with this name already exists. Please enter a different name for this project.</value>
+  </data>
+  <data name="INVALID_PROJECT_NAME_RESERVED_WORD" xml:space="preserve">
+    <value>Invalid project name:  The name specified for this Project is a reserved word. Please enter a different name for this project.</value>
+  </data>
+  <data name="INVALID_PROJECT_NAME_TOO_LONG" xml:space="preserve">
+    <value>Invalid project name:  A project's name cannot consist of more than 64 characters. Please enter a shorter name for this project.</value>
+  </data>
+  <data name="INVALID_PROJECT_NAME_TOO_SHORT" xml:space="preserve">
+    <value>Invalid project name:  A project's name cannot consist of less than 4 characters. Please enter a longer name for this project.</value>
+  </data>
+  <data name="LOADING_PROJECT" xml:space="preserve">
+    <value>Loading project ...</value>
+  </data>
+  <data name="MAKE_VIEW" xml:space="preserve">
+    <value>Form Designer</value>
+  </data>
+  <data name="MAKE_VIEW_WINDOW_TITLE" xml:space="preserve">
+    <value>Form Designer</value>
+  </data>
+  <data name="MENU" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="MISSING_VIEW_NAME" xml:space="preserve">
+    <value>Please enter a name for the form.</value>
+  </data>
+  <data name="MISSING_PROJECT_NAME" xml:space="preserve">
+    <value>Please enter a name for the project.</value>
+  </data>
+  <data name="NEW_PROGRAM" xml:space="preserve">
+    <value>New Program</value>
+  </data>
+  <data name="NEW_RECORD" xml:space="preserve">
+    <value>New Record</value>
+  </data>
+  <data name="NO_AGGREGATE_SPECIFIED" xml:space="preserve">
+    <value>At least one aggregate must be specified.</value>
+  </data>
+  <data name="NO_ASSIGN_EXPRESSION" xml:space="preserve">
+    <value>No assign expression has been entered.</value>
+  </data>
+  <data name="NO_ASSIGN_VAR" xml:space="preserve">
+    <value>No assign variable has been chosen.</value>
+  </data>
+  <data name="NO_DELETE_CRITERIA" xml:space="preserve">
+    <value>No delete criteria have been specified.</value>
+  </data>
+  <data name="NO_DIALOG_FORMAT" xml:space="preserve">
+    <value>Dialog format must be selected.</value>
+  </data>
+  <data name="NO_FILENAME" xml:space="preserve">
+    <value>A filename must be provided.</value>
+  </data>
+  <data name="NO_FILES_SELECTED" xml:space="preserve">
+    <value>No files have been specified.</value>
+  </data>
+  <data name="NO_INPUT_VARIABLE" xml:space="preserve">
+    <value>Input variable must be selected.</value>
+  </data>
+  <data name="NO_RADIO_BUTTON_SELECTED" xml:space="preserve">
+    <value>No radio button selected.</value>
+  </data>
+  <data name="NO_RECODE_VARIABLE" xml:space="preserve">
+    <value>No recode variable has been selected.</value>
+  </data>
+  <data name="NO_RECODINGS_DESIGNATED" xml:space="preserve">
+    <value>No recodings have been designated.</value>
+  </data>
+  <data name="NO_SHOW_VARIABLE" xml:space="preserve">
+    <value>Variable to show must be selected.</value>
+  </data>
+  <data name="NO_SORT_VARIABLES_SELECTED" xml:space="preserve">
+    <value>No variables are selected.</value>
+  </data>
+  <data name="NO_TABLE_SELECTED" xml:space="preserve">
+    <value>No table has been selected.</value>
+  </data>
+  <data name="NO_UNDELETE_CRITERIA" xml:space="preserve">
+    <value>No undelete criteria have been specified.</value>
+  </data>
+  <data name="NO_VIEW_SELECTED" xml:space="preserve">
+    <value>No form has been selected.</value>
+  </data>
+  <data name="NOT_VALID_ENUM_TYPE" xml:space="preserve">
+    <value>Not a valid enum type:</value>
+  </data>
+  <data name="NOT_VALID_IN_DATA_ENTRY_MODE" xml:space="preserve">
+    <value>Not valid in data entry mode.</value>
+  </data>
+  <data name="NOT_VALID_IN_FORM_DESIGN_MODE" xml:space="preserve">
+    <value>Not valid in form design mode.</value>
+  </data>
+  <data name="OPENING_VIEW" xml:space="preserve">
+    <value>Opening form</value>
+  </data>
+  <data name="OUT_OF_MEMORY" xml:space="preserve">
+    <value>Out of memory</value>
+  </data>
+  <data name="OUTPUT_TABLE_NOT_SPECIFIED" xml:space="preserve">
+    <value>An output table must be specified.</value>
+  </data>
+  <data name="PAGE_NOT_SELECTED" xml:space="preserve">
+    <value>Page Not Selected</value>
+  </data>
+  <data name="INVALID_PAGE_NAME" xml:space="preserve">
+    <value>The specified page name is invalid.</value>
+  </data>
+  <data name="INVALID_PAGE_NAME_BLANK" xml:space="preserve">
+    <value>The specified page name is invalid. Page names must contain characters other than spaces.</value>
+  </data>
+  <data name="INVALID_PAGE_NAME_DUPLICATE" xml:space="preserve">
+    <value>A page with this name already exists. Please choose another name for this page.</value>
+  </data>
+  <data name="PLEASE_WAIT" xml:space="preserve">
+    <value>Please Wait ...</value>
+  </data>
+  <data name="PROGRAM_EDITOR" xml:space="preserve">
+    <value>Program Editor</value>
+  </data>
+  <data name="PROJECT_ALREADY_EXISTS" xml:space="preserve">
+    <value>The project file {0} already exists. Do you want to overwrite?</value>
+  </data>
+  <data name="PROJECT_ALREADY_EXISTS_TITLE" xml:space="preserve">
+    <value>Project already exists</value>
+  </data>
+  <data name="VOCABULARY_FIELDS" xml:space="preserve">
+    <value>Vocabulary Fields</value>
+  </data>
+  <data name="QUESTION" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="READY" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="SEARCH_LIMIT_EXCEEDED" xml:space="preserve">
+    <value>A search is limited to six fields.</value>
+  </data>
+  <data name="SOURCE_TABLE_NOT_SET" xml:space="preserve">
+    <value>Source table not set</value>
+  </data>
+  <data name="START_END_BY_EMPTY" xml:space="preserve">
+    <value>Start, End and By value must be specified.</value>
+  </data>
+  <data name="UNEXPECTED_TOKEN" xml:space="preserve">
+    <value>Unexpected Token</value>
+  </data>
+  <data name="COMMAND_NOT_IDENTIFIED" xml:space="preserve">
+    <value>Command cannot be identified.</value>
+  </data>
+  <data name="SPECIFY_TABLE_OR_VIEW" xml:space="preserve">
+    <value>Please select a table or form from the list.</value>
+  </data>
+  <data name="SPECIFY_DATASOURCE" xml:space="preserve">
+    <value>Please specify a data source.</value>
+  </data>
+  <data name="SPECIFY_PROJECT" xml:space="preserve">
+    <value>Please specify a project.</value>
+  </data>
+  <data name="SPECIFY_DATAFORMAT" xml:space="preserve">
+    <value>Please specify a data format.</value>
+  </data>
+  <data name="SEPARATE_COMMENT_LEGAL_WITH_HYPEN" xml:space="preserve">
+    <value>Please separate comment from legal value with a hypen (-)</value>
+  </data>
+  <data name="ENTER_QUESTION_OR_PROMPT" xml:space="preserve">
+    <value>Please enter a Question or a Prompt.</value>
+  </data>
+  <data name="ENTER_FIELD_NAME" xml:space="preserve">
+    <value>Field name is empty. Please enter a field name.</value>
+  </data>
+  <data name="INVALID_NUMERIC_PATTERN" xml:space="preserve">
+    <value>The numeric pattern is invalid.</value>
+  </data>
+  <data name="COMPLETE_ALL_SELECTION_FIELDS" xml:space="preserve">
+    <value>Please ensure that all fields are complete before adding the condition.</value>
+  </data>
+  <data name="SELECTION_SYNTAX_ERROR" xml:space="preserve">
+    <value>A syntax error was detected in the selection criteria. Modify the condition(s) and try again.</value>
+  </data>
+  <data name="SELECTION_EVALUATION_ERROR" xml:space="preserve">
+    <value>There was a problem evaluating the selection criteria. Modify the condition(s) and try again.</value>
+  </data>
+  <data name="DUPLICATE_FIELD_NAME" xml:space="preserve">
+    <value>Specified field name already exists in the database. Please change the field name.</value>
+  </data>
+  <data name="FIELD_NAME_IS_RESERVED" xml:space="preserve">
+    <value>Specified field name is a reserved word. Please change the field name.</value>
+  </data>
+  <data name="INVALID_LOWER_DATE_RANGE" xml:space="preserve">
+    <value>Lower range entered is not a valid date.</value>
+  </data>
+  <data name="INVALID_UPPER_DATE_RANGE" xml:space="preserve">
+    <value>Upper range entered is not a valid date.</value>
+  </data>
+  <data name="UPPER_DATE_RANGE_IS_LOWER" xml:space="preserve">
+    <value>Upper date range should be greater than lower date range.</value>
+  </data>
+  <data name="UPPER_NUMBER_RANGE_IS_LOWER" xml:space="preserve">
+    <value>Upper number range should be greater than lower number range.</value>
+  </data>
+  <data name="DELETE_PROGRAM" xml:space="preserve">
+    <value>Do you want to delete this program?</value>
+  </data>
+  <data name="FIELD_IS_REQUIRED" xml:space="preserve">
+    <value>{0}: This field is required</value>
+  </data>
+  <data name="FIELD_IS_REQUIRED_LONG" xml:space="preserve">
+    <value>{0} is a required field (page {1}). Please fill in this field before attempting to leave the record, save data, or close the form. </value>
+  </data>
+  <data name="CONFIRM_PROGRAM_DELETE" xml:space="preserve">
+    <value>Confirm Program Delete</value>
+  </data>
+  <data name="SELECT_PROGRAM" xml:space="preserve">
+    <value>Select a program from the list.</value>
+  </data>
+  <data name="DELETE_LINK_TO_CODE_TABLE" xml:space="preserve">
+    <value>Are you sure you want to delete the link to this code table?</value>
+  </data>
+  <data name="DUPLICATE_VALUE" xml:space="preserve">
+    <value>This is a duplicate value. Please change the value.</value>
+  </data>
+  <data name="ENTER_COLUMN_NAME_FOR_GRID" xml:space="preserve">
+    <value>Please enter a column name for the grid.</value>
+  </data>
+  <data name="NO_DATA_SOURCE" xml:space="preserve">
+    <value>No data source has been read.</value>
+  </data>
+  <data name="WARNING" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="CHANGE_NOT_EFFECT_UNTIL_RESTART" xml:space="preserve">
+    <value>Language change will not take effect until after the application is restarted.</value>
+  </data>
+  <data name="SEARCH_RECORDS_NOT_FOUND" xml:space="preserve">
+    <value>No records matching the specified search criteria were found.</value>
+  </data>
+  <data name="CLICK_TO_CHANGE" xml:space="preserve">
+    <value>Click here to change</value>
+  </data>
+  <data name="CURRENT_LOCALE" xml:space="preserve">
+    <value>Current Locale</value>
+  </data>
+  <data name="RELEASE_DATE" xml:space="preserve">
+    <value>Release date</value>
+  </data>
+  <data name="VERSION_NUMBER" xml:space="preserve">
+    <value>Version number</value>
+  </data>
+  <data name="LOADING_MODULE" xml:space="preserve">
+    <value>Loading module ...</value>
+  </data>
+  <data name="IMPORT_PREFIX_ERROR" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="IMPORT_PREFIX_NOTICE" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="IMPORT_PREFIX_WARNING" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_ELAPSED_TIME" xml:space="preserve">
+    <value>Time elapsed for import of project [{0}]: {1} seconds.</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_CONVERTING_VIEW_RELATIONS" xml:space="preserve">
+    <value>Converting Form Relations</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_PAGE_RENAME" xml:space="preserve">
+    <value>Warning: Page name [{0}] has been renamed to [{1}] to prevent an invalid page name and/or duplicate page names from being imported.</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_UPDATE_KEYS" xml:space="preserve">
+    <value>Updating foreign keys...</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_USER_WILL_NOT_OVERWRITE" xml:space="preserve">
+    <value>Notice: Import aborted by user [{0}] after being prompted to overwrite existing tables.</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_USER_WILL_OVERWRITE" xml:space="preserve">
+    <value>Notice: Import continued by user [{0}] after being prompted to overwrite existing tables.</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_VIEW_SKIPPED_FIELD_LIMIT" xml:space="preserve">
+    <value>Notice: The View [{0}] has been skipped for processing during the import as it contains {1} fields; the field limit for imported Views with no data table where SQL Server is selected is 999.</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_VIEW_SKIPPED_NO_PAGES" xml:space="preserve">
+    <value>Notice: The View [{0}] has been skipped for processing during the import as it contains no pages.</value>
+  </data>
+  <data name="IMPORT_WARNING_GRID_NOT_SUPPORTED" xml:space="preserve">
+    <value>Warning: The grid field [{0}] was not imported. The importer does not support this field type.</value>
+  </data>
+  <data name="IMPORT_WARNING_DELETE_COLUMN" xml:space="preserve">
+    <value>Warning: An exception occurred while trying to delete column [{0}] :  {1}</value>
+  </data>
+  <data name="IMPORT_ERROR_PROCESSING_VIEW" xml:space="preserve">
+    <value>Error: A null reference exception occurred while processing the View [{0}].</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_UPDATE_GUIDS" xml:space="preserve">
+    <value>Updating foreign keys...</value>
+  </data>
+  <data name="IMPORT_ERROR_SOURCE_VIEW_NULL" xml:space="preserve">
+    <value>Error: One of the View objects created from the source project is null. This is likely due to a corrupted project or corrupted metadata in the source project. The import has been aborted.</value>
+  </data>
+  <data name="IMPORT_ERROR_BAD_DATE_DATA" xml:space="preserve">
+    <value>Error: The database being imported contains a bad or out-of-range date value in View [{0}]. The import process has been aborted. Please update the source data and try the import again.</value>
+  </data>
+  <data name="IMPORT_ADD_GUIDS" xml:space="preserve">
+    <value>Adding unique record identifiers to {0}...</value>
+  </data>
+  <data name="IMPORT_PROCESSED_ALL_GUIDS" xml:space="preserve">
+    <value>Processed a total of {0} unique record identifiers in {1}</value>
+  </data>
+  <data name="IMPORT_PROCESSED_GUIDS" xml:space="preserve">
+    <value>Processed {0} of {1} unique record identifiers in {2}</value>
+  </data>
+  <data name="IMPORT_PROCESSED_RECORDS" xml:space="preserve">
+    <value>Processed {0} records</value>
+  </data>
+  <data name="IMPORT_PROCESSED_RECORDS_BASE_TABLE" xml:space="preserve">
+    <value>Processed {0:n0} records on {1} base table</value>
+  </data>
+  <data name="IMPORT_COMPLETE" xml:space="preserve">
+    <value>Import complete processed {0} records</value>
+  </data>
+  <data name="IMPORT_COMPLETED" xml:space="preserve">
+    <value>Import of project [{0}] completed. {1} out of {2} Views were imported successfully.</value>
+  </data>
+  <data name="IMPORT_WARNING_MESSAGE" xml:space="preserve">
+    <value>The Import process may take anywhere from several minutes to an hour or more to complete depending on the number of records in the database, the amount and complexity of the forms contained inside the database, and the computer's processor speed.</value>
+  </data>
+  <data name="IMPORT_WARNING_CHECKCODE" xml:space="preserve">
+    <value>Warning: This Epi Info 3.x project contained Check Code that has been imported. Please review and validate the new Check Code for proper Epi Info 7.x syntax using the Check Code Editor in the Form Designer module. Failure to validate the new Check Code and correct problems may lead to non-functional Check Code during data entry.</value>
+  </data>
+  <data name="IMPORT_WARNING_RELATE_FIELD" xml:space="preserve">
+    <value>Warning: Error relating field [{0}] to related View [{1}]. The related View was not found in the destination project, likely because it contained errors and was skipped during the import procedure.</value>
+  </data>
+  <data name="IMPORT_WARNING_TABLE_NAME" xml:space="preserve">
+    <value>Warning: Table name [{0}] already exists in the destination database. If the import proceeds past this point, this table may be overwritten.</value>
+  </data>
+  <data name="IMPORT_ERROR_BAD_METADATA_IN_FIELD" xml:space="preserve">
+    <value>Error: Import aborted due to bad metadata in field [{0}] in form [{1}]</value>
+  </data>
+  <data name="IMPORT_LOG_NO_DATA_COLUMN" xml:space="preserve">
+    <value>Warning: Data for field {0} was not copied into {1}: No matching column was found in the collected data repository.</value>
+  </data>
+  <data name="IMPORT_WARNING_FIELD_LEADING_DIGIT" xml:space="preserve">
+    <value>Warning: Field {0} was not imported. Field names with leading digits are not allowed in Epi Info 7.</value>
+  </data>
+  <data name="WARNING_PROJECT_MAY_ALREADY_EXIST" xml:space="preserve">
+    <value>An Epi Info 7 project may already exist in the specified database. Continuing the project creation process will cause the project's metadata to be overwritten.
+    
+Do you wish to proceed with the creation of the project and overwrite any existing project metadata? This action cannot be undone.</value>
+  </data>
+  <data name="WARNING_PROJECT_MAY_ALREADY_EXIST_SHORT" xml:space="preserve">
+    <value>Overwrite existing Epi Info 7 project metadata</value>
+  </data>
+  <data name="IMPORT_BAD_FIELD_DATA" xml:space="preserve">
+    <value>The project being imported contains bad metadata for field {0} on page {1} in form {2}. The import process has been aborted. Please update the data then try the import again.</value>
+  </data>
+  <data name="IMPORT_DATA_ALREADY_EXISTS" xml:space="preserve">
+    <value>The importer has detected that data already exist in the specified database. The following tables will be overwritten if the import process proceeds: {0}
+    
+Do you wish to proceed with the import and overwrite these tables? This action cannot be undone.</value>
+  </data>
+  <data name="IMPORT_NO_VALID_VIEWS" xml:space="preserve">
+    <value>There are no valid Epi Info 2000 Views to import. The import process has been canceled.</value>
+  </data>
+  <data name="IMPORT_SKIPPED_VIEWS" xml:space="preserve">
+    <value>The following Epi Info 2000 Views contained problems and will be skipped during the import process: {0}</value>
+  </data>
+  <data name="IMPORT_OVERWRITE_DATA" xml:space="preserve">
+    <value>Overwrite existing data tables</value>
+  </data>
+  <data name="MODULE_NOT_LOADED" xml:space="preserve">
+    <value>Module could not be loaded.</value>
+  </data>
+  <data name="OPEN_PROGRAM" xml:space="preserve">
+    <value>Open Program</value>
+  </data>
+  <data name="SAVE_PROGRAM" xml:space="preserve">
+    <value>Save Program</value>
+  </data>
+  <data name="VARIABLE_NOT_EXIST" xml:space="preserve">
+    <value>The variable does not exist.</value>
+  </data>
+  <data name="PROGRAM_FILE" xml:space="preserve">
+    <value>Program File</value>
+  </data>
+  <data name="PROJECT_FILE" xml:space="preserve">
+    <value>Project File</value>
+  </data>
+  <data name="RESTORE_CONFIGURATION_Q" xml:space="preserve">
+    <value>Configuration is invalid or out of date. Would you like to restore default Configuration?</value>
+  </data>
+  <data name="PROJECT_FILE_CORRUPT" xml:space="preserve">
+    <value>Project file is corrupted</value>
+  </data>
+  <data name="CONFIG_NOT_LOADED" xml:space="preserve">
+    <value>Configuration has not been loaded.</value>
+  </data>
+  <data name="CORRUPTION_DUPE_PERM" xml:space="preserve">
+    <value>Data corruption: Found duplicate permanent variables in the config file. Please clean up Config file and try again.</value>
+  </data>
+  <data name="DESC_STATS_ERR" xml:space="preserve">
+    <value>Exception in Descriptive Statistics.</value>
+  </data>
+  <data name="GRIDTABLE_TITLE" xml:space="preserve">
+    <value>Output Grid (Read Only)</value>
+  </data>
+  <data name="SELECT_DATA_SOURCE" xml:space="preserve">
+    <value>Select a data source.</value>
+  </data>
+  <data name="SELECT_DATABASE_TYPE" xml:space="preserve">
+    <value>Select a database type.</value>
+  </data>
+  <data name="SELECT_DATABASE" xml:space="preserve">
+    <value>Select a database.</value>
+  </data>
+  <data name="UNABLE_READ_PGM" xml:space="preserve">
+    <value>Unable to read .PGM.</value>
+  </data>
+  <data name="UNABLE_WRITE_PGM" xml:space="preserve">
+    <value>Unable to write .PGM</value>
+  </data>
+  <data name="UNABLE_CREATE_DATABASE" xml:space="preserve">
+    <value>Unable to create database</value>
+  </data>
+  <data name="UNABLE_CONNECT_TO_DATABASE" xml:space="preserve">
+    <value>Unable to connect to database</value>
+  </data>
+  <data name="UPDATE_TITLE" xml:space="preserve">
+    <value>Output Grid (Updateable)</value>
+  </data>
+  <data name="DATA_TYPE_MISMATCH" xml:space="preserve">
+    <value>data type mismatch.</value>
+  </data>
+  <data name="DEFINED_VARIABLE" xml:space="preserve">
+    <value>Defined</value>
+  </data>
+  <data name="GLOBAL_VARIABLE" xml:space="preserve">
+    <value>Global variable</value>
+  </data>
+  <data name="PERMANENT_VARIABLE" xml:space="preserve">
+    <value>Permanent variable</value>
+  </data>
+  <data name="STANDARD_VARIABLE" xml:space="preserve">
+    <value>Standard variable</value>
+  </data>
+  <data name="VIEW_VARIABLE" xml:space="preserve">
+    <value>Form variable</value>
+  </data>
+  <data name="TABLE_NOT_FOUND" xml:space="preserve">
+    <value>Table not found</value>
+  </data>
+  <data name="VIEW_NOT_FOUND" xml:space="preserve">
+    <value>View not found</value>
+  </data>
+  <data name="TABLE_HAS_VIEWS" xml:space="preserve">
+    <value>You can't delete this table because there are couple Epi forms associated with it.</value>
+  </data>
+  <data name="INVALID_MDB_FILE" xml:space="preserve">
+    <value>Not a valid MDB file </value>
+  </data>
+  <data name="TABLE_DELETE_ASK" xml:space="preserve">
+    <value>Do you really want to delete this table</value>
+  </data>
+  <data name="TABLE_HAS_VIEW" xml:space="preserve">
+    <value>You can't delete this table because there is an Epi form associated with it.</value>
+  </data>
+  <data name="COMFIRM_DELETE_VIEW" xml:space="preserve">
+    <value>Confirm delete this form.</value>
+  </data>
+  <data name="COMFIRM_DELETE_VIEW_WITH_DATATABLE" xml:space="preserve">
+    <value>Confirm delete the form with data table.</value>
+  </data>
+  <data name="WARING_VIEW_NAME_MISSING" xml:space="preserve">
+    <value>Form Name missing</value>
+  </data>
+  <data name="WARNING_DELETE_VIEW_ERROR" xml:space="preserve">
+    <value>Error during deleting this form in the database</value>
+  </data>
+  <data name="DATA_FILTERS" xml:space="preserve">
+    <value>Data Filters</value>
+  </data>
+  <data name="REC_STATUS" xml:space="preserve">
+    <value>Record status</value>
+  </data>
+  <data name="UNIQUE_KEY" xml:space="preserve">
+    <value>Unique key</value>
+  </data>
+  <data name="CHECK_CODE_EXECUTION_WAS_UNSUCCESSFUL_FOR_ASSOCIATED_PROGRAM" xml:space="preserve">
+    <value>for associated program:</value>
+  </data>
+  <data name="AUTOSEARCH" xml:space="preserve">
+    <value>Autosearch will display similar sounding names.  Select a record and click 'OK' if there is a match or click 'Cancel' to continue.</value>
+  </data>
+  <data name="WARNING_Not_FOR_GLOBAL_PERM_VARS" xml:space="preserve">
+    <value>This feature is not for Permanent and Global Variables</value>
+  </data>
+  <data name="WARNING_RECODE_GROUP_OVERSIZE" xml:space="preserve">
+    <value>Recode cannot handle over 105 groups.</value>
+  </data>
+  <data name="NO_CURRENT_PROJECT" xml:space="preserve">
+    <value>You must first open a project.</value>
+  </data>
+  <data name="RESERVED_WORD" xml:space="preserve">
+    <value>{0} is a reserved word.</value>
+  </data>
+  <data name="NO_DEFINE_VAR" xml:space="preserve">
+    <value>No variable to define has been specified.</value>
+  </data>
+  <data name="NO_VARS_SELECTED" xml:space="preserve">
+    <value>No variable(s) selected</value>
+  </data>
+  <data name="UPGRADING_PROJECT" xml:space="preserve">
+    <value>Upgrading project...</value>
+  </data>
+  <data name="RECORDS_COPIED" xml:space="preserve">
+    <value>records copied</value>
+  </data>
+  <data name="CREATING_PROJECT" xml:space="preserve">
+    <value>Creating project ...</value>
+  </data>
+  <data name="PLEASE_WAIT_FIELD_BEING_CREATED" xml:space="preserve">
+    <value>Please wait while the field is created ...</value>
+  </data>
+  <data name="PROJECT_SCHEMA_OUT_OF_DATE" xml:space="preserve">
+    <value>Project schema out of date</value>
+  </data>
+  <data name="CONFIRMATION" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="BROWSE_FOR_MORE" xml:space="preserve">
+    <value>&lt;Browse for more&gt;</value>
+  </data>
+  <data name="NUMBER_OF_RECORDS_AFFECTED" xml:space="preserve">
+    <value>Number of records affected</value>
+  </data>
+  <data name="WARNING_COMMAND_SYNTAX_ERROR" xml:space="preserve">
+    <value>Command syntax error</value>
+  </data>
+  <data name="WARNING_CANNOT_DELETE_PRIMARY_PAGE" xml:space="preserve">
+    <value>Primary page cannot be deleted.</value>
+  </data>
+  <data name="WARNING_CANNOT_DELETE_THIS_PAGE" xml:space="preserve">
+    <value>Could not delete page in the database</value>
+  </data>
+  <data name="ENTER_VALID_DATE" xml:space="preserve">
+    <value>Please enter a valid date.</value>
+  </data>
+  <data name="ENTER_VALID_DATE_AND_TIME" xml:space="preserve">
+    <value>Please enter a valid date and time.</value>
+  </data>
+  <data name="ENTER_VALID_TIME" xml:space="preserve">
+    <value>Please enter a valid time.</value>
+  </data>
+  <data name="ENTER_VALID_NUMBER" xml:space="preserve">
+    <value>Please enter a valid number.</value>
+  </data>
+  <data name="ENTER_VALID_PHONE_NUMBER" xml:space="preserve">
+    <value>Please enter a valid phone number.</value>
+  </data>
+  <data name="INPUT_FORMAT" xml:space="preserve">
+    <value>Input Format:</value>
+  </data>
+  <data name="SELECT_PROJECT" xml:space="preserve">
+    <value>Select a project.</value>
+  </data>
+  <data name="VARIABLE_ALREADY_DEFINED" xml:space="preserve">
+    <value>Variable already defined: {0}</value>
+  </data>
+  <data name="INVALID_CHARS_IN_FIELD_NAME" xml:space="preserve">
+    <value>The field name contains these invalid characters: {0}</value>
+  </data>
+  <data name="INVALID_SEARCH_QUERY_NUMERIC" xml:space="preserve">
+    <value>The search query for the numeric field '{0}' is invalid. Please ensure that numeric parameters are used when searching on this field type.</value>
+  </data>
+  <data name="INVALID_SEARCH_QUERY_DATE" xml:space="preserve">
+    <value>The search query for the date field '{0}' is invalid. Please ensure that the search parameters consist of dates when searching on this field type.</value>
+  </data>
+  <data name="INVALID_SEARCH_QUERY_YESNO" xml:space="preserve">
+    <value>The search query for the Yes/No field '{0}' is invalid. Please ensure that the search parameters consist of (+), (-), or (.) when searching on this field type.</value>
+  </data>
+  <data name="INVALID_SEARCH_QUERY_CHECKBOX" xml:space="preserve">
+    <value>The search query for the checkbox field '{0}' is invalid. Please ensure that the search parameters consist of either (+) or (-) when searching on this field type.</value>
+  </data>
+  <data name="INVALID_SEARCH_QUERY" xml:space="preserve">
+    <value>The search query for the field '{0}' is invalid. Please check the syntax of the search query and its parameters.</value>
+  </data>
+  <data name="RENAME_PROJECT_NAME" xml:space="preserve">
+    <value>The project name will be renamed to: </value>
+  </data>
+  <data name="INVALID_EXPRESSION" xml:space="preserve">
+    <value>The expression {0} is not a valid comparison expression.</value>
+  </data>
+  <data name="EPI3_PROJECTS" xml:space="preserve">
+    <value>Unable to open EPI3.x projects in this version.</value>
+  </data>
+  <data name="XML" xml:space="preserve">
+    <value>XML</value>
+  </data>
+  <data name="WARNING_ADD_RELATE_CONDITION" xml:space="preserve">
+    <value>Add relate condition please.</value>
+  </data>
+  <data name="TOTAL" xml:space="preserve">
+    <value>TOTAL</value>
+  </data>
+  <data name="DUPLICATE_VIEW_NAME" xml:space="preserve">
+    <value>The specified form name already exists in the database.  Please change the form name.</value>
+  </data>
+  <data name="RENAME_VIEW_NAME" xml:space="preserve">
+    <value>Invalid form name:  Form names cannot contain spaces or be in the Reserved Words List nor contain non-alphanumeric characters.  The form name will be changed to: </value>
+  </data>
+  <data name="PROJECT_NAME_TOO_LONG" xml:space="preserve">
+    <value>Invalid project name:  The maximum number of characters to be entered must not exceed 64 characters.</value>
+  </data>
+  <data name="WARNING_CANNOT_SAVE_BLANK_PGM" xml:space="preserve">
+    <value>Can't save blank PGM</value>
+  </data>
+  <data name="PROJECT_NAME_TOO_LONG_AND_INVALID_CHARACTERS" xml:space="preserve">
+    <value>Invalid project name:  The maximum number of characters to be entered must not exceed 64 characters and cannot contain non-alphanumeric characters.</value>
+  </data>
+  <data name="INVALID_PROJECT_LOCATION" xml:space="preserve">
+    <value>Invalid project location: The project location entered is not valid. Please enter a valid location.</value>
+  </data>
+  <data name="INVALID_PROJECT_LOCATION_TITLE" xml:space="preserve">
+    <value>Invalid project location</value>
+  </data>
+  <data name="VIEW_NAME_TOO_LONG_AND_INVALID_CHARACTERS" xml:space="preserve">
+    <value>Invalid form name: The maximum number of characters to be entered must not exceed 64 characters and cannot contain blanks or non-alphanumeric characters.</value>
+  </data>
+  <data name="MAXIMUM_NUMBER_PAGES" xml:space="preserve">
+    <value>The maximum number of pages allowed to be added to a form is 150.  The limit has been reached.</value>
+  </data>
+  <data name="WARNING_CANNOT_OPEN_PROGRAM" xml:space="preserve">
+    <value>Can't open PGM. Please create a PGM to open.</value>
+  </data>
+  <data name="VIEW_NAME_BEGIN_NUMERIC" xml:space="preserve">
+    <value>Invalid form name: Form names cannot begin with numbers.</value>
+  </data>
+  <data name="VIEW_NAME_BEGIN_INVALID" xml:space="preserve">
+    <value>Invalid form name: Form names cannot begin with numbers or non-alphanumeric characters.</value>
+  </data>
+  <data name="VIEW_NAME_MISSING" xml:space="preserve">
+    <value>Invalid form name: Form names cannot be blank.</value>
+  </data>
+  <data name="DATA_TABLE_NAME_BEGIN_NUMERIC" xml:space="preserve">
+    <value>Invalid data table name: Data table names cannot begin with numbers.</value>
+  </data>
+  <data name="DATA_TABLE_NAME_BEGIN_UNDERSCORE" xml:space="preserve">
+    <value>Invalid data table name: Table names cannot begin with underscores.</value>
+  </data>
+  <data name="PROJECT_NAME_BEGIN_NUMERIC" xml:space="preserve">
+    <value>Invalid project name: Project names cannot begin with numbers.</value>
+  </data>
+  <data name="PROJECT_NAME_BEGIN_INVALID" xml:space="preserve">
+    <value>Invalid project name: Project names cannot begin with numbers or non-alphanumeric characters.</value>
+  </data>
+  <data name="PROJECT_NAME_MISSING" xml:space="preserve">
+    <value>Invalid project name: Project names cannot be blank.</value>
+  </data>
+  <data name="INVALID_YES_NO_VALUE" xml:space="preserve">
+    <value>Invalid value:  The value entered is not a valid value for this {0}/{1} field.  Please enter or select a valid value.</value>
+  </data>
+  <data name="DATA_TABLE_NOT_CREATED" xml:space="preserve">
+    <value>A data table has not been created for this form.  Would you like to create the data table?</value>
+  </data>
+  <data name="CREATE_NEW_DATA_TABLE" xml:space="preserve">
+    <value>Create New Data Table</value>
+  </data>
+  <data name="DATA_TABLE_NAME_TOO_LONG" xml:space="preserve">
+    <value>Invalid data table name: The maximum number of characters to be entered must not exceed 64 characters.</value>
+  </data>
+  <data name="DATATABLE_NAME_TOO_LONG_AND_INVALID_CHARACTERS" xml:space="preserve">
+    <value>Invalid data table name: The maximum number of characters to be entered must not exceed 64 characters and cannot contain non-alphanumeric characters.</value>
+  </data>
+  <data name="INVALID_DATATABLE_NAME" xml:space="preserve">
+    <value>Invalid data table name: Data table names cannot contain spaces, non-alphanumeric characters or be in the Reserved Words List.  </value>
+  </data>
+  <data name="RENAME_DATA_TABLE_NAME" xml:space="preserve">
+    <value>The data table name will be renamed to: </value>
+  </data>
+  <data name="INVALID_STARTING_UNIQUE_ID" xml:space="preserve">
+    <value>Invalid starting unique Id:  The starting unique ID must be numeric.</value>
+  </data>
+  <data name="MODIFICATION_NOT_PERMITTED" xml:space="preserve">
+    <value>Modification of this field is not permitted.</value>
+  </data>
+  <data name="NO_RECORDS_SELECTED" xml:space="preserve">
+    <value>No records match the selection criteria.</value>
+  </data>
+  <data name="CANNOT_LOAD_APPLICATION" xml:space="preserve">
+    <value>Could not load Epi Info application module '{0}'.</value>
+  </data>
+  <data name="CANNOT_CONNECT_MYSQL" xml:space="preserve">
+    <value>Can not connect to MySQL database.</value>
+  </data>
+  <data name="CAN_NOT_CONNECT_MYSQL" xml:space="preserve">
+    <value>Cannot connect to MySQL database.</value>
+  </data>
+  <data name="CAN_NOT_CREATE_NEW_MYSQL" xml:space="preserve">
+    <value>Could not create new MySQL database.</value>
+  </data>
+  <data name="MYSQL_DATABASE" xml:space="preserve">
+    <value>MySQL Database</value>
+  </data>
+  <data name="NO_COMMAND" xml:space="preserve">
+    <value>There are no commands to run.  Enter a command in the program editor.</value>
+  </data>
+  <data name="MUST_SELECT_EXPOSURE" xml:space="preserve">
+    <value>Select an exposure variable.</value>
+  </data>
+  <data name="MUST_SELECT_PSU" xml:space="preserve">
+    <value>Select a primary sampling unit variable.</value>
+  </data>
+  <data name="MUST_SELECT_OUTCOME" xml:space="preserve">
+    <value>Select an outcome variable.</value>
+  </data>
+  <data name="MUST_SELECT_TERMS" xml:space="preserve">
+    <value>Select at least one term.</value>
+  </data>
+  <data name="NO_MATCHVAR" xml:space="preserve">
+    <value>Select a match variable for matched analysis.</value>
+  </data>
+  <data name="NO_RELATE_KEYS" xml:space="preserve">
+    <value>You must select the keys to use to relate the  tables.</value>
+  </data>
+  <data name="WORD_ALL" xml:space="preserve">
+    <value>ALL</value>
+  </data>
+  <data name="COL_WORD" xml:space="preserve">
+    <value>Col</value>
+  </data>
+  <data name="ROW_WORD" xml:space="preserve">
+    <value>row</value>
+  </data>
+  <data name="TOTAL_IN_CAPS" xml:space="preserve">
+    <value>TOTAL</value>
+  </data>
+  <data name="MYSQL_DATABASE_INFO" xml:space="preserve">
+    <value>Epi.Data.MySQL.MySQLDBFactory, Epi.Data.MySQL</value>
+  </data>
+  <data name="WARNING_ADD_RELATED_VIEW_NAME" xml:space="preserve">
+    <value>Add Related Form name please.</value>
+  </data>
+  <data name="BEGIN" xml:space="preserve">
+    <value>Begin</value>
+  </data>
+  <data name="END" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="CURRENT_VIEW" xml:space="preserve">
+    <value>Current Data Source</value>
+  </data>
+  <data name="DELETED_RECORDS_EXCLUDED" xml:space="preserve">
+    <value>Deleted Records Excluded</value>
+  </data>
+  <data name="DELETED_RECORDS_INCLUDED" xml:space="preserve">
+    <value>Deleted Records Included</value>
+  </data>
+  <data name="DELETED_RECORDS_ONLY" xml:space="preserve">
+    <value>Deleted Records Only</value>
+  </data>
+  <data name="RECORD_COUNT" xml:space="preserve">
+    <value>Record Count</value>
+  </data>
+  <data name="RECORD_SORT" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="UNABLE_CREATE_2X2" xml:space="preserve">
+    <value>Unable to create '2x2' table.</value>
+  </data>
+  <data name="FOREIGN_KEY" xml:space="preserve">
+    <value>Foreign Key</value>
+  </data>
+  <data name="PROGRAM_EDITOR_EMPTY" xml:space="preserve">
+    <value>The program editor contains no commands to execute.  Please enter commands.</value>
+  </data>
+  <data name="DEFINED_VARIABLES_SECTION" xml:space="preserve">
+    <value>has been placed in the  Defined Variables Section.</value>
+  </data>
+  <data name="RESERVED_WORD_ERROR" xml:space="preserve">
+    <value>The following is a reserved word. Reserved words can't be used for naming fields, forms and pages.</value>
+  </data>
+  <data name="RESERVED_WORD_INVALID_USE" xml:space="preserve">
+    <value>Invalid use of reserved word</value>
+  </data>
+  <data name="SOURCE_PROJECT_CONTAINS_ERRORS" xml:space="preserve">
+    <value>The source project has some fatal errors. Please refer to application logs for details.</value>
+  </data>
+  <data name="VALIDATING_SOURCE_PROJECT" xml:space="preserve">
+    <value>Validating source project ...</value>
+  </data>
+  <data name="DATA_ENTRY_EXECUTION_ONLY" xml:space="preserve">
+    <value>command can only be executed for data entry fields.</value>
+  </data>
+  <data name="DATABASE_NAME_CONTAINS_INVALID_CHARACTERS" xml:space="preserve">
+    <value>Database name can't contain special characters.</value>
+  </data>
+  <data name="DATABASE_NAME_MUST_START_WITH_A_LETTE_OR_UNDERSCORE" xml:space="preserve">
+    <value>Database name must start with a letter or underscore</value>
+  </data>
+  <data name="DATABASE_NAME_REQUIRED" xml:space="preserve">
+    <value>Database name is required</value>
+  </data>
+  <data name="DATABASE_NAME_TOO_LONG" xml:space="preserve">
+    <value>Database name can't be more than 30 characters long</value>
+  </data>
+  <data name="NO_LINKED_FIELD_SELECTED" xml:space="preserve">
+    <value>No field to link has been selected.</value>
+  </data>
+  <data name="WARNING_MUST_CREATE_TEXT_FIRST" xml:space="preserve">
+    <value>You must create a text field to link to before creating a Codes field.</value>
+  </data>
+  <data name="NO_TEXT_VALUE" xml:space="preserve">
+    <value>A text value must be specified.</value>
+  </data>
+  <data name="BROWSE_FOR_FILE" xml:space="preserve">
+    <value>Would you like to browse for the file?</value>
+  </data>
+  <data name="METADATA_PREFIX" xml:space="preserve">
+    <value>meta</value>
+    <comment>Prefix for metadata database</comment>
+  </data>
+  <data name="INVALID_METADATA_DATABASE" xml:space="preserve">
+    <value>The Form Repository database must be different from the Collected Data Repository database.</value>
+  </data>
+  <data name="WARNING_APPLICATION_RUNNING" xml:space="preserve">
+    <value>Epi Info is already running. Please close all open modules and try again.</value>
+  </data>
+  <data name="DELETE_DATA_TABLE" xml:space="preserve">
+    <value>Delete Data Table</value>
+  </data>
+  <data name="DELETE_DATA_TABLE_WARNING" xml:space="preserve">
+    <value>The data table for this form will be deleted.  Continue?</value>
+  </data>
+  <data name="INVALID_DATE_RANGE" xml:space="preserve">
+    <value>Invalid date: Please enter a date between {0} and {1}</value>
+  </data>
+  <data name="INVALID_NUMBER_RANGE" xml:space="preserve">
+    <value>Invalid number: Please enter a number between {0} and {1}</value>
+  </data>
+  <data name="OUT_OF" xml:space="preserve">
+    <value>out of</value>
+  </data>
+  <data name="INVALID_CHECKCODE" xml:space="preserve">
+    <value>The checkcode you have entered is invalid.</value>
+  </data>
+  <data name="UNIQUEIDENTIFIER" xml:space="preserve">
+    <value>Unique Identifier</value>
+  </data>
+  <data name="INVALID_DROPDOWN_VALUE" xml:space="preserve">
+    <value>The value entered is invalid. Please click the drop-down arrow or press the down arrow key to see a list of valid choices.</value>
+  </data>
+  <data name="INVALID_DROPDOWN_VALUE_CAPTION" xml:space="preserve">
+    <value>Invalid drop down value</value>
+  </data>
+  <data name="INVALID_YES_NO_VALUE_CAPTION" xml:space="preserve">
+    <value>Invalid {0}/{1} Value</value>
+  </data>
+  <data name="CANNOT_LOAD_PROGRAM" xml:space="preserve">
+    <value>Could not load program based on command line.</value>
+  </data>
+  <data name="TABLE_EXISTS_OUTPUT" xml:space="preserve">
+    <value>Overwrite the existing output table?</value>
+  </data>
+  <data name="OUTPUT_TABLE_NAME_COMMAND" xml:space="preserve">
+    <value>OutTable</value>
+  </data>
+  <data name="CHECKCODE_CHANGED" xml:space="preserve">
+    <value>The checkcode for this field has changed. Would you like to save it?</value>
+  </data>
+  <data name="CANNOT_DELETE_FILE" xml:space="preserve">
+    <value>You do not have the proper permissions to delete this file.</value>
+  </data>
+  <data name="ERROR_RELATE_KEYS" xml:space="preserve">
+    <value>The number of expressions on each side must be equal.</value>
+  </data>
+  <data name="ERROR_PAGE_NOT_FOUND" xml:space="preserve">
+    <value>Page not found.</value>
+  </data>
+  <data name="ERROR_OPENING_CONNECTION" xml:space="preserve">
+    <value>Error opening connection. Please check the database you are trying to open.</value>
+  </data>
+  <data name="ERROR_LOADING_METADATA_UNKNOWN_SOURCE" xml:space="preserve">
+    <value>Cannot load forms due to unknown metadata source.</value>
+  </data>
+  <data name="CANNOT_DETERMINE_RELATIONSHIP" xml:space="preserve">
+    <value>Could not determine relationship.</value>
+  </data>
+  <data name="TOKEN_EXCEPTION" xml:space="preserve">
+    <value>Invalid token ({0}) found in checkcode</value>
+  </data>
+  <data name="PRINT" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="CURRENT_PROJECT" xml:space="preserve">
+    <value>(current project)</value>
+  </data>
+  <data name="DEFINED_VARIABLE_1" xml:space="preserve">
+    <value>has already been defined.</value>
+  </data>
+  <data name="NO_PROGRAM" xml:space="preserve">
+    <value>Select a program.</value>
+  </data>
+  <data name="INVALID_PROGRAM_FILE" xml:space="preserve">
+    <value>Please select an EpiInfo 7 project (prj) or a PGM file.</value>
+  </data>
+  <data name="CONFIRM_VIEW_DELETE" xml:space="preserve">
+    <value>Are you sure you want to delete this form?</value>
+  </data>
+  <data name="SPECIFY_VIEW_TO_ADD_PAGE" xml:space="preserve">
+    <value>Please select a form to add a page to.</value>
+  </data>
+  <data name="SPECIFY_VIEW" xml:space="preserve">
+    <value>Please select a form.</value>
+  </data>
+  <data name="WARNING_CANNOT_DELETE_PRIMARY_VIEW" xml:space="preserve">
+    <value>Your project must contain at least one form</value>
+  </data>
+  <data name="WARNING_DELETE_PARENT_VIEW" xml:space="preserve">
+    <value>This form contains a related form field. Please delete the related forms before deleting this form.</value>
+  </data>
+  <data name="WARNING_DELETE_RELATED_VIEW" xml:space="preserve">
+    <value>Deleting this form will remove the associated related form fields from the parent form. Are you sure you want to delete this form?</value>
+  </data>
+  <data name="CONFIRM_DELETE_RECORDS" xml:space="preserve">
+    <value>Delete Records? ({0})</value>
+  </data>
+  <data name="WARNING_UNEXPECTED_TOKEN" xml:space="preserve">
+    <value>Unexpected token: {0}</value>
+  </data>
+  <data name="DATA_TABLE_NOT_FOUND" xml:space="preserve">
+    <value>There is no datatable for this form: {0}</value>
+  </data>
+  <data name="VALUE_NOT_IN_RANGE" xml:space="preserve">
+    <value>Value is not in the given range. Minimum Range: {0}  Maximum Range: {1}</value>
+  </data>
+  <data name="ERROR_INCOMPATIBLE_TYPES" xml:space="preserve">
+    <value>Operands must be of compatible types for this operation: {0}</value>
+  </data>
+  <data name="ERROR_CONNECT_DATA_SOURCE" xml:space="preserve">
+    <value>Could not connect to data source.</value>
+  </data>
+  <data name="ERROR_SELECT_QUERY_DATA_SOURCE" xml:space="preserve">
+    <value>Error executing select query against the database.</value>
+  </data>
+  <data name="ERROR_UPDATING_DATA" xml:space="preserve">
+    <value>Error updating data.</value>
+  </data>
+  <data name="ERROR_CLOSING_CONNECTION" xml:space="preserve">
+    <value>Error closing connection.</value>
+  </data>
+  <data name="INVALID_NUMBER_OPTIONS" xml:space="preserve">
+    <value>Number of options must be greater than 1.</value>
+  </data>
+  <data name="GRID_CANNOT_BE_COPIED" xml:space="preserve">
+    <value>Grid cannot be copied</value>
+  </data>
+  <data name="NO_SELECTION_TO_COPY" xml:space="preserve">
+    <value>There is no selection to copy.</value>
+  </data>
+  <data name="WARING_RadioButton_Caption_Missing" xml:space="preserve">
+    <value>Please input all option names.</value>
+  </data>
+  <data name="CLOSE_PROJECT_LITERAL" xml:space="preserve">
+    <value>Close Project</value>
+  </data>
+  <data name="CLOSE_VIEW_LITERAL" xml:space="preserve">
+    <value>Close Form</value>
+  </data>
+  <data name="CONFIRM_DELETE_GRID_COLUMN" xml:space="preserve">
+    <value>Are you sure you want to delete this column?</value>
+  </data>
+  <data name="INVALID_NUMBER_OPTIONS_EXCEED_MAX_COUNT" xml:space="preserve">
+    <value>The maximum number of options is {0}.</value>
+  </data>
+  <data name="NO_SELECTION_TO_ALIGN" xml:space="preserve">
+    <value>Please select the Text Fields to for alignment, Hold down MOUSE Button; Drag mouse to select</value>
+  </data>
+  <data name="WARNING_OKAY_TO_CLEAR_CLIPBOARD_CAPTION" xml:space="preserve">
+    <value>Okay to Clear Clipboard?</value>
+  </data>
+  <data name="WARNING_OKAY_TO_CLEAR_CLIPBOARD_MESSAGE" xml:space="preserve">
+    <value>You have fields on the clipboard from a cut command that possibly contain data. By continuing with this action, the data corresponding to the cut fields will be lost. Continue?</value>
+  </data>
+  <data name="WARNING_CANNOT_SYNCHRONIZE" xml:space="preserve">
+    <value>There was an error synchronizing the field descriptions made in Form Designer with the data table used in Enter/Analysis.</value>
+  </data>
+  <data name="WARNING_CANNOT_SYNCHRONIZE_ACCESSS" xml:space="preserve">
+    <value>There was an error synchronizing the field descriptions made in Form Designer with the data table used in  Enter/Analysis. Check to make sure that Microsoft Access does not have the .mdb file opened.</value>
+  </data>
+  <data name="FONT" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="CONFIRM_GROUP_DROP_PICKUP_FIELD" xml:space="preserve">
+    <value>Do you want to make the field(s) you covered with a group field part of the group?</value>
+  </data>
+  <data name="COLLECTED_DATA_INFORMATION_REQUIRED" xml:space="preserve">
+    <value>Collected database information is required</value>
+  </data>
+  <data name="PROJECT_LOCATION_REQUIRED" xml:space="preserve">
+    <value>A project location is required</value>
+  </data>
+  <data name="METADATA_DATABASE_INFORMATION_REQUIRED" xml:space="preserve">
+    <value>Metadata database information is required.</value>
+  </data>
+  <data name="WARNING_CANNOT_CONNECT_TO_COLLECTED_DATA_DATABASE" xml:space="preserve">
+    <value>Unable to connect to collected data database.</value>
+  </data>
+  <data name="WARNING_CANNOT_CONNECT_TO_METADATA_DATABASE" xml:space="preserve">
+    <value>Unable to connect to metadata database.</value>
+  </data>
+  <data name="WARNING_CANNOT_SET_COLLECTED_DATA_TEXT" xml:space="preserve">
+    <value>Unable to set collected data text.</value>
+  </data>
+  <data name="SAVE_CHANGES_TO_RECORD" xml:space="preserve">
+    <value>Do you want to save changes to this record?</value>
+  </data>
+  <data name="UNIQUE_RECORD_ID" xml:space="preserve">
+    <value>UniqueRecordId</value>
+  </data>
+  <data name="GLOBAL_RECORD_ID" xml:space="preserve">
+    <value>GlobalRecordId</value>
+  </data>
+  <data name="IMPORT_WARNING_NO_IMAGE_COPIED" xml:space="preserve">
+    <value>Warning: The image at {0} referenced in [{1}] was not imported. </value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_IMAGE_UPDATE_START" xml:space="preserve">
+    <value>Started updating image fields in [{0}]...</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_IMAGE_UPDATE_END" xml:space="preserve">
+    <value>Finished updating image fields. {0} image fields processed in [{1}].</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_IMAGE_UPDATE_NONE" xml:space="preserve">
+    <value>No image fields found to update in [{0}].</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_COLUMN_REMOVED_NO_MATCH" xml:space="preserve">
+    <value>Notice: The column [{0}] in table [{1}] has no matching field in metaFields. It has been removed from the table.</value>
+  </data>
+  <data name="IMPORT_NOTIFICATION_COLUMN_NOT_REMOVED_BUT_ATTEMPTED" xml:space="preserve">
+    <value>Notice: Table column [{0}] in [{1}] could not be deleted: {2}</value>
+  </data>
+  <data name="IMPORT_WARNING_MIRROR_FIELD_NO_SOURCE" xml:space="preserve">
+    <value>Warning: The mirror field [{0}] in [{1}] was removed because its source field [{2}] does not exist.</value>
+  </data>
+  <data name="IMPORT_WARNING_RELATED_TABLE_HAS_NO_FKEY" xml:space="preserve">
+    <value>Warning: The related table [{0}] (with parent table [{1}]) has no FKEY column. The FKEYs and GUIDs for [{2}] have not been updated. Any child forms for this table will also not have their FKEYs or GUIDs updated.</value>
+  </data>
+  <data name="IMPORT_WARNING_RELATED_TABLE_NOT_PROCESSED" xml:space="preserve">
+    <value>Warning: There was a problem upgrading the related table [{0}]. No parent table was found. This table has been skipped for processing.</value>
+  </data>
+  <data name="MUST_SELECT_CENSORED" xml:space="preserve">
+    <value>Select a censored variable and a value for uncensored.</value>
+    <comment>Used for Kaplan Meier Survival and Cox Proportional Hazards</comment>
+  </data>
+  <data name="MUST_SELECT_GROUP_OR_PREDICTOR" xml:space="preserve">
+    <value>Select a group variable or at least one predictor variable.</value>
+    <comment>Used for Kaplan-Meier Survival and Cox Proportional Hazards.</comment>
+  </data>
+  <data name="MUST_SELECT_TIME_VAR" xml:space="preserve">
+    <value>Select a time variable.</value>
+    <comment>Used for Kaplan-Meier Survival and Cox Proportional Hazards.</comment>
+  </data>
+  <data name="WARNING_HIGH_CENSOR_VAL_COUNT" xml:space="preserve">
+    <value>There are more than two values for the censored variable.</value>
+  </data>
+  <data name="MUST_SELECT_UNCENSORED_VALUE" xml:space="preserve">
+    <value>Select a Value for Uncensored that represents the uncensored subjects.</value>
+    <comment>Used for Kaplan-Meier Survival and Cox Proportional Hazards.</comment>
+  </data>
+  <data name="MUST_SELECT_GROUP" xml:space="preserve">
+    <value>Select a test group variable.</value>
+    <comment>Used for Kaplan-Meier Survival</comment>
+  </data>
+  <data name="KMSURV_CENSORED" xml:space="preserve">
+    <value>Censored</value>
+    <comment>Used in Kaplan Meier Survival output table</comment>
+  </data>
+  <data name="KMSURV_CUMFAILURES" xml:space="preserve">
+    <value>Cum. Failures</value>
+    <comment>Used in Kaplan Meier Survival output table</comment>
+  </data>
+  <data name="KMSURV_FAILURES" xml:space="preserve">
+    <value>Failures</value>
+    <comment>Used in Kaplan Meier Survival output table</comment>
+  </data>
+  <data name="KMSURV_RISK" xml:space="preserve">
+    <value>At Risk</value>
+    <comment>Used in Kaplan Meier Survival output table</comment>
+  </data>
+  <data name="KMSURV_SURVIVALPROB" xml:space="preserve">
+    <value>Obs. Surv. Prob.</value>
+    <comment>Used in Kaplan Meier Survival output table</comment>
+  </data>
+  <data name="SAVE" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="EMPTY_DLL_DEF" xml:space="preserve">
+    <value>Please enter a DLL Object definition.</value>
+  </data>
+  <data name="NO_FILENAME_COMMAND" xml:space="preserve">
+    <value>Filename or command is required.</value>
+  </data>
+  <data name="NO_SAVED_PGM" xml:space="preserve">
+    <value>No saved program in selected project.</value>
+  </data>
+  <data name="DEFAULT_CHART_LEGEND_ITEM" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="SELECT_EXCLUSION_VARIABLES" xml:space="preserve">
+    <value>Select a variable to exclude.</value>
+  </data>
+  <data name="SELECT_VARIABLE" xml:space="preserve">
+    <value>Select a variable to analyze.</value>
+  </data>
+  <data name="MUST_SELECT_GRAPH_VAR" xml:space="preserve">
+    <value>Select a variable to graph.</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_LESS_THAN" xml:space="preserve">
+    <value>is less than</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_GREATER_THAN" xml:space="preserve">
+    <value>is greater than</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>is less than or equal to</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>is greater than or equal to</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_BETWEEN" xml:space="preserve">
+    <value>is between</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_IS_ANY_OF" xml:space="preserve">
+    <value>is any of</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_IS_NOT_ANY_OF" xml:space="preserve">
+    <value>is not any of</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_EQUAL_TO" xml:space="preserve">
+    <value>is equal to</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_NOT_EQUAL_TO" xml:space="preserve">
+    <value>is not equal to</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_NOT_MISSING" xml:space="preserve">
+    <value>is not missing</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_MISSING" xml:space="preserve">
+    <value>is missing</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_LIKE" xml:space="preserve">
+    <value>is like</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_AND" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="FRIENDLY_OPERATOR_OR" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="FRIENDLY_CONDITION_DATA_FILTER" xml:space="preserve">
+    <value>The value of {0} {1} {2}</value>
+  </data>
+  <data name="FRIENDLY_CONDITION_DATA_FILTER_BETWEEN" xml:space="preserve">
+    <value>The value of {0} is between {1} and {2}</value>
+  </data>
+  <data name="FIELD_NAME_BEGIN_NUMERIC" xml:space="preserve">
+    <value>Invalid field name: Field names cannot begin with numbers.</value>
+  </data>
+  <data name="INVALID_CHARS_IN_VAR_NAME" xml:space="preserve">
+    <value>Invalid variable name; invalid characters: {0}</value>
+  </data>
+  <data name="VAR_NAME_IS_RESERVED" xml:space="preserve">
+    <value>Invalid variable name;  reserved word.</value>
+  </data>
+  <data name="NO_COLUMNS_FOR_SELECT_QUERY" xml:space="preserve">
+    <value>No columns specified for SELECT</value>
+  </data>
+  <data name="INVALID_GROUP" xml:space="preserve">
+    <value>Not a valid group</value>
+  </data>
+  <data name="TABLES_CHI_SQUARE_NOT_VALID" xml:space="preserve">
+    <value>An expected value is &lt; 5. Chi-squared may not be a valid test.</value>
+  </data>
+  <data name="ANOVA_DESCRIPTION_FOR_MEANS" xml:space="preserve">
+    <value>ANOVA, a Parametric Test for Inequality of Population Means</value>
+  </data>
+  <data name="ANOVA_DESCRIPTION_FOR_MEANS_SUBTITLE" xml:space="preserve">
+    <value>(For normally distributed data only)</value>
+  </data>
+  <data name="ANOVA_VARIATION" xml:space="preserve">
+    <value>Variation</value>
+  </data>
+  <data name="ANOVA_BETWEEN" xml:space="preserve">
+    <value>Between</value>
+  </data>
+  <data name="ANOVA_WITHIN" xml:space="preserve">
+    <value>Within</value>
+  </data>
+  <data name="ANOVA_TOTAL" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="ANOVA_SS" xml:space="preserve">
+    <value>SS</value>
+  </data>
+  <data name="ANOVA_DF_SHORT" xml:space="preserve">
+    <value>dF</value>
+  </data>
+  <data name="ANOVA_MS" xml:space="preserve">
+    <value>MS</value>
+  </data>
+  <data name="ANOVA_F" xml:space="preserve">
+    <value>F-Statistic</value>
+  </data>
+  <data name="ANOVA_P_VAL" xml:space="preserve">
+    <value>P-Value</value>
+  </data>
+  <data name="ANOVA_BARTLETT" xml:space="preserve">
+    <value>Bartlett's Test for Inequality of Population Variances</value>
+  </data>
+  <data name="ANOVA_CHI" xml:space="preserve">
+    <value>Chi Square</value>
+  </data>
+  <data name="ANOVA_DF_LONG" xml:space="preserve">
+    <value>Degrees of freedom</value>
+  </data>
+  <data name="ANOVA_SMALL_P" xml:space="preserve">
+    <value>A small p-value (e.g., less than 0.05) suggests that the variances are not homogeneous and that the ANOVA may not be appropriate.</value>
+  </data>
+  <data name="ANOVA_MWWTST" xml:space="preserve">
+    <value>Mann-Whitney/Wilcoxon Two-Sample Test (Kruskal-Wallis test for two groups)</value>
+  </data>
+  <data name="ANOVA_KWH" xml:space="preserve">
+    <value>Kruskal-Wallis H</value>
+  </data>
+  <data name="DASHBOARD_EXPORT_WARNING" xml:space="preserve">
+    <value>Warning: The table {0} will be overwritten if the export proceeds. This action cannot be undone.</value>
+  </data>
+  <data name="DASHBOARD_EXPORT_CREATE_TABLE" xml:space="preserve">
+    <value>Creating output table...</value>
+  </data>
+  <data name="DASHBOARD_EXPORT_PROGRESS" xml:space="preserve">
+    <value>Wrote {0} records... </value>
+  </data>
+  <data name="EXPORT_CANNOT_PROCEED_LEADING_TRAILING_SPACES" xml:space="preserve">
+    <value>The export process can not proceed because some of the selected fields contain a leading or trailing space. The invalid fields are: {0}</value>
+  </data>
+  <data name="DASHBOARD_EXPORT_PROGRESS_INCLUDE_SKIPPED" xml:space="preserve">
+    <value>Wrote {0} records... 
+{2} records skipped due to problems...</value>
+  </data>
+  <data name="DASHBOARD_EXPORT_WIDE_TABLE_FAIL" xml:space="preserve">
+    <value>Due to the number of fields selected, the exporter attempted to separate the fields into {0} tables. At least one of the tables already exists and the export process has been halted. Change the table name and try the export process again.</value>
+  </data>
+  <data name="DASHBOARD_EXPORT_EXCEL_TABLE_OVERWRITE_FAIL" xml:space="preserve">
+    <value>The exporter was unable to overwrite the Excel worksheet {0}. Try creating a new worksheet in the database.</value>
+  </data>
+  <data name="DASHBOARD_EXPORT_EXCEL_NUMERIC_FIELD_OVERFLOW_FAIL" xml:space="preserve">
+    <value>Numeric field overflow detected. There is likely a date value in this data set that exceeds the year 2060 or precedes the year 1900. Please check and correct these date values and try the export process again. The process has been halted.</value>
+  </data>
+  <data name="DASHBOARD_EXPORT_CANCELLED" xml:space="preserve">
+    <value>Export cancelled. Wrote {0} records prior to cancellation.</value>
+  </data>
+  <data name="DASHBOARD_EXPORT_SUCCESS" xml:space="preserve">
+    <value>Export completed successfully. {0} records written.</value>
+  </data>
+  <data name="DASHBOARD_EXPORT_SUCCESS_SOME_SKIPPED" xml:space="preserve">
+    <value>Export completed. {0} of {1} records written. {2} records skipped due to problems.</value>
+  </data>
+  <data name="DASHBOARD_EXPORT_SUCCESS_SOME_SKIPPED_NUMERIC_FIELD_OVERFLOW" xml:space="preserve">
+    <value>Export completed. {0} of {1} records written. {2} records skipped due to problems. Numeric field overflow was detected during the export process; this is likely due to date values that are less than January 1st, 1900 or greater than December 31st, 2060. Records containing these dates have been skipped.</value>
+  </data>
+  <data name="DASHBOARD_FREQUENCY_FREQUENCY" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+  <data name="DASHBOARD_FREQUENCY_PERCENT" xml:space="preserve">
+    <value>Percent</value>
+  </data>
+  <data name="DASHBOARD_FREQUENCY_CUMULATIVE_PERCENT" xml:space="preserve">
+    <value>Cum. Percent</value>
+  </data>
+  <data name="DASHBOARD_FREQUENCY_CI_LOWER" xml:space="preserve">
+    <value>95% CI Lower</value>
+  </data>
+  <data name="DASHBOARD_FREQUENCY_CI_UPPER" xml:space="preserve">
+    <value>95% CI Upper</value>
+  </data>
+  <data name="DASHBOARD_FREQUENCY_OUTER_LABEL" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+  <data name="DASHBOARD_FREQUENCY_CONFIG_PANEL_LABEL" xml:space="preserve">
+    <value>Frequency Properties</value>
+  </data>
+  <data name="DASHBOARD_MEANS_MEAN" xml:space="preserve">
+    <value>Mean</value>
+  </data>
+  <data name="DASHBOARD_MEANS_SUM" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="DASHBOARD_MEANS_TOTAL" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="DASHBOARD_MEANS_OBSERVATIONS" xml:space="preserve">
+    <value>Obs</value>
+  </data>
+  <data name="DASHBOARD_MEANS_MODE" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="DASHBOARD_MEANS_MEDIAN" xml:space="preserve">
+    <value>Median</value>
+  </data>
+  <data name="DASHBOARD_MEANS_25" xml:space="preserve">
+    <value>25%</value>
+  </data>
+  <data name="DASHBOARD_MEANS_75" xml:space="preserve">
+    <value>75%</value>
+  </data>
+  <data name="DASHBOARD_MEANS_MIN" xml:space="preserve">
+    <value>Min</value>
+  </data>
+  <data name="DASHBOARD_MEANS_MAX" xml:space="preserve">
+    <value>Max</value>
+  </data>
+  <data name="DASHBOARD_MEANS_VARIANCE" xml:space="preserve">
+    <value>Var</value>
+  </data>
+  <data name="DASHBOARD_MEANS_STANDARD_DEVIATION" xml:space="preserve">
+    <value>Std Dev</value>
+  </data>
+  <data name="DASHBOARD_MEANS_OUTER_LABEL" xml:space="preserve">
+    <value>Means</value>
+  </data>
+  <data name="DASHBOARD_MEANS_CONFIG_PANEL_LABEL" xml:space="preserve">
+    <value>Means Properties</value>
+  </data>
+  <data name="DASHBOARD_FIELD_LABEL" xml:space="preserve">
+    <value>Field:</value>
+  </data>
+  <data name="DASHBOARD_WEIGHT_FIELD_LABEL" xml:space="preserve">
+    <value>Weight:</value>
+  </data>
+  <data name="DASHBOARD_STRATA_FIELD_SINGLE_LABEL" xml:space="preserve">
+    <value>Stratify by:</value>
+  </data>
+  <data name="DASHBOARD_CROSSTAB_FIELD_LABEL" xml:space="preserve">
+    <value>Cross-tabulate by:</value>
+  </data>
+  <data name="DASHBOARD_ADVANCED_OPTIONS_LABEL" xml:space="preserve">
+    <value>Advanced options</value>
+  </data>
+  <data name="DASHBOARD_100_PERCENT_LABEL" xml:space="preserve">
+    <value>100.00 %</value>
+  </data>
+  <data name="DASHBOARD_OPTION_INCLUDE_MISSING" xml:space="preserve">
+    <value>Include missing values</value>
+  </data>
+  <data name="DASHBOARD_OPTION_ALL_VALUES" xml:space="preserve">
+    <value>Display all list values</value>
+  </data>
+  <data name="DASHBOARD_OPTION_SHOW_CONFIDENCE_LIMITS" xml:space="preserve">
+    <value>Confidence limits</value>
+  </data>
+  <data name="DASHBOARD_OPTION_SHOW_CUMULATIVE_PERCENT" xml:space="preserve">
+    <value>Cumulative percentage</value>
+  </data>
+  <data name="DASHBOARD_OPTION_SORT_HIGH_TO_LOW" xml:space="preserve">
+    <value>Sort high to low</value>
+  </data>
+  <data name="DASHBOARD_OPTION_MAX_ROWS" xml:space="preserve">
+    <value>Max rows to display:</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_DISPLAYING_OUTPUT" xml:space="preserve">
+    <value>Displaying output...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_INITIALIZING" xml:space="preserve">
+    <value>Initializing...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_OPERATION_CANCELLED" xml:space="preserve">
+    <value>Operation cancelled</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_ROW_LIMIT" xml:space="preserve">
+    <value>Warning: Some rows were not displayed due to gadget settings. Showing top {0} rows only.</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_CHECKING_INPUTS" xml:space="preserve">
+    <value>Checking inputs...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_CREATING_VARIABLES" xml:space="preserve">
+    <value>Creating local variables...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_GENERATING_TABLE" xml:space="preserve">
+    <value>Generating data table...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_CACHING" xml:space="preserve">
+    <value>Caching data locally...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_RELATING_PAGES" xml:space="preserve">
+    <value>Relating page tables ({0} complete)</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_RELATING_PAGES_NO_PROGRESS" xml:space="preserve">
+    <value>Relating page tables...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_RELATING_TABLE" xml:space="preserve">
+    <value>Relating table {0} ({1} complete)</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_PREPROCESSING_RELATED_TABLE" xml:space="preserve">
+    <value>Preprocessing table {0} ({1} complete)</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_PROCESSING_RELATED_TABLE" xml:space="preserve">
+    <value>Processing related table {0}...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_CACHING_WAIT" xml:space="preserve">
+    <value>Waiting for data to be cached locally...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_PROCESSING" xml:space="preserve">
+    <value>Processing data...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_FINISHED_CACHING" xml:space="preserve">
+    <value>Finished caching data</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_GENERATING_EPI_CURVE_TABLE" xml:space="preserve">
+    <value>Generating the epi curve table...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_TOTALS_EPI_CURVE_TABLE" xml:space="preserve">
+    <value>Filling in totals in the epi curve table...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_FINDING_STRATA_VALUES" xml:space="preserve">
+    <value>Finding strata values...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_FINDING_FREQ_VALUES" xml:space="preserve">
+    <value>Finding all distinct frequency values...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_FINDING_DATE_VALUES" xml:space="preserve">
+    <value>Finding all distinct date values...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_SORTING_FREQ_VALUES" xml:space="preserve">
+    <value>Sorting frequency values...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_CHART_ERROR" xml:space="preserve">
+    <value>Unable to generate chart</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_COMPARING_FREQ_VALUES" xml:space="preserve">
+    <value>Comparing frequency values...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_COMPARED_FREQ_VALUES" xml:space="preserve">
+    <value>Compared {0} of {1} values...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_FINDING_LIST_VALUES" xml:space="preserve">
+    <value>Finding list-based frequency values...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_FINDING_CROSSTAB_VALUES" xml:space="preserve">
+    <value>Finding crosstab values...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_CALCULATING_TOTALS" xml:space="preserve">
+    <value>Calculating totals...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_ASSIGNED_VALUES_TO" xml:space="preserve">
+    <value>Assigning values to user variables ({0} complete)...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_CALCULATING_DESCRIPTIVE_STATISTICS" xml:space="preserve">
+    <value>Calculating descriptive statistics...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_CALCULATING_DESCRIPTIVE_STATISTICS_ADVANCED" xml:space="preserve">
+    <value>Calculating ANOVA and other advanced descriptive statistics...</value>
+  </data>
+  <data name="DASHBOARD_GADGET_STATUS_PROCESSED_TABLES" xml:space="preserve">
+    <value>Processed {0} table(s)...</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_ANALYSIS_GADGET" xml:space="preserve">
+    <value>Add Analysis Gadget</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_FREQUENCY_GADGET" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_EARS_GADGET" xml:space="preserve">
+    <value>Aberration Detection</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_COMBINED_FREQUENCY_GADGET" xml:space="preserve">
+    <value>Combined Frequency</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_TABLES_GADGET" xml:space="preserve">
+    <value>Tables</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_MATCH_GADGET" xml:space="preserve">
+    <value>Match</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_2X2_GADGET" xml:space="preserve">
+    <value>2 x 2 Table</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_MXN_GADGET" xml:space="preserve">
+    <value>M x N / 2 x 2 Table</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_MEANS_GADGET" xml:space="preserve">
+    <value>Means</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_REGRESS_GADGET" xml:space="preserve">
+    <value>Linear Regression</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_LOGISTIC_GADGET" xml:space="preserve">
+    <value>Logistic Regression</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_COX_GADGET" xml:space="preserve">
+    <value>Cox Proportional Hazards</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_KMSURVIVAL_GADGET" xml:space="preserve">
+    <value>Kaplan Meier Survival</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_CHART_GADGET" xml:space="preserve">
+    <value>Chart</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_CSAMPLE_FREQUENCY_GADGET" xml:space="preserve">
+    <value>Complex Sample Frequency</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_CSAMPLE_MEANS_GADGET" xml:space="preserve">
+    <value>Complex Sample Means</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_CSAMPLE_TABLE_GADGET" xml:space="preserve">
+    <value>Complex Sample Table</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_LINE_LIST_GADGET" xml:space="preserve">
+    <value>Line List</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_STATCALC_2X2_GADGET" xml:space="preserve">
+    <value>Tables (2 x 2 x n)</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_STATCALC_POPULATION_GADGET" xml:space="preserve">
+    <value>Population survey</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_STATCALC_COHORT_GADGET" xml:space="preserve">
+    <value>Cohort or cross-sectional</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_STATCALC_UCC_GADGET" xml:space="preserve">
+    <value>Unmatched case-control</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_STATCALC_CHI_GADGET" xml:space="preserve">
+    <value>Chi square for trend</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_STATCALC_SAMPLE_SIZE_POWER_GADGET" xml:space="preserve">
+    <value>Sample size and power</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_REFRESH" xml:space="preserve">
+    <value>Refresh Results</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_RESET" xml:space="preserve">
+    <value>Reset Dashboard</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_SET_DATA_SOURCE" xml:space="preserve">
+    <value>Set Data Source...</value>
+  </data>
+  <data name="DASHBOARD_TITLE" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="DASHBOARD_INSTRUCTIONS" xml:space="preserve">
+    <value>Right-click on canvas to add content.</value>
+  </data>
+  <data name="DASHBOARD_INSTRUCTIONS_FINISHED_CACHING" xml:space="preserve">
+    <value>Finished caching data locally. Right-click on canvas to add content.</value>
+  </data>
+  <data name="DASHBOARD_OUTPUT_SAVED" xml:space="preserve">
+    <value>Output has been saved.</value>
+  </data>
+  <data name="DASHBOARD_CANVAS_SAVED" xml:space="preserve">
+    <value>Canvas has been saved.</value>
+  </data>
+  <data name="DASHBOARD_CANNOT_SAVE_CANVAS_NO_DATA_SOURCE" xml:space="preserve">
+    <value>A data source must be read before the canvas can be saved.</value>
+  </data>
+  <data name="DASHBOARD_CANNOT_RELATE_NO_DATA_SOURCE" xml:space="preserve">
+    <value>A data source must be read before other data sources can be related.</value>
+  </data>
+  <data name="DASHBOARD_GADGET_LOAD_ERROR" xml:space="preserve">
+    <value>The 'type' attribute for one of the gadgets in the specified canvas file is not set properly. The loading of this canvas file has been aborted.</value>
+  </data>
+  <data name="DASHBOARD_HTML_HEADING" xml:space="preserve">
+    <value>Dashboard Output</value>
+  </data>
+  <data name="DASHBOARD_HTML_TITLE" xml:space="preserve">
+    <value>Dashboard Output</value>
+  </data>
+  <data name="DASHBOARD_SAVE_CANVAS" xml:space="preserve">
+    <value>Do you want to save the current canvas before proceeding?</value>
+  </data>
+  <data name="DASHBOARD_ERROR_PROJECT_NOT_FOUND_FOR_CANVAS" xml:space="preserve">
+    <value>The specified project file ({0}) that is associated with this canvas was not found. Please modify the canvas file to point to a valid Epi Info 7 project or select a new data source.</value>
+  </data>
+  <data name="DASHBOARD_ERROR_PROJECT_NOT_FOUND" xml:space="preserve">
+    <value>The specified project file ({0}) is either missing or corrupt and cannot be opened.</value>
+  </data>
+  <data name="DASHBOARD_ERROR_DEFINED_VARIABLE_MISSING" xml:space="preserve">
+    <value>No such defined variable exists: {0}</value>
+  </data>
+  <data name="DASHBOARD_ERROR_INVALID_COLUMN_TYPE" xml:space="preserve">
+    <value>Invalid column type</value>
+  </data>
+  <data name="EXISTING_TABLE_APPEND" xml:space="preserve">
+    <value>The table named {0} already has {1} records. Are you sure you want to APPEND data onto it?</value>
+  </data>
+  <data name="EXISTING_TABLE_REPLACE" xml:space="preserve">
+    <value>The table named {0} already has {1} records. Are you sure you want to REPLACE data in it?</value>
+  </data>
+  <data name="UNIQUE_ROW_ID" xml:space="preserve">
+    <value>UniqueRowId</value>
+  </data>
+  <data name="MAX_NONE_MASK_DIGITS_EXCEEDED" xml:space="preserve">
+    <value>Mask digit of type None cannot exceed 40 digits. Please make smaller.</value>
+  </data>
+  <data name="EOF" xml:space="preserve">
+    <value>End of the file was reached.</value>
+  </data>
+  <data name="NO_SEARCH_TEXT" xml:space="preserve">
+    <value>No text to search.</value>
+  </data>
+  <data name="CNTXT_CMD_ASSIGN" xml:space="preserve">
+    <value>Assign</value>
+  </data>
+  <data name="CNTXT_CMD_AUTOSEARCH" xml:space="preserve">
+    <value>Autosearch</value>
+  </data>
+  <data name="CNTXT_FXN_NUMCOPS_MOD" xml:space="preserve">
+    <value>MOD (modulus or remainder)</value>
+  </data>
+  <data name="CNTXT_FXN_NUMCOPS" xml:space="preserve">
+    <value>Numeric and Comparison Operators</value>
+  </data>
+  <data name="CNTXT_CMD_CLEAR" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="CNTXT_CMD_DIALOG" xml:space="preserve">
+    <value>Dialog</value>
+  </data>
+  <data name="CNTXT_CMD_DISABLE" xml:space="preserve">
+    <value>Disable</value>
+  </data>
+  <data name="CNTXT_CMD_ENABLE" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="CNTXT_CMD_EXECUTE" xml:space="preserve">
+    <value>Execute</value>
+  </data>
+  <data name="CNTXT_CMD_GEOCODE" xml:space="preserve">
+    <value>Geocode</value>
+  </data>
+  <data name="CNTXT_CMD_GOTO" xml:space="preserve">
+    <value>Goto</value>
+  </data>
+  <data name="CNTXT_CMD_HELP" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="CNTXT_CMD_HIDE" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="CNTXT_CMD_HIGHLIGHT" xml:space="preserve">
+    <value>Highlight</value>
+  </data>
+  <data name="CNTXT_CMD_UNHIDE" xml:space="preserve">
+    <value>Unhide</value>
+  </data>
+  <data name="CNTXT_CMD_UNHIGHLIGHT" xml:space="preserve">
+    <value>Unhighlight</value>
+  </data>
+  <data name="CNTXT_FXN_NUMCOPS_EXP" xml:space="preserve">
+    <value>^ (Exponentiation)</value>
+  </data>
+  <data name="CNTXT_FXN_NUMCOPS_EQUAL" xml:space="preserve">
+    <value>= (equal)</value>
+  </data>
+  <data name="CNTXT_FXN_NUMCOPS_GT" xml:space="preserve">
+    <value>&gt; (greater than)</value>
+  </data>
+  <data name="CNTXT_FXN_NUMCOPS_GTE" xml:space="preserve">
+    <value>&gt;= (greater than or equal)</value>
+  </data>
+  <data name="CNTXT_FXN_NUMCOPS_LIKE" xml:space="preserve">
+    <value>LIKE</value>
+  </data>
+  <data name="CNTXT_FXN_NUMCOPS_LT" xml:space="preserve">
+    <value>&lt; (less than)</value>
+  </data>
+  <data name="CNTXT_FXN_NUMCOPS_LTE" xml:space="preserve">
+    <value>&lt;= (less than or equal)</value>
+  </data>
+  <data name="CNTXT_FXN_NUMCOPS_LTGT" xml:space="preserve">
+    <value>&lt;&gt; (less than or greater than; not equal)</value>
+  </data>
+  <data name="CNTXT_FXN_LGOPS" xml:space="preserve">
+    <value>Logical Operators</value>
+  </data>
+  <data name="CNTXT_FXN_LGOPS_AND" xml:space="preserve">
+    <value>AND</value>
+  </data>
+  <data name="CNTXT_FXN_LGOPS_NOT" xml:space="preserve">
+    <value>NOT</value>
+  </data>
+  <data name="CNTXT_FXN_LGOPS_OR" xml:space="preserve">
+    <value>OR</value>
+  </data>
+  <data name="CNTXT_FXN_LGOPS_XOR" xml:space="preserve">
+    <value>XOR (exclusive OR)</value>
+  </data>
+  <data name="CNTXT_FXN_NUMFX" xml:space="preserve">
+    <value>Numeric Functions</value>
+  </data>
+  <data name="CNTXT_FXN_NUMFX_ABS" xml:space="preserve">
+    <value>ABS (absolute value)</value>
+  </data>
+  <data name="CNTXT_FXN_TMPLT_VARIABLE" xml:space="preserve">
+    <value>( &lt;variable&gt; )</value>
+  </data>
+  <data name="CNTXT_FXN_NUMFX_COS" xml:space="preserve">
+    <value>COS</value>
+  </data>
+  <data name="CNTXT_FXN_NUMFX_EXP" xml:space="preserve">
+    <value>EXP</value>
+  </data>
+  <data name="CNTXT_FXN_NUMFX_LN" xml:space="preserve">
+    <value>LN (natural log)</value>
+  </data>
+  <data name="CNTXT_FXN_NUMFX_LOG" xml:space="preserve">
+    <value>LOG (decimal log)</value>
+  </data>
+  <data name="CNTXT_FXN_NUMFX_RND" xml:space="preserve">
+    <value>RND (random)</value>
+  </data>
+  <data name="CNTXT_FXN_NUMFX_ROUND" xml:space="preserve">
+    <value>ROUND</value>
+  </data>
+  <data name="CNTXT_FXN_NUMFX_SIN" xml:space="preserve">
+    <value>SIN</value>
+  </data>
+  <data name="CNTXT_FXN_NUMFX_TAN" xml:space="preserve">
+    <value>TAN</value>
+  </data>
+  <data name="CNTXT_FXN_NUMFX_TRUNC" xml:space="preserve">
+    <value>TRUNC (truncate)</value>
+  </data>
+  <data name="CNTXT_FXN_DATFX" xml:space="preserve">
+    <value>Date Functions</value>
+  </data>
+  <data name="CNTXT_FXN_DATFX_TMPLT1" xml:space="preserve">
+    <value>( &lt;date_time&gt; )</value>
+  </data>
+  <data name="CNTXT_FXN_DATFX_TMPLT2" xml:space="preserve">
+    <value>( &lt;start_date&gt;, &lt;end_date&gt; )</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_DATES" xml:space="preserve">
+    <value>Date and Time  Formats</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_DATES_GEN" xml:space="preserve">
+    <value>General Date </value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_DATES_LONGDATE" xml:space="preserve">
+    <value>Long Date</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_DATES_LONGTIME" xml:space="preserve">
+    <value>Long Time</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_DATES_SHORTDATE" xml:space="preserve">
+    <value>Short Date</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_DATES_SHORTTIME" xml:space="preserve">
+    <value>Short Time</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_NUM" xml:space="preserve">
+    <value>Numeric Formats</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_NUM_CURRENCY" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_NUM_FIXED" xml:space="preserve">
+    <value>Fixed</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_NUM_GEN" xml:space="preserve">
+    <value>General Number</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_NUM_ONOFF" xml:space="preserve">
+    <value>On/Off (1/0)</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_NUM_PERCENT" xml:space="preserve">
+    <value>Percent</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_NUM_SCIENTIFIC" xml:space="preserve">
+    <value>Scientific</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_NUM_STANDARD" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_NUM_TF" xml:space="preserve">
+    <value>True/False</value>
+  </data>
+  <data name="CNTXT_FXN_FRMT_NUM_YN" xml:space="preserve">
+    <value>Yes/No</value>
+  </data>
+  <data name="CNTXT_FXN_TMPLT_ENVVAR" xml:space="preserve">
+    <value>( &lt;name_of_env_variable&gt; )</value>
+  </data>
+  <data name="CNTXT_FXN_TMPLT_FILENAME" xml:space="preserve">
+    <value>( &lt;filename&gt; )</value>
+  </data>
+  <data name="CNTXT_FXN_TMPLT_FINDTEXT" xml:space="preserve">
+    <value>( &lt;letters_to_find&gt;, &lt;variable_to_search&gt; )</value>
+  </data>
+  <data name="CNTXT_FXN_TMPLT_SUBSTRING" xml:space="preserve">
+    <value>( &lt;variable&gt;, {&lt;first&gt;} , {&lt;length&gt;} )</value>
+  </data>
+  <data name="CNTXT_FXN_SYSFXN" xml:space="preserve">
+    <value>System Functions</value>
+  </data>
+  <data name="CNTXT_FXN_TEXTFXN" xml:space="preserve">
+    <value>Text Functions</value>
+  </data>
+  <data name="CNTXT_FXN_TIMEFXN" xml:space="preserve">
+    <value>Time Functions</value>
+  </data>
+  <data name="CNTXT_FXN_TMPLT_VAR_PARM" xml:space="preserve">
+    <value>&lt;variable&gt;</value>
+  </data>
+  <data name="CNTXT_CMD_NEWRECORD" xml:space="preserve">
+    <value>New Record</value>
+  </data>
+  <data name="CNTXT_CMD_QUIT" xml:space="preserve">
+    <value>Quit</value>
+  </data>
+  <data name="CNTXT_CMD_BEEP" xml:space="preserve">
+    <value>Beep</value>
+  </data>
+  <data name="CNTXT_CMD_CANCELSELECT" xml:space="preserve">
+    <value>Cancel Select</value>
+  </data>
+  <data name="CNTXT_CMD_CANCELSORT" xml:space="preserve">
+    <value>Cancel Sort</value>
+  </data>
+  <data name="CNTXT_CMD_CLOSEOUT" xml:space="preserve">
+    <value>Close Out</value>
+  </data>
+  <data name="CNTXT_CMD_COMPSAMPFREQ" xml:space="preserve">
+    <value>Complex Sample Frequencies</value>
+  </data>
+  <data name="CNTXT_CMD_COMPSAMPMEANS" xml:space="preserve">
+    <value>Complex Sample Means</value>
+  </data>
+  <data name="CNTXT_CMD_COMPSAMPTABLES" xml:space="preserve">
+    <value>Complex Sample Tables</value>
+  </data>
+  <data name="CNTXT_CMD_COXPH" xml:space="preserve">
+    <value>Cox Proportional Hazards</value>
+  </data>
+  <data name="CNTXT_CMD_DELETEFILETABLE" xml:space="preserve">
+    <value>Delete File/Table</value>
+  </data>
+  <data name="CNTXT_CMD_DELETERECORDS" xml:space="preserve">
+    <value>Delete Records</value>
+  </data>
+  <data name="CNTXT_CMD_DISPLAY" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="CNTXT_CMD_EXECUTEFILE" xml:space="preserve">
+    <value>Execute File</value>
+  </data>
+  <data name="CNTXT_CMD_FREQ" xml:space="preserve">
+    <value>Frequencies</value>
+  </data>
+  <data name="CNTXT_CMD_GRAPH" xml:space="preserve">
+    <value>Graph</value>
+  </data>
+  <data name="CNTXT_CMD_HEADER" xml:space="preserve">
+    <value>Header</value>
+  </data>
+  <data name="CNTXT_CMD_IF" xml:space="preserve">
+    <value>If</value>
+  </data>
+  <data name="CNTXT_CMD_KMSURV" xml:space="preserve">
+    <value>Kaplan Meier Survival</value>
+  </data>
+  <data name="CNTXT_CMD_LINEARREGRESSION" xml:space="preserve">
+    <value>Linear Regression</value>
+  </data>
+  <data name="CNTXT_CMD_LOGISTICREGRESSION" xml:space="preserve">
+    <value>Logistic Regression</value>
+  </data>
+  <data name="CNTXT_CMD_MAP" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="CNTXT_CMD_MATCH" xml:space="preserve">
+    <value>Match</value>
+  </data>
+  <data name="CNTXT_CMD_MEANS" xml:space="preserve">
+    <value>Means</value>
+  </data>
+  <data name="CNTXT_CMD_MERGE" xml:space="preserve">
+    <value>Merge</value>
+  </data>
+  <data name="CNTXT_CMD_PRINTOUT" xml:space="preserve">
+    <value>Print Out</value>
+  </data>
+  <data name="CNTXT_CMD_READ" xml:space="preserve">
+    <value>Read (Import)</value>
+  </data>
+  <data name="CNTXT_CMD_RECODE" xml:space="preserve">
+    <value>Recode</value>
+  </data>
+  <data name="CNTXT_CMD_RELATE" xml:space="preserve">
+    <value>Relate</value>
+  </data>
+  <data name="CNTXT_CMD_REPORTS" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="CNTXT_CMD_ROUTEOUT" xml:space="preserve">
+    <value>Route Out</value>
+  </data>
+  <data name="CNTXT_CMD_RUNSAVED" xml:space="preserve">
+    <value>Run Saved Program</value>
+  </data>
+  <data name="CNTXT_CMD_SELECT" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="CNTXT_CMD_SET" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="CNTXT_CMD_SORT" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="CNTXT_CMD_STORINGOUTPUT" xml:space="preserve">
+    <value>Storing Output</value>
+  </data>
+  <data name="CNTXT_CMD_SUMMARIZE" xml:space="preserve">
+    <value>Summarize</value>
+  </data>
+  <data name="CNTXT_CMD_TABLES" xml:space="preserve">
+    <value>Tables</value>
+  </data>
+  <data name="CNTXT_CMD_TYPE" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="CNTXT_CMD_UNDELETERECORDS" xml:space="preserve">
+    <value>Undelete Records</value>
+  </data>
+  <data name="CNTXT_CMD_USERCOMMAND" xml:space="preserve">
+    <value>User Command</value>
+  </data>
+  <data name="CNTXT_CMD_WRITE" xml:space="preserve">
+    <value>Write (Export)</value>
+  </data>
+  <data name="CNTXT_CMD_ADVSTATS" xml:space="preserve">
+    <value>Advanced Statistics</value>
+  </data>
+  <data name="CNTXT_CMD_DATA" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="CNTXT_CMD_LIST" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="CNTXT_CMD_OPTIONS" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="CNTXT_CMD_OUTPUT" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="CNTXT_CMD_SELECTIF" xml:space="preserve">
+    <value>Select/If</value>
+  </data>
+  <data name="CNTXT_CMD_STATS" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="CNTXT_CMD_USERCMDS" xml:space="preserve">
+    <value>User Defined Commands</value>
+  </data>
+  <data name="CNTXT_CMD_USERINTERACTION" xml:space="preserve">
+    <value>User Interaction</value>
+  </data>
+  <data name="CNTXT_CMD_VARIABLES" xml:space="preserve">
+    <value>Variables</value>
+  </data>
+  <data name="NUMBER_RECORDS_DELETED" xml:space="preserve">
+    <value>Number of records deleted: {0}</value>
+  </data>
+  <data name="WEBFORM_DEPARTMENT" xml:space="preserve">
+    <value>Your Department Name</value>
+  </data>
+  <data name="WEBFORM_EXITTEXT" xml:space="preserve">
+    <value>Add a 'Thank You' or other closing message for the survey.</value>
+  </data>
+  <data name="WEBFORM_FUTUREDATE" xml:space="preserve">
+    <value>Survey closing date must be a future date.</value>
+  </data>
+  <data name="WEBFORM_ORGANIZATION_KEY" xml:space="preserve">
+    <value>A valid organization key must be supplied.</value>
+  </data>
+  <data name="WEBFORM_INTRODUCTIONTEXT" xml:space="preserve">
+    <value>Write an introduction to your survey here.</value>
+  </data>
+  <data name="WEBFORM_ORGANIZATION" xml:space="preserve">
+    <value>Your Organization Name (optional)</value>
+  </data>
+  <data name="WEBFORM_PUBWOEXIT" xml:space="preserve">
+    <value>You haven't added a closing message. Publish anyway?</value>
+  </data>
+  <data name="WEBFORM_SUCCESS" xml:space="preserve">
+    <value>Your survey published successfully.</value>
+  </data>
+  <data name="WEBFORM_SURVEYID" xml:space="preserve">
+    <value>Your Survey ID (optional)</value>
+  </data>
+  <data name="WEBFORM_TITLE" xml:space="preserve">
+    <value>Give Your Survey a Title (required)</value>
+  </data>
+  <data name="WEBFORM_GIVETITLE" xml:space="preserve">
+    <value>Please give your survey a title.</value>
+  </data>
+  <data name="MASK" xml:space="preserve">
+    <value>Mask</value>
+  </data>
+  <data name="NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TYPE" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="FROM_TO_RANGE_CONFIRM" xml:space="preserve">
+    <value>You are about to print all the records. Are you sure?</value>
+  </data>
+  <data name="FROM_TO_RANGE_ERROR_HEADER" xml:space="preserve">
+    <value>Range Error</value>
+  </data>
+  <data name="FROM_TO_RANGE_INCORRECT" xml:space="preserve">
+    <value>From and To Range are incorrect. Please Correct.</value>
+  </data>
+  <data name="UNABLE_TO_INITIALIZE_PROJECT" xml:space="preserve">
+    <value>Unable to initialize the project.</value>
+  </data>
+  <data name="PE_CHECKBOX_NODE" xml:space="preserve">
+    <value>Checkbox</value>
+  </data>
+  <data name="PE_CODES_NODE" xml:space="preserve">
+    <value>Codes</value>
+  </data>
+  <data name="PE_COMMAND_BUTTON_NODE" xml:space="preserve">
+    <value>Command Button</value>
+  </data>
+  <data name="PE_COMMENT_LEGAL_NODE" xml:space="preserve">
+    <value>Comment Legal</value>
+  </data>
+  <data name="PE_DATETIME_NODE" xml:space="preserve">
+    <value>Date/Time </value>
+  </data>
+  <data name="PE_DATE_NODE" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="PE_GRID_NODE" xml:space="preserve">
+    <value>Grid</value>
+  </data>
+  <data name="PE_GROUP_NODE" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="PE_GUID_NODE" xml:space="preserve">
+    <value>Unique Identifier</value>
+  </data>
+  <data name="PE_IMAGE_NODE" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="PE_LABEL_NODE" xml:space="preserve">
+    <value>Label/Title</value>
+  </data>
+  <data name="PE_LEGAL_VALUE_NODE" xml:space="preserve">
+    <value>Legal Values</value>
+  </data>
+  <data name="PE_MIRROR_NODE" xml:space="preserve">
+    <value>Mirror</value>
+  </data>
+  <data name="PE_MULTI_LINE_NODE" xml:space="preserve">
+    <value>Multiline</value>
+  </data>
+  <data name="PE_NUMBER_NODE" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="PE_OPTION_NODE" xml:space="preserve">
+    <value>Option</value>
+  </data>
+  <data name="PE_PHONE_NODE" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="PE_RELATE_NODE" xml:space="preserve">
+    <value>Relate</value>
+  </data>
+  <data name="PE_SINGLE_LINE_NODE" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="PE_TIME_NODE" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="PE_UPPER_CASE_NODE" xml:space="preserve">
+    <value>Text (Uppercase)</value>
+  </data>
+  <data name="PE_YESNO_NODE" xml:space="preserve">
+    <value>Yes/No</value>
+  </data>
+  <data name="PE_FIELDS_NODE" xml:space="preserve">
+    <value>Fields</value>
+  </data>
+  <data name="PE_TEMPLATES" xml:space="preserve">
+    <value>Templates</value>
+  </data>
+  <data name="DELETE_TEMPLATE" xml:space="preserve">
+    <value>Are you sure you want to delete this template. This delete can not be undone.</value>
+  </data>
+  <data name="UNABLE_CREATE_GRAPH" xml:space="preserve">
+    <value>Unable to create graph. No values found to graph.</value>
+  </data>
+  <data name="DELETE_DATA_FIELD_WARNING" xml:space="preserve">
+    <value>You are deleting a field that may contain collected data. Continue with delete?</value>
+  </data>
+  <data name="WEBFORM_SECURITYTOKEN" xml:space="preserve">
+    <value>Security Token required for downloading data:</value>
+  </data>
+  <data name="WEBFORM_SURVEYKEY" xml:space="preserve">
+    <value>Survey Key needed to access the survey:</value>
+  </data>
+  <data name="WEBFORM_URLTOSEND" xml:space="preserve">
+    <value>URL to send to respondents:</value>
+  </data>
+  <data name="CONTINUE_TAB_ORDER" xml:space="preserve">
+    <value>Continue Tab Order</value>
+  </data>
+  <data name="NEW_FIELD" xml:space="preserve">
+    <value>New Field</value>
+  </data>
+  <data name="NEW_GROUP_FIELD" xml:space="preserve">
+    <value>New Group Field</value>
+  </data>
+  <data name="SHOW_TAB_ORDER" xml:space="preserve">
+    <value>Show Tab Order</value>
+  </data>
+  <data name="START_NEW_TAB_ORDER" xml:space="preserve">
+    <value>Start New Tab Order</value>
+  </data>
+  <data name="ALIGN_1_COLUMN" xml:space="preserve">
+    <value>Align Selection in One (1) Column</value>
+  </data>
+  <data name="ALIGN_2_COLUMN" xml:space="preserve">
+    <value>Align Selection in Two (2) Columns</value>
+  </data>
+  <data name="ALIGN_3_COLUMN" xml:space="preserve">
+    <value>Align Selection in Three (3) Columns</value>
+  </data>
+  <data name="ALIGN_4_COLUMN" xml:space="preserve">
+    <value>Align Selection in Four (4) Columns</value>
+  </data>
+  <data name="ALIGN_5_COLUMN" xml:space="preserve">
+    <value>Align Selection in Five (5) Columns</value>
+  </data>
+  <data name="ALIGN_AS_ROW" xml:space="preserve">
+    <value>Align Selection on Row</value>
+  </data>
+  <data name="COPY" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="CUT" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="DELETE" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="PAGE_CHECK_CODE" xml:space="preserve">
+    <value>Page Check Code</value>
+  </data>
+  <data name="PASTE" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="SAVE_AS_TEMPLATE" xml:space="preserve">
+    <value>Save Selection as Template</value>
+  </data>
+  <data name="TABS" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="CHANGE_TO" xml:space="preserve">
+    <value>&amp;Change To</value>
+  </data>
+  <data name="DEFAULT_AUTO_SIZE" xml:space="preserve">
+    <value>Default &amp;Auto Size</value>
+  </data>
+  <data name="DEFAULT_PROMPT_ALIGN" xml:space="preserve">
+    <value>Default Prompt &amp;Align</value>
+  </data>
+  <data name="FIELD_CHECK_CODE" xml:space="preserve">
+    <value>&amp;Field Check Code</value>
+  </data>
+  <data name="GO_TO_RELATED_FORM" xml:space="preserve">
+    <value>&amp;Go To Related Form</value>
+  </data>
+  <data name="PROPERTIES" xml:space="preserve">
+    <value>&amp;Properties</value>
+  </data>
+  <data name="START_FIELD_DROP" xml:space="preserve">
+    <value>Start field drop...</value>
+  </data>
+  <data name="MAKE_SAME_HEIGHT_MAX" xml:space="preserve">
+    <value>Make Same Height (Use Maximum)</value>
+  </data>
+  <data name="MAKE_SAME_HEIGHT_MIN" xml:space="preserve">
+    <value>Make Same Height (Use Minimum)</value>
+  </data>
+  <data name="MAKE_SAME_SIZE_MAX" xml:space="preserve">
+    <value>Make Same Size (Use Maximum)</value>
+  </data>
+  <data name="MAKE_SAME_SIZE_MIN" xml:space="preserve">
+    <value>Make Same Size (Use Minimum)</value>
+  </data>
+  <data name="MAKE_SAME_WIDTH_MAX" xml:space="preserve">
+    <value>Make Same Width (Use Maximum)</value>
+  </data>
+  <data name="MAKE_SAME_WIDTH_MIN" xml:space="preserve">
+    <value>Make Same Width (Use Minimum)</value>
+  </data>
+  <data name="ADD_FORM" xml:space="preserve">
+    <value>Add &amp;Form</value>
+  </data>
+  <data name="ADD_PAGE" xml:space="preserve">
+    <value>Add &amp;Page</value>
+  </data>
+  <data name="BOOKMARK" xml:space="preserve">
+    <value>Bookmark</value>
+  </data>
+  <data name="DELETE_FORM" xml:space="preserve">
+    <value>Delete &amp;Form</value>
+  </data>
+  <data name="DELETE_PAGE" xml:space="preserve">
+    <value>&amp;Delete Page</value>
+  </data>
+  <data name="FIELDS" xml:space="preserve">
+    <value>Fields</value>
+  </data>
+  <data name="FORMS" xml:space="preserve">
+    <value>Forms</value>
+  </data>
+  <data name="HISTORY" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="INSERTED_PAGE" xml:space="preserve">
+    <value>Inserted Page</value>
+  </data>
+  <data name="INSERT_PAGE" xml:space="preserve">
+    <value>&amp;Insert Page</value>
+  </data>
+  <data name="MAX_PAGES_REACHED" xml:space="preserve">
+    <value>Maximum Pages Reached</value>
+  </data>
+  <data name="OPEN" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="OPEN_CONTAINING_FOLDER" xml:space="preserve">
+    <value>Open Containing Folder</value>
+  </data>
+  <data name="PAGES" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="PROJECTS" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="QUICK_SAVE_PROJECT_AS_TEMPLATE" xml:space="preserve">
+    <value>&amp;Quick Save Project as Template</value>
+  </data>
+  <data name="RENAME" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="RENAME_PAGE" xml:space="preserve">
+    <value>&amp;Rename Page</value>
+  </data>
+  <data name="SAVE_FORM_AS_TEMPLATE" xml:space="preserve">
+    <value>Save Form as &amp;Template</value>
+  </data>
+  <data name="SAVE_PAGE_AS_TEMPLATE" xml:space="preserve">
+    <value>Save Page as &amp;Template</value>
+  </data>
+  <data name="SAVE_PROJECT_AS_TEMPLATE" xml:space="preserve">
+    <value>Save Project as &amp;Template</value>
+  </data>
+  <data name="VIEW_CHECK_CODE" xml:space="preserve">
+    <value>View &amp;Check Code</value>
+  </data>
+  <data name="INVALID_VIEW_NAME_DUPLICATE_PREFIX" xml:space="preserve">
+    <value>A form with that name but without the numbers at the end already existes in this project. This would cause a conflict with the data tables because each data table is named as the name of the form plus the id of the page.</value>
+  </data>
+  <data name="INVALID_PAGE_NAME_IS_RESERVED" xml:space="preserve">
+    <value>Invalid page name;  reserved word.</value>
+  </data>
+  <data name="WARNING_CHILD_VIEW_NOT_SET" xml:space="preserve">
+    <value>The selected Related View button is not currently associated with a view. The button can be assigned a child view by changing the properties of the button in the from designer.</value>
+  </data>
+  <data name="CNTXT_FXN_SYSFXN_CURRUSER" xml:space="preserve">
+    <value>CURRENTUSER</value>
+  </data>
+  <data name="CNTXT_FXN_TMPLT_DATEPARTS" xml:space="preserve">
+    <value>( &lt;year&gt;, &lt;month&gt;, &lt;day&gt; )</value>
+  </data>
+  <data name="CNTXT_FXN_TMPLT_TIMEPARTS" xml:space="preserve">
+    <value>( &lt;hour&gt;, &lt;minute&gt;, &lt;second&gt; )</value>
+  </data>
+  <data name="CNTXT_FXN_TMPLT_ZSCORE" xml:space="preserve">
+    <value>( &lt;reference&gt;, &lt;metric&gt;, &lt;measurement&gt;, &lt;co_metric&gt;, &lt;sex&gt; )</value>
+  </data>
+  <data name="CNTXT_FXN_NUMFX_RECCOUNT" xml:space="preserve">
+    <value>RECORDCOUNT</value>
+  </data>
+  <data name="NUMBER_RECORDS_UNDELETED" xml:space="preserve">
+    <value>Number of records undeleted: {0}</value>
+  </data>
+  <data name="ADD_BLOCK" xml:space="preserve">
+    <value>Add Block</value>
+  </data>
+  <data name="BLOCK_ALREADY_EXISTS" xml:space="preserve">
+    <value>This Check Code block already exists: {0} {1}</value>
+  </data>
+  <data name="ERROR_ON_LINE_COLUMN" xml:space="preserve">
+    <value>Error on line number: {0}; Column number: {1}</value>
+  </data>
+  <data name="ERROR_VARIABLE_NOT_DEFINED" xml:space="preserve">
+    <value>Error--Variable is assigned but not defined:</value>
+  </data>
+  <data name="INVALID_TEMPLATE_FILE" xml:space="preserve">
+    <value>The selected file is not a valid Epi Info template.</value>
+  </data>
+  <data name="MOBILE_FORM_COPIED" xml:space="preserve">
+    <value>Form has been copied to your Android device. Please disconnect the device from your PC to begin data collection.</value>
+  </data>
+  <data name="MOBILE_FORM_COPY_TITLE" xml:space="preserve">
+    <value>Form Copied</value>
+  </data>
+  <data name="PROJECT_FILE_CREATED" xml:space="preserve">
+    <value>Project file created successfully.</value>
+  </data>
+  <data name="PROJECT_FILE_NOT_CREATED" xml:space="preserve">
+    <value>Project file was not created.</value>
+  </data>
+  <data name="TEMPLATE_GET_ALREADY_EXISTS" xml:space="preserve">
+    <value>A template already exists with this name: </value>
+  </data>
+  <data name="TEMPLATE_GET_CANCEL" xml:space="preserve">
+    <value>Click Cancel to exit without getting the template.</value>
+  </data>
+  <data name="TEMPLATE_GET_NO_OVERWRITE" xml:space="preserve">
+    <value>Click No to overwrite the existing template.</value>
+  </data>
+  <data name="TEMPLATE_GET_RENAME_TEMPLATE" xml:space="preserve">
+    <value>Do you want to rename the template you are getting?</value>
+  </data>
+  <data name="TEMPLATE_GET_TITLE" xml:space="preserve">
+    <value>Replace Existing Template?</value>
+  </data>
+  <data name="TEMPLATE_GET_YES_RENAME" xml:space="preserve">
+    <value>Click Yes to use this name instead:</value>
+  </data>
+  <data name="MOBILE_NO_DEVICES" xml:space="preserve">
+    <value>No devices were found.</value>
+  </data>
+  <data name="MOBILE_NO_EI_EXT_FOUND" xml:space="preserve">
+    <value>Epi Info Companion for Android was not detected.  Please ensure that the app is installed on your Android device and that the device is connected to your PC in "USB Storage" or "Media Device" mode.</value>
+  </data>
+  <data name="TEMPLATE_CANNOT_READ_FILE" xml:space="preserve">
+    <value>Cannot read file from disk.  Make sure it is a valid Epi Info template file.</value>
+  </data>
+  <data name="CLOSING_PROJECT" xml:space="preserve">
+    <value>Closing project.</value>
+  </data>
+  <data name="EI3X_PROJECT_FILES" xml:space="preserve">
+    <value>Epi Info 3.x Project Files</value>
+  </data>
+  <data name="EI7_PROJECT_FILES" xml:space="preserve">
+    <value>Epi Info 7 Project Files</value>
+  </data>
+  <data name="ERROR_LOADING_PROJECT_CMDLINE" xml:space="preserve">
+    <value>Could not load project based on command line.</value>
+  </data>
+  <data name="ERROR_PM_NOT_REGISTERED" xml:space="preserve">
+    <value>Project manager is not registered.</value>
+  </data>
+  <data name="INADEQUATE_PERMISSIONS_ACCESS" xml:space="preserve">
+    <value>You do not have adequate permissions to access this project. Please contact your database administrator or the author of this form.</value>
+  </data>
+  <data name="INADEQUATE_PERMISSIONS_MODIFY" xml:space="preserve">
+    <value>You do not have adequate permissions to modify this project. The project has been opened in read-only mode.</value>
+  </data>
+  <data name="MS_ACCESS_FILES" xml:space="preserve">
+    <value>Microsoft Access Files</value>
+  </data>
+  <data name="NEW_PAGE" xml:space="preserve">
+    <value>New Page</value>
+  </data>
+  <data name="OPENING_PROJECT" xml:space="preserve">
+    <value>Opening project.</value>
+  </data>
+  <data name="APPLY_DEFAULT_FONTS_FORM" xml:space="preserve">
+    <value>Apply Default Fonts to Form</value>
+  </data>
+  <data name="APPLY_DEFAULT_FONTS_PAGE" xml:space="preserve">
+    <value>Apply Default Fonts to Page</value>
+  </data>
+  <data name="APPLY_DEFAULT_FONTS_PROJECT" xml:space="preserve">
+    <value>Apply Default Fonts to Project</value>
+  </data>
+  <data name="APPLY_DEFAULT_FONTS" xml:space="preserve">
+    <value>Apply Default Fonts</value>
+  </data>
+  <data name="LOWER_RANGE_GREATER_THAN_UPPER_RANGE" xml:space="preserve">
+    <value>The lower range is greater than the upper range.</value>
+  </data>
+  <data name="NOT_A_NUMBER" xml:space="preserve">
+    <value>Not a number.</value>
+  </data>
+  <data name="PATTERN_RESTRICTS_ENTRY_OF_LOWER_RANGE" xml:space="preserve">
+    <value>The pattern restricts entry of a numbers at the lower range.</value>
+  </data>
+  <data name="PATTERN_RESTRICTS_ENTRY_OF_UPPER_RANGE" xml:space="preserve">
+    <value>The pattern restricts entry of a numbers at the upper range.</value>
+  </data>
+  <data name="CNTXT_CMD_CALL" xml:space="preserve">
+    <value>Call</value>
+  </data>
+  <data name="CNTXT_CMD_SET_NOT_REQUIRED" xml:space="preserve">
+    <value>Set Not Required</value>
+  </data>
+  <data name="CNTXT_CMD_SET_REQUIRED" xml:space="preserve">
+    <value>Set Required</value>
+  </data>
+  <data name="ANDROID_TOO_FEW_FIELDS" xml:space="preserve">
+    <value>Forms for Android must have at least three input fields.</value>
+  </data>
+  <data name="CANNOT_CREATE_SHORTCUT_FOR_CHILD_FORM" xml:space="preserve">
+    <value>You cannot create a shortcut to open Enter to a child form. Please try again from the top-most parent form.</value>
+  </data>
+</root>

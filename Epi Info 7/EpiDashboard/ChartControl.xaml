@@ -1,0 +1,612 @@
+﻿<EpiDashboard:GadgetBase x:Class="EpiDashboard.ChartControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:EpiDashboard="clr-namespace:EpiDashboard"
+    xmlns:toolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=Epi.DataVisualization.Toolkit"
+    xmlns:visualization="clr-namespace:System.Windows.Controls.DataVisualization;assembly=Epi.DataVisualization.Toolkit"
+    xmlns:customControls="clr-namespace:Epi.DataVisualization.Toolkit.PieExtension;assembly=Epi.DataVisualization.Toolkit.PieExtension"
+    xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+             FontFamily="Global User Interface"
+             >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DropShadowEffect x:Key="shadowEffect" BlurRadius="6" Color="Black" Direction="315" Opacity=".3" RenderingBias="Performance" ShadowDepth="3" />
+
+            <Style x:Key="RotateAxisStyle90"
+            TargetType="toolkit:AxisLabel">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="toolkit:AxisLabel">
+                            <TextBlock Text="{TemplateBinding FormattedContent}" Padding="5">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="-90"/>
+                        </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="RotateAxisStyle45"
+            TargetType="toolkit:AxisLabel">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="toolkit:AxisLabel">
+                            <Canvas Height="72">
+                                <TextBlock Text="{TemplateBinding FormattedContent}" Padding="0,5,5,5" Margin="-9,0,0,0" HorizontalAlignment="Left">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="45"/>
+                        </TextBlock.LayoutTransform>
+                                </TextBlock>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="DataPointStyle"
+            TargetType="toolkit:ColumnDataPoint">
+                <Setter Property="Width"  Value="70"/>
+            </Style>
+            <Style x:Key="GooglePolylineStyle" TargetType="Polyline">
+                <Setter Property="StrokeThickness" Value="3"/>
+                <Setter Property="StrokeDashArray" Value="2 2"/>
+            </Style>
+            <Style x:Key="GoogleDataPointStyle" TargetType="toolkit:LineDataPoint">
+                <Setter Property="Background" Value="Orange"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="BorderBrush" Value="Orange"/>
+                <Setter Property="Width" Value="0" />
+                <Setter Property="Height" Value="0" />
+            </Style>
+            <Style x:Key="PieLegendStyle"
+               TargetType="toolkit:LegendItem" >
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="toolkit:LegendItem" >
+                            <StackPanel Orientation="Horizontal" >
+                                <Rectangle Width="8" Height="8" Fill="{Binding Background}" Stroke="{Binding BorderBrush}" StrokeThickness="1" Margin="0,0,3,0" />
+                                <visualization:Title Content="{TemplateBinding Content}"   />
+                                <TextBlock Text=" ("/>
+                                <TextBlock Text="{Binding DependentValue}" DataContext="{Binding DataContext}" />
+                                <TextBlock Text=")"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type customControls:PieChartLabel}" x:Key="pieChartLabelStyle">
+                <!--<Setter Property="LineStrokeThickness" Value="2"/>
+            <Setter Property="LineStroke" Value="Black"/>-->
+            </Style>
+
+            <Style x:Key="noLegendStyle"
+               TargetType="Control" >
+                <Setter Property="Width" Value="0" />
+                <Setter Property="Height" Value="0" />
+            </Style>
+
+            <Style x:Key="shadowRectangle" TargetType="Rectangle" >
+                <Setter Property="Fill" Value="White"/>
+                <Setter Property="Effect" Value="{StaticResource shadowEffect}"/>
+            </Style>
+
+            <DataTemplate DataType="{x:Type EpiDashboard:PieData}" x:Key="pieChartLabelDataTemplate">
+                <Border BorderThickness="1" BorderBrush="Gray">
+                    <Grid Canvas.ZIndex="1000" Background="White">
+                        <Rectangle Style="{StaticResource shadowRectangle}" />
+                        <Label>
+                            <Label.Content>
+                                <StackPanel Background="White" Orientation="Vertical" Grid.Column="1">
+                                    <TextBlock FontWeight="Bold" Text="{Binding IndependentValue}"/>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type customControls:PieChartLabel}}, Path=FormattedRatio}" VerticalAlignment="Center" />
+                                    <!--<TextBlock Text="- " />-->
+                                </StackPanel>
+                            </Label.Content>
+                        </Label>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <Color x:Key="Series3Color"          A="255" R="182" G="82" B="0" />
+            <Color x:Key="Series3HighlightColor" A="255" R="241" G="109" B="0" />
+
+            <Color x:Key="Series2Color"          A="255" R="115" G="11" B="23" />
+            <Color x:Key="Series2HighlightColor" A="255" R="153" G="17" B="32" />
+
+            <Color x:Key="Series1Color"          A="255" R="4" G="58" B="90" />
+            <Color x:Key="Series1HighlightColor" A="255" R="7" G="78" B="121" />
+
+            <Color x:Key="Series4Color"          A="255" R="44" G="92" B="33" />
+            <Color x:Key="Series4HighlightColor" A="255" R="59" G="124" B="45" />
+
+            <Color x:Key="Series5Color"          A="255" R="60" G="39" B="81" />
+            <Color x:Key="Series5HighlightColor" A="255" R="82" G="53" B="110" />
+
+            <Color x:Key="Series6Color"          A="255" R="137" G="101" B="45" />
+            <Color x:Key="Series6HighlightColor" A="255" R="182" G="134" B="60" />
+
+            <Color x:Key="Series7Color"          A="255" R="194" G="120" B="84" />
+            <Color x:Key="Series7HighlightColor" A="255" R="255" G="157" B="110" />
+
+            <Color x:Key="Series8Color"          A="255" R="145" G="94" B="97" />
+            <Color x:Key="Series8HighlightColor" A="255" R="191" G="124" B="127" />
+
+            <RadialGradientBrush x:Key="Series1Brush">
+                <RadialGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.09" ScaleY="1.819" />
+                        <TranslateTransform X="-0.425" Y="-0.486" />
+                    </TransformGroup>
+                </RadialGradientBrush.RelativeTransform>
+                <GradientStop Color="{StaticResource Series1HighlightColor}"/>
+                <GradientStop Color="{StaticResource Series1Color}" Offset="1"/>
+            </RadialGradientBrush>
+
+            <RadialGradientBrush x:Key="Series2Brush">
+                <RadialGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.09" ScaleY="1.819" />
+                        <TranslateTransform X="-0.425" Y="-0.486" />
+                    </TransformGroup>
+                </RadialGradientBrush.RelativeTransform>
+                <GradientStop Color="{StaticResource Series2HighlightColor}"/>
+                <GradientStop Color="{StaticResource Series2Color}" Offset="1"/>
+            </RadialGradientBrush>
+
+            <RadialGradientBrush x:Key="Series3Brush">
+                <RadialGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.09" ScaleY="1.819" />
+                        <TranslateTransform X="-0.425" Y="-0.486" />
+                    </TransformGroup>
+                </RadialGradientBrush.RelativeTransform>
+                <GradientStop Color="{StaticResource Series3HighlightColor}"/>
+                <GradientStop Color="{StaticResource Series3Color}" Offset="1"/>
+            </RadialGradientBrush>
+
+            <RadialGradientBrush x:Key="Series4Brush">
+                <RadialGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.09" ScaleY="1.819" />
+                        <TranslateTransform X="-0.425" Y="-0.486" />
+                    </TransformGroup>
+                </RadialGradientBrush.RelativeTransform>
+                <GradientStop Color="{StaticResource Series4HighlightColor}"/>
+                <GradientStop Color="{StaticResource Series4Color}" Offset="1"/>
+            </RadialGradientBrush>
+
+            <RadialGradientBrush x:Key="Series5Brush">
+                <RadialGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.09" ScaleY="1.819" />
+                        <TranslateTransform X="-0.425" Y="-0.486" />
+                    </TransformGroup>
+                </RadialGradientBrush.RelativeTransform>
+                <GradientStop Color="{StaticResource Series5HighlightColor}"/>
+                <GradientStop Color="{StaticResource Series5Color}" Offset="1"/>
+            </RadialGradientBrush>
+
+            <RadialGradientBrush x:Key="Series6Brush">
+                <RadialGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.09" ScaleY="1.819" />
+                        <TranslateTransform X="-0.425" Y="-0.486" />
+                    </TransformGroup>
+                </RadialGradientBrush.RelativeTransform>
+                <GradientStop Color="{StaticResource Series6HighlightColor}"/>
+                <GradientStop Color="{StaticResource Series6Color}" Offset="1"/>
+            </RadialGradientBrush>
+
+            <RadialGradientBrush x:Key="Series7Brush">
+                <RadialGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.09" ScaleY="1.819" />
+                        <TranslateTransform X="-0.425" Y="-0.486" />
+                    </TransformGroup>
+                </RadialGradientBrush.RelativeTransform>
+                <GradientStop Color="{StaticResource Series7HighlightColor}"/>
+                <GradientStop Color="{StaticResource Series7Color}" Offset="1"/>
+            </RadialGradientBrush>
+
+            <RadialGradientBrush x:Key="Series8Brush">
+                <RadialGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.09" ScaleY="1.819" />
+                        <TranslateTransform X="-0.425" Y="-0.486" />
+                    </TransformGroup>
+                </RadialGradientBrush.RelativeTransform>
+                <GradientStop Color="{StaticResource Series8HighlightColor}"/>
+                <GradientStop Color="{StaticResource Series8Color}" Offset="1"/>
+            </RadialGradientBrush>
+
+            <SolidColorBrush x:Key="annotationLabelColorBrush" Color="Transparent"/>          
+
+            <Style x:Key="BarSeries1Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series1Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->                
+            </Style>
+
+            <Style x:Key="BarSeries2Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series2Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->                
+            </Style>
+
+            <Style x:Key="BarSeries3Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series3Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->                
+            </Style>
+
+            <Style x:Key="BarSeries4Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series4Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+            <Style x:Key="BarSeries5Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series5Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+            <Style x:Key="BarSeries6Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series6Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+            <Style x:Key="BarSeries7Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series7Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+            <Style x:Key="BarSeries8Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series8Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+
+
+            <Style x:Key="ColumnSeries1Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series1Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+            <Style x:Key="ColumnSeries2Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series2Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+            <Style x:Key="ColumnSeries3Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series3Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+            <Style x:Key="ColumnSeries4Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series4Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+            <Style x:Key="ColumnSeries5Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series5Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+            <Style x:Key="ColumnSeries6Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series6Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+            <Style x:Key="ColumnSeries7Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series7Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+            <Style x:Key="ColumnSeries8Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series8Brush}" />
+                <Setter Property="BorderThickness" Value="1"></Setter>
+                <!--<Setter Property="Effect" Value="{StaticResource shadowEffect}"/>-->
+            </Style>
+
+            <Style x:Key="PieSeries1Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series1Brush}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="IsTabStop" Value="False" />
+            </Style>
+
+            <Style x:Key="PieSeries2Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series2Brush}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="IsTabStop" Value="False" />
+            </Style>
+
+            <Style x:Key="PieSeries3Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series3Brush}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="IsTabStop" Value="False" />
+            </Style>
+
+            <Style x:Key="PieSeries4Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series4Brush}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="IsTabStop" Value="False" />
+            </Style>
+
+            <Style x:Key="PieSeries5Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series5Brush}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="IsTabStop" Value="False" />
+            </Style>
+
+            <Style x:Key="PieSeries6Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series6Brush}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="IsTabStop" Value="False" />
+            </Style>
+
+            <Style x:Key="PieSeries7Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series7Brush}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="IsTabStop" Value="False" />
+            </Style>
+
+            <Style x:Key="PieSeries8Style" TargetType="Control">
+                <Setter Property="Background" Value="{StaticResource Series8Brush}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="IsTabStop" Value="False" />
+            </Style>
+
+            <Style x:Key="axisLabelStyle" TargetType="Control">
+                <Setter Property="FontStyle" Value="Normal"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Style>
+
+            <visualization:ResourceDictionaryCollection x:Key="defaultColumnPalette">
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource ColumnSeries1Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource ColumnSeries2Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource ColumnSeries3Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource ColumnSeries4Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource ColumnSeries5Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource ColumnSeries6Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource ColumnSeries7Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource ColumnSeries8Style}" TargetType="Control" />
+                </ResourceDictionary>
+            </visualization:ResourceDictionaryCollection>
+
+
+            <visualization:ResourceDictionaryCollection x:Key="defaultPiePalette">
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource PieSeries1Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource PieSeries2Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource PieSeries3Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource PieSeries4Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource PieSeries5Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource PieSeries6Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource PieSeries7Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource PieSeries8Style}" TargetType="Control" />
+                </ResourceDictionary>
+            </visualization:ResourceDictionaryCollection>
+
+
+
+            <visualization:ResourceDictionaryCollection x:Key="defaultBarPalette">
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource BarSeries1Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource BarSeries2Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource BarSeries3Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource BarSeries4Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource BarSeries5Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource BarSeries6Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource BarSeries7Style}" TargetType="Control" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <Style x:Key="DataPointStyle" BasedOn="{StaticResource BarSeries8Style}" TargetType="Control" />
+                </ResourceDictionary>
+            </visualization:ResourceDictionaryCollection>
+
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid>        
+        <Controls:ShadowRectangle x:Name="rectangleShadow" />
+        <Border Name="borderAll" Style="{DynamicResource mainGadgetBorder}" Background="White" >
+            <Grid x:Name="grdMain">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="6" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="6" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="6" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsFilterButtonAvailable="False" Text="Chart" />
+                <Controls:GadgetMessagePanel Margin="5" x:Name="messagePanel" Grid.Row="2" Text="" />
+                <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
+
+                <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{DynamicResource gadgetWaitPanelStyle}" />
+                <Grid Name="grdChart" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="6">
+                      <StackPanel x:Name="pnlMain" Background="White" Visibility="Collapsed" ContextMenuService.IsEnabled="True">
+                            <StackPanel.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem x:Name="mnuLabel" Header="Set/Change Labels"/>
+                                    <Separator/>
+                                    <MenuItem x:Name="mnuSave" Header="Save chart as image..."/>
+                                    <MenuItem x:Name="mnuCopy" Header="Copy to clipboard"/>
+                                    <MenuItem x:Name="mnuPrint" Header="Print..."/>
+                                    <Separator/>
+                                    <MenuItem x:Name="mnuSendToBack" Header="Send chart to back"/>
+                                    <MenuItem x:Name="mnuRefresh" Header="Refresh chart">
+                                        <MenuItem.Icon>
+                                            <Image Source="Images/refresh1.png" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem x:Name="mnuClose" Header="Close chart"/>
+                                </ContextMenu>
+                            </StackPanel.ContextMenu>
+                        </StackPanel>
+                    </Grid>
+
+                <StackPanel Grid.Row="1" Grid.RowSpan="10" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" >
+                    <Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" >
+                        <Rectangle Style="{DynamicResource rectangleConfigOuter}" />
+                        <Rectangle Style="{DynamicResource rectangleConfigInner}" />
+
+                        <Path x:Name="pathTriangle" 
+                              Margin="0,-2,90,0"
+                              Data="M 5 0 L 10 10 0 10 Z" Fill="{DynamicResource gadgetBackgroundBrush}" IsHitTestVisible="False" HorizontalAlignment="Right" VerticalAlignment="Top" Height="7" />
+
+                        <TextBlock x:Name="ConfigCollapsedTitle" TextAlignment="Center" Text="Chart Properties" Margin="30.331,15.069,29.669,0" FontWeight="Bold"
+                       Height="16" VerticalAlignment="Top" RenderTransformOrigin="0.501,1.017" Visibility="Collapsed" />
+                        <StackPanel Orientation="Vertical" Margin="12,12,12,12" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                            <TextBlock x:Name="tblockProperties" HorizontalAlignment="Center" TextAlignment="Center" Text="Chart Properties" Margin="0,0,0,5" FontWeight="Bold" />
+                            <TextBlock x:Name="tblockChartType" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart Type:" Margin="0,5,0,0"  />
+                            <ComboBox x:Name="cbxChartType" HorizontalAlignment="Left" Width="140"  SelectedIndex="0" >
+                                <ComboBoxItem Content="Epi Curve" />
+                                <ComboBoxItem Content="Scatter" />
+                                <ComboBoxItem Content="Stacked Column" />
+                                <ComboBoxItem Content="Bar" />
+                                <ComboBoxItem Content="Column" />
+                                <ComboBoxItem Content="Line" />
+                                <ComboBoxItem Content="Pie" />
+                                <ComboBoxItem Content="Pareto" />
+                            </ComboBox>
+                            <StackPanel Name="pnlEpiCurveConfig">
+                                <TextBlock x:Name="tblockOnsetDateField" HorizontalAlignment="Left" TextAlignment="Center" Text="Onset Date Field:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxDateField" HorizontalAlignment="Left" Width="140" SelectedIndex="0" />
+                                <TextBlock x:Name="tblockCaseStatusField" HorizontalAlignment="Left" TextAlignment="Center" Text="Case Status Field:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxCaseStatusField" HorizontalAlignment="Left" Width="140" SelectedIndex="0" />
+
+                                <TextBlock x:Name="tblockDateInterval" HorizontalAlignment="Left" TextAlignment="Center" Text="Date Interval:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxDateInterval" HorizontalAlignment="Left" Width="140" SelectedIndex="0">
+                                    <ComboBoxItem>Days</ComboBoxItem>
+                                    <ComboBoxItem>Hours</ComboBoxItem>
+                                    <ComboBoxItem>Months</ComboBoxItem>
+                                    <ComboBoxItem>Years</ComboBoxItem>
+                                </ComboBox>
+
+                                <TextBlock x:Name="tblockXAxisLabelRotation" HorizontalAlignment="Left" TextAlignment="Center" Text="x-axis label rotation:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxXAxisLabelRotation" HorizontalAlignment="Left" Width="65" SelectedIndex="2">
+                                    <ComboBoxItem>0</ComboBoxItem>
+                                    <ComboBoxItem>45</ComboBoxItem>
+                                    <ComboBoxItem>90</ComboBoxItem>
+                                </ComboBox>
+
+                                <TextBlock x:Name="textXAxisStartValue" HorizontalAlignment="Left" TextAlignment="Center" Text="x-axis start value:" Margin="0,5,0,0"  />
+                                <TextBox x:Name="txtXAxisStartValue" Margin="0,5,0,0"/>
+                                <TextBlock x:Name="textXAxisEndValue" HorizontalAlignment="Left" TextAlignment="Center" Text="x-axis end value:" Margin="0,5,0,0"  />
+                                <TextBox x:Name="txtXAxisEndValue" Margin="0,5,0,0"/>
+                            </StackPanel>
+                            <StackPanel Name="pnlSingleConfig" Visibility="Collapsed">
+                                <TextBlock x:Name="tblockPrimaryField" HorizontalAlignment="Left" TextAlignment="Center" Text="Primary Field:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxSingleField" HorizontalAlignment="Left" Width="140" SelectedIndex="0" />
+                                <TextBlock x:Name="tblockWeightField" HorizontalAlignment="Left" TextAlignment="Center" Text="Weight Field:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxWeightField" HorizontalAlignment="Left" Width="140" SelectedIndex="0" />
+                                <TextBlock x:Name="tblockStrataField"  HorizontalAlignment="Left" TextAlignment="Center" Text="Stratify By:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxStrataField" HorizontalAlignment="Left" Width="140" SelectedIndex="0" />
+                                <TextBlock x:Name="tblockChartSize" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart size:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxChartSize" HorizontalAlignment="Left" Width="140" SelectedIndex="0" />
+
+                                <TextBlock x:Name="tblockCustomWidth" Visibility="Collapsed" HorizontalAlignment="Left" TextAlignment="Center" Text="Width:" Margin="0,5,0,0"  />
+                                <TextBox x:Name="txtCustomWidth" Visibility="Collapsed" />
+                                <TextBlock x:Name="tblockCustomHeight" Visibility="Collapsed" HorizontalAlignment="Left" TextAlignment="Center" Text="Height:" Margin="0,5,0,0"  />
+                                <TextBox x:Name="txtCustomHeight" Visibility="Collapsed" />
+                                
+                                <CheckBox x:Name="checkboxAllValues" Margin="0,5,0,0" Content="Display all list values"  HorizontalAlignment="Left" IsEnabled="false"/>
+                            </StackPanel>
+                            <StackPanel Name="pnlStackedColumnConfig" Visibility="Collapsed">
+                                <TextBlock x:Name="tblockStackedXField" HorizontalAlignment="Left" TextAlignment="Center" Text="X-Axis Field:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxColumnXAxisField" HorizontalAlignment="Left" Width="140" SelectedIndex="0" />
+                                <TextBlock x:Name="tblockStackedOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Outcome Field:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxColumnYAxisField" HorizontalAlignment="Left" Width="140" SelectedIndex="0" />
+                                <TextBlock x:Name="tblockAggregate" HorizontalAlignment="Left" TextAlignment="Center" Text="Aggregate Function:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxColumnAggregateFunc" HorizontalAlignment="Left" Width="140" SelectedIndex="0">
+                                    <ComboBoxItem Content="Count"/>
+                                    <ComboBoxItem Content="Count %"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Name="pnlScatterConfig" Visibility="Collapsed">
+                                <TextBlock x:Name="tblockScatterXField" HorizontalAlignment="Left" TextAlignment="Center" Text="X-Axis Field:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxScatterXAxisField" HorizontalAlignment="Left" Width="140" SelectedIndex="0" />
+                                <TextBlock x:Name="tblockScatterOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Outcome Field:" Margin="0,5,0,0"  />
+                                <ComboBox x:Name="cbxScatterYAxisField" HorizontalAlignment="Left" Width="140" SelectedIndex="0" />
+                            </StackPanel>
+                            <StackPanel Name="pnlGenericOptionsConfig" Visibility="Visible">
+                                <CheckBox x:Name="checkboxShowHorizontalGridLines" IsChecked="True" Content="Show grid lines" Margin="0,5,0,0" />
+                            </StackPanel>
+                            <Button x:Name="btnRun" Margin="0,15,0,0" Click="btnRun_Click">Generate Chart</Button>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+
+            </Grid>
+        </Border>        
+    </Grid>
+</EpiDashboard:GadgetBase>

@@ -1,0 +1,978 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{25C3FD50-2315-4129-AB2B-E8CD4EE33C22}</ProjectGuid>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Analysis</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Epi.Analysis</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>Epi.Windows.Analysis.EntryPoint</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\Build\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>..\build\debug\Analysis.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>Analysis</AssemblyName>
+    <RootNamespace>Epi.Analysis</RootNamespace>
+    <ApplicationIcon>EpiInfoP.ico</ApplicationIcon>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\build\release\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\build\release\Analysis.XML</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>Analysis</AssemblyName>
+    <RootNamespace>Epi.Analysis</RootNamespace>
+    <ApplicationIcon>EpiInfoP.ico</ApplicationIcon>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\build\linux\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\linux\Analysis.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug %28Exclude EpiMap%29|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug %28Exclude EpiMap%29\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\debug\Analysis.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Epi.Enter.ServiceApplication\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\debug\Analysis.xml</DocumentationFile>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\build\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Linux\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug %28Exclude EpiMap%29|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug %28Exclude EpiMap%29\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Epi.Enter.ServiceApplication\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalithaLib, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Epi.Core\CalithaLib.dll</HintPath>
+    </Reference>
+    <Reference Include="GoldParserEngine, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Epi.Core\GoldParserEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Design">
+      <Name>System.Design</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\Epi.Core.Interpreter\Epi.Core.AnalysisInterpreter.csproj">
+      <Project>{D8486FD0-2C53-4AED-92DB-347F081FE0AB}</Project>
+      <Name>Epi.Core.AnalysisInterpreter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
+      <Project>{EBD2B961-A952-4670-96CA-50BAA12C7F29}</Project>
+      <Name>Epi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Data.Office\Epi.Data.Office.csproj">
+      <Project>{80BCBF83-6ED7-414E-97AB-F8E2972C8600}</Project>
+      <Name>Epi.Data.Office</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Data.SqlServer\Epi.Data.SqlServer.csproj">
+      <Project>{1B1FDCFE-78E1-487C-9168-C9FEE18AD936}</Project>
+      <Name>Epi.Data.SqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows\Epi.Windows.csproj">
+      <Name>Epi.Windows</Name>
+      <Project>{D120296B-493B-46AC-8657-4D32A9604231}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\EpiInfoPlugin\EpiInfo.Plugin.csproj">
+      <Project>{20C12C97-52CE-45C3-B563-3C15330C2A98}</Project>
+      <Name>EpiInfo.Plugin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="AnalysisEngine.cs" />
+    <Compile Include="Controls\OpenProjectBasedPgm.Designer.cs">
+      <DependentUpon>OpenProjectBasedPgm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProjectBasedPgm.Designer.cs">
+      <DependentUpon>ProjectBasedPgm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AssignDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AssignDialog.Designer.cs">
+      <DependentUpon>AssignDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\BeepDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BeepDialog.Designer.cs">
+      <DependentUpon>BeepDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\BookmarkDialog.Designer.cs">
+      <DependentUpon>BookmarkDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\BuildKeyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BuildKeyDialog.Designer.cs">
+      <DependentUpon>BuildKeyDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CancelSelectDialog.Designer.cs">
+      <DependentUpon>CancelSelectDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CancelSortDialog.Designer.cs">
+      <DependentUpon>CancelSortDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CloseoutDialog.Designer.cs">
+      <DependentUpon>CloseoutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CommandDesignDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CommandDesignDialog.Designer.cs">
+      <DependentUpon>CommandDesignDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\UserCommandDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UserCommandDialog.Designer.cs">
+      <DependentUpon>UserCommandDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DefineUserCommandDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DefineUserCommandDialog.Designer.cs">
+      <DependentUpon>DefineUserCommandDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\GridListDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GridListDialog.Designer.cs">
+      <DependentUpon>GridListDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ReadDataSourceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ReadDataSourceDialog.Designer.cs">
+      <DependentUpon>ReadDataSourceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\GraphDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GraphDialog.Designer.cs">
+      <DependentUpon>GraphDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CSFrequencyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CSFrequencyDialog.Designer.cs">
+      <DependentUpon>CSFrequencyDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CSMeansDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CSMeansDialog.Designer.cs">
+      <DependentUpon>CSMeansDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CSTablesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CSTablesDialog.Designer.cs">
+      <DependentUpon>CSTablesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\KaplanMeierSurvivalDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\KaplanMeierSurvivalDialog.designer.cs">
+      <DependentUpon>KaplanMeierSurvivalDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\LogisticRegressionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\LogisticRegressionDialog.Designer.cs">
+      <DependentUpon>LogisticRegressionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CoxProportionalHazardsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CoxProportionalHazardsDialog.Designer.cs">
+      <DependentUpon>CoxProportionalHazardsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\LinearRegressionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\LinearRegressionDialog.Designer.cs">
+      <DependentUpon>LinearRegressionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ReportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ReportDialog.Designer.cs">
+      <DependentUpon>ReportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DefineVariableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DefineVariableDialog.Designer.cs">
+      <DependentUpon>DefineVariableDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DialogBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DialogBase.Designer.cs">
+      <DependentUpon>DialogBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DialogDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DialogDialog.Designer.cs">
+      <DependentUpon>DialogDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DialogListDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DialogListDialog.Designer.cs">
+      <DependentUpon>DialogListDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ExecuteDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ExecuteDialog.Designer.cs">
+      <DependentUpon>ExecuteDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\HeaderoutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\HeaderoutDialog.Designer.cs">
+      <DependentUpon>HeaderoutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\HelpDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\HelpDialog.Designer.cs">
+      <DependentUpon>HelpDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\QuitDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\QuitDialog.Designer.cs">
+      <DependentUpon>QuitDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RunSavedPGMDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RunSavedPGMDialog.Designer.cs">
+      <DependentUpon>RunSavedPGMDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\StoringOutputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\StoringOutputDialog.Designer.cs">
+      <DependentUpon>StoringOutputDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CoxPHGraphOptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CoxPHGraphOptionsDialog.Designer.cs">
+      <DependentUpon>CoxPHGraphOptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TypeoutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\TypeoutDialog.Designer.cs">
+      <DependentUpon>TypeoutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CreateNewDSNDialog.Designer.cs">
+      <DependentUpon>CreateNewDSNDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DefineGroupDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DefineGroupDialog.Designer.cs">
+      <DependentUpon>DefineGroupDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DeleteFileTableDialog.Designer.cs">
+      <DependentUpon>DeleteFileTableDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DeleteRecordsDialog.Designer.cs">
+      <DependentUpon>DeleteRecordsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DisplayDialog.Designer.cs">
+      <DependentUpon>DisplayDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FrequencyDialog.Designer.cs">
+      <DependentUpon>FrequencyDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\IfDialog.Designer.cs">
+      <DependentUpon>IfDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ListDialog.Designer.cs">
+      <DependentUpon>ListDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\MatchDialog.Designer.cs">
+      <DependentUpon>MatchDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\MeansDialog.Designer.cs">
+      <DependentUpon>MeansDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\MergeDialog.Designer.cs">
+      <DependentUpon>MergeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PgmDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\pgmDialog.Designer.cs">
+      <DependentUpon>PgmDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PrintoutDialog.Designer.cs">
+      <DependentUpon>PrintoutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ReadDialog.Designer.cs">
+      <DependentUpon>ReadDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RecodeDialog.Designer.cs">
+      <DependentUpon>RecodeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RelateDialog.Designer.cs">
+      <DependentUpon>RelateDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RouteoutDialog.Designer.cs">
+      <DependentUpon>RouteoutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SelectDialog.Designer.cs">
+      <DependentUpon>SelectDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SelectDSNDialog.Designer.cs">
+      <DependentUpon>SelectDSNDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SetDialog.Designer.cs">
+      <DependentUpon>SetDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SortDialog.Designer.cs">
+      <DependentUpon>SortDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SummarizeDialog.Designer.cs">
+      <DependentUpon>SummarizeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TablesDialog.Designer.cs">
+      <DependentUpon>TablesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\UndefineVariableDialog.Designer.cs">
+      <DependentUpon>UndefineVariableDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\UndeleteRecordsDialog.Designer.cs">
+      <DependentUpon>UndeleteRecordsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ViewOutputFiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ViewOutputFiles.Designer.cs">
+      <DependentUpon>ViewOutputFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WaitDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WaitDialog.Designer.cs">
+      <DependentUpon>WaitDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WriteDialog.Designer.cs">
+      <DependentUpon>WriteDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EntryPoint.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="FileBasedPGM.cs" />
+    <Compile Include="Forms\AnalysisWindowsModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forms\AnalysisMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AnalysisMainForm.Designer.cs">
+      <DependentUpon>AnalysisMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CommandExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CommandExplorer.Designer.cs">
+      <DependentUpon>CommandExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Event\OutputEventArg.cs" />
+    <Compile Include="Forms\CommandBlock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CommandBlock.Designer.cs">
+      <DependentUpon>CommandBlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DataGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataGridForm.Designer.cs">
+      <DependentUpon>DataGridForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OutputWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OutputWindow.Designer.cs">
+      <DependentUpon>OutputWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Event\OutputEventQueue.IAnalysisCheckCode.cs" />
+    <Compile Include="Forms\ProgramEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProgramEditor.Designer.cs">
+      <DependentUpon>ProgramEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HeaderLevel.cs" />
+    <Compile Include="PGM.cs" />
+    <Compile Include="ProjectBasedPGM.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\OpenProjectBasedPgm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ProjectBasedPgm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BookmarkDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CancelSelectDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CancelSortDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CloseoutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CreateNewDSNDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DeleteFileTableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DeleteRecordsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DisplayDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FrequencyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IfDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ListDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\MatchDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\MeansDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\MergeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PrintoutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ReadDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RecodeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RelateDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RouteoutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SelectDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SelectDSNDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SetDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SortDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SummarizeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\TablesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UndefineVariableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UndeleteRecordsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WriteDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="EpiInfoP.ico" />
+    <EmbeddedResource Include="Controls\OpenProjectBasedPgm.resx">
+      <DependentUpon>OpenProjectBasedPgm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProjectBasedPgm.resx">
+      <DependentUpon>ProjectBasedPgm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AssignDialog.resx">
+      <DependentUpon>AssignDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BeepDialog.resx">
+      <DependentUpon>BeepDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BookmarkDialog.resx">
+      <DependentUpon>BookmarkDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BuildKeyDialog.resx">
+      <DependentUpon>BuildKeyDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CancelSelectDialog.resx">
+      <DependentUpon>CancelSelectDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CancelSortDialog.resx">
+      <DependentUpon>CancelSortDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CloseoutDialog.resx">
+      <DependentUpon>CloseoutDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CommandDesignDialog.resx">
+      <DependentUpon>CommandDesignDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UserCommandDialog.resx">
+      <DependentUpon>UserCommandDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DefineUserCommandDialog.resx">
+      <DependentUpon>DefineUserCommandDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GridListDialog.resx">
+      <DependentUpon>GridListDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ReadDataSourceDialog.resx">
+      <DependentUpon>ReadDataSourceDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GraphDialog.resx">
+      <DependentUpon>GraphDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CSFrequencyDialog.resx">
+      <DependentUpon>CSFrequencyDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CSMeansDialog.resx">
+      <DependentUpon>CSMeansDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CSTablesDialog.resx">
+      <DependentUpon>CSTablesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\KaplanMeierSurvivalDialog.resx">
+      <DependentUpon>KaplanMeierSurvivalDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\LogisticRegressionDialog.resx">
+      <DependentUpon>LogisticRegressionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CoxProportionalHazardsDialog.resx">
+      <DependentUpon>CoxProportionalHazardsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\LinearRegressionDialog.resx">
+      <DependentUpon>LinearRegressionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ReportDialog.resx">
+      <DependentUpon>ReportDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DefineVariableDialog.resx">
+      <DependentUpon>DefineVariableDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DialogBase.resx">
+      <DependentUpon>DialogBase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DialogDialog.resx">
+      <DependentUpon>DialogDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DialogListDialog.resx">
+      <DependentUpon>DialogListDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ExecuteDialog.resx">
+      <DependentUpon>ExecuteDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\HeaderoutDialog.resx">
+      <DependentUpon>HeaderoutDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\HelpDialog.resx">
+      <DependentUpon>HelpDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\QuitDialog.resx">
+      <DependentUpon>QuitDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RunSavedPGMDialog.resx">
+      <DependentUpon>RunSavedPGMDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\StoringOutputDialog.resx">
+      <DependentUpon>StoringOutputDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CoxPHGraphOptionsDialog.resx">
+      <DependentUpon>CoxPHGraphOptionsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\TypeoutDialog.resx">
+      <DependentUpon>TypeoutDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CreateNewDSNDialog.resx">
+      <DependentUpon>CreateNewDSNDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DefineGroupDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DefineGroupDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DeleteFileTableDialog.resx">
+      <DependentUpon>DeleteFileTableDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DeleteRecordsDialog.resx">
+      <DependentUpon>DeleteRecordsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DisplayDialog.resx">
+      <DependentUpon>DisplayDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FrequencyDialog.resx">
+      <DependentUpon>FrequencyDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IfDialog.resx">
+      <DependentUpon>IfDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ListDialog.resx">
+      <DependentUpon>ListDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\MatchDialog.resx">
+      <DependentUpon>MatchDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\MeansDialog.resx">
+      <DependentUpon>MeansDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\MergeDialog.resx">
+      <DependentUpon>MergeDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PgmDialog.resx">
+      <DependentUpon>PgmDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PrintoutDialog.resx">
+      <DependentUpon>PrintoutDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ReadDialog.resx">
+      <DependentUpon>ReadDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RecodeDialog.resx">
+      <DependentUpon>RecodeDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RelateDialog.resx">
+      <DependentUpon>RelateDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RouteoutDialog.resx">
+      <DependentUpon>RouteoutDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SelectDialog.resx">
+      <DependentUpon>SelectDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SelectDSNDialog.resx">
+      <DependentUpon>SelectDSNDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SetDialog.resx">
+      <DependentUpon>SetDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SortDialog.resx">
+      <DependentUpon>SortDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SummarizeDialog.resx">
+      <DependentUpon>SummarizeDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\TablesDialog.resx">
+      <DependentUpon>TablesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UndefineVariableDialog.resx">
+      <DependentUpon>UndefineVariableDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UndeleteRecordsDialog.resx">
+      <DependentUpon>UndeleteRecordsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ViewOutputFiles.resx">
+      <DependentUpon>ViewOutputFiles.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WaitDialog.resx">
+      <DependentUpon>WaitDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WriteDialog.resx">
+      <DependentUpon>WriteDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AnalysisMainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AnalysisMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommandExplorer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CommandExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommandBlock.resx">
+      <DependentUpon>CommandBlock.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataGridForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DataGridForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OutputWindow.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OutputWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgramEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProgramEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+    <Content Include="TestCases\AggregateStatistics.txt" />
+    <Content Include="TestCases\Histogram.txt" />
+    <Content Include="TestCases\Graph.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+    <ProjectGuid>{25C3FD50-2315-4129-AB2B-E8CD4EE33C22}</ProjectGuid>
+    <RootNamespace>Epi.Analysis</RootNamespace>
+  </PropertyGroup>
+</Project>

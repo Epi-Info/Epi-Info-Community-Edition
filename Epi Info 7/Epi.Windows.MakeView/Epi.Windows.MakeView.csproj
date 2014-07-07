@@ -1,0 +1,1466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C646CC38-C861-4E7C-8158-B2AAA0D90E01}</ProjectGuid>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>MakeView</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Epi.Windows.MakeView</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>Epi.Windows.MakeView.EntryPoint</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\Build\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;DEBUG;PHIN_VS</DefineConstants>
+    <DocumentationFile>..\build\Debug\MakeView.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>1591</NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>MakeView</AssemblyName>
+    <RootNamespace>Epi.Windows.MakeView</RootNamespace>
+    <ApplicationIcon>epi2000b.ico</ApplicationIcon>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\build\release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;PHIN_VS</DefineConstants>
+    <DocumentationFile>..\build\release\MakeView.XML</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>MakeView</AssemblyName>
+    <RootNamespace>Epi.Windows.MakeView</RootNamespace>
+    <ApplicationIcon>epi2000b.ico</ApplicationIcon>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\build\linux\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\linux\MakeView.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug %28Exclude EpiMap%29|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug %28Exclude EpiMap%29\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\Debug\MakeView.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Epi.Enter.ServiceApplication\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PHIN_VS</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\Debug\MakeView.xml</DocumentationFile>
+    <FileAlignment>4096</FileAlignment>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\build\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Linux\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug %28Exclude EpiMap%29|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug %28Exclude EpiMap%29\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Epi.Enter.ServiceApplication\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalithaLib, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Epi.Core\CalithaLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Epi.Web.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Web\Epi.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="GoldParserEngine, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Epi.Core\GoldParserEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Microsoft.NET\Primary Interop Assemblies\Microsoft.mshtml.dll</HintPath>
+    </Reference>
+    <Reference Include="PortableDevices, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>PortableDeviceApi\PortableDevices.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Design">
+      <Name>System.Design</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\SetNotRequiredDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\SetNotRequiredDialog.designer.cs">
+      <DependentUpon>SetNotRequiredDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SupportedFieldTypeAndroidDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SupportedFieldTypeAndroidDialog.Designer.cs">
+      <DependentUpon>SupportedFieldTypeAndroidDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CopyToAndroid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CopyToAndroid.Designer.cs">
+      <DependentUpon>CopyToAndroid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\InputGuidDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\InputGuidDialog.Designer.cs">
+      <DependentUpon>InputGuidDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\OrgKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\OrgKey.designer.cs">
+      <DependentUpon>OrgKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WebSurveyOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WebSurveyOptions.designer.cs">
+      <DependentUpon>WebSurveyOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MakeViewMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MakeViewMainForm.designer.cs">
+      <DependentUpon>MakeViewMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SurveyManagerService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\ServiceClient.cs" />
+    <Content Include="App.ico" />
+    <Content Include="Forms\CheckCodeEditor\CheckCodeHelp.txt" />
+    <Content Include="labelAlignHorizontal.bmp" />
+    <Content Include="labelAlignVertical.bmp" />
+    <Content Include="PortableDeviceApi\PortableDevices.dll" />
+    <Content Include="portraitLetter.bmp" />
+    <Content Include="Resources\1368066021_agt_web.png" />
+    <Content Include="Web\Epi.Web.Common.dll" />
+    <Content Include="Web\Epi.Web.Interfaces.dll" />
+    <None Include="Resources\Publish.png" />
+    <None Include="Resources\Android_Robot_100.png" />
+    <None Include="Service References\SurveyManagerService\SurveyManagerService.disco" />
+    <None Include="Service References\SurveyManagerService\configuration91.svcinfo" />
+    <None Include="Service References\SurveyManagerService\configuration.svcinfo" />
+    <None Include="Service References\SurveyManagerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
+    <None Include="Resources\ExitCheckmark.png" />
+    <Content Include="Resources\imageControlIcon.bmp" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
+    <None Include="Resources\mail-send.png" />
+    <None Include="Resources\android_icon.png" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Dialogs\FieldDefinitionDialogs\epi2000c.ico" />
+    <None Include="Resources\download_FTP_00.gif" />
+    <None Include="Resources\database.bmp" />
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Delegates\Delegates.cs" />
+    <Compile Include="Delegates\FieldControlEventArgs.cs" />
+    <Compile Include="Dialogs\AssignDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AssignDialog.Designer.cs">
+      <DependentUpon>AssignDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AssignVariableToMirrorFieldDialog.Designer.cs">
+      <DependentUpon>AssignVariableToMirrorFieldDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\BeepDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BeepDialog.Designer.cs">
+      <DependentUpon>BeepDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\AutoSearchDialog.Designer.cs">
+      <DependentUpon>AutoSearchDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\BackgroundDialog.Designer.cs">
+      <DependentUpon>BackgroundDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\CheckCodeDesignDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\ClearDialog.Designer.cs">
+      <DependentUpon>ClearDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\CallDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\CallDialog.Designer.cs">
+      <DependentUpon>CallDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\SetRequiredDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\SetRequiredDialog.Designer.cs">
+      <DependentUpon>SetRequiredDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\UnhighlightDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\UnhighlightDialog.Designer.cs">
+      <DependentUpon>UnhighlightDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\HighlightDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\HighlightDialog.Designer.cs">
+      <DependentUpon>HighlightDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\EnableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\EnableDialog.Designer.cs">
+      <DependentUpon>EnableDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\DisableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\DisableDialog.Designer.cs">
+      <DependentUpon>DisableDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\GeocodeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\GeocodeDialog.Designer.cs">
+      <DependentUpon>GeocodeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\NewRecordDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\NewRecordDialog.Designer.cs">
+      <DependentUpon>NewRecordDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\VariableAssignmentDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\VariableAssignmentDialog.Designer.cs">
+      <DependentUpon>VariableAssignmentDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\VariableDefinitionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\VariableDefinitionDialog.Designer.cs">
+      <DependentUpon>VariableDefinitionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CodesDialog.Designer.cs">
+      <DependentUpon>CodesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\GetSurveyLink.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GetSurveyLink.designer.cs">
+      <DependentUpon>GetSurveyLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\NewColunmNameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\NewColunmNameDialog.Designer.cs">
+      <DependentUpon>NewColunmNameDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PublishMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PublishMode.designer.cs">
+      <DependentUpon>PublishMode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RenameTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RenameTemplate.designer.cs">
+      <DependentUpon>RenameTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RenameFormFromTemplateDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RenameFormFromTemplateDialog.Designer.cs">
+      <DependentUpon>RenameFormFromTemplateDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ListDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ListDialog.Designer.cs">
+      <DependentUpon>ListDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\ListFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\ListFieldDefinition.Designer.cs">
+      <DependentUpon>ListFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\MatchFieldsDialog.Designer.cs">
+      <DependentUpon>MatchFieldsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CommandDesignDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CommandDesignDialog.Designer.cs">
+      <DependentUpon>CommandDesignDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CommentLegalDialog.Designer.cs">
+      <DependentUpon>CommentLegalDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AddTemplateDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AddTemplateDialog.designer.cs">
+      <DependentUpon>AddTemplateDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AddProjectTemplateDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AddProjectTemplateDialog.designer.cs">
+      <DependentUpon>AddProjectTemplateDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DefineVariableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DefineVariableDialog.Designer.cs">
+      <DependentUpon>DefineVariableDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DialogDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DialogDialog.Designer.cs">
+      <DependentUpon>DialogDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DialogListDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DialogListDialog.Designer.cs">
+      <DependentUpon>DialogListDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\GroupFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\GroupFieldDefinition.designer.cs">
+      <DependentUpon>GroupFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\GUIDFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\GUIDFieldDefinition.Designer.cs">
+      <DependentUpon>GUIDFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\HelpDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\HelpDialog.Designer.cs">
+      <DependentUpon>HelpDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PageSetupDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PageSetupDialog.designer.cs">
+      <DependentUpon>PageSetupDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PreviewTableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PreviewTableDialog.Designer.cs">
+      <DependentUpon>PreviewTableDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CopyViewDialog.Designer.cs">
+      <DependentUpon>CopyViewDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CreateEditDialog.Designer.cs">
+      <DependentUpon>CreateEditDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CreateViewDialog.Designer.cs">
+      <DependentUpon>CreateViewDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\DialogConfigDialog.Designer.cs">
+      <DependentUpon>DialogConfigDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\ExecuteDialog.Designer.cs">
+      <DependentUpon>ExecuteDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\CheckBoxFieldDefinition.Designer.cs">
+      <DependentUpon>CheckBoxFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\CommandButtonFieldDefinition.Designer.cs">
+      <DependentUpon>CommandButtonFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\ContiguousFieldDefinition.Designer.cs">
+      <DependentUpon>ContiguousFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\DateFieldDefinition.Designer.cs">
+      <DependentUpon>DateFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\DateTimeFieldDefinition.Designer.cs">
+      <DependentUpon>DateTimeFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\FieldDefinition.Designer.cs">
+      <DependentUpon>FieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\GenericFieldDefinition.Designer.cs">
+      <DependentUpon>GenericFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\ImageFieldDefinition.Designer.cs">
+      <DependentUpon>ImageFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\LabelFieldDefinition.Designer.cs">
+      <DependentUpon>LabelFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\MultilineTextFieldDefinition.Designer.cs">
+      <DependentUpon>MultilineTextFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\NumberFieldDefinition.Designer.cs">
+      <DependentUpon>NumberFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\PatternableTextFieldDefinition.Designer.cs">
+      <DependentUpon>PatternableTextFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\PhoneNumberFieldDefinition.Designer.cs">
+      <DependentUpon>PhoneNumberFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\SingleLineTextFieldDefinition.Designer.cs">
+      <DependentUpon>SingleLineTextFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\TextFieldDefinition.Designer.cs">
+      <DependentUpon>TextFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\TimeFieldDefinition.Designer.cs">
+      <DependentUpon>TimeFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\UpperCaseTextFieldDefinition.Designer.cs">
+      <DependentUpon>UpperCaseTextFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\YesNoFieldDefinition.Designer.cs">
+      <DependentUpon>YesNoFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldSelectionDialog.Designer.cs">
+      <DependentUpon>FieldSelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\GoToDialog.Designer.cs">
+      <DependentUpon>GoToDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\GridColumnsDialog.Designer.cs">
+      <DependentUpon>GridColumnsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\GridSettingsDialog.Designer.cs">
+      <DependentUpon>GridSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\HelpConfigDialog.Designer.cs">
+      <DependentUpon>HelpConfigDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\HideDialog.Designer.cs">
+      <DependentUpon>HideDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\IfClauseDialog.Designer.cs">
+      <DependentUpon>IfClauseDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ImportCheckCodeDialog.Designer.cs">
+      <DependentUpon>ImportCheckCodeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\LegalValuesDialog.Designer.cs">
+      <DependentUpon>LegalValuesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\OptionFieldItemsDialogs.Designer.cs">
+      <DependentUpon>OptionFieldItemsDialogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\QuitDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\QuitDialog.Designer.cs">
+      <DependentUpon>QuitDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ReadDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ReadDialog.Designer.cs">
+      <DependentUpon>ReadDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RelatedFormDialog.Designer.cs">
+      <DependentUpon>RelatedFormDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RenamePageDialog.Designer.cs">
+      <DependentUpon>RenamePageDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\StandardReferenceTableSelectionDialog.Designer.cs">
+      <DependentUpon>StandardReferenceTableSelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SupportedFieldTypeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SupportedFieldTypeDialog.Designer.cs">
+      <DependentUpon>SupportedFieldTypeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TableDefinitionDialog.Designer.cs">
+      <DependentUpon>TableDefinitionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TableSelectionDialog.Designer.cs">
+      <DependentUpon>TableSelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TableToViewDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\TableToViewDialog.Designer.cs">
+      <DependentUpon>TableToViewDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TabOrderDialog.Designer.cs">
+      <DependentUpon>TabOrderDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\UnhideDialog.Designer.cs">
+      <DependentUpon>UnhideDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RepublishSurveyFields.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RepublishSurveyFields.designer.cs">
+      <DependentUpon>RepublishSurveyFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ViewSelectionDialog.Designer.cs">
+      <DependentUpon>ViewSelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WebPublishDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WebPublishDialog.Designer.cs">
+      <DependentUpon>WebPublishDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EntryPoint.cs" />
+    <Compile Include="Forms\PagePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\PagePanel.Designer.cs">
+      <DependentUpon>PagePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DataDictionary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataDictionary.designer.cs">
+      <DependentUpon>DataDictionary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\WaitPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\WaitPanel.Designer.cs">
+      <DependentUpon>WaitPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InitialCollectedData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Constants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AssignVariableToMirrorFieldDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\AutoSearchDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\BackgroundDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\ClearDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CodesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\MatchFieldsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CommentLegalDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CopyViewDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CreateEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CreateViewDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\DialogConfigDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\ExecuteDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\CheckBoxFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\CodesFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\CodesFieldDefinition.Designer.cs">
+      <DependentUpon>CodesFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\CodeTableDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\CodeTableDefinition.Designer.cs">
+      <DependentUpon>CodeTableDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\CommandButtonFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\CommentLegalFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\CommentLegalFieldDefinition.Designer.cs">
+      <DependentUpon>CommentLegalFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\ContiguousFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\DataSourceSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\DataSourceSelector.Designer.cs">
+      <DependentUpon>DataSourceSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\DateFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\DateTimeFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\FieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\GenericFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\GridFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\GridFieldDefinition.Designer.cs">
+      <DependentUpon>GridFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\GroupDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\GroupDefinition.Designer.cs">
+      <DependentUpon>GroupDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\ImageFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\LabelFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\LegalValuesFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\LegalValuesFieldDefinition.Designer.cs">
+      <DependentUpon>LegalValuesFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\MirrorFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\MirrorFieldDefinition.Designer.cs">
+      <DependentUpon>MirrorFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\MultilineTextFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\NumberFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\OptionFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\OptionFieldDefinition.Designer.cs">
+      <DependentUpon>OptionFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\PatternableTextFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\PhoneNumberFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\RelateFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\RelateFieldDefinition.Designer.cs">
+      <DependentUpon>RelateFieldDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\SingleLineTextFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\TextFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\TimeFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\UpperCaseTextFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldDefinitionDialogs\YesNoFieldDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\GoToDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GridColumnsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GridSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\HelpConfigDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\HideDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\IfClauseDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ImportCheckCodeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\LegalValuesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\OptionFieldItemsDialogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RelatedFormDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RenamePageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\StandardReferenceTableSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\TableDefinitionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\TableSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\TabOrderDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\UnhideDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ViewSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Enums\Enums.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forms\Canvas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Canvas.Designer.cs">
+      <DependentUpon>Canvas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CheckCodeEditor\CheckCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CheckCodeEditor\CheckCode.Designer.cs">
+      <DependentUpon>CheckCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EditorToolWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditorToolWindow.Designer.cs">
+      <DependentUpon>EditorToolWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProjectExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProjectExplorer.Designer.cs">
+      <DependentUpon>ProjectExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MakeViewWindowsModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PresentationLogic\ControlFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PresentationLogic\FieldDefinitionDialogFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PresentationLogic\GuiMediator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Template.cs" />
+    <Compile Include="Utils\ControlManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utils\EditorComboBoxItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="epi2000b.ico" />
+    <EmbeddedResource Include="Dialogs\AssignDialog.resx">
+      <DependentUpon>AssignDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AssignVariableToMirrorFieldDialog.resx">
+      <DependentUpon>AssignVariableToMirrorFieldDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BeepDialog.resx">
+      <DependentUpon>BeepDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\AutoSearchDialog.resx">
+      <DependentUpon>AutoSearchDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BackgroundDialog.resx">
+      <DependentUpon>BackgroundDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\ClearDialog.resx">
+      <DependentUpon>ClearDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\CallDialog.resx">
+      <DependentUpon>CallDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\SetNotRequiredDialog.resx">
+      <DependentUpon>SetNotRequiredDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\SetRequiredDialog.resx">
+      <DependentUpon>SetRequiredDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\UnhighlightDialog.resx">
+      <DependentUpon>UnhighlightDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\HighlightDialog.resx">
+      <DependentUpon>HighlightDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\EnableDialog.resx">
+      <DependentUpon>EnableDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\DisableDialog.resx">
+      <DependentUpon>DisableDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\GeocodeDialog.resx">
+      <DependentUpon>GeocodeDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\NewRecordDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NewRecordDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\VariableAssignmentDialog.resx">
+      <DependentUpon>VariableAssignmentDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\VariableDefinitionDialog.resx">
+      <DependentUpon>VariableDefinitionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CodesDialog.resx">
+      <DependentUpon>CodesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SupportedFieldTypeAndroidDialog.resx">
+      <DependentUpon>SupportedFieldTypeAndroidDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CopyToAndroid.resx">
+      <DependentUpon>CopyToAndroid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GetSurveyLink.resx">
+      <DependentUpon>GetSurveyLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\InputGuidDialog.resx">
+      <DependentUpon>InputGuidDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\NewColunmNameDialog.resx">
+      <DependentUpon>NewColunmNameDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OrgKey.resx">
+      <DependentUpon>OrgKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PublishMode.resx">
+      <DependentUpon>PublishMode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RenameTemplate.resx">
+      <DependentUpon>RenameTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RenameFormFromTemplateDialog.resx">
+      <DependentUpon>RenameFormFromTemplateDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ListDialog.resx">
+      <DependentUpon>ListDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\ListFieldDefinition.resx">
+      <DependentUpon>ListFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\MatchFieldsDialog.resx">
+      <DependentUpon>MatchFieldsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CommandDesignDialog.resx">
+      <DependentUpon>CommandDesignDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CommentLegalDialog.resx">
+      <DependentUpon>CommentLegalDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddTemplateDialog.resx">
+      <DependentUpon>AddTemplateDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddProjectTemplateDialog.resx">
+      <DependentUpon>AddProjectTemplateDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DefineVariableDialog.resx">
+      <DependentUpon>DefineVariableDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DialogDialog.resx">
+      <DependentUpon>DialogDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DialogListDialog.resx">
+      <DependentUpon>DialogListDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\GroupFieldDefinition.resx">
+      <DependentUpon>GroupFieldDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\GUIDFieldDefinition.resx">
+      <DependentUpon>GUIDFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\HelpDialog.resx">
+      <DependentUpon>HelpDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PageSetupDialog.resx">
+      <DependentUpon>PageSetupDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PreviewTableDialog.resx">
+      <DependentUpon>PreviewTableDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CopyViewDialog.resx">
+      <DependentUpon>CopyViewDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CreateEditDialog.resx">
+      <DependentUpon>CreateEditDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CreateViewDialog.resx">
+      <DependentUpon>CreateViewDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\DialogConfigDialog.resx">
+      <DependentUpon>DialogConfigDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\ExecuteDialog.resx">
+      <DependentUpon>ExecuteDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\CheckBoxFieldDefinition.resx">
+      <DependentUpon>CheckBoxFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\CodesFieldDefinition.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CodesFieldDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\CodeTableDefinition.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CodeTableDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\CommandButtonFieldDefinition.resx">
+      <DependentUpon>CommandButtonFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\CommentLegalFieldDefinition.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CommentLegalFieldDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\ContiguousFieldDefinition.resx">
+      <DependentUpon>ContiguousFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\DataSourceSelector.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DataSourceSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\DateFieldDefinition.resx">
+      <DependentUpon>DateFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\DateTimeFieldDefinition.resx">
+      <DependentUpon>DateTimeFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\FieldDefinition.resx">
+      <DependentUpon>FieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\GenericFieldDefinition.resx">
+      <DependentUpon>GenericFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\GridFieldDefinition.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GridFieldDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\GroupDefinition.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GroupDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\ImageFieldDefinition.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ImageFieldDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\LabelFieldDefinition.resx">
+      <DependentUpon>LabelFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\LegalValuesFieldDefinition.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>LegalValuesFieldDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\MirrorFieldDefinition.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MirrorFieldDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\MultilineTextFieldDefinition.resx">
+      <DependentUpon>MultilineTextFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\NumberFieldDefinition.resx">
+      <DependentUpon>NumberFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\OptionFieldDefinition.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OptionFieldDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\PatternableTextFieldDefinition.resx">
+      <DependentUpon>PatternableTextFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\PhoneNumberFieldDefinition.resx">
+      <DependentUpon>PhoneNumberFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\RelateFieldDefinition.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RelateFieldDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\SingleLineTextFieldDefinition.resx">
+      <DependentUpon>SingleLineTextFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\TextFieldDefinition.resx">
+      <DependentUpon>TextFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\TimeFieldDefinition.resx">
+      <DependentUpon>TimeFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\UpperCaseTextFieldDefinition.resx">
+      <DependentUpon>UpperCaseTextFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldDefinitionDialogs\YesNoFieldDefinition.resx">
+      <DependentUpon>YesNoFieldDefinition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldSelectionDialog.resx">
+      <DependentUpon>FieldSelectionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\GoToDialog.resx">
+      <DependentUpon>GoToDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GridColumnsDialog.resx">
+      <DependentUpon>GridColumnsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GridSettingsDialog.resx">
+      <DependentUpon>GridSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\HelpConfigDialog.resx">
+      <DependentUpon>HelpConfigDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\HideDialog.resx">
+      <DependentUpon>HideDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\IfClauseDialog.resx">
+      <DependentUpon>IfClauseDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ImportCheckCodeDialog.resx">
+      <DependentUpon>ImportCheckCodeDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\LegalValuesDialog.resx">
+      <DependentUpon>LegalValuesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionFieldItemsDialogs.resx">
+      <DependentUpon>OptionFieldItemsDialogs.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\QuitDialog.resx">
+      <DependentUpon>QuitDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ReadDialog.resx">
+      <DependentUpon>ReadDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RelatedFormDialog.resx">
+      <DependentUpon>RelatedFormDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RenamePageDialog.resx">
+      <DependentUpon>RenamePageDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\StandardReferenceTableSelectionDialog.resx">
+      <DependentUpon>StandardReferenceTableSelectionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SupportedFieldTypeDialog.resx">
+      <DependentUpon>SupportedFieldTypeDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\TableDefinitionDialog.resx">
+      <DependentUpon>TableDefinitionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\TableSelectionDialog.resx">
+      <DependentUpon>TableSelectionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\TableToViewDialog.resx">
+      <DependentUpon>TableToViewDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\TabOrderDialog.resx">
+      <DependentUpon>TabOrderDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\UnhideDialog.resx">
+      <DependentUpon>UnhideDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RepublishSurveyFields.resx">
+      <DependentUpon>RepublishSurveyFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ViewSelectionDialog.resx">
+      <DependentUpon>ViewSelectionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WebPublishDialog.resx">
+      <DependentUpon>WebPublishDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WebSurveyOptions.resx">
+      <DependentUpon>WebSurveyOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Canvas.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Canvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CheckCodeEditor\CheckCode.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CheckCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MakeViewMainForm.resx">
+      <DependentUpon>MakeViewMainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PagePanel.resx">
+      <DependentUpon>PagePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataDictionary.resx">
+      <DependentUpon>DataDictionary.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditorToolWindow.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EditorToolWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProjectExplorer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProjectExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WaitPanel.resx">
+      <DependentUpon>WaitPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Service References\SurveyManagerService\ManagerService.wsdl" />
+    <None Include="Service References\SurveyManagerService\SurveyManagerService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerService\SurveyManagerService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerService\SurveyManagerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerService\SurveyManagerService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerService\SurveyManagerService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
+      <Project>{EBD2B961-A952-4670-96CA-50BAA12C7F29}</Project>
+      <Name>Epi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.ImportExport\Epi.ImportExport.csproj">
+      <Project>{B5F72DDF-5349-4C03-9285-AE35110BA6CD}</Project>
+      <Name>Epi.ImportExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows.Globalization\Epi.Windows.Globalization.csproj">
+      <Project>{42A2EA6A-823C-4503-AD08-ED1D2FD6B762}</Project>
+      <Name>Epi.Windows.Globalization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows.ImportExport\Epi.Windows.ImportExport.csproj">
+      <Project>{57ECB9DA-A1B8-4B28-A811-91611AEFD82D}</Project>
+      <Name>Epi.Windows.ImportExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows\Epi.Windows.csproj">
+      <Project>{D120296B-493B-46AC-8657-4D32A9604231}</Project>
+      <Name>Epi.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EpiInfoPlugin\EpiInfo.Plugin.csproj">
+      <Project>{20C12C97-52CE-45C3-B563-3C15330C2A98}</Project>
+      <Name>EpiInfo.Plugin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="PortableDeviceApiLib">
+      <Guid>{1F001332-1A57-4934-BE31-AFFC99F4EE0A}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="PortableDeviceTypesLib">
+      <Guid>{2B00BA2F-E750-4BEB-9235-97142EDE1D3E}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SurveyManagerService\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+    <ProjectGuid>{C646CC38-C861-4E7C-8158-B2AAA0D90E01}</ProjectGuid>
+    <RootNamespace>Epi.Windows.MakeView</RootNamespace>
+  </PropertyGroup>
+</Project>

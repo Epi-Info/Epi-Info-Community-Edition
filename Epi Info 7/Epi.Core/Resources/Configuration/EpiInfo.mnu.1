@@ -1,0 +1,55 @@
+MENU Epi Info
+
+*The menu structure is described first
+BEGIN
+  POPUP "&File"
+  BEGIN
+     MENUITEM "E&xit", Exit1
+  END
+
+  POPUP "&Edit"
+  BEGIN
+     MENUITEM "Mo&ve / Resize Buttons", MoveButtons1
+  END
+
+  POPUP "&View"
+  BEGIN
+     MENUITEM "&Buttons", ButtonSetting
+  END
+
+  POPUP "&Tools"
+  BEGIN
+     MENUITEM "Ma&ke View", MakeView
+     MENUITEM "E&nter Data", EnterData
+     MENUITEM "&Analyze Data", Analysis
+     MENUITEM "Create &Maps", EpiMap
+     MENUITEM "Create &Reports", EpiReport
+     MENUITEM SEPARATOR
+     MENUITEM "&Options", Options
+     MENUITEM "&Extract &Strings", ExtractString
+  END
+
+  POPUP "&Help"
+  BEGIN
+     MENUITEM "Epi Info &Website", Website
+     MENUITEM "&About Epi Info", About1
+  END
+
+**Remove the **'s from the lines below to enable easy access to translated manuals which are 
+**based on previous versions of the EpiInfo manual.  For instance, if you have a non-english 
+**version of the manual which is based on the previous manual, these menuitems will call them
+
+  BUTTON "Ma&ke View", MakeView, 5, 67, "Make or Edit a Questionnaire"
+  BUTTON "E&nter Data", Enter, 5, 78, "Enter and store data, using a View"
+  BUTTON "&Analyze Data", Analysis, 5, 89, "Lists, Tables, Statistics, Graphs, Maps"
+
+  BUTTON "E&xit", Exit1, 95, 56, "Leave the current menu"
+
+  BUTTON "Create &Maps", Epimap, 95, 67, "The mapping program"
+  BUTTON "Create &Reports", ReportEngine, 95, 78, "Report Engine"
+  BUTTON "Epi Info &Website",Internet, 95, 89, "Quick access if you have an Internet connection"
+
+  ScreenText "Version @@VERSION", 50, 90, 12, yellow, Arial, Bold
+  ScreenText "@@CompDate", 50, 95, 8, yellow, Arial
+  ScreenText "Language=@@LANGUAGE", 2, 0, 8, yellow, Arial
+END

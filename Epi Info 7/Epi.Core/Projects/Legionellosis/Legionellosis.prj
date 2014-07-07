@@ -1,0 +1,7 @@
+<Project id="09d4d41c-5ed9-e178-040d-90aed21d71ca" name="Legionellosis" location="C:\TFSCode\Epi Info 7\Build\Debug\Projects\Legionellosis" description="This is a Legionellosis case report form. It can be used for disease caused by any legionella species. It is based off CDC 52.56 (Rev 02/2003) but should not be considered an exact replica." schemaVersion="102" epiVersion="" createDate="10/14/2011 09:41:58" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="/CMip3j3HV8RumZ8DOXlLCsNfxtHVPMPzQ5QwP6y4R8dqPQQ3Q3c2YBcemsDyfxV9lImMI3tlxHrJvbIpFBvV1P85/6iXqL47uJYjtbZ6BsIjdwdZGhr10BtfQNxQZL55VriJ1SNtqOybcdjnBuGiCVN/8EcuPO0kFbdDTb73YbcbiQgzjLbEtn4+5k+VBi0" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>

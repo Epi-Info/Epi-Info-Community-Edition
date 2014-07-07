@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="EpiDashboard.MergeControl"
+             x:Name="ucMergeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+             mc:Ignorable="d" 
+             xmlns:EpiDashboard="clr-namespace:EpiDashboard"
+             Background="#00FFFFFF">    
+    <Grid>        
+            <Grid x:Name="ConfigGrid" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5,5,5,5" >
+            <Rectangle Fill="#22000000" RadiusX="10" RadiusY="10" Margin="0,4,0,0" />
+                <Rectangle Fill="#775C90B2" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0,0,0,5" />
+                <Rectangle Fill="#DDFFFFFF" Stroke="DarkGray" RadiusX="5" RadiusY="5" Margin="5,5,5,10" />
+                <StackPanel Orientation="Vertical" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Top" >
+
+                <TextBlock Text="Merge Data" FontWeight="Bold" Margin="0, 0, 0, 10" />
+
+                <TextBlock Text="This gadget is used to merge data from other data sets into the current data set." TextWrapping="WrapWithOverflow" MaxWidth="430" HorizontalAlignment="Left" Margin="0, 0, 0, 10" />
+
+                <TextBlock Text="Source Data Format" ></TextBlock>
+                <ComboBox x:Name="cmbSourceDataFormat" Margin="0,0,0,8"></ComboBox>
+
+                <TextBlock Text="Source Connection Information" ></TextBlock>
+                <Grid Name="grdConnectionInformation" Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="5"></ColumnDefinition>
+                        <ColumnDefinition Width="22"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtConnectionInformation" Grid.Row="0" Grid.Column="0" IsEnabled="False" />
+                    <Button x:Name="btnConnectionBrowse" Content="..." Grid.Row="0" Grid.Column="2" Click="btnConnectionBrowse_Click" />
+                </Grid>
+
+                <TextBlock Text="Source Table" ></TextBlock>
+                <ComboBox x:Name="cmbSourceTable" IsEditable="True"  Margin="0,0,0,8" ></ComboBox>
+
+                <StackPanel x:Name="pnlStatus" Margin="0,0,0,10">
+                    <StackPanel x:Name="pnlError" Height="Auto" Width="Auto" Background="Tomato" Visibility="Visible" Margin="0,0,0,2">
+                        <StackPanel x:Name="pnlErrorTop" Height="2" Width="Auto" Background="Red"/>
+                        <TextBlock x:Name="txtError" Text="Error: Exception occurred." TextWrapping="WrapWithOverflow" MaxWidth="410" Margin="5,5,5,5" HorizontalAlignment="Left" />
+                    </StackPanel>
+                    
+                    <StackPanel x:Name="pnlTableOverwrite" Height="Auto" Width="Auto" Background="Gold" Visibility="Visible" Margin="0,0,0,2">
+                        <StackPanel x:Name="pnlTableOverwriteTop" Height="2" Width="Auto" Background="Goldenrod"/>
+                        <TextBlock x:Name="txtTableOverwrite" Text="Warning: The merge cannot proceed with the current settings." TextWrapping="WrapWithOverflow" MaxWidth="410" Margin="5,5,5,5" HorizontalAlignment="Left" />
+                    </StackPanel>
+
+                    <StackPanel x:Name="pnlProgress" Height="Auto" Width="Auto" Background="PaleGreen" Visibility="Visible" Margin="0,0,0,2">
+                        <StackPanel x:Name="pnlProgressTop" Height="2" Width="Auto" Background="Green"/>                        
+                        <TextBlock x:Name="txtProgress" Visibility="Visible" Text="Merging source table(s)..." TextWrapping="WrapWithOverflow" MaxWidth="410" Margin="5,5,5,5" HorizontalAlignment="Left" />                        
+                        <ProgressBar x:Name="progressBar" Height="18" Margin="4, 2, 4, 8" Visibility="Collapsed" />
+                        
+                    </StackPanel>
+                </StackPanel>
+                    
+                        <Grid Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="115"/>
+                                <ColumnDefinition Width="115"/>
+                                <ColumnDefinition Width="115"/>
+                            </Grid.ColumnDefinitions>
+                        
+                        <Button x:Name="btnMerge" Width="100" Content="Merge" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Click="btnMerge_Click" />
+                        <Button x:Name="btnCancel" Width="100" Content="Cancel" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Click="btnCancel_Click" />
+                        </Grid>               
+
+                </StackPanel>                    
+        </Grid>
+        <Image x:Name="imgClose" Source="Images\x.png" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+    </Grid>
+    
+</UserControl>

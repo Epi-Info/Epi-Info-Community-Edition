@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="EpiDashboard.Controls.CircularButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="16" d:DesignWidth="16"
+             SnapsToDevicePixels="True">
+    <UserControl.Resources>
+        <Style TargetType="Ellipse" x:Key="ellipseStyle">
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="Stroke" Value="Gray" />
+            <Setter Property="Fill">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#FDFEFE" Offset="0.4"></GradientStop>
+                        <GradientStop Color="#D2D5D9" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Fill">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#F8E59B" Offset="0.4"></GradientStop>
+                                <GradientStop Color="#FBF5D5" Offset="1"></GradientStop>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Stroke" Value="GoldenRod" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Ellipse Style="{StaticResource ellipseStyle}">            
+        </Ellipse>
+
+        <Line IsHitTestVisible="False" X1="4" Y1="8" X2="12" Y2="8" StrokeThickness="2">
+            <Line.Stroke>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#4C4E4F" Offset="1"></GradientStop>
+                    <GradientStop Color="#828487" Offset="0.4"></GradientStop>
+                </LinearGradientBrush>
+            </Line.Stroke>
+        </Line>
+
+        <Line x:Name="verticalLine" IsHitTestVisible="False" X1="8" Y1="4" X2="8" Y2="12" StrokeThickness="2">
+            <Line.Stroke>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#4C4E4F" Offset="1"></GradientStop>
+                    <GradientStop Color="#828487" Offset="0.4"></GradientStop>
+                </LinearGradientBrush>
+            </Line.Stroke>
+        </Line>
+    </Grid>
+</UserControl>

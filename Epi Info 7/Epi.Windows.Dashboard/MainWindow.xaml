@@ -1,0 +1,27 @@
+﻿<Window x:Class="Epi.WPF.Dashboard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Dashboard" 
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        xmlns:dashboard="clr-namespace:Epi.WPF.Dashboard"
+        xmlns:Controls="clr-namespace:Epi.WPF.Dashboard.Controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        Icon="App.ico"
+        mc:Ignorable="d"
+        d:DesignHeight="510" d:DesignWidth="900"
+        >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+        <DockPanel>
+           <dashboard:DashboardControl />
+        </DockPanel>
+
+</Window>

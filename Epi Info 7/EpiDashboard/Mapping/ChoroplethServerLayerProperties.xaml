@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="EpiDashboard.Mapping.ChoroplethServerLayerProperties"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" d:DesignWidth="800">
+    <Grid x:Name="grdMain" Width="800">
+        <StackPanel Orientation="Horizontal">
+            <Label x:Name="lblTitle" Width="80" FontWeight="Bold" Visibility="Collapsed" VerticalAlignment="Bottom">Choropleth</Label>
+            <Button x:Name="btnShapeFile" VerticalAlignment="Bottom">Browse Map Server...</Button>
+            <StackPanel Orientation="Vertical" Width="70">
+                <Label x:Name="lblClasses" HorizontalAlignment="Center">Classes:</Label>
+                <ComboBox x:Name="cbxClasses" SelectedIndex="1" HorizontalAlignment="Center">
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                    <ComboBoxItem Content="6"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="150">
+                <Label x:Name="lblShapeKey" HorizontalAlignment="Center">Feature Key:</Label>
+                <ComboBox x:Name="cbxShapeKey" Width="110"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="150">
+                <Label x:Name="lblDataKey" HorizontalAlignment="Center">Data Key:</Label>
+                <ComboBox x:Name="cbxDataKey" Width="110"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="150">
+                <Label x:Name="lblValueField" HorizontalAlignment="Center">Value Field:</Label>
+                <ComboBox x:Name="cbxValue" Width="110"/>
+            </StackPanel>
+        </StackPanel>
+        <Rectangle VerticalAlignment="Bottom" x:Name="rctLowColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,51,0">
+            <Rectangle.ToolTip>
+                <Label Content="Low value color"/>
+            </Rectangle.ToolTip>
+        </Rectangle>
+        <Rectangle VerticalAlignment="Bottom" x:Name="rctHighColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" Margin="0,0,30,0">
+            <Rectangle.ToolTip>
+                <Label Content="High value color"/>
+            </Rectangle.ToolTip>
+        </Rectangle>
+        <Image VerticalAlignment="Bottom" Source="../Images/filter1.png" Stretch="None" HorizontalAlignment="Right" Margin="0,0,11,5"/>
+        <Rectangle VerticalAlignment="Bottom" x:Name="rctFilter" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#00000000" Margin="0,0,8,0">
+            <Rectangle.ToolTip>
+                <Label Content="Data filters"/>
+            </Rectangle.ToolTip>
+        </Rectangle>
+    </Grid>
+</UserControl>

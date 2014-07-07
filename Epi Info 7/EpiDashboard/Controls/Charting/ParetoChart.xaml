@@ -1,0 +1,75 @@
+﻿<ChartControls:ParetoChartBase x:Class="EpiDashboard.Controls.Charting.ParetoChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:EpiDashboard="clr-namespace:EpiDashboard;assembly=EpiDashboard"
+             xmlns:Controls="clr-namespace:EpiDashboard.Controls;assembly=EpiDashboard"
+                    xmlns:ChartControls="clr-namespace:EpiDashboard.Controls.Charting"
+             xmlns:charting="clr-namespace:ComponentArt.Win.DataVisualization.Charting;assembly=ComponentArt.Win.DataVisualization.Charting"             
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid x:Name="gridChartLayoutRoot" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <TextBlock x:Name="tblockChartTitle" HorizontalAlignment="Center" TextAlignment="Center" FontSize="22" FontWeight="Bold" Margin="0, 2, 0, 0" />
+            <TextBlock x:Name="tblockSubTitle" HorizontalAlignment="Center" TextAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0, 24, 0, 0" />
+            <TextBlock x:Name="tblockStrataTitle" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Margin="0, 20, 0, 0" />
+        </StackPanel>
+<!--START OF XYChart-->
+        <!--<Canvas x:Name="yAxisLabelCanvas" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="Auto" Margin="6, 0, -20, 0" >
+            <TextBlock x:Name="tblockYAxisLabel" FontWeight="DemiBold" Canvas.Bottom="0" Canvas.Left="0" TextAlignment="Center" Margin="0,0,0,-20" Text="Count" Visibility="Collapsed" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform x:Name="rotate" Angle="270" />
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Canvas>-->
+
+        <charting:XYChart x:Name="xyChart" Background="White" DefaultGridLinesVisible="True" DefaultStripesVisible="True" DefaultCoordinateSystemFrameVisible="True" XPath="X" Grid.Row="1" Grid.Column="0" DataStructureCreated="xyChart_DataStructureCreated">
+            <charting:XYChart.XAxisArea>
+                <charting:AxisCoordinates x:Name="xAxisCoordinates" Angle="0">
+                    <!--<charting:NumericCoordinates />-->
+                    <!-- Change this to match your XAxis coordinate-type -->
+                </charting:AxisCoordinates>
+                <charting:ChartLabel x:Name="labelXAxis" >
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Margin="0, 6, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="tblockXAxisLabel" FontWeight="DemiBold" Visibility="Collapsed" TextAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </charting:ChartLabel>
+            </charting:XYChart.XAxisArea>
+
+            <charting:XYChart.YAxisArea>
+                <charting:AxisCoordinates x:Name="YAxisCoordinates">
+                </charting:AxisCoordinates>
+                <charting:ChartLabel x:Name="labelYAxis" Orientation="Vertical" >
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="tblockYAxisLabel" FontWeight="DemiBold" Visibility="Collapsed" TextAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </charting:ChartLabel>
+            </charting:XYChart.YAxisArea>
+
+            <charting:XYChart.Y2AxisArea>
+                <charting:AxisCoordinates x:Name="y2AxisCoordinates" AxisId="PercentAxis" />
+            </charting:XYChart.Y2AxisArea>
+            
+            <charting:XYChart.Axes>
+                <charting:Axis Id="YAxis" x:Name="yAxis" UseReferenceValue="False" />
+                <charting:Axis Id="PercentAxis" x:Name="y2Axis" MinValue="0" MaxValue="100" UseReferenceValue="False" />
+            </charting:XYChart.Axes>
+            <charting:BarSeries x:Name="series0" Id="S0" YPath="Y" ShowPointAnnotations="True" BarKind="Rectangle" />
+            <charting:LineSeries x:Name="series1" Id="S1" Label="Percent" YAxisId="PercentAxis" YPath="Z" Marker="Diamond" Color="#FFfbc901" MarkerFill="Black" MarkerStrokeThickness="2" />
+            <!--<charting:OHLCSeries x:Name="series1" OpenPath="Open" LowPath="Lo" HighPath="Hi" ClosePath="Close"/>-->
+        </charting:XYChart>
+        <!--END OF XYChart-->
+    </Grid>
+</ChartControls:ParetoChartBase>

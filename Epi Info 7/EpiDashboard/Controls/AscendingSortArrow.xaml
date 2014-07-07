@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="EpiDashboard.Controls.AscendingSortArrow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Path x:Name="pathTriangle" Data="M 4 0 L 8 8 0 8 Z" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center"
+          StrokeLineJoin="Round"
+          Fill="White" />
+    </Grid>
+</UserControl>

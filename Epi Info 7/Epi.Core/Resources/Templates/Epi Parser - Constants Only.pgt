@@ -1,0 +1,30 @@
+##TEMPLATE-NAME 'Epi Parser - Constants Only'
+##LANGUAGE 'C#'
+##ENGINE-NAME 'None'
+##AUTHOR 'Devin Cook' 
+##FILE-EXTENSION 'cs'
+##NOTES
+This template creates to set of C# enumerated constants for the grammar's symbols and rules.
+##END-NOTES
+##ID-CASE UPPERCASE
+##ID-SEPARATOR '_'
+##ID-SYMBOL-PREFIX 'Symbol'
+using System;
+namespace Epi.Parser
+{
+	public enum Symbols
+	{
+##SYMBOLS
+##DELIMITER ','
+   		%ID.Padded% = %Value.Padded%%Delimiter% // %Description%
+##END-SYMBOLS
+	};
+
+	public enum Rules
+	{
+##RULES
+##DELIMITER ','
+   		%ID.Padded% = %Value.Padded%%Delimiter% // %Description%
+##END-RULES
+	};
+}

@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Comment CommentText="Commands each have a constructor and an Execute().">
+    <Position X="22.656" Y="3.708" Height="0.437" Width="1.835" />
+  </Comment>
+  <Comment CommentText="All the classes below are involved with the Analysis Function processing.">
+    <Position X="24.25" Y="8.323" Height="0.552" Width="1.554" />
+  </Comment>
+  <Class Name="Epi.Core.EnterInterpreter.DataSourceInfo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="39" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEAAgAAEGCAAEAIgFQAIIABAAAABAoAQBASEAACAAAA=</HashCode>
+      <FileName>DataSourceInfo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.JoinTable" Collapsed="true">
+    <Position X="39" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAACAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataSourceInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.SymbolException" Collapsed="true">
+    <Position X="39" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EpiInfo7EventGrammar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.RuleException" Collapsed="true">
+    <Position X="42.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EpiInfo7EventGrammar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.EpiInterpreterParser" Collapsed="true">
+    <Position X="40.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAgAABABAAEAAAAEAAEABBAAGAgAgAAAAACAEAAIAA=</HashCode>
+      <FileName>EpiInfo7EventGrammar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Reduction">
+    <Position X="29" Y="0.5" Width="3.25" />
+    <NestedTypes>
+      <Enum Name="Epi.Core.EnterInterpreter.Rule_Context.eRunMode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>this.Context.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Delegate Name="Epi.Core.EnterInterpreter.this.Context.MapDataDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>this.Context.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>DBAQ6hFAEgAABAQJAhABhAYAAEICEAgQAAAQAEABwUo=</HashCode>
+      <FileName>this.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rule_Context" Collapsed="true">
+    <Position X="40.75" Y="2.75" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="Epi.Core.EnterInterpreter.Rule_Context.MapDataDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Rule_Context.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BBAQYAFAEAAAAAABAgABhAYAAEIAAAgQAAAQAgAAwUA=</HashCode>
+      <FileName>Rule_Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_FunctionCall">
+    <Position X="4" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAgAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_FunctionParameterList">
+    <Position X="44.5" Y="9.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_EmptyFunctionParameterList">
+    <Position X="33" Y="9.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_NonEmptyFunctionParameterList">
+    <Position X="23.5" Y="9.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_MultipleFunctionParameterList">
+    <Position X="27.25" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAEAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_SingleFunctionParameterList">
+    <Position X="30.25" Y="9.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_DateDiff">
+    <Position X="16.75" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAEAAAAAAAAQAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_DatePart">
+    <Position X="53" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAEAAAAAAAAQAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Abs">
+    <Position X="10.75" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Cos">
+    <Position X="35.75" Y="9.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABQAAAAAAAAAAAABABAAAAAAAAAAABA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Seconds">
+    <Position X="20.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Minutes">
+    <Position X="23" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Hours">
+    <Position X="11.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Days">
+    <Position X="14" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Months">
+    <Position X="16.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Years">
+    <Position X="18.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Format">
+    <Position X="47" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Second">
+    <Position X="59.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Minute">
+    <Position X="48" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Hour">
+    <Position X="50.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Day">
+    <Position X="52.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Month">
+    <Position X="54.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Year">
+    <Position X="57" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_RecordCount">
+    <Position X="19.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Substring">
+    <Position X="38.5" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAABQAAEAAAAAAAAAAAAAAAACAAAAAEAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_TxtToDate">
+    <Position X="7.75" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_TxtToNum">
+    <Position X="13.75" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_SystemDate">
+    <Position X="6" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_SystemTime">
+    <Position X="21.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_NumToDate">
+    <Position X="50" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_NumToTime">
+    <Position X="41.5" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.FunctionUtils" Collapsed="true">
+    <Position X="42.5" Y="1.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Epi.Core.EnterInterpreter.Rules.FunctionUtils.DateInterval" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Rules\EpiFunctions.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAABAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\EpiFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_GoTo">
+    <Position X="25.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\Rule_GoTo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epi.Core.EnterInterpreter.Rules.Rule_Hide">
+    <Position X="25.75" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Rules\Rule_Hide.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Epi.Core.EnterInterpreter.IAnalysisCheckCode" Collapsed="true">
+    <Position X="39" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAACAAAAAAAAIAAQIAAAAAAAAAEAAAAAACAQA=</HashCode>
+      <FileName>IAnalysisCheckCode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Epi.Core.EnterInterpreter.IEnterCheckCode" Collapsed="true">
+    <Position X="40.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAQAIBAAAIAAEAAAAAAAAAAAAAAAEAAAAABAgYA=</HashCode>
+      <FileName>IEnterCheckCode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

@@ -1,0 +1,646 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{21B32C8B-1D10-4C30-AD88-0687C4FF4AAD}</ProjectGuid>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Enter</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Epi.Enter</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>Epi.Windows.Enter.EntryPoint</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <ManifestCertificateThumbprint>D3E741554E2E468CCF09B56875EDA7DEC172D749</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Epi.Windows.Enter_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <PublishUrl>\\Isd-v-con1\epiinfo\Enter\</PublishUrl>
+    <Install>false</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://epiinfodev.cdc.gov/Enter/</InstallUrl>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\Build\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>..\Build\Debug\Epi.Windows.Enter.XML</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>1591</NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>Enter</AssemblyName>
+    <RootNamespace>Epi.Enter</RootNamespace>
+    <ApplicationIcon>epi2000c.ico</ApplicationIcon>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\build\release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\build\release\Enter.XML</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>Enter</AssemblyName>
+    <RootNamespace>Epi.Enter</RootNamespace>
+    <ApplicationIcon>epi2000c.ico</ApplicationIcon>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\build\linux\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\linux\Epi.Windows.Enter.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug %28Exclude EpiMap%29|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug %28Exclude EpiMap%29\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\debug\Enter.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Epi.Enter.ServiceApplication\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\Build\Debug\Epi.Windows.Enter.XML</DocumentationFile>
+    <FileAlignment>4096</FileAlignment>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\build\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Linux\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug %28Exclude EpiMap%29|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug %28Exclude EpiMap%29\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Epi.Enter.ServiceApplication\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalithaLib, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Epi.Core\CalithaLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Epi.Web.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Epi.Windows\Web\Epi.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Client.Bing, Version=2.2.0.525, Culture=neutral, PublicKeyToken=29c6dd6e8553d944, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EpiDashboard\Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Bing.dll</HintPath>
+    </Reference>
+    <Reference Include="GoldParserEngine, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Epi.Core\GoldParserEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="PortableDevices, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Epi.Windows.MakeView\PortableDeviceApi\PortableDevices.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Design">
+      <Name>System.Design</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
+      <Project>{EBD2B961-A952-4670-96CA-50BAA12C7F29}</Project>
+      <Name>Epi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Data.SqlServer\Epi.Data.SqlServer.csproj">
+      <Project>{1B1FDCFE-78E1-487C-9168-C9FEE18AD936}</Project>
+      <Name>Epi.Data.SqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Enter.CheckCodeEngine\Epi.Enter.CheckCodeEngine.csproj">
+      <Project>{20766F52-FD89-4D80-87C2-480170D64FE6}</Project>
+      <Name>Epi.Enter.CheckCodeEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.ImportExport\Epi.ImportExport.csproj">
+      <Project>{B5F72DDF-5349-4C03-9285-AE35110BA6CD}</Project>
+      <Name>Epi.ImportExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows.ImportExport\Epi.Windows.ImportExport.csproj">
+      <Project>{57ECB9DA-A1B8-4B28-A811-91611AEFD82D}</Project>
+      <Name>Epi.Windows.ImportExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows\Epi.Windows.csproj">
+      <Name>Epi.Windows</Name>
+      <Project>{D120296B-493B-46AC-8657-4D32A9604231}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\EpiDashboard\EpiDashboard.csproj">
+      <Project>{3DE9D74E-BF08-4101-AC21-96D250A177D4}</Project>
+      <Name>EpiDashboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EpiInfoPlugin\EpiInfo.Plugin.csproj">
+      <Project>{20C12C97-52CE-45C3-B563-3C15330C2A98}</Project>
+      <Name>EpiInfo.Plugin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Controls\ListFieldComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AutoSearchResultsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AutoSearchResultsDialog.Designer.cs">
+      <DependentUpon>AutoSearchResultsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FindRecordDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FindRecordDialog.Designer.cs">
+      <DependentUpon>FindRecordDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\GeocodeResultControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GeocodeResultControl.Designer.cs">
+      <DependentUpon>GeocodeResultControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\GeocodeSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GeocodeSelectionDialog.Designer.cs">
+      <DependentUpon>GeocodeSelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\NewRecordDialog.Designer.cs">
+      <DependentUpon>NewRecordDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PrintPreviewDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PrintPreviewDialog.Designer.cs">
+      <DependentUpon>PrintPreviewDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Print.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Print.Designer.cs">
+      <DependentUpon>Print.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SelectATableDialog.Designer.cs">
+      <DependentUpon>SelectATableDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WithinProjectViewSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WithinProjectViewSelectionDialog.Designer.cs">
+      <DependentUpon>WithinProjectViewSelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\YesNoDialog.Designer.cs">
+      <DependentUpon>YesNoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EnterUIConfig.cs" />
+    <Compile Include="EntryPoint.cs" />
+    <Compile Include="Events\GoToFieldEventArgs.cs" />
+    <Compile Include="Events\GoToRecordEventArgs.cs" />
+    <Compile Include="Events\OpenViewEventArgs.cs" />
+    <Compile Include="Events\PageSelectedEventArgs.cs" />
+    <Compile Include="Forms\canvas.render.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportPhoneData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportPhoneData.Designer.cs">
+      <DependentUpon>ImportPhoneData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ImportWebData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportWebData.Designer.cs">
+      <DependentUpon>ImportWebData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DataDictionary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataDictionary.Designer.cs">
+      <DependentUpon>DataDictionary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ImportData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportData.Designer.cs">
+      <DependentUpon>ImportData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLogic\GuiMediator.Event.Handlers.cs" />
+    <Compile Include="PresentationLogic\GuiMediator.Events.MainForm.cs" />
+    <Compile Include="PresentationLogic\GuiMediator.Events.ViewExplorer.cs" />
+    <Compile Include="PresentationLogic\GuiMediator.IEnterCheckCode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\YesNoComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialogs\NewRecordDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SelectATableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\YesNoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterWindowsModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forms\EnterMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EnterMainForm.Designer.cs">
+      <DependentUpon>EnterMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Canvas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Canvas.Designer.cs">
+      <DependentUpon>Canvas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ViewExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ViewExplorer.Designer.cs">
+      <DependentUpon>ViewExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLogic\ControlFactory.cs" />
+    <Compile Include="PresentationLogic\GuiMediator.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceManager\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\SearchListBoxItem.cs" />
+    <None Include="ClassDiagram1.cd" />
+    <EmbeddedResource Include="Controls\ListFieldComboBox.resx">
+      <DependentUpon>ListFieldComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LegalValuesComboBox.resx">
+      <DependentUpon>LegalValuesComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\YesNoComboBox.resx">
+      <DependentUpon>YesNoComboBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AutoSearchResultsDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AutoSearchResultsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FindRecordDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FindRecordDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GeocodeResultControl.resx">
+      <DependentUpon>GeocodeResultControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GeocodeSelectionDialog.resx">
+      <DependentUpon>GeocodeSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\NewRecordDialog.resx">
+      <DependentUpon>NewRecordDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PrintPreviewDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PrintPreviewDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Print.resx">
+      <DependentUpon>Print.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SelectATableDialog.resx">
+      <DependentUpon>SelectATableDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WithinProjectViewSelectionDialog.resx">
+      <DependentUpon>WithinProjectViewSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\YesNoDialog.resx">
+      <DependentUpon>YesNoDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AnalyticsViewer.resx">
+      <DependentUpon>AnalyticsViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImportPhoneData.resx">
+      <DependentUpon>ImportPhoneData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImportWebData.resx">
+      <DependentUpon>ImportWebData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataDictionary.resx">
+      <DependentUpon>DataDictionary.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImportData.resx">
+      <DependentUpon>ImportData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LineListingViewer.resx">
+      <DependentUpon>LineListingViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MapViewer.resx">
+      <DependentUpon>MapViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EnterMainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EnterMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Canvas.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Canvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LinkedRecordsViewer.resx">
+      <DependentUpon>LinkedRecordsViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SNAViewer.resx">
+      <DependentUpon>SNAViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ViewExplorer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ViewExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComponentArt.Win.DataVisualization.lic" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
+    <None Include="Service References\ServiceManager\ManagerService.wsdl" />
+    <None Include="Service References\ServiceManager\SurveyManagerService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceManager\SurveyManagerService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceManager\SurveyManagerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceManager\SurveyManagerService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceManager\SurveyManagerService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Epi.Windows.Enter_TemporaryKey.pfx" />
+    <Compile Include="Controls\DateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LegalValuesComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Events\CloseFieldEventArg.cs" />
+    <Compile Include="Events\ClickFieldEventArg.cs" />
+    <Compile Include="Events\SaveRecordEventArgs.cs" />
+    <Compile Include="Forms\AnalyticsViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AnalyticsViewer.Designer.cs">
+      <DependentUpon>AnalyticsViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Canvas.control.events.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LineListingViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LineListingViewer.Designer.cs">
+      <DependentUpon>LineListingViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MapViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MapViewer.Designer.cs">
+      <DependentUpon>MapViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LinkedRecordsViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LinkedRecordsViewer.Designer.cs">
+      <DependentUpon>LinkedRecordsViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SNAViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SNAViewer.Designer.cs">
+      <DependentUpon>SNAViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLogic\GuiMediator.Events.Canvas.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\docs_logo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SP_Logo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\android_icon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+    <Content Include="epi2000c.ico" />
+    <Content Include="Resources\GenericTablet.png" />
+    <Content Include="Resources\MarkupCursor.cur" />
+    <EmbeddedResource Include="Resources\imageField_Icons.png" />
+    <None Include="Service References\ServiceManager\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceManager\configuration.svcinfo" />
+    <None Include="Service References\ServiceManager\configuration91.svcinfo" />
+    <None Include="Service References\ServiceManager\SurveyManagerService.disco" />
+    <None Include="Resources\warning.png" />
+    <None Include="Resources\delete_icon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceManager\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+    <ProjectGuid>{21B32C8B-1D10-4C30-AD88-0687C4FF4AAD}</ProjectGuid>
+    <RootNamespace>Epi.Enter</RootNamespace>
+  </PropertyGroup>
+</Project>

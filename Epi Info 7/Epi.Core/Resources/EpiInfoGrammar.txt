@@ -1,0 +1,1474 @@
+
+"Name"					= Epi Info 7 Grammar
+"Version"				= 1.0
+"Author"				= Epi Info Rewrite Team LM-ESAS
+"Case Sensitive" 			= False 
+"Start Symbol"   			= <Statements>
+
+!----------------------------------------------------------------------------------------------------------------------------
+!-------------------------------- CHARACTER SETS ----------------------------------------------------------------------------
+{String Chars} 			= {Printable} - ["]
+{Char Ch} 				= {Printable} - ['']
+{WS}           			= {Whitespace} - {CR} - {LF}
+{ServerName}				= {AlphaNumeric} + ['-''_']
+!{DatabaseVar}			= {Printable} - ['.''!''`''['']''"']  - {WS} - {Control Codes}
+{ID Head}				= {Letter} + [_]
+{ID Tail}      			= {Alphanumeric} + [_]
+!{Hex Digit}           		= {Digit} + [abcdef] + [ABCDEF]
+{Url Chars}				= {Printable} - {WhiteSpace}
+{Valid Chars}				= {All Valid} - {CR} - {LF}
+!----------------------------------------------------------------------------------------------------------------------------
+!-------------------------------- TERMINALS ---------------------------------------------------------------------------------
+NewLine				= ({CR}{LF})+|{CR}+ | {LF}+
+Whitespace                       	= {WS}+
+String                           	= '"'{String Chars}*'"' 
+File				= (''(({Letter}':')|('\\'{ServerName}+)|('..\'+)|([.]?'\'))((['\']?{Printable}+)*)'')|((({Letter}':')|('\\'{ServerName}+)|('..\'+)|([.]?'\'))((['\']?{Printable}+)*))
+Url					= 'http://'{Url Chars}+
+
+!FileSpec 				= ('FILESPEC' {Space}) ('UID=''"' {AlphaNumeric}+ '"'{Space}) ('PWD=''"' {AlphaNumeric}+ '"'{Space}) 'END'
+!					  |('FILESPEC' {Space}) ('PWD=''"' {AlphaNumeric}+ '"'{Space}) 'END'
+Identifier                        = {ID Head}{ID Tail}*
+
+RealLiteral				!= [+-]? {Digit}*'.'{Digit}+ ('E'[+-]? {Digit}+)?
+                                        = {Digit}*'.'{Digit}+ ('E'[+-]? {Digit}+)?
+					  | {Digit}+ 'E'[+-]? {Digit}+
+DecLiteral				!= [+-]? {Digit}+ ([UL] | [U][L] | [L][U])?
+                                        = {Digit}+ ([UL] | [U][L] | [L][U])?
+HexLiteral				= '#'({Digit}[abcdef])+
+
+CharLiteral				= ''({Char Ch})''
+Boolean				= ('(+)') | ('(-)') | ('(.)')
+!Integer				= {Digit}+
+Date					= ({Digit})?{Digit}[/-]({Digit})?{Digit}[/-]({Digit})?{Digit} ({Digit}{Digit})?
+Time					= (([01]? {Digit}) | [2][01234]) ':' ([012345]?{Digit}) (':'[012345]?{Digit})?
+ExcelRange				= {Letter} {Letter}? {Digit} {Digit}? {Digit}? {Digit}? {Digit}? ':' {Letter} {Letter}? {Digit} {Digit}? {Digit}? {Digit}? {Digit}? 
+Percent				= {Digit}* ('.'{Digit}*)?'%'
+!DefinePromptString			= '("'{String Chars}*'")'
+Comment				= ('***'{Valid Chars}*)
+!----------------------------------------------------------------------------------------------------------------------------
+!-------------------------------- RULES -------------------------------------------------------------------------------------
+
+<Statements>				::= <Statements> NewLine <Statement> | <Statement> 
+
+<Statement> ::= <About_Statement>
+		| <Always_Statement> 
+		| <Assign_Statement>
+		| <Simple_Assign_Statement>
+		| <Let_Statement>
+		| <Auto_Search_Statement>
+		| <Beep_Statement>
+		| <Browser_Statement>
+		| <Browser_Size_Statement>
+		| <Button_Offset_Size_1_Statement>
+		| <Button_Offset_Size_2_Statement>
+		| <Button_Offset_1_Statement>
+		| <Button_Offset_2_Statement>
+		| <Call_Statement>
+		| <Cancel_Select_By_Selecting_Statement>
+		| <Cancel_Select_Statement>
+		| <Cancel_Sort_By_Sorting_Statement>
+		| <Cancel_Sort_Statement>
+		| <Clear_Statement>
+		| <Close_Out_Statement>
+		| <Simple_CMD_Statement>
+		| <CMD_Line_Statement>
+!		| <Simple_Cox_Statement>
+!		| <Boolean_Cox_Statement>
+		| <Define_Variable_Statement>
+		| <Define_Dll_Statement>
+		| <Define_Group_Statement> 
+		| <Delete_Records_All_Statement>
+		| <Delete_Records_Selected_Statement> 
+		| <Delete_Table_Statement>
+		| <Delete_Table_Short_Statement>
+		| <Delete_Table_Long_Statement>
+		| <Delete_File_Statement>
+		| <Simple_Dialog_Statement>
+		| <Numeric_Dialog_Implicit_Statement>
+		| <Numeric_Dialog_Explicit_Statement>
+		| <TextBox_Dialog_Statement>
+		| <Db_Values_Dialog_Statement>
+		| <YN_Dialog_Statement>
+		| <Db_Views_Dialog_Statement>
+		| <Databases_Dialog_Statement>
+		| <Db_Variables_Dialog_Statement>
+		| <Multiple_Choice_Dialog_Statement>
+		| <Dialog_Read_Statement>
+		| <Dialog_Write_Statement>
+		| <Dialog_Read_Filter_Statement>
+		| <Dialog_Write_Filter_Statement>
+		| <Dialog_Date_Statement>
+		| <Dialog_Date_Mask_Statement>
+		| <Variables_Display_Statement>
+		| <Views_Display_Statement>
+		| <Tables_Display_Statement>
+		| <New_Record_Statement>
+		| <Simple_Execute_Statement>
+		| <Execute_File_Statement>
+		| <Execute_Url_Statement>
+		| <Execute_Wait_For_Exit_File_Statement>
+		| <Execute_Wait_For_Exit_String_Statement>
+		| <Execute_Wait_For_Exit_Url_Statement>
+		| <Execute_No_Wait_For_Exit_File_Statement>
+		| <Execute_No_Wait_For_Exit_String_Statement>
+		| <Execute_No_Wait_For_Exit_Url_Statement>
+		| <Exit_Statement>
+		| <File_Dialog_Statement>
+		| <Freq_All_Statement>
+		| <Freq_Columns_Statement>
+		| <Freq_All_Except_Statement>
+		| <Get_Path_Statement>
+		| <Go_To_Variable_Statement>
+		| <Go_To_Page_Statement>
+		| <Simple_Graph_Statement>
+		| <Strata_Var_Graph_Statement>
+		| <Weight_Var_Graph_Statement>
+		| <Stra_Wei_Var_Graph_Statement>
+		| <Graph_Opt_1_Statement>
+		| <Graph_Opt_2_Statement>
+		| <Graph_Opt_3_Statement>
+		| <Graph_Opt_4_Statement>
+		| <Graph_Opt_5_Statement>
+		| <Graph_Generic_Opt_Statement>
+		| <Header_Title_String_Statement>
+		| <Header_Title_Font_Statement>
+		| <Header_Title_String_And_Font_Statement>
+		| <Help_File_Statement>
+		| <Simple_Help_Statement>
+		| <Hide_Some_Statement>
+		| <Hide_Except_Statement>
+		| <If_Statement>
+		| <If_Else_Statement>
+		| <Simple_KM_Survival_Statement>
+		| <KM_Survival_Boolean_Statement>
+                | <Simple_List_Statement>
+		| <List_All_Statement>
+		| <List_Columns_Statement>
+		| <List_All_Except_Statement>
+		| <Logistic_Statement>
+                | <Link_Statement>
+                | <Link_Remove_Statement>
+		| <Map_AVG_Statement>
+		| <Map_Case_Statement>
+		| <Map_Sum_Statement>
+		| <Map_Count_Statement>
+		| <Map_Min_Statement>
+		| <Map_Max_Statement>
+		| <Map_Opt_1_Statement>
+		| <Map_Opt_2_Statement>
+		| <Map_Opt_3_Statement>
+		| <Map_Opt_4_Statement>
+		| <Map_Opt_5_Statement>
+		| <Match_Row_All_Statement>
+		| <Match_Row_Except_Statement>
+		| <Match_Column_All_Statement>
+		| <Match_Column_Except_Statement>
+		| <Match_Row_Column_Statement>
+                | <Simple_Means_Statement>
+		| <Row_All_Means_Statement>
+		| <Row_All_Column_Means_Statement>
+		| <Row_Column_All_Means_Statement>
+		| <Row_Column_Means_Statement>
+                | <Menu_Statement>
+                | <Menu_Command_Statement>
+		| <Menu_Dialog_Statement>
+		| <Menu_Execute_Statement>
+!		| <Menu_Help_Statement>
+!		| <Menu_If_Statement>            
+                | <Menu_Item_Block_Name_Statement>
+		| <Menu_Item_Separator_Statement>
+		| <Menu_Replace_Statement>
+                | <Merge_Table_Statement>
+		| <Merge_Db_Table_Statement>
+		| <Merge_File_Statement>
+		| <Merge_Excel_File_Statement>
+                | <Move_Buttons_Statement>
+		| <New_Page_Statement>
+                | <On_Browser_Exit_Block>
+                | <Picture_Statement>
+                | <Picture_Size_Statement>
+                | <Popup_Statement>
+                | <Simple_Print_Out_Statement>
+		| <File_Print_Out_Statement>
+                | <Quit_Statement>
+                | <Simple_Read_Statement>
+		| <Read_Epi_Statement>
+		| <Read_Epi_File_Spec_Statement>
+		| <Read_Sql_Statement>
+		| <Read_Excel_File_Statement>
+		| <Read_Db_Table_Statement>
+                | <Recode_Statement>
+		| <Regress_Statement>
+                | <Relate_Epi_Table_Statement>
+		| <Relate_Table_Statement>
+		| <Relate_Db_Table_Statement>
+		| <Relate_Db_Table_With_Identifier_Statement>
+		| <Relate_File_Statement>
+		| <Relate_Excel_File_Statement>
+                | <Repeat_Statement>
+!                | <Replace_Statement>
+                | <Simple_Routeout_Statement>
+		| <Replace_Routeout_Statement>
+		| <Append_Routeout_Statement>
+                | <Simple_Run_Statement>
+		| <Run_String_Statement>
+		| <Run_File_PGM_Statement>
+		| <Run_PGM_In_Db_Statement>
+                | <Screen_Text_Statement>
+                | <Select_Statement>
+                | <Set_Statement>
+                | <Set_Buttons_Statement>
+                | <Set_DB_Version_Statement>
+                | <Set_DOS_Win_Statement>
+                | <Set_Import_Year_Statement>
+                | <Set_Ini_Dir_Statement>
+                | <Set_Language_Statement>
+                | <Set_Picture_Statement>
+                | <Set_Work_Dir_Statement>
+                | <ShutDown_Block>
+                | <Sort_Statement>
+                | <Startup_Block>
+                | <Summarize_Statement>
+                | <Sys_Info_Statement>
+                | <Simple_Tables_Statement>
+		| <Tables_One_Variable_Statement>
+		| <Row_All_Tables_Statement>
+		| <Row_Except_Tables_Statement>
+		| <Column_All_Tables_Statement>
+		| <Column_Except_Tables_Statement>
+		| <Row_Column_Tables_Statement>
+                | <Type_Out_String_Statement>
+		| <Type_Out_File_Statement>
+		| <Type_Out_String_With_Font_Statement>
+		| <Type_Out_File_With_Font_Statement>
+                | <Simple_Undefine_Statement>
+		| <All_Standard_Undefine_Statement>
+		| <All_Global_Undefine_Statement>
+		| <Undelete_All_Statement>
+		| <Undelete_Selected_Statement>
+                | <Unhide_Some_Statement>
+		| <Unhide_Except_Statement>
+                | <Wait_For_Statement>
+                | <Wait_For_Exit_Statement>
+                | <Wait_For_File_Exists_Statement>
+                | <Write_All_Statement>
+		| <Write_Some_Statement>
+		| <Write_Except_Statement>
+		| <Comment_Line>		
+		| NewLine		
+!		| <Command_Block>
+!		| <On_Browser_Exit_Empty_Block>
+!		| <Startup_Empty_Block>
+!		| <ShutDown_Empty_Block>
+!		| <Menu_Empty_Block>
+!		| <Popup_Empty_Block>
+!		| <Empty_Command_Block>
+		
+
+<Literal> ::=  <Number>
+		| <Literal_Char>
+		| <Literal_String>
+		| <Literal_Date>
+		| <Literal_Time>
+		| <Literal_Date_Time>
+
+<Literal_Char> ::= CharLiteral
+<Literal_String> ::= String
+<Literal_Date> ::= Date
+<Literal_Time> ::= Time
+<Literal_Date_Time> ::= Date Time
+
+<Number> ::= <Real_Number>
+		| <Decimal_Number>
+		| <Hex_Number>
+<Real_Number> ::= RealLiteral
+<Decimal_Number> ::= DecLiteral
+<Hex_Number> ::= HexLiteral		
+
+<QualifiedIdList> ::= <QualifiedIdList> <Qualified ID>
+			| <Qualified ID>
+
+<IdentifierList> ::= <IdentifierList> Identifier
+			| Identifier
+
+<Qualified ID> ::= Identifier
+			| <Fully_Qualified_Id>
+<Fully_Qualified_Id> ::= Identifier '.' <Qualified ID>
+
+<Generic_String> ::= String
+
+<StringList> ::= <Generic_String>
+			| <Comma_Delimited_Strings>
+<Comma_Delimited_Strings> ::= <StringList> ',' <Generic_String>
+	
+!<IdString> ::= String
+!		 | <IdString> String
+
+<VariableTypeIndicator>		::= <Var_Type_Numeric>
+					| <Var_Type_Text_Input>
+					| <Var_Type_YN>
+					| <Var_Type_Date>
+					| !Null
+
+<Var_Type_Numeric> ::= 'NUMERIC'
+<Var_Type_Text_Input> ::= 'TEXTINPUT'
+<Var_Type_YN> ::= 'YN'
+<Var_Type_Date> ::= 'DATEFORMAT'
+
+<Comment_Line> ::= Comment 
+
+!Zack for function*************************************************************
+!<FuncName1> ::= ABS
+!		|COS
+!		|DAY|DAYS
+!		|ENVIRON|EXISTS|EXP
+!		|FILEDATE|FINDTEXT|FORMAT
+!		|HOUR|HOURS
+!		|LN|LOG
+!		|MINUTES|Month|MONTHS
+!		|NUMTODATE|NUMTOTIME
+!		|RND|ROUND
+!		|SECOND|SECONDS|STEP|SUBSTRING|SIN
+!		|TRUNC|TXTTODATE|TXTTONUM|TAN
+!		|UPPERCASE
+!		|YEARS
+!		|COS '('<FunctionParameterList> ')'
+!		|DAY '('<FunctionParameterList> ')'
+!               |DAYS '('<FunctionParameterList> ')'
+!		|ENVIRON '('<FunctionParameterList> ')'
+!               |EXISTS '('<FunctionParameterList> ')'
+!              |EXP '('<FunctionParameterList> ')'
+!		|FILEDATE '('<FunctionParameterList> ')'
+!                |FINDTEXT '('<FunctionParameterList> ')'
+!                |FORMAT '('<FunctionParameterList> ')'
+!		|HOUR '('<FunctionParameterList> ')'
+!                |HOURS '('<FunctionParameterList> ')'
+!		|LN '('<FunctionParameterList> ')'
+!                |LOG '('<FunctionParameterList> ')'
+!		|MINUTES '('<FunctionParameterList> ')'
+!                |Month '('<FunctionParameterList> ')'
+!                |MONTHS '('<FunctionParameterList> ')'
+!		|NUMTODATE '('<FunctionParameterList> ')'
+!                |NUMTOTIME '('<FunctionParameterList> ')'
+!		|RND '('<FunctionParameterList> ')'
+!                |ROUND '('<FunctionParameterList> ')'
+!		|SECOND '('<FunctionParameterList> ')'
+!                |SECONDS '('<FunctionParameterList> ')'
+!                |STEP '('<FunctionParameterList> ')'
+!                |SUBSTRING '('<FunctionParameterList> ')'
+!                |SIN '('<FunctionParameterList> ')'
+!		|TRUNC '('<FunctionParameterList> ')'
+!                |TXTTODATE '('<FunctionParameterList> ')'
+!                |TXTTONUM '('<FunctionParameterList> ')'
+!                |TAN '('<FunctionParameterList> ')'
+!		|UPPERCASE  '('<FunctionParameterList> ')'
+!		|'YEARS' '('<FunctionParameterList> ')'
+!                |YEAR '('<FunctionParameterList> ')'
+
+
+<FuncName2> ::= SYSTEMTIME|SYSTEMDATE | RECORDCOUNT
+
+
+<FunctionCall> ::= Identifier '(' <FunctionParameterList> ')'
+               | FORMAT '(' <FunctionParameterList> ')'
+               	| <FuncName2>
+!			| <FuncName1> '(' <FunctionCall> ')'
+<FunctionParameterList> ::= <EmptyFunctionParameterList> | <NonEmptyFunctionParameterList>
+<NonEmptyFunctionParameterList> ::= <MultipleFunctionParameterList> | <SingleFunctionParameterList>
+
+<MultipleFunctionParameterList> ::= <NonEmptyFunctionParameterList> ',' <Expression>
+<SingleFunctionParameterList> ::= <expression>
+<EmptyFunctionParameterList> ::=
+!Function End *******************************************************************
+
+
+!************************************************ Analysis Commands	********************************************************!
+
+!***			Always Statement				***!
+<Always_Statement>						::= ALWAYS NewLine <Statements> NewLine END
+!***			End						***!
+
+
+
+! -------------------------- ASSIGN --------------------------------------------------
+<Assign_Statement>						::= ASSIGN <Qualified ID> '=' <Expression> 
+<Simple_Assign_Statement>					::= Identifier '=' <Expression>
+<Let_Statement>							::= LET Identifier '=' <Expression> 
+
+
+!***			AutoSearch Statement				***!
+<Auto_Search_Statement>						::= AUTOSEARCH <IdentifierList> 
+!***			End						***!
+
+
+
+! -------------------------- BEEP --------------------------------------------------
+<Beep_Statement>							::= BEEP
+
+
+! ---------------------------CANCEL SELECT --------------------------------------------------
+<Cancel_Select_By_Selecting_Statement>				::= SELECT
+<Cancel_Select_Statement>						::= CANCEL SELECT
+
+
+! ---------------------------CANCEL SORT --------------------------------------------------
+<Cancel_Sort_By_Sorting_Statement>					::= SORT
+<Cancel_Sort_Statement>						::= CANCEL SORT
+
+
+!***			Clear Statement				***!
+<Clear_Statement>						::= CLEAR <IdentifierList>
+!***			End						***!
+
+
+!***			CloseOut Statement			***!
+<Close_Out_Statement>						::= CLOSEOUT
+!***			End					***!
+
+
+!***			CMD Statement				***!
+
+<Simple_CMD_Statement>						::= CMD Identifier NewLine <Statements> END
+<CMD_Line_Statement>						::= COMMANDLINE <CMDListOpt>
+
+<CMDListOpt> 							::= <CMDLineOptString>
+	   							| <CMDLineOptFile>
+	   							| <CMDLineOptPGM>
+	   							| <CMDLineOptView>
+	   							| <CMDLineOptPGM> <CMDLineOptView>
+	   							| <CMDLineOptView> <CMDLineOptPGM>
+	   							| !Null
+
+<CMDLineOptFile>						::= File
+<CMDLineOptString>						::= File ':' String
+
+<CMDLineOptPGM>						::= <CMDLineOptProjectPGM>
+								| <CMDLineOptFilePGM>
+<CMDLineOptProjectPGM>					::= PGMNAME '=' File ':' String
+<CMDLineOptFilePGM>						::= PGMNAME '=' File
+
+<CMDLineOptView> 						::= VIEWNAME '=' File ':' String
+
+
+!***			End					***!
+
+!***			Cox Statement				***!
+!<SimpleCoxStatement> ::= COXPH Identifier '=' <CoxTermList> '*' Identifier '(' Literal ')' <CoxOptList>
+!<BooleanCoxStatement> ::= COXPH Identifier '=' <CoxTermList> '*' Identifier '(' Boolean ')' <CoxOptList>
+
+!<CoxOptList> ::= <CoxOpt> | <CoxOpt> <CoxOptList> | !Null
+
+!<CoxOpt> ::= WEIGHTVAR '=' Identifier
+!		| TIMEUNIT '=' String
+!		| GROAPHTYPE '=' String
+!		| OUTTABLE '=' Identifier
+!		| STRATAVAR '=' <IdentifierList>
+!		| GRAPH '=' <IdentifierList>
+!		| DIALOG
+!		| SHOWOBSERVED
+!		| PVALUE '=' Percent
+!		| PVALUE '=' RealLiteral
+
+!<CoxTermList> ::= <CoxTerm> | <CoxTerm> <CoxTermList>
+
+!<CoxTerm> ::= Identifier
+!		| '(' Identifier ')'
+!		| Identifier ':' <Expression>
+!		| '(' Identifier ')' ':' <Expression>
+!		| Identifier ':'  Identifier ':'
+!		| '(' Identifier ')' ':' Identifier ':'
+
+ 
+!***			End					***!
+
+!------------------------- DEFINE ------------------------------------------------------------
+!<Define_Standard_Variable_Statement>				::= DEFINE Identifier <VariableTypeIndicator> <Define_Prompt>
+!<Define_Std_Var_Unparenthesised_Statement>			::= DEFINE Identifier String
+!<Define_Std_Var_With_Scope_Statement>		 		::= DEFINE Identifier STANDARD <VariableTypeIndicator> <Define_Prompt>
+!<Define_Global_Variable_Statement> 				::= DEFINE Identifier GLOBAL <VariableTypeIndicator> <Define_Prompt>
+!<Define_Permanent_Variable_Statement> 				::= DEFINE Identifier PERMANENT <VariableTypeIndicator> <Define_Prompt>
+
+<Define_Variable_Statement>						::= DEFINE Identifier <Variable_Scope> <VariableTypeIndicator> <Define_Prompt>
+                                                                            | DEFINE Identifier '=' <Expression>
+
+<Define_Dll_Statement> 						::= DEFINE Identifier DLLOBJECT String
+
+<Define_Group_Statement> 						::= DEFINE Identifier GROUPVAR <IdentifierList>
+
+<Define_Prompt>							::= '(' String ')'
+									| String
+									| !Null
+
+<Variable_Scope>							::= STANDARD
+									| GLOBAL
+									| PERMANENT
+									| !Null
+
+!*** 			End 					***!
+
+!***			Define User Command Statement	***!
+!<Simple_Cmd_Statement> 					::= CMD 
+!***			End					***!
+
+!*** 			Delete Statement 		***!
+<Delete_File_Statement>	 				::= DELETE File <DeleteOpts>
+
+<Delete_Records_All_Statement> 				::= DELETE '*' <DeleteOpts>
+<Delete_Records_Selected_Statement> 			::= DELETE <Compare Exp> <DeleteOpts>
+
+<Delete_Table_Statement>	 				::= DELETE TABLES Identifier <DeleteOpts>
+<Delete_Table_Short_Statement> 				::= DELETE TABLES File <DeleteOpts>
+<Delete_Table_Long_Statement> 				::= DELETE TABLES File ':' Identifier <DeleteOpts>
+
+<DeleteOpts> 							::= <DeleteOpts> <DeleteOpt>
+								| <DeleteOpt>
+								| !Null
+
+<DeleteOpt>							::= PERMANENT
+			    					| SAVEDATA
+								| RUNSILENT
+
+!***  			End  					***!
+
+!*** 			Dialog Statement 			***!
+<Simple_Dialog_Statement>					::= DIALOG String <TitleOpt>
+<Numeric_Dialog_Implicit_Statement> 				::= DIALOG String Identifier <TitleOpt>
+<TextBox_Dialog_Statement>					::= DIALOG String Identifier TEXTINPUT <MaskOpt> <TitleOpt>
+<Numeric_Dialog_Explicit_Statement>				::= DIALOG String Identifier NUMERIC <MaskOpt> <TitleOpt>
+<Db_Values_Dialog_Statement>					::= DIALOG String Identifier DBVALUES Identifier Identifier <TitleOpt>
+<YN_Dialog_Statement>						::= DIALOG String Identifier YN <TitleOpt>
+<Db_Views_Dialog_Statement>					::= DIALOG String Identifier DBVIEWS <titleOpt>
+<Databases_Dialog_Statement>					::= DIALOG String Identifier DATABASES <TitleOpt>
+<Db_Variables_Dialog_Statement> 				::= DIALOG String Identifier DBVARIABLES <TitleOpt>
+<Multiple_Choice_Dialog_Statement>				::= DIALOG String Identifier <StringList> <TitleOpt>
+<Dialog_Read_Statement> 					::= DIALOG String Identifier READ <TitleOpt>
+<Dialog_Write_Statement> 					::= DIALOG String Identifier WRITE <TitleOpt>
+<Dialog_Read_Filter_Statement> 				::= DIALOG String Identifier READ String <TitleOpt>
+<Dialog_Write_Filter_Statement> 				::= DIALOG String Identifier WRITE String <TitleOpt>
+<Dialog_Date_Statement> 					::= DIALOG String Identifier DATEFORMAT <TitleOpt>
+<Dialog_Date_Mask_Statement> 					::= DIALOG String Identifier DATEFORMAT String <TitleOpt>
+<TitleOpt> 							::= <SimpleTitleOpt> | !Null
+
+<SimpleTitleOpt>						::= TITLETEXT '=' String
+<MaskOpt>							::= String | !Null
+!***			End 					***!
+
+!*** 			Display Statement 			***!
+<Variables_Display_Statement> 				::= DISPLAY DBVARIABLES <DbVariablesOpt> <DisplayOpt>
+<Views_Display_Statement> 					::= DISPLAY DBVIEWS <DbViewsOpt> <DisplayOpt>
+<Tables_Display_Statement> 					::= DISPLAY TABLES <DbViewsOpt> <DisplayOpt>
+
+<DbVariablesOpt> 						::= DEFINE
+								| FIELDVAR
+								| LIST <IdentifierList>
+								| <IdentifierList>
+								| !Null
+
+<DisplayOpt> 							::= <DefaultDisplayOpt> | !Null
+
+<DefaultDisplayOpt>						::= OUTTABLE '=' Identifier
+<DbViewsOpt> 							::= <DefaultDbViewsOpt> | !Null
+
+<DefaultDbViewsOpt>						::= File
+
+
+!-------------------------- EXECUTE ------------------------------------------------------
+<Simple_Execute_Statement> 					::= EXECUTE String
+<Execute_File_Statement> 					::= EXECUTE File
+<Execute_Url_Statement>					::= EXECUTE Url
+<Execute_Wait_For_Exit_File_Statement>			::= EXECUTE WAITFOREXIT File
+<Execute_Wait_For_Exit_String_Statement>			::= EXECUTE WAITFOREXIT String
+<Execute_Wait_For_Exit_Url_Statement>			::= EXECUTE WAITFOREXIT Url
+<Execute_No_Wait_For_Exit_File_Statement>			::= EXECUTE NOWAITFOREXIT File
+<Execute_No_Wait_For_Exit_String_Statement>		::= EXECUTE NOWAITFOREXIT String
+<Execute_No_Wait_For_Exit_Url_Statement>			::= EXECUTE NOWAITFOREXIT Url
+
+!***			Exit Statement			***!
+
+<Exit_Statement> 						::= EXIT
+
+!***			End					***!
+!*** 			Freq Statement 			***!
+<Freq_All_Statement>							::= FREQ '*' <FreqOpts>
+<Freq_Columns_Statement> 						::= FREQ <IdentifierList> <FreqOpts>
+<Freq_All_Except_Statement> 					::= FREQ '*' EXCEPT <IdentifierList> <FreqOpts>
+
+<FreqOpts>							::= <FreqOpts> <FreqOpt> | <FreqOpt> | !Null
+
+<FreqOpt> 							::= <WeightOpt>
+								| <FreqOptStrata>
+								| <OutTableOpt>
+								| <SetClause>
+								| <FreqOptNoWrap>
+								| <FreqOptColumnSize>
+								| <FreqOptPsuvar>
+
+<WeightOpt>							::= WEIGHTVAR '=' Identifier
+<FreqOptStrata>						::= STRATAVAR '=' <IdentifierList>
+<FreqOptNoWrap>						::= NOWRAP
+<FreqOptColumnSize>						::= COLUMNSIZE '=' DecLiteral
+<FreqOptPsuvar>						::= PSUVAR '=' Identifier
+
+!*** 			End 					***!
+
+
+!***				GoTo Statement			***!
+<Go_To_Variable_Statement> 					::= GOTO  Identifier
+<Go_To_Page_Statement> 						::= GOTO DecLiteral
+                                                                         | GOTO '-'DecLiteral| GOTO '+'DecLiteral
+
+
+!***				End					***!
+
+
+!***			Graph Statement			***!
+<Simple_Graph_Statement> 						::= GRAPH Identifier GRAPHTYPE '=' String
+<Strata_Var_Graph_Statement> 					::= GRAPH <IdentifierList> '*' Identifier GRAPHTYPE '=' String STRATAVAR '=' Identifier
+<Weight_Var_Graph_Statement> 					::= GRAPH Identifier '*' Identifier GRAPHTYPE '=' String WEIGHTVAR '=' Identifier
+<Stra_Wei_Var_Graph_Statement> 					::= GRAPH Identifier '*' <IdentifierList> GRAPHTYPE '=' String STRATAVAR '=' Identifier WEIGHTVAR '=' Identifier
+<Graph_Opt_1_Statement> 						::= GRAPH Identifier GRAPHTYPE '=' String <XYTitleOpt> TEMPLATE '=' File
+<Graph_Opt_2_Statement> 						::= GRAPH Identifier GRAPHTYPE '=' String XTITLE '=' String YTITLE '=' String <TemplateOpt>
+<Graph_Opt_3_Statement> 						::= GRAPH Identifier GRAPHTYPE '=' String <DateFormatOpt> INTERVAL '=' DecLiteral
+<Graph_Opt_4_Statement> 						::= GRAPH Identifier GRAPHTYPE '=' String DATEFORMAT '=' String <IntervalOpt>
+<Graph_Opt_5_Statement> 						::= GRAPH Identifier GRAPHTYPE '=' String THREED '=' Boolean
+<Graph_Generic_Opt_Statement> 					::= GRAPH Identifier GRAPHTYPE '=' String <GenericOpt>
+			
+<DateFormatOpt> 						::= <DefaultDateFormatOpt> | !Null
+
+<DefaultDateFormatOpt>					::= DATEFORMAT '=' String
+<IntervalOpt> 							::= <DefaultIntervalOpt> | !Null
+
+<DefaultIntervalOpt>						::= INTERVAL '=' DecLiteral
+<XYTitleOpt> 							::= <DefaultXYTitleOpt> | !Null
+
+<DefaultXYTitleOpt>						::= XTITLE '=' String YTITLE '=' String
+<TemplateOpt> 							::= <DefaultTemplateOpt> | !Null
+
+<DefaultTemplateOpt>						::= TEMPLATE '=' File
+<GenericOpt> 							::= <DefaultGenericOpt> | <GenericOpt> <DefaultGenericOpt>
+<DefaultGenericOpt>						::= Identifier '=' Identifier
+
+!*** 			End 					***!
+
+!***			Header Statement			***!
+<Header_Title_String_Statement> 					::= HEADER DecLiteral <TitleStringPart> | HEADER DecLiteral RESET | HEADER DecLiteral DROP
+<Header_Title_Font_Statement> 					::= HEADER DecLiteral <TitleFontPart>
+<Header_Title_String_And_Font_Statement> 				::= HEADER DecLiteral <TitleStringPart> <TitleFontPart>
+
+<TitleStringPart> 						::= <DefaultTitleStringPart> | <TitleStringPartWithAppend>
+<DefaultTitleStringPart>					::= String <EffectList>
+<TitleStringPartWithAppend>					::= String <EffectList> APPEND
+!***			End 					***!
+
+!*** 			Help Statement 			***!
+<Help_File_Statement> 						::= HELP File String
+<Simple_Help_Statement> 						::= HELP File Identifier
+
+!*** 			End 					***!
+
+
+!***				Hide Statement			***!
+<Hide_Some_Statement> 						::= HIDE <IdentifierList>
+<Hide_Except_Statement> 						::= HIDE '*' EXCEPT <IdentifierList>
+!***				End					***!
+
+
+! -------------------------------- IF-THEN-ELSE --------------------------------------------------
+<If_Statement> 					::= IF <Expression> THEN NewLine <Statements> NewLine END
+<If_Else_Statement>					::= IF <Expression> THEN NewLine <Statements> NewLine ELSE NewLine <Statements> NewLine END
+!<SimpleIfStatement> 						::= IF <Expression> THEN <Statements> <ElseClause> END
+!<ElseClause> 							::= ELSE <Statements> | !Null
+
+!***       		End 					***!
+
+!***			Kaplan-Meier Survival Statement	***!
+<Simple_KM_Survival_Statement> 					::= KMSURVIVAL Identifier '=' Identifier '*' Identifier '(' Literal ')' <KMSurvOpts>
+<KM_Survival_Boolean_Statement> 					::= KMSURVIVAL Identifier '=' Identifier '*' Identifier '(' Boolean ')' <KMSurvOpts>
+
+<KMSurvOpts>							::= <KMSurvOpt> | <KMSurvOpt> <KMSurvOpts>
+
+<KMSurvOpt> 							::= <KMSurvTimeOpt>
+								| <KMSurvGraphOpt>
+								| <KMSurvOutOpt>
+								| <KMSurvWeightOpt>
+								| <KMSurvTitleOpt>
+<KMSurvTimeOpt>						::= TIMEUNIT '=' String
+<KMSurvGraphOpt>						::= GRAPHTYPE '=' String
+<KMSurvOutOpt>						::= OUTTABLE '=' Identifier
+<KMSurvWeightOpt>						::= WEIGHTVAR '=' Identifier
+<KMSurvTitleOpt>						::= TITLETEXT '=' String
+
+!***			End					***!
+!***  			List Statement 			***!
+<Simple_List_Statement> 						::= LIST <ListOpt>
+<List_All_Statement> 						::= LIST '*' <ListOpt>
+<List_Columns_Statement> 						::= LIST  <IdentifierList> <ListOpt>
+<List_All_Except_Statement> 					::= LIST '*' EXCEPT <IdentifierList> <ListOpt>
+
+<ListOpt> 							::= <ListGridOpt>
+								| <ListUpdateOpt>
+		 						| <ListHTMLOpt>
+
+<ListGridOpt>							::= GRIDTABLE
+<ListUpdateOpt>						::= UPDATE
+		 
+<ListHTMLOpt>							::= <ListHTMLOptOneColumn>
+		    						| <ListHTMLOptTwoColumns>
+		    						| <ListHTMLOptThreeColumns>
+		    						| <ListHTMLOptNoImage>
+		    						| <ListHTMLOptNowrap>
+		    						| <ListHTMLOptLine>
+		    						| !Null
+		 
+<ListHTMLOptOneColumn> 						::= <ListHTMLOpt> COULMNSIZE '=' DecLiteral
+<ListHTMLOptTwoColumns> 					::= <ListHTMLOpt> COULMNSIZE '=' DecLiteral	',' DecLiteral
+<ListHTMLOptThreeColumns> 					::= <ListHTMLOpt> COULMNSIZE '=' DecLiteral ',' DecLiteral ','	 DecLiteral
+<ListHTMLOptNoImage>	 					::= <ListHTMLOpt> NOIMAGE
+<ListHTMLOptNoWrap> 						::= <ListHTMLOpt> NOWRAP
+<ListHTMLOptLine> 						::= <ListHTMLOpt> LINENUMBERS 
+!***  			End 					***!
+
+!***			Logistic Statement			***!
+<Logistic_Statement> 						::= LOGISTIC Identifier '=' <TermList> <LogisticOpts>
+
+<LogisticOpts>						::= <LogisticOpts> <LogisticOpt>
+								| <LogisticOpt>
+								| !Null
+
+<LogisticOpt> 						::= <LogisticTitleOpt>
+								| <WeightOpt>
+								| <LogisticMatchOpt>
+								| <LogisticPValPercentOpt>
+								| <LogisticPValRealOpt>
+								| <OutTableOpt>
+								| <LogisticNoInterceptOpt>
+
+<LogisticTitleOpt>						::= TITLETEXT '=' String
+<LogisticMatchOpt>						::= MATCHVAR '=' Identifier
+<LogisticPValPercentOpt>					::= PVALUE '=' Percent
+<LogisticPValRealOpt>					::= PVALUE '=' RealLiteral
+<OutTableOpt>							::= OUTTABLE '=' Identifier <KeyVarList>
+<LogisticNoInterceptOpt>					::= NOINTERCEPT 
+
+<BaseTerm> 							::= Identifier | '(' Identifier ')'
+<Term> 								::= <BaseTerm> | <Term> '*' <BaseTerm>
+<TermList> 							::= <Term> | <TermList> <Term>
+
+!***			End					***!
+
+!*** 			Map Statement   			***!
+<Map_AVG_Statement> 						::= MAP AVG '(' Identifier ')' Identifier '::' <ReadOpt> ':' Identifier
+<Map_Case_Statement> 						::= MAP CASE_BASED '(' Identifier ')' Identifier '::' <ReadOpt> ':' Identifier
+<Map_Sum_Statement> 						::= MAP SUM '(' Identifier ')' Identifier '::' <ReadOpt> ':' Identifier
+<Map_Count_Statement> 						::= MAP 'COUNT('Identifier')' Identifier '::' <ReadOpt> ':' Identifier
+<Map_Min_Statement> 						::= MAP MIN '(' Identifier ')' Identifier '::' <ReadOpt> ':' Identifier
+<Map_Max_Statement> 						::= MAP MAX '(' Identifier ')' Identifier '::' <ReadOpt> ':' Identifier
+<Map_Opt_1_Statement> 						::= MAP SUM '(' Identifier ')' Identifier '::' <ReadOpt> ':' Identifier DENOMINATOR '=' Identifier
+<Map_Opt_2_Statement> 						::= MAP SUM '(' Identifier ')' Identifier '::' <ReadOpt> ':' Identifier OUTTABLE '=' Identifier DENOMINATOR '=' Identifier
+<Map_Opt_3_Statement> 						::= MAP SUM '(' Identifier ')' Identifier '::' <ReadOpt> ':' Identifier TITLETEXT '=' String
+<Map_Opt_4_Statement> 						::= MAP SUM '(' Identifier ')' Identifier '::' <ReadOpt> ':' Identifier TEMPLATE '=' String
+<Map_Opt_5_Statement> 						::= MAP SUM '(' Identifier ')' Identifier '::' <ReadOpt> ':' Identifier RUNSILENT
+
+!***			End					***!
+
+!*** 			Match Statement 			***!
+<Match_Row_All_Statement> ::= MATCH '*' Identifier <MatchOpts>
+<Match_Row_Except_Statement> ::= MATCH '*' EXCEPT <IdentifierList> Identifier <MatchOpts>
+<Match_Column_All_Statement> ::= MATCH Identifier '*' <MatchOpts>
+<Match_Column_Except_Statement> ::= MATCH Identifier '*' EXCEPT <IdentifierList> <MatchOpts>
+<Match_Row_Column_Statement> ::= MATCH Identifier Identifier <MatchOpts>
+
+<MatchOpts> ::= <MatchOpts> <MatchOpt>| <MatchOpt> | !Null
+
+<MatchOpt> ::= WEIGHTVAR '=' Identifier
+		  | MATCHVAR '=' <IdentifierList>
+		  | <SetClause>
+
+!*** 			End 					***!
+
+!*** 			Means Statement			***!
+<Simple_Means_Statement> 						::= MEANS Identifier <FreqOpts>
+<Row_All_Means_Statement> 						::= MEANS '*' <FreqOpts>
+<Row_All_Column_Means_Statement> 					::= MEANS  '*' Identifer <FreqOpts>
+<Row_Column_All_Means_Statement> 					::= MEANS Identifier '*' <FreqOpts>
+<Row_Column_Means_Statement> 					::= MEANS Identifier Identifier <FreqOpts>
+
+!*** 			End 					***!
+
+!***			Merge Statement 			***!
+<Merge_Table_Statement> 						::= MERGE Identifier <KeyDef> <MergeOpt>
+!<Merge_Db_Table_Statement> 					::= MERGE <ReadOpt> File <LinkName> <KeyDef> <MergeOpt> NewLine <FileSpec>
+<Merge_Db_Table_Statement> 					::= MERGE <ReadOpt> File ':' Identifier <LinkName> <KeyDef> <MergeOpt> NewLine <FileSpec>
+											| MERGE File ':' Identifier <KeyDef> <MergeOpt>
+<Merge_File_Statement> 						::= MERGE <ReadOpt> File <LinkName> <KeyDef> <MergeOpt> NewLine <FileSpec>
+<Merge_Excel_File_Statement> 					::= MERGE <ReadOpt> File ExcelRange <LinkName> <KeyDef> <MergeOpt> NewLine <FileSpec>
+
+<MergeOpt> 							::= APPEND
+		 						| UPDATE
+		 						| RELATE
+		 						| !Null
+
+!***			End					***!
+
+!***			NewPage Statement			***!
+
+<New_Page_Statement> 						::= NEWPAGE
+
+!***			End					***!
+
+
+!*** 				NewRecord Statement			***!
+<New_Record_Statement> 						::= NewRecord
+!<NewRecordStatement> 						::= NewRecord <NewRecordOpt>
+!<NewRecordOpt> 						::= <Expression>
+!
+!!*** 				End					***!
+
+
+
+!***			PrintOut Statement			***!
+<Simple_Print_Out_Statement> 					::= PRINTOUT 
+<File_Print_Out_Statement> 					::= PRINTOUT File
+!***			End					***!
+
+!***			Quit Statement			***!
+<Quit_Statement>							::= QUIT
+!***			End					***!
+
+!*** 			Read Statement 			***!
+<Simple_Read_Statement> 						::= READ <ReadOpt> Identifier
+<Read_Epi_Statement> 						::= READ File ':' Identifier <LinkName>
+
+<Read_Epi_File_Spec_Statement> 					::= READ <FileDataFormat> File ':' Identifier NewLine <FileSpec>
+<Read_Sql_Statement> 						::= READ <DbDataformat>  String ':' Identifier 
+<Read_Excel_File_Statement> 					::= READ <FileDataFormat> File 'ExcelRange' <LinkName> NewLine <FileSpec>
+<Read_Db_Table_Statement> 						::= READ <FileDataFormat> File ':' Identifier <LinkName> NewLine <FileSpec>
+
+<FileDataFormat>  ::= '"Epi7"' | '"Epi2000"' | '"Epi 2000"' | '"Excel 8.0"' | '"Text"'
+
+
+<DbDataFormat>  						::= '"SQL"' | '"ODBC"'
+
+<ReadOpt> 							::= String | !Null
+
+!*** 			End 					***!
+
+
+!*** 			Recode Statement 			***!
+<Recode_Statement> 						::= RECODE Identifier TO Identifier NewLine <RecodeList> END
+
+<RecodeList> 							::= <Recode> NewLine
+		    						| <RecodeList> <Recode> NewLine
+
+<Recode>							::= <Recode_A> | <Recode_B> | <Recode_C> | <Recode_D> | <Recode_E> | <Recode_F> | <Recode_G> | <Recode_H> | <Recode_I> | <Recode_J> | <Recode_K> | <Recode_L> | <Recode_M> | <Recode_N>
+
+!<Recode_A> 							::= <Literal> '-' <Literal> '=' <Literal>
+!<Recode_B>							::= <Literal> '=' <Literal>
+!<Recode_C>							::= Boolean '=' <Literal>
+!<Recode_D>							::= LOVALUE '-' <Literal> '=' <Literal>
+!<Recode_E>							::= <Literal> '-' HIVALUE '=' <Literal>
+!<Recode_F>							::= LOVALUE '-' HIVALUE '=' <Literal>
+!<Recode_G>							::= ELSE '=' <Literal>
+!<Recode_H>							::= <Literal> '-' <Literal> '=' Boolean
+!<Recode_I>							::= <Literal> '=' Boolean
+!<Recode_J>							::= Boolean '=' Boolean
+!<Recode_K>							::= LOVALUE '-' <Literal> '=' Boolean
+!<Recode_L>							::= <Literal> '-' HIVALUE '=' Boolean
+!<Recode_M>							::= LOVALUE '-' HIVALUE '=' Boolean
+!<Recode_N>							::= ELSE '=' Boolean
+
+<Recode_A> 							::= <Negate Exp> '-' <Negate Exp>  '=' <Literal_String>
+<Recode_B>							::= <Negate Exp> '=' <Literal_String>
+<Recode_C>							::= Boolean '=' <Literal_String>
+<Recode_D>							::= LOVALUE '-' <Negate Exp> '=' <Literal_String>
+<Recode_E>							::= <Negate Exp> '-' HIVALUE '=' <Literal_String>
+<Recode_F>							::= LOVALUE '-' HIVALUE '=' <Literal_String>
+<Recode_G>							::= ELSE '=' <Literal_String>
+<Recode_H>							::= <Negate Exp> '-' <Negate Exp> '=' Boolean
+<Recode_I>							::= <Negate Exp> '=' Boolean
+<Recode_J>							::= Boolean '=' Boolean
+<Recode_K>							::= LOVALUE '-' <Negate Exp> '=' Boolean
+<Recode_L>							::= <Negate Exp> '-' HIVALUE '=' Boolean
+<Recode_M>							::= LOVALUE '-' HIVALUE '=' Boolean
+<Recode_N>							::= ELSE '=' Boolean
+
+
+!*** 			End 					***!
+
+!***			Regress Statement			***!
+
+<Regress_Statement> 						::= REGRESS Identifier '=' <TermList> <LogisticOpts>
+
+!***			End					***!
+
+!***			Relate Statement			***!
+<Relate_Epi_Table_Statement> 					::= RELATE Identifier <JoinOpt>
+<Relate_Table_Statement> 						::= RELATE Identifier <KeyDef> <JoinOpt>
+<Relate_Db_Table_Statement> 					::= RELATE <ReadOpt> File <LinkName>  <KeyDef> <JoinOpt>
+<Relate_Db_Table_With_Identifier_Statement>			::= RELATE <ReadOpt> File ':' Identifier <LinkName>  <KeyDef> <JoinOpt>
+<Relate_File_Statement> 						::= RELATE <ReadOpt> File <LinkName>  <KeyDef> <JoinOpt> NewLine <FileSpec>
+<Relate_Excel_File_Statement> 					::= RELATE <ReadOpt> File  ExcelRange <LinkName> <KeyDef> <JoinOpt> NewLine <FileSpec>
+ 
+<JoinOpt> 							::= MATCHING
+								| ALL
+								| !Null
+
+!***			End				***!
+
+!*** 			Routeout 			***!
+<Simple_Routeout_Statement> 					::= ROUTEOUT File
+<Replace_Routeout_Statement> 					::= ROUTEOUT File REPLACE
+<Append_Routeout_Statement> 					::= ROUTEOUT File APPEND
+!*** 			End 				***!
+
+!***			Run Statement			***!
+<Simple_Run_Statement> 						::= RUNPGM Identifier
+<Run_String_Statement> 						::= RUNPGM String
+<Run_File_PGM_Statement> 						::= RUNPGM File
+<Run_PGM_In_Db_Statement> 						::= RUNPGM File ':' Identifier
+ 		
+!***			End 				***!
+
+!*** 			Select Statement 		***!
+<Select_Statement> 						::= SELECT <Expression>
+!*** 			End 				***!
+
+!***  			Set  Statement  		***!
+<Set_Statement> ::= SET <SetList>
+
+<SetClause> ::=  STATISTICS '=' <StatisticsOption>	!These options could be set in FREQ,MATCH, and MEANS commands also
+		| PROCESS '=' <ProcessOption>
+		| PROCESS '=' Identifier
+		| Boolean '=' String
+		| YN	'=' String ',' String ',' String
+		| DELETED '=' <DeletedOption>
+		| PERCENTS '=' <OnOff>
+		| MISSING '=' <OnOff>
+		| IGNORE '=' <OnOff>
+		| SELECT '=' <OnOff>
+		| FREQGRAPH '=' <OnOff>
+		| HYPERLINKS '=' <OnOff>
+		| SHOWPROMPTS '=' <OnOff>
+		| TABLES '=' <OnOff>
+		| USEBROWSER '=' <OnOff>
+
+
+<SetList> ::= <SetList> <SetClause>
+		 | <SetClause>
+ 						   			   
+<OnOff> ::= ON
+	   | OFF
+	   | Boolean
+
+<DeletedOption> ::= <OnOff> 
+			|Identifier
+
+<StatisticsOption>	::= NONE
+			   | MINIMAL
+			   | INTERMEDIATE
+			   | COMPLETE
+
+<ProcessOption> ::= UNDELETED
+			| DELETED
+			| BOTH
+
+!*** 			End 					***!
+
+!***       		SortStatement  			***!
+<Sort_Statement> 						::= SORT <SortList>
+
+<SortOpt> 							::=   ASCENDING
+		 						| DESCENDING
+		 						| !Null
+
+<Sort> 								::= Identifier <SortOpt>
+
+<SortList> 							::= <SortList> <Sort> 
+								|<Sort>
+
+!***			End    				***!
+
+!*** 			Summarize Statement 			***!
+<Summarize_Statement> 						::= SUMMARIZE <AggregateList> TO Identifier <SummarizeOpt>
+
+<SummarizeOpt> 							::= <SummarizeOpt> STRATAVAR '=' <IdentifierList>
+								| <SummarizeOpt> WEIGHTVAR '=' Identifier
+								| !Null
+
+<AggregateVariableElement> 					::= Identifier '::' <AggregateElement>
+<AggregateElement> 						::= Identifier '(' Identifier ')'
+			   					| Identifier '('')'
+!<Aggregate> ::= AVG
+!		  | COUNT 
+!		  | FIRST
+!		  | LAST
+!		  | MAX
+!		  | MIN
+!		  | STDEV
+!		  | STDEVP
+!		  | SUM
+!		  | VAR
+!		  | VARP
+
+<AggregateList> 						::= <AggregateVariableElement>
+								| <AggregateList> <AggregateVariableElement>
+								| <AggregateList> ',' <AggregateVariableElement>
+
+!*** 			End 					***!
+
+!*** 			Tables Statement 			***!
+<Simple_Tables_Statement> 					::= TABLES '*' <FreqOpts>
+<Tables_One_Variable_Statement> 					::= TABLES Identifier <FreqOpts>
+<Row_All_Tables_Statement> 					::= TABLES '*' Identifier <FreqOpts>
+<Row_Except_Tables_Statement> 					::= TABLES '*' EXCEPT <IdentifierList> Indentifier <FreqOpts>
+<Column_All_Tables_Statement> 					::= TABLES Identifier '*' <FreqOpts>
+<Column_Except_Tables_Statement> 					::= TABLES Identifier '*' EXCEPT <IdentifierList> <FreqOpts>
+<Row_Column_Tables_Statement> 					::= TABLES Identifier Identifier <FreqOpts>
+!*** 			End 					***!
+
+!***			TypeOut Statement			***!
+<Type_Out_String_Statement> 					::= TYPEOUT String <EffectList>
+<Type_Out_File_Statement> 						::= TYPEOUT File
+<Type_Out_String_With_Font_Statement> 				::= TYPEOUT String <EffectList> <TitleFontPart>
+<Type_Out_File_With_Font_Statement> 					::= TYPEOUT File <EffectList> <TitleFontPart>
+	 
+!***			End					***!
+
+!*** 			Undefine Statement 			***!
+<Simple_Undefine_Statement> 					::= UNDEFINE Identifier
+<All_Standard_Undefine_Statement> 					::= UNDEFINE '*'	
+<All_Global_Undefine_Statement> 					::= UNDEFINE '*' GLOBAL
+
+
+!*** 			End 					***!
+
+!*** 			Undelete Statement 			***!
+<Undelete_All_Statement> 						::= UNDELETE '*' <Undelete_Option>
+<Undelete_Selected_Statement> 					::= UNDELETE <Expression> <Undelete_Option>
+
+<Undelete_Option>							::= RUNSILENT
+									| !Null
+
+!*** 			End 					***!
+
+
+!***				Unhide Statement			***!
+<Unhide_Some_Statement> ::= UNHIDE <IdentifierList>
+<Unhide_Except_Statement> ::= UNHIDE '*' EXCEPT <IdentifierList>
+
+!***				End					***!
+
+
+!***			Write Statement			***!
+<Write_All_Statement> 						::= WRITE <WriteMode> <FileDataFormat> <OutTarget> '*'
+<Write_Some_Statement> 						::= WRITE <WriteMode> <FileDataFormat> <OutTarget> <QualifiedIdList>
+<Write_Except_Statement> 						::= WRITE <WriteMode> <FileDataFormat> <OutTarget> '*' EXCEPT <QualifiedIdList>
+
+<WriteMode> 							::= APPEND
+		  						| REPLACE
+		  						| !Null
+
+!<WriteOpt> 							::= String
+!		 						| !Null
+
+<OutTarget> 							::= Identifier
+		  						| File ':' Identifier
+		  						| File
+!***			End					***!
+
+
+
+!-------------------------------------------------------------Expression!
+<Expr List> 							::= <Expression> ',' <Expr List>
+              							| <Expression>
+
+<Expression> 							::= <And Exp> OR <Expression>
+		  						| <And Exp> XOR <Expression>
+               							| <And Exp>
+
+<And Exp> 							::= <Not Exp> AND <And Exp>
+            							| <Not Exp>
+
+<Not Exp> 							::= NOT <Compare Exp>
+            							| <Compare Exp>
+
+<Compare Exp> 							::=  <Concat Exp> LIKE String
+								| <Concat Exp> '=' <Compare Exp>
+             							| <Concat Exp> '<>' <Compare Exp>
+             							| <Concat Exp> '>' <Compare Exp>
+             							| <Concat Exp> '>=' <Compare Exp>
+             							| <Concat Exp> '<' <Compare Exp>
+             							| <Concat Exp> '<=' <Compare Exp>
+             							| <Concat Exp>
+
+<Concat Exp> 							::= <Add Exp> '&' <Concat Exp>
+		   						| <Add Exp>
+
+<Add Exp> 							::= <Mult Exp> '+' <Add Exp>
+            							| <Mult Exp> '-' <Add Exp>
+            							| <Mult Exp>
+
+<Mult Exp> 							::= <Pow Exp> '*' <Mult Exp>
+								| <Pow Exp> '/' <Mult Exp>
+								| <Pow Exp> MOD <Mult Exp>
+								| <Pow Exp> '%' <Mult Exp>
+            							| <Pow Exp>
+
+<Pow Exp>							::= <Negate Exp> '^' <Negate Exp>
+								| <Negate Exp>
+
+<Negate Exp> 							::= '-' <Value>
+                                                                | '+' <Value>
+            							| <Value>
+
+<Value>      							::= Identifier
+            							| <Literal>
+								| Boolean 
+            							| '(' <Expr List> ')'
+            							|<FunctionCall>
+
+
+!------------------------------------------------------------- End Expression!
+
+!******************************************* Common Rules		***********************************************!
+
+<LinkName> 							::= LINKNAME '=' Identifier
+		 						| !Null
+
+!****** FileSpec                         *********!
+<FileSpec> 							::= <FilespecKey>
+								| <FileSpecField>
+								| <FileSpecKeyAndField>
+								| !Null
+
+<FileSpecKey> 							::= FILESPEC <FileSpecKeyList> END	
+<FileSpecField> 						::= <FileSpecFieldListEnd>
+								| <FileSpecFieldLiteral>
+
+<FileSpecFieldListEnd> 						::= FILESPEC NewLine <FileSpecFieldList> END
+<FileSpecFieldLiteral> 						::= Identifier DecLiteral '-' DecLiteral Identifier
+
+<FileSpecKeyAndField> 						::= FILESPEC <FileSpecKeyList> <FileSpecFieldList> END
+
+<FileSpecKeyList> 						::= <FileSpecKeyDef>
+			 					| <FileSpecKeyDef> <FileSpecKeyList>
+
+<FileSpecKeyDef> 						::= <FileSpecNumericKey>
+								| <FileSpecStringKey>
+
+<FileSpecNumericKey> 						::= Identifier '=' <Number>
+<FileSpecStringKey> 						::= Identifier '=' <StringList>
+
+<FileSpecFieldSingle> 						::= Identifier DecLiteral Identifier
+
+<FileSpecFieldDef> 						::= <FileSpecField>
+			  					| <FileSpecFieldSingle>
+
+<FileSpecFieldList> 						::= <FileSpecFieldDef>
+								| <FileSpecFieldDef> <FileSpecFieldList> 
+
+!***			End FileSpec			***!
+
+<UndefExpression> 						::= Literal
+			 					| Identifier
+			 					| '-' '(' <UndefExpression> ')'
+			 					| '-' Identifier
+			 					| '(' <UndefExpression> ')'
+
+
+<EffectLeft> 							::= Identifier
+		   						| <EffectLeft> ',' Identifier
+<EffectList> 							::= '(' <EffectLeft> ')'
+		    						| !Null
+
+<TitleFontPart> 						::= TEXTFONT <Color> DecLiteral | TEXTFONT <Color> '+'DecLiteral|TEXTFONT <Color> '-'DecLiteral
+								| TEXTFONT <Color>
+								| TEXTFONT DecLiteral| TEXTFONT '+'DecLiteral | TEXTFONT '-'DecLiteral
+
+<Color> 							::= Identifier
+	     							| HexLiteral
+
+<KeyExpr> 							::= <KeyExprSimple> 
+								| <KeyExprIdentifier>
+
+<KeyExprSimple> 						::= <Expression> '::' <UndefExpression>
+<KeyExprIdentifier> 						::= Identifier '::' <UndefExpression>
+
+<KeyDef> 							::= <KeyExpr>
+								| <KeyDef> AND <KeyExpr>
+<KeyVarList> 							::= KEYVARS '=' <IdentifierList>
+		   						| !Null
+!************************************ End Common Rules		*******************************************!
+
+
+
+!------------------------------------------------------------------------ Functions
+
+!*********************             Menu Screen Commands         *********************!
+
+<Menu_Statement> ::= <Menu_Block> | <Menu_Single_Statement>
+<Menu_Block> ::= MENU <Words> NewLine BEGIN NewLine <Statements> NewLine END
+<Menu_Single_Statement> ::= MENU <Words>
+<Menu_Empty_Block> ::= MENU <Words> NewLine BEGIN NewLine END
+
+<Menu_Item_Block_Name_Statement> ::= MENUITEM String ',' Identifier
+<Menu_Item_Separator_Statement> ::= MENUITEM SEPARATOR
+
+
+<Button_Offset_Size_1_Statement> ::= BUTTON String ',' Identifier ',' DecLiteral ',' DecLiteral ',' DecLiteral ',' DecLiteral ',' String
+<Button_Offset_Size_2_Statement> ::= BUTTON String ',' Identifier ',' DecLiteral ',' DecLiteral ',' DecLiteral ',' DecLiteral
+<Button_Offset_1_Statement> ::= BUTTON String ',' Identifier ',' DecLiteral ',' DecLiteral ',' String
+<Button_Offset_2_Statement> ::= BUTTON String ',' Identifier ',' DecLiteral ',' DecLiteral
+
+<Offset> ::= DecLiteral ',' DecLiteral
+                        
+<Popup_Statement> ::= <Popup_Block> | <Popup_Single_Statement>
+<Popup_Block> ::= POPUP String NewLine BEGIN NewLine <Statements> NewLine END
+<Popup_Single_Statement> ::= POPUP String
+<Popup_Empty_Block> ::= POPUP String NewLine BEGIN NewLine END
+
+<Command_Block> ::= Identifier NewLine BEGIN NewLine <Statements> NewLine END
+<Empty_Command_Block> ::= Identifier NewLine BEGIN NewLine END
+
+<Screen_Text_Statement> ::= SCREENTEXT String ',' <Offset> ',' DecLiteral ',' <Color> ',' <FontStyle>
+
+<FontStyle> ::= Identifier ',' Identifier | Identifier
+
+<Words> ::= <LiteralInc> | <LiteralInc> <Words>
+
+<LiteralInc> ::=  DecLiteral
+				| Date
+                | Identifier
+
+
+!*************************         Menu Commands	*****************************!
+
+<About_Statement> ::= ABOUT
+
+!*** 			Browser Statement 			***!
+<Browser_Statement> ::= <Browser1Statement>
+			| <Browser2Statement>
+			| <Browser3Statement>
+
+<Browser1Statement> ::= BROWSER <FileName> ',' DecLiteral ',' DecLiteral ',' DecLiteral ',' DecLiteral ',' EXITBUTTON
+<Browser2Statement> ::= Browser <FileName> ',' DecLiteral ',' DecLiteral ',' DecLiteral ',' DecLiteral
+<Browser3Statement> ::= Browser <FileName>
+
+!*** 			BrowserSize  Statement 			***!
+<Browser_Size_Statement> ::= <BrowserSize1Statement>
+			| <BrowserSize2Statement>
+
+<BrowserSize1Statement> ::= BROWSERSIZE DecLiteral ',' DecLiteral ',' DecLiteral ',' DecLiteral ',' EXITBUTTON
+<BrowserSize2Statement> ::= BROWSERSIZE DecLiteral ',' DecLiteral ',' DecLiteral ',' DecLiteral
+
+!*** 			Call Statement 			        ***!
+<Call_Statement> ::= CALL Identifier
+
+!*** 			Dialog Statement Additional to Menu     ***!
+<Menu_Dialog_Statement> ::= <DialogFormatStatement>
+                        | <DialogListStatement>
+                        | <DialogButtonsStatement>
+                        | <DialogDateFormatStatement>
+
+<DialogFormatStatement> ::= DIALOG String Identifier FORMAT '=' String ',' <TitleOpt>
+<DialogListStatement> ::= DIALOG String Identifier LIST '=' <List> <TitleOpt>
+<DialogButtonsStatement> ::= DIALOG String Identifier BUTTONS '=' <List> <TitleOpt>
+<DialogDateFormatStatement> ::= DIALOG String Identifier DATEFORMAT '=' String ',' <TitleOpt>
+
+<Menu_Execute_Statement> ::= <ExecuteIdentifierOptStatement>
+			| <ExecuteFile1Statement>
+			| <ExecuteFile2Statement>
+			| <ExecuteFile3Statement> 
+			| <ExecuteTwoFiles1Statement>
+			| <ExecuteTwoFiles2Statement>
+			| <ExecuteFileStringStatement>
+			| <ExecuteWebStatement>
+
+<ExecuteIdentifierOptStatement> ::= EXECUTE <IdentifierOpt>
+<ExecuteFile1Statement> ::= EXECUTE <PathSymbol> Identifier <IdentifierOpt>
+<ExecuteFile2Statement> ::= EXECUTE <PathSymbol> <FilePath> Identifier <IdentifierOpt>
+<ExecuteFile3Statement> ::= EXECUTE '.\@@' Identifier '\' <SimpleFile>
+<ExecuteTwoFiles1Statement> ::= EXECUTE '.\@@' Identifier '\' <SimpleFile> ';' <SimpleFile>
+<ExecuteTwoFiles2Statement> ::= EXECUTE <PathSymbol> <FilePath> Identifier <IdentifierOpt> ';' <PathSymbol> Identifier '.' Identifier
+<ExecuteFileStringStatement> ::= EXECUTE <IdentifierOpt> String
+<ExecuteWebStatement> ::= EXECUTE <WebLink>
+
+<List> ::= String ';' | String ';' <List>
+
+!<MenuIfStatement> ::= <IfExists1Statement>
+!			| <IfExists2Statement>
+!			| <IfFunctionEQStatement>
+!			| <IfFunctionStatement>
+
+!<IfExists1Statement> ::= IF <ExistsOpt> '=' <Bool> THEN NewLine <Statements> ELSE <Statements> ENDIF
+!<IfExists2Statement> ::= IF <ExistsOpt> THEN NewLine <Statements> ELSE <Statements> ENDIF
+!<IfFunctionEQStatement> ::= IF <FunctionOpt> '=' <Bool> THEN NewLine <Statements> ELSE <Statements> ENDIF
+!<IfFunctionStatement> ::= IF <FunctionOpt> THEN NewLine <Statements> ELSE <Statements> ENDIF
+
+
+!<Bool> ::= TRUE | FALSE
+
+!<ExistsOpt> ::= EXISTS '(' <PathSymbol> <FilePath> <FileName> ')'
+!		| EXISTS '(' '.\@@' Identifier '\' <SimpleFile> ')'
+
+!<FunctionOpt> ::= Identifier '(' <Words> ')'
+
+
+!*** 			FileDialog Statement 			***!
+<File_Dialog_Statement> ::= <FileDialogStrStatement>
+                        | <FileDialogVarStatement>
+
+<FileDialogStrStatement> ::= FILEDIALOG Identifier ',' String
+<FileDialogVarStatement> ::= FILEDIALOG Identifier
+
+!*** 			GetPath Statement 			***!
+<Get_Path_Statement> ::= <GetPathStrStatement>
+                        | <GetPathVarStatement>
+
+<GetPathStrStatement> ::= GETPATH Identifier String
+<GetPathVarStatement> ::= GETPATH Identifier
+
+! <MenuHelpStatement> ::= <HelpHtmStatement> | <HelpWebPath1Statement> | <HelpWebPath2Statement> | <HelpFilePathStatement> 
+! <HelpHtmStatement> ::= HELP <IdentifierOpt>
+! <HelpWebPath1Statement> ::= HELP <IdentifierOpt> <ShortcutLink> <WebPath> '/' <IdentifierOpt>
+! <HelpWebPath2Statement> ::= HELP <IdentifierOpt> <ShortcutLink> <IdentifierOpt>
+! <HelpFilePathStatement> ::= HELP <FilePath> <IdentifierOpt> <ShortcutLink> <FilePath> <IdentifierOpt>
+
+
+!*** 			Link Statement 		        	***!
+<Link_Statement> ::= <SimpleLinkStatement>
+			| <CaptionLinkStatement>
+
+<SimpleLinkStatement> ::= LINK <FileCommaFile>
+<CaptionLinkStatement> ::= LINK <FileName> String ',' <FileName> String
+
+!*** 			LinkRemove Statement 		        ***!
+<Link_Remove_Statement> ::= <LinkRemoveStringStatement>
+			| <LinkRemoveAllStatement>
+
+<LinkRemoveStringStatement> ::= LINKREMOVE String
+<LinkRemoveAllStatement> ::= LINKREMOVE ALL
+
+!*** 			MenuCommand Statement 		                ***!
+<Menu_Command_Statement> ::= <MenuCommandStatement1>
+                        | <MenuCommandStatement2>
+                        | <MenuCommandStatement3>
+                        | <MenuCommandStatement4>
+
+<MenuCommandStatement1> ::= MENU Identifier '.' MNU <FileName> DecLiteral ',' DecLiteral ',' DecLiteral ',' DecLiteral
+<MenuCommandStatement2> ::= MENU Identifier '.' MNU <FileName> DecLiteral ',' DecLiteral
+<MenuCommandStatement3> ::= MENU Identifier '.' MNU <FileName>
+<MenuCommandStatement4> ::= MENU Identifier '.' MNU
+
+!*** 			MoveButtons Statement 		        ***!
+<Move_Buttons_Statement> ::= MOVEBUTTONS
+
+!*** 			Picture Statement 		        ***!
+<Picture_Statement> ::= <PictureOffsetStatement>
+                        | <PictureFileStatement>
+                        | <PictureOnStatement>
+                        | <PictureOffStatement>
+
+<PictureOffsetStatement> ::= PICTURE <FileName> DecLiteral ',' DecLiteral ',' DecLiteral ',' DecLiteral
+<PictureFileStatement> ::= PICTURE <FileName>
+<PictureOnStatement> ::= PICTURE ON
+<PictureOffStatement> ::= PICTURE OFF
+
+!*** 			PictureSize Statement 		        ***!
+<Picture_Size_Statement> ::= PICTURESIZE DecLiteral ',' DecLiteral ',' DecLiteral ',' DecLiteral
+
+!*** 			Repeat Until Statement 	                ***!
+<Repeat_Statement> ::= REPEAT NewLine <Statements> NewLine UNTIL <Expression>
+
+!*** 			Replace Statement                       ***!
+<Menu_Replace_Statement> ::= <ReplaceWithCommaStatement>
+			| <ReplaceWithCommaTimesStatement>
+			| <ReplaceWithFromToStatement>
+			| <ReplaceWithFromToTimesStatement>
+
+<ReplaceWithCommaStatement> ::= REPLACE <StringPair> <FileCommaFile>
+<ReplaceWithCommaTimesStatement> ::= REPLACE <StringPair> <FileCommaFile> ',' DecLiteral
+<ReplaceWithFromToStatement> ::= REPLACE <StringPair> <FromFileToFile>
+<ReplaceWithFromToTimesStatement> ::= REPLACE <StringPair> <FromFileToFile> ',' DecLiteral
+
+<FileCommaFile> ::= <FileName> ',' <FileName>
+<FromFileToFile> ::= FROM <FileName> TO <FileName>
+
+<StringPair> ::= String ',' String ';' <StringPair>
+                        | CharLiteral ',' CharLiteral ';' <StringPair>
+                        | String ',' String ';'
+                        | CharLiteral ',' CharLiteral ';'
+
+!*** 			SetButtons Statement                    ***!
+<Set_Buttons_Statement> ::= SETBUTTONS
+
+!*** 			SetDBVersion Statement                  ***!
+<Set_DB_Version_Statement> ::= SETDBVERSION 
+
+!*** 			SetDOSWin Statement                     ***!
+<Set_DOS_Win_Statement> ::= SETDOSWIN Identifier
+
+!*** 			SetImportYear Statement                 ***!
+<Set_Import_Year_Statement> ::= SETIMPORTYEAR
+
+!*** 			SetLanguage Statement                   ***!
+<Set_Language_Statement> ::= SETLANGUAGE
+
+!*** 			SetPicture Statement                    ***!
+<Set_Picture_Statement> ::= SETPICTURE
+
+!*** 			SetWorkDir Statement                    ***!
+<Set_Work_Dir_Statement> ::= <SetWorkDir1Statement>
+			| <SetWorkDir2Statement>
+
+<SetWorkDir1Statement> ::= SETWORKDIR
+<SetWorkDir2Statement> ::= SETWORKDIR String
+
+<Set_Ini_Dir_Statement> ::= <Set_Ini_Dir_1_Statement>
+			| <Set_Ini_Dir_2_Statement>
+
+<Set_Ini_Dir_1_Statement> ::= SETINIDIR
+<Set_Ini_Dir_2_Statement> ::= SETINIDIR String
+
+!*** 			SysInfo Statement                       ***!
+<Sys_Info_Statement> ::= SYSINFO
+
+!*** 			WaitFor Statement                       ***!
+<Wait_For_Statement> ::= WAITFOR <FileName> String
+
+!*** 			WaitForExit Statement                   ***!
+<Wait_For_Exit_Statement> ::= WAITFOREXIT <FileName> String
+
+!*** 			WaitForFileExists Statement             ***!
+<Wait_For_File_Exists_Statement> ::= <WaitForFileExistsStatement1>
+                        | <WaitForFileExistsStatement2>
+
+<WaitForFileExistsStatement1> ::= WAITFORFILEEXISTS <FileName> ',' DecLiteral
+<WaitForFileExistsStatement2> ::= WAITFORFILEEXISTS <FileName>
+
+<FileName> ::= File | String | <Words> | <IdentifierOpt>
+
+<SimpleFile> ::= Identifier '.' Identifier
+
+<IdentifierOpt> ::= <SimpleFile> | <IdentifierOpt> '.' <SimpleFile>
+
+<FilePath> ::= '\' Identifier <FilePath> | !Null
+
+<PathSymbol> ::= '.\' | '..\' | '\' | '@@' | '.\@@' | '..\@@' | !Null 
+
+! <ShortcutLink> ::= '#/' | !Null
+
+<WebLink> ::= <WebHeader> <IdentifierOpt> <WebPath> <WebFile>
+<WebHeader> ::= HTTP '://' | HTTPS '://' | FTP '://'
+<WebPath> ::= '/' Identifier <WebPath> | !Null
+
+<WebFile> ::= '/' | '/' <IdentifierOpt> | !Null
+
+!*********************             Special Command Block          *********************!
+
+<On_Browser_Exit_Block> ::= ONBROWSEREXIT NewLine BEGIN NewLine <Statements> NewLine END
+<Startup_Block> ::= STARTUP NewLine BEGIN NewLine <Statements> NewLine END
+<ShutDown_Block> ::= SHUTDOWN NewLine BEGIN NewLine <Statements> NewLine END
+<On_Browser_Exit_Empty_Block> ::= ONBROWSEREXIT NewLine BEGIN NewLine END
+<Startup_Empty_Block> ::= STARTUP NewLine BEGIN NewLine END
+<ShutDown_Empty_Block> ::= SHUTDOWN NewLine BEGIN NewLine END
