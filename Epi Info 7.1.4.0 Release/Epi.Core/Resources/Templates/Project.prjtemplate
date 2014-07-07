@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Project id="" name="" location="" description="" epiVersion="" createDate="" databaseFormat="" useMetadataDbForCollectedData="">
+	<Metadata>
+		<Database connectionString="" />
+	</Metadata>
+	<CollectedData>
+		<Database connectionString="" />
+	</CollectedData>
+	<LinkTables connectionString="" tableName="" linkName="" />	
+ </Project>

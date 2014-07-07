@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TabOrders" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TabOrders" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="TabOrders" msprop:Generator_DataSetName="TabOrders">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TabOrder" msprop:Generator_UserTableName="TabOrder" msprop:Generator_RowDeletedName="TabOrderRowDeleted" msprop:Generator_TableClassName="TabOrderDataTable" msprop:Generator_RowChangedName="TabOrderRowChanged" msprop:Generator_RowClassName="TabOrderRow" msprop:Generator_RowChangingName="TabOrderRowChanging" msprop:Generator_RowEvArgName="TabOrderRowChangeEvent" msprop:Generator_RowEvHandlerName="TabOrderRowChangeEventHandler" msprop:Generator_TablePropName="TabOrder" msprop:Generator_TableVarName="tableTabOrder" msprop:Generator_RowDeletingName="TabOrderRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FieldId" msprop:Generator_UserColumnName="FieldId" msprop:Generator_ColumnPropNameInRow="FieldId" msprop:Generator_ColumnVarNameInTable="columnFieldId" msprop:Generator_ColumnPropNameInTable="FieldIdColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="Name" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInTable="NameColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="PromptText" msprop:Generator_UserColumnName="PromptText" msprop:Generator_ColumnPropNameInRow="PromptText" msprop:Generator_ColumnVarNameInTable="columnPromptText" msprop:Generator_ColumnPropNameInTable="PromptTextColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="TabIndex" msprop:Generator_UserColumnName="TabIndex" msprop:Generator_ColumnPropNameInRow="TabIndex" msprop:Generator_ColumnVarNameInTable="columnTabIndex" msprop:Generator_ColumnPropNameInTable="TabIndexColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="HasTabStop" msprop:Generator_UserColumnName="HasTabStop" msprop:Generator_ColumnPropNameInRow="HasTabStop" msprop:Generator_ColumnVarNameInTable="columnHasTabStop" msprop:Generator_ColumnPropNameInTable="HasTabStopColumn" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

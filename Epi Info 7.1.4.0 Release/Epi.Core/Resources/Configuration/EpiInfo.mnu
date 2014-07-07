@@ -1,0 +1,386 @@
+MENU Epi Info
+
+*The menu structure is described first
+BEGIN
+  POPUP "&File"
+  BEGIN
+     MENUITEM "E&xit", Exit1
+  END
+
+  POPUP "&Edit"
+  BEGIN
+     MENUITEM "Mo&ve / Resize Buttons", MoveButtons1
+  END
+
+  POPUP "&View"
+  BEGIN
+     MENUITEM "&Buttons", ButtonSetting
+  END
+
+  POPUP "&Tools"
+  BEGIN
+     MENUITEM "Ma&ke View", MakeView
+     MENUITEM "E&nter Data", EnterData
+     MENUITEM "&Analyze Data", Analysis
+     MENUITEM "Create &Maps", EpiMap
+     MENUITEM "Create &Reports", EpiReport
+     MENUITEM SEPARATOR
+     MENUITEM "&Options", Options
+     MENUITEM "&Extract &Strings", ExtractString
+  END
+
+  POPUP "&Help"
+  BEGIN
+     MENUITEM "Epi Info &Website", Website
+     MENUITEM "&About Epi Info", About1
+  END
+
+**Remove the **'s from the lines below to enable easy access to translated manuals which are 
+**based on previous versions of the EpiInfo manual.  For instance, if you have a non-english 
+**version of the manual which is based on the previous manual, these menuitems will call them
+
+  BUTTON "Ma&ke View", MakeView, 5, 67, "Make or Edit a Questionnaire"
+  BUTTON "E&nter Data", Enter, 5, 78, "Enter and store data, using a View"
+  BUTTON "&Analyze Data", Analysis, 5, 89, "Lists, Tables, Statistics, Graphs, Maps"
+
+  BUTTON "E&xit", Exit1, 95, 56, "Leave the current menu"
+
+  BUTTON "Create &Maps", Epimap, 95, 67, "The mapping program"
+  BUTTON "Create &Reports", ReportEngine, 95, 78, "Report Engine"
+  BUTTON "Epi Info &Website",Internet, 95, 89, "Quick access if you have an Internet connection"
+
+  ScreenText "Version @@VERSION", 50, 90, 12, yellow, Arial, Bold
+  ScreenText "@@CompDate", 50, 95, 8, yellow, Arial
+  ScreenText "Language=@@LANGUAGE", 2, 0, 8, yellow, Arial
+END
+
+* The following command blocks contain functions to perform
+* when an item is chosen.
+* Every function MUST have a BEGIN and END.  If they are not
+* paired exactly, the results will be strange.  Commands can be
+* those you would use in a DOS batch file or menu commands like
+* VIEW or HELP.
+
+ StartUp
+ Begin
+ **  Browser "@@WorkDir \Home.htm", 20, 30, 60, 55, ExitButton
+ End
+
+ Shutdown
+ Begin
+ * Your code goes here
+ End
+
+ OnBrowserExit
+ Begin
+ * Do the event when closing the browser
+ End
+
+ MakeView
+ Begin
+   Execute MakeView.EXE
+ End
+
+ Enter
+ Begin
+  Execute Enter.exe
+ End
+
+ Analysis
+ Begin
+   Execute analysis.exe
+ End
+
+ EpiMap
+ Begin
+   Execute Epimap.exe
+ End
+
+ ReportEngine
+ Begin
+   Execute EpiRepGen.exe
+ End
+ 
+ Nutstat
+ Begin
+   Execute NUTSTAT.exe
+ End
+
+ StatCalc
+ Begin
+   If Exists(.\@@language \Statcalc.exe) then
+      Execute .\@@language \Statcalc.exe
+   Else
+      Execute Statcalc.exe
+   EndIf
+ *  Execute .\@@language \Statcalc.exe;Statcalc.exe
+ End
+
+ DataComp
+ Begin
+   Execute DataComp.exe
+ End
+
+ TableToView
+ Begin
+   Execute Tbl2View.exe
+ End
+
+ EpiLock
+ Begin
+   Execute EpiLock.exe
+ End
+
+ Compact
+ Begin
+   Execute Compact.exe
+ End
+
+ WordPad
+ Begin
+   Execute wordpad.exe
+ End
+
+ Find
+ Begin
+   Execute epifind.exe
+ End
+
+ Exit1
+ Begin
+   Exit
+ End
+
+*Illustrates use of a variable value as part of a command.  Note the space after the variable name, which
+*will be removed in processing. This also illustrates the use of a path with the Execute command.  If the first
+*item is not found, Execute looks for the next one.  Items are separated by semicolons.
+
+VisualizeData
+Begin
+  Execute .\@@language \visdata.exe;visdata.exe
+End
+ 
+InstallLanguage
+Begin
+  Execute TSETUP.EXE
+End
+
+ChooseLanguage
+Begin
+  SETLANGUAGE
+End
+
+PictureSetting
+Begin
+  SETPICTURE
+End
+
+EditThisMenu
+Begin
+  Execute WordPad.Exe "@@MenuDir \EpiInfo.MNU"
+End
+
+SystemInfo
+Begin
+  SYSINFO
+End
+
+ChooseDBVersion
+Begin
+  SetDBVersion
+End
+
+ButtonSetting
+Begin
+  SETBUTTONS
+End
+
+MoveButtons1
+Begin
+  MoveButtons
+End
+
+WorkingDir
+Begin
+  SETWORKDIR "Please choose a working directory for which you have write privileges."
+End
+
+INIFileDir
+Begin
+  SETINIDIR "Please choose a writable directory for the EpiInfo.INI file."
+End
+
+Contents
+Begin
+  *Help EIHelp.chm#/Epi_Info_Menu/Epi_Info_Menu_Overview.htm
+  Help EIHelp.chm#/Introduction_to_Epi_Info_for_Windows/First_Topic.htm
+End
+
+Translations
+Begin
+  Help EIHelp.chm#/Translations/Translating_the_Epi_Info_Programs.htm
+End
+
+MenuHowTo
+Begin
+  Help EIHelp.chm#/Epi_Info_Menu/Developing_a_new_Menu_(.mnu).htm, Howto.htm
+End
+
+WhatsNew
+Begin
+  Help EIHelp.chm#/What_s_New!.htm
+End
+
+OswegoEx
+Begin
+  Help Oswego.chm, OSWEGO\INDEX.HTM 
+End
+
+RhodoEx
+Begin
+  Help Rhodo.chm, RHODO\INDEX.HTM 
+End
+
+SurvDesignEx
+Begin
+  Help Surveill.chm, SURVEX\index.HTM 
+End
+                  
+About1
+Begin
+  About
+End
+                  
+*Note that Execute can bring up a suitable display program, in this case, the browser and the Internet,
+*without an explicit reference to the program.  Similarly, a .DOC file might bring up Microsoft Word
+*and a .PDF file will bring up Adobe Reader, according to the associations that are recorded in Windows.
+
+Internet
+Begin
+  Execute http://www.cdc.gov/epiinfo/
+End
+
+**  Old Manual
+**  The following command blocks are executed by the menuitems above
+ManualNewRelease
+Begin
+  Help Newrel.htm
+End
+
+ManualOverView
+Begin
+  Help Overview.htm
+End
+
+ManualInstall
+Begin
+  Help Install.htm
+End
+
+ManualGuidedTour
+Begin
+  Help Guided.HTM
+End
+
+ManualRapidTour
+Begin
+  Help RAPID.HTM
+End
+
+ManualHowTo
+Begin
+  Help Howto.htm
+End
+
+ManualDataMan
+Begin
+  Help DataMan.htm
+End
+
+ManualWhatsNew
+Begin
+  Help WhatsNew.htm
+End
+
+ManualPrograms
+Begin
+  Help Programs.htm
+End
+
+ManualSamples
+Begin
+  Help Samples.htm
+End
+
+ManualNutrition
+Begin
+  Help Nutstat.htm
+End
+
+ManualCmds
+Begin
+  Help Commands.HTM
+End
+
+ManualFunctions
+Begin
+  Help Function.htm
+End
+
+ManualCSample
+Begin
+  Help Csample.htm
+End
+
+ManualLimits
+Begin
+  Help Limits.HTM
+End
+
+ManualTranslate
+Begin
+  Help Translat.HTM
+End
+
+ManualMVA
+Begin
+  Help LogReg.htm
+End
+
+ManualKM
+Begin
+  Help KapMeier.htm
+End
+
+ManualGIS
+Begin
+  Help GISRes.htm
+End
+
+ManualStats
+Begin
+  Help  Statist.htm
+End
+
+ManualInternal
+Begin
+  Help Internal.htm
+End
+
+ManualTitles
+Begin
+  Help Titles.htm
+End
+
+ManualFrCover
+Begin
+  Help FrCover.htm
+End
+
+ManualBkCover
+Begin
+  Help BkCover.htm
+End
+
+*End of Menu
+*ToolTips are included with the Buttons

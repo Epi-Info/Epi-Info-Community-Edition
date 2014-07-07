@@ -1,0 +1,7 @@
+<Project id="94643839-f348-eb2a-f726-ce8c238387cc" name="H1N1ClinicalLongForm" location="C:\TFSCode\Epi Info 7\Build\Debug\Projects\H1N1ClinicalLongForm" description="H1N1ClinicalLongForm" schemaVersion="102" epiVersion="" createDate="09/22/2010 16:24:31" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\TFSCode\Epi Info 7\Build\Debug\Projects\H1N1ClinicalLongForm\H1N1ClinicalLongForm.mdb&quot;;User ID=admin" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.Interpreter" />
+</Project>

@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="EpiDashboard.Controls.SetDataSource"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="700" FontSize="16" Background="White" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Column="1" Grid.Row="1">
+        </DockPanel>
+
+        <DockPanel Grid.Column="2" Grid.Row="1" Margin="0,0,8,8">
+            <UniformGrid Columns="5" Margin="0,5,0,5">
+                <StackPanel Grid.Column="0" />
+                <Button x:Name="btnOK" Content="OK" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Margin="4" Click="btnOK_Click" />
+                <Button x:Name="btnAdvanced" Content="Advanced" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" Margin="4" IsCancel="True" Click="btnAdvanced_Click" />
+                <Button x:Name="btnCancel" Content="Cancel" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" Margin="4" IsCancel="True" Click="btnCancel_Click" />
+                <Button x:Name="btnHelp" Content="Help" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" Margin="4" IsCancel="True" Click="btnHelp_Click" />
+            </UniformGrid>
+        </DockPanel>
+
+        <DockPanel Grid.Column="0" Background="{StaticResource PrimaryAccentColor}" Grid.RowSpan="2">
+            <StackPanel>
+                <TextBlock x:Name="tblockRecent" FontWeight="Light" Margin="10, 10, 10, 0" FontSize="24" Foreground="White">Recent Data Sources</TextBlock>
+                <StackPanel Height="1" Background="#BFDDF2"  HorizontalAlignment="Stretch" Margin="5" />
+
+                <Grid x:Name="grdRecentDataSources">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="16"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                    </Grid.RowDefinitions>
+                </Grid>
+
+                <!--<TextBlock x:Name="tblockAvail" FontWeight="Light" Margin="10, 10, 10, 0" FontSize="22" Foreground="Gray">Available Projects</TextBlock>-->
+
+                <!--<Grid x:Name="grdAvailableProjects">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                    </Grid.RowDefinitions>
+                </Grid>-->
+            </StackPanel>
+
+        </DockPanel>
+
+        <StackPanel Margin="10, 10, 15, 10" Width="450" MaxWidth="450" MinWidth="450" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Column="2">
+            <TextBlock x:Name="tblockHeading" Text="Set a Data Source" Foreground="{DynamicResource windowDarkColor}" FontSize="24" Margin="0,0,2,10"/>
+            <TextBlock x:Name="tblockDbType" Text="Database type:" ></TextBlock>
+            <ComboBox x:Name="cmbDatabaseType" Margin="0,0,0,8" Width="450" MaxWidth="450" MinWidth="450"></ComboBox>
+
+            <TextBlock x:Name="tblockConnInfo" Text="Connection information:" ></TextBlock>
+            <Grid x:Uid="Grid_2" Name="grdConnectionInformation" Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="5"></ColumnDefinition>
+                    <ColumnDefinition Width="26"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="txtConnectionInformation" Grid.Row="0" Grid.Column="0" IsEnabled="False" HorizontalAlignment="Stretch" TextChanged="txtConnectionInformation_TextChanged" />
+                <Button x:Name="btnConnectionBrowse" Content="..." Grid.Row="0" Grid.Column="2" Click="btnConnectionBrowse_Click" />
+            </Grid>
+
+            <TextBlock  x:Name="tblockTables" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0" Text="Tables:" TextAlignment="Center" />
+            <ListBox HorizontalAlignment="Stretch" Margin="0,0,0,8" Name="lbxTables" SelectedIndex="0" SelectionMode="Extended" Width="Auto" Height="325" />
+
+        </StackPanel>
+    </Grid>
+</UserControl>

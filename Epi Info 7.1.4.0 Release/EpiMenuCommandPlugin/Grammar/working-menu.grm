@@ -1,0 +1,165 @@
+"Name"     = 'Epi7 Menu Grammar'
+"Author"   = 'Enter your name'
+"Version"  = 'The version of the grammar and/or language'
+"About"    = 'A short description of the grammar'
+
+"Start Symbol" = <Program>
+
+!--- To Do
+!-- add file path 
+
+!---
+
+! ------------------------------------------------- Sets
+
+{String Chars} = {Printable} + {HT} - ["]
+{Valid Chars}				= {All Valid} - {CR} - {LF}
+{ID Head}				= {Letter} + [_]
+{ID Tail}      			= {Alphanumeric} + [_]
+! ------------------------------------------------- Terminals
+
+Identifier    = {ID Head}{ID Tail}*
+StringLiteral = '"' {String Chars}* '"'
+!Number  = [+-]? {Digit}*'.'{Digit}+ ('E'[+-]? {Digit}+)?
+Number  = {Digit}+
+Comment = '*'{Printable}*
+
+! ------------------------------------------------- Rules
+
+<Program> ::= Menu StringLiteral <CommandSet> | Eof
+
+<Expression>  ::= <Expression> '>'  <Add Exp>
+               |  <Expression> '<'  <Add Exp>
+               |  <Expression> '<=' <Add Exp>
+               |  <Expression> '>=' <Add Exp>
+               |  <Expression> '==' <Add Exp>    !Equal
+               |  <Expression> '<>' <Add Exp>    !Not equal
+               |  <Add Exp>
+
+<Add Exp>     ::= <Add Exp> '+' <Mult Exp>
+               |  <Add Exp> '-' <Mult Exp>
+               |  <Mult Exp>
+
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp>
+               |  <Mult Exp> '/' <Negate Exp>
+               |  <Negate Exp>
+
+<Negate Exp>  ::= '-' <Value>
+               |  <Value>
+
+!Add more values to the rule below - as needed
+
+<Value>       ::= Identifier
+               |  '(' <Expression> ')'
+		  | StringLiteral
+		| Number
+
+<CommandSet> ::= <Command> | <Command> <CommandSet>
+
+<Command> ::= <Assign_Command> | <Browser_Command> | <BrowserSize_Command> | <Button_Command>
+		| <Call_Command> | <Command_Block> | <Comment_Command>
+		| <Execute_Command> | <Expression> | <Exit_Command>
+		| <FileDialog_Command>
+		| <GetPath_Command>
+		| <Help_Command>
+		| <If_Then_Else_Command> 
+		| <Link_Command> | <LinkRemove_Command>
+		| <Menu_Command> | <MoveButtons_Command>
+		| <OnBrowserExit>
+		| <Picture_Command> | <PopUp_Command> 
+		| <RepeatUntil_Command> | <Replace_Command>
+		| <ScreenText_Command> | <SetButtons_Command> | <SetDBVersion_Command> | <SetDosWin_Command> | <SetINIDir_Command> 
+		| <StartUp_Command> | <ShutDown_Command>
+		| <SysInfo_Command> 
+		| <UnDefine_Command>
+		| <WaitFor_Command> | <WaitForExit_Command> | <WaitForFileExists_Command>
+
+
+<Command_Block> ::= Identifier Begin <CommandSet> End
+			| Begin <CommandSet> End
+
+<Assign_Command> ::= ASSIGN Identifier '=' <Expression>
+			| Identifier '=' <Expression>
+
+<Browser_Command> ::= BROWSER StringLiteral ',' Number ',' Number ',' Number ',' Number
+				| BROWSER StringLiteral ',' Number ',' Number ',' Number ',' Number ',' ExitButton
+
+<BrowserSize_Command> ::= BROWSERSIZE StringLiteral ',' Number ',' Number ',' Number ',' Number
+				| BROWSERSIZE StringLiteral ',' Number ',' Number ',' Number ',' Number ',' ExitButton
+
+<Button_Command> ::= Button StringLiteral ',' Identifier ',' Number ',' Number ',' Number ',' Number ',' StringLiteral
+
+<Comment_Command> ::= Comment
+
+<Call_Command> ::= Call Identifier
+
+<Execute_Command> ::= Execute StringLiteral
+
+<Exit_Command> ::= Exit
+
+
+<FileDialog_Command> ::= FileDialog Identifier ',' StringLiteral
+
+
+<GetPath_Command> ::= GetPath Identifier 
+			| GetPath Identifier StringLiteral
+
+<Help_Command> ::= HELP StringLiteral
+			| HELP StringLiteral ',' StringLiteral
+
+<If_Then_Else_Command> ::= If <Expression> Then <CommandSet> EndIf
+				| If <Expression> Then <CommandSet> Else <CommandSet> EndIf
+
+
+<Link_Command> ::= Link Identifier StringLiteral ',' Identifier StringLiteral
+
+<LinkRemove_Command> ::= LinkRemove StringLiteral
+				| LinkRemove ALL
+
+<Menu_Command> ::= MENU StringLiteral
+			| MENU StringLiteral StringLiteral
+			| MENU StringLiteral StringLiteral ',' Number ',' Number
+			| MENU StringLiteral StringLiteral ',' Number ',' Number ',' Number ',' Number
+
+<MoveButtons_Command> ::= MoveButtons
+
+<OnBrowserExit> ::= OnBrowserExit Begin <CommandSet> End
+
+<Picture_Command> ::= Picture StringLiteral
+			| Picture StringLiteral Number ',' Number ',' Number ',' Number
+
+<PopUp_Command> ::= POPUP StringLiteral Begin <MenuItem_List> End
+<MenuItem_Command> ::= MenuItem StringLiteral ',' Identifier 
+			| MenuItem 'Separator'
+<MenuItem_List> ::= <MenuItem_Command>
+			| <MenuItem_Command> <MenuItem_List>
+
+
+<RepeatUntil_Command> ::= Repeat <CommandSet> Until <Expression>
+
+<Replace_Command> ::= Replace StringLiteral ',' StringLiteral ',' StringLiteral ',' StringLiteral ';' From StringLiteral To StringLiteral ',' Number
+			| Replace StringLiteral ',' StringLiteral ',' StringLiteral ',' StringLiteral ';' StringLiteral ',' StringLiteral ',' Number
+
+<ScreenText_Command> ::= ScreenText StringLiteral ',' Number ',' Number ',' Number ',' StringLiteral ',' StringLiteral ',' StringLiteral
+
+
+<SetButtons_Command> ::= SetButtons
+				| SetButtons StringLiteral
+
+<SetDBVersion_Command> ::= SetDBVersion
+
+<SetDosWin_Command> ::= SetDosWin StringLiteral
+
+<SetINIDir_Command> ::= SetIniDir StringLiteral
+
+<StartUp_Command> ::= StartUp Begin <CommandSet> End
+<ShutDown_Command> ::= ShutDown Begin <CommandSet> End
+<SysInfo_Command> ::= SysInfo
+<UnDefine_Command> ::= UnDefine Identifier
+
+<WaitFor_Command> ::= WaitFor StringLiteral ',' StringLiteral
+
+<WaitForExit_Command> ::= WaitForExit StringLiteral ',' StringLiteral
+
+<WaitForFileExists_Command> ::= WaitForFileExists StringLiteral ',' StringLiteral
+

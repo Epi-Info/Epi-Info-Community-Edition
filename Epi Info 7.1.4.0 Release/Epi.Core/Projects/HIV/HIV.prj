@@ -1,0 +1,7 @@
+<Project id="d7d0c581-a02e-409d-715f-31c70a816c15" name="HIV" location="C:\TFSCode\Epi Info 7\build\debug\Projects\HIV" description="" schemaVersion="102" epiVersion="" createDate="06/22/2011 11:29:51" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="/CMip3j3HV8RumZ8DOXlLCsNfxtHVPMPzQ5QwP6y4R8dqPQQ3Q3c2YBcemsDyfxV9lImMI3tlxHrJvbIpFBvV1P85/6iXqL47uJYjtbZ6BsFNz59g9Gc8KEkwNFptiGBLTrQzugEX4j9qq3I6uOFxz8ctTWTZDhuhPZlw0IOixw=" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>

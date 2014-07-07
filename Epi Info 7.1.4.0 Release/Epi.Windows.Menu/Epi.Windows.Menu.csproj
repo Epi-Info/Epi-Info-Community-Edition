@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{532CF511-35F4-4EC9-B21B-E2B59BB2F796}</ProjectGuid>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Menu</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Epi.Windows.Menu</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <StartupObject>Epi.Windows.Menu.EntryPoint</StartupObject>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\Build\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>..\build\debug\Epi.Windows.Menu.XML</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>1591</NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>Menu</AssemblyName>
+    <RootNamespace>Epi.Windows.Menu</RootNamespace>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\build\release\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\build\release\Menu.XML</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>Menu</AssemblyName>
+    <RootNamespace>Epi.Windows.Menu</RootNamespace>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Build\Linux\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\debug\Epi.Windows.Menu.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug %28Exclude EpiMap%29|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug %28Exclude EpiMap%29\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\debug\Menu.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Epi.Enter.ServiceApplication\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\debug\Epi.Windows.Menu.XML</DocumentationFile>
+    <FileAlignment>4096</FileAlignment>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\build\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Linux\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug %28Exclude EpiMap%29|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug %28Exclude EpiMap%29\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Epi.Enter.ServiceApplication\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalithaLib, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Epi.Core\CalithaLib.dll</HintPath>
+    </Reference>
+    <Reference Include="GoldParserEngine, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Epi.Core\GoldParserEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
+      <Project>{EBD2B961-A952-4670-96CA-50BAA12C7F29}</Project>
+      <Name>Epi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows.AnalysisDashboard\Epi.Windows.AnalysisDashboard.csproj">
+      <Project>{05079D2E-76A7-418C-8192-6C7A6D956686}</Project>
+      <Name>Epi.Windows.AnalysisDashboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows.Analysis\Epi.Windows.Analysis.csproj">
+      <Project>{25C3FD50-2315-4129-AB2B-E8CD4EE33C22}</Project>
+      <Name>Epi.Windows.Analysis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows.DataPackager\Epi.Windows.DataPackager.csproj">
+      <Project>{99340A34-95C8-4C4E-8C9E-1FD29AC9983D}</Project>
+      <Name>Epi.Windows.DataPackager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows.DataUnpackager\Epi.Windows.DataUnpackager.csproj">
+      <Project>{A48397AE-92A5-4074-A2B8-FC0FABDAD9D9}</Project>
+      <Name>Epi.Windows.DataUnpackager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows.Enter\Epi.Windows.Enter.csproj">
+      <Project>{21B32C8B-1D10-4C30-AD88-0687C4FF4AAD}</Project>
+      <Name>Epi.Windows.Enter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows.ImportExport\Epi.Windows.ImportExport.csproj">
+      <Project>{57ECB9DA-A1B8-4B28-A811-91611AEFD82D}</Project>
+      <Name>Epi.Windows.ImportExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows.MakeView\Epi.Windows.MakeView.csproj">
+      <Project>{C646CC38-C861-4E7C-8158-B2AAA0D90E01}</Project>
+      <Name>Epi.Windows.MakeView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows.Mapping\Epi.Windows.Mapping.csproj">
+      <Project>{E37EE89F-6638-4E9F-A719-0D5FDCE88FAE}</Project>
+      <Name>Epi.Windows.Mapping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows\Epi.Windows.csproj">
+      <Name>Epi.Windows</Name>
+      <Project>{D120296B-493B-46AC-8657-4D32A9604231}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\EpiDashboard\EpiDashboard.csproj">
+      <Project>{3DE9D74E-BF08-4101-AC21-96D250A177D4}</Project>
+      <Name>EpiDashboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EpiInfoPlugin\EpiInfo.Plugin.csproj">
+      <Project>{20C12C97-52CE-45C3-B563-3C15330C2A98}</Project>
+      <Name>EpiInfo.Plugin</Name>
+    </ProjectReference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ConfigSchema.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="ConfigSchema.xsx">
+      <DependentUpon>ConfigSchema.xsd</DependentUpon>
+    </None>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Dialogs\ButtonDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ButtonDialog.Designer.cs">
+      <DependentUpon>ButtonDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DatabaseFormatDialog.Designer.cs">
+      <DependentUpon>DatabaseFormatDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ListDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ListDialog.Designer.cs">
+      <DependentUpon>ListDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SelectLanguageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SelectLanguageDialog.Designer.cs">
+      <DependentUpon>SelectLanguageDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SimpleDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SimpleDialog.Designer.cs">
+      <DependentUpon>SimpleDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SingleValueDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SingleValueDialog.Designer.cs">
+      <DependentUpon>SingleValueDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\StatCalc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\StatCalc.Designer.cs">
+      <DependentUpon>StatCalc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\UpdateDetailDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UpdateDetailDialog.Designer.cs">
+      <DependentUpon>UpdateDetailDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EntryPoint.cs" />
+    <Compile Include="IMenuProcessor.cs" />
+    <Compile Include="ManualProcessor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DatabaseFormatDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuMainForm.Designer.cs">
+      <DependentUpon>MenuMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuWindowsModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Dialogs\ButtonDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ButtonDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DatabaseFormatDialog.resx">
+      <DependentUpon>DatabaseFormatDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ListDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ListDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SelectLanguageDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SelectLanguageDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SimpleDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SimpleDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SingleValueDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SingleValueDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\StatCalc.resx">
+      <DependentUpon>StatCalc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UpdateDetailDialog.resx">
+      <DependentUpon>UpdateDetailDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuMainForm.resx">
+      <DependentUpon>MenuMainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+    <ProjectGuid>{532CF511-35F4-4EC9-B21B-E2B59BB2F796}</ProjectGuid>
+    <RootNamespace>Epi.Windows.Menu</RootNamespace>
+  </PropertyGroup>
+</Project>

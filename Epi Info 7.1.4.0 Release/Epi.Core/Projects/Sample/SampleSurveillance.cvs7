@@ -1,0 +1,158 @@
+﻿<DashboardCanvas>
+  <dashboardHelper>
+    <projectPath>.\Projects\Sample\Sample.prj</projectPath>
+    <viewName>Surveillance</viewName>
+    <advancedDataFilterCondition>
+    </advancedDataFilterCondition>
+    <useAdvancedDataFilterCondition>False</useAdvancedDataFilterCondition>
+    <relatedDataConnections />
+    <dataFilters recordProcessScope="undeleted" />
+    <dashboardRules />
+  </dashboardHelper>
+  <Gadgets>
+    <standardTextReportGadget top="7" left="445" width="417" height="76" collapsed="false" gadgetType="EpiDashboard.Gadgets.Reporting.StandardTextControl">
+      <text>This Dashboard is refreshed with the latest data when it opens.
+Click and drag gadgets to arrange.
+Righ-click a blank area of the canvas to add other gadgets.</text>
+      <fontWeight>regular</fontWeight>
+      <fontSize>14</fontSize>
+      <fontStretch>Normal</fontStretch>
+      <fontStyle>Normal</fontStyle>
+      <fontFamily>Global User Interface</fontFamily>
+      <textDecorations>
+      </textDecorations>
+      <foregroundColor>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+      </foregroundColor>
+    </standardTextReportGadget>
+    <standardTextReportGadget top="8" left="95" width="290" height="47" collapsed="false" gadgetType="EpiDashboard.Gadgets.Reporting.StandardTextControl">
+      <text>Sample Surveillance Dashboard Canvas</text>
+      <fontWeight>regular</fontWeight>
+      <fontSize>14</fontSize>
+      <fontStretch>Normal</fontStretch>
+      <fontStyle>Normal</fontStyle>
+      <fontFamily>Global User Interface</fontFamily>
+      <textDecorations>
+      </textDecorations>
+      <foregroundColor>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+      </foregroundColor>
+    </standardTextReportGadget>
+    <meansGadget top="94" left="91" collapsed="False" gadgetType="EpiDashboard.MeansControl" id="9593a36b-376f-432b-914e-a37ee1fdc3fa">
+      <mainVariable>Age</mainVariable>
+      <weightVariable>
+      </weightVariable>
+      <crosstabVariable>
+      </crosstabVariable>
+      <columnsToShow>1,2,3,4,5,6,7,8,9,10</columnsToShow>
+      <precision>4</precision>
+      <showANOVA>True</showANOVA>
+      <customHeading>Mean Age</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <dataFilters recordProcessScope="undeleted" />
+    </meansGadget>
+    <pieChartGadget top="202" left="91" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.PieChartGadget" id="0524f09f-78b0-4f06-997f-f2d7a5db013c">
+      <mainVariable>HospitalName</mainVariable>
+      <weightVariable>
+      </weightVariable>
+      <crosstabVariable>
+      </crosstabVariable>
+      <height>400</height>
+      <width>800</width>
+      <sort>
+      </sort>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <includeMissing>False</includeMissing>
+      <customHeading>Pie Chart</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <showAnnotations>True</showAnnotations>
+      <showAnnotationLabel>True</showAnnotationLabel>
+      <showAnnotationValue>True</showAnnotationValue>
+      <showAnnotationPercent>True</showAnnotationPercent>
+      <annotationPercent>20</annotationPercent>
+      <chartKind>0</chartKind>
+      <palette>12</palette>
+      <chartTitle>Hospitals Receiving Cases </chartTitle>
+      <chartSubTitle>
+      </chartSubTitle>
+      <showLegend>True</showLegend>
+      <showLegendBorder>False</showLegendBorder>
+      <showLegendVarNames>False</showLegendVarNames>
+      <legendFontSize>12</legendFontSize>
+      <anchorTop>9593a36b-376f-432b-914e-a37ee1fdc3fa</anchorTop>
+      <dataFilters recordProcessScope="undeleted" />
+    </pieChartGadget>
+    <frequencyGadget top="693" left="91" collapsed="False" gadgetType="EpiDashboard.FrequencyControl" id="cdf5379a-2c18-4b47-ae60-a0fbd8a1f206">
+      <mainVariable>Disease</mainVariable>
+      <strataVariable>Sex</strataVariable>
+      <weightVariable>
+      </weightVariable>
+      <sort>
+      </sort>
+      <allValues>False</allValues>
+      <precision>2</precision>
+      <showListLabels>False</showListLabels>
+      <useFieldPrompts>True</useFieldPrompts>
+      <columnsToShow>1,2,3,4,5,6</columnsToShow>
+      <includeMissing>False</includeMissing>
+      <customHeading>Frequency of Disease by Sex</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <anchorTop>0524f09f-78b0-4f06-997f-f2d7a5db013c</anchorTop>
+      <dataFilters recordProcessScope="undeleted" />
+    </frequencyGadget>
+    <frequencyGadget top="713" left="665" collapsed="False" gadgetType="EpiDashboard.FrequencyControl" id="ad52cf61-293d-4845-aad1-b66597f08c6f">
+      <mainVariable>CountyName</mainVariable>
+      <weightVariable>
+      </weightVariable>
+      <sort>
+      </sort>
+      <allValues>False</allValues>
+      <precision>2</precision>
+      <showListLabels>False</showListLabels>
+      <useFieldPrompts>True</useFieldPrompts>
+      <columnsToShow>1,2,3,4,5,6</columnsToShow>
+      <includeMissing>False</includeMissing>
+      <customHeading>Frequency of Cases by County</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <dataFilters recordProcessScope="undeleted" />
+    </frequencyGadget>
+  </Gadgets>
+  <OutputSettings>
+    <showCanvasSummaryInfo>True</showCanvasSummaryInfo>
+    <showGadgetHeadings>True</showGadgetHeadings>
+    <showGadgetSettings>True</showGadgetSettings>
+    <useAlternatingColors>False</useAlternatingColors>
+    <tableFontSize>13</tableFontSize>
+    <customHeading>
+    </customHeading>
+    <customSummary>
+    </customSummary>
+    <customConclusion>
+    </customConclusion>
+    <customTableFontFamily>
+    </customTableFontFamily>
+    <canvasHeight>8000</canvasHeight>
+    <sortGadgets>True</sortGadgets>
+  </OutputSettings>
+  <CanvasSettings>
+    <editMode>True</editMode>
+    <layoutMode>free</layoutMode>
+  </CanvasSettings>
+</DashboardCanvas>

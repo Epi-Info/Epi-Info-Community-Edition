@@ -1,0 +1,1179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EBD2B961-A952-4670-96CA-50BAA12C7F29}</ProjectGuid>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Epi.Core</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Epi</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\build\debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;DEBUG;PHIN_VS; WINDOWS_BUILD</DefineConstants>
+    <DocumentationFile>..\build\debug\Epi.Core.XML</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>1591</NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>Migrated rules for Epi.Core (2).ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\build\release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;PHIN_VS; WINDOWS_BUILD</DefineConstants>
+    <DocumentationFile>..\build\release\Epi.Core.XML</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\build\linux\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;LINUX_BUILD</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\linux\epi.core.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>Migrated rules for Epi.Core (2).ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug %28Exclude EpiMap%29|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug %28Exclude EpiMap%29\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PHIN_VS</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\debug\Epi.Core.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>Migrated rules for Epi.Core (2).ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Epi.Enter.ServiceApplication\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PHIN_VS; WINDOWS_BUILD</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>..\build\debug\Epi.Core.XML</DocumentationFile>
+    <FileAlignment>4096</FileAlignment>
+    <NoWarn>1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>Migrated rules for Epi.Core (2).ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\build\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Linux\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug %28Exclude EpiMap%29|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug %28Exclude EpiMap%29\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Epi.Enter.ServiceApplication\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalithaLib, Version=1.10.1954.23795, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\CalithaLib.dll</HintPath>
+    </Reference>
+    <Reference Include="GoldParserEngine, Version=1.10.1954.23795, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\GoldParserEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Design">
+      <Name>System.Design</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="DataSets\Config.cs">
+      <DependentUpon>Config.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Collections\TaggedList.cs" />
+    <Compile Include="CommandProcessorResults.cs" />
+    <Compile Include="Configuration_Static.cs" />
+    <Compile Include="Constants\Constants.cs" />
+    <Compile Include="Constants\ExecuteTokens.cs" />
+    <Compile Include="Constants\MessageBoxType.cs" />
+    <Compile Include="Constants\MetadataSource.cs" />
+    <Compile Include="Constants\SortOrder.cs" />
+    <Compile Include="DataSets\ANSI\TableColumnSchema.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableColumnSchema.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\AppDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\Config.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Config.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\MapMetadata.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MapMetadata.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\TableColumnSchema.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableColumnSchema.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\TableKeysSchema.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableKeysSchema.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\TableSchema.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableSchema.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\TabOrder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TabOrder.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AnalysisOutput.cs" />
+    <Compile Include="Data\DbColumnType.cs" />
+    <Compile Include="Data\DbDriverBase.cs" />
+    <Compile Include="Data\DbDriverInfo.cs" />
+    <Compile Include="Data\DBReadExecute.cs" />
+    <Compile Include="Data\GenericDbType.cs" />
+    <Compile Include="Data\IConnectionStringGui.cs" />
+    <Compile Include="Data\IDbDriverFactory.cs" />
+    <Compile Include="Data\IQuery.cs" />
+    <Compile Include="Data\ITableColumn.cs" />
+    <Compile Include="Data\OptionNameProvider.cs" />
+    <Compile Include="Data\Services\EntityDataReader.cs" />
+    <Compile Include="Data\Services\MetadataDataSet.cs" />
+    <Compile Include="Data\Services\IMetadataProvider.cs" />
+    <Compile Include="Data\Services\MetadataXmlProvider.cs" />
+    <Compile Include="Data\TableColumn.cs" />
+    <Compile Include="Exceptions\ConfigurationException.cs" />
+    <Compile Include="Exceptions\ViewNotFoundException.cs" />
+    <Compile Include="Exceptions\InvalidConfigurationException.cs" />
+    <Compile Include="Exceptions\NotMDBFileException.cs" />
+    <Compile Include="Exceptions\ReservedWordException.cs" />
+    <Compile Include="Exceptions\ValidationFailedException.cs" />
+    <Compile Include="ExecutionEnvironment.cs" />
+    <Compile Include="ProjectPermissions.cs" />
+    <Compile Include="Services\Fields\YesNoColumn.cs" />
+    <Compile Include="Services\Fields\Grid Columns\CheckBoxColumn.cs" />
+    <Compile Include="Services\Fields\Grid Columns\TimeColumn.cs" />
+    <Compile Include="Services\Fields\Grid Columns\DateTimeColumn.cs" />
+    <Compile Include="Services\Fields\Grid Columns\UniqueRowIdColumn.cs" />
+    <Compile Include="Services\Fields\Grid Columns\GlobalRecordIdColumn.cs" />
+    <Compile Include="Services\Fields\DDListField.cs" />
+    <Compile Include="Services\Fields\GlobalRecordIdField.cs" />
+    <Compile Include="Services\Fields\ForeignKeyColumn.cs" />
+    <Compile Include="Services\Fields\ForeignKeyField.cs" />
+    <Compile Include="Services\Fields\Grid Columns\TableBasedDropdownColumn.cs" />
+    <Compile Include="Services\Fields\DDLColumnOfCommentLegal.cs" />
+    <Compile Include="Services\Fields\DDLColumnOfLegalValues.cs" />
+    <Compile Include="Services\Fields\Grid Columns\UniqueKeyColumn.cs" />
+    <Compile Include="Services\Fields\Grid Columns\RecStatusColumn.cs" />
+    <Compile Include="Services\Fields\Grid Columns\PredefinedColumn.cs" />
+    <Compile Include="Services\Fields\GrouplField.cs" />
+    <Compile Include="Services\Fields\GUIDField.cs" />
+    <Compile Include="IControlFactory.cs" />
+    <Compile Include="Services\Fields\UniqueIdentifierField.cs" />
+    <Compile Include="ICommandProcessor.cs" />
+    <Compile Include="Data\Services\AppData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ApplicationIdentity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger.cs" />
+    <Compile Include="SortCriteria.cs" />
+    <Compile Include="SilverlightStatics.cs" />
+    <Compile Include="Template.cs" />
+    <Compile Include="Tools\DetermineOS.cs" />
+    <Compile Include="Validator.cs" />
+    <Compile Include="Variables\GlobalVariable.cs" />
+    <Compile Include="Variables\DataSourceVariableRedined.cs" />
+    <Compile Include="Variables\IDataSourceVariable.cs" />
+    <Compile Include="Variables\IScalarVariable.cs" />
+    <Compile Include="Variables\ISetBasedVariable.cs" />
+    <Compile Include="Variables\ISystemVariable.cs" />
+    <Compile Include="Variables\MemoryRegion.cs" />
+    <Compile Include="Variables\StandardVariable.cs" />
+    <Compile Include="Variables\IVariable.cs" />
+    <Compile Include="Variables\IMemoryRegion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Collections\FieldCollectionMaster.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Collections\KeyValuePairCollection.cs" />
+    <Compile Include="Collections\NamedObjectCollection.cs" />
+    <Compile Include="Collections\ViewCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ConfigKeys.cs" />
+    <Compile Include="Configuration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Constants\Action.cs" />
+    <Compile Include="Constants\AppSettingKeys.cs" />
+    <Compile Include="Constants\CharLiterals.cs" />
+    <Compile Include="Constants\ColumnNames.cs" />
+    <Compile Include="Constants\CommandNames.cs" />
+    <Compile Include="Constants\DatabasePurpose.cs" />
+    <Compile Include="Constants\DataSourceObjectCategories.cs" />
+    <Compile Include="Constants\DataType.cs" />
+    <Compile Include="Constants\DialogFormat.cs" />
+    <Compile Include="Constants\FileExtensions.cs" />
+    <Compile Include="Constants\FormMode.cs" />
+    <Compile Include="Constants\ConnectionStringKeys.cs" />
+    <Compile Include="Constants\MetaFieldType.cs" />
+    <Compile Include="Constants\RecordProcessingScope.cs" />
+    <Compile Include="Constants\ShortHands.cs" />
+    <Compile Include="Constants\SqlDataTypes.cs" />
+    <Compile Include="Constants\SqlKeyWords.cs" />
+    <Compile Include="Constants\StatisticsLevel.cs" />
+    <Compile Include="Constants\StringLiterals.cs" />
+    <Compile Include="Constants\SupportedAggregate.cs" />
+    <Compile Include="Constants\VariableType.cs" />
+    <Compile Include="DataSets\AppDataSet.cs">
+      <DependentUpon>AppDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data\Services\CollectedDataProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\IDbDriver.cs" />
+    <Compile Include="Data\QueryParameter.cs" />
+    <Compile Include="Data\DbDriverFactoryCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Query.cs" />
+    <Compile Include="Data\ITable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Services\MetadataDbProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Services\PHINVSProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\Table.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Defaults.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Delegates.cs" />
+    <Compile Include="Diagnostics\Debugger.cs" />
+    <Compile Include="IniProvider.cs" />
+    <Compile Include="Exceptions\CurrentProjectInvalidException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Exceptions\VariableExistsException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Exceptions\GeneralException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Exceptions\InvalidProjectFormatException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Exceptions\ParseException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Exceptions\TableNotFoundException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Exceptions\TokenException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\CheckBoxField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\CommandButtonField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\Grid Columns\ContiguousColumn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\Grid Columns\DateColumn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\DateField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\DateTimeField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\DDLFieldOfCodes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\DDLFieldOfCommentLegal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\DDLFieldOfLegalValues.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\DropDownField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\Field.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\FieldWithoutSeparatePrompt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\FieldWithSeparatePrompt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\Grid Columns\GridColumnBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\GridField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\IDataField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\IDependentField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\IField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\IFieldWithCheckCode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\IInputField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\ImageField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\IMirrorable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\InputFieldWithSeparatePrompt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\InputFieldWithoutSeparatePrompt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\InputTextBoxField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\IPatternable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\IPatternableField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\LabelField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\MirrorField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\MultilineTextField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\Grid Columns\NumberColumn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\NumberField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\OptionField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\OptionFieldItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\PatternableColumn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\Grid Columns\PhoneNumberColumn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\PhoneNumberField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\ReadOnlyTextField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\RecStatusField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\RelatedViewField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\RenderableField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\SingleLineTextField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\PredefinedDataField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\TableBasedDropdownField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\Grid Columns\TextColumn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\TextField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\TimeField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\UniqueKeyField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\UpperCaseTextField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Fields\YesNoField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ICommandLine.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IModuleManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="INamedObject.cs" />
+    <Compile Include="IProjectHost.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IProjectManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ISettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="KeyValuePair.cs" />
+    <Compile Include="Localization.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ModuleBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Page.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Constants\ParserConstants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Project.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ResourceLoader.cs" />
+    <Compile Include="Settings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SharedStrings.Designer.cs">
+      <DependentUpon>SharedStrings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SubRoutine.cs" />
+    <Compile Include="Util.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Variables\ArithmeticOperandVariable.cs" />
+    <Compile Include="Variables\PermanentVariable.cs" />
+    <Compile Include="Variables\SystemVariables.cs" />
+    <Compile Include="Variables\PluginVariable.cs" />
+    <Compile Include="Variables\VariableBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Variables\DataSourceVariable.cs" />
+    <Compile Include="View.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\HTML.cs" />
+    <Compile Include="Web\HtmlDocument.cs" />
+    <Compile Include="Web\ResultsHistory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\SessionHistory.cs" />
+    <Compile Include="WordBuilder.cs" />
+    <Content Include="FipsCrypto.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\SamplePrograms\Sample.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\Sample\Sample.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Training Projects\CommunityHealthAssessment\albany_demogz.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Training Projects\CommunityHealthAssessment\CommunityHealthAssessment.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Training Projects\Salmonellosis\Salmonellosis.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Fields\debug - one of each field with different widths.xml" />
+    <Content Include="Templates\Fields\debug - one of each field.xml" />
+    <Content Include="Templates\Fields\States.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Pages\Mosquito Net Description.xml" />
+    <Content Include="Templates\Projects\AndroidSamsungGalaxyTab2_7.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\CheckCodeAssignDialogInput.xml" />
+    <Content Include="Templates\Projects\Codes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Control State Check Code.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Different Form Sizes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Epi Info 7 Course Evaluation.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Epi Web Control State Check Code Verification.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\ExampleProjectLevelTemplate.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\ExecuteCommand.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Generic Blank Project.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Grid Field with YesNo and Checkbox Field Requirment Verification Project.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Option Fields.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Phone Number Fields.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Populate Fields.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Rule_EpiWeek.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Tabbing.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\Table Based Field Sandbox.xml" />
+    <Content Include="Templates\Projects\Table Based Fields DevEx.xml" />
+    <Content Include="Templates\Projects\Table Based Fields.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\TestProject03.xml" />
+    <Content Include="Templates\Projects\Time Based Control Examples.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Projects\[New Record] with [Repeat Last].xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="DataSets\ANSI\TableColumnSchema.xsc">
+      <DependentUpon>TableColumnSchema.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\ANSI\TableColumnSchema.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TableColumnSchema.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSets\ANSI\TableColumnSchema.xss">
+      <DependentUpon>TableColumnSchema.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\AppDataSet.xsc">
+      <DependentUpon>AppDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\AppDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>AppDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSets\AppDataSet.xss">
+      <DependentUpon>AppDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\AppDataSet.xsx">
+      <DependentUpon>AppDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\Config.xsc">
+      <DependentUpon>Config.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\Config.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Config.Designer.cs</LastGenOutput>
+    </None>
+    <EmbeddedResource Include="SharedStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SharedStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="DataSets\Config.xss">
+      <DependentUpon>Config.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\Config.xsx">
+      <DependentUpon>Config.xsd</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Resources\Configuration\Measles_CB_GUI.mnu" />
+    <None Include="DataSets\ConfigBackup.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="DataSets\MapMetadata.xsc">
+      <DependentUpon>MapMetadata.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\MapMetadata.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MapMetadata.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSets\MapMetadata.xss">
+      <DependentUpon>MapMetadata.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\ProjectMetadata.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="DataSets\ProjectMetadata.xsx">
+      <DependentUpon>ProjectMetadata.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\TableColumnSchema.xsc">
+      <DependentUpon>TableColumnSchema.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\TableColumnSchema.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TableColumnSchema.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSets\TableColumnSchema.xss">
+      <DependentUpon>TableColumnSchema.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\TableKeysSchema.xsc">
+      <DependentUpon>TableKeysSchema.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\TableKeysSchema.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TableKeysSchema.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSets\TableKeysSchema.xss">
+      <DependentUpon>TableKeysSchema.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\TableSchema.xsc">
+      <DependentUpon>TableSchema.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\TableSchema.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TableSchema.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSets\TableSchema.xss">
+      <DependentUpon>TableSchema.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\TabOrder.xsc">
+      <DependentUpon>TabOrder.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\TabOrder.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TabOrder.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSets\TabOrder.xss">
+      <DependentUpon>TabOrder.xsd</DependentUpon>
+    </None>
+    <None Include="DataSources.cd" />
+    <None Include="Data\Services\AppData.cd" />
+    <EmbeddedResource Include="Resources\EpiInfo.Enter.Grammar.cgt" />
+    <EmbeddedResource Include="Resources\EpiInfoGrammar.cgt" />
+    <None Include="Migrated rules for Epi.Core %282%29.ruleset" />
+    <None Include="Projects\EColi\EColi.cvs7">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\EColi\EColi.map7" />
+    <None Include="Projects\EColi\EColi.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\HIV\HIV.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\JohnSnow\JohnSnow.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\KML_Example\ACS_11_1YR_HealthInsurance.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\KML_Example\Maryland_Counties.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Legionellosis\Legionellosis.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Lyme\Lyme.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Mumps\Mumps.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Nutrition\Nutrition.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\SamplePrograms\Sample.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Sample\Case Control DatabaseExample.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Sample\EARS.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Sample\MXState.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Sample\MXState.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Sample\MXState.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Sample\Oswego.cvs7">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Sample\Sample.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Sample\SampleSurveillance.cvs7">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\H1N1 Samples\H1N1ClinicalLongForm\H1N1ClinicalLongForm.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\Albany County Boundary_region.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\Albany County Boundary_region.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\Albany County Boundary_region.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\Albany County Boundary_region.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\ALBZCTA_region.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\ALBZCTA_region.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\ALBZCTA_region.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\ALBZCTA_region.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\assessment.cvs7" />
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\assessment.map7" />
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\AsthmaTable.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\CommunityHealthAssessment.cvs7" />
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\CommunityHealthAssessment.map7" />
+    <None Include="Resources\Training Projects\CommunityHealthAssessment\CommunityHealthAssessment.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Training Projects\Salmonellosis\SalmonellaTrainingCaseData_2013-06-17T20-04-48.edp7">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Training Projects\Salmonellosis\Salmonellosis.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Services\Fields\Fields.cd" />
+    <None Include="ProjectView.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <EmbeddedResource Include="Resources\Configuration\EpiInfo.mnu" />
+    <None Include="Resources\Configuration\Project.xsx">
+      <DependentUpon>Project.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\Configuration\TestMenu.mnu" />
+    <None Include="Resources\Configuration\View.xsx">
+      <DependentUpon>View.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\Configuration\EpiInfo.mnu.1" />
+    <Content Include="CalithaLib.dll" />
+    <Content Include="GoldParserEngine.dll" />
+    <None Include="Resources\EpiInfoGrammar.txt" />
+    <None Include="Resources\EpiInfo.Enter.Grammar.txt" />
+    <None Include="Projects\JohnSnow\JohnSnow.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Output\SilverlightApplication.xap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\EColi\EColi.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\HIV\HIV.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\Legionellosis\Legionellosis.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\Lyme\Lyme.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\Mumps\Mumps.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\Nutrition\Nutrition.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\H1N1 Samples\H1N1ClinicalLongForm\H1N1ClinicalLongForm.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\ImagesNotToBeDeployed\AddLayer.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\addPage.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\arrow.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\back.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\box.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\Bullets.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\button.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\checkbox.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\ClosedFolder.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\CodeSnippet.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\copy.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\cut.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\Database.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\date.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\delete.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\Designer.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\DesignerGrid.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\DividePoly.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\DocFolder.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\Down.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\dropdown.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\find.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\first.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\forward.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\FullExtent.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\grid.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\hand.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\help.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\image.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\info.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\invArrow.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\label.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\letter.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\line.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\LineSelect.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\LinkedMode.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\mirror.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\MoveDown.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\MoveLeft.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\MoveRight.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\MoveUp.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\new.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\NewRecord.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\Numbers.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\numeric.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\open.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\openfields.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\OpenFolder.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\oval.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\PaintBG.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\PaintText.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\paste.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\play.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\playOnce.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\point.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\polygon.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\prev.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\print.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\Program.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\radiobutton.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\remPage.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\save.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\select.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\shapes.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\table.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\text.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\UI.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\undo.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\uppercase.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\ZoomIn.bmp" />
+    <None Include="Resources\ImagesNotToBeDeployed\ZoomOut.bmp" />
+    <Content Include="Resources\Images\AboutHeader.JPG" />
+    <EmbeddedResource Include="Resources\Images\BG_Final.png" />
+    <Content Include="Resources\Output\Output.html" />
+    <EmbeddedResource Include="Resources\Templates\Project.prjtemplate" />
+    <Content Include="Resources\Configuration\Project.xsd">
+      <SubType>
+      </SubType>
+    </Content>
+    <Content Include="Resources\Configuration\View.xsd">
+      <SubType>
+      </SubType>
+    </Content>
+    <EmbeddedResource Include="Resources\Images\CDC Banner.bmp" />
+    <EmbeddedResource Include="Resources\Scripts\CollectedDataTableScript.sql" />
+    <EmbeddedResource Include="Resources\Scripts\MetadataTableScript.sql" />
+    <Content Include="Resources\Configuration\WARNING.rtf" />
+    <None Include="Resources\ImagesNotToBeDeployed\epi2000c.ico" />
+    <None Include="Resources\ImagesNotToBeDeployed\App.ico" />
+    <EmbeddedResource Include="Resources\Templates\ReportTemplate.EPT" />
+    <EmbeddedResource Include="Resources\Templates\ReportTemplate.epx" />
+    <EmbeddedResource Include="Resources\Images\EpiInfo.jpg" />
+    <EmbeddedResource Include="Resources\Images\EpiInfo7.jpg" />
+    <None Include="Resources\ImagesNotToBeDeployed\filecopy.avi" />
+    <None Include="Resources\ImagesNotToBeDeployed\Green.gif" />
+    <None Include="Resources\ImagesNotToBeDeployed\Orange.gif" />
+    <None Include="Resources\ImagesNotToBeDeployed\Red.gif" />
+    <None Include="Resources\ImagesNotToBeDeployed\REFCAMP.BMP" />
+    <None Include="Resources\ImagesNotToBeDeployed\Sky.jpg" />
+    <None Include="Resources\ImagesNotToBeDeployed\Yellow.gif" />
+    <EmbeddedResource Include="Resources\Templates\IHistory.htmTemplate" />
+    <None Include="Resources\Templates\Epi Parser - Constants Only.pgt" />
+    <EmbeddedResource Include="Resources\Templates\IResults.htmTemplate">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\Output.htmTemplate" />
+    <Content Include="Resources\PHIN\PHINVS.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Fields\Hospital Code Table Example.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Forms\BuildCheck_FormLevel.xml" />
+    <Content Include="Templates\Pages\Clinical Signs 1.xml" />
+    <Content Include="Templates\Pages\Clinical Signs 2.xml" />
+    <Content Include="Templates\Pages\Hematology Page 1.xml" />
+    <Content Include="Templates\Pages\Hematology Page 2.xml" />
+    <Content Include="Templates\Pages\Medical Care Facility.xml" />
+    <Content Include="Templates\Pages\Medical History.xml" />
+    <Content Include="Templates\Pages\Medications Page 1.xml" />
+    <Content Include="Templates\Pages\Medications Page 2.xml" />
+    <Content Include="Templates\Pages\Microbiology Results.xml" />
+    <Content Include="Templates\Pages\Outcome.xml" />
+    <Content Include="Templates\Pages\Pathology and Histopathology.xml" />
+    <Content Include="Templates\Pages\Radiology CTMMRI1.xml" />
+    <Content Include="Templates\Pages\Radiology CXR1.xml" />
+    <Content Include="Templates\Pages\Radiology CXR2.xml" />
+    <Content Include="Templates\Pages\Reporting.xml" />
+    <Content Include="Templates\Pages\Severity of Illness.xml" />
+    <Content Include="Templates\Pages\Vaccination History.xml" />
+    <Content Include="Templates\Pages\Vital Signs.xml" />
+    <Content Include="Templates\Fields\Demographics.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Fields\Diagnosis.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Fields\Geo_Location.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Fields\Medical_Facility.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Resources\Templates\LiveAnalytics.htmTemplate" />
+    <EmbeddedResource Include="Resources\Templates\UserDialog.xml" />
+    <EmbeddedResource Include="Resources\Templates\AnalysisHomeTemplate.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EpiInfoPlugin\EpiInfo.Plugin.csproj">
+      <Project>{20C12C97-52CE-45C3-B563-3C15330C2A98}</Project>
+      <Name>EpiInfo.Plugin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Content\" />
+    <Folder Include="Samples\" />
+    <Folder Include="Test\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

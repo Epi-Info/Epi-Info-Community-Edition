@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="EpiDashboard.Mapping.LayerList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:dashboard="clr-namespace:EpiDashboard.Mapping"
+             >
+    <Grid>
+        <Grid x:Name="ConfigGrid" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5,5,5,5" >
+            <Rectangle Fill="#775C90B2" Stroke="Gray" Margin="0,0,0,5" />
+            <Rectangle Fill="#DDFFFFFF" Stroke="DarkGray" Margin="5,5,5,10" />
+            <Grid>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Map Layers (" Margin="0,10,0,0" FontWeight="Bold" />
+                    <TextBlock x:Name="txtLayerCount" HorizontalAlignment="Center" TextAlignment="Center" Text="0" Margin="0,10,0,0" FontWeight="Bold" />
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text=")" Margin="0,10,0,0" FontWeight="Bold" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel x:Name="grdPlaceholder" Margin="-30,30,30,30" Width="860" >
+
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

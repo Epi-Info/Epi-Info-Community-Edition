@@ -1,0 +1,2 @@
+<?xml version="1.0"?>
+<XmlRoot><PageSetup><PageSize>Letter</PageSize><PageSizeId>1</PageSizeId><Header>&amp;bPage &amp;p of &amp;P</Header><Footer>&amp;u&amp;b&amp;d</Footer><Orientation>1</Orientation><LeftMargin>0.5</LeftMargin><RightMargin>0.5</RightMargin><TopMargin>0.5</TopMargin><BottomtMargin>0.5</BottomtMargin><IsBackgroundPrint>yes</IsBackgroundPrint></PageSetup><BooleanSubYesValue RepresentYesAs="" RepresentNoAs="" RepresentMissingAs=""/><Pagination Value="default" ShowMessage="yes"/></XmlRoot>

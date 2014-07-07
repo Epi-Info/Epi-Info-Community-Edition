@@ -1,0 +1,7 @@
+<Project id="31dfe186-6e79-0f3b-bc91-1441cb636758" name="Lyme" location="C:\TFSCode\Epi Info 7\Build\Debug\Projects\Lyme" description="" schemaVersion="102" epiVersion="" createDate="10/20/2011 13:19:54" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="/CMip3j3HV8RumZ8DOXlLCsNfxtHVPMPzQ5QwP6y4R8dqPQQ3Q3c2YBcemsDyfxV9lImMI3tlxHrJvbIpFBvV1P85/6iXqL47uJYjtbZ6Btfm7NV2XdQDLDqceoGT6Ceq2CBv4bbQw4IrwlgB/FIzDMF0xTwYx63q1tfAI73EsU=" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>

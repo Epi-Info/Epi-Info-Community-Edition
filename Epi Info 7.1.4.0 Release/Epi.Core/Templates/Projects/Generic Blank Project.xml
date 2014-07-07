@@ -1,0 +1,12 @@
+﻿<Template Name="Generic Blank Project" Description="" CreateDate="Friday, April 13, 2012 2:46:29 PM" Level="Project">
+  <Project Id="" Name="Project" Location="" Description="" EpiVersion="" CreateDate="">
+    <CollectedData>
+      <Database Source="" DataDriver="" />
+    </CollectedData>
+    <Metadata Source="" />
+    <EnterMakeviewInterpreter Source="Epi.Core.EnterInterpreter" />
+    <View ViewId="1" Name="GenericForm" IsRelatedView="False" CheckCode="" Width="768" Height="1028" Orientation="Portrait" LabelAlign="Vertical">
+      <Page PageId="1" Name="Page" Position="0" BackgroundId="0" ViewId="1" />
+    </View>
+  </Project>
+</Template>

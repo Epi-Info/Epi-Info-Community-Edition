@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a0031669-80e2-41cc-b4d4-3739fce6e8a5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://isd-v-osel-eiw/EIWSService/SurveyManagerService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SurveyManagerService.xsd" MetadataType="Schema" ID="7f7ba737-92f1-4c5e-aa5f-af80f905ca88" SourceId="1" SourceUrl="http://isd-v-osel-eiw.cdc.gov/EIWSService/SurveyManagerService.svc?xsd=xsd1" />
+    <MetadataFile FileName="SurveyManagerService1.xsd" MetadataType="Schema" ID="e8cb025f-e7c8-4741-bfb3-f93b7fb42cd8" SourceId="1" SourceUrl="http://isd-v-osel-eiw.cdc.gov/EIWSService/SurveyManagerService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ManagerService.wsdl" MetadataType="Wsdl" ID="62f88cb5-925f-4e9c-aec6-657e5467ec5e" SourceId="1" SourceUrl="http://isd-v-osel-eiw.cdc.gov/EIWSService/SurveyManagerService.svc?wsdl" />
+    <MetadataFile FileName="SurveyManagerService2.xsd" MetadataType="Schema" ID="eea61499-8b28-46c2-8bd6-783ed9cd5313" SourceId="1" SourceUrl="http://isd-v-osel-eiw.cdc.gov/EIWSService/SurveyManagerService.svc?xsd=xsd2" />
+    <MetadataFile FileName="SurveyManagerService3.xsd" MetadataType="Schema" ID="84f3020c-6424-4ad9-a8b9-afe96d36f547" SourceId="1" SourceUrl="http://isd-v-osel-eiw.cdc.gov/EIWSService/SurveyManagerService.svc?xsd=xsd4" />
+    <MetadataFile FileName="SurveyManagerService.disco" MetadataType="Disco" ID="b46847c6-f317-447b-8d2b-a134cbbbb563" SourceId="1" SourceUrl="http://isd-v-osel-eiw.cdc.gov/EIWSService/SurveyManagerService.svc?disco" />
+    <MetadataFile FileName="SurveyManagerService4.xsd" MetadataType="Schema" ID="2798678c-6e91-4c95-b228-536efcad21b6" SourceId="1" SourceUrl="http://isd-v-osel-eiw.cdc.gov/EIWSService/SurveyManagerService.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

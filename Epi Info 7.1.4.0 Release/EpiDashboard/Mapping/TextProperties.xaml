@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="EpiDashboard.Mapping.TextProperties"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" d:DesignWidth="800">
+    <Grid x:Name="grdMain" Width="800">
+        <StackPanel Orientation="Horizontal">
+            <Label x:Name="lblTitle" Width="80" FontWeight="Bold" Visibility="Collapsed">Label</Label>
+            <Label x:Name="lblText">Text:</Label>
+            <TextBox x:Name="txtText" Width="330"/>
+            <Label x:Name="lblFont">Font:</Label>
+            <TextBox x:Name="txtFont" Width="120" IsReadOnly="True"/>
+            <Button x:Name="btnFont" Content="..." Width="30" Margin="10,0,0,0"/>
+        </StackPanel>
+        <Rectangle x:Name="rctColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#FFFF1100" Margin="0,0,50,0">
+            <Rectangle.ToolTip>
+                <Label Content="Point color"/>
+            </Rectangle.ToolTip>
+        </Rectangle>
+        <Button x:Name="btnOK" Content="OK" Width="30" HorizontalAlignment="Right" IsEnabled="False"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,72 @@
+﻿<Template Level="Field">
+  <Project>
+    <View CheckCode="">
+      <Page>
+        <Field Name="State" PageId="1" FieldId="20" UniqueId="111abf7a-935f-42f2-a742-d80b97baa142" FieldTypeId="19" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="Page 1" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.0175097276264591" ControlLeftPositionPercentage="0" ControlHeightPercentage="0.0204280155642023" ControlWidthPercentage="0.260416666666667" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0" PromptLeftPositionPercentage="0" PromptText="State" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="codestate" CodeColumnName="" TextColumnName="State" Sort="False" IsExclusiveTable="False" TabIndex="17" HasTabStop="True" SourceFieldId="" />
+      </Page>
+    </View>
+  </Project>
+  <SourceTable TableName="codestate">
+    <Item state="AK-Alaska" />
+    <Item state="AL-Alabama" />
+    <Item state="AR-Arkansas" />
+    <Item state="AS-American Samoa" />
+    <Item state="AZ-Arizona" />
+    <Item state="CA-California" />
+    <Item state="CO-Colorado" />
+    <Item state="CT-Connecticut" />
+    <Item state="DC-District of Columbia" />
+    <Item state="DE-Delaware" />
+    <Item state="FL-Florida" />
+    <Item state="FM-Federated States of Micronesia" />
+    <Item state="GA-Georgia" />
+    <Item state="GU-Guam" />
+    <Item state="HI-Hawaii" />
+    <Item state="IA-Iowa" />
+    <Item state="ID-Idaho" />
+    <Item state="IL-Illinois" />
+    <Item state="IN-Indiana" />
+    <Item state="KS-Kansas" />
+    <Item state="KY-Kentucky" />
+    <Item state="LA-Louisiana" />
+    <Item state="MA-Massachusetts" />
+    <Item state="ME-Maine" />
+    <Item state="MD-Maryland" />
+    <Item state="MH-Marshall Islands" />
+    <Item state="MI-Michigan" />
+    <Item state="MN-Minnesota" />
+    <Item state="MO-Missouri" />
+    <Item state="MP-Northern Mariana Islands" />
+    <Item state="MS-Mississippi" />
+    <Item state="MT-Montana" />
+    <Item state="NC-North Carolina" />
+    <Item state="ND-North Dakota" />
+    <Item state="NE-Nebraska" />
+    <Item state="NH-New Hampshire" />
+    <Item state="NJ-New Jersey" />
+    <Item state="NM-New Mexico" />
+    <Item state="NV-Nevada" />
+    <Item state="NY-New York" />
+    <Item state="OH-Ohio" />
+    <Item state="OK-Oklahoma" />
+    <Item state="OR-Oregon" />
+    <Item state="PA-Pennsylvania" />
+    <Item state="PW-Palau" />
+    <Item state="PR-Puerto Rico" />
+    <Item state="RI-Rhode Island" />
+    <Item state="SC-South Carolina" />
+    <Item state="SD-South Dakota" />
+    <Item state="TN-Tennessee" />
+    <Item state="TX-Texas" />
+    <Item state="UM-U.S. Minor Outlying Islands" />
+    <Item state="UT-Utah" />
+    <Item state="VI-Virgin Islands" />
+    <Item state="VT-Vermont" />
+    <Item state="VA-Virginia" />
+    <Item state="WA-Washington" />
+    <Item state="WI-Wisconsin" />
+    <Item state="WV-West Virginia" />
+    <Item state="WY-Wyoming" />
+  </SourceTable>
+  <FieldFootprint Width="200" Height="42" />
+</Template>

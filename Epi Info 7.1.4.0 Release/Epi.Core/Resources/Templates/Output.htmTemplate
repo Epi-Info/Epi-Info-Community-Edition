@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<title>Output</title>
+		<style type="text/css">
+      h1
+      {
+      color:#4a7ac9;
+      }
+      table
+      {
+      border-collapse:collapse;
+      padding:5px;
+      }
+      td
+      {
+      border-style:solid;
+      border-color:Black;
+      border-width:1px;
+      }
+      th
+      {
+      border-style:solid;
+      border-color:Black;
+      border-width:1px;
+      padding-left:.3em;
+      padding-right:.3em;
+      background-color:#4a7ac9;
+      color:#FFFFFF;
+      }
+      td.Stats
+      {
+      border-style:none;
+      border-width:0px;
+      padding-left:5px;
+      padding-right:5px;
+      padding-bottom:0px;
+      }
+      th.Stats
+      {
+      border-style:none;
+      border-width:0px;
+      background-color:#4a7ac9;
+      color:#FFFFFF;
+      padding:5px;
+      }
+      hr
+      {
+      background-color:#d2451e;
+      }
+      div.PercentBar_Summary
+      {
+      filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr="Yellow",endColorStr=#ffd38e);
+      background-color:#fe9451;
+      height: 3px;
+      }
+
+      div.PercentBar_Totals
+      {
+      filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#ffd38e,endColorStr=#fe9451);
+      background-color:#fe9451;
+      height: 3px;
+      }
+      
+      td.Crosstabs
+      {
+      border-style:none;
+      border-width:0px;
+      padding:0px;
+      }
+
+	  td.TwoByTwo
+      {
+      border-style:none;
+      border-width:0px;
+      padding:0px;
+      }
+      
+      div.Crosstab_Red
+      {
+      FILTER:PROGID:DXIMAGETRANSFORM.MICROSOFT.GRADIENT(GRADIENTTYPE=1, STARTCOLORSTR='Red', ENDCOLORSTR='#00FF0000') PROGID:DXIMAGETRANSFORM.MICROSOFT.GRADIENT(GRADIENTTYPE=0, STARTCOLORSTR='Red', ENDCOLORSTR='#00FF0000' );
+      }
+      
+      div.Crosstab_Green
+      {
+      FILTER:PROGID:DXIMAGETRANSFORM.MICROSOFT.GRADIENT(GRADIENTTYPE=1, STARTCOLORSTR='#00FF0000', ENDCOLORSTR='Green') PROGID:DXIMAGETRANSFORM.MICROSOFT.GRADIENT(GRADIENTTYPE=0, STARTCOLORSTR='#00FF0000', ENDCOLORSTR='Green' );
+      }
+      
+      div.Crosstab_Yellow
+      {
+      FILTER:PROGID:DXIMAGETRANSFORM.MICROSOFT.GRADIENT(GRADIENTTYPE=1, STARTCOLORSTR='Yellow', ENDCOLORSTR='#00FF0000') PROGID:DXIMAGETRANSFORM.MICROSOFT.GRADIENT(GRADIENTTYPE=0, STARTCOLORSTR='#00FF0000', ENDCOLORSTR='Yellow' );
+      }
+      
+      div.Crosstab_Orange
+      {
+      FILTER:PROGID:DXIMAGETRANSFORM.MICROSOFT.GRADIENT(GRADIENTTYPE=1, STARTCOLORSTR='#00FF0000', ENDCOLORSTR='Orange') PROGID:DXIMAGETRANSFORM.MICROSOFT.GRADIENT(GRADIENTTYPE=0, STARTCOLORSTR='Orange', ENDCOLORSTR='#00FF0000' );
+      }
+
+    </style>
+	
+	</head>
+	<body>
+	<h1>
+        <font color="#365F91">Epi Info</font>
+    </h1>
+	<br/>
+			

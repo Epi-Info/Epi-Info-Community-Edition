@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Epi.WPF.Controls.DashboardFileMenuItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../ResourceDictionary.xaml"/>
+                <ResourceDictionary>
+
+                    <Style x:Key="StandardBorderStyle" TargetType="Border">
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                        <Setter Property="BorderThickness" Value="1, 1, 1, 0" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E8E8E8" />
+                                <Setter Property="BorderBrush" Value="{DynamicResource windowBorderColor}" />
+                                <Setter Property="BorderThickness" Value="1, 1, 1, 0" />
+                            </Trigger>
+                        </Style.Triggers>                        
+                    </Style>
+
+                    <Style x:Key="StandardBorderSelectedStyle" TargetType="Border">
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                        <Setter Property="BorderThickness" Value="1, 1, 1, 0" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E8E8E8" />
+                                <Setter Property="BorderBrush" Value="{DynamicResource windowBorderColor}" />
+                                <Setter Property="BorderThickness" Value="1, 1, 1, 0" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Border x:Name="borderMain" Style="{StaticResource StandardBorderStyle}" MouseLeftButtonUp="border_MouseLeftButtonUp">
+            <TextBlock x:Name="tblockMain" Margin="24,4,24,4" FontSize="15" Foreground="{DynamicResource windowTextColor}" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False" />
+        </Border>
+    </Grid>
+</UserControl>

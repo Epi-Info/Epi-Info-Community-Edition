@@ -1,0 +1,1526 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3DE9D74E-BF08-4101-AC21-96D250A177D4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EpiDashboard</RootNamespace>
+    <AssemblyName>EpiDashboard</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\build\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\build\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ComponentArt.Win.DataVisualization.Charting, Version=2012.1.1871.0, Culture=neutral, PublicKeyToken=9bc9f846553156bb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ComponentArt.Win.DataVisualization.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentArt.Win.DataVisualization.Common, Version=2012.1.1871.0, Culture=neutral, PublicKeyToken=9bc9f846553156bb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ComponentArt.Win.DataVisualization.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicDataDisplay, Version=0.3.0.0, Culture=neutral, PublicKeyToken=5b7d744a7263923f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DynamicDisplay\DynamicDataDisplay.dll</HintPath>
+    </Reference>
+    <Reference Include="Epi.DataVisualization.Toolkit, Version=3.5.0.1, Culture=neutral, PublicKeyToken=141db00aea0d30bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>MS_WPF\Epi.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Epi.DataVisualization.Toolkit.PieExtension, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>MS_WPF\Epi.DataVisualization.Toolkit.PieExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Client, Version=10.1.1.0, Culture=neutral, PublicKeyToken=29c6dd6e8553d944, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Mapping\ESRI_WPF\ESRI.ArcGIS.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Client.Behaviors, Version=10.1.1.0, Culture=neutral, PublicKeyToken=29c6dd6e8553d944, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Client.Bing, Version=10.1.1.0, Culture=neutral, PublicKeyToken=29c6dd6e8553d944, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Bing.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Client.Toolkit, Version=10.1.1.0, Culture=neutral, PublicKeyToken=29c6dd6e8553d944, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Client.Toolkit.DataSources, Version=10.1.1.0, Culture=neutral, PublicKeyToken=29c6dd6e8553d944, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Toolkit.DataSources.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>MS_WPF\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>MS_WPF\WPFToolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="AberrationChartData.cs" />
+    <Compile Include="BarSpacing.cs" />
+    <Compile Include="ColumnDataType.cs" />
+    <Compile Include="CombineModeTypes.cs" />
+    <Compile Include="Controls\Charting\AberrationChart.xaml.cs">
+      <DependentUpon>AberrationChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Charting\AreaChart.xaml.cs">
+      <DependentUpon>AreaChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Charting\ChartBase.cs" />
+    <Compile Include="Controls\Charting\ColumnChart.xaml.cs">
+      <DependentUpon>ColumnChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Charting\ColumnChartBase.cs" />
+    <Compile Include="Controls\Charting\AreaChartBase.cs" />
+    <Compile Include="Controls\Charting\ParetoChartBase.cs" />
+    <Compile Include="Controls\Charting\ParetoChart.xaml.cs">
+      <DependentUpon>ParetoChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Charting\PieChartBase.cs" />
+    <Compile Include="Controls\Charting\LineChartBase.cs" />
+    <Compile Include="Controls\Charting\HistogramChart.xaml.cs">
+      <DependentUpon>HistogramChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Charting\IChart.cs" />
+    <Compile Include="Controls\Charting\LineChart.xaml.cs">
+      <DependentUpon>LineChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Charting\PieChart.xaml.cs">
+      <DependentUpon>PieChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CombinedFrequencyTable.xaml.cs">
+      <DependentUpon>CombinedFrequencyTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChoroplethProperties.xaml.cs">
+      <DependentUpon>ChoroplethProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DuplicatesControl.xaml.cs">
+      <DependentUpon>DuplicatesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\ColumnChartProperties.xaml.cs">
+      <DependentUpon>ColumnChartProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\AreaChartProperties.xaml.cs">
+      <DependentUpon>AreaChartProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml.cs">
+      <DependentUpon>AberrationDetectionChartProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\ParetoChartProperties.xaml.cs">
+      <DependentUpon>ParetoChartProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\PieChartProperties.xaml.cs">
+      <DependentUpon>PieChartProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\DuplicatesListProperties.xaml.cs">
+      <DependentUpon>DuplicatesListProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\LineChartProperties.xaml.cs">
+      <DependentUpon>LineChartProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\WordCloudProperties.xaml.cs">
+      <DependentUpon>WordCloudProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\CrosstabProperties.xaml.cs">
+      <DependentUpon>CrosstabProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\MeansProperties.xaml.cs">
+      <DependentUpon>MeansProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VariablesDisplayControl.xaml.cs">
+      <DependentUpon>VariablesDisplayControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DashboardProperties.xaml.cs">
+      <DependentUpon>DashboardProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataDisplayControl.xaml.cs">
+      <DependentUpon>DataDisplayControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataFilterPanel.xaml.cs">
+      <DependentUpon>DataFilterPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetBorder.xaml.cs">
+      <DependentUpon>GadgetBorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetMenuItem.cs" />
+    <Compile Include="Controls\GadgetProperties\CombinedFrequencyProperties.xaml.cs">
+      <DependentUpon>CombinedFrequencyProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\FrequencyProperties.xaml.cs">
+      <DependentUpon>FrequencyProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\GadgetPropertiesPanelBase.cs" />
+    <Compile Include="Controls\GadgetProperties\IGadgetPropertiesPanel.cs" />
+    <Compile Include="Controls\GadgetProperties\LineListProperties.xaml.cs">
+      <DependentUpon>LineListProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NumericUpDown.cs" />
+    <Compile Include="Controls\SetDataSource.xaml.cs">
+      <DependentUpon>SetDataSource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SettingsToggleButton.xaml.cs">
+      <DependentUpon>SettingsToggleButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatusBarArrangeButton.xaml.cs">
+      <DependentUpon>StatusBarArrangeButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetMatchedPairPanel.xaml.cs">
+      <DependentUpon>GadgetMatchedPairPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetInfoPanel.xaml.cs">
+      <DependentUpon>GadgetInfoPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatCalcMatchedCaseControlPanel.xaml.cs">
+      <DependentUpon>StatCalcMatchedCaseControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MatchedPairPanel.xaml.cs">
+      <DependentUpon>MatchedPairPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetStrataListPanel.xaml.cs">
+      <DependentUpon>GadgetStrataListPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetTwoByTwoPanel.xaml.cs">
+      <DependentUpon>GadgetTwoByTwoPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InstructionsPanel.xaml.cs">
+      <DependentUpon>InstructionsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LoadingPanel.xaml.cs">
+      <DependentUpon>LoadingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SingleTableAnalysisPanel.xaml.cs">
+      <DependentUpon>SingleTableAnalysisPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SpinCursor.xaml.cs">
+      <DependentUpon>SpinCursor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StratifiedTableAnalysisPanel.xaml.cs">
+      <DependentUpon>StratifiedTableAnalysisPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChartingSharedStrings.Designer.cs">
+      <DependentUpon>ChartingSharedStrings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="CrosstabValue.cs" />
+    <Compile Include="DashboardPopup.cs" />
+    <Compile Include="DashboardSharedStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DashboardSharedStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FontChooser.xaml.cs">
+      <DependentUpon>FontChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\LayerDescriptionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\LayerDescriptionDialog.Designer.cs">
+      <DependentUpon>LayerDescriptionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ValueMapperDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ValueMapperDialog.Designer.cs">
+      <DependentUpon>ValueMapperDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FieldFlags.cs" />
+    <Compile Include="FontFamilyListItem.cs" />
+    <Compile Include="FontSizeListItem.cs" />
+    <Compile Include="GadgetDescriptionWindow.xaml.cs">
+      <DependentUpon>GadgetDescriptionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GadgetPropertiesPopupRequestedEventArgs.cs" />
+    <Compile Include="Gadgets\Analysis\CombinedFrequencyControl.xaml.cs">
+      <DependentUpon>CombinedFrequencyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\AberrationControl.xaml.cs">
+      <DependentUpon>AberrationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common.cs" />
+    <Compile Include="Controls\AscendingSortArrow.xaml.cs">
+      <DependentUpon>AscendingSortArrow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CircularButton.xaml.cs">
+      <DependentUpon>CircularButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CloseButton.xaml.cs">
+      <DependentUpon>CloseButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataFilterControl.xaml.cs">
+      <DependentUpon>DataFilterControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetDescriptionPanel.xaml.cs">
+      <DependentUpon>GadgetDescriptionPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetRefreshIcon.xaml.cs">
+      <DependentUpon>GadgetRefreshIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RefreshIcon.xaml.cs">
+      <DependentUpon>RefreshIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ResizingAdorner.cs" />
+    <Compile Include="Controls\ShadowRectangle.xaml.cs">
+      <DependentUpon>ShadowRectangle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatusBarBordersButton.xaml.cs">
+      <DependentUpon>StatusBarBordersButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VariablesControl.xaml.cs">
+      <DependentUpon>VariablesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DescendingSortArrow.xaml.cs">
+      <DependentUpon>DescendingSortArrow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetHeaderPanel.xaml.cs">
+      <DependentUpon>GadgetHeaderPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetMessagePanel.xaml.cs">
+      <DependentUpon>GadgetMessagePanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetWaitPanel.xaml.cs">
+      <DependentUpon>GadgetWaitPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NotificationPanel.xaml.cs">
+      <DependentUpon>NotificationPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataDictionaryControl.xaml.cs">
+      <DependentUpon>DataDictionaryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ConditionalAssignDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ConditionalAssignDialog.Designer.cs">
+      <DependentUpon>ConditionalAssignDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CreateGroupDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CreateGroupDialog.Designer.cs">
+      <DependentUpon>CreateGroupDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RowFilterDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RowFilterDialog.Designer.cs">
+      <DependentUpon>RowFilterDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExportWindow.xaml.cs">
+      <DependentUpon>ExportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GadgetRepositionEventArgs.cs" />
+    <Compile Include="Gadgets\Analysis\ComplexSampleFrequencyControl.xaml.cs">
+      <DependentUpon>ComplexSampleFrequencyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\ComplexSampleTablesControl.xaml.cs">
+      <DependentUpon>ComplexSampleTablesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\ComplexSampleMeansControl.xaml.cs">
+      <DependentUpon>ComplexSampleMeansControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\DuplicatesListControl.xaml.cs">
+      <DependentUpon>DuplicatesListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\Old_DuplicatesListControl.xaml.cs">
+      <DependentUpon>Old_DuplicatesListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\WordCloudControl.xaml.cs">
+      <DependentUpon>WordCloudControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\PMCCControl.xaml.cs">
+      <DependentUpon>PMCCControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Charting\ParetoChartGadgetBase.cs" />
+    <Compile Include="Gadgets\Charting\XYParetoChartData.cs" />
+    <Compile Include="Gadgets\ChartParametersBase.cs" />
+    <Compile Include="Gadgets\Charting\AberrationChartGadget.xaml.cs">
+      <DependentUpon>AberrationChartGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Charting\AreaChartGadget.xaml.cs">
+      <DependentUpon>AreaChartGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Charting\ChartGadgetBase.cs" />
+    <Compile Include="Gadgets\Charting\ChartSettings.cs" />
+    <Compile Include="Gadgets\Charting\ColumnChartGadget.xaml.cs">
+      <DependentUpon>ColumnChartGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Charting\ColumnChartGadgetBase.cs" />
+    <Compile Include="Gadgets\Charting\HistogramChartGadget.xaml.cs">
+      <DependentUpon>HistogramChartGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Charting\IChartGadget.cs" />
+    <Compile Include="Gadgets\Charting\LineChartGadget.xaml.cs">
+      <DependentUpon>LineChartGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Charting\ParetoChartGadget.xaml.cs">
+      <DependentUpon>ParetoChartGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Charting\PieChartGadget.xaml.cs">
+      <DependentUpon>PieChartGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Charting\ScatterChartGadget.xaml.cs">
+      <DependentUpon>ScatterChartGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Charting\XYColumnChartData.cs" />
+    <Compile Include="Gadgets\ColumnChartParametersBase.cs" />
+    <Compile Include="Gadgets\ColumnChartParameters.cs" />
+    <Compile Include="Gadgets\CombinedFrequencyParameters.cs" />
+    <Compile Include="Gadgets\AreaChartParameters.cs" />
+    <Compile Include="Gadgets\AreaChartParametersBase.cs" />
+    <Compile Include="Gadgets\AberrationDetectionChartParametersBase.cs" />
+    <Compile Include="Gadgets\AberrationDetectionChartParameters.cs" />
+    <Compile Include="Gadgets\ParetoChartParameters.cs" />
+    <Compile Include="Gadgets\ParetoChartParametersBase.cs" />
+    <Compile Include="Gadgets\PieChartParameters.cs" />
+    <Compile Include="Gadgets\PieChartParametersBase.cs" />
+    <Compile Include="Gadgets\DuplicatesListParameters.cs" />
+    <Compile Include="Gadgets\WordCloudParameters.cs" />
+    <Compile Include="Gadgets\CrosstabParameters.cs" />
+    <Compile Include="Gadgets\FrequencyParameters.cs" />
+    <Compile Include="Gadgets\FrequencyParametersBase.cs" />
+    <Compile Include="Gadgets\GadgetBase.cs" />
+    <Compile Include="Gadgets\IGadgetParameters.cs" />
+    <Compile Include="Gadgets\GadgetParametersBase.cs" />
+    <Compile Include="Gadgets\IStatCalcGadget.cs" />
+    <Compile Include="Gadgets\LineChartParametersBase.cs" />
+    <Compile Include="Gadgets\LineChartParameters.cs" />
+    <Compile Include="Gadgets\LineListParameters.cs" />
+    <Compile Include="Gadgets\MeansParameters.cs" />
+    <Compile Include="Gadgets\Reporting\StandardImageControl.xaml.cs">
+      <DependentUpon>StandardImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Reporting\IReportingGadget.cs" />
+    <Compile Include="Gadgets\Reporting\StandardTextControl.xaml.cs">
+      <DependentUpon>StandardTextControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\IGadget.cs" />
+    <Compile Include="Gadgets\StatCalc\CohortGadget.xaml.cs">
+      <DependentUpon>CohortGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\StatCalc\BinomialGadget.xaml.cs">
+      <DependentUpon>BinomialGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\StatCalc\PopulationSurveyGadget.xaml.cs">
+      <DependentUpon>PopulationSurveyGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\StatCalc\UnmatchedCaseControlGadget.xaml.cs">
+      <DependentUpon>UnmatchedCaseControlGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\StatCalc\PoissonGadget.xaml.cs">
+      <DependentUpon>PoissonGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\StatCalc\MatchedPairCaseControlGadget.xaml.cs">
+      <DependentUpon>MatchedPairCaseControlGadget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\StatCalc\StatCalcGadgetBase.cs" />
+    <Compile Include="Gadgets\IChartGadgetParameters.cs" />
+    <Compile Include="LineListSharedStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LineListSharedStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\ChoroplethKmlLayerProvider.cs" />
+    <Compile Include="Mapping\ChoroplethKmlLayerProperties.xaml.cs">
+      <DependentUpon>ChoroplethKmlLayerProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\PointLayerProperties.xaml.cs">
+      <DependentUpon>PointLayerProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\PointLayerProvider.cs" />
+    <Compile Include="Mapping\DotDensityServerLayerProperties.xaml.cs">
+      <DependentUpon>DotDensityServerLayerProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\DotDensityServerLayerProvider.cs" />
+    <Compile Include="Mapping\DotDensityLayerProperties.xaml.cs">
+      <DependentUpon>DotDensityLayerProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\DotDensityLayerProvider.cs" />
+    <Compile Include="Mapping\DotDensityKmlLayerProperties.xaml.cs">
+      <DependentUpon>DotDensityKmlLayerProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\DotDensityKmlLayerProvider.cs" />
+    <Compile Include="Mapping\KmlDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mapping\KmlDialog.Designer.cs">
+      <DependentUpon>KmlDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\KmlLayerProperties.xaml.cs">
+      <DependentUpon>KmlLayerProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\KmlLayerProvider.cs" />
+    <Compile Include="Mapping\MapBackgroundType.cs" />
+    <Compile Include="MergeConnection.cs" />
+    <Compile Include="MergeControl.xaml.cs">
+      <DependentUpon>MergeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NameDictionaryHelper.cs" />
+    <Compile Include="PropertiesControl.xaml.cs">
+      <DependentUpon>PropertiesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExportControl.xaml.cs">
+      <DependentUpon>ExportControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DataFilterDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DataFilterDialog.Designer.cs">
+      <DependentUpon>DataFilterDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FieldInfo.cs" />
+    <Compile Include="Gadgets\GadgetParameters.cs" />
+    <Compile Include="Gadgets\Analysis\LineListControl.xaml.cs">
+      <DependentUpon>LineListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\CrosstabControl.xaml.cs">
+      <DependentUpon>CrosstabControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DescriptiveStatistics.cs" />
+    <Compile Include="Dialogs\ExpressionAssignDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ExpressionAssignDialog.Designer.cs">
+      <DependentUpon>ExpressionAssignDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SimpleAssignDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SimpleAssignDialog.Designer.cs">
+      <DependentUpon>SimpleAssignDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\ChoroplethServerLayerProperties.xaml.cs">
+      <DependentUpon>ChoroplethServerLayerProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\ChoroplethServerLayerProvider.cs" />
+    <Compile Include="Mapping\IReferenceLayerProperties.cs" />
+    <Compile Include="Mapping\MapServerFeatureDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mapping\MapServerFeatureDialog.Designer.cs">
+      <DependentUpon>MapServerFeatureDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\MapServerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mapping\MapServerDialog.Designer.cs">
+      <DependentUpon>MapServerDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\MapServerLayerProperties.xaml.cs">
+      <DependentUpon>MapServerLayerProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\MapServerLayerProvider.cs" />
+    <Compile Include="Mapping\MarkerProperties.xaml.cs">
+      <DependentUpon>MarkerProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\MarkerProvider.cs" />
+    <Compile Include="Mapping\ShapeLayerProvider.cs" />
+    <Compile Include="Mapping\ShapeLayerProperties.xaml.cs">
+      <DependentUpon>ShapeLayerProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\TextProperties.xaml.cs">
+      <DependentUpon>TextProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\TextProvider.cs" />
+    <Compile Include="Mapping\ZoneProperties.xaml.cs">
+      <DependentUpon>ZoneProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\ZoneProvider.cs" />
+    <Compile Include="Gadgets\Analysis\MeansControl.xaml.cs">
+      <DependentUpon>MeansControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataFilters.cs" />
+    <Compile Include="Dialogs\FillRangesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FillRangesDialog.Designer.cs">
+      <DependentUpon>FillRangesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FilterCondition.cs" />
+    <Compile Include="NutritionChartControl.xaml.cs">
+      <DependentUpon>NutritionChartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NutStat\GrowthMeasurement.cs" />
+    <Compile Include="NutStat\GrowthReference.cs" />
+    <Compile Include="NutStat\PercentileArrays.cs" />
+    <Compile Include="RelatedConnection.cs" />
+    <Compile Include="RowFilterControl.xaml.cs">
+      <DependentUpon>RowFilterControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Rules\DefectiveRuleException.cs" />
+    <Compile Include="Rules\Rule_ConditionalAssign.cs" />
+    <Compile Include="Rules\Rule_SimpleAssign.cs" />
+    <Compile Include="Rules\DashboardRules.cs" />
+    <Compile Include="Rules\DataAssignmentRule.cs" />
+    <Compile Include="Rules\IDashboardRule.cs" />
+    <Compile Include="Mapping\IMapControl.cs" />
+    <Compile Include="Mapping\StandaloneMapControl.xaml.cs">
+      <DependentUpon>StandaloneMapControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\TimeConfigDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mapping\TimeConfigDialog.Designer.cs">
+      <DependentUpon>TimeConfigDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rules\Rule_ExpressionAssign.cs" />
+    <Compile Include="Rules\Rule_Recode.cs" />
+    <Compile Include="DataRecodingControl.xaml.cs">
+      <DependentUpon>DataRecodingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardHelper.cs" />
+    <Compile Include="ChartControl.xaml.cs">
+      <DependentUpon>ChartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChartLabelDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChartLabelDialog.Designer.cs">
+      <DependentUpon>ChartLabelDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RecodeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RecodeDialog.Designer.cs">
+      <DependentUpon>RecodeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FormatDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FormatDialog.Designer.cs">
+      <DependentUpon>FormatDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\LogisticRegressionControl.xaml.cs">
+      <DependentUpon>LogisticRegressionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\LinearRegressionControl.xaml.cs">
+      <DependentUpon>LinearRegressionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Rules\Rule_VariableGroup.cs" />
+    <Compile Include="Rules\SimpleAssignmentStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SimpleAssignmentStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Rules\SimpleAssignType.cs" />
+    <Compile Include="SocialNetworkGraph.xaml.cs">
+      <DependentUpon>SocialNetworkGraph.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SortOrder.cs" />
+    <Compile Include="StackedHistogramSeries.cs" />
+    <Compile Include="StatCalc\ChiSquareControl.xaml.cs">
+      <DependentUpon>ChiSquareControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatCalc\Binomial.xaml.cs">
+      <DependentUpon>Binomial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatCalc\Poisson.xaml.cs">
+      <DependentUpon>Poisson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StrataGridListRow.cs" />
+    <Compile Include="StrataValue.cs" />
+    <Compile Include="TextBlockConfig.cs" />
+    <Compile Include="TwoByTwoTableControl.xaml.cs">
+      <DependentUpon>TwoByTwoTableControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardControl.xaml.cs">
+      <DependentUpon>DashboardControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DragCanvas.cs" />
+    <Compile Include="Mapping\ChoroplethLayerProperties.xaml.cs">
+      <DependentUpon>ChoroplethLayerProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\ChoroplethLayerProvider.cs" />
+    <Compile Include="Mapping\ClusterLayerProperties.xaml.cs">
+      <DependentUpon>ClusterLayerProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\ClusterLayerProvider.cs" />
+    <Compile Include="Mapping\ILayerProperties.cs" />
+    <Compile Include="Mapping\ILayerProvider.cs" />
+    <Compile Include="Mapping\LayerAdder.xaml.cs">
+      <DependentUpon>LayerAdder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\LayerList.xaml.cs">
+      <DependentUpon>LayerList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\LayerListItem.xaml.cs">
+      <DependentUpon>LayerListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\MapControl.xaml.cs">
+      <DependentUpon>MapControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\MapTextDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mapping\MapTextDialog.Designer.cs">
+      <DependentUpon>MapTextDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\MarkerConfigDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mapping\MarkerConfigDialog.Designer.cs">
+      <DependentUpon>MarkerConfigDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Gadgets\Analysis\FrequencyControl.xaml.cs">
+      <DependentUpon>FrequencyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\RadiusMapConfigDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mapping\RadiusMapConfigDialog.Designer.cs">
+      <DependentUpon>RadiusMapConfigDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\ShapeFileReader\ArgumentPropertyValue.cs" />
+    <Compile Include="Mapping\ShapeFileReader\DBFField.cs" />
+    <Compile Include="Mapping\ShapeFileReader\ExtensionMethods.cs" />
+    <Compile Include="Mapping\ShapeFileReader\IPropertyValue.cs" />
+    <Compile Include="Mapping\ShapeFileReader\ShapeFile.cs" />
+    <Compile Include="Mapping\ShapeFileReader\ShapeFileHeader.cs" />
+    <Compile Include="Mapping\ShapeFileReader\ShapeFileReadInfo.cs" />
+    <Compile Include="Mapping\ShapeFileReader\ShapeFileRecord.cs" />
+    <Compile Include="Mapping\ShapeFileReader\ShapeType.cs" />
+    <Compile Include="Rules\Rule_Format.cs" />
+    <Compile Include="DataFilteringControl.xaml.cs">
+      <DependentUpon>DataFilteringControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SimpleDataGrid.xaml.cs">
+      <DependentUpon>SimpleDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatCalc\Cohort.xaml.cs">
+      <DependentUpon>Cohort.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatCalc\IStatCalcControl.cs" />
+    <Compile Include="StatCalc\PopulationSurvey.xaml.cs">
+      <DependentUpon>PopulationSurvey.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatCalc\TwoByTwo.xaml.cs">
+      <DependentUpon>TwoByTwo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatCalc\UnmatchedCaseControl.xaml.cs">
+      <DependentUpon>UnmatchedCaseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TypefaceListItem.cs" />
+    <Compile Include="TypographicFeatureListItem.cs" />
+    <Compile Include="VariableCategory.cs" />
+    <Compile Include="WaitCursor.xaml.cs">
+      <DependentUpon>WaitCursor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XAxisLabelType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
+      <Project>{EBD2B961-A952-4670-96CA-50BAA12C7F29}</Project>
+      <Name>Epi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.ImportExport\Epi.ImportExport.csproj">
+      <Project>{B5F72DDF-5349-4C03-9285-AE35110BA6CD}</Project>
+      <Name>Epi.ImportExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Statistics\Epi.Statistics.csproj">
+      <Project>{86B1B837-AE10-4833-97E5-DAEC7748F852}</Project>
+      <Name>Epi.Statistics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Windows\Epi.Windows.csproj">
+      <Project>{D120296B-493B-46AC-8657-4D32A9604231}</Project>
+      <Name>Epi.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EpiInfoPlugin\EpiInfo.Plugin.csproj">
+      <Project>{20C12C97-52CE-45C3-B563-3C15330C2A98}</Project>
+      <Name>EpiInfo.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatisticsRepository\StatisticsRepository.vbproj">
+      <Project>{05E53353-68CB-4E89-B477-169E070EAE5D}</Project>
+      <Name>StatisticsRepository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ChartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Charting\AberrationChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Charting\AreaChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Charting\ColumnChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Charting\ParetoChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Charting\HistogramChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Charting\LineChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Charting\PieChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CombinedFrequencyTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ChoroplethProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DuplicatesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GadgetProperties\ColumnChartProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\AreaChartProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\ParetoChartProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\PieChartProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\DuplicatesListProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\LineChartProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\WordCloudProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\CrosstabProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\MeansProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\VariablesDisplayControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DashboardProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DataDisplayControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DataFilterPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GadgetBorder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GadgetProperties\CombinedFrequencyProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\FrequencyProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\LineListProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SetDataSource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SettingsToggleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StatusBarArrangeButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetMatchedPairPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetInfoPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\StatCalcMatchedCaseControlPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MatchedPairPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetStrataListPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GadgetTwoByTwoPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\InstructionsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LoadingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SingleTableAnalysisPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SpinCursor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StratifiedTableAnalysisPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gadgets\Analysis\DuplicatesListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StyleDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\FontChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GadgetDescriptionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gadgets\Analysis\ComplexSampleFrequencyControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\ComplexSampleTablesControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\ComplexSampleMeansControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\Old_DuplicatesListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\WordCloudControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\PMCCControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Charting\AberrationChartGadget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gadgets\Charting\AreaChartGadget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gadgets\Charting\ColumnChartGadget.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Charting\HistogramChartGadget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gadgets\Charting\LineChartGadget.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Charting\ParetoChartGadget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gadgets\Charting\PieChartGadget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gadgets\Charting\ScatterChartGadget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gadgets\StatCalc\CohortGadget.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\StatCalc\BinomialGadget.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\StatCalc\PopulationSurveyGadget.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\StatCalc\UnmatchedCaseControlGadget.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\StatCalc\PoissonGadget.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\StatCalc\MatchedPairCaseControlGadget.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\ChoroplethKmlLayerProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\PointLayerProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\DotDensityServerLayerProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\DotDensityLayerProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\DotDensityKmlLayerProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\KmlLayerProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TwoByTwoResourceDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\CombinedFrequencyControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\AberrationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AscendingSortArrow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CircularButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CloseButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DataFilterControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetDescriptionPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GadgetRefreshIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RefreshIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ShadowRectangle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StatusBarBordersButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\VariablesControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DescendingSortArrow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetHeaderPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GadgetMessagePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GadgetWaitPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NotificationPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataDictionaryControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gadgets\Reporting\StandardImageControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Reporting\StandardTextControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MergeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PropertiesControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExportControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\LineListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\CrosstabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\ChoroplethServerLayerProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\MapServerLayerProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\MarkerProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\ShapeLayerProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mapping\TextProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\ZoneProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\MeansControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataRecodingControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\LogisticRegressionControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\LinearRegressionControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NutritionChartControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RowFilterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SocialNetworkGraph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatCalc\ChiSquareControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatCalc\Binomial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StatCalc\Poisson.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TwoByTwoTableControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DashboardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\FrequencyControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\ChoroplethLayerProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mapping\ClusterLayerProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mapping\LayerAdder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mapping\LayerList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mapping\LayerListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mapping\MapControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataFilteringControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mapping\StandaloneMapControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SimpleDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StatCalc\Cohort.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StatCalc\PopulationSurvey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatCalc\TwoByTwo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatCalc\UnmatchedCaseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WaitCursor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ChartLabelDialog.resx">
+      <DependentUpon>ChartLabelDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChartingSharedStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ChartingSharedStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DashboardSharedStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>DashboardSharedStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConditionalAssignDialog.resx">
+      <DependentUpon>ConditionalAssignDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CreateGroupDialog.resx">
+      <DependentUpon>CreateGroupDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DataFilterDialog.resx">
+      <DependentUpon>DataFilterDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ExpressionAssignDialog.resx">
+      <DependentUpon>ExpressionAssignDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FillRangesDialog.resx">
+      <DependentUpon>FillRangesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\LayerDescriptionDialog.resx">
+      <DependentUpon>LayerDescriptionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RecodeDialog.resx">
+      <DependentUpon>RecodeDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FormatDialog.resx">
+      <DependentUpon>FormatDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RowFilterDialog.resx">
+      <DependentUpon>RowFilterDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SimpleAssignDialog.resx">
+      <DependentUpon>SimpleAssignDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ValueMapperDialog.resx">
+      <DependentUpon>ValueMapperDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LineListSharedStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LineListSharedStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mapping\KmlDialog.resx">
+      <DependentUpon>KmlDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mapping\MapServerFeatureDialog.resx">
+      <DependentUpon>MapServerFeatureDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mapping\MapServerDialog.resx">
+      <DependentUpon>MapServerDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mapping\MapTextDialog.resx">
+      <DependentUpon>MapTextDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mapping\MarkerConfigDialog.resx">
+      <DependentUpon>MarkerConfigDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mapping\RadiusMapConfigDialog.resx">
+      <DependentUpon>RadiusMapConfigDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mapping\TimeConfigDialog.resx">
+      <DependentUpon>TimeConfigDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rules\SimpleAssignmentStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SimpleAssignmentStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\x.png" />
+    <Resource Include="Images\x_over.png" />
+    <Resource Include="Images\refresh1.png" />
+    <Resource Include="Images\gadget.png" />
+    <Resource Include="Images\filter1.png" />
+    <Resource Include="Images\db_add.png" />
+    <Resource Include="Images\save.png" />
+    <Resource Include="Images\copy.png" />
+    <Content Include="ComponentArt.Win.DataVisualization.Charting.dll" />
+    <Content Include="ComponentArt.Win.DataVisualization.Common.dll" />
+    <Content Include="DynamicDisplay\DynamicDataDisplay.dll" />
+    <Resource Include="Images\casecluster.png" />
+    <Resource Include="Images\choropleth.png" />
+    <Resource Include="Images\dotdensity.png" />
+    <Content Include="Images\labels.png" />
+    <Resource Include="Images\saveHTML.png" />
+    <Resource Include="Images\watermark_logo.png" />
+    <Resource Include="Images\poi.png" />
+    <Content Include="license.txt" />
+    <Content Include="Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Behaviors.dll" />
+    <Content Include="Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Bing.dll" />
+    <Content Include="Mapping\ESRI_WPF\ESRI.ArcGIS.Client.dll" />
+    <Content Include="Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Toolkit.DataSources.dll" />
+    <Content Include="Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Toolkit.dll" />
+    <Content Include="MS_WPF\Epi.DataVisualization.Toolkit.dll" />
+    <Content Include="MS_WPF\Epi.DataVisualization.Toolkit.PieExtension.dll" />
+    <Content Include="MS_WPF\System.Windows.Interactivity.dll" />
+    <Content Include="MS_WPF\WPFToolkit.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <EmbeddedResource Include="ComponentArt.Win.DataVisualization.lic" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
