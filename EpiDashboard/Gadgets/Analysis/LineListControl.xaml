@@ -9,7 +9,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="..\..\ResourceDictionary.xaml"/>
-                <ResourceDictionary Source="..\..\StyleDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </EpiDashboard:GadgetBase.Resources>
@@ -17,7 +16,7 @@
     <Grid>
         <Controls:ShadowRectangle x:Name="rectangleShadow"></Controls:ShadowRectangle>
 
-        <Border Name="borderAll" Style="{DynamicResource GadgetBorderStyle}" >
+        <Border Name="borderAll" Style="{DynamicResource mainGadgetBorder}" >
             <Border.ContextMenu>
                 <ContextMenu x:Name="gadgetContextMenu">
                     <MenuItem x:Name="mnuCopy" Header="Copy list data to clipboard"/>
@@ -50,9 +49,9 @@
                     <RowDefinition Height="0" />
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
-                </Grid.RowDefinitions>
-
-                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsDescriptionButtonAvailable="False" IsFilterButtonAvailable="False"  Text="Line List" />
+                </Grid.RowDefinitions>                
+                
+                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" Text="Line List" />
                 <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel" Grid.Row="2" Text="" />
                 <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
 
@@ -65,7 +64,7 @@
 
                 <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{DynamicResource gadgetWaitPanelStyle}" />
                 <StackPanel Grid.Row="1" Grid.RowSpan="7" Orientation="Vertical" Margin="00,-15,-10,0" HorizontalAlignment="Right" VerticalAlignment="Top" >                    
-            <!--<Grid x:Name="ConfigGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,10,0" >
+            <Grid x:Name="ConfigGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,10,0" >
                         <Rectangle Style="{DynamicResource rectangleConfigOuter}" />
                         <Rectangle Style="{DynamicResource rectangleConfigInner}" />
                 
@@ -146,6 +145,7 @@
                                     <CheckBox x:Name="checkboxTabOrder" Margin="0,2,0,0" Content="Sort variables by tab order" Visibility="Visible" IsEnabled="true" />
                                     <CheckBox x:Name="checkboxUsePrompts" Margin="0,2,0,0" Content="Use field prompts" Visibility="Visible" IsEnabled="true" />
                                     <CheckBox x:Name="checkboxListLabels" Margin="0,2,0,0" Content="Display list labels" IsEnabled="true"/>
+                                <!--<CheckBox x:Name="checkboxAltRowColors" Content="Alternating row colors" Grid.Row="10" Grid.Column="2" Visibility="Collapsed" IsEnabled="true" />-->
                                     <CheckBox x:Name="checkboxLineColumn" Margin="0,2,0,0" Content="Show line column" IsChecked="True" />
                                     <CheckBox x:Name="checkboxColumnHeaders" Margin="0,2,0,0" Content="Show column headings" IsChecked="True" />
                                     <CheckBox x:Name="checkboxShowNulls" Margin="0,2,0,0" Content="Show missing representation" IsChecked="True" />
@@ -156,7 +156,7 @@
                             <Button x:Name="btnRun" Content="Generate Line List" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Click="btnRun_Click" />
                     
                         </StackPanel>
-            </Grid>-->
+            </Grid>
         </StackPanel>                
             </Grid>
         </Border>

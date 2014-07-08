@@ -33,11 +33,13 @@ namespace Epi.Windows.Enter
         public bool EnableTabToNextControl
         {
             get { return _enableTabToNextControl; }
-            set 
-            { 
-                _enableTabToNextControl = value; 
+            set
+            {
+                _enableTabToNextControl = value;
             }
         }
+
+
 
         private void control_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {

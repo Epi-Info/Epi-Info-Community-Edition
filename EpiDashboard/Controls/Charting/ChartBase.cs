@@ -304,52 +304,11 @@ namespace EpiDashboard.Controls.Charting
                 xyChart = el as XYChart;
             }
 
-            bool shouldShowY2 = false;
-
-            foreach (XYColumnChartData xyc in dataList)
-            {
-                if (xyc.Y2.HasValue)
-                {
-                    shouldShowY2 = true;
-                    break;
-                }
-            }
-
-            if (shouldShowY2 && series1 != null)
+            if (dataList[0].Y2.HasValue && series1 != null)
             {
                 series1.Visibility = System.Windows.Visibility.Visible;
             }
             xyChart.DataSource = dataList;            
-        }
-
-        protected void SetChartData(List<XYParetoChartData> dataList)
-        {
-            #region Input Validation
-            if (dataList == null)
-            {
-                throw new ArgumentNullException("dataList");
-            }
-            #endregion // Input Validation
-
-            Series series1 = null;
-            object el = FindName("series1");
-            if (el is Series)
-            {
-                series1 = el as Series;
-            }
-
-            XYChart xyChart = null;
-            el = FindName("xyChart");
-            if (el is XYChart)
-            {
-                xyChart = el as XYChart;
-            }
-
-            if (series1 != null)
-            {
-                series1.Visibility = System.Windows.Visibility.Visible;
-            }
-            xyChart.DataSource = dataList;
         }
 
         public virtual void CopyImageToClipboard()

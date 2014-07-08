@@ -502,9 +502,10 @@ namespace Epi.Windows.Enter.PresentationLogic
                     }
                 }
             }
-            
+
             return continueProcess;
         }
+
 
         private bool ProcessPrintRequest(int pageNumberStart, int pageNumberEnd, bool showData)
         {
@@ -538,7 +539,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                         height = Convert.ToInt32(((float)height) * (float)scaleFactor);
                         width = Convert.ToInt32(((float)width) * (float)scaleFactor);
                     }
-                    
+
                     if (isLandscape)
                     {
                         printPanel.Size = new System.Drawing.Size(height, width);
@@ -801,34 +802,34 @@ namespace Epi.Windows.Enter.PresentationLogic
                     }
                     else
                     {
-                      /* if (showtab)
-                        {
-                            foreach (Control control in pageControls)
-                            {
-                                Field field = factory.GetAssociatedField(control);                              
-                                if (control.TabStop == true)
-                                {
-                                    bool isInputField = ((Control)control) is PairedLabel == false && field.FieldType != MetaFieldType.Group;
-                                    bool isLabelField = field.FieldType == MetaFieldType.LabelTitle;
-                                    if (isInputField || isLabelField)
-                                    {
-                                        Label lbTabSquare = new Label();
-                                        lbTabSquare.BackColor = control.TabStop ? Color.Black : Color.Firebrick;
-                                        lbTabSquare.Padding = new Padding(2);
-                                        lbTabSquare.ForeColor = Color.White;
-                                        lbTabSquare.BorderStyle = BorderStyle.None;
-                                        lbTabSquare.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold);
-                                        lbTabSquare.Text = control.TabIndex.ToString() + "  " + field.Name;
-                                        lbTabSquare.Location = new Point(control.Location.X, control.Location.Y);
-                                        lbTabSquare.Size = TextRenderer.MeasureText(lbTabSquare.Text, lbTabSquare.Font);
-                                        lbTabSquare.Size = new Size(lbTabSquare.Size.Width + lbTabSquare.Padding.Size.Width, lbTabSquare.Size.Height + lbTabSquare.Padding.Size.Height);
-                                        lbTabSquare.Tag = "showtab";
-                                        lbTabSquare.BringToFront();
-                                        printPanel.Controls.Add(lbTabSquare);
-                                    }
-                                }
-                            }
-                        }*/
+                        /* if (showtab)
+                          {
+                              foreach (Control control in pageControls)
+                              {
+                                  Field field = factory.GetAssociatedField(control);                              
+                                  if (control.TabStop == true)
+                                  {
+                                      bool isInputField = ((Control)control) is PairedLabel == false && field.FieldType != MetaFieldType.Group;
+                                      bool isLabelField = field.FieldType == MetaFieldType.LabelTitle;
+                                      if (isInputField || isLabelField)
+                                      {
+                                          Label lbTabSquare = new Label();
+                                          lbTabSquare.BackColor = control.TabStop ? Color.Black : Color.Firebrick;
+                                          lbTabSquare.Padding = new Padding(2);
+                                          lbTabSquare.ForeColor = Color.White;
+                                          lbTabSquare.BorderStyle = BorderStyle.None;
+                                          lbTabSquare.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold);
+                                          lbTabSquare.Text = control.TabIndex.ToString() + "  " + field.Name;
+                                          lbTabSquare.Location = new Point(control.Location.X, control.Location.Y);
+                                          lbTabSquare.Size = TextRenderer.MeasureText(lbTabSquare.Text, lbTabSquare.Font);
+                                          lbTabSquare.Size = new Size(lbTabSquare.Size.Width + lbTabSquare.Padding.Size.Width, lbTabSquare.Size.Height + lbTabSquare.Padding.Size.Height);
+                                          lbTabSquare.Tag = "showtab";
+                                          lbTabSquare.BringToFront();
+                                          printPanel.Controls.Add(lbTabSquare);
+                                      }
+                                  }
+                              }
+                          }*/
                         printPanel.BackgroundImageLayout = ImageLayout.None;
                         if (printPanel.Size.Width > 0 && printPanel.Size.Height > 0)
                         {
@@ -937,7 +938,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                     {
                         bufferBitmap.Dispose();
                         graphics.Dispose();
-                        printPanel.Dispose();                      
+                        printPanel.Dispose();
                         pageImageList = null;
                         memoryImage.Dispose();
                         return false;

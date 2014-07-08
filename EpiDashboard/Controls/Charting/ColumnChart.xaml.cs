@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ComponentArt.Win.DataVisualization.Charting;
-using Epi.Fields;
 using EpiDashboard;
 using EpiDashboard.Gadgets.Charting;
 
@@ -22,16 +21,16 @@ namespace EpiDashboard.Controls.Charting
     /// <summary>
     /// Interaction logic for ColumnChart.xaml
     /// </summary>
-    public partial class ColumnChart : ColumnChartBase
+    public partial class ColumnChart : ChartBase
     {
-        //public ColumnChartSettings ColumnChartSettings { get; set; }
-        
-        public ColumnChart(DashboardHelper dashboardHelper, ColumnChartParameters parameters, List<XYColumnChartData> dataList)
+        public ColumnChartSettings ColumnChartSettings { get; set; }
+
+        public ColumnChart(DashboardHelper dashboardHelper, GadgetParameters parameters, ColumnChartSettings settings, List<XYColumnChartData> dataList)
         {
             InitializeComponent();
-            //this.Settings = settings;
-            //this.ColumnChartSettings = settings;
-            ColumnChartParameters = parameters;
+            this.Settings = settings;
+            this.ColumnChartSettings = settings;
+            this.Parameters = parameters;
             this.DashboardHelper = dashboardHelper;
             SetChartProperties();
             SetChartData(dataList);
@@ -41,79 +40,22 @@ namespace EpiDashboard.Controls.Charting
         protected override void SetChartProperties()
         {
             xyChart.AnimationOnLoad = false;
-            //xyChart.Width = Settings.ChartWidth;
-            //xyChart.Height = Settings.ChartHeight;
-            //xyChart.Palette = Settings.Palette;
-            //xyChart.DefaultGridLinesVisible = Settings.ShowDefaultGridLines;
-            //xyChart.LegendDock = Settings.LegendDock;
-
-            xyChart.Width = ColumnChartParameters.ChartWidth;
-            xyChart.Height = ColumnChartParameters.ChartHeight;
-
-            //xyChart.Palette = ColumnChartParameters.Palette;
-            switch (ColumnChartParameters.Palette)
-            {
-                case 0:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Atlantic");
-                    break;
-                case 1:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Breeze");
-                    break;
-                case 2:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("ComponentArt");
-                    break;
-                case 3:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Deep");
-                    break;
-                case 4:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Earth");
-                    break;
-                case 5:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Evergreen");
-                    break;
-                case 6:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Heatwave");
-                    break;
-                case 7:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Montreal");
-                    break;
-                case 8:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Pastel");
-                    break;
-                case 9:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Renaissance");
-                    break;
-                case 10:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("SharePoint");
-                    break;
-                case 11:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Study");
-                    break;
-                default:
-                case 12:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantA");
-                    break;
-                case 13:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantB");
-                    break;
-                case 14:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantC");
-                    break;
-            }
-
-            xyChart.DefaultGridLinesVisible = ColumnChartParameters.ShowGridLines;
-            xyChart.LegendDock = ColumnChartParameters.LegendDock;
+            xyChart.Width = Settings.ChartWidth;
+            xyChart.Height = Settings.ChartHeight;
+            xyChart.Palette = Settings.Palette;
+            xyChart.DefaultGridLinesVisible = Settings.ShowDefaultGridLines;
+            xyChart.LegendDock = Settings.LegendDock;
 
             series0.BarRelativeBegin = double.NaN;
             series0.BarRelativeEnd = double.NaN;
 
-            switch ((BarSpacing)ColumnChartParameters.BarSpace)
+            switch (ColumnChartSettings.BarSpacing)
             {
-                case BarSpacing.None:                
+                case BarSpacing.None:
                     series0.RelativePointSpace = 0;
                     series0.BarRelativeBegin = 0;
                     series0.BarRelativeEnd = 0;
-                    if (ColumnChartParameters.Composition == CompositionKind.SideBySide) ColumnChartParameters.Composition = CompositionKind.Stacked;
+                    if (ColumnChartSettings.Composition == CompositionKind.SideBySide) ColumnChartSettings.Composition = CompositionKind.Stacked;
                     break;
                 case BarSpacing.Small:
                     series0.RelativePointSpace = 0.1;
@@ -130,77 +72,30 @@ namespace EpiDashboard.Controls.Charting
                     break;
             }
 
-            //if (!string.IsNullOrEmpty(ColumnChartSettings.YAxisFormattingString.Trim()))
-            //{
-            //    YAxisCoordinates.FormattingString = ColumnChartSettings.YAxisFormattingString;
-            //}
-            //if (!string.IsNullOrEmpty(ColumnChartSettings.Y2AxisFormattingString.Trim()))
-            //{
-            //    Y2AxisCoordinates.FormattingString = ColumnChartSettings.Y2AxisFormattingString;
-            //}
-            //xyChart.CompositionKind = ColumnChartSettings.Composition;
-            //xyChart.Orientation = ColumnChartSettings.Orientation;
-            //xAxisCoordinates.Angle = Settings.XAxisLabelRotation;
-
-            if (!string.IsNullOrEmpty(ColumnChartParameters.YAxisFormat.Trim()))
+            if (!string.IsNullOrEmpty(ColumnChartSettings.YAxisFormattingString.Trim()))
             {
-                YAxisCoordinates.FormattingString = ColumnChartParameters.YAxisFormat.Trim();
+                YAxisCoordinates.FormattingString = ColumnChartSettings.YAxisFormattingString;
             }
-            if (!string.IsNullOrEmpty(ColumnChartParameters.Y2AxisFormat.Trim()))
+            if (!string.IsNullOrEmpty(ColumnChartSettings.Y2AxisFormattingString.Trim()))
             {
-                Y2AxisCoordinates.FormattingString = ColumnChartParameters.Y2AxisFormat.Trim();
+                Y2AxisCoordinates.FormattingString = ColumnChartSettings.Y2AxisFormattingString;
             }
-            xyChart.CompositionKind = ColumnChartParameters.Composition;
-            xyChart.Orientation = ColumnChartParameters.Orientation;
-            xAxisCoordinates.Angle = ColumnChartParameters.XAxisAngle;
+            xyChart.CompositionKind = ColumnChartSettings.Composition;
+            xyChart.Orientation = ColumnChartSettings.Orientation;
+            xAxisCoordinates.Angle = Settings.XAxisLabelRotation;
 
-            //switch (Settings.XAxisLabelType)
-            //{
-            //    case XAxisLabelType.Custom:
-            //    case XAxisLabelType.FieldPrompt:
-            //        tblockXAxisLabel.Text = Settings.XAxisLabel;
-            //        tblockXAxisLabel.Text = Settings.XAxisLabel;        ???  WHY WAS THIS IN THERE TWICE ???
-            //        break;
-            //    case XAxisLabelType.None:
-            //        tblockXAxisLabel.Text = string.Empty;
-            //        break;
-            //    default:
-            //        tblockXAxisLabel.Text = Settings.XAxisLabel;
-            //        break;
-            //}
-
-            switch (ColumnChartParameters.XAxisLabelType)
+            switch (Settings.XAxisLabelType)
             {
-                default:
-                case 0:  //Automatic
-                    if (!String.IsNullOrEmpty(ColumnChartParameters.XAxisLabel))
-                    {
-                        tblockXAxisLabel.Text = ColumnChartParameters.XAxisLabel;
-                    }
-                    else
-                    {
-                        tblockXAxisLabel.Text = ColumnChartParameters.ColumnNames[0];
-                    }
+                case XAxisLabelType.Custom:
+                case XAxisLabelType.FieldPrompt:
+                    tblockXAxisLabel.Text = Settings.XAxisLabel;
+                    tblockXAxisLabel.Text = Settings.XAxisLabel;
                     break;
-                case 1:  //Field Prompt
-                    {
-                        Field field = DashboardHelper.GetAssociatedField(ColumnChartParameters.ColumnNames[0]);
-                        if (field != null)
-                        {
-                            RenderableField rField = field as RenderableField;
-                            tblockXAxisLabel.Text = rField.PromptText;
-                        }
-                        else
-                        {
-                            tblockXAxisLabel.Text = ColumnChartParameters.ColumnNames[0];
-                        }
-                    }
-                    break;
-                case 2:  //None
+                case XAxisLabelType.None:
                     tblockXAxisLabel.Text = string.Empty;
                     break;
-                case 3:  //Custom
-                    tblockXAxisLabel.Text = ColumnChartParameters.XAxisLabel;
+                default:
+                    tblockXAxisLabel.Text = Settings.XAxisLabel;
                     break;
             }
 
@@ -213,21 +108,13 @@ namespace EpiDashboard.Controls.Charting
                 tblockXAxisLabel.Visibility = System.Windows.Visibility.Collapsed;
             }
 
-            //YAxisLabel = Settings.YAxisLabel;
-            //Y2AxisLabel = Settings.Y2AxisLabel;
-            //Y2AxisLegendTitle = Settings.Y2AxisLegendTitle;
+            YAxisLabel = Settings.YAxisLabel;
+            Y2AxisLabel = Settings.Y2AxisLabel;
+            Y2AxisLegendTitle = Settings.Y2AxisLegendTitle;
 
-            //xyChart.UseDifferentBarColors = ColumnChartSettings.UseDiffColors;
-            //xyChart.LegendVisible = Settings.ShowLegend;
-            //xyChart.Legend.FontSize = Settings.LegendFontSize;
-
-            YAxisLabel = ColumnChartParameters.YAxisLabel;
-            Y2AxisLabel = ColumnChartParameters.Y2AxisLabel;
-            Y2AxisLegendTitle = ColumnChartParameters.Y2AxisLegendTitle;
-
-            xyChart.UseDifferentBarColors = ColumnChartParameters.UseDiffColors;
-            xyChart.LegendVisible = ColumnChartParameters.ShowLegend;
-            xyChart.Legend.FontSize = ColumnChartParameters.LegendFontSize;
+            xyChart.UseDifferentBarColors = ColumnChartSettings.UseDiffColors;
+            xyChart.LegendVisible = Settings.ShowLegend;
+            xyChart.Legend.FontSize = Settings.LegendFontSize;
 
             Size textSize = new Size();
             Size chartSize = new Size();
@@ -267,18 +154,10 @@ namespace EpiDashboard.Controls.Charting
                     tblockY2AxisLabel.Padding = new Thickness(((chartSize.Height - 144) / 2) - (textSizeY2.Width / 2), 2, 0, 2);
                     break;
             }
-            
-            //tblockChartTitle.Text = Settings.ChartTitle;
-            //tblockSubTitle.Text = Settings.ChartSubTitle;
-            //tblockStrataTitle.Text = Settings.ChartStrataTitle;
 
-            tblockChartTitle.Text = ColumnChartParameters.ChartTitle;
-            tblockSubTitle.Text = ColumnChartParameters.ChartSubTitle;
-            tblockStrataTitle.Text = ColumnChartParameters.ChartStrataTitle;
-            //if (ColumnChartParameters.StrataVariableNames.Count > 0)
-            //{
-            //    tblockStrataTitle.Text = ColumnChartParameters.StrataVariableNames[0].ToString();
-            //}
+            tblockChartTitle.Text = Settings.ChartTitle;
+            tblockSubTitle.Text = Settings.ChartSubTitle;
+            tblockStrataTitle.Text = Settings.ChartStrataTitle;
 
             if (string.IsNullOrEmpty(tblockChartTitle.Text)) tblockChartTitle.Visibility = System.Windows.Visibility.Collapsed;
             else tblockChartTitle.Visibility = System.Windows.Visibility.Visible;
@@ -288,32 +167,31 @@ namespace EpiDashboard.Controls.Charting
 
             if (string.IsNullOrEmpty(tblockStrataTitle.Text)) tblockStrataTitle.Visibility = System.Windows.Visibility.Collapsed;
             else tblockStrataTitle.Visibility = System.Windows.Visibility.Visible;
-            
-            //yAxis.UseReferenceValue = Settings.UseRefValues;
 
-            //series0.ShowPointAnnotations = ColumnChartSettings.ShowAnnotations;
-            //series0.BarKind = ColumnChartSettings.BarKind;            
+            yAxis.UseReferenceValue = Settings.UseRefValues;
 
-            //series1.ShowPointAnnotations = Settings.ShowAnnotationsY2;
-            //series1.DashStyle = Settings.LineDashStyleY2;
-            //series1.LineKind = Settings.LineKindY2;
-            //series1.Thickness = Settings.Y2LineThickness;
+            if ((Settings as ColumnChartSettings).YAxisTo != 0)
+                numberCoordinates.To = (Settings as ColumnChartSettings).YAxisTo;
 
-            yAxis.UseReferenceValue = ColumnChartParameters.UseRefValues;
+            if ((Settings as ColumnChartSettings).YAxisFrom != 0)
+                numberCoordinates.From = (Settings as ColumnChartSettings).YAxisFrom;
 
-            series0.ShowPointAnnotations = ColumnChartParameters.ShowAnnotations;
-            series0.BarKind = ColumnChartParameters.BarKind;
+            if ((Settings as ColumnChartSettings).YAxisStep != 0)
+                numberCoordinates.Step = (Settings as ColumnChartSettings).YAxisStep;
 
-            series1.ShowPointAnnotations = ColumnChartParameters.Y2ShowAnnotations;
-            series1.DashStyle = ColumnChartParameters.Y2LineDashStyle;
-            series1.LineKind = ColumnChartParameters.Y2LineKind;
-            series1.Thickness = ColumnChartParameters.Y2LineThickness;
+            series0.ShowPointAnnotations = ColumnChartSettings.ShowAnnotations;
+            series0.BarKind = ColumnChartSettings.BarKind;
 
-            if (ColumnChartParameters.ShowLegendBorder == true) 
+            series1.ShowPointAnnotations = Settings.ShowAnnotationsY2;
+            series1.DashStyle = Settings.LineDashStyleY2;
+            series1.LineKind = Settings.LineKindY2;
+            series1.Thickness = Settings.Y2LineThickness;
+
+            if (Settings.ShowLegendBorder == true)
             {
                 xyChart.Legend.BorderThickness = new Thickness(1);
             }
-            else 
+            else
             {
                 xyChart.Legend.BorderThickness = new Thickness(0);
             }
@@ -321,7 +199,7 @@ namespace EpiDashboard.Controls.Charting
 
         private void xyChart_DataStructureCreated(object sender, EventArgs e)
         {
-            if (ColumnChartParameters.Y2AxisType == 3)
+            if (ColumnChartSettings.Y2IsCumulativePercent)
             {
                 NumericCoordinates nc = new NumericCoordinates() { From = 0, To = 1, Step = 0.1 };
                 Y2AxisCoordinates.Coordinates = nc;

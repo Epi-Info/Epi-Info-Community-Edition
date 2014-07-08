@@ -178,9 +178,9 @@ namespace Epi.Windows.MakeView.Forms
         /// <param name="frm">The main form</param>
         public CheckCode(Page page, MakeViewMainForm frm,View currentview)
         {
-            mainForm = frm;
-            if (currentview != null)
-            currentview.MustRefreshFieldCollection = true;         
+            mainForm = frm; 
+            if (currentview != null) 
+            currentview.MustRefreshFieldCollection = true;
             view = currentview;    
             Construct();                            
             BuildComboBox();
@@ -1885,9 +1885,7 @@ namespace Epi.Windows.MakeView.Forms
                 }
             }
 
-            string caseKey = pLevel.ToLower() + "_" + pEvent.ToLower();
-
-            switch (caseKey)
+            switch (pLevel.ToLower() + "_" + pEvent.ToLower())
             {
 
                 case "definevariables_":
@@ -2285,6 +2283,7 @@ namespace Epi.Windows.MakeView.Forms
                         AddStatusErrorMessage("Field " + Identifier + " before: This check code block already exists.");
                     }
                     break;
+                
                 case "field_after":
                 case "field_":
 
@@ -2321,13 +2320,14 @@ namespace Epi.Windows.MakeView.Forms
                             CheckCodeBlock.Append("\n\tAfter\n\t\t//add code here\n\n\tEnd-After\nEnd-Field\n");
                             this.ParseText(CheckCodeBlock.ToString());
                         }
+
                         result = true;
                     }
                     else
                     {
                         AddStatusErrorMessage("Field " + Identifier + " after: This check code block already exists.");
                     }
-
+                    
                     break;
 
                 case "field_click":

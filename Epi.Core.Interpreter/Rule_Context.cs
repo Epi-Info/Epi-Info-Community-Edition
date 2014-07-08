@@ -216,7 +216,7 @@ namespace Epi.Core.AnalysisInterpreter
             SelectCommandList.Add(CommandNames.SUBSTRING);
             SelectCommandList.Add(CommandNames.TXTTONUM);
             SelectCommandList.Add(CommandNames.TXTTODATE);
-            SelectCommandList.Add(CommandNames.UPPERCASE);      
+            SelectCommandList.Add(CommandNames.UPPERCASE);    
         }
         
         public object GetVariable(string name)
@@ -1145,7 +1145,7 @@ namespace Epi.Core.AnalysisInterpreter
                 {
                     OverriddenSetOptions.Add(kvp.Key, kvp.Value);
                 }
-            }           
+            }          
         }
 
         public void AddConnection(string identifier, string pathOrConnectionString)

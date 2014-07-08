@@ -2166,7 +2166,7 @@ namespace EpiDashboard
             }
         }
 
-        protected override void RenderFinish()
+        private void RenderFinish()
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed; 
 
@@ -2188,7 +2188,7 @@ namespace EpiDashboard
             CheckAndSetPosition();
         }
 
-        protected override void RenderFinishWithWarning(string errorMessage)
+        private void RenderFinishWithWarning(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -2210,7 +2210,7 @@ namespace EpiDashboard
             CheckAndSetPosition();
         }
 
-        protected override void RenderFinishWithError(string errorMessage)
+        private void RenderFinishWithError(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 

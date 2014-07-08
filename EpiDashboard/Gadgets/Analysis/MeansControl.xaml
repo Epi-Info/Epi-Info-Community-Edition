@@ -41,7 +41,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>                
                 
-                <Controls:GadgetHeaderPanel x:Name="headerPanel" IsFilterButtonAvailable="False" IsDescriptionButtonAvailable="False" Grid.Row="0" Text="Means" />
+                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" Text="Means" />
                 <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel" Grid.Row="2" Text="" />
                 <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
 
@@ -54,7 +54,7 @@
 
                 <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{DynamicResource gadgetWaitPanelStyle}" />
 
-                <StackPanel Grid.Row="1" Grid.RowSpan="9" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Collapsed">
+                <StackPanel Grid.Row="1" Grid.RowSpan="9" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" >
                     <Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" >
                         <Rectangle Style="{DynamicResource rectangleConfigOuter}" />
                         <Rectangle Style="{DynamicResource rectangleConfigInner}" />
@@ -80,7 +80,7 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <Expander Margin="0, 5, 0, 0" x:Name="expanderAdvancedOptions" Header="Advanced options" Expanded="expanderAdvancedOptions_Expanded">
+                                <Expander Margin="0, 5, 0, 0" x:Name="expanderAdvancedOptions" Header="Advanced options">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition></ColumnDefinition>

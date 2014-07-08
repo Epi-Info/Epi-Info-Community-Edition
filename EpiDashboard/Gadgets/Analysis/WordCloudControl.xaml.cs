@@ -196,80 +196,79 @@ namespace EpiDashboard
         /// </summary>
         private void FillComboboxes(bool update = false)
         {
-            //LoadingCombos = true;
+            LoadingCombos = true;
 
-            //string prevField = string.Empty;
-            //string prevWeightField = string.Empty;
-            ////string prevStrataField = string.Empty;
-            //List<string> prevStrataFields = new List<string>();
+            string prevField = string.Empty;
+            string prevWeightField = string.Empty;
+            //string prevStrataField = string.Empty;
+            List<string> prevStrataFields = new List<string>();
 
-            //if (update)
-            //{
-            //    if (cbxField.SelectedIndex >= 0)
-            //    {
-            //        prevField = cbxField.SelectedItem.ToString();
-            //    }
-            //}
+            if (update)
+            {
+                if (cbxField.SelectedIndex >= 0)
+                {
+                    prevField = cbxField.SelectedItem.ToString();
+                }
+            }
 
-            //cbxField.ItemsSource = null;
-            //cbxField.Items.Clear();
+            cbxField.ItemsSource = null;
+            cbxField.Items.Clear();
 
-            ////cbxFieldStrata.ItemsSource = null;
-            ////cbxFieldStrata.Items.Clear();
+            //cbxFieldStrata.ItemsSource = null;
+            //cbxFieldStrata.Items.Clear();
 
-            //List<string> fieldNames = new List<string>();
-            //List<string> weightFieldNames = new List<string>();
-            //List<string> strataFieldNames = new List<string>();
+            List<string> fieldNames = new List<string>();
+            List<string> weightFieldNames = new List<string>();
+            List<string> strataFieldNames = new List<string>();
 
-            //weightFieldNames.Add(string.Empty);
-            ////strataFieldNames.Add(string.Empty);
+            weightFieldNames.Add(string.Empty);
+            //strataFieldNames.Add(string.Empty);
 
-            //List<string> fieldNames = new List<string>();
-            //ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined | ColumnDataType.UserDefined;
-            //fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
+            ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined | ColumnDataType.UserDefined;
+            fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
 
-            //columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
-            //weightFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
+            columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
+            weightFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
 
-            //columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
-            //strataFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
+            columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
+            strataFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
 
-            //fieldNames.Sort();
-            //weightFieldNames.Sort();
-            //strataFieldNames.Sort();
+            fieldNames.Sort();
+            weightFieldNames.Sort();
+            strataFieldNames.Sort();
 
-            //if (fieldNames.Contains("SYSTEMDATE"))
-            //{
-            //    fieldNames.Remove("SYSTEMDATE");
-            //}
+            if (fieldNames.Contains("SYSTEMDATE"))
+            {
+                fieldNames.Remove("SYSTEMDATE");
+            }
 
-            //if (DashboardHelper.IsUsingEpiProject)
-            //{
-            //    if (fieldNames.Contains("RecStatus")) fieldNames.Remove("RecStatus");
-            //    if (weightFieldNames.Contains("RecStatus")) weightFieldNames.Remove("RecStatus");
+            if (DashboardHelper.IsUsingEpiProject)
+            {
+                if (fieldNames.Contains("RecStatus")) fieldNames.Remove("RecStatus");
+                if (weightFieldNames.Contains("RecStatus")) weightFieldNames.Remove("RecStatus");
 
-            //    if (strataFieldNames.Contains("RecStatus")) strataFieldNames.Remove("RecStatus");
-            //    if (strataFieldNames.Contains("FKEY")) strataFieldNames.Remove("FKEY");
-            //    if (strataFieldNames.Contains("GlobalRecordId")) strataFieldNames.Remove("GlobalRecordId");
-            //}
+                if (strataFieldNames.Contains("RecStatus")) strataFieldNames.Remove("RecStatus");
+                if (strataFieldNames.Contains("FKEY")) strataFieldNames.Remove("FKEY");
+                if (strataFieldNames.Contains("GlobalRecordId")) strataFieldNames.Remove("GlobalRecordId");
+            }
 
-            //cbxField.ItemsSource = fieldNames;
+            cbxField.ItemsSource = fieldNames;
 
-            //if (cbxField.Items.Count > 0)
-            //{
-            //    cbxField.SelectedIndex = -1;
-            //}
+            if (cbxField.Items.Count > 0)
+            {
+                cbxField.SelectedIndex = -1;
+            }
 
-            //if (update)
-            //{
-            //    cbxField.SelectedItem = prevField;
+            if (update)
+            {
+                cbxField.SelectedItem = prevField;
 
-            //    foreach (string s in prevStrataFields)
-            //    {
-            //    }
-            //}
+                foreach (string s in prevStrataFields)
+                {
+                }
+            }
 
-            //LoadingCombos = false;
+            LoadingCombos = false;
         }
 
         /// <summary>
@@ -497,7 +496,7 @@ namespace EpiDashboard
         /// <summary>
         /// Sets the gadget's state to 'finished' mode
         /// </summary>
-        protected override void RenderFinish()
+        private void RenderFinish()
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -525,7 +524,7 @@ namespace EpiDashboard
         /// Thus we finish the rendering, but still show a message.
         /// </remarks>
         /// <param name="errorMessage">The warning message to display</param>
-        protected override void RenderFinishWithWarning(string errorMessage)
+        private void RenderFinishWithWarning(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed; //waitCursor.Visibility = Visibility.Hidden;
 
@@ -547,7 +546,7 @@ namespace EpiDashboard
         /// Sets the gadget's state to 'finished with error' mode
         /// </summary>
         /// <param name="errorMessage">The error message to display</param>
-        protected override void RenderFinishWithError(string errorMessage)
+        private void RenderFinishWithError(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -602,51 +601,51 @@ namespace EpiDashboard
         /// </summary> 
         private void CreateInputVariableList()
         {
-            //Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
+            Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
 
-            //GadgetOptions.MainVariableName = string.Empty;
-            //GadgetOptions.WeightVariableName = string.Empty;
-            //GadgetOptions.StrataVariableNames = new List<string>();
-            //GadgetOptions.CrosstabVariableName = string.Empty;
-            //GadgetOptions.ColumnNames = new List<string>();
+            GadgetOptions.MainVariableName = string.Empty;
+            GadgetOptions.WeightVariableName = string.Empty;
+            GadgetOptions.StrataVariableNames = new List<string>();
+            GadgetOptions.CrosstabVariableName = string.Empty;
+            GadgetOptions.ColumnNames = new List<string>();
 
-            //if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
-            //{
-            //    inputVariableList.Add("freqvar", cbxField.SelectedItem.ToString());
-            //    GadgetOptions.MainVariableName = cbxField.SelectedItem.ToString();
-            //}
-            //else
-            //{
-            //    return;
-            //}
+            if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
+            {
+                inputVariableList.Add("freqvar", cbxField.SelectedItem.ToString());
+                GadgetOptions.MainVariableName = cbxField.SelectedItem.ToString();
+            }
+            else
+            {
+                return;
+            }
 
-            //{
-            //    inputVariableList.Add("allvalues", "false");
-            //    GadgetOptions.ShouldUseAllPossibleValues = false;
-            //}
+            {
+                inputVariableList.Add("allvalues", "false");
+                GadgetOptions.ShouldUseAllPossibleValues = false;
+            }
 
-            //{
-            //    GadgetOptions.ShouldShowCommentLegalLabels = false;
-            //}
+            {
+                GadgetOptions.ShouldShowCommentLegalLabels = false;
+            }
 
-            //{
-            //    GadgetOptions.ShouldSortHighToLow = false;
-            //}
+            {
+                GadgetOptions.ShouldSortHighToLow = false;
+            }
 
-            //{
-            //    inputVariableList.Add("includemissing", "false");
-            //    GadgetOptions.ShouldIncludeMissing = false;
-            //}
+            {
+                inputVariableList.Add("includemissing", "false");
+                GadgetOptions.ShouldIncludeMissing = false;
+            }
 
-            //if (!inputVariableList.ContainsKey("usepromptforfield"))
-            //{
-            //    {
-            //        inputVariableList.Add("usepromptforfield", "false");
-            //    }
-            //}
+            if (!inputVariableList.ContainsKey("usepromptforfield"))
+            {
+                {
+                    inputVariableList.Add("usepromptforfield", "false");
+                }
+            }
 
-            //GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
-            //GadgetOptions.InputVariableList = inputVariableList;
+            GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
+            GadgetOptions.InputVariableList = inputVariableList;
         }
 
         /// <summary>
@@ -707,13 +706,12 @@ namespace EpiDashboard
             this.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(IsCancelled);
 
             #region Translation
-            //ConfigExpandedTitle.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_WORD_CLOUD;
-            //tblockMainVariable.Text = DashboardSharedStrings.GADGET_PARSE_FIELD;
-            //btnRun.Content = DashboardSharedStrings.GADGET_RUN_BUTTON;
+            ConfigExpandedTitle.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_WORD_CLOUD;
+            tblockMainVariable.Text = DashboardSharedStrings.GADGET_PARSE_FIELD;
+            btnRun.Content = DashboardSharedStrings.GADGET_RUN_BUTTON;
             #endregion // Translation
 
             base.Construct();
-            this.Parameters = new WordCloudParameters();
         }
 
         /// <summary>
@@ -928,49 +926,6 @@ namespace EpiDashboard
             StrataExpanderList.Clear();
         }
 
-        public override void ShowHideConfigPanel()
-        {
-            Popup = new DashboardPopup();
-            Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
-            Controls.GadgetProperties.WordCloudProperties properties = new Controls.GadgetProperties.WordCloudProperties(this.DashboardHelper, this, (WordCloudParameters)Parameters);
-
-            properties.Width = 800;
-            properties.Height = 600;
-
-            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
-            {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
-            }
-
-            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
-            {
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
-            }
-
-            properties.Cancelled += new EventHandler(properties_Cancelled);
-            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
-            Popup.Content = properties;
-            Popup.Show();
-        }
-
-        private void properties_ChangesAccepted(object sender, EventArgs e)
-        {
-            Controls.GadgetProperties.WordCloudProperties properties = Popup.Content as Controls.GadgetProperties.WordCloudProperties;
-            this.Parameters = properties.Parameters;
-            this.DataFilters = properties.DataFilters;
-            this.CustomOutputHeading = this.Parameters.GadgetTitle;
-            this.CustomOutputDescription = this.Parameters.GadgetDescription;
-            Popup.Close();
-            if (properties.HasSelectedFields)
-            {
-                RefreshResults();
-            }
-        }
-
-        private void properties_Cancelled(object sender, EventArgs e)
-        {
-            Popup.Close();
-        }
         /// <summary>
         /// Checks the selected variables and enables/disables checkboxes as appropriate
         /// </summary>
@@ -985,8 +940,8 @@ namespace EpiDashboard
         public override void SetGadgetToProcessingState()
         {
             this.IsProcessing = true;
-            //this.cbxField.IsEnabled = false;
-            //this.btnRun.IsEnabled = false;
+            this.cbxField.IsEnabled = false;
+            this.btnRun.IsEnabled = false;
         }
 
         /// <summary>
@@ -995,8 +950,8 @@ namespace EpiDashboard
         public override void SetGadgetToFinishedState()
         {
             this.IsProcessing = false;
-            //this.cbxField.IsEnabled = true;
-            //this.btnRun.IsEnabled = true;
+            this.cbxField.IsEnabled = true;
+            this.btnRun.IsEnabled = true;
 
             if (IsDropDownList || IsRecoded)
             {
@@ -1014,10 +969,9 @@ namespace EpiDashboard
         /// </summary>
         public override void RefreshResults()
         {
-            //if (!LoadingCombos && GadgetOptions != null && cbxField.SelectedIndex > -1)
-            if (!LoadingCombos && Parameters != null && Parameters.ColumnNames.Count > 0)
+            if (!LoadingCombos && GadgetOptions != null && cbxField.SelectedIndex > -1)
             {
-                //CreateInputVariableList();
+                CreateInputVariableList();
                 infoPanel.Visibility = System.Windows.Visibility.Collapsed;
                 waitPanel.Visibility = System.Windows.Visibility.Visible;
                 messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
@@ -1027,8 +981,7 @@ namespace EpiDashboard
                 baseWorker.RunWorkerAsync();
                 base.RefreshResults();
             }
-            //else if (!LoadingCombos && cbxField.SelectedIndex == -1)
-            else
+            else if (!LoadingCombos && cbxField.SelectedIndex == -1)
             {
                 ClearResults();
                 waitPanel.Visibility = System.Windows.Visibility.Collapsed;
@@ -1050,19 +1003,100 @@ namespace EpiDashboard
         /// <returns>XmlNode</returns>
         public override XmlNode Serialize(XmlDocument doc)
         {
-            WordCloudParameters WordCloudParameters = (WordCloudParameters)Parameters;
+            CreateInputVariableList();
+
+            Dictionary<string, string> inputVariableList = GadgetOptions.InputVariableList;
+
+            string freqVar = string.Empty;
+            string strataVar = string.Empty;
+            string weightVar = string.Empty;
+            string sort = string.Empty;
+            bool allValues = false;
+            bool showConfLimits = true;
+            bool showCumulativePercent = true;
+            bool includeMissing = false;
+
+            WordBuilder wb = new WordBuilder(",");
+
+            if (inputVariableList.ContainsKey("freqvar"))
+            {
+                freqVar = inputVariableList["freqvar"].Replace("<", "&lt;");
+            }
+            if (inputVariableList.ContainsKey("stratavar"))
+            {
+                strataVar = inputVariableList["stratavar"].Replace("<", "&lt;");
+            }
+            if (inputVariableList.ContainsKey("weightvar"))
+            {
+                weightVar = inputVariableList["weightvar"].Replace("<", "&lt;");
+            }
+            if (inputVariableList.ContainsKey("sort"))
+            {
+                sort = inputVariableList["sort"];
+            }
+            if (inputVariableList.ContainsKey("allvalues"))
+            {
+                allValues = bool.Parse(inputVariableList["allvalues"]);
+            }
+            if (inputVariableList.ContainsKey("showconflimits"))
+            {
+                showConfLimits = bool.Parse(inputVariableList["showconflimits"]);
+            }
+            if (inputVariableList.ContainsKey("showcumulativepercent"))
+            {
+                showCumulativePercent = bool.Parse(inputVariableList["showcumulativepercent"]);
+            }
+            if (inputVariableList.ContainsKey("includemissing"))
+            {
+                includeMissing = bool.Parse(inputVariableList["includemissing"]);
+            }
+
+            int precision = 4;
+            CustomOutputHeading = headerPanel.Text;
+            CustomOutputDescription = descriptionPanel.Text;
+
+            string xmlString =
+            "<mainVariable>" + freqVar + "</mainVariable>";
+            
+            if(GadgetOptions.StrataVariableNames.Count == 1) 
+            {
+                xmlString = xmlString + "<strataVariable>" + GadgetOptions.StrataVariableNames[0].Replace("<", "&lt;") + "</strataVariable>";
+            }
+            else if (GadgetOptions.StrataVariableNames.Count > 1)
+            {
+                xmlString = xmlString + "<strataVariables>";
+
+                foreach (string strataVariable in this.GadgetOptions.StrataVariableNames)
+                {
+                    xmlString = xmlString + "<strataVariable>" + strataVariable.Replace("<", "&lt;") + "</strataVariable>";
+                }
+
+                xmlString = xmlString + "</strataVariables>";
+            }
+
+            xmlString = xmlString + "<weightVariable>" + weightVar + "</weightVariable>" +
+            "<sort>" + sort + "</sort>" +
+            "<allValues>" + allValues + "</allValues>" +
+            "<precision>" + precision.ToString() + "</precision>" +
+            "<showListLabels> </showListLabels>" +
+            "<useFieldPrompts> </useFieldPrompts>" +
+            "<columnsToShow>" + wb.ToString() + "</columnsToShow>" +
+            "<includeMissing>" + includeMissing + "</includeMissing>" +
+            "<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
+            "<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>" +
+            "<customCaption>" + CustomOutputCaption + "</customCaption>";
+
+            xmlString = xmlString + SerializeAnchors();
 
             System.Xml.XmlElement element = doc.CreateElement("frequencyGadget");
-            //element.InnerXml = xmlString;
+            element.InnerXml = xmlString;
             element.AppendChild(SerializeFilters(doc));
 
-            System.Xml.XmlAttribute id = doc.CreateAttribute("id");
             System.Xml.XmlAttribute locationY = doc.CreateAttribute("top");
             System.Xml.XmlAttribute locationX = doc.CreateAttribute("left");
             System.Xml.XmlAttribute collapsed = doc.CreateAttribute("collapsed");
             System.Xml.XmlAttribute type = doc.CreateAttribute("gadgetType");
 
-            id.Value = this.UniqueIdentifier.ToString();
             locationY.Value = Canvas.GetTop(this).ToString("F0");
             locationX.Value = Canvas.GetLeft(this).ToString("F0");
             collapsed.Value = IsCollapsed.ToString();
@@ -1072,109 +1106,6 @@ namespace EpiDashboard
             element.Attributes.Append(locationX);
             element.Attributes.Append(collapsed);
             element.Attributes.Append(type);
-            element.Attributes.Append(id);
-
-            string freqVar = string.Empty;
-
-            WordBuilder wb = new WordBuilder(",");
-
-            //if (inputVariableList.ContainsKey("freqvar"))
-            //{
-            //    freqVar = inputVariableList["freqvar"].Replace("<", "&lt;");
-            //}
-            //if (inputVariableList.ContainsKey("stratavar"))
-            //{
-            //    strataVar = inputVariableList["stratavar"].Replace("<", "&lt;");
-            //}
-            //if (inputVariableList.ContainsKey("weightvar"))
-            //{
-            //    weightVar = inputVariableList["weightvar"].Replace("<", "&lt;");
-            //}
-            //if (inputVariableList.ContainsKey("sort"))
-            //{
-            //    sort = inputVariableList["sort"];
-            //}
-            //if (inputVariableList.ContainsKey("allvalues"))
-            //{
-            //    allValues = bool.Parse(inputVariableList["allvalues"]);
-            //}
-            //if (inputVariableList.ContainsKey("showconflimits"))
-            //{
-            //    showConfLimits = bool.Parse(inputVariableList["showconflimits"]);
-            //}
-            //if (inputVariableList.ContainsKey("showcumulativepercent"))
-            //{
-            //    showCumulativePercent = bool.Parse(inputVariableList["showcumulativepercent"]);
-            //}
-            //if (inputVariableList.ContainsKey("includemissing"))
-            //{
-            //    includeMissing = bool.Parse(inputVariableList["includemissing"]);
-            //}
-
-            int precision = 4;
-            CustomOutputHeading = headerPanel.Text;
-            CustomOutputDescription = descriptionPanel.Text;
-
-            XmlElement mainVariableElement = doc.CreateElement("mainVariable");
-            if (WordCloudParameters.ColumnNames.Count > 0)
-            {
-                mainVariableElement.InnerText = WordCloudParameters.ColumnNames[0];
-            }
-            element.AppendChild(mainVariableElement);
-
-
-            XmlElement precisionElement = doc.CreateElement("precision");
-            precisionElement.InnerText = precision.ToString();
-            element.AppendChild(precisionElement);
-
-            XmlElement commonWordsElement = doc.CreateElement("commonWords");
-            commonWordsElement.InnerText = WordCloudParameters.CommonWords;
-            element.AppendChild(commonWordsElement);
-
-            //string xmlString =
-            //"<mainVariable>" + freqVar + "</mainVariable>";
-            
-            //if(GadgetOptions.StrataVariableNames.Count == 1) 
-            //{
-            //    xmlString = xmlString + "<strataVariable>" + GadgetOptions.StrataVariableNames[0].Replace("<", "&lt;") + "</strataVariable>";
-            //}
-            //else if (GadgetOptions.StrataVariableNames.Count > 1)
-            //{
-            //    xmlString = xmlString + "<strataVariables>";
-
-            //    foreach (string strataVariable in this.GadgetOptions.StrataVariableNames)
-            //    {
-            //        xmlString = xmlString + "<strataVariable>" + strataVariable.Replace("<", "&lt;") + "</strataVariable>";
-            //    }
-
-            //    xmlString = xmlString + "</strataVariables>";
-            //}
-
-            //xmlString = xmlString + "<weightVariable>" + weightVar + "</weightVariable>" +
-            //"<sort>" + sort + "</sort>" +
-            //"<allValues>" + allValues + "</allValues>" +
-            //"<precision>" + precision.ToString() + "</precision>" +
-            //"<showListLabels> </showListLabels>" +
-            //"<useFieldPrompts> </useFieldPrompts>" +
-            //"<columnsToShow>" + wb.ToString() + "</columnsToShow>" +
-            //"<includeMissing>" + includeMissing + "</includeMissing>" +
-            //"<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
-            //"<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>" +
-            //"<customCaption>" + CustomOutputCaption + "</customCaption>";
-
-            XmlElement customHeadingElement = doc.CreateElement("customHeading");
-            customHeadingElement.InnerText = CustomOutputHeading.Replace("<", "&lt;");
-            element.AppendChild(customHeadingElement);
-
-            XmlElement customDescriptionElement = doc.CreateElement("customDescription");
-            customDescriptionElement.InnerText = CustomOutputDescription.Replace("<", "&lt;");
-            element.AppendChild(customDescriptionElement);
-
-            XmlElement customCaptionElement = doc.CreateElement("customCaption");
-            customCaptionElement.InnerText = CustomOutputCaption;
-            element.AppendChild(customCaptionElement);
-
-            SerializeAnchors(element);
 
             return element;
         }
@@ -1186,7 +1117,6 @@ namespace EpiDashboard
         public override void CreateFromXml(XmlElement element)
         {
             this.LoadingCombos = true;
-            this.Parameters = new WordCloudParameters();
             HideConfigPanel();
             infoPanel.Visibility = System.Windows.Visibility.Collapsed;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
@@ -1196,8 +1126,7 @@ namespace EpiDashboard
                 switch (child.Name.ToLower())
                 {
                     case "mainvariable":
-                        //cbxField.Text = child.InnerText.Replace("&lt;", "<");
-                        ((WordCloudParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
+                        cbxField.Text = child.InnerText.Replace("&lt;", "<");
                         break;
                     case "stratavariable":
                         break;
@@ -1215,9 +1144,6 @@ namespace EpiDashboard
                     case "precision":
                         int precision = 4;
                         int.TryParse(child.InnerText, out precision);
-                        break;
-                    case "commonwords":
-                        ((WordCloudParameters)Parameters).CommonWords = (child.InnerText.Replace("&lt;", "<"));
                         break;
                     case "sort":
                         if (child.InnerText.ToLower().Equals("highlow"))
@@ -1241,15 +1167,13 @@ namespace EpiDashboard
                     case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
-                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<");
-                            Parameters.GadgetTitle = CustomOutputHeading;
+                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<"); ;
                         }
                         break;
                     case "customdescription":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
                             this.CustomOutputDescription = child.InnerText.Replace("&lt;", "<");
-                            Parameters.GadgetDescription = CustomOutputDescription;
                             if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputHeading.Equals("(none)"))
                             {
                                 descriptionPanel.Text = CustomOutputDescription;
@@ -1297,7 +1221,7 @@ namespace EpiDashboard
             }
 
             htmlBuilder.AppendLine("<p class=\"gadgetOptions\"><small>");
-            htmlBuilder.AppendLine("<em>Frequency variable:</em> <strong>" + Parameters.ColumnNames[0] + "</strong>");
+            htmlBuilder.AppendLine("<em>Frequency variable:</em> <strong>" + cbxField.Text + "</strong>");
             htmlBuilder.AppendLine("<br />");
 
             //if (cbxFieldStrata.SelectedIndex >= 0)
@@ -1588,59 +1512,51 @@ namespace EpiDashboard
         {
             lock (syncLock)
             {
-                //Dictionary<string, string> inputVariableList = ((GadgetParameters)e.Argument).InputVariableList;
-                WordCloudParameters WordCloudParameters = (WordCloudParameters)Parameters;
-
+                Dictionary<string, string> inputVariableList = ((GadgetParameters)e.Argument).InputVariableList;
+            
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
                 this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToProcessingState));                
                 this.Dispatcher.BeginInvoke(new SimpleCallback(ClearResults));                
 
-                //string freqVar = GadgetOptions.MainVariableName;
-                //string weightVar = GadgetOptions.WeightVariableName;
-                //string strataVar = string.Empty;                
-                //bool includeMissing = GadgetOptions.ShouldIncludeMissing;
-
-                if (WordCloudParameters.ColumnNames.Count > 0)
-                {
-                    string freqVar = WordCloudParameters.ColumnNames[0];
-                }
-
-                //if (inputVariableList.ContainsKey("stratavar"))
-                //{
-                //    strataVar = inputVariableList["stratavar"];
-                //}
+                string freqVar = GadgetOptions.MainVariableName;
+                string weightVar = GadgetOptions.WeightVariableName;
+                string strataVar = string.Empty;                
+                bool includeMissing = GadgetOptions.ShouldIncludeMissing;
                 
-                //List<string> stratas = new List<string>();
-                //if (!string.IsNullOrEmpty(strataVar))
-                //{
-                //    stratas.Add(strataVar);
-                //}
+                if (inputVariableList.ContainsKey("stratavar"))
+                {
+                    strataVar = inputVariableList["stratavar"];
+                }
+                
+                List<string> stratas = new List<string>();
+                if (!string.IsNullOrEmpty(strataVar))
+                {
+                    stratas.Add(strataVar);
+                }
 
                 try
                 {                    
                     RequestUpdateStatusDelegate requestUpdateStatus = new RequestUpdateStatusDelegate(RequestUpdateStatusMessage);
                     CheckForCancellationDelegate checkForCancellation = new CheckForCancellationDelegate(IsCancelled);
 
-                    //GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
-                    //GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
-                    WordCloudParameters.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
-                    WordCloudParameters.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
+                    GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
+                    GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
+
                     if (this.DataFilters != null && this.DataFilters.Count > 0)
                     {
-                        WordCloudParameters.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
+                        GadgetOptions.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
                     }
                     else
                     {
-                        WordCloudParameters.CustomFilter = string.Empty;
+                        GadgetOptions.CustomFilter = string.Empty;
                     }
 
-                    //GadgetOptions.ShouldIgnoreRowLimits = true;
+                    GadgetOptions.ShouldIgnoreRowLimits = true;
 //                    Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(GadgetOptions/*, freqVar, weightVar, stratas, string.Empty, useAllPossibleValues, sortHighLow, includeMissing, false*/);
 //                    DataTable dt = DashboardHelper.ExtractFirstFrequencyTable(stratifiedFrequencyTables);
-                    //DataView dv = DashboardHelper.GenerateView(GadgetOptions);
-                    DataView dv = DashboardHelper.GenerateView(WordCloudParameters);
+                    DataView dv = DashboardHelper.GenerateView(GadgetOptions);
 
                     Dictionary<char, Dictionary<string, double>> wordCloudDictionary1 = new Dictionary<char, Dictionary<string, double>>();
                     wordCloudDictionary1.Add('0', new Dictionary<string, double>());
@@ -1681,50 +1597,44 @@ namespace EpiDashboard
                     wordCloudDictionary1.Add('z', new Dictionary<string, double>());
                     Dictionary<string, double> wordCloudDictionary = new Dictionary<string, double>();
 
-                    if (WordCloudParameters.ColumnNames.Count > 0 && !String.IsNullOrEmpty(WordCloudParameters.ColumnNames[0]))
+                    foreach (DataRowView dr in dv)
                     {
-                        foreach (DataRowView dr in dv)
+                        DataRow row = dr.Row;
+                        string[] strings = row[GadgetOptions.MainVariableName].ToString().Replace(", ", " ").Replace(". ", " ").ToLowerInvariant().Split(' ');
+
+                        foreach (string s in strings)
                         {
-                            DataRow row = dr.Row;
-                            string[] strings = row[WordCloudParameters.ColumnNames[0]].ToString().Replace(", ", " ").Replace(". ", " ").ToLowerInvariant().Split(' ');
-
-                            foreach (string s in strings)
+                            string s0 = s;
+                            if (s.Length > 0 && (s.Substring(s.Length - 1).Equals(",") || s.Substring(s.Length - 1).Equals(".")))
+                                s0 = s.Remove(s.Length - 1);
+                            char [] firstChars = s0.ToCharArray();
+                            if (firstChars.Length > 0)
                             {
-                                string s0 = s;
-                                if (s.Length > 0 && (s.Substring(s.Length - 1).Equals(",") || s.Substring(s.Length - 1).Equals(".")))
-                                    s0 = s.Remove(s.Length - 1);
-                                char[] firstChars = s0.ToCharArray();
-                                if (firstChars.Length > 0)
+                                char firstChar = firstChars[0];
+                                if (wordCloudDictionary1.ContainsKey(firstChar))
                                 {
-                                    char firstChar = firstChars[0];
-                                    if (wordCloudDictionary1.ContainsKey(firstChar))
+                                    if (wordCloudDictionary1[firstChar].ContainsKey(s0))
                                     {
-                                        if (wordCloudDictionary1[firstChar].ContainsKey(s0))
+                                        wordCloudDictionary1[firstChar][s0]++;
+                                    }
+                                    else
+                                    {
+                                        if (!s0.Equals(",") && !s0.Equals(".") && !s0.Equals("and") && !s0.Equals("the") && !s0.Equals("for") &&
+                                            !s0.Equals("in") && !s0.Equals("on") && !s0.Equals("with") && !s0.Equals("of") && !s0.Equals("a") && !s0.Equals("an")
+                                             && !s0.Equals("to") && !s0.Equals("as") && !s0.Equals("we") && !s0.Equals("i") && !s0.Equals("me") && !s0.Equals("us") 
+                                             && !s0.Equals("you") && !s0.Equals("this") && !s0.Equals("it") && !s0.Equals("is") && !s0.Equals("are") && !s0.Equals("or") 
+                                             && !s0.Equals("my") && !s0.Equals("that") && !s0.Equals("if") && !s0.Equals("not") && !s0.Equals("were") && !s0.Equals("was") 
+                                             && !s0.Equals("by") && !s0.Equals("at") && !s0.Equals("our") && !s0.Equals("your") && !s0.Equals("their") && !s0.Equals("will")
+                                             && !s0.Equals("would") && !s0.Equals("but") && !s0.Equals("his") && !s0.Equals("her") && !s0.Equals("am") && !s0.Equals("pm")
+                                             && s0.Length > 0)
                                         {
-                                            wordCloudDictionary1[firstChar][s0]++;
-                                        }
-                                        else
-                                        {
-                                            //, . a am an and are as at but by for her his i if in is it me my not of on or our pm that the their this to us was we were will with would you your
-                                            //string txtCommonWords = ", . a am an and are as at but by for her his i if in is it me my not of on or our pm that the their this to us was we were will with would you your";
-
-                                            //if (!s0.Equals(",") && !s0.Equals(".") && !s0.Equals("and") && !s0.Equals("the") && !s0.Equals("for") &&
-                                            //    !s0.Equals("in") && !s0.Equals("on") && !s0.Equals("with") && !s0.Equals("of") && !s0.Equals("a") && !s0.Equals("an")
-                                            //     && !s0.Equals("to") && !s0.Equals("as") && !s0.Equals("we") && !s0.Equals("i") && !s0.Equals("me") && !s0.Equals("us")
-                                            //     && !s0.Equals("you") && !s0.Equals("this") && !s0.Equals("it") && !s0.Equals("is") && !s0.Equals("are") && !s0.Equals("or")
-                                            //     && !s0.Equals("my") && !s0.Equals("that") && !s0.Equals("if") && !s0.Equals("not") && !s0.Equals("were") && !s0.Equals("was")
-                                            //     && !s0.Equals("by") && !s0.Equals("at") && !s0.Equals("our") && !s0.Equals("your") && !s0.Equals("their") && !s0.Equals("will")
-                                            //     && !s0.Equals("would") && !s0.Equals("but") && !s0.Equals("his") && !s0.Equals("her") && !s0.Equals("am") && !s0.Equals("pm")
-                                            //     && s0.Length > 0)
-                                            if(s0.Length > 0 && !WordCloudParameters.CommonWords.Contains(s0))
-                                            {
-                                                wordCloudDictionary1[firstChar].Add(s0, 1.0);
-                                            }
+                                            wordCloudDictionary1[firstChar].Add(s0, 1.0);
                                         }
                                     }
                                 }
                             }
                         }
+
                     }
 
                     Dictionary<string, double> wordCloudDictionary0 = new Dictionary<string, double>();

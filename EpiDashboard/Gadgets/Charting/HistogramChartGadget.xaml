@@ -270,6 +270,15 @@
 
                                             <TextBlock x:Name="tblockEndValue" HorizontalAlignment="Left" TextAlignment="Center" Text="End value:" Margin="0,5,0,0"  />
                                             <TextBox x:Name="txtEndValue" HorizontalAlignment="Stretch" />
+
+                                            <TextBlock x:Name="tblockToValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis max value:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtToValue" HorizontalAlignment="Stretch" />
+
+                                            <TextBlock x:Name="tblockFromValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis min value:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtFromValue" HorizontalAlignment="Stretch" />
+
+                                            <TextBlock x:Name="tblocktStepValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis step value:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtStepValue" HorizontalAlignment="Stretch" />
                                         </StackPanel>
                                     </Border>
 

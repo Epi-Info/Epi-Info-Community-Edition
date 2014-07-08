@@ -24,8 +24,6 @@
     <Thickness x:Key="genericElementMargin" Left="6" Top="2" Right="6" Bottom="6"></Thickness>
     <Thickness x:Key="genericTextMargin" Left="4" Top="2" Right="4" Bottom="2"></Thickness>
     <Thickness x:Key="genericTextMarginAlt" Left="4" Top="4" Right="4" Bottom="4"></Thickness>
-    <!--<SolidColorBrush x:Key="menuBarBackground" Color="#017BCD"></SolidColorBrush>-->
-    <!--<SolidColorBrush x:Key="menuBarBackground" Color="#5C53AC"></SolidColorBrush>-->
     <SolidColorBrush x:Key="menuBarBackground" Color="#3696D2"></SolidColorBrush>
     
     <LinearGradientBrush x:Key="goldBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
@@ -79,33 +77,6 @@
             </GradientStopCollection>
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
-    
-    <Style TargetType="ContextMenu">
-        <Setter Property="FontSize" Value="16" />
-    </Style>
-
-    <Style TargetType="MenuItem">
-        <Setter Property="Padding" Value="4" />
-    </Style>
-
-    <Style x:Key="menuIconStyle" TargetType="DockPanel">
-        <Setter Property="ToolTipService.ShowDuration" Value="5000" />
-        <Setter Property="ToolTipService.InitialShowDelay" Value="50" />
-        <Setter Property="Margin" Value="6,0,6,0" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="IsHitTestVisible" Value="True" />
-        <Style.Triggers>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True" />
-                </MultiTrigger.Conditions>
-                <Setter Property="Cursor" Value="Hand"></Setter>
-            </MultiTrigger>
-
-        </Style.Triggers>
-    </Style>
 
     <Style x:Key="configGroupBorderStyle" TargetType="Border">
         <Setter Property="Padding" Value="5,5,5,5" />

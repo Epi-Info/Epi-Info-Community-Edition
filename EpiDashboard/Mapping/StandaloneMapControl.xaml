@@ -5,18 +5,7 @@
     xmlns:Mapping="clr-namespace:EpiDashboard.Mapping"
     xmlns:Charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=Epi.DataVisualization.Toolkit"
     Background="White">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../ResourceDictionary.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Grid x:Name="LayoutRoot">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="58"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
         <StackPanel>
             <TextBlock Name="txtMap" HorizontalAlignment="Center" Text="Epi Info Map" Margin="0,10,0,0" FontSize="14" FontWeight="Bold"></TextBlock>
             <!--<TextBlock Name="txtInternet" HorizontalAlignment="Center" Text="This feature requires Internet connectivity." Margin="0,10,0,0" FontSize="12"></TextBlock>-->
@@ -24,241 +13,31 @@
             <EpiDashboard:WaitCursor x:Name="waitCursor" Width="25" Height="25" Visibility="Collapsed" StackPanel.ZIndex="99"/>
             <!--<Button Name="btnBypass" HorizontalAlignment="Center" Content="Bypass Internet Check" Margin="0,10,0,0"/>-->
         </StackPanel>
-        
-        <Grid x:Name="grdMapDef" Grid.Column="1">
+        <Grid x:Name="grdMapDef">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Canvas x:Name="MapContainer" Grid.Row="0"/>
+            <Canvas x:Name="MapContainer" Grid.Row="1"/>
             <StackPanel Grid.Row="1" x:Name="stkLegends" HorizontalAlignment="Left" Width="175" VerticalAlignment="Bottom"  Margin="0,0,0,40"/>
         </Grid>
-        
-        <Grid x:Name="grdLayerTypeChooser" HorizontalAlignment="Left" Grid.Column="1" Width="310" Margin="-310,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="5"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Border Grid.Row="0" Grid.RowSpan="9" CornerRadius="0" BorderThickness="0" Background="#303030" ></Border>
-            <Image x:Name="imgPoi" Source="..\Images\poi.png" Stretch="None" Grid.Row="1" Cursor="Hand" MouseLeftButtonUp="imgChoropleth_MouseLeftButtonUp"/>
-            <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="2" HorizontalAlignment="Center">Points of Interest</TextBlock>
-            <Image x:Name="imgCaseCluster" Source="..\Images\casecluster.png" Stretch="None" Grid.Row="3" Cursor="Hand" MouseLeftButtonUp="imgChoropleth_MouseLeftButtonUp"/>
-            <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="4" HorizontalAlignment="Center">Case Cluster</TextBlock>
-            <Image x:Name="imgChoropleth" Source="..\Images\choropleth.png" Stretch="None" Grid.Row="5" Cursor="Hand" MouseLeftButtonUp="imgChoropleth_MouseLeftButtonUp"/>
-            <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="6" HorizontalAlignment="Center">Choropleth</TextBlock>
-            <Image x:Name="imgDotDensity" Source="..\Images\dotdensity.png" Stretch="None" Grid.Row="7" Cursor="Hand" MouseLeftButtonUp="imgChoropleth_MouseLeftButtonUp"/>
-            <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="8" HorizontalAlignment="Center">Dot Density</TextBlock>
-        </Grid>
-
-        <DockPanel SnapsToDevicePixels="True" Grid.Column="0">
-            <Grid>
-                <Rectangle Style="{DynamicResource shadowRectangle}"></Rectangle>
-                <DockPanel Background="{DynamicResource menuBarBackground}">
-                    <Grid x:Name="grdMenuBarInner">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="50" />
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height=".05*"/>
-                            <RowDefinition Height="2" />
-                            <RowDefinition Height=".05*" MaxHeight="32" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <DockPanel x:Name="iconOpenMap" Style="{StaticResource menuIconStyle}" Grid.Row="0" MouseLeftButtonUp="iconOpenMap_MouseLeftButtonUp">
-                            <DockPanel.ToolTip>
-                                <StackPanel>
-                                    <Label x:Name="tooltipFileHeader" FontWeight="Bold">Open Button</Label>
-                                    <TextBlock x:Name="tooltipFile"
-                                               Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
-                                        Opens a previously saved map.</TextBlock>
-                                </StackPanel>
-                            </DockPanel.ToolTip>
-                            <Grid Height="36" Width="36">
-                                <Path Width="22" Height="18" Stretch="Fill" Fill="White" Data="F1 M 19,50L 28,34L 63,34L 54,50L 19,50 Z M 19,28.0001L 35,28C 36,25 37.4999,24.0001 37.4999,24.0001L 48.75,24C 49.3023,24 50,24.6977 50,25.25L 50,28L 53.9999,28.0001L 53.9999,32L 27,32L 19,46.4L 19,28.0001 Z "/>
-                                <Ellipse Stroke="White" Fill="Transparent" StrokeThickness="3" />
-                            </Grid>
-                        </DockPanel>
-
-                        <DockPanel x:Name="iconSaveMap" Style="{StaticResource menuIconStyle}" Grid.Row="1" MouseLeftButtonUp="iconSaveMap_MouseLeftButtonUp">
-                            <DockPanel.ToolTip>
-                                <StackPanel>
-                                    <Label x:Name="tooltipRefreshHeader" FontWeight="Bold">Save Button</Label>
-                                    <TextBlock x:Name="tooltipRefresh"
-                                               Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
-                                        Saves the current map.</TextBlock>
-                                </StackPanel>
-                            </DockPanel.ToolTip>
-                            <Grid Height="36" Width="36">
-                                <Path Width="18" Height="18" Stretch="Fill" Fill="White" Data="F1 M 20.5833,20.5833L 55.4167,20.5833L 55.4167,55.4167L 45.9167,55.4167L 45.9167,44.3333L 30.0833,44.3333L 30.0833,55.4167L 20.5833,55.4167L 20.5833,20.5833 Z M 33.25,55.4167L 33.25,50.6667L 39.5833,50.6667L 39.5833,55.4167L 33.25,55.4167 Z M 26.9167,23.75L 26.9167,33.25L 49.0833,33.25L 49.0833,23.75L 26.9167,23.75 Z "/>
-                                <Ellipse Stroke="White" Fill="Transparent" StrokeThickness="3" />
-                            </Grid>
-                        </DockPanel>
-
-                        <DockPanel x:Name="iconSaveAsImage" Style="{StaticResource menuIconStyle}" Grid.Row="3" MouseLeftButtonUp="iconSaveAsImage_MouseLeftButtonUp">
-                            <DockPanel.ToolTip>
-                                <StackPanel>
-                                    <Label x:Name="tooltipSetDataSourceHeader" FontWeight="Bold">Save as Image Button</Label>
-                                    <TextBlock x:Name="tooltipSetDataSource"
-                                               Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
-                                        Saves the current map as an image.</TextBlock>
-                                </StackPanel>
-                            </DockPanel.ToolTip>
-                            <Grid Height="36" Width="36">
-                                <Path Width="18" Height="21" Stretch="Fill" Fill="White" Data="F1 M 20,17L 44.25,17L 56,28.75L 56,59L 20,59L 20,17 Z M 24,21L 24,55L 52,55L 52,34L 39,34L 39,21L 24,21 Z M 43,22.25L 43,30L 50.75,30L 43,22.25 Z M 27,47.5L 30,50.5L 42.5,38L 47.5,43L 51,39L 51,54L 25,54L 25,50L 27,47.5 Z M 33,22C 33,26.3723 29.3723,30 25,30L 25,22L 33,22 Z "/>
-                                <Ellipse Stroke="White" Fill="Transparent" StrokeThickness="3" />
-                            </Grid>
-                        </DockPanel>
-
-                        <DockPanel x:Name="iconAddDataLayer" 
-                                   Style="{StaticResource menuIconStyle}" Grid.Row="4" MouseLeftButtonUp="iconAddDataLayer_MouseLeftButtonUp">
-                            <DockPanel.ToolTip>
-                                <StackPanel>
-                                    <Label x:Name="tooltipOpenHeader" FontWeight="Bold">Add Data Layer Button</Label>
-                                    <TextBlock x:Name="tooltipOpen"
-                                               Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
-                                        Adds a data layer to the map.
-                                    </TextBlock>
-                                </StackPanel>
-                            </DockPanel.ToolTip>
-                            <Grid Height="36" Width="36">
-                                <Path Width="18" Height="18" Stretch="Fill" Fill="White" Data="F1 M 38,19C 47.619,19 55.4167,21.1266 55.4167,23.75C 55.4167,24.9666 53.7397,26.0763 50.9819,26.9167C 47.7927,27.8884 43.1582,28.5 38,28.5C 32.8418,28.5 28.2073,27.8884 25.0181,26.9167C 22.2603,26.0763 20.5833,24.9666 20.5833,23.75C 20.5833,21.1266 28.381,19 38,19 Z M 55.4167,52.25C 55.4167,54.8734 47.6189,57 38,57C 28.381,57 20.5833,54.8734 20.5833,52.25L 20.5833,45.9167C 20.5833,48.54 28.381,50.6667 38,50.6667C 47.6189,50.6667 55.4167,48.54 55.4166,45.9167L 55.4167,52.25 Z M 55.4167,42.75C 55.4167,45.3734 47.619,47.5 38,47.5C 28.381,47.5 20.5833,45.3734 20.5833,42.75L 20.5833,36.4167C 20.5833,39.04 28.381,41.1667 38,41.1667C 47.619,41.1667 55.4167,39.04 55.4166,36.4167L 55.4167,42.75 Z M 55.4167,33.25C 55.4167,35.8733 47.619,38 38,38C 28.3811,38 20.5833,35.8733 20.5833,33.25L 20.5833,26.9167C 20.5833,29.54 28.381,31.6667 38,31.6667C 47.619,31.6667 55.4167,29.54 55.4167,26.9167L 55.4167,33.25 Z "/>
-                                <Ellipse Stroke="White" Fill="Transparent" StrokeThickness="3" />
-                            </Grid>
-                        </DockPanel>
-
-                        <DockPanel x:Name="iconSave"
-                                   Style="{StaticResource menuIconStyle}"
-                                   Grid.Row="5">
-                            <DockPanel.ToolTip>
-                                <StackPanel>
-                                    <Label x:Name="tooltipSaveHeader" FontWeight="Bold">Add Reference Layer Button</Label>
-                                    <TextBlock x:Name="tooltipSave"
-                                               Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
-                                        Adds a reference layer to the map.
-                                    </TextBlock>
-                                </StackPanel>
-                            </DockPanel.ToolTip>
-                            <Grid Height="36" Width="36">
-                                <Path Width="20.5" Height="18" Stretch="Fill" Fill="White" Data="F1 M 43,37L 55,37L 55,49L 43,61L 43,37 Z M 45,42L 45,44L 48,44L 48,47L 50,47L 50,44L 53,44L 53,42L 50,42.0001L 50,39L 48,39L 48,42L 45,42 Z M 27.7083,23.75L 38.7917,26.9167L 48.2917,20.5833L 62,24L 62,51L 56,49.4681L 56,44.6944L 58,45.25L 58,28L 49,25.5L 49,36L 48,36L 48,25.5L 39,31.5L 39,49L 42,47L 42,51.6944L 38.7917,53.8333L 27.7083,50.6667L 16,55.5L 16,28.5L 27.7083,23.75 Z M 27,46.25L 27,29L 20,31.75L 20,49L 27,46.25 Z M 28,28.75L 28,46L 38,48.5L 38,31.75L 28,28.75 Z "/>
-                                <Ellipse Stroke="White" Fill="Transparent" StrokeThickness="3" />
-                            </Grid>
-                        </DockPanel>
-
-                        <DockPanel x:Name="iconTimeLapse"
-                                   Style="{StaticResource menuIconStyle}"
-                                   Grid.Row="6">
-                            <DockPanel.ToolTip>
-                                <StackPanel>
-                                    <Label x:Name="tooltipTimeLapseHeader" FontWeight="Bold">Create Time Lapse Button</Label>
-                                    <TextBlock x:Name="tooltipTimeLapse"
-                                               Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
-                                        Creates a time lapse with case cluster layers on the map.
-                                    </TextBlock>
-                                </StackPanel>
-                            </DockPanel.ToolTip>
-                            <Grid Height="36" Width="36">
-                                <Path Width="18" Height="23.7" Stretch="Fill" Fill="White" Data="F1 M 44.3333,45.9167L 53.8333,54.625L 44.3333,63.3333L 44.3333,45.9167 Z M 52.25,39.5833C 52.25,42.2298 51.6007,44.7245 50.4528,46.917L 47.3572,44.2084C 47.762,43.2521 48.0451,42.2317 48.187,41.1667L 44.3333,41.1667L 44.3333,38L 48.187,38C 47.4819,32.7082 43.2918,28.5181 38,27.813L 38,31.6667L 34.8333,31.6667L 34.8333,27.813C 29.5415,28.5181 25.3513,32.7082 24.6463,38L 28.5,38.0001L 28.5,41.1667L 24.6463,41.1667C 25.3513,46.4585 29.5415,50.6487 34.8333,51.3537L 34.8333,47.5L 38,47.5L 38,51.3537C 39.1115,51.2056 40.5703,50.9038 41.5625,50.4702L 41.5625,54.6918C 40.063,55.1628 38.0716,55.4167 36.4167,55.4167C 27.6721,55.4167 20.5833,48.3279 20.5833,39.5833C 20.5833,31.3732 26.8322,24.6226 34.8333,23.8282L 34.8333,22.1667L 30.0833,22.1667L 30.0833,17.4167L 42.75,17.4167L 42.75,22.1667L 38,22.1667L 38,23.8282C 41.1844,24.1444 44.0913,25.404 46.4371,27.3237L 47.5796,26.1813L 45.3404,23.9421L 48.6991,20.5833L 55.4167,27.3009L 52.0579,30.6596L 49.8187,28.4204L 48.6763,29.5629C 50.9099,32.2923 52.25,35.7813 52.25,39.5833 Z M 36.4166,36.4167C 38.1655,36.4167 39.5833,37.8345 39.5833,39.5834C 39.5833,41.3323 38.1655,42.75 36.4166,42.75L 30.0833,47.5L 33.2499,39.5834C 33.2499,37.8345 34.6677,36.4167 36.4166,36.4167 Z "/>
-                                <Ellipse Stroke="White" Fill="Transparent" StrokeThickness="3" />
-                            </Grid>
-                        </DockPanel>
-
-                        <DockPanel x:Name="whiteUnderlineRefresh" Background="White" Height="3" VerticalAlignment="Bottom"  Grid.Column="1" Visibility="Collapsed"></DockPanel>
-                        <DockPanel x:Name="whiteUnderlineSetData" Background="White" Width="{Binding ElementName=tblockSetDataSource, Path=ActualWidth}" Height="3" VerticalAlignment="Bottom"  Grid.Column="2" Visibility="Collapsed"></DockPanel>
-                        <DockPanel x:Name="whiteUnderlineOpen" Background="White" Width="{Binding ElementName=tblockOpen, Path=ActualWidth}" Height="3" VerticalAlignment="Bottom"  Grid.Column="3" Visibility="Collapsed"></DockPanel>
-                        <DockPanel x:Name="whiteUnderlineSave" Background="White" Width="{Binding ElementName=tblockSave, Path=ActualWidth}" Height="3" VerticalAlignment="Bottom"  Grid.Column="4" Visibility="Collapsed"></DockPanel>
-                        <DockPanel x:Name="whiteUnderlineSaveAs" Background="White" Width="{Binding ElementName=tblockSaveAs, Path=ActualWidth}" Height="3" VerticalAlignment="Bottom"  Grid.Column="5" Visibility="Collapsed"></DockPanel>
-                        <DockPanel x:Name="whiteUnderlineFile" Background="White" Width="{Binding ElementName=tblockSaveAs, Path=ActualWidth}" Height="3" VerticalAlignment="Bottom"  Grid.Column="0" Visibility="Collapsed"></DockPanel>
-
-                    </Grid>
-                </DockPanel>
+        <StackPanel x:Name="LayerTypeSelector" Visibility="Collapsed" Orientation="Vertical" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" >
+            <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" >
+                <Rectangle Fill="#775C90B2" Stroke="Gray"  Margin="0,0,0,5" />
+                <Rectangle Fill="#DDFFFFFF" Stroke="DarkGray" Margin="10,10,10,15" />
+                <StackPanel Orientation="Horizontal" Margin="25" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                    <RadioButton x:Name="ImageryRadioButton"
+                             Tag="0" IsChecked="true" Margin="5,0,5,0" Foreground="Black"
+                             GroupName="Layers" Content="Satellite" Checked="RadioButton_Checked"/>
+                    <RadioButton x:Name="StreetsRadioButton"
+                       Tag="1" Margin="5,0,5,0" Foreground="Black"
+                       GroupName="Layers" Content="Street" Checked="RadioButton_Checked" />
+                    <RadioButton x:Name="BlankRadioButton"
+                       Tag="1" Margin="5,0,5,0" Foreground="Black"
+                       GroupName="Layers" Content="Blank" Checked="RadioButton_Checked" />
+                </StackPanel>
             </Grid>
-        </DockPanel>
-
-        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Border x:Name="borderDataSource" Visibility="Visible" Grid.Column="0" Grid.ColumnSpan="7" CornerRadius="0" BorderThickness="0" Background="#6a6a6a" ></Border>
-            <Border x:Name="borderSat" Cursor="Hand" Visibility="Visible" Grid.Column="0" BorderThickness="0" Background="#6a6a6a" MouseLeftButtonUp="borderSat_MouseLeftButtonUp" ></Border>
-            <Border x:Name="borderStr" Cursor="Hand" Visibility="Visible" Grid.Column="2" BorderThickness="0" Background="#6a6a6a" MouseLeftButtonUp="borderStr_MouseLeftButtonUp" ></Border>
-            <Border x:Name="borderBln" Cursor="Hand" Visibility="Visible" Grid.Column="4" BorderThickness="0" Background="#6a6a6a" MouseLeftButtonUp="borderBln_MouseLeftButtonUp" ></Border>
-            <Border x:Name="borderSat_alt" Visibility="Visible" Grid.Column="1" BorderThickness="0" Background="#ffffff" ></Border>
-            <Border x:Name="borderStr_alt" Visibility="Visible" Grid.Column="3" BorderThickness="0" Background="#ffffff" ></Border>
-            <Border x:Name="borderBln_alt" Visibility="Visible" Grid.Column="5" BorderThickness="0" Background="#ffffff" ></Border>
-
-            <TextBlock x:Name="ImageryRadioButton" Cursor="Hand" MouseLeftButtonUp="ImageryRadioButton_MouseLeftButtonUp"  Visibility="Collapsed" VerticalAlignment="Center" Foreground="White" FontWeight="Light" FontSize="16" Grid.Column="0"
-                             Tag="0" Margin="5,0,5,0">Satellite</TextBlock>
-            <TextBlock x:Name="ImageryRadioButton_alt" VerticalAlignment="Center" Foreground="Black" FontWeight="Light" FontSize="16" Grid.Column="1"
-                             Tag="0" Margin="5,0,5,0" Background="White">Satellite</TextBlock>
-            <TextBlock x:Name="StreetsRadioButton" Cursor="Hand" MouseLeftButtonUp="StreetsRadioButton_MouseLeftButtonUp" Grid.Column="2" VerticalAlignment="Center"
-                       Tag="1" Margin="5,0,5,0" Foreground="White" FontWeight="Light" FontSize="16">Street</TextBlock>
-            <TextBlock x:Name="StreetsRadioButton_alt" Visibility="Collapsed" Grid.Column="3" VerticalAlignment="Center"
-                       Tag="1" Margin="5,0,5,0" Foreground="Black" FontWeight="Light" FontSize="16">Street</TextBlock>
-            <TextBlock x:Name="BlankRadioButton" Cursor="Hand" MouseLeftButtonUp="BlankRadioButton_MouseLeftButtonUp" Grid.Column="4" VerticalAlignment="Center"
-                       Tag="1" Margin="5,0,5,0" Foreground="White" FontWeight="Light" FontSize="16">Blank</TextBlock>
-            <TextBlock x:Name="BlankRadioButton_alt" Visibility="Collapsed" Grid.Column="5" VerticalAlignment="Center"
-                       Tag="1" Margin="5,0,5,0" Foreground="Black" FontWeight="Light" FontSize="16">Blank</TextBlock>
-
-            <DockPanel x:Name="iconExpand" 
-                                   Style="{StaticResource menuIconStyle}"
-                                   Grid.Column="6" MouseLeftButtonUp="iconExpand_MouseLeftButtonUp" Margin="0,0,0,5">
-                <DockPanel.ToolTip>
-                    <StackPanel>
-                        <Label x:Name="tooltipExpandHeader" FontWeight="Bold">Full Screen</Label>
-                        <TextBlock x:Name="tooltipExpand"
-                                               Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
-                                        Switches to full screen mode.
-                        </TextBlock>
-                    </StackPanel>
-                </DockPanel.ToolTip>
-                <Grid Height="36" Width="36">
-                    <Path Width="26" Height="26" Stretch="Fill" Fill="White" Data="F1 M 44.5,19L 58,19L 58,32.75L 53,37.5L 53,28L 37.75,43.25L 34,39.5L 49.5,24L 39.5,24L 44.5,19 Z M 20,27L 42.5,27L 37.5,32L 25,32L 25,52L 45,52L 45,40.5L 50,35.5L 50,57L 20,57L 20,27 Z "/>
-
-                </Grid>
-            </DockPanel>
-
-            <DockPanel x:Name="iconRestore"
-                                   Style="{StaticResource menuIconStyle}" Visibility="Collapsed"
-                                   Grid.Column="6" MouseLeftButtonUp="iconRestore_MouseLeftButtonUp">
-                <DockPanel.ToolTip>
-                    <StackPanel>
-                        <Label x:Name="tooltipRestoreHeader" FontWeight="Bold">Window</Label>
-                        <TextBlock x:Name="tooltipRestore"
-                                               Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
-                                        Switches to window mode.
-                        </TextBlock>
-                    </StackPanel>
-                </DockPanel.ToolTip>
-                <Grid Height="36" Width="36">
-                    <Path Width="26" Height="26" Stretch="Fill" Fill="White" Data="F1 M 19,57L 19,19L 57,19L 57,57L 19,57 Z M 24,29L 47,29L 47,52L 52,52L 52,24L 24,24L 24,29 Z M 24,34L 24,52L 42,52L 42,34L 24,34 Z "/>
-
-                </Grid>
-            </DockPanel>
-        </Grid>
-        
+        </StackPanel>
         <Grid x:Name="grdTimeLapse" Visibility="Collapsed" HorizontalAlignment="Center"  VerticalAlignment="Bottom"  Margin="0,10,10,30" >
 
             <Rectangle Fill="#00919191" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0,0,0,5" >

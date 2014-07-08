@@ -3,13 +3,11 @@ using System.Data;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -37,7 +35,27 @@ namespace EpiDashboard
     public partial class LineListControl : GadgetBase
     {
         #region Private Members
+        /// <summary>
+        /// The list of labels for each group value. E.g. if grouping the line list by SEX, there would
+        /// be (likely) two values in this list: One for Male and one for Female. These show up as the table
+        /// headings when displaying both of the line lists.
+        /// </summary>
+        private List<TextBlock> gridLabelsList;
+
+        /// <summary>
+        /// The list of scrollviewers for each group value.
+        /// </summary>
+        private List<ScrollViewer> groupSvList;
+
         private List<string> columnOrder = new List<string>();
+        private int draggedColumnIndex = -1;
+        private string clickedColumnName = string.Empty;
+        private bool columnWarningShown;
+        private int rowCount = 1;
+        private int columnCount = 1;
+        private int maxColumns;
+
+        private const int MAX_ROW_LIMIT = 2000;
 
         /// <summary>
         /// Bool used to determine if the gadget is being called directly from the Enter module (e.g. 'Interactive Line List' option)
@@ -49,11 +67,18 @@ namespace EpiDashboard
         /// </summary>
         private double currentWidth;
 
+        private Rectangle highlightRowRectangle;
+        private FrameworkElement allowUpdateBox;
         private RequestUpdateStatusDelegate requestUpdateStatus;
         private CheckForCancellationDelegate checkForCancellation;
 
         #endregion // Private Members
-        
+
+        #region Delegates
+        private delegate void SetGridImageDelegate(string strataValue, byte[] imageBlob, TextBlockConfig textBlockConfig, FontWeight fontWeight);
+        private delegate void RenderFrequencyHeaderDelegate(string strataValue, string freqVar, DataColumnCollection columns);
+        #endregion
+
         #region Events
         public event Mapping.RecordSelectedHandler RecordSelected;
         #endregion // Events
@@ -64,7 +89,7 @@ namespace EpiDashboard
         /// </summary>
         public LineListControl()
         {
-            InitializeComponent();
+            InitializeComponent();            
             Construct();
         }
 
@@ -78,6 +103,7 @@ namespace EpiDashboard
             this.DashboardHelper = dashboardHelper;
             this.IsHostedByEnter = false;
             Construct();
+            FillComboboxes();
         }
 
         /// <summary>
@@ -91,10 +117,13 @@ namespace EpiDashboard
             this.DashboardHelper = dashboardHelper;
             this.IsHostedByEnter = hostedByEnter;
             Construct();
+            FillComboboxes();
         }
+
         #endregion // Constructors
 
         #region Public Methods
+
         /// <summary>
         /// Returns the gadget's description as a string.
         /// </summary>
@@ -110,20 +139,26 @@ namespace EpiDashboard
         /// <param name="pageNumber">The page number</param>
         public void SelectPageNumber(int pageNumber)
         {
-        }
+            string pageNumberStr = "Page " + pageNumber.ToString();
+            List<string> fieldNames = new List<string>();
+            Epi.Page pageOne = this.View.GetPageByPosition(pageNumber - 1);
 
-        private DataGrid GetDataGrid()
-        {
-            DataGrid dg = null;
-            foreach (UIElement element in panelMain.Children)
+            foreach (Field field in pageOne.Fields)
             {
-                if (element is DataGrid)
+                if (field is IDataField && !(field is GridField || field is GroupField || field is UniqueKeyField || field is ImageField ||
+                    field is RecStatusField || field is ForeignKeyField || field is GlobalRecordIdField))
                 {
-                    dg = element as DataGrid;
+                    if (lbxFields.Items.Contains(field.Name))
+                    {
+                        fieldNames.Add(field.Name);
+                    }
                 }
             }
 
-            return dg;
+            foreach (string s in fieldNames)
+            {
+                lbxFields.SelectedItems.Add(s);
+            }
         }
 
         /// <summary>
@@ -131,67 +166,55 @@ namespace EpiDashboard
         /// </summary>
         protected override void CopyToClipboard()
         {
-            DataGrid dg = GetDataGrid();
+            StringBuilder sb = new StringBuilder();
 
-            if (dg != null)
+            foreach (Grid grid in this.StrataGridList)
             {
-                if (dg.ItemsSource is DataView)
+                string gridName = grid.Tag.ToString();
+                if (StrataGridList.Count > 1)
                 {
-                    Common.CopyDataViewToClipboard(dg.ItemsSource as DataView);
+                    sb.AppendLine(grid.Tag.ToString());
                 }
-                else if (dg.ItemsSource is ListCollectionView)
+
+                SortedList<int, TextBlock> textBlocks = new SortedList<int, TextBlock>();
+                int currentColumnCount = 0;
+                int currentColumnNumber = 0;
+                foreach (UIElement control in grid.Children)
                 {
-                    ListCollectionView lcv = dg.ItemsSource as ListCollectionView;
-                    if (lcv.SourceCollection is DataView)
+                    if (control is TextBlock)
+                    {                        
+                        int columnNumber = Grid.GetColumn(control);
+                        textBlocks.Add(columnNumber + currentColumnCount, control as TextBlock);
+                        currentColumnNumber++;
+                    }
+                    if (currentColumnNumber >= grid.ColumnDefinitions.Count)
                     {
-                        Common.CopyDataViewToClipboard(lcv.SourceCollection as DataView);
+                        currentColumnCount = currentColumnCount + grid.ColumnDefinitions.Count;
+                        currentColumnNumber = 0;
                     }
                 }
+
+                foreach (KeyValuePair<int, TextBlock> kvp in textBlocks)
+                {
+                    TextBlock control = kvp.Value;
+                    int rowNumber = Grid.GetRow(control);
+                    int columnNumber = Grid.GetColumn(control);
+                        
+                    string value = ((TextBlock)control).Text;
+
+                    sb.Append(value + "\t");
+
+                    if (columnNumber >= grid.ColumnDefinitions.Count - 1)
+                    {
+                        sb.AppendLine();
+                    }                    
+                }
+
+                sb.AppendLine();
             }
-        }
-
-        public override void ShowHideConfigPanel()
-        {
-            Popup = new DashboardPopup();
-            Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
-            Controls.GadgetProperties.LineListProperties properties = new Controls.GadgetProperties.LineListProperties(this.DashboardHelper, this, (LineListParameters)Parameters, StrataGridList, columnOrder);
-
-            properties.Width = 800;
-            properties.Height = 600;
-
-            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
-            {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
-            }
-
-            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
-            {
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
-            }
-
-            properties.Cancelled += new EventHandler(properties_Cancelled);
-            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
-            Popup.Content = properties;
-            Popup.Show();
-        }
-
-        private void properties_ChangesAccepted(object sender, EventArgs e)
-        {
-            Controls.GadgetProperties.LineListProperties properties = Popup.Content as Controls.GadgetProperties.LineListProperties;
-            this.Parameters = properties.Parameters;
-            this.DataFilters = properties.DataFilters;
-            this.CustomOutputHeading = Parameters.GadgetTitle;
-            this.CustomOutputDescription = Parameters.GadgetDescription;
-            Popup.Close();
-            if (properties.HasSelectedFields)
-            {
-                RefreshResults();
-            }
-        }
-
-        private void properties_Cancelled(object sender, EventArgs e)
-        {
-            Popup.Close();
+            sb.Replace("\n", "");
+            Clipboard.Clear();
+            Clipboard.SetText(sb.ToString());
         }
 
         /// <summary>
@@ -203,124 +226,39 @@ namespace EpiDashboard
             messagePanel.Text = string.Empty;
             descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
 
-            panelMain.Children.Clear();
+            foreach (Grid grid in StrataGridList)
+            {
+                grid.Children.Clear();
+                grid.RowDefinitions.Clear();
+                panelMain.Children.Remove(grid);                
+            }
+
+            foreach (ScrollViewer sv in groupSvList)
+            {
+                if (panelMain.Children.Contains(sv))
+                {
+                    panelMain.Children.Remove(sv);
+                }
+            }
+
+            foreach (Expander expander in StrataExpanderList)
+            {
+                if (panelMain.Children.Contains(expander))
+                {
+                    panelMain.Children.Remove(expander);
+                }
+            }
+
+            foreach (TextBlock textBlock in gridLabelsList)
+            {
+                panelMain.Children.Remove(textBlock);
+            }
+
+            StrataExpanderList.Clear();
+            StrataGridList.Clear();
+            groupSvList.Clear();            
         }
         #endregion // Public Methods
-
-        private void AddDataGrid(DataView dv, string strataValue)
-        {
-            DataGrid dg = new DataGrid();
-            dg.Style = this.Resources["LineListDataGridStyle"] as Style;
-
-            LineListParameters ListParameters = (this.Parameters) as LineListParameters;
-
-            FrameworkElementFactory datagridRowsPresenter = new FrameworkElementFactory(typeof(DataGridRowsPresenter));
-            ItemsPanelTemplate itemsPanelTemplate = new ItemsPanelTemplate();
-            itemsPanelTemplate.VisualTree = datagridRowsPresenter;
-            GroupStyle groupStyle = new GroupStyle();
-            groupStyle.ContainerStyle = this.Resources["DefaultGroupItemStyle"] as Style;
-            groupStyle.Panel = itemsPanelTemplate;
-            dg.GroupStyle.Add(groupStyle);
-
-            GroupStyle groupStyle2 = new GroupStyle();
-            groupStyle2.HeaderTemplate = this.Resources["GroupDataTemplate"] as DataTemplate;
-            //groupStyle.Panel = itemsPanelTemplate;
-            dg.GroupStyle.Add(groupStyle2);
-
-            string groupVar = String.Empty;
-
-            if (!String.IsNullOrEmpty(ListParameters.PrimaryGroupField.Trim()))
-            {
-                groupVar = ListParameters.PrimaryGroupField.Trim();
-                ListCollectionView lcv = new ListCollectionView(dv);
-                lcv.GroupDescriptions.Add(new PropertyGroupDescription(groupVar));
-                if (!String.IsNullOrEmpty(ListParameters.SecondaryGroupField.Trim()) && !ListParameters.SecondaryGroupField.Trim().Equals(groupVar))
-                {
-                    lcv.GroupDescriptions.Add(new PropertyGroupDescription(ListParameters.SecondaryGroupField.Trim())); // for second category
-                }
-                dg.ItemsSource = lcv;
-            }
-            else
-            {
-                dg.ItemsSource = dv;
-            }
-
-
-            if (Parameters.Height.HasValue)
-            {
-                dg.MaxHeight = Parameters.Height.Value;
-            }
-            else
-            {
-                dg.MaxHeight = 700;
-            }
-
-            if (Parameters.Width.HasValue)
-            {
-                dg.MaxWidth = Parameters.Width.Value;
-            }
-            else
-            {
-                dg.MaxWidth = 900;
-            }
-
-            dg.AutoGeneratedColumns += new EventHandler(dg_AutoGeneratedColumns);
-            dg.AutoGeneratingColumn += new EventHandler<DataGridAutoGeneratingColumnEventArgs>(dg_AutoGeneratingColumn);
-
-            panelMain.Children.Add(dg);
-        }
-
-        void dg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            e.Column.IsReadOnly = true;
-
-            DataGridTextColumn dataGridTextColumn = e.Column as DataGridTextColumn;
-            if (dataGridTextColumn != null)
-            {
-                if (e.PropertyType == typeof(DateTime))
-                {
-                    dataGridTextColumn.CellStyle = this.Resources["RightAlignDataGridCellStyle"] as Style;
-                    Field field = DashboardHelper.GetAssociatedField(e.Column.Header.ToString());
-                    if (field != null && field is DateField)
-                    {
-                        dataGridTextColumn.Binding.StringFormat = "{0:d}";
-                    }
-                    else if (field != null && field is TimeField)
-                    {
-                        dataGridTextColumn.Binding.StringFormat = "{0:t}";
-                    }
-                }
-                else if (e.PropertyType == typeof(int) ||
-                    e.PropertyType == typeof(byte) ||
-                    e.PropertyType == typeof(decimal) ||
-                    e.PropertyType == typeof(double) ||
-                    e.PropertyType == typeof(float))
-                {
-                    dataGridTextColumn.CellStyle = this.Resources["RightAlignDataGridCellStyle"] as Style;
-                }
-            }
-        }
-
-        void dg_AutoGeneratedColumns(object sender, EventArgs e)
-        {
-            //DataGrid dg = (sender as DataGrid);
-            //DataView dv = dg.ItemsSource as DataView;
-
-            //int columnCount = 0;
-            //foreach (DataColumn column in dv.Table.Columns)
-            //{
-            //    Field field = DashboardHelper.GetAssociatedField(column.ColumnName);
-            //    if (field != null && field is RenderableField)
-            //    {
-            //        if (GadgetOptions.InputVariableList.ContainsKey("usepromptsforcolumnnames") &&
-            //            GadgetOptions.InputVariableList["usepromptsforcolumnnames"] == "true")
-            //        {
-            //            dg.Columns[columnCount].Header = (((RenderableField)field).PromptText);
-            //        }
-            //    }
-            //    columnCount++;
-            //}
-        }
 
         #region Event Handlers
 
@@ -332,7 +270,6 @@ namespace EpiDashboard
         protected override void worker_WorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             Debug.Print("Background worker thread for line list gadget was cancelled or ran to completion.");
-            this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
         }
 
         /// <summary>
@@ -344,27 +281,118 @@ namespace EpiDashboard
         {
             lock (syncLock)
             {
+                Dictionary<string, string> inputVariableList = ((GadgetParameters)e.Argument).InputVariableList;
+
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToProcessingState));
+                this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToProcessingState));     
                 this.Dispatcher.BeginInvoke(new SimpleCallback(ClearResults));
-                AddDataGridDelegate addDataGrid = new AddDataGridDelegate(AddDataGrid);
 
-                try
+                AddOutputGridDelegate addGrid = new AddOutputGridDelegate(AddLineListGrid);
+                SetGridTextDelegate setText = new SetGridTextDelegate(SetGridText);
+                SetGridImageDelegate setImage = new SetGridImageDelegate(SetGridImage);
+                AddGridRowDelegate addRow = new AddGridRowDelegate(AddGridRow);
+                RenderFrequencyHeaderDelegate renderHeader = new RenderFrequencyHeaderDelegate(RenderFrequencyHeader);
+                DrawFrequencyBordersDelegate drawBorders = new DrawFrequencyBordersDelegate(DrawFrequencyBorders);
+
+                Configuration config = DashboardHelper.Config;
+                string yesValue = config.Settings.RepresentationOfYes;
+                string noValue = config.Settings.RepresentationOfNo;
+
+                string groupVar = string.Empty;                
+                int maxRows = 50;
+                bool exceededMaxRows = false;
+                bool exceededMaxColumns = false;
+                bool showLineColumn = true;
+                bool showColumnHeadings = true;
+                bool showNullLabels = true;
+
+                if (GadgetOptions.StrataVariableNames.Count > 0)
                 {
-                    Parameters.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
-                    Parameters.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
-                    if (this.DataFilters != null)
+                    groupVar = GadgetOptions.StrataVariableNames[0];
+                }                
+
+                if (inputVariableList.ContainsKey("maxcolumns"))
+                {
+                    maxColumns = int.Parse(inputVariableList["maxcolumns"]);
+                }
+
+                if (inputVariableList.ContainsKey("maxrows"))
+                {
+                    maxRows = int.Parse(inputVariableList["maxrows"]);
+                }
+
+                if (inputVariableList.ContainsKey("showcolumnheadings")) 
+                {
+                    showColumnHeadings = bool.Parse(inputVariableList["showcolumnheadings"]);
+                }
+
+                if (inputVariableList.ContainsKey("showlinecolumn"))
+                {
+                    showLineColumn = bool.Parse(inputVariableList["showlinecolumn"]);
+                }
+
+                if (inputVariableList.ContainsKey("shownulllabels"))
+                {
+                    showNullLabels = bool.Parse(inputVariableList["shownulllabels"]);
+                }                
+
+                //System.Threading.Thread.Sleep(4000); // Artifically inflating process time to see how the 'loading' screen looks. TODO: REMOVE LATER
+
+                if (IsHostedByEnter)
+                {
+                    if (System.Windows.SystemParameters.IsSlowMachine == true)
                     {
-                        Parameters.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
+                        maxColumns = 512;
                     }
                     else
                     {
-                        Parameters.CustomFilter = string.Empty;
+                        maxColumns = 1024;
+                    }
+                }
+                else
+                {   
+                    int renderingTier = (RenderCapability.Tier >> 16);
+                    if (renderingTier >= 2)
+                    {
+                        maxColumns = 128;
+                    }
+                    else if (renderingTier >= 1)
+                    {
+                        maxColumns = 64;
+                    }
+                    else
+                    {
+                        maxColumns = 24;
+                    }
+                    
+                    if (System.Windows.SystemParameters.IsSlowMachine == true)
+                    {
+                        maxColumns = 24;
+                    }
+                }
+
+                List<string> stratas = new List<string>();
+                if (!string.IsNullOrEmpty(groupVar))
+                {
+                    stratas.Add(groupVar);
+                }
+
+                try
+                {
+                    GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
+                    GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
+                    if (this.DataFilters != null)
+                    {
+                        GadgetOptions.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
+                    }
+                    else
+                    {
+                        GadgetOptions.CustomFilter = string.Empty;
                     }
 
-                    List<DataTable> lineListTables = DashboardHelper.GenerateLineList(Parameters as LineListParameters);
+                    List<DataTable> lineListTables = DashboardHelper.GenerateLineList(GadgetOptions);
 
                     if (lineListTables == null || lineListTables.Count == 0)
                     {
@@ -398,6 +426,7 @@ namespace EpiDashboard
                             {
                                 continue;
                             }
+                            this.Dispatcher.BeginInvoke(addGrid, groupVar, listTable.TableName, listTable.Columns.Count);
                         }
 
                         SetGadgetStatusMessage(SharedStrings.DASHBOARD_GADGET_STATUS_DISPLAYING_OUTPUT);
@@ -410,7 +439,17 @@ namespace EpiDashboard
                                 continue;
                             }
                             string tableHeading = listTable.TableName;
+
+                            if (lineListTables.Count > 1)
+                            {
+                                //tableHeading = freqVar; ???
+                            }
+
                             SetCustomColumnSort(listTable);
+
+                            this.Dispatcher.BeginInvoke(renderHeader, strataValue, tableHeading, listTable.Columns);
+                            
+                            rowCount = 1;
 
                             if (listTable.Columns.Count == 0)
                             {
@@ -418,22 +457,147 @@ namespace EpiDashboard
                             }
 
                             int[] totals = new int[listTable.Columns.Count - 1];
+                            columnCount = 1;
 
-                            this.Dispatcher.BeginInvoke(addDataGrid, listTable.AsDataView(), listTable.TableName);
+                            foreach (System.Data.DataRow row in listTable.Rows)
+                            {
+                                this.Dispatcher.Invoke(addRow, strataValue, -1);
+                                this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(rowCount.ToString(), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Stretch, TextAlignment.Center, rowCount, 0, Visibility.Visible), FontWeights.Normal);
+                                columnCount = 1;
+
+                                foreach (DataColumn column in listTable.Columns)
+                                {
+                                    if (columnCount > maxColumns + 1)
+                                    {
+                                        exceededMaxColumns = true;
+                                        break;
+                                    }
+
+                                    string displayValue = row[column.ColumnName].ToString();
+
+                                    if (DashboardHelper.IsUserDefinedColumn(column.ColumnName))
+                                    {
+                                        displayValue = DashboardHelper.GetFormattedOutput(column.ColumnName, row[column.ColumnName]);
+                                    }
+                                    else
+                                    {
+                                        Field field = null;
+                                        string columnType = string.Empty;
+
+                                        foreach (DataRow fieldRow in DashboardHelper.FieldTable.Rows)
+                                        {
+                                            if (fieldRow["columnname"].Equals(column.ColumnName))
+                                            {
+                                                columnType = fieldRow["datatype"].ToString();
+                                                if (fieldRow["epifieldtype"] is Field)
+                                                {
+                                                    field = fieldRow["epifieldtype"] as Field;
+                                                }
+                                                break;
+                                            }
+                                        }
+
+                                        if ((field != null && (field is YesNoField || field is CheckBoxField)) || column.DataType.ToString().Equals("System.Boolean"))
+                                        {
+                                            if (row[column.ColumnName].ToString().Equals("1") || row[column.ColumnName].ToString().ToLower().Equals("true"))
+                                                displayValue = yesValue;
+                                            else if (row[column.ColumnName].ToString().Equals("0") || row[column.ColumnName].ToString().ToLower().Equals("false"))
+                                                displayValue = noValue;
+                                        }
+                                        else if ((field != null && field is DateField) || (!DashboardHelper.DateColumnRequiresTime(listTable, listTable.Columns[column.ColumnName].ColumnName)))
+                                        {
+                                            displayValue = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:d}", row[column.ColumnName]);
+                                        }
+                                        else if (field != null && field is TimeField)
+                                        {
+                                            displayValue = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:T}", row[column.ColumnName]);
+                                        }
+                                        else
+                                        {
+                                            displayValue = DashboardHelper.GetFormattedOutput(column.ColumnName, row[column.ColumnName]);
+                                        }
+                                    }
+
+                                    if (string.IsNullOrEmpty(displayValue))
+                                    {
+                                        if (showNullLabels)
+                                        {
+                                            displayValue = config.Settings.RepresentationOfMissing;
+                                        }
+                                        else
+                                        {
+                                            displayValue = string.Empty;
+                                        }
+                                    }
+
+                                    if (column.DataType.ToString().Equals("System.DateTime") || column.DataType.ToString().Equals("System.Int32") || column.DataType.ToString().Equals("System.Double") || column.DataType.ToString().Equals("System.Single"))
+                                    {
+                                        if (column.ColumnName.Equals("UniqueKey"))
+                                        {
+                                            this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(displayValue, new Thickness(8, 6, 8, 6), VerticalAlignment.Stretch, HorizontalAlignment.Stretch, TextAlignment.Right, rowCount, columnCount, Visibility.Collapsed), FontWeights.Normal);
+                                        }
+                                        else
+                                        {
+                                            this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(displayValue, new Thickness(8, 6, 8, 6), VerticalAlignment.Stretch, HorizontalAlignment.Stretch, TextAlignment.Right, rowCount, columnCount, Visibility.Visible), FontWeights.Normal);
+                                        }
+                                    }
+                                    else if (column.DataType == typeof(byte[]) && displayValue != config.Settings.RepresentationOfMissing && IsHostedByEnter)
+                                    {
+                                        this.Dispatcher.BeginInvoke(setImage, strataValue, (byte[])row[column.ColumnName], new TextBlockConfig(displayValue, new Thickness(8, 6, 8, 6), VerticalAlignment.Stretch, HorizontalAlignment.Stretch, TextAlignment.Left, rowCount, columnCount, Visibility.Visible), FontWeights.Normal);
+                                    }
+                                    else
+                                    {
+                                        this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(displayValue, new Thickness(8, 6, 8, 6), VerticalAlignment.Stretch, HorizontalAlignment.Stretch, TextAlignment.Left, rowCount, columnCount, Visibility.Visible), FontWeights.Normal);
+                                    }
+                                    columnCount++;
+                                }
+
+                                rowCount++;
+
+                                if (rowCount > maxRows)
+                                {
+                                    break;
+                                }
+                            }
+                            
+                            this.Dispatcher.BeginInvoke(drawBorders, strataValue);
+
+                            if (rowCount > maxRows)
+                            {
+                                exceededMaxRows = true;
+                            }
                         }
 
-                        //for(int i = 0; i < lineListTables.Count; i++)
-                        //{
-                        //    lineListTables[i].Dispose();
-                        //}
-                        //lineListTables.Clear();
+                        for(int i = 0; i < lineListTables.Count; i++)
+                        {
+                            lineListTables[i].Dispose();
+                        }
+                        lineListTables.Clear();
                     }
 
-                    this.Dispatcher.BeginInvoke(new SimpleCallback(RenderFinish));
+                    if (exceededMaxRows && exceededMaxColumns)
+                    {
+                        this.Dispatcher.BeginInvoke(new RenderFinishWithWarningDelegate(RenderFinishWithWarning), "Warning: Some rows and columns were not displayed due to gadget settings. Showing top " + maxRows.ToString() + " rows and top " + maxColumns.ToString() + " columns only.");
+                    }
+                    else if (exceededMaxColumns)
+                    {
+                        this.Dispatcher.BeginInvoke(new RenderFinishWithWarningDelegate(RenderFinishWithWarning), "Warning: Some columns were not displayed due to gadget settings. Showing top " + maxColumns.ToString() + " columns only.");
+                    }
+                    else if (exceededMaxRows)
+                    {
+                        this.Dispatcher.BeginInvoke(new RenderFinishWithWarningDelegate(RenderFinishWithWarning), string.Format(SharedStrings.DASHBOARD_GADGET_STATUS_ROW_LIMIT, maxRows.ToString()));
+                    }
+                    else
+                    {
+                        this.Dispatcher.BeginInvoke(new SimpleCallback(RenderFinish));
+                    }
+                    // Now called after drawing all the borders.
+                    // this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState)); 
                 }
                 catch (Exception ex)
                 {
                     this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), ex.Message);
+                    this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
                 }
                 finally
                 {   
@@ -454,18 +618,24 @@ namespace EpiDashboard
         protected override void Construct()
         {
             currentWidth = borderAll.ActualWidth;
-            this.Parameters = new LineListParameters();
 
             if (!string.IsNullOrEmpty(CustomOutputHeading))
             {
                 headerPanel.Text = CustomOutputHeading;
             }
 
+            StrataGridList = new List<Grid>();
+            groupSvList = new List<ScrollViewer>();
+            StrataExpanderList = new List<Expander>();
+            gridLabelsList = new List<TextBlock>();
+
+            cbxSortField.SelectionChanged += new SelectionChangedEventHandler(cbxSortField_SelectionChanged);
             requestUpdateStatus = new RequestUpdateStatusDelegate(RequestUpdateStatusMessage);
             checkForCancellation = new CheckForCancellationDelegate(IsCancelled);
 
             mnuCopy.Click += new RoutedEventHandler(mnuCopy_Click);
             mnuSendDataToHTML.Click += new RoutedEventHandler(mnuSendDataToHTML_Click);
+            mnuRemoveSorts.Click += new RoutedEventHandler(mnuRemoveSorts_Click);
 
 #if LINUX_BUILD
             mnuSendDataToExcel.Visibility = Visibility.Collapsed;
@@ -484,9 +654,13 @@ namespace EpiDashboard
                 mnuSendDataToExcel.Click += new RoutedEventHandler(mnuSendDataToExcel_Click);
             }
 #endif
+
+            mnuRemove.Click += new RoutedEventHandler(mnuRemove_Click);
+            mnuSwapSortType.Click += new RoutedEventHandler(mnuSwapSortType_Click);
             if (!IsHostedByEnter)
             {
                 mnuSendToBack.Click += new RoutedEventHandler(mnuSendToBack_Click);
+                //mnuRefresh.Click += new RoutedEventHandler(mnuRefresh_Click);
                 mnuClose.Click += new RoutedEventHandler(mnuClose_Click);
                 mnuCenter.Click += new RoutedEventHandler(mnuCenter_Click);
                 mnuSendDataToHTML.Visibility = System.Windows.Visibility.Visible;
@@ -503,14 +677,21 @@ namespace EpiDashboard
                 headerPanel.IsDescriptionButtonAvailable = false;
                 headerPanel.IsFilterButtonAvailable = false;
                 headerPanel.IsOutputCollapseButtonAvailable = false;
+                pathTriangle.Margin = new Thickness(pathTriangle.Margin.Left, pathTriangle.Margin.Top, 8, pathTriangle.Margin.Bottom);
+                grdDimensions.Visibility = System.Windows.Visibility.Collapsed;
             }
 
+            columnWarningShown = false;
+
             this.IsProcessing = false;
+            this.MaxColumns = 25;
 
             this.GadgetStatusUpdate += new GadgetStatusUpdateHandler(RequestUpdateStatusMessage);
             this.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(IsCancelled);
 
             base.Construct();
+
+            lbxFields.SelectedIndex = -1;
 
             #region Translation
             mnuCenter.Header = DashboardSharedStrings.GADGET_CENTER;
@@ -521,29 +702,32 @@ namespace EpiDashboard
             mnuSendDataToHTML.Header = LineListSharedStrings.CMENU_HTML;
             mnuSendToBack.Header = LineListSharedStrings.CMENU_SEND_TO_BACK;
 
-            //tblockListVariablesToDisplay.Text = LineListSharedStrings.LIST_VARIABLES_TO_DISPLAY;
-            //tblockSortVariables.Text = LineListSharedStrings.SORT_VARIABLES;
-            //tblockSortOrder.Text = LineListSharedStrings.SORT_ORDER;
-            //tblockLineListProperties.Text = LineListSharedStrings.LIST_CONFIG_TITLE;
-            //tblockGroupResultsBy.Text = LineListSharedStrings.GROUP_RESULTS_BY;
-            //tblockMaxVarNameLength.Text = LineListSharedStrings.MAX_VAR_NAME_LENGTH;
-            //tblockMaxRows.Text = LineListSharedStrings.MAX_ROWS_TO_DISPLAY;
+            mnuSwapSortType.Header = LineListSharedStrings.CMENU_SWAP_SORT;
+            mnuRemove.Header = LineListSharedStrings.CMENU_REMOVE_FIELD;
 
-            //tblockMaxWidth.Text = DashboardSharedStrings.GADGET_MAX_WIDTH;
-            //tblockMaxHeight.Text = DashboardSharedStrings.GADGET_MAX_HEIGHT;
+            tblockListVariablesToDisplay.Text = LineListSharedStrings.LIST_VARIABLES_TO_DISPLAY;
+            tblockSortVariables.Text = LineListSharedStrings.SORT_VARIABLES;
+            tblockSortOrder.Text = LineListSharedStrings.SORT_ORDER;
+            tblockLineListProperties.Text = LineListSharedStrings.LIST_CONFIG_TITLE;
+            tblockGroupResultsBy.Text = LineListSharedStrings.GROUP_RESULTS_BY;
+            tblockMaxVarNameLength.Text = LineListSharedStrings.MAX_VAR_NAME_LENGTH;
+            tblockMaxRows.Text = LineListSharedStrings.MAX_ROWS_TO_DISPLAY;
 
-            //tblockInst1.Text = LineListSharedStrings.INSTRUCTIONS_1;
-            //tblockInst2.Text = LineListSharedStrings.INSTRUCTIONS_2;
+            tblockMaxWidth.Text = DashboardSharedStrings.GADGET_MAX_WIDTH;
+            tblockMaxHeight.Text = DashboardSharedStrings.GADGET_MAX_HEIGHT;
 
-            //checkboxTabOrder.Content = LineListSharedStrings.SORT_VARS_TAB_ORDER;
-            //checkboxUsePrompts.Content = LineListSharedStrings.USE_FIELD_PROMPTS;
-            //checkboxListLabels.Content = DashboardSharedStrings.GADGET_LIST_LABELS;
-            //checkboxAllowUpdates.Content = LineListSharedStrings.ALLOW_UPDATES;
-            //checkboxLineColumn.Content = LineListSharedStrings.SHOW_LINE_COLUMN;
-            //checkboxColumnHeaders.Content = LineListSharedStrings.SHOW_COLUMN_HEADINGS;
-            //checkboxShowNulls.Content = LineListSharedStrings.SHOW_MISSING_REPRESENTATION;
+            tblockInst1.Text = LineListSharedStrings.INSTRUCTIONS_1;
+            tblockInst2.Text = LineListSharedStrings.INSTRUCTIONS_2;
 
-            //btnRun.Content = LineListSharedStrings.GENERATE_LINE_LIST;
+            checkboxTabOrder.Content = LineListSharedStrings.SORT_VARS_TAB_ORDER;
+            checkboxUsePrompts.Content = LineListSharedStrings.USE_FIELD_PROMPTS;
+            checkboxListLabels.Content = DashboardSharedStrings.GADGET_LIST_LABELS;
+            checkboxAllowUpdates.Content = LineListSharedStrings.ALLOW_UPDATES;
+            checkboxLineColumn.Content = LineListSharedStrings.SHOW_LINE_COLUMN;
+            checkboxColumnHeaders.Content = LineListSharedStrings.SHOW_COLUMN_HEADINGS;
+            checkboxShowNulls.Content = LineListSharedStrings.SHOW_MISSING_REPRESENTATION;
+
+            btnRun.Content = LineListSharedStrings.GENERATE_LINE_LIST;
             #endregion // Translation
         }
 
@@ -572,30 +756,1027 @@ namespace EpiDashboard
                 baseWorker.DoWork -= new System.ComponentModel.DoWorkEventHandler(Execute);
             }
 
-            if (Parameters != null)
+            if (GadgetOptions != null)
             {
-                Parameters.GadgetStatusUpdate -= new GadgetStatusUpdateHandler(requestUpdateStatus);
-                Parameters.GadgetCheckForCancellation -= new GadgetCheckForCancellationHandler(checkForCancellation);
-                Parameters = null;
+                GadgetOptions.GadgetStatusUpdate -= new GadgetStatusUpdateHandler(requestUpdateStatus);
+                GadgetOptions.GadgetCheckForCancellation -= new GadgetCheckForCancellationHandler(checkForCancellation);
+                GadgetOptions = null;
             }
 
             this.GadgetStatusUpdate -= new GadgetStatusUpdateHandler(RequestUpdateStatusMessage);
             this.GadgetCheckForCancellation -= new GadgetCheckForCancellationHandler(IsCancelled);
 
-            panelMain.Children.Clear();
+            for (int i = 0; i < StrataGridList.Count; i++)
+            {
+                StrataGridList[i].Children.Clear();
+            }
+            for (int i = 0; i < groupSvList.Count; i++)
+            {
+                groupSvList[i].Content = null;
+            }
+            for (int i = 0; i < StrataExpanderList.Count; i++)
+            {
+                StrataExpanderList[i].Content = null;
+            }
+            this.StrataGridList.Clear();
+            this.groupSvList.Clear();
+            this.StrataExpanderList.Clear();
+
+            cbxSortField.SelectionChanged -= new SelectionChangedEventHandler(cbxSortField_SelectionChanged);
 
             requestUpdateStatus = null;
             checkForCancellation = null;
 
+            mnuRemove.Click -= new RoutedEventHandler(mnuRemove_Click);
+            mnuSwapSortType.Click -= new RoutedEventHandler(mnuSwapSortType_Click);
             if (!IsHostedByEnter)
             {
                 mnuSendToBack.Click -= new RoutedEventHandler(mnuSendToBack_Click);
+                //mnuRefresh.Click -= new RoutedEventHandler(mnuRefresh_Click);
                 mnuClose.Click -= new RoutedEventHandler(mnuClose_Click);
             }
 
             base.CloseGadget();
 
-            Parameters = null;
+            GadgetOptions = null;
+        }
+
+        /// <summary>
+        /// Handles the filling of the gadget's combo boxes
+        /// </summary>
+        private void FillComboboxes(bool update = false)
+        {
+            LoadingCombos = true;
+
+            string prevGroup = string.Empty;
+
+            if (update)
+            {
+                if (cbxGroupField.SelectedIndex >= 0)
+                {
+                    prevGroup = cbxGroupField.SelectedItem.ToString();
+                }
+            }
+
+            cbxGroupField.ItemsSource = null;
+            cbxGroupField.Items.Clear();            
+
+            if (!update)
+            {
+                lbxFields.ItemsSource = null;
+                lbxFields.Items.Clear();
+                lbxSortFields.Items.Clear();
+
+                List<string> fieldNames = new List<string>();
+                List<string> strataFieldNames = new List<string>();
+                ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.DateTime | ColumnDataType.UserDefined;
+                strataFieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
+                strataFieldNames.Add(string.Empty);
+                strataFieldNames.Sort();
+
+                fieldNames = DashboardHelper.GetFieldsAsList();
+
+                if (fieldNames.Contains("SYSTEMDATE"))
+                {
+                    fieldNames.Remove("SYSTEMDATE");
+                }
+
+                if (strataFieldNames.Contains("SYSTEMDATE"))
+                {
+                    strataFieldNames.Remove("SYSTEMDATE");
+                }
+
+                //fieldNames.AddRange(DashboardHelper.GetGroupFieldsAsList());
+                fieldNames.AddRange(DashboardHelper.GetAllGroupsAsList());
+
+                if (DashboardHelper.IsUsingEpiProject)
+                {
+                    for (int i = 0; i < this.View.Pages.Count; i++)
+                    {
+                        fieldNames.Add("Page " + (i + 1).ToString());
+                    }
+                }                
+
+                cbxGroupField.ItemsSource = strataFieldNames;
+                cbxSortField.ItemsSource = strataFieldNames;
+                lbxFields.ItemsSource = fieldNames;
+
+                if (cbxGroupField.Items.Count > 0)
+                {
+                    cbxGroupField.SelectedIndex = -1;
+                }
+            }
+            else
+            {
+                List<string> selectedListFields = new List<string>();
+
+                foreach (string s in lbxFields.SelectedItems)
+                {
+                    selectedListFields.Add(s);
+                }
+
+                lbxFields.ItemsSource = null;
+                lbxFields.Items.Clear();                
+
+                List<string> fieldNames = new List<string>();
+                List<string> strataFieldNames = new List<string>();
+                ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.DateTime | ColumnDataType.UserDefined;
+                strataFieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
+                strataFieldNames.Add(string.Empty);
+                strataFieldNames.Sort();
+
+                fieldNames = DashboardHelper.GetFieldsAsList();
+                
+                if (fieldNames.Contains("SYSTEMDATE"))
+                {
+                    fieldNames.Remove("SYSTEMDATE");
+                }
+
+                fieldNames.AddRange(DashboardHelper.GetAllGroupsAsList());
+
+                if (DashboardHelper.IsUsingEpiProject)
+                {
+                    for (int i = 0; i < this.View.Pages.Count; i++)
+                    {
+                        fieldNames.Add("Page " + (i + 1).ToString());
+                    }
+                }
+
+                cbxGroupField.ItemsSource = strataFieldNames;
+                cbxSortField.ItemsSource = strataFieldNames;
+                lbxFields.ItemsSource = fieldNames;
+
+                if (cbxGroupField.Items.Count > 0)
+                {
+                    cbxGroupField.SelectedIndex = -1;
+                }
+
+                for (int i = lbxSortFields.Items.Count - 1; i == 0; i--)
+                {
+                    string s = lbxSortFields.Items[i].ToString();
+
+                    if (!strataFieldNames.Contains(s))
+                    {
+                        lbxSortFields.Items.Remove(s);
+                    }
+                }
+
+                foreach (string s in selectedListFields)
+                {
+                    if (fieldNames.Contains(s))
+                    {
+                        lbxFields.SelectedItems.Add(s);
+                    }
+                }
+            }
+
+            if (update)
+            {
+                cbxGroupField.SelectedItem = prevGroup;
+            }
+
+            LoadingCombos = false;
+        }
+
+        /// <summary>
+        /// Used to add a new Line List grid to the gadget's output
+        /// </summary>
+        /// <param name="groupVar">The name of the group variable selected, if any</param>
+        /// <param name="value">The value by which this grid has been grouped by</param>
+        private void AddLineListGrid(string groupVar, string value, int columnCount)
+        {
+            ScrollViewer sv = new ScrollViewer();
+            sv.Style = this.Resources["gadgetScrollViewer"] as Style;
+            sv.Tag = value;
+            if (IsHostedByEnter)
+            {
+                sv.MaxHeight = System.Windows.SystemParameters.PrimaryScreenHeight - 180;
+                sv.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth - 150;
+                sv.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+            }
+            else
+            {
+                //sv.MaxHeight = System.Windows.SystemParameters.PrimaryScreenHeight - 300;
+                //sv.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth - 250;
+
+                int width = 800;
+                int height = 600;
+
+                if (int.TryParse(txtMaxWidth.Text, out width))
+                {
+                    sv.MaxWidth = width;
+                }
+                else
+                {
+                    sv.MaxWidth = double.NaN;
+                }
+
+                if (int.TryParse(txtMaxHeight.Text, out height))
+                {
+                    sv.MaxHeight = height;
+                }
+                else
+                {
+                    sv.MaxHeight = double.NaN;
+                }
+            }
+            
+            sv.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            sv.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+            Grid grid = new Grid();
+            grid.Tag = value;
+            grid.Style = this.Resources["genericOutputGrid"] as Style;
+            grid.Visibility = System.Windows.Visibility.Collapsed;
+
+            Border border = new Border();
+            border.Style = this.Resources["genericOutputGridBorder"] as Style;
+            border.Child = grid;
+
+            for (int i = 0; i < columnCount; i++)
+            {
+                if (i > MaxColumns)
+                {
+                    break;
+                }
+
+                ColumnDefinition column = new ColumnDefinition();
+                column.Width = GridLength.Auto;
+                grid.ColumnDefinitions.Add(column);
+            }
+
+            if (checkboxLineColumn.IsChecked == false)
+            {
+                grid.ColumnDefinitions[0].Width = new GridLength(1);
+            }
+
+            ColumnDefinition totalColumn = new ColumnDefinition();
+            totalColumn.Width = GridLength.Auto;
+            grid.ColumnDefinitions.Add(totalColumn);
+
+            TextBlock txtGridLabel = new TextBlock();
+            txtGridLabel.Text = value;
+            txtGridLabel.HorizontalAlignment = HorizontalAlignment.Left;
+            txtGridLabel.VerticalAlignment = VerticalAlignment.Bottom;
+            txtGridLabel.Margin = new Thickness(2, 2, 2, 2);
+            txtGridLabel.FontWeight = FontWeights.Bold;
+
+            sv.Content = border;
+
+            Expander expander = new Expander();
+
+            TextBlock txtExpanderHeader = new TextBlock();
+            txtExpanderHeader.Text = value;
+            txtExpanderHeader.Style = this.Resources["genericOutputExpanderText"] as Style;
+            expander.Header = txtExpanderHeader;
+
+            if (string.IsNullOrEmpty(groupVar))
+            {
+                txtGridLabel.Visibility = System.Windows.Visibility.Collapsed;
+                panelMain.Children.Add(sv);
+            }
+            else
+            {
+                expander.Margin = (Thickness)this.Resources["expanderMargin"]; //new Thickness(6, 2, 6, 6);                
+                sv.Margin = new Thickness(0, 4, 0, 4);
+                expander.Content = sv;
+                expander.IsExpanded = true;
+                panelMain.Children.Add(expander);
+                StrataExpanderList.Add(expander);
+            }
+
+            StrataGridList.Add(grid);
+            groupSvList.Add(sv);          
+        }
+
+        private void SetGridText(string strataValue, TextBlockConfig textBlockConfig, FontWeight fontWeight)
+        {
+            Grid grid = new Grid();
+
+            grid = GetStrataGrid(strataValue);
+
+            TextBlock txt = new TextBlock();
+            txt.Foreground = this.Resources["cellForeground"] as SolidColorBrush;
+            txt.FontWeight = fontWeight;
+            txt.Text = textBlockConfig.Text;
+            txt.Margin = textBlockConfig.Margin;
+            txt.VerticalAlignment = textBlockConfig.VerticalAlignment;
+            txt.HorizontalAlignment = textBlockConfig.HorizontalAlignment;
+            txt.TextAlignment = textBlockConfig.TextAlignment;
+            txt.TextWrapping = TextWrapping.Wrap;
+            txt.MaxWidth = 300;
+            txt.Visibility = textBlockConfig.ControlVisibility;
+            if (IsHostedByEnter)
+            {                
+                txt.MouseEnter += new MouseEventHandler(rowDef_MouseEnter);
+                txt.MouseLeave += new MouseEventHandler(rowDef_MouseLeave);
+                txt.MouseUp += new MouseButtonEventHandler(rowDef_MouseUp);
+            }
+            Grid.SetZIndex(txt, 1000);
+            Grid.SetRow(txt, textBlockConfig.RowNumber);
+            Grid.SetColumn(txt, textBlockConfig.ColumnNumber);
+            grid.Children.Add(txt);
+
+            if (checkboxAllowUpdates.IsChecked == true)
+            {
+                //txt.MouseLeftButtonDown += new MouseButtonEventHandler(gridCell_MouseLeftButtonDown); 
+            }
+        }
+
+        private struct AllowUpdateMetaData
+        {
+            public UIElement GridCellTextBlock;
+            public MetaFieldType FieldType;
+            public object Value;
+            int Column;
+            int Row;
+            string Key;
+            string FieldName;
+
+            public AllowUpdateMetaData(UIElement gridCellTextBlock, MetaFieldType fieldType, string fieldName, object value, int column, int row, string key)
+            {
+                GridCellTextBlock = gridCellTextBlock;
+                FieldType = fieldType;
+                FieldName = fieldName;
+                Value = value;
+                Column = column;
+                Row = row;
+                Key = key;
+            }
+        }
+
+        private void gridCell_MouseLeftButtonDown(object sender, MouseEventArgs e)
+        {
+            if (sender is TextBlock)
+            {
+                int row = Grid.GetRow((UIElement)sender);
+                int column = Grid.GetColumn((UIElement)sender);
+                Grid grid = (sender as TextBlock).Parent as Grid;
+
+                if (allowUpdateBox == null)
+                {
+                    //UIElement element = ((sender as TextBlock).Parent as Grid).Children.Cast<UIElement>().First(x => Grid.GetRow(x) == 0 && Grid.GetColumn(x) == column);
+                    IEnumerable<UIElement> elements = grid.Children.Cast<UIElement>().Where(x => Grid.GetRow(x) == 0 && Grid.GetColumn(x) == column);
+                    UIElement element = new UIElement();
+
+                    foreach (UIElement uie in elements)
+                    {
+                        if (uie is TextBlock)
+                        {
+                            element = uie;
+                            break;
+                        }
+                    }
+
+                    if (element is TextBlock)
+                    {
+                        TextBlock columnTextBlock = element as TextBlock;
+                        Field field = DashboardHelper.GetAssociatedField(columnTextBlock.Text);
+                        if (field != null)
+                        {
+                            TextBlock gridCellTextBlock = sender as TextBlock;
+
+                            switch (field.FieldType)
+                            {
+                                case MetaFieldType.Checkbox:
+                                    allowUpdateBox = new ComboBox();
+                                    (allowUpdateBox as ComboBox).Items.Add(Config.Settings.RepresentationOfYes);
+                                    (allowUpdateBox as ComboBox).Items.Add(Config.Settings.RepresentationOfNo);
+                                    (allowUpdateBox as ComboBox).SelectedItem = gridCellTextBlock.Text;
+                                    break;
+                                case MetaFieldType.YesNo:
+                                    allowUpdateBox = new ComboBox();
+                                    (allowUpdateBox as ComboBox).Items.Add(Config.Settings.RepresentationOfYes);
+                                    (allowUpdateBox as ComboBox).Items.Add(Config.Settings.RepresentationOfNo);
+                                    (allowUpdateBox as ComboBox).Items.Add(Config.Settings.RepresentationOfMissing);
+                                    (allowUpdateBox as ComboBox).SelectedItem = gridCellTextBlock.Text;
+                                    break;
+                                case MetaFieldType.Text:
+                                    allowUpdateBox = new TextBox();
+                                    (allowUpdateBox as TextBox).Text = gridCellTextBlock.Text;
+                                    break;
+                                default:
+                                    return;
+                            }
+
+                            int keyColumn = grid.ColumnDefinitions.Count - 1;
+                            elements = grid.Children.Cast<UIElement>().Where(x => Grid.GetRow(x) == row && Grid.GetColumn(x) == keyColumn);
+                            string key = string.Empty;
+
+                            foreach (UIElement uie in elements)
+                            {
+                                if (uie is TextBlock)
+                                {
+                                    key = (uie as TextBlock).Text;
+                                }
+                            }
+
+                            //allowUpdateBox = new TextBox();
+                            allowUpdateBox.Margin = new Thickness(2);
+                            //allowUpdateBox.Tag = new AllowUpdateMetaData(gridCellTextBlock, field.FieldType, gridCellTextBlock.Text, column, row, key);  //gridCellTextBlock;
+                            Grid.SetZIndex(allowUpdateBox, 2000);
+                            Grid.SetRow(allowUpdateBox, row);
+                            Grid.SetColumn(allowUpdateBox, column);
+                            ((Grid)((FrameworkElement)sender).Parent).Children.Add(allowUpdateBox);
+                            allowUpdateBox.KeyDown += new KeyEventHandler(cellTextBox_KeyDown);
+                        }
+                    }
+                }
+                else
+                {
+                    allowUpdateBox.Visibility = System.Windows.Visibility.Collapsed;
+                    allowUpdateBox.KeyDown -= new KeyEventHandler(cellTextBox_KeyDown);
+                    allowUpdateBox = null;
+                }
+            }
+        }
+
+        private bool UpdateDatabase(UIElement inputControl, object value, int column)
+        {
+            Grid grid = (inputControl as FrameworkElement).Parent as Grid;
+            string columnName = string.Empty;
+            string key = string.Empty;
+
+            int row = Grid.GetRow((FrameworkElement)inputControl);
+            int keyColumn = grid.ColumnDefinitions.Count - 1;
+
+            IEnumerable<UIElement> elements = grid.Children.Cast<UIElement>().Where(x => Grid.GetRow(x) == row && Grid.GetColumn(x) == keyColumn);
+
+            foreach (UIElement uie in elements)
+            {
+                if (uie is TextBlock)
+                {
+                    key = (uie as TextBlock).Text;
+                }
+            }
+
+            elements = grid.Children.Cast<UIElement>().Where(x => Grid.GetRow(x) == 0 && Grid.GetColumn(x) == column);
+            UIElement element = new UIElement();
+
+            foreach (UIElement uie in elements)
+            {
+                if (uie is TextBlock)
+                {
+                    columnName = (uie as TextBlock).Text;                    
+                }
+            }
+
+            Field field = DashboardHelper.GetAssociatedField(columnName);
+            if (field != null)
+            {
+                // Todo: Move this to a separate class. This should not be in the UI.
+                DataView dv = new DataView(DashboardHelper.DataSet.Tables[0]);
+                dv.RowFilter = "[UniqueKey] = " + key;
+                if (dv.Count == 1)
+                {
+                    dv[0][columnName] = value;
+                }
+            }
+
+            return false;
+        }
+
+        private void cellTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                int row = Grid.GetRow((UIElement)sender);
+                int column = Grid.GetColumn((UIElement)sender);
+                TextBox textBox = (sender as TextBox);
+                TextBlock textBlock = textBox.Tag as TextBlock; 
+
+                if (e.Key == Key.Enter)
+                {
+                    allowUpdateBox.Visibility = System.Windows.Visibility.Collapsed;
+                    textBlock.Text = textBox.Text;
+                    allowUpdateBox.KeyDown -= new KeyEventHandler(cellTextBox_KeyDown);
+                    allowUpdateBox = null;
+                }
+                else if (e.Key == Key.Escape)
+                {
+                    allowUpdateBox.Visibility = System.Windows.Visibility.Collapsed;
+                    allowUpdateBox.KeyDown -= new KeyEventHandler(cellTextBox_KeyDown);
+                    allowUpdateBox = null;
+                }
+            }
+            else if (sender is ComboBox)
+            {
+                int row = Grid.GetRow((UIElement)sender);
+                int column = Grid.GetColumn((UIElement)sender);
+                ComboBox textBox = (sender as ComboBox);
+                TextBlock textBlock = textBox.Tag as TextBlock;
+
+                if (e.Key == Key.Enter)
+                {
+                    allowUpdateBox.Visibility = System.Windows.Visibility.Collapsed;
+                    textBlock.Text = textBox.SelectedItem.ToString();
+                    allowUpdateBox.KeyDown -= new KeyEventHandler(cellTextBox_KeyDown);
+                    allowUpdateBox = null;
+                }
+                else if (e.Key == Key.Escape)
+                {
+                    allowUpdateBox.Visibility = System.Windows.Visibility.Collapsed;
+                    allowUpdateBox.KeyDown -= new KeyEventHandler(cellTextBox_KeyDown);
+                    allowUpdateBox = null;
+                }
+            }
+        }
+
+
+        private void SetGridImage(string strataValue, byte[] imageBlob, TextBlockConfig textBlockConfig, FontWeight fontWeight)
+        {
+            Grid grid = new Grid();
+
+            grid = GetStrataGrid(strataValue);
+
+            Image image = new Image();
+            System.IO.MemoryStream stream = new System.IO.MemoryStream(imageBlob);
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.StreamSource = stream;
+            bitmap.EndInit();
+            image.Source = bitmap;
+            image.Height = bitmap.Height;
+            image.Width = bitmap.Width;
+
+            if (IsHostedByEnter)
+            {
+                image.MouseEnter += new MouseEventHandler(rowDef_MouseEnter);
+                image.MouseLeave += new MouseEventHandler(rowDef_MouseLeave);
+                image.MouseUp += new MouseButtonEventHandler(rowDef_MouseUp);
+            }
+            Grid.SetZIndex(image, 1000);
+            Grid.SetRow(image, textBlockConfig.RowNumber);
+            Grid.SetColumn(image, textBlockConfig.ColumnNumber);
+            grid.Children.Add(image);
+        }
+
+        void colDef_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (draggedColumnIndex == -1 || IsProcessing)
+            {
+                return;
+            }
+
+            columnOrder = new List<string>();
+        
+            Grid grid = (Grid)((FrameworkElement)sender).Parent;            
+            int destinationColumn = Grid.GetColumn((FrameworkElement)sender);
+
+            if (destinationColumn < draggedColumnIndex)
+            {
+                foreach (UIElement element in grid.Children)
+                {
+                    int currentColumn = Grid.GetColumn(element);
+                    if (currentColumn == draggedColumnIndex)
+                    {
+                        Grid.SetColumn(element, destinationColumn);
+                    }
+                    else if (currentColumn == destinationColumn)
+                    {
+                        Grid.SetColumn(element, destinationColumn + 1);
+                    }
+                    else if (currentColumn >= destinationColumn && currentColumn < draggedColumnIndex)
+                    {
+                        Grid.SetColumn(element, currentColumn + 1);
+                    }
+                }
+            }
+            else if (destinationColumn > draggedColumnIndex)
+            {
+                foreach (UIElement element in grid.Children)
+                {
+                    int currentColumn = Grid.GetColumn(element);
+                    if (currentColumn == draggedColumnIndex)
+                    {
+                        Grid.SetColumn(element, destinationColumn);
+                    }
+                    else if (currentColumn == destinationColumn)
+                    {
+                        Grid.SetColumn(element, destinationColumn - 1);
+                    }
+                    else if (currentColumn < destinationColumn && currentColumn > draggedColumnIndex)
+                    {
+                        Grid.SetColumn(element, currentColumn - 1);
+                    }
+                }
+            }
+
+            draggedColumnIndex = -1;
+        }
+
+        void colDef_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (IsProcessing)
+            {
+                draggedColumnIndex = -1;
+            }
+            else
+            {
+                Grid grid = (Grid)((FrameworkElement)sender).Parent;
+                int column = Grid.GetColumn((FrameworkElement)sender);
+                draggedColumnIndex = column;
+            }
+        }
+
+        void rowDef_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Grid grid = StrataGridList[0]; //new Grid();
+
+            //if (sender is Rectangle)
+            //{
+            //    grid = (((sender as Rectangle).Parent) as Border).Parent as Grid;
+            //}
+            int row = Grid.GetRow((FrameworkElement)sender);
+            int column = grid.ColumnDefinitions.Count - 1;
+            //UIElement element = grid.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == row && Grid.GetColumn(x) == column);
+            //if (element is TextBlock)
+            //{
+            //    if (RecordSelected != null)
+            //    {
+            //        RecordSelected(int.Parse(((TextBlock)element).Text));
+            //    }
+            //}
+            //else if (element is Rectangle)
+            //{
+                IEnumerable<UIElement> elements = grid.Children.Cast<UIElement>().Where(x => Grid.GetRow(x) == row && Grid.GetColumn(x) == column);
+
+                foreach (UIElement element in elements)
+                {
+                    if (element is TextBlock)
+                    {
+                        if (RecordSelected != null)
+                        {
+                            RecordSelected(int.Parse(((TextBlock)element).Text));
+                        }
+                    }
+                }
+            //}
+        }
+
+        //private void AddGridRow(string strataValue, int height)
+        //{
+        //    Grid grid = GetStrataGrid(strataValue);
+        //    waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+        //    grid.Visibility = Visibility.Visible;
+        //    RowDefinition rowDef = new RowDefinition();
+        //    rowDef.Height = GridLength.Auto;
+        //    grid.RowDefinitions.Add(rowDef);
+        //}
+
+        void rowDef_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (highlightRowRectangle != null && StrataGridList.Count > 0 && StrataGridList[0].Children.Contains(highlightRowRectangle))
+            {
+                StrataGridList[0].Children.Remove(highlightRowRectangle);
+            }
+            this.Cursor = Cursors.Arrow;
+        }
+
+        void rowDef_MouseEnter(object sender, MouseEventArgs e)
+        {
+            int row = Grid.GetRow((UIElement)sender);
+
+            if(sender is Rectangle) 
+            {
+                Rectangle rectangle = sender as Rectangle;
+                if (rectangle.Parent is Border)
+                {
+                    Border border = rectangle.Parent as Border;
+                    row = Grid.GetRow(border);
+                }
+            }
+            
+            if (highlightRowRectangle == null)
+            {
+                highlightRowRectangle = new Rectangle();
+                highlightRowRectangle.IsHitTestVisible = false;
+                highlightRowRectangle.Fill = Brushes.LightBlue;
+                highlightRowRectangle.Opacity = 0.25;
+                highlightRowRectangle.Margin = new Thickness(0);
+                //highlightRowRectangle.StrokeThickness = 3;
+                Grid.SetZIndex(highlightRowRectangle, 2000);
+            }
+            Grid.SetRow(highlightRowRectangle, row);
+            Grid.SetColumn(highlightRowRectangle, 0);
+            Grid.SetColumnSpan(highlightRowRectangle, StrataGridList[0].ColumnDefinitions.Count); //((Grid)((FrameworkElement)sender).Parent);
+            //Grid.SetColumnSpan(highlightRowRectangle, (((Border)((FrameworkElement)sender).Parent).Child as Grid).ColumnDefinitions.Count); //((Grid)((FrameworkElement)sender).Parent);
+            StrataGridList[0].Children.Add(highlightRowRectangle);
+            
+            
+            //.ColumnDefinitions.Count);
+            this.Cursor = Cursors.Hand;
+        }
+
+        void rctHeader_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (sender is Rectangle)
+            {
+                Rectangle rect = sender as Rectangle;
+                rect.Fill = this.Resources["lineListRowHighlightBrush"] as SolidColorBrush;
+                rect.Opacity = 0.4;
+                this.Cursor = Cursors.Hand;
+            }
+        }
+
+        void rctHeader_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (sender is Rectangle)
+            {
+                Rectangle rect = sender as Rectangle;
+                rect.Fill = this.Resources["lineListRowHighlightBrush"] as SolidColorBrush;
+                rect.Opacity = 1.0;
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
+        void rctHeader_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Rectangle && (sender as Rectangle).Tag != null)
+            {
+                clickedColumnName = (sender as Rectangle).Tag.ToString();
+            }
+        }
+
+        void rctHeader_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Rectangle)
+            {
+                Rectangle rect = sender as Rectangle;
+
+                if (rect.Tag != null && rect.Tag.ToString() == clickedColumnName)
+                {
+                    string columnName = rect.Tag.ToString();
+                    if (!lbxSortFields.Items.Contains(columnName + " (ascending)") && !lbxSortFields.Items.Contains(columnName + " (descending)"))
+                    {
+                        InsertColumnInSortList(columnName, 0);
+                        this.RefreshResults();
+                    }
+                    else if (lbxSortFields.Items.Contains(columnName + " (ascending)") || lbxSortFields.Items.Contains(columnName + " (descending)"))
+                    {
+                        SwapColumnOrderInSortList(columnName);
+                        this.RefreshResults();
+                    }
+                }
+            }
+        }
+
+        bool IsSortingBy(string columnName, out SortOrder sortOrder)
+        {
+            sortOrder = SortOrder.Ascending;
+
+            foreach (KeyValuePair<string, string> kvp in this.GadgetOptions.InputVariableList)
+            {
+                if (kvp.Value.Equals("sortfield"))
+                {
+                    string key = kvp.Key.Substring(0, kvp.Key.Length - 4);
+                    string order = kvp.Key.Substring(kvp.Key.Length - 5, 4);
+
+                    if (order.Contains("DES"))
+                    {
+                        sortOrder = SortOrder.Descending;
+                    }
+
+                    key = key.Trim().TrimEnd(']').TrimStart('[');
+                    if (key == columnName)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private void RenderFrequencyHeader(string strataValue, string freqVar, DataColumnCollection columns)
+        {
+            Grid grid = GetStrataGrid(strataValue);
+
+            RowDefinition rowDefHeader = new RowDefinition();
+            rowDefHeader.Height = new GridLength(30);
+            grid.RowDefinitions.Add(rowDefHeader);
+
+            for (int y = 0; y < grid.ColumnDefinitions.Count; y++)
+            {
+                Rectangle rctHeader = new Rectangle();
+                rctHeader.Style = this.Resources["gridHeaderCellRectangle"] as Style;
+
+                if (y >= 1)
+                {
+                    rctHeader.Tag = columns[y - 1].ColumnName.Trim();                    
+                }
+                
+                //rctHeader.Fill = headerBackgroundBrush; // new SolidColorBrush(Color.FromRgb(112, 146, 190)); // SystemColors.MenuHighlightBrush;
+                Grid.SetRow(rctHeader, 0);
+                Grid.SetColumn(rctHeader, y);
+                grid.Children.Add(rctHeader);
+
+                rctHeader.MouseUp += new MouseButtonEventHandler(colDef_MouseUp);
+                rctHeader.MouseDown += new MouseButtonEventHandler(colDef_MouseDown);
+
+                rctHeader.MouseEnter += new MouseEventHandler(rctHeader_MouseEnter);
+                rctHeader.MouseLeave += new MouseEventHandler(rctHeader_MouseLeave);
+                rctHeader.MouseLeftButtonDown += new MouseButtonEventHandler(rctHeader_MouseLeftButtonDown);                
+                rctHeader.MouseLeftButtonUp += new MouseButtonEventHandler(rctHeader_MouseLeftButtonUp);                
+            }
+
+            int maxColumnLength = MaxColumnLength;
+
+            TextBlock txtRowTotalHeader = new TextBlock();
+            txtRowTotalHeader.Text = "Line";
+            txtRowTotalHeader.Style = this.Resources["columnHeadingText"] as Style;
+            
+            Grid.SetRow(txtRowTotalHeader, 0);
+            Grid.SetColumn(txtRowTotalHeader, 0);
+            grid.Children.Add(txtRowTotalHeader);
+
+            if (checkboxColumnHeaders.IsChecked == false)
+            {
+                grid.RowDefinitions[0].Height = new GridLength(1);
+            }
+
+            for (int i = 0; i < columns.Count; i++)
+            {
+                if (i > MaxColumns)
+                {
+                    break;
+                }
+                TextBlock txtColHeader = new TextBlock();
+                string columnName = columns[i].ColumnName.Trim();
+
+                SortOrder order = SortOrder.Ascending;
+                if (IsSortingBy(columnName, out order))
+                {
+                    if (order == SortOrder.Ascending)
+                    {
+                        Controls.AscendingSortArrow arrowAsc = new Controls.AscendingSortArrow();
+                        arrowAsc.IsHitTestVisible = false;
+                        arrowAsc.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                        arrowAsc.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                        arrowAsc.Opacity = 0.5;
+                        arrowAsc.Margin = new Thickness(2);
+                        Grid.SetRow(arrowAsc, 0);
+                        Grid.SetColumn(arrowAsc, i + 1);
+                        grid.Children.Add(arrowAsc);
+                    }
+                    else
+                    {
+                        Controls.DescendingSortArrow arrowDesc = new Controls.DescendingSortArrow();
+                        arrowDesc.IsHitTestVisible = false;
+                        arrowDesc.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                        arrowDesc.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                        arrowDesc.Opacity = 0.5;
+                        arrowDesc.Margin = new Thickness(2);
+                        Grid.SetRow(arrowDesc, 0);
+                        Grid.SetColumn(arrowDesc, i + 1);
+                        grid.Children.Add(arrowDesc);
+                    }
+                }
+
+                if (GadgetOptions.InputVariableList.ContainsKey("usepromptsforcolumnnames") && GadgetOptions.InputVariableList["usepromptsforcolumnnames"].ToLower().Equals("true"))
+                {
+                    Field field = DashboardHelper.GetAssociatedField(columns[i].ColumnName);
+                    if (field != null && field is RenderableField)
+                    {
+                        columnName = ((RenderableField)field).PromptText;
+                    }
+                }
+
+                if (columnName.Length > maxColumnLength)
+                {
+                    columnName = columnName.Substring(0, maxColumnLength) + StringLiterals.ELLIPSIS;
+                }
+
+                txtColHeader.Text = columnName;
+                txtColHeader.IsHitTestVisible = false;
+                txtColHeader.Style = this.Resources["columnHeadingText"] as Style;
+
+                txtColHeader.MouseUp += new MouseButtonEventHandler(colDef_MouseUp);
+                txtColHeader.MouseDown += new MouseButtonEventHandler(colDef_MouseDown);
+
+                Grid.SetRow(txtColHeader, 0);
+                Grid.SetColumn(txtColHeader, i + 1);
+                if (IsHostedByEnter || checkboxAllowUpdates.IsChecked == true)
+                {
+                    if (i < columns.Count - 1)
+                    {
+                        grid.Children.Add(txtColHeader);
+                    }
+                }
+                else
+                {
+                    grid.Children.Add(txtColHeader);
+                }
+            }
+        }
+
+        private void RenderFrequencyFooter(string strataValue, int footerRowIndex, int[] totalRows)
+        {
+            Grid grid = GetStrataGrid(strataValue);
+
+            RowDefinition rowDefTotals = new RowDefinition();
+            rowDefTotals.Height = new GridLength(30);
+            grid.RowDefinitions.Add(rowDefTotals);
+
+            TextBlock txtValTotals = new TextBlock();
+            txtValTotals.Text = StringLiterals.SPACE + SharedStrings.TOTAL + StringLiterals.SPACE;
+            txtValTotals.Margin = new Thickness(2, 0, 2, 0);
+            txtValTotals.VerticalAlignment = VerticalAlignment.Center;
+            txtValTotals.FontWeight = FontWeights.Bold;
+            Grid.SetRow(txtValTotals, footerRowIndex);
+            Grid.SetColumn(txtValTotals, 0);
+            grid.Children.Add(txtValTotals);
+
+            for (int i = 0; i < totalRows.Length; i++)
+            {
+                if (i >= MaxColumns)
+                {
+                    break;
+                }
+                TextBlock txtFreqTotals = new TextBlock();
+                txtFreqTotals.Text = StringLiterals.SPACE + totalRows[i].ToString() + StringLiterals.SPACE;
+                txtFreqTotals.Margin = new Thickness(2, 0, 2, 0);
+                txtFreqTotals.VerticalAlignment = VerticalAlignment.Center;
+                txtFreqTotals.HorizontalAlignment = HorizontalAlignment.Right;
+                txtFreqTotals.FontWeight = FontWeights.Bold;
+                Grid.SetRow(txtFreqTotals, footerRowIndex);
+                Grid.SetColumn(txtFreqTotals, i + 1);
+                grid.Children.Add(txtFreqTotals);
+            }
+
+            int sumTotal = 0;
+            foreach (int n in totalRows)
+            {
+                sumTotal = sumTotal + n;
+            }
+
+            TextBlock txtOverallTotal = new TextBlock();
+            txtOverallTotal.Text = StringLiterals.SPACE + sumTotal.ToString() + StringLiterals.SPACE;
+            txtOverallTotal.Margin = new Thickness(2, 0, 2, 0);
+            txtOverallTotal.VerticalAlignment = VerticalAlignment.Center;
+            txtOverallTotal.HorizontalAlignment = HorizontalAlignment.Right;
+            txtOverallTotal.FontWeight = FontWeights.Bold;
+            Grid.SetRow(txtOverallTotal, footerRowIndex);
+            Grid.SetColumn(txtOverallTotal, MaxColumns + 1);
+            grid.Children.Add(txtOverallTotal);
+            grid.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void DrawFrequencyBorders(string groupValue)
+        {
+            Grid grid = GetStrataGrid(groupValue);
+
+            waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+            int rdcount = 0;
+
+            foreach (RowDefinition rd in grid.RowDefinitions)
+            {
+                int cdcount = 0;
+                foreach (ColumnDefinition cd in grid.ColumnDefinitions)
+                {  
+                    Rectangle rctBorder = new Rectangle();                    
+                    Border border = new Border();
+                    if (rdcount > 0)
+                    {
+                        border.Style = this.Resources["gridCellBorder"] as Style;
+                    }
+                    else
+                    {
+                        border.Style = this.Resources["gridHeaderCellBorder"] as Style;
+                    }
+
+                    if (rdcount == 0)
+                    {
+                        border.BorderThickness = new Thickness(border.BorderThickness.Left, border.BorderThickness.Bottom, border.BorderThickness.Right, border.BorderThickness.Bottom);
+                    }
+                    if (cdcount == 0)
+                    {
+                        border.BorderThickness = new Thickness(border.BorderThickness.Right, border.BorderThickness.Top, border.BorderThickness.Right, border.BorderThickness.Bottom);
+                    }
+
+                    border.Child = rctBorder;                    
+
+                    Grid.SetRow(border, rdcount);
+                    Grid.SetColumn(border, cdcount);
+                    grid.Children.Add(border);
+                    if (rdcount > 0)
+                    {
+                        Grid.SetZIndex(rctBorder, 0);
+
+                        rctBorder.Style = this.Resources["gridCellRectangle"] as Style;// .Fill = Brushes.White;
+                        
+                        if (IsHostedByEnter)
+                        {
+                            //rctBorder.MouseEnter += new MouseEventHandler(rowDef_MouseEnter);
+                            //rctBorder.MouseLeave += new MouseEventHandler(rowDef_MouseLeave);
+                            //rctBorder.MouseUp += new MouseButtonEventHandler(rowDef_MouseUp);
+                            rctBorder.IsHitTestVisible = false;
+                        }
+                    }
+                    cdcount++;
+                }
+                rdcount++;
+            }
+
+            SetGadgetToFinishedState();
         }
 
         private void SetCustomColumnSort(DataTable table)
@@ -630,9 +1811,14 @@ namespace EpiDashboard
         /// <summary>
         /// Sets the gadget's state to 'finished' mode
         /// </summary>
-        protected override void RenderFinish()
+        private void RenderFinish()
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+
+            foreach (Grid grid in StrataGridList)
+            {
+                grid.Visibility = Visibility.Visible;
+            }
 
             messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
             messagePanel.Text = string.Empty;
@@ -642,9 +1828,14 @@ namespace EpiDashboard
             CheckAndSetPosition();
         }
 
-        protected override void RenderFinishWithWarning(string errorMessage)
+        private void RenderFinishWithWarning(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+
+            foreach (Grid grid in StrataGridList)
+            {
+                grid.Visibility = Visibility.Visible;
+            }
 
             messagePanel.MessagePanelType = Controls.MessagePanelType.WarningPanel;
             messagePanel.Text = errorMessage;
@@ -658,7 +1849,7 @@ namespace EpiDashboard
         /// Sets the gadget's state to 'finished with error' mode
         /// </summary>
         /// <param name="errorMessage">The error message to display</param>
-        protected override void RenderFinishWithError(string errorMessage)
+        private void RenderFinishWithError(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -669,6 +1860,206 @@ namespace EpiDashboard
             HideConfigPanel();
             CheckAndSetPosition();
         }
+
+        /// <summary>
+        /// Used to generate the list of variables and options for the GadgetParameters object
+        /// </summary> 
+        private void CreateInputVariableList()
+        {
+            Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
+
+            GadgetOptions.MainVariableName = string.Empty;
+            GadgetOptions.WeightVariableName = string.Empty;
+            GadgetOptions.StrataVariableNames = new List<string>();
+            GadgetOptions.CrosstabVariableName = string.Empty;
+
+            List<string> listFields = new List<string>();
+
+            if (lbxFields.SelectedItems.Count > 0)
+            {
+                foreach (string item in lbxFields.SelectedItems)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        listFields.Add(item);
+                    }
+                }
+            }
+
+            listFields.Sort();
+            if (IsHostedByEnter)
+            {
+                //if (dashboardHelper.IsUsingEpiProject && checkboxAllowUpdates.IsChecked == true)
+                //{
+                    if (listFields.Contains("UniqueKey"))
+                        listFields.Remove("UniqueKey");
+                    listFields.Add("UniqueKey");
+                //}
+            }
+
+            foreach (string field in listFields)
+            {
+                inputVariableList.Add(field, "listfield");
+            }
+
+            if (!inputVariableList.ContainsKey("sortcolumnsbytaborder"))
+            {
+                if (checkboxTabOrder.IsChecked == true)
+                {
+                    inputVariableList.Add("sortcolumnsbytaborder", "true");
+                }
+                else
+                {
+                    inputVariableList.Add("sortcolumnsbytaborder", "false");
+                }
+            }
+
+            if (!inputVariableList.ContainsKey("usepromptsforcolumnnames"))
+            {
+                if (checkboxUsePrompts.IsChecked == true)
+                {
+                    inputVariableList.Add("usepromptsforcolumnnames", "true");
+                }
+                else
+                {
+                    inputVariableList.Add("usepromptsforcolumnnames", "false");
+                }
+            }
+
+            if (!inputVariableList.ContainsKey("showcolumnheadings"))
+            {
+                if (checkboxColumnHeaders.IsChecked == true)
+                {
+                    inputVariableList.Add("showcolumnheadings", "true");
+                }
+                else
+                {
+                    inputVariableList.Add("showcolumnheadings", "false");
+                }
+            }
+
+            if (!inputVariableList.ContainsKey("showlinecolumn"))
+            {
+                if (checkboxLineColumn.IsChecked == true)
+                {
+                    inputVariableList.Add("showlinecolumn", "true");
+                }
+                else
+                {
+                    inputVariableList.Add("showlinecolumn", "false");
+                }
+            }
+
+            if (!inputVariableList.ContainsKey("shownulllabels"))
+            {
+                if (checkboxShowNulls.IsChecked == true)
+                {
+                    inputVariableList.Add("shownulllabels", "true");
+                }
+                else
+                {
+                    inputVariableList.Add("shownulllabels", "false");
+                }
+            }
+
+            if (checkboxListLabels.IsChecked == true)
+            {
+                GadgetOptions.ShouldShowCommentLegalLabels = true;
+            }
+            else
+            {
+                GadgetOptions.ShouldShowCommentLegalLabels = false;
+            }
+
+            if (lbxSortFields.Items.Count > 0)
+            {
+                foreach (string item in lbxSortFields.Items)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        string baseStr = item;
+
+                        if (baseStr.EndsWith("(ascending)"))
+                        {
+                            baseStr = "[" + baseStr.Remove(baseStr.Length - 12) + "] ASC";
+                        }
+                        if (baseStr.EndsWith("(descending)"))
+                        {
+                            baseStr = "[" + baseStr.Remove(baseStr.Length - 13) + "] DESC";
+                        }
+                        inputVariableList.Add(baseStr, "sortfield");
+                    }
+                }
+            }
+
+            if (cbxGroupField.SelectedIndex >= 0)
+            {
+                if (!string.IsNullOrEmpty(cbxGroupField.SelectedItem.ToString()))
+                {
+                    GadgetOptions.StrataVariableNames.Add(cbxGroupField.SelectedItem.ToString());
+                }
+            }
+
+            if (StrataGridList.Count >= 1) 
+            {
+                Grid grid = StrataGridList[0];
+                SortedDictionary<int, string> sortColumnDictionary = new SortedDictionary<int, string>();
+
+                foreach (UIElement element in grid.Children)
+                {
+                    if (Grid.GetRow(element) == 0 && element is TextBlock)
+                    {
+                        TextBlock txtColumnName = element as TextBlock;
+                        //columnOrder.Add(txtColumnName.Text);
+                        sortColumnDictionary.Add(Grid.GetColumn(element), txtColumnName.Text);
+                    }
+                }
+
+                columnOrder = new List<string>();
+                foreach (KeyValuePair<int, string> kvp in sortColumnDictionary)
+                {
+                    columnOrder.Add(kvp.Value);
+                }
+
+                if (columnOrder.Count == listFields.Count || columnOrder.Count == (listFields.Count + 1))
+                {
+                    bool same = true;
+                    foreach (string s in listFields)
+                    {
+                        if (!columnOrder.Contains(s))
+                        {
+                            same = false;
+                        }
+                    }
+
+                    if (same)
+                    {
+                        WordBuilder wb = new WordBuilder("^");
+                        foreach (string s in columnOrder)
+                        {
+                            wb.Add(s);
+                        }
+
+                        inputVariableList.Add("customusercolumnsort", wb.ToString());
+                    }
+                    else
+                    {
+                        columnOrder = new List<string>();
+                    }
+                }
+                else
+                {
+                    columnOrder = new List<string>();
+                }
+            }
+
+            inputVariableList.Add("maxcolumns", MaxColumns.ToString());
+            inputVariableList.Add("maxrows", MaxRows.ToString());
+
+            GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
+            GadgetOptions.InputVariableList = inputVariableList;
+        }
+
         #endregion
 
         #region Private Properties
@@ -694,16 +2085,46 @@ namespace EpiDashboard
         public override void CollapseOutput()
         {
             borderAll.MinWidth = currentWidth;
+            foreach (ScrollViewer sv in this.groupSvList)
+            {
+                sv.Visibility = System.Windows.Visibility.Collapsed;
+            }
+
+            foreach (TextBlock tb in this.gridLabelsList)
+            {
+                tb.Visibility = System.Windows.Visibility.Collapsed;
+            }
+
+            foreach (Expander expander in this.StrataExpanderList)
+            {
+                expander.Visibility = System.Windows.Visibility.Collapsed;
+            }
+
             panelMain.Visibility = System.Windows.Visibility.Collapsed;
 
             this.messagePanel.Visibility = System.Windows.Visibility.Collapsed;
-            this.infoPanel.Visibility = System.Windows.Visibility.Collapsed;
+            this.infoPanel.Visibility = System.Windows.Visibility.Collapsed;            
             descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
             IsCollapsed = true;
         }
 
         public override void ExpandOutput()
         {
+            foreach (ScrollViewer sv in this.groupSvList)
+            {
+                sv.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            foreach (TextBlock tb in this.gridLabelsList)
+            {
+                tb.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            foreach (Expander expander in this.StrataExpanderList)
+            {
+                expander.Visibility = System.Windows.Visibility.Visible;
+            }
+
             if (this.messagePanel.MessagePanelType != Controls.MessagePanelType.StatusPanel)
             {
                 this.messagePanel.Visibility = System.Windows.Visibility.Visible;
@@ -733,8 +2154,16 @@ namespace EpiDashboard
         {
             if (this.DataFilters != null && this.DataFilters.Count > 0)
             {
-                infoPanel.MaxWidth = this.ActualWidth;
-                infoPanel.Text = String.Format(DashboardSharedStrings.GADGET_CUSTOM_FILTER, this.DataFilters.GenerateReadableDataFilterString());
+                if (this.groupSvList.Count > 0 && groupSvList[0].ActualWidth > 30)
+                {
+                    infoPanel.MaxWidth = Math.Truncate(groupSvList[0].ActualWidth - 10);
+                }
+                else
+                {
+                    infoPanel.MaxWidth = this.ActualWidth;
+                }
+
+                infoPanel.Text = "Only showing records matching the following criteria (in addition to canvas filters): " + this.DataFilters.GenerateReadableDataFilterString();
                 infoPanel.Visibility = System.Windows.Visibility.Visible;
             }
             else
@@ -749,8 +2178,9 @@ namespace EpiDashboard
         /// </summary>
         public override void RefreshResults()
         {
-            if (!LoadingCombos && Parameters != null && Parameters.ColumnNames.Count > 0)
+            if (!LoadingCombos && GadgetOptions != null && lbxFields.SelectedItems.Count > 0)
             {
+                CreateInputVariableList();
                 if (IsHostedByEnter)
                 {
                     HideConfigPanel(); 
@@ -761,7 +2191,6 @@ namespace EpiDashboard
                 descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
 
                 baseWorker = new BackgroundWorker();
-                baseWorker.WorkerSupportsCancellation = true;
                 baseWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(Execute);
                 baseWorker.RunWorkerAsync();
 
@@ -780,7 +2209,7 @@ namespace EpiDashboard
         /// </summary>
         public override void UpdateVariableNames()
         {
-            //FillComboboxes(true);
+            FillComboboxes(true);
         }
 
         /// <summary>
@@ -790,9 +2219,54 @@ namespace EpiDashboard
         /// <returns>XmlNode</returns>
         public override XmlNode Serialize(XmlDocument doc)
         {
-            LineListParameters listParameters = (LineListParameters)Parameters;
+            Dictionary<string, string> inputVariableList = GadgetOptions.InputVariableList;
+
+            string groupVar = string.Empty;            
+
+            if (cbxGroupField.SelectedItem != null)
+            {
+                groupVar = cbxGroupField.SelectedItem.ToString().Replace("<", "&lt;");
+            }
+
+            CustomOutputHeading = headerPanel.Text;            
+            //CustomOutputDescription = txtOutputDescription.Text.Replace("<", "&lt;");
+            CustomOutputDescription = descriptionPanel.Text; //txtOutputDescription.Text.Replace("<", "&lt;");
+
+            string xmlString =
+            "<groupVariable>" + groupVar + "</groupVariable>" +
+            "<maxRows>" + MaxRows.ToString() + "</maxRows>" +
+            "<maxColumnNameLength>" + MaxColumnLength.ToString() + "</maxColumnNameLength>" +
+            "<sortColumnsByTabOrder>" + checkboxTabOrder.IsChecked.ToString() + "</sortColumnsByTabOrder>" +
+            "<useFieldPrompts>" + checkboxUsePrompts.IsChecked.ToString() + "</useFieldPrompts>" +
+            "<showListLabels>" + checkboxListLabels.IsChecked + "</showListLabels>" +
+            "<showLineColumn>" + checkboxLineColumn.IsChecked.ToString() + "</showLineColumn>" +
+            "<showColumnHeadings>" + checkboxColumnHeaders.IsChecked.ToString() + "</showColumnHeadings>" +
+            "<showNullLabels>" + checkboxShowNulls.IsChecked.ToString() + "</showNullLabels>" + 
+            //"<alternatingRowColors>" + checkboxAltRowColors.IsChecked.ToString() + "</alternatingRowColors>" +
+            //"<allowUpdates>" + checkboxAllowUpdates.IsChecked.ToString() + "</allowUpdates>" +
+            "<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
+            "<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>" +
+            "<customCaption>" + CustomOutputCaption + "</customCaption>";
+
+            xmlString = xmlString + SerializeAnchors();
+
+            if (inputVariableList.ContainsKey("customusercolumnsort"))
+            {
+                string columns = inputVariableList["customusercolumnsort"];
+                xmlString = xmlString + "<customusercolumnsort>" + columns + "</customusercolumnsort>";                
+            }
+            else if (columnOrder != null && columnOrder.Count > 0) // when user has re-ordered columns but not refreshed
+            {
+                WordBuilder wb = new WordBuilder("^");
+                for (int i = 0; i < columnOrder.Count; i++)
+                {
+                    wb.Add(columnOrder[i]);
+                }
+                xmlString = xmlString + "<customusercolumnsort>" + wb.ToString() + "</customusercolumnsort>";
+            }
 
             System.Xml.XmlElement element = doc.CreateElement("lineListGadget");
+            element.InnerXml = xmlString;
             element.AppendChild(SerializeFilters(doc));
 
             System.Xml.XmlAttribute id = doc.CreateAttribute("id");
@@ -804,7 +2278,7 @@ namespace EpiDashboard
             id.Value = this.UniqueIdentifier.ToString();
             locationY.Value = Canvas.GetTop(this).ToString("F0");
             locationX.Value = Canvas.GetLeft(this).ToString("F0");
-            collapsed.Value = IsCollapsed.ToString();
+            collapsed.Value = IsCollapsed.ToString();     
             type.Value = "EpiDashboard.LineListControl";
 
             element.Attributes.Append(locationY);
@@ -813,97 +2287,32 @@ namespace EpiDashboard
             element.Attributes.Append(type);
             element.Attributes.Append(id);
 
-            string groupVar1 = String.Empty;
-            string groupVar2 = String.Empty;
-
-            if (!String.IsNullOrEmpty(listParameters.PrimaryGroupField))
+            if (lbxFields.Items.Count > 0 && lbxFields.SelectedItems.Count > 0)
             {
-                groupVar1 = listParameters.PrimaryGroupField;
-            }
-            if (!String.IsNullOrEmpty(listParameters.SecondaryGroupField))
-            {
-                groupVar2 = listParameters.SecondaryGroupField;
-            }
+                string xmlListItemString = string.Empty;
+                XmlElement listItemElement = doc.CreateElement("listFields");
 
-            XmlElement groupElement = doc.CreateElement("groupVariable");
-            groupElement.InnerText = groupVar1;
-            element.AppendChild(groupElement);
+                foreach (string s in lbxFields.SelectedItems)
+                {
+                    xmlListItemString = xmlListItemString + "<listField>" + s.Replace("<", "&lt;") + "</listField>";
+                }
 
-            XmlElement groupElement2 = doc.CreateElement("groupVariableSecondary");
-            groupElement2.InnerText = groupVar2;
-            element.AppendChild(groupElement2);
-
-            XmlElement tabOrderElement = doc.CreateElement("sortColumnsByTabOrder");
-            tabOrderElement.InnerText = listParameters.SortColumnsByTabOrder.ToString();
-            element.AppendChild(tabOrderElement);
-
-            XmlElement usePromptsElement = doc.CreateElement("usepromptsforcolumnnames");
-            usePromptsElement.InnerText = listParameters.UsePromptsForColumnNames.ToString();
-            element.AppendChild(usePromptsElement);
-
-            XmlElement showListLabelsElement = doc.CreateElement("showListLabels");
-            showListLabelsElement.InnerText = listParameters.ShowCommentLegalLabels.ToString();
-            element.AppendChild(showListLabelsElement);
-
-            XmlElement showLineColumnElement = doc.CreateElement("showLineColumn");
-            showLineColumnElement.InnerText = listParameters.ShowLineColumn.ToString();
-            element.AppendChild(showLineColumnElement);
-
-            XmlElement showColumnHeadersElement = doc.CreateElement("showColumnHeadings");
-            showColumnHeadersElement.InnerText = listParameters.ShowColumnHeadings.ToString();
-            element.AppendChild(showColumnHeadersElement);
-
-            XmlElement showNullLabelsElement = doc.CreateElement("showNullLabels");
-            showNullLabelsElement.InnerText = listParameters.ShowNullLabels.ToString();
-            element.AppendChild(showNullLabelsElement);
-
-            XmlElement customHeadingElement = doc.CreateElement("customHeading");
-            customHeadingElement.InnerText = listParameters.GadgetTitle; // CustomOutputHeading.Replace("<", "&lt;");
-            element.AppendChild(customHeadingElement);
-
-            XmlElement customDescElement = doc.CreateElement("customDescription");
-            customDescElement.InnerText = listParameters.GadgetDescription; // CustomOutputDescription.Replace("<", "&lt;");
-            element.AppendChild(customDescElement);
-
-            SerializeAnchors(element);
-
-            XmlElement listItemElement = doc.CreateElement("listFields");
-
-            string xmlListItemString = string.Empty;
-            
-            foreach (string columnName in listParameters.ColumnNames)
-            {
-                xmlListItemString = xmlListItemString + "<listField>" + columnName.Replace("<", "&lt;") + "</listField>";
-            }
-
-            listItemElement.InnerXml = xmlListItemString;
-
-            if (!String.IsNullOrEmpty(xmlListItemString))
-            {
+                listItemElement.InnerXml = xmlListItemString;
                 element.AppendChild(listItemElement);
             }
 
-            XmlElement sortItemElement = doc.CreateElement("sortFields");
-
-            string xmlSortItemString = string.Empty;
-
-            foreach (KeyValuePair<string, SortOrder> kvp in Parameters.SortVariables)
+            if (lbxSortFields.Items.Count > 0)
             {
-                if (kvp.Value == SortOrder.Descending)
-                {
-                    xmlSortItemString = xmlSortItemString + "<sortField order=\"DESC\">" + kvp.Key.Replace("<", "&lt;") + "</sortField>";
-                }
-                else
-                {
-                    xmlSortItemString = xmlSortItemString + "<sortField order=\"ASC\">" + kvp.Key.Replace("<", "&lt;") + "</sortField>";
-                }
-            }
+                string xmlSortString = string.Empty;
+                XmlElement sortElement = doc.CreateElement("sortFields");
 
-            sortItemElement.InnerXml = xmlSortItemString;
+                foreach (string s in lbxSortFields.Items)
+                {
+                    xmlSortString = xmlSortString + "<sortField>" + s.Replace("<", "&lt;") + "</sortField>";
+                }
 
-            if (!String.IsNullOrEmpty(xmlSortItemString))
-            {
-                element.AppendChild(sortItemElement);
+                sortElement.InnerXml = xmlSortString;
+                element.AppendChild(sortElement);
             }
 
             return element;
@@ -916,10 +2325,10 @@ namespace EpiDashboard
         public override void CreateFromXml(XmlElement element)
         {
             this.LoadingCombos = true;
-            this.Parameters = new LineListParameters();
+            this.ColumnWarningShown = true;
 
             HideConfigPanel();
-
+            
             infoPanel.Visibility = System.Windows.Visibility.Collapsed;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -928,60 +2337,64 @@ namespace EpiDashboard
                 switch (child.Name.ToLower())
                 {
                     case "groupvariable":
-                    case "groupvariableprimary":
-                        if (!String.IsNullOrEmpty(child.InnerText.Trim()))
-                        {
-                            ((LineListParameters)Parameters).PrimaryGroupField = child.InnerText.Trim();
-                        }
+                        cbxGroupField.Text = child.InnerText.Replace("&lt;", "<");
                         break;
-                    case "groupvariablesecondary":
-                        if (!String.IsNullOrEmpty(child.InnerText.Trim()))
-                        {
-                            ((LineListParameters)Parameters).SecondaryGroupField = child.InnerText.Trim();
-                        }
+                    case "maxcolumnnamelength":
+                        int maxColumnLength = 24;
+                        int.TryParse(child.InnerText, out maxColumnLength);
+                        txtMaxColumnLength.Text = maxColumnLength.ToString();
                         break;
-                    case "sortcolumnsbytaborder":
+                    case "maxrows":
+                        int maxRows = 50;
+                        int.TryParse(child.InnerText, out maxRows);
+                        txtMaxRows.Text = maxRows.ToString();
+                        break;
+                    case "sortcolumnsbytaborder":                        
                         bool sortByTabs = false;
                         bool.TryParse(child.InnerText, out sortByTabs);
-                        ((LineListParameters)Parameters).SortColumnsByTabOrder = sortByTabs;
+                        checkboxTabOrder.IsChecked = sortByTabs;
                         break;
                     case "usefieldprompts":
                         bool usePrompts = false;
                         bool.TryParse(child.InnerText, out usePrompts);
-                        ((LineListParameters)Parameters).UsePromptsForColumnNames = usePrompts;
+                        checkboxUsePrompts.IsChecked = usePrompts;
+                        break;
+                    case "allowupdates":
+                        bool allowUpdates = false;
+                        bool.TryParse(child.InnerText, out allowUpdates);
+                        checkboxAllowUpdates.IsChecked = allowUpdates;
                         break;
                     case "showlinecolumn":
                         bool showLineColumn = true;
                         bool.TryParse(child.InnerText, out showLineColumn);
-                        ((LineListParameters)Parameters).ShowLineColumn = showLineColumn;
+                        checkboxLineColumn.IsChecked = showLineColumn;
                         break;
                     case "showcolumnheadings":
                         bool showColumnHeadings = true;
                         bool.TryParse(child.InnerText, out showColumnHeadings);
-                        ((LineListParameters)Parameters).ShowColumnHeadings = showColumnHeadings;
+                        checkboxColumnHeaders.IsChecked = showColumnHeadings;
                         break;
                     case "showlistlabels":
                         bool showLabels = false;
                         bool.TryParse(child.InnerText, out showLabels);
-                        Parameters.ShowCommentLegalLabels = showLabels;
+                        checkboxListLabels.IsChecked = showLabels;
                         break;
                     case "shownulllabels":
                         bool showNullLabels = true;
                         bool.TryParse(child.InnerText, out showNullLabels);
-                        ((LineListParameters)Parameters).ShowNullLabels = showNullLabels;
+                        checkboxShowNulls.IsChecked = showNullLabels;
                         break;
                     case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText))
                         {
-                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<");
-                            Parameters.GadgetTitle = CustomOutputHeading;
+                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<"); ;
                         }
                         break;
                     case "customdescription":
                         if (!string.IsNullOrEmpty(child.InnerText))
                         {
                             this.CustomOutputDescription = child.InnerText.Replace("&lt;", "<");
-                            Parameters.GadgetDescription = CustomOutputDescription;
+
                             if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputHeading.Equals("(none)"))
                             {
                                 descriptionPanel.Text = CustomOutputDescription;
@@ -1002,8 +2415,8 @@ namespace EpiDashboard
                             List<string> fields = new List<string>();
                             if (field.Name.ToLower().Equals("listfield"))
                             {
-                                //GadgetOptions.InputVariableList.Add(field.InnerText.Replace("&lt;", "<"), "listfield");
-                                Parameters.ColumnNames.Add(field.InnerText.Replace("&lt;", "<"));
+                             //   fields.Add(field.InnerText);
+                                lbxFields.SelectedItems.Add(field.InnerText.Replace("&lt;", "<"));
                             }
                         }
                         break;
@@ -1011,34 +2424,26 @@ namespace EpiDashboard
                         foreach (XmlElement field in child.ChildNodes)
                         {
                             List<string> fields = new List<string>();
-                            
-                            SortOrder order = SortOrder.Ascending;
-
-                            if (field.Attributes.Count >= 1 && field.Attributes["order"].Value == "DESC")
-                            {
-                                order = SortOrder.Descending;
-                            }
-
                             if (field.Name.ToLower().Equals("sortfield"))
                             {
-                                Parameters.SortVariables.Add(field.InnerText.Replace("&lt;", "<"), order);
+                                lbxSortFields.Items.Add(field.InnerText.Replace("&lt;", "<"));
                             }
                         }
                         break;
-                    case "customusercolumnsort":
+                    case "customusercolumnsort":                        
                         string[] cols = child.InnerText.Split('^');
                         columnOrder = cols.ToList();
                         break;
                     case "datafilters":
                         this.DataFilters = new DataFilters(this.DashboardHelper);
                         this.DataFilters.CreateFromXml(child);
-                        break;
+                        break;                
                 }
             }
 
             base.CreateFromXml(element);
 
-            this.LoadingCombos = false;
+            this.LoadingCombos = false;            
 
             RefreshResults();
             HideConfigPanel();
@@ -1046,13 +2451,106 @@ namespace EpiDashboard
 
         #endregion
 
+        private void txtMaxColumns_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Util.IsWholeNumber(e.Text);
+            base.OnPreviewTextInput(e);
+        }
+
+        private int MaxRows
+        {
+            get
+            {
+                int maxRows = 50;
+                bool success = int.TryParse(txtMaxRows.Text, out maxRows);
+                if (!success)
+                {
+                    return 50;
+                }
+                else
+                {
+                    if (maxRows >= MAX_ROW_LIMIT)
+                    {
+                        return MAX_ROW_LIMIT;
+                    }
+                    else
+                    {
+                        return maxRows;
+                    }
+                }
+            }
+        }
+
+        private int MaxColumns
+        {
+            get
+            {
+                return this.maxColumns;                
+            }
+            set
+            {
+                if (value <= 1)
+                {
+                    this.maxColumns = 1;
+                }
+                else
+                {
+                    this.maxColumns = value;
+                }
+            }
+        }
+
+        private int MaxColumnLength
+        {
+            get
+            {
+                int maxColumnLength = 24;
+                bool success = int.TryParse(txtMaxColumnLength.Text, out maxColumnLength);
+                if (!success)
+                {
+                    return 24;
+                }
+                else
+                {
+                    return maxColumnLength;
+                }
+            }
+        }
+
+        private bool ColumnWarningShown
+        {
+            get
+            {
+                return this.columnWarningShown;
+            }
+            set
+            {
+                this.columnWarningShown = value;
+            }
+        }
+
         /// <summary>
         /// Sets the gadget to its 'processing' state
         /// </summary>
         public override void SetGadgetToProcessingState()
         {
             this.IsProcessing = true;
-            base.SetGadgetToProcessingState();
+            this.cbxGroupField.IsEnabled = false;
+            this.lbxFields.IsEnabled = false;
+            this.lbxSortFields.IsEnabled = false;
+            this.txtMaxRows.IsEnabled = false;
+            this.txtMaxColumnLength.IsEnabled = false;
+            this.btnRun.IsEnabled = false;
+            this.cbxSortField.IsEnabled = false;
+            this.checkboxTabOrder.IsEnabled = false;
+            this.checkboxUsePrompts.IsEnabled = false;
+            this.checkboxAllowUpdates.IsEnabled = false;
+            this.checkboxListLabels.IsEnabled = false;
+            this.checkboxLineColumn.IsEnabled = false;
+            this.checkboxColumnHeaders.IsEnabled = false;
+            this.checkboxShowNulls.IsEnabled = false;
+
+            base.SetGadgetToProcessingState();   
         }
 
         /// <summary>
@@ -1061,7 +2559,23 @@ namespace EpiDashboard
         public override void SetGadgetToFinishedState()
         {
             this.IsProcessing = false;
+            this.cbxGroupField.IsEnabled = true;
+            this.lbxFields.IsEnabled = true;
+            this.lbxSortFields.IsEnabled = true;
+            this.txtMaxRows.IsEnabled = true;
+            this.txtMaxColumnLength.IsEnabled = true;
+            this.btnRun.IsEnabled = true;
+            this.cbxSortField.IsEnabled = true;
+            this.checkboxTabOrder.IsEnabled = true;
+            this.checkboxUsePrompts.IsEnabled = true;
+            this.checkboxAllowUpdates.IsEnabled = true;
+            this.checkboxListLabels.IsEnabled = true;
+            this.checkboxLineColumn.IsEnabled = true;
+            this.checkboxColumnHeaders.IsEnabled = true;
+            this.checkboxShowNulls.IsEnabled = true;
+
             currentWidth = borderAll.ActualWidth;
+
             base.SetGadgetToFinishedState();
         }
 
@@ -1094,32 +2608,81 @@ namespace EpiDashboard
             if (!string.IsNullOrEmpty(messagePanel.Text) && messagePanel.Visibility == Visibility.Visible)
             {
                 htmlBuilder.AppendLine("<p><small><strong>" + messagePanel.Text + "</strong></small></p>");
-            }
+            }                   
 
-            DataGrid dg = GetDataGrid();
-            if (dg != null && dg.ItemsSource != null)
+            foreach (Grid grid in this.StrataGridList)
             {
+                string gridName = grid.Tag.ToString();
+
                 htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
                 htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
                 if (string.IsNullOrEmpty(CustomOutputCaption) && this.StrataGridList.Count > 1)
                 {
-                    //htmlBuilder.AppendLine("<caption>" + grid.Tag + "</caption>");
+                    htmlBuilder.AppendLine("<caption>" + grid.Tag + "</caption>");
                 }
-                else if (!string.IsNullOrEmpty(CustomOutputCaption))
+                else if(!string.IsNullOrEmpty(CustomOutputCaption))
                 {
                     htmlBuilder.AppendLine("<caption>" + CustomOutputCaption + "</caption>");
                 }
-
-                if (dg.ItemsSource is DataView)
+                
+                SortedList<int, TextBlock> textBlocks = new SortedList<int, TextBlock>();
+                int currentColumnCount = 0;
+                int currentColumnNumber = 0;
+                foreach (UIElement control in grid.Children)
                 {
-                    htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView));
-                }
-                else if (dg.ItemsSource is ListCollectionView)
-                {
-                    ListCollectionView lcv = dg.ItemsSource as ListCollectionView;
-                    if (lcv.SourceCollection is DataView)
+                    if (control is TextBlock)
+                    {                        
+                        int columnNumber = Grid.GetColumn(control);
+                        textBlocks.Add(columnNumber + currentColumnCount, control as TextBlock);
+                        currentColumnNumber++;
+                    }
+                    if (currentColumnNumber >= grid.ColumnDefinitions.Count)
                     {
-                        htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(lcv.SourceCollection as DataView));
+                        currentColumnCount = currentColumnCount + grid.ColumnDefinitions.Count;
+                        currentColumnNumber = 0;
+                    }
+                }
+
+                foreach (KeyValuePair<int, TextBlock> kvp in textBlocks)
+                {
+                    TextBlock control = kvp.Value;
+                    int rowNumber = Grid.GetRow(control);
+                    int columnNumber = Grid.GetColumn(control);
+
+                    string tableDataTagOpen = "<td class=\"value\" style=\"max-width: 300px; vertical-align: top;\">";
+                    string tableDataTagClose = "</td>";
+
+                    if (rowNumber == 0)
+                    {
+                        tableDataTagOpen = "<th style=\"width: auto;\">";
+                        tableDataTagClose = "</th>";
+                    }
+
+                    if (columnNumber == 0)
+                    {
+                        if (((double)rowNumber) % 2.0 == 1)
+                        {
+                            htmlBuilder.AppendLine("<tr class=\"altcolor\">");
+                        }
+                        else
+                        {
+                            htmlBuilder.AppendLine("<tr>");
+                        }
+                    }
+                    if (columnNumber == 0 && rowNumber > 0)
+                    {
+                        tableDataTagOpen = "<td class=\"value\">";
+                    }
+
+                    string value = ((TextBlock)control).Text;
+                    string formattedValue = value.Replace("<", "&lt;").Replace(">", "&gt;");
+                    formattedValue = formattedValue.Replace("\n", "<br/>");
+
+                    htmlBuilder.AppendLine(tableDataTagOpen + formattedValue + tableDataTagClose);
+
+                    if (columnNumber >= grid.ColumnDefinitions.Count - 1)
+                    {
+                        htmlBuilder.AppendLine("</tr>");
                     }
                 }
 
@@ -1181,16 +2744,156 @@ namespace EpiDashboard
             set
             {
                 isHostedByEnter = value;
-                // REVISIT THIS
-                //if (value)
-                //{
-                //    imgClose.Visibility = System.Windows.Visibility.Collapsed;
-                //}
-                //else
-                //{
-                //    imgClose.Visibility = System.Windows.Visibility.Visible;
-                //}
+                if (value)
+                {
+                    //imgClose.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else
+                {
+                    //imgClose.Visibility = System.Windows.Visibility.Visible;
+                }
             }
+        }
+
+        private void btnRun_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshResults();
+        }
+
+        private void cbxSortField_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!LoadingCombos && cbxSortField.SelectedIndex > 0 && !lbxSortFields.Items.Contains(cbxSortField.SelectedItem.ToString()))
+            {
+                AddColumnToSortList(cbxSortField.SelectedItem.ToString());                
+            }
+        }
+
+        private void AddColumnToSortList(string columnName)
+        {
+            if (!lbxSortFields.Items.Contains(columnName) && !lbxSortFields.Items.Contains(columnName + " (ascending)"))
+            {
+                lbxSortFields.Items.Add(columnName + " (ascending)");
+            }
+        }
+
+        private void InsertColumnInSortList(string columnName, int insertAt)
+        {
+            if (!lbxSortFields.Items.Contains(columnName) && !lbxSortFields.Items.Contains(columnName + " (ascending)"))
+            {
+                lbxSortFields.Items.Insert(insertAt, columnName + " (ascending)");
+            }
+        }
+
+        private void SwapColumnOrderInSortList(string columnName)
+        {
+            if (lbxSortFields.Items.Contains(columnName + " (ascending)"))
+            {
+                string sortColumn = columnName + " (descending)";
+                lbxSortFields.Items.Remove(columnName + " (ascending)");
+                lbxSortFields.Items.Add(sortColumn);
+            }
+            else if (lbxSortFields.Items.Contains(columnName + " (descending)"))
+            {
+                string sortColumn = columnName + " (ascending)";
+                lbxSortFields.Items.Remove(columnName + " (descending)");
+                lbxSortFields.Items.Add(sortColumn);
+            }
+        }
+
+        void mnuRemoveSorts_Click(object sender, RoutedEventArgs e)
+        {
+            lbxSortFields.Items.Clear();
+            RefreshResults();
+        }
+
+        void mnuSwapSortType_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbxSortFields.SelectedItems.Count == 1)
+            {
+                string selectedItem = lbxSortFields.SelectedItem.ToString();
+                int index = lbxSortFields.SelectedIndex;
+
+                if (selectedItem.ToLower().EndsWith("(ascending)"))
+                {
+                    selectedItem = selectedItem.Remove(selectedItem.Length - 11) + "(descending)";
+                }
+                else
+                {
+                    selectedItem = selectedItem.Remove(selectedItem.Length - 12) + "(ascending)";
+                }
+
+                lbxSortFields.Items.Remove(lbxSortFields.SelectedItem.ToString());
+                lbxSortFields.Items.Insert(index, selectedItem);
+            }
+        }
+
+        void mnuRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbxSortFields.SelectedItems.Count == 1)
+            {
+                lbxSortFields.Items.Remove(lbxSortFields.SelectedItem.ToString());
+            }
+        }
+
+        private void txtMaxRows_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int rows = 0;
+
+            int.TryParse(txtMaxRows.Text, out rows);
+
+            if (rows > MAX_ROW_LIMIT)
+            {
+                rows = MAX_ROW_LIMIT;
+                txtMaxRows.Text = rows.ToString();
+            }
+        }
+
+        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            //#region Fade in
+            //// Create a storyboard to contain the animations.
+            //Storyboard storyboard = new Storyboard();
+            //TimeSpan duration = new TimeSpan(0, 0, 0, 0, 250);
+
+            //// Create a DoubleAnimation to fade the not selected option control
+            //DoubleAnimation animation = new DoubleAnimation();
+
+            //animation.From = 0.0;
+            //animation.To = 1.0;
+            //animation.Duration = new Duration(duration);
+            //// Configure the animation to target de property Opacity
+            //Storyboard.SetTargetName(animation, ConfigGrid.Name);
+            //Storyboard.SetTargetProperty(animation, new PropertyPath(Control.OpacityProperty));
+            //// Add the animation to the storyboard
+            //storyboard.Children.Add(animation);
+
+            //// Begin the storyboard
+            //storyboard.Begin(this);
+            //#endregion
+        }
+
+        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            //#region Fade out
+            //// Create a storyboard to contain the animations.
+            //Storyboard storyboard = new Storyboard();
+            //TimeSpan duration = new TimeSpan(0, 0, 0, 0, 250);
+
+            //// Create a DoubleAnimation to fade the not selected option control
+            //DoubleAnimation animation = new DoubleAnimation();
+
+            //animation.From = 1.0;
+            //animation.To = 0.0;
+            //animation.Duration = new Duration(duration);
+            //// Configure the animation to target de property Opacity
+            //Storyboard.SetTargetName(animation, ConfigGrid.Name);
+            //Storyboard.SetTargetProperty(animation, new PropertyPath(Control.OpacityProperty));
+            //// Add the animation to the storyboard
+            //storyboard.Children.Add(animation);
+
+            //// Begin the storyboard
+            //storyboard.Begin(this);
+            //#endregion
         }
     }
 }

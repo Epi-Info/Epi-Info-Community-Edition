@@ -60,8 +60,6 @@ namespace EpiDashboard
             operandTypes.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING, "is not null");
             operandTypes.Add(SharedStrings.FRIENDLY_OPERATOR_AND, "and");
             operandTypes.Add(SharedStrings.FRIENDLY_OPERATOR_OR, "or");
-            operandTypes.Add(SharedStrings.FRIENDLY_OPERATOR_IS_ANY_OF, "in");
-            operandTypes.Add(SharedStrings.FRIENDLY_OPERATOR_IS_NOT_ANY_OF, "not in");
 
             DataColumn idColumn = new DataColumn(COLUMN_ID, typeof(int));
             DataColumn filterColumn = new DataColumn(COLUMN_FILTER, typeof(FilterCondition));
@@ -372,31 +370,14 @@ namespace EpiDashboard
                     value = "#" + friendlyValue.Trim() + "#";
                     break;
                 case "System.String":
-
-                    if (operand.Equals(operandTypes[SharedStrings.FRIENDLY_OPERATOR_IS_ANY_OF]) ||
-                        operand.Equals(operandTypes[SharedStrings.FRIENDLY_OPERATOR_IS_NOT_ANY_OF]))
+                    value = "'" + friendlyValue.Trim().Replace("'", "''") + "'";
+                    if (value.Equals("''") && operand.Equals(operandTypes[SharedStrings.FRIENDLY_OPERATOR_MISSING]))
                     {
-                        string[] values = friendlyValue.Split(',');
-                        WordBuilder wb = new WordBuilder(",");
-
-                        foreach (string str in values)
-                        {
-                            wb.Add("'" + str.Trim().Replace("'", "''") + "'");
-                        }
-
-                        value = "(" + wb.ToString() + ")";
+                        operand = operandTypes[SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO];
                     }
-                    else
+                    else if (value.Equals("''") && operand.Equals(operandTypes[SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING]))
                     {
-                        value = "'" + friendlyValue.Trim().Replace("'", "''") + "'";
-                        if (value.Equals("''") && operand.Equals(operandTypes[SharedStrings.FRIENDLY_OPERATOR_MISSING]))
-                        {
-                            operand = operandTypes[SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO];
-                        }
-                        else if (value.Equals("''") && operand.Equals(operandTypes[SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING]))
-                        {
-                            operand = operandTypes[SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO];
-                        }
+                        operand = operandTypes[SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO];
                     }
                     break;
                 case "System.Boolean":
@@ -438,11 +419,10 @@ namespace EpiDashboard
 
             if (friendlyValue.Equals(config.Settings.RepresentationOfMissing))
             {
-                value = string.Empty;
-                friendlyValue = string.Empty;
-                if (friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) || friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO))
+                if (friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
                 {
-                    operand = operandTypes[SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING]; // "is not null";
+                    operand = operandTypes[SharedStrings.FRIENDLY_OPERATOR_MISSING]; // "is null";
+                    value = string.Empty;
                 }
                 else if (friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
                 {
@@ -451,7 +431,8 @@ namespace EpiDashboard
                 }
                 else
                 {
-                    operand = operandTypes[SharedStrings.FRIENDLY_OPERATOR_MISSING]; // "is null";
+                    operand = operandTypes[SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING]; // "is not null";
+                    value = string.Empty;
                 }
             }
 

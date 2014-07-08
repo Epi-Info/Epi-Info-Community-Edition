@@ -117,7 +117,7 @@ namespace Epi.Enter.Forms
         {
             btnCancel.Enabled = true;
             btnOK.Enabled = true;
-            cmbImportType.Enabled = true;            
+            cmbImportType.Enabled = true;
             txtPhoneDataFile.Enabled = true;
             progressBar.Visible = false;
             progressBar.Style = ProgressBarStyle.Continuous;
@@ -267,7 +267,7 @@ namespace Epi.Enter.Forms
 
                 this.Cursor = Cursors.Default;
             }
-            
+
         }
 
         /// <summary>
@@ -286,8 +286,8 @@ namespace Epi.Enter.Forms
         private void IncrementProgressBarValue(double value)
         {
             progressBar.Style = ProgressBarStyle.Continuous;
-            progressBar.Increment((int)value);            
-        } 
+            progressBar.Increment((int)value);
+        }
 
         /// <summary>
         /// Processes a form's base table
@@ -307,7 +307,7 @@ namespace Epi.Enter.Forms
             {
                 //IDataReader sourceReader = sourceProjectDataDriver.GetTableDataReader(sourceView.TableName);
                 foreach (string surveyGUID in surveyGUIDs /*Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer in result.SurveyResponseList*/)
-                {             
+                {
                     object recordStatus = 1; // no marking for deletion supported at this time.
 
                     QueryParameter paramRecordStatus = new QueryParameter("@RECSTATUS", DbType.Int32, recordStatus);
@@ -375,7 +375,7 @@ namespace Epi.Enter.Forms
                                 sb.Append(StringLiterals.EQUAL);
 
                                 sb.Append(StringLiterals.COMMERCIAL_AT);
-                                sb.Append("FKEY");                               
+                                sb.Append("FKEY");
                                 fieldValueParams.Add(paramFkey);
 
                                 Query updateQuery = destinationProjectDataDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
@@ -436,7 +436,7 @@ namespace Epi.Enter.Forms
         }
 
         private struct PhoneFieldData
-        {            
+        {
             public string RecordGUID;
             public string FieldName;
             public object FieldValue;
@@ -497,7 +497,7 @@ namespace Epi.Enter.Forms
                 this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), "Invalid password or sync file.");
                 return;
             }
-                
+
             System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
             doc.LoadXml(xmlText);
 
@@ -519,7 +519,7 @@ namespace Epi.Enter.Forms
                             if (surveyElement.Name.ToLower().Equals("page") && surveyElement.Attributes.Count > 0 && surveyElement.Attributes[0].Name.ToLower().Equals("pageid"))
                             {
                                 List<PhoneFieldData> fieldValues = new List<PhoneFieldData>();
-                                
+
                                 foreach (XmlElement pageElement in surveyElement.ChildNodes)
                                 {
                                     if (pageElement.Name.ToLower().Equals("responsedetail"))
@@ -569,7 +569,7 @@ namespace Epi.Enter.Forms
 
             return new PhoneFieldData(); // this is bad, fix
         }
-        
+
         /// <summary>
         /// Processes all of the fields on a given form, page-by-page, except for the fields on the base table.
         /// </summary>      
@@ -578,7 +578,7 @@ namespace Epi.Enter.Forms
         private void ProcessPages(View destinationView, List<string> destinationGUIDList, string syncFilePath)
         {
             int recordsProcessed = 0;
-            
+
             foreach (KeyValuePair<string, List<PhoneFieldData>> kvp in _surveyResponses)
             {
                 string recordKey = kvp.Key;
@@ -597,7 +597,7 @@ namespace Epi.Enter.Forms
                         pagedFieldDataDictionary[pageId].Add(fieldData);
                     }
                 }
-                
+
                 for (int i = 0; i < destinationView.Pages.Count; i++)
                 {
                     this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on page " + (i + 1).ToString() + " of " + destinationView.Pages.Count.ToString() + "...");
@@ -612,7 +612,7 @@ namespace Epi.Enter.Forms
                     Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + pageTableName + "]");
                     IDataReader destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
                     destinationGUIDList = new List<string>();
-                    
+
                     while (destReader.Read())
                     {
                         destinationGUIDList.Add(destReader[0].ToString());
@@ -626,7 +626,7 @@ namespace Epi.Enter.Forms
                         {
                             InsertEmptyPageTableRecord(recordKey, pageTableName);
                         }
-                        
+
                         string currentGUID = string.Empty;
                         string lastGUID = string.Empty;
 
@@ -775,7 +775,7 @@ namespace Epi.Enter.Forms
                                     ))
                                 {
                                     String fieldName = ((Epi.INamedObject)dataField).Name;
-                                    
+
                                     switch (dataField.FieldType)
                                     {
                                         case MetaFieldType.Date:
@@ -903,7 +903,7 @@ namespace Epi.Enter.Forms
                     finally
                     {
                     }
-                
+
                     // this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "On page '" + destinationPage.Name + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");
                 }
 
@@ -1085,7 +1085,7 @@ namespace Epi.Enter.Forms
         private void AddWarningMessage(string statusMessage)
         {
             string message = DateTime.Now + ": Warning: " + statusMessage;
-            lbxStatus.Items.Add(message);            
+            lbxStatus.Items.Add(message);
             Logger.Log(message);
         }
 
@@ -1232,7 +1232,7 @@ namespace Epi.Enter.Forms
                 if (System.IO.File.Exists(filePath))
                 {
                     try
-                    {                        
+                    {
                         txtPhoneDataFile.Text = filePath;
                     }
                     catch (Exception ex)
@@ -1295,7 +1295,7 @@ namespace Epi.Enter.Forms
                 importWorker.RunWorkerAsync(txtPhoneDataFile.Text);
             }
             //DoImport();
-        }        
+        }
 
         /// <summary>
         /// Handles the WorkerCompleted event for the worker
@@ -1309,7 +1309,7 @@ namespace Epi.Enter.Forms
             this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import complete. Time elapsed: " + stopwatch.Elapsed.ToString());
             this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Import complete. Time elapsed: " + stopwatch.Elapsed.ToString());
 
-            StopImport();            
+            StopImport();
         }
 
         /// <summary>
@@ -1373,6 +1373,6 @@ namespace Epi.Enter.Forms
         {
             AddStatusMessage("Loaded data import dialog. Ready.");
         }
-        #endregion // Event Handlers        
+        #endregion // Event Handlers
     }
 }

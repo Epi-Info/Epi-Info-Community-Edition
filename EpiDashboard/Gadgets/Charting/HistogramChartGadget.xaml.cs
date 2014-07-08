@@ -248,13 +248,13 @@ namespace EpiDashboard.Gadgets.Charting
             EndDate = null;
 
             if (!string.IsNullOrEmpty(txtStartValue.Text))
-            {                
+            {
                 DateTime stDt = DateTime.Now;
                 double stInt = -1;
                 if (DateTime.TryParse(txtStartValue.Text, out stDt))
                 {
                     StartDate = stDt;
-                }                
+                }
                 else if (double.TryParse(txtStartValue.Text, out stInt))
                 {
                     stDt = DateTime.Now;
@@ -276,6 +276,10 @@ namespace EpiDashboard.Gadgets.Charting
                     edDt = DateTime.Now;
                     edDt = edDt.AddDays(edInt);
                     EndDate = edDt;
+                }
+                else if (txtEndValue.Text.ToUpper() == "SYSTEMDATE" || txtEndValue.Text == "SYSTEMDATE")
+                {
+                    EndDate = DateTime.Now;
                 }
             }
 
@@ -418,7 +422,7 @@ namespace EpiDashboard.Gadgets.Charting
             StrataExpanderList.Clear();
         }
 
-        protected override void RenderFinish()
+        private void RenderFinish()
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -430,7 +434,7 @@ namespace EpiDashboard.Gadgets.Charting
             CheckAndSetPosition();
         }
 
-        protected override void RenderFinishWithWarning(string errorMessage)
+        private void RenderFinishWithWarning(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed; //waitCursor.Visibility = Visibility.Hidden;
 
@@ -442,7 +446,7 @@ namespace EpiDashboard.Gadgets.Charting
             CheckAndSetPosition();
         }
 
-        protected override void RenderFinishWithError(string errorMessage)
+        private void RenderFinishWithError(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -725,6 +729,69 @@ namespace EpiDashboard.Gadgets.Charting
                         case "width":
                             txtWidth.Text = child.InnerText;
                             break;
+                        case "yaxisfrom":
+                            txtFromValue.Text = child.InnerText;
+                            break;
+                        case "yaxisto":
+                            txtToValue.Text = child.InnerText;
+                            break;
+                        case "yaxisstep":
+                            txtStepValue.Text = child.InnerText;
+                            break;
+                        case "xaxisstartvalue":
+                            string startText = child.InnerText;
+
+                            if (startText.ToUpper().Equals("SYSTEMDATE") || startText.Equals("SYSTEMDATE"))
+                            {
+                                txtStartValue.Text = startText;
+                            }
+                            else if (startText.Length < 5)
+                            {
+                                double stValueNumeric;
+                                bool numericSuccess = Double.TryParse(startText, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out stValueNumeric);
+                                if (numericSuccess)
+                                {
+                                    txtStartValue.Text = startText;
+                                }
+                            }
+                            else
+                            {
+                                long ticks;
+                                bool longSuccess = long.TryParse(startText, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out ticks);
+                                if (longSuccess)
+                                {
+                                    DateTime dt = new DateTime(ticks);
+                                    txtStartValue.Text = dt.ToShortDateString();
+                                }
+                            }
+                            break;
+                        case "xaxisendvalue":
+                            string endText = child.InnerText;
+
+                            if (endText.Equals("SYSTEMDATE") || endText.Equals("SYSTEMDATE"))
+                            {
+                                txtEndValue.Text = endText;
+                            }
+                            else if (endText.Length < 5)
+                            {
+                                double stValueNumeric;
+                                bool numericSuccess = Double.TryParse(endText, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out stValueNumeric);
+                                if (numericSuccess)
+                                {
+                                    txtEndValue.Text = endText;
+                                }
+                            }
+                            else
+                            {
+                                long ticks;
+                                bool longSuccess = long.TryParse(endText, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out ticks);
+                                if (longSuccess)
+                                {
+                                    DateTime dt = new DateTime(ticks);
+                                    txtEndValue.Text = dt.ToShortDateString();
+                                }
+                            }
+                            break;
                     }
                 }
             }
@@ -863,6 +930,46 @@ namespace EpiDashboard.Gadgets.Charting
 
             xmlString += "<legendDock>" + cmbLegendDock.SelectedIndex + "</legendDock>";
 
+            xmlString += "<yAxisFrom>" + txtFromValue.Text + "</yAxisFrom>";
+            xmlString += "<yAxisTo>" + txtToValue.Text + "</yAxisTo>";
+            xmlString += "<yAxisStep>" + txtStepValue.Text + "</yAxisStep>";
+
+            if (!string.IsNullOrEmpty(txtEndValue.Text))
+            {
+                DateTime edDt = DateTime.Now;
+                double edInt = -1;
+                if (DateTime.TryParse(txtEndValue.Text, out edDt))
+                {
+                    xmlString += "<xAxisEndValue>" + edDt.Ticks.ToString() + "</xAxisEndValue>";
+                }
+                else if (double.TryParse(txtEndValue.Text, out edInt))
+                {
+                    xmlString += "<xAxisEndValue>" + edInt.ToString() + "</xAxisEndValue>";
+                }
+                else if (txtEndValue.Text.ToUpper() == "SYSTEMDATE" || txtEndValue.Text == "SYSTEMDATE")
+                {
+                    xmlString += "<xAxisEndValue>SYSTEMDATE</xAxisEndValue>";
+                }
+            }
+
+            if (!string.IsNullOrEmpty(txtStartValue.Text))
+            {
+                DateTime edDt = DateTime.Now;
+                double edInt = -1;
+                if (DateTime.TryParse(txtStartValue.Text, out edDt))
+                {
+                    xmlString += "<xAxisStartValue>" + edDt.Ticks + "</xAxisStartValue>";
+                }
+                else if (double.TryParse(txtStartValue.Text, out edInt))
+                {
+                    xmlString += "<xAxisStartValue>" + edInt.ToString() + "</xAxisStartValue>";
+                }
+                else if (txtStartValue.Text.ToUpper() == "SYSTEMDATE" || txtStartValue.Text == "SYSTEMDATE")
+                {
+                    xmlString += "<xAxisStartValue>SYSTEMDATE</xAxisStartValue>";
+                }
+            }
+
             xmlString = xmlString + SerializeAnchors();
 
             System.Xml.XmlElement element = doc.CreateElement("histogramChartGadget");
@@ -902,6 +1009,19 @@ namespace EpiDashboard.Gadgets.Charting
             }
             chartSettings.ChartWidth = int.Parse(txtWidth.Text);
             chartSettings.ChartHeight = int.Parse(txtHeight.Text);
+
+            double from;
+            bool success = Double.TryParse(txtFromValue.Text, out from);
+            if (success) { chartSettings.YAxisFrom = from; }
+
+            double to;
+            success = Double.TryParse(txtToValue.Text, out to);
+            if (success) { chartSettings.YAxisTo = to; }
+
+            double step;
+            success = Double.TryParse(txtStepValue.Text, out step);
+            if (success) { chartSettings.YAxisStep = step; }
+
             chartSettings.ShowDefaultGridLines = (bool)checkboxGridLines.IsChecked;
             chartSettings.LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Right;
 
@@ -1303,7 +1423,7 @@ namespace EpiDashboard.Gadgets.Charting
 
                 incDt = incDt.AddYears(step);
             }
-        }      
+        }
 
         protected override void worker_WorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
@@ -1313,7 +1433,7 @@ namespace EpiDashboard.Gadgets.Charting
             }
             else
             {
-                System.Threading.Thread.Sleep(400);
+                System.Threading.Thread.Sleep(1000);
             }
             this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
         }
@@ -1377,7 +1497,7 @@ namespace EpiDashboard.Gadgets.Charting
                             parameters.CrosstabVariableName = string.Empty;
                             Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(parameters);
                             GenerateChartData(stratifiedFrequencyTables, strata);
-                            System.Threading.Thread.Sleep(100);
+                            System.Threading.Thread.Sleep(200);
                         }
                     }
                     else

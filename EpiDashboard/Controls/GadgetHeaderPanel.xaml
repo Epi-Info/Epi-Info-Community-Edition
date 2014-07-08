@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             Height="30"
-             d:DesignHeight="32" d:DesignWidth="330">
+             Height="26"
+             d:DesignHeight="26" d:DesignWidth="330">
     <UserControl.Resources>
         
         <Style TargetType="TextBlock" x:Key="titleTextStyle">
@@ -71,19 +71,17 @@
         </Style>
 
         <Style x:Key="collapseRectangle" TargetType="Rectangle">
-            <!--<Setter Property="Fill" Value="ForestGreen"/>-->
-            <Setter Property="Fill" Value="Gray"/>
+            <Setter Property="Fill" Value="ForestGreen"/>
             <Setter Property="Stroke" Value="{StaticResource brushWhiteTransparent}"/>
         </Style>
 
         <Style x:Key="collapseRectangleHover" TargetType="Rectangle">
-            <!--<Setter Property="Fill" Value="LightGreen"/>-->
-            <Setter Property="Fill" Value="DarkGray"/>
+            <Setter Property="Fill" Value="LightGreen"/>
             <Setter Property="Stroke" Value="{StaticResource brushWhiteTransparent}"/>
         </Style>
 
         <Style x:Key="closeRectangle" TargetType="Rectangle">
-            <Setter Property="Fill" Value="#FF4E4E"/>
+            <Setter Property="Fill" Value="{StaticResource brushRedOrange}"/>
             <Setter Property="Stroke" Value="{StaticResource brushWhiteTransparent}"/>            
         </Style>
 
@@ -127,47 +125,129 @@
         </Style>
         
     </UserControl.Resources>
-    <Grid x:Name="gridHeader" Margin="0, 0, 0, 0">
+    <Grid x:Name="gridHeader">
+        <!--<Grid.Background>-->
+            <!--<SolidColorBrush Color="#32475C"/>-->
+            <!--<SolidColorBrush Color="White"/>-->
+        <!--</Grid.Background>-->
+        <!--<Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#C6D5E8" Offset="0.0" />
+                <GradientStop Color="#6C9DC6" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="30" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="26" />
+            <ColumnDefinition Width="26" />
+            <ColumnDefinition Width="26" />
+            <ColumnDefinition Width="26" />
+            <ColumnDefinition Width="26" />
             <ColumnDefinition Width="4" />
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="gadgetTypeText" Style="{StaticResource titleTextStyle}" Grid.Column="0" >Dashboard Gadget</TextBlock>
 
-        <Grid Grid.Column="2" x:Name="grdCustomFilter" Width="24" Height="24" Margin="4, 0, 4, 0" Visibility="Visible" VerticalAlignment="Bottom">
-            <Rectangle x:Name="filterRectangle1" Style="{StaticResource filterRectangle}"  MouseEnter="PathFilter_MouseEnter" MouseLeave="PathFilter_MouseLeave" MouseLeftButtonUp="PathFilter_MouseLeftButtonUp">
+        <Grid Grid.Column="2" x:Name="grdCustomFilter" Width="20" Height="20" Margin="1" Visibility="Visible" VerticalAlignment="Bottom">
+            <Rectangle x:Name="filterRectangle1" Style="{StaticResource filterRectangle}"/>
+            <Rectangle Opacity="0.5" Stroke="Transparent" Margin="1"  MouseEnter="PathFilter_MouseEnter" MouseLeave="PathFilter_MouseLeave" MouseLeftButtonUp="PathFilter_MouseLeftButtonUp" >
                 <Rectangle.ToolTip>
                     <ToolTip x:Name="toolTipDataFilters">Allows the use of custom gadget-specific data filters. Any data filters created for this gadget will be applied in addition to any canvas-wide filters.</ToolTip>
                 </Rectangle.ToolTip>
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="white" Offset="0" />
+                                <GradientStop Color="transparent" Offset="1" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
             </Rectangle>
-            <Path Fill="White" 
-                  HorizontalAlignment="Center" VerticalAlignment="Center"
-                  Height="16" Width="16" 
-                  StrokeThickness="1" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                  IsHitTestVisible="False"
-                  Stretch="Fill"
-                  Data="F1 M 34.8333,61.75L 34.8333,42.75L 19,20.5833L 57,20.5833L 41.1667,42.75L 41.1667,58.5833L 34.8333,61.75 Z "/>
+            <!--<Path x:Name="pathTriangle" Style="{StaticResource collapseTriangle}" IsHitTestVisible="False" Stretch="Fill" Width="6.878" Height="6.878" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"  />-->
+            <Path x:Name="pathFilter" Data="M 5 5 L 0 -1 10 -1 Z" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="White" />
+            <Line IsHitTestVisible="False"
+    X1="10" Y1="9"
+    X2="10" Y2="15"
+    Stroke="White"
+    StrokeThickness="2" />
 
             <!--M 5 10 L 0 0 10 0 Z    Expand arrow-->
             <!--M 5 0 L 10 10 0 10 Z   Collapse arrow -->
         </Grid>
 
-        <Grid Grid.Column="3" x:Name="grdConfigure" Width="Auto" Height="24" Margin="4, 0, 4, 0" Visibility="Visible"  VerticalAlignment="Bottom" >
-            <Rectangle x:Name="configRectangle1" Style="{StaticResource configRectangle}" MouseEnter="PathConfig_MouseEnter" MouseLeave="PathConfig_MouseLeave" MouseLeftButtonUp="PathConfig_MouseLeftButtonUp">
+        <Grid Grid.Column="3" x:Name="grdConfigure" Width="20" Height="20" Margin="1" Visibility="Visible"  VerticalAlignment="Bottom" >
+            <Rectangle x:Name="configRectangle1" Style="{StaticResource configRectangle}"/>
+            <Rectangle Opacity="0.5" Stroke="Transparent" Margin="1"  MouseEnter="PathConfig_MouseEnter" MouseLeave="PathConfig_MouseLeave" MouseLeftButtonUp="PathConfig_MouseLeftButtonUp" >
                 <Rectangle.ToolTip>
                     <ToolTip x:Name="toolTipConfig">Opens the gadget configuration panel.</ToolTip>
                 </Rectangle.ToolTip>
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="white" Offset="0" />
+                                <GradientStop Color="transparent" Offset="1" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
             </Rectangle>
-            <TextBlock Margin="4, 2, 4, 2" FontSize="14" Foreground="White" VerticalAlignment="Center" IsHitTestVisible="False">Edit Properties</TextBlock>
+            <Ellipse IsHitTestVisible="False" Margin="4.5" Stroke="White" StrokeThickness="2"></Ellipse>
+            <Line IsHitTestVisible="False"
+    X1="2" Y1="10"
+    X2="5" Y2="10"
+    Stroke="White"
+    StrokeThickness="2" />
+
+            <Line IsHitTestVisible="False"
+    X1="15" Y1="10"
+    X2="18" Y2="10"
+    Stroke="White"
+    StrokeThickness="2" />
+
+            <Line IsHitTestVisible="False"
+    X1="10" Y1="2"
+    X2="10" Y2="5"
+    Stroke="White"
+    StrokeThickness="2" />
+
+            <Line IsHitTestVisible="False"
+    X1="10" Y1="15"
+    X2="10" Y2="18"
+    Stroke="White"
+    StrokeThickness="2" />
+
+            <Line IsHitTestVisible="False"
+    X1="4.5" Y1="4.5"
+    X2="7" Y2="7"
+    Stroke="White"
+    StrokeThickness="2" />
+
+            <Line IsHitTestVisible="False"
+    X1="15.5" Y1="15.5"
+    X2="13" Y2="13"
+    Stroke="White"
+    StrokeThickness="2" />
+
+            <Line IsHitTestVisible="False"
+    X1="13" Y1="7"
+    X2="15.5" Y2="4.5"
+    Stroke="White"
+    StrokeThickness="2" />
+
+            <Line IsHitTestVisible="False"
+    X1="4.5" Y1="15.5"
+    X2="7" Y2="13"
+    Stroke="White"
+    StrokeThickness="2" />
+
+
+            <!--<Path x:Name="pathConfig" Style="{StaticResource collapseTriangle}" Data="M85,30 L85,30 L87.5,25 L90,30 z" IsHitTestVisible="False" Stretch="Fill" Width="6.878" Height="6.878" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"  />-->
         </Grid>
 
-        <Grid Grid.Column="4" x:Name="grdDescription" Width="24" Height="24" Margin="4, 0, 4, 0" Visibility="Visible" VerticalAlignment="Bottom">
+        <Grid Grid.Column="4" x:Name="grdDescription" Width="20" Height="20" Margin="1" Visibility="Visible" VerticalAlignment="Bottom">
             <Rectangle x:Name="descRectangle1" Style="{StaticResource descRectangle}"/>
             <Rectangle Opacity="0.5" Stroke="Transparent" Margin="1" MouseEnter="PathDesc_MouseEnter" MouseLeave="PathDesc_MouseLeave" MouseLeftButtonUp="PathDesc_MouseLeftButtonUp">
                 <Rectangle.ToolTip>
@@ -203,12 +283,24 @@
     StrokeThickness="2" />
         </Grid>
 
-        <Grid Grid.Column="5" x:Name="grdExpandCollapse" Width="24" Height="24" Margin="4, 0, 4, 0" Visibility="Visible"  VerticalAlignment="Bottom" >
-            <Rectangle x:Name="expandCollapseRectangle1" Style="{StaticResource collapseRectangle}" MouseEnter="PathCollapse_MouseEnter" MouseLeave="PathCollapse_MouseLeave" MouseLeftButtonUp="PathCollapse_MouseLeftButtonUp">
+        <Grid Grid.Column="5" x:Name="grdExpandCollapse" Width="20" Height="20" Margin="1" Visibility="Visible"  VerticalAlignment="Bottom">
+            <Rectangle x:Name="expandCollapseRectangle1" Style="{StaticResource collapseRectangle}"/>
+            <Rectangle Opacity="0.5" Stroke="Transparent" Margin="1"  MouseEnter="PathCollapse_MouseEnter" MouseLeave="PathCollapse_MouseLeave" MouseLeftButtonUp="PathCollapse_MouseLeftButtonUp" >
                 <Rectangle.ToolTip>
                     <ToolTip x:Name="toolTipCollapseOutput">Collapses or expands the gadget's output.</ToolTip>
                 </Rectangle.ToolTip>
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="white" Offset="0" />
+                                <GradientStop Color="transparent" Offset="1" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
             </Rectangle>
+            <!--<Path x:Name="pathTriangle" Style="{StaticResource collapseTriangle}" IsHitTestVisible="False" Stretch="Fill" Width="6.878" Height="6.878" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"  />-->
             <Path x:Name="pathTriangle" Style="{StaticResource collapseTriangle}" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center"
           StrokeLineJoin="Round"           
           Fill="White">
@@ -218,11 +310,22 @@
             <!--M 5 0 L 10 10 0 10 Z   Collapse arrow -->
         </Grid>
 
-        <Grid Grid.Column="6" x:Name="grdErrorIcon" Width="24" Height="24" Margin="4, 0, 1, 0" Visibility="Visible" VerticalAlignment="Bottom">
-            <Rectangle x:Name="closeRectangle1" Style="{StaticResource closeRectangle}" MouseEnter="PathX_MouseEnter" MouseLeave="PathX_MouseLeave" MouseLeftButtonUp="PathX_MouseLeftButtonUp" >
+        <Grid Grid.Column="6" x:Name="grdErrorIcon" Width="20" Height="20" Margin="1" Visibility="Visible" VerticalAlignment="Bottom">
+            <Rectangle x:Name="closeRectangle1" Style="{StaticResource closeRectangle}" />
+            <Rectangle Opacity="0.5" Stroke="Transparent" Margin="1"  MouseEnter="PathX_MouseEnter" MouseLeave="PathX_MouseLeave" MouseLeftButtonUp="PathX_MouseLeftButtonUp" >
                 <Rectangle.ToolTip>
                     <ToolTip x:Name="toolTipClose">Closes the gadget.</ToolTip>
                 </Rectangle.ToolTip>
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Color="white" Offset="0" />
+                                <GradientStop Color="transparent" Offset="1" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
             </Rectangle>
             <Path x:Name="pathX" Style="{StaticResource closeX}" IsHitTestVisible="False" Stretch="Fill" Width="6.878" Height="6.878" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Data="M 200,0 L 0,200 M 0,0 L 200,200"/>
         </Grid>

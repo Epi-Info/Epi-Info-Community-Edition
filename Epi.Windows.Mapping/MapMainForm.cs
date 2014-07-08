@@ -25,40 +25,25 @@ namespace Epi.Windows.Mapping
 
             host = new ElementHost();
             host.Dock = DockStyle.Fill;
-            this.Controls.Add(host);
+            this.toolStripContainer1.ContentPanel.Controls.Add(host);
 
             mapControl = new EpiDashboard.Mapping.StandaloneMapControl();
             mapControl.DataSourceRequested += new EpiDashboard.Mapping.DataSourceRequestedHandler(mapControl_DataSourceRequested);
             mapControl.MouseCoordinatesChanged += new EpiDashboard.Mapping.MouseCoordinatesChangedHandler(mapControl_MouseCoordinatesChanged);
             mapControl.MapLoaded +=new EpiDashboard.Mapping.MapLoadedHandler(mapControl_MapLoaded);
-            mapControl.ExpandRequested += new EventHandler(mapControl_ExpandRequested);
-            mapControl.RestoreRequested += new EventHandler(mapControl_RestoreRequested);
             host.Child = mapControl;
             this.Width++;
             this.Width--;
         }
 
-        void mapControl_RestoreRequested(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Maximized;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-        }
-
-        void mapControl_ExpandRequested(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Normal;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Bounds = Screen.PrimaryScreen.Bounds;
-        }
-
         void mapControl_MapLoaded(EpiDashboard.Mapping.StandaloneMapControl control, bool isTimeLapsePossible)
         {
-            //btnAddLayer.Enabled = true;
-            //btnOpen.Enabled = true;
-            //btnSave.Enabled = true;
-            //btnSaveImage.Enabled = true;
-            //btnTimeLapse.Enabled = isTimeLapsePossible;
-            //btnReference.Enabled = true;
+            btnAddLayer.Enabled = true;
+            btnOpen.Enabled = true;
+            btnSave.Enabled = true;
+            btnSaveImage.Enabled = true;
+            btnTimeLapse.Enabled = isTimeLapsePossible;
+            btnReference.Enabled = true;
         }
 
         void mapControl_MouseCoordinatesChanged(double latitude, double longitude)

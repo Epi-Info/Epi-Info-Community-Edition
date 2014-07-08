@@ -227,23 +227,14 @@ namespace EpiDashboard.Controls.Charting
             YAxisLabel = ParetoChartParameters.YAxisLabel;
             tblockYAxisLabel.Text = ParetoChartParameters.YAxisLabel;
 
-            tblockYAxisLabel.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-            Size textSize = new Size(tblockYAxisLabel.DesiredSize.Width, tblockYAxisLabel.DesiredSize.Height);
-
-            xyChart.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-            Size chartSize = new Size(xyChart.DesiredSize.Width, xyChart.DesiredSize.Height);
-
-            tblockYAxisLabel.Padding = new Thickness(((chartSize.Height - 144) / 2) - (textSize.Width / 2), 2, 0, 2);
-
-
             Y2AxisLabel = ParetoChartParameters.Y2AxisLabel;
             Y2AxisLegendTitle = ParetoChartParameters.Y2AxisLegendTitle;
 
             xyChart.UseDifferentBarColors = ParetoChartParameters.UseDiffColors;
 
 
-            //Size textSize = new Size();
-            //Size chartSize = new Size();
+            Size textSize = new Size();
+            Size chartSize = new Size();
 
             //tblockChartTitle.Text = Settings.ChartTitle;
             //tblockSubTitle.Text = Settings.ChartSubTitle;
@@ -276,12 +267,10 @@ namespace EpiDashboard.Controls.Charting
             series0.ShowPointAnnotations = ParetoChartParameters.ShowAnnotations;
             series0.BarKind = ParetoChartParameters.BarKind;
 
-            series1.ShowPointAnnotations = ParetoChartParameters.Y2ShowAnnotations;
-            series1.DashStyle = ParetoChartParameters.Y2LineDashStyle;
-            series1.LineKind = ParetoChartParameters.Y2LineKind;
-            series1.Thickness = ParetoChartParameters.Y2LineThickness;
-
-            y2AxisCoordinates.FormattingString = "P0";
+            //series1.ShowPointAnnotations = ParetoChartParameters.Y2ShowAnnotations;
+            //series1.DashStyle = ParetoChartParameters.Y2LineDashStyle;
+            //series1.LineKind = ParetoChartParameters.Y2LineKind;
+            //series1.Thickness = ParetoChartParameters.Y2LineThickness;
 
             xyChart.LegendVisible = ParetoChartParameters.ShowLegend;
             xyChart.Legend.FontSize = ParetoChartParameters.LegendFontSize;

@@ -635,7 +635,7 @@ namespace EpiDashboard
         /// Sets the gadget's state to 'finished with error' mode
         /// </summary>
         /// <param name="errorMessage">The error message to display</param>
-        protected override void RenderFinishWithError(string errorMessage)
+        private void RenderFinishWithError(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 

@@ -29,7 +29,7 @@
 
         </LinearGradientBrush>
         <Style x:Key="closeRectangle" TargetType="Rectangle">
-            <Setter Property="Fill" Value="#FF4E4E"/>
+            <Setter Property="Fill" Value="{StaticResource brushRedOrange}"/>
             <Setter Property="Stroke" Value="{StaticResource brushWhiteTransparent}"/>
         </Style>
 
@@ -46,12 +46,22 @@
             <Setter Property="Stroke" Value="Maroon"/>
         </Style>
     </UserControl.Resources>
-    <Grid Grid.Column="5" Name="grdErrorIcon" Width="24" Height="24" Margin="1" Visibility="Visible">
+    <Grid Grid.Column="5" Name="grdErrorIcon" Width="16" Height="16" Margin="1" Visibility="Visible">
         <Rectangle x:Name="closeRectangle1" Style="{StaticResource closeRectangle}" />
         <Rectangle Opacity="0.5" Stroke="Transparent" Margin="1" >
             <Rectangle.ToolTip>
                 <ToolTip x:Name="toolTipClose">Closes the gadget.</ToolTip>
             </Rectangle.ToolTip>
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="white" Offset="0" />
+                            <GradientStop Color="transparent" Offset="1" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
         </Rectangle>
         <Path x:Name="pathX" Style="{StaticResource closeX}" IsHitTestVisible="False" Stretch="Fill" Width="6.878" Height="6.878" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Data="M 200,0 L 0,200 M 0,0 L 200,200"/>
     </Grid>

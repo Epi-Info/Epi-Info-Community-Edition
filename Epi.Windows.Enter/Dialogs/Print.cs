@@ -17,7 +17,7 @@ namespace Epi.Windows.Enter.Dialogs
 	{
         int fromRecord;
         int toRecord;
-        int _recordStart, _recordEnd, _pageNumberStart, _pageNumberEnd;      
+        int _recordStart, _recordEnd, _pageNumberStart, _pageNumberEnd;        
 
 		public Print()
 		{
@@ -37,7 +37,7 @@ namespace Epi.Windows.Enter.Dialogs
             int recordCount = this.mediator.View.GetRecordCount();
             if (recordCount == 0)
             {
-                //disable controls
+                //disable controls               
                 this.selectRecords_Current.Enabled = false;
                 this.selectRecords_All.Enabled = false;
                 this.selectRecords_Range.Enabled = false;

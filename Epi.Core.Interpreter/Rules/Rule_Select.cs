@@ -16,7 +16,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         AnalysisRule Expression = null;
         string SelectString = null;
         bool CancelExpresson = false;
-        StringBuilder fieldnames = new StringBuilder(); 
+        StringBuilder fieldnames = new StringBuilder();
         /// <summary>
         /// Constructor for Rule_Select
         /// </summary>
@@ -36,10 +36,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     this.CancelExpresson = true;
                 }
                 else
-                {                   
-                    fieldnames.Append(this.GetFieldnames(pToken.Tokens, 1));                   
+                {
+                    fieldnames.Append(this.GetFieldnames(pToken.Tokens, 1));       
                         this.Expression = AnalysisRule.BuildStatments(pContext, (NonterminalToken)pToken.Tokens[1]);
-                        this.SelectString = this.GetCommandElement(pToken.Tokens, 1);                                     
+                        this.SelectString = this.GetCommandElement(pToken.Tokens, 1);                                       
                 }                    
             }
         }
@@ -83,10 +83,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         {
             VariableType scopeWord = VariableType.DataSource | VariableType.Standard |
                                      VariableType.Global | VariableType.Permanent;
-            VariableCollection vars = this.Context.MemoryRegion.GetVariablesInScope(scopeWord);
+            VariableCollection vars = this.Context.MemoryRegion.GetVariablesInScope(scopeWord);           
             string[] names = null; bool isvalid = false;
-            fieldnames.ToString().Trim(new char[] { '[', ']' });
-            names = fieldnames.ToString().Split(' '); invalidfieldnames = new List<string>();
+            fieldnames.ToString().Trim(new char[] { '[', ']' });           
+            names = fieldnames.ToString().Split(' ');     invalidfieldnames=new List<string>();       
             foreach (string name in names)
             {
                 invalidfieldnames.Add(name);
@@ -115,7 +115,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         isvalid = true;
                         invalidfieldnames.Remove(name);
                         break;
-                    }
+                    }                   
                 }
             }
             return isvalid;
@@ -140,29 +140,29 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     List<string> invalidfieldnames = new List<string>();
                     bool isValid = Checkvariablenames(fieldnames, out invalidfieldnames);
-                    if (isValid & invalidfieldnames.Count == 0)
+                    if (isValid & invalidfieldnames.Count==0)
                     {
-                    this.Context.SelectExpression.Add(this.Expression);
-                    if (this.Context.SelectString.Length > 0)
-                    {
-                        if (!this.Context.SelectString.ToString().StartsWith("("))
+                        this.Context.SelectExpression.Add(this.Expression);
+                        if (this.Context.SelectString.Length > 0)
                         {
-                            this.Context.SelectString.Insert(0, '(');
-                            this.Context.SelectString.Append(") AND (");
+                            if (!this.Context.SelectString.ToString().StartsWith("("))
+                            {
+                                this.Context.SelectString.Insert(0, '(');
+                                this.Context.SelectString.Append(") AND (");
 
+                            }
+                            else
+                            {
+                                this.Context.SelectString.Append(" AND (");
+                            }
+                            this.Context.SelectString.Append(this.ConvertToSQL(this.SelectString));
+                            this.Context.SelectString.Append(")");
                         }
                         else
                         {
-                            this.Context.SelectString.Append(" AND (");
+                            this.Context.SelectString.Append(this.ConvertToSQL(this.SelectString));
                         }
-                        this.Context.SelectString.Append(this.ConvertToSQL(this.SelectString));
-                        this.Context.SelectString.Append(")");
                     }
-                    else
-                    {
-                        this.Context.SelectString.Append(this.ConvertToSQL(this.SelectString));
-                    }
-                }
                     else
                     {
                         throw new Exception(string.Join(",", invalidfieldnames.ToArray()) + " does not exist ");

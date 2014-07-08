@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -67,7 +66,7 @@ namespace EpiDashboard
         public event GadgetEventHandler GadgetDragStart;
         public event GadgetEventHandler GadgetDragStop;
         public event GadgetEventHandler GadgetDrag;
-        public event GadgetAnchorSetEventHandler GadgetAnchorSetFromXml;        
+        public event GadgetAnchorSetEventHandler GadgetAnchorSetFromXml;
         #endregion // Events
 
         #region Delegates
@@ -77,7 +76,6 @@ namespace EpiDashboard
         protected delegate void RenderOutputGridHeaderDelegate(string strataValue, string freqVar);
         protected delegate void SetGridBarDelegate(string strataValue, int rowNumber, double pct);
         protected delegate void AddGridRowDelegate(string strataValue, int height);
-        protected delegate void AddDataGridDelegate(DataView dv, string strataValue);
         protected delegate void AddGridFooterDelegate(string strataValue, int rowNumber, int[] totalRows);
         protected delegate void DrawFrequencyBordersDelegate(string strataValue);
         protected delegate void SetStatusDelegate(string statusMessage);
@@ -101,7 +99,6 @@ namespace EpiDashboard
         public bool IsBeingDragged { get; set; }
         public Guid UniqueIdentifier { get; private set; }
         public bool IsCollapsed { get; protected set; }
-        public DashboardPopup Popup { get; protected set; }
 
         /// <summary>
         /// Gets the data filters associated with this gadget
@@ -191,16 +188,6 @@ namespace EpiDashboard
         /// and any other parameters set in the gadget UI.
         /// </remarks>
         protected GadgetParameters GadgetOptions { get; set; }
-
-        /// <summary>
-        /// Gets/sets the parameters for the gadget
-        /// </summary>
-        /// <remarks>
-        /// The object that is passed into the data manager and contains the options the user selected.
-        /// For example, this will contain the columns for the list variables, sort variables, group variable,
-        /// and any other parameters set in the gadget UI.
-        /// </remarks>
-        protected IGadgetParameters Parameters { get; set; }
 
         /// <summary>
         /// Gets/sets whether the gadget is loading combo boxes.
@@ -474,21 +461,6 @@ namespace EpiDashboard
 
         #region Protected Methods
         /// <summary>
-        /// Finishes rendering
-        /// </summary>
-        protected virtual void RenderFinish() { }
-
-        /// <summary>
-        /// Finishes rendering with a warning
-        /// </summary>
-        protected virtual void RenderFinishWithWarning(string errorMessage) { }
-
-        /// <summary>
-        /// Finishes rendering with an error
-        /// </summary>
-        protected virtual void RenderFinishWithError(string errorMessage) { }
-
-        /// <summary>
         /// Adds anchoring information to the Xml used to serialize the gadget
         /// </summary>
         /// <returns>string</returns>
@@ -523,29 +495,6 @@ namespace EpiDashboard
             }
 
             return str;
-        }
-
-        /// <summary>
-        /// Adds anchoring information to the Xml used to serialize the gadget
-        /// </summary>
-        /// <returns>string</returns>
-        protected void SerializeAnchors(XmlElement gadgetElement)
-        {
-            XmlDocument doc = gadgetElement.OwnerDocument;
-
-            if (this.AnchorLeft != null)
-            {
-                XmlElement anchorLeft = doc.CreateElement("anchorLeft");
-                anchorLeft.InnerText = ((IGadget)AnchorLeft).UniqueIdentifier.ToString();
-                gadgetElement.AppendChild(anchorLeft);
-            }
-
-            if (this.AnchorTop != null)
-            {
-                XmlElement anchorTop = doc.CreateElement("anchorTop");
-                anchorTop.InnerText = ((IGadget)AnchorTop).UniqueIdentifier.ToString();
-                gadgetElement.AppendChild(anchorTop);
-            }
         }
 
         /// <summary>
@@ -705,15 +654,6 @@ namespace EpiDashboard
                 headerPanel.GadgetConfigButtonClicked -= new GadgetConfigButtonHandler(ShowHideConfigPanel);
                 headerPanel.GadgetDescriptionButtonClicked -= new GadgetDescriptionButtonHandler(ShowHideDescriptionPanel);
                 headerPanel.GadgetFilterButtonClicked -= new GadgetFilterButtonHandler(ShowCustomFilterDialog);
-            }
-
-            if (worker != null && worker.WorkerSupportsCancellation)
-            {
-                worker.CancelAsync();
-            }
-            if (baseWorker != null && baseWorker.WorkerSupportsCancellation)
-            {
-                baseWorker.CancelAsync();
             }
 
             if (GadgetClosing != null)
@@ -954,7 +894,15 @@ namespace EpiDashboard
             StrataExpanderList = new List<Expander>();
             strataCount = 0;
 
-            
+            GadgetOptions = new GadgetParameters();
+            GadgetOptions.InputVariableList = new Dictionary<string, string>();
+            GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
+            GadgetOptions.ShouldIncludeMissing = false;
+            GadgetOptions.ShouldSortHighToLow = false;
+            GadgetOptions.ShouldUseAllPossibleValues = false;
+            GadgetOptions.StrataVariableNames = new List<string>();
+            GadgetOptions.PSUVariableName = string.Empty;
+            GadgetOptions.CustomFilter = string.Empty;
 
             this.MouseEnter += new MouseEventHandler(GadgetBase_MouseEnter);
             this.MouseLeave += new MouseEventHandler(GadgetBase_MouseLeave);

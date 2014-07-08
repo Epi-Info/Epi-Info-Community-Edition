@@ -432,6 +432,9 @@
   <data name="btnKeyFields.Text" xml:space="preserve">
     <value>Set Match Keys</value>
   </data>
+  <data name="btnKeyFields.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;btnKeyFields.Name" xml:space="preserve">
     <value>btnKeyFields</value>
   </data>
