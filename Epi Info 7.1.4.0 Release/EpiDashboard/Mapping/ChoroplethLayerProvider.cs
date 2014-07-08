@@ -38,7 +38,8 @@ namespace EpiDashboard.Mapping
         private string dataKey;
         private string valueField;
         private Guid layerId;
-        private List<SolidColorBrush> colors;
+        private Color lowColor;
+        private Color highColor;
         private int classCount;
 
         public ChoroplethLayerProvider(Map myMap)
@@ -47,6 +48,7 @@ namespace EpiDashboard.Mapping
             this.layerId = Guid.NewGuid();
         }
 
+        List<List<SolidColorBrush>> ColorList = new List<List<SolidColorBrush>>();
         int _colorShadeIndex = 0;
         
         int _lastGeneratedClassCount = 0;
@@ -151,35 +153,35 @@ namespace EpiDashboard.Mapping
             return d;
         }
 
-        private void CreateColorList1(Color lowColor, Color highColor)
+        private void CreateColorList(Color lowColor, Color highColor)
         {
-            //LinearGradientBrush gradientBrush = new LinearGradientBrush(highColor, lowColor, 0);
-            //Rectangle temp = new Rectangle();
-            //temp.Width = 256;
-            //temp.Height = 256;
-            //temp.Fill = gradientBrush;
+            LinearGradientBrush gradientBrush = new LinearGradientBrush(highColor, lowColor, 0);
+            Rectangle temp = new Rectangle();
+            temp.Width = 256;
+            temp.Height = 256;
+            temp.Fill = gradientBrush;
             
-            //ColorList = new List<List<SolidColorBrush>>();
+            ColorList = new List<List<SolidColorBrush>>();
 
-            //List<SolidColorBrush> BlueShades = new List<SolidColorBrush>();
+            List<SolidColorBrush> BlueShades = new List<SolidColorBrush>();
 
-            //int rgbFactor = 255 / classCount;
-            //Random rnd = new Random();
-            //for (int j = 0; j < 256; j = j + rgbFactor)
-            //{
-            //    Color color = Color.FromRgb((byte)rnd.Next(0, 255), (byte)rnd.Next(0, 255), (byte)rnd.Next(0, 255));// GetColorAtPoint(temp, new Point(j, j));
-            //    color.A = 0xF0;
-            //    BlueShades.Add(new SolidColorBrush(color));
-            //}
+            int rgbFactor = 255 / classCount;
 
-            //ColorList.Add(BlueShades);
+            for (int j = 0; j < 256; j = j + rgbFactor)
+            {
+                Color color = GetColorAtPoint(temp, new Point(j, j));
+                color.A = 0xF0;
+                BlueShades.Add(new SolidColorBrush(color));
+            }
 
-            //foreach (List<SolidColorBrush> brushList in ColorList)
-            //{
-            //    brushList.Reverse();
-            //}
+            ColorList.Add(BlueShades);
 
-            //_lastGeneratedClassCount = classCount;
+            foreach (List<SolidColorBrush> brushList in ColorList)
+            {
+                brushList.Reverse();
+            }
+
+            _lastGeneratedClassCount = classCount;
         }
 
         private int GetRangeIndex(double val, List<double> ranges)
@@ -268,7 +270,7 @@ namespace EpiDashboard.Mapping
                     Graphic graphic = record.ToGraphic();
                     if (graphic != null)
                     {
-                        graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(240, 255, 255, 255)));
+                        graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(192, 255, 255, 255)));
                         graphicsLayer.Graphics.Add(graphic);
                     }
                     counter += rgbFactor;
@@ -292,7 +294,6 @@ namespace EpiDashboard.Mapping
                 {
                     myMap.Extent = graphicsLayer.FullExtent;
                 }
-                graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
                 return new object[] { fileName, graphicsLayer.Graphics[0].Attributes };
             }
             else return null;
@@ -351,14 +352,12 @@ namespace EpiDashboard.Mapping
                 int recCount = shapeFileReader.Records.Count;
                 int rgbFactor = 255 / recCount;
                 int counter = 0;
-                //int minPoints = shapeFileReader.Records.Min(record => record.NumberOfPoints);
-                //double meanPoints = shapeFileReader.Records.Average(record => record.NumberOfPoints);
                 foreach (ShapeFileReader.ShapeFileRecord record in shapeFileReader.Records)
                 {
                     Graphic graphic = record.ToGraphic();
                     if (graphic != null)
                     {
-                        graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(240, 255, 255, 255)));
+                        graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(192, 255, 255, 255)));
                         graphicsLayer.Graphics.Add(graphic);
                     }
                     counter += rgbFactor;
@@ -375,7 +374,6 @@ namespace EpiDashboard.Mapping
                         myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
                     }
                 }
-                graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
                 return new object[] { ofd.FileName, graphicsLayer.Graphics[0].Attributes };
             }
             else return null;
@@ -396,11 +394,11 @@ namespace EpiDashboard.Mapping
         {
             if (dashboardHelper != null)
             {
-                SetShapeRangeValues(dashboardHelper, shapeKey, dataKey, valueField, colors, classCount);
+                SetShapeRangeValues(dashboardHelper, shapeKey, dataKey, valueField, lowColor, highColor, classCount);
             }
         }
 
-        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount)
+        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, Color lowColor, Color highColor, int classCount)
         {
             try
             {
@@ -409,7 +407,8 @@ namespace EpiDashboard.Mapping
                 this.shapeKey = shapeKey;
                 this.dataKey = dataKey;
                 this.valueField = valueField;
-                this.colors = colors;
+                this.lowColor = lowColor;
+                this.highColor = highColor;
 
                 List<string> columnNames = new List<string>();
                 if (dashboardHelper.IsUsingEpiProject)
@@ -449,6 +448,7 @@ namespace EpiDashboard.Mapping
 
 
                 GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+                CreateColorList(lowColor, highColor);
                 ThematicItem thematicItem = new ThematicItem() { Name = dataKey, Description = dataKey, CalcField = "" };
                 List<double> valueList = new List<double>();
                 for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
@@ -514,6 +514,8 @@ namespace EpiDashboard.Mapping
                     thematicItem.RangeStarts.Add(value);
                 }
 
+                // Create graphic features and set symbol using the class range which contains the value 
+                List<SolidColorBrush> brushList = ColorList[_colorShadeIndex];
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
 
@@ -544,7 +546,7 @@ namespace EpiDashboard.Mapping
 
                         SimpleFillSymbol symbol = new SimpleFillSymbol()
                         {
-                            Fill = graphicValue == Double.PositiveInfinity ? new SolidColorBrush(Colors.Transparent) : colors[brushIndex],
+                            Fill = graphicValue == Double.PositiveInfinity ? new SolidColorBrush(Colors.Transparent) : brushList[brushIndex],
                             BorderBrush = new SolidColorBrush(Colors.Black),
                             BorderThickness = 1
                         };
@@ -596,7 +598,7 @@ namespace EpiDashboard.Mapping
                             Width = 20,
                             Height = 20,
                             Stroke = new SolidColorBrush(Colors.Black),
-                            Fill = colors[c]
+                            Fill = brushList[c]
                         };
 
                         TextBlock classTextBlock = new TextBlock();

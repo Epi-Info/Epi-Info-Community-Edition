@@ -25,7 +25,7 @@
             <TextBlock x:Name="tblockStrataTitle" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Margin="0, 20, 0, 0" />
         </StackPanel>
 <!--START OF XYChart-->
-        <!--<Canvas x:Name="yAxisLabelCanvas" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="Auto" Margin="6, 0, -20, 0" >
+        <Canvas x:Name="yAxisLabelCanvas" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="Auto" Margin="6, 0, -20, 0" >
             <TextBlock x:Name="tblockYAxisLabel" FontWeight="DemiBold" Canvas.Bottom="0" Canvas.Left="0" TextAlignment="Center" Margin="0,0,0,-20" Text="Count" Visibility="Collapsed" >
                 <TextBlock.RenderTransform>
                     <TransformGroup>
@@ -33,9 +33,9 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-        </Canvas>-->
+        </Canvas>
 
-        <charting:XYChart x:Name="xyChart" Background="White" DefaultGridLinesVisible="True" DefaultStripesVisible="True" DefaultCoordinateSystemFrameVisible="True" XPath="X" Grid.Row="1" Grid.Column="0" DataStructureCreated="xyChart_DataStructureCreated">
+        <charting:XYChart x:Name="xyChart" Background="White" DefaultGridLinesVisible="True" DefaultStripesVisible="True" DefaultCoordinateSystemFrameVisible="True" XPath="X" Grid.Row="0" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated">
             <charting:XYChart.XAxisArea>
                 <charting:AxisCoordinates x:Name="xAxisCoordinates" Angle="0">
                     <!--<charting:NumericCoordinates />-->
@@ -48,20 +48,10 @@
                 </charting:ChartLabel>
             </charting:XYChart.XAxisArea>
 
-            <charting:XYChart.YAxisArea>
-                <charting:AxisCoordinates x:Name="YAxisCoordinates">
-                </charting:AxisCoordinates>
-                <charting:ChartLabel x:Name="labelYAxis" Orientation="Vertical" >
-                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="tblockYAxisLabel" FontWeight="DemiBold" Visibility="Collapsed" TextAlignment="Center"></TextBlock>
-                    </StackPanel>
-                </charting:ChartLabel>
-            </charting:XYChart.YAxisArea>
-
             <charting:XYChart.Y2AxisArea>
                 <charting:AxisCoordinates x:Name="y2AxisCoordinates" AxisId="PercentAxis" />
+                
             </charting:XYChart.Y2AxisArea>
-            
             <charting:XYChart.Axes>
                 <charting:Axis Id="YAxis" x:Name="yAxis" UseReferenceValue="False" />
                 <charting:Axis Id="PercentAxis" x:Name="y2Axis" MinValue="0" MaxValue="100" UseReferenceValue="False" />

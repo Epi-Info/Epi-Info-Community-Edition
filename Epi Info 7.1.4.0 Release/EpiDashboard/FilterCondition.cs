@@ -327,11 +327,18 @@ namespace EpiDashboard
                     friendlyHighValue = DateTime.Parse(friendlyHighValue, System.Globalization.CultureInfo.CurrentCulture).ToString("d", System.Globalization.CultureInfo.InvariantCulture);
                     friendlyLowValue = DateTime.Parse(friendlyLowValue, System.Globalization.CultureInfo.CurrentCulture).ToString("d", System.Globalization.CultureInfo.InvariantCulture);
                 }
-                else if(!String.IsNullOrEmpty(value.Trim()))
+                else 
                 {
-                    value = "#" + DateTime.Parse(value.Trim('#')).ToString("s") + "#";
-
-                    friendlyValue = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture).ToString("d", System.Globalization.CultureInfo.InvariantCulture);
+                    if (String.IsNullOrEmpty(this.value))
+                    {
+                        this.value = String.Empty;
+                        this.friendlyValue = String.Empty;
+                    }
+                    else
+                    {
+                        value = "#" + DateTime.Parse(value.Trim('#')).ToString("s") + "#";
+                        friendlyValue = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture).ToString("d", System.Globalization.CultureInfo.InvariantCulture);
+                    }
                 }
             }
             
@@ -440,10 +447,12 @@ namespace EpiDashboard
 
                     this.friendlyCondition = string.Format(SharedStrings.FRIENDLY_CONDITION_DATA_FILTER_BETWEEN, columnName, friendlyLowValue, friendlyHighValue);
                 }
-                else if (!String.IsNullOrEmpty(this.value.Trim()))
+                else
                 {
                     this.value = "#" + DateTime.Parse(this.value.Trim('#')).ToString(System.Globalization.CultureInfo.InvariantCulture) + "#";
+
                     this.friendlyValue = DateTime.Parse(this.friendlyValue, System.Globalization.CultureInfo.InvariantCulture).ToString("d", System.Globalization.CultureInfo.CurrentCulture);
+
                     this.friendlyCondition = string.Format(SharedStrings.FRIENDLY_CONDITION_DATA_FILTER, columnName, friendlyOperand, friendlyValue);                    
                 }
             }

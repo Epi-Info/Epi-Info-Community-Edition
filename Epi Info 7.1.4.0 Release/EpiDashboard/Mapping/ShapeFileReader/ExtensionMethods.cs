@@ -230,7 +230,6 @@ namespace EpiDashboard.Mapping.ShapeFileReader
 
         private static ESRI.ArcGIS.Client.Geometry.Geometry GetPolygon( ShapeFileRecord record )
         {
-            Random rnd = new Random();
             Polygon polygon = new Polygon();
             SpatialReference geoReference = new SpatialReference(4326);
             try
@@ -262,31 +261,28 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                     }
                     for (int j = start; j < end; j++)
                     {
-                        if (record.NumberOfPoints < 5000 || rnd.Next(0, 5) == 1)
+                        System.Windows.Point point = record.Points[j];
+                        if (isWebMercator)
                         {
-                            System.Windows.Point point = record.Points[j];
-                            if (isWebMercator)
-                            {
-                                points.Add(new MapPoint(point.X, point.Y));
-                            }
-                            else
-                            {
-                                points.Add(new MapPoint(point.X, point.Y, geoReference));
-                            }
-                            if (leftMostPoint == 0)
-                            {
-                                leftMostPoint = point.X;
-                                rightMostPoint = point.X;
-                                topMostPoint = point.Y;
-                                bottomMostPoint = point.Y;
-                            }
-                            else
-                            {
-                                if (point.X < leftMostPoint) leftMostPoint = point.X;
-                                if (point.X > rightMostPoint) rightMostPoint = point.X;
-                                if (point.Y < topMostPoint) topMostPoint = point.Y;
-                                if (point.Y > bottomMostPoint) bottomMostPoint = point.Y;
-                            }
+                            points.Add(new MapPoint(point.X, point.Y));
+                        }
+                        else
+                        {
+                            points.Add(new MapPoint(point.X, point.Y, geoReference));
+                        }
+                        if (leftMostPoint == 0)
+                        {
+                            leftMostPoint = point.X;
+                            rightMostPoint = point.X;
+                            topMostPoint = point.Y;
+                            bottomMostPoint = point.Y;
+                        }
+                        else
+                        {
+                            if (point.X < leftMostPoint) leftMostPoint = point.X;
+                            if (point.X > rightMostPoint) rightMostPoint = point.X;
+                            if (point.Y < topMostPoint) topMostPoint = point.Y;
+                            if (point.Y > bottomMostPoint) bottomMostPoint = point.Y;
                         }
                     }
 

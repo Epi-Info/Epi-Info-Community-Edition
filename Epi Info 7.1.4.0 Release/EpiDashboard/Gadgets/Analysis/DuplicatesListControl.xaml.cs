@@ -771,7 +771,7 @@ namespace EpiDashboard.Gadgets.Analysis
         /// </summary>
         public override void RefreshResults()
         {
-            if (!LoadingCombos && Parameters != null && Parameters.ColumnNames.Count > 0)
+            if (!LoadingCombos && Parameters != null)
             {
                 if (IsHostedByEnter)
                 {

@@ -9,20 +9,19 @@ namespace EpiDashboard
     /// <summary>
     /// A class used to encompass input parameters, delegates, and events
     /// </summary>
-    [Obsolete("Use gadget-specific parameters objects starting in 7.1.4.0", false)]
-    public class GadgetParameters : GadgetParametersBase
+    public class GadgetParameters
     {
         #region Events
-        public new event GadgetStatusUpdateHandler GadgetStatusUpdate;
-        //public event GadgetCheckForCancellationHandler GadgetCheckForCancellation;
-        //public event SetGadgetStatusHandler GadgetCheckForProgress;
+        public event GadgetStatusUpdateHandler GadgetStatusUpdate;
+        public event GadgetCheckForCancellationHandler GadgetCheckForCancellation;
+        public event SetGadgetStatusHandler GadgetCheckForProgress;
         #endregion // Events
 
         #region Constructors
         /// <summary>
         /// Constructor
         /// </summary>
-        public GadgetParameters() : base()
+        public GadgetParameters()
         {
             ColumnNames = new List<string>();
             GadgetStatusUpdate = null;
@@ -38,7 +37,6 @@ namespace EpiDashboard
             WeightVariableName = string.Empty;
             StrataVariableNames = new List<string>();
             ShouldIgnoreRowLimits = false;
-            SortVariables = new Dictionary<string, SortOrder>();
         }
 
         /// <summary>
@@ -62,19 +60,6 @@ namespace EpiDashboard
             WeightVariableName = parameters.WeightVariableName;
             StrataVariableNames = parameters.StrataVariableNames;
             ShouldIgnoreRowLimits = parameters.ShouldIgnoreRowLimits;
-            SortVariables = parameters.SortVariables;
-        }
-
-        /// <summary>
-        /// Copy Constructor
-        /// </summary>
-        public GadgetParameters(IGadgetParameters parameters)
-        {
-            InputVariableList = parameters.InputVariableList;
-            CustomFilter = parameters.CustomFilter;
-            CustomSortColumnName = parameters.CustomSortColumnName;
-            StrataVariableNames = parameters.StrataVariableNames;
-            SortVariables = parameters.SortVariables;
         }
         #endregion // Constructors
 
@@ -83,16 +68,6 @@ namespace EpiDashboard
         /// Gets/sets the number of rows that should be displayed
         /// </summary>
         public int? RowsToDisplay { get; set; }
-
-        /// <summary>
-        /// Gets/sets the desired height of the gadget assuming no stratification
-        /// </summary>
-        public double? Height { get; set; }
-
-        /// <summary>
-        /// Gets/sets the desired width of the gadget assuming no stratification
-        /// </summary>
-        public double? Width { get; set; }
 
         /// <summary>
         /// Gets/sets the input variable list
@@ -176,5 +151,44 @@ namespace EpiDashboard
         /// <remarks>Only applicable to certain methods</remarks>
         public string CustomSortColumnName { get; set; }
         #endregion // Public Properties
+
+        #region Internal Methods
+        /// <summary>
+        /// Sends a status message back to the gadget
+        /// </summary>
+        /// <param name="statusMessage">The status message to display</param>
+        internal void UpdateGadgetStatus(string statusMessage)
+        {
+            if (GadgetStatusUpdate != null)
+            {
+                GadgetStatusUpdate(statusMessage);
+            }
+        }
+
+        /// <summary>
+        /// Sends a progress update back to the gadget
+        /// </summary>
+        /// <param name="progress">The amount of progress</param>
+        internal void UpdateGadgetProgress(double progress)
+        {
+            if (GadgetCheckForProgress != null)
+            {
+                GadgetCheckForProgress("", progress);
+            }
+        }
+
+        /// <summary>
+        /// Used to check whether or not the request to generate output has been cancelled
+        /// </summary>
+        /// <returns>bool</returns>
+        internal bool IsRequestCancelled()
+        {
+            if (GadgetCheckForCancellation != null)
+            {
+                return GadgetCheckForCancellation();
+            }
+            return false;
+        }
+        #endregion // Internal Methods
     }
 }

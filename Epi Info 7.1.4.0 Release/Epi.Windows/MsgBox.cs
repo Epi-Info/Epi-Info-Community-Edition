@@ -308,11 +308,11 @@ namespace Epi.Windows
         /// <returns>The user's response from the dialog</returns>
 		public static DialogResult Show(string text,string caption,MessageBoxButtons buttons)
 		{
-            PrepareToShow();
-            Form topForm = TopMostMessageBox.GetTopMostInstance();
-            DialogResult dialogResult = MessageBox.Show(topForm, text, caption, buttons);
-            topForm.Dispose();
-            return dialogResult;
+			PrepareToShow();
+			return MessageBox.Show(
+				text, 
+				caption,
+				buttons);
 		}
 
 		/// <summary>
@@ -325,11 +325,11 @@ namespace Epi.Windows
         /// <returns>The user's response from the dialog</returns>
 		public static DialogResult Show(string text,string caption,MessageBoxButtons buttons, MessageBoxIcon icon)
 		{
-            PrepareToShow();
-            Form topForm = TopMostMessageBox.GetTopMostInstance();
-            DialogResult dialogResult = MessageBox.Show(topForm, text, caption, buttons, icon);
-            topForm.Dispose();
-            return dialogResult;
+			PrepareToShow();
+			return MessageBox.Show(
+				text, 
+				caption,
+				buttons,icon);
 		}
 
 		/// <summary>
@@ -341,10 +341,9 @@ namespace Epi.Windows
 		public static DialogResult Show(string text,string caption)
 		{
 			PrepareToShow();
-            Form topForm = TopMostMessageBox.GetTopMostInstance();
-            DialogResult dialogResult = MessageBox.Show(topForm, text, caption);
-            topForm.Dispose();
-            return dialogResult;
+			return MessageBox.Show(
+				text, 
+				caption);
 		}
 
 		#endregion Public Methods
@@ -370,27 +369,51 @@ namespace Epi.Windows
 			Cursor.Current = Cursors.Default;
 		}
 
+        ///// <summary>
+        ///// Ignores any exceptions occuring during localization.
+        ///// Required for error reporting only.
+        ///// </summary>
+        ///// <param name="str1"></param>
+        ///// <param name="str2"></param>
+        ///// <returns></returns>
+        //private static string LocalizeMessage(string str1, string str2)
+        //{
+        //    string localizedMessage = string.Empty;
+        //    try
+        //    {
+        //        localizedMessage = Localization.LocalizeMessage(str1, str2);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // Eat the exceptiion and return a simple string concatenation;
+        //        localizedMessage = str1 + " : " + str2;
+        //    }
+        //    return localizedMessage;
+        //}
+
+        ///// <summary>
+        ///// Ignores any exceptions occuring during localization.
+        ///// Required for error reporting only.
+        ///// </summary>
+        ///// <param name="str1"></param>
+        ///// <param name="str2"></param>
+        ///// <returns></returns>
+        //private static string LocalizeString(string str1)
+        //{
+        //    string localizedString = str1;
+        //    try
+        //    {
+        //        localizedString = Localization.LocalizeString(str1);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // Eat the exceptiion and return the original string;
+        //    }
+        //    return localizedString;
+        //}
+
+
 		#endregion Private Methods
 
 	}
-
-    static public class TopMostMessageBox
-    {
-        static public Form GetTopMostInstance()
-        {
-            Form topmostForm = new Form();
-
-            topmostForm.Size = new System.Drawing.Size(1, 1);
-            topmostForm.StartPosition = FormStartPosition.Manual;
-            System.Drawing.Rectangle screenRect = SystemInformation.VirtualScreen;
-
-            topmostForm.Location = new System.Drawing.Point(screenRect.Bottom + 10, screenRect.Right + 10);
-            topmostForm.Show();
-            topmostForm.Focus();
-            topmostForm.BringToFront();
-            topmostForm.TopMost = true;
-
-            return topmostForm;
-        }
-    }
 }

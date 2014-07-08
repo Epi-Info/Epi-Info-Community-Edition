@@ -183,43 +183,42 @@ namespace EpiDashboard
                 RenderMeansHeaderDelegate renderHeader = new RenderMeansHeaderDelegate(RenderMeansHeader);
                 DrawMeansBordersDelegate drawBorders = new DrawMeansBordersDelegate(DrawOutputGridBorders);
 
-                //GadgetOptions.ShouldIgnoreRowLimits = true;
-                //GadgetOptions.ShouldIncludeFullSummaryStatistics = true;                
+                GadgetOptions.ShouldIgnoreRowLimits = true;
+                GadgetOptions.ShouldIncludeFullSummaryStatistics = true;                
 
                 string precisionFormat = "F4";
-                (Parameters as MeansParameters).IncludeFullSummaryStatistics = true;
 
-                //if (GadgetOptions.InputVariableList.ContainsKey("precision"))
-                //{
-                //    precisionFormat = GadgetOptions.InputVariableList["precision"];
-                //    precisionFormat = "F" + precisionFormat;
-                //}
+                if (GadgetOptions.InputVariableList.ContainsKey("precision"))
+                {
+                    precisionFormat = GadgetOptions.InputVariableList["precision"];
+                    precisionFormat = "F" + precisionFormat;
+                }
 
-                string meansVar = Parameters.ColumnNames[0];
-                string weightVar = (Parameters as MeansParameters).WeightVariableName;
+                string meansVar = GadgetOptions.MainVariableName;
+                string weightVar = GadgetOptions.WeightVariableName;
                 string strataVar = string.Empty;
                 bool hasData = false;
-                if ((Parameters as MeansParameters).StrataVariableNames != null && (Parameters as MeansParameters).StrataVariableNames.Count > 0)
+                if (GadgetOptions.StrataVariableNames != null && GadgetOptions.StrataVariableNames.Count > 0)
                 {
-                    strataVar = (Parameters as MeansParameters).StrataVariableNames[0];
+                    strataVar = GadgetOptions.StrataVariableNames[0];
                 }
 
                 bool showAnova = true;
-                //if (GadgetOptions.InputVariableList.ContainsKey("showanova"))
-                //{
-                //    bool.TryParse(GadgetOptions.InputVariableList["showanova"], out showAnova);
-                //}
+                if (GadgetOptions.InputVariableList.ContainsKey("showanova"))
+                {
+                    bool.TryParse(GadgetOptions.InputVariableList["showanova"], out showAnova);
+                }
 
-                string crosstabVar = (Parameters as MeansParameters).CrosstabVariableName;
+                string crosstabVar = GadgetOptions.CrosstabVariableName;
 
-                //if (string.IsNullOrEmpty(crosstabVar))
-                //{
-                //    GadgetOptions.InputVariableList.Add("NeedsOutputGrid", "false");
-                //}
-                //else
-                //{
-                //    GadgetOptions.InputVariableList.Add("NeedsOutputGrid", "true");
-                //}
+                if (string.IsNullOrEmpty(crosstabVar))
+                {
+                    GadgetOptions.InputVariableList.Add("NeedsOutputGrid", "false");
+                }
+                else
+                {
+                    GadgetOptions.InputVariableList.Add("NeedsOutputGrid", "true");
+                }
 
                 List<string> stratas = new List<string>();
                 if (!string.IsNullOrEmpty(strataVar))
@@ -231,19 +230,19 @@ namespace EpiDashboard
                     RequestUpdateStatusDelegate requestUpdateStatus = new RequestUpdateStatusDelegate(RequestUpdateStatusMessage);
                     CheckForCancellationDelegate checkForCancellation = new CheckForCancellationDelegate(IsCancelled);
 
-                    //GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
-                    //GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
+                    GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
+                    GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
 
-                    //if (this.DataFilters != null && this.DataFilters.Count > 0)
-                    //{
-                    //    GadgetOptions.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
-                    //}
-                    //else
-                    //{
-                    //    GadgetOptions.CustomFilter = string.Empty;
-                    //}
+                    if (this.DataFilters != null && this.DataFilters.Count > 0)
+                    {
+                        GadgetOptions.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
+                    }
+                    else
+                    {
+                        GadgetOptions.CustomFilter = string.Empty;
+                    }
 
-                    Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(Parameters);
+                    Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(GadgetOptions);
                     if (stratifiedFrequencyTables == null || stratifiedFrequencyTables.Count == 0)
                     {
                         this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), DashboardSharedStrings.GADGET_MSG_NO_DATA);
@@ -371,11 +370,6 @@ namespace EpiDashboard
                                     string statsQ1 = Epi.SharedStrings.UNDEFINED;
                                     string statsQ3 = Epi.SharedStrings.UNDEFINED;
 
-                                    if (Convert.ToInt32(((MeansParameters)Parameters).Precision) >= 0)
-                                    {
-                                        precisionFormat = "F" + ((MeansParameters)Parameters).Precision;
-                                    }
-
                                     if (means.sum != null)
                                         statsSum = ((double)means.sum).ToString(precisionFormat);
                                     if (means.mean != null)
@@ -489,7 +483,7 @@ namespace EpiDashboard
                     {
                         for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
                         {
-                            if (((MeansParameters)Parameters).columnsToHide.Contains(i))
+                            if (columnsToHide.Contains(i))
                             {
                                 grid.ColumnDefinitions[i].Width = new GridLength(0);
                             }
@@ -926,16 +920,8 @@ namespace EpiDashboard
                     Grid.SetRow(txtMethod, 1);
                     Grid.SetColumn(txtMethod, 1);
 
-                    String precisionFormat = "N4";
-
-                    if (Convert.ToInt32(((MeansParameters)Parameters).Precision) >= 0)
-                    {
-                        precisionFormat = "N" + ((MeansParameters)Parameters).Precision;
-                    }
-
-
                     TextBlock txtMeanP = new TextBlock();
-                    txtMeanP.Text = stats.meansDiff.ToString(precisionFormat);
+                    txtMeanP.Text = stats.meansDiff.ToString("N4");
                     txtMeanP.Margin = new Thickness(4, 0, 4, 0);
                     txtMeanP.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     txtMeanP.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -944,7 +930,7 @@ namespace EpiDashboard
                     Grid.SetColumn(txtMeanP, 2);
 
                     TextBlock txtLCLP = new TextBlock();
-                    txtLCLP.Text = stats.equalLCLMean.ToString(precisionFormat);
+                    txtLCLP.Text = stats.equalLCLMean.ToString("N4");
                     txtLCLP.Margin = new Thickness(4, 0, 4, 0);
                     txtLCLP.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     txtLCLP.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -953,7 +939,7 @@ namespace EpiDashboard
                     Grid.SetColumn(txtLCLP, 3);
 
                     TextBlock txtUCLP = new TextBlock();
-                    txtUCLP.Text = stats.equalUCLMean.ToString(precisionFormat);
+                    txtUCLP.Text = stats.equalUCLMean.ToString("N4");
                     txtUCLP.Margin = new Thickness(4, 0, 4, 0);
                     txtUCLP.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     txtUCLP.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -962,7 +948,7 @@ namespace EpiDashboard
                     Grid.SetColumn(txtUCLP, 4);
 
                     TextBlock txtStdDev = new TextBlock();
-                    txtStdDev.Text = stats.stdDevDiff.ToString(precisionFormat);
+                    txtStdDev.Text = stats.stdDevDiff.ToString("N4");
                     txtStdDev.Margin = new Thickness(4, 0, 4, 0);
                     txtStdDev.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     txtStdDev.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -980,7 +966,7 @@ namespace EpiDashboard
                     Grid.SetColumn(txtMethodS, 1);
 
                     TextBlock txtMeanS = new TextBlock();
-                    txtMeanS.Text = stats.meansDiff.ToString(precisionFormat);
+                    txtMeanS.Text = stats.meansDiff.ToString("N4");
                     txtMeanS.Margin = new Thickness(4, 0, 4, 0);
                     txtMeanS.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     txtMeanS.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -989,7 +975,7 @@ namespace EpiDashboard
                     Grid.SetColumn(txtMeanS, 2);
 
                     TextBlock txtLCLS = new TextBlock();
-                    txtLCLS.Text = stats.unequalLCLMean.ToString(precisionFormat);
+                    txtLCLS.Text = stats.unequalLCLMean.ToString("N4");
                     txtLCLS.Margin = new Thickness(4, 0, 4, 0);
                     txtLCLS.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     txtLCLS.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -998,7 +984,7 @@ namespace EpiDashboard
                     Grid.SetColumn(txtLCLS, 3);
 
                     TextBlock txtUCLS = new TextBlock();
-                    txtUCLS.Text = stats.unequalUCLMean.ToString(precisionFormat);
+                    txtUCLS.Text = stats.unequalUCLMean.ToString("N4");
                     txtUCLS.Margin = new Thickness(4, 0, 4, 0);
                     txtUCLS.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     txtUCLS.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -1161,7 +1147,7 @@ namespace EpiDashboard
                     Grid.SetColumn(txtDFP, 2);
 
                     TextBlock txtDFS = new TextBlock();
-                    txtDFS.Text = stats.SatterthwaiteDF.ToString(precisionFormat);
+                    txtDFS.Text = stats.SatterthwaiteDF.ToString("N2");
                     txtDFS.Margin = new Thickness(4, 0, 4, 0);
                     txtDFS.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     txtDFS.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -1170,7 +1156,7 @@ namespace EpiDashboard
                     Grid.SetColumn(txtDFS, 2);
 
                     TextBlock txtTStatP = new TextBlock();
-                    txtTStatP.Text = stats.tStatistic.ToString(precisionFormat);
+                    txtTStatP.Text = stats.tStatistic.ToString("N4");
                     txtTStatP.Margin = new Thickness(4, 0, 4, 0);
                     txtTStatP.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     txtTStatP.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -1179,7 +1165,7 @@ namespace EpiDashboard
                     Grid.SetColumn(txtTStatP, 3);
 
                     TextBlock txtTStatS = new TextBlock();
-                    txtTStatS.Text = stats.tStatisticUnequal.ToString(precisionFormat);
+                    txtTStatS.Text = stats.tStatisticUnequal.ToString("N4");
                     txtTStatS.Margin = new Thickness(4, 0, 4, 0);
                     txtTStatS.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     txtTStatS.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -1188,7 +1174,7 @@ namespace EpiDashboard
                     Grid.SetColumn(txtTStatS, 3);
 
                     TextBlock txtPValueP = new TextBlock();
-                    txtPValueP.Text = stats.pEqual.ToString(precisionFormat);
+                    txtPValueP.Text = stats.pEqual.ToString("N4");
                     txtPValueP.Margin = new Thickness(4, 0, 4, 0);
                     txtPValueP.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     txtPValueP.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -1197,7 +1183,7 @@ namespace EpiDashboard
                     Grid.SetColumn(txtPValueP, 4);
 
                     TextBlock txtPValueS = new TextBlock();
-                    txtPValueS.Text = stats.pUneqal.ToString(precisionFormat);
+                    txtPValueS.Text = stats.pUneqal.ToString("N4");
                     txtPValueS.Margin = new Thickness(4, 0, 4, 0);
                     txtPValueS.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                     txtPValueS.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -1396,15 +1382,8 @@ namespace EpiDashboard
             Grid.SetRow(lblF, 0);
             Grid.SetColumn(lblF, 4);
 
-            String roundingFormat = "N4";
-
-            if (Convert.ToInt32(((MeansParameters)Parameters).Precision) >= 0)
-            {
-                roundingFormat = "N" + ((MeansParameters)Parameters).Precision;
-            }
-
             TextBlock txtSSBetween = new TextBlock();
-            txtSSBetween.Text = stats.ssBetween.Value.ToString(roundingFormat);
+            txtSSBetween.Text = stats.ssBetween.Value.ToString("N4");
             txtSSBetween.Margin = new Thickness(4, 0, 4, 0);
             txtSSBetween.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
             txtSSBetween.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -1413,7 +1392,7 @@ namespace EpiDashboard
             Grid.SetColumn(txtSSBetween, 1);
 
             TextBlock txtSSWithin = new TextBlock();
-            txtSSWithin.Text = stats.ssWithin.Value.ToString(roundingFormat);
+            txtSSWithin.Text = stats.ssWithin.Value.ToString("N4");
             txtSSWithin.Margin = new Thickness(4, 0, 4, 0);
             txtSSWithin.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
             txtSSWithin.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -1422,7 +1401,7 @@ namespace EpiDashboard
             Grid.SetColumn(txtSSWithin, 1);
 
             TextBlock txtSSTotal = new TextBlock();
-            txtSSTotal.Text = (stats.ssWithin.Value + stats.ssBetween.Value).ToString(roundingFormat);
+            txtSSTotal.Text = (stats.ssWithin.Value + stats.ssBetween.Value).ToString("N4");
             txtSSTotal.Margin = new Thickness(4, 0, 4, 0);
             txtSSTotal.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
             txtSSTotal.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -1458,7 +1437,7 @@ namespace EpiDashboard
             Grid.SetColumn(txtDFTotal, 2);
 
             TextBlock txtMSBetween = new TextBlock();
-            txtMSBetween.Text = stats.msBetween.Value.ToString(roundingFormat);
+            txtMSBetween.Text = stats.msBetween.Value.ToString("N4");
             txtMSBetween.Margin = new Thickness(4, 0, 4, 0);
             txtMSBetween.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
             txtMSBetween.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -1467,7 +1446,7 @@ namespace EpiDashboard
             Grid.SetColumn(txtMSBetween, 3);
 
             TextBlock txtMSWithin = new TextBlock();
-            txtMSWithin.Text = stats.msWithin.Value.ToString(roundingFormat);
+            txtMSWithin.Text = stats.msWithin.Value.ToString("N4");
             txtMSWithin.Margin = new Thickness(4, 0, 4, 0);
             txtMSWithin.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
             txtMSWithin.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -1476,7 +1455,7 @@ namespace EpiDashboard
             Grid.SetColumn(txtMSWithin, 3);
 
             TextBlock txtFStat = new TextBlock();
-            txtFStat.Text = stats.fStatistic.Value.ToString(roundingFormat);
+            txtFStat.Text = stats.fStatistic.Value.ToString("N4");
             txtFStat.Margin = new Thickness(4, 0, 4, 0);
             txtFStat.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             txtFStat.VerticalAlignment = System.Windows.VerticalAlignment.Center;
@@ -1543,7 +1522,7 @@ namespace EpiDashboard
             grid2.Children.Add(lblPValue);
 
             TextBlock txtPValue = new TextBlock();
-            txtPValue.Text = stats.anovaPValue.Value.ToString(roundingFormat);
+            txtPValue.Text = stats.anovaPValue.Value.ToString("N4");
             txtPValue.HorizontalAlignment = HorizontalAlignment.Center;
             txtPValue.VerticalAlignment = VerticalAlignment.Center;
             Grid.SetRow(txtPValue, 0);
@@ -1637,7 +1616,7 @@ namespace EpiDashboard
             grid3.Children.Add(lblBartlettP);
 
             TextBlock txtBartlettChi = new TextBlock();
-            txtBartlettChi.Text = stats.chiSquare.Value.ToString(roundingFormat);
+            txtBartlettChi.Text = stats.chiSquare.Value.ToString("N4");
             txtBartlettChi.HorizontalAlignment = HorizontalAlignment.Center;
             txtBartlettChi.VerticalAlignment = VerticalAlignment.Center;
             Grid.SetRow(txtBartlettChi, 0);
@@ -1653,7 +1632,7 @@ namespace EpiDashboard
             grid3.Children.Add(txtBartlettDf);
 
             TextBlock txtBartlettP = new TextBlock();
-            txtBartlettP.Text = stats.bartlettPValue.Value.ToString(roundingFormat);
+            txtBartlettP.Text = stats.bartlettPValue.Value.ToString("N4");
             txtBartlettP.HorizontalAlignment = HorizontalAlignment.Center;
             txtBartlettP.VerticalAlignment = VerticalAlignment.Center;
             Grid.SetRow(txtBartlettP, 2);
@@ -1754,7 +1733,7 @@ namespace EpiDashboard
             grid4.Children.Add(lblKWP);
 
             TextBlock txtKWChi = new TextBlock();
-            txtKWChi.Text = stats.kruskalWallisH.Value.ToString(roundingFormat);
+            txtKWChi.Text = stats.kruskalWallisH.Value.ToString("N4");
             txtKWChi.HorizontalAlignment = HorizontalAlignment.Center;
             txtKWChi.VerticalAlignment = VerticalAlignment.Center;
             Grid.SetRow(txtKWChi, 0);
@@ -1770,7 +1749,7 @@ namespace EpiDashboard
             grid4.Children.Add(txtWKDf);
 
             TextBlock txtKWP = new TextBlock();
-            txtKWP.Text = stats.kruskalPValue.Value.ToString(roundingFormat);
+            txtKWP.Text = stats.kruskalPValue.Value.ToString("N4");
             txtKWP.HorizontalAlignment = HorizontalAlignment.Center;
             txtKWP.VerticalAlignment = VerticalAlignment.Center;
             Grid.SetRow(txtKWP, 2);
@@ -2039,7 +2018,7 @@ namespace EpiDashboard
         /// <summary>
         /// Sets the gadget's state to 'finished' mode
         /// </summary>
-        protected override void RenderFinish()
+        private void RenderFinish()
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -2061,7 +2040,7 @@ namespace EpiDashboard
         /// Sets the gadget's state to 'finished with error' mode
         /// </summary>
         /// <param name="errorMessage">The error message to display</param>
-        protected override void RenderFinishWithError(string errorMessage)
+        private void RenderFinishWithError(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -2152,8 +2131,6 @@ namespace EpiDashboard
             {
                 headerPanel.Text = CustomOutputHeading;
             }
-
-            Parameters = new MeansParameters();
 
             StrataGridList = new List<Grid>();
             anovaBlocks = new List<StackPanel>();
@@ -2272,9 +2249,9 @@ namespace EpiDashboard
         /// </summary>
         public override void RefreshResults()
         {
-            if (!LoadingCombos && Parameters != null && Parameters.ColumnNames.Count > 0) // && cbxField.SelectedIndex > -1)
+            if (!LoadingCombos && GadgetOptions != null && cbxField.SelectedIndex > -1)
             {
-//                CreateInputVariableList();
+                CreateInputVariableList();
                 StrataCount = 0;
 
                 infoPanel.Visibility = System.Windows.Visibility.Collapsed;
@@ -2288,53 +2265,11 @@ namespace EpiDashboard
 
                 base.RefreshResults();
             }
-            else if (!LoadingCombos) // && cbxField.SelectedIndex == -1)
+            else if (!LoadingCombos && cbxField.SelectedIndex == -1)
             {
                 ClearResults();
                 waitPanel.Visibility = System.Windows.Visibility.Collapsed;
             }
-        }
-
-        public override void ShowHideConfigPanel()
-        {
-            Popup = new DashboardPopup();
-            Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
-            Controls.GadgetProperties.MeansProperties properties = new Controls.GadgetProperties.MeansProperties(this.DashboardHelper, this, (MeansParameters)Parameters);
-
-            properties.Width = 800;
-            properties.Height = 600;
-
-            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
-            {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
-            }
-
-            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
-            {
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
-            }
-
-            properties.Cancelled += new EventHandler(properties_Cancelled);
-            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
-            Popup.Content = properties;
-            Popup.Show();
-        }
-
-        private void properties_ChangesAccepted(object sender, EventArgs e)
-        {
-            Controls.GadgetProperties.MeansProperties properties = Popup.Content as Controls.GadgetProperties.MeansProperties;
-            this.Parameters = properties.Parameters;
-            this.DataFilters = properties.DataFilters;
-            Popup.Close();
-            if (properties.HasSelectedFields)
-            {
-                RefreshResults();
-            }
-        }
-
-        private void properties_Cancelled(object sender, EventArgs e)
-        {
-            Popup.Close();
         }
 
         /// <summary>
@@ -2892,10 +2827,5 @@ namespace EpiDashboard
         }
 
         #endregion        
-
-        private void expanderAdvancedOptions_Expanded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

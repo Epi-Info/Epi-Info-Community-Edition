@@ -234,8 +234,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         }
                     }
                 }
-                Context.DefineVarList.Clear();
 
+                Context.DefineVarList.Clear();
                 Dictionary<string, string> args = new Dictionary<string, string>();
                 args.Add("COMMANDNAME", CommandNames.DEFINE);
                 this.Context.AnalysisCheckCodeInterface.Display(args);

@@ -46,7 +46,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsDescriptionButtonAvailable="False" IsFilterButtonAvailable="False" Text="Aberration Detection Chart" />
+                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" Text="Aberration Detection Chart" />
                 <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel" Grid.Row="2" Text="" />
                 <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
 
@@ -57,7 +57,7 @@
                 <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{StaticResource gadgetWaitPanelStyle}" />
 
                 <StackPanel Grid.Row="1" Grid.RowSpan="7" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" >
-                    <!--<Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" >
+                    <Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" >
                         <Rectangle Style="{DynamicResource rectangleConfigOuter}" />
                         <Rectangle Style="{DynamicResource rectangleConfigInner}" />
 
@@ -66,6 +66,7 @@
                               Data="M 5 0 L 10 10 0 10 Z" Fill="{DynamicResource gadgetBackgroundBrush}" IsHitTestVisible="False" HorizontalAlignment="Right" VerticalAlignment="Top" Height="7" />
 
                         <StackPanel Orientation="Vertical" Margin="25, 10, 25, 25" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                            <!--<TextBlock x:Name="ConfigExpandedTitle" HorizontalAlignment="Center" TextAlignment="Center" Text="Settings" Margin="5" FontSize="13" FontWeight="Bold" />-->
                             <TextBlock x:Name="tblockMainVariable" HorizontalAlignment="Left" TextAlignment="Center" Text="Date variable:" Margin="0,5,0,0"  />
                             <ComboBox x:Name="cmbField" Width="140" HorizontalAlignment="Left" SelectedIndex="0" />
 
@@ -136,11 +137,22 @@
                                         </StackPanel>
                                     </Border>
 
+                                    <!--<Border Style="{StaticResource configGroupBorderStyle}" Grid.Column="4">
+                                        <StackPanel Grid.Column="0">
+                                            <Label FontWeight="Bold">Legend</Label>
+                                            <CheckBox x:Name="checkboxShowLegend" Margin="0,5,0,0" Content="Show legend" HorizontalAlignment="Left" IsChecked="False" Checked="checkboxShowLegend_Checked" Unchecked="checkboxShowLegend_Unchecked" />
+                                            <CheckBox x:Name="checkboxShowLegendBorder" Margin="0,5,0,0" Content="Show legend border" HorizontalAlignment="Left" IsChecked="False" Checked="checkboxShowLegendBorder_Checked" Unchecked="checkboxShowLegendBorder_Unchecked" />
+                                            <CheckBox x:Name="checkboxShowVarName" Margin="0,5,0,0" Content="Show variable names" HorizontalAlignment="Left" IsChecked="True" />
+
+                                            <TextBlock x:Name="tblockLegendFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend font size:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtLegendFontSize" HorizontalAlignment="Stretch" Text="12" />
+                                        </StackPanel>
+                                    </Border>-->
                                 </Grid>
                             </Expander>
                             <Button x:Name="btnRun" Content="Run" Margin="0,20,0,0" Click="btnRun_Click" />
                         </StackPanel>
-                    </Grid>-->
+                    </Grid>
                 </StackPanel>
             </Grid>
         </Border>

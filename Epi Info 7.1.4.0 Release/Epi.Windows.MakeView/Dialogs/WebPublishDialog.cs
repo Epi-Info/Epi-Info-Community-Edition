@@ -56,9 +56,9 @@ namespace Epi.Windows.MakeView.Dialogs
             InitializeComponent();
         }
         public string GetOrgKey
-            {
+        {
             get { return this.OrganizationKey; }
-            }
+        }
         public WebPublishDialog(string pOrganizationKey, Epi.View pView, string pTemplate, bool pIsMetaDataOnly = false)
         {
             InitializeComponent();
@@ -98,7 +98,7 @@ namespace Epi.Windows.MakeView.Dialogs
         void PopulateTimeDropDowns()
         {
             DateTime dateTime = new DateTime();
-            TimeSpan timeSpan = new TimeSpan(0,30,0);
+            TimeSpan timeSpan = new TimeSpan(0, 30, 0);
             string timeString = string.Empty;
 
             StartTimecomboBox.Items.Add(string.Empty);
@@ -137,7 +137,7 @@ namespace Epi.Windows.MakeView.Dialogs
             txtStatus.Clear();
             txtURL.Clear();
             this.tabPublishWebForm.SelectedTab = this.tabPublishWebForm.TabPages[2];
-          
+
             btnPublishForm.Enabled = true;
             progressBar.Visible = true;
 
@@ -145,31 +145,31 @@ namespace Epi.Windows.MakeView.Dialogs
             stopwatch.Start();
 
             Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
-             
+
             if (string.IsNullOrEmpty(ClosingTimecomboBox.Text))
             {
                 Request.SurveyInfo.ClosingDate = dtpSurveyClosingDate.Value.Date + new TimeSpan(0, 23, 59, 0);
             }
-            else 
+            else
             {
-                Request.SurveyInfo.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text); 
+                Request.SurveyInfo.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text);
             }
-           
+
             if (string.IsNullOrEmpty(StartTimecomboBox.Text))
             {
                 Request.SurveyInfo.StartDate = StartDateDatePicker.Value.Date;
             }
             else
             {
-                Request.SurveyInfo.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date ,StartTimecomboBox.Text);
+                Request.SurveyInfo.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date, StartTimecomboBox.Text);
             }
 
             Request.SurveyInfo.DepartmentName = txtDepartment.Text;
             Request.SurveyInfo.IntroductionText = txtIntroductionText.Text;
             Request.SurveyInfo.ExitText = txtExitText.Text;
-            
+
             Request.SurveyInfo.SurveyName = txtSurveyName.Text;
-            
+
             Request.SurveyInfo.OrganizationKey = new Guid(txtOrganizationKey.Text.ToString());
             Request.SurveyInfo.UserPublishKey = UserPublishGuid;
             Request.SurveyInfo.XML = template;
@@ -274,15 +274,15 @@ namespace Epi.Windows.MakeView.Dialogs
             Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
             Request.Action = "Update";
 
-          
+
             //this.currentSurveyInfoDTO.ClosingDate =  dtpSurveyClosingDate.Value.Date + GetTimeFormat(ClosingTimecomboBox.Text);
-             
-             this.currentSurveyInfoDTO.ClosingDate = GetdateTimeFormat( dtpSurveyClosingDate.Value.Date ,ClosingTimecomboBox.Text); 
+
+            this.currentSurveyInfoDTO.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text);
 
             //this.currentSurveyInfoDTO.StartDate = StartDateDatePicker.Value.Date + GetTimeFormat(StartTimecomboBox.Text);
-            this.currentSurveyInfoDTO.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date,StartTimecomboBox.Text);
+            this.currentSurveyInfoDTO.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date, StartTimecomboBox.Text);
             this.currentSurveyInfoDTO.DepartmentName = txtDepartment.Text;
-            
+
             //this.currentSurveyInfoDTO.DepartmentName = txtDepartment.Text;
             this.currentSurveyInfoDTO.IntroductionText = txtIntroductionText.Text;
             this.currentSurveyInfoDTO.ExitText = txtExitText.Text;
@@ -306,7 +306,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
 
             this.currentSurveyInfoDTO.SurveyName = txtSurveyName.Text;
-            
+
             this.currentSurveyInfoDTO.OrganizationKey = new Guid(txtOrganizationKey.Text.ToString());
             //this.currentSurveyInfoDTO.UserPublishKey = UserPublishGuid;
             if (!this.IsMetaDataOnly)
@@ -315,14 +315,14 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             this.currentSurveyInfoDTO.SurveyType = (rdbSingleResponse.Checked) ? 1 : 2;
 
-            Request.SurveyInfo  = this.currentSurveyInfoDTO;
+            Request.SurveyInfo = this.currentSurveyInfoDTO;
 
 
             try
             {
                 SurveyManagerService.ManagerServiceClient client = MakeView.Utils.ServiceClient.GetClient();
                 Epi.Web.Common.Message.PublishResponse Result = client.RePublishSurvey(Request);
-                
+
                 panel2.Visible = true;
                 panel3.Visible = true;
 
@@ -342,13 +342,13 @@ namespace Epi.Windows.MakeView.Dialogs
                     this.btnDataKeyCopy.Enabled = true;
                     this.btnGo.Enabled = true;
                     this.btnURLCopy.Enabled = true;
-                   //txtURL.Text = Result.PublishInfo.URL;
+                    //txtURL.Text = Result.PublishInfo.URL;
                     txtSurveyKey.Text = this.currentSurveyInfoDTO.SurveyId;
 
                     txtDataKey.Text = this.currentSurveyInfoDTO.UserPublishKey.ToString();
                     //txtDataKey.Text = txtSurveyKey.Text;
                     txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
-                   // txtURL.Text = Result.PublishInfo.URL;
+                    // txtURL.Text = Result.PublishInfo.URL;
 
                     //txtURL.Text =;
 
@@ -403,7 +403,7 @@ namespace Epi.Windows.MakeView.Dialogs
                 //this.progressBar.Visible = false;
                 this.Cursor = Cursors.Default;
             }
-            
+
 
             this.progressBar.Visible = false;
             //this.btnPublish.Enabled = true;
@@ -479,10 +479,10 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             txtStatus.AppendText(Environment.NewLine);
 
-           // panel2.Visible = false;
+            // panel2.Visible = false;
             panel3.Visible = true;
-            
-            
+
+
 
         }
 
@@ -497,7 +497,7 @@ namespace Epi.Windows.MakeView.Dialogs
             string statusMessage = "Fault Exception<CustomFaultException>";
             AddStatusMessage(statusMessage);
             btnShowLog.Enabled = true;
-            txtStatusSummary.Text = statusMessage; 
+            txtStatusSummary.Text = statusMessage;
             txtStatus.AppendText(cfe.ToString());
             btnDetails.Visible = true;
             this.progressBar.Visible = false;
@@ -552,7 +552,7 @@ namespace Epi.Windows.MakeView.Dialogs
             panel3.Visible = true;
             lblSuccessNotice2.Visible = false;
         }
-        
+
         /// <summary>
         /// Handles a communication exception during publishing
         /// </summary>
@@ -623,7 +623,7 @@ namespace Epi.Windows.MakeView.Dialogs
             lblSuccessNotice2.Visible = false;
             btnPublishForm.Enabled = false;
         }
-        
+
         /// <summary>
         /// Adds a status message to the status list box
         /// </summary>
@@ -666,7 +666,7 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             this.Close();
         }
-    
+
 
         /// <summary>
         /// Handles the Click event of the Go button
@@ -720,7 +720,7 @@ namespace Epi.Windows.MakeView.Dialogs
             PubValues.Append("Survey Name: " + StringLiterals.NEW_LINE + txtSurveyName.Text + StringLiterals.NEW_LINE + StringLiterals.NEW_LINE);
             PubValues.Append(SharedStrings.WEBFORM_URLTOSEND + StringLiterals.NEW_LINE + txtURL.Text + StringLiterals.NEW_LINE + StringLiterals.NEW_LINE);
             PubValues.Append(SharedStrings.WEBFORM_SURVEYKEY + StringLiterals.NEW_LINE + txtSurveyKey.Text + StringLiterals.NEW_LINE + StringLiterals.NEW_LINE);
-            PubValues.Append(SharedStrings.WEBFORM_SECURITYTOKEN + StringLiterals.NEW_LINE + txtDataKey.Text +StringLiterals.NEW_LINE + StringLiterals.NEW_LINE);
+            PubValues.Append(SharedStrings.WEBFORM_SECURITYTOKEN + StringLiterals.NEW_LINE + txtDataKey.Text + StringLiterals.NEW_LINE + StringLiterals.NEW_LINE);
             // PubValues.Append(txtSurveyName.Text + StringLiterals.NEW_LINE);
             // PubValues.Append(txtSurveyID.Text + StringLiterals.SEMI_COLON + StringLiterals.SPACE + txtOrganization.Text + StringLiterals.SEMI_COLON + StringLiterals.SPACE + txtDepartment.Text + StringLiterals.NEW_LINE);
             //PubValues.Append(txtIntroductionText.Text + StringLiterals.NEW_LINE);
@@ -729,7 +729,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
             Clipboard.SetText(PubValues.ToString());
 
-         }
+        }
 
         /// <summary>
         /// Handles the Click event of the Copy All URLs to Clipboard button
@@ -799,7 +799,7 @@ namespace Epi.Windows.MakeView.Dialogs
                 txtExitText.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
 
                 if (!this.isRepublishableConfig)
-                    {
+                {
                     this.lblSurveyStartDate.Visible = false;
                     this.StartDateDatePicker.Visible = false;
                     this.StartTimecomboBox.Visible = false;
@@ -814,115 +814,116 @@ namespace Epi.Windows.MakeView.Dialogs
                     label1.Visible = false;
                     lblClosingDate.Left = 18;
                     dtpSurveyClosingDate.Left = 18;
-                   // this.ClosingTimecomboBox.Left = 240;
-                   // this.closingTimelabel.Left = 240;
+                    // this.ClosingTimecomboBox.Left = 240;
+                    // this.closingTimelabel.Left = 240;
                     //ClosingTimecomboBox.SelectedIndex = 0;
                     ClosingTimecomboBox.Visible = false;
                     closingTimelabel.Visible = false;
-                    }
-                else {
-                        this.txtDepartment.Visible = false;
-                        this.lblDepartment.Visible = false;
-
-
-                        this.txtOrganization.Left = 381;
-                        this.txtOrganization.Size = new System.Drawing.Size(453, 23);
-                        this.lblOrganization.Left = 300;
-
-
-                        this.lblDepMirr.Visible = false;
-                        this.txtDepartmentMirror.Visible = false;
-
-                        this.txtOrganizationMirror.Left = 381;
-                        this.txtOrganizationMirror.Size = new System.Drawing.Size(453, 23);
-                        this.lblOrgMirr.Left = 300;
-                       ClosingTimecomboBox.SelectedIndex = 0;
-                       StartTimecomboBox.SelectedIndex = 0;
-                       
-                    }
-                
-            }
-            else
-            {
-                SurveyManagerService.ManagerServiceClient client = Epi.Windows.MakeView.Utils.ServiceClient.GetClient();
-
+                }
+                else
+                {
                     this.txtDepartment.Visible = false;
                     this.lblDepartment.Visible = false;
-                    
-                   
+
+
                     this.txtOrganization.Left = 381;
-                    this.txtOrganization.Size = new  System.Drawing.Size(453,23);
+                    this.txtOrganization.Size = new System.Drawing.Size(453, 23);
                     this.lblOrganization.Left = 300;
-                     
-                     
+
+
                     this.lblDepMirr.Visible = false;
                     this.txtDepartmentMirror.Visible = false;
 
                     this.txtOrganizationMirror.Left = 381;
                     this.txtOrganizationMirror.Size = new System.Drawing.Size(453, 23);
                     this.lblOrgMirr.Left = 300;
-
-                     
                     ClosingTimecomboBox.SelectedIndex = 0;
                     StartTimecomboBox.SelectedIndex = 0;
-                  
+
+                }
+
+            }
+            else
+            {
+                SurveyManagerService.ManagerServiceClient client = Epi.Windows.MakeView.Utils.ServiceClient.GetClient();
+
+                this.txtDepartment.Visible = false;
+                this.lblDepartment.Visible = false;
 
 
-               // Epi.Windows.Dialogs.InputDialog inputDialog = new Windows.Dialogs.InputDialog("Enter organization key", "Organization Key", "", null, EpiInfo.Plugin.DataType.Text);
+                this.txtOrganization.Left = 381;
+                this.txtOrganization.Size = new System.Drawing.Size(453, 23);
+                this.lblOrganization.Left = 300;
+
+
+                this.lblDepMirr.Visible = false;
+                this.txtDepartmentMirror.Visible = false;
+
+                this.txtOrganizationMirror.Left = 381;
+                this.txtOrganizationMirror.Size = new System.Drawing.Size(453, 23);
+                this.lblOrgMirr.Left = 300;
+
+
+                ClosingTimecomboBox.SelectedIndex = 0;
+                StartTimecomboBox.SelectedIndex = 0;
+
+
+
+                // Epi.Windows.Dialogs.InputDialog inputDialog = new Windows.Dialogs.InputDialog("Enter organization key", "Organization Key", "", null, EpiInfo.Plugin.DataType.Text);
                 //DialogResult result = inputDialog.ShowDialog();
-                 
-               // if (result == System.Windows.Forms.DialogResult.OK)
+
+                // if (result == System.Windows.Forms.DialogResult.OK)
                 //{
-                   // this.OrganizationKey = inputDialog.OrganizationKey;
-                  this.txtOrganizationKey.Text = this.OrganizationKey;
- 
-                    SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
-                    Request.Criteria.SurveyIdList.Add(this.view.WebSurveyId);
-                    Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
-                    SurveyInfoResponse response = client.GetSurveyInfo(Request);
-                    if (response.SurveyInfoList.Count > 0)
+                // this.OrganizationKey = inputDialog.OrganizationKey;
+                this.txtOrganizationKey.Text = this.OrganizationKey;
+
+                SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
+                Request.Criteria.SurveyIdList.Add(this.view.WebSurveyId);
+                Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+                SurveyInfoResponse response = client.GetSurveyInfo(Request);
+                if (response.SurveyInfoList.Count > 0)
+                {
+                    currentSurveyInfoDTO = response.SurveyInfoList[0];
+                    if (currentSurveyInfoDTO.IsDraftMode)
                     {
-                        currentSurveyInfoDTO = response.SurveyInfoList[0];
-                        if (currentSurveyInfoDTO.IsDraftMode)
-                            {
-                            this.lblPublishModeStatus.Text = "DRAFT";
-                            }
-                        else
-                            {
-                            this.lblPublishModeStatus.Text = "FINAL";
-                            }
-
-                        dtpSurveyClosingDate.Value = currentSurveyInfoDTO.ClosingDate;
-
-                        StartDateDatePicker.Value = currentSurveyInfoDTO.StartDate;
-                        DateTime CloseTime = Convert.ToDateTime(currentSurveyInfoDTO.ClosingDate);
-                        DateTime StartTime = Convert.ToDateTime(currentSurveyInfoDTO.StartDate);
-
-                        ClosingTimecomboBox.SelectedItem = CloseTime.ToShortTimeString();
-                        StartTimecomboBox.SelectedItem = StartTime.ToShortTimeString();
-
-                        txtSurveyName.Text = currentSurveyInfoDTO.SurveyName;
-                        //txtSurveyName.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        //txtSurveyNameMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        txtSurveyID.Text = currentSurveyInfoDTO.SurveyNumber;
-                        //txtSurveyID.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        //txtSurveyIDMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        txtSurveyIDMirror.Text = currentSurveyInfoDTO.SurveyNumber;
-                        txtOrganization.Text = currentSurveyInfoDTO.OrganizationName;
-                        //txtOrganization.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        //txtOrganizationMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        txtOrganizationMirror.Text = currentSurveyInfoDTO.OrganizationName;
-                        txtDepartment.Text = currentSurveyInfoDTO.DepartmentName;
-                        //txtDepartment.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        //txtDepartmentMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        txtDepartmentMirror.Text = currentSurveyInfoDTO.DepartmentName;
-                        txtIntroductionText.Text = currentSurveyInfoDTO.IntroductionText;
-                        //txtIntroductionText.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        txtExitText.Text = currentSurveyInfoDTO.ExitText;
-                        //txtExitText.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        
-                        btnPublishForm.Enabled = true;
+                        this.lblPublishModeStatus.Text = "DRAFT";
                     }
+                    else
+                    {
+                        this.lblPublishModeStatus.Text = "FINAL";
+                    }
+
+                    dtpSurveyClosingDate.Value = currentSurveyInfoDTO.ClosingDate;
+
+                    StartDateDatePicker.Value = currentSurveyInfoDTO.StartDate;
+                    DateTime CloseTime = Convert.ToDateTime(currentSurveyInfoDTO.ClosingDate);
+                    DateTime StartTime = Convert.ToDateTime(currentSurveyInfoDTO.StartDate);
+
+                    ClosingTimecomboBox.SelectedItem = CloseTime.ToShortTimeString();
+                    StartTimecomboBox.SelectedItem = StartTime.ToShortTimeString();
+
+                    txtSurveyName.Text = currentSurveyInfoDTO.SurveyName;
+                    //txtSurveyName.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+                    //txtSurveyNameMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+                    txtSurveyID.Text = currentSurveyInfoDTO.SurveyNumber;
+                    //txtSurveyID.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+                    //txtSurveyIDMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+                    txtSurveyIDMirror.Text = currentSurveyInfoDTO.SurveyNumber;
+                    txtOrganization.Text = currentSurveyInfoDTO.OrganizationName;
+                    //txtOrganization.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+                    //txtOrganizationMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+                    txtOrganizationMirror.Text = currentSurveyInfoDTO.OrganizationName;
+                    txtDepartment.Text = currentSurveyInfoDTO.DepartmentName;
+                    //txtDepartment.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+                    //txtDepartmentMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+                    txtDepartmentMirror.Text = currentSurveyInfoDTO.DepartmentName;
+                    txtIntroductionText.Text = currentSurveyInfoDTO.IntroductionText;
+                    //txtIntroductionText.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+                    txtExitText.Text = currentSurveyInfoDTO.ExitText;
+                    //txtExitText.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+
+                    btnPublishForm.Enabled = true;
+                }
                 //}
             }
 
@@ -1184,7 +1185,7 @@ namespace Epi.Windows.MakeView.Dialogs
             try
             {
                 SurveyManagerService.ManagerServiceClient client = Epi.Windows.MakeView.Utils.ServiceClient.GetClient();
-                
+
 
                 Epi.Web.Common.Message.PublishRequest Request = (Epi.Web.Common.Message.PublishRequest)((object[])e.Argument)[0];
                 Epi.Web.Common.Message.PublishResponse Result = (Epi.Web.Common.Message.PublishResponse)((object[])e.Argument)[1];
@@ -1251,7 +1252,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
         private void tabPublishWebForm_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnNext.Enabled = (this.tabPublishWebForm.SelectedIndex.Equals(2)) ? false : true ;
+            btnNext.Enabled = (this.tabPublishWebForm.SelectedIndex.Equals(2)) ? false : true;
         }
 
         private void btnDataKeyCopy_Click(object sender, EventArgs e)
@@ -1263,7 +1264,7 @@ namespace Epi.Windows.MakeView.Dialogs
         private void txtOrganizationKey_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtOrganizationKey.Text))
-            {          
+            {
                 string guidPattern = @"[a-fA-F0-9]{8}(-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}";
                 Regex regPattern = new Regex(guidPattern);
                 btnPublishForm.Enabled = regPattern.IsMatch(txtOrganizationKey.Text);
@@ -1286,11 +1287,11 @@ namespace Epi.Windows.MakeView.Dialogs
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-           // OrgKey OK = new OrgKey();
+            // OrgKey OK = new OrgKey();
             //OK.Show();
             OrgKey NewDialog = new OrgKey(this.view.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can change the survey mode.");
             DialogResult result = NewDialog.ShowDialog();
-           
+
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1317,10 +1318,10 @@ namespace Epi.Windows.MakeView.Dialogs
             btnNext.Enabled = true;
         }
 
-        private DateTime GetdateTimeFormat(DateTime dateTime , string time) 
+        private DateTime GetdateTimeFormat(DateTime dateTime, string time)
         {
             string dateTimeString = dateTime.ToShortDateString();
-            
+
             return Convert.ToDateTime(dateTimeString + " " + time);
         }
     }

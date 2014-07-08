@@ -9,15 +9,23 @@ using ComponentArt.Win.DataVisualization;
 
 namespace EpiDashboard.Gadgets.Charting
 {
-    //public enum BarSpacing
-    //{
-    //    Default,
-    //    None,
-    //    Small,
-    //    Medium,
-    //    Large
-    //}
-    
+    public enum BarSpacing
+    {
+        Default,
+        None,
+        Small,
+        Medium,
+        Large
+    }
+
+    public enum XAxisLabelType
+    {
+        Automatic,
+        FieldPrompt,
+        None,
+        Custom
+    }
+
     public interface IChartSettings
     {
         bool UseRefValues { get; set; }
@@ -44,7 +52,6 @@ namespace EpiDashboard.Gadgets.Charting
         int ChartHeight { get; set; }
         string YAxisFormattingString { get; set; }
         string Y2AxisFormattingString { get; set; }
-
         ComponentArt.Win.DataVisualization.Charting.Dock LegendDock { get; set; }
     }
 
@@ -94,7 +101,7 @@ namespace EpiDashboard.Gadgets.Charting
         public LineKind LineKindY2 { get; set; }
         public LineDashStyle LineDashStyleY2 { get; set; }
         public string Y2AxisLabel { get; set; }
-        public string Y2AxisLegendTitle { get; set; }        
+        public string Y2AxisLegendTitle { get; set; }
         public string YAxisLabel { get; set; }
         public string XAxisLabel { get; set; }
         public double LineThickness { get; set; }
@@ -150,6 +157,10 @@ namespace EpiDashboard.Gadgets.Charting
         public string Y2AxisFormattingString { get; set; }
         public bool Y2IsCumulativePercent { get; set; }
 
+        public double YAxisFrom { get; set; }
+        public double YAxisTo { get; set; }
+        public double YAxisStep { get; set; }
+
         public ComponentArt.Win.DataVisualization.Charting.Dock LegendDock { get; set; }
     }
 
@@ -190,6 +201,10 @@ namespace EpiDashboard.Gadgets.Charting
 
         public string YAxisFormattingString { get; set; }
         public string Y2AxisFormattingString { get; set; }
+
+        public double YAxisFrom { get; set; }
+        public double YAxisTo { get; set; }
+        public double YAxisStep { get; set; }
 
         public ComponentArt.Win.DataVisualization.Charting.Dock LegendDock { get; set; }
     }

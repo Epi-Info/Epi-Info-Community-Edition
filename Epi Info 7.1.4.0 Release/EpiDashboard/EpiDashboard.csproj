@@ -122,7 +122,6 @@
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Printing" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -156,9 +155,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="AberrationChartData.cs" />
-    <Compile Include="BarSpacing.cs" />
     <Compile Include="ColumnDataType.cs" />
-    <Compile Include="CombineModeTypes.cs" />
     <Compile Include="Controls\Charting\AberrationChart.xaml.cs">
       <DependentUpon>AberrationChart.xaml</DependentUpon>
     </Compile>
@@ -169,14 +166,6 @@
     <Compile Include="Controls\Charting\ColumnChart.xaml.cs">
       <DependentUpon>ColumnChart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Charting\ColumnChartBase.cs" />
-    <Compile Include="Controls\Charting\AreaChartBase.cs" />
-    <Compile Include="Controls\Charting\ParetoChartBase.cs" />
-    <Compile Include="Controls\Charting\ParetoChart.xaml.cs">
-      <DependentUpon>ParetoChart.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Charting\PieChartBase.cs" />
-    <Compile Include="Controls\Charting\LineChartBase.cs" />
     <Compile Include="Controls\Charting\HistogramChart.xaml.cs">
       <DependentUpon>HistogramChart.xaml</DependentUpon>
     </Compile>
@@ -190,76 +179,11 @@
     <Compile Include="Controls\CombinedFrequencyTable.xaml.cs">
       <DependentUpon>CombinedFrequencyTable.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ChoroplethProperties.xaml.cs">
-      <DependentUpon>ChoroplethProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DuplicatesControl.xaml.cs">
-      <DependentUpon>DuplicatesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GadgetProperties\ColumnChartProperties.xaml.cs">
-      <DependentUpon>ColumnChartProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GadgetProperties\AreaChartProperties.xaml.cs">
-      <DependentUpon>AreaChartProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml.cs">
-      <DependentUpon>AberrationDetectionChartProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GadgetProperties\ParetoChartProperties.xaml.cs">
-      <DependentUpon>ParetoChartProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GadgetProperties\PieChartProperties.xaml.cs">
-      <DependentUpon>PieChartProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GadgetProperties\DuplicatesListProperties.xaml.cs">
-      <DependentUpon>DuplicatesListProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GadgetProperties\LineChartProperties.xaml.cs">
-      <DependentUpon>LineChartProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GadgetProperties\WordCloudProperties.xaml.cs">
-      <DependentUpon>WordCloudProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GadgetProperties\CrosstabProperties.xaml.cs">
-      <DependentUpon>CrosstabProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GadgetProperties\MeansProperties.xaml.cs">
-      <DependentUpon>MeansProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\VariablesDisplayControl.xaml.cs">
-      <DependentUpon>VariablesDisplayControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DashboardProperties.xaml.cs">
-      <DependentUpon>DashboardProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DataDisplayControl.xaml.cs">
-      <DependentUpon>DataDisplayControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DataFilterPanel.xaml.cs">
-      <DependentUpon>DataFilterPanel.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\GadgetBorder.xaml.cs">
       <DependentUpon>GadgetBorder.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\GadgetMenuItem.cs" />
-    <Compile Include="Controls\GadgetProperties\CombinedFrequencyProperties.xaml.cs">
-      <DependentUpon>CombinedFrequencyProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GadgetProperties\FrequencyProperties.xaml.cs">
-      <DependentUpon>FrequencyProperties.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GadgetProperties\GadgetPropertiesPanelBase.cs" />
-    <Compile Include="Controls\GadgetProperties\IGadgetPropertiesPanel.cs" />
-    <Compile Include="Controls\GadgetProperties\LineListProperties.xaml.cs">
-      <DependentUpon>LineListProperties.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\NumericUpDown.cs" />
-    <Compile Include="Controls\SetDataSource.xaml.cs">
-      <DependentUpon>SetDataSource.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SettingsToggleButton.xaml.cs">
-      <DependentUpon>SettingsToggleButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\StatusBarArrangeButton.xaml.cs">
       <DependentUpon>StatusBarArrangeButton.xaml</DependentUpon>
     </Compile>
@@ -302,7 +226,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="CrosstabValue.cs" />
-    <Compile Include="DashboardPopup.cs" />
     <Compile Include="DashboardSharedStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -329,7 +252,6 @@
     <Compile Include="GadgetDescriptionWindow.xaml.cs">
       <DependentUpon>GadgetDescriptionWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GadgetPropertiesPopupRequestedEventArgs.cs" />
     <Compile Include="Gadgets\Analysis\CombinedFrequencyControl.xaml.cs">
       <DependentUpon>CombinedFrequencyControl.xaml</DependentUpon>
     </Compile>
@@ -417,11 +339,9 @@
     <Compile Include="Gadgets\Analysis\ComplexSampleMeansControl.xaml.cs">
       <DependentUpon>ComplexSampleMeansControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Gadgets\Analysis\DuplicatesListControl.xaml.cs">
-      <DependentUpon>DuplicatesListControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Gadgets\Analysis\Old_DuplicatesListControl.xaml.cs">
-      <DependentUpon>Old_DuplicatesListControl.xaml</DependentUpon>
+    <Compile Include="Gadgets\Analysis\DeduplicationControl.xaml.cs">
+      <DependentUpon>DeduplicationControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Gadgets\Analysis\WordCloudControl.xaml.cs">
       <DependentUpon>WordCloudControl.xaml</DependentUpon>
@@ -429,9 +349,6 @@
     <Compile Include="Gadgets\Analysis\PMCCControl.xaml.cs">
       <DependentUpon>PMCCControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Gadgets\Charting\ParetoChartGadgetBase.cs" />
-    <Compile Include="Gadgets\Charting\XYParetoChartData.cs" />
-    <Compile Include="Gadgets\ChartParametersBase.cs" />
     <Compile Include="Gadgets\Charting\AberrationChartGadget.xaml.cs">
       <DependentUpon>AberrationChartGadget.xaml</DependentUpon>
     </Compile>
@@ -443,7 +360,6 @@
     <Compile Include="Gadgets\Charting\ColumnChartGadget.xaml.cs">
       <DependentUpon>ColumnChartGadget.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Gadgets\Charting\ColumnChartGadgetBase.cs" />
     <Compile Include="Gadgets\Charting\HistogramChartGadget.xaml.cs">
       <DependentUpon>HistogramChartGadget.xaml</DependentUpon>
     </Compile>
@@ -461,30 +377,8 @@
       <DependentUpon>ScatterChartGadget.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gadgets\Charting\XYColumnChartData.cs" />
-    <Compile Include="Gadgets\ColumnChartParametersBase.cs" />
-    <Compile Include="Gadgets\ColumnChartParameters.cs" />
-    <Compile Include="Gadgets\CombinedFrequencyParameters.cs" />
-    <Compile Include="Gadgets\AreaChartParameters.cs" />
-    <Compile Include="Gadgets\AreaChartParametersBase.cs" />
-    <Compile Include="Gadgets\AberrationDetectionChartParametersBase.cs" />
-    <Compile Include="Gadgets\AberrationDetectionChartParameters.cs" />
-    <Compile Include="Gadgets\ParetoChartParameters.cs" />
-    <Compile Include="Gadgets\ParetoChartParametersBase.cs" />
-    <Compile Include="Gadgets\PieChartParameters.cs" />
-    <Compile Include="Gadgets\PieChartParametersBase.cs" />
-    <Compile Include="Gadgets\DuplicatesListParameters.cs" />
-    <Compile Include="Gadgets\WordCloudParameters.cs" />
-    <Compile Include="Gadgets\CrosstabParameters.cs" />
-    <Compile Include="Gadgets\FrequencyParameters.cs" />
-    <Compile Include="Gadgets\FrequencyParametersBase.cs" />
     <Compile Include="Gadgets\GadgetBase.cs" />
-    <Compile Include="Gadgets\IGadgetParameters.cs" />
-    <Compile Include="Gadgets\GadgetParametersBase.cs" />
     <Compile Include="Gadgets\IStatCalcGadget.cs" />
-    <Compile Include="Gadgets\LineChartParametersBase.cs" />
-    <Compile Include="Gadgets\LineChartParameters.cs" />
-    <Compile Include="Gadgets\LineListParameters.cs" />
-    <Compile Include="Gadgets\MeansParameters.cs" />
     <Compile Include="Gadgets\Reporting\StandardImageControl.xaml.cs">
       <DependentUpon>StandardImageControl.xaml</DependentUpon>
     </Compile>
@@ -512,7 +406,6 @@
       <DependentUpon>MatchedPairCaseControlGadget.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gadgets\StatCalc\StatCalcGadgetBase.cs" />
-    <Compile Include="Gadgets\IChartGadgetParameters.cs" />
     <Compile Include="LineListSharedStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -800,11 +693,9 @@
     </Compile>
     <Compile Include="TypefaceListItem.cs" />
     <Compile Include="TypographicFeatureListItem.cs" />
-    <Compile Include="VariableCategory.cs" />
     <Compile Include="WaitCursor.xaml.cs">
       <DependentUpon>WaitCursor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XAxisLabelType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
@@ -851,10 +742,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Charting\ParetoChart.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\Charting\HistogramChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -871,91 +758,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ChoroplethProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\DuplicatesControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\GadgetProperties\ColumnChartProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\GadgetProperties\AreaChartProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\GadgetProperties\ParetoChartProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\GadgetProperties\PieChartProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\GadgetProperties\DuplicatesListProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\GadgetProperties\LineChartProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\GadgetProperties\WordCloudProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\GadgetProperties\CrosstabProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\GadgetProperties\MeansProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\VariablesDisplayControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\DashboardProperties.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\DataDisplayControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\DataFilterPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\GadgetBorder.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\GadgetProperties\CombinedFrequencyProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\GadgetProperties\FrequencyProperties.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\GadgetProperties\LineListProperties.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\SetDataSource.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\SettingsToggleButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1007,14 +810,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Gadgets\Analysis\DuplicatesListControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="StyleDictionary.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Dialogs\FontChooser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1035,9 +830,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Gadgets\Analysis\Old_DuplicatesListControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Gadgets\Analysis\DeduplicationControl.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gadgets\Analysis\WordCloudControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -1475,14 +1270,9 @@
     <Content Include="ComponentArt.Win.DataVisualization.Charting.dll" />
     <Content Include="ComponentArt.Win.DataVisualization.Common.dll" />
     <Content Include="DynamicDisplay\DynamicDataDisplay.dll" />
-    <Resource Include="Images\casecluster.png" />
-    <Resource Include="Images\choropleth.png" />
-    <Resource Include="Images\dotdensity.png" />
     <Content Include="Images\labels.png" />
     <Resource Include="Images\saveHTML.png" />
     <Resource Include="Images\watermark_logo.png" />
-    <Resource Include="Images\poi.png" />
-    <Content Include="license.txt" />
     <Content Include="Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Behaviors.dll" />
     <Content Include="Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Bing.dll" />
     <Content Include="Mapping\ESRI_WPF\ESRI.ArcGIS.Client.dll" />

@@ -122,15 +122,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                 this.CurrentRecordId = this.EnterCheckCodeEngine.CurrentView.CurrentRecordNumber;  
 
                 this.OpenPageHandler(sender, new PageSelectedEventArgs(this.view.Pages[0]));
-
-                //uncomment to include referential integrity check on collected data tables 
-                //bool passedIntegrityCheck = view.GetProject().CollectedData.CheckCollectedDataIntegrity(view);
-
-                //if (passedIntegrityCheck == false)
-                //{
-                //    MsgBox.ShowWarning("Collected data tables are incomplete.");
-                //}
-
+                
                 IsDirty = false;
             }
         }

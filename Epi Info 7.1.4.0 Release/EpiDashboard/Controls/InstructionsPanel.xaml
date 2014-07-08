@@ -7,18 +7,11 @@
              xmlns:Controls="clr-namespace:EpiDashboard.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="700">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../StyleDictionary.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
     <DockPanel x:Name="WorkingPanel" Canvas.Top="100" Canvas.Left="50" Width="420" Height="200">
         <Grid>
             <Controls:ShadowRectangle></Controls:ShadowRectangle>
             <!-- #8EBD40 Green -->
-            <Grid x:Name="grdMain" Background="{StaticResource PrimaryAccentColorLight}">
+            <Grid x:Name="grdMain" Background="#5EA8DE">
                 <Grid.RowDefinitions>
                     <RowDefinition />                    
                 </Grid.RowDefinitions>

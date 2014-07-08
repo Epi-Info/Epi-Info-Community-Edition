@@ -1978,10 +1978,8 @@ namespace Epi.Windows.MakeView.Forms
                             MsgBox.ShowInformation(string.Format(SharedStrings.CANNOT_OPEN_VIEW_RELATED));
                         }
                     }
-
                 }
-                   
-                }           
+            }           
         }
 
         private void worker1_DoWork(object sender, DoWorkEventArgs e)

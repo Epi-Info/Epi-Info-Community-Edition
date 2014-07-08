@@ -268,12 +268,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         }
                     }
                 }
-            } 
+            }
             else // is NOT an isExceptionList
             {
                 for (int i = 0; i < CurrentDataTable.Columns.Count; i++)
                 {
-                    if(TempVariableList.Contains(CurrentDataTable.Columns[i].ColumnName.ToUpper()))
+                    if (TempVariableList.Contains(CurrentDataTable.Columns[i].ColumnName.ToUpper()))
                     {
                         VariableList.Add(CurrentDataTable.Columns[i].ColumnName.ToUpper());
                     }
@@ -299,7 +299,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     }
                 }
 
-                OutputDriver = DBReadExecute.GetDataDriver(FilePath, this.isConnectionString);            
+                OutputDriver = DBReadExecute.GetDataDriver(FilePath, this.isConnectionString);
 
                 if (OutputDriver.GetType().Name.Equals("CsvFile", StringComparison.OrdinalIgnoreCase) || this.FileDataFormat.Equals("TEXT", StringComparison.OrdinalIgnoreCase))
                 {
@@ -352,7 +352,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             {
                                 isPermanentVariable = true;
                             }
-                            
+
                             if (isPermanentVariable == false)
                             {
                                 TableColumn newTableColumn;
@@ -383,7 +383,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                                 {
                                     newTableColumn = new TableColumn(column.ColumnName.ToString(), ConvertToGenericType(column.DataType), column.AllowDBNull);
                                 }
-                                
+
                                 newTableColumn.AllowNull = column.AllowDBNull;
                                 newTableColumn.IsIdentity = column.Unique;
                                 TableColumns.Add(newTableColumn);
@@ -391,7 +391,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         }
                     }
 
-                    if 
+                    if
                     (
                         (
                            (!(OutputDriver.GetType().Name.Equals("AccessDatabase", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Access2007Database", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("ExcelWorkbook", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Excel2007Workbook", StringComparison.OrdinalIgnoreCase))
@@ -407,9 +407,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                         if (OutputDriver.GetType().Name.Equals("ExcelWorkbook", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Excel2007Workbook", StringComparison.OrdinalIgnoreCase))
                         {
-                            WideTableColumns = this.CreateExcelWideTable(TableColumns); 
+                            WideTableColumns = this.CreateExcelWideTable(TableColumns);
                         }
-                        else if(!OutputDriver.GetType().Name.Equals("CsvFile", StringComparison.OrdinalIgnoreCase))
+                        else if (!OutputDriver.GetType().Name.Equals("CsvFile", StringComparison.OrdinalIgnoreCase))
                         {
                             WideTableColumns = this.CreateAccessWideTable(TableColumns);
                         }
@@ -469,7 +469,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                                 }
 
                                 if (isPermanentVariable == false)
-                                { 
+                                {
                                     TableColumn newTableColumn;
 
                                     if (column.DataType.ToString() == "System.String")
@@ -498,7 +498,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                                     {
                                         newTableColumn = new TableColumn(column.ColumnName.ToString(), ConvertToGenericType(column.DataType), column.AllowDBNull);
                                     }
-    
+
                                     newTableColumn.AllowNull = column.AllowDBNull;
                                     newTableColumn.IsIdentity = column.Unique;
                                     TableColumns.Add(newTableColumn);
@@ -590,7 +590,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 else if ((OutputDriver.GetType().Name.Equals("AccessDatabase", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Access2007Database", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("ExcelWorkbook", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Excel2007Workbook", StringComparison.OrdinalIgnoreCase)) && VariableList.Count > Max_Number_Columns)
                 {
                     this.PopulateTable(WideTableColumns);
-                }                
+                }
                 else
                 {
                     DataTable sourceTable = OutputDriver.GetTableData(TableName);

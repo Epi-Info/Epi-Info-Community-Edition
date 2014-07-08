@@ -1120,7 +1120,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                     }
 
                     // TODO: Remove this before release! This output is for testing purposes only!
-                    // package.Save(@PackagePath + "\\" + fileName + ".xml");
+                  //  package.Save(@PackagePath + "\\" + fileName + ".xml");
 
                     CallbackSetStatusMessage("Compressing package...");
                     string compressedText = ImportExportHelper.Zip(package.OuterXml);

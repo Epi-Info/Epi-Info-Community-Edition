@@ -68,7 +68,7 @@ namespace EpiDashboard.Controls.Charting
 
         public override string SendDataToString()
         {
-            StringBuilder sb = new StringBuilder();            
+            StringBuilder sb = new StringBuilder();
             List<XYHistogramChartData> dataList = xyChart.DataSource as List<XYHistogramChartData>;
 
             sb.Append("X" + "\t");
@@ -82,7 +82,7 @@ namespace EpiDashboard.Controls.Charting
                 sb.Append(chartData.Y + "\t");
                 sb.Append(chartData.S + "\t");
                 sb.AppendLine();
-            }            
+            }
 
             return sb.ToString();
         }
@@ -123,7 +123,7 @@ namespace EpiDashboard.Controls.Charting
 
             xAxisCoordinates.Angle = Settings.XAxisLabelRotation;
 
-            switch ((EpiDashboard.XAxisLabelType)Settings.XAxisLabelType)
+            switch (Settings.XAxisLabelType)
             {
                 case XAxisLabelType.Custom:
                 case XAxisLabelType.FieldPrompt:
@@ -207,6 +207,15 @@ namespace EpiDashboard.Controls.Charting
             else tblockStrataTitle.Visibility = System.Windows.Visibility.Visible;
 
             yAxis.UseReferenceValue = Settings.UseRefValues;
+
+            if ((Settings as HistogramChartSettings).YAxisTo != 0)
+                numberCoordinates.To = (Settings as HistogramChartSettings).YAxisTo;
+
+            if ((Settings as HistogramChartSettings).YAxisFrom != 0)
+                numberCoordinates.From = (Settings as HistogramChartSettings).YAxisFrom;
+
+            if ((Settings as HistogramChartSettings).YAxisStep != 0)
+                numberCoordinates.Step = (Settings as HistogramChartSettings).YAxisStep;
 
             series0.ShowPointAnnotations = HistogramChartSettings.ShowAnnotations;
             series0.BarKind = HistogramChartSettings.BarKind;
