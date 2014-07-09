@@ -339,10 +339,6 @@
     <Compile Include="Gadgets\Analysis\ComplexSampleMeansControl.xaml.cs">
       <DependentUpon>ComplexSampleMeansControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Gadgets\Analysis\DeduplicationControl.xaml.cs">
-      <DependentUpon>DeduplicationControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Gadgets\Analysis\WordCloudControl.xaml.cs">
       <DependentUpon>WordCloudControl.xaml</DependentUpon>
     </Compile>
@@ -829,10 +825,6 @@
     <Page Include="Gadgets\Analysis\ComplexSampleMeansControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Gadgets\Analysis\DeduplicationControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Gadgets\Analysis\WordCloudControl.xaml">
       <Generator>MSBuild:Compile</Generator>
