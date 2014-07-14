@@ -201,6 +201,15 @@ namespace Epi.Data.MySQL.Forms
                 ErrorMessages.Add("Password is required"); // TODO: Hard coded string
             }
 
+            if (!string.IsNullOrEmpty(txtPort.Text))
+            {
+                uint result;
+                if (!uint.TryParse(txtPort.Text, out result))
+                {
+                    ErrorMessages.Add("Invalid port");
+                }
+            }
+
             return (ErrorMessages.Count == 0);
         }
 
@@ -228,6 +237,10 @@ namespace Epi.Data.MySQL.Forms
                 dbConnectionStringBuilder.Server = cmbServerName.Text.Trim();
                 dbConnectionStringBuilder.UserID = txtUserName.Text.Trim();
                 dbConnectionStringBuilder.Password = txtPassword.Text.Trim();
+                if (!string.IsNullOrEmpty(txtPort.Text))
+                {
+                    dbConnectionStringBuilder.Port = uint.Parse(txtPort.Text);
+                }
                 this.DialogResult = DialogResult.OK;
                 this.Hide();
             }
