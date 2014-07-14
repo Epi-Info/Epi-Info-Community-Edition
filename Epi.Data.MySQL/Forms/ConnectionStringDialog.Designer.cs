@@ -40,6 +40,8 @@ namespace Epi.Data.MySQL.Forms
             this.lblUserName = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
+            this.txtPort = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // baseImageList
@@ -162,7 +164,6 @@ namespace Epi.Data.MySQL.Forms
             resources.ApplyResources(this.cmbServerName, "cmbServerName");
             this.cmbServerName.Name = "cmbServerName";
             this.cmbServerName.SelectedIndexChanged += new System.EventHandler(this.cmbServerName_SelectedIndexChanged);
-
             // 
             // txtDatabaseName
             // 
@@ -190,10 +191,22 @@ namespace Epi.Data.MySQL.Forms
             resources.ApplyResources(this.lblPassword, "lblPassword");
             this.lblPassword.Name = "lblPassword";
             // 
+            // txtPort
+            // 
+            resources.ApplyResources(this.txtPort, "txtPort");
+            this.txtPort.Name = "txtPort";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // ConnectionStringDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtPort);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.txtUserName);
@@ -265,6 +278,8 @@ namespace Epi.Data.MySQL.Forms
         /// Password label control.
         /// </summary>
         protected System.Windows.Forms.Label lblPassword;
+        protected System.Windows.Forms.TextBox txtPort;
+        protected System.Windows.Forms.Label label1;
 
     }
 }
