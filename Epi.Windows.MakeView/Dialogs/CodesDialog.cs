@@ -166,14 +166,44 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             creationMode = CreationMode.UseExisting;
 
-            ViewSelectionDialog dialog = new ViewSelectionDialog(MainForm, page.GetProject());
+            Project project = page.GetProject();
+
+            ViewSelectionDialog dialog = new ViewSelectionDialog(MainForm, project);
             DialogResult result = dialog.ShowDialog();
 
             if (result == DialogResult.OK)
             {
                 sourceTableName = dialog.TableName;
                 dialog.Close();
-                codeTable = page.GetProject().GetTableData(sourceTableName);
+
+                if (project.CollectedData.TableExists(sourceTableName) == false)
+                {
+                    string separator = " - ";
+                    string filterExpression = string.Empty;
+
+                    if (sourceTableName.Contains(separator))
+                    {
+                        string[] view_page = sourceTableName.Replace(separator, "^").Split('^');
+                        string viewName = view_page[0].ToString();
+                        string pageName = view_page[1].ToString();
+                        View targetView = project.Metadata.GetViewByFullName(viewName);
+
+                        DataTable targetPages = project.Metadata.GetPagesForView(targetView.Id);
+                        DataView dataView = new DataView(targetPages);
+
+                        filterExpression = string.Format("Name = '{0}'", pageName);
+
+                        DataRow[] pageArray = targetPages.Select(filterExpression);
+
+                        if (pageArray.Length > 0)
+                        {
+                            int pageId = (int)pageArray[0]["PageId"];
+                            sourceTableName = viewName + pageId;
+                        }
+                    }
+                }
+
+                codeTable = project.GetTableData(sourceTableName);
 
                 if (codeTable != null)
                 {
