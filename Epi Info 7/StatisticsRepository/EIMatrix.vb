@@ -322,6 +322,8 @@ Option Explicit On
         'UPGRADE_WARNING: Lower bound of array ldblaScore was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
         ReDim ldblaScore(lintMatrixSize - 1)
         mdblScore = 0
+        Dim oldmdblScore As Double
+        oldmdblScore = CDbl(0)
         mboolConverge = True
 
         On Error GoTo ERROR_Renamed
@@ -329,10 +331,14 @@ Option Explicit On
         'Set Array sizes
         'UPGRADE_WARNING: Lower bound of array mdblaJacobian was changed from 1,1 to 0,0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
         ReDim mdblaJacobian(lintMatrixSize - 1, lintMatrixSize - 1)
+        Dim oldmdblaJacobian(,) As Double
+        ReDim oldmdblaJacobian(lintMatrixSize - 1, lintMatrixSize - 1)
         'UPGRADE_WARNING: Lower bound of array mdblaInv was changed from 1,1 to 0,0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
         ReDim mdblaInv(lintMatrixSize - 1, lintMatrixSize - 1)
         'UPGRADE_WARNING: Lower bound of array mdblaF was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
         ReDim mdblaF(lintMatrixSize - 1)
+        Dim oldmdblaF() As Double
+        ReDim oldmdblaF(lintMatrixSize - 1)
         'UPGRADE_WARNING: Lower bound of array mdblaB was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
         ReDim mdblaB(lintMatrixSize - 1)
         'UPGRADE_WARNING: Lower bound of array ldblaScore was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
@@ -340,6 +346,13 @@ Option Explicit On
 
         'Calculate the likelihood
         RaiseEvent CalcLikelihood(lintOffset, dataArray, mdblaB, mdblaJacobian, mdblaF, nRows, ldbllfst, strCalcLikelihoodError, booStartAtZero)
+
+        For i = 0 To UBound(mdblaB)
+            For j = 0 To UBound(mdblaB)
+                oldmdblaJacobian(i, j) = mdblaJacobian(i, j)
+            Next j
+            oldmdblaF(i) = mdblaF(i)
+        Next i
 
         ' added by Eric Fontaine 07/28/03: raises an error if CalcLikelihood had an error
         If strCalcLikelihoodError <> "" Then
@@ -352,6 +365,16 @@ Option Explicit On
         ldbll = ldbllfst
         If ldbllfst > 0 Then Err.Raise(vbObjectError, , "<tlt>Positive Log-Likelihood, regression is diverging</tlt>")
         inv(mdblaJacobian, mdblaInv)
+        Dim oldmdblaInv(,) As Double
+        Dim oldmdblaB() As Double
+        ReDim oldmdblaInv(lintMatrixSize - 1, lintMatrixSize - 1)
+        ReDim oldmdblaB(lintMatrixSize - 1)
+        For i = 0 To UBound(mdblaB)
+            For j = 0 To UBound(mdblaB)
+                oldmdblaInv(i, j) = mdblaInv(i, j)
+            Next j
+            oldmdblaB(i) = mdblaB(i)
+        Next i
         'find the determinant
         'The matrix has already been lu decomposed.
         ldblDet = 1
@@ -376,6 +399,9 @@ Option Explicit On
             mdblScore = mdblScore + ldblaScore(i) * mdblaF(i)
         Next
 
+        Dim Ridge As Double
+        Ridge = CDbl(0)
+
         For mintIterations = 2 To llngIters
             'clear f
             For i = 0 To UBound(mdblaF)
@@ -386,6 +412,30 @@ Option Explicit On
 
             'test for exit time
             If ldbloldll - ldbll > ldblConv Then
+                If Ridge > 0.0 And Ridge < 1000 Then
+                    mintIterations = mintIterations - 1
+                    Ridge = Ridge * 4.0
+                    For i = 0 To UBound(mdblaB)
+                        For j = 0 To UBound(mdblaB)
+                            mdblaJacobian(i, j) = oldmdblaJacobian(i, j) * (1 + Int(i = j) * Ridge)
+                        Next j
+                        mdblaB(i) = oldmdblaB(i)
+                        mdblaF(i) = oldmdblaF(i)
+                    Next i
+                    GoTo ContinuePoint
+                End If
+                If Ridge = 0.0 Then
+                    mintIterations = mintIterations - 1
+                    Ridge = 0.0001
+                    For i = 0 To UBound(mdblaB)
+                        For j = 0 To UBound(mdblaB)
+                            mdblaJacobian(i, j) = oldmdblaJacobian(i, j) * (1 + Int(i = j) * Ridge)
+                        Next j
+                        mdblaB(i) = oldmdblaB(i)
+                        mdblaF(i) = oldmdblaF(i)
+                    Next i
+                    GoTo ContinuePoint
+                End If
 
                 mboolConverge = False
                 mdblllfst = ldbllfst
@@ -393,10 +443,24 @@ Option Explicit On
                 Err.Raise(vbObjectError, , "<tlt>Regression not converging</tlt>")
                 'UPGRADE_WARNING: Couldn't resolve default property of object ldblConv. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="6A50421D-15FE-4896-8A1B-2EC21E9037B2"'
             ElseIf ldbll - ldbloldll < ldblConv Then
+                mdblaB = oldmdblaB
+                mdblaInv = oldmdblaInv
+                mintIterations = mintIterations - 1
                 GoTo EndProc
             End If
 
+            For i = 0 To UBound(mdblaB)
+                For j = 0 To UBound(mdblaB)
+                    oldmdblaInv(i, j) = mdblaInv(i, j)
+                    oldmdblaJacobian(i, j) = mdblaJacobian(i, j)
+                Next j
+                oldmdblaB(i) = mdblaB(i)
+                oldmdblaF(i) = mdblaF(i)
+            Next i
+            Ridge = 0.0
+            ldbloldll = ldbll
 
+ContinuePoint:
             inv(mdblaJacobian, mdblaInv)
             'find the determinant
             'The matrix has already been ludecomposed.
@@ -421,7 +485,6 @@ Option Explicit On
 
             Next
 
-            ldbloldll = ldbll
 
         Next
 EndProc:
