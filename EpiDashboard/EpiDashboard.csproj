@@ -171,6 +171,10 @@
     </Compile>
     <Compile Include="Controls\Charting\ColumnChartBase.cs" />
     <Compile Include="Controls\Charting\AreaChartBase.cs" />
+    <Compile Include="Controls\Charting\ScatterChart.xaml.cs">
+      <DependentUpon>ScatterChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Charting\ScatterChartBase.cs" />
     <Compile Include="Controls\Charting\ParetoChartBase.cs" />
     <Compile Include="Controls\Charting\ParetoChart.xaml.cs">
       <DependentUpon>ParetoChart.xaml</DependentUpon>
@@ -204,6 +208,9 @@
     </Compile>
     <Compile Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml.cs">
       <DependentUpon>AberrationDetectionChartProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\ScatterChartProperties.xaml.cs">
+      <DependentUpon>ScatterChartProperties.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\GadgetProperties\ParetoChartProperties.xaml.cs">
       <DependentUpon>ParetoChartProperties.xaml</DependentUpon>
@@ -468,6 +475,8 @@
     <Compile Include="Gadgets\AreaChartParametersBase.cs" />
     <Compile Include="Gadgets\AberrationDetectionChartParametersBase.cs" />
     <Compile Include="Gadgets\AberrationDetectionChartParameters.cs" />
+    <Compile Include="Gadgets\ScatterChartParameters.cs" />
+    <Compile Include="Gadgets\ScatterChartParametersBase.cs" />
     <Compile Include="Gadgets\ParetoChartParameters.cs" />
     <Compile Include="Gadgets\ParetoChartParametersBase.cs" />
     <Compile Include="Gadgets\PieChartParameters.cs" />
@@ -851,6 +860,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\Charting\ScatterChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Charting\ParetoChart.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -888,6 +901,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\ScatterChartProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
