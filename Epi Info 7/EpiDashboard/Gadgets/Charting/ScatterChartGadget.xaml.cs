@@ -78,246 +78,233 @@ namespace EpiDashboard.Gadgets.Charting
 
         private void FillComboboxes(bool update = false)
         {
-            LoadingCombos = true;
+            //LoadingCombos = true;
 
-            string prevField = string.Empty;
-            string prevOutcomeField = string.Empty;
-            List<string> prevStrataFields = new List<string>();
+            //string prevField = string.Empty;
+            //string prevOutcomeField = string.Empty;
+            //List<string> prevStrataFields = new List<string>();
 
-            //cmbFontSelector.ItemsSource = Fonts.SystemFontFamilies;
+            ////cmbFontSelector.ItemsSource = Fonts.SystemFontFamilies;
 
-            if (update)
-            {
-                if (cmbField.SelectedIndex >= 0)
-                {
-                    prevField = cmbField.SelectedItem.ToString();
-                }
-                if (cmbOutcomeField.SelectedIndex >= 0)
-                {
-                    prevOutcomeField = cmbOutcomeField.SelectedItem.ToString();
-                }
-                //foreach (string s in listboxFieldStrata.SelectedItems)
-                //{
-                //    prevStrataFields.Add(s);
-                //}
-            }
+            //if (update)
+            //{
+            //    if (cmbField.SelectedIndex >= 0)
+            //    {
+            //        prevField = cmbField.SelectedItem.ToString();
+            //    }
+            //    if (cmbOutcomeField.SelectedIndex >= 0)
+            //    {
+            //        prevOutcomeField = cmbOutcomeField.SelectedItem.ToString();
+            //    }
+            //    //foreach (string s in listboxFieldStrata.SelectedItems)
+            //    //{
+            //    //    prevStrataFields.Add(s);
+            //    //}
+            //}
 
-            cmbField.ItemsSource = null;
-            cmbField.Items.Clear();
+            //cmbField.ItemsSource = null;
+            //cmbField.Items.Clear();
 
-            cmbOutcomeField.ItemsSource = null;
-            cmbOutcomeField.Items.Clear();
+            //cmbOutcomeField.ItemsSource = null;
+            //cmbOutcomeField.Items.Clear();
 
-            //listboxFieldStrata.ItemsSource = null;
-            //listboxFieldStrata.Items.Clear();
+            ////listboxFieldStrata.ItemsSource = null;
+            ////listboxFieldStrata.Items.Clear();
 
-            List<string> fieldNames = new List<string>();
-            List<string> weightFieldNames = new List<string>();
-            List<string> strataFieldNames = new List<string>();
+            //List<string> fieldNames = new List<string>();
+            //List<string> weightFieldNames = new List<string>();
+            //List<string> strataFieldNames = new List<string>();
 
-            weightFieldNames.Add(string.Empty);
+            //weightFieldNames.Add(string.Empty);
 
-            ColumnDataType columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
-            fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
+            //ColumnDataType columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
+            //fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
 
-            //columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
-            //weightFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
+            ////columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
+            ////weightFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
 
-            columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
-            strataFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
+            //columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
+            //strataFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
 
-            fieldNames.Sort();
-            //weightFieldNames.Sort();
-            strataFieldNames.Sort();
+            //fieldNames.Sort();
+            ////weightFieldNames.Sort();
+            //strataFieldNames.Sort();
 
-            if (fieldNames.Contains("SYSTEMDATE"))
-            {
-                fieldNames.Remove("SYSTEMDATE");
-            }
+            //if (fieldNames.Contains("SYSTEMDATE"))
+            //{
+            //    fieldNames.Remove("SYSTEMDATE");
+            //}
 
-            if (DashboardHelper.IsUsingEpiProject)
-            {
-                if (fieldNames.Contains("RecStatus")) fieldNames.Remove("RecStatus");
-                if (weightFieldNames.Contains("RecStatus")) weightFieldNames.Remove("RecStatus");
+            //if (DashboardHelper.IsUsingEpiProject)
+            //{
+            //    if (fieldNames.Contains("RecStatus")) fieldNames.Remove("RecStatus");
+            //    if (weightFieldNames.Contains("RecStatus")) weightFieldNames.Remove("RecStatus");
 
-                if (strataFieldNames.Contains("RecStatus")) strataFieldNames.Remove("RecStatus");
-                if (strataFieldNames.Contains("FKEY")) strataFieldNames.Remove("FKEY");
-                if (strataFieldNames.Contains("GlobalRecordId")) strataFieldNames.Remove("GlobalRecordId");
-            }
+            //    if (strataFieldNames.Contains("RecStatus")) strataFieldNames.Remove("RecStatus");
+            //    if (strataFieldNames.Contains("FKEY")) strataFieldNames.Remove("FKEY");
+            //    if (strataFieldNames.Contains("GlobalRecordId")) strataFieldNames.Remove("GlobalRecordId");
+            //}
 
-            cmbField.ItemsSource = fieldNames;
-            cmbOutcomeField.ItemsSource = fieldNames;
-            //listboxFieldStrata.ItemsSource = strataFieldNames;
+            //cmbField.ItemsSource = fieldNames;
+            //cmbOutcomeField.ItemsSource = fieldNames;
+            ////listboxFieldStrata.ItemsSource = strataFieldNames;
 
-            if (cmbField.Items.Count > 0)
-            {
-                cmbField.SelectedIndex = -1;
-            }
-            if (cmbOutcomeField.Items.Count > 0)
-            {
-                cmbOutcomeField.SelectedIndex = -1;
-            }
+            //if (cmbField.Items.Count > 0)
+            //{
+            //    cmbField.SelectedIndex = -1;
+            //}
+            //if (cmbOutcomeField.Items.Count > 0)
+            //{
+            //    cmbOutcomeField.SelectedIndex = -1;
+            //}
 
-            if (update)
-            {
-                cmbField.SelectedItem = prevField;
-                cmbOutcomeField.SelectedItem = prevOutcomeField;
+            //if (update)
+            //{
+            //    cmbField.SelectedItem = prevField;
+            //    cmbOutcomeField.SelectedItem = prevOutcomeField;
 
-                //foreach (string s in prevStrataFields)
-                //{
-                //    listboxFieldStrata.SelectedItems.Add(s);
-                //}
-            }
+            //    //foreach (string s in prevStrataFields)
+            //    //{
+            //    //    listboxFieldStrata.SelectedItems.Add(s);
+            //    //}
+            //}
 
-            LoadingCombos = false;
+            //LoadingCombos = false;
         }
 
         public override void SetGadgetToProcessingState()
         {
             this.IsProcessing = true;
-            this.cmbPalette.IsEnabled = false;
-            this.cmbField.IsEnabled = false;
-            //this.listboxFieldStrata.IsEnabled = false;
-            //this.cmbFieldWeight.IsEnabled = false;
-            //this.checkboxIncludeMissing.IsEnabled = false;
-            //this.checkboxSortHighLow.IsEnabled = false;
-            //this.checkboxCommentLegalLabels.IsEnabled = false;
-            //this.checkboxAllValues.IsEnabled = false;
-            this.btnRun.IsEnabled = false;
         }
 
         public override void SetGadgetToFinishedState()
         {
             this.IsProcessing = false;
-            this.cmbPalette.IsEnabled = true;
-            this.cmbField.IsEnabled = true;
-            //this.listboxFieldStrata.IsEnabled = true;
-            //this.cmbFieldWeight.IsEnabled = true;
-            //this.checkboxIncludeMissing.IsEnabled = true;
-            //this.checkboxSortHighLow.IsEnabled = true;
-            this.btnRun.IsEnabled = true;
-
-            //if (IsDropDownList || IsRecoded)
-            //{
-            //    this.checkboxAllValues.IsEnabled = true;
-            //}
-
-            //if (IsCommentLegal || IsOptionField)
-            //{
-            //    this.checkboxCommentLegalLabels.IsEnabled = true;
-            //}
-
             base.SetGadgetToFinishedState();
         }
 
         private void SetVisuals()
         {
-            SetPalette();
-            SetMarkerType();
+            //ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
+            ////SetPalette();
+            ////SetMarkerType();
 
-            double legendFontSize = 13;
-            double.TryParse(txtLegendFontSize.Text, out legendFontSize);
-            xyChart.Legend.FontSize = legendFontSize;
+            //double legendFontSize = 13;
+            ////double.TryParse(txtLegendFontSize.Text, out legendFontSize);
+            //xyChart.Legend.FontSize = chtParameters.LegendFontSize;
 
-            if (checkboxAnnotations.IsChecked == true) series0.ShowPointAnnotations = true;
-            else series0.ShowPointAnnotations = false;
+            ////xyChart.InnerMargins = new Thickness(20, 30, 30, 50);
 
-            //xyChart.InnerMargins = new Thickness(20, 30, 30, 50);
+            ////double angle = 0;
+            ////if (double.TryParse(txtXAxisAngle.Text, out angle))
+            ////{
+            //xAxisCoordinates.Angle = chtParameters.XAxisAngle;
+            ////}
 
-            double angle = 0;
-            if (double.TryParse(txtXAxisAngle.Text, out angle))
-            {
-                xAxisCoordinates.Angle = angle;
-            }
+            ////tblockYAxisLabel.Text = txtYAxisLabelValue.Text;
+            //tblockYAxisLabel.Text = chtParameters.YAxisLabel;
+            ////switch (cmbXAxisLabelType.SelectedIndex)
+            //switch(chtParameters.XAxisLabelType)
+            //{
+            //    case 3:
+            //        tblockXAxisLabel.Text = chtParameters.XAxisLabel;
+            //        break;
+            //    case 1:
+            //        if (chtParameters.ColumnNames.Count > 0 && !String.IsNullOrEmpty(chtParameters.ColumnNames[0]))
+            //        {
+            //            Field field = DashboardHelper.GetAssociatedField(chtParameters.ColumnNames[0]);
+            //            if (field != null)
+            //            {
+            //                RenderableField rField = field as RenderableField;
+            //                tblockXAxisLabel.Text = rField.PromptText;
+            //            }
+            //            else
+            //            {
+            //                tblockXAxisLabel.Text = chtParameters.ColumnNames[0];
+            //            }
+            //        }
+            //        break;
+            //    case 2:
+            //        tblockXAxisLabel.Text = string.Empty;
+            //        break;
+            //    default:
+            //        tblockXAxisLabel.Text = chtParameters.ColumnNames[0];
+            //        break;
+            //}
 
-            tblockYAxisLabel.Text = txtYAxisLabelValue.Text;
-
-            switch (cmbXAxisLabelType.SelectedIndex)
-            {
-                case 3:
-                    tblockXAxisLabel.Text = txtXAxisLabelValue.Text;
-                    break;
-                case 1:
-                    Field field = DashboardHelper.GetAssociatedField(GadgetOptions.MainVariableName);
-                    if (field != null)
-                    {
-                        RenderableField rField = field as RenderableField;
-                        tblockXAxisLabel.Text = rField.PromptText;
-                    }
-                    else
-                    {
-                        tblockXAxisLabel.Text = GadgetOptions.MainVariableName;
-                    }
-                    break;
-                case 2:
-                    tblockXAxisLabel.Text = string.Empty;
-                    break;
-                default:
-                    tblockXAxisLabel.Text = GadgetOptions.MainVariableName;
-                    break;
-            }
-
-            tblockChartTitle.Text = txtChartTitle.Text;
+            //tblockChartTitle.Text = chtParameters.ChartTitle;
         }
 
         public override void RefreshResults()
         {
-            if (!LoadingCombos && GadgetOptions != null && cmbField.SelectedIndex > -1 && cmbOutcomeField.SelectedIndex > -1)
+            ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
+            //if (!LoadingCombos && GadgetOptions != null && cmbField.SelectedIndex > -1 && cmbOutcomeField.SelectedIndex > -1)
+            if (!LoadingCombos)
             {
-                CreateInputVariableList();
-                SetVisuals();
-                infoPanel.Visibility = System.Windows.Visibility.Collapsed;
-                waitPanel.Visibility = System.Windows.Visibility.Visible;
-                messagePanel.MessagePanelType = EpiDashboard.Controls.MessagePanelType.StatusPanel;
-                descriptionPanel.PanelMode = EpiDashboard.Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
-                baseWorker = new BackgroundWorker();
-                baseWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(Execute);
-                baseWorker.RunWorkerAsync();
-                base.RefreshResults();
-            }
-            else if (!LoadingCombos && cmbField.SelectedIndex == -1)
-            {
-                ClearResults();
-                waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+                if (chtParameters != null)
+                {
+                    if (chtParameters.ColumnNames.Count > 0 && !String.IsNullOrEmpty(chtParameters.ColumnNames[0]))
+                    {
+
+                        CreateInputVariableList();
+                        SetVisuals();
+                        infoPanel.Visibility = System.Windows.Visibility.Collapsed;
+                        waitPanel.Visibility = System.Windows.Visibility.Visible;
+                        messagePanel.MessagePanelType = EpiDashboard.Controls.MessagePanelType.StatusPanel;
+                        descriptionPanel.PanelMode = EpiDashboard.Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
+                        baseWorker = new BackgroundWorker();
+                        baseWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(Execute);
+                        baseWorker.RunWorkerAsync();
+                        base.RefreshResults();
+                    }
+                    else
+                    {
+                        ClearResults();
+                        waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+                    }
+                }
             }
         }
 
         private void CreateInputVariableList()
         {
-            Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
+            //MOVED TO SCATTER CHART PROPERTIES
+            //Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
 
-            GadgetOptions.MainVariableName = string.Empty;
-            GadgetOptions.WeightVariableName = string.Empty;
-            GadgetOptions.StrataVariableNames = new List<string>();
-            GadgetOptions.CrosstabVariableName = string.Empty;
-            GadgetOptions.ColumnNames = new List<string>();
+            //GadgetOptions.MainVariableName = string.Empty;
+            //GadgetOptions.WeightVariableName = string.Empty;
+            //GadgetOptions.StrataVariableNames = new List<string>();
+            //GadgetOptions.CrosstabVariableName = string.Empty;
+            //GadgetOptions.ColumnNames = new List<string>();
 
-            if (cmbField.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbField.SelectedItem.ToString()))
-            {
-                inputVariableList.Add("freqvar", cmbField.SelectedItem.ToString());
-                GadgetOptions.MainVariableName = cmbField.SelectedItem.ToString();
-            }
-            else
-            {
-                return;
-            }
+            //if (cmbField.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbField.SelectedItem.ToString()))
+            //{
+            //    inputVariableList.Add("freqvar", cmbField.SelectedItem.ToString());
+            //    GadgetOptions.MainVariableName = cmbField.SelectedItem.ToString();
+            //}
+            //else
+            //{
+            //    return;
+            //}
 
-            if (cmbField.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbOutcomeField.SelectedItem.ToString()))
-            {
-                inputVariableList.Add("crosstabvar", cmbOutcomeField.SelectedItem.ToString());
-                GadgetOptions.CrosstabVariableName = cmbOutcomeField.SelectedItem.ToString();
-            }
-            else
-            {
-                return;
-            }
+            //if (cmbField.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbOutcomeField.SelectedItem.ToString()))
+            //{
+            //    inputVariableList.Add("crosstabvar", cmbOutcomeField.SelectedItem.ToString());
+            //    GadgetOptions.CrosstabVariableName = cmbOutcomeField.SelectedItem.ToString();
+            //}
+            //else
+            //{
+            //    return;
+            //}
 
-            GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
-            GadgetOptions.InputVariableList = inputVariableList;
+            //GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
+            //GadgetOptions.InputVariableList = inputVariableList;
         }
 
         protected override void Construct()
         {
+            this.Parameters = new ScatterChartParameters();
+
             if (!string.IsNullOrEmpty(CustomOutputHeading) && !CustomOutputHeading.Equals("(none)"))
             {
                 headerPanel.Text = CustomOutputHeading;
@@ -353,48 +340,6 @@ namespace EpiDashboard.Gadgets.Charting
             this.GadgetStatusUpdate += new GadgetStatusUpdateHandler(RequestUpdateStatusMessage);
             this.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(IsCancelled);
 
-            #region Translation
-
-            tblockWidth.Text = DashboardSharedStrings.GADGET_WIDTH;
-            tblockHeight.Text = DashboardSharedStrings.GADGET_HEIGHT;
-            tblockMainVariable.Text = DashboardSharedStrings.GADGET_MAIN_VARIABLE;
-
-            //expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
-            expanderDisplayOptions.Header = DashboardSharedStrings.GADGET_DISPLAY_OPTIONS;
-
-            lblColorsStyles.Content = ChartingSharedStrings.PANEL_COLORS_AND_STYLES;
-            lblLabels.Content = ChartingSharedStrings.PANEL_LABELS;
-            lblLegend.Content = ChartingSharedStrings.PANEL_LEGEND;
-
-            checkboxAnnotations.Content = ChartingSharedStrings.SHOW_ANNOTATIONS;
-            tblockPalette.Text = ChartingSharedStrings.COLOR_PALETTE;
-
-            tblockYAxisLabelValue.Text = ChartingSharedStrings.Y_AXIS_LABEL;
-
-            tblockXAxisLabelType.Text = ChartingSharedStrings.X_AXIS_LABEL_TYPE;
-            tblockXAxisLabelValue.Text = ChartingSharedStrings.X_AXIS_LABEL;
-            tblockXAxisAngle.Text = ChartingSharedStrings.X_AXIS_ANGLE;
-            tblockChartTitleValue.Text = ChartingSharedStrings.CHART_TITLE;
-
-            checkboxShowLegend.Content = ChartingSharedStrings.SHOW_LEGEND;
-            checkboxShowLegendBorder.Content = ChartingSharedStrings.SHOW_LEGEND_BORDER;
-            checkboxShowVarName.Content = ChartingSharedStrings.SHOW_VAR_NAMES;
-            tblockLegendFontSize.Text = ChartingSharedStrings.LEGEND_FONT_SIZE;
-
-            btnRun.Content = DashboardSharedStrings.GADGET_RUN_BUTTON;
-
-            #endregion // Translation
-
-            txtWidth.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
-            txtHeight.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
-            txtLegendFontSize.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
-            txtXAxisAngle.PreviewKeyDown += new KeyEventHandler(txtInput_IntegerOnly_PreviewKeyDown);
-
-            xyChart.Legend.BorderBrush = Brushes.Gray;
-            double legendFontSize = 13;
-            double.TryParse(txtLegendFontSize.Text, out legendFontSize);
-            xyChart.Legend.FontSize = legendFontSize;
-
             base.Construct();
         }
 
@@ -408,10 +353,10 @@ namespace EpiDashboard.Gadgets.Charting
             tblockYAxisLabel.Visibility = System.Windows.Visibility.Collapsed;
             tblockChartTitle.Visibility = System.Windows.Visibility.Collapsed;
 
-            //panelMain.Children.Clear();
-            xyChart.DataSource = null;
-            xyChart.Width = 0;
-            xyChart.Height = 0;
+            panelMain.Children.Clear();
+            //xyChart.DataSource = null;
+            //xyChart.Width = 0;
+            //xyChart.Height = 0;
 
             StrataGridList.Clear();
             StrataExpanderList.Clear();
@@ -419,7 +364,10 @@ namespace EpiDashboard.Gadgets.Charting
 
         private void ShowLabels()
         {
-            if (string.IsNullOrEmpty(tblockXAxisLabel.Text.Trim()))
+            ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
+
+            //if (string.IsNullOrEmpty(tblockXAxisLabel.Text.Trim()))
+            if (string.IsNullOrEmpty(chtParameters.XAxisLabel))
             {
                 tblockXAxisLabel.Visibility = System.Windows.Visibility.Collapsed;
             }
@@ -428,7 +376,8 @@ namespace EpiDashboard.Gadgets.Charting
                 tblockXAxisLabel.Visibility = System.Windows.Visibility.Visible;
             }
 
-            if (string.IsNullOrEmpty(tblockYAxisLabel.Text.Trim()))
+            //if (string.IsNullOrEmpty(tblockYAxisLabel.Text.Trim()))
+            if (string.IsNullOrEmpty(chtParameters.YAxisLabel))
             {
                 tblockYAxisLabel.Visibility = System.Windows.Visibility.Collapsed;
             }
@@ -437,7 +386,8 @@ namespace EpiDashboard.Gadgets.Charting
                 tblockYAxisLabel.Visibility = System.Windows.Visibility.Visible;
             }
 
-            if (string.IsNullOrEmpty(tblockChartTitle.Text.Trim()))
+            //if (string.IsNullOrEmpty(tblockChartTitle.Text.Trim()))
+            if (string.IsNullOrEmpty(chtParameters.ChartTitle))
             {
                 tblockChartTitle.Visibility = System.Windows.Visibility.Collapsed;
             }
@@ -457,7 +407,7 @@ namespace EpiDashboard.Gadgets.Charting
 
             panelFormula.Visibility = System.Windows.Visibility.Visible;
 
-            ShowLabels();
+            //ShowLabels();
             HideConfigPanel();
             CheckAndSetPosition();
         }
@@ -472,7 +422,7 @@ namespace EpiDashboard.Gadgets.Charting
 
             panelFormula.Visibility = System.Windows.Visibility.Visible;
 
-            ShowLabels();
+            //ShowLabels();
             HideConfigPanel();
             CheckAndSetPosition();
         }
@@ -487,8 +437,8 @@ namespace EpiDashboard.Gadgets.Charting
 
             panelFormula.Visibility = System.Windows.Visibility.Collapsed;
 
-            xyChart.DataSource = null;
-            xyChart.Visibility = System.Windows.Visibility.Collapsed;
+            //xyChart.DataSource = null;
+            //xyChart.Visibility = System.Windows.Visibility.Collapsed;
 
             HideConfigPanel();
             CheckAndSetPosition();
@@ -497,6 +447,8 @@ namespace EpiDashboard.Gadgets.Charting
         public override void CreateFromXml(XmlElement element)
         {
             this.LoadingCombos = true;
+            this.Parameters = new ScatterChartParameters();
+
             HideConfigPanel();
             infoPanel.Visibility = System.Windows.Visibility.Collapsed;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
@@ -506,55 +458,43 @@ namespace EpiDashboard.Gadgets.Charting
                 switch (child.Name.ToLower())
                 {
                     case "mainvariable":
-                        cmbField.Text = child.InnerText.Replace("&lt;", "<");
+                        if (this.Parameters.ColumnNames.Count > 0)
+                        {
+                            ((ScatterChartParameters)Parameters).ColumnNames[0] = (child.InnerText.Replace("&lt;", "<"));
+                        }
+                        else
+                        {
+                            ((ScatterChartParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
+                        }
                         break;
                     case "outcomevariable":
-                        cmbOutcomeField.Text = child.InnerText.Replace("&lt;", "<");
+                        //cmbOutcomeField.Text = child.InnerText.Replace("&lt;", "<");
+                        if (this.Parameters.ColumnNames.Count > 1)
+                        {
+                            ((ScatterChartParameters)Parameters).ColumnNames[1] = (child.InnerText.Replace("&lt;", "<"));
+                        }
+                        else
+                        {
+                            ((ScatterChartParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
+                        }
                         break;
-                    //case "stratavariable":
-                    //    listboxFieldStrata.SelectedItems.Add(child.InnerText.Replace("&lt;", "<"));
-                    //    break;
-                    //case "stratavariables":
-                    //    foreach (XmlElement field in child.ChildNodes)
-                    //    {
-                    //        List<string> fields = new List<string>();
-                    //        if (field.Name.ToLower().Equals("stratavariable"))
-                    //        {
-                    //            listboxFieldStrata.SelectedItems.Add(field.InnerText.Replace("&lt;", "<"));
-                    //        }
-                    //    }
-                    //    break;
-                    //case "weightvariable":
-                    //    cmbFieldWeight.Text = child.InnerText.Replace("&lt;", "<");
-                    //    break;
-                    //case "sort":
-                    //    if (child.InnerText.ToLower().Equals("highlow"))
-                    //    {
-                    //        checkboxSortHighLow.IsChecked = true;
-                    //    }
-                    //    break;
-                    //case "allvalues":
-                    //    if (child.InnerText.ToLower().Equals("true")) { checkboxAllValues.IsChecked = true; }
-                    //    else { checkboxAllValues.IsChecked = false; }
-                    //    break;
-                    //case "showlistlabels":
-                    //    if (child.InnerText.ToLower().Equals("true")) { checkboxCommentLegalLabels.IsChecked = true; }
-                    //    else { checkboxCommentLegalLabels.IsChecked = false; }
-                    //    break;
-                    //case "includemissing":
-                    //    if (child.InnerText.ToLower().Equals("true")) { checkboxIncludeMissing.IsChecked = true; }
-                    //    else { checkboxIncludeMissing.IsChecked = false; }
-                    //    break;
                     case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
+                            this.Parameters.GadgetTitle = child.InnerText.Replace("&lt;", "<"); 
                             this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<"); ;
+                        }
+                        else
+                        {
+                            this.CustomOutputHeading = string.Empty;
+                            this.Parameters.GadgetTitle = string.Empty;
                         }
                         break;
                     case "customdescription":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
                             this.CustomOutputDescription = child.InnerText.Replace("&lt;", "<");
+                            this.Parameters.GadgetDescription = child.InnerText.Replace("&lt;", "<");
                             if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputHeading.Equals("(none)"))
                             {
                                 descriptionPanel.Text = CustomOutputDescription;
@@ -573,59 +513,51 @@ namespace EpiDashboard.Gadgets.Charting
                         this.DataFilters = new DataFilters(this.DashboardHelper);
                         this.DataFilters.CreateFromXml(child);
                         break;
-                    //case "usediffbarcolors":
-                    //    if (child.InnerText.ToLower().Equals("true")) { checkboxAllValues.IsChecked = true; }
-                    //    else { checkboxAllValues.IsChecked = false; }                        
-                    //    break;
-                    //case "userefvalues":
-                    //    if (child.InnerText.ToLower().Equals("true")) { checkboxUseRefValues.IsChecked = true; }
-                    //    else { checkboxUseRefValues.IsChecked = false; }
-                    //    break;
-                    case "showannotations":
-                        if (child.InnerText.ToLower().Equals("true")) { checkboxAnnotations.IsChecked = true; }
-                        else { checkboxAnnotations.IsChecked = false; }
-                        break;
                     case "palette":
-                        cmbPalette.SelectedIndex = int.Parse(child.InnerText);
+                        ((ScatterChartParameters)Parameters).Palette = int.Parse(child.InnerText);
                         break;
                     case "markertype":
-                        cmbMarkerType.SelectedIndex = int.Parse(child.InnerText);
+                        ((ScatterChartParameters)Parameters).MarkerType = int.Parse(child.InnerText);
                         break;
                     case "yaxislabel":
-                        txtYAxisLabelValue.Text = child.InnerText;
+                        ((ScatterChartParameters)Parameters).Y2AxisLabel = child.InnerText;
                         break;
                     case "xaxislabeltype":
-                        cmbXAxisLabelType.SelectedIndex = int.Parse(child.InnerText);
+                        ((ScatterChartParameters)Parameters).XAxisLabelType = int.Parse(child.InnerText);
+
                         break;
                     case "xaxislabel":
-                        txtXAxisLabelValue.Text = child.InnerText;
+                        ((ScatterChartParameters)Parameters).XAxisLabel = child.InnerText;
                         break;
                     case "xaxisangle":
-                        txtXAxisAngle.Text = child.InnerText;
+                        ((ScatterChartParameters)Parameters).XAxisAngle = int.Parse(child.InnerText);
                         break;
                     case "charttitle":
-                        txtChartTitle.Text = child.InnerText;
+                        ((ScatterChartParameters)Parameters).ChartTitle = child.InnerText;
+                        break;
+                    case "chartsubtitle":
+                        ((ScatterChartParameters)Parameters).ChartSubTitle = child.InnerText;
                         break;
                     case "showlegend":
-                        if (child.InnerText.ToLower().Equals("true")) { checkboxShowLegend.IsChecked = true; }
-                        else { checkboxShowLegend.IsChecked = false; }
+                        if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).ShowLegend = true; }
+                        else { ((ScatterChartParameters)Parameters).ShowLegend = false; }
                         break;
                     case "showlegendborder":
-                        if (child.InnerText.ToLower().Equals("true")) { checkboxShowLegendBorder.IsChecked = true; }
-                        else { checkboxShowLegendBorder.IsChecked = false; }
+                        if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).ShowLegendBorder = true; }
+                        else { ((ScatterChartParameters)Parameters).ShowLegendBorder = false; }
                         break;
                     case "showlegendvarnames":
-                        if (child.InnerText.ToLower().Equals("true")) { checkboxShowVarName.IsChecked = true; }
-                        else { checkboxShowVarName.IsChecked = false; }
+                        if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).ShowLegendVarNames = true; }
+                        else { ((ScatterChartParameters)Parameters).ShowLegendVarNames = false; }
                         break;
                     case "legendfontsize":
-                        txtLegendFontSize.Text = child.InnerText;
+                        ((ScatterChartParameters)Parameters).LegendFontSize = int.Parse(child.InnerText);
                         break;
                     case "height":
-                        txtHeight.Text = child.InnerText;
+                        ((ScatterChartParameters)Parameters).ChartHeight = double.Parse(child.InnerText);
                         break;
                     case "width":
-                        txtWidth.Text = child.InnerText;
+                        ((ScatterChartParameters)Parameters).ChartWidth = double.Parse(child.InnerText);
                         break;
                 }
             }
@@ -644,115 +576,11 @@ namespace EpiDashboard.Gadgets.Charting
         /// <returns>XmlNode</returns>
         public override XmlNode Serialize(XmlDocument doc)
         {
-            CreateInputVariableList();
-
-            Dictionary<string, string> inputVariableList = GadgetOptions.InputVariableList;
-
-            string mainVar = string.Empty;
-            string crosstabVar = string.Empty;
-            string strataVar = string.Empty;
-            string weightVar = string.Empty;
-            string sort = string.Empty;
-            bool allValues = false;
-            bool showConfLimits = true;
-            bool showCumulativePercent = true;
-            bool includeMissing = false;
-
-            int height = 600;
-            int width = 800;
-
-            int.TryParse(txtHeight.Text, out height);
-            int.TryParse(txtWidth.Text, out width);
-
-            if (inputVariableList.ContainsKey("freqvar"))
-            {
-                mainVar = inputVariableList["freqvar"].Replace("<", "&lt;");
-            }
-            if (inputVariableList.ContainsKey("crosstabvar"))
-            {
-                crosstabVar = inputVariableList["crosstabvar"].Replace("<", "&lt;");
-            }
-            if (inputVariableList.ContainsKey("weightvar"))
-            {
-                weightVar = inputVariableList["weightvar"].Replace("<", "&lt;");
-            }
-            if (inputVariableList.ContainsKey("sort"))
-            {
-                sort = inputVariableList["sort"];
-            }
-            if (inputVariableList.ContainsKey("allvalues"))
-            {
-                allValues = bool.Parse(inputVariableList["allvalues"]);
-            }
-            if (inputVariableList.ContainsKey("showconflimits"))
-            {
-                showConfLimits = bool.Parse(inputVariableList["showconflimits"]);
-            }
-            if (inputVariableList.ContainsKey("showcumulativepercent"))
-            {
-                showCumulativePercent = bool.Parse(inputVariableList["showcumulativepercent"]);
-            }
-            if (inputVariableList.ContainsKey("includemissing"))
-            {
-                includeMissing = bool.Parse(inputVariableList["includemissing"]);
-            }
-
-            CustomOutputHeading = headerPanel.Text;
-            CustomOutputDescription = descriptionPanel.Text;
-
-            string xmlString =
-            "<mainVariable>" + mainVar + "</mainVariable>";
-
-            xmlString +=
-            "<outcomeVariable>" + crosstabVar + "</outcomeVariable>";
-
-            if (GadgetOptions.StrataVariableNames.Count == 1)
-            {
-                xmlString = xmlString + "<strataVariable>" + GadgetOptions.StrataVariableNames[0].Replace("<", "&lt;") + "</strataVariable>";
-            }
-            else if (GadgetOptions.StrataVariableNames.Count > 1)
-            {
-                xmlString = xmlString + "<strataVariables>";
-
-                foreach (string strataVariable in this.GadgetOptions.StrataVariableNames)
-                {
-                    xmlString = xmlString + "<strataVariable>" + strataVariable.Replace("<", "&lt;") + "</strataVariable>";
-                }
-
-                xmlString = xmlString + "</strataVariables>";
-            }
-
-            xmlString = xmlString + "<weightVariable>" + weightVar + "</weightVariable>" +
-
-                "<height>" + height + "</height>" +
-                "<width>" + width + "</width>" +
-
-            "<sort>" + sort + "</sort>" +
-            "<allValues>" + allValues + "</allValues>" +
-            "<includeMissing>" + includeMissing + "</includeMissing>" +
-            "<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
-            "<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>" +
-            "<customCaption>" + CustomOutputCaption + "</customCaption>";
-
-            xmlString += "<showAnnotations>" + checkboxAnnotations.IsChecked.Value + "</showAnnotations>";
-
-            xmlString += "<palette>" + cmbPalette.SelectedIndex + "</palette>";
-            xmlString += "<areaType>" + cmbMarkerType.SelectedIndex + "</areaType>";
-
-            xmlString += "<yAxisLabel>" + txtYAxisLabelValue.Text + "</yAxisLabel>";
-            xmlString += "<xAxisLabelType>" + cmbXAxisLabelType.SelectedIndex + "</xAxisLabelType>";
-            xmlString += "<xAxisLabel>" + txtXAxisLabelValue.Text + "</xAxisLabel>";
-            xmlString += "<xAxisAngle>" + txtXAxisAngle.Text + "</xAxisAngle>";
-            xmlString += "<chartTitle>" + txtChartTitle.Text + "</chartTitle>";
-
-            xmlString += "<showLegend>" + checkboxShowLegend.IsChecked.Value + "</showLegend>";
-            xmlString += "<showLegendBorder>" + checkboxShowLegendBorder.IsChecked.Value + "</showLegendBorder>";
-            xmlString += "<showLegendVarNames>" + checkboxShowVarName.IsChecked.Value + "</showLegendVarNames>";
-            xmlString += "<legendFontSize>" + txtLegendFontSize.Text + "</legendFontSize>";
-
-            xmlString = xmlString + SerializeAnchors();
+            //CreateInputVariableList();
+            ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
 
             System.Xml.XmlElement element = doc.CreateElement("scatterChartGadget");
+            string xmlString = string.Empty;
             element.InnerXml = xmlString;
             element.AppendChild(SerializeFilters(doc));
 
@@ -773,6 +601,244 @@ namespace EpiDashboard.Gadgets.Charting
             element.Attributes.Append(collapsed);
             element.Attributes.Append(type);
             element.Attributes.Append(id);
+
+
+            string mainVar = string.Empty;
+            string crosstabVar = string.Empty;
+            string strataVar = string.Empty;
+            string weightVar = string.Empty;
+            string sort = string.Empty;
+
+            double height = 600;
+            double width = 800;
+
+            double.TryParse(chtParameters.ChartHeight.ToString(), out height);
+            double.TryParse(chtParameters.ChartWidth.ToString(), out width);
+
+            //if (inputVariableList.ContainsKey("freqvar"))
+            //{
+            //    mainVar = inputVariableList["freqvar"].Replace("<", "&lt;");
+            //}
+            //mainVariable
+            XmlElement freqVarElement = doc.CreateElement("mainVariable");
+            if (chtParameters.ColumnNames.Count > 0)
+            {
+                if (!String.IsNullOrEmpty(chtParameters.ColumnNames[0].ToString()))
+                {
+                    freqVarElement.InnerText = chtParameters.ColumnNames[0].ToString().Replace("<", "&lt;");
+                    element.AppendChild(freqVarElement);
+                }
+            }
+
+            XmlElement outcomeVarElement = doc.CreateElement("outcomeVariable");
+            if (chtParameters.ColumnNames.Count > 1)
+            {
+                if (!String.IsNullOrEmpty(chtParameters.ColumnNames[1].ToString()))
+                {
+                    outcomeVarElement.InnerText = chtParameters.ColumnNames[1].ToString().Replace("<", "&lt;");
+                    element.AppendChild(outcomeVarElement);
+                }
+            }
+            
+            //if (inputVariableList.ContainsKey("crosstabvar"))
+            //{
+            //    crosstabVar = inputVariableList["crosstabvar"].Replace("<", "&lt;");
+            //}
+            //if (inputVariableList.ContainsKey("weightvar"))
+            //{
+            //    weightVar = inputVariableList["weightvar"].Replace("<", "&lt;");
+            //}
+            //if (inputVariableList.ContainsKey("sort"))
+            //{
+            //    sort = inputVariableList["sort"];
+            //}
+            //if (inputVariableList.ContainsKey("allvalues"))
+            //{
+            //    allValues = bool.Parse(inputVariableList["allvalues"]);
+            //}
+            //if (inputVariableList.ContainsKey("showconflimits"))
+            //{
+            //    showConfLimits = bool.Parse(inputVariableList["showconflimits"]);
+            //}
+            //if (inputVariableList.ContainsKey("showcumulativepercent"))
+            //{
+            //    showCumulativePercent = bool.Parse(inputVariableList["showcumulativepercent"]);
+            //}
+            //if (inputVariableList.ContainsKey("includemissing"))
+            //{
+            //    includeMissing = bool.Parse(inputVariableList["includemissing"]);
+            //}
+
+            CustomOutputHeading = headerPanel.Text;
+            CustomOutputDescription = descriptionPanel.Text;
+
+            //string xmlString =
+            //"<mainVariable>" + mainVar + "</mainVariable>";
+
+            //xmlString +=
+            //"<outcomeVariable>" + crosstabVar + "</outcomeVariable>";
+
+            //if (GadgetOptions.StrataVariableNames.Count == 1)
+            //{
+            //    xmlString = xmlString + "<strataVariable>" + GadgetOptions.StrataVariableNames[0].Replace("<", "&lt;") + "</strataVariable>";
+            //}
+            //else if (GadgetOptions.StrataVariableNames.Count > 1)
+            //{
+            //    xmlString = xmlString + "<strataVariables>";
+
+            //    foreach (string strataVariable in this.GadgetOptions.StrataVariableNames)
+            //    {
+            //        xmlString = xmlString + "<strataVariable>" + strataVariable.Replace("<", "&lt;") + "</strataVariable>";
+            //    }
+
+            //    xmlString = xmlString + "</strataVariables>";
+            //}
+
+            //xmlString = xmlString + "<weightVariable>" + weightVar + "</weightVariable>" +
+
+                //"<height>" + height + "</height>" +
+                //"<width>" + width + "</width>" +
+
+            //height 
+            XmlElement heightElement = doc.CreateElement("height");
+            heightElement.InnerText = chtParameters.ChartHeight.ToString().Replace("<", "&lt;");
+            element.AppendChild(heightElement);
+
+            //width 
+            XmlElement widthElement = doc.CreateElement("width");
+            widthElement.InnerText = chtParameters.ChartWidth.ToString().Replace("<", "&lt;");
+            element.AppendChild(widthElement);
+
+            //"<sort>" + sort + "</sort>" +
+            //"<allValues>" + allValues + "</allValues>" +
+            //"<includeMissing>" + includeMissing + "</includeMissing>" +
+
+            //"<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
+            //"<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>" +
+            //"<customCaption>" + CustomOutputCaption + "</customCaption>";
+
+            //customHeading
+            XmlElement customHeadingElement = doc.CreateElement("customHeading");
+            customHeadingElement.InnerText = chtParameters.GadgetTitle.Replace("<", "&lt;");
+            element.AppendChild(customHeadingElement);
+
+            //customDescription
+            XmlElement customDescriptionElement = doc.CreateElement("customDescription");
+            customDescriptionElement.InnerText = chtParameters.GadgetDescription.Replace("<", "&lt;");
+            element.AppendChild(customDescriptionElement);
+
+            //customCaption
+            XmlElement customCaptionElement = doc.CreateElement("customCaption");
+            if (!String.IsNullOrEmpty(CustomOutputCaption))
+            {
+                customCaptionElement.InnerText = CustomOutputCaption.Replace("<", "&lt;");
+            }
+            else
+            {
+                customCaptionElement.InnerText = string.Empty;
+            }
+            element.AppendChild(customCaptionElement);
+
+
+            //xmlString += "<showAnnotations>" + checkboxAnnotations.IsChecked.Value + "</showAnnotations>";
+
+            //xmlString += "<palette>" + cmbPalette.SelectedIndex + "</palette>";
+            //palette 
+            XmlElement paletteElement = doc.CreateElement("palette");
+            paletteElement.InnerText = chtParameters.Palette.ToString();
+            element.AppendChild(paletteElement);
+
+            //xmlString += "<areaType>" + cmbMarkerType.SelectedIndex + "</areaType>";
+            //Marker type 
+            XmlElement markerTypeElement = doc.CreateElement("areaType");
+            markerTypeElement.InnerText = chtParameters.MarkerType.ToString();
+            element.AppendChild(markerTypeElement);
+
+
+            //xmlString += "<yAxisLabel>" + txtYAxisLabelValue.Text + "</yAxisLabel>";
+            //yAxisLabel 
+            XmlElement yAxisLabelElement = doc.CreateElement("yAxisLabel");
+            yAxisLabelElement.InnerText = chtParameters.YAxisLabel.ToString().Replace("<", "&lt;");
+            element.AppendChild(yAxisLabelElement);
+
+            //xmlString += "<xAxisLabelType>" + cmbXAxisLabelType.SelectedIndex + "</xAxisLabelType>";
+            //xmlString += "<xAxisLabel>" + txtXAxisLabelValue.Text + "</xAxisLabel>";
+            //xmlString += "<xAxisAngle>" + txtXAxisAngle.Text + "</xAxisAngle>";
+            //xmlString += "<chartTitle>" + txtChartTitle.Text + "</chartTitle>";
+
+            //xAxisLabelType 
+            XmlElement xAxisLabelTypeElement = doc.CreateElement("xAxisLabelType");
+            xAxisLabelTypeElement.InnerText = chtParameters.XAxisLabelType.ToString().Replace("<", "&lt;");
+            element.AppendChild(xAxisLabelTypeElement);
+
+            //xAxisLabel 
+            XmlElement xAxisLabelElement = doc.CreateElement("xAxisLabel");
+            xAxisLabelElement.InnerText = chtParameters.XAxisLabel.ToString().Replace("<", "&lt;");
+            element.AppendChild(xAxisLabelElement);
+
+            //xAxisAngle 
+            XmlElement xAxisAngleElement = doc.CreateElement("xAxisAngle");
+            xAxisAngleElement.InnerText = chtParameters.XAxisAngle.ToString().Replace("<", "&lt;");
+            element.AppendChild(xAxisAngleElement);
+
+            //chartTitle 
+            XmlElement chartTitleElement = doc.CreateElement("chartTitle");
+            chartTitleElement.InnerText = chtParameters.ChartTitle.ToString().Replace("<", "&lt;");
+            element.AppendChild(chartTitleElement);
+
+            //chartSubTitle 
+            XmlElement chartSubTitleElement = doc.CreateElement("chartSubTitle");
+            chartSubTitleElement.InnerText = chtParameters.ChartSubTitle.ToString().Replace("<", "&lt;");
+            element.AppendChild(chartSubTitleElement);
+
+            //xmlString += "<showLegend>" + checkboxShowLegend.IsChecked.Value + "</showLegend>";
+            //xmlString += "<showLegendBorder>" + checkboxShowLegendBorder.IsChecked.Value + "</showLegendBorder>";
+            //xmlString += "<showLegendVarNames>" + checkboxShowVarName.IsChecked.Value + "</showLegendVarNames>";
+            //xmlString += "<legendFontSize>" + txtLegendFontSize.Text + "</legendFontSize>";
+
+            //showLegend 
+            XmlElement showLegendElement = doc.CreateElement("showLegend");
+            showLegendElement.InnerText = chtParameters.ShowLegend.ToString().Replace("<", "&lt;");
+            element.AppendChild(showLegendElement);
+
+            //showLegendBorder 
+            XmlElement showLegendBorderElement = doc.CreateElement("showLegendBorder");
+            showLegendBorderElement.InnerText = chtParameters.ShowLegendBorder.ToString();
+            element.AppendChild(showLegendBorderElement);
+
+            //showLegendVarNames 
+            XmlElement showLegendVarNamesElement = doc.CreateElement("showLegendVarNames");
+            showLegendVarNamesElement.InnerText = chtParameters.ShowLegendVarNames.ToString();
+            element.AppendChild(showLegendVarNamesElement);
+
+            //legendFontSize 
+            XmlElement legendFontSizeElement = doc.CreateElement("legendFontSize");
+            legendFontSizeElement.InnerText = chtParameters.LegendFontSize.ToString();
+            element.AppendChild(legendFontSizeElement);
+
+            //legendDock 
+            XmlElement legendDockElement = doc.CreateElement("legendDock");
+            switch (chtParameters.LegendDock)
+            {
+                case ComponentArt.Win.DataVisualization.Charting.Dock.Left:
+                    legendDockElement.InnerText = "0";
+                    break;
+                default:
+                case ComponentArt.Win.DataVisualization.Charting.Dock.Right:
+                    legendDockElement.InnerText = "1";
+                    break;
+                case ComponentArt.Win.DataVisualization.Charting.Dock.Top:
+                    legendDockElement.InnerText = "2";
+                    break;
+                case ComponentArt.Win.DataVisualization.Charting.Dock.Bottom:
+                    legendDockElement.InnerText = "3";
+                    break;
+            }
+            element.AppendChild(legendDockElement);
+
+            //xmlString = xmlString + SerializeAnchors();
+
+            SerializeAnchors(element);
 
             return element;
         }
@@ -876,10 +942,10 @@ namespace EpiDashboard.Gadgets.Charting
             //xAxis.UseOnlyVisiblePointsToComputeRange = true;
 
             //xyChart.DataSource = dataList;
-            series0.DataSource = dataList;
-            series1.DataSource = regressionDataList;
-            xyChart.Width = double.Parse(txtWidth.Text);
-            xyChart.Height = double.Parse(txtHeight.Text);
+            //series0.DataSource = dataList;
+            //series1.DataSource = regressionDataList;
+            //xyChart.Width = double.Parse(txtWidth.Text);
+            //xyChart.Height = double.Parse(txtHeight.Text);
 
             //xAxis.UseOnlyVisiblePointsToComputeRange = true;
         }
@@ -1016,10 +1082,10 @@ namespace EpiDashboard.Gadgets.Charting
         public override string ToHTML(string htmlFileName = "", int count = 0)
         {
             // Check to see if a chart has been created.
-            if (xyChart.ActualHeight == 0 || xyChart.ActualWidth == 0)
-            {
-                return string.Empty;
-            }
+            //if (xyChart.ActualHeight == 0 || xyChart.ActualWidth == 0)
+            //{
+            //    return string.Empty;
+            //}
 
             StringBuilder htmlBuilder = new StringBuilder();
 
@@ -1057,11 +1123,11 @@ namespace EpiDashboard.Gadgets.Charting
 
             imageFileName = imageFileName + "_" + count.ToString() + ".png";
 
-            BitmapSource img = (BitmapSource)Common.ToImageSource(xyChart);
+            //BitmapSource img = (BitmapSource)Common.ToImageSource(xyChart);
             System.IO.FileStream stream = new System.IO.FileStream(imageFileName, System.IO.FileMode.Create);
             //JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             PngBitmapEncoder encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(img));
+            //encoder.Frames.Add(BitmapFrame.Create(img));
             encoder.Save(stream);
             stream.Close();
 
@@ -1072,115 +1138,79 @@ namespace EpiDashboard.Gadgets.Charting
 
         private void SetPalette()
         {
-            if (LoadingCombos) { return; }
+            //if (LoadingCombos) { return; }
 
-            ComboBoxItem cbi = cmbPalette.SelectedItem as ComboBoxItem;
+            //ComboBoxItem cbi = cmbPalette.SelectedItem as ComboBoxItem;
 
-            //xyChart.Palette = new ComponentArt.Win.DataVisualization.Palette();
-            ComponentArt.Win.DataVisualization.Palette palette = ComponentArt.Win.DataVisualization.Palette.GetPalette(cbi.Content.ToString());
+            ////xyChart.Palette = new ComponentArt.Win.DataVisualization.Palette();
+            //ComponentArt.Win.DataVisualization.Palette palette = ComponentArt.Win.DataVisualization.Palette.GetPalette(cbi.Content.ToString());
 
-            xyChart.Palette = palette;
+            //xyChart.Palette = palette;
         }
 
-        private void checkboxShowLegend_Checked(object sender, RoutedEventArgs e)
-        {
-            xyChart.LegendVisible = true;
-        }
+        //private void checkboxShowLegend_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    xyChart.LegendVisible = true;
+        //}
 
-        private void checkboxShowLegend_Unchecked(object sender, RoutedEventArgs e)
-        {
-            xyChart.LegendVisible = false;
-        }
+        //private void checkboxShowLegend_Unchecked(object sender, RoutedEventArgs e)
+        //{
+        //    xyChart.LegendVisible = false;
+        //}
 
-        private void checkboxUseRefValues_Checked(object sender, RoutedEventArgs e)
-        {
-            yAxis.UseReferenceValue = true;
-        }
+        //private void checkboxUseRefValues_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    yAxis.UseReferenceValue = true;
+        //}
 
-        private void checkboxUseRefValues_Unchecked(object sender, RoutedEventArgs e)
-        {
-            yAxis.UseReferenceValue = false;
-        }
+        //private void checkboxUseRefValues_Unchecked(object sender, RoutedEventArgs e)
+        //{
+        //    yAxis.UseReferenceValue = false;
+        //}
 
-        private void cmbPalette_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SetPalette();
-        }
+        //private void cmbPalette_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    SetPalette();
+        //}
 
-        private void cmbXAxisLabelType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (LoadingCombos || txtXAxisLabelValue == null) return;
-            switch (cmbXAxisLabelType.SelectedIndex)
-            {
-                case 3:
-                    txtXAxisLabelValue.IsEnabled = true;
-                    break;
-                case 0:
-                case 1:
-                case 2:
-                    txtXAxisLabelValue.IsEnabled = false;
-                    txtXAxisLabelValue.Text = string.Empty;
-                    break;
-            }
-        }
+        //private void cmbXAxisLabelType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (LoadingCombos || txtXAxisLabelValue == null) return;
+        //    switch (cmbXAxisLabelType.SelectedIndex)
+        //    {
+        //        case 3:
+        //            txtXAxisLabelValue.IsEnabled = true;
+        //            break;
+        //        case 0:
+        //        case 1:
+        //        case 2:
+        //            txtXAxisLabelValue.IsEnabled = false;
+        //            txtXAxisLabelValue.Text = string.Empty;
+        //            break;
+        //    }
+        //}
 
-        private void xyChart_DataStructureCreated(object sender, EventArgs e)
-        {
-            string sName = "";
+        //private void xyChart_DataStructureCreated(object sender, EventArgs e)
+        //{
+        //    string sName = "";
 
-            if (GadgetOptions.StrataVariableNames.Count > 0)
-            {
-                foreach (Series s0 in xyChart.DataSeries)
-                {
-                    sName = s0.Label.Split('.')[1];
-                    if (checkboxShowVarName.IsChecked == false)
-                    {
-                        int index = sName.IndexOf(" = ");
-                        s0.Label = sName.Substring(index + 3);
-                    }
-                    else
-                    {
-                        s0.Label = sName;
-                    }
-                }
-            }
-        }
-
-        private void checkboxShowLegendBorder_Checked(object sender, RoutedEventArgs e)
-        {
-            checkboxShowLegend.IsChecked = true;
-            xyChart.Legend.BorderThickness = new Thickness(1);
-        }
-
-        private void checkboxShowLegendBorder_Unchecked(object sender, RoutedEventArgs e)
-        {
-            xyChart.Legend.BorderThickness = new Thickness(0);
-        }
-
-        private void cmbMarkerType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SetMarkerType();
-        }
-
-        private void SetMarkerType()
-        {
-            switch (cmbMarkerType.SelectedIndex)
-            {
-                default:
-                case 0:
-                    series0.Marker = new ComponentArt.Win.DataVisualization.Common.Marker("Circle");
-                    break;
-                case 1:
-                    series0.Marker = new ComponentArt.Win.DataVisualization.Common.Marker("Cross");
-                    break;
-                case 2:
-                    series0.Marker = new ComponentArt.Win.DataVisualization.Common.Marker("Diamond");
-                    break;
-                case 3:
-                    series0.Marker = new ComponentArt.Win.DataVisualization.Common.Marker("Square");
-                    break;
-            }
-        }
+        //    if (GadgetOptions.StrataVariableNames.Count > 0)
+        //    {
+        //        foreach (Series s0 in xyChart.DataSeries)
+        //        {
+        //            sName = s0.Label.Split('.')[1];
+        //            if (checkboxShowVarName.IsChecked == false)
+        //            {
+        //                int index = sName.IndexOf(" = ");
+        //                s0.Label = sName.Substring(index + 3);
+        //            }
+        //            else
+        //            {
+        //                s0.Label = sName;
+        //            }
+        //        }
+        //    }
+        //}
 
         public virtual void ToImageFile(string fileName, bool includeGrid = true)
         {
@@ -1283,24 +1313,24 @@ namespace EpiDashboard.Gadgets.Charting
         {
             StringBuilder sb = new StringBuilder();
 
-            XYChart xyChart = null;
-            object el = FindName("xyChart");
-            if (el is XYChart)
-            {
-                xyChart = el as XYChart;
-                List<XYChartData> dataList = series0.DataSource as List<XYChartData>;
+            //XYChart xyChart = null;
+            //object el = FindName("xyChart");
+            //if (el is XYChart)
+            //{
+            //    xyChart = el as XYChart;
+            //    List<XYChartData> dataList = series0.DataSource as List<XYChartData>;
 
-                sb.Append("X" + "\t");
-                sb.Append("Y" + "\t");
-                sb.AppendLine();
+            //    sb.Append("X" + "\t");
+            //    sb.Append("Y" + "\t");
+            //    sb.AppendLine();
 
-                foreach (XYChartData chartData in dataList)
-                {
-                    sb.Append(chartData.X + "\t");
-                    sb.Append(chartData.Y + "\t");
-                    sb.AppendLine();
-                }
-            }
+            //    foreach (XYChartData chartData in dataList)
+            //    {
+            //        sb.Append(chartData.X + "\t");
+            //        sb.Append(chartData.Y + "\t");
+            //        sb.AppendLine();
+            //    }
+            //}
 
             return sb.ToString();
         }
