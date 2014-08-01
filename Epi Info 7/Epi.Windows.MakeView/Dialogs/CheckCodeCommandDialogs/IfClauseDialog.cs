@@ -735,6 +735,35 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             DesignStatement(new NewRecordDialog(MainForm));
         }
 
+        /// <summary>
+        /// Handles the Click event of the If menu item
+        /// </summary>
+        /// <param name="sender">Object that fired the event</param>
+        /// <param name="e">.NET supplied event parameters</param>
+        void mnuIf_Click(object sender, EventArgs e)
+        {
+            DesignStatement(new IfClauseDialog(MainForm));           
+        }
+
+        /// <summary>
+        /// Handles the Click event of the Set-Required menu item
+        /// </summary>
+        /// <param name="sender">Object that fired the event</param>
+        /// <param name="e">.NET supplied event parameters</param>
+        void mnuSetRequired_Click(object sender, EventArgs e)
+        {
+            DesignStatement(new SetRequiredDialog(MainForm));
+        }
+
+        /// <summary>
+        /// Handles the Click event of the Set-Required menu item
+        /// </summary>
+        /// <param name="sender">Object that fired the event</param>
+        /// <param name="e">.NET supplied event parameters</param>
+        void mnuSetNotRequired_Click(object sender, EventArgs e)
+        {
+            DesignStatement(new SetNotRequiredDialog(MainForm));
+        }
         ///// <summary>
         ///// Handles the Click event of the Quit menu item
         ///// </summary>
@@ -798,8 +827,13 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             mnuUnhighlight.Click += new EventHandler(mnuUnhighlight_Click);
             ToolStripMenuItem mnuNewRecord = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_NEWRECORD);
             mnuNewRecord.Click += new EventHandler(mnuNewRecord_Click);
-
-            contextMenu.Items.AddRange(new ToolStripMenuItem[] { mnuAssign, mnuAutosearch, mnuClear, mnuDialog, mnuDisable, mnuEnable, mnuExecute, mnuGeocode, mnuGoto, mnuHelp, mnuHide, mnuUnhide, mnuHighlight, mnuUnhighlight, mnuNewRecord });
+            ToolStripMenuItem mnuIf = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_IF);
+            mnuIf.Click += new EventHandler(mnuIf_Click);
+            ToolStripMenuItem mnuSetRequired = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_SET_REQUIRED);
+            mnuSetRequired.Click += new EventHandler(mnuSetRequired_Click);
+            ToolStripMenuItem mnuSetNotRequired = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_SET_NOT_REQUIRED);
+            mnuSetNotRequired.Click += new EventHandler(mnuSetNotRequired_Click);
+            contextMenu.Items.AddRange(new ToolStripMenuItem[] { mnuAssign, mnuAutosearch, mnuClear, mnuDialog, mnuDisable, mnuEnable, mnuExecute, mnuGeocode, mnuGoto, mnuHelp, mnuHide, mnuUnhide, mnuHighlight, mnuUnhighlight, mnuNewRecord, mnuIf, mnuSetRequired, mnuSetNotRequired });
 
             return contextMenu;
         }
