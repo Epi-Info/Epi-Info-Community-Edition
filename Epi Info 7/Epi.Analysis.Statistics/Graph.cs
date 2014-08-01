@@ -381,10 +381,53 @@ namespace Epi.Analysis.Statistics
                             StrataVarValueList,
                             _weightVar);
 
+                        DateTime intervalStart = DateTime.MinValue;
+                        DateTime intervalEnd = DateTime.MinValue;
+                        DateTime dateTimeValue = DateTime.MinValue;
+
+                        double givenInterval = 1;
+                        int days = 0, hours = 0, minutes = 0, seconds = 0; 
+                        TimeSpan period = new TimeSpan(days, hours, minutes, seconds);
+                        double.TryParse(_graphInterval, out givenInterval);
+
                         foreach (DataRow row in workingTable.Rows)
                         {
                             if (row["__Values__"] != DBNull.Value)
                             {
+                                dateTimeValue = (DateTime)row["__Values__"];
+
+                                if (intervalStart == DateTime.MinValue)
+                                {
+                                    intervalStart = dateTimeValue;
+                                }
+
+                                if ( dateTimeValue > intervalEnd)
+                                {
+                                    if (intervalEnd != DateTime.MinValue)
+                                    { 
+                                        intervalStart = intervalEnd;
+                                    }
+
+                                    switch (_graphIntervalUnits)
+                                    {
+                                        case "Years":
+                                            break;
+                                        case "Quarters":
+                                            break;
+                                        case "Weeks":
+                                            break;
+                                        case "Days":
+                                            intervalEnd = intervalStart.AddDays(givenInterval);
+                                            break;
+                                        case "Hours":
+                                            break;
+                                        case "Minutes":
+                                            break;
+                                        case "Seconds":
+                                            break;
+                                    }
+                                }
+
                                 string seriesName = string.Empty;
                                 object independentValue = new object();
 
@@ -411,7 +454,21 @@ namespace Epi.Analysis.Statistics
 
                                     if (double.TryParse(row["__Count__"].ToString(), out dependentVal))
                                     {
-                                        regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
+                                        if ((dateTimeValue >= intervalStart) && (dateTimeValue < intervalEnd))
+                                        {
+                                            string expression = "Predictor = #" + intervalStart.ToString() + "#";
+                                            DataRow[] foundRows = regressionTable.Select(expression);
+
+                                            if (foundRows.Length == 0)
+                                            {
+                                                regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
+                                            }
+                                            else
+                                            {
+                                                foundRows[0]["Response"] = (double)foundRows[0]["Response"] + dependentVal;
+                                                regressionTable.AcceptChanges();
+                                            }
+                                        }
                                     }
                                 }
                                 else
