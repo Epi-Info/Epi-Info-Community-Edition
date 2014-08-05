@@ -31,7 +31,7 @@ namespace Epi.Analysis.Statistics
 
         string _graphInterval = string.Empty;
         string _graphIntervalUnits = string.Empty;
-        string _graphStartFrom = string.Empty;
+        object _graphStartFrom = string.Empty;
 
         bool _independentValueTypesSame = true; 
         bool _independentValuesAllBool = true;        
@@ -399,9 +399,10 @@ namespace Epi.Analysis.Statistics
                                 if (intervalStart == DateTime.MinValue)
                                 {
                                     intervalStart = dateTimeValue;
+                                    _graphStartFrom = dateTimeValue;
                                 }
 
-                                if ( dateTimeValue > intervalEnd)
+                                if ( dateTimeValue >= intervalEnd)
                                 {
                                     if (intervalEnd != DateTime.MinValue)
                                     { 
