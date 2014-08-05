@@ -17,6 +17,7 @@ using Epi.Resources;
 
 namespace Epi.Data.Services
 {
+
     /// <summary>
     /// Database implementation of Metadata provider
     /// </summary>
@@ -768,6 +769,31 @@ namespace Epi.Data.Services
                 throw new GeneralException("Could not retrieve view", ex);
             }
         }
+
+
+
+        /// <summary>
+        /// Gets a view object based on view id
+        /// </summary>
+        /// <param name="viewId">Id of the view</param>
+        /// <returns>A view object</returns>
+        public DataTable GetPublishedViewKeys(int viewId)
+            {
+            try
+                {
+                Query query = db.CreateQuery("select [EIWSOrganizationKey] ,[EIWSFormId] ,[EWEOrganizationKey] ,[EWEFormId]  " +
+                    "from metaViews " +
+                    "where [ViewId] = @ViewId");
+                query.Parameters.Add(new QueryParameter("@ViewId", DbType.Int32, viewId));
+                DataTable results = db.Select(query);
+                return results;
+                }
+            catch (Exception ex)
+                {
+                throw new GeneralException("Could not retrieve view", ex);
+                }
+            }
+
 
         /// <summary>
         /// Gets a view's record check code for the "After" event
@@ -4987,7 +5013,7 @@ namespace Epi.Data.Services
         {
             try
             {
-                string queryString = "update metaViews set [CheckCodeVariableDefinitions] = @CheckCodeVariableDefinitions, [CheckCode] = @CheckCode, [CheckCodeBefore] = @CheckCodeBefore, [CheckCodeAfter] = @CheckCodeAfter, [RecordCheckCodeBefore] = @RecordCheckCodeBefore, [RecordCheckCodeAfter] = @RecordCheckCodeAfter, [IsRelatedView] = @IsRelatedView, [Width] = @Width, [Height] = @Height, [Orientation] = @Orientation, [LabelAlign] = @LabelAlign where [ViewId] = @ViewId";
+            string queryString = "update metaViews set [CheckCodeVariableDefinitions] = @CheckCodeVariableDefinitions, [CheckCode] = @CheckCode, [CheckCodeBefore] = @CheckCodeBefore, [CheckCodeAfter] = @CheckCodeAfter, [RecordCheckCodeBefore] = @RecordCheckCodeBefore, [RecordCheckCodeAfter] = @RecordCheckCodeAfter, [IsRelatedView] = @IsRelatedView, [Width] = @Width, [Height] = @Height, [Orientation] = @Orientation, [LabelAlign] = @LabelAlign ,[EIWSOrganizationKey]= @EIWSOrganizationKey,[EIWSFormId]= @EIWSFormId,[EWEOrganizationKey]= @EWEOrganizationKey,[EWEFormId]= @EWEFormId where [ViewId] = @ViewId";
                 Query query = db.CreateQuery(queryString);
                 query.Parameters.Add(new QueryParameter("@CheckCodeVariableDefinitions", DbType.String, view.CheckCodeVariableDefinitions));
                 query.Parameters.Add(new QueryParameter("@CheckCode", DbType.String, view.CheckCode));
@@ -5000,8 +5026,12 @@ namespace Epi.Data.Services
                 query.Parameters.Add(new QueryParameter("@Height", DbType.Int32, view.PageHeight));
                 query.Parameters.Add(new QueryParameter("@Orientation", DbType.String, view.PageOrientation));
                 query.Parameters.Add(new QueryParameter("@LabelAlign", DbType.String, view.PageLabelAlign));
+                query.Parameters.Add(new QueryParameter("@EIWSOrganizationKey", DbType.String, view.EIWSOrganizationKey));
+                query.Parameters.Add(new QueryParameter("@EIWSFormId", DbType.String, view.EIWSFormId));
+                query.Parameters.Add(new QueryParameter("@EWEOrganizationKey", DbType.String, view.EWEOrganizationKey));
+                query.Parameters.Add(new QueryParameter("@EWEFormId", DbType.String, view.EWEFormId));
                 query.Parameters.Add(new QueryParameter("@ViewId", DbType.Int32, view.Id));
-
+                
                 int i = db.ExecuteNonQuery(query);
             }
             catch (Exception ex)
@@ -9139,6 +9169,10 @@ namespace Epi.Data.Services
             columns.Add(new TableColumn("Height", GenericDbColumnType.Int32, true, false));
             columns.Add(new TableColumn("Orientation", GenericDbColumnType.String, 16, false));
             columns.Add(new TableColumn("LabelAlign", GenericDbColumnType.String, 16, false));
+            columns.Add(new TableColumn("EIWSOrganizationKey", GenericDbColumnType.StringLong, true));
+            columns.Add(new TableColumn("EIWSFormId", GenericDbColumnType.StringLong, true));
+            columns.Add(new TableColumn("EWEOrganizationKey", GenericDbColumnType.StringLong, true));
+            columns.Add(new TableColumn("EWEFormId", GenericDbColumnType.StringLong, true));
             db.CreateTable("metaViews", columns);
         }
 

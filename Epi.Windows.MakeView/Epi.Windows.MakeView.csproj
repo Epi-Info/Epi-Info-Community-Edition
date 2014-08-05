@@ -177,6 +177,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Web\Epi.Web.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Epi.Web.Enter.Common">
+      <HintPath>Web\Epi.Web.Enter.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Epi.Web.Enter.Interfaces">
+      <HintPath>Web\Epi.Web.Enter.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="GoldParserEngine, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Epi.Core\GoldParserEngine.dll</HintPath>
@@ -200,6 +206,8 @@
     <Reference Include="System.Design">
       <Name>System.Design</Name>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
@@ -219,6 +227,12 @@
     </Compile>
     <Compile Include="Dialogs\CheckCodeCommandDialogs\SetNotRequiredDialog.designer.cs">
       <DependentUpon>SetNotRequiredDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\EWEOrgKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\EWEOrgKey.designer.cs">
+      <DependentUpon>EWEOrgKey.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\SupportedFieldTypeAndroidDialog.cs">
       <SubType>Form</SubType>
@@ -244,6 +258,24 @@
     <Compile Include="Dialogs\OrgKey.designer.cs">
       <DependentUpon>OrgKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\UserAuthentication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UserAuthentication.designer.cs">
+      <DependentUpon>UserAuthentication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WebEnterOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WebEnterOptions.designer.cs">
+      <DependentUpon>WebEnterOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\WebEnterPublishDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WebEnterPublishDialog.designer.cs">
+      <DependentUpon>WebEnterPublishDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\WebSurveyOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,11 +288,18 @@
     <Compile Include="Forms\MakeViewMainForm.designer.cs">
       <DependentUpon>MakeViewMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginInfo.cs" />
+    <Compile Include="Service References\EWEManagerService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\SurveyManagerService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Utils\EWEServiceClient.cs" />
     <Compile Include="Utils\ServiceClient.cs" />
     <Content Include="App.ico" />
     <Content Include="Forms\CheckCodeEditor\CheckCodeHelp.txt" />
@@ -269,10 +308,53 @@
     <Content Include="PortableDeviceApi\PortableDevices.dll" />
     <Content Include="portraitLetter.bmp" />
     <Content Include="Resources\1368066021_agt_web.png" />
+    <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.OrganizationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.PublishResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.SurveyAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.SurveyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.UserAuthenticationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService.disco" />
+    <None Include="Service References\EWEManagerService\configuration91.svcinfo" />
+    <None Include="Service References\EWEManagerService\configuration.svcinfo" />
+    <None Include="Service References\EWEManagerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web\Epi.Web.Common.dll" />
+    <Content Include="Web\Epi.Web.Enter.Common.dll" />
+    <Content Include="Web\Epi.Web.Enter.Interfaces.dll" />
     <Content Include="Web\Epi.Web.Interfaces.dll" />
     <None Include="Resources\Publish.png" />
     <None Include="Resources\Android_Robot_100.png" />
+    <None Include="Service References\EWEManagerService\EWEManagerService.wsdl" />
+    <None Include="Service References\EWEManagerService\EWEManagerService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\SurveyManagerService\SurveyManagerService.disco" />
     <None Include="Service References\SurveyManagerService\configuration91.svcinfo" />
     <None Include="Service References\SurveyManagerService\configuration.svcinfo" />
@@ -1015,6 +1097,9 @@
       <DependentUpon>CodesDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EWEOrgKey.resx">
+      <DependentUpon>EWEOrgKey.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SupportedFieldTypeAndroidDialog.resx">
       <DependentUpon>SupportedFieldTypeAndroidDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1320,9 +1405,18 @@
     <EmbeddedResource Include="Dialogs\RepublishSurveyFields.resx">
       <DependentUpon>RepublishSurveyFields.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UserAuthentication.resx">
+      <DependentUpon>UserAuthentication.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ViewSelectionDialog.resx">
       <DependentUpon>ViewSelectionDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WebEnterOptions.resx">
+      <DependentUpon>WebEnterOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WebEnterPublishDialog.resx">
+      <DependentUpon>WebEnterPublishDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WebPublishDialog.resx">
       <DependentUpon>WebPublishDialog.cs</DependentUpon>
@@ -1452,6 +1546,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\EWEManagerService\" />
     <WCFMetadataStorage Include="Service References\SurveyManagerService\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

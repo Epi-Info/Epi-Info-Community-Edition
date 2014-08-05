@@ -184,6 +184,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Epi.Windows\Web\Epi.Web.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Epi.Web.Enter.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Epi.Web.Enter.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="ESRI.ArcGIS.Client.Bing, Version=2.2.0.525, Culture=neutral, PublicKeyToken=29c6dd6e8553d944, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\EpiDashboard\Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Bing.dll</HintPath>
@@ -358,6 +360,12 @@
     <Compile Include="Forms\ImportData.Designer.cs">
       <DependentUpon>ImportData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ImportWebEnterData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportWebEnterData.designer.cs">
+      <DependentUpon>ImportWebEnterData.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLogic\GuiMediator.Event.Handlers.cs" />
     <Compile Include="PresentationLogic\GuiMediator.Events.MainForm.cs" />
     <Compile Include="PresentationLogic\GuiMediator.Events.ViewExplorer.cs" />
@@ -404,6 +412,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\EWEManagerService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceManager\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -475,6 +488,9 @@
     <EmbeddedResource Include="Forms\ImportData.resx">
       <DependentUpon>ImportData.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImportWebEnterData.resx">
+      <DependentUpon>ImportWebEnterData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LineListingViewer.resx">
       <DependentUpon>LineListingViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -512,6 +528,40 @@
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
+    <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.OrganizationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.PublishResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.SurveyAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.SurveyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.UserAuthenticationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService.wsdl" />
+    <None Include="Service References\EWEManagerService\EWEManagerService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceManager\ManagerService.wsdl" />
     <None Include="Service References\ServiceManager\SurveyManagerService.xsd">
       <SubType>Designer</SubType>
@@ -617,6 +667,13 @@
     <Content Include="epi2000c.ico" />
     <Content Include="Resources\GenericTablet.png" />
     <Content Include="Resources\MarkupCursor.cur" />
+    <None Include="Service References\EWEManagerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\EWEManagerService\configuration.svcinfo" />
+    <None Include="Service References\EWEManagerService\configuration91.svcinfo" />
+    <None Include="Service References\EWEManagerService\EWEManagerService.disco" />
     <EmbeddedResource Include="Resources\imageField_Icons.png" />
     <None Include="Service References\ServiceManager\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
@@ -632,6 +689,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\EWEManagerService\" />
     <WCFMetadataStorage Include="Service References\ServiceManager\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

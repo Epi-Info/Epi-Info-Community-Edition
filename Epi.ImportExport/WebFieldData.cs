@@ -9,5 +9,8 @@ namespace Epi.ImportExport
         public object FieldValue;
         public int Page;
         public int Status;
+        public int ViewId;
+        public string ParentId;
+
     }
 }

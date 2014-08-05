@@ -678,7 +678,9 @@ namespace Epi
             row.MapServiceKey = "Aua5s8kFcEZMx5lsd8Vkerz3frboU1CwzvOyzX_vgSnzsnbqV7xlQ4WTRUlN19_Q";
             row.LastAlertDate = new DateTime(2011, 9, 23);
             row.WebServiceAuthMode = 0; // 0 = Anon, 1 = NT
+            row.EWEServiceAuthMode = 0; // 0 = Anon, 1 = NT
             row.WebServiceEndpointAddress = string.Empty;
+            row.EWEServiceEndpointAddress = string.Empty;
             row.WebServiceBindingMode = "BASIC";
             row.WebServiceMaxBufferPoolSize = 524288;
             row.WebServiceMaxReceivedMessageSize = 999999999;
@@ -687,12 +689,21 @@ namespace Epi
             row.WebServiceReaderMaxArrayLength = 16384;
             row.WebServiceReaderMaxBytesPerRead = 4096;
             row.WebServiceReaderMaxNameTableCharCount = 16384;
+            row.EWEServiceBindingMode = "BASIC";
+            row.EWEServiceMaxBufferPoolSize = 524288;
+            row.EWEServiceMaxReceivedMessageSize = 999999999;
+            row.EWEServiceReaderMaxDepth = 32;
+            row.EWEServiceReaderMaxStringContentLength = 2048000;
+            row.EWEServiceReaderMaxArrayLength = 16384;
+            row.EWEServiceReaderMaxBytesPerRead = 4096;
+            row.EWEServiceReaderMaxNameTableCharCount = 16384;
             row.DashboardFrequencyRowLimit = 200;
             row.DashboardFrequencyStrataLimit = 100;
             row.DashboardFrequencyCrosstabLimit = 100;
             row.DashboardCombinedFrequencyRowLimit = 250;
             row.DashboardAberrationRowLimit = 366;
             row.DashboardLineListRowLimit = 2000;
+
 
             #if LINUX_BUILD
             row.DefaultDataDriver = MySQLDriver;

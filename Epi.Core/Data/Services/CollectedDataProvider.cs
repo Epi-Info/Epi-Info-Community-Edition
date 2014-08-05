@@ -19,6 +19,7 @@ namespace Epi.Data.Services
     /// <summary>
     /// Data access class for Epi Info collected data
     /// </summary>
+    /// 
     public class CollectedDataProvider
     {
         private bool isWebMode;
