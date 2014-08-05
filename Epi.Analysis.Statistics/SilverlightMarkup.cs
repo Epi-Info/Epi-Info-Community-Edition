@@ -17,7 +17,7 @@ namespace Epi
         // this format is only used to write and read the inputParams
         const string _dateTimeFormat = "MM/dd/yyyy·hh:mm:ss.fff·tt";
 
-        public string Graph(string chartType, string chartTitle, string dependentLabel, string independentLabel, string independentValueFormat, string dependentValueFormat, string interval, string intervalUnit, string startFrom, DataTable regressionTable)
+        public string Graph(string chartType, string chartTitle, string dependentLabel, string independentLabel, string independentValueFormat, string dependentValueFormat, string interval, string intervalUnit, object startFrom, DataTable regressionTable)
         {
             string inputParams = string.Empty;
             inputParams = BuildInputParams(chartType, chartTitle, dependentLabel, independentLabel, independentValueFormat, dependentValueFormat, interval, intervalUnit, startFrom, regressionTable);
@@ -60,7 +60,7 @@ namespace Epi
             string dependentValueFormat,
             string interval,
             string intervalUnit,
-            string startFrom,
+            object startFrom,
             DataTable regressionTable)
         {
             StringBuilder chartLineSeries = new StringBuilder();
@@ -275,7 +275,18 @@ namespace Epi
 
             if (interval.Length > 0) inputParams += string.Format("interval={0},", interval);
             if (intervalUnit.Length > 0) inputParams += string.Format("intervalUnit={0},", intervalUnit);
-            if (startFrom.Length > 0) inputParams += string.Format("startFrom={0},", startFrom);
+
+            if (startFrom is DateTime)
+            {
+                startFrom = ((DateTime)startFrom).ToString(_dateTimeFormat);
+            }
+            else
+            {
+                startFrom = startFrom.ToString();
+            }
+            
+            
+            if (((string)startFrom).Length > 0) inputParams += string.Format("startFrom={0},", ((string)startFrom));
 
             inputParams += chartLineSeries.Replace(",", SilverlightStatics.Comma);
             return inputParams;
