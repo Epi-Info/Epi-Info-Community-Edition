@@ -2420,7 +2420,12 @@ namespace Epi.Windows.MakeView.PresentationLogic
                     }
                 }
 
-                PersistFieldChange(dialog.Field, BackupFieldAction.Change);
+                bool changePersisted = PersistFieldChange(dialog.Field, BackupFieldAction.Change);
+
+                if (changePersisted && (nameBeforeEdit != dialog.Field.Name))
+                {
+                    ((MakeViewMainForm)this.Canvas.MainForm).EpiInterpreter.Context.UndefineVariable(nameBeforeEdit);
+                }
 
                 if (promptFontBeforeEdit != dialog.Field.PromptFont)
                 {
