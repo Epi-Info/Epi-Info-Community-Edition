@@ -33,6 +33,7 @@ namespace Epi.Data.Services
         /// <param name="layerId"></param>
         void AddLayerToMap(int mapId, int layerId);
         
+
         /// <summary>
         /// Add Grid Column
         /// </summary>
@@ -1110,6 +1111,13 @@ namespace Epi.Data.Services
         /// <param name="viewId">Current Id of view in Epi.Project.</param>
         /// <returns>View</returns>
         View GetViewById(int viewId);
+
+        /// <summary>
+        /// Get View By Id
+        /// </summary>
+        /// <param name="viewId">Current Id of view in Epi.Project.</param>
+        /// <returns>View</returns>
+        DataTable GetPublishedViewKeys(int viewId);
         /// <summary>
         /// Get View Check Code
         /// </summary>
