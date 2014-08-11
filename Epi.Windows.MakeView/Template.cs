@@ -515,11 +515,12 @@ namespace Epi.Windows.MakeView
                 }
 
                 index = checkCode.LastIndexOf("\nPage ");
+                index = index == -1 ? checkCode.LastIndexOf("\n\tPage ") : index;
                 index = index == -1 ? checkCode.LastIndexOf(" Page ") : index;
                 index = index == -1 ? checkCode.LastIndexOf("Page ") : index;
 
                 candidate = checkCode.Substring(index, checkCode.Length - index);
-                candidate = candidate.TrimStart(new char[] { '\r', '\n' });
+                candidate = candidate.TrimStart(new char[] { '\r', '\n', '\t' });
                 candidate = candidate.Substring(4, candidate.Length - 4);
                 candidate = candidate.TrimStart(' ');
 
