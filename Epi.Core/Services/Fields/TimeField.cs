@@ -102,8 +102,23 @@ namespace Epi.Fields
                 }
                 else
                 {
-                    return ((DateTime)CurrentRecordValueObject).ToLongTimeString();
+                    if (CurrentRecordValueObject is DateTime)
+                    { 
+                        return ((DateTime)CurrentRecordValueObject).ToLongTimeString();
+                    }
+                    else if (CurrentRecordValueObject is String)
+                    { 
+                        DateTime dateTime = new DateTime();
+
+                        if (DateTime.TryParse((string)CurrentRecordValueObject, out dateTime))
+                        {
+                            CurrentRecordValueObject = dateTime;
+                            return dateTime.ToLongTimeString();
+                        }
+                    }
                 }
+
+                return string.Empty;
             }
         }
 
