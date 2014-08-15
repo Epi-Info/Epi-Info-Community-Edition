@@ -538,6 +538,10 @@ namespace Epi.Data.SqlServer
                     return SqlDbType.DateTime;
                 case DbType.DateTime:
                     return SqlDbType.DateTime;
+                case DbType.DateTime2:
+                    return SqlDbType.DateTime2;
+                case DbType.DateTimeOffset:
+                    return SqlDbType.DateTimeOffset;
                 case DbType.Decimal:
                     return SqlDbType.Decimal;
                 case DbType.Double:
