@@ -154,14 +154,29 @@ namespace Epi.Fields
         {
             get
             {
-                if (CurrentRecordValueObject is DateTime)
-                {
-                    return ((DateTime)CurrentRecordValueObject).ToShortDateString();
-                }
-                else
+                if (CurrentRecordValueObject == null || CurrentRecordValueObject.Equals(DBNull.Value))
                 {
                     return string.Empty;
                 }
+                else
+                {
+                    if (CurrentRecordValueObject is DateTime)
+                    { 
+                        return ((DateTime)CurrentRecordValueObject).ToShortDateString();
+                    }
+                    else if (CurrentRecordValueObject is String)
+                    { 
+                        DateTime dateTime = new DateTime();
+
+                        if (DateTime.TryParse((string)CurrentRecordValueObject, out dateTime))
+                        {
+                            CurrentRecordValueObject = dateTime;
+                            return dateTime.ToShortDateString();
+                        }
+                    }
+                }
+
+                return string.Empty;
             }
         }
 

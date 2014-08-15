@@ -143,10 +143,23 @@ namespace Epi.Fields
                 }
                 else
                 {
-                    string dateTime = string.Empty;
-                    dateTime = ((DateTime)CurrentRecordValueObject).ToString();
-                    return dateTime;
+                    if (CurrentRecordValueObject is DateTime)
+                    { 
+                        return ((DateTime)CurrentRecordValueObject).ToString();
+                    }
+                    else if (CurrentRecordValueObject is String)
+                    { 
+                        DateTime dateTime = new DateTime();
+
+                        if (DateTime.TryParse((string)CurrentRecordValueObject, out dateTime))
+                        {
+                            CurrentRecordValueObject = dateTime;
+                            return dateTime.ToString();
+                        }
+                    }
                 }
+
+                return string.Empty;
             }
 
             set
