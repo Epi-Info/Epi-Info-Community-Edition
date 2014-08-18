@@ -28,7 +28,9 @@ using Epi.Web.Common.Exception;
 using System.ServiceModel;
 using System.ServiceModel.Security;
 using System.Threading;
-
+using System.DirectoryServices;
+using System.DirectoryServices.AccountManagement;
+ 
 #endregion Namespaces
 
 namespace Epi.Windows.MakeView.Forms
@@ -50,6 +52,7 @@ namespace Epi.Windows.MakeView.Forms
         private System.IO.FileSystemWatcher _templateWatcher;
         private const int PAGE_BREAK_LIMIT = 32; // fields per page
         private string OrganizationKey ;
+        private string EWEOrganizationKey;
         private string UserPublishKey = null;
         private bool openForViewingOnly = false;
         private string SurveyName = "";
@@ -60,6 +63,7 @@ namespace Epi.Windows.MakeView.Forms
         private DateTime CloseDate;
         private bool IsSingleResponse;
         private bool IsDraftMode;
+        private bool IsEWEDraftMode;
         private string IntroductionText;
         private string ExitText;
         private string TemplateXML;
@@ -1943,7 +1947,7 @@ namespace Epi.Windows.MakeView.Forms
                                 worker1.WorkerSupportsCancellation = true;
                                 worker1.DoWork += new DoWorkEventHandler(worker1_DoWork);
                                 worker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker1_RunWorkerCompleted);
-                                worker1.RunWorkerAsync();
+                                worker1.RunWorkerAsync();                              
                                 Application.DoEvents();
                                 View currentView = this.mediator.ProjectExplorer.SelectedPage.GetView();
                                 if (this.mediator.Project.CollectedData.TableExists(currentView.TableName))
@@ -1959,11 +1963,12 @@ namespace Epi.Windows.MakeView.Forms
                                 }
                             }
                             finally
-                            {
+                            {                               
                             }
-                            this.Dispose();
+                                this.Dispose();
+                            }
+                            
                         }
-
                     }
                     else
                     {
@@ -1978,9 +1983,6 @@ namespace Epi.Windows.MakeView.Forms
                             MsgBox.ShowInformation(string.Format(SharedStrings.CANNOT_OPEN_VIEW_RELATED));
                         }
                     }
-
-                }
-                   
                 }           
         }
 
@@ -2794,7 +2796,9 @@ namespace Epi.Windows.MakeView.Forms
 
         private void publishNewSurveyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+        
+         //  this.OrganizationKey = this.projectExplorer.CurrentView.CheckCodeBefore;
+          
             Template template = new Template(this.mediator);
             string InvalidForPublishing = ListFieldsNotSupportedForWeb();
             View view;
@@ -3046,36 +3050,60 @@ namespace Epi.Windows.MakeView.Forms
         public void SetPublishMenuItems(View pView)
         {
             Configuration config = Configuration.GetNewInstance();
-
+            DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(pView.Id);
+           
+           DataRow ViewRow = table.Rows[0];
+           
             try
             {
                 if (config.Settings.Republish_IsRepbulishable == true)
                 {
-
+                QuickPublishtoolStripButton.Enabled = true;
+                ChangeModetoolStripDropDownButton.Enabled = true;
                     if (!string.IsNullOrWhiteSpace(pView.WebSurveyId))
                     {
                         mnuPublishToWeb.Text = "Republish Form to Web";
-                        mnuPublishToWeb.Enabled = true; 
-                        QuickPublishtoolStripButton.Visible = true;
-                        ChangeModetoolStripDropDownButton.Visible = true;
+                        mnuPublishToWeb.Enabled = true;
+
+                        toWebSurveyToolStripMenuItem.Visible = true;
+                        EIWSToolStripMenuItem.Visible = true;
                         toolStripSeparator10.Visible = true;
-                        toolStripSeparator11.Visible = true; 
-                        QuickPublishtoolStripButton.Enabled = true;
-                        ChangeModetoolStripDropDownButton.Enabled = true;
+                        toolStripSeparator11.Visible = true;
+                        toWebSurveyToolStripMenuItem.Enabled = true;
+                        EIWSToolStripMenuItem.Enabled = true;
 
                     }
                     else
                     {
                         mnuPublishToWeb.Text = "Publish Form to Web";
                         mnuPublishToWeb.Enabled = true;
-                        QuickPublishtoolStripButton.Enabled = false;
-                        ChangeModetoolStripDropDownButton.Enabled = false;
+
+                        toWebSurveyToolStripMenuItem.Enabled = false;
+                        EIWSToolStripMenuItem.Enabled = false;
                     }
+                    if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[2].ToString()))
+                        {
+                       
+                        toolStripPublishToWebEnter.Text = "Republish Form to Web Enter";
+                        toolStripPublishToWebEnter.Enabled = true;
+                        toWebEnterToolStripMenuItem.Enabled = true;
+                        EWEToolStripMenuItem.Enabled = true;
+                        }
+                    else
+                        {
+                       
+                        toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
+                        toolStripPublishToWebEnter.Enabled = true;
+                        toWebEnterToolStripMenuItem.Enabled = false;
+                        EWEToolStripMenuItem.Enabled = false;
+                        }
                 }
                 else
                 {
                     mnuPublishToWeb.Text = "Publish Form to Web";
                     mnuPublishToWeb.Enabled = true;
+                    toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
+                    toolStripPublishToWebEnter.Enabled = true;
                     QuickPublishtoolStripButton.Enabled = false;
                     ChangeModetoolStripDropDownButton.Enabled = false;
                 }
@@ -3084,6 +3112,8 @@ namespace Epi.Windows.MakeView.Forms
             {
                       mnuPublishToWeb.Text = "Publish Form to Web";
                     mnuPublishToWeb.Enabled = true;
+                    toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
+                    toolStripPublishToWebEnter.Enabled = true;
                     QuickPublishtoolStripButton.Enabled = false;
                     ChangeModetoolStripDropDownButton.Enabled = false;
 
@@ -3091,89 +3121,89 @@ namespace Epi.Windows.MakeView.Forms
 
         }
 
-        private void QuickPublishtoolStripButton_Click(object sender, EventArgs e)
-        {
-        Template template = new Template(this.mediator);
-        try
-            {
+        //private void QuickPublishtoolStripButton_Click(object sender, EventArgs e)
+        //{
+        //Template template = new Template(this.mediator);
+        //try
+        //    {
              
-                Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.No;
-                if (string.IsNullOrWhiteSpace(this.projectExplorer.CurrentView.WebSurveyId))
-                    {
-                    IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrgKey(this.OrganizationKey);
-                    }
-                else
-                    {
-                    IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrgKey(this.OrganizationKey, this.projectExplorer.CurrentView.WebSurveyId);
-                    }
-                WebPublishDialog dialog = null;
+        //        Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.No;
+        //        if (string.IsNullOrWhiteSpace(this.projectExplorer.CurrentView.WebSurveyId))
+        //            {
+        //            IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrgKey(this.OrganizationKey);
+        //            }
+        //        else
+        //            {
+        //            IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrgKey(this.OrganizationKey, this.projectExplorer.CurrentView.WebSurveyId);
+        //            }
+        //        WebPublishDialog dialog = null;
                 
-                switch (IsValidOKey)
-                    {
-                    case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.No:
-                        OrgKey NewDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
-                        DialogResult result = NewDialog.ShowDialog();
-                        if (result == System.Windows.Forms.DialogResult.OK)
-                            {
-                            this.OrganizationKey = NewDialog.OrganizationKey;
-                            if (!string.IsNullOrWhiteSpace(OrganizationKey))
-                                {
-                                SetSurveyInfo();
-                                QuickSurveyInfoUpdate();
-                                }
-                            }
-                        break;
-                    case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
-                        WebSurveyOptions dialog1 = new WebSurveyOptions();
-                        DialogResult result1 = dialog1.ShowDialog();
-                        if (result1 == System.Windows.Forms.DialogResult.OK)
-                            {
-                            OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
-                            DialogResult result2 = OrgKeyDialog.ShowDialog();
-                            if (result2 == System.Windows.Forms.DialogResult.OK)
-                                {
-                                this.OrganizationKey = OrgKeyDialog.OrganizationKey;
-                                if (!string.IsNullOrWhiteSpace(OrganizationKey))
-                                    {
-                                    SetSurveyInfo();
-                                    QuickSurveyInfoUpdate();
-                                    }
-                                }
-                            }
-                        break;
-                    case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.GeneralException:
-                        WebSurveyOptions dialog2 = new WebSurveyOptions();
-                        DialogResult result3 = dialog2.ShowDialog();
-                        if (result3 == System.Windows.Forms.DialogResult.OK)
-                            {
-                            OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
-                            DialogResult result4 = OrgKeyDialog.ShowDialog();
-                            if (result4 == System.Windows.Forms.DialogResult.OK)
-                                {
-                                this.OrganizationKey = OrgKeyDialog.OrganizationKey;
-                                if (!string.IsNullOrWhiteSpace(OrganizationKey))
-                                    {
-                                    SetSurveyInfo();
-                                    QuickSurveyInfoUpdate();
-                                    }
-                                }
-                            }
-                        break;
-                    case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.Yes:
-                       SetSurveyInfo();
-                       QuickSurveyInfoUpdate();
-                        break;
-                    }
+        //        switch (IsValidOKey)
+        //            {
+        //            case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.No:
+        //                OrgKey NewDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+        //                DialogResult result = NewDialog.ShowDialog();
+        //                if (result == System.Windows.Forms.DialogResult.OK)
+        //                    {
+        //                    this.OrganizationKey = NewDialog.OrganizationKey;
+        //                    if (!string.IsNullOrWhiteSpace(OrganizationKey))
+        //                        {
+        //                        SetSurveyInfo();
+        //                        QuickSurveyInfoUpdate();
+        //                        }
+        //                    }
+        //                break;
+        //            case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
+        //                WebSurveyOptions dialog1 = new WebSurveyOptions();
+        //                DialogResult result1 = dialog1.ShowDialog();
+        //                if (result1 == System.Windows.Forms.DialogResult.OK)
+        //                    {
+        //                    OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+        //                    DialogResult result2 = OrgKeyDialog.ShowDialog();
+        //                    if (result2 == System.Windows.Forms.DialogResult.OK)
+        //                        {
+        //                        this.OrganizationKey = OrgKeyDialog.OrganizationKey;
+        //                        if (!string.IsNullOrWhiteSpace(OrganizationKey))
+        //                            {
+        //                            SetSurveyInfo();
+        //                            QuickSurveyInfoUpdate();
+        //                            }
+        //                        }
+        //                    }
+        //                break;
+        //            case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.GeneralException:
+        //                WebSurveyOptions dialog2 = new WebSurveyOptions();
+        //                DialogResult result3 = dialog2.ShowDialog();
+        //                if (result3 == System.Windows.Forms.DialogResult.OK)
+        //                    {
+        //                    OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+        //                    DialogResult result4 = OrgKeyDialog.ShowDialog();
+        //                    if (result4 == System.Windows.Forms.DialogResult.OK)
+        //                        {
+        //                        this.OrganizationKey = OrgKeyDialog.OrganizationKey;
+        //                        if (!string.IsNullOrWhiteSpace(OrganizationKey))
+        //                            {
+        //                            SetSurveyInfo();
+        //                            QuickSurveyInfoUpdate();
+        //                            }
+        //                        }
+        //                    }
+        //                break;
+        //            case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.Yes:
+        //               SetSurveyInfo();
+        //               QuickSurveyInfoUpdate();
+        //                break;
+        //            }
                 
-            }
-        catch (Exception ex)// not republishable
-            {
+        //    }
+        //catch (Exception ex)// not republishable
+        //    {
            
-            }
+        //    }
 
 
 
-        }
+        //}
         public bool ValidateServiceProperties()
         {
             bool IsValid = false;
@@ -3198,20 +3228,18 @@ namespace Epi.Windows.MakeView.Forms
             return IsValid;
         }
         private void draftToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-            UpdateMode(true);
-            finalToolStripMenuItem.CheckState = CheckState.Unchecked;
-            draftToolStripMenuItem.CheckState = CheckState.Checked;
-        }
+            {
+                
+            EIWSToolStripMenuItem.CheckState = CheckState.Unchecked;
+           
+            }
         private void finalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-          
-            UpdateMode(false);
-            draftToolStripMenuItem.CheckState = CheckState.Unchecked;
-            finalToolStripMenuItem.CheckState = CheckState.Checked;
+            {
+
             
-        }
+            EWEToolStripMenuItem.CheckState = CheckState.Unchecked;
+             
+            }
         public void UpdateMode(bool IsDraftMode)
          {
          this.IsDraftMode = IsDraftMode;
@@ -3296,22 +3324,180 @@ namespace Epi.Windows.MakeView.Forms
 
             
          }
+        public void UpdateWebEnterMode(bool IsDraftMode)
+            {
+            this.IsEWEDraftMode = IsDraftMode;
+            Template template = new Template(this.mediator);
+
+
+            View RootView = mediator.Project.Metadata.GetParentView(this.projectExplorer.CurrentView.Id);
+
+            // DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(this.projectExplorer.CurrentView.Id);
+            DataTable table;
+           
+            if (RootView == null)
+                {
+                table = this.mediator.Project.Metadata.GetPublishedViewKeys(this.mediator.ProjectExplorer.CurrentView.Id);
+                }
+            else
+                {
+                table = this.mediator.Project.Metadata.GetPublishedViewKeys(RootView.Id);
+                }
+
+            DataRow ViewRow = table.Rows[0];
+            string OrganizationKey = ViewRow.ItemArray[2].ToString(); ;
+            string WebSurveyId = ViewRow.ItemArray[3].ToString();
+
+                if(ValidateUser())
+                    {
+                         DoUpDateMode(IsDraftMode, OrganizationKey, WebSurveyId);
+                    }
+
+                else
+    
+                    {
+                               Configuration config = Configuration.GetNewInstance(); 
+                                int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
+
+                                if (ISWindowAuthMode == 0)
+                                    {
+                                    if (LoginInfo.UserID == -1)
+                                        {
+                                        UserAuthentication dialog = new UserAuthentication();
+                                        DialogResult result = dialog.ShowDialog();
+                                        if (result == System.Windows.Forms.DialogResult.OK)
+                                            {
+                                            DoUpDateMode(IsDraftMode, OrganizationKey, WebSurveyId);
+                                            }
+                                        }
+                                    else 
+                                        {
+                                       DoUpDateMode(IsDraftMode, OrganizationKey, WebSurveyId);
+                                        }
+                                   
+
+                                    }
+                                else {
+
+                                MessageBox.Show("You are not authorized to Change mode for this form. Please contact system admin for more info.");
+                                    
+                                    }
+
+                            }
+            }
+
+        private void DoUpDateMode(bool IsDraftMode, string OrganizationKey, string WebSurveyId)
+            {
+            try
+                {
+
+                Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.No;
+                if (string.IsNullOrWhiteSpace(WebSurveyId))
+                    {
+                    IsValidOKey = Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrgKey(OrganizationKey);
+                    }
+                else
+                    {
+                    IsValidOKey = Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrgKey(OrganizationKey, WebSurveyId);
+                    }
+                WebEnterPublishDialog dialog = null;
+
+                switch (IsValidOKey)
+                    {
+                    case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.No:
+                        EWEOrgKey NewDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                        DialogResult result = NewDialog.ShowDialog();
+                        if (result == System.Windows.Forms.DialogResult.OK)
+                            {
+                            OrganizationKey = NewDialog.OrganizationKey;
+                            if (!string.IsNullOrWhiteSpace(OrganizationKey))
+                                {
+                                SetFormInfo();
+                                UpdateFormMode(IsDraftMode);
+                                }
+                            }
+                        break;
+                    case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
+                        WebEnterOptions dialog1 = new WebEnterOptions();
+                        DialogResult result1 = dialog1.ShowDialog();
+                        if (result1 == System.Windows.Forms.DialogResult.OK)
+                            {
+                            EWEOrgKey OrgKeyDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                            DialogResult result2 = OrgKeyDialog.ShowDialog();
+                            if (result2 == System.Windows.Forms.DialogResult.OK)
+                                {
+                                OrganizationKey = OrgKeyDialog.OrganizationKey;
+                                if (!string.IsNullOrWhiteSpace(OrganizationKey))
+                                    {
+                                    SetFormInfo();
+                                    UpdateFormMode(IsDraftMode);
+                                    }
+                                }
+                            }
+                        break;
+                    case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.GeneralException:
+                        WebEnterOptions dialog2 = new WebEnterOptions();
+                        DialogResult result3 = dialog2.ShowDialog();
+                        if (result3 == System.Windows.Forms.DialogResult.OK)
+                            {
+                            EWEOrgKey OrgKeyDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                            DialogResult result4 = OrgKeyDialog.ShowDialog();
+                            if (result4 == System.Windows.Forms.DialogResult.OK)
+                                {
+                                OrganizationKey = OrgKeyDialog.OrganizationKey;
+                                if (!string.IsNullOrWhiteSpace(OrganizationKey))
+                                    {
+                                    SetFormInfo();
+
+                                    UpdateFormMode(IsDraftMode);
+                                    }
+                                }
+                            }
+                        break;
+                    case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.Yes:
+                        SetFormInfo();
+                        UpdateFormMode(IsDraftMode);
+                        break;
+                    }
+
+                }
+            catch (Exception ex)// not republishable
+                {
+
+                }
+          
+            }
         public void SetModetoolStripDropDown(bool IsDraftMode){
 
             if (IsDraftMode)
                 {
-                    draftToolStripMenuItem.Checked = true;
-                    draftToolStripMenuItem.CheckState = CheckState.Checked;
-                    finalToolStripMenuItem.CheckState = CheckState.Unchecked;
+                draftToolStripMenuItem1.Checked = true;
+                draftToolStripMenuItem1.CheckState = CheckState.Checked;
+                finalToolStripMenuItem1.CheckState = CheckState.Unchecked;
                 }
             else
                 {
-                    finalToolStripMenuItem.Checked = true;
-                    finalToolStripMenuItem.CheckState = CheckState.Checked;
-                    draftToolStripMenuItem.CheckState = CheckState.Unchecked;
+                finalToolStripMenuItem1.Checked = true;
+                finalToolStripMenuItem1.CheckState = CheckState.Checked;
+                draftToolStripMenuItem1.CheckState = CheckState.Unchecked;
                 }
         }
+        public void SetEWEModetoolStripDropDown(bool IsDraftMode)
+            {
 
+            if (IsDraftMode)
+                {
+                draftToolStripMenuItem2.Checked = true;
+                draftToolStripMenuItem2.CheckState = CheckState.Checked;
+                finalToolStripMenuItem2.CheckState = CheckState.Unchecked;
+                }
+            else
+                {
+                finalToolStripMenuItem2.Checked = true;
+                finalToolStripMenuItem2.CheckState = CheckState.Checked;
+                draftToolStripMenuItem2.CheckState = CheckState.Unchecked;
+                }
+            }
       
         private void UpdateSurveyMode(bool IsDraftMode)
         {
@@ -3382,7 +3568,130 @@ namespace Epi.Windows.MakeView.Forms
 
             }
         }
+        private void UpdateFormMode(bool IsDraftMode)
+            {
+            try
+                {
+                //var client = Epi.Windows.MakeView.Utils.EWEServiceClient.GetClient();
+                //Configuration config = Configuration.GetNewInstance();
 
+                //Epi.Web.Common.Message.SurveyInfoRequest Request = new Web.Common.Message.SurveyInfoRequest(); 
+                //Epi.Web.Common.Message.SurveyInfoResponse Result = new Web.Common.Message.SurveyInfoResponse(); 
+                //Request.Criteria.ClosingDate = this.CloseDate;
+                //Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+                //Request.Criteria.UserPublishKey = new Guid(this.UserPublishKey);
+                //Request.Criteria.SurveyIdList.Add(this.SurveyId);
+
+
+                //Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfoDTO = new Web.Common.DTO.SurveyInfoDTO();
+
+                //SurveyInfoDTO.ClosingDate = this.CloseDate;
+                //SurveyInfoDTO.StartDate = this.StartDate;
+                //SurveyInfoDTO.SurveyId = new Guid(this.CurrentView.WebSurveyId).ToString();
+                //SurveyInfoDTO.SurveyType = this.SurveyType;
+                //SurveyInfoDTO.SurveyNumber = this.SurveyNumber;
+                //SurveyInfoDTO.SurveyName = this.SurveyName;
+                //SurveyInfoDTO.OrganizationKey = new Guid(OrganizationKey);
+                //SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
+                //SurveyInfoDTO.OrganizationName = this.OrganizationName;
+                //SurveyInfoDTO.XML = this.TemplateXML;
+                //SurveyInfoDTO.ExitText = this.ExitText;
+                //SurveyInfoDTO.IntroductionText = this.IntroductionText;
+                //SurveyInfoDTO.DepartmentName = this.DepartmentName;
+
+                //Request.Criteria.SurveyType = this.SurveyType;
+
+
+
+                Template template = new Template(this.mediator);
+
+
+
+                EWEManagerService.EWEManagerServiceClient client = Epi.Windows.MakeView.Utils.EWEServiceClient.GetClient();
+                DataTable table;
+                View RootView = this.mediator.Project.Metadata.GetParentView(this.mediator.ProjectExplorer.CurrentView.Id);
+                if (RootView == null)
+                    {
+                    table = this.mediator.Project.Metadata.GetPublishedViewKeys(this.mediator.ProjectExplorer.CurrentView.Id);
+                    }
+                else
+                    {
+                    table = this.mediator.Project.Metadata.GetPublishedViewKeys(RootView.Id);
+                    }
+          
+                DataRow ViewRow = table.Rows[0];
+
+                string WebSurveyId = ViewRow.ItemArray[3].ToString();
+                string OrganizationKey = ViewRow.ItemArray[2].ToString();
+
+
+                Configuration config = Configuration.GetNewInstance();
+                Epi.Windows.MakeView.EWEManagerService.SurveyInfoRequest Request = new Epi.Windows.MakeView.EWEManagerService.SurveyInfoRequest();
+                Epi.Windows.MakeView.EWEManagerService.SurveyInfoResponse Result = new Epi.Windows.MakeView.EWEManagerService.SurveyInfoResponse();
+                Epi.Windows.MakeView.EWEManagerService.SurveyInfoCriteria Criteria = new EWEManagerService.SurveyInfoCriteria();
+
+                //   Request.Criteria.ClosingDate = this.CloseDate;
+                Criteria.OrganizationKey = new Guid(OrganizationKey);
+                //Criteria.UserPublishKey = new Guid(this.UserPublishKey);
+                List<string> List = new List<string>();
+                List.Add(WebSurveyId);
+                Criteria.SurveyIdList = List.ToArray();
+                Request.Criteria = Criteria;
+                
+
+                Epi.Windows.MakeView.EWEManagerService.SurveyInfoDTO SurveyInfoDTO = new Epi.Windows.MakeView.EWEManagerService.SurveyInfoDTO();
+
+
+                SurveyInfoDTO.StartDate = DateTime.Now;
+                SurveyInfoDTO.SurveyId = new Guid(WebSurveyId).ToString();
+                SurveyInfoDTO.SurveyType = 2;
+                SurveyInfoDTO.SurveyName = mediator.Project.Name;
+                SurveyInfoDTO.OrganizationKey = new Guid(OrganizationKey);
+
+                //SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
+                SurveyInfoDTO.XML = template.CreateWebEnterTemplate();
+
+                Request.Criteria.SurveyType = 2;
+               
+               
+
+                if (IsDraftMode)
+                    {
+                    Request.Action = "Update";
+                    Request.Criteria.IsDraftMode = true;
+                    SurveyInfoDTO.IsDraftMode = true;
+                    }
+                else
+                    {
+                    Request.Action = "UpdateMode";
+                    Request.Criteria.IsDraftMode = false;
+                    SurveyInfoDTO.IsDraftMode = false;
+                    }
+                List<Epi.Windows.MakeView.EWEManagerService.SurveyInfoDTO> DTOList = new List<Epi.Windows.MakeView.EWEManagerService.SurveyInfoDTO>();
+                DTOList.Add(SurveyInfoDTO);
+                Request.SurveyInfoList = DTOList.ToArray();
+
+                Result = client.SetSurveyInfo(Request);
+                if (Result != null && Result.SurveyInfoList.Count() > 0)
+                    {
+                    //this.UpdateStatus("Survey mode was successfully updated!");
+                    if (IsDraftMode)
+                        {
+                        MessageBox.Show("Survey mode was successfully changed to DRAFT.", "", MessageBoxButtons.OK);
+                        }
+                    else
+                        {
+                        MessageBox.Show("Survey mode was successfully changed to FINAL.", "", MessageBoxButtons.OK);
+                        }
+                    }
+                }
+
+            catch (Exception ex)
+                {
+                //this.BeginInvoke(new FinishWithExceptionDelegate(FinishWithException), ex);
+
+                }
+            }
       //  private void GetSurveyInfo (object sender, System.ComponentModel.DoWorkEventArgs e)
         public void SetSurveyInfo()
         {
@@ -3456,7 +3765,82 @@ namespace Epi.Windows.MakeView.Forms
 
             }
         }
+       
+        public void SetFormInfo()
+            {
+            try
+                {
+                EWEManagerService.EWEManagerServiceClient client = Epi.Windows.MakeView.Utils.EWEServiceClient.GetClient();
+                Configuration config = Configuration.GetNewInstance();
+                DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(this.projectExplorer.CurrentView.Id);
+                DataRow ViewRow = table.Rows[0];
 
+                string WebSurveyId = ViewRow.ItemArray[3].ToString();
+
+                Epi.Windows.MakeView.EWEManagerService.SurveyInfoRequest Request = new Epi.Windows.MakeView.EWEManagerService.SurveyInfoRequest();
+                Epi.Windows.MakeView.EWEManagerService.SurveyInfoResponse Result = new Epi.Windows.MakeView.EWEManagerService.SurveyInfoResponse();
+                if (!string.IsNullOrWhiteSpace(WebSurveyId))
+                    {
+                    Request.Criteria.OrganizationKey = new Guid(this.EWEOrganizationKey); //new Guid(this.OrganizationKey);
+                    Request.Criteria.ReturnSizeInfoOnly = false;
+                    Request.Criteria.SurveyIdList[0]=WebSurveyId;
+                    Result = client.GetSurveyInfo(Request);
+
+                    }
+
+                if (Result != null && Result.SurveyInfoList.Count() > 0)
+                    {
+
+                    SurveyName = Result.SurveyInfoList[0].SurveyName;
+                    DepartmentName = Result.SurveyInfoList[0].DepartmentName;
+                    SurveyNumber = Result.SurveyInfoList[0].SurveyNumber;
+                    OrganizationName = Result.SurveyInfoList[0].OrganizationName;
+                    StartDate = Result.SurveyInfoList[0].StartDate;
+                    CloseDate = Result.SurveyInfoList[0].ClosingDate;
+                    IsDraftMode = Result.SurveyInfoList[0].IsDraftMode;
+                    IntroductionText = Result.SurveyInfoList[0].IntroductionText;
+                    ExitText = Result.SurveyInfoList[0].ExitText;
+                    TemplateXML = Result.SurveyInfoList[0].XML;
+                    //this.OrganizationKey = Result.SurveyInfoList[0].OrganizationKey.ToString();
+                    SurveyType = Result.SurveyInfoList[0].SurveyType;
+                    this.UserPublishKey = Result.SurveyInfoList[0].UserPublishKey.ToString();
+                    //SurveyId = Result.SurveyInfoList[0].SurveyId;
+                    //ChangeModetoolStripDropDownButton
+                    SetEWEModetoolStripDropDown(IsDraftMode);
+                    }
+
+                }
+            catch (FaultException<CustomFaultException> cfe)
+                {
+                // this.BeginInvoke(new FinishWithCustomFaultExceptionDelegate(FinishWithCustomFaultException), cfe);
+
+                }
+            catch (FaultException fe)
+                {
+                //this.BeginInvoke(new FinishWithFaultExceptionDelegate(FinishWithFaultException), fe);
+
+                }
+            catch (SecurityNegotiationException sne)
+                {
+                //this.BeginInvoke(new FinishWithSecurityNegotiationExceptionDelegate(FinishWithSecurityNegotiationException), sne);
+
+                }
+            catch (CommunicationException ce)
+                {
+                //this.BeginInvoke(new FinishWithCommunicationExceptionDelegate(FinishWithCommunicationException), ce);
+
+                }
+            catch (TimeoutException te)
+                {
+                // this.BeginInvoke(new FinishWithTimeoutExceptionDelegate(FinishWithTimeoutException), te);
+
+                }
+            catch (Exception ex)
+                {
+                //this.BeginInvoke(new FinishWithExceptionDelegate(FinishWithException), ex);
+
+                }
+            }
         private void ChangeModetoolStripDropDownButton_Click(object sender, EventArgs e)
         {
             /*
@@ -3616,5 +4000,654 @@ namespace Epi.Windows.MakeView.Forms
 
             }
         }
+        private void QuickFormInfoUpdate()
+            {
+            try
+                {
+                Template template = new Template(this.mediator);
+                if (ValidateUser()) // Validate User
+                    {
+
+                    DoQuickPublish(template);
+                    }
+                else // Validate User
+                    {
+
+                         Configuration config = Configuration.GetNewInstance();
+                         int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
+                         if (ISWindowAuthMode == 0 )
+                            {
+                            if (LoginInfo.UserID == -1)
+                                {
+                                    UserAuthentication dialog = new UserAuthentication();
+                                    DialogResult result = dialog.ShowDialog();
+                                    if (result == System.Windows.Forms.DialogResult.OK)
+                                        {
+                                        dialog.Close();
+                                        DoQuickPublish(template);
+                                        }
+                                }
+                            else 
+                                {
+                                       DoQuickPublish(template);
+                                 }
+                            }
+                        else 
+                            {
+                               MessageBox.Show("You are not authorized to quick publish this form to Epi Web Enter system. Please contact system admin for more info.");
+                            
+                            }
+                                   
+                    }
+                }
+            catch (FaultException<CustomFaultException> cfe)
+                {
+                // this.BeginInvoke(new FinishWithCustomFaultExceptionDelegate(FinishWithCustomFaultException), cfe);
+
+                }
+            catch (FaultException fe)
+                {
+                //this.BeginInvoke(new FinishWithFaultExceptionDelegate(FinishWithFaultException), fe);
+
+                }
+            catch (SecurityNegotiationException sne)
+                {
+                //this.BeginInvoke(new FinishWithSecurityNegotiationExceptionDelegate(FinishWithSecurityNegotiationException), sne);
+
+                }
+            catch (CommunicationException ce)
+                {
+                //this.BeginInvoke(new FinishWithCommunicationExceptionDelegate(FinishWithCommunicationException), ce);
+
+                }
+            catch (TimeoutException te)
+                {
+                // this.BeginInvoke(new FinishWithTimeoutExceptionDelegate(FinishWithTimeoutException), te);
+
+                }
+            catch (Exception ex)
+                {
+                //this.BeginInvoke(new FinishWithExceptionDelegate(FinishWithException), ex);
+
+                }
+            }
+
+        private void DoQuickPublish(Template template)
+            {
+
+
+
+
+            EWEManagerService.EWEManagerServiceClient client = Epi.Windows.MakeView.Utils.EWEServiceClient.GetClient();
+
+            DataTable table;
+            View RootView = this.mediator.Project.Metadata.GetParentView(this.mediator.ProjectExplorer.CurrentView.Id);
+            if (RootView == null)
+                {
+                table = this.mediator.Project.Metadata.GetPublishedViewKeys(this.mediator.ProjectExplorer.CurrentView.Id);
+                }
+            else
+                {
+                table = this.mediator.Project.Metadata.GetPublishedViewKeys(RootView.Id);
+                }
+            DataRow ViewRow = table.Rows[0];
+
+            string WebSurveyId = ViewRow.ItemArray[3].ToString();
+            string OrganizationKey = ViewRow.ItemArray[2].ToString();
+
+
+            Configuration config = Configuration.GetNewInstance();
+            Epi.Windows.MakeView.EWEManagerService.SurveyInfoRequest Request = new Epi.Windows.MakeView.EWEManagerService.SurveyInfoRequest();
+            Epi.Windows.MakeView.EWEManagerService.SurveyInfoResponse Result = new Epi.Windows.MakeView.EWEManagerService.SurveyInfoResponse();
+            Epi.Windows.MakeView.EWEManagerService.SurveyInfoCriteria Criteria = new EWEManagerService.SurveyInfoCriteria();
+
+            //   Request.Criteria.ClosingDate = this.CloseDate;
+            Criteria.OrganizationKey = new Guid(OrganizationKey);
+            //Criteria.UserPublishKey = new Guid(this.UserPublishKey);
+            List<string> List = new List<string>();
+            List.Add(WebSurveyId);
+            Criteria.SurveyIdList = List.ToArray();
+            Request.Criteria = Criteria;
+            Request.Action = "Update";
+
+            Epi.Windows.MakeView.EWEManagerService.SurveyInfoDTO SurveyInfoDTO = new Epi.Windows.MakeView.EWEManagerService.SurveyInfoDTO();
+
+
+            SurveyInfoDTO.StartDate = DateTime.Now;
+            SurveyInfoDTO.SurveyId = new Guid(WebSurveyId).ToString();
+            SurveyInfoDTO.SurveyType = 2;
+            SurveyInfoDTO.SurveyName = mediator.Project.Name;
+            SurveyInfoDTO.OrganizationKey = new Guid(OrganizationKey);
+
+            //SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
+            SurveyInfoDTO.XML = template.CreateWebEnterTemplate();
+
+
+
+            Request.Criteria.SurveyType = 2;
+            Request.Criteria.IsDraftMode = true;
+            //SurveyInfoDTO.IsDraftMode = this.IsDraftMode;
+            List<Epi.Windows.MakeView.EWEManagerService.SurveyInfoDTO> DTOList = new List<Epi.Windows.MakeView.EWEManagerService.SurveyInfoDTO>();
+            DTOList.Add(SurveyInfoDTO);
+            Request.SurveyInfoList = DTOList.ToArray();
+            Result = client.SetSurveyInfo(Request);
+            if (Result != null && Result.SurveyInfoList.Count() > 0)
+                {
+                //this.UpdateStatus("Survey was successfully updated!");
+
+                MessageBox.Show("Survey was successfully updated.", "", MessageBoxButtons.OK);
+                }
+            }
+        private void toolStripPublishToWebEnter_Click(object sender, EventArgs e)
+            {
+            DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(this.projectExplorer.CurrentView.Id);
+            DataRow ViewRow = table.Rows[0];
+        // this.OrganizationKey = this.projectExplorer.CurrentView.EWEOrganizationKey;
+            this.EWEOrganizationKey = ViewRow.ItemArray[2].ToString();
+
+
+            Template template = new Template(this.mediator);
+            string InvalidForPublishing = ListFieldsNotSupportedForWeb();
+            View view;
+            
+            if (projectExplorer.CurrentView != null)
+                {
+                view = projectExplorer.CurrentView;
+                }
+            else
+                {
+                view = projectExplorer.SelectedPage.view;
+                }
+            if (InvalidForPublishing.Length > 0)
+                {
+                SupportedFieldTypeDialog dialog = new SupportedFieldTypeDialog(InvalidForPublishing);
+                dialog.ShowDialog();
+                }
+            else
+                {
+                Configuration config = Configuration.GetNewInstance();
+
+                try
+                    {
+                    if(ValidateUser()) // Validate User
+                        {
+                    if (config.Settings.Republish_IsRepbulishable == true) //IsRepbulishable
+                        {
+
+                        if (string.IsNullOrWhiteSpace(this.EWEOrganizationKey) && !string.IsNullOrWhiteSpace(view.EWEFormId))//valitate OrgId and FormId
+                            {
+                            Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.No;
+                            if (string.IsNullOrWhiteSpace(view.EWEFormId))
+                                {
+                                IsValidOKey = Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrgKey(this.EWEOrganizationKey);
+                                }
+                            else
+                                {
+                                IsValidOKey = Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrgKey(this.EWEOrganizationKey, view.EWEFormId);
+                                }
+                            WebEnterPublishDialog dialog = null;
+                            WebEnterOptions wso = null;
+                            switch (IsValidOKey)
+                                {
+                                case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.No:
+                                    EWEOrgKey NewDialog = new EWEOrgKey(this.CurrentView.EWEFormId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                    DialogResult result = NewDialog.ShowDialog();
+                                    if (result == System.Windows.Forms.DialogResult.OK)
+                                        {
+                                        this.EWEOrganizationKey = NewDialog.OrganizationKey;
+                                        if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
+                                            {
+                                            SetFormInfo();
+                                            dialog = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                                            dialog.ShowDialog();
+                                            }
+                                        }
+                                    break;
+                                case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
+                                    WebEnterOptions dialog1 = new WebEnterOptions();
+                                    DialogResult result1 = dialog1.ShowDialog();
+                                    if (result1 == System.Windows.Forms.DialogResult.OK)
+                                        {
+                                        EWEOrgKey OrgKeyDialog = new EWEOrgKey(this.CurrentView.EWEFormId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                        DialogResult result2 = OrgKeyDialog.ShowDialog();
+                                        if (result2 == System.Windows.Forms.DialogResult.OK)
+                                            {
+                                            this.EWEOrganizationKey = OrgKeyDialog.OrganizationKey;
+                                            if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
+                                                {
+                                                SetFormInfo();
+                                                dialog = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                                                dialog.ShowDialog();
+                                                }
+                                            }
+                                        }
+                                    break;
+                                case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.GeneralException:
+                                    WebEnterOptions dialog2 = new WebEnterOptions();
+                                    DialogResult result3 = dialog2.ShowDialog();
+                                    if (result3 == System.Windows.Forms.DialogResult.OK)
+                                        {
+                                        EWEOrgKey OrgKeyDialog = new EWEOrgKey(this.CurrentView.EWEFormId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                        DialogResult result4 = OrgKeyDialog.ShowDialog();
+                                        if (result4 == System.Windows.Forms.DialogResult.OK)
+                                            {
+                                            this.EWEOrganizationKey = OrgKeyDialog.OrganizationKey;
+                                            if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
+                                                {
+                                                SetFormInfo();
+                                                dialog = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                                                dialog.ShowDialog();
+                                                }
+                                            }
+                                        }
+                                    break;
+                                case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.Yes:
+                                    SetFormInfo();
+                                    dialog = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                                    dialog.ShowDialog();
+                                    break;
+                                }
+
+                            }
+                        else  //valitate OrgId and FormId
+                            {
+                            if (!string.IsNullOrEmpty(this.EWEOrganizationKey))
+                                {
+                                WebEnterPublishDialog dialog = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                                dialog.ShowDialog();
+                                }
+                            else
+                                {
+                                try
+                                    {
+
+                                    EWEManagerService.EWEManagerServiceClient client = Epi.Windows.MakeView.Utils.EWEServiceClient.GetClient();
+                                     Epi.Windows.MakeView.EWEManagerService.OrganizationRequest Request = new Epi.Windows.MakeView.EWEManagerService.OrganizationRequest();
+                                    //Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+                                     Request.Organization = new EWEManagerService.OrganizationDTO();
+                                    var TestService = client.GetOrganization(Request);
+
+                                    WebEnterPublishDialog dialog = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
+                                    DialogResult result = dialog.ShowDialog();
+                                    if (result == System.Windows.Forms.DialogResult.Cancel)
+                                        {
+                                        this.EWEOrganizationKey = dialog.GetOrgKey;
+                                        }
+
+                                    }
+                                catch (Exception ex)
+                                    {
+                                    WebEnterOptions dialog2 = new WebEnterOptions();
+                                    DialogResult result3 = dialog2.ShowDialog();
+                                    if (result3 == System.Windows.Forms.DialogResult.OK)
+                                        {
+
+                                        WebEnterPublishDialog dialog = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                                        DialogResult result = dialog.ShowDialog();
+                                        if (result == System.Windows.Forms.DialogResult.Cancel)
+                                            {
+                                            this.EWEOrganizationKey = dialog.GetOrgKey;
+                                            }
+
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    else // IsRepbulishable
+                        {
+                        try
+                            {
+
+                            SurveyManagerService.ManagerServiceClient client = Epi.Windows.MakeView.Utils.ServiceClient.GetClient();
+                            Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+                            var TestService = client.GetOrganization(Request);
+
+                            WebEnterPublishDialog dialog = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
+                            DialogResult result = dialog.ShowDialog();
+                            if (result == System.Windows.Forms.DialogResult.Cancel)
+                                {
+                                this.EWEOrganizationKey = dialog.GetOrgKey;
+                                }
+
+                            }
+                        catch (Exception ex)
+                            {
+
+
+                            if (config.Settings.Republish_IsRepbulishable == true)
+                                {
+                                WebSurveyOptions dialog2 = new WebSurveyOptions();
+                                DialogResult result3 = dialog2.ShowDialog();
+                                if (result3 == System.Windows.Forms.DialogResult.OK)
+                                    {
+
+                                    WebEnterPublishDialog dialog = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                                    DialogResult result = dialog.ShowDialog();
+                                    if (result == System.Windows.Forms.DialogResult.Cancel)
+                                        {
+                                        this.EWEOrganizationKey = dialog.GetOrgKey;
+                                        }
+
+                                    }
+                                }
+                            else
+                                {
+
+                                WebEnterPublishDialog dialog = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
+                                 dialog.ShowDialog();
+                                
+                                }
+                            }
+                        }
+                        }
+                    else // Validate User
+                        {
+                          
+
+                        int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
+
+                        if (ISWindowAuthMode == 0)
+                            {
+                               if(LoginInfo.UserID == -1){
+                                UserAuthentication dialog = new UserAuthentication();
+                                DialogResult result = dialog.ShowDialog();
+                                if (result == System.Windows.Forms.DialogResult.OK)
+                                    {
+                                    dialog.Close();
+                                    if (string.IsNullOrEmpty(this.EWEOrganizationKey))
+                                        {
+                                          WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
+                                           dialog1.ShowDialog();
+                                        }else{
+                                        WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                                        dialog1.ShowDialog();
+                                
+                                        }
+                                    }
+                                   }
+                               else{
+                                    if (string.IsNullOrEmpty(this.EWEOrganizationKey))
+                                        {
+                                          WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
+                                           dialog1.ShowDialog();
+                                        }else{
+                                        WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                                        dialog1.ShowDialog();
+                                
+                                        }
+                                   
+                                   }
+                            }
+                        
+                        else
+                            {
+                            MessageBox.Show("You are not authorized to publish this form to Epi Web Enter system. Please contact system admin for more info.");
+                            
+                            
+                            
+                            }
+                        }
+                    }
+                catch (Exception ex)// not republishable
+                    {
+                    WebEnterPublishDialog dialog = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
+                    dialog.ShowDialog();
+                    }
+                }
+
+            this.SetPublishMenuItems(view);
+            }
+
+        private bool ValidateUser()
+            {
+            try{
+            bool IsValidUser = false;
+            string UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
+            Configuration config = Configuration.GetNewInstance();
+            int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
+
+
+            UserPrincipal User = GetUser(UserName);
+
+            Epi.Windows.MakeView.EWEManagerService.UserAuthenticationRequest Request = new Epi.Windows.MakeView.EWEManagerService.UserAuthenticationRequest();
+            var rUser = new Epi.Windows.MakeView.EWEManagerService.UserDTO();
+            rUser.EmailAddress = User.EmailAddress;
+            Request.User = rUser;
+            Request.User.Operation = Epi.Windows.MakeView.EWEManagerService.ConstantOperationMode.NoChange;
+            EWEManagerService.EWEManagerServiceClient client = Epi.Windows.MakeView.Utils.EWEServiceClient.GetClient();
+            var Result = client.GetUser(Request);
+            if (Result != null && ISWindowAuthMode == 1)
+             {
+              IsValidUser = true;
+              LoginInfo.UserID = Result.User.UserId;
+              }
+
+            return IsValidUser;
+            }
+             catch (Exception ex) 
+                 {
+                 throw ex;
+                 }
+            }
+        public  UserPrincipal GetUser(string UserName)
+            {
+            PrincipalContext PrincipalContext = new PrincipalContext(ContextType.Domain);
+            UserPrincipal UserPrincipal =
+               UserPrincipal.FindByIdentity(PrincipalContext, UserName);
+            return UserPrincipal;
+            }
+        
+
+        private void toWebSurveyToolStripMenuItem_Click(object sender, EventArgs e)
+            {
+            Template template = new Template(this.mediator);
+            try
+                {
+
+                Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.No;
+                if (string.IsNullOrWhiteSpace(this.projectExplorer.CurrentView.WebSurveyId))
+                    {
+                    IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrgKey(this.OrganizationKey);
+                    }
+                else
+                    {
+                    IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrgKey(this.OrganizationKey, this.projectExplorer.CurrentView.WebSurveyId);
+                    }
+                WebPublishDialog dialog = null;
+
+                switch (IsValidOKey)
+                    {
+                    case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.No:
+                        OrgKey NewDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                        DialogResult result = NewDialog.ShowDialog();
+                        if (result == System.Windows.Forms.DialogResult.OK)
+                            {
+                            this.OrganizationKey = NewDialog.OrganizationKey;
+                            if (!string.IsNullOrWhiteSpace(OrganizationKey))
+                                {
+                                SetSurveyInfo();
+                                QuickSurveyInfoUpdate();
+                                }
+                            }
+                        break;
+                    case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
+                        WebSurveyOptions dialog1 = new WebSurveyOptions();
+                        DialogResult result1 = dialog1.ShowDialog();
+                        if (result1 == System.Windows.Forms.DialogResult.OK)
+                            {
+                            OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                            DialogResult result2 = OrgKeyDialog.ShowDialog();
+                            if (result2 == System.Windows.Forms.DialogResult.OK)
+                                {
+                                this.OrganizationKey = OrgKeyDialog.OrganizationKey;
+                                if (!string.IsNullOrWhiteSpace(OrganizationKey))
+                                    {
+                                    SetSurveyInfo();
+                                    QuickSurveyInfoUpdate();
+                                    }
+                                }
+                            }
+                        break;
+                    case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.GeneralException:
+                        WebSurveyOptions dialog2 = new WebSurveyOptions();
+                        DialogResult result3 = dialog2.ShowDialog();
+                        if (result3 == System.Windows.Forms.DialogResult.OK)
+                            {
+                            OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                            DialogResult result4 = OrgKeyDialog.ShowDialog();
+                            if (result4 == System.Windows.Forms.DialogResult.OK)
+                                {
+                                this.OrganizationKey = OrgKeyDialog.OrganizationKey;
+                                if (!string.IsNullOrWhiteSpace(OrganizationKey))
+                                    {
+                                    SetSurveyInfo();
+                                    QuickSurveyInfoUpdate();
+                                    }
+                                }
+                            }
+                        break;
+                    case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.Yes:
+                        SetSurveyInfo();
+                        QuickSurveyInfoUpdate();
+                        break;
+                    }
+
+                }
+            catch (Exception ex)// not republishable
+                {
+
+                }
+
+
+            }
+
+        private void toWebEnterToolStripMenuItem_Click(object sender, EventArgs e)
+            {
+            DataTable table;
+            View RootView = this.mediator.Project.Metadata.GetParentView(this.mediator.ProjectExplorer.CurrentView.Id);
+            if (RootView == null)
+                {
+                table = this.mediator.Project.Metadata.GetPublishedViewKeys(this.mediator.ProjectExplorer.CurrentView.Id);
+                }
+            else
+                {
+                table = this.mediator.Project.Metadata.GetPublishedViewKeys(RootView.Id);
+                }
+            DataRow ViewRow = table.Rows[0];
+
+            string WebSurveyId = ViewRow.ItemArray[3].ToString();
+
+            Template template = new Template(this.mediator);
+            try
+                {
+
+                Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.No;
+                if (string.IsNullOrWhiteSpace(WebSurveyId))
+                    {
+                    IsValidOKey = Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrgKey(this.EWEOrganizationKey);
+                    }
+                else
+                    {
+                    IsValidOKey = Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrgKey(this.EWEOrganizationKey, WebSurveyId);
+                    }
+                WebEnterPublishDialog dialog = null;
+
+                switch (IsValidOKey)
+                    {
+                    case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.No:
+                        EWEOrgKey NewDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                        DialogResult result = NewDialog.ShowDialog();
+                        if (result == System.Windows.Forms.DialogResult.OK)
+                            {
+                            this.EWEOrganizationKey = NewDialog.OrganizationKey;
+                            if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
+                                {
+                                SetFormInfo();
+                                QuickFormInfoUpdate();
+                                }
+                            }
+                        break;
+                    case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
+                        WebEnterOptions dialog1 = new WebEnterOptions();
+                        DialogResult result1 = dialog1.ShowDialog();
+                        if (result1 == System.Windows.Forms.DialogResult.OK)
+                            {
+                            EWEOrgKey OrgKeyDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                            DialogResult result2 = OrgKeyDialog.ShowDialog();
+                            if (result2 == System.Windows.Forms.DialogResult.OK)
+                                {
+                                this.EWEOrganizationKey = OrgKeyDialog.OrganizationKey;
+                                if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
+                                    {
+                                    SetFormInfo();
+                                    QuickFormInfoUpdate();
+                                    }
+                                }
+                            }
+                        break;
+                    case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.GeneralException:
+                        WebEnterOptions dialog2 = new WebEnterOptions();
+                        DialogResult result3 = dialog2.ShowDialog();
+                        if (result3 == System.Windows.Forms.DialogResult.OK)
+                            {
+                            EWEOrgKey OrgKeyDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                            DialogResult result4 = OrgKeyDialog.ShowDialog();
+                            if (result4 == System.Windows.Forms.DialogResult.OK)
+                                {
+                                this.EWEOrganizationKey = OrgKeyDialog.OrganizationKey;
+                                if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
+                                    {
+                                    SetFormInfo();
+                                    QuickFormInfoUpdate();
+                                    }
+                                }
+                            }
+                        break;
+                    case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.Yes:
+                        SetFormInfo();
+                        QuickFormInfoUpdate();
+                        break;
+                    }
+
+                }
+            catch (Exception ex)// not republishable
+                {
+
+                }
+            }
+
+        private void draftToolStripMenuItem1_Click(object sender, EventArgs e)
+            {
+            UpdateMode(true);
+            finalToolStripMenuItem1.CheckState = CheckState.Unchecked;
+            draftToolStripMenuItem1.CheckState = CheckState.Checked;
+            }
+
+        private void draftToolStripMenuItem2_Click(object sender, EventArgs e)
+            {
+            UpdateWebEnterMode(true);
+            finalToolStripMenuItem2.CheckState = CheckState.Unchecked;
+            draftToolStripMenuItem2.CheckState = CheckState.Checked;
+            }
+
+        private void finalToolStripMenuItem1_Click(object sender, EventArgs e)
+            {
+
+            UpdateMode(false);
+            draftToolStripMenuItem1.CheckState = CheckState.Unchecked;
+            finalToolStripMenuItem1.CheckState = CheckState.Checked;
+            }
+
+        private void finalToolStripMenuItem2_Click(object sender, EventArgs e)
+            {
+
+            UpdateWebEnterMode(false);
+            draftToolStripMenuItem2.CheckState = CheckState.Unchecked;
+            finalToolStripMenuItem2.CheckState = CheckState.Checked;
+            }
+        
+       
     }
 }
