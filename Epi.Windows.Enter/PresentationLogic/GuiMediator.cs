@@ -2030,7 +2030,29 @@ namespace Epi.Windows.Enter.PresentationLogic
                         ((ComboBox)control).BeginUpdate();
 
                         int indexCombo = ((ComboBox)control).FindString(findString);
+
+                        if (indexCombo == -1)
+                        { 
+                            if (field is DDLFieldOfCommentLegal)
+                            {
+                                string numeric, trimmed;
+                            
+                                System.Windows.Forms.ComboBox.ObjectCollection items = ((ComboBox)control).Items;
+                                foreach (var item in items)
+                                {
+                                    numeric = ((string)item).Substring(0, ((string)item).IndexOf('-'));
+                                    trimmed = numeric.TrimStart(new char[] { '0' });
+                                    if (trimmed == findString)
+                                    {
+                                        indexCombo = ((ComboBox)control).FindString(numeric);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
                         IsComboTextAssign = true;
+                        
                         if (indexCombo == -1)
                         {
                             ((System.Windows.Forms.ComboBox)control).Text = string.Empty;
@@ -2038,8 +2060,6 @@ namespace Epi.Windows.Enter.PresentationLogic
                         }
                         else
                         {
-                            ((System.Windows.Forms.ComboBox)control).Text = findString;
-                            ((System.Windows.Forms.ComboBox)control).SelectedText = string.Empty;
                             ((System.Windows.Forms.ComboBox)control).SelectedIndex = indexCombo;
                         }
 
