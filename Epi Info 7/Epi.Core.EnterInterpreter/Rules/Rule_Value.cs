@@ -408,13 +408,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                     default:
                         double double_compare;
                         DateTime DateTime_compare;
-                        bool bool_compare;
-
-                        if (dataValue.StartsWith("0"))
-                        {
-                            result = dataValue;
-                            break;
-                        }
+                        bool bool_compare;                       
 
                         if (double.TryParse(dataValue, out double_compare))
                         {
