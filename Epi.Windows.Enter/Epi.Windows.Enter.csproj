@@ -668,8 +668,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\EWEManagerService\EWEManagerService1.disco" />
-    <Content Include="Web\Epi.Web.Enter.Common.dll" />
-    <Content Include="Web\Epi.Web.Enter.Interfaces.dll" />
     <EmbeddedResource Include="Resources\imageField_Icons.png" />
     <None Include="Service References\ServiceManager\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
@@ -687,6 +685,9 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ServiceManager\" />
     <WCFMetadataStorage Include="Service References\EWEManagerService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Web\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
