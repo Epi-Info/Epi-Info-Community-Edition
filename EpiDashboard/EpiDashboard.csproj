@@ -209,6 +209,9 @@
     <Compile Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml.cs">
       <DependentUpon>AberrationDetectionChartProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GadgetProperties\LogisticProperties.xaml.cs">
+      <DependentUpon>LogisticProperties.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GadgetProperties\ScatterChartProperties.xaml.cs">
       <DependentUpon>ScatterChartProperties.xaml</DependentUpon>
     </Compile>
@@ -475,6 +478,7 @@
     <Compile Include="Gadgets\AreaChartParametersBase.cs" />
     <Compile Include="Gadgets\AberrationDetectionChartParametersBase.cs" />
     <Compile Include="Gadgets\AberrationDetectionChartParameters.cs" />
+    <Compile Include="Gadgets\LogisticParameters.cs" />
     <Compile Include="Gadgets\ScatterChartParameters.cs" />
     <Compile Include="Gadgets\ScatterChartParametersBase.cs" />
     <Compile Include="Gadgets\ParetoChartParameters.cs" />
@@ -901,6 +905,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\LogisticProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
