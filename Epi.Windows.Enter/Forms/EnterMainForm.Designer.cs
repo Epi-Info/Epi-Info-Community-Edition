@@ -125,7 +125,6 @@ namespace Epi.Windows.Enter
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
-            this.copyShortcutToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -801,12 +800,6 @@ namespace Epi.Windows.Enter
             // ContentPanel
             // 
             resources.ApplyResources(this.ContentPanel, "ContentPanel");
-            // 
-            // copyShortcutToClipboardToolStripMenuItem
-            // 
-            this.copyShortcutToClipboardToolStripMenuItem.Name = "copyShortcutToClipboardToolStripMenuItem";
-            resources.ApplyResources(this.copyShortcutToClipboardToolStripMenuItem, "copyShortcutToClipboardToolStripMenuItem");
-            this.copyShortcutToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyShortcutToClipboardToolStripMenuItem_Click);
             // 
             // EnterMainForm
             // 
