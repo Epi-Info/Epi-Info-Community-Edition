@@ -410,6 +410,12 @@ namespace Epi.Core.EnterInterpreter.Rules
                         DateTime DateTime_compare;
                         bool bool_compare;
 
+                        if (dataValue.StartsWith("0"))
+                        {
+                            result = dataValue;
+                            break;
+                        }
+
                         if (double.TryParse(dataValue, out double_compare))
                         {
                             result = double_compare;
