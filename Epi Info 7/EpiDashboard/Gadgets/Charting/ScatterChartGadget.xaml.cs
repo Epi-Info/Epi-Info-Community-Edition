@@ -246,7 +246,7 @@ namespace EpiDashboard.Gadgets.Charting
                     if (chtParameters.ColumnNames.Count > 0 && !String.IsNullOrEmpty(chtParameters.ColumnNames[0]))
                     {
 
-                        CreateInputVariableList();
+                        //CreateInputVariableList();
                         SetVisuals();
                         infoPanel.Visibility = System.Windows.Visibility.Collapsed;
                         waitPanel.Visibility = System.Windows.Visibility.Visible;
@@ -443,6 +443,26 @@ namespace EpiDashboard.Gadgets.Charting
             HideConfigPanel();
             CheckAndSetPosition();
         }
+
+        private void properties_ChangesAccepted(object sender, EventArgs e)
+        {
+            Controls.GadgetProperties.ScatterChartProperties properties = Popup.Content as Controls.GadgetProperties.ScatterChartProperties;
+            this.Parameters = properties.Parameters;
+            this.DataFilters = properties.DataFilters;
+            this.CustomOutputHeading = Parameters.GadgetTitle;
+            this.CustomOutputDescription = Parameters.GadgetDescription;
+            Popup.Close();
+            if (properties.HasSelectedFields)
+            {
+                RefreshResults();
+            }
+        }
+
+        private void properties_Cancelled(object sender, EventArgs e)
+        {
+            Popup.Close();
+        }
+
 
         public override void CreateFromXml(XmlElement element)
         {
@@ -974,37 +994,45 @@ namespace EpiDashboard.Gadgets.Charting
 
                 this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToProcessingState));
                 this.Dispatcher.BeginInvoke(new SimpleCallback(ClearResults));
+                ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
 
-                string freqVar = GadgetOptions.MainVariableName;
-                string crosstabVar = GadgetOptions.CrosstabVariableName;
-                string weightVar = GadgetOptions.WeightVariableName;
-                string strataVar = string.Empty;
-                bool includeMissing = GadgetOptions.ShouldIncludeMissing;
+                //string freqVar = GadgetOptions.MainVariableName;
+                //string crosstabVar = GadgetOptions.CrosstabVariableName;
+                //string weightVar = GadgetOptions.WeightVariableName;
+                //string strataVar = string.Empty;
+                //bool includeMissing = GadgetOptions.ShouldIncludeMissing;
 
-                List<string> stratas = new List<string>();
-                if (!string.IsNullOrEmpty(strataVar))
-                {
-                    stratas.Add(strataVar);
-                }
+                string freqVar = chtParameters.ColumnNames[0];
+                string crosstabVar = chtParameters.CrosstabVariableName;
+                bool includeMissing = chtParameters.IncludeMissing;
+
+                //List<string> stratas = new List<string>();
+                //if (!string.IsNullOrEmpty(strataVar))
+                //{
+                //    stratas.Add(strataVar);
+                //}
 
                 try
                 {
                     RequestUpdateStatusDelegate requestUpdateStatus = new RequestUpdateStatusDelegate(RequestUpdateStatusMessage);
                     CheckForCancellationDelegate checkForCancellation = new CheckForCancellationDelegate(IsCancelled);
 
-                    GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
-                    GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
+                    //GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
+                    //GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
+                    chtParameters.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
+                    chtParameters.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
 
                     if (this.DataFilters != null && this.DataFilters.Count > 0)
                     {
-                        GadgetOptions.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
+                        chtParameters.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
                     }
                     else
                     {
-                        GadgetOptions.CustomFilter = string.Empty;
+                        chtParameters.CustomFilter = string.Empty;
                     }
 
-                    DataView dv = DashboardHelper.GenerateView(GadgetOptions);
+                    //DataView dv = DashboardHelper.GenerateView(GadgetOptions);
+                    DataView dv = DashboardHelper.GenerateView(chtParameters);
 
                     List<XYChartData> dataList = new List<XYChartData>();
 
@@ -1069,7 +1097,7 @@ namespace EpiDashboard.Gadgets.Charting
                 finally
                 {
                     stopwatch.Stop();
-                    Debug.Print("Column chart gadget took " + stopwatch.Elapsed.ToString() + " seconds to complete.");
+                    Debug.Print("Scatter chart gadget took " + stopwatch.Elapsed.ToString() + " seconds to complete.");
                     Debug.Print(DashboardHelper.DataFilters.GenerateDataFilterString());
                 }
             }
@@ -1134,6 +1162,31 @@ namespace EpiDashboard.Gadgets.Charting
             htmlBuilder.AppendLine("<img src=\"" + imageFileName + "\" />");
 
             return htmlBuilder.ToString();
+        }
+
+        public override void ShowHideConfigPanel()
+        {
+            Popup = new DashboardPopup();
+            Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
+            Controls.GadgetProperties.ScatterChartProperties properties = new Controls.GadgetProperties.ScatterChartProperties(this.DashboardHelper, this, (ScatterChartParameters)Parameters, StrataGridList);
+
+            properties.Width = 800;
+            properties.Height = 600;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            {
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            {
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            properties.Cancelled += new EventHandler(properties_Cancelled);
+            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            Popup.Content = properties;
+            Popup.Show();
         }
 
         private void SetPalette()
