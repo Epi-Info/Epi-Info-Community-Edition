@@ -75,7 +75,7 @@
 
                         <TextBlock x:Name="tblockXAxisLabel" FontWeight="DemiBold" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0, 0, 0, 6" Visibility="Collapsed" />
 
-                        <!--<charting:XYChart x:Name="xyChart" Background="White" Grid.Row="0" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated">
+                        <charting:XYChart x:Name="xyChart" Background="White" Grid.Row="0" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated">
                             <charting:XYChart.XAxisArea>
                                 <charting:AxisCoordinates x:Name="xAxisCoordinates" Angle="0">
                                 </charting:AxisCoordinates>
@@ -85,7 +85,7 @@
                                 <charting:Axis Id="XAxis" x:Name="xAxis" />
                             </charting:XYChart.Axes>
                             <charting:MarkerSeries x:Name="series0" Id="S0" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="True" />
-                            <charting:LineSeries x:Name="series1" Id="S1" XPath="X" YPath="Z" LineKind="Auto" />-->
+                            <charting:LineSeries x:Name="series1" Id="S1" XPath="X" YPath="Z" LineKind="Auto" />
                             <!--<charting:SeriesAnnotationTracker SeriesIdsCSS="S0" />
                             <charting:SeriesTracker SeriesId="S0" MarkerSize="6" />-->
 
@@ -105,7 +105,7 @@
                                     </DataTemplate>
                                 </charting:CoordinateStripes.StripeTemplate>
                             </charting:CoordinateStripes>-->
-                        <!--</charting:XYChart>-->
+                        </charting:XYChart>
 
                         <StackPanel Grid.Row="0" Grid.Column="1" x:Name="panelFormula" Visibility="Collapsed" >
                             <Border BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top">

@@ -489,14 +489,7 @@ namespace EpiDashboard.Gadgets.Charting
                         break;
                     case "outcomevariable":
                         //cmbOutcomeField.Text = child.InnerText.Replace("&lt;", "<");
-                        if (this.Parameters.ColumnNames.Count > 1)
-                        {
-                            ((ScatterChartParameters)Parameters).ColumnNames[1] = (child.InnerText.Replace("&lt;", "<"));
-                        }
-                        else
-                        {
-                            ((ScatterChartParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
-                        }
+                        ((ScatterChartParameters)Parameters).CrosstabVariableName = (child.InnerText.Replace("&lt;", "<"));
                         break;
                     case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
@@ -585,7 +578,10 @@ namespace EpiDashboard.Gadgets.Charting
             base.CreateFromXml(element);
 
             this.LoadingCombos = false;
-            RefreshResults();
+            if (!String.IsNullOrEmpty(((ScatterChartParameters)Parameters).ColumnNames[0]) && (!String.IsNullOrEmpty(((ScatterChartParameters)Parameters).CrosstabVariableName)))
+            {
+                RefreshResults();
+            }
             HideConfigPanel();
         }
 
@@ -868,6 +864,7 @@ namespace EpiDashboard.Gadgets.Charting
         private void SetChartData(List<XYChartData> dataList, StatisticsRepository.LinearRegression.LinearRegressionResults regresResults, NumericDataValue maxValue, NumericDataValue minValue)
         {
             List<RegressionChartData> regressionDataList = new List<RegressionChartData>();
+            ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
 
             if (regresResults.variables != null)
             {
@@ -962,10 +959,10 @@ namespace EpiDashboard.Gadgets.Charting
             //xAxis.UseOnlyVisiblePointsToComputeRange = true;
 
             //xyChart.DataSource = dataList;
-            //series0.DataSource = dataList;
-            //series1.DataSource = regressionDataList;
-            //xyChart.Width = double.Parse(txtWidth.Text);
-            //xyChart.Height = double.Parse(txtHeight.Text);
+            series0.DataSource = dataList;
+            series1.DataSource = regressionDataList;
+            xyChart.Width = chtParameters.ChartWidth;
+            xyChart.Height = chtParameters.ChartHeight;
 
             //xAxis.UseOnlyVisiblePointsToComputeRange = true;
         }
@@ -1243,27 +1240,27 @@ namespace EpiDashboard.Gadgets.Charting
         //    }
         //}
 
-        //private void xyChart_DataStructureCreated(object sender, EventArgs e)
-        //{
-        //    string sName = "";
+        private void xyChart_DataStructureCreated(object sender, EventArgs e)
+        {
+            string sName = "";
 
-        //    if (GadgetOptions.StrataVariableNames.Count > 0)
-        //    {
-        //        foreach (Series s0 in xyChart.DataSeries)
-        //        {
-        //            sName = s0.Label.Split('.')[1];
-        //            if (checkboxShowVarName.IsChecked == false)
-        //            {
-        //                int index = sName.IndexOf(" = ");
-        //                s0.Label = sName.Substring(index + 3);
-        //            }
-        //            else
-        //            {
-        //                s0.Label = sName;
-        //            }
-        //        }
-        //    }
-        //}
+            //if (GadgetOptions.StrataVariableNames.Count > 0)
+            //{
+            //    foreach (Series s0 in xyChart.DataSeries)
+            //    {
+            //        sName = s0.Label.Split('.')[1];
+            //        if (checkboxShowVarName.IsChecked == false)
+            //        {
+            //            int index = sName.IndexOf(" = ");
+            //            s0.Label = sName.Substring(index + 3);
+            //        }
+            //        else
+            //        {
+            //            s0.Label = sName;
+            //        }
+            //    }
+            //}
+        }
 
         public virtual void ToImageFile(string fileName, bool includeGrid = true)
         {

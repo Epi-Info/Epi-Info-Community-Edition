@@ -135,7 +135,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             get
             {
-                if (cmbField.SelectedIndex > -1)
+                if ((cmbField.SelectedIndex > -1) && (cmbOutcome.SelectedIndex > -1))
                 {
                     return true;
                 }
