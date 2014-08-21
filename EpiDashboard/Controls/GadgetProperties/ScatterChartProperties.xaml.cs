@@ -82,7 +82,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
             view.GroupDescriptions.Add(groupDescription);
 
-            RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as ColumnChartGadget).DataFilters, true);
+            RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as ScatterChartGadget).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
 
@@ -174,14 +174,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             if (cmbOutcome.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbOutcome.SelectedItem.ToString()))
             {
-                if (Parameters.ColumnNames.Count > 1)
-                {
-                    Parameters.ColumnNames[1] = cmbOutcome.SelectedItem.ToString();
-                }
-                else
-                {
-                    Parameters.ColumnNames.Add(cmbOutcome.SelectedItem.ToString());
-                }
+                Parameters.CrosstabVariableName = cmbOutcome.SelectedItem.ToString();
             }
             else
             {
@@ -273,7 +266,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 cmbField.SelectedItem = Parameters.ColumnNames[0];
             }
 
-            cmbOutcome.SelectedItem = Parameters.WeightVariableName;
+            cmbOutcome.SelectedItem = Parameters.CrosstabVariableName;
 
             //Display settings
             scrollViewerProperties.MaxHeight = scrollViewerProperties.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
