@@ -81,14 +81,55 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
         public bool Checkvariablenames(StringBuilder fieldnames, out List<string> invalidfieldnames)
         {
-            VariableType scopeWord = VariableType.DataSource | VariableType.Standard |
-                                     VariableType.Global | VariableType.Permanent;
+            VariableType scopeWord = VariableType.DataSource 
+                | VariableType.Standard 
+                | VariableType.Global 
+                | VariableType.Permanent;
+
             VariableCollection vars = this.Context.MemoryRegion.GetVariablesInScope(scopeWord);
-            string[] names = null; bool isvalid = false;
-            names = fieldnames.ToString().Trim(new char[] { '[', ']' }).Split(' '); invalidfieldnames = new List<string>();
+
+            string workingName = string.Empty;
+            List<string> names = new List<string>();
+            bool isvalid = false;
+            bool isInBracket = false;
+
+            foreach (char ch in fieldnames.ToString())
+            {
+                if (ch == '[')
+                {
+                    isInBracket = true;
+                }
+                else if (ch == ']')
+                {
+                    isInBracket = false;
+                    names.Add(workingName);
+                    workingName = string.Empty;
+                }
+                else if (ch == ' ' && isInBracket == false)
+                {
+                    if (workingName != string.Empty)
+                    {
+                        names.Add(workingName);
+                    }
+                    workingName = string.Empty;
+                }
+                else
+                {
+                    workingName = workingName + ch;
+                }
+            }
+
+            if (workingName != string.Empty)
+            {
+                names.Add(workingName);
+            }
+            
+            invalidfieldnames = new List<string>();
+            
             foreach (string name in names)
             {
                 invalidfieldnames.Add(name);
+
                 foreach (IVariable var in vars)
                 {
                     if (!(var is Epi.Fields.PredefinedDataField))
@@ -101,6 +142,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         }
                     }
                 }
+                
                 if (invalidfieldnames.Count > 0)
                 {
                     if (this.Context.VariableValueList.ContainsKey(name))
@@ -117,6 +159,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     }
                 }
             }
+
             return isvalid;
         }
 
@@ -138,30 +181,33 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 else
                 {
                     List<string> invalidfieldnames = new List<string>();
+
                     bool isValid = Checkvariablenames(fieldnames, out invalidfieldnames);
+                    
                     if (isValid & invalidfieldnames.Count == 0)
                     {
-                    this.Context.SelectExpression.Add(this.Expression);
-                    if (this.Context.SelectString.Length > 0)
-                    {
-                        if (!this.Context.SelectString.ToString().StartsWith("("))
-                        {
-                            this.Context.SelectString.Insert(0, '(');
-                            this.Context.SelectString.Append(") AND (");
+                        this.Context.SelectExpression.Add(this.Expression);
 
+                        if (this.Context.SelectString.Length > 0)
+                        {
+                            if (!this.Context.SelectString.ToString().StartsWith("("))
+                            {
+                                this.Context.SelectString.Insert(0, '(');
+                                this.Context.SelectString.Append(") AND (");
+
+                            }
+                            else
+                            {
+                                this.Context.SelectString.Append(" AND (");
+                            }
+                            this.Context.SelectString.Append(this.ConvertToSQL(this.SelectString));
+                            this.Context.SelectString.Append(")");
                         }
                         else
                         {
-                            this.Context.SelectString.Append(" AND (");
+                            this.Context.SelectString.Append(this.ConvertToSQL(this.SelectString));
                         }
-                        this.Context.SelectString.Append(this.ConvertToSQL(this.SelectString));
-                        this.Context.SelectString.Append(")");
                     }
-                    else
-                    {
-                        this.Context.SelectString.Append(this.ConvertToSQL(this.SelectString));
-                    }
-                }
                     else
                     {
                         throw new Exception(string.Join(",", invalidfieldnames.ToArray()) + " does not exist ");
