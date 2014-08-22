@@ -781,6 +781,7 @@ namespace Epi.ImportExport.ProjectPackagers
                 case DbType.Date:
                     return OleDbType.DBDate;
                 case DbType.DateTime:
+                case DbType.DateTime2:
                     return OleDbType.DBTimeStamp;
                 case DbType.Decimal:
                     return OleDbType.Decimal;
@@ -934,8 +935,26 @@ namespace Epi.ImportExport.ProjectPackagers
             if (!string.IsNullOrEmpty(fkey)) { fields.Append("[FKEY]"); }
             if (!string.IsNullOrEmpty(firstSaveId)) { fields.Append("[FirstSaveLogonName]"); }
             if (!string.IsNullOrEmpty(lastSaveId)) { fields.Append("[LastSaveLogonName]"); }
-            if (firstSaveTime.HasValue) { fields.Append("[FirstSaveTime]"); }
-            if (lastSaveTime.HasValue) { fields.Append("[LastSaveTime]"); }
+            if (firstSaveTime.HasValue)
+            {
+                firstSaveTime = new DateTime(firstSaveTime.Value.Year,
+                firstSaveTime.Value.Month,
+                firstSaveTime.Value.Day,
+                firstSaveTime.Value.Hour,
+                firstSaveTime.Value.Minute,
+                firstSaveTime.Value.Second);
+                fields.Append("[FirstSaveTime]");
+            }
+            if (lastSaveTime.HasValue)
+            {
+                lastSaveTime = new DateTime(lastSaveTime.Value.Year,
+                lastSaveTime.Value.Month,
+                lastSaveTime.Value.Day,
+                lastSaveTime.Value.Hour,
+                lastSaveTime.Value.Minute,
+                lastSaveTime.Value.Second);
+                fields.Append("[LastSaveTime]");
+            }
 
             sb.Append("(" + fields.ToString() + ")");
             sb.Append(" values (");
