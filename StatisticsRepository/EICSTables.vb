@@ -3564,15 +3564,19 @@ ErrorHandler:
                         doma = domain.FieldEntry
                         Valid = False
                         If com Then
-                            If ValidCase() And ((doma = domain1) Or (doma = domain2)) Then
-                                Valid = True
+                            If Not doma.ToString() = "" Then
+                                If ValidCase() And ((doma = domain1) Or (doma = domain2)) Then
+                                    Valid = True
+                                End If
+                            Else
+                                Valid = ValidCase()
                             End If
                         Else
                             Valid = ValidCase()
                         End If
-                    Else
-                        Valid = ValidCase()
-                    End If
+                        Else
+                            Valid = ValidCase()
+                        End If
 
                     If Valid Then
 
