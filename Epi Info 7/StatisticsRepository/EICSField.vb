@@ -38,11 +38,11 @@ Public Class CSField
     Private cbMissing As Boolean
     Private cenumFieldType As Integer
 
-    Public Function FieldInt() As Short
+    Public Function FieldInt() As Long
         ' return the integer value of the field
 
         If (IsNumeric(csFieldEntry) And CDec(Val(csFieldEntry)) Mod 1 = 0) Then
-            FieldInt = CInt(Val(csFieldEntry))
+            FieldInt = CLng(Val(csFieldEntry))
         Else
             FieldInt = 0.0#
         End If
