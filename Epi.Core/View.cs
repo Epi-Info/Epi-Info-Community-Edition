@@ -1318,7 +1318,7 @@ namespace Epi
                 {
                     if (field is CheckBoxField)
                     {
-                        if (field.CurrentRecordValueObject != null)
+                        if (field.CurrentRecordValueObject != null && field.CurrentRecordValueObject != DBNull.Value)
                         {
                             if ((bool)field.CurrentRecordValueObject)
                             {
