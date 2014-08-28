@@ -25,6 +25,7 @@ namespace EpiDashboard
             : base()
         {
             ColumnNames = new List<string>();
+            CrosstabVariableName = String.Empty;
             //  Sorting/Grouping
             //  Display
             GadgetTitle = "Scatter Chart";
@@ -56,6 +57,7 @@ namespace EpiDashboard
             : base (parameters)
         {
             ColumnNames = parameters.ColumnNames;
+            CrosstabVariableName = parameters.CrosstabVariableName;
             InputVariableList = parameters.InputVariableList;
             CustomFilter = parameters.CustomFilter;
             CustomSortColumnName = parameters.CustomSortColumnName;

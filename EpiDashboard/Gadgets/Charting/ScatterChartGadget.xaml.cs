@@ -185,54 +185,104 @@ namespace EpiDashboard.Gadgets.Charting
 
         private void SetVisuals()
         {
-            //ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
-            ////SetPalette();
-            ////SetMarkerType();
-
+            ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
+            //SetPalette();
+            switch (chtParameters.Palette)
+            {
+                case 0:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Atlantic");
+                    break;
+                case 1:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Breeze");
+                    break;
+                case 2:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("ComponentArt");
+                    break;
+                case 3:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Deep");
+                    break;
+                case 4:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Earth");
+                    break;
+                case 5:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Evergreen");
+                    break;
+                case 6:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Heatwave");
+                    break;
+                case 7:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Montreal");
+                    break;
+                case 8:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Pastel");
+                    break;
+                case 9:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Renaissance");
+                    break;
+                case 10:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("SharePoint");
+                    break;
+                case 11:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Study");
+                    break;
+                default:
+                case 12:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantA");
+                    break;
+                case 13:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantB");
+                    break;
+                case 14:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantC");
+                    break;
+            }            
+            
+            //SetMarkerType();
+            
             //double legendFontSize = 13;
-            ////double.TryParse(txtLegendFontSize.Text, out legendFontSize);
-            //xyChart.Legend.FontSize = chtParameters.LegendFontSize;
+            //double.TryParse(txtLegendFontSize.Text, out legendFontSize);
+            xyChart.Legend.FontSize = chtParameters.LegendFontSize;
 
-            ////xyChart.InnerMargins = new Thickness(20, 30, 30, 50);
+            //xyChart.InnerMargins = new Thickness(20, 30, 30, 50);
 
-            ////double angle = 0;
-            ////if (double.TryParse(txtXAxisAngle.Text, out angle))
-            ////{
-            //xAxisCoordinates.Angle = chtParameters.XAxisAngle;
-            ////}
-
-            ////tblockYAxisLabel.Text = txtYAxisLabelValue.Text;
-            //tblockYAxisLabel.Text = chtParameters.YAxisLabel;
-            ////switch (cmbXAxisLabelType.SelectedIndex)
-            //switch(chtParameters.XAxisLabelType)
+            //double angle = 0;
+            //if (double.TryParse(txtXAxisAngle.Text, out angle))
             //{
-            //    case 3:
-            //        tblockXAxisLabel.Text = chtParameters.XAxisLabel;
-            //        break;
-            //    case 1:
-            //        if (chtParameters.ColumnNames.Count > 0 && !String.IsNullOrEmpty(chtParameters.ColumnNames[0]))
-            //        {
-            //            Field field = DashboardHelper.GetAssociatedField(chtParameters.ColumnNames[0]);
-            //            if (field != null)
-            //            {
-            //                RenderableField rField = field as RenderableField;
-            //                tblockXAxisLabel.Text = rField.PromptText;
-            //            }
-            //            else
-            //            {
-            //                tblockXAxisLabel.Text = chtParameters.ColumnNames[0];
-            //            }
-            //        }
-            //        break;
-            //    case 2:
-            //        tblockXAxisLabel.Text = string.Empty;
-            //        break;
-            //    default:
-            //        tblockXAxisLabel.Text = chtParameters.ColumnNames[0];
-            //        break;
+            xAxisCoordinates.Angle = chtParameters.XAxisAngle;
             //}
 
-            //tblockChartTitle.Text = chtParameters.ChartTitle;
+            //tblockYAxisLabel.Text = txtYAxisLabelValue.Text;
+            tblockYAxisLabel.Text = chtParameters.YAxisLabel;
+            //switch (cmbXAxisLabelType.SelectedIndex)
+            switch (chtParameters.XAxisLabelType)
+            {
+                case 3:
+                    tblockXAxisLabel.Text = chtParameters.XAxisLabel;
+                    break;
+                case 1:
+                    if (chtParameters.ColumnNames.Count > 0 && !String.IsNullOrEmpty(chtParameters.ColumnNames[0]))
+                    {
+                        Field field = DashboardHelper.GetAssociatedField(chtParameters.ColumnNames[0]);
+                        if (field != null)
+                        {
+                            RenderableField rField = field as RenderableField;
+                            tblockXAxisLabel.Text = rField.PromptText;
+                        }
+                        else
+                        {
+                            tblockXAxisLabel.Text = chtParameters.ColumnNames[0];
+                        }
+                    }
+                    break;
+                case 2:
+                    tblockXAxisLabel.Text = string.Empty;
+                    break;
+                default:
+                    tblockXAxisLabel.Text = chtParameters.ColumnNames[0];
+                    break;
+            }
+
+            tblockChartTitle.Text = chtParameters.ChartTitle;
         }
 
         public override void RefreshResults()
@@ -646,16 +696,11 @@ namespace EpiDashboard.Gadgets.Charting
                 }
             }
 
+            //Outcome
             XmlElement outcomeVarElement = doc.CreateElement("outcomeVariable");
-            if (chtParameters.ColumnNames.Count > 1)
-            {
-                if (!String.IsNullOrEmpty(chtParameters.ColumnNames[1].ToString()))
-                {
-                    outcomeVarElement.InnerText = chtParameters.ColumnNames[1].ToString().Replace("<", "&lt;");
-                    element.AppendChild(outcomeVarElement);
-                }
-            }
-            
+            outcomeVarElement.InnerText = chtParameters.CrosstabVariableName.ToString().Replace("<", "&lt;");
+            element.AppendChild(outcomeVarElement);
+
             //if (inputVariableList.ContainsKey("crosstabvar"))
             //{
             //    crosstabVar = inputVariableList["crosstabvar"].Replace("<", "&lt;");
@@ -1242,24 +1287,26 @@ namespace EpiDashboard.Gadgets.Charting
 
         private void xyChart_DataStructureCreated(object sender, EventArgs e)
         {
+            ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
             string sName = "";
 
-            //if (GadgetOptions.StrataVariableNames.Count > 0)
-            //{
-            //    foreach (Series s0 in xyChart.DataSeries)
-            //    {
-            //        sName = s0.Label.Split('.')[1];
-            //        if (checkboxShowVarName.IsChecked == false)
-            //        {
-            //            int index = sName.IndexOf(" = ");
-            //            s0.Label = sName.Substring(index + 3);
-            //        }
-            //        else
-            //        {
-            //            s0.Label = sName;
-            //        }
-            //    }
-            //}
+            if (chtParameters.StrataVariableNames.Count > 0)
+            {
+                foreach (Series s0 in xyChart.DataSeries)
+                {
+                    sName = s0.Label.Split('.')[1];
+                    //if (checkboxShowVarName.IsChecked == false)
+                    if (chtParameters.ShowLegendVarNames == false)
+                    {
+                        int index = sName.IndexOf(" = ");
+                        s0.Label = sName.Substring(index + 3);
+                    }
+                    else
+                    {
+                        s0.Label = sName;
+                    }
+                }
+            }
         }
 
         public virtual void ToImageFile(string fileName, bool includeGrid = true)
