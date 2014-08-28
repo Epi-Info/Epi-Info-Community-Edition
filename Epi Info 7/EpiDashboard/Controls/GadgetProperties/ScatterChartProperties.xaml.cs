@@ -44,7 +44,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             
             //Variable fields
             fields.Add(String.Empty);
-            ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
+            ColumnDataType columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
             foreach (string fieldName in DashboardHelper.GetFieldsAsList(columnDataType))
             {
                 if (DashboardHelper.IsUsingEpiProject)
@@ -60,19 +60,19 @@ namespace EpiDashboard.Controls.GadgetProperties
             cmbOutcome.ItemsSource = fields;
 
             //Strata Fields 
-            strataItems.Add(String.Empty);
-            columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
-            foreach (string fieldName in DashboardHelper.GetFieldsAsList(columnDataType))
-            {
-                if (DashboardHelper.IsUsingEpiProject)
-                {
-                    if (!(fieldName == "RecStatus" || fieldName == "FKEY" || fieldName == "GlobalRecordId")) strataItems.Add(fieldName);
-                }
-                else
-                {
-                    strataItems.Add(fieldName);
-                }
-            }
+            //strataItems.Add(String.Empty);
+            //columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
+            //foreach (string fieldName in DashboardHelper.GetFieldsAsList(columnDataType))
+            //{
+            //    if (DashboardHelper.IsUsingEpiProject)
+            //    {
+            //        if (!(fieldName == "RecStatus" || fieldName == "FKEY" || fieldName == "GlobalRecordId")) strataItems.Add(fieldName);
+            //    }
+            //    else
+            //    {
+            //        strataItems.Add(fieldName);
+            //    }
+            //}
 
             txtYAxisLabelValue.Text = "Count";
             txtXAxisLabelValue.Text = String.Empty;
@@ -131,6 +131,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
 
         }
+
         public bool HasSelectedFields
         {
             get
