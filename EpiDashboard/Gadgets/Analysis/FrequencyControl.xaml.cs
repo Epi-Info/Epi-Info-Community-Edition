@@ -722,6 +722,12 @@ namespace EpiDashboard
             {
                 lower = 1;
                 upper = 1;
+                if (count < 300)
+                {
+                    lower = 0;
+                    freq.ExactCI(frequency, (double)count, 95.0, ref lower, ref upper);
+                    upper = 1;
+                }
             }
             else
             {
