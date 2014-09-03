@@ -439,6 +439,7 @@
     <Compile Include="Gadgets\Analysis\PMCCControl.xaml.cs">
       <DependentUpon>PMCCControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gadgets\Charting\ScatterChartGadgetBase.cs" />
     <Compile Include="Gadgets\Charting\ParetoChartGadgetBase.cs" />
     <Compile Include="Gadgets\Charting\XYParetoChartData.cs" />
     <Compile Include="Gadgets\ChartParametersBase.cs" />
