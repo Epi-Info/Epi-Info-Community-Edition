@@ -283,6 +283,7 @@ namespace Epi.Core.EnterInterpreter
 
                     case "<Go_To_Variable_Statement>":
                     case "<Go_To_Page_Statement>":
+                    case "<Go_To_Form_Statement>":
                         result  = new Rule_GoTo(pContext, NT);
                         break;
 

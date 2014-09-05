@@ -1354,6 +1354,35 @@ namespace Epi
             return false;
         }
 
+        public bool IsParentOf(View childCandidate)
+        {
+            int candidateId = childCandidate.Id;
+            View candidateView = null;
+
+            if ((candidateView = GetParent(candidateId)) != null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool IsHomeParentOf(View childCandidate)
+        {
+            int candidateId = childCandidate.Id;
+            View candidateView = null;
+
+            while ((candidateView = GetParent(candidateId)) != null)
+            {
+                if (candidateView != null)
+                {
+                    candidateId = candidateView.Id;
+                }
+            }
+
+            return this.Id == candidateId;
+        }
+
         /// <summary>
         /// Checks if all input fields are empty
         /// </summary>
@@ -1584,9 +1613,10 @@ namespace Epi
 
         #region Private Methods
         
-        private void GetParent(int relatedViewId)
+        private View GetParent(int relatedViewId)
         {
             parentView = this.GetMetadata().GetParentView(relatedViewId);
+            return parentView;
         }
 
         #endregion

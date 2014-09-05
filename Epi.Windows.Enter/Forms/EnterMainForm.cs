@@ -1845,6 +1845,118 @@ namespace Epi.Windows.Enter
             return true;
         }
 
+        public bool OpenView(string openViewName)
+        {
+            if (this.CloseViewEvent != null)
+            {
+                if (this.currentProject.Views.Contains(openViewName) == true)
+                {
+                    View targetView = this.currentProject.Views[openViewName];
+
+                    if (targetView.IsHomeParentOf(view))
+                    {
+                        this.CloseViewEvent(true, new EventArgs());
+                    }
+                    else if (targetView.IsParentOf(view))
+                    {
+                        this.CloseViewEvent(false, new EventArgs());
+                    }
+                    else
+                    {
+
+
+                        string currentViewName = string.Empty;
+                        string currentProject = string.Empty;
+
+                        bool shouldCheckRequiredFields = true;
+
+                        if (this.view != null)
+                        {
+                            if (!ContinueChangeRecord)
+                            {
+                                MsgBox.ShowWarning(SharedStrings.CANNOT_CLOSE_RECORD_INVALID_DATA);
+
+                            }
+
+                            mediator.SetFieldData();
+                            if (View.IsEmptyNewRecord() == false)
+                            {
+                                if (shouldCheckRequiredFields == true)
+                                {
+                                    bool allRequiredsComplete = mediator.CheckViewRequiredFields();
+
+                                    if (allRequiredsComplete == false)
+                                    {
+
+                                    }
+                                }
+                            }
+
+                            currentViewName = this.view.Name;
+                            currentProject = this.view.GetProject().FullName;
+
+                            //if (View.Text.Substring(View.Text.LastIndexOf(":") + 1) != currentViewName && currentProject.ToLower() != View.Text.ToLower())
+                            //{
+                            //    if (!CloseView())
+                            //    {
+                            //        //return;
+                            //    }
+                            //}
+
+                            this.CloseViewEvent(this, new EventArgs());
+
+                        }
+
+
+                        View methodView = CurrentProject.Metadata.GetViewByFullName(openViewName);
+
+                        if (methodView == null)
+                        {
+                            string name = string.Empty;
+                            if (openViewName.Length > 3)
+                            {
+                                name = openViewName.Remove(0, 3);
+                            }
+                            else
+                            {
+                                name = openViewName;
+                            }
+
+                            MsgBox.ShowError(string.Format(SharedStrings.ERROR_LOADING_VIEW, name));
+                        }
+                        else if (!methodView.IsRelatedView)
+                        {
+                            if (this.OpenViewEvent != null)
+                            {
+                                this.View = methodView;
+                                this.OpenViewEvent(this, new Epi.Windows.Enter.PresentationLogic.OpenViewEventArgs(methodView));
+                            }
+                        }
+                        else
+                        {
+                            MsgBox.ShowInformation(SharedStrings.CANNOT_OPEN_VIEW_RELATED);
+                        }
+
+                        SetWindowTitle();
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public bool OpenPage(string pageName, string formName = "")
+        {
+            // Get a confirmation from the user
+            if (this.CloseViewEvent != null)
+            {
+                this.CloseViewEvent(this, new EventArgs());
+                SetWindowTitle();
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Enables and disables controls based on the rec status
         /// </summary>
