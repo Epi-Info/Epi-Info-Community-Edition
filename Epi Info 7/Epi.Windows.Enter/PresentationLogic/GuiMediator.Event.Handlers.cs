@@ -139,8 +139,12 @@ namespace Epi.Windows.Enter.PresentationLogic
         {
             this.canvas.UnsubscribeControlEventHandlers();
             this.SetFieldData();
+            
             if (SaveRecord() == false)
+            {
                 return;
+            }
+            
             RunTimeView RTV = this.EnterCheckCodeEngine.CurrentView;
             this.IsClosingRelatedView = RTV.View.IsRelatedView;
             EpiInfo.Plugin.IScope scope = RTV.EpiInterpreter.Context.Scope.GetEnclosingScope();
@@ -156,10 +160,12 @@ namespace Epi.Windows.Enter.PresentationLogic
 
             if (this.EnterCheckCodeEngine.CurrentView != null)
             {
-                this.view = this.EnterCheckCodeEngine.CurrentView.View;
+                view = this.EnterCheckCodeEngine.CurrentView.View;
+                                
                 this.Reset();
                 this.canvas.CurrentView = this.view;
                 this.mainForm.OpenView(this.view);
+
                 this.viewExplorer.LoadView(this.EnterCheckCodeEngine.CurrentView, this.EnterCheckCodeEngine.CurrentView.CurrentPage);
 
                 // *** populate view data with any changes from child - begin
