@@ -1421,7 +1421,6 @@ namespace Epi.Windows.Enter.PresentationLogic
                 SetFieldData();
                 SaveRecord();
                 this.mainForm.OpenView(targetForm);
-
             }
             else if (pDestination == "" && targetPage != "" )
             {
