@@ -327,7 +327,7 @@ namespace EpiDashboard
                     friendlyHighValue = DateTime.Parse(friendlyHighValue, System.Globalization.CultureInfo.CurrentCulture).ToString("d", System.Globalization.CultureInfo.InvariantCulture);
                     friendlyLowValue = DateTime.Parse(friendlyLowValue, System.Globalization.CultureInfo.CurrentCulture).ToString("d", System.Globalization.CultureInfo.InvariantCulture);
                 }
-                else if(!String.IsNullOrEmpty(value.Trim()))
+                else if (!String.IsNullOrEmpty(value.Trim()))
                 {
                     value = "#" + DateTime.Parse(value.Trim('#')).ToString("s") + "#";
 
