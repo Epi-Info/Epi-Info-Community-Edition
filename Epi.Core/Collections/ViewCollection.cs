@@ -15,7 +15,7 @@ namespace Epi.Collections
         /// </summary>
         /// <param name="viewId"></param>
         /// <returns></returns>
-        public View GetViewById(int viewId)
+        public virtual View GetViewById(int viewId)
         {
             foreach (View view in this)
             {
