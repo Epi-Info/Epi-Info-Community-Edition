@@ -767,7 +767,7 @@ namespace Epi
         /// <summary>
         /// Disposes the object.
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
             if (metadata != null)
             {
@@ -789,7 +789,7 @@ namespace Epi
         /// <summary>
         /// Saves the XML document for the project using the specified <see cref="System.Xml.XmlWriter"/>.
         /// </summary>
-        public void Save()
+        public virtual void Save()
         {
             try
             {
@@ -827,7 +827,7 @@ namespace Epi
         /// Returns list of tables that are <see cref="Epi.View"/>s.
         /// </summary>
         /// <returns>Listof view names</returns>
-        public List<string> GetViewNames()
+        public virtual List<string> GetViewNames()
         {
             DataTable dt = Metadata.GetViewsAsDataTable();
             List<String> list = new List<String>();
@@ -842,7 +842,7 @@ namespace Epi
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<string> GetParentViewNames()
+        public virtual List<string> GetParentViewNames()
         {
             DataTable dt = Metadata.GetViewsAsDataTable();
             List<String> list = new List<String>();
@@ -1268,7 +1268,7 @@ namespace Epi
         /// </summary>
         /// <param name="tableName">Name of data table.</param>
         /// <returns>Contents of data table.</returns>
-        public DataTable GetTableData(string tableName)
+        public virtual DataTable GetTableData(string tableName)
         {
             if (tableName.StartsWith("code", StringComparison.InvariantCultureIgnoreCase)) // it is a code table
             {
@@ -1286,7 +1286,7 @@ namespace Epi
         /// <param name="tableName">Name of data table.</param>
         /// <param name="columnNames">List of column names in data table.</param>
         /// <returns>Contents of data table.</returns>
-        public DataTable GetTableData(string tableName, string columnNames)
+        public virtual DataTable GetTableData(string tableName, string columnNames)
         {
             if (tableName.StartsWith("code", StringComparison.InvariantCultureIgnoreCase)) // it is a code table
             {
@@ -1305,7 +1305,7 @@ namespace Epi
         /// <param name="columnNames">Name of column in data table.</param>
         /// <param name="sortCriteria"></param>
         /// <returns>Contents of data table.</returns>
-        public DataTable GetTableData(string tableName, string columnNames, string sortCriteria)
+        public virtual DataTable GetTableData(string tableName, string columnNames, string sortCriteria)
         {
             if (tableName.StartsWith("code", StringComparison.InvariantCultureIgnoreCase)) // it is a code table
             {
