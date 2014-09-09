@@ -865,7 +865,7 @@ namespace Epi
         /// Gets a reference to the Epi7 project object.
         /// </summary>
         /// <returns></returns>
-        public Project GetProject()
+        public virtual Project GetProject()
         {
             return project;
         }
@@ -874,7 +874,7 @@ namespace Epi
         /// Gets a list of all descendant views.
         /// </summary>
         /// <returns>List of Views</returns>
-        public List<View> GetDescendantViews()
+        public virtual List<View> GetDescendantViews()
         {
             List<View> relatedViews = new List<View>();
 
@@ -917,7 +917,7 @@ namespace Epi
         /// <summary>
         /// Implements IDisposable.Dispose() method
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
             if (pages != null)
             {
@@ -938,7 +938,7 @@ namespace Epi
         /// <summary>
         /// Save to database
         /// </summary>
-        public void SaveToDb()
+        public virtual void SaveToDb()
         {
             if (Id == 0)
             {
@@ -1038,7 +1038,7 @@ namespace Epi
         /// <summary>
         /// Delete a view's data table(s)
         /// </summary>
-        public void DeleteDataTables()
+        public virtual void DeleteDataTables()
         {
             CollectedDataProvider collectedDataPro = this.Project.CollectedData;
             //remove all tables for GridFields
@@ -1116,7 +1116,7 @@ namespace Epi
         /// Gets the data for the current record in the current view 
         /// </summary>
         /// <param name="recordID">Record Id</param>
-        public void LoadRecord(int recordID)
+        public virtual void LoadRecord(int recordID)
         {
             #region Input Validation
             if (recordID < 1)
@@ -1136,7 +1136,7 @@ namespace Epi
         /// <summary>
         /// Loads the first record into view
         /// </summary>
-        public void LoadFirstRecord()
+        public virtual void LoadFirstRecord()
         {
             int recId = GetFirstRecordId();
             if (recId > 0)
@@ -1148,7 +1148,7 @@ namespace Epi
         /// <summary>
         /// Loads the last record into this <see cref="Epi.View"/>.
         /// </summary>
-        public void LoadLastRecord()
+        public virtual void LoadLastRecord()
         {
             int recId = GetLastRecordId();
             if (recId > 0)
@@ -1161,7 +1161,7 @@ namespace Epi
         /// Loads the prior to the current record into this <see cref="Epi.View"/> by Id.
         /// </summary>
         /// <param name="currentRecordId">Current record Id.</param>
-        public void LoadPreviousRecord(int currentRecordId)
+        public virtual void LoadPreviousRecord(int currentRecordId)
         {
             #region Input Validation
             if (currentRecordId < 0)
@@ -1191,7 +1191,7 @@ namespace Epi
         /// Loads the next to the current record into this <see cref="Epi.View"/> by Id.
         /// </summary>
         /// <param name="currentRecordId">Current record Id.</param>
-        public void LoadNextRecord(int currentRecordId)
+        public virtual void LoadNextRecord(int currentRecordId)
         {
             #region Input Validation
             if (currentRecordId < 1)
@@ -1211,7 +1211,7 @@ namespace Epi
         /// Gets the record Id for the first record
         /// </summary>
         /// <returns>Id of the first record</returns>
-        public int GetFirstRecordId()
+        public virtual int GetFirstRecordId()
         {
             return project.CollectedData.GetFirstRecordId(this);
         }
@@ -1220,7 +1220,7 @@ namespace Epi
         /// Gets the record Id for the last record
         /// </summary>
         /// <returns>Id of the last record</returns>
-        public int GetLastRecordId()
+        public virtual int GetLastRecordId()
         {
             return (project.CollectedData.GetLastRecordId(this));
         }
@@ -1230,7 +1230,7 @@ namespace Epi
         /// </summary>
         /// <param name="currentRecordId">Current record Id.</param>
         /// <returns>Previous record Id.</returns>
-        public int GetPreviousRecordId(int currentRecordId)
+        public virtual int GetPreviousRecordId(int currentRecordId)
         {
             return project.CollectedData.GetPreviousRecordId(this, currentRecordId);
         }
@@ -1240,7 +1240,7 @@ namespace Epi
         /// </summary>
         /// <param name="currentRecordId">Current record Id.</param>
         /// <returns>Next record Id.</returns>
-        public int GetNextRecordId(int currentRecordId)
+        public virtual int GetNextRecordId(int currentRecordId)
         {
             return project.CollectedData.GetNextRecordId(this, currentRecordId);
         }
@@ -1249,7 +1249,7 @@ namespace Epi
         /// Gets the record count for the current view
         /// </summary>
         /// <returns>Record count</returns>
-        public int GetRecordCount()
+        public virtual int GetRecordCount()
         {
             return (project.CollectedData.GetRecordCount(this));
         }
@@ -1259,7 +1259,7 @@ namespace Epi
         /// </summary>		
         /// <param name="recordId">The unique record</param>
         /// <returns>the record Id</returns>
-        public int SaveRecord(int recordId)
+        public virtual int SaveRecord(int recordId)
         {
             #region Input Validation
             if (recordId < 1)
@@ -1275,7 +1275,7 @@ namespace Epi
         /// Inserts the current record
         /// </summary>
         /// <returns>Record Id</returns>
-        public int SaveRecord()
+        public virtual int SaveRecord()
         {
             return (project.CollectedData.SaveRecord(this));
         }
@@ -1293,7 +1293,7 @@ namespace Epi
             return false;
         }
 
-        public bool IsParent()
+        public virtual bool IsParent()
         {
             foreach (Field field in Fields)
             {
