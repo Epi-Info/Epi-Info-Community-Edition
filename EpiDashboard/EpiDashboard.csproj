@@ -171,6 +171,7 @@
     </Compile>
     <Compile Include="Controls\Charting\ColumnChartBase.cs" />
     <Compile Include="Controls\Charting\AreaChartBase.cs" />
+    <Compile Include="Controls\Charting\HistogramChartBase.cs" />
     <Compile Include="Controls\Charting\ScatterChart.xaml.cs">
       <DependentUpon>ScatterChart.xaml</DependentUpon>
     </Compile>
@@ -208,6 +209,9 @@
     </Compile>
     <Compile Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml.cs">
       <DependentUpon>AberrationDetectionChartProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\HistogramChartProperties.xaml.cs">
+      <DependentUpon>HistogramChartProperties.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\GadgetProperties\LogisticProperties.xaml.cs">
       <DependentUpon>LogisticProperties.xaml</DependentUpon>
@@ -439,6 +443,7 @@
     <Compile Include="Gadgets\Analysis\PMCCControl.xaml.cs">
       <DependentUpon>PMCCControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gadgets\Charting\HistogramChartGadgetBase.cs" />
     <Compile Include="Gadgets\Charting\ScatterChartGadgetBase.cs" />
     <Compile Include="Gadgets\Charting\ParetoChartGadgetBase.cs" />
     <Compile Include="Gadgets\Charting\XYParetoChartData.cs" />
@@ -479,6 +484,8 @@
     <Compile Include="Gadgets\AreaChartParametersBase.cs" />
     <Compile Include="Gadgets\AberrationDetectionChartParametersBase.cs" />
     <Compile Include="Gadgets\AberrationDetectionChartParameters.cs" />
+    <Compile Include="Gadgets\HistogramChartParameters.cs" />
+    <Compile Include="Gadgets\HistogramChartParametersBase.cs" />
     <Compile Include="Gadgets\LogisticParameters.cs" />
     <Compile Include="Gadgets\ScatterChartParameters.cs" />
     <Compile Include="Gadgets\ScatterChartParametersBase.cs" />
@@ -906,6 +913,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\HistogramChartProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

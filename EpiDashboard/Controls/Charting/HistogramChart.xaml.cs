@@ -21,16 +21,17 @@ namespace EpiDashboard.Controls.Charting
     /// <summary>
     /// Interaction logic for HistogramChart.xaml
     /// </summary>
-    public partial class HistogramChart : ChartBase
+    public partial class HistogramChart : HistogramChartBase
     {
-        public HistogramChartSettings HistogramChartSettings { get; set; }
+        //public HistogramChartSettings HistogramChartSettings { get; set; }
 
-        public HistogramChart(DashboardHelper dashboardHelper, GadgetParameters parameters, HistogramChartSettings settings, List<XYColumnChartData> dataList)
+        //public HistogramChart(DashboardHelper dashboardHelper, GadgetParameters parameters, HistogramChartSettings settings, List<XYColumnChartData> dataList)
+        public HistogramChart(DashboardHelper dashboardHelper, HistogramChartParameters parameters, List<XYColumnChartData> dataList)
         {
             InitializeComponent();
-            this.Settings = settings;
-            this.HistogramChartSettings = settings;
-            this.Parameters = parameters;
+            //this.Settings = settings;
+            //this.HistogramChartSettings = settings;
+            HistogramChartParameters = parameters;
             this.DashboardHelper = dashboardHelper;
             SetChartProperties();
             SetChartData(dataList);
@@ -90,16 +91,18 @@ namespace EpiDashboard.Controls.Charting
         protected override void SetChartProperties()
         {
             xyChart.AnimationOnLoad = false;
-            xyChart.Width = Settings.ChartWidth;
-            xyChart.Height = Settings.ChartHeight;
-            xyChart.Palette = Settings.Palette;
-            xyChart.DefaultGridLinesVisible = Settings.ShowDefaultGridLines;
-            xyChart.LegendDock = Settings.LegendDock;
+            //xyChart.Width = Settings.ChartWidth;
+            //xyChart.Height = Settings.ChartHeight;
+            //xyChart.Palette = Settings.Palette;
+            //xyChart.DefaultGridLinesVisible = Settings.ShowDefaultGridLines;
+            //xyChart.LegendDock = Settings.LegendDock;
+
+            xyChart.Width = HistogramChartParameters.ChartWidth;
 
             series0.BarRelativeBegin = double.NaN;
             series0.BarRelativeEnd = double.NaN;
 
-            switch (HistogramChartSettings.BarSpacing)
+            switch (HistogramChartParameters.BarSpace)
             {
                 case BarSpacing.None:
                     series0.RelativePointSpace = 0;
@@ -208,8 +211,8 @@ namespace EpiDashboard.Controls.Charting
 
             yAxis.UseReferenceValue = Settings.UseRefValues;
 
-            series0.ShowPointAnnotations = HistogramChartSettings.ShowAnnotations;
-            series0.BarKind = HistogramChartSettings.BarKind;
+            series0.ShowPointAnnotations = HistogramChartParameters.ShowAnnotations;
+            series0.BarKind = HistogramChartParameters.BarKind;
 
             series1.ShowPointAnnotations = Settings.ShowAnnotationsY2;
             series1.DashStyle = Settings.LineDashStyleY2;
