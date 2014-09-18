@@ -465,9 +465,8 @@ erroRHandler:
 
         If lintStrata = 1 Then
             lstrSortOrder = "[" & mstrTimeVar & "], [" & mstrCensoredVar & "] DESC"
-            Debug.Print("????????")
-            lStrataA(1).strName = lSVarArray(1).strName & " " & lSVarArray(1).straTerms(1)
-            LoadPlotData(lstrbase, lstrSortOrder, 1, lStrataA)
+            lStrataA(0).strName = lSVarArray(0).strName & " " & lSVarArray(0).straTerms(0)
+            LoadPlotData(lstrbase, lstrSortOrder, 0, lStrataA)
         Else
             StrataRecurseWOC(lstrbase, lstrSortOrder, 1, 0, lSVarArray, lStrataA)
         End If

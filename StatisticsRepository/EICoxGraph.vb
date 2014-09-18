@@ -1731,7 +1731,6 @@ MISSING:
         '3 = failure
         '4 = riskset
         G = UBound(S)
-        If G = 0 Then GoTo OneGroup
         'for big nasty matrix
         ReDim ldblaM(G - 1, G - 1)
         ReDim ldblaMP(G - 1, G - 1)
@@ -1978,6 +1977,8 @@ MISSING:
         lstrGraphOut = lstrGraphOut & "</object>"
         lstrGraphOut = lstrGraphOut & "</div>"
         lstrGraphOut = lstrGraphOut & "<br />"
+
+        If G = 0 Then GoTo OneGroup
 
         strTestResults = "<br clear = all><table><tr><th><b><tlt>Test</tlt></b></th>"
         strTestResults = strTestResults & "<th><B><tlt>Statistic</tlt></B></th>"
