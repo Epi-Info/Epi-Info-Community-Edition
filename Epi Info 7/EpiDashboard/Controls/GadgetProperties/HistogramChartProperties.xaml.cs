@@ -115,7 +115,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
             view.GroupDescriptions.Add(groupDescription);
 
-            RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as ColumnChartGadget).DataFilters, true);
+            RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as HistogramChartGadget).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
 
@@ -471,8 +471,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
 
             //inputVariableList.Add("step", txtStep.Text);
-            double dubStep = -1;
-            if (double.TryParse(txtStep.Text, out dubStep))
+            int dubStep = 1;
+            if (int.TryParse(txtStep.Text, out dubStep))
             {
                 Parameters.Step = dubStep;
             }

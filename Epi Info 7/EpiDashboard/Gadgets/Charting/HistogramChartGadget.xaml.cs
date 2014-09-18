@@ -762,11 +762,13 @@ namespace EpiDashboard.Gadgets.Charting
         {
             lock (syncLockData)
             {
+                HistogramChartParameters chtParameters = (HistogramChartParameters)Parameters;
                 string second_y_var = string.Empty;
 
-                if (GadgetOptions.InputVariableList.ContainsKey("second_y_var"))
+                //if (GadgetOptions.InputVariableList.ContainsKey("second_y_var"))
+                if (chtParameters.ColumnNames.Count > 2)
                 {
-                    second_y_var = GadgetOptions.InputVariableList["second_y_var"];
+                    second_y_var = chtParameters.ColumnNames[1];
                 }
 
                 List<XYColumnChartData> dataList = new List<XYColumnChartData>();
@@ -790,12 +792,18 @@ namespace EpiDashboard.Gadgets.Charting
                     epiCurveTable.PrimaryKey = parentPrimaryKeyColumns;
 
                     int step = 1;
-                    int.TryParse(GadgetOptions.InputVariableList["step"], out step);
+                    //int.TryParse(GadgetOptions.InputVariableList["step"], out step);
+                    int.TryParse(chtParameters.Step.ToString(), out step);
 
                     string interval = "day";
-                    if (GadgetOptions.InputVariableList.ContainsKey("interval"))
+                    
+                    //if (GadgetOptions.InputVariableList.ContainsKey("interval"))
+                    //{
+                    //    interval = GadgetOptions.InputVariableList["interval"];
+                    //}
+                    if (!String.IsNullOrEmpty(chtParameters.Interval))
                     {
-                        interval = GadgetOptions.InputVariableList["interval"];
+                        interval = chtParameters.Interval;
                     }
 
                     switch (interval)
@@ -943,6 +951,25 @@ namespace EpiDashboard.Gadgets.Charting
 
             //GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
             //GadgetOptions.InputVariableList = inputVariableList;
+        }
+
+        private void properties_ChangesAccepted(object sender, EventArgs e)
+        {
+            Controls.GadgetProperties.HistogramChartProperties properties = Popup.Content as Controls.GadgetProperties.HistogramChartProperties;
+            this.Parameters = properties.Parameters;
+            this.DataFilters = properties.DataFilters;
+            this.CustomOutputHeading = Parameters.GadgetTitle;
+            this.CustomOutputDescription = Parameters.GadgetDescription;
+            Popup.Close();
+            if (properties.HasSelectedFields)
+            {
+                RefreshResults();
+            }
+        }
+
+        private void properties_Cancelled(object sender, EventArgs e)
+        {
+            Popup.Close();
         }
 
 
@@ -1420,7 +1447,7 @@ namespace EpiDashboard.Gadgets.Charting
                                 }
                                 break;
                             case "step":
-                                ((HistogramChartParameters)Parameters).Step = double.Parse(child.InnerText.Replace("&lt;", "<"));
+                                ((HistogramChartParameters)Parameters).Step = int.Parse(child.InnerText.Replace("&lt;", "<"));
                                 break;
                             case "interval":
                                 ((HistogramChartParameters)Parameters).Interval = child.InnerText.Replace("&lt;", "<");
@@ -2092,6 +2119,30 @@ namespace EpiDashboard.Gadgets.Charting
             }
         }
 
+        public override void ShowHideConfigPanel()
+        {
+            Popup = new DashboardPopup();
+            Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
+            Controls.GadgetProperties.HistogramChartProperties properties = new Controls.GadgetProperties.HistogramChartProperties(this.DashboardHelper, this, (HistogramChartParameters)Parameters, StrataGridList);
+
+            properties.Width = 800;
+            properties.Height = 600;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            {
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            {
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            properties.Cancelled += new EventHandler(properties_Cancelled);
+            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            Popup.Content = properties;
+            Popup.Show();
+        }
         #endregion //Public Methods
 
 #region Event Handlers

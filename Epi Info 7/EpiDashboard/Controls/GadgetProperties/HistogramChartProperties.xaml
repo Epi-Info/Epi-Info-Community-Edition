@@ -43,7 +43,7 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
-        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
 
             <TextBlock x:Name="tblockMainVariable">Main variable:</TextBlock>
@@ -90,7 +90,7 @@
         </StackPanel>
 <!--Display-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-        <StackPanel x:Name="panelDisplay" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Visible">
+        <StackPanel x:Name="panelDisplay" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
 
             <ScrollViewer x:Name="scrollViewerProperties" Height="480.0">
