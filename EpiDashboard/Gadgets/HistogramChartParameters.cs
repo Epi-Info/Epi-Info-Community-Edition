@@ -23,7 +23,7 @@ namespace EpiDashboard
         //public int Y2AxisType { get; set; }
         public string ChartStrataTitle { get; set; }
 
-        public double Step { get; set; }
+        public int Step { get; set; }
         public string Interval { get; set; }
         public string StartValue { get; set; }
         public string EndValue { get; set; }
@@ -72,7 +72,8 @@ namespace EpiDashboard
             Orientation = Orientation.Vertical;
             Palette = 12;
             BarType = BarKind.Block;
-
+            Step = 1;
+            Interval = "Day";
             StartValue = string.Empty;
             EndValue = string.Empty;
             StartDate = null;
@@ -165,7 +166,8 @@ namespace EpiDashboard
             //LegendFontSize in ChartGadgetParametersBase.cs
             LegendDock = parameters.LegendDock;
             Y2IsCumulativePercent = parameters.Y2IsCumulativePercent;
-
+            Step = parameters.Step;
+            Interval = parameters.Interval;
             StartValue = parameters.StartValue;
             EndValue = parameters.EndValue;
             StartDate = parameters.StartDate;

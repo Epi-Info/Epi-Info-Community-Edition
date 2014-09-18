@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ComponentArt.Win.DataVisualization.Charting;
+using Epi.Fields;
 using EpiDashboard;
 using EpiDashboard.Gadgets.Charting;
 
@@ -98,6 +99,7 @@ namespace EpiDashboard.Controls.Charting
             //xyChart.LegendDock = Settings.LegendDock;
 
             xyChart.Width = HistogramChartParameters.ChartWidth;
+            xyChart.Height = HistogramChartParameters.ChartHeight;
 
             series0.BarRelativeBegin = double.NaN;
             series0.BarRelativeEnd = double.NaN;
@@ -124,23 +126,62 @@ namespace EpiDashboard.Controls.Charting
                     break;
             }
 
-            xAxisCoordinates.Angle = Settings.XAxisLabelRotation;
+            //xAxisCoordinates.Angle = Settings.XAxisLabelRotation;
+            xAxisCoordinates.Angle = HistogramChartParameters.XAxisAngle;
 
-            switch ((EpiDashboard.XAxisLabelType)Settings.XAxisLabelType)
+            //switch ((EpiDashboard.XAxisLabelType)Settings.XAxisLabelType)
+            switch ((EpiDashboard.XAxisLabelType)HistogramChartParameters.XAxisLabelType)
             {
                 case XAxisLabelType.Custom:
                 case XAxisLabelType.FieldPrompt:
-                    tblockXAxisLabel.Text = Settings.XAxisLabel;
-                    tblockXAxisLabel.Text = Settings.XAxisLabel;
+                    //tblockXAxisLabel.Text = Settings.XAxisLabel;
+                    //tblockXAxisLabel.Text = Settings.XAxisLabel;
+                    tblockXAxisLabel.Text = HistogramChartParameters.XAxisLabel;
+                    tblockXAxisLabel.Text = HistogramChartParameters.XAxisLabel;
                     break;
                 case XAxisLabelType.None:
                     tblockXAxisLabel.Text = string.Empty;
                     break;
                 default:
-                    tblockXAxisLabel.Text = Settings.XAxisLabel;
+                    tblockXAxisLabel.Text = HistogramChartParameters.XAxisLabel;
                     break;
             }
 
+            switch (HistogramChartParameters.XAxisLabelType)
+            {
+                default:
+                case 0:  //Automatic
+                    if (!String.IsNullOrEmpty(HistogramChartParameters.XAxisLabel))
+                    {
+                        tblockXAxisLabel.Text = HistogramChartParameters.XAxisLabel;
+                    }
+                    else
+                    {
+                        tblockXAxisLabel.Text = HistogramChartParameters.ColumnNames[0];
+                    }
+                    break;
+                case 1:  //Field Prompt
+                    {
+                        Field field = DashboardHelper.GetAssociatedField(HistogramChartParameters.ColumnNames[0]);
+                        if (field != null)
+                        {
+                            RenderableField rField = field as RenderableField;
+                            tblockXAxisLabel.Text = rField.PromptText;
+                        }
+                        else
+                        {
+                            tblockXAxisLabel.Text = HistogramChartParameters.ColumnNames[0];
+                        }
+                    }
+                    break;
+                case 2:  //None
+                    tblockXAxisLabel.Text = string.Empty;
+                    break;
+                case 3:  //Custom
+                    tblockXAxisLabel.Text = HistogramChartParameters.XAxisLabel;
+                    break;
+            }
+            
             if (!string.IsNullOrEmpty(tblockXAxisLabel.Text.Trim()))
             {
                 tblockXAxisLabel.Visibility = System.Windows.Visibility.Visible;
@@ -150,12 +191,12 @@ namespace EpiDashboard.Controls.Charting
                 tblockXAxisLabel.Visibility = System.Windows.Visibility.Collapsed;
             }
 
-            YAxisLabel = Settings.YAxisLabel;
-            Y2AxisLabel = Settings.Y2AxisLabel;
-            Y2AxisLegendTitle = Settings.Y2AxisLegendTitle;
+            YAxisLabel = HistogramChartParameters.YAxisLabel;
+            Y2AxisLabel = HistogramChartParameters.Y2AxisLabel;
+            Y2AxisLegendTitle = HistogramChartParameters.Y2AxisLegendTitle;
 
-            xyChart.LegendVisible = Settings.ShowLegend;
-            xyChart.Legend.FontSize = Settings.LegendFontSize;
+            xyChart.LegendVisible = HistogramChartParameters.ShowLegend;
+            xyChart.Legend.FontSize = HistogramChartParameters.LegendFontSize;
 
             Size textSize = new Size();
             Size chartSize = new Size();
@@ -196,9 +237,9 @@ namespace EpiDashboard.Controls.Charting
                     break;
             }
 
-            tblockChartTitle.Text = Settings.ChartTitle;
-            tblockSubTitle.Text = Settings.ChartSubTitle;
-            tblockStrataTitle.Text = Settings.ChartStrataTitle;
+            tblockChartTitle.Text = HistogramChartParameters.ChartTitle;
+            tblockSubTitle.Text = HistogramChartParameters.ChartSubTitle;
+            tblockStrataTitle.Text = HistogramChartParameters.ChartStrataTitle;
 
             if (string.IsNullOrEmpty(tblockChartTitle.Text)) tblockChartTitle.Visibility = System.Windows.Visibility.Collapsed;
             else tblockChartTitle.Visibility = System.Windows.Visibility.Visible;
@@ -209,19 +250,19 @@ namespace EpiDashboard.Controls.Charting
             if (string.IsNullOrEmpty(tblockStrataTitle.Text)) tblockStrataTitle.Visibility = System.Windows.Visibility.Collapsed;
             else tblockStrataTitle.Visibility = System.Windows.Visibility.Visible;
 
-            yAxis.UseReferenceValue = Settings.UseRefValues;
+            yAxis.UseReferenceValue = HistogramChartParameters.UseRefValues;
 
             series0.ShowPointAnnotations = HistogramChartParameters.ShowAnnotations;
             series0.BarKind = HistogramChartParameters.BarKind;
 
-            series1.ShowPointAnnotations = Settings.ShowAnnotationsY2;
-            series1.DashStyle = Settings.LineDashStyleY2;
-            series1.LineKind = Settings.LineKindY2;
+            series1.ShowPointAnnotations = HistogramChartParameters.Y2ShowAnnotations;
+            series1.DashStyle = HistogramChartParameters.Y2LineDashStyle;
+            series1.LineKind = HistogramChartParameters.Y2LineKind;
 
             // Epi Curve can't have a series1
             series1.Visibility = System.Windows.Visibility.Collapsed;
 
-            if (Settings.ShowLegendBorder == true)
+            if (HistogramChartParameters.ShowLegendBorder == true)
             {
                 xyChart.Legend.BorderThickness = new Thickness(1);
             }
