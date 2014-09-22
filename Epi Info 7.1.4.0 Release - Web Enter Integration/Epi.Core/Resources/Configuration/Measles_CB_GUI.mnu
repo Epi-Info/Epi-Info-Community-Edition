@@ -1,0 +1,1730 @@
+Menu Measles Case Based GUI
+* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* Program name:     Measles_CB_GUI.mnu
+*
+* Program purpose:  The graphic user interface mnu is to province the access to all functions of the measles surveillance system
+*
+* Program created: Jinghong Ma, Addis Ababa, Ethoipia January 2007
+*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BEGIN
+	POPUP "Data &Entry" 
+	BEGIN
+		MENUITEM "Measles", DE_Measles
+		MENUITEM SEPARATOR
+		MENUITEM "E&xit", Exit
+	END	
+
+	POPUP "Analysis parameters"
+	BEGIN
+		MENUITEM "== TIME PERIOD SELECTION ==", ***
+		MENUITEM "Enter time period for all analyses", U_Set_Time_Period
+		MENUITEM "[Selected time period = @@DATE_START - @@DATE_END  (dd/mm/yyyy)]",***
+		
+		MENUITEM SEPARATOR
+		
+		MENUITEM "== GRAPH TIME INTERVAL SELECTION (Choose one) ==", ***
+		MENUITEM "By year", U_Selection_By_Year
+		MENUITEM "By month", U_Selection_By_Month
+		MENUITEM "By quarter", U_Selection_By_Quarter
+		MENUITEM "By weekly (Epidemiological week)", U_Selection_By_Weekly
+		MENUITEM "[Selected time interval = By @@SELECTION_BY_TIME ]",***
+		
+		MENUITEM SEPARATOR
+		
+		MENUITEM "== MAP/TABLE GEOGRAPHIC LEVEL SELECTION (Choose one) ==", ***
+		MENUITEM "By province", U_Selection_By_Province
+		MENUITEM "By district", U_Selection_By_District
+		
+		MENUITEM "[@@SELECTION_PLACE_DISPLAY ]",***
+	END	
+	
+	POPUP "Data Cleaning"
+	BEGIN
+		MENUITEM "-- to be reviewed-- Missing key variables - List-Update", Missing_Key_Variables_update
+		MENUITEM "Missing key variables - Table", Missing_Key_Variables
+		MENUITEM "-- to be reviewed-- Missing classification status", Missing_FinalClassification_update
+		MENUITEM "-- to be reviewed-- Pending lab result", Pending_lab_result_update
+	END
+	
+	POPUP "Core Analysis"
+	BEGIN
+		MENUITEM "Map - Suspected measles cases by classification status by district", M_MAP_ClassificationStatus
+       		MENUITEM "Table - Percentage suspected measles cases with lab specimen by province", M_TAB_PercentOfSuspectedCasesWithLabSpecByProvince
+		MENUITEM "Map - Rate of suspected measles cases by district", M_MAP_Suspected_measles_Rates_district
+		
+		POPUP "Map - Silent districts"	
+		BEGIN	
+			MENUITEM "12 months", M_MAP_Dist_With_At_Least_1_Spec_12
+			MENUITEM "24 months", M_MAP_Dist_With_At_Least_1_Spec_24
+			MENUITEM "36 months", M_MAP_Dist_With_At_Least_1_Spec_36
+			MENUITEM "Select the time interval - need to be displayed in title", M_MAP_Dist_With_At_Least_1_Time_Interval
+		END
+	END
+			
+	POPUP "&Analysis"
+	BEGIN
+		MENUITEM "==Time (Graph)=="
+		MENUITEM "Suspected measles cases", M_Graph_Suspected_Cases
+		MENUITEM "Suspected measles with lab specimen", M_Graph_Suspected_with_Lab_Speci_Cases    
+		MENUITEM "Confirmed (lab, epi-linked, and clinical/compatible) measles cases", M_GRAPH_Confirmed_LabPlusCompatible_Cases	
+		MENUITEM "Confirmed (lab, epi-linked) measles cases", M_GRAPH_Confirmed_LabPlusCompatible_Cases_2	
+		MENUITEM "Lab-confirmed (IgM+) measles cases", M_GRAPH_LabConfirmedIgMPlus_Cases
+		MENUITEM "Suspected, total confirmed, and lab-confirmed measles cases", M_GRAPH_TotalConfirmed_Cases2
+		MENUITEM "Clinical/compatible measles cases", M_GRAPH_Compatible_Clinic_Cases                
+		MENUITEM "Timeliness of receipt of case form at national level", M_GRAPH_TimelinessOfFormReceivedAtNationalLevel2
+		MENUITEM "Timeliness of receipt of lab specimen at national lab", M_GRAPH_TimelinessOfSpeciReceivedAtNationalLevel2
+		MENUITEM "Timeliness of lab result being sent to district level",M_Graph_TimelinessOfLabResultSentToDistrictLevel2
+ 		MENUITEM "Percentage of lab specimens with adequate condition", M_GRAPH_PercentOfSpecimenWithAdequateCondi
+		MENUITEM SEPARATOR
+		
+		MENUITEM "==Person (Tables)=="
+		MENUITEM "-- to be reviewed-- Suspected measles cases by classification status", M_TAB_ClassificationStatusALL
+		MENUITEM "Suspected measles cases by classification status by year", M_TAB_ClassificationStatus_By_Year
+		MENUITEM "-- to be reviewed-- Suspected measles cases by classification status by age group", M_TAB_ClassificationStatus_By_Age
+		MENUITEM "Suspected measles cases/rates" ,M_TAB_Suspected_measles_Cases_rates
+		MENUITEM "Percentage of suspected measles cases with lab specimen by province", M_TAB_PercentOfSuspectedCasesWithLabSpecByProvince
+ 		MENUITEM "Suspected measles with lab specimen cases/rates",M_TAB_Suspected_measles_With_LabSpec_Cases_rates
+		MENUITEM "Confirmed (lab, epi-linked, and clinical/compatible) measles cases/percentage by age group (in years)",M_TAB_Confirmed_By_AgeGroup_Cases_Percentage
+		MENUITEM "Confirmed (lab, epi-linked) measles cases/percentage by age group (in years)",M_TAB_Confirmed_By_AgeGroup_Cases_Percentage_2
+ 		MENUITEM "-- to be reviewed-- Lab-confirmed (IgM+) measles cases by age group (in years)",M_TAB_Lab_Confirmed_IgM_Pos_By_Age_Cases
+ 		MENUITEM "-- to be reviewed-- Lab-confirmed (IgM+) measles cases/percentage out of cases with the specimen",M_TAB_Lab_Confirmed_IgM_Pos_By_Age_Cases_Percentage
+		MENUITEM "Clinical/compatible measles cases/rates",M_TAB_Comp_Clinic_measles_Cases_rates
+		MENUITEM "Percentage total confirmed cases that are lab-confirmed", M_TAB_PercenOfTotalConfirmedLabConfirmed
+		MENUITEM "Vaccination status of lab-confirmed cases/percentage by age group", M_TAB_Vacci_StatusOfLabConfirmed
+  		
+		MENUITEM "-- to be reviewed-- Percentage of lab specimens with adequate condition by year", M_TAB_PercentOfSpecimenWithAdequateConditionByYear
+		MENUITEM SEPARATOR
+		
+		MENUITEM "==Place (Maps)=="
+		MENUITEM "-- to be reviewed-- Suspected measles cases by classification status by district", M_MAP_ClassificationStatus
+		MENUITEM "Percentage of suspected measles cases with lab specimen by province", M_MAP_PercentOfSuspectedCasesWithLabSpecByProvince
+		POPUP "Suspected measles"
+	                   BEGIN
+	                        MENUITEM "Cases",M_MAP_Suspected_measles_Cases
+	                        MENUITEM "Rates",M_MAP_Suspected_measles_Rates
+	                   END     
+	
+	       		POPUP "Suspected measles with lab specimen"
+	       		   BEGIN
+	                        MENUITEM "Cases",M_MAP_Suspected_measles_With_LabSpec_Cases
+	                        MENUITEM "Rates",M_MAP_Suspected_measles_With_LabSpec_Rates
+	                   END     
+	
+			POPUP "Clinical/compatible measles"
+	                   BEGIN
+	                        MENUITEM "Cases",M_MAP_Comp_Clinic_measles_Cases
+	                        MENUITEM "Rates",M_MAP_Comp_Clinic_measles_Rates
+	                   END     
+	                
+		POPUP "Confirmed (lab, epi-linked, and clinical/compatible) measles"
+		BEGIN
+			MENUITEM "Cases",M_MAP_Confirmed_measles_Cases
+			MENUITEM "Rates",M_MAP_Confirmed_measles_Rates
+		END   
+		 
+		POPUP "Confirmed (lab, epi-linked) measles"
+		BEGIN
+			MENUITEM "Cases",M_MAP_Confirmed_measles_Cases_2
+			MENUITEM "Rates",M_MAP_Confirmed_measles_Rates_2
+		END     
+	
+		POPUP "-- to be reviewed-- Lab-confirmed (IgM+) measles"
+	                   BEGIN
+	                        MENUITEM "Cases",M_MAP_Lab_Confirmed_IgM_Pos_Cases
+	                        MENUITEM "Rates",M_MAP_Lab_Confirmed_IgM_Pos_Rates
+	                        MENUITEM "Percentage", M_MAP_Lab_Confirmed_IgM_Pos_Percentage
+	                   END 
+	
+		MENUITEM "Percentage of lab specimens with adequate condition", M_MAP_PercentOfSpecimenWithAdequateCondition
+              
+		POPUP "Silent districts"	
+		BEGIN	
+			MENUITEM "12 months", M_MAP_Dist_With_At_Least_1_Spec_12
+			MENUITEM "24 months", M_MAP_Dist_With_At_Least_1_Spec_24
+			MENUITEM "36 months", M_MAP_Dist_With_At_Least_1_Spec_36
+			MENUITEM "-- to be reviewed-- Select the time interval - need to be displayed in title", M_MAP_Dist_With_At_Least_1_Time_Interval
+		END
+		
+		*MENUITEM "==Lab-related=="
+		*MENUITEM "Timeliness of receipt of lab specimen at national lab", M_TAB_TimelinessOfSpeciReceivedAtNationalLevel
+		*MENUITEM "Timeliness of lab result being sent to district", M_TAB_TimelinessOfLabResultSentToDistrictLevel
+  	END	
+	
+	
+	POPUP "&Feed Forward"
+	BEGIN
+		*MENUITEM "Feed forward data", EI_Feed_Forward
+		MENUITEM "Feed forward data", Feed_Forward
+	END
+	
+	POPUP "&Utility/SetUp"
+	BEGIN
+		MENUITEM "Run setup (When you encounter a problem, run setup to refresh the system)",U_Run_Setup
+		MENUITEM SEPARATOR
+		*MENUITEM "Enter country info", U_update_country_tables
+		MENUITEM "View province info (for updating the province info and its population)", U_update_province_tables
+		MENUITEM "View district info (for updating the district info and its population)", U_update_district_tables
+		MENUITEM SEPARATOR
+		MENUITEM "Export data table to Excel", Export_Excel
+		MENUITEM "Backup the databases", Backup_Data
+		MENUITEM SEPARATOR
+		MENUITEM "==This command will pre-fill district and province population==", ""
+		MENUITEM "==Only run once per year==", ""
+		MENUITEM "Pre-fill district and province population for current year", AddDistrictsForCurrentYear 
+		
+		*MENUITEM SEPARATOR
+		*MENUITEM "Data refresh", U_Data_Update
+		*MENUITEM SEPARATOR
+		*MENUITEM "Load measles data", Load_Measles_Data
+		*MENUITEM "Load utility data", xxxx
+		*MENUITEM SEPARATOR
+		*MENUITEM "Delete variables in ini file", Delete_Vars
+		*MENUITEM SEPARATOR
+		*MENUITEM "Delete all records", Delete_Records
+		*MENUITEM "Load data", Load_Data	
+	END
+		
+	POPUP "&Epi Info"
+	BEGIN
+		MENUITEM "== EPI INFO MODULES =="
+		MENUITEM "Ma&ke View (Questionnaire)", MakeView
+		MENUITEM "&Enter Data", Enter
+		MENUITEM "&Analyze Data",Analysis
+		MENUITEM "Create &Reports", ReportEngine
+		MENUITEM "Epi Ma&p", EpiMap
+		MENUITEM "&Visualize Data", VisualizeData
+		MENUITEM "&StatCalc", StatCalc
+	END
+	
+	POPUP "&Help"
+	BEGIN
+		MENUITEM "==Ad-Hoc analysis helper==", xxxx
+		MENUITEM "Time interval selection", Ad_Hoc_Analysis_Help
+		MENUITEM "Month-Year MM_YYYY variable", Ad_Hoc_Analysis_Help
+		MENUITEM "Case classification status", Ad_Hoc_Analysis_Help
+		MENUITEM "Age and age group variable", Ad_Hoc_Analysis_Help
+		MENUITEM "Vaccination status variable", Ad_Hoc_Analysis_Help
+		MENUITEM "Other variables", Ad_Hoc_Analysis_Help
+		
+		MENUITEM SEPARATOR
+		MENUITEM "Epi Info &Help", Contents
+		MENUITEM "&About Epi Info", About
+		MENUITEM SEPARATOR
+		MENUITEM "&About measles case-based tool", ***
+		MENUITEM "Measles case-based tool help/tutorial", *Surv_Help
+	END
+
+  	Screentext "Measles Case-Based Surveillance System" 50, 3, 24, Navy, arial, bold
+  	Screentext "Zambia" 81, 55, 44, Navy, arial, bold
+  	Screentext "Proposed Global Model" 85, 65, 18, Navy, arial, bold
+  	Screentext "Version 1.0" 85, 70,12, Navy, arial, bold
+  	
+  	Screentext "________ Time/Place Selection Criteria __________________________________________________________________________ " 50, 84, 12, Navy, arial, bold
+  	
+  	
+  	Screentext "Time Period" 10, 87, 10, Navy, arial, bold
+  	Screentext "[ @@DATE_START - @@DATE_END  (dd/mm/yyyy) ]" 10, 89, 10, Red, arial, bold
+  	
+  	Screentext "Time Interval" 50, 87, 10, Navy, arial, bold
+  	Screentext "[ By @@SELECTION_BY_TIME  ]" 50, 89, 10, Red, arial, bold
+  	
+  	Screentext "Place" 70, 87, 10, Navy, arial, bold
+  	Screentext "[ By @@NAME_FILE_SHAPE  ]" 73, 89, 10, Red, arial, bold
+   END
+
+
+
+******************
+* Begin of Startup
+******************
+Startup
+BEGIN
+	Picture @@MenuDir \worldmap.jpg
+	
+	IF FLAG_SETUP="" OR "@@MENUDIR \" <> PATH_MAIN THEN
+		SETDOSWIN HIDE
+		COPY @@MENUDIR \Shared\Source\Setup_CheckSystemDateSetting.SRC @@MENUDIR \Shared\PGM\Setup_CheckSystemDateSetting.PGM
+		EXECUTE Analysis.exe '@@MENUDIR \Shared\PGM\Setup_CheckSystemDateSetting.PGM'
+		Waitforexit Analysis.exe
+	
+		IF Flag_EuropeanDate = "T" THEN
+			REPLACE %MenuDir%,@@MenuDir; FROM @@MenuDir \Shared\Source\Setup.SRC TO @@MenuDir \Shared\PGM\Setup.PGM
+			EXECUTE Analysis.exe '@@MenuDir \Shared\PGM\Setup.PGM'
+			WaitForExit Analysis.exe
+		
+			IF DATE_FLAG = "T" THEN
+				SetDOSWin Hide
+				UNDEFINE Flag_EuropeanDate PERMANENT
+				EXIT
+				Assign SELECTION_PROCESS="GUI Refresh" 
+				Execute @@PATH_SHARED Application\Shared_Process.exe
+			ELSE
+				EXIT
+				UNDEFINE FLAG_SETUP
+				Assign SELECTION_PROCESS="GUI Refresh" 
+				Execute @@PATH_SHARED Application\Shared_Process.exe									
+			ENDIF		
+		ELSE
+			UNDEFINE Flag_EuropeanDate
+			Assign SELECTION_PROCESS="GUI Refresh" 
+			Execute @@PATH_SHARED Application\Shared_Process.exe
+			EXIT
+		ENDIF
+	ENDIF
+END    
+****End of Startup****
+
+
+
+*********************
+* Start of Data entry
+*********************
+DE_Measles
+BEGIN
+	Assign SELECTION_PROCESS="Data Enter"
+	Assign PATH_APPLICATION=@@PATH_Measles
+	Assign NAME_TABLE="@@PATH_Measles Database\Measles.mdb':GenericCaseBased"
+	Assign NAME_DATABASE="Measles"
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Exit
+BEGIN
+	Exit
+END
+
+****End of Data Entry****
+
+*********************
+* Begin of Time/Place
+*********************
+
+**== TIME PERIOD SELECTION ==
+U_Set_Time_Period
+BEGIN
+	Assign SELECTION_PROCESS="U_Set_Time_Period"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+**== TIME INTERVAL SELECTION ==
+U_Selection_By_Year
+BEGIN
+	Assign SELECTION_BY_TIME="year"
+	Assign GRAPH_TYPE="Bar"
+	Assign SELECTION_PROCESS="GUI Refresh"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+U_Selection_By_Month
+BEGIN
+	Assign SELECTION_BY_TIME="month"
+	Assign GRAPH_TYPE="Line"
+	Assign SELECTION_PROCESS="GUI Refresh"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+U_Selection_By_Quarter
+BEGIN
+	Assign SELECTION_BY_TIME="quarter"
+	Assign GRAPH_TYPE="Line"
+	Assign SELECTION_PROCESS="GUI Refresh"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+U_Selection_By_Weekly
+BEGIN
+	Assign SELECTION_BY_TIME="week"
+	Assign GRAPH_TYPE="Line"
+	Assign SELECTION_PROCESS="GUI Refresh"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+
+**== PLACE SELECTION ==
+U_Selection_By_Country
+BEGIN
+	*Need delete this line in region system
+	Assign NAME_COUNTRY="Burkina Faso"
+	
+	Assign SELECTION_BY_PLACE="Country_Name"
+	Assign NAME_FILE_SHAPE="country"
+	Assign SELECTION_PROCESS="GUI Refresh"
+	Assign SELECTION_PLACE_DISPLAY="Selected geographic level = By country"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+U_Selection_By_Province
+BEGIN
+	Assign SELECTION_BY_PLACE="Province_Name"
+	Assign NAME_FILE_SHAPE="province"
+	Assign SELECTION_PROCESS="GUI Refresh"
+	Assign SELECTION_PLACE_DISPLAY="Selected geographic level = By province"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+U_Selection_By_District
+BEGIN
+	Assign SELECTION_BY_PLACE="District_Name"
+	ASSIGN NAME_FILE_SHAPE="district"
+ 	Assign SELECTION_PROCESS="GUI Refresh"
+	Assign SELECTION_PLACE_DISPLAY="Selected geographic level = By district"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+U_Selection_By_HealthFacility
+BEGIN
+	Assign SELECTION_BY_PLACE="HealthFacility_Name"
+	Assign NAME_FILE_SHAPE="HealthFacility"
+	Assign SELECTION_PROCESS="GUI Refresh"
+	Assign SELECTION_PLACE_DISPLAY="Selected geographic level = By health facility"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+
+**== GRAPH TYPE SELECTION ==
+U_Selection_By_Bar
+BEGIN
+	Assign GRAPH_TYPE="Bar"
+	Assign SELECTION_PROCESS="GUI Refresh"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+U_Selection_By_Line
+BEGIN
+	Assign GRAPH_TYPE="Line"
+	Assign SELECTION_PROCESS="GUI Refresh"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+U_Selection_By_Pie
+BEGIN
+	Assign GRAPH_TYPE="Pie"
+	Assign SELECTION_PROCESS="GUI Refresh"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+**** End of Time/Place ****
+
+
+****************************
+* Begin of Data Cleaning
+****************************
+Missing_Key_Variables
+BEGIN
+	CALL SUB_TABLE_Measles
+		
+	Assign SELECTION_PROCESS="Report"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_FILE_SOURCE="Missing_Key_Variables"
+	Assign NAME_TEMPLATE="M_Missing_Key_Variables"
+	Assign TEMPLATE_MAIN_TITLE="Missing key variables list"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	
+	WaitForExist Analysis.exe
+	SetDOSWin Hide
+	COPY @@PATH_Measles Output\M_Missing_Key_Variables.htm @@PATH_Measles Output\Reports\M_Missing_Key_Variables.htm
+END
+
+Display_Missing_Key_Variables
+BEGIN
+	If Exists("@@PATH_Measles Output\Reports\M_Missing_Key_Variables.htm") Then
+		Execute  @@PATH_Measles Output\Reports\M_Missing_Key_Variables.htm
+	Else
+		Dialog "Missing key variables report doesn't exist, please run first, then try it again"
+	Endif
+END	
+
+Missing_Key_Variables_update
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FILE_SOURCE="Missing_Key_Variables_update"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign MERGE_KEYS="DistrictofResidence :: DistrictofResidence AND NamesOfPatient :: NamesOfPatient AND DateReceivedNatlevel::DateReceivedNatlevel AND PatientsResidence::PatientsResidence"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Missing_FinalClassification_update
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FILE_SOURCE="Missing_FinalClassification_update"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign MERGE_KEYS="DistrictofResidence :: DistrictofResidence AND NamesOfPatient :: NamesOfPatient AND DateReceivedNatlevel::DateReceivedNatlevel AND PatientsResidence::PatientsResidence"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Pending_lab_result_update
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FILE_SOURCE="Pending_lab_result_update"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign MERGE_KEYS="DistrictofResidence :: DistrictofResidence AND NamesOfPatient :: NamesOfPatient AND DateReceivedNatlevel::DateReceivedNatlevel AND PatientsResidence::PatientsResidence"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Missing_IDNumber
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_NAME="IDNumber"
+	Assign NAME_FIELD_LABEL="missing ID number "
+	Assign NAME_FILE_SOURCE="M_Missing_Key_Variables_Update"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign MERGE_KEYS="DistrictofResidence :: DistrictofResidence AND NamesOfPatient :: NamesOfPatient AND DateReceivedNatlevel::DateReceivedNatlevel AND PatientsResidence::PatientsResidence"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Missing_DateOnset
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_NAME="DateOfonset"
+	Assign NAME_FIELD_LABEL="missing date of onset"
+	Assign NAME_FILE_SOURCE="M_Missing_Key_Variables_Update"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign MERGE_KEYS="DistrictofResidence :: DistrictofResidence AND NamesOfPatient :: NamesOfPatient AND DateReceivedNatlevel::DateReceivedNatlevel AND PatientsResidence::PatientsResidence"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Missing_DateSpecimen
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_NAME="DateSpecimencollected"
+	Assign NAME_FIELD_LABEL="missing date of specimen collected"
+	Assign NAME_FILE_SOURCE="M_Missing_Key_Variables_Update"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign MERGE_KEYS="DistrictofResidence :: DistrictofResidence AND NamesOfPatient :: NamesOfPatient AND DateReceivedNatlevel::DateReceivedNatlevel AND PatientsResidence::PatientsResidence"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Missing_DateOfLastvaccination
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_NAME="DateOfLastvaccination"
+	Assign NAME_FIELD_LABEL="missing date of last vaccination"
+	Assign NAME_FILE_SOURCE="M_Missing_Key_Variables_Update"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign MERGE_KEYS="DistrictofResidence :: DistrictofResidence AND NamesOfPatient :: NamesOfPatient AND DateReceivedNatlevel::DateReceivedNatlevel AND PatientsResidence::PatientsResidence"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Missing_District_Res
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_NAME="DistrictofResidence"
+	Assign NAME_FIELD_LABEL="missing district of the residence"
+	Assign NAME_FILE_SOURCE="M_Missing_Key_Variables_Update"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign MERGE_KEYS="DistrictofResidence :: DistrictofResidence AND NamesOfPatient :: NamesOfPatient AND DateReceivedNatlevel::DateReceivedNatlevel AND PatientsResidence::PatientsResidence"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Missing_IgM_Results
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_NAME="MeaslesIgm"
+	Assign NAME_FIELD_LABEL="missing Igm result"
+	Assign NAME_FILE_SOURCE="M_Missing_Key_Variables_Update"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign MERGE_KEYS="DistrictofResidence :: DistrictofResidence AND NamesOfPatient :: NamesOfPatient AND DateReceivedNatlevel::DateReceivedNatlevel AND PatientsResidence::PatientsResidence"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Missing_Final_Class
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_NAME="FinalClassification2"
+	Assign NAME_FIELD_LABEL="missing final classification"
+	Assign NAME_FILE_SOURCE="M_Missing_Key_Variables_Update"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign MERGE_KEYS="DistrictofResidence :: DistrictofResidence AND NamesOfPatient :: NamesOfPatient AND DateReceivedNatlevel::DateReceivedNatlevel AND PatientsResidence::PatientsResidence"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+**** End of Data Cleaning ****
+
+
+*********************
+* Begin of Analysis
+********************* 
+
+                     *********************************************
+                     *******Begining of Graphs procedures*********
+	       *********************************************
+
+M_Graph_Suspected_Cases
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+     	Assign SELECTION_PROCESS="Graph"
+     	Assign NAME_INDICATOR_TYPE="_Number"
+	CALL SUB_GRAPH_BY_TIME
+	
+	Assign NAME_FILE_SOURCE="Graph"
+	
+	If SELECTION_BY_TIME="week" Then
+		Assign TEMPLATE_MAIN_TITLE="Suspected measles cases by epidemiological @@SELECTION_BY_TIME "
+	Else
+		Assign TEMPLATE_MAIN_TITLE="Suspected measles cases by @@SELECTION_BY_TIME "
+	Endif
+
+	Execute @@PATH_SHARED Application\shared_Process.exe
+END
+
+
+M_Graph_Suspected_with_Lab_Speci_Cases
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_INDICATOR_TYPE="_Number"
+      	Assign SELECTION_PROCESS="Graph"
+       	CALL SUB_GRAPH_BY_TIME
+	
+	Assign NAME_FILE_SOURCE="M_Graph_Suspected_with_Lab_Speci_Cases"
+				
+	If SELECTION_BY_TIME="week" Then
+		Assign TEMPLATE_MAIN_TITLE="Suspected measles cases with lab specimen by epidemiological @@SELECTION_BY_TIME "
+	Else
+		Assign TEMPLATE_MAIN_TITLE="Suspected measles cases with lab specimen by @@SELECTION_BY_TIME "
+	Endif
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_GRAPH_Confirmed_LabPlusCompatible_Cases
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign NAME_INDICATOR_TYPE="_Number"
+       	Assign SELECTION_PROCESS="Graph"
+       	CALL SUB_GRAPH_BY_TIME
+	
+	Assign NAME_FILE_SOURCE="Data_Selection"
+	Assign NAME_ANALYSIS_COMMAND = "Select finalclassification="1" or finalclassification="2" or finalclassification="3" "
+	
+	If SELECTION_BY_TIME="week" Then
+		Assign TEMPLATE_MAIN_TITLE="Confirmed (lab & epi-linked & clinical/compatible) measles cases by epidemiological @@SELECTION_BY_TIME "
+	Else
+		Assign TEMPLATE_MAIN_TITLE="Confirmed (lab & epi-linked & clinical/compatible) measles cases by @@SELECTION_BY_TIME "
+	Endif
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_GRAPH_Confirmed_LabPlusCompatible_Cases_2
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign NAME_INDICATOR_TYPE="_Number"
+       	Assign SELECTION_PROCESS="Graph"
+       	CALL SUB_GRAPH_BY_TIME
+	
+	Assign NAME_FILE_SOURCE="Data_Selection"
+	Assign NAME_ANALYSIS_COMMAND = "Select finalclassification="1" or finalclassification="2" "
+	
+	If SELECTION_BY_TIME="week" Then
+		Assign TEMPLATE_MAIN_TITLE="Confirmed (lab & epi-linked) measles cases by epidemiological @@SELECTION_BY_TIME "
+	Else
+		Assign TEMPLATE_MAIN_TITLE="Confirmed (lab & epi-linked) measles cases by @@SELECTION_BY_TIME "
+	Endif
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_GRAPH_LabConfirmedIgMPlus_Cases
+BEGIN
+	CALL SUB_TABLE_Measles
+        	
+	Assign NAME_INDICATOR_TYPE="_Number"
+        Assign SELECTION_PROCESS="Graph"
+        CALL SUB_GRAPH_BY_TIME
+	
+	Assign NAME_FILE_SOURCE="Data_Selection"
+	Assign NAME_ANALYSIS_COMMAND = "Select MeaslesIgm="1" "
+			
+	If SELECTION_BY_TIME="week" Then
+		Assign TEMPLATE_MAIN_TITLE="Lab-confirmed (IgM+) measles cases by epidemiological @@SELECTION_BY_TIME "
+	Else
+		Assign TEMPLATE_MAIN_TITLE="Lab-confirmed (IgM+) measles cases by @@SELECTION_BY_TIME "
+	Endif
+	        
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_GRAPH_TotalConfirmed_Cases2
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+       	Assign NAME_INDICATOR_TYPE=""
+	CALL SUB_GRAPH_BY_TIME
+	
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	
+	If SELECTION_BY_TIME="week" Then
+		Assign TEMPLATE_MAIN_TITLE="Suspected & total confirmed & lab-confirmed measles cases by epidemiological @@SELECTION_BY_TIME "
+		Assign NAME_FILE_SOURCE="M_GRAPH_TotalConfirmed_Cases2_Week"
+	Else
+		Assign TEMPLATE_MAIN_TITLE="Suspected & total confirmed & lab-confirmed measles cases by @@SELECTION_BY_TIME "
+		Assign NAME_FILE_SOURCE="M_GRAPH_TotalConfirmed_Cases2"
+	Endif
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_GRAPH_Compatible_Clinic_Cases
+BEGIN
+	CALL SUB_TABLE_Measles
+        Assign SELECTION_PROCESS="Graph"
+	Assign NAME_INDICATOR_TYPE="_Number"
+	CALL SUB_GRAPH_BY_TIME
+	
+	Assign NAME_FILE_SOURCE="Data_Selection"
+	Assign NAME_ANALYSIS_COMMAND = "Select finalclassification="3" "
+	
+	If SELECTION_BY_TIME="week" Then
+		Assign TEMPLATE_MAIN_TITLE="Clinical/compatible measles cases by epidemiological @@SELECTION_BY_TIME "
+	Else
+		Assign TEMPLATE_MAIN_TITLE="Clinical/compatible measles cases by @@SELECTION_BY_TIME "
+	Endif
+	              
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_GRAPH_TimelinessOfFormReceivedAtNationalLevel2
+BEGIN
+	CALL SUB_TABLE_Measles
+        	
+	Assign SELECTION_PROCESS="Graph"
+	Assign NAME_FILE_SOURCE="M_GRAPH_TimelinessOfFormReceivedAtNationalLevel2"
+	
+	If SELECTION_BY_TIME="week" Then
+		Assign TEMPLATE_MAIN_TITLE="Timeliness of receipt of case form at national level by epidemiological @@SELECTION_BY_TIME "
+	Else
+		Assign TEMPLATE_MAIN_TITLE="Timeliness of receipt of case form at national level by @@SELECTION_BY_TIME "
+	Endif
+	Assign NAME_INDICATOR_TYPE="_Percentage"	
+
+	ASSIGN NAME_FIELD_DENOMINATOR = "AlllabSpecimen"
+	ASSIGN NAME_FIELD_NUMERATOR= "TimelinessFormToNational"
+	Assign NAME_INDICATOR_TYPE="_Percentage"
+	CALL SUB_GRAPH_BY_TIME
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_GRAPH_TimelinessOfSpeciReceivedAtNationalLevel2
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	
+	Assign SELECTION_PROCESS="Graph"
+	Assign NAME_FILE_SOURCE="M_GRAPH_TimelinessOfSpeciReceivedAtNationalLevel2"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "	
+	
+	If SELECTION_BY_TIME="week" Then
+		Assign TEMPLATE_MAIN_TITLE="Timeliness of receipt of lab specimen at national lab by epidemiological @@SELECTION_BY_TIME "
+	Else
+		Assign TEMPLATE_MAIN_TITLE="Timeliness of receipt of lab specimen at national lab by @@SELECTION_BY_TIME "
+	Endif
+	Assign NAME_INDICATOR_TYPE="_Percentage"
+	
+	ASSIGN NAME_FIELD_DENOMINATOR = "AlllabSpecimen"
+	ASSIGN NAME_FIELD_NUMERATOR= "TimelinessSpecimenTolab"
+	Assign NAME_FIELD_NAME=" "
+	Assign NAME_FIELD_VALUE=" "
+        Assign NAME_PARAMETER=" "
+	
+	CALL SUB_GRAPH_BY_TIME
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+                  
+   
+M_Graph_TimelinessOfLabResultSentToDistrictLevel2
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+        Assign NAME_INDICATOR_TYPE="_Percentage"	
+	Assign SELECTION_PROCESS="Graph"
+	CALL SUB_GRAPH_BY_TIME
+	
+	Assign NAME_FILE_SOURCE="M_Graph_TimelinessOfLabResultSentToDistrictLevel2"
+	ASSIGN NAME_FIELD_DENOMINATOR = "AlllabSpecimen"
+	ASSIGN NAME_FIELD_NUMERATOR= "TimelinessLabSentResulttodistrict"
+		
+	If SELECTION_BY_TIME="week" Then
+		Assign TEMPLATE_MAIN_TITLE="Timeliness of lab result being sent to district level by epidemiological @@SELECTION_BY_TIME "
+	Else
+		Assign TEMPLATE_MAIN_TITLE="Timeliness of lab result being sent to district level by @@SELECTION_BY_TIME "
+	Endif
+		
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END                
+
+M_GRAPH_PercentOfSpecimenWithAdequateCondi                   
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_INDICATOR_TYPE="_Percentage"
+	Assign SELECTION_PROCESS="Graph"
+	CALL SUB_GRAPH_BY_TIME
+	
+	Assign NAME_FILE_SOURCE="M_PercentOfSpecimenWithAdequateCondition"
+	ASSIGN NAME_FIELD_DENOMINATOR = "CasesWithCondition"
+	ASSIGN NAME_FIELD_NUMERATOR= "Adequate"
+		
+	If SELECTION_BY_TIME="week" Then
+		Assign TEMPLATE_MAIN_TITLE="Percentage of lab specimens with adequate condition by epidemiological @@SELECTION_BY_TIME "
+	Else
+		Assign TEMPLATE_MAIN_TITLE="Percentage of lab specimens with adequate condition by @@SELECTION_BY_TIME "
+	Endif
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+
+
+                     *********************************************
+                     *******Begining of Tables procedures*********
+                     *********************************************
+
+M_TAB_Suspected_measles_Cases_rates
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Table"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "
+	Assign NAME_FILE_SOURCE="M_TAB_Suspected_measles_Cases_rates"
+	Assign COUNT_FILE_SOURCE=1
+     	ASSIGN NAME_FIELD_DENOMINATOR="@@NAME_FILE_SHAPE Population"
+		 
+	Assign NAME_TEMPLATE="M_TAB_Suspected_measles_cases_rates_@@NAME_FILE_SHAPE "
+	Assign TEMPLATE_MAIN_TITLE="Suspected measles cases/rates by @@NAME_FILE_SHAPE "
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe		
+END
+
+M_TAB_Suspected_measles_With_LabSpec_Cases_rates
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Table"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "
+
+	Assign NAME_FILE_SOURCE="M_TAB_Suspected_measles_With_LabSpec_Cases_rates"
+       	Assign COUNT_FILE_SOURCE=1
+        ASSIGN NAME_FIELD_DENOMINATOR="@@NAME_FILE_SHAPE Population"
+   	 
+	*Assign NAME_TEMPLATE="M_TAB_Suspected_measles_With_LabSpec_Cases_rates_@@NAME_FILE_SHAPE "
+	Assign NAME_TEMPLATE="M_TAB_Suspected_measles_cases_rates_@@NAME_FILE_SHAPE "
+	Assign TEMPLATE_MAIN_TITLE="Suspected measles with lab specimen cases/rates by @@NAME_FILE_SHAPE "
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+        
+        
+M_TAB_Confirmed_By_AgeGroup_Cases_Percentage
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FILE_SOURCE="M_TAB_Confirmed_By_AgeGroup_Cases_Percentage"
+	Assign NAME_ANALYSIS_COMMAND="Select finalclassification="1" or finalclassification="2" or finalclassification="3" "
+	Assign NAME_TEMPLATE="M_TAB_Confirmed_By_AgeGroup_Cases_Percentage"
+	Assign TEMPLATE_MAIN_TITLE="Confirmed (lab, epi-linked, and clinical/compatible) measles cases/percentage by age group (in years)"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END       
+
+M_TAB_Confirmed_By_AgeGroup_Cases_Percentage_2
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FILE_SOURCE="M_TAB_Confirmed_By_AgeGroup_Cases_Percentage"
+	Assign NAME_ANALYSIS_COMMAND="Select finalclassification="1" or finalclassification="2" "
+	Assign NAME_TEMPLATE="M_TAB_Confirmed_By_AgeGroup_Cases_Percentage"
+	Assign TEMPLATE_MAIN_TITLE="Confirmed (lab, epi-linked) measles cases/percentage by age group (in years)"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END                           
+      
+M_TAB_Lab_Confirmed_IgM_Pos_By_Age_Cases
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FILE_SOURCE="M_TAB_Lab_Confirmed_IgM_Pos_By_Age_Cases"
+	Assign NAME_TEMPLATE="M_TAB_Confirmed_Lab_Plus_Confirmed_By_Age_Cases"
+	Assign TEMPLATE_MAIN_TITLE="Lab-confirmed IgM postive measles cases by age group (in years), national"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_TAB_Lab_Confirmed_IgM_Pos_By_Age_Cases_Percentage
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FILE_SOURCE="M_TAB_Lab_Confirmed_IgM_Pos_By_Age_Cases_Percentage"
+	Assign NAME_TEMPLATE="M_TAB_Lab_Confirmed_IgM_Pos_By_Age_Cases_Percentage"
+	Assign TEMPLATE_MAIN_TITLE="Lab-confirmed (IgM+) measles cases/percentage out of cases with the specimen"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_TAB_Comp_Clinic_measles_Cases_rates
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Table"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "
+	Assign NAME_FILE_SOURCE="M_TAB_Comp_Clinic_measles_Cases_rates"
+	Assign COUNT_FILE_SOURCE=1
+     	ASSIGN NAME_FIELD_DENOMINATOR="@@NAME_FILE_SHAPE Population"
+		 
+	Assign NAME_TEMPLATE="M_TAB_Suspected_measles_Cases_rates_@@NAME_FILE_SHAPE "
+	Assign TEMPLATE_MAIN_TITLE="Clinical/compatible measles cases/rates by @@NAME_FILE_SHAPE "
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe		
+END
+                     
+M_TAB_PercenOfTotalConfirmedLabConfirmed
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Table"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "
+	Assign NAME_FILE_SOURCE="M_TAB_PercenOfTotalConfirmedLabConfirmed"
+	Assign NAME_TEMPLATE="M_TAB_PercenOfTotalConfirmedLabConfirmed_@@NAME_FILE_SHAPE "
+	Assign TEMPLATE_MAIN_TITLE="Percentage total confirmed cases that are lab-confirmed by @@NAME_FILE_SHAPE "
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe		
+END    
+
+M_TAB_Vacci_StatusOfLabConfirmed
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FILE_SOURCE="M_TAB_Vacci_StatusOfLabConfirmed"
+	Assign NAME_TEMPLATE="M_TAB_Vacci_StatusOfLabConfirmed"
+	Assign TEMPLATE_MAIN_TITLE="Vaccination status of lab-confirmed cases/percentages by age group"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END   
+
+M_TAB_ClassificationStatusALL
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	
+	Assign SELECTION_PROCESS="Table"
+	Assign NAME_FILE_SOURCE="M_TAB_ClassificationStatusALL"
+	*Assign NAME_FIELD_STRATA="year"
+	Assign NAME_TEMPLATE="M_TAB_ClassificationStatusALL"
+	Assign TEMPLATE_MAIN_TITLE="Classification of Suspected Measles Cases"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe		
+END     
+
+M_TAB_ClassificationStatus_By_Age
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FILE_SOURCE="M_TAB_ClassificationStatus_By_Age"
+	Assign NAME_TEMPLATE="M_TAB_ClassificationStatus"
+	Assign TEMPLATE_MAIN_TITLE="Measles cases by classification status by age group, national"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END   
+
+         
+M_TAB_ClassificationStatus_By_Year
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	
+	Assign SELECTION_PROCESS="Table"
+	Assign NAME_FILE_SOURCE="M_TAB_ClassificationStatus_By_Year"
+	Assign NAME_FIELD_STRATA="year"
+	Assign NAME_TEMPLATE="M_TAB_ClassificationStatus"
+	Assign TEMPLATE_MAIN_TITLE="Measles cases by classification status by year"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe		
+END   
+
+M_TAB_PercentOfSpecimenWithAdequateConditionByYear
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FILE_SOURCE="M_TAB_PercentOfSpecimenWithAdequateConditionByYear"
+	Assign NAME_TEMPLATE="M_TAB_PercentOfSpecimenWithAdequateConditionByYear"
+	Assign TEMPLATE_MAIN_TITLE="Percentage of lab specimens with adequate condition by year"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+        
+
+M_TAB_PercentOfSuspectedCasesWithLabSpecByProvince
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FILE_SOURCE="M_TAB_PercentOfSuspectedCasesWithLabSpecByProvince"
+	Assign NAME_TEMPLATE="M_TAB_PercentOfSuspectedCasesWithLabSpecByProvince"
+	Assign TEMPLATE_MAIN_TITLE="Percentage of suspected measles cases with lab specimen by province"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+            
+
+M_TAB_TimelinessOfLabResultSentToDistrictLevel
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	
+	Assign SELECTION_PROCESS="Table"
+	Assign NAME_FILE_SOURCE="M_TAB_TimelinessOfLabResultSentToDistrictLevel"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "
+	Assign NAME_TEMPLATE="M_TAB_TimelinessOfLabResultSentToDistrictLevel"
+	Assign TEMPLATE_MAIN_TITLE="Timeliness of lab result being sent to district"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe		
+
+END
+
+M_TAB_TimelinessOfSpeciReceivedAtNationalLevel
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	
+	Assign SELECTION_PROCESS="Table"
+	Assign NAME_FILE_SOURCE="M_TAB_TimelinessOfSpeciReceivedAtNationalLevel"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "
+	Assign NAME_TEMPLATE="M_TAB_TimelinessOfSpeciReceivedAtNationalLevel"
+	Assign TEMPLATE_MAIN_TITLE="Timeliness of receipt of lab specimen at national lab"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe		
+
+END
+
+
+M_TAB_Indicators_by_Year
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+
+	Assign SELECTION_PROCESS="Table"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE"
+	Assign NAME_FILE_SOURCE="M_TAB_Indicators_by_Year"
+	Assign NAME_TEMPLATE="M_TAB_Indicators_by_Year"
+	Assign TEMPLATE_MAIN_TITLE="Measles indicators by year"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe	
+
+END
+
+
+
+                     *********************************************
+                     *******Begining of Maps procedures*********
+		     *********************************************
+
+
+
+
+M_MAP_ClassificationStatus
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign NAME_INDICATOR_TYPE="_Number"
+        Assign SELECTION_PROCESS="Single source pgm"
+	Assign NAME_FILE_SOURCE="M_MAP_ClassificationStatus"
+	Assign TEMPLATE_MAIN_TITLE="Measles cases by classification status by district @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\M_MAP_ClassificationStatusDistrict"
+	Assign NAME_PARAMETER="AlllabSpecimen"
+	Execute @@PATH_SHARED Application\Shared_Process.exe	
+END
+
+M_MAP_PercentOfSuspectedCasesWithLabSpecByProvince
+BEGIN
+	CALL SUB_TABLE_Measles
+	Assign SELECTION_PROCESS="Single source pgm" 
+	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_FILE_SOURCE="M_MAP_PercentOfSuspectedCasesWithLabSpecByProvince"
+	Assign TEMPLATE_MAIN_TITLE="Percentage of suspected measles cases with lab specimen by province @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_Percent_province"
+
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_MAP_Suspected_measles_Cases
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Map"
+	Assign NAME_INDICATOR_TYPE="_Number"
+ 	Assign NAME_FILE_SOURCE="M_MAP_Suspected_measles_Cases"
+	Assign TEMPLATE_MAIN_TITLE="Suspected measles cases by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_Cases@@NAME_FILE_SHAPE "
+	*Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_Confirmed_measles_cases@@NAME_FILE_SHAPE "
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe	
+END                   
+
+M_MAP_Suspected_measles_Rates
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+       	Assign SELECTION_PROCESS="Single source pgm"
+       	Assign SELECTION_PROCESS_SUB=""
+       	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "
+	Assign NAME_FILE_SOURCE="M_MAP_Suspected_measles_Rates"
+	ASSIGN NAME_FIELD_DENOMINATOR="@@NAME_FILE_SHAPE Population"
+        Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_Rates@@NAME_FILE_SHAPE "
+        Assign TEMPLATE_MAIN_TITLE="Suspected measles annualized rates by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+			
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END   
+
+M_MAP_Suspected_measles_Rates_District
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+       	Assign SELECTION_PROCESS="Single source pgm"
+       	Assign SELECTION_PROCESS_SUB=""
+       	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_STRATA="District_Name"
+	Assign NAME_FILE_SOURCE="M_MAP_Suspected_measles_Rates_District"
+	ASSIGN NAME_FIELD_DENOMINATOR="DistrictPopulation"
+        Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_RatesDistrict"
+        Assign TEMPLATE_MAIN_TITLE="Suspected measles annualized rates by district @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+			
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END        
+
+M_MAP_Suspected_measles_With_LabSpec_Cases
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign NAME_INDICATOR_TYPE="_Number"
+	Assign SELECTION_PROCESS="Map"
+	Assign NAME_FILE_SOURCE="M_MAP_Suspected_measles_With_LabSpec_Cases"
+	Assign TEMPLATE_MAIN_TITLE="Suspected measles cases with lab specimen by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_Cases@@NAME_FILE_SHAPE "
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END                   
+
+M_MAP_Suspected_measles_With_LabSpec_Rates
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+       	Assign SELECTION_PROCESS="Single source pgm"
+       	Assign SELECTION_PROCESS_SUB=""
+       	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "
+	Assign NAME_FILE_SOURCE="M_MAP_Suspected_measles_With_LabSpec_Rates"
+	ASSIGN NAME_FIELD_DENOMINATOR="@@NAME_FILE_SHAPE Population"
+        Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_Rates@@NAME_FILE_SHAPE "
+        Assign TEMPLATE_MAIN_TITLE="Rate of suspected measles cases with lab specimen by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+			
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_MAP_Comp_Clinic_measles_Rates
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+        Assign SELECTION_PROCESS="Single source pgm"
+        Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "
+	Assign NAME_FILE_SOURCE="M_MAP_Comp_Clinic_measles_Rates"
+	Assign COUNT_FILE_SOURCE=1
+	ASSIGN NAME_FIELD_DENOMINATOR="@@NAME_FILE_SHAPE Population"
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_Rates@@NAME_FILE_SHAPE "
+	Assign TEMPLATE_MAIN_TITLE="Clinical/compatible measles rates by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+    			
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_MAP_Comp_Clinic_measles_Cases
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+	Assign SELECTION_PROCESS="Map"
+	Assign NAME_INDICATOR_TYPE="_Number"
+	Assign NAME_FILE_SOURCE="M_MAP_Comp_Clinic_measles_Cases"
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_Cases@@NAME_FILE_SHAPE "
+	Assign TEMPLATE_MAIN_TITLE="Clinical/compatible measles cases by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+	Assign NAME_PARAMETER="Compatible_3"
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_MAP_Confirmed_measles_Cases
+BEGIN
+	CALL SUB_TABLE_Measles
+
+	Assign SELECTION_PROCESS="Map"
+	Assign NAME_INDICATOR_TYPE="_Number"
+	Assign NAME_FILE_SOURCE="Data_Selection"
+	Assign NAME_ANALYSIS_COMMAND="select finalclassification="1" or finalclassification="2" or finalclassification="3" "
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_cases@@NAME_FILE_SHAPE "
+	Assign TEMPLATE_MAIN_TITLE="Confirmed (lab & epi-linked & clinical/compatible) measles cases by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+	Assign NAME_PARAMETER="Confirmed_1"
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_MAP_Confirmed_measles_Cases_2
+BEGIN
+	CALL SUB_TABLE_Measles
+
+	Assign SELECTION_PROCESS="Map"
+	Assign NAME_INDICATOR_TYPE="_Number"
+	Assign NAME_FILE_SOURCE="Data_Selection"
+	Assign NAME_ANALYSIS_COMMAND="select finalclassification="1" or finalclassification="2" "
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_cases@@NAME_FILE_SHAPE "
+	Assign TEMPLATE_MAIN_TITLE="Confirmed (lab & epi-linked) measles cases by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+	Assign NAME_PARAMETER="Confirmed_1"
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_MAP_Confirmed_measles_Rates
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+       	Assign SELECTION_PROCESS="Single source pgm"
+       	Assign SELECTION_PROCESS_SUB=""
+       	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "
+	Assign NAME_ANALYSIS_COMMAND="select finalclassification="1" or finalclassification="2" or finalclassification="3" "
+	Assign NAME_FILE_SOURCE="M_MAP_Confirmed_measles_Rates"
+	ASSIGN NAME_FIELD_DENOMINATOR="@@NAME_FILE_SHAPE Population"
+       	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_Rates@@NAME_FILE_SHAPE "
+        	Assign TEMPLATE_MAIN_TITLE="Rates of confirmed (lab & epi-linked & clinical/compatible) measles cases by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+			
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END  
+
+M_MAP_Confirmed_measles_Rates_2
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+       	Assign SELECTION_PROCESS="Single source pgm"
+       	Assign SELECTION_PROCESS_SUB=""
+       	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "
+	Assign NAME_ANALYSIS_COMMAND="select finalclassification="1" or finalclassification="2" "
+	Assign NAME_FILE_SOURCE="M_MAP_Confirmed_measles_Rates"
+	ASSIGN NAME_FIELD_DENOMINATOR="@@NAME_FILE_SHAPE Population"
+       	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_Rates@@NAME_FILE_SHAPE "
+         	Assign TEMPLATE_MAIN_TITLE="Rates of confirmed (lab & epi-linked) measles cases by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+			
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END    
+
+M_MAP_Lab_Confirmed_IgM_Pos_Rates
+BEGIN
+	CALL SUB_TABLE_Measles
+        
+       	Assign SELECTION_PROCESS="Single source pgm"
+       	Assign SELECTION_PROCESS_SUB=""
+       	Assign NAME_PARAMETER="with time interval no auto exit"
+	Assign NAME_FIELD_STRATA="@@SELECTION_BY_PLACE "
+	Assign NAME_FILE_SOURCE="M_MAP_Lab_Confirmed_IgM_Pos_Rates"
+	ASSIGN NAME_FIELD_DENOMINATOR="@@NAME_FILE_SHAPE Population"
+        	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_Rates@@NAME_FILE_SHAPE "
+       	 Assign TEMPLATE_MAIN_TITLE="Rates of lab-confirmed (IgM+) measles cases by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+			
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END   
+
+M_MAP_Lab_Confirmed_IgM_Pos_Percentage
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_INDICATOR_TYPE="_Percentage"	
+	Assign SELECTION_PROCESS="Map"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_FILE_SOURCE="M_MAP_Lab_Confirmed_IgM_Pos_Percentage"
+	ASSIGN NAME_FIELD_DENOMINATOR = "labSpecimenIn"
+	ASSIGN NAME_FIELD_NUMERATOR= "ConfirmedCases"
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_percent_@@NAME_FILE_SHAPE "
+	Assign TEMPLATE_MAIN_TITLE="Percentage of lab-confirmed (IgM+) measles cases by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_MAP_Lab_Confirmed_IgM_Pos_Cases
+BEGIN
+	CALL SUB_TABLE_Measles
+ 
+	Assign SELECTION_PROCESS="Map"
+	Assign NAME_INDICATOR_TYPE="_Number"
+	Assign NAME_FILE_SOURCE="M_MAP_Lab_Confirmed_IgM_Pos_Cases"
+	Assign TEMPLATE_MAIN_TITLE="Lab-confirmed (IgM+) measles cases by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_Cases@@NAME_FILE_SHAPE "
+	Assign NAME_PARAMETER="LabConfirm_IgmPos"		
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+                
+M_MAP_PercentOfSpecimenWithAdequateCondition
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_INDICATOR_TYPE="_Percentage"	
+	Assign SELECTION_PROCESS="Map"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_FILE_SOURCE="M_PercentOfSpecimenWithAdequateCondition"
+	ASSIGN NAME_FIELD_DENOMINATOR = "CasesWithCondition"
+	ASSIGN NAME_FIELD_NUMERATOR= "Adequate"
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\MAP_percent_@@NAME_FILE_SHAPE "
+	Assign TEMPLATE_MAIN_TITLE="Percentage of lab specimens with adequate condition by @@NAME_FILE_SHAPE  @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_MAP_Dist_With_At_Least_1_Spec_12
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER=""
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_FILE_SOURCE="M_Dist_At_Least_1_Spec"
+	*Assign TEMPLATE_MAIN_TITLE="Districts with at least one specimen past 12 months to @@DATE_END_MONTH /@@DATE_END_YEAR  - @@NAME_COUNTRY "
+	Assign TEMPLATE_MAIN_TITLE="Districts (in white) with no case with a lab specimen in past 12 months [@@DATE_SYSTEM ] - [@@NAME_COUNTRY ]"
+	
+	Assign COUNT_JUST_A_NUMBER=1	
+	Assign NAME_FIELD_LABEL="in last 12 months"
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\M_Dist_At_Least_1_Spec"
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_MAP_Dist_With_At_Least_1_Spec_24
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER=""
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_FILE_SOURCE="M_Dist_At_Least_1_Spec"
+	Assign TEMPLATE_MAIN_TITLE="Districts (in white) with no case with a lab specimen in past 24 months [@@DATE_SYSTEM ] - [@@NAME_COUNTRY ]"
+	Assign COUNT_JUST_A_NUMBER=2	
+	Assign NAME_FIELD_LABEL="in last 24 months"
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\M_Dist_At_Least_1_Spec"
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_MAP_Dist_With_At_Least_1_Spec_36
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	Assign NAME_PARAMETER=""
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_FILE_SOURCE="M_Dist_At_Least_1_Spec"
+	Assign TEMPLATE_MAIN_TITLE="Districts (in white) with no case with a lab specimen in past 36 months [@@DATE_SYSTEM ] - [@@NAME_COUNTRY ]"
+	Assign COUNT_JUST_A_NUMBER=3	
+	Assign NAME_FIELD_LABEL="in last 36 months"
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\M_Dist_At_Least_1_Spec"
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+M_MAP_Dist_With_At_Least_1_Time_Interval
+BEGIN
+	CALL SUB_TABLE_Measles
+	
+	DIALOG "Please type in the start date for the report in the format DD-MM-YYYY", Measles_DATE_START, FORMAT=##/##/####, TITLETEXT="Report Start Date Setup"
+	DIALOG "Please type in th end date for the report in the format DD-MM-YYYY", Measles_DATE_END, FORMAT=##/##/####, TITLETEXT="Report End Date Setup"
+
+	Assign NAME_PARAMETER=""
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_FILE_SOURCE="M_Dist_At_Least_1_Spec_Time_Interval"
+	Assign TEMPLATE_MAIN_TITLE="Districts (in white) with no case with a lab specimen in past 36 months [@@DATE_SYSTEM ] - [@@NAME_COUNTRY ]"
+	Assign COUNT_JUST_A_NUMBER=3	
+	Assign NAME_FIELD_LABEL="in last 36 months"
+	Assign NAME_TEMPLATE="@@PATH_APPLICATION Template\Map\M_Dist_At_Least_1_Spec"
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+**** End of Analysis ****
+
+
+****************************
+* Begin of Feedforward
+****************************
+Feed_Forward
+BEGIN
+ 	Assign SELECTION_PROCESS="Feed_Forward"
+	Assign PATH_APPLICATION=@@PATH_SHARED
+	Assign NAME_TABLE="@@PATH_SHARED Database\Utility.mdb':FeedForward"
+	Assign NAME_MDB="Utility"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+EI_Feed_Forward
+BEGIN
+	Execute FeedForward.exe
+END
+**** End of Merge_Feedforward ****
+
+
+
+************************
+* Begin of Utility/SetUp 
+************************
+U_Run_Setup
+BEGIN
+	REPLACE %MenuDir%,@@MenuDir; %DATE_END%,@@DATE_END; %DATE_START%,@@DATE_START; FROM @@MenuDir \Shared\Source\Setup.SRC TO @@MenuDir \Shared\PGM\Setup.PGM
+	EXECUTE Analysis.exe '@@PATH_SHARED PGM\Setup.PGM'
+	
+	WaitforExit Analysis.exe
+	Assign SELECTION_PROCESS="GUI Refresh"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+	Exit
+END
+
+U_Data_Update
+BEGIN
+	CALL SUB_TABLE_Measles
+	Assign SELECTION_PROCESS="DATA_PROCESSING"
+	Execute @@PATH_APPLICATION Application\Measles_CB_Process.exe
+END
+
+Load_Measles_Data
+BEGIN
+	SetDOSWin Hide
+	Copy @@PATH_APPLICATION Database\measles.mdb @@PATH_APPLICATION BACKUP\measles@@SYSTEMDATE .mdb
+	
+	FILEDIALOG NAME_DATABASE, "EpiInfo/Access(*.MDB)|*.mdb", "C:\"
+	Assign NAME_TABLE="@@NAME_DATABASE ':Genericcasebased"
+	Assign NAME_TABLE_DATA_ENTRY="@@PATH_APPLICATION Database\Measles.mdb':GenericCaseBased"
+	Assign NAME_FILE_SOURCE="Load_New_Data"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign MERGE_KEYS="IDNumber :: IDNumber AND NamesOfPatient :: NamesOfPatient AND DateOfonset :: DateOfOnset"
+	
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Load_Utility_Data
+BEGIN
+	FILEDIALOG NAME_DATABASE, "EpiInfo/Access(*.MDB)|*.mdb", "C:\"
+	Assign NAME_TABLE="@@NAME_DATABASE ':Genericcasebased"
+	Assign NAME_TABLE_DATA_ENTRY="@@PATH_APPLICATION Database\Measles.mdb':GenericCaseBased"
+	Assign NAME_FILE_SOURCE="Load_New_Data"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Assign NAME_PARAMETER=""
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+  
+U_update_country_tables
+BEGIN
+	Assign SELECTION_PROCESS="U_update_code_tables"
+	Assign PATH_APPLICATION=@@PATH_MEASLES
+	Assign NAME_TABLE="@@PATH_SHARED Database\Utility.MDB':country"
+	Assign NAME_DATABASE="Measles"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+U_update_province_tables
+BEGIN
+	Assign SELECTION_PROCESS="U_update_code_tables"
+	Assign PATH_APPLICATION=@@PATH_MEASLES 
+	Assign NAME_TABLE="@@PATH_SHARED Database\Utility.MDB':province"
+	Assign NAME_DATABASE="Measles"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+U_update_district_tables
+BEGIN
+	Assign SELECTION_PROCESS="U_update_code_tables"
+	Assign PATH_APPLICATION=@@PATH_MEASLES 
+	Assign NAME_TABLE="@@PATH_SHARED Database\Utility.MDB':district"
+	Assign NAME_DATABASE="Measles"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Export_Excel
+BEGIN
+	Assign NAME_DATABASE="Measles"
+	Assign SELECTION_PROCESS="Export_Excel"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Backup_Data
+BEGIN
+ Assign SELECTION_PROCESS="Backup" 
+ Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+
+AddDistrictsForCurrentYear
+BEGIN
+	Assign SELECTION_PROCESS="Single pgm"
+	Assign SELECTION_PROCESS_SUB="Shared"
+	Assign NAME_FILE_SOURCE="AddDistrictsForCurrentYear"
+	
+   	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Date_Format
+BEGIN
+	Execute @@PATH_SHARED Application\EAS.exe
+END
+
+Delete_Vars
+BEGIN
+	Execute @@PATH_SHARED Application\EIini.exe /s
+END
+
+Delete_Records
+BEGIN
+	Assign NAME_TABLE_DATA_ENTRY="@@PATH_Measles Database\Measles.mdb':GenericCaseBased"
+	Assign NAME_FILE_SOURCE="Delete_All_Records"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Load_Data
+BEGIN
+	Assign PATH_APPLICATION=@@PATH_Measles
+	FILEDIALOG NAME_DATABASE, "EpiInfo/Access(*.MDB)|*.mdb", "@@PATH_Measles Backup\"
+	Assign NAME_TABLE="@@NAME_DATABASE ':GenericCaseBased"
+	Assign NAME_TABLE_DATA_ENTRY="@@PATH_Measles Database\Measles.mdb':GenericCaseBased"
+	Assign MERGE_KEYS="DistrictofResidence::DistrictofResidence AND ProvinceOfResidence::ProvinceOfResidence AND DateOfonset::DateOfonset"
+	
+	Assign NAME_FILE_SOURCE="Merge_OldData"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+Utility_Merge_OldData
+BEGIN
+	Assign PATH_APPLICATION=@@PATH_SHARED
+	Assign SELECTION_PROCESS_SUB="Shared" 
+	FILEDIALOG NAME_DATABASE, "EpiInfo/Access(*.MDB)|*.mdb", "D:\"
+	Assign NAME_TABLE="@@NAME_DATABASE ':HealthFacility"
+	Assign NAME_TABLE_DATA_ENTRY="@@PATH_SHARED Database\Utility.MDB':viewHealthFacility"
+	Assign MERGE_KEYS="HealthFacility_Name::HealthFacility_Name AND Year::Year"
+	
+	Assign NAME_FILE_SOURCE="Merge_OldData"
+	Assign SELECTION_PROCESS="Single source pgm"
+	Execute @@PATH_SHARED Application\Shared_Process.exe
+END
+
+**** End of Utility/Setup ****
+
+
+****************************
+* Begin of Epi Info programs
+****************************
+MakeView
+BEGIN
+	Execute MakeView.EXE
+END
+
+Enter
+BEGIN
+	Execute Enter.EXE
+END
+
+Analysis
+BEGIN
+	Execute Analysis.EXE
+END
+
+ReportEngine
+BEGIN
+	Execute EpiRepGen.EXE
+END
+
+EpiMap
+BEGIN
+	Execute EpiMap.EXE
+END
+
+VisualizeData
+BEGIN
+	Execute visdata.exe
+END
+ 
+StatCalc
+BEGIN
+	Execute Statcalc.exe
+END
+
+InstallLanguage
+BEGIN
+	Execute TSETUP.EXE
+END
+
+ChooseLanguage
+BEGIN
+	SETLANGUAGE
+END
+
+
+**** End of Epi Info programs ****
+
+***************
+* Begin of Help
+***************
+Contents
+BEGIN
+	Help EIHelp.chm#/Introduction_to_Epi_Info_for_Windows/First_Topic.htm
+END
+
+Surv_Help
+BEGIN
+	Execute @@PATH_SHARED Documentation\Zambia Data Management System Tutorial.doc
+END
+
+Ad_Hoc_Analysis_Help
+BEGIN
+	Execute @@PATH_MEASLES Documentation\Help\Global Measles Ad Hoc Analysis.doc
+	*Execute @@PATH_MEASLES Documentation\Help\Global Measles Ad Hoc Analysis.htm#_Time_interval_selection
+	*Execute @@PATH_MEASLES Documentation\Help\Global Measles Ad Hoc Analysis.htm
+END
+
+About
+BEGIN
+	About
+END
+
+WordPad
+BEGIN
+	Execute wordpad.exe
+END
+
+**** End of Help ****
+
+************************
+* Begin of Sub Functions 
+*************************
+SUB_INITIALIZE
+BEGIN
+	Assign NAME_INDICATOR_TYPE=""
+	Assign SELECTION_PROCESS_SUB=""
+	Assign NAME_FIELD_VALUE=""
+	Assign NAME_FIELD_DENOMINATOR=""
+END
+
+*SUB_Measles_IgM
+*BEGIN
+*	CALL SUB_TABLE_Measles
+	
+*	Assign SELECTION_PROCESS="Table"
+*	Assign NAME_FILE_SOURCE="M_TAB_Lab_Results"
+	
+*	Assign NAME_FIELD_NAME="MeaslesIgm"
+*	Assign NAME_TEMPLATE="M_TAB_Lab_Results"
+*END
+
+SUB_TABLE_Measles
+BEGIN
+	CALL SUB_INITIALIZE
+	Assign PATH_APPLICATION=@@PATH_Measles
+	Assign NAME_TABLE_DATA_ENTRY="@@PATH_Measles Database\Measles.mdb':GenericCaseBased"
+	Assign NAME_TABLE="@@PATH_SHARED Database\Output.MDB':Measles"
+	Assign NAME_FIELD_DATE="DateOfOnset"
+	Assign NAME_DATABASE="Measles"
+	Assign NAME_DATA_PROCESS="C_Blank"
+	Assign NAME_DATA_PROCESS_APPLICATION="M_Data_Processing"
+        Assign TEMPLATE_SUB_TITLE="From @@DATE_START   to @@DATE_END "
+        *Assign TEMPLATE_SUB_TITLE="From @@DATE_START_MONTH /@@DATE_START_YEAR  to @@DATE_END_MONTH /@@DATE_END_YEAR "
+END
+
+SUB_GRAPH_BY_TIME
+BEGIN
+	If SELECTION_BY_TIME="year" Then
+		Assign NAME_TEMPLATE="Bar_By_Year@@NAME_INDICATOR_TYPE .CHT"
+		Assign GRAPH_TYPE="Bar"
+	Endif
+	
+	If SELECTION_BY_TIME="month" Then
+		Assign NAME_TEMPLATE="Line_By_Month@@NAME_INDICATOR_TYPE .CHT"
+		Assign GRAPH_TYPE="Line"
+	Endif
+	
+	If SELECTION_BY_TIME="quarter" Then
+		Assign NAME_TEMPLATE="Line_By_Quarter@@NAME_INDICATOR_TYPE .CHT"
+		Assign GRAPH_TYPE="Line"
+	Endif
+	
+	If SELECTION_BY_TIME="week" Then
+		Assign NAME_TEMPLATE="Line_By_Week@@NAME_INDICATOR_TYPE .CHT"
+		Assign GRAPH_TYPE="Line"
+	Endif
+END
+	
+
+                                                     
+**** End of Sub Functions ****
+
+*End of Menu
+
+
+
+

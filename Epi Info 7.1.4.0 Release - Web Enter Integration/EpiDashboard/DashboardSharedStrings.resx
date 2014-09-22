@@ -1,0 +1,918 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CANNOT_REMOVE_VARIABLE" xml:space="preserve">
+    <value>The variable could not be removed. Check to make sure that no data filters and/or other variables are dependent on this variable.</value>
+  </data>  
+  <data name="CANNOT_SAVE_CANVAS_NO_DATA_SOURCE" xml:space="preserve">
+    <value>A data source must be read before the canvas can be saved.</value>
+  </data>
+  <data name="CANVAS_FILES_HEADER" xml:space="preserve">
+    <value>Quick Access - Available Canvas Files</value>
+    <comment>Header for the 'Open' menu</comment>
+  </data>
+  <data name="CANVAS_FILE_BROWSE" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="CANVAS_LOADED" xml:space="preserve">
+    <value>Canvas file {0} loaded successfully.</value>
+  </data>
+  <data name="CMENU_ADD_ANALYSIS_GADGET" xml:space="preserve">
+    <value>Add Analysis gadget</value>
+  </data>
+  <data name="CMENU_ADD_CHARTS" xml:space="preserve">
+    <value>Charts</value>
+  </data>
+  <data name="CMENU_ADD_COLUMN_CHART" xml:space="preserve">
+    <value>Column chart</value>
+  </data>
+  <data name="CMENU_ADD_LINE_CHART" xml:space="preserve">
+    <value>Line chart</value>
+  </data>
+  <data name="CMENU_ADD_AREA_CHART" xml:space="preserve">
+    <value>Area chart</value>
+  </data>
+  <data name="CMENU_ADD_PIE_CHART" xml:space="preserve">
+    <value>Pie chart</value>
+  </data>
+  <data name="CMENU_ADD_ABERRATION_CHART" xml:space="preserve">
+    <value>Aberration detection chart</value>
+  </data>
+  <data name="CMENU_ADD_PARETO_CHART" xml:space="preserve">
+    <value>Pareto chart</value>
+  </data>
+  <data name="CMENU_ADD_SCATTER_CHART" xml:space="preserve">
+    <value>Scatter chart</value>
+  </data>
+  <data name="CMENU_ADD_EPICURVE_CHART" xml:space="preserve">
+    <value>Epi curve chart</value>
+  </data>
+  <data name="CMENU_ADD_COMBINED_FREQUENCY" xml:space="preserve">
+    <value>Combined frequency</value>
+  </data>
+  <data name="CMENU_ADD_WORD_CLOUD" xml:space="preserve">
+    <value>Word cloud</value>
+  </data>
+  <data name="CMENU_ADD_MATCHED_PAIR_CASE_CONTROL" xml:space="preserve">
+    <value>Matched pair case-control</value>
+  </data>  
+  <data name="CMENU_ADD_CSFREQ" xml:space="preserve">
+    <value>Complex sample frequencies</value>
+  </data>
+  <data name="CMENU_ADD_CSMEANS" xml:space="preserve">
+    <value>Complex sample means</value>
+  </data>
+  <data name="CMENU_ADD_CSTABLES" xml:space="preserve">
+    <value>Complex sample tables</value>
+  </data>
+  <!--<data name="CMENU_ADD_EARS" xml:space="preserve">
+    <value>Aberration detection</value>
+  </data>-->
+  <data name="CMENU_ADD_FREQUENCY" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+  <data name="CMENU_ADD_LINEAR" xml:space="preserve">
+    <value>Linear regression</value>
+  </data>
+  <data name="CMENU_ADD_LINE_LIST" xml:space="preserve">
+    <value>Line list</value>
+  </data>
+  <data name="CMENU_ADD_LOGISTIC" xml:space="preserve">
+    <value>Logistic regression</value>
+  </data>
+  <data name="CMENU_ADD_MEANS" xml:space="preserve">
+    <value>Means</value>
+  </data>
+  <data name="CMENU_ADD_MXN" xml:space="preserve">
+    <value>M x N / 2 x 2 table</value>
+  </data>
+  <data name="CMENU_CUSTOM_GADGETS" xml:space="preserve">
+    <value>Custom gadgets</value>
+  </data>
+  <data name="CMENU_ADD_NUTSTAT" xml:space="preserve">
+    <value>Add NutStat growth chart</value>
+  </data>
+  <data name="CMENU_ADD_RELATED_DATA" xml:space="preserve">
+    <value>Add related data source...</value>
+  </data>
+  <data name="CMENU_ADD_REPORT_GADGET" xml:space="preserve">
+    <value>Add Report gadget</value>
+  </data>
+  <data name="CMENU_ADD_STATCALC" xml:space="preserve">
+    <value>Add StatCalc calculator</value>
+  </data>
+  <data name="CMENU_ADV_STATS" xml:space="preserve">
+    <value>Advanced statistics</value>
+  </data>
+  <data name="CMENU_EXPORT_DATA" xml:space="preserve">
+    <value>Export data</value>
+  </data>
+  <data name="CMENU_MS_EXCEL" xml:space="preserve">
+    <value>Microsoft Excel</value>
+  </data>
+  <data name="CMENU_MS_WORD" xml:space="preserve">
+    <value>Microsoft Word</value>
+  </data>
+  <data name="CMENU_OPEN_CANVAS" xml:space="preserve">
+    <value>Open canvas...</value>
+  </data>
+  <data name="CMENU_PROPERTIES" xml:space="preserve">
+    <value>Canvas properties</value>
+  </data>
+  <data name="CMENU_AUTO_ARRANGE" xml:space="preserve">
+    <value>Auto-arrange gadgets</value>
+  </data>
+  <data name="CMENU_REFRESH" xml:space="preserve">
+    <value>Refresh data source</value>
+  </data>
+  <data name="CMENU_RESET" xml:space="preserve">
+    <value>Reset Dashboard</value>
+  </data>
+  <data name="CMENU_SAVE_AS_HTML" xml:space="preserve">
+    <value>Save output as HTML</value>
+  </data>
+  <data name="CMENU_SAVE_CANVAS" xml:space="preserve">
+    <value>Save canvas</value>
+  </data>
+  <data name="CMENU_SAVE_CANVAS_AS" xml:space="preserve">
+    <value>Save canvas as...</value>
+  </data>
+  <data name="CMENU_SEND_OUTPUT_TO" xml:space="preserve">
+    <value>Send output to</value>
+  </data>
+  <data name="CMENU_SET_DATA_SOURCE" xml:space="preserve">
+    <value>Set data source</value>
+  </data>
+  <data name="CMENU_SHOW_DATA_DICTIONARY" xml:space="preserve">
+    <value>Show data dictionary</value>
+  </data>
+  <data name="COL_HEADER_CI_LOWER" xml:space="preserve">
+    <value>95% CI Lower</value>
+    <comment>Column header for the 95% CI lower</comment>
+  </data>
+  <data name="COL_HEADER_CI_UPPER" xml:space="preserve">
+    <value>95% CI Upper</value>
+    <comment>COL_HEADER_CI_LOWER	95% CI Lower	Column header for the 95% CI upper</comment>
+  </data>
+  <data name="COL_HEADER_CUMULATIVE_PERCENT" xml:space="preserve">
+    <value>Cum. Percent</value>
+    <comment>Column header for the 'Cumulative Percent' label.</comment>
+  </data>
+  <data name="COL_HEADER_FREQUENCY" xml:space="preserve">
+    <value>Frequency</value>
+    <comment>Column header for the frequency gadget's output table.</comment>
+  </data>
+  <data name="COL_HEADER_PERCENT" xml:space="preserve">
+    <value>Percent</value>
+    <comment>Column header for the 'Percent' label.</comment>
+  </data>
+
+  
+  <data name="CUSTOM_QUERY" xml:space="preserve">
+    <value>Custom SQL Query</value>    
+  </data>
+  
+  <data name="VARIABLE_CONTROL_TITLE" xml:space="preserve">
+    <value>Defined Variables ({0})</value>    
+  </data>
+
+  <data name="VARIABLE_CONTROL_HEADER" xml:space="preserve">
+    <value>Variable Definitions:</value>    
+  </data>
+  <data name="VARIABLE_CONTROL_NEW_VARIABLE" xml:space="preserve">
+    <value>New Variable</value>    
+  </data>
+  <data name="VARIABLE_CONTROL_EDIT_VARIABLE" xml:space="preserve">
+    <value>Edit Variable</value>    
+  </data>
+  <data name="VARIABLE_CONTROL_DEL_VARIABLE" xml:space="preserve">
+    <value>Delete Variable</value>    
+  </data>
+
+  <data name="VARIABLE_CONTROL_CMENU_RECODE" xml:space="preserve">
+    <value>With Recoded Value</value>    
+  </data>
+  <data name="VARIABLE_CONTROL_CMENU_SIMPLE_ASSIGN" xml:space="preserve">
+    <value>With Simple Assignment</value>    
+  </data>
+  <data name="VARIABLE_CONTROL_CMENU_CONDITIONAL_ASSIGN" xml:space="preserve">
+    <value>With Conditional Assignment</value>    
+  </data>
+  <data name="VARIABLE_CONTROL_CMENU_FORMAT" xml:space="preserve">
+    <value>With Formatted Value</value>    
+  </data>
+  <data name="VARIABLE_CONTROL_CMENU_EXPRESSION" xml:space="preserve">
+    <value>With Assigned Expression</value>    
+  </data>
+  <data name="VARIABLE_CONTROL_CMENU_GROUP" xml:space="preserve">
+    <value>Create Variable Group</value>    
+  </data>
+
+  <data name="DENOMINATOR_DESCRIPTION_BOOLEAN" xml:space="preserve">
+    <value>Fields are boolean.
+Denominator = {0}</value>
+  </data>
+  <data name="DENOMINATOR_DESCRIPTION_NON_BOOLEAN" xml:space="preserve">
+    <value>Fields are not boolean.
+Denominator = {0}</value>
+  </data>
+  <data name="DASHBOARD_INTRO_SET_DATA_SOURCE" xml:space="preserve">
+    <value>Set a data source now</value>
+  </data>
+  <data name="DASHBOARD_INTRO_TEXT" xml:space="preserve">
+    <value>Right-click on the canvas to set a data source and add statistical gadgets. Or, open an existing dashboard canvas.</value>
+    <comment>The intro text for the Dashboard. Shows up in the center of the screen when the Dashboard is opened from the menu.</comment>
+  </data>
+  <data name="DASHBOARD_TITLE" xml:space="preserve">
+    <value>Epi Info 7 Dashboard</value>
+    <comment>The title of the Dashboard. Shows up in the center of the screen when the Dashboard is opened from the menu.</comment>
+  </data>
+  <data name="ERROR_CANNOT_CONDITIONAL_ASSIGN_INVALID_INPUT" xml:space="preserve">
+    <value>Invalid input detected.</value>
+  </data>
+  <data name="ERROR_CANNOT_CONDITIONAL_ASSIGN_TYPE_MISMATCH" xml:space="preserve">
+    <value>This existing field cannot be assigned to because of mis-matched data types. It is of type {0} while the selection in this dialog is of type {1}.</value>
+  </data>
+  <data name="ERROR_CANNOT_DECRYPT" xml:space="preserve">
+    <value>There was a problem decrypting the connection information inside of this canvas. The connection string contained in this canvas may have been encrypted using a different set of keys.</value>
+  </data>
+  <data name="ERROR_CANVAS_DATA_SOURCE_NOT_FOUND" xml:space="preserve">
+    <value>The data source for this canvas cannot be found: {0}</value>
+  </data>
+  <data name="ERROR_CANVAS_SAVE_IO_EXCEPTION" xml:space="preserve">
+    <value>An input/output exception occurred and the canvas could not be saved. Check to make sure the specified file is not in use and try again.</value>
+  </data>
+  <data name="ERROR_DATA_SOURCE_GENERIC" xml:space="preserve">
+    <value>The data source could not be set. If supplying a custom SQL query, check the query's syntax and try again.</value>
+  </data>
+  <data name="ERROR_DATA_SOURCE_PERMISSIONS" xml:space="preserve">
+    <value>There was a problem accessing the data source that this canvas file is referencing. Please check to make sure that you have adequate permissions to the database and try again.</value>
+  </data>
+  <data name="ERROR_PROJECT_NOT_FOUND_FOR_CANVAS" xml:space="preserve">
+    <value>The specified project file ({0}) that is associated with this canvas was not found. Please modify the canvas file to point to a valid Epi Info 7 project or select a new data source.</value>
+  </data>
+  <data name="FIELD_COUNT" xml:space="preserve">
+    <value>{0} fields</value>
+  </data>
+  <data name="FIELD_AND_RECORD_COUNT" xml:space="preserve">
+    <value>{0} fields, {1} records</value>
+  </data>
+  <data name="GADGET_ADVANCED_OPTIONS" xml:space="preserve">
+    <value>Advanced options</value>
+    <comment>Label for the Advanced options text that appears in most gadgets' configuration panels.</comment>
+  </data>
+    <data name="GADGET_DISPLAY_OPTIONS" xml:space="preserve">
+    <value>Display options</value>
+    <comment>Label for the Display options text that appears in most gadgets' configuration panels.</comment>
+  </data>
+  <data name="GADGET_ALL_LIST_VALUES" xml:space="preserve">
+    <value>Display all list values</value>
+  </data>
+  <!--<data name="GADGET_CHART_GRID_LINES" xml:space="preserve">
+    <value>Show grid lines</value>
+  </data>-->
+  <data name="GADGET_CONFIG_TITLE_FREQUENCY" xml:space="preserve">
+    <value>Frequency Properties</value>
+    <comment>The title text used in the config panel for the frequency gadget.</comment>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_WORD_CLOUD" xml:space="preserve">
+    <value>Cloud Properties</value>
+    <comment>The title text used in the config panel for the word cloud gadget.</comment>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_ABERRATION_DETECTION" xml:space="preserve">
+    <value>Aberration Detection Properties</value>
+    <comment>The title text used in the config panel for the aberration detection gadget.</comment>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_COMBINED_FREQUENCY" xml:space="preserve">
+    <value>Combined Frequency Properties</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_MEANS" xml:space="preserve">
+    <value>Means Properties</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_MXN" xml:space="preserve">
+    <value>Crosstabulation Properties</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_CHART" xml:space="preserve">
+    <value>Chart Properties</value>
+  </data>
+  <data name="GADGET_COUNT" xml:space="preserve">
+    <value>{0} gadgets</value>
+    <comment>The gadget counter that shows up in the bottom left corner of the window.</comment>
+  </data>
+  <data name="GADGET_CUSTOM_FILTER" xml:space="preserve">
+    <value>Only showing records matching the following criteria (in addition to canvas filters): {0}</value>
+  </data>
+  <data name="GADGET_DECIMALS_TO_DISPLAY" xml:space="preserve">
+    <value>Decimals to display:</value>
+  </data>
+  <!--<data name="GADGET_CHART_TYPE" xml:space="preserve">
+    <value>Chart Type:</value>
+  </data>-->
+  <!--<data name="GADGET_CHART_SIZE" xml:space="preserve">
+    <value>Chart Size:</value>
+  </data>-->
+  <!--<data name="GADGET_DATE_INTERVAL" xml:space="preserve">
+    <value>Date Interval:</value>
+  </data>-->
+  <!--<data name="GADGET_X_LABEL_ROTATION" xml:space="preserve">
+    <value>x-axis label rotation:</value>
+  </data>-->
+  <!--<data name="GADGET_X_START_VALUE" xml:space="preserve">
+    <value>x-axis start value:</value>
+  </data>-->
+  <!--<data name="GADGET_X_END_VALUE" xml:space="preserve">
+    <value>x-axis end value:</value>
+  </data>-->
+  <!--<data name="GADGET_X_FIELD" xml:space="preserve">
+    <value>X-Axis Field:</value>
+  </data>-->
+  <!--<data name="GADGET_Y_FIELD" xml:space="preserve">
+    <value>Y-Axis Field:</value>
+  </data>-->
+  <!--<data name="GADGET_ONSET_DATE_FIELD" xml:space="preserve">
+    <value>Onset Date Field:</value>
+  </data>-->
+  <!--<data name="GADGET_CASE_STATUS_FIELD" xml:space="preserve">
+    <value>Case Status Field:</value>
+  </data>-->
+  <!--<data name="GADGET_AGG_FUNC" xml:space="preserve">
+    <value>Aggregate Function:</value>
+  </data>-->
+  <!--<data name="GADGET_CHART_VARIABLE" xml:space="preserve">
+    <value>Primary Field:</value>
+  </data>-->
+  <!--<data name="GADGET_CHART_OUTCOME_VARIABLE" xml:space="preserve">
+    <value>Outcome Field:</value>
+  </data>-->
+  <!--<data name="GADGET_CHART_GENERATE" xml:space="preserve">
+    <value>Generate Chart</value>
+  </data>-->
+  <data name="GADGET_INDICATOR_VARIABLE_OPT" xml:space="preserve">
+    <value>Indicator (Optional):</value>
+  </data>
+  <data name="GADGET_INDICATOR_VARIABLES_OPT" xml:space="preserve">
+    <value>Indicators (Optional):</value>
+  </data>
+  <data name="GADGET_COUNT_VARIABLE_OPT" xml:space="preserve">
+    <value>Count (Optional):</value>
+  </data>
+  <data name="GADGET_DATE_VARIABLE" xml:space="preserve">
+    <value>Date:</value>
+  </data>
+  <data name="GADGET_LAG_TIME_DAYS" xml:space="preserve">
+    <value>Lag time (days):</value>
+  </data>
+  <data name="GADGET_THRESHOLD" xml:space="preserve">
+    <value>Threshold (Std. Deviations):</value>
+  </data>
+  <data name="GADGET_DAYS_PRIOR" xml:space="preserve">
+    <value>Process records this many days prior:</value>
+  </data>
+  <data name="GADGET_FREQUENCY_VARIABLE" xml:space="preserve">
+    <value>Frequency of:</value>
+  </data>
+  <data name="GADGET_MEANS_VARIABLE" xml:space="preserve">
+    <value>Means of:</value>
+  </data>
+  <data name="GADGET_GROUP_VARIABLE" xml:space="preserve">
+    <value>Group field:</value>
+  </data>
+  <data name="GADGET_EXPOSURE_VARIABLE" xml:space="preserve">
+    <value>Exposure:</value>
+  </data>
+  <data name="GADGET_OUTCOME_VARIABLE" xml:space="preserve">
+    <value>Outcome:</value>
+  </data>
+  <data name="GADGET_CROSSTAB_VARIABLE" xml:space="preserve">
+    <value>Cross-tabulate by:</value>
+  </data>
+  <data name="GADGET_MAIN_VARIABLE" xml:space="preserve">
+    <value>Main variable:</value>
+  </data>
+  <data name="GADGET_RUN_BUTTON" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="GADGET_2X2_VALUE_REMAPPING_BUTTON" xml:space="preserve">
+    <value>Define 2x2 Value Mappings</value>
+  </data>
+
+  <data name="GADGET_MAX_WIDTH" xml:space="preserve">
+    <value>Max width:</value>
+  </data>
+  <data name="GADGET_MAX_HEIGHT" xml:space="preserve">
+    <value>Max height:</value>
+  </data>
+  <data name="GADGET_WIDTH" xml:space="preserve">
+    <value>Width:</value>
+  </data>
+  <data name="GADGET_HEIGHT" xml:space="preserve">
+    <value>Height:</value>
+  </data>
+  <data name="GADGET_TRUE_VALUE" xml:space="preserve">
+    <value>Value to treat as true:</value>
+  </data>
+
+
+  <data name="GADGET_USE_CONDITIONAL_CELL_SHADING" xml:space="preserve">
+    <value>Conditional cell shading</value>
+  </data>
+  <data name="GADGET_COLOR_GRADIENT" xml:space="preserve">
+    <value>Color Gradient:</value>
+  </data>
+  <data name="GADGET_BREAK_TYPE" xml:space="preserve">
+    <value>Break type:</value>
+  </data>
+  <data name="GADGET_BREAK1" xml:space="preserve">
+    <value>Break 1:</value>
+  </data>
+  <data name="GADGET_BREAK2" xml:space="preserve">
+    <value>Break 2:</value>
+  </data>
+  <data name="GADGET_BREAK3" xml:space="preserve">
+    <value>Break 3:</value>
+  </data>
+  <data name="GADGET_BREAK4" xml:space="preserve">
+    <value>Break 4:</value>
+  </data>
+  <data name="GADGET_BREAK5" xml:space="preserve">
+    <value>Break 5:</value>
+  </data>
+
+  <data name="GADGET_MAX_ROWS_TO_DISPLAY" xml:space="preserve">
+    <value>Maxium rows to display:</value>
+  </data>
+  <data name="GADGET_MAX_PERCENT_BAR_WIDTH" xml:space="preserve">
+    <value>Max width of percent bar:</value>
+  </data>
+
+  <data name="GADGET_PARSE_FIELD" xml:space="preserve">
+    <value>Parse field:</value>
+  </data>
+
+
+  
+
+
+
+
+
+  <data name="GADGET_INCLUDE_MISSING" xml:space="preserve">
+    <value>Include missing values</value>
+  </data>
+  <data name="GADGET_STRATA_SUMMARY_ONLY" xml:space="preserve">
+    <value>Show strata summary only</value>
+  </data>
+  <data name="GADGET_LIST_LABELS" xml:space="preserve">
+    <value>Display list labels</value>
+  </data>
+  <data name="GADGET_OUTCOME_CONTINUOUS" xml:space="preserve">
+    <value>Outcome is continuous</value>
+  </data>
+  <data name="GADGET_ROW_COL_PERCENTS" xml:space="preserve">
+    <value>Row / column percents</value>
+  </data>
+  <data name="GADGET_SMART_2X2" xml:space="preserve">
+    <value>Smart 2x2 table</value>
+  </data>
+  <data name="GADGET_MAX_COL_NAME_LENGTH" xml:space="preserve">
+    <value>Max column name length:</value>
+  </data>
+  <data name="GADGET_DISPLAY_STRATAS_HORIZONTALLY" xml:space="preserve">
+    <value>Display stratas horizontally</value>
+  </data>
+  <data name="GADGET_DISPLAY_2X2_SUMMARY_HORIZONTALLY" xml:space="preserve">
+    <value>Horizontal 2x2 summary</value>
+  </data>
+  <data name="GADGET_DISPLAY_ANOVA" xml:space="preserve">
+    <value>Display ANOVA statistics</value>
+  </data>
+  <data name="GADGET_CENTER" xml:space="preserve">
+    <value>Center horizontally</value>
+  </data>
+  <data name="GADGET_LOAD_ERROR" xml:space="preserve">
+    <value>The 'type' attribute for one of the gadgets in the specified canvas file is not set properly. The loading of this canvas file has been aborted.</value>
+  </data>
+  <data name="GADGET_ERASE_ALL_FROM_CANVAS" xml:space="preserve">
+    <value>All gadgets will be erased from the canvas. Proceed?</value>
+  </data>  
+  <data name="GADGET_MSG_NO_DATA" xml:space="preserve">
+    <value>No data are present in the selected field or fields.</value>
+    <comment>Displayed in the gadget's message panel when the user has told the gadget to show results, but there is nothing to show.</comment>
+  </data>
+  <data name="GADGET_MSG_OPERATION_CANCELLED" xml:space="preserve">
+    <value>Operation cancelled</value>
+    <comment>Displayed in the gadget's message panel when the user has cancelled the processing of a gadget.</comment>
+  </data>
+  <data name="GADGET_OUTPUT_COLUMNS_DISPLAY" xml:space="preserve">
+    <value>Output columns to display:</value>
+  </data>
+  <data name="GADGET_SORT_HI_LOW" xml:space="preserve">
+    <value>Sort high to low</value>
+  </data>
+  <data name="GADGET_SHOW_DENOMINATOR" xml:space="preserve">
+    <value>Show denominator</value>
+  </data>
+  <data name="GADGET_STRATA_VARIABLE" xml:space="preserve">
+    <value>Stratify by:</value>
+  </data>
+  <data name="GADGET_ABERRATIONS_FOUND" xml:space="preserve">
+    <value>Aberrations found:</value>
+  </data>
+  <data name="GADGET_NO_ABERRATIONS_FOUND" xml:space="preserve">
+    <value>No aberrations found.</value>
+  </data>
+  <data name="GADGET_ABERRATION" xml:space="preserve">
+    <value>Aberration</value>
+  </data>
+  <data name="GADGET_ABERRATION_EXPECTED" xml:space="preserve">
+    <value>Expected</value>
+  </data>
+  <data name="GADGET_ABERRATION_ACTUAL" xml:space="preserve">
+    <value>Actual</value>
+  </data>
+  <data name="GADGET_ABERRATION_DATE" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="GADGET_ABERRATION_COUNT" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="GADGET_ABERRATION_DIFF" xml:space="preserve">
+    <value>Difference</value>
+  </data>
+  <data name="GADGET_USE_FIELD_PROMPT" xml:space="preserve">
+    <value>Use field prompt</value>
+  </data>
+  <data name="GADGET_WEIGHT_VARIABLE" xml:space="preserve">
+    <value>Weight:</value>
+  </data>
+  <data name="INSTRUCTIONS" xml:space="preserve">
+    <value>Right-click on canvas to add content.</value>
+  </data>
+  <data name="INSTRUCTIONS_FINISHED_CACHING" xml:space="preserve">
+    <value>Finished caching data locally. Right-click on canvas to add content.</value>
+  </data>
+  <data name="MENU_OPEN" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="MENU_SAVE" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="MENU_SAVE_AS" xml:space="preserve">
+    <value>Save as</value>
+  </data>
+  <data name="MENU_SET_DATA_SOURCE" xml:space="preserve">
+    <value>Set Data Source</value>
+  </data>
+  <data name="NOTIFICATION_CANVAS_SAVE" xml:space="preserve">
+    <value>The current canvas was saved to file {0}.</value>
+  </data>
+  <data name="OUTPUT_SAVED" xml:space="preserve">
+    <value>Output has been saved.</value>
+  </data>
+  <data name="RECORD_COUNT" xml:space="preserve">
+    <value>({0} records)</value>
+  </data>
+  <data name="SAVE_CHANGES" xml:space="preserve">
+    <value>Do you wish to save the changes you made to this dashboard canvas?</value>
+  </data>
+  <data name="SAVE_CHANGES_TO_FILE" xml:space="preserve">
+    <value>Do you wish to save the changes you made to {0}?</value>
+  </data>
+  <data name="TABLES_SINGLE_TABLE_ANALYSIS_HEADER" xml:space="preserve">
+    <value>Single Table Analysis</value>
+  </data>
+  <data name="TABLES_STATISTICAL_TESTS" xml:space="preserve">
+    <value>Statistical Tests</value>
+  </data>
+  <data name="TABLES_ODDS_RISK_PARAMS" xml:space="preserve">
+    <value>Odds- and Risk-based parameters</value>
+  </data>
+  <data name="TABLES_ODDS_RATIO" xml:space="preserve">
+    <value>Odds ratio</value>
+  </data>
+  <data name="TABLES_MLE_ODDS_RATIO" xml:space="preserve">
+    <value>MLE Odds ratio (Mid-P)</value>
+  </data>
+  <data name="TABLES_FISHER_EXACT" xml:space="preserve">
+    <value>Fisher-Exact</value>
+  </data>
+  <data name="TABLES_RISK_RATIO" xml:space="preserve">
+    <value>Risk ratio</value>
+  </data>
+  <data name="TABLES_RISK_DIFFERENCE" xml:space="preserve">
+    <value>Risk difference</value>
+  </data>
+  <data name="TABLES_UNCORRECTED" xml:space="preserve">
+    <value>Uncorrected</value>
+  </data>
+  <data name="TABLES_MH" xml:space="preserve">
+    <value>Mantel-Haenszel</value>
+  </data>
+  <data name="TABLES_CORRECTED" xml:space="preserve">
+    <value>Corrected</value>
+  </data>
+  <data name="TABLES_MIDP_EXACT" xml:space="preserve">
+    <value>Mid-P Exact</value>
+  </data>
+  <data name="TABLES_ESTIMATE" xml:space="preserve">
+    <value>Estimate</value>
+  </data>
+  <data name="TABLES_LOWER" xml:space="preserve">
+    <value>Lower</value>
+  </data>
+  <data name="TABLES_UPPER" xml:space="preserve">
+    <value>Upper</value>
+  </data>
+  <data name="TOOLTIP_SWAP_OUTCOME" xml:space="preserve">
+    <value>Swaps the column positions for the outcome values. For example, if 'F' were on the left and 'T' were on the right, they would be switched.</value>
+  </data>
+  <data name="TOOLTIP_SWAP_EXPOSURE" xml:space="preserve">
+    <value>Swaps the row positions for the exposure values. For example, if 'F' were on the top and 'T' were on the bottom, they would be switched.</value>
+  </data>
+  <data name="TOOLTIP_CLOSE_GADGET" xml:space="preserve">
+    <value>Closes the gadget.</value>
+  </data>
+  <data name="TOOLTIP_COLLAPSE_GADGET" xml:space="preserve">
+    <value>Collapses or expands the gadget's output.</value>
+  </data>
+  <data name="TOOLTIP_GADGET_CONFIG" xml:space="preserve">
+    <value>Opens the gadget configuration panel.</value>
+  </data>
+  <data name="TOOLTIP_GADGET_DATA_FILTERS" xml:space="preserve">
+    <value>Allows the use of custom gadget-specific data filters. Any data filters created for this gadget will be applied in addition to any canvas-wide filters.</value>
+  </data>
+  <data name="TOOLTIP_GADGET_DESC_PANEL" xml:space="preserve">
+    <value>Expands the description panel.</value>
+  </data>
+  <data name="TOOLTIP_MENU_OPEN" xml:space="preserve">
+    <value>Opens an existing Dashboard canvas file.</value>
+  </data>
+  <data name="TOOLTIP_MENU_REFRESH" xml:space="preserve">
+    <value>Updates and refreshes the current data source.</value>
+  </data>
+  <data name="TOOLTIP_MENU_SAVE" xml:space="preserve">
+    <value>Saves the current Dashboard canvas.</value>
+  </data>
+  <data name="TOOLTIP_MENU_SAVE_AS" xml:space="preserve">
+    <value>Saves the current Dashboard canvas to a different file.</value>
+  </data>
+  <data name="TOOLTIP_MENU_SET_DATA_SOURCE" xml:space="preserve">
+    <value>Attaches a data source (Epi Info 7 project, Excel spreadsheet, etc.) to a new, blank Dashboard canvas.</value>
+  </data>
+  
+  <data name="TOOLTIP_MENU_SET_DATA_SOURCE_HEADER" xml:space="preserve">
+    <value>Set Data Source Button</value>
+  </data>
+  <data name="TOOLTIP_MENU_OPEN_HEADER" xml:space="preserve">
+    <value>Open Button</value>
+  </data>
+  <data name="TOOLTIP_MENU_SAVE_HEADER" xml:space="preserve">
+    <value>Save Button</value>
+  </data>
+  <data name="TOOLTIP_MENU_SAVE_AS_HEADER" xml:space="preserve">
+    <value>Save As Button</value>
+  </data>
+  <data name="TOOLTIP_MENU_REFRESH_HEADER" xml:space="preserve">
+    <value>Refresh Button</value>
+  </data>
+  
+  <data name="ERROR_TOO_MANY_VALUES" xml:space="preserve">
+    <value>There are too many distinct values in the variable {0}. The number of distinct
+values is {1} and the limit is {2}.</value>
+  </data>
+  <data name="ERROR_TOO_MANY_STRATA_VALUES" xml:space="preserve">
+    <value>There are too many distinct values in the stratification variable {0}. The number of distinct
+values is {1} and the limit is {2}.</value>
+  </data>
+  <data name="ERROR_TOO_MANY_CROSSTAB_VALUES" xml:space="preserve">
+    <value>There are too many distinct values in the crosstab (outcome) variable {0}. The number of distinct
+values is {1} and the limit is {2}.</value>
+  </data>
+  <data name="ERROR_TOO_MANY_VALUES_COMBINED_FREQ" xml:space="preserve">
+    <value>There are too many distinct values in the crosstab (outcome) variable {0}. The number of distinct
+values is {1} and the limit is {2}.</value>
+  </data>
+  <data name="ERROR_ZERO_VALUES_COMBINED_FREQ_EXT" xml:space="preserve">
+    <value>There are no values on which to run the combined frequency or the variables in the group are not supported for this gadget.</value>
+  </data>
+  <data name="ERROR_ZERO_VALUES_COMBINED_FREQ" xml:space="preserve">
+    <value>There are no values on which to run the combined frequency.</value>
+  </data>
+  <data name="ERROR_TOO_MANY_VALUES_COMBINED_FREQ_EXT" xml:space="preserve">
+    <value>There are too many values in all of the fields in the group {0}.
+The value count is {1} and the limit is {2}. Please use data filters to narrow the number
+of records or select fewer fields for the group.</value>
+  </data>
+  <data name="ERROR_COLUMN_DOESNT_EXIST" xml:space="preserve">
+    <value>The column {0} does not exist in this data set.</value>
+  </data>
+  <data name="ERROR_FILTER_NO_LONGER_VALID" xml:space="preserve">
+    <value>The specified data filter is no longer valid.</value>
+  </data>  
+  <data name="ERROR_FORM_NOT_FOUND_FOR_CANVAS" xml:space="preserve">
+    <value>The form named '{0}' was not found in this project. Please make sure the project you are selecting to use with this canvas file contains the appropriate form.</value>
+  </data>
+  <data name="ERROR_CANVAS_XML_INVALID" xml:space="preserve">
+    <value>Invalid xml input</value>
+  </data>
+  <data name="ERROR_NO_DATA" xml:space="preserve">
+    <value>No data are present in the selected field or fields.</value>
+  </data>
+  <data name="EXPORT_WINDOW_TITLE" xml:space="preserve">
+    <value>Export data</value>
+  </data>
+  <data name="EXPORT_OUTPUT_FORMAT" xml:space="preserve">
+    <value>Output format</value>
+  </data>
+  <data name="EXPORT_CONN_INFO" xml:space="preserve">
+    <value>Connection information</value>
+  </data>
+  <data name="EXPORT_DEST_TABLE" xml:space="preserve">
+    <value>Destination table</value>
+  </data>
+  <data name="EXPORT_FIELDS_TO_EXPORT" xml:space="preserve">
+    <value>Fields to export:</value>
+  </data>
+  <data name="EXPORT_FIELD_COUNT" xml:space="preserve">
+    <value>{0} fields selected</value>
+  </data>
+  <data name="EXPORT_SORT_BY_TAB_ORDER" xml:space="preserve">
+    <value>Sort variables by tab order</value>
+  </data>
+  <data name="EXPORT_BUTTON_EXPORT" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="EXPORT_BUTTON_BROWSE" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="EXPORT_BUTTON_CLOSE" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CMENU_ADD_IMAGE_GADGET" xml:space="preserve">
+    <value>Image gadget</value>
+  </data>
+  <data name="CMENU_ADD_SIMPLE_TEXT_GADGET" xml:space="preserve">
+    <value>Simple text box</value>
+  </data>
+  <data name="DATA_PROCESSING_FINISHED" xml:space="preserve">
+    <value>processing finished</value>
+  </data>
+  <data name="CANVAS_FILTERS_IN_EFFECT" xml:space="preserve">
+    <value>The following canvas filters are in effect: {0}</value>
+  </data>
+  <data name="FILTER_IS_VALID" xml:space="preserve">
+    <value>The filter is valid and is now in effect.</value>
+  </data>
+  <data name="FILTER_IS_INVALID" xml:space="preserve">
+    <value>The filter is not valid and has not been applied. Check the filter's syntax and try again.</value>
+  </data>
+  <data name="REMAPPER_MESSAGE_ALREADY_BOOLEAN" xml:space="preserve">
+    <value>The exposure and outcome are boolean. No remapping is needed.</value>
+  </data>
+  <data name="EXPRESSION_ASSIGN_DESTINATION_FIELD_BLANK" xml:space="preserve">
+    <value>Destination field is blank.</value>
+  </data>
+  <data name="EXPRESSION_ASSIGN_DESTINATION_FIELD_ALREADY_EXISTS" xml:space="preserve">
+    <value>Destination field name already exists as a column in this data set. Please use another name.</value>
+  </data>
+  <data name="EXPRESSION_ASSIGN_DESTINATION_FIELD_ALREADY_EXISTS_AS_RECODED" xml:space="preserve">
+    <value>Destination field name already exists as a defined field with recoded values. Please use another field name.</value>
+  </data>
+  <data name="CREATE_VAR_GROUP_NO_FIELDS_SELECTED" xml:space="preserve">
+    <value>No fields selected.</value>
+  </data>
+  <data name="CREATE_VAR_GROUP_FIELD_ALREADY_EXISTS" xml:space="preserve">
+    <value>A field with this name already exists.</value>
+  </data>
+  <data name="CREATE_VAR_GROUP_NO_NAME_SPECIFIED" xml:space="preserve">
+    <value>No group name has been specified.</value>
+  </data>
+  <data name="CREATE_VAR_GROUP_FIELDS_NOT_FOUND" xml:space="preserve">
+    <value>{0} fields specified in the group were not found and have been excluded.</value>
+  </data>
+  <data name="MAP_SAVED" xml:space="preserve">
+    <value>"Map has been saved.</value>
+  </data>
+  <data name="MAP_IMAGE_SAVED" xml:space="preserve">
+    <value>Map image has been saved.</value>
+  </data>
+  <data name="SAVE_SUCCESSFUL" xml:space="preserve">
+    <value>Save Successful</value>
+  </data>
+</root>

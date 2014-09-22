@@ -1,0 +1,143 @@
+﻿<UserControl x:Class="Epi.WPF.Dashboard.Controls.SingleTableAnalysisPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:dashboard="clr-namespace:Epi.WPF.Dashboard"
+             xmlns:Controls="clr-namespace:Epi.WPF.Dashboard.Controls"
+             Width="Auto"
+             Height="Auto"
+             >
+    <UserControl.Resources>
+        <ResourceDictionary Source="../ResourceDictionary.xaml" />
+    </UserControl.Resources>
+    <Grid Name="grdResults" Width="Auto" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,0" Visibility="Visible" SnapsToDevicePixels="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="15"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="3" Style="{DynamicResource gridCellBorder}" BorderThickness="0,1,0,1">
+            <TextBlock x:Name="tblockSingleTableAnalysis"  Grid.Row="0" FontWeight="Bold" Margin="0,1,0,1" HorizontalAlignment="Center" FontSize="14">Single Table Analysis</TextBlock>
+        </Border>
+
+        <Grid Grid.Row="1" Grid.Column="2" Margin="0,4,0,0" SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="tblockStatisticalTests" Margin="4,2,4,2" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" FontWeight="Bold" HorizontalAlignment="Center">Statistical Tests</TextBlock>
+
+            <TextBlock Margin="4,2,4,2" Grid.Row="1" Grid.Column="1" FontWeight="DemiBold" FontFamily="Pericles, Global User Interface" HorizontalAlignment="Center">X<Run Typography.Variants="Superscript">2</Run></TextBlock>
+            <TextBlock Margin="4,2,4,2" Grid.Row="1" Grid.Column="2" FontWeight="DemiBold" HorizontalAlignment="Center">2 Tailed P</TextBlock>
+
+            <Border BorderThickness="0,0,0,1" BorderBrush="DarkGray" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></Border>
+
+            <TextBlock x:Name="tblockUncLabel" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="2" Grid.Column="0">Uncorrected</TextBlock>
+            <TextBlock x:Name="tblockMHLabel" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="3" Grid.Column="0">Mantel-Haenszel</TextBlock>
+            <TextBlock x:Name="tblockCorLabel" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="4" Grid.Column="0">Corrected</TextBlock>
+
+            <TextBlock Name="txtChiSqUncVal"  Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtChiSqManVal"  Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtChiSqCorVal"  Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right">n/a</TextBlock>
+
+            <TextBlock Name="txtChiSqUncP" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtChiSqManP" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtChiSqCorP" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right">n/a</TextBlock>
+
+
+            <TextBlock Margin="4,2,4,2" Grid.Row="6" Grid.Column="1" FontWeight="DemiBold" HorizontalAlignment="Center">1 Tailed P</TextBlock>
+            <TextBlock Margin="4,2,4,2" Grid.Row="6" Grid.Column="2" FontWeight="DemiBold" HorizontalAlignment="Center">2 Tailed P</TextBlock>
+
+            <Border BorderThickness="0,0,0,1" BorderBrush="DarkGray" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3"></Border>
+
+            <TextBlock x:Name="tblockMidPLabel" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="7" Grid.Column="0">Mid-P Exact</TextBlock>
+            <TextBlock x:Name="tblockFisherExactPLabel" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="8" Grid.Column="0">Fisher Exact</TextBlock>
+
+            <TextBlock Name="txtMidPExact"  Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtFisherExact"  Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Right">n/a</TextBlock>
+
+            <TextBlock Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="7" Grid.Column="2" HorizontalAlignment="Right"></TextBlock>
+            <TextBlock Name="txtFisherExact2P" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="8" Grid.Column="2" HorizontalAlignment="Right">n/a</TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0,4,0,0" SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" x:Name="oddsColumn0" ></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="tblockOddsRiskParams" Margin="4,2,4,2" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" FontWeight="Bold" HorizontalAlignment="Center">Odds- and Risk-based parameters</TextBlock>
+
+            <TextBlock x:Name="tblockEstimate" Margin="4,2,4,2" Grid.Row="1" Grid.Column="1" FontWeight="DemiBold" HorizontalAlignment="Center">Estimate</TextBlock>
+            <TextBlock x:Name="tblockLower" Margin="4,2,4,2" Grid.Row="1" Grid.Column="2" FontWeight="DemiBold" HorizontalAlignment="Center">Lower</TextBlock>
+            <TextBlock x:Name="tblockUpper" Margin="4,2,4,2" Grid.Row="1" Grid.Column="3" FontWeight="DemiBold" HorizontalAlignment="Center">Upper</TextBlock>
+
+            <Border BorderThickness="0,0,0,1" BorderBrush="DarkGray" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"></Border>
+
+            <TextBlock x:Name="tblockOddsRatioLabel" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="2" Grid.Column="0">Odds ratio</TextBlock>
+            <TextBlock x:Name="tblockMLELabel" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="3" Grid.Column="0">MLE Odds ratio (Mid-P)</TextBlock>
+            <TextBlock x:Name="tblockFisherExactLabel" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="4" Grid.Column="0">Fisher-Exact</TextBlock>
+
+            <TextBlock Name="txtOddsRatioEstimate"  Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtMidPEstimate"  Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right"></TextBlock>
+
+            <TextBlock Name="txtOddsRatioLower" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtMidPLower" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtFisherLower" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right">n/a</TextBlock>
+
+            <TextBlock Name="txtOddsRatioUpper" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtMidPUpper" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtFisherUpper" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Right">n/a</TextBlock>
+
+            <TextBlock x:Name="tblockRiskRatioLabel" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="5" Grid.Column="0">Risk ratio</TextBlock>
+            <TextBlock x:Name="tblockRiskDiffLabel" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="6" Grid.Column="0">Risk difference</TextBlock>
+
+            <TextBlock Name="txtRiskRatioEstimate"  Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtRiskDifferenceEstimate"  Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right">n/a</TextBlock>
+
+            <TextBlock Name="txtRiskRatioLower" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtRiskDifferenceLower" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right">n/a</TextBlock>
+
+            <TextBlock Name="txtRiskRatioUpper" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtRiskDifferenceUpper" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="6" Grid.Column="3" HorizontalAlignment="Right">n/a</TextBlock>
+        </Grid>
+    </Grid>
+</UserControl>

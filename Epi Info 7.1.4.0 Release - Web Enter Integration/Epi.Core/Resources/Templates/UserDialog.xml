@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UserDialog DialogType="" Title="" Prompt="" Varname="" DialogResult="" Mask="" VarValue="" DoubleQuote="&quot;">
+  <Controls>
+    <txt1 Visible="" MaxLength="255"></txt1>
+    <mtb1 Visible=""></mtb1>
+    <cmb1 Visible=""> </cmb1>
+    <dtp1 Visible =""></dtp1>
+    <btnYes Visible=""></btnYes>
+    <btnNo Visible=""></btnNo>
+    <btnCancel Visible=""></btnCancel>
+    <btnOk Visible =""></btnOk>
+  </Controls>
+  <ListItems>
+  </ListItems>
+</UserDialog>
+

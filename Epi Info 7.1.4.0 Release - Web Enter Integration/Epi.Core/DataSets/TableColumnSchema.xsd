@@ -1,0 +1,43 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="TableColumnSchema" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="TableColumnSchema" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Columns" msdata:Locale="">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TABLE_CATALOG" type="xs:string" minOccurs="0" />
+              <xs:element name="TABLE_SCHEMA" type="xs:string" minOccurs="0" />
+              <xs:element name="TABLE_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="COLUMN_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="COLUMN_GUID" msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" type="xs:string" minOccurs="0" />
+              <xs:element name="COLUMN_PROPID" type="xs:long" minOccurs="0" />
+              <xs:element name="ORDINAL_POSITION" type="xs:long" minOccurs="0" />
+              <xs:element name="COLUMN_HASDEFAULT" type="xs:boolean" minOccurs="0" />
+              <xs:element name="COLUMN_DEFAULT" type="xs:string" minOccurs="0" />
+              <xs:element name="COLUMN_FLAGS" type="xs:long" minOccurs="0" />
+              <xs:element name="IS_NULLABLE" type="xs:boolean" minOccurs="0" />
+              <xs:element name="DATA_TYPE" type="xs:int" minOccurs="0" />
+              <xs:element name="TYPE_GUID" msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" type="xs:string" minOccurs="0" />
+              <xs:element name="CHARACTER_MAXIMUM_LENGTH" type="xs:long" minOccurs="0" />
+              <xs:element name="CHARACTER_OCTET_LENGTH" type="xs:long" minOccurs="0" />
+              <xs:element name="NUMERIC_PRECISION" type="xs:int" minOccurs="0" />
+              <xs:element name="NUMERIC_SCALE" type="xs:short" minOccurs="0" />
+              <xs:element name="DATETIME_PRECISION" type="xs:long" minOccurs="0" />
+              <xs:element name="CHARACTER_SET_CATALOG" type="xs:string" minOccurs="0" />
+              <xs:element name="CHARACTER_SET_SCHEMA" type="xs:string" minOccurs="0" />
+              <xs:element name="CHARACTER_SET_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="COLLATION_CATALOG" type="xs:string" minOccurs="0" />
+              <xs:element name="COLLATION_SCHEMA" type="xs:string" minOccurs="0" />
+              <xs:element name="COLLATION_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="DOMAIN_CATALOG" type="xs:string" minOccurs="0" />
+              <xs:element name="DOMAIN_SCHEMA" type="xs:string" minOccurs="0" />
+              <xs:element name="DOMAIN_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="DESCRIPTION" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

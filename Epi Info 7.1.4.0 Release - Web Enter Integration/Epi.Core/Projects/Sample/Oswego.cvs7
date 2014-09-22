@@ -1,0 +1,279 @@
+﻿<DashboardCanvas>
+  <dashboardHelper>
+    <projectPath>C:\Epi Info 7\Projects\Sample\Sample.prj</projectPath>
+    <viewName>Oswego</viewName>
+    <advancedDataFilterCondition>
+    </advancedDataFilterCondition>
+    <useAdvancedDataFilterCondition>False</useAdvancedDataFilterCondition>
+    <relatedDataConnections />
+    <dataFilters recordProcessScope="undeleted" />
+    <dashboardRules>
+      <rule ruleType="EpiDashboard.Rules.Rule_Recode">
+        <friendlyRule>Recode the values in AGE to AGE_RECODED</friendlyRule>
+        <sourceColumnName>AGE</sourceColumnName>
+        <sourceColumnType>System.Double</sourceColumnType>
+        <destinationColumnName>AGE_RECODED</destinationColumnName>
+        <destinationColumnType>System.String</destinationColumnType>
+        <tableColumns>3</tableColumns>
+        <elseValue>
+        </elseValue>
+        <shouldUseWildcards>False</shouldUseWildcards>
+        <shouldMaintainSortOrder>True</shouldMaintainSortOrder>
+        <recodeTable>
+          <recodeTableRow>
+            <recodeTableData>LOVALUE</recodeTableData>
+            <recodeTableData>0</recodeTableData>
+            <recodeTableData>LOVALUE - &amp;lt;0</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>0</recodeTableData>
+            <recodeTableData>10</recodeTableData>
+            <recodeTableData>0 to &amp;lt;10</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>10</recodeTableData>
+            <recodeTableData>20</recodeTableData>
+            <recodeTableData>10 to &amp;lt;20</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>20</recodeTableData>
+            <recodeTableData>30</recodeTableData>
+            <recodeTableData>20 to &amp;lt;30</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>30</recodeTableData>
+            <recodeTableData>40</recodeTableData>
+            <recodeTableData>30 to &amp;lt;40</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>40</recodeTableData>
+            <recodeTableData>50</recodeTableData>
+            <recodeTableData>40 to &amp;lt;50</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>50</recodeTableData>
+            <recodeTableData>60</recodeTableData>
+            <recodeTableData>50 to &amp;lt;60</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>60</recodeTableData>
+            <recodeTableData>65</recodeTableData>
+            <recodeTableData>60 to &amp;lt;65</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>65</recodeTableData>
+            <recodeTableData>HIVALUE</recodeTableData>
+            <recodeTableData>65+</recodeTableData>
+          </recodeTableRow>
+        </recodeTable>
+      </rule>
+    </dashboardRules>
+  </dashboardHelper>
+  <Gadgets>
+    <standardTextReportGadget top="36" left="333" width="510" height="43" collapsed="false" gadgetType="EpiDashboard.Gadgets.Reporting.StandardTextControl">
+      <text>Oswego: Outbreak of Gastrointestinal Illness Following a Church Supper; 1940</text>
+      <fontWeight>regular</fontWeight>
+      <fontSize>14</fontSize>
+      <fontStretch>Normal</fontStretch>
+      <fontStyle>Normal</fontStyle>
+      <fontFamily>Global User Interface</fontFamily>
+      <textDecorations>
+      </textDecorations>
+      <foregroundColor>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+      </foregroundColor>
+    </standardTextReportGadget>
+    <pieChartGadget top="125" left="83" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.PieChartGadget" id="90ea3dd7-0e65-4d80-a57d-30ddabb16a56">
+      <mainVariable>AGE_RECODED</mainVariable>
+      <weightVariable>
+      </weightVariable>
+      <crosstabVariable>
+      </crosstabVariable>
+      <height>333</height>
+      <width>533</width>
+      <sort>
+      </sort>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <includeMissing>False</includeMissing>
+      <customHeading>Pie Chart of Age Group</customHeading>
+      <customDescription>Ages grouped by 10 year intervals.</customDescription>
+      <customCaption>
+      </customCaption>
+      <showAnnotations>True</showAnnotations>
+      <showAnnotationLabel>True</showAnnotationLabel>
+      <showAnnotationValue>True</showAnnotationValue>
+      <showAnnotationPercent>True</showAnnotationPercent>
+      <annotationPercent>20</annotationPercent>
+      <chartKind>0</chartKind>
+      <palette>12</palette>
+      <chartTitle>
+      </chartTitle>
+      <chartSubTitle>
+      </chartSubTitle>
+      <showLegend>True</showLegend>
+      <showLegendBorder>False</showLegendBorder>
+      <showLegendVarNames>True</showLegendVarNames>
+      <legendFontSize>12</legendFontSize>
+    </pieChartGadget>
+    <frequencyGadget top="125" left="641" collapsed="False" gadgetType="EpiDashboard.FrequencyControl" id="c8d5e886-86fa-4944-92d0-aa44b4290ca2">
+      <mainVariable>AGE_RECODED</mainVariable>
+      <weightVariable>
+      </weightVariable>
+      <sort>
+      </sort>
+      <allValues>False</allValues>
+      <precision>2</precision>
+      <showListLabels>False</showListLabels>
+      <useFieldPrompts>True</useFieldPrompts>
+      <columnsToShow>1,2,3,4,5,6</columnsToShow>
+      <includeMissing>False</includeMissing>
+      <customHeading>Frequency of Age Groups</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <anchorLeft>90ea3dd7-0e65-4d80-a57d-30ddabb16a56</anchorLeft>
+      <dataFilters recordProcessScope="undeleted" />
+    </frequencyGadget>
+    <histogramChartGadget top="538" left="83" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.HistogramChartGadget" id="6187fece-6808-4256-8a4d-0de33ef89edd">
+      <mainVariable>DATEONSET</mainVariable>
+      <weightVariable>
+      </weightVariable>
+      <crosstabVariable>
+      </crosstabVariable>
+      <height>500</height>
+      <width>800</width>
+      <sort>
+      </sort>
+      <allValues>False</allValues>
+      <includeMissing>False</includeMissing>
+      <customHeading>Epi Curve Chart</customHeading>
+      <customDescription>This chart shows the count of illnesses by Date of Onset.</customDescription>
+      <customCaption>
+      </customCaption>
+      <useRefValues>True</useRefValues>
+      <showAnnotations>False</showAnnotations>
+      <step>1</step>
+      <barSpace>1</barSpace>
+      <palette>12</palette>
+      <barType>0</barType>
+      <yAxisLabel>
+      </yAxisLabel>
+      <xAxisLabelType>3</xAxisLabelType>
+      <xAxisLabel>
+      </xAxisLabel>
+      <xAxisAngle>-45</xAxisAngle>
+      <chartTitle>
+      </chartTitle>
+      <chartSubTitle>
+      </chartSubTitle>
+      <showLegend>False</showLegend>
+      <showLegendBorder>False</showLegendBorder>
+      <showLegendVarNames>True</showLegendVarNames>
+      <legendFontSize>12</legendFontSize>
+      <anchorTop>90ea3dd7-0e65-4d80-a57d-30ddabb16a56</anchorTop>
+    </histogramChartGadget>
+    <frequencyGadget top="1118" left="83" collapsed="False" gadgetType="EpiDashboard.CrosstabControl" id="da031d24-5500-43f1-ac64-50d9da4cc3a8">
+      <mainVariable>AllFoods</mainVariable>
+      <crosstabVariable>ILL</crosstabVariable>
+      <weightVariable>
+      </weightVariable>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <showConfLimits>True</showConfLimits>
+      <showCumulativePercent>True</showCumulativePercent>
+      <includeMissing>False</includeMissing>
+      <showStrataSummaryOnly>False</showStrataSummaryOnly>
+      <treatOutcomeAsContinuous>False</treatOutcomeAsContinuous>
+      <customHeading>Relative Risk Chart - All Foods Consumed</customHeading>
+      <customDescription>Using Epi Info 7, a relative risk chart was created using the 'All Foods' group variable on the Oswego investigation questionnaire. The chart was sorted by Risk Ratio, with the item having the highest risk ratio placed first in the list. Vanilla ice cream was shown to have a risk ratio of over 5 and an odds ratio of over 23, far above all other food items.</customDescription>
+      <customCaption>
+      </customCaption>
+      <layoutMode>vertical</layoutMode>
+      <rowColPercents>True</rowColPercents>
+      <showHeatMap>False</showHeatMap>
+      <breakType>0</breakType>
+      <break1>0</break1>
+      <break2>20</break2>
+      <break3>40</break3>
+      <break4>60</break4>
+      <break5>80</break5>
+      <startColor>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+      </startColor>
+      <endColor>
+        <red>252</red>
+        <green>90</green>
+        <blue>84</blue>
+      </endColor>
+      <anchorTop>6187fece-6808-4256-8a4d-0de33ef89edd</anchorTop>
+      <dataFilters recordProcessScope="undeleted" />
+    </frequencyGadget>
+    <frequencyGadget top="5322" left="83" collapsed="False" gadgetType="EpiDashboard.CrosstabControl" id="11700651-b6cc-4eec-943d-8067efbea23d">
+      <mainVariable>VANILLA</mainVariable>
+      <crosstabVariable>ILL</crosstabVariable>
+      <weightVariable>
+      </weightVariable>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <showConfLimits>True</showConfLimits>
+      <showCumulativePercent>True</showCumulativePercent>
+      <includeMissing>False</includeMissing>
+      <showStrataSummaryOnly>False</showStrataSummaryOnly>
+      <treatOutcomeAsContinuous>False</treatOutcomeAsContinuous>
+      <customHeading>Two by Two Table - Vanilla by Ill</customHeading>
+      <customDescription>Additional statistics were generated using whether or not the patient ate vanilla ice cream (Vanilla) by whether or not the patient became ill (ILL). The results are shown below.</customDescription>
+      <customCaption>
+      </customCaption>
+      <layoutMode>vertical</layoutMode>
+      <rowColPercents>True</rowColPercents>
+      <showHeatMap>False</showHeatMap>
+      <breakType>0</breakType>
+      <break1>0</break1>
+      <break2>20</break2>
+      <break3>40</break3>
+      <break4>60</break4>
+      <break5>80</break5>
+      <startColor>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+      </startColor>
+      <endColor>
+        <red>252</red>
+        <green>90</green>
+        <blue>84</blue>
+      </endColor>
+      <anchorTop>da031d24-5500-43f1-ac64-50d9da4cc3a8</anchorTop>
+      <dataFilters recordProcessScope="undeleted" />
+    </frequencyGadget>
+  </Gadgets>
+  <OutputSettings>
+    <showCanvasSummaryInfo>False</showCanvasSummaryInfo>
+    <showGadgetHeadings>True</showGadgetHeadings>
+    <showGadgetSettings>False</showGadgetSettings>
+    <useAlternatingColors>False</useAlternatingColors>
+    <tableFontSize>13</tableFontSize>
+    <customHeading>Oswego Outbreak Investigation</customHeading>
+    <customSummary>On April 19, 1940, the local health officer in the village of Lycoming, Oswego County, New York, reported the occurrence of an outbreak of acute gastrointestinal illness to the District Health Officer in Syracuse.  Dr. A. M. Rubin, epidemiologist-in-training, was assigned to conduct an investigation. 
+
+When Dr. Rubin arrived in the field, he learned from the health officer that all persons known to be ill had attended a church supper held on the  previous evening, April 18.  Family members who did not attend the church supper did not become ill.  Accordingly, Dr. Rubin focused the investigation on the supper.  He completed Interviews with 75 of the 80 persons known to have attended, collecting information about the occurrence and time of onset of symptoms, and foods consumed.  Of the 75 persons interviewed, 46 persons reported gastrointestinal illness. The results of the investigation are shown below.</customSummary>
+    <customConclusion>Conclusions:  An attack of gastroenteritis occurred following a church supper at Lycoming. The cause of the outbreak was contaminated vanilla ice cream.  The method of contamination of ice cream is not clearly understood.  Whether
+the positive Staphylococcus nose and throat cultures occurring in the Petrie family had anything to do with the contamination is a matter of conjecture. Reference: http://www.cdc.gov/EIS/casestudies/xoswego.401-303.student.pdf</customConclusion>
+    <customTableFontFamily>
+    </customTableFontFamily>
+    <canvasHeight>8000</canvasHeight>
+    <sortGadgets>True</sortGadgets>
+  </OutputSettings>
+  <CanvasSettings>
+    <editMode>True</editMode>
+    <layoutMode>free</layoutMode>
+  </CanvasSettings>
+</DashboardCanvas>

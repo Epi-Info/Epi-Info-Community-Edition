@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"                    
+                    xmlns:vsm ="clr-namespace:System.Windows;assembly=PresentationFramework"
+    >    
+    <SolidColorBrush x:Key="windowTextColor" Color="#686868" />
+    <SolidColorBrush x:Key="windowButtonColor" Color="#686868" />
+    <SolidColorBrush x:Key="windowBorderColor" Color="#D5D5D5" />
+
+    <SolidColorBrush x:Key="menuBarBackground" Color="White"></SolidColorBrush>
+    <SolidColorBrush x:Key="statusBarBackground" Color="#3567BB"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="windowDarkColor" Color="#3567BB"></SolidColorBrush>
+    <SolidColorBrush x:Key="windowDarkHighlightedColor" Color="#5885CF"></SolidColorBrush>
+    <SolidColorBrush x:Key="windowDarkSelectedColor" Color="#3058A0"></SolidColorBrush>
+
+    <ControlTemplate x:Key="TabItem">
+        
+    </ControlTemplate>
+
+</ResourceDictionary>  
+    

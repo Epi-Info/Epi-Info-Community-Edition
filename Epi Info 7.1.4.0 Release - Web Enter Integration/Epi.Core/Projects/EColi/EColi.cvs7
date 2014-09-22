@@ -1,0 +1,253 @@
+﻿<DashboardCanvas>
+  <dashboardHelper>
+    <projectPath>C:\Epi Info 7\Projects\EColi\EColi.prj</projectPath>
+    <viewName>FoodHistory</viewName>
+    <advancedDataFilterCondition>
+    </advancedDataFilterCondition>
+    <useAdvancedDataFilterCondition>False</useAdvancedDataFilterCondition>
+    <relatedDataConnections />
+    <dataFilters recordProcessScope="undeleted" />
+    <dashboardRules>
+      <rule ruleType="EpiDashboard.Rules.Rule_Recode">
+        <friendlyRule>Recode the values in Age to AgeGroup</friendlyRule>
+        <sourceColumnName>Age</sourceColumnName>
+        <sourceColumnType>System.Single</sourceColumnType>
+        <destinationColumnName>AgeGroup</destinationColumnName>
+        <destinationColumnType>System.String</destinationColumnType>
+        <tableColumns>3</tableColumns>
+        <elseValue>
+        </elseValue>
+        <shouldUseWildcards>False</shouldUseWildcards>
+        <shouldMaintainSortOrder>True</shouldMaintainSortOrder>
+        <recodeTable>
+          <recodeTableRow>
+            <recodeTableData>LOVALUE</recodeTableData>
+            <recodeTableData>0</recodeTableData>
+            <recodeTableData>LOVALUE - &amp;lt;0</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>0</recodeTableData>
+            <recodeTableData>10</recodeTableData>
+            <recodeTableData>0 to &amp;lt;10</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>10</recodeTableData>
+            <recodeTableData>20</recodeTableData>
+            <recodeTableData>10 to &amp;lt;20</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>20</recodeTableData>
+            <recodeTableData>30</recodeTableData>
+            <recodeTableData>20 to &amp;lt;30</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>30</recodeTableData>
+            <recodeTableData>40</recodeTableData>
+            <recodeTableData>30 to &amp;lt;40</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>40</recodeTableData>
+            <recodeTableData>50</recodeTableData>
+            <recodeTableData>40 to &amp;lt;50</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>50</recodeTableData>
+            <recodeTableData>60</recodeTableData>
+            <recodeTableData>50 to &amp;lt;60</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>60</recodeTableData>
+            <recodeTableData>65</recodeTableData>
+            <recodeTableData>60 to &amp;lt;65</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>65</recodeTableData>
+            <recodeTableData>HIVALUE</recodeTableData>
+            <recodeTableData>65+</recodeTableData>
+          </recodeTableRow>
+        </recodeTable>
+      </rule>
+    </dashboardRules>
+  </dashboardHelper>
+  <Gadgets>
+    <standardTextReportGadget top="22" left="379" width="451" height="43" collapsed="false" gadgetType="EpiDashboard.Gadgets.Reporting.StandardTextControl">
+      <text>Outbreak Investigation:  Food History Leading to Outbreak of E. coli </text>
+      <fontWeight>regular</fontWeight>
+      <fontSize>14</fontSize>
+      <fontStretch>Normal</fontStretch>
+      <fontStyle>Normal</fontStyle>
+      <fontFamily>Global User Interface</fontFamily>
+      <textDecorations>
+      </textDecorations>
+      <foregroundColor>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+      </foregroundColor>
+    </standardTextReportGadget>
+    <pieChartGadget top="101" left="76" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.PieChartGadget" id="7957a7e2-bc31-4579-8164-69168bdfdd21">
+      <mainVariable>AgeGroup</mainVariable>
+      <weightVariable>
+      </weightVariable>
+      <crosstabVariable>
+      </crosstabVariable>
+      <height>333</height>
+      <width>533</width>
+      <sort>
+      </sort>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <includeMissing>False</includeMissing>
+      <customHeading>Pie Chart</customHeading>
+      <customDescription>Ages grouped into ten year intervals.</customDescription>
+      <customCaption>
+      </customCaption>
+      <showAnnotations>True</showAnnotations>
+      <showAnnotationLabel>True</showAnnotationLabel>
+      <showAnnotationValue>True</showAnnotationValue>
+      <showAnnotationPercent>True</showAnnotationPercent>
+      <annotationPercent>20</annotationPercent>
+      <chartKind>0</chartKind>
+      <palette>12</palette>
+      <chartTitle>Age Groups</chartTitle>
+      <chartSubTitle>
+      </chartSubTitle>
+      <showLegend>True</showLegend>
+      <showLegendBorder>False</showLegendBorder>
+      <showLegendVarNames>True</showLegendVarNames>
+      <legendFontSize>12</legendFontSize>
+    </pieChartGadget>
+    <frequencyGadget top="101" left="634" collapsed="False" gadgetType="EpiDashboard.FrequencyControl" id="3974a998-9686-4554-830d-370f581cc95d">
+      <mainVariable>ILL</mainVariable>
+      <strataVariable>Sex</strataVariable>
+      <weightVariable>
+      </weightVariable>
+      <sort>
+      </sort>
+      <allValues>False</allValues>
+      <precision>2</precision>
+      <showListLabels>False</showListLabels>
+      <useFieldPrompts>True</useFieldPrompts>
+      <columnsToShow>1,2,3,4,5,6</columnsToShow>
+      <includeMissing>False</includeMissing>
+      <customHeading>Frequency</customHeading>
+      <customDescription>Frequency of illness (Yes or No) stratified by sex (F-Female or M-Male).</customDescription>
+      <customCaption>
+      </customCaption>
+      <anchorLeft>7957a7e2-bc31-4579-8164-69168bdfdd21</anchorLeft>
+      <dataFilters recordProcessScope="undeleted" />
+    </frequencyGadget>
+    <histogramChartGadget top="542" left="76" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.HistogramChartGadget" id="a11711b2-155b-4d44-a423-e504c7d762c8">
+      <mainVariable>OnsetDate</mainVariable>
+      <strataVariable>Sex</strataVariable>
+      <weightVariable>
+      </weightVariable>
+      <crosstabVariable>
+      </crosstabVariable>
+      <height>500</height>
+      <width>800</width>
+      <sort>
+      </sort>
+      <allValues>False</allValues>
+      <includeMissing>False</includeMissing>
+      <customHeading>Epi Curve Chart</customHeading>
+      <customDescription>Epi Curve chart showing the count of cases by onset date.</customDescription>
+      <customCaption>
+      </customCaption>
+      <useRefValues>True</useRefValues>
+      <showAnnotations>False</showAnnotations>
+      <step>1</step>
+      <barSpace>1</barSpace>
+      <palette>12</palette>
+      <barType>0</barType>
+      <yAxisLabel>Case Count</yAxisLabel>
+      <xAxisLabelType>3</xAxisLabelType>
+      <xAxisLabel>Day</xAxisLabel>
+      <xAxisAngle>-45</xAxisAngle>
+      <chartTitle>E. Coli Outbreak</chartTitle>
+      <chartSubTitle>
+      </chartSubTitle>
+      <showLegend>False</showLegend>
+      <showLegendBorder>False</showLegendBorder>
+      <showLegendVarNames>True</showLegendVarNames>
+      <legendFontSize>12</legendFontSize>
+      <anchorTop>7957a7e2-bc31-4579-8164-69168bdfdd21</anchorTop>
+    </histogramChartGadget>
+    <meansGadget top="1150" left="76" collapsed="False" gadgetType="EpiDashboard.MeansControl" id="b0b7f373-549a-431f-9c91-a0a73437c636">
+      <mainVariable>FeverTemp</mainVariable>
+      <weightVariable>
+      </weightVariable>
+      <crosstabVariable>Sex</crosstabVariable>
+      <columnsToShow>1,2,3,4,5,6,7,8,9,10,11</columnsToShow>
+      <precision>4</precision>
+      <showANOVA>True</showANOVA>
+      <customHeading>Means</customHeading>
+      <customDescription>Means of fever temperature cross-tabulated by sex.</customDescription>
+      <customCaption>
+      </customCaption>
+      <anchorTop>a11711b2-155b-4d44-a423-e504c7d762c8</anchorTop>
+      <dataFilters recordProcessScope="undeleted" />
+    </meansGadget>
+    <frequencyGadget top="2028" left="76" collapsed="False" gadgetType="EpiDashboard.CrosstabControl" id="948bb4b1-74ff-4182-aade-7d379365670e">
+      <mainVariable>FoodsEaten</mainVariable>
+      <crosstabVariable>ILL</crosstabVariable>
+      <weightVariable>
+      </weightVariable>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <showConfLimits>True</showConfLimits>
+      <showCumulativePercent>True</showCumulativePercent>
+      <includeMissing>False</includeMissing>
+      <showStrataSummaryOnly>False</showStrataSummaryOnly>
+      <treatOutcomeAsContinuous>False</treatOutcomeAsContinuous>
+      <customHeading>Crosstabulation (MxN, 2x2)</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <layoutMode>vertical</layoutMode>
+      <rowColPercents>True</rowColPercents>
+      <showHeatMap>False</showHeatMap>
+      <breakType>0</breakType>
+      <break1>0</break1>
+      <break2>20</break2>
+      <break3>40</break3>
+      <break4>60</break4>
+      <break5>80</break5>
+      <startColor>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+      </startColor>
+      <endColor>
+        <red>252</red>
+        <green>90</green>
+        <blue>84</blue>
+      </endColor>
+      <anchorTop>b0b7f373-549a-431f-9c91-a0a73437c636</anchorTop>
+      <dataFilters recordProcessScope="undeleted" />
+    </frequencyGadget>
+  </Gadgets>
+  <OutputSettings>
+    <showCanvasSummaryInfo>True</showCanvasSummaryInfo>
+    <showGadgetHeadings>True</showGadgetHeadings>
+    <showGadgetSettings>True</showGadgetSettings>
+    <useAlternatingColors>False</useAlternatingColors>
+    <tableFontSize>13</tableFontSize>
+    <customHeading>
+    </customHeading>
+    <customSummary>
+    </customSummary>
+    <customConclusion>
+    </customConclusion>
+    <customTableFontFamily>
+    </customTableFontFamily>
+    <canvasHeight>8000</canvasHeight>
+    <sortGadgets>True</sortGadgets>
+  </OutputSettings>
+  <CanvasSettings>
+    <editMode>True</editMode>
+    <layoutMode>free</layoutMode>
+  </CanvasSettings>
+</DashboardCanvas>

@@ -1,0 +1,351 @@
+﻿<ChartGadgets:ChartGadgetBase x:Class="EpiDashboard.Gadgets.Charting.HistogramChartGadget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:EpiDashboard="clr-namespace:EpiDashboard"
+             xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+             xmlns:ChartGadgets="clr-namespace:EpiDashboard.Gadgets.Charting"
+             xmlns:charting="clr-namespace:ComponentArt.Win.DataVisualization.Charting;assembly=ComponentArt.Win.DataVisualization.Charting"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="600"
+                         SnapsToDevicePixels="True"
+             Style="{DynamicResource gadgetBaseStyle}" MouseRightButtonUp="ChartGadgetBase_MouseRightButtonUp">
+    <EpiDashboard:GadgetBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </EpiDashboard:GadgetBase.Resources>
+    <Grid>
+        <Border Name="borderAll" Style="{DynamicResource mainGadgetBorder}" Background="White" >
+            <Border.ContextMenu>
+                <ContextMenu x:Name="gadgetContextMenu">
+                    <MenuItem x:Name="mnuCopy" Header="Copy all chart data to clipboard"/>
+                    <MenuItem x:Name="mnuSendDataToHTML" Header="Send to web browser" />
+                    <Separator x:Name="separatorCurrentChart" />
+                    <MenuItem x:Name="mnuCurrentChart" StaysOpenOnClick="True" Header="Selected chart:" Background="LightGray"/>
+                    <MenuItem x:Name="mnuSaveSelectedChartAsImage" Header="Save chart as image..." Click="mnuSaveSelectedChartAsImage_Click" />
+                    <MenuItem x:Name="mnuCopySelectedChartImage" Header="Copy chart image to clipboard" Click="mnuCopySelectedChartImage_Click" />
+                    <MenuItem x:Name="mnuCopySelectedChartData" Header="Copy chart data to clipboard" Click="mnuCopySelectedChartData_Click" />
+                    <Separator/>
+                    <MenuItem x:Name="mnuSendToBack" Header="Send gadget to back"/>
+                    <MenuItem x:Name="mnuClose" Header="Close this gadget"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+
+            <Grid x:Name="grdMain">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" Text="Epi Curve Chart" />
+                <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel" Grid.Row="2" Text="" />
+                <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
+
+                <Controls:GadgetInfoPanel Grid.Row="4" Visibility="Collapsed" Margin="4" x:Name="infoPanel"></Controls:GadgetInfoPanel>
+                <StackPanel Grid.Row="7" x:Name="panelMain" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <!--<Grid x:Name="gridChartLayoutRoot">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock x:Name="tblockChartTitle" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Margin="0, 6, 0, 6" Visibility="Collapsed" />
+
+                        <charting:XYChart x:Name="xyChart" XPath="S" Grid.Row="0" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated">
+                        <charting:XYChart.XAxisArea>
+                                <charting:AxisScrollBar AxisId="XAxis" x:Name="XScrollBar"/>
+                                <charting:AxisCoordinates x:Name="xAxisCoordinates" Angle="0">
+                                    <charting:DateTimeCoordinates x:Name="dateTimeCoordinates" LabelAtMidPoint="True" />
+                            </charting:AxisCoordinates>
+
+                                <charting:ChartLabel x:Name="labelXAxis">
+                                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="tblockXAxisLabel" FontWeight="DemiBold" Visibility="Collapsed" TextAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                </charting:ChartLabel>
+                            </charting:XYChart.XAxisArea>
+
+                            <charting:XYChart.YAxisArea>
+
+                                <charting:AxisCoordinates x:Name="YAxisCoordinates">
+                                </charting:AxisCoordinates>
+
+                                <charting:ChartLabel x:Name="labelYAxis" Orientation="Vertical" >
+                                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="tblockYAxisLabel" FontWeight="DemiBold" Visibility="Collapsed" TextAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                </charting:ChartLabel>
+                            </charting:XYChart.YAxisArea>
+
+                            <charting:XYChart.Y2AxisArea>
+
+                                <charting:AxisCoordinates AxisId="RateAxis" x:Name="Y2AxisCoordinates">
+                                </charting:AxisCoordinates>
+
+                                <charting:ChartLabel x:Name="labelY2Axis" Orientation="Vertical" >
+                                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="tblockY2AxisLabel" FontWeight="DemiBold" Visibility="Collapsed" TextAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                </charting:ChartLabel>
+                            </charting:XYChart.Y2AxisArea>
+                            
+                            <charting:XYChart.Axes>
+                            <charting:Axis Id="YAxis" x:Name="yAxis" UseReferenceValue="true" />
+                        </charting:XYChart.Axes>
+                            <charting:BarSeries x:Name="series0" Id="S0" YPath="Y" SeriesPath="X" ShowPointAnnotations="True" BarKind="Rectangle" />
+                            <charting:LineSeries x:Name="series1" Id="S1" YPath="Y2" SeriesPath="X" YAxisId="RateAxis" ShowPointAnnotations="True" Visibility="Collapsed" />
+                        </charting:XYChart>
+                    </Grid>-->
+                </StackPanel>
+                <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{StaticResource gadgetWaitPanelStyle}" />
+
+                <StackPanel Grid.Row="1" Grid.RowSpan="7" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" >
+                    <Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" >
+                        <Rectangle Style="{DynamicResource rectangleConfigOuter}" />
+                        <Rectangle Style="{DynamicResource rectangleConfigInner}" />
+
+                        <Path x:Name="pathTriangle" 
+                              Margin="0,-2,90,0"
+                              Data="M 5 0 L 10 10 0 10 Z" Fill="{DynamicResource gadgetBackgroundBrush}" IsHitTestVisible="False" HorizontalAlignment="Right" VerticalAlignment="Top" Height="7" />
+
+                        <StackPanel Orientation="Vertical" Margin="25, 10, 25, 25" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                            <!--<TextBlock x:Name="ConfigExpandedTitle" HorizontalAlignment="Center" TextAlignment="Center" Text="Settings" Margin="5" FontSize="13" FontWeight="Bold" />-->
+                            <TextBlock x:Name="tblockMainVariable" HorizontalAlignment="Left" TextAlignment="Center" Text="Main variable:" Margin="0,5,0,0"  />
+                            <ComboBox x:Name="cmbField" Width="140" HorizontalAlignment="Left" SelectedIndex="0" />
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="5"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock x:Name="tblockWidth" HorizontalAlignment="Left" TextAlignment="Center" Text="Width:" Margin="0,5,0,0"  />
+                                    <TextBox x:Name="txtWidth" Text="800" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock x:Name="tblockHeight" HorizontalAlignment="Left" TextAlignment="Center" Text="Height:" Margin="0,5,0,0"  />
+                                    <TextBox x:Name="txtHeight" Text="500" />
+                                </StackPanel>
+                            </Grid>
+
+                            <Expander Margin="0, 5, 0, 0" x:Name="expanderAdvancedOptions">
+                                <Expander.Header>
+                                    <TextBlock>Advanced options</TextBlock>
+                                </Expander.Header>
+                                <Border Style="{StaticResource configGroupBorderStyle}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="15"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel x:Name="panelAdvanced1" Visibility="Visible">
+                                            <TextBlock x:Name="tblockWeightVariable" HorizontalAlignment="Left" TextAlignment="Center" Text="Weight:" Margin="0,5,0,0"  />
+                                            <ComboBox x:Name="cmbFieldWeight" Width="140" HorizontalAlignment="Left" SelectedIndex="0" />
+
+                                            <TextBlock x:Name="tblockCrosstabVariable" HorizontalAlignment="Left" TextAlignment="Center" Text="One graph for each value of:" Margin="0,5,0,0"  />
+                                            <ComboBox x:Name="cmbFieldCrosstab" Width="140" HorizontalAlignment="Left" SelectedIndex="0" />
+
+                                            <TextBlock x:Name="tblockStrataVariable" HorizontalAlignment="Left" TextAlignment="Center" Text="Stratify by:" Margin="0,5,0,0"  />
+                                            <ListBox x:Name="listboxFieldStrata" Width="180" Height="120" SelectionMode="Extended" HorizontalAlignment="Left" />
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+                            </Expander>
+
+                            <Expander Margin="0, 5, 0, 0" x:Name="expanderDisplayOptions">
+                                <Expander.Header>
+                                    <TextBlock>Display options</TextBlock>
+                                </Expander.Header>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="15"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="15"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Style="{StaticResource configGroupBorderStyle}" Grid.Column="0">
+                                        <StackPanel Grid.Column="0" x:Name="panelDisplay1">
+                                            <Label x:Name="lblColorsStyles" FontWeight="Bold">Colors and styles</Label>
+
+                                            <CheckBox x:Name="checkboxUseRefValues" Margin="0,5,0,0" Content="Use reference values" HorizontalAlignment="Left" IsChecked="True" />
+                                            <CheckBox x:Name="checkboxAnnotations" Margin="0,5,0,0" Content="Show annotations" HorizontalAlignment="Left" IsChecked="False" />
+                                            <CheckBox x:Name="checkboxGridLines" Margin="0,5,0,0" Content="Show grid lines" HorizontalAlignment="Left" IsChecked="True" />
+
+                                            <TextBlock x:Name="tblockBarSpacing" HorizontalAlignment="Left" TextAlignment="Center" Text="Space between bars:" Margin="0,5,0,0"  />
+                                            <ComboBox x:Name="cmbBarSpacing" Width="140" HorizontalAlignment="Left" SelectedIndex="1">
+                                                <ComboBox.Items>
+                                                    <ComboBoxItem>Default</ComboBoxItem>
+                                                    <ComboBoxItem>None</ComboBoxItem>
+                                                    <ComboBoxItem>Small</ComboBoxItem>
+                                                    <ComboBoxItem>Medium</ComboBoxItem>
+                                                    <ComboBoxItem>Large</ComboBoxItem>
+                                                </ComboBox.Items>
+                                            </ComboBox>
+
+                                            <TextBlock x:Name="tblockPalette" HorizontalAlignment="Left" TextAlignment="Center" Text="Color palette:" Margin="0,5,0,0"  />
+                                            <ComboBox x:Name="cmbPalette" Width="140" HorizontalAlignment="Left" SelectedIndex="12">
+                                                <ComboBox.Items>
+                                                    <ComboBoxItem>Atlantic</ComboBoxItem>
+                                                    <ComboBoxItem>Breeze</ComboBoxItem>
+                                                    <ComboBoxItem>ComponentArt</ComboBoxItem>
+                                                    <ComboBoxItem>Deep</ComboBoxItem>
+                                                    <ComboBoxItem>Earth</ComboBoxItem>
+                                                    <ComboBoxItem>Evergreen</ComboBoxItem>
+                                                    <ComboBoxItem>Heatwave</ComboBoxItem>
+                                                    <ComboBoxItem>Montreal</ComboBoxItem>
+                                                    <ComboBoxItem>Pastel</ComboBoxItem>
+                                                    <ComboBoxItem>Renaissance</ComboBoxItem>
+                                                    <ComboBoxItem>SharePoint</ComboBoxItem>
+                                                    <ComboBoxItem>Study</ComboBoxItem>
+                                                    <ComboBoxItem>VibrantA</ComboBoxItem>
+                                                    <ComboBoxItem>VibrantB</ComboBoxItem>
+                                                    <ComboBoxItem>VibrantC</ComboBoxItem>
+                                                </ComboBox.Items>
+                                            </ComboBox>
+
+                                            <TextBlock x:Name="tblockBarType" HorizontalAlignment="Left" TextAlignment="Center" Text="Bar type:" Margin="0,5,0,0"  />
+                                            <ComboBox x:Name="cmbBarType" Width="140" HorizontalAlignment="Left" SelectedIndex="0">
+                                                <ComboBox.Items>
+                                                    <ComboBoxItem>Block</ComboBoxItem>
+                                                    <ComboBoxItem>Cylinder</ComboBoxItem>
+                                                    <ComboBoxItem>Rectangle</ComboBoxItem>
+                                                    <ComboBoxItem>RoundedBlock</ComboBoxItem>
+                                                </ComboBox.Items>
+                                            </ComboBox>
+
+                                            <Grid Margin="0,5,0,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width=".2*"/>
+                                                    <ColumnDefinition Width="5"/>
+                                                    <ColumnDefinition Width=".8*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+
+                                                <TextBlock x:Name="tblockStep" Grid.Row="0" HorizontalAlignment="Left" TextAlignment="Center" Text="Step:" />
+                                                <TextBox x:Name="txtStep" Grid.Row="1" HorizontalAlignment="Stretch" Text="1" />
+
+                                                <TextBlock x:Name="tblockInterval" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" TextAlignment="Center" Text="Interval:" />
+                                                <ComboBox x:Name="cmbInterval" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" SelectedIndex="2">
+                                                    <ComboBox.Items>
+                                                        <ComboBoxItem>Minute</ComboBoxItem>
+                                                        <ComboBoxItem>Hour</ComboBoxItem>
+                                                        <ComboBoxItem>Day</ComboBoxItem>
+                                                        <ComboBoxItem Visibility="Collapsed">Epi Week (Sunday)</ComboBoxItem>
+                                                        <ComboBoxItem Visibility="Collapsed">Epi Week (Monday)</ComboBoxItem>
+                                                        <ComboBoxItem>Month</ComboBoxItem>
+                                                        <ComboBoxItem>Year</ComboBoxItem>
+                                                    </ComboBox.Items>
+                                                </ComboBox>
+                                            </Grid>
+
+                                            <TextBlock x:Name="tblockStartValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Start value:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtStartValue" HorizontalAlignment="Stretch" />
+
+                                            <TextBlock x:Name="tblockEndValue" HorizontalAlignment="Left" TextAlignment="Center" Text="End value:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtEndValue" HorizontalAlignment="Stretch" />
+
+                                            <TextBlock x:Name="tblockToValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis max value:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtToValue" HorizontalAlignment="Stretch" />
+
+                                            <TextBlock x:Name="tblockFromValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis min value:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtFromValue" HorizontalAlignment="Stretch" />
+
+                                            <TextBlock x:Name="tblocktStepValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis step value:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtStepValue" HorizontalAlignment="Stretch" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Style="{StaticResource configGroupBorderStyle}" Grid.Column="2">
+                                        <StackPanel Grid.Column="2" x:Name="panelDisplay2">
+                                            <Label x:Name="lblLabels" FontWeight="Bold">Labels</Label>
+                                            <TextBlock x:Name="tblockYAxisLabelValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis label:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtYAxisLabelValue" HorizontalAlignment="Stretch" Text="Count" />
+
+                                            <TextBlock x:Name="tblockXAxisLabelType" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis label type:" Margin="0,5,0,0"  />
+                                            <ComboBox x:Name="cmbXAxisLabelType" Width="140" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cmbXAxisLabelType_SelectionChanged">
+                                                <ComboBox.Items>
+                                                    <ComboBoxItem>Automatic</ComboBoxItem>
+                                                    <ComboBoxItem>Field Prompt</ComboBoxItem>
+                                                    <ComboBoxItem>None</ComboBoxItem>
+                                                    <ComboBoxItem>Custom</ComboBoxItem>
+                                                </ComboBox.Items>
+                                            </ComboBox>
+
+                                            <TextBlock x:Name="tblockXAxisLabelValue" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis label:" Margin="0,5,0,0" />
+                                            <TextBox x:Name="txtXAxisLabelValue" HorizontalAlignment="Stretch" Text="" IsEnabled="False" />
+
+                                            <TextBlock x:Name="tblockXAxisAngle" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis angle:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtXAxisAngle" HorizontalAlignment="Stretch" Text="-45" />
+
+                                            <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart title:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtChartTitle" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
+
+                                            <TextBlock x:Name="tblockChartSubTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart subtitle:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtChartSubTitle" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
+
+                                            <!--<Button x:Name="btnSetAxisLabelFont" Margin="0,5,0,0" Content="Set axis label font..." Click="btnSetAxisLabelFont_Click" />
+                                            <Button x:Name="btnSetChartTitleFont" Margin="0,5,0,0" Content="Set chart title font..." Click="btnSetChartTitleFont_Click" />-->
+
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Style="{StaticResource configGroupBorderStyle}" Grid.Column="4">
+                                        <StackPanel x:Name="panelDisplay3">
+                                            <Label x:Name="lblLegend" FontWeight="Bold">Legend</Label>
+                                            <CheckBox x:Name="checkboxShowLegend" Margin="0,5,0,0" Content="Show legend" HorizontalAlignment="Left" IsChecked="False" />
+                                            <CheckBox x:Name="checkboxShowLegendBorder" Margin="0,5,0,0" Content="Show legend border" HorizontalAlignment="Left" IsChecked="False" />
+                                            <CheckBox x:Name="checkboxShowVarName" Margin="0,5,0,0" Content="Show variable names" HorizontalAlignment="Left" IsChecked="False" />
+
+                                            <TextBlock x:Name="tblockLegendFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend font size:" Margin="0,5,0,0"  />
+                                            <TextBox x:Name="txtLegendFontSize" HorizontalAlignment="Stretch" Text="12" />
+
+                                            <TextBlock x:Name="tblockLegendDock" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend placement:" Margin="0,5,0,0"  />
+                                            <ComboBox x:Name="cmbLegendDock" Width="140" HorizontalAlignment="Left" />
+
+                                            <!--<TextBlock x:Name="tblockLegendFontFamily" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend font family:" Margin="0,5,0,0" />
+                                            <ComboBox Width="140" x:Name="cmbFontSelector" HorizontalAlignment="Left" SelectionChanged="cmbFontSelector_SelectionChanged">
+                                                <ComboBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding}" FontFamily="{Binding}"/>
+                                                    </DataTemplate>
+                                                </ComboBox.ItemTemplate>
+                                            </ComboBox>-->
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </Expander>
+                            <Button x:Name="btnRun" Content="Run" Margin="0,20,0,0" Click="btnRun_Click" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</ChartGadgets:ChartGadgetBase>

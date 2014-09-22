@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="Epi.WPF.Dashboard.Controls.GadgetDescriptionPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" MinWidth="200" MaxWidth="500" HorizontalAlignment="Left" Margin="5,2,5,2">
+    <StackPanel Grid.Row="4" x:Name="panelDescription" HorizontalAlignment="Stretch" VerticalAlignment="Top" Visibility="Visible">
+        <TextBlock x:Name="tblockDescription" Text="Description:" Margin="0,0,2,0" FontFamily="Global User Interface"></TextBlock>
+        <TextBox x:Name="txtOutputDescription" TextWrapping="Wrap" AcceptsTab="True" AcceptsReturn="False" FontFamily="Global User Interface" Visibility="Visible" KeyDown="txtOutputDescription_KeyDown" LostFocus="txtOutputDescription_LostFocus"></TextBox>
+        <TextBlock x:Name="tblockOutputDescription" FontFamily="Global User Interface" TextWrapping="Wrap" Visibility="Collapsed" MouseEnter="tblockOutputDescription_MouseEnter" MouseLeave="tblockOutputDescription_MouseLeave" MouseLeftButtonUp="tblockOutputDescription_MouseLeftButtonUp"></TextBlock>
+    </StackPanel>
+</UserControl>

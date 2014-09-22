@@ -1,0 +1,25 @@
+##TEMPLATE-NAME 'Epi Info'
+##LANGUAGE 'XML'
+##ENGINE-NAME 'None'
+##AUTHOR 'Lockheed Martin EI7 Team' 
+##FILE-EXTENSION 'XML'
+##NOTES
+##END-NOTES
+##ID-CASE UPPERCASE
+##ID-SEPARATOR '_'
+##ID-SYMBOL-PREFIX 'Symbol'
+##ID-RULE-PREFIX 'Rule'
+<grammar>
+<symbols>
+##SYMBOLS
+##DELIMITER ','
+	<symbol><description>%Description.XML%</description><id>%ID%</id></symbol>
+##END-SYMBOLS
+</symbols>
+<rules>
+##RULES
+##DELIMITER ','
+	<rule><description>%Description.XML%</description><id>%ID%</id></rule>
+##END-RULES
+</rules>
+</grammar>

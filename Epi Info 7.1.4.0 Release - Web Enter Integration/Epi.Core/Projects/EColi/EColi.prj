@@ -1,0 +1,7 @@
+<Project id="5da2eb5c-1e47-2211-7bd2-8f839cb015e1" name="EColi" location="C:\Users\mii0\Desktop\Epi Info 7\Epi Info 7\Projects\EColi" description="" schemaVersion="102" epiVersion="" createDate="06/14/2011 11:26:09" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="/CMip3j3HV8RumZ8DOXlLCsNfxtHVPMPzQ5QwP6y4R8dqPQQ3Q3c2YBcemsDyfxV9lImMI3tlxHrJvbIpFBvV1P85/6iXqL47uJYjtbZ6Bum4y6bhOTQNOsiNjH6dDBg8NkF3faR/iAAv8aSi7CSB76DjVSKQBznJJHKMP6ny3k=" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>

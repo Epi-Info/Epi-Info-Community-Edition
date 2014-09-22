@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Epi.CommandLine.Config.BooleanVariableControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="175" d:DesignWidth="350">
+    <Grid Width="350" Height="175" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" x:Name="lblPrompt" FontSize="15" Foreground="#003399" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10">Do you want to save changes to Untitled?</TextBlock>
+        <Rectangle Grid.Row="2" Fill="#F0F0F0" Stroke="Silver"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnYes" Content="Yes" Height="22" Width="100" />
+            <Button x:Name="btnNo" Content="No" Height="22" Width="100" HorizontalAlignment="Right" Margin="10,0,10,0" />
+        </StackPanel>
+    </Grid>
+</UserControl>

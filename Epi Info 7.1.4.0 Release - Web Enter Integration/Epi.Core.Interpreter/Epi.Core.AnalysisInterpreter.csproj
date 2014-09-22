@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D8486FD0-2C53-4AED-92DB-347F081FE0AB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Epi.Core.AnalysisInterpreter</RootNamespace>
+    <AssemblyName>Epi.Core.AnalysisInterpreter</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\build\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Epi.Enter.ServiceApplication\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\build\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Epi.Enter.ServiceApplication|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Epi.Enter.ServiceApplication\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalithaLib, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Epi.Core\CalithaLib.dll</HintPath>
+    </Reference>
+    <Reference Include="GoldParserEngine, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Epi.Core\GoldParserEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="AnalysisOutput.cs" />
+    <Compile Include="AnalysisStatisticExecuteHost.cs" />
+    <Compile Include="cAST.cs" />
+    <Compile Include="cCOMDLL.cs" />
+    <Compile Include="cNETDLL.cs" />
+    <Compile Include="IDLLClass.cs" />
+    <Compile Include="Rules\Functions\Rule_STRLEN.cs" />
+    <Compile Include="Rules\Functions\Rule_EPIWEEK.cs" />
+    <Compile Include="Rules\Functions\Rule_PFROMZ.cs" />
+    <Compile Include="Rules\Functions\Rule_ZSCORE.cs" />
+    <Compile Include="Rules\Functions\Rule_FileDate.cs" />
+    <Compile Include="Rules\Functions\Rule_Exists.cs" />
+    <Compile Include="Rules\Functions\Rule_Environ.cs" />
+    <Compile Include="Rules\Functions\Rule_FindText.cs" />
+    <Compile Include="Rules\Functions\Rule_UpperCase.cs" />
+    <Compile Include="Rules\Functions\Rule_Step.cs" />
+    <Compile Include="Rules\Functions\Rule_TRUNC.cs" />
+    <Compile Include="Rules\Functions\Rule_Tan.cs" />
+    <Compile Include="Rules\Functions\Rule_Sin.cs" />
+    <Compile Include="Rules\Functions\Rule_LOG_Func.cs" />
+    <Compile Include="Rules\Functions\Rule_LN_Func.cs" />
+    <Compile Include="Rules\Functions\Rule_Exp_Func.cs" />
+    <Compile Include="Rules\Functions\Rule_Rnd.cs" />
+    <Compile Include="Rules\Functions\Rule_Abs.cs" />
+    <Compile Include="Rules\Functions\Rule_Cos.cs" />
+    <Compile Include="Rules\Functions\Rule_DateDiff.cs" />
+    <Compile Include="Rules\Functions\Rule_DatePart.cs" />
+    <Compile Include="Rules\Functions\Rule_Day.cs" />
+    <Compile Include="Rules\Functions\Rule_Days.cs" />
+    <Compile Include="Rules\Functions\Rule_Format.cs" />
+    <Compile Include="Rules\Functions\Rule_Hour.cs" />
+    <Compile Include="Rules\Functions\Rule_Hours.cs" />
+    <Compile Include="Rules\Functions\Rule_Minute.cs" />
+    <Compile Include="Rules\Functions\Rule_Minutes.cs" />
+    <Compile Include="Rules\Functions\Rule_Month.cs" />
+    <Compile Include="Rules\Functions\Rule_Months.cs" />
+    <Compile Include="Rules\Functions\Rule_NumToDate.cs" />
+    <Compile Include="Rules\Functions\Rule_NumToTime.cs" />
+    <Compile Include="Rules\Functions\Rule_RecordCount.cs" />
+    <Compile Include="Rules\Functions\Rule_Round.cs" />
+    <Compile Include="Rules\Functions\Rule_Second.cs" />
+    <Compile Include="Rules\Functions\Rule_Seconds.cs" />
+    <Compile Include="Rules\Functions\Rule_Substring.cs" />
+    <Compile Include="Rules\Functions\Rule_SystemDate.cs" />
+    <Compile Include="Rules\Functions\Rule_SystemTime.cs" />
+    <Compile Include="Rules\Functions\Rule_TxtToDate.cs" />
+    <Compile Include="Rules\Functions\Rule_TxtToNum.cs" />
+    <Compile Include="Rules\Functions\Rule_Year.cs" />
+    <Compile Include="Rules\Functions\Rule_Years.cs" />
+    <Compile Include="Rules\Rule_Graph.cs" />
+    <Compile Include="Rules\Rule_Define_Group.cs" />
+    <Compile Include="Rules\Rule_KMSurvival.cs" />
+    <Compile Include="Rules\Rule_Assign_DLL_Statement.cs" />
+    <Compile Include="Rules\Rule_CoxPH.cs" />
+    <Compile Include="Rules\Rule_DLL_Statement.cs" />
+    <Compile Include="Rules\Rule_LogisticRegression.cs" />
+    <Compile Include="Rules\Rule_Match.cs" />
+    <Compile Include="Rules\Rule_QualifiedIdList.cs" />
+    <Compile Include="Rules\Rule_Report.cs" />
+    <Compile Include="Rules\Rule_Subroutine_Statement.cs" />
+    <Compile Include="Rules\Rule_Summarize.cs" />
+    <Compile Include="Rules\Rule_UnDelete.cs" />
+    <Compile Include="DataSourceInfo.cs" />
+    <Compile Include="EpiDataReader.cs" />
+    <Compile Include="EpiInfo7EventGrammar.cs" />
+    <Compile Include="IAnalysisCheckCode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AnalysisRule.cs" />
+    <Compile Include="Rules\EpiFunctions.cs" />
+    <Compile Include="Rules\Rule_Define_Connection.cs" />
+    <Compile Include="Rules\Rule_LinearRegression.cs" />
+    <Compile Include="Rules\Rule_RecordSet.cs" />
+    <Compile Include="Rules\Rule_SQLExec.cs" />
+    <Compile Include="Rule_Context.cs" />
+    <Compile Include="Rules\Rule_AddExp.cs" />
+    <Compile Include="Rules\Rule_Always.cs" />
+    <Compile Include="Rules\Rule_AndExp.cs" />
+    <Compile Include="Rules\Rule_Assign.cs" />
+    <Compile Include="Rules\Rule_Beep.cs" />
+    <Compile Include="Rules\Rule_CloseOut.cs" />
+    <Compile Include="Rules\Rule_CommentLine.cs" />
+    <Compile Include="Rules\Rule_CompareExp.cs" />
+    <Compile Include="Rules\Rule_ConcatExp.cs" />
+    <Compile Include="Rules\Rule_Define.cs" />
+    <Compile Include="Rules\Rule_Delete.cs" />
+    <Compile Include="Rules\Rule_Dialog.cs" />
+    <Compile Include="Rules\Rule_Display.cs" />
+    <Compile Include="Rules\Rule_Execute.cs" />
+    <Compile Include="Rules\Rule_Expression.cs" />
+    <Compile Include="Rules\Rule_ExprList.cs" />
+    <Compile Include="Rules\Rule_Freq.cs" />
+    <Compile Include="Rules\Rule_Header.cs" />
+    <Compile Include="Rules\Rule_If_Then_Else_End.cs" />
+    <Compile Include="Rules\Rule_List.cs" />
+    <Compile Include="Rules\Rule_Means.cs" />
+    <Compile Include="Rules\Rule_Merge.cs" />
+    <Compile Include="Rules\Rule_MultExp.cs" />
+    <Compile Include="Rules\Rule_NegateExp.cs" />
+    <Compile Include="Rules\Rule_NotExp.cs" />
+    <Compile Include="Rules\Rule_PowExp.cs" />
+    <Compile Include="Rules\Rule_Printout.cs" />
+    <Compile Include="Rules\Rule_Quit.cs" />
+    <Compile Include="Rules\Rule_Read.cs" />
+    <Compile Include="Rules\Rule_Recode.cs" />
+    <Compile Include="Rules\Rule_Relate.cs" />
+    <Compile Include="Rules\Rule_RouteOut.cs" />
+    <Compile Include="Rules\Rule_RunPGM.cs" />
+    <Compile Include="Rules\Rule_Select.cs" />
+    <Compile Include="Rules\Rule_Set.cs" />
+    <Compile Include="Rules\Rule_Sort.cs" />
+    <Compile Include="Rules\Rule_Statement.cs" />
+    <Compile Include="Rules\Rule_Statements.cs" />
+    <Compile Include="Rules\Rule_Tables.cs" />
+    <Compile Include="Rules\Rule_Typeout.cs" />
+    <Compile Include="Rules\Rule_Undefine.cs" />
+    <Compile Include="Rules\Rule_Value.cs" />
+    <Compile Include="Rules\Rule_Write.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AnthStat\AnthStat.csproj">
+      <Project>{47760089-1785-4491-9FD5-3AAEF963D271}</Project>
+      <Name>AnthStat</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Analysis.Statistics\Epi.Analysis.Statistics.csproj">
+      <Project>{5BBFF425-915E-4C8C-BA37-3750259B27DF}</Project>
+      <Name>Epi.Analysis.Statistics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
+      <Project>{EBD2B961-A952-4670-96CA-50BAA12C7F29}</Project>
+      <Name>Epi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.ImportExport\Epi.ImportExport.csproj">
+      <Project>{B5F72DDF-5349-4C03-9285-AE35110BA6CD}</Project>
+      <Name>Epi.ImportExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EpiInfoPlugin\EpiInfo.Plugin.csproj">
+      <Project>{20C12C97-52CE-45C3-B563-3C15330C2A98}</Project>
+      <Name>EpiInfo.Plugin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="CommandProcess.cd" />
+    <None Include="Framework.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="grammar\EpiInfo.Analysis.Grammar.cgt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="grammar\EpiInfo.Analysis.Grammar.grm" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

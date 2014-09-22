@@ -1,0 +1,56 @@
+﻿==========================================================================================
+==========================================================================================
+GRAPH AGGREGATE STATISTICS
+==========================================================================================
+==========================================================================================
+
+READ 'C:\Epi_Info\Sample.mdb':ADDFull
+DEFINE IQGROUP 
+RECODE IQ TO IQGROUP 
+	LOVALUE - 1 = "<=1"
+	1 - 21 = "001 - 21"
+	21 - 41 = "021 - 41"
+	41 - 61 = "041 - 61"
+	61 - 81 = "061 - 81"
+	81 - 101 = "081 - 101"
+	101 - 121 = "101 - 121"
+	121 - 141 = "121 - 141"
+	141 - 160 = "141 - 160"
+	160 - HIVALUE = "160"
+END
+GRAPH IQGROUP GRAPHTYPE="Bar" 
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=COUNT(GPA)
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=SUM(GPA)
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=AVG(GPA)
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=MIN(GPA)
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=MAX(GPA)
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=PERCENT(GPA)
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=SUMPCT(GPA)
+FREQ IQGROUP WEIGHTVAR=GPA
+
+==========================================================================================
+==========================================================================================
+
+READ 'C:\Epi_Info\Sample.mdb':ADDFull
+DEFINE IQGROUP 
+RECODE IQ TO IQGROUP 
+	LOVALUE - 1 = "<=1"
+	1 - 21 = "001 - 21"
+	21 - 41 = "021 - 41"
+	41 - 61 = "041 - 61"
+	61 - 81 = "061 - 81"
+	81 - 101 = "081 - 101"
+	101 - 121 = "101 - 121"
+	121 - 141 = "121 - 141"
+	141 - 160 = "141 - 160"
+	160 - HIVALUE = "160"
+END
+
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=PERCENT(GPA)
+GRAPH IQGROUP GRAPHTYPE="Bar" WEIGHTVAR=SUMPCT(GPA)
+FREQ IQGROUP WEIGHTVAR=GPA 
+
+GRAPH IQGROUP GRAPHTYPE="Bar"
+FREQ IQGROUP
+
+

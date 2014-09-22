@@ -1,0 +1,302 @@
+﻿<EpiDashboard:GadgetBase x:Class="EpiDashboard.LinearRegressionControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:EpiDashboard="clr-namespace:EpiDashboard"          
+    xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+    Style="{DynamicResource gadgetBaseStyle}">
+    <EpiDashboard:GadgetBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </EpiDashboard:GadgetBase.Resources>
+    <Grid>
+        <Controls:ShadowRectangle x:Name="rectangleShadow"></Controls:ShadowRectangle>
+        <Border Name="borderAll" Style="{DynamicResource mainGadgetBorder}" >
+            <Border.ContextMenu>
+                <ContextMenu x:Name="gadgetContextMenu">
+                    <MenuItem x:Name="mnuSendToBack" Header="Send gadget to back"/>
+                    <!--<MenuItem x:Name="mnuRefresh" Header="Refresh this gadget">
+                        <MenuItem.Icon>
+                            <Image Source="../../Images/refresh1.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>-->
+                    <MenuItem x:Name="mnuClose" Header="Close this gadget"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+
+            <Grid x:Name="grdMain">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="6" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="6" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="6" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsFilterButtonAvailable="False" Text="Linear Regression" />
+                <Controls:GadgetMessagePanel Margin="5" x:Name="messagePanel" Grid.Row="2" Text="" />
+                <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
+                <TextBlock Grid.Row="6" x:Name="txtFilterString" Style="{DynamicResource filterStringText}" Visibility="Collapsed" />
+                <StackPanel Grid.Row="7" x:Name="panelMain" HorizontalAlignment="Left" VerticalAlignment="Top"></StackPanel>
+                <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" HorizontalAlignment="Center" Style="{DynamicResource gadgetWaitPanelStyle}" />
+
+                <Grid SnapsToDevicePixels="True" Name="grdRegress" Grid.Row="8" Width="Auto" HorizontalAlignment="Center" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+
+                <StackPanel Grid.Row="9">
+                    <TextBlock x:Name="txtCorrelation" FontWeight="Bold" Margin="{DynamicResource genericElementMargin}" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Text="Correlation Coefficient: r^2 = "/>
+                </StackPanel>
+
+                <Grid SnapsToDevicePixels="True" Grid.Row="10" Name="grdParameters" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Row="0" Grid.Column="0" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <Rectangle Grid.Row="0" Grid.Column="1" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <Rectangle Grid.Row="0" Grid.Column="2" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <Rectangle Grid.Row="0" Grid.Column="3" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <Rectangle Grid.Row="0" Grid.Column="4" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <Rectangle Grid.Row="0" Grid.Column="5" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <Rectangle Grid.Row="1" Grid.Column="0" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <!--<Rectangle Grid.Row="1" Grid.Column="1" Stroke="Black"/>
+                    <Rectangle Grid.Row="1" Grid.Column="2" Stroke="Black"/>
+                    <Rectangle Grid.Row="1" Grid.Column="3" Stroke="Black"/>
+                    <Rectangle Grid.Row="1" Grid.Column="4" Stroke="Black"/>-->
+                    <Rectangle Grid.Row="2" Grid.Column="0" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <!--<Rectangle Grid.Row="2" Grid.Column="1" Stroke="Black"/>
+                    <Rectangle Grid.Row="2" Grid.Column="2" Stroke="Black"/>
+                    <Rectangle Grid.Row="2" Grid.Column="3" Stroke="Black"/>
+                    <Rectangle Grid.Row="2" Grid.Column="4" Stroke="Black"/>-->
+                    <Rectangle Grid.Row="3" Grid.Column="0" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <!--<Rectangle Grid.Row="3" Grid.Column="1" Stroke="Black"/>
+                    <Rectangle Grid.Row="3" Grid.Column="2" Stroke="Black"/>
+                    <Rectangle Grid.Row="3" Grid.Column="3" Stroke="Black"/>
+                    <Rectangle Grid.Row="3" Grid.Column="4" Stroke="Black"/>-->
+
+                    <Border Grid.Row="0" Grid.Column="0" Style="{DynamicResource gridCellBorder}" BorderThickness="1,1,1,1"></Border>
+                    <Border Grid.Row="1" Grid.Column="0" Style="{DynamicResource gridCellBorder}" BorderThickness="1,0,1,1"></Border>
+                    <Border Grid.Row="2" Grid.Column="0" Style="{DynamicResource gridCellBorder}" BorderThickness="1,0,1,1"></Border>
+                    <Border Grid.Row="3" Grid.Column="0" Style="{DynamicResource gridCellBorder}" BorderThickness="1,0,1,1"></Border>
+
+                    <Border Grid.Row="0" Grid.Column="1" Style="{DynamicResource gridCellBorder}" BorderThickness="0,1,1,1"></Border>
+                    <Border Grid.Row="0" Grid.Column="2" Style="{DynamicResource gridCellBorder}" BorderThickness="0,1,1,1"></Border>
+                    <Border Grid.Row="0" Grid.Column="3" Style="{DynamicResource gridCellBorder}" BorderThickness="0,1,1,1"></Border>
+                    <Border Grid.Row="0" Grid.Column="4" Style="{DynamicResource gridCellBorder}" BorderThickness="0,1,1,1"></Border>
+                    <Border Grid.Row="0" Grid.Column="5" Style="{DynamicResource gridCellBorder}" BorderThickness="0,1,1,1"></Border>
+
+                    <Border Grid.Row="1" Grid.Column="1" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="1" Grid.Column="2" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="1" Grid.Column="3" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="1" Grid.Column="4" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="1" Grid.Column="5" Style="{DynamicResource gridCellBorder}"></Border>
+
+                    <Border Grid.Row="2" Grid.Column="1" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="2" Grid.Column="2" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="2" Grid.Column="3" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="2" Grid.Column="4" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="2" Grid.Column="5" Style="{DynamicResource gridCellBorder}"></Border>
+
+                    <Border Grid.Row="3" Grid.Column="1" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="3" Grid.Column="2" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="3" Grid.Column="3" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="3" Grid.Column="4" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="3" Grid.Column="5" Style="{DynamicResource gridCellBorder}"></Border>
+
+
+                    <TextBlock FontWeight="Bold" Foreground="White" Margin="2, 0, 2, 0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Source"/>
+                    <TextBlock FontWeight="Bold" Foreground="White" Margin="2, 0, 2, 0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="df"/>
+                    <TextBlock FontWeight="Bold" Foreground="White" Margin="2, 0, 2, 0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="Sum of Squares"/>
+                    <TextBlock FontWeight="Bold" Foreground="White" Margin="2, 0, 2, 0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="3" Text="Mean Square"/>
+                    <TextBlock FontWeight="Bold" Foreground="White" Margin="2, 0, 2, 0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="4" Text="F-statistic"/>
+                    <TextBlock FontWeight="Bold" Foreground="White" Margin="2, 0, 2, 0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="5" Text="p-value"/>
+
+                    <TextBlock Style="{DynamicResource columnHeadingText}" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Text="Regression"/>
+                    <TextBlock Style="{DynamicResource columnHeadingText}" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Text="Residuals"/>
+                    <TextBlock Style="{DynamicResource columnHeadingText}" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" Text="Total"/>
+
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtRegressionDf" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" />
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtRegressionSumOfSquares" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="2" />
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtRegressionMeanSquare" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="3" />
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtRegressionFstatistic" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="4" />
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtRegressionFstatisticP" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="5" />
+
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtResidualsDf" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" />
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtResidualsSumOfSquares" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="2" />
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtResidualsMeanSquare" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="3" />
+
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtTotalDf" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="1" />
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtTotalSumOfSquares" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="2" />
+                </Grid>
+
+                <StackPanel Grid.Row="11">
+                    <TextBlock x:Name="txtPearsonAnalysis" FontWeight="Bold" Margin="{DynamicResource genericElementMargin}" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Text="Pearson's Correlation Analysis"/>
+                </StackPanel>
+
+                <Grid SnapsToDevicePixels="True" Grid.Row="12" Name="grdPearson" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Row="0" Grid.Column="0" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <Rectangle Grid.Row="0" Grid.Column="1" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <Rectangle Grid.Row="0" Grid.Column="2" Style="{DynamicResource gridHeaderCellRectangle}" />
+
+                    <Border Grid.Row="0" Grid.Column="0" Style="{DynamicResource gridCellBorder}" BorderThickness="1,1,1,1"></Border>
+                    <Border Grid.Row="1" Grid.Column="0" Style="{DynamicResource gridCellBorder}" BorderThickness="1,0,1,1"></Border>
+
+                    <Border Grid.Row="0" Grid.Column="1" Style="{DynamicResource gridCellBorder}" BorderThickness="0,1,1,1"></Border>
+                    <Border Grid.Row="0" Grid.Column="2" Style="{DynamicResource gridCellBorder}" BorderThickness="0,1,1,1"></Border>
+                    <Border Grid.Row="1" Grid.Column="1" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="1" Grid.Column="2" Style="{DynamicResource gridCellBorder}"></Border>
+
+                    <TextBlock FontWeight="Bold" Foreground="White" Margin="2, 0, 2, 0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Coefficient"/>
+                    <TextBlock FontWeight="Bold" Foreground="White" Margin="2, 0, 2, 0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="T-Statistic"/>
+                    <TextBlock FontWeight="Bold" Foreground="White" Margin="2, 0, 2, 0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="P-Value"/>
+
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtPearsonCoefficient" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" />
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtPearsonCoefficientT" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" />
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtPearsonCoefficientTP" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="2" />
+                </Grid>
+
+                <StackPanel Grid.Row="13">
+                    <TextBlock x:Name="txtSpearmanAnalysis" FontWeight="Bold" Margin="{DynamicResource genericElementMargin}" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Text="Spearman's Correlation Analysis"/>
+                </StackPanel>
+
+                <Grid SnapsToDevicePixels="True" Grid.Row="14" Name="grdSpearman" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Row="0" Grid.Column="0" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <Rectangle Grid.Row="0" Grid.Column="1" Style="{DynamicResource gridHeaderCellRectangle}" />
+                    <Rectangle Grid.Row="0" Grid.Column="2" Style="{DynamicResource gridHeaderCellRectangle}" />
+
+                    <Border Grid.Row="0" Grid.Column="0" Style="{DynamicResource gridCellBorder}" BorderThickness="1,1,1,1"></Border>
+                    <Border Grid.Row="1" Grid.Column="0" Style="{DynamicResource gridCellBorder}" BorderThickness="1,0,1,1"></Border>
+
+                    <Border Grid.Row="0" Grid.Column="1" Style="{DynamicResource gridCellBorder}" BorderThickness="0,1,1,1"></Border>
+                    <Border Grid.Row="0" Grid.Column="2" Style="{DynamicResource gridCellBorder}" BorderThickness="0,1,1,1"></Border>
+                    <Border Grid.Row="1" Grid.Column="1" Style="{DynamicResource gridCellBorder}"></Border>
+                    <Border Grid.Row="1" Grid.Column="2" Style="{DynamicResource gridCellBorder}"></Border>
+
+                    <TextBlock FontWeight="Bold" Foreground="White" Margin="2, 0, 2, 0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Coefficient"/>
+                    <TextBlock FontWeight="Bold" Foreground="White" Margin="2, 0, 2, 0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="T-Statistic"/>
+                    <TextBlock FontWeight="Bold" Foreground="White" Margin="2, 0, 2, 0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="P-Value"/>
+
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtSpearmanCoefficient" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" />
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtSpearmanCoefficientT" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" />
+                    <TextBlock Margin="2, 0, 2, 0" Name="txtSpearmannCoefficientTP" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="2" />
+                </Grid>
+
+                <StackPanel Grid.Row="1" Grid.RowSpan="10" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" >
+                    <Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" >
+                        <Rectangle Style="{DynamicResource rectangleConfigOuter}" />
+                        <Rectangle Style="{DynamicResource rectangleConfigInner}" />
+
+                        <Path x:Name="pathTriangle" 
+                              Margin="0,-2,90,0"
+                              Data="M 5 0 L 10 10 0 10 Z" Fill="{DynamicResource gadgetBackgroundBrush}" IsHitTestVisible="False" HorizontalAlignment="Right" VerticalAlignment="Top" Height="7" />
+
+                        <StackPanel Orientation="Vertical" Margin="25, 10, 25, 25" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                            <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Regression Properties" Margin="5" FontWeight="Bold" />
+
+                            <Grid Name="grdRegressProperties" Width="Auto" HorizontalAlignment="Center" Margin="2,2,2,2" Visibility="Visible">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="21"/>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="170"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Outcome:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="0"  />
+                                <ComboBox x:Name="cbxFieldOutcome" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="0" MaxWidth="120" Width="120"/>
+
+                                <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Fields:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="1"  />
+                                <ComboBox x:Name="cbxFields" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="1" MaxWidth="120" Width="120"/>
+
+                                <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Other variables:" Margin="0,5,0,0" Grid.Row="2" Grid.Column="1" />
+                                <ListBox x:Name="lbxOtherFields" HorizontalAlignment="Left" SelectedIndex="0" Width="160"  Margin="0,5,0,0" Grid.Row="3" Grid.Column="1" Grid.RowSpan="3" SelectionMode="Extended" SelectionChanged="lbxOtherFields_SelectionChanged" MouseDoubleClick="lbxOtherFields_MouseDoubleClick" />
+
+                                <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Weight:" Margin="0,5,0,0" Grid.Row="2" Grid.Column="0" />
+                                <ComboBox x:Name="cbxFieldWeight" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="3" Grid.Column="0" MaxWidth="120" Width="120" />
+
+                                <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Confidence limits:" Margin="0,5,0,0" Grid.Row="4" Grid.Column="0" />
+                                <ComboBox x:Name="cbxConf" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="5" Grid.Column="0" MaxWidth="120" Width="120" />
+
+                                <CheckBox x:Name="checkboxNoIntercept" HorizontalAlignment="left" Grid.Row="7" Grid.Column="0" Content="No intercept" />
+                                <CheckBox x:Name="checkboxIncludeMissing" Visibility="Collapsed" HorizontalAlignment="left" Grid.Row="7" Content="Include missing values" Margin="-1,20,0,1" Grid.RowSpan="2" />
+
+                                <Button x:Name="btnMakeDummy" Content="Make Dummy" Grid.Row="7" Grid.Column="1" Click="btnMakeDummy_Click" Width="160" HorizontalAlignment="Left" />
+
+                                <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Dummy variables:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="2" />
+                                <ListBox x:Name="lbxDummy" HorizontalAlignment="Left" SelectedIndex="0" Width="160"  Margin="0,5,0,0" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" SelectionMode="Single" MouseDoubleClick="lbxDummy_MouseDoubleClick" />
+
+                                <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Interaction terms:" Margin="0,5,0,0" Grid.Row="4" Grid.Column="2" />
+                                <ListBox x:Name="lbxInteractionTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="160"  Margin="0,5,0,0" Grid.Row="5" Grid.Column="2" Grid.RowSpan="3" SelectionMode="Single" MouseDoubleClick="lbxInteractionTerms_MouseDoubleClick" />
+                            </Grid>
+
+                            <Button x:Name="btnRun" Content="Run" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Click="btnRun_Click" />
+
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>            
+        </Border>
+    </Grid>
+</EpiDashboard:GadgetBase>

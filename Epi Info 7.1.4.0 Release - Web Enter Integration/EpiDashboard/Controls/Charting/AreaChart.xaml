@@ -1,0 +1,80 @@
+﻿<ChartControls:ChartBase x:Class="EpiDashboard.Controls.Charting.AreaChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:EpiDashboard="clr-namespace:EpiDashboard;assembly=EpiDashboard"
+             xmlns:Controls="clr-namespace:EpiDashboard.Controls;assembly=EpiDashboard"
+             xmlns:ChartControls="clr-namespace:EpiDashboard.Controls.Charting"
+             xmlns:charting="clr-namespace:ComponentArt.Win.DataVisualization.Charting;assembly=ComponentArt.Win.DataVisualization.Charting"             
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid x:Name="gridChartLayoutRoot" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--<Grid.ContextMenu>
+            <ContextMenu x:Name="gadgetContextMenu">
+                <MenuItem x:Name="mnuSave" Header="Save chart as image..." Click="mnuSave_Click" />
+                <MenuItem x:Name="mnuCopyImage" Header="Copy chart image to clipboard" Click="mnuCopyImage_Click" />
+                <MenuItem x:Name="mnuCopyFullData" Header="Copy all data to clipboard" Click="mnuCopyFullData_Click" />
+            </ContextMenu>
+        </Grid.ContextMenu>-->
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <TextBlock x:Name="tblockChartTitle" HorizontalAlignment="Center" TextAlignment="Center" FontSize="22" FontWeight="Bold" Margin="0, 2, 0, 0" />
+            <TextBlock x:Name="tblockSubTitle" HorizontalAlignment="Center" TextAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0, 24, 0, 0" />
+            <TextBlock x:Name="tblockStrataTitle" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Margin="0, 20, 0, 0" />
+        </StackPanel>
+
+        <charting:XYChart x:Name="xyChart" Margin="1" XPath="S" Grid.Row="1" Grid.Column="1" ProcessDataSourceInBackgroundThread="False" DataStructureCreated="xyChart_DataStructureCreated" AnimationCompleted="xyChart_AnimationCompleted" Background="White">
+            <charting:XYChart.XAxisArea>
+                <charting:AxisCoordinates x:Name="xAxisCoordinates" Angle="0" />
+
+                <charting:ChartLabel x:Name="labelXAxis">
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Margin="0, 6, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="tblockXAxisLabel" FontWeight="DemiBold" Visibility="Collapsed" TextAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </charting:ChartLabel>
+            </charting:XYChart.XAxisArea>
+
+            <charting:XYChart.YAxisArea>
+
+                <charting:AxisCoordinates x:Name="YAxisCoordinates">
+                </charting:AxisCoordinates>
+
+                <charting:ChartLabel x:Name="labelYAxis" Orientation="Vertical" >
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="tblockYAxisLabel" FontWeight="DemiBold" Visibility="Collapsed" TextAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </charting:ChartLabel>
+            </charting:XYChart.YAxisArea>
+
+            <charting:XYChart.Y2AxisArea>
+
+                <charting:AxisCoordinates AxisId="RateAxis" x:Name="Y2AxisCoordinates">
+                </charting:AxisCoordinates>
+
+                <charting:ChartLabel x:Name="labelY2Axis" Orientation="Vertical" >
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="tblockY2AxisLabel" FontWeight="DemiBold" Visibility="Collapsed" TextAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </charting:ChartLabel>
+            </charting:XYChart.Y2AxisArea>
+
+            <charting:XYChart.Axes>
+                <charting:Axis Id="YAxis" x:Name="yAxis" UseReferenceValue="true" />
+            </charting:XYChart.Axes>
+            <charting:AreaSeries x:Name="series0" Id="S0" YPath="Y" SeriesPath="X" StrokeThickness="4" ShowPointAnnotations="True" AreaKind="Auto" GradientBottomColorShift="A-30" GradientTopColorShift="A-90"  />
+            <charting:LineSeries x:Name="series1" Id="S1" YPath="Y2" SeriesPath="X" YAxisId="RateAxis" ShowPointAnnotations="True" Visibility="Collapsed" />
+        </charting:XYChart>
+    </Grid>
+</ChartControls:ChartBase>

@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="EpiDashboard.SocialNetworkGraph"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dashboard="clr-namespace:EpiDashboard"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <dashboard:DragCanvas x:Name="grdMain" AllowDragging="True" AllowDragOutOfView="True">
+        <Canvas x:Name="MainCanvas" Background="White" Height="3000" Width="3000"/>
+    </dashboard:DragCanvas>
+</UserControl>
