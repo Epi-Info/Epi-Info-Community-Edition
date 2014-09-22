@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b75ac710-ce8a-488e-bbf6-dac34b75080d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1567c9d5-9de7-40c1-8015-7a2da8385beb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -21,14 +21,14 @@
     <MetadataSource Address="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="EWEManagerService.xsd" MetadataType="Schema" ID="6c31f449-5c0a-473e-8660-11bb81a95e7e" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?xsd=xsd5" />
-    <MetadataFile FileName="EWEManagerService1.xsd" MetadataType="Schema" ID="41dbfac3-4a7c-4f5a-b14b-e384b8484b3d" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?xsd=xsd4" />
-    <MetadataFile FileName="EWEManagerService.disco" MetadataType="Disco" ID="73cdf838-7ee1-402d-88e1-ccb7e49c12c6" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?disco" />
-    <MetadataFile FileName="EWEManagerService2.xsd" MetadataType="Schema" ID="e434e155-4dd2-4681-a2c6-e25237781e03" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?xsd=xsd0" />
-    <MetadataFile FileName="EWEManagerService3.xsd" MetadataType="Schema" ID="b3c4a7ef-fab0-4aea-a6dc-d122831085c1" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?xsd=xsd3" />
-    <MetadataFile FileName="EWEManagerService4.xsd" MetadataType="Schema" ID="6ffd0344-42d5-452a-b34d-d5777bd33678" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?xsd=xsd2" />
-    <MetadataFile FileName="EWEManagerService5.xsd" MetadataType="Schema" ID="aa93afc6-dbc3-454a-8d87-b52443121841" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?xsd=xsd1" />
-    <MetadataFile FileName="EWEManagerService.wsdl" MetadataType="Wsdl" ID="3629b7bc-fa07-4259-bc65-e7d33f7632bc" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?wsdl" />
+    <MetadataFile FileName="EWEManagerService.xsd" MetadataType="Schema" ID="7f80ebb4-5f08-4b95-b10f-bd6c7fa78833" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?xsd=xsd5" />
+    <MetadataFile FileName="EWEManagerService1.xsd" MetadataType="Schema" ID="bc358d96-03f3-4339-a9c1-79d35a899259" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?xsd=xsd4" />
+    <MetadataFile FileName="EWEManagerService.disco" MetadataType="Disco" ID="998a48e0-989d-4568-9594-61812aec465e" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?disco" />
+    <MetadataFile FileName="EWEManagerService2.xsd" MetadataType="Schema" ID="2ca9b8ca-4a43-4c8b-8c83-e7b1ec6a8b07" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?xsd=xsd0" />
+    <MetadataFile FileName="EWEManagerService3.xsd" MetadataType="Schema" ID="235f469d-ebd8-43f9-a4b9-6d6451409834" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?xsd=xsd3" />
+    <MetadataFile FileName="EWEManagerService4.xsd" MetadataType="Schema" ID="6381022f-cbd0-48a4-ac86-14b7a41e54ad" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?xsd=xsd2" />
+    <MetadataFile FileName="EWEManagerService5.xsd" MetadataType="Schema" ID="4fa925cd-1150-4f7c-833e-6a269e9aafe3" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?xsd=xsd1" />
+    <MetadataFile FileName="EWEManagerService.wsdl" MetadataType="Wsdl" ID="4c153cf7-118c-44f2-881a-558ba93c69c3" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/EWEManagerService.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

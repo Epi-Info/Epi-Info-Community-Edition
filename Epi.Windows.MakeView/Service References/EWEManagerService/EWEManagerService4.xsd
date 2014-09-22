@@ -154,8 +154,12 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:RequestBase">
         <xs:sequence>
+          <xs:element minOccurs="0" name="Action" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="AdminSecurityKey" type="ser:guid" />
           <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" minOccurs="0" name="Organization" nillable="true" type="q4:OrganizationDTO" />
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" minOccurs="0" name="OrganizationAdminInfo" nillable="true" type="q5:UserDTO" />
+          <xs:element minOccurs="0" name="UserId" type="xs:int" />
+          <xs:element minOccurs="0" name="UserRole" type="xs:int" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -166,7 +170,8 @@
       <xs:extension base="tns:ResponseBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
-          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" minOccurs="0" name="OrganizationList" nillable="true" type="q5:ArrayOfOrganizationDTO" />
+          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" minOccurs="0" name="OrganizationList" nillable="true" type="q6:ArrayOfOrganizationDTO" />
+          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" minOccurs="0" name="OrganizationUsersList" nillable="true" type="q7:ArrayOfUserDTO" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -195,8 +200,10 @@
           <xs:element minOccurs="0" name="PageNumber" type="xs:int" />
           <xs:element minOccurs="0" name="PageSize" type="xs:int" />
           <xs:element minOccurs="0" name="ReturnSizeInfoOnly" type="xs:boolean" />
+          <xs:element minOccurs="0" name="SortOrder" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Sortfield" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="StatusId" type="xs:int" />
-          <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyAnswerIdList" nillable="true" type="q6:ArrayOfstring" />
+          <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyAnswerIdList" nillable="true" type="q8:ArrayOfstring" />
           <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="UserId" type="xs:int" />
           <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
@@ -222,6 +229,7 @@
       <xs:element minOccurs="0" name="RelateParentId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ResponseHierarchyIds" nillable="true" type="tns:ArrayOfSurveyAnswerDTO" />
       <xs:element minOccurs="0" name="ResponseId" nillable="true" type="xs:string" />
+      <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SqlData" nillable="true" type="q9:ArrayOfKeyValueOfstringstring" />
       <xs:element minOccurs="0" name="Status" type="xs:int" />
       <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserEmail" nillable="true" type="xs:string" />
@@ -266,7 +274,7 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="PassCode" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="SurveyResponseId" nillable="true" type="xs:string" />
-          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" minOccurs="0" name="User" nillable="true" type="q7:UserDTO" />
+          <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" minOccurs="0" name="User" nillable="true" type="q10:UserDTO" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -277,11 +285,38 @@
       <xs:extension base="tns:ResponseBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="PassCode" nillable="true" type="xs:string" />
-          <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" minOccurs="0" name="User" nillable="true" type="q8:UserDTO" />
+          <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" minOccurs="0" name="User" nillable="true" type="q11:UserDTO" />
           <xs:element minOccurs="0" name="UserIsValid" type="xs:boolean" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="UserAuthenticationResponse" nillable="true" type="tns:UserAuthenticationResponse" />
+  <xs:complexType name="PreFilledAnswerRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AnswerInfo" nillable="true" type="tns:PreFilledAnswerDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PreFilledAnswerRequest" nillable="true" type="tns:PreFilledAnswerRequest" />
+  <xs:complexType name="PreFilledAnswerDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
+      <xs:element minOccurs="0" name="ParentRecordId" type="ser:guid" />
+      <xs:element minOccurs="0" name="ResponseId" type="ser:guid" />
+      <xs:element minOccurs="0" name="SurveyId" type="ser:guid" />
+      <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyQuestionAnswerList" nillable="true" type="q12:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PreFilledAnswerDTO" nillable="true" type="tns:PreFilledAnswerDTO" />
+  <xs:complexType name="PreFilledAnswerResponse">
+    <xs:sequence>
+      <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessageList" nillable="true" type="q13:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SurveyResponseID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SurveyResponsePassCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SurveyResponseUrl" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PreFilledAnswerResponse" nillable="true" type="tns:PreFilledAnswerResponse" />
 </xs:schema>

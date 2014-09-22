@@ -189,10 +189,35 @@ namespace Epi.Windows.MakeView.EWEManagerService {
     public partial class OrganizationRequest : Epi.Windows.MakeView.EWEManagerService.RequestBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Action1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid AdminSecurityKeyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Epi.Windows.MakeView.EWEManagerService.OrganizationDTO OrganizationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.Windows.MakeView.EWEManagerService.UserDTO OrganizationAdminInfoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserRoleField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Name="Action")]
+        public string Action1 {
+            get {
+                return this.Action1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Action1Field, value) != true)) {
+                    this.Action1Field = value;
+                    this.RaisePropertyChanged("Action1");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Guid AdminSecurityKey {
@@ -216,6 +241,45 @@ namespace Epi.Windows.MakeView.EWEManagerService {
                 if ((object.ReferenceEquals(this.OrganizationField, value) != true)) {
                     this.OrganizationField = value;
                     this.RaisePropertyChanged("Organization");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.Windows.MakeView.EWEManagerService.UserDTO OrganizationAdminInfo {
+            get {
+                return this.OrganizationAdminInfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrganizationAdminInfoField, value) != true)) {
+                    this.OrganizationAdminInfoField = value;
+                    this.RaisePropertyChanged("OrganizationAdminInfo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserRole {
+            get {
+                return this.UserRoleField;
+            }
+            set {
+                if ((this.UserRoleField.Equals(value) != true)) {
+                    this.UserRoleField = value;
+                    this.RaisePropertyChanged("UserRole");
                 }
             }
         }
@@ -916,6 +980,12 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         private bool ReturnSizeInfoOnlyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SortOrderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SortfieldField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StatusIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1035,6 +1105,32 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SortOrder {
+            get {
+                return this.SortOrderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SortOrderField, value) != true)) {
+                    this.SortOrderField = value;
+                    this.RaisePropertyChanged("SortOrder");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Sortfield {
+            get {
+                return this.SortfieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SortfieldField, value) != true)) {
+                    this.SortfieldField = value;
+                    this.RaisePropertyChanged("Sortfield");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int StatusId {
             get {
                 return this.StatusIdField;
@@ -1116,6 +1212,9 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         private string OrganizationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int OrganizationIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string OrganizationKeyField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -1155,6 +1254,19 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int OrganizationId {
+            get {
+                return this.OrganizationIdField;
+            }
+            set {
+                if ((this.OrganizationIdField.Equals(value) != true)) {
+                    this.OrganizationIdField = value;
+                    this.RaisePropertyChanged("OrganizationId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string OrganizationKey {
             get {
                 return this.OrganizationKeyField;
@@ -1175,6 +1287,225 @@ namespace Epi.Windows.MakeView.EWEManagerService {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UserDTO", Namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO")]
+    [System.SerializableAttribute()]
+    public partial class UserDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailAddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FirstNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsActiveField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LastNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.Windows.MakeView.EWEManagerService.ConstantOperationMode OperationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordHashField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ResetPasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RoleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EmailAddress {
+            get {
+                return this.EmailAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailAddressField, value) != true)) {
+                    this.EmailAddressField = value;
+                    this.RaisePropertyChanged("EmailAddress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FirstName {
+            get {
+                return this.FirstNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
+                    this.FirstNameField = value;
+                    this.RaisePropertyChanged("FirstName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsActive {
+            get {
+                return this.IsActiveField;
+            }
+            set {
+                if ((this.IsActiveField.Equals(value) != true)) {
+                    this.IsActiveField = value;
+                    this.RaisePropertyChanged("IsActive");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LastName {
+            get {
+                return this.LastNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
+                    this.LastNameField = value;
+                    this.RaisePropertyChanged("LastName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.Windows.MakeView.EWEManagerService.ConstantOperationMode Operation {
+            get {
+                return this.OperationField;
+            }
+            set {
+                if ((this.OperationField.Equals(value) != true)) {
+                    this.OperationField = value;
+                    this.RaisePropertyChanged("Operation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PasswordHash {
+            get {
+                return this.PasswordHashField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordHashField, value) != true)) {
+                    this.PasswordHashField = value;
+                    this.RaisePropertyChanged("PasswordHash");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhoneNumber {
+            get {
+                return this.PhoneNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
+                    this.PhoneNumberField = value;
+                    this.RaisePropertyChanged("PhoneNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ResetPassword {
+            get {
+                return this.ResetPasswordField;
+            }
+            set {
+                if ((this.ResetPasswordField.Equals(value) != true)) {
+                    this.ResetPasswordField = value;
+                    this.RaisePropertyChanged("ResetPassword");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Role {
+            get {
+                return this.RoleField;
+            }
+            set {
+                if ((this.RoleField.Equals(value) != true)) {
+                    this.RoleField = value;
+                    this.RaisePropertyChanged("Role");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserName {
+            get {
+                return this.UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Constant.OperationMode", Namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.Constants")]
+    public enum ConstantOperationMode : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NoChange = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UpdatePassword = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UpdateUserInfo = 2,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1212,6 +1543,9 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ResponseIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<string, string> SqlDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StatusField;
@@ -1359,6 +1693,19 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<string, string> SqlData {
+            get {
+                return this.SqlDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SqlDataField, value) != true)) {
+                    this.SqlDataField = value;
+                    this.RaisePropertyChanged("SqlData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Status {
             get {
                 return this.StatusField;
@@ -1444,209 +1791,6 @@ namespace Epi.Windows.MakeView.EWEManagerService {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UserDTO", Namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO")]
-    [System.SerializableAttribute()]
-    public partial class UserDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string EmailAddressField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FirstNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LastNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.Windows.MakeView.EWEManagerService.ConstantOperationMode OperationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordHashField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PhoneNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool ResetPasswordField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int RoleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int UserIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UserNameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string EmailAddress {
-            get {
-                return this.EmailAddressField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EmailAddressField, value) != true)) {
-                    this.EmailAddressField = value;
-                    this.RaisePropertyChanged("EmailAddress");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FirstName {
-            get {
-                return this.FirstNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
-                    this.FirstNameField = value;
-                    this.RaisePropertyChanged("FirstName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LastName {
-            get {
-                return this.LastNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
-                    this.LastNameField = value;
-                    this.RaisePropertyChanged("LastName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.Windows.MakeView.EWEManagerService.ConstantOperationMode Operation {
-            get {
-                return this.OperationField;
-            }
-            set {
-                if ((this.OperationField.Equals(value) != true)) {
-                    this.OperationField = value;
-                    this.RaisePropertyChanged("Operation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PasswordHash {
-            get {
-                return this.PasswordHashField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PasswordHashField, value) != true)) {
-                    this.PasswordHashField = value;
-                    this.RaisePropertyChanged("PasswordHash");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PhoneNumber {
-            get {
-                return this.PhoneNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
-                    this.PhoneNumberField = value;
-                    this.RaisePropertyChanged("PhoneNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool ResetPassword {
-            get {
-                return this.ResetPasswordField;
-            }
-            set {
-                if ((this.ResetPasswordField.Equals(value) != true)) {
-                    this.ResetPasswordField = value;
-                    this.RaisePropertyChanged("ResetPassword");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Role {
-            get {
-                return this.RoleField;
-            }
-            set {
-                if ((this.RoleField.Equals(value) != true)) {
-                    this.RoleField = value;
-                    this.RaisePropertyChanged("Role");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UserName {
-            get {
-                return this.UserNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
-                    this.UserNameField = value;
-                    this.RaisePropertyChanged("UserName");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Constant.OperationMode", Namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.Constants")]
-    public enum ConstantOperationMode : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NoChange = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        UpdatePassword = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        UpdateUserInfo = 2,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1878,6 +2022,9 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Epi.Windows.MakeView.EWEManagerService.OrganizationDTO[] OrganizationListField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.Windows.MakeView.EWEManagerService.UserDTO[] OrganizationUsersListField;
+        
         [System.Runtime.Serialization.DataMemberAttribute(Name="Message")]
         public string Message1 {
             get {
@@ -1900,6 +2047,19 @@ namespace Epi.Windows.MakeView.EWEManagerService {
                 if ((object.ReferenceEquals(this.OrganizationListField, value) != true)) {
                     this.OrganizationListField = value;
                     this.RaisePropertyChanged("OrganizationList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.Windows.MakeView.EWEManagerService.UserDTO[] OrganizationUsersList {
+            get {
+                return this.OrganizationUsersListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrganizationUsersListField, value) != true)) {
+                    this.OrganizationUsersListField = value;
+                    this.RaisePropertyChanged("OrganizationUsersList");
                 }
             }
         }
@@ -2456,6 +2616,285 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PreFilledAnswerRequest", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class PreFilledAnswerRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.Windows.MakeView.EWEManagerService.PreFilledAnswerDTO AnswerInfoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.Windows.MakeView.EWEManagerService.PreFilledAnswerDTO AnswerInfo {
+            get {
+                return this.AnswerInfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AnswerInfoField, value) != true)) {
+                    this.AnswerInfoField = value;
+                    this.RaisePropertyChanged("AnswerInfo");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PreFilledAnswerDTO", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class PreFilledAnswerDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid OrganizationKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid ParentRecordIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid ResponseIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid SurveyIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<string, string> SurveyQuestionAnswerListField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid OrganizationKey {
+            get {
+                return this.OrganizationKeyField;
+            }
+            set {
+                if ((this.OrganizationKeyField.Equals(value) != true)) {
+                    this.OrganizationKeyField = value;
+                    this.RaisePropertyChanged("OrganizationKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ParentRecordId {
+            get {
+                return this.ParentRecordIdField;
+            }
+            set {
+                if ((this.ParentRecordIdField.Equals(value) != true)) {
+                    this.ParentRecordIdField = value;
+                    this.RaisePropertyChanged("ParentRecordId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ResponseId {
+            get {
+                return this.ResponseIdField;
+            }
+            set {
+                if ((this.ResponseIdField.Equals(value) != true)) {
+                    this.ResponseIdField = value;
+                    this.RaisePropertyChanged("ResponseId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid SurveyId {
+            get {
+                return this.SurveyIdField;
+            }
+            set {
+                if ((this.SurveyIdField.Equals(value) != true)) {
+                    this.SurveyIdField = value;
+                    this.RaisePropertyChanged("SurveyId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<string, string> SurveyQuestionAnswerList {
+            get {
+                return this.SurveyQuestionAnswerListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyQuestionAnswerListField, value) != true)) {
+                    this.SurveyQuestionAnswerListField = value;
+                    this.RaisePropertyChanged("SurveyQuestionAnswerList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PreFilledAnswerResponse", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class PreFilledAnswerResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<string, string> ErrorMessageListField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurveyResponseIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurveyResponsePassCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurveyResponseUrlField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<string, string> ErrorMessageList {
+            get {
+                return this.ErrorMessageListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageListField, value) != true)) {
+                    this.ErrorMessageListField = value;
+                    this.RaisePropertyChanged("ErrorMessageList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SurveyResponseID {
+            get {
+                return this.SurveyResponseIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyResponseIDField, value) != true)) {
+                    this.SurveyResponseIDField = value;
+                    this.RaisePropertyChanged("SurveyResponseID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SurveyResponsePassCode {
+            get {
+                return this.SurveyResponsePassCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyResponsePassCodeField, value) != true)) {
+                    this.SurveyResponsePassCodeField = value;
+                    this.RaisePropertyChanged("SurveyResponsePassCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SurveyResponseUrl {
+            get {
+                return this.SurveyResponseUrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyResponseUrlField, value) != true)) {
+                    this.SurveyResponseUrlField = value;
+                    this.RaisePropertyChanged("SurveyResponseUrl");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EWEManagerService.IEWEManagerService")]
     public interface IEWEManagerService {
@@ -2523,6 +2962,10 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEWEManagerService/GetUser", ReplyAction="http://tempuri.org/IEWEManagerService/GetUserResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Windows.MakeView.EWEManagerService.CustomFaultException), Action="http://tempuri.org/IEWEManagerService/GetUserCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Windows.MakeView.EWEManagerService.UserAuthenticationResponse GetUser(Epi.Windows.MakeView.EWEManagerService.UserAuthenticationRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswer", ReplyAction="http://tempuri.org/IEWEManagerService/SetSurveyAnswerResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Windows.MakeView.EWEManagerService.CustomFaultException), Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Windows.MakeView.EWEManagerService.PreFilledAnswerResponse SetSurveyAnswer(Epi.Windows.MakeView.EWEManagerService.PreFilledAnswerRequest pRequestMessage);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2610,6 +3053,10 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         
         public Epi.Windows.MakeView.EWEManagerService.UserAuthenticationResponse GetUser(Epi.Windows.MakeView.EWEManagerService.UserAuthenticationRequest request) {
             return base.Channel.GetUser(request);
+        }
+        
+        public Epi.Windows.MakeView.EWEManagerService.PreFilledAnswerResponse SetSurveyAnswer(Epi.Windows.MakeView.EWEManagerService.PreFilledAnswerRequest pRequestMessage) {
+            return base.Channel.SetSurveyAnswer(pRequestMessage);
         }
     }
 }

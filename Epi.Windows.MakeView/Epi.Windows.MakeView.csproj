@@ -311,6 +311,9 @@
     <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.OrganizationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.PreFilledAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.PublishResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

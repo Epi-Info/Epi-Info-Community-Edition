@@ -145,6 +145,15 @@
   <wsdl:message name="IEWEManagerService_GetUser_CustomFaultExceptionFault_FaultMessage">
     <wsdl:part xmlns:q15="http://www.yourcompany.com/types/" name="detail" element="q15:CustomFaultException" />
   </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyAnswer_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyAnswer" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyAnswer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyAnswerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyAnswer_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q16="http://www.yourcompany.com/types/" name="detail" element="q16:CustomFaultException" />
+  </wsdl:message>
   <wsdl:portType name="IEWEManagerService">
     <wsdl:operation name="PublishSurvey">
       <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/PublishSurvey" message="tns:IEWEManagerService_PublishSurvey_InputMessage" />
@@ -220,6 +229,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/GetUser" message="tns:IEWEManagerService_GetUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/GetUserResponse" message="tns:IEWEManagerService_GetUser_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/GetUserCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_GetUser_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSurveyAnswer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswer" message="tns:IEWEManagerService_SetSurveyAnswer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerResponse" message="tns:IEWEManagerService_SetSurveyAnswer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_SetSurveyAnswer_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IEWEManagerService" type="tns:IEWEManagerService">
@@ -394,6 +408,18 @@
     </wsdl:operation>
     <wsdl:operation name="GetUser">
       <soap:operation soapAction="http://tempuri.org/IEWEManagerService/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetSurveyAnswer">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/SetSurveyAnswer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

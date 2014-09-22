@@ -413,12 +413,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Service References\ServiceManager\Reference.cs">
+    <Compile Include="Service References\EWEManagerService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\EWEManagerService\Reference.cs">
+    <Compile Include="Service References\ServiceManager\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -531,6 +531,9 @@
     <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.OrganizationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.PreFilledAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.PublishResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -540,20 +543,26 @@
     <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.SurveyInfoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService1.wsdl" />
+    <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.UserAuthenticationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService.wsdl" />
+    <None Include="Service References\EWEManagerService\EWEManagerService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\EWEManagerService\EWEManagerService5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService51.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService52.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService53.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService54.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceManager\ManagerService.wsdl" />
@@ -661,13 +670,13 @@
     <Content Include="epi2000c.ico" />
     <Content Include="Resources\GenericTablet.png" />
     <Content Include="Resources\MarkupCursor.cur" />
-    <None Include="Service References\EWEManagerService\configuration91.svcinfo" />
-    <None Include="Service References\EWEManagerService\configuration.svcinfo" />
     <None Include="Service References\EWEManagerService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService1.disco" />
+    <None Include="Service References\EWEManagerService\configuration.svcinfo" />
+    <None Include="Service References\EWEManagerService\configuration91.svcinfo" />
+    <None Include="Service References\EWEManagerService\EWEManagerService.disco" />
     <EmbeddedResource Include="Resources\imageField_Icons.png" />
     <None Include="Service References\ServiceManager\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
@@ -683,8 +692,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceManager\" />
     <WCFMetadataStorage Include="Service References\EWEManagerService\" />
+    <WCFMetadataStorage Include="Service References\ServiceManager\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Web\" />
