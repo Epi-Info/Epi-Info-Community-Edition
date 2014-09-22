@@ -1504,6 +1504,7 @@ namespace Epi.Windows.Enter
                 mnuImportFromWeb.Enabled = false;
                 mnuImportFromDataPackage.Enabled = false;
                 mnuPackageForTransport.Enabled = false;
+                fromWebEnterToolStripMenuItem.Enabled = false;
                 newRecordToolStripMenuItem.Enabled = false;
                 saveToolStripMenuItem.Enabled = false;
                 editViewToolStripMenuItem.Enabled = false;
@@ -1538,6 +1539,7 @@ namespace Epi.Windows.Enter
                 mnuImportFromWeb.Enabled = true;
                 mnuImportFromDataPackage.Enabled = true;
                 mnuPackageForTransport.Enabled = true;
+                fromWebEnterToolStripMenuItem.Enabled = true;
                 editViewToolStripMenuItem.Enabled = true;
                 findToolStripMenuItem.Enabled = true;
                 printToolStripMenuItem.Enabled = true;
@@ -2435,7 +2437,46 @@ namespace Epi.Windows.Enter
                 }
             }
         }
+        private void ImportFormDataFromWebEnter(View destinationView)
+            {
+            if (destinationView.IsRelatedView)
+                {
+                return;
+                }
 
+            Epi.Enter.Forms.ImportWebEnterDataForm importWebDataForm = new Epi.Enter.Forms.ImportWebEnterDataForm(destinationView);
+            DialogResult result = importWebDataForm.ShowDialog();
+
+            if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                if (this.View != null)
+                    {
+                    if (IsRecordCloseable == false)
+                        {
+                        return;
+                        }
+
+                    if (CloseView() == false)
+                        {
+                        return;
+                        }
+                    }
+
+                this.view = destinationView;
+
+                Project project = view.Project;
+
+                if (!project.CollectedData.TableExists(view.TableName))
+                    {
+                    MsgBox.ShowError("Something that should never fail has failed.");
+                    }
+
+                if (this.OpenViewEvent != null)
+                    {
+                    this.OpenViewEvent(this, new Epi.Windows.Enter.PresentationLogic.OpenViewEventArgs(view));
+                    }
+                }
+            }
         /// <summary>
         /// Imports data from an Android phone.
         /// </summary>
@@ -2746,5 +2787,9 @@ namespace Epi.Windows.Enter
             {
             }
         }
+ private void fromWebEnterToolStripMenuItem_Click(object sender, EventArgs e)
+            {
+            ImportFormDataFromWebEnter(this.view);
+            }
     }
 }
