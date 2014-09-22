@@ -923,7 +923,7 @@
     <value>settingsPanel</value>
   </data>
   <data name="&gt;&gt;settingsPanel.Type" xml:space="preserve">
-    <value>Epi.Windows.Controls.SettingsPanel, Epi.Windows, Version=7.1.5329.16378, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Controls.SettingsPanel, Epi.Windows, Version=7.1.5343.24387, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;settingsPanel.Parent" xml:space="preserve">
     <value>tabAnalysis</value>
@@ -1874,6 +1874,6 @@
     <value>OptionsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5329.16378, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5343.24387, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
