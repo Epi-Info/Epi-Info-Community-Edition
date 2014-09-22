@@ -156,8 +156,6 @@ namespace Epi.Windows.Dialogs
             {
                 InitYesNoButtons();
             }
-
-            this.TopMost = true;
         }
         
         string Watermark(EpiInfo.Plugin.DataType dataType)

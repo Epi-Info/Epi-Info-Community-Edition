@@ -373,7 +373,7 @@ namespace Epi.Windows.Analysis.Dialogs
             }
             comboBoxIntervalType.Enabled = enableIntervalFields;
             textBoxInterval.Enabled = enableIntervalFields;
-            textBoxFirstValue.Enabled = false;
+            textBoxFirstValue.Enabled = enableIntervalFields;
         }
 	}
 }

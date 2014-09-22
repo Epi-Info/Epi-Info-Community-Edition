@@ -214,8 +214,8 @@
                     <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart title:" Margin="0,12,0,0"  />
                     <TextBox x:Name="txtChartTitle" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
 
-                    <TextBlock x:Name="tblockChartSubTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart subtitle:" Margin="0,12,0,0"  />
-                    <TextBox x:Name="txtChartSubTitle" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
+                    <!--<TextBlock x:Name="tblockChartSubTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart subtitle:" Margin="0,12,0,0"  />
+                    <TextBox x:Name="txtChartSubTitle" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Stretch" />-->
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>

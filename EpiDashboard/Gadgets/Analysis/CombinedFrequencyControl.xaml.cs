@@ -8,7 +8,6 @@ using System.Text;
 using System.Xml;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -30,16 +29,21 @@ namespace EpiDashboard
     public partial class CombinedFrequencyControl : GadgetBase
     {
         #region Private Variables
-        /// <summary>
-        /// Used for maintaining the width when collapsing output
-        /// </summary>
-        private double currentWidth;
+        
+        private List<TextBlock> gridLabelsList;
 
         #endregion // Private Variables
 
         #region Delegates
 
         private new delegate void AddGridFooterDelegate(string strataValue, int denominator, int fields = -1, bool isBoolean = false);
+        private new delegate void SetGridTextDelegate(string strataValue, TextBlockConfig textBlockConfig);
+        private delegate void AddFreqGridDelegate(string strataVar, string value);
+        private delegate void RenderFrequencyHeaderDelegate(string strataValue, string freqVar);
+        private delegate void RenderConfidenceLimitsHeaderDelegate(string strataValue, string freqVar);
+        private delegate void DrawConfidenceLimitBordersDelegate(string strataValue);        
+        private delegate void SetConfidenceLimitsGridTextDelegate(string strataValue, TextBlockConfig textBlockConfig);
+        private delegate void AddConfidenceLimitsGridRowDelegate(string strataValue, int height);
 
         #endregion // Delegates
 
@@ -74,8 +78,10 @@ namespace EpiDashboard
                 headerPanel.Text = CustomOutputHeading;
             }
 
+            StrataGridList = new List<Grid>();
+            gridLabelsList = new List<TextBlock>();
             
-            //FillComboboxes();
+            FillComboboxes();
             
             mnuCopyData.Click += new RoutedEventHandler(mnuCopyData_Click);
             mnuSendDataToHTML.Click += new RoutedEventHandler(mnuSendDataToHTML_Click);
@@ -104,15 +110,14 @@ namespace EpiDashboard
             this.IsProcessing = false;
 
             base.Construct();
-            this.Parameters = new CombinedFrequencyParameters();
 
             #region Translation
-            //ConfigExpandedTitle.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_COMBINED_FREQUENCY;
-            //tblockGroupField.Text = DashboardSharedStrings.GADGET_GROUP_VARIABLE;
-            //tblockTrueValue.Text = DashboardSharedStrings.GADGET_TRUE_VALUE;
-            //expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
-            //checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
-            //checkboxShowDenominator.Content = DashboardSharedStrings.GADGET_SHOW_DENOMINATOR;
+            ConfigExpandedTitle.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_COMBINED_FREQUENCY;
+            tblockGroupField.Text = DashboardSharedStrings.GADGET_GROUP_VARIABLE;
+            tblockTrueValue.Text = DashboardSharedStrings.GADGET_TRUE_VALUE;
+            expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
+            checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
+            checkboxShowDenominator.Content = DashboardSharedStrings.GADGET_SHOW_DENOMINATOR;
             #endregion // Translation
         }  
         #endregion // Constructors
@@ -126,6 +131,25 @@ namespace EpiDashboard
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             messagePanel.Text = string.Empty;
             descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
+
+            foreach (Grid grid in StrataGridList)
+            {
+                grid.Children.Clear();
+                grid.RowDefinitions.Clear();
+                if (grid.Parent is Border)
+                {
+                    Border border = grid.Parent as Border;
+                    panelMain.Children.Remove(border);
+                }
+            }
+
+            foreach (TextBlock textBlock in gridLabelsList)
+            {
+                panelMain.Children.Remove(textBlock);
+            }
+
+            StrataGridList.Clear();
+
             panelMain.Children.Clear();
         }
         
@@ -156,7 +180,28 @@ namespace EpiDashboard
             RefreshResults();
         }
 
-       
+        /// <summary>
+        /// Handles the selection changed event for the combine mode combo box
+        /// </summary>
+        /// <param name="sender">Object that fired the event</param>
+        /// <param name="e">.NET supplied event parameters</param>
+        private void cmbCombineMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (txtTrueValue != null && tblockTrueValue != null)
+            {
+                if (cmbCombineMode.SelectedIndex == 1)
+                {
+                    txtTrueValue.Visibility = System.Windows.Visibility.Visible;
+                    tblockTrueValue.Visibility = System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    txtTrueValue.Visibility = System.Windows.Visibility.Collapsed;
+                    tblockTrueValue.Visibility = System.Windows.Visibility.Collapsed;
+                    txtTrueValue.Text = string.Empty;
+                }
+            }
+        }
 
         protected override void worker_WorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
@@ -167,28 +212,48 @@ namespace EpiDashboard
 
         protected override void worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+            //Stopwatch stopwatch = new Stopwatch();
+            //stopwatch.Start();
+            Dictionary<string, string> inputVariableList = GadgetOptions.InputVariableList;
+
             lock (syncLock)
             {
                 this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToProcessingState));
                 this.Dispatcher.BeginInvoke(new SimpleCallback(ClearResults));
+
+                AddFreqGridDelegate addGrid = new AddFreqGridDelegate(AddFreqGrid);
+                SetGridTextDelegate setText = new SetGridTextDelegate(SetGridText);
+                AddGridRowDelegate addRow = new AddGridRowDelegate(AddGridRow);                
+                RenderFrequencyHeaderDelegate renderHeader = new RenderFrequencyHeaderDelegate(RenderFrequencyHeader);
                 DrawFrequencyBordersDelegate drawBorders = new DrawFrequencyBordersDelegate(DrawOutputGridBorders);
-                AddDataGridDelegate addDataGrid = new AddDataGridDelegate(AddDataGrid);
 
                 System.Collections.Generic.Dictionary<string, System.Data.DataTable> Freq_ListSet = new Dictionary<string, System.Data.DataTable>();
 
+                string freqVar = GadgetOptions.MainVariableName;
+                string weightVar = GadgetOptions.WeightVariableName;
+                string strataVar = string.Empty;                
+
+                if (GadgetOptions.StrataVariableNames != null && GadgetOptions.StrataVariableNames.Count > 0)
+                {
+                    strataVar = GadgetOptions.StrataVariableNames[0];
+                }
+
                 try
                 {
+                    List<string> stratas = new List<string>();
+                    if (!string.IsNullOrEmpty(strataVar))
+                    {
+                        stratas.Add(strataVar);
+                    }
+
                     DataTable dt = new DataTable();
                     bool booleanResults = false;
                     int fields = -1;
 
-                    if (Parameters.ColumnNames.Count > 0)
+                    if (DashboardHelper.GetAllGroupsAsList().Contains(freqVar))
                     {
-                        //if (DashboardHelper.GetAllGroupsAsList().Contains(freqVar))
-                        //{
-                        dt = DashboardHelper.GenerateCombinedFrequencyTable(Parameters as CombinedFrequencyParameters, ref booleanResults, ref fields);
-                        //fields = DashboardHelper.GetVariablesInGroup(freqVar).Count;
-                        //}
+                        dt = DashboardHelper.GenerateCombinedFrequencyTable(GadgetOptions, ref booleanResults);
+                        fields = DashboardHelper.GetVariablesInGroup(freqVar).Count;
                     }
                     else
                     {
@@ -213,13 +278,17 @@ namespace EpiDashboard
                     else
                     {
                         string formatString = string.Empty;
-                        double count = Convert.ToDouble(dt.Compute("sum([count])", string.Empty)); 
+                        double count = Convert.ToDouble(dt.Compute("sum([count])", string.Empty));  //0;
+                        this.Dispatcher.BeginInvoke(addGrid, strataVar, string.Empty);
                         string strataValue = dt.TableName;
+                        this.Dispatcher.BeginInvoke(renderHeader, strataValue, freqVar);
+                        //double AccumulatedTotal = 0;
+                        int rowCount = 1;
                         int denominator = DashboardHelper.RecordCount;
 
-                        if (!string.IsNullOrEmpty(Parameters.CustomFilter.Trim()))
+                        if (!string.IsNullOrEmpty(GadgetOptions.CustomFilter.Trim()))
                         {
-                            denominator = DashboardHelper.DataSet.Tables[0].Select(Parameters.CustomFilter.Trim()).Count();
+                            denominator = DashboardHelper.DataSet.Tables[0].Select(GadgetOptions.CustomFilter.Trim()).Count();
                         }
                         
                         if (!booleanResults)
@@ -227,26 +296,31 @@ namespace EpiDashboard
                             denominator = denominator * fields;
                         }
 
-                        dt.Columns[0].ColumnName = DashboardSharedStrings.COL_HEADER_VALUE;
-                        dt.Columns[1].ColumnName = DashboardSharedStrings.COL_HEADER_FREQUENCY;
-                        dt.Columns.Add(new DataColumn(DashboardSharedStrings.COL_HEADER_PERCENT, typeof(double)));
-
                         foreach (System.Data.DataRow row in dt.Rows)
                         {
-                            if (!row[DashboardSharedStrings.COL_HEADER_VALUE].Equals(DBNull.Value))
-                            {   
+                            if (!row["value"].Equals(DBNull.Value))
+                            {
+                                this.Dispatcher.Invoke(addRow, strataValue, 26);
+                                string displayValue = row["value"].ToString();
+
+                                this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(displayValue, new Thickness(6, 0, 6, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Left, rowCount, 0, Visibility.Visible));
+                                this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(row["count"].ToString(), new Thickness(6, 0, 6, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 1, Visibility.Visible));
+
                                 double pct = 0;
                                 if (count > 0)
-                                {
-                                    pct = Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]) / (double)denominator;
-                                    row[DashboardSharedStrings.COL_HEADER_PERCENT] = pct;
+                                {                                    
+                                    pct = Convert.ToDouble(row["count"]) / (double)denominator;
                                 }
+                                //AccumulatedTotal += pct;
+
+                                this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(pct.ToString("P"), new Thickness(6, 0, 6, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 2, Visibility.Visible));
+
+                                rowCount++;
                             }
                         }
 
-                        this.Dispatcher.BeginInvoke(addDataGrid, dt.AsDataView(), dt.TableName);
                         this.Dispatcher.BeginInvoke(new AddGridFooterDelegate(RenderFrequencyFooter), strataValue, denominator, fields, booleanResults);
-                        //this.Dispatcher.BeginInvoke(drawBorders, strataValue);
+                        this.Dispatcher.BeginInvoke(drawBorders, strataValue);
 
                         this.Dispatcher.BeginInvoke(new SimpleCallback(RenderFinish));
                         //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
@@ -274,123 +348,125 @@ namespace EpiDashboard
         /// </summary>
         private void FillComboboxes(bool update = false)
         {
-        }
+            LoadingCombos = true;
 
-        private void AddDataGrid(DataView dv, string strataValue)
-        {
-            DataGrid dg = new DataGrid();
-            dg.Style = this.Resources["LineListDataGridStyle"] as Style;
+            string prevField = string.Empty;            
 
-            CombinedFrequencyParameters CombinedFrequencyParameters = (this.Parameters) as CombinedFrequencyParameters;
-
-            FrameworkElementFactory datagridRowsPresenter = new FrameworkElementFactory(typeof(DataGridRowsPresenter));
-            ItemsPanelTemplate itemsPanelTemplate = new ItemsPanelTemplate();
-            itemsPanelTemplate.VisualTree = datagridRowsPresenter;
-            GroupStyle groupStyle = new GroupStyle();
-            groupStyle.ContainerStyle = this.Resources["DefaultGroupItemStyle"] as Style;
-            groupStyle.Panel = itemsPanelTemplate;
-            dg.GroupStyle.Add(groupStyle);
-
-            GroupStyle groupStyle2 = new GroupStyle();
-            groupStyle2.HeaderTemplate = this.Resources["GroupDataTemplate"] as DataTemplate;
-            //groupStyle.Panel = itemsPanelTemplate;
-            dg.GroupStyle.Add(groupStyle2);
-
-            string groupVar = String.Empty;
-
-            //if (!String.IsNullOrEmpty(ListParameters.PrimaryGroupField.Trim()))
-            //{
-            //    groupVar = ListParameters.PrimaryGroupField.Trim();
-            //    ListCollectionView lcv = new ListCollectionView(dv);
-            //    lcv.GroupDescriptions.Add(new PropertyGroupDescription(groupVar));
-            //    if (!String.IsNullOrEmpty(ListParameters.SecondaryGroupField.Trim()) && !ListParameters.SecondaryGroupField.Trim().Equals(groupVar))
-            //    {
-            //        lcv.GroupDescriptions.Add(new PropertyGroupDescription(ListParameters.SecondaryGroupField.Trim())); // for second category
-            //    }
-            //    dg.ItemsSource = lcv;
-            //}
-            //else
-            //{
-                dg.ItemsSource = dv;
-            //}
-
-
-            if (Parameters.Height.HasValue)
+            if (update)
             {
-                dg.MaxHeight = Parameters.Height.Value;
-            }
-            else
-            {
-                dg.MaxHeight = 700;
-            }
-
-            if (Parameters.Width.HasValue)
-            {
-                dg.MaxWidth = Parameters.Width.Value;
-            }
-            else
-            {
-                dg.MaxWidth = 900;
-            }
-
-            dg.AutoGeneratedColumns += new EventHandler(dg_AutoGeneratedColumns);
-            dg.AutoGeneratingColumn += new EventHandler<DataGridAutoGeneratingColumnEventArgs>(dg_AutoGeneratingColumn);
-
-            panelMain.Children.Add(dg);
-        }
-
-        void dg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            e.Column.IsReadOnly = true;
-
-            DataGridTextColumn dataGridTextColumn = e.Column as DataGridTextColumn;
-            if (dataGridTextColumn != null)
-            {
-                if (e.PropertyType == typeof(DateTime))
+                if (cbxField.SelectedIndex >= 0)
                 {
-                    dataGridTextColumn.CellStyle = this.Resources["RightAlignDataGridCellStyle"] as Style;
-                    Field field = DashboardHelper.GetAssociatedField(e.Column.Header.ToString());
-                    if (field != null && field is DateField)
+                    prevField = cbxField.SelectedItem.ToString();
+                }
+            }
+
+            cbxField.ItemsSource = null;
+            cbxField.Items.Clear();
+
+            cmbFieldStrata.ItemsSource = null;
+            cmbFieldStrata.Items.Clear();
+
+            List<string> fieldNames = new List<string>();
+            List<string> weightFieldNames = new List<string>();
+            List<string> strataFieldNames = new List<string>();
+
+            weightFieldNames.Add(string.Empty);
+            strataFieldNames.Add(string.Empty);
+
+            if (DashboardHelper.IsUsingEpiProject)
+            {
+                Field field = null;
+                foreach (DataRow fieldRow in DashboardHelper.FieldTable.Rows)
+                {   
+                    if (fieldRow["epifieldtype"] is Field)
                     {
-                        dataGridTextColumn.Binding.StringFormat = "{0:d}";
-                    }
-                    else if (field != null && field is TimeField)
-                    {
-                        dataGridTextColumn.Binding.StringFormat = "{0:t}";
+                        field = fieldRow["epifieldtype"] as Field;
+                        if (field is GroupField)
+                        {
+                            fieldNames.Add(field.Name);
+                        }
                     }
                 }
-                else if (e.PropertyType == typeof(int) ||
-                    e.PropertyType == typeof(byte) ||
-                    e.PropertyType == typeof(decimal) ||
-                    e.PropertyType == typeof(double) ||
-                    e.PropertyType == typeof(float))
-                {
-                    dataGridTextColumn.CellStyle = this.Resources["RightAlignDataGridCellStyle"] as Style;
-                }
             }
 
-            if (e.PropertyName == DashboardSharedStrings.COL_HEADER_PERCENT)
+            fieldNames.AddRange(DashboardHelper.GetGroupVariablesAsList());
+
+            fieldNames.Sort();
+            weightFieldNames.Sort();
+            strataFieldNames.Sort();
+
+            cbxField.ItemsSource = fieldNames;            
+            cmbFieldStrata.ItemsSource = strataFieldNames;
+
+            if (cbxField.Items.Count > 0)
             {
-                (e.Column as DataGridTextColumn).Binding.StringFormat = "P2";
+                cbxField.SelectedIndex = -1;
             }
+            if (cmbFieldStrata.Items.Count > 0)
+            {
+                cmbFieldStrata.SelectedIndex = -1;
+            }
+
+            if (update)
+            {
+                cbxField.SelectedItem = prevField;
+            }
+
+            LoadingCombos = false;
         }
 
-        void dg_AutoGeneratedColumns(object sender, EventArgs e)
+        private void AddFreqGrid(string strataVar, string value)
         {
+            Grid grid = new Grid();
+            grid.Tag = value;
+            grid.Style = this.Resources["genericOutputGrid"] as Style;
+            grid.Visibility = System.Windows.Visibility.Collapsed;
+            
+            ColumnDefinition column1 = new ColumnDefinition();
+            ColumnDefinition column2 = new ColumnDefinition();
+            ColumnDefinition column3 = new ColumnDefinition();
+
+            column1.Width = GridLength.Auto;
+            column2.Width = GridLength.Auto;
+            column3.Width = GridLength.Auto;
+
+            grid.ColumnDefinitions.Add(column1);
+            grid.ColumnDefinitions.Add(column2);
+            grid.ColumnDefinitions.Add(column3);
+
+            Border border = new Border();
+            border.Style = this.Resources["genericOutputGridBorderWithMargins"] as Style;
+
+            border.Child = grid;
+            panelMain.Children.Add(border);
+            StrataGridList.Add(grid);
         }
 
-        private DataGrid GetDataGrid()
+        private void SetGridText(string strataValue, TextBlockConfig textBlockConfig)
         {
-            DataGrid dg = null;
-            foreach (UIElement element in panelMain.Children)
-            {
-                if (element is DataGrid)
-                {
-                    dg = element as DataGrid;
-                }
-            }
+            Grid grid = new Grid();
 
-            return dg;
+            grid = GetStrataGrid(strataValue);
+
+            TextBlock txt = new TextBlock();
+            txt.Foreground = this.Resources["cellForeground"] as SolidColorBrush;
+            txt.Text = textBlockConfig.Text;
+            txt.Margin = textBlockConfig.Margin;
+            txt.VerticalAlignment = textBlockConfig.VerticalAlignment;
+            txt.HorizontalAlignment = textBlockConfig.HorizontalAlignment;
+            Grid.SetRow(txt, textBlockConfig.RowNumber);
+            Grid.SetColumn(txt, textBlockConfig.ColumnNumber);
+            grid.Children.Add(txt);
+        }
+
+        protected override void AddGridRow(string strataValue, int height)
+        {
+            Grid grid = GetStrataGrid(strataValue);
+            waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+            grid.Visibility = Visibility.Visible; 
+            RowDefinition rowDef = new RowDefinition();
+            rowDef.Height = new GridLength(height);
+            grid.RowDefinitions.Add(rowDef);
         }
 
         /// <summary>
@@ -398,12 +474,36 @@ namespace EpiDashboard
         /// </summary>
         protected override void CopyToClipboard()
         {
-            DataGrid dg = GetDataGrid();
+            StringBuilder sb = new StringBuilder();
 
-            if (dg != null)
+            foreach (Grid grid in StrataGridList)
             {
-                Common.CopyDataViewToClipboard(dg.ItemsSource as DataView);
+                if (StrataGridList.Count > 1)
+                {
+                    sb.AppendLine(grid.Tag.ToString());
+                }
+
+                foreach (UIElement control in grid.Children)
+                {
+                    if (control is TextBlock)
+                    {
+                        int columnNumber = Grid.GetColumn(control);
+                        string value = ((TextBlock)control).Text;
+
+                        sb.Append(value + "\t");
+
+                        if (columnNumber >= grid.ColumnDefinitions.Count - 1)
+                        {
+                            sb.AppendLine();
+                        }
+                    }
+                }
+
+                sb.AppendLine();
             }
+
+            Clipboard.Clear();
+            Clipboard.SetText(sb.ToString());
         }
 
         /// <summary>
@@ -417,6 +517,16 @@ namespace EpiDashboard
 
         public override void CollapseOutput()
         {
+            //foreach (Grid grid in this.StrataGridList)
+            //{
+            //    grid.Visibility = System.Windows.Visibility.Collapsed;
+            //    Border border = new Border();
+            //    if (grid.Parent is Border)
+            //    {
+            //        border = (grid.Parent) as Border;
+            //        border.Visibility = System.Windows.Visibility.Collapsed;
+            //    }
+            //}
             panelMain.Visibility = System.Windows.Visibility.Collapsed;
             this.messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             this.infoPanel.Visibility = System.Windows.Visibility.Collapsed;
@@ -426,6 +536,17 @@ namespace EpiDashboard
 
         public override void ExpandOutput()
         {
+            //foreach (Grid grid in this.StrataGridList)
+            //{
+            //    grid.Visibility = System.Windows.Visibility.Visible;
+            //    Border border = new Border();
+            //    if (grid.Parent is Border)
+            //    {
+            //        border = (grid.Parent) as Border;
+            //        border.Visibility = System.Windows.Visibility.Visible;
+            //    }
+            //}
+
             panelMain.Visibility = System.Windows.Visibility.Visible;
 
             if (this.messagePanel.MessagePanelType != Controls.MessagePanelType.StatusPanel)
@@ -445,25 +566,81 @@ namespace EpiDashboard
             IsCollapsed = false;
         }
 
+        /// <summary>
+        /// Draws the header row in the output grid
+        /// </summary>
+        /// <param name="strataValue"></param>
+        /// <param name="freqVar"></param>
+        private void RenderFrequencyHeader(string strataValue, string freqVar)
+        {
+            Grid grid = GetStrataGrid(strataValue);
+
+            RowDefinition rowDefHeader = new RowDefinition();
+            rowDefHeader.Height = new GridLength(30);
+            grid.RowDefinitions.Add(rowDefHeader); 
+
+            for (int y = 0; y < grid.ColumnDefinitions.Count; y++)
+            {
+                Rectangle rctHeader = new Rectangle();
+                rctHeader.Style = this.Resources["gridHeaderCellRectangle"] as Style;
+                Grid.SetRow(rctHeader, 0);
+                Grid.SetColumn(rctHeader, y);
+                grid.Children.Add(rctHeader); 
+            }
+
+            TextBlock txtValHeader = new TextBlock();
+            txtValHeader.Text = freqVar;
+            txtValHeader.VerticalAlignment = VerticalAlignment.Center;
+            txtValHeader.HorizontalAlignment = HorizontalAlignment.Center;
+            txtValHeader.Margin = new Thickness(6, 0, 6, 0);
+            txtValHeader.FontWeight = FontWeights.Bold;
+            txtValHeader.Foreground = Brushes.White;
+            Grid.SetRow(txtValHeader, 0);
+            Grid.SetColumn(txtValHeader, 0);
+            grid.Children.Add(txtValHeader);
+
+            TextBlock txtFreqHeader = new TextBlock();
+            txtFreqHeader.Text = DashboardSharedStrings.COL_HEADER_FREQUENCY;
+            txtFreqHeader.VerticalAlignment = VerticalAlignment.Center;
+            txtFreqHeader.HorizontalAlignment = HorizontalAlignment.Center;
+            txtFreqHeader.Margin = new Thickness(6, 0, 6, 0);
+            txtFreqHeader.FontWeight = FontWeights.Bold;
+            txtFreqHeader.Foreground = Brushes.White;
+            Grid.SetRow(txtFreqHeader, 0);
+            Grid.SetColumn(txtFreqHeader, 1);
+            grid.Children.Add(txtFreqHeader); 
+
+            TextBlock txtPctHeader = new TextBlock();
+            txtPctHeader.Text = DashboardSharedStrings.COL_HEADER_PERCENT;
+            txtPctHeader.VerticalAlignment = VerticalAlignment.Center;
+            txtPctHeader.HorizontalAlignment = HorizontalAlignment.Center;
+            txtPctHeader.Margin = new Thickness(6, 0, 6, 0);
+            txtPctHeader.FontWeight = FontWeights.Bold;
+            txtPctHeader.Foreground = Brushes.White;
+            Grid.SetRow(txtPctHeader, 0);
+            Grid.SetColumn(txtPctHeader, 2);
+            grid.Children.Add(txtPctHeader); 
+        }
+
         private void RenderFrequencyFooter(string strataValue, int denominator, int fields = -1, bool isBoolean = false)
         {
-            if (!((Parameters as CombinedFrequencyParameters).ShowDenominator))
+            if (checkboxShowDenominator.IsChecked == false)
             {
                 return;
             }
 
             TextBlock txtDenom = new TextBlock();
             txtDenom.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-            txtDenom.FontWeight = FontWeights.Bold;
+            txtDenom.FontWeight = FontWeights.Bold;            
             txtDenom.Margin = (Thickness)this.Resources["genericTextMargin"];
 
             if (isBoolean == true)
             {
-                txtDenom.Text = string.Format(DashboardSharedStrings.DENOMINATOR_DESCRIPTION_BOOLEAN, denominator);
+                txtDenom.Text = string.Format(DashboardSharedStrings.DENOMINATOR_DESCRIPTION_BOOLEAN, denominator);                    
             }
             else
             {
-                txtDenom.Text = string.Format(DashboardSharedStrings.DENOMINATOR_DESCRIPTION_NON_BOOLEAN, denominator);
+                txtDenom.Text = string.Format(DashboardSharedStrings.DENOMINATOR_DESCRIPTION_NON_BOOLEAN, denominator);            
             }
 
             panelMain.Children.Add(txtDenom);
@@ -492,14 +669,21 @@ namespace EpiDashboard
             this.GadgetCheckForCancellation -= new GadgetCheckForCancellationHandler(IsCancelled);
 
             base.CloseGadget();
+
+            GadgetOptions = null;
         }
 
         /// <summary>
         /// Finishes the drawing process
         /// </summary>
-        protected override void RenderFinish()
+        private void RenderFinish()
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+
+            foreach (Grid freqGrid in StrataGridList)
+            {
+                freqGrid.Visibility = Visibility.Visible;
+            }
 
             messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
             messagePanel.Text = string.Empty;
@@ -513,9 +697,14 @@ namespace EpiDashboard
         /// Finishes the drawing process with a warning message
         /// </summary>
         /// <param name="errorMessage">The message to display</param>
-        protected override void RenderFinishWithWarning(string errorMessage)
+        private void RenderFinishWithWarning(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+
+            foreach (Grid freqGrid in StrataGridList)
+            {
+                freqGrid.Visibility = Visibility.Visible;
+            }
 
             messagePanel.MessagePanelType = Controls.MessagePanelType.WarningPanel;
             messagePanel.Text = errorMessage;
@@ -529,7 +718,7 @@ namespace EpiDashboard
         /// Finishes the drawing process with an error message
         /// </summary>
         /// <param name="errorMessage">The message to display</param>
-        protected override void RenderFinishWithError(string errorMessage)
+        private void RenderFinishWithError(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -541,62 +730,61 @@ namespace EpiDashboard
             CheckAndSetPosition();
         }
 
-//MOVED TO CombinedFrequencyProperties.xaml.cs        
-        ///// <summary>
-        ///// Creates the list of internal gadget variables used for data processing
-        ///// </summary>
-        //private void CreateInputVariableList()
-        //{
-        //    Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
+        /// <summary>
+        /// Creates the list of internal gadget variables used for data processing
+        /// </summary>
+        private void CreateInputVariableList()
+        {
+            Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
 
-        //    if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
-        //    {
-        //        GadgetOptions.MainVariableName = cbxField.SelectedItem.ToString();
-        //    }
-        //    else
-        //    {
-        //        return;
-        //    }
+            if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
+            {
+                GadgetOptions.MainVariableName = cbxField.SelectedItem.ToString();
+            }
+            else
+            {
+                return;
+            }
 
-        //    if (checkboxSortHighLow.IsChecked == true)
-        //    {
-        //        inputVariableList.Add("sort", "highlow");
-        //        GadgetOptions.ShouldSortHighToLow = true;
-        //    }
-        //    else
-        //    {
-        //        GadgetOptions.ShouldSortHighToLow = false;
-        //    }
+            if (checkboxSortHighLow.IsChecked == true)
+            {
+                inputVariableList.Add("sort", "highlow");
+                GadgetOptions.ShouldSortHighToLow = true;
+            }
+            else
+            {
+                GadgetOptions.ShouldSortHighToLow = false;
+            }
 
-        //    if (checkboxShowDenominator.IsChecked == true)
-        //    {
-        //        inputVariableList.Add("denom", "true");
-        //    }
-        //    else
-        //    {
-        //        inputVariableList.Add("denom", "false");
-        //    }
+            if (checkboxShowDenominator.IsChecked == true)
+            {
+                inputVariableList.Add("denom", "true");
+            }
+            else
+            {
+                inputVariableList.Add("denom", "false");
+            }
 
-        //    GadgetOptions.ShouldIncludeMissing = false;
+            GadgetOptions.ShouldIncludeMissing = false;
 
-        //    if (DataFilters != null && DataFilters.Count > 0)
-        //    {
-        //        GadgetOptions.CustomFilter = DataFilters.GenerateDataFilterString(false);
-        //    }
-        //    else
-        //    {
-        //        GadgetOptions.CustomFilter = string.Empty;
-        //    }
+            if (DataFilters != null && DataFilters.Count > 0)
+            {
+                GadgetOptions.CustomFilter = DataFilters.GenerateDataFilterString(false);
+            }
+            else
+            {
+                GadgetOptions.CustomFilter = string.Empty;
+            }
 
-        //    if (cmbCombineMode.SelectedIndex >= 0)
-        //    {
-        //        inputVariableList.Add("combinemode", cmbCombineMode.SelectedIndex.ToString());
-        //    }
+            if (cmbCombineMode.SelectedIndex >= 0)
+            {
+                inputVariableList.Add("combinemode", cmbCombineMode.SelectedIndex.ToString());
+            }
 
-        //    inputVariableList.Add("truevalue", txtTrueValue.Text);
+            inputVariableList.Add("truevalue", txtTrueValue.Text);
 
-        //    GadgetOptions.InputVariableList = inputVariableList;
-        //}
+            GadgetOptions.InputVariableList = inputVariableList;
+        }
 
         #endregion // Private Methods
 
@@ -625,8 +813,8 @@ namespace EpiDashboard
         /// </summary>
         public override void SetGadgetToProcessingState()
         {
+            this.cbxField.IsEnabled = false;
             this.IsProcessing = true;
-            base.SetGadgetToProcessingState();
         }
 
         /// <summary>
@@ -634,8 +822,9 @@ namespace EpiDashboard
         /// </summary>
         public override void SetGadgetToFinishedState()
         {
+            this.cbxField.IsEnabled = true;
             this.IsProcessing = false;
-            currentWidth = borderAll.ActualWidth;
+
             base.SetGadgetToFinishedState();
         }
 
@@ -644,7 +833,7 @@ namespace EpiDashboard
         /// </summary>
         public override void UpdateVariableNames()
         {
-            //FillComboboxes(true);
+            FillComboboxes(true);
         }
 
         /// <summary>
@@ -652,8 +841,11 @@ namespace EpiDashboard
         /// </summary>
         public override void RefreshResults()
         {
-            if (!LoadingCombos && Parameters != null && Parameters.ColumnNames.Count > 0)
+            Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
+
+            if (!LoadingCombos && cbxField.SelectedIndex >= 0)
             {
+                CreateInputVariableList();
                 infoPanel.Visibility = System.Windows.Visibility.Collapsed;
                 waitPanel.Visibility = System.Windows.Visibility.Visible;
                 messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
@@ -667,50 +859,6 @@ namespace EpiDashboard
             }
         }
 
-        public override void ShowHideConfigPanel()
-        {
-            Popup = new DashboardPopup();
-            Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
-            Controls.GadgetProperties.CombinedFrequencyProperties properties = new Controls.GadgetProperties.CombinedFrequencyProperties(this.DashboardHelper, this, (CombinedFrequencyParameters)Parameters);
-
-            properties.Width = 800;
-            properties.Height = 600;
-
-            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
-            {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
-            }
-
-            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
-            {
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
-            }
-
-            properties.Cancelled += new EventHandler(properties_Cancelled);
-            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
-            Popup.Content = properties;
-            Popup.Show();
-        }
-
-        private void properties_ChangesAccepted(object sender, EventArgs e)
-        {
-            Controls.GadgetProperties.CombinedFrequencyProperties properties = Popup.Content as Controls.GadgetProperties.CombinedFrequencyProperties;
-            this.Parameters = properties.Parameters;
-            this.DataFilters = properties.DataFilters;
-            this.CustomOutputHeading = Parameters.GadgetTitle;
-            this.CustomOutputDescription = Parameters.GadgetDescription;
-            Popup.Close();
-            if (properties.HasSelectedFields)
-            {
-                RefreshResults();
-            }
-        }
-
-        private void properties_Cancelled(object sender, EventArgs e)
-        {
-            Popup.Close();
-        }
-
         /// <summary>
         /// Generates Xml representation of this gadget
         /// </summary>
@@ -718,10 +866,57 @@ namespace EpiDashboard
         /// <returns>XmlNode</returns>
         public override XmlNode Serialize(XmlDocument doc)
         {
-            CombinedFrequencyParameters combFreqParameters = (CombinedFrequencyParameters)Parameters;
+            CreateInputVariableList();
+
+            Dictionary<string, string> inputVariableList = GadgetOptions.InputVariableList;
+
+            string freqVar = GadgetOptions.MainVariableName;
+            string strataVar = string.Empty;
+            string crosstabVar = GadgetOptions.CrosstabVariableName;
+            string sort = string.Empty;
+            bool showDenominator = true;
+            if (checkboxShowDenominator.IsChecked == false)
+            {
+                showDenominator = false;
+            }
+            
+            if (inputVariableList.ContainsKey("sort"))
+            {
+                sort = inputVariableList["sort"];
+            }
+
+            CustomOutputHeading = headerPanel.Text;
+            CustomOutputDescription = descriptionPanel.Text;
+
+            string combineMode = "automatic";
+
+            switch(cmbCombineMode.SelectedIndex) 
+            {
+                case 1:
+                    combineMode = "boolean";
+                    break;
+                case 2:
+                    combineMode = "categorical";
+                    break;
+                case 0:
+                default:
+                    combineMode = "automatic";
+                    break;                    
+            }            
+
+            string xmlString =
+            "<mainVariable>" + freqVar + "</mainVariable>" +
+            "<sort>" + sort + "</sort>" +
+            "<combineMode>" + combineMode + "</combineMode>" +
+            "<trueValue>" + txtTrueValue.Text + "</trueValue>" +
+            "<showDenominator>" + showDenominator + "</showDenominator>" +
+            "<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
+            "<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>";
+
+            xmlString = xmlString + SerializeAnchors();
 
             System.Xml.XmlElement element = doc.CreateElement("combinedFrequencyGadget");
-            //element.InnerXml = xmlString;
+            element.InnerXml = xmlString;
             element.AppendChild(SerializeFilters(doc));
 
             System.Xml.XmlAttribute id = doc.CreateAttribute("id");
@@ -741,48 +936,6 @@ namespace EpiDashboard
             element.Attributes.Append(collapsed);
             element.Attributes.Append(type);
             element.Attributes.Append(id);
-            
-            XmlElement combineModeElement = doc.CreateElement("combineMode");
-            combineModeElement.InnerText = combFreqParameters.CombineMode.ToString();
-            element.AppendChild(combineModeElement);
-
-            XmlElement trueValueElement = doc.CreateElement("trueValue");
-            trueValueElement.InnerText = combFreqParameters.TrueValue.ToString();
-            element.AppendChild(trueValueElement);
-
-            XmlElement sortElement = doc.CreateElement("sort");
-            if (combFreqParameters.SortHighToLow) sortElement.InnerText = "hightolow";
-            element.AppendChild(sortElement);
-
-            XmlElement showDenominatorElement = doc.CreateElement("showDenominator");
-            showDenominatorElement.InnerText = combFreqParameters.ShowDenominator.ToString();
-            element.AppendChild(showDenominatorElement);
-
-            XmlElement customHeadingElement = doc.CreateElement("customHeading");
-            customHeadingElement.InnerText = combFreqParameters.GadgetTitle.Replace("<", "&lt;");
-            element.AppendChild(customHeadingElement);
-
-            XmlElement customDescElement = doc.CreateElement("customDescription");
-            customDescElement.InnerText = combFreqParameters.GadgetDescription.Replace("<", "&lt;");
-            element.AppendChild(customDescElement);
-
-            SerializeAnchors(element);
-
-            XmlElement groupItemElement = doc.CreateElement("groupFields");
-
-            string xmlGroupItemString = string.Empty;
-
-            foreach (string columnName in combFreqParameters.ColumnNames)
-            {
-                xmlGroupItemString = xmlGroupItemString + "<groupField>" + columnName.Replace("<", "&lt;") + "</groupField>";
-            }
-
-            groupItemElement.InnerXml = xmlGroupItemString;
-
-            if (!String.IsNullOrEmpty(xmlGroupItemString))
-            {
-                element.AppendChild(groupItemElement);
-            }
 
             return element;
         }
@@ -794,77 +947,58 @@ namespace EpiDashboard
         public override void CreateFromXml(XmlElement element)
         {
             this.LoadingCombos = true;
-            this.Parameters = new CombinedFrequencyParameters();
-
-            HideConfigPanel();
-
-            infoPanel.Visibility = System.Windows.Visibility.Collapsed;
-            messagePanel.Visibility = System.Windows.Visibility.Collapsed;
 
             foreach (XmlElement child in element.ChildNodes)
             {
                 switch (child.Name.ToLower())
                 {
                     case "mainvariable":
-                        ((CombinedFrequencyParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
+                        cbxField.Text = child.InnerText;
                         break;
-                    case "groupfields":
-                        foreach (XmlElement field in child.ChildNodes)
-                        {
-                            List<string> fields = new List<string>();
-                            if (field.Name.ToLower().Equals("groupfield"))
-                            {
-                                ((CombinedFrequencyParameters)Parameters).ColumnNames.Add(field.InnerText.Replace("&lt;", "<"));
-                            }
-                        }
-                        break;
-                    case "combinemode":
-                        if (!String.IsNullOrEmpty(child.InnerText.Trim()))
-                        {
-                            switch (child.InnerText.ToString().ToLower())
-                            {
-                                case "boolean":
-                                    ((CombinedFrequencyParameters)Parameters).CombineMode = CombineModeTypes.Boolean;
-                                    break;
-                                case "catagorical":
-                                    ((CombinedFrequencyParameters)Parameters).CombineMode = CombineModeTypes.Categorical;
-                                    break;
-                                case "automatic":
-                                default:
-                                    ((CombinedFrequencyParameters)Parameters).CombineMode = CombineModeTypes.Automatic;
-                                    break;
-                            }
-                        }
+                    case "stratavariable":
+                        cmbFieldStrata.Text = child.InnerText;
                         break;
                     case "truevalue":
-                        //txtTrueValue.Text = child.InnerText;
-                        if (!String.IsNullOrEmpty(child.InnerText.Trim()))
-                        {
-                            ((CombinedFrequencyParameters)Parameters).TrueValue = child.InnerText.Replace("&lt;", "<").ToString();
-                        }
+                        txtTrueValue.Text = child.InnerText;
+                        break;
+                    case "combinemode":
+                        switch (child.InnerText.ToLower())
+                        {                            
+                            case "boolean":
+                            case "bool":
+                                cmbCombineMode.SelectedIndex = 1;
+                                break;
+                            case "categorical":                            
+                                cmbCombineMode.SelectedIndex = 2;
+                                break;
+                            case "automatic":
+                            case "auto":
+                            default:
+                                cmbCombineMode.SelectedIndex = 0;
+                                break;
+                        }                        
                         break;
                     case "sort":
                         if (child.InnerText.ToLower().Equals("hightolow") || child.InnerText.ToLower().Equals("highlow"))
                         {
-                            ((CombinedFrequencyParameters)Parameters).SortHighToLow = true;
+                            checkboxSortHighLow.IsChecked = true;
                         }
                         else
                         {
-                            ((CombinedFrequencyParameters)Parameters).SortHighToLow = false;
+                            checkboxSortHighLow.IsChecked = false;
                         }
                         break;
                     case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
-                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<");
-                            Parameters.GadgetTitle = CustomOutputHeading;                           
+                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<"); ;
                         }
                         break;
                     case "customdescription":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
                             this.CustomOutputDescription = child.InnerText.Replace("&lt;", "<");
-                            Parameters.GadgetDescription = CustomOutputDescription;
+
                             if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputHeading.Equals("(none)"))
                             {
                                 descriptionPanel.Text = CustomOutputDescription;
@@ -879,7 +1013,7 @@ namespace EpiDashboard
                     case "showdenominator":
                         bool showDenom = false;
                         bool.TryParse(child.InnerText, out showDenom);
-                        ((CombinedFrequencyParameters)Parameters).ShowDenominator = showDenom;
+                        checkboxShowDenominator.IsChecked = showDenom;
                         break;
                     case "datafilters":
                         this.DataFilters = new DataFilters(this.DashboardHelper);
@@ -919,17 +1053,16 @@ namespace EpiDashboard
             }
 
             htmlBuilder.AppendLine("<p class=\"gadgetOptions\"><small>");
-            // TODO: Update this with columns selected
-            //htmlBuilder.AppendLine("<em>Group variable:</em> <strong>" + GadgetOptions.MainVariableName + "</strong>");
+            htmlBuilder.AppendLine("<em>Group variable:</em> <strong>" + cbxField.Text + "</strong>");
             htmlBuilder.AppendLine("<br />");
 
-            //if (cmbFieldStrata.SelectedIndex >= 0)
-            //{
-            //    htmlBuilder.AppendLine("<em>Strata variable:</em> <strong>" + cmbFieldStrata.Text + "</strong>");
-            //    htmlBuilder.AppendLine("<br />");
-            //}
+            if (cmbFieldStrata.SelectedIndex >= 0)
+            {
+                htmlBuilder.AppendLine("<em>Strata variable:</em> <strong>" + cmbFieldStrata.Text + "</strong>");
+                htmlBuilder.AppendLine("<br />");
+            }
 
-            //htmlBuilder.AppendLine("<em>Combine mode:</em> <strong>" + cmbCombineMode.Text + "</strong>");
+            htmlBuilder.AppendLine("<em>Combine mode:</em> <strong>" + cmbCombineMode.Text + "</strong>");
             htmlBuilder.AppendLine("<br />");
             htmlBuilder.AppendLine("</small></p>");
 
@@ -948,17 +1081,61 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("<p><small><strong>" + infoPanel.Text + "</strong></small></p>");
             }
 
-            DataGrid dg = GetDataGrid();
-
-            if (dg != null && dg.ItemsSource != null)
+            foreach (Grid grid in this.StrataGridList)
             {
+                string gridName = grid.Tag.ToString();
+
                 htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
                 htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+                htmlBuilder.AppendLine("<caption>" + gridName + "</caption>");
 
-                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView));
+                foreach (UIElement control in grid.Children)
+                {
+                    if (control is TextBlock)
+                    {
+                        int rowNumber = Grid.GetRow(control);
+                        int columnNumber = Grid.GetColumn(control);
+
+                        string tableDataTagOpen = "<td>";
+                        string tableDataTagClose = "</td>";
+
+                        if (rowNumber == 0)
+                        {
+                            tableDataTagOpen = "<th>";
+                            tableDataTagClose = "</th>";
+                        }
+
+                        if (columnNumber == 0)
+                        {
+                            if (((double)rowNumber) % 2.0 == 1)
+                            {
+                                htmlBuilder.AppendLine("<tr class=\"altcolor\">");
+                            }
+                            else
+                            {
+                                htmlBuilder.AppendLine("<tr>");
+                            }
+                        }
+                        if (columnNumber == 0 && rowNumber > 0)
+                        {
+                            tableDataTagOpen = "<td class=\"value\">";
+                        }
+
+                        string value = ((TextBlock)control).Text;
+                        string formattedValue = value;
+
+                        htmlBuilder.AppendLine(tableDataTagOpen + formattedValue + tableDataTagClose);
+
+                        if (columnNumber >= grid.ColumnDefinitions.Count - 1)
+                        {
+                            htmlBuilder.AppendLine("</tr>");
+                        }
+                    }
+                }
 
                 htmlBuilder.AppendLine("</table>");
             }
+
             // TODO: Update if this gadget ever implements stratas
             foreach (UIElement element in panelMain.Children)
             {
@@ -1001,6 +1178,18 @@ namespace EpiDashboard
             {
                 this.customOutputDescription = value;
                 descriptionPanel.Text = CustomOutputDescription;
+            }
+        }
+
+        public override string CustomOutputCaption
+        {
+            get
+            {
+                return this.customOutputCaption;
+            }
+            set
+            {
+                this.customOutputCaption = value;
             }
         }
         #endregion // IGadget Members

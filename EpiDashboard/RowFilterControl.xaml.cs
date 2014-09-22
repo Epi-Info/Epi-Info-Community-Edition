@@ -60,7 +60,7 @@ namespace EpiDashboard
                 DataFilters = filters;
             }
 
-            //txtTitle.RenderTransform = new RotateTransform(270);
+            txtTitle.RenderTransform = new RotateTransform(270);
             FillSelectionComboboxes();
 
             selectionGridHeight = grdSelectionProperties.Height;
@@ -84,7 +84,7 @@ namespace EpiDashboard
 
             if (!dashboardHelper.IsUsingEpiProject)
             {
-                //panelAdvanced.Visibility = Visibility.Collapsed;
+                panelAdvanced.Visibility = Visibility.Collapsed;
             }
             config = Configuration.GetNewInstance();            
         }
@@ -244,17 +244,17 @@ namespace EpiDashboard
         /// </summary>
         /// <param name="sender">Object that fired the event</param>
         /// <param name="e">.NET supplied event parameters</param>
-        private void cmbFieldName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbxFieldName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cmbOperator.Items.Clear();
-            cmbValue.Items.Clear();
+            cbxOperator.Items.Clear();
+            cbxValue.Items.Clear();
 
-            if (cmbFieldName.SelectedIndex <= -1)
+            if (cbxFieldName.SelectedIndex <= -1)
             {
                 return;
             }
 
-            string columnName = cmbFieldName.SelectedItem.ToString();
+            string columnName = cbxFieldName.SelectedItem.ToString();
             Field field = null;
             string columnType = string.Empty;
 
@@ -274,8 +274,8 @@ namespace EpiDashboard
             if (field != null)
             {
                 Configuration config = dashboardHelper.Config;
-                cmbValue.IsEnabled = true;
-                cmbOperator.IsEnabled = true;
+                cbxValue.IsEnabled = true;
+                cbxOperator.IsEnabled = true;
 
                 if (field is IDataField)
                 {
@@ -337,19 +337,19 @@ namespace EpiDashboard
                         }
                     }
 
-                    cmbValue.Items.Clear();
+                    cbxValue.Items.Clear();
 
                     int i = 0;
                     foreach (KeyValuePair<string, string> kvp in fieldValues)
                     {
                         if (kvp.Key.Length > 0)
                         {
-                            cmbValue.Items.Add(kvp.Key);
+                            cbxValue.Items.Add(kvp.Key);
                         }
 
                         i++;
                     }
-                    cmbValue.Items.Add(config.Settings.RepresentationOfMissing);
+                    cbxValue.Items.Add(config.Settings.RepresentationOfMissing);
                 }
             }
             else
@@ -360,8 +360,8 @@ namespace EpiDashboard
                     columnDataType = dashboardHelper.TableColumnNames[columnName];
                 }                
                 
-                cmbValue.IsEnabled = true;
-                cmbOperator.IsEnabled = true;
+                cbxValue.IsEnabled = true;
+                cbxOperator.IsEnabled = true;
 
                 FillOperatorValues(columnDataType);
                 ShowValueSelector(columnDataType);
@@ -373,13 +373,13 @@ namespace EpiDashboard
         /// </summary>
         /// <param name="sender">Object that fired the event</param>
         /// <param name="e">.NET supplied event parameters</param>
-        private void cmbOperator_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbxOperator_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cmbOperator.SelectedItem != null)
+            if (cbxOperator.SelectedItem != null)
             {
                 btnNewCondition.IsEnabled = true;
 
-                string columnName = cmbFieldName.SelectedItem.ToString();
+                string columnName = cbxFieldName.SelectedItem.ToString();
                 Field field = null;
                 string columnType = string.Empty;
 
@@ -408,7 +408,7 @@ namespace EpiDashboard
             else
             {
                 btnNewCondition.IsEnabled = false;
-                cmbValue.IsEnabled = true;
+                cbxValue.IsEnabled = true;
             }
         }
 
@@ -466,20 +466,20 @@ namespace EpiDashboard
         /// </summary>
         /// <param name="sender">Object that fired the event</param>
         /// <param name="e">.NET supplied event parameters</param>
-        private void cmbRecordProcessScope_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbxRecordProcessScope_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (cbxRecordProcessScope.SelectedIndex == 0)
-            //{
-            //    dashboardHelper.RecordProcessScope = RecordProcessingScope.Undeleted;
-            //}
-            //else if (cbxRecordProcessScope.SelectedIndex == 1)
-            //{
-            //    dashboardHelper.RecordProcessScope = RecordProcessingScope.Deleted;
-            //}
-            //else if (cbxRecordProcessScope.SelectedIndex == 2)
-            //{
-            //    dashboardHelper.RecordProcessScope = RecordProcessingScope.Both;
-            //}
+            if (cbxRecordProcessScope.SelectedIndex == 0)
+            {
+                dashboardHelper.RecordProcessScope = RecordProcessingScope.Undeleted;
+            }
+            else if (cbxRecordProcessScope.SelectedIndex == 1)
+            {
+                dashboardHelper.RecordProcessScope = RecordProcessingScope.Deleted;
+            }
+            else if (cbxRecordProcessScope.SelectedIndex == 2)
+            {
+                dashboardHelper.RecordProcessScope = RecordProcessingScope.Both;
+            }
         }
         #endregion // Event Handlers
 
@@ -490,8 +490,8 @@ namespace EpiDashboard
         /// <param name="conditionOperand">The operand to add the condition with</param>
         private void AddCondition(ConditionJoinType joinType)
         {
-            string fieldName = cmbFieldName.SelectedItem.ToString();
-            string friendlyOperand = cmbOperator.SelectedItem.ToString();
+            string fieldName = cbxFieldName.SelectedItem.ToString();
+            string friendlyOperand = cbxOperator.SelectedItem.ToString();
             string friendlyValue = string.Empty;
             string friendlyCondition = string.Empty;
 
@@ -507,7 +507,7 @@ namespace EpiDashboard
 
                 AddDataFilterCondition(friendlyOperand, friendlyValue, fieldName, joinType);
             }
-            else if (friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO) && cmbFieldName.SelectedIndex > -1 && dashboardHelper.GetColumnType(cmbFieldName.SelectedItem.ToString()).Equals("System.DateTime"))
+            else if (friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO) && cbxFieldName.SelectedIndex > -1 && dashboardHelper.GetColumnType(cbxFieldName.SelectedItem.ToString()).Equals("System.DateTime"))
             {
                 string loValue = GetValue();
                 string hiValue = GetValue();
@@ -731,7 +731,7 @@ namespace EpiDashboard
             //dashboardHelper.UseAdvancedUserDataFilter = false;
             UpdateFilterConditions();
             txtAdvancedFilterStatus.Text = string.Empty;
-            //txtTitle.Margin = new Thickness(-3, 0, 0, -80);
+            txtTitle.Margin = new Thickness(-3, 0, 0, -80);
         }
 
         /// <summary>
@@ -754,7 +754,7 @@ namespace EpiDashboard
         /// </summary>
         private void UpdateFilterConditions()
         {
-            //lbxConditions.Items.Clear();
+            lbxConditions.Items.Clear();
             DataTable filterConditions = DataFilters.GetFilterConditionsAsTable();
 
             if (filterConditions.Columns.Contains(DataFilters.COLUMN_ACTIVE))
@@ -798,9 +798,9 @@ namespace EpiDashboard
         /// </summary>
         public void FillSelectionComboboxes(bool update = false)
         {
-            cmbFieldName.ItemsSource = null;
-            cmbOperator.Items.Clear();
-            //cbxRecordProcessScope.Items.Clear();
+            cbxFieldName.ItemsSource = null;
+            cbxOperator.Items.Clear();
+            cbxRecordProcessScope.Items.Clear();
 
             List<string> fieldNames = new List<string>();            
             ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text;
@@ -817,23 +817,13 @@ namespace EpiDashboard
                 fieldNames.Remove(ColumnNames.REC_STATUS);
             }
 
-            if (fieldNames.Contains("SYSTEMDATE"))
-            {
-                fieldNames.Remove("SYSTEMDATE");
-            }
+            cbxFieldName.ItemsSource = fieldNames;
 
-            if (fieldNames.Contains("GlobalRecordId"))
-            {
-                fieldNames.Remove("GlobalRecordId");
-            }
+            cbxRecordProcessScope.Items.Add("Normal records only");
+            cbxRecordProcessScope.Items.Add("Deleted records only");
+            cbxRecordProcessScope.Items.Add("Both normal and deleted records");
 
-            cmbFieldName.ItemsSource = fieldNames;
-
-            //cbxRecordProcessScope.Items.Add("Normal records only");
-            //cbxRecordProcessScope.Items.Add("Deleted records only");
-            //cbxRecordProcessScope.Items.Add("Both normal and deleted records");
-
-            //cbxRecordProcessScope.SelectedIndex = 0;
+            cbxRecordProcessScope.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -844,53 +834,49 @@ namespace EpiDashboard
         {
             if (field is IDataField)
             {
-                cmbOperator.Items.Clear();
+                cbxOperator.Items.Clear();
 
                 // Set operator drop-down values
                 if (field is NumberField || field is DateField || field is DateTimeField || field is TimeField)
                 {
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_BETWEEN);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_BETWEEN);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
                 }
                 else if (field is CheckBoxField)
                 {
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
-                    cmbOperator.SelectedIndex = 0;
-                    cmbOperator.IsEnabled = false;
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
+                    cbxOperator.SelectedIndex = 0;
+                    cbxOperator.IsEnabled = false;
 
-                    cmbValue.Items.Add(config.Settings.RepresentationOfYes);
-                    cmbValue.Items.Add(config.Settings.RepresentationOfNo);
-                    cmbValue.IsEnabled = true;
+                    cbxValue.Items.Add(config.Settings.RepresentationOfYes);
+                    cbxValue.Items.Add(config.Settings.RepresentationOfNo);
+                    cbxValue.IsEnabled = true;
                 }
                 else if (field is YesNoField)
                 {
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
 
-                    cmbValue.Items.Add(config.Settings.RepresentationOfYes);
-                    cmbValue.Items.Add(config.Settings.RepresentationOfNo);
-                    cmbValue.Items.Add(config.Settings.RepresentationOfMissing);
-                    cmbValue.IsEnabled = true;
+                    cbxValue.Items.Add(config.Settings.RepresentationOfYes);
+                    cbxValue.Items.Add(config.Settings.RepresentationOfNo);
+                    cbxValue.Items.Add(config.Settings.RepresentationOfMissing);
+                    cbxValue.IsEnabled = true;
                 }
                 else if (field is TextField || field is UpperCaseTextField || field is TableBasedDropDownField || field is PhoneNumberField)
                 {
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LIKE);
-
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_IS_ANY_OF);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_IS_NOT_ANY_OF);
-
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LIKE);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
                 }
                 else if (field is OptionField)
                 {
@@ -905,7 +891,7 @@ namespace EpiDashboard
         /// <param name="column">The column that the condition is based upon</param>
         private void FillOperatorValues(string columnType)
         {            
-            cmbOperator.Items.Clear();
+            cbxOperator.Items.Clear();
 
             switch (columnType)
             {
@@ -918,31 +904,31 @@ namespace EpiDashboard
                 case "System.Int32":
                 case "System.Byte":
                 case "System.SByte":
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_BETWEEN);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_BETWEEN);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
                     break;
                 case "System.Boolean":
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
-                    cmbOperator.SelectedIndex = 0;
-                    cmbValue.Items.Add(config.Settings.RepresentationOfYes);
-                    cmbValue.Items.Add(config.Settings.RepresentationOfNo);                    
-                    cmbValue.IsEnabled = true;
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
+                    cbxOperator.SelectedIndex = 0;
+                    cbxValue.Items.Add(config.Settings.RepresentationOfYes);
+                    cbxValue.Items.Add(config.Settings.RepresentationOfNo);                    
+                    cbxValue.IsEnabled = true;
                     break;
                 case "System.String":
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LIKE);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
-                    cmbOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LIKE);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
+                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
                     break;
             }
         }
@@ -951,74 +937,123 @@ namespace EpiDashboard
         /// Shows the appropriate value selection control to the user depending on the type of field that is being selected for
         /// </summary>
         /// <param name="field">The field that the condition is based upon</param>
-        private void ShowValueSelector(Field field)
+        private void ShowValueSelector(Field field) 
         {
-            HideValueSelectors();
+            txtValue.Visibility = System.Windows.Visibility.Visible;
             if (field is IDataField)
             {
-                if (cmbOperator.SelectedValue != null)
+                if (cbxOperator.SelectedValue != null)
                 {
-                    dpValue.IsEnabled = true;
+                    dateValue.IsEnabled = true;
                     tbxNumericValue.IsEnabled = true;
-                    cmbValue.IsEnabled = true;
-                    dpLowValue.IsEnabled = true;
-                    dpHighValue.IsEnabled = true;
+                    cbxValue.IsEnabled = true;
+                    dateLowValue.IsEnabled = true;
+                    dateHighValue.IsEnabled = true;
                     tbxLowValue.IsEnabled = true;
                     tbxHighValue.IsEnabled = true;
                     tbxValue.IsEnabled = true;
-
-                    if (cmbOperator.SelectedValue.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
-                    {
-                        //Show the Lo and Hi value labels
-                        txtLoValue.Visibility = Visibility.Visible;
-                        txtAnd.Visibility = Visibility.Visible;
-                        txtHiValue.Visibility = Visibility.Visible;
-                        if (field is DateField || (field is DateTimeField && !(field is TimeField)))
-                        {
-                            ShowDateLoHiSelector();
-                        }
-                        else
-                        {
-                            ShowNumericLoHiSelector();
-                        }
-                    }
-                    else if (!cmbOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) && !cmbOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
-                    {
-                        if (field is DateField || (field is DateTimeField && !(field is TimeField)))
-                        {
-                            ShowDateValueSelector();
-                        }
-                        else if (field is NumberField)
-                        {
-                            ShowNumericValueSelector();
-                        }
-                        else if (field is TableBasedDropDownField || field is CheckBoxField || field is YesNoField)
-                        {
-                            ShowDDLValueSelector();
-                        }
-                        else if (field is TextField || field is UpperCaseTextField || field is MultilineTextField)
-                        {
-                            ShowTextValueSelector();
-                        }
-                    }
                 }
-                else  //cmbOperator.SelectedValue == null
+                else
                 {
-                    dpValue.IsEnabled = false;
+                    dateValue.IsEnabled = false;
                     tbxNumericValue.IsEnabled = false;
-                    cmbValue.IsEnabled = false;
-                    dpLowValue.IsEnabled = false;
-                    dpHighValue.IsEnabled = false;
+                    cbxValue.IsEnabled = false;
+                    dateLowValue.IsEnabled = false;
+                    dateHighValue.IsEnabled = false;
                     tbxLowValue.IsEnabled = false;
                     tbxHighValue.IsEnabled = false;
                     tbxValue.IsEnabled = false;
 
                     tbxNumericValue.Clear();
-                    cmbValue.SelectedIndex = -1;
+                    cbxValue.SelectedIndex = -1;
                     tbxLowValue.Clear();
                     tbxHighValue.Clear();
                     tbxValue.Clear();
                     return;
+                }
+
+                if (cbxOperator.SelectedValue == null || !cbxOperator.SelectedValue.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
+                {
+                    txtAnd.Visibility = Visibility.Hidden;
+                    dateLowValue.Visibility = Visibility.Hidden;
+                    dateHighValue.Visibility = Visibility.Hidden;
+                    tbxLowValue.Visibility = Visibility.Hidden;
+                    tbxHighValue.Visibility = Visibility.Hidden;
+
+                    // Set which 'value' control is visible
+                    if (field is DateField || (field is DateTimeField && !(field is TimeField)))
+                    {
+                        dateValue.Visibility = Visibility.Visible;
+                        tbxNumericValue.Visibility = Visibility.Hidden;
+                        cbxValue.Visibility = Visibility.Hidden;
+                        tbxValue.Visibility = Visibility.Hidden;
+
+                        if (cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) || cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+                        {
+                            dateValue.IsEnabled = false;
+                            dateValue.Visibility = Visibility.Hidden;
+                            txtValue.Visibility = Visibility.Hidden;
+                        }
+                    }
+                    else if (field is NumberField)
+                    {
+                        dateValue.Visibility = Visibility.Hidden;
+                        tbxNumericValue.Visibility = Visibility.Visible;
+                        cbxValue.Visibility = Visibility.Hidden;                        
+                        tbxValue.Visibility = Visibility.Hidden;
+
+                        if (cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) || cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+                        {
+                            tbxNumericValue.IsEnabled = false;
+                        }
+                    }
+                    else if (field is TableBasedDropDownField || field is CheckBoxField || field is YesNoField)
+                    {
+                        dateValue.Visibility = Visibility.Hidden;
+                        tbxNumericValue.Visibility = Visibility.Hidden;
+                        cbxValue.Visibility = Visibility.Visible;
+                        tbxValue.Visibility = Visibility.Hidden;
+
+                        if (cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) || cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+                        {
+                            cbxValue.IsEnabled = false;
+                        }
+                    }
+                    else if (field is TextField || field is UpperCaseTextField || field is MultilineTextField)
+                    {
+                        dateValue.Visibility = Visibility.Hidden;
+                        tbxNumericValue.Visibility = Visibility.Hidden;
+                        cbxValue.Visibility = Visibility.Hidden;
+                        tbxValue.Visibility = Visibility.Visible;
+
+                        if (cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) || cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+                        {
+                            tbxValue.IsEnabled = false;
+                        }
+                    }
+                }
+                else
+                {
+                    txtAnd.Visibility = Visibility.Visible;
+                    dateValue.Visibility = Visibility.Hidden;
+                    tbxNumericValue.Visibility = Visibility.Hidden;
+                    cbxValue.Visibility = Visibility.Hidden;
+                    dateLowValue.Visibility = Visibility.Hidden;
+                    dateHighValue.Visibility = Visibility.Hidden;
+                    tbxLowValue.Visibility = Visibility.Hidden;
+                    tbxHighValue.Visibility = Visibility.Hidden;
+                    tbxValue.Visibility = Visibility.Hidden;
+
+                    if (field is DateField || (field is DateTimeField && !(field is TimeField)))
+                    {
+                        dateLowValue.Visibility = Visibility.Visible;
+                        dateHighValue.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        tbxLowValue.Visibility = Visibility.Visible;
+                        tbxHighValue.Visibility = Visibility.Visible;
+                    }
                 }
             }
         }
@@ -1029,161 +1064,121 @@ namespace EpiDashboard
         /// <param name="column">The column that the condition is based upon</param>
         private void ShowValueSelector(string columnType)
         {
-            HideValueSelectors();
-            if (cmbOperator.SelectedValue != null)
+            txtValue.Visibility = System.Windows.Visibility.Visible;            
+
+            if (cbxOperator.SelectedValue != null)
             {
+                dateValue.IsEnabled = true;
                 tbxNumericValue.IsEnabled = true;
-                cmbValue.IsEnabled = true;
-                dpLowValue.IsEnabled = true;
-                dpHighValue.IsEnabled = true;
+                cbxValue.IsEnabled = true;
+                dateLowValue.IsEnabled = true;
+                dateHighValue.IsEnabled = true;
                 tbxLowValue.IsEnabled = true;
                 tbxHighValue.IsEnabled = true;
                 tbxValue.IsEnabled = true;
-
-                if (cmbOperator.SelectedValue.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
-                {
-                    //Show the Lo and Hi value labels
-                    txtLoValue.Visibility = Visibility.Visible;
-                    txtAnd.Visibility = Visibility.Visible;
-                    txtHiValue.Visibility = Visibility.Visible;
-                    if (columnType.Equals("System.DateTime"))
-                    {
-                        ShowDateLoHiSelector();
-                    }
-                    else
-                    {
-                        ShowNumericLoHiSelector();
-                    }
-                }
-                else if (!cmbOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) && !cmbOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
-                {
-                    if (columnType.Equals("System.DateTime"))
-                    {
-                        ShowDateValueSelector();
-                    }
-                    else if (columnType.Equals("System.Int16") || columnType.Equals("System.Int32") || columnType.Equals("System.Int64") || columnType.Equals("System.Single") || columnType.Equals("System.Double") || columnType.Equals("System.Decimal") || columnType.Equals("System.Byte") || columnType.Equals("System.SByte"))
-                    {
-                        ShowNumericValueSelector();
-                    }
-                    else if (columnType.Equals("System.Boolean"))
-                    {
-                        ShowDDLValueSelector();
-                    }
-                    else if (columnType.Equals("System.String"))
-                    {
-                        ShowTextValueSelector();
-                    }
-                }  // friendlyOperator == Missing or Not Missing, then don't show any of the value selectors
             }
-            else  //cmbOperator.SelectedValue == null
+            else
             {
-                dpValue.IsEnabled = false;
+                dateValue.IsEnabled = false;
                 tbxNumericValue.IsEnabled = false;
-                cmbValue.IsEnabled = false;
-                dpLowValue.IsEnabled = false;
-                dpHighValue.IsEnabled = false;
+                cbxValue.IsEnabled = false;
+                dateLowValue.IsEnabled = false;
+                dateHighValue.IsEnabled = false;
                 tbxLowValue.IsEnabled = false;
                 tbxHighValue.IsEnabled = false;
                 tbxValue.IsEnabled = false;
 
                 tbxNumericValue.Clear();
-                cmbValue.SelectedIndex = -1;
+                cbxValue.SelectedIndex = -1;
                 tbxLowValue.Clear();
                 tbxHighValue.Clear();
                 tbxValue.Clear();
                 return;
             }
-        }
 
+            if (cbxOperator.SelectedValue == null || !cbxOperator.SelectedValue.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
+            {
+                txtAnd.Visibility = Visibility.Hidden;
+                dateLowValue.Visibility = Visibility.Hidden;
+                dateHighValue.Visibility = Visibility.Hidden;
+                tbxLowValue.Visibility = Visibility.Hidden;
+                tbxHighValue.Visibility = Visibility.Hidden;
 
+                // Set which 'value' control is visible
+                if (columnType.Equals("System.DateTime"))
+                {
+                    dateValue.Visibility = Visibility.Visible;
+                    tbxNumericValue.Visibility = Visibility.Hidden;
+                    cbxValue.Visibility = Visibility.Hidden;
+                    tbxValue.Visibility = Visibility.Hidden;
 
-        /// <summary>
-        /// Hides the value selection controls in order for only the correct controls to be shown.
-        /// </summary>
-        private void HideValueSelectors()
-        {
-            //Hiding single value controls
-            txtValue.Visibility = Visibility.Hidden;
-            dpValue.Visibility = Visibility.Hidden;
-            tbxNumericValue.Visibility = Visibility.Hidden;
-            cmbValue.Visibility = Visibility.Hidden;
-            tbxValue.Visibility = Visibility.Hidden;
+                    if (cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) || cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+                    {
+                        dateValue.IsEnabled = false;
+                        dateValue.Visibility = Visibility.Hidden;
+                        txtValue.Visibility = Visibility.Hidden;
+                    }
+                }
+                else if (columnType.Equals("System.Int16") || columnType.Equals("System.Int32") || columnType.Equals("System.Int64") || columnType.Equals("System.Single") || columnType.Equals("System.Double") || columnType.Equals("System.Decimal") || columnType.Equals("System.Byte") || columnType.Equals("System.SByte"))
+                {
+                    dateValue.Visibility = Visibility.Hidden;
+                    tbxNumericValue.Visibility = Visibility.Visible;
+                    cbxValue.Visibility = Visibility.Hidden;
+                    tbxValue.Visibility = Visibility.Hidden;
 
-            //Hiding Lo and Hi value controls
-            txtAnd.Visibility = Visibility.Hidden;
-            txtHiValue.Visibility = Visibility.Hidden;
-            dpLowValue.Visibility = Visibility.Hidden;
-            dpHighValue.Visibility = Visibility.Hidden;
-            tbxLowValue.Visibility = Visibility.Hidden;
-            tbxHighValue.Visibility = Visibility.Hidden;
-        }
+                    if (cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) || cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+                    {
+                        tbxNumericValue.IsEnabled = false;
+                    }
+                }
+                else if (columnType.Equals("System.Boolean"))
+                {
+                    dateValue.Visibility = Visibility.Hidden;
+                    tbxNumericValue.Visibility = Visibility.Hidden;
+                    cbxValue.Visibility = Visibility.Visible;
+                    tbxValue.Visibility = Visibility.Hidden;
 
-        /// <summary>
-        /// Shows the appropriate value selection control for date type fields or columns
-        /// </summary>
-        private void ShowDateValueSelector()
-        {
-            txtValue.Visibility = Visibility.Visible;
-            dpValue.IsEnabled = true;
-            dpValue.Visibility = Visibility.Visible;
-        }
+                    if (cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) || cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+                    {
+                        cbxValue.IsEnabled = false;
+                    }
+                }
+                else if (columnType.Equals("System.String"))
+                {
+                    dateValue.Visibility = Visibility.Hidden;
+                    tbxNumericValue.Visibility = Visibility.Hidden;
+                    cbxValue.Visibility = Visibility.Hidden;
+                    tbxValue.Visibility = Visibility.Visible;
 
-        /// <summary>
-        /// Shows the appropriate value selection control for date type fields or columns that are between a low and high value
-        /// </summary>
-        private void ShowDateLoHiSelector()
-        {
-            txtLoValue.Visibility = Visibility.Visible;
-            txtAnd.Visibility = Visibility.Visible;
-            txtHiValue.Visibility = Visibility.Visible;
-            dpLowValue.IsEnabled = true;
-            dpLowValue.Visibility = Visibility.Visible;
-            dpHighValue.Visibility = Visibility.Visible;
-            dpHighValue.IsEnabled = true;
-        }
+                    if (cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) || cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+                    {
+                        tbxValue.IsEnabled = false;
+                    }
+                }
+            }
+            else
+            {
+                txtAnd.Visibility = Visibility.Visible;
+                dateValue.Visibility = Visibility.Hidden;
+                tbxNumericValue.Visibility = Visibility.Hidden;
+                cbxValue.Visibility = Visibility.Hidden;
+                dateLowValue.Visibility = Visibility.Hidden;
+                dateHighValue.Visibility = Visibility.Hidden;
+                tbxLowValue.Visibility = Visibility.Hidden;
+                tbxHighValue.Visibility = Visibility.Hidden;
+                tbxValue.Visibility = Visibility.Hidden;
 
-        /// <summary>
-        /// Shows the appropriate value selection control for text type fields or columns
-        /// </summary>
-        private void ShowTextValueSelector()
-        {
-            txtValue.Visibility = Visibility.Visible;
-            tbxValue.Visibility = Visibility.Visible;
-            tbxValue.IsEnabled = true;
-        }
-
-        /// <summary>
-        /// Shows the appropriate value selection control for text type fields or columns
-        /// </summary>
-        private void ShowNumericValueSelector()
-        {
-            txtValue.Visibility = Visibility.Visible;
-            tbxNumericValue.Visibility = Visibility.Visible;
-            tbxNumericValue.IsEnabled = true;
-        }
-
-        /// <summary>
-        /// Shows the appropriate value selection controls for text type fields or columns that are between a low and high value
-        /// </summary>
-        private void ShowNumericLoHiSelector()
-        {
-            txtLoValue.Visibility = Visibility.Visible;
-            txtAnd.Visibility = Visibility.Visible;
-            txtHiValue.Visibility = Visibility.Visible;
-            tbxLowValue.IsEnabled = true;
-            tbxLowValue.Visibility = Visibility.Visible;
-            tbxHighValue.Visibility = Visibility.Visible;
-            tbxHighValue.IsEnabled = true;
-        }
-
-        /// <summary>
-        /// Shows the appropriate value selection control for text type fields or columns
-        /// </summary>
-        private void ShowDDLValueSelector()
-        {
-            txtValue.Visibility = Visibility.Visible;
-            cmbValue.IsEnabled = true;
-            cmbValue.Visibility = Visibility.Visible;
+                if (columnType.Equals("System.DateTime"))
+                {
+                    dateLowValue.Visibility = Visibility.Visible;
+                    dateHighValue.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    tbxLowValue.Visibility = Visibility.Visible;
+                    tbxHighValue.Visibility = Visibility.Visible;
+                }
+            }
         }
 
         /// <summary>
@@ -1194,29 +1189,29 @@ namespace EpiDashboard
         {
             string value = string.Empty;
 
-            if (cmbOperator.SelectedValue.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) || cmbOperator.SelectedValue.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+            if (cbxOperator.SelectedValue.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) || cbxOperator.SelectedValue.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
             {
                 value = string.Empty;
             }
-            else if (!cmbOperator.SelectedValue.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
+            else if (!cbxOperator.SelectedValue.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
             {
-                if (dpValue.Visibility == Visibility.Visible)
+                if (dateValue.Visibility == Visibility.Visible)
                 {
-                    value = dpValue.Text;
+                    value = dateValue.Text;
                 }
                 else if (tbxNumericValue.Visibility == Visibility.Visible)
                 {
                     value = tbxNumericValue.Text;
                 }
-                else if (cmbValue.Visibility == Visibility.Visible)
+                else if (cbxValue.Visibility == Visibility.Visible)
                 {
-                    if (cmbValue.SelectedItem != null)
+                    if (cbxValue.SelectedItem != null)
                     {
-                        value = cmbValue.SelectedItem.ToString();
+                        value = cbxValue.SelectedItem.ToString();
                     }
-                    else if (!string.IsNullOrEmpty(cmbValue.Text))
+                    else if (!string.IsNullOrEmpty(cbxValue.Text))
                     {
-                        value = cmbValue.Text;
+                        value = cbxValue.Text;
                     }
                     else
                     {
@@ -1230,9 +1225,9 @@ namespace EpiDashboard
             }
             else
             {
-                if (dpLowValue.Visibility == Visibility.Visible)
+                if (dateLowValue.Visibility == Visibility.Visible)
                 {
-                    value = dpLowValue.Text + ";" + dpHighValue.Text;
+                    value = dateLowValue.Text + ";" + dateHighValue.Text;
                 }
                 else if (tbxLowValue.Visibility == Visibility.Visible)
                 {
@@ -1248,15 +1243,15 @@ namespace EpiDashboard
         /// </summary>
         private void SetTitle()
         {
-            //if (pnlAdvancedMode.Visibility == System.Windows.Visibility.Visible)
-            //{
-            //    this.txtTitle.Text = SharedStrings.DATA_FILTERS;
-            //}
-            //else
-            //{
-            //    this.txtTitle.Text = SharedStrings.DATA_FILTERS + StringLiterals.SPACE + StringLiterals.PARANTHESES_OPEN +
-            //        dgFilters.Items.Count.ToString() + StringLiterals.PARANTHESES_CLOSE;
-            //}
+            if (pnlAdvancedMode.Visibility == System.Windows.Visibility.Visible)
+            {
+                this.txtTitle.Text = SharedStrings.DATA_FILTERS;
+            }
+            else
+            {
+                this.txtTitle.Text = SharedStrings.DATA_FILTERS + StringLiterals.SPACE + StringLiterals.PARANTHESES_OPEN +
+                    dgFilters.Items.Count.ToString() + StringLiterals.PARANTHESES_CLOSE;
+            }
         }
 
         /// <summary>

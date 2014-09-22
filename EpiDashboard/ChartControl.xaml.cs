@@ -30,11 +30,11 @@ namespace EpiDashboard
     /// </summary>
     public partial class ChartControl : GadgetBase
     {
-        private readonly char[] SplitTokens = " \t;".ToCharArray();        
-        private bool loadingCombos;        
-        private Chart chart;        
+        private readonly char[] SplitTokens = " \t;".ToCharArray();
+        private bool loadingCombos;
+        private Chart chart;
         private int axisLabelMaxLength;
-        private bool isBooleanWithNoStratas = false;        
+        private bool isBooleanWithNoStratas = false;
         private object syncLock = new object();
         private string chartTitle;
         private string legendTitle;
@@ -51,7 +51,7 @@ namespace EpiDashboard
         private delegate void RenderFinishEpiCurveDelegate(DataTable data, List<List<StringDataValue>> dataValues);
         private delegate void RenderFinishSingleChartDelegate(List<List<StringDataValue>> stratifiedValues);
         private delegate void RenderFinishScatterChartDelegate(List<NumericDataValue> dataValues, StatisticsRepository.LinearRegression.LinearRegressionResults results, NumericDataValue maxValue, NumericDataValue minValue);
-        private delegate void RenderFinishStackedChartDelegate(List<List<StringDataValue>> dataValues, DataTable data);        
+        private delegate void RenderFinishStackedChartDelegate(List<List<StringDataValue>> dataValues, DataTable data);
 
         public class StringDataValue
         {
@@ -81,7 +81,7 @@ namespace EpiDashboard
         public ChartControl(DashboardHelper dashboardHelper)
         {
             InitializeComponent();
-            this.DashboardHelper = dashboardHelper;            
+            this.DashboardHelper = dashboardHelper;
             cbxDateField.SelectionChanged += new SelectionChangedEventHandler(ConfigField_SelectionChanged);
             cbxCaseStatusField.SelectionChanged += new SelectionChangedEventHandler(ConfigField_SelectionChanged);
             cbxChartType.SelectionChanged += new SelectionChangedEventHandler(cbxChartType_SelectionChanged);
@@ -161,7 +161,7 @@ namespace EpiDashboard
             base.CloseGadget();
 
             GadgetOptions = null;
-            chart = null;            
+            chart = null;
         }
 
         void mnuPrint_Click(object sender, RoutedEventArgs e)
@@ -255,7 +255,7 @@ namespace EpiDashboard
         {
             if (pnlMain.Children.Count > 0 && pnlMain.Children[0] is Chart)
             {
-                Chart currentChart = (Chart)pnlMain.Children[0];                
+                Chart currentChart = (Chart)pnlMain.Children[0];
 
                 if (currentChart.ActualAxes.Count > 0)
                 {
@@ -348,7 +348,7 @@ namespace EpiDashboard
                         pnlScatterConfig.Visibility = Visibility.Visible;
                         pnlStackedColumnConfig.Visibility = Visibility.Collapsed;
                         pnlEpiCurveConfig.Visibility = Visibility.Collapsed;
-                        pnlSingleConfig.Visibility = Visibility.Collapsed; 
+                        pnlSingleConfig.Visibility = Visibility.Collapsed;
                         break;
                     default:
                         pnlScatterConfig.Visibility = Visibility.Collapsed;
@@ -388,7 +388,7 @@ namespace EpiDashboard
             if (cbxWeightField.Items.Count > 0)
                 cbxWeightField.SelectedIndex = -1;
             if (cbxStrataField.Items.Count > 0)
-                cbxStrataField.SelectedIndex = -1;  
+                cbxStrataField.SelectedIndex = -1;
             if (cbxScatterXAxisField.Items.Count > 0)
                 cbxScatterXAxisField.SelectedIndex = -1;
             if (cbxScatterYAxisField.Items.Count > 0)
@@ -545,7 +545,7 @@ namespace EpiDashboard
                 List<List<StringDataValue>> dataValues = (List<List<StringDataValue>>)((object[])e.Result)[0];
                 DataTable data = (DataTable)((object[])e.Result)[1];
                 this.Dispatcher.BeginInvoke(new RenderFinishStackedChartDelegate(RenderFinishStackedChart), dataValues, data);
-                System.Threading.Thread.Sleep(2500);
+                System.Threading.Thread.Sleep(3500);
                 this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
             }
         }
@@ -589,7 +589,7 @@ namespace EpiDashboard
                     //{
                     //    allRows = data.Select(string.Empty, "[" + data.Columns[0].ColumnName + "]");
                     //}                    
-                    
+
                     List<List<StringDataValue>> dataValues = new List<List<StringDataValue>>();
                     for (int i = 1; i < data.Columns.Count; i++)
                     {
@@ -615,7 +615,7 @@ namespace EpiDashboard
                     e.Result = result;
 
                     this.Dispatcher.BeginInvoke(new SimpleCallback(RenderFinish));
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -653,7 +653,7 @@ namespace EpiDashboard
 
             chart = new Chart();
             chart.Loaded += new RoutedEventHandler(chart_Loaded);
-            chart.BorderThickness = new Thickness(0); 
+            chart.BorderThickness = new Thickness(0);
             chart.Series.Add(stackedSeries);
             chart.Height = 600;
 
@@ -708,9 +708,9 @@ namespace EpiDashboard
             Canvas.SetZIndex(this, -1);
         }
 
-        protected override void RenderFinish()
+        private void RenderFinish()
         {
-            waitPanel.Visibility = System.Windows.Visibility.Collapsed;                        
+            waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
             pnlMain.Visibility = System.Windows.Visibility.Visible;
 
@@ -723,7 +723,7 @@ namespace EpiDashboard
             CheckAndSetPosition();
         }
 
-        protected override void RenderFinishWithWarning(string errorMessage)
+        private void RenderFinishWithWarning(string errorMessage)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -738,9 +738,9 @@ namespace EpiDashboard
             CheckAndSetPosition();
         }
 
-        protected override void RenderFinishWithError(string errorMessage)
+        private void RenderFinishWithError(string errorMessage)
         {
-            waitPanel.Visibility = System.Windows.Visibility.Collapsed;            
+            waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
             pnlMain.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -836,7 +836,7 @@ namespace EpiDashboard
                     if ((f is DateField) || (f is DateTimeField) || (f is NumberField))
                     {
                         dateFields.Add(f.Name);
-                    }                    
+                    }
                 }
 
                 foreach (EpiDashboard.Rules.IDashboardRule rule in DashboardHelper.Rules)
@@ -982,7 +982,7 @@ namespace EpiDashboard
                 cbxWeightField.SelectedItem = prevWeightField;
                 cbxStrataField.SelectedItem = prevStrataField;
             }
-            
+
             loadingCombos = false;
         }
 
@@ -1026,11 +1026,11 @@ namespace EpiDashboard
         void epiCurveWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             if (e.Result != null)
-            {                
+            {
                 DataTable data = (DataTable)((object[])e.Result)[1];
                 List<List<StringDataValue>> dataValues = (List<List<StringDataValue>>)((object[])e.Result)[0];
                 this.Dispatcher.BeginInvoke(new RenderFinishEpiCurveDelegate(RenderFinishEpiCurve), data, dataValues);
-                System.Threading.Thread.Sleep(2500);
+                System.Threading.Thread.Sleep(3500);
                 this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
             }
         }
@@ -1135,9 +1135,9 @@ namespace EpiDashboard
             chart.Palette = (System.Collections.ObjectModel.Collection<ResourceDictionary>)this.Resources["defaultColumnPalette"];
 
             //stackedSeries
-            
 
-            chart.BorderThickness = new Thickness(0); 
+
+            chart.BorderThickness = new Thickness(0);
             chart.Loaded += new RoutedEventHandler(chart_Loaded);
             chart.Series.Add(stackedSeries);
             chart.Height = 500;
@@ -1169,7 +1169,7 @@ namespace EpiDashboard
 
                 GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
                 GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
-                
+
                 //System.Threading.Thread.Sleep(100);
 
                 DataTable data = GetEpiCurveData(byEpiWeek, dateVar, caseStatusVar);
@@ -1203,7 +1203,7 @@ namespace EpiDashboard
                                 }
                                 else if (dateFormat.ToLower().Equals("months"))
                                 {
-                                    val.IndependentValue = ((DateTime)row[0]).ToString("MMM yyyy");                                    
+                                    val.IndependentValue = ((DateTime)row[0]).ToString("MMM yyyy");
                                 }
                                 else if (dateFormat.ToLower().Equals("years"))
                                 {
@@ -1251,7 +1251,7 @@ namespace EpiDashboard
 
         private DataTable GetEpiCurveData(bool byEpiWeek, string dateVar, string caseStatusVar)
         {
-            DataTable data = new DataTable();            
+            DataTable data = new DataTable();
 
             if (byEpiWeek)
             {
@@ -1259,7 +1259,7 @@ namespace EpiDashboard
                 decimal? maxWeek = null;
 
                 DashboardHelper.FindUpperLowerNumericValues(dateVar, ref minWeek, ref maxWeek);
-                if (minWeek.HasValue && maxWeek.HasValue)                
+                if (minWeek.HasValue && maxWeek.HasValue)
                 {
                     // override min and max values if the user set custom start and end points for the x-axis
                     if (GadgetOptions.InputVariableList.ContainsKey("xaxisstart"))
@@ -1330,12 +1330,12 @@ namespace EpiDashboard
                         if (success)
                         {
                             maxDate = dt;
-                        }                        
+                        }
                     }
 
                     if (string.IsNullOrEmpty(caseStatusVar))
                     {
-                        GadgetOptions.CrosstabVariableName = "_default_";                        
+                        GadgetOptions.CrosstabVariableName = "_default_";
                     }
 
                     data = DashboardHelper.GenerateEpiCurveTable(GadgetOptions, (DateTime)minDate, (DateTime)maxDate);
@@ -1444,7 +1444,7 @@ namespace EpiDashboard
             tmp.Rows.Add(r);
             return tmp;
         }
-       
+
         private bool IsBooleanWithNoStratas
         {
             get
@@ -1505,7 +1505,7 @@ namespace EpiDashboard
                 messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
 
                 //this.Dispatcher.BeginInvoke(GadgetStatusUpdate, SharedStrings.DASHBOARD_GADGET_STATUS_INITIALIZING);
-                
+
                 GadgetOptions.MainVariableName = string.Empty;
                 GadgetOptions.WeightVariableName = string.Empty;
                 GadgetOptions.StrataVariableNames = new List<string>();
@@ -1532,7 +1532,7 @@ namespace EpiDashboard
                 else
                 {
                     GadgetOptions.ShouldUseAllPossibleValues = false;
-                }                
+                }
 
                 switch (((ComboBoxItem)cbxChartType.SelectedItem).Content.ToString())
                 {
@@ -1575,7 +1575,7 @@ namespace EpiDashboard
                             baseWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(GenerateScatterChart);
                             baseWorker.RunWorkerAsync();
                         }
-                        break;                        
+                        break;
                     case "Pie":
                         if (cbxChartSize.SelectedIndex > -1)
                         {
@@ -1672,7 +1672,7 @@ namespace EpiDashboard
 
                 this.Dispatcher.BeginInvoke(new RenderFinishScatterChartDelegate(RenderFinishScatterChart), dataValues, results, maxValue, minValue);
 
-                System.Threading.Thread.Sleep(2500);
+                System.Threading.Thread.Sleep(3500);
                 this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
             }
         }
@@ -1685,7 +1685,7 @@ namespace EpiDashboard
         void scatterChartWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try
-            {   
+            {
                 this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToProcessingState));
                 this.Dispatcher.BeginInvoke(new SimpleCallback(ClearResults));
 
@@ -1694,7 +1694,7 @@ namespace EpiDashboard
 
                 GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
                 GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
-                
+
                 string xAxisVar = GadgetOptions.MainVariableName;
                 string yAxisVar = GadgetOptions.CrosstabVariableName;
 
@@ -1819,8 +1819,8 @@ namespace EpiDashboard
         {
             Chart chart = new Chart();
             chart.Loaded += new RoutedEventHandler(chart_Loaded);
-            chart.BorderThickness = new Thickness(0); 
-            ScatterSeries series = new ScatterSeries();            
+            chart.BorderThickness = new Thickness(0);
+            ScatterSeries series = new ScatterSeries();
 
             LinearAxis xaxis = new LinearAxis();
             xaxis.Orientation = AxisOrientation.X;
@@ -1888,18 +1888,18 @@ namespace EpiDashboard
 
             Chart chart = new Chart();
             chart.Loaded += new RoutedEventHandler(chart_Loaded);
-            chart.BorderThickness = new Thickness(0);                        
-            LinearAxis dependentAxis = new LinearAxis();            
+            chart.BorderThickness = new Thickness(0);
+            LinearAxis dependentAxis = new LinearAxis();
             dependentAxis.Minimum = 0;
             dependentAxis.ShowGridLines = (bool)checkboxShowHorizontalGridLines.IsChecked;
 
             CategoryAxis independentAxis = new CategoryAxis();
             independentAxis.Orientation = AxisOrientation.X;
-            
+
             foreach (List<StringDataValue> dataValues in stratifiedValues)
             {
                 DataPointSeries series;
-                LineSeries avgSeries = null;                
+                LineSeries avgSeries = null;
 
                 switch (((ComboBoxItem)cbxChartType.SelectedItem).Content.ToString())
                 {
@@ -1917,15 +1917,15 @@ namespace EpiDashboard
                         chart.Palette = (System.Collections.ObjectModel.Collection<ResourceDictionary>)this.Resources["defaultBarPalette"];
 
                         break;
-                    case "Column":                    
+                    case "Column":
                         series = new ColumnSeries();
                         if (DashboardHelper.IsColumnText(cbxSingleField.SelectedItem.ToString()) && axisLabelMaxLength > 5)
                             independentAxis.AxisLabelStyle = Resources["RotateAxisStyle90"] as Style;
 
                         ((ColumnSeries)series).IndependentAxis = independentAxis;
                         dependentAxis.Orientation = AxisOrientation.Y;
-                        ((ColumnSeries)series).DependentRangeAxis = dependentAxis;   
-                     
+                        ((ColumnSeries)series).DependentRangeAxis = dependentAxis;
+
                         chart.PlotAreaStyle = new Style();
                         chart.PlotAreaStyle.Setters.Add(new Setter(Chart.BackgroundProperty, Brushes.White));
 
@@ -1946,7 +1946,7 @@ namespace EpiDashboard
                             independentAxis.AxisLabelStyle = Resources["RotateAxisStyle90"] as Style;
                         ((ColumnSeries)series).IndependentAxis = independentAxis;
                         dependentAxis.Orientation = AxisOrientation.Y;
-                        ((ColumnSeries)series).DependentRangeAxis = dependentAxis;                        
+                        ((ColumnSeries)series).DependentRangeAxis = dependentAxis;
 
                         LinearAxis percentAxis = new LinearAxis();
                         percentAxis.Minimum = 0;
@@ -1957,7 +1957,7 @@ namespace EpiDashboard
 
                         avgSeries = new LineSeries();
                         avgSeries.IndependentValuePath = "IndependentValue";
-                        avgSeries.DependentValuePath = "CurrentMeanValue";                        
+                        avgSeries.DependentValuePath = "CurrentMeanValue";
                         avgSeries.Title = "Accumulated %";
                         avgSeries.DependentRangeAxis = percentAxis;
                         avgSeries.IndependentAxis = independentAxis;
@@ -1997,11 +1997,11 @@ namespace EpiDashboard
                         }
                         chart = new LabeledPieChart();
                         chart.Loaded += new RoutedEventHandler(chart_Loaded);
-                        chart.BorderThickness = new Thickness(0);                        
-                        series = new LabeledPieSeries();                        
-                        series.LegendItemStyle = Resources["PieLegendStyle"] as Style;                        
-                        ((LabeledPieSeries)series).PieChartLabelStyle=Resources["pieChartLabelStyle"] as Style;
-					    ((LabeledPieSeries)series).PieChartLabelItemTemplate=Resources["pieChartLabelDataTemplate"] as DataTemplate;
+                        chart.BorderThickness = new Thickness(0);
+                        series = new LabeledPieSeries();
+                        series.LegendItemStyle = Resources["PieLegendStyle"] as Style;
+                        ((LabeledPieSeries)series).PieChartLabelStyle = Resources["pieChartLabelStyle"] as Style;
+                        ((LabeledPieSeries)series).PieChartLabelItemTemplate = Resources["pieChartLabelDataTemplate"] as DataTemplate;
                         ((LabeledPieSeries)series).LabelDisplayMode = DisplayMode.Auto;
                         chart.LegendTitle = cbxSingleField.SelectedItem.ToString();
                         chart.Series.Add(series);
@@ -2167,7 +2167,7 @@ namespace EpiDashboard
             {
                 List<List<StringDataValue>> stratifiedValues = (List<List<StringDataValue>>)e.Result;
                 this.Dispatcher.BeginInvoke(new RenderFinishSingleChartDelegate(RenderFinishSingleChart), stratifiedValues);
-                System.Threading.Thread.Sleep(2500);
+                System.Threading.Thread.Sleep(3500);
                 this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
             }
         }
@@ -2216,11 +2216,11 @@ namespace EpiDashboard
 
                     //if (GadgetStatusUpdate != null)
                     //{
-                        //this.Dispatcher.BeginInvoke(GadgetStatusUpdate, SharedStrings.DASHBOARD_GADGET_STATUS_DISPLAYING_OUTPUT);
-                        System.Threading.Thread.Sleep(150); // necessary to prevent this message from overriding the 'no records selected'
+                    //this.Dispatcher.BeginInvoke(GadgetStatusUpdate, SharedStrings.DASHBOARD_GADGET_STATUS_DISPLAYING_OUTPUT);
+                    System.Threading.Thread.Sleep(250); // necessary to prevent this message from overriding the 'no records selected'
                     //}
 
-                        if (res.Count == 1 && !singleChartType.Equals("pie") && !singleChartType.Equals("pareto") && DashboardHelper.IsUsingEpiProject && DashboardHelper.View.Fields.Contains(GadgetOptions.MainVariableName) && (DashboardHelper.View.Fields[GadgetOptions.MainVariableName] is YesNoField || DashboardHelper.View.Fields[GadgetOptions.MainVariableName] is CheckBoxField))
+                    if (res.Count == 1 && !singleChartType.Equals("pie") && !singleChartType.Equals("pareto") && DashboardHelper.IsUsingEpiProject && DashboardHelper.View.Fields.Contains(GadgetOptions.MainVariableName) && (DashboardHelper.View.Fields[GadgetOptions.MainVariableName] is YesNoField || DashboardHelper.View.Fields[GadgetOptions.MainVariableName] is CheckBoxField))
                     {
                         IsBooleanWithNoStratas = true;
                     }
@@ -2263,14 +2263,14 @@ namespace EpiDashboard
                                     condensedTable.Rows.Add(frequencies.Rows[i].ItemArray);
                                 }
                                 else if (i == maxLegendItems)
-                                {                                    
+                                {
                                     condensedTable.Rows.Add("All others", frequencies.Rows[i][1]);
                                     rowStoppedAt = i;
                                 }
                                 else
                                 {
                                     condensedTable.Rows[maxLegendItems][1] = (double)condensedTable.Rows[rowStoppedAt][1] + (double)frequencies.Rows[i][1];
-                                }                        
+                                }
                             }
 
                             if (condensedTable.Rows.Count > maxLegendItems)
@@ -2321,8 +2321,8 @@ namespace EpiDashboard
                                 {
                                     axisLabelMaxLength = row[varName].ToString().Length;
                                 }
-                                stratifiedValues.Add(listSdv);                                
-                            }                            
+                                stratifiedValues.Add(listSdv);
+                            }
                         }
                         else
                         {
@@ -2334,9 +2334,9 @@ namespace EpiDashboard
                                 if (row[varName].ToString().Length > axisLabelMaxLength)
                                 {
                                     axisLabelMaxLength = row[varName].ToString().Length;
-                                }                                
+                                }
                             }
-                            stratifiedValues.Add(dataValues);                            
+                            stratifiedValues.Add(dataValues);
                         }
                     }
                     e.Result = stratifiedValues;
@@ -2348,12 +2348,12 @@ namespace EpiDashboard
                     else
                     {
                         this.Dispatcher.BeginInvoke(new SimpleCallback(RenderFinish));
-                    }                    
+                    }
                 }
             }
             catch (Exception ex)
             {
-                this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), ex.Message);                
+                this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), ex.Message);
             }
         }
 
@@ -2450,7 +2450,7 @@ namespace EpiDashboard
             if (cbxChartType.SelectedIndex > -1)
             {
                 chartType = cbxChartType.Text;
-            }            
+            }
             if (cbxCaseStatusField.SelectedIndex > -1)
             {
                 caseStatusField = cbxCaseStatusField.SelectedItem.ToString().Replace("<", "&lt;");
@@ -2503,7 +2503,7 @@ namespace EpiDashboard
             "<caseStatusVariable>" + caseStatusField + "</caseStatusVariable>" +
             "<dateVariable>" + dateField + "</dateVariable>" +
             "<dateInterval>" + cbxDateInterval.Text + "</dateInterval>" +
-            "<singleVariable>" + singleField + "</singleVariable>" +            
+            "<singleVariable>" + singleField + "</singleVariable>" +
             "<weightVariable>" + weightField + "</weightVariable>" +
             "<strataVariable>" + strataField + "</strataVariable>" +
             "<yAxisVariable>" + yAxisField + "</yAxisVariable>" +
@@ -2512,7 +2512,7 @@ namespace EpiDashboard
             "<xAxisScatterVariable>" + xAxisFieldScatter + "</xAxisScatterVariable>" +
             "<yAxisLabel>" + YAxisLabel + "</yAxisLabel>" +
             "<xAxisLabel>" + XAxisLabel + "</xAxisLabel>" +
-            "<xAxisRotation>" + xAxisRotation + "</xAxisRotation>" +            
+            "<xAxisRotation>" + xAxisRotation + "</xAxisRotation>" +
             "<xAxisStartValue>" + txtXAxisStartValue.Text + "</xAxisStartValue>" +
             "<xAxisEndValue>" + txtXAxisEndValue.Text + "</xAxisEndValue>" +
             "<allValues>" + checkboxAllValues.IsChecked.ToString() + "</allValues>" +
@@ -2661,7 +2661,7 @@ namespace EpiDashboard
                             default:
                                 cbxXAxisLabelRotation.SelectedIndex = 2;
                                 break;
-                        }                        
+                        }
                         break;
                 }
             }
@@ -2724,7 +2724,7 @@ namespace EpiDashboard
 
             string imageFileName = string.Empty;
 
-            if(htmlFileName.EndsWith(".html")) 
+            if (htmlFileName.EndsWith(".html"))
             {
                 imageFileName = htmlFileName.Remove(htmlFileName.Length - 5, 5);
             }
@@ -2734,7 +2734,7 @@ namespace EpiDashboard
             }
 
             imageFileName = imageFileName + "_" + count.ToString() + ".png";
-            
+
             BitmapSource img = (BitmapSource)Common.ToImageSource(pnlMain);
             FileStream stream = new FileStream(imageFileName, FileMode.Create);
             //JpegBitmapEncoder encoder = new JpegBitmapEncoder();
@@ -2843,7 +2843,7 @@ namespace EpiDashboard
             RefreshResults();
         }
 
-        public bool DrawBorders { get; set; } 
+        public bool DrawBorders { get; set; }
     }
 
     public class PieData

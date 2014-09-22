@@ -13,7 +13,6 @@ using Epi.Data.Services;
 namespace Epi
 {
 
-
     /// <summary>
     /// A <see cref="Epi.View"/> of a <see cref="Epi.Project"/>. Contains one or more <see cref="Epi.Page"/> objects.
     /// </summary>
@@ -42,10 +41,7 @@ namespace Epi
         private XmlElement viewElement;
         private ArrayList fieldLockToken;
         private bool isDirty = false;
-        private string eiwsOrganizationKey = string.Empty;
-        private string eiwsFormId = string.Empty;
-        private string eweOrganizationKey = string.Empty;
-        private string eweFormId = string.Empty;
+
         /// <summary>
         /// Project that this view belongs to
         /// </summary>
@@ -774,51 +770,7 @@ namespace Epi
                 this.GlobalRecordIdField.CurrentRecordValueObject = value;
             }
         }
-      
-        public virtual string EIWSOrganizationKey
-            {
-            get
-                {
-                return (eiwsOrganizationKey);
-                }
-            set
-                {
-                eiwsOrganizationKey = value;
-                }
-            }
-        public virtual string EIWSFormId
-            {
-            get
-                {
-                return (eiwsFormId);
-                }
-            set
-                {
-                eiwsFormId = value;
-                }
-            }
-        public virtual string EWEOrganizationKey
-            {
-            get
-                {
-                return (eweOrganizationKey);
-                }
-            set
-                {
-                eweOrganizationKey = value;
-                }
-            }
-        public virtual string EWEFormId
-            {
-            get
-                {
-                return (eweFormId);
-                }
-            set
-                {
-                eweFormId = value;
-                }
-            }
+
         #endregion Public Properties
 
         #region Private Properties
@@ -1354,35 +1306,6 @@ namespace Epi
             return false;
         }
 
-        public virtual bool IsParentOf(View childCandidate)
-        {
-            int candidateId = childCandidate.Id;
-            View candidateView = null;
-
-            if ((candidateView = GetParent(candidateId)) != null)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        public virtual bool IsHomeParentOf(View childCandidate)
-        {
-            int candidateId = childCandidate.Id;
-            View candidateView = null;
-
-            while ((candidateView = GetParent(candidateId)) != null)
-            {
-                if (candidateView != null)
-                {
-                    candidateId = candidateView.Id;
-                }
-            }
-
-            return this.Id == candidateId;
-        }
-
         /// <summary>
         /// Checks if all input fields are empty
         /// </summary>
@@ -1613,10 +1536,9 @@ namespace Epi
 
         #region Private Methods
         
-        private View GetParent(int relatedViewId)
+        private void GetParent(int relatedViewId)
         {
             parentView = this.GetMetadata().GetParentView(relatedViewId);
-            return parentView;
         }
 
         #endregion

@@ -46,8 +46,6 @@ namespace EpiDashboard.Mapping
         public event EventHandler MapDataChanged;
         public event DataSourceRequestedHandler DataSourceRequested;
         public event MouseCoordinatesChangedHandler MouseCoordinatesChanged;
-        public event EventHandler ExpandRequested;
-        public event EventHandler RestoreRequested;
 
         private BackgroundWorker worker;
         private BackgroundWorker openDefaultMapWorker;
@@ -71,7 +69,7 @@ namespace EpiDashboard.Mapping
         {
             InitializeComponent();
             //btnBypass.Click += new RoutedEventHandler(btnBypass_Click);
-            Construct();
+            Construct();            
         }
 
         public StandaloneMapControl(Brush backgroundColor)
@@ -100,7 +98,7 @@ namespace EpiDashboard.Mapping
             this.defaultBackgroundType = backgroundType;
             this.hidePanels = hidePanels;
             Construct();
-        }
+        }        
 
         private void Construct()
         {
@@ -212,45 +210,15 @@ namespace EpiDashboard.Mapping
             switch (this.defaultBackgroundType)
             {
                 case MapBackgroundType.Satellite:
-                    ToggleSatellite();
+                    ImageryRadioButton.IsChecked = true;
                     break;
                 case MapBackgroundType.Street:
-                    ToggleStreet();
+                    StreetsRadioButton.IsChecked = true;
                     break;
                 case MapBackgroundType.None:
-                    ToggleBlank();
+                    BlankRadioButton.IsChecked = true;
                     break;
             }
-        }
-
-        private void ToggleSatellite()
-        {
-            ImageryRadioButton.Visibility = System.Windows.Visibility.Collapsed;
-            ImageryRadioButton_alt.Visibility = System.Windows.Visibility.Visible;
-            StreetsRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            StreetsRadioButton.Visibility = System.Windows.Visibility.Visible;
-            BlankRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            BlankRadioButton.Visibility = System.Windows.Visibility.Visible;
-        }
-
-        private void ToggleStreet()
-        {
-            StreetsRadioButton.Visibility = System.Windows.Visibility.Collapsed;
-            StreetsRadioButton_alt.Visibility = System.Windows.Visibility.Visible;
-            ImageryRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            ImageryRadioButton.Visibility = System.Windows.Visibility.Visible;
-            BlankRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            BlankRadioButton.Visibility = System.Windows.Visibility.Visible;
-        }
-
-        private void ToggleBlank()
-        {
-            BlankRadioButton.Visibility = System.Windows.Visibility.Collapsed;
-            BlankRadioButton_alt.Visibility = System.Windows.Visibility.Visible;
-            ImageryRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            ImageryRadioButton.Visibility = System.Windows.Visibility.Visible;
-            StreetsRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            StreetsRadioButton.Visibility = System.Windows.Visibility.Visible;
         }
 
         void openDefaultMapWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -302,16 +270,21 @@ namespace EpiDashboard.Mapping
             {
                 txtLoading.Visibility = Visibility.Collapsed;
                 waitCursor.Visibility = Visibility.Collapsed;
+                if (!hidePanels)
+                {
+                    LayerTypeSelector.Visibility = Visibility.Visible;
+                    //btnBypass.Visibility = Visibility.Collapsed;
+                }
 
                 ESRI.ArcGIS.Client.Bing.TileLayer layer = new TileLayer();
                 layer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
 
-                if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                if (ImageryRadioButton.IsChecked.Value)
                 {
                     layer.Token = Configuration.GetNewInstance().Settings.MapServiceKey;
                     layer.LayerStyle = TileLayer.LayerType.AerialWithLabels;
                 }
-                else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                else if (StreetsRadioButton.IsChecked.Value)
                 {
                     layer.Token = Configuration.GetNewInstance().Settings.MapServiceKey;
                     layer.LayerStyle = TileLayer.LayerType.Road;
@@ -371,8 +344,8 @@ namespace EpiDashboard.Mapping
 
                 myMap.MouseMove += new MouseEventHandler(myMap_MouseMove);
                 myMap.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
-                myMap.Loaded += new RoutedEventHandler(myMap_Loaded);
-
+                myMap.Loaded += new RoutedEventHandler(myMap_Loaded);                
+                
                 MapContainer.Children.Add(myMap);
 
                 ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
@@ -403,8 +376,8 @@ namespace EpiDashboard.Mapping
                 //grdMapDef.Background = Brushes.Black;
                 //myMap.Background = Brushes.Black;
                 SetBackgroundColor(defaultBackgroundColor);
-
-                AddLayerList();
+                
+                AddLayerList();                
 
                 if (MapLoaded != null)
                 {
@@ -416,7 +389,7 @@ namespace EpiDashboard.Mapping
                 //
             }
             finally
-            {
+            {                
             }
         }
 
@@ -477,35 +450,6 @@ namespace EpiDashboard.Mapping
         private void mnuRadius_Click(object sender, RoutedEventArgs e)
         {
             AddLayer(LayerType.Zone);
-        }
-
-        public DashboardHelper GetNewDashboardHelper()
-        {
-            List<object> resultArray = DataSourceRequested();
-            if (resultArray != null)
-            {
-                object dataSource = resultArray[0];
-                string dataMember = resultArray[1].ToString();
-                DashboardHelper dashboardHelper;
-                if (dataSource is Project)
-                {
-                    Project project = (Project)dataSource;
-                    View view = project.GetViewByName(dataMember);
-                    IDbDriver dbDriver = DBReadExecute.GetDataDriver(project.FilePath);
-                    dashboardHelper = new DashboardHelper(view, dbDriver);
-                }
-                else
-                {
-                    IDbDriver dbDriver = (IDbDriver)dataSource;
-                    dashboardHelper = new DashboardHelper(dataMember, dbDriver);
-                }
-                dashboardHelper.PopulateDataSet();
-                return dashboardHelper;
-            }
-            else
-            {
-                return null;
-            }
         }
 
         private void AddLayer(LayerType layerType)
@@ -1006,7 +950,7 @@ namespace EpiDashboard.Mapping
         }
 
         public void OpenMap(string filePath)
-        {
+        {            
             ClearGraphics();
             System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
             doc.Load(filePath);
@@ -1061,17 +1005,17 @@ namespace EpiDashboard.Mapping
                 string baseMapType = doc.DocumentElement.Attributes["baseMapType"].Value;
                 if (baseMapType.Equals("street"))
                 {
-                    ToggleStreet();
+                    StreetsRadioButton.IsChecked = true;
                 }
                 else if (baseMapType.Equals("satellite"))
                 {
-                    ToggleSatellite();
+                    ImageryRadioButton.IsChecked = true;
                 }
                 else
                 {
-                    ToggleBlank();
+                    BlankRadioButton.IsChecked = true;
                 }
-            }
+            }            
         }
 
         public void SaveMap()
@@ -1084,11 +1028,11 @@ namespace EpiDashboard.Mapping
             {
                 System.Xml.XmlElement element = layerList.SerializeLayers();
                 System.Xml.XmlAttribute baseMapType = element.OwnerDocument.CreateAttribute("baseMapType");
-                if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                if (ImageryRadioButton.IsChecked.Value)
                 {
                     baseMapType.Value = "satellite";
                 }
-                else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                else if (StreetsRadioButton.IsChecked.Value)
                 {
                     baseMapType.Value = "street";
                 }
@@ -1156,106 +1100,9 @@ namespace EpiDashboard.Mapping
             AddLayer(LayerType.CaseCluster);
         }
 
-        private DashboardPopup popup;
-
         public void GenerateShapeFileChoropleth()
         {
-            //AddLayer(LayerType.ChoroplethShapeFile);
-            popup = new DashboardPopup();
-            popup.Parent = LayoutRoot;
-            EpiDashboard.Controls.ChoroplethProperties properties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
-
-            properties.Width = 800;
-            properties.Height = 600;
-
-            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
-            {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
-            }
-
-            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
-            {
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
-            }
-
-            properties.Cancelled += new EventHandler(properties_Cancelled);
-            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
-            popup.Content = properties;
-            popup.Show();
-        }
-
-        void properties_ChangesAccepted(object sender, EventArgs e)
-        {
-            //DashboardProperties properties = popup.Content as DashboardProperties;
-
-            //if (DashboardHelper.IsUsingEpiProject)
-            //{
-            //    bool projectPathIsValid = true;
-            //    Project tempProject = new Project();
-            //    try
-            //    {
-            //        tempProject = new Project(properties.ProjectFileInfo.FullName);
-            //    }
-            //    catch
-            //    {
-            //        projectPathIsValid = false;
-            //    }
-
-            //    if (!projectPathIsValid)
-            //    {
-            //        //pnlError.Visibility = System.Windows.Visibility.Visible;
-            //        //txtError.Text = "Error: The specified project path is not valid. Settings were not saved.";
-            //        return;
-            //    }
-
-            //    if (!tempProject.Views.Contains(properties.FormName))
-            //    {
-            //        //pnlError.Visibility = System.Windows.Visibility.Visible;
-            //        //txtError.Text = "Error: Form not found in project. Settings were not saved.";
-            //        return;
-            //    }
-
-            //    if (DashboardHelper.IsUsingEpiProject)
-            //    {
-            //        //if (cmbTableName.Text.ToLower() == dashboardHelper.View.Name.ToLower() && dashboardHelper.View.Project.FilePath == txtProjectPath.Text)
-            //        //{
-            //        //    pnlWarning.Visibility = System.Windows.Visibility.Collapsed;
-            //        //    txtWarning.Text = string.Empty;
-            //        //}
-            //    }
-
-            //    DashboardHelper.ResetView(tempProject.Views[properties.FormName], false);
-            //}
-            //else if (!string.IsNullOrEmpty(properties.SqlQuery))
-            //{
-            //    DashboardHelper.SetCustomQuery(properties.SqlQuery);
-            //}
-
-            //this.CustomOutputConclusionText = properties.Conclusion;
-            //this.CustomOutputHeading = properties.Title;
-            //this.CustomOutputSummaryText = properties.Summary;
-            //this.UseAlternatingColorsInOutput = properties.UseAlternatingColors;
-            //this.ShowCanvasSummaryInfoInOutput = properties.ShowCanvasSummary;
-            //this.ShowGadgetHeadingsInOutput = properties.ShowGadgetHeadings;
-            //this.ShowGadgetSettingsInOutput = properties.ShowGadgetSettings;
-            //this.SortGadgetsTopToBottom = properties.UseTopToBottomGadgetOrdering;
-
-            //if (properties.DefaultChartWidth.HasValue)
-            //{
-            //    DefaultChartWidth = properties.DefaultChartWidth.Value;
-            //}
-
-            //if (properties.DefaultChartHeight.HasValue)
-            //{
-            //    DefaultChartHeight = properties.DefaultChartHeight.Value;
-            //}
-
-            popup.Close();
-        }
-
-        void properties_Cancelled(object sender, EventArgs e)
-        {
-            popup.Close();
+            AddLayer(LayerType.ChoroplethShapeFile);
         }
 
         public void GenerateMapServerChoropleth()
@@ -1326,12 +1173,12 @@ namespace EpiDashboard.Mapping
                 {
                     if (myMap.Layers[0] is TileLayer)
                     {
-                        if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                        if (ImageryRadioButton.IsChecked.Value)
                         {
                             ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
                             ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.AerialWithLabels;
                         }
-                        else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                        else if (StreetsRadioButton.IsChecked.Value)
                         {
                             ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
                             ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.Road;
@@ -1344,100 +1191,6 @@ namespace EpiDashboard.Mapping
                     ((TileLayer)myMap.Layers[0]).Refresh();
                 }
             }
-        }
-
-        private void iconExpand_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (ExpandRequested != null)
-            {
-                ExpandRequested(this, new EventArgs());
-            }
-            iconExpand.Visibility = System.Windows.Visibility.Collapsed;
-            iconRestore.Visibility = System.Windows.Visibility.Visible;
-        }
-
-        private void iconRestore_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (RestoreRequested != null)
-            {
-                RestoreRequested(this, new EventArgs());
-            }
-            iconExpand.Visibility = System.Windows.Visibility.Visible;
-            iconRestore.Visibility = System.Windows.Visibility.Collapsed;
-        }
-
-        private void iconOpenMap_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            OpenMap();
-        }
-
-        private void iconSaveMap_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            SaveMap();
-        }
-
-        private void iconSaveAsImage_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            SaveAsImage();
-        }
-
-        private void CollapseExpandLayerChooser()
-        {
-            if (grdLayerTypeChooser.Margin.Left == 0)
-            {
-                grdLayerTypeChooser.BeginAnimation(Grid.MarginProperty, new ThicknessAnimation(new Thickness(-310, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
-            }
-            else
-            {
-                grdLayerTypeChooser.BeginAnimation(Grid.MarginProperty, new ThicknessAnimation(new Thickness(0, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
-            }
-        }
-
-        private void iconAddDataLayer_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            CollapseExpandLayerChooser();
-        }
-
-        private void imgChoropleth_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            CollapseExpandLayerChooser();
-            GenerateShapeFileChoropleth();
-        }
-
-        private void ImageryRadioButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleSatellite();
-            SetBackgroundImageType();
-        }
-
-        private void StreetsRadioButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleStreet();
-            SetBackgroundImageType();
-        }
-
-        private void BlankRadioButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleBlank();
-            SetBackgroundImageType();
-        }
-
-        private void borderSat_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleSatellite();
-            SetBackgroundImageType();
-        }
-
-        private void borderStr_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleStreet();
-            SetBackgroundImageType();
-        }
-
-        private void borderBln_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleBlank();
-            SetBackgroundImageType();
         }
     }
 

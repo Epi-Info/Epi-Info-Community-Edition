@@ -19,7 +19,6 @@ namespace Epi.Data.Services
     /// <summary>
     /// Data access class for Epi Info collected data
     /// </summary>
-    /// 
     public class CollectedDataProvider
     {
         private bool isWebMode;
@@ -211,31 +210,6 @@ namespace Epi.Data.Services
                 return true;
             }
             return false;
-        }
-
-        public bool CheckCollectedDataIntegrity(View view)
-        {
-            if (view == null)
-            {
-                throw new ArgumentNullException("view");
-            }
-
-            string queryString = "select count(*) from " + dbDriver.InsertInEscape(view.TableName);
-            Query query = dbDriver.CreateQuery(queryString);
-            int masterRecordCount = Int32.Parse((dbDriver.ExecuteScalar(query)).ToString());
-
-            foreach (Page page in view.Pages)
-            {
-                queryString = "select count(*) from " + dbDriver.InsertInEscape(page.TableName);
-                query = dbDriver.CreateQuery(queryString);
-
-                if (masterRecordCount != Int32.Parse((dbDriver.ExecuteScalar(query)).ToString()))
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         public void SuggestRenameFieldInCollectedData(Field field, string nameBeforeEdit)

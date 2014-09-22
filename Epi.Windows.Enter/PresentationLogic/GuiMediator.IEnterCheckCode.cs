@@ -1414,141 +1414,124 @@ namespace Epi.Windows.Enter.PresentationLogic
         /// GoTo
         /// </summary>
         /// <param name="pDestination">Destination</param>
-        public void GoTo(string pDestination, string targetPage = "", string targetForm = "")
+        public void GoTo(string pDestination)
         {
-            if (pDestination == "" && targetPage == "" && targetForm != "")
+            Collection<string> checkCodeList = new Collection<string>();
+            checkCodeList.Add(pDestination);
+            int pagePosition;
+            bool result;
+            ControlFactory factory = ControlFactory.Instance;          
+            List<Control> CurrentControl = factory.GetAssociatedControls(EnterCheckCodeEngine.CurrentView.CurrentField);
+            if (CurrentControl.Count > 1)
+            {
+                SetFieldData(CurrentControl[1]);
+            }
+            else
+            {
+                if (CurrentControl.Count > 0 && !(CurrentControl[0] is Label || EnterCheckCodeEngine.CurrentView.CurrentField is Epi.Fields.CommandButtonField))
+                {
+                    SetFieldData(CurrentControl[0]);
+                }
+            }
+            //Go to next page
+            if (checkCodeList[0].ToString() == "+1")
             {
                 SetFieldData();
                 SaveRecord();
-                this.mainForm.OpenView(targetForm);
-            }
-            else if (pDestination == "" && targetPage != "" )
+                GoToNextPage();
+            }            
+            //Go to previous page
+            else if (checkCodeList[0].ToString() == "-1")
             {
                 SetFieldData();
                 SaveRecord();
-                this.mainForm.OpenPage(targetPage, targetForm);
+                GoToPreviousPage();
             }
-            else if (pDestination != "")
+            else
             {
-                Collection<string> checkCodeList = new Collection<string>();
-                checkCodeList.Add(pDestination);
-                int pagePosition;
-                bool result;
-                ControlFactory factory = ControlFactory.Instance;
-                List<Control> CurrentControl = factory.GetAssociatedControls(EnterCheckCodeEngine.CurrentView.CurrentField);
-
-                if (CurrentControl.Count > 1)
+                result = int.TryParse(checkCodeList[0].ToString(), out pagePosition);
+                //Go to specific page
+                if (result)
                 {
-                    SetFieldData(CurrentControl[1]);
-                }
-                else
-                {
-                    if (CurrentControl.Count > 0 && !(CurrentControl[0] is Label || EnterCheckCodeEngine.CurrentView.CurrentField is Epi.Fields.CommandButtonField))
+                    SetFieldData();                  
+                    if (pagePosition == 0 || pagePosition > view.Pages.Count)
                     {
-                        SetFieldData(CurrentControl[0]);
+                        //Since this page does not exist, only navigate to the next control.
+                        canvas.EnableTabToNextControl = true;
                     }
-                }
-
-                //Go to next page
-                if (checkCodeList[0].ToString() == "+1")
-                {
-                    SetFieldData();
-                    SaveRecord();
-                    GoToNextPage();
-                }
-                //Go to previous page
-                else if (checkCodeList[0].ToString() == "-1")
-                {
-                    SetFieldData();
-                    SaveRecord();
-                    GoToPreviousPage();
-                }
-                else
-                {
-                    result = int.TryParse(checkCodeList[0].ToString(), out pagePosition);
-                    //Go to specific page
-                    if (result)
+                    else
                     {
-                        SetFieldData();
-                        if (pagePosition == 0 || pagePosition > view.Pages.Count)
+                        //Since page position starts with index 0, reset the page position to be one less
+                        //than it is because when the check code was saved it was saved starting with a 1 based index 
+                        //instead of a 0 based index.
+                        pagePosition -= 1;//
+                        for (int i = 0; i < view.Pages.Count; i++)
                         {
-                            //Since this page does not exist, only navigate to the next control.
-                            canvas.EnableTabToNextControl = true;
-                        }
-                        else
-                        {
-                            //Since page position starts with index 0, reset the page position to be one less
-                            //than it is because when the check code was saved it was saved starting with a 1 based index 
-                            //instead of a 0 based index.
-                            pagePosition -= 1;//
-                            for (int i = 0; i < view.Pages.Count; i++)
+                            if (view.Pages[i].Position == pagePosition)
                             {
-                                if (view.Pages[i].Position == pagePosition)
-                                {
-                                    OpenPageHandler(this, new PageSelectedEventArgs(view.Pages[i]));
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    else  //Go to specific field
-                    {
-                        // find page for field
-                        foreach (Page page in view.Pages)
-                        {
-                            if (page.Fields.Contains(checkCodeList[0].ToString()))
-                            {
-                                pagePosition = page.Position;
+                                OpenPageHandler(this, new PageSelectedEventArgs(view.Pages[i]));
                                 break;
                             }
                         }
-                        if (currentPage.Position == pagePosition)
-                        {
-                            Field field = null;
-                            controlsList = GetAssociatedControls(checkCodeList);
-                            foreach (Control control in controlsList)
-                            {
-                                field = ControlFactory.Instance.GetAssociatedField(control);
-                                if (!Util.IsEmpty(field))
-                                {
-                                    if (!currentPage.Fields.Contains((RenderableField)field))
-                                    {
-                                        SaveRecord();
-                                    }
-                                }
-                            }
-                            canvas.EnableTabToNextControl = false;
-                            if (field != null)
-                            {
-                                canvas.GoToField(controlsList, field);
-                                foreach (Control control in controlsList)
-                                {
-                                    if (!(control is Label))
-                                        canvas.GotoPageControl = control;
-                                    canvas.GotoPageField = field;
-                                }
-                            }
-                        }
-                        else  //Go To specific field in other Page
-                        {
-                            SetFieldData();
-                            // SaveRecord();
-                            canvas.EnableTabToNextControl = false;
-                            Field field = null;
-                            canvas.IsGotoPageField = true;
-                            OpenPageHandler(this, new PageSelectedEventArgs(view.Pages[pagePosition]));
-                            controlsList = GetAssociatedControls(checkCodeList);
-                            foreach (Control control in controlsList)
-                            {
-                                field = ControlFactory.Instance.GetAssociatedField(control);
-                            }
-                            canvas.GoToField(controlsList, field);
-                            canvas.IsGotoPageField = false;
-                        }
                     }
                 }
-                canvas.GotoPageControl = null; canvas.GotoPageField = null;
+                else  //Go to specific field
+                {
+                    // find page for field
+                    foreach (Page page in view.Pages)
+                    {
+                        if (page.Fields.Contains(checkCodeList[0].ToString()))
+                        {
+                            pagePosition = page.Position;
+                            break;
+                        }
+                    }
+                    if (currentPage.Position == pagePosition)
+                    {
+                        Field field = null;
+                        controlsList = GetAssociatedControls(checkCodeList);
+                        foreach (Control control in controlsList)
+                        {
+                            field = ControlFactory.Instance.GetAssociatedField(control);
+                            if (!Util.IsEmpty(field))
+                            {
+                                if (!currentPage.Fields.Contains((RenderableField)field))
+                                {
+                                    SaveRecord();
+                                }
+                            }
+                        }
+                        canvas.EnableTabToNextControl = false;
+                        if (field != null)
+                        {
+                            canvas.GoToField(controlsList, field);
+                            foreach (Control control in controlsList)
+                            {
+                                if (!(control is Label))
+                                    canvas.GotoPageControl = control;
+                                canvas.GotoPageField = field; 
+                            }  
+                        }
+                    }
+                    else  //Go To specific field in other Page
+                    {
+                        SetFieldData();
+                       // SaveRecord();
+                        canvas.EnableTabToNextControl = false;
+                        Field field = null;
+                        canvas.IsGotoPageField = true;
+                        OpenPageHandler(this, new PageSelectedEventArgs(view.Pages[pagePosition]));
+                        controlsList = GetAssociatedControls(checkCodeList);
+                        foreach (Control control in controlsList)
+                        {
+                            field = ControlFactory.Instance.GetAssociatedField(control);
+                        }
+                        canvas.GoToField(controlsList, field);
+                        canvas.IsGotoPageField = false;
+                    }
+                }
             }
+            canvas.GotoPageControl = null; canvas.GotoPageField = null;
         }
 
         /// <summary>

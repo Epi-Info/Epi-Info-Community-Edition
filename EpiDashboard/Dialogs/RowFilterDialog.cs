@@ -77,7 +77,7 @@ namespace EpiDashboard.Dialogs
             this.Controls.Add(host);
 
             this.Width = 587;
-            this.Height = 560;
+            this.Height = 381;
         }
 
         public DataFilters DataFilters

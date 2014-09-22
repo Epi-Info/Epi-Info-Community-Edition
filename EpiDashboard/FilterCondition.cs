@@ -184,7 +184,7 @@ namespace EpiDashboard
         public string Value
         {
             get
-            {                
+            {
                 return this.value;
             }
         }
@@ -272,7 +272,7 @@ namespace EpiDashboard
             {
                 this.isEnabled = value;
             }
-        }        
+        }
         #endregion // Public Properties
 
         #region Public Methods
@@ -319,7 +319,7 @@ namespace EpiDashboard
 
             if (ColumnType.Equals("System.DateTime"))
             {
-                if(IsBetween) 
+                if (IsBetween)
                 {
                     highValue = "#" + DateTime.Parse(highValue.Trim('#'), System.Globalization.CultureInfo.InvariantCulture).ToString("s") + "#";
                     lowValue = "#" + DateTime.Parse(lowValue.Trim('#'), System.Globalization.CultureInfo.InvariantCulture).ToString("s") + "#";
@@ -334,7 +334,7 @@ namespace EpiDashboard
                     friendlyValue = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture).ToString("d", System.Globalization.CultureInfo.InvariantCulture);
                 }
             }
-            
+
             string xmlString =
             "<condition>" + xmlFriendlyCondition + "</condition>" +
             "<friendlyCondition>" + friendlyCondition.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;") + "</friendlyCondition>" +
@@ -444,7 +444,7 @@ namespace EpiDashboard
                 {
                     this.value = "#" + DateTime.Parse(this.value.Trim('#')).ToString(System.Globalization.CultureInfo.InvariantCulture) + "#";
                     this.friendlyValue = DateTime.Parse(this.friendlyValue, System.Globalization.CultureInfo.InvariantCulture).ToString("d", System.Globalization.CultureInfo.CurrentCulture);
-                    this.friendlyCondition = string.Format(SharedStrings.FRIENDLY_CONDITION_DATA_FILTER, columnName, friendlyOperand, friendlyValue);                    
+                    this.friendlyCondition = string.Format(SharedStrings.FRIENDLY_CONDITION_DATA_FILTER, columnName, friendlyOperand, friendlyValue);
                 }
             }
 
@@ -456,8 +456,8 @@ namespace EpiDashboard
         /// <summary>
         /// Generates the necessary friendly values and other internal logic needed to create the filter
         /// </summary>        
-        private void SetupFilterCondition() 
-        {            
+        private void SetupFilterCondition()
+        {
             Configuration config = Configuration.GetNewInstance();
             StringBuilder conditionBuilder = new StringBuilder();
 

@@ -668,7 +668,6 @@ Errorhandler:
         If context.InputVariableList.ContainsKey("OutTable") Then
             OuttableName = context.InputVariableList("OutTable")
         End If
-
         If identifiers Is Nothing Then
             args = New Dictionary(Of String, String)
             CreateSettingsFromContext()
@@ -712,6 +711,14 @@ Errorhandler:
                     domain2 = LastDom.Domain
                 End If
 
+                If (Not domain Is Nothing) Then
+                    ComputeTot(errorMessage)
+                    If Not String.IsNullOrEmpty(errorMessage) Then
+                        DisplayError(args, errorMessage)
+                        Exit Sub
+                    End If
+                End If
+
                 If Not OuttableName Is Nothing Then
                     Outputtable = New DataTable
                     Outputtable.TableName = OuttableName
@@ -721,12 +728,12 @@ Errorhandler:
                     End If
                     exposureoutvar = outcome.FieldLabel
 
-                    If Not exposurevar Is Nothing Then
-                        Outputtable.Columns.Add(exposurevar, Type.GetType("System.Double"))
-
-                    End If
                     If Not exposureoutvar Is Nothing Then
                         Outputtable.Columns.Add(exposureoutvar, Type.GetType("System.Double"))
+
+                    End If
+                    If Not exposurevar Is Nothing Then
+                        Outputtable.Columns.Add(exposurevar, Type.GetType("System.Double"))
 
                     End If
                     Outputtable.Columns.Add("COUNT", Type.GetType("System.Double"))
@@ -737,14 +744,6 @@ Errorhandler:
                     Outputtable.Columns.Add("UCL", Type.GetType("System.Double"))
                     Outputtable.Columns.Add("DesignEff", Type.GetType("System.Double"))
                 End If
-                If (Not domain Is Nothing) Then
-                    ComputeTot(errorMessage)
-                    If Not String.IsNullOrEmpty(errorMessage) Then
-                        DisplayError(args, errorMessage)
-                        Exit Sub
-                    End If
-                End If
-
                 ResetReader()
 
                 result = SecondPass(errorMessage)
@@ -767,7 +766,6 @@ Errorhandler:
                 context.OutTable(Outputtable)
             End If
         Else
-
             If Not OuttableName Is Nothing Then
                 Outputtable = New DataTable
                 Outputtable.TableName = OuttableName
@@ -786,7 +784,6 @@ Errorhandler:
                 Outputtable.Columns.Add("DesignEff", Type.GetType("System.Double"))
 
             End If
-
             For Each id In identifiers
 
                 args = New Dictionary(Of String, String)
@@ -2980,6 +2977,7 @@ ErrorHandler:
 ErrorHandler:
 
     End Sub
+
     Public Function FirstPassCom(ByRef errorMessage As String) As Integer
 
         Const PROC_Name As String = "clsCTables::FirstPassCom"
@@ -3564,19 +3562,15 @@ ErrorHandler:
                         doma = domain.FieldEntry
                         Valid = False
                         If com Then
-                            If Not doma.ToString() = "" Then
-                                If ValidCase() And ((doma = domain1) Or (doma = domain2)) Then
-                                    Valid = True
-                                End If
-                            Else
-                                Valid = ValidCase()
+                            If ValidCase() And ((doma = domain1) Or (doma = domain2)) Then
+                                Valid = True
                             End If
                         Else
                             Valid = ValidCase()
                         End If
-                        Else
-                            Valid = ValidCase()
-                        End If
+                    Else
+                        Valid = ValidCase()
+                    End If
 
                     If Valid Then
 
@@ -3815,7 +3809,6 @@ ErrorHandler:
                 PrintValuesforCSF()
             End If
         End If
-
         If T22 And risk And cnOutputLevel > 1 Then
             'UPGRADE_WARNING: Lower bound of array vntResultsArray was changed from 1,1 to 0,0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
             'UPGRADE_ISSUE: As Variant was removed from ReDim vntResultsArray(1 To 2, 1 To 20) statement. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="19AFCB41-AA8E-4E6B-A441-A3E802E5FD64"'

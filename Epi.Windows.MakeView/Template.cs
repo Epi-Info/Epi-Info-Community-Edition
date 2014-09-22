@@ -308,61 +308,7 @@ namespace Epi.Windows.MakeView
             }
             writer.WriteEndElement();
         }
-        public void CreateEWEProjectTemplate(string nameWithSubfolders, string templateDescription, XmlWriter writer)
-            {
-            writer.WriteStartElement("Template");
-            writer.WriteAttributeString("Name", nameWithSubfolders);
-            writer.WriteAttributeString("Description", templateDescription);
-            writer.WriteAttributeString("CreateDate", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString());
-            writer.WriteAttributeString("Level", "Project");
 
-            writer.WriteStartElement("Project");
-            writer.WriteAttributeString("Id", string.Empty);
-            writer.WriteAttributeString("Name", mediator.Project.Name);
-            writer.WriteAttributeString("Location", string.Empty);
-            writer.WriteAttributeString("Description", mediator.Project.Description);
-            writer.WriteAttributeString("EpiVersion", mediator.Project.EpiVersion);
-            writer.WriteAttributeString("CreateDate", string.Empty);
-
-            Configuration configuration = Configuration.GetNewInstance();
-
-            writer.WriteAttributeString("ControlFontBold", configuration.Settings.ControlFontBold.ToString());
-            writer.WriteAttributeString("ControlFontItalics", configuration.Settings.ControlFontItalics.ToString());
-            writer.WriteAttributeString("ControlFontName", configuration.Settings.ControlFontName);
-            writer.WriteAttributeString("ControlFontSize", configuration.Settings.ControlFontSize.ToString());
-
-            writer.WriteAttributeString("DefaultLabelAlign", configuration.Settings.DefaultLabelAlign);
-            writer.WriteAttributeString("DefaultPageHeight", configuration.Settings.DefaultPageHeight.ToString());
-            writer.WriteAttributeString("DefaultPageOrientation", configuration.Settings.DefaultPageOrientation);
-            writer.WriteAttributeString("DefaultPageWidth", configuration.Settings.DefaultPageWidth.ToString());
-
-            writer.WriteAttributeString("EditorFontBold", configuration.Settings.EditorFontBold.ToString());
-            writer.WriteAttributeString("EditorFontItalics", configuration.Settings.EditorFontItalics.ToString());
-            writer.WriteAttributeString("EditorFontName", configuration.Settings.EditorFontName);
-            writer.WriteAttributeString("EditorFontSize", configuration.Settings.EditorFontSize.ToString());
-
-            writer.WriteStartElement("CollectedData");
-            writer.WriteStartElement("Database");
-            writer.WriteAttributeString("Source", string.Empty);
-            writer.WriteAttributeString("DataDriver", string.Empty);
-            writer.WriteEndElement();
-            writer.WriteEndElement();
-
-            writer.WriteStartElement("Metadata");
-            writer.WriteAttributeString("Source", string.Empty);
-            writer.WriteEndElement();
-
-            writer.WriteStartElement("EnterMakeviewInterpreter");
-            writer.WriteAttributeString("Source", mediator.Project.EnterMakeviewIntepreter);
-            writer.WriteEndElement();
-
-            foreach (View view in mediator.Project.Views)
-                {
-                this.view = view;
-                CreateViewTemplate(nameWithSubfolders, writer);
-                }
-            writer.WriteEndElement();
-            }
         public string CreateWebSurveyTemplate()
         {
             StringWriter sw = new StringWriter();
@@ -379,23 +325,7 @@ namespace Epi.Windows.MakeView
             writer.Close();
             return sw.ToString();
         }
-        public string CreateWebEnterTemplate()
-            {
 
-            StringWriter sw = new StringWriter();
-
-            XmlWriter writer = XmlWriter.Create(sw);  
-            writer.WriteStartDocument();
-            //writer.WriteStartElement("Template");
-            //writer.WriteAttributeString("Level", "View");
-            //writer.WriteStartElement("Project");
-            CreateProjectTemplate("web", "dis", writer);
-           // writer.WriteEndElement();
-            AddCodeTableTemplates(writer);
-           // writer.WriteEndElement();
-            writer.Close();
-            return sw.ToString();
-            }
         public void CreatePhoneTemplate(string path)
         {
             StringWriter sw = new StringWriter();
@@ -585,12 +515,11 @@ namespace Epi.Windows.MakeView
                 }
 
                 index = checkCode.LastIndexOf("\nPage ");
-                index = index == -1 ? checkCode.LastIndexOf("\n\tPage ") : index;
                 index = index == -1 ? checkCode.LastIndexOf(" Page ") : index;
                 index = index == -1 ? checkCode.LastIndexOf("Page ") : index;
 
                 candidate = checkCode.Substring(index, checkCode.Length - index);
-                candidate = candidate.TrimStart(new char[] { '\r', '\n', '\t' });
+                candidate = candidate.TrimStart(new char[] { '\r', '\n' });
                 candidate = candidate.Substring(4, candidate.Length - 4);
                 candidate = candidate.TrimStart(' ');
 
@@ -1914,8 +1843,7 @@ namespace Epi.Windows.MakeView
                     ((GridField)field).PromptLeftPositionPercentage = promptLeftPercentage;
                     ((GridField)field).PromptTopPositionPercentage = promptTopPercentage;
                 }
-  
-  
+
                 if (field is ImageField)
                 {
                     ((ImageField)field).ShouldRetainImageSize = (bool)row["ShouldRetainImageSize"];

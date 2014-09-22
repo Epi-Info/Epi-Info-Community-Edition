@@ -21,7 +21,6 @@ namespace Epi.Data.Services
 {
     public class MetadataDataSet : MetadataDbProvider
     {
-
         private bool isWebMode;
         private DataSet _dataSet;
 

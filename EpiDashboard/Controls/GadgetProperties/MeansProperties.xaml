@@ -44,7 +44,7 @@
             <Label>Weight:</Label>
             <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
             <Label>Stratify by:</Label>
-            <ListBox SelectionMode="Multiple" Name="lvFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="90" />
+            <ListBox SelectionMode="Multiple" Name="lvFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="290" />
             <!--<ListView Name="lvFieldStrata" MaxHeight="450">
                 <ListView.View>
                     <GridView>

@@ -61,7 +61,6 @@ namespace Epi.Windows.Enter
             this.mnuImportFromWeb = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportFromForm = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportFromDataPackage = new System.Windows.Forms.ToolStripMenuItem();
-            this.fromWebEnterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPackageForTransport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,7 +83,6 @@ namespace Epi.Windows.Enter
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableCheckCodeExecutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableCheckCodeErrorSupressionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyShortcutToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutEpiInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,6 +123,7 @@ namespace Epi.Windows.Enter
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.copyShortcutToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -336,8 +335,7 @@ namespace Epi.Windows.Enter
             this.mnuImportFromPhone,
             this.mnuImportFromWeb,
             this.mnuImportFromForm,
-            this.mnuImportFromDataPackage,
-            this.fromWebEnterToolStripMenuItem});
+            this.mnuImportFromDataPackage});
             this.importDataToolStripMenuItem.Name = "importDataToolStripMenuItem";
             resources.ApplyResources(this.importDataToolStripMenuItem, "importDataToolStripMenuItem");
             // 
@@ -365,12 +363,6 @@ namespace Epi.Windows.Enter
             resources.ApplyResources(this.mnuImportFromDataPackage, "mnuImportFromDataPackage");
             this.mnuImportFromDataPackage.Name = "mnuImportFromDataPackage";
             this.mnuImportFromDataPackage.Click += new System.EventHandler(this.mnuImportFromDataPackage_Click);
-            // 
-            // fromWebEnterToolStripMenuItem
-            // 
-            resources.ApplyResources(this.fromWebEnterToolStripMenuItem, "fromWebEnterToolStripMenuItem");
-            this.fromWebEnterToolStripMenuItem.Name = "fromWebEnterToolStripMenuItem";
-            this.fromWebEnterToolStripMenuItem.Click += new System.EventHandler(this.fromWebEnterToolStripMenuItem_Click);
             // 
             // mnuPackageForTransport
             // 
@@ -516,12 +508,6 @@ namespace Epi.Windows.Enter
             this.enableCheckCodeErrorSupressionToolStripMenuItem.Name = "enableCheckCodeErrorSupressionToolStripMenuItem";
             resources.ApplyResources(this.enableCheckCodeErrorSupressionToolStripMenuItem, "enableCheckCodeErrorSupressionToolStripMenuItem");
             this.enableCheckCodeErrorSupressionToolStripMenuItem.Click += new System.EventHandler(this.enableCheckCodeErrorSupressionToolStripMenuItem_Click);
-            // 
-            // copyShortcutToClipboardToolStripMenuItem
-            // 
-            this.copyShortcutToClipboardToolStripMenuItem.Name = "copyShortcutToClipboardToolStripMenuItem";
-            resources.ApplyResources(this.copyShortcutToClipboardToolStripMenuItem, "copyShortcutToClipboardToolStripMenuItem");
-            this.copyShortcutToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyShortcutToClipboardToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -801,6 +787,12 @@ namespace Epi.Windows.Enter
             // 
             resources.ApplyResources(this.ContentPanel, "ContentPanel");
             // 
+            // copyShortcutToClipboardToolStripMenuItem
+            // 
+            this.copyShortcutToClipboardToolStripMenuItem.Name = "copyShortcutToClipboardToolStripMenuItem";
+            resources.ApplyResources(this.copyShortcutToClipboardToolStripMenuItem, "copyShortcutToClipboardToolStripMenuItem");
+            this.copyShortcutToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyShortcutToClipboardToolStripMenuItem_Click);
+            // 
             // EnterMainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -923,6 +915,5 @@ namespace Epi.Windows.Enter
         private System.Windows.Forms.ToolStripMenuItem mnuImportFromPhone;
         private System.Windows.Forms.ToolStripMenuItem mnuImportFromDataPackage;
         private System.Windows.Forms.ToolStripMenuItem copyShortcutToClipboardToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fromWebEnterToolStripMenuItem;
     }
 }

@@ -31,7 +31,7 @@ namespace Epi.Analysis.Statistics
 
         string _graphInterval = string.Empty;
         string _graphIntervalUnits = string.Empty;
-        object _graphStartFrom = string.Empty;
+        string _graphStartFrom = string.Empty;
 
         bool _independentValueTypesSame = true; 
         bool _independentValuesAllBool = true;        
@@ -354,131 +354,6 @@ namespace Epi.Analysis.Statistics
                                             }
                                         }
                                     }
-                                }
-                            }
-                        }
-                    }
-                }
-                else if (_graphInterval != "" && _graphType == "EPICURVE")
-                {
-                    string categoryName = string.Empty;
-                    Dictionary<object, double> indDepValuePairCollection = new Dictionary<object, double>();
-
-                    List<string> StrataVarNameList = new List<string>();
-                    List<string> StrataVarValueList = new List<string>();
-
-                    foreach (string independentVariable in _independentVariableArray)
-                    {
-                        StrataVarNameList.Add(filter.strataVarName);
-                        StrataVarValueList.Add(filter.strataVarValue);
-
-                        DataTable workingTable = cWorkingTable.CreateWorkingTable(
-                            independentVariable, 
-                            "", 
-                            config, 
-                            sourceTable,
-                            StrataVarNameList,
-                            StrataVarValueList,
-                            _weightVar);
-
-                        DateTime intervalStart = DateTime.MinValue;
-                        DateTime intervalEnd = DateTime.MinValue;
-                        DateTime dateTimeValue = DateTime.MinValue;
-
-                        double givenInterval = 1;
-                        int days = 0, hours = 0, minutes = 0, seconds = 0; 
-                        TimeSpan period = new TimeSpan(days, hours, minutes, seconds);
-                        double.TryParse(_graphInterval, out givenInterval);
-
-                        foreach (DataRow row in workingTable.Rows)
-                        {
-                            if (row["__Values__"] != DBNull.Value)
-                            {
-                                dateTimeValue = (DateTime)row["__Values__"];
-
-                                if (intervalStart == DateTime.MinValue)
-                                {
-                                    intervalStart = dateTimeValue;
-                                    _graphStartFrom = dateTimeValue;
-                                }
-
-                                if ( dateTimeValue >= intervalEnd)
-                                {
-                                    if (intervalEnd != DateTime.MinValue)
-                                    { 
-                                        intervalStart = intervalEnd;
-                                    }
-
-                                    switch (_graphIntervalUnits)
-                                    {
-                                        case "Years":
-                                            break;
-                                        case "Quarters":
-                                            break;
-                                        case "Weeks":
-                                            break;
-                                        case "Days":
-                                            intervalEnd = intervalStart.AddDays(givenInterval);
-                                            break;
-                                        case "Hours":
-                                            break;
-                                        case "Minutes":
-                                            break;
-                                        case "Seconds":
-                                            break;
-                                    }
-                                }
-
-                                string seriesName = string.Empty;
-                                object independentValue = new object();
-
-                                independentValue = BuildIndependentValue(independentVariable, row, config);
-
-                                if (string.IsNullOrEmpty(seriesName))
-                                {
-                                    seriesName = SilverlightStatics.COUNT;
-
-                                    if (_independentVariableArray.Length > 1)
-                                    {
-                                        seriesName = independentVariable;
-                                    }
-
-                                    if(string.IsNullOrEmpty(_aggregateFunction) == false)
-                                    {
-                                        seriesName = _aggregateFunction;
-                                    }
-                                }
-
-                                if (string.IsNullOrEmpty(_weightVar))
-                                {
-                                    double dependentVal;
-
-                                    if (double.TryParse(row["__Count__"].ToString(), out dependentVal))
-                                    {
-                                        if ((dateTimeValue >= intervalStart) && (dateTimeValue < intervalEnd))
-                                        {
-                                            string expression = "Predictor = #" + intervalStart.ToString() + "#";
-                                            DataRow[] foundRows = regressionTable.Select(expression);
-
-                                            if (foundRows.Length == 0)
-                                            {
-                                                regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
-                                            }
-                                            else
-                                            {
-                                                foundRows[0]["Response"] = (double)foundRows[0]["Response"] + dependentVal;
-                                                regressionTable.AcceptChanges();
-                                            }
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    filter.independentVarValue = row["__Values__"];
-                                    filter.independentVarName = independentVariable;
-                                    filter.weightVarName = _weightVar;
-                                    double dependentVal = GetAggregateValue(sourceTable, filter);
-                                    regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
                                 }
                             }
                         }

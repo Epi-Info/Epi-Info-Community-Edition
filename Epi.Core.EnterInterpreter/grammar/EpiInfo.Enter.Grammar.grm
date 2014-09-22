@@ -119,7 +119,6 @@ Comment End = '*/'
         | <Get_Path_Statement>
         | <Go_To_Variable_Statement>
         | <Go_To_Page_Statement>
-        | <Go_To_Form_Statement>
         | <Help_Statement> 
         | <Hide_Some_Statement>
         | <Hide_Except_Statement>
@@ -406,9 +405,9 @@ Comment End = '*/'
 
 
 !***                GoTo Statement          ***!
-<Go_To_Variable_Statement>              ::= GOTO Identifier | GOTO <Fully_Qualified_Id>
-<Go_To_Page_Statement>                  ::= GOTO DecLiteral | GOTO '-'DecLiteral| GOTO '+'DecLiteral | GOTOPAGE Identifier | GOTOPAGE <Fully_Qualified_Id>
-<Go_To_Form_Statement>                  ::= GOTOFORM Identifier | GOTOFORM <Fully_Qualified_Id>
+<Go_To_Variable_Statement>                  ::= GOTO  Identifier
+<Go_To_Page_Statement>                      ::= GOTO DecLiteral
+                                                                         | GOTO '-'DecLiteral| GOTO '+'DecLiteral
 !***                End                 ***!
 
 

@@ -426,7 +426,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
 
             Parameters.ChartTitle = txtChartTitle.Text;
-            Parameters.ChartSubTitle = txtChartSubTitle.Text;
+
+            //Parameters.ChartSubTitle = txtChartSubTitle.Text;
 
             //Legend settings /////////////////////////////////
 
@@ -754,7 +755,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                     if (field != null && field is RenderableField)
                     {
                         FieldFlags flags = SetFieldFlags(field as RenderableField);
-                        UpdateXAxisLabelValue(cmbField.SelectedItem.ToString());
+
                         if (checkboxAllValues != null)
                         {
                             if (flags.IsDropDownListField || flags.IsRecodedField)
@@ -860,27 +861,22 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 if (cmbXAxisLabelType.SelectedIndex == 1)
                 {
-                    UpdateXAxisLabelValue(cmbField.Text);
+                    Field f = DashboardHelper.GetAssociatedField(cmbField.Text);
+                    if(f != null && f is IDataField) 
+                    {
+                        Epi.Fields.IDataField dataField = f as IDataField;
+                        txtXAxisLabelValue.Text = dataField.PromptText;
+                    }
+                    else
+                    {
+                        txtXAxisLabelValue.Text = String.Empty;
+                    }
                 }
                 else
                 {
                     txtXAxisLabelValue.Text = String.Empty;
                 }
                 txtXAxisLabelValue.IsEnabled = false;
-            }
-        }
-
-        private void UpdateXAxisLabelValue(string FieldText)
-        {
-            Field f = DashboardHelper.GetAssociatedField(FieldText);
-            if (f != null && f is IDataField)
-            {
-                Epi.Fields.IDataField dataField = f as IDataField;
-                txtXAxisLabelValue.Text = dataField.PromptText;
-            }
-            else
-            {
-                txtXAxisLabelValue.Text = String.Empty;
             }
         }
 

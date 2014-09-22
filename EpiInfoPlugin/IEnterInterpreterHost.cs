@@ -19,7 +19,7 @@ namespace EpiInfo.Plugin
         bool Dialog(string text, string caption, string mask, string modifier, ref object input, EpiInfo.Plugin.DataType dataType);
         string GetValue(string pName);
         IVariable GetGridValue(string pName, int pIndex0, object pIndex1);
-        void GoTo(string pDesitnation, string targetPage = "", string targetForm = "");
+        void GoTo(string pDesitnation);
         void Hide(string[] pNameList, bool pIsAnExceptList);
         void Highlight(string[] pNameList, bool pIsAnExceptList);
         void UnHighlight(string[] pNameList, bool pIsAnExceptList);

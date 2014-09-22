@@ -18,6 +18,9 @@ namespace EpiDashboard.Gadgets.Charting
     {
         public Controls.Charting.IChart SelectedChart { get; set; }
 
+        protected int? XAxisStart { get; set; }
+        protected int? XAxisEnd { get; set; }
+
         protected object syncLockData = new object();
 
         protected delegate void SetChartDataDelegate(List<XYColumnChartData> dataList, Strata strata);
@@ -89,39 +92,30 @@ namespace EpiDashboard.Gadgets.Charting
 
         protected void cmbXAxisLabelType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //MOVED TO INDIVIDUAL CHART PROPERTIES PANELS
-            //LEFT SHELL TO ENABLE OTHER CHARTS TO COMPILE
-        //    TextBox txtXAxisLabelValue = this.FindName("txtXAxisLabelValue") as TextBox;
-        //    ComboBox cmbXAxisLabelType = this.FindName("cmbXAxisLabelType") as ComboBox;
+            TextBox txtXAxisLabelValue = this.FindName("txtXAxisLabelValue") as TextBox;
+            ComboBox cmbXAxisLabelType = this.FindName("cmbXAxisLabelType") as ComboBox;
 
-        //    if (LoadingCombos || txtXAxisLabelValue == null) return;
-        //    SetXAxisLabelControls();
+            if (LoadingCombos || txtXAxisLabelValue == null) return;
+            SetXAxisLabelControls();
         }
 
         protected void SetXAxisLabelControls()
         {
-            //MOVED TO INDIVIDUAL CHART PROPERTIES PANELS
-            //LEFT SHELL TO ENABLE OTHER CHARTS TO COMPILE
+            TextBox txtXAxisLabelValue = this.FindName("txtXAxisLabelValue") as TextBox;
+            ComboBox cmbXAxisLabelType = this.FindName("cmbXAxisLabelType") as ComboBox;
 
-        //    XAxisLabelType xAxisLabelType = ((ChartParametersBase)Parameters).XAxisLabelType;
-        //    //TextBox txtXAxisLabelValue = this.FindName("txtXAxisLabelValue") as TextBox;
-        //    //ComboBox cmbXAxisLabelType = this.FindName("cmbXAxisLabelType") as ComboBox;
-
-        //    object element = this.FindName("cmbXAxisLabelType");
-
-
-        //    switch (cmbXAxisLabelType.SelectedIndex)
-        //    {
-        //        case 3:
-        //            txtXAxisLabelValue.IsEnabled = true;
-        //            break;
-        //        case 0:
-        //        case 1:
-        //        case 2:
-        //            txtXAxisLabelValue.IsEnabled = false;
-        //            txtXAxisLabelValue.Text = string.Empty;
-        //            break;
-        //    }
+            switch (cmbXAxisLabelType.SelectedIndex)
+            {
+                case 3:
+                    txtXAxisLabelValue.IsEnabled = true;
+                    break;
+                case 0:
+                case 1:
+                case 2:
+                    txtXAxisLabelValue.IsEnabled = false;
+                    txtXAxisLabelValue.Text = string.Empty;
+                    break;
+            }
         }
 
         protected override void CopyToClipboard()
@@ -131,7 +125,7 @@ namespace EpiDashboard.Gadgets.Charting
             {
                 StringBuilder sb = new StringBuilder();
 
-                foreach(UIElement element in (el as StackPanel).Children) 
+                foreach (UIElement element in (el as StackPanel).Children)
                 {
                     if (element is Controls.Charting.IChart)
                     {
@@ -146,68 +140,65 @@ namespace EpiDashboard.Gadgets.Charting
 
         protected virtual void cmbField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //MOVED TO INDIVIDUAL CHART PROPERTIES PANELS
-            //LEFT SHELL TO ENABLE OTHER CHARTS TO COMPILE
+            if (sender is ComboBox)
+            {
+                ComboBox cmbField = sender as ComboBox;
 
-            //if(sender is ComboBox) 
-            //{
-            //    ComboBox cmbField = sender as ComboBox;
+                CheckBox checkboxAllValues = null;
+                CheckBox checkboxCommentLegalLabels = null;
 
-            //    CheckBox checkboxAllValues = null;
-            //    CheckBox checkboxCommentLegalLabels = null;
+                object element = this.FindName("checkboxAllValues");
+                if (element != null && element is CheckBox)
+                {
+                    checkboxAllValues = element as CheckBox;
+                }
 
-            //    object element = this.FindName("checkboxAllValues");
-            //    if(element != null && element is CheckBox) 
-            //    {
-            //        checkboxAllValues = element as CheckBox;
-            //    }
+                element = this.FindName("checkboxCommentLegalLabels");
+                if (element != null && element is CheckBox)
+                {
+                    checkboxCommentLegalLabels = element as CheckBox;
+                }
 
-            //    element = this.FindName("checkboxCommentLegalLabels");
-            //    if(element != null && element is CheckBox) 
-            //    {
-            //        checkboxCommentLegalLabels = element as CheckBox;
-            //    }
+                if (cmbField.SelectedIndex >= 0)
+                {
+                    Field field = DashboardHelper.GetAssociatedField(cmbField.SelectedItem.ToString());
+                    if (field != null && field is RenderableField)
+                    {
+                        FieldFlags flags = SetFieldFlags(field as RenderableField);
 
-            //    if (cmbField.SelectedIndex >= 0)
-            //    {
-            //        Field field = DashboardHelper.GetAssociatedField(cmbField.SelectedItem.ToString());
-            //        if (field != null && field is RenderableField)
-            //        {
-            //            FieldFlags flags = SetFieldFlags(field as RenderableField);
+                        if (checkboxAllValues != null)
+                        {
+                            if (flags.IsDropDownListField || flags.IsRecodedField)
+                            {
+                                checkboxAllValues.IsEnabled = true;
+                            }
+                            else
+                            {
+                                checkboxAllValues.IsEnabled = false;
+                                checkboxAllValues.IsChecked = false;
+                            }
+                        }
 
-            //            if (checkboxAllValues != null)
-            //            {
-            //                if (flags.IsDropDownListField || flags.IsRecodedField)
-            //                {
-            //                    checkboxAllValues.IsEnabled = true;
-            //                }
-            //                else
-            //                {
-            //                    checkboxAllValues.IsEnabled = false;
-            //                    checkboxAllValues.IsChecked = false;
-            //                }
-            //            }
+                        if (checkboxCommentLegalLabels != null)
+                        {
+                            if (flags.IsCommentLegalField || flags.IsOptionField)
+                            {
+                                checkboxCommentLegalLabels.IsEnabled = true;
+                            }
+                            else
+                            {
+                                checkboxCommentLegalLabels.IsEnabled = false;
+                                checkboxCommentLegalLabels.IsChecked = false;
+                            }
 
-            //            if (checkboxCommentLegalLabels != null)
-            //            {
-            //                if (flags.IsCommentLegalField || flags.IsOptionField)
-            //                {
-            //                    checkboxCommentLegalLabels.IsEnabled = true;
-            //                }
-            //                else
-            //                {
-            //                    checkboxCommentLegalLabels.IsEnabled = false;
-            //                    checkboxCommentLegalLabels.IsChecked = false;
-            //                }
-
-            //                if (!flags.IsCommentLegalField && !flags.IsOptionField)
-            //                {
-            //                    checkboxCommentLegalLabels.IsChecked = flags.IsCommentLegalField;
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+                            if (!flags.IsCommentLegalField && !flags.IsOptionField)
+                            {
+                                checkboxCommentLegalLabels.IsChecked = flags.IsCommentLegalField;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         protected void chart_MouseLeave(object sender, MouseEventArgs e)
@@ -282,38 +273,17 @@ namespace EpiDashboard.Gadgets.Charting
 
                 Y2Type y2type = Y2Type.None;
 
-                ///ToDo: Remove GadgetOptions code when Parameters obj fully implemented. //////////////////////////////////////
-                //if (GadgetOptions.InputVariableList.ContainsKey("second_y_var"))
-                //{
-                //    second_y_var = GadgetOptions.InputVariableList["second_y_var"];
-                //}
-                //if (GadgetOptions.InputVariableList.ContainsKey("second_y_var_type") && GadgetOptions.InputVariableList["second_y_var_type"].Equals("rate_per_100k"))
-                //{
-                //    y2type = Y2Type.RatePer100kPop;
-                //}
-                //else if (GadgetOptions.InputVariableList.ContainsKey("second_y_var_type") && GadgetOptions.InputVariableList["second_y_var_type"].Equals("cumulative_percent"))
-                //{
-                //    y2type = Y2Type.CumulativePercent;
-                //}
-                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                switch ((Parameters as IChartGadgetParameters).Y2AxisType)
+                if (GadgetOptions.InputVariableList.ContainsKey("second_y_var"))
                 {
-                    case 1:
-                        if (Parameters.ColumnNames.Count > 1 && !String.IsNullOrEmpty(Parameters.ColumnNames[1]))
-                        {
-                            second_y_var = Parameters.ColumnNames[1];
-                        }
-                        break;
-                    case 2:
-                        y2type = Y2Type.RatePer100kPop;
-                        if (Parameters.ColumnNames.Count > 1 && !String.IsNullOrEmpty(Parameters.ColumnNames[1]))
-                        {
-                            second_y_var = Parameters.ColumnNames[1];
-                        }
-                        break;
-                    case 3:
-                        y2type = Y2Type.CumulativePercent;
-                        break;
+                    second_y_var = GadgetOptions.InputVariableList["second_y_var"];
+                }
+                if (GadgetOptions.InputVariableList.ContainsKey("second_y_var_type") && GadgetOptions.InputVariableList["second_y_var_type"].Equals("rate_per_100k"))
+                {
+                    y2type = Y2Type.RatePer100kPop;
+                }
+                else if (GadgetOptions.InputVariableList.ContainsKey("second_y_var_type") && GadgetOptions.InputVariableList["second_y_var_type"].Equals("cumulative_percent"))
+                {
+                    y2type = Y2Type.CumulativePercent;
                 }
 
                 List<XYColumnChartData> dataList = new List<XYColumnChartData>();
@@ -341,8 +311,7 @@ namespace EpiDashboard.Gadgets.Charting
                         {
                             foreach (DataRow dRow in DashboardHelper.DataSet.Tables[0].Rows)
                             {
-                                //if (((row[0].ToString().Equals(dRow[GadgetOptions.MainVariableName].ToString()))||(row[0].ToString().Equals(dRow[Parameters.ColumnNames[0]].ToString()))) && (y2type == Y2Type.CumulativePercent || dRow[second_y_var] != DBNull.Value))
-                                if ((row[0].ToString().Equals(dRow[Parameters.ColumnNames[0]].ToString())) && (y2type == Y2Type.CumulativePercent || dRow[second_y_var] != DBNull.Value))
+                                if (row[0].ToString().Equals(dRow[GadgetOptions.MainVariableName].ToString()) && (y2type == Y2Type.CumulativePercent || dRow[second_y_var] != DBNull.Value))
                                 {
                                     if (y2type == Y2Type.RatePer100kPop)
                                     {
@@ -367,15 +336,52 @@ namespace EpiDashboard.Gadgets.Charting
                             foreach (DataRow dRow in DashboardHelper.DataSet.Tables[0].Rows)
                             {
                             }
-                            
+
                         }
 
                         chartData.S = row[0];
-                        if(chartData.S == null || string.IsNullOrEmpty(chartData.S.ToString().Trim())) 
+                        if (chartData.S == null || string.IsNullOrEmpty(chartData.S.ToString().Trim()))
                         {
                             chartData.S = Config.Settings.RepresentationOfMissing;
                         }
                         dataList.Add(chartData);
+                    }
+
+                    var query = from chartData in dataList
+                                orderby chartData.S ascending
+                                select chartData;
+
+                    XYColumnChartData firstObj = query.First();
+                    XYColumnChartData lastObj = query.Last();
+
+                    if (XAxisStart.HasValue && XAxisStart.Value >= 0 &&
+                        (table.Columns[0].DataType.ToString().Equals("System.Single") ||
+                        table.Columns[0].DataType.ToString().Equals("System.Double") ||
+                        table.Columns[0].DataType.ToString().Equals("System.Decimal")))
+                    {
+                        if (Convert.ToDouble(lastObj.S) > XAxisStart.Value)
+                        {
+                            XYColumnChartData fillerFirst = new XYColumnChartData();
+                            fillerFirst.Y = 0;
+                            fillerFirst.X = strataValue;
+                            fillerFirst.S = XAxisStart.Value;
+                            dataList.Add(fillerFirst);
+                        }
+                    }
+
+                    if (XAxisEnd.HasValue && XAxisEnd.Value >= 0 &&
+                        (table.Columns[0].DataType.ToString().Equals("System.Single") ||
+                        table.Columns[0].DataType.ToString().Equals("System.Double") ||
+                        table.Columns[0].DataType.ToString().Equals("System.Decimal")))
+                    {
+                        if (Convert.ToDouble(lastObj.S) < XAxisEnd.Value)
+                        {
+                            XYColumnChartData fillerLast = new XYColumnChartData();
+                            fillerLast.Y = 0;
+                            fillerLast.X = strataValue;
+                            fillerLast.S = XAxisEnd.Value;
+                            dataList.Add(fillerLast);
+                        }
                     }
                 }
 
@@ -400,7 +406,7 @@ namespace EpiDashboard.Gadgets.Charting
             }
 
             if (SelectedChart != null)
-            {                
+            {
                 object el = this.FindName("separatorCurrentChart");
                 if (el is Separator) (el as Separator).Visibility = System.Windows.Visibility.Visible;
                 el = this.FindName("mnuCurrentChart");

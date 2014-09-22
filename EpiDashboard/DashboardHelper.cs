@@ -9,7 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Windows.Threading;
 using Epi;
@@ -1202,7 +1201,7 @@ namespace EpiDashboard
         /// Resets the View object
         /// </summary>
         /// <param name="view">The new view object to use</param>
-        public void ResetView(View view, bool clearEverything = true)
+        public void ResetView(View view)
         {
             if (IsUsingEpiProject && System.IO.File.Exists(view.Project.FilePath))
             {
@@ -1212,7 +1211,7 @@ namespace EpiDashboard
                     db = view.Project.CollectedData.GetDbDriver(); //DBReadExecute.GetDataDriver(view.Project.FilePath);
                     this.DataSet.Tables.Clear();
                     this.ConstructTableColumnNames();
-                    this.dashboardControl.ReCacheDataSource(clearEverything);
+                    this.dashboardControl.ReCacheDataSource();
                 }
             }
         }
@@ -1328,8 +1327,6 @@ namespace EpiDashboard
                     return DbType.SByte;
                 case "System.String":
                     return DbType.String;
-                case "System.Guid":
-                    return DbType.Guid;
                 default:
                     throw new ApplicationException("Unknown column type.");
             }
@@ -2017,7 +2014,7 @@ namespace EpiDashboard
             return false;
         }
 
-        private DataTable JoinPageTables(View vw, bool isRelatedView = false, IGadgetParameters inputs = null)
+        private DataTable JoinPageTables(View vw, bool isRelatedView = false, GadgetParameters inputs = null)
         {
             DataTable unfilteredTable = new DataTable();
 
@@ -2165,7 +2162,7 @@ namespace EpiDashboard
         /// Populates the DataSet object
         /// </summary>
         /// <returns>DataTable</returns>
-        internal void PopulateDataSet(IGadgetParameters inputs = null)
+        internal void PopulateDataSet(GadgetParameters inputs = null)
         {
             DataTable unfilteredTable = new DataTable("unfilteredTable");
             unfilteredTable.CaseSensitive = true;
@@ -2320,7 +2317,7 @@ namespace EpiDashboard
         /// <summary>
         /// Generates a sorted .NET DataView based off of the selection criteria and sort criteria
         /// </summary>
-        public DataView GenerateView(IGadgetParameters inputs = null)
+        public DataView GenerateView(GadgetParameters inputs = null)
         {
             string sortOrder = string.Empty;
             string filterCriteria = GenerateFilterCriteria();
@@ -2380,7 +2377,7 @@ namespace EpiDashboard
         /// <summary>
         /// Generates sorted .NET DataViews based off of the selection criteria, sort criteria, and strata variables
         /// </summary>
-        public List<DataView> GenerateViews(IGadgetParameters inputs = null)
+        public List<DataView> GenerateViews(GadgetParameters inputs = null)
         {
             List<DataView> dataViews = new List<DataView>();
             if (inputs.StrataVariableNames.Count == 0)
@@ -2395,7 +2392,7 @@ namespace EpiDashboard
                 stratas = GetStrataValuesAsDictionary(inputs.StrataVariableNames, false, false);
                 foreach (Strata strata in stratas)
                 {
-                    IGadgetParameters parameters = new GadgetParameters(inputs);
+                    GadgetParameters parameters = new GadgetParameters(inputs);
                     if (string.IsNullOrEmpty(parameters.CustomFilter))
                     {
                         parameters.CustomFilter = strata.SafeFilter;
@@ -2418,7 +2415,7 @@ namespace EpiDashboard
         /// </summary>
         /// <param name="sortOrder">The order by which to sort</param>
         /// <returns>DataTable</returns>
-        public DataTable GenerateTable(IGadgetParameters inputs = null)
+        public DataTable GenerateTable(GadgetParameters inputs = null)
         {
             List<string> columnNames = new List<string>();
 
@@ -2426,23 +2423,18 @@ namespace EpiDashboard
             {
                 columnNames.AddRange(inputs.ColumnNames);
 
-                if (inputs is GadgetParameters)
+                if (!columnNames.Contains(inputs.MainVariableName, caseInsensitiveEqualityComparer) && !string.IsNullOrEmpty(inputs.MainVariableName.Trim()))
                 {
-                    GadgetParameters gadgetParameters = inputs as GadgetParameters;
-                    if (!columnNames.Contains(gadgetParameters.MainVariableName, caseInsensitiveEqualityComparer) && !string.IsNullOrEmpty(gadgetParameters.MainVariableName.Trim()))
-                    {
-                        columnNames.Add(gadgetParameters.MainVariableName);
-                    }
-                    if (!columnNames.Contains(gadgetParameters.CrosstabVariableName, caseInsensitiveEqualityComparer) && !string.IsNullOrEmpty(gadgetParameters.CrosstabVariableName.Trim()))
-                    {
-                        columnNames.Add(gadgetParameters.CrosstabVariableName);
-                    }
-                    if (!columnNames.Contains(gadgetParameters.WeightVariableName, caseInsensitiveEqualityComparer) && !string.IsNullOrEmpty(gadgetParameters.WeightVariableName.Trim()))
-                    {
-                        columnNames.Add(gadgetParameters.WeightVariableName);
-                    }
+                    columnNames.Add(inputs.MainVariableName);
                 }
-                
+                if (!columnNames.Contains(inputs.CrosstabVariableName, caseInsensitiveEqualityComparer) && !string.IsNullOrEmpty(inputs.CrosstabVariableName.Trim()))
+                {
+                    columnNames.Add(inputs.CrosstabVariableName);
+                }
+                if (!columnNames.Contains(inputs.WeightVariableName, caseInsensitiveEqualityComparer) && !string.IsNullOrEmpty(inputs.WeightVariableName.Trim()))
+                {
+                    columnNames.Add(inputs.WeightVariableName);
+                }
                 foreach (string strataVariableName in inputs.StrataVariableNames)
                 {
                     if (!columnNames.Contains(strataVariableName, caseInsensitiveEqualityComparer) && !string.IsNullOrEmpty(strataVariableName.Trim()))
@@ -2493,124 +2485,45 @@ namespace EpiDashboard
         /// <param name="inputs">The inputs for this method</param>
         /// <param name="booleanOutput">Whether the results are of boolean fields</param>
         /// <returns>DataTable</returns>
-        public DataTable GenerateCombinedFrequencyTable(CombinedFrequencyParameters inputs, ref bool booleanOutput, ref int fields)
+        public DataTable GenerateCombinedFrequencyTable(GadgetParameters inputs, ref bool booleanOutput)
         {
             #region Input Validation
             if (inputs == null)
             {
                 throw new ArgumentNullException("inputs");
             }
-            if (inputs.ColumnNames.Count == 0)
+            if (string.IsNullOrEmpty(inputs.MainVariableName))
             {
-                throw new ArgumentNullException("inputs.ColumnNames");
+                throw new ArgumentNullException("inputs.MainVariableName");
             }
             #endregion // Input Validation
 
-            //string groupVar = inputs.MainVariableName;
-            bool includeMissing = inputs.IncludeMissing;
-            bool sortHighToLow = inputs.SortHighToLow;
+            string groupVar = inputs.MainVariableName;
+            bool includeMissing = inputs.ShouldIncludeMissing;
+            bool sortHighToLow = inputs.ShouldSortHighToLow;
             booleanOutput = false;
             string trueValue = string.Empty;
-            //int combineMode = 0; // automatic
+            int combineMode = 0; // automatic
 
             List<string> fieldNames = new List<string>();
 
-            foreach (string listFieldName in inputs.ColumnNames)
+            if (GetGroupVariablesAsList().Contains(groupVar))
             {
-                if (!fieldNames.Contains(listFieldName))
-                {
-                    if (IsUsingEpiProject && GetGroupFieldsAsList().Contains(listFieldName, caseInsensitiveEqualityComparer))
-                    {
-                        // add fields in a group
-                        foreach (Field field in this.View.Fields)
-                        {
-                            if (field is GroupField && field.Name.Equals(listFieldName))
-                            {
-                                GroupField groupField = field as GroupField;
-                                foreach (string s in groupField.ChildFieldNameArray)
-                                {
-                                    if (!fieldNames.Contains(listFieldName))
-                                    {
-                                        fieldNames.Add(s);
-                                    }
-                                }
-                                break;
-                            }
-                        }
-                    }
-                    else if (GetGroupVariablesAsList().Contains(listFieldName, caseInsensitiveEqualityComparer))
-                    {
-                        // add fields in a group
-                        foreach (string columnName in GetGroupVariable(listFieldName).Variables)
-                        {
-                            if (!fieldNames.Contains(listFieldName))
-                            {
-                                fieldNames.Add(columnName);
-                            }
-                        }
-                    }
-                    else if (IsUsingEpiProject && listFieldName.ToLower().StartsWith("page "))
-                    {
-                        // add fields on a specific page
-                        int pageNumber = -1;
-
-                        string strPageNumber = listFieldName.Remove(0, 5);
-
-                        int.TryParse(strPageNumber, out pageNumber);
-
-                        if (pageNumber < 0)
-                        {
-                            continue;
-                        }
-
-                        pageNumber--;
-                        Page page = this.View.Pages[pageNumber];
-
-                        foreach (Field field in page.Fields)
-                        {
-                            if (field is IDataField && field is RenderableField && !(field is GroupField) && !(field is GridField) && !(field is MirrorField))
-                            {
-                                if (!fieldNames.Contains(listFieldName))
-                                {
-                                    fieldNames.Add(field.Name);
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // add a single field
-                        if (!fieldNames.Contains(listFieldName))
-                        {
-                            fieldNames.Add(listFieldName);
-                        }
-                    }
-                }
+                fieldNames = GetGroupVariable(groupVar).Variables;
+            }
+            else if (GetGroupFieldsAsList().Contains(groupVar))
+            {
+                fieldNames = GetVariablesInGroup(groupVar);
             }
 
-            fields = fieldNames.Count;
-
-            //if (GetGroupVariablesAsList().Contains(groupVar))
-            //{
-            //    fieldNames = GetGroupVariable(groupVar).Variables;
-            //}
-            //else if (GetGroupFieldsAsList().Contains(groupVar))
-            //{
-            //    fieldNames = GetVariablesInGroup(groupVar);
-            //}
-
-            trueValue = inputs.TrueValue;
-            CombineModeTypes combineMode = inputs.CombineMode;
-            
-
-            //if (inputs.InputVariableList.ContainsKey("combinemode"))
-            //{
-            //    int.TryParse(inputs.InputVariableList["combinemode"], out combineMode);
-            //}
-            //if (inputs.InputVariableList.ContainsKey("truevalue"))
-            //{
-            //    trueValue = inputs.InputVariableList["truevalue"];
-            //}
+            if (inputs.InputVariableList.ContainsKey("combinemode"))
+            {
+                int.TryParse(inputs.InputVariableList["combinemode"], out combineMode);
+            }
+            if (inputs.InputVariableList.ContainsKey("truevalue"))
+            {
+                trueValue = inputs.InputVariableList["truevalue"];
+            }
 
             DataView dv = GenerateView();
 
@@ -2658,7 +2571,7 @@ namespace EpiDashboard
 
             if (booleanFields.Count == 0 && otherFields.Count > 0 && otherFields.Count > numericFields.Count)
             {
-                if (combineMode == CombineModeTypes.Automatic || combineMode == CombineModeTypes.Categorical)
+                if (combineMode == 0 || combineMode == 2)
                 {
                     List<string> values = new List<string>();
 
@@ -2689,7 +2602,7 @@ namespace EpiDashboard
                     }
                     else if (values.Count > Combined_Frequency_Row_Limit)
                     {
-                        string exMsg = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_VALUES_COMBINED_FREQ_EXT, values.Count, Combined_Frequency_Row_Limit);
+                        string exMsg = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_VALUES_COMBINED_FREQ_EXT, groupVar, values.Count, Combined_Frequency_Row_Limit);
                         throw new ApplicationException(exMsg);
                     }
 
@@ -2719,7 +2632,7 @@ namespace EpiDashboard
                         }
                     }
                 }
-                else if (combineMode == CombineModeTypes.Boolean)
+                else if (combineMode == 1)
                 {
                     foreach (string otherField in otherFields)
                     {
@@ -2764,7 +2677,7 @@ namespace EpiDashboard
             }
             else if (numericFields.Count > 0)
             {
-                if (combineMode == CombineModeTypes.Boolean)
+                if (combineMode == 1)
                 {
                     foreach (string numberField in numericFields)
                     {
@@ -2815,7 +2728,7 @@ namespace EpiDashboard
                     }
                     else if (values.Count > Combined_Frequency_Row_Limit)
                     {
-                        string exMsg = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_VALUES_COMBINED_FREQ_EXT, values.Count, Combined_Frequency_Row_Limit);
+                        string exMsg = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_VALUES_COMBINED_FREQ_EXT, groupVar, values.Count, Combined_Frequency_Row_Limit);
                         throw new ApplicationException(exMsg);
                     }
 
@@ -2870,135 +2783,133 @@ namespace EpiDashboard
             return combinedFrequencyTable;
         }
 
-        //public Dictionary<string, List<DataTable>> GenerateStratifiedCombinedFrequencyTable(GadgetParameters inputs, ref bool booleanOutput)
-        //{
-        //    if (inputs.StrataVariableNames.Count == 0)
-        //    {
-        //        Dictionary<string, List<DataTable>> singleTableDictionary = new Dictionary<string, List<DataTable>>();
-        //        List<DataTable> singleTableList = new List<DataTable>();
-        //        singleTableList.Add(GenerateCombinedFrequencyTable(inputs, ref booleanOutput));
-        //        singleTableDictionary.Add(inputs.MainVariableName, singleTableList);
-        //        return singleTableDictionary;
-        //    }
+        public Dictionary<string, List<DataTable>> GenerateStratifiedCombinedFrequencyTable(GadgetParameters inputs, ref bool booleanOutput)
+        {
+            if (inputs.StrataVariableNames.Count == 0)
+            {
+                Dictionary<string, List<DataTable>> singleTableDictionary = new Dictionary<string, List<DataTable>>();
+                List<DataTable> singleTableList = new List<DataTable>();
+                singleTableList.Add(GenerateCombinedFrequencyTable(inputs, ref booleanOutput));
+                singleTableDictionary.Add(inputs.MainVariableName, singleTableList);
+                return singleTableDictionary;
+            }
 
-        //    string strata1 = inputs.StrataVariableNames[0];
-        //    string strata2 = string.Empty;
-        //    if (inputs.StrataVariableNames.Count == 2)
-        //    {
-        //        strata2 = inputs.StrataVariableNames[1];
-        //    }
+            string strata1 = inputs.StrataVariableNames[0];
+            string strata2 = string.Empty;
+            if (inputs.StrataVariableNames.Count == 2)
+            {
+                strata2 = inputs.StrataVariableNames[1];
+            }
 
-        //    List<string> strataOuter = new List<string>();
-        //    strataOuter.Add(strata1);
+            List<string> strataOuter = new List<string>();
+            strataOuter.Add(strata1);
             
-        //    List<Strata> outerStratas = GetStrataValuesAsDictionary(strataOuter, false, false);
-        //    List<Strata> innerStratas = new List<Strata>();
+            List<Strata> outerStratas = GetStrataValuesAsDictionary(strataOuter, false, false);
+            List<Strata> innerStratas = new List<Strata>();
 
-        //    List<string> strataInner = new List<string>();
-        //    if (!string.IsNullOrEmpty(strata2))
-        //    {
-        //        strataInner.Add(strata2);
-        //        innerStratas = GetStrataValuesAsDictionary(strataInner, false, false);
-        //    }
+            List<string> strataInner = new List<string>();
+            if (!string.IsNullOrEmpty(strata2))
+            {
+                strataInner.Add(strata2);
+                innerStratas = GetStrataValuesAsDictionary(strataInner, false, false);
+            }
 
-        //    Dictionary<string, List<DataTable>> tableDictionary = new Dictionary<string, List<DataTable>>();
+            Dictionary<string, List<DataTable>> tableDictionary = new Dictionary<string, List<DataTable>>();
 
-        //    foreach (Strata kvpOuter in outerStratas)
-        //    {
-        //        GadgetParameters parameters = new GadgetParameters(inputs);
+            foreach (Strata kvpOuter in outerStratas)
+            {
+                GadgetParameters parameters = new GadgetParameters(inputs);
 
-        //        if (string.IsNullOrEmpty(parameters.CustomFilter))
-        //        {
-        //            parameters.CustomFilter = kvpOuter.SafeFilter;
-        //        }
-        //        else
-        //        {
-        //            parameters.CustomFilter = "(" + parameters.CustomFilter + ") AND " + kvpOuter.SafeFilter;
-        //        }
+                if (string.IsNullOrEmpty(parameters.CustomFilter))
+                {
+                    parameters.CustomFilter = kvpOuter.SafeFilter;
+                }
+                else
+                {
+                    parameters.CustomFilter = "(" + parameters.CustomFilter + ") AND " + kvpOuter.SafeFilter;
+                }
 
-        //        if (string.IsNullOrEmpty(strata2))
-        //        {
-        //            DataTable dt = GenerateCombinedFrequencyTable(parameters, ref booleanOutput);                    
-        //            dt.TableName = kvpOuter.Values[0].ToString();
-        //            List<DataTable> tables = new List<DataTable>();
-        //            tables.Add(dt);
-        //            tableDictionary.Add(kvpOuter.Values[0].ToString(), tables);
-        //        }
-        //        else
-        //        {
-        //            foreach (Strata kvpInner in innerStratas)
-        //            {
-        //                GadgetParameters parametersInner = new GadgetParameters(parameters);
+                if (string.IsNullOrEmpty(strata2))
+                {
+                    DataTable dt = GenerateCombinedFrequencyTable(parameters, ref booleanOutput);                    
+                    dt.TableName = kvpOuter.Values[0].ToString();
+                    List<DataTable> tables = new List<DataTable>();
+                    tables.Add(dt);
+                    tableDictionary.Add(kvpOuter.Values[0].ToString(), tables);
+                }
+                else
+                {
+                    foreach (Strata kvpInner in innerStratas)
+                    {
+                        GadgetParameters parametersInner = new GadgetParameters(parameters);
 
-        //                if (string.IsNullOrEmpty(parametersInner.CustomFilter))
-        //                {
-        //                    parametersInner.CustomFilter = kvpInner.SafeFilter;
-        //                }
-        //                else
-        //                {
-        //                    parametersInner.CustomFilter = "(" + parametersInner.CustomFilter + ") AND " + kvpInner.SafeFilter;
-        //                }
+                        if (string.IsNullOrEmpty(parametersInner.CustomFilter))
+                        {
+                            parametersInner.CustomFilter = kvpInner.SafeFilter;
+                        }
+                        else
+                        {
+                            parametersInner.CustomFilter = "(" + parametersInner.CustomFilter + ") AND " + kvpInner.SafeFilter;
+                        }
 
-        //                DataTable dt = GenerateCombinedFrequencyTable(parametersInner, ref booleanOutput);
-        //                dt.TableName = kvpInner.Values[0].ToString();
+                        DataTable dt = GenerateCombinedFrequencyTable(parametersInner, ref booleanOutput);
+                        dt.TableName = kvpInner.Values[0].ToString();
 
-        //                if (tableDictionary.ContainsKey(kvpOuter.Values[0].ToString()))
-        //                {
-        //                    tableDictionary[kvpOuter.Values[0].ToString()].Add(dt);
-        //                }
-        //                else
-        //                {
-        //                    List<DataTable> tables = new List<DataTable>();
-        //                    tables.Add(dt);
-        //                    tableDictionary.Add(kvpOuter.Values[0].ToString(), tables);
-        //                }                        
-        //            }
-        //        }
-        //    }
+                        if (tableDictionary.ContainsKey(kvpOuter.Values[0].ToString()))
+                        {
+                            tableDictionary[kvpOuter.Values[0].ToString()].Add(dt);
+                        }
+                        else
+                        {
+                            List<DataTable> tables = new List<DataTable>();
+                            tables.Add(dt);
+                            tableDictionary.Add(kvpOuter.Values[0].ToString(), tables);
+                        }                        
+                    }
+                }
+            }
 
-        //    return tableDictionary;
-        //}
+            return tableDictionary;
+        }
 
         /// <summary>
         /// Generates a grouped line listing .NET data table based off of the given columns, sort order, and group field
         /// </summary>
         /// <param name="inputs">The inputs needed to process the frequency</param>
         /// <returns>A dictionary of data tables, one for each value of the stratification variable, and that table's associated count</returns>
-        public List<DataTable> GenerateLineList(LineListParameters parameters)
+        public List<DataTable> GenerateLineList(GadgetParameters inputs)
         {
-            parameters.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CREATING_VARIABLES);
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CREATING_VARIABLES);
 
             List<string> columnsToSelect = new List<string>();
             List<string> originalColumnsToSelect = new List<string>();
 
             string sortOrder = string.Empty;
+            int maxRows = 200;
 
-            if (!String.IsNullOrEmpty(parameters.PrimaryGroupField))
+            if (inputs.StrataVariableNames != null && inputs.StrataVariableNames.Count > 0)
             {
-                columnsToSelect.Add(parameters.PrimaryGroupField);
-                originalColumnsToSelect.Add(parameters.PrimaryGroupField);
-            }
-            if (!String.IsNullOrEmpty(parameters.SecondaryGroupField))
-            {
-                columnsToSelect.Add(parameters.SecondaryGroupField);
-                originalColumnsToSelect.Add(parameters.SecondaryGroupField);
-            }
-
-            foreach (string listFieldName in parameters.ColumnNames)
-            {
-                if (!columnsToSelect.Contains(listFieldName))
+                if (!columnsToSelect.Contains(inputs.StrataVariableNames[0]))
                 {
-                    if (IsUsingEpiProject && GetGroupFieldsAsList().Contains(listFieldName, caseInsensitiveEqualityComparer))
+                    columnsToSelect.Add(inputs.StrataVariableNames[0]);
+                }
+            }
+
+            foreach (KeyValuePair<string, string> kvp in inputs.InputVariableList)
+            {
+                if (kvp.Value.ToLower().Equals("listfield") && !columnsToSelect.Contains(kvp.Key))
+                {
+                    if (IsUsingEpiProject && GetGroupFieldsAsList().Contains(kvp.Key, caseInsensitiveEqualityComparer))
                     {
                         // add fields in a group
                         foreach (Field field in this.View.Fields)
                         {
-                            if (field is GroupField && field.Name.Equals(listFieldName))
+                            if (field is GroupField && field.Name.Equals(kvp.Key))
                             {
                                 GroupField groupField = field as GroupField;
                                 foreach (string s in groupField.ChildFieldNameArray)
                                 {
-                                    if (!columnsToSelect.Contains(listFieldName))
+                                    if (!columnsToSelect.Contains(kvp.Key))
                                     {
                                         columnsToSelect.Add(s);
                                         originalColumnsToSelect.Add(s);
@@ -3008,24 +2919,24 @@ namespace EpiDashboard
                             }
                         }
                     }
-                    else if (GetGroupVariablesAsList().Contains(listFieldName, caseInsensitiveEqualityComparer))
+                    else if (GetGroupVariablesAsList().Contains(kvp.Key, caseInsensitiveEqualityComparer))
                     {
                         // add fields in a group
-                        foreach (string columnName in GetGroupVariable(listFieldName).Variables)
+                        foreach (string columnName in GetGroupVariable(kvp.Key).Variables)
                         {
-                            if (!columnsToSelect.Contains(listFieldName))
+                            if (!columnsToSelect.Contains(kvp.Key))
                             {
                                 columnsToSelect.Add(columnName);
                                 originalColumnsToSelect.Add(columnName);
                             }
                         }
                     }
-                    else if (IsUsingEpiProject && listFieldName.ToLower().StartsWith("page "))
+                    else if (IsUsingEpiProject && kvp.Key.ToLower().StartsWith("page "))
                     {
                         // add fields on a specific page
                         int pageNumber = -1;
 
-                        string strPageNumber = listFieldName.Remove(0, 5);
+                        string strPageNumber = kvp.Key.Remove(0, 5);
 
                         int.TryParse(strPageNumber, out pageNumber);
 
@@ -3041,7 +2952,7 @@ namespace EpiDashboard
                         {
                             if (field is IDataField && field is RenderableField && !(field is GroupField) && !(field is GridField) && !(field is MirrorField))
                             {
-                                if (!columnsToSelect.Contains(listFieldName))
+                                if (!columnsToSelect.Contains(kvp.Key))
                                 {
                                     columnsToSelect.Add(field.Name);
                                     originalColumnsToSelect.Add(field.Name);
@@ -3052,109 +2963,38 @@ namespace EpiDashboard
                     else
                     {
                         // add a single field
-                        if (!columnsToSelect.Contains(listFieldName))
+                        if (!columnsToSelect.Contains(kvp.Key))
                         {
-                            columnsToSelect.Add(listFieldName);
-                            originalColumnsToSelect.Add(listFieldName);
+                            columnsToSelect.Add(kvp.Key);
+                            originalColumnsToSelect.Add(kvp.Key);
                         }
                     }
                 }
             }
 
-            //foreach (KeyValuePair<string, string> kvp in inputs.InputVariableList)
-            //{
-            //    if (kvp.Value.ToLower().Equals("listfield") && !columnsToSelect.Contains(kvp.Key))
-            //    {
-            //        if (IsUsingEpiProject && GetGroupFieldsAsList().Contains(kvp.Key, caseInsensitiveEqualityComparer))
-            //        {
-            //            // add fields in a group
-            //            foreach (Field field in this.View.Fields)
-            //            {
-            //                if (field is GroupField && field.Name.Equals(kvp.Key))
-            //                {
-            //                    GroupField groupField = field as GroupField;
-            //                    foreach (string s in groupField.ChildFieldNameArray)
-            //                    {
-            //                        if (!columnsToSelect.Contains(kvp.Key))
-            //                        {
-            //                            columnsToSelect.Add(s);
-            //                            originalColumnsToSelect.Add(s);
-            //                        }
-            //                    }
-            //                    break;
-            //                }
-            //            }
-            //        }
-            //        else if (GetGroupVariablesAsList().Contains(kvp.Key, caseInsensitiveEqualityComparer))
-            //        {
-            //            // add fields in a group
-            //            foreach (string columnName in GetGroupVariable(kvp.Key).Variables)
-            //            {
-            //                if (!columnsToSelect.Contains(kvp.Key))
-            //                {
-            //                    columnsToSelect.Add(columnName);
-            //                    originalColumnsToSelect.Add(columnName);
-            //                }
-            //            }
-            //        }
-            //        else if (IsUsingEpiProject && kvp.Key.ToLower().StartsWith("page "))
-            //        {
-            //            // add fields on a specific page
-            //            int pageNumber = -1;
-
-            //            string strPageNumber = kvp.Key.Remove(0, 5);
-
-            //            int.TryParse(strPageNumber, out pageNumber);
-
-            //            if (pageNumber < 0)
-            //            {
-            //                continue;
-            //            }
-
-            //            pageNumber--;
-            //            Page page = this.View.Pages[pageNumber];
-
-            //            foreach (Field field in page.Fields)
-            //            {
-            //                if (field is IDataField && field is RenderableField && !(field is GroupField) && !(field is GridField) && !(field is MirrorField))
-            //                {
-            //                    if (!columnsToSelect.Contains(kvp.Key))
-            //                    {
-            //                        columnsToSelect.Add(field.Name);
-            //                        originalColumnsToSelect.Add(field.Name);
-            //                    }
-            //                }
-            //            }
-            //        }
-            //        else
-            //        {
-            //            // add a single field
-            //            if (!columnsToSelect.Contains(kvp.Key))
-            //            {
-            //                columnsToSelect.Add(kvp.Key);
-            //                originalColumnsToSelect.Add(kvp.Key);
-            //            }
-            //        }
-            //    }
-            //}
-
-            foreach(KeyValuePair<string, SortOrder> kvp in parameters.SortVariables) 
+            foreach (KeyValuePair<string, string> kvp in inputs.InputVariableList)
             {
-                string sortFieldName = kvp.Key;
-
-                switch (kvp.Value)
+                if (kvp.Value.ToLower().Equals("sortfield"))
                 {
-                    case SortOrder.Ascending:
-                        sortOrder = sortOrder + sortFieldName + " ASC,";
-                        break;
-                    case SortOrder.Descending:
-                        sortOrder = sortOrder + sortFieldName + " DESC,";
-                        break;
-                }
+                    sortOrder = sortOrder + kvp.Key + ",";
 
-                if (!columnsToSelect.Contains(sortFieldName))
-                {
-                    columnsToSelect.Add(sortFieldName);
+                    string sortFieldName = kvp.Key;
+
+                    if (sortFieldName.ToLower().EndsWith("desc"))
+                    {
+                        sortFieldName = sortFieldName.Remove(sortFieldName.Length - 5);
+                    }
+                    else
+                    {
+                        sortFieldName = sortFieldName.Remove(sortFieldName.Length - 4);
+                    }
+
+                    sortFieldName = sortFieldName.TrimStart('[').TrimEnd(']');
+
+                    if (!columnsToSelect.Contains(sortFieldName))
+                    {
+                        columnsToSelect.Add(sortFieldName);
+                    }
                 }
             }
 
@@ -3166,407 +3006,36 @@ namespace EpiDashboard
                 }
             }
 
+            if (inputs.InputVariableList.ContainsKey("maxrows"))
+            {
+                maxRows = int.Parse(inputs.InputVariableList["maxrows"]);
+            }
+
             sortOrder = sortOrder.TrimEnd(',');
-            parameters.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_GENERATING_TABLE);
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_GENERATING_TABLE);
 
-            PopulateDataSet(parameters);
+            PopulateDataSet(inputs);
 
-            DataView dv = GenerateView(parameters);
+            DataView dv = GenerateView(inputs);
 
             DataView dvAllRows = new DataView(mainTable);
             dvAllRows.RowFilter = mainTable.DefaultView.RowFilter;
-            if (!string.IsNullOrEmpty(parameters.CustomFilter))
+            if (!string.IsNullOrEmpty(inputs.CustomFilter))
             {
-                dvAllRows.RowFilter = CombineFilters(parameters.CustomFilter, dvAllRows);
+                dvAllRows.RowFilter = CombineFilters(inputs.CustomFilter, dvAllRows);
             }
             dvAllRows.Sort = sortOrder;
 
             RecordCount = mainTable.DefaultView.Count;
 
             // Grouped output; use one table for each strata value
-            //if (false /*inputs.StrataVariableNames != null && inputs.StrataVariableNames.Count > 0*/)
-            //{
-            //    List<DataTable> tables = new List<DataTable>();
-            //    List<string> strataValues = new List<string>();
-            //    string strataVariableName = inputs.StrataVariableNames[0];
-
-            //    inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_STRATA_VALUES);
-            //    for (int i = 0; i < dvAllRows.Count; i++)
-            //    {
-            //        DataRow dataRow = dvAllRows[i].Row;
-            //        string strataValue = dataRow[strataVariableName].ToString().Trim();
-            //        if (!strataValues.Contains(strataValue, caseInsensitiveEqualityComparer))
-            //        {
-            //            strataValues.Add(strataValue);
-            //        }
-            //    }
-
-            //    foreach (string strataValue in strataValues)
-            //    {
-            //        DataView strataDv = new DataView(mainTable);
-            //        strataDv.Sort = dvAllRows.Sort;
-            //        strataDv.RowFilter = dvAllRows.RowFilter;
-
-            //        DataTable dt = new DataTable();//dtAllRows.Clone();
-
-            //        string strataFilter = string.Empty;
-            //        string fullFilter = string.Empty;
-
-            //        if (!string.IsNullOrEmpty(strataValue))
-            //        {
-            //            string columnType = GetColumnType(strataVariableName);
-            //            strataFilter = StringLiterals.LEFT_SQUARE_BRACKET + strataVariableName + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + StringLiterals.EQUAL + StringLiterals.SPACE + FormatValue(strataValue, columnType);
-            //        }
-            //        else
-            //        {
-            //            strataFilter = StringLiterals.LEFT_SQUARE_BRACKET + strataVariableName + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + " is null";
-            //        }
-
-            //        if (!string.IsNullOrEmpty(dvAllRows.RowFilter))
-            //        {
-            //            fullFilter = CombineFilters(strataFilter, dvAllRows);
-            //        }
-            //        else
-            //        {
-            //            fullFilter = strataFilter;
-            //        }
-
-            //        strataDv.RowFilter = fullFilter;
-
-            //        try
-            //        {
-            //            dt = strataDv.ToTable(mainTable.TableName);
-            //        }
-            //        catch (InvalidOperationException)
-            //        {
-            //            continue;
-            //        }
-
-            //        List<DataColumn> columnsToRemove = new List<DataColumn>();
-
-            //        foreach (DataColumn column in dt.Columns)
-            //        {
-            //            bool found = false;
-
-            //            foreach (string s in originalColumnsToSelect)
-            //            {
-            //                if (column.ColumnName.ToLower().Equals(s.ToLower()))
-            //                {
-            //                    found = true;
-            //                }
-            //            }
-
-            //            if (!found)
-            //            {
-            //                columnsToRemove.Add(column);
-            //            }
-            //        }
-
-            //        foreach (DataColumn dc in columnsToRemove)
-            //        {
-            //            dt.Columns.Remove(dc);
-            //        }
-
-            //        if (IsColumnYesNo(strataVariableName))
-            //        {
-            //            if (strataFilter.EndsWith("1"))
-            //            {
-            //                strataFilter = strataFilter.Substring(0, strataFilter.Length - 1) + Config.Settings.RepresentationOfYes;
-            //            }
-            //            else if (strataFilter.EndsWith("0"))
-            //            {
-            //                strataFilter = strataFilter.Substring(0, strataFilter.Length - 1) + Config.Settings.RepresentationOfNo;
-            //            }
-            //        }
-            //        else if (IsColumnBoolean(strataVariableName))
-            //        {
-            //            if (strataFilter.EndsWith("True"))
-            //            {
-            //                strataFilter = strataFilter.Substring(0, strataFilter.Length - 4) + Config.Settings.RepresentationOfYes;
-            //            }
-            //            else if (strataFilter.EndsWith("False"))
-            //            {
-            //                strataFilter = strataFilter.Substring(0, strataFilter.Length - 5) + Config.Settings.RepresentationOfNo;
-            //            }
-            //        }
-
-            //        if (GetAssociatedField(strataVariableName) != null)
-            //        {
-            //            strataFilter = strataFilter.Replace("]", "").Replace("[", "");
-            //        }
-
-            //        dt.TableName = strataFilter;
-            //        ConvertLineListData(dt);
-            //        tables.Add(dt);
-            //    }
-
-            //    return tables;
-            //}
-            // Non-grouped output; only one line list table will be produced
-            //else
-            //{
-            DataTable dt = dvAllRows.ToTable();
-
-            List<DataColumn> columnsToRemove = new List<DataColumn>();
-
-            foreach (DataColumn column in dt.Columns)
-            {
-                bool found = false;
-
-                foreach (string s in originalColumnsToSelect)
-                {
-                    if (column.ColumnName.ToLower().Equals(s.ToLower()))
-                    {
-                        found = true;
-                    }
-                }
-
-                if (!found)
-                {
-                    columnsToRemove.Add(column);
-                }
-            }
-
-            foreach (DataColumn dc in columnsToRemove)
-            {
-                dt.Columns.Remove(dc);
-            }
-            
-            OrderColumns(dt, parameters.SortColumnsByTabOrder);
-
-            if (parameters.ShowCommentLegalLabels)
-            {
-                AddOptionLabelsToListTable(dt);
-                AddCommentLegalLabelsToListTable(dt);
-            }
-
-            List<DataTable> tables = new List<DataTable>();
-            ConvertLineListData(dt);
-            tables.Add(dt);
-
-            return tables;
-            //}
-        }
-
-        /// <summary>
-        /// Carries out any needed data conversions in line list tables
-        /// </summary>
-        /// <param name="dt">A valid line list data table being processed in the GenerateLineListTable method</param>
-        private void ConvertLineListData(DataTable dt)
-        {
-            Dictionary<DataColumn, DataColumn> dictionary = new Dictionary<DataColumn, DataColumn>();
-            List<DataColumn> columnsToAdd = new List<DataColumn>();
-            List<DataColumn> columnsToRemove = new List<DataColumn>();
-
-            foreach (DataColumn dc in dt.Columns)
-            {
-                Field field = GetAssociatedField(dc.ColumnName);
-                if (field != null && (field is YesNoField || field is CheckBoxField))
-                {
-                    DataColumn newDc = new DataColumn(dc.ColumnName + "___1234_ACD_PLX", typeof(string));
-                    columnsToAdd.Add(newDc);
-                    columnsToRemove.Add(dc);
-                    dictionary.Add(newDc, dc);
-                }
-            }
-
-            foreach (DataColumn dc in columnsToAdd)
-            {
-                dt.Columns.Add(dc);
-            }
-
-            foreach (DataRow row in dt.Rows)
-            {
-                foreach (KeyValuePair<DataColumn, DataColumn> kvp in dictionary)
-                {
-                    DataColumn newDc = kvp.Key;
-                    DataColumn oldDc = kvp.Value;
-
-                    if (row[oldDc].ToString() == "1" || row[oldDc].ToString().ToLower() == "true")
-                    {
-                        row[newDc] = Config.Settings.RepresentationOfYes;
-                    }
-                    else if (row[oldDc].ToString() == "0" || row[oldDc].ToString().ToLower() == "false")
-                    {
-                        row[newDc] = Config.Settings.RepresentationOfNo;
-                    }
-                }
-            }
-
-            foreach (KeyValuePair<DataColumn, DataColumn> kvp in dictionary)
-            {
-                dt.Columns.Remove(kvp.Value);
-                kvp.Key.ColumnName = kvp.Key.ColumnName.Replace("___1234_ACD_PLX", String.Empty);
-            }
-        }
-
-        /// <summary>
-        /// Generates a grouped line listing .NET data table based off of the given columns, sort order, and group field
-        /// </summary>
-        /// <param name="inputs">The inputs needed to process the list</param>
-        /// <returns>A dictionary of data tables, one for each value of the stratification variable, and that table's associated count</returns>
-        public List<DataTable> GenerateDeduplicationList(DuplicatesListParameters parameters)
-        {
-            //inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CREATING_VARIABLES);
-            parameters.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CREATING_VARIABLES);
-
-            List<string> columnsToSelect = new List<string>();
-            List<string> originalColumnsToSelect = new List<string>();
-
-            string sortOrder = string.Empty;
-            //int maxRows = 200;
-
-            if (parameters.StrataVariableNames != null && parameters.StrataVariableNames.Count > 0)
-            {
-                if (!columnsToSelect.Contains(parameters.StrataVariableNames[0]))
-                {
-                    columnsToSelect.Add(parameters.StrataVariableNames[0]);
-                }
-            }
-
-            //foreach (KeyValuePair<string, string> kvp in inputs.InputVariableList)
-            foreach (string listFieldName in parameters.ColumnNames)
-            {
-                //if (kvp.Value.ToLower().Equals("listfield") && !columnsToSelect.Contains(kvp.Key))
-                if (!columnsToSelect.Contains(listFieldName))
-                {
-                    if (IsUsingEpiProject && GetGroupFieldsAsList().Contains(listFieldName, caseInsensitiveEqualityComparer))
-                    {
-                        // add fields in a group
-                        foreach (Field field in this.View.Fields)
-                        {
-                            if (field is GroupField && field.Name.Equals(listFieldName))
-                            {
-                                GroupField groupField = field as GroupField;
-                                foreach (string s in groupField.ChildFieldNameArray)
-                                {
-                                    if (!columnsToSelect.Contains(listFieldName))
-                                    {
-                                        columnsToSelect.Add(s);
-                                        originalColumnsToSelect.Add(s);
-                                    }
-                                }
-                                break;
-                            }
-                        }
-                    }
-                    else if (GetGroupVariablesAsList().Contains(listFieldName, caseInsensitiveEqualityComparer))
-                    {
-                        // add fields in a group
-                        foreach (string columnName in GetGroupVariable(listFieldName).Variables)
-                        {
-                            if (!columnsToSelect.Contains(listFieldName))
-                            {
-                                columnsToSelect.Add(columnName);
-                                originalColumnsToSelect.Add(columnName);
-                            }
-                        }
-                    }
-                    else if (IsUsingEpiProject && listFieldName.ToLower().StartsWith("page "))
-                    {
-                        // add fields on a specific page
-                        int pageNumber = -1;
-
-                        string strPageNumber = listFieldName.Remove(0, 5);
-
-                        int.TryParse(strPageNumber, out pageNumber);
-
-                        if (pageNumber < 0)
-                        {
-                            continue;
-                        }
-
-                        pageNumber--;
-                        Page page = this.View.Pages[pageNumber];
-
-                        foreach (Field field in page.Fields)
-                        {
-                            if (field is IDataField && field is RenderableField && !(field is GroupField) && !(field is GridField) && !(field is MirrorField))
-                            {
-                                if (!columnsToSelect.Contains(listFieldName))
-                                {
-                                    columnsToSelect.Add(field.Name);
-                                    originalColumnsToSelect.Add(field.Name);
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // add a single field
-                        if (!columnsToSelect.Contains(listFieldName))
-                        {
-                            columnsToSelect.Add(listFieldName);
-                            originalColumnsToSelect.Add(listFieldName);
-                        }
-                    }
-                }
-            }
-
-            //foreach (KeyValuePair<string, string> kvp in inputs.InputVariableList)
-            //{
-            //    if (kvp.Value.ToLower().Equals("sortfield"))
-            //    {
-            //        sortOrder = sortOrder + kvp.Key + ",";
-
-            //        string sortFieldName = kvp.Key;
-
-            //        if (sortFieldName.ToLower().EndsWith("desc"))
-            //        {
-            //            sortFieldName = sortFieldName.Remove(sortFieldName.Length - 5);
-            //        }
-            //        else
-            //        {
-            //            sortFieldName = sortFieldName.Remove(sortFieldName.Length - 4);
-            //        }
-
-            //        sortFieldName = sortFieldName.TrimStart('[').TrimEnd(']');
-
-            //        if (!columnsToSelect.Contains(sortFieldName))
-            //        {
-            //            columnsToSelect.Add(sortFieldName);
-            //        }
-            //    }
-            //}
-
-            foreach (FilterCondition condition in this.DataFilters)
-            {
-                if (!columnsToSelect.Contains(condition.RawColumnName))
-                {
-                    columnsToSelect.Add(condition.RawColumnName);
-                }
-            }
-
-            //if (inputs.InputVariableList.ContainsKey("maxrows"))
-            //{
-            //    maxRows = int.Parse(inputs.InputVariableList["maxrows"]);
-            //}
-
-            sortOrder = sortOrder.TrimEnd(',');
-            parameters.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_GENERATING_TABLE);
-
-            PopulateDataSet(parameters);
-
-            DataView dv = GenerateView(parameters);
-
-            DataView dvAllRows = new DataView(mainTable);
-            dvAllRows.RowFilter = mainTable.DefaultView.RowFilter;
-            if (!string.IsNullOrEmpty(parameters.CustomFilter))
-            {
-                dvAllRows.RowFilter = CombineFilters(parameters.CustomFilter, dvAllRows);
-            }
-            dvAllRows.Sort = sortOrder;
-
-            RecordCount = mainTable.DefaultView.Count;
-
-            // Grouped output; use one table for each strata value
-            if (parameters.StrataVariableNames != null && parameters.StrataVariableNames.Count > 0)
+            if (inputs.StrataVariableNames != null && inputs.StrataVariableNames.Count > 0)
             {
                 List<DataTable> tables = new List<DataTable>();
                 List<string> strataValues = new List<string>();
-                string strataVariableName = parameters.StrataVariableNames[0];
+                string strataVariableName = inputs.StrataVariableNames[0];
 
-                parameters.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_STRATA_VALUES);
+                inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_STRATA_VALUES);
                 for (int i = 0; i < dvAllRows.Count; i++)
                 {
                     DataRow dataRow = dvAllRows[i].Row;
@@ -3709,13 +3178,339 @@ namespace EpiDashboard
                 }
 
                 bool sortByTabOrder = false;
-                if (parameters.InputVariableList.ContainsKey("sortcolumnsbytaborder"))
+                if (inputs.InputVariableList.ContainsKey("sortcolumnsbytaborder"))
                 {
-                    sortByTabOrder = bool.Parse(parameters.InputVariableList["sortcolumnsbytaborder"]);
+                    sortByTabOrder = bool.Parse(inputs.InputVariableList["sortcolumnsbytaborder"]);
                     OrderColumns(dt, sortByTabOrder);
                 }
 
-                if (parameters.ShowCommentLegalLabels)
+                if (inputs.ShouldShowCommentLegalLabels)
+                {
+                    AddOptionLabelsToListTable(dt);
+                    AddCommentLegalLabelsToListTable(dt);
+                }
+
+                List<DataTable> tables = new List<DataTable>();
+                tables.Add(dt);
+
+                return tables;
+            }
+        }
+
+
+        /// <summary>
+        /// Generates a grouped line listing .NET data table based off of the given columns, sort order, and group field
+        /// </summary>
+        /// <param name="inputs">The inputs needed to process the list</param>
+        /// <returns>A dictionary of data tables, one for each value of the stratification variable, and that table's associated count</returns>
+        public List<DataTable> GenerateDeduplicationList(GadgetParameters inputs)
+        {
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CREATING_VARIABLES);
+
+            List<string> columnsToSelect = new List<string>();
+            List<string> originalColumnsToSelect = new List<string>();
+
+            string sortOrder = string.Empty;
+            int maxRows = 200;
+
+            if (inputs.StrataVariableNames != null && inputs.StrataVariableNames.Count > 0)
+            {
+                if (!columnsToSelect.Contains(inputs.StrataVariableNames[0]))
+                {
+                    columnsToSelect.Add(inputs.StrataVariableNames[0]);
+                }
+            }
+
+            foreach (KeyValuePair<string, string> kvp in inputs.InputVariableList)
+            {
+                if (kvp.Value.ToLower().Equals("listfield") && !columnsToSelect.Contains(kvp.Key))
+                {
+                    if (IsUsingEpiProject && GetGroupFieldsAsList().Contains(kvp.Key, caseInsensitiveEqualityComparer))
+                    {
+                        // add fields in a group
+                        foreach (Field field in this.View.Fields)
+                        {
+                            if (field is GroupField && field.Name.Equals(kvp.Key))
+                            {
+                                GroupField groupField = field as GroupField;
+                                foreach (string s in groupField.ChildFieldNameArray)
+                                {
+                                    if (!columnsToSelect.Contains(kvp.Key))
+                                    {
+                                        columnsToSelect.Add(s);
+                                        originalColumnsToSelect.Add(s);
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    else if (GetGroupVariablesAsList().Contains(kvp.Key, caseInsensitiveEqualityComparer))
+                    {
+                        // add fields in a group
+                        foreach (string columnName in GetGroupVariable(kvp.Key).Variables)
+                        {
+                            if (!columnsToSelect.Contains(kvp.Key))
+                            {
+                                columnsToSelect.Add(columnName);
+                                originalColumnsToSelect.Add(columnName);
+                            }
+                        }
+                    }
+                    else if (IsUsingEpiProject && kvp.Key.ToLower().StartsWith("page "))
+                    {
+                        // add fields on a specific page
+                        int pageNumber = -1;
+
+                        string strPageNumber = kvp.Key.Remove(0, 5);
+
+                        int.TryParse(strPageNumber, out pageNumber);
+
+                        if (pageNumber < 0)
+                        {
+                            continue;
+                        }
+
+                        pageNumber--;
+                        Page page = this.View.Pages[pageNumber];
+
+                        foreach (Field field in page.Fields)
+                        {
+                            if (field is IDataField && field is RenderableField && !(field is GroupField) && !(field is GridField) && !(field is MirrorField))
+                            {
+                                if (!columnsToSelect.Contains(kvp.Key))
+                                {
+                                    columnsToSelect.Add(field.Name);
+                                    originalColumnsToSelect.Add(field.Name);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // add a single field
+                        if (!columnsToSelect.Contains(kvp.Key))
+                        {
+                            columnsToSelect.Add(kvp.Key);
+                            originalColumnsToSelect.Add(kvp.Key);
+                        }
+                    }
+                }
+            }
+
+            foreach (KeyValuePair<string, string> kvp in inputs.InputVariableList)
+            {
+                if (kvp.Value.ToLower().Equals("sortfield"))
+                {
+                    sortOrder = sortOrder + kvp.Key + ",";
+
+                    string sortFieldName = kvp.Key;
+
+                    if (sortFieldName.ToLower().EndsWith("desc"))
+                    {
+                        sortFieldName = sortFieldName.Remove(sortFieldName.Length - 5);
+                    }
+                    else
+                    {
+                        sortFieldName = sortFieldName.Remove(sortFieldName.Length - 4);
+                    }
+
+                    sortFieldName = sortFieldName.TrimStart('[').TrimEnd(']');
+
+                    if (!columnsToSelect.Contains(sortFieldName))
+                    {
+                        columnsToSelect.Add(sortFieldName);
+                    }
+                }
+            }
+
+            foreach (FilterCondition condition in this.DataFilters)
+            {
+                if (!columnsToSelect.Contains(condition.RawColumnName))
+                {
+                    columnsToSelect.Add(condition.RawColumnName);
+                }
+            }
+
+            if (inputs.InputVariableList.ContainsKey("maxrows"))
+            {
+                maxRows = int.Parse(inputs.InputVariableList["maxrows"]);
+            }
+
+            sortOrder = sortOrder.TrimEnd(',');
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_GENERATING_TABLE);
+
+            PopulateDataSet(inputs);
+
+            DataView dv = GenerateView(inputs);
+
+            DataView dvAllRows = new DataView(mainTable);
+            dvAllRows.RowFilter = mainTable.DefaultView.RowFilter;
+            if (!string.IsNullOrEmpty(inputs.CustomFilter))
+            {
+                dvAllRows.RowFilter = CombineFilters(inputs.CustomFilter, dvAllRows);
+            }
+            dvAllRows.Sort = sortOrder;
+
+            RecordCount = mainTable.DefaultView.Count;
+
+            // Grouped output; use one table for each strata value
+            if (inputs.StrataVariableNames != null && inputs.StrataVariableNames.Count > 0)
+            {
+                List<DataTable> tables = new List<DataTable>();
+                List<string> strataValues = new List<string>();
+                string strataVariableName = inputs.StrataVariableNames[0];
+
+                inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_STRATA_VALUES);
+                for (int i = 0; i < dvAllRows.Count; i++)
+                {
+                    DataRow dataRow = dvAllRows[i].Row;
+                    string strataValue = dataRow[strataVariableName].ToString().Trim();
+                    if (!strataValues.Contains(strataValue, caseInsensitiveEqualityComparer))
+                    {
+                        strataValues.Add(strataValue);
+                    }
+                }
+
+                foreach (string strataValue in strataValues)
+                {
+                    DataView strataDv = new DataView(mainTable);
+                    strataDv.Sort = dvAllRows.Sort;
+                    strataDv.RowFilter = dvAllRows.RowFilter;
+
+                    DataTable dt = new DataTable();//dtAllRows.Clone();
+
+                    string strataFilter = string.Empty;
+                    string fullFilter = string.Empty;
+
+                    if (!string.IsNullOrEmpty(strataValue))
+                    {
+                        string columnType = GetColumnType(strataVariableName);
+                        strataFilter = StringLiterals.LEFT_SQUARE_BRACKET + strataVariableName + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + StringLiterals.EQUAL + StringLiterals.SPACE + FormatValue(strataValue, columnType);
+                    }
+                    else
+                    {
+                        strataFilter = StringLiterals.LEFT_SQUARE_BRACKET + strataVariableName + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + " is null";
+                    }
+
+                    if (!string.IsNullOrEmpty(dvAllRows.RowFilter))
+                    {
+                        fullFilter = CombineFilters(strataFilter, dvAllRows);
+                    }
+                    else
+                    {
+                        fullFilter = strataFilter;
+                    }
+
+                    strataDv.RowFilter = fullFilter;
+
+                    try
+                    {
+                        dt = strataDv.ToTable(mainTable.TableName);
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        continue;
+                    }
+
+                    List<DataColumn> columnsToRemove = new List<DataColumn>();
+
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        bool found = false;
+
+                        foreach (string s in originalColumnsToSelect)
+                        {
+                            if (column.ColumnName.ToLower().Equals(s.ToLower()))
+                            {
+                                found = true;
+                            }
+                        }
+
+                        if (!found)
+                        {
+                            columnsToRemove.Add(column);
+                        }
+                    }
+
+                    foreach (DataColumn dc in columnsToRemove)
+                    {
+                        dt.Columns.Remove(dc);
+                    }
+
+                    if (IsColumnYesNo(strataVariableName))
+                    {
+                        if (strataFilter.EndsWith("1"))
+                        {
+                            strataFilter = strataFilter.Substring(0, strataFilter.Length - 1) + Config.Settings.RepresentationOfYes;
+                        }
+                        else if (strataFilter.EndsWith("0"))
+                        {
+                            strataFilter = strataFilter.Substring(0, strataFilter.Length - 1) + Config.Settings.RepresentationOfNo;
+                        }
+                    }
+                    else if (IsColumnBoolean(strataVariableName))
+                    {
+                        if (strataFilter.EndsWith("True"))
+                        {
+                            strataFilter = strataFilter.Substring(0, strataFilter.Length - 4) + Config.Settings.RepresentationOfYes;
+                        }
+                        else if (strataFilter.EndsWith("False"))
+                        {
+                            strataFilter = strataFilter.Substring(0, strataFilter.Length - 5) + Config.Settings.RepresentationOfNo;
+                        }
+                    }
+
+                    if (GetAssociatedField(strataVariableName) != null)
+                    {
+                        strataFilter = strataFilter.Replace("]", "").Replace("[", "");
+                    }
+
+                    dt.TableName = strataFilter;
+
+                    tables.Add(dt);
+                }
+
+                return tables;
+            }
+            // Non-grouped output; only one line list table will be produced
+            else
+            {
+                DataTable dt = dvAllRows.ToTable();
+
+                List<DataColumn> columnsToRemove = new List<DataColumn>();
+
+                foreach (DataColumn column in dt.Columns)
+                {
+                    bool found = false;
+
+                    foreach (string s in originalColumnsToSelect)
+                    {
+                        if (column.ColumnName.ToLower().Equals(s.ToLower()))
+                        {
+                            found = true;
+                        }
+                    }
+
+                    if (!found)
+                    {
+                        columnsToRemove.Add(column);
+                    }
+                }
+
+                foreach (DataColumn dc in columnsToRemove)
+                {
+                    dt.Columns.Remove(dc);
+                }
+
+                bool sortByTabOrder = false;
+                if (inputs.InputVariableList.ContainsKey("sortcolumnsbytaborder"))
+                {
+                    sortByTabOrder = bool.Parse(inputs.InputVariableList["sortcolumnsbytaborder"]);
+                    OrderColumns(dt, sortByTabOrder);
+                }
+
+                if (inputs.ShouldShowCommentLegalLabels)
                 {
                     AddOptionLabelsToListTable(dt);
                     AddCommentLegalLabelsToListTable(dt);
@@ -3758,37 +3553,31 @@ namespace EpiDashboard
         /// </summary>
         /// <param name="inputs">The inputs needed to process the frequency</param>
         /// <returns>A dictionary of data tables, one for each value of the stratification variable, and that table's associated count</returns>
-        public Dictionary<DataTable, List<DescriptiveStatistics>> GenerateFrequencyTable(IGadgetParameters parameters)
+        public Dictionary<DataTable, List<DescriptiveStatistics>> GenerateFrequencyTable(GadgetParameters inputs)
         {
             //Stopwatch sw1 = new Stopwatch();
             //sw1.Start();
 
-            //inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CHECKING_INPUTS);
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CHECKING_INPUTS);
 
             #region Input Validation
-            if (parameters == null)
+            if (inputs == null)
             {
                 throw new ArgumentNullException("inputs");
             }
-            if (parameters.ColumnNames.Count == 0)
+            if (string.IsNullOrEmpty(inputs.MainVariableName))
             {
-                throw new ArgumentNullException("parameters.ColumnNames.Count");
-            }
-            if (string.IsNullOrEmpty(parameters.ColumnNames[0]))
-            {
-                throw new ArgumentNullException("parameters.ColumnNames[0]");
+                throw new ArgumentNullException("inputs.MainVariableName");
             }
             #endregion // Input Validation
 
-            FrequencyParametersBase inputs = parameters as FrequencyParametersBase;
-
-            string freqVar = inputs.ColumnNames[0];
+            string freqVar = inputs.MainVariableName;
             string crosstabVar = inputs.CrosstabVariableName;
             string weightVar = inputs.WeightVariableName;
-            bool includeMissing = inputs.IncludeMissing;
-            bool sortHighToLow = inputs.SortHighToLow;
-            bool useAllPossibleValues = inputs.ShowAllListValues;
-            bool includeFullSummaryStatistics = inputs.IncludeFullSummaryStatistics;
+            bool includeMissing = inputs.ShouldIncludeMissing;
+            bool sortHighToLow = inputs.ShouldSortHighToLow;
+            bool useAllPossibleValues = inputs.ShouldUseAllPossibleValues;
+            bool includeFullSummaryStatistics = inputs.ShouldIncludeFullSummaryStatistics;
             bool needsOutputTable = true;
             bool useFieldPrompts = false;
             bool isAberrationRoutine = false;
@@ -3857,7 +3646,7 @@ namespace EpiDashboard
                 columnNames.Add(weightVar);
             }
 
-            if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+            if (inputs.IsRequestCancelled())
             {
                 return null;
             }
@@ -3887,13 +3676,7 @@ namespace EpiDashboard
                 }
             }
 
-            foreach (string columnName in columnNames)
-            {
-                if (!inputs.ColumnNames.Contains(columnName))
-                {
-                    inputs.ColumnNames.Add(columnName);
-                }
-            }
+            inputs.ColumnNames.AddRange(columnNames);
 
             inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_GENERATING_TABLE);
             DataView dv = GenerateView(inputs);
@@ -3977,88 +3760,50 @@ namespace EpiDashboard
                 doMeans = true;
             }
 
-            //inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_STRATA_VALUES);
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_STRATA_VALUES);
             // Select distinct values for stratification            
             List<Strata> stratas = new List<Strata>();
             //Dictionary<string, string> stratas = new Dictionary<string, string>();
             DataTable distinctTable = new DataTable();
             DataTable sortedDistinctTable = new DataTable();
 
-            // Select distinct values for the main variable            
-            List<string> freqValues = new List<string>();
-            Field field = null;
-            Dictionary<string, string> crosstabValues = new Dictionary<string, string>();
+            if (doStratification)
+            {
+                stratas = GetStrataValuesAsDictionary(strataVars, includeMissing, useFieldPrompts);
+            }
+            else
+            {
+                stratas.Add(new Strata(new List<string>(), new List<object>(), freqVar, freqVar));///*new KeyValuePair<string, string>(freqVar, freqVar)*/);
+            }
 
-            Parallel.Invoke(
-                () =>
-                {
-                    if (doStratification)
-                    {
-                        stratas = GetStrataValuesAsDictionary(strataVars, includeMissing, useFieldPrompts);
-                    }
-                    else
-                    {
-                        stratas.Add(new Strata(new List<string>(), new List<object>(), freqVar, freqVar));///*new KeyValuePair<string, string>(freqVar, freqVar)*/);
-                    }
-                },
-                () => 
-                {   
-                    if (doCrossTab)
-                    {   
-                        crosstabValues = GetCrosstabValuesAsDictionary(crosstabVar, freqVar, includeMissing);
-
-                        if (!inputs.IgnoreRowLimits && crosstabValues.Count > Frequency_Crosstab_Limit)
-                        {
-                            string exMessage = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_CROSSTAB_VALUES, crosstabVar, crosstabValues.Count, Frequency_Crosstab_Limit);
-                            throw new ApplicationException(exMessage);
-                        }
-                    }
-                },
-                () =>
-                {
-                    if (!freqVar.Equals(inputs.CustomSortColumnName))
-                    {
-                        distinctTable = SelectDistinct(inputs.CustomSortColumnName, dv, freqVar); // this needs to be checked
-                    }
-                    else
-                    {
-                        distinctTable = SelectDistinct(dv, freqVar);
-                    }
-                    sortedDistinctTable = SortBySingleColumn(distinctTable, distinctTable.Columns[freqVar]);
-                },
-                () =>
-                {
-                    foreach (DataRow fieldRow in FieldTable.Rows)
-                    {
-                        if (fieldRow["columnname"].Equals(freqVar))
-                        {
-                            if (fieldRow["epifieldtype"] is Field)
-                            {
-                                field = fieldRow["epifieldtype"] as Field;
-                            }
-                            break;
-                        }
-                    }
-                }
-            );
-
-            if (!inputs.IgnoreRowLimits && stratas.Count > Frequency_Strata_Limit)
+            if (!inputs.ShouldIgnoreRowLimits && stratas.Count > Frequency_Strata_Limit)
             {
                 string exMessage = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_STRATA_VALUES, strataVars[0], stratas.Count, Frequency_Strata_Limit);
                 throw new ApplicationException(exMessage);
             }
 
-            //inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_FREQ_VALUES);
-            
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_FREQ_VALUES);
 
-            if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+            // Select distinct values for the main variable            
+            List<string> freqValues = new List<string>();
+
+            if (!freqVar.Equals(inputs.CustomSortColumnName))
+            {
+                distinctTable = SelectDistinct(inputs.CustomSortColumnName, dv, freqVar); // this needs to be checked
+            }
+            else
+            {
+                distinctTable = SelectDistinct(dv, freqVar);
+            }
+
+            if (inputs.IsRequestCancelled())
             {
                 return null;
             }
 
-            //inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_SORTING_FREQ_VALUES);
-            
-            //inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_COMPARING_FREQ_VALUES);
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_SORTING_FREQ_VALUES);
+            sortedDistinctTable = SortBySingleColumn(distinctTable, distinctTable.Columns[freqVar]);
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_COMPARING_FREQ_VALUES);
 
             int count = 0;
             int totalCount = sortedDistinctTable.Rows.Count;
@@ -4069,7 +3814,7 @@ namespace EpiDashboard
                 // ignore case to ensure we don't end up double-counting some of the values.
                 if (!freqValues.Contains(row[0].ToString().TrimEnd()))
                 {
-                    if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                    if (inputs.IsRequestCancelled())
                     {
                         return null;
                     }
@@ -4095,12 +3840,12 @@ namespace EpiDashboard
                 }
             }
 
-            if (isAberrationRoutine && !inputs.IgnoreRowLimits && freqValues.Count > Aberration_Row_Limit)
+            if (isAberrationRoutine && !inputs.ShouldIgnoreRowLimits && freqValues.Count > Aberration_Row_Limit)
             {
                 string exMessage = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_VALUES, freqVar, freqValues.Count, Aberration_Row_Limit);
                 throw new ApplicationException(exMessage);
             }
-            else if (!inputs.InputVariableList.ContainsKey("aberration") && !inputs.IgnoreRowLimits && freqValues.Count > Frequency_Row_Limit)
+            else if (!inputs.InputVariableList.ContainsKey("aberration") && !inputs.ShouldIgnoreRowLimits && freqValues.Count > Frequency_Row_Limit)
             {
                 string exMessage = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_VALUES, freqVar, freqValues.Count, Frequency_Row_Limit);
                 throw new ApplicationException(exMessage);
@@ -4111,6 +3856,20 @@ namespace EpiDashboard
                 string temp = freqValues[0];
                 freqValues.Clear();
                 freqValues.Add(temp);
+            }
+
+            Field field = null;
+
+            foreach (DataRow fieldRow in FieldTable.Rows)
+            {
+                if (fieldRow["columnname"].Equals(freqVar))
+                {
+                    if (fieldRow["epifieldtype"] is Field)
+                    {
+                        field = fieldRow["epifieldtype"] as Field;
+                    }
+                    break;
+                }
             }
 
             if (!valuesAreBool && field != null && field is YesNoField)
@@ -4153,7 +3912,7 @@ namespace EpiDashboard
 
                     foreach (System.Data.DataRow row in dataTable.Rows)
                     {
-                        if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                        if (inputs.IsRequestCancelled())
                         {
                             return null;
                         }
@@ -4179,7 +3938,7 @@ namespace EpiDashboard
 
                     foreach (System.Data.DataRow row in dataTable.Rows)
                     {
-                        if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                        if (inputs.IsRequestCancelled())
                         {
                             return null;
                         }
@@ -4261,10 +4020,23 @@ namespace EpiDashboard
                 }
             }
 
+            Dictionary<string, string> crosstabValues = new Dictionary<string, string>();
+            if (doCrossTab)
+            {
+                inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_CROSSTAB_VALUES);
+                crosstabValues = GetCrosstabValuesAsDictionary(crosstabVar, freqVar, includeMissing);
+
+                if (!inputs.ShouldIgnoreRowLimits && crosstabValues.Count > Frequency_Crosstab_Limit)
+                {
+                    string exMessage = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_CROSSTAB_VALUES, crosstabVar, crosstabValues.Count, Frequency_Crosstab_Limit);
+                    throw new ApplicationException(exMessage);
+                }
+            }
+
             inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CALCULATING_TOTALS);
             foreach (Strata strataKvp in stratas)
             {
-                if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                if (inputs.IsRequestCancelled())
                 {
                     return null;
                 }
@@ -4290,7 +4062,7 @@ namespace EpiDashboard
                     //Stopwatch sw3 = new Stopwatch();
                     //sw3.Start();
 
-                    if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                    if (inputs.IsRequestCancelled())
                     {
                         return null;
                     }
@@ -4477,7 +4249,7 @@ namespace EpiDashboard
                             // do cross-tab
                             foreach (KeyValuePair<string, string> csKvp in crosstabValues)
                             {
-                                if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                                if (inputs.IsRequestCancelled())
                                 {
                                     return null;
                                 }
@@ -4512,7 +4284,7 @@ namespace EpiDashboard
 
                         foreach (KeyValuePair<string, string> csKvp in crosstabValues)
                         {
-                            if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                            if (inputs.IsRequestCancelled())
                             {
                                 return null;
                             }
@@ -4603,7 +4375,7 @@ namespace EpiDashboard
                     sortedFreqTable = SortBySingleColumn(freqTable, freqTable.Columns[freqVar]);
                 }
 
-                if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                if (inputs.IsRequestCancelled())
                 {
                     return null;
                 }
@@ -4622,7 +4394,7 @@ namespace EpiDashboard
                     {
                         foreach (KeyValuePair<string, string> csKvp in crosstabValues)
                         {
-                            if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                            if (inputs.IsRequestCancelled())
                             {
                                 return null;
                             }
@@ -4644,17 +4416,12 @@ namespace EpiDashboard
                             //}
                         }
 
-                        bool showAnova = false;
+                        bool showAnova = true;
 
-                        if (inputs is MeansParameters)
+                        if (inputs.InputVariableList.ContainsKey("showanova"))
                         {
-                            MeansParameters meansParameters = inputs as MeansParameters;
-                            showAnova = meansParameters.ShowANOVA;
+                            bool.TryParse(inputs.InputVariableList["showanova"], out showAnova);
                         }
-                        //if (inputs.InputVariableList.ContainsKey("showanova"))
-                        //{
-                        //    bool.TryParse(inputs.InputVariableList["showanova"], out showAnova);
-                        //}
                         //Don't do the ANOVA statistics if any crosstab values have zero observations (Classic Analysis does the same)
                         foreach (DescriptiveStatistics stats in descriptiveStatistics)
                             if (stats.observations == 0.0)
@@ -4772,13 +4539,13 @@ namespace EpiDashboard
                                 {
                                     fullFilter = fullFilter + " and " + crosstabFilter;
                                 }
-                            }
+                            }                            
 
-                            FrequencyParameters newInputs = new FrequencyParameters();
-                            newInputs.IncludeFullSummaryStatistics = false;
-                            newInputs.IncludeMissing = false;
-                            newInputs.IgnoreRowLimits = true;
-                            newInputs.ColumnNames.Add(freqVar);
+                            GadgetParameters newInputs = new GadgetParameters();
+                            newInputs.ShouldIncludeFullSummaryStatistics = false;
+                            newInputs.ShouldIncludeMissing = false;
+                            newInputs.ShouldIgnoreRowLimits = true;
+                            newInputs.MainVariableName = freqVar;
                             if (!string.IsNullOrEmpty(inputs.CustomFilter.Trim()))
                             {
                                 newInputs.CustomFilter = inputs.CustomFilter.Trim() + " and " + fullFilter;
@@ -4794,11 +4561,11 @@ namespace EpiDashboard
 
                             DataTable freqHorizontal = ExtractFirstFrequencyTable(this.GenerateFrequencyTable(newInputs));
 
-                            newInputs = new FrequencyParameters();
-                            newInputs.IncludeFullSummaryStatistics = false;
-                            newInputs.IncludeMissing = false;
-                            newInputs.IgnoreRowLimits = true;
-                            newInputs.ColumnNames.Add(crosstabVar);                            
+                            newInputs = new GadgetParameters();
+                            newInputs.ShouldIncludeFullSummaryStatistics = false;
+                            newInputs.ShouldIncludeMissing = false;
+                            newInputs.ShouldIgnoreRowLimits = true;
+                            newInputs.MainVariableName = crosstabVar;
                             if (!string.IsNullOrEmpty(inputs.CustomFilter.Trim()))
                             {
                                 newInputs.CustomFilter = inputs.CustomFilter.Trim() + " and " + fullFilter;
@@ -4882,19 +4649,16 @@ namespace EpiDashboard
                 //System.Diagnostics.Debug.Print(string.Empty);
                 #endregion // Debug
 
-                if (inputs != null && inputs.ShowCommentLegalLabels && field != null && field is DDLFieldOfCommentLegal)
+                if (inputs != null && inputs.ShouldShowCommentLegalLabels && field != null && field is DDLFieldOfCommentLegal)
                 {
                     AddCommentLegalLabelsToFreqTable(sortedFreqTable, freqVar, crosstabVar);
                 }
-                else if (inputs != null && inputs.ShowCommentLegalLabels && field != null && field is OptionField)
+                else if (inputs != null && inputs.ShouldShowCommentLegalLabels && field != null && field is OptionField)
                 {
                     AddOptionLabelsToFreqTable(sortedFreqTable);
                 }
 
-                if (sortedFreqTable != null)
-                {
-                    stratifiedFrequencyTables.Add(sortedFreqTable, descriptiveStatistics);
-                }
+                stratifiedFrequencyTables.Add(sortedFreqTable, descriptiveStatistics);
                 string processedStatusMessage = string.Format(SharedStrings.DASHBOARD_GADGET_STATUS_PROCESSED_TABLES, stratifiedFrequencyTables.Count.ToString());
                 inputs.UpdateGadgetStatus(processedStatusMessage);
             } // end foreach strata
@@ -4929,91 +4693,12 @@ namespace EpiDashboard
             }
         }
 
-        public DataTable GenerateDataDictionaryTable()
-        {
-            DataTable dictionaryTable = this.FieldTable.Copy();
-
-            foreach (KeyValuePair<string, string> kvp in this.TableColumnNames)
-            {
-                DataRow row = dictionaryTable.Rows.Find(kvp.Key);
-                if (row == null)
-                {
-                    dictionaryTable.Rows.Add(kvp.Key, kvp.Value);
-                }
-            }
-
-            if (this.IsUsingEpiProject)
-            {
-                dictionaryTable.Columns.Add("Page", typeof(int));
-                dictionaryTable.Columns.Add("Tab", typeof(int));
-                dictionaryTable.Columns.Add("Prompt", typeof(string));
-                dictionaryTable.Columns.Add("Definition", typeof(string));
-                dictionaryTable.Columns.Add("Items", typeof(string));
-
-                foreach (DataRow fieldRow in dictionaryTable.Rows)
-                {
-                    if (fieldRow["epifieldtype"] is RenderableField)
-                    {
-                        RenderableField renderableField = fieldRow["epifieldtype"] as RenderableField;
-                        fieldRow["Page"] = renderableField.Page.Position + 1;
-                        fieldRow["Tab"] = renderableField.TabIndex;
-                        fieldRow["Prompt"] = renderableField.PromptText;
-                        if (renderableField is GroupField)
-                        {
-                            GroupField groupField = renderableField as GroupField;
-                            fieldRow["Items"] = groupField.ChildFieldNames;
-                        }
-                        else if (renderableField is OptionField)
-                        {
-                            OptionField optionField = renderableField as OptionField;
-                            fieldRow["Items"] = optionField.GetOptionsString();
-                        }
-                    }
-                    else if (IsUserDefinedColumn(fieldRow["columnname"].ToString()))
-                    {
-                        List<IDashboardRule> rules = this.Rules.GetRules(fieldRow["columnname"].ToString());
-                        if (rules.Count > 0)
-                        {
-                            fieldRow["Definition"] = rules[0].FriendlyRule;
-                        }
-                    }
-
-                    fieldRow["datatype"] = fieldRow["datatype"].ToString().Replace("System.", String.Empty);
-                }
-
-                dictionaryTable.Columns["columnname"].SetOrdinal(0);
-                dictionaryTable.Columns["Prompt"].SetOrdinal(1);
-                dictionaryTable.Columns["formname"].SetOrdinal(2);
-                dictionaryTable.Columns["Page"].SetOrdinal(3);
-                dictionaryTable.Columns["Tab"].SetOrdinal(4);
-                dictionaryTable.Columns["datatype"].SetOrdinal(5);
-                dictionaryTable.Columns["epifieldtype"].SetOrdinal(6);
-                dictionaryTable.Columns["tablename"].SetOrdinal(7);
-                dictionaryTable.Columns["Definition"].SetOrdinal(8);
-                dictionaryTable.Columns["Items"].SetOrdinal(9);
-
-                //dictionaryTable.Columns["formname"].ColumnName = "Form";
-                //dictionaryTable.Columns["epifieldtype"].ColumnName = "Epi Field Type";
-                //dictionaryTable.Columns["tablename"].ColumnName = "Table";
-            }
-            if (dictionaryTable == null || dictionaryTable.Rows.Count == 0)
-            {
-                throw new ApplicationException("There are no fields to display.");
-            }
-
-            //dictionaryTable.Columns["columnname"].ColumnName = "Name";
-            //dictionaryTable.Columns["datatype"].ColumnName = "Data Type";
-
-            return dictionaryTable;
-        }
-
         /// <summary>
         /// Generates a .NET 2x2 table based off of the selection criteria.
         /// </summary>
         /// <param name="exposure">The exposure variable</param>
         /// <param name="outcome">The outcome variable</param>        
         /// <returns>DataTable</returns>
-        [Obsolete]
         public DataTable Generate2x2Table(string exposure, string outcome, bool includeMissing = false)
         {
             #region Input Validation
@@ -5271,7 +4956,6 @@ namespace EpiDashboard
             return twoByTwoTable;
         }
 
-        [Obsolete]
         public DataTable GenerateEpiCurveTable(GadgetParameters inputs, decimal minWeek, decimal maxWeek, bool includeMissing = false)
         {
             #region Input Validation
@@ -5467,7 +5151,6 @@ namespace EpiDashboard
         /// <param name="maxDate">The maximum date value to use when selecting dates</param>
         /// <param name="minDate">The minimum date value to use when selecting dates</param>
         /// <returns>DataTable</returns>
-        [Obsolete]
         public DataTable GenerateEpiCurveTable(GadgetParameters inputs, DateTime minDate, DateTime maxDate, bool includeMissing = false)
         {
             #region Input Validation
@@ -5761,7 +5444,6 @@ namespace EpiDashboard
         /// <param name="xAxisColumn">The name of the case status column to process</param>
         /// <param name="yAxisColumn">The name of the data column to process</param>
         /// <returns>DataTable</returns>
-        [Obsolete]
         public DataTable GenerateStackedBarTable(string xAxisColumn, string yAxisColumn)
         {
             #region Input Validation
@@ -6026,7 +5708,6 @@ namespace EpiDashboard
         /// <param name="numberColumn">The column name to process</param>
         /// <param name="minNum">The minNum to be passed by reference back to the calling method</param>
         /// <param name="maxNum">The maxNum to be passed by reference back to the calling method</param>
-        [Obsolete]
         public void FindUpperLowerNumericValues(string numberColumn, ref decimal? minNum, ref decimal? maxNum)
         {
             #region Input Validation
@@ -6353,7 +6034,7 @@ namespace EpiDashboard
         /// Applies all dashboard rules to the data set, e.g. recoding, formatting, assigning, etc.
         /// </summary>
         /// <param name="view">The view on which to apply the rules</param>
-        internal void ApplyDashboardRules(IGadgetParameters inputs = null)
+        internal void ApplyDashboardRules(GadgetParameters inputs = null)
         {
             bool onlyGroups = true;
 
@@ -7339,114 +7020,6 @@ namespace EpiDashboard
         }
 
         /// <summary>
-        /// Generates a table that contains duplicate rows based on the specified column names (keys)
-        /// </summary>
-        /// <param name="columnNames">The column names to use as the match keys for detecting duplicates</param>        
-        /// <returns>DataTable</returns>
-        public DataTable GenerateDuplicatesTable(DuplicatesListParameters parameters)
-        {
-            #region Input Validation
-            //if (columnNames == null || columnNames.Length == 0)
-            //{
-            //    throw new ArgumentNullException("columnNames");
-            //}
-            #endregion // Input Validation
-
-            List<string> allColumnNames = new List<string>();
-            foreach (string s in parameters.ColumnNames)
-            {
-                allColumnNames.Add(s);
-            }
-            foreach (string s in parameters.KeyColumnNames)
-            {
-                allColumnNames.Add(s);
-            }
-
-            string[] keyColumnNames = parameters.KeyColumnNames.ToArray();
-            object[] lastValues;
-            DataTable duplicatesTable;
-
-            lastValues = new object[keyColumnNames.Length];
-            duplicatesTable = new DataTable();
-
-            foreach (string columnName in keyColumnNames)
-            {
-                if (!duplicatesTable.Columns.Contains(columnName))
-                {
-                    Type type = mainTable.Columns[columnName].DataType;
-                    duplicatesTable.Columns.Add(columnName, type);
-
-                    if (type.ToString().Equals("System.Single") || type.ToString().Equals("System.Double"))
-                    {
-                        duplicatesTable.Columns[columnName].DataType = typeof(decimal);
-                    }
-                }
-            }
-
-            foreach (string columnName in parameters.ColumnNames)
-            {
-                if (!duplicatesTable.Columns.Contains(columnName))
-                {
-                    Type type = mainTable.Columns[columnName].DataType;
-                    duplicatesTable.Columns.Add(columnName, type);
-                }
-            }
-
-            List<string> safeColumnNames = new List<string>();
-
-            foreach (string s in keyColumnNames)
-            {
-                safeColumnNames.Add(s);
-            }
-
-            foreach (string s in parameters.ColumnNames)
-            {
-                safeColumnNames.Add(s);
-            }
-
-            //string[] safeColumnNames = new string[columnNames.Length + parameters.ColumnNames.Count];
-
-            //for (int i = 0; i < columnNames.Length; i++)
-            //{
-            //    safeColumnNames[i] = AddBracketsToString(columnNames[i]);
-            //}
-
-            //for (int i = columnNames.Length; i < parameters.ColumnNames.Count; i++)
-            //{
-            //    safeColumnNames[i] = AddBracketsToString(columnNames[i]);
-            //}
-
-            DataView sourceView = ds.Tables[0].DefaultView;
-            DataView sortedSourceView = new DataView(ds.Tables[0], sourceView.RowFilter, string.Join(", ", safeColumnNames.ToArray()), DataViewRowState.CurrentRows);
-            bool isFirstDuplicate = true;
-            DataRow lastRow = null;
-
-            foreach (DataRowView rowView in sortedSourceView)
-            {
-                DataRow row = rowView.Row;
-                if (ColumnValuesAreEqual(lastValues, row, keyColumnNames))
-                {
-                    if (isFirstDuplicate)
-                    {
-                        duplicatesTable.Rows.Add(lastRow);
-                        isFirstDuplicate = false;
-                    }
-                    duplicatesTable.Rows.Add(CreateRowClone(row, duplicatesTable.NewRow(), allColumnNames.ToArray()));
-                }
-                else
-                {
-                    isFirstDuplicate = true;
-                }
-                lastRow = CreateRowClone(row, duplicatesTable.NewRow(), allColumnNames.ToArray());
-                SetLastValues(lastValues, row, keyColumnNames);
-            }
-
-            OrderColumns(duplicatesTable, parameters.SortColumnsByTabOrder);
-
-            return duplicatesTable;
-        }
-
-        /// <summary>
         /// Selects distinct values
         /// </summary>
         /// <param name="sourceTable">The table to execute the selection on</param>
@@ -7729,14 +7302,14 @@ namespace EpiDashboard
         /// <param name="filter">Any filter parameters to apply</param>
         /// <param name="outerFilter">Outer filter</param>
         /// <returns>DescriptiveStatistics</returns>
-        private DescriptiveStatistics DoMeans(FrequencyParametersBase inputs, DataTable table, DataTable freqTable, string filter, string outerFilter)
+        private DescriptiveStatistics DoMeans(GadgetParameters inputs, DataTable table, DataTable freqTable, string filter, string outerFilter)
         {
             DescriptiveStatistics means = new DescriptiveStatistics();
 
-            string freqVar = inputs.ColumnNames[0];
+            string freqVar = inputs.MainVariableName;
             string weightVar = inputs.WeightVariableName;
             string crosstabVar = inputs.CrosstabVariableName;
-            bool includeFullSummaryStatistics = inputs.IncludeFullSummaryStatistics;
+            bool includeFullSummaryStatistics = inputs.ShouldIncludeFullSummaryStatistics;
 
             string safeFreqVar = AddBracketsToString(freqVar);
             string safeWeightVar = AddBracketsToString(weightVar);
@@ -7764,7 +7337,7 @@ namespace EpiDashboard
             {
                 DataTable sortedFilteredTable = SortBySingleColumn(table, table.Columns[weightVar]);
 
-                if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                if (inputs.IsRequestCancelled())
                 {
                     means.observations = -1;
                     return means;
@@ -7929,7 +7502,7 @@ namespace EpiDashboard
                     return means;
                 }
 
-                if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                if (inputs.IsRequestCancelled())
                 {
                     means.observations = -1;
                     return means;
@@ -7937,16 +7510,16 @@ namespace EpiDashboard
 
                 //DataTable filteredTable = rowArray.CopyToDataTable().DefaultView.ToTable(table.TableName);
 
-                //if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
-                //{
-                //    means.observations = -1;
-                //    return means;
-                //}
+                if (inputs.IsRequestCancelled())
+                {
+                    means.observations = -1;
+                    return means;
+                }
 
                 //DataTable sortedFilteredTable = SortBySingleColumn(filteredTable, filteredTable.Columns[freqVar]);
                 DataView sortedDv = new DataView(table, filter, table.Columns[freqVar].ToString(), DataViewRowState.CurrentRows);
 
-                if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                if (inputs.IsRequestCancelled())
                 {
                     means.observations = -1;
                     return means;
@@ -8376,7 +7949,7 @@ namespace EpiDashboard
         /// <param name="childTable">The child table</param>
         /// <param name="parentKey">The key column to be used in the parent</param>
         /// <param name="childKey">The key column to be used in the child</param>
-        private void RelateInto(DataTable parentTable, DataTable childTable, string parentKey, string childKey, bool useUnmatched, IGadgetParameters inputs = null)
+        private void RelateInto(DataTable parentTable, DataTable childTable, string parentKey, string childKey, bool useUnmatched, GadgetParameters inputs = null)
         {
             Dictionary<string, string> columnNameMapping = new Dictionary<string, string>();
 

@@ -626,7 +626,7 @@ namespace Epi
             recentviewrow1.Location = drow.Project + "Mumps\\Mumps.prj:Survey";
             recentviewrow1.LastAccessed = DateTime.Now;
             configDataSet.RecentView.Rows.Add(recentviewrow1);
-          
+
             Config.RecentViewRow recentviewrow2 = configDataSet.RecentView.NewRecentViewRow();
             recentviewrow2.Name = drow.Project + "HIV\\HIV.prj:Case";
             recentviewrow2.Location = drow.Project + "HIV\\HIV.prj:Case";
@@ -637,7 +637,7 @@ namespace Epi
             recentviewrow3.Name = drow.Project + "EColi\\EColi.prj:FoodHistory";
             recentviewrow3.Location = drow.Project + "EColi\\EColi.prj:FoodHistory";
             recentviewrow3.LastAccessed = DateTime.Now;
-            configDataSet.RecentView.Rows.Add(recentviewrow3);           
+            configDataSet.RecentView.Rows.Add(recentviewrow3);
 
             Config.RecentProjectRow recentprojectrow = configDataSet.RecentProject.NewRecentProjectRow();
             recentprojectrow.Name = "Sample";
@@ -678,9 +678,7 @@ namespace Epi
             row.MapServiceKey = "Aua5s8kFcEZMx5lsd8Vkerz3frboU1CwzvOyzX_vgSnzsnbqV7xlQ4WTRUlN19_Q";
             row.LastAlertDate = new DateTime(2011, 9, 23);
             row.WebServiceAuthMode = 0; // 0 = Anon, 1 = NT
-            row.EWEServiceAuthMode = 0; // 0 = Anon, 1 = NT
             row.WebServiceEndpointAddress = string.Empty;
-            row.EWEServiceEndpointAddress = string.Empty;
             row.WebServiceBindingMode = "BASIC";
             row.WebServiceMaxBufferPoolSize = 524288;
             row.WebServiceMaxReceivedMessageSize = 999999999;
@@ -689,21 +687,12 @@ namespace Epi
             row.WebServiceReaderMaxArrayLength = 16384;
             row.WebServiceReaderMaxBytesPerRead = 4096;
             row.WebServiceReaderMaxNameTableCharCount = 16384;
-            row.EWEServiceBindingMode = "BASIC";
-            row.EWEServiceMaxBufferPoolSize = 524288;
-            row.EWEServiceMaxReceivedMessageSize = 999999999;
-            row.EWEServiceReaderMaxDepth = 32;
-            row.EWEServiceReaderMaxStringContentLength = 2048000;
-            row.EWEServiceReaderMaxArrayLength = 16384;
-            row.EWEServiceReaderMaxBytesPerRead = 4096;
-            row.EWEServiceReaderMaxNameTableCharCount = 16384;
             row.DashboardFrequencyRowLimit = 200;
             row.DashboardFrequencyStrataLimit = 100;
             row.DashboardFrequencyCrosstabLimit = 100;
             row.DashboardCombinedFrequencyRowLimit = 250;
             row.DashboardAberrationRowLimit = 366;
             row.DashboardLineListRowLimit = 2000;
-
 
             #if LINUX_BUILD
             row.DefaultDataDriver = MySQLDriver;
@@ -1254,7 +1243,7 @@ namespace Epi
             result.Padding = PaddingMode.PKCS7;
 
             result.GenerateIV();
-            result.IV = new byte[] { 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48 };
+            result.IV = new byte[] { 33, 84, 103, 103, 111, 67, 68, 97, 84, 97, 71, 97, 67, 97, 80, 33 };
             string ivString = "00000000";
             byte[] bytes = new byte[ivString.Length * sizeof(char)];
             System.Buffer.BlockCopy(ivString.ToCharArray(), 0, bytes, 0, bytes.Length);

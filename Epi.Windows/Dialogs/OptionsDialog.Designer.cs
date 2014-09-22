@@ -82,15 +82,6 @@ namespace Epi.Windows.Dialogs
             this.rbNoWindows = new System.Windows.Forms.RadioButton();
             this.rbUseWindows = new System.Windows.Forms.RadioButton();
             this.lblEndpoint = new System.Windows.Forms.Label();
-            this.tabPageWebEnter = new System.Windows.Forms.TabPage();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.EWErbWSHTTP = new System.Windows.Forms.RadioButton();
-            this.EWErbBasic = new System.Windows.Forms.RadioButton();
-            this.EWEEndPointTextBox = new System.Windows.Forms.TextBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.EWErbNoWindows = new System.Windows.Forms.RadioButton();
-            this.EWErbUseWindows = new System.Windows.Forms.RadioButton();
-            this.label10 = new System.Windows.Forms.Label();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
@@ -112,9 +103,6 @@ namespace Epi.Windows.Dialogs
             this.tabPageWebSurvey.SuspendLayout();
             this.BindingGroupBox.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.tabPageWebEnter.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // baseImageList
@@ -130,7 +118,6 @@ namespace Epi.Windows.Dialogs
             this.tabControlDateTime.Controls.Add(this.tabAnalysis);
             this.tabControlDateTime.Controls.Add(this.tabPlugIns);
             this.tabControlDateTime.Controls.Add(this.tabPageWebSurvey);
-            this.tabControlDateTime.Controls.Add(this.tabPageWebEnter);
             resources.ApplyResources(this.tabControlDateTime, "tabControlDateTime");
             this.tabControlDateTime.Name = "tabControlDateTime";
             this.tabControlDateTime.SelectedIndex = 0;
@@ -444,6 +431,7 @@ namespace Epi.Windows.Dialogs
             // 
             resources.ApplyResources(this.txtEndpoint, "txtEndpoint");
             this.txtEndpoint.Name = "txtEndpoint";
+            this.txtEndpoint.Multiline = true;
             // 
             // BindingGroupBox
             // 
@@ -494,70 +482,6 @@ namespace Epi.Windows.Dialogs
             // 
             resources.ApplyResources(this.lblEndpoint, "lblEndpoint");
             this.lblEndpoint.Name = "lblEndpoint";
-            // 
-            // tabPageWebEnter
-            // 
-            this.tabPageWebEnter.Controls.Add(this.groupBox8);
-            this.tabPageWebEnter.Controls.Add(this.EWEEndPointTextBox);
-            this.tabPageWebEnter.Controls.Add(this.groupBox7);
-            this.tabPageWebEnter.Controls.Add(this.label10);
-            resources.ApplyResources(this.tabPageWebEnter, "tabPageWebEnter");
-            this.tabPageWebEnter.Name = "tabPageWebEnter";
-            this.tabPageWebEnter.UseVisualStyleBackColor = true;
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.EWErbWSHTTP);
-            this.groupBox8.Controls.Add(this.EWErbBasic);
-            resources.ApplyResources(this.groupBox8, "groupBox8");
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.TabStop = false;
-            // 
-            // EWErbWSHTTP
-            // 
-            resources.ApplyResources(this.EWErbWSHTTP, "EWErbWSHTTP");
-            this.EWErbWSHTTP.Name = "EWErbWSHTTP";
-            this.EWErbWSHTTP.TabStop = true;
-            this.EWErbWSHTTP.UseVisualStyleBackColor = true;
-            // 
-            // EWErbBasic
-            // 
-            resources.ApplyResources(this.EWErbBasic, "EWErbBasic");
-            this.EWErbBasic.Name = "EWErbBasic";
-            this.EWErbBasic.TabStop = true;
-            this.EWErbBasic.UseVisualStyleBackColor = true;
-            // 
-            // EWEEndPointTextBox
-            // 
-            resources.ApplyResources(this.EWEEndPointTextBox, "EWEEndPointTextBox");
-            this.EWEEndPointTextBox.Name = "EWEEndPointTextBox";
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.EWErbNoWindows);
-            this.groupBox7.Controls.Add(this.EWErbUseWindows);
-            resources.ApplyResources(this.groupBox7, "groupBox7");
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.TabStop = false;
-            // 
-            // EWErbNoWindows
-            // 
-            resources.ApplyResources(this.EWErbNoWindows, "EWErbNoWindows");
-            this.EWErbNoWindows.Name = "EWErbNoWindows";
-            this.EWErbNoWindows.TabStop = true;
-            this.EWErbNoWindows.UseVisualStyleBackColor = true;
-            // 
-            // EWErbUseWindows
-            // 
-            resources.ApplyResources(this.EWErbUseWindows, "EWErbUseWindows");
-            this.EWErbUseWindows.Name = "EWErbUseWindows";
-            this.EWErbUseWindows.TabStop = true;
-            this.EWErbUseWindows.UseVisualStyleBackColor = true;
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
             // 
             // btnOk
             // 
@@ -631,12 +555,6 @@ namespace Epi.Windows.Dialogs
             this.BindingGroupBox.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            this.tabPageWebEnter.ResumeLayout(false);
-            this.tabPageWebEnter.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -702,14 +620,5 @@ namespace Epi.Windows.Dialogs
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.RadioButton rbNoWindows;
         private System.Windows.Forms.RadioButton rbUseWindows;
-        private System.Windows.Forms.TabPage tabPageWebEnter;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.RadioButton EWErbWSHTTP;
-        private System.Windows.Forms.RadioButton EWErbBasic;
-        private System.Windows.Forms.TextBox EWEEndPointTextBox;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.RadioButton EWErbNoWindows;
-        private System.Windows.Forms.RadioButton EWErbUseWindows;
-        private System.Windows.Forms.Label label10;
     }
 }

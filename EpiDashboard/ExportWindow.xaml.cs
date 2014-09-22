@@ -615,11 +615,6 @@ namespace EpiDashboard
                         tcList,
                         fileName);
 
-                    if (dashboardHelper.IsUsingEpiProject)
-                    {
-                        csvExporter.IncludeDeletedRecords = false;
-                    }
-
                     if (this.useTabOrder)
                     {
                         csvExporter.ColumnSortOrder = Epi.ImportExport.ColumnSortOrder.TabOrder;

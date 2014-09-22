@@ -1,4 +1,4 @@
-﻿<ChartControls:PieChartBase x:Class="EpiDashboard.Controls.Charting.PieChart"
+﻿<ChartControls:ChartBase x:Class="EpiDashboard.Controls.Charting.PieChart"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -53,4 +53,4 @@
             </charting:PieSeries>
         </charting:PieChart>
     </Grid>
-</ChartControls:PieChartBase>
+</ChartControls:ChartBase>

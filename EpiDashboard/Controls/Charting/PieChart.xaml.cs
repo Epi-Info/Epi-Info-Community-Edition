@@ -21,19 +21,21 @@ namespace EpiDashboard.Controls.Charting
     /// <summary>
     /// Interaction logic for PieChart.xaml
     /// </summary>
-    public partial class PieChart : PieChartBase
+    public partial class PieChart : ChartBase
     {
-        //public PieChartSettings PieChartSettings { get; set; }
+        public PieChartSettings PieChartSettings { get; set; }
 
         /// <summary>
         /// The percent at which to show annotations outside of the slice it is associated with.
         /// </summary>
         public double AnnotationPercentCutoff { get; set; }
 
-        public PieChart(DashboardHelper dashboardHelper, PieChartParameters parameters, List<XYColumnChartData> dataList)
+        public PieChart(DashboardHelper dashboardHelper, GadgetParameters parameters, PieChartSettings settings, List<XYColumnChartData> dataList)
         {
             InitializeComponent();
-            PieChartParameters = parameters;
+            this.Settings = settings;
+            this.PieChartSettings = settings;
+            this.Parameters = parameters;
             this.DashboardHelper = dashboardHelper;
             SetChartProperties();
             SetChartData(dataList);
@@ -44,66 +46,13 @@ namespace EpiDashboard.Controls.Charting
         protected override void SetChartProperties()
         {
             xyChart.AnimationOnLoad = false;
-            //xyChart.Width = Settings.ChartWidth;
-            //xyChart.Height = Settings.ChartHeight;
-            //xyChart.Palette = Settings.Palette;
+            xyChart.Width = Settings.ChartWidth;
+            xyChart.Height = Settings.ChartHeight;
+            xyChart.Palette = Settings.Palette;
 
-            tblockChartTitle.Text = PieChartParameters.ChartTitle;
-            tblockSubTitle.Text = PieChartParameters.ChartSubTitle;
-            tblockStrataTitle.Text = PieChartParameters.ChartStrataTitle;
-
-            xyChart.Width = PieChartParameters.ChartWidth;
-            xyChart.Height = PieChartParameters.ChartHeight;
-
-            switch (PieChartParameters.Palette)
-            {
-                case 0:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Atlantic");
-                    break;
-                case 1:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Breeze");
-                    break;
-                case 2:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("ComponentArt");
-                    break;
-                case 3:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Deep");
-                    break;
-                case 4:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Earth");
-                    break;
-                case 5:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Evergreen");
-                    break;
-                case 6:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Heatwave");
-                    break;
-                case 7:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Montreal");
-                    break;
-                case 8:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Pastel");
-                    break;
-                case 9:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Renaissance");
-                    break;
-                case 10:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("SharePoint");
-                    break;
-                case 11:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Study");
-                    break;
-                default:
-                case 12:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantA");
-                    break;
-                case 13:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantB");
-                    break;
-                case 14:
-                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantC");
-                    break;
-            }
+            tblockChartTitle.Text = Settings.ChartTitle;
+            tblockSubTitle.Text = Settings.ChartSubTitle;
+            tblockStrataTitle.Text = Settings.ChartStrataTitle;
 
             if (string.IsNullOrEmpty(tblockChartTitle.Text)) tblockChartTitle.Visibility = System.Windows.Visibility.Collapsed;
             else tblockChartTitle.Visibility = System.Windows.Visibility.Visible;
@@ -114,15 +63,14 @@ namespace EpiDashboard.Controls.Charting
             if (string.IsNullOrEmpty(tblockStrataTitle.Text)) tblockStrataTitle.Visibility = System.Windows.Visibility.Collapsed;
             else tblockStrataTitle.Visibility = System.Windows.Visibility.Visible;
 
-            series0.ShowPointAnnotations = PieChartParameters.ShowAnnotations;
+            series0.ShowPointAnnotations = PieChartSettings.ShowAnnotations;
 
-            AnnotationPercentCutoff = PieChartParameters.AnnotationPercent;
+            AnnotationPercentCutoff = PieChartSettings.AnnotationPercent;
 
-            xyChart.ChartKind = PieChartParameters.PieChartKind;
-            xyChart.LegendDock = PieChartParameters.LegendDock;
+            xyChart.ChartKind = PieChartSettings.PieChartKind;
 
-            xyChart.LegendVisible = PieChartParameters.ShowLegend;
-            if (PieChartParameters.ShowLegendBorder == true)
+            xyChart.LegendVisible = Settings.ShowLegend;
+            if (Settings.ShowLegendBorder == true)
             {
                 xyChart.Legend.BorderThickness = new Thickness(1);
             }
@@ -131,7 +79,7 @@ namespace EpiDashboard.Controls.Charting
                 xyChart.Legend.BorderThickness = new Thickness(0);
             }
 
-            xyChart.Legend.FontSize = PieChartParameters.LegendFontSize;
+            xyChart.Legend.FontSize = Settings.LegendFontSize;
         }
 
         protected override void SetChartData(List<XYColumnChartData> dataList)
@@ -143,9 +91,9 @@ namespace EpiDashboard.Controls.Charting
         {
             series0.DataPointAnnotations.Clear();
 
-            if (PieChartParameters.ShowAnnotations == true)
+            if (PieChartSettings.ShowAnnotations == true)
             {
-                if (PieChartParameters.ShowAnnotationLabel == false && PieChartParameters.ShowAnnotationPercent == false && PieChartParameters.ShowAnnotationValue == false)
+                if (PieChartSettings.ShowAnnotationLabel == false && PieChartSettings.ShowAnnotationPercent == false && PieChartSettings.ShowAnnotationValue == false)
                 {
                     return;
                 }
@@ -157,18 +105,18 @@ namespace EpiDashboard.Controls.Charting
                     + "<Border Background=\"#70ffcece\" CornerRadius=\"4\" Padding=\"6,3,6,3\" BorderBrush=\"#FFc4c4c4\" BorderThickness=\"0.5\">"
                     + "<StackPanel Orientation=\"Vertical\" HorizontalAlignment=\"Center\">";
 
-                if (PieChartParameters.ShowAnnotationLabel == true)
+                if (PieChartSettings.ShowAnnotationLabel == true)
                 {
                     xaml = xaml + "<charting:FormattedTextBlock Margin=\".5,.5,0,0\" HorizontalAlignment=\"Center\" TextAlignment=\"Center\" Data=\"{Binding DataPoint.ActualLabel}\" Foreground=\"Black\" FontWeight=\"Bold\" FontSize=\"10.5\" />";
                 }
 
                 xaml = xaml + "<StackPanel Orientation=\"Horizontal\" HorizontalAlignment=\"Center\">";
 
-                if (PieChartParameters.ShowAnnotationValue == true)
+                if (PieChartSettings.ShowAnnotationValue == true)
                 {
                     xaml = xaml + "<TextBlock Text=\"{Binding DataPoint.Y}\" Foreground=\"Black\" FontWeight=\"Bold\" FontSize=\"10.5\" HorizontalAlignment=\"Center\"/>";
                 }
-                if (PieChartParameters.ShowAnnotationPercent == true)
+                if (PieChartSettings.ShowAnnotationPercent == true)
                 {
                     xaml += "<dvCommon:CalcContainer>"
                     + "<dvCommon:CalcContainer.Computing>"

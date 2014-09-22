@@ -2420,12 +2420,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                     }
                 }
 
-                bool changePersisted = PersistFieldChange(dialog.Field, BackupFieldAction.Change);
-
-                if (changePersisted && (nameBeforeEdit != dialog.Field.Name))
-                {
-                    ((MakeViewMainForm)this.Canvas.MainForm).EpiInterpreter.Context.UndefineVariable(nameBeforeEdit);
-                }
+                PersistFieldChange(dialog.Field, BackupFieldAction.Change);
 
                 if (promptFontBeforeEdit != dialog.Field.PromptFont)
                 {
@@ -3884,7 +3879,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
         /// GoTo
         /// </summary>
         /// <param name="pDestination">destination</param>
-        public void GoTo(string pDestination, string targetPage = "", string targetForm = "")
+        public void GoTo(string pDestination)
         {
             throw new Exception("The method or operation is not implemented.");
         }

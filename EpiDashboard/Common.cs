@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -74,72 +73,6 @@ namespace EpiDashboard
             obj.LayoutTransform = transform;
             obj.Margin = margin;
             return bmp;
-        }
-
-        public static void CopyDataViewToClipboard(DataView dv)
-        {
-            StringBuilder sb = new StringBuilder();
-            DataTable dt = dv.Table;
-
-            foreach (DataColumn dc in dt.Columns)
-            {
-                string columnName = dc.ColumnName;
-                sb.Append(columnName + "\t");
-            }
-            sb.AppendLine();
-
-            foreach(DataRow row in dt.Rows)
-            {
-                foreach (DataColumn dc in dt.Columns)
-                {
-                    object value = row[dc];
-                    sb.Append(value.ToString() + "\t");
-                }
-                sb.AppendLine();
-            }
-
-            sb.Replace("\n", "");
-            Clipboard.Clear();
-            Clipboard.SetText(sb.ToString());
-        }
-
-        public static string ConvertDataViewToHtmlString(DataView dv)
-        {
-            StringBuilder sb = new StringBuilder();
-            DataTable dt = dv.Table;
-
-            sb.AppendLine(" <tr>");
-            foreach (DataColumn dc in dt.Columns)
-            {
-                sb.AppendLine("  <th style=\"width: auto;\">");
-                sb.AppendLine("  " + dc.ColumnName);
-                sb.AppendLine("  </th>");
-            }
-            sb.AppendLine("</tr>");
-
-            foreach (DataRow row in dt.Rows)
-            {
-                sb.AppendLine(" <tr>");
-                foreach (DataColumn dc in dt.Columns)
-                {
-                    sb.AppendLine("  <td class=\"value\">");
-                    object value = row[dc];
-                    string strValue = value.ToString().Trim();
-
-                    if (String.IsNullOrEmpty(strValue))
-                    {
-                        strValue = "&nbsp;";
-                    }
-
-                    sb.Append(strValue);
-                    sb.AppendLine("  </td>");
-                }
-                sb.AppendLine(" </tr>");
-            }
-
-            sb.Replace("\n", "");
-            
-            return sb.ToString();
         }
     }
 }

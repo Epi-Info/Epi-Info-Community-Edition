@@ -46,7 +46,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsDescriptionButtonAvailable="False" IsFilterButtonAvailable="False" Text="Pie Chart" />
+                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" Text="Pie Chart" />
                 <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel" Grid.Row="2" Text="" />
                 <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
 
@@ -56,7 +56,7 @@
                 </StackPanel>
                 <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{StaticResource gadgetWaitPanelStyle}" />
 
-                <!--<StackPanel Grid.Row="1" Grid.RowSpan="7" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" >
+                <StackPanel Grid.Row="1" Grid.RowSpan="7" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" >
                     <Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" >
                         <Rectangle Style="{DynamicResource rectangleConfigOuter}" />
                         <Rectangle Style="{DynamicResource rectangleConfigInner}" />
@@ -66,7 +66,7 @@
                               Data="M 5 0 L 10 10 0 10 Z" Fill="{DynamicResource gadgetBackgroundBrush}" IsHitTestVisible="False" HorizontalAlignment="Right" VerticalAlignment="Top" Height="7" />
 
                         <StackPanel Orientation="Vertical" Margin="25, 10, 25, 25" HorizontalAlignment="Center" VerticalAlignment="Top" >
-                            <TextBlock x:Name="ConfigExpandedTitle" HorizontalAlignment="Center" TextAlignment="Center" Text="Settings" Margin="5" FontSize="13" FontWeight="Bold" />
+                            <!--<TextBlock x:Name="ConfigExpandedTitle" HorizontalAlignment="Center" TextAlignment="Center" Text="Settings" Margin="5" FontSize="13" FontWeight="Bold" />-->
                             <TextBlock x:Name="tblockMainVariable" HorizontalAlignment="Left" TextAlignment="Center" Text="Main variable:" Margin="0,5,0,0"  />
                             <ComboBox x:Name="cmbField" Width="140" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cmbField_SelectionChanged" />
 
@@ -115,7 +115,7 @@
                                             <CheckBox x:Name="checkboxCommentLegalLabels" Margin="0,5,0,0" Content="Display list labels"  HorizontalAlignment="Left" IsEnabled="false"/>
                                             <CheckBox x:Name="checkboxSortHighLow" Margin="0,5,0,0" Content="Sort high to low" HorizontalAlignment="Left" />
                                             <CheckBox x:Name="checkboxIncludeMissing" Margin="0,5,0,0" Content="Include missing values" HorizontalAlignment="Left" IsChecked="False" />
-                                            <CheckBox x:Name="checkboxConfBars" Margin="0,5,0,0" Content="Show confidence intervals" HorizontalAlignment="Left" IsChecked="False" />
+                                            <!--<CheckBox x:Name="checkboxConfBars" Margin="0,5,0,0" Content="Show confidence intervals" HorizontalAlignment="Left" IsChecked="False" />-->
                                         </StackPanel>
                                     </Grid>
                                 </Border>
@@ -143,7 +143,7 @@
                                             <CheckBox x:Name="checkboxAnnotationValue" Margin="0,5,0,0" Content="Show annotation value" HorizontalAlignment="Left" IsChecked="True" />
                                             <CheckBox x:Name="checkboxAnnotationPercent" Margin="0,5,0,0" Content="Show annotation percent" HorizontalAlignment="Left" IsChecked="True" />
 
-                                            <TextBlock x:Name="tblockBarSpacing" HorizontalAlignment="Left" TextAlignment="Center" Text="Space between bars:" Margin="0,5,0,0"  />
+                                            <!--<TextBlock x:Name="tblockBarSpacing" HorizontalAlignment="Left" TextAlignment="Center" Text="Space between bars:" Margin="0,5,0,0"  />
                                             <ComboBox x:Name="cmbBarSpacing" Width="140" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cmbBarSpacing_SelectionChanged">
                                                 <ComboBox.Items>
                                                     <ComboBoxItem>Default</ComboBoxItem>
@@ -152,7 +152,7 @@
                                                     <ComboBoxItem>Medium</ComboBoxItem>
                                                     <ComboBoxItem>Large</ComboBoxItem>
                                                 </ComboBox.Items>
-                                            </ComboBox>
+                                            </ComboBox>-->
 
                                             <TextBlock x:Name="tblockChartKind" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart kind:" Margin="0,5,0,0"  />
                                             <ComboBox x:Name="cmbChartKind" Width="140" HorizontalAlignment="Left" SelectedIndex="0">
@@ -188,7 +188,7 @@
                                             <TextBlock x:Name="tblockAnnotationPercent" HorizontalAlignment="Left" TextAlignment="Center" Text="Annotation percent:" Margin="0,5,0,0"  />
                                             <TextBox x:Name="txtAnnotationPercent" HorizontalAlignment="Stretch" Text="20" />
 
-                                            <TextBlock x:Name="tblockBarType" HorizontalAlignment="Left" TextAlignment="Center" Text="Bar type:" Margin="0,5,0,0"  />
+                                            <!--<TextBlock x:Name="tblockBarType" HorizontalAlignment="Left" TextAlignment="Center" Text="Bar type:" Margin="0,5,0,0"  />
                                             <ComboBox x:Name="cmbBarType" Width="140" HorizontalAlignment="Left" SelectedIndex="2" SelectionChanged="cmbBarType_SelectionChanged">
                                                 <ComboBox.Items>
                                                     <ComboBoxItem>Block</ComboBoxItem>
@@ -196,14 +196,14 @@
                                                     <ComboBoxItem>Rectangle</ComboBoxItem>
                                                     <ComboBoxItem>RoundedBlock</ComboBoxItem>
                                                 </ComboBox.Items>
-                                            </ComboBox>
+                                            </ComboBox>-->
                                         </StackPanel>
                                     </Border>
 
                                     <Border Style="{StaticResource configGroupBorderStyle}" Grid.Column="2">
                                         <StackPanel Grid.Column="2">
                                             <Label x:Name="lblLabels" FontWeight="Bold">Labels</Label>
-                                            <TextBlock x:Name="tblockYAxisLabelValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis label:" Margin="0,5,0,0"  />
+                                            <!--<TextBlock x:Name="tblockYAxisLabelValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis label:" Margin="0,5,0,0"  />
                                             <TextBox x:Name="txtYAxisLabelValue" HorizontalAlignment="Stretch" Text="Count" />
 
                                             <TextBlock x:Name="tblockXAxisLabelType" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis label type:" Margin="0,5,0,0"  />
@@ -220,7 +220,7 @@
                                             <TextBox x:Name="txtXAxisLabelValue" HorizontalAlignment="Stretch" Text="" IsEnabled="False" />
 
                                             <TextBlock x:Name="tblockXAxisAngle" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis angle:" Margin="0,5,0,0"  />
-                                            <TextBox x:Name="txtXAxisAngle" HorizontalAlignment="Stretch" Text="0" />
+                                            <TextBox x:Name="txtXAxisAngle" HorizontalAlignment="Stretch" Text="0" />-->
 
                                             <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart title:" Margin="0,5,0,0"  />
                                             <TextBox x:Name="txtChartTitle" AcceptsReturn="True" TextWrapping="Wrap" MinWidth="120" HorizontalAlignment="Stretch" />
@@ -240,14 +240,14 @@
                                             <TextBlock x:Name="tblockLegendFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend font size:" Margin="0,5,0,0"  />
                                             <TextBox x:Name="txtLegendFontSize" HorizontalAlignment="Stretch" Text="12" />
 
-                                            <TextBlock x:Name="tblockLegendFontFamily" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend font family:" Margin="0,5,0,0" />
+                                            <!--<TextBlock x:Name="tblockLegendFontFamily" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend font family:" Margin="0,5,0,0" />
                                             <ComboBox Width="140" x:Name="cmbFontSelector" HorizontalAlignment="Left" SelectionChanged="cmbFontSelector_SelectionChanged">
                                                 <ComboBox.ItemTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Text="{Binding}" FontFamily="{Binding}"/>
                                                     </DataTemplate>
                                                 </ComboBox.ItemTemplate>
-                                            </ComboBox>
+                                            </ComboBox>-->
                                         </StackPanel>
                                     </Border>
                                 </Grid>
@@ -255,7 +255,7 @@
                             <Button x:Name="btnRun" Content="Run" Margin="0,20,0,0" Click="btnRun_Click" />
                         </StackPanel>
                     </Grid>
-                </StackPanel>-->
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>

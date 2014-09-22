@@ -30,7 +30,6 @@
 
 
 
-
 namespace Microsoft.Samples.EntityDataReader
 {
   using System;

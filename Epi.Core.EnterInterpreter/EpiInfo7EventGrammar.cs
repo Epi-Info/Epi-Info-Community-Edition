@@ -344,16 +344,10 @@ namespace Epi.Core.EnterInterpreter
         private void ParseErrorEvent(LALRParser parser, ParseErrorEventArgs args)
         {
             Context.ExpectedTokens = args.ExpectedTokens.ToString();
-            
-            if (args.NextToken != null)
-            {
-                Context.NextToken = args.NextToken.ToString();
-            }
-            
+            if(args.NextToken!=null)
+            Context.NextToken = args.NextToken.ToString();
             if (args.UnexpectedToken != null)
-            {
-                Context.UnexpectedToken = args.UnexpectedToken.ToString();
-            }
+            Context.UnexpectedToken = args.UnexpectedToken.ToString();
 
             throw new ParseException(args);
         }

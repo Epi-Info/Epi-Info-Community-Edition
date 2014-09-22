@@ -35,7 +35,6 @@ namespace EpiDashboard
             WeightVariableName = string.Empty;
             CrosstabVariableName = string.Empty;
             Y2AxisType = 0;
-            Y2IsCumulativePercent = true;
             //Parameters.Y2AxisVariable ==> ColumnNames[1]
             //  Sorting/Grouping
             StrataVariableNames = new List<string>();
@@ -58,7 +57,7 @@ namespace EpiDashboard
             BarSpace = BarSpacing.Default;
             Orientation = Orientation.Vertical;
             Palette = 12;
-            BarKind = BarKind.Rectangle;
+            BarType = BarKind.Block;
             Y2LineDashStyle = LineDashStyle.Solid;
             Y2LineThickness = 2;
             //  Labels

@@ -1504,7 +1504,6 @@ namespace Epi.Windows.Enter
                 mnuImportFromWeb.Enabled = false;
                 mnuImportFromDataPackage.Enabled = false;
                 mnuPackageForTransport.Enabled = false;
-                fromWebEnterToolStripMenuItem.Enabled = false;
                 newRecordToolStripMenuItem.Enabled = false;
                 saveToolStripMenuItem.Enabled = false;
                 editViewToolStripMenuItem.Enabled = false;
@@ -1539,7 +1538,6 @@ namespace Epi.Windows.Enter
                 mnuImportFromWeb.Enabled = true;
                 mnuImportFromDataPackage.Enabled = true;
                 mnuPackageForTransport.Enabled = true;
-                fromWebEnterToolStripMenuItem.Enabled = true;
                 editViewToolStripMenuItem.Enabled = true;
                 findToolStripMenuItem.Enabled = true;
                 printToolStripMenuItem.Enabled = true;
@@ -1834,118 +1832,6 @@ namespace Epi.Windows.Enter
         /// Closes current view
         /// </summary>
         public bool CloseView()
-        {
-            // Get a confirmation from the user
-            if (this.CloseViewEvent != null)
-            {
-                this.CloseViewEvent(this, new EventArgs());
-                SetWindowTitle();
-            }
-
-            return true;
-        }
-
-        public bool OpenView(string openViewName)
-        {
-            if (this.CloseViewEvent != null)
-            {
-                if (this.currentProject.Views.Contains(openViewName) == true)
-                {
-                    View targetView = this.currentProject.Views[openViewName];
-
-                    if (targetView.IsHomeParentOf(view))
-                    {
-                        this.CloseViewEvent(true, new EventArgs());
-                    }
-                    else if (targetView.IsParentOf(view))
-                    {
-                        this.CloseViewEvent(false, new EventArgs());
-                    }
-                    else
-                    {
-
-
-                        string currentViewName = string.Empty;
-                        string currentProject = string.Empty;
-
-                        bool shouldCheckRequiredFields = true;
-
-                        if (this.view != null)
-                        {
-                            if (!ContinueChangeRecord)
-                            {
-                                MsgBox.ShowWarning(SharedStrings.CANNOT_CLOSE_RECORD_INVALID_DATA);
-
-                            }
-
-                            mediator.SetFieldData();
-                            if (View.IsEmptyNewRecord() == false)
-                            {
-                                if (shouldCheckRequiredFields == true)
-                                {
-                                    bool allRequiredsComplete = mediator.CheckViewRequiredFields();
-
-                                    if (allRequiredsComplete == false)
-                                    {
-
-                                    }
-                                }
-                            }
-
-                            currentViewName = this.view.Name;
-                            currentProject = this.view.GetProject().FullName;
-
-                            //if (View.Text.Substring(View.Text.LastIndexOf(":") + 1) != currentViewName && currentProject.ToLower() != View.Text.ToLower())
-                            //{
-                            //    if (!CloseView())
-                            //    {
-                            //        //return;
-                            //    }
-                            //}
-
-                            this.CloseViewEvent(this, new EventArgs());
-
-                        }
-
-
-                        View methodView = CurrentProject.Metadata.GetViewByFullName(openViewName);
-
-                        if (methodView == null)
-                        {
-                            string name = string.Empty;
-                            if (openViewName.Length > 3)
-                            {
-                                name = openViewName.Remove(0, 3);
-                            }
-                            else
-                            {
-                                name = openViewName;
-                            }
-
-                            MsgBox.ShowError(string.Format(SharedStrings.ERROR_LOADING_VIEW, name));
-                        }
-                        else if (!methodView.IsRelatedView)
-                        {
-                            if (this.OpenViewEvent != null)
-                            {
-                                this.View = methodView;
-                                this.OpenViewEvent(this, new Epi.Windows.Enter.PresentationLogic.OpenViewEventArgs(methodView));
-                            }
-                        }
-                        else
-                        {
-                            MsgBox.ShowInformation(SharedStrings.CANNOT_OPEN_VIEW_RELATED);
-                        }
-
-                        SetWindowTitle();
-                    }
-                }
-            }
-
-            return true;
-        }
-
-        public bool OpenPage(string pageName, string formName = "")
         {
             // Get a confirmation from the user
             if (this.CloseViewEvent != null)
@@ -2549,46 +2435,7 @@ namespace Epi.Windows.Enter
                 }
             }
         }
-        private void ImportFormDataFromWebEnter(View destinationView)
-            {
-            if (destinationView.IsRelatedView)
-                {
-                return;
-                }
 
-            Epi.Enter.Forms.ImportWebEnterDataForm importWebDataForm = new Epi.Enter.Forms.ImportWebEnterDataForm(destinationView);
-            DialogResult result = importWebDataForm.ShowDialog();
-
-            if (result == System.Windows.Forms.DialogResult.OK)
-                {
-                if (this.View != null)
-                    {
-                    if (IsRecordCloseable == false)
-                        {
-                        return;
-                        }
-
-                    if (CloseView() == false)
-                        {
-                        return;
-                        }
-                    }
-
-                this.view = destinationView;
-
-                Project project = view.Project;
-
-                if (!project.CollectedData.TableExists(view.TableName))
-                    {
-                    MsgBox.ShowError("Something that should never fail has failed.");
-                    }
-
-                if (this.OpenViewEvent != null)
-                    {
-                    this.OpenViewEvent(this, new Epi.Windows.Enter.PresentationLogic.OpenViewEventArgs(view));
-                    }
-                }
-            }
         /// <summary>
         /// Imports data from an Android phone.
         /// </summary>
@@ -2899,9 +2746,5 @@ namespace Epi.Windows.Enter
             {
             }
         }
- private void fromWebEnterToolStripMenuItem_Click(object sender, EventArgs e)
-            {
-            ImportFormDataFromWebEnter(this.view);
-            }
     }
 }

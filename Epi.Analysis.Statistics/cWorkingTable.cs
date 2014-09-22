@@ -653,21 +653,10 @@ namespace Epi.Analysis.Statistics
             }
             DataRow[] ALLROWS = FullTable.Select();
             i = 0;
-            if (FullTable.Columns.Count > 1)
+            foreach (System.Data.DataRow R in ALLROWS)
             {
-                foreach (System.Data.DataRow R in ALLROWS)
-                {
-                    if (R[1].ToString().Equals(pColumnName) || pColumnName.Equals("__Count__"))
-                        i++;
-                }
-            }
-            else
-            {
-                foreach (System.Data.DataRow R in ALLROWS)
-                {
-                    if (R[0].ToString().Equals(pColumnName) || pColumnName.Equals("__Count__"))
-                        i++;
-                }
+                if (R[1].ToString().Equals(pColumnName) || pColumnName.Equals("__Count__"))
+                    i++;
             }
 
             result.Variance = result.Sum_Sqr / (i - 1);
