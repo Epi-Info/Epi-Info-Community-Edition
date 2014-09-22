@@ -5,20 +5,16 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="IsEnabled" type="xs:boolean" />
       <xs:element minOccurs="0" name="Organization" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrganizationId" type="xs:int" />
       <xs:element minOccurs="0" name="OrganizationKey" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrganizationDTO" nillable="true" type="tns:OrganizationDTO" />
-  <xs:complexType name="ArrayOfOrganizationDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrganizationDTO" nillable="true" type="tns:OrganizationDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfOrganizationDTO" nillable="true" type="tns:ArrayOfOrganizationDTO" />
   <xs:complexType name="UserDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.Constants" minOccurs="0" name="Operation" type="q1:Constant.OperationMode" />
       <xs:element minOccurs="0" name="PasswordHash" nillable="true" type="xs:string" />
@@ -30,4 +26,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UserDTO" nillable="true" type="tns:UserDTO" />
+  <xs:complexType name="ArrayOfOrganizationDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrganizationDTO" nillable="true" type="tns:OrganizationDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrganizationDTO" nillable="true" type="tns:ArrayOfOrganizationDTO" />
+  <xs:complexType name="ArrayOfUserDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserDTO" nillable="true" type="tns:UserDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserDTO" nillable="true" type="tns:ArrayOfUserDTO" />
 </xs:schema>

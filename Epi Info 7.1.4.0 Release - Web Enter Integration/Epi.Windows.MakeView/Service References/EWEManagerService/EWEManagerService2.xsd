@@ -211,4 +211,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SetSurveyAnswer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://www.yourcompany.com/types/" minOccurs="0" name="pRequestMessage" nillable="true" type="q29:PreFilledAnswerRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetSurveyAnswerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://www.yourcompany.com/types/" minOccurs="0" name="SetSurveyAnswerResult" nillable="true" type="q30:PreFilledAnswerResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
