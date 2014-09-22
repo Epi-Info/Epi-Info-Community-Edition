@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAC
-        4gAAAk1TRnQBSQFMAgEBYQEAAWMBAAHkAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        4gAAAk1TRnQBSQFMAgEBYQEAAWMBAAH8AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABXgEBAgABAQEAASAGAAFeAQH/AP8AEwABvQGcAXsF/wG9AZwBhAX/Ab0BnAF7Bf8BvQGcAYQF/wG9
         AZwBewX/Ab0BnAGEBf8BvQGcAXsF/wG9AZwBhAH/xAA8/8QAAb0BnAGECf8BvQGlAYQB/wG9AZwBhAH/
         Ab0BpQGEBf8BvQGlAYQB/wG9AZwBhAH/Ab0BpQGEEf8BvQGcAXsB/8QACP8BxgGlAYQJ/wG9AZwBhAX/
@@ -1126,7 +1126,7 @@
     <value>enterDockManager</value>
   </data>
   <data name="&gt;&gt;enterDockManager.Type" xml:space="preserve">
-    <value>Epi.Windows.Docking.DockManager, Epi.Windows, Version=7.1.5064.25743, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Docking.DockManager, Epi.Windows, Version=7.1.5345.24398, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;enterDockManager.Parent" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -1252,7 +1252,7 @@
     <value>False</value>
   </data>
   <data name="mnuImportFromPhone.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuImportFromPhone.Text" xml:space="preserve">
     <value>From mobile device...</value>
@@ -1261,7 +1261,7 @@
     <value>False</value>
   </data>
   <data name="mnuImportFromWeb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuImportFromWeb.Text" xml:space="preserve">
     <value>From web...</value>
@@ -1270,7 +1270,7 @@
     <value>False</value>
   </data>
   <data name="mnuImportFromForm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuImportFromForm.Text" xml:space="preserve">
     <value>From form...</value>
@@ -1279,10 +1279,19 @@
     <value>False</value>
   </data>
   <data name="mnuImportFromDataPackage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
+    <value>188, 22</value>
   </data>
   <data name="mnuImportFromDataPackage.Text" xml:space="preserve">
     <value>From data package...</value>
+  </data>
+  <data name="fromWebEnterToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="fromWebEnterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="fromWebEnterToolStripMenuItem.Text" xml:space="preserve">
+    <value>From Web Enter</value>
   </data>
   <data name="importDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
@@ -4084,6 +4093,12 @@
   <data name="&gt;&gt;mnuImportFromDataPackage.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;fromWebEnterToolStripMenuItem.Name" xml:space="preserve">
+    <value>fromWebEnterToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;fromWebEnterToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuPackageForTransport.Name" xml:space="preserve">
     <value>mnuPackageForTransport</value>
   </data>
@@ -4214,6 +4229,12 @@
     <value>enableCheckCodeErrorSupressionToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;enableCheckCodeErrorSupressionToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;copyShortcutToClipboardToolStripMenuItem.Name" xml:space="preserve">
+    <value>copyShortcutToClipboardToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;copyShortcutToClipboardToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
@@ -4414,16 +4435,10 @@
   <data name="&gt;&gt;btiHelp.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;copyShortcutToClipboardToolStripMenuItem.Name" xml:space="preserve">
-    <value>copyShortcutToClipboardToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;copyShortcutToClipboardToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EnterMainForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.MainForm, Epi.Windows, Version=7.1.5064.25743, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.MainForm, Epi.Windows, Version=7.1.5345.24398, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
