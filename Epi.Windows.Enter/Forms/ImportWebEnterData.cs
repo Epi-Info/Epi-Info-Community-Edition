@@ -505,9 +505,11 @@ namespace Epi.Enter.Forms
                 int ViewId = surveyAnswer.Value.Select(x => x.Value.ViewId).ToList().First();
 
                 View NewView = destinationProject.GetViewById(ViewId);
+                if (NewView != null)
+                { 
                 destinationView = NewView;
 
-
+                }
                 destinationTable = destinationView.TableName;
                 QueryParameter paramRecordStatus = new QueryParameter("@RECSTATUS", DbType.Int32, 1);
 
@@ -848,7 +850,10 @@ namespace Epi.Enter.Forms
                     int ViewId = kvp.Value.Select(x => x.Value.ViewId).ToList().First();
 
                     View NewView = destinationProject.GetViewById(ViewId);
+                    if (NewView != null)
+                        {
                     destinationView = NewView;
+                        }
                     string currentGUID = string.Empty;
                     string lastGUID = string.Empty;
 
