@@ -923,7 +923,7 @@
     <value>settingsPanel</value>
   </data>
   <data name="&gt;&gt;settingsPanel.Type" xml:space="preserve">
-    <value>Epi.Windows.Controls.SettingsPanel, Epi.Windows, Version=7.1.4875.14851, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Controls.SettingsPanel, Epi.Windows, Version=7.1.5329.16378, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;settingsPanel.Parent" xml:space="preserve">
     <value>tabAnalysis</value>
@@ -1186,20 +1186,20 @@
   <data name="txtEndpoint.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 20</value>
   </data>
+  <data name="txtEndpoint.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="txtEndpoint.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 78</value>
   </data>
   <data name="txtEndpoint.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="txtEndpoint.Text" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;txtEndpoint.Name" xml:space="preserve">
     <value>txtEndpoint</value>
   </data>
   <data name="&gt;&gt;txtEndpoint.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtEndpoint.Parent" xml:space="preserve">
     <value>tabPageWebSurvey</value>
@@ -1423,6 +1423,252 @@
   <data name="&gt;&gt;tabPageWebSurvey.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="EWErbWSHTTP.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="EWErbWSHTTP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="EWErbWSHTTP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>62, 19</value>
+  </data>
+  <data name="EWErbWSHTTP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="EWErbWSHTTP.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="EWErbWSHTTP.Text" xml:space="preserve">
+    <value>wsHTTP</value>
+  </data>
+  <data name="&gt;&gt;EWErbWSHTTP.Name" xml:space="preserve">
+    <value>EWErbWSHTTP</value>
+  </data>
+  <data name="&gt;&gt;EWErbWSHTTP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EWErbWSHTTP.Parent" xml:space="preserve">
+    <value>groupBox8</value>
+  </data>
+  <data name="&gt;&gt;EWErbWSHTTP.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="EWErbBasic.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="EWErbBasic.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="EWErbBasic.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="EWErbBasic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 17</value>
+  </data>
+  <data name="EWErbBasic.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="EWErbBasic.Text" xml:space="preserve">
+    <value>basic</value>
+  </data>
+  <data name="&gt;&gt;EWErbBasic.Name" xml:space="preserve">
+    <value>EWErbBasic</value>
+  </data>
+  <data name="&gt;&gt;EWErbBasic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EWErbBasic.Parent" xml:space="preserve">
+    <value>groupBox8</value>
+  </data>
+  <data name="&gt;&gt;EWErbBasic.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>258, 110</value>
+  </data>
+  <data name="groupBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 55</value>
+  </data>
+  <data name="groupBox8.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="groupBox8.Text" xml:space="preserve">
+    <value>Binding Protocol</value>
+  </data>
+  <data name="&gt;&gt;groupBox8.Name" xml:space="preserve">
+    <value>groupBox8</value>
+  </data>
+  <data name="&gt;&gt;groupBox8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox8.Parent" xml:space="preserve">
+    <value>tabPageWebEnter</value>
+  </data>
+  <data name="&gt;&gt;groupBox8.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="EWEEndPointTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 26</value>
+  </data>
+  <data name="EWEEndPointTextBox.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="EWEEndPointTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>410, 78</value>
+  </data>
+  <data name="EWEEndPointTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;EWEEndPointTextBox.Name" xml:space="preserve">
+    <value>EWEEndPointTextBox</value>
+  </data>
+  <data name="&gt;&gt;EWEEndPointTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EWEEndPointTextBox.Parent" xml:space="preserve">
+    <value>tabPageWebEnter</value>
+  </data>
+  <data name="&gt;&gt;EWEEndPointTextBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="EWErbNoWindows.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="EWErbNoWindows.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="EWErbNoWindows.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 19</value>
+  </data>
+  <data name="EWErbNoWindows.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 17</value>
+  </data>
+  <data name="EWErbNoWindows.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="EWErbNoWindows.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="&gt;&gt;EWErbNoWindows.Name" xml:space="preserve">
+    <value>EWErbNoWindows</value>
+  </data>
+  <data name="&gt;&gt;EWErbNoWindows.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EWErbNoWindows.Parent" xml:space="preserve">
+    <value>groupBox7</value>
+  </data>
+  <data name="&gt;&gt;EWErbNoWindows.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="EWErbUseWindows.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="EWErbUseWindows.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="EWErbUseWindows.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="EWErbUseWindows.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 17</value>
+  </data>
+  <data name="EWErbUseWindows.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="EWErbUseWindows.Text" xml:space="preserve">
+    <value>Yes (requires basic protocol)</value>
+  </data>
+  <data name="&gt;&gt;EWErbUseWindows.Name" xml:space="preserve">
+    <value>EWErbUseWindows</value>
+  </data>
+  <data name="&gt;&gt;EWErbUseWindows.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EWErbUseWindows.Parent" xml:space="preserve">
+    <value>groupBox7</value>
+  </data>
+  <data name="&gt;&gt;EWErbUseWindows.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 110</value>
+  </data>
+  <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 55</value>
+  </data>
+  <data name="groupBox7.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="groupBox7.Text" xml:space="preserve">
+    <value>Connect using Windows Authentication?</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.Name" xml:space="preserve">
+    <value>groupBox7</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.Parent" xml:space="preserve">
+    <value>tabPageWebEnter</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 9</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="label10.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Endpoint address:</value>
+  </data>
+  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+    <value>label10</value>
+  </data>
+  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
+    <value>tabPageWebEnter</value>
+  </data>
+  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tabPageWebEnter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageWebEnter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>440, 413</value>
+  </data>
+  <data name="tabPageWebEnter.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="tabPageWebEnter.Text" xml:space="preserve">
+    <value>Web Enter</value>
+  </data>
+  <data name="&gt;&gt;tabPageWebEnter.Name" xml:space="preserve">
+    <value>tabPageWebEnter</value>
+  </data>
+  <data name="&gt;&gt;tabPageWebEnter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageWebEnter.Parent" xml:space="preserve">
+    <value>tabControlDateTime</value>
+  </data>
+  <data name="&gt;&gt;tabPageWebEnter.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="tabControlDateTime.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 12</value>
   </data>
@@ -1628,6 +1874,6 @@
     <value>OptionsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.4875.14851, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5329.16378, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

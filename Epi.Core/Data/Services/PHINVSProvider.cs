@@ -10,6 +10,7 @@ namespace Epi.Data.Services
     /// </summary>
 	public class PHINVSProvider
     {
+
         #region Fields
         private IDbDriver db;
         private static PHINVSProvider instance;

@@ -22,6 +22,7 @@ using Epi.Windows.Globalization.Translators;
 
 namespace Epi.Windows.Dialogs
 {
+
 	/// <summary>
 	/// Dialog for setting system options
 	/// </summary>
@@ -434,6 +435,14 @@ namespace Epi.Windows.Dialogs
                 {
                     rbNoWindows.Checked = true;
                 }
+                if (config.Settings.EWEServiceAuthMode == 1)
+                    {
+                    EWErbUseWindows.Checked = true;
+                    }
+                else
+                    {
+                    EWErbNoWindows.Checked = true;
+                    }
             //}
 
                 try
@@ -446,6 +455,14 @@ namespace Epi.Windows.Dialogs
                     {
                         rbBasic.Checked = true;
                     }
+                    if (config.Settings.EWEServiceBindingMode == "wshttp")
+                        {
+                        EWErbWSHTTP.Checked = true;
+                        }
+                    else
+                        {
+                        EWErbBasic.Checked = true;
+                        }
                 }
                 catch (Exception ex)
                 {
@@ -453,6 +470,7 @@ namespace Epi.Windows.Dialogs
                 }
 
             txtEndpoint.Text = config.Settings.WebServiceEndpointAddress;
+            EWEEndPointTextBox.Text = config.Settings.EWEServiceEndpointAddress;
 		}
 
         private void LoadLanguages()
@@ -546,6 +564,14 @@ namespace Epi.Windows.Dialogs
                 config.Settings.WebServiceAuthMode = 0;
             }
 
+            if (EWErbUseWindows.Checked)
+                {
+                config.Settings.EWEServiceAuthMode = 1;
+                }
+            else
+                {
+                config.Settings.EWEServiceAuthMode = 0;
+                }
 
             if (rbWSHTTP.Checked)
             {
@@ -555,8 +581,16 @@ namespace Epi.Windows.Dialogs
             {
                 config.Settings.WebServiceBindingMode = "basic";
             }
+            if (EWErbWSHTTP.Checked)
+                {
+                config.Settings.EWEServiceBindingMode = "wshttp";
+                }
+            else
+                {
+                config.Settings.EWEServiceBindingMode = "basic";
+                }
             config.Settings.WebServiceEndpointAddress = txtEndpoint.Text;
-
+            config.Settings.EWEServiceEndpointAddress = this.EWEEndPointTextBox.Text;
             // Default data driver
             config.Settings.DefaultDataDriver = cmbDatabaseFormat.SelectedValue.ToString();
 

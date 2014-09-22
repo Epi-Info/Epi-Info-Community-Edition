@@ -16,6 +16,7 @@ using Epi.Resources;
 
 namespace Epi.Data.Services
 {
+
     /// <summary>
     /// Xml implementation of Metadata provider
     /// </summary>
@@ -565,6 +566,28 @@ namespace Epi.Data.Services
                 throw new GeneralException("Could not retrieve view", ex);
             }
         }
+
+        /// <summary>
+        /// Gets a view object based on view id
+        /// </summary>
+        /// <param name="viewId">Id of the view</param>
+        /// <returns>A view object</returns>
+        public DataTable GetPublishedViewKeys(int viewId)
+            {
+            try
+                {
+                Query query = db.CreateQuery("select [EIWSOrganizationKey] ,[EIWSFormId] ,[EWEOrganizationKey] ,[EWEFormId]  " +
+                    "from metaViews " +
+                    "where [ViewId] = @ViewId");
+                query.Parameters.Add(new QueryParameter("@ViewId", DbType.Int32, viewId));
+                DataTable results = db.Select(query);
+                return results;
+                }
+            catch (Exception ex)
+                {
+                throw new GeneralException("Could not retrieve view", ex);
+                }
+            }
 
         /// <summary>
         /// Gets a view's record check code for the "After" event

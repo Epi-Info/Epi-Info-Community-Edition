@@ -7237,6 +7237,26 @@ namespace Epi.DataSets {
             
             private global::System.Data.DataColumn columnDateTimeFormat;
             
+            private global::System.Data.DataColumn columnEWEServiceEndpointAddress;
+            
+            private global::System.Data.DataColumn columnEWEServiceAuthMode;
+            
+            private global::System.Data.DataColumn columnEWEServiceReaderMaxArrayLength;
+            
+            private global::System.Data.DataColumn columnEWEServiceReaderMaxBytesPerRead;
+            
+            private global::System.Data.DataColumn columnEWEServiceReaderMaxNameTableCharCount;
+            
+            private global::System.Data.DataColumn columnEWEServiceBindingMode;
+            
+            private global::System.Data.DataColumn columnEWEServiceMaxBufferPoolSize;
+            
+            private global::System.Data.DataColumn columnEWEServiceMaxReceivedMessageSize;
+            
+            private global::System.Data.DataColumn columnEWEServiceReaderMaxDepth;
+            
+            private global::System.Data.DataColumn columnEWEServiceReaderMaxStringContentLength;
+            
             private global::System.Data.DataColumn columnWebServiceEndpointAddress;
             
             private global::System.Data.DataColumn columnWebServiceAuthMode;
@@ -7748,6 +7768,86 @@ namespace Epi.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EWEServiceEndpointAddressColumn {
+                get {
+                    return this.columnEWEServiceEndpointAddress;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EWEServiceAuthModeColumn {
+                get {
+                    return this.columnEWEServiceAuthMode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EWEServiceReaderMaxArrayLengthColumn {
+                get {
+                    return this.columnEWEServiceReaderMaxArrayLength;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EWEServiceReaderMaxBytesPerReadColumn {
+                get {
+                    return this.columnEWEServiceReaderMaxBytesPerRead;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EWEServiceReaderMaxNameTableCharCountColumn {
+                get {
+                    return this.columnEWEServiceReaderMaxNameTableCharCount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EWEServiceBindingModeColumn {
+                get {
+                    return this.columnEWEServiceBindingMode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EWEServiceMaxBufferPoolSizeColumn {
+                get {
+                    return this.columnEWEServiceMaxBufferPoolSize;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EWEServiceMaxReceivedMessageSizeColumn {
+                get {
+                    return this.columnEWEServiceMaxReceivedMessageSize;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EWEServiceReaderMaxDepthColumn {
+                get {
+                    return this.columnEWEServiceReaderMaxDepth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EWEServiceReaderMaxStringContentLengthColumn {
+                get {
+                    return this.columnEWEServiceReaderMaxStringContentLength;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn WebServiceEndpointAddressColumn {
                 get {
                     return this.columnWebServiceEndpointAddress;
@@ -8014,6 +8114,16 @@ namespace Epi.DataSets {
                         string DateFormat, 
                         string TimeFormat, 
                         string DateTimeFormat, 
+                        string EWEServiceEndpointAddress, 
+                        int EWEServiceAuthMode, 
+                        int EWEServiceReaderMaxArrayLength, 
+                        int EWEServiceReaderMaxBytesPerRead, 
+                        int EWEServiceReaderMaxNameTableCharCount, 
+                        string EWEServiceBindingMode, 
+                        int EWEServiceMaxBufferPoolSize, 
+                        int EWEServiceMaxReceivedMessageSize, 
+                        int EWEServiceReaderMaxDepth, 
+                        int EWEServiceReaderMaxStringContentLength, 
                         string WebServiceEndpointAddress, 
                         int WebServiceAuthMode, 
                         int WebServiceMaxBufferPoolSize, 
@@ -8092,6 +8202,16 @@ namespace Epi.DataSets {
                         DateFormat,
                         TimeFormat,
                         DateTimeFormat,
+                        EWEServiceEndpointAddress,
+                        EWEServiceAuthMode,
+                        EWEServiceReaderMaxArrayLength,
+                        EWEServiceReaderMaxBytesPerRead,
+                        EWEServiceReaderMaxNameTableCharCount,
+                        EWEServiceBindingMode,
+                        EWEServiceMaxBufferPoolSize,
+                        EWEServiceMaxReceivedMessageSize,
+                        EWEServiceReaderMaxDepth,
+                        EWEServiceReaderMaxStringContentLength,
                         WebServiceEndpointAddress,
                         WebServiceAuthMode,
                         WebServiceMaxBufferPoolSize,
@@ -8190,6 +8310,16 @@ namespace Epi.DataSets {
                 this.columnDateFormat = base.Columns["DateFormat"];
                 this.columnTimeFormat = base.Columns["TimeFormat"];
                 this.columnDateTimeFormat = base.Columns["DateTimeFormat"];
+                this.columnEWEServiceEndpointAddress = base.Columns["EWEServiceEndpointAddress"];
+                this.columnEWEServiceAuthMode = base.Columns["EWEServiceAuthMode"];
+                this.columnEWEServiceReaderMaxArrayLength = base.Columns["EWEServiceReaderMaxArrayLength"];
+                this.columnEWEServiceReaderMaxBytesPerRead = base.Columns["EWEServiceReaderMaxBytesPerRead"];
+                this.columnEWEServiceReaderMaxNameTableCharCount = base.Columns["EWEServiceReaderMaxNameTableCharCount"];
+                this.columnEWEServiceBindingMode = base.Columns["EWEServiceBindingMode"];
+                this.columnEWEServiceMaxBufferPoolSize = base.Columns["EWEServiceMaxBufferPoolSize"];
+                this.columnEWEServiceMaxReceivedMessageSize = base.Columns["EWEServiceMaxReceivedMessageSize"];
+                this.columnEWEServiceReaderMaxDepth = base.Columns["EWEServiceReaderMaxDepth"];
+                this.columnEWEServiceReaderMaxStringContentLength = base.Columns["EWEServiceReaderMaxStringContentLength"];
                 this.columnWebServiceEndpointAddress = base.Columns["WebServiceEndpointAddress"];
                 this.columnWebServiceAuthMode = base.Columns["WebServiceAuthMode"];
                 this.columnWebServiceMaxBufferPoolSize = base.Columns["WebServiceMaxBufferPoolSize"];
@@ -8325,6 +8455,26 @@ namespace Epi.DataSets {
                 base.Columns.Add(this.columnTimeFormat);
                 this.columnDateTimeFormat = new global::System.Data.DataColumn("DateTimeFormat", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDateTimeFormat);
+                this.columnEWEServiceEndpointAddress = new global::System.Data.DataColumn("EWEServiceEndpointAddress", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEWEServiceEndpointAddress);
+                this.columnEWEServiceAuthMode = new global::System.Data.DataColumn("EWEServiceAuthMode", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEWEServiceAuthMode);
+                this.columnEWEServiceReaderMaxArrayLength = new global::System.Data.DataColumn("EWEServiceReaderMaxArrayLength", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEWEServiceReaderMaxArrayLength);
+                this.columnEWEServiceReaderMaxBytesPerRead = new global::System.Data.DataColumn("EWEServiceReaderMaxBytesPerRead", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEWEServiceReaderMaxBytesPerRead);
+                this.columnEWEServiceReaderMaxNameTableCharCount = new global::System.Data.DataColumn("EWEServiceReaderMaxNameTableCharCount", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEWEServiceReaderMaxNameTableCharCount);
+                this.columnEWEServiceBindingMode = new global::System.Data.DataColumn("EWEServiceBindingMode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEWEServiceBindingMode);
+                this.columnEWEServiceMaxBufferPoolSize = new global::System.Data.DataColumn("EWEServiceMaxBufferPoolSize", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEWEServiceMaxBufferPoolSize);
+                this.columnEWEServiceMaxReceivedMessageSize = new global::System.Data.DataColumn("EWEServiceMaxReceivedMessageSize", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEWEServiceMaxReceivedMessageSize);
+                this.columnEWEServiceReaderMaxDepth = new global::System.Data.DataColumn("EWEServiceReaderMaxDepth", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEWEServiceReaderMaxDepth);
+                this.columnEWEServiceReaderMaxStringContentLength = new global::System.Data.DataColumn("EWEServiceReaderMaxStringContentLength", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEWEServiceReaderMaxStringContentLength);
                 this.columnWebServiceEndpointAddress = new global::System.Data.DataColumn("WebServiceEndpointAddress", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnWebServiceEndpointAddress);
                 this.columnWebServiceAuthMode = new global::System.Data.DataColumn("WebServiceAuthMode", typeof(int), null, global::System.Data.MappingType.Element);
@@ -8436,6 +8586,24 @@ namespace Epi.DataSets {
                 this.columnDateFormat.DefaultValue = ((string)("MM-DD-YYYY"));
                 this.columnTimeFormat.DefaultValue = ((string)("HH:MM:SS AMPM"));
                 this.columnDateTimeFormat.DefaultValue = ((string)("MM-DD-YYYY HH:MM:SS AMPM"));
+                this.columnEWEServiceEndpointAddress.Caption = "WebServiceEndpointAddress";
+                this.columnEWEServiceAuthMode.AllowDBNull = false;
+                this.columnEWEServiceAuthMode.Caption = "WebServiceAuthMode";
+                this.columnEWEServiceReaderMaxArrayLength.AllowDBNull = false;
+                this.columnEWEServiceReaderMaxArrayLength.Caption = "WebServiceReaderMaxArrayLength";
+                this.columnEWEServiceReaderMaxBytesPerRead.AllowDBNull = false;
+                this.columnEWEServiceReaderMaxBytesPerRead.Caption = "WebServiceReaderMaxBytesPerRead";
+                this.columnEWEServiceReaderMaxNameTableCharCount.AllowDBNull = false;
+                this.columnEWEServiceReaderMaxNameTableCharCount.Caption = "WebServiceReaderMaxNameTableCharCount";
+                this.columnEWEServiceBindingMode.Caption = "WebServiceBindingMode";
+                this.columnEWEServiceMaxBufferPoolSize.AllowDBNull = false;
+                this.columnEWEServiceMaxBufferPoolSize.Caption = "WebServiceMaxBufferPoolSize";
+                this.columnEWEServiceMaxReceivedMessageSize.AllowDBNull = false;
+                this.columnEWEServiceMaxReceivedMessageSize.Caption = "WebServiceMaxReceivedMessageSize";
+                this.columnEWEServiceReaderMaxDepth.AllowDBNull = false;
+                this.columnEWEServiceReaderMaxDepth.Caption = "WebServiceReaderMaxDepth";
+                this.columnEWEServiceReaderMaxStringContentLength.AllowDBNull = false;
+                this.columnEWEServiceReaderMaxStringContentLength.Caption = "WebServiceReaderMaxStringContentLength";
                 this.columnWebServiceAuthMode.AllowDBNull = false;
                 this.columnWebServiceMaxBufferPoolSize.AllowDBNull = false;
                 this.columnWebServiceMaxReceivedMessageSize.AllowDBNull = false;
@@ -10886,6 +11054,126 @@ namespace Epi.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string EWEServiceEndpointAddress {
+                get {
+                    try {
+                        return ((string)(this[this.tableSettings.EWEServiceEndpointAddressColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EWEServiceEndpointAddress\' in table \'Settings\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSettings.EWEServiceEndpointAddressColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int EWEServiceAuthMode {
+                get {
+                    return ((int)(this[this.tableSettings.EWEServiceAuthModeColumn]));
+                }
+                set {
+                    this[this.tableSettings.EWEServiceAuthModeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int EWEServiceReaderMaxArrayLength {
+                get {
+                    return ((int)(this[this.tableSettings.EWEServiceReaderMaxArrayLengthColumn]));
+                }
+                set {
+                    this[this.tableSettings.EWEServiceReaderMaxArrayLengthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int EWEServiceReaderMaxBytesPerRead {
+                get {
+                    return ((int)(this[this.tableSettings.EWEServiceReaderMaxBytesPerReadColumn]));
+                }
+                set {
+                    this[this.tableSettings.EWEServiceReaderMaxBytesPerReadColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int EWEServiceReaderMaxNameTableCharCount {
+                get {
+                    return ((int)(this[this.tableSettings.EWEServiceReaderMaxNameTableCharCountColumn]));
+                }
+                set {
+                    this[this.tableSettings.EWEServiceReaderMaxNameTableCharCountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string EWEServiceBindingMode {
+                get {
+                    try {
+                        return ((string)(this[this.tableSettings.EWEServiceBindingModeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EWEServiceBindingMode\' in table \'Settings\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSettings.EWEServiceBindingModeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int EWEServiceMaxBufferPoolSize {
+                get {
+                    return ((int)(this[this.tableSettings.EWEServiceMaxBufferPoolSizeColumn]));
+                }
+                set {
+                    this[this.tableSettings.EWEServiceMaxBufferPoolSizeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int EWEServiceMaxReceivedMessageSize {
+                get {
+                    return ((int)(this[this.tableSettings.EWEServiceMaxReceivedMessageSizeColumn]));
+                }
+                set {
+                    this[this.tableSettings.EWEServiceMaxReceivedMessageSizeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int EWEServiceReaderMaxDepth {
+                get {
+                    return ((int)(this[this.tableSettings.EWEServiceReaderMaxDepthColumn]));
+                }
+                set {
+                    this[this.tableSettings.EWEServiceReaderMaxDepthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int EWEServiceReaderMaxStringContentLength {
+                get {
+                    return ((int)(this[this.tableSettings.EWEServiceReaderMaxStringContentLengthColumn]));
+                }
+                set {
+                    this[this.tableSettings.EWEServiceReaderMaxStringContentLengthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string WebServiceEndpointAddress {
                 get {
                     try {
@@ -11369,6 +11657,30 @@ namespace Epi.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDateTimeFormatNull() {
                 this[this.tableSettings.DateTimeFormatColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEWEServiceEndpointAddressNull() {
+                return this.IsNull(this.tableSettings.EWEServiceEndpointAddressColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEWEServiceEndpointAddressNull() {
+                this[this.tableSettings.EWEServiceEndpointAddressColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEWEServiceBindingModeNull() {
+                return this.IsNull(this.tableSettings.EWEServiceBindingModeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEWEServiceBindingModeNull() {
+                this[this.tableSettings.EWEServiceBindingModeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
