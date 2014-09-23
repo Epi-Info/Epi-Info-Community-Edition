@@ -117,8 +117,11 @@ namespace Epi.Windows.Analysis.Dialogs
                     sb.Append(StringLiterals.SPACE);
                     sb.Append(StringLiterals.CURLY_BRACE_LEFT);
                     if (txtFileName.Text.StartsWith("Provider=Microsoft.Jet.OLEDB.4.0") || txtFileName.Text.StartsWith("Provider=Microsoft.ACE.OLEDB.12.0"))
-                    {                        
+                    {
+                        if (txtFileName.Text.Substring(txtFileName.Text.IndexOf("ource=") + 6).IndexOf(';')!=-1)                      
                         sb.Append(txtFileName.Text.Substring(txtFileName.Text.IndexOf("ource=") + 6, txtFileName.Text.Substring(txtFileName.Text.IndexOf("ource=") + 6).IndexOf(';')));
+                        else
+                            sb.Append(txtFileName.Text.Substring(txtFileName.Text.IndexOf("ource=") + 6));
                     }
                     else
                     {
