@@ -44,8 +44,8 @@ namespace Epi.Windows.MakeView.Dialogs
             }
 
         private bool ValidateUser( out string message  )
-            {
-            bool IsValidUser = false;
+        {
+            message = "";
            
             Epi.Windows.MakeView.EWEManagerService.UserAuthenticationRequest Request = new Epi.Windows.MakeView.EWEManagerService.UserAuthenticationRequest();
             var rUser = new Epi.Windows.MakeView.EWEManagerService.UserDTO();
@@ -55,25 +55,28 @@ namespace Epi.Windows.MakeView.Dialogs
             Request.User.EmailAddress = this.EmailAddresstextBox1.Text;
             Request.User.UserName = this.EmailAddresstextBox1.Text;
             Request.User.PasswordHash = this.PassWordTextBox1.Text;
+            
             EWEManagerService.EWEManagerServiceClient client = Epi.Windows.MakeView.Utils.EWEServiceClient.GetClient();
-            var Result = client.UserLogin(Request);
-            if (Result.User != null)
-                {
-                IsValidUser = true;
-                LoginInfo.UserID = Result.User.UserId;
-                message = "";
-                }
-            else
-                {
-                IsValidUser = false;
-                message = "";
 
-                }
+            try
+            {
+                var Result = client.UserLogin(Request);
 
-            return IsValidUser;
+                if (Result.User != null)
+                {
+                    LoginInfo.UserID = Result.User.UserId;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-
-
+            catch
+            {
+                return false;
+            }
+        }
 
         public bool ValidEmailAddress(string emailAddress, out string errorMessage)
             {
