@@ -333,6 +333,10 @@ namespace Epi.Data
                 }
                 else
                 {
+                    if (!string.IsNullOrEmpty(GroupBy.Split(',')[0]))
+                    {
+                        Main_Variable = GroupBy.Split(',')[0];
+                    }
                     if (string.IsNullOrEmpty(this.Main_Variable))
                     {
                         String[] valuelist;
@@ -370,11 +374,7 @@ namespace Epi.Data
                     return;
                 }
                 this.ValueCount = new Dictionary<string, int>();
-                // ******** Statistics - Start
-                if (!string.IsNullOrEmpty(GroupBy.Split(',')[0]))
-                {
-                    Main_Variable = GroupBy.Split(',')[0];
-                }
+                // ******** Statistics - Start               
                 if (Main_Variable != null)
                 {
                     if (Columns[Main_Variable].DataType == typeof(double) || Columns[Main_Variable].DataType == typeof(int) || Columns[Main_Variable].DataType == typeof(byte) || Columns[Main_Variable].DataType == typeof(long) || Columns[Main_Variable].DataType == typeof(float) || Columns[Main_Variable].DataType == typeof(decimal))
