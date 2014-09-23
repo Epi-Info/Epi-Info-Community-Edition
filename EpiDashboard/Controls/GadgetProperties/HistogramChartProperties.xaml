@@ -43,7 +43,8 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
-        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible"
+                    >
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
 
             <TextBlock x:Name="tblockMainVariable">Main variable:</TextBlock>
@@ -56,8 +57,8 @@
             <TextBlock x:Name="tblockCrossTabVariable" Margin="0,12,0,0">One graph for each value of:</TextBlock>
             <ComboBox x:Name="cmbFieldCrosstab" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbFieldWeight_SelectionChanged" />
 
-            <TextBlock x:Name="tblockSecondYAxis" Text="Second y-axis type:" Margin="0,12,0,0"  />
-            <ComboBox x:Name="cmbSecondYAxis" Width="216" HorizontalAlignment="Left" Height="28" SelectedIndex="0" SelectionChanged="cmbSecondYAxis_SelectionChanged">
+            <TextBlock x:Name="tblockSecondYAxis" Text="Second y-axis type:" Margin="0,12,0,0" Visibility="Collapsed"/>
+            <ComboBox x:Name="cmbSecondYAxis" Width="216" HorizontalAlignment="Left" Visibility="Collapsed" Height="28" SelectedIndex="0" SelectionChanged="cmbSecondYAxis_SelectionChanged">
                 <ComboBox.Items>
                     <ComboBoxItem>None</ComboBoxItem>
                     <ComboBoxItem>Single field</ComboBoxItem>
@@ -66,10 +67,73 @@
                 </ComboBox.Items>
             </ComboBox>
 
-            <TextBlock x:Name="tblockSecondYAxisVariable" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,12,0,0" Text="Second y-axis variable:" Visibility="Visible" />
-            <ComboBox x:Name="cmbSecondYAxisVariable" Width="216" HorizontalAlignment="Left" Visibility="Visible" SelectionChanged="cmbSecondYAxisVariable_SelectionChanged" />
+            <TextBlock x:Name="tblockSecondYAxisVariable" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,12,0,0" Text="Second y-axis variable:" Visibility="Collapsed"  />
+            <ComboBox x:Name="cmbSecondYAxisVariable" Width="216" HorizontalAlignment="Left" Visibility="Collapsed" SelectionChanged="cmbSecondYAxisVariable_SelectionChanged"/>
 
-<!--Sorting and Grouping-->
+            <TextBlock x:Name="tblockStep" Margin="0,12,0,0" Grid.Row="0" HorizontalAlignment="Left" TextAlignment="Center" Text="Step:" />
+            <TextBox x:Name="txtStep" Width="216" HorizontalAlignment="Left"  Text="1" />
+
+            <TextBlock x:Name="tblockInterval" Margin="0,12,0,0" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" TextAlignment="Center" Text="Interval:" />
+            <ComboBox x:Name="cmbInterval" Width="216" HorizontalAlignment="Left" SelectedIndex="2">
+                <ComboBox.Items>
+                    <ComboBoxItem>Minute</ComboBoxItem>
+                    <ComboBoxItem>Hour</ComboBoxItem>
+                    <ComboBoxItem>Day</ComboBoxItem>
+                    <ComboBoxItem Visibility="Collapsed">Epi Week (Sunday)</ComboBoxItem>
+                    <ComboBoxItem Visibility="Collapsed">Epi Week (Monday)</ComboBoxItem>
+                    <ComboBoxItem>Month</ComboBoxItem>
+                    <ComboBoxItem>Year</ComboBoxItem>
+                </ComboBox.Items>
+            </ComboBox>
+            <TextBlock x:Name="tblockStartValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Start value:" Margin="0,12,0,0"/>
+            <TextBox x:Name="txtStartValue" Width="216" HorizontalAlignment="Left"  />
+
+            <TextBlock x:Name="tblockEndValue" HorizontalAlignment="Left" TextAlignment="Center" Text="End value:" Margin="0,12,0,0"  />
+            <TextBox x:Name="txtEndValue" Width="216" HorizontalAlignment="Left"  />
+
+            <TextBlock x:Name="tblockToValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis max value:" Margin="0,12,0,0"  />
+            <TextBox x:Name="txtToValue" Width="216" HorizontalAlignment="Left"  />
+
+            <TextBlock x:Name="tblockFromValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis min value:" Margin="0,12,0,0"  />
+            <TextBox x:Name="txtFromValue" Width="216" HorizontalAlignment="Left"  />
+
+            <TextBlock x:Name="tblocktStepValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis step value:" Margin="0,12,0,0"  />
+            <TextBox x:Name="txtStepValue" Width="216" HorizontalAlignment="Left"  />
+
+            <TextBlock x:Name="tblockLineTypeY2" HorizontalAlignment="Left" Visibility="Collapsed" TextAlignment="Center" Text="Line type (Y2):" Margin="0,12,0,0" />
+            <ComboBox x:Name="cmbLineTypeY2" Width="216" HorizontalAlignment="Left" Visibility="Collapsed" SelectedIndex="0" IsEnabled="False">
+                <ComboBox.Items>
+                    <ComboBoxItem>Auto</ComboBoxItem>
+                    <ComboBoxItem>Polygon</ComboBoxItem>
+                    <ComboBoxItem>Smooth</ComboBoxItem>
+                    <ComboBoxItem>Step</ComboBoxItem>
+                </ComboBox.Items>
+            </ComboBox>
+
+            <TextBlock x:Name="tblockLineDashTypeY2" HorizontalAlignment="Left" Visibility="Collapsed" TextAlignment="Center" Text="Line dash style (Y2):" Margin="0,12,0,0"  />
+            <ComboBox x:Name="cmbLineDashTypeY2" Width="216" HorizontalAlignment="Left" Visibility="Collapsed" SelectedIndex="4" IsEnabled="False">
+                <ComboBox.Items>
+                    <ComboBoxItem>Dash</ComboBoxItem>
+                    <ComboBoxItem>Dash Dot</ComboBoxItem>
+                    <ComboBoxItem>Dash Dot Dot</ComboBoxItem>
+                    <ComboBoxItem>Dot</ComboBoxItem>
+                    <ComboBoxItem>Solid</ComboBoxItem>
+                </ComboBox.Items>
+            </ComboBox>
+
+            <TextBlock x:Name="tblockLineThicknessY2" HorizontalAlignment="Left" Visibility="Collapsed" TextAlignment="Center" Text="Line thickness (Y2):" Margin="0,12,0,0"  />
+            <ComboBox x:Name="cmbLineThicknessY2" Width="216" HorizontalAlignment="Left" Visibility="Collapsed" SelectedIndex="1" IsEnabled="False">
+                <ComboBox.Items>
+                    <ComboBoxItem>1</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>3</ComboBoxItem>
+                    <ComboBoxItem>4</ComboBoxItem>
+                    <ComboBoxItem>5</ComboBoxItem>
+                </ComboBox.Items>
+            </ComboBox>
+
+
+            <!--Sorting and Grouping-->
 <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
         </StackPanel>
@@ -84,9 +148,9 @@
                 </StackPanel>
             </ScrollViewer>
 
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 30, 0, 4">Sorting</Label>
+            <Label Style="{StaticResource PropertiesSubHeading}" Visibility="Collapsed" Margin="0, 30, 0, 4">Sorting</Label>
             <!--<TextBlock x:Name="tblockSortMethod">Sort Method:</TextBlock>-->
-            <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort high to low" HorizontalAlignment="Left" IsChecked="true"></CheckBox>
+            <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Visibility="Collapsed" Content="Sort high to low" HorizontalAlignment="Left" IsChecked="true"></CheckBox>
         </StackPanel>
 <!--Display-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
@@ -205,67 +269,6 @@
                             <ComboBoxItem>Cylinder</ComboBoxItem>
                             <ComboBoxItem>Rectangle</ComboBoxItem>
                             <ComboBoxItem>RoundedBlock</ComboBoxItem>
-                        </ComboBox.Items>
-                    </ComboBox>
-                    <TextBlock x:Name="tblockStep" Grid.Row="0" HorizontalAlignment="Left" TextAlignment="Center" Text="Step:" />
-                    <TextBox x:Name="txtStep" Grid.Row="1" HorizontalAlignment="Stretch" Text="1" />
-
-                    <TextBlock x:Name="tblockInterval" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" TextAlignment="Center" Text="Interval:" />
-                    <ComboBox x:Name="cmbInterval" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" SelectedIndex="2">
-                        <ComboBox.Items>
-                            <ComboBoxItem>Minute</ComboBoxItem>
-                            <ComboBoxItem>Hour</ComboBoxItem>
-                            <ComboBoxItem>Day</ComboBoxItem>
-                            <ComboBoxItem Visibility="Collapsed">Epi Week (Sunday)</ComboBoxItem>
-                            <ComboBoxItem Visibility="Collapsed">Epi Week (Monday)</ComboBoxItem>
-                            <ComboBoxItem>Month</ComboBoxItem>
-                            <ComboBoxItem>Year</ComboBoxItem>
-                        </ComboBox.Items>
-                    </ComboBox>
-                    <TextBlock x:Name="tblockStartValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Start value:" Margin="0,5,0,0"  />
-                    <TextBox x:Name="txtStartValue" HorizontalAlignment="Stretch" />
-
-                    <TextBlock x:Name="tblockEndValue" HorizontalAlignment="Left" TextAlignment="Center" Text="End value:" Margin="0,5,0,0"  />
-                    <TextBox x:Name="txtEndValue" HorizontalAlignment="Stretch" />
-
-                    <TextBlock x:Name="tblockToValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis max value:" Margin="0,5,0,0"  />
-                    <TextBox x:Name="txtToValue" HorizontalAlignment="Stretch" />
-
-                    <TextBlock x:Name="tblockFromValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis min value:" Margin="0,5,0,0"  />
-                    <TextBox x:Name="txtFromValue" HorizontalAlignment="Stretch" />
-
-                    <TextBlock x:Name="tblocktStepValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis step value:" Margin="0,5,0,0"  />
-                    <TextBox x:Name="txtStepValue" HorizontalAlignment="Stretch" />
-
-                    <TextBlock x:Name="tblockLineTypeY2" HorizontalAlignment="Left" TextAlignment="Center" Text="Line type (Y2):" Margin="0,12,0,0" />
-                    <ComboBox x:Name="cmbLineTypeY2" Width="216" HorizontalAlignment="Left" SelectedIndex="0" IsEnabled="False">
-                        <ComboBox.Items>
-                            <ComboBoxItem>Auto</ComboBoxItem>
-                            <ComboBoxItem>Polygon</ComboBoxItem>
-                            <ComboBoxItem>Smooth</ComboBoxItem>
-                            <ComboBoxItem>Step</ComboBoxItem>
-                        </ComboBox.Items>
-                    </ComboBox>
-
-                    <TextBlock x:Name="tblockLineDashTypeY2" HorizontalAlignment="Left" TextAlignment="Center" Text="Line dash style (Y2):" Margin="0,12,0,0"  />
-                    <ComboBox x:Name="cmbLineDashTypeY2" Width="216" HorizontalAlignment="Left" SelectedIndex="4" IsEnabled="False">
-                        <ComboBox.Items>
-                            <ComboBoxItem>Dash</ComboBoxItem>
-                            <ComboBoxItem>Dash Dot</ComboBoxItem>
-                            <ComboBoxItem>Dash Dot Dot</ComboBoxItem>
-                            <ComboBoxItem>Dot</ComboBoxItem>
-                            <ComboBoxItem>Solid</ComboBoxItem>
-                        </ComboBox.Items>
-                    </ComboBox>
-
-                    <TextBlock x:Name="tblockLineThicknessY2" HorizontalAlignment="Left" TextAlignment="Center" Text="Line thickness (Y2):" Margin="0,12,0,0"  />
-                    <ComboBox x:Name="cmbLineThicknessY2" Width="216" HorizontalAlignment="Left" SelectedIndex="1" IsEnabled="False">
-                        <ComboBox.Items>
-                            <ComboBoxItem>1</ComboBoxItem>
-                            <ComboBoxItem>2</ComboBoxItem>
-                            <ComboBoxItem>3</ComboBoxItem>
-                            <ComboBoxItem>4</ComboBoxItem>
-                            <ComboBoxItem>5</ComboBoxItem>
                         </ComboBox.Items>
                     </ComboBox>
                 </StackPanel>
