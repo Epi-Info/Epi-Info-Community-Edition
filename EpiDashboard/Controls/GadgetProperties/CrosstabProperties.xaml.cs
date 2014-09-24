@@ -608,11 +608,18 @@ namespace EpiDashboard.Controls.GadgetProperties
         private void lbxFieldStrata_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             bool clearLbx = false;
-            foreach (string s in lbxFieldStrata.SelectedItems)
+            if (lbxFieldStrata.SelectedItems.Count == 0)
             {
-                if (s == String.Empty)
+                clearLbx = true;
+            }
+            else
+            {
+                foreach (string s in lbxFieldStrata.SelectedItems)
                 {
-                    clearLbx = true;
+                    if (s == String.Empty)
+                    {
+                        clearLbx = true;
+                    }
                 }
             }
             if (clearLbx) lbxFieldStrata.SelectedItems.Clear();
