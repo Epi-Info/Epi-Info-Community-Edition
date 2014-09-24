@@ -173,21 +173,18 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.Precision = cbxFieldPrecision.SelectedIndex.ToString();
             }
             Parameters.columnsToHide.Clear();
-            if (lbxColumns.SelectedItems.Count > 0)
-            {
-                if (!lbxColumns.SelectedItems.Contains("Observations")) Parameters.columnsToHide.Add(1);
-                if (!lbxColumns.SelectedItems.Contains("Total")) Parameters.columnsToHide.Add(2);
-                if (!lbxColumns.SelectedItems.Contains("Mean")) Parameters.columnsToHide.Add(3);
-                if (!lbxColumns.SelectedItems.Contains("Variance")) Parameters.columnsToHide.Add(4);
-                if (!lbxColumns.SelectedItems.Contains("Std. Dev.")) Parameters.columnsToHide.Add(5);
-                if (!lbxColumns.SelectedItems.Contains("Minimum")) Parameters.columnsToHide.Add(6);
-                if (!lbxColumns.SelectedItems.Contains("25%")) Parameters.columnsToHide.Add(7);
-                if (!lbxColumns.SelectedItems.Contains("Median")) Parameters.columnsToHide.Add(8);
-                if (!lbxColumns.SelectedItems.Contains("75%")) Parameters.columnsToHide.Add(9);
-                if (!lbxColumns.SelectedItems.Contains("Maximum")) Parameters.columnsToHide.Add(10);
-                if (!lbxColumns.SelectedItems.Contains("Mode")) Parameters.columnsToHide.Add(11);
+            if (!(bool)checkboxShowObservations.IsChecked) Parameters.columnsToHide.Add(1);
+            if (!(bool)checkboxShowTotal.IsChecked) Parameters.columnsToHide.Add(2);
+            if (!(bool)checkboxShowMean.IsChecked) Parameters.columnsToHide.Add(3);
+            if (!(bool)checkboxShowVariance.IsChecked) Parameters.columnsToHide.Add(4);
+            if (!(bool)checkboxShowStdDev.IsChecked) Parameters.columnsToHide.Add(5);
+            if (!(bool)checkboxShowMin.IsChecked) Parameters.columnsToHide.Add(6);
+            if (!(bool)checkboxShowQ1.IsChecked) Parameters.columnsToHide.Add(7);
+            if (!(bool)checkboxShowMedian.IsChecked) Parameters.columnsToHide.Add(8);
+            if (!(bool)checkboxShowQ3.IsChecked) Parameters.columnsToHide.Add(9);
+            if (!(bool)checkboxShowMax.IsChecked) Parameters.columnsToHide.Add(10);
+            if (!(bool)checkboxShowMode.IsChecked) Parameters.columnsToHide.Add(11);
             }
-        }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -212,41 +209,60 @@ namespace EpiDashboard.Controls.GadgetProperties
                     lvFieldStrata.SelectedItems.Add(s.ToString());
             }
 
-            if (lbxColumns.Items.Count == 0)
+            checkboxShowObservations.IsChecked = true;
+            checkboxShowTotal.IsChecked = true;
+            checkboxShowMean.IsChecked = true;
+            checkboxShowVariance.IsChecked = true;
+            checkboxShowStdDev.IsChecked = true;
+            checkboxShowMin.IsChecked = true;
+            checkboxShowQ1.IsChecked = true;
+            checkboxShowMedian.IsChecked = true;
+            checkboxShowQ3.IsChecked = true;
+            checkboxShowMax.IsChecked = true;
+            checkboxShowMode.IsChecked = true;
+
+            if (Parameters.columnsToHide.Count > 0)
             {
-                lbxColumns.Items.Add("Observations");
-                lbxColumns.Items.Add("Total");
-                lbxColumns.Items.Add("Mean");
-                lbxColumns.Items.Add("Variance");
-                lbxColumns.Items.Add("Std. Dev.");
-                lbxColumns.Items.Add("Minimum");
-                lbxColumns.Items.Add("25%");
-                lbxColumns.Items.Add("Median");
-                lbxColumns.Items.Add("75%");
-                lbxColumns.Items.Add("Maximum");
-                lbxColumns.Items.Add("Mode");
-                lbxColumns.SelectAll();
+                foreach (int x in Parameters.columnsToHide)
+                {
+                    switch (x)
+                    {
+                        case 1:
+                            checkboxShowObservations.IsChecked = false;
+                            break;
+                        case 2:
+                            checkboxShowTotal.IsChecked = false;
+                            break;
+                        case 3:
+                            checkboxShowMean.IsChecked = false;
+                            break;
+                        case 4:
+                            checkboxShowVariance.IsChecked = false;
+                            break;
+                        case 5:
+                            checkboxShowStdDev.IsChecked = false;
+                            break;
+                        case 6:
+                            checkboxShowMin.IsChecked = false;
+                            break;
+                        case 7:
+                            checkboxShowQ1.IsChecked = false;
+                            break;
+                        case 8:
+                            checkboxShowMedian.IsChecked = false;
+                            break;
+                        case 9:
+                            checkboxShowQ3.IsChecked = false;
+                            break;
+                        case 10:
+                            checkboxShowMax.IsChecked = false;
+                            break;
+                        case 11:
+                            checkboxShowMode.IsChecked = false;
+                            break;
+                    }
+                }
             }
-            //checkboxShowAllListValues.IsChecked = Parameters.ShowAllListValues;
-            //checkboxShowListLabels.IsChecked = Parameters.ShowListLabels;
-            //checkboxSortHighLow.IsChecked = Parameters.SortHighToLow;
-            //checkboxIncludeMissing.IsChecked = Parameters.IncludeMissing;
-
-            //checkboxUsePrompts.IsChecked = Parameters.UseFieldPrompts;
-            //checkboxDrawBorders.IsChecked = Parameters.DrawBorders;
-            //checkboxDrawHeader.IsChecked = Parameters.DrawHeaderRow;
-            //checkboxDrawTotal.IsChecked = Parameters.DrawTotalRow;
-
-            //cbxFieldPrecision.SelectedItem = Parameters.Precision;
-
-            //tblockBarWidth.Text = Parameters.PercentBarWidth.ToString();
-
-            //checkboxColumnFrequency.IsChecked = Parameters.ShowFrequencyCol;
-            //checkboxColumnPercent.IsChecked = Parameters.ShowPercentCol;
-            //checkboxColumnCumulativePercent.IsChecked = Parameters.ShowCumPercentCol;
-            //checkboxColumn95CILower.IsChecked = Parameters.Show95CILowerCol;
-            //checkboxColumn95CIUpper.IsChecked = Parameters.Show95CIUpperCol;
-            //checkboxColumnPercentBars.IsChecked = Parameters.ShowPercentBarsCol;
         }
 
         public class FieldInfo { public string Name { get; set; } public string DataType { get; set; } public VariableCategory VariableCategory { get; set; } }
