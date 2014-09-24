@@ -329,12 +329,38 @@ namespace Epi.ImportExport.ProjectPackagers
                         Field field = form.Fields[fieldName];
                         string t = field.FieldType.ToString();
 
-                        if (!fieldType.Equals(t))
+                        if (!fieldType.Equals(t, StringComparison.OrdinalIgnoreCase))
                         {
-                            ImportInfo.Succeeded = false;
-                            string message = string.Format(ImportExportSharedStrings.UNPACKAGE_PROBLEM_CHECK_ERROR_E3013, fieldName, form.Name, fieldType, t);
-                            ImportInfo.AddError(message, "3013");
-                            throw new ApplicationException(message);
+                            if (!(fieldType.Equals("Text") &&
+                                (t.Equals("CommentLegal") ||
+                                t.Equals("LegalValues") ||
+                                t.Equals("Text") ||
+                                t.Equals("Codes")))
+                                &&
+                                !(fieldType.Equals("LegalValues") &&
+                                (t.Equals("CommentLegal") ||
+                                t.Equals("LegalValues") ||
+                                t.Equals("Text") ||
+                                t.Equals("Codes")))
+                                &&
+                                !(fieldType.Equals("Codes") &&
+                                (t.Equals("CommentLegal") ||
+                                t.Equals("LegalValues") ||
+                                t.Equals("Text") ||
+                                t.Equals("Codes")))
+                                &&
+                                !(fieldType.Equals("CommentLegal") &&
+                                (t.Equals("CommentLegal") ||
+                                t.Equals("LegalValues") ||
+                                t.Equals("Text") ||
+                                t.Equals("Codes")))
+                                )
+                            {
+                                ImportInfo.Succeeded = false;
+                                string message = string.Format(ImportExportSharedStrings.UNPACKAGE_PROBLEM_CHECK_ERROR_E3013, fieldName, form.Name, fieldType, t);
+                                ImportInfo.AddError(message, "3013");
+                                throw new ApplicationException(message);
+                            }
                         }
                     }
                     else
