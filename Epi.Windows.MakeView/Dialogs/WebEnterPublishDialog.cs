@@ -365,6 +365,10 @@ namespace Epi.Windows.MakeView.Dialogs
             this.currentSurveyInfoDTO.OwnerId = LoginInfo.UserID;
             this.currentSurveyInfoDTO.StartDate = DateTime.Now;
             this.currentSurveyInfoDTO.SurveyName = this.mediater.Project.Name;
+            if (this.mediater.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+                {
+                this.currentSurveyInfoDTO.IsSqlProject = true;
+                }
               Request.SurveyInfo  = this.currentSurveyInfoDTO;
 
 
