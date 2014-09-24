@@ -92,7 +92,8 @@ namespace Epi.Core.EnterInterpreter.Rules
                         case "RealLiteral":
                         case "HexLiteral":
                             double Decimal_temp;
-                            if (double.TryParse(this.GetCommandElement(T.Tokens, 0), out Decimal_temp))
+                           //if (double.TryParse(this.GetCommandElement(T.Tokens, 0), out Decimal_temp))
+                            if (double.TryParse(this.GetCommandElement(T.Tokens, 0), System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo, out Decimal_temp))
                             {
                                 this.value = Decimal_temp;
                             }
