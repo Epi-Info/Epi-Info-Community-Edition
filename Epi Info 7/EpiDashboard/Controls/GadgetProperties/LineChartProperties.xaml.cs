@@ -957,11 +957,18 @@ namespace EpiDashboard.Controls.GadgetProperties
         private void listboxFieldStrata_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             bool clearLbx = false;
-            foreach (string s in listboxFieldStrata.SelectedItems)
+            if (listboxFieldStrata.SelectedItems.Count == 0)
             {
-                if (s == String.Empty)
+                clearLbx = true;
+            }
+            else
+            {
+                foreach (string s in listboxFieldStrata.SelectedItems)
                 {
-                    clearLbx = true;
+                    if (s == String.Empty)
+                    {
+                        clearLbx = true;
+                    }
                 }
             }
             if (clearLbx)
