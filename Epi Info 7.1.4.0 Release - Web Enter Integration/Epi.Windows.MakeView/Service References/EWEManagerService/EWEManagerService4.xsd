@@ -27,10 +27,12 @@
   <xs:complexType name="SurveyInfoDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="ClosingDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DBConnectionString" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DepartmentName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ExitText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IntroductionText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsDraftMode" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSqlProject" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
       <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
       <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
