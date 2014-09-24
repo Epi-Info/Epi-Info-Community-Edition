@@ -415,6 +415,9 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         private System.DateTime ClosingDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DBConnectionStringField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DepartmentNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -425,6 +428,9 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsDraftModeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSqlProjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsSuccessField;
@@ -486,6 +492,19 @@ namespace Epi.Windows.MakeView.EWEManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DBConnectionString {
+            get {
+                return this.DBConnectionStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DBConnectionStringField, value) != true)) {
+                    this.DBConnectionStringField = value;
+                    this.RaisePropertyChanged("DBConnectionString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string DepartmentName {
             get {
                 return this.DepartmentNameField;
@@ -533,6 +552,19 @@ namespace Epi.Windows.MakeView.EWEManagerService {
                 if ((this.IsDraftModeField.Equals(value) != true)) {
                     this.IsDraftModeField = value;
                     this.RaisePropertyChanged("IsDraftMode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSqlProject {
+            get {
+                return this.IsSqlProjectField;
+            }
+            set {
+                if ((this.IsSqlProjectField.Equals(value) != true)) {
+                    this.IsSqlProjectField = value;
+                    this.RaisePropertyChanged("IsSqlProject");
                 }
             }
         }

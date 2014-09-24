@@ -150,7 +150,15 @@ namespace Epi.Windows.MakeView.Dialogs
             Epi.Windows.MakeView.EWEManagerService.PublishRequest Request = new Epi.Windows.MakeView.EWEManagerService.PublishRequest();
             Epi.Windows.MakeView.EWEManagerService.SurveyInfoDTO SurveyInfoDTO = new EWEManagerService.SurveyInfoDTO();
             Request.SurveyInfo = SurveyInfoDTO;
-             
+           
+            Request.SurveyInfo.DBConnectionString = RemoveUserName(this.mediater.Project.CollectedDataConnectionString);
+               
+            //if ((this.mediater.Project.CollectedData.dbDriver).ConnectionDescription)
+            if (this.mediater.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+                {
+                Request.SurveyInfo.IsSqlProject = true;
+                }
+        
            //Request.SurveyInfo.ClosingDate = dtpSurveyClosingDate.Value.Date + t;
             //if (string.IsNullOrEmpty(ClosingTimecomboBox.Text))
             //    {
@@ -257,6 +265,11 @@ namespace Epi.Windows.MakeView.Dialogs
                 this.Cursor = Cursors.Default;
             }
         }
+
+        private string RemoveUserName(string ConnectionString)
+            {
+            return ConnectionString = ConnectionString.Remove(ConnectionString.IndexOf("User ID")-1);
+            }
 
 
         /// <summary>
