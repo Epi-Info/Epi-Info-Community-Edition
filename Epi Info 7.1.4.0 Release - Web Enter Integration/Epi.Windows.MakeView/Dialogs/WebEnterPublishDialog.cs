@@ -214,7 +214,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
             if (indexOfUserId > 0)
             {
-                ConnectionString = ConnectionString.Remove(-1);
+            ConnectionString = ConnectionString.Remove(indexOfUserId - 1);
             }
 
             return ConnectionString;
