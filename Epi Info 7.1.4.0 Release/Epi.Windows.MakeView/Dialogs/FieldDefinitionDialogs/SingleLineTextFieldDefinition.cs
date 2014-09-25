@@ -123,6 +123,10 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
                     field.MaxLength = 254;
                 }
             }
+            else
+            {
+                field.MaxLength = 0;
+            }
         }
 
 		#endregion	//Protected Methods
