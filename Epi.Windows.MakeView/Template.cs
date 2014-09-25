@@ -379,23 +379,18 @@ namespace Epi.Windows.MakeView
             writer.Close();
             return sw.ToString();
         }
+        
         public string CreateWebEnterTemplate()
-            {
-
+        {
             StringWriter sw = new StringWriter();
-
-            XmlWriter writer = XmlWriter.Create(sw);  
+            XmlWriter writer = XmlWriter.Create(sw);
             writer.WriteStartDocument();
-            //writer.WriteStartElement("Template");
-            //writer.WriteAttributeString("Level", "View");
-            //writer.WriteStartElement("Project");
             CreateProjectTemplate("web", "dis", writer);
-           // writer.WriteEndElement();
             AddCodeTableTemplates(writer);
-           // writer.WriteEndElement();
             writer.Close();
             return sw.ToString();
-            }
+        }
+
         public void CreatePhoneTemplate(string path)
         {
             StringWriter sw = new StringWriter();
