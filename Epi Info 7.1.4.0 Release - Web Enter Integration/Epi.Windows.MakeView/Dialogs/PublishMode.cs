@@ -120,17 +120,16 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-                SurveyManagerService.ManagerServiceClient client;
+                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 Configuration config = Configuration.GetNewInstance();
-                client = GetClient();
-                Epi.Web.Common.Message.SurveyInfoRequest Request = (Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
-                Epi.Web.Common.Message.SurveyInfoResponse Result = (Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
+                
+                SurveyManagerService.SurveyInfoRequest Request = (SurveyManagerService.SurveyInfoRequest)((object[])e.Argument)[0];
+                SurveyManagerService.SurveyInfoResponse Result = (SurveyManagerService.SurveyInfoResponse)((object[])e.Argument)[1];
             
-
-                 Result = client.GetSurveyInfo(Request);
-                 if (Result != null && Result.SurveyInfoList.Count>0) 
-                 { 
-                 
+                Result = client.GetSurveyInfo(Request);
+                
+                if (Result != null && Result.SurveyInfoList.Length > 0) 
+                { 
                       SurveyName = Result.SurveyInfoList[0].SurveyName;
                       DepartmentName= Result.SurveyInfoList[0].DepartmentName;
                       SurveyNumber = Result.SurveyInfoList[0].SurveyNumber;
@@ -145,10 +144,7 @@ namespace Epi.Windows.MakeView.Dialogs
                       SurveyType = Result.SurveyInfoList[0].SurveyType;
                       UserPublishKey = Result.SurveyInfoList[0].UserPublishKey.ToString();
                       //SurveyId = Result.SurveyInfoList[0].SurveyId;
-
-                 
                  }
-              
             }
             catch (FaultException<CustomFaultException> cfe)
             {
@@ -188,16 +184,16 @@ namespace Epi.Windows.MakeView.Dialogs
                 SurveyManagerService.ManagerServiceClient client;
                 Configuration config = Configuration.GetNewInstance();
                 client = GetClient();
-                Epi.Web.Common.Message.SurveyInfoRequest Request = (Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
-                Epi.Web.Common.Message.SurveyInfoResponse Result = (Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
+                SurveyManagerService.SurveyInfoRequest Request = (SurveyManagerService.SurveyInfoRequest)((object[])e.Argument)[0];
+                SurveyManagerService.SurveyInfoResponse Result = (SurveyManagerService.SurveyInfoResponse)((object[])e.Argument)[1];
 
                 Request.Criteria.ClosingDate =this.CloseDate;
                 Request.Criteria.OrganizationKey =  new Guid(this.OrganizationKey);
                 Request.Criteria.UserPublishKey = new Guid(this.UserPublishKey);
-                Request.Criteria.SurveyIdList.Add(this.SurveyId);
+                Request.Criteria.SurveyIdList = new string[]{this.SurveyId};
                 Request.Action = "Update";
 
-                Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfoDTO = new Web.Common.DTO.SurveyInfoDTO();
+                SurveyManagerService.SurveyInfoDTO SurveyInfoDTO = new SurveyManagerService.SurveyInfoDTO();
 
                 SurveyInfoDTO.ClosingDate = this.CloseDate;
                 SurveyInfoDTO.StartDate = this.StartDate;
@@ -225,7 +221,7 @@ namespace Epi.Windows.MakeView.Dialogs
                     Request.Criteria.IsDraftMode = false;
                     SurveyInfoDTO.IsDraftMode = false;
                 }
-                 Request.SurveyInfoList.Add(SurveyInfoDTO);
+                 Request.SurveyInfoList = new SurveyManagerService.SurveyInfoDTO[]{SurveyInfoDTO};
                
                 Result = client.SetSurveyInfo(Request);
 

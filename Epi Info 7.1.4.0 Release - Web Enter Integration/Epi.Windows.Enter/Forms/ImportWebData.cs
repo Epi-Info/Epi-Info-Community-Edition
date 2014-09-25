@@ -44,7 +44,7 @@ namespace Epi.Enter.Forms
         private string SurveyId = string.Empty;
         private string OrganizationKey = string.Empty;
         private string PublishKey = string.Empty;
-        private ServiceManager.ManagerServiceClient client;
+        private SurveyManagerService.ManagerServiceClient client;
         private Dictionary<string, Dictionary<string, WebFieldData>> wfList;
         private bool IsDraftMode;
         private int SurveyStatus;
@@ -149,7 +149,7 @@ namespace Epi.Enter.Forms
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                    client = new ServiceManager.ManagerServiceClient(binding, endpoint);
+                    client = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
 
                     client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     client.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
@@ -195,7 +195,7 @@ namespace Epi.Enter.Forms
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                        client = new ServiceManager.ManagerServiceClient(binding, endpoint);
+                        client = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
 
                     }
                     else
@@ -229,7 +229,7 @@ namespace Epi.Enter.Forms
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                        client = new ServiceManager.ManagerServiceClient(binding, endpoint);
+                        client = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
                     }
 
                 }
@@ -676,12 +676,12 @@ namespace Epi.Enter.Forms
         /// Parses XML from the web survey
         /// </summary>
         /// <param name="result">The parsed results in dictionary format</param>
-        private Dictionary<string, Dictionary<string, WebFieldData>> ParseXML(SurveyAnswerResponse pSurveyAnswer)
+        private Dictionary<string, Dictionary<string, WebFieldData>> ParseXML(SurveyManagerService.SurveyAnswerResponse pSurveyAnswer)
         {
             Dictionary<string, Dictionary<string, WebFieldData>> result = new Dictionary<string, Dictionary<string, WebFieldData>>(StringComparer.OrdinalIgnoreCase);
             SetFilterProperties(DownLoadType);
-            
-            foreach (Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
+
+            foreach (SurveyManagerService.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
             {
                 if (SurveyStatus == 0)
                 {
@@ -702,7 +702,7 @@ namespace Epi.Enter.Forms
             return result;
         }
 
-        private void AddSurveyAnswerResult(Dictionary<string, Dictionary<string, WebFieldData>> result, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer)
+        private void AddSurveyAnswerResult(Dictionary<string, Dictionary<string, WebFieldData>> result, SurveyManagerService.SurveyAnswerDTO surveyAnswer)
         {
             result.Add(surveyAnswer.ResponseId, new Dictionary<string, WebFieldData>(StringComparer.OrdinalIgnoreCase));
             System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
@@ -1147,13 +1147,13 @@ namespace Epi.Enter.Forms
             lock (syncLock)
             {
                 try
-                {                    
-                    Epi.Web.Common.Message.SurveyAnswerRequest Request = new Epi.Web.Common.Message.SurveyAnswerRequest();
+                {
+                    SurveyManagerService.SurveyAnswerRequest Request = new SurveyManagerService.SurveyAnswerRequest();
                     Request.Criteria.SurveyId = SurveyId;
                     Request.Criteria.UserPublishKey = new Guid(PublishKey);
                     Request.Criteria.OrganizationKey = new Guid(OrganizationKey);
-                    Request.Criteria.ReturnSizeInfoOnly = true;                    
-                    Epi.Web.Common.Message.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
+                    Request.Criteria.ReturnSizeInfoOnly = true;
+                    SurveyManagerService.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
                     Pages = Result.NumberOfPages;
                     PageSize = Result.PageSize;
 
@@ -1204,14 +1204,14 @@ namespace Epi.Enter.Forms
             {
                 if (e.Argument is SurveyAnswerRequest)
                 {
-                    SurveyAnswerRequest Request = e.Argument as SurveyAnswerRequest;
+                    SurveyManagerService.SurveyAnswerRequest Request = e.Argument as SurveyManagerService.SurveyAnswerRequest;
                     Request.Criteria.SurveyId = SurveyId;
                   //  Request.Criteria.StatusId = 3;
                     Request.Criteria.UserPublishKey = new Guid(PublishKey);
                     Request.Criteria.OrganizationKey = new Guid(OrganizationKey);
                     Request.Criteria.ReturnSizeInfoOnly = false;
 
-                    List<SurveyAnswerResponse> Results = new List<SurveyAnswerResponse>();                    
+                    List<SurveyManagerService.SurveyAnswerResponse> Results = new List<SurveyManagerService.SurveyAnswerResponse>();                    
 
                     for (int i = 1; i <= Pages; i++)
                     {
@@ -1219,7 +1219,7 @@ namespace Epi.Enter.Forms
                         Request.Criteria.PageSize = PageSize;
                         try
                         {
-                            Epi.Web.Common.Message.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
+                            SurveyManagerService.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
                             Results.Add(Result);
                         }
                         catch (Exception ex)
@@ -1232,7 +1232,7 @@ namespace Epi.Enter.Forms
 
                     this.BeginInvoke(new SetMaxProgressBarValueDelegate(SetProgressBarMaximum), Results.Count);
 
-                    foreach(SurveyAnswerResponse Result in Results)
+                    foreach (SurveyManagerService.SurveyAnswerResponse Result in Results)
                     {
                         try
                         {

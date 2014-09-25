@@ -710,12 +710,12 @@ namespace Epi.Enter.Forms
         /// Parses XML from the web survey
         /// </summary>
         /// <param name="result">The parsed results in dictionary format</param>
-        private Dictionary<string, Dictionary<string, WebFieldData>> ParseXML(Epi.Enter.EWEManagerService.SurveyAnswerResponse pSurveyAnswer)
+        private Dictionary<string, Dictionary<string, WebFieldData>> ParseXML(Epi.EWEManagerService.SurveyAnswerResponse pSurveyAnswer)
             {
             Dictionary<string, Dictionary<string, WebFieldData>> result = new Dictionary<string, Dictionary<string, WebFieldData>>(StringComparer.OrdinalIgnoreCase);
             SetFilterProperties(DownLoadType);
 
-            foreach (Epi.Enter.EWEManagerService.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
+            foreach (Epi.EWEManagerService.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
                 {
                 if (SurveyStatus == 0)
                     {
@@ -745,14 +745,14 @@ namespace Epi.Enter.Forms
             return result;
             }
 
-        private void AddSurveyAnswerResult(Dictionary<string, Dictionary<string, WebFieldData>> result, Epi.Enter.EWEManagerService.SurveyAnswerDTO surveyAnswer)
-            {
+        private void AddSurveyAnswerResult(Dictionary<string, Dictionary<string, WebFieldData>> result, Epi.EWEManagerService.SurveyAnswerDTO surveyAnswer)
+        {
             result.Add(surveyAnswer.ResponseId, new Dictionary<string, WebFieldData>(StringComparer.OrdinalIgnoreCase));
             System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
             doc.LoadXml(surveyAnswer.XML);
 
             foreach (XmlNode docElement in doc.SelectNodes("//ResponseDetail"))
-                {
+            {
                 string fieldName = docElement.Attributes.GetNamedItem("QuestionName").Value;
                 object fieldValue = FormatWebFieldData(fieldName, docElement.InnerText);
 
@@ -763,12 +763,13 @@ namespace Epi.Enter.Forms
                 wfData.Status = surveyAnswer.Status;
                 wfData.ViewId = surveyAnswer.ViewId;
                 wfData.ParentId = surveyAnswer.RelateParentId;
+                
                 if (result[surveyAnswer.ResponseId].Keys.Contains(wfData.FieldName) == false)
-                    {
+                {
                     result[surveyAnswer.ResponseId].Add(wfData.FieldName, wfData);
-                    }
                 }
             }
+        }
 
         /// <summary>
         /// Parses XML from the web survey
@@ -1209,8 +1210,8 @@ namespace Epi.Enter.Forms
                 try
                     {
                   //  Epi.Web.Common.Message.SurveyAnswerRequest Request = new Epi.Web.Common.Message.SurveyAnswerRequest();
-                    Epi.Enter.EWEManagerService.SurveyAnswerRequest Request = new Epi.Enter.EWEManagerService.SurveyAnswerRequest();
-                    Epi.Enter.EWEManagerService.SurveyAnswerCriteria Criteria = new EWEManagerService.SurveyAnswerCriteria();
+                    EWEManagerService.SurveyAnswerRequest Request = new EWEManagerService.SurveyAnswerRequest();
+                    EWEManagerService.SurveyAnswerCriteria Criteria = new EWEManagerService.SurveyAnswerCriteria();
                     Criteria.SurveyId = SurveyId;
                     Criteria.UserPublishKey = new Guid(PublishKey);
                     Criteria.OrganizationKey = new Guid(OrganizationKey);
@@ -1218,7 +1219,7 @@ namespace Epi.Enter.Forms
                     Criteria.SurveyAnswerIdList = new  string[0];
                     Request.Criteria = Criteria; 
 
-                    Epi.Enter.EWEManagerService.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
+                    EWEManagerService.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
                     Pages = Result.NumberOfPages;
                     PageSize = Result.PageSize;
 
@@ -1277,8 +1278,8 @@ namespace Epi.Enter.Forms
 
                     EWEManagerService.SurveyAnswerResponse Result = null;
 
-                    Epi.Enter.EWEManagerService.SurveyAnswerRequest Request = new Epi.Enter.EWEManagerService.SurveyAnswerRequest();
-                    Epi.Enter.EWEManagerService.SurveyAnswerCriteria Criteria = new EWEManagerService.SurveyAnswerCriteria();
+                    EWEManagerService.SurveyAnswerRequest Request = new EWEManagerService.SurveyAnswerRequest();
+                    EWEManagerService.SurveyAnswerCriteria Criteria = new EWEManagerService.SurveyAnswerCriteria();
                     Criteria.SurveyId = SurveyId;
                     Criteria.UserPublishKey = new Guid(PublishKey);
                     Criteria.OrganizationKey = new Guid(OrganizationKey);

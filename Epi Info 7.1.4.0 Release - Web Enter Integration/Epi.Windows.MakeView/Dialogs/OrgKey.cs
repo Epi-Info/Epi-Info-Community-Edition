@@ -20,13 +20,11 @@ namespace Epi.Windows.MakeView.Dialogs
         private string _OrgKey;
         private bool _ShowSuccessMessage;
 
-
-
         public string  OrganizationKey 
         {
             get { return _OrgKey; }
-    
         }
+        
         public OrgKey(string SurveyId, bool ShowSuccessMessage ,string SuccessMessage, string DialogPrompt)
         {
             InitializeComponent();
@@ -40,6 +38,7 @@ namespace Epi.Windows.MakeView.Dialogs
             this._SuccessMessage = SuccessMessage;
             _ShowSuccessMessage = ShowSuccessMessage;
         }
+
         public OrgKey( )
         {
             InitializeComponent();
@@ -47,25 +46,22 @@ namespace Epi.Windows.MakeView.Dialogs
             pnlOrgKey.Visible = true;
             pnlSuccess.Visible = false;
             pnlSuccessMsg.Visible = false;
-         
         }
+        
         private void button1_Click(object sender, EventArgs e)
         {
+            Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No;
+            IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrgKey(tbOrgKey.Text.ToString(), this._SurveyId);
 
-            //tbOrgKey
-            Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.No;
-            IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrgKey(tbOrgKey.Text.ToString(), this._SurveyId);
-
-            //this.DialogResult = DialogResult.OK;
             switch(IsValidOKey)
             {
-                case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.No:
+                case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No:
                     pnlError.Visible = true;
                     pnlOrgKey.Visible = true;
                     pnlSuccess.Visible = false;
                     pnlSuccessMsg.Visible = false;
                     break;
-                case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
+                case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
                     pnlError.Visible = true;
                     pnlOrgKey.Visible = true;
                     pnlSuccess.Visible = false;
@@ -73,13 +69,13 @@ namespace Epi.Windows.MakeView.Dialogs
                     WebSurveyOptions wso = new WebSurveyOptions();
                     wso.Show();
                     break;
-                case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.GeneralException:
+                case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.GeneralException:
                     pnlError.Visible = true;
                     pnlOrgKey.Visible = true;
                     pnlSuccess.Visible = false;
                     pnlSuccessMsg.Visible = false;
                     break;
-                case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.Yes:
+                case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.Yes:
                     this._OrgKey = tbOrgKey.Text.ToString();
                     pnlError.Visible = false;
                     pnlOrgKey.Visible = false;
@@ -87,28 +83,25 @@ namespace Epi.Windows.MakeView.Dialogs
                     pnlSuccessMsg.Visible = true;
                     this.Text = "Success";
                     this.DialogPromptLabel.Text = _Dialogprompt;
-                   // lblSuccess.Text = " Your survey has been published successfully!";
                     lblSuccess.Text = this._SuccessMessage;
+
                     if(!this._ShowSuccessMessage)
                     {
                         this.DialogResult = DialogResult.OK;
                     }
+
                 break;
             }
         }
-
 
         public static bool IsGuid(string Guid)
         {
             bool isValid = false;
 
-
             if (Guid != null)
             {
-
                 if (isGuid.IsMatch(Guid))
                 {
-
                     isValid = true;
                 }
             }
@@ -116,14 +109,13 @@ namespace Epi.Windows.MakeView.Dialogs
             return isValid;
         }
 
-
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             if (this._ShowSuccessMessage)
             {
                 this.DialogResult = DialogResult.OK;
             }
+
             this.Close();
         }
 
@@ -138,7 +130,5 @@ namespace Epi.Windows.MakeView.Dialogs
                 btnSubmit.Enabled = false;
             }
         }
-
-       
     }
 }

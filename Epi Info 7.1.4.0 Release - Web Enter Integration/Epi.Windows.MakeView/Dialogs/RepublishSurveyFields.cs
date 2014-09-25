@@ -15,12 +15,11 @@ namespace Epi.Windows.MakeView.Dialogs
 {
     public partial class RepublishSurveyFields : Form
     {
-
         private Guid UserPublishGuid;
         private View view = null;
         private string OrganizationKey = null;
         private string template = null;
-        private Epi.Web.Common.DTO.SurveyInfoDTO currentSurveyInfoDTO;
+        private SurveyManagerService.SurveyInfoDTO currentSurveyInfoDTO;
 
         public RepublishSurveyFields(string pOrganizationKey, Epi.View pView, string pTemplate)
         {
@@ -53,12 +52,12 @@ namespace Epi.Windows.MakeView.Dialogs
 
             if (this.UserPublishGuid != null)
             {
-                Epi.Web.Common.Message.SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
+                SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();
                 Request.Action = "Update";
 
                 this.currentSurveyInfoDTO.XML = template;
 
-                Request.SurveyInfoList.Add(this.currentSurveyInfoDTO);
+                Request.SurveyInfoList = new SurveyManagerService.SurveyInfoDTO[]{this.currentSurveyInfoDTO};
                 try
                 {
                     Epi.Web.Common.Message.SurveyInfoResponse Result = new Epi.Web.Common.Message.SurveyInfoResponse();
@@ -109,25 +108,25 @@ namespace Epi.Windows.MakeView.Dialogs
 
         private void QueryForExistingSurveyInfo()
         {
-                SurveyManagerService.ManagerServiceClient client = Epi.Windows.MakeView.Utils.ServiceClient.GetClient();
-                SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
-                Request.Criteria.SurveyIdList.Add(this.view.WebSurveyId);
-                Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
-                SurveyInfoResponse response = client.GetSurveyInfo(Request);
-                if (response.SurveyInfoList.Count > 0)
-                {
-                    this.currentSurveyInfoDTO = response.SurveyInfoList[0];
-                }
+            SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+            SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();
+            Request.Criteria.SurveyIdList = new string[]{this.view.WebSurveyId};
+            Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+            SurveyManagerService.SurveyInfoResponse response = client.GetSurveyInfo(Request);
+            
+            if (response.SurveyInfoList.Length > 0)
+            {
+                this.currentSurveyInfoDTO = response.SurveyInfoList[0];
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            Epi.Web.Common.Message.SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
+            SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();
             Request.Action = "Update";
 
             this.currentSurveyInfoDTO.XML = this.template;
-            Request.SurveyInfoList.Add(this.currentSurveyInfoDTO);
-
+            Request.SurveyInfoList = new SurveyManagerService.SurveyInfoDTO[] { this.currentSurveyInfoDTO };
 
             try
             {

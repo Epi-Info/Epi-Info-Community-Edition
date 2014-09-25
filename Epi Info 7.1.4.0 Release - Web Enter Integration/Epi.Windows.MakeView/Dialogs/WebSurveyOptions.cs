@@ -87,11 +87,10 @@ namespace Epi.Windows.MakeView.Dialogs
             bool IsValid = true;
           
             try
-            { 
-                SurveyManagerService.ManagerServiceClient client = Epi.Windows.MakeView.Utils.ServiceClient.GetClient();
-                Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+            {
+                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
                 var Result = client.GetOrganization(Request);
-
             }
             catch (Exception ex)
             {

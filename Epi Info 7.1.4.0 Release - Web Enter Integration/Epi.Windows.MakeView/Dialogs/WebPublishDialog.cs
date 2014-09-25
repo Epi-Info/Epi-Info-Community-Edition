@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using System.ServiceModel;
 using System.ServiceModel.Security;
 using Epi.Web.Common.Exception;
-using Epi.Web.Common.Message;
 
 namespace Epi.Windows.MakeView.Dialogs
 {
@@ -30,7 +29,7 @@ namespace Epi.Windows.MakeView.Dialogs
         private bool IsMetaDataOnly = false;
         private bool isRepublishableConfig = false;
 
-        private Epi.Web.Common.DTO.SurveyInfoDTO currentSurveyInfoDTO;
+        private SurveyManagerService.SurveyInfoDTO currentSurveyInfoDTO;
 
         //=======
         //private Epi.Web.Common.Message.PublishResponse Result;
@@ -262,30 +261,17 @@ namespace Epi.Windows.MakeView.Dialogs
             this.tabPublishWebForm.SelectedTab = this.tabPublishWebForm.TabPages[2];
 
             btnPublishForm.Enabled = false;
-
-
             progressBar.Visible = true;
 
-            //stopwatch = new Stopwatch();
-            //stopwatch.Start();
-
-            //SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
-
-            Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
+            SurveyManagerService.PublishRequest Request = new SurveyManagerService.PublishRequest();
             Request.Action = "Update";
 
-
-            //this.currentSurveyInfoDTO.ClosingDate =  dtpSurveyClosingDate.Value.Date + GetTimeFormat(ClosingTimecomboBox.Text);
-
             this.currentSurveyInfoDTO.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text);
-
-            //this.currentSurveyInfoDTO.StartDate = StartDateDatePicker.Value.Date + GetTimeFormat(StartTimecomboBox.Text);
             this.currentSurveyInfoDTO.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date, StartTimecomboBox.Text);
             this.currentSurveyInfoDTO.DepartmentName = txtDepartment.Text;
-
-            //this.currentSurveyInfoDTO.DepartmentName = txtDepartment.Text;
             this.currentSurveyInfoDTO.IntroductionText = txtIntroductionText.Text;
             this.currentSurveyInfoDTO.ExitText = txtExitText.Text;
+            
             if (txtOrganization.Text.Equals("Your Organization Name (optional)", StringComparison.OrdinalIgnoreCase))
             {
                 this.currentSurveyInfoDTO.OrganizationName = null;
@@ -306,22 +292,21 @@ namespace Epi.Windows.MakeView.Dialogs
 
 
             this.currentSurveyInfoDTO.SurveyName = txtSurveyName.Text;
-
             this.currentSurveyInfoDTO.OrganizationKey = new Guid(txtOrganizationKey.Text.ToString());
-            //this.currentSurveyInfoDTO.UserPublishKey = UserPublishGuid;
+
             if (!this.IsMetaDataOnly)
             {
                 this.currentSurveyInfoDTO.XML = this.template;
             }
+
             this.currentSurveyInfoDTO.SurveyType = (rdbSingleResponse.Checked) ? 1 : 2;
 
             Request.SurveyInfo = this.currentSurveyInfoDTO;
 
-
             try
             {
-                SurveyManagerService.ManagerServiceClient client = MakeView.Utils.ServiceClient.GetClient();
-                Epi.Web.Common.Message.PublishResponse Result = client.RePublishSurvey(Request);
+                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.PublishResponse Result = client.RePublishSurvey(Request);
 
                 panel2.Visible = true;
                 panel3.Visible = true;
@@ -845,16 +830,14 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             else
             {
-                SurveyManagerService.ManagerServiceClient client = Epi.Windows.MakeView.Utils.ServiceClient.GetClient();
+                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
 
                 this.txtDepartment.Visible = false;
                 this.lblDepartment.Visible = false;
 
-
                 this.txtOrganization.Left = 381;
                 this.txtOrganization.Size = new System.Drawing.Size(453, 23);
                 this.lblOrganization.Left = 300;
-
 
                 this.lblDepMirr.Visible = false;
                 this.txtDepartmentMirror.Visible = false;
@@ -863,25 +846,16 @@ namespace Epi.Windows.MakeView.Dialogs
                 this.txtOrganizationMirror.Size = new System.Drawing.Size(453, 23);
                 this.lblOrgMirr.Left = 300;
 
-
                 ClosingTimecomboBox.SelectedIndex = 0;
                 StartTimecomboBox.SelectedIndex = 0;
 
-
-
-                // Epi.Windows.Dialogs.InputDialog inputDialog = new Windows.Dialogs.InputDialog("Enter organization key", "Organization Key", "", null, EpiInfo.Plugin.DataType.Text);
-                //DialogResult result = inputDialog.ShowDialog();
-
-                // if (result == System.Windows.Forms.DialogResult.OK)
-                //{
-                // this.OrganizationKey = inputDialog.OrganizationKey;
                 this.txtOrganizationKey.Text = this.OrganizationKey;
 
-                SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
-                Request.Criteria.SurveyIdList.Add(this.view.WebSurveyId);
+                SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();
+                Request.Criteria.SurveyIdList = new string[]{this.view.WebSurveyId};
                 Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
-                SurveyInfoResponse response = client.GetSurveyInfo(Request);
-                if (response.SurveyInfoList.Count > 0)
+                SurveyManagerService.SurveyInfoResponse response = client.GetSurveyInfo(Request);
+                if (response.SurveyInfoList.Length > 0)
                 {
                     currentSurveyInfoDTO = response.SurveyInfoList[0];
                     if (currentSurveyInfoDTO.IsDraftMode)
@@ -1184,11 +1158,9 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-                SurveyManagerService.ManagerServiceClient client = Epi.Windows.MakeView.Utils.ServiceClient.GetClient();
-
-
-                Epi.Web.Common.Message.PublishRequest Request = (Epi.Web.Common.Message.PublishRequest)((object[])e.Argument)[0];
-                Epi.Web.Common.Message.PublishResponse Result = (Epi.Web.Common.Message.PublishResponse)((object[])e.Argument)[1];
+                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.PublishRequest Request = (SurveyManagerService.PublishRequest)((object[])e.Argument)[0];
+                SurveyManagerService.PublishResponse Result = (SurveyManagerService.PublishResponse)((object[])e.Argument)[1];
                 Result = client.PublishSurvey(Request);
                 this.BeginInvoke(new PublishDelegate(AfterPublish), Result);
             }
