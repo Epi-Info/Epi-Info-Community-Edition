@@ -3345,42 +3345,40 @@ namespace Epi.Windows.MakeView.Forms
             string OrganizationKey = ViewRow.ItemArray[2].ToString(); ;
             string WebSurveyId = ViewRow.ItemArray[3].ToString();
 
-                if(ValidateUser())
+          if(ValidateUser())
             {
-                         DoUpDateMode(IsDraftMode, OrganizationKey, WebSurveyId);
+              DoUpDateMode(IsDraftMode, OrganizationKey, WebSurveyId);
             }
 
             else
     
             {
-                               Configuration config = Configuration.GetNewInstance(); 
-                                int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
+            Configuration config = Configuration.GetNewInstance(); 
+            int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
 
-                                if (ISWindowAuthMode == 0)
-                                    {
-                                    if (LoginInfo.UserID == -1)
-                                        {
-                                        UserAuthentication dialog = new UserAuthentication();
-                                        DialogResult result = dialog.ShowDialog();
-                                        if (result == System.Windows.Forms.DialogResult.OK)
-                                            {
-                                            DoUpDateMode(IsDraftMode, OrganizationKey, WebSurveyId);
-            }
-        }
-                                    else 
-        {
-                                       DoUpDateMode(IsDraftMode, OrganizationKey, WebSurveyId);
-                                        }
-            
-
-        }
-                                else {
+            if (ISWindowAuthMode == 0)
+                {
+                if (LoginInfo.UserID == -1)
+                    {
+                    UserAuthentication dialog = new UserAuthentication();
+                    DialogResult result = dialog.ShowDialog();
+                    if (result == System.Windows.Forms.DialogResult.OK)
+                        {
+                        DoUpDateMode(IsDraftMode, OrganizationKey, WebSurveyId);
+                        }
+                    }
+                  else 
+                    {
+                    DoUpDateMode(IsDraftMode, OrganizationKey, WebSurveyId);
+                    }
+                 }
+            else {
           
-                                MessageBox.Show("You are not authorized to Change mode for this form. Please contact system admin for more info.");
+                MessageBox.Show("You are not authorized to Change mode for this form. Please contact system admin for more info.");
             
-        }
+                }
 
-                            }
+             }
             }
 
         private void DoUpDateMode(bool IsDraftMode, string OrganizationKey, string WebSurveyId)
@@ -4133,7 +4131,7 @@ namespace Epi.Windows.MakeView.Forms
 
                 try
                     {
-                    if(ValidateUser()) // Validate User
+                    if (ValidateUser()) // Validate User
                         {
                     if (config.Settings.Republish_IsRepbulishable == true) //IsRepbulishable
                         {
@@ -4366,7 +4364,7 @@ namespace Epi.Windows.MakeView.Forms
 
         private bool ValidateUser()
             {
-            try{
+           
             bool IsValidUser = false;
             string UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
             Configuration config = Configuration.GetNewInstance();
@@ -4380,6 +4378,8 @@ namespace Epi.Windows.MakeView.Forms
             rUser.EmailAddress = User.EmailAddress;
             Request.User = rUser;
             Request.User.Operation = EWEManagerService.ConstantOperationMode.NoChange;
+            try
+                {
             EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
             var Result = client.GetUser(Request);
             if (Result != null && ISWindowAuthMode == 1)
@@ -4392,7 +4392,22 @@ namespace Epi.Windows.MakeView.Forms
             }
              catch (Exception ex) 
                  {
-                 throw ex;
+                 Template template = new Template(this.mediator);
+                 WebEnterOptions dialog2 = new WebEnterOptions();
+                 DialogResult result3 = dialog2.ShowDialog();
+                 //if (result3 == System.Windows.Forms.DialogResult.OK)
+                 //    {
+
+                 //    WebEnterPublishDialog dialog = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                 //    DialogResult result = dialog.ShowDialog();
+                 //    if (result == System.Windows.Forms.DialogResult.Cancel)
+                 //        {
+                 //        this.EWEOrganizationKey = dialog.GetOrgKey;
+                 //        }
+
+
+                 //    }
+                 return IsValidUser;
                  }
             }
         public  UserPrincipal GetUser(string UserName)
