@@ -2796,12 +2796,10 @@ namespace Epi.Windows.MakeView.Forms
 
         private void publishNewSurveyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
-         //  this.OrganizationKey = this.projectExplorer.CurrentView.CheckCodeBefore;
-          
             Template template = new Template(this.mediator);
             string InvalidForPublishing = ListFieldsNotSupportedForWeb();
             View view;
+
             if (projectExplorer.CurrentView != null)
             {
                 view = projectExplorer.CurrentView;
@@ -2810,6 +2808,7 @@ namespace Epi.Windows.MakeView.Forms
             {
                 view = projectExplorer.SelectedPage.view;
             }
+            
             if (InvalidForPublishing.Length > 0)
             {
                 SupportedFieldTypeDialog dialog = new SupportedFieldTypeDialog(InvalidForPublishing);
@@ -2817,183 +2816,181 @@ namespace Epi.Windows.MakeView.Forms
             }
             else
             {
-                    Configuration config = Configuration.GetNewInstance();
+                Configuration config = Configuration.GetNewInstance();
                     
-                    try
+                try
+                {
+                    if (config.Settings.Republish_IsRepbulishable == true)
                     {
-                        if (config.Settings.Republish_IsRepbulishable == true)
-                        
-                        {                            
-                          
                         if (string.IsNullOrWhiteSpace(this.OrganizationKey) && !string.IsNullOrWhiteSpace(view.WebSurveyId))
-                            {
-                                Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No;
+                        {
+                            Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No;
+
                             if (string.IsNullOrWhiteSpace(view.WebSurveyId))
-                                {
-                                    IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrgKey(this.OrganizationKey);
-                                }
+                            {
+                                IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrgKey(this.OrganizationKey);
+                            }
                             else
-                                {
-                                    IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrgKey(this.OrganizationKey, view.WebSurveyId);
-                                }
+                            {
+                                IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrgKey(this.OrganizationKey, view.WebSurveyId);
+                            }
+
                             WebPublishDialog dialog = null;
                             WebSurveyOptions wso = null;
+
                             switch (IsValidOKey)
-                                {
-                                    case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No:
+                            {
+                                case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No:
                                     OrgKey NewDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
                                     DialogResult result = NewDialog.ShowDialog();
+
                                     if (result == System.Windows.Forms.DialogResult.OK)
-                                        {
+                                    {
                                         this.OrganizationKey = NewDialog.OrganizationKey;
                                         if (!string.IsNullOrWhiteSpace(OrganizationKey))
-                                            {
+                                        {
                                             SetSurveyInfo();
                                             dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
                                             dialog.ShowDialog();
-                                            }
                                         }
+                                    }
                                     break;
-                                    case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
+
+                                case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
                                     WebSurveyOptions dialog1 = new WebSurveyOptions();
                                     DialogResult result1 = dialog1.ShowDialog();
+
                                     if (result1 == System.Windows.Forms.DialogResult.OK)
-                                        {
+                                    {
                                         OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
                                         DialogResult result2 = OrgKeyDialog.ShowDialog();
                                         if (result2 == System.Windows.Forms.DialogResult.OK)
-                                            {
+                                        {
                                             this.OrganizationKey = OrgKeyDialog.OrganizationKey;
                                             if (!string.IsNullOrWhiteSpace(OrganizationKey))
-                                                {
+                                            {
                                                 SetSurveyInfo();
                                                 dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
                                                 dialog.ShowDialog();
-                                                }
                                             }
                                         }
+                                    }
                                     break;
-                                    case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.GeneralException:
+
+                                case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.GeneralException:
                                     WebSurveyOptions dialog2 = new WebSurveyOptions();
                                     DialogResult result3 = dialog2.ShowDialog();
                                     if (result3 == System.Windows.Forms.DialogResult.OK)
-                                        {
+                                    {
                                         OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
                                         DialogResult result4 = OrgKeyDialog.ShowDialog();
                                         if (result4 == System.Windows.Forms.DialogResult.OK)
-                                            {
+                                        {
                                             this.OrganizationKey = OrgKeyDialog.OrganizationKey;
                                             if (!string.IsNullOrWhiteSpace(OrganizationKey))
-                                                {
+                                            {
                                                 SetSurveyInfo();
                                                 dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
                                                 dialog.ShowDialog();
-                                                }
                                             }
                                         }
+                                    }
                                     break;
-                                    case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.Yes:
+
+                                case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.Yes:
                                     SetSurveyInfo();
                                     dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
                                     dialog.ShowDialog();
                                     break;
-                                }
-                             
-                             }
-                        else {
-                        if (!string.IsNullOrEmpty(this.OrganizationKey))
-                            {
-                               WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
-                               dialog.ShowDialog();
-                                }else
-                                {
-                                        try
-                                            {
-
-                                                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
-                                                SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
-                                            var TestService = client.GetOrganization(Request);
-
-                                            WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
-                                            DialogResult result = dialog.ShowDialog();
-                                            if (result == System.Windows.Forms.DialogResult.Cancel)
-                                                {
-                                                this.OrganizationKey = dialog.GetOrgKey;
-                                                }
-
-                                            }
-                                        catch (Exception ex)
-                                            {
-                                            WebSurveyOptions dialog2 = new WebSurveyOptions();
-                                            DialogResult result3 = dialog2.ShowDialog();
-                                            if (result3 == System.Windows.Forms.DialogResult.OK)
-                                                {
-                                
-                                                    WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
-                                                    DialogResult result = dialog.ShowDialog();
-                                                    if (result == System.Windows.Forms.DialogResult.Cancel)
-                                                        {
-                                                        this.OrganizationKey = dialog.GetOrgKey;
-                                                        }
-
-                                      
-                                                }
-                                             }
-                                }
                             }
                         }
                         else
                         {
-                        try 
+                            if (!string.IsNullOrEmpty(this.OrganizationKey))
+                            {
+                                WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
+                                dialog.ShowDialog();
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                                    SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
+                                    var TestService = client.GetOrganization(Request);
+
+                                    WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
+                                    DialogResult result = dialog.ShowDialog();
+                                    
+                                    if (result == System.Windows.Forms.DialogResult.Cancel)
+                                    {
+                                        this.OrganizationKey = dialog.GetOrgKey;
+                                    }
+                                }
+                                catch
+                                {
+                                    WebSurveyOptions dialog2 = new WebSurveyOptions();
+                                    DialogResult result3 = dialog2.ShowDialog();
+                                    if (result3 == System.Windows.Forms.DialogResult.OK)
+                                    {
+                                        WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
+                                        DialogResult result = dialog.ShowDialog();
+                                        if (result == System.Windows.Forms.DialogResult.Cancel)
+                                        {
+                                            this.OrganizationKey = dialog.GetOrgKey;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        try
                         {
                             SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                             SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
                             var TestService = client.GetOrganization(Request);
 
                             WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
-                            DialogResult result =  dialog.ShowDialog();
-                                if (result == System.Windows.Forms.DialogResult.Cancel)
-                                    {
-                                     this.OrganizationKey = dialog.GetOrgKey;
-                                    }
-                                
-                            }
-                            catch (Exception ex)
+                            DialogResult result = dialog.ShowDialog();
+                            if (result == System.Windows.Forms.DialogResult.Cancel)
                             {
-                                 
-                  
-                                if (config.Settings.Republish_IsRepbulishable == true)
-                                   {
-                                    WebSurveyOptions dialog2 = new WebSurveyOptions();
-                                    DialogResult result3 = dialog2.ShowDialog();
-                                    if (result3 == System.Windows.Forms.DialogResult.OK)
-                                        {
+                                this.OrganizationKey = dialog.GetOrgKey;
+                            }
 
-                                        WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
-                                        DialogResult result = dialog.ShowDialog();
-                                        if (result == System.Windows.Forms.DialogResult.Cancel)
-                                            {
-                                            this.OrganizationKey = dialog.GetOrgKey;
-                                            }
-
-                                        }
-                                    }
-                                 else
+                        }
+                        catch
+                        {
+                            if (config.Settings.Republish_IsRepbulishable == true)
+                            {
+                                WebSurveyOptions dialog2 = new WebSurveyOptions();
+                                DialogResult result3 = dialog2.ShowDialog();
+                                if (result3 == System.Windows.Forms.DialogResult.OK)
+                                {
+                                    WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
+                                    DialogResult result = dialog.ShowDialog();
+                                    if (result == System.Windows.Forms.DialogResult.Cancel)
                                     {
-                                    
-                                     WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
-                                     dialog.ShowDialog();
+                                        this.OrganizationKey = dialog.GetOrgKey;
                                     }
+                                }
+                            }
+                            else
+                            {
+                                WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
+                                dialog.ShowDialog();
                             }
                         }
                     }
-                    catch(Exception ex)// not republishable
-                    {
-                        WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
-                        dialog.ShowDialog();
-                    }
+                }
+                catch
+                {
+                    WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
+                    dialog.ShowDialog();
+                }
             }
-                            
+
             this.SetPublishMenuItems(view);
         }
 

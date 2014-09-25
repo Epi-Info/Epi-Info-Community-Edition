@@ -122,71 +122,31 @@ namespace Epi.Windows.MakeView.Dialogs
         /// </summary>
         private void DoPublish()
         {
-
             UserPublishGuid = Guid.NewGuid();
            
             txtOrganizationKey.Enabled = false;
-         //   btnPrevious.Enabled = false;
             txtStatus.Clear();
             txtURL.Clear();
-          //  this.tabPublishWebForm.SelectedTab = this.tabPublishWebForm.TabPages[2];
 
             TimeSpan tClose = new TimeSpan(0, 23, 59, 59);
           
             btnPublishForm.Enabled = true;
-
-            
             progressBar.Visible = true;
 
             stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            //SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
-
-         //   Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
-
-           // Epi.Web.Enter.Common.Message.PublishRequest Request = new Epi.Web.Enter.Common.Message.PublishRequest();
-
-            Epi.EWEManagerService.PublishRequest Request = new Epi.EWEManagerService.PublishRequest();
-            Epi.EWEManagerService.SurveyInfoDTO SurveyInfoDTO = new EWEManagerService.SurveyInfoDTO();
+            EWEManagerService.PublishRequest Request = new Epi.EWEManagerService.PublishRequest();
+            EWEManagerService.SurveyInfoDTO SurveyInfoDTO = new EWEManagerService.SurveyInfoDTO();
             Request.SurveyInfo = SurveyInfoDTO;
            
             Request.SurveyInfo.DBConnectionString = RemoveUserName(this.mediater.Project.CollectedDataConnectionString);
                
-            //if ((this.mediater.Project.CollectedData.dbDriver).ConnectionDescription)
             if (this.mediater.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
-                {
+            {
                 Request.SurveyInfo.IsSqlProject = true;
-                }
+            }
         
-           //Request.SurveyInfo.ClosingDate = dtpSurveyClosingDate.Value.Date + t;
-            //if (string.IsNullOrEmpty(ClosingTimecomboBox.Text))
-            //    {
-            //    Request.SurveyInfo.ClosingDate = dtpSurveyClosingDate.Value.Date + GetTimeFormat(tClose.ToString());
-            //    }
-            //else {
-            //    // Request.SurveyInfo.ClosingDate = dtpSurveyClosingDate.Value.Date + GetTimeFormat(ClosingTimecomboBox.Text);
-            //       Request.SurveyInfo.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text); 
-            //    }
-           
-            //if (string.IsNullOrEmpty(StartTimecomboBox.Text))
-            //    {
-            //    Request.SurveyInfo.StartDate = StartDateDatePicker.Value.Date + GetTimeFormat(DateTime.Now.TimeOfDay.ToString());
-            //    }
-            //else
-            //    {
-            //   // Request.SurveyInfo.StartDate = StartDateDatePicker.Value.Date + GetTimeFormat(StartTimecomboBox.Text);
-            //      Request.SurveyInfo.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date ,StartTimecomboBox.Text);
-            //    }
-           
-       
-
-            //Request.SurveyInfo.DepartmentName = txtDepartment.Text;
-            //Request.SurveyInfo.IntroductionText = txtIntroductionText.Text;
-            //Request.SurveyInfo.ExitText = txtExitText.Text;
-            
-            //Request.SurveyInfo.SurveyName = txtSurveyName.Text;
-            
             Request.SurveyInfo.OrganizationKey = new Guid(txtOrganizationKey.Text.ToString());
             Request.SurveyInfo.UserPublishKey = UserPublishGuid;
             Request.SurveyInfo.XML = template;
@@ -197,27 +157,8 @@ namespace Epi.Windows.MakeView.Dialogs
             Request.SurveyInfo.OwnerId = LoginInfo.UserID;
             Request.SurveyInfo.StartDate = DateTime.Now;
            
-            //Request.SurveyInfo.SurveyType = (rdbSingleResponse.Checked) ? 1 : 2;
-            //if (txtOrganization.Text.Equals("Your Organization Name (optional)", StringComparison.OrdinalIgnoreCase))
-            //{
-            //    Request.SurveyInfo.OrganizationName = null;
-            //}
-            //else
-            //{
-            //    Request.SurveyInfo.OrganizationName = txtOrganization.Text;
-            //}
-
-            //if (txtSurveyID.Text.Equals("Your Survey ID (optional)", StringComparison.OrdinalIgnoreCase))
-            //{
-            //    Request.SurveyInfo.SurveyNumber = null;
-            //}
-            //else
-            //{
-            //    Request.SurveyInfo.SurveyNumber = txtSurveyID.Text;
-            //}
-
-
             Configuration config = Configuration.GetNewInstance();
+
             try
             {
                 if (config.Settings.Republish_IsRepbulishable)
@@ -234,10 +175,11 @@ namespace Epi.Windows.MakeView.Dialogs
             {
                 Request.SurveyInfo.IsDraftMode = false;
             }
+            
             try
             {
-                //Epi.Web.Common.Message.PublishResponse Result = new Epi.Web.Common.Message.PublishResponse();
-            Epi.EWEManagerService.PublishResponse Result = new Epi.EWEManagerService.PublishResponse();
+                Epi.EWEManagerService.PublishResponse Result = new Epi.EWEManagerService.PublishResponse();
+
                 lock (syncLock)
                 {
                     this.Cursor = Cursors.WaitCursor;
@@ -267,10 +209,16 @@ namespace Epi.Windows.MakeView.Dialogs
         }
 
         private string RemoveUserName(string ConnectionString)
+        {
+            int indexOfUserId = ConnectionString.IndexOf("User ID");
+
+            if (indexOfUserId > 0)
             {
-            return ConnectionString = ConnectionString.Remove(ConnectionString.IndexOf("User ID")-1);
+                ConnectionString = ConnectionString.Remove(-1);
             }
 
+            return ConnectionString;
+        }
 
         /// <summary>
         /// Initiates a single form publishing process
