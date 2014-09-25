@@ -1835,6 +1835,7 @@ namespace EpiDashboard.Gadgets.Charting
                     if (element is EpiDashboard.Controls.Charting.ColumnChart)
                     {
                         sb.AppendLine(((EpiDashboard.Controls.Charting.ColumnChart)element).ToHTML(htmlFileName, count, true, false));
+                        count++;
                     }
                 }
 

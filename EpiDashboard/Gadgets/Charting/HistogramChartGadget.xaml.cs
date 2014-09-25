@@ -2081,6 +2081,7 @@ namespace EpiDashboard.Gadgets.Charting
                 if (element is EpiDashboard.Controls.Charting.HistogramChart)
                 {
                     sb.AppendLine(((EpiDashboard.Controls.Charting.HistogramChart)element).ToHTML(htmlFileName, count, true, false));
+                    count++;
                 }
             }
 
