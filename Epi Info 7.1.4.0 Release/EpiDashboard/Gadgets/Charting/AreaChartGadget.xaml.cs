@@ -1166,6 +1166,7 @@ namespace EpiDashboard.Gadgets.Charting
                 if (element is Controls.Charting.AreaChart)
                 {
                     sb.AppendLine(((Controls.Charting.AreaChart)element).ToHTML(htmlFileName, count, true, false));
+                    count++;
                 }
             }
 
