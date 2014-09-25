@@ -13,6 +13,7 @@ using Epi.Fields;
 using Epi.DataSets;
 using System.Text.RegularExpressions;
 using Epi.Resources;
+using Epi.EWEManagerService;
 
 namespace Epi.Data.Services
 {
@@ -614,6 +615,61 @@ namespace Epi.Data.Services
         public IDbDriver GetDatabase()
         {
             return this.dbDriver;
+        }
+
+        public void SaveAsResponse(View view)
+        {
+            if (string.IsNullOrEmpty(view.EWEFormId) == false && string.IsNullOrEmpty(view.EWEOrganizationKey) == false)
+            {
+                return;
+            }
+
+            string statusMessage = "";
+
+            try
+            {
+                EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+                Epi.EWEManagerService.PreFilledAnswerRequest Request = new Epi.EWEManagerService.PreFilledAnswerRequest();
+                Guid OrganizationGuid = new Guid("dpb");
+                Guid SurveyGuid = new Guid("dpb");
+                Guid ParentId = new Guid("dpb");
+                Guid ResponseId = new Guid("dpb");
+                Dictionary<string, string> Values = new Dictionary<string, string>();
+
+                //foreach (var item in listView1.Items)
+                //{
+                //    Values.Add(((System.Data.DataRowView)(item)).Row[0].ToString(), ((System.Data.DataRowView)(item)).Row[1].ToString());
+                //}
+
+                Request.AnswerInfo.UserId = 2;
+                Request.AnswerInfo.OrganizationKey = OrganizationGuid;
+                Request.AnswerInfo.SurveyId = SurveyGuid;
+                Request.AnswerInfo.ParentRecordId = ParentId;
+                Request.AnswerInfo.ResponseId = ResponseId;
+                Request.AnswerInfo.SurveyQuestionAnswerList = Values;
+
+                var Result = client.SetSurveyAnswer(Request);
+
+                if (Result.Status == "Success")
+                {
+                    statusMessage += "\nResponse Id: " + Result.SurveyResponseID;
+                    statusMessage += "\nResponse URL: " + Result.SurveyResponseUrl;
+                    statusMessage += "\nPass Code: " + Result.SurveyResponsePassCode;
+                }
+                else
+                {
+                    //if (Result.ErrorMessageList.Count() > 0)
+                    {
+                        foreach (var item in Result.ErrorMessageList)
+                        {
+                            statusMessage += "\n" + item.Key + " : " + item.Value;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+            }
         }
 
         /// <summary>

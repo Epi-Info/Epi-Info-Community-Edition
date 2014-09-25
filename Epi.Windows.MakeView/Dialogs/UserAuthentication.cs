@@ -47,16 +47,16 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             message = "";
            
-            Epi.Windows.MakeView.EWEManagerService.UserAuthenticationRequest Request = new Epi.Windows.MakeView.EWEManagerService.UserAuthenticationRequest();
-            var rUser = new Epi.Windows.MakeView.EWEManagerService.UserDTO();
+            EWEManagerService.UserAuthenticationRequest Request = new EWEManagerService.UserAuthenticationRequest();
+            var rUser = new EWEManagerService.UserDTO();
             
             Request.User = rUser;
-            Request.User.Operation = Epi.Windows.MakeView.EWEManagerService.ConstantOperationMode.NoChange;
+            Request.User.Operation = EWEManagerService.ConstantOperationMode.NoChange;
             Request.User.EmailAddress = this.EmailAddresstextBox1.Text;
             Request.User.UserName = this.EmailAddresstextBox1.Text;
             Request.User.PasswordHash = this.PassWordTextBox1.Text;
-            
-            EWEManagerService.EWEManagerServiceClient client = Epi.Windows.MakeView.Utils.EWEServiceClient.GetClient();
+
+            EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
 
             try
             {

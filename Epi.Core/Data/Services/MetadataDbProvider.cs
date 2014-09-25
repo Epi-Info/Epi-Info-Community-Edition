@@ -9169,10 +9169,10 @@ namespace Epi.Data.Services
             columns.Add(new TableColumn("Height", GenericDbColumnType.Int32, true, false));
             columns.Add(new TableColumn("Orientation", GenericDbColumnType.String, 16, false));
             columns.Add(new TableColumn("LabelAlign", GenericDbColumnType.String, 16, false));
-            columns.Add(new TableColumn("EIWSOrganizationKey", GenericDbColumnType.StringLong, true));
-            columns.Add(new TableColumn("EIWSFormId", GenericDbColumnType.StringLong, true));
-            columns.Add(new TableColumn("EWEOrganizationKey", GenericDbColumnType.StringLong, true));
-            columns.Add(new TableColumn("EWEFormId", GenericDbColumnType.StringLong, true));
+            columns.Add(new TableColumn("EIWSOrganizationKey", GenericDbColumnType.String, 64, true));
+            columns.Add(new TableColumn("EIWSFormId", GenericDbColumnType.String, 64, true));
+            columns.Add(new TableColumn("EWEOrganizationKey", GenericDbColumnType.String, 64, true));
+            columns.Add(new TableColumn("EWEFormId", GenericDbColumnType.String, 64, true));
             db.CreateTable("metaViews", columns);
         }
 

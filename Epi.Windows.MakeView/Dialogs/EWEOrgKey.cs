@@ -53,19 +53,19 @@ namespace Epi.Windows.MakeView.Dialogs
          {
         
             //tbOrgKey
-        Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.No;
-        IsValidOKey = Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrgKey(tbOrgKey.Text.ToString(), this._SurveyId);
+             Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.No;
+             IsValidOKey = Epi.Core.ServiceClient.EWEServiceClient.IsValidOrgKey(tbOrgKey.Text.ToString(), this._SurveyId);
 
             //this.DialogResult = DialogResult.OK;
             switch(IsValidOKey)
             {
-            case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.No:
+                case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.No:
                     pnlError.Visible = true;
                     pnlOrgKey.Visible = true;
                     pnlSuccess.Visible = false;
                     pnlSuccessMsg.Visible = false;
                     break;
-            case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
+                case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
                     pnlError.Visible = true;
                     pnlOrgKey.Visible = true;
                     pnlSuccess.Visible = false;
@@ -74,13 +74,13 @@ namespace Epi.Windows.MakeView.Dialogs
                      
                     wso.Show();
                     break;
-            case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.GeneralException:
+                case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.GeneralException:
                     pnlError.Visible = true;
                     pnlOrgKey.Visible = true;
                     pnlSuccess.Visible = false;
                     pnlSuccessMsg.Visible = false;
                     break;
-            case Epi.Windows.MakeView.Utils.EWEServiceClient.IsValidOrganizationKeyEnum.Yes:
+                case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.Yes:
                     this._OrgKey = tbOrgKey.Text.ToString();
                     pnlError.Visible = false;
                     pnlOrgKey.Visible = false;

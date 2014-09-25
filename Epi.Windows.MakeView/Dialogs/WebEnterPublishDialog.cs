@@ -33,7 +33,7 @@ namespace Epi.Windows.MakeView.Dialogs
         private bool isRepublishableConfig = false;
 
         //private Epi.Web.Enter.Common.DTO.SurveyInfoDTO currentSurveyInfoDTO;
-        private Epi.Windows.MakeView.EWEManagerService.SurveyInfoDTO currentSurveyInfoDTO = new EWEManagerService.SurveyInfoDTO();
+        private Epi.EWEManagerService.SurveyInfoDTO currentSurveyInfoDTO = new EWEManagerService.SurveyInfoDTO();
         //=======
         //private Epi.Web.Common.Message.PublishResponse Result;
         //=======
@@ -42,7 +42,7 @@ namespace Epi.Windows.MakeView.Dialogs
         #region Delegates
         private delegate void SetStatusDelegate(string statusMessage);
       //  private delegate void PublishDelegate(Epi.Web.Common.Message.PublishResponse Result);
-        private delegate void PublishDelegate(Epi.Windows.MakeView.EWEManagerService.PublishResponse Result);
+        private delegate void PublishDelegate(Epi.EWEManagerService.PublishResponse Result);
         private delegate void FinishWithErrorDelegate(string errorMessage);
         private delegate void FinishWithCustomFaultExceptionDelegate(FaultException<CustomFaultException> cfe);
         private delegate void FinishWithFaultExceptionDelegate(FaultException fe);
@@ -147,8 +147,8 @@ namespace Epi.Windows.MakeView.Dialogs
 
            // Epi.Web.Enter.Common.Message.PublishRequest Request = new Epi.Web.Enter.Common.Message.PublishRequest();
 
-            Epi.Windows.MakeView.EWEManagerService.PublishRequest Request = new Epi.Windows.MakeView.EWEManagerService.PublishRequest();
-            Epi.Windows.MakeView.EWEManagerService.SurveyInfoDTO SurveyInfoDTO = new EWEManagerService.SurveyInfoDTO();
+            Epi.EWEManagerService.PublishRequest Request = new Epi.EWEManagerService.PublishRequest();
+            Epi.EWEManagerService.SurveyInfoDTO SurveyInfoDTO = new EWEManagerService.SurveyInfoDTO();
             Request.SurveyInfo = SurveyInfoDTO;
            
             Request.SurveyInfo.DBConnectionString = RemoveUserName(this.mediater.Project.CollectedDataConnectionString);
@@ -237,7 +237,7 @@ namespace Epi.Windows.MakeView.Dialogs
             try
             {
                 //Epi.Web.Common.Message.PublishResponse Result = new Epi.Web.Common.Message.PublishResponse();
-            Epi.Windows.MakeView.EWEManagerService.PublishResponse Result = new Epi.Windows.MakeView.EWEManagerService.PublishResponse();
+            Epi.EWEManagerService.PublishResponse Result = new Epi.EWEManagerService.PublishResponse();
                 lock (syncLock)
                 {
                     this.Cursor = Cursors.WaitCursor;
@@ -301,7 +301,7 @@ namespace Epi.Windows.MakeView.Dialogs
             //SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
 
            // Epi.Web.Enter.Common.Message.PublishRequest Request = new Epi.Web.Enter.Common.Message.PublishRequest();
-            var Request = new Epi.Windows.MakeView.EWEManagerService.PublishRequest();
+            var Request = new Epi.EWEManagerService.PublishRequest();
             Request.Action = "Update";
 
           
@@ -374,7 +374,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
             try
             {
-                EWEManagerService.EWEManagerServiceClient client = MakeView.Utils.EWEServiceClient.GetClient();
+                EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
           //  Epi.Web.Enter.Common.Message.PublishResponse Result = client.RePublishSurvey(Request);
                 //Epi.Web.Enter.Common.Message.PublishResponse Result = client.RePublishSurvey(Request);
                var Result = client.RePublishSurvey(Request);
@@ -467,7 +467,7 @@ namespace Epi.Windows.MakeView.Dialogs
             //this.btnPublish.Enabled = true;
         }
 
-        private void AfterPublish(Epi.Windows.MakeView.EWEManagerService.PublishResponse Result)
+        private void AfterPublish(Epi.EWEManagerService.PublishResponse Result)
         {
             if (Result.PublishInfo.IsPulished)
             {
@@ -936,7 +936,7 @@ namespace Epi.Windows.MakeView.Dialogs
                 }
             else
                 {
-                EWEManagerService.EWEManagerServiceClient client = MakeView.Utils.EWEServiceClient.GetClient();
+                    EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
 
                 //this.txtDepartment.Visible = false;
                 //this.lblDepartment.Visible = false;
@@ -969,8 +969,8 @@ namespace Epi.Windows.MakeView.Dialogs
                 this.txtOrganizationKey.Text = this.OrganizationKey;
 
                 // Epi.Web.Enter.Common.Message.SurveyInfoRequest Request = new Epi.Web.Enter.Common.Message.SurveyInfoRequest();
-                Epi.Windows.MakeView.EWEManagerService.SurveyInfoRequest Request = new Epi.Windows.MakeView.EWEManagerService.SurveyInfoRequest();
-                Epi.Windows.MakeView.EWEManagerService.SurveyInfoCriteria Criteria = new EWEManagerService.SurveyInfoCriteria();
+                EWEManagerService.SurveyInfoRequest Request = new EWEManagerService.SurveyInfoRequest();
+                EWEManagerService.SurveyInfoCriteria Criteria = new EWEManagerService.SurveyInfoCriteria();
 
                 List<string> IdList = new List<string>();
                 IdList.Add(WebSurveyId);
@@ -1348,12 +1348,12 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-            EWEManagerService.EWEManagerServiceClient client = MakeView.Utils.EWEServiceClient.GetClient();
+                EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
 
                 //Epi.Web.Common.Message.PublishRequest Request = (Epi.Web.Common.Message.PublishRequest)((object[])e.Argument)[0];
                 //Epi.Web.Common.Message.PublishResponse Result = (Epi.Web.Common.Message.PublishResponse)((object[])e.Argument)[1];
-            Epi.Windows.MakeView.EWEManagerService.PublishRequest Request = (Epi.Windows.MakeView.EWEManagerService.PublishRequest)((object[])e.Argument)[0];
-            Epi.Windows.MakeView.EWEManagerService.PublishResponse Result = (Epi.Windows.MakeView.EWEManagerService.PublishResponse)((object[])e.Argument)[1];
+            EWEManagerService.PublishRequest Request = (EWEManagerService.PublishRequest)((object[])e.Argument)[0];
+            EWEManagerService.PublishResponse Result = (EWEManagerService.PublishResponse)((object[])e.Argument)[1];
                 Result = client.PublishSurvey(Request);
                 this.BeginInvoke(new PublishDelegate(AfterPublish), Result);
             }
