@@ -3726,81 +3726,65 @@ namespace Epi.Windows.MakeView.Forms
         }
        
         public void SetFormInfo()
-            {
+        {
             try
-                {
-                    EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+            {
+                EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
                 Configuration config = Configuration.GetNewInstance();
                 DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(this.projectExplorer.CurrentView.Id);
                 DataRow ViewRow = table.Rows[0];
 
                 string WebSurveyId = ViewRow.ItemArray[3].ToString();
 
-                Epi.EWEManagerService.SurveyInfoRequest Request = new Epi.EWEManagerService.SurveyInfoRequest();
-                Epi.EWEManagerService.SurveyInfoResponse Result = new Epi.EWEManagerService.SurveyInfoResponse();
+                Epi.EWEManagerService.SurveyInfoRequest infoRequest = new Epi.EWEManagerService.SurveyInfoRequest();
+                Epi.EWEManagerService.SurveyInfoResponse infoResult = new Epi.EWEManagerService.SurveyInfoResponse();
+                infoRequest.Criteria = new EWEManagerService.SurveyInfoCriteria();
                 
                 if (!string.IsNullOrWhiteSpace(WebSurveyId))
                 {
-                    Request.Criteria.OrganizationKey = new Guid(this.EWEOrganizationKey); //new Guid(this.OrganizationKey);
-                    Request.Criteria.ReturnSizeInfoOnly = false;
-                    Request.Criteria.SurveyIdList[0]=WebSurveyId;
-                    Result = client.GetSurveyInfo(Request);
-
+                    infoRequest.Criteria.OrganizationKey = new Guid(this.EWEOrganizationKey);
+                    infoRequest.Criteria.ReturnSizeInfoOnly = false;
+                    infoRequest.Criteria.SurveyIdList = new string[]{WebSurveyId};
+                    infoResult = client.GetSurveyInfo(infoRequest);
                 }
 
-                if (Result != null && Result.SurveyInfoList.Count() > 0)
-                    {
-
-                    SurveyName = Result.SurveyInfoList[0].SurveyName;
-                    DepartmentName = Result.SurveyInfoList[0].DepartmentName;
-                    SurveyNumber = Result.SurveyInfoList[0].SurveyNumber;
-                    OrganizationName = Result.SurveyInfoList[0].OrganizationName;
-                    StartDate = Result.SurveyInfoList[0].StartDate;
-                    CloseDate = Result.SurveyInfoList[0].ClosingDate;
-                    IsDraftMode = Result.SurveyInfoList[0].IsDraftMode;
-                    IntroductionText = Result.SurveyInfoList[0].IntroductionText;
-                    ExitText = Result.SurveyInfoList[0].ExitText;
-                    TemplateXML = Result.SurveyInfoList[0].XML;
-                    //this.OrganizationKey = Result.SurveyInfoList[0].OrganizationKey.ToString();
-                    SurveyType = Result.SurveyInfoList[0].SurveyType;
-                    this.UserPublishKey = Result.SurveyInfoList[0].UserPublishKey.ToString();
-                    //SurveyId = Result.SurveyInfoList[0].SurveyId;
-                    //ChangeModetoolStripDropDownButton
+                if (infoResult != null && infoResult.SurveyInfoList.Count() > 0)
+                {
+                    SurveyName = infoResult.SurveyInfoList[0].SurveyName;
+                    DepartmentName = infoResult.SurveyInfoList[0].DepartmentName;
+                    SurveyNumber = infoResult.SurveyInfoList[0].SurveyNumber;
+                    OrganizationName = infoResult.SurveyInfoList[0].OrganizationName;
+                    StartDate = infoResult.SurveyInfoList[0].StartDate;
+                    CloseDate = infoResult.SurveyInfoList[0].ClosingDate;
+                    IsDraftMode = infoResult.SurveyInfoList[0].IsDraftMode;
+                    IntroductionText = infoResult.SurveyInfoList[0].IntroductionText;
+                    ExitText = infoResult.SurveyInfoList[0].ExitText;
+                    TemplateXML = infoResult.SurveyInfoList[0].XML;
+                    SurveyType = infoResult.SurveyInfoList[0].SurveyType;
+                    this.UserPublishKey = infoResult.SurveyInfoList[0].UserPublishKey.ToString();
                     SetEWEModetoolStripDropDown(IsDraftMode);
-                    }
-
-                }
-            catch (FaultException<CustomFaultException> cfe)
-                {
-                // this.BeginInvoke(new FinishWithCustomFaultExceptionDelegate(FinishWithCustomFaultException), cfe);
-
-                }
-            catch (FaultException fe)
-                {
-                //this.BeginInvoke(new FinishWithFaultExceptionDelegate(FinishWithFaultException), fe);
-
-                }
-            catch (SecurityNegotiationException sne)
-                {
-                //this.BeginInvoke(new FinishWithSecurityNegotiationExceptionDelegate(FinishWithSecurityNegotiationException), sne);
-
-                }
-            catch (CommunicationException ce)
-                {
-                //this.BeginInvoke(new FinishWithCommunicationExceptionDelegate(FinishWithCommunicationException), ce);
-
-                }
-            catch (TimeoutException te)
-                {
-                // this.BeginInvoke(new FinishWithTimeoutExceptionDelegate(FinishWithTimeoutException), te);
-
-        }
-            catch (Exception ex)
-                {
-                //this.BeginInvoke(new FinishWithExceptionDelegate(FinishWithException), ex);
-
                 }
             }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+            }
+            catch (FaultException fe)
+            {
+            }
+            catch (SecurityNegotiationException sne)
+            {
+            }
+            catch (CommunicationException ce)
+            {
+            }
+            catch (TimeoutException te)
+            {
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
         private void ChangeModetoolStripDropDownButton_Click(object sender, EventArgs e)
         {
             /*
@@ -4305,53 +4289,57 @@ namespace Epi.Windows.MakeView.Forms
                         }
                         }
                     else // Validate User
-                        {
-                          
-
+                    {
                         int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
 
                         if (ISWindowAuthMode == 0)
+                        {
+                            if (LoginInfo.UserID == -1)
                             {
-                               if(LoginInfo.UserID == -1){
                                 UserAuthentication dialog = new UserAuthentication();
                                 DialogResult result = dialog.ShowDialog();
                                 if (result == System.Windows.Forms.DialogResult.OK)
-                                    {
+                                {
                                     dialog.Close();
                                     if (string.IsNullOrEmpty(this.EWEOrganizationKey))
-                                        {
-                                          WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
-                                           dialog1.ShowDialog();
-                                        }else{
-                                        WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                                    {
+                                        WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
                                         dialog1.ShowDialog();
-                                
-                                        }
                                     }
-                                   }
-                               else{
-                                    if (string.IsNullOrEmpty(this.EWEOrganizationKey))
-                                        {
-                                          WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
-                                           dialog1.ShowDialog();
-                                        }else{
+                                    else
+                                    {
                                         WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
                                         dialog1.ShowDialog();
-                                
-                                        }
-                                   
-                                   }
+
+                                    }
+                                }
                             }
-                        
-                        else
+                            else
                             {
-                            MessageBox.Show("You are not authorized to publish this form to Epi Web Enter system. Please contact system admin for more info.");
-                            
-                            
-                            
+                                if (string.IsNullOrEmpty(this.EWEOrganizationKey))
+                                {
+                                    WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
+                                    dialog1.ShowDialog();
+                                }
+                                else
+                                {
+                                    WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                                    dialog1.ShowDialog();
+
+                                }
+
                             }
                         }
+
+                        else
+                        {
+                            MessageBox.Show("You are not authorized to publish this form to Epi Web Enter system. Please contact system admin for more info.");
+
+
+
+                        }
                     }
+                }
                 catch (Exception ex)// not republishable
                     {
                     WebEnterPublishDialog dialog = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
