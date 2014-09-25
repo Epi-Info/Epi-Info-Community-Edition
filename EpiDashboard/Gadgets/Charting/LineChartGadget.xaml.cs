@@ -1269,6 +1269,7 @@ namespace EpiDashboard.Gadgets.Charting
                 if (element is EpiDashboard.Controls.Charting.LineChart)
                 {
                     sb.AppendLine(((EpiDashboard.Controls.Charting.LineChart)element).ToHTML(htmlFileName, count, true, false));
+                    count++;
                 }
             }
 
