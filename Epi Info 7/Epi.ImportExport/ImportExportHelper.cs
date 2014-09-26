@@ -12,23 +12,6 @@ namespace Epi.ImportExport
     public static class ImportExportHelper
     {
         /// <summary>
-        /// Gets the appropriate data packager type for the given db driver type.
-        /// </summary>
-        /// <param name="database"></param>
-        /// <returns></returns>
-        public static Type GetPackagerType(IDbDriver database)
-        {
-            if (database.ConnectionDescription.ToLower().Contains("ole") || database.ConnectionDescription.ToLower().Contains("access"))
-            {
-                return typeof(AccessProjectPackager);
-            }
-            else
-            {
-                return typeof(GenericProjectPackager);
-            }
-        }
-
-        /// <summary>
         /// Compresses an Epi Info 7 data package.
         /// </summary>
         /// <param name="fi">The file info for the raw data file that will be compressed.</param>
@@ -256,13 +239,16 @@ namespace Epi.ImportExport
                         if (field is Epi.Fields.RenderableField && field is Epi.Fields.IDataField)
                         {
                             Epi.Fields.RenderableField renderableField = field as Epi.Fields.RenderableField;
-                            double tabIndex = renderableField.TabIndex;
-                            while (fieldsOnPage.ContainsKey(tabIndex))
+                            if (renderableField != null)
                             {
-                                tabIndex = tabIndex + 0.1;
-                            }
+                                double tabIndex = renderableField.TabIndex;
+                                while (fieldsOnPage.ContainsKey(tabIndex))
+                                {
+                                    tabIndex = tabIndex + 0.1;
+                                }
 
-                            fieldsOnPage.Add(tabIndex, field.Name);
+                                fieldsOnPage.Add(tabIndex, field.Name);
+                            }
                         }
                     }
 

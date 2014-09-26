@@ -316,6 +316,11 @@ namespace Epi.ImportExport
                             RenderableField rfDstField = destinationField as RenderableField;
                             RenderableField rfSrcField = sourceField as RenderableField;
 
+                            if (rfDstField == null || rfSrcField == null)
+                            {
+                                throw new InvalidOperationException("null fields detected in CheckIfDescendantFormsAreAlike");
+                            }
+
                             if (rfDstField.Page.Position != rfSrcField.Page.Position)
                             {
                                 throw new ApplicationException(string.Format(ImportExportSharedStrings.ERROR_DESCENDANT_FIELD_PAGE_ORDER_MISMATCH, rfSrcField.Name, sourceChildForm.Name));
@@ -323,7 +328,15 @@ namespace Epi.ImportExport
                         }
                         if (destinationField is GridField && sourceField is GridField)
                         {
-                            CheckIfGridsAreAlike(destinationField as GridField, sourceField as GridField);
+                            GridField destinationGridField = destinationField as GridField;
+                            GridField sourceGridField = sourceField as GridField;
+
+                            if (destinationGridField == null || sourceGridField == null)
+                            {
+                                throw new InvalidOperationException("null fields detected in CheckIfDescendantFormsAreAlike");
+                            }
+
+                            CheckIfGridsAreAlike(destinationGridField, sourceGridField);
                         }
                     }
                 }
@@ -381,7 +394,10 @@ namespace Epi.ImportExport
         /// </summary>
         private void CheckIfGridsAreAlike(GridField sourceGridField, GridField destGridField)
         {
-            //OnAddStatusMessage(string.Format(ImportExportSharedStrings.IMPORT_CHECK_GRID_START, sourceGridField.Name));
+            #region Input Validation
+            if (sourceGridField == null) throw new ArgumentNullException("sourceGridField");
+            if (destGridField == null) throw new ArgumentNullException("destGridField");
+            #endregion // Input Validation
 
             foreach (GridColumnBase dgc in destGridField.Columns)
             {
@@ -446,7 +462,7 @@ namespace Epi.ImportExport
                 }
             }
 
-            if (!string.IsNullOrEmpty(destinationView.TableName) && destinationProjectDataDriver.TableExists(destinationView.TableName))
+            if (!String.IsNullOrEmpty(destinationView.TableName) && destinationProjectDataDriver.TableExists(destinationView.TableName))
             {
                 if (!sourceView.TableName.Equals(destinationView.TableName))
                 {
@@ -462,7 +478,7 @@ namespace Epi.ImportExport
 
                     if (destinationField.FieldType != sourceField.FieldType)
                     {
-                        throw new ApplicationException(string.Format(ImportExportSharedStrings.ERROR_FIELD_MISMATCH_DEST, destinationField.Name));
+                        throw new ApplicationException(String.Format(ImportExportSharedStrings.ERROR_FIELD_MISMATCH_DEST, destinationField.Name));
                     }
                     else
                     {
@@ -473,7 +489,7 @@ namespace Epi.ImportExport
 
                             if (rfDstField.Page.Position != rfSrcField.Page.Position)
                             {
-                                throw new ApplicationException(string.Format(ImportExportSharedStrings.ERROR_FIELD_PAGE_ORDER_MISMATCH, rfSrcField.Name));
+                                throw new ApplicationException(String.Format(ImportExportSharedStrings.ERROR_FIELD_PAGE_ORDER_MISMATCH, rfSrcField.Name));
                             }
                         }
                         if (destinationField is GridField && sourceField is GridField)
@@ -654,10 +670,14 @@ namespace Epi.ImportExport
             {
                 if (f is OptionField)
                 {
-                    DataTable dt = destinationProjectDataDriver.GetTopTwoTable((f as OptionField).Page.TableName);
-                    if (dt.Columns[f.Name].DataType.ToString().Equals("System.String"))
+                    OptionField optionField = f as OptionField;
+                    if (optionField != null)
                     {
-                        optionFieldsAsStrings.Add(f.Name);
+                        DataTable dt = destinationProjectDataDriver.GetTopTwoTable(optionField.Page.TableName);
+                        if (dt.Columns[optionField.Name].DataType.ToString().Equals("System.String", StringComparison.OrdinalIgnoreCase))
+                        {
+                            optionFieldsAsStrings.Add(f.Name);
+                        }
                     }
                 }
             }

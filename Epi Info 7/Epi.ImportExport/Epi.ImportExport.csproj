@@ -216,11 +216,8 @@
     <Compile Include="FormDataImporter.cs" />
     <Compile Include="Filters\IRowFilterCondition.cs" />
     <Compile Include="ImportExportProblem.cs" />
-    <Compile Include="ProjectPackagers\AccessProjectPackager.cs" />
     <Compile Include="ProjectPackagers\ExportInfo.cs" />
-    <Compile Include="ProjectPackagers\GenericProjectPackager.cs" />
     <Compile Include="ProjectPackagers\ImportInfo.cs" />
-    <Compile Include="ProjectPackagers\IProjectPackager.cs" />
     <Compile Include="ProjectPackagers\PackageFieldData.cs" />
     <Compile Include="ProjectPackagers\PackagerStrings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -247,12 +244,8 @@
     <Compile Include="Epi2000\Page.cs" />
     <Compile Include="Epi2000\Project.cs" />
     <Compile Include="Epi2000\View.cs" />
-    <Compile Include="ProjectPackagers\ProjectPackagerBase.cs" />
     <Compile Include="ImportExportProblemType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="FormCopier.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ProjectUpgradeManager.cs" />

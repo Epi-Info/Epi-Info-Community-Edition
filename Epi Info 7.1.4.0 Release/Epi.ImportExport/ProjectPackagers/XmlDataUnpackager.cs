@@ -241,38 +241,40 @@ namespace Epi.ImportExport.ProjectPackagers
                                             {
                                                 Field field = form.Fields.GridFields[gridNode.Attributes["Name"].Value];
                                                 GridField gridField = field as GridField;
-
-                                                if (gridNode.ChildNodes.Count == 2)
+                                                if (gridField != null)
                                                 {
-                                                    XmlNode gridMetaDataNode = gridNode.ChildNodes[0];
-                                                    XmlNode gridDataNode = gridNode.ChildNodes[1];
-
-                                                    foreach (XmlElement gridRecordElement in gridDataNode.ChildNodes)
+                                                    if (gridNode.ChildNodes.Count == 2)
                                                     {
-                                                        string gridGuid = gridRecordElement.Attributes["UniqueRowId"].Value.ToString();
-                                                        foreach (XmlNode gridColumnNode in gridRecordElement.ChildNodes)
+                                                        XmlNode gridMetaDataNode = gridNode.ChildNodes[0];
+                                                        XmlNode gridDataNode = gridNode.ChildNodes[1];
+
+                                                        foreach (XmlElement gridRecordElement in gridDataNode.ChildNodes)
                                                         {
-                                                            string columnName = string.Empty;
-                                                            if (gridColumnNode.Name.Equals("GridColumn"))
+                                                            string gridGuid = gridRecordElement.Attributes["UniqueRowId"].Value.ToString();
+                                                            foreach (XmlNode gridColumnNode in gridRecordElement.ChildNodes)
                                                             {
-                                                                columnName = gridColumnNode.Attributes[0].Value;
+                                                                string columnName = string.Empty;
+                                                                if (gridColumnNode.Name.Equals("GridColumn"))
+                                                                {
+                                                                    columnName = gridColumnNode.Attributes[0].Value;
 
-                                                                object gridColumnValue = gridColumnNode.InnerText;
+                                                                    object gridColumnValue = gridColumnNode.InnerText;
 
-                                                                PackageFieldData fieldData = new PackageFieldData();
-                                                                fieldData.FieldName = columnName;
-                                                                fieldData.FieldValue = gridColumnValue;
-                                                                fieldData.RecordGUID = gridGuid;
+                                                                    PackageFieldData fieldData = new PackageFieldData();
+                                                                    fieldData.FieldName = columnName;
+                                                                    fieldData.FieldValue = gridColumnValue;
+                                                                    fieldData.RecordGUID = gridGuid;
 
-                                                                gridRecords.Add(fieldData);
+                                                                    gridRecords.Add(fieldData);
+                                                                }
                                                             }
                                                         }
                                                     }
-                                                }
-                                                if (gridRecords.Count > 0)
-                                                {
-                                                    ImportGridRecords(gridField, gridNode, gridRecords);
-                                                    ImportInfo.GridsProcessed++;
+                                                    if (gridRecords.Count > 0)
+                                                    {
+                                                        ImportGridRecords(gridField, gridNode, gridRecords);
+                                                        ImportInfo.GridsProcessed++;
+                                                    }
                                                 }
                                             }
                                             #endregion // Grid Records
