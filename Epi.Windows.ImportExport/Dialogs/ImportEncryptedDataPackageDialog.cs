@@ -345,17 +345,20 @@ namespace Epi.Windows.ImportExport.Dialogs
             {
                 Exception ex = result as Exception;
 
-                if (ex is System.Security.Cryptography.CryptographicException)
+                if (ex != null)
                 {
-                    string msg = ImportExportSharedStrings.IMPORT_FAIL_DECRYPT;
-                    this.BeginInvoke(new SetStatusDelegate(AddNotificationStatusMessage), msg);
-                    this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), msg);
-                }
-                else
-                {
-                    string msg = string.Format(ImportExportSharedStrings.IMPORT_FAIL_EXCEPTION, ex.Message);
-                    this.BeginInvoke(new SetStatusDelegate(AddNotificationStatusMessage), msg);
-                    this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), msg);
+                    if (ex is System.Security.Cryptography.CryptographicException)
+                    {
+                        string msg = ImportExportSharedStrings.IMPORT_FAIL_DECRYPT;
+                        this.BeginInvoke(new SetStatusDelegate(AddNotificationStatusMessage), msg);
+                        this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), msg);
+                    }
+                    else
+                    {
+                        string msg = string.Format(ImportExportSharedStrings.IMPORT_FAIL_EXCEPTION, ex.Message);
+                        this.BeginInvoke(new SetStatusDelegate(AddNotificationStatusMessage), msg);
+                        this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), msg);
+                    }
                 }
             }
             else

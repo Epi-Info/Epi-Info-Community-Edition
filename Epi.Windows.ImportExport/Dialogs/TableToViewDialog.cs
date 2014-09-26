@@ -193,7 +193,7 @@ namespace Epi.ImportExport.Dialogs
             //((DataGridViewComboBoxColumn)dgvFormFields.Columns["ListSourceTableName"]).DataSource = codeTableList;
             //((DataGridViewComboBoxColumn)dgvFormFields.Columns["ListSourceTableName"]).AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             
-            dgvFormFields.DataSource = dataDictionary;            
+            dgvFormFields.DataSource = dataDictionary;
             dgvFormFields.AutoResizeColumns();
 
             codeTableList.Add(string.Empty);
@@ -202,6 +202,11 @@ namespace Epi.ImportExport.Dialogs
             {
                 DataGridViewComboBoxCell dgvc = dgvRow.Cells["FieldType"] as DataGridViewComboBoxCell;                
                 DataGridViewTextBoxCell dgvt = dgvRow.Cells["SourceColumnType"] as DataGridViewTextBoxCell;
+
+                if (dgvc == null || dgvt == null)
+                {
+                    throw new InvalidOperationException("dgvc and dgvt must not be null.");
+                }
 
                 dgvc.Items.Clear();
                 
