@@ -946,121 +946,154 @@ namespace Epi.Enter.Forms
                 dataField is RelatedViewField ||
                 dataField is UniqueKeyField ||
                 dataField is RecStatusField ||
-                dataField is GlobalRecordIdField ||
-                fieldData.FieldValue == null ||
-                string.IsNullOrEmpty(fieldData.FieldValue.ToString())
+                dataField is GlobalRecordIdField               
                 ))
             {
                 String fieldName = ((Epi.INamedObject)dataField).Name;
-                switch (dataField.FieldType)
+                if (fieldData.FieldValue == null || string.IsNullOrEmpty(fieldData.FieldValue.ToString()))
                 {
-                    case MetaFieldType.Date:
-                    case MetaFieldType.DateTime:
-                    case MetaFieldType.Time:
-                        return new QueryParameter("@" + fieldName, DbType.DateTime, Convert.ToDateTime(fieldData.FieldValue));
-                    case MetaFieldType.Checkbox:
-                        return new QueryParameter("@" + fieldName, DbType.Boolean, Convert.ToBoolean(fieldData.FieldValue));
-                    case MetaFieldType.CommentLegal:
-                    case MetaFieldType.LegalValues:
-                    case MetaFieldType.Codes:
-                    case MetaFieldType.Text:
-                    case MetaFieldType.TextUppercase:
-                    case MetaFieldType.PhoneNumber:
-                    case MetaFieldType.UniqueRowId:
-                    case MetaFieldType.ForeignKey:
-                    case MetaFieldType.GlobalRecordId:
-                    case MetaFieldType.Multiline:
-                        return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
-                    case MetaFieldType.Number:
-                    case MetaFieldType.YesNo:
-                    case MetaFieldType.Option:
-                    case MetaFieldType.RecStatus:
-                        return new QueryParameter("@" + fieldName, DbType.Single, fieldData.FieldValue);
-                    case MetaFieldType.Image:
-                        byte[] imageBytes = null;
-                        if (syncFilePath.Contains("EpiInfo\\"))
-                        {
-                            string part1 = syncFilePath.Substring(0, syncFilePath.IndexOf("EpiInfo"));
-                            string part2 = fieldData.FieldValue.ToString().Substring(fieldData.FieldValue.ToString().IndexOf("EpiInfo"), fieldData.FieldValue.ToString().Length - fieldData.FieldValue.ToString().IndexOf("EpiInfo"));
-                            string fileName = part1 + part2;
-
-                            if (File.Exists(fileName))
+                    switch (dataField.FieldType)
+                    {
+                        case MetaFieldType.Date:
+                        case MetaFieldType.DateTime:
+                        case MetaFieldType.Time:
+                            return new QueryParameter("@" + fieldName, DbType.DateTime, DBNull.Value);
+                        case MetaFieldType.Checkbox:
+                            return new QueryParameter("@" + fieldName, DbType.Boolean, DBNull.Value);
+                        case MetaFieldType.CommentLegal:
+                        case MetaFieldType.LegalValues:
+                        case MetaFieldType.Codes:
+                        case MetaFieldType.Text:
+                        case MetaFieldType.TextUppercase:
+                        case MetaFieldType.PhoneNumber:
+                        case MetaFieldType.UniqueRowId:
+                        case MetaFieldType.ForeignKey:
+                        case MetaFieldType.GlobalRecordId:
+                        case MetaFieldType.Multiline:
+                            return new QueryParameter("@" + fieldName, DbType.String, DBNull.Value);
+                        case MetaFieldType.Number:
+                        case MetaFieldType.YesNo:
+                        case MetaFieldType.Option:
+                        case MetaFieldType.RecStatus:
+                            return new QueryParameter("@" + fieldName, DbType.Single, DBNull.Value);
+                        case MetaFieldType.Image:
+                            return new QueryParameter("@" + fieldName, DbType.Binary, DBNull.Value);
+                        default:
+                            throw new ApplicationException("Not a supported field type");
+                    }
+                }
+                else
+                {
+                    switch (dataField.FieldType)
+                    {
+                        case MetaFieldType.Date:
+                        case MetaFieldType.DateTime:
+                        case MetaFieldType.Time:
+                            return new QueryParameter("@" + fieldName, DbType.DateTime, Convert.ToDateTime(fieldData.FieldValue));
+                        case MetaFieldType.Checkbox:
+                            return new QueryParameter("@" + fieldName, DbType.Boolean, Convert.ToBoolean(fieldData.FieldValue));
+                        case MetaFieldType.CommentLegal:
+                        case MetaFieldType.LegalValues:
+                        case MetaFieldType.Codes:
+                        case MetaFieldType.Text:
+                        case MetaFieldType.TextUppercase:
+                        case MetaFieldType.PhoneNumber:
+                        case MetaFieldType.UniqueRowId:
+                        case MetaFieldType.ForeignKey:
+                        case MetaFieldType.GlobalRecordId:
+                        case MetaFieldType.Multiline:
+                            return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
+                        case MetaFieldType.Number:
+                        case MetaFieldType.YesNo:
+                        case MetaFieldType.Option:
+                        case MetaFieldType.RecStatus:
+                            return new QueryParameter("@" + fieldName, DbType.Single, fieldData.FieldValue);
+                        case MetaFieldType.Image:
+                            byte[] imageBytes = null;
+                            if (syncFilePath.Contains("EpiInfo\\"))
                             {
-                                imageBytes = Util.GetByteArrayFromImagePath(fileName);
-                            }
-                        }
-                        else
-                        {
-                            imageBytes = null;
-                            var devices = new PortableDevices.PortableDeviceCollection();
-                            try
-                            {
-                                devices.Refresh();
-                            }
-                            catch (System.IndexOutOfRangeException)
-                            {
-                                break;
-                            }
+                                string part1 = syncFilePath.Substring(0, syncFilePath.IndexOf("EpiInfo"));
+                                string part2 = fieldData.FieldValue.ToString().Substring(fieldData.FieldValue.ToString().IndexOf("EpiInfo"), fieldData.FieldValue.ToString().Length - fieldData.FieldValue.ToString().IndexOf("EpiInfo"));
+                                string fileName = part1 + part2;
 
-                            if (devices.Count == 0)
-                            {
-                                break;
-                            }
-
-                            var pd = devices.First();
-                            pd.Connect();
-                            PortableDeviceFolder root = pd.GetContents();
-
-                            PortableDeviceFolder download =
-                                (from r in ((PortableDeviceFolder)root.Files[0]).Files
-                                 where r.Name.Equals("Download")
-                                 select r).First() as PortableDeviceFolder;
-
-                            PortableDeviceFolder epiinfo =
-                                (from r in download.Files
-                                 where r.Name.Equals("EpiInfo")
-                                 select r).First() as PortableDeviceFolder;
-
-                            PortableDeviceFolder images =
-                                (from r in epiinfo.Files
-                                 where r.Name.Equals("Images")
-                                 select r).First() as PortableDeviceFolder;
-
-                            if (images == null)
-                            {
-                                pd.Disconnect();
-                                break;
+                                if (File.Exists(fileName))
+                                {
+                                    imageBytes = Util.GetByteArrayFromImagePath(fileName);
+                                }
                             }
                             else
                             {
+                                imageBytes = null;
+                                var devices = new PortableDevices.PortableDeviceCollection();
                                 try
                                 {
-                                    string imageFileName = fieldData.FieldValue.ToString().Substring(fieldData.FieldValue.ToString().IndexOf("Images/")).Split('/')[1].Split('.')[0];
-                                    string tempPath = Path.GetTempPath();
-                                    PortableDeviceFile existingFile =
-                                    (from r in images.Files
-                                     where r.Name.Equals(imageFileName)
-                                     select r).First() as PortableDeviceFile;
-                                    new FileInfo(tempPath + existingFile.Id).Create().Close();
-                                    pd.DownloadFile(existingFile, tempPath);
-                                    imageBytes = Util.GetByteArrayFromImagePath(tempPath + existingFile.Id);
+                                    devices.Refresh();
                                 }
-                                catch (Exception ex)
+                                catch (System.IndexOutOfRangeException)
                                 {
-                                    //
+                                    break;
+                                }
+
+                                if (devices.Count == 0)
+                                {
+                                    break;
+                                }
+
+                                var pd = devices.First();
+                                pd.Connect();
+                                PortableDeviceFolder root = pd.GetContents();
+
+                                PortableDeviceFolder download =
+                                    (from r in ((PortableDeviceFolder)root.Files[0]).Files
+                                     where r.Name.Equals("Download")
+                                     select r).First() as PortableDeviceFolder;
+
+                                PortableDeviceFolder epiinfo =
+                                    (from r in download.Files
+                                     where r.Name.Equals("EpiInfo")
+                                     select r).First() as PortableDeviceFolder;
+
+                                PortableDeviceFolder images =
+                                    (from r in epiinfo.Files
+                                     where r.Name.Equals("Images")
+                                     select r).First() as PortableDeviceFolder;
+
+                                if (images == null)
+                                {
+                                    pd.Disconnect();
+                                    break;
+                                }
+                                else
+                                {
+                                    try
+                                    {
+                                        string imageFileName = fieldData.FieldValue.ToString().Substring(fieldData.FieldValue.ToString().IndexOf("Images/")).Split('/')[1].Split('.')[0];
+                                        string tempPath = Path.GetTempPath();
+                                        PortableDeviceFile existingFile =
+                                        (from r in images.Files
+                                         where r.Name.Equals(imageFileName)
+                                         select r).First() as PortableDeviceFile;
+                                        new FileInfo(tempPath + existingFile.Id).Create().Close();
+                                        pd.DownloadFile(existingFile, tempPath);
+                                        imageBytes = Util.GetByteArrayFromImagePath(tempPath + existingFile.Id);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        //
+                                    }
                                 }
                             }
-                        }
-                        if (imageBytes != null)
-                        {
-                            return new QueryParameter("@" + fieldName, DbType.Binary, imageBytes);
-                        }
-                        else
-                        {
-                            return new QueryParameter("@" + fieldName, DbType.Binary, null);
-                        }
-                    default:
-                        throw new ApplicationException("Not a supported field type");
+                            if (imageBytes != null)
+                            {
+                                return new QueryParameter("@" + fieldName, DbType.Binary, imageBytes);
+                            }
+                            else
+                            {
+                                return new QueryParameter("@" + fieldName, DbType.Binary, null);
+                            }
+                        default:
+                            throw new ApplicationException("Not a supported field type");
+                    }
                 }
             }
 
@@ -1280,7 +1313,27 @@ namespace Epi.Enter.Forms
 
                 textProgress.Text = string.Empty;
                 AddStatusMessage("Request for phone sync file initiated by user " + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString());
+                string importTypeDescription = "Records with matching ID fields will be updated and unmatched records will be appended.";
 
+                if (cmbImportType.SelectedIndex == 0)
+                {
+                    update = true;
+                    append = true;
+                }
+                else if (cmbImportType.SelectedIndex == 1)
+                {
+                    update = true;
+                    append = false;
+                    importTypeDescription = "Records with matching ID fields will be updated. Unmatched records will be ignored.";
+                }
+                else
+                {
+                    update = false;
+                    append = true;
+                    importTypeDescription = "Records with no matching ID fields will be appended. Records with matching ID fields will be ignored.";
+                }
+
+                AddStatusMessage("Import initiated for sync file: " + txtPhoneDataFile.Text + ". " + importTypeDescription);
                 if (importWorker.WorkerSupportsCancellation)
                 {
                     importWorker.CancelAsync();
