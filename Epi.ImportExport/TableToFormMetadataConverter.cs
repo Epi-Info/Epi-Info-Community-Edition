@@ -325,7 +325,7 @@ namespace Epi.ImportExport
 
                 SetFieldProperties(field, cci);
 
-                page.AddNewField((RenderableField)field);                
+                page.AddNewField((RenderableField)field);
             }
             
             destinationView.SaveToDb();
