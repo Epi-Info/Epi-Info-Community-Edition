@@ -233,12 +233,14 @@ namespace Epi.ImportExport
 
             foreach (string value in parentGuidList)
             {
-                Query deleteQuery = db.CreateQuery("DELETE * FROM " + db.InsertInEscape(sourceView.TableName) + " WHERE [GlobalRecordId] = '" + value + "'");
+                Query deleteQuery = db.CreateQuery("DELETE * FROM " + db.InsertInEscape(sourceView.TableName) + " WHERE [GlobalRecordId] = @Guid");
+                deleteQuery.Parameters.Add(new QueryParameter("@Guid", DbType.String, value));
                 db.ExecuteNonQuery(deleteQuery);
 
                 foreach (Page page in sourceView.Pages)
                 {
-                    deleteQuery = db.CreateQuery("DELETE * FROM " + db.InsertInEscape(page.TableName) + " WHERE [GlobalRecordId] = '" + value + "'");
+                    deleteQuery = db.CreateQuery("DELETE * FROM " + db.InsertInEscape(page.TableName) + " WHERE [GlobalRecordId] = @Guid");
+                    deleteQuery.Parameters.Add(new QueryParameter("@Guid", DbType.String, value));
                     db.ExecuteNonQuery(deleteQuery);
                 }
             }
@@ -320,7 +322,8 @@ namespace Epi.ImportExport
 
                     foreach (string s in toRemove)
                     {
-                        Query deleteQuery = db.CreateQuery("DELETE * FROM " + db.InsertInEscape(gridField.TableName) + " WHERE [GlobalRecordId] = '" + s + "'");
+                        Query deleteQuery = db.CreateQuery("DELETE * FROM " + db.InsertInEscape(gridField.TableName) + " WHERE [GlobalRecordId] = @Guid");
+                        deleteQuery.Parameters.Add(new QueryParameter("@Guid", DbType.String, s));
                         runningDeletionTotal = runningDeletionTotal + db.ExecuteNonQuery(deleteQuery);
                     }
                 }
@@ -395,12 +398,14 @@ namespace Epi.ImportExport
 
                     foreach (string s in toRemove)
                     {
-                        Query deleteQuery = db.CreateQuery("DELETE * FROM " + db.InsertInEscape(view.TableName) + " WHERE [GlobalRecordId] = '" + s + "'");
+                        Query deleteQuery = db.CreateQuery("DELETE * FROM " + db.InsertInEscape(view.TableName) + " WHERE [GlobalRecordId] = @Guid");
+                        deleteQuery.Parameters.Add(new QueryParameter("@Guid", DbType.String, s));
                         runningDeletionTotal = runningDeletionTotal + db.ExecuteNonQuery(deleteQuery);
 
                         foreach (Page page in view.Pages)
                         {
-                            deleteQuery = db.CreateQuery("DELETE * FROM " + db.InsertInEscape(page.TableName) + " WHERE [GlobalRecordId] = '" + s + "'");
+                            deleteQuery = db.CreateQuery("DELETE * FROM " + db.InsertInEscape(page.TableName) + " WHERE [GlobalRecordId] = @Guid");
+                            deleteQuery.Parameters.Add(new QueryParameter("@Guid", DbType.String, s));
                             db.ExecuteNonQuery(deleteQuery);
                         }
                     }

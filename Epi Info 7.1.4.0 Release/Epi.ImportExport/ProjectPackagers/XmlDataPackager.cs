@@ -204,8 +204,35 @@ namespace Epi.ImportExport.ProjectPackagers
         {            
             IDbDriver driver = SourceProject.CollectedData.GetDatabase();
 
+            if (driver == null)
+            {
+                ExportInfo.Succeeded = false;
+                ExportInfo.AddError("Data driver is null.", "999999");
+                throw new InvalidOperationException("Data driver cannot be null");
+            }
+
             // Check #1 - Make sure the base table exists and that it has a Global Record Id field, Record status field, and Unique key field.
             DataTable dt = driver.GetTableData(SourceForm.TableName, "GlobalRecordId, RECSTATUS, UniqueKey");
+
+            if (dt == null)
+            {
+                ExportInfo.Succeeded = false;
+                ExportInfo.AddError("Source table is null.", "999998");
+                throw new InvalidOperationException("Source table cannot be null");
+            }
+            else if (dt.Columns.Count == 0)
+            {
+                ExportInfo.Succeeded = false;
+                ExportInfo.AddError("Source table has zero columns.", "999997");
+                throw new InvalidOperationException("Source table cannot have zero columns");
+            }
+            else if (dt.Columns.Count == 1)
+            {
+                ExportInfo.Succeeded = false;
+                ExportInfo.AddError("Source table has only one column.", "999996");
+                throw new InvalidOperationException("Source table cannot have only one column");
+            }
+
             int baseTableRowCount = dt.Rows.Count;
 
             // Check #2a - Make sure GlobalRecordId is a string.

@@ -299,8 +299,9 @@ namespace Epi.Epi2000
                         foreach (string s in tableNames)
                         {
                             // Data Table
-                            queryText = "select [DATATABLE] from " + viewName + " where [Name] = '" + s + "'";
+                            queryText = "select [DATATABLE] from " + viewName + " where [Name] = @Name";
                             query = db.CreateQuery(queryText);
+                            query.Parameters.Add(new QueryParameter("@Name", DbType.String, s));
                             tempTable = db.Select(query);
                             if (tempTable.Rows.Count > 0)
                             {

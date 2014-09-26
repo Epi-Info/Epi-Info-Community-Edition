@@ -33,7 +33,7 @@ namespace Epi.ImportExport.ProjectPackagers
         {
             #region Input Validation
             if (sourceForm == null) { throw new ArgumentNullException("sourceForm"); }
-            if (string.IsNullOrEmpty(packageName)) { throw new ArgumentNullException("packageName"); }
+            if (String.IsNullOrEmpty(packageName)) { throw new ArgumentNullException("packageName"); }
             #endregion // Input Validation
             
             SourceForm = sourceForm;
@@ -166,9 +166,9 @@ namespace Epi.ImportExport.ProjectPackagers
                     // Include this form in the dictionary of forms to process
                     // Note: We're sorting these so that the forms are generated in top-to-bottom order in the Xml
                     int level = ImportExportHelper.GetFormDescendantLevel(form, SourceForm, 0);
-                    if (!forms.ContainsKey(level))                    
+                    if (!forms.ContainsKey(level))
                     {
-                        forms.Add(level, new List<View>());                        
+                        forms.Add(level, new List<View>());
                     }
                     forms[level].Add(form);
                 }
@@ -201,11 +201,38 @@ namespace Epi.ImportExport.ProjectPackagers
         /// Checks for problems in the source project
         /// </summary>
         private void CheckForProblems()
-        {            
+        {
             IDbDriver driver = SourceProject.CollectedData.GetDatabase();
+
+            if (driver == null)
+            {
+                ExportInfo.Succeeded = false;
+                ExportInfo.AddError("Data driver is null.", "999999");
+                throw new InvalidOperationException("Data driver cannot be null");
+            }
 
             // Check #1 - Make sure the base table exists and that it has a Global Record Id field, Record status field, and Unique key field.
             DataTable dt = driver.GetTableData(SourceForm.TableName, "GlobalRecordId, RECSTATUS, UniqueKey");
+
+            if (dt == null)
+            {
+                ExportInfo.Succeeded = false;
+                ExportInfo.AddError("Source table is null.", "999998");
+                throw new InvalidOperationException("Source table cannot be null");
+            }
+            else if (dt.Columns.Count == 0)
+            {
+                ExportInfo.Succeeded = false;
+                ExportInfo.AddError("Source table has zero columns.", "999997");
+                throw new InvalidOperationException("Source table cannot have zero columns");
+            }
+            else if (dt.Columns.Count == 1)
+            {
+                ExportInfo.Succeeded = false;
+                ExportInfo.AddError("Source table has only one column.", "999996");
+                throw new InvalidOperationException("Source table cannot have only one column");
+            }
+
             int baseTableRowCount = dt.Rows.Count;
 
             // Check #2a - Make sure GlobalRecordId is a string.
