@@ -203,6 +203,11 @@ namespace Epi.ImportExport.Dialogs
                 DataGridViewComboBoxCell dgvc = dgvRow.Cells["FieldType"] as DataGridViewComboBoxCell;                
                 DataGridViewTextBoxCell dgvt = dgvRow.Cells["SourceColumnType"] as DataGridViewTextBoxCell;
 
+                if (dgvc == null || dgvt == null)
+                {
+                    throw new InvalidOperationException("dgvc and dgvt must not be null.");
+                }
+
                 dgvc.Items.Clear();
                 
                 switch(dgvt.FormattedValue.ToString().ToLower()) 
