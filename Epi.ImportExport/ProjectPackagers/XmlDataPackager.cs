@@ -452,24 +452,27 @@ namespace Epi.ImportExport.ProjectPackagers
 
             foreach (Field field in this.KeyFields)
             {
-                if (field is IDataField && field is RenderableField)
+                if (field is IDataField)
                 {
                     RenderableField renderableField = field as RenderableField;
-                    XmlElement fieldInfo = xmlDataPackage.CreateElement("KeyField");
+                    if (renderableField != null)
+                    {
+                        XmlElement fieldInfo = xmlDataPackage.CreateElement("KeyField");
 
-                    XmlAttribute name = xmlDataPackage.CreateAttribute("Name");
-                    XmlAttribute type = xmlDataPackage.CreateAttribute("FieldType");
-                    XmlAttribute page = xmlDataPackage.CreateAttribute("Page"); // records page position, NOT page id and NOT page name
+                        XmlAttribute name = xmlDataPackage.CreateAttribute("Name");
+                        XmlAttribute type = xmlDataPackage.CreateAttribute("FieldType");
+                        XmlAttribute page = xmlDataPackage.CreateAttribute("Page"); // records page position, NOT page id and NOT page name
 
-                    name.Value = renderableField.Name;
-                    type.Value = renderableField.FieldType.ToString();
-                    page.Value = renderableField.Page.Position.ToString();
+                        name.Value = renderableField.Name;
+                        type.Value = renderableField.FieldType.ToString();
+                        page.Value = renderableField.Page.Position.ToString();
 
-                    fieldInfo.Attributes.Append(name);
-                    fieldInfo.Attributes.Append(type);
-                    fieldInfo.Attributes.Append(page);
+                        fieldInfo.Attributes.Append(name);
+                        fieldInfo.Attributes.Append(type);
+                        fieldInfo.Attributes.Append(page);
 
-                    fields.AppendChild(fieldInfo);
+                        fields.AppendChild(fieldInfo);
+                    }
                 }
             }
 
@@ -495,24 +498,27 @@ namespace Epi.ImportExport.ProjectPackagers
 
             foreach (Field field in form.Fields)
             {
-                if (field is IDataField && field is RenderableField)
+                if (field is IDataField)
                 {
-                    RenderableField renderableField = field as RenderableField;                    
-                    XmlElement fieldInfo = xmlDataPackage.CreateElement("FieldInfo");
+                    RenderableField renderableField = field as RenderableField;
+                    if (renderableField != null)
+                    {
+                        XmlElement fieldInfo = xmlDataPackage.CreateElement("FieldInfo");
 
-                    XmlAttribute name = xmlDataPackage.CreateAttribute("Name");
-                    XmlAttribute type = xmlDataPackage.CreateAttribute("FieldType");
-                    XmlAttribute page = xmlDataPackage.CreateAttribute("Page"); // records page position, NOT page id and NOT page name
+                        XmlAttribute name = xmlDataPackage.CreateAttribute("Name");
+                        XmlAttribute type = xmlDataPackage.CreateAttribute("FieldType");
+                        XmlAttribute page = xmlDataPackage.CreateAttribute("Page"); // records page position, NOT page id and NOT page name
 
-                    name.Value = renderableField.Name;
-                    type.Value = renderableField.FieldType.ToString();
-                    page.Value = renderableField.Page.Position.ToString();
+                        name.Value = renderableField.Name;
+                        type.Value = renderableField.FieldType.ToString();
+                        page.Value = renderableField.Page.Position.ToString();
 
-                    fieldInfo.Attributes.Append(name);
-                    fieldInfo.Attributes.Append(type);
-                    fieldInfo.Attributes.Append(page);
-                    
-                    fields.AppendChild(fieldInfo);
+                        fieldInfo.Attributes.Append(name);
+                        fieldInfo.Attributes.Append(type);
+                        fieldInfo.Attributes.Append(page);
+
+                        fields.AppendChild(fieldInfo);
+                    }
                 }
             }
 
@@ -728,33 +734,36 @@ namespace Epi.ImportExport.ProjectPackagers
                                 if (field is IDataField && field is RenderableField && !(field is GridField) && !(FieldsToNull.ContainsKey(form.Name) && FieldsToNull[form.Name].Contains(field.Name)))
                                 {
                                     RenderableField renderableField = field as RenderableField;
-                                    XmlElement fieldData = xmlDataPackage.CreateElement("Field");
-
-                                    XmlAttribute name = xmlDataPackage.CreateAttribute("Name");
-                                    name.Value = renderableField.Name;
-                                    fieldData.Attributes.Append(name);
-
-                                    string value = reader[field.Name].ToString();
-                                    
-                                    if (!string.IsNullOrEmpty(value))
+                                    if (renderableField != null)
                                     {
-                                        if (field is DateTimeField)
+                                        XmlElement fieldData = xmlDataPackage.CreateElement("Field");
+
+                                        XmlAttribute name = xmlDataPackage.CreateAttribute("Name");
+                                        name.Value = renderableField.Name;
+                                        fieldData.Attributes.Append(name);
+
+                                        string value = reader[field.Name].ToString();
+
+                                        if (!string.IsNullOrEmpty(value))
                                         {
-                                            DateTime dt = Convert.ToDateTime(value);
-                                            fieldData.InnerText = dt.Ticks.ToString();                                            
+                                            if (field is DateTimeField)
+                                            {
+                                                DateTime dt = Convert.ToDateTime(value);
+                                                fieldData.InnerText = dt.Ticks.ToString();
+                                            }
+                                            else if (field is ImageField)
+                                            {
+                                                value = Convert.ToBase64String((Byte[])reader[field.Name]);
+                                                fieldData.InnerText = value;
+                                            }
+                                            else
+                                            {
+                                                fieldData.InnerText = value;
+                                            }
                                         }
-                                        else if (field is ImageField)
-                                        {
-                                            value = Convert.ToBase64String((Byte[])reader[field.Name]);
-                                            fieldData.InnerText = value;
-                                        }
-                                        else
-                                        {
-                                            fieldData.InnerText = value;
-                                        }
+                                        element.AppendChild(fieldData);
+                                        data.AppendChild(element);
                                     }
-                                    element.AppendChild(fieldData);
-                                    data.AppendChild(element);                                    
                                 }
                             }                            
                         }
