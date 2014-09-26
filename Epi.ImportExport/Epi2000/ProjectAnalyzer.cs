@@ -305,7 +305,9 @@ namespace Epi.ImportExport.Epi2000
 
                                             foreach (string dataRef in dataRefsList)
                                             {
-                                                DataTable dataRefTable = db.Select(db.CreateQuery("SELECT [Name] FROM [" + view.Name + "] WHERE [Name] = '" + dataRef + "' AND [Type] = 'SOURCE'"));
+                                                Query dataRefQuery = db.CreateQuery("SELECT [Name] FROM [" + view.Name + "] WHERE [Name] = @DataRef AND [Type] = 'SOURCE'");
+                                                dataRefQuery.Parameters.Add(new QueryParameter("@DataRef", DbType.String, dataRef));
+                                                DataTable dataRefTable = db.Select(dataRefQuery);
                                                 if (dataRefTable.Rows.Count == 0)
                                                 {
                                                     errorList.Add(ImportExportMessageType.Error, "1018", string.Format(ImportExportSharedStrings.UPGRADE_PROBLEM_CHECK_ERROR_E1018, view.Name, dataRef));
@@ -465,7 +467,9 @@ namespace Epi.ImportExport.Epi2000
                                         valueFieldName = leftSide[1].Trim(')').Trim();
                                         string codeReference = leftSide[0];
 
-                                        DataTable codeTableCheck = db.Select(db.CreateQuery("SELECT [Name], [Datatable] FROM [" + view.Name + "] WHERE [Name] = '" + codeReference + "'"));
+                                        Query codeTableCheckQuery = db.CreateQuery("SELECT [Name], [Datatable] FROM [" + view.Name + "] WHERE [Name] = '" + codeReference + "'");
+                                        codeTableCheckQuery.Parameters.Add(new QueryParameter("@CodeReference", DbType.String, codeReference));
+                                        DataTable codeTableCheck = db.Select(codeTableCheckQuery);
                                         if (codeTableCheck.Rows.Count > 0)
                                         {
                                             string tableName = codeTableCheck.Rows[0]["Datatable"].ToString();
