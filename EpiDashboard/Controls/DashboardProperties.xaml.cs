@@ -24,6 +24,10 @@ namespace EpiDashboard.Controls
     {
         public DashboardProperties(DashboardHelper dashboardHelper)
         {
+            #region Input Validation
+            if (dashboardHelper == null) { throw new ArgumentNullException("dashboardHelper"); }
+            #endregion // Input Validation
+
             InitializeComponent();
             this.DashboardHelper = dashboardHelper;
 
@@ -287,52 +291,65 @@ namespace EpiDashboard.Controls
 
         private void tbtnInfo_Checked(object sender, RoutedEventArgs e)
         {
-            CheckButtonStates(sender as ToggleButton);
-            panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
-            panelInfo.Visibility = System.Windows.Visibility.Visible;
+            ToggleButton tb = sender as ToggleButton;
+            if (sender != null)
+            {
+                CheckButtonStates(tb);
+                panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
+                panelHTML.Visibility = System.Windows.Visibility.Collapsed;
+                panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+                panelInfo.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         private void tbtnCharts_Checked(object sender, RoutedEventArgs e)
         {
-            CheckButtonStates(sender as ToggleButton);
-            panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Visible;
-            panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            ToggleButton tb = sender as ToggleButton;
+            if (sender != null)
+            {
+                CheckButtonStates(tb);
+                panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
+                panelHTML.Visibility = System.Windows.Visibility.Collapsed;
+                panelCharts.Visibility = System.Windows.Visibility.Visible;
+                panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void tbtnHTML_Checked(object sender, RoutedEventArgs e)
         {
-            CheckButtonStates(sender as ToggleButton);
-            panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            panelHTML.Visibility = System.Windows.Visibility.Visible;
-            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
-            panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            ToggleButton tb = sender as ToggleButton;
+            if (sender != null)
+            {
+                CheckButtonStates(tb);
+                panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
+                panelHTML.Visibility = System.Windows.Visibility.Visible;
+                panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+                panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void tbtnDataSource_Checked(object sender, RoutedEventArgs e)
         {
             if (panelDataSource == null) return;
-            CheckButtonStates(sender as ToggleButton);
-            panelDataSource.Visibility = System.Windows.Visibility.Visible;
-            panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
-            panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            ToggleButton tb = sender as ToggleButton;
+            if (sender != null)
+            {
+                CheckButtonStates(tb);
+                panelDataSource.Visibility = System.Windows.Visibility.Visible;
+                panelHTML.Visibility = System.Windows.Visibility.Collapsed;
+                panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+                panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void CheckButtonStates(ToggleButton sender)
         {
             foreach (UIElement element in panelSidebar.Children)
             {
-                if (element is ToggleButton)
+                ToggleButton tbtn = element as ToggleButton;
+                if (tbtn != null && tbtn != sender)
                 {
-                    ToggleButton tbtn = element as ToggleButton;
-                    if (tbtn != sender)
-                    {
-                        tbtn.IsChecked = false;
-                    }
+                    tbtn.IsChecked = false;
                 }
             }
         }
@@ -358,7 +375,7 @@ namespace EpiDashboard.Controls
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.DefaultExt = ".prj";
             dlg.Filter = "Epi Info 7 Project|*.prj";
-            if (!string.IsNullOrEmpty(txtProjectPath.Text))
+            if (!String.IsNullOrEmpty(txtProjectPath.Text))
             {
                 dlg.FileName = txtProjectPath.Text;
             }

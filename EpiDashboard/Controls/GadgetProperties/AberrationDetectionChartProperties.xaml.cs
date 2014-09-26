@@ -557,52 +557,72 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             if (panelVariables == null) return;
 
-            CheckButtonStates(sender as SettingsToggleButton);
-            panelVariables.Visibility = System.Windows.Visibility.Visible;
-            panelSorting.Visibility = System.Windows.Visibility.Collapsed;
-            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
-            panelDisplayLabels.Visibility = System.Windows.Visibility.Collapsed;
-            panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+            SettingsToggleButton stb = sender as SettingsToggleButton;
+            if (stb != null)
+            {
+                CheckButtonStates(stb);
+                panelVariables.Visibility = System.Windows.Visibility.Visible;
+                panelSorting.Visibility = System.Windows.Visibility.Collapsed;
+                panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
+                panelDisplayLabels.Visibility = System.Windows.Visibility.Collapsed;
+                panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void tbtnSorting_Checked(object sender, RoutedEventArgs e)
         {
-            CheckButtonStates(sender as SettingsToggleButton);
-            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
-            panelSorting.Visibility = System.Windows.Visibility.Visible;
-            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
-            panelDisplayLabels.Visibility = System.Windows.Visibility.Collapsed;
-            panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+            SettingsToggleButton stb = sender as SettingsToggleButton;
+            if (stb != null)
+            {
+                CheckButtonStates(stb);
+                panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+                panelSorting.Visibility = System.Windows.Visibility.Visible;
+                panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
+                panelDisplayLabels.Visibility = System.Windows.Visibility.Collapsed;
+                panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void tbtnDisplay_Checked(object sender, RoutedEventArgs e)
         {
-            CheckButtonStates(sender as SettingsToggleButton);
-            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
-            panelSorting.Visibility = System.Windows.Visibility.Collapsed;
-            panelDisplay.Visibility = System.Windows.Visibility.Visible;
-            panelDisplayLabels.Visibility = System.Windows.Visibility.Collapsed;
-            panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+            SettingsToggleButton stb = sender as SettingsToggleButton;
+            if (stb != null)
+            {
+                CheckButtonStates(stb);
+                panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+                panelSorting.Visibility = System.Windows.Visibility.Collapsed;
+                panelDisplay.Visibility = System.Windows.Visibility.Visible;
+                panelDisplayLabels.Visibility = System.Windows.Visibility.Collapsed;
+                panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void tbtnDisplayLabels_Checked(object sender, RoutedEventArgs e)
         {
-            CheckButtonStates(sender as SettingsToggleButton);
-            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
-            panelSorting.Visibility = System.Windows.Visibility.Collapsed;
-            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
-            panelDisplayLabels.Visibility = System.Windows.Visibility.Visible;
-            panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+            SettingsToggleButton stb = sender as SettingsToggleButton;
+            if (stb != null)
+            {
+                CheckButtonStates(stb);
+                panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+                panelSorting.Visibility = System.Windows.Visibility.Collapsed;
+                panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
+                panelDisplayLabels.Visibility = System.Windows.Visibility.Visible;
+                panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void tbtnFilters_Checked(object sender, RoutedEventArgs e)
         {
-            CheckButtonStates(sender as SettingsToggleButton);
-            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
-            panelSorting.Visibility = System.Windows.Visibility.Collapsed;
-            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
-            panelDisplayLabels.Visibility = System.Windows.Visibility.Collapsed;
-            panelFilters.Visibility = System.Windows.Visibility.Visible;
+            SettingsToggleButton stb = sender as SettingsToggleButton;
+            if (stb != null)
+            {
+                CheckButtonStates(stb);
+                panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+                panelSorting.Visibility = System.Windows.Visibility.Collapsed;
+                panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
+                panelDisplayLabels.Visibility = System.Windows.Visibility.Collapsed;
+                panelFilters.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         private void listboxFieldStrata_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -644,60 +664,64 @@ namespace EpiDashboard.Controls.GadgetProperties
 
         protected virtual void cmbField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (sender is ComboBox)
+            if (sender != null)
             {
                 ComboBox cmbField = sender as ComboBox;
 
-                CheckBox checkboxAllValues = null;
-                CheckBox checkboxCommentLegalLabels = null;
-
-                object element = this.FindName("checkboxAllValues");
-                if (element != null && element is CheckBox)
+                if (cmbField != null)
                 {
-                    checkboxAllValues = element as CheckBox;
-                }
 
-                element = this.FindName("checkboxCommentLegalLabels");
-                if (element != null && element is CheckBox)
-                {
-                    checkboxCommentLegalLabels = element as CheckBox;
-                }
+                    CheckBox checkboxAllValues = null;
+                    CheckBox checkboxCommentLegalLabels = null;
 
-                if (cmbField.SelectedIndex >= 0)
-                {
-                    Field field = DashboardHelper.GetAssociatedField(cmbField.SelectedItem.ToString());
-                    if (field != null && field is RenderableField)
+                    object element = this.FindName("checkboxAllValues");
+                    if (element != null && element is CheckBox)
                     {
-                        FieldFlags flags = SetFieldFlags(field as RenderableField);
+                        checkboxAllValues = element as CheckBox;
+                    }
 
-                        if (checkboxAllValues != null)
+                    element = this.FindName("checkboxCommentLegalLabels");
+                    if (element != null && element is CheckBox)
+                    {
+                        checkboxCommentLegalLabels = element as CheckBox;
+                    }
+
+                    if (cmbField.SelectedIndex >= 0)
+                    {
+                        Field field = DashboardHelper.GetAssociatedField(cmbField.SelectedItem.ToString());
+                        if (field != null && field is RenderableField)
                         {
-                            if (flags.IsDropDownListField || flags.IsRecodedField)
-                            {
-                                checkboxAllValues.IsEnabled = true;
-                            }
-                            else
-                            {
-                                checkboxAllValues.IsEnabled = false;
-                                checkboxAllValues.IsChecked = false;
-                            }
-                        }
+                            FieldFlags flags = SetFieldFlags(field as RenderableField);
 
-                        if (checkboxCommentLegalLabels != null)
-                        {
-                            if (flags.IsCommentLegalField || flags.IsOptionField)
+                            if (checkboxAllValues != null)
                             {
-                                checkboxCommentLegalLabels.IsEnabled = true;
-                            }
-                            else
-                            {
-                                checkboxCommentLegalLabels.IsEnabled = false;
-                                checkboxCommentLegalLabels.IsChecked = false;
+                                if (flags.IsDropDownListField || flags.IsRecodedField)
+                                {
+                                    checkboxAllValues.IsEnabled = true;
+                                }
+                                else
+                                {
+                                    checkboxAllValues.IsEnabled = false;
+                                    checkboxAllValues.IsChecked = false;
+                                }
                             }
 
-                            if (!flags.IsCommentLegalField && !flags.IsOptionField)
+                            if (checkboxCommentLegalLabels != null)
                             {
-                                checkboxCommentLegalLabels.IsChecked = flags.IsCommentLegalField;
+                                if (flags.IsCommentLegalField || flags.IsOptionField)
+                                {
+                                    checkboxCommentLegalLabels.IsEnabled = true;
+                                }
+                                else
+                                {
+                                    checkboxCommentLegalLabels.IsEnabled = false;
+                                    checkboxCommentLegalLabels.IsChecked = false;
+                                }
+
+                                if (!flags.IsCommentLegalField && !flags.IsOptionField)
+                                {
+                                    checkboxCommentLegalLabels.IsChecked = flags.IsCommentLegalField;
+                                }
                             }
                         }
                     }
@@ -757,10 +781,13 @@ namespace EpiDashboard.Controls.GadgetProperties
                 if (cmbXAxisLabelType.SelectedIndex == 1)
                 {
                     Field f = DashboardHelper.GetAssociatedField(cmbField.Text);
-                    if (f != null && f is IDataField)
+                    if (f != null)
                     {
                         Epi.Fields.IDataField dataField = f as IDataField;
-                        txtXAxisLabelValue.Text = dataField.PromptText;
+                        if (dataField != null)
+                        {
+                            txtXAxisLabelValue.Text = dataField.PromptText;
+                        }
                     }
                     else
                     {
