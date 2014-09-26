@@ -153,7 +153,7 @@ namespace Epi.Windows.MakeView.Dialogs
             Request.SurveyInfo.IsDraftMode = true;
             Request.SurveyInfo.SurveyType = 2;
             Request.SurveyInfo.SurveyName = this.mediater.Project.Name;
-
+            Request.SurveyInfo.ViewId = this.mediater.ProjectExplorer.CurrentView.Id;
             Request.SurveyInfo.OwnerId = LoginInfo.UserID;
             Request.SurveyInfo.StartDate = DateTime.Now;
            
