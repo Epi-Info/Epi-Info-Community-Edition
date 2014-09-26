@@ -402,12 +402,18 @@ namespace EpiDashboard
                 if (element is IReportingGadget)
                 {
                     IReportingGadget reportGadget = element as IReportingGadget;
-                    reportGadget.Select();
+                    if (reportGadget != null)
+                    {
+                        reportGadget.Select();
+                    }
                 }
                 if (element is GadgetBase)
                 {
                     GadgetBase gadget = element as GadgetBase;
-                    gadget.DrawBorders = true;
+                    if (gadget != null)
+                    {
+                        gadget.DrawBorders = true;
+                    }
                 }
             }
         }
@@ -419,13 +425,19 @@ namespace EpiDashboard
                 if (element is IReportingGadget)
                 {
                     IReportingGadget reportGadget = element as IReportingGadget;
-                    reportGadget.Deselect();
+                    if (reportGadget != null)
+                    {
+                        reportGadget.Deselect();
+                    }
                 }
                 if (element is GadgetBase)
                 {
                     GadgetBase gadget = element as GadgetBase;
-                    gadget.DrawBorders = false;
-                    gadget.HideConfigPanel();
+                    if (gadget != null)
+                    {
+                        gadget.DrawBorders = false;
+                        gadget.HideConfigPanel();
+                    }
                 }
             }
         }
@@ -873,9 +885,13 @@ namespace EpiDashboard
                 gadget.DrawBorders = false;
             }
 
-            this.Gadgets.Add((UserControl)gadget);
+            UserControl uc = gadget as UserControl;
 
-            Canvas.SetZIndex(gadget as UserControl, ZTop);
+            if (uc != null)
+            {
+                this.Gadgets.Add(uc);
+                Canvas.SetZIndex(uc, ZTop);
+            }
             ZTop++;
         }
 
@@ -884,23 +900,26 @@ namespace EpiDashboard
             IGadget gadget = sender as IGadget;
             UserControl control = sender as UserControl;
 
-            Guid guid = e.Guid;
-
-            var filteredGadgets = from g in Gadgets
-                           where ((IGadget)g).UniqueIdentifier == guid                           
-                           select g;
-
-            foreach (UserControl targetControl in filteredGadgets)
+            if (gadget != null && control != null)
             {
-                if (e.AnchorType == GadgetAnchorSetEventArgs.GadgetAnchorType.Left)
+                Guid guid = e.Guid;
+
+                var filteredGadgets = from g in Gadgets
+                                      where ((IGadget)g).UniqueIdentifier == guid
+                                      select g;
+
+                foreach (UserControl targetControl in filteredGadgets)
                 {
-                    gadget.AnchorLeft = targetControl;
-                    break;
-                }
-                if (e.AnchorType == GadgetAnchorSetEventArgs.GadgetAnchorType.Top)
-                {
-                    gadget.AnchorTop = targetControl;
-                    break;
+                    if (e.AnchorType == GadgetAnchorSetEventArgs.GadgetAnchorType.Left)
+                    {
+                        gadget.AnchorLeft = targetControl;
+                        break;
+                    }
+                    if (e.AnchorType == GadgetAnchorSetEventArgs.GadgetAnchorType.Top)
+                    {
+                        gadget.AnchorTop = targetControl;
+                        break;
+                    }
                 }
             }
         }
@@ -916,92 +935,100 @@ namespace EpiDashboard
 
         private void gadget_GadgetDrag(object sender)
         {
-            foreach (IGadget gadget in this.Gadgets)
+            IGadget senderGadget = sender as IGadget;
+
+            if (senderGadget != null)
             {
-                if (gadget == (IGadget)sender)
+                foreach (IGadget gadget in this.Gadgets)
                 {
-                    continue;
-                }
-
-                UserControl draggedControl = sender as UserControl;
-                UserControl control = gadget as UserControl;
-
-                double targetLeft = Canvas.GetLeft(control);
-                double targetRight = Canvas.GetLeft(control) + control.ActualWidth;
-                double targetTop = Canvas.GetTop(control);
-                double targetBottom = Canvas.GetTop(control) + control.ActualHeight;
-
-                double draggedLeft = Canvas.GetLeft(draggedControl);
-                double draggedTop = Canvas.GetTop(draggedControl);
-
-                double yCoordCenter = 0;
-                double xCoordCenter = 0;
-
-                // condition for left anchoring
-                if (Math.Abs(draggedTop - targetTop) < 15 && draggedLeft >= targetRight && draggedLeft < (targetRight + 15))
-                {
-                    anchorLine.Visibility = System.Windows.Visibility.Visible;
-
-                    Canvas.SetLeft(draggedControl, Canvas.GetLeft(control) + control.ActualWidth + DEFAULT_ANCHOR_LEFT_SPACE);
-                    Canvas.SetTop(draggedControl, Canvas.GetTop(control));
-
-                    if (control.ActualHeight > draggedControl.ActualHeight)
+                    if (gadget == senderGadget)
                     {
-                        yCoordCenter = (draggedControl.ActualHeight / 2) + Canvas.GetTop(control);
-                    }
-                    else
-                    {
-                        yCoordCenter = (control.ActualHeight / 2) + Canvas.GetTop(control);
+                        continue;
                     }
 
-                    anchorLine.X1 = Canvas.GetLeft(control) + control.ActualWidth;
-                    anchorLine.Y1 = yCoordCenter;
+                    UserControl draggedControl = sender as UserControl;
+                    UserControl control = gadget as UserControl;
 
-                    anchorLine.X2 = Canvas.GetLeft(draggedControl);
-                    anchorLine.Y2 = yCoordCenter;
-
-                    ((IGadget)draggedControl).AnchorLeft = control;
-                    ((IGadget)draggedControl).AnchorTop = null;
-
-                    break;
-                }
-                // condition for top anchoring                
-                else if (Math.Abs(draggedLeft - targetLeft) < 15 && draggedTop >= targetBottom && draggedTop < (targetBottom + 15))
-                {
-                    anchorLine.Visibility = System.Windows.Visibility.Visible;
-
-                    Canvas.SetLeft(draggedControl, Canvas.GetLeft(control));
-                    Canvas.SetTop(draggedControl, targetBottom + DEFAULT_ANCHOR_TOP_SPACE);
-
-                    if (control.ActualWidth > draggedControl.ActualWidth)
+                    if (draggedControl != null && control != null)
                     {
-                        xCoordCenter = (draggedControl.ActualWidth / 2) + Canvas.GetLeft(control);
+                        double targetLeft = Canvas.GetLeft(control);
+                        double targetRight = Canvas.GetLeft(control) + control.ActualWidth;
+                        double targetTop = Canvas.GetTop(control);
+                        double targetBottom = Canvas.GetTop(control) + control.ActualHeight;
+
+                        double draggedLeft = Canvas.GetLeft(draggedControl);
+                        double draggedTop = Canvas.GetTop(draggedControl);
+
+                        double yCoordCenter = 0;
+                        double xCoordCenter = 0;
+
+                        // condition for left anchoring
+                        if (Math.Abs(draggedTop - targetTop) < 15 && draggedLeft >= targetRight && draggedLeft < (targetRight + 15))
+                        {
+                            anchorLine.Visibility = System.Windows.Visibility.Visible;
+
+                            Canvas.SetLeft(draggedControl, Canvas.GetLeft(control) + control.ActualWidth + DEFAULT_ANCHOR_LEFT_SPACE);
+                            Canvas.SetTop(draggedControl, Canvas.GetTop(control));
+
+                            if (control.ActualHeight > draggedControl.ActualHeight)
+                            {
+                                yCoordCenter = (draggedControl.ActualHeight / 2) + Canvas.GetTop(control);
+                            }
+                            else
+                            {
+                                yCoordCenter = (control.ActualHeight / 2) + Canvas.GetTop(control);
+                            }
+
+                            anchorLine.X1 = Canvas.GetLeft(control) + control.ActualWidth;
+                            anchorLine.Y1 = yCoordCenter;
+
+                            anchorLine.X2 = Canvas.GetLeft(draggedControl);
+                            anchorLine.Y2 = yCoordCenter;
+
+                            ((IGadget)draggedControl).AnchorLeft = control;
+                            ((IGadget)draggedControl).AnchorTop = null;
+
+                            break;
+                        }
+                        // condition for top anchoring                
+                        else if (Math.Abs(draggedLeft - targetLeft) < 15 && draggedTop >= targetBottom && draggedTop < (targetBottom + 15))
+                        {
+                            anchorLine.Visibility = System.Windows.Visibility.Visible;
+
+                            Canvas.SetLeft(draggedControl, Canvas.GetLeft(control));
+                            Canvas.SetTop(draggedControl, targetBottom + DEFAULT_ANCHOR_TOP_SPACE);
+
+                            if (control.ActualWidth > draggedControl.ActualWidth)
+                            {
+                                xCoordCenter = (draggedControl.ActualWidth / 2) + Canvas.GetLeft(control);
+                            }
+                            else
+                            {
+                                xCoordCenter = (control.ActualWidth / 2) + Canvas.GetLeft(control);
+                            }
+
+                            anchorLine.X1 = xCoordCenter;
+                            anchorLine.Y1 = Canvas.GetTop(control) + control.ActualHeight;
+
+                            anchorLine.X2 = xCoordCenter;
+                            anchorLine.Y2 = Canvas.GetTop(draggedControl);
+
+                            ((IGadget)draggedControl).AnchorLeft = null;
+                            ((IGadget)draggedControl).AnchorTop = control;
+
+                            break;
+                        }
+                        else
+                        {
+                            anchorLine.Visibility = System.Windows.Visibility.Collapsed;
+                            ((IGadget)draggedControl).AnchorLeft = null;
+                            ((IGadget)draggedControl).AnchorTop = null;
+                        }
                     }
-                    else
-                    {
-                        xCoordCenter = (control.ActualWidth / 2) + Canvas.GetLeft(control);
-                    }
-
-                    anchorLine.X1 = xCoordCenter;
-                    anchorLine.Y1 = Canvas.GetTop(control) + control.ActualHeight;
-
-                    anchorLine.X2 = xCoordCenter;
-                    anchorLine.Y2 = Canvas.GetTop(draggedControl);
-
-                    ((IGadget)draggedControl).AnchorLeft = null;
-                    ((IGadget)draggedControl).AnchorTop = control;
-
-                    break;
                 }
-                else
-                {
-                    anchorLine.Visibility = System.Windows.Visibility.Collapsed;
-                    ((IGadget)draggedControl).AnchorLeft = null;
-                    ((IGadget)draggedControl).AnchorTop = null;
-                }
+
+                MoveAnchoredGadgets(senderGadget);
             }
-
-            MoveAnchoredGadgets(sender as IGadget);
         }
 
         private void MoveAnchoredGadgets(IGadget source)
@@ -1012,36 +1039,47 @@ namespace EpiDashboard
                 {
                     UserControl control = source as UserControl;
                     UserControl anchoredControl = gadget as UserControl;
-                    Canvas.SetTop(anchoredControl, Canvas.GetTop(control));
-                    Canvas.SetLeft(anchoredControl, Canvas.GetLeft(control) + control.ActualWidth + DEFAULT_ANCHOR_LEFT_SPACE);
-                    MoveAnchoredGadgets(anchoredControl as IGadget);
+                    IGadget anchoredGadget = anchoredControl as IGadget;
+                    if (control != null && anchoredControl != null && anchoredGadget != null)
+                    {
+                        Canvas.SetTop(anchoredControl, Canvas.GetTop(control));
+                        Canvas.SetLeft(anchoredControl, Canvas.GetLeft(control) + control.ActualWidth + DEFAULT_ANCHOR_LEFT_SPACE);
+                        MoveAnchoredGadgets(anchoredGadget);
+                    }
                 }
                 else if (gadget.AnchorTop == source)
                 {
                     UserControl control = source as UserControl;
                     UserControl anchoredControl = gadget as UserControl;
-                    Canvas.SetTop(anchoredControl, Canvas.GetTop(control) + control.ActualHeight + DEFAULT_ANCHOR_TOP_SPACE);
-                    Canvas.SetLeft(anchoredControl, Canvas.GetLeft(control));
-                    MoveAnchoredGadgets(anchoredControl as IGadget);
+                    IGadget anchoredGadget = anchoredControl as IGadget;
+                    if (control != null && anchoredControl != null && anchoredGadget != null)
+                    {
+                        Canvas.SetTop(anchoredControl, Canvas.GetTop(control) + control.ActualHeight + DEFAULT_ANCHOR_TOP_SPACE);
+                        Canvas.SetLeft(anchoredControl, Canvas.GetLeft(control));
+                        MoveAnchoredGadgets(anchoredGadget);
+                    }
                 }
             }
         }
 
         public void AddGadgetToCanvasFromContextMenu(UserControl control)
         {
-            if (control is IGadget)
+            if (control != null && control is IGadget)
             {
                 IGadget gadget = control as IGadget;
 
-                canvasMain.Children.Add(control);
-                Canvas.SetLeft(control, mousePoint.X - 10);
-                Canvas.SetTop(control, mousePoint.Y - 10);
-
-                AddGadgetToCanvas(gadget);                
-                IsCanvasDirty = true;
-                if (CanvasChanged != null)
+                if (gadget != null)
                 {
-                    CanvasChanged(this.CurrentCanvas);
+                    canvasMain.Children.Add(control);
+                    Canvas.SetLeft(control, mousePoint.X - 10);
+                    Canvas.SetTop(control, mousePoint.Y - 10);
+
+                    AddGadgetToCanvas(gadget);
+                    IsCanvasDirty = true;
+                    if (CanvasChanged != null)
+                    {
+                        CanvasChanged(this.CurrentCanvas);
+                    }
                 }
             }
             EnableDisableOptions();
@@ -1059,9 +1097,13 @@ namespace EpiDashboard
 
         void gadgetBase_GadgetReposition(object sender, GadgetRepositionEventArgs e)
         {
-            if (sender is UserControl)
+            if (sender != null && sender is UserControl)
             {
-                CenterControlHorizontally(sender as UserControl);
+                UserControl uc = sender as UserControl;
+                if (uc != null)
+                {
+                    CenterControlHorizontally(uc);
+                }
             }
         }
 
@@ -1093,7 +1135,7 @@ namespace EpiDashboard
         /// </summary>
         /// <param name="statusMessage">The status message to display</param>
         private void SetStatusMessage(string statusMessage)
-        {            
+        {
             tblockInstructions.Text = statusMessage;
             loadingPanel.DescriptionText = statusMessage;
             CenterControlHorizontally(spTitle);
@@ -1120,7 +1162,7 @@ namespace EpiDashboard
         private void DisablePermanentGadgets()
         {
             dataFilteringControl.IsEnabled = false;
-            variablesControl.IsEnabled = false;            
+            variablesControl.IsEnabled = false;
         }
 
         private void EnablePermanentGadgets()
@@ -1131,6 +1173,11 @@ namespace EpiDashboard
 
         private void AppendChildNodes(XmlElement root, XmlDocument doc)
         {
+            #region Input Validation
+            if (root == null) { throw new ArgumentNullException("root");  }
+            if (doc == null) { throw new ArgumentNullException("doc"); }
+            #endregion // Input Validation
+
             root.AppendChild(DashboardHelper.Serialize(doc));
             root.AppendChild(this.SerializeGadgets(doc));
             root.AppendChild(this.SerializeOutputSettings(doc));
@@ -1283,7 +1330,7 @@ namespace EpiDashboard
 
             if (introAvailableData.Visibility == System.Windows.Visibility.Visible)
             {
-                introAvailableData.Visibility = System.Windows.Visibility.Collapsed;                
+                introAvailableData.Visibility = System.Windows.Visibility.Collapsed;
             }
 
             panelAddSpace.Visibility = System.Windows.Visibility.Visible;
@@ -1712,12 +1759,15 @@ namespace EpiDashboard
             if (sender is Border)
             {
                 Border border = sender as Border;
-                if (border.Tag is FileInfo)
+                if (border != null && border.Tag != null && border.Tag is FileInfo)
                 {
                     if (CanCloseDashboard())
                     {
-                        FileInfo fi = (border.Tag as FileInfo);
-                        OpenCanvas(fi.FullName);
+                        FileInfo fi = border.Tag as FileInfo;
+                        if (fi != null)
+                        {
+                            OpenCanvas(fi.FullName);
+                        }
                     }
                 }
             }
@@ -1886,35 +1936,43 @@ namespace EpiDashboard
             if (sender is GadgetMenuItem)
             {
                 GadgetMenuItem gadgetMenuItem = sender as GadgetMenuItem;
-                string gadgetType = gadgetMenuItem.GadgetType;
-                Type typeFactory = Type.GetType(gadgetType);
+                if (gadgetMenuItem != null)
+                {
+                    string gadgetType = gadgetMenuItem.GadgetType;
+                    Type typeFactory = Type.GetType(gadgetType);
 
-                if (typeFactory == null)
-                {
-                    typeFactory = GetGadgetType(gadgetType);
-                }
+                    if (typeFactory == null)
+                    {
+                        typeFactory = GetGadgetType(gadgetType);
+                    }
 
-                try
-                {
-                    UserControl gadget = null;
-                    // If StatCalc, create without Dashboard Helper since data source is not needed for calculators
-                    if (typeFactory.ToString().Contains("Gadgets.StatCalc"))
+                    try
                     {
-                        gadget = Activator.CreateInstance(typeFactory) as UserControl;
+                        UserControl gadget = null;
+                        // If StatCalc, create without Dashboard Helper since data source is not needed for calculators
+                        if (typeFactory.ToString().Contains("Gadgets.StatCalc"))
+                        {
+                            gadget = Activator.CreateInstance(typeFactory) as UserControl;
+                        }
+                        else
+                        {
+                            gadget = Activator.CreateInstance(typeFactory, DashboardHelper) as UserControl;
+                        }
+                        
+                        if (gadget != null)
+                        {
+                            AddGadgetToCanvasFromContextMenu(gadget);
+                            GadgetBase gBase = gadget as GadgetBase;
+                            if (gBase != null)
+                            {
+                                gBase.ShowHideConfigPanel();
+                            }
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        gadget = Activator.CreateInstance(typeFactory, DashboardHelper) as UserControl;
+                        throw new ApplicationException("Can not create instance of dbFactory" + ex.StackTrace);
                     }
-                    AddGadgetToCanvasFromContextMenu(gadget);
-                    if (gadget is GadgetBase)
-                    {
-                        (gadget as GadgetBase).ShowHideConfigPanel();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new ApplicationException("Can not create instance of dbFactory" + ex.StackTrace);
                 }
             }
         }
@@ -1922,7 +1980,7 @@ namespace EpiDashboard
         void mnuSaveOutput_Click(object sender, RoutedEventArgs e)
         {
             SaveOutputAsHTMLAndDisplay();
-        }        
+        }
 
         void mnuProperties_Click(object sender, RoutedEventArgs e)
         {
@@ -2087,18 +2145,26 @@ namespace EpiDashboard
                 }
 
                 UserControl control = nonPlacedGadgets[nextGadget] as UserControl;
-                IGadget placedGadget = nonPlacedGadgets[nextGadget];
-                Canvas.SetLeft(control, x);
-                Canvas.SetTop(control, y);
-                x = x + (int)control.ActualWidth;
 
-                if (rowHeight < control.ActualHeight)
+                if (control != null)
                 {
-                    rowHeight = (int)control.ActualHeight;
-                }
+                    IGadget placedGadget = nonPlacedGadgets[nextGadget];
+                    Canvas.SetLeft(control, x);
+                    Canvas.SetTop(control, y);
+                    x = x + (int)control.ActualWidth;
 
-                placedGadgets.Add(placedGadget);
-                nonPlacedGadgets.Remove(placedGadget);
+                    if (rowHeight < control.ActualHeight)
+                    {
+                        rowHeight = (int)control.ActualHeight;
+                    }
+
+                    placedGadgets.Add(placedGadget);
+                    nonPlacedGadgets.Remove(placedGadget);
+                }
+                else
+                {
+                    throw new InvalidOperationException("control cannot be null in AutoArrangeGadgets()");
+                }
             }
 
             if (Gadgets.Count > 0)
@@ -2480,21 +2546,28 @@ namespace EpiDashboard
 
         private bool GadgetReliesOnVariable(IGadget gadget, string friendlyRule)
         {
-            if (gadget is GadgetBase)
+            if (gadget != null)
             {
                 GadgetBase gadgetBase = gadget as GadgetBase;
-                EpiDashboard.Rules.IDashboardRule rule = DashboardHelper.Rules.GetRule(friendlyRule);
 
-                if (rule is EpiDashboard.Rules.DataAssignmentRule)
+                if (gadgetBase != null)
                 {
-                    EpiDashboard.Rules.DataAssignmentRule assignRule = rule as EpiDashboard.Rules.DataAssignmentRule;
-                    string destinationField = assignRule.DestinationColumnName;
+                    EpiDashboard.Rules.IDashboardRule rule = DashboardHelper.Rules.GetRule(friendlyRule);
 
-                    foreach (FilterCondition fc in gadgetBase.DataFilters)
+                    if (rule is EpiDashboard.Rules.DataAssignmentRule)
                     {
-                        if (fc.RawColumnName.Equals(destinationField))
+                        EpiDashboard.Rules.DataAssignmentRule assignRule = rule as EpiDashboard.Rules.DataAssignmentRule;
+                        if (assignRule != null)
                         {
-                            return true;
+                            string destinationField = assignRule.DestinationColumnName;
+
+                            foreach (FilterCondition fc in gadgetBase.DataFilters)
+                            {
+                                if (fc.RawColumnName.Equals(destinationField))
+                                {
+                                    return true;
+                                }
+                            }
                         }
                     }
                 }
@@ -3697,10 +3770,13 @@ namespace EpiDashboard
                     if (control is IGadget && ((IGadget)control).IsProcessing == false)
                     {
                         IGadget gadget = control as IGadget;
-                        htmlBuilder.Append(gadget.ToHTML(htmlFileName, count));
-                        htmlBuilder.AppendLine("");
-                        htmlBuilder.AppendLine("<p>&nbsp;</p>");
-                        count++;
+                        if (gadget != null)
+                        {
+                            htmlBuilder.Append(gadget.ToHTML(htmlFileName, count));
+                            htmlBuilder.AppendLine("");
+                            htmlBuilder.AppendLine("<p>&nbsp;</p>");
+                            count++;
+                        }
                     }
                 }
             }
@@ -3786,6 +3862,11 @@ namespace EpiDashboard
         void properties_ChangesAccepted(object sender, EventArgs e)
         {
             DashboardProperties properties = popup.Content as DashboardProperties;
+
+            if (properties == null)
+            {
+                throw new InvalidOperationException("properties cannot be null in properties_ChangesAccepted");
+            }
 
             if (DashboardHelper.IsUsingEpiProject)
             {
