@@ -617,14 +617,25 @@ namespace Epi.Data.Services
             return this.dbDriver;
         }
 
-        public void SaveAsResponse(View view)
+        public string SaveAsResponse(View view)
         {
-            bool isAccessProject = this.dbDriver.GetType().FullName == "Epi.Data.Office.AccessDatabase";
-            bool notPublished = string.IsNullOrEmpty(view.EWEFormId) || string.IsNullOrEmpty(view.EWEOrganizationKey);
+            if (this.dbDriver.GetType().FullName == "Epi.Data.Office.AccessDatabase") { return ""; }
 
-            if (isAccessProject || notPublished ) { return; }
+            DataTable publishTable = project.Metadata.GetPublishedViewKeys(view.Id);
+            string organizationKey = "";
+            string formId = "";
+
+            if (publishTable != null && publishTable.Rows.Count > 0)
+            {
+                organizationKey = (string)publishTable.Rows[0]["EWEOrganizationKey"];
+                formId = (string)publishTable.Rows[0]["EWEFormId"];
+            }
+            else { return ""; }
+
+            if (string.IsNullOrEmpty(organizationKey) || string.IsNullOrEmpty(formId)) { return ""; }
 
             string statusMessage = "";
+            Guid responseId = new Guid();
 
             try
             {
@@ -634,14 +645,23 @@ namespace Epi.Data.Services
 
                 foreach (IDataField dataField in view.Fields.DataFields)
                 {
-                    responseDictionary.Add(((Epi.INamedObject)dataField).Name, dataField.CurrentRecordValueObject.ToString());
+                    if (dataField is GlobalRecordIdField)
+                    {
+                        responseId = new Guid(dataField.CurrentRecordValueString);
+                    }
+                    else if ((dataField is UniqueKeyField) == false && (dataField is RecStatusField) == false)
+                    {
+                        responseDictionary.Add(((Epi.INamedObject)dataField).Name, dataField.CurrentRecordValueObject.ToString());
+                    }
                 }
 
+                Request.AnswerInfo = new PreFilledAnswerDTO(); 
+
                 Request.AnswerInfo.UserId = 2;
-                Request.AnswerInfo.OrganizationKey = new Guid();
-                Request.AnswerInfo.SurveyId = new Guid();
+                Request.AnswerInfo.OrganizationKey = new Guid(organizationKey);
+                Request.AnswerInfo.SurveyId = new Guid(formId);
                 Request.AnswerInfo.ParentRecordId = new Guid();
-                Request.AnswerInfo.ResponseId = new Guid();
+                Request.AnswerInfo.ResponseId = responseId;
                 Request.AnswerInfo.SurveyQuestionAnswerList = responseDictionary;
 
                 var Result = client.SetSurveyAnswer(Request);
@@ -665,8 +685,10 @@ namespace Epi.Data.Services
             }
             catch
             {
-                statusMessage = "dpb";
+                statusMessage = "[record not sent to service]";
             }
+
+            return statusMessage;
         }
 
         /// <summary>
