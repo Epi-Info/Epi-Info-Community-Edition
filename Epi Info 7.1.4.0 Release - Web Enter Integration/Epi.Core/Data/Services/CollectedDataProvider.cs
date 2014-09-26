@@ -619,10 +619,10 @@ namespace Epi.Data.Services
 
         public void SaveAsResponse(View view)
         {
-            if (string.IsNullOrEmpty(view.EWEFormId) || string.IsNullOrEmpty(view.EWEOrganizationKey))
-            {
-                //return;
-            }
+            bool isAccessProject = this.dbDriver.GetType().FullName == "Epi.Data.Office.AccessDatabase";
+            bool notPublished = string.IsNullOrEmpty(view.EWEFormId) || string.IsNullOrEmpty(view.EWEOrganizationKey);
+
+            if (isAccessProject || notPublished ) { return; }
 
             string statusMessage = "";
 
