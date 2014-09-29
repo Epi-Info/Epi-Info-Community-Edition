@@ -774,15 +774,14 @@ namespace EpiDashboard.Gadgets.Charting
                         case "palette":
                             ((ScatterChartParameters)Parameters).Palette = int.Parse(child.InnerText);
                             break;
-                        case "markertype":
+                        case "areatype":
                             ((ScatterChartParameters)Parameters).MarkerType = int.Parse(child.InnerText);
                             break;
                         case "yaxislabel":
-                            ((ScatterChartParameters)Parameters).Y2AxisLabel = child.InnerText;
+                            ((ScatterChartParameters)Parameters).YAxisLabel = child.InnerText;
                             break;
                         case "xaxislabeltype":
                             ((ScatterChartParameters)Parameters).XAxisLabelType = int.Parse(child.InnerText);
-
                             break;
                         case "xaxislabel":
                             ((ScatterChartParameters)Parameters).XAxisLabel = child.InnerText;
@@ -797,15 +796,15 @@ namespace EpiDashboard.Gadgets.Charting
                             ((ScatterChartParameters)Parameters).ChartSubTitle = child.InnerText;
                             break;
                         case "showlegend":
-                            if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).ShowLegend = true; }
+                            if (child.InnerText.ToLower().Equals("true")) { ((ScatterChartParameters)Parameters).ShowLegend = true; }
                             else { ((ScatterChartParameters)Parameters).ShowLegend = false; }
                             break;
                         case "showlegendborder":
-                            if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).ShowLegendBorder = true; }
+                            if (child.InnerText.ToLower().Equals("true")) { ((ScatterChartParameters)Parameters).ShowLegendBorder = true; }
                             else { ((ScatterChartParameters)Parameters).ShowLegendBorder = false; }
                             break;
                         case "showlegendvarnames":
-                            if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).ShowLegendVarNames = true; }
+                            if (child.InnerText.ToLower().Equals("true")) { ((ScatterChartParameters)Parameters).ShowLegendVarNames = true; }
                             else { ((ScatterChartParameters)Parameters).ShowLegendVarNames = false; }
                             break;
                         case "legendfontsize":

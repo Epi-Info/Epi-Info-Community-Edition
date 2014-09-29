@@ -76,6 +76,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             txtYAxisLabelValue.Text = "Count";
             txtXAxisLabelValue.Text = String.Empty;
+            txtXAxisLabelValue.IsEnabled = false;
             cmbLegendDock.SelectedIndex = 1;
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cmbField.ItemsSource);
@@ -279,12 +280,21 @@ namespace EpiDashboard.Controls.GadgetProperties
             //Display Colors and Styles settings
             scrollViewerPropertiesColors.Height = scrollViewerPropertiesColors.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
             cmbPalette.SelectedIndex = Parameters.Palette;
+            cmbMarkerType.SelectedIndex = Parameters.MarkerType;
 
             //Display Labels settings
             scrollViewerPropertiesLabels.MaxHeight = scrollViewerPropertiesLabels.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
 
             txtYAxisLabelValue.Text = Parameters.YAxisLabel;
             cmbXAxisLabelType.SelectedIndex = Parameters.XAxisLabelType;
+            if (cmbXAxisLabelType.SelectedIndex == 0)
+            {
+                txtXAxisLabelValue.IsEnabled = false;
+            }
+            else
+            {
+                txtXAxisLabelValue.IsEnabled = true;
+            }
             txtXAxisLabelValue.Text = Parameters.XAxisLabel;
             txtXAxisAngle.Text = Parameters.XAxisAngle.ToString();
 
