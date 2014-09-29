@@ -1306,7 +1306,7 @@ namespace EpiDashboard.Gadgets.Charting
                         //DataView dv = DashboardHelper.GenerateView(GadgetOptions);
                         DataView dv = DashboardHelper.GenerateView(chtParameters);
 
-                        List<XYColumnChartData> dataList = new List<XYColumnChartData>();
+                        List<XYChartData> dataList = new List<XYChartData>();
 
                         NumericDataValue minValue = null;
                         NumericDataValue maxValue = null;
@@ -1317,7 +1317,7 @@ namespace EpiDashboard.Gadgets.Charting
 
                             if (row[freqVar] != DBNull.Value && row[freqVar] != null && row[crosstabVar] != DBNull.Value && row[crosstabVar] != null)
                             {
-                                XYColumnChartData chartData = new XYColumnChartData();
+                                XYChartData chartData = new XYChartData();
                                 chartData.X = Convert.ToDouble(row[freqVar]);
                                 chartData.Y = Convert.ToDouble(row[crosstabVar]);
                                 dataList.Add(chartData);
