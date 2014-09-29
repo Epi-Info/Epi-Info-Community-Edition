@@ -172,10 +172,6 @@
     <Compile Include="Controls\Charting\ColumnChartBase.cs" />
     <Compile Include="Controls\Charting\AreaChartBase.cs" />
     <Compile Include="Controls\Charting\HistogramChartBase.cs" />
-    <Compile Include="Controls\Charting\ScatterChart.xaml.cs">
-      <DependentUpon>ScatterChart.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Charting\ScatterChartBase.cs" />
     <Compile Include="Controls\Charting\ParetoChartBase.cs" />
     <Compile Include="Controls\Charting\ParetoChart.xaml.cs">
       <DependentUpon>ParetoChart.xaml</DependentUpon>
@@ -444,7 +440,6 @@
       <DependentUpon>PMCCControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gadgets\Charting\HistogramChartGadgetBase.cs" />
-    <Compile Include="Gadgets\Charting\ScatterChartGadgetBase.cs" />
     <Compile Include="Gadgets\Charting\ParetoChartGadgetBase.cs" />
     <Compile Include="Gadgets\Charting\XYParetoChartData.cs" />
     <Compile Include="Gadgets\ChartParametersBase.cs" />
@@ -869,10 +864,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Charting\ColumnChart.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\Charting\ScatterChart.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -1,23 +1,22 @@
-﻿<ChartGadgets:ScatterChartGadgetBase x:Class="EpiDashboard.Gadgets.Charting.ScatterChartGadget"
+﻿<EpiDashboard:GadgetBase x:Class="EpiDashboard.Gadgets.Charting.ScatterChartGadget"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:EpiDashboard="clr-namespace:EpiDashboard"
              xmlns:Controls="clr-namespace:EpiDashboard.Controls"
-             xmlns:ChartGadgets="clr-namespace:EpiDashboard.Gadgets.Charting"
              xmlns:charting="clr-namespace:ComponentArt.Win.DataVisualization.Charting;assembly=ComponentArt.Win.DataVisualization.Charting"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="600"
                          SnapsToDevicePixels="True"
-             Style="{DynamicResource gadgetBaseStyle}" MouseRightButtonUp="ChartGadgetBase_MouseRightButtonUp">
-    <ChartGadgets:ScatterChartGadgetBase.Resources>
+             Style="{DynamicResource gadgetBaseStyle}">
+    <EpiDashboard:GadgetBase.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../ResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </ChartGadgets:ScatterChartGadgetBase.Resources>
+    </EpiDashboard:GadgetBase.Resources>
     <Grid>
         <Border Name="borderAll" Style="{DynamicResource mainGadgetBorder}" Background="White" >
             <Border.ContextMenu>
@@ -259,4 +258,4 @@
             </Grid>
         </Border>
     </Grid>
-</ChartGadgets:ScatterChartGadgetBase>
+</EpiDashboard:GadgetBase>

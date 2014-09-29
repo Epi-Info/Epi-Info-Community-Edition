@@ -27,7 +27,7 @@ namespace EpiDashboard.Gadgets.Charting
     /// <summary>
     /// Interaction logic for ScatterChartGadget.xaml
     /// </summary>
-    public partial class ScatterChartGadget : ScatterChartGadgetBase
+    public partial class ScatterChartGadget : GadgetBase
     {
         #region Constructors
             public ScatterChartGadget()
@@ -449,7 +449,7 @@ namespace EpiDashboard.Gadgets.Charting
                 CheckAndSetPosition();
             }
 
-            private void SetChartData(List<XYColumnChartData> dataList, StatisticsRepository.LinearRegression.LinearRegressionResults regresResults, NumericDataValue maxValue, NumericDataValue minValue)
+            private void SetChartData(List<XYChartData> dataList, StatisticsRepository.LinearRegression.LinearRegressionResults regresResults, NumericDataValue maxValue, NumericDataValue minValue)
             {
                 List<RegressionChartData> regressionDataList = new List<RegressionChartData>();
                 ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
@@ -482,7 +482,7 @@ namespace EpiDashboard.Gadgets.Charting
                     rChartData.Z = (double)newMaxValue.DependentValue;
                     regressionDataList.Add(rChartData);
 
-
+                    #region Commented Code
                     //bool foundMin = false;
                     //bool foundMax = false;
 
@@ -542,6 +542,7 @@ namespace EpiDashboard.Gadgets.Charting
 
                     //    xAxis.MinValue = data.X;
                     //}
+                    #endregion //Commented Code
                 }
 
                 //xAxis.UseOnlyVisiblePointsToComputeRange = true;
@@ -554,16 +555,16 @@ namespace EpiDashboard.Gadgets.Charting
 
                 //xAxis.UseOnlyVisiblePointsToComputeRange = true;
 
-                EpiDashboard.Controls.Charting.ScatterChart scatterChart = new EpiDashboard.Controls.Charting.ScatterChart(DashboardHelper, chtParameters, dataList);
+                //EpiDashboard.Controls.Charting.ScatterChart scatterChart = new EpiDashboard.Controls.Charting.ScatterChart(DashboardHelper, chtParameters, dataList);
 
-                scatterChart.Margin = new Thickness(0, 0, 0, 16);
-                //scatterChart.MouseEnter += new MouseEventHandler(chart_MouseEnter);
-                //scatterChart.MouseLeave += new MouseEventHandler(chart_MouseLeave);
-                panelMain.Children.Add(scatterChart);
+                //scatterChart.Margin = new Thickness(0, 0, 0, 16);
+                ////scatterChart.MouseEnter += new MouseEventHandler(chart_MouseEnter);
+                ////scatterChart.MouseLeave += new MouseEventHandler(chart_MouseLeave);
+                //panelMain.Children.Add(scatterChart);
 
             }
 
-            private delegate void SetChartDataDelegate(List<XYColumnChartData> dataList, StatisticsRepository.LinearRegression.LinearRegressionResults regresResults, NumericDataValue maxValue, NumericDataValue minValue);
+            private delegate void SetChartDataDelegate(List<XYChartData> dataList, StatisticsRepository.LinearRegression.LinearRegressionResults regresResults, NumericDataValue maxValue, NumericDataValue minValue);
 
             private void SetPalette()
             {
