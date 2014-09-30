@@ -693,7 +693,7 @@ namespace Epi.Data.Services
 
                 if (view.IsRelatedView)
                 {
-                    Request.AnswerInfo.ParentRecordId = new Guid(view.ParentView.CurrentGlobalRecordId);
+                    Request.AnswerInfo.ParentRecordId = new Guid(view.ParentView.GlobalRecordIdField.CurrentRecordValueString);
                 }
                 else
                 {
