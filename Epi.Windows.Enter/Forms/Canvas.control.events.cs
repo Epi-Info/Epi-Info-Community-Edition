@@ -468,13 +468,7 @@ namespace Epi.Windows.Enter
         /// <param name="e">.NET supplied event parameters</param>
         private void control_Enter(object sender, EventArgs e)
         {          
-            if (this.GotoFieldEvent != null)
-            {               
-                    Field field = ControlFactory.Instance.GetAssociatedField((Control)sender);
-                    GoToFieldEventArgs args = new GoToFieldEventArgs(field);
-                    this.GotoFieldEvent(sender, args);
-                }
-                                  
+                          
              ControlFactory factory = ControlFactory.Instance;
             if (factory.IsPopup)
             {
@@ -485,6 +479,13 @@ namespace Epi.Windows.Enter
                         factory.IsPopup = false;
                     }
             }
+            if (this.GotoFieldEvent != null)
+            {
+                Field field = ControlFactory.Instance.GetAssociatedField((Control)sender);
+                GoToFieldEventArgs args = new GoToFieldEventArgs(field);
+                this.GotoFieldEvent(sender, args);
+            }
+                    
         }
 
         ///<summary>
@@ -524,19 +525,23 @@ namespace Epi.Windows.Enter
             }
             else if (field is DateField)
             {
-                DateTime dateTimeReturn = new DateTime();
-                TextBox control = ((TextBox)sender);
-                bool canParse = DateTime.TryParse(control.Text, out dateTimeReturn);
+                if (!factory.IsPopup)
+                {
+                    DateTime dateTimeReturn = new DateTime();
+                    TextBox control = ((TextBox)sender);
+                    bool canParse = DateTime.TryParse(control.Text, out dateTimeReturn);
 
-                if (canParse)
-                {
-                    ((IInputField)field).CurrentRecordValueObject = dateTimeReturn;
-                    control.Text = ((DateField)field).CurrentRecordValueString;
+                    if (canParse)
+                    {
+                        ((IInputField)field).CurrentRecordValueObject = dateTimeReturn;
+                        control.Text = ((DateField)field).CurrentRecordValueString;
+                    }
+                    else
+                    {
+                        control.Clear();
+                    }
                 }
-                else
-                {
-                    control.Clear();
-                }
+                else return;
             }
             else if (field is TimeField)
             {
@@ -556,19 +561,23 @@ namespace Epi.Windows.Enter
             }
             else if (field is DateTimeField)
             {
-                DateTime dateTimeReturn = new DateTime();
-                TextBox control = ((TextBox)sender);
-                bool canParse = DateTime.TryParse(control.Text, out dateTimeReturn);
+                if (!factory.IsPopup)
+                {
+                    DateTime dateTimeReturn = new DateTime();
+                    TextBox control = ((TextBox)sender);
+                    bool canParse = DateTime.TryParse(control.Text, out dateTimeReturn);
 
-                if (canParse)
-                {
-                    ((IInputField)field).CurrentRecordValueObject = dateTimeReturn;
-                    control.Text = ((DateTimeField)field).CurrentRecordValueString;
+                    if (canParse)
+                    {
+                        ((IInputField)field).CurrentRecordValueObject = dateTimeReturn;
+                        control.Text = ((DateTimeField)field).CurrentRecordValueString;
+                    }
+                    else
+                    {
+                        control.Clear();
+                    }
                 }
-                else
-                {
-                    control.Clear();
-                }
+                else return;
             }
 
             if (this.CloseFieldEvent != null)
