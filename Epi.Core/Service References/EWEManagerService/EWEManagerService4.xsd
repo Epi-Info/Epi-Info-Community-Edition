@@ -195,6 +195,7 @@
       <xs:extension base="tns:Criteria">
         <xs:sequence>
           <xs:element minOccurs="0" name="DateCompleted" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="GetAllColumns" type="xs:boolean" />
           <xs:element minOccurs="0" name="IncludeOrderStatistics" type="xs:boolean" />
           <xs:element minOccurs="0" name="IsEditMode" type="xs:boolean" />
           <xs:element minOccurs="0" name="IsMobile" type="xs:boolean" />
@@ -262,6 +263,7 @@
       <xs:element minOccurs="0" name="FormNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsDraftMode" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsOwner" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSQLProject" type="xs:boolean" />
       <xs:element minOccurs="0" name="OrganizationId" type="xs:int" />
       <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OwnerFName" nillable="true" type="xs:string" />
