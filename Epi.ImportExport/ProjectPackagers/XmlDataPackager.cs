@@ -35,7 +35,8 @@ namespace Epi.ImportExport.ProjectPackagers
             if (sourceForm == null) { throw new ArgumentNullException("sourceForm"); }
             if (string.IsNullOrEmpty(packageName)) { throw new ArgumentNullException("packageName"); }
             #endregion // Input Validation
-            
+
+            IncludeNullFieldData = true;
             SourceForm = sourceForm;
             SourceProject = SourceForm.Project;
             PackageName = packageName;
@@ -52,17 +53,22 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <summary>
         /// Gets/sets the source form within the project that will be used for the packaging routine.
         /// </summary>
-        public View SourceForm { get; private set; }
+        public View SourceForm { get; protected set; }
 
         /// <summary>
         /// Gets/sets the name of the package.
         /// </summary>
-        public string PackageName { get; private set; }
+        public string PackageName { get; protected set; }
 
         /// <summary>
         /// Gets/sets the results of the packaging process
         /// </summary>
-        public ExportInfo ExportInfo { get; private set; }
+        public ExportInfo ExportInfo { get; protected set; }
+
+        /// <summary>
+        /// Gets/sets whether to include empty field data
+        /// </summary>
+        public bool IncludeNullFieldData { get; set; }
 
         /// <summary>
         /// Gets/sets the list of fields whose data should be erased during the packaging process. The dictionary key is the name of the form; the list of strings represent the field names within the form that should be erased.
@@ -87,17 +93,17 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <summary>
         /// Gets/sets the source project for the packaging routine
         /// </summary>
-        private Project SourceProject { get; set; }
+        protected Project SourceProject { get; set; }
 
         /// <summary>
         /// Gets/sets a dictionary of GUID string and XmlElement key value pairs.
         /// </summary>
-        private Dictionary<string, XmlElement> IdList { get; set; }
+        protected Dictionary<string, XmlElement> IdList { get; set; }
 
         /// <summary>
         /// Gets/sets a list of GUIDs for the parent form for whichever form is currently being processed.
         /// </summary>
-        private List<string> ParentIdList { get; set; }
+        protected List<string> ParentIdList { get; set; }
 
         /// <summary>
         /// Gets whether or not the package process is proceeding with custom keys instead of the built-in GlobalRecordId key field.
@@ -113,12 +119,12 @@ namespace Epi.ImportExport.ProjectPackagers
         /// to ensure that Guid lists don't get refreshed when moving to another related form that is the same distance as a related
         /// form that was processed previously.
         /// </remarks>
-        private int CurrentDistanceFromRoot { get; set; }
+        protected int CurrentDistanceFromRoot { get; set; }
 
         /// <summary>
         /// Gets/sets the distance away from the root (parent) node of the form that was packaged prior to the current form.
         /// </summary>        
-        private int PreviousDistanceFromRoot { get; set; }
+        protected int PreviousDistanceFromRoot { get; set; }
         #endregion // Properties
 
         #region Public Methods
@@ -200,7 +206,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <summary>
         /// Checks for problems in the source project
         /// </summary>
-        private void CheckForProblems()
+        protected void CheckForProblems()
         {            
             IDbDriver driver = SourceProject.CollectedData.GetDatabase();
 
@@ -323,7 +329,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// </summary>
         /// <param name="xmlDataPackage">The Xml Data Package document</param>
         /// <param name="root">The root element of the document</param>
-        private void CreateRootAttributes(XmlDocument xmlDataPackage, XmlElement root)
+        protected void CreateRootAttributes(XmlDocument xmlDataPackage, XmlElement root)
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -359,7 +365,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="form">The form that contains the grid field</param>
         /// <param name="gridField">The grid field to be serialized</param>
         /// <returns>XmlElement; represents the Grid field in Xml format, suitable for use in data packaging</returns>
-        private XmlElement CreateXmlGridElement(XmlDocument xmlDataPackage, View form, GridField gridField)
+        protected XmlElement CreateXmlGridElement(XmlDocument xmlDataPackage, View form, GridField gridField)
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -393,7 +399,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="xmlDataPackage">The data package xml document that the XmlElement should be added to</param>
         /// <param name="form">The form to be serialized</param>        
         /// <returns>XmlElement; represents the view in Xml format, suitable for use in data packaging</returns>
-        private XmlElement CreateXmlFormElement(XmlDocument xmlDataPackage, View form) 
+        protected XmlElement CreateXmlFormElement(XmlDocument xmlDataPackage, View form) 
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -441,7 +447,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="xmlDataPackage">The data package xml document that the XmlElement should be added to</param>
         /// <param name="form">The form that will be using these match keys during the import process</param>
         /// <returns>XmlElement; represents the keys Xml format</returns>
-        private XmlElement CreateXmlFormKeyElement(XmlDocument xmlDataPackage, View form)
+        protected XmlElement CreateXmlFormKeyElement(XmlDocument xmlDataPackage, View form)
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -485,7 +491,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="xmlDataPackage">The data package xml document that the XmlElement should be added to</param>
         /// <param name="form">The form whose metadata will be serialized</param>
         /// <returns>XmlElement; represents the view's metadata in Xml format, suitable for use in data packaging</returns>
-        private XmlElement CreateXmlFormMetadataElement(XmlDocument xmlDataPackage, View form)
+        protected XmlElement CreateXmlFormMetadataElement(XmlDocument xmlDataPackage, View form)
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -532,7 +538,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="form">The form that contains the grid field</param>
         /// <param name="gridField">The grid field whose metadata will be serialized</param>
         /// <returns>XmlElement; represents the grid's metadata in Xml format, suitable for use in data packaging</returns>
-        private XmlElement CreateXmlGridMetadataElement(XmlDocument xmlDataPackage, View form, GridField gridField)
+        protected XmlElement CreateXmlGridMetadataElement(XmlDocument xmlDataPackage, View form, GridField gridField)
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -572,7 +578,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="xmlDataPackage">The data package xml document that the XmlElement should be added to</param>
         /// <param name="form">The form whose data will be serialized</param>
         /// <returns>XmlElement; represents the form's data in Xml format, suitable for use in data packaging</returns>
-        private XmlElement CreateXmlFormDataElement(XmlDocument xmlDataPackage, View form)
+        protected XmlElement CreateXmlFormDataElement(XmlDocument xmlDataPackage, View form)
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -761,7 +767,15 @@ namespace Epi.ImportExport.ProjectPackagers
                                                 fieldData.InnerText = value;
                                             }
                                         }
-                                        element.AppendChild(fieldData);
+
+                                        if (String.IsNullOrEmpty(fieldData.InnerText) && IncludeNullFieldData == false)
+                                        {
+                                            // do nothing, for now...
+                                        }
+                                        else
+                                        {
+                                            element.AppendChild(fieldData);
+                                        }
                                         data.AppendChild(element);
                                     }
                                 }
@@ -789,7 +803,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="form">The form that contains the grid field</param>
         /// <param name="gridField">The grid field whose data will be serialized</param>
         /// <returns>XmlElement; represents the grid's data in Xml format, suitable for use in data packaging</returns>
-        private XmlElement CreateXmlGridDataElement(XmlDocument xmlDataPackage, View form, GridField gridField)
+        protected XmlElement CreateXmlGridDataElement(XmlDocument xmlDataPackage, View form, GridField gridField)
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -865,6 +879,6 @@ namespace Epi.ImportExport.ProjectPackagers
 
             return data;
         }
-        #endregion // Private Methods
+        #endregion // Private/Protected Methods
     }
 }
