@@ -313,6 +313,7 @@ namespace Epi.Windows.MakeView.Dialogs
             this.currentSurveyInfoDTO.OwnerId = LoginInfo.UserID;
             this.currentSurveyInfoDTO.StartDate = DateTime.Now;
             this.currentSurveyInfoDTO.SurveyName = this.mediater.Project.Name;
+            this.currentSurveyInfoDTO.DBConnectionString = RemoveUserName(this.mediater.Project.CollectedDataConnectionString);
             if (this.mediater.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
                 {
                 this.currentSurveyInfoDTO.IsSqlProject = true;
