@@ -4115,6 +4115,10 @@ namespace Epi.Windows.MakeView.Forms
 
                 try
                     {
+                        if (view.Project.CollectedData.TableExists(view.TableName) == false)//checking if no table is created in Epi7
+                        {
+                            CreateViewDataTable(view);
+                        }
                     if (ValidateUser()) // Validate User
                         {
                     if (config.Settings.Republish_IsRepbulishable == true) //IsRepbulishable
@@ -4349,6 +4353,22 @@ namespace Epi.Windows.MakeView.Forms
 
             this.SetPublishMenuItems(view);
             }
+
+        private void CreateViewDataTable(View view)
+        {
+            view.SetTableName(view.Name);
+            this.mediator.Project.CollectedData.CreateDataTableForView(view, 1);
+            this.createDataTableToolStripMenuItem.Enabled = false;
+
+            foreach (View v in view.GetDescendantViews())
+            {
+                if (!this.mediator.Project.CollectedData.TableExists(v.TableName))
+                {
+                    view.SetTableName(v.Name);
+                    this.mediator.Project.CollectedData.CreateDataTableForView(v, 1);
+                }
+            }
+        }
 
         private bool ValidateUser()
             {
