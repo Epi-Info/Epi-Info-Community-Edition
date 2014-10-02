@@ -634,7 +634,7 @@ namespace Epi.Data.SqlServer
             sb.Append(" ( ");
             foreach (TableColumn column in columns)
             {
-                sb.Append(column.Name);
+                sb.Append("[" + column.Name + "]");
                 sb.Append(" ");
                 if (GetDbSpecificColumnType(column.DataType).Equals("nvarchar") && column.Length.HasValue && column.Length.Value > 8000)
                 {

@@ -42,14 +42,21 @@ namespace Epi
             {
                 using (System.Xml.XmlReader reader = System.Xml.XmlReader.Create(fileName))
                 {
-                    while (reader.ReadToFollowing("Template"))
+                    try
                     {
-                        string name = reader.GetAttribute("Name");
-
-                        if (string.IsNullOrEmpty(name) == false)
+                        while (reader.ReadToFollowing("Template"))
                         {
-                            strValidFiles.Add(fileName);
+                            string name = reader.GetAttribute("Name");
+
+                            if (string.IsNullOrEmpty(name) == false)
+                            {
+                                strValidFiles.Add(fileName);
+                            }
                         }
+                    }
+                    catch 
+                    {
+                        Logger.Log("The template file [ " + fileName + " ] cannot be read.");
                     }
                 }
             }
