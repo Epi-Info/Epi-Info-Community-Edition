@@ -74,6 +74,7 @@ namespace Epi.Windows.MakeView.Forms
         private string WebServiceEndpointAddress;
         BackgroundWorker worker = null;
         SplashScreenForm sf = null;
+        private string RepublishOrgKey = null;
 
         /// <summary>
         /// PageChanged EventHandler
@@ -3048,7 +3049,7 @@ namespace Epi.Windows.MakeView.Forms
         {
             Configuration config = Configuration.GetNewInstance();
             DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(pView.Id);
-
+            RepublishOrgKey = null;
            DataRow ViewRow = table.Rows[0];
            
             try
@@ -3078,22 +3079,22 @@ namespace Epi.Windows.MakeView.Forms
                         toWebSurveyToolStripMenuItem.Enabled = false;
                         EIWSToolStripMenuItem.Enabled = false;
                     }
-                    if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[2].ToString()))
-                        {
+                    if (CheckforRepublishWebEnterMenuItem())
+                    {
                        
                         toolStripPublishToWebEnter.Text = "Republish Form to Web Enter";
                         toolStripPublishToWebEnter.Enabled = true;
                         toWebEnterToolStripMenuItem.Enabled = true;
                         EWEToolStripMenuItem.Enabled = true;
-                }
-                else
-                {
+                    }
+                    else
+                    {
                        
                         toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
                         toolStripPublishToWebEnter.Enabled = true;
                         toWebEnterToolStripMenuItem.Enabled = false;
                         EWEToolStripMenuItem.Enabled = false;
-                        }
+                    }
                 }
                 else
                 {
@@ -3116,6 +3117,22 @@ namespace Epi.Windows.MakeView.Forms
 
             }
 
+        }
+
+        private bool CheckforRepublishWebEnterMenuItem()
+        {
+            foreach (View view in this.mediator.Project.Views)
+            {
+                DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(view.Id);
+
+                DataRow ViewRow = table.Rows[0];
+                if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[2].ToString()))
+                {
+                    RepublishOrgKey = ViewRow.ItemArray[2].ToString();
+                    return true;
+                }
+            }
+            return false;
         }
 
         //private void QuickPublishtoolStripButton_Click(object sender, EventArgs e)
@@ -4090,7 +4107,9 @@ namespace Epi.Windows.MakeView.Forms
             DataRow ViewRow = table.Rows[0];
         // this.OrganizationKey = this.projectExplorer.CurrentView.EWEOrganizationKey;
             this.EWEOrganizationKey = ViewRow.ItemArray[2].ToString();
-
+            if (string.IsNullOrEmpty(EWEOrganizationKey))
+                if (RepublishOrgKey != null)
+                    EWEOrganizationKey = RepublishOrgKey;
 
             Template template = new Template(this.mediator);
             string InvalidForPublishing = ListFieldsNotSupportedForWeb();
