@@ -3653,11 +3653,11 @@ namespace Epi.Windows.MakeView.Forms
                     //this.UpdateStatus("Survey mode was successfully updated!");
                     if (IsDraftMode)
                         {
-                        MessageBox.Show("Survey mode was successfully changed to DRAFT.", "", MessageBoxButtons.OK);
+                        MessageBox.Show("Form mode was successfully changed to Staging.", "", MessageBoxButtons.OK);
                         }
                     else
                         {
-                        MessageBox.Show("Survey mode was successfully changed to FINAL.", "", MessageBoxButtons.OK);
+                        MessageBox.Show("Form mode was successfully changed to Production.", "", MessageBoxButtons.OK);
                         }
             }
         }
@@ -4098,7 +4098,7 @@ namespace Epi.Windows.MakeView.Forms
                 {
                 //this.UpdateStatus("Survey was successfully updated!");
 
-                MessageBox.Show("Survey was successfully updated.", "", MessageBoxButtons.OK);
+                MessageBox.Show("Form was successfully updated.", "", MessageBoxButtons.OK);
                 }
             }
         private void toolStripPublishToWebEnter_Click(object sender, EventArgs e)
