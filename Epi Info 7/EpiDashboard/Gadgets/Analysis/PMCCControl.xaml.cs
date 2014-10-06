@@ -90,18 +90,22 @@ namespace EpiDashboard
             InitializeComponent();
             this.DashboardHelper = dashboardHelper;
             Construct();
-            FillComboboxes();
+            //FillComboboxes();
         }
 
         protected override void Construct()
         {
+            this.Parameters = new PMCCParameters();
             if (!string.IsNullOrEmpty(CustomOutputHeading) && !CustomOutputHeading.Equals("(none)"))
             {
                 headerPanel.Text = CustomOutputHeading;
             }
 
-            smartTable = (bool)checkboxSmartTable.IsChecked;
-            showPercents = (bool)checkboxRowColPercents.IsChecked;
+            YesValues = new List<string>();
+            NoValues = new List<string>();
+
+            //smartTable = (bool)checkboxSmartTable.IsChecked;
+            //showPercents = (bool)checkboxRowColPercents.IsChecked;
 
             inputVariableList = new Dictionary<string, string>();
             StrataGridList = new List<Grid>();
@@ -141,26 +145,26 @@ namespace EpiDashboard
             mnuSendToBack.Click += new RoutedEventHandler(mnuSendToBack_Click);            
             mnuClose.Click += new RoutedEventHandler(mnuClose_Click);            
 
-            checkboxAllValues.Checked += new RoutedEventHandler(checkboxCheckChanged);
-            checkboxAllValues.Unchecked += new RoutedEventHandler(checkboxCheckChanged);
+            //checkboxAllValues.Checked += new RoutedEventHandler(checkboxCheckChanged);
+            //checkboxAllValues.Unchecked += new RoutedEventHandler(checkboxCheckChanged);
 
-            checkboxIncludeMissing.Checked += new RoutedEventHandler(checkboxCheckChanged);
-            checkboxIncludeMissing.Unchecked += new RoutedEventHandler(checkboxCheckChanged);
+            //checkboxIncludeMissing.Checked += new RoutedEventHandler(checkboxCheckChanged);
+            //checkboxIncludeMissing.Unchecked += new RoutedEventHandler(checkboxCheckChanged);
 
-            checkboxOutcomeContinuous.Checked += new RoutedEventHandler(checkboxCheckChanged);
-            checkboxOutcomeContinuous.Unchecked += new RoutedEventHandler(checkboxCheckChanged);
+            //checkboxOutcomeContinuous.Checked += new RoutedEventHandler(checkboxCheckChanged);
+            //checkboxOutcomeContinuous.Unchecked += new RoutedEventHandler(checkboxCheckChanged);
 
-            checkboxSmartTable.Checked += new RoutedEventHandler(checkboxCheckChanged);
-            checkboxSmartTable.Unchecked += new RoutedEventHandler(checkboxCheckChanged);
+            //checkboxSmartTable.Checked += new RoutedEventHandler(checkboxCheckChanged);
+            //checkboxSmartTable.Unchecked += new RoutedEventHandler(checkboxCheckChanged);
 
-            checkboxRowColPercents.Checked += new RoutedEventHandler(checkboxRowColPercents_Checked);
-            checkboxRowColPercents.Unchecked += new RoutedEventHandler(checkboxRowColPercents_Checked);
+            //checkboxRowColPercents.Checked += new RoutedEventHandler(checkboxRowColPercents_Checked);
+            //checkboxRowColPercents.Unchecked += new RoutedEventHandler(checkboxRowColPercents_Checked);
 
-            checkboxHorizontal.Checked += new RoutedEventHandler(checkboxHorizontal_Checked);
-            checkboxHorizontal.Unchecked += new RoutedEventHandler(checkboxHorizontal_Unchecked);
+            //checkboxHorizontal.Checked += new RoutedEventHandler(checkboxHorizontal_Checked);
+            //checkboxHorizontal.Unchecked += new RoutedEventHandler(checkboxHorizontal_Unchecked);
 
-            checkboxStrataSummaryOnly.Checked += new RoutedEventHandler(checkboxStrataSummaryOnly_CheckChanged);
-            checkboxStrataSummaryOnly.Unchecked += new RoutedEventHandler(checkboxStrataSummaryOnly_CheckChanged);
+            //checkboxStrataSummaryOnly.Checked += new RoutedEventHandler(checkboxStrataSummaryOnly_CheckChanged);
+            //checkboxStrataSummaryOnly.Unchecked += new RoutedEventHandler(checkboxStrataSummaryOnly_CheckChanged);
             
             columnWarningShown = false;
 
@@ -181,22 +185,22 @@ namespace EpiDashboard
  //           ConfigExpandedTitle.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_MXN;
  //           tblockExposureField.Text = DashboardSharedStrings.GADGET_EXPOSURE_VARIABLE;
  //           tblockOutcomeField.Text = DashboardSharedStrings.GADGET_OUTCOME_VARIABLE;
-            tblockWeightVariable.Text = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
+            //tblockWeightVariable.Text = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
  //           tblockStratifyBy.Text = DashboardSharedStrings.GADGET_STRATA_VARIABLE;
 
-            expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
-            checkboxStrataSummaryOnly.Content = DashboardSharedStrings.GADGET_STRATA_SUMMARY_ONLY;
-            checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
-            checkboxAllValues.Content = DashboardSharedStrings.GADGET_ALL_LIST_VALUES;
-            checkboxCommentLegalLabels.Content = DashboardSharedStrings.GADGET_LIST_LABELS;
-            checkboxOutcomeContinuous.Content = DashboardSharedStrings.GADGET_OUTCOME_CONTINUOUS;
-            checkboxRowColPercents.Content = DashboardSharedStrings.GADGET_ROW_COL_PERCENTS;
-            checkboxSmartTable.Content = DashboardSharedStrings.GADGET_SMART_2X2;
-            checkboxHorizontal.Content = DashboardSharedStrings.GADGET_DISPLAY_STRATAS_HORIZONTALLY;
+            //expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
+            //checkboxStrataSummaryOnly.Content = DashboardSharedStrings.GADGET_STRATA_SUMMARY_ONLY;
+            //checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
+            //checkboxAllValues.Content = DashboardSharedStrings.GADGET_ALL_LIST_VALUES;
+            //checkboxCommentLegalLabels.Content = DashboardSharedStrings.GADGET_LIST_LABELS;
+            //checkboxOutcomeContinuous.Content = DashboardSharedStrings.GADGET_OUTCOME_CONTINUOUS;
+            //checkboxRowColPercents.Content = DashboardSharedStrings.GADGET_ROW_COL_PERCENTS;
+            //checkboxSmartTable.Content = DashboardSharedStrings.GADGET_SMART_2X2;
+            //checkboxHorizontal.Content = DashboardSharedStrings.GADGET_DISPLAY_STRATAS_HORIZONTALLY;
 
-            tblockMaxColumnLength.Text = DashboardSharedStrings.GADGET_MAX_COL_NAME_LENGTH;
+            //tblockMaxColumnLength.Text = DashboardSharedStrings.GADGET_MAX_COL_NAME_LENGTH;
 
-            btnRun.Content = DashboardSharedStrings.GADGET_RUN_BUTTON;
+            //btnRun.Content = DashboardSharedStrings.GADGET_RUN_BUTTON;
             #endregion // Translation
         }
 
@@ -451,7 +455,7 @@ namespace EpiDashboard
 
             base.CloseGadget();
 
-            GadgetOptions = null;
+            //GadgetOptions = null;
         }
 
         /// <summary>
@@ -573,7 +577,9 @@ namespace EpiDashboard
 
         private void AddStrata2x2Statistics()
         {
-            if (this.StrataGridList.Count == 0 && this.GadgetOptions.StrataVariableNames.Count >= 1 && !DashboardHelper.GetAllGroupsAsList().Contains(GadgetOptions.MainVariableName))
+            PMCCParameters pmccParameters = (PMCCParameters)Parameters;
+            //if (this.StrataGridList.Count == 0 && this.GadgetOptions.StrataVariableNames.Count >= 1 && !DashboardHelper.GetAllGroupsAsList().Contains(GadgetOptions.MainVariableName))
+            if (this.StrataGridList.Count == 0 && pmccParameters.StrataVariableNames.Count >= 1 && !DashboardHelper.GetAllGroupsAsList().Contains(pmccParameters.ColumnNames[0].ToString()))
             {
                 // We have two or more 2x2 tables and stratification (non-grouped). Get 2x2 strata summary results.
 
@@ -677,6 +683,67 @@ namespace EpiDashboard
             }
         }
 
+        /// <summary>
+        /// Shows the Properties Panel for the gadget to set its options and parameters.
+        /// </summary>
+        public override void ShowHideConfigPanel()
+        {
+            Popup = new DashboardPopup();
+            Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
+            Controls.GadgetProperties.PMCCProperties properties = new Controls.GadgetProperties.PMCCProperties(this.DashboardHelper, this, (PMCCParameters)Parameters, StrataGridList);
+
+            properties.Width = 800;
+            properties.Height = 600;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            {
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            {
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            properties.Cancelled += new EventHandler(properties_Cancelled);
+            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            Popup.Content = properties;
+            Popup.Show();
+        }
+
+
+        /// <summary>
+        /// Accepts changes to the Properties panel and refreshes the results.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void properties_ChangesAccepted(object sender, EventArgs e)
+        {
+            Controls.GadgetProperties.PMCCProperties properties = Popup.Content as Controls.GadgetProperties.PMCCProperties;
+            this.Parameters = properties.Parameters;
+            this.DataFilters = properties.DataFilters;
+            this.CustomOutputHeading = Parameters.GadgetTitle;
+            this.CustomOutputDescription = Parameters.GadgetDescription;
+            this.YesValues = (properties.Parameters as PMCCParameters).YesValues;
+            this.NoValues = (properties.Parameters as PMCCParameters).NoValues;
+            Popup.Close();
+            if (properties.HasSelectedFields)
+            {
+                RefreshResults();
+            }
+        }
+
+        /// <summary>
+        /// Closes the Properties panel when cancel is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void properties_Cancelled(object sender, EventArgs e)
+        {
+            Popup.Close();
+        }
+
+
         protected override void worker_WorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             Debug.Print("Background worker thread for frequency gadget was cancelled or ran to completion.");
@@ -687,10 +754,11 @@ namespace EpiDashboard
         {
             lock (syncLock)
             {
-                Dictionary<string, string> inputVariableList = ((GadgetParameters)e.Argument).InputVariableList;
+                //Dictionary<string, string> inputVariableList = ((GadgetParameters)e.Argument).InputVariableList;
 
                 //Stopwatch stopwatch = new Stopwatch();
                 //stopwatch.Start();
+                PMCCParameters pmccParameters = (PMCCParameters)Parameters;
 
                 this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToProcessingState));     
                 this.Dispatcher.BeginInvoke(new SimpleCallback(ClearResults));
@@ -704,56 +772,70 @@ namespace EpiDashboard
                 string freqVar = string.Empty;
                 string weightVar = string.Empty;
                 string strataVar = string.Empty;
+                List<string> stratas = new List<string>();
                 string crosstabVar = string.Empty;
                 bool includeMissing = false;
                 bool outcomeContinuous = false;
                 bool showStrataSummaryOnly = false;
 
-                if (inputVariableList.ContainsKey("freqvar"))
+                //if (inputVariableList.ContainsKey("freqvar"))
+                //{
+                //    freqVar = inputVariableList["freqvar"];
+                //}
+
+                if (!String.IsNullOrEmpty(pmccParameters.ColumnNames[0]))
+                    freqVar = pmccParameters.ColumnNames[0];
+
+                //if (inputVariableList.ContainsKey("crosstabvar"))
+                //{
+                //    crosstabVar = inputVariableList["crosstabvar"];
+                //}
+                if (!String.IsNullOrEmpty(pmccParameters.CrosstabVariableName))
+                    crosstabVar = pmccParameters.CrosstabVariableName;
+
+                //if (inputVariableList.ContainsKey("weightvar"))
+                //{
+                //    weightVar = inputVariableList["weightvar"];
+                //}
+                if (!String.IsNullOrEmpty(pmccParameters.WeightVariableName))
+                    weightVar = pmccParameters.WeightVariableName;
+
+                //if (inputVariableList.ContainsKey("stratavar"))
+                //{
+                //    strataVar = inputVariableList["stratavar"];
+                //}
+                if (pmccParameters.StrataVariableNames.Count > 0)
                 {
-                    freqVar = inputVariableList["freqvar"];
+                    stratas = pmccParameters.StrataVariableNames;
                 }
 
-                if (inputVariableList.ContainsKey("crosstabvar"))
-                {
-                    crosstabVar = inputVariableList["crosstabvar"];
-                }
+                //if (inputVariableList.ContainsKey("includemissing"))
+                //{
+                //    if (inputVariableList["includemissing"].Equals("true"))
+                //    {
+                //        includeMissing = true;
+                //    }
+                //}
+                includeMissing = pmccParameters.IncludeMissing;
 
-                if (inputVariableList.ContainsKey("weightvar"))
-                {
-                    weightVar = inputVariableList["weightvar"];
-                }
+                //if (inputVariableList.ContainsKey("stratasummaryonly"))
+                //{
+                //    if (inputVariableList["stratasummaryonly"].Equals("true"))
+                //    {
+                //        showStrataSummaryOnly = true;
+                //    }
+                //}                
+                showStrataSummaryOnly = pmccParameters.StrataSummaryOnly;
 
-                if (inputVariableList.ContainsKey("stratavar"))
-                {
-                    strataVar = inputVariableList["stratavar"];
-                }
+                //if (inputVariableList.ContainsKey("treatoutcomeascontinuous"))
+                //{
+                //    if (inputVariableList["treatoutcomeascontinuous"].Equals("true"))
+                //    {
+                //        outcomeContinuous = true;
+                //    }
+                //}
+                outcomeContinuous = pmccParameters.TreatOutcomeAsContinuous;
 
-                if (inputVariableList.ContainsKey("includemissing"))
-                {
-                    if (inputVariableList["includemissing"].Equals("true"))
-                    {
-                        includeMissing = true;
-                    }
-                }
-
-                if (inputVariableList.ContainsKey("stratasummaryonly"))
-                {
-                    if (inputVariableList["stratasummaryonly"].Equals("true"))
-                    {
-                        showStrataSummaryOnly = true;
-                    }
-                }                
-
-                if (inputVariableList.ContainsKey("treatoutcomeascontinuous"))
-                {
-                    if (inputVariableList["treatoutcomeascontinuous"].Equals("true"))
-                    {
-                        outcomeContinuous = true;
-                    }
-                }
-
-                List<string> stratas = new List<string>();
                 if (!string.IsNullOrEmpty(strataVar))
                 {
                     stratas.Add(strataVar);
@@ -761,16 +843,16 @@ namespace EpiDashboard
 
                 try
                 {
-                    GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
-                    GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
+                    pmccParameters.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
+                    pmccParameters.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
 
                     if (this.DataFilters != null && this.DataFilters.Count > 0)
                     {
-                        GadgetOptions.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
+                        pmccParameters.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
                     }
                     else
                     {
-                        GadgetOptions.CustomFilter = string.Empty;
+                        pmccParameters.CustomFilter = string.Empty;
                     }
 
                     bool runGroup = false;
@@ -779,15 +861,18 @@ namespace EpiDashboard
 
                     List<string> allGroupFields = DashboardHelper.GetAllGroupsAsList();
 
-                    if (GadgetOptions.MainVariableNames != null && GadgetOptions.MainVariableNames.Count > 0)
-                    {
-                        Dictionary<DataTable, List<DescriptiveStatistics>> grpTables = new Dictionary<DataTable, List<DescriptiveStatistics>>();
-
-                        foreach (string mainVariableName in GadgetOptions.MainVariableNames)
+                    //if (GadgetOptions.MainVariableNames != null && GadgetOptions.MainVariableNames.Count > 0)
+                    if (pmccParameters.ColumnNames[0] != null && pmccParameters.ColumnNames.Count > 0 &&
+                            !(allGroupFields.Contains(pmccParameters.ColumnNames[0])))
                         {
-                            GadgetParameters newOptions = new GadgetParameters(GadgetOptions);
-                            newOptions.MainVariableNames = null;
-                            newOptions.MainVariableName = mainVariableName;
+                        Dictionary<DataTable, List<DescriptiveStatistics>> grpTables = new Dictionary<DataTable, List<DescriptiveStatistics>>();
+                        PMCCParameters newOptions = new PMCCParameters(pmccParameters);
+
+                        foreach (string mainVariableName in pmccParameters.ColumnNames)
+                        {
+                            //GadgetParameters newOptions = new GadgetParameters(GadgetOptions);
+                            //newOptions.MainVariableNames = null;
+                            //newOptions.MainVariableName = mainVariableName;
 
                             grpTables = DashboardHelper.GenerateFrequencyTable(newOptions);
 
@@ -798,17 +883,22 @@ namespace EpiDashboard
                         }                        
                         runGroup = true;
                     }
-                    else if (allGroupFields.Contains(GadgetOptions.MainVariableName))
+                    //else if (allGroupFields.Contains(GadgetOptions.MainVariableName))
+                    else if (allGroupFields.Contains(pmccParameters.ColumnNames[0]))
                     {
                         Dictionary<DataTable, List<DescriptiveStatistics>> grpTables = new Dictionary<DataTable, List<DescriptiveStatistics>>();
 
-                        foreach (string variableName in DashboardHelper.GetVariablesInGroup(GadgetOptions.MainVariableName))
+                        //foreach (string variableName in DashboardHelper.GetVariablesInGroup(GadgetOptions.MainVariableName))
+                        foreach (string variableName in DashboardHelper.GetVariablesInGroup(pmccParameters.ColumnNames[0]))
                         {
                             if (!allGroupFields.Contains(variableName) && DashboardHelper.TableColumnNames.ContainsKey(variableName))
                             {
-                                GadgetParameters newOptions = new GadgetParameters(GadgetOptions);
-                                newOptions.MainVariableNames = null;
-                                newOptions.MainVariableName = variableName;
+                                //GadgetParameters newOptions = new GadgetParameters(GadgetOptions);
+                                PMCCParameters newOptions = new PMCCParameters(pmccParameters);
+                                //newOptions.MainVariableNames = null;
+                                //newOptions.MainVariableName = variableName;
+                                newOptions.ColumnNames[0] = null;
+                                newOptions.ColumnNames[0] = variableName;
 
                                 grpTables = DashboardHelper.GenerateFrequencyTable(newOptions);
 
@@ -822,7 +912,8 @@ namespace EpiDashboard
                     }
                     else
                     {
-                        stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(GadgetOptions/*, freqVar, weightVar, stratas, crosstabVar, useAllPossibleValues, sortHighLow, includeMissing, false*/);
+                        //stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(GadgetOptions/*, freqVar, weightVar, stratas, crosstabVar, useAllPossibleValues, sortHighLow, includeMissing, false*/);
+                        stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(pmccParameters /*, freqVar, weightVar, stratas, crosstabVar, useAllPossibleValues, sortHighLow, includeMissing, false*/);
                         runGroup = false;
                     }
 
@@ -952,7 +1043,7 @@ namespace EpiDashboard
                             }
                             DataTable frequencies = tableKvp.Key;
 
-                            if (YesValues.Count > 0 && NoValues.Count > 0)
+                            if (pmccParameters.YesValues.Count > 0 && pmccParameters.NoValues.Count > 0)
                             {
                                 frequencies = ApplyRowValueMappings(frequencies);
                                 frequencies = ApplyColumnValueMappings(frequencies);
@@ -1093,135 +1184,138 @@ namespace EpiDashboard
 
         private void FillComboboxes(bool update = false)
         {
-            LoadingCombos = true;
+            //LoadingCombos = true;
 
-            string prevExposureField = string.Empty;
-            string prevOutcomeField = string.Empty;
-            string prevWeightField = string.Empty;
-            //string prevStrataField = string.Empty;
-            List<string> prevStrataFields = new List<string>();
+            //string prevExposureField = string.Empty;
+            //string prevOutcomeField = string.Empty;
+            //string prevWeightField = string.Empty;
+            ////string prevStrataField = string.Empty;
+            //List<string> prevStrataFields = new List<string>();
 
-            if (update)
-            {
-                if (cbxExposureField.SelectedIndex >= 0)
-                {
-                    prevExposureField = cbxExposureField.SelectedItem.ToString();
-                }
-                if (cbxOutcomeField.SelectedIndex >= 0)
-                {
-                    prevOutcomeField = cbxOutcomeField.SelectedItem.ToString();
-                }
-                if (cbxFieldWeight.SelectedIndex >= 0)
-                {
-                    prevWeightField = cbxFieldWeight.SelectedItem.ToString();
-                }
-                //if (cbxFieldStrata.SelectedIndex >= 0)
-                //{
-                //    prevStrataField = cbxFieldStrata.SelectedItem.ToString();
-                //}
-                foreach (string s in lbxFieldStrata.SelectedItems)
-                {
-                    prevStrataFields.Add(s);
-                }
-            }            
-
-            cbxExposureField.ItemsSource = null;
-            cbxExposureField.Items.Clear();
-
-            cbxOutcomeField.ItemsSource = null;
-            cbxOutcomeField.Items.Clear();
-
-            cbxFieldWeight.ItemsSource = null;
-            cbxFieldWeight.Items.Clear();
-
-            //cbxFieldStrata.ItemsSource = null;
-            //cbxFieldStrata.Items.Clear();
-
-            lbxFieldStrata.ItemsSource = null;
-            lbxFieldStrata.Items.Clear();
-
-            List<string> fieldNames = new List<string>();
-            List<string> weightFieldNames = new List<string>();
-            List<string> strataFieldNames = new List<string>();
-
-            weightFieldNames.Add(string.Empty);
-            strataFieldNames.Add(string.Empty);
-            
-            ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
-            fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
-
-            columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
-            weightFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
-
-            columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
-            strataFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));            
-
-            fieldNames.Sort();
-            weightFieldNames.Sort();
-            strataFieldNames.Sort();
-
-            if (fieldNames.Contains("SYSTEMDATE"))
-            {
-                fieldNames.Remove("SYSTEMDATE");
-            }
-
-            if (DashboardHelper.IsUsingEpiProject)
-            {
-                if (fieldNames.Contains("RecStatus")) fieldNames.Remove("RecStatus");
-                if (weightFieldNames.Contains("RecStatus")) weightFieldNames.Remove("RecStatus");
-
-                if (strataFieldNames.Contains("RecStatus")) strataFieldNames.Remove("RecStatus");
-                if (strataFieldNames.Contains("FKEY")) strataFieldNames.Remove("FKEY");
-                if (strataFieldNames.Contains("GlobalRecordId")) strataFieldNames.Remove("GlobalRecordId");
-            }
-
-            fieldNames.AddRange(DashboardHelper.GetAllGroupsAsList());
-
-            cbxExposureField.ItemsSource = fieldNames;
-            cbxOutcomeField.ItemsSource = fieldNames;
-            cbxFieldWeight.ItemsSource = weightFieldNames;
-            //cbxFieldStrata.ItemsSource = strataFieldNames;
-            lbxFieldStrata.ItemsSource = strataFieldNames;
-
-            if (cbxExposureField.Items.Count > 0)
-            {
-                cbxExposureField.SelectedIndex = -1;
-                cbxOutcomeField.SelectedIndex = -1;
-            }
-            if (cbxFieldWeight.Items.Count > 0)
-            {
-                cbxFieldWeight.SelectedIndex = -1;
-            }
-            //if (cbxFieldStrata.Items.Count > 0)
+            //if (update)
             //{
-            //    cbxFieldStrata.SelectedIndex = -1;
+            //    if (cbxExposureField.SelectedIndex >= 0)
+            //    {
+            //        prevExposureField = cbxExposureField.SelectedItem.ToString();
+            //    }
+            //    if (cbxOutcomeField.SelectedIndex >= 0)
+            //    {
+            //        prevOutcomeField = cbxOutcomeField.SelectedItem.ToString();
+            //    }
+            //    if (cbxFieldWeight.SelectedIndex >= 0)
+            //    {
+            //        prevWeightField = cbxFieldWeight.SelectedItem.ToString();
+            //    }
+            //    //if (cbxFieldStrata.SelectedIndex >= 0)
+            //    //{
+            //    //    prevStrataField = cbxFieldStrata.SelectedItem.ToString();
+            //    //}
+            //    foreach (string s in lbxFieldStrata.SelectedItems)
+            //    {
+            //        prevStrataFields.Add(s);
+            //    }
             //}            
 
-            if (update)
-            {
-                cbxExposureField.SelectedItem = prevExposureField;
-                cbxOutcomeField.SelectedItem = prevOutcomeField;
-                cbxFieldWeight.SelectedItem = prevWeightField;
-                //cbxFieldStrata.SelectedItem = prevStrataField;
+            //cbxExposureField.ItemsSource = null;
+            //cbxExposureField.Items.Clear();
 
-                foreach (string s in prevStrataFields)
-                {
-                    lbxFieldStrata.SelectedItems.Add(s);
-                }
-            }
+            //cbxOutcomeField.ItemsSource = null;
+            //cbxOutcomeField.Items.Clear();
 
-            LoadingCombos = false;
+            //cbxFieldWeight.ItemsSource = null;
+            //cbxFieldWeight.Items.Clear();
+
+            ////cbxFieldStrata.ItemsSource = null;
+            ////cbxFieldStrata.Items.Clear();
+
+            //lbxFieldStrata.ItemsSource = null;
+            //lbxFieldStrata.Items.Clear();
+
+            //List<string> fieldNames = new List<string>();
+            //List<string> weightFieldNames = new List<string>();
+            //List<string> strataFieldNames = new List<string>();
+
+            //weightFieldNames.Add(string.Empty);
+            //strataFieldNames.Add(string.Empty);
+            
+            //ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
+            //fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
+
+            //columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
+            //weightFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
+
+            //columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
+            //strataFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));            
+
+            //fieldNames.Sort();
+            //weightFieldNames.Sort();
+            //strataFieldNames.Sort();
+
+            //if (fieldNames.Contains("SYSTEMDATE"))
+            //{
+            //    fieldNames.Remove("SYSTEMDATE");
+            //}
+
+            //if (DashboardHelper.IsUsingEpiProject)
+            //{
+            //    if (fieldNames.Contains("RecStatus")) fieldNames.Remove("RecStatus");
+            //    if (weightFieldNames.Contains("RecStatus")) weightFieldNames.Remove("RecStatus");
+
+            //    if (strataFieldNames.Contains("RecStatus")) strataFieldNames.Remove("RecStatus");
+            //    if (strataFieldNames.Contains("FKEY")) strataFieldNames.Remove("FKEY");
+            //    if (strataFieldNames.Contains("GlobalRecordId")) strataFieldNames.Remove("GlobalRecordId");
+            //}
+
+            //fieldNames.AddRange(DashboardHelper.GetAllGroupsAsList());
+
+            //cbxExposureField.ItemsSource = fieldNames;
+            //cbxOutcomeField.ItemsSource = fieldNames;
+            //cbxFieldWeight.ItemsSource = weightFieldNames;
+            ////cbxFieldStrata.ItemsSource = strataFieldNames;
+            //lbxFieldStrata.ItemsSource = strataFieldNames;
+
+            //if (cbxExposureField.Items.Count > 0)
+            //{
+            //    cbxExposureField.SelectedIndex = -1;
+            //    cbxOutcomeField.SelectedIndex = -1;
+            //}
+            //if (cbxFieldWeight.Items.Count > 0)
+            //{
+            //    cbxFieldWeight.SelectedIndex = -1;
+            //}
+            ////if (cbxFieldStrata.Items.Count > 0)
+            ////{
+            ////    cbxFieldStrata.SelectedIndex = -1;
+            ////}            
+
+            //if (update)
+            //{
+            //    cbxExposureField.SelectedItem = prevExposureField;
+            //    cbxOutcomeField.SelectedItem = prevOutcomeField;
+            //    cbxFieldWeight.SelectedItem = prevWeightField;
+            //    //cbxFieldStrata.SelectedItem = prevStrataField;
+
+            //    foreach (string s in prevStrataFields)
+            //    {
+            //        lbxFieldStrata.SelectedItems.Add(s);
+            //    }
+            //}
+
+            //LoadingCombos = false;
         }
 
         private void AddFreqGrid(string strataVar, string value, string crosstabVar, string groupReference, DataTable table)
-        {            
+        {
+            PMCCParameters pmccParameters = (PMCCParameters)Parameters;
+
             bool inList = false;
 
             int columnCount = table.Columns.Count;
 
             string formattedValue = value;
 
-            if (string.IsNullOrEmpty(strataVar) && GadgetOptions.StrataVariableNames.Count == 0)
+//            if (string.IsNullOrEmpty(strataVar) && GadgetOptions.StrataVariableNames.Count == 0)
+            if (string.IsNullOrEmpty(strataVar) && pmccParameters.StrataVariableNames.Count == 0)
             {
                 formattedValue = crosstabVar;
             }
@@ -1897,6 +1991,8 @@ namespace EpiDashboard
 
         private DataTable ApplyRowValueMappings(DataTable table)
         {
+            PMCCParameters pmccParameters = (PMCCParameters)Parameters;
+
             if (YesValues.Count > 0 && NoValues.Count > 0)
             {
                 DataTable remappedTable = table.Clone();
@@ -1928,7 +2024,8 @@ namespace EpiDashboard
                 {
                     string value = row[0].ToString();
 
-                    if (YesValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.MainVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.MainVariableName)) && value.Equals(Config.Settings.RepresentationOfYes)))
+                    //if (YesValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.MainVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.MainVariableName)) && value.Equals(Config.Settings.RepresentationOfYes)))
+                    if (YesValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(pmccParameters.ColumnNames[0]) || DashboardHelper.IsColumnYesNo(pmccParameters.ColumnNames[0])) && value.Equals(Config.Settings.RepresentationOfYes)))
                     {
                         for (int i = 1; i < remappedTable.Columns.Count; i++)
                         {
@@ -1936,7 +2033,8 @@ namespace EpiDashboard
                         }
                     }
 
-                    if (NoValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.MainVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.MainVariableName)) && value.Equals(Config.Settings.RepresentationOfNo)))
+                    //if (NoValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.MainVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.MainVariableName)) && value.Equals(Config.Settings.RepresentationOfNo)))
+                    if (NoValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(pmccParameters.ColumnNames[0]) || DashboardHelper.IsColumnYesNo(pmccParameters.ColumnNames[0])) && value.Equals(Config.Settings.RepresentationOfNo)))
                     {
                         for (int i = 1; i < remappedTable.Columns.Count; i++)
                         {
@@ -1954,6 +2052,7 @@ namespace EpiDashboard
 
         private DataTable ApplyColumnValueMappings(DataTable table)
         {
+            PMCCParameters pmccParameters = (PMCCParameters)Parameters;
             if (YesValues.Count > 0 && NoValues.Count > 0)
             {
                 DataTable remappedTable = new DataTable();
@@ -1985,7 +2084,8 @@ namespace EpiDashboard
                 {
                     string columnName = table.Columns[i].ToString();
 
-                    if (YesValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfYes)))
+                    //if (YesValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfYes)))
+                    if (YesValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(pmccParameters.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(pmccParameters.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfYes)))
                     {
                         for (int j = 0; j < 2; j++)
                         {
@@ -1993,7 +2093,8 @@ namespace EpiDashboard
                         }
                     }
 
-                    if (NoValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfNo)))
+                    //if (NoValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfNo)))
+                    if (NoValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(pmccParameters.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(pmccParameters.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfNo)))
                     {
                         for (int j = 0; j < 2; j++)
                         {
@@ -2224,138 +2325,143 @@ namespace EpiDashboard
 
         private void CheckVariables()
         {
-            lbxFieldStrata.IsEnabled = true;
-            if (cbxExposureField.SelectedIndex >= 0)
-            {
-                string exposureFieldName = cbxExposureField.SelectedItem.ToString();
+            #region Deprecated Code
+            //lbxFieldStrata.IsEnabled = true;
+            //if (cbxExposureField.SelectedIndex >= 0)
+            //{
+            //    string exposureFieldName = cbxExposureField.SelectedItem.ToString();
 
-                if (DashboardHelper.GetAllGroupsAsList().Contains(cbxExposureField.SelectedItem.ToString()))
-                {
-                    lbxFieldStrata.IsEnabled = false;
-                    lbxFieldStrata.SelectedItems.Clear();
+            //    if (DashboardHelper.GetAllGroupsAsList().Contains(cbxExposureField.SelectedItem.ToString()))
+            //    {
+            //        lbxFieldStrata.IsEnabled = false;
+            //        lbxFieldStrata.SelectedItems.Clear();
 
-                    btnValueMappings.IsEnabled = true;
-                }
-                else if (DashboardHelper.IsColumnText(exposureFieldName) || DashboardHelper.IsColumnNumeric(exposureFieldName))
-                {
-                    btnValueMappings.IsEnabled = true;
-                }
-            }
-            else
-            {
-                if (!LoadingCombos)
-                {
-                    btnValueMappings.IsEnabled = false;
-                    YesValues = new List<string>();
-                    NoValues = new List<string>();
-                }
-            }
+            //        btnValueMappings.IsEnabled = true;
+            //    }
+            //    else if (DashboardHelper.IsColumnText(exposureFieldName) || DashboardHelper.IsColumnNumeric(exposureFieldName))
+            //    {
+            //        btnValueMappings.IsEnabled = true;
+            //    }
+            //}
+            //else
+            //{
+            //    if (!LoadingCombos)
+            //    {
+            //        btnValueMappings.IsEnabled = false;
+            //        YesValues = new List<string>();
+            //        NoValues = new List<string>();
+            //    }
+            //}
+        #endregion
         }
 
         private void CreateInputVariableList()
         {
-            Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
+            #region Deprecated Code
+            //MOVED TO PMCC PROPERTIES
+            //Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
 
-            GadgetOptions.MainVariableName = string.Empty;
-            GadgetOptions.WeightVariableName = string.Empty;
-            GadgetOptions.StrataVariableNames = new List<string>();
-            GadgetOptions.CrosstabVariableName = string.Empty;
+            //GadgetOptions.MainVariableName = string.Empty;
+            //GadgetOptions.WeightVariableName = string.Empty;
+            //GadgetOptions.StrataVariableNames = new List<string>();
+            //GadgetOptions.CrosstabVariableName = string.Empty;
 
-            smartTable = (bool)checkboxSmartTable.IsChecked;
-            showPercents = (bool)checkboxRowColPercents.IsChecked;
+            //smartTable = (bool)checkboxSmartTable.IsChecked;
+            //showPercents = (bool)checkboxRowColPercents.IsChecked;
 
-            if (cbxExposureField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString()))
-            {
-                inputVariableList.Add("freqvar", cbxExposureField.SelectedItem.ToString());
-                GadgetOptions.MainVariableName = cbxExposureField.SelectedItem.ToString();
-            }
-            else
-            {
-                return;
-            }
-
-            if (cbxOutcomeField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxOutcomeField.SelectedItem.ToString()))
-            {
-                inputVariableList.Add("crosstabvar", cbxOutcomeField.SelectedItem.ToString());
-                GadgetOptions.CrosstabVariableName = cbxOutcomeField.SelectedItem.ToString();
-            }
-
-            if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
-            {
-                inputVariableList.Add("weightvar", cbxFieldWeight.SelectedItem.ToString());
-                GadgetOptions.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
-            }
-            //if (cbxFieldStrata.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldStrata.SelectedItem.ToString()))
+            //if (cbxExposureField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString()))
             //{
-            //    inputVariableList.Add("stratavar", cbxFieldStrata.SelectedItem.ToString());
-            //    GadgetOptions.StrataVariableNames = new List<string>();
-            //    GadgetOptions.StrataVariableNames.Add(cbxFieldStrata.SelectedItem.ToString());
+            //    inputVariableList.Add("freqvar", cbxExposureField.SelectedItem.ToString());
+            //    GadgetOptions.MainVariableName = cbxExposureField.SelectedItem.ToString();
+            //}
+            //else
+            //{
+            //    return;
             //}
 
-            if (lbxFieldStrata.SelectedItems.Count > 0)
-            {
-                //inputVariableList.Add("stratavar", cbxFieldStrata.SelectedItem.ToString());
-                GadgetOptions.StrataVariableNames = new List<string>();
-                foreach (string s in lbxFieldStrata.SelectedItems)
-                {
-                    GadgetOptions.StrataVariableNames.Add(s);
-                }
-            }
+            //if (cbxOutcomeField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxOutcomeField.SelectedItem.ToString()))
+            //{
+            //    inputVariableList.Add("crosstabvar", cbxOutcomeField.SelectedItem.ToString());
+            //    GadgetOptions.CrosstabVariableName = cbxOutcomeField.SelectedItem.ToString();
+            //}
 
-            if (checkboxAllValues.IsChecked == true)
-            {
-                inputVariableList.Add("allvalues", "true");
-                GadgetOptions.ShouldUseAllPossibleValues = true;
-            }
-            else
-            {
-                inputVariableList.Add("allvalues", "false");
-                GadgetOptions.ShouldUseAllPossibleValues = false;
-            }
+            //if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
+            //{
+            //    inputVariableList.Add("weightvar", cbxFieldWeight.SelectedItem.ToString());
+            //    GadgetOptions.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
+            //}
+            ////if (cbxFieldStrata.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldStrata.SelectedItem.ToString()))
+            ////{
+            ////    inputVariableList.Add("stratavar", cbxFieldStrata.SelectedItem.ToString());
+            ////    GadgetOptions.StrataVariableNames = new List<string>();
+            ////    GadgetOptions.StrataVariableNames.Add(cbxFieldStrata.SelectedItem.ToString());
+            ////}
 
-            if (checkboxCommentLegalLabels.IsChecked == true)
-            {
-                GadgetOptions.ShouldShowCommentLegalLabels = true;
-            }
-            else
-            {
-                GadgetOptions.ShouldShowCommentLegalLabels = false;
-            }
+            //if (lbxFieldStrata.SelectedItems.Count > 0)
+            //{
+            //    //inputVariableList.Add("stratavar", cbxFieldStrata.SelectedItem.ToString());
+            //    GadgetOptions.StrataVariableNames = new List<string>();
+            //    foreach (string s in lbxFieldStrata.SelectedItems)
+            //    {
+            //        GadgetOptions.StrataVariableNames.Add(s);
+            //    }
+            //}
 
-            if (checkboxIncludeMissing.IsChecked == true)
-            {
-                inputVariableList.Add("includemissing", "true");
-                GadgetOptions.ShouldIncludeMissing = true;
-            }
-            else
-            {
-                inputVariableList.Add("includemissing", "false");
-                GadgetOptions.ShouldIncludeMissing = false;
-            }
+            //if (checkboxAllValues.IsChecked == true)
+            //{
+            //    inputVariableList.Add("allvalues", "true");
+            //    GadgetOptions.ShouldUseAllPossibleValues = true;
+            //}
+            //else
+            //{
+            //    inputVariableList.Add("allvalues", "false");
+            //    GadgetOptions.ShouldUseAllPossibleValues = false;
+            //}
 
-            if (checkboxOutcomeContinuous.IsChecked == true)
-            {
-                inputVariableList.Add("treatoutcomeascontinuous", "true");                
-            }
-            else
-            {
-                inputVariableList.Add("treatoutcomeascontinuous", "false");                
-            }
+            //if (checkboxCommentLegalLabels.IsChecked == true)
+            //{
+            //    GadgetOptions.ShouldShowCommentLegalLabels = true;
+            //}
+            //else
+            //{
+            //    GadgetOptions.ShouldShowCommentLegalLabels = false;
+            //}
 
-            if (checkboxStrataSummaryOnly.IsChecked == true)
-            {
-                inputVariableList.Add("stratasummaryonly", "true");
-            }
-            else
-            {
-                inputVariableList.Add("stratasummaryonly", "false");
-            }
+            //if (checkboxIncludeMissing.IsChecked == true)
+            //{
+            //    inputVariableList.Add("includemissing", "true");
+            //    GadgetOptions.ShouldIncludeMissing = true;
+            //}
+            //else
+            //{
+            //    inputVariableList.Add("includemissing", "false");
+            //    GadgetOptions.ShouldIncludeMissing = false;
+            //}
 
-            //inputVariableList.Add("maxcolumns", MaxColumns.ToString());
-            //inputVariableList.Add("maxrows", MaxRows.ToString());
+            //if (checkboxOutcomeContinuous.IsChecked == true)
+            //{
+            //    inputVariableList.Add("treatoutcomeascontinuous", "true");                
+            //}
+            //else
+            //{
+            //    inputVariableList.Add("treatoutcomeascontinuous", "false");                
+            //}
 
-            GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
-            GadgetOptions.InputVariableList = inputVariableList;
+            //if (checkboxStrataSummaryOnly.IsChecked == true)
+            //{
+            //    inputVariableList.Add("stratasummaryonly", "true");
+            //}
+            //else
+            //{
+            //    inputVariableList.Add("stratasummaryonly", "false");
+            //}
+
+            ////inputVariableList.Add("maxcolumns", MaxColumns.ToString());
+            ////inputVariableList.Add("maxrows", MaxRows.ToString());
+
+            //GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
+            //GadgetOptions.InputVariableList = inputVariableList;
+            #endregion
         }
         #endregion
 
@@ -2388,24 +2494,40 @@ namespace EpiDashboard
 
         public override void RefreshResults()
         {
+            PMCCParameters pmccParameters = (PMCCParameters)Parameters;
+
             isRunningGrouped2x2 = null;
 
-            if (!LoadingCombos && GadgetOptions != null && cbxExposureField.SelectedIndex > -1 && cbxOutcomeField.SelectedIndex > -1)
+            //if (!LoadingCombos && GadgetOptions != null && cbxExposureField.SelectedIndex > -1 && cbxOutcomeField.SelectedIndex > -1)
+            if (Parameters != null && pmccParameters.ColumnNames.Count > 0)
             {
-                CreateInputVariableList();
-                infoPanel.Visibility = System.Windows.Visibility.Collapsed;
-                waitPanel.Visibility = System.Windows.Visibility.Visible;
-                messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
-                descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
-                baseWorker = new BackgroundWorker();
-                baseWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(Execute);
-                baseWorker.RunWorkerAsync();
-                base.RefreshResults();
-            }
-            else if (!LoadingCombos && (cbxExposureField.SelectedIndex == -1 && cbxOutcomeField.SelectedIndex == -1))
-            {
-                ClearResults();
-                waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+                if (!String.IsNullOrEmpty(pmccParameters.ColumnNames[0]) && (!String.IsNullOrEmpty(pmccParameters.CrosstabVariableName)))
+                {
+                    //CreateInputVariableList();
+                    if (pmccParameters.LayoutMode.Equals("vertical"))
+                    {
+                        panelMain.Orientation = Orientation.Vertical;
+                    }
+                    else
+                    {
+                        panelMain.Orientation = Orientation.Horizontal;
+                    }
+
+                    infoPanel.Visibility = System.Windows.Visibility.Collapsed;
+                    waitPanel.Visibility = System.Windows.Visibility.Visible;
+                    messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
+                    descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
+                    baseWorker = new BackgroundWorker();
+                    baseWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(Execute);
+                    baseWorker.RunWorkerAsync();
+                    base.RefreshResults();
+                }
+                //                else if (!LoadingCombos && (cbxExposureField.SelectedIndex == -1 && cbxOutcomeField.SelectedIndex == -1))
+                if (String.IsNullOrEmpty(pmccParameters.ColumnNames[0]) || (String.IsNullOrEmpty(pmccParameters.CrosstabVariableName)))
+                {
+                    ClearResults();
+                    waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+                }
             }
         }
 
@@ -2416,142 +2538,15 @@ namespace EpiDashboard
         /// <returns>XmlNode</returns>
         public override XmlNode Serialize(XmlDocument doc)
         {
-            Dictionary<string, string> inputVariableList = GadgetOptions.InputVariableList;
+            //Dictionary<string, string> inputVariableList = GadgetOptions.InputVariableList;
+            PMCCParameters pmccParameters = (PMCCParameters)Parameters;
+            System.Xml.XmlElement element = doc.CreateElement("pmccGadget");  //Note: 7.1.3.0 has this as "frequencyGadget"
 
             string freqVar = string.Empty;
             string crosstabVar = string.Empty;
             string strataVar = string.Empty;
             string weightVar = string.Empty;
             string sort = string.Empty;
-            bool allValues = false;
-            bool showConfLimits = true;
-            bool showCumulativePercent = true;
-            bool includeMissing = false;
-            bool outcomeContinuous = false;
-            bool rowColPercents = (bool)checkboxRowColPercents.IsChecked;
-            string layoutMode = "vertical";
-            bool showStrataSummaryOnly = false;
-
-            if (checkboxHorizontal.IsChecked == true)
-            {
-                layoutMode = "horizontal";
-            }
-
-            if (inputVariableList.ContainsKey("freqvar"))
-            {
-                freqVar = inputVariableList["freqvar"].Replace("<", "&lt;");
-            }
-            if (inputVariableList.ContainsKey("stratavar"))
-            {
-                strataVar = inputVariableList["stratavar"].Replace("<", "&lt;");
-            }
-            if (inputVariableList.ContainsKey("weightvar"))
-            {
-                weightVar = inputVariableList["weightvar"].Replace("<", "&lt;");
-            }
-            if (inputVariableList.ContainsKey("crosstabvar"))
-            {
-                crosstabVar = inputVariableList["crosstabvar"].Replace("<", "&lt;");
-            }
-            if (inputVariableList.ContainsKey("sort"))
-            {
-                sort = inputVariableList["sort"];
-            }
-            if (inputVariableList.ContainsKey("allvalues"))
-            {
-                allValues = bool.Parse(inputVariableList["allvalues"]);
-            }
-            if (inputVariableList.ContainsKey("showconflimits"))
-            {
-                showConfLimits = bool.Parse(inputVariableList["showconflimits"]);
-            }
-            if (inputVariableList.ContainsKey("showcumulativepercent"))
-            {
-                showCumulativePercent = bool.Parse(inputVariableList["showcumulativepercent"]);
-            }
-            if (inputVariableList.ContainsKey("includemissing"))
-            {
-                includeMissing = bool.Parse(inputVariableList["includemissing"]);
-            }
-            if (inputVariableList.ContainsKey("treatoutcomeascontinuous"))
-            {
-                outcomeContinuous = bool.Parse(inputVariableList["treatoutcomeascontinuous"]);
-            }
-            if (inputVariableList.ContainsKey("stratasummaryonly"))
-            {
-                showStrataSummaryOnly = bool.Parse(inputVariableList["stratasummaryonly"]);                
-            }   
-
-            CustomOutputHeading = headerPanel.Text;
-            CustomOutputDescription = descriptionPanel.Text;
-
-            string xmlString =
-            "<mainVariable>" + freqVar + "</mainVariable>" +
-            "<crosstabVariable>" + crosstabVar + "</crosstabVariable>";
-            
-            if(GadgetOptions.StrataVariableNames.Count == 1) 
-            {
-                xmlString = xmlString + "<strataVariable>" + GadgetOptions.StrataVariableNames[0].Replace("<", "&lt;") + "</strataVariable>";
-            }
-            else if (GadgetOptions.StrataVariableNames.Count > 1)
-            {
-                xmlString = xmlString + "<strataVariables>";
-
-                foreach (string strataVariable in this.GadgetOptions.StrataVariableNames)
-                {
-                    xmlString = xmlString + "<strataVariable>" + strataVariable.Replace("<", "&lt;") + "</strataVariable>";
-                }
-
-                xmlString = xmlString + "</strataVariables>";
-            }
-
-            if (YesValues.Count > 0 && NoValues.Count > 0)
-            {
-                xmlString = xmlString + "<valueRemappings>";
-                xmlString = xmlString + "<yesValues>";
-
-                foreach (string s in YesValues)
-                {
-                    xmlString = xmlString + "<value>";
-                    xmlString = xmlString + s;
-                    xmlString = xmlString + "</value>";
-                }
-
-                xmlString = xmlString + "</yesValues>";
-                xmlString = xmlString + "<noValues>";
-
-                foreach (string s in NoValues)
-                {
-                    xmlString = xmlString + "<value>";
-                    xmlString = xmlString + s;
-                    xmlString = xmlString + "</value>";
-                }
-
-                xmlString = xmlString + "</noValues>";
-                xmlString = xmlString + "</valueRemappings>";
-            }
-            
-            xmlString = xmlString + "<weightVariable>" + weightVar + "</weightVariable>" +
-            //"<maxColumns>" + MaxColumns.ToString() + "</maxColumns>" +
-            "<maxColumnNameLength>" + MaxColumnLength.ToString() + "</maxColumnNameLength>" +
-            "<allValues>" + allValues + "</allValues>" +
-            "<showListLabels>" + checkboxCommentLegalLabels.IsChecked + "</showListLabels>" +
-            "<showConfLimits>" + showConfLimits + "</showConfLimits>" +
-            "<showCumulativePercent>" + showCumulativePercent + "</showCumulativePercent>" + 
-            "<includeMissing>" + includeMissing + "</includeMissing>" +
-            "<showStrataSummaryOnly>" + showStrataSummaryOnly + "</showStrataSummaryOnly>" +
-            "<treatOutcomeAsContinuous>" + outcomeContinuous + "</treatOutcomeAsContinuous>" +
-            "<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
-            "<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>" +
-            "<customCaption>" + CustomOutputCaption + "</customCaption>" +
-            "<layoutMode>" + layoutMode + "</layoutMode>" +
-            "<rowColPercents>" + rowColPercents + "</rowColPercents>";
-
-            xmlString = xmlString + SerializeAnchors();
-
-            System.Xml.XmlElement element = doc.CreateElement("frequencyGadget");
-            element.InnerXml = xmlString;
-            element.AppendChild(SerializeFilters(doc));
 
             System.Xml.XmlAttribute id = doc.CreateAttribute("id");
             System.Xml.XmlAttribute locationY = doc.CreateAttribute("top");
@@ -2571,6 +2566,285 @@ namespace EpiDashboard
             element.Attributes.Append(type);
             element.Attributes.Append(id);
 
+            //CustomOutputHeading = headerPanel.Text;
+            //CustomOutputDescription = descriptionPanel.Text;
+            CustomOutputHeading = pmccParameters.GadgetTitle;
+            CustomOutputDescription = pmccParameters.GadgetDescription;
+
+            //if (inputVariableList.ContainsKey("freqvar"))
+            //{
+            //    freqVar = inputVariableList["freqvar"].Replace("<", "&lt;");
+            //}
+            XmlElement mainVarElement = doc.CreateElement("mainVariable");
+            if (pmccParameters.ColumnNames.Count > 0)
+            {
+                if (!String.IsNullOrEmpty(pmccParameters.ColumnNames[0].ToString()))
+                {
+                    mainVarElement.InnerText = pmccParameters.ColumnNames[0].ToString();
+                    element.AppendChild(mainVarElement);
+                }
+            }
+
+            //if (inputVariableList.ContainsKey("crosstabvar"))
+            //{
+            //    crosstabVar = inputVariableList["crosstabvar"].Replace("<", "&lt;");
+            //}
+            XmlElement crosstabVarElement = doc.CreateElement("crosstabVariable");
+            if (!String.IsNullOrEmpty(pmccParameters.CrosstabVariableName.ToString()))
+            {
+                crosstabVarElement.InnerText = pmccParameters.CrosstabVariableName.ToString();
+                element.AppendChild(crosstabVarElement);
+            }
+
+            //if (inputVariableList.ContainsKey("stratavar"))
+            //{
+            //    strataVar = inputVariableList["stratavar"].Replace("<", "&lt;");
+            //}
+            XmlElement StrataVariableNameElement = doc.CreateElement("strataVariable");
+            XmlElement StrataVariableNamesElement = doc.CreateElement("strataVariables");
+            if (pmccParameters.StrataVariableNames.Count == 1)
+            {
+                StrataVariableNameElement.InnerText = pmccParameters.StrataVariableNames[0].ToString();
+                element.AppendChild(StrataVariableNameElement);
+            }
+            else if (pmccParameters.StrataVariableNames.Count > 1)
+            {
+                //string xmlstrataVarString = string.Empty;
+                //foreach (string strataColumn in freqParameters.StrataVariableNames)
+                //{
+                //    xmlstrataVarString = xmlstrataVarString + "<strataVariable>" + strataColumn.Replace("<", "&lt;") + "</strataVariable>";
+                //}
+                //StrataVariableNamesElement.InnerXml = xmlstrataVarString;
+                //element.AppendChild(StrataVariableNamesElement); 
+
+                foreach (string strataColumn in pmccParameters.StrataVariableNames)
+                {
+                    XmlElement strataElement = doc.CreateElement("strataVariable");
+                    strataElement.InnerText = strataColumn.Replace("<", "&lt;");
+                    StrataVariableNamesElement.AppendChild(strataElement);
+                }
+
+                element.AppendChild(StrataVariableNamesElement);
+            }
+
+            if (pmccParameters.YesValues.Count > 0 && pmccParameters.NoValues.Count > 0)
+            {
+                //xmlString = xmlString + "<valueRemappings>";
+                XmlElement valueRemapElement = doc.CreateElement("valueRemappings");
+                //xmlString = xmlString + "<yesValues>";
+                XmlElement yesValuesElement = doc.CreateElement("yesValues");
+                //foreach (string s in YesValues)
+                foreach (string s in pmccParameters.YesValues)
+                {
+                    //xmlString = xmlString + "<value>";
+                    //xmlString = xmlString + s;
+                    //xmlString = xmlString + "</value>";
+                    XmlElement valueElement = doc.CreateElement("value");
+                    valueElement.InnerText = s;
+                    yesValuesElement.AppendChild(valueElement);
+                }
+                valueRemapElement.AppendChild(yesValuesElement);
+                //xmlString = xmlString + "</yesValues>";
+                //xmlString = xmlString + "<noValues>";
+                XmlElement noValuesElement = doc.CreateElement("noValues");
+                foreach (string s in pmccParameters.NoValues)
+                {
+                    //xmlString = xmlString + "<value>";
+                    //xmlString = xmlString + s;
+                    //xmlString = xmlString + "</value>";
+                    XmlElement valueElement = doc.CreateElement("value");
+                    valueElement.InnerText = s;
+                    noValuesElement.AppendChild(valueElement);
+                }
+                //xmlString = xmlString + "</noValues>";
+                //xmlString = xmlString + "</valueRemappings>";
+                valueRemapElement.AppendChild(noValuesElement);
+                element.AppendChild(valueRemapElement);
+            }
+            
+            //if (inputVariableList.ContainsKey("weightvar"))
+            //{
+            //    weightVar = inputVariableList["weightvar"].Replace("<", "&lt;");
+            //}
+            XmlElement weightVarElement = doc.CreateElement("weightVar");
+            if (!String.IsNullOrEmpty(pmccParameters.WeightVariableName.ToString()))
+            {
+                weightVarElement.InnerText = pmccParameters.WeightVariableName.ToString();
+                element.AppendChild(weightVarElement);
+            }
+            
+            XmlElement maxColumnNameLengthElement = doc.CreateElement("maxColumnNameLength");
+            if (!String.IsNullOrEmpty(pmccParameters.MaxColumnNameLength.ToString()))
+            {
+                maxColumnNameLengthElement.InnerText = pmccParameters.MaxColumnNameLength.ToString();
+                element.AppendChild(maxColumnNameLengthElement);
+            }
+
+            //if (inputVariableList.ContainsKey("allvalues"))
+            //{
+            //    allValues = bool.Parse(inputVariableList["allvalues"]);
+            //}
+            XmlElement allValuesElement = doc.CreateElement("allValues");
+            if (!String.IsNullOrEmpty(pmccParameters.ShowAllListValues.ToString()))
+            {
+                allValuesElement.InnerText = pmccParameters.ShowAllListValues.ToString();
+                element.AppendChild(allValuesElement);
+            }
+
+            XmlElement showListLabelsElement = doc.CreateElement("showListLabels");
+            if (!String.IsNullOrEmpty(pmccParameters.ShowCommentLegalLabels.ToString()))
+            {
+                showListLabelsElement.InnerText = pmccParameters.ShowCommentLegalLabels.ToString();
+                element.AppendChild(showListLabelsElement);
+            }
+            
+            //if (inputVariableList.ContainsKey("showconflimits"))
+            //{
+            //    showConfLimits = bool.Parse(inputVariableList["showconflimits"]);
+            //}
+            XmlElement showConfLimitsElement = doc.CreateElement("showConfLimits");
+            if (!String.IsNullOrEmpty(pmccParameters.ShowConfLimits.ToString()))
+            {
+                showConfLimitsElement.InnerText = pmccParameters.ShowConfLimits.ToString();
+                element.AppendChild(showConfLimitsElement);
+            }
+
+            //if (inputVariableList.ContainsKey("showcumulativepercent"))
+            //{
+            //    showCumulativePercent = bool.Parse(inputVariableList["showcumulativepercent"]);
+            //}
+            XmlElement showCumulativePercentElement = doc.CreateElement("showCumulativePercent");
+            if (!String.IsNullOrEmpty(pmccParameters.ShowCumulativePercent.ToString()))
+            {
+                showCumulativePercentElement.InnerText = pmccParameters.ShowCumulativePercent.ToString();
+                element.AppendChild(showCumulativePercentElement);
+            }
+
+            //if (inputVariableList.ContainsKey("includemissing"))
+            //{
+            //    includeMissing = bool.Parse(inputVariableList["includemissing"]);
+            //}
+            XmlElement includeMissingElement = doc.CreateElement("includeMissing");
+            if (!String.IsNullOrEmpty(pmccParameters.IncludeMissing.ToString()))
+            {
+                includeMissingElement.InnerText = pmccParameters.IncludeMissing.ToString();
+                element.AppendChild(includeMissingElement);
+            }
+
+            //if (inputVariableList.ContainsKey("treatoutcomeascontinuous"))
+            //{
+            //    outcomeContinuous = bool.Parse(inputVariableList["treatoutcomeascontinuous"]);
+            //}
+            XmlElement treatOutcomeAsContinuousElement = doc.CreateElement("treatOutcomeAsContinuous");
+            if (!String.IsNullOrEmpty(pmccParameters.TreatOutcomeAsContinuous.ToString()))
+            {
+                treatOutcomeAsContinuousElement.InnerText = pmccParameters.TreatOutcomeAsContinuous.ToString();
+                element.AppendChild(treatOutcomeAsContinuousElement);
+            }
+
+            //if (inputVariableList.ContainsKey("stratasummaryonly"))
+            //{
+            //    showStrataSummaryOnly = bool.Parse(inputVariableList["stratasummaryonly"]);                
+            //}
+            XmlElement showStrataSummaryOnlyElement = doc.CreateElement("showStrataSummaryOnly");
+            if (!String.IsNullOrEmpty(pmccParameters.StrataSummaryOnly.ToString()))
+            {
+                showStrataSummaryOnlyElement.InnerText = pmccParameters.StrataSummaryOnly.ToString();
+                element.AppendChild(showStrataSummaryOnlyElement);
+            }
+
+            //if (checkboxHorizontal.IsChecked == true)
+            //{
+            //    layoutMode = "horizontal";
+            //}
+            XmlElement layoutModeElement = doc.CreateElement("layoutMode");
+            if (!String.IsNullOrEmpty(pmccParameters.LayoutMode.ToString()))
+            {
+                layoutModeElement.InnerText = pmccParameters.LayoutMode.ToString();
+            }
+            element.AppendChild(layoutModeElement);
+
+
+            #region Deprecated Code
+            //string xmlString =
+            //"<mainVariable>" + freqVar + "</mainVariable>" +
+            //"<crosstabVariable>" + crosstabVar + "</crosstabVariable>";
+            
+            //if(GadgetOptions.StrataVariableNames.Count == 1) 
+            //{
+            //    xmlString = xmlString + "<strataVariable>" + GadgetOptions.StrataVariableNames[0].Replace("<", "&lt;") + "</strataVariable>";
+            //}
+            //else if (GadgetOptions.StrataVariableNames.Count > 1)
+            //{
+            //    xmlString = xmlString + "<strataVariables>";
+
+            //    foreach (string strataVariable in this.GadgetOptions.StrataVariableNames)
+            //    {
+            //        xmlString = xmlString + "<strataVariable>" + strataVariable.Replace("<", "&lt;") + "</strataVariable>";
+            //    }
+
+            //    xmlString = xmlString + "</strataVariables>";
+            //}
+
+            //if (YesValues.Count > 0 && NoValues.Count > 0)
+            //{
+            //    xmlString = xmlString + "<valueRemappings>";
+            //    xmlString = xmlString + "<yesValues>";
+
+            //    foreach (string s in YesValues)
+            //    {
+            //        xmlString = xmlString + "<value>";
+            //        xmlString = xmlString + s;
+            //        xmlString = xmlString + "</value>";
+            //    }
+
+            //    xmlString = xmlString + "</yesValues>";
+            //    xmlString = xmlString + "<noValues>";
+
+            //    foreach (string s in NoValues)
+            //    {
+            //        xmlString = xmlString + "<value>";
+            //        xmlString = xmlString + s;
+            //        xmlString = xmlString + "</value>";
+            //    }
+
+            //    xmlString = xmlString + "</noValues>";
+            //    xmlString = xmlString + "</valueRemappings>";
+            //}
+            
+            //xmlString = xmlString + "<weightVariable>" + weightVar + "</weightVariable>" +
+            ////"<maxColumns>" + MaxColumns.ToString() + "</maxColumns>" +
+            //"<maxColumnNameLength>" + MaxColumnLength.ToString() + "</maxColumnNameLength>" +
+            //"<allValues>" + allValues + "</allValues>" +
+            //"<showListLabels>" + checkboxCommentLegalLabels.IsChecked + "</showListLabels>" +
+            //"<showConfLimits>" + showConfLimits + "</showConfLimits>" +
+            //"<showCumulativePercent>" + showCumulativePercent + "</showCumulativePercent>" + 
+            //"<includeMissing>" + includeMissing + "</includeMissing>" +
+            //"<showStrataSummaryOnly>" + showStrataSummaryOnly + "</showStrataSummaryOnly>" +
+            //"<treatOutcomeAsContinuous>" + outcomeContinuous + "</treatOutcomeAsContinuous>" +
+
+            //"<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
+            //"<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>" +
+            //"<customCaption>" + CustomOutputCaption + "</customCaption>" +
+            #endregion
+
+            //customHeading
+            XmlElement customHeadingElement = doc.CreateElement("customHeading");
+            customHeadingElement.InnerText = pmccParameters.GadgetTitle; //CustomOutputHeading.Replace("<", "&lt;");
+            element.AppendChild(customHeadingElement);
+
+            //customDescription
+            XmlElement customDescriptionElement = doc.CreateElement("customDescription");
+            customDescriptionElement.InnerText = pmccParameters.GadgetDescription; //CustomOutputDescription.Replace("<", "&lt;");
+            element.AppendChild(customDescriptionElement);
+
+            //customCaption
+            XmlElement customCaptionElement = doc.CreateElement("customCaption");
+            customCaptionElement.InnerText = CustomOutputCaption;
+            element.AppendChild(customCaptionElement);
+
+            SerializeAnchors(element);
+
             return element;
         }
 
@@ -2582,6 +2856,7 @@ namespace EpiDashboard
         {
             this.LoadingCombos = true;
             this.ColumnWarningShown = true;
+            this.Parameters = new PMCCParameters();
 
             HideConfigPanel();
 
@@ -2594,98 +2869,136 @@ namespace EpiDashboard
                 {
                     case "mainvariable":
                     case "exposurevariable": // added to work with the old 2x2 gadget
-                        cbxExposureField.Text = child.InnerText.Replace("&lt;", "<");
+                        //cbxExposureField.Text = child.InnerText.Replace("&lt;", "<");
+                        ((PMCCParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
                         break;
                     case "crosstabvariable":
                     case "outcomevariable": // added to work with the old 2x2 gadget
-                        cbxOutcomeField.Text = child.InnerText.Replace("&lt;", "<");
+                        //cbxOutcomeField.Text = child.InnerText.Replace("&lt;", "<");
+                        ((PMCCParameters)Parameters).CrosstabVariableName = child.InnerText.Replace("&lt;", "<");
                         break;
                     case "stratavariable":
                         //cbxFieldStrata.Text = child.InnerText.Replace("&lt;", "<");
+                        //if (!string.IsNullOrEmpty(child.InnerText))
+                        //{
+                        //    lbxFieldStrata.SelectedItems.Add(child.InnerText.Replace("&lt;", "<"));
+                        //}
                         if (!string.IsNullOrEmpty(child.InnerText))
                         {
-                            lbxFieldStrata.SelectedItems.Add(child.InnerText.Replace("&lt;", "<"));
+                            if (((PMCCParameters)Parameters).StrataVariableNames.Count == 0)
+                            {
+                                ((PMCCParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
+                            }
+                            else
+                            {
+                                ((PMCCParameters)Parameters).StrataVariableNames[0] = child.InnerText.Replace("&lt;", "<");
+                            }
                         }
-                        break;                    
+                        break;
+                    case "stratavariables":
+                        foreach (XmlElement field in child.ChildNodes)
+                        {
+                            List<string> fields = new List<string>();
+                            if (field.Name.ToLower().Equals("stratavariable"))
+                            {
+                                ((PMCCParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));
+                            }
+                        }
+                        break;
                     case "weightvariable":
-                        cbxFieldWeight.Text = child.InnerText.Replace("&lt;", "<");
+                        //cbxFieldWeight.Text = child.InnerText.Replace("&lt;", "<");
+                        ((PMCCParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
                         break;
                     case "maxcolumnnamelength":
                         int maxColumnLength = 24;
                         int.TryParse(child.InnerText, out maxColumnLength);
-                        txtMaxColumnLength.Text = maxColumnLength.ToString();
+                        //txtMaxColumnLength.Text = maxColumnLength.ToString();
+                        ((PMCCParameters)Parameters).MaxColumnNameLength = maxColumnLength.ToString();
                         break;
                     case "allvalues":
                         if (child.InnerText.ToLower().Equals("true"))
                         {
-                            checkboxAllValues.IsChecked = true;
+                            //checkboxAllValues.IsChecked = true;
+                            ((PMCCParameters)Parameters).ShowAllListValues = true;
                         }
                         else
                         {
-                            checkboxAllValues.IsChecked = false;
+                            //checkboxAllValues.IsChecked = false;
+                            ((PMCCParameters)Parameters).ShowAllListValues = false;
                         }
                         break;
                     case "showlistlabels":
                         if (child.InnerText.ToLower().Equals("true"))
                         {
-                            checkboxCommentLegalLabels.IsChecked = true;
+                            //checkboxCommentLegalLabels.IsChecked = true;
+                            ((PMCCParameters)Parameters).ShowCommentLegalLabels = true;
                         }
                         else
                         {
-                            checkboxCommentLegalLabels.IsChecked = false;
+                            //checkboxCommentLegalLabels.IsChecked = false;
+                            ((PMCCParameters)Parameters).ShowCommentLegalLabels = true;
                         }
                         break;
                     case "includemissing":
                         if (child.InnerText.ToLower().Equals("true"))
                         {
-                            checkboxIncludeMissing.IsChecked = true;
+                            //checkboxIncludeMissing.IsChecked = true;
+                            ((PMCCParameters)Parameters).IncludeMissing = true;
                         }
                         else
                         {
-                            checkboxIncludeMissing.IsChecked = false;
-                        }       
+                            //checkboxIncludeMissing.IsChecked = false;
+                            ((PMCCParameters)Parameters).IncludeMissing = false;
+                        }
                         break;
-                    case "showstratasummaryonly":                        
+                    case "showstratasummaryonly":
                         if (child.InnerText.ToLower().Equals("true"))
                         {
-                            checkboxStrataSummaryOnly.IsChecked = true;
+                            //checkboxStrataSummaryOnly.IsChecked = true;
+                            ((PMCCParameters)Parameters).StrataSummaryOnly = true;
                         }
                         else
                         {
-                            checkboxStrataSummaryOnly.IsChecked = false;
+                            //checkboxStrataSummaryOnly.IsChecked = false;
+                            ((PMCCParameters)Parameters).StrataSummaryOnly = true;
                         }
                         break;
                     case "treatoutcomeascontinuous":
                         if (child.InnerText.ToLower().Equals("true"))
                         {
-                            checkboxOutcomeContinuous.IsChecked = true;
+                            //checkboxOutcomeContinuous.IsChecked = true;
+                            ((PMCCParameters)Parameters).TreatOutcomeAsContinuous = true;
                         }
                         else
                         {
-                            checkboxOutcomeContinuous.IsChecked = false;
+                            //checkboxOutcomeContinuous.IsChecked = false;
+                            ((PMCCParameters)Parameters).TreatOutcomeAsContinuous = false;
                         }
                         break;
                     case "rowcolpercents":
                         if (child.InnerText.ToLower().Equals("true"))
                         {
-                            checkboxRowColPercents.IsChecked = true;
+                            //checkboxRowColPercents.IsChecked = true;
+                            ((PMCCParameters)Parameters).RowColPercents = true;
                         }
                         else
                         {
-                            checkboxRowColPercents.IsChecked = false;
+                            //checkboxRowColPercents.IsChecked = false;
+                            ((PMCCParameters)Parameters).RowColPercents = false;
                         }
                         break;
                     case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
-                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<"); ;
+                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<");
+                            Parameters.GadgetTitle = CustomOutputHeading;
                         }
                         break;
                     case "customdescription":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
                             this.CustomOutputDescription = child.InnerText.Replace("&lt;", "<");
-
+                            Parameters.GadgetDescription = child.InnerText.Replace("&lt;", "<");
                             if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputHeading.Equals("(none)"))
                             {
                                 descriptionPanel.Text = CustomOutputDescription;
@@ -2704,27 +3017,22 @@ namespace EpiDashboard
                         this.DataFilters = new DataFilters(this.DashboardHelper);
                         this.DataFilters.CreateFromXml(child);
                         break;
-                    case "stratavariables":
-                        foreach (XmlElement field in child.ChildNodes)
-                        {
-                            List<string> fields = new List<string>();
-                            if (field.Name.ToLower().Equals("stratavariable"))
-                            {
-                                lbxFieldStrata.SelectedItems.Add(field.InnerText.Replace("&lt;", "<"));
-                            }
-                        }
-                        break;
+                    //case "stratavariables":
+                    //    foreach (XmlElement field in child.ChildNodes)
+                    //    {
+                    //        List<string> fields = new List<string>();
+                    //        if (field.Name.ToLower().Equals("stratavariable"))
+                    //        {
+                    //            lbxFieldStrata.SelectedItems.Add(field.InnerText.Replace("&lt;", "<"));
+                    //        }
+                    //    }
+                    //    break;
                     case "layoutmode":
-                        if (child.InnerText.ToLower().Equals("horizontal"))
+                        if (!string.IsNullOrEmpty(child.InnerText))
                         {
-                            checkboxHorizontal.IsChecked = true;
-                            panelMain.Orientation = Orientation.Horizontal;
+                            //checkboxHorizontal.IsChecked = true;
+                            ((PMCCParameters)Parameters).LayoutMode = child.InnerText.Replace("&lt;", "<");
                         }
-                        else
-                        {
-                            checkboxHorizontal.IsChecked = false;
-                            panelMain.Orientation = Orientation.Vertical;
-                        }                        
                         break;
                     case "valueremappings":
                         foreach (XmlNode node in child.ChildNodes)
@@ -2734,13 +3042,15 @@ namespace EpiDashboard
                                 case "yesvalues":
                                     foreach (XmlNode valueNode in node.ChildNodes)
                                     {
-                                        YesValues.Add(valueNode.InnerText);
+                                        //YesValues.Add(valueNode.InnerText);
+                                        ((PMCCParameters)Parameters).YesValues.Add(valueNode.InnerText);
                                     }
                                     break;
                                 case "novalues":
                                     foreach (XmlNode valueNode in node.ChildNodes)
                                     {
-                                        NoValues.Add(valueNode.InnerText);
+                                        //NoValues.Add(valueNode.InnerText);
+                                        ((PMCCParameters)Parameters).NoValues.Add(valueNode.InnerText);
                                     }
                                     break;
                             }
@@ -2753,10 +3063,10 @@ namespace EpiDashboard
 
             this.LoadingCombos = false;
 
-            CheckVariables();
+            //CheckVariables();
 
             RefreshResults();
-            HideConfigPanel();
+            //HideConfigPanel();
         }
 
         /// <summary>

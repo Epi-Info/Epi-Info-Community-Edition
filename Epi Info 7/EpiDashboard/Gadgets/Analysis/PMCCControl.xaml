@@ -40,7 +40,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" Text="Matched Pair Case-Control" />
+                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsDescriptionButtonAvailable="False" IsFilterButtonAvailable="False" Text="Matched Pair Case-Control" />
                 <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel" Grid.Row="2" Text="" />
                 <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
                 <!--<TextBlock Grid.Row="6" x:Name="txtFilterString" Style="{DynamicResource filterStringText}" Visibility="Collapsed" />-->
@@ -51,7 +51,7 @@
                 <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" HorizontalAlignment="Center" Style="{DynamicResource gadgetWaitPanelStyle}" />
 
                 <StackPanel Grid.Row="1" Grid.RowSpan="7" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" >
-                    <Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" >
+                    <Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" Visibility="Collapsed">
                         <Rectangle Style="{DynamicResource rectangleConfigOuter}" />
                         <Rectangle Style="{DynamicResource rectangleConfigInner}" />
 
@@ -84,14 +84,7 @@
                                         <TextBlock x:Name="tblockWeightVariable" HorizontalAlignment="Left" TextAlignment="Center" Text="Weight:" Margin="0,5,0,0"  />
                                         <ComboBox x:Name="cbxFieldWeight" Width="Auto" HorizontalAlignment="Stretch" SelectedIndex="0" />
                                         <TextBlock x:Name="tblockStratifyBy0" HorizontalAlignment="Left" TextAlignment="Center" Text="Stratify by:" Margin="0,5,0,0"  />
-                                        <!--<ComboBox x:Name="cbxFieldStrata" Width="140" HorizontalAlignment="Left" SelectedIndex="0" />-->
                                         <ListBox x:Name="lbxFieldStrata0" Width="180" Height="120" SelectionMode="Extended" HorizontalAlignment="Left" />
-
-                                        <!--<TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Max rows to display:" Margin="0,5,0,0"  />
-                                    <TextBox x:Name="txtMaxRows" Width="60" HorizontalAlignment="Left" Text="200" Margin="0, 0, 0, 10" PreviewTextInput="txtMaxColumns_PreviewTextInput"></TextBox>
-
-                                    <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Max columns to display:" Margin="0,5,0,0"  />
-                                    <TextBox x:Name="txtMaxColumns" Width="60" HorizontalAlignment="Left" Text="20" Margin="0, 0, 0, 10" PreviewTextInput="txtMaxColumns_PreviewTextInput"></TextBox>-->                                        
                                     </StackPanel>
 
                                     <StackPanel x:Name="panelAdvanced2" Grid.Column="2">
