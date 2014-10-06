@@ -82,7 +82,7 @@ namespace Epi.Windows.Enter.PresentationLogic
 
             this.mainForm = null;
             this.viewExplorer = null;
-            this.canvas = null;
+            this.canvas = null; 
             this.linkedRecordsViewer = null;
         }
 
@@ -91,6 +91,7 @@ namespace Epi.Windows.Enter.PresentationLogic
             if (e.View != null)
             {
                 this.Reset();
+
                 this.canvas.ResetControlFactoryFields();
 
                 if (this.EnterCheckCodeEngine.Project == null || this.EnterCheckCodeEngine.Project.FilePath != e.View.Project.FilePath)
@@ -101,6 +102,15 @@ namespace Epi.Windows.Enter.PresentationLogic
 
                 this.EnterCheckCodeEngine.OpenViewHandler(this, new Epi.EnterCheckCodeEngine.OpenViewEventArgs(this, e.View.Id));
                 this.view = this.EnterCheckCodeEngine.CurrentView.View;
+
+                if(sender is EnterMainForm)
+                {
+                    if (((EnterMainForm)sender).DisableCodeTableCache(view))
+                    {
+                        this.view.DisableCodeTableCache = true;
+                    }
+                }
+
                 this.view.ReturnToParent = e.View.ReturnToParent;
 
                 this.mainForm.OpenView(this.view);

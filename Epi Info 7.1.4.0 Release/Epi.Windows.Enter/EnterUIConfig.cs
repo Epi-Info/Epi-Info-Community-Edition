@@ -24,5 +24,6 @@ namespace Epi.Enter
         public Dictionary<View, bool> ShowEditFormButton = new Dictionary<View, bool>();
         public bool ShowLinkedRecordsViewer = true;
         public Dictionary<View, bool> AllowOneRecordOnly = new Dictionary<View, bool>();
+        public Dictionary<View, bool> DisableCodeTableCache = new Dictionary<View, bool>();
     }
 }
