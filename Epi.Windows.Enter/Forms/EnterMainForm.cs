@@ -84,6 +84,18 @@ namespace Epi.Windows.Enter
             }
         }
 
+        public bool DisableCodeTableCache(View view)
+        {
+            bool disable = false;
+
+            if(UIConfig != null && UIConfig.DisableCodeTableCache.ContainsKey(view))
+            {
+                return UIConfig.DisableCodeTableCache[view];
+            }
+
+            return disable;
+        }
+
         #region Constructors
 
         /// <summary>

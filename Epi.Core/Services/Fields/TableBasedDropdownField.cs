@@ -117,11 +117,7 @@ namespace Epi.Fields
         {
             get
             {
-                if (codeTable == null)
-                {
-                    codeTable = GetSourceData();
-                }
-                
+                codeTable = GetSourceData();
                 return codeTable;
             }
         }

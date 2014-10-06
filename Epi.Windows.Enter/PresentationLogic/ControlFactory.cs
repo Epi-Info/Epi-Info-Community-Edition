@@ -491,9 +491,9 @@ namespace Epi.Windows.Enter.PresentationLogic
             }
 
             ComboBox comboBox = new Epi.Windows.Enter.Controls.LegalValuesComboBox();
-            
+
             SetControlProperties(comboBox, field, canvasSize);
-            
+
             if (field is DDListField)
             {
                 comboBox.DropDownStyle = ComboBoxStyle.Simple;
@@ -502,27 +502,35 @@ namespace Epi.Windows.Enter.PresentationLogic
             {
                 comboBox.DropDownStyle = ComboBoxStyle.DropDown;
             }
-            
+
             comboBox.Sorted = field.ShouldSort;
 
             if (!string.IsNullOrEmpty(displayMember))
             {
                 comboBox.DisplayMember = null;
                 comboBox.ValueMember = null;
-
-                if (cachedListValues == null)
-                {
-                    cachedListValues = new Dictionary<string, DataTable>();
-                }
                 DataTable displayTable;
-                if (cachedListValues.ContainsKey(displayMember + "," + field.SourceTableName))
+
+                if (field.View.DisableCodeTableCache)
                 {
-                    displayTable = cachedListValues[displayMember + "," + field.SourceTableName];
+                    displayTable = field.GetDisplayTable("", "", displayMember);
                 }
                 else
                 {
-                    displayTable = field.GetDisplayTable("", "", displayMember);
-                    cachedListValues.Add(displayMember + "," + field.SourceTableName, displayTable);
+                    if (cachedListValues == null)
+                    {
+                        cachedListValues = new Dictionary<string, DataTable>();
+                    }
+
+                    if (cachedListValues.ContainsKey(displayMember + "," + field.SourceTableName))
+                    {
+                        displayTable = cachedListValues[displayMember + "," + field.SourceTableName];
+                    }
+                    else
+                    {
+                        displayTable = field.GetDisplayTable("", "", displayMember);
+                        cachedListValues.Add(displayMember + "," + field.SourceTableName, displayTable);
+                    }
                 }
 
                 if (displayTable != null)

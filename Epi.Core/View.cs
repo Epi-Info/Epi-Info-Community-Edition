@@ -41,6 +41,13 @@ namespace Epi
         private XmlElement viewElement;
         private ArrayList fieldLockToken;
         private bool isDirty = false;
+        private bool _disableCodeTableCache = false;
+
+        public bool DisableCodeTableCache
+        {
+            get { return _disableCodeTableCache; }
+            set { _disableCodeTableCache = value; }
+        }
 
         /// <summary>
         /// Project that this view belongs to
