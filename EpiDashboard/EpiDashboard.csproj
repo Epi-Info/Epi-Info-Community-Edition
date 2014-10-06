@@ -206,6 +206,9 @@
     <Compile Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml.cs">
       <DependentUpon>AberrationDetectionChartProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GadgetProperties\PMCCProperties.xaml.cs">
+      <DependentUpon>PMCCProperties.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GadgetProperties\HistogramChartProperties.xaml.cs">
       <DependentUpon>HistogramChartProperties.xaml</DependentUpon>
     </Compile>
@@ -479,6 +482,7 @@
     <Compile Include="Gadgets\AreaChartParametersBase.cs" />
     <Compile Include="Gadgets\AberrationDetectionChartParametersBase.cs" />
     <Compile Include="Gadgets\AberrationDetectionChartParameters.cs" />
+    <Compile Include="Gadgets\PMCCParameters.cs" />
     <Compile Include="Gadgets\HistogramChartParameters.cs" />
     <Compile Include="Gadgets\HistogramChartParametersBase.cs" />
     <Compile Include="Gadgets\LogisticParameters.cs" />
@@ -904,6 +908,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\PMCCProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
