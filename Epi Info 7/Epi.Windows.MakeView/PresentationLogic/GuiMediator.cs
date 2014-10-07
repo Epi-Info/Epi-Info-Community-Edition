@@ -2370,6 +2370,12 @@ namespace Epi.Windows.MakeView.PresentationLogic
         public void mnuProperties_Click(object sender, EventArgs e)
         {
             string nameBeforeEdit = rightClickedControl.Field.Name;
+            bool isAdvancedUser = false;
+
+            if (sender is ToolStripDropDownItem && ((ToolStripDropDownItem)sender).Tag is bool)
+            {
+                isAdvancedUser = (bool)((ToolStripDropDownItem)sender).Tag;
+            }
 
             RenderableField field = ((RenderableField)(rightClickedControl.Field));
 
@@ -2381,7 +2387,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
             Dialogs.FieldDefinitionDialogs.FieldDefinition dialog = dialogFactory.GetFieldDefinitionDialog(rightClickedControl.Field);
             
             bool hasCollectedDataColumn = (Project.CollectedData.TableExists(field.GetView().TableName));
-            if ((hasCollectedDataColumn == false) || (hasCollectedDataColumn && _newFieldIds.Contains(field.Id)))
+            if (isAdvancedUser || (hasCollectedDataColumn == false) || (hasCollectedDataColumn && _newFieldIds.Contains(field.Id)))
             {
                 ((Dialogs.FieldDefinitionDialogs.GenericFieldDefinition)dialog).FieldNameEnabled = true;
             }
@@ -2400,6 +2406,30 @@ namespace Epi.Windows.MakeView.PresentationLogic
                 if (!((dialog.Field is MirrorField) || (dialog.Field is LabelField) || (dialog.Field is GridField)))
                 {
                     dialog.Field.HasTabStop = true;
+                }
+
+                if (isAdvancedUser && (nameBeforeEdit != dialog.Field.Name))
+                {
+                    if (project.CollectedData.TableExists(field.Page.TableName))
+                    {
+                        if (project.CollectedData.ColumnExists(field.Page.TableName, nameBeforeEdit))
+                        {
+                            DialogResult response = MessageBox.Show
+                            (
+                                "================ WARNING: ================\n\r" +
+                                "\n\r" +
+                                "YES WILL DELETE all data for the field and rename the column.\n\r" +
+                                "NO will continue without changing the name of the field.",
+                                "WARNING",
+                                MessageBoxButtons.YesNo
+                            );
+
+                            if (response == DialogResult.No)
+                            {
+                                dialog.Field.Name = nameBeforeEdit;
+                            }
+                        }
+                    }
                 }
                 
                 if (nameBeforeEdit != dialog.Field.Name)
