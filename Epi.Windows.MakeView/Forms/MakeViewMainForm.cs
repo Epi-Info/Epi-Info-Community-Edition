@@ -1045,9 +1045,14 @@ namespace Epi.Windows.MakeView.Forms
                     {
                       QuickPublishtoolStripButton.Visible = true;
                       ChangeModetoolStripDropDownButton.Visible = true;
-                      toolStripSeparator10.Visible = true;
-                      toolStripSeparator11.Visible = true;
+                      toolStripSeparator10.Visible = true;                     
                     }
+                if (config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress)))
+                {
+                    QuickPublishtoolStripButton.Visible = true;
+                    ChangeModetoolStripDropDownButton.Visible = true;                   
+                    toolStripSeparator11.Visible = true;
+                }
                 else 
                     {
                     QuickPublishtoolStripButton.Visible = false;
@@ -1910,9 +1915,14 @@ namespace Epi.Windows.MakeView.Forms
                 {
                 QuickPublishtoolStripButton.Visible = true;
                 ChangeModetoolStripDropDownButton.Visible = true;
-                toolStripSeparator10.Visible = true;
-                toolStripSeparator11.Visible = true;
+                toolStripSeparator10.Visible = true;               
                 }
+            if (config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress)))
+            {
+                QuickPublishtoolStripButton.Visible = true;
+                ChangeModetoolStripDropDownButton.Visible = true;                
+                toolStripSeparator11.Visible = true;
+            }
             else
                 {
                 QuickPublishtoolStripButton.Visible = false;
