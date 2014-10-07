@@ -64,7 +64,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             cbxField.ItemsSource = fields;
             cbxFieldWeight.ItemsSource = fields;
             cbxFieldCrosstab.ItemsSource = crosstabFields;
-            lvFieldStrata.ItemsSource = strataFields;
+            cbxFieldStrata.ItemsSource = strataFields;
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cbxField.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
@@ -111,7 +111,6 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             List<string> listFields = new List<string>();
 
-            Parameters.ShowCommentLegalLabels = checkboxListLabels.IsChecked.Value;
             Parameters.InputVariableList = inputVariableList;
 
             if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
@@ -135,14 +134,9 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
             }
 
-            if (lvFieldStrata.SelectedItems.Count > 0)
+            if (cbxFieldStrata.SelectedIndex > -1)
             {
                 Parameters.StrataVariableNames = new List<string>();
-                foreach (String s in lvFieldStrata.SelectedItems)
-                {
-                    if (!string.IsNullOrEmpty(s))
-                        Parameters.StrataVariableNames.Add(s);
-                }
             }
             else
                 Parameters.StrataVariableNames.Clear();
@@ -155,36 +149,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 Parameters.CrosstabVariableName = String.Empty;
             }
-
-            if (checkboxShowANOVA.IsChecked == true)
-            {
-                inputVariableList.Add("showanova", "true");
-                Parameters.ShowANOVA = true;
-            }
-            else
-            {
-                inputVariableList.Add("showanova", "false");
-                Parameters.ShowANOVA = false;
-            }
-
-            if (cbxFieldPrecision.SelectedIndex >= 0)
-            {
-                inputVariableList.Add("precision", cbxFieldPrecision.SelectedIndex.ToString());
-                Parameters.Precision = cbxFieldPrecision.SelectedIndex.ToString();
-            }
-            Parameters.columnsToHide.Clear();
-            if (!(bool)checkboxShowObservations.IsChecked) Parameters.columnsToHide.Add(1);
-            if (!(bool)checkboxShowTotal.IsChecked) Parameters.columnsToHide.Add(2);
-            if (!(bool)checkboxShowMean.IsChecked) Parameters.columnsToHide.Add(3);
-            if (!(bool)checkboxShowVariance.IsChecked) Parameters.columnsToHide.Add(4);
-            if (!(bool)checkboxShowStdDev.IsChecked) Parameters.columnsToHide.Add(5);
-            if (!(bool)checkboxShowMin.IsChecked) Parameters.columnsToHide.Add(6);
-            if (!(bool)checkboxShowQ1.IsChecked) Parameters.columnsToHide.Add(7);
-            if (!(bool)checkboxShowMedian.IsChecked) Parameters.columnsToHide.Add(8);
-            if (!(bool)checkboxShowQ3.IsChecked) Parameters.columnsToHide.Add(9);
-            if (!(bool)checkboxShowMax.IsChecked) Parameters.columnsToHide.Add(10);
-            if (!(bool)checkboxShowMode.IsChecked) Parameters.columnsToHide.Add(11);
-            }
+        }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -199,70 +164,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
             cbxFieldWeight.SelectedItem = Parameters.WeightVariableName;
             cbxFieldCrosstab.SelectedItem = Parameters.CrosstabVariableName;
-            checkboxShowANOVA.IsChecked = Parameters.ShowANOVA;
-            cbxFieldPrecision.SelectedIndex = Convert.ToInt32(Parameters.Precision);
-            lvFieldStrata.MaxHeight = lvFieldStrata.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
             scrollViewerDisplay.Height = scrollViewerDisplay.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
-            if (Parameters.StrataVariableNames.Count > 0)
-            {
-                foreach (string s in Parameters.StrataVariableNames)
-                    lvFieldStrata.SelectedItems.Add(s.ToString());
-            }
-
-            checkboxShowObservations.IsChecked = true;
-            checkboxShowTotal.IsChecked = true;
-            checkboxShowMean.IsChecked = true;
-            checkboxShowVariance.IsChecked = true;
-            checkboxShowStdDev.IsChecked = true;
-            checkboxShowMin.IsChecked = true;
-            checkboxShowQ1.IsChecked = true;
-            checkboxShowMedian.IsChecked = true;
-            checkboxShowQ3.IsChecked = true;
-            checkboxShowMax.IsChecked = true;
-            checkboxShowMode.IsChecked = true;
-
-            if (Parameters.columnsToHide.Count > 0)
-            {
-                foreach (int x in Parameters.columnsToHide)
-                {
-                    switch (x)
-                    {
-                        case 1:
-                            checkboxShowObservations.IsChecked = false;
-                            break;
-                        case 2:
-                            checkboxShowTotal.IsChecked = false;
-                            break;
-                        case 3:
-                            checkboxShowMean.IsChecked = false;
-                            break;
-                        case 4:
-                            checkboxShowVariance.IsChecked = false;
-                            break;
-                        case 5:
-                            checkboxShowStdDev.IsChecked = false;
-                            break;
-                        case 6:
-                            checkboxShowMin.IsChecked = false;
-                            break;
-                        case 7:
-                            checkboxShowQ1.IsChecked = false;
-                            break;
-                        case 8:
-                            checkboxShowMedian.IsChecked = false;
-                            break;
-                        case 9:
-                            checkboxShowQ3.IsChecked = false;
-                            break;
-                        case 10:
-                            checkboxShowMax.IsChecked = false;
-                            break;
-                        case 11:
-                            checkboxShowMode.IsChecked = false;
-                            break;
-                    }
-                }
-            }
         }
 
         public class FieldInfo { public string Name { get; set; } public string DataType { get; set; } public VariableCategory VariableCategory { get; set; } }
