@@ -771,7 +771,9 @@ namespace EpiDashboard.Gadgets.Analysis
         /// </summary>
         public override void RefreshResults()
         {
-            if (!LoadingCombos && Parameters != null && Parameters.ColumnNames.Count > 0)
+            DuplicatesListParameters listParameters = (DuplicatesListParameters)Parameters;
+
+            if (!LoadingCombos && Parameters != null && listParameters.KeyColumnNames.Count > 0)
             {
                 if (IsHostedByEnter)
                 {
