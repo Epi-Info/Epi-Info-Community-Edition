@@ -42,7 +42,7 @@ Public Class CSField
         ' return the integer value of the field
 
         If (IsNumeric(csFieldEntry) And CDec(Val(csFieldEntry)) Mod 1 = 0) Then
-            FieldInt = CInt(Val(csFieldEntry))
+            FieldInt = CLng(Val(csFieldEntry))
         Else
             FieldInt = 0.0#
         End If
