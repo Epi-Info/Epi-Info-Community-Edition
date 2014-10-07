@@ -1504,7 +1504,10 @@ namespace Epi.Windows.Enter
                 mnuImportFromWeb.Enabled = false;
                 mnuImportFromDataPackage.Enabled = false;
                 mnuPackageForTransport.Enabled = false;
-                fromWebEnterToolStripMenuItem.Enabled = false;
+                if (currentProject.CollectedDataDriver == "Epi.Data.Office.AccessDBFactory, Epi.Data.Office")
+                    fromWebEnterToolStripMenuItem.Enabled = true;
+                else
+                    fromWebEnterToolStripMenuItem.Enabled = false;  
                 newRecordToolStripMenuItem.Enabled = false;
                 saveToolStripMenuItem.Enabled = false;
                 editViewToolStripMenuItem.Enabled = false;
