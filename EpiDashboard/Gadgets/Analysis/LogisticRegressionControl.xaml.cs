@@ -100,6 +100,8 @@ namespace EpiDashboard
                 headerPanel.Text = CustomOutputHeading;
             }
 
+            Parameters = new LogisticParameters();
+
             this.IsProcessing = false;
 
             this.GadgetStatusUpdate += new GadgetStatusUpdateHandler(RequestUpdateStatusMessage);
@@ -368,7 +370,13 @@ namespace EpiDashboard
                 {
                     lock (staticSyncLock)
                     {
+                        string GadgetFilter = String.Empty;
+                        GadgetFilter = DataFilters.GenerateDataFilterString(false);
+                        if (!String.IsNullOrEmpty(GadgetFilter))
+                            customFilter = customFilter + " AND (" + GadgetFilter + ")";
+
                         DataTable regressTable = DashboardHelper.GenerateTable(columnNames, customFilter);
+
                         RegressionResults results = new RegressionResults();
 
                         if (regressTable == null || regressTable.Rows.Count <= 0)
@@ -944,7 +952,7 @@ namespace EpiDashboard
 
                 CreateInputVariableList();
 
-                txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
+        //        txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
                 waitPanel.Visibility = System.Windows.Visibility.Visible;
                 messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
                 descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;                
@@ -955,6 +963,49 @@ namespace EpiDashboard
 
                 base.RefreshResults();
             }
+        }
+
+        public override void ShowHideConfigPanel()
+        {
+            Popup = new DashboardPopup();
+            Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
+//            Controls.GadgetProperties.MeansProperties properties = new Controls.GadgetProperties.MeansProperties(this.DashboardHelper, this, (MeansParameters)Parameters);
+            Controls.GadgetProperties.LogisticProperties properties = new Controls.GadgetProperties.LogisticProperties(this.DashboardHelper, this, (LogisticParameters)Parameters);
+
+            properties.Width = 800;
+            properties.Height = 600;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            {
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            {
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            properties.Cancelled += new EventHandler(properties_Cancelled);
+            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            Popup.Content = properties;
+            Popup.Show();
+        }
+
+        private void properties_ChangesAccepted(object sender, EventArgs e)
+        {
+            Controls.GadgetProperties.LogisticProperties properties = Popup.Content as Controls.GadgetProperties.LogisticProperties;
+            this.Parameters = properties.Parameters;
+            this.DataFilters = properties.DataFilters;
+            Popup.Close();
+            if (properties.HasSelectedFields)
+            {
+                RefreshResults();
+            }
+        }
+
+        private void properties_Cancelled(object sender, EventArgs e)
+        {
+            Popup.Close();
         }
 
         private void CreateInputVariableList()

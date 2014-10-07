@@ -32,6 +32,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             this.Gadget = gadget;
             this.Parameters = parameters;
 
+
             List<string> fields = new List<string>();
             List<FieldInfo> items = new List<FieldInfo>();
             List<string> crosstabFields = new List<string>();
@@ -61,12 +62,13 @@ namespace EpiDashboard.Controls.GadgetProperties
             fields.Sort();
             crosstabFields.Sort();
 
-            cbxField.ItemsSource = fields;
+            cbxFieldOutcome.ItemsSource = fields;
             cbxFieldWeight.ItemsSource = fields;
-            cbxFieldCrosstab.ItemsSource = crosstabFields;
-            lvFieldStrata.ItemsSource = strataFields;
+            cbxFieldMatch.ItemsSource = crosstabFields;
+//            lbxOtherFields.ItemsSource = strataFields;
+            cbxFields.ItemsSource = fields;
 
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cbxField.ItemsSource);
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cbxFieldOutcome.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
             view.GroupDescriptions.Add(groupDescription);
 
@@ -79,7 +81,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             get
             {
-                if (cbxField.SelectedIndex > -1)
+                if (cbxFieldOutcome.SelectedIndex > -1)
                 {
                     return true;
                 }
@@ -87,8 +89,113 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
         }
 
+        private void btnRun_Click(object sender, RoutedEventArgs e)
+        {
+            EpiDashboard.LogisticRegressionControl lrc = new EpiDashboard.LogisticRegressionControl(this.DashboardHelper);
+            lrc = (EpiDashboard.LogisticRegressionControl)Gadget;
+            lrc.cbxFieldOutcome = this.cbxFieldOutcome;
+            lrc.lbxOtherFields = this.lbxOtherFields;
+            lrc.lbxDummyTerms = this.lbxDummyTerms;
+            lrc.cbxFieldWeight = this.cbxFieldWeight;
+            lrc.checkboxNoIntercept = this.checkboxNoIntercept;
+            lrc.checkboxIncludeMissing = this.checkboxIncludeMissing;
+            lrc.cbxFieldMatch = this.cbxFieldMatch;
+            lrc.cbxConf = this.cbxConf;
+            lrc.lbxInteractionTerms = this.lbxInteractionTerms;
+            lrc.txtFilterString = null;
+            lrc.DataFilters = RowFilterControl.DataFilters;
+
+            lrc.RefreshResults();
+            btnCancel_Click(sender, e);
+//            RefreshResults();
+        }
+
+        private void btnClearInteractionTerms_Click(object sender, RoutedEventArgs e)
+        {
+            lbxInteractionTerms.Items.Clear();
+        }
+
+        private void btnMakeDummy_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbxOtherFields.SelectedItems.Count == 1)
+            {
+                if (!string.IsNullOrEmpty(lbxOtherFields.SelectedItem.ToString()))
+                {
+                    string columnName = lbxOtherFields.SelectedItem.ToString();
+                    lbxOtherFields.Items.Remove(columnName);
+                    lbxDummyTerms.Items.Add(columnName);
+                }
+            }
+            else if (lbxOtherFields.SelectedItems.Count == 2)
+            {
+                string term = lbxOtherFields.SelectedItems[0] + "*" + lbxOtherFields.SelectedItems[1];
+                if (!lbxInteractionTerms.Items.Contains(term))
+                {
+                    lbxInteractionTerms.Items.Add(term);
+                }
+            }
+        }
+
+        private void lbxOtherFields_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbxOtherFields.SelectedItems.Count == 1 || lbxOtherFields.SelectedItems.Count == 2)
+            {
+                btnMakeDummy.IsEnabled = true;
+            }
+            else
+            {
+                btnMakeDummy.IsEnabled = false;
+            }
+
+            if (lbxOtherFields.SelectedItems.Count == 1 || lbxOtherFields.SelectedItems.Count > 2)
+            {
+                btnMakeDummy.Content = "Make Dummy";
+            }
+            else if (lbxOtherFields.SelectedItems.Count == 2)
+            {
+                btnMakeDummy.Content = "Make Interaction";
+            }
+        }
+
+        void cbxFields_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbxFields.SelectedIndex > -1)
+            {
+                if (!lbxOtherFields.Items.Contains(cbxFields.SelectedItem.ToString()))
+                {
+                    lbxOtherFields.Items.Add(cbxFields.SelectedItem.ToString());
+                }
+            }
+        }
+
+        private void lbxOtherFields_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lbxOtherFields.SelectedItems.Count == 1)
+            {
+                lbxOtherFields.Items.Remove(lbxOtherFields.SelectedItem);
+            }
+        }
+
         private void lbxColumns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+        }
+
+        private void lbxDummyTerms_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lbxDummyTerms.SelectedItems.Count == 1)
+            {
+                string s = lbxDummyTerms.SelectedItem.ToString();
+                lbxDummyTerms.Items.Remove(lbxDummyTerms.SelectedItem);
+                lbxOtherFields.Items.Add(s);
+            }
+        }
+
+        private void lbxInteractionTerms_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lbxInteractionTerms.SelectedItems.Count == 1)
+            {
+                lbxInteractionTerms.Items.Remove(lbxInteractionTerms.SelectedItem);
+            }
         }
 
         public LogisticParameters Parameters { get; private set; }
@@ -114,15 +221,15 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.ShowCommentLegalLabels = checkboxListLabels.IsChecked.Value;
             Parameters.InputVariableList = inputVariableList;
 
-            if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
+            if (cbxFieldOutcome.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldOutcome.SelectedItem.ToString()))
             {
                 if (Parameters.ColumnNames.Count > 0)
                 {
-                    Parameters.ColumnNames[0] = cbxField.SelectedItem.ToString();
+                    Parameters.ColumnNames[0] = cbxFieldOutcome.SelectedItem.ToString();
                 }
                 else
                 {
-                    Parameters.ColumnNames.Add(cbxField.SelectedItem.ToString());
+                    Parameters.ColumnNames.Add(cbxFieldOutcome.SelectedItem.ToString());
                 }
             }
             else
@@ -135,10 +242,10 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
             }
 
-            if (lvFieldStrata.SelectedItems.Count > 0)
+            if (lbxOtherFields.SelectedItems.Count > 0)
             {
                 Parameters.StrataVariableNames = new List<string>();
-                foreach (String s in lvFieldStrata.SelectedItems)
+                foreach (String s in lbxOtherFields.SelectedItems)
                 {
                     if (!string.IsNullOrEmpty(s))
                         Parameters.StrataVariableNames.Add(s);
@@ -147,9 +254,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             else
                 Parameters.StrataVariableNames.Clear();
 
-            if (cbxFieldCrosstab.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldCrosstab.SelectedItem.ToString()))
+            if (cbxFieldMatch.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldMatch.SelectedItem.ToString()))
             {
-                Parameters.CrosstabVariableName = cbxFieldCrosstab.SelectedItem.ToString();
+                Parameters.CrosstabVariableName = cbxFieldMatch.SelectedItem.ToString();
             }
             else
             {
@@ -196,21 +303,37 @@ namespace EpiDashboard.Controls.GadgetProperties
             //Just one column for Frequency, .ColumnNames should have only one item
             txtTitle.Text = Parameters.GadgetTitle;
             txtDesc.Text = Parameters.GadgetDescription;
+            EpiDashboard.LogisticRegressionControl lrc = (EpiDashboard.LogisticRegressionControl)Gadget;
             if (Parameters.ColumnNames.Count > 0)
             {
-                cbxField.SelectedItem = Parameters.ColumnNames[0];
+                cbxFieldOutcome.SelectedItem = Parameters.ColumnNames[0];
             }
-            cbxFieldWeight.SelectedItem = Parameters.WeightVariableName;
-            cbxFieldCrosstab.SelectedItem = Parameters.CrosstabVariableName;
+            cbxConf.ItemsSource = null;
+            cbxConf.Items.Clear();
+
+            cbxConf.Items.Add("90%");
+            cbxConf.Items.Add("95%");
+            cbxConf.Items.Add("99%");
+            cbxConf.SelectedIndex = 1;
+
+            cbxFieldWeight.SelectedItem = lrc.cbxFieldWeight.SelectedItem;
+            cbxFieldMatch.SelectedItem = lrc.cbxFieldMatch.SelectedItem;
+            cbxConf.SelectedItem = lrc.cbxConf.SelectedItem;
+            checkboxNoIntercept.IsChecked = lrc.checkboxNoIntercept.IsChecked;
+            checkboxIncludeMissing.IsChecked = lrc.checkboxIncludeMissing.IsChecked;
             checkboxShowANOVA.IsChecked = Parameters.ShowANOVA;
             cbxFieldPrecision.SelectedIndex = Convert.ToInt32(Parameters.Precision);
-            lvFieldStrata.MaxHeight = lvFieldStrata.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
+            lbxOtherFields.MaxHeight = lbxOtherFields.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
             scrollViewerDisplay.Height = scrollViewerDisplay.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
-            if (Parameters.StrataVariableNames.Count > 0)
-            {
-                foreach (string s in Parameters.StrataVariableNames)
-                    lvFieldStrata.SelectedItems.Add(s.ToString());
-            }
+            if (lrc.lbxOtherFields.Items.Count > 0)
+                foreach (string s in lrc.lbxOtherFields.Items)
+                    lbxOtherFields.Items.Add(s.ToString());
+            if (lrc.lbxDummyTerms.Items.Count > 0)
+                foreach (string s in lrc.lbxDummyTerms.Items)
+                    lbxDummyTerms.Items.Add(s.ToString());
+            if (lrc.lbxInteractionTerms.Items.Count > 0)
+                foreach (string s in lrc.lbxInteractionTerms.Items)
+                    lbxInteractionTerms.Items.Add(s.ToString());
 
             if (lbxColumns.Items.Count == 0)
             {
@@ -227,6 +350,8 @@ namespace EpiDashboard.Controls.GadgetProperties
                 lbxColumns.Items.Add("Mode");
                 lbxColumns.SelectAll();
             }
+
+            cbxFieldOutcome.SelectedItem = lrc.cbxFieldOutcome.SelectedItem;
             //checkboxShowAllListValues.IsChecked = Parameters.ShowAllListValues;
             //checkboxShowListLabels.IsChecked = Parameters.ShowListLabels;
             //checkboxSortHighLow.IsChecked = Parameters.SortHighToLow;

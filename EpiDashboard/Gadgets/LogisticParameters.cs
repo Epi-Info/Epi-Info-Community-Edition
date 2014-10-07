@@ -9,6 +9,7 @@ namespace EpiDashboard
 {
     public class LogisticParameters : FrequencyParametersBase
     {
+        public string OutcomeVariableName { get; set; }
         public bool ShowANOVA { get; set; }
         public bool ShowMaxCol { get; set; }
         public bool ShowModeCol { get; set; }

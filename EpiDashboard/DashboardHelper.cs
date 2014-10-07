@@ -2471,9 +2471,9 @@ namespace EpiDashboard
             }
             #endregion // Input Validation
 
-            GadgetParameters inputs = new GadgetParameters();
-            inputs.MainVariableName = string.Empty;
-            inputs.MainVariableNames = new List<string>();
+            IGadgetParameters inputs = new GadgetParameters();
+            ((GadgetParameters)inputs).MainVariableName = string.Empty;
+            ((GadgetParameters)inputs).MainVariableNames = new List<string>();
             inputs.ColumnNames = columnNames;
             inputs.CustomFilter = customFilter;
             inputs.CustomSortColumnName = string.Empty;
