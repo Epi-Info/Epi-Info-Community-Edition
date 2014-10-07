@@ -1542,7 +1542,14 @@ namespace Epi.Windows.MakeView.Forms
                 return;
             }
 
-            if (makeViewForm.mediator.SelectedFieldControls.Count == 0)
+            bool isAdvancedUser = false;
+
+            if (Control.ModifierKeys == Keys.Control && makeViewForm.mediator.SelectedFieldControls.Count < 3)
+            {
+                isAdvancedUser = true;
+            }
+
+            if (isAdvancedUser || makeViewForm.mediator.SelectedFieldControls.Count == 0)
             {
                 if (e.Button == MouseButtons.Right)
                 {
@@ -1935,10 +1942,18 @@ namespace Epi.Windows.MakeView.Forms
             ContextMenuStrip contextMenu = new ContextMenuStrip();
             contextMenu.ImageList = imgCanvas;
 
+            bool isAdvancedUser = false;
+
+            if (Control.ModifierKeys == Keys.Control)
+            {
+                isAdvancedUser = true;
+            }
+
             Epi.Fields.Field field = makeViewForm.mediator.RightClickedControl.Field;
 
             ToolStripMenuItem mnuProperties = new ToolStripMenuItem(SharedStrings.PROPERTIES);
             mnuProperties.ImageIndex = 16;
+            mnuProperties.Tag = isAdvancedUser;
             mnuProperties.Click += new EventHandler(makeViewForm.mediator.mnuProperties_Click);
             contextMenu.Items.Add(mnuProperties);
 
@@ -1963,7 +1978,7 @@ namespace Epi.Windows.MakeView.Forms
             mnuChangeTo.DropDownItems.AddRange(BuildChangeToList(field));
 
             bool hasCollectedDataColumn = (makeViewForm.mediator.Project.CollectedData.TableExists(field.GetView().TableName));
-            mnuChangeTo.Enabled = (hasCollectedDataColumn == false) || (hasCollectedDataColumn && makeViewForm.mediator.NewFieldIds.Contains(field.Id));
+            mnuChangeTo.Enabled = isAdvancedUser || (hasCollectedDataColumn == false) || (hasCollectedDataColumn && makeViewForm.mediator.NewFieldIds.Contains(field.Id));
 
             contextMenu.Items.Add(mnuChangeTo);
 
