@@ -27,13 +27,13 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Crosstabulation</Label>
+            <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10" xml:space="preserve">Complex Sample&#10;Tables</Label>
 
             <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables" Description="Select the columns for exposure and outcome." IsChecked="True" Checked="tbtnVariables_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnValueMapping" Title="2x2 Value Mapping" Description="Specify the values for Exposure and Outcome as Yes or No." IsChecked="False" Checked="tbtnValueMapping_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnValueMapping" Title="2x2 Value Mapping" Description="Specify the values for Exposure and Outcome as Yes or No." IsChecked="False" Checked="tbtnValueMapping_Checked" Visibility="Collapsed"/>
             <!--<Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Sorting and Grouping" Description="Set a sort order and create list groups." IsChecked="False" Checked="tbtnSorting_Checked"/>-->
             <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnDisplayColors" Title="Colors and Styles" Description="Set cell shading and color gradient." IsChecked="False" Checked="tbtnDisplayColors_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnDisplayColors" Title="Colors and Styles" Description="Set cell shading and color gradient." IsChecked="False" Checked="tbtnDisplayColors_Checked" Visibility="Collapsed"/>
             <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
 
         </StackPanel>
@@ -55,15 +55,16 @@
             <StackPanel Height="12" />
 
             <TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
-            <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFieldWeight_SelectionChanged" />
+            <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
 
             <StackPanel Height="12" />
             <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
-            <ScrollViewer x:Name="scrollViewerStrataProperties" VerticalAlignment="Stretch" Height="290" >
-                <StackPanel>
-                    <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" Height="290"/>
-                </StackPanel>
-            </ScrollViewer>
+            <ComboBox x:Name="cbxFieldStrata" Width="216" HorizontalAlignment="Left" Height="28" />
+
+            <StackPanel Height="12" />
+
+            <TextBlock x:Name="tblockPSU">PSU:</TextBlock>
+            <ComboBox x:Name="cbxFieldPSU" Width="216" HorizontalAlignment="Left" Height="28" />
         </StackPanel>
 
         <!--2x2 Value Mapping-->
@@ -127,22 +128,6 @@
 
                     <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
                     <TextBox x:Name="txtDesc" Width="360" AcceptsReturn="True" Height="128" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
-
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 10">Output Options</Label>
-                    <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values" Visibility="Visible" IsEnabled="true" />
-                    <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" Visibility="Visible" IsEnabled="true" />
-                    <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values" IsChecked="False" />
-                    <CheckBox x:Name="checkboxOutcomeContinuous" Style="{StaticResource PropertiesPanelCheckbox}" Content="Outcome is continuous" IsEnabled="True" />
-                    <CheckBox x:Name="checkboxSmartTable" Style="{StaticResource PropertiesPanelCheckbox}" Content="Smart 2x2 table" IsEnabled="True" IsChecked="True" />
-                    <CheckBox x:Name="checkboxStrataSummaryOnly" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show strata summary only" IsEnabled="True" IsChecked="False" />
-                    <CheckBox x:Name="checkboxRowColPercents" Style="{StaticResource PropertiesPanelCheckbox}" Content="Row / column percents"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="True" />
-                    <CheckBox x:Name="checkboxHorizontal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Horizontal 2x2 summary"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="True" />
-                    <TextBlock x:Name="tblockMaxColumnLength" HorizontalAlignment="Left" TextAlignment="Center" Text="Max column name length:" />
-                    <TextBox x:Name="txtMaxColumnLength" Width="60" HorizontalAlignment="Left" Text="24"></TextBox>
-
-                    <!--<Button x:Name="btnValueMappings" HorizontalAlignment="Left" Click="btnValueMappings_Click" >
-                        Define 2x2 Value Mappings
-                    </Button>-->
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>

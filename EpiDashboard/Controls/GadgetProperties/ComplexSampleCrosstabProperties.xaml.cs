@@ -138,7 +138,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             cbxExposureField.ItemsSource = allFieldNames;
             cbxOutcomeField.ItemsSource = fields;
             cbxFieldWeight.ItemsSource = weightFields;
-            lbxFieldStrata.ItemsSource = strataItems;
+            cbxFieldStrata.ItemsSource = strataItems;
 
             if (cbxExposureField.Items.Count > 0)
             {
@@ -158,33 +158,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as CrosstabControl).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
-
-            txtMaxColumnLength.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
-
-            #region Translation
-
-            //lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_FREQUENCY;
-            ////expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
-            ////expanderDisplayOptions.Header = DashboardSharedStrings.GADGET_DISPLAY_OPTIONS;
-            //tblockMainVariable.Text = DashboardSharedStrings.GADGET_FREQUENCY_VARIABLE;
-            //tblockStrataVariable.Text = DashboardSharedStrings.GADGET_STRATA_VARIABLE;
-            //tblockWeightVariable.Text = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
-
-            ////checkboxAllValues.Content = DashboardSharedStrings.GADGET_ALL_LIST_VALUES;
-            ////checkboxCommentLegalLabels.Content = DashboardSharedStrings.GADGET_LIST_LABELS;
-            //checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
-
-            //checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
-            //checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPT;
-            ////tblockOutputColumns.Text = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
-            ////tblockPrecision.Text = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
-
-            //tblockRows.Text = DashboardSharedStrings.GADGET_MAX_ROWS_TO_DISPLAY;
-            //tblockBarWidth.Text = DashboardSharedStrings.GADGET_MAX_PERCENT_BAR_WIDTH;
-
-            ////btnRun.Content = DashboardSharedStrings.GADGET_RUN_BUTTON;
-            #endregion // Translation
-
         }
 
         public bool HasSelectedFields
@@ -250,12 +223,15 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.WeightVariableName = String.Empty;
             }
 
-            if (lbxFieldStrata.SelectedItems.Count > 0)
+            if (cbxFieldStrata.SelectedIndex > -1)
             {
-                Parameters.StrataVariableNames = new List<string>();
-                foreach (string s in lbxFieldStrata.SelectedItems)
+                if (Parameters.StrataVariableNames.Count > 0)
                 {
-                    Parameters.StrataVariableNames.Add(s.ToString());
+                    Parameters.StrataVariableNames[0] = cbxFieldStrata.SelectedItem.ToString();
+                }
+                else
+                {
+                    Parameters.StrataVariableNames.Add(cbxFieldStrata.SelectedItem.ToString());
                 }
             }
 
@@ -284,30 +260,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             //Display settings
             Parameters.GadgetTitle = txtTitle.Text;
             Parameters.GadgetDescription = txtDesc.Text;
-
-            Parameters.ShowAllListValues = (bool)checkboxAllValues.IsChecked;
-            Parameters.ShowCommentLegalLabels = (bool)checkboxCommentLegalLabels.IsChecked;
-            Parameters.IncludeMissing = (bool) checkboxIncludeMissing.IsChecked;
-
-            Parameters.TreatOutcomeAsContinuous = (bool)checkboxOutcomeContinuous.IsChecked;
-            Parameters.SmartTable = (bool)checkboxSmartTable.IsChecked;
-            Parameters.StrataSummaryOnly = (bool)checkboxStrataSummaryOnly.IsChecked;
-            Parameters.ShowPercents = (bool)checkboxRowColPercents.IsChecked;
-            //Parameters.IncludeFullSummaryStatistics = false;
-            Parameters.HorizontalDisplayMode = (bool)checkboxHorizontal.IsChecked;
-            Parameters.MaxColumnNameLength = txtMaxColumnLength.Text;
-
-            //Color and style settings
-            Parameters.ConditionalShading = (bool)checkboxConditionalShading.IsChecked;
-            Parameters.LoColorFill = rctLowColor.Fill as SolidColorBrush;
-            Parameters.HiColorFill = rctHighColor.Fill as SolidColorBrush;
-
-            Parameters.BreakType = cmbBreakType.SelectedIndex;
-            Parameters.Break1 = txtPct1.Text;
-            Parameters.Break2 = txtPct2.Text;
-            Parameters.Break3 = txtPct3.Text;
-            Parameters.Break4 = txtPct4.Text;
-            Parameters.Break5 = txtPct5.Text;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -325,15 +277,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
             cbxOutcomeField.SelectedItem = Parameters.CrosstabVariableName;
             cbxFieldWeight.SelectedItem = Parameters.WeightVariableName;
-            lbxFieldStrata.MaxHeight = lbxFieldStrata.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
-            scrollViewerStrataProperties.Height = scrollViewerStrataProperties.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
             if (Parameters.StrataVariableNames.Count > 0)
             {
-                foreach (string s in Parameters.StrataVariableNames)
-                {
-                    //lbxFieldStrata.SelectedItem = s;
-                    lbxFieldStrata.SelectedItems.Add(s.ToString());
-                }
+                cbxFieldStrata.SelectedItem = Parameters.StrataVariableNames[0].ToString();
             }
 
             //2 x 2 Value mapping settings
@@ -363,143 +309,11 @@ namespace EpiDashboard.Controls.GadgetProperties
             //Display settings
             txtTitle.Text = Parameters.GadgetTitle;
             txtDesc.Text = Parameters.GadgetDescription;
-            checkboxAllValues.IsChecked = Parameters.ShowAllListValues;
-            checkboxCommentLegalLabels.IsChecked = Parameters.ShowCommentLegalLabels;
-            checkboxIncludeMissing.IsChecked = Parameters.IncludeMissing;
-            checkboxOutcomeContinuous.IsChecked = crosstabParameters.TreatOutcomeAsContinuous;
-            checkboxSmartTable.IsChecked = crosstabParameters.SmartTable;
-            checkboxStrataSummaryOnly.IsChecked = crosstabParameters.StrataSummaryOnly;
-            checkboxRowColPercents.IsChecked = crosstabParameters.ShowPercents;
-            checkboxHorizontal.IsChecked = crosstabParameters.HorizontalDisplayMode;
-            txtMaxColumnLength.Text = crosstabParameters.MaxColumnNameLength;
-            
-            //Color and style settings
-            checkboxConditionalShading.IsChecked = crosstabParameters.ConditionalShading;
-
-            //color gradient
-            cmbBreakType.SelectedIndex = int.Parse(crosstabParameters.BreakType.ToString());
-            if (!String.IsNullOrEmpty(crosstabParameters.Break1))
-            {
-                txtPct1.Text = crosstabParameters.Break1;
-            }
-            else 
-            {
-                txtPct1.Text = "0";
-            }
-            if (!String.IsNullOrEmpty(crosstabParameters.Break2))
-            {
-                txtPct2.Text = crosstabParameters.Break2;
-            }
-            else
-            {
-                txtPct2.Text = "20";
-            }
-            if (!String.IsNullOrEmpty(crosstabParameters.Break3))
-            {
-                txtPct3.Text = crosstabParameters.Break3;
-            }
-            else
-            {
-                txtPct3.Text = "40";
-            }
-            if (!String.IsNullOrEmpty(crosstabParameters.Break4))
-            {
-                txtPct4.Text = crosstabParameters.Break4;
-            }
-            else
-            {
-                txtPct4.Text = "60";
-            }
-            if (!String.IsNullOrEmpty(crosstabParameters.Break5))
-            {
-                txtPct5.Text = crosstabParameters.Break5;
-            }
-            else
-            {
-                txtPct5.Text = "80";
-            }
 
             CheckVariables();
         }
 
         public class FieldInfo { public string Name { get; set; } public string DataType { get; set; } public VariableCategory VariableCategory { get; set; } }
-
-        ///// <summary>
-        ///// Fired when the user changes a column selection
-        ///// </summary>
-        ///// <param name="sender">Object that fired the event</param>
-        ///// <param name="e">.NET supplied event parameters</param>
-        //private void lbxColumns_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    ShowHideOutputColumns();
-        //}
-
-        //private void CheckVariables()
-        //{
-        //    bool isDropDownList = false;
-        //    bool isCommentLegal = false;
-        //    bool isOptionField = false;
-        //    bool isRecoded = false;
-
-        //    if (cbxExposureField.SelectedItem != null && !string.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString()))
-        //    {
-        //        foreach (DataRow fieldRow in DashboardHelper.FieldTable.Rows)
-        //        {
-        //            if (fieldRow["columnname"].Equals(cbxExposureField.SelectedItem.ToString()))
-        //            {
-        //                if (fieldRow["epifieldtype"] is TableBasedDropDownField || fieldRow["epifieldtype"] is YesNoField || fieldRow["epifieldtype"] is CheckBoxField)
-        //                {
-        //                    isDropDownList = true;
-        //                    if (fieldRow["epifieldtype"] is DDLFieldOfCommentLegal)
-        //                    {
-        //                        isCommentLegal = true;
-        //                    }
-        //                }
-        //                else if (fieldRow["epifieldtype"] is OptionField)
-        //                {
-        //                    isOptionField = true;
-        //                }
-        //                break;
-        //            }
-        //        }
-
-        //        if (DashboardHelper.IsUserDefinedColumn(cbxExposureField.SelectedItem.ToString()))
-        //        {
-        //            List<IDashboardRule> associatedRules = DashboardHelper.Rules.GetRules(cbxExposureField.SelectedItem.ToString());
-        //            foreach (IDashboardRule rule in associatedRules)
-        //            {
-        //                if (rule is Rule_Recode)
-        //                {
-        //                    isRecoded = true;
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    if (isDropDownList || isRecoded)
-        //    {
-        //        checkboxAllValues.IsEnabled = true;
-        //    }
-        //    else
-        //    {
-        //        checkboxAllValues.IsEnabled = false;
-        //        checkboxAllValues.IsChecked = false;
-        //    }
-
-        //    if (isCommentLegal || isOptionField)
-        //    {
-        //        checkboxCommentLegalLabels.IsEnabled = true;
-        //    }
-        //    else
-        //    {
-        //        checkboxCommentLegalLabels.IsEnabled = false;
-        //    }
-
-        //    if (!isCommentLegal && !isOptionField)
-        //    {
-        //        checkboxCommentLegalLabels.IsChecked = isCommentLegal;
-        //    }   
-        //}
 
         private void tbtnVariables_Checked(object sender, RoutedEventArgs e)
         {
@@ -562,14 +376,14 @@ namespace EpiDashboard.Controls.GadgetProperties
         /// <param name="e">.NET supplied event parameters</param>
         private void checkboxCheckChanged(object sender, RoutedEventArgs e)
         {
-            if (sender == checkboxOutcomeContinuous && checkboxOutcomeContinuous.IsChecked == true)
-            {
-                checkboxIncludeMissing.IsChecked = false;
-            }
-            else if (sender == checkboxIncludeMissing && checkboxIncludeMissing.IsChecked == true)
-            {
-                checkboxOutcomeContinuous.IsChecked = false;
-            }
+            //if (sender == checkboxOutcomeContinuous && checkboxOutcomeContinuous.IsChecked == true)
+            //{
+            //    checkboxIncludeMissing.IsChecked = false;
+            //}
+            //else if (sender == checkboxIncludeMissing && checkboxIncludeMissing.IsChecked == true)
+            //{
+            //    checkboxOutcomeContinuous.IsChecked = false;
+            //}
         }
 
         /// <summary>
@@ -577,7 +391,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         /// </summary>
         private void CheckVariables()
         {
-            lbxFieldStrata.IsEnabled = true;
+            cbxFieldStrata.IsEnabled = true;
             if (cbxExposureField.SelectedIndex >= 0)
             {
                 string exposureFieldName = cbxExposureField.SelectedItem.ToString();
@@ -585,8 +399,8 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     if (DashboardHelper.GetAllGroupsAsList().Contains(exposureFieldName))
                     {
-                        lbxFieldStrata.IsEnabled = false;
-                        lbxFieldStrata.SelectedItems.Clear();
+                        cbxFieldStrata.IsEnabled = false;
+                        cbxFieldStrata.SelectedIndex = -1;
                         //btnValueMappings.IsEnabled = true;
                     }
                     else if (DashboardHelper.IsColumnText(exposureFieldName) || DashboardHelper.IsColumnNumeric(exposureFieldName))
@@ -605,79 +419,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
         }
 
-        private void lbxFieldStrata_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            bool clearLbx = false;
-            if (lbxFieldStrata.SelectedItems.Count == 0)
-            {
-                clearLbx = true;
-            }
-            else
-            {
-                foreach (string s in lbxFieldStrata.SelectedItems)
-                {
-                    if (s == String.Empty)
-                    {
-                        clearLbx = true;
-                    }
-                }
-            }
-            if (clearLbx) lbxFieldStrata.SelectedItems.Clear();
-        }
-
-        private void cbxFieldWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //if (cbxFieldWeight.SelectedValue == String.Empty)
-            //{
-            //    cbxFieldWeight.Items.Clear();
-            //}
-        }
-
-        //private void cbxField_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    CheckVariables();
-        //}
-
-        //private void btnValueMappings_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (cbxExposureField.SelectedIndex >= 0 && cbxOutcomeField.SelectedIndex >= 0)
-        //    {
-        //        string exposureFieldName = cbxExposureField.SelectedItem.ToString();
-        //        string outcomeFieldName = cbxOutcomeField.SelectedItem.ToString();
-
-        //        DataColumn exposure = DashboardHelper.DataSet.Tables[0].Columns[exposureFieldName];
-        //        DataColumn outcome = DashboardHelper.DataSet.Tables[0].Columns[outcomeFieldName];
-
-        //        Dialogs.ValueMapperDialog vmd = null;
-
-        //        if (DashboardHelper.GetAllGroupsAsList().Contains(exposureFieldName))
-        //        {
-        //            vmd = new Dialogs.ValueMapperDialog(DashboardHelper, DashboardHelper.GetVariablesInGroup(exposureFieldName), outcome, YesValues, NoValues);
-        //        }
-        //        else if (
-        //            (DashboardHelper.IsColumnText(exposureFieldName) || DashboardHelper.IsColumnNumeric(exposureFieldName))
-        //            ||
-        //            (DashboardHelper.IsColumnText(outcomeFieldName) || DashboardHelper.IsColumnNumeric(outcomeFieldName))
-        //            )
-        //        {
-        //            vmd = new Dialogs.ValueMapperDialog(DashboardHelper, exposure, outcome, YesValues, NoValues);
-        //        }
-
-        //        if (vmd != null)
-        //        {
-        //            System.Windows.Forms.DialogResult result = vmd.ShowDialog();
-        //            if (result == System.Windows.Forms.DialogResult.OK)
-        //            {
-        //                YesValues = vmd.YesValues;
-        //                NoValues = vmd.NoValues;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            Epi.Windows.MsgBox.ShowInformation(DashboardSharedStrings.REMAPPER_MESSAGE_ALREADY_BOOLEAN);
-        //        }
-        //    }
-        //}
 
         private void Update2x2ValueMappings()
         {

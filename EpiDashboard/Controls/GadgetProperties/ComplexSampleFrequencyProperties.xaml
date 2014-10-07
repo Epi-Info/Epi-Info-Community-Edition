@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Frequency</Label>
+            <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10" xml:space="preserve">Complex Sample&#10;Frequency</Label>
 
             <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables" Description="Select the column for the frequency." IsChecked="True" Checked="tbtnVariables_Checked"/>
             <!--<Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Sorting and Grouping" Description="Set a sort order and create list groups." IsChecked="False" Checked="tbtnSorting_Checked"/>-->
@@ -45,36 +45,19 @@
             <StackPanel Height="12" />
             
             <TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
-            <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFieldWeight_SelectionChanged" />
-            
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 10">Sorting and Grouping</Label>
-            <TextBlock x:Name="tblockSortMethod">Sort Method:</TextBlock>
-            <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort high to low" HorizontalAlignment="Left" IsChecked="true">
-                <!--<CheckBox.ToolTip>
-                    <StackPanel>
-                        <Label FontWeight="Bold">Sort High to Low</Label>
-                        <TextBlock 
-                                               Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
-                                        Determines if the output is sorted from highest frequency to lowest frequency. If unchecked, the output
-                        will be sorted alphabetically.</TextBlock>
-                    </StackPanel>
-                </CheckBox.ToolTip>-->
-            </CheckBox>
+            <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
+
+            <StackPanel Height="12" />
+
             <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
-            <ScrollViewer x:Name="scrollViewerStrataProperties" VerticalAlignment="Stretch" Height="400" >
-                <StackPanel>
-                    <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" />
-                </StackPanel>
-            </ScrollViewer>
+            <ComboBox x:Name="cbxFieldStrata" Width="216" HorizontalAlignment="Left" Height="28" />
+
+            <StackPanel Height="12" />
+
+            <TextBlock x:Name="tblockPSU">PSU:</TextBlock>
+            <ComboBox x:Name="cbxFieldPSU" Width="216" HorizontalAlignment="Left" Height="28" />
+
         </StackPanel>
-        <!--<StackPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
-
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 4">Grouping</Label>
-            <Label>Stratify by:</Label>
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 30, 0, 4">Sorting</Label>         
-        </StackPanel>-->
-
         <StackPanel x:Name="panelDisplay" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
 
@@ -86,60 +69,6 @@
 
                     <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
                     <TextBox x:Name="txtDesc" Width="360" AcceptsReturn="True" Height="128" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
-
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 10">Output Options</Label>
-                    <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values" Visibility="Visible" IsEnabled="true" />
-                    <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" Visibility="Visible" IsEnabled="true" />
-                    <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values" IsChecked="True" />
-                    <!--<CheckBox x:Name="checkboxShowNulls" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show missing representation" IsChecked="True" />-->
-
-                    <CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use field prompts" Visibility="Visible" IsEnabled="true">
-                        <!--<CheckBox.ToolTip>
-                            <StackPanel>
-                                <Label FontWeight="Bold">Shows labels</Label>
-                                <TextBlock 
-                                               Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200" >
-                                    Shows field prompts instead of the field names. Not applicable to variables that are not Epi Info 7 fields.
-                                        </TextBlock>
-                            </StackPanel>
-                        </CheckBox.ToolTip>-->
-                    </CheckBox>
-
-                    <CheckBox x:Name="checkboxDrawBorders" Style="{StaticResource PropertiesPanelCheckbox}" Content="Draw borders" Visibility="Visible" IsEnabled="true" />
-                    <CheckBox x:Name="checkboxDrawHeader" Style="{StaticResource PropertiesPanelCheckbox}" Content="Draw header row" Visibility="Visible" IsEnabled="true" />
-                    <CheckBox x:Name="checkboxDrawTotal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Draw total row" Visibility="Visible" IsEnabled="true" />
-
-                    <Label x:Name="tblockPrecision" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Decimals to display:" />
-                    <ComboBox x:Name="cbxFieldPrecision" HorizontalAlignment="Left" Width="45" SelectedIndex="2">
-                        <ComboBoxItem>0</ComboBoxItem>
-                        <ComboBoxItem>1</ComboBoxItem>
-                        <ComboBoxItem>2</ComboBoxItem>
-                        <ComboBoxItem>3</ComboBoxItem>
-                        <ComboBoxItem>4</ComboBoxItem>
-                    </ComboBox>
-
-                    <TextBlock x:Name="tblockPercentBarData" HorizontalAlignment="Left" TextAlignment="Center" Text="Percent bar display mode:" Margin="0,5,0,0" Visibility="Collapsed"  />
-                    <ComboBox x:Name="cmbPercentBarMode" SelectedIndex="0" Visibility="Collapsed">
-                        <ComboBoxItem>Bar only</ComboBoxItem>
-                        <ComboBoxItem>Bar and percent</ComboBoxItem>
-                    </ComboBox>
-
-                    <TextBlock x:Name="tblockRows" HorizontalAlignment="Left" TextAlignment="Center" Text="Maximum rows to display:"  Margin="0,5,0,0"  />
-                    <TextBox x:Name="txtRows" Width="100" />
-
-                    <TextBlock x:Name="tblockBarWidth" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,5,0,0" >Maximum width of percent bar:</TextBlock>
-                    <TextBox x:Name="txtBarWidth"  Width="100"/>
-
-                    <!--<TextBlock x:Name="tblockOutputColumns" Margin="0,5,0,0" >Output columns to display:</TextBlock>-->
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 10">Output Columns To Display</Label>
-                    <StackPanel>
-                        <CheckBox x:Name="checkboxColumnFrequency" Style="{StaticResource PropertiesPanelCheckbox}" Content="Frequency" IsChecked="True" />
-                        <CheckBox x:Name="checkboxColumnPercent" Style="{StaticResource PropertiesPanelCheckbox}" Content="Percent" IsChecked="True" />
-                        <CheckBox x:Name="checkboxColumnCumulativePercent" Style="{StaticResource PropertiesPanelCheckbox}" Content="Cumulative percent" IsChecked="True" />
-                        <CheckBox x:Name="checkboxColumn95CILower" Style="{StaticResource PropertiesPanelCheckbox}" Content="95% CI lower" IsChecked="True" />
-                        <CheckBox x:Name="checkboxColumn95CIUpper" Style="{StaticResource PropertiesPanelCheckbox}" Content="95% CI upper" IsChecked="True" />
-                        <CheckBox x:Name="checkboxColumnPercentBars" Style="{StaticResource PropertiesPanelCheckbox}" Content="Percent bars" IsChecked="True" />
-                    </StackPanel>
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>

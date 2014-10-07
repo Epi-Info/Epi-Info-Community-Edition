@@ -88,7 +88,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                     strataItems.Add(fieldName);
                 }
             }
-            lbxFieldStrata.ItemsSource = strataItems;
+            cbxFieldStrata.ItemsSource = strataItems;
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cbxField.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
@@ -97,33 +97,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as FrequencyControl).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
-
-            txtRows.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
-            txtBarWidth.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
-
-            #region Translation
-
-            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_FREQUENCY;
-            //expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
-            //expanderDisplayOptions.Header = DashboardSharedStrings.GADGET_DISPLAY_OPTIONS;
-            tblockMainVariable.Text = DashboardSharedStrings.GADGET_FREQUENCY_VARIABLE;
-            tblockStrataVariable.Text = DashboardSharedStrings.GADGET_STRATA_VARIABLE;
-            tblockWeightVariable.Text = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
-
-            //checkboxAllValues.Content = DashboardSharedStrings.GADGET_ALL_LIST_VALUES;
-            //checkboxCommentLegalLabels.Content = DashboardSharedStrings.GADGET_LIST_LABELS;
-            checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
-
-            checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
-            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPT;
-            //tblockOutputColumns.Text = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
-            //tblockPrecision.Text = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
-
-            tblockRows.Text = DashboardSharedStrings.GADGET_MAX_ROWS_TO_DISPLAY;
-            tblockBarWidth.Text = DashboardSharedStrings.GADGET_MAX_PERCENT_BAR_WIDTH;
-
-            //btnRun.Content = DashboardSharedStrings.GADGET_RUN_BUTTON;
-            #endregion // Translation
 
         }
 
@@ -181,76 +154,21 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.WeightVariableName = String.Empty;
             }
 
-            Parameters.SortHighToLow = (bool)checkboxSortHighLow.IsChecked;
-
-            if (lbxFieldStrata.SelectedItems.Count > 0)
+            if (cbxFieldStrata.SelectedIndex > -1)
             {
-                Parameters.StrataVariableNames = new List<string>();
-                foreach (string s in lbxFieldStrata.SelectedItems)
+                if (Parameters.StrataVariableNames.Count > 0)
                 {
-                    Parameters.StrataVariableNames.Add(s.ToString());
+                    Parameters.StrataVariableNames[0] = cbxFieldStrata.SelectedItem.ToString();
+                }
+                else
+                {
+                    Parameters.StrataVariableNames.Add(cbxFieldStrata.SelectedItem.ToString());
                 }
             }
 
             //Display settings
             Parameters.GadgetTitle = txtTitle.Text;
             Parameters.GadgetDescription = txtDesc.Text;
-
-            Parameters.ShowAllListValues = (bool)checkboxAllValues.IsChecked;
-            Parameters.ShowCommentLegalLabels = (bool)checkboxCommentLegalLabels.IsChecked;
-            Parameters.IncludeMissing = (bool) checkboxIncludeMissing.IsChecked;
-
-            Parameters.UseFieldPrompts = (bool) checkboxUsePrompts.IsChecked;
-
-            Parameters.DrawBorders = (bool) checkboxDrawBorders.IsChecked;
-            Parameters.DrawHeaderRow = (bool)checkboxDrawHeader.IsChecked;
-            Parameters.DrawTotalRow = (bool)checkboxDrawTotal.IsChecked;
-            //Parameters.ShowNullRepresentation = (bool)checkboxShowNulls.IsChecked;
-
-            Parameters.Precision = cbxFieldPrecision.Text;
-
-            Parameters.PercentBarMode = cmbPercentBarMode.SelectedItem.ToString();
-
-            //Max rows to display
-            if (string.IsNullOrEmpty(txtRows.Text))
-            {
-                Parameters.RowsToDisplay = null;
-            }
-            else
-            {
-                int rows;
-                bool success = int.TryParse(txtRows.Text, out rows);
-                if (success)
-                {
-                    Parameters.RowsToDisplay = rows;
-                }
-                else
-                {
-                    Parameters.RowsToDisplay = null;
-                    txtRows.Text = string.Empty;
-                }
-            }
-
-            if (String.IsNullOrEmpty(txtBarWidth.Text))
-            {
-                Parameters.PercentBarWidth = 100;
-                txtBarWidth.Text = "100";
-            }
-            else
-            {
-                int barWidth;
-                bool bar_success = int.TryParse(txtBarWidth.Text, out barWidth);
-                if(bar_success) Parameters.PercentBarWidth = barWidth;
-                else Parameters.PercentBarWidth = 100;
-            }
-
-            //Columns to Display
-            Parameters.ShowFrequencyCol = (bool)checkboxColumnFrequency.IsChecked;
-            Parameters.ShowPercentCol = (bool)checkboxColumnPercent.IsChecked;
-            Parameters.ShowCumPercentCol = (bool)checkboxColumnCumulativePercent.IsChecked;
-            Parameters.Show95CILowerCol = (bool)checkboxColumn95CILower.IsChecked;
-            Parameters.Show95CIUpperCol = (bool)checkboxColumn95CIUpper.IsChecked;
-            Parameters.ShowPercentBarsCol = (bool)checkboxColumnPercentBars.IsChecked;
 
         }
 
@@ -263,47 +181,15 @@ namespace EpiDashboard.Controls.GadgetProperties
                 cbxField.SelectedItem = Parameters.ColumnNames[0];
             }
             cbxFieldWeight.SelectedItem = Parameters.WeightVariableName;
-            checkboxSortHighLow.IsChecked = Parameters.SortHighToLow;
+
             if (Parameters.StrataVariableNames.Count > 0)
             {
-                foreach (string s in Parameters.StrataVariableNames)
-                {
-                    //lbxFieldStrata.SelectedItem = s;
-                    lbxFieldStrata.SelectedItems.Add(s.ToString());
-                }
+                cbxFieldStrata.SelectedItem = Parameters.StrataVariableNames[0].ToString();
             }
 
             //Display settings
             txtTitle.Text = Parameters.GadgetTitle;
             txtDesc.Text = Parameters.GadgetDescription;
-            checkboxAllValues.IsChecked = Parameters.ShowAllListValues;
-            checkboxCommentLegalLabels.IsChecked = Parameters.ShowCommentLegalLabels;
-            checkboxIncludeMissing.IsChecked = Parameters.IncludeMissing;
-
-            checkboxUsePrompts.IsChecked = Parameters.UseFieldPrompts;
-
-            checkboxDrawBorders.IsChecked = Parameters.DrawBorders;
-            checkboxDrawHeader.IsChecked = Parameters.DrawHeaderRow;
-            checkboxDrawTotal.IsChecked = Parameters.DrawTotalRow;
-            //checkboxShowNulls.IsChecked = Parameters.ShowNullRepresentation;
-
-            int precision = 2;
-            bool precise_parse = int.TryParse(Parameters.Precision.ToString(), out precision);
-            if (precise_parse) cbxFieldPrecision.SelectedIndex = precision;
-
-            cmbPercentBarMode.SelectedItem = Parameters.PercentBarMode;
-
-            txtRows.Text = Parameters.RowsToDisplay.ToString();
-            txtBarWidth.Text = Parameters.PercentBarWidth.ToString();
-            
-
-            //Output columns to display
-            checkboxColumnFrequency.IsChecked = Parameters.ShowFrequencyCol;
-            checkboxColumnPercent.IsChecked = Parameters.ShowPercentCol;
-            checkboxColumnCumulativePercent.IsChecked = Parameters.ShowCumPercentCol;
-            checkboxColumn95CILower.IsChecked = Parameters.Show95CILowerCol;
-            checkboxColumn95CIUpper.IsChecked = Parameters.Show95CIUpperCol;
-            checkboxColumnPercentBars.IsChecked = Parameters.ShowPercentBarsCol;
 
             CheckVariables();
         }
@@ -364,30 +250,6 @@ namespace EpiDashboard.Controls.GadgetProperties
                     }
                 }
             }
-
-            if (isDropDownList || isRecoded)
-            {
-                checkboxAllValues.IsEnabled = true;
-            }
-            else
-            {
-                checkboxAllValues.IsEnabled = false;
-                checkboxAllValues.IsChecked = false;
-            }
-
-            if (isCommentLegal || isOptionField)
-            {
-                checkboxCommentLegalLabels.IsEnabled = true;
-            }
-            else
-            {
-                checkboxCommentLegalLabels.IsEnabled = false;
-            }
-
-            if (!isCommentLegal && !isOptionField)
-            {
-                checkboxCommentLegalLabels.IsChecked = isCommentLegal;
-            }   
         }
 
 
@@ -446,7 +308,6 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             CheckButtonStates(sender as SettingsToggleButton);
             panelVariables.Visibility = System.Windows.Visibility.Visible;
-            //panelSorting.Visibility = System.Windows.Visibility.Collapsed;
             panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -455,7 +316,6 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             CheckButtonStates(sender as SettingsToggleButton);
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
-            //panelSorting.Visibility = System.Windows.Visibility.Visible;
             panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -464,7 +324,6 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             CheckButtonStates(sender as SettingsToggleButton);
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
-            //panelSorting.Visibility = System.Windows.Visibility.Collapsed;
             panelDisplay.Visibility = System.Windows.Visibility.Visible;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -473,37 +332,8 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             CheckButtonStates(sender as SettingsToggleButton);
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
-            //panelSorting.Visibility = System.Windows.Visibility.Collapsed;
             panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Visible;
-        }
-
-        private void lbxFieldStrata_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            bool clearLbx = false;
-            if (lbxFieldStrata.SelectedItems.Count == 0)
-            {
-                clearLbx = true;
-            }
-            else
-            {
-                foreach (string s in lbxFieldStrata.SelectedItems)
-                {
-                    if (s == String.Empty)
-                    {
-                        clearLbx = true;
-                    }
-                }
-            }
-            if (clearLbx) lbxFieldStrata.SelectedItems.Clear();
-        }
-
-        private void cbxFieldWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //if (cbxFieldWeight.SelectedValue == String.Empty)
-            //{
-            //    cbxFieldWeight.Items.Clear();
-            //}
         }
 
         private void cbxField_SelectionChanged(object sender, SelectionChangedEventArgs e)
