@@ -206,6 +206,15 @@
     <Compile Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml.cs">
       <DependentUpon>AberrationDetectionChartProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GadgetProperties\ComplexSampleCrosstabProperties.xaml.cs">
+      <DependentUpon>ComplexSampleCrosstabProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\ComplexSampleMeansProperties.xaml.cs">
+      <DependentUpon>ComplexSampleMeansProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GadgetProperties\ComplexSampleFrequencyProperties.xaml.cs">
+      <DependentUpon>ComplexSampleFrequencyProperties.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GadgetProperties\PMCCProperties.xaml.cs">
       <DependentUpon>PMCCProperties.xaml</DependentUpon>
     </Compile>
@@ -482,6 +491,9 @@
     <Compile Include="Gadgets\AreaChartParametersBase.cs" />
     <Compile Include="Gadgets\AberrationDetectionChartParametersBase.cs" />
     <Compile Include="Gadgets\AberrationDetectionChartParameters.cs" />
+    <Compile Include="Gadgets\ComplexSampleCrosstabParameters.cs" />
+    <Compile Include="Gadgets\ComplexSampleFrequencyParameters.cs" />
+    <Compile Include="Gadgets\ComplexSampleMeansParameters.cs" />
     <Compile Include="Gadgets\PMCCParameters.cs" />
     <Compile Include="Gadgets\HistogramChartParameters.cs" />
     <Compile Include="Gadgets\HistogramChartParametersBase.cs" />
@@ -908,6 +920,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\GadgetProperties\AberrationDetectionChartProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\ComplexSampleCrosstabProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\ComplexSampleMeansProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\ComplexSampleFrequencyProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
