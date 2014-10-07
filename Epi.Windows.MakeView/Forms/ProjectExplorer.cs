@@ -1451,14 +1451,21 @@ namespace Epi.Windows.MakeView.Forms
                 {
                     using (System.Xml.XmlReader reader = System.Xml.XmlReader.Create(templateNames[i]))
                     {
-                        while (reader.ReadToFollowing("Template"))
+                        try
                         {
-                            string nameCandidate = reader.GetAttribute("Name");
-
-                            if (string.IsNullOrEmpty(nameCandidate))
+                            while (reader.ReadToFollowing("Template"))
                             {
-                                hasProjectName = false;
+                                string nameCandidate = reader.GetAttribute("Name");
+
+                                if (string.IsNullOrEmpty(nameCandidate))
+                                {
+                                    hasProjectName = false;
+                                }
                             }
+                        }
+                        catch
+                        {
+                            Logger.Log("Project Explorer - The template file [ " + reader.BaseURI + " ] cannot be read.");
                         }
                     }
                 }
