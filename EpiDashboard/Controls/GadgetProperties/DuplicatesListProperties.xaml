@@ -42,7 +42,7 @@
                 <WrapPanel Orientation="Horizontal">
                     <StackPanel Margin="0,0,10,0">
                         <Label>Key fields for duplicate checking:</Label>
-                        <ListView Name="lvVariables" SelectionChanged="lvVariables_SelectionChanged" >
+                        <ListView Name="lvVariables" Height="400"  SelectionChanged="lvVariables_SelectionChanged" >
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}" />
@@ -62,7 +62,7 @@
                     </StackPanel>
                     <StackPanel>
                         <Label>Additional fields to display:</Label>
-                        <ListView Name="lvDisplayVariables" >
+                        <ListView Name="lvDisplayVariables" Height="400" >
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}" />
