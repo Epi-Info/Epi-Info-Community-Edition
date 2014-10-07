@@ -970,7 +970,7 @@ namespace EpiDashboard
                             }
                             DataTable frequencies = tableKvp.Key;
 
-                            if (YesValues.Count > 0 && NoValues.Count > 0)
+                            if (pmccParameters.YesValues.Count > 0 && pmccParameters.NoValues.Count > 0)
                             {
                                 frequencies = ApplyRowValueMappings(frequencies);
                                 frequencies = ApplyColumnValueMappings(frequencies);
@@ -1993,7 +1993,7 @@ namespace EpiDashboard
         {
             PMCCParameters pmccParameters = (PMCCParameters)Parameters;
 
-            if (YesValues.Count > 0 && NoValues.Count > 0)
+            if (pmccParameters.YesValues.Count > 0 && pmccParameters.NoValues.Count > 0)
             {
                 DataTable remappedTable = table.Clone();
 
@@ -2025,7 +2025,7 @@ namespace EpiDashboard
                     string value = row[0].ToString();
 
                     //if (YesValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.MainVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.MainVariableName)) && value.Equals(Config.Settings.RepresentationOfYes)))
-                    if (YesValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(pmccParameters.ColumnNames[0]) || DashboardHelper.IsColumnYesNo(pmccParameters.ColumnNames[0])) && value.Equals(Config.Settings.RepresentationOfYes)))
+                    if (pmccParameters.YesValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(pmccParameters.ColumnNames[0]) || DashboardHelper.IsColumnYesNo(pmccParameters.ColumnNames[0])) && value.Equals(Config.Settings.RepresentationOfYes)))
                     {
                         for (int i = 1; i < remappedTable.Columns.Count; i++)
                         {
@@ -2034,7 +2034,7 @@ namespace EpiDashboard
                     }
 
                     //if (NoValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.MainVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.MainVariableName)) && value.Equals(Config.Settings.RepresentationOfNo)))
-                    if (NoValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(pmccParameters.ColumnNames[0]) || DashboardHelper.IsColumnYesNo(pmccParameters.ColumnNames[0])) && value.Equals(Config.Settings.RepresentationOfNo)))
+                    if (pmccParameters.NoValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(pmccParameters.ColumnNames[0]) || DashboardHelper.IsColumnYesNo(pmccParameters.ColumnNames[0])) && value.Equals(Config.Settings.RepresentationOfNo)))
                     {
                         for (int i = 1; i < remappedTable.Columns.Count; i++)
                         {
@@ -2053,7 +2053,7 @@ namespace EpiDashboard
         private DataTable ApplyColumnValueMappings(DataTable table)
         {
             PMCCParameters pmccParameters = (PMCCParameters)Parameters;
-            if (YesValues.Count > 0 && NoValues.Count > 0)
+            if (pmccParameters.YesValues.Count > 0 && pmccParameters.NoValues.Count > 0)
             {
                 DataTable remappedTable = new DataTable();
 
@@ -2085,7 +2085,7 @@ namespace EpiDashboard
                     string columnName = table.Columns[i].ToString();
 
                     //if (YesValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfYes)))
-                    if (YesValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(pmccParameters.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(pmccParameters.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfYes)))
+                    if (pmccParameters.YesValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(pmccParameters.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(pmccParameters.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfYes)))
                     {
                         for (int j = 0; j < 2; j++)
                         {
@@ -2094,7 +2094,7 @@ namespace EpiDashboard
                     }
 
                     //if (NoValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfNo)))
-                    if (NoValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(pmccParameters.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(pmccParameters.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfNo)))
+                    if (pmccParameters.NoValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(pmccParameters.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(pmccParameters.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfNo)))
                     {
                         for (int j = 0; j < 2; j++)
                         {
