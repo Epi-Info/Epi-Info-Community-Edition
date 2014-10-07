@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <Label FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Logistic Regression</Label>
+            <Label FontWeight="Light" Foreground="White" FontSize="32" Margin="0, 0, 0, 10">Logistic Regression</Label>
 
             <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables" Description="Select columns to display in the list." IsChecked="True" Checked="tbtnVariables_Checked"/>
             <!--<Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Sorting and Grouping" Description="Set a sort order and create list groups." IsChecked="False" Checked="tbtnSorting_Checked"/>-->
@@ -39,13 +39,46 @@
         <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
 
-            <Label>Dependent Variable:</Label>
-            <ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" />
-            <Label>Weight:</Label>
-            <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
-            <Label>Stratify by:</Label>
-            <ListBox SelectionMode="Multiple" Name="lvFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="90" />
-            <!--<ListView Name="lvFieldStrata" MaxHeight="450">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="0.5*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0">Outcome:</Label>
+            <!--ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" /-->
+                <ComboBox Grid.Column="0" Grid.Row="1" x:Name="cbxFieldOutcome" Width="216" HorizontalAlignment="Left" Height="28" />
+                <Label Grid.Column="2" Grid.Row="0">Weight:</Label>
+                <ComboBox Grid.Column="2" Grid.Row="1" x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
+                <Label Grid.Column="0" Grid.Row="2">Independent Variables:</Label>
+                <ComboBox Grid.Column="0" Grid.Row="3" x:Name="cbxFields" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFields_SelectionChanged" />
+            <!--ListBox SelectionMode="Multiple" Name="lvFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="90" /-->
+                <ListBox Grid.Column="0" Grid.Row="4" SelectionMode="Extended" Name="lbxOtherFields" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="90" Width="216" SelectionChanged="lbxOtherFields_SelectionChanged" MouseDoubleClick="lbxOtherFields_MouseDoubleClick" />
+                <Grid Grid.Row="4" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Button x:Name="btnMakeDummy" Content="Make Dummy" Grid.Row="0" HorizontalAlignment="Left" Width="160" Grid.Column="0" Click="btnMakeDummy_Click" />
+                    <Label Height="5" Grid.Row="1" Grid.Column="0" />
+                    <Button x:Name="btnClearInteractionTerms" Content="Clear Terms" Grid.Row="2" Grid.Column="0" Width="160" HorizontalAlignment="Left" Click="btnClearInteractionTerms_Click" />
+                </Grid>
+                <!--<ListView Name="lvFieldStrata" MaxHeight="450">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}" />
@@ -62,10 +95,19 @@
                     </GroupStyle>
                 </ListView.GroupStyle>
             </ListView>-->
-            <Label>Cross-tabulate by:</Label>
-            <ComboBox x:Name="cbxFieldCrosstab" Width="216" HorizontalAlignment="Left" Height="28" />
-            <CheckBox x:Name="checkboxShowANOVA" Content="Display ANOVA statistics" IsChecked="True" Margin="0,8,0,0" />
-
+                <Label Grid.Column="0" Grid.Row="5">Match Variable:</Label>
+            <!--ComboBox x:Name="cbxFieldCrosstab" Width="216" HorizontalAlignment="Left" Height="28" /-->
+                <ComboBox Grid.Column="0" Grid.Row="6" x:Name="cbxFieldMatch" Width="216" HorizontalAlignment="Left" Height="28" />
+                <CheckBox x:Name="checkboxShowANOVA" Content="Display ANOVA statistics" IsChecked="True" Margin="0,8,0,0" Visibility="Collapsed" />
+                <Label Grid.Column="2" Grid.Row="5">Confidence Limits:</Label>
+                <ComboBox Grid.Column="2" Grid.Row="6" x:Name="cbxConf" Width="216" HorizontalAlignment="Left" Height="28" />
+                <TextBlock Grid.Column="0" Grid.Row="7" HorizontalAlignment="Left" TextAlignment="Center" Text="Dummy variables:" Margin="0,5,0,0" />
+                <ListBox Height="40" Grid.Column="0" Grid.Row="8" x:Name="lbxDummyTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="160"  Margin="0,5,0,0" Grid.RowSpan="1" SelectionMode="Single" MouseDoubleClick="lbxDummyTerms_MouseDoubleClick" />
+                <TextBlock Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" TextAlignment="Center" Text="Interaction terms:" Margin="0,5,0,0" />
+                <ListBox Height="40" Grid.Column="2" Grid.Row="8" x:Name="lbxInteractionTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="160"  Margin="0,5,0,0" Grid.RowSpan="1" SelectionMode="Single" MouseDoubleClick="lbxInteractionTerms_MouseDoubleClick" />
+                <CheckBox Grid.Column="0" Grid.Row="9" x:Name="checkboxNoIntercept" HorizontalAlignment="left" Content="No intercept" />
+                <CheckBox Grid.Column="2" Grid.Row="9" x:Name="checkboxIncludeMissing" HorizontalAlignment="left" Content="Include missing" />
+            </Grid>
         </StackPanel>
 
         <StackPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
@@ -156,7 +198,7 @@
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="1">
             <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
-            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
+            <Button x:Name="btnRun" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnRun_Click">OK</Button>
         </DockPanel>
     </Grid>
 </PropertyPanels:GadgetPropertiesPanelBase>
