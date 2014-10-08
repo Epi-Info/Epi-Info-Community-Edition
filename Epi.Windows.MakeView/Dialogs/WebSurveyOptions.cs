@@ -90,6 +90,8 @@ namespace Epi.Windows.MakeView.Dialogs
             {
                 SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
+                SurveyManagerService.OrganizationDTO orgDTO = new SurveyManagerService.OrganizationDTO();
+                Request.Organization = orgDTO;
                 var Result = client.GetOrganization(Request);
             }
             catch (Exception ex)
