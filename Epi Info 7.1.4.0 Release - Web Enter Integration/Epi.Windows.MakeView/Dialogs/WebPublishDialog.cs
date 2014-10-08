@@ -38,7 +38,8 @@ namespace Epi.Windows.MakeView.Dialogs
 
         #region Delegates
         private delegate void SetStatusDelegate(string statusMessage);
-        private delegate void PublishDelegate(Epi.Web.Common.Message.PublishResponse Result);
+       // private delegate void PublishDelegate(Epi.Web.Common.Message.PublishResponse Result);
+        private delegate void PublishDelegate(SurveyManagerService.PublishResponse Result);
         private delegate void FinishWithErrorDelegate(string errorMessage);
         private delegate void FinishWithCustomFaultExceptionDelegate(FaultException<CustomFaultException> cfe);
         private delegate void FinishWithFaultExceptionDelegate(FaultException fe);
@@ -143,7 +144,9 @@ namespace Epi.Windows.MakeView.Dialogs
             stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
+          //  Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
+            SurveyManagerService.PublishRequest Request = new SurveyManagerService.PublishRequest();
+            Request.SurveyInfo = new SurveyManagerService.SurveyInfoDTO();
 
             if (string.IsNullOrEmpty(ClosingTimecomboBox.Text))
             {
@@ -212,7 +215,9 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             try
             {
-                Epi.Web.Common.Message.PublishResponse Result = new Epi.Web.Common.Message.PublishResponse();
+              //  Epi.Web.Common.Message.PublishResponse Result = new Epi.Web.Common.Message.PublishResponse();
+                SurveyManagerService.PublishResponse Result = new SurveyManagerService.PublishResponse();
+               
                 lock (syncLock)
                 {
                     this.Cursor = Cursors.WaitCursor;
@@ -394,7 +399,8 @@ namespace Epi.Windows.MakeView.Dialogs
             //this.btnPublish.Enabled = true;
         }
 
-        private void AfterPublish(Epi.Web.Common.Message.PublishResponse Result)
+        //private void AfterPublish(Epi.Web.Common.Message.PublishResponse Result)
+        private void AfterPublish(SurveyManagerService.PublishResponse Result)
         {
             if (Result.PublishInfo.IsPulished)
             {

@@ -2928,6 +2928,8 @@ namespace Epi.Windows.MakeView.Forms
                                 {
                                     SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                                     SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
+                                    SurveyManagerService.OrganizationDTO orgDTO = new SurveyManagerService.OrganizationDTO();
+                                    Request.Organization = orgDTO;
                                     var TestService = client.GetOrganization(Request);
 
                                     WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
@@ -2961,6 +2963,8 @@ namespace Epi.Windows.MakeView.Forms
                         {
                             SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                             SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
+                            SurveyManagerService.OrganizationDTO orgDTO = new SurveyManagerService.OrganizationDTO();
+                            Request.Organization = orgDTO;
                             var TestService = client.GetOrganization(Request);
 
                             WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
@@ -4281,6 +4285,8 @@ namespace Epi.Windows.MakeView.Forms
 
                                 SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                                 SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
+                                SurveyManagerService.OrganizationDTO orgDTO = new SurveyManagerService.OrganizationDTO();
+                                Request.Organization = orgDTO;
                             var TestService = client.GetOrganization(Request);
 
                             WebEnterPublishDialog dialog = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
