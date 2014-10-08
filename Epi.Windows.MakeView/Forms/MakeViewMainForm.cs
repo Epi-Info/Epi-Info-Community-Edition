@@ -4148,8 +4148,9 @@ namespace Epi.Windows.MakeView.Forms
 
                 try
                     {
+                       
                         if (view.Project.CollectedData.TableExists(view.TableName) == false)//checking if no table is created in Epi7
-                        {
+                        {                            
                             CreateViewDataTable(view);
                         }
                     if (ValidateUser()) // Validate User
@@ -4394,7 +4395,7 @@ namespace Epi.Windows.MakeView.Forms
             view.SetTableName(view.Name);
             this.mediator.Project.CollectedData.CreateDataTableForView(view, 1);
             this.createDataTableToolStripMenuItem.Enabled = false;
-
+            this.DeleteDataTableItemEnabled = true;
             foreach (View v in view.GetDescendantViews())
             {
                 if (!this.mediator.Project.CollectedData.TableExists(v.TableName))
