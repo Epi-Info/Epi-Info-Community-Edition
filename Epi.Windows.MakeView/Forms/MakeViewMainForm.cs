@@ -3068,10 +3068,15 @@ namespace Epi.Windows.MakeView.Forms
            
             try
             {
+                if (pView.IsRelatedView == true)
+                    toolStripPublishToWebEnter.Enabled = false;
+                else
+                    toolStripPublishToWebEnter.Enabled = true;
+
                 if (config.Settings.Republish_IsRepbulishable == true)
                 {
-                QuickPublishtoolStripButton.Enabled = true;
-                ChangeModetoolStripDropDownButton.Enabled = true;
+                    QuickPublishtoolStripButton.Enabled = true;
+                    ChangeModetoolStripDropDownButton.Enabled = true;
                     if (!string.IsNullOrWhiteSpace(pView.WebSurveyId))
                     {
                         mnuPublishToWeb.Text = "Republish Form to Web";
@@ -3097,15 +3102,25 @@ namespace Epi.Windows.MakeView.Forms
                     {
                        
                         toolStripPublishToWebEnter.Text = "Republish Form to Web Enter";
-                        toolStripPublishToWebEnter.Enabled = true;
-                        toWebEnterToolStripMenuItem.Enabled = true;
-                        EWEToolStripMenuItem.Enabled = true;
+                       // toolStripPublishToWebEnter.Enabled = true;
+                        if (pView.IsRelatedView == true)
+                        {
+                            toWebEnterToolStripMenuItem.Enabled = false;
+                            EWEToolStripMenuItem.Enabled = false;
+                        }
+                        else
+                        {
+                            toWebEnterToolStripMenuItem.Enabled = true;
+                            EWEToolStripMenuItem.Enabled = true;
+                        }
+                       // toWebEnterToolStripMenuItem.Enabled = true;
+                        //EWEToolStripMenuItem.Enabled = true;
                     }
                     else
                     {
                        
                         toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
-                        toolStripPublishToWebEnter.Enabled = true;
+                       // toolStripPublishToWebEnter.Enabled = true;
                         toWebEnterToolStripMenuItem.Enabled = false;
                         EWEToolStripMenuItem.Enabled = false;
                     }
@@ -3115,7 +3130,7 @@ namespace Epi.Windows.MakeView.Forms
                     mnuPublishToWeb.Text = "Publish Form to Web";
                     mnuPublishToWeb.Enabled = true;
                     toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
-                    toolStripPublishToWebEnter.Enabled = true;
+                    //toolStripPublishToWebEnter.Enabled = true;
                     QuickPublishtoolStripButton.Enabled = false;
                     ChangeModetoolStripDropDownButton.Enabled = false;
                 }
