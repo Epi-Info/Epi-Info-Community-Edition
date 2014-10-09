@@ -6,6 +6,9 @@ using System.Windows.Forms;
 using Epi.Fields;
 using Epi.EnterCheckCodeEngine;
 using Epi.Windows.Controls;
+using Epi.Resources;
+using Epi.EWEManagerService;
+using System.ComponentModel;
 
 namespace Epi.Windows.Enter.PresentationLogic
 {
@@ -27,6 +30,8 @@ namespace Epi.Windows.Enter.PresentationLogic
         public delegate void ClickFieldEventHandler(object sender, ClickFieldEventArg e);
         public delegate void FieldChangeEventHandler(object sender, Field field);
         public delegate void DirtyFieldEventHandler(object sender, EventArgs e);
+
+        private BackgroundWorker _callUpdateRecStatusServiceWorker;
 
         private bool IsClosingRelatedView = false;
 
@@ -638,6 +643,8 @@ namespace Epi.Windows.Enter.PresentationLogic
                 this.Render();
                 string guid = this.EnterCheckCodeEngine.CurrentView.View.GlobalRecordIdField.GlobalRecordId;
                 UpdateRecStatus(this.EnterCheckCodeEngine.CurrentView.View, true, guid);
+
+                CallUpdateRecStaticService(this.EnterCheckCodeEngine.CurrentView.View, true, guid);
             }
         }
 
@@ -657,8 +664,66 @@ namespace Epi.Windows.Enter.PresentationLogic
             //end -- perform cascading delete of any related view records.
             this.Render();
             string guid = this.EnterCheckCodeEngine.CurrentView.View.GlobalRecordIdField.GlobalRecordId;
+            
             UpdateRecStatus(this.EnterCheckCodeEngine.CurrentView.View, false, guid);
 
+            CallUpdateRecStaticService(this.EnterCheckCodeEngine.CurrentView.View, false, guid);
+
+        }
+
+        private string CallUpdateRecStaticService(View view, bool isDelete, string globalRecordId)
+        {
+            if (view.Project.CollectedData.GetDbDriver().GetType().FullName == "Epi.Data.Office.AccessDatabase") { return ""; }
+
+            DataTable publishTable = view.Project.Metadata.GetPublishedViewKeys(view.Id);
+            string organizationKey = "";
+            string formId = "";
+
+            if (publishTable != null && publishTable.Rows.Count > 0)
+            {
+                if (publishTable.Rows[0]["EWEOrganizationKey"] == DBNull.Value || publishTable.Rows[0]["EWEFormId"] == DBNull.Value)
+                { return ""; }
+
+                organizationKey = (string)publishTable.Rows[0]["EWEOrganizationKey"];
+                formId = (string)publishTable.Rows[0]["EWEFormId"];
+            }
+            else { return ""; }
+
+            if (string.IsNullOrEmpty(organizationKey) || string.IsNullOrEmpty(formId)) { return ""; }
+
+            string statusMessage = "[record not sent to service]";
+            Guid responseId = new Guid();
+
+            Dictionary<string, object> args = new Dictionary<string, object>();
+            args.Add("FormId", formId);
+            args.Add("ResponseId", responseId);
+            args.Add("IsDelete", isDelete);
+
+            _callUpdateRecStatusServiceWorker = new System.ComponentModel.BackgroundWorker();
+            _callUpdateRecStatusServiceWorker.DoWork += new DoWorkEventHandler(worker_CallUpdateRecStatusService);
+            _callUpdateRecStatusServiceWorker.RunWorkerAsync(args);
+
+            return statusMessage;
+        }
+
+        private static void worker_CallUpdateRecStatusService(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                string formId = (string)((Dictionary<string, object>)(e.Argument))["FormId"];
+                bool isDelete = (bool)((Dictionary<string, object>)(e.Argument))["IsDelete"];
+                Guid responseId = (Guid)((Dictionary<string, object>)(e.Argument))["ResponseId"];
+
+                EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+                Epi.EWEManagerService.SurveyAnswerRequest surveyAnswerRequest = new Epi.EWEManagerService.SurveyAnswerRequest();
+                surveyAnswerRequest.Criteria = new SurveyAnswerCriteria();
+                surveyAnswerRequest.Criteria.SurveyId = formId;
+                surveyAnswerRequest.Criteria.StatusId = isDelete ? 0 : 1;
+                surveyAnswerRequest.Criteria.SurveyAnswerIdList = new string[]{responseId.ToString()};
+
+                client.SetSurveyAnswerStatus(surveyAnswerRequest);
+            }
+            catch { }
         }
 
         private void UpdateRecStatus(View view, bool isDelete, string globalRecordId)
@@ -669,7 +734,7 @@ namespace Epi.Windows.Enter.PresentationLogic
             updateQuery.Parameters.Add(new Epi.Data.QueryParameter("@RecStatus", DbType.Int32, isDelete ? 0 : 1));
             updateQuery.Parameters.Add(new Epi.Data.QueryParameter("@GlobalRecordId", DbType.String, globalRecordId));
             collectedData.ExecuteNonQuery(updateQuery);
-            
+
             // < GRID TABLES >
 
             foreach (GridField gridField in view.Fields.GridFields)

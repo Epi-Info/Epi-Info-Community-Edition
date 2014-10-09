@@ -679,7 +679,7 @@ namespace Epi.Data.Services
                     {
                         responseId = new Guid(dataField.CurrentRecordValueString);
                     }
-                    else if ((dataField is UniqueKeyField) == false && (dataField is RecStatusField) == false)
+                    else if ((dataField is UniqueKeyField) == false && (dataField is RecStatusField) == false && (dataField is ForeignKeyField) == false)
                     {
                         responseDictionary.Add(((Epi.INamedObject)dataField).Name, dataField.CurrentRecordValueObject.ToString());
                     }
@@ -691,7 +691,7 @@ namespace Epi.Data.Services
                 Request.AnswerInfo.OrganizationKey = new Guid(organizationKey);
                 Request.AnswerInfo.SurveyId = new Guid(formId);
 
-                if (view.IsRelatedView)
+                if (view.IsRelatedView && !string.IsNullOrEmpty(view.ParentView.GlobalRecordIdField.CurrentRecordValueString))
                 {
                     Request.AnswerInfo.ParentRecordId = new Guid(view.ParentView.GlobalRecordIdField.CurrentRecordValueString);
                 }
