@@ -4419,6 +4419,7 @@ namespace Epi.Windows.MakeView.Forms
                     this.mediator.Project.CollectedData.CreateDataTableForView(v, 1);
                 }
             }
+            this.mediator.Project.CollectedData.SynchronizeDataTable(view);
         }
 
         private bool ValidateUser()
