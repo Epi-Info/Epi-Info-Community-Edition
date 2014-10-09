@@ -1980,7 +1980,6 @@ namespace Epi.Windows.MakeView.Forms
                         }
 
                     }
-                    }
                     else
                     {
                         View relatedView = this.mediator.ProjectExplorer.SelectedPage.GetView();
@@ -1995,7 +1994,8 @@ namespace Epi.Windows.MakeView.Forms
                         }
                     }
                 }
-                }           
+            }
+        }           
 
         private void worker1_DoWork(object sender, DoWorkEventArgs e)
         {
