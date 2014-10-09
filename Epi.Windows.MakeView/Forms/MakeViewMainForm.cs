@@ -1947,7 +1947,7 @@ namespace Epi.Windows.MakeView.Forms
                                 worker1.WorkerSupportsCancellation = true;
                                 worker1.DoWork += new DoWorkEventHandler(worker1_DoWork);
                                 worker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker1_RunWorkerCompleted);
-                                worker1.RunWorkerAsync();                              
+                                worker1.RunWorkerAsync();
                                 Application.DoEvents();
                                 View currentView = this.mediator.ProjectExplorer.SelectedPage.GetView();
                                 if (this.mediator.Project.CollectedData.TableExists(currentView.TableName))
@@ -1963,11 +1963,9 @@ namespace Epi.Windows.MakeView.Forms
                                 }
                             }
                             finally
-                            {                               
+                            {
                             }
-                                this.Dispose();
-                            }
-                            
+                            this.Dispose();
                         }
                     }
                     else
@@ -1983,7 +1981,8 @@ namespace Epi.Windows.MakeView.Forms
                             MsgBox.ShowInformation(string.Format(SharedStrings.CANNOT_OPEN_VIEW_RELATED));
                         }
                     }
-                }           
+                }
+            }           
         }
 
         private void worker1_DoWork(object sender, DoWorkEventArgs e)
