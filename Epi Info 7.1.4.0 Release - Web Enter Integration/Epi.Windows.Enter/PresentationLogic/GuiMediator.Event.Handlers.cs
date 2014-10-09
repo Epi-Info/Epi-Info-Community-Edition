@@ -692,7 +692,7 @@ namespace Epi.Windows.Enter.PresentationLogic
             if (string.IsNullOrEmpty(organizationKey) || string.IsNullOrEmpty(formId)) { return ""; }
 
             string statusMessage = "[record not sent to service]";
-            Guid responseId = new Guid();
+            Guid responseId = new Guid(globalRecordId);
 
             Dictionary<string, object> args = new Dictionary<string, object>();
             args.Add("FormId", formId);
