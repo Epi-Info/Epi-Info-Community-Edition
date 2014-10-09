@@ -163,6 +163,15 @@
   <wsdl:message name="IEWEManagerService_PingManagerService_CustomFaultExceptionFault_FaultMessage">
     <wsdl:part xmlns:q17="http://www.yourcompany.com/types/" name="detail" element="q17:CustomFaultException" />
   </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyAnswerStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyAnswerStatus" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyAnswerStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyAnswerStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyAnswerStatus_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q18="http://www.yourcompany.com/types/" name="detail" element="q18:CustomFaultException" />
+  </wsdl:message>
   <wsdl:portType name="IEWEManagerService">
     <wsdl:operation name="PublishSurvey">
       <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/PublishSurvey" message="tns:IEWEManagerService_PublishSurvey_InputMessage" />
@@ -248,6 +257,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/PingManagerService" message="tns:IEWEManagerService_PingManagerService_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/PingManagerServiceResponse" message="tns:IEWEManagerService_PingManagerService_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/PingManagerServiceCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_PingManagerService_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSurveyAnswerStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerStatus" message="tns:IEWEManagerService_SetSurveyAnswerStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerStatusResponse" message="tns:IEWEManagerService_SetSurveyAnswerStatus_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerStatusCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_SetSurveyAnswerStatus_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IEWEManagerService" type="tns:IEWEManagerService">
@@ -446,6 +460,18 @@
     </wsdl:operation>
     <wsdl:operation name="PingManagerService">
       <soap:operation soapAction="http://tempuri.org/IEWEManagerService/PingManagerService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetSurveyAnswerStatus">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/SetSurveyAnswerStatus" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

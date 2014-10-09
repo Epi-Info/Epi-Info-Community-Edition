@@ -197,12 +197,15 @@
           <xs:element minOccurs="0" name="DateCompleted" type="xs:dateTime" />
           <xs:element minOccurs="0" name="GetAllColumns" type="xs:boolean" />
           <xs:element minOccurs="0" name="IncludeOrderStatistics" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsDeleteMode" type="xs:boolean" />
           <xs:element minOccurs="0" name="IsEditMode" type="xs:boolean" />
           <xs:element minOccurs="0" name="IsMobile" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsSqlProject" type="xs:boolean" />
           <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
           <xs:element minOccurs="0" name="PageNumber" type="xs:int" />
           <xs:element minOccurs="0" name="PageSize" type="xs:int" />
           <xs:element minOccurs="0" name="ReturnSizeInfoOnly" type="xs:boolean" />
+          <xs:element minOccurs="0" name="SearchCriteria" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="SortOrder" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Sortfield" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="StatusId" type="xs:int" />
@@ -229,6 +232,7 @@
       <xs:element minOccurs="0" name="IsDraftMode" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsLocked" type="xs:boolean" />
       <xs:element minOccurs="0" name="ParentRecordId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RecordSourceId" type="xs:int" />
       <xs:element minOccurs="0" name="RelateParentId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ResponseHierarchyIds" nillable="true" type="tns:ArrayOfSurveyAnswerDTO" />
       <xs:element minOccurs="0" name="ResponseId" nillable="true" type="xs:string" />

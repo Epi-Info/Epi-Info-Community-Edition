@@ -237,4 +237,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SetSurveyAnswerStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://www.yourcompany.com/types/" minOccurs="0" name="pRequestMessage" nillable="true" type="q31:SurveyAnswerRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetSurveyAnswerStatusResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

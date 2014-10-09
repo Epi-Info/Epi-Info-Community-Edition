@@ -997,10 +997,16 @@ namespace Epi.EWEManagerService {
         private bool IncludeOrderStatisticsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsDeleteModeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsEditModeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsMobileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSqlProjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid OrganizationKeyField;
@@ -1013,6 +1019,9 @@ namespace Epi.EWEManagerService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool ReturnSizeInfoOnlyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SearchCriteriaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SortOrderField;
@@ -1075,6 +1084,19 @@ namespace Epi.EWEManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsDeleteMode {
+            get {
+                return this.IsDeleteModeField;
+            }
+            set {
+                if ((this.IsDeleteModeField.Equals(value) != true)) {
+                    this.IsDeleteModeField = value;
+                    this.RaisePropertyChanged("IsDeleteMode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsEditMode {
             get {
                 return this.IsEditModeField;
@@ -1096,6 +1118,19 @@ namespace Epi.EWEManagerService {
                 if ((this.IsMobileField.Equals(value) != true)) {
                     this.IsMobileField = value;
                     this.RaisePropertyChanged("IsMobile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSqlProject {
+            get {
+                return this.IsSqlProjectField;
+            }
+            set {
+                if ((this.IsSqlProjectField.Equals(value) != true)) {
+                    this.IsSqlProjectField = value;
+                    this.RaisePropertyChanged("IsSqlProject");
                 }
             }
         }
@@ -1148,6 +1183,19 @@ namespace Epi.EWEManagerService {
                 if ((this.ReturnSizeInfoOnlyField.Equals(value) != true)) {
                     this.ReturnSizeInfoOnlyField = value;
                     this.RaisePropertyChanged("ReturnSizeInfoOnly");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SearchCriteria {
+            get {
+                return this.SearchCriteriaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SearchCriteriaField, value) != true)) {
+                    this.SearchCriteriaField = value;
+                    this.RaisePropertyChanged("SearchCriteria");
                 }
             }
         }
@@ -1584,6 +1632,9 @@ namespace Epi.EWEManagerService {
         private string ParentRecordIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RecordSourceIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RelateParentIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1697,6 +1748,19 @@ namespace Epi.EWEManagerService {
                 if ((object.ReferenceEquals(this.ParentRecordIdField, value) != true)) {
                     this.ParentRecordIdField = value;
                     this.RaisePropertyChanged("ParentRecordId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int RecordSourceId {
+            get {
+                return this.RecordSourceIdField;
+            }
+            set {
+                if ((this.RecordSourceIdField.Equals(value) != true)) {
+                    this.RecordSourceIdField = value;
+                    this.RaisePropertyChanged("RecordSourceId");
                 }
             }
         }
@@ -3035,6 +3099,11 @@ namespace Epi.EWEManagerService {
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.EWEManagerService.CustomFaultException), Action="http://tempuri.org/IEWEManagerService/PingManagerServiceCustomFaultExceptionFault" +
             "", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         bool PingManagerService();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerStatus", ReplyAction="http://tempuri.org/IEWEManagerService/SetSurveyAnswerStatusResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.EWEManagerService.CustomFaultException), Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerStatusCustomFaultExceptionFa" +
+            "ult", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        void SetSurveyAnswerStatus(Epi.EWEManagerService.SurveyAnswerRequest pRequestMessage);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3130,6 +3199,10 @@ namespace Epi.EWEManagerService {
         
         public bool PingManagerService() {
             return base.Channel.PingManagerService();
+        }
+        
+        public void SetSurveyAnswerStatus(Epi.EWEManagerService.SurveyAnswerRequest pRequestMessage) {
+            base.Channel.SetSurveyAnswerStatus(pRequestMessage);
         }
     }
 }
