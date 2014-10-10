@@ -681,7 +681,14 @@ namespace Epi.Data.Services
                     }
                     else if ((dataField is UniqueKeyField) == false && (dataField is RecStatusField) == false && (dataField is ForeignKeyField) == false)
                     {
-                        responseDictionary.Add(((Epi.INamedObject)dataField).Name, dataField.CurrentRecordValueObject.ToString());
+                        string value = string.Empty;
+
+                        if (dataField.CurrentRecordValueObject != null)
+                        {
+                            value = dataField.CurrentRecordValueObject.ToString();
+                        }
+                        
+                        responseDictionary.Add(((Epi.INamedObject)dataField).Name, value);
                     }
                 }
 
