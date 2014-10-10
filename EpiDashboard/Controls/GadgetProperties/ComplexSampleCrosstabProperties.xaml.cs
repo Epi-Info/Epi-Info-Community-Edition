@@ -55,7 +55,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         public ComplexSampleCrosstabProperties(
             DashboardHelper dashboardHelper, 
             IGadget gadget, 
-            CrosstabParameters parameters, 
+            ComplexSampleCrosstabParameters parameters, 
             List<Grid> strataGridList
             )
         {
@@ -139,6 +139,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             cbxOutcomeField.ItemsSource = fields;
             cbxFieldWeight.ItemsSource = weightFields;
             cbxFieldStrata.ItemsSource = strataItems;
+            cbxFieldPSU.ItemsSource = strataItems;
 
             if (cbxExposureField.Items.Count > 0)
             {
@@ -155,7 +156,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
             view.GroupDescriptions.Add(groupDescription);
 
-            RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as CrosstabControl).DataFilters, true);
+            RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as ComplexSampleTablesControl).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
         }
@@ -172,7 +173,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
         }
 
-        public CrosstabParameters Parameters { get; private set; }
+        public ComplexSampleCrosstabParameters Parameters { get; private set; }
         private List<Grid> StrataGridList { get; set; }
 
         /// <summary>
@@ -189,8 +190,14 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.ColumnNames = new List<string>();
             Parameters.StrataVariableNames = new List<string>();
 
-            if (cbxExposureField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString()))
+            if (cbxExposureField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString())
+                &&
+                cbxFieldPSU.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldPSU.SelectedItem.ToString())
+                &&
+                cbxOutcomeField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxOutcomeField.SelectedItem.ToString())
+                )
             {
+                inputVariableList.Add("EXPOSURE_VARIABLE", cbxExposureField.SelectedItem.ToString());
                 if (Parameters.ColumnNames.Count > 0)
                 {
                     Parameters.ColumnNames[0] = cbxExposureField.SelectedItem.ToString();
@@ -198,15 +205,10 @@ namespace EpiDashboard.Controls.GadgetProperties
                 else
                 {
                     Parameters.ColumnNames.Add(cbxExposureField.SelectedItem.ToString());
-                }
-            }
-            else
-            {
-                return;
-            }
-
-            if (cbxOutcomeField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxOutcomeField.SelectedItem.ToString()))
-            {
+                } 
+                inputVariableList.Add("PSUVar", cbxFieldPSU.SelectedItem.ToString());
+                Parameters.PSUVariableName = cbxFieldPSU.SelectedItem.ToString();
+                inputVariableList.Add("OUTCOME_VARIABLE", cbxOutcomeField.SelectedItem.ToString());
                 Parameters.CrosstabVariableName = cbxOutcomeField.SelectedItem.ToString();
             }
             else
@@ -216,11 +218,13 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
             {
+                inputVariableList.Add("WeightVar", cbxFieldWeight.SelectedItem.ToString());
                 Parameters.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
             }
             else
             {
                 Parameters.WeightVariableName = String.Empty;
+                inputVariableList.Add("WeightVar", String.Empty);
             }
 
             if (cbxFieldStrata.SelectedIndex > -1)
@@ -234,6 +238,15 @@ namespace EpiDashboard.Controls.GadgetProperties
                     Parameters.StrataVariableNames.Add(cbxFieldStrata.SelectedItem.ToString());
                 }
             }
+
+            if (cbxFieldStrata.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldStrata.SelectedItem.ToString()))
+            {
+                inputVariableList.Add("StratvarList", cbxFieldStrata.SelectedItem.ToString());
+                Parameters.StrataVariableNames = new List<string>();
+                Parameters.StrataVariableNames.Add(cbxFieldStrata.SelectedItem.ToString());
+            }
+            Parameters.IncludeFullSummaryStatistics = false;
+            Parameters.InputVariableList = inputVariableList;
 
             //2x2 Value mapping settings
             if (lbxYesValues.Items.Count > 0)
@@ -260,15 +273,16 @@ namespace EpiDashboard.Controls.GadgetProperties
             //Display settings
             Parameters.GadgetTitle = txtTitle.Text;
             Parameters.GadgetDescription = txtDesc.Text;
+
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             this.DashboardHelper = DashboardHelper;
-            CrosstabParameters crosstabParameters = (CrosstabParameters)Parameters;
+            ComplexSampleCrosstabParameters crosstabParameters = (ComplexSampleCrosstabParameters)Parameters;
 
-            rctLowColor.Fill = crosstabParameters.LoColorFill;
-            rctHighColor.Fill = crosstabParameters.HiColorFill;
+            //rctLowColor.Fill = crosstabParameters.LoColorFill;
+            //rctHighColor.Fill = crosstabParameters.HiColorFill;
 
             //Variables settings
             if (Parameters.ColumnNames.Count > 0)
@@ -276,6 +290,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 cbxExposureField.SelectedItem = Parameters.ColumnNames[0];
             }
             cbxOutcomeField.SelectedItem = Parameters.CrosstabVariableName;
+            cbxFieldPSU.SelectedItem = Parameters.PSUVariableName; 
             cbxFieldWeight.SelectedItem = Parameters.WeightVariableName;
             if (Parameters.StrataVariableNames.Count > 0)
             {

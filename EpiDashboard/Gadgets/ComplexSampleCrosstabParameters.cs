@@ -27,7 +27,7 @@ namespace EpiDashboard
         public string Break3 { get; set; }
         public string Break4 { get; set; }
         public string Break5 { get; set; }
-        
+        public string PSUVariableName { get; set; }
 
         //public FrequencyParametersBase fpbParameters { get; set; }
         //public GadgetParametersBase gpbParameters { get; set; }
@@ -35,7 +35,7 @@ namespace EpiDashboard
         public ComplexSampleCrosstabParameters()
             : base()
         {
-            GadgetTitle = "Crosstabulation (MxN, 2x2)";
+            GadgetTitle = "Complex Sample Tables";
             TreatOutcomeAsContinuous = false;
             StrataSummaryOnly = false;
             SmartTable = true;
@@ -52,7 +52,8 @@ namespace EpiDashboard
             Break2 = "20";
             Break3 = "40";
             Break4 = "60";
-            Break5 = "80"; 
+            Break5 = "80";
+            PSUVariableName = string.Empty;
         }
 
         /// <summary>
@@ -61,6 +62,7 @@ namespace EpiDashboard
         public ComplexSampleCrosstabParameters(ComplexSampleCrosstabParameters parameters)
             : base(parameters)
         {
+            GadgetTitle = parameters.GadgetTitle;
             TreatOutcomeAsContinuous = parameters.TreatOutcomeAsContinuous;
             StrataSummaryOnly = parameters.StrataSummaryOnly;
             SmartTable = parameters.SmartTable;
@@ -86,6 +88,7 @@ namespace EpiDashboard
             Break3 = parameters.Break3;
             Break4 = parameters.Break4;
             Break5 = parameters.Break5;
+            PSUVariableName = parameters.PSUVariableName;
         }
     }
 }

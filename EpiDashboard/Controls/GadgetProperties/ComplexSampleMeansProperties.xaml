@@ -16,9 +16,9 @@
     </PropertyPanels:GadgetPropertiesPanelBase.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="400" Width=".33*" />
+            <ColumnDefinition MinWidth="400" Width=".40*" />
             <ColumnDefinition Width="30" />
-            <ColumnDefinition Width=".66*" />
+            <ColumnDefinition Width=".60*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -36,7 +36,7 @@
 
         </StackPanel>
 
-        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
 
             <Label>Means of:</Label>
@@ -98,7 +98,7 @@
             </ScrollViewer>
         </StackPanel>
 
-        <StackPanel x:Name="panelDisplay" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Visible">
+        <StackPanel x:Name="panelDisplay" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
 
             <ScrollViewer x:Name="scrollViewerDisplay" Height="480">
