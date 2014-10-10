@@ -24,7 +24,8 @@ namespace EpiDashboard.Controls.GadgetProperties
         public ComplexSampleMeansProperties(
             DashboardHelper dashboardHelper, 
             IGadget gadget,
-            MeansParameters parameters
+            ComplexSampleMeansParameters parameters,
+            List<Grid> strataGridList
             )
         {
             InitializeComponent();
@@ -65,12 +66,13 @@ namespace EpiDashboard.Controls.GadgetProperties
             cbxFieldWeight.ItemsSource = fields;
             cbxFieldCrosstab.ItemsSource = crosstabFields;
             cbxFieldStrata.ItemsSource = strataFields;
+            cbxFieldPSU.ItemsSource = strataFields;
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cbxField.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
             view.GroupDescriptions.Add(groupDescription);
 
-            RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as MeansControl).DataFilters, true);
+            RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as ComplexSampleMeansControl).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
         }
@@ -91,7 +93,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
         }
 
-        public MeansParameters Parameters { get; private set; }
+        public ComplexSampleMeansParameters Parameters { get; private set; }
 
         /// <summary>
         /// Used to generate the list of variables and options for the GadgetParameters object
@@ -103,7 +105,6 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
             Parameters.ColumnNames = new List<string>();
-
             Parameters.SortVariables = new Dictionary<string, SortOrder>();
 
             Parameters.GadgetTitle = txtTitle.Text;
@@ -113,8 +114,10 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             Parameters.InputVariableList = inputVariableList;
 
-            if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
+            if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()) &&
+                cbxFieldPSU.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldPSU.SelectedItem.ToString()))
             {
+                inputVariableList.Add("Identifier", cbxField.SelectedItem.ToString());
                 if (Parameters.ColumnNames.Count > 0)
                 {
                     Parameters.ColumnNames[0] = cbxField.SelectedItem.ToString();
@@ -123,6 +126,8 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     Parameters.ColumnNames.Add(cbxField.SelectedItem.ToString());
                 }
+                inputVariableList.Add("PSUVar", cbxFieldPSU.SelectedItem.ToString());
+                Parameters.PSUVariableName = cbxFieldPSU.SelectedItem.ToString();
             }
             else
             {
@@ -131,6 +136,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
             {
+                inputVariableList.Add("WeightVar", cbxFieldWeight.SelectedItem.ToString());
                 Parameters.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
             }
 
@@ -143,12 +149,16 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             if (cbxFieldCrosstab.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldCrosstab.SelectedItem.ToString()))
             {
+                inputVariableList.Add("Cross_Tabulation_Variable", cbxFieldCrosstab.SelectedItem.ToString());
                 Parameters.CrosstabVariableName = cbxFieldCrosstab.SelectedItem.ToString();
             }
             else
             {
                 Parameters.CrosstabVariableName = String.Empty;
+                inputVariableList.Add("Cross_Tabulation_Variable", String.Empty);
             }
+
+            Parameters.InputVariableList = inputVariableList;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -163,7 +173,13 @@ namespace EpiDashboard.Controls.GadgetProperties
                 cbxField.SelectedItem = Parameters.ColumnNames[0];
             }
             cbxFieldWeight.SelectedItem = Parameters.WeightVariableName;
+            cbxFieldPSU.SelectedItem = Parameters.PSUVariableName; 
             cbxFieldCrosstab.SelectedItem = Parameters.CrosstabVariableName;
+            if (Parameters.StrataVariableNames.Count > 0)
+            {
+                cbxFieldStrata.SelectedItem = Parameters.StrataVariableNames[0].ToString();
+            }
+
             scrollViewerDisplay.Height = scrollViewerDisplay.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
         }
 

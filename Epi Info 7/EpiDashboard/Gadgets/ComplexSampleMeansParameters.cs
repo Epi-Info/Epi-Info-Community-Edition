@@ -11,12 +11,24 @@ namespace EpiDashboard
     {
         public bool ShowANOVA { get; set; }
         public List<int> columnsToHide;
+        public string PSUVariableName { get; set; }
 
         public ComplexSampleMeansParameters()
             : base()
         {
+            GadgetTitle = "Complex Sample Means";
             ShowANOVA = true;
             columnsToHide = new List<int>();
+            PSUVariableName = string.Empty;
+        }
+
+        public ComplexSampleMeansParameters(ComplexSampleMeansParameters parameters)
+            : base(parameters)
+        {
+            GadgetTitle = parameters.GadgetTitle;
+            ShowANOVA = parameters.ShowANOVA;
+            columnsToHide = parameters.columnsToHide;
+            PSUVariableName = parameters.PSUVariableName;
         }
     }
 }

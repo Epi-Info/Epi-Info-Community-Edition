@@ -21,6 +21,7 @@ namespace EpiDashboard
         public bool Show95CILowerCol { get; set; }
         public bool Show95CIUpperCol { get; set; }
         public bool ShowPercentBarsCol { get; set; }
+        public string PSUVariableName { get; set; }
 
         public ComplexSampleFrequencyParameters()
             : base()
@@ -38,13 +39,14 @@ namespace EpiDashboard
             Show95CIUpperCol = true;
             ShowPercentBarsCol = true;
             IncludeFullSummaryStatistics = false;
-            GadgetTitle = "Frequency";
+            GadgetTitle = "Complex Sample Frequency";
+            PSUVariableName = string.Empty;
         }
 
         /// <summary>
         /// Copy Constructor
         /// </summary>
-        public ComplexSampleFrequencyParameters(FrequencyParameters parameters)
+        public ComplexSampleFrequencyParameters(ComplexSampleFrequencyParameters parameters)
             : base()
         {
             GadgetTitle = parameters.GadgetTitle;
@@ -71,6 +73,7 @@ namespace EpiDashboard
             Show95CIUpperCol = parameters.Show95CIUpperCol;
             ShowPercentBarsCol = parameters.ShowPercentBarsCol;
             IncludeFullSummaryStatistics = parameters.IncludeFullSummaryStatistics;
+            PSUVariableName = parameters.PSUVariableName;
         }
     }
 }

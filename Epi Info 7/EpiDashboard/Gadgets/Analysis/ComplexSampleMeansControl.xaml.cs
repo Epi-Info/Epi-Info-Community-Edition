@@ -159,121 +159,121 @@ namespace EpiDashboard
         /// </summary>
         private void FillComboboxes(bool update = false)
         {
-            LoadingCombos = true;
+            //LoadingCombos = true;
 
-            string prevField = string.Empty;
-            string prevWeightField = string.Empty;
-            string prevStrataField = string.Empty;
-            string prevPSUField = string.Empty;
-            string prevCrosstabField = string.Empty;
+            //string prevField = string.Empty;
+            //string prevWeightField = string.Empty;
+            //string prevStrataField = string.Empty;
+            //string prevPSUField = string.Empty;
+            //string prevCrosstabField = string.Empty;
 
-            if (update)
-            {
-                if (cbxField.SelectedIndex >= 0)
-                {
-                    prevField = cbxField.SelectedItem.ToString();
-                }
-                if (cbxFieldWeight.SelectedIndex >= 0)
-                {
-                    prevWeightField = cbxFieldWeight.SelectedItem.ToString();
-                }
-                if (cbxFieldStrata.SelectedIndex >= 0)
-                {
-                    prevStrataField = cbxFieldStrata.SelectedItem.ToString();
-                }
-                if (cbxFieldPSU.SelectedIndex >= 0)
-                {
-                    prevPSUField = cbxFieldPSU.SelectedItem.ToString();
-                }
-                if (cbxFieldCrosstab.SelectedIndex >= 0)
-                {
-                    prevCrosstabField = cbxFieldCrosstab.SelectedItem.ToString();
-                }
-            }
+            //if (update)
+            //{
+            //    if (cbxField.SelectedIndex >= 0)
+            //    {
+            //        prevField = cbxField.SelectedItem.ToString();
+            //    }
+            //    if (cbxFieldWeight.SelectedIndex >= 0)
+            //    {
+            //        prevWeightField = cbxFieldWeight.SelectedItem.ToString();
+            //    }
+            //    if (cbxFieldStrata.SelectedIndex >= 0)
+            //    {
+            //        prevStrataField = cbxFieldStrata.SelectedItem.ToString();
+            //    }
+            //    if (cbxFieldPSU.SelectedIndex >= 0)
+            //    {
+            //        prevPSUField = cbxFieldPSU.SelectedItem.ToString();
+            //    }
+            //    if (cbxFieldCrosstab.SelectedIndex >= 0)
+            //    {
+            //        prevCrosstabField = cbxFieldCrosstab.SelectedItem.ToString();
+            //    }
+            //}
 
-            cbxField.ItemsSource = null;
-            cbxField.Items.Clear();
+            //cbxField.ItemsSource = null;
+            //cbxField.Items.Clear();
 
-            cbxFieldWeight.ItemsSource = null;
-            cbxFieldWeight.Items.Clear();
+            //cbxFieldWeight.ItemsSource = null;
+            //cbxFieldWeight.Items.Clear();
 
-            cbxFieldStrata.ItemsSource = null;
-            cbxFieldStrata.Items.Clear();
+            //cbxFieldStrata.ItemsSource = null;
+            //cbxFieldStrata.Items.Clear();
 
-            cbxFieldPSU.ItemsSource = null;
-            cbxFieldPSU.Items.Clear();
+            //cbxFieldPSU.ItemsSource = null;
+            //cbxFieldPSU.Items.Clear();
 
-            cbxFieldCrosstab.ItemsSource = null;
-            cbxFieldCrosstab.Items.Clear();
+            //cbxFieldCrosstab.ItemsSource = null;
+            //cbxFieldCrosstab.Items.Clear();
 
-            List<string> fieldNames = new List<string>();
-            List<string> weightFieldNames = new List<string>();
-            List<string> strataFieldNames = new List<string>();
+            //List<string> fieldNames = new List<string>();
+            //List<string> weightFieldNames = new List<string>();
+            //List<string> strataFieldNames = new List<string>();
 
-            weightFieldNames.Add(string.Empty);
-            strataFieldNames.Add(string.Empty);
+            //weightFieldNames.Add(string.Empty);
+            //strataFieldNames.Add(string.Empty);
 
-            ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined | ColumnDataType.UserDefined;
-            fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
+            //ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined | ColumnDataType.UserDefined;
+            //fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
 
-            columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
-            weightFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
+            //columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
+            //weightFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
 
-            columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
-            strataFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
+            //columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
+            //strataFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
 
-            fieldNames.Sort();
-            weightFieldNames.Sort();
-            strataFieldNames.Sort();
+            //fieldNames.Sort();
+            //weightFieldNames.Sort();
+            //strataFieldNames.Sort();
 
-            if (fieldNames.Contains("SYSTEMDATE"))
-            {
-                fieldNames.Remove("SYSTEMDATE");
-            }
+            //if (fieldNames.Contains("SYSTEMDATE"))
+            //{
+            //    fieldNames.Remove("SYSTEMDATE");
+            //}
 
-            if (DashboardHelper.IsUsingEpiProject)
-            {
-                if (fieldNames.Contains("RecStatus")) fieldNames.Remove("RecStatus");
-                if (weightFieldNames.Contains("RecStatus")) weightFieldNames.Remove("RecStatus");
+            //if (DashboardHelper.IsUsingEpiProject)
+            //{
+            //    if (fieldNames.Contains("RecStatus")) fieldNames.Remove("RecStatus");
+            //    if (weightFieldNames.Contains("RecStatus")) weightFieldNames.Remove("RecStatus");
 
-                if (strataFieldNames.Contains("RecStatus")) strataFieldNames.Remove("RecStatus");
-                if (strataFieldNames.Contains("FKEY")) strataFieldNames.Remove("FKEY");
-                if (strataFieldNames.Contains("GlobalRecordId")) strataFieldNames.Remove("GlobalRecordId");
-            }
+            //    if (strataFieldNames.Contains("RecStatus")) strataFieldNames.Remove("RecStatus");
+            //    if (strataFieldNames.Contains("FKEY")) strataFieldNames.Remove("FKEY");
+            //    if (strataFieldNames.Contains("GlobalRecordId")) strataFieldNames.Remove("GlobalRecordId");
+            //}
 
-            cbxField.ItemsSource = fieldNames;
-            cbxFieldWeight.ItemsSource = weightFieldNames;
-            cbxFieldStrata.ItemsSource = strataFieldNames;
-            cbxFieldPSU.ItemsSource = strataFieldNames;
-            cbxFieldCrosstab.ItemsSource = strataFieldNames;
+            //cbxField.ItemsSource = fieldNames;
+            //cbxFieldWeight.ItemsSource = weightFieldNames;
+            //cbxFieldStrata.ItemsSource = strataFieldNames;
+            //cbxFieldPSU.ItemsSource = strataFieldNames;
+            //cbxFieldCrosstab.ItemsSource = strataFieldNames;
 
-            if (cbxField.Items.Count > 0)
-            {
-                cbxField.SelectedIndex = -1;
-            }
-            if (cbxFieldWeight.Items.Count > 0)
-            {
-                cbxFieldWeight.SelectedIndex = -1;
-            }
-            if (cbxFieldStrata.Items.Count > 0)
-            {
-                cbxFieldStrata.SelectedIndex = -1;
-            }
-            if (cbxFieldCrosstab.Items.Count > 0)
-            {
-                cbxFieldCrosstab.SelectedIndex = -1;
-            }
+            //if (cbxField.Items.Count > 0)
+            //{
+            //    cbxField.SelectedIndex = -1;
+            //}
+            //if (cbxFieldWeight.Items.Count > 0)
+            //{
+            //    cbxFieldWeight.SelectedIndex = -1;
+            //}
+            //if (cbxFieldStrata.Items.Count > 0)
+            //{
+            //    cbxFieldStrata.SelectedIndex = -1;
+            //}
+            //if (cbxFieldCrosstab.Items.Count > 0)
+            //{
+            //    cbxFieldCrosstab.SelectedIndex = -1;
+            //}
 
-            if (update)
-            {
-                cbxField.SelectedItem = prevField;
-                cbxFieldWeight.SelectedItem = prevWeightField;
-                cbxFieldStrata.SelectedItem = prevStrataField;
-                cbxFieldPSU.SelectedItem = prevPSUField;
-                cbxFieldCrosstab.SelectedItem = prevCrosstabField;
-            }
+            //if (update)
+            //{
+            //    cbxField.SelectedItem = prevField;
+            //    cbxFieldWeight.SelectedItem = prevWeightField;
+            //    cbxFieldStrata.SelectedItem = prevStrataField;
+            //    cbxFieldPSU.SelectedItem = prevPSUField;
+            //    cbxFieldCrosstab.SelectedItem = prevCrosstabField;
+            //}
 
-            LoadingCombos = false;
+            //LoadingCombos = false;
         }
 
         /// <summary>
@@ -346,48 +346,48 @@ namespace EpiDashboard
         /// </summary> 
         private void CreateInputVariableList()
         {
-            Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
+            //Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
 
-            GadgetOptions.MainVariableName = string.Empty;
-            GadgetOptions.WeightVariableName = string.Empty;
-            GadgetOptions.StrataVariableNames = new List<string>();
-            GadgetOptions.CrosstabVariableName = string.Empty;
-            GadgetOptions.PSUVariableName = string.Empty;
-            GadgetOptions.ColumnNames = new List<string>();
+            //GadgetOptions.MainVariableName = string.Empty;
+            //GadgetOptions.WeightVariableName = string.Empty;
+            //GadgetOptions.StrataVariableNames = new List<string>();
+            //GadgetOptions.CrosstabVariableName = string.Empty;
+            //GadgetOptions.PSUVariableName = string.Empty;
+            //GadgetOptions.ColumnNames = new List<string>();
 
-            if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString())
-                &&
-                cbxFieldPSU.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldPSU.SelectedItem.ToString()))
-            {
-                inputVariableList.Add("Numeric_Variable", cbxField.SelectedItem.ToString());
-                GadgetOptions.MainVariableName = cbxField.SelectedItem.ToString();
-                inputVariableList.Add("PSUVar", cbxFieldPSU.SelectedItem.ToString());
-                GadgetOptions.PSUVariableName = cbxFieldPSU.SelectedItem.ToString();                
-            }
-            else
-            {
-                return;
-            }
+            //if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString())
+            //    &&
+            //    cbxFieldPSU.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldPSU.SelectedItem.ToString()))
+            //{
+            //    inputVariableList.Add("Numeric_Variable", cbxField.SelectedItem.ToString());
+            //    GadgetOptions.MainVariableName = cbxField.SelectedItem.ToString();
+            //    inputVariableList.Add("PSUVar", cbxFieldPSU.SelectedItem.ToString());
+            //    GadgetOptions.PSUVariableName = cbxFieldPSU.SelectedItem.ToString();                
+            //}
+            //else
+            //{
+            //    return;
+            //}
 
-            if (cbxFieldCrosstab.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldCrosstab.SelectedItem.ToString()))
-            {
-                inputVariableList.Add("Cross_Tabulation_Variable", cbxFieldCrosstab.SelectedItem.ToString());
-                GadgetOptions.CrosstabVariableName = cbxFieldCrosstab.SelectedItem.ToString();
-            }
+            //if (cbxFieldCrosstab.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldCrosstab.SelectedItem.ToString()))
+            //{
+            //    inputVariableList.Add("Cross_Tabulation_Variable", cbxFieldCrosstab.SelectedItem.ToString());
+            //    GadgetOptions.CrosstabVariableName = cbxFieldCrosstab.SelectedItem.ToString();
+            //}
 
-            if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
-            {
-                inputVariableList.Add("WeightVar", cbxFieldWeight.SelectedItem.ToString());
-                GadgetOptions.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
-            }
-            if (cbxFieldStrata.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldStrata.SelectedItem.ToString()))
-            {
-                inputVariableList.Add("StratvarList", cbxFieldStrata.SelectedItem.ToString());
-                GadgetOptions.StrataVariableNames = new List<string>();
-                GadgetOptions.StrataVariableNames.Add(cbxFieldStrata.SelectedItem.ToString());
-            }
-            GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
-            GadgetOptions.InputVariableList = inputVariableList;
+            //if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
+            //{
+            //    inputVariableList.Add("WeightVar", cbxFieldWeight.SelectedItem.ToString());
+            //    GadgetOptions.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
+            //}
+            //if (cbxFieldStrata.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldStrata.SelectedItem.ToString()))
+            //{
+            //    inputVariableList.Add("StratvarList", cbxFieldStrata.SelectedItem.ToString());
+            //    GadgetOptions.StrataVariableNames = new List<string>();
+            //    GadgetOptions.StrataVariableNames.Add(cbxFieldStrata.SelectedItem.ToString());
+            //}
+            //GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
+            //GadgetOptions.InputVariableList = inputVariableList;
         }
 
         /// <summary>
@@ -395,6 +395,7 @@ namespace EpiDashboard
         /// </summary>        
         protected override void Construct()
         {
+            this.Parameters = new ComplexSampleMeansParameters();
             if (!string.IsNullOrEmpty(CustomOutputHeading) && !CustomOutputHeading.Equals("(none)"))
             {
                 headerPanel.Text = CustomOutputHeading;
@@ -568,8 +569,7 @@ namespace EpiDashboard
             this.panelMain.Children.Clear();
 
             base.CloseGadget();
-
-            GadgetOptions = null;
+            
         }
 
         /// <summary>
@@ -661,7 +661,7 @@ namespace EpiDashboard
         /// <returns>string</returns>
         public override string ToString()
         {
-            return "Complex Sample Frequency Gadget";
+            return "Complex Sample Means Gadget";
         }
         #endregion
 
@@ -678,8 +678,9 @@ namespace EpiDashboard
 
         private void AddComplexSampleMeansGrid(StatisticsRepository.ComplexSampleMeans.CSMeansResults results) 
         {
+            ComplexSampleMeansParameters csmeansParameters = (ComplexSampleMeansParameters)Parameters;
             Grid grid = new Grid();
-            grid.Tag = GadgetOptions.MainVariableName;
+            grid.Tag = csmeansParameters.ColumnNames[0];
             grid.Style = this.Resources["genericOutputGrid"] as Style;
             grid.Margin = (Thickness)this.Resources["genericElementMargin"];
             grid.Visibility = System.Windows.Visibility.Collapsed;
@@ -711,7 +712,7 @@ namespace EpiDashboard
             grid.Children.Add(rctHeader);
 
             TextBlock txtValHeader = new TextBlock();
-            txtValHeader.Text = GadgetOptions.MainVariableName;
+            txtValHeader.Text = csmeansParameters.ColumnNames[0];
             txtValHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtValHeader, 0);
             Grid.SetColumn(txtValHeader, 1);
@@ -719,7 +720,7 @@ namespace EpiDashboard
             grid.Children.Add(txtValHeader);
 
             TextBlock txtCrosstabHeader = new TextBlock();
-            txtCrosstabHeader.Text = GadgetOptions.CrosstabVariableName;
+            txtCrosstabHeader.Text = csmeansParameters.CrosstabVariableName;
             txtCrosstabHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtCrosstabHeader, 1);
             Grid.SetRowSpan(txtCrosstabHeader, 2);
@@ -938,27 +939,47 @@ namespace EpiDashboard
         {
             lock (syncLock)
             {
-                Dictionary<string, string> inputVariableList = ((GadgetParameters)e.Argument).InputVariableList;
-            
+                ComplexSampleMeansParameters csmeansParameters = (ComplexSampleMeansParameters)Parameters;
+                Dictionary<string, string> inputVariableList = csmeansParameters.InputVariableList;
                 this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToProcessingState));                
                 this.Dispatcher.BeginInvoke(new SimpleCallback(ClearResults));
                 CreateComplexSampleMeansGridDelegate createGrid = new CreateComplexSampleMeansGridDelegate(AddComplexSampleMeansGrid);
 
-                string freqVar = GadgetOptions.MainVariableName;
-                string weightVar = GadgetOptions.WeightVariableName;
-                string strataVar = string.Empty;                
-                bool includeMissing = GadgetOptions.ShouldIncludeMissing;
+                //string freqVar = GadgetOptions.MainVariableName;
+                //string weightVar = GadgetOptions.WeightVariableName;
+                //string strataVar = string.Empty;                
+                //bool includeMissing = GadgetOptions.ShouldIncludeMissing;
                 
-                if (inputVariableList.ContainsKey("stratavar"))
+                //if (inputVariableList.ContainsKey("stratavar"))
+                //{
+                //    strataVar = inputVariableList["stratavar"];
+                //}
+                
+                //List<string> stratas = new List<string>();
+                //if (!string.IsNullOrEmpty(strataVar))
+                //{
+                //    stratas.Add(strataVar);
+                //}
+                string freqVar = string.Empty;
+                if (!String.IsNullOrEmpty(csmeansParameters.ColumnNames[0]))
                 {
-                    strataVar = inputVariableList["stratavar"];
+                    freqVar = csmeansParameters.ColumnNames[0];
                 }
-                
+                string weightVar = csmeansParameters.WeightVariableName;
+                string strataVar = string.Empty;
+                bool includeMissing = false;
+
+                if (csmeansParameters.StrataVariableNames.Count > 0 && !String.IsNullOrEmpty(csmeansParameters.StrataVariableNames[0]))
+                {
+                    strataVar = csmeansParameters.StrataVariableNames[0];
+                }
+
                 List<string> stratas = new List<string>();
                 if (!string.IsNullOrEmpty(strataVar))
                 {
                     stratas.Add(strataVar);
                 }
+
 
                 try
                 {
@@ -969,35 +990,35 @@ namespace EpiDashboard
                     RequestUpdateStatusDelegate requestUpdateStatus = new RequestUpdateStatusDelegate(RequestUpdateStatusMessage);
                     CheckForCancellationDelegate checkForCancellation = new CheckForCancellationDelegate(IsCancelled);
 
-                    GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
-                    GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
+                    csmeansParameters.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
+                    csmeansParameters.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
 
                     if (this.DataFilters != null && this.DataFilters.Count > 0)
                     {
-                        GadgetOptions.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
+                        csmeansParameters.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
                     }
                     else
                     {
-                        GadgetOptions.CustomFilter = string.Empty;
+                        csmeansParameters.CustomFilter = string.Empty;
                     }
 
                     List<string> columnNames = new List<string>();
-                    columnNames.Add(GadgetOptions.MainVariableName);
-                    columnNames.Add(GadgetOptions.PSUVariableName);
-                    if(GadgetOptions.StrataVariableNames != null && GadgetOptions.StrataVariableNames.Count == 1 && !string.IsNullOrEmpty(GadgetOptions.StrataVariableNames[0])) 
+                    columnNames.Add(csmeansParameters.ColumnNames[0]);
+                    columnNames.Add(csmeansParameters.PSUVariableName);
+                    if (csmeansParameters.StrataVariableNames != null && csmeansParameters.StrataVariableNames.Count == 1 && !string.IsNullOrEmpty(csmeansParameters.StrataVariableNames[0])) 
                     {
-                        columnNames.Add(GadgetOptions.StrataVariableNames[0]);
+                        columnNames.Add(csmeansParameters.StrataVariableNames[0]);
                     }
-                    if(!string.IsNullOrEmpty(GadgetOptions.WeightVariableName)) 
+                    if (!string.IsNullOrEmpty(csmeansParameters.WeightVariableName)) 
                     {
-                        columnNames.Add(GadgetOptions.WeightVariableName);
+                        columnNames.Add(csmeansParameters.WeightVariableName);
                     }
-                    if (!string.IsNullOrEmpty(GadgetOptions.CrosstabVariableName))
+                    if (!string.IsNullOrEmpty(csmeansParameters.CrosstabVariableName))
                     {
-                        columnNames.Add(GadgetOptions.CrosstabVariableName);
+                        columnNames.Add(csmeansParameters.CrosstabVariableName);
                     }
 
-                    DataTable csTable = DashboardHelper.GenerateTable(columnNames, GadgetOptions.CustomFilter);
+                    DataTable csTable = DashboardHelper.GenerateTable(columnNames, csmeansParameters.CustomFilter);
 
                     if (csTable == null || csTable.Rows.Count == 0)
                     {
@@ -1017,7 +1038,7 @@ namespace EpiDashboard
                         {
                             // Complex sample frequency actually uses the CS Tables class.
                             StatisticsRepository.ComplexSampleMeans csMeans = new StatisticsRepository.ComplexSampleMeans();
-                            StatisticsRepository.ComplexSampleMeans.CSMeansResults results = csMeans.ComplexSampleMeans(GadgetOptions.InputVariableList, csTable);
+                            StatisticsRepository.ComplexSampleMeans.CSMeansResults results = csMeans.ComplexSampleMeans(csmeansParameters.InputVariableList, csTable);
 
                             if (!string.IsNullOrEmpty(results.ErrorMessage))
                             {
@@ -1047,6 +1068,64 @@ namespace EpiDashboard
                 }
             }
         }
+
+        /// <summary>
+        /// Shows the Properties Panel for the gadget to set its options and parameters.
+        /// </summary>
+        public override void ShowHideConfigPanel()
+        {
+            Popup = new DashboardPopup();
+            Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
+            Controls.GadgetProperties.ComplexSampleMeansProperties properties = new Controls.GadgetProperties.ComplexSampleMeansProperties(this.DashboardHelper, this, (ComplexSampleMeansParameters)Parameters, StrataGridList);
+
+            properties.Width = 800;
+            properties.Height = 600;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            {
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            {
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            properties.Cancelled += new EventHandler(properties_Cancelled);
+            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            Popup.Content = properties;
+            Popup.Show();
+        }
+
+        /// <summary>
+        /// Accepts changes to the Properties panel and refreshes the results.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void properties_ChangesAccepted(object sender, EventArgs e)
+        {
+            Controls.GadgetProperties.ComplexSampleMeansProperties properties = Popup.Content as Controls.GadgetProperties.ComplexSampleMeansProperties;
+            this.Parameters = properties.Parameters;
+            this.DataFilters = properties.DataFilters;
+            this.CustomOutputHeading = Parameters.GadgetTitle;
+            this.CustomOutputDescription = Parameters.GadgetDescription;
+            Popup.Close();
+            if (properties.HasSelectedFields)
+            {
+                RefreshResults();
+            }
+        }
+
+        /// <summary>
+        /// Closes the Properties panel when cancel is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void properties_Cancelled(object sender, EventArgs e)
+        {
+            Popup.Close();
+        }
+
         #endregion // Event Handlers        
         
         #region Private Properties
@@ -1131,8 +1210,10 @@ namespace EpiDashboard
         /// </summary>
         public override void RefreshResults()
         {
-            if (!LoadingCombos && GadgetOptions != null && cbxField.SelectedIndex > -1 && cbxFieldPSU.SelectedIndex > -1)
+            ComplexSampleMeansParameters csmeansParameters = (ComplexSampleMeansParameters)Parameters;
+            if (!LoadingCombos)
             {
+                if (csmeansParameters != null && !String.IsNullOrEmpty(csmeansParameters.ColumnNames[0]) && !String.IsNullOrEmpty(csmeansParameters.PSUVariableName))
                 CreateInputVariableList();
                 txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
                 waitPanel.Visibility = System.Windows.Visibility.Visible;
@@ -1143,7 +1224,7 @@ namespace EpiDashboard
                 baseWorker.RunWorkerAsync();
                 base.RefreshResults();
             }
-            else if (!LoadingCombos && cbxField.SelectedIndex == -1)
+            else if (!LoadingCombos && String.IsNullOrEmpty(csmeansParameters.ColumnNames[0]))
             {
                 ClearResults();                
                 waitPanel.Visibility = System.Windows.Visibility.Collapsed;
@@ -1165,9 +1246,10 @@ namespace EpiDashboard
         /// <returns>XmlNode</returns>
         public override XmlNode Serialize(XmlDocument doc)
         {
-            CreateInputVariableList();
+            //CreateInputVariableList();
+            ComplexSampleMeansParameters csmeansParameters = (ComplexSampleMeansParameters)Parameters;
 
-            Dictionary<string, string> inputVariableList = GadgetOptions.InputVariableList;
+            Dictionary<string, string> inputVariableList = csmeansParameters.InputVariableList;
 
             string freqVar = string.Empty;
             string strataVar = string.Empty;
@@ -1175,28 +1257,8 @@ namespace EpiDashboard
             string sort = string.Empty;
 
             WordBuilder wb = new WordBuilder(",");
-
-            if (GadgetOptions.StrataVariableNames != null && GadgetOptions.StrataVariableNames.Count == 1)
-            {
-                strataVar = GadgetOptions.StrataVariableNames[0];
-            }
-
-            CustomOutputHeading = headerPanel.Text;
-            CustomOutputDescription = descriptionPanel.Text;
-
-            string xmlString =
-            "<mainVariable>" + GadgetOptions.MainVariableName.Replace("<", "&lt;") + "</mainVariable>" +
-            "<strataVariable>" + strataVar.Replace("<", "&lt;") + "</strataVariable>" +
-            "<weightVariable>" + GadgetOptions.WeightVariableName.Replace("<", "&lt;") + "</weightVariable>" +
-            "<psuVariable>" + GadgetOptions.PSUVariableName.Replace("<", "&lt;") + "</psuVariable>" +
-            "<crosstabVariable>" + GadgetOptions.CrosstabVariableName.Replace("<", "&lt;") + "</crosstabVariable>" +
-            "<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
-            "<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>" +
-            "<customCaption>" + CustomOutputCaption + "</customCaption>";
-
-            xmlString = xmlString + SerializeAnchors();
-
             System.Xml.XmlElement element = doc.CreateElement("complexSampleMeansGadget");
+            string xmlString = string.Empty;
             element.InnerXml = xmlString;
             element.AppendChild(SerializeFilters(doc));
 
@@ -1218,6 +1280,81 @@ namespace EpiDashboard
             element.Attributes.Append(type);
             element.Attributes.Append(id);
 
+            CustomOutputHeading = headerPanel.Text;
+            CustomOutputDescription = descriptionPanel.Text;
+
+            XmlElement mainVarElement = doc.CreateElement("mainVariable");
+            if (csmeansParameters.ColumnNames.Count > 0)
+            {
+                if (!String.IsNullOrEmpty(csmeansParameters.ColumnNames[0].ToString()))
+                {
+                    mainVarElement.InnerText = csmeansParameters.ColumnNames[0].ToString();
+                    element.AppendChild(mainVarElement);
+                }
+            }
+
+            XmlElement StrataVariableNameElement = doc.CreateElement("strataVariable");
+            XmlElement StrataVariableNamesElement = doc.CreateElement("strataVariables");
+            if (csmeansParameters.StrataVariableNames.Count == 1)
+            {
+                StrataVariableNameElement.InnerText = csmeansParameters.StrataVariableNames[0].ToString();
+                element.AppendChild(StrataVariableNameElement);
+            }
+            else if (csmeansParameters.StrataVariableNames.Count > 1)
+            {
+                foreach (string strataColumn in csmeansParameters.StrataVariableNames)
+                {
+                    XmlElement strataElement = doc.CreateElement("strataVariable");
+                    strataElement.InnerText = strataColumn.Replace("<", "&lt;");
+                    StrataVariableNamesElement.AppendChild(strataElement);
+                }
+
+                element.AppendChild(StrataVariableNamesElement);
+            }
+
+            // =========  Former Advanced Options section  ============
+            //weightVariable
+            XmlElement weightVariableElement = doc.CreateElement("weightVariable");
+            if (!String.IsNullOrEmpty(csmeansParameters.WeightVariableName))
+            {
+                weightVariableElement.InnerText = csmeansParameters.WeightVariableName;
+                element.AppendChild(weightVariableElement);
+            }
+
+            XmlElement psuVariableElement = doc.CreateElement("psuVariable");
+            if (!String.IsNullOrEmpty(csmeansParameters.PSUVariableName))
+            {
+                psuVariableElement.InnerText = csmeansParameters.PSUVariableName;
+                element.AppendChild(psuVariableElement);
+            }
+
+            //customHeading
+            XmlElement customHeadingElement = doc.CreateElement("customHeading");
+            customHeadingElement.InnerText = csmeansParameters.GadgetTitle; //CustomOutputHeading.Replace("<", "&lt;");
+            element.AppendChild(customHeadingElement);
+
+            //customDescription
+            XmlElement customDescriptionElement = doc.CreateElement("customDescription");
+            customDescriptionElement.InnerText = csmeansParameters.GadgetDescription; //CustomOutputDescription.Replace("<", "&lt;");
+            element.AppendChild(customDescriptionElement);
+
+            //customCaption
+            XmlElement customCaptionElement = doc.CreateElement("customCaption");
+            customCaptionElement.InnerText = CustomOutputCaption;
+            element.AppendChild(customCaptionElement);
+
+            //string xmlString =
+            //"<mainVariable>" + GadgetOptions.MainVariableName.Replace("<", "&lt;") + "</mainVariable>" +
+            //"<strataVariable>" + strataVar.Replace("<", "&lt;") + "</strataVariable>" +
+            //"<weightVariable>" + GadgetOptions.WeightVariableName.Replace("<", "&lt;") + "</weightVariable>" +
+            //"<psuVariable>" + GadgetOptions.PSUVariableName.Replace("<", "&lt;") + "</psuVariable>" +
+            //"<crosstabVariable>" + GadgetOptions.CrosstabVariableName.Replace("<", "&lt;") + "</crosstabVariable>" +
+            //"<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
+            //"<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>" +
+            //"<customCaption>" + CustomOutputCaption + "</customCaption>";
+
+            SerializeAnchors(element);
+
             return element;
         }
 
@@ -1228,7 +1365,8 @@ namespace EpiDashboard
         public override void CreateFromXml(XmlElement element)
         {
             this.LoadingCombos = true;
-
+            this.Parameters = new ComplexSampleMeansParameters();
+            Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
             HideConfigPanel();
 
             txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
@@ -1239,30 +1377,39 @@ namespace EpiDashboard
                 switch (child.Name.ToLower())
                 {
                     case "mainvariable":
-                        cbxField.Text = child.InnerText.Replace("&lt;", "<");
+                        //cbxField.Text = child.InnerText.Replace("&lt;", "<");
+                        ((ComplexSampleMeansParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
+                        inputVariableList.Add("Identifier", child.InnerText.Replace("&lt;", "<"));
                         break;
                     case "stratavariable":
-                        cbxFieldStrata.Text = child.InnerText.Replace("&lt;", "<");
+                        //cbxFieldStrata.Text = child.InnerText.Replace("&lt;", "<");
+                        ((ComplexSampleMeansParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
                         break;
                     case "weightvariable":
-                        cbxFieldWeight.Text = child.InnerText.Replace("&lt;", "<");
+                        //cbxFieldWeight.Text = child.InnerText.Replace("&lt;", "<");
+                        ((ComplexSampleMeansParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
                         break;
                     case "psuvariable":
-                        cbxFieldPSU.Text = child.InnerText.Replace("&lt;", "<");
+                        //cbxFieldPSU.Text = child.InnerText.Replace("&lt;", "<");
+                        ((ComplexSampleMeansParameters)Parameters).PSUVariableName = child.InnerText.Replace("&lt;", "<");
+                        inputVariableList.Add("PSUVar", child.InnerText.Replace("&lt;", "<"));
                         break;
                     case "crosstabvariable":
                         cbxFieldCrosstab.Text = child.InnerText.Replace("&lt;", "<");
+                        ((ComplexSampleMeansParameters)Parameters).CrosstabVariableName = child.InnerText.Replace("&lt;", "<");
                         break;
                     case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
-                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<"); ;
+                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<");
+                            Parameters.GadgetTitle = CustomOutputHeading;
                         }
                         break;
                     case "customdescription":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
                             this.CustomOutputDescription = child.InnerText.Replace("&lt;", "<");
+                            Parameters.GadgetDescription = CustomOutputDescription;
 
                             if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputHeading.Equals("(none)"))
                             {
@@ -1284,8 +1431,12 @@ namespace EpiDashboard
                         break; 
                 }
             }
+
             base.CreateFromXml(element);
             this.LoadingCombos = false;
+
+            Parameters.InputVariableList = inputVariableList;
+            
             CheckVariables();
             RefreshResults();
             HideConfigPanel();
@@ -1298,7 +1449,7 @@ namespace EpiDashboard
         public override string ToHTML(string htmlFileName = "", int count = 0)
         {
             if (IsCollapsed) return string.Empty;
-
+            ComplexSampleMeansParameters csmeansParameters = (ComplexSampleMeansParameters)Parameters;
             StringBuilder htmlBuilder = new StringBuilder();
 
             CustomOutputHeading = headerPanel.Text;
@@ -1314,24 +1465,29 @@ namespace EpiDashboard
             }
 
             htmlBuilder.AppendLine("<p class=\"gadgetOptions\"><small>");
-            htmlBuilder.AppendLine("<em>Frequency variable:</em> <strong>" + cbxField.Text + "</strong>");
+            htmlBuilder.AppendLine("<em>Frequency variable:</em> <strong>" + csmeansParameters.ColumnNames[0] + "</strong>");
             htmlBuilder.AppendLine("<br />");
-            htmlBuilder.AppendLine("<em>PSU variable:</em> <strong>" + cbxFieldPSU.Text + "</strong>");
+            htmlBuilder.AppendLine("<em>PSU variable:</em> <strong>" + csmeansParameters.PSUVariableName + "</strong>");
             htmlBuilder.AppendLine("<br />");
 
-            if (cbxFieldCrosstab.SelectedIndex >= 0)
+            if (!String.IsNullOrEmpty(csmeansParameters.CrosstabVariableName)) 
             {
-                htmlBuilder.AppendLine("<em>Crosstab variable:</em> <strong>" + cbxFieldCrosstab.Text + "</strong>");
+                htmlBuilder.AppendLine("<em>Crosstab variable:</em> <strong>" + csmeansParameters.CrosstabVariableName + "</strong>");
                 htmlBuilder.AppendLine("<br />");
             }
-            if (cbxFieldWeight.SelectedIndex >= 0)
+            if (!String.IsNullOrEmpty(csmeansParameters.WeightVariableName))
             {
-                htmlBuilder.AppendLine("<em>Weight variable:</em> <strong>" + cbxFieldWeight.Text + "</strong>");
+                htmlBuilder.AppendLine("<em>Weight variable:</em> <strong>" + csmeansParameters.WeightVariableName + "</strong>");
                 htmlBuilder.AppendLine("<br />");
             }
-            if (cbxFieldStrata.SelectedIndex >= 0)
+            if (csmeansParameters.StrataVariableNames.Count > 0)
             {
-                htmlBuilder.AppendLine("<em>Strata variable:</em> <strong>" + cbxFieldStrata.Text + "</strong>");
+                WordBuilder wb = new WordBuilder(", ");
+                foreach (string s in csmeansParameters.StrataVariableNames)
+                {
+                    wb.Add(s);
+                }
+                htmlBuilder.AppendLine("<em>Strata variable:</em> <strong>" + wb.ToString() + "</strong>");
                 htmlBuilder.AppendLine("<br />");
             }
             //htmlBuilder.AppendLine("<em>Include missing:</em> <strong>" + checkboxIncludeMissing.IsChecked.ToString() + "</strong>");
@@ -1362,11 +1518,11 @@ namespace EpiDashboard
 
                 htmlBuilder.AppendLine("<tr>");
                 htmlBuilder.AppendLine(" <th>&nbsp;</th>");
-                htmlBuilder.AppendLine(" <th colspan=\"7\">" + GadgetOptions.MainVariableName + "</th>");
+                htmlBuilder.AppendLine(" <th colspan=\"7\">" + csmeansParameters.ColumnNames[0] + "</th>");
                 htmlBuilder.AppendLine("</tr>");
 
                 htmlBuilder.AppendLine("<tr>");
-                htmlBuilder.AppendLine(" <th rowspan=\"2\">" + GadgetOptions.CrosstabVariableName + "</th>");
+                htmlBuilder.AppendLine(" <th rowspan=\"2\">" + csmeansParameters.CrosstabVariableName + "</th>");
                 htmlBuilder.AppendLine(" <th rowspan=\"2\">Count</th>");
                 htmlBuilder.AppendLine(" <th rowspan=\"2\">Mean</th>");
                 htmlBuilder.AppendLine(" <th rowspan=\"2\">Std Error</th>");
