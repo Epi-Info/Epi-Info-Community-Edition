@@ -811,7 +811,14 @@ namespace Epi.Windows.MakeView.Forms
                     try
                     {
                         makeViewMainForm.SetDataTableMenuItems();
-                        makeViewMainForm.SetPublishMenuItems(currentPage.view);
+                        if (!currentPage.view.Project.CollectedData.TableExists(currentPage.view.TableName))
+                        {
+                            Configuration config = Configuration.GetNewInstance();
+                            if (config.Settings.Republish_IsRepbulishable == true)
+                            {
+                                makeViewMainForm.SetPublishMenuItems(currentPage.view);
+                            }
+                        }                     
                         //if (!currentPage.view.Project.CollectedData.TableExists(currentPage.view.TableName))
                         //{
                         //    makeViewMainForm.SetDataTableMenuItems();

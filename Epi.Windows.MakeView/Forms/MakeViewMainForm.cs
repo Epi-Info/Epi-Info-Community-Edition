@@ -3062,9 +3062,9 @@ namespace Epi.Windows.MakeView.Forms
         public void SetPublishMenuItems(View pView)
         {
             Configuration config = Configuration.GetNewInstance();
-            DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(pView.Id);
+          //  DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(pView.Id);
             RepublishOrgKey = null;
-           DataRow ViewRow = table.Rows[0];
+          // DataRow ViewRow = table.Rows[0];
            
             try
             {
@@ -3153,12 +3153,17 @@ namespace Epi.Windows.MakeView.Forms
             foreach (View view in this.mediator.Project.Views)
             {
                 DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(view.Id);
-
-                DataRow ViewRow = table.Rows[0];
-                if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[2].ToString()))
+                if (table != null)
                 {
-                    RepublishOrgKey = ViewRow.ItemArray[2].ToString();
-                    return true;
+                    DataRow ViewRow = table.Rows[0];
+                    if (ViewRow != null)
+                    {
+                        if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[2].ToString()))
+                        {
+                            RepublishOrgKey = ViewRow.ItemArray[2].ToString();
+                            return true;
+                        }
+                    }
                 }
             }
             return false;
