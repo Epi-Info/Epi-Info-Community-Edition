@@ -788,9 +788,10 @@ namespace Epi.Data.Services
                 DataTable results = db.Select(query);
                 return results;
                 }
-            catch (Exception ex)
+            catch 
                 {
-                throw new GeneralException("Could not retrieve view", ex);
+                    return null;
+               // throw new GeneralException("Could not retrieve view", ex);
                 }
             }
 
