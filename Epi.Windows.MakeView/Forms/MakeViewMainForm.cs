@@ -3062,17 +3062,14 @@ namespace Epi.Windows.MakeView.Forms
         public void SetPublishMenuItems(View pView)
         {
             Configuration config = Configuration.GetNewInstance();
-          //  DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(pView.Id);
+            DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(pView.Id);
+            DataRow viewRow = null;
             RepublishOrgKey = null;
-          // DataRow ViewRow = table.Rows[0];
+            if(table!=null)
+                viewRow = table.Rows[0];
            
             try
-            {
-                if (pView.IsRelatedView == true)
-                    toolStripPublishToWebEnter.Enabled = false;
-                else
-                    toolStripPublishToWebEnter.Enabled = true;
-
+            {                
                 if (config.Settings.Republish_IsRepbulishable == true)
                 {
                     QuickPublishtoolStripButton.Enabled = true;
@@ -3098,31 +3095,39 @@ namespace Epi.Windows.MakeView.Forms
                         toWebSurveyToolStripMenuItem.Enabled = false;
                         EIWSToolStripMenuItem.Enabled = false;
                     }
-                    if (CheckforRepublishWebEnterMenuItem())
+                    if (viewRow != null)
                     {
-                       
-                        toolStripPublishToWebEnter.Text = "Republish Form to Web Enter";
-                       // toolStripPublishToWebEnter.Enabled = true;
-                        if (pView.IsRelatedView == true)
+                        if (CheckforRepublishWebEnterMenuItem())
                         {
-                            toWebEnterToolStripMenuItem.Enabled = false;
-                            EWEToolStripMenuItem.Enabled = false;
+
+                            toolStripPublishToWebEnter.Text = "Republish Form to Web Enter";
+                            // toolStripPublishToWebEnter.Enabled = true;
+                            if (pView.IsRelatedView == true)
+                            {
+                                toWebEnterToolStripMenuItem.Enabled = false;
+                                EWEToolStripMenuItem.Enabled = false;
+                            }
+                            else
+                            {
+                                toWebEnterToolStripMenuItem.Enabled = true;
+                                EWEToolStripMenuItem.Enabled = true;
+                            }
+                            // toWebEnterToolStripMenuItem.Enabled = true;
+                            //EWEToolStripMenuItem.Enabled = true;
                         }
                         else
                         {
-                            toWebEnterToolStripMenuItem.Enabled = true;
-                            EWEToolStripMenuItem.Enabled = true;
+
+                            toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
+                            // toolStripPublishToWebEnter.Enabled = true;
+                            toWebEnterToolStripMenuItem.Enabled = false;
+                            EWEToolStripMenuItem.Enabled = false;
                         }
-                       // toWebEnterToolStripMenuItem.Enabled = true;
-                        //EWEToolStripMenuItem.Enabled = true;
-                    }
-                    else
-                    {
-                       
-                        toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
-                       // toolStripPublishToWebEnter.Enabled = true;
-                        toWebEnterToolStripMenuItem.Enabled = false;
-                        EWEToolStripMenuItem.Enabled = false;
+
+                        if (pView.IsRelatedView == true)
+                            toolStripPublishToWebEnter.Enabled = false;
+                        else
+                            toolStripPublishToWebEnter.Enabled = true;
                     }
                 }
                 else
@@ -3130,14 +3135,17 @@ namespace Epi.Windows.MakeView.Forms
                     mnuPublishToWeb.Text = "Publish Form to Web";
                     mnuPublishToWeb.Enabled = true;
                     toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
-                    //toolStripPublishToWebEnter.Enabled = true;
+                    if (pView.IsRelatedView == true)
+                        toolStripPublishToWebEnter.Enabled = false;
+                    else
+                        toolStripPublishToWebEnter.Enabled = true;
                     QuickPublishtoolStripButton.Enabled = false;
                     ChangeModetoolStripDropDownButton.Enabled = false;
                 }
             }
             catch(Exception ex)
             {
-                      mnuPublishToWeb.Text = "Publish Form to Web";
+                    mnuPublishToWeb.Text = "Publish Form to Web";
                     mnuPublishToWeb.Enabled = true;
                     toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
                     toolStripPublishToWebEnter.Enabled = true;
@@ -3153,18 +3161,14 @@ namespace Epi.Windows.MakeView.Forms
             foreach (View view in this.mediator.Project.Views)
             {
                 DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(view.Id);
-                if (table != null)
-                {
+               
                     DataRow ViewRow = table.Rows[0];
-                    if (ViewRow != null)
-                    {
+                   
                         if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[2].ToString()))
                         {
                             RepublishOrgKey = ViewRow.ItemArray[2].ToString();
                             return true;
-                        }
-                    }
-                }
+                        }                                    
             }
             return false;
         }
