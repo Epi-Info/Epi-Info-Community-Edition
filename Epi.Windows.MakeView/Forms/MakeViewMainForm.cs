@@ -75,6 +75,7 @@ namespace Epi.Windows.MakeView.Forms
         BackgroundWorker worker = null;
         SplashScreenForm sf = null;
         private string RepublishOrgKey = null;
+        private bool iscancel = false;
 
         /// <summary>
         /// PageChanged EventHandler
@@ -3065,8 +3066,15 @@ namespace Epi.Windows.MakeView.Forms
             DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(pView.Id);
             DataRow viewRow = null;
             RepublishOrgKey = null;
-            if(table!=null)
+            if (table != null)
                 viewRow = table.Rows[0];
+            else
+            {
+                toWebEnterToolStripMenuItem.Enabled = false;
+                EWEToolStripMenuItem.Enabled = false;
+                mnuPublishToWeb.Text = "Publish Form to Web";
+                mnuPublishToWeb.Enabled = false;
+            }
            
             try
             {                
@@ -3578,8 +3586,7 @@ namespace Epi.Windows.MakeView.Forms
                 SurveyInfoDTO.XML = this.TemplateXML;
                 SurveyInfoDTO.ExitText = this.ExitText;
                 SurveyInfoDTO.IntroductionText = this.IntroductionText;
-                SurveyInfoDTO.DepartmentName = this.DepartmentName;
-
+                SurveyInfoDTO.DepartmentName = this.DepartmentName;                
                 Request.Criteria.SurveyType = this.SurveyType;
 
                 if (IsDraftMode)
@@ -3661,6 +3668,10 @@ namespace Epi.Windows.MakeView.Forms
                 SurveyInfoDTO.SurveyType = 2;
                 SurveyInfoDTO.SurveyName = mediator.Project.Name;
                 SurveyInfoDTO.OrganizationKey = new Guid(OrganizationKey);
+                if (this.mediator.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+                {
+                    SurveyInfoDTO.IsSqlProject= true;
+                }// Update IsSqlProject to true on change survey mode for Sql project.
 
                 //SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
                 SurveyInfoDTO.XML = template.CreateWebEnterTemplate();
@@ -4120,6 +4131,11 @@ namespace Epi.Windows.MakeView.Forms
             SurveyInfoDTO.SurveyName = mediator.Project.Name;
             SurveyInfoDTO.OrganizationKey = new Guid(OrganizationKey);
 
+            if (this.mediator.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+            {
+                SurveyInfoDTO.IsSqlProject = true;
+            }//changed IsSqlProject to true on quick publishing a SQL project
+
             //SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
             SurveyInfoDTO.XML = template.CreateWebEnterTemplate();
 
@@ -4168,7 +4184,7 @@ namespace Epi.Windows.MakeView.Forms
                 }
             else
                 {
-                Configuration config = Configuration.GetNewInstance();
+                Configuration config = Configuration.GetNewInstance();               
 
                 try
                     {
@@ -4177,7 +4193,7 @@ namespace Epi.Windows.MakeView.Forms
                         {                            
                             CreateViewDataTable(view);
                         }
-                    if (ValidateUser()) // Validate User
+                        if (ValidateUser()&& ! iscancel) // Validate User
                         {
                     if (config.Settings.Republish_IsRepbulishable == true) //IsRepbulishable
                         {
@@ -4352,19 +4368,35 @@ namespace Epi.Windows.MakeView.Forms
                             }
                         }
                         }
-                    else // Validate User
-                    {
-                        int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
-
-                        if (ISWindowAuthMode == 0)
+                       
+                        else if(!iscancel)// Validate User
                         {
-                            if (LoginInfo.UserID == -1)
+                            int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
+
+                            if (ISWindowAuthMode == 0)
                             {
-                                UserAuthentication dialog = new UserAuthentication();
-                                DialogResult result = dialog.ShowDialog();
-                                if (result == System.Windows.Forms.DialogResult.OK)
+                                if (LoginInfo.UserID == -1)
                                 {
-                                    dialog.Close();
+                                    UserAuthentication dialog = new UserAuthentication();
+                                    DialogResult result = dialog.ShowDialog();
+                                    if (result == System.Windows.Forms.DialogResult.OK)
+                                    {
+                                        dialog.Close();
+                                        if (string.IsNullOrEmpty(this.EWEOrganizationKey))
+                                        {
+                                            WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
+                                            dialog1.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
+                                            dialog1.ShowDialog();
+
+                                        }
+                                    }
+                                }
+                                else
+                                {
                                     if (string.IsNullOrEmpty(this.EWEOrganizationKey))
                                     {
                                         WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
@@ -4376,33 +4408,18 @@ namespace Epi.Windows.MakeView.Forms
                                         dialog1.ShowDialog();
 
                                     }
+
                                 }
                             }
+
                             else
                             {
-                                if (string.IsNullOrEmpty(this.EWEOrganizationKey))
-                                {
-                                    WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
-                                    dialog1.ShowDialog();
-                                }
-                                else
-                                {
-                                    WebEnterPublishDialog dialog1 = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
-                                    dialog1.ShowDialog();
+                                MessageBox.Show("You are not authorized to publish this form to Epi Web Enter system. Please contact system admin for more info.");
 
-                                }
+
 
                             }
                         }
-
-                        else
-                        {
-                            MessageBox.Show("You are not authorized to publish this form to Epi Web Enter system. Please contact system admin for more info.");
-
-
-
-                        }
-                    }
                 }
                 catch (Exception ex)// not republishable
                     {
@@ -4428,13 +4445,14 @@ namespace Epi.Windows.MakeView.Forms
                     this.mediator.Project.CollectedData.CreateDataTableForView(v, 1);
                 }
             }
+            view.TableName = view.Name;                 
             this.mediator.Project.CollectedData.SynchronizeDataTable(view);
         }
-
+       
         private bool ValidateUser()
             {
-           
-            bool IsValidUser = false;
+            iscancel = false;
+            bool IsValidUser = false;            
             string UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
             Configuration config = Configuration.GetNewInstance();
             int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
@@ -4464,6 +4482,12 @@ namespace Epi.Windows.MakeView.Forms
                  Template template = new Template(this.mediator);
                  WebEnterOptions dialog2 = new WebEnterOptions();
                  DialogResult result3 = dialog2.ShowDialog();
+                 if (result3 == DialogResult.Cancel)
+                 {
+                     iscancel = true;
+                     dialog2.Close();
+                 }
+
                  //if (result3 == System.Windows.Forms.DialogResult.OK)
                  //    {
 
