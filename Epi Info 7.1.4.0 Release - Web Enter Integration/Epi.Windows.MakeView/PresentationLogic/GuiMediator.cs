@@ -2435,6 +2435,15 @@ namespace Epi.Windows.MakeView.PresentationLogic
                 }
 
                 PanelFieldUpdate(dialog.Field);
+
+                if (dialog.Field is RelatedViewField)
+                {
+                    RelatedViewField relatedViewField = (RelatedViewField)dialog.Field;                 
+                    View childView = relatedViewField.GetProject().GetViewById(relatedViewField.RelatedViewID);
+                    childView.IsRelatedView = true;
+                    childView.ParentView = this.ProjectExplorer.SelectedPage.GetView(); // added to fix a problem where the parentview property is null after creating a relate button where existing is true.
+                    ProjectExplorer.SetView(childView);                                      
+                }
             }
         }
 
