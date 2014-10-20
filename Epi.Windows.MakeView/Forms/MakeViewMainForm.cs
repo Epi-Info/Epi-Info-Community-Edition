@@ -4609,85 +4609,106 @@ namespace Epi.Windows.MakeView.Forms
                 }
             DataRow ViewRow = table.Rows[0];
 
-            string WebSurveyId = ViewRow.ItemArray[3].ToString();
+            string WebSurveyId = ViewRow.ItemArray[2].ToString();
+            this.EWEOrganizationKey = ViewRow.ItemArray[3].ToString();
 
-            Template template = new Template(this.mediator);
-            try
+            if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
+            {
+                SetFormInfo();
+                QuickFormInfoUpdate();
+            }
+            else
+            {
+                EWEOrgKey NewDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                DialogResult result = NewDialog.ShowDialog();
+                if (result == System.Windows.Forms.DialogResult.OK)
                 {
-
-                    Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.No;
-                if (string.IsNullOrWhiteSpace(WebSurveyId))
+                    this.EWEOrganizationKey = NewDialog.OrganizationKey;
+                    if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
                     {
-                        IsValidOKey = Epi.Core.ServiceClient.EWEServiceClient.IsValidOrgKey(this.EWEOrganizationKey);
-                    }
-                else
-                    {
-                        IsValidOKey = Epi.Core.ServiceClient.EWEServiceClient.IsValidOrgKey(this.EWEOrganizationKey, WebSurveyId);
-                    }
-                WebEnterPublishDialog dialog = null;
-
-                switch (IsValidOKey)
-                    {
-                        case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.No:
-                        EWEOrgKey NewDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
-                        DialogResult result = NewDialog.ShowDialog();
-                        if (result == System.Windows.Forms.DialogResult.OK)
-                            {
-                            this.EWEOrganizationKey = NewDialog.OrganizationKey;
-                            if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
-                                {
-                                SetFormInfo();
-                                QuickFormInfoUpdate();
-                                }
-                            }
-                        break;
-                        case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
-                        WebEnterOptions dialog1 = new WebEnterOptions();
-                        DialogResult result1 = dialog1.ShowDialog();
-                        if (result1 == System.Windows.Forms.DialogResult.OK)
-                            {
-                            EWEOrgKey OrgKeyDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
-                            DialogResult result2 = OrgKeyDialog.ShowDialog();
-                            if (result2 == System.Windows.Forms.DialogResult.OK)
-                                {
-                                this.EWEOrganizationKey = OrgKeyDialog.OrganizationKey;
-                                if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
-                                    {
-                                    SetFormInfo();
-                                    QuickFormInfoUpdate();
-                                    }
-                                }
-                            }
-                        break;
-                        case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.GeneralException:
-                        WebEnterOptions dialog2 = new WebEnterOptions();
-                        DialogResult result3 = dialog2.ShowDialog();
-                        if (result3 == System.Windows.Forms.DialogResult.OK)
-                            {
-                            EWEOrgKey OrgKeyDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
-                            DialogResult result4 = OrgKeyDialog.ShowDialog();
-                            if (result4 == System.Windows.Forms.DialogResult.OK)
-                                {
-                                this.EWEOrganizationKey = OrgKeyDialog.OrganizationKey;
-                                if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
-                                    {
-                                    SetFormInfo();
-                                    QuickFormInfoUpdate();
-                                    }
-                                }
-                            }
-                        break;
-                        case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.Yes:
                         SetFormInfo();
                         QuickFormInfoUpdate();
-                        break;
                     }
-
                 }
-            catch (Exception ex)// not republishable
-                {
+            }
+                                
+            //Template template = new Template(this.mediator);
+            //try
+            //    {
 
-                }
+            //        Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.No;
+            //    if (string.IsNullOrWhiteSpace(WebSurveyId))
+            //        {
+            //            IsValidOKey = Epi.Core.ServiceClient.EWEServiceClient.IsValidOrgKey(this.EWEOrganizationKey);
+            //        }
+            //    else
+            //        {
+            //            IsValidOKey = Epi.Core.ServiceClient.EWEServiceClient.IsValidOrgKey(WebSurveyId,this.projectExplorer.CurrentView.EWEFormId);
+            //        }
+            //    WebEnterPublishDialog dialog = null;
+
+            //    switch (IsValidOKey)
+            //        {
+            //            case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.No:
+            //            EWEOrgKey NewDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+            //            DialogResult result = NewDialog.ShowDialog();
+            //            if (result == System.Windows.Forms.DialogResult.OK)
+            //                {
+            //                this.EWEOrganizationKey = NewDialog.OrganizationKey;
+            //                if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
+            //                    {
+            //                    SetFormInfo();
+            //                    QuickFormInfoUpdate();
+            //                    }
+            //                }
+            //            break;
+            //            case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
+            //            WebEnterOptions dialog1 = new WebEnterOptions();
+            //            DialogResult result1 = dialog1.ShowDialog();
+            //            if (result1 == System.Windows.Forms.DialogResult.OK)
+            //                {
+            //                EWEOrgKey OrgKeyDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+            //                DialogResult result2 = OrgKeyDialog.ShowDialog();
+            //                if (result2 == System.Windows.Forms.DialogResult.OK)
+            //                    {
+            //                    this.EWEOrganizationKey = OrgKeyDialog.OrganizationKey;
+            //                    if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
+            //                        {
+            //                        SetFormInfo();
+            //                        QuickFormInfoUpdate();
+            //                        }
+            //                    }
+            //                }
+            //            break;
+            //            case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.GeneralException:
+            //            WebEnterOptions dialog2 = new WebEnterOptions();
+            //            DialogResult result3 = dialog2.ShowDialog();
+            //            if (result3 == System.Windows.Forms.DialogResult.OK)
+            //                {
+            //                EWEOrgKey OrgKeyDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+            //                DialogResult result4 = OrgKeyDialog.ShowDialog();
+            //                if (result4 == System.Windows.Forms.DialogResult.OK)
+            //                    {
+            //                    this.EWEOrganizationKey = OrgKeyDialog.OrganizationKey;
+            //                    if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
+            //                        {
+            //                        SetFormInfo();
+            //                        QuickFormInfoUpdate();
+            //                        }
+            //                    }
+            //                }
+            //            break;
+            //            case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.Yes:
+            //            SetFormInfo();
+            //            QuickFormInfoUpdate();
+            //            break;
+            //        }
+
+            //    }
+            //catch (Exception ex)// not republishable
+            //    {
+
+            //    }
             }
 
         private void draftToolStripMenuItem1_Click(object sender, EventArgs e)
