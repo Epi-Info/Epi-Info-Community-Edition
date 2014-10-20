@@ -2370,12 +2370,12 @@ namespace Epi.Windows.MakeView.PresentationLogic
         public void mnuProperties_Click(object sender, EventArgs e)
         {
             string nameBeforeEdit = rightClickedControl.Field.Name;
-            bool isAdvancedUser = false;
+           /* bool isAdvancedUser = false;//Reverting the changes made to VHF
 
             if (sender is ToolStripDropDownItem && ((ToolStripDropDownItem)sender).Tag is bool)
             {
                 isAdvancedUser = (bool)((ToolStripDropDownItem)sender).Tag;
-            }
+            }*/
 
             RenderableField field = ((RenderableField)(rightClickedControl.Field));
 
@@ -2387,7 +2387,8 @@ namespace Epi.Windows.MakeView.PresentationLogic
             Dialogs.FieldDefinitionDialogs.FieldDefinition dialog = dialogFactory.GetFieldDefinitionDialog(rightClickedControl.Field);
             
             bool hasCollectedDataColumn = (Project.CollectedData.TableExists(field.GetView().TableName));
-            if (isAdvancedUser || (hasCollectedDataColumn == false) || (hasCollectedDataColumn && _newFieldIds.Contains(field.Id)))
+            //if (isAdvancedUser || (hasCollectedDataColumn == false) || (hasCollectedDataColumn && _newFieldIds.Contains(field.Id)))//Reverting the changes made to VHF
+            if ((hasCollectedDataColumn == false) || (hasCollectedDataColumn && _newFieldIds.Contains(field.Id)))
             {
                 ((Dialogs.FieldDefinitionDialogs.GenericFieldDefinition)dialog).FieldNameEnabled = true;
             }
@@ -2408,7 +2409,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                     dialog.Field.HasTabStop = true;
                 }
 
-                if (isAdvancedUser && (nameBeforeEdit != dialog.Field.Name))
+               /* if (isAdvancedUser && (nameBeforeEdit != dialog.Field.Name))//Reverting teh changes made to VHF
                 {
                     if (project.CollectedData.TableExists(field.Page.TableName))
                     {
@@ -2430,7 +2431,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                             }
                         }
                     }
-                }
+                }*/
                 
                 if (nameBeforeEdit != dialog.Field.Name)
                 {
