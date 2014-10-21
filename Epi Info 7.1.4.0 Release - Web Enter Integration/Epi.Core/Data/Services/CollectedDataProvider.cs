@@ -698,9 +698,9 @@ namespace Epi.Data.Services
                 Request.AnswerInfo.OrganizationKey = new Guid(organizationKey);
                 Request.AnswerInfo.SurveyId = new Guid(formId);
 
-                if (view.IsRelatedView && !string.IsNullOrEmpty(view.ParentView.GlobalRecordIdField.CurrentRecordValueString))
+                if (view.IsRelatedView && !string.IsNullOrEmpty(view.ForeignKeyField.CurrentRecordValueString))
                 {
-                    Request.AnswerInfo.ParentRecordId = new Guid(view.ParentView.GlobalRecordIdField.CurrentRecordValueString);
+                    Request.AnswerInfo.ParentRecordId = new Guid(view.ForeignKeyField.CurrentRecordValueString);
                 }
                 else
                 {
