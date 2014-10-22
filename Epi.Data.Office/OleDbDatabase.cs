@@ -1625,6 +1625,7 @@ namespace Epi.Data.Office
                 int rowCount = 0;
                 int skippedRows = 0;
                 int totalRows = 0;
+                int truncatedCellCount = 0;
                 bool numericFieldOverflow = false;
 
                 while (pDataReader.Read())
@@ -1637,7 +1638,7 @@ namespace Epi.Data.Office
                     InsertSQL.Append(pSelectSQL.Replace("Select * From ", ""));
                     InsertSQL.Append(" (");
                     ValueSQL.Append(" values (");
-
+                    int CheckLength = 0;
                     List<OleDbParameter> ParameterList = new List<OleDbParameter>();
                     foreach (System.Data.OleDb.OleDbParameter param in cmdOle.Parameters)
                     {
@@ -1673,12 +1674,17 @@ namespace Epi.Data.Office
 
                     foreach (OleDbParameter param in ParameterList)
                     {
-
                         DbParameter p2 = cmdOle.CreateParameter();
                         p2.DbType = param.DbType;
                         try
                         {
                             p2.Value = pDataReader[param.SourceColumn];
+                            CheckLength = p2.Value.ToString().Length;
+                            if (CheckLength > 255)
+                            {
+                                p2.Value = p2.Value.ToString().Substring(0, 255);
+                                truncatedCellCount++;
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -1709,15 +1715,17 @@ namespace Epi.Data.Office
                     if (pStatusDelegate != null)
                     {
                         totalRows = rowCount + skippedRows;
+                        string messageString = String.Empty;
 
                         if (skippedRows == 0)
-                        {
-                            pStatusDelegate.Invoke(string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS, rowCount.ToString(), totalRows.ToString()), (double)rowCount);
+                        {                           
+                            messageString = string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS, rowCount.ToString(), totalRows.ToString());
                         }
                         else
-                        {
-                            pStatusDelegate.Invoke(string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS_INCLUDE_SKIPPED, rowCount.ToString(), totalRows.ToString(), skippedRows.ToString()), (double)rowCount);
+                        {                          
+                            messageString = string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS_INCLUDE_SKIPPED, rowCount.ToString(), totalRows.ToString(), skippedRows.ToString());
                         }
+                        pStatusDelegate.Invoke(messageString, (double)rowCount);
                     }
 
                     if (pCancellationDelegate != null && pCancellationDelegate.Invoke())
@@ -1730,19 +1738,25 @@ namespace Epi.Data.Office
                 if (pStatusDelegate != null)
                 {
                     totalRows = rowCount + skippedRows;
+                    string messageString = String.Empty;
 
                     if (skippedRows == 0)
-                    {
-                        pStatusDelegate.Invoke(string.Format(SharedStrings.DASHBOARD_EXPORT_SUCCESS, totalRows.ToString()));
+                    {                      
+                        messageString = string.Format(SharedStrings.DASHBOARD_EXPORT_SUCCESS, totalRows.ToString());
                     }
                     else if (skippedRows > 0 && !numericFieldOverflow)
-                    {                        
-                        pStatusDelegate.Invoke(string.Format(SharedStrings.DASHBOARD_EXPORT_SUCCESS_SOME_SKIPPED, rowCount.ToString(), totalRows.ToString(), skippedRows.ToString()));
+                    {                                             
+                        messageString = string.Format(SharedStrings.DASHBOARD_EXPORT_SUCCESS_SOME_SKIPPED, rowCount.ToString(), totalRows.ToString(), skippedRows.ToString());
                     }
                     else if (skippedRows > 0 && numericFieldOverflow)
-                    {
-                        pStatusDelegate.Invoke(string.Format(SharedStrings.DASHBOARD_EXPORT_SUCCESS_SOME_SKIPPED_NUMERIC_FIELD_OVERFLOW, rowCount.ToString(), totalRows.ToString(), skippedRows.ToString()));
+                    {                        
+                        messageString = string.Format(SharedStrings.DASHBOARD_EXPORT_SUCCESS_SOME_SKIPPED_NUMERIC_FIELD_OVERFLOW, rowCount.ToString(), totalRows.ToString(), skippedRows.ToString());
                     }
+                    if (truncatedCellCount > 0)
+                    {
+                        messageString = messageString + string.Format("; {0} cells truncated to 255 maximum character limit.", truncatedCellCount);
+                    }
+                    pStatusDelegate.Invoke(messageString);
                 }
             }
             //catch (System.Exception ex)
