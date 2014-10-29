@@ -1317,7 +1317,15 @@ namespace Epi.Enter.Forms
                                 {
                                 destinationGUIDList.Add(destReader[0].ToString());
                                 }
-
+                            foreach (View v in destinationView.GetDescendantViews())
+                            {
+                                selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + v.TableName + "]");
+                                destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
+                                while (destReader.Read())
+                                {
+                                    destinationGUIDList.Add(destReader[0].ToString());
+                                }
+                            }
                             _webFieldDataList = ParseXML(Result);
                             
                             ProcessBaseTable(_webFieldDataList, destinationView, destinationGUIDList);
