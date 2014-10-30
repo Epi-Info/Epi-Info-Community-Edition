@@ -357,6 +357,7 @@ namespace Epi.Windows.MakeView.Forms
                     temp = PreText + "End-Form" + PostText;
 
                     this.view.CheckCode = temp;
+                    GetPublishedViewKeys();
                     this.view.GetMetadata().UpdateView(this.view);
                 }
             }
@@ -401,6 +402,7 @@ namespace Epi.Windows.MakeView.Forms
             {
                 this.view.CheckCode = checkCodeValue;
                 this.mainForm.mediator.Project.Views[view.Name].CheckCode = checkCodeValue;
+                GetPublishedViewKeys();
                 this.view.GetMetadata().UpdateView(this.view);
 
                 BuildComboBox();
@@ -797,6 +799,7 @@ namespace Epi.Windows.MakeView.Forms
                         if (goAhead)
                         {
                             this.view.CheckCode = checkCodeValue;
+                            GetPublishedViewKeys();
                             this.view.GetMetadata().UpdateView(this.view);
                         }
                         else
@@ -1110,6 +1113,16 @@ namespace Epi.Windows.MakeView.Forms
                 file.Write(codeText.Text);
                 file.Close();
             }
+        }
+
+        private void GetPublishedViewKeys()
+        {
+            DataTable table = this.mainForm.mediator.Project.Metadata.GetPublishedViewKeys(this.view.Id);
+            DataRow ViewRow = table.Rows[0];
+            string EWEFormId = ViewRow.ItemArray[3].ToString();
+            this.view.EWEFormId = EWEFormId;
+            string OrganizationKey = ViewRow.ItemArray[2].ToString();
+            this.view.EWEOrganizationKey = OrganizationKey;           
         }
 
         #endregion  //Event Handlers
