@@ -118,13 +118,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             return isValid;
         }
 
-        //private void NumberBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        //{
-        //    //e.ControlText
-        //    e.Handled = !Util.IsWholeNumber(e.Text);
-        //    base.OnPreviewTextInput(e);
-        //}
-
         private void txtLagTime_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!string.IsNullOrEmpty(txtLagTime.Text))
@@ -178,147 +171,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
         }
 
-
-        private void FillComboboxes(bool update = false)
-        {
-            //LoadingCombos = true;
-
-            //string prevField = string.Empty;
-            //string prevWeightField = string.Empty;
-            //string prevCrosstabField = string.Empty;
-            //string prev2ndYAxisField = string.Empty;
-            //List<string> prevStrataFields = new List<string>();
-
-            //if (update)
-            //{
-            //    if (cmbField.SelectedIndex >= 0)
-            //    {
-            //        prevField = cmbField.SelectedItem.ToString();
-            //    }
-            //    if (cmbFieldWeight.SelectedIndex >= 0)
-            //    {
-            //        prevWeightField = cmbFieldWeight.SelectedItem.ToString();
-            //    }
-            //    if (cmbFieldCrosstab.SelectedIndex >= 0)
-            //    {
-            //        prevCrosstabField = cmbFieldCrosstab.SelectedItem.ToString();
-            //    }
-            //    if (cmbSecondYAxisVariable.SelectedIndex >= 0)
-            //    {
-            //        prev2ndYAxisField = cmbSecondYAxisVariable.SelectedItem.ToString();
-            //    }
-            //    foreach (string s in listboxFieldStrata.SelectedItems)
-            //    {
-            //        prevStrataFields.Add(s);
-            //    }
-            //}
-
-            //if (cmbLegendDock.Items.Count == 0)
-            //{
-            //    cmbLegendDock.Items.Add(ChartingSharedStrings.LEGEND_DOCK_VALUE_LEFT);
-            //    cmbLegendDock.Items.Add(ChartingSharedStrings.LEGEND_DOCK_VALUE_RIGHT);
-            //    cmbLegendDock.Items.Add(ChartingSharedStrings.LEGEND_DOCK_VALUE_TOP);
-            //    cmbLegendDock.Items.Add(ChartingSharedStrings.LEGEND_DOCK_VALUE_BOTTOM);
-            //    cmbLegendDock.SelectedIndex = 1;
-            //}
-
-            //cmbField.ItemsSource = null;
-            //cmbField.Items.Clear();
-
-            //cmbFieldWeight.ItemsSource = null;
-            //cmbFieldWeight.Items.Clear();
-
-            //cmbFieldCrosstab.ItemsSource = null;
-            //cmbFieldCrosstab.Items.Clear();
-
-            //cmbSecondYAxisVariable.ItemsSource = null;
-            //cmbSecondYAxisVariable.Items.Clear();
-
-            //listboxFieldStrata.ItemsSource = null;
-            //listboxFieldStrata.Items.Clear();
-
-            //List<string> fieldNames = new List<string>();
-            //List<string> weightFieldNames = new List<string>();
-            //List<string> strataFieldNames = new List<string>();
-            //List<string> crosstabFieldNames = new List<string>();
-
-            //weightFieldNames.Add(string.Empty);
-            //crosstabFieldNames.Add(string.Empty);
-
-            //ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
-            //fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
-
-            //columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
-            //weightFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
-
-            //columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
-            //strataFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
-
-            //columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
-            //crosstabFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
-
-            //fieldNames.Sort();
-            //weightFieldNames.Sort();
-            //strataFieldNames.Sort();
-            //crosstabFieldNames.Sort();
-
-            //if (fieldNames.Contains("SYSTEMDATE"))
-            //{
-            //    fieldNames.Remove("SYSTEMDATE");
-            //}
-
-            //if (DashboardHelper.IsUsingEpiProject)
-            //{
-            //    if (fieldNames.Contains("RecStatus")) fieldNames.Remove("RecStatus");
-            //    if (weightFieldNames.Contains("RecStatus")) weightFieldNames.Remove("RecStatus");
-
-            //    if (strataFieldNames.Contains("RecStatus")) strataFieldNames.Remove("RecStatus");
-            //    if (strataFieldNames.Contains("FKEY")) strataFieldNames.Remove("FKEY");
-            //    if (strataFieldNames.Contains("GlobalRecordId")) strataFieldNames.Remove("GlobalRecordId");
-
-            //    if (crosstabFieldNames.Contains("RecStatus")) crosstabFieldNames.Remove("RecStatus");
-            //    if (crosstabFieldNames.Contains("FKEY")) crosstabFieldNames.Remove("FKEY");
-            //    if (crosstabFieldNames.Contains("GlobalRecordId")) crosstabFieldNames.Remove("GlobalRecordId");
-            //}
-
-            //cmbField.ItemsSource = fieldNames;
-            //cmbFieldWeight.ItemsSource = weightFieldNames;
-            //cmbFieldCrosstab.ItemsSource = crosstabFieldNames;
-            //cmbSecondYAxisVariable.ItemsSource = weightFieldNames;
-            //listboxFieldStrata.ItemsSource = strataFieldNames;
-
-            //if (cmbField.Items.Count > 0)
-            //{
-            //    cmbField.SelectedIndex = -1;
-            //}
-            //if (cmbFieldWeight.Items.Count > 0)
-            //{
-            //    cmbFieldWeight.SelectedIndex = -1;
-            //}
-            //if (cmbFieldCrosstab.Items.Count > 0)
-            //{
-            //    cmbFieldCrosstab.SelectedIndex = -1;
-            //}
-            //if (cmbSecondYAxisVariable.Items.Count > 0)
-            //{
-            //    cmbSecondYAxisVariable.SelectedIndex = -1;
-            //}
-
-            //if (update)
-            //{
-            //    cmbField.SelectedItem = prevField;
-            //    cmbFieldWeight.SelectedItem = prevWeightField;
-            //    cmbFieldCrosstab.SelectedItem = prevCrosstabField;
-            //    cmbSecondYAxisVariable.SelectedItem = prev2ndYAxisField;
-
-            //    foreach (string s in prevStrataFields)
-            //    {
-            //        listboxFieldStrata.SelectedItems.Add(s);
-            //    }
-            //}
-
-            //LoadingCombos = false;
-        }
         public bool HasSelectedFields
         {
             get
@@ -341,8 +193,6 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             // Set data filters!
             this.DataFilters = RowFilterControl.DataFilters;
-
-            //Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
 
             if (cmbField.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbField.SelectedItem.ToString()))
             {
@@ -418,9 +268,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             Parameters.ChartTitle = txtChartTitle.Text;
 
-            //GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
             Parameters.IncludeFullSummaryStatistics = false;
-            //GadgetOptions.InputVariableList = inputVariableList;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -469,7 +317,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 foreach (string s in Parameters.StrataVariableNames)
                 {
-                    //listboxFieldStrata.SelectedItem = s;
                     listboxFieldStrata.SelectedItems.Add(s.ToString());
                 }
             }
@@ -495,16 +342,6 @@ namespace EpiDashboard.Controls.GadgetProperties
         }
 
         public class FieldInfo { public string Name { get; set; } public string DataType { get; set; } public VariableCategory VariableCategory { get; set; } }
-
-        ///// <summary>
-        ///// Fired when the user changes a column selection
-        ///// </summary>
-        ///// <param name="sender">Object that fired the event</param>
-        ///// <param name="e">.NET supplied event parameters</param>
-        //private void lbxColumns_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    ShowHideOutputColumns();
-        //}
 
         /// <summary>
         /// Checks the selected variables and enables/disables checkboxes as appropriate
@@ -648,19 +485,6 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.StrataVariableNames.Clear();
             }
         }
-
-        private void cmbFieldWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //if (cmbFieldWeight.SelectedValue == String.Empty)
-            //{
-            //    cmbFieldWeight.Items.Clear();
-            //}
-        }
-
-        //private void cmbField_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    CheckVariables();
-        //}
 
         protected virtual void cmbField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
