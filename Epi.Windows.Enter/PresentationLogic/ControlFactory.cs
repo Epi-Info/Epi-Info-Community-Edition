@@ -510,26 +510,33 @@ namespace Epi.Windows.Enter.PresentationLogic
                 comboBox.DisplayMember = null;
                 comboBox.ValueMember = null;
                 DataTable displayTable;
-
-                if (field.View.DisableCodeTableCache)
+                if (field.SourceTableName.Contains("-"))
                 {
-                    displayTable = field.GetDisplayTable("", "", displayMember);
+                    string tablename = field.SourceTableName.Substring(0, field.SourceTableName.IndexOf('-'));
+                    displayTable = field.GetDisplayTable("", "", displayMember, tablename);
                 }
                 else
                 {
-                    if (cachedListValues == null)
+                    if (field.View.DisableCodeTableCache)
                     {
-                        cachedListValues = new Dictionary<string, DataTable>();
-                    }
-
-                    if (cachedListValues.ContainsKey(displayMember + "," + field.SourceTableName))
-                    {
-                        displayTable = cachedListValues[displayMember + "," + field.SourceTableName];
+                        displayTable = field.GetDisplayTable("", "", displayMember);
                     }
                     else
                     {
-                        displayTable = field.GetDisplayTable("", "", displayMember);
-                        cachedListValues.Add(displayMember + "," + field.SourceTableName, displayTable);
+                        if (cachedListValues == null)
+                        {
+                            cachedListValues = new Dictionary<string, DataTable>();
+                        }
+
+                        if (cachedListValues.ContainsKey(displayMember + "," + field.SourceTableName))
+                        {
+                            displayTable = cachedListValues[displayMember + "," + field.SourceTableName];
+                        }
+                        else
+                        {
+                            displayTable = field.GetDisplayTable("", "", displayMember);
+                            cachedListValues.Add(displayMember + "," + field.SourceTableName, displayTable);
+                        }
                     }
                 }
 
