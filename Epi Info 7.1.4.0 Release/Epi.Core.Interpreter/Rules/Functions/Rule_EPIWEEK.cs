@@ -57,7 +57,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 }
             }
 
-            if (_dateTimeGiven != null)
+            if (_dateTimeGiven != null && _dateTimeGiven!=DateTime.MinValue)
             {
                 DateTime MMWR__Start;
                 MMWR__Start = GetMMWRStart(_dateTimeGiven, _firstDayOfWeek);
