@@ -3,6 +3,7 @@ using System.Data;
 
 using Epi;
 using Epi.Data;
+using System.Collections.Generic;
 
 namespace Epi.Fields
 {
@@ -83,6 +84,58 @@ namespace Epi.Fields
             {
                 DataView dataView = new DataView(CodeTable);
 
+                if (dataView.Count > 0)
+                {
+                    displayTable = dataView.ToTable(true, this.TextColumnName);
+                }
+                else
+                {
+                    displayTable = null;
+                    return displayTable;
+                }
+            }
+            else
+            {
+                EnumerableRowCollection<DataRow> query =
+                    from code in codeTable.AsEnumerable()
+                    where code.Field<string>(predicate) == expression
+                    select code;
+
+                DataView view = query.AsDataView();
+                displayTable = view.ToTable(true, this.TextColumnName);
+            }
+
+            displayTable.Columns[0].ColumnName = "Item";
+
+            return displayTable;
+        }
+
+        public DataTable GetDisplayTable(string predicate, string expression, string displayMember, string formcodetable)
+        {
+            DataTable displayTable = new DataTable();
+
+            if (string.IsNullOrEmpty(expression))
+            {
+                DataView dataView1 = new DataView(CodeTable);
+                displayTable = dataView1.ToTable();
+                DataTable dt = new DataTable();
+                dt = this.GetProject().CollectedData.GetTableData(formcodetable);
+                DataView dv = new DataView(dt);
+                dv.RowFilter = "RECSTATUS=0";
+                DataTable dt1 = dv.ToTable();
+                List<DataRow> deletedRows = new List<DataRow>();
+                foreach (DataRow dr in displayTable.Rows)
+                {
+                    foreach (DataRow dr1 in dt1.Rows)
+                    {
+                        if (dr1["GlobalRecordId"].ToString() == dr["GlobalRecordId"].ToString())
+                        {
+                            deletedRows.Add(dr);
+                        }
+                    }
+                }
+                deletedRows.ForEach(x => displayTable.Rows.Remove(x));
+                DataView dataView = new DataView(displayTable);
                 if (dataView.Count > 0)
                 {
                     displayTable = dataView.ToTable(true, this.TextColumnName);
