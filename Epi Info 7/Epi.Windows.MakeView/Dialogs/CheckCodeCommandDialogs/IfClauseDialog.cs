@@ -964,7 +964,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             mnuZSCORE.Click += new EventHandler(FXClickHandler);
 
             ToolStripMenuItem mnuRECORDCOUNT = new ToolStripMenuItem(CommandNames.RECORDCOUNT);
-            mnuRECORDCOUNT.ToolTipText = CommandNames.FILEDATE + SharedStrings.CNTXT_FXN_TMPLT_FILENAME;
+            mnuRECORDCOUNT.ToolTipText = CommandNames.RECORDCOUNT;
             mnuRECORDCOUNT.Click += new EventHandler(FXClickHandler);
 
             //===================================================================
