@@ -49,7 +49,7 @@
             
 
             <TextBlock x:Name="tblockWeightVariable" Margin="0,12,0,0">Count (Optional):</TextBlock>
-            <ComboBox x:Name="cmbFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbFieldWeight_SelectionChanged" />
+            <ComboBox x:Name="cmbFieldWeight" Width="216" HorizontalAlignment="Left" Height="28"/>
 
             <TextBlock x:Name="tblockLagTimeDays" Margin="0,12,0,0" HorizontalAlignment="Left" TextAlignment="Center" Text="Lag time (days):"/>
             <TextBox x:Name="txtLagTime" Grid.Column="2" Grid.Row="5" Width="30" HorizontalAlignment="Left" Text="7" Margin="0, 0, 0, 00" TextChanged="txtLagTime_TextChanged"></TextBox>
