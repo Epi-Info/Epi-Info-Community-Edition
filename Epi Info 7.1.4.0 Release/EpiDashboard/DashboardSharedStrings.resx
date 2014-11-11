@@ -112,14 +112,14 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CANNOT_REMOVE_VARIABLE" xml:space="preserve">
     <value>The variable could not be removed. Check to make sure that no data filters and/or other variables are dependent on this variable.</value>
-  </data>  
+  </data>
   <data name="CANNOT_SAVE_CANVAS_NO_DATA_SOURCE" xml:space="preserve">
     <value>A data source must be read before the canvas can be saved.</value>
   </data>
@@ -171,7 +171,7 @@
   </data>
   <data name="CMENU_ADD_MATCHED_PAIR_CASE_CONTROL" xml:space="preserve">
     <value>Matched pair case-control</value>
-  </data>  
+  </data>
   <data name="CMENU_ADD_CSFREQ" xml:space="preserve">
     <value>Complex sample frequencies</value>
   </data>
@@ -181,9 +181,6 @@
   <data name="CMENU_ADD_CSTABLES" xml:space="preserve">
     <value>Complex sample tables</value>
   </data>
-  <!--<data name="CMENU_ADD_EARS" xml:space="preserve">
-    <value>Aberration detection</value>
-  </data>-->
   <data name="CMENU_ADD_FREQUENCY" xml:space="preserve">
     <value>Frequency</value>
   </data>
@@ -282,48 +279,42 @@
     <value>Percent</value>
     <comment>Column header for the 'Percent' label.</comment>
   </data>
-
-  
   <data name="CUSTOM_QUERY" xml:space="preserve">
-    <value>Custom SQL Query</value>    
+    <value>Custom SQL Query</value>
   </data>
-  
   <data name="VARIABLE_CONTROL_TITLE" xml:space="preserve">
-    <value>Defined Variables ({0})</value>    
+    <value>Defined Variables ({0})</value>
   </data>
-
   <data name="VARIABLE_CONTROL_HEADER" xml:space="preserve">
-    <value>Variable Definitions:</value>    
+    <value>Variable Definitions:</value>
   </data>
   <data name="VARIABLE_CONTROL_NEW_VARIABLE" xml:space="preserve">
-    <value>New Variable</value>    
+    <value>New Variable</value>
   </data>
   <data name="VARIABLE_CONTROL_EDIT_VARIABLE" xml:space="preserve">
-    <value>Edit Variable</value>    
+    <value>Edit Variable</value>
   </data>
   <data name="VARIABLE_CONTROL_DEL_VARIABLE" xml:space="preserve">
-    <value>Delete Variable</value>    
+    <value>Delete Variable</value>
   </data>
-
   <data name="VARIABLE_CONTROL_CMENU_RECODE" xml:space="preserve">
-    <value>With Recoded Value</value>    
+    <value>With Recoded Value</value>
   </data>
   <data name="VARIABLE_CONTROL_CMENU_SIMPLE_ASSIGN" xml:space="preserve">
-    <value>With Simple Assignment</value>    
+    <value>With Simple Assignment</value>
   </data>
   <data name="VARIABLE_CONTROL_CMENU_CONDITIONAL_ASSIGN" xml:space="preserve">
-    <value>With Conditional Assignment</value>    
+    <value>With Conditional Assignment</value>
   </data>
   <data name="VARIABLE_CONTROL_CMENU_FORMAT" xml:space="preserve">
-    <value>With Formatted Value</value>    
+    <value>With Formatted Value</value>
   </data>
   <data name="VARIABLE_CONTROL_CMENU_EXPRESSION" xml:space="preserve">
-    <value>With Assigned Expression</value>    
+    <value>With Assigned Expression</value>
   </data>
   <data name="VARIABLE_CONTROL_CMENU_GROUP" xml:space="preserve">
-    <value>Create Variable Group</value>    
+    <value>Create Variable Group</value>
   </data>
-
   <data name="DENOMINATOR_DESCRIPTION_BOOLEAN" xml:space="preserve">
     <value>Fields are boolean.
 Denominator = {0}</value>
@@ -377,16 +368,13 @@ Denominator = {0}</value>
     <value>Advanced options</value>
     <comment>Label for the Advanced options text that appears in most gadgets' configuration panels.</comment>
   </data>
-    <data name="GADGET_DISPLAY_OPTIONS" xml:space="preserve">
+  <data name="GADGET_DISPLAY_OPTIONS" xml:space="preserve">
     <value>Display options</value>
     <comment>Label for the Display options text that appears in most gadgets' configuration panels.</comment>
   </data>
   <data name="GADGET_ALL_LIST_VALUES" xml:space="preserve">
     <value>Display all list values</value>
   </data>
-  <!--<data name="GADGET_CHART_GRID_LINES" xml:space="preserve">
-    <value>Show grid lines</value>
-  </data>-->
   <data name="GADGET_CONFIG_TITLE_FREQUENCY" xml:space="preserve">
     <value>Frequency Properties</value>
     <comment>The title text used in the config panel for the frequency gadget.</comment>
@@ -421,48 +409,6 @@ Denominator = {0}</value>
   <data name="GADGET_DECIMALS_TO_DISPLAY" xml:space="preserve">
     <value>Decimals to display:</value>
   </data>
-  <!--<data name="GADGET_CHART_TYPE" xml:space="preserve">
-    <value>Chart Type:</value>
-  </data>-->
-  <!--<data name="GADGET_CHART_SIZE" xml:space="preserve">
-    <value>Chart Size:</value>
-  </data>-->
-  <!--<data name="GADGET_DATE_INTERVAL" xml:space="preserve">
-    <value>Date Interval:</value>
-  </data>-->
-  <!--<data name="GADGET_X_LABEL_ROTATION" xml:space="preserve">
-    <value>x-axis label rotation:</value>
-  </data>-->
-  <!--<data name="GADGET_X_START_VALUE" xml:space="preserve">
-    <value>x-axis start value:</value>
-  </data>-->
-  <!--<data name="GADGET_X_END_VALUE" xml:space="preserve">
-    <value>x-axis end value:</value>
-  </data>-->
-  <!--<data name="GADGET_X_FIELD" xml:space="preserve">
-    <value>X-Axis Field:</value>
-  </data>-->
-  <!--<data name="GADGET_Y_FIELD" xml:space="preserve">
-    <value>Y-Axis Field:</value>
-  </data>-->
-  <!--<data name="GADGET_ONSET_DATE_FIELD" xml:space="preserve">
-    <value>Onset Date Field:</value>
-  </data>-->
-  <!--<data name="GADGET_CASE_STATUS_FIELD" xml:space="preserve">
-    <value>Case Status Field:</value>
-  </data>-->
-  <!--<data name="GADGET_AGG_FUNC" xml:space="preserve">
-    <value>Aggregate Function:</value>
-  </data>-->
-  <!--<data name="GADGET_CHART_VARIABLE" xml:space="preserve">
-    <value>Primary Field:</value>
-  </data>-->
-  <!--<data name="GADGET_CHART_OUTCOME_VARIABLE" xml:space="preserve">
-    <value>Outcome Field:</value>
-  </data>-->
-  <!--<data name="GADGET_CHART_GENERATE" xml:space="preserve">
-    <value>Generate Chart</value>
-  </data>-->
   <data name="GADGET_INDICATOR_VARIABLE_OPT" xml:space="preserve">
     <value>Indicator (Optional):</value>
   </data>
@@ -511,7 +457,6 @@ Denominator = {0}</value>
   <data name="GADGET_2X2_VALUE_REMAPPING_BUTTON" xml:space="preserve">
     <value>Define 2x2 Value Mappings</value>
   </data>
-
   <data name="GADGET_MAX_WIDTH" xml:space="preserve">
     <value>Max width:</value>
   </data>
@@ -527,8 +472,6 @@ Denominator = {0}</value>
   <data name="GADGET_TRUE_VALUE" xml:space="preserve">
     <value>Value to treat as true:</value>
   </data>
-
-
   <data name="GADGET_USE_CONDITIONAL_CELL_SHADING" xml:space="preserve">
     <value>Conditional cell shading</value>
   </data>
@@ -553,25 +496,15 @@ Denominator = {0}</value>
   <data name="GADGET_BREAK5" xml:space="preserve">
     <value>Break 5:</value>
   </data>
-
   <data name="GADGET_MAX_ROWS_TO_DISPLAY" xml:space="preserve">
     <value>Maxium rows to display:</value>
   </data>
   <data name="GADGET_MAX_PERCENT_BAR_WIDTH" xml:space="preserve">
     <value>Max width of percent bar:</value>
   </data>
-
   <data name="GADGET_PARSE_FIELD" xml:space="preserve">
     <value>Parse field:</value>
   </data>
-
-
-  
-
-
-
-
-
   <data name="GADGET_INCLUDE_MISSING" xml:space="preserve">
     <value>Include missing values</value>
   </data>
@@ -610,7 +543,7 @@ Denominator = {0}</value>
   </data>
   <data name="GADGET_ERASE_ALL_FROM_CANVAS" xml:space="preserve">
     <value>All gadgets will be erased from the canvas. Proceed?</value>
-  </data>  
+  </data>
   <data name="GADGET_MSG_NO_DATA" xml:space="preserve">
     <value>No data are present in the selected field or fields.</value>
     <comment>Displayed in the gadget's message panel when the user has told the gadget to show results, but there is nothing to show.</comment>
@@ -775,7 +708,6 @@ Denominator = {0}</value>
   <data name="TOOLTIP_MENU_SET_DATA_SOURCE" xml:space="preserve">
     <value>Attaches a data source (Epi Info 7 project, Excel spreadsheet, etc.) to a new, blank Dashboard canvas.</value>
   </data>
-  
   <data name="TOOLTIP_MENU_SET_DATA_SOURCE_HEADER" xml:space="preserve">
     <value>Set Data Source Button</value>
   </data>
@@ -791,7 +723,6 @@ Denominator = {0}</value>
   <data name="TOOLTIP_MENU_REFRESH_HEADER" xml:space="preserve">
     <value>Refresh Button</value>
   </data>
-  
   <data name="ERROR_TOO_MANY_VALUES" xml:space="preserve">
     <value>There are too many distinct values in the variable {0}. The number of distinct
 values is {1} and the limit is {2}.</value>
@@ -824,7 +755,7 @@ of records or select fewer fields for the group.</value>
   </data>
   <data name="ERROR_FILTER_NO_LONGER_VALID" xml:space="preserve">
     <value>The specified data filter is no longer valid.</value>
-  </data>  
+  </data>
   <data name="ERROR_FORM_NOT_FOUND_FOR_CANVAS" xml:space="preserve">
     <value>The form named '{0}' was not found in this project. Please make sure the project you are selecting to use with this canvas file contains the appropriate form.</value>
   </data>
@@ -914,5 +845,8 @@ of records or select fewer fields for the group.</value>
   </data>
   <data name="SAVE_SUCCESSFUL" xml:space="preserve">
     <value>Save Successful</value>
+  </data>
+  <data name="ERROR_NO_DATA_FOR_STRATA" xml:space="preserve">
+    <value>No data are present in the selected strata.</value>
   </data>
 </root>

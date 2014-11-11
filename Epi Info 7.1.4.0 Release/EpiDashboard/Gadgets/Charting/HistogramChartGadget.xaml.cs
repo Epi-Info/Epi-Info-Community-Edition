@@ -1006,6 +1006,12 @@ namespace EpiDashboard.Gadgets.Charting
             if (strata != null)
             {
                 chartSettings.ChartStrataTitle = strata.Filter;
+                if (dataList.Count <= 0)
+                {
+                    chartSettings.ChartStrataTitle = chartSettings.ChartStrataTitle + StringLiterals.SPACE + StringLiterals.PARANTHESES_OPEN +
+                        DashboardSharedStrings.ERROR_NO_DATA_FOR_STRATA +
+                        StringLiterals.PARANTHESES_CLOSE;
+                }
             }
             chartSettings.ChartWidth = int.Parse(txtWidth.Text);
             chartSettings.ChartHeight = int.Parse(txtHeight.Text);
@@ -1561,26 +1567,28 @@ namespace EpiDashboard.Gadgets.Charting
                         interval = GadgetOptions.InputVariableList["interval"];
                     }
 
-                    switch (interval)
+                    if (table.Rows.Count > 0) 
                     {
-                        case "year":
-                            CalculateByYear(table, epiCurveTable, step);
-                            break;
-                        case "minute":
-                            CalculateByMinute(table, epiCurveTable, step);
-                            break;
-                        case "hour":
-                            CalculateByHour(table, epiCurveTable, step);
-                            break;
-                        case "month":
-                            CalculateByMonth(table, epiCurveTable, step);
-                            break;
-                        default:
-                        case "day":
-                            CalculateByDay(table, epiCurveTable, step);
-                            break;
+                        switch (interval)
+                        {
+                            case "year":
+                                CalculateByYear(table, epiCurveTable, step);
+                                break;
+                            case "minute":
+                                CalculateByMinute(table, epiCurveTable, step);
+                                break;
+                            case "hour":
+                                CalculateByHour(table, epiCurveTable, step);
+                                break;
+                            case "month":
+                                CalculateByMonth(table, epiCurveTable, step);
+                                break;
+                            default:
+                            case "day":
+                                CalculateByDay(table, epiCurveTable, step);
+                                break;
+                        }
                     }
-
                     foreach (DataRow row in epiCurveTable.Rows)
                     {
                         XYColumnChartData chartData = new XYColumnChartData();
