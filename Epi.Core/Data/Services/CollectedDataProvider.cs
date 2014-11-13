@@ -1353,11 +1353,13 @@ namespace Epi.Data.Services
                 Query selectQuery = dbDriver.CreateQuery(sb.ToString());
 
                 DataTable dataTable = dbDriver.Select(selectQuery);
+                dataTable.CaseSensitive = false;
                 if (dataTable.Rows.Count > 0)
                 {
                     DataRow dataRow = dataTable.Rows[0];
                     view.UniqueKeyField.CurrentRecordValueString = dataRow["UniqueKey"].ToString();
-                    view.RecStatusField.CurrentRecordValueObject = dataRow["RecStatus"];
+                   // view.RecStatusField.CurrentRecordValueObject = dataRow["RecStatus"];
+                    view.RecStatusField.CurrentRecordValueObject = dataRow["RECSTATUS"];//To support differnet locales such as Hungarian,Turkish.
                     view.CurrentGlobalRecordId = dataRow["GlobalRecordId"].ToString();
                 }
 
