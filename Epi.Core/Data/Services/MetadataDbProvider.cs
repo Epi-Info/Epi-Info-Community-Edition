@@ -9807,6 +9807,12 @@ namespace Epi.Data.Services
                 "metaFields.Name AS [Name], " +
                 "metaDataTypes.Name AS [Variable Type], " +
                 "metaFields.Pattern AS [Format], " +
+                "metaFields.Isrequired, " +
+                "metafields.IsReadOnly,  " +
+                "metafields.ShouldRepeatLast, " +
+                "metafields.ShouldRetainImageSize, " +
+                "metafields.[lower],  " + 
+                "metafields.[upper],  " +
                 "metaFields.List AS [Special Info] " +
                 "FROM ((metaFields  " +
                 "INNER JOIN metaFieldTypes ON metaFields.FieldTypeId = metaFieldTypes.FieldTypeId ) " +
