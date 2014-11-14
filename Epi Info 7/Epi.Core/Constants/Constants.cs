@@ -40,5 +40,22 @@ namespace Epi
         public const Char LIST_SEPARATOR = ',';
 
         public const string VARIABLE_NAME_TEST_TOKEN = "zydpbwza"; //"VARNAMETESTTOKEN";
+
+        //Adding Properties to data dictionary
+
+        public const string VARREADONLY = " Read Only ";
+
+        public const string VARREPEATLAST = " Repeat Last ";
+
+        public const string VARREQUIRED = " Required ";
+
+        public const string VARRANGE = " RANGE ";
+
+        public const string VARRETAINIMAGESIZE = " Retain Image Size ";
+
+        public const string SHOULDRETAINIMAGESIZE = "ShouldRetainImageSize";
+
+        public const string SPECIALINFO = "Special Info";
+
     }
 }
