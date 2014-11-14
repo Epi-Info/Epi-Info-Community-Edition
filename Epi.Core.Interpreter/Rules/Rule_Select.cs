@@ -84,9 +84,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             VariableType scopeWord = VariableType.DataSource | VariableType.Standard |
                                      VariableType.Global | VariableType.Permanent;
             VariableCollection vars = this.Context.MemoryRegion.GetVariablesInScope(scopeWord);           
-            string[] names = null; bool isvalid = false;
-            fieldnames.ToString().Trim(new char[] { '[', ']' });           
-            names = fieldnames.ToString().Split(' ');     invalidfieldnames=new List<string>();       
+            string[] names = null; bool isvalid = false;                     
+            names = fieldnames.ToString().Trim(new char[] { '[', ']' }).Split(' ');     invalidfieldnames=new List<string>();       
             foreach (string name in names)
             {
                 invalidfieldnames.Add(name);
