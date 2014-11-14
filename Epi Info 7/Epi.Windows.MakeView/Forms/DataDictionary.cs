@@ -248,10 +248,47 @@ namespace Epi.Windows.MakeView.Forms
                     if (dr["Field Type"].ToString().ToLower() == "image")
                     {
                         dr["Variable Type"] = "Image";
-                    }
-                }
 
-                ((MakeViewMainForm)this.mainForm).EpiInterpreter.Context.ClearState();
+                         //--2365
+                        Boolean bshouldretainImage = (Boolean) dr[Constants.SHOULDRETAINIMAGESIZE];
+                        if (bshouldretainImage == true)
+                        {
+                            dr[Constants.SPECIALINFO] =  dr[Constants.SPECIALINFO].ToString() + Constants.VARRETAINIMAGESIZE;
+                        }
+                        //--
+	                }
+                    //--2365
+                    Boolean bshouldRepeatLast = (Boolean)dr[ColumnNames.SHOULD_REPEAT_LAST];
+                    if (bshouldRepeatLast == true)
+                    {
+                        dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO] .ToString() + Constants.VARREPEATLAST;
+                    }
+                    Boolean bIsRequired = (Boolean)dr[ColumnNames.IS_REQUIRED];
+                    if (bIsRequired == true)
+                    {
+                        dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO] .ToString() + Constants.VARREQUIRED;
+                    }
+                    Boolean bIsReadOnly = (Boolean)dr[ColumnNames.IS_READ_ONLY];
+                    if (bIsReadOnly == true)
+                    {
+                        dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO] + Constants.VARREADONLY;
+                    }
+                    if (dr[ColumnNames.UPPER].ToString().Length > 0 && dr[ColumnNames.LOWER].ToString().Length > 0)
+                   {
+                       dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO] + Constants.VARRANGE + CharLiterals.LEFT_SQUARE_BRACKET + dr[ColumnNames.LOWER].ToString() + CharLiterals.COMMA + dr[ColumnNames.UPPER].ToString() + CharLiterals.RIGHT_SQUARE_BRACKET;
+                   }
+                    //---- 
+                }
+                //-- 2365
+                displayTable.Columns.Remove(ColumnNames.IS_REQUIRED);
+                displayTable.Columns.Remove(ColumnNames.SHOULD_REPEAT_LAST);
+                displayTable.Columns.Remove(ColumnNames.IS_READ_ONLY);
+                displayTable.Columns.Remove(Constants.SHOULDRETAINIMAGESIZE);
+                displayTable.Columns.Remove(ColumnNames.UPPER);
+                displayTable.Columns.Remove(ColumnNames.LOWER);
+
+                //--
+               ((MakeViewMainForm)this.mainForm).EpiInterpreter.Context.ClearState();
                 ((MakeViewMainForm)this.mainForm).EpiInterpreter.Execute(this.view.CheckCode);
 
                 EpiInfo.Plugin.VariableScope variableScope =
