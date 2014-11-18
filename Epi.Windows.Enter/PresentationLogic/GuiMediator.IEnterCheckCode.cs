@@ -440,8 +440,8 @@ namespace Epi.Windows.Enter.PresentationLogic
             if (this.currentPage != null && this.currentPage.Fields.Contains(name))
             {
                 List<System.Windows.Forms.Control> Controls = ControlFactory.Instance.GetAssociatedControls(this.currentPage.Fields[name]);
-
                 dataField = (IVariable)this.view.Fields[name];
+
                 dataType = (EpiInfo.Plugin.DataType)dataField.DataType;
 
                 if (Controls.Count > 1)
@@ -1123,10 +1123,14 @@ namespace Epi.Windows.Enter.PresentationLogic
         /// Quit
         /// </summary>
         public void Quit()
-        {
+         {
+            //--for 2327
+            if (this.mainForm.IsRecordCloseable) 
+            {
             this.canvas.UnsubscribeControlEventHandlers();
             this.mainForm.Close();
             this.CloseFormEventHandler(this, new EventArgs());
+            }
         }
 
         /// <summary>
@@ -1134,6 +1138,9 @@ namespace Epi.Windows.Enter.PresentationLogic
         /// </summary>
         public void NewRecord()
         {
+            //--2326
+            if (this.mainForm.IsRecordCloseable)
+            { 
             this.canvas.UnsubscribeControlEventHandlers();
             this.SaveRecord();
 
@@ -1154,6 +1161,7 @@ namespace Epi.Windows.Enter.PresentationLogic
             this.Render();
             this.canvas.SubscribeControlEventHandlers();
             SetFocusToFirstControl(currentPage, _fieldPanel);
+            }
         }
 
         private void ResetViewDataFields()
