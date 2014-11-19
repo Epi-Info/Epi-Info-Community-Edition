@@ -4152,6 +4152,11 @@ namespace Epi.Data.Services
                 }
                 #endregion
 
+                if (db.ColumnExists("metaGridColumns", "IsUniqueField") == false)
+                {
+                    TableColumn tableColumn = new TableColumn("IsUniqueField", GenericDbColumnType.Boolean, true);
+                    db.AddColumn("metaGridColumns", tableColumn);
+                }
                 Query insertQuery = db.CreateQuery("insert into metaGridColumns([Name], [FieldTypeId], [Width], [Size], [Position], [Text], [ShouldRepeatLast], [IsRequired], [IsReadOnly], [FieldId], [IsUniqueField]) " +
                     "values (@Name, @FieldTypeId, @Width, @Size, @Position, @Text, @ShouldRepeatLast, @IsRequired, @IsReadOnly, @FieldId, @IsUniqueField)");
 
@@ -4195,6 +4200,29 @@ namespace Epi.Data.Services
                 }
                 #endregion
 
+                Query query = db.CreateQuery("select F.[FieldTypeId],  F.[Name],  F.[HasRepeatLast], F.[HasRequired], F.[HasReadOnly], F.[HasRetainImageSize],  F.[HasFont], F.[IsGridColumn], F.[IsDropDown] " +
+                "from metaFieldTypes F " +
+                "where [F.FieldTypeId]=@FieldTypeId");
+                query.Parameters.Add(new QueryParameter("@FieldTypeId", DbType.Int32, (int)column.GridColumnType));
+                DataTable dt = db.Select(query);
+                if (dt.Rows.Count == 0)
+                {
+                    query = null;
+                    query = db.CreateQuery("insert into metaFieldTypes ([FieldTypeId], [Name], [HasRepeatLast], [HasRequired], [HasReadOnly], [HasRetainImageSize], [HasFont], [IsDropDown], [IsGridColumn], [DataTypeId], [IsSystem],DefaultPatternId) values (@FieldTypeId, @Name, @HasRepeatLast, @HasRequired, @HasReadOnly, @HasRetainImageSize, @HasFont, @IsDropDown, @IsGridColumn, @DataTypeId, @IsSystem,@DefaultPatternId)");
+                    query.Parameters.Add(new QueryParameter("@FieldTypeId", DbType.Int32, (int)column.GridColumnType));
+                    query.Parameters.Add(new QueryParameter("@Name", DbType.String, column.Name));
+                    query.Parameters.Add(new QueryParameter("@HasRepeatLast", DbType.Boolean, false));
+                    query.Parameters.Add(new QueryParameter("@HasRequired", DbType.Boolean, false));
+                    query.Parameters.Add(new QueryParameter("@HasReadOnly", DbType.Boolean, false));
+                    query.Parameters.Add(new QueryParameter("@HasRetainImageSize", DbType.Boolean, false));
+                    query.Parameters.Add(new QueryParameter("@HasFont", DbType.Boolean, false));
+                    query.Parameters.Add(new QueryParameter("@IsDropDown", DbType.Boolean, false));
+                    query.Parameters.Add(new QueryParameter("@IsGridColumn", DbType.Boolean, true));
+                    query.Parameters.Add(new QueryParameter("@DataTypeId", DbType.Int32, 1));
+                    query.Parameters.Add(new QueryParameter("@IsSystem", DbType.Boolean, true));
+                    query.Parameters.Add(new QueryParameter("@DefaultPatternId", DbType.Int32, 0));
+                    db.ExecuteNonQuery(query);
+                }
                 Query insertQuery = db.CreateQuery("insert into metaGridColumns([Name], [FieldTypeId], [Width], [Size], [Position], [Text], [ShouldRepeatLast], [IsRequired], [IsReadOnly], [FieldId]) " +
                     "values (@Name, @FieldTypeId, @Width, @Size, @Position, @Text, @ShouldRepeatLast, @IsRequired, @IsReadOnly, @FieldId)");
 
