@@ -18,6 +18,7 @@ namespace Epi.ImportExport.Filters
     {
         #region Private Members
         private List<IRowFilterCondition> _rowFilterConditions;
+        private readonly ConditionJoinTypes _conditionJoinType = ConditionJoinTypes.And;
         #endregion // Private Members
 
         #region Constructors
@@ -25,7 +26,8 @@ namespace Epi.ImportExport.Filters
         /// Constructor
         /// </summary>
         /// <param name="dataDriver">The data driver to attach to this object</param>
-        public RowFilters(IDbDriver dataDriver)
+        /// <param name="joinType">Whether to use a global AND or OR to join all the conditions</param>
+        public RowFilters(IDbDriver dataDriver, ConditionJoinTypes joinType = ConditionJoinTypes.And)
         {
             // pre
             Contract.Requires(dataDriver != null);
@@ -34,6 +36,7 @@ namespace Epi.ImportExport.Filters
             Contract.Ensures(DataDriver != null);
             Contract.Ensures(_rowFilterConditions != null);
 
+            _conditionJoinType = joinType;
             DataDriver = dataDriver;
             _rowFilterConditions = new List<IRowFilterCondition>();
         }
@@ -63,6 +66,9 @@ namespace Epi.ImportExport.Filters
             Contract.Ensures(Contract.Result<Query>() != null);
             Contract.Ensures(!String.IsNullOrEmpty(Contract.Result<Query>().SqlStatement));
 
+            // assumes
+            Contract.Assume(DataDriver != null);
+
             if (DataDriver == null)
             {
                 throw new InvalidOperationException();
@@ -78,7 +84,6 @@ namespace Epi.ImportExport.Filters
 
             Contract.Assert(!String.IsNullOrEmpty(fromClause));
 
-            WordBuilder filterSql = new WordBuilder(" AND ");
             WordBuilder columns = new WordBuilder(", ");
 
             columns.Append("[" + baseTableName + "].[GlobalRecordId]");
@@ -93,15 +98,22 @@ namespace Epi.ImportExport.Filters
                 columns.Append("[" + baseTableName + "].[LastSaveTime]");
             }
 
-            string fullSql = "SELECT " + columns.ToString() + " " + fromClause + " WHERE [" + baseTableName + "].[RECSTATUS] = 1 ";
-            filterSql.Append(fullSql);
+            string fullSql = "SELECT " + columns.ToString() + " " + fromClause + " WHERE [" + baseTableName + "].[RECSTATUS] = 1 AND (";
+            //filterSql.Append(fullSql);
 
+            string logicalOperatorString = " AND ";
+            if (_conditionJoinType == ConditionJoinTypes.Or)
+            {
+                logicalOperatorString = " OR ";
+            }
+
+            WordBuilder filterSql = new WordBuilder(logicalOperatorString);
             foreach (IRowFilterCondition rowFc in _rowFilterConditions)
             {
                 filterSql.Append(rowFc.Sql);
             }
 
-            Query selectQuery = DataDriver.CreateQuery(filterSql.ToString());
+            Query selectQuery = DataDriver.CreateQuery(fullSql + " " + filterSql.ToString() + ")");
 
             Contract.Assert(selectQuery != null);
             Contract.Assert(!String.IsNullOrEmpty(selectQuery.SqlStatement));
