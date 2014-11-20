@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using Epi.Data;
+using Epi.ImportExport;
 
 namespace Epi.ImportExport.Filters
 {
     /// <summary>
-    /// A class used to manage row filtering, primary for use in creating data packages or otherwise
-    /// exporting data from Epi Info 7 projects.
+    /// A class used to manage row filtering in the context of import/export operations, and
+    /// for which filters are applied directly to the underlying SQL. This class was designed
+    /// primarily for use in supporting the creation of XML data packages.
     /// </summary>
     public class RowFilters : IEnumerable<IRowFilterCondition>
     {
         #region Private Members
-        private List<IRowFilterCondition> rowFilterConditions;
+        private List<IRowFilterCondition> _rowFilterConditions;
         #endregion // Private Members
 
         #region Constructors
@@ -24,8 +27,15 @@ namespace Epi.ImportExport.Filters
         /// <param name="dataDriver">The data driver to attach to this object</param>
         public RowFilters(IDbDriver dataDriver)
         {
+            // pre
+            Contract.Requires(dataDriver != null);
+
+            // post
+            Contract.Ensures(DataDriver != null);
+            Contract.Ensures(_rowFilterConditions != null);
+
             DataDriver = dataDriver;
-            rowFilterConditions = new List<IRowFilterCondition>();
+            _rowFilterConditions = new List<IRowFilterCondition>();
         }
         #endregion // Constructors
 
@@ -33,20 +43,8 @@ namespace Epi.ImportExport.Filters
         /// <summary>
         /// Gets/sets the data driver attached to this row filter object.
         /// </summary>
-        private IDbDriver DataDriver { get; set; }        
+        private IDbDriver DataDriver { get; set; }
 
-        public string WhereClause
-        {
-            get
-            {
-                WordBuilder wb = new WordBuilder(" AND ");
-                foreach (IRowFilterCondition rfc in this)
-                {
-                    wb.Add(rfc.Sql);
-                }
-                return wb.ToString();
-            }
-        }
         #endregion // Public Properties
 
         #region Public Methods
@@ -56,11 +54,18 @@ namespace Epi.ImportExport.Filters
         /// </summary>
         /// <param name="form">The form to process</param>
         /// <returns>Query</returns>
-        public Query GetGuidSelectQuery(View form)
+        public virtual Query GetGuidSelectQuery(View form)
         {
+            // pre
+            Contract.Requires(form != null);
+
+            // post
+            Contract.Ensures(Contract.Result<Query>() != null);
+            Contract.Ensures(!String.IsNullOrEmpty(Contract.Result<Query>().SqlStatement));
+
             if (DataDriver == null)
             {
-                throw new NullReferenceException();
+                throw new InvalidOperationException();
             }
             if (form == null)
             {
@@ -70,6 +75,9 @@ namespace Epi.ImportExport.Filters
             string baseTableName = "t";
 
             string fromClause = form.FromViewSQL;
+
+            Contract.Assert(!String.IsNullOrEmpty(fromClause));
+
             WordBuilder filterSql = new WordBuilder(" AND ");
             WordBuilder columns = new WordBuilder(", ");
 
@@ -88,34 +96,40 @@ namespace Epi.ImportExport.Filters
             string fullSql = "SELECT " + columns.ToString() + " " + fromClause + " WHERE [" + baseTableName + "].[RECSTATUS] = 1 ";
             filterSql.Append(fullSql);
 
-            foreach (IRowFilterCondition rowFc in rowFilterConditions)
+            foreach (IRowFilterCondition rowFc in _rowFilterConditions)
             {
                 filterSql.Append(rowFc.Sql);
             }
 
             Query selectQuery = DataDriver.CreateQuery(filterSql.ToString());
 
-            foreach (IRowFilterCondition rowFc in rowFilterConditions)
+            Contract.Assert(selectQuery != null);
+            Contract.Assert(!String.IsNullOrEmpty(selectQuery.SqlStatement));
+
+            foreach (IRowFilterCondition rowFc in _rowFilterConditions)
             {
                 selectQuery.Parameters.Add(rowFc.Parameter);
             }
 
-            return selectQuery;            
+            return selectQuery;
         }
 
         /// <summary>
         /// Adds a new condition to the filter
         /// </summary>
         /// <param name="newCondition">The condition to be added</param>
-        public void Add(IRowFilterCondition newCondition)
+        public virtual void Add(IRowFilterCondition newCondition)
         {
+            // pre
+            Contract.Requires(newCondition != null);
+
             if (this.Contains(newCondition.Description))
             {
                 throw new InvalidOperationException("This item has already been added.");
             }
             else
             {
-                rowFilterConditions.Add(newCondition);
+                _rowFilterConditions.Add(newCondition);
             }
         }
 
@@ -123,24 +137,27 @@ namespace Epi.ImportExport.Filters
         /// Removes a condition from the filter
         /// </summary>
         /// <param name="condition">The condition to be removed</param>
-        public void Remove(IRowFilterCondition condition)
+        public virtual void Remove(IRowFilterCondition condition)
         {
+            // pre
+            Contract.Requires(condition != null);
+
             if (this.Contains(condition.Description))
             {
-                rowFilterConditions.Remove(condition);
+                _rowFilterConditions.Remove(condition);
             }
             else
             {
                 throw new KeyNotFoundException("The condition '" + condition.Description + "' could not be found.");
             }
-        }        
+        }
 
         /// <summary>
         /// Clears all conditions from the filter
         /// </summary>
-        public void Clear()
+        public virtual void Clear()
         {
-            this.rowFilterConditions.Clear();
+            this._rowFilterConditions.Clear();
         }
 
         /// <summary>
@@ -148,9 +165,12 @@ namespace Epi.ImportExport.Filters
         /// </summary>
         /// <param name="description">The description of the condition to be searched for</param>
         /// <returns>bool; represents whether the condition is contained in the filter</returns>
-        public bool Contains(string description)
+        public virtual bool Contains(string description)
         {
-            foreach (IRowFilterCondition rowFc in this.rowFilterConditions)
+            // pre
+            Contract.Requires(!String.IsNullOrEmpty(description));
+
+            foreach (IRowFilterCondition rowFc in this._rowFilterConditions)
             {
                 if (rowFc.Description.Equals(description))
                 {
@@ -178,7 +198,7 @@ namespace Epi.ImportExport.Filters
 
         public IEnumerator<IRowFilterCondition> GetEnumerator()
         {
-            return new RowFiltersEnumerator(rowFilterConditions);
+            return new RowFiltersEnumerator(_rowFilterConditions);
         }
 
         public void Dispose() { }
@@ -192,13 +212,13 @@ namespace Epi.ImportExport.Filters
         protected class RowFiltersEnumerator : IEnumerator<IRowFilterCondition>
         {
             #region Private Members
-            private List<IRowFilterCondition> rowFilterConditions;
+            private List<IRowFilterCondition> _rowFilterConditions;
             private int currentIndex;
             #endregion Private Members
 
-            public RowFiltersEnumerator(List<IRowFilterCondition> rowFilterConditions)
+            public RowFiltersEnumerator(List<IRowFilterCondition> _rowFilterConditions)
             {
-                this.rowFilterConditions = rowFilterConditions;
+                this._rowFilterConditions = _rowFilterConditions;
                 Reset();
             }
 
@@ -212,7 +232,7 @@ namespace Epi.ImportExport.Filters
             {
                 get
                 {
-                    return rowFilterConditions[currentIndex];
+                    return _rowFilterConditions[currentIndex];
                 }
             }
 
@@ -227,7 +247,7 @@ namespace Epi.ImportExport.Filters
             public bool MoveNext()
             {
                 currentIndex++;
-                return currentIndex < rowFilterConditions.Count;
+                return currentIndex < _rowFilterConditions.Count;
             }
 
             public void Dispose() { }

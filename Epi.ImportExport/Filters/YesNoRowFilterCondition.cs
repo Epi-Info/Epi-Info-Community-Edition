@@ -12,13 +12,6 @@ namespace Epi.ImportExport
     public class YesNoRowFilterCondition : RowFilterConditionBase
     {
         #region Constructors
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public YesNoRowFilterCondition() :
-            base()
-        {
-        }
 
         /// <summary>
         /// Constructor
