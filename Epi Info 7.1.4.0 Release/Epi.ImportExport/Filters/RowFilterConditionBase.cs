@@ -14,6 +14,7 @@ namespace Epi.ImportExport
     {
         #region Members
         private string _parameterName = String.Empty;
+        private readonly bool _legacyMode = true;
         #endregion // Members
 
         #region Constructors
@@ -45,6 +46,8 @@ namespace Epi.ImportExport
             Contract.Requires(!String.IsNullOrEmpty(paramName));
             Contract.Requires(paramName.StartsWith("@"));
             Contract.Requires(value != null);
+
+            _legacyMode = false;
 
             this.ColumnName = columnName;
             this.ParameterName = paramName;
@@ -91,6 +94,11 @@ namespace Epi.ImportExport
                 Contract.Requires(value.StartsWith("@"));
 
                 this._parameterName = value;
+
+                if (_legacyMode == false)
+                {
+                    BuildSql(); // rebuild since param name is now different
+                }
             }
         }
 
