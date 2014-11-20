@@ -26,13 +26,17 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         public override object Execute()
         {
             object result = null;
-            
-            object p1 = this.ParameterList[0].Execute().ToString();
-            double param1;
 
-            if(double.TryParse(p1.ToString(), out param1))
+            object p1 = this.ParameterList[0].Execute();
+
+            if (p1 != null)
             {
-                result = Math.Pow(Math.E, param1);
+                double param1;
+
+                if (double.TryParse(p1.ToString(), out param1))
+                {
+                    result = Math.Pow(Math.E, param1);
+                }
             }
 
             return result;
