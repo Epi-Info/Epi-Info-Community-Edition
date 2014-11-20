@@ -16,7 +16,7 @@ namespace Epi.ImportExport
     public class CSVExporter : ExporterBase
     {
         #region Private Members
-        private string fileName;        
+        private readonly string fileName;        
         #endregion // Private Members
 
         public int rowsExported;

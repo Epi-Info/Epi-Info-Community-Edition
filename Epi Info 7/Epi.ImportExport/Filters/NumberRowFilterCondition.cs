@@ -12,13 +12,6 @@ namespace Epi.ImportExport
     public class NumberRowFilterCondition : RowFilterConditionBase
     {
         #region Constructors
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public NumberRowFilterCondition() :
-            base()
-        {
-        }
 
         /// <summary>
         /// Constructor

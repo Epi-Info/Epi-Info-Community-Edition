@@ -12,13 +12,6 @@ namespace Epi.ImportExport
     public class DateTimeRowFilterCondition : RowFilterConditionBase
     {
         #region Constructors
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public DateTimeRowFilterCondition() :
-            base()
-        {
-        }
 
         /// <summary>
         /// Constructor

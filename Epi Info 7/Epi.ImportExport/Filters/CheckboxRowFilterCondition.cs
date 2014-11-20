@@ -12,13 +12,6 @@ namespace Epi.ImportExport
     public class CheckboxRowFilterCondition : RowFilterConditionBase
     {
         #region Constructors
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public CheckboxRowFilterCondition() :
-            base()
-        {
-        }
 
         /// <summary>
         /// Constructor

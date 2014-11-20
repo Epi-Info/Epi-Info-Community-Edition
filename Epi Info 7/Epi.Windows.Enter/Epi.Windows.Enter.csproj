@@ -32,7 +32,7 @@
     <ManifestCertificateThumbprint>D3E741554E2E468CCF09B56875EDA7DEC172D749</ManifestCertificateThumbprint>
     <ManifestKeyFile>Epi.Windows.Enter_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>

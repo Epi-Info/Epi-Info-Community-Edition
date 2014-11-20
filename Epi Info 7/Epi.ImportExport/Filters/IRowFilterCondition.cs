@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml;
 using Epi.Data;
+using Epi.ImportExport.Filters;
 
 namespace Epi.ImportExport
 {
@@ -11,13 +10,15 @@ namespace Epi.ImportExport
     /// </summary>
     public interface IRowFilterCondition
     {
-        QueryParameter Parameter { get; set; }
-        object Value { get; set; }
-        string ColumnName { get; set; }
+        QueryParameter Parameter { get; }
+        object Value { get; }
+        string ColumnName { get; }
         string Sql { get; set; }
         string ParameterName { get; set; }
         string Description { get; set; }
+        ConditionOperators ConditionOperator { get; }
         XmlNode Serialize(XmlDocument doc);
         void CreateFromXml(XmlElement element);
+        void BuildSql();
     }
 }

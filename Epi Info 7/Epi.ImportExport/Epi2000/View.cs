@@ -22,7 +22,7 @@ namespace Epi.Epi2000
 		private string recordCheckCodeAfter = string.Empty;
 		//private bool mustRefreshFieldCollection = false;
         //private string dataTableName = string.Empty;
-        private List<string> dataTableNames = new List<string>();
+        private readonly List<string> dataTableNames = new List<string>();
 		private int id = 0;
         private Epi2000.View parentView;
         

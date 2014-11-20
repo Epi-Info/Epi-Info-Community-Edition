@@ -12,13 +12,6 @@ namespace Epi.ImportExport
     public class YesNoRowFilterCondition : RowFilterConditionBase
     {
         #region Constructors
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public YesNoRowFilterCondition() :
-            base()
-        {
-        }
 
         /// <summary>
         /// Constructor
@@ -88,7 +81,7 @@ namespace Epi.ImportExport
         /// Constructs the object
         /// </summary>
         protected override void Construct()
-        {            
+        {
             Parameter = new QueryParameter(ParameterName, System.Data.DbType.Int16, Int16.Parse(Value.ToString()));
         }
         #endregion // Protected Methods
