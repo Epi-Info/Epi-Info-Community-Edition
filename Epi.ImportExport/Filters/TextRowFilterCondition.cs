@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using Epi.Data;
@@ -12,13 +13,6 @@ namespace Epi.ImportExport
     public class TextRowFilterCondition : RowFilterConditionBase
     {
         #region Constructors
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public TextRowFilterCondition() :
-            base()
-        {
-        }
 
         /// <summary>
         /// Constructor
@@ -27,16 +21,25 @@ namespace Epi.ImportExport
             base(sql, columnName, paramName, value)
         {
         }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public TextRowFilterCondition(Epi.ImportExport.Filters.ConditionOperators conditionOperator, string columnName, string paramName, object value) :
+            base(conditionOperator, columnName, paramName, value)
+        {
+        }
         #endregion // Constructors
 
         #region Protected Methods
+
         /// <summary>
         /// Validates the condition
         /// </summary>
         protected override void ValidateCondition()
         {
             if (
-                (Value == null) ||                
+                (Value == null) ||
                 !(Value is string || Value is String) ||
                 (string.IsNullOrEmpty(Value.ToString().Trim())) ||
                 (string.IsNullOrEmpty(ParameterName.Trim())) ||

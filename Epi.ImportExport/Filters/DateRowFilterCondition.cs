@@ -12,13 +12,6 @@ namespace Epi.ImportExport
     public class DateRowFilterCondition : RowFilterConditionBase
     {
         #region Constructors
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public DateRowFilterCondition() :
-            base()
-        {
-        }
 
         /// <summary>
         /// Constructor
@@ -101,7 +94,7 @@ namespace Epi.ImportExport
         protected override void ValidateCondition()
         {
             if (
-                (Value == null) ||                
+                (Value == null) ||
                 !(Value is DateTime) ||
                 (string.IsNullOrEmpty(ParameterName.Trim())) ||
                 !(ParameterName.Contains("@"))

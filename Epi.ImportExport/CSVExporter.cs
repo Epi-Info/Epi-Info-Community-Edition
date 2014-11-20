@@ -16,7 +16,7 @@ namespace Epi.ImportExport
     public class CSVExporter : ExporterBase
     {
         #region Private Members
-        private string fileName;        
+        private readonly string fileName;
         #endregion // Private Members
 
         public int rowsExported;
@@ -92,7 +92,7 @@ namespace Epi.ImportExport
                     else
                     {
                         ImportExportHelper.OrderColumns(table, ColumnSortOrder);
-                    }                    
+                    }
 
                     List<DataColumn> columnsToRemove = new List<DataColumn>();
 
@@ -131,30 +131,30 @@ namespace Epi.ImportExport
 
                 //if (useTabOrder || !exportAllFields)
                 //{
-                    totalRows = table.Rows.Count;
-                    foreach (DataRow row in table.Rows)
+                totalRows = table.Rows.Count;
+                foreach (DataRow row in table.Rows)
+                {
+                    wb = new WordBuilder(SEPARATOR);
+                    for (int i = 0; i < table.Columns.Count; i++)
                     {
-                        wb = new WordBuilder(SEPARATOR);
-                        for (int i = 0; i < table.Columns.Count; i++)
+                        string rowValue = row[i].ToString().Replace("\r\n", " ");
+                        if (rowValue.Contains(",") || rowValue.Contains("\""))
                         {
-                            string rowValue = row[i].ToString().Replace("\r\n", " ");
-                            if (rowValue.Contains(",") || rowValue.Contains("\""))
-                            {
-                                rowValue = rowValue.Replace("\"", "\"\"");
-                                rowValue = Util.InsertIn(rowValue, "\"");
-                            }
-                            wb.Add(rowValue);
+                            rowValue = rowValue.Replace("\"", "\"\"");
+                            rowValue = Util.InsertIn(rowValue, "\"");
                         }
-                        sw.WriteLine(wb);
-                        rowsExported++;
-                        if (rowsExported % 500 == 0)
-                        {
-                            //this.Dispatcher.BeginInvoke(new SetGadgetStatusHandler(RequestUpdateStatusMessage), string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS, rowsExported.ToString(), totalRows.ToString()), (double)rowsExported);
-                            //RequestUpdateStatusMessage(string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS, rowsExported.ToString(), totalRows.ToString()), (double)rowsExported);
-                            //SetProgressAndStatus(string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS, rowsExported.ToString(), totalRows.ToString()), (double)rowsExported);
-                            OnSetStatusMessageAndProgressCount(string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS, rowsExported.ToString(), totalRows.ToString()), (double)rowsExported);
-                        }
+                        wb.Add(rowValue);
                     }
+                    sw.WriteLine(wb);
+                    rowsExported++;
+                    if (rowsExported % 500 == 0)
+                    {
+                        //this.Dispatcher.BeginInvoke(new SetGadgetStatusHandler(RequestUpdateStatusMessage), string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS, rowsExported.ToString(), totalRows.ToString()), (double)rowsExported);
+                        //RequestUpdateStatusMessage(string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS, rowsExported.ToString(), totalRows.ToString()), (double)rowsExported);
+                        //SetProgressAndStatus(string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS, rowsExported.ToString(), totalRows.ToString()), (double)rowsExported);
+                        OnSetStatusMessageAndProgressCount(string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS, rowsExported.ToString(), totalRows.ToString()), (double)rowsExported);
+                    }
+                }
                 //}
                 //else
                 //{
@@ -200,7 +200,7 @@ namespace Epi.ImportExport
                     sw.Close();
                     sw.Dispose();
                     sw = null;
-                }                
+                }
 
                 //stopWatch.Stop();
                 //System.Diagnostics.Debug.Print("File I/O Export thread finished in " + stopWatch.Elapsed.ToString());
