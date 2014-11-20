@@ -246,6 +246,7 @@
     <Compile Include="CSVExporter.cs" />
     <Compile Include="DataMergeType.cs" />
     <Compile Include="Epi2000\ProjectAnalyzer.cs" />
+    <Compile Include="Filters\ConditionJoinTypes.cs" />
     <Compile Include="Filters\ConditionOperators.cs" />
     <Compile Include="Filters\DateTimeRowFilterCondition.cs" />
     <Compile Include="ImportExportErrorList.cs" />
