@@ -702,16 +702,73 @@ namespace Epi.Windows.MakeView.Dialogs
         /// <param name="tableName">Table name</param>
         protected virtual void ShowFieldSelection(string tableName)
         {
-            FieldSelectionDialog fieldSelection = new FieldSelectionDialog(MainForm, page.GetProject(), tableName);
-            DialogResult result = fieldSelection.ShowDialog();
-            if (result == DialogResult.OK)
+            string separator = " - ";
+            if (!tableName.Contains(separator))
             {
-                textColumnName = fieldSelection.ColumnName;
-                sourceTableName = tableName;
-                codeTable = page.GetProject().GetTableData(tableName, textColumnName, string.Empty);
-                fieldSelection.Close();
-                DisplayData();
-                isExclusiveTable = true;
+                FieldSelectionDialog fieldSelection = new FieldSelectionDialog(MainForm, page.GetProject(), tableName);
+                DialogResult result = fieldSelection.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    textColumnName = fieldSelection.ColumnName;
+                    sourceTableName = tableName;
+                    codeTable = page.GetProject().GetTableData(tableName, textColumnName, string.Empty);
+                    fieldSelection.Close();
+                    DisplayData();
+                    isExclusiveTable = true;
+                }
+            }
+            else if (DdlField != null)// using Form table as Datasource
+            {
+                string[] view_page = sourceTableName.Replace(separator, "^").Split('^');
+                string viewName = view_page[0].ToString();
+                string pageName = view_page[1].ToString();
+                string filterExpression = string.Empty;
+                string tableName1 = null;
+                View targetView = page.GetProject().Metadata.GetViewByFullName(viewName);
+
+                if (targetView != null)
+                {
+                    DataTable targetPages = page.GetProject().Metadata.GetPagesForView(targetView.Id);
+                    DataView dataView = new DataView(targetPages);
+
+                    filterExpression = string.Format("Name = '{0}'", pageName);
+
+                    DataRow[] pageArray = targetPages.Select(filterExpression);
+
+                    if (pageArray.Length > 0)
+                    {
+                        int pageId = (int)pageArray[0]["PageId"];
+                        tableName1 = viewName + pageId;
+                    }
+                }
+                if (page.GetProject().CollectedData.TableExists(tableName1))
+                {
+                    FieldSelectionDialog fieldSelection = new FieldSelectionDialog(MainForm, page.GetProject(), tableName1);
+                    DialogResult result = fieldSelection.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        textColumnName = fieldSelection.ColumnName;
+                        codeTable = page.GetProject().GetTableData(tableName1, textColumnName, string.Empty);
+                        fieldSelection.Close();
+                        DisplayData();
+                        isExclusiveTable = true;
+                    }
+                }
+
+            }
+            else
+            {
+                FieldSelectionDialog fieldSelection = new FieldSelectionDialog(MainForm, page.GetProject(), tableName);
+                DialogResult result = fieldSelection.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    textColumnName = fieldSelection.ColumnName;
+                    sourceTableName = tableName;
+                    codeTable = page.GetProject().GetTableData(tableName, textColumnName, string.Empty);
+                    fieldSelection.Close();
+                    DisplayData();
+                    isExclusiveTable = true;
+                }
             }
         }
 
