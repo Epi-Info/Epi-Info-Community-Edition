@@ -40,7 +40,7 @@ namespace Epi.ImportExport.ProjectPackagers
             if (destinationForm == null) { throw new ArgumentNullException("sourceForm"); }
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
             #endregion // Input Validation
-            
+
             DestinationForm = destinationForm;
             DestinationProject = DestinationForm.Project;
             XmlDataPackage = xmlDataPackage;
@@ -284,10 +284,10 @@ namespace Epi.ImportExport.ProjectPackagers
 
                                 ImportInfo.FormsProcessed++;
                                 if (StatusChanged != null) { StatusChanged(string.Format(UnpackagerStrings.IMPORT_START_FORM, PackageName, form.Name)); }
-                                if (MessageGenerated != null) { MessageGenerated(string.Format(UnpackagerStrings.IMPORT_START_FORM, PackageName, form.Name)); }                                
+                                if (MessageGenerated != null) { MessageGenerated(string.Format(UnpackagerStrings.IMPORT_START_FORM, PackageName, form.Name)); }
                                 ImportRecords(form, formNode, records);
                                 if (StatusChanged != null) { StatusChanged(string.Format(UnpackagerStrings.IMPORT_END_FORM, PackageName, form.Name, ImportInfo.RecordsUpdated[form].ToString(), ImportInfo.RecordsAppended[form].ToString())); }
-                                if (MessageGenerated != null) { MessageGenerated(string.Format(UnpackagerStrings.IMPORT_END_FORM, PackageName, form.Name, ImportInfo.RecordsUpdated[form].ToString(), ImportInfo.RecordsAppended[form].ToString())); }                                
+                                if (MessageGenerated != null) { MessageGenerated(string.Format(UnpackagerStrings.IMPORT_END_FORM, PackageName, form.Name, ImportInfo.RecordsUpdated[form].ToString(), ImportInfo.RecordsAppended[form].ToString())); }
                             }
                         }
                     }
@@ -389,8 +389,8 @@ namespace Epi.ImportExport.ProjectPackagers
 
             IDbDriver db = DestinationProject.CollectedData.GetDatabase();
 
-            if (ResetProgress != null) { ResetProgress(); }            
-            double total = records.Count;            
+            if (ResetProgress != null) { ResetProgress(); }
+            double total = records.Count;
 
             Page previousPage = null;
             string lastGuid = string.Empty;
@@ -404,7 +404,7 @@ namespace Epi.ImportExport.ProjectPackagers
             lastRecord.RecordGUID = string.Empty;
             records.Add(lastRecord);
 
-            for(int i = 0; i < records.Count; i++)
+            for (int i = 0; i < records.Count; i++)
             {
                 PackageFieldData fieldData = records[i];
 
@@ -485,8 +485,8 @@ namespace Epi.ImportExport.ProjectPackagers
                 {
                     QueryParameter parameter = GetQueryParameterForField(fieldData, form, fieldData.Page);
                     fieldsInQuery.Add(fieldData.FieldName);
-                    if(parameter != null) 
-                    {                    
+                    if (parameter != null)
+                    {
                         setFieldText.Append(db.InsertInEscape(fieldData.FieldName) + " = " + "@" + fieldData.FieldName);
                         fieldValueParams.Add(parameter);
                     }
@@ -523,7 +523,7 @@ namespace Epi.ImportExport.ProjectPackagers
             if (this.IsUsingCustomMatchkeys)
             {
                 WordBuilder wb = new WordBuilder(",");
-                foreach(Field field in KeyFields) 
+                foreach (Field field in KeyFields)
                 {
                     wb.Add(field.Name);
                 }
@@ -576,6 +576,7 @@ namespace Epi.ImportExport.ProjectPackagers
                             CreateNewBlankRow(form, guid, fkey, firstSaveId, lastSaveId, firstSaveTime, lastSaveTime);
                             ImportInfo.TotalRecordsAppended++;
                             ImportInfo.RecordsAppended[form]++;
+                            ImportInfo.AddRecordIdAsAppended(form, guid);
                         }
                     }
                     else
@@ -588,6 +589,7 @@ namespace Epi.ImportExport.ProjectPackagers
                         {
                             ImportInfo.TotalRecordsUpdated++;
                             ImportInfo.RecordsUpdated[form]++;
+                            ImportInfo.AddRecordIdAsAppended(form, guid);
                         }
                     }
                 }
@@ -610,7 +612,7 @@ namespace Epi.ImportExport.ProjectPackagers
 
             if (ResetProgress != null) { ResetProgress(); }
             double total = gridRecords.Count;
-            
+
             string lastGuid = string.Empty;
             List<string> fieldsInQuery = new List<string>();
 
@@ -746,7 +748,7 @@ namespace Epi.ImportExport.ProjectPackagers
                         else if (attrib.Name.ToLower().Equals("uniquerowid")) urid = attrib.Value;
                         else if (attrib.Name.ToLower().Equals("fkey")) fkey = attrib.Value;
                     }
-                    
+
                     //if (!destinationGuids.ContainsKey(guid))
                     if (!destinationGuids.ContainsKey(urid))
                     {
@@ -754,7 +756,7 @@ namespace Epi.ImportExport.ProjectPackagers
                         {
                             //destinationGuids.Add(guid, true);                                                      
                             destinationGuids.Add(urid, true);
-                            CreateNewBlankGridRow(gridField, guid, urid, fkey);                            
+                            CreateNewBlankGridRow(gridField, guid, urid, fkey);
                         }
                     }
                     else
@@ -878,8 +880,8 @@ namespace Epi.ImportExport.ProjectPackagers
             }
 
             return command;
-        }        
-        
+        }
+
         /// <summary>
         /// Creates a new blank row for a given form's base table and all of its page tables.
         /// </summary>
@@ -903,19 +905,19 @@ namespace Epi.ImportExport.ProjectPackagers
 
             IDbDriver db = DestinationProject.CollectedData.GetDatabase();
             StringBuilder sb = new StringBuilder();
-            sb.Append("insert into " + db.InsertInEscape(gridField.TableName) + " ");            
+            sb.Append("insert into " + db.InsertInEscape(gridField.TableName) + " ");
 
             WordBuilder fields = new WordBuilder(",");
             fields.Append("[GlobalRecordId], [UniqueRowId], [FKEY]");
 
-            sb.Append("(" + fields.ToString() + ") values (");            
-            
+            sb.Append("(" + fields.ToString() + ") values (");
+
             WordBuilder values = new WordBuilder(",");
-            values.Append("'" + guid + "', '" + urid + "', '" + fkey + "'");            
+            values.Append("'" + guid + "', '" + urid + "', '" + fkey + "'");
 
             sb.Append(values.ToString());
             sb.Append(") ");
-            Epi.Data.Query insertQuery = db.CreateQuery(sb.ToString());            
+            Epi.Data.Query insertQuery = db.CreateQuery(sb.ToString());
 
             if (DestinationProject.CollectedDataDriver.ToLower().Contains("epi.data.office"))
             {
@@ -993,7 +995,7 @@ namespace Epi.ImportExport.ProjectPackagers
 
             if (!string.IsNullOrEmpty(fkey))
             {
-                values.Append("@FKEY"); 
+                values.Append("@FKEY");
                 parameters.Add(new QueryParameter("@FKEY", DbType.String, fkey));
             }
             if (!string.IsNullOrEmpty(firstSaveId))
@@ -1071,7 +1073,7 @@ namespace Epi.ImportExport.ProjectPackagers
                 dataField is RelatedViewField ||
                 dataField is UniqueKeyField ||
                 dataField is RecStatusField ||
-                dataField is GlobalRecordIdField ||               
+                dataField is GlobalRecordIdField ||
                 fieldData.FieldValue == null ||
                 string.IsNullOrEmpty(fieldData.FieldValue.ToString()
                 )))
@@ -1104,10 +1106,10 @@ namespace Epi.ImportExport.ProjectPackagers
                         return new QueryParameter("@" + fieldName, DbType.Single, fieldData.FieldValue);
                     case MetaFieldType.Image:
                         //throw new ApplicationException("Not a supported field type");
-                        return new QueryParameter("@" + fieldName, DbType.Binary, Convert.FromBase64String(fieldData.FieldValue.ToString()));                        
+                        return new QueryParameter("@" + fieldName, DbType.Binary, Convert.FromBase64String(fieldData.FieldValue.ToString()));
                     case MetaFieldType.Option:
                         return new QueryParameter("@" + fieldName, DbType.Single, fieldData.FieldValue);
-                        //this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), "The data for " + fieldName + " was not imported. This field type is not supported.");
+                    //this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), "The data for " + fieldName + " was not imported. This field type is not supported.");
                     default:
                         throw new ApplicationException("Not a supported field type");
                 }

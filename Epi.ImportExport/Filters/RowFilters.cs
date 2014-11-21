@@ -139,6 +139,24 @@ namespace Epi.ImportExport.Filters
             {
                 throw new InvalidOperationException("This item has already been added.");
             }
+
+            if (this._conditionJoinType == ConditionJoinTypes.Or)
+            {
+                int numberOfTimesThisColumnIsReferenced = 0;
+                foreach (IRowFilterCondition rowFc in _rowFilterConditions)
+                {
+                    if (rowFc.ColumnName.Equals(newCondition.ColumnName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        numberOfTimesThisColumnIsReferenced++;
+                    }
+                }
+
+
+                newCondition.ParameterName = newCondition.ParameterName + numberOfTimesThisColumnIsReferenced.ToString();
+                newCondition.BuildSql();
+
+                _rowFilterConditions.Add(newCondition);
+            }
             else
             {
                 _rowFilterConditions.Add(newCondition);
