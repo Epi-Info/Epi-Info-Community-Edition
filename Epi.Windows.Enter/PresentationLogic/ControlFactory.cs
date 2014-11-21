@@ -515,14 +515,22 @@ namespace Epi.Windows.Enter.PresentationLogic
                     cachedListValues = new Dictionary<string, DataTable>();
                 }
                 DataTable displayTable;
-                if (cachedListValues.ContainsKey(displayMember + "," + field.SourceTableName))
+                if (field.SourceTableName.Contains("-"))
                 {
-                    displayTable = cachedListValues[displayMember + "," + field.SourceTableName];
+                    string tablename = field.SourceTableName.Substring(0, field.SourceTableName.IndexOf('-'));
+                    displayTable = field.GetDisplayTable("", "", displayMember, tablename);
                 }
                 else
                 {
-                    displayTable = field.GetDisplayTable("", "", displayMember);
-                    cachedListValues.Add(displayMember + "," + field.SourceTableName, displayTable);
+                    if (cachedListValues.ContainsKey(displayMember + "," + field.SourceTableName))
+                    {
+                        displayTable = cachedListValues[displayMember + "," + field.SourceTableName];
+                    }
+                    else
+                    {
+                        displayTable = field.GetDisplayTable("", "", displayMember);
+                        cachedListValues.Add(displayMember + "," + field.SourceTableName, displayTable);
+                    }
                 }
 
                 if (displayTable != null)
