@@ -27,10 +27,18 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         public override object Execute()
         {
             double result = 0.0;
-            if (Double.TryParse(this.ParameterList[0].Execute().ToString(), out result))
+            object p1 = this.ParameterList[0].Execute();
+            if (p1 != null)
             {
+                if (Double.TryParse(p1.ToString(), out result))
+                {
 
-                return Math.Cos(result);
+                    return Math.Cos(result);
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {
