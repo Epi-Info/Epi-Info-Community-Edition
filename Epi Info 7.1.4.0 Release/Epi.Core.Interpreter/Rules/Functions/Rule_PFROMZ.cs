@@ -26,18 +26,26 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         public override object Execute()
         {
             double result = 0.0;
-            if (this.ParameterList[0].Execute() != null && Double.TryParse(this.ParameterList[0].Execute().ToString(), out result))
+            object p1 = this.ParameterList[0].Execute();
+            if (p1 != null)
             {
-                result = Math.Round(AnthStat.NutriDataCalc.GetPercentile(result), 3);
-                if (result >= 99.9999)
+                if (Double.TryParse(p1.ToString(), out result))
                 {
-                    result = 99.999;
+                    result = Math.Round(AnthStat.NutriDataCalc.GetPercentile(result), 3);
+                    if (result >= 99.9999)
+                    {
+                        result = 99.999;
+                    }
+                    else if (result <= -99.9999)
+                    {
+                        result = -99.999;
+                    }
+                    return result;
                 }
-                else if (result <= -99.9999)
+                else
                 {
-                    result = -99.999;
+                    return null;
                 }
-                return result;
             }
             else
             {
