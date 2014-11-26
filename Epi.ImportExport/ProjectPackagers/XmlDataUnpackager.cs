@@ -126,7 +126,7 @@ namespace Epi.ImportExport.ProjectPackagers
 
                 foreach (XmlNode node in XmlDataPackage.ChildNodes)
                 {
-                    if (node.Name.ToLower().Equals("datapackage"))
+                    if (node.Name.Equals("datapackage", StringComparison.OrdinalIgnoreCase))
                     {
                         PackageName = node.Attributes["Name"].Value;
                         if (StatusChanged != null) { StatusChanged(string.Format(UnpackagerStrings.IMPORT_INITIATED, PackageName, ImportInfo.UserID)); }
@@ -134,7 +134,7 @@ namespace Epi.ImportExport.ProjectPackagers
 
                         foreach (XmlNode dpNode in node.ChildNodes)
                         {
-                            if (dpNode.Name.ToLower().Equals("form"))
+                            if (dpNode.Name.Equals("form", StringComparison.OrdinalIgnoreCase))
                             {
                                 List<PackageFieldData> records = new List<PackageFieldData>();
 
@@ -549,23 +549,25 @@ namespace Epi.ImportExport.ProjectPackagers
 
             foreach (XmlNode recordNode in formNode.SelectSingleNode("Data").ChildNodes)
             {
-                if (recordNode.Name.ToLower().Equals("record"))
+                if (recordNode.Name.Equals("record", StringComparison.OrdinalIgnoreCase))
                 {
-                    string guid = string.Empty;
-                    string fkey = string.Empty;
-                    string firstSaveId = string.Empty;
-                    string lastSaveId = string.Empty;
+                    string guid = String.Empty;
+                    string recStatus = String.Empty;
+                    string fkey = String.Empty;
+                    string firstSaveId = String.Empty;
+                    string lastSaveId = String.Empty;
                     DateTime? firstSaveTime = null;
                     DateTime? lastSaveTime = null;
 
                     foreach (XmlAttribute attrib in recordNode.Attributes)
                     {
-                        if (attrib.Name.ToLower().Equals("id")) guid = attrib.Value;
-                        if (attrib.Name.ToLower().Equals("fkey")) fkey = attrib.Value;
-                        if (attrib.Name.ToLower().Equals("firstsaveuserid")) firstSaveId = attrib.Value;
-                        if (attrib.Name.ToLower().Equals("lastsaveuserid")) lastSaveId = attrib.Value;
-                        if (attrib.Name.ToLower().Equals("firstsavetime")) firstSaveTime = new DateTime(Convert.ToInt64(attrib.Value));
-                        if (attrib.Name.ToLower().Equals("lastsavetime")) lastSaveTime = new DateTime(Convert.ToInt64(attrib.Value));
+                        if (attrib.Name.Equals("id", StringComparison.OrdinalIgnoreCase)) guid = attrib.Value;
+                        if (attrib.Name.Equals("recstatus", StringComparison.OrdinalIgnoreCase)) recStatus = attrib.Value;
+                        if (attrib.Name.Equals("fkey", StringComparison.OrdinalIgnoreCase)) fkey = attrib.Value;
+                        if (attrib.Name.Equals("firstsaveuserid", StringComparison.OrdinalIgnoreCase)) firstSaveId = attrib.Value;
+                        if (attrib.Name.Equals("lastsaveuserid", StringComparison.OrdinalIgnoreCase)) lastSaveId = attrib.Value;
+                        if (attrib.Name.Equals("firstsavetime", StringComparison.OrdinalIgnoreCase)) firstSaveTime = new DateTime(Convert.ToInt64(attrib.Value));
+                        if (attrib.Name.Equals("lastsavetime", StringComparison.OrdinalIgnoreCase)) lastSaveTime = new DateTime(Convert.ToInt64(attrib.Value));
                     }
 
                     if (!destinationGuids.ContainsKey(guid))
@@ -573,7 +575,7 @@ namespace Epi.ImportExport.ProjectPackagers
                         if (Append)
                         {
                             destinationGuids.Add(guid, true);
-                            CreateNewBlankRow(form, guid, fkey, firstSaveId, lastSaveId, firstSaveTime, lastSaveTime);
+                            CreateNewBlankRow(form, guid, fkey, recStatus, firstSaveId, lastSaveId, firstSaveTime, lastSaveTime);
                             ImportInfo.TotalRecordsAppended++;
                             ImportInfo.RecordsAppended[form]++;
                             ImportInfo.AddRecordIdAsAppended(form, guid);
@@ -587,6 +589,16 @@ namespace Epi.ImportExport.ProjectPackagers
                         }
                         else
                         {
+                            if (!String.IsNullOrEmpty(recStatus))
+                            {
+                                // update RecStatus
+                                IDbDriver db = DestinationProject.CollectedData.GetDatabase();
+                                Query updateQuery = db.CreateQuery("UPDATE [" + form.TableName + "] SET [RecStatus] = @RecStatus WHERE [GlobalRecordId] = @GlobalRecordId");
+                                updateQuery.Parameters.Add(new QueryParameter("@RecStatus", DbType.Int32, Double.Parse(recStatus)));
+                                updateQuery.Parameters.Add(new QueryParameter("@GlobalRecordId", DbType.String, guid));
+                                db.ExecuteNonQuery(updateQuery);
+                            }
+
                             ImportInfo.TotalRecordsUpdated++;
                             ImportInfo.RecordsUpdated[form]++;
                             ImportInfo.AddRecordIdAsAppended(form, guid);
@@ -736,7 +748,7 @@ namespace Epi.ImportExport.ProjectPackagers
 
             foreach (XmlNode recordNode in gridNode.ChildNodes[1].ChildNodes)
             {
-                if (recordNode.Name.ToLower().Equals("record"))
+                if (recordNode.Name.Equals("record", StringComparison.OrdinalIgnoreCase))
                 {
                     string guid = string.Empty;
                     string urid = string.Empty;
@@ -744,9 +756,9 @@ namespace Epi.ImportExport.ProjectPackagers
 
                     foreach (XmlAttribute attrib in recordNode.Attributes)
                     {
-                        if (attrib.Name.ToLower().Equals("id")) guid = attrib.Value;
-                        else if (attrib.Name.ToLower().Equals("uniquerowid")) urid = attrib.Value;
-                        else if (attrib.Name.ToLower().Equals("fkey")) fkey = attrib.Value;
+                        if (attrib.Name.Equals("id", StringComparison.OrdinalIgnoreCase)) guid = attrib.Value;
+                        else if (attrib.Name.Equals("uniquerowid", StringComparison.OrdinalIgnoreCase)) urid = attrib.Value;
+                        else if (attrib.Name.Equals("fkey", StringComparison.OrdinalIgnoreCase)) fkey = attrib.Value;
                     }
 
                     //if (!destinationGuids.ContainsKey(guid))
@@ -936,11 +948,12 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="form">The form where the row should be added.</param>
         /// <param name="guid">The Guid value to use for the row.</param>
         /// <param name="fkey">The foreign key for the row.</param>
+        /// <param name="recStatus">The record status for this record (0 = deleted, 1 = active)</param>
         /// <param name="firstSaveId">The user ID of the first person that saved this record.</param>
         /// <param name="firstSaveTime">The time when the record was first saved.</param>
         /// <param name="lastSaveId">The user ID of the last person that saved this record.</param>
         /// <param name="lastSaveTime">The time when the record was last saved.</param>
-        protected virtual void CreateNewBlankRow(View form, string guid, string fkey = "", string firstSaveId = "", string lastSaveId = "", DateTime? firstSaveTime = null, DateTime? lastSaveTime = null)
+        protected virtual void CreateNewBlankRow(View form, string guid, string fkey = "", string recStatus = "1", string firstSaveId = "", string lastSaveId = "", DateTime? firstSaveTime = null, DateTime? lastSaveTime = null)
         {
             #region Input Validation
             if (string.IsNullOrEmpty(guid)) { throw new ArgumentNullException("guid"); }
@@ -962,9 +975,10 @@ namespace Epi.ImportExport.ProjectPackagers
             WordBuilder fields = new WordBuilder(",");
             fields.Append("[GlobalRecordId]");
 
-            if (!string.IsNullOrEmpty(fkey)) { fields.Append("[FKEY]"); }
-            if (!string.IsNullOrEmpty(firstSaveId)) { fields.Append("[FirstSaveLogonName]"); }
-            if (!string.IsNullOrEmpty(lastSaveId)) { fields.Append("[LastSaveLogonName]"); }
+            if (!String.IsNullOrEmpty(fkey)) { fields.Append("[FKEY]"); }
+            if (!String.IsNullOrEmpty(recStatus)) { fields.Append("[RecStatus]"); }
+            if (!String.IsNullOrEmpty(firstSaveId)) { fields.Append("[FirstSaveLogonName]"); }
+            if (!String.IsNullOrEmpty(lastSaveId)) { fields.Append("[LastSaveLogonName]"); }
             if (firstSaveTime.HasValue)
             {
                 firstSaveTime = new DateTime(firstSaveTime.Value.Year,
@@ -993,17 +1007,22 @@ namespace Epi.ImportExport.ProjectPackagers
             WordBuilder values = new WordBuilder(",");
             values.Append("'" + guid + "'");
 
-            if (!string.IsNullOrEmpty(fkey))
+            if (!String.IsNullOrEmpty(fkey))
             {
                 values.Append("@FKEY");
                 parameters.Add(new QueryParameter("@FKEY", DbType.String, fkey));
             }
-            if (!string.IsNullOrEmpty(firstSaveId))
+            if (!String.IsNullOrEmpty(recStatus))
+            {
+                values.Append("@RecStatus");
+                parameters.Add(new QueryParameter("@RecStatus", DbType.Int32, Convert.ToInt32(recStatus)));
+            }
+            if (!String.IsNullOrEmpty(firstSaveId))
             {
                 values.Append("@FirstSaveLogonName");
                 parameters.Add(new QueryParameter("@FirstSaveLogonName", DbType.String, firstSaveId));
             }
-            if (!string.IsNullOrEmpty(lastSaveId))
+            if (!String.IsNullOrEmpty(lastSaveId))
             {
                 values.Append("@LastSaveLogonName");
                 parameters.Add(new QueryParameter("@LastSaveLogonName", DbType.String, lastSaveId));
@@ -1103,7 +1122,7 @@ namespace Epi.ImportExport.ProjectPackagers
                     case MetaFieldType.Number:
                     case MetaFieldType.YesNo:
                     case MetaFieldType.RecStatus:
-                        return new QueryParameter("@" + fieldName, DbType.Single, fieldData.FieldValue);
+                        return new QueryParameter("@" + fieldName, DbType.Single, Convert.ToDouble(fieldData.FieldValue, System.Globalization.CultureInfo.InvariantCulture));
                     case MetaFieldType.Image:
                         //throw new ApplicationException("Not a supported field type");
                         return new QueryParameter("@" + fieldName, DbType.Binary, Convert.FromBase64String(fieldData.FieldValue.ToString()));
@@ -1132,7 +1151,7 @@ namespace Epi.ImportExport.ProjectPackagers
                 string fieldName = fieldData.FieldName;
                 foreach (GridColumnBase gc in gridField.Columns)
                 {
-                    if (gc.Name.ToLower().Equals(fieldName.ToLower()))
+                    if (gc.Name.Equals(fieldName, StringComparison.OrdinalIgnoreCase))
                     {
                         gridColumnBase = gc;
                     }
@@ -1184,11 +1203,11 @@ namespace Epi.ImportExport.ProjectPackagers
 
                 if (field is CheckBoxField)
                 {
-                    if (value.ToString().ToLower().Equals("true"))
+                    if (value.ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
                     {
                         value = true;
                     }
-                    else if (value.ToString().ToLower().Equals("false"))
+                    else if (value.ToString().Equals("false", StringComparison.OrdinalIgnoreCase))
                     {
                         value = false;
                     }
@@ -1196,11 +1215,11 @@ namespace Epi.ImportExport.ProjectPackagers
 
                 if (field is YesNoField)
                 {
-                    if (value.ToString().ToLower().Equals("1"))
+                    if (value.ToString().Equals("1", StringComparison.OrdinalIgnoreCase))
                     {
                         value = 1;
                     }
-                    else if (value.ToString().ToLower().Equals("0"))
+                    else if (value.ToString().Equals("0", StringComparison.OrdinalIgnoreCase))
                     {
                         value = 0;
                     }

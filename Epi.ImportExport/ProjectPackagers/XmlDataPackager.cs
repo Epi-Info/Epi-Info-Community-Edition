@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using Epi;
 using Epi.Data;
 using Epi.Fields;
 using Epi.ImportExport.Filters;
@@ -33,10 +34,11 @@ namespace Epi.ImportExport.ProjectPackagers
         {
             #region Input Validation
             if (sourceForm == null) { throw new ArgumentNullException("sourceForm"); }
-            if (string.IsNullOrEmpty(packageName)) { throw new ArgumentNullException("packageName"); }
+            if (String.IsNullOrEmpty(packageName)) { throw new ArgumentNullException("packageName"); }
             #endregion // Input Validation
 
             IncludeNullFieldData = true;
+            RecordProcessingScope = RecordProcessingScope.Undeleted;
             SourceForm = sourceForm;
             SourceProject = SourceForm.Project;
             PackageName = packageName;
@@ -69,6 +71,11 @@ namespace Epi.ImportExport.ProjectPackagers
         /// Gets/sets whether to include empty field data
         /// </summary>
         public bool IncludeNullFieldData { get; set; }
+
+        /// <summary>
+        /// Gets/sets whether to include records that are marked for deletion
+        /// </summary>
+        public RecordProcessingScope RecordProcessingScope { get; set; }
 
         /// <summary>
         /// Gets/sets the list of fields whose data should be erased during the packaging process. The dictionary key is the name of the form; the list of strings represent the field names within the form that should be erased.
@@ -153,7 +160,7 @@ namespace Epi.ImportExport.ProjectPackagers
             // Process the parent form first, before getting to any relational forms...
             root.AppendChild(CreateXmlFormElement(xmlDataPackage, SourceForm));
             ExportInfo.FormsProcessed++;
-            
+
             // ... now that we've processed the parent, we want to process each related form. But we want to process
             // those related forms in order, based on how far away they are from the parent (the root). This is necessary
             // so that we can take the GUIDs from the last parent processed and use them to delete orphans.
@@ -172,9 +179,9 @@ namespace Epi.ImportExport.ProjectPackagers
                     // Include this form in the dictionary of forms to process
                     // Note: We're sorting these so that the forms are generated in top-to-bottom order in the Xml
                     int level = ImportExportHelper.GetFormDescendantLevel(form, SourceForm, 0);
-                    if (!forms.ContainsKey(level))                    
+                    if (!forms.ContainsKey(level))
                     {
-                        forms.Add(level, new List<View>());                        
+                        forms.Add(level, new List<View>());
                     }
                     forms[level].Add(form);
                 }
@@ -207,7 +214,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// Checks for problems in the source project
         /// </summary>
         protected void CheckForProblems()
-        {            
+        {
             IDbDriver driver = SourceProject.CollectedData.GetDatabase();
 
             if (driver == null)
@@ -341,7 +348,7 @@ namespace Epi.ImportExport.ProjectPackagers
             // Append timestamp in UTC so that people sending packages across time zones don't need to worry about what zone it was packaged in.
             DateTime dt = DateTime.UtcNow;
             string dateDisplayValue = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:s}", dt);
-            
+
             XmlAttribute version = xmlDataPackage.CreateAttribute("Version"); // The version of Epi Info 7 that was used to create it
             XmlAttribute created = xmlDataPackage.CreateAttribute("Created"); // The date/time the package creation started
             XmlAttribute pakName = xmlDataPackage.CreateAttribute("Name"); // The name of the package (should mirror the file name but without a filename-based timestamp)
@@ -399,7 +406,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="xmlDataPackage">The data package xml document that the XmlElement should be added to</param>
         /// <param name="form">The form to be serialized</param>        
         /// <returns>XmlElement; represents the view in Xml format, suitable for use in data packaging</returns>
-        protected XmlElement CreateXmlFormElement(XmlDocument xmlDataPackage, View form) 
+        protected XmlElement CreateXmlFormElement(XmlDocument xmlDataPackage, View form)
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -413,7 +420,7 @@ namespace Epi.ImportExport.ProjectPackagers
             XmlAttribute related = xmlDataPackage.CreateAttribute("IsRelatedForm");
 
             name.Value = form.Name;
-            pages.Value = form.Pages.Count.ToString(); 
+            pages.Value = form.Pages.Count.ToString();
             related.Value = form.IsRelatedView.ToString();
 
             formElement.Attributes.Append(name);
@@ -436,7 +443,7 @@ namespace Epi.ImportExport.ProjectPackagers
 
             if (this.IsUsingCustomMatchkeys) { formElement.AppendChild(CreateXmlFormKeyElement(xmlDataPackage, form)); } // only add a custom key element if custom keys are specified... this maintains backward compatibility with 7.1.2.0 which only expects two child elements in <Form>
             formElement.AppendChild(CreateXmlFormMetadataElement(xmlDataPackage, form));
-            formElement.AppendChild(CreateXmlFormDataElement(xmlDataPackage, form));            
+            formElement.AppendChild(CreateXmlFormDataElement(xmlDataPackage, form));
 
             return formElement;
         }
@@ -615,27 +622,28 @@ namespace Epi.ImportExport.ProjectPackagers
                 ParentIdList.Clear();
                 foreach (KeyValuePair<string, XmlElement> kvp in IdList) { ParentIdList.Add(kvp.Key); }
             }
-            
+
             IdList.Clear(); // Very important, this needs to be re-set in case we've already processed a form (this is a class level variable)
 
-            if(!ExportInfo.RecordsPackaged.ContainsKey(form)) 
+            if (!ExportInfo.RecordsPackaged.ContainsKey(form))
             {
                 ExportInfo.RecordsPackaged.Add(form, 0);
-            }            
+            }
 
             bool filterThisForm = false;
             RowFilters filters = null;
             Query selectQuery = null;
-            
+
             if (Filters != null && Filters.ContainsKey(form.Name) && Filters[form.Name].Count() > 0)
             {
                 filterThisForm = true;
                 filters = Filters[form.Name];
+                filters.RecordProcessingScope = RecordProcessingScope;
                 selectQuery = filters.GetGuidSelectQuery(form);
             }
 
             double totalRecords = 0;
-                
+
             using (IDataReader guidReader = filterThisForm ? SourceProject.CollectedData.GetDatabase().ExecuteReader(selectQuery) : SourceProject.CollectedData.GetDatabase().GetTableDataReader(form.TableName))
             {
                 while (guidReader.Read())
@@ -669,7 +677,10 @@ namespace Epi.ImportExport.ProjectPackagers
                         }
                     }
 
-                    if (recstatus.Equals("1")) // only include undeleted records
+                    if (
+                        (recstatus.Equals("1", StringComparison.OrdinalIgnoreCase) && RecordProcessingScope == Epi.RecordProcessingScope.Undeleted) ||
+                        (recstatus.Equals("0", StringComparison.OrdinalIgnoreCase) && RecordProcessingScope == Epi.RecordProcessingScope.Deleted) ||
+                        (RecordProcessingScope == Epi.RecordProcessingScope.Both))
                     {
                         if (!form.IsRelatedView || ParentIdList.Contains(fkey))
                         {
@@ -708,6 +719,12 @@ namespace Epi.ImportExport.ProjectPackagers
                                 lastSaveDateTime.Value = lastSaveTime.Value.Ticks.ToString();
                                 record.Attributes.Append(lastSaveDateTime);
                             }
+                            if (!String.IsNullOrEmpty(recstatus))
+                            {
+                                XmlAttribute recStatusAttribute = xmlDataPackage.CreateAttribute("RecStatus");
+                                recStatusAttribute.Value = recstatus;
+                                record.Attributes.Append(recStatusAttribute);
+                            }
                             IdList.Add(guid, record);
                             totalRecords++;
 
@@ -734,7 +751,7 @@ namespace Epi.ImportExport.ProjectPackagers
                         if (IdList.ContainsKey(guid))
                         {
                             XmlElement element = IdList[guid];
-                            
+
                             foreach (Field field in page.Fields)
                             {
                                 if (field is IDataField && field is RenderableField && !(field is GridField) && !(FieldsToNull.ContainsKey(form.Name) && FieldsToNull[form.Name].Contains(field.Name)))
@@ -762,6 +779,11 @@ namespace Epi.ImportExport.ProjectPackagers
                                                 value = Convert.ToBase64String((Byte[])reader[field.Name]);
                                                 fieldData.InnerText = value;
                                             }
+                                            else if (field is NumberField)
+                                            {
+                                                value = Convert.ToDouble(value).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                                                fieldData.InnerText = value;
+                                            }
                                             else
                                             {
                                                 fieldData.InnerText = value;
@@ -779,13 +801,13 @@ namespace Epi.ImportExport.ProjectPackagers
                                         data.AppendChild(element);
                                     }
                                 }
-                            }                            
+                            }
                         }
                         processedRecords++;
                         double progress = (((double)processedRecords) / ((double)totalRecords)) * 100;
                         if (UpdateProgress != null) { UpdateProgress(progress); }
                     }
-                }                
+                }
             }
             foreach (GridField gridField in form.Fields.GridFields)
             {
@@ -814,7 +836,7 @@ namespace Epi.ImportExport.ProjectPackagers
             XmlElement data = xmlDataPackage.CreateElement("GridData");
 
             if (StatusChanged != null) { StatusChanged(string.Format(PackagerStrings.ADDING_GRID_DATA, gridField.Name, form.Name)); }
-            
+
             using (IDataReader reader = SourceProject.CollectedData.GetDatabase().GetTableDataReader(gridField.TableName))
             {
                 while (reader.Read())
@@ -867,13 +889,13 @@ namespace Epi.ImportExport.ProjectPackagers
                                         {
                                             gridFieldData.InnerText = value;
                                         }
-                                    }                                        
+                                    }
                                     element.AppendChild(gridFieldData);
-                                    data.AppendChild(element);                                    
+                                    data.AppendChild(element);
                                 }
                             }
                         }
-                    }                    
+                    }
                 }
             }
 
