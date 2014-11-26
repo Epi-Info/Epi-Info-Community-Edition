@@ -429,6 +429,20 @@ namespace Epi.EnterCheckCodeEngine
 
         private void NewRecord(object sender, RunCheckCodeEventArgs e)
         {
+            //----2101
+            if (!this.mView.IsDirty)
+            {
+                if (this.AfterStack.Peek().Key == EventActionEnum.CloseField)
+                {
+                    this.AfterStack.Pop();
+                    this.AfterStack.Pop();
+                }
+                else if (this.AfterStack.Peek().Key == EventActionEnum.ClosePage)
+                {
+                    this.AfterStack.Pop();
+                }
+            }
+            //---
             this.UnRollRecord();
             this.AfterStack.Push(new KeyValuePair<EventActionEnum, StackCommand>(EventActionEnum.CloseRecord, new StackCommand(this.EpiInterpreter, "record", "after", "")));
             this.ResetFields();
