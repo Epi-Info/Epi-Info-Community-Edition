@@ -27,7 +27,8 @@ namespace Epi.ImportExport.Filters
         /// </summary>
         /// <param name="dataDriver">The data driver to attach to this object</param>
         /// <param name="joinType">Whether to use a global AND or OR to join all the conditions</param>
-        public RowFilters(IDbDriver dataDriver, ConditionJoinTypes joinType = ConditionJoinTypes.And)
+        /// <param name="recordProcessingScope">Whether to include records marked for deletion</param>
+        public RowFilters(IDbDriver dataDriver, ConditionJoinTypes joinType = ConditionJoinTypes.And, RecordProcessingScope recordProcessingScope = Epi.RecordProcessingScope.Undeleted)
         {
             // pre
             Contract.Requires(dataDriver != null);
@@ -39,16 +40,22 @@ namespace Epi.ImportExport.Filters
             _conditionJoinType = joinType;
             DataDriver = dataDriver;
             _rowFilterConditions = new List<IRowFilterCondition>();
+            RecordProcessingScope = recordProcessingScope;
         }
         #endregion // Constructors
 
-        #region Public Properties
+        #region Properties
         /// <summary>
         /// Gets/sets the data driver attached to this row filter object.
         /// </summary>
         private IDbDriver DataDriver { get; set; }
 
-        #endregion // Public Properties
+        /// <summary>
+        /// Gets/sets whether to include records that are marked for deletion
+        /// </summary>
+        public RecordProcessingScope RecordProcessingScope { get; set; }
+
+        #endregion // Properties
 
         #region Public Methods
 
@@ -98,7 +105,18 @@ namespace Epi.ImportExport.Filters
                 columns.Append("[" + baseTableName + "].[LastSaveTime]");
             }
 
-            string fullSql = "SELECT " + columns.ToString() + " " + fromClause + " WHERE [" + baseTableName + "].[RECSTATUS] = 1 AND (";
+            string recStatusComparison = "[" + baseTableName + "].[RECSTATUS] = 1";
+
+            if (RecordProcessingScope == Epi.RecordProcessingScope.Both)
+            {
+                recStatusComparison = "[" + baseTableName + "].[RECSTATUS] >= 0";
+            }
+            else if (RecordProcessingScope == Epi.RecordProcessingScope.Deleted)
+            {
+                recStatusComparison = "[" + baseTableName + "].[RECSTATUS] = 0";
+            }
+
+            string fullSql = "SELECT " + columns.ToString() + " " + fromClause + " WHERE " + recStatusComparison + " AND (";
             //filterSql.Append(fullSql);
 
             string logicalOperatorString = " AND ";
@@ -151,7 +169,7 @@ namespace Epi.ImportExport.Filters
                     }
                 }
 
-            
+
                 newCondition.ParameterName = newCondition.ParameterName + numberOfTimesThisColumnIsReferenced.ToString();
                 newCondition.BuildSql();
 
