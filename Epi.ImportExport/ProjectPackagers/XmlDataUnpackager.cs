@@ -47,6 +47,8 @@ namespace Epi.ImportExport.ProjectPackagers
             KeyFields = new List<Field>();
             Update = true;
             Append = true;
+            Delete = true;
+            Undelete = true;
         }
         #endregion // Constructors
 
@@ -69,6 +71,16 @@ namespace Epi.ImportExport.ProjectPackagers
         /// Gets/sets whether to update matching records during the import.
         /// </summary>
         public bool Update { get; set; }
+
+        /// <summary>
+        /// Gets/sets whether to soft-delete records during the import.
+        /// </summary>
+        public bool Delete { get; set; }
+
+        /// <summary>
+        /// Gets/sets whether to undo soft-deletions of records during the import.
+        /// </summary>
+        public bool Undelete { get; set; }
 
         /// <summary>
         /// Gets/sets the source project for the packaging routine
@@ -110,7 +122,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <summary>
         /// Unpackages the specified XmlDocument and imports the data into the specified Epi Info 7 form (and any descendant forms).
         /// </summary>
-        public void Unpackage()
+        public virtual void Unpackage()
         {
             ImportInfo = new ImportInfo();
             ImportInfo.UserID = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
@@ -509,13 +521,20 @@ namespace Epi.ImportExport.ProjectPackagers
 
             IDbDriver destinationDb = DestinationProject.CollectedData.GetDatabase();
             Dictionary<string, bool> destinationGuids = new Dictionary<string, bool>();
+            Dictionary<string, int> destinationGuidsAndRecStatus = new Dictionary<string, int>();
             Dictionary<Dictionary<Field, object>, bool> destinationKeyValues = new Dictionary<Dictionary<Field, object>, bool>();
 
             using (IDataReader baseTableReader = destinationDb.GetTableDataReader(form.TableName))
             {
                 while (baseTableReader.Read())
                 {
-                    destinationGuids.Add(baseTableReader["GlobalRecordId"].ToString(), true);
+                    string readerGuid = baseTableReader["GlobalRecordId"].ToString();
+                    int readerRecStatus = 0;
+
+                    bool success = Int32.TryParse(baseTableReader["RecStatus"].ToString(), out readerRecStatus);
+
+                    destinationGuids.Add(readerGuid, true);
+                    destinationGuidsAndRecStatus.Add(readerGuid, readerRecStatus);
                 }
             }
 
@@ -589,19 +608,51 @@ namespace Epi.ImportExport.ProjectPackagers
                         }
                         else
                         {
-                            if (!String.IsNullOrEmpty(recStatus))
+                            #region Record status update for deletions
+                            // the destination recStatus doesn't match the one in the sync file. Now we need to do an update...
+                            if (!String.IsNullOrEmpty(recStatus) && destinationGuidsAndRecStatus[guid].ToString() != recStatus)
                             {
-                                // update RecStatus
-                                IDbDriver db = DestinationProject.CollectedData.GetDatabase();
-                                Query updateQuery = db.CreateQuery("UPDATE [" + form.TableName + "] SET [RecStatus] = @RecStatus WHERE [GlobalRecordId] = @GlobalRecordId");
-                                updateQuery.Parameters.Add(new QueryParameter("@RecStatus", DbType.Int32, Double.Parse(recStatus)));
-                                updateQuery.Parameters.Add(new QueryParameter("@GlobalRecordId", DbType.String, guid));
-                                db.ExecuteNonQuery(updateQuery);
+                                // if the desired rec status is 0 (deleted) then try to change the target recstatus to this value
+                                if (recStatus == "0")
+                                {
+                                    // but we only update rec status if the caller allowed it via the Delete property
+                                    if (Delete)
+                                    {
+                                        // update RecStatus with DB query
+                                        IDbDriver db = DestinationProject.CollectedData.GetDatabase();
+                                        Query updateQuery = db.CreateQuery("UPDATE [" + form.TableName + "] SET [RecStatus] = @RecStatus WHERE [GlobalRecordId] = @GlobalRecordId");
+                                        updateQuery.Parameters.Add(new QueryParameter("@RecStatus", DbType.Int32, Double.Parse(recStatus)));
+                                        updateQuery.Parameters.Add(new QueryParameter("@GlobalRecordId", DbType.String, guid));
+                                        db.ExecuteNonQuery(updateQuery);
+                                    }
+
+                                    // and regardless of the delete property's setting, we still add the record ID to the list of deleted records
+                                    ImportInfo.AddRecordIdAsDeleted(form, guid);
+                                }
+                                else if (recStatus == "1")
+                                {
+                                    // now, the destination has a value of 0 and the sender has a value of 1, meaning the sender
+                                    // is trying to UNDELETE the record for the receiver.
+
+                                    // but only undelete if the caller said so via API
+                                    if (Undelete)
+                                    {
+                                        IDbDriver db = DestinationProject.CollectedData.GetDatabase();
+                                        Query updateQuery = db.CreateQuery("UPDATE [" + form.TableName + "] SET [RecStatus] = @RecStatus WHERE [GlobalRecordId] = @GlobalRecordId");
+                                        updateQuery.Parameters.Add(new QueryParameter("@RecStatus", DbType.Int32, Double.Parse(recStatus)));
+                                        updateQuery.Parameters.Add(new QueryParameter("@GlobalRecordId", DbType.String, guid));
+                                        db.ExecuteNonQuery(updateQuery);
+                                    }
+
+                                    // regardless of whether we hit the DB, add the ID to the undelete list
+                                    ImportInfo.AddRecordIdAsUndeleted(form, guid);
+                                }
                             }
+                            #endregion
 
                             ImportInfo.TotalRecordsUpdated++;
                             ImportInfo.RecordsUpdated[form]++;
-                            ImportInfo.AddRecordIdAsAppended(form, guid);
+                            ImportInfo.AddRecordIdAsUpdated(form, guid);
                         }
                     }
                 }
