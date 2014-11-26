@@ -9,6 +9,8 @@ namespace Epi.ImportExport.ProjectPackagers
     {
         private Dictionary<View, List<string>> _recordIdsUpdated = new Dictionary<View, List<string>>();
         private Dictionary<View, List<string>> _recordIdsAppended = new Dictionary<View, List<string>>();
+        private Dictionary<View, List<string>> _recordIdsDeleted = new Dictionary<View, List<string>>();
+        private Dictionary<View, List<string>> _recordIdsUndeleted = new Dictionary<View, List<string>>();
 
         public int FormsProcessed;
         public int GridsProcessed;
@@ -58,6 +60,48 @@ namespace Epi.ImportExport.ProjectPackagers
         }
 
         /// <summary>
+        /// Adds a record GUID to the list of record GUIDs that were changed from being soft-deleted to active during the import operation.
+        /// </summary>
+        /// <param name="form">The Epi Info 7 form that the record belongs to</param>
+        /// <param name="id">The GUID of the record</param>
+        public void AddRecordIdAsUndeleted(View form, string id)
+        {
+            if (_recordIdsUndeleted.ContainsKey(form))
+            {
+                List<string> recordIds = _recordIdsUndeleted[form];
+                if (!recordIds.Contains(id))
+                {
+                    recordIds.Add(id);
+                }
+            }
+            else
+            {
+                _recordIdsUndeleted.Add(form, new List<string>() { id });
+            }
+        }
+
+        /// <summary>
+        /// Adds a record GUID to the list of record GUIDs that were soft-deleted during the import operation.
+        /// </summary>
+        /// <param name="form">The Epi Info 7 form that the soft-deleted record belongs to</param>
+        /// <param name="id">The GUID of the soft-deleted record</param>
+        public void AddRecordIdAsDeleted(View form, string id)
+        {
+            if (_recordIdsDeleted.ContainsKey(form))
+            {
+                List<string> recordIds = _recordIdsDeleted[form];
+                if (!recordIds.Contains(id))
+                {
+                    recordIds.Add(id);
+                }
+            }
+            else
+            {
+                _recordIdsDeleted.Add(form, new List<string>() { id });
+            }
+        }
+
+        /// <summary>
         /// Adds a record GUID to the list of record GUIDs that were appended (inserted) during the import operation.
         /// </summary>
         /// <param name="form">The Epi Info 7 form that the appended record belongs to</param>
@@ -88,6 +132,42 @@ namespace Epi.ImportExport.ProjectPackagers
             if (_recordIdsAppended.ContainsKey(form))
             {
                 return _recordIdsAppended[form].AsEnumerable();
+            }
+
+            else
+            {
+                return new List<string>();
+            }
+        }
+
+        /// <summary>
+        /// Gets a list of all of the records that were soft-deleted during the import operation for the specified form
+        /// </summary>
+        /// <param name="form">The Epi Info 7 form for which the records were soft-deleted</param>
+        /// <returns>IEnumerable; a collection of strings that represent the GUIDs for each of the soft-deleted records</returns>
+        public IEnumerable<string> GetDeletedRecordIdsForForm(View form)
+        {
+            if (_recordIdsDeleted.ContainsKey(form))
+            {
+                return _recordIdsDeleted[form].AsEnumerable();
+            }
+
+            else
+            {
+                return new List<string>();
+            }
+        }
+
+        /// <summary>
+        /// Gets a list of all of the records that were undeleted during the import operation for the specified form
+        /// </summary>
+        /// <param name="form">The Epi Info 7 form for which the records were undeleted</param>
+        /// <returns>IEnumerable; a collection of strings that represent the GUIDs for each of the undeleted records</returns>
+        public IEnumerable<string> GetUndeletedRecordIdsForForm(View form)
+        {
+            if (_recordIdsUndeleted.ContainsKey(form))
+            {
+                return _recordIdsUndeleted[form].AsEnumerable();
             }
 
             else
