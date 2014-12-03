@@ -413,7 +413,7 @@ namespace Epi.ImportExport.ProjectPackagers
 
             PackageFieldData lastRecord = new PackageFieldData();
             lastRecord.FieldName = "__--LastRecord--__";
-            lastRecord.RecordGUID = string.Empty;
+            lastRecord.RecordGUID = String.Empty;
             records.Add(lastRecord);
 
             for (int i = 0; i < records.Count; i++)
@@ -430,12 +430,12 @@ namespace Epi.ImportExport.ProjectPackagers
                 bool isLast = fieldData.Equals(lastRecord);
                 Page currentPage = fieldData.Page;
 
-                if ((previousPage != currentPage && previousPage != null) || isLast || fieldsInQuery.Contains(fieldData.FieldName))
+                if ((previousPage != currentPage && previousPage != null) || isLast || fieldsInQuery.Contains(fieldData.FieldName) || (!String.IsNullOrEmpty(lastGuid) && !guid.Equals(lastGuid, StringComparison.OrdinalIgnoreCase)))
                 {
                     // run the update with the fields we currently have...
 
-                    string updateHeader = string.Empty;
-                    string whereClause = string.Empty;
+                    string updateHeader = String.Empty;
+                    string whereClause = String.Empty;
                     StringBuilder sb = new StringBuilder();
 
                     // Build the Update statement which will be reused
