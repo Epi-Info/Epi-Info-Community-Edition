@@ -264,6 +264,10 @@ namespace Epi
         /// </summary>
         public const string IF = "IF";
         /// <summary>
+        /// Perform a command or a set of commands conditionally
+        /// </summary>
+        public const string ISDISTINCT = "ISDISTINCT";
+        /// <summary>
         /// Kaplan-Meier Survival 
         /// </summary>
         public const string KMSURVIVAL = "KMSURVIVAL";
