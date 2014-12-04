@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -80,7 +81,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <summary>
         /// Gets/sets the list of fields whose data should be erased during the packaging process. The dictionary key is the name of the form; the list of strings represent the field names within the form that should be erased.
         /// </summary>
-        public Dictionary<string, List<string>> FieldsToNull { get; set; }
+        private Dictionary<string, List<string>> FieldsToNull { get; set; }
 
         /// <summary>
         /// Gets/sets the list of fields to use as match keys. If none are specified, the GlobalRecordId field will be used as the match key.
@@ -95,7 +96,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <summary>
         /// Gets/sets the list of grid columns whose data should be erased during the packaging process
         /// </summary>
-        public Dictionary<string, List<string>> GridColumnsToNull { get; set; }
+        private Dictionary<string, List<string>> GridColumnsToNull { get; set; }
 
         /// <summary>
         /// Gets/sets the source project for the packaging routine
@@ -135,6 +136,67 @@ namespace Epi.ImportExport.ProjectPackagers
         #endregion // Properties
 
         #region Public Methods
+
+        /// <summary>
+        /// Adds a field whose data should be excluded from the data package
+        /// </summary>
+        /// <param name="fieldName">The name of the field to exclude</param>
+        /// <param name="formName">The name of the form on which the field is present</param>
+        public void AddGridColumnToNull(string gridColumnName, string gridName)
+        {
+            // pre
+            Contract.Requires(!String.IsNullOrEmpty(gridColumnName));
+            Contract.Requires(!String.IsNullOrEmpty(gridName));
+
+            if (GridColumnsToNull.ContainsKey(gridName))
+            {
+                if (!GridColumnsToNull[gridName].Contains(gridColumnName))
+                {
+                    GridColumnsToNull[gridName].Add(gridColumnName);
+                }
+            }
+            else
+            {
+                GridColumnsToNull.Add(gridName, new List<string>() { gridColumnName });
+            }
+        }
+
+        /// <summary>
+        /// Adds a field whose data should be excluded from the data package
+        /// </summary>
+        /// <param name="fieldName">The name of the field to exclude</param>
+        /// <param name="formName">The name of the form on which the field is present</param>
+        public void AddFieldToNull(string fieldName, string formName)
+        {
+            // pre
+            Contract.Requires(!String.IsNullOrEmpty(fieldName));
+            Contract.Requires(!String.IsNullOrEmpty(formName));
+
+            if (FieldsToNull.ContainsKey(formName))
+            {
+                if (!FieldsToNull[formName].Contains(fieldName))
+                {
+                    FieldsToNull[formName].Add(fieldName);
+                }
+            }
+            else
+            {
+                FieldsToNull.Add(formName, new List<string>() { fieldName });
+            }
+        }
+
+        /// <summary>
+        /// Adds a field whose data should be excluded from the data package
+        /// </summary>
+        /// <param name="field">The field whose data should be excluded</param>
+        public void AddFieldToNull(IField field)
+        {
+            // pre
+            Contract.Requires(field != null);
+
+            AddFieldToNull(field.Name, field.GetView().Name);
+        }
+
         /// <summary>
         /// Initiates form packaging and returns the corresponding package in Xml format.
         /// </summary>
