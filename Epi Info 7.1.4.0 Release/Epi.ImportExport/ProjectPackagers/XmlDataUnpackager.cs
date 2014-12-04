@@ -49,6 +49,7 @@ namespace Epi.ImportExport.ProjectPackagers
             Append = true;
             Delete = true;
             Undelete = true;
+            RecordProcessingScope = Epi.RecordProcessingScope.Both;
         }
         #endregion // Constructors
 
@@ -71,6 +72,11 @@ namespace Epi.ImportExport.ProjectPackagers
         /// Gets/sets whether to update matching records during the import.
         /// </summary>
         public bool Update { get; set; }
+
+        /// <summary>
+        /// Gets/sets whether to include records that are marked for deletion
+        /// </summary>
+        public RecordProcessingScope RecordProcessingScope { get; set; }
 
         /// <summary>
         /// Gets/sets whether to soft-delete records during the import.
@@ -189,6 +195,22 @@ namespace Epi.ImportExport.ProjectPackagers
                                         if (recordElement.Name.Equals("Record"))
                                         {
                                             string guid = recordElement.Attributes[0].Value.ToString();
+                                            string recordStatus = String.Empty;
+
+                                            if (recordElement.HasAttribute("RecStatus"))
+                                            {
+                                                recordStatus = recordElement.GetAttribute("RecStatus");
+                                            }
+
+                                            // if we're processing only deleted records and the record status is undeleted, OR if we're processing only
+                                            // undeleted (that is, active) records and the record status is deleted, then skip adding this to the list 
+                                            // of records to process
+                                            if ((RecordProcessingScope == Epi.RecordProcessingScope.Deleted && recordStatus.Equals("1")) ||
+                                                (RecordProcessingScope == Epi.RecordProcessingScope.Undeleted && recordStatus.Equals("0")))
+                                            {
+                                                continue;
+                                            }
+
                                             Dictionary<Field, object> customKey = new Dictionary<Field, object>();
 
                                             #region Custom Match Keys

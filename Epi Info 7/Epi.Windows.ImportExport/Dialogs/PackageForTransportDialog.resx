@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 583</value>
+    <value>309, 548</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -154,7 +154,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 583</value>
+    <value>390, 548</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -568,7 +568,7 @@
     <value>5</value>
   </data>
   <data name="grpDataRemoval.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 174</value>
+    <value>12, 178</value>
   </data>
   <data name="grpDataRemoval.Size" type="System.Drawing.Size, System.Drawing">
     <value>453, 156</value>
@@ -595,7 +595,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 583</value>
+    <value>228, 548</value>
   </data>
   <data name="btnSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -622,7 +622,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnLoad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 583</value>
+    <value>147, 548</value>
   </data>
   <data name="btnLoad.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -694,7 +694,7 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 554</value>
+    <value>12, 519</value>
   </data>
   <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
     <value>453, 23</value>
@@ -718,7 +718,7 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="txtProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 528</value>
+    <value>12, 493</value>
   </data>
   <data name="txtProgress.Size" type="System.Drawing.Size, System.Drawing">
     <value>453, 20</value>
@@ -748,10 +748,10 @@
     <value>True</value>
   </data>
   <data name="lbxStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 336</value>
+    <value>12, 340</value>
   </data>
   <data name="lbxStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 186</value>
+    <value>453, 147</value>
   </data>
   <data name="lbxStatus.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -850,7 +850,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>477, 618</value>
+    <value>477, 583</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Package data for transport</value>

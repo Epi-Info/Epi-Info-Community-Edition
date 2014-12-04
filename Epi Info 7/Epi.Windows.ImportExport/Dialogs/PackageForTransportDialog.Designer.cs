@@ -42,6 +42,7 @@
             this.txtVerifyPassword = new System.Windows.Forms.TextBox();
             this.lblVerifyPassword = new System.Windows.Forms.Label();
             this.grpDataRemoval = new System.Windows.Forms.GroupBox();
+            this.btnKeyFields = new System.Windows.Forms.Button();
             this.btnAdvanced = new System.Windows.Forms.Button();
             this.btnRowFilter = new System.Windows.Forms.Button();
             this.btnGridDataRemoval = new System.Windows.Forms.Button();
@@ -57,7 +58,6 @@
             this.lblPackageName = new System.Windows.Forms.Label();
             this.txtPackageName = new System.Windows.Forms.TextBox();
             this.checkboxIncludeTime = new System.Windows.Forms.CheckBox();
-            this.btnKeyFields = new System.Windows.Forms.Button();
             this.grpDataRemoval.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -151,6 +151,13 @@
             this.grpDataRemoval.Controls.Add(this.txtPassword);
             this.grpDataRemoval.Name = "grpDataRemoval";
             this.grpDataRemoval.TabStop = false;
+            // 
+            // btnKeyFields
+            // 
+            resources.ApplyResources(this.btnKeyFields, "btnKeyFields");
+            this.btnKeyFields.Name = "btnKeyFields";
+            this.btnKeyFields.UseVisualStyleBackColor = true;
+            this.btnKeyFields.Click += new System.EventHandler(this.btnKeyFields_Click);
             // 
             // btnAdvanced
             // 
@@ -250,13 +257,6 @@
             this.checkboxIncludeTime.Name = "checkboxIncludeTime";
             this.checkboxIncludeTime.UseVisualStyleBackColor = true;
             this.checkboxIncludeTime.CheckedChanged += new System.EventHandler(this.checkboxIncludeTime_CheckedChanged);
-            // 
-            // btnKeyFields
-            // 
-            resources.ApplyResources(this.btnKeyFields, "btnKeyFields");
-            this.btnKeyFields.Name = "btnKeyFields";
-            this.btnKeyFields.UseVisualStyleBackColor = true;
-            this.btnKeyFields.Click += new System.EventHandler(this.btnKeyFields_Click);
             // 
             // PackageForTransportDialog
             // 

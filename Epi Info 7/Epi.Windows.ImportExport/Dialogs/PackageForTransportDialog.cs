@@ -1085,8 +1085,24 @@ namespace Epi.Windows.ImportExport.Dialogs
                 try
                 {
                     XmlDataPackager xmlDP = new XmlDataPackager(sourceProject.Views[FormName], this.PackageName);
-                    xmlDP.GridColumnsToNull = gridColumnsToNull;
-                    xmlDP.FieldsToNull = fieldsToNull;
+
+                    foreach (KeyValuePair<string, List<string>> kvp in gridColumnsToNull)
+                    {
+                        foreach (string gridColumnName in kvp.Value)
+                        {
+                            xmlDP.AddGridColumnToNull(gridColumnName, kvp.Key);
+                        }
+                    }
+                    //xmlDP.GridColumnsToNull = gridColumnsToNull;
+
+                    foreach (KeyValuePair<string, List<string>> kvp in fieldsToNull)
+                    {
+                        foreach (string fieldName in kvp.Value)
+                        {
+                            xmlDP.AddFieldToNull(fieldName, kvp.Key);
+                        }
+                    }
+                    //xmlDP.FieldsToNull = fieldsToNull;
 
                     CallbackSetupProgressBar(100);
 
