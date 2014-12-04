@@ -3388,7 +3388,9 @@ namespace Epi.Windows.MakeView.PresentationLogic
                     MoveField((IFieldControl)childControl, false);
                 }
             }
-
+            //----147
+            SetBackColorForGroupCheckBoxes();
+            //---
             canvas.RenderControlTracker((Control)groupControl, true);
             canvas.HideUpdateEnd();
         }
@@ -3641,6 +3643,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
             PersistChildFieldNames();
             SetZeeOrderOfGroups();
+            SetBackColorForGroupCheckBoxes();
         }
 
         public void AddControlsToPanel(List<Control> controls)
@@ -3737,23 +3740,58 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
         public void SetZeeOrderOfGroups()
         {
-            System.Collections.Generic.SortedList<IFieldControl, Point> pointSortedGroups = new SortedList<IFieldControl, Point>(new GroupZeeOrderComparer());
+           System.Collections.Generic.SortedList<IFieldControl, Point> pointSortedGroups = new SortedList<IFieldControl, Point>(new GroupZeeOrderComparer());
 
-            foreach (Control possibleGroupControl in canvas.PagePanel.Controls)
+           foreach (Control possibleGroupControl in canvas.PagePanel.Controls)
+           {
+               IFieldControl fieldControl = possibleGroupControl as IFieldControl;
+               if (fieldControl != null && fieldControl.Field is GroupField)
+               {
+                   pointSortedGroups.Add(fieldControl, ((Control)fieldControl).Location);
+               }
+               foreach (KeyValuePair<IFieldControl, Point> kvp in pointSortedGroups)
+               {
+                   ((Control)kvp.Key).SendToBack();
+               }
+           }
+        }
+        
+        ///<summary>
+        ///Assign Backcolor for Checkboxes
+        ///</summary>
+        /// <param name="field">The field to be assigned a tab index</param>
+        /// <param name="panel">The panel the field belongs to</param>
+        /// <param name="currentPage">The current page</param>
+        private void SetBackColorForGroupCheckBoxes()
+        {
+            //---147
+            foreach (Control GroupControl in canvas.PagePanel.Controls)
             {
-                IFieldControl fieldControl = possibleGroupControl as IFieldControl;
-                if (fieldControl != null && fieldControl.Field is GroupField)
+                IFieldControl PfieldControl = GroupControl as IFieldControl;
+                if (PfieldControl != null && PfieldControl.Field is GroupField)
                 {
-                    pointSortedGroups.Add(fieldControl, ((Control)fieldControl).Location);
+                    ArrayList groupChildren = new ArrayList();
+                    String[] names = ((GroupField)PfieldControl.Field).ChildFieldNames.Split((Constants.LIST_SEPARATOR));
+                    foreach (string s in names)
+                    {
+                        groupChildren.Add(s);
+                    }
+                    foreach (Control p in canvas.PagePanel.Controls)
+                    {
+                        IFieldControl PossfieldControl = p as IFieldControl;
+                        if (PossfieldControl != null && PossfieldControl.Field is CheckBoxField)
+                        {
+                            if (groupChildren.Contains(PossfieldControl.Field.Name.ToString()))
+                            {
+                                ((CheckBox)PossfieldControl).BackColor = ((GroupField)PfieldControl.Field).BackgroundColor;
+                            }
+                        }
+                    }
                 }
             }
-
-            foreach (KeyValuePair<IFieldControl, Point> kvp in pointSortedGroups)
-            {
-                ((Control)kvp.Key).SendToBack();
-            }
         }
-
+      //----
+      
         /// <summary>
         /// Assign the tab index for controls
         /// </summary>
@@ -4530,6 +4568,9 @@ namespace Epi.Windows.MakeView.PresentationLogic
             RemoveFieldControlFromPanel(field);
             AddControlsToPanel(ControlFactory.Instance.GetFieldControls(field, canvas.PagePanel.Size));
             PersistChildFieldNames();
+            //--147
+            SetBackColorForGroupCheckBoxes();
+            //---
         }
 
         private void RemoveFieldControlFromPanel(Field field)
