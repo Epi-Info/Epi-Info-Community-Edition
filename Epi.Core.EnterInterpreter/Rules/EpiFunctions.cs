@@ -131,6 +131,9 @@ namespace Epi.Core.EnterInterpreter.Rules
                     case "HOURS":
                         functionCall = new Rule_Hours(pContext, T);
                         break;
+                    case "ISDISTINCT":
+                        functionCall = new Rule_IsDistinct(pContext, T);
+                        break;
                     case "LINEBREAK":
                         functionCall = new Rule_LineBreak(pContext, T);
                         break;
