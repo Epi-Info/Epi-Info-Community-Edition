@@ -25,10 +25,10 @@ namespace Epi.Windows.ImportExport.Dialogs
     {
         #region Private Members
         private Project sourceProject;
-        private Project destinationProject;
+        private readonly Project destinationProject;
         private IDbDriver sourceProjectDataDriver;
         private View sourceView;
-        private View destinationView;
+        private readonly View destinationView;
         private IDbDriver destinationProjectDataDriver;
         private Configuration config;        
         private BackgroundWorker importWorker;
