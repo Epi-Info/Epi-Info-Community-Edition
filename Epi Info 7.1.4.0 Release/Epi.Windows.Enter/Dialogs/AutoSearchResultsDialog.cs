@@ -16,14 +16,11 @@ namespace Epi.Windows.Enter.Dialogs
 {
     public partial class AutoSearchResults : Epi.Windows.Dialogs.DialogBase
     {
-        #region Private Members
 
         private int currentRow = -1;
         private DataTable dataTable = null;
         private new EnterMainForm mainForm;
 
-        #endregion
-        
         #region Constructors
 
         /// <summary>
@@ -40,7 +37,7 @@ namespace Epi.Windows.Enter.Dialogs
         /// <param name="view">The current view</param>
         /// <param name="mainForm">Enter module's main form</param>
         /// <param name="data">Data table containing auto search results</param>
-        public AutoSearchResults(View view, EnterMainForm mainForm, DataTable data)
+        public AutoSearchResults(View view, EnterMainForm mainForm, DataTable data, bool showContinueNewMessage = false)
             : base(mainForm)
         {
             #region Input Validation
@@ -75,7 +72,12 @@ namespace Epi.Windows.Enter.Dialogs
             this.KeyDown += new KeyEventHandler(OnKeyDown);
             base.KeyDown += new KeyEventHandler(OnKeyDown);
             this.dataGrid1.SelectionChanged += new EventHandler(dataGrid1_SelectionChanged);
-            
+
+            this.lblOKInstructions.Visible = !showContinueNewMessage;
+            this.lblCancelInstructions.Visible = !showContinueNewMessage;
+            this.lblContinueNewMessage.Visible = showContinueNewMessage;
+            this.lblContinueNew2.Visible = showContinueNewMessage;
+
             DisplayResults(data);
             
         }

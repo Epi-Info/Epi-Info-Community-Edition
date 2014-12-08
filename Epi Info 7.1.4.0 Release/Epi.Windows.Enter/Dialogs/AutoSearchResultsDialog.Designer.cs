@@ -53,6 +53,8 @@ namespace Epi.Windows.Enter.Dialogs
             this.lblRecordsReturned = new System.Windows.Forms.Label();
             this.lblOKInstructions = new System.Windows.Forms.Label();
             this.lblCancelInstructions = new System.Windows.Forms.Label();
+            this.lblContinueNewMessage = new System.Windows.Forms.Label();
+            this.lblContinueNew2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -176,9 +178,21 @@ namespace Epi.Windows.Enter.Dialogs
             resources.ApplyResources(this.lblCancelInstructions, "lblCancelInstructions");
             this.lblCancelInstructions.Name = "lblCancelInstructions";
             // 
+            // lblContinueNewMessage
+            // 
+            resources.ApplyResources(this.lblContinueNewMessage, "lblContinueNewMessage");
+            this.lblContinueNewMessage.Name = "lblContinueNewMessage";
+            // 
+            // lblContinueNew2
+            // 
+            resources.ApplyResources(this.lblContinueNew2, "lblContinueNew2");
+            this.lblContinueNew2.Name = "lblContinueNew2";
+            // 
             // AutoSearchResults
             // 
             resources.ApplyResources(this, "$this");
+            this.Controls.Add(this.lblContinueNew2);
+            this.Controls.Add(this.lblContinueNewMessage);
             this.Controls.Add(this.lblCancelInstructions);
             this.Controls.Add(this.lblOKInstructions);
             this.Controls.Add(this.lblRecordsReturned);
@@ -203,5 +217,7 @@ namespace Epi.Windows.Enter.Dialogs
         private System.Windows.Forms.Label lblRecordsReturned;
         private System.Windows.Forms.Label lblOKInstructions;
         private System.Windows.Forms.Label lblCancelInstructions;
+        private System.Windows.Forms.Label lblContinueNewMessage;
+        private System.Windows.Forms.Label lblContinueNew2;
     }
 }
