@@ -940,6 +940,7 @@ namespace Epi.Windows.Enter.PresentationLogic
             Collection<string> comparisonTypes = new Collection<string>();
             ControlFactory factory = ControlFactory.Instance;
             Dictionary<string,int> OrFieldCount = new Dictionary<string,int>();
+            bool ShowContinueNewDialog = false;
 
             foreach (String fieldName in checkCodeList)
             {
@@ -978,8 +979,20 @@ namespace Epi.Windows.Enter.PresentationLogic
                     {
                         foreach (string s in pDisplayList)
                         {
-                            TempTable.Columns.Add(new DataColumn(s, data.Columns[s].DataType));
+                            if (s.Equals("CONTINUENEW"))
+                            {
+                                ShowContinueNewDialog = true;
+                            }
+                            else
+                            {
+                                TempTable.Columns.Add(new DataColumn(s, data.Columns[s].DataType));
+                            }
                         }
+                        if (TempTable.Columns.Count == 0)
+                        {
+                            TempTable = data.Clone();
+                        }
+
                     }
                     else
                     {
@@ -1033,9 +1046,9 @@ namespace Epi.Windows.Enter.PresentationLogic
                         TempTable.ImportRow(R);
                     }
 
-                    Dialogs.AutoSearchResults dialog = new Dialogs.AutoSearchResults(this.view, this.mainForm, TempTable);
+                    Dialogs.AutoSearchResults dialog = new Dialogs.AutoSearchResults(this.view, this.mainForm, TempTable, ShowContinueNewDialog);
                     DialogResult result = dialog.ShowDialog();
-                    if (result == DialogResult.OK)
+                    if (result == DialogResult.OK && false == ShowContinueNewDialog)
                     {
                         this.dirty = false;
                         this.view.IsDirty = false;
@@ -1046,13 +1059,23 @@ namespace Epi.Windows.Enter.PresentationLogic
                 {
                     if (data.Select(string.Format("GlobalRecordId = '{0}'", this.view.CurrentGlobalRecordId)).Length != 1)
                     {
-
                         DataTable TempTable = new DataTable();
                         if (pDisplayList != null)
                         {
                             foreach (string s in pDisplayList)
                             {
-                                TempTable.Columns.Add(new DataColumn(s, data.Columns[s].DataType));
+                                if (s.Equals("CONTINUENEW"))
+                                {
+                                    ShowContinueNewDialog = true;
+                                }
+                                else
+                                {
+                                    TempTable.Columns.Add(new DataColumn(s, data.Columns[s].DataType));
+                                }
+                            }
+                            if (TempTable.Columns.Count == 0)
+                            {
+                                TempTable = data.Clone();
                             }
                         }
                         else
@@ -1086,6 +1109,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                                     if (data.Columns[i].ColumnName.Equals(s, StringComparison.OrdinalIgnoreCase))
                                     {
                                         isFound = true;
+                                        if(s.Equals("CONTINUENEW")) ShowContinueNewDialog = false;
                                         break;
                                     }
                                 }
@@ -1106,9 +1130,9 @@ namespace Epi.Windows.Enter.PresentationLogic
                             TempTable.ImportRow(R);
                         }
 
-                        Dialogs.AutoSearchResults dialog = new Dialogs.AutoSearchResults(this.view, this.mainForm, TempTable);
+                        Dialogs.AutoSearchResults dialog = new Dialogs.AutoSearchResults(this.view, this.mainForm, TempTable, ShowContinueNewDialog);
                         DialogResult result = dialog.ShowDialog();
-                        if (result == DialogResult.OK)
+                        if (result == DialogResult.OK && false == ShowContinueNewDialog)
                         {
                             this.dirty = false;
                             this.view.IsDirty = false;
