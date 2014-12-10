@@ -98,7 +98,11 @@ namespace Epi.Windows.Enter.PresentationLogic
                     this.EnterCheckCodeEngine.Reset();
                     this.EnterCheckCodeEngine.Project = e.View.Project;
                 }
-
+                if (this.EnterCheckCodeEngine.Project.views == null)
+                {
+                    this.EnterCheckCodeEngine.Reset();
+                    this.EnterCheckCodeEngine.Project = e.View.Project;
+                }
                 this.EnterCheckCodeEngine.OpenViewHandler(this, new Epi.EnterCheckCodeEngine.OpenViewEventArgs(this, e.View.Id));
                 this.view = this.EnterCheckCodeEngine.CurrentView.View;
                 this.view.ReturnToParent = e.View.ReturnToParent;
