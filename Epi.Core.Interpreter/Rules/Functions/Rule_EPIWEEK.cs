@@ -32,7 +32,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             // Updated by David Brown
 
             object result = null;
-
+            _dateTimeGiven = DateTime.MinValue;
             if (this.ParameterList.Count >= 1)
             {
                 if (this.ParameterList[0] != null && this.ParameterList[0].Execute() != null)
@@ -57,7 +57,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 }
             }
 
-            if (_dateTimeGiven != null)
+            if (_dateTimeGiven != null && _dateTimeGiven!=DateTime.MinValue)
             {
                 DateTime MMWR__Start;
                 MMWR__Start = GetMMWRStart(_dateTimeGiven, _firstDayOfWeek);
