@@ -129,7 +129,45 @@ namespace Epi.Windows.MakeView.Dialogs
             {
                 sourceTableName = dialog.TableName;
                 dialog.Close();
-                codeTable = page.GetProject().GetTableData(sourceTableName);
+                if (page.GetProject().CollectedData.TableExists(sourceTableName))
+                {
+                    codeTable = page.GetProject().GetTableData(sourceTableName);
+                }
+                else
+                {
+                    string separator = " - ";
+
+                    if (sourceTableName.Contains(separator))
+                    {
+                        string[] view_page = sourceTableName.Replace(separator, "^").Split('^');
+                        string viewName = view_page[0].ToString();
+                        string pageName = view_page[1].ToString();
+                        string filterExpression = string.Empty;
+                        string tableName = null;
+                        View targetView = page.GetProject().Metadata.GetViewByFullName(viewName);
+
+                        if (targetView != null)
+                        {
+                            DataTable targetPages = page.GetProject().Metadata.GetPagesForView(targetView.Id);
+                            DataView dataView = new DataView(targetPages);
+
+                            filterExpression = string.Format("Name = '{0}'", pageName);
+
+                            DataRow[] pageArray = targetPages.Select(filterExpression);
+
+                            if (pageArray.Length > 0)
+                            {
+                                int pageId = (int)pageArray[0]["PageId"];
+                                tableName = viewName + pageId;
+                            }
+                        }
+                        if (page.GetProject().CollectedData.TableExists(tableName))
+                        {
+                            codeTable = page.GetProject().GetTableData(tableName);
+                        }
+                    }
+                }
+                
 
                 if (codeTable != null)
                 {
@@ -166,44 +204,51 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             creationMode = CreationMode.UseExisting;
 
-            Project project = page.GetProject();
-
-            ViewSelectionDialog dialog = new ViewSelectionDialog(MainForm, project);
+            ViewSelectionDialog dialog = new ViewSelectionDialog(MainForm, page.GetProject());
             DialogResult result = dialog.ShowDialog();
 
             if (result == DialogResult.OK)
             {
                 sourceTableName = dialog.TableName;
                 dialog.Close();
-
-                if (project.CollectedData.TableExists(sourceTableName) == false)
+                if (page.GetProject().CollectedData.TableExists(sourceTableName))
+                {
+                    codeTable = page.GetProject().GetTableData(sourceTableName);
+                }
+                else
                 {
                     string separator = " - ";
-                    string filterExpression = string.Empty;
 
                     if (sourceTableName.Contains(separator))
                     {
                         string[] view_page = sourceTableName.Replace(separator, "^").Split('^');
                         string viewName = view_page[0].ToString();
                         string pageName = view_page[1].ToString();
-                        View targetView = project.Metadata.GetViewByFullName(viewName);
+                        string filterExpression = string.Empty;
+                        string tableName = null;
+                        View targetView = page.GetProject().Metadata.GetViewByFullName(viewName);
 
-                        DataTable targetPages = project.Metadata.GetPagesForView(targetView.Id);
-                        DataView dataView = new DataView(targetPages);
-
-                        filterExpression = string.Format("Name = '{0}'", pageName);
-
-                        DataRow[] pageArray = targetPages.Select(filterExpression);
-
-                        if (pageArray.Length > 0)
+                        if (targetView != null)
                         {
-                            int pageId = (int)pageArray[0]["PageId"];
-                            sourceTableName = viewName + pageId;
+                            DataTable targetPages = page.GetProject().Metadata.GetPagesForView(targetView.Id);
+                            DataView dataView = new DataView(targetPages);
+
+                            filterExpression = string.Format("Name = '{0}'", pageName);
+
+                            DataRow[] pageArray = targetPages.Select(filterExpression);
+
+                            if (pageArray.Length > 0)
+                            {
+                                int pageId = (int)pageArray[0]["PageId"];
+                                tableName = viewName + pageId;
+                            }
+                        }
+                        if (page.GetProject().CollectedData.TableExists(tableName))
+                        {
+                            codeTable = page.GetProject().GetTableData(tableName);
                         }
                     }
                 }
-
-                codeTable = project.GetTableData(sourceTableName);
 
                 if (codeTable != null)
                 {
