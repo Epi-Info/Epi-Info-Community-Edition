@@ -468,7 +468,7 @@ namespace Epi.Windows.Enter.PresentationLogic
             return controls;
         }
 
-        private Dictionary<string, DataTable> cachedListValues;
+      //  private Dictionary<string, DataTable> cachedListValues;
 
         private List<Control> GetControls(TableBasedDropDownField field, Size canvasSize)
         {
@@ -510,10 +510,10 @@ namespace Epi.Windows.Enter.PresentationLogic
                 comboBox.DisplayMember = null;
                 comboBox.ValueMember = null;
 
-                if (cachedListValues == null)
+               /* if (cachedListValues == null)
                 {
                     cachedListValues = new Dictionary<string, DataTable>();
-                }
+                }*/
                 DataTable displayTable;
                 if (field.SourceTableName.Contains("-"))
                 {
@@ -522,7 +522,8 @@ namespace Epi.Windows.Enter.PresentationLogic
                 }
                 else
                 {
-                    if (cachedListValues.ContainsKey(displayMember + "," + field.SourceTableName))
+                    displayTable = field.GetDisplayTable("", "", displayMember);
+                   /* if (cachedListValues.ContainsKey(displayMember + "," + field.SourceTableName))
                     {
                         displayTable = cachedListValues[displayMember + "," + field.SourceTableName];
                     }
@@ -530,7 +531,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                     {
                         displayTable = field.GetDisplayTable("", "", displayMember);
                         cachedListValues.Add(displayMember + "," + field.SourceTableName, displayTable);
-                    }
+                    }*/
                 }
 
                 if (displayTable != null)
