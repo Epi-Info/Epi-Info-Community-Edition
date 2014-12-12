@@ -215,6 +215,9 @@
     <Compile Include="Controls\GadgetProperties\ComplexSampleFrequencyProperties.xaml.cs">
       <DependentUpon>ComplexSampleFrequencyProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GadgetProperties\LinearRegressionProperties.xaml.cs">
+      <DependentUpon>LinearRegressionProperties.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GadgetProperties\PMCCProperties.xaml.cs">
       <DependentUpon>PMCCProperties.xaml</DependentUpon>
     </Compile>
@@ -932,6 +935,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\GadgetProperties\ComplexSampleFrequencyProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GadgetProperties\LinearRegressionProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
