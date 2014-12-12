@@ -242,7 +242,8 @@
                               Margin="0,-2,90,0"
                               Data="M 5 0 L 10 10 0 10 Z" Fill="{DynamicResource gadgetBackgroundBrush}" IsHitTestVisible="False" HorizontalAlignment="Right" VerticalAlignment="Top" Height="7" />
 
-                        <StackPanel Orientation="Vertical" Margin="25, 10, 25, 25" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                        <!-- Old input panel -->
+                        <StackPanel Orientation="Vertical" Margin="25, 10, 25, 25" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed" >
                             <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="Regression Properties" Margin="5" FontWeight="Bold" />
 
                             <Grid Name="grdRegressProperties" Width="Auto" HorizontalAlignment="Center" Margin="2,2,2,2" Visibility="Visible">
