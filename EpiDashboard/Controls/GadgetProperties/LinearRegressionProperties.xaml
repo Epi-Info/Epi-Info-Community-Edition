@@ -32,7 +32,7 @@
             <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables" Description="Select columns to display in the list." IsChecked="True" Checked="tbtnVariables_Checked"/>
             <!--<Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Sorting and Grouping" Description="Set a sort order and create list groups." IsChecked="False" Checked="tbtnSorting_Checked"/>-->
             <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked" Visibility="Collapsed"/>
 
         </StackPanel>
 
