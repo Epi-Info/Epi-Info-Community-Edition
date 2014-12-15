@@ -806,7 +806,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                                 if(project.Metadata.TableExists(dataTable.TableName))
                                 {
-                                    project.Metadata.DeleteCodeTable(dataTable.TableName);
+                                    project.Metadata.DeleteCodeTable("["+dataTable.TableName+"]");
                                 }
 
                                 dataTable.AcceptChanges();
