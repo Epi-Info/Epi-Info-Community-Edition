@@ -76,6 +76,11 @@ namespace Epi.Windows.Enter.Dialogs
             this.lblOKInstructions.Visible = !showContinueNewMessage;
             this.lblCancelInstructions.Visible = !showContinueNewMessage;
             this.lblContinueNewMessage.Visible = showContinueNewMessage;
+            this.btnCancel.Visible = !showContinueNewMessage;
+            if (showContinueNewMessage)
+            {
+                btnOK.Location = new Point(230, 270);
+            } 
             this.lblContinueNew2.Visible = showContinueNewMessage;
             DisplayResults(data);
             
