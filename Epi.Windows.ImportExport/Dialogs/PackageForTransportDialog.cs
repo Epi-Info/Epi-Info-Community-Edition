@@ -1231,12 +1231,21 @@ namespace Epi.Windows.ImportExport.Dialogs
             //FillForms();
 
             fieldsToNull = new Dictionary<string, List<string>>();
+            gridColumnsToNull = new Dictionary<string, List<string>>();
 
             if (fieldsToNull.Count == 0)
             {
                 foreach (View view in sourceProject.Views)
                 {
                     fieldsToNull.Add(view.Name, new List<string>());
+                }
+            }
+
+            if (gridColumnsToNull.Count == 0)
+            {
+                foreach (View view in sourceProject.Views)
+                {
+                    gridColumnsToNull.Add(view.Name, new List<string>());
                 }
             }
 
