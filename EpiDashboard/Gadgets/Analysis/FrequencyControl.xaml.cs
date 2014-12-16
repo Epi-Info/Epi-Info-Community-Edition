@@ -119,7 +119,6 @@ namespace EpiDashboard
             InitializeComponent();
             this.DashboardHelper = dashboardHelper;
             Construct();
-            //FillComboboxes();
         }
 
         #endregion // Constructors
@@ -161,114 +160,6 @@ namespace EpiDashboard
         }
 
         /// <summary>
-        /// Handles the filling of the gadget's combo boxes
-        /// </summary>
-        private void FillComboboxes(bool update = false)
-        {
-            //LoadingCombos = true;
-
-            //string prevField = string.Empty;
-            //string prevWeightField = string.Empty;
-            //List<string> prevStrataFields = new List<string>();
-
-            //if (lbxColumns.Items.Count == 0)
-            //{
-            //    lbxColumns.Items.Add("Frequency");
-            //    lbxColumns.Items.Add("Percent");
-            //    lbxColumns.Items.Add("Cumulative Percent");
-            //    lbxColumns.Items.Add("95% CI Lower");
-            //    lbxColumns.Items.Add("95% CI Upper");
-            //    lbxColumns.Items.Add("Percent bars");
-            //    lbxColumns.SelectAll();
-            //}
-
-            //if (update)
-            //{
-            //    if (cbxField.SelectedIndex >= 0)
-            //    {
-            //        prevField = cbxField.SelectedItem.ToString();
-            //    }
-            //    if (cbxFieldWeight.SelectedIndex >= 0)
-            //    {
-            //        prevWeightField = cbxFieldWeight.SelectedItem.ToString();
-            //    }
-            //    foreach (string s in lbxFieldStrata.SelectedItems)
-            //    {
-            //        prevStrataFields.Add(s);
-            //    }
-            //}
-
-            //cbxField.ItemsSource = null;
-            //cbxField.Items.Clear();
-
-            //cbxFieldWeight.ItemsSource = null;
-            //cbxFieldWeight.Items.Clear();
-
-            //lbxFieldStrata.ItemsSource = null;
-            //lbxFieldStrata.Items.Clear();
-
-            //List<string> fieldNames = new List<string>();
-            //List<string> weightFieldNames = new List<string>();
-            //List<string> strataFieldNames = new List<string>();
-
-            //weightFieldNames.Add(string.Empty);
-
-            //ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
-            //fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
-
-            //columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
-            //weightFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
-
-            //columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
-            //strataFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
-
-            //fieldNames.Sort();
-            //weightFieldNames.Sort();
-            //strataFieldNames.Sort();
-
-            //if (fieldNames.Contains("SYSTEMDATE"))
-            //{
-            //    fieldNames.Remove("SYSTEMDATE");
-            //}
-
-            //if (DashboardHelper.IsUsingEpiProject)
-            //{
-            //    if (fieldNames.Contains("RecStatus")) fieldNames.Remove("RecStatus");
-            //    if (weightFieldNames.Contains("RecStatus")) weightFieldNames.Remove("RecStatus");
-
-            //    if (strataFieldNames.Contains("RecStatus")) strataFieldNames.Remove("RecStatus");
-            //    if (strataFieldNames.Contains("FKEY")) strataFieldNames.Remove("FKEY");
-            //    if (strataFieldNames.Contains("GlobalRecordId")) strataFieldNames.Remove("GlobalRecordId");
-            //}
-
-            //cbxField.ItemsSource = fieldNames;
-            //cbxFieldWeight.ItemsSource = weightFieldNames;
-            //lbxFieldStrata.ItemsSource = strataFieldNames;
-
-            //if (cbxField.Items.Count > 0)
-            //{
-            //    cbxField.SelectedIndex = -1;
-            //}
-            //if (cbxFieldWeight.Items.Count > 0)
-            //{
-            //    cbxFieldWeight.SelectedIndex = -1;
-            //}
-
-            //if (update)
-            //{
-            //    cbxField.SelectedItem = prevField;
-            //    cbxFieldWeight.SelectedItem = prevWeightField;
-
-            //    foreach (string s in prevStrataFields)
-            //    {
-            //        lbxFieldStrata.SelectedItems.Add(s);
-            //    }
-            //}
-
-            //LoadingCombos = false;
-        }
-
-        /// <summary>
         /// Used to add a new FREQ grid to the gadget's output
         /// </summary>
         /// <param name="strataVar">The name of the stratification variable selected, if any</param>
@@ -293,7 +184,6 @@ namespace EpiDashboard
             txtExpanderHeader.Style = this.Resources["genericOutputExpanderText"] as Style;
             expander.Header = txtExpanderHeader;
 
-            //if (string.IsNullOrEmpty(strataVar) && GadgetOptions.StrataVariableNames.Count == 0)
             if (string.IsNullOrEmpty(strataVar) && this.Parameters.StrataVariableNames.Count == 0)
             {
                 panelMain.Children.Add(border);
@@ -749,134 +639,6 @@ namespace EpiDashboard
         }
 
         /// <summary>
-        /// Used to generate the list of variables and options for the GadgetParameters object
-        /// </summary> 
-        private void CreateInputVariableList()
-        {
-            //MOVE TO FREQUENCY PROPERTIES
-            //Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
-
-            //GadgetOptions.MainVariableName = string.Empty;
-            //GadgetOptions.WeightVariableName = string.Empty;
-            //GadgetOptions.StrataVariableNames = new List<string>();
-            //GadgetOptions.CrosstabVariableName = string.Empty;
-            //GadgetOptions.ColumnNames = new List<string>();
-
-            //if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
-            //{
-            //    inputVariableList.Add("freqvar", cbxField.SelectedItem.ToString());
-            //    GadgetOptions.MainVariableName = cbxField.SelectedItem.ToString();
-            //}
-            //else
-            //{
-            //    return;
-            //}
-
-            //if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
-            //{
-            //    inputVariableList.Add("weightvar", cbxFieldWeight.SelectedItem.ToString());
-            //    GadgetOptions.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
-            //}            
-
-            //if (lbxFieldStrata.SelectedItems.Count > 0)
-            //{                
-            //    GadgetOptions.StrataVariableNames = new List<string>();
-            //    foreach (string s in lbxFieldStrata.SelectedItems)
-            //    {
-            //        GadgetOptions.StrataVariableNames.Add(s);
-            //    }
-            //}
-
-            //if (checkboxAllValues.IsChecked == true)
-            //{
-            //    inputVariableList.Add("allvalues", "true");
-            //    GadgetOptions.ShouldUseAllPossibleValues = true;
-            //}
-            //else
-            //{
-            //    inputVariableList.Add("allvalues", "false");
-            //    GadgetOptions.ShouldUseAllPossibleValues = false;
-            //}
-
-            //if (checkboxCommentLegalLabels.IsChecked == true)
-            //{
-            //    GadgetOptions.ShouldShowCommentLegalLabels = true;
-            //}
-            //else
-            //{
-            //    GadgetOptions.ShouldShowCommentLegalLabels = false;
-            //}
-
-            //if (checkboxSortHighLow.IsChecked == true)
-            //{
-            //    inputVariableList.Add("sort", "highlow");
-            //    GadgetOptions.ShouldSortHighToLow = true;
-            //}
-            //else
-            //{
-            //    GadgetOptions.ShouldSortHighToLow = false;
-            //}
-
-            //if (checkboxIncludeMissing.IsChecked == true)
-            //{
-            //    inputVariableList.Add("includemissing", "true");
-            //    GadgetOptions.ShouldIncludeMissing = true;
-            //}
-            //else
-            //{
-            //    inputVariableList.Add("includemissing", "false");
-            //    GadgetOptions.ShouldIncludeMissing = false;
-            //}
-
-            //if (!inputVariableList.ContainsKey("usepromptforfield"))
-            //{
-            //    if (checkboxUsePrompts.IsChecked == true)
-            //    {
-            //        inputVariableList.Add("usepromptforfield", "true");
-            //    }
-            //    else
-            //    {
-            //        inputVariableList.Add("usepromptforfield", "false");
-            //    }
-            //}
-
-            //if (cbxFieldPrecision.SelectedIndex >= 0)
-            //{
-            //    inputVariableList.Add("precision", cbxFieldPrecision.SelectedIndex.ToString());
-            //}
-
-            //if (checkboxDrawBorders.IsChecked == true)
-            //{
-            //    inputVariableList.Add("drawborders", "true");
-            //}
-            //else
-            //{
-            //    inputVariableList.Add("drawborders", "false");
-            //}
-
-            //GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
-            //GadgetOptions.InputVariableList = inputVariableList;
-            //if (string.IsNullOrEmpty(txtRows.Text))
-            //{
-            //    GadgetOptions.RowsToDisplay = null;
-            //}
-            //else
-            //{
-            //    int rows;
-            //    bool success = int.TryParse(txtRows.Text, out rows);
-            //    if (success)
-            //    {
-            //        GadgetOptions.RowsToDisplay = rows;
-            //    }
-            //    else
-            //    {
-            //        GadgetOptions.RowsToDisplay = null;
-            //        txtRows.Text = string.Empty;
-            //    }
-            //}
-        }
-
-        /// <summary>
         /// Used to construct the gadget and assign events
         /// </summary>        
         protected override void Construct()
@@ -1172,77 +934,6 @@ namespace EpiDashboard
             StrataExpanderList.Clear();
         }
 
-//Moved to FrequencyProperties
-        ///// <summary>
-        ///// Checks the selected variables and enables/disables checkboxes as appropriate
-        ///// </summary>
-        //private void CheckVariables()
-        //{
-        //    isDropDownList = false;
-        //    isCommentLegal = false;
-        //    isOptionField = false;
-        //    isRecoded = false;
-
-        //    if (cbxField.SelectedItem != null && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
-        //    {
-        //        foreach (DataRow fieldRow in DashboardHelper.FieldTable.Rows)
-        //        {
-        //            if (fieldRow["columnname"].Equals(cbxField.SelectedItem.ToString()))
-        //            {
-        //                if (fieldRow["epifieldtype"] is TableBasedDropDownField || fieldRow["epifieldtype"] is YesNoField || fieldRow["epifieldtype"] is CheckBoxField)
-        //                {
-        //                    isDropDownList = true;
-        //                    if (fieldRow["epifieldtype"] is DDLFieldOfCommentLegal)
-        //                    {
-        //                        isCommentLegal = true;
-        //                    }
-        //                }
-        //                else if (fieldRow["epifieldtype"] is OptionField)
-        //                {
-        //                    isOptionField = true;
-        //                }
-        //                break;
-        //            }
-        //        }
-
-        //        if (DashboardHelper.IsUserDefinedColumn(cbxField.SelectedItem.ToString()))
-        //        {
-        //            List<IDashboardRule> associatedRules = DashboardHelper.Rules.GetRules(cbxField.SelectedItem.ToString());
-        //            foreach (IDashboardRule rule in associatedRules)
-        //            {
-        //                if (rule is Rule_Recode)
-        //                {
-        //                    isRecoded = true;
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    if (IsDropDownList || IsRecoded)
-        //    {
-        //        checkboxAllValues.IsEnabled = true;
-        //    }
-        //    else
-        //    {
-        //        checkboxAllValues.IsEnabled = false;
-        //        checkboxAllValues.IsChecked = false;
-        //    }
-
-        //    if (IsCommentLegal || IsOptionField)
-        //    {
-        //        checkboxCommentLegalLabels.IsEnabled = true;
-        //    }
-        //    else
-        //    {
-        //        checkboxCommentLegalLabels.IsEnabled = false;
-        //    }
-
-        //    if (!IsCommentLegal && !IsOptionField)
-        //    {
-        //        checkboxCommentLegalLabels.IsChecked = isCommentLegal;
-        //    }
-        //}
-
         #endregion // Private and Protected Methods
 
         #region Public Methods
@@ -1273,12 +964,10 @@ namespace EpiDashboard
         {
             FrequencyParameters freqParameters = (FrequencyParameters)Parameters;
 
-            //if (!LoadingCombos && GadgetOptions != null && cbxField.SelectedIndex > -1)
             if (!LoadingCombos && freqParameters != null && freqParameters.ColumnNames.Count > 0)
             {
                 if (!String.IsNullOrEmpty(freqParameters.ColumnNames[0]))
                 {
-                    CreateInputVariableList();
                     infoPanel.Visibility = System.Windows.Visibility.Collapsed;
                     waitPanel.Visibility = System.Windows.Visibility.Visible;
                     messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
@@ -1288,7 +977,6 @@ namespace EpiDashboard
                     baseWorker.RunWorkerAsync();
                     base.RefreshResults();
                 }
-//                else if (!LoadingCombos && cbxField.SelectedIndex == -1)
                 else if (!LoadingCombos && freqParameters.ColumnNames[0]== String.Empty)
                 {
                     ClearResults();
@@ -1354,15 +1042,6 @@ namespace EpiDashboard
             Popup.Close();
         }
 
-
-        /// <summary>
-        /// Updates the variable names available in the gadget's properties
-        /// </summary>
-        public override void UpdateVariableNames()
-        {
-            //FillComboboxes(true);
-        }
-
         /// <summary>
         /// Generates Xml representation of this gadget
         /// </summary>
@@ -1370,7 +1049,6 @@ namespace EpiDashboard
         /// <returns>XmlNode</returns>
         public override XmlNode Serialize(XmlDocument doc)
         {
-            //CreateInputVariableList();
             FrequencyParameters freqParameters = (FrequencyParameters)Parameters;
 
             System.Xml.XmlElement element = doc.CreateElement("frequencyGadget");
@@ -1436,14 +1114,6 @@ namespace EpiDashboard
             }
             else if (freqParameters.StrataVariableNames.Count > 1)
             {
-                //string xmlstrataVarString = string.Empty;
-                //foreach (string strataColumn in freqParameters.StrataVariableNames)
-                //{
-                //    xmlstrataVarString = xmlstrataVarString + "<strataVariable>" + strataColumn.Replace("<", "&lt;") + "</strataVariable>";
-                //}
-                //StrataVariableNamesElement.InnerXml = xmlstrataVarString;
-                //element.AppendChild(StrataVariableNamesElement); 
-
                 foreach (string strataColumn in freqParameters.StrataVariableNames)
                 {
                     XmlElement strataElement = doc.CreateElement("strataVariable");
@@ -1453,22 +1123,6 @@ namespace EpiDashboard
 
                 element.AppendChild(StrataVariableNamesElement); 
             }
-
-            //if(GadgetOptions.StrataVariableNames.Count == 1) 
-            //{
-            //    xmlString = xmlString + "<strataVariable>" + GadgetOptions.StrataVariableNames[0].Replace("<", "&lt;") + "</strataVariable>";
-            //}
-            //else if (GadgetOptions.StrataVariableNames.Count > 1)
-            //{
-            //    xmlString = xmlString + "<strataVariables>";
-
-            //    foreach (string strataVariable in this.GadgetOptions.StrataVariableNames)
-            //    {
-            //        xmlString = xmlString + "<strataVariable>" + strataVariable.Replace("<", "&lt;") + "</strataVariable>";
-            //    }
-
-            //    xmlString = xmlString + "</strataVariables>";
-            //}
 
             //showAllListValues
             XmlElement allValuesElement = doc.CreateElement("allValues");
@@ -1575,25 +1229,6 @@ namespace EpiDashboard
             customCaptionElement.InnerText = CustomOutputCaption;
             element.AppendChild(customCaptionElement);
 
-            //xmlString = xmlString + "<weightVariable>" + weightVar + "</weightVariable>" +
-            //"<sort>" + sort + "</sort>" + 
-            //"<allValues>" + allValues + "</allValues>" + 
-            //"<precision>" + precision.ToString() + "</precision>" +            
-            //"<showListLabels>" + checkboxCommentLegalLabels.IsChecked + "</showListLabels>" +
-            //"<useFieldPrompts>" + checkboxUsePrompts.IsChecked.ToString() + "</useFieldPrompts>" +
-            //"<columnsToShow>" + wb.ToString() + "</columnsToShow>" +
-            //"<includeMissing>" + includeMissing + "</includeMissing>" +
-            //"<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
-            //"<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>" +
-            //"<customCaption>" + CustomOutputCaption + "</customCaption>";
-
-            //if (!string.IsNullOrEmpty(txtRows.Text))
-            //{
-            //    xmlString += "<rowsToDisplay>" + txtRows.Text + "</rowsToDisplay>";
-            //}
-
-            //xmlString = xmlString + SerializeAnchors();
-
             SerializeAnchors(element);
 
             return element;
@@ -1674,19 +1309,20 @@ namespace EpiDashboard
                     {
                         case "mainvariable":
                             {
-                                //cbxField.Text = child.InnerText.Replace("&lt;", "<");
                                 ((FrequencyParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
                             }
                             break;
                         case "weightvariable":
-                            //cbxFieldWeight.Text = child.InnerText.Replace("&lt;", "<");
                             ((FrequencyParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
                             break;
                         case "stratavariable":
-                            //lbxFieldStrata.SelectedItems.Add(child.InnerText.Replace("&lt;", "<"));
-                            if (string.IsNullOrEmpty(child.InnerText))
+                            if (Parameters.StrataVariableNames.Count > 0)
                             {
                                 ((FrequencyParameters)Parameters).StrataVariableNames[0] = child.InnerText.Replace("&lt;", "<");
+                            }
+                            else
+                            {
+                                ((FrequencyParameters)Parameters).StrataVariableNames.Add (child.InnerText.Replace("&lt;", "<"));
                             }
                             break;
                         case "stratavariables":
@@ -1695,7 +1331,6 @@ namespace EpiDashboard
                                 List<string> fields = new List<string>();
                                 if (field.Name.ToLower().Equals("stratavariable"))
                                 {
-                                    //lbxFieldStrata.SelectedItems.Add(field.InnerText.Replace("&lt;", "<"));
                                     ((FrequencyParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));
                                 }
                             }
@@ -1703,24 +1338,20 @@ namespace EpiDashboard
                         case "allvalues":
                             if (child.InnerText.ToLower().Equals("true"))
                             {
-                                //checkboxAllValues.IsChecked = true; 
                                 ((FrequencyParameters)Parameters).ShowAllListValues = true;
                             }
                             else
                             {
-                                //checkboxAllValues.IsChecked = false;
                                 ((FrequencyParameters)Parameters).ShowAllListValues = false;
                             }
                             break;
                         case "showlistlabels":
-                            //if (child.InnerText.ToLower().Equals("true")) { checkboxCommentLegalLabels.IsChecked = true; }
                             if (child.InnerText.ToLower().Equals("true")) { ((FrequencyParameters)Parameters).ShowCommentLegalLabels = true; }
                             else { ((FrequencyParameters)Parameters).ShowCommentLegalLabels = false; }
                             break;
                         case "sort":
                             if (child.InnerText.ToLower().Equals("highlow") || child.InnerText.ToLower().Equals("hightolow"))
                             {
-                                //checkboxSortHighLow.IsChecked = true;
                                 ((FrequencyParameters)Parameters).SortHighToLow = true;
                             }
                             else
@@ -1731,43 +1362,36 @@ namespace EpiDashboard
                         case "includemissing":
                             if (child.InnerText.ToLower().Equals("true"))
                             {
-                                //checkboxIncludeMissing.IsChecked = true; 
                                 ((FrequencyParameters)Parameters).IncludeMissing = true;
                             }
                             else
                             {
-                                //checkboxIncludeMissing.IsChecked = false;
                                 ((FrequencyParameters)Parameters).IncludeMissing = false;
                             }
                             break;
                         case "usefieldprompts":
                             bool usePrompts = false;
                             bool.TryParse(child.InnerText, out usePrompts);
-                            //checkboxUsePrompts.IsChecked = usePrompts;
                             ((FrequencyParameters)Parameters).UseFieldPrompts = usePrompts;
                             break;
                         case "drawborders":
                             bool drawborders = false;
                             bool.TryParse(child.InnerText, out drawborders);
-                            //checkboxUsePrompts.IsChecked = usePrompts;
                             ((FrequencyParameters)Parameters).DrawBorders = drawborders;
                             break;
                         case "drawheaderrow":
                             bool drawheaderrow = false;
                             bool.TryParse(child.InnerText, out drawheaderrow);
-                            //checkboxUsePrompts.IsChecked = usePrompts;
                             ((FrequencyParameters)Parameters).DrawHeaderRow = drawheaderrow;
                             break;
                         case "drawtotalrow":
                             bool drawtotalrow = false;
                             bool.TryParse(child.InnerText, out drawtotalrow);
-                            //checkboxUsePrompts.IsChecked = usePrompts;
                             ((FrequencyParameters)Parameters).DrawTotalRow = drawtotalrow;
                             break;
                         case "precision":
                             int precision = 4;
                             int.TryParse(child.InnerText, out precision);
-                            //cbxFieldPrecision.SelectedIndex = precision;
                             ((FrequencyParameters)Parameters).Precision = precision.ToString();
                             break;
                         case "rowstodisplay":
@@ -1776,7 +1400,6 @@ namespace EpiDashboard
                                 bool success = int.TryParse(child.InnerText, out rows);
                                 if (success)
                                 {
-                                    //txtRows.Text = rows.ToString();
                                     ((FrequencyParameters)Parameters).RowsToDisplay = rows;
                                 }
                             }
@@ -1786,14 +1409,12 @@ namespace EpiDashboard
                             bool parsesuccess = int.TryParse(child.InnerText, out barwidth);
                             if (parsesuccess)
                             {
-                                //txtRows.Text = rows.ToString();
                                 ((FrequencyParameters)Parameters).PercentBarWidth = barwidth;
                             }
                             break;
                         case "columnstoshow":
                             if (string.IsNullOrEmpty(child.InnerText)) 
                             { 
-                                //lbxColumns.SelectedItems.Clear();
                                 ((FrequencyParameters)Parameters).ShowFrequencyCol = true;
                                 ((FrequencyParameters)Parameters).ShowPercentCol = true;
                                 ((FrequencyParameters)Parameters).ShowCumPercentCol = true;
@@ -1803,7 +1424,6 @@ namespace EpiDashboard
                             }
                             else
                             {
-                                //lbxColumns.SelectedItems.Clear();
                                 ((FrequencyParameters)Parameters).ShowFrequencyCol = false;
                                 ((FrequencyParameters)Parameters).ShowPercentCol = false;
                                 ((FrequencyParameters)Parameters).ShowCumPercentCol = false;
@@ -1818,7 +1438,6 @@ namespace EpiDashboard
                                     bool colsuccess = int.TryParse(s, out columnNumber);
                                     if (colsuccess)
                                     {
-                                        //lbxColumns.SelectedItems.Add(lbxColumns.Items[columnNumber - 1]);
                                         switch (columnNumber)
                                         {
                                             case 1:
@@ -1882,7 +1501,6 @@ namespace EpiDashboard
             base.CreateFromXml(element);
             
             this.LoadingCombos = false;
-            //CheckVariables();
             RefreshResults();
             HideConfigPanel();
         }
@@ -1910,36 +1528,15 @@ namespace EpiDashboard
             }
 
             htmlBuilder.AppendLine("<p class=\"gadgetOptions\"><small>");
-//            htmlBuilder.AppendLine("<em>Frequency variable:</em> <strong>" + cbxField.Text + "</strong>");
             htmlBuilder.AppendLine("<em>Frequency variable:</em> <strong>" + freqParameters.ColumnNames[0] + "</strong>");
             htmlBuilder.AppendLine("<br />");
 
-            //if (cbxFieldWeight.SelectedIndex >= 0)
-            //{
-            //    htmlBuilder.AppendLine("<em>Weight variable:</em> <strong>" + cbxFieldWeight.Text + "</strong>");
-            //    htmlBuilder.AppendLine("<br />");
-            //}
             if (!String.IsNullOrEmpty(freqParameters.WeightVariableName))
             {
                 htmlBuilder.AppendLine("<em>Weight variable:</em> <strong>" + freqParameters.WeightVariableName + "</strong>");
                 htmlBuilder.AppendLine("<br />");
             }
-            //if (cbxFieldStrata.SelectedIndex >= 0)
-            //{
-            //    htmlBuilder.AppendLine("<em>Strata variable:</em> <strong>" + cbxFieldStrata.Text + "</strong>");
-            //    htmlBuilder.AppendLine("<br />");
-            //}
 
-            //if (lbxFieldStrata.SelectedItems.Count > 0)
-            //{
-            //    WordBuilder wb = new WordBuilder(", ");
-            //    foreach (string s in lbxFieldStrata.SelectedItems)
-            //    {
-            //        wb.Add(s);
-            //    }
-            //    htmlBuilder.AppendLine("<em>Strata variable(s):</em> <strong>" + wb.ToString() + "</strong>");
-            //    htmlBuilder.AppendLine("<br />");
-            //}
             if (freqParameters.StrataVariableNames.Count > 0)
             {
                 WordBuilder wb = new WordBuilder(", ");
@@ -1951,7 +1548,6 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("<br />");
             }
 
-            //htmlBuilder.AppendLine("<em>Include missing:</em> <strong>" + checkboxIncludeMissing.IsChecked.ToString() + "</strong>");
             htmlBuilder.AppendLine("<em>Include missing:</em> <strong>" + freqParameters.IncludeMissing.ToString() + "</strong>");
             htmlBuilder.AppendLine("<br />");
             htmlBuilder.AppendLine("</small></p>");
@@ -1985,7 +1581,6 @@ namespace EpiDashboard
 
                 if (string.IsNullOrEmpty(CustomOutputCaption))
                 {
-                    //if (lbxFieldStrata.SelectedItems.Count > 0)
                     if (freqParameters.StrataVariableNames.Count > 0)
                     {
                         htmlBuilder.AppendLine("<caption>" + grid.Tag + "</caption>");
@@ -2186,49 +1781,6 @@ namespace EpiDashboard
         }
 
         /// <summary>
-        /// Handles the check / unchecked events
-        /// </summary>
-        /// <param name="sender">Object that fired the event</param>
-        /// <param name="e">.NET supplied event parameters</param>
-        //private void checkboxCheckChanged(object sender, RoutedEventArgs e)
-        //{
-        //    RefreshResults();
-        //}
-
-        /// <summary>
-        /// Fired when the user changes a field selection
-        /// </summary>
-        /// <param name="sender">Object that fired the event</param>
-        /// <param name="e">.NET supplied event parameters</param>
-        //private void cbxField_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    //if (LoadingCombos)
-        //    //{
-        //    //    return;
-        //    //}
-
-        //    //CheckVariables();
-        //    //RefreshResults();
-        //}
-
-        ///// <summary>
-        ///// Fired when the user clicks the Run button
-        ///// </summary>
-        ///// <param name="sender">Object that fired the event</param>
-        ///// <param name="e">.NET supplied event parameters</param>
-        //private void btnRun_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (LoadingCombos)
-        //    {
-        //        return;
-        //    }
-
-        //    //CheckVariables();
-        //    RefreshResults();
-        //}
-
-
-        /// <summary>
         /// Handles the WorkerCompleted event for the worker
         /// </summary>
         /// <param name="sender">Object that fired the event</param>
@@ -2255,9 +1807,7 @@ namespace EpiDashboard
                 this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToProcessingState));
                 this.Dispatcher.BeginInvoke(new SimpleCallback(ClearResults));
                 DrawFrequencyBordersDelegate drawBorders = new DrawFrequencyBordersDelegate(DrawOutputGridBorders);
-                //AddDataGridDelegate addDataGrid = new AddDataGridDelegate(AddDataGrid);
 
-                //Dictionary<string, string> inputVariableList = ((FrequencyParameters)e.Argument).InputVariableList;
                 FrequencyParameters freqParameters = (FrequencyParameters)Parameters;
                 
                 AddFreqGridDelegate addGrid = new AddFreqGridDelegate(AddFreqGrid);
@@ -2266,17 +1816,13 @@ namespace EpiDashboard
                 SetGridBarDelegate setBar = new SetGridBarDelegate(SetGridBar);
                 RenderFrequencyHeaderDelegate renderHeader = new RenderFrequencyHeaderDelegate(RenderFrequencyHeader);
 
-                //string freqVar = GadgetOptions.MainVariableName;
                 string freqVar = string.Empty;
-                //string weightVar = GadgetOptions.WeightVariableName;
                 string weightVar = freqParameters.WeightVariableName;
                 string strataVar = string.Empty;
                 List<string> stratas = freqParameters.StrataVariableNames;
                 bool showConfLimits = false;
                 bool showCumulativePercent = false;
-                //bool includeMissing = GadgetOptions.ShouldIncludeMissing;
                 bool includeMissing = freqParameters.IncludeMissing; 
-                //int? rowsToDisplay = GadgetOptions.RowsToDisplay;
                 int? rowsToDisplay = freqParameters.RowsToDisplay;
                 bool showEllipsis = false;
                 bool shouldDrawBorders = true;
@@ -2290,46 +1836,14 @@ namespace EpiDashboard
                 {
                     stratas = freqParameters.StrataVariableNames;
                 }
-                //List<string> stratas = new List<string>();
-                //if (!string.IsNullOrEmpty(strataVar))
-                //{
-                //    stratas.Add(strataVar);
-                //}
-                
-                //if (inputVariableList.ContainsKey("stratavar"))
-                //{
-                //    strataVar = inputVariableList["stratavar"];
-                //}
-                
-                //if (inputVariableList.ContainsKey("showconflimits"))
-                //{
-                //    if (inputVariableList["showconflimits"].Equals("true"))
-                //    {
-                //        showConfLimits = true;
-                //    }
-                //}
 
                 showCumulativePercent = freqParameters.ShowCumPercentCol;
-                //if (inputVariableList.ContainsKey("showcumulativepercent"))
-                //{
-                //    if (inputVariableList["showcumulativepercent"].Equals("true"))
-                //    {
-                //        showCumulativePercent = true;
-                //    }
-                //}
+
                 shouldDrawBorders = freqParameters.DrawBorders;
-                //if (inputVariableList.ContainsKey("drawborders") && inputVariableList["drawborders"].Equals("false")) 
-                //    shouldDrawBorders = false;
-                
+               
                 string precisionFormat = "F2";
                 string precisionPercentFormat = "P2";
 
-                //if (GadgetOptions.InputVariableList.ContainsKey("precision"))
-                //{
-                //    precisionFormat = GadgetOptions.InputVariableList["precision"];
-                //    precisionPercentFormat = "P" + precisionFormat;
-                //    precisionFormat = "F" + precisionFormat;
-                //}
                 if (!String.IsNullOrEmpty(freqParameters.Precision))
                 {
                     precisionFormat = freqParameters.Precision;
@@ -2346,23 +1860,18 @@ namespace EpiDashboard
                     RequestUpdateStatusDelegate requestUpdateStatus = new RequestUpdateStatusDelegate(RequestUpdateStatusMessage);
                     CheckForCancellationDelegate checkForCancellation = new CheckForCancellationDelegate(IsCancelled);
 
-                    //GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
-                    //GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
                     freqParameters.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
                     freqParameters.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
 
                     if (this.DataFilters != null && this.DataFilters.Count > 0)
                     {
-                        //GadgetOptions.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
                         freqParameters.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
                     }
                     else
                     {
-                        //GadgetOptions.CustomFilter = string.Empty;
                         freqParameters.CustomFilter = string.Empty;
                     }
 
-                    //Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(GadgetOptions/*, freqVar, weightVar, stratas, string.Empty, useAllPossibleValues, sortHighLow, includeMissing, false*/);
                     Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(freqParameters /*, freqVar, weightVar, stratas, string.Empty, useAllPossibleValues, sortHighLow, includeMissing, false*/);
 
                     if (stratifiedFrequencyTables == null || stratifiedFrequencyTables.Count == 0)
