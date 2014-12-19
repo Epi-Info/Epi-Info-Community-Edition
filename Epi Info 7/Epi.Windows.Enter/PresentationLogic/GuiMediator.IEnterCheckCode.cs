@@ -1450,9 +1450,38 @@ namespace Epi.Windows.Enter.PresentationLogic
         {
             if (pDestination == "" && targetPage == "" && targetForm != "")
             {
+                
+              /*  SetFieldData();
+                SaveRecord();
+                this.mainForm.OpenView(targetForm); 
+              */ 
+                           
+                //---2225(gotoform RelatedView)
                 SetFieldData();
                 SaveRecord();
-                this.mainForm.OpenView(targetForm);
+                foreach (Field field in view.Fields)
+                {
+                    if (field is RelatedViewField)
+                    {
+                        RelatedViewField rvf = (RelatedViewField)field;
+                        if (rvf.ChildView.Name.ToLower() == targetForm.ToLower())
+                        {
+                            Epi.View childView = rvf.GetProject().Metadata.GetChildView(rvf);
+                            childView.ReturnToParent = rvf.ShouldReturnToParent;
+                            childView.ForeignKeyField.CurrentRecordValueString = rvf.GetView().CurrentGlobalRecordId;
+                            Field cField = this.EnterCheckCodeEngine.CurrentView.CurrentField;
+                            ControlFactory factory = ControlFactory.Instance;
+                            List<Control> CurrentControl = factory.GetAssociatedControls(EnterCheckCodeEngine.CurrentView.CurrentField);
+                            if (CurrentControl is InputFieldWithSeparatePrompt)
+                            {
+                                this.CloseFieldHandler(CurrentControl[1], new CloseFieldEventArg(cField, true, "GoToForm"));
+                            }
+                            this.OpenViewHandler(this, new OpenViewEventArgs(childView));
+                            break;
+                        }
+                    }
+                } 
+               //--------
             }
             else if (pDestination == "" && targetPage != "" )
             {
