@@ -29,10 +29,10 @@ namespace Epi.Windows.Enter
 				{
 					Epi.Windows.Enter.EnterMainForm mainForm = new Epi.Windows.Enter.EnterMainForm();
 
+
                     if (!mainForm.IsDisposed)
                     {
                         mainForm.Show();
-
                         if (mainForm.WindowState == FormWindowState.Minimized)
                         {
                             mainForm.WindowState = FormWindowState.Normal;
@@ -57,19 +57,28 @@ namespace Epi.Windows.Enter
                                 mainForm.FireOpenViewEvent(project.Views[viewName], recordId);
                             }
 					    }
-
+                        //--2225
+                        Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+                       //--
                         System.Windows.Forms.Application.Run(mainForm);
+                        
                     }
 
                     mainForm = null;
 				}
-                catch (Exception baseException)
+               catch (Exception baseException)
 				{
                     MsgBox.ShowError(string.Format("Error: \n {0}", baseException.ToString()));
 				}
 			}
 		}
-
+        //---2225
+        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            // Handle exception
+            return;
+        }
+        //---
 		private static bool LoadConfiguration(string[] args)
 		{
 			// TODO: parse command line to load configuration if specified
