@@ -205,7 +205,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// </remarks>
         public XmlDocument PackageForm()
         {
-            if (StatusChanged != null) { StatusChanged("Starting package processing..."); }
+            OnStatusChanged("Starting package processing...");
 
             ExportInfo = new ExportInfo();
             ExportInfo.UserID = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
@@ -262,7 +262,7 @@ namespace Epi.ImportExport.ProjectPackagers
 
             xmlDataPackage.AppendChild(root);
 
-            if (StatusChanged != null) { StatusChanged(PackagerStrings.PACKAGE_CREATED); }
+            OnStatusChanged(PackagerStrings.PACKAGE_CREATED);
 
             ExportInfo.Succeeded = true;
             ExportInfo.ExportCompleted = DateTime.Now;
@@ -273,9 +273,35 @@ namespace Epi.ImportExport.ProjectPackagers
 
         #region Private Methods
         /// <summary>
+        /// Fires a status event
+        /// </summary>
+        /// <param name="status">Status message</param>
+        protected void OnStatusChanged(string status)
+        {
+            if (StatusChanged != null) { StatusChanged(status); }
+        }
+
+        /// <summary>
+        /// Fires a progress value event
+        /// </summary>
+        /// <param name="progress">Progress value</param>
+        protected void OnProgressChanged(double progress)
+        {
+            if (UpdateProgress != null) { UpdateProgress(progress); }
+        }
+
+        /// <summary>
+        /// Fires a reset progress event
+        /// </summary>
+        protected void OnResetProgress()
+        {
+            if (ResetProgress != null) { ResetProgress(); }
+        }
+
+        /// <summary>
         /// Checks for problems in the source project
         /// </summary>
-        protected void CheckForProblems()
+        protected virtual void CheckForProblems()
         {
             IDbDriver driver = SourceProject.CollectedData.GetDatabase();
 
@@ -315,7 +341,7 @@ namespace Epi.ImportExport.ProjectPackagers
             {
                 ExportInfo.Succeeded = false;
                 ExportInfo.AddError(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_INVALID_GUID_COLUMN, "101000");
-                throw new ApplicationException(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_INVALID_GUID_COLUMN);
+                throw new InvalidOperationException(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_INVALID_GUID_COLUMN);
             }
 
             // Check #2b - Make sure RECSTATUS is a number
@@ -323,7 +349,7 @@ namespace Epi.ImportExport.ProjectPackagers
             {
                 ExportInfo.Succeeded = false;
                 ExportInfo.AddError(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_INVALID_RECSTATUS_COLUMN, "101001");
-                throw new ApplicationException(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_INVALID_RECSTATUS_COLUMN);
+                throw new InvalidOperationException(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_INVALID_RECSTATUS_COLUMN);
             }
 
             // Check #3 - Make sure GlobalRecordId values haven't been replaced with something that isn't actually a GUID. 
@@ -350,7 +376,7 @@ namespace Epi.ImportExport.ProjectPackagers
             {
                 ExportInfo.Succeeded = false;
                 ExportInfo.AddError(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_GUID_NOT_UNIQUE, "101002");
-                throw new ApplicationException(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_GUID_NOT_UNIQUE);
+                throw new InvalidOperationException(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_GUID_NOT_UNIQUE);
             }
 
             // Check #4b - See if global record ID values are distinct on each page table.
@@ -362,7 +388,7 @@ namespace Epi.ImportExport.ProjectPackagers
                 {
                     ExportInfo.Succeeded = false;
                     ExportInfo.AddError(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_GUID_NOT_UNIQUE_PAGE, "101003");
-                    throw new ApplicationException(string.Format(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_GUID_NOT_UNIQUE_PAGE, page.TableName));
+                    throw new InvalidOperationException(String.Format(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_GUID_NOT_UNIQUE_PAGE, page.TableName));
                 }
             }
 
@@ -375,7 +401,7 @@ namespace Epi.ImportExport.ProjectPackagers
                 {
                     ExportInfo.Succeeded = false;
                     ExportInfo.AddError(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_RECSTATUS_VALUES_INVALID, "101004");
-                    throw new ApplicationException(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_RECSTATUS_VALUES_INVALID);
+                    throw new InvalidOperationException(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_RECSTATUS_VALUES_INVALID);
                 }
             }
 
@@ -384,7 +410,7 @@ namespace Epi.ImportExport.ProjectPackagers
             {
                 ExportInfo.Succeeded = false;
                 ExportInfo.AddError(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_RELATED_FORM, "101005");
-                throw new ApplicationException(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_RELATED_FORM);
+                throw new InvalidOperationException(ImportExportSharedStrings.ERROR_PACKAGER_CHECK_RELATED_FORM);
             }
 
             distinctTable = null;
@@ -398,7 +424,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// </summary>
         /// <param name="xmlDataPackage">The Xml Data Package document</param>
         /// <param name="root">The root element of the document</param>
-        protected void CreateRootAttributes(XmlDocument xmlDataPackage, XmlElement root)
+        protected virtual void CreateRootAttributes(XmlDocument xmlDataPackage, XmlElement root)
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -409,7 +435,7 @@ namespace Epi.ImportExport.ProjectPackagers
 
             // Append timestamp in UTC so that people sending packages across time zones don't need to worry about what zone it was packaged in.
             DateTime dt = DateTime.UtcNow;
-            string dateDisplayValue = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:s}", dt);
+            string dateDisplayValue = String.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:s}", dt);
 
             XmlAttribute version = xmlDataPackage.CreateAttribute("Version"); // The version of Epi Info 7 that was used to create it
             XmlAttribute created = xmlDataPackage.CreateAttribute("Created"); // The date/time the package creation started
@@ -468,7 +494,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="xmlDataPackage">The data package xml document that the XmlElement should be added to</param>
         /// <param name="form">The form to be serialized</param>        
         /// <returns>XmlElement; represents the view in Xml format, suitable for use in data packaging</returns>
-        protected XmlElement CreateXmlFormElement(XmlDocument xmlDataPackage, View form)
+        protected virtual XmlElement CreateXmlFormElement(XmlDocument xmlDataPackage, View form)
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -567,7 +593,7 @@ namespace Epi.ImportExport.ProjectPackagers
             if (form == null) { throw new ArgumentNullException("form"); }
             #endregion // Input Validation
 
-            if (StatusChanged != null) { StatusChanged(string.Format(PackagerStrings.ADDING_FIELD_METADATA, form.Name)); }
+            OnStatusChanged(String.Format(PackagerStrings.ADDING_FIELD_METADATA, form.Name));
 
             XmlElement fields = xmlDataPackage.CreateElement("FieldMetadata");
 
@@ -615,7 +641,7 @@ namespace Epi.ImportExport.ProjectPackagers
             if (gridField == null) { throw new ArgumentNullException("gridField"); }
             #endregion // Input Validation
 
-            if (StatusChanged != null) { StatusChanged(string.Format(PackagerStrings.ADDING_GRID_METADATA, gridField.Name, form.Name)); }
+            OnStatusChanged(String.Format(PackagerStrings.ADDING_GRID_METADATA, gridField.Name, form.Name));
 
             XmlElement gridFields = xmlDataPackage.CreateElement("GridMetadata");
 
@@ -647,7 +673,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="xmlDataPackage">The data package xml document that the XmlElement should be added to</param>
         /// <param name="form">The form whose data will be serialized</param>
         /// <returns>XmlElement; represents the form's data in Xml format, suitable for use in data packaging</returns>
-        protected XmlElement CreateXmlFormDataElement(XmlDocument xmlDataPackage, View form)
+        protected virtual XmlElement CreateXmlFormDataElement(XmlDocument xmlDataPackage, View form)
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -656,8 +682,8 @@ namespace Epi.ImportExport.ProjectPackagers
 
             XmlElement data = xmlDataPackage.CreateElement("Data");
 
-            if (StatusChanged != null) { StatusChanged(string.Format(PackagerStrings.GUID_LIST_SETUP, form.Name)); }
-            if (ResetProgress != null) { ResetProgress(); }
+            OnStatusChanged(String.Format(PackagerStrings.GUID_LIST_SETUP, form.Name));
+            OnResetProgress();
 
             /* This seems like an usual set of steps to just iterate over the data. The problem is that we can't "just
              * iterate over the data" - the data is split up page tables, with one table representing one page on the
@@ -800,7 +826,7 @@ namespace Epi.ImportExport.ProjectPackagers
             totalRecords = totalRecords * form.Pages.Count;
             int processedRecords = 0;
 
-            if (StatusChanged != null) { StatusChanged(string.Format(PackagerStrings.ADDING_FIELD_DATA, form.Name)); }
+            OnStatusChanged(String.Format(PackagerStrings.ADDING_FIELD_DATA, form.Name));
 
             foreach (Page page in form.Pages)
             {
@@ -867,7 +893,7 @@ namespace Epi.ImportExport.ProjectPackagers
                         }
                         processedRecords++;
                         double progress = (((double)processedRecords) / ((double)totalRecords)) * 100;
-                        if (UpdateProgress != null) { UpdateProgress(progress); }
+                        OnProgressChanged(progress);
                     }
                 }
             }
@@ -887,7 +913,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="form">The form that contains the grid field</param>
         /// <param name="gridField">The grid field whose data will be serialized</param>
         /// <returns>XmlElement; represents the grid's data in Xml format, suitable for use in data packaging</returns>
-        protected XmlElement CreateXmlGridDataElement(XmlDocument xmlDataPackage, View form, GridField gridField)
+        protected virtual XmlElement CreateXmlGridDataElement(XmlDocument xmlDataPackage, View form, GridField gridField)
         {
             #region Input Validation
             if (xmlDataPackage == null) { throw new ArgumentNullException("xmlDataPackage"); }
@@ -897,7 +923,7 @@ namespace Epi.ImportExport.ProjectPackagers
 
             XmlElement data = xmlDataPackage.CreateElement("GridData");
 
-            if (StatusChanged != null) { StatusChanged(string.Format(PackagerStrings.ADDING_GRID_DATA, gridField.Name, form.Name)); }
+            OnStatusChanged(String.Format(PackagerStrings.ADDING_GRID_DATA, gridField.Name, form.Name));
 
             using (IDataReader reader = SourceProject.CollectedData.GetDatabase().GetTableDataReader(gridField.TableName))
             {
