@@ -111,7 +111,7 @@ namespace Epi.Windows.ImportExport.Dialogs
             {
                 this.cmbPackageForm.SelectedItem = view.Name;
                 btnBrowseProject.Enabled = false;
-            }            
+            }
 
             this.txtPackagePath.Text = packagePath;
 
@@ -124,7 +124,7 @@ namespace Epi.Windows.ImportExport.Dialogs
         /// <param name="scriptPath">The path to the packaging script</param>
         public PackageForTransportDialog(string scriptPath)
         {
-            InitializeComponent();            
+            InitializeComponent();
             Construct();
             CreateFromXml(scriptPath);
         }
@@ -276,7 +276,7 @@ namespace Epi.Windows.ImportExport.Dialogs
             KeyFields = new List<Field>();
             EnableDisableButtons();
             config = Configuration.GetNewInstance();
-            
+
             if (!string.IsNullOrEmpty(txtProjectPath.Text))
             {
                 sourceProject = new Project(txtProjectPath.Text);
@@ -331,13 +331,13 @@ namespace Epi.Windows.ImportExport.Dialogs
         /// <returns>bool; represents whether or not the input is correct and the packaging can proceed.</returns>
         private bool ValidateInput()
         {
-            if(string.IsNullOrEmpty(txtProjectPath.Text))
+            if (string.IsNullOrEmpty(txtProjectPath.Text))
             {
                 Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_NO_PACKAGE);
                 return false;
             }
 
-            if (!System.IO.File.Exists(txtProjectPath.Text)) 
+            if (!System.IO.File.Exists(txtProjectPath.Text))
             {
                 Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_PROJECT_DOESNT_EXIST);
                 return false;
@@ -353,7 +353,7 @@ namespace Epi.Windows.ImportExport.Dialogs
             {
                 Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_SPECIFY_PACKAGE_PATH);
                 return false;
-            }            
+            }
 
             if (string.IsNullOrEmpty(txtPackageName.Text))
             {
@@ -729,7 +729,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                     xmlString += "<rowFilterQuery>";
                     xmlString += selectQuery.SqlStatement.Replace(">", "&gt;").Replace("<", "&lt;");
                     xmlString += "</rowFilterQuery>";
-                
+
                     xmlString += "<rowFilterParameters>";
 
                     foreach (QueryParameter param in selectQuery.Parameters)
@@ -868,7 +868,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                         break;
                 }
             }
-            AddNotificationStatusMessage(string.Format(ImportExportSharedStrings.SCRIPT_LOADED, scriptPath));            
+            AddNotificationStatusMessage(string.Format(ImportExportSharedStrings.SCRIPT_LOADED, scriptPath));
         }
 
         /// <summary>
@@ -969,7 +969,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                     {
                         string formName = columnElement.Attributes[0].Value;
                         string gridName = columnElement.Attributes[1].Value;
-                        
+
                         string gridInfo = formName + ":" + gridName;
 
                         string columnName = columnElement.InnerText;
@@ -1109,7 +1109,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                     Dictionary<string, Epi.ImportExport.Filters.RowFilters> filters = new Dictionary<string, Epi.ImportExport.Filters.RowFilters>();
                     filters.Add(FormName, new Epi.ImportExport.Filters.RowFilters(sourceProject.CollectedData.GetDatabase()));
                     foreach (IRowFilterCondition rfc in rowFilterConditions)
-                    {                        
+                    {
                         filters[FormName].Add(rfc);
                     }
                     xmlDP.Filters = filters;
@@ -1141,7 +1141,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                     CallbackSetStatusMessage("Compressing package...");
                     string compressedText = ImportExportHelper.Zip(package.OuterXml);
                     compressedText = "[[EPIINFO7_DATAPACKAGE]]" + compressedText;
-                    
+
                     CallbackSetStatusMessage("Encrypting package...");
                     Configuration.EncryptStringToFile(compressedText, @PackagePath + "\\" + fileName + ".edp7", txtPassword.Text);
 
@@ -1172,7 +1172,7 @@ namespace Epi.Windows.ImportExport.Dialogs
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 txtProjectPath.Text = openFileDialog.FileName;
-                sourceProject = new Project(txtPackagePath.Text);
+                sourceProject = new Project(openFileDialog.FileName);
             }
         }
 
@@ -1185,7 +1185,7 @@ namespace Epi.Windows.ImportExport.Dialogs
         {
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
             DialogResult result = folderDialog.ShowDialog();
-            if(result == System.Windows.Forms.DialogResult.OK) 
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
                 txtPackagePath.Text = folderDialog.SelectedPath;
             }
@@ -1210,14 +1210,21 @@ namespace Epi.Windows.ImportExport.Dialogs
         {
             EnableDisableButtons();
 
-            sourceProject = new Project(txtProjectPath.Text);
-
-            foreach (View view in sourceProject.Views)
+            try
             {
-                if (view.IsRelatedView == false)
+                sourceProject = new Project(txtProjectPath.Text);
+
+                foreach (View view in sourceProject.Views)
                 {
-                    cmbPackageForm.Items.Add(view.Name);
+                    if (view.IsRelatedView == false)
+                    {
+                        cmbPackageForm.Items.Add(view.Name);
+                    }
                 }
+            }
+            catch (System.Security.Cryptography.CryptographicException ex)
+            {
+                Epi.Windows.MsgBox.ShowException(ex);
             }
         }
 
@@ -1268,7 +1275,7 @@ namespace Epi.Windows.ImportExport.Dialogs
             if (this.sourceProject != null)
             {
                 this.sourceProject.Dispose();
-            }            
+            }
             this.Close();
         }
 
@@ -1307,7 +1314,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     fieldsToNull = pcrDialog.FieldsToNull;
-                }                
+                }
             }
         }
 
@@ -1365,7 +1372,7 @@ namespace Epi.Windows.ImportExport.Dialogs
 
         private void btnKeyFields_Click(object sender, EventArgs e)
         {
-            foreach(View otherForm in this.sourceProject.Views) 
+            foreach (View otherForm in this.sourceProject.Views)
             {
                 if (otherForm.Name != Form.Name && Epi.ImportExport.ImportExportHelper.IsFormDescendant(otherForm, Form))
                 {
@@ -1455,7 +1462,7 @@ namespace Epi.Windows.ImportExport.Dialogs
         /// <param name="sender">Object that fired the event</param>
         /// <param name="e">.NET supplied event parameters</param>
         private void txtPackageName_KeyDown(object sender, KeyEventArgs e)
-        {            
+        {
         }
 
         /// <summary>
