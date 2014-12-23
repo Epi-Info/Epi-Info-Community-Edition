@@ -1172,7 +1172,7 @@ namespace Epi.Windows.ImportExport.Dialogs
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 txtProjectPath.Text = openFileDialog.FileName;
-                sourceProject = new Project(txtPackagePath.Text);
+                sourceProject = new Project(openFileDialog.FileName);
             }
         }
 
@@ -1210,14 +1210,21 @@ namespace Epi.Windows.ImportExport.Dialogs
         {
             EnableDisableButtons();
 
-            sourceProject = new Project(txtProjectPath.Text);
-
-            foreach (View view in sourceProject.Views)
+            try
             {
-                if (view.IsRelatedView == false)
+                sourceProject = new Project(txtProjectPath.Text);
+
+                foreach (View view in sourceProject.Views)
                 {
-                    cmbPackageForm.Items.Add(view.Name);
+                    if (view.IsRelatedView == false)
+                    {
+                        cmbPackageForm.Items.Add(view.Name);
+                    }
                 }
+            }
+            catch (System.Security.Cryptography.CryptographicException ex)
+            {
+                Epi.Windows.MsgBox.ShowException(ex);
             }
         }
 
