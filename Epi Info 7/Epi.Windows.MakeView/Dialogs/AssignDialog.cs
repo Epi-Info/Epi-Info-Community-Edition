@@ -321,6 +321,15 @@ namespace Epi.Windows.MakeView.Dialogs
             ToolStripMenuItem mnuSYSTEMTIME = new ToolStripMenuItem(CommandNames.SYSTEMTIME);
             mnuSYSTEMTIME.ToolTipText = CommandNames.SYSTEMTIME;
             mnuSYSTEMTIME.Click += new EventHandler(FXClickHandler);
+            //--123
+            ToolStripMenuItem mnuFIRSTSAVETIME = new ToolStripMenuItem(CommandNames.FIRSTSAVETIME);
+            mnuFIRSTSAVETIME.ToolTipText = CommandNames.FIRSTSAVETIME;
+            mnuFIRSTSAVETIME.Click += new EventHandler(FXClickHandler);
+
+            ToolStripMenuItem mnuLASTSAVETIME = new ToolStripMenuItem(CommandNames.LASTSAVETIME);
+            mnuLASTSAVETIME.ToolTipText = CommandNames.LASTSAVETIME;
+            mnuLASTSAVETIME.Click += new EventHandler(FXClickHandler);
+            //--
 
             //ToolStripMenuItem mnuENVIRON = new ToolStripMenuItem("ENVIRON");
             //mnuENVIRON.ToolTipText = "ENVIRON( <name_of_env_variable> )";
@@ -505,7 +514,7 @@ namespace Epi.Windows.MakeView.Dialogs
             mnuBools.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuAND, mnuOR, mnuXOR, mnuNOT });
             mnuNums.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuABS, mnuEXP, mnuLN, mnuLOG, mnuNTD, mnuNTT, mnuRECORDCOUNT, mnuRND, mnuROUND, mnuSTEP, mnuSIN, mnuCOS, mnuTAN, mnuTRUNC, mnuPFROMZ, mnuZSCORE });
             mnuDates.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuYRS, mnuMOS, mnuDYS, mnuYR, mnuMO, mnuDY, mnuEpiWeek });
-            mnuSys.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuCurrUser, mnuEXISTS, mnuFILEDATE, mnuSYSTEMDATE, mnuSYSTEMTIME });
+            mnuSys.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuCurrUser, mnuEXISTS, mnuFILEDATE, mnuSYSTEMDATE, mnuSYSTEMTIME, mnuFIRSTSAVETIME, mnuLASTSAVETIME });
             mnuTimes.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuHOURS, mnuMINUTES, mnuSECONDS, mnuHOUR, mnuMINUTE, mnuSECOND });
             mnuTxts.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuFINDTEXT, mnuFORMAT, mnuLINEBREAK, mnuSTRLEN, mnuSUBSTRING, mnuTXTTONUM, mnuTXTTODATE, mnuUPPERCASE });
 
