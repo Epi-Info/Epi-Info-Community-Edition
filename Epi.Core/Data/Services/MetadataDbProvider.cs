@@ -1334,6 +1334,16 @@ namespace Epi.Data.Services
                             field = new RecStatusField(view);
                             field.LoadFromRow(row);
                             break;
+                        //----123
+                        case MetaFieldType.FirstSaveTime:
+                            field = new FirstSaveTimeField(view);
+                            field.LoadFromRow(row);
+                            break;
+                        case MetaFieldType.LastSaveTime:
+                            field = new LastSaveTimeField(view);
+                            field.LoadFromRow(row);
+                            break;
+                        //----
                         case MetaFieldType.UniqueKey:
                             field = new UniqueKeyField(view);
                             field.LoadFromRow(row);
@@ -2236,6 +2246,14 @@ namespace Epi.Data.Services
                 RecStatusField recStatusField = new RecStatusField(view);
                 UniqueKeyField uniqueKeyField = new UniqueKeyField(view);
                 GlobalRecordIdField globalRecordIdField = new GlobalRecordIdField(view);
+
+                //---123
+                FirstSaveTimeField firstsavetimeField = new FirstSaveTimeField(view);
+                firstsavetimeField.SaveToDb();
+                LastSaveTimeField lastsavetimeField = new LastSaveTimeField(view);
+                lastsavetimeField.SaveToDb();
+                //---
+
                 uniqueKeyField.SaveToDb();
                 recStatusField.SaveToDb();
                 globalRecordIdField.SaveToDb();
@@ -2469,7 +2487,173 @@ namespace Epi.Data.Services
 
             }
         }
+        //---123
+        /// <summary>
+        /// Insert a FirstSaveTimeField record into the metaFields table.
+        /// </summary>
+        /// <param name="field">FirstSaveTime field.</param>
+        /// <returns>Returns the Id of the last FirstSaveTimeField added.</returns>
+        public int CreateField(FirstSaveTimeField field)
+        {
+            try
+            {
+                #region InputValidation
+                if (field == null)
+                {
+                    throw new ArgumentNullException("FirstSaveTimeField");
+                }
+                #endregion
+                Query insertQuery = db.CreateQuery("insert into metaFields([DataTableName], [ViewId], [FieldTypeId], [Name]) " +
+                  "values (@DataTableName, @ViewId, @FieldTypeId, @Name)");
 
+                insertQuery.Parameters.Add(new QueryParameter("@DataTableName", DbType.String, field.TableName));
+                insertQuery.Parameters.Add(new QueryParameter("@ViewId", DbType.Int32, field.GetView().Id));
+                insertQuery.Parameters.Add(new QueryParameter("@FieldTypeId", DbType.Int32, (int)field.FieldType));
+                insertQuery.Parameters.Add(new QueryParameter("@Name", DbType.String, field.Name));
+
+
+                db.ExecuteNonQuery(insertQuery);                             
+                return GetMaxFieldId(field.GetView().Id);
+            }
+            catch (Exception ex)
+            {
+                throw new GeneralException("Unable to get FirstSaveTime field from the database", ex);
+            }
+            finally
+            {
+
+            }
+        }
+        /// <summary>
+        /// Insert a FirstSaveTimeField record into the metaFields table.
+        /// </summary>
+        /// <param name="field">LastSaveTime field.</param>
+        /// <returns>Returns the Id of the lastSaveTime Field added.</returns>
+        public int CreateField(LastSaveTimeField field)
+        {
+            try
+            {
+                #region InputValidation
+                if (field == null)
+                {
+                    throw new ArgumentNullException("LastSaveTimeField");
+                }
+                #endregion
+                Query insertQuery = db.CreateQuery("insert into metaFields([DataTableName], [ViewId], [FieldTypeId], [Name]) " +
+                  "values (@DataTableName, @ViewId, @FieldTypeId, @Name)");
+
+                insertQuery.Parameters.Add(new QueryParameter("@DataTableName", DbType.String, field.TableName));
+                insertQuery.Parameters.Add(new QueryParameter("@ViewId", DbType.Int32, field.GetView().Id));
+                insertQuery.Parameters.Add(new QueryParameter("@FieldTypeId", DbType.Int32, (int)field.FieldType));
+                insertQuery.Parameters.Add(new QueryParameter("@Name", DbType.String, field.Name));
+
+
+                db.ExecuteNonQuery(insertQuery);
+                return GetMaxFieldId(field.GetView().Id);
+            }
+            catch (Exception ex)
+            {
+                throw new GeneralException("Unable to get LastSaveTime field from the database", ex);
+            }
+            finally
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Reset and Repopulate metaFieldTypes table.
+        /// </summary>
+        /// <param name="field">View.</param>
+        /// <returns></returns>
+        public void SynchronizeMetaFieldtypes(View view)
+        {
+            Query query = null;
+            ArrayList SysVarList= new ArrayList();
+            string conMetaViews = "metaViews";
+
+            try
+            {
+                Query SelectQuery = db.CreateQuery("select * from Metafieldtypes");
+                DataTable SysVars = db.Select(SelectQuery);
+
+                foreach (DataRow row in SysVars.Rows)
+                {
+                    SysVarList.Add(row[ColumnNames.NAME].ToString());
+                }
+
+                ///Verify that all system var columns exists in View.
+                if (db.TableExists(view.TableName))
+                {
+                  if (db.ColumnExists(view.TableName, ColumnNames.RECORD_FIRST_SAVE_TIME) == false)
+                  {
+                    TableColumn tableFirstSaveColumn = new TableColumn(ColumnNames.RECORD_FIRST_SAVE_TIME, GenericDbColumnType.DateTime, true);
+                    db.AddColumn(view.TableName, tableFirstSaveColumn);
+                   }
+                   if (db.ColumnExists(view.TableName, ColumnNames.RECORD_LAST_SAVE_TIME) == false)
+                    {
+                     TableColumn tableLastSaveColumn = new TableColumn(ColumnNames.RECORD_LAST_SAVE_TIME, GenericDbColumnType.DateTime, true);
+                     db.AddColumn(view.TableName, tableLastSaveColumn);
+                    }
+                }
+                // ---for suma
+                if (db.ColumnExists(conMetaViews, ColumnNames.EWEOrganization_KEY) == false)
+                {
+                    TableColumn tableEWEOrganizationColumn = new TableColumn(ColumnNames.EWEOrganization_KEY, GenericDbColumnType.StringLong, true);
+                    db.AddColumn(conMetaViews, tableEWEOrganizationColumn);
+                } 
+                if (db.ColumnExists(conMetaViews, ColumnNames.EiWSOrganization_KEY) == false)
+                {
+                    TableColumn tableEWEOrganizationKeyColumn = new TableColumn(ColumnNames.EiWSOrganization_KEY, GenericDbColumnType.StringLong, true);
+                    db.AddColumn(conMetaViews, tableEWEOrganizationKeyColumn);
+                }
+                if (db.ColumnExists(conMetaViews, ColumnNames.EIWsForm_ID) == false)
+                {
+                    TableColumn tableEIWSFormIdColumn = new TableColumn(ColumnNames.EIWsForm_ID, GenericDbColumnType.StringLong, true);
+                    db.AddColumn(conMetaViews, tableEIWSFormIdColumn);
+                }
+                if (db.ColumnExists(conMetaViews, ColumnNames.EWEForm_ID) == false)
+                {
+                    TableColumn tableEWEFormIdColumn = new TableColumn(ColumnNames.EWEForm_ID, GenericDbColumnType.StringLong, true);
+                    db.AddColumn(conMetaViews, tableEWEFormIdColumn);
+                } 
+                //-------
+                ///
+                foreach (AppDataSet.FieldTypesRow fieldType in AppData.Instance.FieldTypesDataTable.Rows)
+                {
+                    if ((SysVarList.Contains(fieldType.Name) == false))
+                    {
+                        query = db.CreateQuery("insert into metaFieldTypes ([FieldTypeId], [Name], [HasRepeatLast], [HasRequired], [HasReadOnly], [HasRetainImageSize], [HasFont], [IsDropDown], [IsGridColumn], [DataTypeId], [IsSystem], [DefaultPatternId]) values (@FieldTypeId, @Name, @HasRepeatLast, @HasRequired, @HasReadOnly, @HasRetainImageSize, @HasFont, @IsDropDown, @IsGridColumn, @DataTypeId, @IsSystem, @DefaultPatternId)");
+                        query.Parameters.Add(new QueryParameter("@FieldTypeId", DbType.Int32, fieldType.FieldTypeId));
+                        query.Parameters.Add(new QueryParameter("@Name", DbType.String, fieldType.Name));
+                        query.Parameters.Add(new QueryParameter("@HasRepeatLast", DbType.Boolean, fieldType.HasRepeatLast));
+                        query.Parameters.Add(new QueryParameter("@HasRequired", DbType.Boolean, fieldType.HasRequired));
+                        query.Parameters.Add(new QueryParameter("@HasReadOnly", DbType.Boolean, fieldType.HasReadOnly));
+                        query.Parameters.Add(new QueryParameter("@HasRetainImageSize", DbType.Boolean, fieldType.HasRetainImageSize));
+                        query.Parameters.Add(new QueryParameter("@HasFont", DbType.Boolean, fieldType.HasFont));
+                        query.Parameters.Add(new QueryParameter("@IsDropDown", DbType.Boolean, fieldType.IsDropDown));
+                        query.Parameters.Add(new QueryParameter("@IsGridColumn", DbType.Boolean, fieldType.IsGridColumn));
+                        if (fieldType.IsDataTypeIdNull())
+                            query.Parameters.Add(new QueryParameter("@DataTypeId", DbType.Int32, DBNull.Value));
+                        else
+                            query.Parameters.Add(new QueryParameter("@DataTypeId", DbType.Int32, fieldType.DataTypeId));
+                        query.Parameters.Add(new QueryParameter("@IsSystem", DbType.Boolean, fieldType.IsSystem));
+                        query.Parameters.Add(new QueryParameter("@DefaultPatternId", DbType.Int32, fieldType.DefaultPatternId));
+
+                        db.ExecuteNonQuery(query);
+                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new GeneralException("Unable to synchronize MetafieldTypes Table", ex);
+            }
+            finally
+            {
+
+            }
+        }
+        //---
         /// <summary>
         /// Insert a ForeignKeyField record into the metaFields table.
         /// </summary>
@@ -9696,7 +9880,24 @@ namespace Epi.Data.Services
         public void GetFieldData(UniqueKeyField field, XmlNode fieldNode)
         {
         }
-
+        //--123
+        /// <summary>
+        /// Retrieves data for FirstSaveTime field from xml metadata.
+        /// </summary>
+        /// <param name="field">A FirstSaveTime field.</param>
+        /// <param name="fieldNode">XML node for FirstSaveTime field.</param>
+        public void GetFieldData(FirstSaveTimeField field, XmlNode fieldNode)
+        {
+        }
+        /// <summary>
+        /// Retrieves data for LastSaveTime field from xml metadata.
+        /// </summary>
+        /// <param name="field">A LastSaveTime field.</param>
+        /// <param name="fieldNode">XML node for LastSaveTime field.</param>
+        public void GetFieldData(LastSaveTimeField field, XmlNode fieldNode)
+        {
+        }
+        //---
         /// <summary>
         /// Retrieves data for UniqueKeyField field 
         /// </summary>
