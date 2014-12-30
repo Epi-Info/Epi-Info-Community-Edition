@@ -300,6 +300,10 @@ namespace Epi.Data.Services
 					fieldTypesDataTable.AddFieldTypesRow(25, @"GUID", false, false, false, false, false, false, false, false, false, false, false, 10, false, 0);
 					fieldTypesDataTable.AddFieldTypesRow(26, @"GlobalRecordId", false, false, false, false, false, false, false, false, false, false, false, 2, false, 0);
 					fieldTypesDataTable.AddFieldTypesRow(27, @"List", false, false, true, true, true, false, false, false, true, true, false, 9, false, 0);
+                    //123---
+                    fieldTypesDataTable.AddFieldTypesRow(29, @"FirstSaveTime", false, false, true, true, true, false, false, false, true, true, false, 9, false, 0);
+                    fieldTypesDataTable.AddFieldTypesRow(30, @"LastSaveTime", false, false, true, true, true, false, false, false, true, true, false, 9, false, 0);
+                    //---
 					fieldTypesDataTable.AddFieldTypesRow(99, @"Unknown", false, false, false, false, false, false, false, false, false, false, false, 9, false, 0);
 				}
 				return (fieldTypesDataTable);
@@ -627,6 +631,9 @@ namespace Epi.Data.Services
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"GLOBALID   ", @"D");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"GO", @"B");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"GOTO", @"B");
+                    //---2225
+                    reservedWordsDataTable.AddReservedWordsRow(index++, @"GOTOFORM", @"B");
+                    //---
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"GRANT", @"B");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"GRAPH", @"A");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"GRAPHTYPE", @"A");
