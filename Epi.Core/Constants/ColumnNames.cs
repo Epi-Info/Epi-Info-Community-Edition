@@ -482,5 +482,26 @@ namespace Epi
         /// YesNoColumn
         /// </summary>
         public const string YESNO_COLUMN = "YesNoColumn";
+
+        /// <summary>
+        /// EiWSOrganizationKey
+        /// </summary>
+        public const string EiWSOrganization_KEY = "EIWSOrganizationKey";
+
+        /// <summary>
+        /// EiWsFormId
+        /// </summary>
+        public const string EIWsForm_ID = "EIWSFormId";
+
+        /// <summary>
+        /// EWEOrganization
+        /// </summary>
+        public const string EWEOrganization_KEY = "EWEOrganizationKey";
+
+        /// <summary>
+        /// EWEFormID
+        /// </summary>
+        public const string EWEForm_ID = "EWEFormID";
+       
     }
 }
