@@ -117,6 +117,16 @@ namespace Epi
         /// <summary>
         /// UniqueRowId
         /// </summary>
-        UniqueRowId = 28
+        UniqueRowId = 28,
+        //---123
+         /// <summary>
+        ///FirstSaveTime field type
+        /// </summary>
+        FirstSaveTime = 29,
+        /// <summary>
+        ///FirstSaveTime field type
+        /// </summary>
+        LastSaveTime = 30,
+        
     }
 }
