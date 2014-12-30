@@ -280,6 +280,8 @@
     <Compile Include="Exceptions\ValidationFailedException.cs" />
     <Compile Include="ExecutionEnvironment.cs" />
     <Compile Include="ProjectPermissions.cs" />
+    <Compile Include="Services\Fields\FirstSaveTime.cs" />
+    <Compile Include="Services\Fields\LastSaveTime.cs" />
     <Compile Include="Services\Fields\YesNoColumn.cs" />
     <Compile Include="Services\Fields\Grid Columns\CheckBoxColumn.cs" />
     <Compile Include="Services\Fields\Grid Columns\TimeColumn.cs" />
