@@ -2394,7 +2394,114 @@ namespace Epi.Data.Services
             {
             }
         }
+        ///-----123
+        /// <summary>
+        /// Create FirstSaveTime field.
+        /// </summary>
+        /// <param name="field">FirstSaveTime field to create.</param>
+        /// <returns>Id of the newly created field.</returns>
+        public int CreateField(FirstSaveTimeField field)
+        {
+            try
+            {
+                #region InputValidation
+                if (field == null)
+                {
+                    throw new ArgumentNullException("FirstSaveTimeField");
+                }
+                #endregion
 
+                XmlDocument xmlDoc = GetXmlDocument();
+                XmlNode fieldsNode = GetFieldsNode(field.ViewElement);
+                View view = field.GetView();
+                XmlElement fieldElement = xmlDoc.CreateElement("Field");
+
+                XmlAttribute fieldIdAttribute = xmlDoc.CreateAttribute("FieldId");
+                fieldIdAttribute.Value = view.GetFieldId(field.ViewElement).ToString();
+                fieldElement.Attributes.Append(fieldIdAttribute);
+                field.Id = Int32.Parse(fieldIdAttribute.Value);
+
+                XmlAttribute fieldTypeId = xmlDoc.CreateAttribute("FieldTypeId");
+                fieldTypeId.Value = field.FieldType.ToString();
+                fieldElement.Attributes.Append(fieldTypeId);
+
+                XmlAttribute fieldNameAttribute = xmlDoc.CreateAttribute("Name");
+                fieldNameAttribute.Value = field.Name;
+                fieldElement.Attributes.Append(fieldNameAttribute);
+
+                XmlAttribute fieldViewId = xmlDoc.CreateAttribute("ViewId");
+                fieldViewId.Value = view.Id.ToString();
+                fieldElement.Attributes.Append(fieldViewId);
+
+                XmlAttribute dataTableName = xmlDoc.CreateAttribute("DataTableName");
+                dataTableName.Value = field.TableName;
+                fieldElement.Attributes.Append(dataTableName);
+
+                fieldsNode.AppendChild(fieldElement);
+                view.Project.Save();
+                return field.Id;
+            }
+            finally
+            {
+            }
+        }
+
+        /// <summary>
+        /// Create LastSaveTime field.
+        /// </summary>
+        /// <param name="field">LastSaveTime field to create.</param>
+        /// <returns>Id of the newly created field.</returns>
+        public int CreateField(LastSaveTimeField field)
+        {
+            try
+            {
+                #region InputValidation
+                if (field == null)
+                {
+                    throw new ArgumentNullException("LastSaveTimeField");
+                }
+                #endregion
+
+                XmlDocument xmlDoc = GetXmlDocument();
+                XmlNode fieldsNode = GetFieldsNode(field.ViewElement);
+                View view = field.GetView();
+                XmlElement fieldElement = xmlDoc.CreateElement("Field");
+
+                XmlAttribute fieldIdAttribute = xmlDoc.CreateAttribute("FieldId");
+                fieldIdAttribute.Value = view.GetFieldId(field.ViewElement).ToString();
+                fieldElement.Attributes.Append(fieldIdAttribute);
+                field.Id = Int32.Parse(fieldIdAttribute.Value);
+
+                XmlAttribute fieldTypeId = xmlDoc.CreateAttribute("FieldTypeId");
+                fieldTypeId.Value = field.FieldType.ToString();
+                fieldElement.Attributes.Append(fieldTypeId);
+
+                XmlAttribute fieldNameAttribute = xmlDoc.CreateAttribute("Name");
+                fieldNameAttribute.Value = field.Name;
+                fieldElement.Attributes.Append(fieldNameAttribute);
+
+                XmlAttribute fieldViewId = xmlDoc.CreateAttribute("ViewId");
+                fieldViewId.Value = view.Id.ToString();
+                fieldElement.Attributes.Append(fieldViewId);
+
+                XmlAttribute dataTableName = xmlDoc.CreateAttribute("DataTableName");
+                dataTableName.Value = field.TableName;
+                fieldElement.Attributes.Append(dataTableName);
+
+                fieldsNode.AppendChild(fieldElement);
+                view.Project.Save();
+                return field.Id;
+            }
+            finally
+            {
+            }
+        }
+        public void  SynchronizeMetaFieldtypes(View view)
+        {
+
+        }
+
+        ///---------- 
         /// <summary>
         /// Create Check box field.
         /// </summary>
@@ -11032,6 +11139,24 @@ namespace Epi.Data.Services
         {
         }
 
+        //----123
+        /// <summary>
+        /// Retrieves data for FirstSaveTime field from xml metadata
+        /// </summary>
+        /// <param name="field">A First Save Time field</param>
+        /// <param name="fieldNode">The field node in the Xml metadata file</param>
+        public void GetFieldData(FirstSaveTimeField field, XmlNode fieldNode)
+        {
+        }
+        /// <summary>
+        /// Retrieves data for LastSaveTime field from xml metadata
+        /// </summary>
+        /// <param name="field">A Last Save Time field</param>
+        /// <param name="fieldNode">The field node in the Xml metadata file</param>
+        public void GetFieldData(LastSaveTimeField field, XmlNode fieldNode)
+        {
+        }
+        //----
         /// <summary>
         /// Retrieves data for related view field from xml metadata
         /// </summary>
