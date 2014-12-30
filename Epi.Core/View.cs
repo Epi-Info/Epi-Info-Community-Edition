@@ -96,7 +96,7 @@ namespace Epi
             PageOrientation = configuration.Settings.DefaultPageOrientation;
             PageLabelAlign = configuration.Settings.DefaultLabelAlign;
             this.fieldLockToken = new ArrayList();
-        }
+           }
 
         /// <summary>
         /// Constructs a new view from a data row
@@ -139,6 +139,9 @@ namespace Epi
                 this.GetParent(Id);
             }
             this.fieldLockToken = new ArrayList();
+            //--123
+            VerifyandUpdateViewSystemVars();
+            //--
         }
 
         #endregion Constructors
@@ -464,7 +467,7 @@ namespace Epi
                 {
                     if (this.Project.MetadataSource.Equals(MetadataSource.Xml) == false)
                     {
-                        fields = GetMetadata().GetFields(this);
+                       fields = GetMetadata().GetFields(this);
                     }
                     else
                     {
@@ -673,7 +676,54 @@ namespace Epi
                 return Fields.RecStatusField;
             }
         }
-
+        //---123
+        /// <summary>
+        /// Returns the FirstSavetime field.
+        /// </summary>
+        ///
+        public FirstSaveTimeField FirstSaveTimeField
+        {
+            get
+            {
+                return Fields.FirstSaveTimeField;
+            }
+        }
+        /// <summary>
+        /// Returns the LastSavetime field.
+        /// </summary>
+        public LastSaveTimeField LastSaveTimeField
+        {
+            get
+            {
+                return Fields.LastSaveTimeField;
+            }
+        }
+        /// <summary>
+        /// Checks and adds records metafieldtype and Metafield tables and also adds fields to datatable
+        /// </summary>
+        private void VerifyandUpdateViewSystemVars()
+        {
+            DataTable fieldSysVars = GetMetadata().GetSystemFields(this.id);
+            bool FlagColumnExists = false;
+            //check table for fields
+            foreach (DataRow row in fieldSysVars.Rows)
+            {
+                if (row[ColumnNames.NAME].ToString() == ColumnNames.RECORD_FIRST_SAVE_TIME)
+                {
+                    FlagColumnExists = true;
+                    return;
+                }
+            }
+            if (FlagColumnExists == false)
+            {
+                GetMetadata().SynchronizeMetaFieldtypes(this);
+                FirstSaveTimeField firstsavetimeField = new FirstSaveTimeField(this);
+                firstsavetimeField.SaveToDb();
+                LastSaveTimeField lastsavetimeField = new LastSaveTimeField(this);
+                lastsavetimeField.SaveToDb();
+            }
+         }
+         //----
         /// <summary>
         /// Returns the foreign key field of the unique key.
         /// </summary>
