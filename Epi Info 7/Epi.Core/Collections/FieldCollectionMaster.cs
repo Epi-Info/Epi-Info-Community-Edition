@@ -71,7 +71,29 @@ namespace Epi.Collections
                 return this[ColumnNames.REC_STATUS] as RecStatusField;
             }
         }
-
+        //-----123
+        /// <summary>
+        /// Returns the FirstSaveTime Field.
+        /// </summary>
+        public FirstSaveTimeField FirstSaveTimeField
+        {
+            get
+            {
+                return this[ColumnNames.RECORD_FIRST_SAVE_TIME] as FirstSaveTimeField;
+            }
+        }
+        
+        /// <summary>
+        /// Returns the LastSaveTime Field.
+        /// </summary>
+        public LastSaveTimeField LastSaveTimeField
+        {
+            get
+            {
+                return this[ColumnNames.RECORD_LAST_SAVE_TIME] as LastSaveTimeField;
+            }
+        }
+         //-------
         /// <summary>
         /// Returns the Foreign Key Field.
         /// </summary>
