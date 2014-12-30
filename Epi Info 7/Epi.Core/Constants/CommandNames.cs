@@ -212,7 +212,11 @@ namespace Epi
         /// </summary>
         public const string GOTO = "GOTO";
         /// <summary>
-        /// 
+        /// Goes to Relate Form
+        /// </summary>
+        public const string GOTOFORM = "GOTOFORM";
+        /// <summary>
+        /// <summary>
         /// </summary>
         public const string GRAPH = "GRAPH";
 		/// <summary>
@@ -561,6 +565,14 @@ namespace Epi
         /// SYSTEMTIME system function
         /// </summary>
         public const string SYSTEMTIME = "SYSTEMTIME";
+        /// FIRSTSAVETIME system function
+        /// </summary>
+        /// --123
+        public const string FIRSTSAVETIME = "FIRSTSAVETIME";
+        ///LASTSAVETIME system function
+        /// </summary>
+        public const string LASTSAVETIME = "LASTSAVETIME";
+        //---
         /// <summary>
         /// Performs a cross-tabulation  of the specified exposure and outcome variables
         /// </summary>
