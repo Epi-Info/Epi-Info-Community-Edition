@@ -764,6 +764,17 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
         {
             DesignStatement(new SetNotRequiredDialog(MainForm));
         }
+
+        /// <summary>
+        /// Handles the Click event of the Call Command menu item
+        /// </summary>
+        /// <param name="sender">Object that fired the event</param>
+        /// <param name="e">.NET supplied event parameters</param>
+        void mnuCallcommand_Click(object sender, EventArgs e)
+        {
+            Epi.Windows.MakeView.Forms.CheckCode checkCode = new Epi.Windows.MakeView.Forms.CheckCode(((Epi.Windows.MakeView.Forms.MakeViewMainForm)this.MainForm));
+            DesignStatement(new CallDialog(checkCode));
+        }
         ///// <summary>
         ///// Handles the Click event of the Quit menu item
         ///// </summary>
@@ -833,7 +844,9 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             mnuSetRequired.Click += new EventHandler(mnuSetRequired_Click);
             ToolStripMenuItem mnuSetNotRequired = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_SET_NOT_REQUIRED);
             mnuSetNotRequired.Click += new EventHandler(mnuSetNotRequired_Click);
-            contextMenu.Items.AddRange(new ToolStripMenuItem[] { mnuAssign, mnuAutosearch, mnuClear, mnuDialog, mnuDisable, mnuEnable, mnuExecute, mnuGeocode, mnuGoto, mnuHelp, mnuHide, mnuUnhide, mnuHighlight, mnuUnhighlight, mnuNewRecord, mnuIf, mnuSetRequired, mnuSetNotRequired });
+            ToolStripMenuItem mnuCallcommand = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_CALL);
+            mnuCallcommand.Click += new EventHandler(mnuCallcommand_Click);
+            contextMenu.Items.AddRange(new ToolStripMenuItem[] { mnuAssign, mnuAutosearch, mnuClear, mnuDialog, mnuDisable, mnuEnable, mnuExecute, mnuGeocode, mnuGoto, mnuHelp, mnuHide, mnuUnhide, mnuHighlight, mnuUnhighlight, mnuNewRecord, mnuIf, mnuSetRequired, mnuSetNotRequired, mnuCallcommand });
 
             return contextMenu;
         }
