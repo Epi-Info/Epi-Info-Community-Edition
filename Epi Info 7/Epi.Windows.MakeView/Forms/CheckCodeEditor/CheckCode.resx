@@ -756,6 +756,9 @@
   <data name="Commands.Items20" xml:space="preserve">
     <value>Set-Not-Required</value>
   </data>
+   <data name="Commands.Items21" xml:space="preserve">
+    <value>GoToForm</value>
+  </data>
   <data name="Commands.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 20</value>
   </data>
@@ -1347,4 +1350,5 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  
 </root>
