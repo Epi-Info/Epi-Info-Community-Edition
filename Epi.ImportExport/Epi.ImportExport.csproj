@@ -278,7 +278,6 @@
     <Compile Include="ProjectPackagers\XmlDataPackager.cs" />
     <Compile Include="ProjectPackagers\XmlDataUnpackager.cs" />
     <Compile Include="ProjectPackagers\XmlMultiKeyDataUnpackager.cs" />
-    <Compile Include="ProjectPackagers\XmlSqlDataPackager.cs" />
     <Compile Include="ProjectUnpackager.cs" />
     <Compile Include="Dialogs\ImportMessagesDialog.cs">
       <SubType>Form</SubType>
