@@ -468,7 +468,7 @@ namespace Epi.Windows.Enter.PresentationLogic
             return controls;
         }
 
-        private Dictionary<string, DataTable> cachedListValues;
+       // private Dictionary<string, DataTable> cachedListValues;
 
         private List<Control> GetControls(TableBasedDropDownField field, Size canvasSize)
         {
@@ -523,7 +523,8 @@ namespace Epi.Windows.Enter.PresentationLogic
                     }
                     else
                     {
-                        if (cachedListValues == null)
+                        displayTable = field.GetDisplayTable("", "", displayMember);
+                        /*if (cachedListValues == null)
                         {
                             cachedListValues = new Dictionary<string, DataTable>();
                         }
@@ -536,7 +537,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                         {
                             displayTable = field.GetDisplayTable("", "", displayMember);
                             cachedListValues.Add(displayMember + "," + field.SourceTableName, displayTable);
-                        }
+                        }*/
                     }
                 }
 
