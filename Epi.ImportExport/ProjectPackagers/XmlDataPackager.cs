@@ -81,7 +81,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <summary>
         /// Gets/sets the list of fields whose data should be erased during the packaging process. The dictionary key is the name of the form; the list of strings represent the field names within the form that should be erased.
         /// </summary>
-        private Dictionary<string, List<string>> FieldsToNull { get; set; }
+        public Dictionary<string, List<string>> FieldsToNull { get; set; }
 
         /// <summary>
         /// Gets/sets the list of fields to use as match keys. If none are specified, the GlobalRecordId field will be used as the match key.
