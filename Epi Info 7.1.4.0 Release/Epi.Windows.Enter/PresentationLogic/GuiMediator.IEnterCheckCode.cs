@@ -1158,26 +1158,30 @@ namespace Epi.Windows.Enter.PresentationLogic
         /// </summary>
         public void NewRecord()
         {
-            this.canvas.UnsubscribeControlEventHandlers();
-            this.SaveRecord();
-
-            if (this.View.IsRelatedView && this.View.ReturnToParent)
+            //--2326
+            if (this.mainForm.IsRecordCloseable)
             {
-                this.mainForm.CloseView();
-                return;
+                this.canvas.UnsubscribeControlEventHandlers();
+                this.SaveRecord();
+
+                if (this.View.IsRelatedView && this.View.ReturnToParent)
+                {
+                    this.mainForm.CloseView();
+                    return;
+                }
+                ResetViewDataFields();
+
+                this.canvas.UnsubscribeControlEventHandlers();
+                this.CurrentRecordId = this.EnterCheckCodeEngine.CurrentView.CurrentRecordNumber;
+                this.canvas.SetNewRecordValues();
+                this.mainForm.UpdateAppSpecificInfo(SharedStrings.NEW_RECORD);
+                this.mainForm.AddNewRecordSettings();
+                this.viewExplorer.GoToFirstPage();
+
+                this.Render();
+                this.canvas.SubscribeControlEventHandlers();
+                SetFocusToFirstControl(currentPage, _fieldPanel);
             }
-            ResetViewDataFields();
-            
-            this.canvas.UnsubscribeControlEventHandlers();
-            this.CurrentRecordId = this.EnterCheckCodeEngine.CurrentView.CurrentRecordNumber;
-            this.canvas.SetNewRecordValues();
-            this.mainForm.UpdateAppSpecificInfo(SharedStrings.NEW_RECORD);
-            this.mainForm.AddNewRecordSettings();
-            this.viewExplorer.GoToFirstPage();
-             
-            this.Render();
-            this.canvas.SubscribeControlEventHandlers();
-            SetFocusToFirstControl(currentPage, _fieldPanel);
         }
 
         private void ResetViewDataFields()
