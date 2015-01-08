@@ -15,8 +15,9 @@ namespace Epi.Core.EnterInterpreter.Rules
         public Rule_GoTo(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
         {
             _goto_type = this.GetCommandElement(pToken.Tokens, 0);
-
-            switch (_goto_type)
+            //---2225
+           // switch (_goto_type)
+           switch (_goto_type.ToUpper())
             {
                 case "GOTOFORM":
                     if (pToken.Tokens.Length == 2)
