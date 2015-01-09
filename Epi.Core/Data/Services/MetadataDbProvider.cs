@@ -5689,16 +5689,29 @@ namespace Epi.Data.Services
 
                     for (int i = 0; i < columnNames.Length; i++)
                     {
-                        string columnName = string.Empty;
+                        string columnName = string.Empty; int intcolumn = 0;
 
                         if (row[columnNames[i]] is string)
                         {
                             columnName = (string)row[columnNames[i]];
+                            string atColumnName = StringLiterals.COMMERCIAL_AT + columnNames[i].Replace(" ", "");
+                            QueryParameter param = new QueryParameter(atColumnName, DbType.String, columnName);
+                            insertQuery.Parameters.Add(param);
                         }
 
-                        string atColumnName = StringLiterals.COMMERCIAL_AT + columnNames[i].Replace(" ", "");
-                        QueryParameter param = new QueryParameter(atColumnName, DbType.String, columnName);
-                        insertQuery.Parameters.Add(param);
+                        else if (row[columnNames[i]] is Int32)
+                        {
+                            intcolumn = Int32.Parse(row[columnNames[i]].ToString());
+                            string atColumnName = StringLiterals.COMMERCIAL_AT + columnNames[i].Replace(" ", "");
+                            QueryParameter param = new QueryParameter(atColumnName, DbType.Int32, intcolumn);
+                            insertQuery.Parameters.Add(param);
+                        }
+                        else
+                        {
+                            string atColumnName = StringLiterals.COMMERCIAL_AT + columnNames[i].Replace(" ", "");
+                            QueryParameter param = new QueryParameter(atColumnName, DbType.String, columnName);
+                            insertQuery.Parameters.Add(param);
+                        }      
                     }
 
                     db.ExecuteNonQuery(insertQuery);
