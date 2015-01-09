@@ -21,7 +21,6 @@ namespace Epi.EnterCheckCodeEngine
         private Epi.Fields.Field mCurrentField;
         private Dictionary<int,int> RecordNumberMap;
         private int recordCount;
-
         private int parentViewRecordId;
         private string parentViewGlobalRecordId;
 
@@ -114,7 +113,6 @@ namespace Epi.EnterCheckCodeEngine
             get { return this.parentViewGlobalRecordId; }
             set { this.parentViewGlobalRecordId = value; }
         }
-
         public IEnterInterpreter EpiInterpreter
         {
             get { return this.mEpiInterpreter; }
@@ -175,8 +173,8 @@ namespace Epi.EnterCheckCodeEngine
                     switch (e.Parameter)
                     {
                         case "+":
+                        case Constants.Plus:
                             this.NewRecord(sender, e);
-
                             break;
                         case "<<":
                             this.FirstRecord(sender, e);
@@ -430,19 +428,8 @@ namespace Epi.EnterCheckCodeEngine
         private void NewRecord(object sender, RunCheckCodeEventArgs e)
         {
             //----2101
-            if (!this.mView.IsDirty)
-            {
-                if (this.AfterStack.Peek().Key == EventActionEnum.CloseField)
-                {
-                    this.AfterStack.Pop();
-                    this.AfterStack.Pop();
-                }
-                else if (this.AfterStack.Peek().Key == EventActionEnum.ClosePage)
-                {
-                    this.AfterStack.Pop();
-                }
-            }
-            //---
+              this.ClearPageEventForNewRecord(e.Parameter);
+            //--
             this.UnRollRecord();
             this.AfterStack.Push(new KeyValuePair<EventActionEnum, StackCommand>(EventActionEnum.CloseRecord, new StackCommand(this.EpiInterpreter, "record", "after", "")));
             this.ResetFields();
@@ -469,6 +456,23 @@ namespace Epi.EnterCheckCodeEngine
             this.ExecuteCheckCode("record", "before", "");
             
         }
+
+        //--2101
+        private void ClearPageEventForNewRecord(string param)
+        {
+            //clearing page event for New
+            if (this.AfterStack.Peek().Key == EventActionEnum.CloseField && param == Constants.Plus)
+            {
+                    this.AfterStack.Pop();
+                    this.AfterStack.Pop();
+                    this.AfterStack.Push(new KeyValuePair<EventActionEnum, StackCommand>(EventActionEnum.CloseField, new StackCommand(this.EpiInterpreter, "field", "after", this.mCurrentField.Name)));
+            } 
+            else if (this.AfterStack.Peek().Key == EventActionEnum.ClosePage && param == Constants.Plus)
+            {
+                 this.AfterStack.Pop();
+            }
+         }
+        //---
         private void GotoRecord(object sender, RunCheckCodeEventArgs e)
         {
             this.UnRollRecord();

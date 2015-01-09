@@ -67,7 +67,7 @@ namespace Epi.Windows.Enter
         private bool canUpdateRecords = true;
         private bool canSelectRecords = true;
         private bool allowOnlyRecordOnly = false;
-
+       
         private bool AllowOneRecordOnly
         {
             get
@@ -1080,7 +1080,10 @@ namespace Epi.Windows.Enter
         {
             if (this.GotoRecordEvent != null && canInsertRecords)
             {
-                this.GotoRecordEvent(this, new GoToRecordEventArgs("+"));
+              //--2101 
+              //  this.GotoRecordEvent(this, new GoToRecordEventArgs("+"));
+               this.GotoRecordEvent(this, new GoToRecordEventArgs(Constants.Plus));
+
             }
         }
 
@@ -1596,6 +1599,9 @@ namespace Epi.Windows.Enter
 
                 this.view = CurrentProject.Views.GetViewById(viewSelectionDialog.ViewId);
                 viewSelectionDialog.Close();
+                //--123
+                // this.view.VerifyandUpdateViewSystemVars();
+                ////
                 if (!this.view.IsRelatedView)
                 {
                     Project project = view.GetProject();
@@ -2903,5 +2909,10 @@ namespace Epi.Windows.Enter
             {
             ImportFormDataFromWebEnter(this.view);
             }
+
+ private void enterDockManager_Paint(object sender, PaintEventArgs e)
+ {
+
+ }
     }
 }

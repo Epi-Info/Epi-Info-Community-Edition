@@ -57,5 +57,6 @@ namespace Epi
 
         public const string SPECIALINFO = "Special Info";
 
+        public const string Plus = "PLUS";
     }
 }

@@ -244,7 +244,8 @@ namespace Epi.Windows.Enter.PresentationLogic
 
                 switch (e.RecordString)
                 {
-                    case "+": // add new record
+                    case "+"  : // add new record
+                    case Constants.Plus: //2101
                         if (this.View.IsRelatedView && this.View.ReturnToParent)
                         {
                             this.mainForm.CloseView();
@@ -252,7 +253,6 @@ namespace Epi.Windows.Enter.PresentationLogic
                         }
 
                         if (AllowOneRecordOnly) { return; }
-                        
                         this.EnterCheckCodeEngine.CheckCodeHandler(this, new RunCheckCodeEventArgs(EventActionEnum.NewRecord, e.RecordString));
                         this.canvas.UnsubscribeControlEventHandlers();
                         this.CurrentRecordId = this.EnterCheckCodeEngine.CurrentView.CurrentRecordNumber;
@@ -546,7 +546,6 @@ namespace Epi.Windows.Enter.PresentationLogic
 
                 Epi.Page ThisPage = this.EnterCheckCodeEngine.CurrentView.CurrentPage;
                 Epi.Fields.Field ThisField = this.EnterCheckCodeEngine.CurrentView.CurrentField;
-
                 this.EnterCheckCodeEngine.CheckCodeHandler(sender, new RunCheckCodeEventArgs(EventActionEnum.CloseField, ""));
                 View TestView = this.EnterCheckCodeEngine.CurrentView.View;
                 
