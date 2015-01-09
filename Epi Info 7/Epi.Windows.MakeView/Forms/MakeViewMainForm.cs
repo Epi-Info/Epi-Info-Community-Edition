@@ -1437,6 +1437,13 @@ namespace Epi.Windows.MakeView.Forms
             mediator.OnShortcutKeyPressed(e);
         }
 
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            base.OnKeyUp(e);
+            mediator.OnShortcutKeyUp(e);
+
+        }
+
         /// <summary>
         /// Handles the MouseWheel event for the main form; primarily done to solve a problem related to not being able to scroll inside of the canvas when the main form has focus
         /// </summary>

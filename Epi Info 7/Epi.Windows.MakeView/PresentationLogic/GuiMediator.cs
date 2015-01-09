@@ -40,7 +40,8 @@ namespace Epi.Windows.MakeView.PresentationLogic
         private InitialCollectedData initialCollectedData = null;
         private Field _fieldBefore = null;
         private List<Control> _pastedFields = new List<Control>();
-        private List<int> _newFieldIds = new List<int>(); 
+        private List<int> _newFieldIds = new List<int>();
+        private int _arrowKeyDownCount = 0;
         #endregion Private Data Members
 
         #region Public Events
@@ -1357,12 +1358,28 @@ namespace Epi.Windows.MakeView.PresentationLogic
                     case Keys.Down:
                     case Keys.Left:
                     case Keys.Right:
-                        OnSelectedControlsArrow(keyCode);
+                        _arrowKeyDownCount += 1;  
                         break;
                     case Keys.Enter:
                         RepeatNewOpenControl();
                         break;
                 }
+            }
+        }
+
+        public void OnShortcutKeyUp(KeyEventArgs e)
+        {
+            Keys keyCode = e.KeyCode;
+            
+            switch (keyCode)
+            {
+                case Keys.Up:
+                case Keys.Down:
+                case Keys.Left:
+                case Keys.Right:
+                    OnSelectedControlsArrow(keyCode, _arrowKeyDownCount);
+                    _arrowKeyDownCount = 0;
+                    break;
             }
         }
 
@@ -1391,7 +1408,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
             }
         }
 
-        private void OnSelectedControlsArrow(Keys keyCode)
+        private void OnSelectedControlsArrow(Keys keyCode, int count)
         {
             int verticalIncrement = 0;
             int horizontalIncrement = 0;
@@ -1399,16 +1416,16 @@ namespace Epi.Windows.MakeView.PresentationLogic
             switch (keyCode)
             {
                 case Keys.Up:
-                    verticalIncrement = -1;
+                    verticalIncrement = -count;
                     break;
                 case Keys.Down:
-                    verticalIncrement = 1;
+                    verticalIncrement = count;
                     break;
                 case Keys.Left:
-                    horizontalIncrement = -1;
+                    horizontalIncrement = -count;
                     break;
                 case Keys.Right:
-                    horizontalIncrement = 1;
+                    horizontalIncrement = count;
                     break;
             }
             
@@ -1423,43 +1440,50 @@ namespace Epi.Windows.MakeView.PresentationLogic
                 }
             }
 
-            foreach (KeyValuePair<IFieldControl, Point> kvp in selectedFieldControls)
+            try
             {
-                if (!(kvp.Key.Field is GroupField || childFields.Contains(kvp.Key.Field.Name)))
+                foreach (KeyValuePair<IFieldControl, Point> kvp in selectedFieldControls)
                 {
-                    if (kvp.Key.Field is FieldWithSeparatePrompt)
+                    if (!(kvp.Key.Field is GroupField || childFields.Contains(kvp.Key.Field.Name)))
                     {
-                        if (kvp.Key is DragableLabel)
+                        if (kvp.Key.Field is FieldWithSeparatePrompt)
                         {
-                            _fieldBefore = CloneField(kvp.Key.Field);
-
-                            ((Control)kvp.Key).Top += verticalIncrement;
-                            ((Control)kvp.Key).Left += horizontalIncrement;
-
-                            if (((DragableLabel)kvp.Key).LabelFor != null)
+                            if (kvp.Key is DragableLabel)
                             {
-                                ((DragableLabel)kvp.Key).LabelFor.Top += verticalIncrement;
-                                ((DragableLabel)kvp.Key).LabelFor.Left += horizontalIncrement;
+                                _fieldBefore = CloneField(kvp.Key.Field);
+
+                                ((Control)kvp.Key).Top += verticalIncrement;
+                                ((Control)kvp.Key).Left += horizontalIncrement;
+
+                                if (((DragableLabel)kvp.Key).LabelFor != null)
+                                {
+                                    ((DragableLabel)kvp.Key).LabelFor.Top += verticalIncrement;
+                                    ((DragableLabel)kvp.Key).LabelFor.Left += horizontalIncrement;
+                                }
+
+                                ConvertAndSaveControlPositionToField(kvp.Key);
+                                MovePrompt(kvp.Key, false);
                             }
-
-                            ConvertAndSaveControlPositionToField(kvp.Key);
-                            MovePrompt(kvp.Key, false);
                         }
-                    }
-                    else if (kvp.Key.Field is FieldWithoutSeparatePrompt)
-                    {
-                        if (childFields.Contains(kvp.Key.Field.Name) == false)
+                        else if (kvp.Key.Field is FieldWithoutSeparatePrompt)
                         {
-                            _fieldBefore = CloneField(kvp.Key.Field);
+                            if (childFields.Contains(kvp.Key.Field.Name) == false)
+                            {
+                                _fieldBefore = CloneField(kvp.Key.Field);
 
-                            ((Control)kvp.Key).Top += verticalIncrement;
-                            ((Control)kvp.Key).Left += horizontalIncrement;
+                                ((Control)kvp.Key).Top += verticalIncrement;
+                                ((Control)kvp.Key).Left += horizontalIncrement;
 
-                            ConvertAndSaveControlPositionToField(kvp.Key);
-                            MoveField(kvp.Key, false);
+                                ConvertAndSaveControlPositionToField(kvp.Key);
+                                MoveField(kvp.Key, false);
+                            }
                         }
                     }
                 }
+            }
+            catch(System.InvalidOperationException)
+            {
+                return;
             }
 
             SetZeeOrderOfGroups();
