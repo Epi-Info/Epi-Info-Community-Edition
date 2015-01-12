@@ -1148,9 +1148,13 @@ namespace Epi.Windows.Enter.PresentationLogic
         /// </summary>
         public void Quit()
         {
-            this.canvas.UnsubscribeControlEventHandlers();
-            this.mainForm.Close();
-            this.CloseFormEventHandler(this, new EventArgs());
+             //--for 2327
+            if (this.mainForm.IsRecordCloseable)
+            {
+                this.canvas.UnsubscribeControlEventHandlers();
+                this.mainForm.Close();
+                this.CloseFormEventHandler(this, new EventArgs());
+            }
         }
 
         /// <summary>
