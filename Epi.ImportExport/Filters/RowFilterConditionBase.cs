@@ -78,7 +78,7 @@ namespace Epi.ImportExport
         /// <summary>
         /// The operator to use between the column name and the parameter
         /// </summary>
-        public ImportExport.Filters.ConditionOperators ConditionOperator { get; protected set; }
+        public ImportExport.Filters.ConditionOperators ConditionOperator { get; set; }
 
         /// <summary>
         /// Gets/sets the parameter name
@@ -208,6 +208,8 @@ namespace Epi.ImportExport
                     return " <= ";
                 case Filters.ConditionOperators.NotEqualTo:
                     return " <> ";
+                case Filters.ConditionOperators.Contains:
+                    return " LIKE ";
                 default:
                     throw new InvalidOperationException("Invalid operator.");
             }
