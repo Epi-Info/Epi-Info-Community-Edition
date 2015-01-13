@@ -12,6 +12,7 @@ namespace Epi.ImportExport.Filters
         LessThan,
         LessThenOrEqualTo,
         GreaterThan,
-        GreaterThanOrEqualTo
+        GreaterThanOrEqualTo,
+        Contains
     }
 }
