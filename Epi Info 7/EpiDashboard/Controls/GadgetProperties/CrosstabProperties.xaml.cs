@@ -292,6 +292,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.TreatOutcomeAsContinuous = (bool)checkboxOutcomeContinuous.IsChecked;
             Parameters.SmartTable = (bool)checkboxSmartTable.IsChecked;
             Parameters.StrataSummaryOnly = (bool)checkboxStrataSummaryOnly.IsChecked;
+            Parameters.DisplayChiSq = (bool)checkboxDisplayChiSq.IsChecked;//EI-146
             Parameters.ShowPercents = (bool)checkboxRowColPercents.IsChecked;
             //Parameters.IncludeFullSummaryStatistics = false;
             Parameters.HorizontalDisplayMode = (bool)checkboxHorizontal.IsChecked;
@@ -369,6 +370,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxOutcomeContinuous.IsChecked = crosstabParameters.TreatOutcomeAsContinuous;
             checkboxSmartTable.IsChecked = crosstabParameters.SmartTable;
             checkboxStrataSummaryOnly.IsChecked = crosstabParameters.StrataSummaryOnly;
+            checkboxDisplayChiSq.IsChecked = crosstabParameters.DisplayChiSq; //EI-146
             checkboxRowColPercents.IsChecked = crosstabParameters.ShowPercents;
             checkboxHorizontal.IsChecked = crosstabParameters.HorizontalDisplayMode;
             txtMaxColumnLength.Text = crosstabParameters.MaxColumnNameLength;

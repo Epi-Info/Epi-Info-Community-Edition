@@ -27,6 +27,8 @@ namespace EpiDashboard
         public string Break3 { get; set; }
         public string Break4 { get; set; }
         public string Break5 { get; set; }
+
+        public bool DisplayChiSq { get; set; }
         
 
         //public FrequencyParametersBase fpbParameters { get; set; }
@@ -52,7 +54,8 @@ namespace EpiDashboard
             Break2 = "20";
             Break3 = "40";
             Break4 = "60";
-            Break5 = "80"; 
+            Break5 = "80";
+            DisplayChiSq = true; // EI-146
         }
 
         /// <summary>
@@ -86,6 +89,7 @@ namespace EpiDashboard
             Break3 = parameters.Break3;
             Break4 = parameters.Break4;
             Break5 = parameters.Break5;
+            DisplayChiSq = parameters.DisplayChiSq; //EI-146
         }
     }
 }
