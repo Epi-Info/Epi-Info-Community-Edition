@@ -135,6 +135,7 @@
                     <CheckBox x:Name="checkboxOutcomeContinuous" Style="{StaticResource PropertiesPanelCheckbox}" Content="Outcome is continuous" IsEnabled="True" />
                     <CheckBox x:Name="checkboxSmartTable" Style="{StaticResource PropertiesPanelCheckbox}" Content="Smart 2x2 table" IsEnabled="True" IsChecked="True" />
                     <CheckBox x:Name="checkboxStrataSummaryOnly" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show strata summary only" IsEnabled="True" IsChecked="False" />
+                    <CheckBox x:Name="checkboxDisplayChiSq" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display Chi-Square" IsEnabled="True" IsChecked="True" />
                     <CheckBox x:Name="checkboxRowColPercents" Style="{StaticResource PropertiesPanelCheckbox}" Content="Row / column percents"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="True" />
                     <CheckBox x:Name="checkboxHorizontal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Horizontal 2x2 summary"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="True" />
                     <TextBlock x:Name="tblockMaxColumnLength" HorizontalAlignment="Left" TextAlignment="Center" Text="Max column name length:" />

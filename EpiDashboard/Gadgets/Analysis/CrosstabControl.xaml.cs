@@ -34,14 +34,14 @@ namespace EpiDashboard
         #region Private Variables
         private RequestUpdateStatusDelegate requestUpdateStatus;
         private CheckForCancellationDelegate checkForCancellation;
-        private List<TextBlock> gridDisclaimerList;        
+        private List<TextBlock> gridDisclaimerList;
         private List<Grid> strataChiSquareGridList;
         private List<GadgetTwoByTwoPanel> strata2x2GridList;
         private List<StackPanel> groupList;
-        
+
         private List<GadgetStrataListPanel> strataListPanels;
         private GadgetStrataListPanel strataGroupPanel;
-        
+
         private bool columnWarningShown;
         private int rowCount = 1;
         private int columnCount = 1;
@@ -60,7 +60,7 @@ namespace EpiDashboard
         #endregion
 
         #region Delegates
-        
+
         private delegate void AddFreqGridDelegate(string strataVar, string value, string crosstabVar, string groupReference, DataTable table);
         private delegate void RenderFrequencyHeaderDelegate(string strataValue, string freqVar, DataColumnCollection columns);
         //private delegate void AddGridRowDelegate(string strataValue, int height);
@@ -138,8 +138,8 @@ namespace EpiDashboard
             }
 #endif
 
-            mnuSendToBack.Click += new RoutedEventHandler(mnuSendToBack_Click);            
-            mnuClose.Click += new RoutedEventHandler(mnuClose_Click);            
+            mnuSendToBack.Click += new RoutedEventHandler(mnuSendToBack_Click);
+            mnuClose.Click += new RoutedEventHandler(mnuClose_Click);
 
             //checkboxAllValues.Checked += new RoutedEventHandler(checkboxCheckChanged);
             //checkboxAllValues.Unchecked += new RoutedEventHandler(checkboxCheckChanged);
@@ -161,7 +161,7 @@ namespace EpiDashboard
 
             //checkboxStrataSummaryOnly.Checked += new RoutedEventHandler(checkboxStrataSummaryOnly_CheckChanged);
             //checkboxStrataSummaryOnly.Unchecked += new RoutedEventHandler(checkboxStrataSummaryOnly_CheckChanged);
-            
+
             columnWarningShown = false;
 
             this.IsProcessing = false;
@@ -347,7 +347,7 @@ namespace EpiDashboard
                         }
                     }
                     else if (control is StackPanel)
-                    {                        
+                    {
                         int columnNumber = Grid.GetColumn(control);
                         string value = (((control as StackPanel).Children[0]) as TextBlock).Text;
 
@@ -371,7 +371,7 @@ namespace EpiDashboard
                 sb.AppendLine(grid2x2.ExposureYesLabel + "\t" + grid2x2.YesYesValue + "\t" + grid2x2.YesNoValue + "\t" + grid2x2.TotalYesRow.Value.ToString());
                 sb.AppendLine(grid2x2.ExposureNoLabel + "\t" + grid2x2.NoYesValue + "\t" + grid2x2.NoNoValue + "\t" + grid2x2.TotalNoRow.Value.ToString());
                 sb.AppendLine("Total\t" + grid2x2.TotalYesCol.Value.ToString() + "\t" + grid2x2.TotalNoCol.Value.ToString() + "\t" + grid2x2.TotalValue.Value.ToString());
-                sb.AppendLine();                
+                sb.AppendLine();
 
                 sb.AppendLine("(Exposure = Rows; Outcome = Columns)");
 
@@ -420,7 +420,7 @@ namespace EpiDashboard
             StrataExpanderList.Clear();
 
             panelMain.Children.Clear();
-        }       
+        }
 
         /// <summary>
         /// Closes the gadget
@@ -501,12 +501,12 @@ namespace EpiDashboard
         //        LoadingCombos = false;
         //    }
         //}
-        
+
         //void cbxField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{
         //    CheckVariables();
         //}
-        #endregion        
+        #endregion
 
         #region Event Handlers
 
@@ -545,13 +545,13 @@ namespace EpiDashboard
                 {
                     string columnName = table.Columns[i].ToString();
 
-//                    if (YesValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfYes)))
+                    //                    if (YesValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfYes)))
                     if (YesValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(crosstabParameters.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(crosstabParameters.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfYes)))
-                    {                        
+                    {
                         for (int j = 0; j < 2; j++)
                         {
-                            remappedTable.Rows[j][1] = Convert.ToDouble(remappedTable.Rows[j][1]) + Convert.ToDouble(table.Rows[j][i]);                            
-                        }                        
+                            remappedTable.Rows[j][1] = Convert.ToDouble(remappedTable.Rows[j][1]) + Convert.ToDouble(table.Rows[j][i]);
+                        }
                     }
 
                     //if (NoValues.Contains(columnName) || ((DashboardHelper.IsColumnBoolean(GadgetOptions.CrosstabVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.CrosstabVariableName)) && columnName.Equals(Config.Settings.RepresentationOfNo)))
@@ -616,7 +616,7 @@ namespace EpiDashboard
 
                     //if (NoValues.Contains(value) || ( (DashboardHelper.IsColumnBoolean(GadgetOptions.MainVariableName) || DashboardHelper.IsColumnYesNo(GadgetOptions.MainVariableName)) && value.Equals(Config.Settings.RepresentationOfNo)))
                     if (NoValues.Contains(value) || ((DashboardHelper.IsColumnBoolean(crosstabParameters.ColumnNames[0]) || DashboardHelper.IsColumnYesNo(crosstabParameters.ColumnNames[0])) && value.Equals(Config.Settings.RepresentationOfNo)))
-                    {                        
+                    {
                         for (int i = 1; i < remappedTable.Columns.Count; i++)
                         {
                             remappedTable.Rows[1][i] = Convert.ToDouble(remappedTable.Rows[1][i]) + Convert.ToDouble(row[i]);
@@ -753,7 +753,7 @@ namespace EpiDashboard
                 //lists[2] = nyList;
                 //lists[3] = nnList;
 
-                Controls.StratifiedTableAnalysisPanel stap = new StratifiedTableAnalysisPanel();                
+                Controls.StratifiedTableAnalysisPanel stap = new StratifiedTableAnalysisPanel();
                 stap.YesYesList = yyList;
                 stap.YesNoList = ynList;
                 stap.NoYesList = nyList;
@@ -774,7 +774,7 @@ namespace EpiDashboard
 
         private void UpdateStrata2x2Statistics()
         {
-            foreach(UIElement element in panelMain.Children)
+            foreach (UIElement element in panelMain.Children)
             {
                 if (element is StratifiedTableAnalysisPanel)
                 {
@@ -829,7 +829,7 @@ namespace EpiDashboard
 
                 CrosstabParameters crosstabParameters = (CrosstabParameters)Parameters;
 
-                this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToProcessingState));     
+                this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToProcessingState));
                 this.Dispatcher.BeginInvoke(new SimpleCallback(ClearResults));
 
                 AddFreqGridDelegate addGrid = new AddFreqGridDelegate(AddFreqGrid);
@@ -932,10 +932,10 @@ namespace EpiDashboard
                     List<string> allGroupFields = DashboardHelper.GetAllGroupsAsList();
 
                     //if (GadgetOptions.MainVariableNames != null && GadgetOptions.MainVariableNames.Count > 0)
-                    if (crosstabParameters.ColumnNames[0] != null && crosstabParameters.ColumnNames.Count > 0 && 
+                    if (crosstabParameters.ColumnNames[0] != null && crosstabParameters.ColumnNames.Count > 0 &&
                         !(allGroupFields.Contains(crosstabParameters.ColumnNames[0])))
                     {
-                            Dictionary<DataTable, List<DescriptiveStatistics>> grpTables = new Dictionary<DataTable, List<DescriptiveStatistics>>();
+                        Dictionary<DataTable, List<DescriptiveStatistics>> grpTables = new Dictionary<DataTable, List<DescriptiveStatistics>>();
                         CrosstabParameters newOptions = new CrosstabParameters(crosstabParameters);
 
                         foreach (string mainVariableName in crosstabParameters.ColumnNames)
@@ -962,7 +962,7 @@ namespace EpiDashboard
                         //}
                         runGroup = true;
                     }
-//                  else if (allGroupFields.Contains(GadgetOptions.MainVariableName))
+                    //                  else if (allGroupFields.Contains(GadgetOptions.MainVariableName))
                     else if (allGroupFields.Contains(crosstabParameters.ColumnNames[0]))
                     {
                         Dictionary<DataTable, List<DescriptiveStatistics>> grpTables = new Dictionary<DataTable, List<DescriptiveStatistics>>();
@@ -972,7 +972,7 @@ namespace EpiDashboard
                         {
                             if (!allGroupFields.Contains(variableName) && DashboardHelper.TableColumnNames.ContainsKey(variableName))
                             {
-//                              GadgetParameters newOptions = new GadgetParameters(GadgetOptions);
+                                //                              GadgetParameters newOptions = new GadgetParameters(GadgetOptions);
                                 CrosstabParameters newOptions = new CrosstabParameters(crosstabParameters);
                                 //newOptions.MainVariableNames = null;
                                 //newOptions.MainVariableName = variableName;
@@ -991,7 +991,7 @@ namespace EpiDashboard
                     }
                     else
                     {
-//                      stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(GadgetOptions/*, freqVar, weightVar, stratas, crosstabVar, useAllPossibleValues, sortHighLow, includeMissing, false*/);
+                        //                      stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(GadgetOptions/*, freqVar, weightVar, stratas, crosstabVar, useAllPossibleValues, sortHighLow, includeMissing, false*/);
                         stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(crosstabParameters/*, freqVar, weightVar, stratas, crosstabVar, useAllPossibleValues, sortHighLow, includeMissing, false*/);
                         runGroup = false;
                     }
@@ -1017,7 +1017,7 @@ namespace EpiDashboard
 
                         foreach (KeyValuePair<DataTable, List<DescriptiveStatistics>> tableKvp in stratifiedFrequencyTables)
                         {
-                            CreateSmartTable(tableKvp.Key);                            
+                            CreateSmartTable(tableKvp.Key);
 
                             string strataValue = tableKvp.Key.TableName;
 
@@ -1049,7 +1049,7 @@ namespace EpiDashboard
                             if (frequencies.Rows.Count == 0)
                             {
                                 continue;
-                            }                            
+                            }
 
                             if (outcomeContinuous)
                             {
@@ -1087,8 +1087,8 @@ namespace EpiDashboard
                                         }
                                     }
                                 }
-                            }                            
-                            
+                            }
+
                             this.Dispatcher.BeginInvoke(addGrid, strataVar, frequencies.TableName, crosstabVar, frequencies.Columns[0].ToString(), frequencies);
                         }
 
@@ -1132,7 +1132,7 @@ namespace EpiDashboard
                             }
 
                             this.Dispatcher.BeginInvoke(renderHeader, strataValue, tableHeading, frequencies.Columns);
-                            
+
                             rowCount = 1;
 
                             int[] totals = new int[frequencies.Columns.Count - 1];
@@ -1183,7 +1183,7 @@ namespace EpiDashboard
 
                                     this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(displayValue, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Left, rowCount, 0, System.Windows.Visibility.Visible), FontWeights.Normal, count);
 
-                                    
+
                                     int rowTotal = 0;
                                     columnCount = 1;
 
@@ -1207,7 +1207,7 @@ namespace EpiDashboard
                                     }
                                     this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(rowTotal.ToString(), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, columnCount, System.Windows.Visibility.Visible), FontWeights.Bold, count);
                                     rowCount++;
-                                }                                
+                                }
                             }
 
                             double[] tableChiSq = Epi.Statistics.SingleMxN.CalcChiSq(SortedRows, false);
@@ -1223,7 +1223,7 @@ namespace EpiDashboard
                         }
                     }
 
-                    
+
                     this.Dispatcher.BeginInvoke(new SimpleCallback(RenderFinish));
                     this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
 
@@ -1232,7 +1232,7 @@ namespace EpiDashboard
                     {
                     }
 
-                    stratifiedFrequencyTables.Clear();                    
+                    stratifiedFrequencyTables.Clear();
                 }
                 catch (Exception ex)
                 {
@@ -1298,7 +1298,7 @@ namespace EpiDashboard
             //List<string> strataFieldNames = new List<string>();
 
             //weightFieldNames.Add(string.Empty);
-            
+
             //ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
             //fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
 
@@ -1392,7 +1392,7 @@ namespace EpiDashboard
 
             if (!inList)
             {
-                groupList.Add(groupPanel);                
+                groupList.Add(groupPanel);
             }
 
             int columnCount = table.Columns.Count;
@@ -1501,7 +1501,7 @@ namespace EpiDashboard
                 }
 
                 if (string.IsNullOrEmpty(strataVar) && crosstabParameters.StrataVariableNames.Count == 0)
-                {                    
+                {
                     crosstabPanel.Margin = (Thickness)this.Resources["genericElementMargin"];
                     crosstabPanel.Children.Add(twoByTwoPanel);
 
@@ -1542,10 +1542,10 @@ namespace EpiDashboard
                             strataListPanel = (element as GadgetStrataListPanel);
                             break;
                         }
-                    }                    
+                    }
 
                     if (!found)
-                    {                        
+                    {
                         strataListPanel.RowClicked += new StrataGridRowClickedHandler(strataListPanel_RowClicked);
                         strataListPanel.ExpandAllClicked += new StrataGridExpandAllClickedHandler(strataListPanel_ExpandAllClicked);
                         strataListPanel.SnapsToDevicePixels = true;
@@ -1583,7 +1583,7 @@ namespace EpiDashboard
                         sRow.RiskUpper = null;
                         sRow.OddsRatio = null;
                         sRow.OddsLower = null;
-                        sRow.OddsUpper = null;                        
+                        sRow.OddsUpper = null;
                         strataGroupPanel.AddRow(sRow);
                         strataGroupPanel.RowClicked += new StrataGridRowClickedHandler(strataGroupPanel_RowClicked);
                         strataGroupPanel.ExpandAllClicked += new StrataGridExpandAllClickedHandler(strataGroupPanel_ExpandAllClicked);
@@ -1611,7 +1611,7 @@ namespace EpiDashboard
                 }
 
                 strata2x2GridList.Add(twoByTwoPanel);
-                
+
                 return;
             }
             else if ((columnCount != 3 || table.Rows.Count != 2) && (isRunningGrouped2x2 == true))
@@ -1627,7 +1627,7 @@ namespace EpiDashboard
             chiSquaregrid.HorizontalAlignment = HorizontalAlignment.Center;
             chiSquaregrid.Margin = new Thickness(0, 5, 0, 10);
             chiSquaregrid.Visibility = System.Windows.Visibility.Collapsed;
-            
+
             chiSquaregrid.ColumnDefinitions.Add(new ColumnDefinition());
             chiSquaregrid.ColumnDefinitions.Add(new ColumnDefinition());
             chiSquaregrid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -1637,7 +1637,7 @@ namespace EpiDashboard
 
             Grid grid = new Grid();
             grid.Tag = value;
-            grid.Style = this.Resources["genericOutputGrid"] as Style;                        
+            grid.Style = this.Resources["genericOutputGrid"] as Style;
             grid.Visibility = System.Windows.Visibility.Collapsed;
             grid.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
 
@@ -1659,11 +1659,11 @@ namespace EpiDashboard
             sv.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth - 300;
             sv.Margin = (Thickness)this.Resources["expanderMargin"];
 
-            Grid gridOuter = new Grid();            
+            Grid gridOuter = new Grid();
             gridOuter.ColumnDefinitions.Add(new ColumnDefinition());
             gridOuter.ColumnDefinitions.Add(new ColumnDefinition());
             gridOuter.RowDefinitions.Add(new RowDefinition());
-            gridOuter.RowDefinitions.Add(new RowDefinition());            
+            gridOuter.RowDefinitions.Add(new RowDefinition());
 
             Grid.SetColumn(grid, 1);
             Grid.SetRow(grid, 1);
@@ -1678,7 +1678,7 @@ namespace EpiDashboard
             exposureCanvas.Width = 25;
             Binding canvasHeightBinding = new Binding("Height");
             canvasHeightBinding.Source = grid;
-            exposureCanvas.SetBinding(Grid.HeightProperty, canvasHeightBinding);            
+            exposureCanvas.SetBinding(Grid.HeightProperty, canvasHeightBinding);
 
             TextBlock tblock1 = new TextBlock();
 
@@ -1716,11 +1716,11 @@ namespace EpiDashboard
             //    double bottom = diff / 2;
             //    Canvas.SetBottom(tblock1, bottom);
             //}
-            
+
             tblock1.RenderTransform = rotate;
 
             exposureCanvas.Children.Add(tblock1);
-            
+
             //Grid.SetColumn(tblock1, 0);
             //Grid.SetRow(tblock1, 1);
             //gridOuter.Children.Add(tblock1);
@@ -1739,14 +1739,14 @@ namespace EpiDashboard
             Grid.SetRow(tblock2, 0);
             gridOuter.Children.Add(tblock2);
 
-            sv.Content = gridOuter;     
+            sv.Content = gridOuter;
 
             TextBlock txtDisclaimerLabel = new TextBlock();
             txtDisclaimerLabel.Text = string.Empty;
             txtDisclaimerLabel.Margin = new Thickness(2, 8, 2, 10);
             txtDisclaimerLabel.HorizontalAlignment = HorizontalAlignment.Center;
             txtDisclaimerLabel.Tag = value;
-            
+
             gridDisclaimerList.Add(txtDisclaimerLabel);
 
             crosstabPanel.Children.Add(sv);
@@ -1755,7 +1755,7 @@ namespace EpiDashboard
 
             //if (string.IsNullOrEmpty(strataVar) && GadgetOptions.StrataVariableNames.Count == 0)
             if (string.IsNullOrEmpty(strataVar) && crosstabParameters.StrataVariableNames.Count == 0)
-            {                
+            {
                 panelMain.Children.Add(crosstabPanel);
             }
             else
@@ -1774,8 +1774,8 @@ namespace EpiDashboard
         void strataGroupPanel_ExpandAllClicked()
         {
             foreach (StackPanel panel in this.groupList)
-            {                
-                panel.Visibility = System.Windows.Visibility.Visible;                
+            {
+                panel.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
@@ -1797,7 +1797,7 @@ namespace EpiDashboard
         void strataGroupPanel_NoStrata_ExpandAllClicked()
         {
             foreach (GadgetTwoByTwoPanel grid2x2 in this.strata2x2GridList)
-            {                
+            {
                 grid2x2.Visibility = System.Windows.Visibility.Visible;
                 FrameworkElement element = grid2x2.Parent as FrameworkElement;
                 element.Visibility = System.Windows.Visibility.Visible;
@@ -1825,7 +1825,7 @@ namespace EpiDashboard
 
         void strataListPanel_ExpandAllClicked()
         {
-            foreach (Expander expander in this.StrataExpanderList) 
+            foreach (Expander expander in this.StrataExpanderList)
             {
                 expander.IsExpanded = true;
                 expander.Visibility = System.Windows.Visibility.Visible;
@@ -1922,7 +1922,7 @@ namespace EpiDashboard
                 double break3 = 40;
                 double break4 = 60;
                 double break5 = 80;
-                
+
                 //double.TryParse(txtPct1.Text, out break1);
                 //double.TryParse(txtPct2.Text, out break2);
                 //double.TryParse(txtPct3.Text, out break3);
@@ -2190,7 +2190,7 @@ namespace EpiDashboard
                     textBlock = tblock;
                     break;
                 }
-            }           
+            }
 
             if (!string.IsNullOrEmpty(disclaimer) && !Double.IsNaN(tableChiSq))
             {
@@ -2201,6 +2201,11 @@ namespace EpiDashboard
             {
                 textBlock.Text = string.Empty;
                 textBlock.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            //EI-146
+            if (!((CrosstabParameters)Parameters).DisplayChiSq)
+            {
+                return;
             }
 
             Grid grid = GetStrataChiSquareGrid(value);
@@ -2349,11 +2354,11 @@ namespace EpiDashboard
             if (grid.Parent is Grid)
             {
                 Grid gridOuter = grid.Parent as Grid;
-                UIElement element = gridOuter.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == 0 && Grid.GetColumn(x) == 1);                
+                UIElement element = gridOuter.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == 0 && Grid.GetColumn(x) == 1);
 
                 if (element != null && element is TextBlock)
                 {
-                    double width = grid.ColumnDefinitions[0].ActualWidth;                    
+                    double width = grid.ColumnDefinitions[0].ActualWidth;
                     TextBlock tblockHeader = element as TextBlock;
                     tblockHeader.Margin = new Thickness(width, 0, 0, 0);
                 }
@@ -2389,7 +2394,7 @@ namespace EpiDashboard
                     {
                         StackPanel panel = rElement as StackPanel;
                         TextBlock tblockRowTotal = panel.Children[0] as TextBlock;
-                        rowTotal = double.Parse(tblockRowTotal.Text);                        
+                        rowTotal = double.Parse(tblockRowTotal.Text);
                     }
 
                     UIElement element = grid.Children.Cast<UIElement>().Last(x => Grid.GetRow(x) == rdCount && Grid.GetColumn(x) == cdCount);
@@ -2427,7 +2432,7 @@ namespace EpiDashboard
 
         protected override void RenderFinish()
         {
-            waitPanel.Visibility = System.Windows.Visibility.Collapsed; 
+            waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
             foreach (Grid freqGrid in StrataGridList)
             {
@@ -2483,130 +2488,130 @@ namespace EpiDashboard
 
         //private void CheckVariables()
         //{            
-            //lbxFieldStrata.IsEnabled = true;
-            //if (cbxExposureField.SelectedIndex >= 0)
-            //{
-            //    string exposureFieldName = cbxExposureField.SelectedItem.ToString();
+        //lbxFieldStrata.IsEnabled = true;
+        //if (cbxExposureField.SelectedIndex >= 0)
+        //{
+        //    string exposureFieldName = cbxExposureField.SelectedItem.ToString();
 
-            //    if (DashboardHelper.GetAllGroupsAsList().Contains(exposureFieldName))
-            //    {
-            //        lbxFieldStrata.IsEnabled = false;
-            //        lbxFieldStrata.SelectedItems.Clear();
+        //    if (DashboardHelper.GetAllGroupsAsList().Contains(exposureFieldName))
+        //    {
+        //        lbxFieldStrata.IsEnabled = false;
+        //        lbxFieldStrata.SelectedItems.Clear();
 
-            //        btnValueMappings.IsEnabled = true;
-            //    }
-            //    else if (DashboardHelper.IsColumnText(exposureFieldName) || DashboardHelper.IsColumnNumeric(exposureFieldName))
-            //    {
-            //        btnValueMappings.IsEnabled = true;
-            //    }
-                
-            //}
-            //else
-            //{
-            //    if (!LoadingCombos)
-            //    {
-            //        btnValueMappings.IsEnabled = false;
-            //        YesValues = new List<string>();
-            //        NoValues = new List<string>();
-            //    }
+        //        btnValueMappings.IsEnabled = true;
+        //    }
+        //    else if (DashboardHelper.IsColumnText(exposureFieldName) || DashboardHelper.IsColumnNumeric(exposureFieldName))
+        //    {
+        //        btnValueMappings.IsEnabled = true;
+        //    }
+
+        //}
+        //else
+        //{
+        //    if (!LoadingCombos)
+        //    {
+        //        btnValueMappings.IsEnabled = false;
+        //        YesValues = new List<string>();
+        //        NoValues = new List<string>();
+        //    }
         //    }
         //}
 
         //private void CreateInputVariableList()
         //{
-            //MOVED TO CROSSTAB PROPERTIES
-            //Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
+        //MOVED TO CROSSTAB PROPERTIES
+        //Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
 
-            //GadgetOptions.MainVariableName = string.Empty;
-            //GadgetOptions.WeightVariableName = string.Empty;
-            //GadgetOptions.StrataVariableNames = new List<string>();
-            //GadgetOptions.CrosstabVariableName = string.Empty;
+        //GadgetOptions.MainVariableName = string.Empty;
+        //GadgetOptions.WeightVariableName = string.Empty;
+        //GadgetOptions.StrataVariableNames = new List<string>();
+        //GadgetOptions.CrosstabVariableName = string.Empty;
 
-            //smartTable = (bool)checkboxSmartTable.IsChecked;
-            //showPercents = (bool)checkboxRowColPercents.IsChecked;
+        //smartTable = (bool)checkboxSmartTable.IsChecked;
+        //showPercents = (bool)checkboxRowColPercents.IsChecked;
 
-            //if (cbxExposureField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString()))
-            //{
-            //    inputVariableList.Add("freqvar", cbxExposureField.SelectedItem.ToString());
-            //    GadgetOptions.MainVariableName = cbxExposureField.SelectedItem.ToString();
-            //}
-            //else
-            //{
-            //    return;
-            //}
+        //if (cbxExposureField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString()))
+        //{
+        //    inputVariableList.Add("freqvar", cbxExposureField.SelectedItem.ToString());
+        //    GadgetOptions.MainVariableName = cbxExposureField.SelectedItem.ToString();
+        //}
+        //else
+        //{
+        //    return;
+        //}
 
-            //if (cbxOutcomeField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxOutcomeField.SelectedItem.ToString()))
-            //{
-            //    inputVariableList.Add("crosstabvar", cbxOutcomeField.SelectedItem.ToString());
-            //    GadgetOptions.CrosstabVariableName = cbxOutcomeField.SelectedItem.ToString();
-            //}
+        //if (cbxOutcomeField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxOutcomeField.SelectedItem.ToString()))
+        //{
+        //    inputVariableList.Add("crosstabvar", cbxOutcomeField.SelectedItem.ToString());
+        //    GadgetOptions.CrosstabVariableName = cbxOutcomeField.SelectedItem.ToString();
+        //}
 
-            //if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
-            //{
-            //    inputVariableList.Add("weightvar", cbxFieldWeight.SelectedItem.ToString());
-            //    GadgetOptions.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
-            //}
+        //if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
+        //{
+        //    inputVariableList.Add("weightvar", cbxFieldWeight.SelectedItem.ToString());
+        //    GadgetOptions.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
+        //}
 
-            //if (lbxFieldStrata.SelectedItems.Count > 0)
-            //{
-            //    GadgetOptions.StrataVariableNames = new List<string>();
-            //    foreach (string s in lbxFieldStrata.SelectedItems)
-            //    {
-            //        GadgetOptions.StrataVariableNames.Add(s);
-            //    }
-            //}
+        //if (lbxFieldStrata.SelectedItems.Count > 0)
+        //{
+        //    GadgetOptions.StrataVariableNames = new List<string>();
+        //    foreach (string s in lbxFieldStrata.SelectedItems)
+        //    {
+        //        GadgetOptions.StrataVariableNames.Add(s);
+        //    }
+        //}
 
-            //if (checkboxAllValues.IsChecked == true)
-            //{
-            //    inputVariableList.Add("allvalues", "true");
-            //    GadgetOptions.ShouldUseAllPossibleValues = true;
-            //}
-            //else
-            //{
-            //    inputVariableList.Add("allvalues", "false");
-            //    GadgetOptions.ShouldUseAllPossibleValues = false;
-            //}
+        //if (checkboxAllValues.IsChecked == true)
+        //{
+        //    inputVariableList.Add("allvalues", "true");
+        //    GadgetOptions.ShouldUseAllPossibleValues = true;
+        //}
+        //else
+        //{
+        //    inputVariableList.Add("allvalues", "false");
+        //    GadgetOptions.ShouldUseAllPossibleValues = false;
+        //}
 
-            //if (checkboxCommentLegalLabels.IsChecked == true)
-            //{
-            //    GadgetOptions.ShouldShowCommentLegalLabels = true;
-            //}
-            //else
-            //{
-            //    GadgetOptions.ShouldShowCommentLegalLabels = false;
-            //}
+        //if (checkboxCommentLegalLabels.IsChecked == true)
+        //{
+        //    GadgetOptions.ShouldShowCommentLegalLabels = true;
+        //}
+        //else
+        //{
+        //    GadgetOptions.ShouldShowCommentLegalLabels = false;
+        //}
 
-            //if (checkboxIncludeMissing.IsChecked == true)
-            //{
-            //    inputVariableList.Add("includemissing", "true");
-            //    GadgetOptions.ShouldIncludeMissing = true;
-            //}
-            //else
-            //{
-            //    inputVariableList.Add("includemissing", "false");
-            //    GadgetOptions.ShouldIncludeMissing = false;
-            //}
+        //if (checkboxIncludeMissing.IsChecked == true)
+        //{
+        //    inputVariableList.Add("includemissing", "true");
+        //    GadgetOptions.ShouldIncludeMissing = true;
+        //}
+        //else
+        //{
+        //    inputVariableList.Add("includemissing", "false");
+        //    GadgetOptions.ShouldIncludeMissing = false;
+        //}
 
-            //if (checkboxOutcomeContinuous.IsChecked == true)
-            //{
-            //    inputVariableList.Add("treatoutcomeascontinuous", "true");                
-            //}
-            //else
-            //{
-            //    inputVariableList.Add("treatoutcomeascontinuous", "false");                
-            //}
+        //if (checkboxOutcomeContinuous.IsChecked == true)
+        //{
+        //    inputVariableList.Add("treatoutcomeascontinuous", "true");                
+        //}
+        //else
+        //{
+        //    inputVariableList.Add("treatoutcomeascontinuous", "false");                
+        //}
 
-            //if (checkboxStrataSummaryOnly.IsChecked == true)
-            //{
-            //    inputVariableList.Add("stratasummaryonly", "true");
-            //}
-            //else
-            //{
-            //    inputVariableList.Add("stratasummaryonly", "false");
-            //}
+        //if (checkboxStrataSummaryOnly.IsChecked == true)
+        //{
+        //    inputVariableList.Add("stratasummaryonly", "true");
+        //}
+        //else
+        //{
+        //    inputVariableList.Add("stratasummaryonly", "false");
+        //}
 
-            //GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
-            //GadgetOptions.InputVariableList = inputVariableList;
+        //GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
+        //GadgetOptions.InputVariableList = inputVariableList;
         //}
         #endregion
 
@@ -2663,7 +2668,7 @@ namespace EpiDashboard
             }
 
             //BlueShades[BlueShades.Count-1] = (rctLowColor.Fill as SolidColorBrush);
-            BlueShades[BlueShades.Count-1] = (crosstabParameters.LoColorFill as SolidColorBrush);
+            BlueShades[BlueShades.Count - 1] = (crosstabParameters.LoColorFill as SolidColorBrush);
 
             ColorList = BlueShades;
 
@@ -2873,7 +2878,7 @@ namespace EpiDashboard
             //"<mainVariable>" + freqVar + "</mainVariable>" +
 
             XmlElement mainVarElement = doc.CreateElement("mainVariable");
-            if (crosstabParameters.ColumnNames.Count> 0 )
+            if (crosstabParameters.ColumnNames.Count > 0)
             {
                 if (!String.IsNullOrEmpty(crosstabParameters.ColumnNames[0].ToString()))
                 {
@@ -2886,8 +2891,8 @@ namespace EpiDashboard
             XmlElement crosstabVarElement = doc.CreateElement("crosstabVariable");
             if (!String.IsNullOrEmpty(crosstabParameters.CrosstabVariableName.ToString()))
             {
-                crosstabVarElement .InnerText = crosstabParameters.CrosstabVariableName.ToString();
-                element.AppendChild(crosstabVarElement );
+                crosstabVarElement.InnerText = crosstabParameters.CrosstabVariableName.ToString();
+                element.AppendChild(crosstabVarElement);
             }
 
             //if(GadgetOptions.StrataVariableNames.Count == 1) 
@@ -2911,7 +2916,7 @@ namespace EpiDashboard
             if (crosstabParameters.StrataVariableNames.Count == 1)
             {
                 StrataVariableNameElement.InnerText = crosstabParameters.StrataVariableNames[0].ToString();
-                element.AppendChild (StrataVariableNameElement );
+                element.AppendChild(StrataVariableNameElement);
             }
             else if (crosstabParameters.StrataVariableNames.Count > 1)
             {
@@ -2930,11 +2935,11 @@ namespace EpiDashboard
                     StrataVariableNamesElement.AppendChild(strataElement);
                 }
 
-                element.AppendChild(StrataVariableNamesElement); 
+                element.AppendChild(StrataVariableNamesElement);
             }
 
             //if (YesValues.Count > 0 && NoValues.Count > 0)
-            if (crosstabParameters.YesValues.Count > 0 && crosstabParameters.NoValues.Count > 0 )
+            if (crosstabParameters.YesValues.Count > 0 && crosstabParameters.NoValues.Count > 0)
             {
                 //xmlString = xmlString + "<valueRemappings>";
                 XmlElement valueRemapElement = doc.CreateElement("valueRemappings");
@@ -2949,7 +2954,7 @@ namespace EpiDashboard
                     XmlElement valueElement = doc.CreateElement("value");
                     valueElement.InnerText = s;
                     yesValuesElement.AppendChild(valueElement);
-                }                
+                }
                 valueRemapElement.AppendChild(yesValuesElement);
                 //xmlString = xmlString + "</yesValues>";
                 //xmlString = xmlString + "<noValues>";
@@ -2962,7 +2967,7 @@ namespace EpiDashboard
                     XmlElement valueElement = doc.CreateElement("value");
                     valueElement.InnerText = s;
                     noValuesElement.AppendChild(valueElement);
-                }                
+                }
                 //xmlString = xmlString + "</noValues>";
                 //xmlString = xmlString + "</valueRemappings>";
                 valueRemapElement.AppendChild(noValuesElement);
@@ -2977,7 +2982,7 @@ namespace EpiDashboard
                 element.AppendChild(weightVarElement);
             }
 
-                //"<maxColumns>" + MaxColumns.ToString() + "</maxColumns>" +
+            //"<maxColumns>" + MaxColumns.ToString() + "</maxColumns>" +
             //"<maxColumnNameLength>" + MaxColumnLength.ToString() + "</maxColumnNameLength>" +
             XmlElement maxColumnNameLengthElement = doc.CreateElement("maxColumnNameLength");
             if (!String.IsNullOrEmpty(crosstabParameters.MaxColumnNameLength.ToString()))
@@ -3019,6 +3024,13 @@ namespace EpiDashboard
             {
                 showStrataSummaryOnlyElement.InnerText = crosstabParameters.StrataSummaryOnly.ToString();
                 element.AppendChild(showStrataSummaryOnlyElement);
+            }
+            //EI-146
+            XmlElement displayChiSqElement = doc.CreateElement("displayChiSquare");
+            if (!String.IsNullOrEmpty(crosstabParameters.DisplayChiSq.ToString()))
+            {
+                displayChiSqElement.InnerText = crosstabParameters.DisplayChiSq.ToString();
+                element.AppendChild(displayChiSqElement);
             }
 
             //"<treatOutcomeAsContinuous>" + outcomeContinuous + "</treatOutcomeAsContinuous>" +
@@ -3217,7 +3229,7 @@ namespace EpiDashboard
                         {
                             if (((CrosstabParameters)Parameters).StrataVariableNames.Count == 0)
                             {
-                                ((CrosstabParameters)Parameters).StrataVariableNames.Add (child.InnerText.Replace("&lt;", "<"));
+                                ((CrosstabParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
                             }
                             else
                             {
@@ -3276,7 +3288,7 @@ namespace EpiDashboard
                         else
                         {
                             //checkboxCommentLegalLabels.IsChecked = false;
-                            ((CrosstabParameters)Parameters).ShowCommentLegalLabels = false; 
+                            ((CrosstabParameters)Parameters).ShowCommentLegalLabels = false;
                         }
                         break;
                     case "includemissing":
@@ -3289,7 +3301,7 @@ namespace EpiDashboard
                         {
                             //checkboxIncludeMissing.IsChecked = false;
                             ((CrosstabParameters)Parameters).IncludeMissing = false;
-                        }       
+                        }
                         break;
                     case "treatoutcomeascontinuous":
                         if (child.InnerText.ToLower().Equals("true"))
@@ -3323,6 +3335,17 @@ namespace EpiDashboard
                         {
                             //checkboxStrataSummaryOnly.IsChecked = false;
                             ((CrosstabParameters)Parameters).StrataSummaryOnly = false;
+                        }
+                        break;
+                    //EI-146
+                    case "displaychisquare":
+                        if (child.InnerText.ToLower().Equals("true"))
+                        {
+                            ((CrosstabParameters)Parameters).DisplayChiSq = true;
+                        }
+                        else
+                        {
+                            ((CrosstabParameters)Parameters).DisplayChiSq = false;
                         }
                         break;
                     case "rowcolpercents":
@@ -3378,7 +3401,7 @@ namespace EpiDashboard
                         {
                             //checkboxHorizontal.IsChecked = true;
                             ((CrosstabParameters)Parameters).HorizontalDisplayMode = true;
-                        }                        
+                        }
                         break;
                     case "showheatmap":
                         if (child.InnerText.ToLower().Equals("true"))
@@ -3524,7 +3547,7 @@ namespace EpiDashboard
             e.Handled = !ValidNumberChar(e.Text);
 
             base.OnPreviewTextInput(e);
-        }        
+        }
 
         private int MaxColumnLength
         {
@@ -3556,7 +3579,7 @@ namespace EpiDashboard
                 this.columnWarningShown = value;
             }
         }
-        
+
         /// <summary>
         /// Sets the gadget to its 'processing' state
         /// </summary>
@@ -3610,11 +3633,11 @@ namespace EpiDashboard
         {
             if (IsCollapsed) return string.Empty;
             CrosstabParameters crosstabParameters = (CrosstabParameters)Parameters;
-            
+
             StringWriter stringWriter = new StringWriter();
             //using (HTMTextWriter writer = new HTMTextWriter(stringWriter))
-            
-            using(HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
+
+            using (HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
             {
                 //StringBuilder htmlBuilder = new StringBuilder();
 
@@ -3644,7 +3667,7 @@ namespace EpiDashboard
                 writer.AddAttribute(HtmlTextWriterAttribute.Class, "gadgetOptions");
                 writer.RenderBeginTag(HtmlTextWriterTag.P);  //Begin (B) #1
                 writer.RenderBeginTag(HtmlTextWriterTag.Small);  //B 2
-                
+
                 //htmlBuilder.AppendLine("<em>Main variable:</em> <strong>" + cbxExposureField.Text + "</strong>");
                 writer.RenderBeginTag(HtmlTextWriterTag.Em);  //B 3
                 writer.Write("Main variable:");
@@ -3755,7 +3778,7 @@ namespace EpiDashboard
                     writer.RenderEndTag();
 
                     //htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-                    writer.AddAttribute(HtmlTextWriterAttribute.Align, "left");  
+                    writer.AddAttribute(HtmlTextWriterAttribute.Align, "left");
                     writer.AddAttribute(HtmlTextWriterAttribute.Border, "0");
                     writer.AddAttribute(HtmlTextWriterAttribute.Cellpadding, "0");
                     writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, "0");
@@ -3772,7 +3795,7 @@ namespace EpiDashboard
                     {
                         string value = string.Empty;
                         int rowNumber = -1;
-                        int columnNumber = -1;                    
+                        int columnNumber = -1;
 
                         if (control is TextBlock || control is StackPanel || control is Rectangle)
                         {
@@ -3839,7 +3862,7 @@ namespace EpiDashboard
                                 writer.AddAttribute(HtmlTextWriterAttribute.Class, "total");
                                 writer.RenderBeginTag(HtmlTextWriterTag.Span);
                                 writer.Write(value);
-                                writer.RenderEndTag();
+                                writer.RenderEndTag(); 
                             }
 
                             //htmlBuilder.AppendLine(tableDataTagOpen + formattedValue + tableDataTagClose);
