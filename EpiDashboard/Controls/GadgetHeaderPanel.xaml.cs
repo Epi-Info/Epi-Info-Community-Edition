@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EpiDashboard.Gadgets.Charting;
 
 namespace EpiDashboard.Controls
 {
@@ -125,7 +126,7 @@ namespace EpiDashboard.Controls
             if (GadgetConfigButtonClicked != null)
             {
                 GadgetConfigButtonClicked();
-            }  
+            }
         }
 
         private void PathCollapse_MouseEnter(object sender, MouseEventArgs e)
@@ -192,14 +193,48 @@ namespace EpiDashboard.Controls
             this.Cursor = Cursors.Arrow;
         }
 
+        /// <summary>
+        /// Handles the MouseLeftButtonUp event of the PathX control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs" /> instance containing the event data.</param>
         private void PathX_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (GadgetCloseButtonClicked != null)
+            //EI-39
+            MessageBoxResult result = MessageBoxResult.Yes;
+            
+            if (IsGadget())
+            {
+                result = MessageBox.Show("Are you sure you want to remove/close this gadget from your canvas?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            }
+
+            if (GadgetCloseButtonClicked != null && result == MessageBoxResult.Yes)
             {
                 GadgetCloseButtonClicked();
             }
         }
-        
+
+        //EI-39
+        /// <summary>
+        /// Determines if current control is gadget or not.
+        /// </summary>
+        /// <returns></returns>
+        private bool IsGadget() 
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(this);
+            while (!(parent is GadgetBase || parent is ChartGadgetBase))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+
+            if (parent is ChartGadgetBase)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public bool IsCloseButtonAvailable
         {
             get
