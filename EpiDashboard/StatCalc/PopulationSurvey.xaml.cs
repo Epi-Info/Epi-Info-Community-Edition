@@ -46,6 +46,13 @@ namespace EpiDashboard.StatCalc
             txtConfidenceLimits.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtDesignEffect.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNumberOfClusters.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
+			//EI-14
+            txtPopulationSize.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtExpectedFreq.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtConfidenceLimits.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtDesignEffect.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNumberOfClusters.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+
             imgClose.MouseEnter += new MouseEventHandler(imgClose_MouseEnter);
             imgClose.MouseLeave += new MouseEventHandler(imgClose_MouseLeave);
             imgClose.MouseDown += new MouseButtonEventHandler(imgClose_MouseDown);
@@ -121,6 +128,25 @@ namespace EpiDashboard.StatCalc
                     ttxt9999.Text = (clusters * res[6]).ToString();
                 }
             }
+        }
+		//EI-14
+        protected virtual void txtInput_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            bool isNumPadNumeric = (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) || e.Key == Key.Decimal;
+            bool isNumeric = (e.Key >= Key.D0 && e.Key <= Key.D9) || e.Key == Key.OemPeriod;
+
+            if (System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
+            {
+                isNumeric = (e.Key >= Key.D0 && e.Key <= Key.D9) || e.Key == Key.OemComma;
+            }
+
+            if ((isNumeric || isNumPadNumeric) && Keyboard.Modifiers != ModifierKeys.None)
+            {
+                e.Handled = true;
+                return;
+            }
+            bool isControl = ((Keyboard.Modifiers != ModifierKeys.None && Keyboard.Modifiers != ModifierKeys.Shift) || e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right || e.Key == Key.Up || e.Key == Key.Tab || e.Key == Key.PageDown || e.Key == Key.PageUp || e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Escape || e.Key == Key.Home || e.Key == Key.End);
+            e.Handled = !isControl && !isNumeric && !isNumPadNumeric;
         }
 
         #region IGadget Members

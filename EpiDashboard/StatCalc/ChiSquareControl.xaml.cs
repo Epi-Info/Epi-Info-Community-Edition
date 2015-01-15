@@ -118,6 +118,7 @@ namespace EpiDashboard.StatCalc
             txtScore.FontFamily = new FontFamily("Microsoft Sans Serif");
             txtScore.FontSize = 20;
             txtScore.TextChanged += new TextChangedEventHandler(txtInput_TextChanged);
+            txtScore.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
             Grid.SetColumn(txtScore, 0);
             Grid.SetRow(txtScore, grdMain.RowDefinitions.Count);
 
@@ -130,6 +131,7 @@ namespace EpiDashboard.StatCalc
             txtCases.FontFamily = new FontFamily("Microsoft Sans Serif");
             txtCases.FontSize = 20;
             txtCases.TextChanged += new TextChangedEventHandler(txtInput_TextChanged);
+            txtCases.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
             Grid.SetColumn(txtCases, 1);
             Grid.SetRow(txtCases, grdMain.RowDefinitions.Count);
 
@@ -142,6 +144,7 @@ namespace EpiDashboard.StatCalc
             txtControls.FontFamily = new FontFamily("Microsoft Sans Serif");
             txtControls.FontSize = 20;
             txtControls.TextChanged += new TextChangedEventHandler(txtInput_TextChanged);
+            txtControls.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
             Grid.SetColumn(txtControls, 2);
             Grid.SetRow(txtControls, grdMain.RowDefinitions.Count);
 
@@ -207,6 +210,25 @@ namespace EpiDashboard.StatCalc
                 txtChiSquare.Text = "...";
                 txtPValue.Text = "...";
             }
+        }
+		//EI-14
+        protected virtual void txtInput_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            bool isNumPadNumeric = (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) || e.Key == Key.Decimal;
+            bool isNumeric = (e.Key >= Key.D0 && e.Key <= Key.D9) || e.Key == Key.OemPeriod;
+
+            if (System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
+            {
+                isNumeric = (e.Key >= Key.D0 && e.Key <= Key.D9) || e.Key == Key.OemComma;
+            }
+
+            if ((isNumeric || isNumPadNumeric) && Keyboard.Modifiers != ModifierKeys.None)
+            {
+                e.Handled = true;
+                return;
+            }
+            bool isControl = ((Keyboard.Modifiers != ModifierKeys.None && Keyboard.Modifiers != ModifierKeys.Shift) || e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right || e.Key == Key.Up || e.Key == Key.Tab || e.Key == Key.PageDown || e.Key == Key.PageUp || e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Escape || e.Key == Key.Home || e.Key == Key.End);
+            e.Handled = !isControl && !isNumeric && !isNumPadNumeric;
         }
 
         void imgClose_MouseDown(object sender, MouseButtonEventArgs e)

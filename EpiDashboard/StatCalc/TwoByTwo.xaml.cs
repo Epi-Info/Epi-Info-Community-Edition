@@ -76,54 +76,99 @@ namespace EpiDashboard.StatCalc
             txtYesNoVal1.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoYesVal1.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoNoVal1.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
+			//EI-14
+            txtYesYesVal1.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtYesNoVal1.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoYesVal1.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoNoVal1.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
 
             txtExposure2.RenderTransform = rotate;
             txtYesYesVal2.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtYesNoVal2.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoYesVal2.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoNoVal2.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
+			//EI-14
+            txtYesYesVal2.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtYesNoVal2.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoYesVal2.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoNoVal2.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
 
             txtExposure3.RenderTransform = rotate;
             txtYesYesVal3.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtYesNoVal3.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoYesVal3.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoNoVal3.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
+			//EI-14
+            txtYesYesVal3.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtYesNoVal3.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoYesVal3.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoNoVal3.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
 
             txtExposure4.RenderTransform = rotate;
             txtYesYesVal4.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtYesNoVal4.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoYesVal4.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoNoVal4.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
+			//EI-14
+            txtYesYesVal4.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtYesNoVal4.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoYesVal4.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoNoVal4.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
 
             txtExposure5.RenderTransform = rotate;
             txtYesYesVal5.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtYesNoVal5.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoYesVal5.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoNoVal5.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
+			//EI-14
+            txtYesYesVal5.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtYesNoVal5.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoYesVal5.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoNoVal5.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
 
             txtExposure6.RenderTransform = rotate;
             txtYesYesVal6.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtYesNoVal6.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoYesVal6.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoNoVal6.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
+			//EI-14
+            txtYesYesVal6.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtYesNoVal6.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoYesVal6.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoNoVal6.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
 
             txtExposure7.RenderTransform = rotate;
             txtYesYesVal7.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtYesNoVal7.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoYesVal7.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoNoVal7.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
+			//EI-14
+            txtYesYesVal7.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtYesNoVal7.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoYesVal7.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoNoVal7.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
 
             txtExposure8.RenderTransform = rotate;
             txtYesYesVal8.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtYesNoVal8.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoYesVal8.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoNoVal8.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
+			//EI-14
+            txtYesYesVal8.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtYesNoVal8.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoYesVal8.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoNoVal8.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
 
             txtExposure9.RenderTransform = rotate;
             txtYesYesVal9.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtYesNoVal9.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoYesVal9.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
             txtNoNoVal9.TextChanged += new TextChangedEventHandler(txtInputs_TextChanged);
+			//EI-14
+            txtYesYesVal9.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtYesNoVal9.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoYesVal9.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
+            txtNoNoVal9.PreviewKeyDown += new KeyEventHandler(txtInput_PreviewKeyDown);
 
             imgClose.MouseEnter += new MouseEventHandler(imgClose_MouseEnter);
             imgClose.MouseLeave += new MouseEventHandler(imgClose_MouseLeave);
@@ -418,6 +463,25 @@ namespace EpiDashboard.StatCalc
             int strata = int.Parse(((FrameworkElement)sender).Name.Substring(((FrameworkElement)sender).Name.Length - 1));
             CalculateStrata(strata);
             CalculateSummary();
+        }
+			//EI-14
+        protected virtual void txtInput_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            bool isNumPadNumeric = (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) || e.Key == Key.Decimal;
+            bool isNumeric = (e.Key >= Key.D0 && e.Key <= Key.D9) || e.Key == Key.OemPeriod;
+
+            if (System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
+            {
+                isNumeric = (e.Key >= Key.D0 && e.Key <= Key.D9) || e.Key == Key.OemComma;
+            }
+
+            if ((isNumeric || isNumPadNumeric) && Keyboard.Modifiers != ModifierKeys.None)
+            {
+                e.Handled = true;
+                return;
+            }
+            bool isControl = ((Keyboard.Modifiers != ModifierKeys.None && Keyboard.Modifiers != ModifierKeys.Shift) || e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right || e.Key == Key.Up || e.Key == Key.Tab || e.Key == Key.PageDown || e.Key == Key.PageUp || e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Escape || e.Key == Key.Home || e.Key == Key.End);
+            e.Handled = !isControl && !isNumeric && !isNumPadNumeric;
         }
 
         private void CalculateSummary()
