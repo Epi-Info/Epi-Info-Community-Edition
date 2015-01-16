@@ -819,7 +819,7 @@ namespace EpiDashboard
 
             this.messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             this.infoPanel.Visibility = System.Windows.Visibility.Collapsed;
-            descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
+            //descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed; //EI-24
         }
 
         /// <summary>

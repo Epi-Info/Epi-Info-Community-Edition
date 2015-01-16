@@ -420,7 +420,7 @@ namespace EpiDashboard
             panelMain.Visibility = System.Windows.Visibility.Collapsed;
             this.messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             this.infoPanel.Visibility = System.Windows.Visibility.Collapsed;
-            descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
+            //descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed; //EI-24
             IsCollapsed = true;
         }
 

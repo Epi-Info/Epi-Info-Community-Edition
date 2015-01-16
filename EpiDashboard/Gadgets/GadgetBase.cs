@@ -276,14 +276,14 @@ namespace EpiDashboard
                 Controls.GadgetMessagePanel messagePanel = element as Controls.GadgetMessagePanel;
                 messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             }
-            
-            element = this.FindName("descriptionPanel");
+            //EI-24
+            //element = this.FindName("descriptionPanel");
 
-            if (element is Controls.GadgetDescriptionPanel)
-            {
-                Controls.GadgetDescriptionPanel descriptionPanel = element as Controls.GadgetDescriptionPanel;
-                descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
-            }
+            //if (element is Controls.GadgetDescriptionPanel)
+            //{
+            //    Controls.GadgetDescriptionPanel descriptionPanel = element as Controls.GadgetDescriptionPanel;
+            //    descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
+            //}
             IsCollapsed = true;
         }
 
