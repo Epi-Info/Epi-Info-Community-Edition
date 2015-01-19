@@ -80,6 +80,7 @@ namespace EpiDashboard.Controls.Charting
             }
 
             xyChart.Legend.FontSize = Settings.LegendFontSize;
+            tblockXAxisLabel.Text = this.Parameters.MainVariableName;
         }
 
         protected override void SetChartData(List<XYColumnChartData> dataList)

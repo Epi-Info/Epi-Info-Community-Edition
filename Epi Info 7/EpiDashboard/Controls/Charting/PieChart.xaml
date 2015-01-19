@@ -46,7 +46,7 @@
             </TextBlock>
         </Canvas>
 
-        <TextBlock x:Name="tblockXAxisLabel" FontWeight="DemiBold" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0, 0, 0, 6" Visibility="Collapsed" />
+        <TextBlock x:Name="tblockXAxisLabel" FontWeight="DemiBold" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0, 0, 0, 6" Visibility="Visible" />
 
         <charting:PieChart Margin="1" x:Name="xyChart" XPath="S" Grid.Row="1" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated" AnimationCompleted="xyChart_AnimationCompleted" Background="White">
             <charting:PieSeries x:Name="series0" Id="S0" YPath="Y" ShowPointAnnotations="True">
