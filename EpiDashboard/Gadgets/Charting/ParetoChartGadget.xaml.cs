@@ -29,6 +29,23 @@ namespace EpiDashboard.Gadgets.Charting
     /// </summary>
     public partial class ParetoChartGadget : GadgetBase
     {
+        private string customOutputHeading;
+        /// <summary>
+        /// Gets/sets the gadget's custom output heading
+        /// </summary>
+        public override string CustomOutputHeading
+        {
+            get
+            {
+                return this.customOutputHeading;
+            }
+            set
+            {
+                this.customOutputHeading = value;
+                headerPanel.Text = CustomOutputHeading;
+            }
+        }
+
         public ParetoChartGadget()
         {
             InitializeComponent();

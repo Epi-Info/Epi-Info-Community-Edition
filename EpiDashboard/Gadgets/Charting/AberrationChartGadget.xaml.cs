@@ -70,6 +70,22 @@ namespace EpiDashboard.Gadgets.Charting
         //}
         #endregion // Classes
 
+        private string customOutputHeading;
+        /// <summary>
+        /// Gets/sets the gadget's custom output heading
+        /// </summary>
+        public override string CustomOutputHeading
+        {
+            get
+            {
+                return this.customOutputHeading;
+            }
+            set
+            {
+                this.customOutputHeading = value;
+                headerPanel.Text = CustomOutputHeading;
+            }
+        }
         private bool IsDropDownList { get; set; }
         private bool IsCommentLegal { get; set; }
         private bool IsRecoded { get; set; }

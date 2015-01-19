@@ -575,7 +575,7 @@ namespace EpiDashboard.Gadgets.Charting
                         case "customheading":
                             if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                             {
-                                this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<"); ;
+                                this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<");
                             }
                             break;
                         case "customdescription":
@@ -1034,6 +1034,23 @@ namespace EpiDashboard.Gadgets.Charting
             }
 
             return sb.ToString();
+        }
+
+        private string customOutputHeading;
+        /// <summary>
+        /// Gets/sets the gadget's custom output heading
+        /// </summary>
+        public override string CustomOutputHeading
+        {
+            get
+            {
+                return this.customOutputHeading;
+            }
+            set
+            {
+                this.customOutputHeading = value;
+                headerPanel.Text = CustomOutputHeading;
+            }
         }
     }
 }
