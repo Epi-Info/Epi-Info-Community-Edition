@@ -37,6 +37,23 @@ namespace EpiDashboard.Gadgets.Charting
         private bool IsRecoded { get; set; }
         private bool IsOptionField { get; set; }
 
+        private string customOutputHeading;
+        /// <summary>
+        /// Gets/sets the gadget's custom output heading
+        /// </summary>
+        public override string CustomOutputHeading
+        {
+            get
+            {
+                return this.customOutputHeading;
+            }
+            set
+            {
+                this.customOutputHeading = value;
+                headerPanel.Text = CustomOutputHeading;
+            }
+        }
+
         public LineChartGadget()
         {
             InitializeComponent();

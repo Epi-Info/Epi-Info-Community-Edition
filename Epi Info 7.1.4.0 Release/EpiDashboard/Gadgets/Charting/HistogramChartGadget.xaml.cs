@@ -46,6 +46,23 @@ namespace EpiDashboard.Gadgets.Charting
             FillComboboxes();
         }
 
+        private string customOutputHeading;
+        /// <summary>
+        /// Gets/sets the gadget's custom output heading
+        /// </summary>
+        public override string CustomOutputHeading
+        {
+            get
+            {
+                return this.customOutputHeading;
+            }
+            set
+            {
+                this.customOutputHeading = value;
+                headerPanel.Text = CustomOutputHeading;
+            }
+        }
+
         DateTime? StartDate { get; set; }
         DateTime? EndDate { get; set; }
         System.Drawing.Font AxisLabelFont { get; set; }

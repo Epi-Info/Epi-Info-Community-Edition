@@ -56,6 +56,23 @@ namespace EpiDashboard.Gadgets.Charting
             RefreshResults();
         }
 
+        private string customOutputHeading;
+        /// <summary>
+        /// Gets/sets the gadget's custom output heading
+        /// </summary>
+        public override string CustomOutputHeading
+        {
+            get
+            {
+                return this.customOutputHeading;
+            }
+            set
+            {
+                this.customOutputHeading = value;
+                headerPanel.Text = CustomOutputHeading;
+            }
+        }
+
         private void FillComboboxes(bool update = false)
         {
             LoadingCombos = true;
