@@ -98,12 +98,15 @@ namespace EpiDashboard
         public bool ShowGridLines { get; set; }
 
         public string XAxisLabel { get; set; }
+        public double XAxisLabelFontSize { get; set; }//EI-98
+        public double XAxisFontSize { get; set; }//EI-98
         public int XAxisLabelType { get; set; }
         public int XAxisAngle { get; set; }
 
         public string YAxisFormat { get; set; }
         public string YAxisLabel { get; set; }
-
+        public double YAxisLabelFontSize { get; set; }//EI-98
+        public double YAxisFontSize { get; set; }//EI-98
         public string Y2AxisFormat { get; set; }
         public string Y2AxisLabel { get; set; }
         public string Y2AxisLegendTitle { get; set; }

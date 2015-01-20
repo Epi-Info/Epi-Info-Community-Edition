@@ -1788,11 +1788,29 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to X-Axis font size must be between 5 and 100..
+        /// </summary>
+        public static string PROPERTIES_XAXIS_FONT_SIZE_INVALID {
+            get {
+                return ResourceManager.GetString("PROPERTIES_XAXIS_FONT_SIZE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Second y-axis variable must be selected for this y-axis type..
         /// </summary>
         public static string PROPERTIES_Y2_AXIS_VARIABLE_REQ {
             get {
                 return ResourceManager.GetString("PROPERTIES_Y2_AXIS_VARIABLE_REQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Y-Axis font size must be between 5 and 100..
+        /// </summary>
+        public static string PROPERTIES_YAXIS_FONT_SIZE_INVALID {
+            get {
+                return ResourceManager.GetString("PROPERTIES_YAXIS_FONT_SIZE_INVALID", resourceCulture);
             }
         }
         

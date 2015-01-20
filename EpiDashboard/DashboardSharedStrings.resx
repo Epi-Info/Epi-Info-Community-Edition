@@ -862,4 +862,10 @@ of records or select fewer fields for the group.</value>
   <data name="PROPERTIES_LEGEND_FONT_SIZE_INVALID" xml:space="preserve">
     <value>Legend font size must be between 5 and 100.</value>
   </data>
+  <data name="PROPERTIES_XAXIS_FONT_SIZE_INVALID" xml:space="preserve">
+    <value>X-Axis font size must be between 5 and 100.</value>
+  </data>
+  <data name="PROPERTIES_YAXIS_FONT_SIZE_INVALID" xml:space="preserve">
+    <value>Y-Axis font size must be between 5 and 100.</value>
+  </data>
 </root>
