@@ -27,9 +27,9 @@ namespace EpiDashboard.Controls.GadgetProperties
     public partial class HistogramChartProperties : GadgetPropertiesPanelBase
     {
         public HistogramChartProperties(
-            DashboardHelper dashboardHelper, 
-            IGadget gadget, 
-            HistogramChartParameters parameters, 
+            DashboardHelper dashboardHelper,
+            IGadget gadget,
+            HistogramChartParameters parameters,
             List<Grid> strataGridList
             )
         {
@@ -42,7 +42,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             List<string> fields = new List<string>();
             List<string> weightFields = new List<string>();
             List<string> strataItems = new List<string>();
-            
+
             //Variable fields
             fields.Add(String.Empty);
             //ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
@@ -110,7 +110,13 @@ namespace EpiDashboard.Controls.GadgetProperties
             cmbInterval.Text = "Day";
             txtXAxisAngle.Text = "-45";
             txtLegendFontSize.Text = "12";
-            
+			//EI-98
+            txtXAxisFontSize.Text = parameters.XAxisFontSize.ToString();
+            txtYAxisFontSize.Text = parameters.YAxisFontSize.ToString();
+
+            txtXAxisLabelFontSize.Text = parameters.XAxisLabelFontSize.ToString();
+            txtYAxisLabelFontSize.Text = parameters.YAxisLabelFontSize.ToString();
+
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cmbField.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
             view.GroupDescriptions.Add(groupDescription);
@@ -139,28 +145,39 @@ namespace EpiDashboard.Controls.GadgetProperties
                 isValid = false;
                 MessageBox.Show(DashboardSharedStrings.PROPERTIES_MAIN_VARIABLE_REQ);
             }
-            else if ((cmbSecondYAxis.SelectedIndex == 1 || cmbSecondYAxis.SelectedIndex == 2) && (cmbSecondYAxisVariable.SelectedIndex == -1 || cmbSecondYAxisVariable.SelectedItem.ToString() == String.Empty ))
+            else if ((cmbSecondYAxis.SelectedIndex == 1 || cmbSecondYAxis.SelectedIndex == 2) && (cmbSecondYAxisVariable.SelectedIndex == -1 || cmbSecondYAxisVariable.SelectedItem.ToString() == String.Empty))
             {
                 isValid = false;
                 MessageBox.Show(DashboardSharedStrings.PROPERTIES_Y2_AXIS_VARIABLE_REQ);
             }
-            if (String.IsNullOrEmpty(txtLegendFontSize.Text))
+            //EI-98
+            ValidateFontSize(txtLegendFontSize, DashboardSharedStrings.PROPERTIES_LEGEND_FONT_SIZE_INVALID, out isValid);
+            ValidateFontSize(txtYAxisFontSize, DashboardSharedStrings.PROPERTIES_YAXIS_FONT_SIZE_INVALID, out isValid);
+            ValidateFontSize(txtXAxisFontSize, DashboardSharedStrings.PROPERTIES_XAXIS_FONT_SIZE_INVALID, out isValid);
+            
+
+            return isValid;
+        }
+
+//EI-98
+        private void ValidateFontSize(TextBox txtFontSize, string errorMessage, out bool isValid)
+        {
+            if (String.IsNullOrEmpty(txtFontSize.Text))
             {
-                txtLegendFontSize.Text = "12";
+                txtYAxisFontSize.Text = "12";
             }
             else
             {
                 double thisSize = 0;
-                double.TryParse(txtLegendFontSize.Text, out thisSize);
+                double.TryParse(txtYAxisFontSize.Text, out thisSize);
                 if (thisSize < 5 || thisSize > 100)
                 {
                     isValid = false;
-                    MessageBox.Show(DashboardSharedStrings.PROPERTIES_LEGEND_FONT_SIZE_INVALID);
+                    MessageBox.Show(errorMessage);
+                    return;
                 }
             }
-
-
-            return isValid;
+            isValid = true;
         }
 
         private void FillComboboxes(bool update = false)
@@ -482,7 +499,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                     Parameters.Interval = "minute";
                     break;
                 case 1:
-                    Parameters.Interval =  "hour";
+                    Parameters.Interval = "hour";
                     break;
                 case 2:
                     Parameters.Interval = "day";
@@ -503,13 +520,13 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             //GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
             Parameters.IncludeFullSummaryStatistics = false;
-            
+
             //GadgetOptions.InputVariableList = inputVariableList;
 
             Parameters.SortHighToLow = (bool)checkboxSortHighLow.IsChecked;
 
             //Display settings ///////////////////////////////////////////
-            
+
             Parameters.GadgetTitle = txtTitle.Text;
             Parameters.GadgetDescription = txtDesc.Text;
             Parameters.ChartWidth = double.Parse(txtWidth.Text);
@@ -716,6 +733,26 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (!String.IsNullOrEmpty(txtLegendFontSize.Text))
             {
                 Parameters.LegendFontSize = double.Parse(txtLegendFontSize.Text);
+            }
+			//EI-98
+            if (!String.IsNullOrEmpty(txtYAxisFontSize.Text))
+            {
+                Parameters.YAxisFontSize = double.Parse(txtYAxisFontSize.Text);
+            }
+
+            if (!String.IsNullOrEmpty(txtXAxisFontSize.Text))
+            {
+                Parameters.XAxisFontSize = double.Parse(txtXAxisFontSize.Text);
+            }
+
+            if (!String.IsNullOrEmpty(txtYAxisLabelFontSize.Text))
+            {
+                Parameters.YAxisLabelFontSize = double.Parse(txtYAxisLabelFontSize.Text);
+            }
+
+            if (!String.IsNullOrEmpty(txtXAxisLabelFontSize.Text))
+            {
+                Parameters.XAxisLabelFontSize = double.Parse(txtXAxisLabelFontSize.Text);
             }
 
             if (cmbLegendDock.SelectedIndex >= 0)
@@ -940,7 +977,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             txtToValue.Text = Parameters.YAxisTo.ToString();
             txtFromValue.Text = Parameters.YAxisFrom.ToString();
             txtStepValue.Text = Parameters.YAxisStep.ToString();
-            
+
             switch (Parameters.Y2LineKind)
             {
                 case LineKind.Auto:
@@ -1096,7 +1133,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (!isCommentLegal && !isOptionField)
             {
                 checkboxCommentLegalLabels.IsChecked = isCommentLegal;
-            }   
+            }
         }
 
 
@@ -1470,7 +1507,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             double.TryParse(txtWidth.Text, out thisWidth);
             if (thisWidth > System.Windows.SystemParameters.PrimaryScreenWidth * 2)
             {
-                txtWidth.Text = (System.Windows.SystemParameters.PrimaryScreenWidth * 2 ).ToString();
+                txtWidth.Text = (System.Windows.SystemParameters.PrimaryScreenWidth * 2).ToString();
             }
         }
 
@@ -1496,7 +1533,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 if (cmbXAxisLabelType.SelectedIndex == 1)
                 {
                     Field f = DashboardHelper.GetAssociatedField(cmbField.Text);
-                    if(f != null && f is IDataField) 
+                    if (f != null && f is IDataField)
                     {
                         Epi.Fields.IDataField dataField = f as IDataField;
                         txtXAxisLabelValue.Text = dataField.PromptText;

@@ -35,7 +35,7 @@ namespace EpiDashboard.Gadgets.Charting
     /// </summary>
     public partial class HistogramChartGadget : HistogramChartGadgetBase
     {
-#region Constructors
+        #region Constructors
         public HistogramChartGadget()
         {
             InitializeComponent();
@@ -50,9 +50,9 @@ namespace EpiDashboard.Gadgets.Charting
             //FillComboboxes();
         }
 
-#endregion //Constructors
+        #endregion //Constructors
 
-#region Properties
+        #region Properties
 
         //MOVED TO CHART PROPERTIES
         DateTime? StartDate { get; set; }
@@ -71,9 +71,9 @@ namespace EpiDashboard.Gadgets.Charting
         /// </summary>
         private string customOutputDescription;
 
-#endregion //Properties
+        #endregion //Properties
 
-#region Private and Protected Methods
+        #region Private and Protected Methods
 
         private void FillComboboxes(bool update = false)
         {
@@ -453,9 +453,9 @@ namespace EpiDashboard.Gadgets.Charting
                 //        break;
                 //}
                 #endregion
-                
+
                 //Controls.Charting.HistogramChart columnChart = new Controls.Charting.HistogramChart(DashboardHelper, GadgetOptions, chartSettings, dataList);
-                EpiDashboard.Controls.Charting.HistogramChart columnChart = new EpiDashboard.Controls.Charting.HistogramChart(DashboardHelper, chtParameters, dataList); 
+                EpiDashboard.Controls.Charting.HistogramChart columnChart = new EpiDashboard.Controls.Charting.HistogramChart(DashboardHelper, chtParameters, dataList);
                 columnChart.Margin = new Thickness(0, 0, 0, 16);
                 columnChart.MouseEnter += new MouseEventHandler(chart_MouseEnter);
                 columnChart.MouseLeave += new MouseEventHandler(chart_MouseLeave);
@@ -796,7 +796,7 @@ namespace EpiDashboard.Gadgets.Charting
                     int.TryParse(chtParameters.Step.ToString(), out step);
 
                     string interval = "day";
-                    
+
                     //if (GadgetOptions.InputVariableList.ContainsKey("interval"))
                     //{
                     //    interval = GadgetOptions.InputVariableList["interval"];
@@ -973,9 +973,9 @@ namespace EpiDashboard.Gadgets.Charting
         }
 
 
-#endregion //Private and Protected Methods
+        #endregion //Private and Protected Methods
 
-#region Public Methods
+        #region Public Methods
 
         public override void SetGadgetToProcessingState()
         {
@@ -1570,6 +1570,19 @@ namespace EpiDashboard.Gadgets.Charting
                             case "yaxislabel":
                                 ((HistogramChartParameters)Parameters).YAxisLabel = child.InnerText;
                                 break;
+								//EI-98
+                            case "yaxislabelfontsize":
+                                ((HistogramChartParameters)Parameters).YAxisLabelFontSize = double.Parse(child.InnerText);
+                                break;
+                            case "xaxislabelfontsize":
+                                ((HistogramChartParameters)Parameters).XAxisLabelFontSize = double.Parse(child.InnerText);
+                                break;
+                            case "yaxisfontsize":
+                                ((HistogramChartParameters)Parameters).YAxisFontSize = double.Parse(child.InnerText);
+                                break;
+                            case "xaxisfontsize":
+                                ((HistogramChartParameters)Parameters).XAxisFontSize = double.Parse(child.InnerText);
+                                break;
                             case "yaxisformatstring":
                                 ((HistogramChartParameters)Parameters).YAxisFormat = child.InnerText;
                                 break;
@@ -1944,13 +1957,13 @@ namespace EpiDashboard.Gadgets.Charting
             XmlElement stepElement = doc.CreateElement("step");
             stepElement.InnerText = chtParameters.Step.ToString();
             element.AppendChild(stepElement);
-            
+
             //interval
             //xmlString += "<interval>" + interval + "</interval>";
             XmlElement intervalElement = doc.CreateElement("interval");
             intervalElement.InnerText = chtParameters.Interval.ToString();
             element.AppendChild(intervalElement);
-            
+
             //y2LineType 
             XmlElement y2LineTypeElement = doc.CreateElement("y2LineType");
             y2LineTypeElement.InnerText = chtParameters.Y2LineKind.ToString();
@@ -1970,6 +1983,26 @@ namespace EpiDashboard.Gadgets.Charting
             XmlElement yAxisLabelElement = doc.CreateElement("yAxisLabel");
             yAxisLabelElement.InnerText = chtParameters.YAxisLabel.ToString().Replace("<", "&lt;");
             element.AppendChild(yAxisLabelElement);
+
+            //yAxisLabelFontSize 
+            XmlElement yAxisLabelFontSizeElement = doc.CreateElement("yAxisLabelFontSize");
+            yAxisLabelFontSizeElement.InnerText = chtParameters.YAxisLabelFontSize.ToString().Replace("<", "&lt;");
+            element.AppendChild(yAxisLabelFontSizeElement);
+
+            //xAxisLabelFontSize 
+            XmlElement xAxisLabelFontSize = doc.CreateElement("xAxisLabelFontSize");
+            xAxisLabelFontSize.InnerText = chtParameters.XAxisLabelFontSize.ToString().Replace("<", "&lt;");
+            element.AppendChild(xAxisLabelFontSize);
+
+            //yAxisFontSize 
+            XmlElement yAxisFontSizeElement = doc.CreateElement("yAxisFontSize");
+            yAxisFontSizeElement.InnerText = chtParameters.YAxisFontSize.ToString().Replace("<", "&lt;");
+            element.AppendChild(yAxisFontSizeElement);
+
+            //xAxisFontSize 
+            XmlElement xAxisFontSize = doc.CreateElement("xAxisFontSize");
+            xAxisFontSize.InnerText = chtParameters.XAxisFontSize.ToString().Replace("<", "&lt;");
+            element.AppendChild(xAxisFontSize);
 
             //yAxisFormatString 
             XmlElement yAxisFormatStringElement = doc.CreateElement("yAxisFormatString");
@@ -2146,7 +2179,7 @@ namespace EpiDashboard.Gadgets.Charting
         }
         #endregion //Public Methods
 
-#region Event Handlers
+        #region Event Handlers
         protected override void worker_WorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             if (DashboardHelper.IsAutoClosing)
@@ -2283,7 +2316,7 @@ namespace EpiDashboard.Gadgets.Charting
             //}
         }
 
-#endregion //Event Handlers
+        #endregion //Event Handlers
 
     }
 }

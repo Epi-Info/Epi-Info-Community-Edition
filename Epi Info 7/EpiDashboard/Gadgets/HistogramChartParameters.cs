@@ -83,12 +83,18 @@ namespace EpiDashboard
             Y2LineThickness = 2;
             //  Labels
             YAxisLabel = "Count";
+			//EI-98
+            YAxisLabelFontSize = 12.0;
+            YAxisFontSize = 12.0;
             YAxisFormat = String.Empty;
             Y2AxisLabel = String.Empty;
             Y2AxisLegendTitle = String.Empty;
             Y2AxisFormat = String.Empty;
             XAxisLabelType = 0;
             XAxisLabel = String.Empty;
+			//EI-98
+            XAxisLabelFontSize = 12.0;
+            XAxisFontSize = 12.0;
             XAxisAngle = 0;
             ChartTitle = String.Empty;
             ChartSubTitle = String.Empty;
@@ -150,12 +156,17 @@ namespace EpiDashboard
             //  Labels
             YAxisLabel = parameters.YAxisLabel;
             YAxisFormat = parameters.YAxisFormat;
+            YAxisLabelFontSize = parameters.YAxisLabelFontSize;//EI-98
             Y2AxisLabel = parameters.Y2AxisLabel;
             Y2AxisLegendTitle = parameters.Y2AxisLegendTitle;
             Y2AxisFormat = parameters.Y2AxisFormat;
             XAxisLabelType = parameters.XAxisLabelType;
             XAxisLabel = parameters.XAxisLabel;
             XAxisAngle = parameters.XAxisAngle;
+			//EI-98
+            XAxisLabelFontSize = parameters.XAxisLabelFontSize;
+            XAxisFontSize = parameters.XAxisFontSize;
+            YAxisFontSize = parameters.YAxisFontSize;
             ChartTitle = parameters.ChartTitle;
             ChartSubTitle = parameters.ChartSubTitle;
             ChartStrataTitle = parameters.ChartStrataTitle;

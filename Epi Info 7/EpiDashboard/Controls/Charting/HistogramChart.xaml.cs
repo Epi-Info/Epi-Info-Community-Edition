@@ -270,6 +270,12 @@ namespace EpiDashboard.Controls.Charting
             {
                 xyChart.Legend.BorderThickness = new Thickness(0);
             }
+			//EI-98
+            YAxisCoordinates.FontSize = HistogramChartParameters.YAxisFontSize;
+            xAxisCoordinates.FontSize = HistogramChartParameters.XAxisFontSize;
+
+            tblockXAxisLabel.FontSize = HistogramChartParameters.XAxisLabelFontSize;
+            tblockYAxisLabel.FontSize = HistogramChartParameters.YAxisLabelFontSize;
         }
 
         private void xyChart_DataStructureCreated(object sender, EventArgs e)
