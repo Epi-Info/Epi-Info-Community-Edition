@@ -2046,16 +2046,27 @@ namespace Epi.Windows.MakeView.Forms
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
+                string strOldPageName = node.Text;
                 node.Text = dialog.PageName;
                 node.Page.Name = dialog.PageName;
                 node.Page.SaveToDb();
+                //--EI-52
+                UpdatePageNameinCheckCode(strOldPageName, dialog.PageName);
+                //--
                 ViewNode viewNode = (ViewNode)node.Parent;
                 Page foundPage = viewNode.View.Pages.Find(delegate(Page p) { return p.Id == node.Page.Id; });
                 foundPage.Name = dialog.PageName;
                 PageSelected(SelectedPage);
             }
         }
-
+        // EI-52 Updates checkcode with changed pagename
+        private void UpdatePageNameinCheckCode(string strOldPage, string strNewPage)
+        {
+            string strCheckcode = CurrentView.CheckCode;
+            string strReplacedCheckcode = strCheckcode.Replace(strOldPage, strNewPage);
+            CurrentView.CheckCode = strReplacedCheckcode;
+            CurrentView.SaveToDb();
+        }
         #endregion  //Private Methods
 
         #region Public Properties
