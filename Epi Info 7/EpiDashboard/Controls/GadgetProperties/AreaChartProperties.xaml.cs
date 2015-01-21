@@ -106,6 +106,13 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
 
+            //EI-98
+            txtXAxisFontSize.Text = parameters.XAxisFontSize.ToString();
+            txtYAxisFontSize.Text = parameters.YAxisFontSize.ToString();
+
+            txtXAxisLabelFontSize.Text = parameters.XAxisLabelFontSize.ToString();
+            txtYAxisLabelFontSize.Text = parameters.YAxisLabelFontSize.ToString();
+
             txtWidth.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
             txtHeight.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
             txtTransTop.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
@@ -135,22 +142,34 @@ namespace EpiDashboard.Controls.GadgetProperties
                 MessageBox.Show(DashboardSharedStrings.PROPERTIES_Y2_AXIS_VARIABLE_REQ);
             }
 
-            if (String.IsNullOrEmpty(txtLegendFontSize.Text))
+            //EI-98
+            ValidateFontSize(txtLegendFontSize, DashboardSharedStrings.PROPERTIES_LEGEND_FONT_SIZE_INVALID, out isValid);
+            ValidateFontSize(txtYAxisFontSize, DashboardSharedStrings.PROPERTIES_YAXIS_FONT_SIZE_INVALID, out isValid);
+            ValidateFontSize(txtXAxisFontSize, DashboardSharedStrings.PROPERTIES_XAXIS_FONT_SIZE_INVALID, out isValid);
+
+
+            return isValid;
+        }
+
+        //EI-98
+        private void ValidateFontSize(TextBox txtFontSize, string errorMessage, out bool isValid)
+        {
+            if (String.IsNullOrEmpty(txtFontSize.Text))
             {
-                txtLegendFontSize.Text = "12";
+                txtYAxisFontSize.Text = "12";
             }
             else
             {
                 double thisSize = 0;
-                double.TryParse(txtLegendFontSize.Text, out thisSize);
+                double.TryParse(txtYAxisFontSize.Text, out thisSize);
                 if (thisSize < 5 || thisSize > 100)
                 {
                     isValid = false;
-                    MessageBox.Show(DashboardSharedStrings.PROPERTIES_LEGEND_FONT_SIZE_INVALID);
+                    MessageBox.Show(errorMessage);
+                    return;
                 }
             }
-
-            return isValid;
+            isValid = true;
         }
 
         private void FillComboboxes(bool update = false)
@@ -620,6 +639,25 @@ namespace EpiDashboard.Controls.GadgetProperties
             //GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
             Parameters.IncludeFullSummaryStatistics = false;
             //GadgetOptions.InputVariableList = inputVariableList;
+
+            //EI-98
+            if (!String.IsNullOrEmpty(txtXAxisFontSize.Text))
+            {
+                Parameters.XAxisFontSize = double.Parse(txtXAxisFontSize.Text);
+            }
+
+            if (!String.IsNullOrEmpty(txtXAxisLabelFontSize.Text))
+            {
+                Parameters.XAxisLabelFontSize = double.Parse(txtXAxisLabelFontSize.Text);
+            }
+            if (!String.IsNullOrEmpty(txtYAxisFontSize.Text))
+            {
+                Parameters.YAxisFontSize = double.Parse(txtYAxisFontSize.Text);
+            }
+            if (!String.IsNullOrEmpty(txtYAxisLabelFontSize.Text))
+            {
+                Parameters.YAxisLabelFontSize = double.Parse(txtYAxisLabelFontSize.Text);
+            }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

@@ -261,6 +261,13 @@ namespace EpiDashboard.Controls.Charting
 
             xyChart.Legend.FontSize = AreaChartParameters.LegendFontSize;
 
+            //EI-98
+            YAxisCoordinates.FontSize = AreaChartParameters.YAxisFontSize;
+            xAxisCoordinates.FontSize = AreaChartParameters.XAxisFontSize;
+
+            tblockXAxisLabel.FontSize = AreaChartParameters.XAxisLabelFontSize;
+            tblockYAxisLabel.FontSize = AreaChartParameters.YAxisLabelFontSize;
+
         }
 
         private void xyChart_DataStructureCreated(object sender, EventArgs e)
