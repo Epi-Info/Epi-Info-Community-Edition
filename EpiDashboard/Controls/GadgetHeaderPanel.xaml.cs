@@ -227,7 +227,7 @@ namespace EpiDashboard.Controls
                 parent = VisualTreeHelper.GetParent(parent);
             }
 
-            if (parent is ChartGadgetBase)
+            if (parent is ChartGadgetBase || parent is ScatterChartGadget || parent is AberrationChartGadget)
             {
                 return false;
             }
