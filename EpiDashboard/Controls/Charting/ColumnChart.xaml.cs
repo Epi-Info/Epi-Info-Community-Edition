@@ -317,6 +317,13 @@ namespace EpiDashboard.Controls.Charting
             {
                 xyChart.Legend.BorderThickness = new Thickness(0);
             }
+
+            //EI-98
+            YAxisCoordinates.FontSize = ColumnChartParameters.YAxisFontSize;
+            xAxisCoordinates.FontSize = ColumnChartParameters.XAxisFontSize;
+                                        
+            tblockXAxisLabel.FontSize = ColumnChartParameters.XAxisLabelFontSize;
+            tblockYAxisLabel.FontSize = ColumnChartParameters.YAxisLabelFontSize;
         }
 
         private void xyChart_DataStructureCreated(object sender, EventArgs e)
