@@ -1248,6 +1248,19 @@ namespace EpiDashboard.Gadgets.Charting
                             case "width":
                                 ((AreaChartParameters)Parameters).ChartWidth = double.Parse(child.InnerText);
                                 break;
+                            //EI-98
+                            case "yaxislabelfontsize":
+                                ((AreaChartParameters)Parameters).YAxisLabelFontSize = double.Parse(child.InnerText);
+                                break;
+                            case "xaxislabelfontsize":
+                                ((AreaChartParameters)Parameters).XAxisLabelFontSize = double.Parse(child.InnerText);
+                                break;
+                            case "yaxisfontsize":
+                                ((AreaChartParameters)Parameters).YAxisFontSize = double.Parse(child.InnerText);
+                                break;
+                            case "xaxisfontsize":
+                                ((AreaChartParameters)Parameters).XAxisFontSize = double.Parse(child.InnerText);
+                                break;
                         }
                     }
                 }
@@ -1771,6 +1784,27 @@ namespace EpiDashboard.Gadgets.Charting
                 XmlElement legendFontSizeElement = doc.CreateElement("legendFontSize");
                 legendFontSizeElement.InnerText = chtParameters.LegendFontSize.ToString();
                 element.AppendChild(legendFontSizeElement);
+
+                //EI-98
+                //yAxisLabelFontSize 
+                XmlElement yAxisLabelFontSizeElement = doc.CreateElement("yAxisLabelFontSize");
+                yAxisLabelFontSizeElement.InnerText = chtParameters.YAxisLabelFontSize.ToString().Replace("<", "&lt;");
+                element.AppendChild(yAxisLabelFontSizeElement);
+
+                //xAxisLabelFontSize 
+                XmlElement xAxisLabelFontSize = doc.CreateElement("xAxisLabelFontSize");
+                xAxisLabelFontSize.InnerText = chtParameters.XAxisLabelFontSize.ToString().Replace("<", "&lt;");
+                element.AppendChild(xAxisLabelFontSize);
+
+                //yAxisFontSize 
+                XmlElement yAxisFontSizeElement = doc.CreateElement("yAxisFontSize");
+                yAxisFontSizeElement.InnerText = chtParameters.YAxisFontSize.ToString().Replace("<", "&lt;");
+                element.AppendChild(yAxisFontSizeElement);
+
+                //xAxisFontSize 
+                XmlElement xAxisFontSize = doc.CreateElement("xAxisFontSize");
+                xAxisFontSize.InnerText = chtParameters.XAxisFontSize.ToString().Replace("<", "&lt;");
+                element.AppendChild(xAxisFontSize);
 
                 //legendDock 
                 XmlElement legendDockElement = doc.CreateElement("legendDock");

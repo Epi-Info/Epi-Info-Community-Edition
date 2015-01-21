@@ -66,6 +66,10 @@ namespace EpiDashboard
             LegendFontSize = 12;
             LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Right;
             ChartStrataTitle = String.Empty;
+            YAxisFontSize = 12;
+            YAxisLabelFontSize = 12;
+            XAxisFontSize = 12;
+            XAxisLabelFontSize = 12;
         }
 
         /// <summary>
@@ -128,6 +132,10 @@ namespace EpiDashboard
             ShowLegendVarNames = parameters.ShowLegendVarNames;
             //LegendFontSize in ChartGadgetParametersBase.cs
             LegendDock = parameters.LegendDock;
+            YAxisFontSize = parameters.YAxisFontSize;
+            YAxisLabelFontSize = parameters.YAxisLabelFontSize;
+            XAxisFontSize = parameters.XAxisFontSize;
+            XAxisLabelFontSize = parameters.XAxisLabelFontSize;
         }
     }
 }

@@ -679,7 +679,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             if (!String.IsNullOrEmpty(txtXAxisLabelFontSize.Text))
             {
-                Parameters.XAxisLabelFontSize = double.Parse(txtXAxisFontSize.Text);
+                Parameters.XAxisLabelFontSize = double.Parse(txtXAxisLabelFontSize.Text);
             }
             if (!String.IsNullOrEmpty(txtYAxisFontSize.Text))
             {
