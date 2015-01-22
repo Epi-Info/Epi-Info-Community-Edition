@@ -295,6 +295,13 @@ namespace EpiDashboard.Controls.Charting
             {
                 xyChart.Legend.BorderThickness = new Thickness(0);
             }
+
+            //EI-98
+            YAxisCoordinates.FontSize = ParetoChartParameters.YAxisFontSize;
+            xAxisCoordinates.FontSize = ParetoChartParameters.XAxisFontSize;
+
+            tblockXAxisLabel.FontSize = ParetoChartParameters.XAxisLabelFontSize;
+            tblockYAxisLabel.FontSize = ParetoChartParameters.YAxisLabelFontSize;
         }
 
         private void xyChart_DataStructureCreated(object sender, EventArgs e)

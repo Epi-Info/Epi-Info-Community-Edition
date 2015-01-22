@@ -24,6 +24,7 @@ namespace EpiDashboard.Controls.Charting
     /// </summary>
     public partial class AberrationChart : UserControl
     {
+        private AberrationDetectionChartParameters _abChartParameters;
         public AberrationChart()
         {
             InitializeComponent();
@@ -33,6 +34,16 @@ namespace EpiDashboard.Controls.Charting
         {
             xyChart.Width = width;
             xyChart.Height = height;
+        }
+
+        public void SetChartLabels(AberrationDetectionChartParameters Parameters)
+        {
+            //EI-98
+            xAxisCoordinates.FontSize = Parameters.XAxisFontSize;
+            yAxisCoordinates.FontSize = Parameters.YAxisFontSize;
+
+            tblockXAxisLabel.FontSize = Parameters.XAxisLabelFontSize;
+            tblockYAxisLabel.FontSize = Parameters.YAxisLabelFontSize;
         }
 
         public void SetChartData(List<AberrationChartData> dataList, DataTable aberrationDetails)

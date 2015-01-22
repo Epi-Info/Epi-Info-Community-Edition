@@ -18,7 +18,10 @@ namespace EpiDashboard
             LineType = string.Empty;
             GadgetTitle = "Aberration Detection Chart";
             LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Right;
-
+            YAxisFontSize = 12;
+            YAxisLabelFontSize = 12;
+            XAxisFontSize = 12;
+            XAxisLabelFontSize = 12;
         }
 
         /// <summary>
@@ -28,6 +31,10 @@ namespace EpiDashboard
             : base(parameters)
         {
             LineType = parameters.LineType;
+            YAxisFontSize = parameters.YAxisFontSize;
+            YAxisLabelFontSize = parameters.YAxisLabelFontSize;
+            XAxisFontSize = parameters.XAxisFontSize;
+            XAxisLabelFontSize = parameters.XAxisLabelFontSize;
         }
 
     }

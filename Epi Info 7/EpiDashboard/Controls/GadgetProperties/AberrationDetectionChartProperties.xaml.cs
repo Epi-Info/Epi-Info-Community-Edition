@@ -91,6 +91,13 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
 
+            //EI-98
+            txtXAxisFontSize.Text = parameters.XAxisFontSize.ToString();
+            txtYAxisFontSize.Text = parameters.YAxisFontSize.ToString();
+
+            txtXAxisLabelFontSize.Text = parameters.XAxisLabelFontSize.ToString();
+            txtYAxisLabelFontSize.Text = parameters.YAxisLabelFontSize.ToString();
+
             txtWidth.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
             txtHeight.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
             txtLagTime.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
@@ -115,7 +122,33 @@ namespace EpiDashboard.Controls.GadgetProperties
                 MessageBox.Show(DashboardSharedStrings.PROPERTIES_MAIN_VARIABLE_REQ);
             }
 
+            //EI-98
+            ValidateFontSize(txtYAxisFontSize, DashboardSharedStrings.PROPERTIES_YAXIS_FONT_SIZE_INVALID, out isValid);
+            ValidateFontSize(txtXAxisFontSize, DashboardSharedStrings.PROPERTIES_XAXIS_FONT_SIZE_INVALID, out isValid);
+
+
             return isValid;
+        }
+
+        //EI-98
+        private void ValidateFontSize(TextBox txtFontSize, string errorMessage, out bool isValid)
+        {
+            if (String.IsNullOrEmpty(txtFontSize.Text))
+            {
+                txtYAxisFontSize.Text = "12";
+            }
+            else
+            {
+                double thisSize = 0;
+                double.TryParse(txtYAxisFontSize.Text, out thisSize);
+                if (thisSize < 5 || thisSize > 100)
+                {
+                    isValid = false;
+                    MessageBox.Show(errorMessage);
+                    return;
+                }
+            }
+            isValid = true;
         }
 
         private void txtLagTime_TextChanged(object sender, TextChangedEventArgs e)
@@ -269,6 +302,25 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.ChartTitle = txtChartTitle.Text;
 
             Parameters.IncludeFullSummaryStatistics = false;
+
+            //EI-98
+            if (!String.IsNullOrEmpty(txtXAxisFontSize.Text))
+            {
+                Parameters.XAxisFontSize = double.Parse(txtXAxisFontSize.Text);
+            }
+
+            if (!String.IsNullOrEmpty(txtXAxisLabelFontSize.Text))
+            {
+                Parameters.XAxisLabelFontSize = double.Parse(txtXAxisLabelFontSize.Text);
+            }
+            if (!String.IsNullOrEmpty(txtYAxisFontSize.Text))
+            {
+                Parameters.YAxisFontSize = double.Parse(txtYAxisFontSize.Text);
+            }
+            if (!String.IsNullOrEmpty(txtYAxisLabelFontSize.Text))
+            {
+                Parameters.YAxisLabelFontSize = double.Parse(txtYAxisLabelFontSize.Text);
+            }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

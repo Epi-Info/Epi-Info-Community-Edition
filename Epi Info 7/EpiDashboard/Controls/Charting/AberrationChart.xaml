@@ -50,7 +50,7 @@
 
         <!--<TextBlock x:Name="tblockXAxisLabel" FontWeight="DemiBold" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0, 0, 0, 6" Visibility="Collapsed" />-->
 
-        <dvCharting:XYChart x:Name="xyChart" Margin="1" Background="White" ProcessDataSourceInBackgroundThread="False" XPath="Date" Grid.Row="1" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated" AllowFractionalPointXRange="False" Visibility="Collapsed" AnimationCompleted="xyChart_AnimationCompleted" ChartVisualUpdated="xyChart_ChartVisualUpdated">
+           <dvCharting:XYChart x:Name="xyChart" Margin="1" Background="white" ProcessDataSourceInBackgroundThread="False" XPath="Date" Grid.Row="1" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated" AllowFractionalPointXRange="False" Visibility="Collapsed" AnimationCompleted="xyChart_AnimationCompleted" ChartVisualUpdated="xyChart_ChartVisualUpdated">
             <dvCharting:XYChart.XAxisArea>
                 <dvCharting:AxisCoordinates x:Name="xAxisCoordinates" AxisId="XAxis" Angle="0" />
                 <!--<dvCharting:AxisScrollBar x:Name="xAxisScroller" AxisId="XAxis" Height="12" />-->
@@ -63,7 +63,7 @@
             </dvCharting:XYChart.XAxisArea>
 
             <dvCharting:XYChart.YAxisArea>
-                <dvCharting:AxisCoordinates/>
+                <dvCharting:AxisCoordinates x:Name="yAxisCoordinates"/>
             </dvCharting:XYChart.YAxisArea>
 
             <!--<dvCharting:XYChart.Axes>
@@ -77,7 +77,8 @@
 
             <!--<dvCharting:SeriesTracker SeriesId="S0, S1" MarkerSize="6" />-->
 
-        </dvCharting:XYChart>
+        </dvCharting:XYChart> 
+            
 
         <StackPanel Grid.Row="3" Grid.Column="1" Background="Gray" Margin="80,0,80,0" x:Name="panelScroller">
             <dvCharting:XAxisScrollBar x:Name="xAxisScrollBar" Height="20" VerticalAlignment="Top" Chart="{Binding ElementName=xyChart}" Visibility="Collapsed" />
