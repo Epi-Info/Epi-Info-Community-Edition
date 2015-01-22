@@ -311,6 +311,7 @@ namespace EpiDashboard.Gadgets.Charting
                     if (AberrationDetectionChartParameters.ColumnNames.Count > 0 && !String.IsNullOrEmpty(AberrationDetectionChartParameters.ColumnNames[0]))
                     {
                         //CreateInputVariableList();
+
                         infoPanel.Visibility = System.Windows.Visibility.Collapsed;
                         waitPanel.Visibility = System.Windows.Visibility.Visible;
                         messagePanel.MessagePanelType = EpiDashboard.Controls.MessagePanelType.StatusPanel;
@@ -441,6 +442,19 @@ namespace EpiDashboard.Gadgets.Charting
                                 break;
                             case "xaxislabel":
                                 ((AberrationDetectionChartParameters)Parameters).XAxisLabel = child.InnerText;
+                                break;
+                            //EI-98
+                            case "yaxislabelfontsize":
+                                ((AberrationDetectionChartParameters)Parameters).YAxisLabelFontSize = double.Parse(child.InnerText);
+                                break;
+                            case "xaxislabelfontsize":
+                                ((AberrationDetectionChartParameters)Parameters).XAxisLabelFontSize = double.Parse(child.InnerText);
+                                break;
+                            case "yaxisfontsize":
+                                ((AberrationDetectionChartParameters)Parameters).YAxisFontSize = double.Parse(child.InnerText);
+                                break;
+                            case "xaxisfontsize":
+                                ((AberrationDetectionChartParameters)Parameters).XAxisFontSize = double.Parse(child.InnerText);
                                 break;
                         }
                     }
@@ -606,6 +620,28 @@ namespace EpiDashboard.Gadgets.Charting
             chartTitleElement.InnerText = AbDetChartParameters.ChartTitle.ToString().Replace("<", "&lt;");
             element.AppendChild(chartTitleElement);
 
+            //EI-98
+
+            //yAxisLabelFontSize 
+            XmlElement yAxisLabelFontSizeElement = doc.CreateElement("yAxisLabelFontSize");
+            yAxisLabelFontSizeElement.InnerText = AbDetChartParameters.YAxisLabelFontSize.ToString().Replace("<", "&lt;");
+            element.AppendChild(yAxisLabelFontSizeElement);
+
+            //xAxisLabelFontSize 
+            XmlElement xAxisLabelFontSize = doc.CreateElement("xAxisLabelFontSize");
+            xAxisLabelFontSize.InnerText = AbDetChartParameters.XAxisLabelFontSize.ToString().Replace("<", "&lt;");
+            element.AppendChild(xAxisLabelFontSize);
+
+            //yAxisFontSize 
+            XmlElement yAxisFontSizeElement = doc.CreateElement("yAxisFontSize");
+            yAxisFontSizeElement.InnerText = AbDetChartParameters.YAxisFontSize.ToString().Replace("<", "&lt;");
+            element.AppendChild(yAxisFontSizeElement);
+
+            //xAxisFontSize 
+            XmlElement xAxisFontSize = doc.CreateElement("xAxisFontSize");
+            xAxisFontSize.InnerText = AbDetChartParameters.XAxisFontSize.ToString().Replace("<", "&lt;");
+            element.AppendChild(xAxisFontSize);
+
             SerializeAnchors(element);
             return element;
         }
@@ -718,6 +754,7 @@ namespace EpiDashboard.Gadgets.Charting
             }
 
             aberrationChart.ChartTitle = AbDetChartParameters.ChartTitle;
+
         }
 
         protected override void Construct()
@@ -969,6 +1006,7 @@ namespace EpiDashboard.Gadgets.Charting
             abChart.DashboardHelper = this.DashboardHelper;
             abChart.SetChartSize(double.Parse(AbDetChartParameters.ChartWidth.ToString()), double.Parse(AbDetChartParameters.ChartHeight.ToString()));
             abChart.SetChartData(dataList, aberrationDetails);
+            abChart.SetChartLabels(AbDetChartParameters);
             panelMain.Children.Add(abChart);
             SetVisuals(abChart);
 
