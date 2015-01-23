@@ -3709,7 +3709,7 @@ namespace EpiDashboard
                     minDate = DateTime.MinValue;
                 }
 
-                dv.RowFilter = CombineFilters(AddBracketsToString(freqVar) + " >= " + FormatValue(minDate.Value.ToShortDateString(), "System.DateTime"), dv);
+                dv.RowFilter = CombineFilters(AddBracketsToString(freqVar) + " >= " + FormatValue(minDate.Value.ToString("MM/dd/yyyy"), "System.DateTime"), dv);
             }
 
             if (!minDate.HasValue)
