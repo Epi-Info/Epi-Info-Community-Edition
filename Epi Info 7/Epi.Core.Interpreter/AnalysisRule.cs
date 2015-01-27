@@ -446,7 +446,9 @@ namespace Epi.Core.AnalysisInterpreter
                     case "<Subroutine_Statement>":
                         result = new Rule_Subroutine_Statement(context, nonterminal);
                         break;
-
+                    case "<Call_Statement>":
+                        result = new Rule_Call(context, nonterminal);
+                        break;
                     //**these are not yet implemented; move up when completed    
                     //**these are not yet implemented; move up when completed    
                     //**these are not yet implemented; move up when completed    
@@ -460,8 +462,7 @@ namespace Epi.Core.AnalysisInterpreter
                     case "<Button_Offset_Size_1_Statement>":
                     case "<Button_Offset_Size_2_Statement>":
                     case "<Button_Offset_1_Statement>":
-                    case "<Button_Offset_2_Statement>":
-                    case "<Call_Statement>":
+                    case "<Button_Offset_2_Statement>":                   
                     case "<Simple_CMD_Statement>":
                     case "<CMD_Line_Statement>":
                     case "<Delete_Table_Short_Statement>":
