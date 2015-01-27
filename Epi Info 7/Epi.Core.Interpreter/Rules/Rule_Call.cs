@@ -36,8 +36,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 this.Identifier = this.Identifier.ToLower();
 
                 if (this.Context.SubroutineList.ContainsKey(this.Identifier))
-                {
-                    ((Epi.Core.AnalysisInterpreter.Rules.Rule_Statements)(this.Context.Subroutine[this.Identifier])).Execute();                   
+                {                     
+                    this.Context.Subroutine[this.Identifier].Execute();
                 }            
                 this.HasRun = true;
             }

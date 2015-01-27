@@ -234,9 +234,17 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     Context.SelectExpression.Clear();
                 }
+                if (Context.SubroutineList != null)
+                {
+                    Context.SubroutineList.Clear();
+                }
+                if (Context.Subroutine != null)
+                {
+                    Context.Subroutine.Clear();
+                }
 
                 Context.SelectString.Length = 0;
-                Context.SortExpression.Length = 0;
+                Context.SortExpression.Length = 0;              
             }
             else
             {
