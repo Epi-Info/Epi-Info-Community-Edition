@@ -198,10 +198,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxCommandList.Location = new System.Drawing.Point(13, 111);
+            this.textBoxCommandList.WordWrap = false;
             this.textBoxCommandList.Multiline = true;
             this.textBoxCommandList.Name = "textBoxCommandList";
             this.textBoxCommandList.Size = new System.Drawing.Size(621, 213);
             this.textBoxCommandList.TabIndex = 2;
+            this.textBoxCommandList.TextChanged += new System.EventHandler(this.textBoxCommandList_TextChanged);
             // 
             // GenerateCommandButton
             // 
@@ -212,7 +214,7 @@
             this.GenerateCommandButton.TabIndex = 1;
             this.GenerateCommandButton.Text = "Generate Command";
             this.GenerateCommandButton.UseVisualStyleBackColor = true;
-            this.GenerateCommandButton.Click += new System.EventHandler(this.GenerateCommandButton_Click);
+            this.GenerateCommandButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GenerateCommandButton_MouseClick);
             // 
             // DefineUserCommandDialog
             // 

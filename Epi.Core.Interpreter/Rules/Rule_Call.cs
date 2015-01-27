@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using com.calitha.goldparser;
 
 namespace Epi.Core.AnalysisInterpreter.Rules
 {
-    public class Rule_Subroutine_Statement : AnalysisRule
+    public class Rule_Call : AnalysisRule
     {
+
         bool HasRun = false;
 
         private AnalysisRule Statements = null;
@@ -14,16 +16,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
         private string TextField = null;
 
-        public Rule_Subroutine_Statement(Rule_Context pContext, NonterminalToken pToken)
+        public Rule_Call(Rule_Context pContext, NonterminalToken pToken)
             : base(pContext)
         {
 
             //<Subroutine_Statement> ::= Sub Identifier <Statements> End | Sub Identifier End
-            this.Identifier = this.GetCommandElement(pToken.Tokens, 1);
-            if (pToken.Tokens.Length > 3)
-            {              
-                this.Statements = AnalysisRule.BuildStatments(pContext, pToken.Tokens[2]);
-            }
+            this.Identifier = this.GetCommandElement(pToken.Tokens, 1);          
         }
 
         
@@ -39,15 +37,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                 if (this.Context.SubroutineList.ContainsKey(this.Identifier))
                 {
-                    this.Context.Subroutine.Remove(this.Identifier);
-                }
-                this.Context.Subroutine.Add(this.Identifier, this.Statements);
-                this.Context.SubroutineList.Add(this.Identifier,this.Statements);             
+                    ((Epi.Core.AnalysisInterpreter.Rules.Rule_Statements)(this.Context.Subroutine[this.Identifier])).Execute();                   
+                }            
                 this.HasRun = true;
             }
             return null;
         }
-
 
     }
 }

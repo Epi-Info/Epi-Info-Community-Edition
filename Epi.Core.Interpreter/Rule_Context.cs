@@ -35,7 +35,8 @@ namespace Epi.Core.AnalysisInterpreter
         public System.Collections.Generic.Dictionary<string, IDLLClass> DLLClassList;
         public System.Collections.Generic.Dictionary<string, string> AssignVariableCheck;
         public Dictionary<string, List<string>> GroupVariableList;
-        public System.Collections.Generic.Dictionary<string, AnalysisRule> Subroutine;
+        public Dictionary<string, AnalysisRule> Subroutine;
+        public Dictionary<string, Epi.Core.AnalysisInterpreter.AnalysisRule> SubroutineList = new Dictionary<string, Epi.Core.AnalysisInterpreter.AnalysisRule>();
         public StringBuilder SelectString = new StringBuilder();
         public StringBuilder CurrentSelect = null;
         public Dictionary<string, IDataSource> ConnectionList;
@@ -218,6 +219,9 @@ namespace Epi.Core.AnalysisInterpreter
             SelectCommandList.Add(CommandNames.TXTTODATE);
             SelectCommandList.Add(CommandNames.UPPERCASE);
             SelectCommandList.Add(CommandNames.ISDISTINCT);
+
+            Subroutine = new Dictionary<string, AnalysisRule>(StringComparer.OrdinalIgnoreCase);
+            SubroutineList = new Dictionary<string, Epi.Core.AnalysisInterpreter.AnalysisRule>();
         }
         
         public object GetVariable(string name)
@@ -657,6 +661,7 @@ namespace Epi.Core.AnalysisInterpreter
         public void Reset()
         {
             SelectExpression.Clear();
+            SubroutineList.Clear();
             SelectString.Length = 0;
 
             if (DataInfo != null)

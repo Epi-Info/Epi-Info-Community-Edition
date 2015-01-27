@@ -53,30 +53,10 @@ namespace Epi.Windows.Analysis.Dialogs
 
         private void LoadPGMList()
         {
-
-            //if (txtFileName.Text.EndsWith(".prj",StringComparison.CurrentCultureIgnoreCase))
-            //{
-            //    if (System.IO.File.Exists(txtFileName.Text))
-            //    {
-            //        Project project = new Project(txtFileName.Text);
-            //        programs = project.GetPgms();
-            //        cmbCommandName.Enabled = true;
-            //        cmbCommandName.DataSource = programs;
-            //        cmbCommandName.DisplayMember = ColumnNames.NAME;
-            //        cmbCommandName.ValueMember = ColumnNames.PROGRAM_ID;
-            //        cmbCommandName.SelectedIndex = -1;
-            //        if (cmbCommandName.Items.Count <= 0) 
-            //        {
-            //            ErrorMessages.Add(SharedStrings.NO_SAVED_PGM);
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    cmbCommandName.Enabled = false;
-            //    cmbCommandName.SelectedIndex = -1;
-            //    this.btnOK.Enabled = true;
-            //}
+            foreach (var k in EpiInterpreter.Context.SubroutineList)
+            {
+                cmbCommandName.Items.Add(k.Key.ToString());
+            }          
         }
         #endregion
 
@@ -90,20 +70,7 @@ namespace Epi.Windows.Analysis.Dialogs
         /// <returns></returns>
         protected override bool ValidateInput()
         {
-            base.ValidateInput();
-
-            //if (String.IsNullOrEmpty(txtFileName.Text.Trim()))
-            //{
-            //    ErrorMessages.Add(SharedStrings.NO_FILENAME);
-            //}
-            //else
-            //{
-            //    //if (!txtFileName.Text.EndsWith(".prj", StringComparison.CurrentCultureIgnoreCase) && !txtFileName.Text.EndsWith(".pgm", StringComparison.CurrentCultureIgnoreCase))
-            //    if (!txtFileName.Text.EndsWith(".prj", StringComparison.CurrentCultureIgnoreCase) && !txtFileName.Text.EndsWith(".pgm7", StringComparison.CurrentCultureIgnoreCase))
-            //    {
-            //        ErrorMessages.Add(SharedStrings.INVALID_PROGRAM_FILE);
-            //    }
-            //}
+            base.ValidateInput();          
 
             if (cmbCommandName.Enabled)
             {
@@ -132,24 +99,11 @@ namespace Epi.Windows.Analysis.Dialogs
         protected override void GenerateCommand()
         {
             StringBuilder sb = new StringBuilder();
-
-            sb.Append(Epi.CommandNames.RUNPGM);
-            sb.Append(StringLiterals.SPACE);
-
-            //sb.Append(StringLiterals.DOUBLEQUOTES);
-             
-            sb.Append(StringLiterals.SINGLEQUOTES);
-            //sb.Append(txtFileName.Text);
-            //sb.Append(StringLiterals.DOUBLEQUOTES);
-            sb.Append(StringLiterals.SINGLEQUOTES);
-
-            if (cmbCommandName.Enabled)
+            if (!(string.IsNullOrEmpty(cmbCommandName.Text)))
             {
-                if (!cmbCommandName.SelectedIndex.Equals(-1))
-                {
-                    sb.Append(StringLiterals.COLON);
-                    sb.Append(cmbCommandName.Text.Trim());
-                }
+                sb.Append(Epi.CommandNames.CALL);
+                sb.Append(StringLiterals.SPACE);
+                sb.Append(cmbCommandName.Text.Trim());
             }
 
             CommandText = sb.ToString().Trim();
@@ -159,8 +113,7 @@ namespace Epi.Windows.Analysis.Dialogs
         #region event handlers
 
         private void txtFileName_Leave(object sender, EventArgs e)
-        {
-            //txtFileName.Text = txtFileName.Text.Trim();
+        {         
             LoadPGMList();
             CheckForInputSufficiency();
         }
@@ -175,8 +128,7 @@ namespace Epi.Windows.Analysis.Dialogs
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "All Program Files|*.prj;*.pgm7|EpiInfo 7 Project|*.prj|PGM|*.pgm7";
             if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                
+            {                
                 LoadPGMList();
             }
         }
@@ -191,6 +143,7 @@ namespace Epi.Windows.Analysis.Dialogs
             LoadPGMList();
             CheckForInputSufficiency();
         }
+
 
         /// <summary>
         /// Opens a process to show the related help topic
