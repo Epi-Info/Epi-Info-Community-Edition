@@ -1446,6 +1446,17 @@ namespace Epi.Windows.Enter
             EndBusy();
         }
 
+        public bool OpenPage(string pageName, string formName = "")
+        {
+            // Get a confirmation from the user
+            if (this.CloseViewEvent != null)
+            {
+                this.CloseViewEvent(this, new EventArgs());
+                SetWindowTitle();
+            }
+
+            return true;
+        }
         private bool CheckAndSetPermissions()
         {
             permissions = this.view.Project.CollectedData.GetDbDriver().GetPermissions();

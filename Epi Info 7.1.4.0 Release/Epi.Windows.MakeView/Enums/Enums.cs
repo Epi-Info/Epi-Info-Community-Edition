@@ -40,6 +40,10 @@ namespace Epi.Windows.MakeView.Enums
 		/// Go to a field
 		/// </summary>
 		GoTo,
+        /// <summary>
+        /// Go to a relatefield
+        /// </summary>
+        GoToForm,
 		/// <summary>
 		/// Hide a field
 		/// </summary>

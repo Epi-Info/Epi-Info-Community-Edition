@@ -13,7 +13,7 @@ namespace Epi.Core.EnterInterpreter
         void Dialog(string pTextPrompt,ref object pVariable, string pListType, string pTitleText);
         bool Dialog(string text, string caption, string mask, string modifier, ref object input);
         string GetValue(string pName);
-        void GoTo(string pDesitnation);
+        void GoTo(string pDesitnation, string targetPage = "", string targetForm = "");
         void Hide(string[] pNameList, bool pIsAnExceptList);
         void NewRecord();
         void UnHide(string[] pNameList, bool pIsAnExceptList);

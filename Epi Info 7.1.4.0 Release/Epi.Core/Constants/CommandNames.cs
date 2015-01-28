@@ -212,6 +212,10 @@ namespace Epi
         /// </summary>
         public const string GOTO = "GOTO";
         /// <summary>
+        /// Goes to Relate Form
+        /// </summary>
+        public const string GOTOFORM = "GOTOFORM";
+        /// <summary>
         /// 
         /// </summary>
         public const string GRAPH = "GRAPH";

@@ -291,6 +291,7 @@ namespace Epi.Windows.MakeView.Forms
 
             this.keywords.Add("geocode");
             this.keywords.Add("goto");
+            this.keywords.Add("gotoform");
             this.keywords.Add("help");
             this.keywords.Add("hide");
             this.keywords.Add("highlight");
@@ -1340,6 +1341,16 @@ namespace Epi.Windows.MakeView.Forms
                         AddStatusErrorMessage("Goto command: invalid cursor location.\nPlease place cursor inside a code block.");
                     }
                     break;
+                case Enums.FieldCommands.GoToForm:
+                    if (this.PreValidateCommand(" Gotoform relatedform "))
+                    {
+                        DesignStatement(new GoToFormDialog(mainForm));
+                    }
+                    else
+                    {
+                        AddStatusErrorMessage("Gotoform command: invalid cursor location.\nPlease place cursor inside a code block.");
+                    }
+                    break;
                 case Enums.FieldCommands.Hide:
                     if (this.PreValidateCommand(" Hide Address "))
                     {
@@ -1729,6 +1740,9 @@ namespace Epi.Windows.MakeView.Forms
                         break;
                     case "goto":
                         DesignFieldCommand(Enums.FieldCommands.GoTo);
+                        break;
+                    case "gotoform":
+                        DesignFieldCommand(Enums.FieldCommands.GoToForm);
                         break;
                     case "hide":
                         DesignFieldCommand(Enums.FieldCommands.Hide);

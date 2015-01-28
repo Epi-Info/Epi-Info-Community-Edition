@@ -334,7 +334,8 @@ namespace Epi.Windows.MakeView.Forms
             resources.GetString("Commands.Items17"),
             resources.GetString("Commands.Items18"),
             resources.GetString("Commands.Items19"),
-            resources.GetString("Commands.Items20")});
+            resources.GetString("Commands.Items20"),
+            resources.GetString("Commands.Items21")});
             this.Commands.Name = "Commands";
             this.Commands.SelectedIndexChanged += new System.EventHandler(this.Commands_SelectedIndexChanged);
             // 

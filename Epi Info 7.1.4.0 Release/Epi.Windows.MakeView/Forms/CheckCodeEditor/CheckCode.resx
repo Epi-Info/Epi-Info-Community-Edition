@@ -147,9 +147,9 @@
   <data name="codeText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="CommandContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="CommandContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>233, 0</value>
-  </metadata>
+  </data>
   <data name="CommandContextMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 92</value>
   </data>
@@ -213,9 +213,9 @@
   <data name="deleteToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="CheckCodeStatusBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="CheckCodeStatusBar.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>400, 0</value>
-  </metadata>
+  </data>
   <data name="CheckCodeStatusBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 426</value>
   </data>
@@ -285,7 +285,7 @@
   <data name="toolStripDropDownButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACGSURBVDhP7ZBLDoAgDAV7J07LabUv0PgCtHwWbnSSiUTq
+        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAACGSURBVDhP7ZBLDoAgDAV7J07LabUv0PgCtHwWbnSSiUTq
         QJSU0rWrRGBgFZsNozaUc8aQK+DD3agN6TIUcBAMo20wog2CLtoGPW2mBrqnWrDgyj8cvScLFtwBh7Oa
         6YMrN2SmQV2GekyDu7x3Q9oY6uEGT/mDnw1CbJyIbzXzBAnbOFURuQGA2xOMpwVdCQAAAABJRU5ErkJg
         gg==
@@ -343,9 +343,9 @@
   <data name="PositionNumberLabel.Text" xml:space="preserve">
     <value>01</value>
   </data>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
-  </metadata>
+  </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
@@ -373,7 +373,7 @@
   <data name="ValidateCodeToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACoAAAAlCAYAAAA0lXuOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASySURBVFhH1Zd9TFNXFMAJXRwYYEoGKWtpy6YdsUClZRmZ
+        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAASySURBVFhH1Zd9TFNXFMAJXRwYYEoGKWtpy6YdsUClZRmZ
         LkM0fMMUWaNDSqkgsAFbdSEM44Yji9nIQDRDQAl+gMKQMCANIzgbYIwxgsAoVkKQhJkQNcuWLPFPzu55
         nIcldXFWpW+/5CXtu+ddfpxz73m3bv8HJhaH/OmjMDF0JA5HNajq6aswyTOn9Wd1JH98rr82hm4JD2NX
         0tCnlpx9sRXRDXRLeOR1pfUfHyjs9C/YME63hAeWu/wnU4fY5D05aB2U0W3hAAAvFPW8/yNmMvQrhSXj
@@ -408,7 +408,7 @@
   <data name="btnCancel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE1SURBVDhPnZA/S8NQFMXzkbJ3yeyURaiLZgxOGetgCA4i
+        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAE1SURBVDhPnZA/S8NQFMXzkbJ3yeyURaiLZgxOGetgCA4i
         iJBFKO1SrZSmoAQSTSGoof5DaiGILk6ZNU3yDY7vvoSAJFjjgTs87j2/c+8TftPiI8b4NsHkJoU7T7B4
         W6JorRYZTTtD30txZOdlMZAzS+sh5jgrG+5jzM3qcQpJCyGpNlqqgzU9wpmfwntIqhCDAS6elvCeP7lZ
         MSNmDpg5wNbeNdb1K0jKAPJBBqsOoHUjaN0M2qBIVmxevfOXcrilDPkW/WlcBVCibFByDtnesSpDtA0B
@@ -431,7 +431,7 @@
   <data name="btnSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFfSURBVDhPfZKhcsMwEET9Cf2EfIJhoGCgYKBgoKChYKBh
+        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAFfSURBVDhPfZKhcsMwEET9Cf2EfIJhoGCgYKBgoKChYKBh
         oGCgYKBgoWChYKFg2XX37CSKm+nN7HjG8j7d7XlgpVsTVVp1bRIjdKkyz6vOVUKApiKe8kXUzKIpZ8GH
         8m+1HxF7zOKOSbXaO8C5rZ/+LZpba2JslnF0AHWAiJYJYIvv6m6u301GmzBGFWtjB8C8BHgcbKs3ly8A
         DknnfwUgLAXgoK+tOZcqOxPFnTYApkwAD+71zpw/q3zsAXBZ7GHuAFhRvglWCYgDnR8gbQ0MM7Nt3vww
@@ -455,7 +455,7 @@
   <data name="btnPrint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFQSURBVDhPjVEtTwUxEOxP4KfwE5DIkwR1CQZZiSwJycMQ
+        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAFQSURBVDhPjVEtTwUxEOxP4KfwE5DIkwR1CQZZiSwJycMQ
         KoAQVCU5TCW4JphnSBrUE4iTyErcMrO9Cxz3jrxJ9j7a3ZmdXbOEmLL8F0Padry/fcgMXyL9Z5H4nKVp
         3TIBE4hSiqR11uBZjEnyppfWOjk+Od9O8Nq9qMoEUAaX5H4H9QAVgiQTdXjOGeqnTgn8fRQf4pSIxWnd
         KwFVR+Uejx7q4TFpsfNBmDvp5Pq2w2HWJL59SEiMYl2AZ6/JTWvVP5XtZfghYHKh4gJ4x044VFpzKG7P
@@ -479,15 +479,15 @@
   <data name="AddCodeBlockToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <metadata name="mainImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="mainImageList.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>554, 0</value>
-  </metadata>
+  </data>
   <data name="mainImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABS
-        DwAAAk1TRnQBSQFMAgEBBAEAARwBAAEcAQABEAEAAQ4BAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABU
+        DwAAAk1TRnQBSQFMAgEBBAEAARwBAAEgAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABHAMAAQEBAAEgBgABHP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wDQAAHwAe0B6wH/AdYBzgHJ
         Af9IAAGBAYQBjwH/AoEBjwH/AoEBhwH/A4EB/wOBAf8BfAKBAf8BcQKBAf8BZgFyAXsB/wFdAWYBbQH/
         AVMBWgFhAf8BTAFRAVYB/wFGAUoBTgH/AUYBSwFQAf8MAAGBAYQBjwH/AoEBhQH/A4EB/wOBAf8BegKB
@@ -552,7 +552,7 @@
         BQAB4BcAA/9xAAX/AfMC/wEAAQcBAAEBAfgBwwH/AfsBAAEDAQABAQHwAQMB7wH/AQABAwEAAQEB4AED
         AccB9wEAAQEBAAEBAeABAwHHAe8BAAEBAQABAQHgAQMB4wHPAwABAQHgAQMB8QGfAwABAQHgAQMB+AE/
         AwABAQHgAQMB/AF/AQABBwEAAQEB4AEDAfgBPwEAAQcBAAEBAeABAwHxAb8BAAH/AQAB/wHgAQMBwwHP
-        AQEB/wEBAf8B4AEHAYcB5wT/AeABDwGfAfML
+        AQEB/wEBAf8B4AEHAYcB5wT/AeABDwGfAfMWAAs=
 </value>
   </data>
   <data name="StatusTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -638,18 +638,6 @@
   </data>
   <data name="btnAddBlock.Text" xml:space="preserve">
     <value>Add Block To Editor</value>
-  </data>
-  <data name="&gt;&gt;btnAddBlock.Name" xml:space="preserve">
-    <value>btnAddBlock</value>
-  </data>
-  <data name="&gt;&gt;btnAddBlock.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnAddBlock.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;btnAddBlock.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -756,6 +744,9 @@
   <data name="Commands.Items20" xml:space="preserve">
     <value>Set-Not-Required</value>
   </data>
+  <data name="Commands.Items21" xml:space="preserve">
+    <value>GoToForm</value>
+  </data>
   <data name="Commands.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 20</value>
   </data>
@@ -763,18 +754,6 @@
     <value>195, 147</value>
   </data>
   <data name="Commands.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;Commands.Name" xml:space="preserve">
-    <value>Commands</value>
-  </data>
-  <data name="&gt;&gt;Commands.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Commands.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;Commands.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -909,9 +888,9 @@
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="CheckCodeMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="CheckCodeMenu.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>99, 0</value>
-  </metadata>
+  </data>
   <data name="CheckCodeMenu.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -1080,12 +1059,12 @@
   <data name="mnuFontsSetEditorFont.Text" xml:space="preserve">
     <value>Set editor font</value>
   </data>
-  <metadata name="CheckCodeFontDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="CheckCodeFontDialog.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 37</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>727, 448</value>
   </data>
@@ -1346,5 +1325,8 @@
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Commands.Items21" xml:space="preserve">
+    <value>GoToForm</value>
   </data>
 </root>
