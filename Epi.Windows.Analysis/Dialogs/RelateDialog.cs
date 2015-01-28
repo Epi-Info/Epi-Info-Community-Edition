@@ -129,6 +129,7 @@ namespace Epi.Windows.Analysis.Dialogs
                         try
                         {
                             selectedDataSource = new Project(filePath);
+                            txtDataSource.Text = filePath;
                         }
                         catch (Exception ex)
                         {
