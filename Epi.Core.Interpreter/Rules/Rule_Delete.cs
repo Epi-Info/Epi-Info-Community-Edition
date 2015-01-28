@@ -673,7 +673,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         whereClause = string.Format(" t.{0} = 1 ", ColumnNames.REC_STATUS);
                     }
                 }
-
+                //---EI-108
+                if (whereClause.ToLower().Contains(ColumnNames.GLOBAL_RECORD_ID.ToLower()))
+                 {
+                    whereClause = whereClause.ToLower().Replace(ColumnNames.GLOBAL_RECORD_ID.ToLower(), "t." + ColumnNames.GLOBAL_RECORD_ID.ToLower());
+                 }
+                //---
                 FromClause = EpiView.FromViewSQL;
                 FromClause = FromClause.Remove(0, 5);
             }
