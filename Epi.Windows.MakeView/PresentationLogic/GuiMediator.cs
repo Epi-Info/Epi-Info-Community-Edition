@@ -3968,7 +3968,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
         /// GoTo
         /// </summary>
         /// <param name="pDestination">destination</param>
-        public void GoTo(string pDestination)
+        public void GoTo(string pDestination, string targetPage = "", string targetForm = "")
         {
             throw new Exception("The method or operation is not implemented.");
         }

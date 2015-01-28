@@ -627,6 +627,7 @@ namespace Epi.Data.Services
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"GLOBALID   ", @"D");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"GO", @"B");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"GOTO", @"B");
+                    reservedWordsDataTable.AddReservedWordsRow(index++, @"GOTOFORM", @"B");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"GRANT", @"B");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"GRAPH", @"A");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"GRAPHTYPE", @"A");

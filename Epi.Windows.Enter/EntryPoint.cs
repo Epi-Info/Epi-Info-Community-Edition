@@ -57,7 +57,7 @@ namespace Epi.Windows.Enter
                                 mainForm.FireOpenViewEvent(project.Views[viewName], recordId);
                             }
 					    }
-
+                        Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
                         System.Windows.Forms.Application.Run(mainForm);
                     }
 
@@ -69,7 +69,11 @@ namespace Epi.Windows.Enter
 				}
 			}
 		}
-
+        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            // Handle exception
+            return;
+        }
 		private static bool LoadConfiguration(string[] args)
 		{
 			// TODO: parse command line to load configuration if specified

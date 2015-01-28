@@ -277,6 +277,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\GoToFormDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\GoToFormDialog.designer.cs">
+      <DependentUpon>GoToFormDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\CheckCodeCommandDialogs\SetNotRequiredDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1034,6 +1040,9 @@
     <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\CallDialog.resx">
       <DependentUpon>CallDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\GoToFormDialog.resx">
+      <DependentUpon>GoToFormDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\SetNotRequiredDialog.resx">
       <DependentUpon>SetNotRequiredDialog.cs</DependentUpon>
