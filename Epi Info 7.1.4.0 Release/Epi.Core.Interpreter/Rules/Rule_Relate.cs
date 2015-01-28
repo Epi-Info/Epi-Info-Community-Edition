@@ -270,6 +270,19 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 }
                 else
                 {
+                    if (filePath.EndsWith(".prj"))
+                    {
+                        Epi.Data.IDbDriver driver = DBReadExecute.GetDataDriver(filePath);
+                        table = driver.GetTableData(identifier);
+                        DataTable pageTables = DBReadExecute.GetDataTable(driver, "Select DISTINCT PageId FROM metaFields Where DataTableName = '" + identifier + "' AND PageId <> null");
+
+                        foreach (DataRow row in pageTables.Rows)
+                        {
+                            DataTable pageTable = driver.GetTableData(identifier + row["PageId"]);
+                            table = JoinPagesTables(table, pageTable);
+                        }
+                    }
+                    else
                     table = DBReadExecute.GetDataTable(filePath, "Select * FROM " + IdentifierBuilder.ToString());
                 }
             }
