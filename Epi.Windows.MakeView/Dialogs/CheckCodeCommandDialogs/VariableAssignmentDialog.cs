@@ -50,7 +50,9 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             {
                 foreach (Fields.Field field in value.Fields)
                 {
-                    if (field is Fields.RenderableField && !(field is Fields.LabelField))
+                    //--EI27
+                   //  if (field is Fields.RenderableField && !(field is Fields.LabelField))
+                    if (field is Fields.RenderableField && !(field is Fields.LabelField) && !(field is Fields.MirrorField))
                     {
                         cbxAvailVariables.Items.Add(field.Name);
                         cbxAssignVariable.Items.Add(field.Name);
