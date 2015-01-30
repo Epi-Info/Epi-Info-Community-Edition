@@ -944,6 +944,13 @@ namespace Epi.Analysis.Statistics
                     nn = double.Parse(SortedRows[1][3].ToString());
                 }
 
+                double expectedYY = ((yy + yn) * (yy + ny)) / (yy + yn + ny + nn);
+                double expectedYN = ((yy + yn) * (yn + nn)) / (yy + yn + ny + nn);
+                double expectedNY = ((ny + nn) * (yy + ny)) / (yy + yn + ny + nn);
+                double expectedNN = ((ny + nn) * (yn + nn)) / (yy + yn + ny + nn);
+
+                bool hasAnExpectedCountLessThanFive = expectedYY < 5 || expectedYN < 5 || expectedNY < 5 || expectedNN < 5;
+
                 tt = yy + yn + ny + nn;
 
                 yyList.Add(yy);
@@ -1073,6 +1080,8 @@ namespace Epi.Analysis.Statistics
                     pHTMLString.AppendLine(" <tr><td class=\"stats\">Chi-square - corrected (Yates)</td> <td class=\"stats\" align=\"right\">" + singleTableResults.ChiSquareYatesVal.ToString("F4") + "<td class=\"stats\"></td><td class=\"stats\" align=\"right\">" + singleTableResults.ChiSquareYates2P.ToString("F10") + "</td></tr>");
                     pHTMLString.AppendLine(" <tr><td class=\"stats\">Mid-p exact</td>  <td class=\"stats\"></td> <td class=\"stats\" align=\"right\">" + singleTableResults.MidP.ToString("F10") + "</td><td class=\"stats\"></td></tr>");
                     pHTMLString.AppendLine(" <tr><td class=\"stats\">Fisher exact</td> <td class=\"stats\"></td> <td class=\"stats\" align=\"right\">" + singleTableResults.FisherExactP.ToString("F10") + "</td><td class=\"stats\">" + singleTableResults.FisherExact2P.ToString("F10") + "</td></tr>");
+                    if (hasAnExpectedCountLessThanFive)
+                        pHTMLString.AppendLine(" <tr> <td class=\"stats\" colspan=\"4\"><p align=\"center\"><tt> At least one cell has expected size <5. Chi-square may not be a valid test.</tt></p></tr>");
                     pHTMLString.AppendLine("</table>");
                 }
 
@@ -1085,6 +1094,8 @@ namespace Epi.Analysis.Statistics
                 double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
                 String disclaimer = "";
                 if (tableChiSq[1] == 1.0)
+                    disclaimer = "An expected value is < 1. Chi-squared may not be a valid test.";
+                if (tableChiSq[1] == 5.0)
                     disclaimer = "An expected value is < 5. Chi-squared may not be a valid test.";
                 pHTMLString.Append("<br clear=\"all\" />");
                 pHTMLString.AppendLine("<br clear=\"all\" /><h4 align=\"center\"> Single Table Analysis </h4>");
