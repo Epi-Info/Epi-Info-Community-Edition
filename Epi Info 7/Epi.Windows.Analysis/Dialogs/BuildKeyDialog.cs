@@ -157,8 +157,23 @@ namespace Epi.Windows.Analysis.Dialogs
                 if (SelectedDataSource is IDbDriver)
                 {
                     IDbDriver db = SelectedDataSource as IDbDriver;
-                    relatedFields = db.GetTableColumnNames(RelatedTable);
-
+                    //--EI-114
+                    // relatedFields = db.GetTableColumnNames(RelatedTable);
+                    if (RelatedTable.Contains(StringLiterals.SPACE))
+                    {
+                        string pstr = "Select TOP 2 * from [" + RelatedTable + "]";
+                        DataTable relfields = DBReadExecute.GetDataTable(db, pstr);
+                        foreach (DataColumn dc in relfields.Columns)
+                        {
+                            relatedFields.Add(dc.ColumnName);
+                        }
+                    }
+                    else
+                    {
+                        relatedFields = db.GetTableColumnNames(RelatedTable); 
+                    }
+                    //---
+                    
                 }
                 else if (SelectedDataSource is Project)
                 {
