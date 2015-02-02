@@ -130,6 +130,7 @@ namespace Epi.Windows.Analysis.Dialogs
                         {
                             selectedDataSource = new Project(filePath);
                             txtDataSource.Text = filePath;
+                            LoadTables();
                         }
                         catch (Exception ex)
                         {
