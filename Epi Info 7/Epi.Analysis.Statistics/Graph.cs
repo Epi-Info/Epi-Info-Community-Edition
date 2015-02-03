@@ -36,7 +36,7 @@ namespace Epi.Analysis.Statistics
         bool _independentValueTypesSame = true; 
         bool _independentValuesAllBool = true;        
         
-        DataTable regressionTable = new DataTable();
+        DataTable _regressionTable = new DataTable();
 
         public Graph(IAnalysisStatisticContext AnalysisStatisticContext)
         {
@@ -110,10 +110,10 @@ namespace Epi.Analysis.Statistics
 
         public void Execute()
         {
-            regressionTable = new DataTable();
-            regressionTable.Columns.Add("SeriesName", typeof(string));
-            regressionTable.Columns.Add("Predictor", typeof(object));
-            regressionTable.Columns.Add("Response", typeof(double));
+            _regressionTable = new DataTable();
+            _regressionTable.Columns.Add("SeriesName", typeof(string));
+            _regressionTable.Columns.Add("Predictor", typeof(object));
+            _regressionTable.Columns.Add("Response", typeof(double));
             
             Dictionary<string, string> config = Context.SetProperties;
             StringBuilder HTMLString = new StringBuilder();
@@ -239,7 +239,7 @@ namespace Epi.Analysis.Statistics
 
                                 if (double.TryParse(row[regressand].ToString(), out dependentVal))
                                 {
-                                    regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
+                                    _regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
                                 }
                             }
                             else
@@ -249,7 +249,7 @@ namespace Epi.Analysis.Statistics
                                 filter.weightVarName = _weightVar;
                                 double dependentVal = GetAggregateValue(sourceTable, filter);
 
-                                regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
+                                _regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
                             }
                         }
                     }
@@ -321,7 +321,7 @@ namespace Epi.Analysis.Statistics
                                             {
                                                 if (double.TryParse(row[crossTabCandidate.ColumnName].ToString(), out dependentVal))
                                                 {
-                                                    regressionTable.Rows.Add( seriesName, independentValue, dependentVal);
+                                                    _regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
                                                 }
                                             }
                                             else
@@ -349,7 +349,7 @@ namespace Epi.Analysis.Statistics
                                                     filter.independentVarValue = independentVariableValue;
                                                     filter.weightVarName = _weightVar;
                                                     dependentVal = GetAggregateValue(sourceTable, filter);
-                                                    regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
+                                                    _regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
                                                 }
                                             }
                                         }
@@ -402,7 +402,7 @@ namespace Epi.Analysis.Statistics
                                     _graphStartFrom = dateTimeValue;
                                 }
 
-                                if ( dateTimeValue >= intervalEnd)
+                                while ( dateTimeValue >= intervalEnd)
                                 {
                                     if (intervalEnd != DateTime.MinValue)
                                     { 
@@ -412,19 +412,25 @@ namespace Epi.Analysis.Statistics
                                     switch (_graphIntervalUnits)
                                     {
                                         case "Years":
+                                            intervalEnd = intervalStart.AddYears((int)givenInterval);
                                             break;
                                         case "Quarters":
+                                            intervalEnd = intervalStart.AddDays(givenInterval * 365.25 / 4.0);
                                             break;
                                         case "Weeks":
+                                            intervalEnd = intervalStart.AddDays(givenInterval * 7);
                                             break;
                                         case "Days":
                                             intervalEnd = intervalStart.AddDays(givenInterval);
                                             break;
                                         case "Hours":
+                                            intervalEnd = intervalStart.AddHours(givenInterval);
                                             break;
                                         case "Minutes":
+                                            intervalEnd = intervalStart.AddMinutes(givenInterval);
                                             break;
                                         case "Seconds":
+                                            intervalEnd = intervalStart.AddSeconds(givenInterval);
                                             break;
                                     }
                                 }
@@ -458,16 +464,16 @@ namespace Epi.Analysis.Statistics
                                         if ((dateTimeValue >= intervalStart) && (dateTimeValue < intervalEnd))
                                         {
                                             string expression = "Predictor = #" + intervalStart.ToString() + "#";
-                                            DataRow[] foundRows = regressionTable.Select(expression);
+                                            DataRow[] foundRows = _regressionTable.Select(expression);
 
                                             if (foundRows.Length == 0)
                                             {
-                                                regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
+                                                _regressionTable.Rows.Add(seriesName, intervalStart, dependentVal);
                                             }
                                             else
                                             {
                                                 foundRows[0]["Response"] = (double)foundRows[0]["Response"] + dependentVal;
-                                                regressionTable.AcceptChanges();
+                                                _regressionTable.AcceptChanges();
                                             }
                                         }
                                     }
@@ -478,7 +484,7 @@ namespace Epi.Analysis.Statistics
                                     filter.independentVarName = independentVariable;
                                     filter.weightVarName = _weightVar;
                                     double dependentVal = GetAggregateValue(sourceTable, filter);
-                                    regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
+                                    _regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
                                 }
                             }
                         }
@@ -570,7 +576,7 @@ namespace Epi.Analysis.Statistics
 
                                     if (double.TryParse(row["__Count__"].ToString(), out dependentVal))
                                     {
-                                        regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
+                                        _regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
                                     }
                                 }
                                 else
@@ -590,7 +596,7 @@ namespace Epi.Analysis.Statistics
                                     filter.independentVarName = independentVariable;
                                     filter.weightVarName = _weightVar;
                                     double dependentVal = GetAggregateValue(sourceTable, filter);
-                                    regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
+                                    _regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
                                 }
                             }
                         }
@@ -624,10 +630,10 @@ namespace Epi.Analysis.Statistics
                         _graphInterval,
                         _graphIntervalUnits,
                         _graphStartFrom,
-                        regressionTable
+                        _regressionTable
                     );
 
-                regressionTable.Rows.Clear();
+                _regressionTable.Rows.Clear();
             }
 
             string data = string.Empty;
