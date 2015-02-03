@@ -899,5 +899,10 @@ namespace EpiDashboard.Controls
         {            
             ValuesUpdated = null;
         }
+
+        private void panelSingleTableResults_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
