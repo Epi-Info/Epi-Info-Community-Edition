@@ -723,7 +723,28 @@ Errorhandler:
         'UPGRADE_WARNING: Couldn't resolve default property of object mvaResult(2, 17). Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="6A50421D-15FE-4896-8A1B-2EC21E9037B2"'
         mvaResult(2, 17) = rd2
 
+        Dim expectedYY As Double
+        Dim expectedYN As Double
+        Dim expectedNY As Double
+        Dim expectedNN As Double
+
+        expectedYY = ((a + c) * (a + b)) / (a + b + c + d)
+        expectedYN = ((a + c) * (c + d)) / (a + b + c + d)
+        expectedNY = ((b + d) * (a + b)) / (a + b + c + d)
+        expectedNN = ((b + d) * (c + d)) / (a + b + c + d)
+
         Dim tableResults As New SingleTableResults
+        tableResults.LowestExpectedCellCount = CType(expectedYY, Double)
+        If expectedYN < expectedYY Then
+            tableResults.LowestExpectedCellCount = CType(expectedYN, Double)
+        End If
+        If expectedNY < expectedYN Then
+            tableResults.LowestExpectedCellCount = CType(expectedNY, Double)
+        End If
+        If expectedNN < expectedNY Then
+            tableResults.LowestExpectedCellCount = CType(expectedNN, Double)
+        End If
+
         tableResults.ChiSquareMantel2P = CType(mvaResult(2, 4), Double)
         tableResults.ChiSquareMantelVal = CType(mvaResult(2, 3), Double)
         tableResults.ChiSquareUncorrected2P = CType(mvaResult(2, 2), Double)
@@ -793,6 +814,8 @@ Main_error:
         Public OddsRatioMLEMidPUpper As Double
         Public OddsRatioMLEFisherLower As Double
         Public OddsRatioMLEFisherUpper As Double
+
+        Public LowestExpectedCellCount As Double
 
         Public RiskRatioEstimate As Nullable(Of Double)
         Public RiskRatioLower As Nullable(Of Double)

@@ -1214,8 +1214,10 @@ namespace EpiDashboard
                             double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 2);
                             double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
                             String disclaimer = "";
+                            if (tableChiSq[1] == 5.0)
+                                disclaimer = "An expected cell value is <5. X" + '\u00B2' + " may not be valid.";
                             if (tableChiSq[1] == 1.0)
-                                disclaimer = SharedStrings.TABLES_CHI_SQUARE_NOT_VALID;
+                                disclaimer = "An expected cell value is <1. X" + '\u00B2' + " may not be valid.";
 
                             this.Dispatcher.BeginInvoke(new AddChiSquareDelegate(RenderChiSquare), tableChiSq[0], tableChiSqDF, tableChiSqP, disclaimer, strataValue);
                             this.Dispatcher.BeginInvoke(new AddGridFooterDelegate(RenderFrequencyFooter), strataValue, rowCount, totals);
@@ -2269,6 +2271,24 @@ namespace EpiDashboard
             Grid.SetRow(txt6, 1);
             Grid.SetColumn(txt6, 2);
             grid.Children.Add(txt6);
+
+            if (!string.IsNullOrEmpty(disclaimer) && !Double.IsNaN(tableChiSq))
+            {
+                grid.RowDefinitions.Add(new RowDefinition());
+
+                StackPanel g = (StackPanel)grid.Parent;
+
+                TextBlock txt7 = new TextBlock();
+                txt7.Text = disclaimer;
+                txt7.Margin = margin;
+                txt7.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                txt7.FontWeight = FontWeights.DemiBold;
+//                Grid.SetRow(txt7, 2);
+//                Grid.SetColumn(txt7, 0);
+//                Grid.SetColumnSpan(txt7, 3);
+//                grid.Children.Add(txt7);
+                g.Children.Add(txt7);
+            }
         }
 
         private void RenderFrequencyFooter(string strataValue, int footerRowIndex, int[] totalRows)
