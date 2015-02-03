@@ -7,17 +7,21 @@ using com.calitha.goldparser;
 namespace Epi.Core.EnterInterpreter.Rules
 {
     /// <summary>
-    /// Class for the Rule_IsDistinct reduction.
+    /// Class for the Rule_IsUnique reduction.
     /// </summary>
-    public partial class Rule_IsDistinct : EnterRule
+    public partial class Rule_IsUnique : EnterRule
     {
+        /*<Is_Unique_Statement> ::= ISUNIQUE <IdentifierList> 
+                                     |ISUNIQUE <IdentifierList> Always
+        */
         string[] IdentifierList = null;
-        private List<EnterRule> ParameterList = new List<EnterRule>();
+        //private List<EnterRule> ParameterList = new List<EnterRule>();
 
-        public Rule_IsDistinct(Rule_Context pContext, NonterminalToken pToken)
+        public Rule_IsUnique(Rule_Context pContext, NonterminalToken pToken)
             : base(pContext)
         {
-            this.ParameterList = EnterRule.GetFunctionParameters(pContext, pToken);
+            this.IdentifierList = this.GetCommandElement(pToken.Tokens, 0).Split(' ');
+            //this.ParameterList = EnterRule.GetFunctionParameters(pContext, pToken);
         }
 
         /// <summary>
@@ -27,7 +31,8 @@ namespace Epi.Core.EnterInterpreter.Rules
         public override object Execute()
         {
             //this.Context.EnterCheckCodeInterface.AutoSearch(this.IdentifierList, this.IdentifierList, true); 
-            object result = true;
+
+            object result = this.Context.EnterCheckCodeInterface.IsUnique(this.IdentifierList); 
 
             return result;
         }

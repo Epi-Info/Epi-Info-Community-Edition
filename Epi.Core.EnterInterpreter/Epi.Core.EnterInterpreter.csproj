@@ -95,7 +95,8 @@
     <Compile Include="IEnterCheckCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EnterRule.cs" />
-    <Compile Include="Rules\Functions\Rule_IsDistinct.cs" />
+    <Compile Include="Rules\Functions\Rule_Autosearch_Function.cs" />
+    <Compile Include="Rules\Functions\Rule_IsUnique.cs" />
     <Compile Include="Rules\Rule_SaveRecord.cs" />
     <Compile Include="Rules\Functions\Rule_GetCoordinates.cs" />
     <Compile Include="Rules\Functions\Rule_SendSMS.cs" />

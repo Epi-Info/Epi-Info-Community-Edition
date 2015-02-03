@@ -5,13 +5,13 @@ using com.calitha.goldparser;
 
 namespace Epi.Core.EnterInterpreter.Rules
 {
-    public class Rule_AutoSearch : EnterRule 
+    public class Rule_Autosearch_Function: EnterRule 
     {
         string[] IdentifierList = null;
         bool AlwaysShow = false;
         string[] DisplayList = null;
-   
-        public Rule_AutoSearch(Rule_Context pContext, NonterminalToken pToken) 
+
+        public Rule_Autosearch_Function(Rule_Context pContext, NonterminalToken pToken)
             : base(pContext)
         {
             /*<Auto_Search_Statement> ::= AUTOSEARCH <IdentifierList> 
@@ -41,13 +41,14 @@ namespace Epi.Core.EnterInterpreter.Rules
             }
         }
 
+
         /// <summary>
         /// uses the EnterCheckCodeInterface to perform an AutoSearch
         /// </summary>
         /// <returns>object</returns>
         public override object Execute()
         {
-            this.Context.EnterCheckCodeInterface.AutoSearch(this.IdentifierList, this.DisplayList, this.AlwaysShow);
+            this.Context.EnterCheckCodeInterface.AutosearchFunction(this.IdentifierList, this.DisplayList, this.AlwaysShow);
             return null;
         }
     }

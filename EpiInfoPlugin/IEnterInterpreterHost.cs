@@ -13,6 +13,8 @@ namespace EpiInfo.Plugin
         bool AssignGrid(string pName, object pValue, int pIndex0, object pIndex1);
         bool Geocode(string address, string latName, string longName);
         void AutoSearch(string[] pIdentifierList, string[] pDisplayList, bool pAlwaysShow);
+        int AutosearchFunction(string[] pIdentifierList, string[] pDisplayList, bool pAlwaysShow);
+        bool IsUnique(string[] pIdentifierList);
         void Clear(string[] pIdentifierList);
         void Dialog(string pTextPrompt, string pTitleText);
         void Dialog(string pTextPrompt, ref object pVariable, string pListType, string pTitleText);
