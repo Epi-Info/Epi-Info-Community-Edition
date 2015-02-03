@@ -270,7 +270,7 @@ namespace Epi
         /// <summary>
         /// Perform a command or a set of commands conditionally
         /// </summary>
-        public const string ISDISTINCT = "ISDISTINCT";
+        public const string ISUNIQUE = "ISUNIQUE";
         /// <summary>
         /// Kaplan-Meier Survival 
         /// </summary>

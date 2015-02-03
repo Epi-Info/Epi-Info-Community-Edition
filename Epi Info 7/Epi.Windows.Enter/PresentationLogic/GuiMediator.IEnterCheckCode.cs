@@ -941,6 +941,7 @@ namespace Epi.Windows.Enter.PresentationLogic
             ControlFactory factory = ControlFactory.Instance;
             Dictionary<string,int> OrFieldCount = new Dictionary<string,int>();
             bool ShowContinueNewDialog = false;
+            bool isNewRecord = false;
 
             foreach (String fieldName in checkCodeList)
             {
@@ -949,7 +950,6 @@ namespace Epi.Windows.Enter.PresentationLogic
                 {
                     if (!(control is Label))
                     {
-
                         if(OrFieldCount.ContainsKey(fieldName.ToLower()))
                         {
                             OrFieldCount[fieldName.ToLower()]++;
@@ -972,8 +972,158 @@ namespace Epi.Windows.Enter.PresentationLogic
             DataTable data = this.view.GetProject().CollectedData.GetSearchRecords(this.view, OrFieldCount, autoSearchFields, autoSearchFieldItemTypes, comparisonTypes, autoSearchFieldValues);
             if (data != null && data.Rows.Count > 0)
             {
-                if (pAlwaysShow)
+                if (data.Select(string.Format("GlobalRecordId = '{0}'", this.view.CurrentGlobalRecordId)).Length != 1)
                 {
+                    isNewRecord = true;
+                }
+
+                if (pAlwaysShow || isNewRecord)
+                {
+                    DataTable TempTable = new DataTable();
+                    if (pDisplayList != null)
+                    {
+                        foreach (string s in pDisplayList)
+                        {
+                            if (s.Equals("CONTINUENEW"))
+                            {
+                                ShowContinueNewDialog = true;
+                            }
+                            else
+                            {
+                                TempTable.Columns.Add(new DataColumn(s, data.Columns[s].DataType));
+                            }
+                        }
+                        if (TempTable.Columns.Count == 0)
+                        {
+                            TempTable = data.Clone();
+                        }
+                    }
+                    else
+                    {
+                        TempTable = data.Clone();
+                    }
+
+                    if (!TempTable.Columns.Contains("UniqueKey"))
+                    {
+                        TempTable.Columns.Add(new DataColumn("UniqueKey", data.Columns["UniqueKey"].DataType));
+                    }
+
+                    DataTable ResultTable = data.Clone();
+                    foreach (DataRow R in data.Rows)
+                    {
+                        ResultTable.ImportRow(R);
+                    }
+
+                    for (int i = 0; i < data.Columns.Count; i++)
+                    {
+
+                        if (data.Columns[i].ColumnName.ToLower().Contains("globalrecordid"))
+                        {
+                            ResultTable.Columns.Remove(data.Columns[i].ColumnName.ToString());
+                        }
+                        else if (pDisplayList != null)
+                        {
+                            bool isFound = false;
+                            foreach (string s in pDisplayList)
+                            {
+                                if (data.Columns[i].ColumnName.Equals(s, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    isFound = true;
+                                    break;
+                                }
+                            }
+
+                            if (!isFound && !data.Columns[i].ColumnName.Equals("UniqueKey", StringComparison.OrdinalIgnoreCase))
+                            {
+                                ResultTable.Columns.Remove(data.Columns[i].ColumnName.ToString());
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+
+                    foreach (DataRow R in ResultTable.Rows)
+                    {
+                        TempTable.ImportRow(R);
+                    }
+
+                    Dialogs.AutoSearchResults dialog = new Dialogs.AutoSearchResults(this.view, this.mainForm, TempTable, ShowContinueNewDialog);
+                    DialogResult result = dialog.ShowDialog();
+                    if (result == DialogResult.OK && false == ShowContinueNewDialog)
+                    {
+                        this.dirty = false;
+                        this.view.IsDirty = false;
+                        this.GoToRecordHandler(this, new GoToRecordEventArgs(this.MainForm.RecordId));
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// AutoSearch the Function
+        /// </summary>
+        /// <param name="pIdentifierList">Identified List</param>
+        /// <param name="pDisplayList">Display List</param>
+        /// <param name="pAlwaysShow">Always</param>
+        /// <returns>Returns an integer with the number of records matching the search variable(s).</returns>
+      
+        public int AutosearchFunction(string[] pIdentifierList, string[] pDisplayList, bool pAlwaysShow)
+        {
+            Collection<string> checkCodeList = new Collection<string>();
+            for (int i = 0; i < pIdentifierList.Length; i++)
+            {
+                checkCodeList.Add(pIdentifierList[i]);
+            }
+
+            Collection<string> autoSearchFields = new Collection<string>();
+            ArrayList autoSearchFieldValues = new ArrayList();
+            Collection<string> autoSearchFieldItemTypes = new Collection<string>();
+            Collection<string> comparisonTypes = new Collection<string>();
+            ControlFactory factory = ControlFactory.Instance;
+            Dictionary<string, int> OrFieldCount = new Dictionary<string, int>();
+            bool ShowContinueNewDialog = false;
+            int ReturnRecordCount = -1;
+            bool isNewRecord = false;
+
+            foreach (String fieldName in checkCodeList)
+            {
+                controlsList = GetAssociatedControls(fieldName);
+                foreach (Control control in controlsList)
+                {
+                    if (!(control is Label))
+                    {
+                        if (OrFieldCount.ContainsKey(fieldName.ToLower()))
+                        {
+                            OrFieldCount[fieldName.ToLower()]++;
+                        }
+                        else
+                        {
+                            OrFieldCount.Add(fieldName.ToLower(), 1);
+                        }
+
+                        autoSearchFields.Add(fieldName);
+                        autoSearchFieldValues.Add(control.Text.Trim());
+
+                        Field field = factory.GetAssociatedField(control);
+                        autoSearchFieldItemTypes.Add(field.FieldType.ToString());
+                        comparisonTypes.Add("=");
+                    }
+                }
+            }
+
+            DataTable data = this.view.GetProject().CollectedData.GetSearchRecords(this.view, OrFieldCount, autoSearchFields, autoSearchFieldItemTypes, comparisonTypes, autoSearchFieldValues);
+            if (data != null && data.Rows.Count > 0)
+            {
+                if (data.Select(string.Format("GlobalRecordId = '{0}'", this.view.CurrentGlobalRecordId)).Length != 1)
+                {
+                    isNewRecord = true;
+                }
+
+                if (pAlwaysShow || isNewRecord)
+                {
+                    ReturnRecordCount = data.Rows.Count;
                     DataTable TempTable = new DataTable();
                     if (pDisplayList != null)
                     {
@@ -1026,6 +1176,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                                 if (data.Columns[i].ColumnName.Equals(s, StringComparison.OrdinalIgnoreCase))
                                 {
                                     isFound = true;
+                                    if (s.Equals("CONTINUENEW")) ShowContinueNewDialog = false;
                                     break;
                                 }
                             }
@@ -1033,10 +1184,6 @@ namespace Epi.Windows.Enter.PresentationLogic
                             if (!isFound && !data.Columns[i].ColumnName.Equals("UniqueKey", StringComparison.OrdinalIgnoreCase))
                             {
                                 ResultTable.Columns.Remove(data.Columns[i].ColumnName.ToString());
-                            }
-                            else
-                            {
-
                             }
                         }
                     }
@@ -1055,93 +1202,74 @@ namespace Epi.Windows.Enter.PresentationLogic
                         this.GoToRecordHandler(this, new GoToRecordEventArgs(this.MainForm.RecordId));
                     }
                 }
-                else
+            }
+            return ReturnRecordCount;
+        }
+
+        /// <summary>
+        /// IsUnique
+        /// </summary>
+        /// <param name="pIdentifierList">Identified List</param>
+        public bool IsUnique(string[] pIdentifierList)
+        {
+            Collection<string> checkCodeList = new Collection<string>();
+            for (int i = 0; i < pIdentifierList.Length; i++)
+            {
+                checkCodeList.Add(pIdentifierList[i]);
+            }
+
+            Collection<string> autoSearchFields = new Collection<string>();
+            ArrayList autoSearchFieldValues = new ArrayList();
+            Collection<string> autoSearchFieldItemTypes = new Collection<string>();
+            Collection<string> comparisonTypes = new Collection<string>();
+            ControlFactory factory = ControlFactory.Instance;
+            Dictionary<string, int> OrFieldCount = new Dictionary<string, int>();
+            bool isUnique = false;
+
+            foreach (String fieldName in checkCodeList)
+            {
+                controlsList = GetAssociatedControls(fieldName);
+                foreach (Control control in controlsList)
                 {
-                    if (data.Select(string.Format("GlobalRecordId = '{0}'", this.view.CurrentGlobalRecordId)).Length != 1)
+                    if (!(control is Label))
                     {
-                        DataTable TempTable = new DataTable();
-                        if (pDisplayList != null)
+                        if (OrFieldCount.ContainsKey(fieldName.ToLower()))
                         {
-                            foreach (string s in pDisplayList)
-                            {
-                                if (s.Equals("CONTINUENEW"))
-                                {
-                                    ShowContinueNewDialog = true;
-                                }
-                                else
-                                {
-                                    TempTable.Columns.Add(new DataColumn(s, data.Columns[s].DataType));
-                                }
-                            }
-                            if (TempTable.Columns.Count == 0)
-                            {
-                                TempTable = data.Clone();
-                            }
+                            OrFieldCount[fieldName.ToLower()]++;
                         }
                         else
                         {
-                            TempTable = data.Clone();
+                            OrFieldCount.Add(fieldName.ToLower(), 1);
                         }
 
-                        if (!TempTable.Columns.Contains("UniqueKey"))
-                        {
-                            TempTable.Columns.Add(new DataColumn("UniqueKey", data.Columns["UniqueKey"].DataType));
-                        }
+                        autoSearchFields.Add(fieldName);
+                        autoSearchFieldValues.Add(control.Text.Trim());
 
-                        DataTable ResultTable = data.Clone();
-                        foreach (DataRow R in data.Rows)
-                        {
-                            ResultTable.ImportRow(R);
-                        }
-
-                        for (int i = 0; i < data.Columns.Count; i++)
-                        {
-
-                            if (data.Columns[i].ColumnName.ToLower().Contains("globalrecordid"))
-                            {
-                                ResultTable.Columns.Remove(data.Columns[i].ColumnName.ToString());
-                            }
-                            else if (pDisplayList != null)
-                            {
-                                bool isFound = false;
-                                foreach (string s in pDisplayList)
-                                {
-                                    if (data.Columns[i].ColumnName.Equals(s, StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        isFound = true;
-                                        if(s.Equals("CONTINUENEW")) ShowContinueNewDialog = false;
-                                        break;
-                                    }
-                                }
-
-                                if (!isFound && !data.Columns[i].ColumnName.Equals("UniqueKey", StringComparison.OrdinalIgnoreCase))
-                                {
-                                    ResultTable.Columns.Remove(data.Columns[i].ColumnName.ToString());
-                                }
-                                else
-                                {
-
-                                }
-                            }
-                        }
-
-                        foreach (DataRow R in ResultTable.Rows)
-                        {
-                            TempTable.ImportRow(R);
-                        }
-
-                        Dialogs.AutoSearchResults dialog = new Dialogs.AutoSearchResults(this.view, this.mainForm, TempTable, ShowContinueNewDialog);
-                        DialogResult result = dialog.ShowDialog();
-                        if (result == DialogResult.OK && false == ShowContinueNewDialog)
-                        {
-                            this.dirty = false;
-                            this.view.IsDirty = false;
-                            this.GoToRecordHandler(this, new GoToRecordEventArgs(this.MainForm.RecordId));
-                        }
+                        Field field = factory.GetAssociatedField(control);
+                        autoSearchFieldItemTypes.Add(field.FieldType.ToString());
+                        comparisonTypes.Add("=");
                     }
                 }
             }
+
+            DataTable data = this.view.GetProject().CollectedData.GetSearchRecords(this.view, OrFieldCount, autoSearchFields, autoSearchFieldItemTypes, comparisonTypes, autoSearchFieldValues);
+            if (data != null && data.Rows.Count > 0)
+            {
+                if (data.Select(string.Format("GlobalRecordId = '{0}'", this.view.CurrentGlobalRecordId)).Length != 1)
+                {
+                    if (data.Rows.Count == 1)
+                    {
+                        isUnique = true;
+                    }
+                    else
+                    {
+                        isUnique = false;
+                    }
+                }
+            }
+            return isUnique;
         }
+
 
         /// <summary>
         /// Quit

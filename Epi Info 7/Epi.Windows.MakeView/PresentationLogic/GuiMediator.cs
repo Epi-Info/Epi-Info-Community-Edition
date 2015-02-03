@@ -3886,9 +3886,31 @@ namespace Epi.Windows.MakeView.PresentationLogic
         /// AutoSearch
         /// </summary>
         /// <param name="pIdentifierList">Identifier list</param>
+        /// <param name="pDisplayList">Display List</param>
+        /// <param name="pAlwaysShow">Always</param>
         public void AutoSearch(string[] pIdentifierList, string[] pDisplayList, bool pAlwaysShow)
         {
             throw new Exception("The method or operation is not implemented.");
+        }
+
+        /// <summary>
+        /// AutoSearch Function
+        /// </summary>
+        /// <param name="pIdentifierList">Identifier list</param>
+        /// <param name="pDisplayList">Display List</param>
+        /// <param name="pAlwaysShow">Always</param>
+        public int AutosearchFunction(string[] pIdentifierList, string[] pDisplayList, bool pAlwaysShow)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        /// <summary>
+        /// IsDistinct
+        /// </summary>
+        /// <param name="pIdentifierList">Identifier list</param>
+        public bool IsUnique(string[] pIdentifierList)
+        {
+            return false;
         }
 
         /// <summary>

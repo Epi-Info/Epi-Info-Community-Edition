@@ -110,6 +110,9 @@ namespace Epi.Core.EnterInterpreter.Rules
                     case "ABS":
                         functionCall = new Rule_Abs(pContext, T);
                         break;
+                    case "AUTOSEARCH":
+                        functionCall = new Rule_Autosearch_Function(pContext, T);
+                        break;
                     case "COS":
                         functionCall = new Rule_Cos(pContext, T);
                         break;
@@ -131,8 +134,8 @@ namespace Epi.Core.EnterInterpreter.Rules
                     case "HOURS":
                         functionCall = new Rule_Hours(pContext, T);
                         break;
-                    case "ISDISTINCT":
-                        functionCall = new Rule_IsDistinct(pContext, T);
+                    case "ISUNIQUE":
+                        functionCall = new Rule_IsUnique(pContext, T);
                         break;
                     case "LINEBREAK":
                         functionCall = new Rule_LineBreak(pContext, T);

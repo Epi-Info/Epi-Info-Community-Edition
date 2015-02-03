@@ -218,7 +218,7 @@ namespace Epi.Core.AnalysisInterpreter
             SelectCommandList.Add(CommandNames.TXTTONUM);
             SelectCommandList.Add(CommandNames.TXTTODATE);
             SelectCommandList.Add(CommandNames.UPPERCASE);
-            SelectCommandList.Add(CommandNames.ISDISTINCT);
+            SelectCommandList.Add(CommandNames.ISUNIQUE);
 
             Subroutine = new Dictionary<string, AnalysisRule>(StringComparer.OrdinalIgnoreCase);
             SubroutineList = new Dictionary<string, Epi.Core.AnalysisInterpreter.AnalysisRule>();
