@@ -1173,19 +1173,17 @@ namespace Epi.Windows.Enter.PresentationLogic
                     this.mainForm.CloseView();
                     return;
                 }
-                ResetViewDataFields();
-
+                if (AllowOneRecordOnly) { return; }
+                this.EnterCheckCodeEngine.CheckCodeHandler(this, new Epi.EnterCheckCodeEngine.RunCheckCodeEventArgs(Epi.EnterCheckCodeEngine.EventActionEnum.NewRecord, "+"));
                 this.canvas.UnsubscribeControlEventHandlers();
                 this.CurrentRecordId = this.EnterCheckCodeEngine.CurrentView.CurrentRecordNumber;
                 this.canvas.SetNewRecordValues();
                 this.mainForm.UpdateAppSpecificInfo(SharedStrings.NEW_RECORD);
                 this.mainForm.AddNewRecordSettings();
                 this.viewExplorer.GoToFirstPage();
-
+                this.OpenPageHandler(this, new PageSelectedEventArgs(this.currentPage));    
                 this.Render();
-                this.canvas.SubscribeControlEventHandlers();
-                SetFocusToFirstControl(currentPage, _fieldPanel);
-            }
+              }
         }
 
         private void ResetViewDataFields()
