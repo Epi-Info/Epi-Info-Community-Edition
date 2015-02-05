@@ -62,6 +62,7 @@ namespace Epi.Windows.MakeView.Forms
             this.closeProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportTemplate = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCopyToPhone = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripPublishToWebEnter = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPublishToWeb = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -81,6 +82,8 @@ namespace Epi.Windows.MakeView.Forms
             this.statusBarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vocabularyFieldsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.epiInfoLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fieldNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.insertPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -307,6 +310,7 @@ namespace Epi.Windows.MakeView.Forms
             this.closeProjectToolStripMenuItem,
             this.mnuImportTemplate,
             this.mnuCopyToPhone,
+            this.toolStripMenuItemPrint,
             this.toolStripPublishToWebEnter,
             this.mnuPublishToWeb,
             this.toolStripSeparator3,
@@ -369,6 +373,12 @@ namespace Epi.Windows.MakeView.Forms
             this.mnuCopyToPhone.Image = global::Epi.Windows.MakeView.Properties.Resources.android_icon;
             this.mnuCopyToPhone.Name = "mnuCopyToPhone";
             this.mnuCopyToPhone.Click += new System.EventHandler(this.mnuCopyToPhone_Click);
+            // 
+            // toolStripMenuItemPrint
+            // 
+            resources.ApplyResources(this.toolStripMenuItemPrint, "toolStripMenuItemPrint");
+            this.toolStripMenuItemPrint.Name = "toolStripMenuItemPrint";
+            this.toolStripMenuItemPrint.Click += new System.EventHandler(this.toolStripMenuItemPrint_Click);
             // 
             // toolStripPublishToWebEnter
             // 
@@ -472,7 +482,9 @@ namespace Epi.Windows.MakeView.Forms
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusBarToolStripMenuItem,
             this.vocabularyFieldsToolStripMenuItem,
-            this.epiInfoLogsToolStripMenuItem});
+            this.epiInfoLogsToolStripMenuItem,
+            this.fieldNamesToolStripMenuItem,
+            this.tabOrderToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
             // 
@@ -496,6 +508,20 @@ namespace Epi.Windows.MakeView.Forms
             this.epiInfoLogsToolStripMenuItem.Name = "epiInfoLogsToolStripMenuItem";
             resources.ApplyResources(this.epiInfoLogsToolStripMenuItem, "epiInfoLogsToolStripMenuItem");
             this.epiInfoLogsToolStripMenuItem.Click += new System.EventHandler(this.epiInfoLogsToolStripMenuItem_Click);
+            // 
+            // fieldNamesToolStripMenuItem
+            // 
+            this.fieldNamesToolStripMenuItem.CheckOnClick = true;
+            this.fieldNamesToolStripMenuItem.Name = "fieldNamesToolStripMenuItem";
+            resources.ApplyResources(this.fieldNamesToolStripMenuItem, "fieldNamesToolStripMenuItem");
+            this.fieldNamesToolStripMenuItem.Click += new System.EventHandler(this.fieldNamesToolStripMenuItem_Click);
+            // 
+            // tabOrderToolStripMenuItem
+            // 
+            this.tabOrderToolStripMenuItem.CheckOnClick = true;
+            this.tabOrderToolStripMenuItem.Name = "tabOrderToolStripMenuItem";
+            resources.ApplyResources(this.tabOrderToolStripMenuItem, "tabOrderToolStripMenuItem");
+            this.tabOrderToolStripMenuItem.Click += new System.EventHandler(this.tabOrderToolStripMenuItem_Click);
             // 
             // insertToolStripMenuItem
             // 
@@ -1090,6 +1116,9 @@ namespace Epi.Windows.MakeView.Forms
         private ToolStripMenuItem finalToolStripMenuItem1;
         private ToolStripMenuItem draftToolStripMenuItem2;
         private ToolStripMenuItem finalToolStripMenuItem2;
+        private ToolStripMenuItem toolStripMenuItemPrint;
+        private ToolStripMenuItem fieldNamesToolStripMenuItem;
+        private ToolStripMenuItem tabOrderToolStripMenuItem;
 
     }
 }

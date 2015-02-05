@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAC
-        4gAAAk1TRnQBSQFMAgEBYQEAAWMBAAH8AQEBEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        4gAAAk1TRnQBSQFMAgEBYQEAAWMBAAEsAQIBEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABXgEBAgABAQEAASAGAAFeAQH/AP8AEwABvQGcAXsF/wG9AZwBhAX/Ab0BnAF7Bf8BvQGcAYQF/wG9
         AZwBewX/Ab0BnAGEBf8BvQGcAXsF/wG9AZwBhAH/xAA8/8QAAb0BnAGECf8BvQGlAYQB/wG9AZwBhAH/
         Ab0BpQGEBf8BvQGlAYQB/wG9AZwBhAH/Ab0BpQGEEf8BvQGcAXsB/8QACP8BxgGlAYQJ/wG9AZwBhAX/
@@ -1126,7 +1126,7 @@
     <value>dockManager1</value>
   </data>
   <data name="&gt;&gt;dockManager1.Type" xml:space="preserve">
-    <value>Epi.Windows.Docking.DockManager, Epi.Windows, Version=7.1.5330.14322, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Docking.DockManager, Epi.Windows, Version=7.1.5511.17797, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dockManager1.Parent" xml:space="preserve">
     <value>MainToolStripContainer.ContentPanel</value>
@@ -1375,6 +1375,15 @@
   <data name="mnuCopyToPhone.Text" xml:space="preserve">
     <value>Copy Form to Android Device</value>
   </data>
+  <data name="toolStripMenuItemPrint.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripMenuItemPrint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 22</value>
+  </data>
+  <data name="toolStripMenuItemPrint.Text" xml:space="preserve">
+    <value>Print</value>
+  </data>
   <data name="toolStripPublishToWebEnter.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1529,6 +1538,18 @@
   </data>
   <data name="epiInfoLogsToolStripMenuItem.Text" xml:space="preserve">
     <value>Epi Info &amp;Logs</value>
+  </data>
+  <data name="fieldNamesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
+  <data name="fieldNamesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Field Names</value>
+  </data>
+  <data name="tabOrderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
+  <data name="tabOrderToolStripMenuItem.Text" xml:space="preserve">
+    <value>Tab Order</value>
   </data>
   <data name="viewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -3632,6 +3653,12 @@
   <data name="&gt;&gt;mnuCopyToPhone.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItemPrint.Name" xml:space="preserve">
+    <value>toolStripMenuItemPrint</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemPrint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripPublishToWebEnter.Name" xml:space="preserve">
     <value>toolStripPublishToWebEnter</value>
   </data>
@@ -3744,6 +3771,18 @@
     <value>epiInfoLogsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;epiInfoLogsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fieldNamesToolStripMenuItem.Name" xml:space="preserve">
+    <value>fieldNamesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;fieldNamesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabOrderToolStripMenuItem.Name" xml:space="preserve">
+    <value>tabOrderToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;tabOrderToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;insertToolStripMenuItem.Name" xml:space="preserve">
@@ -4140,6 +4179,6 @@
     <value>MakeViewMainForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.MainForm, Epi.Windows, Version=7.1.5330.14322, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.MainForm, Epi.Windows, Version=7.1.5511.17797, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
