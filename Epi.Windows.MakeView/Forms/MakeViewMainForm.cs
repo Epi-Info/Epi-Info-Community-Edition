@@ -1215,6 +1215,7 @@ namespace Epi.Windows.MakeView.Forms
                 UndoButtonEnabled = true;
                 RedoButtonEnabled = true;
                 makeViewFromDataTableToolStripMenuItem.Enabled = true;// false;//true;
+                toolStripMenuItemPrint.Enabled = true;
             }
             else
             {
@@ -1237,6 +1238,7 @@ namespace Epi.Windows.MakeView.Forms
                 UndoButtonEnabled = false;                
                 RedoButtonEnabled = false;
                 makeViewFromDataTableToolStripMenuItem.Enabled = false;
+                toolStripMenuItemPrint.Enabled = false;
             }
 
             closeProjectToolStripMenuItem.Enabled = true;
@@ -1304,7 +1306,7 @@ namespace Epi.Windows.MakeView.Forms
             displayDataDictionaryToolStripMenuItem.Enabled = false;
             UndoButtonEnabled = false;
             RedoButtonEnabled = false;
-
+            toolStripMenuItemPrint.Enabled = false;
             if (projectExplorer.SelectedPage != null)
             {
                 View currentView = this.mediator.ProjectExplorer.SelectedPage.GetView();
@@ -4575,6 +4577,28 @@ namespace Epi.Windows.MakeView.Forms
             draftToolStripMenuItem2.CheckState = CheckState.Unchecked;
             finalToolStripMenuItem2.CheckState = CheckState.Checked;
             }
+
+        private void toolStripMenuItemPrint_Click(object sender, EventArgs e)
+        {
+            Print printdialog = new Print(this.mediator);
+            printdialog.Show();
+        }
+
+        private void fieldNamesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(fieldNamesToolStripMenuItem.Checked)
+                this.mediator.isShowFieldName = true;
+            else
+                this.mediator.isShowFieldName = false;
+        }
+
+        private void tabOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabOrderToolStripMenuItem.Checked)
+            this.mediator.isShowTabOrder = true;
+            else
+                this.mediator.isShowTabOrder = false;
+        }
         
        
     }

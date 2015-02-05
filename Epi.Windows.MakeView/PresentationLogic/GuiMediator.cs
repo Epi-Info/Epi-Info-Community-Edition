@@ -12,6 +12,7 @@ using Epi.Windows.MakeView.Forms;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using System.Drawing.Printing;
 
 
 namespace Epi.Windows.MakeView.PresentationLogic
@@ -42,6 +43,10 @@ namespace Epi.Windows.MakeView.PresentationLogic
         private List<Control> _pastedFields = new List<Control>();
         private List<int> _newFieldIds = new List<int>();
         private int _arrowKeyDownCount = 0;
+        private System.Drawing.Printing.PrintDocument printDocument;
+        private ArrayList pageImageList;
+        private Bitmap memoryImage;
+        private int currentPrintPage;
         #endregion Private Data Members
 
         #region Public Events
@@ -122,6 +127,9 @@ namespace Epi.Windows.MakeView.PresentationLogic
         #endregion
 
         #region Public Properties
+
+        public bool isShowTabOrder { get; set; }
+        public bool isShowFieldName { get; set; }
 
         public List<int> NewFieldIds
         {
@@ -4691,6 +4699,434 @@ namespace Epi.Windows.MakeView.PresentationLogic
             }
             canvas.DisposeControlTrackers();
         }
+
+        # region Print
+
+        public void Print(int pageNumberStart, int pageNumberEnd)
+        {
+            if (ProcessPrintRequest( pageNumberStart,  pageNumberEnd))
+            {
+                printDocument.Print();
+            }
+            else
+            {
+                MessageBox.Show("The selected range and number of pages is too much to print at one time.");
+                System.GC.Collect();
+                System.GC.WaitForPendingFinalizers();
+            }
+        }
+
+           /// <summary>
+        /// Handles the Print Page event of the document
+        /// </summary>
+        /// <param name="sender">Object that fired the event</param>
+        /// <param name="e">.NET supplied event parameters</param>
+        private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            e.Graphics.DrawImage(((Bitmap)pageImageList[currentPrintPage++]), 0, 0);
+
+            if (currentPrintPage < pageImageList.Count)
+            {
+                e.HasMorePages = true;
+            }
+            else
+            {
+                e.HasMorePages = false;
+                currentPrintPage = 0;
+            }
+        }
+
+        private bool ProcessPrintRequest(int pageNumberStart, int pageNumberEnd)
+        {
+            bool isLandscape = false;           
+            currentPrintPage = 0;
+            pageImageList = new ArrayList();
+            View view = this.ProjectExplorer.SelectedPage.GetView();
+            Page currentPage=this.ProjectExplorer.currentPage;
+               try
+               {
+                   List<Page> allPages = view.GetMetadata().GetViewPages(view);
+                   List<Page> pages = new List<Page>();
+                   pages = allPages.GetRange(pageNumberStart - 1, 1 + pageNumberEnd - pageNumberStart);
+
+                   foreach (Page page in pages)
+                   {
+                       printDocument = new System.Drawing.Printing.PrintDocument();
+                       printDocument.PrintPage += new PrintPageEventHandler(printDocument_PrintPage);
+
+                       DataRow row = page.GetMetadata().GetPageSetupData(view);                      
+                       isLandscape = row["Orientation"].ToString().ToLower() == "landscape";
+                       Panel printPanel = new Panel();
+
+                       float dpiX;
+                       Graphics graphics = printPanel.CreateGraphics();
+                       dpiX = graphics.DpiX;
+
+                       int height = (int)row["Height"];
+                       int width = (int)row["Width"];
+
+                       if (dpiX != 96)
+                       {
+                           float scaleFactor = (dpiX * 1.041666666f) / 100;
+                           height = Convert.ToInt32(((float)height) * (float)scaleFactor);
+                           width = Convert.ToInt32(((float)width) * (float)scaleFactor);
+                       }
+
+                       if (isLandscape)
+                       {
+                           printPanel.Size = new System.Drawing.Size(height, width);
+                           printDocument.DefaultPageSettings.Landscape = true;
+                       }
+                       else
+                       {
+                           printPanel.Size = new System.Drawing.Size(width, height);
+                       }
+
+                       ControlFactory factory = ControlFactory.Instance;
+                       List<Control> pageControls = factory.GetPageControls(page, printPanel.Size);
+
+                       SortedList<IFieldControl, System.Drawing.Point> groupsOnPage = new SortedList<IFieldControl, System.Drawing.Point>(new GroupZeeOrderComparer());
+                       List<Control> childrenOnPage = new List<Control>();
+                       List<Control> orphansOnPage = new List<Control>();
+                       ArrayList namesOfChildenOnPage = new ArrayList();
+
+                       Panel panel = canvas.PagePanel;
+
+                       foreach (Control control in pageControls)
+                       {
+                           Control printControl = control;
+                           Field field = factory.GetAssociatedField(control);
+                           field = view.Fields[field.Name];
+
+                           if (control is DragableGroupBox == false)
+                           {
+                               try
+                               {
+                                   if (control is RichTextBox)
+                                   {
+                                       printControl = new TextBox();
+
+                                       ((TextBoxBase)printControl).BorderStyle = ((TextBoxBase)control).BorderStyle;
+                                       ((TextBoxBase)printControl).Multiline = true;
+
+                                       printControl.Left = control.Left;
+                                       printControl.Top = control.Top;
+                                       printControl.Height = control.Height;
+                                       printControl.Width = control.Width;
+                                       printControl.Font = control.Font;
+                                   }
+
+                                   printPanel.Controls.Add(printControl);
+                               }
+                               catch
+                               {
+                                   return false;
+                               }
+                           }
+
+                           if (printControl is Label) continue;
+                           if (printControl is FieldGroupBox) continue;
+                          
+                           if (printControl is TextBox || printControl is ComboBox)
+                           {
+                               if (field is IDataField || printControl is DataGridView)
+                               {
+                                   if (printControl is ComboBox)
+                                   {
+                                       ((ComboBox)printControl).Text = "";
+                                   }
+                               }
+
+                               if (printControl is TextBox)
+                               {
+                                   ((TextBox)printControl).Text = "";
+                                   ((TextBox)printControl).Enabled = true;
+                               }
+                           }                           
+                       }
+                      
+                       int colorValue;
+                       DataTable backgroundTable = page.GetMetadata().GetPageBackgroundData(page);
+                       DataRow[] rows = backgroundTable.Select("BackgroundId=" + page.BackgroundId);
+                       string imageLayout = string.Empty;
+                       if (rows.Length > 0)
+                       {
+                           imageLayout = Convert.ToString(rows[0]["ImageLayout"]);
+                       }
+                       Color color;
+                       Image image;
+                       Bitmap bufferBitmap = null;
+
+                       if (page != null)
+                       {
+                           if (rows.Length > 0)
+                           {
+                               colorValue = Convert.ToInt32(rows[0]["Color"]);
+
+                               if (rows[0]["Image"] != System.DBNull.Value)
+                               {
+                                   try
+                                   {
+                                       byte[] imageBytes = ((byte[])rows[0]["Image"]);
+
+                                       using (MemoryStream memStream = new MemoryStream(imageBytes.Length))
+                                       {
+                                           memStream.Seek(0, SeekOrigin.Begin);
+                                           memStream.Write(imageBytes, 0, imageBytes.Length);
+                                           memStream.Seek(0, SeekOrigin.Begin);
+
+                                           image = Image.FromStream(((Stream)memStream));
+                                       }
+                                   }
+                                   catch
+                                   {
+                                       image = null;
+                                   }
+                               }
+                               else
+                               {
+                                   image = null;
+                               }
+
+                               if (colorValue == 0)
+                               {
+                                   color = SystemColors.Window;
+                               }
+                               else
+                               {
+                                   color = Color.FromArgb(colorValue);
+                               }
+                           }
+                           else
+                           {
+                               image = null;
+                               imageLayout = "None";
+                               color = SystemColors.Window;
+                           }
+                       }
+                       else
+                       {
+                           image = null;
+                           imageLayout = "None";
+                           color = SystemColors.Window;
+                       }
+
+                       if ((image == null) && (color.Equals(Color.Empty)))
+                       {
+                           printPanel.BackColor = Color.White;
+                       }
+                       else
+                       {
+                           if (!isShowFieldName && !isShowTabOrder)
+                           {
+                           }
+                           else
+                           {
+                               foreach (Control control in pageControls)
+                               {
+                                   Field field = factory.GetAssociatedField(control);
+                                   if (control.TabStop == true)
+                                   {
+                                       bool isInputField = ((Control)control) is PairedLabel == false && field.FieldType != MetaFieldType.Group;
+                                       bool isLabelField = field.FieldType == MetaFieldType.LabelTitle;
+                                       if (isInputField || isLabelField)
+                                       {
+                                           Label lbTabSquare = new Label();
+                                           lbTabSquare.BackColor = control.TabStop ? Color.Black : Color.Firebrick;
+                                           lbTabSquare.Padding = new Padding(2);
+                                           lbTabSquare.ForeColor = Color.White;
+                                           lbTabSquare.BorderStyle = BorderStyle.None;
+                                           lbTabSquare.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold);
+                                           if (isShowFieldName && isShowTabOrder)
+                                               lbTabSquare.Text = control.TabIndex.ToString() + "  " + field.Name;
+                                           else if (isShowFieldName && !isShowTabOrder)
+                                               lbTabSquare.Text = field.Name;
+                                           else if (!isShowFieldName && isShowTabOrder)
+                                               lbTabSquare.Text = control.TabIndex.ToString();                                         
+                                           lbTabSquare.Location = new Point(control.Location.X, control.Location.Y);
+                                           lbTabSquare.Size = TextRenderer.MeasureText(lbTabSquare.Text, lbTabSquare.Font);
+                                           lbTabSquare.Size = new Size(lbTabSquare.Size.Width + lbTabSquare.Padding.Size.Width, lbTabSquare.Size.Height + lbTabSquare.Padding.Size.Height);
+                                           lbTabSquare.Tag = "showtab";
+                                           lbTabSquare.BringToFront();
+                                           printPanel.Controls.Add(lbTabSquare);
+                                       }
+                                   }
+                                   else
+                                   {
+                                       bool isInputField = ((Control)control) is PairedLabel == false && field.FieldType != MetaFieldType.Group;
+                                       bool isLabelField = field.FieldType == MetaFieldType.LabelTitle;
+                                       if (isInputField || isLabelField)
+                                       {
+                                           Label lbTabSquare = new Label();
+                                           //lbTabSquare.Paint+=new PaintEventHandler(lbTabSquare_Paint);
+                                           lbTabSquare.BackColor = Color.Firebrick;// control.TabStop ? Color.Firebrick : Color.Black;
+                                           lbTabSquare.Padding = new Padding(2);
+                                           lbTabSquare.ForeColor = Color.White;
+                                           lbTabSquare.BorderStyle = BorderStyle.None;
+                                           lbTabSquare.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold);
+                                           if (isShowFieldName && isShowTabOrder)
+                                               lbTabSquare.Text = control.TabIndex.ToString() + "  " + field.Name;
+                                           else if (isShowFieldName && !isShowTabOrder)
+                                               lbTabSquare.Text = field.Name;
+                                           else if (!isShowFieldName && isShowTabOrder)
+                                               lbTabSquare.Text = control.TabIndex.ToString();                                          
+                                           lbTabSquare.Location = new Point(control.Location.X, control.Location.Y);
+                                           lbTabSquare.Size = TextRenderer.MeasureText(lbTabSquare.Text, lbTabSquare.Font);
+                                           lbTabSquare.Size = new Size(lbTabSquare.Size.Width + lbTabSquare.Padding.Size.Width, lbTabSquare.Size.Height + lbTabSquare.Padding.Size.Height);                                           
+                                           lbTabSquare.BringToFront();
+                                           printPanel.Controls.Add(lbTabSquare);
+                                       }
+                                   }
+                               }
+                           }                          
+                           printPanel.BackgroundImageLayout = ImageLayout.None;
+                           if (printPanel.Size.Width > 0 && printPanel.Size.Height > 0)
+                           {
+                               try
+                               {                                   
+                                   Bitmap b = new Bitmap(printPanel.Size.Width, printPanel.Size.Height);                                   
+                                   Graphics bufferGraphics = Graphics.FromImage(b);
+
+                                   if (!(color.Equals(Color.Empty)))
+                                   {
+                                       printPanel.BackColor = color;
+                                   }
+                                   
+                                   bufferGraphics.Clear(printPanel.BackColor);
+
+                                   if (image != null)
+                                   {
+                                       Image img = image;
+                                       switch (imageLayout.ToUpper())
+                                       {
+                                           case "TILE":
+                                               TextureBrush tileBrush = new TextureBrush(img, System.Drawing.Drawing2D.WrapMode.Tile);
+                                               bufferGraphics.FillRectangle(tileBrush, 0, 0, printPanel.Size.Width, printPanel.Size.Height);
+                                               tileBrush.Dispose();
+                                               break;
+
+                                           case "STRETCH":
+                                               bufferGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                                               bufferGraphics.DrawImage(img, 0, 0, printPanel.Size.Width, printPanel.Size.Height);
+                                               bufferGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+                                               break;
+
+                                           case "CENTER":
+                                               int centerX = (printPanel.Size.Width / 2) - (img.Size.Width / 2);
+                                               int centerY = (printPanel.Size.Height / 2) - (img.Size.Height / 2);
+                                               bufferGraphics.DrawImage(img, centerX, centerY);
+                                               break;
+
+                                           default:
+                                               bufferGraphics.DrawImage(img, 0, 0);
+                                               break;
+                                       }
+                                   }
+
+                                   foreach (Control control in pageControls)
+                                   {
+                                       if (control is DragableGroupBox)
+                                       {
+                                           Pen pen = new Pen(Color.Black);
+                                           Point ul = control.Location;
+                                           Point ur = new Point(control.Location.X + control.Width, control.Location.Y);
+                                           Point ll = new Point(control.Location.X, control.Location.Y + control.Height);
+                                           Point lr = new Point(control.Location.X + control.Width, control.Location.Y + control.Height);
+                                           bufferGraphics.DrawLine(pen, ul, ur);
+                                           bufferGraphics.DrawLine(pen, ur, lr);
+                                           bufferGraphics.DrawLine(pen, lr, ll);
+                                           bufferGraphics.DrawLine(pen, ll, ul);
+                                       }
+                                   }
+                                   
+                                   bufferGraphics.DrawImage(b, 0, 0);
+                                   bufferBitmap = b;
+                                   printPanel.BackgroundImage = b;
+                               }
+                               catch
+                               {
+                                   bufferBitmap.Dispose();
+                                   graphics.Dispose();
+                                   printPanel.Dispose();
+                                   pageImageList = null;
+                                   return false;
+                               }
+                           }
+                       }
+
+                       foreach (Control control in pageControls)
+                       {
+                           if (control is DragableGroupBox)
+                           {
+                               Label label = new Label();
+                               label.Width = control.Width;
+                               label.Text = control.Text;
+                               Size textSize = TextRenderer.MeasureText(graphics, label.Text, label.Font);
+                               label.Left = control.Left + 12;
+                               label.Top = control.Top - textSize.Height / 2;
+                               label.Width = textSize.Width + 12;
+                               label.Font = control.Font;
+                               label.AutoSize = true;
+                               printPanel.Controls.Add(label);
+                           }
+                       }
+
+                       if (bufferBitmap != null)
+                       {
+                           graphics.DrawImage(bufferBitmap, 0, 0);
+                       }
+
+                       try
+                       {
+                            Bitmap b1 = new Bitmap(printPanel.Size.Width, printPanel.Size.Height);
+                           DrawGrid(b1);
+                           printPanel.BackgroundImage = b1;
+                           memoryImage = new Bitmap(printPanel.Width, printPanel.Height, graphics);
+                           printPanel.DrawToBitmap(memoryImage, new Rectangle(0, 0, printPanel.Width, printPanel.Height));
+                           printPanel.Dispose();
+                           pageImageList.Add(memoryImage.Clone());
+                       }
+                       catch
+                       {
+                           bufferBitmap.Dispose();
+                           graphics.Dispose();
+                           printPanel.Dispose();
+                           pageImageList = null;
+                           memoryImage.Dispose();
+                           return false;
+                       }
+                   }
+               }
+
+               catch
+               {
+                   memoryImage.Dispose();
+                   pageImageList = null;
+                   return false;
+               };
+
+            return true;
+        }
+
+        private Configuration Config = Configuration.GetNewInstance();
+
+        private void DrawGrid(Bitmap b)
+        {           
+            for (int y = 0; y < b.Height; y += (Config.Settings.GridSize + 1) * Epi.Constants.GRID_FACTOR)
+            {
+                for (int x = 0; x < b.Width; x += (Config.Settings.GridSize + 1) * Epi.Constants.GRID_FACTOR)
+                {
+                    b.SetPixel(x, y, Color.Silver);
+                }
+            }
+        }
+
+        void lbTabSquare_Paint(object sender, PaintEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 
     #region ControlTopComparer
@@ -4864,4 +5300,6 @@ namespace Epi.Windows.MakeView.PresentationLogic
         RedoChange
     }
     #endregion
+
+  
 }

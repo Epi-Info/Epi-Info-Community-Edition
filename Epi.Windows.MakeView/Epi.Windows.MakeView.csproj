@@ -240,6 +240,12 @@
     <Compile Include="Dialogs\EWEOrgKey.designer.cs">
       <DependentUpon>EWEOrgKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\PrintDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PrintDialog.Designer.cs">
+      <DependentUpon>PrintDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\SupportedFieldTypeAndroidDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1108,6 +1114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EWEOrgKey.resx">
       <DependentUpon>EWEOrgKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PrintDialog.resx">
+      <DependentUpon>PrintDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SupportedFieldTypeAndroidDialog.resx">
       <DependentUpon>SupportedFieldTypeAndroidDialog.cs</DependentUpon>
