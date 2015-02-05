@@ -11,17 +11,30 @@ namespace Epi.Core.EnterInterpreter.Rules
     /// </summary>
     public partial class Rule_IsUnique : EnterRule
     {
-        /*<Is_Unique_Statement> ::= ISUNIQUE <IdentifierList> 
-                                     |ISUNIQUE <IdentifierList> Always
-        */
+        //<Is_Unique_Statement> ::= ISUNIQUE <IdentifierList> 
+
         string[] IdentifierList = null;
-        //private List<EnterRule> ParameterList = new List<EnterRule>();
 
         public Rule_IsUnique(Rule_Context pContext, NonterminalToken pToken)
             : base(pContext)
         {
-            this.IdentifierList = this.GetCommandElement(pToken.Tokens, 0).Split(' ');
-            //this.ParameterList = EnterRule.GetFunctionParameters(pContext, pToken);
+            if (pToken.Tokens.Length > 1)
+            {
+                int max = pToken.Tokens.GetUpperBound(0);
+                string tokensInTree = "";
+                for (int i = pToken.Tokens.GetLowerBound(0); i <= max; i++)
+                {
+                    if (pToken.Tokens[i] is NonterminalToken)
+                    {
+                        tokensInTree += ExtractTokens(((NonterminalToken)pToken.Tokens[i]).Tokens).Trim();
+                    }
+                    else
+                    {
+                        tokensInTree += pToken.Tokens[i].ToString();
+                    }
+                }
+                this.IdentifierList = tokensInTree.Split(',');
+            }
         }
 
         /// <summary>
@@ -30,12 +43,9 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>Returns true when the value is unique.</returns>
         public override object Execute()
         {
-            //this.Context.EnterCheckCodeInterface.AutoSearch(this.IdentifierList, this.IdentifierList, true); 
-
             object result = this.Context.EnterCheckCodeInterface.IsUnique(this.IdentifierList); 
 
             return result;
-        }
-        
+        }       
     }
 }

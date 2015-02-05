@@ -1253,18 +1253,15 @@ namespace Epi.Windows.Enter.PresentationLogic
             }
 
             DataTable data = this.view.GetProject().CollectedData.GetSearchRecords(this.view, OrFieldCount, autoSearchFields, autoSearchFieldItemTypes, comparisonTypes, autoSearchFieldValues);
-            if (data != null && data.Rows.Count > 0)
+            if (data != null)
             {
-                if (data.Select(string.Format("GlobalRecordId = '{0}'", this.view.CurrentGlobalRecordId)).Length != 1)
+                if ((data.Rows.Count == 0) || (data.Rows.Count == 1 && (data.Select(string.Format("GlobalRecordId = '{0}'", this.view.CurrentGlobalRecordId)).Length == 1)))
                 {
-                    if (data.Rows.Count == 1)
-                    {
-                        isUnique = true;
-                    }
-                    else
-                    {
-                        isUnique = false;
-                    }
+                    isUnique = true;
+                }
+                else
+                {
+                    isUnique = false;
                 }
             }
             return isUnique;
