@@ -18,7 +18,7 @@ namespace Epi.Core.EnterInterpreter.Rules
         public Rule_IsUnique(Rule_Context pContext, NonterminalToken pToken)
             : base(pContext)
         {
-            if (pToken.Tokens.Length > 1)
+            if (pToken.Tokens.Length >= 1)
             {
                 int max = pToken.Tokens.GetUpperBound(0);
                 string tokensInTree = "";
