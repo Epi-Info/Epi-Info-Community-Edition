@@ -35,7 +35,18 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 DateTime param1 = (DateTime) p1;
                 DateTime param2 = (DateTime) p2;
 
-                int age = param2.Year - param1.Year;
+                if (param1 != null && param2 != null)
+                {
+                    int monthsApart = 12 * (param2.Year - param1.Year) + param2.Month - param1.Month;
+
+                    if (param2.Day < param1.Day)
+                    {
+                        monthsApart--;
+                    }
+
+                    result = monthsApart;
+                }
+               /* int age = param2.Year - param1.Year;
                 if
                 (
                     param2.Month < param1.Month ||
@@ -74,7 +85,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                 }
 
-                result = age + months;
+                result = age + months;*/
             }
              
             return result;
