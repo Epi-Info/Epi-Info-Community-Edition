@@ -750,6 +750,10 @@ Errorhandler:
         If expectedNN < expectedNY Then
             tableResults.LowestExpectedCellCount = CType(expectedNN, Double)
         End If
+        tableResults.LowNPQ = CType(n1p1q1, Double)
+        If n2p2q2 < n1p1q1 Then
+            tableResults.LowNPQ = CType(n2p2q2, Double)
+        End If
 
         tableResults.ChiSquareMantel2P = CType(mvaResult(2, 4), Double)
         tableResults.ChiSquareMantelVal = CType(mvaResult(2, 3), Double)
@@ -822,6 +826,7 @@ Main_error:
         Public OddsRatioMLEFisherUpper As Double
 
         Public LowestExpectedCellCount As Double
+        Public LowNPQ As Double
 
         Public RiskRatioEstimate As Nullable(Of Double)
         Public RiskRatioLower As Nullable(Of Double)

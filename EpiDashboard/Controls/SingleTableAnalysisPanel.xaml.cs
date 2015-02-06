@@ -224,12 +224,24 @@ namespace EpiDashboard.Controls
                 if (singleTableResults.LowestExpectedCellCount < 5)
                 {
                     txtDisclaimer.Visibility = Visibility.Visible;
+                    txtDisclaimer.FontWeight = FontWeights.DemiBold;
                     txtDisclaimer.Text = "An expected cell count is < 5. X" + '\u00B2' + " may not be valid.";
                 }
                 else
                 {
                     txtDisclaimer.Visibility = Visibility.Collapsed;
                     txtDisclaimer.Text = "";
+                }
+                if (singleTableResults.LowNPQ < 5)
+                {
+                    txtDisclaimerOR.Visibility = Visibility.Visible;
+                    txtDisclaimerOR.FontWeight = FontWeights.DemiBold;
+                    txtDisclaimerOR.Text = "Sparse data. Use exact confidence limits.";
+                }
+                else
+                {
+                    txtDisclaimerOR.Visibility = Visibility.Collapsed;
+                    txtDisclaimerOR.Text = "";
                 }
             }
         }
