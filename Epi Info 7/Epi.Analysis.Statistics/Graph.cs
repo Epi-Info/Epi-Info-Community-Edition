@@ -31,7 +31,7 @@ namespace Epi.Analysis.Statistics
 
         string _graphInterval = string.Empty;
         string _graphIntervalUnits = string.Empty;
-        object _graphStartFrom = string.Empty;
+        DateTime _graphStartFrom = DateTime.MinValue;
 
         bool _independentValueTypesSame = true; 
         bool _independentValuesAllBool = true;        
@@ -104,7 +104,9 @@ namespace Epi.Analysis.Statistics
             }
             if (Context.InputVariableList.ContainsKey("Start_From"))
             {
-                _graphStartFrom = Context.InputVariableList["Start_From"];
+                _graphStartFrom = DateTime.MinValue;
+                string startFromDate = Context.InputVariableList["START_FROM"];
+                DateTime.TryParse(startFromDate, out _graphStartFrom);
             }
         }
 
@@ -384,6 +386,7 @@ namespace Epi.Analysis.Statistics
                         DateTime intervalStart = DateTime.MinValue;
                         DateTime intervalEnd = DateTime.MinValue;
                         DateTime dateTimeValue = DateTime.MinValue;
+                        intervalStart = _graphStartFrom;
 
                         double givenInterval = 1;
                         int days = 0, hours = 0, minutes = 0, seconds = 0; 
