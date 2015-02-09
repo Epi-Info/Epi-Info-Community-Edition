@@ -75,6 +75,9 @@ namespace Epi.Windows.Analysis.Dialogs
             comboBoxWeightVar.SelectedIndex = 0;
             comboBoxStrataVar.SelectedIndex = 0;
             comboBoxBarOfEachValueOf.SelectedIndex = 0;
+            textBoxInterval.Text = "";
+            comboBoxIntervalType.Text = "";
+            startDateTime.Value = DateTime.Now;
 		}
 
         /// <summary>
@@ -138,7 +141,7 @@ namespace Epi.Windows.Analysis.Dialogs
             {
                 if (false == listBoxVariables.Items.Contains(comboBoxMainVariable.SelectedItem) && !string.IsNullOrEmpty(comboBoxMainVariable.SelectedItem.ToString()))
                 {
-                    if (comboBoxGraphType.Text == "Pie")
+                    if (comboBoxGraphType.Text == "Pie" || comboBoxGraphType.Text == "Epi Curve")
                     {
                         listBoxVariables.Items.Clear();
                     }
@@ -297,6 +300,8 @@ namespace Epi.Windows.Analysis.Dialogs
                 command.Append(string.Format("INTERVAL=\"{0} {1}\"", textBoxInterval.Text, comboBoxIntervalType.Text));
             }
 
+            command.Append(string.Format("STARTFROM=\"{0}\"", startDateTime.Value.ToString()));
+
 			CommandText = command.ToString();
 		}
 		#endregion //Protected Methods
@@ -373,7 +378,7 @@ namespace Epi.Windows.Analysis.Dialogs
             }
             comboBoxIntervalType.Enabled = enableIntervalFields;
             textBoxInterval.Enabled = enableIntervalFields;
-            textBoxFirstValue.Enabled = false;
+            startDateTime.Enabled = enableIntervalFields;
         }
 	}
 }
