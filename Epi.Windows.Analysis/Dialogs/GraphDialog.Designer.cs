@@ -61,8 +61,8 @@ namespace Epi.Windows.Analysis.Dialogs
             this.comboBoxDateFormat = new System.Windows.Forms.ComboBox();
             this.labelDateFormat = new System.Windows.Forms.Label();
             this.groupBoxInterval = new System.Windows.Forms.GroupBox();
+            this.startDateTime = new System.Windows.Forms.DateTimePicker();
             this.labelInterval = new System.Windows.Forms.Label();
-            this.textBoxFirstValue = new System.Windows.Forms.TextBox();
             this.labelFirstValue = new System.Windows.Forms.Label();
             this.comboBoxIntervalType = new System.Windows.Forms.ComboBox();
             this.textBoxInterval = new System.Windows.Forms.TextBox();
@@ -376,8 +376,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // groupBoxInterval
             // 
+            this.groupBoxInterval.Controls.Add(this.startDateTime);
             this.groupBoxInterval.Controls.Add(this.labelInterval);
-            this.groupBoxInterval.Controls.Add(this.textBoxFirstValue);
             this.groupBoxInterval.Controls.Add(this.labelFirstValue);
             this.groupBoxInterval.Controls.Add(this.comboBoxIntervalType);
             this.groupBoxInterval.Controls.Add(this.textBoxInterval);
@@ -385,15 +385,16 @@ namespace Epi.Windows.Analysis.Dialogs
             this.groupBoxInterval.Name = "groupBoxInterval";
             this.groupBoxInterval.TabStop = false;
             // 
+            // startDateTime
+            // 
+            resources.ApplyResources(this.startDateTime, "startDateTime");
+            this.startDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.startDateTime.Name = "startDateTime";
+            // 
             // labelInterval
             // 
             resources.ApplyResources(this.labelInterval, "labelInterval");
             this.labelInterval.Name = "labelInterval";
-            // 
-            // textBoxFirstValue
-            // 
-            resources.ApplyResources(this.textBoxFirstValue, "textBoxFirstValue");
-            this.textBoxFirstValue.Name = "textBoxFirstValue";
             // 
             // labelFirstValue
             // 
@@ -498,9 +499,9 @@ namespace Epi.Windows.Analysis.Dialogs
         private System.Windows.Forms.Label labelDateFormat;
         private System.Windows.Forms.GroupBox groupBoxInterval;
         private System.Windows.Forms.Label labelInterval;
-        private System.Windows.Forms.TextBox textBoxFirstValue;
         private System.Windows.Forms.Label labelFirstValue;
         private System.Windows.Forms.ComboBox comboBoxIntervalType;
         private System.Windows.Forms.TextBox textBoxInterval;
+        private System.Windows.Forms.DateTimePicker startDateTime;
     }
 }

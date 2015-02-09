@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
-        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAHUAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEEAQEBEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wAgAAF1AYQBjwH/
         AWYBgAGPAf8BYAF5AYcB/wFXAW4BewH/AU4BYgFvAf8BRAFWAWEB/wE5AUgBUgH/AS4BOgFDAf8BJQEu
         ATUB/wEbASIBKQH/ARQBGQEeAf8BDgESARYB/wEOARMBGAH/DAABdQGEAY8B/wFsAXoBhQH/AWABbQF3
@@ -928,7 +928,7 @@
     <value>9</value>
   </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>140, 17</value>
+    <value>146, 17</value>
   </metadata>
   <data name="comboBoxGraphType.Items" xml:space="preserve">
     <value>Area</value>
@@ -1551,6 +1551,33 @@
   <data name="&gt;&gt;groupBoxFormat.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="startDateTime.CustomFormat" xml:space="preserve">
+    <value>MM/dd/yyyy hh:mm tt</value>
+  </data>
+  <data name="startDateTime.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="startDateTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 75</value>
+  </data>
+  <data name="startDateTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 20</value>
+  </data>
+  <data name="startDateTime.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;startDateTime.Name" xml:space="preserve">
+    <value>startDateTime</value>
+  </data>
+  <data name="&gt;&gt;startDateTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;startDateTime.Parent" xml:space="preserve">
+    <value>groupBoxInterval</value>
+  </data>
+  <data name="&gt;&gt;startDateTime.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="labelInterval.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1576,30 +1603,6 @@
     <value>groupBoxInterval</value>
   </data>
   <data name="&gt;&gt;labelInterval.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="textBoxFirstValue.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="textBoxFirstValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 74</value>
-  </data>
-  <data name="textBoxFirstValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 20</value>
-  </data>
-  <data name="textBoxFirstValue.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;textBoxFirstValue.Name" xml:space="preserve">
-    <value>textBoxFirstValue</value>
-  </data>
-  <data name="&gt;&gt;textBoxFirstValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxFirstValue.Parent" xml:space="preserve">
-    <value>groupBoxInterval</value>
-  </data>
-  <data name="&gt;&gt;textBoxFirstValue.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelFirstValue.AutoSize" type="System.Boolean, mscorlib">
@@ -1753,6 +1756,6 @@
     <value>GraphDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5283.18308, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5518.22848, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
