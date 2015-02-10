@@ -74,7 +74,10 @@ namespace Epi.Windows.Enter.PresentationLogic
                                     if (String.IsNullOrEmpty(((InputFieldWithSeparatePrompt)pageField).CurrentRecordValueString))
                                     {
                                         //MessageBox.Show(((InputFieldWithSeparatePrompt)pageField).Name + ": This field is required.");
-                                        MsgBox.ShowWarning(string.Format(SharedStrings.FIELD_IS_REQUIRED_LONG, ((InputFieldWithSeparatePrompt)pageField).Prompt, (((InputFieldWithSeparatePrompt)pageField).Page.Position + 1).ToString()));
+                                        //--EI-159
+                                        //MsgBox.ShowWarning(string.Format(SharedStrings.FIELD_IS_REQUIRED_LONG, ((InputFieldWithSeparatePrompt)pageField).Prompt, (((InputFieldWithSeparatePrompt)pageField).Page.Position + 1).ToString()));
+                                        MsgBox.ShowWarning(string.Format(SharedStrings.FIELD_IS_REQUIRED_LONG, ((InputFieldWithSeparatePrompt)pageField).Prompt , (((InputFieldWithSeparatePrompt)pageField).Page.Name).ToString()));
+                                        //--
                                         //
                                         List<Control> fieldList = factory.GetAssociatedControls((InputFieldWithSeparatePrompt)pageField);
                                         if (fieldList != null && fieldList.Count > 1)
@@ -111,7 +114,9 @@ namespace Epi.Windows.Enter.PresentationLogic
                                     if (String.IsNullOrEmpty(((InputFieldWithSeparatePrompt)pageField).CurrentRecordValueString))
                                     {
                                         //MessageBox.Show(((InputFieldWithSeparatePrompt)pageField).Name + ": This field is required.");
-                                        MsgBox.ShowWarning(string.Format(SharedStrings.FIELD_IS_REQUIRED_LONG, ((InputFieldWithSeparatePrompt)pageField).Prompt, (((InputFieldWithSeparatePrompt)pageField).Page.Position + 1).ToString()));
+                                        //--EI-159
+                                       // MsgBox.ShowWarning(string.Format(SharedStrings.FIELD_IS_REQUIRED_LONG, ((InputFieldWithSeparatePrompt)pageField).Prompt, (((InputFieldWithSeparatePrompt)pageField).Page.Position + 1).ToString()));
+                                        MsgBox.ShowWarning(string.Format(SharedStrings.FIELD_IS_REQUIRED_LONG, ((InputFieldWithSeparatePrompt)pageField).Prompt, (((InputFieldWithSeparatePrompt)pageField).Page.Name).ToString()));
                                         //
                                         return false;
                                     }
