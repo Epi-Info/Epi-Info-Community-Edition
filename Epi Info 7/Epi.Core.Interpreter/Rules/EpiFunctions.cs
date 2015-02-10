@@ -194,6 +194,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     case "LOG":
                         functionCall = new Rule_LOG_Func(pContext, T);
                         break;
+                    case "SQRT":
+                        functionCall = new Rule_SQRT_Func(pContext, T);
+                        break;
                     case "SIN":
                         functionCall = new Rule_Sin(pContext, T);
                         break;
