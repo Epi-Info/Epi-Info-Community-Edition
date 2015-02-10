@@ -728,10 +728,16 @@ Errorhandler:
         Dim expectedNY As Double
         Dim expectedNN As Double
 
+        Dim n1p1q1 As Double
+        Dim n2p2q2 As Double
+
         expectedYY = ((a + c) * (a + b)) / (a + b + c + d)
         expectedYN = ((a + c) * (c + d)) / (a + b + c + d)
         expectedNY = ((b + d) * (a + b)) / (a + b + c + d)
         expectedNN = ((b + d) * (c + d)) / (a + b + c + d)
+
+        n1p1q1 = n1 * (a / n1) * (1 - (a / n1))
+        n2p2q2 = n0 * (c / n0) * (1 - (c / n0))
 
         Dim tableResults As New SingleTableResults
         tableResults.LowestExpectedCellCount = CType(expectedYY, Double)
