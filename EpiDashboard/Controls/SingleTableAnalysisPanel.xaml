@@ -48,6 +48,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
             <TextBlock x:Name="tblockStatisticalTests" Margin="4,2,4,2" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" FontWeight="Bold" HorizontalAlignment="Center">Statistical Tests</TextBlock>
@@ -83,6 +84,7 @@
 
             <TextBlock Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="7" Grid.Column="2" HorizontalAlignment="Right"></TextBlock>
             <TextBlock Name="txtFisherExact2P" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="8" Grid.Column="2" HorizontalAlignment="Right">n/a</TextBlock>
+            <TextBlock Name="txtDisclaimer" Style="{DynamicResource twoByTwoSingleTableTextBlockStyle}" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Left" Visibility="Collapsed" Grid.ColumnSpan="3">Disclaimer</TextBlock>
         </Grid>
 
         <Grid Grid.Row="1" Margin="0,4,0,0" SnapsToDevicePixels="True">
