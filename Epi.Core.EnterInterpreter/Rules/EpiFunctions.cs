@@ -110,9 +110,6 @@ namespace Epi.Core.EnterInterpreter.Rules
                     case "ABS":
                         functionCall = new Rule_Abs(pContext, T);
                         break;
-                    case "AUTOSEARCH":
-                        functionCall = new Rule_Autosearch_Function(pContext, T);
-                        break;
                     case "COS":
                         functionCall = new Rule_Cos(pContext, T);
                         break;
