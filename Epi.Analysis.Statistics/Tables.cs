@@ -961,6 +961,8 @@ namespace Epi.Analysis.Statistics
                 StatisticsRepository.cTable.SingleTableResults singleTableResults;
                 singleTableResults = new StatisticsRepository.cTable().SigTable((double)yy, (double)yn, (double)ny, (double)nn, 0.95);
 
+                bool hasNPQLessThanFive = singleTableResults.LowNPQ < 5;
+
                 if (string.IsNullOrEmpty(singleTableResults.ErrorMessage))
                 {
                     double yyPct = ((double)yy / (double)tt) * 160;
@@ -1074,6 +1076,8 @@ namespace Epi.Analysis.Statistics
                     pHTMLString.AppendLine(" <tr><td class=\"stats\">Risk Difference (RD%)</td><td class=\"stats\" align=\"right\">" + singleTableResults.RiskDifferenceEstimate.ToString("F4") + "</td><td class=\"stats\" align=\"right\">" + singleTableResults.RiskDifferenceLower.ToString("F4") + "</td><td class=\"stats\" align=\"right\">" + singleTableResults.RiskDifferenceUpper.ToString("F4") + "<tt> (T)</tt></td></tr>");
                     pHTMLString.AppendLine(" <tr /><tr /><tr /><tr /><tr />");
                     pHTMLString.AppendLine(" <tr> <td class=\"stats\" colspan=\"4\"><p align=\"center\"><tt> (T=Taylor series; C=Cornfield; M=Mid-P; F=Fisher Exact)</tt></p></tr>");
+                    if (hasNPQLessThanFive)
+                        pHTMLString.AppendLine(" <tr> <td class=\"stats\" colspan=\"4\"><p align=\"center\"><tt><b>Sparse data. Use exact confidence limits.</b></tt></p></tr>");
                     pHTMLString.AppendLine(" <tr /><tr /><tr /><tr /><tr />");
                     pHTMLString.AppendLine(" <tr><td class=\"stats\">STATISTICAL TESTS</td> <td class=\"stats\">Chi-square<td class=\"stats\">1-tailed p<td class=\"stats\">2-tailed p<tr><td class=\"stats\">Chi-square - uncorrected<td class=\"stats\" align=\"right\">" + singleTableResults.ChiSquareUncorrectedVal.ToString("F4") + "<td class=\"stats\"><td class=\"stats\" align=\"right\">" + singleTableResults.ChiSquareUncorrected2P.ToString("F10") + "</td></tr>");
                     pHTMLString.AppendLine(" <tr><td class=\"stats\">Chi-square - Mantel-Haenszel</td> <td class=\"stats\" align=\"right\">" + singleTableResults.ChiSquareMantelVal.ToString("F4") + "<td class=\"stats\"><td class=\"stats\" align=\"right\">" + singleTableResults.ChiSquareMantel2P.ToString("F10") + "</td></tr>");
@@ -1081,7 +1085,7 @@ namespace Epi.Analysis.Statistics
                     pHTMLString.AppendLine(" <tr><td class=\"stats\">Mid-p exact</td>  <td class=\"stats\"></td> <td class=\"stats\" align=\"right\">" + singleTableResults.MidP.ToString("F10") + "</td><td class=\"stats\"></td></tr>");
                     pHTMLString.AppendLine(" <tr><td class=\"stats\">Fisher exact</td> <td class=\"stats\"></td> <td class=\"stats\" align=\"right\">" + singleTableResults.FisherExactP.ToString("F10") + "</td><td class=\"stats\">" + singleTableResults.FisherExact2P.ToString("F10") + "</td></tr>");
                     if (hasAnExpectedCountLessThanFive)
-                        pHTMLString.AppendLine(" <tr> <td class=\"stats\" colspan=\"4\"><p align=\"center\"><tt> At least one cell has expected size <5. Chi-square may not be a valid test.</tt></p></tr>");
+                        pHTMLString.AppendLine(" <tr> <td class=\"stats\" colspan=\"4\"><p align=\"center\"><tt><b>At least one cell has expected size <5. Chi-square may not be a valid test.</b></tt></p></tr>");
                     pHTMLString.AppendLine("</table>");
                 }
 
