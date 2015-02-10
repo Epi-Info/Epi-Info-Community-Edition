@@ -32,7 +32,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Controls:SingleTableAnalysisPanel x:Name="panelSingleTableResults" Grid.Column="7" Grid.Row="0" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" SnapsToDevicePixels="True"></Controls:SingleTableAnalysisPanel>
+        <Controls:SingleTableAnalysisPanel x:Name="panelSingleTableResults" Grid.Column="7" Grid.Row="0" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" SnapsToDevicePixels="True" Loaded="panelSingleTableResults_Loaded"></Controls:SingleTableAnalysisPanel>
         <!--<Grid Name="grdResults" Grid.Column="7" Grid.Row="0" Grid.RowSpan="3" Width="Auto" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,0" Visibility="Visible" SnapsToDevicePixels="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

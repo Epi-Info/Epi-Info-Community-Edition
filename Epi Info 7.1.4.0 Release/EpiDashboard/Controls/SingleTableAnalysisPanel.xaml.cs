@@ -220,7 +220,17 @@ namespace EpiDashboard.Controls
                 txtFisherUpper.Text = fisherUpper;
                 txtFisherExact.Text = fisherExact;
                 txtFisherExact2P.Text = fisherExact2P;
-                txtMidPExact.Text = singleTableResults.MidP.ToString("F10");                
+                txtMidPExact.Text = singleTableResults.MidP.ToString("F10");
+                if (singleTableResults.LowestExpectedCellCount < 5)
+                {
+                    txtDisclaimer.Visibility = Visibility.Visible;
+                    txtDisclaimer.Text = "An expected cell count is < 5. X" + '\u00B2' + " may not be valid.";
+                }
+                else
+                {
+                    txtDisclaimer.Visibility = Visibility.Collapsed;
+                    txtDisclaimer.Text = "";
+                }            
             }
         }
 

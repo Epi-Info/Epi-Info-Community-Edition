@@ -66,8 +66,10 @@ namespace Epi.Statistics
                         expected[k] = rowtotals[i] * ps[j + 2];
                         OminusESqOverE[k] = Math.Pow(observed[k] - expected[k], 2.0) / expected[k];
                         ChiSq[0] += OminusESqOverE[k];
-                        if (expected[k] < 5.0)
+                        if (expected[k] < 1.0)
                             ChiSq[1] = 1.0;
+                        if (expected[k] < 5.0 && ChiSq[1] == 0.0)
+                            ChiSq[1] = 5.0;
                         k++;
                     }
             }
