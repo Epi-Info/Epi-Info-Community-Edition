@@ -245,7 +245,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                                 if (result is System.DBNull)
                                 {
-                                    result = null;
+                                    result = "";
                                 }
                             }
                             else // there is NO current row go through datarows
