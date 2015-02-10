@@ -2215,7 +2215,14 @@ namespace EpiDashboard
                 //                Grid.SetColumn(txt7, 0);
                 //                Grid.SetColumnSpan(txt7, 3);
                 //                grid.Children.Add(txt7);
-                g.Children.Add(txt7);
+              //  g.Children.Add(txt7);
+                if (g == null) { }
+                else
+                {
+                    textBlock.Text = string.Empty;
+                    textBlock.Visibility = System.Windows.Visibility.Collapsed;
+                    g.Children.Add(txt7);
+                }
             }
         }
 
