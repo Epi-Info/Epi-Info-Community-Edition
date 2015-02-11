@@ -161,6 +161,9 @@ namespace Epi.Core.EnterInterpreter.Rules
                     case "SECONDS":
                         functionCall = new Rule_Seconds(pContext, T);
                         break;
+                    case "SQRT":
+                        functionCall = new Rule_SQRT_Func(pContext, T);
+                        break;
                     case "SYSTEMDATE":
                         functionCall = new Rule_SystemDate(pContext, T);
                         break;
