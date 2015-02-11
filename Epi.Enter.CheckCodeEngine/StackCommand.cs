@@ -7,14 +7,24 @@ namespace Epi.EnterCheckCodeEngine
 {
     public class StackCommand
     {
-        string QueryString; // level= & event= & identifier View | record | page | field
+        string QueryString; 
+        string _level; // View | Record | Page | Field
+        string _event; // Before | After | ...
+        string _identifier;
+
+        public string Level { get {return _level;} }
+        public string Event { get { return _event; } }
+        public string Identifier { get { return _identifier; } }
+        
         IEnterInterpreter EnterInterpreter;
-
-
-        public StackCommand(IEnterInterpreter pEnterInterpreter, string pLevel, string pEvent, string pIdentifier)
+        
+        public StackCommand(IEnterInterpreter EnterInterpreter, string Level, string Event, string Identifier)
         {
-            this.EnterInterpreter = pEnterInterpreter;
-            this.QueryString = string.Format("level={0}&event={1}&identifier={2}", pLevel.ToLower(), pEvent.ToLower(), pIdentifier.ToLower());
+            this.EnterInterpreter = EnterInterpreter;
+            _level = Level;
+            _event = Event;
+            _identifier = Identifier;
+            this.QueryString = string.Format("level={0}&event={1}&identifier={2}", Level.ToLower(), Event.ToLower(), Identifier.ToLower());
         }
 
         public void Execute()
