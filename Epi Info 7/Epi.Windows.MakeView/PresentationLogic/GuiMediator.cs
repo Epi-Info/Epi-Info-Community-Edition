@@ -2029,6 +2029,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
             RenderableField field = (RenderableField)(((IFieldControl)control).Field);
 
             _fieldBefore = CloneField(field);
+            if(!(field is LabelField))
             field.HasTabStop = !field.HasTabStop;
             PersistFieldChange(field, BackupFieldAction.Change);
             label.BackColor = field.HasTabStop ? Color.Black : Color.Firebrick;
