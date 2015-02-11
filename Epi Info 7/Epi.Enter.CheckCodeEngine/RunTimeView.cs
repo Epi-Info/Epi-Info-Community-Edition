@@ -325,9 +325,10 @@ namespace Epi.EnterCheckCodeEngine
 
         private void OpenField(object sender, RunCheckCodeEventArgs e)
         {
+            this.mCurrentField = this.mView.Fields[e.Parameter];
+
             this.UnRollField();
 
-            this.mCurrentField = this.mView.Fields[e.Parameter];
             // push after_field onto stack
 
             if (this.mCurrentField is IFieldWithCheckCodeAfter)
@@ -428,7 +429,7 @@ namespace Epi.EnterCheckCodeEngine
         private void NewRecord(object sender, RunCheckCodeEventArgs e)
         {
             //----2101
-              this.ClearPageEventForNewRecord(e.Parameter);
+            this.ClearPageEventForNewRecord(e.Parameter);
             //--
             this.UnRollRecord();
             this.AfterStack.Push(new KeyValuePair<EventActionEnum, StackCommand>(EventActionEnum.CloseRecord, new StackCommand(this.EpiInterpreter, "record", "after", "")));
@@ -537,7 +538,8 @@ namespace Epi.EnterCheckCodeEngine
         {
             while (this.AfterStack.Peek().Key != EventActionEnum.CloseView)
             {
-                this.AfterStack.Peek().Value.Execute();
+                StackCommand command = this.AfterStack.Peek().Value;
+                command.Execute();
                 this.AfterStack.Pop();
             }
 
@@ -574,7 +576,11 @@ namespace Epi.EnterCheckCodeEngine
             switch (CurrentState)
             {
                 case EventActionEnum.CloseField:
-                    this.AfterStack.Pop().Value.Execute();
+                    StackCommand stackCommand = this.AfterStack.Pop().Value;
+                    if ((stackCommand.Identifier == CurrentField.Name && stackCommand.Event == "after") == false)
+                    {
+                        stackCommand.Execute();
+                    }
                     break;
                 default:
                     break;

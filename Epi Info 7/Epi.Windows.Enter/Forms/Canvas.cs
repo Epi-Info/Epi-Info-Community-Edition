@@ -695,7 +695,7 @@ namespace Epi.Windows.Enter
                 throw new ArgumentNullException("ControlsList");
             }
             #endregion  //Input Validation
-
+            
             for (int i = 0; i <= controlsList.Count - 1; i++)
             {
                 if (!(controlsList[i] is Label))
