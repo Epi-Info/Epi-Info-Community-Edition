@@ -1824,6 +1824,57 @@ namespace Epi.Data.Services
                             }
                         }
                     }
+                    //---EI-139
+                    else if (searchFieldItemTypes[i].Equals("GlobalRecordId"))
+                    {
+                        if (string.IsNullOrEmpty(searchFieldValues[i].ToString()))
+                        {
+                            sb.Append(searchFields[i]);
+                            sb.Append(StringLiterals.SPACE);
+                            sb.Append(SqlKeyWords.IS);
+                            sb.Append(StringLiterals.SPACE);
+                            sb.Append(SqlKeyWords.NULL);
+                        }
+                        else
+                        {
+                            sb.Append("basetable." + searchFields[i] + " " + comparisonTypes[i] + " " + Util.InsertInSingleQuotes(searchFieldValues[i].ToString()));
+                        }
+                     }
+                    else if (searchFieldItemTypes[i].Equals("LastSaveTime") || searchFieldItemTypes[i].Equals("FirstSaveTime"))
+                    {
+                        if (searchFieldValues[i] == null || string.IsNullOrEmpty(searchFieldValues[i].ToString()))
+                        {
+                            sb.Append(searchFields[i]);
+                            sb.Append(StringLiterals.SPACE);
+                            sb.Append(SqlKeyWords.IS);
+                            sb.Append(StringLiterals.SPACE);
+                            sb.Append(SqlKeyWords.NULL);
+                        }
+                        else
+                        {
+                            DateTime date;
+                            bool isDate = DateTime.TryParse(searchFieldValues[i].ToString(), out date);
+                            if (isDate)
+                            {
+                                sb.Append("basetable." + searchFields[i] +
+                                               StringLiterals.SPACE +
+                                               comparisonTypes[i] +
+                                               StringLiterals.SPACE +
+                                               paramName);
+                                parameters.Add(new QueryParameter(paramName, DbType.DateTime, date));
+                            }
+                            else
+                            {
+                                sb.Append(searchFields[i]);
+                                sb.Append(StringLiterals.SPACE);
+                                sb.Append(SqlKeyWords.IS);
+                                sb.Append(StringLiterals.SPACE);
+                                sb.Append(SqlKeyWords.NULL);
+                            }
+                           
+                        }
+                    }
+                    //--
                     else if (searchFieldItemTypes[i].Equals("PhoneNumber"))
                     {
                         if (string.IsNullOrEmpty(searchFieldValues[i].ToString()))
