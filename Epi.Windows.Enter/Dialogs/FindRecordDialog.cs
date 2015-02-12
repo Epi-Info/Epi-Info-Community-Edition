@@ -98,8 +98,8 @@ namespace Epi.Windows.Enter.Dialogs
                 {
                     foreach (Epi.Fields.Field field in page.Fields)
                     {
-                        if (!(field is UniqueKeyField) && !(field is RecStatusField) && !(field is MirrorField) && !(field is RelatedViewField) && !(field is LabelField) && !(field is GridField) && !(field is GroupField) && !(field is CommandButtonField))
-                        {
+                         if (!(field is UniqueKeyField) && !(field is RecStatusField) && !(field is MirrorField) && !(field is RelatedViewField) && !(field is LabelField) && !(field is GridField) && !(field is GroupField) && !(field is CommandButtonField))
+                           {
                             if (field is IPatternable)
                             {
                                 lbxSearchFields.Items.Add(new SearchListBoxItem(field.Name.ToString(), field.Id, field.FieldType.ToString(), ((IPatternable)field).Pattern, string.Empty));
@@ -110,8 +110,18 @@ namespace Epi.Windows.Enter.Dialogs
                             }
                         }
                     }
-                }
-            }
+                 }
+                //--Ei-139
+                RecStatusField recstatus = new RecStatusField(view);
+                lbxSearchFields.Items.Add(new SearchListBoxItem(recstatus.Name.ToString(), recstatus.Id, recstatus.FieldType.ToString(), string.Empty, string.Empty));
+                GlobalRecordIdField globalfld = new GlobalRecordIdField(view);
+                lbxSearchFields.Items.Add(new SearchListBoxItem(globalfld.Name.ToString(), globalfld.Id, globalfld.FieldType.ToString(), string.Empty, string.Empty));
+                FirstSaveTimeField firstsavetime = new FirstSaveTimeField(view);
+                lbxSearchFields.Items.Add(new SearchListBoxItem(firstsavetime.Name.ToString(), firstsavetime.Id, firstsavetime.FieldType.ToString(), string.Empty, string.Empty));
+                LastSaveTimeField lastsavetime = new LastSaveTimeField(view);
+                lbxSearchFields.Items.Add(new SearchListBoxItem(lastsavetime.Name.ToString(), lastsavetime.Id, lastsavetime.FieldType.ToString(), string.Empty, string.Empty));
+                //--
+              }
         }
 
         /// <summary>
