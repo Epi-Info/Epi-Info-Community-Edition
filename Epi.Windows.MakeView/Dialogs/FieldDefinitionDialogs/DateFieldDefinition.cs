@@ -58,8 +58,15 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
                     upperDatePicker.Value = DateTime.Today;
                 }
             }
-            
             this.UseRange.Checked = ((field.Lower.Length + field.Upper.Length) != 0);
+
+            //--EI-111
+            if ((field.Notfuturedate) || (field.Upper == CommandNames.SYSTEMDATE))
+            {
+                UseRange.Checked = false; 
+                chkNotfutureDate.Checked = true; 
+            }
+            //--
             
             int fieldType = (int)field.FieldType;
 
@@ -139,6 +146,17 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
                 field.Lower = String.Empty;
                 field.Upper = String.Empty;
             }
+            //--EI-111
+            if (chkNotfutureDate.Checked)
+            {
+                field.Upper = CommandNames.SYSTEMDATE;
+                field.Lower = CommandNames.SYSTEMDATE;
+            }
+            else
+            {
+                field.Notfuturedate = false;
+            }
+            //--
         }
 
         /// <summary>
@@ -202,6 +220,9 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
         private void UseRange_CheckedChanged(object sender, EventArgs e)
         {
             EnableDatePickers(((CheckBox)sender).Checked);
+            //EI-111--
+            chkNotfutureDate.Enabled = !UseRange.Checked;
+           //
         }
 
         private void EnableDatePickers(bool enabled)
@@ -211,6 +232,13 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
 
             this.labelUpperRange.Enabled = enabled;
             this.upperDatePicker.Enabled = enabled;
+            
         }
+        //--EI-111
+        private void chkNotfutureDate_CheckedChanged(object sender, EventArgs e)
+        {
+           UseRange.Enabled = !chkNotfutureDate.Checked;
+        }
+        //--
 	}
 }

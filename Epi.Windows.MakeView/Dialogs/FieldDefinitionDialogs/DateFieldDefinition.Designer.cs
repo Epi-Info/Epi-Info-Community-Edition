@@ -29,6 +29,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             this.lowerDatePicker = new System.Windows.Forms.DateTimePicker();
             this.labelLowerRange = new System.Windows.Forms.Label();
             this.labelUpperRange = new System.Windows.Forms.Label();
+            this.chkNotfutureDate = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +59,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkNotfutureDate);
             this.groupBox1.Controls.Add(this.UseRange);
             this.groupBox1.Controls.Add(this.labelLowerRange);
             this.groupBox1.Controls.Add(this.lowerDatePicker);
@@ -74,6 +76,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             this.groupBox1.Controls.SetChildIndex(this.chkRepeatLast, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnFieldFont, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnPromptFont, 0);
+            this.groupBox1.Controls.SetChildIndex(this.chkNotfutureDate, 0);
             // 
             // btnPromptFont
             // 
@@ -203,6 +206,13 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             resources.ApplyResources(this.labelUpperRange, "labelUpperRange");
             this.labelUpperRange.Name = "labelUpperRange";
             // 
+            // chkNotfutureDate
+            // 
+            resources.ApplyResources(this.chkNotfutureDate, "chkNotfutureDate");
+            this.chkNotfutureDate.Name = "chkNotfutureDate";
+            this.chkNotfutureDate.UseVisualStyleBackColor = true;
+            this.chkNotfutureDate.CheckedChanged += new System.EventHandler(this.chkNotfutureDate_CheckedChanged);
+            // 
             // DateFieldDefinition
             // 
             resources.ApplyResources(this, "$this");
@@ -223,5 +233,6 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
         private System.Windows.Forms.CheckBox UseRange;
         private System.Windows.Forms.DateTimePicker upperDatePicker;
         private System.Windows.Forms.DateTimePicker lowerDatePicker;
+        private System.Windows.Forms.CheckBox chkNotfutureDate;
     }
 }
