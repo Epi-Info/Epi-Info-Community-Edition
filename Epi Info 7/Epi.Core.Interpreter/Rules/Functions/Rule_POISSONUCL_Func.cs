@@ -32,7 +32,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             if(double.TryParse(p1.ToString(), out param1))
             {
-                if (param1 < 0.0)
+                if (param1 < 0.0 || param1 != (double)(int)param1)
                     result = Double.NaN;
                 else
                 {
@@ -77,16 +77,17 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             if (_x < 0.000000001 || _df < 1.0)
                 return 1.0;
 
-            double _rr = 1.0;
+            double _rr = 0.0;
             int _ii = (int)_df;
 
             while (_ii >= 2)
             {
-                _rr = _rr * (double)_ii;
+                _rr = _rr + Math.Log((double)_ii);
                 _ii = _ii - 2;
             }
 
-            _k = Math.Exp(Math.Floor((_df + 1.0) * 0.5) * Math.Log(Math.Abs(_x)) - _x * 0.5) / _rr;
+            double _k0 = (Math.Floor((_df + 1.0) * 0.5) * Math.Log(Math.Abs(_x)) - _x * 0.5) - _rr;
+            _k = Math.Exp(_k0);
 
             if (_k <= 0.0)
                 return 0.0;
