@@ -22,6 +22,10 @@ namespace Epi.Fields
         private BackgroundWorker _updater;
         private BackgroundWorker _inserter;
         private const string ISO8601 = "YYYY-MM-DD"; 
+        //-EI-111
+        private bool _notfuturedate;
+        private const int conzero = 0;
+        //
 		#endregion Fields
 		
 		#region Constructors
@@ -86,6 +90,20 @@ namespace Epi.Fields
             _pattern = row[ColumnNames.PATTERN].ToString();
             _lower = row[ColumnNames.LOWER].ToString();
             _upper = row[ColumnNames.UPPER].ToString();
+
+            //---EI-111
+            if (_upper == CommandNames.SYSTEMDATE)
+            {
+                string curyear = DateTime.Today.Year.ToString();
+                string curmonth = DateTime.Today.Month.ToString();
+                if (curmonth.Length == 1) { curmonth = conzero + curmonth; }
+                string curday = DateTime.Today.Day.ToString();
+                string cursystemdate = curyear + CharLiterals.HYPHEN + curmonth + CharLiterals.HYPHEN + curday;
+                _upper = curyear + CharLiterals.HYPHEN + curmonth + CharLiterals.HYPHEN + curday;
+                _notfuturedate = true;
+                if (_lower == CommandNames.SYSTEMDATE) { _lower = cursystemdate; }
+            }
+            //--
 
             LowerDate = GetRange(_lower);
             UpperDate = GetRange(_upper);
@@ -209,7 +227,22 @@ namespace Epi.Fields
                 _upper = value;
             }
         }
-
+        //--EI-111
+        /// <summary>
+        /// Notfuturedate
+        /// </summary>
+        public bool Notfuturedate
+        {
+            get
+            {
+                return (_notfuturedate);
+            }
+            set
+            {
+                _notfuturedate = value;
+            }
+        }
+        //--
         /// <summary>
         /// Pattern
         /// </summary>
