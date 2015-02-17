@@ -138,6 +138,8 @@
     <Compile Include="cCOMDLL.cs" />
     <Compile Include="cNETDLL.cs" />
     <Compile Include="IDLLClass.cs" />
+    <Compile Include="Rules\Functions\Rule_POISSONLCL_Func.cs" />
+    <Compile Include="Rules\Functions\Rule_POISSONUCL_Func.cs" />
     <Compile Include="Rules\Functions\Rule_SQRT_Func.cs" />
     <Compile Include="Rules\Functions\Rule_STRLEN.cs" />
     <Compile Include="Rules\Functions\Rule_EPIWEEK.cs" />

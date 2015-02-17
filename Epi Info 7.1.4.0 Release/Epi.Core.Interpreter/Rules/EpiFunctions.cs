@@ -197,6 +197,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     case "SQRT":
                         functionCall = new Rule_SQRT_Func(pContext, T);
                         break;
+                    case "POISSONLCL":
+                        functionCall = new Rule_POISSONLCL_Func(pContext, T);
+                        break;
+                    case "POISSONUCL":
+                        functionCall = new Rule_POISSONUCL_Func(pContext, T);
+                        break;
                     case "SIN":
                         functionCall = new Rule_Sin(pContext, T);
                         break;
