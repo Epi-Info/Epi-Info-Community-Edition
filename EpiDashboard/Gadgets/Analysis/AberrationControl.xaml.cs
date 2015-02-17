@@ -53,7 +53,7 @@ namespace EpiDashboard
         #endregion // Classes
 
         #region Private Variables
-        
+
         private const int DEFAULT_DEVIATIONS = 3;
         private const int DEFAULT_LAG_TIME = 7;
         private const int DEFAULT_TIME_PERIOD = 365;
@@ -79,7 +79,6 @@ namespace EpiDashboard
             InitializeComponent();
             this.DashboardHelper = dashboardHelper;
             Construct();
-            FillComboboxes();            
         }
 
         protected override void Construct()
@@ -89,10 +88,6 @@ namespace EpiDashboard
                 headerPanel.Text = CustomOutputHeading;
             }
 
-            cbxDate.SelectionChanged += new SelectionChangedEventHandler(cbxField_SelectionChanged);
-            cbxFieldWeight.SelectionChanged += new SelectionChangedEventHandler(cbxField_SelectionChanged);
-            cbxSyndrome.SelectionChanged += new SelectionChangedEventHandler(cbxField_SelectionChanged);
-
             this.IsProcessing = false;
 
             this.IsProcessing = false;
@@ -101,37 +96,15 @@ namespace EpiDashboard
             this.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(IsCancelled);
 
             base.Construct();
-
-            #region Translation
-            tblockConfigTitle.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_ABERRATION_DETECTION;
-            tblockIndicator.Text = DashboardSharedStrings.GADGET_INDICATOR_VARIABLE_OPT;
-            tblockCount.Text = DashboardSharedStrings.GADGET_COUNT_VARIABLE_OPT;
-            tblockDate.Text = DashboardSharedStrings.GADGET_DATE_VARIABLE;
-            tblockLagTimeDays.Text = DashboardSharedStrings.GADGET_LAG_TIME_DAYS;
-            tblockThresh.Text = DashboardSharedStrings.GADGET_THRESHOLD;
-            tblockTimePeriod.Text = DashboardSharedStrings.GADGET_DAYS_PRIOR;
-            expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
-
-            btnRun.Content = DashboardSharedStrings.GADGET_RUN_BUTTON;
-            #endregion // Translation
-        }
-        
-        #endregion
-
-        #region Public Methods
-        #endregion
-
-        #region Event Handlers
-
-        void cbxField_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {            
         }
 
+        #endregion
+    
         protected override void worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             lock (syncLock)
             {
-                Dictionary<string, string> inputVariableList = GadgetOptions.InputVariableList;
+                AberrationDetectionChartParameters aberrationParameters = (AberrationDetectionChartParameters)Parameters;
 
                 this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToProcessingState));
                 this.Dispatcher.BeginInvoke(new SimpleCallback(ClearResults));
@@ -147,45 +120,38 @@ namespace EpiDashboard
                 int timePeriod = DEFAULT_TIME_PERIOD;
                 double deviations = DEFAULT_DEVIATIONS;
 
-                if (inputVariableList.ContainsKey("freqvar"))
+                if (!String.IsNullOrEmpty(aberrationParameters.ColumnNames[0]))
+                    freqVar = aberrationParameters.ColumnNames[0];
+
+                if (!String.IsNullOrEmpty(aberrationParameters.WeightVariableName))
+                    weightVar = aberrationParameters.WeightVariableName;
+
+                List<string> stratas = new List<string>();
+                if (aberrationParameters.StrataVariableNames.Count > 0)
                 {
-                    freqVar = inputVariableList["freqvar"];
+                    stratas = aberrationParameters.StrataVariableNames;
                 }
 
-                if (inputVariableList.ContainsKey("weightvar"))
+                if (!String.IsNullOrEmpty(aberrationParameters.LagTime))
                 {
-                    weightVar = inputVariableList["weightvar"];
+                    int.TryParse(aberrationParameters.LagTime, out lagTime);
                 }
 
-                if (inputVariableList.ContainsKey("stratavar"))
+                if (!String.IsNullOrEmpty(aberrationParameters.TimePeriod))
                 {
-                    strataVar = inputVariableList["stratavar"];
+                    int.TryParse(aberrationParameters.TimePeriod, out timePeriod);
                 }
 
-                if (inputVariableList.ContainsKey("lagtime"))
+                if (!String.IsNullOrEmpty(aberrationParameters.Deviations))
                 {
-                    int.TryParse(inputVariableList["lagtime"], out lagTime);
-                }
-                if (inputVariableList.ContainsKey("timeperiod"))
-                {
-                    int.TryParse(inputVariableList["timeperiod"], out timePeriod);
-                }
-                if (inputVariableList.ContainsKey("deviations"))
-                {
-                    double.TryParse(inputVariableList["deviations"], out deviations);
+                    double.TryParse(aberrationParameters.Deviations, out deviations);
                 }
 
-                if (inputVariableList.ContainsKey("includemissing"))
-                {
-                    if (inputVariableList["includemissing"].Equals("true"))
-                    {
-                        includeMissing = true;
-                    }
-                }
+                includeMissing = aberrationParameters.IncludeMissing;
+
 
                 deviations = deviations - 0.001;
 
-                List<string> stratas = new List<string>();
                 if (!string.IsNullOrEmpty(strataVar))
                 {
                     stratas.Add(strataVar);
@@ -196,19 +162,19 @@ namespace EpiDashboard
                     RequestUpdateStatusDelegate requestUpdateStatus = new RequestUpdateStatusDelegate(RequestUpdateStatusMessage);
                     CheckForCancellationDelegate checkForCancellation = new CheckForCancellationDelegate(IsCancelled);
 
-                    GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
-                    GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
+                    aberrationParameters.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
+                    aberrationParameters.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
 
                     if (this.DataFilters != null && this.DataFilters.Count > 0)
                     {
-                        GadgetOptions.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
+                        aberrationParameters.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
                     }
                     else
                     {
-                        GadgetOptions.CustomFilter = string.Empty;
+                        aberrationParameters.CustomFilter = string.Empty;
                     }
 
-                    Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(GadgetOptions/*, freqVar, weightVar, stratas, string.Empty, useAllPossibleValues, sortHighLow, includeMissing*/);
+                    Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(aberrationParameters);
 
                     if (stratifiedFrequencyTables == null || stratifiedFrequencyTables.Count == 0)
                     {
@@ -357,8 +323,7 @@ namespace EpiDashboard
                 }
             }
         }
-        
-        #endregion
+
 
         #region Private Methods
 
@@ -398,97 +363,12 @@ namespace EpiDashboard
         {
             double ret = 0;
             if (values.Count() > 0)
-            {      
-                double avg = values.Average();          
-                double sum = values.Sum(d => Math.Pow(d - avg, 2));          
+            {
+                double avg = values.Average();
+                double sum = values.Sum(d => Math.Pow(d - avg, 2));
                 ret = Math.Sqrt((sum) / (values.Count() - 1));
             }
             return ret;
-        }
-
-        private void FillComboboxes(bool update = false)
-        {
-            LoadingCombos = true;
-
-            string prevDateField = string.Empty;            
-            string prevWeightField = string.Empty;
-            string prevSyndromeField = string.Empty;
-
-            if (update)
-            {
-                if (cbxDate.SelectedIndex >= 0)
-                {
-                    prevDateField = cbxDate.SelectedItem.ToString();
-                }
-                if (cbxFieldWeight.SelectedIndex >= 0)
-                {
-                    prevWeightField = cbxFieldWeight.SelectedItem.ToString();
-                }
-                if (cbxSyndrome.SelectedIndex >= 0)
-                {
-                    prevSyndromeField = cbxSyndrome.SelectedItem.ToString();
-                }
-            }
-
-            cbxDate.ItemsSource = null;
-            cbxDate.Items.Clear();
-
-            cbxFieldWeight.ItemsSource = null;
-            cbxFieldWeight.Items.Clear();
-
-            cbxSyndrome.ItemsSource = null;
-            cbxSyndrome.Items.Clear();
-
-            List<string> fieldNames = new List<string>();
-            List<string> weightFieldNames = new List<string>();
-            List<string> strataFieldNames = new List<string>();
-
-            weightFieldNames.Add(string.Empty);
-            strataFieldNames.Add(string.Empty);
-
-            ColumnDataType columnDataType = ColumnDataType.DateTime | ColumnDataType.UserDefined;
-            fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
-
-            columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
-            weightFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
-
-            columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
-            strataFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
-
-            fieldNames.Sort();
-            weightFieldNames.Sort();
-            strataFieldNames.Sort();
-
-            if (fieldNames.Contains("SYSTEMDATE"))
-            {
-                fieldNames.Remove("SYSTEMDATE");
-            }
-
-            cbxDate.ItemsSource = fieldNames;
-            cbxFieldWeight.ItemsSource = weightFieldNames;
-            cbxSyndrome.ItemsSource = strataFieldNames;
-
-            if (cbxDate.Items.Count > 0)
-            {
-                cbxDate.SelectedIndex = -1;
-            }
-            if (cbxFieldWeight.Items.Count > 0)
-            {
-                cbxFieldWeight.SelectedIndex = -1;
-            }
-            if (cbxSyndrome.Items.Count > 0)
-            {
-                cbxSyndrome.SelectedIndex = -1;
-            }
-
-            if (update)
-            {
-                cbxDate.SelectedItem = prevDateField;
-                cbxFieldWeight.SelectedItem = prevWeightField;
-                cbxSyndrome.SelectedItem = prevSyndromeField;
-            }
-
-            LoadingCombos = false;
         }
 
         private void NumberBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -498,58 +378,7 @@ namespace EpiDashboard
             base.OnPreviewTextInput(e);
         }
 
-        private void txtLagTime_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtLagTime.Text))
-            {
-                int lagTime = 7;
 
-                int.TryParse(txtLagTime.Text, out lagTime);
-
-                if (lagTime > 365)
-                {
-                    txtLagTime.Text = "365";
-                }
-                else if (lagTime <= 2)
-                {
-                    txtLagTime.Text = "2";
-                }
-            }
-        }
-
-        private void txtTimePeriod_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtTimePeriod.Text))
-            {
-                int period = 365;
-
-                int.TryParse(txtTimePeriod.Text, out period);
-
-                if (period > 366)
-                {
-                    txtTimePeriod.Text = "366";
-                }
-            }
-        }
-
-        private void txtDeviations_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtDeviations.Text))
-            {
-                int dev = 0;
-
-                int.TryParse(txtDeviations.Text, out dev);
-
-                if (dev > 7)
-                {
-                    txtDeviations.Text = "7";
-                }
-                else if (dev <= 1)
-                {
-                    txtDeviations.Text = "1";
-                }
-            }
-        }
 
         /// <summary>
         /// Clears the gadget's output
@@ -602,20 +431,20 @@ namespace EpiDashboard
             dependentAxis.Orientation = AxisOrientation.Y;
             dependentAxis.Minimum = 0;
             dependentAxis.ShowGridLines = true;
-            
+
             CategoryAxis independentAxis = new CategoryAxis();
             independentAxis.Orientation = AxisOrientation.X;
             independentAxis.SortOrder = CategorySortOrder.Ascending;
             independentAxis.AxisLabelStyle = Resources["RotateAxisAberrationStyle"] as Style;
-            
-            chart.PlotAreaStyle = new Style();            
+
+            chart.PlotAreaStyle = new Style();
             chart.PlotAreaStyle.Setters.Add(new Setter(Chart.BackgroundProperty, Brushes.White));
 
             dependentAxis.GridLineStyle = new Style();
             dependentAxis.GridLineStyle.Setters.Add(new Setter(Line.StrokeProperty, Brushes.LightGray));
-            
+
             //System.Windows.Controls.DataVisualization.Charting.Chart.BackgroundProperty
-            
+
             try
             {
                 independentAxis.AxisLabelStyle.Setters.Add(new Setter(AxisLabel.StringFormatProperty, "{0:d}"));
@@ -641,7 +470,7 @@ namespace EpiDashboard
             series2.DependentRangeAxis = dependentAxis;
             series2.IndependentAxis = independentAxis;
             series2.PolylineStyle = Resources["GooglePolylineAberrationStyle"] as Style;
-            series2.DataPointStyle = Resources["GoogleDataPointAberrationStyle"] as Style;            
+            series2.DataPointStyle = Resources["GoogleDataPointAberrationStyle"] as Style;
 
             ScatterSeries series3 = new ScatterSeries();
             series3.IndependentValuePath = "IndependentValue";
@@ -650,14 +479,14 @@ namespace EpiDashboard
             series3.Title = DashboardSharedStrings.GADGET_ABERRATION;
             series3.DependentRangeAxis = dependentAxis;
             series3.IndependentAxis = independentAxis;
-            series3.DataPointStyle = Resources["DataPointAberrationStyle"] as Style;            
+            series3.DataPointStyle = Resources["DataPointAberrationStyle"] as Style;
 
             chart.Series.Add(series1);
             chart.Series.Add(series3);
             chart.Series.Add(series2);
             chart.Height = 400;
-            
-            
+
+
             //if (actualValues.Count > 37)
             //{
             //    chart.Width = (actualValues.Count * (871.0 / 37.0)) + 129;
@@ -667,7 +496,7 @@ namespace EpiDashboard
             //    chart.Width = 1000;
             //}
             chart.BorderThickness = new Thickness(0);
-            chart.Margin = new Thickness(6, -20, 6, 6);            
+            chart.Margin = new Thickness(6, -20, 6, 6);
             //chart.Width = (actualValues.Count * (871.0 / 37.0)) + 539;
             //Label title = new Label();
             //title.Content = strataValue;
@@ -681,7 +510,7 @@ namespace EpiDashboard
             sv.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth - 125;
             //if (actualValues.Count > 37)
             //{
-                chart.Width = (actualValues.Count * (871.0 / 37.0)) + 229;                
+            chart.Width = (actualValues.Count * (871.0 / 37.0)) + 229;
             //}
             //else
             //{
@@ -924,72 +753,6 @@ namespace EpiDashboard
             CheckAndSetPosition();
         }
 
-        private void CreateInputVariableList()
-        {
-            Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
-
-            GadgetOptions.MainVariableName = string.Empty;
-            GadgetOptions.WeightVariableName = string.Empty;
-            GadgetOptions.StrataVariableNames = new List<string>();
-            GadgetOptions.CrosstabVariableName = string.Empty; 
-
-            if (cbxDate.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxDate.SelectedItem.ToString()))
-            {
-                inputVariableList.Add("freqvar", cbxDate.SelectedItem.ToString());
-                GadgetOptions.MainVariableName = cbxDate.SelectedItem.ToString();
-            }
-            else
-            {
-                return;
-            }
-
-            if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
-            {
-                inputVariableList.Add("weightvar", cbxFieldWeight.SelectedItem.ToString());
-                GadgetOptions.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
-            }
-            if (cbxSyndrome.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxSyndrome.SelectedItem.ToString()))
-            {
-                inputVariableList.Add("stratavar", cbxSyndrome.SelectedItem.ToString());
-                GadgetOptions.StrataVariableNames = new List<string>();
-                GadgetOptions.StrataVariableNames.Add(cbxSyndrome.SelectedItem.ToString());
-            }
-
-            if (!string.IsNullOrEmpty(txtLagTime.Text))
-            {
-                inputVariableList.Add("lagtime", txtLagTime.Text);
-            }
-            else
-            {
-                inputVariableList.Add("lagtime", DEFAULT_LAG_TIME.ToString());
-                txtLagTime.Text = DEFAULT_LAG_TIME.ToString();
-            }
-
-            if (!string.IsNullOrEmpty(txtDeviations.Text))
-            {
-                inputVariableList.Add("deviations", txtDeviations.Text);
-            }
-            else
-            {
-                inputVariableList.Add("deviations", DEFAULT_DEVIATIONS.ToString());
-                txtDeviations.Text = DEFAULT_DEVIATIONS.ToString();
-            }
-
-            if (!string.IsNullOrEmpty(txtTimePeriod.Text))
-            {
-                inputVariableList.Add("timeperiod", txtTimePeriod.Text);
-            }
-            else
-            {
-                inputVariableList.Add("timeperiod", int.MaxValue.ToString());                
-            }
-
-            inputVariableList.Add("aberration", "true");
-
-            GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
-            GadgetOptions.InputVariableList = inputVariableList;
-        }
-
         public override void CollapseOutput()
         {
             panelMain.Visibility = Visibility.Collapsed;
@@ -1001,7 +764,6 @@ namespace EpiDashboard
 
             this.messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             this.infoPanel.Visibility = System.Windows.Visibility.Collapsed;
-            //descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed; //EI-24
             IsCollapsed = true;
         }
 
@@ -1089,14 +851,6 @@ namespace EpiDashboard
         /// </summary>
         public override void SetGadgetToProcessingState()
         {
-            txtDeviations.IsEnabled = false;
-            txtLagTime.IsEnabled = false;
-            txtTimePeriod.IsEnabled = false;
-            btnRun.IsEnabled = false;
-            cbxDate.IsEnabled = false;
-            cbxFieldWeight.IsEnabled = false;
-            cbxSyndrome.IsEnabled = false;
-
             this.IsProcessing = true;
         }
 
@@ -1105,34 +859,28 @@ namespace EpiDashboard
         /// </summary>
         public override void SetGadgetToFinishedState()
         {
-            txtDeviations.IsEnabled = true;
-            txtLagTime.IsEnabled = true;
-            txtTimePeriod.IsEnabled = true;
-            btnRun.IsEnabled = true;
-            cbxDate.IsEnabled = true;
-            cbxFieldWeight.IsEnabled = true;
-            cbxSyndrome.IsEnabled = true;
-
             this.IsProcessing = false;
             base.SetGadgetToFinishedState();
         }
 
         public override void RefreshResults()
         {
-            if (!LoadingCombos && GadgetOptions != null && cbxDate.SelectedIndex > -1)
+            AberrationDetectionChartParameters aberrationParameters = (AberrationDetectionChartParameters)Parameters;
+            if(Parameters != null && aberrationParameters.ColumnNames.Count > 0)
             {
-                CreateInputVariableList();
+                if (!String.IsNullOrEmpty(aberrationParameters.ColumnNames[0]) && (!String.IsNullOrEmpty(aberrationParameters.CrosstabVariableName)))
+                {
+                    infoPanel.Visibility = System.Windows.Visibility.Collapsed;
+                    waitPanel.Visibility = System.Windows.Visibility.Visible;
+                    messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
+                    descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
 
-                infoPanel.Visibility = System.Windows.Visibility.Collapsed;
-                waitPanel.Visibility = System.Windows.Visibility.Visible;
-                messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
-                descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
+                    baseWorker = new BackgroundWorker();
+                    baseWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(Execute);
+                    baseWorker.RunWorkerAsync();
 
-                baseWorker = new BackgroundWorker();
-                baseWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(Execute);
-                baseWorker.RunWorkerAsync();
-
-                base.RefreshResults();
+                    base.RefreshResults();
+                }
             }
         }
 
@@ -1141,7 +889,7 @@ namespace EpiDashboard
         /// </summary>
         public override void UpdateVariableNames()
         {
-            FillComboboxes(true);
+            //FillComboboxes(true);
         }
 
         /// <summary>
@@ -1151,63 +899,10 @@ namespace EpiDashboard
         /// <returns>XmlNode</returns>
         public override XmlNode Serialize(XmlDocument doc)
         {
-            CreateInputVariableList();
+            AberrationDetectionChartParameters aberrationParameters = (AberrationDetectionChartParameters)Parameters;
 
-            string freqVar = string.Empty;
-            string strataVar = string.Empty;
-            string weightVar = string.Empty;
-            string sort = string.Empty;
-            int lagTime = DEFAULT_LAG_TIME;
-            int deviations = DEFAULT_DEVIATIONS;
-            int timeperiod = DEFAULT_TIME_PERIOD;
-
-            CustomOutputHeading = headerPanel.Text;
-            CustomOutputDescription = descriptionPanel.Text;
-
-            if (GadgetOptions.InputVariableList.ContainsKey("freqvar"))
-            {
-                freqVar = GadgetOptions.InputVariableList["freqvar"];
-            }
-            if (GadgetOptions.InputVariableList.ContainsKey("stratavar"))
-            {
-                strataVar = GadgetOptions.InputVariableList["stratavar"];
-            }
-            if (GadgetOptions.InputVariableList.ContainsKey("weightvar"))
-            {
-                weightVar = GadgetOptions.InputVariableList["weightvar"];
-            }
-            if (GadgetOptions.InputVariableList.ContainsKey("sort"))
-            {
-                sort = GadgetOptions.InputVariableList["sort"];
-            }
-            if (GadgetOptions.InputVariableList.ContainsKey("lagtime"))
-            {
-                lagTime = int.Parse(GadgetOptions.InputVariableList["lagtime"]);
-            }
-            if (GadgetOptions.InputVariableList.ContainsKey("deviations"))
-            {
-                deviations = int.Parse(GadgetOptions.InputVariableList["deviations"]);
-            }
-            if (GadgetOptions.InputVariableList.ContainsKey("timeperiod"))
-            {
-                timeperiod = int.Parse(GadgetOptions.InputVariableList["timeperiod"]);
-            }
-
-            string xmlString =
-            "<mainVariable>" + freqVar + "</mainVariable>" +
-            "<strataVariable>" + strataVar + "</strataVariable>" +
-            "<weightVariable>" + weightVar + "</weightVariable>" +
-            "<lagTime>" + lagTime + "</lagTime>" +
-            "<deviations>" + deviations + "</deviations>" +
-            "<timePeriod>" + timeperiod + "</timePeriod>" +
-            "<sort>" + sort + "</sort>" +
-            "<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
-            "<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>" +
-            "<customCaption>" + CustomOutputCaption + "</customCaption>";
-
-            xmlString = xmlString + SerializeAnchors();
-
-            System.Xml.XmlElement element = doc.CreateElement("frequencyGadget");
+            System.Xml.XmlElement element = doc.CreateElement("aberrationDetectionGadget"); //Note: 7.1.3.0 has this as "frequencyGadget"
+            string xmlString = string.Empty;
             element.InnerXml = xmlString;
             element.AppendChild(SerializeFilters(doc));
 
@@ -1229,6 +924,72 @@ namespace EpiDashboard
             element.Attributes.Append(type);
             element.Attributes.Append(id);
 
+            CustomOutputHeading = aberrationParameters.GadgetTitle;
+            CustomOutputDescription = aberrationParameters.GadgetDescription;
+
+            XmlElement mainVarElement = doc.CreateElement("mainVariable");
+            if (aberrationParameters.ColumnNames.Count > 0)
+            {
+                if (!String.IsNullOrEmpty(aberrationParameters.ColumnNames[0].ToString()))
+                {
+                    mainVarElement.InnerText = aberrationParameters.ColumnNames[0].ToString();
+                    element.AppendChild(mainVarElement);
+                }
+            }
+
+            XmlElement StrataVariableNameElement = doc.CreateElement("strataVariable");
+            XmlElement StrataVariableNamesElement = doc.CreateElement("strataVariables");
+            if (aberrationParameters.StrataVariableNames.Count == 1)
+            {
+                StrataVariableNameElement.InnerText = aberrationParameters.StrataVariableNames[0].ToString();
+                element.AppendChild(StrataVariableNameElement);
+            }
+            else if (aberrationParameters.StrataVariableNames.Count > 1)
+            {
+                foreach (string strataColumn in aberrationParameters.StrataVariableNames)
+                {
+                    XmlElement strataElement = doc.CreateElement("strataVariable");
+                    strataElement.InnerText = strataColumn.Replace("<", "&lt;");
+                    StrataVariableNamesElement.AppendChild(strataElement);
+                }
+
+                element.AppendChild(StrataVariableNamesElement);
+            }
+
+            XmlElement weightVarElement = doc.CreateElement("weightVar");
+            if (!String.IsNullOrEmpty(aberrationParameters.WeightVariableName.ToString()))
+            {
+                weightVarElement.InnerText = aberrationParameters.WeightVariableName.ToString();
+                element.AppendChild(weightVarElement);
+            }
+
+            //if (GadgetOptions.InputVariableList.ContainsKey("sort"))
+            //{
+            //    sort = GadgetOptions.InputVariableList["sort"];
+            //}
+
+            XmlElement lagtimeElement = doc.CreateElement("lagtime");
+            if (!String.IsNullOrEmpty(aberrationParameters.LagTime.ToString()))
+            {
+                lagtimeElement.InnerText = aberrationParameters.LagTime.ToString();
+                element.AppendChild(lagtimeElement);
+            }
+
+            XmlElement deviationsVarElement = doc.CreateElement("deviations");
+            if (!String.IsNullOrEmpty(aberrationParameters.Deviations.ToString()))
+            {
+                deviationsVarElement.InnerText = aberrationParameters.Deviations.ToString();
+                element.AppendChild(deviationsVarElement);
+            }
+
+            XmlElement timeperiodVarElement = doc.CreateElement("timeperiod");
+            if (!String.IsNullOrEmpty(aberrationParameters.TimePeriod.ToString()))
+            {
+                timeperiodVarElement.InnerText = aberrationParameters.TimePeriod.ToString();
+                element.AppendChild(timeperiodVarElement);
+            }
+
+            SerializeAnchors(element);
             return element;
         }
 
@@ -1239,28 +1000,53 @@ namespace EpiDashboard
         public override void CreateFromXml(XmlElement element)
         {
             this.LoadingCombos = true;
+            this.Parameters = new AberrationDetectionChartParameters();
+
+            HideConfigPanel();
+            infoPanel.Visibility = System.Windows.Visibility.Collapsed;
+            messagePanel.Visibility = System.Windows.Visibility.Collapsed;
 
             foreach (XmlElement child in element.ChildNodes)
             {
                 switch (child.Name.ToLower())
                 {
                     case "mainvariable":
-                        cbxDate.Text = child.InnerText;
+                        ((AberrationDetectionChartParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
                         break;
                     case "stratavariable":
-                        cbxSyndrome.Text = child.InnerText;
+                        if (!string.IsNullOrEmpty(child.InnerText))
+                        {
+                            if (((AberrationDetectionChartParameters)Parameters).StrataVariableNames.Count == 0)
+                            {
+                                ((AberrationDetectionChartParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
+                            }
+                            else
+                            {
+                                ((AberrationDetectionChartParameters)Parameters).StrataVariableNames[0] = child.InnerText.Replace("&lt;", "<");
+                            }
+                        }                       
+                        break;
+                    case "stratavariables":
+                        foreach (XmlElement field in child.ChildNodes)
+                        {
+                            List<string> fields = new List<string>();
+                            if (field.Name.ToLower().Equals("stratavariable"))
+                            {
+                                ((AberrationDetectionChartParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));
+                            }
+                        }
                         break;
                     case "weightvariable":
-                        cbxFieldWeight.Text = child.InnerText;
+                        ((AberrationDetectionChartParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
                         break;
                     case "lagtime":
-                        txtLagTime.Text = child.InnerText;
+                        ((AberrationDetectionChartParameters)Parameters).LagTime = child.InnerText.Replace("&lt;", "<");
                         break;
                     case "deviations":
-                        txtDeviations.Text = child.InnerText;
+                        ((AberrationDetectionChartParameters)Parameters).Deviations = child.InnerText.Replace("&lt;", "<");
                         break;
                     case "timeperiod":
-                        txtTimePeriod.Text = child.InnerText;
+                        ((AberrationDetectionChartParameters)Parameters).TimePeriod = child.InnerText.Replace("&lt;", "<");
                         break;
                     case "datafilters":
                         this.DataFilters = new DataFilters(this.DashboardHelper);
@@ -1270,13 +1056,14 @@ namespace EpiDashboard
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
                             this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<"); ;
+                            Parameters.GadgetTitle = CustomOutputHeading;
                         }
                         break;
                     case "customdescription":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
                             this.CustomOutputDescription = child.InnerText.Replace("&lt;", "<");
-
+                            Parameters.GadgetDescription = CustomOutputDescription;
                             if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputHeading.Equals("(none)"))
                             {
                                 descriptionPanel.Text = CustomOutputDescription;
@@ -1296,7 +1083,6 @@ namespace EpiDashboard
             this.LoadingCombos = false;
 
             RefreshResults();
-            HideConfigPanel();
         }
 
         /// <summary>
@@ -1346,7 +1132,7 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("<p><small><strong>" + infoPanel.Text + "</strong></small></p>");
             }
 
-            foreach (StackPanel strataPanel in this.StrataPanelList) 
+            foreach (StackPanel strataPanel in this.StrataPanelList)
             {
                 if (strataPanel.Tag != null && strataPanel.Tag is string)
                 {
@@ -1529,7 +1315,7 @@ namespace EpiDashboard
             }
         }
 
-        public override string CustomOutputCaption 
+        public override string CustomOutputCaption
         {
             get
             {
@@ -1578,11 +1364,6 @@ namespace EpiDashboard
             obj.LayoutTransform = transform;
             obj.Margin = margin;
             return bmp;
-        }
-
-        private void btnRun_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshResults();
         }
     }
 }
