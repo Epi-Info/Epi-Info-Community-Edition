@@ -58,57 +58,6 @@
                 <StackPanel Grid.Row="7" x:Name="panelMain" HorizontalAlignment="Left" VerticalAlignment="Top"></StackPanel>
 
                 <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{DynamicResource gadgetWaitPanelStyle}" />
-
-                <!--<StackPanel Grid.Row="1" Grid.RowSpan="7" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" >
-                    <Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" >
-                        <Rectangle Style="{DynamicResource rectangleConfigOuter}" />
-                        <Rectangle Style="{DynamicResource rectangleConfigInner}" />
-
-                        <Path x:Name="pathTriangle" 
-                              Margin="0,-2,90,0"
-                              Data="M 5 0 L 10 10 0 10 Z" Fill="{DynamicResource gadgetBackgroundBrush}" IsHitTestVisible="False" HorizontalAlignment="Right" VerticalAlignment="Top" Height="7" />                
-                        
-                        <StackPanel Orientation="Vertical" Margin="25, 10, 25, 25" HorizontalAlignment="Center" VerticalAlignment="Top" >
-                            <TextBlock x:Name="ConfigExpandedTitle" HorizontalAlignment="Center" TextAlignment="Center" Margin="5" FontWeight="Bold">
-                                Combined Frequency<LineBreak />Properties
-                            </TextBlock>
-
-                            <TextBlock x:Name="tblockGroupField" HorizontalAlignment="Left" TextAlignment="Center" Text="Group field:" Margin="0,5,0,0"  />
-                            <ComboBox x:Name="cbxField" Width="150" HorizontalAlignment="Left" SelectedIndex="0" />
-
-                            <Grid x:Name="grdAdvancedOptionsHeading">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>                                
-                            </Grid>
-
-                            <Expander Margin="0, 5, 0, 0" x:Name="expanderAdvancedOptions" Header="Advanced options">                            
-                                <StackPanel>
-                                    <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Stratify by:" Margin="0,5,0,0" Visibility="Collapsed" />
-                                    <ComboBox x:Name="cmbFieldStrata" Width="120" HorizontalAlignment="Left" SelectedIndex="0" Visibility="Collapsed" />
-
-                                    <TextBlock x:Name="tblockCombineMode" HorizontalAlignment="Left" TextAlignment="Center" Text="Combine mode:" Margin="0,7,0,0" Visibility="Visible" />
-                                    <ComboBox x:Name="cmbCombineMode" Width="180" HorizontalAlignment="Left" SelectedIndex="0" Visibility="Visible" Margin="0,0,0,0" SelectionChanged="cmbCombineMode_SelectionChanged">
-                                        <ComboBoxItem>Automatic</ComboBoxItem>
-                                        <ComboBoxItem>Boolean</ComboBoxItem>
-                                        <ComboBoxItem>Categorical</ComboBoxItem>
-                                    </ComboBox>
-
-                                    <TextBlock x:Name="tblockTrueValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Value to treat as true:" Margin="0,12,0,0" Visibility="Collapsed" />
-                                    <TextBox x:Name="txtTrueValue" Width="180" HorizontalAlignment="Left" Visibility="Collapsed" />
-
-                                    <CheckBox x:Name="checkboxSortHighLow" Margin="0,12,0,0" Content="Sort high to low" HorizontalAlignment="Left" IsChecked="true" />
-                                    <CheckBox x:Name="checkboxShowDenominator" Margin="0,12,0,0" Content="Show denominator" HorizontalAlignment="Left" IsChecked="true" />
-                                    
-                                </StackPanel>
-                            </Expander>
-
-                            <Button x:Name="btnRun" Content="Run" Margin="0,14,0,0" Click="btnRun_Click" />
-
-                        </StackPanel>
-            </Grid>
-        </StackPanel>-->                
             </Grid>
         </Border>        
     </Grid>

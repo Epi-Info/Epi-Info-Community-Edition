@@ -73,10 +73,7 @@ namespace EpiDashboard
             {
                 headerPanel.Text = CustomOutputHeading;
             }
-
-            
-            //FillComboboxes();
-            
+           
             mnuCopyData.Click += new RoutedEventHandler(mnuCopyData_Click);
             mnuSendDataToHTML.Click += new RoutedEventHandler(mnuSendDataToHTML_Click);
 
@@ -106,14 +103,6 @@ namespace EpiDashboard
             base.Construct();
             this.Parameters = new CombinedFrequencyParameters();
 
-            #region Translation
-            //ConfigExpandedTitle.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_COMBINED_FREQUENCY;
-            //tblockGroupField.Text = DashboardSharedStrings.GADGET_GROUP_VARIABLE;
-            //tblockTrueValue.Text = DashboardSharedStrings.GADGET_TRUE_VALUE;
-            //expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
-            //checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
-            //checkboxShowDenominator.Content = DashboardSharedStrings.GADGET_SHOW_DENOMINATOR;
-            #endregion // Translation
         }  
         #endregion // Constructors
 
@@ -142,21 +131,6 @@ namespace EpiDashboard
             CopyToClipboard();
         }
 
-        /// <summary>
-        /// Handles the click event for the Run button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnRun_Click(object sender, RoutedEventArgs e)
-        {
-            if (LoadingCombos)
-            {
-                return;
-            }
-            RefreshResults();
-        }
-
-       
 
         protected override void worker_WorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
@@ -269,12 +243,6 @@ namespace EpiDashboard
         #endregion
 
         #region Private Methods
-        /// <summary>
-        /// Fill the gadget's comboboxes
-        /// </summary>
-        private void FillComboboxes(bool update = false)
-        {
-        }
 
         private void AddDataGrid(DataView dv, string strataValue)
         {
@@ -541,63 +509,6 @@ namespace EpiDashboard
             CheckAndSetPosition();
         }
 
-//MOVED TO CombinedFrequencyProperties.xaml.cs        
-        ///// <summary>
-        ///// Creates the list of internal gadget variables used for data processing
-        ///// </summary>
-        //private void CreateInputVariableList()
-        //{
-        //    Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
-
-        //    if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
-        //    {
-        //        GadgetOptions.MainVariableName = cbxField.SelectedItem.ToString();
-        //    }
-        //    else
-        //    {
-        //        return;
-        //    }
-
-        //    if (checkboxSortHighLow.IsChecked == true)
-        //    {
-        //        inputVariableList.Add("sort", "highlow");
-        //        GadgetOptions.ShouldSortHighToLow = true;
-        //    }
-        //    else
-        //    {
-        //        GadgetOptions.ShouldSortHighToLow = false;
-        //    }
-
-        //    if (checkboxShowDenominator.IsChecked == true)
-        //    {
-        //        inputVariableList.Add("denom", "true");
-        //    }
-        //    else
-        //    {
-        //        inputVariableList.Add("denom", "false");
-        //    }
-
-        //    GadgetOptions.ShouldIncludeMissing = false;
-
-        //    if (DataFilters != null && DataFilters.Count > 0)
-        //    {
-        //        GadgetOptions.CustomFilter = DataFilters.GenerateDataFilterString(false);
-        //    }
-        //    else
-        //    {
-        //        GadgetOptions.CustomFilter = string.Empty;
-        //    }
-
-        //    if (cmbCombineMode.SelectedIndex >= 0)
-        //    {
-        //        inputVariableList.Add("combinemode", cmbCombineMode.SelectedIndex.ToString());
-        //    }
-
-        //    inputVariableList.Add("truevalue", txtTrueValue.Text);
-
-        //    GadgetOptions.InputVariableList = inputVariableList;
-        //}
-
         #endregion // Private Methods
 
         #region Private Properties
@@ -637,14 +548,6 @@ namespace EpiDashboard
             this.IsProcessing = false;
             currentWidth = borderAll.ActualWidth;
             base.SetGadgetToFinishedState();
-        }
-
-        /// <summary>
-        /// Updates the variable names available in the gadget's properties
-        /// </summary>
-        public override void UpdateVariableNames()
-        {
-            //FillComboboxes(true);
         }
 
         /// <summary>

@@ -144,7 +144,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                     Parameters.CombineMode = CombineModeTypes.Categorical;
                     break;
             }
-
+            ValidateInput();
             Parameters.TrueValue = txtTrueValue.Text;
             Parameters.SortHighToLow = checkboxSortHighLow.IsChecked.Value;
             Parameters.ShowDenominator = checkboxShowDenominator.IsChecked.Value;
@@ -262,6 +262,25 @@ namespace EpiDashboard.Controls.GadgetProperties
                     txtTrueValue.Text = string.Empty;
                 }
             }
+        }
+
+        protected override bool ValidateInput()
+        {
+            bool isValid = true;
+
+            if (cmbCombineMode.SelectedIndex == 1)
+            {
+                if (String.IsNullOrEmpty(txtTrueValue.Text.ToString().Trim()))
+                { 
+                    isValid = false;
+                    MessageBox.Show(DashboardSharedStrings.GADGET_TRUE_VALUE_REQ);
+                    panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+                    panelSorting.Visibility = System.Windows.Visibility.Visible;
+                    panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
+                    panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+                }
+            }
+            return isValid;
         }
     }
 }

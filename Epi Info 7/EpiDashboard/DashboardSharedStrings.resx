@@ -868,4 +868,7 @@ of records or select fewer fields for the group.</value>
   <data name="PROPERTIES_YAXIS_FONT_SIZE_INVALID" xml:space="preserve">
     <value>Y-Axis font size must be between 5 and 100.</value>
   </data>
+  <data name="GADGET_TRUE_VALUE_REQ" xml:space="preserve">
+    <value>Value to treat as true is required when combine mode is Boolean.</value>
+  </data>
 </root>
