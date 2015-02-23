@@ -4963,6 +4963,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not Future Date: Please enter date less than or equal to Today&apos;s Date.
+        /// </summary>
+        public static string INVALID_NOTFUTUREDATE {
+            get {
+                return ResourceManager.GetString("INVALID_NOTFUTUREDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number of options must be greater than 1..
         /// </summary>
         public static string INVALID_NUMBER_OPTIONS {

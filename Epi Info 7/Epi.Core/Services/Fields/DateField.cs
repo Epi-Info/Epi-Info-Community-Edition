@@ -101,8 +101,7 @@ namespace Epi.Fields
                 string cursystemdate = curyear + CharLiterals.HYPHEN + curmonth + CharLiterals.HYPHEN + curday;
                 _upper = curyear + CharLiterals.HYPHEN + curmonth + CharLiterals.HYPHEN + curday;
                 _notfuturedate = true;
-                if (_lower == CommandNames.SYSTEMDATE) { _lower = cursystemdate; }
-            }
+             }
             //--
 
             LowerDate = GetRange(_lower);
@@ -133,7 +132,12 @@ namespace Epi.Fields
                     SharedStrings.INVALID_DATE_RANGE, 
                     LowerDate.ToShortDateString(), 
                     UpperDate.ToShortDateString());
-            
+                    //--Ei-111
+                    if (_notfuturedate)
+                    {
+                        warningMessage = SharedStrings.INVALID_NOTFUTUREDATE;
+                    }
+                    //--
                 System.Windows.Forms.MessageBox.Show(
                     warningMessage,
                     SharedStrings.WARNING,
