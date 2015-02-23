@@ -150,7 +150,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             if (chkNotfutureDate.Checked)
             {
                 field.Upper = CommandNames.SYSTEMDATE;
-                field.Lower = CommandNames.SYSTEMDATE;
+                field.Lower = DateTime.MinValue.ToShortDateString();
             }
             else
             {

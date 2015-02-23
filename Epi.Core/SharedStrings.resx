@@ -2825,4 +2825,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="CANNOT_CREATE_SHORTCUT_FOR_CHILD_FORM" xml:space="preserve">
     <value>You cannot create a shortcut to open Enter to a child form. Please try again from the top-most parent form.</value>
   </data>
+  <data name="INVALID_NOTFUTUREDATE" xml:space="preserve">
+    <value>Not Future Date: Please enter date less than or equal to Today's Date</value>
+  </data>
 </root>
