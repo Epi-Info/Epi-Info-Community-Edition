@@ -127,7 +127,7 @@
             "All records in final mode"});
             this.cmbImportType.Location = new System.Drawing.Point(9, 157);
             this.cmbImportType.Name = "cmbImportType";
-            this.cmbImportType.Size = new System.Drawing.Size(166, 21);
+            this.cmbImportType.Size = new System.Drawing.Size(182, 21);
             this.cmbImportType.TabIndex = 4;
             // 
             // lblDataGUID
