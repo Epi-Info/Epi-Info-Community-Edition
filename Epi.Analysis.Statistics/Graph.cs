@@ -399,11 +399,11 @@ namespace Epi.Analysis.Statistics
                             {
                                 dateTimeValue = (DateTime)row["__Values__"];
 
-                                if (intervalStart == DateTime.MinValue)
-                                {
-                                    intervalStart = dateTimeValue;
-                                    _graphStartFrom = dateTimeValue;
-                                }
+                                //if (intervalStart == DateTime.MinValue)
+                                //{
+                                //    intervalStart = dateTimeValue;
+                                //    _graphStartFrom = dateTimeValue;
+                                //}
 
                                 while ( dateTimeValue >= intervalEnd)
                                 {
