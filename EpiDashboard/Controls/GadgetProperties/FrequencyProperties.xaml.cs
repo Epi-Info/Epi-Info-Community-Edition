@@ -24,10 +24,26 @@ namespace EpiDashboard.Controls.GadgetProperties
     /// </summary>
     public partial class FrequencyProperties : GadgetPropertiesPanelBase
     {
+        private bool oneVar = false;
+
+        public bool OneVar
+        {
+            get { return oneVar; }
+            set { oneVar = value; }
+        }
+
+        private bool multiVar = false;
+
+        public bool MultiVar
+        {
+            get { return multiVar; }
+            set { multiVar = value; }
+        }
+
         public FrequencyProperties(
-            DashboardHelper dashboardHelper, 
-            IGadget gadget, 
-            FrequencyParameters parameters, 
+            DashboardHelper dashboardHelper,
+            IGadget gadget,
+            FrequencyParameters parameters,
             List<Grid> strataGridList
             )
         {
@@ -40,7 +56,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             List<string> fields = new List<string>();
             List<string> weightFields = new List<string>();
             List<string> strataItems = new List<string>();
-            
+
             //Variable fields
             fields.Add(String.Empty);
             ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
@@ -56,7 +72,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 }
             }
             cbxField.ItemsSource = fields;
-
+            lbxField.ItemsSource = fields;
             //Weight Fields
             weightFields.Add(String.Empty);
             columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
@@ -131,10 +147,16 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             get
             {
-                if (cbxField.SelectedIndex > -1)
+                if (OneVar && cbxField.SelectedIndex > -1)
                 {
                     return true;
                 }
+
+                if (MultiVar && lbxField.SelectedItems.Count > -1)
+                {
+                    return true;
+                }
+
                 return false;
             }
         }
@@ -156,20 +178,36 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.ColumnNames = new List<string>();
             Parameters.StrataVariableNames = new List<string>();
 
-            if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
+            if (OneVar)
             {
-                if (Parameters.ColumnNames.Count > 0)
+                if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
                 {
-                    Parameters.ColumnNames[0] = cbxField.SelectedItem.ToString();
+                    if (Parameters.ColumnNames.Count > 0)
+                    {
+                        Parameters.ColumnNames[0] = cbxField.SelectedItem.ToString();
+                    }
+                    else
+                    {
+                        Parameters.ColumnNames.Add(cbxField.SelectedItem.ToString());
+                    }
+                    radOneVar.IsChecked = true;
+
                 }
                 else
                 {
-                    Parameters.ColumnNames.Add(cbxField.SelectedItem.ToString());
+                    return;
                 }
             }
-            else
+            if (MultiVar)
             {
-                return;
+                foreach (var item in lbxField.SelectedItems)
+                {
+                    if (!string.IsNullOrEmpty(item.ToString()))
+                    {
+                        Parameters.ColumnNames.Add(item.ToString());
+                    }
+                }
+                radMultiVar.IsChecked = true;
             }
 
             if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
@@ -198,11 +236,11 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             Parameters.ShowAllListValues = (bool)checkboxAllValues.IsChecked;
             Parameters.ShowCommentLegalLabels = (bool)checkboxCommentLegalLabels.IsChecked;
-            Parameters.IncludeMissing = (bool) checkboxIncludeMissing.IsChecked;
+            Parameters.IncludeMissing = (bool)checkboxIncludeMissing.IsChecked;
 
-            Parameters.UseFieldPrompts = (bool) checkboxUsePrompts.IsChecked;
+            Parameters.UseFieldPrompts = (bool)checkboxUsePrompts.IsChecked;
 
-            Parameters.DrawBorders = (bool) checkboxDrawBorders.IsChecked;
+            Parameters.DrawBorders = (bool)checkboxDrawBorders.IsChecked;
             Parameters.DrawHeaderRow = (bool)checkboxDrawHeader.IsChecked;
             Parameters.DrawTotalRow = (bool)checkboxDrawTotal.IsChecked;
             //Parameters.ShowNullRepresentation = (bool)checkboxShowNulls.IsChecked;
@@ -240,7 +278,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 int barWidth;
                 bool bar_success = int.TryParse(txtBarWidth.Text, out barWidth);
-                if(bar_success) Parameters.PercentBarWidth = barWidth;
+                if (bar_success) Parameters.PercentBarWidth = barWidth;
                 else Parameters.PercentBarWidth = 100;
             }
 
@@ -258,9 +296,22 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             //Variables settings
             //Just one column for Frequency, .ColumnNames should have only one item
-            if (Parameters.ColumnNames.Count > 0)
+            if (Parameters.ColumnNames.Count == 1 || Parameters.StrataVariableNames.Count > 0)
             {
+                scrollViewerVarPro.Visibility = System.Windows.Visibility.Hidden;
+                cbxField.Visibility = System.Windows.Visibility.Visible;
                 cbxField.SelectedItem = Parameters.ColumnNames[0];
+                radOneVar.IsChecked = true;
+            }
+            else if (Parameters.ColumnNames.Count > 1)
+            {
+                radMultiVar.IsChecked = true;
+                scrollViewerVarPro.Visibility = System.Windows.Visibility.Visible;
+                cbxField.Visibility = System.Windows.Visibility.Hidden;
+                for (int i = 0; i < Parameters.ColumnNames.Count; i++)
+                {
+                    lbxField.SelectedItems.Add(Parameters.ColumnNames[i]);
+                }
             }
             cbxFieldWeight.SelectedItem = Parameters.WeightVariableName;
             checkboxSortHighLow.IsChecked = Parameters.SortHighToLow;
@@ -295,7 +346,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             txtRows.Text = Parameters.RowsToDisplay.ToString();
             txtBarWidth.Text = Parameters.PercentBarWidth.ToString();
-            
+
 
             //Output columns to display
             checkboxColumnFrequency.IsChecked = Parameters.ShowFrequencyCol;
@@ -387,8 +438,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (!isCommentLegal && !isOptionField)
             {
                 checkboxCommentLegalLabels.IsChecked = isCommentLegal;
-            }   
+            }
         }
+
 
 
         ///// <summary>
@@ -509,6 +561,38 @@ namespace EpiDashboard.Controls.GadgetProperties
         private void cbxField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CheckVariables();
+        }
+
+        private void OneVar_Checked(object sender, RoutedEventArgs e)
+        {
+            OneVar = true;
+            MultiVar = false;
+            cbxField.Visibility = System.Windows.Visibility.Visible;
+            scrollViewerVarPro.Visibility = System.Windows.Visibility.Hidden;
+
+            checkboxUsePrompts.IsChecked = true;
+            cbxFieldWeight.IsEnabled = true;
+            lbxFieldStrata.IsEnabled = true;
+            checkboxSortHighLow.IsEnabled = true;
+
+        }
+        private void MultiVar_Checked(object sender, RoutedEventArgs e)
+        {
+            OneVar = false;
+            MultiVar = true;
+            cbxField.Visibility = System.Windows.Visibility.Hidden;
+            scrollViewerVarPro.Visibility = System.Windows.Visibility.Visible;
+
+            checkboxUsePrompts.IsChecked = false;
+
+            cbxFieldWeight.IsEnabled = false;
+            cbxFieldWeight.SelectedIndex = -1;
+
+            lbxFieldStrata.SelectedIndex = -1;
+            lbxFieldStrata.IsEnabled = false;
+
+            checkboxSortHighLow.IsChecked = false;
+            checkboxSortHighLow.IsEnabled = false;
         }
     }
 }
