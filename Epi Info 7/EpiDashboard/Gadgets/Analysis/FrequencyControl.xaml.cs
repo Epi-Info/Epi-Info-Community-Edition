@@ -82,6 +82,11 @@ namespace EpiDashboard
         private StatisticsRepository.cFreq freq = new StatisticsRepository.cFreq();
 
         /// <summary>
+        /// Used to hold main variables.
+        /// </summary>
+        private List<string> fields;
+
+        /// <summary>
         /// A data structure used for storing the 95% confidence intervals
         /// </summary>
         private struct ConfLimit
@@ -142,7 +147,7 @@ namespace EpiDashboard
                 foreach (UIElement control in grid.Children)
                 {
                     if (control is TextBlock)
-                    {                        
+                    {
                         int columnNumber = Grid.GetColumn(control);
                         string value = ((TextBlock)control).Text;
                         sb.Append(value + "\t");
@@ -168,7 +173,7 @@ namespace EpiDashboard
         {
             FrequencyParameters freqParameters = (FrequencyParameters)Parameters;
 
-            Grid grid = new Grid();            
+            Grid grid = new Grid();
             grid.Tag = value;
             grid.Style = this.Resources["genericOutputGrid"] as Style;
             grid.Visibility = System.Windows.Visibility.Collapsed;
@@ -213,7 +218,7 @@ namespace EpiDashboard
             column3.Width = GridLength.Auto;
             column4.Width = GridLength.Auto;
             column5.Width = GridLength.Auto;
-            column6.Width = GridLength.Auto;            
+            column6.Width = GridLength.Auto;
 
             int width = 100;
             if (int.TryParse(freqParameters.PercentBarWidth.ToString(), out width))
@@ -278,7 +283,7 @@ namespace EpiDashboard
             rctBar.Width = 0.1;// pct * 100.0;
             rctBar.Fill = this.Resources["frequencyPercentBarBrush"] as SolidColorBrush;
             rctBar.HorizontalAlignment = HorizontalAlignment.Left;
-            rctBar.Margin = new Thickness(2,6,2,6); //.HorizontalAlignment = HorizontalAlignment.Left;
+            rctBar.Margin = new Thickness(2, 6, 2, 6); //.HorizontalAlignment = HorizontalAlignment.Left;
 
             Grid.SetRow(rctBar, rowNumber);
             Grid.SetColumn(rctBar, /*4*/6);
@@ -345,7 +350,7 @@ namespace EpiDashboard
             Grid grid = GetStrataGrid(strataValue);
 
             RowDefinition rowDefHeader = new RowDefinition();
-            rowDefHeader.Height = new GridLength(30);            
+            rowDefHeader.Height = new GridLength(30);
 
             grid.RowDefinitions.Add(rowDefHeader);
 
@@ -371,7 +376,8 @@ namespace EpiDashboard
             Grid.SetColumn(txtValHeader, 0);
             grid.Children.Add(txtValHeader);
 
-            if (freqParameters.UseFieldPrompts == true) ShowFieldPrompt();
+            //Dont show prompt if frequency is requested for more than one main variable.
+            if (freqParameters.UseFieldPrompts == true && fields.Count == 1) ShowFieldPrompt();
             txtValHeader.MouseLeftButtonUp += new MouseButtonEventHandler(txtValHeader_MouseLeftButtonUp);
             txtValHeader.MouseEnter += new MouseEventHandler(txtValHeader_MouseEnter);
             txtValHeader.MouseLeave += new MouseEventHandler(txtValHeader_MouseLeave);
@@ -428,7 +434,7 @@ namespace EpiDashboard
             Grid grid = GetStrataGrid(strataValue);
 
             RowDefinition rowDefTotals = new RowDefinition();
-            rowDefTotals.Height = new GridLength(26);            
+            rowDefTotals.Height = new GridLength(26);
 
             grid.RowDefinitions.Add(rowDefTotals);
 
@@ -445,7 +451,7 @@ namespace EpiDashboard
             txtValTotals.FontWeight = FontWeights.Bold;
             Grid.SetRow(txtValTotals, footerRowIndex);
             Grid.SetColumn(txtValTotals, 0);
-            grid.Children.Add(txtValTotals); 
+            grid.Children.Add(txtValTotals);
 
             TextBlock txtFreqTotals = new TextBlock();
             txtFreqTotals.Text = totalRows.ToString();
@@ -685,7 +691,7 @@ namespace EpiDashboard
             this.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(IsCancelled);
 
             //#region Translation
-//Moved to FrequencyProperties.xaml.cs   
+            //Moved to FrequencyProperties.xaml.cs   
             //ConfigExpandedTitle.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_FREQUENCY;
             //expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
             //expanderDisplayOptions.Header = DashboardSharedStrings.GADGET_DISPLAY_OPTIONS;
@@ -915,9 +921,9 @@ namespace EpiDashboard
                 grid.RowDefinitions.Clear();
                 if (grid.Parent is Border)
                 {
-                    Border border = (grid.Parent) as Border;                    
+                    Border border = (grid.Parent) as Border;
                     panelMain.Children.Remove(border);
-                }                
+                }
             }
 
             foreach (Expander expander in StrataExpanderList)
@@ -977,7 +983,7 @@ namespace EpiDashboard
                     baseWorker.RunWorkerAsync();
                     base.RefreshResults();
                 }
-                else if (!LoadingCombos && freqParameters.ColumnNames[0]== String.Empty)
+                else if (!LoadingCombos && freqParameters.ColumnNames[0] == String.Empty)
                 {
                     ClearResults();
                     waitPanel.Visibility = System.Windows.Visibility.Collapsed;
@@ -1076,26 +1082,33 @@ namespace EpiDashboard
 
 
 
-            WordBuilder wb = new WordBuilder(",");          
+            WordBuilder wb = new WordBuilder(",");
             if (freqParameters.ShowFrequencyCol) wb.Add("1");
             if (freqParameters.ShowPercentCol) wb.Add("2");
             if (freqParameters.ShowCumPercentCol) wb.Add("3");
             if (freqParameters.Show95CILowerCol) wb.Add("4");
             if (freqParameters.Show95CIUpperCol) wb.Add("5");
             if (freqParameters.ShowPercentBarsCol) wb.Add("6");
-           
+
             this.CustomOutputHeading = freqParameters.GadgetTitle;
             this.CustomOutputDescription = freqParameters.GadgetDescription;
 
-            XmlElement freqVarElement = doc.CreateElement("mainVariable");
-            if (freqParameters.ColumnNames.Count > 0)
+            XmlElement freqVarElements = doc.CreateElement("mainVariables");
+
+            
+            foreach (var mainVar in freqParameters.ColumnNames)
             {
-                if (!String.IsNullOrEmpty(freqParameters.ColumnNames[0].ToString()))
+                XmlElement freqVarElement = doc.CreateElement("mainVariable");
+                if (freqParameters.ColumnNames.Count > 0)
                 {
-                    freqVarElement.InnerText = freqParameters.ColumnNames[0].ToString();
-                    element.AppendChild(freqVarElement);
+                    if (!String.IsNullOrEmpty(mainVar.ToString()))
+                    {
+                        freqVarElement.InnerText = mainVar.ToString();
+                        freqVarElements.AppendChild(freqVarElement);
+                    }
                 }
             }
+            element.AppendChild(freqVarElements);
             // =========  Former Advanced Options section  ============
             //weightVariable
             XmlElement weightVariableElement = doc.CreateElement("weightVariable");
@@ -1110,7 +1123,7 @@ namespace EpiDashboard
             if (freqParameters.StrataVariableNames.Count == 1)
             {
                 StrataVariableNameElement.InnerText = freqParameters.StrataVariableNames[0].ToString();
-                element.AppendChild (StrataVariableNameElement );
+                element.AppendChild(StrataVariableNameElement);
             }
             else if (freqParameters.StrataVariableNames.Count > 1)
             {
@@ -1121,7 +1134,7 @@ namespace EpiDashboard
                     StrataVariableNamesElement.AppendChild(strataElement);
                 }
 
-                element.AppendChild(StrataVariableNamesElement); 
+                element.AppendChild(StrataVariableNamesElement);
             }
 
             //showAllListValues
@@ -1165,7 +1178,7 @@ namespace EpiDashboard
             XmlElement drawTotalRowElement = doc.CreateElement("drawTotalRow");
             drawTotalRowElement.InnerText = freqParameters.DrawTotalRow.ToString();
             element.AppendChild(drawTotalRowElement);
-            
+
             //precision
             int precision = 2;
             bool precision_success = int.TryParse(freqParameters.Precision.ToString(), out precision);
@@ -1184,7 +1197,7 @@ namespace EpiDashboard
             //rowsToDisplay
             string rowsToDisplay = String.Empty;
             XmlElement rowsToDisplayElement = doc.CreateElement("rowsToDisplay");
-            if (freqParameters.RowsToDisplay.HasValue) 
+            if (freqParameters.RowsToDisplay.HasValue)
             {
                 if (freqParameters.RowsToDisplay > 0)
                 {
@@ -1294,9 +1307,9 @@ namespace EpiDashboard
         {
             this.LoadingCombos = true;
             this.Parameters = new FrequencyParameters();
-            
+
             HideConfigPanel();
-            
+
             infoPanel.Visibility = System.Windows.Visibility.Collapsed;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -1312,6 +1325,16 @@ namespace EpiDashboard
                                 ((FrequencyParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
                             }
                             break;
+                        case "mainvariables":
+                            foreach (XmlElement field in child.ChildNodes)
+                            {
+                                List<string> fields = new List<string>();
+                                if (field.Name.ToLower().Equals("mainvariable"))
+                                {
+                                    ((FrequencyParameters)Parameters).ColumnNames.Add(field.InnerText.Replace("&lt;", "<"));
+                                }
+                            }
+                            break;
                         case "weightvariable":
                             ((FrequencyParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
                             break;
@@ -1322,7 +1345,7 @@ namespace EpiDashboard
                             }
                             else
                             {
-                                ((FrequencyParameters)Parameters).StrataVariableNames.Add (child.InnerText.Replace("&lt;", "<"));
+                                ((FrequencyParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
                             }
                             break;
                         case "stratavariables":
@@ -1413,8 +1436,8 @@ namespace EpiDashboard
                             }
                             break;
                         case "columnstoshow":
-                            if (string.IsNullOrEmpty(child.InnerText)) 
-                            { 
+                            if (string.IsNullOrEmpty(child.InnerText))
+                            {
                                 ((FrequencyParameters)Parameters).ShowFrequencyCol = true;
                                 ((FrequencyParameters)Parameters).ShowPercentCol = true;
                                 ((FrequencyParameters)Parameters).ShowCumPercentCol = true;
@@ -1499,7 +1522,7 @@ namespace EpiDashboard
             }
 
             base.CreateFromXml(element);
-            
+
             this.LoadingCombos = false;
             RefreshResults();
             HideConfigPanel();
@@ -1809,286 +1832,311 @@ namespace EpiDashboard
                 DrawFrequencyBordersDelegate drawBorders = new DrawFrequencyBordersDelegate(DrawOutputGridBorders);
 
                 FrequencyParameters freqParameters = (FrequencyParameters)Parameters;
+                fields = new List<string>();
+                if (freqParameters.StrataVariableNames.Count > 0) //The frequency is stratfied for one variable.
+                {
+                    fields.Add(freqParameters.ColumnNames[0]);
+                }
+                else
+                {
+                    fields.AddRange(freqParameters.ColumnNames);
+                }
                 
-                AddFreqGridDelegate addGrid = new AddFreqGridDelegate(AddFreqGrid);
-                SetGridTextDelegate setText = new SetGridTextDelegate(SetGridText);
-                AddGridRowDelegate addRow = new AddGridRowDelegate(AddGridRow);
-                SetGridBarDelegate setBar = new SetGridBarDelegate(SetGridBar);
-                RenderFrequencyHeaderDelegate renderHeader = new RenderFrequencyHeaderDelegate(RenderFrequencyHeader);
 
-                string freqVar = string.Empty;
-                string weightVar = freqParameters.WeightVariableName;
-                string strataVar = string.Empty;
-                List<string> stratas = freqParameters.StrataVariableNames;
-                bool showConfLimits = false;
-                bool showCumulativePercent = false;
-                bool includeMissing = freqParameters.IncludeMissing; 
-                int? rowsToDisplay = freqParameters.RowsToDisplay;
-                bool showEllipsis = false;
-                bool shouldDrawBorders = true;
-
-                if (!String.IsNullOrEmpty(freqParameters.ColumnNames[0]))
+                for (int i = 0; i < fields.Count; i++)
                 {
-                    freqVar = freqParameters.ColumnNames[0];
-                }
+                    freqParameters.ColumnNames.Clear();
+                    freqParameters.ColumnNames.Add(fields[i]);
 
-                if (freqParameters.StrataVariableNames.Count > 0)
-                {
-                    stratas = freqParameters.StrataVariableNames;
-                }
 
-                showCumulativePercent = freqParameters.ShowCumPercentCol;
+                    AddFreqGridDelegate addGrid = new AddFreqGridDelegate(AddFreqGrid);
+                    SetGridTextDelegate setText = new SetGridTextDelegate(SetGridText);
+                    AddGridRowDelegate addRow = new AddGridRowDelegate(AddGridRow);
+                    SetGridBarDelegate setBar = new SetGridBarDelegate(SetGridBar);
+                    RenderFrequencyHeaderDelegate renderHeader = new RenderFrequencyHeaderDelegate(RenderFrequencyHeader);
 
-                shouldDrawBorders = freqParameters.DrawBorders;
-               
-                string precisionFormat = "F2";
-                string precisionPercentFormat = "P2";
+                    string freqVar = string.Empty;
+                    string weightVar = freqParameters.WeightVariableName;
+                    string strataVar = string.Empty;
+                    List<string> stratas = freqParameters.StrataVariableNames;
+                    bool showConfLimits = false;
+                    bool showCumulativePercent = false;
+                    bool includeMissing = freqParameters.IncludeMissing;
+                    int? rowsToDisplay = freqParameters.RowsToDisplay;
+                    bool showEllipsis = false;
+                    bool shouldDrawBorders = true;
 
-                if (!String.IsNullOrEmpty(freqParameters.Precision))
-                {
-                    precisionFormat = freqParameters.Precision;
-                    precisionPercentFormat = "P" + precisionFormat;
-                    precisionFormat = "F" + precisionFormat;
-                }
-
-                try
-                {
-                    Configuration config = DashboardHelper.Config;
-                    string yesValue = config.Settings.RepresentationOfYes;
-                    string noValue = config.Settings.RepresentationOfNo;
-
-                    RequestUpdateStatusDelegate requestUpdateStatus = new RequestUpdateStatusDelegate(RequestUpdateStatusMessage);
-                    CheckForCancellationDelegate checkForCancellation = new CheckForCancellationDelegate(IsCancelled);
-
-                    freqParameters.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
-                    freqParameters.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
-
-                    if (this.DataFilters != null && this.DataFilters.Count > 0)
+                    if (!String.IsNullOrEmpty(freqParameters.ColumnNames[0]))
                     {
-                        freqParameters.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
-                    }
-                    else
-                    {
-                        freqParameters.CustomFilter = string.Empty;
+                        freqVar = freqParameters.ColumnNames[0];
                     }
 
-                    Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(freqParameters /*, freqVar, weightVar, stratas, string.Empty, useAllPossibleValues, sortHighLow, includeMissing, false*/);
-
-                    if (stratifiedFrequencyTables == null || stratifiedFrequencyTables.Count == 0)
+                    if (freqParameters.StrataVariableNames.Count > 0)
                     {
-                        this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), DashboardSharedStrings.GADGET_MSG_NO_DATA);
-                        //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));                        
-                        return;
+                        stratas = freqParameters.StrataVariableNames;
                     }
-                    else if (worker.CancellationPending)
-                    {
-                        this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), DashboardSharedStrings.GADGET_MSG_OPERATION_CANCELLED);
-                        //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
-                        return;                        
-                    }
-                    else
-                    {
-                        string formatString = string.Empty;
 
-                        foreach (KeyValuePair<DataTable, List<DescriptiveStatistics>> tableKvp in stratifiedFrequencyTables)
+                    showCumulativePercent = freqParameters.ShowCumPercentCol;
+
+                    shouldDrawBorders = freqParameters.DrawBorders;
+
+                    string precisionFormat = "F2";
+                    string precisionPercentFormat = "P2";
+
+                    if (!String.IsNullOrEmpty(freqParameters.Precision))
+                    {
+                        precisionFormat = freqParameters.Precision;
+                        precisionPercentFormat = "P" + precisionFormat;
+                        precisionFormat = "F" + precisionFormat;
+                    }
+
+                    try
+                    {
+                        Configuration config = DashboardHelper.Config;
+                        string yesValue = config.Settings.RepresentationOfYes;
+                        string noValue = config.Settings.RepresentationOfNo;
+
+                        RequestUpdateStatusDelegate requestUpdateStatus = new RequestUpdateStatusDelegate(RequestUpdateStatusMessage);
+                        CheckForCancellationDelegate checkForCancellation = new CheckForCancellationDelegate(IsCancelled);
+
+                        freqParameters.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
+                        freqParameters.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
+
+                        if (this.DataFilters != null && this.DataFilters.Count > 0)
                         {
-                            string strataValue = tableKvp.Key.TableName;
-
-                            double count = 0;
-                            foreach (DescriptiveStatistics ds in tableKvp.Value)
-                            {
-                                count = count + ds.observations;
-                            }
-
-                            if (count == 0 && stratifiedFrequencyTables.Count == 1)
-                            {
-                                // this is the only table and there are no records, so let the user know
-                                this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), DashboardSharedStrings.GADGET_MSG_NO_DATA);
-                                //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));                                
-                                return;
-                            }
-                            else if (count == 0)
-                            {
-                                continue;
-                            }
-                            DataTable frequencies = tableKvp.Key;
-
-                            if (frequencies.Rows.Count == 0)
-                            {
-                                continue;
-                            }
-
-                            this.Dispatcher.BeginInvoke(addGrid, strataVar, frequencies.TableName);
+                            freqParameters.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
+                        }
+                        else
+                        {
+                            freqParameters.CustomFilter = string.Empty;
                         }
 
-                        foreach (KeyValuePair<DataTable, List<DescriptiveStatistics>> tableKvp in stratifiedFrequencyTables)
+                        Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(freqParameters /*, freqVar, weightVar, stratas, string.Empty, useAllPossibleValues, sortHighLow, includeMissing, false*/);
+
+                        if (stratifiedFrequencyTables == null || stratifiedFrequencyTables.Count == 0)
                         {
-                            string strataValue = tableKvp.Key.TableName;
+                            this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), DashboardSharedStrings.GADGET_MSG_NO_DATA);
+                            //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));                        
+                            return;
+                        }
+                        else if (worker.CancellationPending)
+                        {
+                            this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), DashboardSharedStrings.GADGET_MSG_OPERATION_CANCELLED);
+                            //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
+                            return;
+                        }
+                        else
+                        {
+                            string formatString = string.Empty;
 
-                            double count = 0;
-                            foreach (DescriptiveStatistics ds in tableKvp.Value)
+                            foreach (KeyValuePair<DataTable, List<DescriptiveStatistics>> tableKvp in stratifiedFrequencyTables)
                             {
-                                count = count + ds.observations;
-                            }
+                                string strataValue = tableKvp.Key.TableName;
 
-                            if (count == 0)
-                            {
-                                continue;
-                            }
-                            DataTable frequencies = tableKvp.Key;
-
-                            if (frequencies.Rows.Count == 0)
-                            {
-                                continue;
-                            }
-
-                            string tableHeading = tableKvp.Key.TableName;
-
-                            if (stratifiedFrequencyTables.Count > 1)
-                            {
-                                tableHeading = freqVar;// +": " + strataVar + " = " + frequencies.TableName;
-                            }
-
-                            if (!showCumulativePercent)
-                            {
-                                this.Dispatcher.BeginInvoke(new SimpleCallback(HideCumulativePercent));
-                            }
-
-                            if (!showConfLimits)
-                            {
-                                this.Dispatcher.BeginInvoke(new SimpleCallback(HideConfidenceIntervals));
-                            }
-
-                            Field field = null;
-                            string columnType = string.Empty;
-
-                            foreach (DataRow fieldRow in DashboardHelper.FieldTable.Rows)
-                            {
-                                if (fieldRow["columnname"].Equals(freqVar))
+                                double count = 0;
+                                foreach (DescriptiveStatistics ds in tableKvp.Value)
                                 {
-                                    columnType = fieldRow["datatype"].ToString();
-                                    if (fieldRow["epifieldtype"] is Field)
-                                    {
-                                        field = fieldRow["epifieldtype"] as Field;
-                                    }
-                                    break;
+                                    count = count + ds.observations;
                                 }
+
+                                if (count == 0 && stratifiedFrequencyTables.Count == 1)
+                                {
+                                    // this is the only table and there are no records, so let the user know
+                                    this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), DashboardSharedStrings.GADGET_MSG_NO_DATA);
+                                    //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));                                
+                                    return;
+                                }
+                                else if (count == 0)
+                                {
+                                    continue;
+                                }
+                                DataTable frequencies = tableKvp.Key;
+
+                                if (frequencies.Rows.Count == 0)
+                                {
+                                    continue;
+                                }
+
+                                this.Dispatcher.BeginInvoke(addGrid, strataVar, frequencies.TableName);
                             }
 
-                            this.Dispatcher.BeginInvoke(renderHeader, strataValue, tableHeading);
-
-                            double AccumulatedTotal = 0;
-                            List<ConfLimit> confLimits = new List<ConfLimit>();
-                            int rowCount = 1;
-                            foreach (System.Data.DataRow row in frequencies.Rows)
+                            foreach (KeyValuePair<DataTable, List<DescriptiveStatistics>> tableKvp in stratifiedFrequencyTables)
                             {
-                                if (!row[freqVar].Equals(DBNull.Value) || (row[freqVar].Equals(DBNull.Value) && includeMissing == true))
-                                {
-                                    if ((rowsToDisplay.HasValue && rowCount <= rowsToDisplay.Value) || rowsToDisplay.HasValue == false)
-                                    {
-                                        this.Dispatcher.Invoke(addRow, strataValue, 26);
-                                    }
-                                    string displayValue = row[freqVar].ToString();
+                                string strataValue = tableKvp.Key.TableName;
 
-                                    if (DashboardHelper.IsUserDefinedColumn(freqVar))
+                                double count = 0;
+                                foreach (DescriptiveStatistics ds in tableKvp.Value)
+                                {
+                                    count = count + ds.observations;
+                                }
+
+                                if (count == 0)
+                                {
+                                    continue;
+                                }
+                                DataTable frequencies = tableKvp.Key;
+
+                                if (frequencies.Rows.Count == 0)
+                                {
+                                    continue;
+                                }
+
+                                string tableHeading = tableKvp.Key.TableName;
+
+                                if (stratifiedFrequencyTables.Count > 1)
+                                {
+                                    tableHeading = freqVar;// +": " + strataVar + " = " + frequencies.TableName;
+                                }
+
+                                if (!showCumulativePercent)
+                                {
+                                    this.Dispatcher.BeginInvoke(new SimpleCallback(HideCumulativePercent));
+                                }
+
+                                if (!showConfLimits)
+                                {
+                                    this.Dispatcher.BeginInvoke(new SimpleCallback(HideConfidenceIntervals));
+                                }
+
+                                Field field = null;
+                                string columnType = string.Empty;
+
+                                foreach (DataRow fieldRow in DashboardHelper.FieldTable.Rows)
+                                {
+                                    if (fieldRow["columnname"].Equals(freqVar))
                                     {
-                                        displayValue = DashboardHelper.GetFormattedOutput(freqVar, row[freqVar]);
+                                        columnType = fieldRow["datatype"].ToString();
+                                        if (fieldRow["epifieldtype"] is Field)
+                                        {
+                                            field = fieldRow["epifieldtype"] as Field;
+                                        }
+                                        break;
                                     }
-                                    else
+                                }
+
+                                this.Dispatcher.BeginInvoke(renderHeader, strataValue, tableHeading);
+
+                                double AccumulatedTotal = 0;
+                                List<ConfLimit> confLimits = new List<ConfLimit>();
+                                int rowCount = 1;
+                                foreach (System.Data.DataRow row in frequencies.Rows)
+                                {
+                                    if (!row[freqVar].Equals(DBNull.Value) || (row[freqVar].Equals(DBNull.Value) && includeMissing == true))
                                     {
-                                        if (field != null && field is YesNoField)
+                                        if ((rowsToDisplay.HasValue && rowCount <= rowsToDisplay.Value) || rowsToDisplay.HasValue == false)
                                         {
-                                            if (row[freqVar].ToString().Equals("1"))
-                                                displayValue = yesValue;
-                                            else if (row[freqVar].ToString().Equals("0"))
-                                                displayValue = noValue;
+                                            this.Dispatcher.Invoke(addRow, strataValue, 26);
                                         }
-                                        else if ((field != null && field is DateField) || (!DashboardHelper.DateColumnRequiresTime(frequencies, frequencies.Columns[0].ColumnName)))
-                                        {
-                                            displayValue = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:d}", row[freqVar]);
-                                        }
-                                        else if (field != null && field is TimeField)
-                                        {
-                                            displayValue = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:T}", row[freqVar]);
-                                        } 
-                                        else
+                                        string displayValue = row[freqVar].ToString();
+
+                                        if (DashboardHelper.IsUserDefinedColumn(freqVar))
                                         {
                                             displayValue = DashboardHelper.GetFormattedOutput(freqVar, row[freqVar]);
                                         }
+                                        else
+                                        {
+                                            if (field != null && field is YesNoField)
+                                            {
+                                                if (row[freqVar].ToString().Equals("1"))
+                                                    displayValue = yesValue;
+                                                else if (row[freqVar].ToString().Equals("0"))
+                                                    displayValue = noValue;
+                                            }
+                                            else if ((field != null && field is DateField) || (!DashboardHelper.DateColumnRequiresTime(frequencies, frequencies.Columns[0].ColumnName)))
+                                            {
+                                                displayValue = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:d}", row[freqVar]);
+                                            }
+                                            else if (field != null && field is TimeField)
+                                            {
+                                                displayValue = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:T}", row[freqVar]);
+                                            }
+                                            else
+                                            {
+                                                displayValue = DashboardHelper.GetFormattedOutput(freqVar, row[freqVar]);
+                                            }
+                                        }
+
+                                        if (string.IsNullOrEmpty(displayValue))
+                                        {
+                                            displayValue = config.Settings.RepresentationOfMissing;
+                                        }
+
+                                        double pct = 0;
+                                        if (count > 0)
+                                            pct = Convert.ToDouble(row["freq"]) / (count * 1.0);
+                                        AccumulatedTotal += pct;
+
+                                        if (count > 0)
+                                            confLimits.Add(GetConfLimit(displayValue, Convert.ToDouble(row["freq"]), count));
+
+                                        if ((rowsToDisplay.HasValue && rowCount <= rowsToDisplay.Value) || rowsToDisplay.HasValue == false)
+                                        {
+                                            this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(displayValue, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Left, rowCount, 0, Visibility.Visible));
+                                            //this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(row["freq"].ToString(), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 1, Visibility.Visible));
+                                            this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(Math.Round((double)(row["freq"]), int.Parse((Parameters as FrequencyParameters).Precision)).ToString(), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 1, Visibility.Visible));
+
+                                            this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(pct.ToString(precisionPercentFormat), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 2, Visibility.Visible));
+                                            this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(AccumulatedTotal.ToString(precisionPercentFormat), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 3, Visibility.Visible));
+
+                                            this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(confLimits[rowCount - 1].Lower.ToString(precisionPercentFormat), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 4, Visibility.Visible));
+                                            this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(confLimits[rowCount - 1].Upper.ToString(precisionPercentFormat), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 5, Visibility.Visible));
+                                            this.Dispatcher.BeginInvoke(setBar, strataValue, rowCount, pct);
+                                            rowCount++;
+                                        }
+                                        else
+                                        {
+                                            showEllipsis = true;
+                                        }
                                     }
-
-                                    if (string.IsNullOrEmpty(displayValue))
-                                    {                                        
-                                        displayValue = config.Settings.RepresentationOfMissing;
-                                    }
-
-                                    double pct = 0;
-                                    if (count > 0)
-                                        pct = Convert.ToDouble(row["freq"]) / (count * 1.0);
-                                    AccumulatedTotal += pct;
-
-                                    if (count > 0)
-                                        confLimits.Add(GetConfLimit(displayValue, Convert.ToDouble(row["freq"]), count));
-
-                                    if ((rowsToDisplay.HasValue && rowCount <= rowsToDisplay.Value) || rowsToDisplay.HasValue == false)
-                                    {
-                                        this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(displayValue, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Left, rowCount, 0, Visibility.Visible));
-                                        //this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(row["freq"].ToString(), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 1, Visibility.Visible));
-                                        this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(Math.Round((double)(row["freq"]), int.Parse((Parameters as FrequencyParameters).Precision)).ToString(), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 1, Visibility.Visible));
-
-                                        this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(pct.ToString(precisionPercentFormat), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 2, Visibility.Visible));
-                                        this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(AccumulatedTotal.ToString(precisionPercentFormat), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 3, Visibility.Visible));
-
-                                        this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(confLimits[rowCount - 1].Lower.ToString(precisionPercentFormat), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 4, Visibility.Visible));
-                                        this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(confLimits[rowCount - 1].Upper.ToString(precisionPercentFormat), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 5, Visibility.Visible));
-                                        this.Dispatcher.BeginInvoke(setBar, strataValue, rowCount, pct);
-                                        rowCount++;
-                                    }
-                                    else
-                                    {
-                                        showEllipsis = true;
-                                    }                                    
                                 }
+
+                                if (showEllipsis)
+                                {
+                                    this.Dispatcher.Invoke(addRow, strataValue, 26);
+                                    this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(StringLiterals.ELLIPSIS, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Left, rowCount, 0, Visibility.Visible));
+                                    this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(StringLiterals.ELLIPSIS, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 1, Visibility.Visible));
+
+                                    this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(StringLiterals.ELLIPSIS, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 2, Visibility.Visible));
+                                    this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(StringLiterals.ELLIPSIS, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 3, Visibility.Visible));
+
+                                    this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(StringLiterals.ELLIPSIS, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 4, Visibility.Visible));
+                                    this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(StringLiterals.ELLIPSIS, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 5, Visibility.Visible));
+                                    rowCount++;
+                                }
+
+                                this.Dispatcher.BeginInvoke(new AddGridFooterDelegate(RenderFrequencyFooter), strataValue, rowCount, (int)count);
+                                if (shouldDrawBorders) this.Dispatcher.BeginInvoke(drawBorders, strataValue);
                             }
 
-                            if (showEllipsis)
-                            {
-                                this.Dispatcher.Invoke(addRow, strataValue, 26);
-                                this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(StringLiterals.ELLIPSIS, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Left, rowCount, 0, Visibility.Visible));
-                                this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(StringLiterals.ELLIPSIS, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 1, Visibility.Visible));
-
-                                this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(StringLiterals.ELLIPSIS, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 2, Visibility.Visible));
-                                this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(StringLiterals.ELLIPSIS, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 3, Visibility.Visible));
-
-                                this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(StringLiterals.ELLIPSIS, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 4, Visibility.Visible));
-                                this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(StringLiterals.ELLIPSIS, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 5, Visibility.Visible));
-                                rowCount++;
-                            }
-
-                            this.Dispatcher.BeginInvoke(new AddGridFooterDelegate(RenderFrequencyFooter), strataValue, rowCount, (int)count);
-                            if (shouldDrawBorders) this.Dispatcher.BeginInvoke(drawBorders, strataValue);                            
+                            stratifiedFrequencyTables.Clear();
                         }
-
-                        stratifiedFrequencyTables.Clear();
+                        this.Dispatcher.BeginInvoke(new SimpleCallback(RenderFinish));
+                        //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
                     }
-                    this.Dispatcher.BeginInvoke(new SimpleCallback(RenderFinish));
-                    //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
+                    catch (Exception ex)
+                    {
+                        this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), ex.Message);
+                        //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
+                    }
+                    finally
+                    {
+                        stopwatch.Stop();
+                        Debug.Print("Frequency gadget took " + stopwatch.Elapsed.ToString() + " seconds to complete with " + DashboardHelper.RecordCount.ToString() + " records and the following filters:");
+                        Debug.Print(DashboardHelper.DataFilters.GenerateDataFilterString());
+                    }
                 }
-                catch (Exception ex)
+
+                if (fields.Count > 1)
                 {
-                    this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), ex.Message);
-                    //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
+                    freqParameters.ColumnNames.Clear();
+                    freqParameters.ColumnNames.AddRange(fields);
                 }
-                finally
-                {
-                    stopwatch.Stop();
-                    Debug.Print("Frequency gadget took " + stopwatch.Elapsed.ToString() + " seconds to complete with " + DashboardHelper.RecordCount.ToString() + " records and the following filters:");
-                    Debug.Print(DashboardHelper.DataFilters.GenerateDataFilterString());
-                }
+
+
             }
         }
-        #endregion // Event Handlers        
-        
+        #endregion // Event Handlers
+
         #region Private Properties
         /// <summary>
         /// Gets whether or not the main variable is a drop-down list

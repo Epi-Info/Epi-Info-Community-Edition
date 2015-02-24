@@ -40,8 +40,16 @@
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
 
             <TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
-            <ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" />
-            
+            <RadioButton x:Name="radOneVar" GroupName="mutlifreq" Content="One Variable" Checked="OneVar_Checked"/>
+            <RadioButton x:Name="radMultiVar" GroupName="mutlifreq" Content="Multi-Variable" Checked="MultiVar_Checked"/>
+           
+            <ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" Visibility="Hidden" />
+            <ScrollViewer x:Name="scrollViewerVarPro" VerticalAlignment="Stretch" Height="50" Visibility="Hidden">
+                <StackPanel>
+                    <ListBox SelectionMode="Multiple" Name="lbxField" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  />
+                </StackPanel>
+            </ScrollViewer>
+            <StackPanel>
             <StackPanel Height="12" />
             
             <TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
@@ -66,6 +74,7 @@
                     <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" />
                 </StackPanel>
             </ScrollViewer>
+        </StackPanel>
         </StackPanel>
         <!--<StackPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
