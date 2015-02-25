@@ -874,6 +874,7 @@ namespace EpiDashboard
                             //newOptions.MainVariableNames = null;
                             //newOptions.MainVariableName = mainVariableName;
 
+                            newOptions.IgnoreRowLimits = true;
                             grpTables = DashboardHelper.GenerateFrequencyTable(newOptions);
 
                             foreach (KeyValuePair<DataTable, List<DescriptiveStatistics>> kvp in grpTables)
