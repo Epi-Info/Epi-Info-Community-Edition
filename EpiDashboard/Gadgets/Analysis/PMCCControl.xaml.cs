@@ -788,6 +788,7 @@ namespace EpiDashboard
                             GadgetParameters newOptions = new GadgetParameters(GadgetOptions);
                             newOptions.MainVariableNames = null;
                             newOptions.MainVariableName = mainVariableName;
+                            newOptions.ShouldIgnoreRowLimits = true;
 
                             grpTables = DashboardHelper.GenerateFrequencyTable(newOptions);
 
@@ -809,6 +810,7 @@ namespace EpiDashboard
                                 GadgetParameters newOptions = new GadgetParameters(GadgetOptions);
                                 newOptions.MainVariableNames = null;
                                 newOptions.MainVariableName = variableName;
+                                newOptions.ShouldIgnoreRowLimits = true;
 
                                 grpTables = DashboardHelper.GenerateFrequencyTable(newOptions);
 
@@ -822,6 +824,7 @@ namespace EpiDashboard
                     }
                     else
                     {
+                        GadgetOptions.ShouldIgnoreRowLimits = true;
                         stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(GadgetOptions/*, freqVar, weightVar, stratas, crosstabVar, useAllPossibleValues, sortHighLow, includeMissing, false*/);
                         runGroup = false;
                     }
