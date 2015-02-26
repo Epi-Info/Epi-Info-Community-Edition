@@ -1321,23 +1321,25 @@ namespace Epi.Data.Services
                             field.LoadFromRow(row);
                             break;
                         default:
-                            throw new ApplicationException("Invalid Field Type");
+                            break;
                     }
+                    
                     // Note: This check ideally shouldn't be necessary, but Epi 3.5.1 and previous versions actually do allow duplicate field names for group fields.
-                    if (fields.Contains(field))
+                    if (field != null)
                     {
-                        Logger.Log(DateTime.Now + ":  " + string.Format("The {0} field with name \"{1}\" already exists in {2}. This field has not been imported.", field.GetType().ToString(), field.Name, view.Name));
-                    }
-                    else
-                    {
-                        fields.Add(field);
+                        if (fields.Contains(field))
+                        {
+                            Logger.Log(DateTime.Now + ":  " + string.Format("The {0} field with name \"{1}\" already exists in {2}. This field has not been imported.", field.GetType().ToString(), field.Name, view.Name));
+                        }
+                        else
+                        {
+                            fields.Add(field);
+                        }
                     }
                 }
-
             }
-            catch (Exception ex)
+            catch
             {
-                //
             }
             return (fields);
         }
