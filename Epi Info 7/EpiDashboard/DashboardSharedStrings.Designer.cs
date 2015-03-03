@@ -538,6 +538,42 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exact 95% LCL.
+        /// </summary>
+        public static string COL_HEADER_EXACT_CI_LOWER {
+            get {
+                return ResourceManager.GetString("COL_HEADER_EXACT_CI_LOWER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exact 95% LCL.
+        /// </summary>
+        public static string COL_HEADER_EXACT_CI_UPPER {
+            get {
+                return ResourceManager.GetString("COL_HEADER_EXACT_CI_UPPER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fleiss 95% LCL.
+        /// </summary>
+        public static string COL_HEADER_FLEISS_CI_LOWER {
+            get {
+                return ResourceManager.GetString("COL_HEADER_FLEISS_CI_LOWER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fleiss 95% LCL.
+        /// </summary>
+        public static string COL_HEADER_FLEISS_CI_UPPER {
+            get {
+                return ResourceManager.GetString("COL_HEADER_FLEISS_CI_UPPER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Frequency.
         /// </summary>
         public static string COL_HEADER_FREQUENCY {
