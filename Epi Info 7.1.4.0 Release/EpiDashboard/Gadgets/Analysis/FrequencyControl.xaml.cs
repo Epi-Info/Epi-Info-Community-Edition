@@ -90,7 +90,7 @@ namespace EpiDashboard
         #region Delegates
         private new delegate void SetGridTextDelegate(string strataValue, TextBlockConfig textBlockConfig);
         private delegate void AddFreqGridDelegate(string strataVar, string value);
-        private delegate void RenderFrequencyHeaderDelegate(string strataValue, string freqVar);
+        private delegate void RenderFrequencyHeaderDelegate(string strataValue, string freqVar, double observationCount);
         private new delegate void AddGridFooterDelegate(string strataValue, int rowNumber, int totalRows);
         #endregion // Delegates
 
@@ -487,7 +487,7 @@ namespace EpiDashboard
         /// return the proper System.Windows.Controls.Grid for text insertion.
         /// </param>
         /// <param name="freqVar">The variable that the statistics were run on</param>        
-        private void RenderFrequencyHeader(string strataValue, string freqVar)
+        private void RenderFrequencyHeader(string strataValue, string freqVar, double observationCount)
         {
             Grid grid = GetStrataGrid(strataValue);
 
@@ -545,14 +545,20 @@ namespace EpiDashboard
             grid.Children.Add(txtAccuHeader);
 
             TextBlock txtCILowHeader = new TextBlock();
-            txtCILowHeader.Text = DashboardSharedStrings.COL_HEADER_CI_LOWER;
+            if (observationCount < 300)
+                txtCILowHeader.Text = DashboardSharedStrings.COL_HEADER_EXACT_CI_LOWER;
+            else
+                txtCILowHeader.Text = DashboardSharedStrings.COL_HEADER_FLEISS_CI_LOWER;
             txtCILowHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtCILowHeader, 0);
             Grid.SetColumn(txtCILowHeader, 4);
             grid.Children.Add(txtCILowHeader);
 
             TextBlock txtCIUpperHeader = new TextBlock();
-            txtCIUpperHeader.Text = DashboardSharedStrings.COL_HEADER_CI_UPPER;
+            if (observationCount < 300)
+                txtCIUpperHeader.Text = DashboardSharedStrings.COL_HEADER_EXACT_CI_UPPER;
+            else
+                txtCIUpperHeader.Text = DashboardSharedStrings.COL_HEADER_FLEISS_CI_UPPER;
             txtCIUpperHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtCIUpperHeader, 0);
             Grid.SetColumn(txtCIUpperHeader, 5);
@@ -2141,7 +2147,7 @@ namespace EpiDashboard
                                 }
                             }
 
-                            this.Dispatcher.BeginInvoke(renderHeader, strataValue, tableHeading);
+                            this.Dispatcher.BeginInvoke(renderHeader, strataValue, tableHeading, count);
 
                             double AccumulatedTotal = 0;
                             List<ConfLimit> confLimits = new List<ConfLimit>();
