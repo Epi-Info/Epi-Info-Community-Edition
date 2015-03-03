@@ -17,9 +17,9 @@ namespace Epi.Core.ServiceClient
             GeneralException
         }
 
-        public static EWEManagerService.EWEManagerServiceClient GetClient(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
+        public static EWEManagerService.EWEManagerServiceV2Client GetClient(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
         {
-            EWEManagerService.EWEManagerServiceClient result = null;
+            EWEManagerService.EWEManagerServiceV2Client result = null;
             
             try
             {
@@ -56,7 +56,7 @@ namespace Epi.Core.ServiceClient
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
 
-                    result = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
+                    result = new EWEManagerService.EWEManagerServiceV2Client(binding, endpoint);
                     result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
                 }
@@ -99,7 +99,7 @@ namespace Epi.Core.ServiceClient
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
 
-                        result = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
+                        result = new EWEManagerService.EWEManagerServiceV2Client(binding, endpoint);
 
                     }
                     else
@@ -132,7 +132,7 @@ namespace Epi.Core.ServiceClient
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
 
-                        result = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
+                        result = new EWEManagerService.EWEManagerServiceV2Client(binding, endpoint);
                     }
                 }
             }
@@ -159,7 +159,7 @@ namespace Epi.Core.ServiceClient
             return result;
         }
 
-        public static EWEManagerService.EWEManagerServiceClient GetClient()
+        public static EWEManagerService.EWEManagerServiceV2Client GetClient()
         {
             Configuration config = Configuration.GetNewInstance();
 
@@ -193,7 +193,7 @@ namespace Epi.Core.ServiceClient
         {
             try
             {
-                EWEManagerService.EWEManagerServiceClient client = EWEServiceClient.GetClient();
+            EWEManagerService.EWEManagerServiceV2Client client = EWEServiceClient.GetClient();
                 Configuration config = Configuration.GetNewInstance();
 
                 var Request = new EWEManagerService.SurveyInfoRequest(); 

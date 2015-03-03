@@ -20,6 +20,7 @@ namespace Epi.SurveyManagerService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.SurveyInfoRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.OrganizationRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.SurveyAnswerRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.PreFilledAnswerRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.PublishRequest))]
     public partial class RequestBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -254,6 +255,29 @@ namespace Epi.SurveyManagerService {
                 if ((object.ReferenceEquals(this.SurveyAnswerListField, value) != true)) {
                     this.SurveyAnswerListField = value;
                     this.RaisePropertyChanged("SurveyAnswerList");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PreFilledAnswerRequest", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class PreFilledAnswerRequest : Epi.SurveyManagerService.RequestBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.SurveyManagerService.PreFilledAnswerDTO AnswerInfoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.SurveyManagerService.PreFilledAnswerDTO AnswerInfo {
+            get {
+                return this.AnswerInfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AnswerInfoField, value) != true)) {
+                    this.AnswerInfoField = value;
+                    this.RaisePropertyChanged("AnswerInfo");
                 }
             }
         }
@@ -794,6 +818,9 @@ namespace Epi.SurveyManagerService {
         private bool IncludeOrderStatisticsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsDraftModeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid OrganizationKeyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -839,6 +866,19 @@ namespace Epi.SurveyManagerService {
                 if ((this.IncludeOrderStatisticsField.Equals(value) != true)) {
                     this.IncludeOrderStatisticsField = value;
                     this.RaisePropertyChanged("IncludeOrderStatistics");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsDraftMode {
+            get {
+                return this.IsDraftModeField;
+            }
+            set {
+                if ((this.IsDraftModeField.Equals(value) != true)) {
+                    this.IsDraftModeField = value;
+                    this.RaisePropertyChanged("IsDraftMode");
                 }
             }
         }
@@ -1216,11 +1256,106 @@ namespace Epi.SurveyManagerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PreFilledAnswerDTO", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class PreFilledAnswerDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid OrganizationKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid SurveyIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<string, string> SurveyQuestionAnswerListField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid UserPublishKeyField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid OrganizationKey {
+            get {
+                return this.OrganizationKeyField;
+            }
+            set {
+                if ((this.OrganizationKeyField.Equals(value) != true)) {
+                    this.OrganizationKeyField = value;
+                    this.RaisePropertyChanged("OrganizationKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid SurveyId {
+            get {
+                return this.SurveyIdField;
+            }
+            set {
+                if ((this.SurveyIdField.Equals(value) != true)) {
+                    this.SurveyIdField = value;
+                    this.RaisePropertyChanged("SurveyId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<string, string> SurveyQuestionAnswerList {
+            get {
+                return this.SurveyQuestionAnswerListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyQuestionAnswerListField, value) != true)) {
+                    this.SurveyQuestionAnswerListField = value;
+                    this.RaisePropertyChanged("SurveyQuestionAnswerList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid UserPublishKey {
+            get {
+                return this.UserPublishKeyField;
+            }
+            set {
+                if ((this.UserPublishKeyField.Equals(value) != true)) {
+                    this.UserPublishKeyField = value;
+                    this.RaisePropertyChanged("UserPublishKey");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseBase", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.SurveyInfoResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.OrganizationResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.SurveyAnswerResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.SurveyControlsRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.SurveyControlsResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.PublishResponse))]
     public partial class ResponseBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1526,6 +1661,68 @@ namespace Epi.SurveyManagerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SurveyControlsRequest", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class SurveyControlsRequest : Epi.SurveyManagerService.ResponseBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurveyIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SurveyId {
+            get {
+                return this.SurveyIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyIdField, value) != true)) {
+                    this.SurveyIdField = value;
+                    this.RaisePropertyChanged("SurveyId");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SurveyControlsResponse", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class SurveyControlsResponse : Epi.SurveyManagerService.ResponseBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Message1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.SurveyManagerService.SurveyControlDTO[] SurveyControlListField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Name="Message")]
+        public string Message1 {
+            get {
+                return this.Message1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Message1Field, value) != true)) {
+                    this.Message1Field = value;
+                    this.RaisePropertyChanged("Message1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.SurveyManagerService.SurveyControlDTO[] SurveyControlList {
+            get {
+                return this.SurveyControlListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyControlListField, value) != true)) {
+                    this.SurveyControlListField = value;
+                    this.RaisePropertyChanged("SurveyControlList");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="PublishResponse", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
     public partial class PublishResponse : Epi.SurveyManagerService.ResponseBase {
@@ -1637,6 +1834,83 @@ namespace Epi.SurveyManagerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SurveyControlDTO", Namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO")]
+    [System.SerializableAttribute()]
+    public partial class SurveyControlDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ControlIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ControlPromptField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ControlTypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ControlId {
+            get {
+                return this.ControlIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ControlIdField, value) != true)) {
+                    this.ControlIdField = value;
+                    this.RaisePropertyChanged("ControlId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ControlPrompt {
+            get {
+                return this.ControlPromptField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ControlPromptField, value) != true)) {
+                    this.ControlPromptField = value;
+                    this.RaisePropertyChanged("ControlPrompt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ControlType {
+            get {
+                return this.ControlTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ControlTypeField, value) != true)) {
+                    this.ControlTypeField = value;
+                    this.RaisePropertyChanged("ControlType");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
     public partial class CustomFaultException : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1728,9 +2002,118 @@ namespace Epi.SurveyManagerService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PreFilledAnswerResponse", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class PreFilledAnswerResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<string, string> ErrorMessageListField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurveyResponseIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurveyResponsePassCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurveyResponseUrlField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<string, string> ErrorMessageList {
+            get {
+                return this.ErrorMessageListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageListField, value) != true)) {
+                    this.ErrorMessageListField = value;
+                    this.RaisePropertyChanged("ErrorMessageList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SurveyResponseID {
+            get {
+                return this.SurveyResponseIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyResponseIDField, value) != true)) {
+                    this.SurveyResponseIDField = value;
+                    this.RaisePropertyChanged("SurveyResponseID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SurveyResponsePassCode {
+            get {
+                return this.SurveyResponsePassCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyResponsePassCodeField, value) != true)) {
+                    this.SurveyResponsePassCodeField = value;
+                    this.RaisePropertyChanged("SurveyResponsePassCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SurveyResponseUrl {
+            get {
+                return this.SurveyResponseUrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyResponseUrlField, value) != true)) {
+                    this.SurveyResponseUrlField = value;
+                    this.RaisePropertyChanged("SurveyResponseUrl");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SurveyManagerService.IManagerService")]
-    public interface IManagerService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SurveyManagerService.IManagerServiceV3")]
+    public interface IManagerServiceV3 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/PublishSurvey", ReplyAction="http://tempuri.org/IManagerService/PublishSurveyResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/PublishSurveyCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
@@ -1780,32 +2163,45 @@ namespace Epi.SurveyManagerService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/RePublishSurvey", ReplyAction="http://tempuri.org/IManagerService/RePublishSurveyResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/RePublishSurveyCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.SurveyManagerService.PublishResponse RePublishSurvey(Epi.SurveyManagerService.PublishRequest pRequestMessage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerServiceV2/SetSurveyAnswer", ReplyAction="http://tempuri.org/IManagerServiceV2/SetSurveyAnswerResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerServiceV2/SetSurveyAnswerCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerService.PreFilledAnswerResponse SetSurveyAnswer(Epi.SurveyManagerService.PreFilledAnswerRequest pRequestMessage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerServiceV2/GetSurveyControlList", ReplyAction="http://tempuri.org/IManagerServiceV2/GetSurveyControlListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerServiceV2/GetSurveyControlListCustomFaultExceptionFaul" +
+            "t", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerService.SurveyControlsResponse GetSurveyControlList(Epi.SurveyManagerService.SurveyControlsRequest pRequestMessage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerServiceV3/UpdateRecordStatus", ReplyAction="http://tempuri.org/IManagerServiceV3/UpdateRecordStatusResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerServiceV3/UpdateRecordStatusCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        void UpdateRecordStatus(Epi.SurveyManagerService.SurveyAnswerRequest pRequestMessage);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IManagerServiceChannel : Epi.SurveyManagerService.IManagerService, System.ServiceModel.IClientChannel {
+    public interface IManagerServiceV3Channel : Epi.SurveyManagerService.IManagerServiceV3, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ManagerServiceClient : System.ServiceModel.ClientBase<Epi.SurveyManagerService.IManagerService>, Epi.SurveyManagerService.IManagerService {
+    public partial class ManagerServiceV3Client : System.ServiceModel.ClientBase<Epi.SurveyManagerService.IManagerServiceV3>, Epi.SurveyManagerService.IManagerServiceV3 {
         
-        public ManagerServiceClient() {
+        public ManagerServiceV3Client() {
         }
         
-        public ManagerServiceClient(string endpointConfigurationName) : 
+        public ManagerServiceV3Client(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public ManagerServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public ManagerServiceV3Client(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ManagerServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ManagerServiceV3Client(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ManagerServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ManagerServiceV3Client(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
@@ -1855,6 +2251,18 @@ namespace Epi.SurveyManagerService {
         
         public Epi.SurveyManagerService.PublishResponse RePublishSurvey(Epi.SurveyManagerService.PublishRequest pRequestMessage) {
             return base.Channel.RePublishSurvey(pRequestMessage);
+        }
+        
+        public Epi.SurveyManagerService.PreFilledAnswerResponse SetSurveyAnswer(Epi.SurveyManagerService.PreFilledAnswerRequest pRequestMessage) {
+            return base.Channel.SetSurveyAnswer(pRequestMessage);
+        }
+        
+        public Epi.SurveyManagerService.SurveyControlsResponse GetSurveyControlList(Epi.SurveyManagerService.SurveyControlsRequest pRequestMessage) {
+            return base.Channel.GetSurveyControlList(pRequestMessage);
+        }
+        
+        public void UpdateRecordStatus(Epi.SurveyManagerService.SurveyAnswerRequest pRequestMessage) {
+            base.Channel.UpdateRecordStatus(pRequestMessage);
         }
     }
 }

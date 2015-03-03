@@ -56,7 +56,7 @@ namespace Epi.Windows.MakeView.Dialogs
             Request.User.UserName = this.EmailAddresstextBox1.Text;
             Request.User.PasswordHash = this.PassWordTextBox1.Text;
 
-            EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+            var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
 
             try
             {

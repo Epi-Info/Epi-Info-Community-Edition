@@ -17,9 +17,9 @@ namespace Epi.Core.ServiceClient
             GeneralException
         }
 
-        public static SurveyManagerService.ManagerServiceClient GetClient(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
+        public static SurveyManagerService.ManagerServiceV3Client GetClient(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
         {
-            SurveyManagerService.ManagerServiceClient result = null;
+            SurveyManagerService.ManagerServiceV3Client result = null;
             try
             {
 
@@ -56,7 +56,7 @@ namespace Epi.Core.ServiceClient
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
 
-                    result = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
+                    result = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
                     result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
                 }
@@ -99,7 +99,7 @@ namespace Epi.Core.ServiceClient
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
 
-                        result = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
+                        result = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
 
                     }
                     else
@@ -132,7 +132,7 @@ namespace Epi.Core.ServiceClient
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
 
-                        result = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
+                        result = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
                     }
                 }
             }
@@ -159,7 +159,7 @@ namespace Epi.Core.ServiceClient
             return result;
         }
 
-        public static SurveyManagerService.ManagerServiceClient GetClient()
+        public static SurveyManagerService.ManagerServiceV3Client GetClient()
         {
             Configuration config = Configuration.GetNewInstance();
 
@@ -193,7 +193,7 @@ namespace Epi.Core.ServiceClient
         {
             try
             {
-                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 Configuration config = Configuration.GetNewInstance();
 
                 SurveyManagerService.SurveyInfoRequest request = new SurveyManagerService.SurveyInfoRequest();

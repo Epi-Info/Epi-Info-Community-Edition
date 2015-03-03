@@ -323,7 +323,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
             try
             {
-                EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+            EWEManagerService.EWEManagerServiceV2Client client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
           //  Epi.Web.Enter.Common.Message.PublishResponse Result = client.RePublishSurvey(Request);
                 //Epi.Web.Enter.Common.Message.PublishResponse Result = client.RePublishSurvey(Request);
                var Result = client.RePublishSurvey(Request);
@@ -885,7 +885,7 @@ namespace Epi.Windows.MakeView.Dialogs
                 }
             else
                 {
-                    EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+                EWEManagerService.EWEManagerServiceV2Client client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
 
                 //this.txtDepartment.Visible = false;
                 //this.lblDepartment.Visible = false;
@@ -1297,7 +1297,7 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-                EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+            var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
 
                 //Epi.Web.Common.Message.PublishRequest Request = (Epi.Web.Common.Message.PublishRequest)((object[])e.Argument)[0];
                 //Epi.Web.Common.Message.PublishResponse Result = (Epi.Web.Common.Message.PublishResponse)((object[])e.Argument)[1];
