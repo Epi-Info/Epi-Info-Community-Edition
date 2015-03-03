@@ -668,8 +668,8 @@ namespace Epi.Data.Services
                 string formId = (string)((Dictionary<string, object>)(e.Argument))["FormId"];
                 string statusMessage = (string)((Dictionary<string, object>)(e.Argument))["StatusMessage"];
                 Guid responseId = (Guid)((Dictionary<string, object>)(e.Argument))["ResponseId"];
-                    
-                EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+
+               var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
                 Epi.EWEManagerService.PreFilledAnswerRequest Request = new Epi.EWEManagerService.PreFilledAnswerRequest();
                 Dictionary<string, string> responseDictionary = new Dictionary<string, string>();
 

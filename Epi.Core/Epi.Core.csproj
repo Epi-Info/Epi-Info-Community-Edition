@@ -682,9 +682,27 @@
     <None Include="Service References\EWEManagerService\Epi.EWEManagerService.UserAuthenticationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService.disco" />
     <None Include="Service References\EWEManagerService\configuration91.svcinfo" />
     <None Include="Service References\EWEManagerService\configuration.svcinfo" />
+    <None Include="Service References\EWEManagerService\EWEManagerServiceV2.wsdl" />
+    <None Include="Service References\EWEManagerService\EWEManagerServiceV2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerServiceV21.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerServiceV22.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerServiceV23.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerServiceV24.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerService\EWEManagerServiceV25.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\EWEManagerService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -694,19 +712,27 @@
     <None Include="Service References\SurveyManagerService\Epi.SurveyManagerService.OrganizationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SurveyManagerService\Epi.SurveyManagerService.PreFilledAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SurveyManagerService\Epi.SurveyManagerService.PublishResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SurveyManagerService\Epi.SurveyManagerService.SurveyAnswerResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SurveyManagerService\Epi.SurveyManagerService.SurveyControlsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SurveyManagerService\Epi.SurveyManagerService.SurveyInfoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SurveyManagerService\ManagerServiceV31.wsdl" />
     <None Include="Service References\SurveyManagerService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\EWEManagerService\EWEManagerServiceV2.disco" />
     <Content Include="Templates\Fields\debug - one of each field with different widths.xml" />
     <Content Include="Templates\Fields\debug - one of each field.xml" />
     <Content Include="Templates\Fields\States.xml">
@@ -990,39 +1016,19 @@
     <None Include="Resources\Training Projects\Salmonellosis\Salmonellosis.prj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService.wsdl" />
-    <None Include="Service References\EWEManagerService\EWEManagerService.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV35.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService1.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV36.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService2.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV37.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService3.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV38.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerService\ManagerService.wsdl" />
-    <None Include="Service References\SurveyManagerService\SurveyManagerService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService4.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV39.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Services\Fields\Fields.cd" />

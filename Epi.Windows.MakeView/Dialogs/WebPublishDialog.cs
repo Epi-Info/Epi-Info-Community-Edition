@@ -310,7 +310,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
             try
             {
-                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+            SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 SurveyManagerService.PublishResponse Result = client.RePublishSurvey(Request);
 
                 panel2.Visible = true;
@@ -836,7 +836,7 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             else
             {
-                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+            SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
 
                 this.txtDepartment.Visible = false;
                 this.lblDepartment.Visible = false;
@@ -1164,7 +1164,7 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+            SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 SurveyManagerService.PublishRequest Request = (SurveyManagerService.PublishRequest)((object[])e.Argument)[0];
                 SurveyManagerService.PublishResponse Result = (SurveyManagerService.PublishResponse)((object[])e.Argument)[1];
                 Result = client.PublishSurvey(Request);

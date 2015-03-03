@@ -2927,7 +2927,7 @@ namespace Epi.Windows.MakeView.Forms
                             {
                                 try
                                 {
-                                    SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                                SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                                     SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
                                     SurveyManagerService.OrganizationDTO orgDTO = new SurveyManagerService.OrganizationDTO();
                                     Request.Organization = orgDTO;
@@ -2962,7 +2962,7 @@ namespace Epi.Windows.MakeView.Forms
                     {
                         try
                         {
-                            SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                        SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                             SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
                             SurveyManagerService.OrganizationDTO orgDTO = new SurveyManagerService.OrganizationDTO();
                             Request.Organization = orgDTO;
@@ -3561,7 +3561,7 @@ namespace Epi.Windows.MakeView.Forms
         {
             try
             {
-                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+            SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 Configuration config = Configuration.GetNewInstance();
 
                 SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
@@ -3628,7 +3628,7 @@ namespace Epi.Windows.MakeView.Forms
             {
                 Template template = new Template(this.mediator);
 
-                EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+               var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
                 DataTable table;
                 View RootView = this.mediator.Project.Metadata.GetParentView(this.mediator.ProjectExplorer.CurrentView.Id);
                 if (RootView == null)
@@ -3722,7 +3722,7 @@ namespace Epi.Windows.MakeView.Forms
         {
             try
             {
-                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+               SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 Configuration config = Configuration.GetNewInstance();
 
                 SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
@@ -3795,7 +3795,7 @@ namespace Epi.Windows.MakeView.Forms
         {
             try
             {
-                EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+                var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
                 Configuration config = Configuration.GetNewInstance();
                 DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(this.projectExplorer.CurrentView.Id);
                 DataRow ViewRow = table.Rows[0];
@@ -3939,7 +3939,7 @@ namespace Epi.Windows.MakeView.Forms
             try
             {
                 Template template = new Template(this.mediator);
-                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 Configuration config = Configuration.GetNewInstance();
 
                 SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
@@ -4090,7 +4090,7 @@ namespace Epi.Windows.MakeView.Forms
 
 
 
-                EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+                var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
 
             DataTable table;
             View RootView = this.mediator.Project.Metadata.GetParentView(this.mediator.ProjectExplorer.CurrentView.Id);
@@ -4285,7 +4285,7 @@ namespace Epi.Windows.MakeView.Forms
                                 try
                                     {
 
-                                    EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+                                    var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
                                     EWEManagerService.OrganizationRequest Request = new Epi.EWEManagerService.OrganizationRequest();
                                     //Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
                                      Request.Organization = new EWEManagerService.OrganizationDTO();
@@ -4324,7 +4324,7 @@ namespace Epi.Windows.MakeView.Forms
                         try
                             {
 
-                                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                            SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                                 SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
                                 SurveyManagerService.OrganizationDTO orgDTO = new SurveyManagerService.OrganizationDTO();
                                 Request.Organization = orgDTO;
@@ -4467,7 +4467,7 @@ namespace Epi.Windows.MakeView.Forms
             Request.User.Operation = EWEManagerService.ConstantOperationMode.NoChange;
             try
                 {
-            EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+           var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
             var Result = client.GetUser(Request);
             if (Result != null && ISWindowAuthMode == 1)
              {

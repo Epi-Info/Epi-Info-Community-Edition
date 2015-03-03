@@ -45,7 +45,7 @@ namespace Epi.Enter.Forms
         private string OrganizationKey = string.Empty;
         private string PublishKey = string.Empty;
         
-        private EWEManagerService.EWEManagerServiceClient client;
+        private EWEManagerService.EWEManagerServiceV2Client client;
         private Dictionary<string, Dictionary<string, WebFieldData>> _webFieldDataList;
         private bool IsDraftMode;
         private int SurveyStatus;
@@ -150,7 +150,7 @@ namespace Epi.Enter.Forms
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.EWEServiceEndpointAddress);
 
-                    client = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
+                    client = new EWEManagerService.EWEManagerServiceV2Client(binding, endpoint);
 
                     client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     client.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
@@ -196,7 +196,7 @@ namespace Epi.Enter.Forms
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.EWEServiceEndpointAddress);
 
-                        client = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
+                        client = new EWEManagerService.EWEManagerServiceV2Client(binding, endpoint);
 
                         }
                     else
@@ -230,7 +230,7 @@ namespace Epi.Enter.Forms
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.EWEServiceEndpointAddress);
 
-                        client = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
+                        client = new EWEManagerService.EWEManagerServiceV2Client(binding, endpoint);
                         }
 
                     }
@@ -247,6 +247,8 @@ namespace Epi.Enter.Forms
         /// </summary>
         private void GetRequest()
             {
+         
+
             if (requestWorker.WorkerSupportsCancellation)
                 {
                 requestWorker.CancelAsync();
@@ -276,6 +278,8 @@ namespace Epi.Enter.Forms
                 ))
                 {
                 String fieldName = ((Epi.INamedObject)dataField).Name;
+                   try
+                    {
                 switch (dataField.FieldType)
                     {
                     case MetaFieldType.Date:
@@ -313,6 +317,14 @@ namespace Epi.Enter.Forms
                     default:
                         throw new ApplicationException("Not a supported field type");
                     }
+                    }
+                   catch (Exception ex)
+                       {
+
+                       this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), "Record GUID:" + fieldData.RecordGUID + "  Field Name:" + fieldName + "  Field Type:" + dataField.FieldType + "  Field Value:" + fieldData.FieldValue + "  Error Message :" + ex.Message);
+                       // Logger.Log("Record GUID:" + fieldData.RecordGUID + "  Field Name:" + fieldName + "  Field Type:" + dataField.FieldType + "  Field Value:" + fieldData.FieldValue + "  Error Message :" + ex.Message);
+                       return null;
+                       }
                 }
 
             return null;
@@ -387,7 +399,7 @@ namespace Epi.Enter.Forms
                     update = false;
                     append = true;
                     importTypeDescription = "Records with no matching ID fields will be appended. Records with matching ID fields will be ignored.";
-                    DownLoadType = cmbImportType.SelectedIndex;
+                    //DownLoadType = cmbImportType.SelectedIndex;
                     AddStatusMessage("Import initiated for form " + textProject.Text + ". " + importTypeDescription);
 
                     btnCancel.Enabled = false;
@@ -558,6 +570,7 @@ namespace Epi.Enter.Forms
 
                 if (destinationGUIDList.Contains(GUID))
                     {
+                    recordsUpdated++;
                     if (update)
                         {
                         // UPDATE matching records
@@ -713,7 +726,7 @@ namespace Epi.Enter.Forms
         private Dictionary<string, Dictionary<string, WebFieldData>> ParseXML(Epi.EWEManagerService.SurveyAnswerResponse pSurveyAnswer)
             {
             Dictionary<string, Dictionary<string, WebFieldData>> result = new Dictionary<string, Dictionary<string, WebFieldData>>(StringComparer.OrdinalIgnoreCase);
-            SetFilterProperties(DownLoadType);
+           // SetFilterProperties(DownLoadType);
 
             foreach (Epi.EWEManagerService.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
                 {
@@ -845,7 +858,7 @@ namespace Epi.Enter.Forms
             //    int recordsInserted = 0;
 
             //    Page destinationPage = destinationView.Pages[i];
-
+            List<string> GUIDList = new List<string>();
                 foreach (KeyValuePair<string, Dictionary<string, WebFieldData>> kvp in pFieldDataList)
                     {
                     int ViewId = kvp.Value.Select(x => x.Value.ViewId).ToList().First();
@@ -862,7 +875,7 @@ namespace Epi.Enter.Forms
                     WordBuilder fieldValues = new WordBuilder(StringLiterals.COMMA);
                     List<QueryParameter> fieldValueParams = new List<QueryParameter>();
 
-                    List<string> GUIDList = new List<string>();
+                  
                     for (int i = 0; i < destinationView.Pages.Count; i++)
                         {
                         this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on page " + (i + 1).ToString() + " of " + destinationView.Pages.Count.ToString() + "...");
@@ -956,6 +969,27 @@ namespace Epi.Enter.Forms
                     //this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "On page '" + destinationPage.Name + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");                
                     }
                // }
+                if (GUIDList.Count > 0)
+                    {
+                     UpdateRecordStatus(GUIDList);
+                    }
+            }
+        private void UpdateRecordStatus(List<string> GUIDList)
+            {
+            Epi.EWEManagerService.SurveyAnswerRequest Request = new Epi.EWEManagerService.SurveyAnswerRequest();
+            List<Epi.EWEManagerService.SurveyAnswerDTO> DTOList = new List<Epi.EWEManagerService.SurveyAnswerDTO>();
+            foreach (var Id in GUIDList)
+                {
+
+                Epi.EWEManagerService.SurveyAnswerDTO DTO = new EWEManagerService.SurveyAnswerDTO();
+
+                DTO.ResponseId = Id;
+                DTO.Status = 4;
+                DTOList.Add(DTO);
+                }
+            Request.SurveyAnswerList = DTOList.ToArray();
+
+            client.UpdateRecordStatus(Request);
             }
 
         /// <summary>
@@ -1106,11 +1140,11 @@ namespace Epi.Enter.Forms
                 //    break;
                 case 0:
                     IsDraftMode =true;
-                    SurveyStatus = 3;//Complete 
+                    //SurveyStatus = 3;//Complete 
                     break;
                 case 1:
                     IsDraftMode = false;
-                    SurveyStatus = 3;//All 
+                   // SurveyStatus = 3;//All 
                     break;
 
 
@@ -1144,6 +1178,10 @@ namespace Epi.Enter.Forms
 
         private void btnOK_Click(object sender, EventArgs e)
             {
+
+            DownLoadType = cmbImportType.SelectedIndex;
+            SetFilterProperties(DownLoadType);
+
             if (!string.IsNullOrEmpty(textProject.Text))
                 {
                 progressBar.Style = ProgressBarStyle.Marquee;
@@ -1213,6 +1251,7 @@ namespace Epi.Enter.Forms
                     EWEManagerService.SurveyAnswerRequest Request = new EWEManagerService.SurveyAnswerRequest();
                     EWEManagerService.SurveyAnswerCriteria Criteria = new EWEManagerService.SurveyAnswerCriteria();
                     Criteria.SurveyId = SurveyId;
+                    Criteria.IsDraftMode = IsDraftMode;
                     Criteria.UserPublishKey = new Guid(PublishKey);
                     Criteria.OrganizationKey = new Guid(OrganizationKey);
                     Criteria.ReturnSizeInfoOnly = true;
@@ -1285,6 +1324,7 @@ namespace Epi.Enter.Forms
                     Criteria.OrganizationKey = new Guid(OrganizationKey);
                     Criteria.ReturnSizeInfoOnly = false;
                     Criteria.SurveyAnswerIdList = new string[0];
+                    Criteria.IsDraftMode = IsDraftMode;
                     Request.Criteria = Criteria; 
 
                     for (int i = 1; i <= Pages; i++)

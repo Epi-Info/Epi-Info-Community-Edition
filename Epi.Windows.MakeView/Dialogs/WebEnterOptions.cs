@@ -88,7 +88,7 @@ namespace Epi.Windows.MakeView.Dialogs
           
             try
             {
-                EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+           var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
 
                 var Result = client.PingManagerService();
             }

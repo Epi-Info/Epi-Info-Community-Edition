@@ -44,7 +44,7 @@ namespace Epi.Enter.Forms
         private string SurveyId = string.Empty;
         private string OrganizationKey = string.Empty;
         private string PublishKey = string.Empty;
-        private SurveyManagerService.ManagerServiceClient client;
+        private SurveyManagerService.ManagerServiceV3Client client;
         private Dictionary<string, Dictionary<string, WebFieldData>> wfList;
         private bool IsDraftMode;
         private int SurveyStatus;
@@ -149,7 +149,7 @@ namespace Epi.Enter.Forms
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                    client = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
+                    client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
 
                     client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     client.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
@@ -195,7 +195,7 @@ namespace Epi.Enter.Forms
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                        client = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
+                        client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
 
                     }
                     else
@@ -229,7 +229,7 @@ namespace Epi.Enter.Forms
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                        client = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
+                        client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
                     }
 
                 }
@@ -275,6 +275,8 @@ namespace Epi.Enter.Forms
                 ))
             {
                 String fieldName = ((Epi.INamedObject)dataField).Name;
+                 try
+                    {
                 switch (dataField.FieldType)
                 {
                     case MetaFieldType.Date:
@@ -312,6 +314,14 @@ namespace Epi.Enter.Forms
                     default:
                         throw new ApplicationException("Not a supported field type");
                 }
+                    }
+                 catch (Exception ex)
+                     {
+
+                     this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), "Record GUID:" + fieldData.RecordGUID + "  Field Name:" + fieldName + "  Field Type:" + dataField.FieldType + "  Field Value:" + fieldData.FieldValue + "  Error Message :" + ex.Message);
+                     // Logger.Log("Record GUID:" + fieldData.RecordGUID + "  Field Name:" + fieldName + "  Field Type:" + dataField.FieldType + "  Field Value:" + fieldData.FieldValue + "  Error Message :" + ex.Message);
+                     return null;
+                     }
             }
 
             return null;
@@ -339,7 +349,7 @@ namespace Epi.Enter.Forms
         /// <summary>
         /// Initiates a full import on a single form
         /// </summary>
-        private void DoImport(SurveyAnswerRequest Request)
+        private void DoImport(SurveyManagerService.SurveyAnswerRequest Request)
         {            
             {
                 try
@@ -386,7 +396,7 @@ namespace Epi.Enter.Forms
                         update = false;
                         append = true;
                         importTypeDescription = "Records with no matching ID fields will be appended. Records with matching ID fields will be ignored.";
-                        DownLoadType = cmbImportType.SelectedIndex;
+                       // DownLoadType = cmbImportType.SelectedIndex;
                         AddStatusMessage("Import initiated for form " + textProject.Text + ". " + importTypeDescription);
 
                         btnCancel.Enabled = false;
@@ -679,7 +689,7 @@ namespace Epi.Enter.Forms
         private Dictionary<string, Dictionary<string, WebFieldData>> ParseXML(SurveyManagerService.SurveyAnswerResponse pSurveyAnswer)
         {
             Dictionary<string, Dictionary<string, WebFieldData>> result = new Dictionary<string, Dictionary<string, WebFieldData>>(StringComparer.OrdinalIgnoreCase);
-            SetFilterProperties(DownLoadType);
+           // SetFilterProperties(DownLoadType);
 
             foreach (SurveyManagerService.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
             {
@@ -790,7 +800,7 @@ namespace Epi.Enter.Forms
         private void ProcessPages(Dictionary<string, Dictionary<string, WebFieldData>> pFieldDataList, View destinationView, List<string> destinationGUIDList)
         {
             Dictionary<int, List<WebFieldData>> pagedFieldDataDictionary = new Dictionary<int, List<WebFieldData>>();
-
+            List<string> GUIDList = new List<string>();
             for (int i = 0; i < destinationView.Pages.Count; i++)
             {
                 this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on page " + (i + 1).ToString() + " of " + destinationView.Pages.Count.ToString() + "...");
@@ -798,7 +808,7 @@ namespace Epi.Enter.Forms
                 int recordsInserted = 0;
 
                 Page destinationPage = destinationView.Pages[i];
-
+               
                 foreach(KeyValuePair<string, Dictionary<string, WebFieldData>> kvp in pFieldDataList)
                 {
                     string currentGUID = string.Empty;
@@ -808,7 +818,7 @@ namespace Epi.Enter.Forms
                     WordBuilder fieldValues = new WordBuilder(StringLiterals.COMMA);
                     List<QueryParameter> fieldValueParams = new List<QueryParameter>();
 
-                    List<string> GUIDList = new List<string>();
+                   
 
                     foreach (Field PageField in destinationPage.Fields)
                     {
@@ -876,14 +886,19 @@ namespace Epi.Enter.Forms
 
                                     if (!GUIDList.Contains(GUID))
                                     {
+
                                         GUIDList.Add(GUID);
                                         recordsInserted++;
                                         this.BeginInvoke(new SetProgressBarDelegate(IncrementProgressBarValue), 1);
                                     }
+
+                                   
                                 }
                             }
                         }
                     }
+
+                      
                 //}
                 //catch (Exception ex)
                 //{
@@ -894,8 +909,31 @@ namespace Epi.Enter.Forms
                 //}
                 //this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "On page '" + destinationPage.Name + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");                
                 }
+             
             }
+            if (GUIDList.Count > 0)
+                {
+                 UpdateRecordStatus(GUIDList);
+                }
         }
+
+        private void UpdateRecordStatus(List<string> GUIDList)
+            {
+            Epi.SurveyManagerService.SurveyAnswerRequest Request = new Epi.SurveyManagerService.SurveyAnswerRequest();
+            List<Epi.SurveyManagerService.SurveyAnswerDTO> DTOList = new List<Epi.SurveyManagerService.SurveyAnswerDTO>();
+            foreach (var Id in GUIDList)
+                {
+
+                Epi.SurveyManagerService.SurveyAnswerDTO DTO = new SurveyManagerService.SurveyAnswerDTO();
+
+                DTO.ResponseId = Id;
+                DTO.Status = 4;
+                DTOList.Add(DTO);
+                }
+            Request.SurveyAnswerList = DTOList.ToArray();
+
+            client.UpdateRecordStatus(Request);
+            }
 
         /// <summary>
         /// Adds a status message to the status list box
@@ -1107,7 +1145,8 @@ namespace Epi.Enter.Forms
                 }
 
                 this.Cursor = Cursors.WaitCursor;
-
+                DownLoadType = cmbImportType.SelectedIndex;
+                SetFilterProperties(DownLoadType);
                 requestWorker = new BackgroundWorker();
                 requestWorker.WorkerSupportsCancellation = true;
                 requestWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(requestWorker_DoWork);
@@ -1124,9 +1163,9 @@ namespace Epi.Enter.Forms
         /// <param name="e">.NET supplied event parameters</param>
         private void requestWorker_WorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            if (e.Result != null && e.Result is SurveyAnswerRequest)
+        if (e.Result != null && e.Result is SurveyManagerService.SurveyAnswerRequest)
             {
-                SurveyAnswerRequest Request = (SurveyAnswerRequest)e.Result;
+            SurveyManagerService.SurveyAnswerRequest Request = (SurveyManagerService.SurveyAnswerRequest)e.Result;
                 AddStatusMessage("Request for web data completed.");
                 DoImport(Request);
             }
@@ -1148,11 +1187,21 @@ namespace Epi.Enter.Forms
             {
                 try
                 {
-                    SurveyManagerService.SurveyAnswerRequest Request = new SurveyManagerService.SurveyAnswerRequest();
+                //Epi.Web.Common.Message.SurveyAnswerRequest Request = new Epi.Web.Common.Message.SurveyAnswerRequest();
+                SurveyManagerService.SurveyAnswerRequest Request = new SurveyManagerService.SurveyAnswerRequest();
+
+                    Request.Criteria = new SurveyManagerService.SurveyAnswerCriteria();
+                    //Request.Criteria.SurveyAnswerIdList;
                     Request.Criteria.SurveyId = SurveyId;
+                    //Request.Criteria.StatusId = -1;
                     Request.Criteria.UserPublishKey = new Guid(PublishKey);
                     Request.Criteria.OrganizationKey = new Guid(OrganizationKey);
                     Request.Criteria.ReturnSizeInfoOnly = true;
+
+                    Request.Criteria.StatusId = SurveyStatus;
+                    Request.Criteria.IsDraftMode = IsDraftMode;
+
+
                     SurveyManagerService.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
                     Pages = Result.NumberOfPages;
                     PageSize = Result.PageSize;
@@ -1200,9 +1249,10 @@ namespace Epi.Enter.Forms
         /// <param name="e">.NET supplied event parameters</param>
         private void worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+           // SetFilterProperties(DownLoadType);
             lock (syncLock)
             {
-                if (e.Argument is SurveyAnswerRequest)
+            if (e.Argument is SurveyManagerService.SurveyAnswerRequest)
                 {
                     SurveyManagerService.SurveyAnswerRequest Request = e.Argument as SurveyManagerService.SurveyAnswerRequest;
                     Request.Criteria.SurveyId = SurveyId;
@@ -1211,10 +1261,17 @@ namespace Epi.Enter.Forms
                     Request.Criteria.OrganizationKey = new Guid(OrganizationKey);
                     Request.Criteria.ReturnSizeInfoOnly = false;
 
-                    List<SurveyManagerService.SurveyAnswerResponse> Results = new List<SurveyManagerService.SurveyAnswerResponse>();                    
+
+                    Request.Criteria.StatusId = SurveyStatus;
+                    Request.Criteria.IsDraftMode = IsDraftMode;
+
+
+                    //List<SurveyManagerService.SurveyAnswerResponse> Results = new List<SurveyManagerService.SurveyAnswerResponse>();                    
 
                     for (int i = 1; i <= Pages; i++)
                     {
+
+                    List<SurveyManagerService.SurveyAnswerResponse> Results = new List<SurveyManagerService.SurveyAnswerResponse>();    
                         Request.Criteria.PageNumber = i;
                         Request.Criteria.PageSize = PageSize;
                         try
@@ -1228,35 +1285,38 @@ namespace Epi.Enter.Forms
                             e.Result = ex;
                             return;
                         }
-                    }
 
-                    this.BeginInvoke(new SetMaxProgressBarValueDelegate(SetProgressBarMaximum), Results.Count);
+                        this.BeginInvoke(new SetMaxProgressBarValueDelegate(SetProgressBarMaximum), Results.Count);
 
-                    foreach (SurveyManagerService.SurveyAnswerResponse Result in Results)
-                    {
-                        try
-                        {
-                            Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + destinationView.TableName + "]");
-                            IDataReader destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
-                            List<string> destinationGUIDList = new List<string>();
-                            while (destReader.Read())
+                        foreach (SurveyManagerService.SurveyAnswerResponse Result in Results)
                             {
-                                destinationGUIDList.Add(destReader[0].ToString());
-                            }
+                            try
+                                {
+                                Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + destinationView.TableName + "]");
+                                IDataReader destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
+                                List<string> destinationGUIDList = new List<string>();
+                                while (destReader.Read())
+                                    {
+                                    destinationGUIDList.Add(destReader[0].ToString());
+                                    }
 
-                            wfList = ParseXML(Result);
+                                wfList = ParseXML(Result);
 
-                            ProcessBaseTable(wfList, destinationView, destinationGUIDList);
-                            ProcessPages(wfList, destinationView, destinationGUIDList);
-                            //ProcessGridFields(sourceView, destinationView);
-                            //ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
-                        }
-                        catch (Exception ex)
-                        {
-                            this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message);
-                            e.Result = ex;
-                            return;
-                        }
+                                ProcessBaseTable(wfList, destinationView, destinationGUIDList);
+                                ProcessPages(wfList, destinationView, destinationGUIDList);
+                                //ProcessGridFields(sourceView, destinationView);
+                                //ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
+                                }
+                            catch (Exception ex)
+                                {
+                                this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message);
+                                e.Result = ex;
+                                return;
+                                }
+
+                          }
+
+                    
                     }
                 }
             }
