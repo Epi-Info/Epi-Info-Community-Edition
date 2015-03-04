@@ -30,7 +30,7 @@ using System.ServiceModel.Security;
 using System.Threading;
 using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
-
+using Epi.Windows.MakeView.PresentationLogic;
 #endregion Namespaces
 
 namespace Epi.Windows.MakeView.Forms
@@ -76,7 +76,7 @@ namespace Epi.Windows.MakeView.Forms
         SplashScreenForm sf = null;
         private string RepublishOrgKey = null;
         private bool iscancel = false;
-
+        //private GuiMediator mediater = null;
         /// <summary>
         /// PageChanged EventHandler
         /// </summary>
@@ -2862,7 +2862,7 @@ namespace Epi.Windows.MakeView.Forms
                                         if (!string.IsNullOrWhiteSpace(OrganizationKey))
                                         {
                                             SetSurveyInfo();
-                                            dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
+                                            dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
                                             dialog.ShowDialog();
                                         }
                                     }
@@ -2882,7 +2882,7 @@ namespace Epi.Windows.MakeView.Forms
                                             if (!string.IsNullOrWhiteSpace(OrganizationKey))
                                             {
                                                 SetSurveyInfo();
-                                                dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
+                                                dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
                                                 dialog.ShowDialog();
                                             }
                                         }
@@ -2902,7 +2902,7 @@ namespace Epi.Windows.MakeView.Forms
                                             if (!string.IsNullOrWhiteSpace(OrganizationKey))
                                             {
                                                 SetSurveyInfo();
-                                                dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
+                                                dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
                                                 dialog.ShowDialog();
                                             }
                                         }
@@ -2911,7 +2911,7 @@ namespace Epi.Windows.MakeView.Forms
 
                                 case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.Yes:
                                     SetSurveyInfo();
-                                    dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
+                                    dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
                                     dialog.ShowDialog();
                                     break;
                             }
@@ -2920,7 +2920,7 @@ namespace Epi.Windows.MakeView.Forms
                         {
                             if (!string.IsNullOrEmpty(this.OrganizationKey))
                             {
-                                WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
+                            WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
                                 dialog.ShowDialog();
                             }
                             else
@@ -2933,7 +2933,7 @@ namespace Epi.Windows.MakeView.Forms
                                     Request.Organization = orgDTO;
                                     var TestService = client.GetOrganization(Request);
 
-                                    WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
+                                    WebPublishDialog dialog = new WebPublishDialog(null, this.mediator, view, template.CreateWebSurveyTemplate());
                                     DialogResult result = dialog.ShowDialog();
                                     
                                     if (result == System.Windows.Forms.DialogResult.Cancel)
@@ -2947,7 +2947,7 @@ namespace Epi.Windows.MakeView.Forms
                                     DialogResult result3 = dialog2.ShowDialog();
                                     if (result3 == System.Windows.Forms.DialogResult.OK)
                                     {
-                                        WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
+                                    WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
                                         DialogResult result = dialog.ShowDialog();
                                         if (result == System.Windows.Forms.DialogResult.Cancel)
                                         {
@@ -2968,7 +2968,7 @@ namespace Epi.Windows.MakeView.Forms
                             Request.Organization = orgDTO;
                             var TestService = client.GetOrganization(Request);
 
-                            WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
+                            WebPublishDialog dialog = new WebPublishDialog(null, this.mediator, view, template.CreateWebSurveyTemplate());
                             DialogResult result = dialog.ShowDialog();
                             if (result == System.Windows.Forms.DialogResult.Cancel)
                             {
@@ -2984,7 +2984,7 @@ namespace Epi.Windows.MakeView.Forms
                                 DialogResult result3 = dialog2.ShowDialog();
                                 if (result3 == System.Windows.Forms.DialogResult.OK)
                                 {
-                                    WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, view, template.CreateWebSurveyTemplate());
+                                WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
                                     DialogResult result = dialog.ShowDialog();
                                     if (result == System.Windows.Forms.DialogResult.Cancel)
                                     {
@@ -2994,7 +2994,7 @@ namespace Epi.Windows.MakeView.Forms
                             }
                             else
                             {
-                                WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
+                            WebPublishDialog dialog = new WebPublishDialog(null, this.mediator, view, template.CreateWebSurveyTemplate());
                                 dialog.ShowDialog();
                             }
                         }
@@ -3002,7 +3002,7 @@ namespace Epi.Windows.MakeView.Forms
                 }
                 catch
                 {
-                    WebPublishDialog dialog = new WebPublishDialog(null, view, template.CreateWebSurveyTemplate());
+                WebPublishDialog dialog = new WebPublishDialog(null, this.mediator, view, template.CreateWebSurveyTemplate());
                     dialog.ShowDialog();
                 }
             }
@@ -3029,7 +3029,7 @@ namespace Epi.Windows.MakeView.Forms
             }
             else
             {
-                WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.projectExplorer.CurrentView, template.CreateWebSurveyTemplate(), true);
+            WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, this.projectExplorer.CurrentView, template.CreateWebSurveyTemplate(), true);
                 dialog.ShowDialog();
             }
 
