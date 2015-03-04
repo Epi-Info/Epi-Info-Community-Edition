@@ -1450,6 +1450,12 @@ namespace Epi.Windows.MakeView.Forms
             set { tabIndexIndicators = value; }
         }
 
+        public List<Control> TabIndexFieldIndicators
+        {
+            get ;
+            set;
+        }
+
         #endregion  //Public Properties
 
         #region Private Methods
@@ -1465,6 +1471,21 @@ namespace Epi.Windows.MakeView.Forms
                         PagePanel.Controls.Remove(tabBox);
                     }
                     this.TabIndexIndicators.Clear();
+                }
+            }
+        }
+
+        public void RemoveTabIndexFieldIndicators()
+        {
+            if (this.TabIndexFieldIndicators != null)
+            {
+                if (this.TabIndexFieldIndicators.Count > 0)
+                {
+                    foreach (Control tabBox in this.TabIndexFieldIndicators)
+                    {
+                        PagePanel.Controls.Remove(tabBox);
+                    }
+                    this.TabIndexFieldIndicators.Clear();
                 }
             }
         }

@@ -1936,7 +1936,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
         public void OnShowTabOrder()
         {
-            canvas.RemoveTabIndexIndicators();
+            canvas.RemoveTabIndexFieldIndicators();
             canvas.TabIndexIndicators = new List<Control>();
             awaitingFirstTabClick = true;
 
@@ -1984,7 +1984,8 @@ namespace Epi.Windows.MakeView.PresentationLogic
         public void OnViewFieldTabsChanged()
         {
             canvas.RemoveTabIndexIndicators();
-            canvas.TabIndexIndicators = new List<Control>();
+            canvas.RemoveTabIndexFieldIndicators();
+            canvas.TabIndexFieldIndicators = new List<Control>();
             awaitingFirstTabClick = true;
 
             foreach (Control control in canvas.PagePanel.Controls)
@@ -2014,7 +2015,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                        // tabSquare.Size = TextRenderer.MeasureText("000", tabSquare.Font);
                         tabSquare.Size = TextRenderer.MeasureText(tabSquare.Text, tabSquare.Font);
                         tabSquare.Size = new Size(tabSquare.Size.Width + tabSquare.Padding.Size.Width, tabSquare.Size.Height + tabSquare.Padding.Size.Height);
-                        tabSquare.MouseClick += new MouseEventHandler(TabSquare_MouseClick);
+                      //  tabSquare.MouseClick += new MouseEventHandler(TabSquare_MouseClick);
                         ToolTip toolTip = new ToolTip();
                         toolTip.InitialDelay = 1;
                         toolTip.ReshowDelay = 1;
@@ -2024,13 +2025,13 @@ namespace Epi.Windows.MakeView.PresentationLogic
                         String tip = "Left click to set the index and then click the next tab.\r\nRight click to for more options.";
                         toolTip.SetToolTip(tabSquare, tip);
                         tabSquare.Tag = control;
-                        canvas.TabIndexIndicators.Add(tabSquare as Control);
+                        canvas.TabIndexFieldIndicators.Add(tabSquare as Control);
                         tabSquare.BringToFront();
                     }
                 }
             }
-            canvas.PagePanel.Controls.AddRange(canvas.TabIndexIndicators.ToArray());
-            foreach (Control ind in canvas.TabIndexIndicators)
+            canvas.PagePanel.Controls.AddRange(canvas.TabIndexFieldIndicators.ToArray());
+            foreach (Control ind in canvas.TabIndexFieldIndicators)
             {
                 ind.BringToFront();
             }
