@@ -1936,6 +1936,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
         public void OnShowTabOrder()
         {
+            canvas.RemoveTabIndexIndicators();
             canvas.TabIndexIndicators = new List<Control>();
             awaitingFirstTabClick = true;
 
@@ -1980,6 +1981,60 @@ namespace Epi.Windows.MakeView.PresentationLogic
             }
         }
 
+        public void OnViewFieldTabsChanged()
+        {
+            canvas.RemoveTabIndexIndicators();
+            canvas.TabIndexIndicators = new List<Control>();
+            awaitingFirstTabClick = true;
+
+            foreach (Control control in canvas.PagePanel.Controls)
+            {
+                if (control is IFieldControl)
+                {
+                    bool isInputField = control is PairedLabel == false && ((IFieldControl)control).Field.FieldType != MetaFieldType.Group;
+                    bool isLabelField = ((IFieldControl)control).Field.FieldType == MetaFieldType.LabelTitle;
+
+                    if (isInputField || isLabelField)
+                    {
+                        Label tabSquare = new Label();
+                        tabSquare.BackColor = control.TabStop ? Color.Black : Color.Firebrick;
+                        tabSquare.Padding = new Padding(2);
+                        tabSquare.ForeColor = Color.White;
+                        tabSquare.BorderStyle = BorderStyle.None;
+                        tabSquare.Font = new Font(FontFamily.GenericSansSerif, 7, FontStyle.Bold);
+                      //  tabSquare.Text = control.TabIndex.ToString();
+                        if (isShowFieldName && isShowTabOrder)
+                            tabSquare.Text = control.TabIndex.ToString() + "  " + ((IFieldControl)control).Field.Name;
+                        else if (isShowFieldName && !isShowTabOrder)
+                            tabSquare.Text = ((IFieldControl)control).Field.Name;
+                        else if (!isShowFieldName && isShowTabOrder)
+                            tabSquare.Text = control.TabIndex.ToString();
+                        else return;
+                        tabSquare.Location = new Point(control.Location.X - 4, control.Location.Y - 4);
+                       // tabSquare.Size = TextRenderer.MeasureText("000", tabSquare.Font);
+                        tabSquare.Size = TextRenderer.MeasureText(tabSquare.Text, tabSquare.Font);
+                        tabSquare.Size = new Size(tabSquare.Size.Width + tabSquare.Padding.Size.Width, tabSquare.Size.Height + tabSquare.Padding.Size.Height);
+                        tabSquare.MouseClick += new MouseEventHandler(TabSquare_MouseClick);
+                        ToolTip toolTip = new ToolTip();
+                        toolTip.InitialDelay = 1;
+                        toolTip.ReshowDelay = 1;
+                        toolTip.AutoPopDelay = 30000;
+                        toolTip.ShowAlways = true;
+                        toolTip.UseFading = false;
+                        String tip = "Left click to set the index and then click the next tab.\r\nRight click to for more options.";
+                        toolTip.SetToolTip(tabSquare, tip);
+                        tabSquare.Tag = control;
+                        canvas.TabIndexIndicators.Add(tabSquare as Control);
+                        tabSquare.BringToFront();
+                    }
+                }
+            }
+            canvas.PagePanel.Controls.AddRange(canvas.TabIndexIndicators.ToArray());
+            foreach (Control ind in canvas.TabIndexIndicators)
+            {
+                ind.BringToFront();
+            }
+        }
         void TabSquare_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
