@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using System.ServiceModel;
 using System.ServiceModel.Security;
 using Epi.Web.Common.Exception;
-
+using Epi.Windows.MakeView.PresentationLogic;
 namespace Epi.Windows.MakeView.Dialogs
 {
     public partial class WebPublishDialog : Form
@@ -28,8 +28,8 @@ namespace Epi.Windows.MakeView.Dialogs
         private string OrganizationKey = null;
         private bool IsMetaDataOnly = false;
         private bool isRepublishableConfig = false;
-
-        private SurveyManagerService.SurveyInfoDTO currentSurveyInfoDTO;
+        private GuiMediator mediater;
+        private SurveyManagerService.SurveyInfoDTO currentSurveyInfoDTO ;
 
         //=======
         //private Epi.Web.Common.Message.PublishResponse Result;
@@ -59,9 +59,10 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             get { return this.OrganizationKey; }
         }
-        public WebPublishDialog(string pOrganizationKey, Epi.View pView, string pTemplate, bool pIsMetaDataOnly = false)
+        public WebPublishDialog(string pOrganizationKey,GuiMediator pMediator, Epi.View pView, string pTemplate, bool pIsMetaDataOnly = false)
         {
             InitializeComponent();
+            this.mediater = pMediator;
             this.view = pView;
             this.template = pTemplate;
             this.OrganizationKey = pOrganizationKey;
@@ -166,6 +167,12 @@ namespace Epi.Windows.MakeView.Dialogs
                 Request.SurveyInfo.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date, StartTimecomboBox.Text);
             }
 
+            Request.SurveyInfo.DBConnectionString = RemoveUserName(this.mediater.Project.CollectedDataConnectionString);
+
+            if (this.mediater.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+                {
+                Request.SurveyInfo.IsSqlProject = true;
+                }
             Request.SurveyInfo.DepartmentName = txtDepartment.Text;
             Request.SurveyInfo.IntroductionText = txtIntroductionText.Text;
             Request.SurveyInfo.ExitText = txtExitText.Text;
@@ -246,7 +253,17 @@ namespace Epi.Windows.MakeView.Dialogs
             }
         }
 
+        private string RemoveUserName(string ConnectionString)
+            {
+            int indexOfUserId = ConnectionString.IndexOf("User ID");
 
+            if (indexOfUserId > 0)
+                {
+                ConnectionString = ConnectionString.Remove(indexOfUserId - 1);
+                }
+
+            return ConnectionString;
+            }
         /// <summary>
         /// Initiates a single form publishing process
         /// </summary>
@@ -270,6 +287,8 @@ namespace Epi.Windows.MakeView.Dialogs
 
             SurveyManagerService.PublishRequest Request = new SurveyManagerService.PublishRequest();
             Request.Action = "Update";
+
+           
 
             this.currentSurveyInfoDTO.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text);
             this.currentSurveyInfoDTO.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date, StartTimecomboBox.Text);
@@ -308,6 +327,12 @@ namespace Epi.Windows.MakeView.Dialogs
 
             Request.SurveyInfo = this.currentSurveyInfoDTO;
 
+            Request.SurveyInfo.DBConnectionString = RemoveUserName(this.mediater.Project.CollectedDataConnectionString);
+
+            if (this.mediater.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+                {
+                Request.SurveyInfo.IsSqlProject = true;
+                }
             try
             {
             SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
@@ -858,6 +883,8 @@ namespace Epi.Windows.MakeView.Dialogs
                 this.txtOrganizationKey.Text = this.OrganizationKey;
 
                 SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();
+                Request.Criteria = new SurveyManagerService.SurveyInfoCriteria();
+                Request.Criteria.SurveyType = -1;
                 Request.Criteria.SurveyIdList = new string[]{this.view.WebSurveyId};
                 Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
                 SurveyManagerService.SurveyInfoResponse response = client.GetSurveyInfo(Request);
