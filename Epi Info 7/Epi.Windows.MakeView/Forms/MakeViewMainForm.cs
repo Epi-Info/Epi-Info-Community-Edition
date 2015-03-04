@@ -4586,18 +4586,30 @@ namespace Epi.Windows.MakeView.Forms
 
         private void fieldNamesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(fieldNamesToolStripMenuItem.Checked)
+            if (fieldNamesToolStripMenuItem.Checked)
+            {
                 this.mediator.isShowFieldName = true;
+                this.mediator.OnViewFieldTabsChanged();
+            }
             else
+            {
                 this.mediator.isShowFieldName = false;
+                this.mediator.OnViewFieldTabsChanged();
+            }
         }
 
         private void tabOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (tabOrderToolStripMenuItem.Checked)
-            this.mediator.isShowTabOrder = true;
+            {
+                this.mediator.isShowTabOrder = true;
+                this.mediator.OnViewFieldTabsChanged();
+            }
             else
+            {
                 this.mediator.isShowTabOrder = false;
+                this.mediator.OnViewFieldTabsChanged();
+            }
         }
         
        
