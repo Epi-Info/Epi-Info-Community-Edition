@@ -1937,6 +1937,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
         public void OnShowTabOrder()
         {
             canvas.RemoveTabIndexFieldIndicators();
+            canvas.RemoveTabIndexIndicators();
             canvas.TabIndexIndicators = new List<Control>();
             awaitingFirstTabClick = true;
 
@@ -1985,7 +1986,10 @@ namespace Epi.Windows.MakeView.PresentationLogic
         {
             canvas.RemoveTabIndexIndicators();
             canvas.RemoveTabIndexFieldIndicators();
-            canvas.TabIndexFieldIndicators = new List<Control>();
+             if (isShowFieldName)
+                canvas.TabIndexFieldIndicators = new List<Control>();
+             else
+                canvas.TabIndexIndicators = new List<Control>();
             awaitingFirstTabClick = true;
 
             foreach (Control control in canvas.PagePanel.Controls)
@@ -2025,15 +2029,29 @@ namespace Epi.Windows.MakeView.PresentationLogic
                         String tip = "Left click to set the index and then click the next tab.\r\nRight click to for more options.";
                         toolTip.SetToolTip(tabSquare, tip);
                         tabSquare.Tag = control;
+                        if (isShowFieldName)
                         canvas.TabIndexFieldIndicators.Add(tabSquare as Control);
+                        else
+                            canvas.TabIndexIndicators.Add(tabSquare as Control);
                         tabSquare.BringToFront();
                     }
                 }
             }
-            canvas.PagePanel.Controls.AddRange(canvas.TabIndexFieldIndicators.ToArray());
-            foreach (Control ind in canvas.TabIndexFieldIndicators)
+            if (isShowFieldName)
             {
-                ind.BringToFront();
+                canvas.PagePanel.Controls.AddRange(canvas.TabIndexFieldIndicators.ToArray());
+                foreach (Control ind in canvas.TabIndexFieldIndicators)
+                {
+                    ind.BringToFront();
+                }
+            }
+            else
+            {
+                canvas.PagePanel.Controls.AddRange(canvas.TabIndexIndicators.ToArray());
+                foreach (Control ind in canvas.TabIndexIndicators)
+                {
+                    ind.BringToFront();
+                }
             }
         }
         void TabSquare_MouseClick(object sender, MouseEventArgs e)
