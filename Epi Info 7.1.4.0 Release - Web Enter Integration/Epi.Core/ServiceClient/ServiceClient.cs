@@ -197,7 +197,7 @@ namespace Epi.Core.ServiceClient
                 Configuration config = Configuration.GetNewInstance();
 
                 SurveyManagerService.SurveyInfoRequest request = new SurveyManagerService.SurveyInfoRequest();
-                
+                request.Criteria = new SurveyManagerService.SurveyInfoCriteria();
                 //tbOrgKey
                 if (!string.IsNullOrEmpty(pOrganizationKey))
                 {
