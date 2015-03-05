@@ -3566,7 +3566,7 @@ namespace Epi.Windows.MakeView.Forms
 
                 SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
                 SurveyManagerService.SurveyInfoResponse Result = new SurveyManagerService.SurveyInfoResponse();//(Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
-
+                Request.Criteria = new SurveyManagerService.SurveyInfoCriteria();
                 Request.Criteria.ClosingDate = this.CloseDate;
                 Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
                 Request.Criteria.UserPublishKey = new Guid(this.UserPublishKey);
@@ -3730,9 +3730,12 @@ namespace Epi.Windows.MakeView.Forms
 
                 if (!string.IsNullOrWhiteSpace(this.CurrentView.WebSurveyId))
                 {
+                    Request.Criteria = new SurveyManagerService.SurveyInfoCriteria();
                     Request.Criteria.OrganizationKey =  new Guid(this.OrganizationKey); //new Guid(this.OrganizationKey);
                     Request.Criteria.ReturnSizeInfoOnly = false;
                     Request.Criteria.SurveyIdList = new string[]{this.CurrentView.WebSurveyId};
+                    Request.Criteria.SurveyType = -1;
+                  
                     Result = client.GetSurveyInfo(Request);
                     
                 }
@@ -3944,7 +3947,8 @@ namespace Epi.Windows.MakeView.Forms
 
                 SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
                 SurveyManagerService.SurveyInfoResponse Result = new SurveyManagerService.SurveyInfoResponse();//(Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
-
+               
+                Request.Criteria = new SurveyManagerService.SurveyInfoCriteria();
                 Request.Criteria.ClosingDate = this.CloseDate;
                 Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
                 Request.Criteria.UserPublishKey = new Guid(this.UserPublishKey);
@@ -3966,6 +3970,10 @@ namespace Epi.Windows.MakeView.Forms
                 SurveyInfoDTO.ExitText = this.ExitText;
                 SurveyInfoDTO.IntroductionText = this.IntroductionText;
                 SurveyInfoDTO.DepartmentName = this.DepartmentName;
+                  if (this.mediator.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+                        {
+                        SurveyInfoDTO.IsSqlProject  = true;
+                        } 
 
                 Request.Criteria.SurveyType = this.SurveyType;
                 Request.Criteria.IsDraftMode = true;
