@@ -97,7 +97,39 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 }
             }
         }
+        //-- EI 76
+        private void SetandDisplayNewRecordCount()
+        {
+            //Displays the new record count when set process options change
+            string strRecordProcessOption = string.Empty ;
 
+            if (_setOptions.ContainsKey(CommandNames.PROCESS))
+            {
+                strRecordProcessOption = _setOptions[CommandNames.PROCESS];
+            }
+            if (this.Context.CurrentRead != null &&  strRecordProcessOption != string.Empty  &&  this.Context.CurrentRead.IsEpi7ProjectRead)
+             {
+               Configuration config = Configuration.GetNewInstance();
+               switch (strRecordProcessOption)
+                {
+                    case "UNDELETED":
+                        config.Settings.RecordProcessingScope = 1;
+                        break;
+                    case "DELETED":
+                        config.Settings.RecordProcessingScope = 2;
+                        break;
+                    case "BOTH":
+                    default:
+                        config.Settings.RecordProcessingScope = 3;
+                        break;
+                }
+                
+                this.Context.ApplyOverridenConfigSettings(config);
+                this.Context.CurrentRead.Execute();
+            }
+
+        }
+        //--
         private void SetSetClause(NonterminalToken nonTermToken)
         {
             ////    <SetClause> ::=  STATISTICS '=' <StatisticsOption>	!These options could be set in FREQ,MATCH, and MEANS commands also
@@ -137,6 +169,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 _setOptions.Add(Key, Value.Trim('"'));
             }
+                      
         }
 
         /// <summary>
@@ -146,6 +179,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         public override object Execute()
         {
             this.Context.AddConfigSettings(_setOptions);
+            //--EI-76
+            SetandDisplayNewRecordCount();
+            //--
             return null;
         }
     }
