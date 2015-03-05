@@ -2832,6 +2832,11 @@ namespace Epi.Windows.MakeView.Forms
                     
                 try
                 {
+                if (view.Project.CollectedData.TableExists(view.TableName) == false)//checking if no table is created in Epi7
+                    {
+                    CreateViewDataTable(view);
+                    }
+
                     if (config.Settings.Republish_IsRepbulishable == true)
                     {
                         if (string.IsNullOrWhiteSpace(this.OrganizationKey) && !string.IsNullOrWhiteSpace(view.WebSurveyId))
