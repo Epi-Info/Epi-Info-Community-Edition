@@ -275,6 +275,8 @@ namespace Epi.Enter.Forms
                 ))
             {
                 String fieldName = ((Epi.INamedObject)dataField).Name;
+                  try
+                    {
                 switch (dataField.FieldType)
                 {
                     case MetaFieldType.Date:
@@ -312,6 +314,14 @@ namespace Epi.Enter.Forms
                     default:
                         throw new ApplicationException("Not a supported field type");
                 }
+                    }
+                  catch (Exception ex)
+                      {
+
+                      this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), "Record GUID:" + fieldData.RecordGUID + "  Field Name:" + fieldName + "  Field Type:" + dataField.FieldType + "  Field Value:" + fieldData.FieldValue + "  Error Message :" + ex.Message);
+                      // Logger.Log("Record GUID:" + fieldData.RecordGUID + "  Field Name:" + fieldName + "  Field Type:" + dataField.FieldType + "  Field Value:" + fieldData.FieldValue + "  Error Message :" + ex.Message);
+                      return null;
+                      }
             }
 
             return null;
