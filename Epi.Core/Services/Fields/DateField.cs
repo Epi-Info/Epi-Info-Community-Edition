@@ -94,12 +94,7 @@ namespace Epi.Fields
             //---EI-111
             if (_upper == CommandNames.SYSTEMDATE)
             {
-                string curyear = DateTime.Today.Year.ToString();
-                string curmonth = DateTime.Today.Month.ToString();
-                if (curmonth.Length == 1) { curmonth = conzero + curmonth; }
-                string curday = DateTime.Today.Day.ToString();
-                string cursystemdate = curyear + CharLiterals.HYPHEN + curmonth + CharLiterals.HYPHEN + curday;
-                _upper = curyear + CharLiterals.HYPHEN + curmonth + CharLiterals.HYPHEN + curday;
+                _upper = GetRange(DateTime.Today);
                 _notfuturedate = true;
              }
             //--
