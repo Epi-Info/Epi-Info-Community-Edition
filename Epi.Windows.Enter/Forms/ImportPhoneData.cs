@@ -993,6 +993,7 @@ namespace Epi.Enter.Forms
                         case MetaFieldType.Checkbox:
                             return new QueryParameter("@" + fieldName, DbType.Boolean, Convert.ToBoolean(fieldData.FieldValue));
                         case MetaFieldType.CommentLegal:
+                            return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue.ToString().Split('-')[0]);
                         case MetaFieldType.LegalValues:
                         case MetaFieldType.Codes:
                         case MetaFieldType.Text:
