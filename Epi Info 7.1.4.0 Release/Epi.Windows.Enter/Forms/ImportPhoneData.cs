@@ -787,6 +787,8 @@ namespace Epi.Enter.Forms
                                             fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.Boolean, Convert.ToBoolean(fieldData.FieldValue)));
                                             break;
                                         case MetaFieldType.CommentLegal:
+                                            fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue.ToString().Split('-')[0]));
+                                            break;
                                         case MetaFieldType.LegalValues:
                                         case MetaFieldType.Codes:
                                         case MetaFieldType.Text:
