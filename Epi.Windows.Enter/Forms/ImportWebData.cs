@@ -534,72 +534,83 @@ namespace Epi.Enter.Forms
 
                     if (destinationGUIDList.Contains(GUID))
                     {
-                        if (update)
-                        {
-                            // UPDATE matching records
-                        //    string updateHeader = string.Empty;
-                        //    string whereClause = string.Empty;
-                        //    fieldValueParams = new List<QueryParameter>();
-                        //    StringBuilder sb = new StringBuilder();
-
-                        //    // Build the Update statement which will be reused
-                        //    sb.Append(SqlKeyWords.UPDATE);
-                        //    sb.Append(StringLiterals.SPACE);
-                        //    sb.Append(destinationProjectDataDriver.InsertInEscape(destinationTable));
-                        //    sb.Append(StringLiterals.SPACE);
-                        //    sb.Append(SqlKeyWords.SET);
-                        //    sb.Append(StringLiterals.SPACE);
-
-                        //    updateHeader = sb.ToString();
-
-                        //    sb.Remove(0, sb.ToString().Length);
-
-                        //    // Build the WHERE caluse which will be reused
-                        //    sb.Append(SqlKeyWords.WHERE);
-                        //    sb.Append(StringLiterals.SPACE);
-                        //    sb.Append(destinationProjectDataDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID));
-                        //    sb.Append(StringLiterals.EQUAL);
-                        //    sb.Append("'");
-                        //    sb.Append(GUID);
-                        //    sb.Append("'");
-                        //    whereClause = sb.ToString();
-
-                        //    sb.Remove(0, sb.ToString().Length);
-
-                        //    //if (sourceView.ForeignKeyFieldExists)
-                        //    if (!string.IsNullOrEmpty(FKEY))
-                        //    {
-                        //        sb.Append(StringLiterals.LEFT_SQUARE_BRACKET);
-                        //        sb.Append("FKEY");
-                        //        sb.Append(StringLiterals.RIGHT_SQUARE_BRACKET);
-                        //        sb.Append(StringLiterals.EQUAL);
-
-                        //        sb.Append(StringLiterals.COMMERCIAL_AT);
-                        //        sb.Append("FKEY");                               
-                        //        fieldValueParams.Add(paramFkey);
-
-                        //        Query updateQuery = destinationProjectDataDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
-                        //        updateQuery.Parameters = fieldValueParams;
-
-                        //        //destinationProjectDataDriver.ExecuteNonQuery(updateQuery);
-
-                        //        sb.Remove(0, sb.ToString().Length);
-                        //        fieldValueParams.Clear();
-
-                        //        recordsUpdated++;
-                        //    }
-                        }
+                    update = true;
+                    append = false;
                     }
                     else
                     {
-                        if (append)
+                        append = true;
+                        update = false;
+                        
+                     }
+                        if (update)
                         {
+                            // UPDATE matching records
+                            string updateHeader = string.Empty;
+                            string whereClause = string.Empty;
+                            fieldValueParams = new List<QueryParameter>();
+                            StringBuilder sb = new StringBuilder();
+
+                            // Build the Update statement which will be reused
+                            sb.Append(SqlKeyWords.UPDATE);
+                            sb.Append(StringLiterals.SPACE);
+                            sb.Append(destinationProjectDataDriver.InsertInEscape(destinationTable));
+                            sb.Append(StringLiterals.SPACE);
+                            sb.Append(SqlKeyWords.SET);
+                            sb.Append(StringLiterals.SPACE);
+
+                            updateHeader = sb.ToString();
+
+                            sb.Remove(0, sb.ToString().Length);
+
+                            // Build the WHERE caluse which will be reused
+                            sb.Append(SqlKeyWords.WHERE);
+                            sb.Append(StringLiterals.SPACE);
+                            sb.Append(destinationProjectDataDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID));
+                            sb.Append(StringLiterals.EQUAL);
+                            sb.Append("'");
+                            sb.Append(GUID);
+                            sb.Append("'");
+                            whereClause = sb.ToString();
+
+                            sb.Remove(0, sb.ToString().Length);
+
+                            //if (sourceView.ForeignKeyFieldExists)
                             if (!string.IsNullOrEmpty(FKEY))
                             {
+                                sb.Append(StringLiterals.LEFT_SQUARE_BRACKET);
+                                sb.Append("FKEY");
+                                sb.Append(StringLiterals.RIGHT_SQUARE_BRACKET);
+                                sb.Append(StringLiterals.EQUAL);
+
+                                sb.Append(StringLiterals.COMMERCIAL_AT);
+                                sb.Append("FKEY");                               
+                                fieldValueParams.Add(paramFkey);
+
+                                Query updateQuery = destinationProjectDataDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
+                                updateQuery.Parameters = fieldValueParams;
+
+                                destinationProjectDataDriver.ExecuteNonQuery(updateQuery);
+
+                                sb.Remove(0, sb.ToString().Length);
+                                fieldValueParams.Clear();
+
+                                recordsUpdated++;
+                            }
+                        }
+                    //}
+                    //else
+                    //{
+                        if (append)
+                        {
+                        try
+                            {
+                            if (!string.IsNullOrEmpty(FKEY))
+                                {
                                 fieldNames.Append("FKEY");
                                 fieldValues.Append("@FKEY");
                                 fieldValueParams.Add(paramFkey);
-                            }
+                                }
                             fieldNames.Append("RECSTATUS");
                             fieldValues.Append("@RECSTATUS");
                             fieldValueParams.Add(paramRecordStatus);
@@ -620,7 +631,7 @@ namespace Epi.Enter.Forms
                             destinationProjectDataDriver.ExecuteNonQuery(insertQuery);
 
                             foreach (Page page in destinationView.Pages)
-                            {
+                                {
                                 sb = new StringBuilder();
                                 sb.Append(" insert into ");
                                 sb.Append(destinationProjectDataDriver.InsertInEscape(page.TableName));
@@ -631,10 +642,16 @@ namespace Epi.Enter.Forms
                                 sb.Append(") ");
                                 insertQuery = destinationProjectDataDriver.CreateQuery(sb.ToString());
                                 destinationProjectDataDriver.ExecuteNonQuery(insertQuery);
-                            }
-                            
+                                }
+
                             recordsInserted++;
-                        }
+                            }
+                            catch(Exception ex)
+                            {
+                             throw ex;
+                                
+                            }
+                       // }
                     }
                     this.BeginInvoke(new SetProgressBarDelegate(IncrementProgressBarValue), 1);
                 }
