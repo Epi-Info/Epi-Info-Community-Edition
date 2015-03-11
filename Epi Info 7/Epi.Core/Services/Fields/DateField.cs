@@ -24,8 +24,7 @@ namespace Epi.Fields
         private const string ISO8601 = "YYYY-MM-DD"; 
         //-EI-111
         private bool _notfuturedate;
-        private const int conzero = 0;
-        //
+       //
 		#endregion Fields
 		
 		#region Constructors
