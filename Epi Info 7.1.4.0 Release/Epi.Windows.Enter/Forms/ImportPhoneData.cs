@@ -42,7 +42,7 @@ namespace Epi.Enter.Forms
         private bool append = true;
         private bool importFinished = false;
         private Dictionary<string, List<PhoneFieldData>> _surveyResponses;
-        private List<string> surveyGUIDs;
+        private Dictionary<string, string> surveyGUIDs;
         #endregion // Private Members
 
         #region Delegates
@@ -306,7 +306,7 @@ namespace Epi.Enter.Forms
             try
             {
                 //IDataReader sourceReader = sourceProjectDataDriver.GetTableDataReader(sourceView.TableName);
-                foreach (string surveyGUID in surveyGUIDs /*Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer in result.SurveyResponseList*/)
+                foreach (string surveyGUID in surveyGUIDs.Keys /*Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer in result.SurveyResponseList*/)
                 {
                     object recordStatus = 1; // no marking for deletion supported at this time.
 
@@ -326,9 +326,9 @@ namespace Epi.Enter.Forms
                     fieldValues.Append("@GlobalRecordId");
 
                     string GUID = surveyGUID; // surveyAnswer.ResponseId; // sourceReader["GlobalRecordId"].ToString();
-                    string FKEY = string.Empty; // sourceReader["FKEY"].ToString(); // FKEY not needed, no related forms to process
+                    string FKEY = surveyGUIDs[surveyGUID]; // sourceReader["FKEY"].ToString(); 
 
-                    QueryParameter paramFkey = new QueryParameter("@FKEY", DbType.String, FKEY); // don't add this yet
+                    QueryParameter paramFkey = new QueryParameter("@FKEY", DbType.String, FKEY);
                     QueryParameter paramGUID = new QueryParameter("@GlobalRecordId", DbType.String, GUID);
                     fieldValueParams.Add(paramGUID);
 
@@ -480,7 +480,7 @@ namespace Epi.Enter.Forms
         private void ParseXML(string filePath)
         {
             _surveyResponses = new Dictionary<string, List<PhoneFieldData>>();
-            surveyGUIDs = new List<string>();
+            surveyGUIDs = new Dictionary<string, string>();
 
             PhoneFieldData wfData = new PhoneFieldData();
             string xmlText;
@@ -509,9 +509,14 @@ namespace Epi.Enter.Forms
                     {
                         string surveyResponseId = docElement.Attributes[0].Value;
 
-                        if (!surveyGUIDs.Contains(surveyResponseId))
+                        if (!surveyGUIDs.ContainsKey(surveyResponseId))
                         {
-                            surveyGUIDs.Add(surveyResponseId);
+                            string fkey = string.Empty;
+                            if (docElement.HasAttribute("fkey"))
+                            {
+                                fkey = docElement.Attributes["fkey"].Value;
+                            }
+                            surveyGUIDs.Add(surveyResponseId, fkey);
                         }
 
                         foreach (XmlElement surveyElement in docElement.ChildNodes)
@@ -948,7 +953,7 @@ namespace Epi.Enter.Forms
                 dataField is RelatedViewField ||
                 dataField is UniqueKeyField ||
                 dataField is RecStatusField ||
-                dataField is GlobalRecordIdField               
+                dataField is GlobalRecordIdField
                 ))
             {
                 String fieldName = ((Epi.INamedObject)dataField).Name;
