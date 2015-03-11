@@ -422,7 +422,7 @@ namespace Epi.Windows.MakeView.Dialogs
             {
                 txtURL.Text = Result.PublishInfo.URL;
                 //txtSurveyKey.Text = txtURL.Text.Substring(txtURL.Text.LastIndexOf('/') + 1);
-                txtSurveyKey.Text = Result.PublishInfo.ViewIdAndFormIdList[1];
+                txtSurveyKey.Text = Result.PublishInfo.ViewIdAndFormIdList.ToList()[0].Value.ToString();//Result.PublishInfo.ViewIdAndFormIdList[1];
                 txtDataKey.Text = UserPublishGuid.ToString();
                 //txtDataKey.Text = txtSurveyKey.Text;
                 txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
