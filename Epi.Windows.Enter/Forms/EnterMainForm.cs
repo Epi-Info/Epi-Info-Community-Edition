@@ -2465,10 +2465,10 @@ namespace Epi.Windows.Enter
         /// <param name="destinationView"></param>
         private void ImportDataFromPhone(View destinationView)
         {
-            if (destinationView.IsRelatedView)
-            {
-                return;
-            }
+            //if (destinationView.IsRelatedView)
+            //{
+            //    return;
+            //}
 
             Epi.Enter.Forms.ImportPhoneDataForm importPhoneDataForm = new Epi.Enter.Forms.ImportPhoneDataForm(destinationView);
             DialogResult result = importPhoneDataForm.ShowDialog();
