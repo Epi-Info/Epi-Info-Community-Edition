@@ -711,7 +711,7 @@ namespace EpiDashboard.Controls
                     cbxValue.Items.Add(config.Settings.RepresentationOfMissing);
                     cbxValue.IsEnabled = true;
                 }
-                else if (field is TextField || field is UpperCaseTextField || field is TableBasedDropDownField || field is PhoneNumberField)
+                else if (field is TextField || field is UpperCaseTextField || field is TableBasedDropDownField || field is PhoneNumberField || field is GlobalRecordIdField)
                 {
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO);
