@@ -532,7 +532,7 @@ namespace Epi.Enter.Forms
                     QueryParameter paramGUID = new QueryParameter("@GlobalRecordId", DbType.String, GUID);
                     fieldValueParams.Add(paramGUID);
 
-                    if (destinationGUIDList.Contains(GUID))
+                    if (destinationGUIDList.Contains(GUID.ToUpper()))
                     {
                     update = true;
                     append = false;
@@ -1314,7 +1314,7 @@ namespace Epi.Enter.Forms
                                 List<string> destinationGUIDList = new List<string>();
                                 while (destReader.Read())
                                     {
-                                    destinationGUIDList.Add(destReader[0].ToString());
+                                    destinationGUIDList.Add(destReader[0].ToString().ToUpper());
                                     }
 
                                 wfList = ParseXML(Result);
