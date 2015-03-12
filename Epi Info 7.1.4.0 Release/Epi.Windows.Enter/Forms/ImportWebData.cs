@@ -1221,10 +1221,12 @@ namespace Epi.Enter.Forms
                     Request.Criteria.OrganizationKey = new Guid(OrganizationKey);
                     Request.Criteria.ReturnSizeInfoOnly = false;
 
-                    List<SurveyAnswerResponse> Results = new List<SurveyAnswerResponse>();                    
+                    //List<SurveyAnswerResponse> Results = new List<SurveyAnswerResponse>();                    
 
                     for (int i = 1; i <= Pages; i++)
                     {
+
+                   List<SurveyAnswerResponse> Results = new List<SurveyAnswerResponse>();  
                         Request.Criteria.PageNumber = i;
                         Request.Criteria.PageSize = PageSize;
                         try
@@ -1238,7 +1240,6 @@ namespace Epi.Enter.Forms
                             e.Result = ex;
                             return;
                         }
-                    }
 
                     this.BeginInvoke(new SetMaxProgressBarValueDelegate(SetProgressBarMaximum), Results.Count);
 
@@ -1256,17 +1257,21 @@ namespace Epi.Enter.Forms
 
                             wfList = ParseXML(Result);
 
-                            ProcessBaseTable(wfList, destinationView, destinationGUIDList);
-                            ProcessPages(wfList, destinationView, destinationGUIDList);
-                            //ProcessGridFields(sourceView, destinationView);
-                            //ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
-                        }
-                        catch (Exception ex)
-                        {
-                            this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message);
-                            e.Result = ex;
-                            return;
-                        }
+                                ProcessBaseTable(wfList, destinationView, destinationGUIDList);
+                                ProcessPages(wfList, destinationView, destinationGUIDList);
+                                //ProcessGridFields(sourceView, destinationView);
+                                //ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
+                                }
+                            catch (Exception ex)
+                                {
+                                this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message);
+                                e.Result = ex;
+                                return;
+                                }
+
+                          }
+
+                    
                     }
                 }
             }
