@@ -318,8 +318,8 @@ namespace Epi.Enter.Forms
                   catch (Exception ex)
                       {
 
-                      this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), "Record GUID:" + fieldData.RecordGUID + "  Field Name:" + fieldName + "  Field Type:" + dataField.FieldType + "  Field Value:" + fieldData.FieldValue + "  Error Message :" + ex.Message);
-                      // Logger.Log("Record GUID:" + fieldData.RecordGUID + "  Field Name:" + fieldName + "  Field Type:" + dataField.FieldType + "  Field Value:" + fieldData.FieldValue + "  Error Message :" + ex.Message);
+                      this.BeginInvoke(new SetStatusDelegate(AddWarningMessage),  "Error Message :" + ex.Message + " Record GUID:" + fieldData.RecordGUID + "  Field Name:" + fieldName + "  Field Type:" + dataField.FieldType + "  Field Value:" + fieldData.FieldValue );
+                     
                       return null;
                       }
             }
@@ -1199,7 +1199,8 @@ namespace Epi.Enter.Forms
                 this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import complete. Time elapsed: " + stopwatch.Elapsed.ToString());
                 this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Import complete. Time elapsed: " + stopwatch.Elapsed.ToString());
             }
-
+            this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "The log file for this transaction can be found at this location : " + Logger.GetLogFilePath());
+            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "The log file for this transaction can be found at this location : " + Logger.GetLogFilePath());
             StopImport();            
         }
 
