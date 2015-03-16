@@ -7944,6 +7944,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Survey Start Date {0} cannot be greater than Closing Date {1}.
+        /// </summary>
+        public static string WEBFORM_STARTDATE {
+            get {
+                return ResourceManager.GetString("WEBFORM_STARTDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your survey published successfully..
         /// </summary>
         public static string WEBFORM_SUCCESS {
