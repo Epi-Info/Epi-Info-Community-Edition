@@ -106,6 +106,11 @@ namespace Epi.Windows.MakeView.Dialogs
 		private object selectedDataSource;
         private System.Collections.Hashtable SourceProjectNames;
         private bool ignoreDataFormatIndexChange = false;
+        //--Ei-148
+        List<string> Sourcedatatables = new List<string>();
+        List<string> SourceNonViewnames = new List<string>();
+        private int count = 1; 
+        //--
         #endregion Private Attributes
 
         #region Constructor
@@ -129,7 +134,7 @@ namespace Epi.Windows.MakeView.Dialogs
 			InitializeComponent();
             Construct();
             SourceProjectNames = new Hashtable();
-
+           
             if (frm.projectExplorer != null)
             {
                 if (frm.projectExplorer.currentPage != null)
@@ -137,13 +142,38 @@ namespace Epi.Windows.MakeView.Dialogs
                     this.sourceProject = frm.projectExplorer.currentPage.view.Project;
                     this.selectedProject = this.sourceProject;
                     this.selectedDataSource = this.selectedProject;
-
+                    //--EI-48
+                    //Adds datatable names to viewlist to enable other tables in project
+                    List<string> SourceViewnames = this.sourceProject.GetViewNames();
+                    SourceNonViewnames = this.sourceProject.GetNonViewTableNames();
+                    foreach(string str in SourceViewnames)
+                    {
+                        View MView = this.sourceProject.GetViewByName(str);
+                        DataTable ViewPages = MView.GetMetadata().GetPagesForView(MView.Id);
+                        foreach(DataRow dt in ViewPages.Rows)
+                        {
+                            string ViewdataTable = MView.TableName + dt[ColumnNames.PAGE_ID];
+                            Sourcedatatables.Add(ViewdataTable);
+                        }
+                        if (SourceNonViewnames.Contains(str)) { SourceNonViewnames.Remove(str); }
+                    }
+                    foreach(string str in Sourcedatatables)
+                    {
+                        SourceViewnames.Add(str);
+                        if (SourceNonViewnames.Contains(str)) { SourceNonViewnames.Remove(str);}
+                    }
+                    
+                   //--                    
+                    
                     foreach (string s in this.sourceProject.GetNonViewTableNames())
                     {
                         string key = s.ToUpper().Trim();
-                        if (!SourceProjectNames.Contains(key))
+                        if (!SourceProjectNames.Contains(key)) 
                         {
-                            SourceProjectNames.Add(key, true);
+                           if (SourceViewnames.Contains(s))
+                             {
+                                SourceProjectNames.Add(key, true);
+                             }
                         }
                     }
                     foreach (string s in this.sourceProject.GetViewNames())
@@ -154,7 +184,7 @@ namespace Epi.Windows.MakeView.Dialogs
                             SourceProjectNames.Add(key, true);
                         }
                     }
-
+                    
                 }
             }
         }
@@ -565,6 +595,9 @@ namespace Epi.Windows.MakeView.Dialogs
             {
                 this.SelectedTable = LV.SelectedItems[0].Text;
                 this.txtViewName.Text = this.SelectedTable.Replace("$", string.Empty);
+                //---Ei-48
+                if (SourceNonViewnames.Contains(txtViewName.Text)) { txtViewName.Text = txtViewName.Text + count.ToString(); } 
+                //
             }
             else
             {
@@ -621,7 +654,15 @@ namespace Epi.Windows.MakeView.Dialogs
                 MsgBox.ShowError(validationMessage);
                 return;
             }
-
+            //---Ei-48
+              //case where tablename exists in current project
+              if (SourceNonViewnames.Contains(txtViewName.Text.Trim()))
+              {
+                  validationMessage = SharedStrings.INVALID_VIEW_NAME_DUPLICATE + " " +  txtViewName.Text ;
+                  MsgBox.ShowError(validationMessage);
+                  return;
+              }
+            //--
             ButtonOkClicked = true;
             this.Close();
         }
