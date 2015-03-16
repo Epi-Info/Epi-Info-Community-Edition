@@ -120,7 +120,4 @@
   <data name="lblDescription.Text" xml:space="preserve">
     <value>The import process will merge records from a web-based version of this form based on each record's GlobalRecordId value. Records in the destination form whose GlobalRecordId value matches a record in the source form will be updated, and unmatched records will be appended. Fields that exist in only the source form or only the destination form will be ignored.</value>
   </data>
-  <data name="lblWarningMessage.Text" xml:space="preserve">
-    <value>Import operations are permanent and cannot be undone. Be sure the form structures are the same before proceeding. If a different field is needed as the match key, please use the Classic Analysis module to conduct the import.</value>
-  </data>
 </root>

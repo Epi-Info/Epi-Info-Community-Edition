@@ -221,11 +221,12 @@
             // 
             // lblWarningMessage
             // 
-            this.lblWarningMessage.Location = new System.Drawing.Point(103, 75);
+            this.lblWarningMessage.Location = new System.Drawing.Point(94, 87);
             this.lblWarningMessage.Name = "lblWarningMessage";
-            this.lblWarningMessage.Size = new System.Drawing.Size(414, 44);
+            this.lblWarningMessage.Size = new System.Drawing.Size(414, 30);
             this.lblWarningMessage.TabIndex = 15;
-            this.lblWarningMessage.Text = resources.GetString("lblWarningMessage.Text");
+            this.lblWarningMessage.Text = "Import operations are permanent and cannot be undone. Be sure the form structures" +
+    " are the same before proceeding.";
             // 
             // ImportWebDataForm
             // 
