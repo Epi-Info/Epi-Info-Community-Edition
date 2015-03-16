@@ -981,7 +981,7 @@ namespace Epi.Windows.MakeView.Dialogs
                 txtOrganization.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             }
         }
-
+        
         private void txtDepartment_Enter(object sender, EventArgs e)
         {
             if (txtDepartment.Text == SharedStrings.WEBFORM_DEPARTMENT)
@@ -999,7 +999,7 @@ namespace Epi.Windows.MakeView.Dialogs
                 txtDepartment.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             }
         }
-
+        
         private void txtIntroductionText_Enter(object sender, EventArgs e)
         {
             if (txtIntroductionText.Text == SharedStrings.WEBFORM_INTRODUCTIONTEXT)
@@ -1067,6 +1067,14 @@ namespace Epi.Windows.MakeView.Dialogs
                 MsgBox.ShowError(SharedStrings.WEBFORM_FUTUREDATE);
                 this.tabPublishWebForm.SelectedTab = this.tabPublishWebForm.TabPages[0];
             }
+            //--Ei-82
+            else if (ValidateStartDate() == false)
+            {
+                MsgBox.ShowError(string.Format(SharedStrings.WEBFORM_STARTDATE, StartDateDatePicker.Value.ToShortDateString().ToString(), dtpSurveyClosingDate.Value.ToShortDateString().ToString()));
+                this.tabPublishWebForm.SelectedTab = this.tabPublishWebForm.TabPages[0];
+                this.StartDateDatePicker.Focus();
+            }
+            //--
             else if (txtSurveyName.Text.Equals(string.Empty) || txtSurveyName.Text.Equals(SharedStrings.WEBFORM_TITLE))
             {
                 MsgBox.ShowError(SharedStrings.WEBFORM_GIVETITLE);
@@ -1322,6 +1330,23 @@ namespace Epi.Windows.MakeView.Dialogs
             string dateTimeString = dateTime.ToShortDateString();
             
             return Convert.ToDateTime(dateTimeString + " " + time);
+        }
+
+        //--EI-82
+        private bool ValidateStartDate()
+        {
+
+           DateTime StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date, StartTimecomboBox.Text);
+           DateTime CloseDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text); 
+           if (StartDate <= CloseDate) 
+           {
+               return true;
+           }
+           else
+           {
+               return false;
+           }
+           
         }
     }
 }
