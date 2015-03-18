@@ -181,6 +181,9 @@ namespace Epi.Windows.Analysis.Dialogs
                 btnOK.Enabled = false;
                 btnSaveOnly.Enabled = false;
             }
+
+            
+
         }
 
         /// <summary>
@@ -313,7 +316,7 @@ namespace Epi.Windows.Analysis.Dialogs
                 VariableType.DataSource | 
                 VariableType.DataSourceRedefined | 
                 VariableType.Standard;
-           
+
             FillVariableCombo(comboBoxMainVariable, scopeWord);
             comboBoxMainVariable.Items.Insert(0, "");
             comboBoxMainVariable.SelectedIndex = 0;
@@ -345,10 +348,6 @@ namespace Epi.Windows.Analysis.Dialogs
         private void comboBoxGraphType_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool enableIntervalFields = false;
-            if ((sender as ComboBox).Text == "Epi Curve")
-            {
-                enableIntervalFields = true;
-            }
 
             if ((sender as ComboBox).Text == "Pie")
             {
@@ -368,14 +367,21 @@ namespace Epi.Windows.Analysis.Dialogs
                 comboBoxMainVariable.Items.Insert(0, "");
                 comboBoxMainVariable.SelectedIndex = 0;
             }
+            else if (((System.Windows.Forms.ComboBox)(sender)).Text.ToLower() == "epi curve")
+            {
+                FillEpiCurveMainVariables(comboBoxMainVariable);
+                comboBoxMainVariable.Items.Insert(0, "");
+                comboBoxMainVariable.SelectedIndex = 0;
+                enableIntervalFields = true;
+            }
             else 
             {
                 VariableType scopeWord =VariableType.DataSource | VariableType.DataSourceRedefined | VariableType.Standard;
                 FillVariableCombo(comboBoxMainVariable, scopeWord);
                 comboBoxMainVariable.Items.Insert(0, "");
                 comboBoxMainVariable.SelectedIndex = 0;
-            
             }
+
             comboBoxIntervalType.Enabled = enableIntervalFields;
             textBoxInterval.Enabled = enableIntervalFields;
             startDateTime.Enabled = enableIntervalFields;
