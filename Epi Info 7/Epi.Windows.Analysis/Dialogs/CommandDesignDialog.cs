@@ -211,6 +211,7 @@ namespace Epi.Windows.Analysis.Dialogs
             cmb.Sorted = true;
             cmb.Refresh();
         }
+        
         protected void FillVariableCombo(ComboBox cmb )
         {
             cmb.Items.Clear();
@@ -225,6 +226,27 @@ namespace Epi.Windows.Analysis.Dialogs
 
             }
  
+            cmb.EndUpdate();
+            cmb.Sorted = true;
+            cmb.Refresh();
+        }
+        
+        protected void FillEpiCurveMainVariables(ComboBox cmb)
+        {
+            cmb.Items.Clear();
+            cmb.BeginUpdate();
+
+            foreach (DataColumn Column in this.mainForm.EpiInterpreter.Context.DataSet.Tables["output"].Columns)
+            {
+                if (Column.DataType.FullName.ToString() == "System.DateTime")
+                {
+                    string columnName = Column.ColumnName.ToString();
+                    if (columnName == "FirstSaveTime") continue;
+                    if (columnName == "LastSaveTime") continue;
+                    cmb.Items.Add(columnName);
+                }
+            }
+
             cmb.EndUpdate();
             cmb.Sorted = true;
             cmb.Refresh();
