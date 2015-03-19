@@ -387,9 +387,12 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // startDateTime
             // 
+            this.startDateTime.Checked = false;
             resources.ApplyResources(this.startDateTime, "startDateTime");
             this.startDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.startDateTime.Name = "startDateTime";
+            this.startDateTime.ShowCheckBox = true;
+            this.startDateTime.ValueChanged += new System.EventHandler(this.startDateTime_ValueChanged);
             // 
             // labelInterval
             // 

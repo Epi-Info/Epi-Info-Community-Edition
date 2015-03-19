@@ -77,7 +77,6 @@ namespace Epi.Windows.Analysis.Dialogs
             comboBoxBarOfEachValueOf.SelectedIndex = 0;
             textBoxInterval.Text = "";
             comboBoxIntervalType.Text = "";
-            startDateTime.Value = DateTime.Now;
 		}
 
         /// <summary>
@@ -303,7 +302,10 @@ namespace Epi.Windows.Analysis.Dialogs
                 command.Append(string.Format("INTERVAL=\"{0} {1}\"", textBoxInterval.Text, comboBoxIntervalType.Text));
             }
 
-            command.Append(string.Format("STARTFROM=\"{0}\"", startDateTime.Value.ToString()));
+            if (startDateTime.Checked)
+            {
+                command.Append(string.Format("STARTFROM=\"{0}\"", startDateTime.Value.ToString()));
+            }
 
 			CommandText = command.ToString();
 		}
@@ -385,6 +387,18 @@ namespace Epi.Windows.Analysis.Dialogs
             comboBoxIntervalType.Enabled = enableIntervalFields;
             textBoxInterval.Enabled = enableIntervalFields;
             startDateTime.Enabled = enableIntervalFields;
+        }
+
+        private void startDateTime_ValueChanged(object sender, EventArgs e)
+        {
+            if (startDateTime.Checked)
+            {
+                startDateTime.Format = DateTimePickerFormat.Long;
+            }
+            else
+            {
+                startDateTime.Format = DateTimePickerFormat.Custom;
+            }
         }
 	}
 }

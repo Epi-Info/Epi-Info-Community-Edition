@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
-        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEEAQEBEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEUAQEBEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wAgAAF1AYQBjwH/
         AWYBgAGPAf8BYAF5AYcB/wFXAW4BewH/AU4BYgFvAf8BRAFWAWEB/wE5AUgBUgH/AS4BOgFDAf8BJQEu
         ATUB/wEbASIBKQH/ARQBGQEeAf8BDgESARYB/wEOARMBGAH/DAABdQGEAY8B/wFsAXoBhQH/AWABbQF3
@@ -1002,6 +1002,54 @@
   <data name="&gt;&gt;labelGraphType.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="&gt;&gt;textBoxXAxisLabel.Name" xml:space="preserve">
+    <value>textBoxXAxisLabel</value>
+  </data>
+  <data name="&gt;&gt;textBoxXAxisLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxXAxisLabel.Parent" xml:space="preserve">
+    <value>groupBoxXAxis</value>
+  </data>
+  <data name="&gt;&gt;textBoxXAxisLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;labelXAxisLabel.Name" xml:space="preserve">
+    <value>labelXAxisLabel</value>
+  </data>
+  <data name="&gt;&gt;labelXAxisLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelXAxisLabel.Parent" xml:space="preserve">
+    <value>groupBoxXAxis</value>
+  </data>
+  <data name="&gt;&gt;labelXAxisLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBoxXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 93</value>
+  </data>
+  <data name="groupBoxXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 202</value>
+  </data>
+  <data name="groupBoxXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="groupBoxXAxis.Text" xml:space="preserve">
+    <value>Independent Axis</value>
+  </data>
+  <data name="&gt;&gt;groupBoxXAxis.Name" xml:space="preserve">
+    <value>groupBoxXAxis</value>
+  </data>
+  <data name="&gt;&gt;groupBoxXAxis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxXAxis.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxXAxis.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="textBoxXAxisLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 33</value>
   </data>
@@ -1050,29 +1098,101 @@
   <data name="&gt;&gt;labelXAxisLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="groupBoxXAxis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 93</value>
+  <data name="&gt;&gt;comboBoxWeightVar.Name" xml:space="preserve">
+    <value>comboBoxWeightVar</value>
   </data>
-  <data name="groupBoxXAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 202</value>
+  <data name="&gt;&gt;comboBoxWeightVar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="groupBoxXAxis.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;comboBoxWeightVar.Parent" xml:space="preserve">
+    <value>groupBoxYAxis</value>
+  </data>
+  <data name="&gt;&gt;comboBoxWeightVar.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;comboBoxShowValueOf.Name" xml:space="preserve">
+    <value>comboBoxShowValueOf</value>
+  </data>
+  <data name="&gt;&gt;comboBoxShowValueOf.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxShowValueOf.Parent" xml:space="preserve">
+    <value>groupBoxYAxis</value>
+  </data>
+  <data name="&gt;&gt;comboBoxShowValueOf.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;labelShowValueOf.Name" xml:space="preserve">
+    <value>labelShowValueOf</value>
+  </data>
+  <data name="&gt;&gt;labelShowValueOf.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelShowValueOf.Parent" xml:space="preserve">
+    <value>groupBoxYAxis</value>
+  </data>
+  <data name="&gt;&gt;labelShowValueOf.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;labelWeightVariable.Name" xml:space="preserve">
+    <value>labelWeightVariable</value>
+  </data>
+  <data name="&gt;&gt;labelWeightVariable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelWeightVariable.Parent" xml:space="preserve">
+    <value>groupBoxYAxis</value>
+  </data>
+  <data name="&gt;&gt;labelWeightVariable.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;textBoxYAxisLabel.Name" xml:space="preserve">
+    <value>textBoxYAxisLabel</value>
+  </data>
+  <data name="&gt;&gt;textBoxYAxisLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxYAxisLabel.Parent" xml:space="preserve">
+    <value>groupBoxYAxis</value>
+  </data>
+  <data name="&gt;&gt;textBoxYAxisLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="groupBoxXAxis.Text" xml:space="preserve">
-    <value>Independent Axis</value>
+  <data name="&gt;&gt;labelYAxis.Name" xml:space="preserve">
+    <value>labelYAxis</value>
   </data>
-  <data name="&gt;&gt;groupBoxXAxis.Name" xml:space="preserve">
-    <value>groupBoxXAxis</value>
+  <data name="&gt;&gt;labelYAxis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBoxXAxis.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelYAxis.Parent" xml:space="preserve">
+    <value>groupBoxYAxis</value>
+  </data>
+  <data name="&gt;&gt;labelYAxis.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="groupBoxYAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>240, 93</value>
+  </data>
+  <data name="groupBoxYAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 202</value>
+  </data>
+  <data name="groupBoxYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="groupBoxYAxis.Text" xml:space="preserve">
+    <value>Dependent Axis</value>
+  </data>
+  <data name="&gt;&gt;groupBoxYAxis.Name" xml:space="preserve">
+    <value>groupBoxYAxis</value>
+  </data>
+  <data name="&gt;&gt;groupBoxYAxis.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBoxXAxis.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxYAxis.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;groupBoxXAxis.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;groupBoxYAxis.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="comboBoxWeightVar.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 119</value>
@@ -1248,29 +1368,77 @@
   <data name="&gt;&gt;labelYAxis.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="groupBoxYAxis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 93</value>
+  <data name="&gt;&gt;labelOneGraphForEachValueOf.Name" xml:space="preserve">
+    <value>labelOneGraphForEachValueOf</value>
   </data>
-  <data name="groupBoxYAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 202</value>
+  <data name="&gt;&gt;labelOneGraphForEachValueOf.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="groupBoxYAxis.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="&gt;&gt;labelOneGraphForEachValueOf.Parent" xml:space="preserve">
+    <value>groupBoxSeries</value>
   </data>
-  <data name="groupBoxYAxis.Text" xml:space="preserve">
-    <value>Dependent Axis</value>
+  <data name="&gt;&gt;labelOneGraphForEachValueOf.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;groupBoxYAxis.Name" xml:space="preserve">
-    <value>groupBoxYAxis</value>
+  <data name="&gt;&gt;labelBarOfEachValueOf.Name" xml:space="preserve">
+    <value>labelBarOfEachValueOf</value>
   </data>
-  <data name="&gt;&gt;groupBoxYAxis.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelBarOfEachValueOf.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelBarOfEachValueOf.Parent" xml:space="preserve">
+    <value>groupBoxSeries</value>
+  </data>
+  <data name="&gt;&gt;labelBarOfEachValueOf.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;comboBoxStrataVar.Name" xml:space="preserve">
+    <value>comboBoxStrataVar</value>
+  </data>
+  <data name="&gt;&gt;comboBoxStrataVar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxStrataVar.Parent" xml:space="preserve">
+    <value>groupBoxSeries</value>
+  </data>
+  <data name="&gt;&gt;comboBoxStrataVar.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;comboBoxBarOfEachValueOf.Name" xml:space="preserve">
+    <value>comboBoxBarOfEachValueOf</value>
+  </data>
+  <data name="&gt;&gt;comboBoxBarOfEachValueOf.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxBarOfEachValueOf.Parent" xml:space="preserve">
+    <value>groupBoxSeries</value>
+  </data>
+  <data name="&gt;&gt;comboBoxBarOfEachValueOf.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="groupBoxSeries.Location" type="System.Drawing.Point, System.Drawing">
+    <value>468, 93</value>
+  </data>
+  <data name="groupBoxSeries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 116</value>
+  </data>
+  <data name="groupBoxSeries.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="groupBoxSeries.Text" xml:space="preserve">
+    <value>Series</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSeries.Name" xml:space="preserve">
+    <value>groupBoxSeries</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSeries.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBoxYAxis.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxSeries.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;groupBoxYAxis.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;groupBoxSeries.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="labelOneGraphForEachValueOf.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1374,30 +1542,6 @@
   <data name="&gt;&gt;comboBoxBarOfEachValueOf.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="groupBoxSeries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>468, 93</value>
-  </data>
-  <data name="groupBoxSeries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 116</value>
-  </data>
-  <data name="groupBoxSeries.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="groupBoxSeries.Text" xml:space="preserve">
-    <value>Series</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSeries.Name" xml:space="preserve">
-    <value>groupBoxSeries</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSeries.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSeries.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSeries.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="labelTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1448,6 +1592,54 @@
   </data>
   <data name="&gt;&gt;textBoxTitle.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDateFormat.Name" xml:space="preserve">
+    <value>comboBoxDateFormat</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDateFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDateFormat.Parent" xml:space="preserve">
+    <value>groupBoxFormat</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDateFormat.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;labelDateFormat.Name" xml:space="preserve">
+    <value>labelDateFormat</value>
+  </data>
+  <data name="&gt;&gt;labelDateFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDateFormat.Parent" xml:space="preserve">
+    <value>groupBoxFormat</value>
+  </data>
+  <data name="&gt;&gt;labelDateFormat.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBoxFormat.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="groupBoxFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>240, 301</value>
+  </data>
+  <data name="groupBoxFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 111</value>
+  </data>
+  <data name="groupBoxFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;groupBoxFormat.Name" xml:space="preserve">
+    <value>groupBoxFormat</value>
+  </data>
+  <data name="&gt;&gt;groupBoxFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxFormat.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxFormat.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="comboBoxDateFormat.Items" xml:space="preserve">
     <value />
@@ -1527,32 +1719,8 @@
   <data name="&gt;&gt;labelDateFormat.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="groupBoxFormat.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="groupBoxFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 301</value>
-  </data>
-  <data name="groupBoxFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 111</value>
-  </data>
-  <data name="groupBoxFormat.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;groupBoxFormat.Name" xml:space="preserve">
-    <value>groupBoxFormat</value>
-  </data>
-  <data name="&gt;&gt;groupBoxFormat.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxFormat.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBoxFormat.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="startDateTime.CustomFormat" xml:space="preserve">
-    <value>MM/dd/yyyy hh:mm tt</value>
+    <value> </value>
   </data>
   <data name="startDateTime.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1756,6 +1924,6 @@
     <value>GraphDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5518.22848, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5556.18219, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
