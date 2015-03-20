@@ -63,7 +63,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             _graphIntervalUnits = intervalArray[1];
                             break;
                         case "<Graph_StartFrom>":
-                            _graphStartFrom = "startFrom";
+                            _graphStartFrom = this.GetCommandElement(nonterminalToken.Tokens, 2);
                             break;
                         case "<Graph_Variable>":
                             _independentVariableList = nonterminalToken.Tokens[0].ToString().Trim(new char[] {'[',']'});

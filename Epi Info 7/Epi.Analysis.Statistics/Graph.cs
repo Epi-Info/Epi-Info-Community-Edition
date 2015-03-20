@@ -105,7 +105,7 @@ namespace Epi.Analysis.Statistics
             if (Context.InputVariableList.ContainsKey("Start_From"))
             {
                 _graphStartFrom = DateTime.MinValue;
-                string startFromDate = Context.InputVariableList["START_FROM"];
+                string startFromDate = Context.InputVariableList["START_FROM"].Trim(new char[]{'"'});
                 DateTime.TryParse(startFromDate, out _graphStartFrom);
             }
         }
@@ -361,7 +361,7 @@ namespace Epi.Analysis.Statistics
                         }
                     }
                 }
-                else if (_graphInterval != "" && _graphType == "EPICURVE")
+                else if (_graphType == "EPICURVE" && _graphIntervalUnits != "")
                 {
                     string categoryName = string.Empty;
                     Dictionary<object, double> indDepValuePairCollection = new Dictionary<object, double>();
@@ -391,7 +391,16 @@ namespace Epi.Analysis.Statistics
                         double givenInterval = 1;
                         int days = 0, hours = 0, minutes = 0, seconds = 0; 
                         TimeSpan period = new TimeSpan(days, hours, minutes, seconds);
-                        double.TryParse(_graphInterval, out givenInterval);
+
+                        if (_graphInterval != "")
+                        {
+                            double.TryParse(_graphInterval, out givenInterval);
+                        }
+
+                        if (_graphIntervalUnits == "")
+                        {
+                            _graphIntervalUnits = "Hours";
+                        }
 
                         foreach (DataRow row in workingTable.Rows)
                         {
@@ -579,7 +588,10 @@ namespace Epi.Analysis.Statistics
 
                                     if (double.TryParse(row["__Count__"].ToString(), out dependentVal))
                                     {
-                                        _regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
+                                        if ((_graphType == "EPICURVE" && independentValue is DateTime && ((DateTime)independentValue) <= _graphStartFrom) == false)
+                                        {
+                                            _regressionTable.Rows.Add(seriesName, independentValue, dependentVal);
+                                        }
                                     }
                                 }
                                 else
