@@ -44,36 +44,39 @@ namespace Epi.Windows.MakeView.Dialogs
             }
 
         private bool ValidateUser( out string message  )
-            {
-            bool IsValidUser = false;
+        {
+            message = "";
            
-            Epi.Windows.MakeView.EWEManagerService.UserAuthenticationRequest Request = new Epi.Windows.MakeView.EWEManagerService.UserAuthenticationRequest();
-            var rUser = new Epi.Windows.MakeView.EWEManagerService.UserDTO();
+            EWEManagerService.UserAuthenticationRequest Request = new EWEManagerService.UserAuthenticationRequest();
+            var rUser = new EWEManagerService.UserDTO();
             
             Request.User = rUser;
-            Request.User.Operation = Epi.Windows.MakeView.EWEManagerService.ConstantOperationMode.NoChange;
+            Request.User.Operation = EWEManagerService.ConstantOperationMode.NoChange;
             Request.User.EmailAddress = this.EmailAddresstextBox1.Text;
             Request.User.UserName = this.EmailAddresstextBox1.Text;
             Request.User.PasswordHash = this.PassWordTextBox1.Text;
-            EWEManagerService.EWEManagerServiceClient client = Epi.Windows.MakeView.Utils.EWEServiceClient.GetClient();
-            var Result = client.UserLogin(Request);
-            if (Result.User != null)
-                {
-                IsValidUser = true;
-                LoginInfo.UserID = Result.User.UserId;
-                message = "";
-                }
-            else
-                {
-                IsValidUser = false;
-                message = "";
 
-                }
+            var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
 
-            return IsValidUser;
+            try
+            {
+                var Result = client.UserLogin(Request);
+
+                if (Result.User != null)
+                {
+                    LoginInfo.UserID = Result.User.UserId;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-
-
+            catch
+            {
+                return false;
+            }
+        }
 
         public bool ValidEmailAddress(string emailAddress, out string errorMessage)
             {

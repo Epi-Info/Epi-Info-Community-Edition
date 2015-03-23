@@ -413,16 +413,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Service References\ServiceManager\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\EWEManagerService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Utils\SearchListBoxItem.cs" />
     <None Include="ClassDiagram1.cd" />
     <EmbeddedResource Include="Controls\ListFieldComboBox.resx">
@@ -528,50 +518,6 @@
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
-    <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.OrganizationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.PublishResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.SurveyAnswerResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\EWEManagerService\Epi.Enter.EWEManagerService.SurveyInfoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService1.wsdl" />
-    <None Include="Service References\EWEManagerService\EWEManagerService5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService51.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService52.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService53.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService54.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceManager\ManagerService.wsdl" />
-    <None Include="Service References\ServiceManager\SurveyManagerService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceManager\SurveyManagerService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceManager\SurveyManagerService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceManager\SurveyManagerService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceManager\SurveyManagerService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -661,30 +607,12 @@
     <Content Include="epi2000c.ico" />
     <Content Include="Resources\GenericTablet.png" />
     <Content Include="Resources\MarkupCursor.cur" />
-    <None Include="Service References\EWEManagerService\configuration91.svcinfo" />
-    <None Include="Service References\EWEManagerService\configuration.svcinfo" />
-    <None Include="Service References\EWEManagerService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService1.disco" />
     <EmbeddedResource Include="Resources\imageField_Icons.png" />
-    <None Include="Service References\ServiceManager\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\ServiceManager\configuration.svcinfo" />
-    <None Include="Service References\ServiceManager\configuration91.svcinfo" />
-    <None Include="Service References\ServiceManager\SurveyManagerService.disco" />
     <None Include="Resources\warning.png" />
     <None Include="Resources\delete_icon.bmp" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceManager\" />
-    <WCFMetadataStorage Include="Service References\EWEManagerService\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Web\" />

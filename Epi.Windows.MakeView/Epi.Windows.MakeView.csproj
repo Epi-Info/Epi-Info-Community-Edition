@@ -301,18 +301,6 @@
       <DependentUpon>MakeViewMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginInfo.cs" />
-    <Compile Include="Service References\EWEManagerService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\SurveyManagerService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\EWEServiceClient.cs" />
-    <Compile Include="Utils\ServiceClient.cs" />
     <Content Include="App.ico" />
     <Content Include="Forms\CheckCodeEditor\CheckCodeHelp.txt" />
     <Content Include="labelAlignHorizontal.bmp" />
@@ -320,60 +308,12 @@
     <Content Include="PortableDeviceApi\PortableDevices.dll" />
     <Content Include="portraitLetter.bmp" />
     <Content Include="Resources\1368066021_agt_web.png" />
-    <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.OrganizationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.PublishResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.SurveyAnswerResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.SurveyInfoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\EWEManagerService\Epi.Windows.MakeView.EWEManagerService.UserAuthenticationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService.disco" />
-    <None Include="Service References\EWEManagerService\configuration91.svcinfo" />
-    <None Include="Service References\EWEManagerService\configuration.svcinfo" />
-    <None Include="Service References\EWEManagerService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Web\Epi.Web.Common.dll" />
     <Content Include="Web\Epi.Web.Enter.Common.dll" />
     <Content Include="Web\Epi.Web.Enter.Interfaces.dll" />
     <Content Include="Web\Epi.Web.Interfaces.dll" />
     <None Include="Resources\Publish.png" />
     <None Include="Resources\Android_Robot_100.png" />
-    <None Include="Service References\EWEManagerService\EWEManagerService.wsdl" />
-    <None Include="Service References\EWEManagerService\EWEManagerService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerService5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService.disco" />
-    <None Include="Service References\SurveyManagerService\configuration91.svcinfo" />
-    <None Include="Service References\SurveyManagerService\configuration.svcinfo" />
-    <None Include="Service References\SurveyManagerService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
     <None Include="Resources\ExitCheckmark.png" />
     <Content Include="Resources\imageControlIcon.bmp" />
@@ -1477,22 +1417,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Service References\SurveyManagerService\ManagerService.wsdl" />
-    <None Include="Service References\SurveyManagerService\SurveyManagerService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
@@ -1562,10 +1486,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\EWEManagerService\" />
-    <WCFMetadataStorage Include="Service References\SurveyManagerService\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -158,10 +158,10 @@
             // panel3
             // 
             resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Controls.Add(this.lblSuccessNotice2);
             this.panel3.Controls.Add(this.Importantlabel3);
             this.panel3.Controls.Add(this.btnDetails);
             this.panel3.Controls.Add(this.btnShowLog);
-            this.panel3.Controls.Add(this.lblSuccessNotice2);
             this.panel3.Controls.Add(this.lblSuccessNotice);
             this.panel3.Name = "panel3";
             // 
@@ -192,13 +192,13 @@
             // panel2
             // 
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.btnCopyAllURLs);
             this.panel2.Controls.Add(this.txtURL);
             this.panel2.Controls.Add(this.txtStatusSummary);
             this.panel2.Controls.Add(this.lblSecurityToken);
             this.panel2.Controls.Add(this.lblSurveyKey);
             this.panel2.Controls.Add(this.txtDataKey);
             this.panel2.Controls.Add(this.txtSurveyKey);
-            this.panel2.Controls.Add(this.btnCopyAllURLs);
             this.panel2.Controls.Add(this.lblStatus);
             this.panel2.Controls.Add(this.lblURL);
             this.panel2.Name = "panel2";

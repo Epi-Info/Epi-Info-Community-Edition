@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAC
-        4gAAAk1TRnQBSQFMAgEBYQEAAWMBAAEsAQIBEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        4gAAAk1TRnQBSQFMAgEBYQEAAWMBAAEUAQIBEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABXgEBAgABAQEAASAGAAFeAQH/AP8AEwABvQGcAXsF/wG9AZwBhAX/Ab0BnAF7Bf8BvQGcAYQF/wG9
         AZwBewX/Ab0BnAGEBf8BvQGcAXsF/wG9AZwBhAH/xAA8/8QAAb0BnAGECf8BvQGlAYQB/wG9AZwBhAH/
         Ab0BpQGEBf8BvQGlAYQB/wG9AZwBhAH/Ab0BpQGEEf8BvQGcAXsB/8QACP8BxgGlAYQJ/wG9AZwBhAX/
@@ -1126,7 +1126,7 @@
     <value>dockManager1</value>
   </data>
   <data name="&gt;&gt;dockManager1.Type" xml:space="preserve">
-    <value>Epi.Windows.Docking.DockManager, Epi.Windows, Version=7.1.5511.17797, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Docking.DockManager, Epi.Windows, Version=7.1.5541.16322, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dockManager1.Parent" xml:space="preserve">
     <value>MainToolStripContainer.ContentPanel</value>
@@ -2117,16 +2117,16 @@
     <value>Web Survey</value>
   </data>
   <data name="draftToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 22</value>
+    <value>133, 22</value>
   </data>
   <data name="draftToolStripMenuItem2.Text" xml:space="preserve">
-    <value>Draft</value>
+    <value>Staging</value>
   </data>
   <data name="finalToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 22</value>
+    <value>133, 22</value>
   </data>
   <data name="finalToolStripMenuItem2.Text" xml:space="preserve">
-    <value>Final</value>
+    <value>Production</value>
   </data>
   <data name="EWEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 22</value>
@@ -2156,10 +2156,13 @@
     <value>Magenta</value>
   </data>
   <data name="ChangeModetoolStripDropDownButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 22</value>
+    <value>95, 22</value>
   </data>
   <data name="ChangeModetoolStripDropDownButton.Text" xml:space="preserve">
-    <value>Change Survey Mode</value>
+    <value>Change Mode</value>
+  </data>
+  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
   </data>
   <data name="btnEnterData.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -4179,6 +4182,6 @@
     <value>MakeViewMainForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.MainForm, Epi.Windows, Version=7.1.5511.17797, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.MainForm, Epi.Windows, Version=7.1.5541.16322, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
