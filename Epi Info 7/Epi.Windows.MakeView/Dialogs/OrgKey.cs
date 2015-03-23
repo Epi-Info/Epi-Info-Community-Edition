@@ -51,21 +51,19 @@ namespace Epi.Windows.MakeView.Dialogs
         }
         private void button1_Click(object sender, EventArgs e)
         {
-
-            //tbOrgKey
-            Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.No;
-            IsValidOKey = Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrgKey(tbOrgKey.Text.ToString(), this._SurveyId);
+            Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No;
+            IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrgKey(tbOrgKey.Text.ToString(), this._SurveyId);
 
             //this.DialogResult = DialogResult.OK;
             switch(IsValidOKey)
             {
-                case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.No:
+                case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No:
                     pnlError.Visible = true;
                     pnlOrgKey.Visible = true;
                     pnlSuccess.Visible = false;
                     pnlSuccessMsg.Visible = false;
                     break;
-                case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
+                case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.EndPointNotFound:
                     pnlError.Visible = true;
                     pnlOrgKey.Visible = true;
                     pnlSuccess.Visible = false;
@@ -73,13 +71,13 @@ namespace Epi.Windows.MakeView.Dialogs
                     WebSurveyOptions wso = new WebSurveyOptions();
                     wso.Show();
                     break;
-                case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.GeneralException:
+                case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.GeneralException:
                     pnlError.Visible = true;
                     pnlOrgKey.Visible = true;
                     pnlSuccess.Visible = false;
                     pnlSuccessMsg.Visible = false;
                     break;
-                case Epi.Windows.MakeView.Utils.ServiceClient.IsValidOrganizationKeyEnum.Yes:
+                case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.Yes:
                     this._OrgKey = tbOrgKey.Text.ToString();
                     pnlError.Visible = false;
                     pnlOrgKey.Visible = false;

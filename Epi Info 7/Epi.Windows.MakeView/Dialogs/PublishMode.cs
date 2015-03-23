@@ -120,17 +120,16 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-                SurveyManagerService.ManagerServiceClient client;
+                SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 Configuration config = Configuration.GetNewInstance();
-                client = GetClient();
-                Epi.Web.Common.Message.SurveyInfoRequest Request = (Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
-                Epi.Web.Common.Message.SurveyInfoResponse Result = (Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
+                
+                SurveyManagerService.SurveyInfoRequest Request = (SurveyManagerService.SurveyInfoRequest)((object[])e.Argument)[0];
+                SurveyManagerService.SurveyInfoResponse Result = (SurveyManagerService.SurveyInfoResponse)((object[])e.Argument)[1];
             
-
-                 Result = client.GetSurveyInfo(Request);
-                 if (Result != null && Result.SurveyInfoList.Count>0) 
-                 { 
-                 
+                Result = client.GetSurveyInfo(Request);
+                
+                if (Result != null && Result.SurveyInfoList.Length > 0) 
+                { 
                       SurveyName = Result.SurveyInfoList[0].SurveyName;
                       DepartmentName= Result.SurveyInfoList[0].DepartmentName;
                       SurveyNumber = Result.SurveyInfoList[0].SurveyNumber;
@@ -185,19 +184,19 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-                SurveyManagerService.ManagerServiceClient client;
+            SurveyManagerService.ManagerServiceV3Client client;
                 Configuration config = Configuration.GetNewInstance();
                 client = GetClient();
-                Epi.Web.Common.Message.SurveyInfoRequest Request = (Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
-                Epi.Web.Common.Message.SurveyInfoResponse Result = (Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
+                SurveyManagerService.SurveyInfoRequest Request = (SurveyManagerService.SurveyInfoRequest)((object[])e.Argument)[0];
+                SurveyManagerService.SurveyInfoResponse Result = (SurveyManagerService.SurveyInfoResponse)((object[])e.Argument)[1];
 
                 Request.Criteria.ClosingDate =this.CloseDate;
                 Request.Criteria.OrganizationKey =  new Guid(this.OrganizationKey);
                 Request.Criteria.UserPublishKey = new Guid(this.UserPublishKey);
-                Request.Criteria.SurveyIdList.Add(this.SurveyId);
+                Request.Criteria.SurveyIdList = new string[]{this.SurveyId};
                 Request.Action = "Update";
 
-                Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfoDTO = new Web.Common.DTO.SurveyInfoDTO();
+                SurveyManagerService.SurveyInfoDTO SurveyInfoDTO = new SurveyManagerService.SurveyInfoDTO();
 
                 SurveyInfoDTO.ClosingDate = this.CloseDate;
                 SurveyInfoDTO.StartDate = this.StartDate;
@@ -225,7 +224,7 @@ namespace Epi.Windows.MakeView.Dialogs
                     Request.Criteria.IsDraftMode = false;
                     SurveyInfoDTO.IsDraftMode = false;
                 }
-                 Request.SurveyInfoList.Add(SurveyInfoDTO);
+                 Request.SurveyInfoList = new SurveyManagerService.SurveyInfoDTO[]{SurveyInfoDTO};
                
                 Result = client.SetSurveyInfo(Request);
 
@@ -263,9 +262,9 @@ namespace Epi.Windows.MakeView.Dialogs
             }
         }
 
-        public SurveyManagerService.ManagerServiceClient GetClient() {
+        public SurveyManagerService.ManagerServiceV3Client GetClient() {
 
-            SurveyManagerService.ManagerServiceClient client;
+            SurveyManagerService.ManagerServiceV3Client client;
             Configuration config = Configuration.GetNewInstance();
 
             if (config.Settings.WebServiceAuthMode == 1) // Windows Authentication
@@ -300,7 +299,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                 System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                client = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
+                client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
 
                 client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                 client.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
@@ -346,7 +345,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                    client = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
+                    client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
 
                 }
                 else
@@ -380,7 +379,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                    client = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
+                    client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
                 }
 
             }

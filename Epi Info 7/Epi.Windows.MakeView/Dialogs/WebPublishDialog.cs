@@ -11,8 +11,7 @@ using System.Windows.Forms;
 using System.ServiceModel;
 using System.ServiceModel.Security;
 using Epi.Web.Common.Exception;
-using Epi.Web.Common.Message;
-
+using Epi.Windows.MakeView.PresentationLogic;
 namespace Epi.Windows.MakeView.Dialogs
 {
     public partial class WebPublishDialog : Form
@@ -29,8 +28,8 @@ namespace Epi.Windows.MakeView.Dialogs
         private string OrganizationKey = null;
         private bool IsMetaDataOnly = false;
         private bool isRepublishableConfig = false;
-
-        private Epi.Web.Common.DTO.SurveyInfoDTO currentSurveyInfoDTO;
+        private GuiMediator mediater;
+        private SurveyManagerService.SurveyInfoDTO currentSurveyInfoDTO ;
 
         //=======
         //private Epi.Web.Common.Message.PublishResponse Result;
@@ -39,7 +38,8 @@ namespace Epi.Windows.MakeView.Dialogs
 
         #region Delegates
         private delegate void SetStatusDelegate(string statusMessage);
-        private delegate void PublishDelegate(Epi.Web.Common.Message.PublishResponse Result);
+       // private delegate void PublishDelegate(Epi.Web.Common.Message.PublishResponse Result);
+        private delegate void PublishDelegate(SurveyManagerService.PublishResponse Result);
         private delegate void FinishWithErrorDelegate(string errorMessage);
         private delegate void FinishWithCustomFaultExceptionDelegate(FaultException<CustomFaultException> cfe);
         private delegate void FinishWithFaultExceptionDelegate(FaultException fe);
@@ -58,10 +58,11 @@ namespace Epi.Windows.MakeView.Dialogs
         public string GetOrgKey
             {
             get { return this.OrganizationKey; }
-            }
-        public WebPublishDialog(string pOrganizationKey, Epi.View pView, string pTemplate, bool pIsMetaDataOnly = false)
+        }
+        public WebPublishDialog(string pOrganizationKey,GuiMediator pMediator, Epi.View pView, string pTemplate, bool pIsMetaDataOnly = false)
         {
             InitializeComponent();
+            this.mediater = pMediator;
             this.view = pView;
             this.template = pTemplate;
             this.OrganizationKey = pOrganizationKey;
@@ -144,8 +145,10 @@ namespace Epi.Windows.MakeView.Dialogs
             stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
-             
+          //  Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
+            SurveyManagerService.PublishRequest Request = new SurveyManagerService.PublishRequest();
+            Request.SurveyInfo = new SurveyManagerService.SurveyInfoDTO();
+
             if (string.IsNullOrEmpty(ClosingTimecomboBox.Text))
             {
                 Request.SurveyInfo.ClosingDate = dtpSurveyClosingDate.Value.Date + new TimeSpan(0, 23, 59, 0);
@@ -164,6 +167,12 @@ namespace Epi.Windows.MakeView.Dialogs
                 Request.SurveyInfo.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date ,StartTimecomboBox.Text);
             }
 
+            Request.SurveyInfo.DBConnectionString = RemoveUserName(this.mediater.Project.CollectedDataConnectionString);
+
+            if (this.mediater.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+                {
+                Request.SurveyInfo.IsSqlProject = true;
+                }
             Request.SurveyInfo.DepartmentName = txtDepartment.Text;
             Request.SurveyInfo.IntroductionText = txtIntroductionText.Text;
             Request.SurveyInfo.ExitText = txtExitText.Text;
@@ -213,7 +222,9 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             try
             {
-                Epi.Web.Common.Message.PublishResponse Result = new Epi.Web.Common.Message.PublishResponse();
+              //  Epi.Web.Common.Message.PublishResponse Result = new Epi.Web.Common.Message.PublishResponse();
+                SurveyManagerService.PublishResponse Result = new SurveyManagerService.PublishResponse();
+               
                 lock (syncLock)
                 {
                     this.Cursor = Cursors.WaitCursor;
@@ -242,7 +253,17 @@ namespace Epi.Windows.MakeView.Dialogs
             }
         }
 
+        private string RemoveUserName(string ConnectionString)
+            {
+            int indexOfUserId = ConnectionString.IndexOf("User ID");
 
+            if (indexOfUserId > 0)
+                {
+                ConnectionString = ConnectionString.Remove(indexOfUserId - 1);
+                }
+
+            return ConnectionString;
+            }
         /// <summary>
         /// Initiates a single form publishing process
         /// </summary>
@@ -266,12 +287,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
             progressBar.Visible = true;
 
-            //stopwatch = new Stopwatch();
-            //stopwatch.Start();
-
-            //SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
-
-            Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
+            SurveyManagerService.PublishRequest Request = new SurveyManagerService.PublishRequest();
             Request.Action = "Update";
 
           
@@ -317,12 +333,17 @@ namespace Epi.Windows.MakeView.Dialogs
 
             Request.SurveyInfo  = this.currentSurveyInfoDTO;
 
+            Request.SurveyInfo.DBConnectionString = RemoveUserName(this.mediater.Project.CollectedDataConnectionString);
 
+            if (this.mediater.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+                {
+                Request.SurveyInfo.IsSqlProject = true;
+                }
             try
             {
-                SurveyManagerService.ManagerServiceClient client = MakeView.Utils.ServiceClient.GetClient();
-                Epi.Web.Common.Message.PublishResponse Result = client.RePublishSurvey(Request);
-                
+            SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.PublishResponse Result = client.RePublishSurvey(Request);
+
                 panel2.Visible = true;
                 panel3.Visible = true;
 
@@ -409,7 +430,8 @@ namespace Epi.Windows.MakeView.Dialogs
             //this.btnPublish.Enabled = true;
         }
 
-        private void AfterPublish(Epi.Web.Common.Message.PublishResponse Result)
+        //private void AfterPublish(Epi.Web.Common.Message.PublishResponse Result)
+        private void AfterPublish(SurveyManagerService.PublishResponse Result)
         {
             if (Result.PublishInfo.IsPulished)
             {
@@ -819,10 +841,11 @@ namespace Epi.Windows.MakeView.Dialogs
                     //ClosingTimecomboBox.SelectedIndex = 0;
                     ClosingTimecomboBox.Visible = false;
                     closingTimelabel.Visible = false;
-                    }
-                else {
-                        this.txtDepartment.Visible = false;
-                        this.lblDepartment.Visible = false;
+                }
+                else
+                {
+                    this.txtDepartment.Visible = false;
+                    this.lblDepartment.Visible = false;
 
 
                         this.txtOrganization.Left = 381;
@@ -844,7 +867,7 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             else
             {
-                SurveyManagerService.ManagerServiceClient client = Epi.Windows.MakeView.Utils.ServiceClient.GetClient();
+            SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
 
                     this.txtDepartment.Visible = false;
                     this.lblDepartment.Visible = false;
@@ -867,30 +890,25 @@ namespace Epi.Windows.MakeView.Dialogs
                     StartTimecomboBox.SelectedIndex = 0;
                   
 
+                this.txtOrganizationKey.Text = this.OrganizationKey;
 
-               // Epi.Windows.Dialogs.InputDialog inputDialog = new Windows.Dialogs.InputDialog("Enter organization key", "Organization Key", "", null, EpiInfo.Plugin.DataType.Text);
-                //DialogResult result = inputDialog.ShowDialog();
-                 
-               // if (result == System.Windows.Forms.DialogResult.OK)
-                //{
-                   // this.OrganizationKey = inputDialog.OrganizationKey;
-                  this.txtOrganizationKey.Text = this.OrganizationKey;
- 
-                    SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
-                    Request.Criteria.SurveyIdList.Add(this.view.WebSurveyId);
-                    Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
-                    SurveyInfoResponse response = client.GetSurveyInfo(Request);
-                    if (response.SurveyInfoList.Count > 0)
+                SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();
+                Request.Criteria = new SurveyManagerService.SurveyInfoCriteria();
+                Request.Criteria.SurveyType = -1;
+                Request.Criteria.SurveyIdList = new string[]{this.view.WebSurveyId};
+                Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+                SurveyManagerService.SurveyInfoResponse response = client.GetSurveyInfo(Request);
+                if (response.SurveyInfoList.Length > 0)
+                {
+                    currentSurveyInfoDTO = response.SurveyInfoList[0];
+                    if (currentSurveyInfoDTO.IsDraftMode)
                     {
-                        currentSurveyInfoDTO = response.SurveyInfoList[0];
-                        if (currentSurveyInfoDTO.IsDraftMode)
-                            {
-                            this.lblPublishModeStatus.Text = "DRAFT";
-                            }
-                        else
-                            {
-                            this.lblPublishModeStatus.Text = "FINAL";
-                            }
+                        this.lblPublishModeStatus.Text = "DRAFT";
+                    }
+                    else
+                    {
+                        this.lblPublishModeStatus.Text = "FINAL";
+                    }
 
                         dtpSurveyClosingDate.Value = currentSurveyInfoDTO.ClosingDate;
 
@@ -1191,11 +1209,9 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-                SurveyManagerService.ManagerServiceClient client = Epi.Windows.MakeView.Utils.ServiceClient.GetClient();
-                
-
-                Epi.Web.Common.Message.PublishRequest Request = (Epi.Web.Common.Message.PublishRequest)((object[])e.Argument)[0];
-                Epi.Web.Common.Message.PublishResponse Result = (Epi.Web.Common.Message.PublishResponse)((object[])e.Argument)[1];
+            SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.PublishRequest Request = (SurveyManagerService.PublishRequest)((object[])e.Argument)[0];
+                SurveyManagerService.PublishResponse Result = (SurveyManagerService.PublishResponse)((object[])e.Argument)[1];
                 Result = client.PublishSurvey(Request);
                 this.BeginInvoke(new PublishDelegate(AfterPublish), Result);
             }

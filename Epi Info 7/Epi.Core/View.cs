@@ -1366,7 +1366,9 @@ namespace Epi
             }
             #endregion Input Validation
 
-            return (project.CollectedData.SaveRecord(this, recordId));
+            int returnId = project.CollectedData.SaveRecord(this, recordId);
+            project.CollectedData.SaveAsResponse(this);
+            return (returnId);
         }
 
         /// <summary>
@@ -1375,7 +1377,9 @@ namespace Epi
         /// <returns>Record Id</returns>
         public virtual int SaveRecord()
         {
-            return (project.CollectedData.SaveRecord(this));
+            int returnId = project.CollectedData.SaveRecord(this);
+            project.CollectedData.SaveAsResponse(this);
+            return (returnId);
         }
 
         public bool IsEmptyNewRecord()

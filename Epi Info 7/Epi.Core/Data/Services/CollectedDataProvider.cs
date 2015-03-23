@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
@@ -13,6 +14,7 @@ using Epi.Fields;
 using Epi.DataSets;
 using System.Text.RegularExpressions;
 using Epi.Resources;
+using Epi.EWEManagerService;
 
 namespace Epi.Data.Services
 {
@@ -22,6 +24,9 @@ namespace Epi.Data.Services
     /// 
     public class CollectedDataProvider
     {
+        private BackgroundWorker saveResponseWorker;
+        protected object syncLock = new object();
+
         private bool isWebMode;
 
         public bool IsWebMode
@@ -639,6 +644,122 @@ namespace Epi.Data.Services
         public IDbDriver GetDatabase()
         {
             return this.dbDriver;
+        }
+
+        public string SaveAsResponse(View view)
+        {
+            if (this.dbDriver.GetType().FullName == "Epi.Data.Office.AccessDatabase") { return ""; }
+
+            DataTable publishTable = project.Metadata.GetPublishedViewKeys(view.Id);
+            string organizationKey = "";
+            string formId = "";
+
+            if (publishTable != null && publishTable.Rows.Count > 0)
+            {
+                if (publishTable.Rows[0]["EWEOrganizationKey"] == DBNull.Value || publishTable.Rows[0]["EWEFormId"] == DBNull.Value)
+                { return ""; }
+                
+                organizationKey = (string)publishTable.Rows[0]["EWEOrganizationKey"];
+                formId = (string)publishTable.Rows[0]["EWEFormId"];
+            }
+            else { return ""; }
+
+            if (string.IsNullOrEmpty(organizationKey) || string.IsNullOrEmpty(formId)) { return ""; }
+
+            string statusMessage = "[record not sent to service]";
+            Guid responseId = new Guid();
+
+            Dictionary<string, object> args = new Dictionary<string, object>();
+            args.Add("View", view);
+            args.Add("OrganizationKey", organizationKey);
+            args.Add("FormId", formId);
+            args.Add("StatusMessage", statusMessage);
+            args.Add("ResponseId", responseId);
+
+            saveResponseWorker = new System.ComponentModel.BackgroundWorker();
+            saveResponseWorker.DoWork += new DoWorkEventHandler(worker_SaveAsResponse);
+            saveResponseWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_SaveAsResponseCompleted);
+            saveResponseWorker.RunWorkerAsync(args);
+
+            return statusMessage;
+        }
+        
+        private static void worker_SaveAsResponse(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                View view = (View)((Dictionary<string, object>)(e.Argument))["View"];
+                string organizationKey = (string)((Dictionary<string, object>)(e.Argument))["OrganizationKey"];
+                string formId = (string)((Dictionary<string, object>)(e.Argument))["FormId"];
+                string statusMessage = (string)((Dictionary<string, object>)(e.Argument))["StatusMessage"];
+                Guid responseId = (Guid)((Dictionary<string, object>)(e.Argument))["ResponseId"];
+
+               var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+                Epi.EWEManagerService.PreFilledAnswerRequest Request = new Epi.EWEManagerService.PreFilledAnswerRequest();
+                Dictionary<string, string> responseDictionary = new Dictionary<string, string>();
+
+                foreach (IDataField dataField in view.Fields.DataFields)
+                {
+                    if (dataField is GlobalRecordIdField)
+                    {
+                        responseId = new Guid(dataField.CurrentRecordValueString);
+                    }
+                    else if ((dataField is UniqueKeyField) == false && (dataField is RecStatusField) == false && (dataField is ForeignKeyField) == false)
+                    {
+                        string value = string.Empty;
+
+                        if (dataField.CurrentRecordValueObject != null)
+                        {
+                            value = dataField.CurrentRecordValueObject.ToString();
+                        }
+                        
+                        responseDictionary.Add(((Epi.INamedObject)dataField).Name, value);
+                    }
+                }
+
+                Request.AnswerInfo = new PreFilledAnswerDTO();
+
+                Request.AnswerInfo.UserId = 2;
+                Request.AnswerInfo.OrganizationKey = new Guid(organizationKey);
+                Request.AnswerInfo.SurveyId = new Guid(formId);
+
+                if (view.IsRelatedView && !string.IsNullOrEmpty(view.ForeignKeyField.CurrentRecordValueString))
+                {
+                    Request.AnswerInfo.ParentRecordId = new Guid(view.ForeignKeyField.CurrentRecordValueString);
+                }
+                else
+                {
+                    Request.AnswerInfo.ParentRecordId = new Guid();
+                }
+
+                Request.AnswerInfo.ResponseId = responseId;
+                Request.AnswerInfo.SurveyQuestionAnswerList = responseDictionary;
+
+                var Result = client.SetSurveyAnswer(Request);
+
+                if (Result.Status == "Success")
+                {
+                    statusMessage += "\nResponse Id: " + Result.SurveyResponseID;
+                    statusMessage += "\nResponse URL: " + Result.SurveyResponseUrl;
+                    statusMessage += "\nPass Code: " + Result.SurveyResponsePassCode;
+                }
+                else
+                {
+                    if (Result.ErrorMessageList.Count > 0)
+                    {
+                        foreach (var item in Result.ErrorMessageList)
+                        {
+                            statusMessage += "\n" + item.Key + " : " + item.Value;
+                        }
+                    }
+                }
+            }
+            catch { }
+        }
+
+        protected  void worker_SaveAsResponseCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+
         }
 
         /// <summary>

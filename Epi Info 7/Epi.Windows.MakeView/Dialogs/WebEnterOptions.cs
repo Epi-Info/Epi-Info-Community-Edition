@@ -87,12 +87,10 @@ namespace Epi.Windows.MakeView.Dialogs
             bool IsValid = true;
           
             try
-            { 
-               
-                EWEManagerService.EWEManagerServiceClient client = Epi.Windows.MakeView.Utils.EWEServiceClient.GetClient();
-                Epi.Windows.MakeView.EWEManagerService.OrganizationRequest Request = new Epi.Windows.MakeView.EWEManagerService.OrganizationRequest();
-                var Result = client.GetOrganization(Request);
+            {
+           var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
 
+                var Result = client.PingManagerService();
             }
             catch (Exception ex)
             {

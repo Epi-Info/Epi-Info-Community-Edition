@@ -6,6 +6,9 @@ using System.Windows.Forms;
 using Epi.Fields;
 using Epi.EnterCheckCodeEngine;
 using Epi.Windows.Controls;
+using Epi.Resources;
+using Epi.EWEManagerService;
+using System.ComponentModel;
 
 namespace Epi.Windows.Enter.PresentationLogic
 {
@@ -27,6 +30,8 @@ namespace Epi.Windows.Enter.PresentationLogic
         public delegate void ClickFieldEventHandler(object sender, ClickFieldEventArg e);
         public delegate void FieldChangeEventHandler(object sender, Field field);
         public delegate void DirtyFieldEventHandler(object sender, EventArgs e);
+
+        private BackgroundWorker _callUpdateRecStatusServiceWorker;
 
         private bool IsClosingRelatedView = false;
 
