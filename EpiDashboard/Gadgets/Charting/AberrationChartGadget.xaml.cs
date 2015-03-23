@@ -796,30 +796,6 @@ namespace EpiDashboard.Gadgets.Charting
             this.GadgetStatusUpdate += new GadgetStatusUpdateHandler(RequestUpdateStatusMessage);
             this.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(IsCancelled);
 
-            #region Translation
-            //tblockConfigTitle.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_ABERRATION_DETECTION;
-            //tblockStrataVariable.Text = DashboardSharedStrings.GADGET_INDICATOR_VARIABLES_OPT;
-            //tblockWeightVariable.Text = DashboardSharedStrings.GADGET_COUNT_VARIABLE_OPT;
-            //tblockMainVariable.Text = DashboardSharedStrings.GADGET_DATE_VARIABLE;
-            //tblockLagTimeDays.Text = DashboardSharedStrings.GADGET_LAG_TIME_DAYS;
-            //tblockThresh.Text = DashboardSharedStrings.GADGET_THRESHOLD;
-            //tblockTimePeriod.Text = DashboardSharedStrings.GADGET_DAYS_PRIOR;
-            ////expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
-            //expanderDisplayOptions.Header = DashboardSharedStrings.GADGET_DISPLAY_OPTIONS;
-
-            //tblockWidth.Text = DashboardSharedStrings.GADGET_WIDTH;
-            //tblockHeight.Text = DashboardSharedStrings.GADGET_HEIGHT;
-
-            //lblLabels.Content = ChartingSharedStrings.PANEL_LABELS;
-
-            //tblockYAxisLabelValue.Text = ChartingSharedStrings.Y_AXIS_LABEL;
-            //tblockXAxisLabelType.Text = ChartingSharedStrings.X_AXIS_LABEL_TYPE;
-            //tblockXAxisLabelValue.Text = ChartingSharedStrings.X_AXIS_LABEL;
-            //tblockChartTitleValue.Text = ChartingSharedStrings.CHART_TITLE;
-
-            //btnRun.Content = DashboardSharedStrings.GADGET_RUN_BUTTON;
-            #endregion // Translation
-
             base.Construct();
         }
 
@@ -835,36 +811,6 @@ namespace EpiDashboard.Gadgets.Charting
             StrataExpanderList.Clear();
         }
 
-        private void ShowLabels()
-        {
-            //if (string.IsNullOrEmpty(tblockXAxisLabel.Text.Trim()))
-            //{
-            //    tblockXAxisLabel.Visibility = System.Windows.Visibility.Collapsed;
-            //}
-            //else
-            //{
-            //    tblockXAxisLabel.Visibility = System.Windows.Visibility.Visible;
-            //}
-
-            //if (string.IsNullOrEmpty(tblockYAxisLabel.Text.Trim()))
-            //{
-            //    tblockYAxisLabel.Visibility = System.Windows.Visibility.Collapsed;
-            //}
-            //else
-            //{
-            //    tblockYAxisLabel.Visibility = System.Windows.Visibility.Visible;
-            //}
-
-            //if (string.IsNullOrEmpty(tblockChartTitle.Text.Trim()))
-            //{
-            //    tblockChartTitle.Visibility = System.Windows.Visibility.Collapsed;
-            //}
-            //else
-            //{
-            //    tblockChartTitle.Visibility = System.Windows.Visibility.Visible;
-            //}
-        }
-
         protected override void RenderFinish()
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
@@ -873,7 +819,6 @@ namespace EpiDashboard.Gadgets.Charting
             messagePanel.Text = string.Empty;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
 
-            ShowLabels();
             HideConfigPanel();
             CheckAndSetPosition();
         }
@@ -886,7 +831,6 @@ namespace EpiDashboard.Gadgets.Charting
             messagePanel.Text = errorMessage;
             messagePanel.Visibility = System.Windows.Visibility.Visible;
 
-            ShowLabels();
             HideConfigPanel();
             CheckAndSetPosition();
         }
@@ -900,8 +844,6 @@ namespace EpiDashboard.Gadgets.Charting
             messagePanel.Visibility = System.Windows.Visibility.Visible;
 
             panelMain.Children.Clear();
-            //xyChart.DataSource = null;
-            //xyChart.Visibility = System.Windows.Visibility.Collapsed;
 
             HideConfigPanel();
             CheckAndSetPosition();
@@ -1123,8 +1065,6 @@ namespace EpiDashboard.Gadgets.Charting
         //        }
         //    }
         //}
-        #endregion // Classes
-
-    
+        #endregion // Classes    
     }
 }

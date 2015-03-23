@@ -45,7 +45,6 @@ namespace EpiDashboard.Gadgets.Charting
                 InitializeComponent();
                 this.DashboardHelper = dashboardHelper;
                 Construct();
-                //FillComboboxes();
             }
 
         #endregion //Constructors
@@ -100,8 +99,6 @@ namespace EpiDashboard.Gadgets.Charting
                 this.GadgetStatusUpdate += new GadgetStatusUpdateHandler(RequestUpdateStatusMessage);
                 this.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(IsCancelled);
 
-
-
                 base.Construct();
             }
 
@@ -113,253 +110,6 @@ namespace EpiDashboard.Gadgets.Charting
                 }
 
                 RefreshResults();
-            }
-
-
-            private void FillComboboxes(bool update = false)
-            {
-                //LoadingCombos = true;
-
-                //string prevField = string.Empty;
-                //string prevWeightField = string.Empty;
-                //string prevCrosstabField = string.Empty;
-                //string prev2ndYAxisField = string.Empty;
-                //List<string> prevStrataFields = new List<string>();
-
-                //if (update)
-                //{
-                //    if (cmbField.SelectedIndex >= 0)
-                //    {
-                //        prevField = cmbField.SelectedItem.ToString();
-                //    }
-                //    if (cmbFieldWeight.SelectedIndex >= 0)
-                //    {
-                //        prevWeightField = cmbFieldWeight.SelectedItem.ToString();
-                //    }
-                //    if (cmbFieldCrosstab.SelectedIndex >= 0)
-                //    {
-                //        prevCrosstabField = cmbFieldCrosstab.SelectedItem.ToString();
-                //    }
-                //    if (cmbSecondYAxisVariable.SelectedIndex >= 0)
-                //    {
-                //        prev2ndYAxisField = cmbSecondYAxisVariable.SelectedItem.ToString();
-                //    }
-                //    foreach (string s in listboxFieldStrata.SelectedItems)
-                //    {
-                //        prevStrataFields.Add(s);
-                //    }
-                //}
-
-                //if (cmbLegendDock.Items.Count == 0)
-                //{
-                //    cmbLegendDock.Items.Add(ChartingSharedStrings.LEGEND_DOCK_VALUE_LEFT);
-                //    cmbLegendDock.Items.Add(ChartingSharedStrings.LEGEND_DOCK_VALUE_RIGHT);
-                //    cmbLegendDock.Items.Add(ChartingSharedStrings.LEGEND_DOCK_VALUE_TOP);
-                //    cmbLegendDock.Items.Add(ChartingSharedStrings.LEGEND_DOCK_VALUE_BOTTOM);
-                //    cmbLegendDock.SelectedIndex = 1;
-                //}
-
-                //cmbField.ItemsSource = null;
-                //cmbField.Items.Clear();
-
-                //cmbFieldWeight.ItemsSource = null;
-                //cmbFieldWeight.Items.Clear();
-
-                //cmbFieldCrosstab.ItemsSource = null;
-                //cmbFieldCrosstab.Items.Clear();
-
-                //cmbSecondYAxisVariable.ItemsSource = null;
-                //cmbSecondYAxisVariable.Items.Clear();
-
-                //listboxFieldStrata.ItemsSource = null;
-                //listboxFieldStrata.Items.Clear();
-
-                //List<string> fieldNames = new List<string>();
-                //List<string> weightFieldNames = new List<string>();
-                //List<string> strataFieldNames = new List<string>();
-                //List<string> crosstabFieldNames = new List<string>();
-
-                //weightFieldNames.Add(string.Empty);
-                //crosstabFieldNames.Add(string.Empty);
-
-                //ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
-                //fieldNames = DashboardHelper.GetFieldsAsList(columnDataType);
-
-                //columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
-                //weightFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
-
-                //columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
-                //strataFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
-
-                //columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
-                //crosstabFieldNames.AddRange(DashboardHelper.GetFieldsAsList(columnDataType));
-
-                //fieldNames.Sort();
-                //weightFieldNames.Sort();
-                //strataFieldNames.Sort();
-                //crosstabFieldNames.Sort();
-
-                //if (fieldNames.Contains("SYSTEMDATE"))
-                //{
-                //    fieldNames.Remove("SYSTEMDATE");
-                //}
-
-                //if (DashboardHelper.IsUsingEpiProject)
-                //{
-                //    if (fieldNames.Contains("RecStatus")) fieldNames.Remove("RecStatus");
-                //    if (weightFieldNames.Contains("RecStatus")) weightFieldNames.Remove("RecStatus");
-
-                //    if (strataFieldNames.Contains("RecStatus")) strataFieldNames.Remove("RecStatus");
-                //    if (strataFieldNames.Contains("FKEY")) strataFieldNames.Remove("FKEY");
-                //    if (strataFieldNames.Contains("GlobalRecordId")) strataFieldNames.Remove("GlobalRecordId");
-
-                //    if (crosstabFieldNames.Contains("RecStatus")) crosstabFieldNames.Remove("RecStatus");
-                //    if (crosstabFieldNames.Contains("FKEY")) crosstabFieldNames.Remove("FKEY");
-                //    if (crosstabFieldNames.Contains("GlobalRecordId")) crosstabFieldNames.Remove("GlobalRecordId");
-                //}
-
-                //cmbField.ItemsSource = fieldNames;
-                //cmbFieldWeight.ItemsSource = weightFieldNames;
-                //cmbFieldCrosstab.ItemsSource = crosstabFieldNames;
-                //cmbSecondYAxisVariable.ItemsSource = weightFieldNames;
-                //listboxFieldStrata.ItemsSource = strataFieldNames;
-
-                //if (cmbField.Items.Count > 0)
-                //{
-                //    cmbField.SelectedIndex = -1;
-                //}
-                //if (cmbFieldWeight.Items.Count > 0)
-                //{
-                //    cmbFieldWeight.SelectedIndex = -1;
-                //}
-                //if (cmbFieldCrosstab.Items.Count > 0)
-                //{
-                //    cmbFieldCrosstab.SelectedIndex = -1;
-                //}
-                //if (cmbSecondYAxisVariable.Items.Count > 0)
-                //{
-                //    cmbSecondYAxisVariable.SelectedIndex = -1;
-                //}
-
-                //if (update)
-                //{
-                //    cmbField.SelectedItem = prevField;
-                //    cmbFieldWeight.SelectedItem = prevWeightField;
-                //    cmbFieldCrosstab.SelectedItem = prevCrosstabField;
-                //    cmbSecondYAxisVariable.SelectedItem = prev2ndYAxisField;
-
-                //    foreach (string s in prevStrataFields)
-                //    {
-                //        listboxFieldStrata.SelectedItems.Add(s);
-                //    }
-                //}
-
-                //LoadingCombos = false;
-            }
-
-            private void CreateInputVariableList()
-            {
-                //MOVED TO COLUMN CHART PROPERTIES
-                //Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
-
-                //GadgetOptions.MainVariableName = string.Empty;
-                //GadgetOptions.WeightVariableName = string.Empty;
-                //GadgetOptions.StrataVariableNames = new List<string>();
-                //GadgetOptions.CrosstabVariableName = string.Empty;
-                //GadgetOptions.ColumnNames = new List<string>();
-
-                //if (cmbField.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbField.SelectedItem.ToString()))
-                //{
-                //    inputVariableList.Add("freqvar", cmbField.SelectedItem.ToString());
-                //    GadgetOptions.MainVariableName = cmbField.SelectedItem.ToString();
-                //}
-                //else
-                //{
-                //    return;
-                //}
-
-                //if (cmbFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbFieldWeight.SelectedItem.ToString()))
-                //{
-                //    inputVariableList.Add("weightvar", cmbFieldWeight.SelectedItem.ToString());
-                //    GadgetOptions.WeightVariableName = cmbFieldWeight.SelectedItem.ToString();
-                //}
-
-                //if (cmbFieldCrosstab.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbFieldCrosstab.SelectedItem.ToString()))
-                //{
-                //    inputVariableList.Add("crosstabvar", cmbFieldCrosstab.SelectedItem.ToString());
-                //    GadgetOptions.CrosstabVariableName = cmbFieldCrosstab.SelectedItem.ToString();
-                //}
-
-                //if (cmbSecondYAxisVariable.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbSecondYAxisVariable.SelectedItem.ToString()))
-                //{
-                //    inputVariableList.Add("second_y_var", cmbSecondYAxisVariable.SelectedItem.ToString());
-                //}
-
-                //if (cmbSecondYAxis.SelectedIndex == 1)
-                //{
-                //    inputVariableList.Add("second_y_var_type", "single");
-                //}
-                //if (cmbSecondYAxis.SelectedIndex == 2)
-                //{
-                //    inputVariableList.Add("second_y_var_type", "rate_per_100k");
-                //}
-                //if (cmbSecondYAxis.SelectedIndex == 3)
-                //{
-                //    inputVariableList.Add("second_y_var_type", "cumulative_percent");
-                //}
-
-                //if (listboxFieldStrata.SelectedItems.Count > 0)
-                //{
-                //    GadgetOptions.StrataVariableNames = new List<string>();
-                //    foreach (string s in listboxFieldStrata.SelectedItems)
-                //    {
-                //        GadgetOptions.StrataVariableNames.Add(s);
-                //    }
-                //}
-
-                //if (checkboxAllValues.IsChecked == true)
-                //{
-                //    inputVariableList.Add("allvalues", "true");
-                //    GadgetOptions.ShouldUseAllPossibleValues = true;
-                //}
-                //else
-                //{
-                //    inputVariableList.Add("allvalues", "false");
-                //    GadgetOptions.ShouldUseAllPossibleValues = false;
-                //}
-
-                //if (checkboxCommentLegalLabels.IsChecked == true)
-                //{
-                //    GadgetOptions.ShouldShowCommentLegalLabels = true;
-                //}
-                //else
-                //{
-                //    GadgetOptions.ShouldShowCommentLegalLabels = false;
-                //}
-
-                //if (checkboxSortHighLow.IsChecked == true)
-                //{
-                //    inputVariableList.Add("sort", "highlow");
-                //    GadgetOptions.ShouldSortHighToLow = true;
-                //}
-                //else
-                //{
-                //    GadgetOptions.ShouldSortHighToLow = false;
-                //}
-
-                //if (checkboxIncludeMissing.IsChecked == true)
-                //{
-                //    inputVariableList.Add("includemissing", "true");
-                //    GadgetOptions.ShouldIncludeMissing = true;
-                //}
-                //else
-                //{
-                //    inputVariableList.Add("includemissing", "false");
-                //    GadgetOptions.ShouldIncludeMissing = false;
-                //}
-
-                //GadgetOptions.ShouldIncludeFullSummaryStatistics = false;
-                //GadgetOptions.InputVariableList = inputVariableList;
             }
 
             private void ClearResults()
@@ -381,7 +131,6 @@ namespace EpiDashboard.Gadgets.Charting
             private void ShowLabels()
             {
                 ColumnChartParameters chtParameters = (ColumnChartParameters)Parameters;
-                //if (string.IsNullOrEmpty(tblockXAxisLabel.Text.Trim()))  
                 if(string.IsNullOrEmpty(chtParameters.XAxisLabel))
                 {
                     tblockXAxisLabel.Visibility = System.Windows.Visibility.Collapsed;
@@ -391,7 +140,6 @@ namespace EpiDashboard.Gadgets.Charting
                     tblockXAxisLabel.Visibility = System.Windows.Visibility.Visible;
                 }
 
-                //if (string.IsNullOrEmpty(tblockYAxisLabel.Text.Trim()))
                 if (string.IsNullOrEmpty(chtParameters.YAxisLabel))
                 {
                     tblockYAxisLabel.Visibility = System.Windows.Visibility.Collapsed;
@@ -419,7 +167,6 @@ namespace EpiDashboard.Gadgets.Charting
                 messagePanel.Text = string.Empty;
                 messagePanel.Visibility = System.Windows.Visibility.Collapsed;
 
-                //ShowLabels();
                 HideConfigPanel();
                 CheckAndSetPosition();
             }
@@ -432,7 +179,6 @@ namespace EpiDashboard.Gadgets.Charting
                 messagePanel.Text = errorMessage;
                 messagePanel.Visibility = System.Windows.Visibility.Visible;
 
-                //ShowLabels();
                 HideConfigPanel();
                 CheckAndSetPosition();
             }
@@ -470,49 +216,6 @@ namespace EpiDashboard.Gadgets.Charting
                 Popup.Close();
             }
 
-            //private new void ChartGadgetBase_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-            //{               
-            //    if (SelectedChart != null)
-            //    {
-            //        separatorCurrentChart.Visibility = System.Windows.Visibility.Visible;
-            //        mnuCurrentChart.Visibility = System.Windows.Visibility.Visible;
-            //        mnuSaveSelectedChartAsImage.Visibility = System.Windows.Visibility.Visible;
-            //        mnuCopySelectedChartImage.Visibility = System.Windows.Visibility.Visible;
-            //        mnuCopySelectedChartData.Visibility = System.Windows.Visibility.Visible;                
-            //    }
-            //    else
-            //    {
-            //        separatorCurrentChart.Visibility = System.Windows.Visibility.Collapsed;
-            //        mnuCurrentChart.Visibility = System.Windows.Visibility.Collapsed;
-            //        mnuSaveSelectedChartAsImage.Visibility = System.Windows.Visibility.Collapsed;
-            //        mnuCopySelectedChartImage.Visibility = System.Windows.Visibility.Collapsed;
-            //        mnuCopySelectedChartData.Visibility = System.Windows.Visibility.Collapsed;                
-            //    }
-            //}
-
-            //protected virtual void mnuSaveSelectedChartAsImage_Click(object sender, RoutedEventArgs e)
-            //{
-            //    if (SelectedChart != null)
-            //    {
-            //        SelectedChart.SaveImageToFile();
-            //    }
-            //}
-
-            //protected virtual void mnuCopySelectedChartImage_Click(object sender, RoutedEventArgs e)
-            //{
-            //    if (SelectedChart != null)
-            //    {
-            //        SelectedChart.CopyImageToClipboard();
-            //    } 
-            //}
-
-            //protected virtual void mnuCopySelectedChartData_Click(object sender, RoutedEventArgs e)
-            //{
-            //    if (SelectedChart != null)
-            //    {
-            //        SelectedChart.CopyAllDataToClipboard();
-            //    }
-            //}
 
 //  SetChartData(dataList, strata) does not appear to be used, ever.
             protected override void SetChartData(List<XYColumnChartData> dataList, Strata strata)
@@ -527,12 +230,8 @@ namespace EpiDashboard.Gadgets.Charting
 
                 if (dataList.Count > 0)
                 {
-                    //ColumnChartSettings chartSettings = new ColumnChartSettings();
-                    //chartSettings.ChartTitle = chtParameters.ChartTitle;
-                    //chartSettings.ChartSubTitle = chtParameters.ChartSubTitle;
                     if (strata != null)
                     {
-                        //chartSettings.ChartStrataTitle = strata.Filter;
                         chtParameters.ChartStrataTitle = strata.Filter;
                     }
                     else
@@ -540,189 +239,6 @@ namespace EpiDashboard.Gadgets.Charting
                         chtParameters.ChartStrataTitle = String.Empty;
                     }
 
-                    //chartSettings.ChartWidth = int.Parse(chtParameters.ChartWidth.ToString());
-                    //chartSettings.ChartHeight = int.Parse(chtParameters.ChartHeight);
-                    //chartSettings.ShowDefaultGridLines = chtParameters.ShowGridLines;
-
-                    //switch (chtParameters.Orientation)
-                    //{
-                    //    case 1:
-                    //        chartSettings.Orientation = Orientation.Horizontal;
-                    //        break;
-                    //    case 0:
-                    //    default:
-                    //        chartSettings.Orientation = Orientation.Vertical;
-                    //        break;
-                    //}
-
-                    //switch (chtParameters.BarType)
-                    //{
-                    //    case 1:
-                    //        chartSettings.BarKind = BarKind.Cylinder;
-                    //        break;
-                    //    case 2:
-                    //        chartSettings.BarKind = BarKind.Rectangle;
-                    //        break;
-                    //    case 3:
-                    //        chartSettings.BarKind = BarKind.RoundedBlock;
-                    //        break;
-                    //    default:
-                    //    case 0:
-                    //        chartSettings.BarKind = BarKind.Block;
-                    //        break;
-                    //}
-
-                    //switch (chtParameters.BarSpace)
-                    //{
-                    //    case 1:
-                    //        chartSettings.BarSpacing = BarSpacing.None;
-                    //        break;
-                    //    case 2:
-                    //        chartSettings.BarSpacing = BarSpacing.Small;
-                    //        break;
-                    //    case 3:
-                    //        chartSettings.BarSpacing = BarSpacing.Medium;
-                    //        break;
-                    //    case 4:
-                    //        chartSettings.BarSpacing = BarSpacing.Large;
-                    //        break;
-                    //    case 0:
-                    //    default:
-                    //        chartSettings.BarSpacing = BarSpacing.Default;
-                    //        break;
-                    //}
-
-                    //switch (chtParameters.Composition)
-                    //{
-                    //    case 0:
-                    //        chartSettings.Composition = CompositionKind.SideBySide;
-                    //        break;
-                    //    case 1:
-                    //        chartSettings.Composition = CompositionKind.Stacked;
-                    //        break;
-                    //    case 2:
-                    //        chartSettings.Composition = CompositionKind.Stacked100;
-                    //        break;
-                    //}
-
-                    //chartSettings.LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Right;
-
-                    //if (chtParameters.LegendDock.ToString().Equals(ChartingSharedStrings.LEGEND_DOCK_VALUE_LEFT))
-                    //{
-                    //    chartSettings.LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Left;
-                    //}
-                    //else if (chtParameters.LegendDock.ToString().Equals(ChartingSharedStrings.LEGEND_DOCK_VALUE_RIGHT))
-                    //{
-                    //    chartSettings.LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Right;
-                    //}
-                    //else if (chtParameters.LegendDock.ToString().Equals(ChartingSharedStrings.LEGEND_DOCK_VALUE_TOP))
-                    //{
-                    //    chartSettings.LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Top;
-                    //}
-                    //else if (chtParameters.LegendDock.ToString().Equals(ChartingSharedStrings.LEGEND_DOCK_VALUE_BOTTOM))
-                    //{
-                    //    chartSettings.LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Bottom;
-                    //}
-
-                    //chartSettings.LegendFontSize = double.Parse(chtParameters.LegendFontSize.ToString());
-
-                    ////ComboBoxItem cbi = cmbPalette.SelectedItem as ComboBoxItem;
-                    //ComponentArt.Win.DataVisualization.Palette palette = ComponentArt.Win.DataVisualization.Palette.GetPalette(chtParameters.PaletteName);
-                    //chartSettings.Palette = palette;
-
-                    //chartSettings.ShowAnnotations = chtParameters.ShowAnnotations;
-                    //chartSettings.ShowAnnotationsY2 = chtParameters.Y2ShowAnnotations;
-                    //chartSettings.ShowLegend = chtParameters.ShowLegend;
-                    //chartSettings.ShowLegendBorder = chtParameters.ShowLegendBorder;
-                    //chartSettings.ShowLegendVarNames = chtParameters.ShowLegendVarNames;
-                    //chartSettings.UseDiffColors = chtParameters.UseDiffBarColors;
-                    //chartSettings.UseRefValues = chtParameters.UseReferenceValues;
-                    //chartSettings.XAxisLabel = chtParameters.XAxisLabel;
-                    //chartSettings.XAxisLabelRotation = int.Parse(chtParameters.XAxisAngle);
-                    //chartSettings.YAxisLabel = chtParameters.YAxisLabel;
-                    //chartSettings.YAxisFormattingString = chtParameters.YAxisFormat;
-                    //chartSettings.Y2AxisFormattingString = chtParameters.Y2AxisFormat;
-                    //chartSettings.Y2AxisLabel = chtParameters.Y2AxisLabel;
-                    //chartSettings.Y2AxisLegendTitle = chtParameters.Y2AxisLegendTitle;
-
-                    ////if (cmbSecondYAxis.SelectedIndex == 3)
-                    //if (chtParameters.Y2AxisType == 3)
-                    //{
-                    //    chartSettings.Y2AxisFormattingString = "P0";
-                    //    chartSettings.Y2IsCumulativePercent = true;
-                    //}
-
-                    ////switch (cmbXAxisLabelType.SelectedIndex)
-                    //switch (chtParameters.XAxisLabelType)
-                    //{
-                    //    case 3:
-                    //        chartSettings.XAxisLabelType = XAxisLabelType.Custom;
-                    //        break;
-                    //    case 1:
-                    //        chartSettings.XAxisLabelType = XAxisLabelType.FieldPrompt;
-                    //        //Field field = DashboardHelper.GetAssociatedField(GadgetOptions.MainVariableName);
-                    //        Field field = DashboardHelper.GetAssociatedField(chtParameters.ColumnNames[0].ToString());
-                    //        if (field == null)
-                    //        {
-                    //            chartSettings.XAxisLabel = chtParameters.ColumnNames[0].ToString();
-                    //        }
-                    //        else
-                    //        {
-                    //            chartSettings.XAxisLabel = ((IDataField)field).PromptText;
-                    //        }
-                    //        break;
-                    //    case 2:
-                    //        chartSettings.XAxisLabelType = XAxisLabelType.None;
-                    //        break;
-                    //    default:
-                    //        chartSettings.XAxisLabelType = XAxisLabelType.Automatic;
-                    //        chartSettings.XAxisLabel = chtParameters.ColumnNames[0].ToString();
-                    //        break;
-                    //}
-
-                    ////switch (cmbLineTypeY2.SelectedIndex)
-                    //switch (chtParameters.Y2LineType)
-                    //{
-                    //    case 1:
-                    //        chartSettings.LineKindY2 = LineKind.Polygon;
-                    //        break;
-                    //    case 2:
-                    //        chartSettings.LineKindY2 = LineKind.Smooth;
-                    //        break;
-                    //    case 3:
-                    //        chartSettings.LineKindY2 = LineKind.Step;
-                    //        break;
-                    //    default:
-                    //    case 0:
-                    //        chartSettings.LineKindY2 = LineKind.Auto;
-                    //        break;
-                    //}
-
-                    ////switch (cmbLineDashTypeY2.SelectedIndex)
-                    //switch (chtParameters.Y2LineDashStyle)
-                    //{
-                    //    case 0:
-                    //        chartSettings.LineDashStyleY2 = LineDashStyle.Dash;
-                    //        break;
-                    //    case 1:
-                    //        chartSettings.LineDashStyleY2 = LineDashStyle.DashDot;
-                    //        break;
-                    //    case 2:
-                    //        chartSettings.LineDashStyleY2 = LineDashStyle.DashDotDot;
-                    //        break;
-                    //    case 3:
-                    //        chartSettings.LineDashStyleY2 = LineDashStyle.Dot;
-                    //        break;
-                    //    default:
-                    //        chartSettings.LineDashStyleY2 = LineDashStyle.Solid;
-                    //        break;
-                    //}
-
-                    //int lineThickness = (int)chtParameters.Y2LineThickness + 1;
-                    //chartSettings.Y2LineThickness = (double)lineThickness;
-
-
-                    //EpiDashboard.Controls.Charting.ColumnChart columnChart = new EpiDashboard.Controls.Charting.ColumnChart(DashboardHelper, GadgetOptions, chartSettings, dataList);
                     EpiDashboard.Controls.Charting.ColumnChart columnChart = new EpiDashboard.Controls.Charting.ColumnChart(DashboardHelper, chtParameters, dataList);
 
                     columnChart.Margin = new Thickness(0, 0, 0, 16);
@@ -730,62 +246,6 @@ namespace EpiDashboard.Gadgets.Charting
                     columnChart.MouseLeave += new MouseEventHandler(chart_MouseLeave);
                     panelMain.Children.Add(columnChart);
                 }
-            }
-
-            //private void EnableDisableY2Fields()
-            //{
-            //    if (cmbSecondYAxis.SelectedIndex == 0)
-            //    {
-            //        tblockSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
-            //        cmbSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
-            //        cmbSecondYAxisVariable.SelectedIndex = -1;
-            //        checkboxAnnotationsY2.IsEnabled = false;
-            //        checkboxAnnotationsY2.IsChecked = false;
-            //        cmbLineDashTypeY2.IsEnabled = false;
-            //        cmbLineThicknessY2.IsEnabled = false;
-            //        cmbLineTypeY2.IsEnabled = false;
-            //        txtY2AxisLabelValue.IsEnabled = false;
-            //        txtY2AxisFormatString.IsEnabled = false;
-            //    }
-            //    else if (cmbSecondYAxis.SelectedIndex == 3)
-            //    {
-            //        tblockSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
-            //        cmbSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
-            //        cmbSecondYAxisVariable.SelectedIndex = -1;
-            //        checkboxAnnotationsY2.IsEnabled = true;
-            //        cmbLineDashTypeY2.IsEnabled = true;
-            //        cmbLineThicknessY2.IsEnabled = true;
-            //        cmbLineTypeY2.IsEnabled = true;
-            //        txtY2AxisLabelValue.IsEnabled = true;
-            //        txtY2AxisFormatString.IsEnabled = false;
-            //    }
-            //    else
-            //    {
-            //        tblockSecondYAxisVariable.Visibility = System.Windows.Visibility.Visible;
-            //        cmbSecondYAxisVariable.Visibility = System.Windows.Visibility.Visible;
-            //        checkboxAnnotationsY2.IsEnabled = true;
-            //        cmbLineDashTypeY2.IsEnabled = true;
-            //        cmbLineThicknessY2.IsEnabled = true;
-            //        cmbLineTypeY2.IsEnabled = true;
-            //        txtY2AxisLabelValue.IsEnabled = true;
-            //        txtY2AxisFormatString.IsEnabled = true;
-
-            //        if (cmbSecondYAxis.SelectedIndex == 1)
-            //        {
-            //            tblockSecondYAxisVariable.Text = "Second y-axis variable:";
-            //        }
-            //        else if (cmbSecondYAxis.SelectedIndex == 2)
-            //        {
-            //            tblockSecondYAxisVariable.Text = "Population variable:";
-            //        }
-            //    }
-            //}
-
-            private void cmbSecondYAxis_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            {
-            //    if (LoadingCombos || tblockSecondYAxisVariable == null || cmbSecondYAxisVariable == null) return;
-
-            //    EnableDisableY2Fields();
             }
 
         #endregion // Private and Protected Methods
@@ -807,7 +267,6 @@ namespace EpiDashboard.Gadgets.Charting
             public override void RefreshResults()
             {
                 ColumnChartParameters chtParameters = (ColumnChartParameters)Parameters;
-                //if (!LoadingCombos && GadgetOptions != null && cmbField.SelectedIndex > -1)
                 if (!LoadingCombos)
                 {
                     if (chtParameters != null)
@@ -859,7 +318,6 @@ namespace EpiDashboard.Gadgets.Charting
                             }
                             break;
                         case "yaxisvariable":
-                            //listboxFieldStrata.SelectedItems.Add(child.InnerText.Replace("&lt;", "<"));
                             if (string.IsNullOrEmpty(child.InnerText))
                             {
                                 ((ColumnChartParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
@@ -868,7 +326,6 @@ namespace EpiDashboard.Gadgets.Charting
                         case "xaxisvariable":
                             if (!string.IsNullOrEmpty(child.InnerText.Trim()))
                             {
-                                //cmbField.Text = child.InnerText.Replace("&lt;", "<");
                                 if (this.Parameters.ColumnNames.Count > 0)
                                 {
                                     ((ColumnChartParameters)Parameters).ColumnNames[0] = (child.InnerText.Replace("&lt;", "<"));
@@ -880,12 +337,6 @@ namespace EpiDashboard.Gadgets.Charting
 
                             }
                             break;
-                        //case "yaxisscattervariable":
-                        //    cbxScatterYAxisField.Text = child.InnerText.Replace("&lt;", "<");
-                        //    break;
-                        //case "xaxisscattervariable":
-                        //    cbxScatterXAxisField.Text = child.InnerText.Replace("&lt;", "<");
-                        //    break;
                         case "allvalues":
                             if (child.InnerText.ToLower().Equals("true")) 
                             { 
@@ -893,16 +344,6 @@ namespace EpiDashboard.Gadgets.Charting
                             }
                             else { ((ColumnChartParameters)Parameters).ShowAllListValues = false; }
                             break;
-                        //case "horizontalgridlines":
-                        //    if (child.InnerText.ToLower().Equals("true"))
-                        //    {
-                        //        checkboxShowHorizontalGridLines.IsChecked = true;
-                        //    }
-                        //    else
-                        //    {
-                        //        checkboxShowHorizontalGridLines.IsChecked = false;
-                        //    }
-                        //    break;
                         case "singlevariable":
                             if (!isStacked)
                             {
@@ -920,18 +361,15 @@ namespace EpiDashboard.Gadgets.Charting
                         case "weightvariable":
                             if (!string.IsNullOrEmpty(child.InnerText.Trim()))
                             {
-                                //cmbFieldWeight.Text = child.InnerText.Replace("&lt;", "<");
                                 ((ColumnChartParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
                             }
                             break;
                         case "stratavariable":
                             if (!isStacked) ((ColumnChartParameters)Parameters).StrataVariableNames[0] = child.InnerText.Replace("&lt;", "<");
-                                //listboxFieldStrata.SelectedItems.Add(child.InnerText.Replace("&lt;", "<"));
                             break;
                         case "columnaggregatefunction":
                             if (child.InnerText == "Count")
                             {
-                                //cmbComposition.SelectedIndex = 1;
                                 ((ColumnChartParameters)Parameters).Composition = CompositionKind.Stacked;
                             }
                             else
@@ -946,13 +384,10 @@ namespace EpiDashboard.Gadgets.Charting
                             }
                             else if (child.InnerText == "Bar")
                             {
-                                //cmbOrientation.SelectedIndex = 1;
                                 ((ColumnChartParameters)Parameters).Orientation = Orientation.Horizontal;
                             }
-                            //cbxChartType.Text = child.InnerText;
                             break;
                         case "customheading":
-                            //this.CustomOutputHeading = child.InnerText;
                             if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                             {
                                 this.Parameters.GadgetTitle = child.InnerText.Replace("&lt;", "<");
@@ -965,7 +400,6 @@ namespace EpiDashboard.Gadgets.Charting
                             }
                             break;
                         case "customdescription":
-                            //this.CustomOutputDescription = child.InnerText;
                             if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                             {
                                 this.CustomOutputDescription = child.InnerText.Replace("&lt;", "<");
@@ -1360,21 +794,6 @@ namespace EpiDashboard.Gadgets.Charting
                                     break;
                                 case "xaxislabeltype":
                                     {
-                                        //switch (child.InnerText)
-                                        //{
-                                        //    case "Automatic":
-                                        //        ((ColumnChartParameters)Parameters).XAxisLabelType = EpiDashboard.XAxisLabelType.Automatic;
-                                        //        break;
-                                        //    case "FieldPrompt":
-                                        //        ((ColumnChartParameters)Parameters).XAxisLabelType = EpiDashboard.XAxisLabelType.FieldPrompt;
-                                        //        break;
-                                        //    case "None":
-                                        //        ((ColumnChartParameters)Parameters).XAxisLabelType = EpiDashboard.XAxisLabelType.None;
-                                        //        break;
-                                        //    case "Custom":
-                                        //        ((ColumnChartParameters)Parameters).XAxisLabelType = EpiDashboard.XAxisLabelType.Custom;
-                                        //        break;
-                                        //}
                                         ((ColumnChartParameters)Parameters).XAxisLabelType = int.Parse(child.InnerText);
                                         break;
                                     }
@@ -1434,7 +853,6 @@ namespace EpiDashboard.Gadgets.Charting
                 this.LoadingCombos = false;
                 RefreshResults();
                 HideConfigPanel();
-                //SetXAxisLabelControls();
             }
 
             /// <summary>
@@ -1470,8 +888,6 @@ namespace EpiDashboard.Gadgets.Charting
                 element.Attributes.Append(type);
                 element.Attributes.Append(id);
 
-                //this.CustomOutputHeading = chtParameters.GadgetTitle;
-                //this.CustomOutputDescription = chtParameters.GadgetDescription;
                 CustomOutputHeading = headerPanel.Text;
                 CustomOutputDescription = descriptionPanel.Text;
 
@@ -1840,14 +1256,6 @@ namespace EpiDashboard.Gadgets.Charting
             }
 
             /// <summary>
-            /// Updates the variable names available in the gadget's properties
-            /// </summary>
-            public override void UpdateVariableNames()
-            {
-                FillComboboxes(true);
-            }
-
-            /// <summary>
             /// Converts the gadget's output to Html
             /// </summary>
             /// <returns></returns>
@@ -1961,9 +1369,6 @@ namespace EpiDashboard.Gadgets.Charting
                     this.Dispatcher.BeginInvoke(new SimpleCallback(ClearResults));
                     ColumnChartParameters chtParameters = (ColumnChartParameters)Parameters;
 
-                    //string freqVar = GadgetOptions.MainVariableName;
-                    //string weightVar = GadgetOptions.WeightVariableName;
-                    //string crosstabVar = GadgetOptions.CrosstabVariableName;
                     string freqVar = chtParameters.ColumnNames[0];
                     string weightVar = chtParameters.WeightVariableName;
                     string crosstabVar = chtParameters.CrosstabVariableName;
@@ -1975,8 +1380,6 @@ namespace EpiDashboard.Gadgets.Charting
                         RequestUpdateStatusDelegate requestUpdateStatus = new RequestUpdateStatusDelegate(RequestUpdateStatusMessage);
                         CheckForCancellationDelegate checkForCancellation = new CheckForCancellationDelegate(IsCancelled);
 
-                        //GadgetOptions.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
-                        //GadgetOptions.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
                         chtParameters.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
                         chtParameters.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
 
@@ -1996,7 +1399,6 @@ namespace EpiDashboard.Gadgets.Charting
 
                             foreach (Strata strata in DashboardHelper.GetStrataValuesAsDictionary(crosstabVarList, false, false))
                             {
-                                //GadgetParameters parameters = new GadgetParameters(GadgetOptions);
                                 ColumnChartParameters parameters = new ColumnChartParameters(chtParameters);
                                 
                                 if (!string.IsNullOrEmpty(chtParameters.CustomFilter))

@@ -110,70 +110,6 @@ namespace EpiDashboard.Gadgets.Charting
                 this.GadgetStatusUpdate += new GadgetStatusUpdateHandler(RequestUpdateStatusMessage);
                 this.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(IsCancelled);
 
-                #region Translation
-
-                //tblockWidth.Text = DashboardSharedStrings.GADGET_WIDTH;
-                //tblockHeight.Text = DashboardSharedStrings.GADGET_HEIGHT;
-                //tblockMainVariable.Text = DashboardSharedStrings.GADGET_MAIN_VARIABLE;
-                //tblockStrataVariable.Text = DashboardSharedStrings.GADGET_STRATA_VARIABLE;
-                //tblockWeightVariable.Text = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
-                //tblockCrosstabVariable.Text = ChartingSharedStrings.GRAPH_FOR_EACH_VALUE_OF_VARIABLE;
-
-                //checkboxAllValues.Content = DashboardSharedStrings.GADGET_ALL_LIST_VALUES;
-                //checkboxCommentLegalLabels.Content = DashboardSharedStrings.GADGET_LIST_LABELS;
-                //checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
-                //checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
-
-                //tblockSecondYAxis.Text = ChartingSharedStrings.SECOND_Y_AXIS_TYPE;
-                //tblockSecondYAxisVariable.Text = ChartingSharedStrings.SECOND_Y_AXIS_VARIABLE;
-
-                //expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
-                //expanderDisplayOptions.Header = DashboardSharedStrings.GADGET_DISPLAY_OPTIONS;
-
-                //lblColorsStyles.Content = ChartingSharedStrings.PANEL_COLORS_AND_STYLES;
-                //lblLabels.Content = ChartingSharedStrings.PANEL_LABELS;
-                //lblLegend.Content = ChartingSharedStrings.PANEL_LEGEND;
-
-                //checkboxUseRefValues.Content = ChartingSharedStrings.USE_REFERENCE_VALUES;
-                //checkboxAnnotations.Content = ChartingSharedStrings.SHOW_ANNOTATIONS;
-                //checkboxGridLines.Content = ChartingSharedStrings.SHOW_GRID_LINES;
-                //tblockPalette.Text = ChartingSharedStrings.COLOR_PALETTE;
-                //tblockComposition.Text = ChartingSharedStrings.COMPOSITION;
-                //tblockAreaType.Text = ChartingSharedStrings.AREA_TYPE;
-
-                //tblockTransTop.Text = ChartingSharedStrings.TRANS_PCT_TOP;
-                //tblockTransBottom.Text = ChartingSharedStrings.TRANS_PCT_BOTTOM;
-
-                //tblockLineTypeY2.Text = ChartingSharedStrings.LINE_TYPE_Y2;
-                //tblockLineDashTypeY2.Text = ChartingSharedStrings.LINE_DASH_STYLE_Y2;
-                //tblockLineThicknessY2.Text = ChartingSharedStrings.LINE_THICKNESS_Y2;
-
-                //tblockYAxisLabelValue.Text = ChartingSharedStrings.Y_AXIS_LABEL;
-                //tblockYAxisFormatString.Text = ChartingSharedStrings.Y_AXIS_FORMAT;
-
-                //tblockY2AxisLabelValue.Text = ChartingSharedStrings.Y2_AXIS_LABEL;
-                //tblockY2AxisLegendTitle.Text = ChartingSharedStrings.Y2_AXIS_LEGEND_TITLE;
-                //tblockY2AxisFormatString.Text = ChartingSharedStrings.Y2_AXIS_FORMAT;
-
-                //tblockXAxisLabelType.Text = ChartingSharedStrings.X_AXIS_LABEL_TYPE;
-                //tblockXAxisLabelValue.Text = ChartingSharedStrings.X_AXIS_LABEL;
-                //tblockXAxisAngle.Text = ChartingSharedStrings.X_AXIS_ANGLE;
-                //tblockChartTitleValue.Text = ChartingSharedStrings.CHART_TITLE;
-                //tblockChartSubTitleValue.Text = ChartingSharedStrings.CHART_SUBTITLE;
-
-                //checkboxShowLegend.Content = ChartingSharedStrings.SHOW_LEGEND;
-                //checkboxShowLegendBorder.Content = ChartingSharedStrings.SHOW_LEGEND_BORDER;
-                //checkboxShowVarName.Content = ChartingSharedStrings.SHOW_VAR_NAMES;
-                //tblockLegendFontSize.Text = ChartingSharedStrings.LEGEND_FONT_SIZE;
-                //tblockLegendDock.Text = ChartingSharedStrings.LEGEND_PLACEMENT;
-
-                //btnRun.Content = DashboardSharedStrings.GADGET_RUN_BUTTON;
-
-                #endregion // Translation
-
-                //double legendFontSize = 13;
-                //double.TryParse(txtLegendFontSize.Text, out legendFontSize);
-
                 base.Construct();
             }
 
@@ -239,9 +175,6 @@ namespace EpiDashboard.Gadgets.Charting
 
                 if (dataList.Count > 0)
                 {
-                    //AreaChartSettings chartSettings = new AreaChartSettings();
-                    //chartSettings.ChartTitle = txtChartTitle.Text;
-                    //chartSettings.ChartSubTitle = txtChartSubTitle.Text;
                     if (strata != null)
                     {
                         areaParameters.ChartStrataTitle = strata.Filter;
