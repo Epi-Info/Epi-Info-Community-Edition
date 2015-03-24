@@ -39,7 +39,10 @@ namespace Epi.ImportExport.ProjectPackagers
             #endregion // Input Validation
 
             IncludeNullFieldData = true;
-            RecordProcessingScope = RecordProcessingScope.Undeleted;
+            //--EI-113
+            // RecordProcessingScope = RecordProcessingScope.Undeleted;
+               RecordProcessingScope = RecordProcessingScope.Both;
+            //--
             SourceForm = sourceForm;
             SourceProject = SourceForm.Project;
             PackageName = packageName;
