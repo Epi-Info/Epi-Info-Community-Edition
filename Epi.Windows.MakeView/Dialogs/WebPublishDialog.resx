@@ -129,7 +129,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dtpSurveyClosingDate.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;dtpSurveyClosingDate.Name" xml:space="preserve">
     <value>dtpSurveyClosingDate</value>
@@ -322,7 +322,7 @@
     <value>75, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Close</value>
@@ -355,7 +355,7 @@
     <value>75, 23</value>
   </data>
   <data name="btnPrevious.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="btnPrevious.Text" xml:space="preserve">
     <value>Previous</value>
@@ -525,24 +525,6 @@
   <data name="&gt;&gt;tabIntro.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdbSingleResponse.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="rdbSingleResponse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdbSingleResponse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 202</value>
-  </data>
-  <data name="rdbSingleResponse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 27</value>
-  </data>
-  <data name="rdbSingleResponse.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="rdbSingleResponse.Text" xml:space="preserve">
-    <value>One response only</value>
-  </data>
   <data name="&gt;&gt;rdbSingleResponse.Name" xml:space="preserve">
     <value>rdbSingleResponse</value>
   </data>
@@ -554,24 +536,6 @@
   </data>
   <data name="&gt;&gt;rdbSingleResponse.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="lblSurveyType.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblSurveyType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSurveyType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 184</value>
-  </data>
-  <data name="lblSurveyType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 25</value>
-  </data>
-  <data name="lblSurveyType.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
-  </data>
-  <data name="lblSurveyType.Text" xml:space="preserve">
-    <value>Can a person submit a completed survey response only once or many times?</value>
   </data>
   <data name="&gt;&gt;lblSurveyType.Name" xml:space="preserve">
     <value>lblSurveyType</value>
@@ -585,24 +549,6 @@
   <data name="&gt;&gt;lblSurveyType.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="rdbMultipleResponse.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="rdbMultipleResponse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdbMultipleResponse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 202</value>
-  </data>
-  <data name="rdbMultipleResponse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 27</value>
-  </data>
-  <data name="rdbMultipleResponse.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="rdbMultipleResponse.Text" xml:space="preserve">
-    <value>Many responses allowed</value>
-  </data>
   <data name="&gt;&gt;rdbMultipleResponse.Name" xml:space="preserve">
     <value>rdbMultipleResponse</value>
   </data>
@@ -614,27 +560,6 @@
   </data>
   <data name="&gt;&gt;rdbMultipleResponse.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;picExitCheckmark.Name" xml:space="preserve">
-    <value>picExitCheckmark</value>
-  </data>
-  <data name="&gt;&gt;picExitCheckmark.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;picExitCheckmark.Parent" xml:space="preserve">
-    <value>grpExitText</value>
-  </data>
-  <data name="&gt;&gt;picExitCheckmark.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="grpExitText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 101</value>
-  </data>
-  <data name="grpExitText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>828, 68</value>
-  </data>
-  <data name="grpExitText.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
   </data>
   <data name="&gt;&gt;grpExitText.Name" xml:space="preserve">
     <value>grpExitText</value>
@@ -648,18 +573,6 @@
   <data name="&gt;&gt;grpExitText.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="txtSurveyIDMirror.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="txtSurveyIDMirror.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 57</value>
-  </data>
-  <data name="txtSurveyIDMirror.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 23</value>
-  </data>
-  <data name="txtSurveyIDMirror.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;txtSurveyIDMirror.Name" xml:space="preserve">
     <value>txtSurveyIDMirror</value>
   </data>
@@ -672,162 +585,7 @@
   <data name="&gt;&gt;txtSurveyIDMirror.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="lblDepMirr.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblDepMirr.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblDepMirr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblDepMirr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>567, 9</value>
-  </data>
-  <data name="lblDepMirr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 15</value>
-  </data>
-  <data name="lblDepMirr.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
-  </data>
-  <data name="lblDepMirr.Text" xml:space="preserve">
-    <value>Department:</value>
-  </data>
-  <data name="&gt;&gt;lblDepMirr.Name" xml:space="preserve">
-    <value>lblDepMirr</value>
-  </data>
-  <data name="&gt;&gt;lblDepMirr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblDepMirr.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;lblDepMirr.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblOrgMirr.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblOrgMirr.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblOrgMirr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblOrgMirr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 9</value>
-  </data>
-  <data name="lblOrgMirr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 15</value>
-  </data>
-  <data name="lblOrgMirr.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="lblOrgMirr.Text" xml:space="preserve">
-    <value>Organization:</value>
-  </data>
-  <data name="&gt;&gt;lblOrgMirr.Name" xml:space="preserve">
-    <value>lblOrgMirr</value>
-  </data>
-  <data name="&gt;&gt;lblOrgMirr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblOrgMirr.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;lblOrgMirr.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblSurvNumMirr.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSurvNumMirr.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblSurvNumMirr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSurvNumMirr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 9</value>
-  </data>
-  <data name="lblSurvNumMirr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 15</value>
-  </data>
-  <data name="lblSurvNumMirr.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="lblSurvNumMirr.Text" xml:space="preserve">
-    <value>Survey #:</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNumMirr.Name" xml:space="preserve">
-    <value>lblSurvNumMirr</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNumMirr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNumMirr.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNumMirr.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="txtOrganizationMirror.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="txtOrganizationMirror.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 6</value>
-  </data>
-  <data name="txtOrganizationMirror.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 23</value>
-  </data>
-  <data name="txtOrganizationMirror.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;txtOrganizationMirror.Name" xml:space="preserve">
-    <value>txtOrganizationMirror</value>
-  </data>
-  <data name="&gt;&gt;txtOrganizationMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtOrganizationMirror.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;txtOrganizationMirror.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="txtDepartmentMirror.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="txtDepartmentMirror.Location" type="System.Drawing.Point, System.Drawing">
-    <value>652, 6</value>
-  </data>
-  <data name="txtDepartmentMirror.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 23</value>
-  </data>
-  <data name="txtDepartmentMirror.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txtDepartmentMirror.Name" xml:space="preserve">
-    <value>txtDepartmentMirror</value>
-  </data>
-  <data name="&gt;&gt;txtDepartmentMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtDepartmentMirror.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;txtDepartmentMirror.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 51</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 35</value>
-  </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
+  
   <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
@@ -840,30 +598,7 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;txtSurveyNameMirror.Name" xml:space="preserve">
-    <value>txtSurveyNameMirror</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyNameMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyNameMirror.Parent" xml:space="preserve">
-    <value>pnlSurveyNameMirror</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyNameMirror.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pnlSurveyNameMirror.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 3</value>
-  </data>
-  <data name="pnlSurveyNameMirror.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 4, 0, 0</value>
-  </data>
-  <data name="pnlSurveyNameMirror.Size" type="System.Drawing.Size, System.Drawing">
-    <value>859, 48</value>
-  </data>
-  <data name="pnlSurveyNameMirror.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
+  
   <data name="&gt;&gt;pnlSurveyNameMirror.Name" xml:space="preserve">
     <value>pnlSurveyNameMirror</value>
   </data>
@@ -1198,7 +933,7 @@
     <value>76, 23</value>
   </data>
   <data name="ClosingTimecomboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ClosingTimecomboBox.Name" xml:space="preserve">
     <value>ClosingTimecomboBox</value>
@@ -1429,7 +1164,7 @@
     <value>76, 23</value>
   </data>
   <data name="StartTimecomboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;StartTimecomboBox.Name" xml:space="preserve">
     <value>StartTimecomboBox</value>
@@ -1453,7 +1188,7 @@
     <value>217, 23</value>
   </data>
   <data name="StartDateDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;StartDateDatePicker.Name" xml:space="preserve">
     <value>StartDateDatePicker</value>
@@ -1540,7 +1275,7 @@
     <value>859, 47</value>
   </data>
   <data name="pnlSurveyName.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;pnlSurveyName.Name" xml:space="preserve">
     <value>pnlSurveyName</value>
@@ -1627,7 +1362,7 @@
     <value>857, 35</value>
   </data>
   <data name="pnlSurvNumOrgDept.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;pnlSurvNumOrgDept.Name" xml:space="preserve">
     <value>pnlSurvNumOrgDept</value>
@@ -1740,6 +1475,129 @@
   <data name="&gt;&gt;lblDepartment.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="rdbSingleResponse.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="rdbSingleResponse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdbSingleResponse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 202</value>
+  </data>
+  <data name="rdbSingleResponse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 27</value>
+  </data>
+  <data name="rdbSingleResponse.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="rdbSingleResponse.Text" xml:space="preserve">
+    <value>One response only</value>
+  </data>
+  <data name="&gt;&gt;rdbSingleResponse.Name" xml:space="preserve">
+    <value>rdbSingleResponse</value>
+  </data>
+  <data name="&gt;&gt;rdbSingleResponse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbSingleResponse.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;rdbSingleResponse.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblSurveyType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblSurveyType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSurveyType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 184</value>
+  </data>
+  <data name="lblSurveyType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 25</value>
+  </data>
+  <data name="lblSurveyType.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="lblSurveyType.Text" xml:space="preserve">
+    <value>Can a person submit a completed survey response only once or many times?</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyType.Name" xml:space="preserve">
+    <value>lblSurveyType</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyType.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyType.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdbMultipleResponse.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="rdbMultipleResponse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdbMultipleResponse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 202</value>
+  </data>
+  <data name="rdbMultipleResponse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 27</value>
+  </data>
+  <data name="rdbMultipleResponse.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="rdbMultipleResponse.Text" xml:space="preserve">
+    <value>Many responses allowed</value>
+  </data>
+  <data name="&gt;&gt;rdbMultipleResponse.Name" xml:space="preserve">
+    <value>rdbMultipleResponse</value>
+  </data>
+  <data name="&gt;&gt;rdbMultipleResponse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbMultipleResponse.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;rdbMultipleResponse.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;picExitCheckmark.Name" xml:space="preserve">
+    <value>picExitCheckmark</value>
+  </data>
+  <data name="&gt;&gt;picExitCheckmark.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picExitCheckmark.Parent" xml:space="preserve">
+    <value>grpExitText</value>
+  </data>
+  <data name="&gt;&gt;picExitCheckmark.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grpExitText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 101</value>
+  </data>
+  <data name="grpExitText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>828, 68</value>
+  </data>
+  <data name="grpExitText.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;grpExitText.Name" xml:space="preserve">
+    <value>grpExitText</value>
+  </data>
+  <data name="&gt;&gt;grpExitText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpExitText.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;grpExitText.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="picExitCheckmark.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Center</value>
   </data>
@@ -1766,6 +1624,294 @@
   </data>
   <data name="&gt;&gt;picExitCheckmark.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="txtSurveyIDMirror.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="txtSurveyIDMirror.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 57</value>
+  </data>
+  <data name="txtSurveyIDMirror.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 23</value>
+  </data>
+  <data name="txtSurveyIDMirror.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyIDMirror.Name" xml:space="preserve">
+    <value>txtSurveyIDMirror</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyIDMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyIDMirror.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyIDMirror.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.Name" xml:space="preserve">
+    <value>lblDepMirr</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.Name" xml:space="preserve">
+    <value>lblOrgMirr</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.Name" xml:space="preserve">
+    <value>lblSurvNumMirr</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.Name" xml:space="preserve">
+    <value>txtOrganizationMirror</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.Name" xml:space="preserve">
+    <value>txtDepartmentMirror</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 51</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>857, 35</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblDepMirr.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDepMirr.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblDepMirr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDepMirr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>567, 9</value>
+  </data>
+  <data name="lblDepMirr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 15</value>
+  </data>
+  <data name="lblDepMirr.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="lblDepMirr.Text" xml:space="preserve">
+    <value>Department:</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.Name" xml:space="preserve">
+    <value>lblDepMirr</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblOrgMirr.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblOrgMirr.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblOrgMirr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblOrgMirr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>276, 9</value>
+  </data>
+  <data name="lblOrgMirr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 15</value>
+  </data>
+  <data name="lblOrgMirr.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="lblOrgMirr.Text" xml:space="preserve">
+    <value>Organization:</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.Name" xml:space="preserve">
+    <value>lblOrgMirr</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblSurvNumMirr.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSurvNumMirr.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblSurvNumMirr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSurvNumMirr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 9</value>
+  </data>
+  <data name="lblSurvNumMirr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 15</value>
+  </data>
+  <data name="lblSurvNumMirr.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="lblSurvNumMirr.Text" xml:space="preserve">
+    <value>Survey #:</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.Name" xml:space="preserve">
+    <value>lblSurvNumMirr</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtOrganizationMirror.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="txtOrganizationMirror.Location" type="System.Drawing.Point, System.Drawing">
+    <value>363, 6</value>
+  </data>
+  <data name="txtOrganizationMirror.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 23</value>
+  </data>
+  <data name="txtOrganizationMirror.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.Name" xml:space="preserve">
+    <value>txtOrganizationMirror</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="txtDepartmentMirror.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="txtDepartmentMirror.Location" type="System.Drawing.Point, System.Drawing">
+    <value>652, 6</value>
+  </data>
+  <data name="txtDepartmentMirror.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 23</value>
+  </data>
+  <data name="txtDepartmentMirror.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.Name" xml:space="preserve">
+    <value>txtDepartmentMirror</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyNameMirror.Name" xml:space="preserve">
+    <value>txtSurveyNameMirror</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyNameMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyNameMirror.Parent" xml:space="preserve">
+    <value>pnlSurveyNameMirror</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyNameMirror.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pnlSurveyNameMirror.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 3</value>
+  </data>
+  <data name="pnlSurveyNameMirror.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 4, 0, 0</value>
+  </data>
+  <data name="pnlSurveyNameMirror.Size" type="System.Drawing.Size, System.Drawing">
+    <value>859, 48</value>
+  </data>
+  <data name="pnlSurveyNameMirror.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pnlSurveyNameMirror.Name" xml:space="preserve">
+    <value>pnlSurveyNameMirror</value>
+  </data>
+  <data name="&gt;&gt;pnlSurveyNameMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlSurveyNameMirror.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;pnlSurveyNameMirror.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="txtSurveyNameMirror.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 15.75pt, style=Bold</value>
@@ -2860,7 +3006,7 @@
     <value>75, 23</value>
   </data>
   <data name="btnNext.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="btnNext.Text" xml:space="preserve">
     <value>Next</value>
