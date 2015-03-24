@@ -60,12 +60,12 @@
             this.rdbMultipleResponse = new System.Windows.Forms.RadioButton();
             this.grpExitText = new System.Windows.Forms.GroupBox();
             this.picExitCheckmark = new System.Windows.Forms.PictureBox();
-            this.txtOrganizationMirror = new System.Windows.Forms.TextBox();
             this.txtSurveyIDMirror = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblDepMirr = new System.Windows.Forms.Label();
             this.lblOrgMirr = new System.Windows.Forms.Label();
             this.lblSurvNumMirr = new System.Windows.Forms.Label();
+            this.txtOrganizationMirror = new System.Windows.Forms.TextBox();
             this.txtDepartmentMirror = new System.Windows.Forms.TextBox();
             this.pnlSurveyNameMirror = new System.Windows.Forms.Panel();
             this.txtSurveyNameMirror = new System.Windows.Forms.TextBox();
@@ -193,11 +193,13 @@
             this.tabPublishWebForm.Controls.Add(this.tabEntry);
             this.tabPublishWebForm.Name = "tabPublishWebForm";
             this.tabPublishWebForm.SelectedIndex = 0;
+            this.tabPublishWebForm.TabStop = false;
             this.tabPublishWebForm.SelectedIndexChanged += new System.EventHandler(this.tabPublishWebForm_SelectedIndexChanged);
             // 
             // tabIntro
             // 
             resources.ApplyResources(this.tabIntro, "tabIntro");
+            this.tabIntro.CausesValidation = false;
             this.tabIntro.Controls.Add(this.ClosingTimecomboBox);
             this.tabIntro.Controls.Add(this.closingTimelabel);
             this.tabIntro.Controls.Add(this.StartTimelabel);
@@ -322,6 +324,7 @@
             // 
             resources.ApplyResources(this.rdbMultipleResponse, "rdbMultipleResponse");
             this.rdbMultipleResponse.Name = "rdbMultipleResponse";
+            this.rdbMultipleResponse.TabStop = true;
             this.rdbMultipleResponse.UseVisualStyleBackColor = true;
             // 
             // grpExitText
@@ -340,14 +343,6 @@
             resources.ApplyResources(this.picExitCheckmark, "picExitCheckmark");
             this.picExitCheckmark.Name = "picExitCheckmark";
             this.picExitCheckmark.TabStop = false;
-            // 
-            // txtOrganizationMirror
-            // 
-            resources.ApplyResources(this.txtOrganizationMirror, "txtOrganizationMirror");
-            this.txtOrganizationMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.txtOrganizationMirror.Name = "txtOrganizationMirror";
-            this.txtOrganizationMirror.ReadOnly = true;
-            this.txtOrganizationMirror.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtOrganizationMirror_MouseClick);
             // 
             // txtSurveyIDMirror
             // 
@@ -382,6 +377,14 @@
             // 
             resources.ApplyResources(this.lblSurvNumMirr, "lblSurvNumMirr");
             this.lblSurvNumMirr.Name = "lblSurvNumMirr";
+            // 
+            // txtOrganizationMirror
+            // 
+            resources.ApplyResources(this.txtOrganizationMirror, "txtOrganizationMirror");
+            this.txtOrganizationMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.txtOrganizationMirror.Name = "txtOrganizationMirror";
+            this.txtOrganizationMirror.ReadOnly = true;
+            this.txtOrganizationMirror.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtOrganizationMirror_MouseClick);
             // 
             // txtDepartmentMirror
             // 
