@@ -1032,7 +1032,7 @@ namespace Epi.Windows.Enter.PresentationLogic
 
         #endregion  //Public Methods
 
-        #region Private Methods
+        #region Private Methods       
 
         /// <summary>
         /// Loads the current panel
@@ -1041,57 +1041,72 @@ namespace Epi.Windows.Enter.PresentationLogic
         {
                        
             DataRow row = page.GetMetadata().GetPageSetupData(page.GetView());
+           
+            if (_fieldPanel != null)
+            {
+              foreach(Control control in _fieldPanel.Controls)              
+                {
+                    control.Font = null;       //GDI Memory leak           
+                }              
+            }
             _fieldPanel = new Panel();
-
+           
             float dpiX;
             Graphics graphics = _fieldPanel.CreateGraphics();
             dpiX = graphics.DpiX;
-
-            int height = (int)row["Height"];
-            int width = (int)row["Width"];
-
-            if (dpiX != 96)
+            try
             {
-                float scaleFactor = (dpiX * 1.041666666f) / 100;
-                height = Convert.ToInt32(((float)height) * (float)scaleFactor);
-                width = Convert.ToInt32(((float)width) * (float)scaleFactor);
-            }
+                int height = (int)row["Height"];
+                int width = (int)row["Width"];
 
-            if (row["Orientation"].ToString() == "Landscape")
-            {
-                _fieldPanel.Size = new System.Drawing.Size(height, width);
-            }
-            else
-            {
-                _fieldPanel.Size = new System.Drawing.Size(width, height);
-            }
-
-            canvas.Size = _fieldPanel.Size;
-            canvas.SetPanelProperties(_fieldPanel);
-
-            currentPage = page;
-
-            ControlFactory factory = ControlFactory.Instance;
-            canvas.canvasPanel.Size = new Size(_fieldPanel.Size.Width, _fieldPanel.Size.Height);
-
-            List<Control> controls = factory.GetPageControls(page, canvas.canvasPanel.Size);
-            canvas.AddControlsToPanel(controls, _fieldPanel);
-
-            SetZeeOrderOfGroups(_fieldPanel);
-
-            _fieldPanel.Visible = false;
-            _fieldPanel.SendToBack();
-
-            foreach (Control controlOnPanel in _fieldPanel.Controls)
-            {
-                if (controlOnPanel is DataGridView)
+                if (dpiX != 96)
                 {
-                    ((DataGridView)controlOnPanel).DataSource = null;
+                    float scaleFactor = (dpiX * 1.041666666f) / 100;
+                    height = Convert.ToInt32(((float)height) * (float)scaleFactor);
+                    width = Convert.ToInt32(((float)width) * (float)scaleFactor);
                 }
 
+                if (row["Orientation"].ToString() == "Landscape")
+                {
+                    _fieldPanel.Size = new System.Drawing.Size(height, width);
+                }
+                else
+                {
+                    _fieldPanel.Size = new System.Drawing.Size(width, height);
+                }
+
+                canvas.Size = _fieldPanel.Size;
+                canvas.SetPanelProperties(_fieldPanel);
+
+                currentPage = page;
+
+                ControlFactory factory = ControlFactory.Instance;
+                canvas.canvasPanel.Size = new Size(_fieldPanel.Size.Width, _fieldPanel.Size.Height);
+
+                List<Control> controls = factory.GetPageControls(page, canvas.canvasPanel.Size);
+                canvas.AddControlsToPanel(controls, _fieldPanel);
+
+                SetZeeOrderOfGroups(_fieldPanel);
+
+                _fieldPanel.Visible = false;
+                _fieldPanel.SendToBack();
+
+                foreach (Control controlOnPanel in _fieldPanel.Controls)
+                {
+                    if (controlOnPanel is DataGridView)
+                    {
+                        ((DataGridView)controlOnPanel).DataSource = null;
+                    }
+
+                }
+                while (canvas.canvasPanel.Controls.Count > 0)
+                    canvas.canvasPanel.Controls[0].Dispose();//User Handles Memory leak
+                // canvas.canvasPanel.Controls.Clear();
+                canvas.canvasPanel.Controls.Add(_fieldPanel);
             }
-            canvas.canvasPanel.Controls.Clear();
-            canvas.canvasPanel.Controls.Add(_fieldPanel);
+            finally
+            {                           
+            }
         }
 
         private void DisposePanel()
