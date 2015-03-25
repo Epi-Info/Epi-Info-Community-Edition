@@ -52,8 +52,9 @@ namespace EpiDashboard
         private RequestUpdateStatusDelegate requestUpdateStatus;
         private CheckForCancellationDelegate checkForCancellation;
 
+
         #endregion // Private Members
-        
+
         #region Events
         public event Mapping.RecordSelectedHandler RecordSelected;
         #endregion // Events
@@ -153,7 +154,15 @@ namespace EpiDashboard
         public override void ShowHideConfigPanel()
         {
             Popup = new DashboardPopup();
-            Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
+            if (this.Parent is DragCanvas)
+            {
+                Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
+            }
+            else
+            {
+                Popup.Parent = this.Parent as Grid;
+            }
+
             Controls.GadgetProperties.LineListProperties properties = new Controls.GadgetProperties.LineListProperties(this.DashboardHelper, this, (LineListParameters)Parameters, StrataGridList, columnOrder);
 
             properties.Width = 800;
@@ -239,6 +248,7 @@ namespace EpiDashboard
                     lcv.GroupDescriptions.Add(new PropertyGroupDescription(ListParameters.SecondaryGroupField.Trim())); // for second category
                 }
                 dg.ItemsSource = lcv;
+
             }
             else
             {
@@ -436,7 +446,7 @@ namespace EpiDashboard
                     this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), ex.Message);
                 }
                 finally
-                {   
+                {
                     stopwatch.Stop();
                     Debug.Print("Line list gadget took " + stopwatch.Elapsed.ToString() + " seconds to complete with " + DashboardHelper.RecordCount.ToString() + " records and the following filters:");
                     Debug.Print(DashboardHelper.DataFilters.GenerateDataFilterString());
@@ -753,7 +763,7 @@ namespace EpiDashboard
             {
                 if (IsHostedByEnter)
                 {
-                    HideConfigPanel(); 
+                    HideConfigPanel();
                 }
                 waitPanel.Visibility = System.Windows.Visibility.Visible;
 
@@ -870,7 +880,7 @@ namespace EpiDashboard
             XmlElement listItemElement = doc.CreateElement("listFields");
 
             string xmlListItemString = string.Empty;
-            
+
             foreach (string columnName in listParameters.ColumnNames)
             {
                 xmlListItemString = xmlListItemString + "<listField>" + columnName.Replace("<", "&lt;") + "</listField>";
@@ -1011,7 +1021,7 @@ namespace EpiDashboard
                         foreach (XmlElement field in child.ChildNodes)
                         {
                             List<string> fields = new List<string>();
-                            
+
                             SortOrder order = SortOrder.Ascending;
 
                             if (field.Attributes.Count >= 1 && field.Attributes["order"].Value == "DESC")
@@ -1097,6 +1107,14 @@ namespace EpiDashboard
             }
 
             DataGrid dg = GetDataGrid();
+
+
+            //if (dg.ItemsSource is ListCollectionView)
+            //{
+            //    StrataCount = cvGroup.Count;
+            //}
+            //for (int i = 0; i < StrataCount; i++)
+            //{
             if (dg != null && dg.ItemsSource != null)
             {
                 htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
@@ -1121,13 +1139,73 @@ namespace EpiDashboard
                     {
                         htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(lcv.SourceCollection as DataView));
                     }
+
+                    //htmlBuilder.AppendLine(ConvertGroupToHtmlString(cvGroup[0]));
+
+                    //htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(cvGroup[0] as DataView));
                 }
 
                 htmlBuilder.AppendLine("</table>");
             }
+            //}
+
+
 
             return htmlBuilder.ToString();
         }
+
+        //public string ConvertGroupToHtmlString(CollectionViewGroup group)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    DataGrid dg = GetDataGrid();
+        //    ListCollectionView lcv = dg.ItemsSource as ListCollectionView;
+        //    sb.AppendLine(" <tr>");
+        //    foreach (DataColumn dc in group.Items)
+        //    {
+        //        sb.AppendLine("  <th style=\"width: auto;\">");
+        //        sb.AppendLine("  " + dc.ColumnName);
+        //        sb.AppendLine("  </th>");
+        //    }
+        //    sb.AppendLine("</tr>");
+
+        //    foreach (var row in group.Items)
+        //    {
+        //        sb.AppendLine(" <tr>");
+        //        for (int i = 0; i < lcv.ItemProperties.Count ; i++)
+        //        {
+        //            sb.AppendLine("  <td class=\"value\">");
+        //            object value = row.[i];
+        //            string strValue = value.ToString().Trim();
+
+        //            if (String.IsNullOrEmpty(strValue))
+        //            {
+        //                strValue = "&nbsp;";
+        //            }
+
+        //            sb.Append(strValue);
+        //            sb.AppendLine("  </td>");
+        //        }
+        //        //foreach (DataColumn dc in dt.Columns)
+        //        //{
+        //        //    sb.AppendLine("  <td class=\"value\">");
+        //        //    object value = row[dc];
+        //        //    string strValue = value.ToString().Trim();
+
+        //        //    if (String.IsNullOrEmpty(strValue))
+        //        //    {
+        //        //        strValue = "&nbsp;";
+        //        //    }
+
+        //        //    sb.Append(strValue);
+        //        //    sb.AppendLine("  </td>");
+        //        //}
+        //        sb.AppendLine(" </tr>");
+        //    }
+
+        //    sb.Replace("\n", "");
+
+        //    return sb.ToString();
+        //}
 
         private string customOutputHeading;
         private string customOutputDescription;
