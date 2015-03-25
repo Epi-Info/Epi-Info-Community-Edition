@@ -1040,12 +1040,20 @@ namespace Epi.Windows.Enter.PresentationLogic
         {
                        
             DataRow row = page.GetMetadata().GetPageSetupData(page.GetView());
+            if (_fieldPanel != null)
+            {
+                foreach (Control control in _fieldPanel.Controls)
+                {
+                    control.Font = null;       //GDI Memory leak           
+                }
+            }
             _fieldPanel = new Panel();
 
             float dpiX;
             Graphics graphics = _fieldPanel.CreateGraphics();
             dpiX = graphics.DpiX;
-
+             try
+            {
             int height = (int)row["Height"];
             int width = (int)row["Width"];
 
@@ -1089,8 +1097,14 @@ namespace Epi.Windows.Enter.PresentationLogic
                 }
 
             }
-            canvas.canvasPanel.Controls.Clear();
+            while (canvas.canvasPanel.Controls.Count > 0)
+                canvas.canvasPanel.Controls[0].Dispose();//User Handles Memory leak
+            // canvas.canvasPanel.Controls.Clear();
             canvas.canvasPanel.Controls.Add(_fieldPanel);
+            }
+             finally
+             {
+             }
         }
 
         private void DisposePanel()
