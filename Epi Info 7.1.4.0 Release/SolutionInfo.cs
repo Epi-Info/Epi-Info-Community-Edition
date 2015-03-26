@@ -38,9 +38,9 @@ using Epi;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("7.1.*")]
 [assembly: AssemblyFileVersion("7.1.5.0")]
-[assembly: AssemblyInformationalVersion("7.1.5.0")]
+[assembly: AssemblyInformationalVersion("7.1.5.1")]
 [assembly: SatelliteContractVersion("7.0.0.0")]
-[assembly: Epi.AssemblyReleaseDateAttribute("03/10/2015")]
+[assembly: Epi.AssemblyReleaseDateAttribute("03/25/2015")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
