@@ -230,6 +230,7 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             resources.ApplyResources(this.lbxDataSourceObjects, "lbxDataSourceObjects");
             this.lbxDataSourceObjects.Name = "lbxDataSourceObjects";
+            this.lbxDataSourceObjects.Sorted = true;
             this.lbxDataSourceObjects.SelectedIndexChanged += new System.EventHandler(this.lbxDataSourceObjects_SelectedIndexChanged);
             // 
             // btnSaveOnly
