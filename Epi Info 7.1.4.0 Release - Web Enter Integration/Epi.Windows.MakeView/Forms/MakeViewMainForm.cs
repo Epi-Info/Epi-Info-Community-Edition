@@ -4470,7 +4470,8 @@ namespace Epi.Windows.MakeView.Forms
             Configuration config = Configuration.GetNewInstance();
             int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
 
-
+            try
+            {
             UserPrincipal User = GetUser(UserName);
 
             EWEManagerService.UserAuthenticationRequest Request = new EWEManagerService.UserAuthenticationRequest();
@@ -4478,8 +4479,7 @@ namespace Epi.Windows.MakeView.Forms
             rUser.EmailAddress = User.EmailAddress;
             Request.User = rUser;
             Request.User.Operation = EWEManagerService.ConstantOperationMode.NoChange;
-            try
-                {
+           
            var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
             var Result = client.GetUser(Request);
             if (Result != null && ISWindowAuthMode == 1)
