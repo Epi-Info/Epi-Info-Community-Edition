@@ -337,4 +337,8 @@ Determines if more than the specified number of fields within a group contain mi
   <data name="OVERWRITE_FIELD_DATA" xml:space="preserve">
     <value>The destination field already exists. Do you want to overwrite the data in this field?</value>
   </data>
+  <data name="TEXT_TO_DATE_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Date
+Attempts to convert data stored as text into date data. Useful if date are stored in a text column and operations need to be carried out on the data. Cannot convert alpha-numeric data, e.g. "A16" could not be converted.</value>
+  </data>
 </root>

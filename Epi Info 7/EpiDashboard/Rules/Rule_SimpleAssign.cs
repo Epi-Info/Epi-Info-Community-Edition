@@ -23,7 +23,7 @@ namespace EpiDashboard.Rules
         private bool isDefective = false;        
         #endregion // Private Members
 
-        #region Constructors
+        #region Constructors 
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -721,6 +721,27 @@ namespace EpiDashboard.Rules
                         row[this.DestinationColumnName] = result;
                     }
                     else
+                    {
+                        row[this.DestinationColumnName] = DBNull.Value;
+                    }
+                }
+            }
+            else if (AssignmentType.Equals(SimpleAssignType.TextToDate))
+            {
+                string textColumnName = AssignmentParameters[0];
+                string value = row[textColumnName].ToString().Trim();
+                if (row[textColumnName] == null || string.IsNullOrEmpty(value))
+                {
+                    row[this.DestinationColumnName] = DBNull.Value;
+                }
+                else
+                {
+                    try
+                    {
+                        DateTime? dateField = DateTime.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+                        row[this.DestinationColumnName] = dateField;
+                    }
+                    catch (Exception)
                     {
                         row[this.DestinationColumnName] = DBNull.Value;
                     }
