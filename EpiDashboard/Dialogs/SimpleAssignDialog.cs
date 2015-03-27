@@ -15,7 +15,7 @@ using EpiDashboard.Rules;
 
 namespace EpiDashboard.Dialogs
 {
-    public partial class SimpleAssignDialog : DialogBase
+    public partial class SimpleAssignDialog : DialogBase 
     {
         #region Private Members
         private DashboardHelper dashboardHelper;
@@ -143,6 +143,9 @@ namespace EpiDashboard.Dialogs
                 case SimpleAssignType.StripDate:
                     cbxAssignmentType.SelectedIndex = 28;
                     break;
+                case SimpleAssignType.TextToDate:
+                    cbxAssignmentType.SelectedIndex = 29;
+                    break;
             }
 
             FillSelectionComboBoxes();
@@ -262,6 +265,7 @@ namespace EpiDashboard.Dialogs
                         cbxParam1.DataSource = fieldNames1;
                         break;
                     case 13:
+                    case 29:
                         columnDataType = ColumnDataType.Text;
                         fieldNames1 = dashboardHelper.GetFieldsAsList(columnDataType);
                         cbxParam1.DataSource = fieldNames1;
@@ -548,6 +552,10 @@ namespace EpiDashboard.Dialogs
                     friendlyLabel = friendlyLabel + " the date component of " + param1;
                     assignmentType = SimpleAssignType.StripDate;
                     break;
+                case 29: //"Convert text data to date data":
+                    friendlyLabel = friendlyLabel + " the date representation of " + param1;
+                    assignmentType = SimpleAssignType.TextToDate;
+                    break;
             }
             
             AssignRule = new Rule_SimpleAssign(this.dashboardHelper, friendlyLabel, txtDestinationField.Text, assignmentType, parameters);
@@ -650,6 +658,9 @@ namespace EpiDashboard.Dialogs
                 case 28:
                     txtDescription.Text = SimpleAssignmentStrings.STRIP_DATE_DESCRIPTION;
                     break;
+                case 29: //"Convert text data to date data":
+                    txtDescription.Text = SimpleAssignmentStrings.TEXT_TO_DATE_DESCRIPTION;
+                    break;
             }
         }
         #endregion // Private Methods
@@ -728,6 +739,7 @@ namespace EpiDashboard.Dialogs
                     break;
                 case 6: // "Convert text data to numeric data":
                 case 7: // "Find the length of text data":                
+                case 29: // "Convert text data to date data":   
                     cbxParam1.Visible = true;
                     cbxParam2.Visible = false;
                     cbxParam3.Visible = false;

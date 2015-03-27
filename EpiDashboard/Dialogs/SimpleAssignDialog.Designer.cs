@@ -16,7 +16,7 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
-            }
+            } 
             base.Dispose(disposing);
         }
 
@@ -190,7 +190,8 @@
             resources.GetString("cbxAssignmentType.Items25"),
             resources.GetString("cbxAssignmentType.Items26"),
             resources.GetString("cbxAssignmentType.Items27"),
-            resources.GetString("cbxAssignmentType.Items28")});
+            resources.GetString("cbxAssignmentType.Items28"),
+            resources.GetString("cbxAssignmentType.Items29")});
             resources.ApplyResources(this.cbxAssignmentType, "cbxAssignmentType");
             this.cbxAssignmentType.Name = "cbxAssignmentType";
             this.cbxAssignmentType.SelectedIndexChanged += new System.EventHandler(this.cbxAssignmentType_SelectedIndexChanged);
