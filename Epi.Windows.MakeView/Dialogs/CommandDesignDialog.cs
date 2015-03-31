@@ -195,6 +195,11 @@ namespace Epi.Windows.MakeView.Dialogs
                 {
                     cmb.Items.Add(var.Name.ToString());
                 }
+                //--Ei-99
+                if (cmb.Name == "cmbAvailVar")
+                if ((var is Epi.Fields.FirstSaveTimeField) || (var is Epi.Fields.LastSaveTimeField)) 
+                    { cmb.Items.Add(var.Name.ToString());}
+                //--
             }
             cmb.EndUpdate();
             cmb.Sorted = true;
