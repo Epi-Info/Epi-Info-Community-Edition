@@ -4469,7 +4469,7 @@ namespace Epi.Windows.MakeView.Forms
             string UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
             Configuration config = Configuration.GetNewInstance();
             int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
-
+            
             try
             {
             UserPrincipal User = GetUser(UserName);
@@ -4492,25 +4492,31 @@ namespace Epi.Windows.MakeView.Forms
             }
              catch (Exception ex) 
                  {
-                 Template template = new Template(this.mediator);
+                /* Template template = new Template(this.mediator);
                  WebEnterOptions dialog2 = new WebEnterOptions();
                  DialogResult result3 = dialog2.ShowDialog();
                  if (result3 == DialogResult.Cancel)
                  {
                      iscancel = true;
                      dialog2.Close();
-                 }
+                 }*/
+                 
 
-                 //if (result3 == System.Windows.Forms.DialogResult.OK)
-                 //    {
+                  if (ISWindowAuthMode == 0)
+                  {
+                      if (LoginInfo.UserID == -1)
+                      {
+                          Template template = new Template(this.mediator);
+                          UserAuthentication dialog = new UserAuthentication();
+                          DialogResult result = dialog.ShowDialog();
+                          if (result == System.Windows.Forms.DialogResult.OK)
+                          {
+                              dialog.Close();
+                              IsValidUser = true;
+                          }
 
-                 //    WebEnterPublishDialog dialog = new WebEnterPublishDialog(this.EWEOrganizationKey, this.mediator, template.CreateWebEnterTemplate());
-                 //    DialogResult result = dialog.ShowDialog();
-                 //    if (result == System.Windows.Forms.DialogResult.Cancel)
-                 //        {
-                 //        this.EWEOrganizationKey = dialog.GetOrgKey;
-                 //        }
-
+                      }
+                  }
 
                  //    }
                  return IsValidUser;
