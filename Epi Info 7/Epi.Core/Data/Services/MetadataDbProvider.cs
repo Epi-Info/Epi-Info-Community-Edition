@@ -4427,7 +4427,7 @@ namespace Epi.Data.Services
                     query.Parameters.Add(new QueryParameter("@HasRetainImageSize", DbType.Boolean, false));
                     query.Parameters.Add(new QueryParameter("@HasFont", DbType.Boolean, false));
                     query.Parameters.Add(new QueryParameter("@IsDropDown", DbType.Boolean, false));
-                    query.Parameters.Add(new QueryParameter("@IsGridColumn", DbType.Boolean, true));
+                    query.Parameters.Add(new QueryParameter("@IsGridColumn", DbType.Boolean, false));
                     query.Parameters.Add(new QueryParameter("@DataTypeId", DbType.Int32, 1));
                     query.Parameters.Add(new QueryParameter("@IsSystem", DbType.Boolean, true));
                     query.Parameters.Add(new QueryParameter("@DefaultPatternId", DbType.Int32, 0));
