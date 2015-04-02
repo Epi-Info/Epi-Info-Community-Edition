@@ -3418,7 +3418,7 @@ namespace Epi.Windows.MakeView.Forms
               DoUpDateMode(IsDraftMode, OrganizationKey, WebSurveyId);
             }
 
-            else
+            /*else
     
             {
             Configuration config = Configuration.GetNewInstance(); 
@@ -3446,7 +3446,7 @@ namespace Epi.Windows.MakeView.Forms
             
                 }
 
-             }
+             }*/
             }
 
         private void DoUpDateMode(bool IsDraftMode, string OrganizationKey, string WebSurveyId)
@@ -4035,7 +4035,7 @@ namespace Epi.Windows.MakeView.Forms
 
                     DoQuickPublish(template);
                     }
-                else // Validate User
+                /*else // Validate User
                     {
 
                          Configuration config = Configuration.GetNewInstance();
@@ -4063,7 +4063,7 @@ namespace Epi.Windows.MakeView.Forms
                             
                             }
                                    
-                    }
+                    }*/
                 }
             catch (FaultException<CustomFaultException> cfe)
                 {
