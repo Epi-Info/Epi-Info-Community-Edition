@@ -633,6 +633,17 @@ namespace Epi.Analysis.Statistics
                     }
                 }
 
+                DataView view = new DataView(_regressionTable);
+                DataTable distinctValues = new DataTable();
+                distinctValues = view.ToTable(true, "SeriesName");
+
+                bool hideLegend = false;
+
+                if (distinctValues.Rows.Count == 1 && distinctValues.Rows[0][0].ToString() == "COUNT")
+                {
+                    hideLegend = true;
+                }
+
                 objectElement = objectElement
                     + silverlight.Graph
                     (
@@ -645,7 +656,8 @@ namespace Epi.Analysis.Statistics
                         _graphInterval,
                         _graphIntervalUnits,
                         _graphStartFrom,
-                        _regressionTable
+                        _regressionTable,
+                        hideLegend
                     );
 
                 _regressionTable.Rows.Clear();

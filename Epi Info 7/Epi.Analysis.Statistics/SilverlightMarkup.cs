@@ -17,7 +17,7 @@ namespace Epi
         // this format is only used to write and read the inputParams
         const string _dateTimeFormat = "MM/dd/yyyy·hh:mm:ss.fff·tt";
 
-        public string Graph(string chartType, string chartTitle, string dependentLabel, string independentLabel, string independentValueFormat, string dependentValueFormat, string interval, string intervalUnit, object startFrom, DataTable regressionTable)
+        public string Graph(string chartType, string chartTitle, string dependentLabel, string independentLabel, string independentValueFormat, string dependentValueFormat, string interval, string intervalUnit, object startFrom, DataTable regressionTable, bool hideLegend = false)
         {
             string inputParams = string.Empty;
             inputParams = BuildInputParams(chartType, chartTitle, dependentLabel, independentLabel, independentValueFormat, dependentValueFormat, interval, intervalUnit, startFrom, regressionTable);
@@ -27,16 +27,29 @@ namespace Epi
                 return string.Empty;
             }
 
-            return Graph(inputParams);
+            if (chartType == SilverlightStatics.Pie && hideLegend)
+            {
+                hideLegend = false;
+            }
+
+            return Graph(inputParams, hideLegend);
         }
 
-        public string Graph(string inputParams)
+        public string Graph(string inputParams, bool hideLegend = false)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(@"<br clear=""all"">");
             sb.AppendLine(@"<div id=""silverlightControlHost"">");
             sb.AppendLine(@"<object data=""data:application/x-silverlight-2,""");
-            sb.AppendLine(@"type=""application/x-silverlight-2"" style=""width:820; height: 615px"">");
+            if (hideLegend)
+            {
+                sb.AppendLine(@"type=""application/x-silverlight-2"" style=""width:720; height: 615px"">");
+            }
+            else
+            {
+                sb.AppendLine(@"type=""application/x-silverlight-2"" style=""width:820; height: 615px"">");
+            }
+            
             sb.AppendLine(@"<param name=""initparams"" value=""" + inputParams + @"""/>");
             sb.AppendLine(@"<param name=""source"" value=""SilverlightApplication.xap"" />");
             sb.AppendLine(@"<param name=""minRuntimeVersion"" value=""4.0.50826.0"" />");
