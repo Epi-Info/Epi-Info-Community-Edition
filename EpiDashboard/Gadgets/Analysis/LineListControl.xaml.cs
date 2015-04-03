@@ -111,6 +111,17 @@ namespace EpiDashboard
         /// <param name="pageNumber">The page number</param>
         public void SelectPageNumber(int pageNumber)
         {
+            Parameters.ColumnNames.Clear();
+            Parameters.ColumnNames.Add("Page " + pageNumber);
+            if (IsHostedByEnter)
+            {
+                //if (dashboardHelper.IsUsingEpiProject && checkboxAllowUpdates.IsChecked == true)
+                //{
+                if (Parameters.ColumnNames.Contains("UniqueKey"))
+                    Parameters.ColumnNames.Remove("UniqueKey");
+                Parameters.ColumnNames.Add("UniqueKey");
+                //}
+            }
         }
 
         private DataGrid GetDataGrid()
