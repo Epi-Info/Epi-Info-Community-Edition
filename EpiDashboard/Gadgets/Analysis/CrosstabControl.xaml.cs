@@ -3855,28 +3855,49 @@ namespace EpiDashboard
                             string tableDataTagOpen = "<td>";
                             string tableDataTagClose = "</td>";
 
+                            if (columnNumber == 0)
+                            {
+                                //htmlBuilder.AppendLine("<tr>");
+                                writer.RenderBeginTag(HtmlTextWriterTag.Tr);
+                            }
+
                             //tableDataTagOpen
-                            if (rowNumber == 0)
+                            if (rowNumber == 0 && columnNumber < grid.ColumnDefinitions.Count - 1)
                             {
                                 tableDataTagOpen = "<th>";
                                 tableDataTagClose = "</th>";
+                                writer.RenderBeginTag(HtmlTextWriterTag.Th);
+                                writer.Write(value);
+                                writer.RenderEndTag();
+                            }
+                            else if (rowNumber == 0 && columnNumber >= grid.ColumnDefinitions.Count - 1)
+                            {
+                                writer.RenderBeginTag(HtmlTextWriterTag.Th);
+                            }
+                            else if (rowNumber > 0 && rowNumber < grid.RowDefinitions.Count - 1 && columnNumber == 0)
+                            {
+                                //tableDataTagOpen = "<td class=\"value\">";
+                                writer.AddAttribute(HtmlTextWriterAttribute.Class, "value");
+                                writer.RenderBeginTag(HtmlTextWriterTag.Td);
+                                writer.Write(value);
+                                writer.RenderEndTag();
                             }
                             else if (rowNumber > 0 && rowNumber < grid.RowDefinitions.Count - 1 && columnNumber < grid.ColumnDefinitions.Count - 1)
                             {
                                 //tableDataTagOpen = "<td style=\"background-color: rgb(" + backColor.Color.R.ToString() + ", " + backColor.Color.G.ToString() + ", " + backColor.Color.B.ToString() + ");\">";
                                 writer.AddAttribute(HtmlTextWriterAttribute.Style, "background-color: rgb(" + backColor.Color.R.ToString() + ", " + backColor.Color.G.ToString() + ", " + backColor.Color.B.ToString() + ");");
                                 writer.RenderBeginTag(HtmlTextWriterTag.Td);
+                                writer.Write(value);
+                                writer.RenderEndTag();
                             }
-
-                            if (columnNumber == 0)
+                            else if (rowNumber > 0 && rowNumber < grid.RowDefinitions.Count - 1 && columnNumber >= grid.ColumnDefinitions.Count - 1)
                             {
-                                //htmlBuilder.AppendLine("<tr>");
-                                writer.RenderBeginTag(HtmlTextWriterTag.Tr);
+                                //tableDataTagOpen = "<td style=\"background-color: rgb(" + backColor.Color.R.ToString() + ", " + backColor.Color.G.ToString() + ", " + backColor.Color.B.ToString() + ");\">";
+                                writer.RenderBeginTag(HtmlTextWriterTag.Td);
                             }
-                            if (columnNumber == 0 && rowNumber > 0)
+                            else if (rowNumber >= grid.RowDefinitions.Count - 1)
                             {
-                                //tableDataTagOpen = "<td class=\"value\">";
-                                writer.AddAttribute(HtmlTextWriterAttribute.Class, "value");
+                                //tableDataTagOpen = "<td style=\"background-color: rgb(" + backColor.Color.R.ToString() + ", " + backColor.Color.G.ToString() + ", " + backColor.Color.B.ToString() + ");\">";
                                 writer.RenderBeginTag(HtmlTextWriterTag.Td);
                             }
 
@@ -3888,29 +3909,53 @@ namespace EpiDashboard
                                 writer.AddAttribute(HtmlTextWriterAttribute.Class, "total");
                                 writer.RenderBeginTag(HtmlTextWriterTag.Span);
                                 writer.Write(value);
-                                writer.RenderEndTag(); 
+                                try
+                                {
+                                    writer.RenderEndTag();
+                                    writer.RenderEndTag();
+                                }
+                                catch (Exception ex)
+                                {
+                                    Exception eexx = ex;
+                                }
                             }
 
                             //htmlBuilder.AppendLine(tableDataTagOpen + formattedValue + tableDataTagClose);
-                            writer.RenderEndTag();
+//                            writer.RenderEndTag();
 
                             if (columnNumber >= grid.ColumnDefinitions.Count - 1)
                             {
                                 //htmlBuilder.AppendLine("</tr>");
-                                writer.RenderEndTag();
+                                try
+                                {
+                                    writer.RenderEndTag();
+                                }
+                                catch (Exception ex)
+                                {
+                                    Exception eexx = ex;
+                                }
                             }
                         }
                     }
 
                     //htmlBuilder.AppendLine("</table>");
-                    writer.RenderEndTag();
+                    try
+                    {
+                        writer.RenderEndTag();
+                    }
+                    catch (Exception ex)
+                    {
+                        Exception eexx = ex;
+                    }
 
                     // Chi Square
 
                     Grid chiSquareGrid = GetStrataChiSquareGrid(grid.Tag.ToString());
                     //htmlBuilder.AppendLine("<p></p>");
                     //htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+                    writer.RenderBeginTag(HtmlTextWriterTag.Br);
                     writer.RenderBeginTag(HtmlTextWriterTag.P);
+                    // </p>
                     writer.RenderEndTag();
                     writer.AddAttribute(HtmlTextWriterAttribute.Border, "0");
                     writer.AddAttribute(HtmlTextWriterAttribute.Cellpadding, "0");
@@ -3927,17 +3972,21 @@ namespace EpiDashboard
                             string tableDataTagOpen = "<td>";
                             string tableDataTagClose = "</td>";
 
+                            if (columnNumber == 0)
+                            {
+                                //htmlBuilder.AppendLine("<tr>");
+                                writer.RenderBeginTag(HtmlTextWriterTag.Tr);
+                            }
+
                             if (rowNumber == 0)
                             {
                                 //tableDataTagOpen = "<th>";
                                 //tableDataTagClose = "</th>";
                                 writer.RenderBeginTag(HtmlTextWriterTag.Th);
                             }
-
-                            if (columnNumber == 0)
+                            else
                             {
-                                //htmlBuilder.AppendLine("<tr>");
-                                writer.RenderBeginTag(HtmlTextWriterTag.Tr);
+                                writer.RenderBeginTag(HtmlTextWriterTag.Td);
                             }
 
                             string value = ((TextBlock)control).Text;
@@ -3947,7 +3996,7 @@ namespace EpiDashboard
                             writer.Write(formattedValue);
                             writer.RenderEndTag();
 
-                            if (columnNumber >= grid.ColumnDefinitions.Count - 1)
+                            if (columnNumber >= chiSquareGrid.ColumnDefinitions.Count - 1)
                             {
                                 //htmlBuilder.AppendLine("</tr>");
                                 writer.RenderEndTag();
@@ -3956,7 +4005,15 @@ namespace EpiDashboard
                     }
 
                     //htmlBuilder.AppendLine("</table>");
-                    writer.RenderEndTag();
+                    try
+                    {
+                        writer.RenderEndTag();
+                    }
+                    catch (Exception ex)
+                    {
+                        Exception eexx = ex;
+                    }
+
 
                     string disclaimer = GetStrataChiSquareDisclaimer(grid.Tag.ToString()).Text;
                     if (!string.IsNullOrEmpty(disclaimer))
