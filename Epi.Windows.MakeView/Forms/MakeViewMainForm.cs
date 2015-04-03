@@ -4515,6 +4515,7 @@ namespace Epi.Windows.MakeView.Forms
                           }
 
                       }
+                      IsValidUser = true;
                   }
 
                  //    }
