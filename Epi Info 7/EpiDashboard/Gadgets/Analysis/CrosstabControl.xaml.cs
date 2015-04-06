@@ -3848,6 +3848,14 @@ namespace EpiDashboard
                     string gridName = grid.Tag.ToString();
 
                     //htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
+                    if (!string.IsNullOrEmpty(gridName))
+                    {
+                        //htmlBuilder.AppendLine("<h3>" + gridName + "</h3>");
+                        writer.RenderBeginTag(HtmlTextWriterTag.H3);
+                        writer.Write(gridName);
+                        writer.RenderEndTag();
+
+                    }
                     writer.AddAttribute(HtmlTextWriterAttribute.Style, "height: 7px;");
                     writer.RenderBeginTag(HtmlTextWriterTag.Div);
                     writer.RenderEndTag();
@@ -4002,10 +4010,11 @@ namespace EpiDashboard
                     Grid chiSquareGrid = GetStrataChiSquareGrid(grid.Tag.ToString());
                     //htmlBuilder.AppendLine("<p></p>");
                     //htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-                    writer.RenderBeginTag(HtmlTextWriterTag.Br);
+                    writer.AddAttribute(HtmlTextWriterAttribute.Style, "clear: both");
                     writer.RenderBeginTag(HtmlTextWriterTag.P);
                     // </p>
                     writer.RenderEndTag();
+                    writer.RenderBeginTag(HtmlTextWriterTag.Br);
                     writer.AddAttribute(HtmlTextWriterAttribute.Border, "0");
                     writer.AddAttribute(HtmlTextWriterAttribute.Cellpadding, "0");
                     writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, "0");
