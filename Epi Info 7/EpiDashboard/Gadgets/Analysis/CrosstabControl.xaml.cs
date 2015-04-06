@@ -1209,7 +1209,7 @@ namespace EpiDashboard
                                     rowCount++;
                                 }
                             }
-
+                          
                             double[] tableChiSq = Epi.Statistics.SingleMxN.CalcChiSq(SortedRows, false);
                             double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 2);
                             double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
@@ -1402,7 +1402,8 @@ namespace EpiDashboard
             Expander expander = new Expander();
 
             TextBlock txtExpanderHeader = new TextBlock();
-            txtExpanderHeader.Text = value;
+            txtExpanderHeader.Text =  value;
+           
             txtExpanderHeader.Style = this.Resources["genericOutputExpanderText"] as Style;
 
             string formattedValue = value;
@@ -1425,7 +1426,10 @@ namespace EpiDashboard
                 formattedValue = groupReference + ", " + formattedValue;
             }
 
+            
             txtExpanderHeader.Text = formattedValue;
+            
+
             expander.Header = txtExpanderHeader;
 
             if (columnCount == 3 && table.Rows.Count == 2 && (isRunningGrouped2x2 == null || isRunningGrouped2x2 == true)) // is 2x2
@@ -1465,18 +1469,29 @@ namespace EpiDashboard
                 if (isGrouped)
                 {
                     twoByTwoPanel.ExposureVariable = groupReference;
+                    //--Ei-83
+                    if (crosstabParameters.UsePromptsForColumnNames == true) { twoByTwoPanel.ExposureVariable = ShowFieldPrompt(groupReference); }
+                    //--
                 }
                 else
                 {
                     //twoByTwoPanel.ExposureVariable = this.GadgetOptions.MainVariableName;
                     twoByTwoPanel.ExposureVariable = crosstabParameters.ColumnNames[0];
+                    //--Ei-83
+                    if (crosstabParameters.UsePromptsForColumnNames == true) { twoByTwoPanel.ExposureVariable = ShowFieldPrompt(crosstabParameters.ColumnNames[0]); }
+                    //--
                     if (strataSummaryOnly)
                     {
                         twoByTwoPanel.Visibility = System.Windows.Visibility.Collapsed;
                         expander.Visibility = System.Windows.Visibility.Collapsed;
                     }
                 }
+               
                 twoByTwoPanel.OutcomeVariable = crosstabParameters.CrosstabVariableName;
+                //Ei-83
+                 if (crosstabParameters.UsePromptsForColumnNames == true)
+                    twoByTwoPanel.OutcomeVariable = ShowFieldPrompt(crosstabParameters.CrosstabVariableName);
+                //--
 
                 twoByTwoPanel.OutcomeYesLabel = table.Columns[1].ColumnName;
                 twoByTwoPanel.OutcomeNoLabel = table.Columns[2].ColumnName;
@@ -1700,6 +1715,14 @@ namespace EpiDashboard
                 //tblock1.Text = cbxExposureField.SelectedItem.ToString();
                 tblock1.Text = crosstabParameters.ColumnNames[0];
             }
+            //--EI-83
+            if (crosstabParameters.UsePromptsForColumnNames == true)
+            {
+                string txtcolumnName = tblock1.Text;
+                txtcolumnName = ShowFieldPrompt(txtcolumnName);
+                tblock1.Text = txtcolumnName;
+            }
+            //
 
             Typeface typeFace = new Typeface(new FontFamily("Global User Interface"), tblock1.FontStyle, tblock1.FontWeight, tblock1.FontStretch);
             FormattedText ftxt = new FormattedText(tblock1.Text, System.Globalization.CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, typeFace, tblock1.FontSize, Brushes.Black);
@@ -1735,6 +1758,14 @@ namespace EpiDashboard
             tblock2.FontSize = tblock1.FontSize + 2;
             //tblock2.Text = cbxOutcomeField.SelectedItem.ToString();
             tblock2.Text = crosstabParameters.CrosstabVariableName;
+            //--EI-83
+            if (crosstabParameters.UsePromptsForColumnNames == true)
+            {
+                string txtcolumnName = tblock2.Text;
+                txtcolumnName = ShowFieldPrompt(txtcolumnName);
+                tblock2.Text = txtcolumnName;
+            }
+            //
             tblock2.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             tblock2.VerticalAlignment = System.Windows.VerticalAlignment.Center;
             Grid.SetColumn(tblock2, 1);
@@ -2148,6 +2179,7 @@ namespace EpiDashboard
             }
 
             TextBlock txtValHeader = new TextBlock();
+           
             txtValHeader.Text = freqVar;
             txtValHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtValHeader, 0);
@@ -2155,6 +2187,7 @@ namespace EpiDashboard
             grid.Children.Add(txtValHeader);
 
             int maxColumnLength = MaxColumnLength;
+                      
 
             for (int i = 1; i < columns.Count; i++)
             {
@@ -2179,6 +2212,7 @@ namespace EpiDashboard
             Grid.SetRow(txtRowTotalHeader, 0);
             Grid.SetColumn(txtRowTotalHeader, grid.ColumnDefinitions.Count - 1);
             grid.Children.Add(txtRowTotalHeader);
+           
         }
 
         private void RenderChiSquare(double tableChiSq, double tableChiSqDF, double tableChiSqP, string disclaimer, string value)
@@ -2324,7 +2358,7 @@ namespace EpiDashboard
             Grid.SetColumn(txtValTotals, 0);
             grid.Children.Add(txtValTotals);
 
-            for (int i = 0; i < totalRows.Length; i++)
+           for (int i = 0; i < totalRows.Length; i++)
             {
                 //if (i >= MaxColumns)
                 //{
@@ -2476,6 +2510,7 @@ namespace EpiDashboard
 
             HideConfigPanel();
             CheckAndSetPosition();
+            
         }
 
         protected override void RenderFinishWithWarning(string errorMessage)
@@ -3024,7 +3059,12 @@ namespace EpiDashboard
                 allValuesElement.InnerText = crosstabParameters.ShowAllListValues.ToString();
                 element.AppendChild(allValuesElement);
             }
-
+            //--EI-83
+            //<usepromptsforcolumnnames> + usepromptsforcolumnnames + "<usepromptsforcolumnames>
+            XmlElement usePromptsElement = doc.CreateElement("usepromptsforcolumnnames");
+            usePromptsElement.InnerText = crosstabParameters.UsePromptsForColumnNames.ToString();
+            element.AppendChild(usePromptsElement);
+            //--
             //"<showListLabels>" + checkboxCommentLegalLabels.IsChecked + "</showListLabels>" +
             XmlElement showListLabelsElement = doc.CreateElement("showListLabels");
             if (!String.IsNullOrEmpty(crosstabParameters.ShowCommentLegalLabels.ToString()))
@@ -3317,6 +3357,15 @@ namespace EpiDashboard
                             ((CrosstabParameters)Parameters).ShowCommentLegalLabels = false;
                         }
                         break;
+                    //---Ei-83
+                    case "usepromptsforcolumnnames":
+                        {
+                            bool usePrompts = false;
+                            bool.TryParse(child.InnerText, out usePrompts);
+                            ((CrosstabParameters)Parameters).UsePromptsForColumnNames = usePrompts;
+                        }
+                        break;
+                    //--
                     case "includemissing":
                         if (child.InnerText.ToLower().Equals("true"))
                         {
@@ -4121,6 +4170,20 @@ namespace EpiDashboard
             }
         }
 
+        private string ShowFieldPrompt(string columnName)
+        {
+             Field field = DashboardHelper.GetAssociatedField(columnName);
+             if (field != null && field is IDataField)
+                 {
+                    return (field as IDataField).PromptText;
+                  }
+              else
+                {
+                  return columnName;
+                }
+                
+        }
+
         //private void checkboxIncludeMissing_Checked(object sender, RoutedEventArgs e)
         //{
         //    checkboxOutcomeContinuous.IsChecked = false;
@@ -4183,4 +4246,6 @@ namespace EpiDashboard
         //    }
         //}
     }
+   
+   
 }

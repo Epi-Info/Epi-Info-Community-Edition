@@ -286,6 +286,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.GadgetDescription = txtDesc.Text;
 
             Parameters.ShowAllListValues = (bool)checkboxAllValues.IsChecked;
+            Parameters.UsePromptsForColumnNames = (bool)checkboxUsePrompts.IsChecked; //Ei-83
             Parameters.ShowCommentLegalLabels = (bool)checkboxCommentLegalLabels.IsChecked;
             Parameters.IncludeMissing = (bool) checkboxIncludeMissing.IsChecked;
 
@@ -365,6 +366,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             txtTitle.Text = Parameters.GadgetTitle;
             txtDesc.Text = Parameters.GadgetDescription;
             checkboxAllValues.IsChecked = Parameters.ShowAllListValues;
+            checkboxUsePrompts.IsChecked = Parameters.UsePromptsForColumnNames; //Ei-83
             checkboxCommentLegalLabels.IsChecked = Parameters.ShowCommentLegalLabels;
             checkboxIncludeMissing.IsChecked = Parameters.IncludeMissing;
             checkboxOutcomeContinuous.IsChecked = crosstabParameters.TreatOutcomeAsContinuous;
