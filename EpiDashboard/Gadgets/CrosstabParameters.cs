@@ -14,6 +14,7 @@ namespace EpiDashboard
         public bool StrataSummaryOnly { get; set; }
         public bool SmartTable { get; set; }
         public bool ShowPercents { get; set; }
+        public bool UsePromptsForColumnNames { get; set; } //EI-83
         public List<string> YesValues { get; set; }
         public List<string> NoValues { get; set; }
         public bool HorizontalDisplayMode { get; set; }
@@ -40,6 +41,7 @@ namespace EpiDashboard
             GadgetTitle = "Crosstabulation (MxN, 2x2)";
             TreatOutcomeAsContinuous = false;
             StrataSummaryOnly = false;
+            UsePromptsForColumnNames = false; //EI-83
             SmartTable = true;
             ShowPercents = true;
             YesValues = new List<string>();
@@ -68,6 +70,7 @@ namespace EpiDashboard
             StrataSummaryOnly = parameters.StrataSummaryOnly;
             SmartTable = parameters.SmartTable;
             ShowPercents = parameters.ShowPercents;
+            UsePromptsForColumnNames = parameters.UsePromptsForColumnNames;//EI-83
             YesValues = new List<string>();
             foreach (string YVal in parameters.YesValues)
             {
