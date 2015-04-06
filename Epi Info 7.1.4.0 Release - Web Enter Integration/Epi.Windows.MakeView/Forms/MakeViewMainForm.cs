@@ -4486,7 +4486,26 @@ namespace Epi.Windows.MakeView.Forms
               IsValidUser = true;
               LoginInfo.UserID = Result.User.UserId;
               }
+            if (!IsValidUser)
+                {
+                if (ISWindowAuthMode == 0)
+                    {
+                    if (LoginInfo.UserID == -1)
+                        {
+                        Template template = new Template(this.mediator);
+                        UserAuthentication dialog = new UserAuthentication();
+                        DialogResult result = dialog.ShowDialog();
+                        if (result == System.Windows.Forms.DialogResult.OK)
+                            {
+                            dialog.Close();
+                            IsValidUser = true;
+                            }
 
+                        }
+                    IsValidUser = true;
+                    }
+                    
+                    }
             return IsValidUser;
             }
              catch (Exception ex) 
