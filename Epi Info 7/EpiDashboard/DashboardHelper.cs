@@ -1251,6 +1251,27 @@ namespace EpiDashboard
         }
 
         /// <summary>
+        /// Change SQL Query
+        /// </summary>
+        /// <param name="newQuery">The new query to use</param>
+        public void SetDataDriver(IDbDriver db, string tableName)
+        {
+            // Added for EI-176
+
+            if (!IsUsingEpiProject)
+            {
+                this.db = db;
+                this.TableName = tableName;
+                this.View = null;
+
+                this.DataSet.Tables.Clear();
+                
+                ConstructTableColumnNames();
+                this.dashboardControl.ReCacheDataSource(false);
+            }
+        }
+
+        /// <summary>
         /// Gets the column type of a given column
         /// </summary>
         /// <param name="columnName">The name of the column to check</param>

@@ -3910,6 +3910,12 @@ namespace EpiDashboard
             {
                 DashboardHelper.SetCustomQuery(properties.SqlQuery);
             }
+            else
+            {
+                // TODO: EI-176 - in progress, change this later
+                IDbDriver currentDriver = DashboardHelper.Database;
+                DashboardHelper.SetDataDriver(currentDriver, properties.TableName);
+            }
 
             this.CustomOutputConclusionText = properties.Conclusion;
             this.CustomOutputHeading = properties.Title;

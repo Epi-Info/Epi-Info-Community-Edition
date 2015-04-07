@@ -46,12 +46,26 @@ namespace EpiDashboard.Controls
                 }
 
                 cmbFormName.Text = dashboardHelper.View.Name;
+
+                panelDataSourceProject.Visibility = System.Windows.Visibility.Visible; // Added for EI-176 (in progress)
+                panelDataSourceAdvanced.Visibility = System.Windows.Visibility.Collapsed; // Added for EI-176 (in progress)
+                panelDataSourceOther.Visibility = System.Windows.Visibility.Collapsed; // Added for EI-176 (in progress)
             }
             else
             {
-                if (!string.IsNullOrEmpty(dashboardHelper.CustomQuery))
+                panelDataSourceProject.Visibility = System.Windows.Visibility.Collapsed; // Added for EI-176 (in progress)
+
+                if (!String.IsNullOrEmpty(dashboardHelper.CustomQuery))
                 {
                     SqlQuery = DashboardHelper.CustomQuery;
+                    panelDataSourceAdvanced.Visibility = System.Windows.Visibility.Visible; // Added for EI-176 (in progress)
+                    panelDataSourceOther.Visibility = System.Windows.Visibility.Collapsed; // Added for EI-176 (in progress)
+                }
+                else
+                {
+                    txtDataSource.Text = DashboardHelper.Database.ConnectionString; // Added for EI-176 (in progress)
+                    panelDataSourceAdvanced.Visibility = System.Windows.Visibility.Collapsed; // Added for EI-176 (in progress)
+                    panelDataSourceOther.Visibility = System.Windows.Visibility.Visible; // Added for EI-176 (in progress)
                 }
             }
 
@@ -256,6 +270,18 @@ namespace EpiDashboard.Controls
             set
             {
                 cmbFormName.SelectedItem = value;
+            }
+        }
+
+        public string TableName
+        {
+            get
+            {
+                return txtTableName.Text;
+            }
+            set
+            {
+                txtTableName.Text = value;
             }
         }
 
