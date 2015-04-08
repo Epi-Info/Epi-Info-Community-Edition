@@ -614,7 +614,8 @@ namespace Epi.Analysis.Statistics
                     if (C.ColumnName != "__Values__" && C.ColumnName != "__Count__")
                     {
                         double ColVal = 0;
-                        double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                      //  double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                        double.TryParse(R[C.ColumnName].ToString(), out ColVal);
 
                         if (ColumnTotalSet.ContainsKey(C.ColumnName))
                         {
@@ -809,7 +810,8 @@ namespace Epi.Analysis.Statistics
                     if (C.ColumnName != "__Values__" && C.ColumnName != "__Count__")
                     {
                         double ColVal = 0;
-                        double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                       // double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                        double.TryParse(R[C.ColumnName].ToString(), out ColVal);
                         RowTotal += ColVal;
                         pHTMLString.Append("<td align=\"right\">");
                         pHTMLString.Append(GetPrintValue(pCrossTabVariable, ColVal.ToString(), this.Context.SetProperties));
@@ -824,7 +826,8 @@ namespace Epi.Analysis.Statistics
                     if (C.ColumnName != "__Values__" && C.ColumnName != "__Count__")
                     {
                         double ColVal = 0;
-                        double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                       // double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                        double.TryParse(R[C.ColumnName].ToString(), out ColVal);
                         if (this.config.Settings.ShowPercents)
                         {
                             RowPercent.Append("<td align=\"right\">");
