@@ -3861,7 +3861,7 @@ namespace EpiDashboard
                     writer.RenderEndTag();
 
                     //htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-                    writer.AddAttribute(HtmlTextWriterAttribute.Align, "left");
+//                    writer.AddAttribute(HtmlTextWriterAttribute.Align, "left");
                     writer.AddAttribute(HtmlTextWriterAttribute.Border, "0");
                     writer.AddAttribute(HtmlTextWriterAttribute.Cellpadding, "0");
                     writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, "0");
