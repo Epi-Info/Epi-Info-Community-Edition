@@ -122,8 +122,13 @@ namespace EpiDashboard.Gadgets.Charting
                 xyChart.Legend.FontSize = chtParameters.LegendFontSize;
 
                 xAxisCoordinates.Angle = chtParameters.XAxisAngle;
+               
 
-                tblockYAxisLabel.Text = chtParameters.YAxisLabel;
+                //--Ei-196
+                 //tblockYAxisLabel.Text = chtParameters.YAxisLabel;
+                 tblockYAxisLabel.Text = chtParameters.CrosstabVariableName;
+                //
+
                 switch (chtParameters.XAxisLabelType)
                 {
                     case 3:
@@ -141,7 +146,7 @@ namespace EpiDashboard.Gadgets.Charting
                             else
                             {
                                 tblockXAxisLabel.Text = chtParameters.ColumnNames[0];
-                            }
+                             }
                         }
                         break;
                     case 2:
@@ -317,7 +322,7 @@ namespace EpiDashboard.Gadgets.Charting
                     newMinValue.DependentValue = (coefficient * minValue.IndependentValue) + constant;
 
                     tblockEquation.Text = "Y = (" + Math.Round(coefficient, 4).ToString() + ")X + " + Math.Round(constant, 4).ToString();
-
+                    
                     List<NumericDataValue> regresValues = new List<NumericDataValue>();
                     regresValues.Add(newMinValue);
                     regresValues.Add(newMaxValue);
@@ -331,14 +336,37 @@ namespace EpiDashboard.Gadgets.Charting
                     rChartData.X = (double)newMaxValue.IndependentValue;
                     rChartData.Z = (double)newMaxValue.DependentValue;
                     regressionDataList.Add(rChartData);
+
+                    //---Ei-196
+                    radiovars1.Content = chtParameters.ColumnNames[0].ToUpper() +" X " + chtParameters.CrosstabVariableName.ToUpper();
+                    radiovars2.Content = "Linear Regression";
+                    int value = (int)newMinValue.IndependentValue;
+                    int remvalue = (value % 2);
+                    xyChart.XRangeStart = newMinValue.IndependentValue - remvalue;
+                    xyChart.XRangeEnd = newMaxValue.IndependentValue;
+                               
+                      NumericCoordinates numx = new NumericCoordinates();
+                      numx.From =(double) newMinValue.IndependentValue ;
+                      numx.To = (double) newMaxValue.IndependentValue; 
+                      numx.Step = 4;
+                      AxisCoordinates ax = new AxisCoordinates();
+                      ax.Coordinates = numx;
+                      ax.Visibility = System.Windows.Visibility.Visible;
+                      xyChart.XAxisArea.Clear();
+                      xyChart.XAxisArea.Add(ax);
+                   //--
+                    
                 }
 
                 //xAxis.UseOnlyVisiblePointsToComputeRange = true;
 
+                
                 series0.DataSource = dataList;
                 series1.DataSource = regressionDataList;
-                xyChart.Width = chtParameters.ChartWidth;
+                xyChart.Width =  chtParameters.ChartWidth;
                 xyChart.Height = chtParameters.ChartHeight;
+               
+
 
                 //xAxis.UseOnlyVisiblePointsToComputeRange = true;
 
@@ -1047,6 +1075,7 @@ namespace EpiDashboard.Gadgets.Charting
                         }
                     }
                 }
+                              
             }
 
             private void mnuSaveChartAsImage_Click(object sender, RoutedEventArgs e)
