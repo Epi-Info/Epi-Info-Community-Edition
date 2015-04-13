@@ -2808,6 +2808,67 @@ namespace EpiDashboard
                 // check to make sure we actually found one
                 if (!(anovaPanel == null))
                 {
+                    // check for t-test
+                    if (grid.RowDefinitions.Count == 3)
+                    {
+                        htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
+                        htmlBuilder.AppendLine("<p><strong>T-Test</strong><br />");
+                        htmlBuilder.AppendLine("<small>" + SharedStrings.ANOVA_DESCRIPTION_FOR_MEANS_SUBTITLE + "</small></p>");
+                        htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" summary=\"" + summaryText + "\">");
+                        htmlBuilder.AppendLine(" <tr>");
+                        htmlBuilder.AppendLine("   <th></th>");
+                        htmlBuilder.AppendLine("   <th>Method</th>");
+                        htmlBuilder.AppendLine("   <th>Mean</th>");
+                        htmlBuilder.AppendLine("   <th colspan=2>95% CL</th>");
+                        htmlBuilder.AppendLine("   <th>Std. Dev.</th>");
+                        htmlBuilder.AppendLine(" </tr>");
+
+                        htmlBuilder.AppendLine(" <tr>");
+                        htmlBuilder.AppendLine("   <th>Diff (Group 1 - Group 2)</th>");
+                        htmlBuilder.AppendLine("   <td>Pooled</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.meansDiff.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.equalLCLMean.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.equalUCLMean.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.stdDevDiff.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine(" </tr>");
+
+                        htmlBuilder.AppendLine(" <tr>");
+                        htmlBuilder.AppendLine("   <th>Diff (Group 1 - Group 2)</th>");
+                        htmlBuilder.AppendLine("   <td>Satterthwaite</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.meansDiff.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.unequalLCLMean.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.unequalUCLMean.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td></td>");
+                        htmlBuilder.AppendLine(" </tr>");
+                        htmlBuilder.AppendLine("</table>");
+
+                        htmlBuilder.AppendLine("<br><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" summary=\"" + summaryText + "\">");
+                        htmlBuilder.AppendLine(" <tr>");
+                        htmlBuilder.AppendLine("   <th>Method</th>");
+                        htmlBuilder.AppendLine("   <th>Variances</th>");
+                        htmlBuilder.AppendLine("   <th>DF</th>");
+                        htmlBuilder.AppendLine("   <th>t value</th>");
+                        htmlBuilder.AppendLine("   <th>Pr > |t|</th>");
+                        htmlBuilder.AppendLine(" </tr>");
+
+                        htmlBuilder.AppendLine(" <tr>");
+                        htmlBuilder.AppendLine("   <th>Pooled</th>");
+                        htmlBuilder.AppendLine("   <td>Equal</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.df.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.tStatistic.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.pEqual.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine(" </tr>");
+
+                        htmlBuilder.AppendLine(" <tr>");
+                        htmlBuilder.AppendLine("   <th>Satterthwaite</th>");
+                        htmlBuilder.AppendLine("   <td>Unequal</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.SatterthwaiteDF.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.tStatisticUnequal.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.pUneqal.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine(" </tr>");
+                        htmlBuilder.AppendLine("</table>");
+                    }
+
                     string strssBetweenValue = SharedStrings.UNDEFINED;
                     string strdfBetweenValue = SharedStrings.UNDEFINED;
                     string strmsBetweenValue = SharedStrings.UNDEFINED;
