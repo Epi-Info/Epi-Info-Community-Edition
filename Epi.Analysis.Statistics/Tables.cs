@@ -561,7 +561,7 @@ namespace Epi.Analysis.Statistics
             double tt = 0; // total
 
 
-            System.Collections.Generic.Dictionary<string, double> ColumnTotalSet = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
+            System.Collections.Generic.Dictionary<string, double> ColumnTotalSet = new Dictionary<string, double>();
             IEnumerable<DataColumn> SortedColumns = null;
             StringBuilder RowPercent = new StringBuilder();
             StringBuilder ColPercent = new StringBuilder();
