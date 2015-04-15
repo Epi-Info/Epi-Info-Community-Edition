@@ -125,10 +125,53 @@ namespace EpiDashboard.Gadgets.Charting
                
 
                 //--Ei-196
-                 //tblockYAxisLabel.Text = chtParameters.YAxisLabel;
-                 tblockYAxisLabel.Text = chtParameters.CrosstabVariableName;
-                //
+                tblockYAxisLabel.Text = chtParameters.YAxisLabel;
+                if (chtParameters.ShowLegend)
+                    { xyChart.LegendVisible = true ;}
+                else
+                 { xyChart.LegendVisible = false; }
 
+                if (chtParameters.ShowLegendBorder)
+                     if (chtParameters.ShowLegendBorder == true)
+                     {
+                         xyChart.Legend.BorderThickness = new Thickness(1);
+                     }
+                     else
+                     {
+                         xyChart.Legend.BorderThickness = new Thickness(0);
+                     }
+
+                 xyChart.LegendDock = chtParameters.LegendDock;
+                //setting legend caption
+                 if (chtParameters.ShowLegendVarNames)
+                 {
+                     foreach (Series series in xyChart.DataSeries)
+                     {
+                         if (series.Name == "series0")
+                         {
+                             series.Label = chtParameters.ColumnNames[0].ToUpper() + " X " + chtParameters.CrosstabVariableName.ToUpper();
+                         }
+                         else if (series.Name == "series1")
+                         {
+                             series.Label = "Linear Regression";
+                         }
+                     }
+                 }
+                 else
+                 {
+                     foreach (Series series in xyChart.DataSeries)
+                     {
+                         if (series.Name == "series0")
+                         {
+                             series.Label = string.Empty;
+                         }
+                         else if (series.Name == "series1")
+                         {
+                             series.Label = string.Empty;
+                         }
+                     }
+                 }       
+                //--
                 switch (chtParameters.XAxisLabelType)
                 {
                     case 3:
@@ -338,22 +381,22 @@ namespace EpiDashboard.Gadgets.Charting
                     regressionDataList.Add(rChartData);
 
                     //---Ei-196
-                    radiovars1.Content = chtParameters.ColumnNames[0].ToUpper() +" X " + chtParameters.CrosstabVariableName.ToUpper();
-                    radiovars2.Content = "Linear Regression";
                     int value = (int)newMinValue.IndependentValue;
                     int remvalue = (value % 2);
-                    xyChart.XRangeStart = newMinValue.IndependentValue - remvalue;
-                    xyChart.XRangeEnd = newMaxValue.IndependentValue;
+                    //adds one step before
+                     remvalue = 2;
+                     xyChart.XRangeStart = newMinValue.IndependentValue - remvalue;
+                     xyChart.XRangeEnd = newMaxValue.IndependentValue + 2;
                                
                       NumericCoordinates numx = new NumericCoordinates();
                       numx.From =(double) newMinValue.IndependentValue ;
                       numx.To = (double) newMaxValue.IndependentValue; 
-                      numx.Step = 4;
+                      numx.Step = 2;
                       AxisCoordinates ax = new AxisCoordinates();
                       ax.Coordinates = numx;
                       ax.Visibility = System.Windows.Visibility.Visible;
                       xyChart.XAxisArea.Clear();
-                      xyChart.XAxisArea.Add(ax);
+                      xyChart.XAxisArea.Add(ax); 
                    //--
                     
                 }
