@@ -75,7 +75,7 @@
 
                         <TextBlock x:Name="tblockXAxisLabel" FontWeight="DemiBold" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0, 0, 0, 6" Visibility="Collapsed" />
 
-                        <charting:XYChart x:Name="xyChart" Background="White" Grid.Row="0" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated" DataPointSubsamplingEnabled="False">
+                        <charting:XYChart x:Name="xyChart" Background="White" Grid.Row="0" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated" DataPointSubsamplingEnabled="False" AllowFractionalPointXRange="True">
                             <charting:XYChart.XAxisArea>
                                 <charting:AxisCoordinates x:Name="xAxisCoordinates" Angle="0">
                                 </charting:AxisCoordinates>
@@ -85,7 +85,7 @@
                                 <charting:Axis Id="XAxis" x:Name="xAxis" />
                             </charting:XYChart.Axes>
                             <charting:MarkerSeries x:Name="series0" Id="S0" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" />
-                            <charting:LineSeries x:Name="series1" Id="S1" XPath="X" YPath="Z" LineKind="Auto" />
+                            <charting:LineSeries x:Name="series1" Id="S1" XPath="X" YPath="Z" LineKind="Auto" /> 
                             <!--<charting:SeriesAnnotationTracker SeriesIdsCSS="S0" />
                             <charting:SeriesTracker SeriesId="S0" MarkerSize="6" />-->
 
@@ -114,15 +114,7 @@
                                 </StackPanel>
                             </Border>
                         </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column ="1" x:Name="panelbox" Visibility="Visible" HorizontalAlignment="Right" VerticalAlignment="Center" >
-                            <Border BorderBrush="Gray" BorderThickness="3" HorizontalAlignment="Right"  VerticalAlignment= "Center" >
-                                <StackPanel Margin="5">
-                                    <RadioButton x:Name ="radiovars1" Background="DarkRed" BorderThickness="10" />
-                                    <RadioButton x:Name ="radiovars2" Background= "DodgerBlue" BorderThickness="10"/>
-                                </StackPanel>
-                            </Border>
-                        </StackPanel>
-                    </Grid>
+                      </Grid>
                 </StackPanel>
                 <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{StaticResource gadgetWaitPanelStyle}" />
 
