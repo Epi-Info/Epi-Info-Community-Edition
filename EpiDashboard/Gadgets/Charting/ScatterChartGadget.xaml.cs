@@ -380,30 +380,14 @@ namespace EpiDashboard.Gadgets.Charting
                     rChartData.Z = (double)newMaxValue.DependentValue;
                     regressionDataList.Add(rChartData);
 
-                    //---Ei-196
-                    int value = (int)newMinValue.IndependentValue;
-                    int remvalue = (value % 2);
-                    //adds one step before
-                     remvalue = 2;
-                     xyChart.XRangeStart = newMinValue.IndependentValue - remvalue;
-                     xyChart.XRangeEnd = newMaxValue.IndependentValue + 2;
-                               
-                      NumericCoordinates numx = new NumericCoordinates();
-                      numx.From =(double) newMinValue.IndependentValue ;
-                      numx.To = (double) newMaxValue.IndependentValue; 
-                      numx.Step = 2;
-                      AxisCoordinates ax = new AxisCoordinates();
-                      ax.Coordinates = numx;
-                      ax.Visibility = System.Windows.Visibility.Visible;
-                      xyChart.XAxisArea.Clear();
-                      xyChart.XAxisArea.Add(ax); 
-                   //--
-                    
+                    int newXminvalue = (int) newMinValue.IndependentValue;
+                    int newXMaxvalue = (int)newMaxValue.IndependentValue;
+                    SetXandYCoordinates(dataList, newXminvalue , newXMaxvalue);
+                   
                 }
 
                 //xAxis.UseOnlyVisiblePointsToComputeRange = true;
-
-                
+                                
                 series0.DataSource = dataList;
                 series1.DataSource = regressionDataList;
                 xyChart.Width =  chtParameters.ChartWidth;
@@ -413,6 +397,59 @@ namespace EpiDashboard.Gadgets.Charting
 
                 //xAxis.UseOnlyVisiblePointsToComputeRange = true;
 
+            }
+            
+           private void SetXandYCoordinates(List<XYChartData> dataList, int newMinXvalue, int newMaxXvalue)
+            {
+                //---Ei-196
+                //adds one step before
+                int remvalue = 2;
+                int value = newMinXvalue % 2;
+                if (value == 1) { remvalue = 1; };
+                xyChart.XRangeStart = newMinXvalue - remvalue;
+                remvalue = 2;
+                xyChart.XRangeEnd = newMaxXvalue + remvalue;
+
+                NumericCoordinates numx = new NumericCoordinates();
+                numx.From = newMinXvalue - remvalue ;
+                value = newMaxXvalue % 2;
+                if (value > 0) { remvalue = 1; }
+                numx.To =  newMaxXvalue + remvalue ;
+                numx.Step = 2;
+                AxisCoordinates ax = new AxisCoordinates();
+                ax.Coordinates = numx;
+                ax.Visibility = System.Windows.Visibility.Visible;
+                xyChart.XAxisArea.Clear();
+                xyChart.XAxisArea.Add(ax);
+                //--
+                int Yminvalue = Int32.MaxValue;
+                int Ymaxvalue = Int32.MinValue;
+                remvalue = 0;
+                foreach (XYChartData xyc in dataList)
+                {
+                    if (xyc.Y.HasValue)
+                    {
+                        int Tminvalue = (int)xyc.Y;
+                        Yminvalue = Math.Min(Yminvalue, Tminvalue);
+                        int Tmaxvalue = (int)xyc.Y;
+                        Ymaxvalue = Math.Max(Ymaxvalue, Tmaxvalue);
+                    }
+                }
+                value = Yminvalue % 10;
+                if (value > 0) { remvalue = value;}
+                NumericCoordinates numy = new NumericCoordinates();
+                numy.From = (int)Yminvalue - remvalue;
+                value = Ymaxvalue % 10;
+                remvalue = 10;
+                if (value > 0) { remvalue = remvalue - value; }
+                numy.To = (int)Ymaxvalue + remvalue;
+                numy.Step = 50;
+                AxisCoordinates ay = new AxisCoordinates();
+                ay.Coordinates = numy;
+                ay.Visibility = System.Windows.Visibility.Visible;
+                xyChart.YAxisArea.Clear();
+                xyChart.YAxisArea.Add(ay);
+                //--
             }
 
             private delegate void SetChartDataDelegate(List<XYChartData> dataList, StatisticsRepository.LinearRegression.LinearRegressionResults regresResults, NumericDataValue maxValue, NumericDataValue minValue);
