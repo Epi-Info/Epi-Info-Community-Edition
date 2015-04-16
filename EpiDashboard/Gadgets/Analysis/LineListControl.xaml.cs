@@ -1093,7 +1093,7 @@ namespace EpiDashboard
         public override string ToHTML(string htmlFileName = "", int count = 0)
         {
             if (IsCollapsed) return string.Empty;
-
+            String groupField = (Parameters as EpiDashboard.LineListParameters).PrimaryGroupField;
             StringBuilder htmlBuilder = new StringBuilder();
             CustomOutputHeading = headerPanel.Text;
             CustomOutputDescription = descriptionPanel.Text;
@@ -1126,37 +1126,106 @@ namespace EpiDashboard
             //}
             //for (int i = 0; i < StrataCount; i++)
             //{
+            Dictionary<String, bool> groupValues = new Dictionary<String, bool>();
             if (dg != null && dg.ItemsSource != null)
             {
-                htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
-                htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-                if (string.IsNullOrEmpty(CustomOutputCaption) && this.StrataGridList.Count > 1)
+                if (!String.IsNullOrEmpty(groupField))
                 {
-                    //htmlBuilder.AppendLine("<caption>" + grid.Tag + "</caption>");
-                }
-                else if (!string.IsNullOrEmpty(CustomOutputCaption))
-                {
-                    htmlBuilder.AppendLine("<caption>" + CustomOutputCaption + "</caption>");
-                }
-
-                if (dg.ItemsSource is DataView)
-                {
-                    htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView));
-                }
-                else if (dg.ItemsSource is ListCollectionView)
-                {
-                    ListCollectionView lcv = dg.ItemsSource as ListCollectionView;
-                    if (lcv.SourceCollection is DataView)
+                    if (dg.ItemsSource is DataView)
                     {
-                        htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(lcv.SourceCollection as DataView));
+                        DataView idv = dg.ItemsSource as DataView;
+                        foreach (DataRow dr in idv.Table.Rows)
+                        {
+                            if (!groupValues.Keys.Contains(dr[groupField] as String))
+                            {
+                                groupValues.Add(dr[groupField] as String, true);
+                            }
+                        }
+                    }
+                    else if (dg.ItemsSource is ListCollectionView)
+                    {
+                        ListCollectionView lcv = dg.ItemsSource as ListCollectionView;
+                        if (lcv.SourceCollection is DataView)
+                        {
+                            DataView idv = lcv.SourceCollection as DataView;
+                            foreach (DataRow dr in idv.Table.Rows)
+                            {
+                                if (!groupValues.Keys.Contains(dr[groupField] as String))
+                                {
+                                    groupValues.Add(dr[groupField] as String, true);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (groupValues.Count == 0)
+                {
+                    groupValues.Add("", true);
+                }
+                foreach (String groupValue in groupValues.Keys)
+                {
+                    htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
+                    if (!String.IsNullOrEmpty(groupField))
+                    {
+                        htmlBuilder.AppendLine("<h3>" + groupField + " = " + groupValue + "</h3>");
+                    }
+                    htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+                    if (string.IsNullOrEmpty(CustomOutputCaption) && this.StrataGridList.Count > 1)
+                    {
+                        //htmlBuilder.AppendLine("<caption>" + grid.Tag + "</caption>");
+                    }
+                    else if (!string.IsNullOrEmpty(CustomOutputCaption))
+                    {
+                        htmlBuilder.AppendLine("<caption>" + CustomOutputCaption + "</caption>");
                     }
 
-                    //htmlBuilder.AppendLine(ConvertGroupToHtmlString(cvGroup[0]));
+                    if (dg.ItemsSource is DataView)
+                    {
+                        if (!String.IsNullOrEmpty(groupField))
+                        {
+                            DataView sdv = dg.ItemsSource as DataView;
+                            sdv.RowFilter = groupField + " = '" + groupValue + "'";
+                            DataTable sdvTable = sdv.ToTable();
+                            if (!Parameters.ColumnNames.Contains(groupField))
+                            {
+                                sdvTable.Columns.Remove(groupField);
+                            }
+                            htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sdvTable.DefaultView));
+                        }
+                        else
+                        {
+                            htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView));
+                        }
+                    }
+                    else if (dg.ItemsSource is ListCollectionView)
+                    {
+                        ListCollectionView lcv = dg.ItemsSource as ListCollectionView;
+                        if (lcv.SourceCollection is DataView)
+                        {
+                            if (!String.IsNullOrEmpty(groupField))
+                            {
+                                DataView sdv = lcv.SourceCollection as DataView;
+                                sdv.RowFilter = groupField + " = '" + groupValue + "'";
+                                DataTable sdvTable = sdv.ToTable();
+                                if (!Parameters.ColumnNames.Contains(groupField))
+                                {
+                                    sdvTable.Columns.Remove(groupField);
+                                }
+                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sdvTable.DefaultView));
+                            }
+                            else
+                            {
+                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(lcv.SourceCollection as DataView));
+                            }
+                        }
 
-                    //htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(cvGroup[0] as DataView));
+                        //htmlBuilder.AppendLine(ConvertGroupToHtmlString(cvGroup[0]));
+
+                        //htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(cvGroup[0] as DataView));
+                    }
+
+                    htmlBuilder.AppendLine("</table>");
                 }
-
-                htmlBuilder.AppendLine("</table>");
             }
             //}
 
