@@ -36,16 +36,24 @@ namespace EpiDashboard
             Palette = 12;
             MarkerType = 0;
             //  Labels
-            YAxisLabel = "Count";
+            //--EI-196
+            //YAxisLabel = "Count";
+            YAxisLabel = string.Empty;
+            //
             XAxisLabelType = 0;
             XAxisLabel = String.Empty;
             XAxisAngle = 0;
             ChartTitle = String.Empty;
             ChartSubTitle = String.Empty;
             //  Legend
-            ShowLegend = false;
-            ShowLegendBorder = false;
-            ShowLegendVarNames = false;
+            //Ei-196
+            //ShowLegend = false;
+            //ShowLegendBorder = false;
+            //ShowLegendVarNames = false;
+            ShowLegend = true;
+            ShowLegendBorder = true;
+            ShowLegendVarNames = true;
+            //--
             LegendFontSize = 12;
             LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Right;
         }
