@@ -180,6 +180,7 @@ namespace EpiDashboard
 
             Border border = new Border();
             border.Style = this.Resources["genericOutputGridBorderWithMargins"] as Style;
+            border.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             border.Child = grid;
 
             Expander expander = new Expander();
