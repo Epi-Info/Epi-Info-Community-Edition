@@ -1136,11 +1136,11 @@ namespace EpiDashboard
                         DataView idv = dg.ItemsSource as DataView;
                         foreach (DataRow dr in idv.Table.Rows)
                         {
-                            if (!String.IsNullOrEmpty(dr[groupField] as String) && !groupValues.Keys.Contains(dr[groupField] as String))
+                            if (!String.IsNullOrEmpty(dr[groupField].ToString() as String) && !groupValues.Keys.Contains(dr[groupField].ToString() as String))
                             {
-                                groupValues.Add(dr[groupField] as String, true);
+                                groupValues.Add(dr[groupField].ToString() as String, true);
                             }
-                            else if (String.IsNullOrEmpty(dr[groupField] as String) && !groupValues.Keys.Contains(""))
+                            else if (String.IsNullOrEmpty(dr[groupField].ToString() as String) && !groupValues.Keys.Contains(""))
                             {
                                 groupValues.Add("", true);
                             }
@@ -1154,11 +1154,11 @@ namespace EpiDashboard
                             DataView idv = lcv.SourceCollection as DataView;
                             foreach (DataRow dr in idv.Table.Rows)
                             {
-                                if (!String.IsNullOrEmpty(dr[groupField] as String) && !groupValues.Keys.Contains(dr[groupField] as String))
+                                if (!String.IsNullOrEmpty(dr[groupField].ToString() as String) && !groupValues.Keys.Contains(dr[groupField].ToString() as String))
                                 {
-                                    groupValues.Add(dr[groupField] as String, true);
+                                    groupValues.Add(dr[groupField].ToString() as String, true);
                                 }
-                                else if (String.IsNullOrEmpty(dr[groupField] as String) && !groupValues.Keys.Contains(""))
+                                else if (String.IsNullOrEmpty(dr[groupField].ToString() as String) && !groupValues.Keys.Contains(""))
                                 {
                                     groupValues.Add("", true);
                                 }
@@ -1192,9 +1192,10 @@ namespace EpiDashboard
                         if (!String.IsNullOrEmpty(groupField))
                         {
                             DataView sdv = dg.ItemsSource as DataView;
-                            sdv.RowFilter = groupField + " = '" + groupValue + "'";
                             if (groupValue.Equals(""))
                                 sdv.RowFilter = groupField + " is null";
+                            else
+                                sdv.RowFilter = groupField + " = '" + groupValue + "'";
                             DataTable sdvTable = sdv.ToTable();
                             if (!Parameters.ColumnNames.Contains(groupField))
                             {
@@ -1215,9 +1216,10 @@ namespace EpiDashboard
                             if (!String.IsNullOrEmpty(groupField))
                             {
                                 DataView sdv = lcv.SourceCollection as DataView;
-                                sdv.RowFilter = groupField + " = '" + groupValue + "'";
                                 if (groupValue.Equals(""))
                                     sdv.RowFilter = groupField + " is null";
+                                else
+                                    sdv.RowFilter = groupField + " = '" + groupValue + "'";
                                 DataTable sdvTable = sdv.ToTable();
                                 if (!Parameters.ColumnNames.Contains(groupField))
                                 {
