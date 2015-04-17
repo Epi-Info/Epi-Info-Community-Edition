@@ -71,7 +71,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                     fields.Add(fieldName);
                 }
             }
-            cbxField.ItemsSource = fields;
+          //  cbxField.ItemsSource = fields;
             lbxField.ItemsSource = fields;
             //Weight Fields
             weightFields.Add(String.Empty);
@@ -106,9 +106,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
             lbxFieldStrata.ItemsSource = strataItems;
 
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cbxField.ItemsSource);
+           // CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cbxField.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
-            view.GroupDescriptions.Add(groupDescription);
+           // view.GroupDescriptions.Add(groupDescription);
 
             RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as FrequencyControl).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
@@ -147,7 +147,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             get
             {
-                if (OneVar && cbxField.SelectedIndex > -1)
+                if (OneVar)// && cbxField.SelectedIndex > -1)
                 {
                     return true;
                 }
@@ -180,17 +180,17 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             if (OneVar)
             {
-                if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
+                if (lbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(lbxField.SelectedItem.ToString()))
                 {
                     if (Parameters.ColumnNames.Count > 0)
                     {
-                        Parameters.ColumnNames[0] = cbxField.SelectedItem.ToString();
+                        Parameters.ColumnNames[0] = lbxField.SelectedItem.ToString();
                     }
                     else
                     {
-                        Parameters.ColumnNames.Add(cbxField.SelectedItem.ToString());
+                        Parameters.ColumnNames.Add(lbxField.SelectedItem.ToString());
                     }
-                    radOneVar.IsChecked = true;
+                  //  radOneVar.IsChecked = true;
 
                 }
                 else
@@ -207,7 +207,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                         Parameters.ColumnNames.Add(item.ToString());
                     }
                 }
-                radMultiVar.IsChecked = true;
+              //  radMultiVar.IsChecked = true;
             }
 
             if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
@@ -296,18 +296,26 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             //Variables settings
             //Just one column for Frequency, .ColumnNames should have only one item
+           // if (Parameters.ColumnNames.Count == 1 || Parameters.StrataVariableNames.Count > 0)
+           // {
+               // scrollViewerVarPro.Visibility = System.Windows.Visibility.Hidden;
+                //cbxField.Visibility = System.Windows.Visibility.Visible;
+               // cbxField.SelectedItem = Parameters.ColumnNames[0];
+               // radOneVar.IsChecked = true;
+            //}
             if (Parameters.ColumnNames.Count == 1 || Parameters.StrataVariableNames.Count > 0)
             {
-                scrollViewerVarPro.Visibility = System.Windows.Visibility.Hidden;
-                cbxField.Visibility = System.Windows.Visibility.Visible;
-                cbxField.SelectedItem = Parameters.ColumnNames[0];
-                radOneVar.IsChecked = true;
+               // radMultiVar.IsChecked = true;
+               // scrollViewerVarPro.Visibility = System.Windows.Visibility.Visible;
+               // cbxField.Visibility = System.Windows.Visibility.Hidden;
+                
+                    lbxField.SelectedItems.Add(Parameters.ColumnNames[0]);               
             }
-            else if (Parameters.ColumnNames.Count > 1)
+            else if (Parameters.ColumnNames.Count > 1 )
             {
-                radMultiVar.IsChecked = true;
-                scrollViewerVarPro.Visibility = System.Windows.Visibility.Visible;
-                cbxField.Visibility = System.Windows.Visibility.Hidden;
+                // radMultiVar.IsChecked = true;
+                // scrollViewerVarPro.Visibility = System.Windows.Visibility.Visible;
+                // cbxField.Visibility = System.Windows.Visibility.Hidden;
                 for (int i = 0; i < Parameters.ColumnNames.Count; i++)
                 {
                     lbxField.SelectedItems.Add(Parameters.ColumnNames[i]);
@@ -357,6 +365,10 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxColumnPercentBars.IsChecked = Parameters.ShowPercentBarsCol;
 
             CheckVariables();
+            if (lbxField.SelectedItems.Count > 0)
+                btnOK.IsEnabled = true;
+            else
+                btnOK.IsEnabled = false;
         }
 
         public class FieldInfo { public string Name { get; set; } public string DataType { get; set; } public VariableCategory VariableCategory { get; set; } }
@@ -376,12 +388,12 @@ namespace EpiDashboard.Controls.GadgetProperties
         /// </summary>
         private void CheckVariables()
         {
-            bool isDropDownList = false;
+           /* bool isDropDownList = false;
             bool isCommentLegal = false;
             bool isOptionField = false;
             bool isRecoded = false;
 
-            if (cbxField.SelectedItem != null && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
+            if (lbxField.SelectedItem != null && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()))
             {
                 foreach (DataRow fieldRow in DashboardHelper.FieldTable.Rows)
                 {
@@ -438,7 +450,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (!isCommentLegal && !isOptionField)
             {
                 checkboxCommentLegalLabels.IsChecked = isCommentLegal;
-            }
+            }*/
         }
 
 
@@ -560,14 +572,14 @@ namespace EpiDashboard.Controls.GadgetProperties
 
         private void cbxField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CheckVariables();
+           // CheckVariables();
         }
 
         private void OneVar_Checked(object sender, RoutedEventArgs e)
         {
             OneVar = true;
             MultiVar = false;
-            cbxField.Visibility = System.Windows.Visibility.Visible;
+           // cbxField.Visibility = System.Windows.Visibility.Visible;
             scrollViewerVarPro.Visibility = System.Windows.Visibility.Hidden;
 
             checkboxUsePrompts.IsChecked = true;
@@ -580,7 +592,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             OneVar = false;
             MultiVar = true;
-            cbxField.Visibility = System.Windows.Visibility.Hidden;
+          //  cbxField.Visibility = System.Windows.Visibility.Hidden;
             scrollViewerVarPro.Visibility = System.Windows.Visibility.Visible;
 
             checkboxUsePrompts.IsChecked = false;
@@ -593,6 +605,49 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             checkboxSortHighLow.IsChecked = false;
             checkboxSortHighLow.IsEnabled = false;
+        }
+        
+
+        private void lbxField_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (((System.Windows.Controls.ListBox)(sender)).SelectedItems.Count == 1)
+            {
+                OneVar = true;
+                MultiVar = false;
+              //  cbxField.Visibility = System.Windows.Visibility.Visible;
+               // scrollViewerVarPro.Visibility = System.Windows.Visibility.Hidden;
+
+                checkboxUsePrompts.IsChecked = true;
+                cbxFieldWeight.IsEnabled = true;
+                lbxFieldStrata.IsEnabled = true;
+                checkboxSortHighLow.IsEnabled = true;
+                btnOK.IsEnabled = true;
+            }
+            else if (((System.Windows.Controls.ListBox)(sender)).SelectedItems.Count > 1)
+            {
+                OneVar = false;
+                MultiVar = true;
+               // cbxField.Visibility = System.Windows.Visibility.Hidden;
+              //  scrollViewerVarPro.Visibility = System.Windows.Visibility.Visible;
+
+                checkboxUsePrompts.IsChecked = false;
+
+                cbxFieldWeight.IsEnabled = false;
+                cbxFieldWeight.SelectedIndex = -1;
+
+                lbxFieldStrata.SelectedIndex = -1;
+                lbxFieldStrata.IsEnabled = false;
+
+                checkboxSortHighLow.IsChecked = false;
+                checkboxSortHighLow.IsEnabled = false;
+                btnOK.IsEnabled = true;
+            }
+            else
+            {
+                btnOK.IsEnabled = false;
+            }
+             
+
         }
     }
 }

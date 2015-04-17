@@ -40,13 +40,13 @@
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
 
             <TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
-            <RadioButton x:Name="radOneVar" GroupName="mutlifreq" Content="One Variable" Checked="OneVar_Checked"/>
-            <RadioButton x:Name="radMultiVar" GroupName="mutlifreq" Content="Multi-Variable" Checked="MultiVar_Checked"/>
+            <!--<RadioButton x:Name="radOneVar" GroupName="mutlifreq" Content="One Variable" Checked="OneVar_Checked"/>
+            <RadioButton x:Name="radMultiVar" GroupName="mutlifreq" Content="Multi-Variable" Checked="MultiVar_Checked"/>-->
            
-            <ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" Visibility="Hidden" />
-            <ScrollViewer x:Name="scrollViewerVarPro" VerticalAlignment="Stretch" Height="50" Visibility="Hidden">
-                <StackPanel>
-                    <ListBox SelectionMode="Multiple" Name="lbxField" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  />
+            <!--<ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" Visibility="Hidden" />-->
+            <ScrollViewer x:Name="scrollViewerVarPro" VerticalAlignment="Stretch" Height="200"  >
+                <StackPanel >
+                    <ListBox SelectionMode="Multiple" Name="lbxField" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="lbxField_SelectionChanged" />
                 </StackPanel>
             </ScrollViewer>
             <StackPanel>
@@ -69,7 +69,7 @@
                 </CheckBox.ToolTip>-->
             </CheckBox>
             <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
-            <ScrollViewer x:Name="scrollViewerStrataProperties" VerticalAlignment="Stretch" Height="400" >
+            <ScrollViewer x:Name="scrollViewerStrataProperties" VerticalAlignment="Stretch" Height="150" >
                 <StackPanel>
                     <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" />
                 </StackPanel>
@@ -162,7 +162,7 @@
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="1">
             <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
-            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
+            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42"  Click="btnOK_Click">OK</Button>
         </DockPanel>
     </Grid>
 </PropertyPanels:GadgetPropertiesPanelBase>
