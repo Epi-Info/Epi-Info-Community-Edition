@@ -415,7 +415,15 @@ namespace EpiDashboard.Gadgets.Charting
                 value = newMaxXvalue % 2;
                 if (value > 0) { remvalue = 1; }
                 numx.To =  newMaxXvalue + remvalue ;
-                numx.Step = 10;
+               //-- step  x
+                if (newMaxXvalue <= 100)    
+                    { numx.Step = 10;} 
+                else if ((newMaxXvalue > 100) && (newMaxXvalue <= 1000))
+                   {numx.Step = 100;}
+                else if (newMaxXvalue > 1000)
+                 { numx.Step = 5000; }
+               
+               
                 AxisCoordinates ax = new AxisCoordinates();
                 ax.Coordinates = numx;
                 ax.Visibility = System.Windows.Visibility.Visible;
@@ -444,6 +452,15 @@ namespace EpiDashboard.Gadgets.Charting
                 if (value > 0) { remvalue = remvalue - value; }
                 numy.To = (int)Ymaxvalue + remvalue;
                 numy.Step = 50;
+
+                //step y
+                if (Ymaxvalue<= 500) 
+                 { numy.Step = 50;}
+                else if ((Ymaxvalue > 500) && (Ymaxvalue <= 1000))
+                 { numy.Step = 100; }
+                else if (Ymaxvalue > 1000)
+                 { numy.Step = 5000; }
+                 
                 AxisCoordinates ay = new AxisCoordinates();
                 ay.Coordinates = numy;
                 ay.Visibility = System.Windows.Visibility.Visible;
