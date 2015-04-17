@@ -415,7 +415,7 @@ namespace EpiDashboard.Gadgets.Charting
                 value = newMaxXvalue % 2;
                 if (value > 0) { remvalue = 1; }
                 numx.To =  newMaxXvalue + remvalue ;
-                numx.Step = 2;
+                numx.Step = 10;
                 AxisCoordinates ax = new AxisCoordinates();
                 ax.Coordinates = numx;
                 ax.Visibility = System.Windows.Visibility.Visible;
