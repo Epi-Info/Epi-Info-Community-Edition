@@ -73,8 +73,10 @@ namespace EpiDashboard.Controls.GadgetProperties
             //        strataItems.Add(fieldName);
             //    }
             //}
-
-            txtYAxisLabelValue.Text = "Count";
+            //--Ei-196
+            //txtYAxisLabelValue.Text = "Count";
+            txtYAxisLabelValue.Text = string.Empty; 
+            //--
             txtXAxisLabelValue.Text = String.Empty;
             txtXAxisLabelValue.IsEnabled = false;
             cmbLegendDock.SelectedIndex = 1;
@@ -466,6 +468,13 @@ namespace EpiDashboard.Controls.GadgetProperties
             panelFilters.Visibility = System.Windows.Visibility.Visible;
         }
 
+       //-- Ei-196
+        protected virtual void cmbOutcome_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbOutcome.SelectedItem.ToString()) == false && txtYAxisLabelValue.Text == string.Empty)
+              {  txtYAxisLabelValue.Text = cmbOutcome.SelectedItem.ToString();}
+        }
+        //--
         protected virtual void cmbField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is ComboBox)
