@@ -471,7 +471,7 @@ namespace EpiDashboard.Controls.GadgetProperties
        //-- Ei-196
         protected virtual void cmbOutcome_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbOutcome.SelectedItem.ToString()) == false && txtYAxisLabelValue.Text == string.Empty)
+            if (string.IsNullOrEmpty(cmbOutcome.SelectedItem.ToString()) == false)
               {  txtYAxisLabelValue.Text = cmbOutcome.SelectedItem.ToString();}
         }
         //--
