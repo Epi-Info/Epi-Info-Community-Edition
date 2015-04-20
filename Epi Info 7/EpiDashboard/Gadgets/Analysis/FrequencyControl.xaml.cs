@@ -1949,9 +1949,12 @@ namespace EpiDashboard
                             if (count == 0 && stratifiedFrequencyTables.Count == 1)
                             {
                                 // this is the only table and there are no records, so let the user know
-                                this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), DashboardSharedStrings.GADGET_MSG_NO_DATA);
+                             //   this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), DashboardSharedStrings.GADGET_MSG_NO_DATA);
+                                this.Dispatcher.BeginInvoke(addGrid, DashboardSharedStrings.GADGET_MSG_NO_DATA, freqParameters.ColumnNames[0].ToString() + "  " + DashboardSharedStrings.GADGET_MSG_NO_DATA);
+
+                                continue;
                                 //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));                                
-                                return;
+                               // return;
                             }
                             else if (count == 0)
                             {
