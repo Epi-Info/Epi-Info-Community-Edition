@@ -272,7 +272,7 @@
     <comment>Column header for the 95% CI lower</comment>
   </data>
   <data name="COL_HEADER_EXACT_CI_UPPER" xml:space="preserve">
-    <value>Exact 95% LCL</value>
+    <value>Exact 95% UCL</value>
     <comment>Column header for the 95% CI upper</comment>
   </data>
   <data name="COL_HEADER_FLEISS_CI_LOWER" xml:space="preserve">
@@ -280,7 +280,7 @@
     <comment>Column header for the 95% CI lower</comment>
   </data>
   <data name="COL_HEADER_FLEISS_CI_UPPER" xml:space="preserve">
-    <value>Fleiss 95% LCL</value>
+    <value>Fleiss 95% UCL</value>
     <comment>Column header for the 95% CI upper</comment>
   </data>
   <data name="COL_HEADER_CUMULATIVE_PERCENT" xml:space="preserve">
