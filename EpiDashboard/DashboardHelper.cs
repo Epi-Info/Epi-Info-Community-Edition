@@ -4094,8 +4094,17 @@ namespace EpiDashboard
                     {
                         return null;
                     }
-
-                    freqValues.Add(row[0].ToString().TrimEnd());
+                    if (sortedDistinctTable.Columns[0].DataType.ToString() == "System.Double")
+                    {
+                        if (!string.IsNullOrEmpty(row[0].ToString().TrimEnd()))
+                        {
+                            double x = 0;
+                            x = (double)row[0];
+                            freqValues.Add(x.ToString("G17").TrimEnd());
+                        }
+                    }
+                    else
+                    freqValues.Add(row[0].ToString().TrimEnd());                    
                 }
 
                 count++;
@@ -7492,10 +7501,10 @@ namespace EpiDashboard
             {
                 Type type = sourceTable.Columns[columnName].DataType;
                 distinctTable.Columns.Add(columnName, type);
-                if (type.ToString().Equals("System.Single") || type.ToString().Equals("System.Double"))
-                {
-                    distinctTable.Columns[columnName].DataType = typeof(decimal);
-                }
+               // if (type.ToString().Equals("System.Single") || type.ToString().Equals("System.Double"))
+                //{
+                   // distinctTable.Columns[columnName].DataType = typeof(decimal);
+                //}
             }
 
             DataTable dt = new DataTable();
@@ -7608,10 +7617,10 @@ namespace EpiDashboard
                 Type type = mainTable.Columns[columnName].DataType;
                 distinctTable.Columns.Add(columnName, type);
 
-                if (type.ToString().Equals("System.Single") || type.ToString().Equals("System.Double"))
-                {
-                    distinctTable.Columns[columnName].DataType = typeof(decimal);
-                }
+               // if (type.ToString().Equals("System.Single") || type.ToString().Equals("System.Double"))
+                //{
+                  //  distinctTable.Columns[columnName].DataType = typeof(decimal);
+                //}
             }
 
             string[] safeColumnNames = new string[columnNames.Length];
