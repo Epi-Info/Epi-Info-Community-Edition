@@ -479,7 +479,20 @@ namespace EpiDashboard.Controls
                     double bottom = diff / 2;
                     Canvas.SetBottom(tblockExposure, bottom);                    
                 }
-
+                //--EI-248
+                else if (actualCanvasHeight < actualControlWidth)
+                {
+                    if (value.Length > 64) { tblockExposure.Text = value.Substring(0, 64); }
+                    tblockExposure.TextWrapping = TextWrapping.Wrap;
+                    tblockExposure.TextAlignment = TextAlignment.Center;
+                    double controlwidth = actualCanvasHeight;
+                    tblockExposure.Width = (controlwidth * 2) - 50; 
+                    double controlbottom = Canvas.GetBottom(tblockExposure);
+                    Canvas.SetBottom(tblockExposure, controlbottom -110); 
+                    double controlleft = Canvas.GetLeft(tblockExposure);
+                    Canvas.SetLeft(tblockExposure, controlleft - 10);
+                 }
+                //--
                 rotate.Angle = 270;
             }
         }
