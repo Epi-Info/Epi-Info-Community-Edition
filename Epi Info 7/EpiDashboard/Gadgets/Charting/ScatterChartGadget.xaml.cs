@@ -352,49 +352,50 @@ namespace EpiDashboard.Gadgets.Charting
                 List<RegressionChartData> regressionDataList = new List<RegressionChartData>();
                 ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
 
-                if (regresResults.variables != null)
+                if ((minValue != null) && (maxValue != null))
                 {
-                    decimal coefficient = Convert.ToDecimal(regresResults.variables[0].coefficient);
-                    decimal constant = Convert.ToDecimal(regresResults.variables[1].coefficient);
+                    if (regresResults.variables != null)
+                    {
+                        decimal coefficient = Convert.ToDecimal(regresResults.variables[0].coefficient);
+                        decimal constant = Convert.ToDecimal(regresResults.variables[1].coefficient);
 
-                    NumericDataValue newMaxValue = new NumericDataValue();
-                    newMaxValue.IndependentValue = maxValue.IndependentValue;
-                    newMaxValue.DependentValue = (coefficient * maxValue.IndependentValue) + constant;
-                    NumericDataValue newMinValue = new NumericDataValue();
-                    newMinValue.IndependentValue = minValue.IndependentValue;
-                    newMinValue.DependentValue = (coefficient * minValue.IndependentValue) + constant;
+                        NumericDataValue newMaxValue = new NumericDataValue();
+                        newMaxValue.IndependentValue = maxValue.IndependentValue;
+                        newMaxValue.DependentValue = (coefficient * maxValue.IndependentValue) + constant;
+                        NumericDataValue newMinValue = new NumericDataValue();
+                        newMinValue.IndependentValue = minValue.IndependentValue;
+                        newMinValue.DependentValue = (coefficient * minValue.IndependentValue) + constant;
 
-                    tblockEquation.Text = "Y = (" + Math.Round(coefficient, 4).ToString() + ")X + " + Math.Round(constant, 4).ToString();
-                    
-                    List<NumericDataValue> regresValues = new List<NumericDataValue>();
-                    regresValues.Add(newMinValue);
-                    regresValues.Add(newMaxValue);
+                        tblockEquation.Text = "Y = (" + Math.Round(coefficient, 4).ToString() + ")X + " + Math.Round(constant, 4).ToString();
 
-                    RegressionChartData rChartData = new RegressionChartData();
-                    rChartData.X = (double)newMinValue.IndependentValue;
-                    rChartData.Z = (double)newMinValue.DependentValue;
-                    regressionDataList.Add(rChartData);
+                        List<NumericDataValue> regresValues = new List<NumericDataValue>();
+                        regresValues.Add(newMinValue);
+                        regresValues.Add(newMaxValue);
 
-                    rChartData = new RegressionChartData();
-                    rChartData.X = (double)newMaxValue.IndependentValue;
-                    rChartData.Z = (double)newMaxValue.DependentValue;
-                    regressionDataList.Add(rChartData);
+                        RegressionChartData rChartData = new RegressionChartData();
+                        rChartData.X = (double)newMinValue.IndependentValue;
+                        rChartData.Z = (double)newMinValue.DependentValue;
+                        regressionDataList.Add(rChartData);
 
-                    int newXminvalue = (int) newMinValue.IndependentValue;
-                    int newXMaxvalue = (int)newMaxValue.IndependentValue;
-                    SetXandYCoordinates(dataList, newXminvalue , newXMaxvalue);
-                   
-                }
+                        rChartData = new RegressionChartData();
+                        rChartData.X = (double)newMaxValue.IndependentValue;
+                        rChartData.Z = (double)newMaxValue.DependentValue;
+                        regressionDataList.Add(rChartData);
 
-                //xAxis.UseOnlyVisiblePointsToComputeRange = true;
-                                
-                series0.DataSource = dataList;
-                series1.DataSource = regressionDataList;
-                xyChart.Width =  chtParameters.ChartWidth;
-                xyChart.Height = chtParameters.ChartHeight;
-               
+                        int newXminvalue = (int)newMinValue.IndependentValue;
+                        int newXMaxvalue = (int)newMaxValue.IndependentValue;
+                        SetXandYCoordinates(dataList, newXminvalue, newXMaxvalue);
+  
+                    }
 
+                    //xAxis.UseOnlyVisiblePointsToComputeRange = true;
 
+                    series0.DataSource = dataList;
+                    series1.DataSource = regressionDataList;
+                    xyChart.Width = chtParameters.ChartWidth;
+                    xyChart.Height = chtParameters.ChartHeight;
+
+                 }
                 //xAxis.UseOnlyVisiblePointsToComputeRange = true;
 
             }
