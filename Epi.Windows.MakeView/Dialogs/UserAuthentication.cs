@@ -72,7 +72,7 @@ namespace Epi.Windows.MakeView.Dialogs
                     return false;
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }

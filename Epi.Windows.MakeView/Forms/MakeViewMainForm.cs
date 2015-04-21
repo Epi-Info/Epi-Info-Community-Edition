@@ -4458,8 +4458,9 @@ namespace Epi.Windows.MakeView.Forms
                 }
                 catch (Exception ex)// not republishable
                 {
-                    WebEnterPublishDialog dialog = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
-                    dialog.ShowDialog();
+                    throw ex;
+                    //WebEnterPublishDialog dialog = new WebEnterPublishDialog(null, this.mediator, template.CreateWebEnterTemplate());
+                    //dialog.ShowDialog();
                 }
             }
 
@@ -4486,34 +4487,34 @@ namespace Epi.Windows.MakeView.Forms
        
         private bool ValidateUser()
             {
-            iscancel = false;
-            bool IsValidUser = false;            
-            string UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
-            Configuration config = Configuration.GetNewInstance();
-            int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
+                iscancel = false;
+                bool IsValidUser = false;
+                string UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
+                Configuration config = Configuration.GetNewInstance();
+                int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
 
-            try
-            {
-            UserPrincipal User = GetUser(UserName);
+           // try
+           // {
+           // UserPrincipal User = GetUser(UserName);
 
-            EWEManagerService.UserAuthenticationRequest Request = new EWEManagerService.UserAuthenticationRequest();
-            var rUser = new EWEManagerService.UserDTO();
-            rUser.EmailAddress = User.EmailAddress;
-            Request.User = rUser;
-            Request.User.Operation = EWEManagerService.ConstantOperationMode.NoChange;
+           // EWEManagerService.UserAuthenticationRequest Request = new EWEManagerService.UserAuthenticationRequest();
+           // var rUser = new EWEManagerService.UserDTO();
+           // rUser.EmailAddress = User.EmailAddress;
+           // Request.User = rUser;
+           // Request.User.Operation = EWEManagerService.ConstantOperationMode.NoChange;
            
-           var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
-            var Result = client.GetUser(Request);
-            if (Result != null && ISWindowAuthMode == 1)
-             {
-              IsValidUser = true;
-              LoginInfo.UserID = Result.User.UserId;
-              }
+           //var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+           // var Result = client.GetUser(Request);
+           // if (Result != null && ISWindowAuthMode == 1)
+           //  {
+           //   IsValidUser = true;
+           //   LoginInfo.UserID = Result.User.UserId;
+           //   }
 
-            return IsValidUser;
-            }
-             catch (Exception ex) 
-                 {
+           // return IsValidUser;
+           // }
+           //  catch (Exception ex) 
+           //      {
                /*  Template template = new Template(this.mediator);
                  WebEnterOptions dialog2 = new WebEnterOptions();
                  DialogResult result3 = dialog2.ShowDialog();
@@ -4523,25 +4524,56 @@ namespace Epi.Windows.MakeView.Forms
                      dialog2.Close();
                  }
                  */
-                     if (ISWindowAuthMode == 0)
-                     {
-                         if (LoginInfo.UserID == -1)
-                         {
-                             Template template = new Template(this.mediator);
-                             UserAuthentication dialog = new UserAuthentication();
-                             DialogResult result = dialog.ShowDialog();
-                             if (result == System.Windows.Forms.DialogResult.OK)
-                             {
-                                 dialog.Close();
-                                 IsValidUser = true;
-                             }
+                 //    if (ISWindowAuthMode == 0)
+                 //    {
+                 //        if (LoginInfo.UserID == -1)
+                 //        {
+                 //            Template template = new Template(this.mediator);
+                 //            UserAuthentication dialog = new UserAuthentication();
+                 //            DialogResult result = dialog.ShowDialog();
+                 //            if (result == System.Windows.Forms.DialogResult.OK)
+                 //            {
+                 //                dialog.Close();
+                 //                IsValidUser = true;
+                 //            }
 
-                         }
-                         IsValidUser = true;
-                     }
+                 //        }
+                 //        IsValidUser = true;
                  //    }
-                 return IsValidUser;
-                 }
+                 ////    }
+                 //return IsValidUser;
+                // }
+
+
+
+
+                if (ISWindowAuthMode == 0)
+                {
+                    if (LoginInfo.UserID == -1)
+                    {
+                        Template template = new Template(this.mediator);
+                        UserAuthentication dialog = new UserAuthentication();
+                        DialogResult result = dialog.ShowDialog();
+                        if (result == System.Windows.Forms.DialogResult.OK)
+                        {
+                            dialog.Close();
+                            IsValidUser = true;
+                        }
+                        if (result == System.Windows.Forms.DialogResult.Cancel)
+                        {
+                            dialog.Close();
+                            IsValidUser = false;
+                        }
+
+                    }
+                   
+                }
+                
+                return IsValidUser;
+
+
+
+
             }
         public  UserPrincipal GetUser(string UserName)
             {
