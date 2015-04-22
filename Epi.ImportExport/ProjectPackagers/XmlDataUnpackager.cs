@@ -763,7 +763,13 @@ namespace Epi.ImportExport.ProjectPackagers
 
                     if (fieldsInQuery.Count > 0 && fieldValueParams.Count > 0)
                     {
-                        Query updateQuery = db.CreateQuery(updateHeader + StringLiterals.SPACE + setFieldText.ToString() + StringLiterals.SPACE + whereClause);
+                        Query updateQuery = db.CreateQuery(updateHeader
+                            + StringLiterals.SPACE
+                            + StringLiterals.LEFT_SQUARE_BRACKET
+                            + setFieldText.ToString()
+                            + StringLiterals.RIGHT_SQUARE_BRACKET
+                            + StringLiterals.SPACE + whereClause);
+                        
                         updateQuery.Parameters = fieldValueParams;
 
                         if (DestinationProject.CollectedDataDriver.ToLower().Contains("epi.data.office"))
