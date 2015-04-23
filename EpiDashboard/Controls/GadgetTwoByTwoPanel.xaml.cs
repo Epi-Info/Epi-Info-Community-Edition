@@ -29,8 +29,10 @@ namespace EpiDashboard.Controls
         private decimal totalNoRow;
         private decimal totalYesCol;
         private decimal totalNoCol;
+        public bool ExposureSwap;
+        public bool OutComeSwap;
         
-        public event TwoByTwoValuesUpdatedHandler ValuesUpdated;
+        public event TwoByTwoValuesUpdatedHandler ValuesUpdated;      
 
         public GadgetTwoByTwoPanel()
         {
@@ -729,10 +731,15 @@ namespace EpiDashboard.Controls
 
             Compute();
 
+            if (OutComeSwap)
+                OutComeSwap = false;
+            else
+                OutComeSwap = true;
+
             if (ValuesUpdated != null)
             {
                 ValuesUpdated(this);
-            }
+            }         
         }
 
         private void PathSwapExposure_MouseEnter(object sender, MouseEventArgs e)
@@ -767,10 +774,15 @@ namespace EpiDashboard.Controls
 
             Compute();
 
+            if (ExposureSwap)
+                ExposureSwap = false;
+            else
+                ExposureSwap = true;
+
             if (ValuesUpdated != null)
             {
                 ValuesUpdated(this);
-            }
+            }          
         }
 
         public Orientation Orientation

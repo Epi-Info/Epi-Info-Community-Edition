@@ -635,21 +635,22 @@ namespace EpiDashboard
         {
             if (smartTable && table.Columns.Count == 3 && table.Rows.Count == 2)
             {
-                Dictionary<string, string> booleanValues = new Dictionary<string, string>();
-                booleanValues.Add("0", "1");
-                booleanValues.Add("false", "true");
-                booleanValues.Add("f", "t");
-                booleanValues.Add("n", "y");
-
-                if (!booleanValues.ContainsKey(DashboardHelper.Config.Settings.RepresentationOfNo.ToLower()))
-                {
-                    booleanValues.Add(DashboardHelper.Config.Settings.RepresentationOfNo.ToLower(), DashboardHelper.Config.Settings.RepresentationOfYes.ToLower());
-                }
+                //Dictionary<string, string> booleanValues = new Dictionary<string, string>();
+                //booleanValues.Add("0", "1");
+                //booleanValues.Add("false", "true");
+                //booleanValues.Add("f", "t");
+                //booleanValues.Add("n", "y");
+                CrosstabParameters crosstabParameters = (CrosstabParameters)Parameters;
+                // if (!booleanValues.ContainsKey(DashboardHelper.Config.Settings.RepresentationOfNo.ToLower()))
+                // {
+                //  booleanValues.Add(DashboardHelper.Config.Settings.RepresentationOfNo.ToLower(), DashboardHelper.Config.Settings.RepresentationOfYes.ToLower());
+                //}
 
                 string firstColumnName = table.Columns[1].ColumnName.ToLower();
                 string secondColumnName = table.Columns[2].ColumnName.ToLower();
 
-                if (booleanValues.ContainsKey(firstColumnName) && secondColumnName.Equals(booleanValues[firstColumnName]))
+                //  if (booleanValues.ContainsKey(firstColumnName) && secondColumnName.Equals(booleanValues[firstColumnName]))
+                if (crosstabParameters.OutcomeSwap)
                 {
                     Swap2x2ColValues(table);
                 }
@@ -657,7 +658,8 @@ namespace EpiDashboard
                 string firstRowName = table.Rows[0][0].ToString();
                 string secondRowName = table.Rows[1][0].ToString();
 
-                if (booleanValues.ContainsKey(firstRowName) && secondRowName.Equals(booleanValues[firstRowName]))
+                // if (booleanValues.ContainsKey(firstRowName) && secondRowName.Equals(booleanValues[firstRowName]))
+                if (crosstabParameters.ExposureSwap)
                 {
                     Swap2x2RowValues(table);
                 }
@@ -1884,6 +1886,16 @@ namespace EpiDashboard
 
         void twoByTwoPanel_ValuesUpdated(System.Windows.Controls.UserControl control)
         {
+            CrosstabParameters crosstabParameters = (CrosstabParameters)Parameters;
+            if (((EpiDashboard.Controls.GadgetTwoByTwoPanel)(control)).ExposureSwap)
+                crosstabParameters.ExposureSwap = true;
+            else
+                crosstabParameters.ExposureSwap = false;
+            if (((EpiDashboard.Controls.GadgetTwoByTwoPanel)(control)).OutComeSwap)
+                crosstabParameters.OutcomeSwap = true;
+            else
+                crosstabParameters.OutcomeSwap = false;
+
             UpdateStrata2x2Statistics();
         }
 
@@ -3245,6 +3257,19 @@ namespace EpiDashboard
             endColorElement.AppendChild(endColorBlueElement);
             element.AppendChild(endColorElement);
 
+            XmlElement OutcomeSwap = doc.CreateElement("OutComeSwap");
+            if (!String.IsNullOrEmpty(crosstabParameters.OutcomeSwap.ToString()))
+            {
+                OutcomeSwap.InnerText = crosstabParameters.OutcomeSwap.ToString();
+                element.AppendChild(OutcomeSwap);
+            }
+
+            XmlElement ExposureSwap = doc.CreateElement("ExposureSwap");
+            if (!String.IsNullOrEmpty(crosstabParameters.ExposureSwap.ToString()))
+            {
+                ExposureSwap.InnerText = crosstabParameters.ExposureSwap.ToString();
+                element.AppendChild(ExposureSwap);
+            }
 
             //xmlString = xmlString + SerializeAnchors();
             SerializeAnchors(element);
@@ -3559,6 +3584,30 @@ namespace EpiDashboard
                         //{
                         //    rctHighColor.Fill = brush;
                         //}
+                        break;
+                    case "outcomeswap":
+                        if (child.InnerText.ToLower().Equals("true"))
+                        {
+                            //checkboxConditionalShading.IsChecked = true;
+                            ((CrosstabParameters)Parameters).OutcomeSwap = true;
+                        }
+                        else
+                        {
+                            //checkboxConditionalShading.IsChecked = false;
+                            ((CrosstabParameters)Parameters).OutcomeSwap = false;
+                        }
+                        break;
+                    case "exposureswap":
+                        if (child.InnerText.ToLower().Equals("true"))
+                        {
+                            //checkboxConditionalShading.IsChecked = true;
+                            ((CrosstabParameters)Parameters).ExposureSwap = true;
+                        }
+                        else
+                        {
+                            //checkboxConditionalShading.IsChecked = false;
+                            ((CrosstabParameters)Parameters).ExposureSwap = false;
+                        }
                         break;
                     case "valueremappings":
                         foreach (XmlNode node in child.ChildNodes)
