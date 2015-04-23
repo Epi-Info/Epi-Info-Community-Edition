@@ -28,7 +28,8 @@ namespace EpiDashboard
         public string Break3 { get; set; }
         public string Break4 { get; set; }
         public string Break5 { get; set; }
-
+        public bool OutcomeSwap { get; set; }
+        public bool ExposureSwap { get; set; }
         public bool DisplayChiSq { get; set; }
         
 
@@ -58,6 +59,8 @@ namespace EpiDashboard
             Break4 = "60";
             Break5 = "80";
             DisplayChiSq = true; // EI-146
+            OutcomeSwap = false;
+            ExposureSwap = false;
         }
 
         /// <summary>
@@ -93,6 +96,8 @@ namespace EpiDashboard
             Break4 = parameters.Break4;
             Break5 = parameters.Break5;
             DisplayChiSq = parameters.DisplayChiSq; //EI-146
+            OutcomeSwap = parameters.OutcomeSwap;
+            ExposureSwap = parameters.ExposureSwap;
         }
     }
 }
