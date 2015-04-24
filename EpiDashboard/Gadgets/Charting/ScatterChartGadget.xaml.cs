@@ -526,6 +526,13 @@ namespace EpiDashboard.Gadgets.Charting
                 //    return string.Empty;
                 //}
 
+                ComponentArt.Win.DataVisualization.Charting.ChartBase xyChart = null;
+                object el = FindName("xyChart");
+                if (el is XYChart)
+                {
+                    xyChart = el as XYChart;
+                }
+
                 StringBuilder htmlBuilder = new StringBuilder();
 
                 if (string.IsNullOrEmpty(CustomOutputHeading))
@@ -561,14 +568,16 @@ namespace EpiDashboard.Gadgets.Charting
                 }
 
                 imageFileName = imageFileName + "_" + count.ToString() + ".png";
-
-                //BitmapSource img = (BitmapSource)Common.ToImageSource(xyChart);
-                System.IO.FileStream stream = new System.IO.FileStream(imageFileName, System.IO.FileMode.Create);
-                //JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-                PngBitmapEncoder encoder = new PngBitmapEncoder();
-                //encoder.Frames.Add(BitmapFrame.Create(img));
-                encoder.Save(stream);
-                stream.Close();
+                if (xyChart != null)
+                {
+                    BitmapSource img = (BitmapSource)Common.ToImageSource(xyChart);
+                    System.IO.FileStream stream = new System.IO.FileStream(imageFileName, System.IO.FileMode.Create);
+                    //JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(img));
+                    encoder.Save(stream);
+                    stream.Close();
+                }
 
                 htmlBuilder.AppendLine("<img src=\"" + imageFileName + "\" />");
 
