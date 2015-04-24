@@ -347,6 +347,35 @@ namespace Epi
             }
         }
 
+        public static bool DoesDataSourceExistForProject(Project project)
+        {
+            IDbDriver db = project.CollectedData.GetDatabase();
+            if (db.FullName.Trim().StartsWith("[MS Access]", StringComparison.OrdinalIgnoreCase))
+            {
+                string databasePath = db.DataSource.StartsWith("data source=") ? db.DataSource.Substring(12) : db.DataSource;
+
+                if (!System.IO.File.Exists(databasePath))
+                {
+                    return false;
+                }
+            }
+            else if (db.ToString().Contains("Sql"))
+            {
+                try
+                {
+                    foreach (View view in project.Views)
+                    {
+
+                    }
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         /// <summary>
         /// Returns true if string is a valid file path
         /// </summary>
