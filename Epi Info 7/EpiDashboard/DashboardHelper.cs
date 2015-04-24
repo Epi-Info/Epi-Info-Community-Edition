@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.OleDb;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -626,18 +627,27 @@ namespace EpiDashboard
                 if (System.IO.File.Exists(projectPath))
                 {
                     Project newProject = new Project(projectPath);
-                    if (newProject.Views.Contains(viewName))
+                    try
                     {
-                        View newView = newProject.GetViewByName(viewName);
-                        IDbDriver database = DBReadExecute.GetDataDriver(projectPath);
+                        if (newProject.Views.Contains(viewName))
+                        {
+                            View newView = newProject.GetViewByName(viewName);
+                            IDbDriver database = DBReadExecute.GetDataDriver(projectPath);
 
-                        this.View = newView;
-                        this.db = database;
+                            this.View = newView;
+                            this.db = database;
+                        }
+                        else
+                        {
+                            string exMsg = string.Format(DashboardSharedStrings.ERROR_FORM_NOT_FOUND_FOR_CANVAS, viewName);
+                            throw new ViewNotFoundException(exMsg);
+                        }
+
                     }
-                    else
+                    catch (Exception Ex)
                     {
-                        string exMsg = string.Format(DashboardSharedStrings.ERROR_FORM_NOT_FOUND_FOR_CANVAS, viewName);
-                        throw new ViewNotFoundException(exMsg);
+                        Epi.Windows.MsgBox.ShowError(SharedStrings.ERROR_LOADING_PROJECT, Ex);
+                        return; // cancelled
                     }
                 }
                 else if (System.IO.File.Exists(Config.Directories.Project + projectPath.Replace(".prj", "") + "\\" + projectPath))
@@ -2045,26 +2055,26 @@ namespace EpiDashboard
             // Get the form's field count, adding base table fields plus GUID field for each page. If less than 255, use SQL relate; otherwise, >255 exceeds OLE field capacity and we need to use a less efficient method
             if (vw.Fields.DataFields.Count + vw.Pages.Count + 5 < 255 && vw.Pages.Count < 15)
             {
-                unfilteredTable = db.Select(db.CreateQuery("SELECT * " + vw.FromViewSQL));
+                    unfilteredTable = db.Select(db.CreateQuery("SELECT * " + vw.FromViewSQL));
 
-                if (unfilteredTable.Columns["RecStatus"] == null && unfilteredTable.Columns["t.RecStatus"] != null)
-                {
-                    unfilteredTable.Columns["t.RecStatus"].ColumnName = "RecStatus";
-                }
-
-                if (unfilteredTable.Columns.Contains("t.GlobalRecordId"))
-                {
-                    unfilteredTable.Columns["t.GlobalRecordId"].ColumnName = "GlobalRecordId";
-                }
-
-                foreach (Page page in vw.Pages)
-                {
-                    string pageGUIDName = page.TableName + "." + "GlobalRecordId";
-                    if (unfilteredTable.Columns.Contains(pageGUIDName))
+                    if (unfilteredTable.Columns["RecStatus"] == null && unfilteredTable.Columns["t.RecStatus"] != null)
                     {
-                        unfilteredTable.Columns.Remove(pageGUIDName);
+                        unfilteredTable.Columns["t.RecStatus"].ColumnName = "RecStatus";
                     }
-                }
+
+                    if (unfilteredTable.Columns.Contains("t.GlobalRecordId"))
+                    {
+                        unfilteredTable.Columns["t.GlobalRecordId"].ColumnName = "GlobalRecordId";
+                    }
+
+                    foreach (Page page in vw.Pages)
+                    {
+                        string pageGUIDName = page.TableName + "." + "GlobalRecordId";
+                        if (unfilteredTable.Columns.Contains(pageGUIDName))
+                        {
+                            unfilteredTable.Columns.Remove(pageGUIDName);
+                        }
+                    }
             }
             else
             {
@@ -2211,10 +2221,17 @@ namespace EpiDashboard
 
                     if (IsUsingEpiProject)
                     {
-                        unfilteredTable = JoinPageTables(this.View, false, inputs);
-
-                        if (unfilteredTable == null)
+                        try
                         {
+                            unfilteredTable = JoinPageTables(this.View, false, inputs);
+                            if (unfilteredTable == null)
+                            {
+                                return; // cancelled
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Epi.Windows.MsgBox.ShowError(SharedStrings.ERROR_LOADING_PROJECT, ex);
                             return; // cancelled
                         }
                     } // end if using Epi Info project

@@ -1341,7 +1341,16 @@ namespace EpiDashboard
             }
             else if (string.IsNullOrEmpty(DashboardHelper.TableName))
             {
-                tblockDataSource.Text = DashboardHelper.View.Project.Name + "\\" + DashboardHelper.View.Name;
+                try
+                {
+                    tblockDataSource.Text = DashboardHelper.View.Project.Name + "\\" + DashboardHelper.View.Name;
+                }
+                catch (Exception ex)
+                {
+                    Epi.Windows.MsgBox.ShowError(SharedStrings.ERROR_CONNECT_DATA_SOURCE);
+                    worker.CancelAsync();
+                    return;
+                }
             }
             else if (string.IsNullOrEmpty(DashboardHelper.CustomQuery))
             {
@@ -1971,7 +1980,7 @@ namespace EpiDashboard
                     }
                     catch (Exception ex)
                     {
-                        throw new ApplicationException("Can not create instance of dbFactory" + ex.StackTrace);
+                        throw new ApplicationException("Cannot create instance of dbFactory" + ex.StackTrace);
                     }
                 }
             }
@@ -3213,8 +3222,16 @@ namespace EpiDashboard
                     this.CurrentCanvas = fileName;
 
                     //dashboardHelper.GenerateRecordCount(true);
-                    UpdateRecordCount();
-                    ReCacheDataSource();
+                    try
+                    {
+                        UpdateRecordCount();
+                        ReCacheDataSource();
+                    }
+                    catch (Exception ex)
+                    {
+                        Epi.Windows.MsgBox.ShowError(ex.Message);
+                        return;
+                    }
                 }
                 
                 if (element.Name.ToLower().Equals("gadgets"))
