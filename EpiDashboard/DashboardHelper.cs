@@ -627,6 +627,12 @@ namespace EpiDashboard
                 if (System.IO.File.Exists(projectPath))
                 {
                     Project newProject = new Project(projectPath);
+
+                    if (!Util.DoesDataSourceExistForProject(newProject))
+                    {
+                        throw new FileNotFoundException(String.Format(DashboardSharedStrings.ERROR_CANVAS_DATA_SOURCE_NOT_FOUND, projectPath));
+                    }
+
                     try
                     {
                         if (newProject.Views.Contains(viewName))

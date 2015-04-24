@@ -721,7 +721,7 @@ namespace Epi.ImportExport.ProjectPackagers
                 string guid = fieldData.RecordGUID;
                 bool isLast = fieldData.Equals(lastRecord);
 
-                if (isLast || fieldsInQuery.Contains(fieldData.FieldName))
+                if (isLast || fieldsInQuery.Contains(fieldData.FieldName) || (!String.IsNullOrEmpty(lastGuid) && !guid.Equals(lastGuid, StringComparison.OrdinalIgnoreCase)))
                 {
                     // run the update with the fields we currently have...
 

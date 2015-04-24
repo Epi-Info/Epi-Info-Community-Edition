@@ -1849,8 +1849,7 @@ namespace EpiDashboard
 
         void mnuRefresh_Click(object sender, RoutedEventArgs e)
         {
-            DashboardHelper.UserVarsNeedUpdating = true;
-            ReCacheDataSource(false);
+            Refresh();
         }
 
         void mnuReset_Click(object sender, RoutedEventArgs e)
@@ -1995,7 +1994,14 @@ namespace EpiDashboard
         {
             if (DashboardHelper != null)
             {
-                ShowCanvasProperties();
+                if (!Util.DoesDataSourceExistForProject(this.DashboardHelper.View.Project))
+                {
+                    Epi.Windows.MsgBox.ShowError(String.Format(DashboardSharedStrings.ERROR_CANVAS_DATA_SOURCE_NOT_FOUND, this.DashboardHelper.View.Project.FullName));
+                }
+                else
+                {
+                    ShowCanvasProperties();
+                }
             }
         }
 
@@ -3178,6 +3184,21 @@ namespace EpiDashboard
                         Epi.Windows.MsgBox.ShowError(ex.Message);
                         return;
                     }
+                    catch (System.Data.OleDb.OleDbException ex)
+                    {
+                        Epi.Windows.MsgBox.ShowError(ex.Message);
+                        return;
+                    }
+                    catch (System.IO.FileNotFoundException ex)
+                    {
+                        Epi.Windows.MsgBox.ShowError(ex.Message);
+                        return;
+                    }
+                    catch (GeneralException ex)
+                    {
+                        Epi.Windows.MsgBox.ShowError(ex.Message);
+                        return;
+                    }
                     catch (ApplicationException ex)
                     {
                         string message = ex.Message;
@@ -3963,10 +3984,22 @@ namespace EpiDashboard
 
         private void iconRefresh_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            Refresh();
+        }
+
+        private void Refresh()
+        {
             if (DashboardHelper != null)
             {
-                DashboardHelper.UserVarsNeedUpdating = true;
-                ReCacheDataSource(false);
+                if (!Util.DoesDataSourceExistForProject(this.DashboardHelper.View.Project))
+                {
+                    Epi.Windows.MsgBox.ShowError(String.Format(DashboardSharedStrings.ERROR_CANVAS_DATA_SOURCE_NOT_FOUND, this.DashboardHelper.View.Project.FullName));
+                }
+                else
+                {
+                    DashboardHelper.UserVarsNeedUpdating = true;
+                    ReCacheDataSource(false);
+                }
             }
         }
 
