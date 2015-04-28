@@ -9,6 +9,8 @@ using System.Windows.Media.Imaging;
 using ComponentArt.Win.DataVisualization.Charting;
 using EpiDashboard;
 using EpiDashboard.Gadgets.Charting;
+using System.IO;
+using System.Globalization;
 
 namespace EpiDashboard.Controls.Charting
 {
@@ -17,7 +19,7 @@ namespace EpiDashboard.Controls.Charting
         public IChartSettings Settings { get; set; }
         public GadgetParameters Parameters { get; set; }
         public DashboardHelper DashboardHelper { get; set; }
-
+       
         public string ChartTitle
         {
             get
@@ -56,6 +58,25 @@ namespace EpiDashboard.Controls.Charting
             }
 
         }
+        //--
+        public string GadgetTitle
+        {
+            get
+            {
+                TextBlock tblockGadgetTitle = null;
+                object el = FindName("tblockGadgetTitle");
+                if (el is TextBlock)
+                {
+                    tblockGadgetTitle = el as TextBlock;
+                }
+
+                if (tblockGadgetTitle == null) return string.Empty;
+
+                return tblockGadgetTitle.Text;
+            }
+            
+        }
+        //--
         public string SubTitle
         {
             get
@@ -261,6 +282,7 @@ namespace EpiDashboard.Controls.Charting
         }
 
         public string Y2AxisLegendTitle { get; set; }
+            
 
         protected virtual void SetChartProperties()
         {
@@ -438,11 +460,11 @@ namespace EpiDashboard.Controls.Charting
             if (dlg.ShowDialog().Value)
             {
                 ToImageFile(dlg.FileName);
-
+                if (!string.IsNullOrEmpty(GadgetTitle)) { WriteTexttoImage(dlg.FileName); }
                 MessageBox.Show("Image saved successfully.", "Save Image", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
+                
         public virtual string ToHTML(string htmlFileName = "", int count = 0, bool includeImage = true, bool includeFullData = false)
         {
             StringBuilder htmlBuilder = new StringBuilder();
@@ -461,7 +483,7 @@ namespace EpiDashboard.Controls.Charting
             imageFileName = imageFileName + "_" + count.ToString() + ".png";
 
             System.IO.FileInfo fi = new System.IO.FileInfo(imageFileName);
-
+            
             ToImageFile(imageFileName, false);
 
             htmlBuilder.AppendLine("<h3>" + this.StrataTitle + "</h3>");
@@ -470,15 +492,15 @@ namespace EpiDashboard.Controls.Charting
             htmlBuilder.AppendLine("<p>&nbsp;</p>");
             htmlBuilder.AppendLine("<p>&nbsp;</p>");
             htmlBuilder.AppendLine("<p>&nbsp;</p>");
-
+            
             return htmlBuilder.ToString();
         }
 
         public virtual void ToImageFile(string fileName, bool includeGrid = true)
         {
             BitmapSource img = ToBitmapSource(false);
-
-            System.IO.FileStream stream = new System.IO.FileStream(fileName, System.IO.FileMode.Create);
+             
+            System.IO.FileStream stream = new System.IO.FileStream(fileName, System.IO.FileMode.Create, FileAccess.ReadWrite );
             BitmapEncoder encoder = null; // new BitmapEncoder();
 
             if (fileName.EndsWith(".png"))
@@ -492,8 +514,12 @@ namespace EpiDashboard.Controls.Charting
 
             encoder.Frames.Add(BitmapFrame.Create(img));
             encoder.Save(stream);
+          //stream.Flush();
             stream.Close();
-        }
+          //stream.Dispose();
+     
+
+         }
 
         public virtual BitmapSource ToBitmapSource(bool includeGrid = true)
         {
@@ -510,6 +536,8 @@ namespace EpiDashboard.Controls.Charting
 
             if (xyChart == null) throw new ApplicationException();
 
+           
+
             Transform transform = xyChart.LayoutTransform;
             Thickness margin = new Thickness(xyChart.Margin.Left, xyChart.Margin.Top, xyChart.Margin.Right, xyChart.Margin.Bottom);
             // reset current transform (in case it is scaled or rotated)
@@ -521,7 +549,7 @@ namespace EpiDashboard.Controls.Charting
             // VERY IMPORTANT
             xyChart.Measure(size);
             xyChart.Arrange(new Rect(size));
-
+           
             RenderTargetBitmap renderBitmap =
               new RenderTargetBitmap(
                 (int)size.Width,
@@ -529,11 +557,11 @@ namespace EpiDashboard.Controls.Charting
                 96d,
                 96d,
                 PixelFormats.Pbgra32);
+
             renderBitmap.Render(xyChart);
 
             xyChart.LayoutTransform = transform;
             xyChart.Margin = margin;
-
             xyChart.Measure(size);
             xyChart.Arrange(new Rect(size));
 
@@ -619,5 +647,61 @@ namespace EpiDashboard.Controls.Charting
         {
             SendDataToExcel();
         }
-    }
+
+        
+        private void WriteTexttoImage(string Imgfilename = "")
+        {
+            string strtempbackupfilename = Imgfilename.Substring(0, Imgfilename.Length - 4) + "Tmp" + Imgfilename.Substring(Imgfilename.Length - 4, 4);
+            File.Copy(Imgfilename, strtempbackupfilename, true);
+
+            BitmapImage bitmap = new BitmapImage(new Uri(strtempbackupfilename));
+            DrawingVisual visual = new DrawingVisual();
+            string sString = "tmp1";
+            Point curposition = new Point(10, 0);
+              
+            string outputfilename = Imgfilename.Substring(0, Imgfilename.Length - 4) + sString;
+            string gadgetitle = GadgetTitle;
+            FormattedText ftext = new FormattedText(gadgetitle, CultureInfo.InvariantCulture, FlowDirection.LeftToRight, new Typeface("Segeo UI"), 18, Brushes.CornflowerBlue);
+            
+            using (DrawingContext dc = visual.RenderOpen())
+            {
+                dc.DrawImage(bitmap, new Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight));
+                dc.DrawText(ftext, curposition);
+
+            }
+
+            RenderTargetBitmap target = new RenderTargetBitmap(bitmap.PixelWidth, bitmap.PixelHeight,
+                                                               bitmap.DpiX, bitmap.DpiY, PixelFormats.Default);
+            target.Render(visual);
+                        
+            BitmapEncoder encoder = null;
+
+            if (Imgfilename.EndsWith(".png"))
+            {
+                encoder = new PngBitmapEncoder();
+                outputfilename = outputfilename + ".png";
+            }
+            else
+            {
+                encoder = new JpegBitmapEncoder();
+                outputfilename = outputfilename + ".jpg";
+           }
+
+            if (encoder != null)
+            {
+                encoder.Frames.Add(BitmapFrame.Create(target));
+                using (FileStream outputStream = new FileStream(outputfilename, FileMode.Create))
+                {
+                    encoder.Save(outputStream);
+                }
+                         
+            }
+            
+            File.Delete(Imgfilename);
+            File.Copy(outputfilename, Imgfilename, true);
+            File.Delete(outputfilename);
+       }
+
+     }
+
 }
