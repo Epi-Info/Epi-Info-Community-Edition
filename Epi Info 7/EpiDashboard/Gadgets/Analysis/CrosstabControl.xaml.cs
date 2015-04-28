@@ -1888,14 +1888,10 @@ namespace EpiDashboard
         {
             CrosstabParameters crosstabParameters = (CrosstabParameters)Parameters;
             if (((EpiDashboard.Controls.GadgetTwoByTwoPanel)(control)).ExposureSwap)
-                crosstabParameters.ExposureSwap = true;
-            else
-                crosstabParameters.ExposureSwap = false;
+                crosstabParameters.ExposureSwap = !crosstabParameters.ExposureSwap;          
             if (((EpiDashboard.Controls.GadgetTwoByTwoPanel)(control)).OutComeSwap)
-                crosstabParameters.OutcomeSwap = true;
-            else
-                crosstabParameters.OutcomeSwap = false;
-
+                crosstabParameters.OutcomeSwap = !crosstabParameters.OutcomeSwap;   
+        
             UpdateStrata2x2Statistics();
         }
 
@@ -3257,7 +3253,7 @@ namespace EpiDashboard
             endColorElement.AppendChild(endColorBlueElement);
             element.AppendChild(endColorElement);
 
-            XmlElement OutcomeSwap = doc.CreateElement("OutComeSwap");
+            XmlElement OutcomeSwap = doc.CreateElement("OutcomeSwap");
             if (!String.IsNullOrEmpty(crosstabParameters.OutcomeSwap.ToString()))
             {
                 OutcomeSwap.InnerText = crosstabParameters.OutcomeSwap.ToString();
