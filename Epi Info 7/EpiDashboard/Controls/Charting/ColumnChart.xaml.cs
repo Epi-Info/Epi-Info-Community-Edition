@@ -275,9 +275,7 @@ namespace EpiDashboard.Controls.Charting
             tblockChartTitle.Text = ColumnChartParameters.ChartTitle;
             tblockSubTitle.Text = ColumnChartParameters.ChartSubTitle;
             tblockStrataTitle.Text = ColumnChartParameters.ChartStrataTitle;
-            //--ei59
-            tblockGadgetTitle.Text = ColumnChartParameters.GadgetTitle;
-            //--
+            
             //if (ColumnChartParameters.StrataVariableNames.Count > 0)
             //{
             //    tblockStrataTitle.Text = ColumnChartParameters.StrataVariableNames[0].ToString();
