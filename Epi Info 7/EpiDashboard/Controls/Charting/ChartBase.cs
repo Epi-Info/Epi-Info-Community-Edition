@@ -376,13 +376,31 @@ namespace EpiDashboard.Controls.Charting
 
         public virtual string SendDataToString()
         {
-            StringBuilder sb = new StringBuilder();
-
+            StringBuilder sb = new StringBuilder();            
             XYChart xyChart = null;
             object el = FindName("xyChart");
             if (el is XYChart)
             {
                 xyChart = el as XYChart;
+                if (xyChart.DataSource.GetType().ToString().Contains("XYParetoChartData"))
+                {
+                    List<XYParetoChartData> dataList = xyChart.DataSource as List<XYParetoChartData>;
+
+                    sb.Append("X" + "\t");
+                    sb.Append("Y1" + "\t");
+                    sb.Append("Y2" + "\t");
+                    sb.AppendLine();
+
+                    foreach (XYParetoChartData chartData in dataList)
+                    {
+                        sb.Append(chartData.X + "\t");
+                        sb.Append(chartData.Y + "\t");
+                        sb.Append(chartData.Z + "\t");
+                        sb.AppendLine();
+                    }
+                }
+            else
+            {
                 List<XYColumnChartData> dataList = xyChart.DataSource as List<XYColumnChartData>;
 
                 sb.Append("X" + "\t");
@@ -396,8 +414,9 @@ namespace EpiDashboard.Controls.Charting
                     sb.Append(chartData.Y + "\t");
                     sb.Append(chartData.S + "\t");
                     sb.AppendLine();
-                }               
+                }     
             }
+        }
 
             return sb.ToString();
         }

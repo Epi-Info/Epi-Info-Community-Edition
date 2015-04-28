@@ -29,7 +29,7 @@ namespace EpiDashboard.Gadgets.Charting
     /// <summary>
     /// Interaction logic for ParetoChartGadget.xaml
     /// </summary>
-    public partial class ParetoChartGadget : ParetoChartGadgetBase
+    public partial class ParetoChartGadget : ChartGadgetBase
     {
         #region Constructors
         public ParetoChartGadget()
