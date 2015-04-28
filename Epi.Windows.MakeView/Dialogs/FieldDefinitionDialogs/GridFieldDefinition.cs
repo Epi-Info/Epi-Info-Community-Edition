@@ -101,6 +101,9 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
                 }
             }
 
+            int pageNameLength = page.TableName.Length;
+            txtFieldName.MaxLength = 64 - pageNameLength;
+            
             if (!this.field.Id.Equals(0))
             {
                 LoadFormData();
@@ -165,6 +168,12 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
         private void LoadFormData()
         {
             txtPrompt.Text = field.PromptText;
+
+            if (field.Name.Length > txtFieldName.MaxLength)
+            {
+                field.Name = field.Name.Substring(0, txtFieldName.MaxLength);
+            }
+            
             txtFieldName.Text = field.Name;
 
             DataTable columnTable = new DataTable("GridColumns");
@@ -433,6 +442,14 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
 
         private void txtFieldName_TextChanged(object sender, System.EventArgs e)
         {
+            this.txtFieldName.TextChanged -= new System.EventHandler(this.txtFieldName_TextChanged);
+            
+            if (txtFieldName.TextLength > txtFieldName.MaxLength)
+            {
+                txtFieldName.Text = txtFieldName.Text.Substring(0, txtFieldName.MaxLength);
+            }
+            this.txtFieldName.TextChanged += new System.EventHandler(this.txtFieldName_TextChanged);
+            
             if (!string.IsNullOrEmpty(txtFieldName.Text))
             {
                 btnOk.Enabled = true;
