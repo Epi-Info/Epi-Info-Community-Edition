@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="460" d:DesignWidth="800" FontFamily="Global User Interface" FontSize="16" Background="White">
     <UserControl.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="../StyleDictionary.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -19,12 +19,12 @@
             <ColumnDefinition Width="30" />
             <ColumnDefinition Width=".63*" />
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
         <!--<Border Grid.ColumnSpan="100" Grid.RowSpan="100" BorderThickness="2" BorderBrush="#DDDDDD" />-->
 
         <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
@@ -68,22 +68,39 @@
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
 
             <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
-                <Label>Epi Info 7 Project:</Label>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBox x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"></TextBox>
-                    <Button x:Name="btnBrowse" Height="Auto" Grid.Column="2" Click="btnBrowse_Click">Browse</Button>
-                </Grid>
+                <StackPanel x:Name="dataSourceIsProject" Visibility="Visible">
+                    <Label Content="Epi Info 7 Project:" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="28*"/>
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged" Grid.ColumnSpan="2"/>
+                        <Button x:Name="btnBrowse" Height="Auto" Grid.Column="3" Click="btnBrowse_Click" Content="Browse"/>
+                    </Grid>
+                    <Label Content="Form:"/>
+                    <ComboBox x:Name="cmbFormName" SelectionChanged="cmbFormName_SelectionChanged"/>
+                    <Label x:Name="lblRelatedDataSources" Content="Related Data Sources:"/>
+                    <ListBox x:Name="lbxRelatedDataSources" MinHeight="100"/>
+                </StackPanel>
+                <StackPanel x:Name="dataSourceIsStandalone" Visibility="Visible">
+                    <Label Content="Data Source:" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="28*"/>
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txtStandalonePath" IsReadOnly="True" TextChanged="txtStandalonePath_TextChanged" Grid.ColumnSpan="2"/>
+                        <Button x:Name="btnStandaloneBrowse" Height="Auto" Grid.Column="3" Click="btnStandaloneBrowse_Click" Content="Browse"/>
+                    </Grid>
+                    <Label Content="Table:"/>
+                    <ComboBox x:Name="cmbStandaloneFormName" SelectionChanged="cmbStandaloneFormName_SelectionChanged"/>
+                </StackPanel>
 
-                <Label>Form:</Label>
-                <ComboBox x:Name="cmbFormName" SelectionChanged="cmbFormName_SelectionChanged"></ComboBox>
-
-                <Label x:Name="lblRelatedDataSources">Related Data Sources:</Label>
-                <ListBox x:Name="lbxRelatedDataSources" MinHeight="100"></ListBox>
             </StackPanel>
 
             <StackPanel x:Name="panelDataSourceOther" Visibility="Collapsed">
@@ -140,7 +157,7 @@
             <Label>Default Height:</Label>
             <TextBox x:Name="txtDefaultChartHeight">500</TextBox>
         </StackPanel>
-        
+
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="1">

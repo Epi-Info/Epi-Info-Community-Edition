@@ -31,6 +31,8 @@ namespace EpiDashboard.Controls
             InitializeComponent();
             this.DashboardHelper = dashboardHelper;
 
+            DataContext = this;
+
             if (DashboardHelper.IsUsingEpiProject)
             {
                 txtProjectPath.Text = dashboardHelper.View.Project.FilePath;
@@ -50,6 +52,8 @@ namespace EpiDashboard.Controls
                 panelDataSourceProject.Visibility = System.Windows.Visibility.Visible; // Added for EI-176 (in progress)
                 panelDataSourceAdvanced.Visibility = System.Windows.Visibility.Collapsed; // Added for EI-176 (in progress)
                 panelDataSourceOther.Visibility = System.Windows.Visibility.Collapsed; // Added for EI-176 (in progress)
+                dataSourceIsProject.Visibility = System.Windows.Visibility.Visible;
+                dataSourceIsStandalone.Visibility = System.Windows.Visibility.Collapsed;
             }
             else
             {
@@ -67,6 +71,20 @@ namespace EpiDashboard.Controls
                     panelDataSourceAdvanced.Visibility = System.Windows.Visibility.Collapsed; // Added for EI-176 (in progress)
                     panelDataSourceOther.Visibility = System.Windows.Visibility.Visible; // Added for EI-176 (in progress)
                 }
+                dataSourceIsProject.Visibility = System.Windows.Visibility.Collapsed;
+                dataSourceIsStandalone.Visibility = System.Windows.Visibility.Visible;
+
+                txtStandalonePath.Text = DashboardHelper.Database.DataSource;
+                
+                Epi.Data.IDbDriver database = Epi.Data.DBReadExecute.GetDataDriver(txtStandalonePath.Text);
+                List<string> tableNames = database.GetTableNames();
+                cmbStandaloneFormName.Items.Clear();
+                foreach (string tableName in tableNames)
+                {
+                    cmbStandaloneFormName.Items.Add(tableName);
+            }
+
+                cmbStandaloneFormName.SelectedItem = DashboardHelper.TableName;
             }
 
             tblockRows.Text = dashboardHelper.DataSet.Tables[0].Rows.Count.ToString() + " unfiltered rows";
@@ -145,6 +163,22 @@ namespace EpiDashboard.Controls
             set
             {
                 checkboxGadgetSettings.IsChecked = value;
+            }
+        }
+
+        public Visibility StandaloneData
+        {
+            get 
+            {
+                return Visibility.Collapsed;
+            }
+        }
+
+        public Visibility IsProjectDataSource
+        {
+            get
+            {
+                return Visibility.Collapsed;
             }
         }
 
@@ -416,23 +450,36 @@ namespace EpiDashboard.Controls
             }
         }
 
-        private void cmbFormName_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cmbFormName.SelectedIndex >= 0)
-            {
-                cmbFormName.Text = cmbFormName.SelectedItem.ToString();
-            }
-        }
-
         private void txtProjectPath_TextChanged(object sender, TextChangedEventArgs e)
         {
             cmbFormName.Items.Clear();
-            if (System.IO.File.Exists(txtProjectPath.Text))
+            if (System.IO.File.Exists(txtProjectPath.Text) && txtProjectPath.Text.ToLower().EndsWith("prj"))
             {
                 Project project = new Project(txtProjectPath.Text);
+                cmbFormName.Items.Clear(); 
                 foreach (View view in project.Views)
                 {
                     cmbFormName.Items.Add(view.Name);
+            }
+        }
+        }
+
+        private void txtStandalonePath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            cmbStandaloneFormName.Items.Clear();
+            if (System.IO.File.Exists(txtStandalonePath.Text))
+            {
+                if (ChangesAccepted != null)
+                {
+                    ChangesAccepted(this, new EventArgs());
+                }
+
+                Epi.Data.IDbDriver database = Epi.Data.DBReadExecute.GetDataDriver(txtStandalonePath.Text);
+                List<string> tableNames = database.GetTableNames();
+                cmbStandaloneFormName.Items.Clear();
+                foreach (string tableName in tableNames)
+                {
+                    cmbStandaloneFormName.Items.Add(tableName);
                 }
             }
         }
@@ -442,6 +489,63 @@ namespace EpiDashboard.Controls
             if (Cancelled != null)
             {
                 Cancelled(this, new EventArgs());
+            }
+        }
+
+        private void btnStandaloneBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+
+            string fileExten = System.IO.Path.GetExtension(DashboardHelper.Database.DataSource);
+            openFileDialog.DefaultExt = fileExten;
+
+            switch (fileExten.ToLower())
+            {
+                case ".xlsx":
+                    openFileDialog.Filter = "Microsoft Excel 2007 (*.xlsx)|*.xlsx";
+                    break;
+                case ".xls":
+                    openFileDialog.Filter = "Microsoft Excel 97-2003 Workbook (*.xls)|*.xls";
+                    break;
+                case ".accdb":
+                    openFileDialog.Filter = "Microsoft Access 2007 (*.accdb)|*.accdb";
+                    break;
+                case ".mdb":
+                    openFileDialog.Filter = "Microsoft Access 2002-2003 (*.mdb)|*.mdb";
+                    break;
+                default:
+                    openFileDialog.Filter = "All Files (*.*)|*.*";
+                    break;
+            }
+
+            if (!String.IsNullOrEmpty(txtProjectPath.Text))
+            {
+                openFileDialog.FileName = txtProjectPath.Text;
+            }
+            else
+            {
+                openFileDialog.InitialDirectory = this.DashboardHelper.Config.Directories.Project;
+            }
+
+            if (openFileDialog.ShowDialog().Value)
+            {
+                txtStandalonePath.Text = openFileDialog.FileName;
+            }
+        }
+
+        private void cmbFormName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbFormName.SelectedIndex >= 0)
+            {
+                cmbFormName.Text = cmbFormName.SelectedItem.ToString();
+            }
+        }
+
+        private void cmbStandaloneFormName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbStandaloneFormName.SelectedIndex >= 0)
+            {
+                cmbStandaloneFormName.Text = cmbStandaloneFormName.SelectedItem.ToString();
             }
         }
     }
