@@ -275,6 +275,9 @@ namespace EpiDashboard.Controls.Charting
             tblockChartTitle.Text = ColumnChartParameters.ChartTitle;
             tblockSubTitle.Text = ColumnChartParameters.ChartSubTitle;
             tblockStrataTitle.Text = ColumnChartParameters.ChartStrataTitle;
+            //--ei59
+            tblockGadgetTitle.Text = ColumnChartParameters.GadgetTitle;
+            //--
             //if (ColumnChartParameters.StrataVariableNames.Count > 0)
             //{
             //    tblockStrataTitle.Text = ColumnChartParameters.StrataVariableNames[0].ToString();
@@ -308,7 +311,7 @@ namespace EpiDashboard.Controls.Charting
             series1.DashStyle = ColumnChartParameters.Y2LineDashStyle;
             series1.LineKind = ColumnChartParameters.Y2LineKind;
             series1.Thickness = ColumnChartParameters.Y2LineThickness;
-
+           
             if (ColumnChartParameters.ShowLegendBorder == true) 
             {
                 xyChart.Legend.BorderThickness = new Thickness(1);
