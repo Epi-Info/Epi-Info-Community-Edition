@@ -730,16 +730,14 @@ namespace EpiDashboard.Controls
             loadingData = false;
 
             Compute();
-
-            if (OutComeSwap)
-                OutComeSwap = false;
-            else
+          
                 OutComeSwap = true;
 
             if (ValuesUpdated != null)
             {
                 ValuesUpdated(this);
-            }         
+            }
+            OutComeSwap = false;
         }
 
         private void PathSwapExposure_MouseEnter(object sender, MouseEventArgs e)
@@ -772,17 +770,14 @@ namespace EpiDashboard.Controls
 
             loadingData = false;
 
-            Compute();
-
-            if (ExposureSwap)
-                ExposureSwap = false;
-            else
+            Compute();           
                 ExposureSwap = true;
 
             if (ValuesUpdated != null)
             {
                 ValuesUpdated(this);
-            }          
+            }
+            ExposureSwap = false;
         }
 
         public Orientation Orientation
