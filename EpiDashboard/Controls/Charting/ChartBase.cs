@@ -58,25 +58,7 @@ namespace EpiDashboard.Controls.Charting
             }
 
         }
-        //--
-        public string GadgetTitle
-        {
-            get
-            {
-                TextBlock tblockGadgetTitle = null;
-                object el = FindName("tblockGadgetTitle");
-                if (el is TextBlock)
-                {
-                    tblockGadgetTitle = el as TextBlock;
-                }
-
-                if (tblockGadgetTitle == null) return string.Empty;
-
-                return tblockGadgetTitle.Text;
-            }
-            
-        }
-        //--
+        
         public string SubTitle
         {
             get
@@ -460,7 +442,7 @@ namespace EpiDashboard.Controls.Charting
             if (dlg.ShowDialog().Value)
             {
                 ToImageFile(dlg.FileName);
-                if (!string.IsNullOrEmpty(GadgetTitle)) { WriteTexttoImage(dlg.FileName); }
+                if (!string.IsNullOrEmpty(ChartTitle)) { WriteTexttoImage(dlg.FileName); }
                 MessageBox.Show("Image saved successfully.", "Save Image", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
@@ -657,11 +639,10 @@ namespace EpiDashboard.Controls.Charting
             BitmapImage bitmap = new BitmapImage(new Uri(strtempbackupfilename));
             DrawingVisual visual = new DrawingVisual();
             string sString = "tmp1";
-            Point curposition = new Point(10, 0);
+            Point curposition = new Point(250, 0);
               
             string outputfilename = Imgfilename.Substring(0, Imgfilename.Length - 4) + sString;
-            string gadgetitle = GadgetTitle;
-            FormattedText ftext = new FormattedText(gadgetitle, CultureInfo.InvariantCulture, FlowDirection.LeftToRight, new Typeface("Segeo UI"), 18, Brushes.CornflowerBlue);
+            FormattedText ftext = new FormattedText(ChartTitle, CultureInfo.InvariantCulture, FlowDirection.LeftToRight, new Typeface("Segeo UI"), 22, Brushes.Black);
             
             using (DrawingContext dc = visual.RenderOpen())
             {
