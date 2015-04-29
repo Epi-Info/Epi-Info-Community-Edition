@@ -1994,15 +1994,16 @@ namespace EpiDashboard
         {
             if (DashboardHelper != null)
             {
-                if (!Util.DoesDataSourceExistForProject(this.DashboardHelper.View.Project))
+                if (this.DashboardHelper.View != null
+                    && !Util.DoesDataSourceExistForProject(this.DashboardHelper.View.Project))
                 {
                     Epi.Windows.MsgBox.ShowError(String.Format(DashboardSharedStrings.ERROR_CANVAS_DATA_SOURCE_NOT_FOUND, this.DashboardHelper.View.Project.FullName));
                 }
                 else
                 {
                 ShowCanvasProperties();
+                }
             }
-        }
         }
 
         void mnuDataDictionary_Click(object sender, RoutedEventArgs e)
@@ -3944,9 +3945,9 @@ namespace EpiDashboard
 
                 DashboardHelper.ResetView(tempProject.Views[properties.FormName], false);
             }
-            else if (!string.IsNullOrEmpty(properties.SqlQuery))
+            else if (!string.IsNullOrEmpty(properties.CustomQuery))
             {
-                DashboardHelper.SetCustomQuery(properties.SqlQuery);
+                DashboardHelper.SetCustomQuery(properties.CustomQuery);
             }
             else
             {

@@ -95,12 +95,18 @@
                     <TextBox x:Name="txtStandalonePath" IsReadOnly="True" TextChanged="txtStandalonePath_TextChanged" Grid.ColumnSpan="2"/>
                     <Button x:Name="btnStandaloneBrowse" Height="Auto" Grid.Column="3" Click="btnStandaloneBrowse_Click" Content="Browse"/>
                 </Grid>
-                <Label Content="Table:"/>
+                <Label>Table:</Label>
                 <ComboBox x:Name="cmbStandaloneFormName" SelectionChanged="cmbStandaloneFormName_SelectionChanged"/>
             </StackPanel>
-            <StackPanel x:Name="panelDataSourceAdvanced" Visibility="Collapsed">
+            <StackPanel x:Name="panelDataSourceSql" Visibility="Collapsed">
                 <Label>SQL Query:</Label>
                 <TextBox x:Name="txtSQLQuery"></TextBox>
+                <Label>Table:</Label>
+                <ComboBox x:Name="cmbSqlTable" SelectionChanged="cmbSqlTable_SelectionChanged"/>
+                <StackPanel x:Name="panelDataSourceSqlAdvanced" Visibility="Collapsed">
+                    <Label>Advanced Sql Query:</Label>
+                    <TextBox x:Name="txtAdvancedSQLQuery"></TextBox>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
