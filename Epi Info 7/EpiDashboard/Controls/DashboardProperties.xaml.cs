@@ -51,32 +51,57 @@ namespace EpiDashboard.Controls
 
                 panelDataSourceProject.Visibility = System.Windows.Visibility.Visible;
                 panelDataSourceOther.Visibility = System.Windows.Visibility.Collapsed;
-                panelDataSourceAdvanced.Visibility = System.Windows.Visibility.Collapsed;
+                panelDataSourceSql.Visibility = System.Windows.Visibility.Collapsed;
             }
-            else if (!String.IsNullOrEmpty(dashboardHelper.CustomQuery))
+            else 
             {
-                SqlQuery = DashboardHelper.CustomQuery;
-                panelDataSourceProject.Visibility = System.Windows.Visibility.Collapsed;
-                panelDataSourceOther.Visibility = System.Windows.Visibility.Collapsed;
-                panelDataSourceAdvanced.Visibility = System.Windows.Visibility.Visible;
-            }
-            else
-            {
-                panelDataSourceProject.Visibility = System.Windows.Visibility.Collapsed;
-                panelDataSourceOther.Visibility = System.Windows.Visibility.Visible;
-                panelDataSourceAdvanced.Visibility = System.Windows.Visibility.Collapsed;
-
-                txtStandalonePath.Text = DashboardHelper.Database.DataSource;
-
-                Epi.Data.IDbDriver database = Epi.Data.DBReadExecute.GetDataDriver(txtStandalonePath.Text);
-                List<string> tableNames = database.GetTableNames();
-                cmbStandaloneFormName.Items.Clear();
-                foreach (string tableName in tableNames)
+                if (dashboardHelper.Database.ToString().Contains("SqlDatabase"))
                 {
-                    cmbStandaloneFormName.Items.Add(tableName);
-                }
+                    panelDataSourceProject.Visibility = System.Windows.Visibility.Collapsed;
+                    panelDataSourceOther.Visibility = System.Windows.Visibility.Collapsed;
+                    panelDataSourceSql.Visibility = System.Windows.Visibility.Visible;
 
-                cmbStandaloneFormName.SelectedItem = DashboardHelper.TableName;
+                    txtSQLQuery.Text = DashboardHelper.Database.ConnectionString;
+
+                    Epi.Data.IDbDriver database = Epi.Data.DBReadExecute.GetDataDriver(txtSQLQuery.Text);
+                    List<string> tableNames = database.GetTableNames();
+                    cmbSqlTable.Items.Clear();
+                        
+                    foreach (string tableName in tableNames)
+                    {
+                        cmbSqlTable.Items.Add(tableName);
+                    }
+
+                    cmbSqlTable.SelectedItem = DashboardHelper.TableName;
+
+                    if (!String.IsNullOrEmpty(dashboardHelper.CustomQuery))
+                    {
+                        CustomQuery = DashboardHelper.CustomQuery;
+                        panelDataSourceSqlAdvanced.Visibility = System.Windows.Visibility.Visible;
+                    }
+                    else
+                    {
+                        panelDataSourceSqlAdvanced.Visibility = System.Windows.Visibility.Collapsed;
+                    }
+                }
+                else
+                {
+                    panelDataSourceProject.Visibility = System.Windows.Visibility.Collapsed;
+                    panelDataSourceOther.Visibility = System.Windows.Visibility.Visible;
+                    panelDataSourceSql.Visibility = System.Windows.Visibility.Collapsed;
+
+                    txtStandalonePath.Text = DashboardHelper.Database.DataSource;
+
+                    Epi.Data.IDbDriver database = Epi.Data.DBReadExecute.GetDataDriver(txtStandalonePath.Text);
+                    List<string> tableNames = database.GetTableNames();
+                    cmbStandaloneFormName.Items.Clear();
+                    foreach (string tableName in tableNames)
+                    {
+                        cmbStandaloneFormName.Items.Add(tableName);
+                    }
+
+                    cmbStandaloneFormName.SelectedItem = DashboardHelper.TableName;
+                }
             }
 
             tblockRows.Text = dashboardHelper.DataSet.Tables[0].Rows.Count.ToString() + " unfiltered rows";
@@ -227,7 +252,7 @@ namespace EpiDashboard.Controls
                 txtProjectPath.Text = value.FullName;
                 panelDataSourceProject.Visibility = Visibility.Visible;
                 panelDataSourceOther.Visibility = Visibility.Collapsed;
-                panelDataSourceAdvanced.Visibility = Visibility.Collapsed;
+                panelDataSourceSql.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -322,22 +347,22 @@ namespace EpiDashboard.Controls
                 txtSQLQuery.Text = value;
                 panelDataSourceProject.Visibility = Visibility.Collapsed;
                 panelDataSourceOther.Visibility = Visibility.Collapsed;
-                panelDataSourceAdvanced.Visibility = Visibility.Visible;
+                panelDataSourceSql.Visibility = Visibility.Visible;
             }
         }
 
-        public string SqlQuery
+        public string CustomQuery
         {
             get
             {
-                return txtSQLQuery.Text;
+                return txtAdvancedSQLQuery.Text;
             }
             set
             {
-                txtSQLQuery.Text = value;
+                txtAdvancedSQLQuery.Text = value;
                 panelDataSourceProject.Visibility = Visibility.Collapsed;
                 panelDataSourceOther.Visibility = Visibility.Collapsed;
-                panelDataSourceAdvanced.Visibility = Visibility.Visible;
+                panelDataSourceSql.Visibility = Visibility.Visible;
             }
         }
 
@@ -534,6 +559,14 @@ namespace EpiDashboard.Controls
             if (cmbStandaloneFormName.SelectedIndex >= 0)
             {
                 cmbStandaloneFormName.Text = cmbStandaloneFormName.SelectedItem.ToString();
+            }
+        }
+
+        private void cmbSqlTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbSqlTable.SelectedIndex >= 0)
+            {
+                cmbSqlTable.Text = cmbSqlTable.SelectedItem.ToString();
             }
         }
     }
