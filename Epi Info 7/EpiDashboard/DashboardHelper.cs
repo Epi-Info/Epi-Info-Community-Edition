@@ -1265,6 +1265,37 @@ namespace EpiDashboard
                 }
             }
         }
+        
+        public void SetDataDriver(IDbDriver db, string path, string tableName)
+        {
+            if (!IsUsingEpiProject)
+            {
+                this.db = db;
+                this.TableName = tableName;
+                
+                this.View = null;
+
+                this.DataSet.Tables.Clear();
+
+                ConstructTableColumnNames();
+                this.dashboardControl.ReCacheDataSource(false);
+            }
+        }
+
+        public void SetSQLDriver(IDbDriver db, string tableName)
+        {
+            if (!IsUsingEpiProject)
+            {
+                this.db = db;
+                this.TableName = tableName;
+                this.View = null;
+
+                this.DataSet.Tables.Clear();
+
+                ConstructTableColumnNames();
+                this.dashboardControl.ReCacheDataSource(false);
+            }
+        }
 
         /// <summary>
         /// Change SQL Query
