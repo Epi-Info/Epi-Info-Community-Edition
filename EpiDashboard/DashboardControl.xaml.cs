@@ -1343,8 +1343,8 @@ namespace EpiDashboard
             {
                 try
                 {
-                    tblockDataSource.Text = DashboardHelper.View.Project.Name + "\\" + DashboardHelper.View.Name;
-                }
+                tblockDataSource.Text = DashboardHelper.View.Project.Name + "\\" + DashboardHelper.View.Name;
+            }
                 catch (Exception ex)
                 {
                     Epi.Windows.MsgBox.ShowError(SharedStrings.ERROR_CONNECT_DATA_SOURCE);
@@ -2000,9 +2000,9 @@ namespace EpiDashboard
                 }
                 else
                 {
-                    ShowCanvasProperties();
-                }
+                ShowCanvasProperties();
             }
+        }
         }
 
         void mnuDataDictionary_Click(object sender, RoutedEventArgs e)
@@ -3245,9 +3245,9 @@ namespace EpiDashboard
                     //dashboardHelper.GenerateRecordCount(true);
                     try
                     {
-                        UpdateRecordCount();
-                        ReCacheDataSource();
-                    }
+                    UpdateRecordCount();
+                    ReCacheDataSource();
+                }
                     catch (Exception ex)
                     {
                         Epi.Windows.MsgBox.ShowError(ex.Message);
@@ -3950,9 +3950,8 @@ namespace EpiDashboard
             }
             else
             {
-                // TODO: EI-176 - in progress, change this later
-                IDbDriver currentDriver = DashboardHelper.Database;
-                DashboardHelper.SetDataDriver(currentDriver, properties.TableName);
+                Epi.Data.IDbDriver dbDriver = Epi.Data.DBReadExecute.GetDataDriver(properties.txtStandalonePath.Text);
+                DashboardHelper.SetDataDriver(dbDriver, properties.txtStandalonePath.Text, properties.TableName);
             }
 
             this.CustomOutputConclusionText = properties.Conclusion;
@@ -3997,10 +3996,10 @@ namespace EpiDashboard
                 }
                 else
                 {
-                    DashboardHelper.UserVarsNeedUpdating = true;
-                    ReCacheDataSource(false);
-                }
+                DashboardHelper.UserVarsNeedUpdating = true;
+                ReCacheDataSource(false);
             }
+        }
         }
 
         private void iconDb_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
