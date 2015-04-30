@@ -35,21 +35,58 @@ namespace Epi.Windows.AnalysisDashboard
                     ICommandLine commandLine = new CommandLine(args);
 
                     DashboardMainForm M = new DashboardMainForm();
-                    string canvasPath = string.Empty;
-                    string htmlOutputPath = string.Empty;
+                    string parsePath = string.Empty;
+                    string canvasPath = commandLine.GetArgument("canvas");
+                    string htmlOutputPath = commandLine.GetArgument("output");
 
                     bool minimized = false;
                     bool.TryParse(commandLine.GetArgument("minimized"), out minimized);
 
-                    for (int i = 0; i < commandLine.ArgumentStrings.Length; i++)
+                    if (commandLine.ArgumentStrings.Length > 0) 
                     {
-                        if (commandLine.ArgumentStrings[i].IndexOf(".cvs7", StringComparison.CurrentCultureIgnoreCase) >= 0)
+                        if (String.IsNullOrEmpty(canvasPath))
                         {
-                            canvasPath = commandLine.ArgumentStrings[i].Trim();                            
+                            for (int i = 0; i < commandLine.ArgumentStrings.Length; i++)
+                            {
+                                if (commandLine.ArgumentStrings[i].IndexOf(".cvs7", StringComparison.CurrentCultureIgnoreCase) >= 0)
+                                {
+                                    canvasPath = commandLine.ArgumentStrings[i].Trim();
+                                    if (!File.Exists(canvasPath))
+                                    {
+                                        parsePath = Application.StartupPath + "\\" + canvasPath;
+                                        if (File.Exists(parsePath))
+                                        {
+                                            canvasPath = parsePath;
+                                        }
+                                        else
+                                        {
+                                            int slashIndex = canvasPath.IndexOf("\\", StringComparison.CurrentCultureIgnoreCase);
+                                            if (canvasPath.Length > slashIndex + 1)
+                                            {
+                                                parsePath = Application.StartupPath + "\\" + canvasPath.Substring(slashIndex + 1);
+                                            }
+                                            if (File.Exists(parsePath))
+                                            {
+                                                canvasPath = parsePath;
+                                            }
+                                            else
+                                            {
+                                                canvasPath = string.Empty;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        else if (commandLine.ArgumentStrings[i].IndexOf(".html", StringComparison.CurrentCultureIgnoreCase) >= 0 || commandLine.ArgumentStrings[i].IndexOf(".htm", StringComparison.CurrentCultureIgnoreCase) >= 0)
+                        if (String.IsNullOrEmpty(htmlOutputPath))
                         {
-                            htmlOutputPath = commandLine.ArgumentStrings[i].Trim();                           
+                            for (int i = 0; i < commandLine.ArgumentStrings.Length; i++)
+                            {
+                                if (commandLine.ArgumentStrings[i].IndexOf(".htm", StringComparison.CurrentCultureIgnoreCase) >= 0 || commandLine.ArgumentStrings[i].IndexOf(".html", StringComparison.CurrentCultureIgnoreCase) >= 0)
+                                {
+                                    htmlOutputPath = commandLine.ArgumentStrings[i].Trim();
+                                }
+                            }
                         }
                     }
 
