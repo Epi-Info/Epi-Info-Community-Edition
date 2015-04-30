@@ -11,6 +11,7 @@ using Epi.Windows.Dialogs;
 using Epi.Fields;
 using Epi;
 using Epi.Windows;
+using Epi.Data.Services;
 #endregion
 
 namespace Epi.Windows.MakeView.Dialogs
@@ -890,6 +891,46 @@ namespace Epi.Windows.MakeView.Dialogs
                     break;
             }
         }
+        /// <summary>
+        /// Validate Grid column field name
+        /// </summary>
+        private void ValidateColumnFieldName()
+        {
+            txtFieldName.Text = Util.Squeeze(txtFieldName.Text);
+
+            if (string.IsNullOrEmpty(txtFieldName.Text))
+            {
+                ErrorMessages.Add(SharedStrings.ENTER_FIELD_NAME);
+            }
+            else if (!txtFieldName.ReadOnly)
+            {
+                string strTestForSymbols = txtFieldName.Text;
+                Regex regex = new Regex("[\\w\\d]", RegexOptions.IgnoreCase);
+                string strResultOfSymbolTest = regex.Replace(strTestForSymbols, string.Empty);
+
+                if (strResultOfSymbolTest.Length > 0)
+                {
+                    ErrorMessages.Add(string.Format(SharedStrings.INVALID_CHARS_IN_FIELD_NAME, strResultOfSymbolTest));
+                }
+                else
+                {
+                    if (txtFieldName.Text.Length > 64)
+                    {
+                        ErrorMessages.Add(SharedStrings.FIELD_NAME_TOO_LONG);
+                    }                   
+
+                    if (AppData.Instance.IsReservedWord(txtFieldName.Text))
+                    {
+                        ErrorMessages.Add(SharedStrings.FIELD_NAME_IS_RESERVED);
+                    }
+                }
+            }
+
+            if ((ErrorMessages.Count > 0) && (!(string.IsNullOrEmpty(txtFieldName.Text))))
+            {
+                txtFieldName.Focus();
+            }
+        }
         #endregion	
 
         #region Event Handlers
@@ -1019,6 +1060,14 @@ namespace Epi.Windows.MakeView.Dialogs
                     return;
                 }
             }
+
+            ValidateColumnFieldName();
+            if (ErrorMessages.Count > 0)
+            {
+                ShowErrorMessages();
+                return;
+            } 
+
             if (cbxRange.Checked)
             {
                 bool isValid = true;
@@ -1431,6 +1480,18 @@ namespace Epi.Windows.MakeView.Dialogs
         void txtFieldName_TextChanged(object sender, System.EventArgs e)
         {
             EnableDisableFields();
+            ValidateColumnFieldName();
+            bool valid = false;
+            valid = ErrorMessages.Count > 0 ? false : true;
+            ErrorMessages.Clear();
+            if (valid)
+            {
+                txtFieldName.ForeColor = Color.Black;               
+            }
+            else
+            {
+                txtFieldName.ForeColor = Color.Red;
+            }
         }	
 
         void delete_Click(object sender, EventArgs e)
