@@ -98,13 +98,15 @@
                 <Label>Table:</Label>
                 <ComboBox x:Name="cmbStandaloneFormName" SelectionChanged="cmbStandaloneFormName_SelectionChanged"/>
             </StackPanel>
-            <StackPanel x:Name="panelDataSourceSql" Visibility="Collapsed">
+            <StackPanel x:Name="panelDataSourceSql" Visibility="Visible">
                 <Label>Connection String:</Label>
                 <TextBox x:Name="txtSQLConnectionString"></TextBox>
                 <Label>Table:</Label>
                 <ComboBox x:Name="cmbSqlTable" SelectionChanged="cmbSqlTable_SelectionChanged"/>
-                    <Label>Advanced Query:</Label>
-                    <TextBox x:Name="txtAdvancedSQLQuery"></TextBox>
+            </StackPanel>
+            <StackPanel x:Name="panelAdvancedSQLQuery" Visibility="Visible">
+                <Label>Advanced Query:</Label>
+                <TextBox x:Name="txtAdvancedSQLQuery" ></TextBox>
             </StackPanel>
         </StackPanel>
 

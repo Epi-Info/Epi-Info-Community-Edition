@@ -3948,13 +3948,12 @@ namespace EpiDashboard
             else if (DashboardHelper.Database.ToString().Contains("SqlDatabase")) 
             {
                 Epi.Data.IDbDriver dbDriver = Epi.Data.DBReadExecute.GetDataDriver(properties.txtSQLConnectionString.Text);
-                DashboardHelper.SetDataDriver(dbDriver, properties.TableName);
-                DashboardHelper.SetCustomQuery(properties.CustomQuery);
+                DashboardHelper.SetDataSource(dbDriver, properties.TableName, properties.CustomQuery);
             }
             else
             {
                 Epi.Data.IDbDriver dbDriver = Epi.Data.DBReadExecute.GetDataDriver(properties.txtStandalonePath.Text);
-                DashboardHelper.SetDataDriver(dbDriver, properties.TableName);
+                DashboardHelper.SetDataSource(dbDriver, properties.TableName, properties.CustomQuery);
             }
 
             this.CustomOutputConclusionText = properties.Conclusion;
@@ -3977,8 +3976,6 @@ namespace EpiDashboard
             }
 
             popup.Close();
-
-            Refresh();
         }
 
         void properties_Cancelled(object sender, EventArgs e)

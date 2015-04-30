@@ -1233,6 +1233,37 @@ namespace EpiDashboard
             }
         }
 
+        public void SetDataSource(IDbDriver db, string tableName, string customQuery)
+        {
+            if (!IsUsingEpiProject)
+            {
+                IDbDriver lastDb = this.db;
+                string lastTableName = this.TableName;
+                string lastCustomQuery = this.CustomQuery;
+                
+                this.db = db;
+                this.TableName = tableName;
+                this.CustomQuery = customQuery;
+
+                try
+                {
+                    this.DataSet.Tables.Clear();
+                    ConstructTableColumnNames();
+                    this.dashboardControl.ReCacheDataSource(false);
+                }
+                catch
+                {
+                    this.db = lastDb;
+                    this.TableName = lastTableName;
+                    this.CustomQuery = lastCustomQuery;
+
+                    this.DataSet.Tables.Clear();
+                    ConstructTableColumnNames();
+                    this.dashboardControl.ReCacheDataSource();
+                }
+            }
+        }
+
         public void SetCustomQuery(string customQuery)
         {
             string oldQuery = this.CustomQuery;
@@ -1254,48 +1285,6 @@ namespace EpiDashboard
                     ConstructTableColumnNames();
                     this.dashboardControl.ReCacheDataSource();
                 }
-            }
-        }
-        
-        public void SetDataDriver(IDbDriver db, string tableName)
-        {
-            if (!IsUsingEpiProject)
-            {
-                IDbDriver lastDb = this.db;
-                string lastTableName = this.TableName;
-
-                this.db = db;
-                this.TableName = tableName;
-
-                try
-                {
-                    this.DataSet.Tables.Clear();
-                    ConstructTableColumnNames();
-                    this.dashboardControl.ReCacheDataSource(false);
-                }
-                catch
-                {
-                    this.db = lastDb;
-                    this.TableName = lastTableName;
-                    this.DataSet.Tables.Clear();
-                    ConstructTableColumnNames();
-                    this.dashboardControl.ReCacheDataSource();
-                }
-            }
-        }
-
-        public void SetSQLDriver(IDbDriver db, string tableName)
-        {
-            if (!IsUsingEpiProject)
-            {
-                this.db = db;
-                this.TableName = tableName;
-                this.View = null;
-
-                this.DataSet.Tables.Clear();
-
-                ConstructTableColumnNames();
-                this.dashboardControl.ReCacheDataSource(false);
             }
         }
 
