@@ -2825,7 +2825,7 @@ namespace EpiDashboard
 
                         htmlBuilder.AppendLine(" <tr>");
                         htmlBuilder.AppendLine("   <th>Diff (Group 1 - Group 2)</th>");
-                        htmlBuilder.AppendLine("   <td>Pooled</td>");
+                        htmlBuilder.AppendLine("   <td class=\"value\">Pooled</td>");
                         htmlBuilder.AppendLine("   <td>" + statistics.meansDiff.ToString("F2") + "</td>");
                         htmlBuilder.AppendLine("   <td>" + statistics.equalLCLMean.ToString("F2") + "</td>");
                         htmlBuilder.AppendLine("   <td>" + statistics.equalUCLMean.ToString("F2") + "</td>");
@@ -2834,7 +2834,7 @@ namespace EpiDashboard
 
                         htmlBuilder.AppendLine(" <tr>");
                         htmlBuilder.AppendLine("   <th>Diff (Group 1 - Group 2)</th>");
-                        htmlBuilder.AppendLine("   <td>Satterthwaite</td>");
+                        htmlBuilder.AppendLine("   <td class=\"value\">Satterthwaite</td>");
                         htmlBuilder.AppendLine("   <td>" + statistics.meansDiff.ToString("F2") + "</td>");
                         htmlBuilder.AppendLine("   <td>" + statistics.unequalLCLMean.ToString("F2") + "</td>");
                         htmlBuilder.AppendLine("   <td>" + statistics.unequalUCLMean.ToString("F2") + "</td>");
@@ -2852,16 +2852,16 @@ namespace EpiDashboard
                         htmlBuilder.AppendLine(" </tr>");
 
                         htmlBuilder.AppendLine(" <tr>");
-                        htmlBuilder.AppendLine("   <th>Pooled</th>");
-                        htmlBuilder.AppendLine("   <td>Equal</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.df.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <th style=\"text-align: left;\">Pooled</th>");
+                        htmlBuilder.AppendLine("   <td class=\"value\">Equal</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.df.ToString() + "</td>");
                         htmlBuilder.AppendLine("   <td>" + statistics.tStatistic.ToString("F2") + "</td>");
                         htmlBuilder.AppendLine("   <td>" + statistics.pEqual.ToString("F2") + "</td>");
                         htmlBuilder.AppendLine(" </tr>");
 
                         htmlBuilder.AppendLine(" <tr>");
-                        htmlBuilder.AppendLine("   <th>Satterthwaite</th>");
-                        htmlBuilder.AppendLine("   <td>Unequal</td>");
+                        htmlBuilder.AppendLine("   <th style=\"text-align: left;\">Satterthwaite</th>");
+                        htmlBuilder.AppendLine("   <td class=\"value\">Unequal</td>");
                         htmlBuilder.AppendLine("   <td>" + statistics.SatterthwaiteDF.ToString("F2") + "</td>");
                         htmlBuilder.AppendLine("   <td>" + statistics.tStatisticUnequal.ToString("F2") + "</td>");
                         htmlBuilder.AppendLine("   <td>" + statistics.pUneqal.ToString("F2") + "</td>");
