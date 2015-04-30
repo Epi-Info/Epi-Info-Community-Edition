@@ -52,15 +52,12 @@ namespace EpiDashboard.Controls
                 panelDataSourceProject.Visibility = System.Windows.Visibility.Visible;
                 panelDataSourceOther.Visibility = System.Windows.Visibility.Collapsed;
                 panelDataSourceSql.Visibility = System.Windows.Visibility.Collapsed;
+                panelAdvancedSQLQuery.Visibility = System.Windows.Visibility.Collapsed;
             }
             else 
             {
                 if (dashboardHelper.Database.ToString().Contains("SqlDatabase"))
                 {
-                    panelDataSourceProject.Visibility = System.Windows.Visibility.Collapsed;
-                    panelDataSourceOther.Visibility = System.Windows.Visibility.Collapsed;
-                    panelDataSourceSql.Visibility = System.Windows.Visibility.Visible;
-
                     txtSQLConnectionString.Text = DashboardHelper.Database.ConnectionString;
 
                     Epi.Data.IDbDriver database = Epi.Data.DBReadExecute.GetDataDriver(txtSQLConnectionString.Text);
@@ -79,13 +76,14 @@ namespace EpiDashboard.Controls
                     {
                         CustomQuery = DashboardHelper.CustomQuery;
                     }
+
+                    panelDataSourceProject.Visibility = System.Windows.Visibility.Collapsed;
+                    panelDataSourceOther.Visibility = System.Windows.Visibility.Collapsed;
+                    panelDataSourceSql.Visibility = System.Windows.Visibility.Visible;
+                    panelAdvancedSQLQuery.Visibility = System.Windows.Visibility.Visible;
                 }
                 else
                 {
-                    panelDataSourceProject.Visibility = System.Windows.Visibility.Collapsed;
-                    panelDataSourceOther.Visibility = System.Windows.Visibility.Visible;
-                    panelDataSourceSql.Visibility = System.Windows.Visibility.Collapsed;
-
                     txtStandalonePath.Text = DashboardHelper.Database.DataSource;
 
                     Epi.Data.IDbDriver database = Epi.Data.DBReadExecute.GetDataDriver(txtStandalonePath.Text);
@@ -98,6 +96,16 @@ namespace EpiDashboard.Controls
                     }
 
                     cmbStandaloneFormName.SelectedItem = DashboardHelper.TableName;
+
+                    if (!String.IsNullOrEmpty(dashboardHelper.CustomQuery))
+                    {
+                        CustomQuery = DashboardHelper.CustomQuery;
+                    }
+
+                    panelDataSourceProject.Visibility = System.Windows.Visibility.Collapsed;
+                    panelDataSourceOther.Visibility = System.Windows.Visibility.Visible;
+                    panelDataSourceSql.Visibility = System.Windows.Visibility.Collapsed;
+                    panelAdvancedSQLQuery.Visibility = System.Windows.Visibility.Visible;
                 }
             }
 
@@ -250,6 +258,7 @@ namespace EpiDashboard.Controls
                 panelDataSourceProject.Visibility = Visibility.Visible;
                 panelDataSourceOther.Visibility = Visibility.Collapsed;
                 panelDataSourceSql.Visibility = Visibility.Collapsed;
+                panelAdvancedSQLQuery.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -359,6 +368,7 @@ namespace EpiDashboard.Controls
                 panelDataSourceProject.Visibility = Visibility.Collapsed;
                 panelDataSourceOther.Visibility = Visibility.Collapsed;
                 panelDataSourceSql.Visibility = Visibility.Visible;
+                panelAdvancedSQLQuery.Visibility = Visibility.Visible;
             }
         }
 
@@ -374,6 +384,7 @@ namespace EpiDashboard.Controls
                 panelDataSourceProject.Visibility = Visibility.Collapsed;
                 panelDataSourceOther.Visibility = Visibility.Collapsed;
                 panelDataSourceSql.Visibility = Visibility.Visible;
+                panelAdvancedSQLQuery.Visibility = Visibility.Visible;
             }
         }
 
