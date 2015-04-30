@@ -7439,7 +7439,15 @@ namespace EpiDashboard
             List<string> allColumnNames = new List<string>();
             foreach (string s in parameters.ColumnNames)
             {
-                allColumnNames.Add(s);
+                List<string> groupvars = GetVariablesInGroup(s);
+                if (groupvars.Count > 0)
+                {
+                    foreach (string var in groupvars) { allColumnNames.Add(var); }
+                }
+                else
+                {
+                    allColumnNames.Add(s);
+                }
             }
             foreach (string s in parameters.KeyColumnNames)
             {
@@ -7469,10 +7477,25 @@ namespace EpiDashboard
 
             foreach (string columnName in parameters.ColumnNames)
             {
-                if (!duplicatesTable.Columns.Contains(columnName))
+                List<string> groupvars = GetVariablesInGroup(columnName);
+                if (groupvars.Count > 0)
                 {
-                    Type type = mainTable.Columns[columnName].DataType;
-                    duplicatesTable.Columns.Add(columnName, type);
+                    foreach (string var in groupvars)
+                    {
+                        if (!duplicatesTable.Columns.Contains(var))
+                        {
+                            Type type = mainTable.Columns[var].DataType;
+                            duplicatesTable.Columns.Add(var, type);
+                        }
+                    }
+                }
+                else
+                {
+                    if (!duplicatesTable.Columns.Contains(columnName))
+                    {
+                        Type type = mainTable.Columns[columnName].DataType;
+                        duplicatesTable.Columns.Add(columnName, type);
+                    }
                 }
             }
 
@@ -7485,7 +7508,15 @@ namespace EpiDashboard
 
             foreach (string s in parameters.ColumnNames)
             {
-                safeColumnNames.Add(s);
+                List<string> groupvars = GetVariablesInGroup(s);
+                if (groupvars.Count > 0)
+                {
+                    foreach (string var in groupvars) { safeColumnNames.Add(var); }
+                }
+                else
+                {
+                    safeColumnNames.Add(s);
+                }
             }
 
             //string[] safeColumnNames = new string[columnNames.Length + parameters.ColumnNames.Count];
