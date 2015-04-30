@@ -1233,22 +1233,13 @@ namespace EpiDashboard
             }
         }
 
-        /// <summary>
-        /// Change SQL Query
-        /// </summary>
-        /// <param name="newQuery">The new query to use</param>
-        public void SetCustomQuery(string newQuery)
+        public void SetCustomQuery(string customQuery)
         {
-            if (newQuery == string.Empty)
-            {
-                return;
-            }
-
             string oldQuery = this.CustomQuery;
 
             if (!IsUsingEpiProject)
             {
-                this.CustomQuery = newQuery;
+                this.CustomQuery = customQuery;
                 this.DataSet.Tables.Clear();
 
                 try
@@ -1266,19 +1257,30 @@ namespace EpiDashboard
             }
         }
         
-        public void SetDataDriver(IDbDriver db, string path, string tableName)
+        public void SetDataDriver(IDbDriver db, string tableName)
         {
             if (!IsUsingEpiProject)
             {
+                IDbDriver lastDb = this.db;
+                string lastTableName = this.TableName;
+
                 this.db = db;
                 this.TableName = tableName;
-                
-                this.View = null;
 
-                this.DataSet.Tables.Clear();
-
-                ConstructTableColumnNames();
-                this.dashboardControl.ReCacheDataSource(false);
+                try
+                {
+                    this.DataSet.Tables.Clear();
+                    ConstructTableColumnNames();
+                    this.dashboardControl.ReCacheDataSource(false);
+                }
+                catch
+                {
+                    this.db = lastDb;
+                    this.TableName = lastTableName;
+                    this.DataSet.Tables.Clear();
+                    ConstructTableColumnNames();
+                    this.dashboardControl.ReCacheDataSource();
+                }
             }
         }
 
@@ -1292,27 +1294,6 @@ namespace EpiDashboard
 
                 this.DataSet.Tables.Clear();
 
-                ConstructTableColumnNames();
-                this.dashboardControl.ReCacheDataSource(false);
-            }
-        }
-
-        /// <summary>
-        /// Change SQL Query
-        /// </summary>
-        /// <param name="newQuery">The new query to use</param>
-        public void SetDataDriver(IDbDriver db, string tableName)
-        {
-            // Added for EI-176
-
-            if (!IsUsingEpiProject)
-            {
-                this.db = db;
-                this.TableName = tableName;
-                this.View = null;
-
-                this.DataSet.Tables.Clear();
-                
                 ConstructTableColumnNames();
                 this.dashboardControl.ReCacheDataSource(false);
             }

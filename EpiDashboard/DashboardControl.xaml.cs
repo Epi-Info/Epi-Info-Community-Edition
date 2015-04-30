@@ -3945,14 +3945,16 @@ namespace EpiDashboard
 
                 DashboardHelper.ResetView(tempProject.Views[properties.FormName], false);
             }
-            else if (!string.IsNullOrEmpty(properties.CustomQuery))
+            else if (DashboardHelper.Database.ToString().Contains("SqlDatabase")) 
             {
+                Epi.Data.IDbDriver dbDriver = Epi.Data.DBReadExecute.GetDataDriver(properties.txtSQLConnectionString.Text);
+                DashboardHelper.SetDataDriver(dbDriver, properties.TableName);
                 DashboardHelper.SetCustomQuery(properties.CustomQuery);
             }
             else
             {
                 Epi.Data.IDbDriver dbDriver = Epi.Data.DBReadExecute.GetDataDriver(properties.txtStandalonePath.Text);
-                DashboardHelper.SetDataDriver(dbDriver, properties.txtStandalonePath.Text, properties.TableName);
+                DashboardHelper.SetDataDriver(dbDriver, properties.TableName);
             }
 
             this.CustomOutputConclusionText = properties.Conclusion;
@@ -3975,6 +3977,8 @@ namespace EpiDashboard
             }
 
             popup.Close();
+
+            Refresh();
         }
 
         void properties_Cancelled(object sender, EventArgs e)
@@ -3991,16 +3995,16 @@ namespace EpiDashboard
         {
             if (DashboardHelper != null)
             {
-                if (!Util.DoesDataSourceExistForProject(this.DashboardHelper.View.Project))
+                if (DashboardHelper.View != null && !Util.DoesDataSourceExistForProject(this.DashboardHelper.View.Project))
                 {
                     Epi.Windows.MsgBox.ShowError(String.Format(DashboardSharedStrings.ERROR_CANVAS_DATA_SOURCE_NOT_FOUND, this.DashboardHelper.View.Project.FullName));
                 }
                 else
                 {
-                DashboardHelper.UserVarsNeedUpdating = true;
-                ReCacheDataSource(false);
+                    DashboardHelper.UserVarsNeedUpdating = true;
+                    ReCacheDataSource(false);
+                }
             }
-        }
         }
 
         private void iconDb_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

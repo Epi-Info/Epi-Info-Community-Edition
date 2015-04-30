@@ -206,7 +206,6 @@ namespace Epi.Windows.AnalysisDashboard
 
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-
                 if (dlg.SelectedDataSource is Project)
                 {
                     Project project = (Project)dlg.SelectedDataSource;
