@@ -724,15 +724,28 @@ namespace EpiDashboard
             if (DashboardHelper.IsUsingEpiProject)
             {
                 if (fieldNames.Contains("RecStatus")) fieldNames.Remove("RecStatus");
+                if (fieldNames.Contains("FKEY")) fieldNames.Remove("FKEY");
+                if (fieldNames.Contains("GlobalRecordId")) fieldNames.Remove("GlobalRecordId");
+                if (fieldNames.Contains("FirstSaveTime")) fieldNames.Remove("FirstSaveTime");
+                if (fieldNames.Contains("LastSaveTime")) fieldNames.Remove("LastSaveTime");
+
                 if (weightFieldNames.Contains("RecStatus")) weightFieldNames.Remove("RecStatus");
+                if (weightFieldNames.Contains("FKEY")) weightFieldNames.Remove("FKEY");
+                if (weightFieldNames.Contains("GlobalRecordId")) weightFieldNames.Remove("GlobalRecordId");
+                if (weightFieldNames.Contains("FirstSaveTime")) weightFieldNames.Remove("FirstSaveTime");
+                if (weightFieldNames.Contains("LastSaveTime")) weightFieldNames.Remove("LastSaveTime");
 
                 if (strataFieldNames.Contains("RecStatus")) strataFieldNames.Remove("RecStatus");
                 if (strataFieldNames.Contains("FKEY")) strataFieldNames.Remove("FKEY");
                 if (strataFieldNames.Contains("GlobalRecordId")) strataFieldNames.Remove("GlobalRecordId");
+                if (strataFieldNames.Contains("FirstSaveTime")) strataFieldNames.Remove("FirstSaveTime");
+                if (strataFieldNames.Contains("LastSaveTime")) strataFieldNames.Remove("LastSaveTime");
 
                 if (crosstabFieldNames.Contains("RecStatus")) crosstabFieldNames.Remove("RecStatus");
                 if (crosstabFieldNames.Contains("FKEY")) crosstabFieldNames.Remove("FKEY");
                 if (crosstabFieldNames.Contains("GlobalRecordId")) crosstabFieldNames.Remove("GlobalRecordId");
+                if (crosstabFieldNames.Contains("FirstSaveTime")) crosstabFieldNames.Remove("FirstSaveTime");
+                if (crosstabFieldNames.Contains("LastSaveTime")) crosstabFieldNames.Remove("LastSaveTime");
             }
 
             cbxField.ItemsSource = fieldNames;
