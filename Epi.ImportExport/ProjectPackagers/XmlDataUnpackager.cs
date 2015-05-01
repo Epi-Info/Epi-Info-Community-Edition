@@ -8,6 +8,7 @@ using System.Xml;
 using Epi.Data;
 using Epi.Fields;
 using Epi.ImportExport.Filters;
+using Epi.Data.Services;
 
 namespace Epi.ImportExport.ProjectPackagers
 {
@@ -765,9 +766,9 @@ namespace Epi.ImportExport.ProjectPackagers
                     {
                         Query updateQuery = db.CreateQuery(updateHeader
                             + StringLiterals.SPACE
-                            + StringLiterals.LEFT_SQUARE_BRACKET
+                           // + StringLiterals.LEFT_SQUARE_BRACKET
                             + setFieldText.ToString()
-                            + StringLiterals.RIGHT_SQUARE_BRACKET
+                           // + StringLiterals.RIGHT_SQUARE_BRACKET
                             + StringLiterals.SPACE + whereClause);
                         
                         updateQuery.Parameters = fieldValueParams;
@@ -798,6 +799,11 @@ namespace Epi.ImportExport.ProjectPackagers
                     QueryParameter parameter = GetQueryParameterForField(fieldData, gridField);
                     if (parameter != null)
                     {
+                        if (AppData.Instance.IsReservedWord(fieldData.FieldName.ToString()))//to support reserved words for the Grid column field if any existing
+                        {
+                            setFieldText.Append(StringLiterals.LEFT_SQUARE_BRACKET + fieldData.FieldName + StringLiterals.RIGHT_SQUARE_BRACKET + " = " + "@" + fieldData.FieldName);
+                        }
+                        else
                         setFieldText.Append(fieldData.FieldName + " = " + "@" + fieldData.FieldName);
                         fieldValueParams.Add(parameter);
                     }
