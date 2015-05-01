@@ -44,8 +44,10 @@ namespace EpiDashboard.Controls.GadgetProperties
                 DataType = "",
                 VariableCategory = VariableCategory.Field
             });
-
-            foreach (string fieldName in DashboardHelper.GetFieldsAsList())
+            //--
+            ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.Numeric | ColumnDataType.UserDefined;
+            //--
+            foreach (string fieldName in DashboardHelper.GetFieldsAsList(columnDataType))
             {
                 items.Add(new FieldInfo()
                 {
@@ -58,6 +60,29 @@ namespace EpiDashboard.Controls.GadgetProperties
                 crosstabFields.Add(fieldName);
                 strataFields.Add(fieldName);
             }
+            //---ei-277
+            if (DashboardHelper.IsUsingEpiProject)
+            {
+                if (fields.Contains("RecStatus")) fields.Remove("RecStatus");
+                if (fields.Contains("FKEY")) fields.Remove("FKEY");
+                if (fields.Contains("GlobalRecordId")) fields.Remove("GlobalRecordId");
+                if (fields.Contains("FirstSaveTime")) fields.Remove("FirstSaveTime");
+                if (fields.Contains("LastSaveTime")) fields.Remove("LastSaveTime");
+
+                if (crosstabFields.Contains("RecStatus")) crosstabFields.Remove("RecStatus");
+                if (crosstabFields.Contains("FKEY")) crosstabFields.Remove("FKEY");
+                if (crosstabFields.Contains("GlobalRecordId")) crosstabFields.Remove("GlobalRecordId");
+                if (crosstabFields.Contains("FirstSaveTime")) crosstabFields.Remove("FirstSaveTime");
+                if (crosstabFields.Contains("LastSaveTime")) crosstabFields.Remove("LastSaveTime");
+
+                if (strataFields.Contains("RecStatus")) strataFields.Remove("RecStatus");
+                if (strataFields.Contains("FKEY")) fields.Remove("FKEY");
+                if (strataFields.Contains("GlobalRecordId")) strataFields.Remove("GlobalRecordId");
+                if (strataFields.Contains("FirstSaveTime")) strataFields.Remove("FirstSaveTime");
+                if (strataFields.Contains("LastSaveTime")) strataFields.Remove("LastSaveTime");
+            }
+            //--
+
             fields.Sort();
             crosstabFields.Sort();
 
