@@ -23,6 +23,7 @@ using EpiDashboard.NutStat;
 using EpiDashboard.Controls;
 using EpiDashboard.Gadgets.Reporting;
 
+
 namespace EpiDashboard
 {
     public delegate void NotificationButtonHandler();
@@ -516,17 +517,17 @@ namespace EpiDashboard
 
                 System.IO.FileStream stream = System.IO.File.OpenWrite(fileName);
                 System.IO.StreamWriter sw = new System.IO.StreamWriter(stream);
-                sw.WriteLine(this.ToHTML());
+                sw.WriteLine(this.ToHTML(fileName)); //ei-279
                 sw.Close();
                 sw.Dispose();
-
+                
                 if (!string.IsNullOrEmpty(fileName))
-                {
+                {                
                     System.Diagnostics.Process proc = new System.Diagnostics.Process();
                     proc.StartInfo.FileName = "excel";
                     proc.StartInfo.Arguments = "\"" + fileName + "\"";
                     proc.StartInfo.UseShellExecute = true;
-                    proc.Start();
+                    proc.Start(); 
                 }
             }
             finally
