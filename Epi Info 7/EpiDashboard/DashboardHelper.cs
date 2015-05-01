@@ -7405,7 +7405,6 @@ namespace EpiDashboard
             //    throw new ArgumentNullException("columnNames");
             //}
             #endregion // Input Validation
-
             List<string> allColumnNames = new List<string>();
             foreach (string s in parameters.ColumnNames)
             {
@@ -7419,12 +7418,38 @@ namespace EpiDashboard
                     allColumnNames.Add(s);
                 }
             }
+
             foreach (string s in parameters.KeyColumnNames)
             {
-                allColumnNames.Add(s);
-            }
+                List<string> groupvars = GetVariablesInGroup(s);
+                if (groupvars.Count > 0)
+                {
+                    foreach (string var in groupvars) { allColumnNames.Add(var); }
+                }
+                else
 
-            string[] keyColumnNames = parameters.KeyColumnNames.ToArray();
+                {
+                 allColumnNames.Add(s);
+                }
+            }
+            //--ei-275
+             // string[] keyColumnNames = parameters.KeyColumnNames.ToArray();
+            List<string> lstkeyColumnNames = new List<string>();
+            foreach (string s in parameters.KeyColumnNames)
+             {
+                List<string> groupvars = GetVariablesInGroup(s);
+                if (groupvars.Count > 0)
+                {
+                    foreach (string var in groupvars) { lstkeyColumnNames.Add(var); }
+                }
+                else
+                {
+                   lstkeyColumnNames.Add(s);
+                }
+             }
+            //--
+
+            string[] keyColumnNames = lstkeyColumnNames.ToArray();
             object[] lastValues;
             DataTable duplicatesTable;
 
@@ -7473,9 +7498,16 @@ namespace EpiDashboard
 
             foreach (string s in keyColumnNames)
             {
-                safeColumnNames.Add(s);
+                List<string> groupvars = GetVariablesInGroup(s);
+                if (groupvars.Count > 0)
+                {
+                    foreach (string var in groupvars) { allColumnNames.Add(var); }
+                }
+                else
+                {
+                    safeColumnNames.Add(s);
+                }
             }
-
             foreach (string s in parameters.ColumnNames)
             {
                 List<string> groupvars = GetVariablesInGroup(s);
