@@ -128,29 +128,37 @@
         <StackPanel x:Name="panelCharts" Grid.Column="2" Margin="8" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors &amp; Ranges</Label>
 
-            <Label>Classes:</Label>
-            <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" Width="100">
+            <Label Margin="8,0,0,2">Classes:</Label>
+
+            <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" Width="100" Margin="8,0,0,2">
+                <ComboBoxItem>2</ComboBoxItem>
                 <ComboBoxItem>3</ComboBoxItem>
                 <ComboBoxItem IsSelected="True">4</ComboBoxItem>
                 <ComboBoxItem>5</ComboBoxItem>
                 <ComboBoxItem>6</ComboBoxItem>
+                <ComboBoxItem>7</ComboBoxItem>
             </ComboBox>
-            <StackPanel Orientation="Horizontal" Margin="0,15,0,15">
-                <CheckBox IsChecked="True">Use gradient</CheckBox>
-                <Rectangle VerticalAlignment="Bottom" x:Name="rctLowColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="20,0,5,0">
+            <StackPanel Orientation="Horizontal" Margin="8,0,0,2" >
+                <!--<CheckBox x:Name="useGradient" IsChecked="True" Click="CheckBox_Click">Use gradient</CheckBox>-->
+                <Label>Start Ramp:</Label>
+                <Rectangle x:Name="rctLowColor" MouseLeftButtonUp="rctLowColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,11,0">
                     <Rectangle.ToolTip>
                         <Label Content="Low value color"/>
                     </Rectangle.ToolTip>
                 </Rectangle>
-                <Rectangle VerticalAlignment="Bottom" x:Name="rctHighColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                <Label>End Ramp:</Label>
+                <Rectangle x:Name="rctHighColor" MouseLeftButtonUp="rctHighColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
                     <Rectangle.ToolTip>
                         <Label Content="High value color"/>
                     </Rectangle.ToolTip>
                 </Rectangle>
             </StackPanel>
-            <Grid>
+            <Button Click="ResetLegend_Click" HorizontalAlignment="Left" Width="134" Height="42" Margin="8,2,0,16">Reset Legend</Button>
+            <ScrollViewer Height="300">
+            <Grid x:Name="stratGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
@@ -175,31 +183,37 @@
                 <Rectangle Grid.Row="4" Grid.Column="0" x:Name="rctColor4" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor4_MouseLeftButtonUp"/>
                 <Rectangle Grid.Row="5" Grid.Column="0" x:Name="rctColor5" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor5_MouseLeftButtonUp"/>
                 <Rectangle Grid.Row="6" Grid.Column="0" x:Name="rctColor6" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor6_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="7" Grid.Column="0" x:Name="rctColor7" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
                 <TextBox Grid.Row="1" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
                 <TextBox Grid.Row="2" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
                 <TextBox Grid.Row="3" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
                 <TextBox Grid.Row="4" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
                 <TextBox Grid.Row="5" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
                 <TextBox Grid.Row="6" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="7" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
                 <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
                 <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
                 <TextBlock Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
                 <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
                 <TextBlock Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
                 <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                <TextBlock Grid.Row="7" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
                 <TextBox Grid.Row="1" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
                 <TextBox Grid.Row="2" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
                 <TextBox Grid.Row="3" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
                 <TextBox Grid.Row="4" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
                 <TextBox Grid.Row="5" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
                 <TextBox Grid.Row="6" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                <TextBox Grid.Row="7" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
                 <TextBox Grid.Row="1" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
                 <TextBox Grid.Row="2" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
                 <TextBox Grid.Row="3" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
                 <TextBox Grid.Row="4" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
                 <TextBox Grid.Row="5" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
                 <TextBox Grid.Row="6" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-            </Grid>
+                <TextBox Grid.Row="7" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                </Grid>
+            </ScrollViewer>
         </StackPanel>
         
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />

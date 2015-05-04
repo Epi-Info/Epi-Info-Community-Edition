@@ -76,6 +76,8 @@ namespace EpiDashboard.Controls
             //        lbxRelatedDataSources.Items.Add(rConn.db.ConnectionString);
             //    }
             //}
+
+            ResetLegend_Click(new object(), new RoutedEventArgs());
         }
 
         
@@ -283,11 +285,30 @@ namespace EpiDashboard.Controls
         {
             if (cmbDataKey.SelectedIndex != -1 && cmbShapeKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
             {
-                provider.SetShapeRangeValues(dashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), new List<SolidColorBrush>() { (SolidColorBrush)rctColor1.Fill, (SolidColorBrush)rctColor2.Fill, (SolidColorBrush)rctColor3.Fill, (SolidColorBrush)rctColor4.Fill, (SolidColorBrush)rctColor5.Fill, (SolidColorBrush)rctColor6.Fill }, int.Parse(cmbClasses.Text.ToString()));
-                //if (MapGenerated != null)
-                //{
-                //    MapGenerated(this, new EventArgs());
-                //}
+                string shapeKey = cmbShapeKey.SelectedItem.ToString();
+                string dataKey = cmbDataKey.SelectedItem.ToString();
+                string value = cmbValue.SelectedItem.ToString();
+                
+                List<SolidColorBrush> brushList = new List<SolidColorBrush>() { 
+                    (SolidColorBrush)rctColor1.Fill, 
+                    (SolidColorBrush)rctColor2.Fill, 
+                    (SolidColorBrush)rctColor3.Fill, 
+                    (SolidColorBrush)rctColor4.Fill, 
+                    (SolidColorBrush)rctColor5.Fill, 
+                    (SolidColorBrush)rctColor6.Fill };
+
+                int classCount;
+                if (int.TryParse(cmbClasses.Text, out classCount))
+                {
+                    classCount = 4;
+                }
+
+                provider.SetShapeRangeValues(dashboardHelper, 
+                    cmbShapeKey.SelectedItem.ToString(), 
+                    cmbDataKey.SelectedItem.ToString(), 
+                    cmbValue.SelectedItem.ToString(),
+                    brushList, 
+                    classCount);
             }
         }
 
@@ -343,6 +364,114 @@ namespace EpiDashboard.Controls
             {
                 rctColor6.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
+        }
+
+        private void rctColor7_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                rctColor7.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+            }
+        }
+
+        private void rctLowColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                rctLowColor.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+            }
+        }
+
+        private void rctHighColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                rctHighColor.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+            }
+        }
+
+        private void ResetLegend_Click(object sender, RoutedEventArgs e)
+        {
+            if (rctLowColor == null || rctHighColor == null)
+            {
+                return;
+            }
+            
+            int stratCount;
+            
+            SolidColorBrush rampStart;
+            SolidColorBrush rampEnd;
+
+            if(int.TryParse(cmbClasses.Text, out stratCount) == false)
+            {
+                stratCount = 4;
+            }
+
+            rampStart = (SolidColorBrush)rctLowColor.Fill;
+            rampEnd = (SolidColorBrush)rctHighColor.Fill;
+
+            int rd = rampStart.Color.R - rampEnd.Color.R;
+            int gd = rampStart.Color.G - rampEnd.Color.G;
+            int bd = rampStart.Color.B - rampEnd.Color.B;
+
+            byte ri = (byte)(rd / (stratCount - 1));
+            byte gi = (byte)(gd / (stratCount - 1));
+            byte bi = (byte)(bd / (stratCount - 1));
+
+            rctColor1.Fill = rampStart;
+
+            int i = 3;
+
+            Color coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri), (byte)(rampStart.Color.G - gi), (byte)(rampStart.Color.B - bi));
+            rctColor2.Fill = new SolidColorBrush(coo);
+
+            coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 2), (byte)(rampStart.Color.G - gi * 2), (byte)(rampStart.Color.B - bi * 2));
+            rctColor3.Visibility = System.Windows.Visibility.Visible;
+            if (i++ > stratCount)
+            {
+                coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+                rctColor3.Visibility = System.Windows.Visibility.Hidden;
+            }
+            rctColor3.Fill = new SolidColorBrush(coo);
+
+            coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 3), (byte)(rampStart.Color.G - gi * 3), (byte)(rampStart.Color.B - bi * 3));
+            rctColor4.Visibility = System.Windows.Visibility.Visible;
+            if (i++ > stratCount)
+            {
+                coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+                rctColor4.Visibility = System.Windows.Visibility.Hidden;
+            }
+            rctColor4.Fill = new SolidColorBrush(coo);
+
+            coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 4), (byte)(rampStart.Color.G - gi * 4), (byte)(rampStart.Color.B - bi * 4));
+            rctColor5.Visibility = System.Windows.Visibility.Visible; 
+            if (i++ > stratCount)
+            {
+                coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+                rctColor5.Visibility = System.Windows.Visibility.Hidden;
+            }
+            rctColor5.Fill = new SolidColorBrush(coo);
+
+            coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 5), (byte)(rampStart.Color.G - gi * 5), (byte)(rampStart.Color.B - bi * 5));
+            rctColor6.Visibility = System.Windows.Visibility.Visible; 
+            if (i++ > stratCount)
+            {
+                coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+                rctColor6.Visibility = System.Windows.Visibility.Hidden;
+            } 
+            rctColor6.Fill = new SolidColorBrush(coo);
+
+            coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 6), (byte)(rampStart.Color.G - gi * 6), (byte)(rampStart.Color.B - bi * 6));
+            rctColor7.Visibility = System.Windows.Visibility.Visible; 
+            if (i++ > stratCount)
+            {
+                coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+                rctColor7.Visibility = System.Windows.Visibility.Hidden;
+            }
+            rctColor7.Fill = new SolidColorBrush(coo);
         }
     }
 }
