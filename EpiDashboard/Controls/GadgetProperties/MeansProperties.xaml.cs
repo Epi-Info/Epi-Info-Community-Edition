@@ -47,7 +47,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             //--
             ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.Numeric | ColumnDataType.UserDefined;
             //--
-            foreach (string fieldName in DashboardHelper.GetFieldsAsList(columnDataType))
+            foreach (string fieldName in DashboardHelper.GetFieldsAsList())
             {
                 items.Add(new FieldInfo()
                 {
@@ -56,9 +56,12 @@ namespace EpiDashboard.Controls.GadgetProperties
                     VariableCategory = VariableCategory.Field
                 });
 
-                fields.Add(fieldName);
                 crosstabFields.Add(fieldName);
                 strataFields.Add(fieldName);
+            }
+            foreach (string fieldName in DashboardHelper.GetFieldsAsList(columnDataType))
+            {
+                fields.Add(fieldName);
             }
             //---ei-277
             if (DashboardHelper.IsUsingEpiProject)
