@@ -894,6 +894,7 @@ namespace Epi.Data.Services
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"YESNO", @"B");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"YN", @"A");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"ZONE", @"B");
+                    reservedWordsDataTable.AddReservedWordsRow(index++, @"CONTAINS", @"B");
 
                     // JavaScript keywords
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"alert", @"B");
