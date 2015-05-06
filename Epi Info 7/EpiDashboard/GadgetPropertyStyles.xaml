@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:EpiDashboard="clr-namespace:EpiDashboard"
+                    xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+                    xmlns:PropertyPanels="clr-namespace:EpiDashboard.Controls.GadgetProperties">
+
+    <!-- added 5/6/2015 by E. Knudsen -->
+    
+    <!-- This style sheet is intended for use by the Gadget property panels only. As of 5/6/2015, the style sheet is just a stub
+    meant to be filled in by a UI designer. -->
+    
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="StyleDictionary.xaml"/>
+        </ResourceDictionary.MergedDictionaries>
+    
+    
+    <Style TargetType="{x:Type CheckBox}">
+        <Setter Property="Margin" Value="0,16,0,16" />
+        <Setter Property="ToolTipService.ShowDuration" Value="5000" />
+        <Setter Property="ToolTipService.InitialShowDelay" Value="50" />
+    </Style>
+
+    <Style x:Key="PropertiesSubHeading" TargetType="Label">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="Light" />
+        <Setter Property="Foreground" Value="{StaticResource PrimaryAccentColor}" />
+    </Style>
+
+    <Style x:Key="PropertiesHeading" TargetType="Label">
+        <Setter Property="FontSize" Value="56" />
+        <Setter Property="FontWeight" Value="Light" />
+    </Style>
+
+</ResourceDictionary>  
+    

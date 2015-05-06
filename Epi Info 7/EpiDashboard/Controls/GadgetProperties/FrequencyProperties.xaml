@@ -8,9 +8,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800" Loaded="UserControl_Loaded" Style="{DynamicResource PropertiesPanelStyle}">
     <PropertyPanels:GadgetPropertiesPanelBase.Resources>
+        
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../StyleDictionary.xaml"/>
+                <!-- I removed the reference to the StyleDictionary.xaml, since GadgetPropertyStyles.xaml now references StyleDictionary.xaml. -->
+                <ResourceDictionary Source="../../GadgetPropertyStyles.xaml"/> 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </PropertyPanels:GadgetPropertiesPanelBase.Resources>
