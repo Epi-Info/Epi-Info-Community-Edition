@@ -17,6 +17,7 @@ namespace EpiDashboard
         {
             ShowANOVA = true;
             columnsToHide = new List<int>();
+            Precision = "4";
         }
     }
 }
