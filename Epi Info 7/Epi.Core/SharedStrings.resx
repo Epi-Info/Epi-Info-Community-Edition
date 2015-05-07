@@ -2831,4 +2831,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="WEBFORM_STARTDATE" xml:space="preserve">
     <value>Survey Start Date {0} cannot be greater than Closing Date {1}</value>
   </data>
+  <data name="ERROR_CANVAS_NOT_FOUND" xml:space="preserve">
+    <value>The canvas file cannot be found: {0}   Make sure the .cvs7 file exists or that the /canvas: command line switch is used.</value>
+  </data>
 </root>

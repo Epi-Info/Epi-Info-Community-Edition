@@ -44,6 +44,8 @@ namespace Epi.Windows.AnalysisDashboard
 
                     if (commandLine.ArgumentStrings.Length > 0) 
                     {
+                        //if the /canvas: switch is not used in the command line, canvasPath will be blank
+                        //current functionality does not require the switch, so check for a valid .csv7 file.
                         if (String.IsNullOrEmpty(canvasPath))
                         {
                             for (int i = 0; i < commandLine.ArgumentStrings.Length; i++)
@@ -51,33 +53,19 @@ namespace Epi.Windows.AnalysisDashboard
                                 if (commandLine.ArgumentStrings[i].IndexOf(".cvs7", StringComparison.CurrentCultureIgnoreCase) >= 0)
                                 {
                                     canvasPath = commandLine.ArgumentStrings[i].Trim();
-                                    if (!File.Exists(canvasPath))
-                                    {
-                                        parsePath = Application.StartupPath + "\\" + canvasPath;
-                                        if (File.Exists(parsePath))
-                                        {
-                                            canvasPath = parsePath;
-                                        }
-                                        else
-                                        {
-                                            int slashIndex = canvasPath.IndexOf("\\", StringComparison.CurrentCultureIgnoreCase);
-                                            if (canvasPath.Length > slashIndex + 1)
-                                            {
-                                                parsePath = Application.StartupPath + "\\" + canvasPath.Substring(slashIndex + 1);
-                                            }
-                                            if (File.Exists(parsePath))
-                                            {
-                                                canvasPath = parsePath;
-                                            }
-                                            else
-                                            {
-                                                canvasPath = string.Empty;
-                                            }
-                                        }
-                                    }
                                 }
                             }
                         }
+
+                        if (!String.IsNullOrEmpty(canvasPath))
+                        {
+                            if (!File.Exists(canvasPath))
+                            {
+                                MsgBox.ShowError(String.Format(SharedStrings.ERROR_CANVAS_NOT_FOUND, canvasPath));
+                                canvasPath = String.Empty;
+                            }
+                        }
+
                         if (String.IsNullOrEmpty(htmlOutputPath))
                         {
                             for (int i = 0; i < commandLine.ArgumentStrings.Length; i++)
