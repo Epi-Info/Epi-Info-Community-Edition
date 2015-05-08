@@ -2821,6 +2821,8 @@ namespace EpiDashboard
                 // check to make sure we actually found one
                 if (!(anovaPanel == null))
                 {
+                    string precision = "4";
+                    Parameters.InputVariableList.TryGetValue("precision", out precision);
                     // check for t-test
                     if (grid.RowDefinitions.Count == 3)
                     {
@@ -2839,18 +2841,18 @@ namespace EpiDashboard
                         htmlBuilder.AppendLine(" <tr>");
                         htmlBuilder.AppendLine("   <th>Diff (Group 1 - Group 2)</th>");
                         htmlBuilder.AppendLine("   <td class=\"value\">Pooled</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.meansDiff.ToString("F2") + "</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.equalLCLMean.ToString("F2") + "</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.equalUCLMean.ToString("F2") + "</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.stdDevDiff.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.meansDiff.ToString("F" + precision) + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.equalLCLMean.ToString("F" + precision) + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.equalUCLMean.ToString("F" + precision) + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.stdDevDiff.ToString("F" + precision) + "</td>");
                         htmlBuilder.AppendLine(" </tr>");
 
                         htmlBuilder.AppendLine(" <tr>");
                         htmlBuilder.AppendLine("   <th>Diff (Group 1 - Group 2)</th>");
                         htmlBuilder.AppendLine("   <td class=\"value\">Satterthwaite</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.meansDiff.ToString("F2") + "</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.unequalLCLMean.ToString("F2") + "</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.unequalUCLMean.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.meansDiff.ToString("F" + precision) + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.unequalLCLMean.ToString("F" + precision) + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.unequalUCLMean.ToString("F" + precision) + "</td>");
                         htmlBuilder.AppendLine("   <td></td>");
                         htmlBuilder.AppendLine(" </tr>");
                         htmlBuilder.AppendLine("</table>");
@@ -2868,16 +2870,16 @@ namespace EpiDashboard
                         htmlBuilder.AppendLine("   <th style=\"text-align: left;\">Pooled</th>");
                         htmlBuilder.AppendLine("   <td class=\"value\">Equal</td>");
                         htmlBuilder.AppendLine("   <td>" + statistics.df.ToString() + "</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.tStatistic.ToString("F2") + "</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.pEqual.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.tStatistic.ToString("F" + precision) + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.pEqual.ToString("F" + precision) + "</td>");
                         htmlBuilder.AppendLine(" </tr>");
 
                         htmlBuilder.AppendLine(" <tr>");
                         htmlBuilder.AppendLine("   <th style=\"text-align: left;\">Satterthwaite</th>");
                         htmlBuilder.AppendLine("   <td class=\"value\">Unequal</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.SatterthwaiteDF.ToString("F2") + "</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.tStatisticUnequal.ToString("F2") + "</td>");
-                        htmlBuilder.AppendLine("   <td>" + statistics.pUneqal.ToString("F2") + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.SatterthwaiteDF.ToString("F" + precision) + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.tStatisticUnequal.ToString("F" + precision) + "</td>");
+                        htmlBuilder.AppendLine("   <td>" + statistics.pUneqal.ToString("F" + precision) + "</td>");
                         htmlBuilder.AppendLine(" </tr>");
                         htmlBuilder.AppendLine("</table>");
                     }
@@ -2898,21 +2900,21 @@ namespace EpiDashboard
                     string strKruskalWallisH = SharedStrings.UNDEFINED;
                     string strKruskalPValue = SharedStrings.UNDEFINED;
 
-                    if (statistics.ssBetween.HasValue) { strssBetweenValue = statistics.ssBetween.Value.ToString("F4"); }
+                    if (statistics.ssBetween.HasValue) { strssBetweenValue = statistics.ssBetween.Value.ToString("F" + precision); }
                     if (statistics.dfBetween.HasValue) { strdfBetweenValue = statistics.dfBetween.Value.ToString("F0"); }
-                    if (statistics.msBetween.HasValue) { strmsBetweenValue = statistics.msBetween.Value.ToString("F4"); }
-                    if (statistics.ssWithin.HasValue) { strssWithinValue = statistics.ssWithin.Value.ToString("F4"); }
+                    if (statistics.msBetween.HasValue) { strmsBetweenValue = statistics.msBetween.Value.ToString("F" + precision); }
+                    if (statistics.ssWithin.HasValue) { strssWithinValue = statistics.ssWithin.Value.ToString("F" + precision); }
                     if (statistics.dfWithin.HasValue) { strdfWithinValue = statistics.dfWithin.Value.ToString("F0"); }
-                    if (statistics.msWithin.HasValue) { strmsWithinValue = statistics.msWithin.Value.ToString("F4"); }
-                    if (statistics.fStatistic.HasValue) { strfStatisticValue = statistics.fStatistic.Value.ToString("F4"); }
-                    if (statistics.anovaPValue.HasValue) { stranovaPValueValue = statistics.anovaPValue.Value.ToString("F4"); }
-                    if (statistics.chiSquare.HasValue) { strchiSquareValue = statistics.chiSquare.Value.ToString("F4"); }
-                    if (statistics.bartlettPValue.HasValue) { strbartlettPValue = statistics.bartlettPValue.Value.ToString("F4"); }
+                    if (statistics.msWithin.HasValue) { strmsWithinValue = statistics.msWithin.Value.ToString("F" + precision); }
+                    if (statistics.fStatistic.HasValue) { strfStatisticValue = statistics.fStatistic.Value.ToString("F" + precision); }
+                    if (statistics.anovaPValue.HasValue) { stranovaPValueValue = statistics.anovaPValue.Value.ToString("F" + precision); }
+                    if (statistics.chiSquare.HasValue) { strchiSquareValue = statistics.chiSquare.Value.ToString("F" + precision); }
+                    if (statistics.bartlettPValue.HasValue) { strbartlettPValue = statistics.bartlettPValue.Value.ToString("F" + precision); }
 
-                    if (statistics.ssBetween.HasValue && statistics.ssWithin.HasValue) { strTotalSSValue = (statistics.ssBetween.Value + statistics.ssWithin.Value).ToString("F4"); }
+                    if (statistics.ssBetween.HasValue && statistics.ssWithin.HasValue) { strTotalSSValue = (statistics.ssBetween.Value + statistics.ssWithin.Value).ToString("F" + precision); }
                     if (statistics.dfBetween.HasValue && statistics.dfWithin.HasValue) { strTotalDFValue = (statistics.dfBetween.Value + statistics.dfWithin.Value).ToString("F0"); }
-                    if (statistics.kruskalWallisH.HasValue) { strKruskalWallisH = statistics.kruskalWallisH.Value.ToString("F4"); }
-                    if (statistics.kruskalPValue.HasValue) { strKruskalPValue = statistics.kruskalPValue.Value.ToString("F4"); }
+                    if (statistics.kruskalWallisH.HasValue) { strKruskalWallisH = statistics.kruskalWallisH.Value.ToString("F" + precision); }
+                    if (statistics.kruskalPValue.HasValue) { strKruskalPValue = statistics.kruskalPValue.Value.ToString("F" + precision); }
 
                     summaryText = "This table contains analysis of variance (ANOVA) statistics for the field " + cbxField.Text + ", cross-tabulated by " + cbxFieldCrosstab.Text + ". ";
                     summaryText += "The column headings for this table are: The variation, the SS value, the degrees of freedom, the MS value, and the F-statistic. There are three rows: The between, the within, and the total.";
