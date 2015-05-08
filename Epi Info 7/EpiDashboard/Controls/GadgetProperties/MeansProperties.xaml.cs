@@ -77,12 +77,14 @@ namespace EpiDashboard.Controls.GadgetProperties
                 if (crosstabFields.Contains("GlobalRecordId")) crosstabFields.Remove("GlobalRecordId");
                 if (crosstabFields.Contains("FirstSaveTime")) crosstabFields.Remove("FirstSaveTime");
                 if (crosstabFields.Contains("LastSaveTime")) crosstabFields.Remove("LastSaveTime");
+                if (crosstabFields.Contains("SYSTEMDATE")) crosstabFields.Remove("SYSTEMDATE");
 
                 if (strataFields.Contains("RecStatus")) strataFields.Remove("RecStatus");
                 if (strataFields.Contains("FKEY")) fields.Remove("FKEY");
                 if (strataFields.Contains("GlobalRecordId")) strataFields.Remove("GlobalRecordId");
                 if (strataFields.Contains("FirstSaveTime")) strataFields.Remove("FirstSaveTime");
                 if (strataFields.Contains("LastSaveTime")) strataFields.Remove("LastSaveTime");
+                if (strataFields.Contains("SYSTEMDATE")) strataFields.Remove("SYSTEMDATE");
             }
             //--
 
