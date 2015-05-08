@@ -657,7 +657,7 @@ namespace EpiDashboard.Controls.Charting
             Point curposition = new Point(250, 0);
               
             string outputfilename = Imgfilename.Substring(0, Imgfilename.Length - 4) + sString;
-            string Titles = ChartTitle + Environment.NewLine + Environment.NewLine +  "    " + SubTitle;
+            string Titles = ChartTitle + Environment.NewLine + Environment.NewLine + SubTitle;
             Typeface typeFace = new Typeface(new FontFamily("Global User Interface"), FontStyles.Normal, FontWeights.DemiBold, FontStretches.Normal);
             FormattedText ftext = new FormattedText(Titles, CultureInfo.InvariantCulture, FlowDirection.LeftToRight, typeFace, 20, Brushes.Black);
                
