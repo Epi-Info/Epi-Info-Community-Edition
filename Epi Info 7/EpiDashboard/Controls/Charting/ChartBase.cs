@@ -461,7 +461,7 @@ namespace EpiDashboard.Controls.Charting
             if (dlg.ShowDialog().Value)
             {
                 ToImageFile(dlg.FileName);
-                if (!string.IsNullOrEmpty(ChartTitle)) { WriteTexttoImage(dlg.FileName); }
+                if ((ChartTitle.Length > 0) || (SubTitle.Length > 0)) { WriteTexttoImage(dlg.FileName); } //ei-59
                 MessageBox.Show("Image saved successfully.", "Save Image", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
@@ -515,11 +515,7 @@ namespace EpiDashboard.Controls.Charting
 
             encoder.Frames.Add(BitmapFrame.Create(img));
             encoder.Save(stream);
-          //stream.Flush();
             stream.Close();
-          //stream.Dispose();
-     
-
          }
 
         public virtual BitmapSource ToBitmapSource(bool includeGrid = true)
@@ -661,16 +657,18 @@ namespace EpiDashboard.Controls.Charting
             Point curposition = new Point(250, 0);
               
             string outputfilename = Imgfilename.Substring(0, Imgfilename.Length - 4) + sString;
-            FormattedText ftext = new FormattedText(ChartTitle, CultureInfo.InvariantCulture, FlowDirection.LeftToRight, new Typeface("Segeo UI"), 22, Brushes.Black);
-            
+            string Titles = ChartTitle + Environment.NewLine + Environment.NewLine +  "    " + SubTitle;
+            Typeface typeFace = new Typeface(new FontFamily("Global User Interface"), FontStyles.Normal, FontWeights.DemiBold, FontStretches.Normal);
+            FormattedText ftext = new FormattedText(Titles, CultureInfo.InvariantCulture, FlowDirection.LeftToRight, typeFace, 20, Brushes.Black);
+               
             using (DrawingContext dc = visual.RenderOpen())
             {
-                dc.DrawImage(bitmap, new Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight));
+                dc.DrawImage(bitmap, new Rect(0, 75, bitmap.PixelWidth, bitmap.PixelHeight  ));
                 dc.DrawText(ftext, curposition);
 
             }
 
-            RenderTargetBitmap target = new RenderTargetBitmap(bitmap.PixelWidth, bitmap.PixelHeight,
+            RenderTargetBitmap target = new RenderTargetBitmap(bitmap.PixelWidth, bitmap.PixelHeight + 75 ,
                                                                bitmap.DpiX, bitmap.DpiY, PixelFormats.Default);
             target.Render(visual);
                         
@@ -696,10 +694,12 @@ namespace EpiDashboard.Controls.Charting
                 }
                          
             }
-            
+
+            bitmap = null;
             File.Delete(Imgfilename);
             File.Copy(outputfilename, Imgfilename, true);
-            File.Delete(outputfilename);
+            File.Delete(outputfilename);                  
+            
        }
 
      }
