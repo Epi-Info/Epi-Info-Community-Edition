@@ -76,8 +76,9 @@ namespace EpiDashboard.StatCalc
 
         private void Calculate()
         {
+            System.Globalization.CultureInfo ci = System.Globalization.CultureInfo.InvariantCulture;
             string confidenceRaw = ((ComboBoxItem)cbxConfidenceLevel.SelectedItem).Content.ToString().Split('%')[0];
-            double confidence = (100.0 - double.Parse(confidenceRaw)) / 100.0;
+            double confidence = (100.0 - double.Parse(confidenceRaw, ci)) / 100.0;
             double power = 0;
             double.TryParse(txtPower.Text, out power);
 
