@@ -93,6 +93,51 @@ namespace Epi.Windows.MakeView.Dialogs
             this.IsMetaDataOnly = pIsMetaDataOnly;
 
             Configuration config = Configuration.GetNewInstance();
+            
+            DataTable table = mediater.Project.Metadata.GetPublishedViewKeys(this.mediater.ProjectExplorer.CurrentView.Id);
+            DataRow ViewRow = table.Rows[0];
+
+            string WebSurveyId = ViewRow.ItemArray[3].ToString();
+            
+            var Request = new Epi.EWEManagerService.SurveyInfoRequest();
+
+            EWEManagerService.SurveyInfoCriteria Criteria  = new EWEManagerService.SurveyInfoCriteria();
+           
+             List<string> IdList = new List<string>();
+              IdList.Add(WebSurveyId);
+               Criteria.SurveyIdList = IdList.ToArray();
+               Criteria.OrganizationKey = new Guid(pOrganizationKey);
+               Criteria.SurveyType = -1;
+               Request.Criteria = Criteria;
+              
+            try
+            {
+            EWEManagerService.EWEManagerServiceV2Client client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+          
+               var Result = client.GetSurveyInfo(Request);
+               if (Result.SurveyInfoList.Count()>0)
+                {
+                    if (Result.SurveyInfoList[0].IsShareable)
+                    {
+                        this.Shareable.Checked = Result.SurveyInfoList[0].IsShareable;
+                        this.AccessAll.Visible = true;
+                        this.AccessAll.Checked = Result.SurveyInfoList[0].ShowAllRecords;
+
+                    }
+                    else 
+                    {
+                        this.Shareable.Checked = Result.SurveyInfoList[0].IsShareable;
+                        this.AccessAll.Visible = false;
+                        this.AccessAll.Checked = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+               
+            }
+          
+
             try
                 {
                 this.isRepublishableConfig = config.Settings.Republish_IsRepbulishable;
@@ -171,7 +216,8 @@ namespace Epi.Windows.MakeView.Dialogs
             Request.SurveyInfo.ViewId = this.mediater.ProjectExplorer.CurrentView.Id;
             Request.SurveyInfo.OwnerId = LoginInfo.UserID;
             Request.SurveyInfo.StartDate = DateTime.Now;
-           
+            Request.SurveyInfo.IsShareable = this.Shareable.Checked;
+            Request.SurveyInfo.ShowAllRecords = this.AccessAll.Checked;
             //Request.SurveyInfo.SurveyType = (rdbSingleResponse.Checked) ? 1 : 2;
             //if (txtOrganization.Text.Equals("Your Organization Name (optional)", StringComparison.OrdinalIgnoreCase))
             //{
@@ -341,7 +387,7 @@ namespace Epi.Windows.MakeView.Dialogs
  
 
             this.currentSurveyInfoDTO.SurveyId = ViewRow.ItemArray[3].ToString();
-
+          
 
             this.currentSurveyInfoDTO.OwnerId = LoginInfo.UserID;
             this.currentSurveyInfoDTO.StartDate = DateTime.Now;
@@ -352,7 +398,8 @@ namespace Epi.Windows.MakeView.Dialogs
                 this.currentSurveyInfoDTO.IsSqlProject = true;
                 }
               Request.SurveyInfo  = this.currentSurveyInfoDTO;
-
+              Request.SurveyInfo.IsShareable = this.Shareable.Checked;
+              Request.SurveyInfo.ShowAllRecords = this.AccessAll.Checked;
 
             try
             {
@@ -1602,5 +1649,28 @@ namespace Epi.Windows.MakeView.Dialogs
             {
 
             }
+
+        private void tabEntry_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Shareable_CheckedChanged(object sender, EventArgs e)
+        {
+            if(this.Shareable.Checked)
+            {
+               this.AccessAll.Visible = true;
+            }
+            else
+            {
+               this.AccessAll.Visible = false;
+               this.AccessAll.Checked = false;
+            }
+        }
     }
 }

@@ -4488,7 +4488,7 @@ namespace Epi.Windows.MakeView.Forms
         private bool ValidateUser()
             {
                 iscancel = false;
-                bool IsValidUser = false;
+                bool IsValidUser = true;
                 string UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
                 Configuration config = Configuration.GetNewInstance();
                 int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
