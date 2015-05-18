@@ -666,26 +666,24 @@
     <Content Include="Resources\Training Projects\Salmonellosis\Salmonellosis.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.OrganizationResponse.datasource">
+    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.OrganizationResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.PreFilledAnswerResponse.datasource">
+    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.PreFilledAnswerResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.PublishResponse.datasource">
+    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.PublishResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.SurveyAnswerResponse.datasource">
+    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.SurveyAnswerResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.SurveyInfoResponse.datasource">
+    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.SurveyInfoResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.UserAuthenticationResponse.datasource">
+    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.UserAuthenticationResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EWEManagerService\configuration91.svcinfo" />
-    <None Include="Service References\EWEManagerService\configuration.svcinfo" />
     <None Include="Service References\EWEManagerService\EWEManagerServiceV2.wsdl" />
     <None Include="Service References\EWEManagerService\EWEManagerServiceV2.xsd">
       <SubType>Designer</SubType>
@@ -704,10 +702,6 @@
     </None>
     <None Include="Service References\EWEManagerService\EWEManagerServiceV25.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\EWEManagerService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\SurveyManagerService\configuration91.svcinfo" />
     <None Include="Service References\SurveyManagerService\configuration.svcinfo" />
@@ -735,6 +729,12 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\EWEManagerService\EWEManagerServiceV2.disco" />
+    <None Include="Service References\EWEManagerService\configuration91.svcinfo" />
+    <None Include="Service References\EWEManagerService\configuration.svcinfo" />
+    <None Include="Service References\EWEManagerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Templates\Fields\debug - one of each field with different widths.xml" />
     <Content Include="Templates\Fields\debug - one of each field.xml" />
     <Content Include="Templates\Fields\States.xml">
@@ -1268,6 +1268,9 @@
     <Folder Include="Resources\Content\" />
     <Folder Include="Samples\" />
     <Folder Include="Test\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\EWEManagerService\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

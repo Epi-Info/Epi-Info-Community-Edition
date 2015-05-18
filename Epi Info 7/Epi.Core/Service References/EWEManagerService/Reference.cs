@@ -430,6 +430,9 @@ namespace Epi.EWEManagerService {
         private bool IsDraftModeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsShareableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsSqlProjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -443,6 +446,9 @@ namespace Epi.EWEManagerService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int OwnerIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ShowAllRecordsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime StartDateField;
@@ -557,6 +563,19 @@ namespace Epi.EWEManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsShareable {
+            get {
+                return this.IsShareableField;
+            }
+            set {
+                if ((this.IsShareableField.Equals(value) != true)) {
+                    this.IsShareableField = value;
+                    this.RaisePropertyChanged("IsShareable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsSqlProject {
             get {
                 return this.IsSqlProjectField;
@@ -617,6 +636,19 @@ namespace Epi.EWEManagerService {
                 if ((this.OwnerIdField.Equals(value) != true)) {
                     this.OwnerIdField = value;
                     this.RaisePropertyChanged("OwnerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ShowAllRecords {
+            get {
+                return this.ShowAllRecordsField;
+            }
+            set {
+                if ((this.ShowAllRecordsField.Equals(value) != true)) {
+                    this.ShowAllRecordsField = value;
+                    this.RaisePropertyChanged("ShowAllRecords");
                 }
             }
         }
@@ -1009,6 +1041,9 @@ namespace Epi.EWEManagerService {
         private bool IsMobileField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsShareableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsSqlProjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1027,6 +1062,9 @@ namespace Epi.EWEManagerService {
         private string SearchCriteriaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ShowAllRecordsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SortOrderField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1043,6 +1081,9 @@ namespace Epi.EWEManagerService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int UserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserOrganizationIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid UserPublishKeyField;
@@ -1139,6 +1180,19 @@ namespace Epi.EWEManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsShareable {
+            get {
+                return this.IsShareableField;
+            }
+            set {
+                if ((this.IsShareableField.Equals(value) != true)) {
+                    this.IsShareableField = value;
+                    this.RaisePropertyChanged("IsShareable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsSqlProject {
             get {
                 return this.IsSqlProjectField;
@@ -1217,6 +1271,19 @@ namespace Epi.EWEManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ShowAllRecords {
+            get {
+                return this.ShowAllRecordsField;
+            }
+            set {
+                if ((this.ShowAllRecordsField.Equals(value) != true)) {
+                    this.ShowAllRecordsField = value;
+                    this.RaisePropertyChanged("ShowAllRecords");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string SortOrder {
             get {
                 return this.SortOrderField;
@@ -1290,6 +1357,19 @@ namespace Epi.EWEManagerService {
                 if ((this.UserIdField.Equals(value) != true)) {
                     this.UserIdField = value;
                     this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserOrganizationId {
+            get {
+                return this.UserOrganizationIdField;
+            }
+            set {
+                if ((this.UserOrganizationIdField.Equals(value) != true)) {
+                    this.UserOrganizationIdField = value;
+                    this.RaisePropertyChanged("UserOrganizationId");
                 }
             }
         }
@@ -1438,6 +1518,9 @@ namespace Epi.EWEManagerService {
         private int RoleField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserHighestRoleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int UserIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1566,6 +1649,19 @@ namespace Epi.EWEManagerService {
                 if ((this.RoleField.Equals(value) != true)) {
                     this.RoleField = value;
                     this.RaisePropertyChanged("Role");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserHighestRole {
+            get {
+                return this.UserHighestRoleField;
+            }
+            set {
+                if ((this.UserHighestRoleField.Equals(value) != true)) {
+                    this.UserHighestRoleField = value;
+                    this.RaisePropertyChanged("UserHighestRole");
                 }
             }
         }
@@ -2472,6 +2568,9 @@ namespace Epi.EWEManagerService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool EwavLiteToggleSwitchField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FormIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2490,6 +2589,12 @@ namespace Epi.EWEManagerService {
         private bool IsSQLProjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsShareableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSharedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int OrganizationIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2502,6 +2607,9 @@ namespace Epi.EWEManagerService {
         private string OwnerLNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ShowAllRecordsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int UserIdField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -2511,6 +2619,19 @@ namespace Epi.EWEManagerService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool EwavLiteToggleSwitch {
+            get {
+                return this.EwavLiteToggleSwitchField;
+            }
+            set {
+                if ((this.EwavLiteToggleSwitchField.Equals(value) != true)) {
+                    this.EwavLiteToggleSwitchField = value;
+                    this.RaisePropertyChanged("EwavLiteToggleSwitch");
+                }
             }
         }
         
@@ -2593,6 +2714,32 @@ namespace Epi.EWEManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsShareable {
+            get {
+                return this.IsShareableField;
+            }
+            set {
+                if ((this.IsShareableField.Equals(value) != true)) {
+                    this.IsShareableField = value;
+                    this.RaisePropertyChanged("IsShareable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsShared {
+            get {
+                return this.IsSharedField;
+            }
+            set {
+                if ((this.IsSharedField.Equals(value) != true)) {
+                    this.IsSharedField = value;
+                    this.RaisePropertyChanged("IsShared");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int OrganizationId {
             get {
                 return this.OrganizationIdField;
@@ -2640,6 +2787,19 @@ namespace Epi.EWEManagerService {
                 if ((object.ReferenceEquals(this.OwnerLNameField, value) != true)) {
                     this.OwnerLNameField = value;
                     this.RaisePropertyChanged("OwnerLName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ShowAllRecords {
+            get {
+                return this.ShowAllRecordsField;
+            }
+            set {
+                if ((this.ShowAllRecordsField.Equals(value) != true)) {
+                    this.ShowAllRecordsField = value;
+                    this.RaisePropertyChanged("ShowAllRecords");
                 }
             }
         }
