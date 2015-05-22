@@ -64,12 +64,20 @@
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
 
             <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 4">Grouping</Label>
-            <Label>Group By:</Label>
-            <ComboBox x:Name="cmbGroupField" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left"/>
-
-            <Label>Sub-group By:</Label>
-            <ComboBox x:Name="cmbSecondaryGroupField" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left"/>
-
+            <WrapPanel Height="80" Orientation="Vertical" HorizontalAlignment="Left">
+                <Border>
+                <StackPanel>
+                    <Label>Group By:</Label>
+                    <ComboBox x:Name="cmbGroupField" Style="{StaticResource PropertiesComboxStyle}" HorizontalAlignment="Left"/>
+                </StackPanel>
+                </Border>
+                <Border Margin="20 0 0 0">
+                <StackPanel>
+                    <Label>Sub-group By:</Label>
+                    <ComboBox x:Name="cmbSecondaryGroupField" HorizontalAlignment="Left" Style="{DynamicResource PropertiesComboxStyle}"/>
+                </StackPanel>
+                </Border>
+            </WrapPanel>    
             <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 30, 0, 4">Sorting</Label>
 
             <Label>Sort Method:</Label>
@@ -98,19 +106,34 @@
 
         <StackPanel x:Name="panelDisplay" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
-
+            <WrapPanel Height="300" Orientation="Vertical" HorizontalAlignment="Left">
+            <Border>
+            <StackPanel>
+           
+            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 4">Title and Description</Label>
+            
             <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
             <TextBox x:Name="txtTitle" Width="360" HorizontalAlignment="Left"></TextBox>
 
             <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
             <TextBox x:Name="txtDesc" Width="360" AcceptsReturn="True" Height="128" HorizontalAlignment="Left"></TextBox>
-
-            <Label x:Name="tblockMaxWidth" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max width:" Margin="0,5,0,0"  />
+            </StackPanel>
+            </Border>
+            <Border Margin="30 0 0 0 ">
+             <StackPanel>
+             <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 4">Dimensions</Label>
+             <Label x:Name="tblockMaxWidth" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max width:" Margin="0,5,0,0"  />
             <TextBox x:Name="txtMaxWidth" Width="40" HorizontalAlignment="Left" Text="800" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"></TextBox>
-            
+             
             <Label x:Name="tblockMaxHeight" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max height:" Margin="0,5,0,0"  />
             <TextBox x:Name="txtMaxHeight" Width="40" HorizontalAlignment="Left" Text="500" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"></TextBox>
-
+            </StackPanel>
+             </Border>
+            </WrapPanel>
+            
+            
+            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 4">Output Options</Label>
+            <WrapPanel Height="300" Orientation="Horizontal" HorizontalAlignment="Left">
             <CheckBox x:Name="checkboxTabOrder" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort variables by tab order" Visibility="Visible" IsEnabled="true" />
             <CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use field prompts" Visibility="Visible" IsEnabled="true" />
             <CheckBox x:Name="checkboxListLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" IsEnabled="true"/>
@@ -118,7 +141,7 @@
             <CheckBox x:Name="checkboxColumnHeaders" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show column headings" IsChecked="True" />
             <CheckBox x:Name="checkboxShowNulls" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show missing representation" IsChecked="True" />
             <!--<CheckBox x:Name="checkboxAllowUpdates" Style="{StaticResource PropertiesPanelCheckbox}" Content="Allow updates" Visibility="Collapsed" IsEnabled="true" />-->
-
+            </WrapPanel>      
         </StackPanel>
 
         <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">

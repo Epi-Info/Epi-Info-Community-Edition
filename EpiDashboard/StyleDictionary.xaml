@@ -26,10 +26,10 @@
     <SolidColorBrush x:Key="ThemeColor2" Color="#6A5ACD" />
     <SolidColorBrush x:Key="ThemeColor3" Color="#808080" />
 
-    <SolidColorBrush x:Key="PrimaryButtonBackgroundColor" Color="#CCCCCC" />
+    <SolidColorBrush x:Key="PrimaryButtonBackgroundColor" Color="#5dbafe" />
     <SolidColorBrush x:Key="PrimaryButtonBackgroundColorDark" Color="#9A9A9A" />
     <SolidColorBrush x:Key="PrimaryButtonBackgroundColorLight" Color="#E9E9E9" />
-    <SolidColorBrush x:Key="PrimaryButtonForegroundColor" Color="Black" />
+    <SolidColorBrush x:Key="PrimaryButtonForegroundColor" Color="#003257" />
 
     <SolidColorBrush x:Key="ColumnHeaderBackgroundBrush" Color="#4F81BD"/>
     <SolidColorBrush x:Key="ColumnHeaderForegroundBrush" Color="White"/>
@@ -44,7 +44,7 @@
     <SolidColorBrush x:Key="ColumnHeaderHoverForegroundBrush" Color="White"/>
 
     <SolidColorBrush x:Key="StatusStripColor" Color="#E2E6EA" />
-
+    
     <Style TargetType="TextBlock" x:Key="GadgetTitleTextStyle">
         <Setter Property="Margin" Value="7,3,0,3" />
         <Setter Property="FontFamily" Value="Calibri, Global User Interface" />
@@ -63,14 +63,18 @@
         <Setter Property="Background" Value="{StaticResource GadgetBackgroundBrush}"></Setter>
     </Style>
 
+    <Style TargetType="ComboBox" x:Key="PropertiesComboxStyle">
+        <Setter Property="Width" Value="300" />
+    </Style>
+
     <Style TargetType="PropertyPanels:GadgetPropertiesPanelBase" x:Key="PropertiesPanelStyle">
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontFamily" Value="Global User Interface" />
         <Setter Property="Background" Value="White" />
     </Style>
-    
+
     <Style x:Key="PropertiesPanelCheckbox" TargetType="CheckBox">
-        <Setter Property="Margin" Value="0,16,0,16" />
+        <Setter Property="Margin" Value="0,16,20,16" />
         <Setter Property="ToolTipService.ShowDuration" Value="5000" />
         <Setter Property="ToolTipService.InitialShowDelay" Value="50" />
     </Style>
@@ -317,7 +321,13 @@
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalAlignment" Value="Right" />
     </Style>
-
+    
+    <LinearGradientBrush x:Key="PrimaryActiveButton" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#5dbafe" Offset="0"/>
+        <GradientStop Color="#85c9fb" Offset="0.53"/>
+        <GradientStop Color="#5dbafe" Offset="0.996"/>
+    </LinearGradientBrush>
+    
     <Style TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Background" Value="{StaticResource PrimaryButtonBackgroundColor}" />
@@ -329,6 +339,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Width" Value="100" />
         <Setter Property="Height" Value="20" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -336,7 +347,7 @@
                     BorderBrush="{TemplateBinding BorderBrush}" 
                     Background="{TemplateBinding Background}" 
                     Padding="{TemplateBinding Padding}" 
-                    CornerRadius="0">
+                    CornerRadius="2">
                         <ContentControl VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}" />
                     </Border>
                 </ControlTemplate>

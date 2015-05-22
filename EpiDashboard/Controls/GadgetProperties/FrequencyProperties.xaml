@@ -87,18 +87,19 @@
         </StackPanel>-->
 
         <StackPanel x:Name="panelDisplay" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 0">Display</Label>
 
-            <ScrollViewer x:Name="scrollViewerProperties" Height="700">
+            <ScrollViewer x:Name="scrollViewerProperties" Height="640">
                 <StackPanel>
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 10">Title and Description</Label>
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 0">Title and Description</Label>
                     <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
                     <TextBox x:Name="txtTitle" Width="360" HorizontalAlignment="Left"></TextBox>
 
                     <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
                     <TextBox x:Name="txtDesc" Width="360" AcceptsReturn="True" Height="128" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
 
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 10">Output Options</Label>
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Output Options</Label>
+                    <WrapPanel Height="150" Orientation="Horizontal" HorizontalAlignment="Left" >
                     <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values" Visibility="Visible" IsEnabled="true" />
                     <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" Visibility="Visible" IsEnabled="true" />
                     <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values" IsChecked="True" />
@@ -119,9 +120,9 @@
                     <CheckBox x:Name="checkboxDrawBorders" Style="{StaticResource PropertiesPanelCheckbox}" Content="Draw borders" Visibility="Visible" IsEnabled="true" />
                     <CheckBox x:Name="checkboxDrawHeader" Style="{StaticResource PropertiesPanelCheckbox}" Content="Draw header row" Visibility="Visible" IsEnabled="true" />
                     <CheckBox x:Name="checkboxDrawTotal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Draw total row" Visibility="Visible" IsEnabled="true" />
-
-                    <Label x:Name="tblockPrecision" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Decimals to display:" />
-                    <ComboBox x:Name="cbxFieldPrecision" HorizontalAlignment="Left" Width="45" SelectedIndex="2">
+                       
+                        <Label x:Name="tblockPrecision" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Decimals to display:" />
+                    <ComboBox x:Name="cbxFieldPrecision" HorizontalAlignment="Left" Width="45" Height="20" SelectedIndex="2">
                         <ComboBoxItem>0</ComboBoxItem>
                         <ComboBoxItem>1</ComboBoxItem>
                         <ComboBoxItem>2</ComboBoxItem>
@@ -130,26 +131,28 @@
                     </ComboBox>
 
                     <TextBlock x:Name="tblockPercentBarData" HorizontalAlignment="Left" TextAlignment="Center" Text="Percent bar display mode:" Margin="0,5,0,0" Visibility="Collapsed"  />
-                    <ComboBox x:Name="cmbPercentBarMode" SelectedIndex="0" Visibility="Collapsed">
-                        <ComboBoxItem>Bar only</ComboBoxItem>
-                        <ComboBoxItem>Bar and percent</ComboBoxItem>
-                    </ComboBox>
-
-                    <TextBlock x:Name="tblockRows" HorizontalAlignment="Left" TextAlignment="Center" Text="Maximum rows to display:"  Margin="0,5,0,0"  />
+                        <ComboBox x:Name="cmbPercentBarMode" SelectedIndex="0" Visibility="Collapsed">
+                            <ComboBoxItem>Bar only</ComboBoxItem>
+                            <ComboBoxItem>Bar and percent</ComboBoxItem>
+                        </ComboBox>
+                        
+                     <TextBlock x:Name="tblockRows" HorizontalAlignment="Left" TextAlignment="Center" Text="Maximum rows to display:"  Margin="0,0,0,0"  />
                     <TextBox x:Name="txtRows" Width="100" />
-
-                    <TextBlock x:Name="tblockBarWidth" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,5,0,0" >Maximum width of percent bar:</TextBlock>
-                    <TextBox x:Name="txtBarWidth"  Width="100"/>
-
+                        
+                    <TextBlock x:Name="tblockBarWidth" HorizontalAlignment="Left" TextAlignment="Center" Margin="30,0,0,0" >Maximum width of percent bar:</TextBlock>
+                    <TextBox x:Name="txtBarWidth"  Width="100" />
+                    </WrapPanel> 
                     <!--<TextBlock x:Name="tblockOutputColumns" Margin="0,5,0,0" >Output columns to display:</TextBlock>-->
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 10">Output Columns To Display</Label>
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Output Columns To Display</Label>
                     <StackPanel>
-                        <CheckBox x:Name="checkboxColumnFrequency" Style="{StaticResource PropertiesPanelCheckbox}" Content="Frequency" IsChecked="True" />
+                        <WrapPanel Height="130" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <CheckBox x:Name="checkboxColumnFrequency" Style="{StaticResource PropertiesPanelCheckbox}" Content="Frequency" IsChecked="True" />
                         <CheckBox x:Name="checkboxColumnPercent" Style="{StaticResource PropertiesPanelCheckbox}" Content="Percent" IsChecked="True" />
                         <CheckBox x:Name="checkboxColumnCumulativePercent" Style="{StaticResource PropertiesPanelCheckbox}" Content="Cumulative percent" IsChecked="True" />
                         <CheckBox x:Name="checkboxColumn95CILower" Style="{StaticResource PropertiesPanelCheckbox}" Content="95% CI lower" IsChecked="True" />
                         <CheckBox x:Name="checkboxColumn95CIUpper" Style="{StaticResource PropertiesPanelCheckbox}" Content="95% CI upper" IsChecked="True" />
                         <CheckBox x:Name="checkboxColumnPercentBars" Style="{StaticResource PropertiesPanelCheckbox}" Content="Percent bars" IsChecked="True" />
+                        </WrapPanel>   
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
