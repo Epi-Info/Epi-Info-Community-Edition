@@ -203,6 +203,30 @@ namespace EpiDashboard.Mapping
             cbxValue.Items.Insert(0, "{Record Count}");
         }
 
+
+        public void SetValues(string shapekey, string datakey, string val, string dottext, Brush selectedcolor)
+        {
+            FillComboBoxes();
+            rctDotColor.Fill = (SolidColorBrush)selectedcolor;
+            txtDotValue.Text = dottext;
+            cbxShapeKey.Text = shapekey;
+            //  cbxShapeKey.SelectedValue = shapekey;
+            cbxDataKey.Text = datakey;
+            cbxValue.Text = val;
+            //  cbxStyle.Text = style;
+            grdMain.Width = 700;
+            //  rctColor.Fill = selectedcolor;
+            // txtDescription.IsEnabled = true;
+            // cbxStyle.IsEnabled = true;
+            // cbxLatitude.IsEnabled = true;
+            // cbxLongitude.IsEnabled = true;
+        }
+
+        public void SetdashboardHelper(DashboardHelper dash)
+        {
+            this.dashboardHelper = dash;
+        }
+
         #region ILayerProperties Members
 
         public void CloseLayer()

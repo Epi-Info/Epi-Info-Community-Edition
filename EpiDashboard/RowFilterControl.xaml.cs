@@ -47,46 +47,49 @@ namespace EpiDashboard
         {
             InitializeComponent();
             this.dashboardHelper = dashboardHelper;
-            this.config = dashboardHelper.Config;
-            this.includeUserDefinedVars = includeUserDefinedVars;
-            this.Mode = pMode;
-
-            if (filters == null)
+            if (dashboardHelper != null)
             {
-                DataFilters = new DataFilters(this.dashboardHelper);
-            }
-            else
-            {
-                DataFilters = filters;
-            }
+                this.config = dashboardHelper.Config;
+                this.includeUserDefinedVars = includeUserDefinedVars;
+                this.Mode = pMode;
 
-            //txtTitle.RenderTransform = new RotateTransform(270);
-            FillSelectionComboboxes();
+                if (filters == null)
+                {
+                    DataFilters = new DataFilters(this.dashboardHelper);
+                }
+                else
+                {
+                    DataFilters = filters;
+                }
 
-            selectionGridHeight = grdSelectionProperties.Height;
-            guidedButtonsGridHeight = grdGuidedModeButtons.Height;
+                //txtTitle.RenderTransform = new RotateTransform(270);
+                FillSelectionComboboxes();
 
-            //if (dashboardHelper.UseAdvancedUserDataFilter)
-            //{
-            //    pnlAdvancedMode.Visibility = Visibility.Visible;
-            //    txtAdvancedFilter.Text = dashboardHelper.AdvancedUserDataFilter;
-            //    SetAdvancedFilterMode();
-            //    ApplyAdvancedModeFilter();
-            //}
-            //else
-            //{
+                selectionGridHeight = grdSelectionProperties.Height;
+                guidedButtonsGridHeight = grdGuidedModeButtons.Height;
+
+                //if (dashboardHelper.UseAdvancedUserDataFilter)
+                //{
+                //    pnlAdvancedMode.Visibility = Visibility.Visible;
+                //    txtAdvancedFilter.Text = dashboardHelper.AdvancedUserDataFilter;
+                //    SetAdvancedFilterMode();
+                //    ApplyAdvancedModeFilter();
+                //}
+                //else
+                //{
                 pnlAdvancedMode.Visibility = Visibility.Collapsed;
                 txtAdvancedFilter.Text = string.Empty;
                 SetGuidedFilterMode();
-            //}
-            
-            UpdateFilterConditions();
+                //}
 
-            if (!dashboardHelper.IsUsingEpiProject)
-            {
-                //panelAdvanced.Visibility = Visibility.Collapsed;
+                UpdateFilterConditions();
+
+                if (!dashboardHelper.IsUsingEpiProject)
+                {
+                    //panelAdvanced.Visibility = Visibility.Collapsed;
+                }
+                config = Configuration.GetNewInstance();
             }
-            config = Configuration.GetNewInstance();            
         }
         #endregion // Constructors
 
