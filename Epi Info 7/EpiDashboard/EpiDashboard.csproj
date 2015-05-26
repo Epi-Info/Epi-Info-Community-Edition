@@ -254,6 +254,7 @@
     <Compile Include="Controls\GadgetProperties\MeansProperties.xaml.cs">
       <DependentUpon>MeansProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PointofInterestProperties.cs" />
     <Compile Include="Controls\VariablesDisplayControl.xaml.cs">
       <DependentUpon>VariablesDisplayControl.xaml</DependentUpon>
     </Compile>
@@ -990,6 +991,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\GadgetProperties\MeansProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PointofInterestProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
