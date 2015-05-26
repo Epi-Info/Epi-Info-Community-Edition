@@ -51,7 +51,7 @@
             <Border Grid.Row="0" Grid.RowSpan="9" CornerRadius="0" BorderThickness="0" Background="#303030" ></Border>
             <Image x:Name="imgPoi" Source="..\Images\poi.png" Stretch="None" Grid.Row="1" Cursor="Hand" MouseLeftButtonUp="imgPointofInterest_MouseLeftButtonUp"/>
             <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="2" HorizontalAlignment="Center">Points of Interest</TextBlock>
-            <Image x:Name="imgCaseCluster" Source="..\Images\casecluster.png" Stretch="None" Grid.Row="3" Cursor="Hand" MouseLeftButtonUp="imgChoropleth_MouseLeftButtonUp"/>
+            <Image x:Name="imgCaseCluster" Source="..\Images\casecluster.png" Stretch="None" Grid.Row="3" Cursor="Hand" MouseLeftButtonUp="imgCaseCluster_MouseLeftButtonUp"/>
             <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="4" HorizontalAlignment="Center">Case Cluster</TextBlock>
             <Image x:Name="imgChoropleth" Source="..\Images\choropleth.png" Stretch="None" Grid.Row="5" Cursor="Hand" MouseLeftButtonUp="imgChoropleth_MouseLeftButtonUp"/>
             <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="6" HorizontalAlignment="Center">Choropleth</TextBlock>

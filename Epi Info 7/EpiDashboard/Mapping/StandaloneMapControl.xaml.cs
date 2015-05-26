@@ -1192,6 +1192,42 @@ namespace EpiDashboard.Mapping
             popup.Content = properties;
             popup.Show();
         }
+
+        public void GenerateCaseClusterMap()
+        {
+            ILayerProperties layerProperties = null;
+            DashboardHelper dashboardHelper = new DashboardHelper();
+
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
+
+            EpiDashboard.Controls.CaseClusterProperties properties = new EpiDashboard.Controls.CaseClusterProperties(this, myMap);
+            //old config
+            layerProperties = new ClusterLayerProperties(myMap, dashboardHelper, this);
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            properties.layerprop = (ClusterLayerProperties)layerProperties;
+
+            //
+            properties.Width = 800;
+            properties.Height = 600;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            {
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            {
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            properties.Cancelled += new EventHandler(properties_Cancelled);
+            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+            popup.Content = properties;
+            popup.Show();
+        }
         //--
 
 
@@ -1483,7 +1519,11 @@ namespace EpiDashboard.Mapping
             CollapseExpandLayerChooser();
             GeneratePointofInterestMap();
         }
-
+        private void imgCaseCluster_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            CollapseExpandLayerChooser();
+            GenerateCaseClusterMap();
+        }
         private void ImageryRadioButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             ToggleSatellite();

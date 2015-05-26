@@ -84,7 +84,10 @@ namespace EpiDashboard.Mapping
         {
             return this.dashboardHelper;
         }
-
+        public void SetdashboardHelper(DashboardHelper dash)
+        {
+            this.dashboardHelper = dash;
+        }
         void provider_RecordSelected(int id)
         {
             mapControl.OnRecordSelected(id);
@@ -170,6 +173,18 @@ namespace EpiDashboard.Mapping
             lblTitle.Visibility = System.Windows.Visibility.Visible;
         }
 
+        //---
+        public void SetValues(string description, string latitude, string longitude, Brush selectedcolor)
+        {
+            FillComboBoxes();
+            rctColor.Fill = (SolidColorBrush)selectedcolor;
+            txtDescription.Text = description;
+            cbxLatitude.Text = latitude;
+            cbxLongitude.Text = longitude;
+            grdMain.Width = 700;
+            rctColor.Fill = selectedcolor;
+        }
+        //--
         public System.Xml.XmlNode Serialize(System.Xml.XmlDocument doc)
         {
             string connectionString = string.Empty;

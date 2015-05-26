@@ -159,6 +159,7 @@
     <Compile Include="BarSpacing.cs" />
     <Compile Include="ColumnDataType.cs" />
     <Compile Include="CombineModeTypes.cs" />
+    <Compile Include="Controls\CaseClusterProperties.cs" />
     <Compile Include="Controls\Charting\AberrationChart.xaml.cs">
       <DependentUpon>AberrationChart.xaml</DependentUpon>
     </Compile>
@@ -875,6 +876,10 @@
     <Page Include="ChartControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CaseClusterProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

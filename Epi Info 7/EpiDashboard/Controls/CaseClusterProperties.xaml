@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="EpiDashboard.Controls.CaseClusterProperties"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="460" d:DesignWidth="800" FontFamily="Global User Interface" FontSize="16" Background="White">
+    <UserControl.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="../StyleDictionary.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".37*" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width=".63*" />
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+       
+        <StackPanel Grid.Column="0" Grid.RowSpan="4" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
+            <Label FontWeight="Light" Foreground="White" FontSize="40" Margin="0, 0, 0, 10">Case Cluster</Label>
+            <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnVariables" Title="Variables" Description="Choose map boundaries." IsChecked="False" Checked="tbtnVariables_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors" Description="Set color representations." IsChecked="False" Checked="tbtnCharts_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnFilter" Title="Filters" Description="Set data filters." IsChecked="False" Checked="tbtnFilter_Checked"/>
+        </StackPanel>
+
+        <StackPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Data Source</Label>
+
+            <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
+                <Label>Data Source:</Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"></TextBox>
+                    <Button x:Name="btnBrowse" Height="Auto" Grid.Column="2" Click="btnBrowse_Click">Browse</Button>
+                </Grid>
+
+                
+            </StackPanel>
+
+            <StackPanel x:Name="panelDataSourceOther" Visibility="Collapsed">
+                <Label>Connection String:</Label>
+                <TextBox x:Name="txtDataSource" Margin="0,0,0,8" />
+            </StackPanel>
+
+            <StackPanel x:Name="panelDataSourceAdvanced" Visibility="Collapsed">
+                <Label>SQL Query:</Label>
+                <TextBox x:Name="txtSQLQuery"></TextBox>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="8" Visibility="Collapsed">
+            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Select the variables for data layer</Label>
+
+            <Label>Description:</Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtDescription" ></TextBox>
+            </Grid>
+            <Label Name="lblLatitude">Latitude Field:</Label>
+            <ComboBox x:Name="cmbLatitude" ></ComboBox>
+            <Label Name="lblLongitude">Longitude Field:</Label>
+            <ComboBox x:Name="cmbLongitude" ></ComboBox>
+        </StackPanel>
+        
+        <StackPanel x:Name="panelFilter" Grid.Column="2"   Margin="8" Visibility="Collapsed"  >
+            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this gadget</Label>
+            <Label Margin="0, 0, 0, 20">Note: Select dataSource to add filter to data layer: </Label>
+       </StackPanel>
+        
+        <StackPanel x:Name="panelInfo" Grid.Column="2" Margin="8" Visibility="Collapsed">
+            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Canvas Information</Label>
+
+            <TextBlock x:Name="tblockRows" Text="2,255 unfiltered rows" Margin="0,0,0,16" />
+            <TextBlock x:Name="tblockColumns" Text="252 columns" Margin="0,0,0,16" />
+            <TextBlock x:Name="tblockCacheDateTime" Text="Data last cached at 12/16/2011 1:56 PM" Margin="0,0,0,16" />
+            <TextBlock x:Name="tblockCacheTimeElapsed" Text="Took 4:32:32 to locally cache data" Margin="0,0,0,16" />
+            <TextBlock x:Name="tblockCurrentEpiVersion" Text="Epi Info 7.0.0.0" Margin="0,0,0,16" />
+        </StackPanel>
+
+        <StackPanel x:Name="panelCharts" Grid.Column="2" Margin="8" Visibility="Collapsed">
+            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Colors</Label>
+         
+            <StackPanel Orientation="Horizontal" Margin="8,0,0,2" >
+                <TextBlock x:Name="tblcolor" Text="Select Color: "> </TextBlock>
+                <Rectangle x:Name="rctSelectColor" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,11,0">
+                    <Rectangle.ToolTip>
+                        <Label Content="select value color"/>
+                    </Rectangle.ToolTip>
+                </Rectangle>
+            </StackPanel>
+        </StackPanel>
+        
+        <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
+
+        <DockPanel Grid.ColumnSpan="3" Grid.Row="1">
+            <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
+            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
+        </DockPanel>
+    </Grid>
+</UserControl>
