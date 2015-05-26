@@ -157,17 +157,10 @@ namespace EpiDashboard.Mapping
             FillComboBoxes();
             rctDotColor.Fill = (SolidColorBrush)selectedcolor;
             txtDotValue.Text = dottext;
-            cbxShapeKey.Text = shapekey;
-          //  cbxShapeKey.SelectedValue = shapekey;
+            cbxShapeKey.Text = shapekey;          
             cbxDataKey.Text = datakey;
-            cbxValue.Text = val;
-          //  cbxStyle.Text = style;
-            grdMain.Width = 700;
-          //  rctColor.Fill = selectedcolor;
-           // txtDescription.IsEnabled = true;
-           // cbxStyle.IsEnabled = true;
-           // cbxLatitude.IsEnabled = true;
-           // cbxLongitude.IsEnabled = true;
+            cbxValue.Text = val;         
+            grdMain.Width = 700;          
         }
 
         public void SetdashboardHelper(DashboardHelper dash)
