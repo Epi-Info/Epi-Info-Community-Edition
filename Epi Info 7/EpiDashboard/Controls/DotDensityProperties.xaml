@@ -28,7 +28,7 @@
         <!--<Border Grid.ColumnSpan="100" Grid.RowSpan="100" BorderThickness="2" BorderBrush="#DDDDDD" />-->
 
         <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <Label FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">DotDensity</Label>
+            <Label FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Dot Density</Label>
 
             <!--<ToggleButton x:Name="tbtnDataSource" Style="{StaticResource ToggleSidebarButtonStyle}" IsChecked="True" Checked="tbtnDataSource_Checked">
                 <StackPanel>
