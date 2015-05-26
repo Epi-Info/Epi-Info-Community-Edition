@@ -65,7 +65,7 @@ namespace EpiDashboard.Mapping
         private MapBackgroundType defaultBackgroundType = MapBackgroundType.Satellite;
         private bool bypassInternetCheck;
         private Brush defaultBackgroundColor = Brushes.White;
-        private bool hidePanels = false;      
+        private bool hidePanels = false;
         public StandaloneMapControl()
         {
             InitializeComponent();
@@ -1157,6 +1157,44 @@ namespace EpiDashboard.Mapping
 
         private DashboardPopup popup;
 
+        public void GeneratePointofInterestMap()
+        {
+           ILayerProperties layerProperties = null;
+           DashboardHelper dashboardHelper = new DashboardHelper();
+
+           popup = new DashboardPopup();
+           popup.Parent = LayoutRoot;
+                                
+            EpiDashboard.Controls.PointofInterestProperties properties = new EpiDashboard.Controls.PointofInterestProperties(this, myMap);
+            //old config
+            layerProperties = new PointLayerProperties(myMap, dashboardHelper, this);
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            properties.layerprop = (PointLayerProperties) layerProperties;
+           
+            //
+            properties.Width = 800;
+            properties.Height = 600;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            {
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            {
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            properties.Cancelled += new EventHandler(properties_Cancelled);
+            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+            popup.Content = properties;
+            popup.Show();
+        }
+        //--
+
+
         public void GenerateShapeFileChoropleth()
         {
             //AddLayer(LayerType.ChoroplethShapeFile);
@@ -1439,6 +1477,11 @@ namespace EpiDashboard.Mapping
         {
             CollapseExpandLayerChooser();
             GenerateShapeFileDotDensity();
+        }
+        private void imgPointofInterest_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            CollapseExpandLayerChooser();
+            GeneratePointofInterestMap();
         }
 
         private void ImageryRadioButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
