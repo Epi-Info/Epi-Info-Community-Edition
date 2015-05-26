@@ -55,7 +55,7 @@
             <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="4" HorizontalAlignment="Center">Case Cluster</TextBlock>
             <Image x:Name="imgChoropleth" Source="..\Images\choropleth.png" Stretch="None" Grid.Row="5" Cursor="Hand" MouseLeftButtonUp="imgChoropleth_MouseLeftButtonUp"/>
             <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="6" HorizontalAlignment="Center">Choropleth</TextBlock>
-            <Image x:Name="imgDotDensity" Source="..\Images\dotdensity.png" Stretch="None" Grid.Row="7" Cursor="Hand" MouseLeftButtonUp="imgChoropleth_MouseLeftButtonUp"/>
+            <Image x:Name="imgDotDensity" Source="..\Images\dotdensity.png" Stretch="None" Grid.Row="7" Cursor="Hand" MouseLeftButtonUp="imgDotDensity_MouseLeftButtonUp"/>
             <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="8" HorizontalAlignment="Center">Dot Density</TextBlock>
         </Grid>
 

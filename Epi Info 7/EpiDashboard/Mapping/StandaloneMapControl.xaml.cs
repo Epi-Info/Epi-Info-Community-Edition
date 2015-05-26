@@ -65,8 +65,7 @@ namespace EpiDashboard.Mapping
         private MapBackgroundType defaultBackgroundType = MapBackgroundType.Satellite;
         private bool bypassInternetCheck;
         private Brush defaultBackgroundColor = Brushes.White;
-        private bool hidePanels = false;
-
+        private bool hidePanels = false;      
         public StandaloneMapControl()
         {
             InitializeComponent();
@@ -621,14 +620,14 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        void ILayerProperties_FilterRequested(object sender, EventArgs e)
+       public void ILayerProperties_FilterRequested(object sender, EventArgs e)
         {
             ILayerProperties layerProperties = (ILayerProperties)sender;
             DashboardHelper dashboardHelper = layerProperties.GetDashboardHelper();
             AddSelectionCriteria(dashboardHelper);
         }
 
-        void ILayerProperties_MapGenerated(object sender, EventArgs e)
+       public void ILayerProperties_MapGenerated(object sender, EventArgs e)
         {
             if (grdLayerConfigContainer.Children.Contains((UIElement)sender))
             {
@@ -1280,7 +1279,39 @@ namespace EpiDashboard.Mapping
 
         public void GenerateShapeFileDotDensity()
         {
-            AddLayer(LayerType.DotDensityShapeFile);
+           // AddLayer(LayerType.DotDensityShapeFile);
+           // ILayerProperties layerProperties = null;
+            DashboardHelper dashboardHelper = new DashboardHelper();
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
+            EpiDashboard.Controls.DotDensityProperties properties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
+
+            //layerProperties = new DotDensityLayerProperties(myMap, dashboardHelper, this);
+           // layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+           // layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+           // properties.layerprop = (DotDensityLayerProperties)layerProperties;
+            properties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            properties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+
+            properties.Width = 800;
+            properties.Height = 600;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            {
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            {
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            properties.Cancelled += new EventHandler(properties_Cancelled);
+            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+           // grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+           
+            popup.Content = properties;
+            popup.Show();
         }
 
         public void GenerateMapServerDotDensity()
@@ -1402,6 +1433,12 @@ namespace EpiDashboard.Mapping
         {
             CollapseExpandLayerChooser();
             GenerateShapeFileChoropleth();
+        }
+
+        private void imgDotDensity_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            CollapseExpandLayerChooser();
+            GenerateShapeFileDotDensity();
         }
 
         private void ImageryRadioButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

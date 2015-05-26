@@ -194,6 +194,9 @@
     <Compile Include="Controls\ChoroplethProperties.xaml.cs">
       <DependentUpon>ChoroplethProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DotDensityProperties.xaml.cs">
+      <DependentUpon>DotDensityProperties.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DuplicatesControl.xaml.cs">
       <DependentUpon>DuplicatesControl.xaml</DependentUpon>
     </Compile>
@@ -909,6 +912,10 @@
     <Page Include="Controls\ChoroplethProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DotDensityProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\DuplicatesControl.xaml">
       <SubType>Designer</SubType>

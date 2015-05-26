@@ -1,0 +1,193 @@
+﻿<UserControl x:Class="EpiDashboard.Controls.DotDensityProperties"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="460" d:DesignWidth="800" FontFamily="Global User Interface" FontSize="16" Background="White">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".37*" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width=".63*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--<Border Grid.ColumnSpan="100" Grid.RowSpan="100" BorderThickness="2" BorderBrush="#DDDDDD" />-->
+
+        <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
+            <Label FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">DotDensity</Label>
+
+            <!--<ToggleButton x:Name="tbtnDataSource" Style="{StaticResource ToggleSidebarButtonStyle}" IsChecked="True" Checked="tbtnDataSource_Checked">
+                <StackPanel>
+                    <TextBlock Margin="4" FontSize="28" FontWeight="Light">Data Source</TextBlock>
+                    <TextBlock Margin="4, 0, 4, 0" FontSize="12" TextWrapping="WrapWithOverflow">Change the data source for the current canvas.</TextBlock>
+                </StackPanel>
+            </ToggleButton>-->
+
+            <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title=" Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title=" Variables" Description="Choose map boundaries." IsChecked="False" Checked="tbtnHTML_Checked"/>
+            <!--<Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsChecked="False" Checked="tbtnCharts_Checked"/>-->
+            <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title=" Settings" Description="Set colors and data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
+
+
+            <!--<ToggleButton x:Name="tbtnHTML" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnHTML_Checked">
+                <StackPanel>
+                    <TextBlock Margin="4" FontSize="28" FontWeight="Light">HTML Output</TextBlock>
+                    <TextBlock Margin="4, 0, 4, 0" FontSize="12" TextWrapping="WrapWithOverflow">Modify the HTML output settings.</TextBlock>
+                </StackPanel>
+            </ToggleButton>
+
+            <ToggleButton x:Name="tbtnCharts" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnCharts_Checked">
+                <StackPanel>
+                    <TextBlock Margin="4" FontSize="28" FontWeight="Light">Charts</TextBlock>
+                    <TextBlock Margin="4, 0, 4, 0" FontSize="12" TextWrapping="WrapWithOverflow">Set default chart settings for this canvas.</TextBlock>
+                </StackPanel>
+            </ToggleButton>
+
+            <ToggleButton x:Name="tbtnInfo" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnInfo_Checked">
+                <StackPanel>
+                    <TextBlock Margin="4" FontSize="28" FontWeight="Light">Information</TextBlock>
+                    <TextBlock Margin="4, 0, 4, 0" FontSize="12" TextWrapping="WrapWithOverflow">View technical details about this canvas.</TextBlock>
+                </StackPanel>
+            </ToggleButton>-->
+        </StackPanel>
+
+        <StackPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
+
+            <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
+                <Label>Data Source:</Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"></TextBox>
+                    <Button x:Name="btnBrowse" Height="Auto" Grid.Column="2" Click="btnBrowse_Click">Browse</Button>
+                </Grid>
+
+
+            </StackPanel>
+
+            <StackPanel x:Name="panelDataSourceOther" Visibility="Collapsed">
+                <Label>Connection String:</Label>
+                <TextBox x:Name="txtDataSource" Margin="0,0,0,8" />
+            </StackPanel>
+
+            <StackPanel x:Name="panelDataSourceAdvanced" Visibility="Collapsed">
+                <Label>SQL Query:</Label>
+                <TextBox x:Name="txtSQLQuery"></TextBox>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel x:Name="panelHTML" Grid.Column="2" Margin="8" Visibility="Collapsed">
+            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Source:</Label>
+            <Label>Boundaries:</Label>
+            <ComboBox x:Name="cmbBoundaries"    SelectionChanged="cmbBoundaries_SelectionChanged">               
+                <ComboBoxItem>Shape File</ComboBoxItem>
+                <ComboBoxItem>Map Server</ComboBoxItem>
+                <ComboBoxItem>KML</ComboBoxItem>
+            </ComboBox>
+           
+            <StackPanel x:Name="panelShapeFile"  Margin="8" Visibility="Collapsed">
+                <Label>Shape File:</Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtShapePath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"></TextBox>
+                    <Button x:Name="btnBrowseShape" Height="Auto" Grid.Column="2" Click="btnBrowseShapeFile_Click">Browse</Button>
+                </Grid>
+            </StackPanel>
+            <StackPanel x:Name="panelMapServer"  Margin="9"  Visibility="Collapsed">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />                                             
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnMapFile" Height="Auto" Width="Auto"  Click="btnMapFile_Click">Browse Map Server...</Button>
+                </Grid>
+                           
+            </StackPanel>
+            <StackPanel x:Name="panelKML"   Margin="8" Visibility="Collapsed">               
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />                                            
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnKMLFile" Width="Auto" Height="Auto" Click="btnKMLFile_Click">Specify KML...</Button>
+                </Grid>
+               
+            </StackPanel>
+
+            <Label>Dot Value:</Label>
+            <TextBox x:Name="txtDotValue" Text="1" ></TextBox>
+            <Label>Feature Key:</Label>
+            <ComboBox x:Name="cmbShapeKey" SelectionChanged="cmbFormName_SelectionChanged"></ComboBox>
+            <Label>Data Key:</Label>
+            <ComboBox x:Name="cmbDataKey" SelectionChanged="cmbFormName_SelectionChanged"></ComboBox>
+            <Label>Value:</Label>
+            <ComboBox x:Name="cmbValue" SelectionChanged="cmbFormName_SelectionChanged"></ComboBox>
+
+        </StackPanel>
+
+        <StackPanel x:Name="panelInfo" Grid.Column="2" Margin="8" Visibility="Collapsed">
+            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Canvas Information</Label>
+
+            <TextBlock x:Name="tblockRows" Text="2,255 unfiltered rows" Margin="0,0,0,16" />
+            <TextBlock x:Name="tblockColumns" Text="252 columns" Margin="0,0,0,16" />
+            <TextBlock x:Name="tblockCacheDateTime" Text="Data last cached at 12/16/2011 1:56 PM" Margin="0,0,0,16" />
+            <TextBlock x:Name="tblockCacheTimeElapsed" Text="Took 4:32:32 to locally cache data" Margin="0,0,0,16" />
+            <TextBlock x:Name="tblockCurrentEpiVersion" Text="Epi Info 7.0.0.0" Margin="0,0,0,16" />
+        </StackPanel>
+
+        <!--<StackPanel x:Name="panelCharts" Grid.Column="2" Margin="8" Visibility="Collapsed">
+            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors &amp; Ranges</Label>
+
+            <Label>Select Color:</Label>
+            <Rectangle x:Name="rctHighColor" MouseLeftButtonUp="rctHighColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                <Rectangle.ToolTip>
+                    <Label Content="Color"/>
+                </Rectangle.ToolTip>
+            </Rectangle>           
+        </StackPanel>-->
+
+        <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10"> Color and Data Filters</Label>
+            <!--<Label>Note: Any filters set here are applied to this gadget only.</Label>-->
+
+            <StackPanel x:Name="panelCharts" Grid.Column="2" Margin="8" >
+                <!--<Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors &amp; Ranges</Label>-->
+
+                <Label>Select Color:</Label>
+                <Rectangle x:Name="rctHighColor" MouseLeftButtonUp="rctHighColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                    <Rectangle.ToolTip>
+                        <Label Content="Color"/>
+                    </Rectangle.ToolTip>
+                </Rectangle>
+            </StackPanel>
+            <TextBlock x:Name="txtNote">Note:Please select the Datasource first to view the Filters:</TextBlock>
+        </StackPanel>
+
+        <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
+
+        <DockPanel Grid.ColumnSpan="3" Grid.Row="1">
+            <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
+            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
+        </DockPanel>
+    </Grid>
+</UserControl>

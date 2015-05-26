@@ -22,6 +22,7 @@ namespace EpiDashboard.Mapping
         {
 
             btnOk.Enabled = cbxMapServers.SelectedIndex > -1;
+            if(cbxMapServers.SelectedItem!=null)
             ServerName = cbxMapServers.SelectedItem.ToString();
         }
 
