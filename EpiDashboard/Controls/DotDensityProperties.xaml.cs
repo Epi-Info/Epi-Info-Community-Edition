@@ -31,10 +31,10 @@ namespace EpiDashboard.Controls
         private DashboardHelper dashboardHelper;
         private EpiDashboard.Mapping.DotDensityLayerProvider provider;
         public event EventHandler FilterRequested;
-        public RowFilterControl RowFilterControl { get; protected set; }       
+        public RowFilterControl rowFilterControl { get; protected set; }       
         private double selectionGridHeight;
         private double guidedButtonsGridHeight;
-        public DataFilters DataFilters;
+        public DataFilters dataFilters;
         private Configuration config;
         private bool includeUserDefinedVars = true;
         private EpiDashboard.Dialogs.FilterDialogMode mode = EpiDashboard.Dialogs.FilterDialogMode.RowFilterMode;
@@ -220,6 +220,7 @@ namespace EpiDashboard.Controls
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
+            Addfilters();
             RenderMap();
             if(layerprop!=null)
             layerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctHighColor.Fill));
@@ -249,10 +250,10 @@ namespace EpiDashboard.Controls
             {
                 txtProjectPath.Text = dashboardHelper.Database.DbName;
                 FillComboBoxes();
-                this.DataFilters = new DataFilters(dashboardHelper);
-                RowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, DataFilters, true);
-                RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; RowFilterControl.FillSelectionComboboxes();
-                panelFilters.Children.Add(RowFilterControl);
+                this.dataFilters = new DataFilters(dashboardHelper);
+                rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dataFilters, true);
+                rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; rowFilterControl.FillSelectionComboboxes();
+                panelFilters.Children.Add(rowFilterControl);
                 txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
             }
         }
@@ -343,21 +344,7 @@ namespace EpiDashboard.Controls
             {
                 string shapeKey = cmbShapeKey.SelectedItem.ToString();
                 string dataKey = cmbDataKey.SelectedItem.ToString();
-                string value = cmbValue.SelectedItem.ToString();
-
-                //List<SolidColorBrush> brushList = new List<SolidColorBrush>() { 
-                //    (SolidColorBrush)rctColor1.Fill, 
-                //    (SolidColorBrush)rctColor2.Fill, 
-                //    (SolidColorBrush)rctColor3.Fill, 
-                //    (SolidColorBrush)rctColor4.Fill, 
-                //    (SolidColorBrush)rctColor5.Fill, 
-                //    (SolidColorBrush)rctColor6.Fill };
-
-                //int classCount;
-                //if (int.TryParse(cmbClasses.Text, out classCount))
-                //{
-                //    classCount = 4;
-                //}
+                string value = cmbValue.SelectedItem.ToString();               
                 if(provider!=null)
                 provider.SetShapeRangeValues(dashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(txtDotValue.Text));               
                 else if(Mapprovider!=null)
@@ -366,79 +353,7 @@ namespace EpiDashboard.Controls
                     KMLprovider.SetShapeRangeValues(dashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(txtDotValue.Text));               
 
             }
-        }
-
-        //private void rctColor1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        //{
-        //    System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-        //    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        //    {
-        //        rctColor1.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-        //    }
-        //}
-
-        //private void rctColor2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        //{
-        //    System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-        //    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        //    {
-        //        rctColor2.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-        //    }
-        //}
-
-        //private void rctColor3_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        //{
-        //    System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-        //    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        //    {
-        //        rctColor3.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-        //    }
-        //}
-
-        //private void rctColor4_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        //{
-        //    System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-        //    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        //    {
-        //        rctColor4.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-        //    }
-        //}
-
-        //private void rctColor5_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        //{
-        //    System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-        //    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        //    {
-        //        rctColor5.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-        //    }
-        //}
-
-        //private void rctColor6_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        //{
-        //    System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-        //    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        //    {
-        //        rctColor6.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-        //    }
-        //}
-
-        //private void rctColor7_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        //{
-        //    System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-        //    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        //    {
-        //        rctColor7.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-        //    }
-        //}
-
-        //private void rctLowColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        //{
-        //    System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-        //    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        //    {
-        //        rctLowColor.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-        //    }
-        //}
+        }    
 
         private void rctHighColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -447,88 +362,7 @@ namespace EpiDashboard.Controls
             {
                 rctHighColor.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
-        }
-
-        //private void ResetLegend_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (rctLowColor == null || rctHighColor == null)
-        //    {
-        //        return;
-        //    }
-
-        //    int stratCount;
-
-        //    SolidColorBrush rampStart;
-        //    SolidColorBrush rampEnd;
-
-        //    if (int.TryParse(cmbClasses.Text, out stratCount) == false)
-        //    {
-        //        stratCount = 4;
-        //    }
-
-        //    rampStart = (SolidColorBrush)rctLowColor.Fill;
-        //    rampEnd = (SolidColorBrush)rctHighColor.Fill;
-
-        //    int rd = rampStart.Color.R - rampEnd.Color.R;
-        //    int gd = rampStart.Color.G - rampEnd.Color.G;
-        //    int bd = rampStart.Color.B - rampEnd.Color.B;
-
-        //    byte ri = (byte)(rd / (stratCount - 1));
-        //    byte gi = (byte)(gd / (stratCount - 1));
-        //    byte bi = (byte)(bd / (stratCount - 1));
-
-        //    rctColor1.Fill = rampStart;
-
-        //    int i = 3;
-
-        //    Color coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri), (byte)(rampStart.Color.G - gi), (byte)(rampStart.Color.B - bi));
-        //    rctColor2.Fill = new SolidColorBrush(coo);
-
-        //    coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 2), (byte)(rampStart.Color.G - gi * 2), (byte)(rampStart.Color.B - bi * 2));
-        //    rctColor3.Visibility = System.Windows.Visibility.Visible;
-        //    if (i++ > stratCount)
-        //    {
-        //        coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-        //        rctColor3.Visibility = System.Windows.Visibility.Hidden;
-        //    }
-        //    rctColor3.Fill = new SolidColorBrush(coo);
-
-        //    coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 3), (byte)(rampStart.Color.G - gi * 3), (byte)(rampStart.Color.B - bi * 3));
-        //    rctColor4.Visibility = System.Windows.Visibility.Visible;
-        //    if (i++ > stratCount)
-        //    {
-        //        coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-        //        rctColor4.Visibility = System.Windows.Visibility.Hidden;
-        //    }
-        //    rctColor4.Fill = new SolidColorBrush(coo);
-
-        //    coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 4), (byte)(rampStart.Color.G - gi * 4), (byte)(rampStart.Color.B - bi * 4));
-        //    rctColor5.Visibility = System.Windows.Visibility.Visible;
-        //    if (i++ > stratCount)
-        //    {
-        //        coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-        //        rctColor5.Visibility = System.Windows.Visibility.Hidden;
-        //    }
-        //    rctColor5.Fill = new SolidColorBrush(coo);
-
-        //    coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 5), (byte)(rampStart.Color.G - gi * 5), (byte)(rampStart.Color.B - bi * 5));
-        //    rctColor6.Visibility = System.Windows.Visibility.Visible;
-        //    if (i++ > stratCount)
-        //    {
-        //        coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-        //        rctColor6.Visibility = System.Windows.Visibility.Hidden;
-        //    }
-        //    rctColor6.Fill = new SolidColorBrush(coo);
-
-        //    coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 6), (byte)(rampStart.Color.G - gi * 6), (byte)(rampStart.Color.B - bi * 6));
-        //    rctColor7.Visibility = System.Windows.Visibility.Visible;
-        //    if (i++ > stratCount)
-        //    {
-        //        coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-        //        rctColor7.Visibility = System.Windows.Visibility.Hidden;
-        //    }
-        //    rctColor7.Fill = new SolidColorBrush(coo);
-        //}
+        }     
 
         private void btnKMLFile_Click(object sender, RoutedEventArgs e)
         {
@@ -559,7 +393,6 @@ namespace EpiDashboard.Controls
                 serverlayerprop.SetdashboardHelper(DashboardHelper); 
             this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
         }
-
 
         void Mapprovider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
         {
@@ -605,7 +438,6 @@ namespace EpiDashboard.Controls
                 RenderMap();
             }
         }
-
 
         void KMLprovider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
         {
@@ -678,6 +510,65 @@ namespace EpiDashboard.Controls
                     panelShapeFile.Visibility = System.Windows.Visibility.Collapsed;
                     panelMapServer.Visibility = System.Windows.Visibility.Collapsed;
                     panelKML.Visibility = System.Windows.Visibility.Visible;
+                }
+            }
+        }
+
+        private void Addfilters()
+        {
+            string sfilterOperand = string.Empty;
+            string[] shilowvars;
+            string svarname;
+
+            this.dataFilters = rowFilterControl.DataFilters;
+
+            List<string> sconditionval = dataFilters.GetFilterConditionsAsList();
+            string strreadablecondition = dataFilters.GenerateReadableDataFilterString().Trim();
+            if (!(string.IsNullOrEmpty(strreadablecondition)))
+            {
+                if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_MISSING;
+                }
+
+                if (!(strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN)))
+                {
+                    svarname = strreadablecondition.Substring(strreadablecondition.IndexOf("[") + 1, strreadablecondition.IndexOf("]") - strreadablecondition.IndexOf("[") - 1);
+                    dashboardHelper.AddDataFilterCondition(sfilterOperand, sconditionval[0].ToString(), svarname, ConditionJoinType.And);
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_BETWEEN;
+                    string strcondition = strreadablecondition.Substring(0, strreadablecondition.IndexOf(sfilterOperand)).Trim();
+                    string[] strVarstrings = strcondition.Split(' ');
+                    svarname = strVarstrings[3].ToString();
+                    string sValues = strreadablecondition.ToString().Substring(strreadablecondition.IndexOf(sfilterOperand) + sfilterOperand.Length, (strreadablecondition.ToString().Length) - (strreadablecondition.ToString().IndexOf(sfilterOperand) + sfilterOperand.Length)).Trim();
+                    shilowvars = sValues.Split(' ');
+                    dashboardHelper.AddDataFilterCondition(sfilterOperand, shilowvars[0].ToString(), shilowvars[2].ToString(), svarname, ConditionJoinType.And);
                 }
             }
         }
