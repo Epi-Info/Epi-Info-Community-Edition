@@ -186,13 +186,17 @@ namespace EpiDashboard
             txtCorrelation.Visibility = System.Windows.Visibility.Collapsed;
             grdParameters.Visibility = System.Windows.Visibility.Collapsed;
 
-            if (!string.IsNullOrEmpty(this.txtFilterString.Text))
+            if (this.txtFilterString != null && !string.IsNullOrEmpty(this.txtFilterString.Text))
             {
                 this.txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
             }
 
             this.messagePanel.Visibility = System.Windows.Visibility.Collapsed;
-            this.txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
+            this.grdPearson.Visibility = System.Windows.Visibility.Collapsed;
+            this.txtPearsonAnalysis.Visibility = System.Windows.Visibility.Collapsed;
+            this.txtSpearmanAnalysis.Visibility = System.Windows.Visibility.Collapsed;
+            this.grdSpearman.Visibility = System.Windows.Visibility.Collapsed;
+//            this.txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
             //descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed; //EI-24
             IsCollapsed = true;
         }
@@ -202,13 +206,20 @@ namespace EpiDashboard
             grdRegress.Visibility = System.Windows.Visibility.Visible;
             txtCorrelation.Visibility = System.Windows.Visibility.Visible;
             grdParameters.Visibility = System.Windows.Visibility.Visible;
+            if (this.lbxOtherFields.Items.Count == 1)
+            {
+                this.grdPearson.Visibility = System.Windows.Visibility.Visible;
+                this.txtPearsonAnalysis.Visibility = System.Windows.Visibility.Visible;
+                this.txtSpearmanAnalysis.Visibility = System.Windows.Visibility.Visible;
+                this.grdSpearman.Visibility = System.Windows.Visibility.Visible;
+            }
 
             if (this.messagePanel.MessagePanelType != Controls.MessagePanelType.StatusPanel)
             {
                 this.messagePanel.Visibility = System.Windows.Visibility.Visible;
             }
 
-            if (!string.IsNullOrEmpty(this.txtFilterString.Text))
+            if (this.txtFilterString != null && !string.IsNullOrEmpty(this.txtFilterString.Text))
             {
                 this.txtFilterString.Visibility = System.Windows.Visibility.Visible;
             }
