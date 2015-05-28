@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebEnterPublishDialog));
             this.btnCancel = new System.Windows.Forms.Button();
             this.ttWebPubDialog = new System.Windows.Forms.ToolTip(this.components);
+            this.btnShowLog = new System.Windows.Forms.Button();
             this.lblHeading2 = new System.Windows.Forms.Label();
             this.OrganizationKeyLinkLabel = new System.Windows.Forms.LinkLabel();
             this.OrganizationKeyValueLabel = new System.Windows.Forms.Label();
@@ -39,37 +40,37 @@
             this.DividerLabel = new System.Windows.Forms.Label();
             this.btnGo = new System.Windows.Forms.Button();
             this.tabEntry = new System.Windows.Forms.TabPage();
-            this.btnPublishForm = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblPublishModeStatus = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtStatus = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lblURL = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.txtSurveyKey = new System.Windows.Forms.TextBox();
-            this.txtDataKey = new System.Windows.Forms.TextBox();
-            this.lblSurveyKey = new System.Windows.Forms.Label();
-            this.lblSecurityToken = new System.Windows.Forms.Label();
-            this.txtStatusSummary = new System.Windows.Forms.TextBox();
-            this.txtURL = new System.Windows.Forms.TextBox();
-            this.btnCopyAllURLs = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lblSuccessNotice = new System.Windows.Forms.Label();
-            this.btnShowLog = new System.Windows.Forms.Button();
-            this.btnDetails = new System.Windows.Forms.Button();
-            this.Importantlabel3 = new System.Windows.Forms.Label();
-            this.lblSuccessNotice2 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtOrganizationKey = new System.Windows.Forms.TextBox();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.tabPublishWebForm = new System.Windows.Forms.TabControl();
             this.Shareable = new System.Windows.Forms.CheckBox();
-            this.AccessAll = new System.Windows.Forms.CheckBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.txtOrganizationKey = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblSuccessNotice2 = new System.Windows.Forms.Label();
+            this.Importantlabel3 = new System.Windows.Forms.Label();
+            this.btnDetails = new System.Windows.Forms.Button();
+            this.lblSuccessNotice = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnCopyAllURLs = new System.Windows.Forms.Button();
+            this.txtURL = new System.Windows.Forms.TextBox();
+            this.txtStatusSummary = new System.Windows.Forms.TextBox();
+            this.lblSecurityToken = new System.Windows.Forms.Label();
+            this.lblSurveyKey = new System.Windows.Forms.Label();
+            this.txtDataKey = new System.Windows.Forms.TextBox();
+            this.txtSurveyKey = new System.Windows.Forms.TextBox();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.lblURL = new System.Windows.Forms.Label();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.lblPublishModeStatus = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnPublishForm = new System.Windows.Forms.Button();
+            this.tabPublishWebForm = new System.Windows.Forms.TabControl();
+            this.DataAccessRuleList = new System.Windows.Forms.ComboBox();
+            this.InfoToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabEntry.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tabPublishWebForm.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,6 +80,14 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnShowLog
+            // 
+            resources.ApplyResources(this.btnShowLog, "btnShowLog");
+            this.btnShowLog.Name = "btnShowLog";
+            this.ttWebPubDialog.SetToolTip(this.btnShowLog, resources.GetString("btnShowLog.ToolTip"));
+            this.btnShowLog.UseVisualStyleBackColor = true;
+            this.btnShowLog.Click += new System.EventHandler(this.btnShowLog_Click);
             // 
             // lblHeading2
             // 
@@ -120,7 +129,7 @@
             // 
             // tabEntry
             // 
-            this.tabEntry.Controls.Add(this.AccessAll);
+            this.tabEntry.Controls.Add(this.DataAccessRuleList);
             this.tabEntry.Controls.Add(this.Shareable);
             this.tabEntry.Controls.Add(this.progressBar);
             this.tabEntry.Controls.Add(this.txtOrganizationKey);
@@ -134,22 +143,29 @@
             this.tabEntry.UseVisualStyleBackColor = true;
             this.tabEntry.Click += new System.EventHandler(this.tabEntry_Click);
             // 
-            // btnPublishForm
+            // Shareable
             // 
-            resources.ApplyResources(this.btnPublishForm, "btnPublishForm");
-            this.btnPublishForm.Name = "btnPublishForm";
-            this.btnPublishForm.UseVisualStyleBackColor = true;
-            this.btnPublishForm.Click += new System.EventHandler(this.btnPublishForm_Click);
+            resources.ApplyResources(this.Shareable, "Shareable");
+            this.Shareable.Name = "Shareable";
+            this.Shareable.UseVisualStyleBackColor = true;
+            this.Shareable.CheckedChanged += new System.EventHandler(this.Shareable_CheckedChanged);
             // 
-            // label1
+            // progressBar
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.progressBar, "progressBar");
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             // 
-            // lblPublishModeStatus
+            // txtOrganizationKey
             // 
-            resources.ApplyResources(this.lblPublishModeStatus, "lblPublishModeStatus");
-            this.lblPublishModeStatus.Name = "lblPublishModeStatus";
+            resources.ApplyResources(this.txtOrganizationKey, "txtOrganizationKey");
+            this.txtOrganizationKey.Name = "txtOrganizationKey";
+            this.txtOrganizationKey.TextChanged += new System.EventHandler(this.txtOrganizationKey_TextChanged);
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
             // 
             // flowLayoutPanel1
             // 
@@ -159,11 +175,39 @@
             this.flowLayoutPanel1.Controls.Add(this.txtStatus);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
-            // txtStatus
+            // panel3
             // 
-            resources.ApplyResources(this.txtStatus, "txtStatus");
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.ReadOnly = true;
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Controls.Add(this.lblSuccessNotice2);
+            this.panel3.Controls.Add(this.Importantlabel3);
+            this.panel3.Controls.Add(this.btnDetails);
+            this.panel3.Controls.Add(this.btnShowLog);
+            this.panel3.Controls.Add(this.lblSuccessNotice);
+            this.panel3.Name = "panel3";
+            // 
+            // lblSuccessNotice2
+            // 
+            resources.ApplyResources(this.lblSuccessNotice2, "lblSuccessNotice2");
+            this.lblSuccessNotice2.Name = "lblSuccessNotice2";
+            // 
+            // Importantlabel3
+            // 
+            resources.ApplyResources(this.Importantlabel3, "Importantlabel3");
+            this.Importantlabel3.ForeColor = System.Drawing.Color.Red;
+            this.Importantlabel3.Name = "Importantlabel3";
+            // 
+            // btnDetails
+            // 
+            resources.ApplyResources(this.btnDetails, "btnDetails");
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.UseVisualStyleBackColor = true;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
+            // 
+            // lblSuccessNotice
+            // 
+            this.lblSuccessNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(191)))));
+            resources.ApplyResources(this.lblSuccessNotice, "lblSuccessNotice");
+            this.lblSuccessNotice.Name = "lblSuccessNotice";
             // 
             // panel2
             // 
@@ -179,51 +223,6 @@
             this.panel2.Controls.Add(this.lblURL);
             this.panel2.Name = "panel2";
             // 
-            // lblURL
-            // 
-            resources.ApplyResources(this.lblURL, "lblURL");
-            this.lblURL.Name = "lblURL";
-            this.lblURL.Click += new System.EventHandler(this.lblURL_Click);
-            // 
-            // lblStatus
-            // 
-            resources.ApplyResources(this.lblStatus, "lblStatus");
-            this.lblStatus.Name = "lblStatus";
-            // 
-            // txtSurveyKey
-            // 
-            resources.ApplyResources(this.txtSurveyKey, "txtSurveyKey");
-            this.txtSurveyKey.Name = "txtSurveyKey";
-            this.txtSurveyKey.ReadOnly = true;
-            // 
-            // txtDataKey
-            // 
-            resources.ApplyResources(this.txtDataKey, "txtDataKey");
-            this.txtDataKey.Name = "txtDataKey";
-            this.txtDataKey.ReadOnly = true;
-            // 
-            // lblSurveyKey
-            // 
-            resources.ApplyResources(this.lblSurveyKey, "lblSurveyKey");
-            this.lblSurveyKey.Name = "lblSurveyKey";
-            // 
-            // lblSecurityToken
-            // 
-            resources.ApplyResources(this.lblSecurityToken, "lblSecurityToken");
-            this.lblSecurityToken.Name = "lblSecurityToken";
-            // 
-            // txtStatusSummary
-            // 
-            resources.ApplyResources(this.txtStatusSummary, "txtStatusSummary");
-            this.txtStatusSummary.Name = "txtStatusSummary";
-            this.txtStatusSummary.ReadOnly = true;
-            // 
-            // txtURL
-            // 
-            resources.ApplyResources(this.txtURL, "txtURL");
-            this.txtURL.Name = "txtURL";
-            this.txtURL.ReadOnly = true;
-            // 
             // btnCopyAllURLs
             // 
             resources.ApplyResources(this.btnCopyAllURLs, "btnCopyAllURLs");
@@ -231,64 +230,73 @@
             this.btnCopyAllURLs.UseVisualStyleBackColor = true;
             this.btnCopyAllURLs.Click += new System.EventHandler(this.btnCopyAllURLs_Click);
             // 
-            // panel3
+            // txtURL
             // 
-            resources.ApplyResources(this.panel3, "panel3");
-            this.panel3.Controls.Add(this.lblSuccessNotice2);
-            this.panel3.Controls.Add(this.Importantlabel3);
-            this.panel3.Controls.Add(this.btnDetails);
-            this.panel3.Controls.Add(this.btnShowLog);
-            this.panel3.Controls.Add(this.lblSuccessNotice);
-            this.panel3.Name = "panel3";
+            resources.ApplyResources(this.txtURL, "txtURL");
+            this.txtURL.Name = "txtURL";
+            this.txtURL.ReadOnly = true;
             // 
-            // lblSuccessNotice
+            // txtStatusSummary
             // 
-            this.lblSuccessNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(191)))));
-            resources.ApplyResources(this.lblSuccessNotice, "lblSuccessNotice");
-            this.lblSuccessNotice.Name = "lblSuccessNotice";
+            resources.ApplyResources(this.txtStatusSummary, "txtStatusSummary");
+            this.txtStatusSummary.Name = "txtStatusSummary";
+            this.txtStatusSummary.ReadOnly = true;
             // 
-            // btnShowLog
+            // lblSecurityToken
             // 
-            resources.ApplyResources(this.btnShowLog, "btnShowLog");
-            this.btnShowLog.Name = "btnShowLog";
-            this.ttWebPubDialog.SetToolTip(this.btnShowLog, resources.GetString("btnShowLog.ToolTip"));
-            this.btnShowLog.UseVisualStyleBackColor = true;
-            this.btnShowLog.Click += new System.EventHandler(this.btnShowLog_Click);
+            resources.ApplyResources(this.lblSecurityToken, "lblSecurityToken");
+            this.lblSecurityToken.Name = "lblSecurityToken";
             // 
-            // btnDetails
+            // lblSurveyKey
             // 
-            resources.ApplyResources(this.btnDetails, "btnDetails");
-            this.btnDetails.Name = "btnDetails";
-            this.btnDetails.UseVisualStyleBackColor = true;
-            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
+            resources.ApplyResources(this.lblSurveyKey, "lblSurveyKey");
+            this.lblSurveyKey.Name = "lblSurveyKey";
             // 
-            // Importantlabel3
+            // txtDataKey
             // 
-            resources.ApplyResources(this.Importantlabel3, "Importantlabel3");
-            this.Importantlabel3.ForeColor = System.Drawing.Color.Red;
-            this.Importantlabel3.Name = "Importantlabel3";
+            resources.ApplyResources(this.txtDataKey, "txtDataKey");
+            this.txtDataKey.Name = "txtDataKey";
+            this.txtDataKey.ReadOnly = true;
             // 
-            // lblSuccessNotice2
+            // txtSurveyKey
             // 
-            resources.ApplyResources(this.lblSuccessNotice2, "lblSuccessNotice2");
-            this.lblSuccessNotice2.Name = "lblSuccessNotice2";
+            resources.ApplyResources(this.txtSurveyKey, "txtSurveyKey");
+            this.txtSurveyKey.Name = "txtSurveyKey";
+            this.txtSurveyKey.ReadOnly = true;
             // 
-            // label2
+            // lblStatus
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.lblStatus, "lblStatus");
+            this.lblStatus.Name = "lblStatus";
             // 
-            // txtOrganizationKey
+            // lblURL
             // 
-            resources.ApplyResources(this.txtOrganizationKey, "txtOrganizationKey");
-            this.txtOrganizationKey.Name = "txtOrganizationKey";
-            this.txtOrganizationKey.TextChanged += new System.EventHandler(this.txtOrganizationKey_TextChanged);
+            resources.ApplyResources(this.lblURL, "lblURL");
+            this.lblURL.Name = "lblURL";
+            this.lblURL.Click += new System.EventHandler(this.lblURL_Click);
             // 
-            // progressBar
+            // txtStatus
             // 
-            resources.ApplyResources(this.progressBar, "progressBar");
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            resources.ApplyResources(this.txtStatus, "txtStatus");
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.ReadOnly = true;
+            // 
+            // lblPublishModeStatus
+            // 
+            resources.ApplyResources(this.lblPublishModeStatus, "lblPublishModeStatus");
+            this.lblPublishModeStatus.Name = "lblPublishModeStatus";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // btnPublishForm
+            // 
+            resources.ApplyResources(this.btnPublishForm, "btnPublishForm");
+            this.btnPublishForm.Name = "btnPublishForm";
+            this.btnPublishForm.UseVisualStyleBackColor = true;
+            this.btnPublishForm.Click += new System.EventHandler(this.btnPublishForm_Click);
             // 
             // tabPublishWebForm
             // 
@@ -297,18 +305,18 @@
             this.tabPublishWebForm.Name = "tabPublishWebForm";
             this.tabPublishWebForm.SelectedIndex = 0;
             // 
-            // Shareable
+            // DataAccessRuleList
             // 
-            resources.ApplyResources(this.Shareable, "Shareable");
-            this.Shareable.Name = "Shareable";
-            this.Shareable.UseVisualStyleBackColor = true;
-            this.Shareable.CheckedChanged += new System.EventHandler(this.Shareable_CheckedChanged);
+            resources.ApplyResources(this.DataAccessRuleList, "DataAccessRuleList");
+            this.DataAccessRuleList.FormattingEnabled = true;
+            this.DataAccessRuleList.Name = "DataAccessRuleList";
+            this.DataAccessRuleList.Tag = "Data Access Rules";
             // 
-            // AccessAll
+            // InfoToolTip
             // 
-            resources.ApplyResources(this.AccessAll, "AccessAll");
-            this.AccessAll.Name = "AccessAll";
-            this.AccessAll.UseVisualStyleBackColor = true;
+            this.InfoToolTip.ShowAlways = true;
+            this.InfoToolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.InfoToolTip.ToolTipTitle = "Data Access Rules Description";
             // 
             // WebEnterPublishDialog
             // 
@@ -334,9 +342,9 @@
             this.tabEntry.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
             this.tabPublishWebForm.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -379,7 +387,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnPublishForm;
         private System.Windows.Forms.TabControl tabPublishWebForm;
-        private System.Windows.Forms.CheckBox AccessAll;
         private System.Windows.Forms.CheckBox Shareable;
+        private System.Windows.Forms.ComboBox DataAccessRuleList;
+        private System.Windows.Forms.ToolTip InfoToolTip;
     }
 }

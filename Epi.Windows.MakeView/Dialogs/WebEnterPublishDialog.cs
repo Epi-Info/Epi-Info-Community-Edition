@@ -31,7 +31,7 @@ namespace Epi.Windows.MakeView.Dialogs
         private string OrganizationKey = null;
         private bool IsMetaDataOnly = false;
         private bool isRepublishableConfig = false;
-
+        private Dictionary<int, string> _DataAccessRuleIds;
         //private Epi.Web.Enter.Common.DTO.SurveyInfoDTO currentSurveyInfoDTO;
         private Epi.EWEManagerService.SurveyInfoDTO currentSurveyInfoDTO = new EWEManagerService.SurveyInfoDTO();
         //=======
@@ -106,31 +106,73 @@ namespace Epi.Windows.MakeView.Dialogs
              List<string> IdList = new List<string>();
               IdList.Add(WebSurveyId);
                Criteria.SurveyIdList = IdList.ToArray();
+               if (!string.IsNullOrEmpty(pOrganizationKey))
+               {
                Criteria.OrganizationKey = new Guid(pOrganizationKey);
+               }
                Criteria.SurveyType = -1;
                Request.Criteria = Criteria;
               
             try
             {
             EWEManagerService.EWEManagerServiceV2Client client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
-          
-               var Result = client.GetSurveyInfo(Request);
-               if (Result.SurveyInfoList.Count()>0)
-                {
-                    if (Result.SurveyInfoList[0].IsShareable)
-                    {
-                        this.Shareable.Checked = Result.SurveyInfoList[0].IsShareable;
-                        this.AccessAll.Visible = true;
-                        this.AccessAll.Checked = Result.SurveyInfoList[0].ShowAllRecords;
 
-                    }
-                    else 
+               var Result = client.GetSurveyInfo(Request);
+                EWEManagerService.FormSettingRequest  FormSettingRequest = new EWEManagerService.FormSettingRequest ();
+                FormSettingRequest.FormInfo = new EWEManagerService.FormInfoDTO ();
+                FormSettingRequest.FormInfo.FormId = WebSurveyId;
+                FormSettingRequest.FormInfo.UserId = LoginInfo.UserID;
+                //Getting Column Name  List
+                EWEManagerService.FormSettingResponse FormSettingResponse = client.GetSettings(FormSettingRequest);
+                var Tooltip = "";
+                foreach (var item in FormSettingResponse.FormSetting.DataAccessRuleDescription)
+                {
+                    Tooltip = Tooltip + item.Key.ToString() + " : " + item.Value + "\n";
+                }
+
+
+                if (FormSettingResponse.FormSetting.DataAccessRuleIds.Count() > 0)
+                {
+                    _DataAccessRuleIds = FormSettingResponse.FormSetting.DataAccessRuleIds;
+                    if (Result.SurveyInfoList.Count() > 0)
                     {
-                        this.Shareable.Checked = Result.SurveyInfoList[0].IsShareable;
-                        this.AccessAll.Visible = false;
-                        this.AccessAll.Checked = false;
+                        if (Result.SurveyInfoList[0].IsShareable)
+                        {
+                            var SelectedVal = "";
+                            this.DataAccessRuleList.Visible = true;
+                            InfoToolTip.SetToolTip(this.DataAccessRuleList, Tooltip);
+                            this.Shareable.Checked = Result.SurveyInfoList[0].IsShareable;
+                            foreach (var item in FormSettingResponse.FormSetting.DataAccessRuleIds)
+                            {
+                                this.DataAccessRuleList.Items.Add(item.Value);
+                                if (item.Key == FormSettingResponse.FormSetting.SelectedDataAccessRule)
+                                {
+                                    SelectedVal = item.Value;
+                                }
+                            }
+                            this.DataAccessRuleList.SelectedItem = SelectedVal;
+                        }
+                        else
+                        {
+                            this.Shareable.Checked = Result.SurveyInfoList[0].IsShareable;
+                            this.DataAccessRuleList.Visible = false;
+                            this.DataAccessRuleList.SelectedValue = "";
+                        }
+                    }
+                    else {
+
+                        this.Shareable.Checked = false;
+                        this.DataAccessRuleList.Visible = false;
+                        foreach (var item in FormSettingResponse.FormSetting.DataAccessRuleIds)
+                        {
+                            this.DataAccessRuleList.Items.Add(item.Value);
+                             
+                        }
+                        
+                    
                     }
                 }
+               
             }
             catch (Exception ex)
             {
@@ -217,7 +259,33 @@ namespace Epi.Windows.MakeView.Dialogs
             Request.SurveyInfo.OwnerId = LoginInfo.UserID;
             Request.SurveyInfo.StartDate = DateTime.Now;
             Request.SurveyInfo.IsShareable = this.Shareable.Checked;
-            Request.SurveyInfo.ShowAllRecords = this.AccessAll.Checked;
+            //Request.SurveyInfo.ShowAllRecords = this.AccessAll.Checked;
+            //if (this.DataAccessRuleList.SelectedItem != null)
+            //{
+            if (_DataAccessRuleIds.Count() > 0 && this.DataAccessRuleList.SelectedItem != null)
+                {
+                    foreach (var Rule in _DataAccessRuleIds)
+                    {
+                        if (this.DataAccessRuleList.SelectedItem.ToString() == Rule.Value)
+                        {
+                            Request.SurveyInfo.DataAccessRuleId = Rule.Key;
+
+                        }
+
+                    }
+                }
+                else
+                {
+                    Request.SurveyInfo.DataAccessRuleId = 1;
+
+                }
+            //}
+            //else {
+
+            //    Request.SurveyInfo.DataAccessRuleId = 1;
+            
+            //}
+            
             //Request.SurveyInfo.SurveyType = (rdbSingleResponse.Checked) ? 1 : 2;
             //if (txtOrganization.Text.Equals("Your Organization Name (optional)", StringComparison.OrdinalIgnoreCase))
             //{
@@ -399,8 +467,23 @@ namespace Epi.Windows.MakeView.Dialogs
                 }
               Request.SurveyInfo  = this.currentSurveyInfoDTO;
               Request.SurveyInfo.IsShareable = this.Shareable.Checked;
-              Request.SurveyInfo.ShowAllRecords = this.AccessAll.Checked;
+              if (_DataAccessRuleIds.Count() > 0)
+              {
+                  foreach (var Rule in _DataAccessRuleIds)
+                  {
+                      if (this.DataAccessRuleList.SelectedItem.ToString() == Rule.Value)
+                      {
+                          Request.SurveyInfo.DataAccessRuleId = Rule.Key;
 
+                      }
+
+                  }
+              }
+              else
+              {
+                  Request.SurveyInfo.DataAccessRuleId = 1;
+
+              }
             try
             {
             EWEManagerService.EWEManagerServiceV2Client client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
@@ -1664,12 +1747,15 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             if(this.Shareable.Checked)
             {
-               this.AccessAll.Visible = true;
+               this.DataAccessRuleList.Visible = true;
+               //this.DataAccessRulelabel.Visible  = true;
             }
             else
             {
-               this.AccessAll.Visible = false;
-               this.AccessAll.Checked = false;
+                this.DataAccessRuleList.Visible = false;
+               /// this.DataAccessRulelabel.Visible = false;
+                this.DataAccessRuleList.SelectedValue = 1;
+                this.DataAccessRuleList.Text = "";
             }
         }
     }
