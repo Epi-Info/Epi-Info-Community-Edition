@@ -161,7 +161,7 @@
                         </DockPanel>
 
                         <DockPanel x:Name="iconTimeLapse"
-                                   Style="{StaticResource menuIconStyle}"
+                                   Style="{StaticResource menuIconStyle}" MouseLeftButtonUp="iconTimeLapse_MouseLeftButtonUp" IsEnabled="False"
                                    Grid.Row="6">
                             <DockPanel.ToolTip>
                                 <StackPanel>
@@ -258,8 +258,9 @@
                 </Grid>
             </DockPanel>
         </Grid>
-        
-        <Grid x:Name="grdTimeLapse" Visibility="Collapsed" HorizontalAlignment="Center"  VerticalAlignment="Bottom"  Margin="0,10,10,30" >
+        <Grid x:Name="grdLapse" Visibility="Collapsed" HorizontalAlignment="Center"  StackPanel.ZIndex="2000"  VerticalAlignment="Bottom"  Grid.Column="1"  Margin="0,10,10,30" >
+
+            <Grid x:Name="grdTimeLapse" Visibility="Collapsed" HorizontalAlignment="Center"    VerticalAlignment="Bottom"  Grid.Column="1"  Margin="0,10,10,30" >
 
             <Rectangle Fill="#00919191" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0,0,0,5" >
                 <Rectangle.Effect>
@@ -271,20 +272,22 @@
 
             </Border>
             <Image x:Name="imgClose" Source="..\Images\x_over.png" Cursor="Hand" HorizontalAlignment="Right" Margin="2" VerticalAlignment="Top" Stretch="None" />
-        </Grid>
-        <Charting:Chart Width="500" Visibility="Collapsed" x:Name="chrtTimeLapse" Background="#00000000" Padding="1" HorizontalAlignment="Center"  VerticalAlignment="Bottom"  Margin="0,10,20,70" BorderThickness="0">
-            <Charting:AreaSeries x:Name="areaSeries">
-
-            </Charting:AreaSeries>
-        </Charting:Chart>
-        <StackPanel x:Name="stkTimeLapse" Visibility="Collapsed" HorizontalAlignment="Center" Width="495"  VerticalAlignment="Bottom"  Margin="0,10,20,50">
-
-            <Grid Margin="15,5,0,5" HorizontalAlignment="Stretch">
-                <TextBlock x:Name="txtSliderStartDate" FontSize="12" Text="2/1/2010" HorizontalAlignment="Left" />
-                <TextBlock x:Name="txtSliderEndDate" FontSize="12" Text="2/30/2010" HorizontalAlignment="Right" />
             </Grid>
-        </StackPanel>
-        <Grid x:Name="grdLayerConfig" Visibility="Collapsed" HorizontalAlignment="Center" Width="850" Height="90" VerticalAlignment="Center">
+            <Charting:Chart Width="500" Visibility="Collapsed" x:Name="chrtTimeLapse"   Background="#00000000" Padding="1" HorizontalAlignment="Center"  VerticalAlignment="Bottom"  Margin="0,10,20,70" BorderThickness="0">
+                <Charting:AreaSeries x:Name="areaSeries">
+
+                </Charting:AreaSeries>
+            </Charting:Chart>
+            <StackPanel x:Name="stkTimeLapse"   Visibility="Collapsed" HorizontalAlignment="Center" Width="495"  VerticalAlignment="Bottom"  Margin="0,10,20,50">
+
+                <Grid Margin="15,5,0,5" HorizontalAlignment="Stretch">
+                    <TextBlock x:Name="txtSliderStartDate" FontSize="12" Text="2/1/2010" HorizontalAlignment="Left" />
+                    <TextBlock x:Name="txtSliderEndDate" FontSize="12" Text="2/30/2010" HorizontalAlignment="Right" />
+                </Grid>
+            </StackPanel>
+
+        </Grid>
+       <Grid x:Name="grdLayerConfig" Visibility="Collapsed" HorizontalAlignment="Center" Width="850" Height="90" VerticalAlignment="Center">
             <Rectangle Fill="#00919191" Stroke="Gray" Margin="0,0,0,5" />
             <Border Background="#DDFFFFFF" BorderBrush="DarkGray" Margin="10,10,10,15"
                     Width="850" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" >
