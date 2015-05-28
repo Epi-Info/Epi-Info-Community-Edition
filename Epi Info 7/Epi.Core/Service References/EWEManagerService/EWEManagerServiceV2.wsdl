@@ -181,6 +181,15 @@
   <wsdl:message name="IEWEManagerServiceV2_UpdateRecordStatus_CustomFaultExceptionFault_FaultMessage">
     <wsdl:part xmlns:q19="http://www.yourcompany.com/types/" name="detail" element="q19:CustomFaultException" />
   </wsdl:message>
+  <wsdl:message name="IEWEManagerServiceV2_GetSettings_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSettings" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerServiceV2_GetSettings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerServiceV2_GetSettings_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q20="http://www.yourcompany.com/types/" name="detail" element="q20:CustomFaultException" />
+  </wsdl:message>
   <wsdl:portType name="IEWEManagerServiceV2">
     <wsdl:operation name="PublishSurvey">
       <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/PublishSurvey" message="tns:IEWEManagerServiceV2_PublishSurvey_InputMessage" />
@@ -276,6 +285,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerServiceV2/UpdateRecordStatus" message="tns:IEWEManagerServiceV2_UpdateRecordStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerServiceV2/UpdateRecordStatusResponse" message="tns:IEWEManagerServiceV2_UpdateRecordStatus_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerServiceV2/UpdateRecordStatusCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerServiceV2_UpdateRecordStatus_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSettings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerServiceV2/GetSettings" message="tns:IEWEManagerServiceV2_GetSettings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerServiceV2/GetSettingsResponse" message="tns:IEWEManagerServiceV2_GetSettings_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerServiceV2/GetSettingsCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerServiceV2_GetSettings_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IEWEManagerServiceV2" type="tns:IEWEManagerServiceV2">
@@ -498,6 +512,18 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateRecordStatus">
       <soap:operation soapAction="http://tempuri.org/IEWEManagerServiceV2/UpdateRecordStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSettings">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerServiceV2/GetSettings" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

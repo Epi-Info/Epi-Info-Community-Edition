@@ -261,4 +261,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetSettings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://www.yourcompany.com/types/" minOccurs="0" name="Request" nillable="true" type="q33:FormSettingRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSettingsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://www.yourcompany.com/types/" minOccurs="0" name="GetSettingsResult" nillable="true" type="q34:FormSettingResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

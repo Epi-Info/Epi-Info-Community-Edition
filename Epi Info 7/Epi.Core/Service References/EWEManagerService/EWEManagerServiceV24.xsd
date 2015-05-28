@@ -28,6 +28,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ClosingDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DBConnectionString" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DataAccessRuleId" type="xs:int" />
       <xs:element minOccurs="0" name="DepartmentName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ExitText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IntroductionText" nillable="true" type="xs:string" />
@@ -38,7 +39,6 @@
       <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
       <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OwnerId" type="xs:int" />
-      <xs:element minOccurs="0" name="ShowAllRecords" type="xs:boolean" />
       <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SurveyName" nillable="true" type="xs:string" />
@@ -196,6 +196,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Criteria">
         <xs:sequence>
+          <xs:element minOccurs="0" name="DataAccessRuleId" type="xs:int" />
           <xs:element minOccurs="0" name="DateCompleted" type="xs:dateTime" />
           <xs:element minOccurs="0" name="GetAllColumns" type="xs:boolean" />
           <xs:element minOccurs="0" name="IncludeOrderStatistics" type="xs:boolean" />
@@ -210,7 +211,6 @@
           <xs:element minOccurs="0" name="PageSize" type="xs:int" />
           <xs:element minOccurs="0" name="ReturnSizeInfoOnly" type="xs:boolean" />
           <xs:element minOccurs="0" name="SearchCriteria" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="ShowAllRecords" type="xs:boolean" />
           <xs:element minOccurs="0" name="SortOrder" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Sortfield" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="StatusId" type="xs:int" />
@@ -268,6 +268,7 @@
   <xs:element name="SurveyAnswerResponse" nillable="true" type="tns:SurveyAnswerResponse" />
   <xs:complexType name="FormInfoDTO">
     <xs:sequence>
+      <xs:element minOccurs="0" name="DataAccessRuleId" type="xs:boolean" />
       <xs:element minOccurs="0" name="EwavLiteToggleSwitch" type="xs:boolean" />
       <xs:element minOccurs="0" name="FormId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FormName" nillable="true" type="xs:string" />
@@ -281,7 +282,6 @@
       <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OwnerFName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OwnerLName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ShowAllRecords" type="xs:boolean" />
       <xs:element minOccurs="0" name="UserId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
@@ -337,4 +337,27 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PreFilledAnswerResponse" nillable="true" type="tns:PreFilledAnswerResponse" />
+  <xs:complexType name="FormSettingRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RequestBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FormInfo" nillable="true" type="tns:FormInfoDTO" />
+          <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" minOccurs="0" name="FormSetting" nillable="true" type="q14:ArrayOfFormSettingDTO" />
+          <xs:element minOccurs="0" name="GetXml" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FormSettingRequest" nillable="true" type="tns:FormSettingRequest" />
+  <xs:complexType name="FormSettingResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RequestBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FormInfo" nillable="true" type="tns:FormInfoDTO" />
+          <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" minOccurs="0" name="FormSetting" nillable="true" type="q15:FormSettingDTO" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FormSettingResponse" nillable="true" type="tns:FormSettingResponse" />
 </xs:schema>

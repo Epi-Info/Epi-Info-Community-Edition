@@ -666,6 +666,9 @@
     <Content Include="Resources\Training Projects\Salmonellosis\Salmonellosis.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Service References\EWEManagerService\Epi.EWEManagerService.FormSettingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\EWEManagerService\Epi.EWEManagerService.OrganizationResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

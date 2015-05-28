@@ -153,6 +153,42 @@
   <metadata name="ttWebPubDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="btnShowLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnShowLog.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="btnShowLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnShowLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>775, 8</value>
+  </data>
+  <data name="btnShowLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 23</value>
+  </data>
+  <data name="btnShowLog.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="btnShowLog.Text" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="btnShowLog.ToolTip" xml:space="preserve">
+    <value>Show Log File</value>
+  </data>
+  <data name="&gt;&gt;btnShowLog.Name" xml:space="preserve">
+    <value>btnShowLog</value>
+  </data>
+  <data name="&gt;&gt;btnShowLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnShowLog.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;btnShowLog.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="lblHeading2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -358,37 +394,34 @@
   <data name="&gt;&gt;btnGo.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="AccessAll.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="DataAccessRuleList.AccessibleDescription" xml:space="preserve">
+    <value />
   </data>
-  <data name="AccessAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="DataAccessRuleList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 47</value>
   </data>
-  <data name="AccessAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 49</value>
+  <data name="DataAccessRuleList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>287, 23</value>
   </data>
-  <data name="AccessAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 19</value>
+  <data name="DataAccessRuleList.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
   </data>
-  <data name="AccessAll.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
+  <data name="DataAccessRuleList.Text" xml:space="preserve">
+    <value>Data Access Rules</value>
   </data>
-  <data name="AccessAll.Text" xml:space="preserve">
-    <value>Access All Records </value>
-  </data>
-  <data name="AccessAll.Visible" type="System.Boolean, mscorlib">
+  <data name="DataAccessRuleList.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;AccessAll.Name" xml:space="preserve">
-    <value>AccessAll</value>
+  <data name="&gt;&gt;DataAccessRuleList.Name" xml:space="preserve">
+    <value>DataAccessRuleList</value>
   </data>
-  <data name="&gt;&gt;AccessAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;DataAccessRuleList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AccessAll.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DataAccessRuleList.Parent" xml:space="preserve">
     <value>tabEntry</value>
   </data>
-  <data name="&gt;&gt;AccessAll.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DataAccessRuleList.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="Shareable.AutoSize" type="System.Boolean, mscorlib">
@@ -685,38 +718,218 @@
   <data name="&gt;&gt;tabEntry.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="txtStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="txtStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 270</value>
-  </data>
-  <data name="txtStatus.Multiline" type="System.Boolean, mscorlib">
+  <data name="panel3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="txtStatus.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
+  <data name="panel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="txtStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>820, 48</value>
+  <data name="&gt;&gt;lblSuccessNotice2.Name" xml:space="preserve">
+    <value>lblSuccessNotice2</value>
   </data>
-  <data name="txtStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
+  <data name="&gt;&gt;lblSuccessNotice2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="txtStatus.Visible" type="System.Boolean, mscorlib">
+  <data name="&gt;&gt;lblSuccessNotice2.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;Importantlabel3.Name" xml:space="preserve">
+    <value>Importantlabel3</value>
+  </data>
+  <data name="&gt;&gt;Importantlabel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Importantlabel3.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;Importantlabel3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btnDetails.Name" xml:space="preserve">
+    <value>btnDetails</value>
+  </data>
+  <data name="&gt;&gt;btnDetails.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnDetails.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;btnDetails.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice.Name" xml:space="preserve">
+    <value>lblSuccessNotice</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>839, 50</value>
+  </data>
+  <data name="panel3.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="panel3.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;txtStatus.Name" xml:space="preserve">
-    <value>txtStatus</value>
+  <data name="&gt;&gt;panel3.Name" xml:space="preserve">
+    <value>panel3</value>
   </data>
-  <data name="&gt;&gt;txtStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;panel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txtStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;txtStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblSuccessNotice2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="lblSuccessNotice2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSuccessNotice2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>77, 34</value>
+  </data>
+  <data name="lblSuccessNotice2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>698, 16</value>
+  </data>
+  <data name="lblSuccessNotice2.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="lblSuccessNotice2.Text" xml:space="preserve">
+    <value>Copy and save the Form ID and Security Token to download collected responses.</value>
+  </data>
+  <data name="lblSuccessNotice2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice2.Name" xml:space="preserve">
+    <value>lblSuccessNotice2</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice2.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Importantlabel3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="Importantlabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Importantlabel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 33</value>
+  </data>
+  <data name="Importantlabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
+  </data>
+  <data name="Importantlabel3.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="Importantlabel3.Text" xml:space="preserve">
+    <value>Important:</value>
+  </data>
+  <data name="&gt;&gt;Importantlabel3.Name" xml:space="preserve">
+    <value>Importantlabel3</value>
+  </data>
+  <data name="&gt;&gt;Importantlabel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Importantlabel3.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;Importantlabel3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnDetails.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnDetails.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="btnDetails.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnDetails.Location" type="System.Drawing.Point, System.Drawing">
+    <value>711, 8</value>
+  </data>
+  <data name="btnDetails.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 23</value>
+  </data>
+  <data name="btnDetails.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="btnDetails.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="btnDetails.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;btnDetails.Name" xml:space="preserve">
+    <value>btnDetails</value>
+  </data>
+  <data name="&gt;&gt;btnDetails.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnDetails.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;btnDetails.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="lblSuccessNotice.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="lblSuccessNotice.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSuccessNotice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 8</value>
+  </data>
+  <data name="lblSuccessNotice.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 0, 0, 0</value>
+  </data>
+  <data name="lblSuccessNotice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>826, 29</value>
+  </data>
+  <data name="lblSuccessNotice.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="lblSuccessNotice.Text" xml:space="preserve">
+    <value>Your Form  has been published!  Please copy and save the Form ID and Security Token below.</value>
+  </data>
+  <data name="lblSuccessNotice.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice.Name" xml:space="preserve">
+    <value>lblSuccessNotice</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;lblSuccessNotice.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="panel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -856,35 +1069,185 @@
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblURL.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  <data name="btnCopyAllURLs.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="lblURL.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="btnCopyAllURLs.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="btnCopyAllURLs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblURL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 13</value>
+  <data name="btnCopyAllURLs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>659, 3</value>
   </data>
-  <data name="lblURL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>692, 16</value>
+  <data name="btnCopyAllURLs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 23</value>
   </data>
-  <data name="lblURL.TabIndex" type="System.Int32, mscorlib">
-    <value>39</value>
+  <data name="btnCopyAllURLs.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
   </data>
-  <data name="lblURL.Text" xml:space="preserve">
-    <value>1. URL: Log in to Web Enter to view your form.</value>
+  <data name="btnCopyAllURLs.Text" xml:space="preserve">
+    <value>Copy All to Clipboard</value>
   </data>
-  <data name="&gt;&gt;lblURL.Name" xml:space="preserve">
-    <value>lblURL</value>
+  <data name="&gt;&gt;btnCopyAllURLs.Name" xml:space="preserve">
+    <value>btnCopyAllURLs</value>
   </data>
-  <data name="&gt;&gt;lblURL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;btnCopyAllURLs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblURL.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnCopyAllURLs.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name="&gt;&gt;lblURL.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="&gt;&gt;btnCopyAllURLs.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtURL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 32</value>
+  </data>
+  <data name="txtURL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>823, 23</value>
+  </data>
+  <data name="txtURL.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;txtURL.Name" xml:space="preserve">
+    <value>txtURL</value>
+  </data>
+  <data name="&gt;&gt;txtURL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtURL.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;txtURL.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtStatusSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 179</value>
+  </data>
+  <data name="txtStatusSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>820, 23</value>
+  </data>
+  <data name="txtStatusSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="txtStatusSummary.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtStatusSummary.Name" xml:space="preserve">
+    <value>txtStatusSummary</value>
+  </data>
+  <data name="&gt;&gt;txtStatusSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtStatusSummary.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;txtStatusSummary.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblSecurityToken.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="lblSecurityToken.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSecurityToken.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 111</value>
+  </data>
+  <data name="lblSecurityToken.Size" type="System.Drawing.Size, System.Drawing">
+    <value>695, 16</value>
+  </data>
+  <data name="lblSecurityToken.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="lblSecurityToken.Text" xml:space="preserve">
+    <value>3. Security Token:</value>
+  </data>
+  <data name="&gt;&gt;lblSecurityToken.Name" xml:space="preserve">
+    <value>lblSecurityToken</value>
+  </data>
+  <data name="&gt;&gt;lblSecurityToken.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSecurityToken.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;lblSecurityToken.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblSurveyKey.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="lblSurveyKey.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSurveyKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 62</value>
+  </data>
+  <data name="lblSurveyKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>696, 16</value>
+  </data>
+  <data name="lblSurveyKey.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="lblSurveyKey.Text" xml:space="preserve">
+    <value>2. Form Id:</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyKey.Name" xml:space="preserve">
+    <value>lblSurveyKey</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyKey.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyKey.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyKey.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="txtDataKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 130</value>
+  </data>
+  <data name="txtDataKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>820, 23</value>
+  </data>
+  <data name="txtDataKey.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="&gt;&gt;txtDataKey.Name" xml:space="preserve">
+    <value>txtDataKey</value>
+  </data>
+  <data name="&gt;&gt;txtDataKey.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtDataKey.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;txtDataKey.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="txtSurveyKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 81</value>
+  </data>
+  <data name="txtSurveyKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>823, 23</value>
+  </data>
+  <data name="txtSurveyKey.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyKey.Name" xml:space="preserve">
+    <value>txtSurveyKey</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyKey.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyKey.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyKey.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="lblStatus.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -919,446 +1282,68 @@
   <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="txtSurveyKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 81</value>
-  </data>
-  <data name="txtSurveyKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>823, 23</value>
-  </data>
-  <data name="txtSurveyKey.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyKey.Name" xml:space="preserve">
-    <value>txtSurveyKey</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyKey.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyKey.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyKey.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="txtDataKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 130</value>
-  </data>
-  <data name="txtDataKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>820, 23</value>
-  </data>
-  <data name="txtDataKey.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <data name="&gt;&gt;txtDataKey.Name" xml:space="preserve">
-    <value>txtDataKey</value>
-  </data>
-  <data name="&gt;&gt;txtDataKey.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtDataKey.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;txtDataKey.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="lblSurveyKey.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblURL.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="lblSurveyKey.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblURL.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblSurveyKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 62</value>
+  <data name="lblURL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 13</value>
   </data>
-  <data name="lblSurveyKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>696, 16</value>
+  <data name="lblURL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>692, 16</value>
   </data>
-  <data name="lblSurveyKey.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
-  <data name="lblSurveyKey.Text" xml:space="preserve">
-    <value>2. Form Id:</value>
-  </data>
-  <data name="&gt;&gt;lblSurveyKey.Name" xml:space="preserve">
-    <value>lblSurveyKey</value>
-  </data>
-  <data name="&gt;&gt;lblSurveyKey.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSurveyKey.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;lblSurveyKey.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lblSecurityToken.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="lblSecurityToken.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSecurityToken.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 111</value>
-  </data>
-  <data name="lblSecurityToken.Size" type="System.Drawing.Size, System.Drawing">
-    <value>695, 16</value>
-  </data>
-  <data name="lblSecurityToken.TabIndex" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <data name="lblSecurityToken.Text" xml:space="preserve">
-    <value>3. Security Token:</value>
-  </data>
-  <data name="&gt;&gt;lblSecurityToken.Name" xml:space="preserve">
-    <value>lblSecurityToken</value>
-  </data>
-  <data name="&gt;&gt;lblSecurityToken.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSecurityToken.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;lblSecurityToken.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="txtStatusSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 179</value>
-  </data>
-  <data name="txtStatusSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>820, 23</value>
-  </data>
-  <data name="txtStatusSummary.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="txtStatusSummary.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;txtStatusSummary.Name" xml:space="preserve">
-    <value>txtStatusSummary</value>
-  </data>
-  <data name="&gt;&gt;txtStatusSummary.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtStatusSummary.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;txtStatusSummary.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="txtURL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 32</value>
-  </data>
-  <data name="txtURL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>823, 23</value>
-  </data>
-  <data name="txtURL.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="&gt;&gt;txtURL.Name" xml:space="preserve">
-    <value>txtURL</value>
-  </data>
-  <data name="&gt;&gt;txtURL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtURL.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;txtURL.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="btnCopyAllURLs.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="btnCopyAllURLs.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="btnCopyAllURLs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnCopyAllURLs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>659, 3</value>
-  </data>
-  <data name="btnCopyAllURLs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 23</value>
-  </data>
-  <data name="btnCopyAllURLs.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
-  </data>
-  <data name="btnCopyAllURLs.Text" xml:space="preserve">
-    <value>Copy All to Clipboard</value>
-  </data>
-  <data name="&gt;&gt;btnCopyAllURLs.Name" xml:space="preserve">
-    <value>btnCopyAllURLs</value>
-  </data>
-  <data name="&gt;&gt;btnCopyAllURLs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnCopyAllURLs.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;btnCopyAllURLs.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="panel3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="panel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice2.Name" xml:space="preserve">
-    <value>lblSuccessNotice2</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice2.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;Importantlabel3.Name" xml:space="preserve">
-    <value>Importantlabel3</value>
-  </data>
-  <data name="&gt;&gt;Importantlabel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Importantlabel3.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;Importantlabel3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;btnDetails.Name" xml:space="preserve">
-    <value>btnDetails</value>
-  </data>
-  <data name="&gt;&gt;btnDetails.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnDetails.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;btnDetails.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;btnShowLog.Name" xml:space="preserve">
-    <value>btnShowLog</value>
-  </data>
-  <data name="&gt;&gt;btnShowLog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnShowLog.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;btnShowLog.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice.Name" xml:space="preserve">
-    <value>lblSuccessNotice</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>839, 50</value>
-  </data>
-  <data name="panel3.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="panel3.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;panel3.Name" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;panel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblSuccessNotice.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="lblSuccessNotice.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSuccessNotice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 8</value>
-  </data>
-  <data name="lblSuccessNotice.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 0, 0, 0</value>
-  </data>
-  <data name="lblSuccessNotice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>826, 29</value>
-  </data>
-  <data name="lblSuccessNotice.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblURL.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
   </data>
-  <data name="lblSuccessNotice.Text" xml:space="preserve">
-    <value>Your Form  has been published!  Please copy and save the Form ID and Security Token below.</value>
+  <data name="lblURL.Text" xml:space="preserve">
+    <value>1. URL: Log in to Web Enter to view your form.</value>
   </data>
-  <data name="lblSuccessNotice.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="&gt;&gt;lblURL.Name" xml:space="preserve">
+    <value>lblURL</value>
   </data>
-  <data name="&gt;&gt;lblSuccessNotice.Name" xml:space="preserve">
-    <value>lblSuccessNotice</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblURL.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblSuccessNotice.Parent" xml:space="preserve">
-    <value>panel3</value>
+  <data name="&gt;&gt;lblURL.Parent" xml:space="preserve">
+    <value>panel2</value>
   </data>
-  <data name="&gt;&gt;lblSuccessNotice.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;lblURL.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
-  <data name="btnShowLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="txtStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
   </data>
-  <data name="btnShowLog.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="txtStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 270</value>
   </data>
-  <data name="btnShowLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="txtStatus.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="btnShowLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>775, 8</value>
+  <data name="txtStatus.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
   </data>
-  <data name="btnShowLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 23</value>
+  <data name="txtStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>820, 48</value>
   </data>
-  <data name="btnShowLog.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
+  <data name="txtStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
   </data>
-  <data name="btnShowLog.Text" xml:space="preserve">
-    <value>Log</value>
-  </data>
-  <data name="btnShowLog.ToolTip" xml:space="preserve">
-    <value>Show Log File</value>
-  </data>
-  <data name="&gt;&gt;btnShowLog.Name" xml:space="preserve">
-    <value>btnShowLog</value>
-  </data>
-  <data name="&gt;&gt;btnShowLog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnShowLog.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;btnShowLog.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="btnDetails.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btnDetails.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="btnDetails.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnDetails.Location" type="System.Drawing.Point, System.Drawing">
-    <value>711, 8</value>
-  </data>
-  <data name="btnDetails.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 23</value>
-  </data>
-  <data name="btnDetails.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="btnDetails.Text" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="btnDetails.Visible" type="System.Boolean, mscorlib">
+  <data name="txtStatus.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;btnDetails.Name" xml:space="preserve">
-    <value>btnDetails</value>
+  <data name="&gt;&gt;txtStatus.Name" xml:space="preserve">
+    <value>txtStatus</value>
   </data>
-  <data name="&gt;&gt;btnDetails.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;txtStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnDetails.Parent" xml:space="preserve">
-    <value>panel3</value>
+  <data name="&gt;&gt;txtStatus.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;btnDetails.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtStatus.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="Importantlabel3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="Importantlabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Importantlabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 33</value>
-  </data>
-  <data name="Importantlabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 17</value>
-  </data>
-  <data name="Importantlabel3.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="Importantlabel3.Text" xml:space="preserve">
-    <value>Important:</value>
-  </data>
-  <data name="&gt;&gt;Importantlabel3.Name" xml:space="preserve">
-    <value>Importantlabel3</value>
-  </data>
-  <data name="&gt;&gt;Importantlabel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Importantlabel3.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;Importantlabel3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblSuccessNotice2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="lblSuccessNotice2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSuccessNotice2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 34</value>
-  </data>
-  <data name="lblSuccessNotice2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>698, 16</value>
-  </data>
-  <data name="lblSuccessNotice2.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="lblSuccessNotice2.Text" xml:space="preserve">
-    <value>Copy and save the Form ID and Security Token to download collected responses.</value>
-  </data>
-  <data name="lblSuccessNotice2.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice2.Name" xml:space="preserve">
-    <value>lblSuccessNotice2</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice2.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;lblSuccessNotice2.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="tabPublishWebForm.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1390,6 +1375,9 @@
   <data name="&gt;&gt;tabPublishWebForm.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <metadata name="InfoToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>159, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1412,6 +1400,12 @@
     <value>ttWebPubDialog</value>
   </data>
   <data name="&gt;&gt;ttWebPubDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;InfoToolTip.Name" xml:space="preserve">
+    <value>InfoToolTip</value>
+  </data>
+  <data name="&gt;&gt;InfoToolTip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
