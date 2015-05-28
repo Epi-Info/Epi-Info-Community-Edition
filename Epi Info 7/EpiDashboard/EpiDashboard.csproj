@@ -589,6 +589,9 @@
     </Compile>
     <Compile Include="Mapping\KmlLayerProvider.cs" />
     <Compile Include="Mapping\MapBackgroundType.cs" />
+    <Compile Include="Mapping\TimeLapse.xaml.cs">
+      <DependentUpon>TimeLapse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MergeConnection.cs" />
     <Compile Include="MergeControl.xaml.cs">
       <DependentUpon>MergeControl.xaml</DependentUpon>
@@ -1098,6 +1101,10 @@
     <Page Include="GadgetPropertyStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Mapping\TimeLapse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StyleDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -708,6 +708,7 @@ namespace EpiDashboard.Mapping
             if (MapLoaded != null)
             {
                 MapLoaded(this, layerList.ClusterLayers.Count > 0);
+                iconTimeLapse.IsEnabled = layerList.ClusterLayers.Count > 0;
             }
         }
 
@@ -923,7 +924,7 @@ namespace EpiDashboard.Mapping
                 areaSeries.DependentValuePath = "Value";
                 areaSeries.IndependentValuePath = "Key";
                 areaSeries.ItemsSource = areaChartDataPoints;
-                areaSeries.LegendItems.Clear();
+                areaSeries.LegendItems.Clear();             
             }
         }
 
@@ -935,7 +936,7 @@ namespace EpiDashboard.Mapping
                 {
                     return pair.Key < slider.Value.End;
                 });
-                areaSeries.ItemsSource = test;
+                areaSeries.ItemsSource = test;               
             }
         }
 
@@ -943,6 +944,7 @@ namespace EpiDashboard.Mapping
         {
             if (currentTimeVariable != null)
             {
+                grdLapse.Visibility = Visibility.Visible;
                 grdTimeLapse.Visibility = Visibility.Visible;
                 stkTimeLapse.Visibility = Visibility.Visible;
                 if (layerList.ClusterLayers.Count == 1)
@@ -1559,6 +1561,45 @@ namespace EpiDashboard.Mapping
             ToggleBlank();
             SetBackgroundImageType();
         }
+
+        EpiDashboard.Mapping.TimeLapse timeLaspe = null;               
+        private void btn_TimeLapseClick(object sender, RoutedEventArgs e)
+        {          
+            if (!string.IsNullOrEmpty(timeLaspe.TimeVariable))
+            {
+                if (TimeVariableSet != null)
+                {
+                    currentTimeVariable = timeLaspe.TimeVariable;
+                    timeLaspe.Closepopup();
+                    TimeVariableSet(timeLaspe.TimeVariable);
+                }               
+           }            
+        }
+        private void iconTimeLapse_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
+            List<ILayerProperties> layers = layerList.Layers;
+            List<DashboardHelper> dashboardHelpers = new List<DashboardHelper>();
+            foreach (ILayerProperties layer in layers)
+            {
+                if (layer.GetDashboardHelper() != null)
+                {
+                    dashboardHelpers.Add(layer.GetDashboardHelper());
+                }
+            }
+            timeLaspe = new EpiDashboard.Mapping.TimeLapse(dashboardHelpers, this, myMap);
+            timeLaspe.btnOK.Click += new RoutedEventHandler(btn_TimeLapseClick);
+           
+            timeLaspe.Width = 250;
+            timeLaspe.Height = 190;
+
+            timeLaspe.Cancelled += new EventHandler(properties_Cancelled);
+            timeLaspe.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            popup.Content = timeLaspe;
+            popup.Show();                  
+        }
+       
     }
 
 
