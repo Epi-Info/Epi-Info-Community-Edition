@@ -5188,7 +5188,7 @@ ErrorHandler:
 
     End Function
 
-    Public Function FieldColl(ByRef p1 As CSField, ByRef s As Object) As Short
+    Public Function FieldColl(ByRef p1 As CSField, ByRef s As Object) As Integer
 
         '   Dim ft As ADODB.DataTypeEnum
         Dim ft As Integer
