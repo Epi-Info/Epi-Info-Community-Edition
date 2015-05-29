@@ -360,6 +360,7 @@ namespace EpiDashboard.Controls
             Addfilters();
             RenderMap();
             layerprop.SetValues(txtDescription.Text, cmbLatitude.Text, cmbLongitude.Text, colorselected );
+            //mapControl.iconTimeLapse.IsEnabled = true;
             if (ChangesAccepted != null)
             {
                 ChangesAccepted(this, new EventArgs());

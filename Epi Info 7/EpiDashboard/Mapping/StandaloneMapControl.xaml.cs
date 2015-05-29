@@ -670,6 +670,7 @@ namespace EpiDashboard.Mapping
             if (MapLoaded != null)
             {
                 MapLoaded(this, layerList.ClusterLayers.Count > 0);
+                iconTimeLapse.IsEnabled = layerList.ClusterLayers.Count == 1;
             }
         }
 
@@ -708,7 +709,7 @@ namespace EpiDashboard.Mapping
             if (MapLoaded != null)
             {
                 MapLoaded(this, layerList.ClusterLayers.Count > 0);
-                iconTimeLapse.IsEnabled = layerList.ClusterLayers.Count > 0;
+                iconTimeLapse.IsEnabled = layerList.ClusterLayers.Count == 1;
             }
         }
 
