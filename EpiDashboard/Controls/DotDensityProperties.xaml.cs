@@ -19,94 +19,39 @@ using Epi.Core;
 using Epi.Data;
 using Epi.Fields;
 using EpiDashboard.Mapping;
+using System.Net;
+using System.Windows.Forms;
 namespace EpiDashboard.Controls
 {
     /// <summary>
     /// Interaction logic for DotDensityProperties.xaml
     /// </summary>
-    public partial class DotDensityProperties : UserControl
+    public partial class DotDensityProperties : System.Windows.Controls.UserControl
     {      
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;
         private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
-        private EpiDashboard.Mapping.DotDensityLayerProvider provider;
-        public event EventHandler FilterRequested;
-        public RowFilterControl rowFilterControl { get; protected set; }       
-        private double selectionGridHeight;
-        private double guidedButtonsGridHeight;
+        private EpiDashboard.Mapping.DotDensityLayerProvider provider;       
+        public RowFilterControl rowFilterControl { get; protected set; }                  
         public DataFilters dataFilters;
-        private Configuration config;
-        private bool includeUserDefinedVars = true;
-        private EpiDashboard.Dialogs.FilterDialogMode mode = EpiDashboard.Dialogs.FilterDialogMode.RowFilterMode;
+        private System.Xml.XmlElement currentElement;
+        public event EventHandler MapGenerated;
+        public event EventHandler FilterRequested;
         private EpiDashboard.Mapping.DotDensityKmlLayerProvider KMLprovider;
         private EpiDashboard.Mapping.DotDensityServerLayerProvider Mapprovider;
         public EpiDashboard.Mapping.DotDensityLayerProperties layerprop;
         public EpiDashboard.Mapping.DotDensityServerLayerProperties serverlayerprop;
-        public EpiDashboard.Mapping.DotDensityKmlLayerProperties kmllayerprop;
-        public event EventHandler MapGenerated;
+        public EpiDashboard.Mapping.DotDensityKmlLayerProperties kmllayerprop;       
         private string shapeFilePath;
-        private System.Xml.XmlElement currentElement;
-        public DotDensityProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
-        {
-            InitializeComponent();
-            this.mapControl = mapControl;
-            this.myMap = myMap;
-            ////this.DashboardHelper = dashboardHelper;
-
-            //if (DashboardHelper.IsUsingEpiProject)
-            //{
-            //    //txtProjectPath.Text = dashboardHelper.View.Project.FilePath;
-
-            //    if (System.IO.File.Exists(txtProjectPath.Text))
-            //    {
-            //        cmbFormName.Items.Clear();
-            //        Project project = new Project(txtProjectPath.Text);
-            //        foreach (View view in project.Views)
-            //        {
-            //            cmbFormName.Items.Add(view.Name);
-            //        }
-            //    }
-
-            //    //cmbFormName.Text = dashboardHelper.View.Name;
-            //}
-            //else
-            //{
-            //    //if (!string.IsNullOrEmpty(dashboardHelper.CustomQuery))
-            //    //{
-            //    //    SqlQuery = DashboardHelper.CustomQuery;
-            //    //}
-            //}
-
-            //tblockRows.Text = dashboardHelper.DataSet.Tables[0].Rows.Count.ToString() + " unfiltered rows";
-            //tblockColumns.Text = dashboardHelper.DataSet.Tables[0].Columns.Count.ToString() + " columns";
-            //tblockCacheDateTime.Text = "Data last cached at " + dashboardHelper.LastCacheTime.ToShortDateString() + " " + dashboardHelper.LastCacheTime.ToShortTimeString();
-            //tblockCacheTimeElapsed.Text = "Took " + dashboardHelper.TimeToCache + " to locally cache data";
-
-            Epi.ApplicationIdentity appId = new Epi.ApplicationIdentity(typeof(Configuration).Assembly);
-            tblockCurrentEpiVersion.Text = "Epi Info " + appId.Version;
-
-            //lbxRelatedDataSources.Items.Clear();
-            //if (dashboardHelper.ConnectionsForRelate.Count > 0)
-            //{
-            //    // Related Data
-            //    foreach (RelatedConnection rConn in dashboardHelper.ConnectionsForRelate)
-            //    {
-            //        lbxRelatedDataSources.Items.Add(rConn.db.ConnectionString);
-            //    }
-            //}       
-         
-           // ResetLegend_Click(new object(), new RoutedEventArgs());           
-        }
-
-        
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;
 
+        # region Public Properties
         public DashboardHelper DashboardHelper { get; private set; }
 
         public FileInfo ProjectFileInfo
         {
-            get 
+            get
             {
                 FileInfo fi = new FileInfo(txtProjectPath.Text);
                 return fi;
@@ -119,7 +64,6 @@ namespace EpiDashboard.Controls
                 panelDataSourceAdvanced.Visibility = Visibility.Collapsed;
             }
         }
-        
 
         public string ConnectionString
         {
@@ -151,6 +95,162 @@ namespace EpiDashboard.Controls
             }
         }
 
+        public string MapServerName { get; set; }
+        public int MapVisibleLayer { get; set; }
+        public string KMLMapServerName { get; set; }
+        public int KMLMapVisibleLayer { get; set; }
+        #endregion
+
+        # region Constructors
+        public DotDensityProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
+        {
+            InitializeComponent();
+            this.mapControl = mapControl;
+            this.myMap = myMap;           
+            Epi.ApplicationIdentity appId = new Epi.ApplicationIdentity(typeof(Configuration).Assembly);
+            tblockCurrentEpiVersion.Text = "Epi Info " + appId.Version;               
+        }
+
+        #endregion
+
+        private void CheckButtonStates(ToggleButton sender)
+        {
+            foreach (UIElement element in panelSidebar.Children)
+            {
+                if (element is ToggleButton)
+                {
+                    ToggleButton tbtn = element as ToggleButton;
+                    if (tbtn != sender)
+                    {
+                        tbtn.IsChecked = false;
+                    }
+                }
+            }
+        }
+
+        private void FillComboBoxes()
+        {
+            cmbDataKey.Items.Clear();
+            cmbValue.Items.Clear();
+            List<string> fields = dashboardHelper.GetFieldsAsList(); // dashboardHelper.GetFormFields();
+            ColumnDataType columnDataType = ColumnDataType.Numeric;
+            List<string> numericFields = dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
+            foreach (string field in fields)
+            {
+                cmbDataKey.Items.Add(field);
+            }
+            foreach (string field in numericFields)
+            {
+                cmbValue.Items.Add(field);
+            }
+            cmbValue.Items.Insert(0, "{Record Count}");
+        }
+
+        private HttpWebRequest CreateWebRequest(string endPoint)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(endPoint);
+            request.Method = "GET";
+            request.ContentLength = 0;
+            request.ContentType = "text/xml";
+            return request;
+        }
+
+        public string GetMessage(string endPoint)
+        {
+            HttpWebRequest request = CreateWebRequest(endPoint);
+            using (var response = (HttpWebResponse)request.GetResponse())
+            {
+                var responseValue = string.Empty;
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    return null;
+                }
+                using (var responseStream = response.GetResponseStream())
+                {
+                    using (var reader = new StreamReader(responseStream))
+                    {
+                        responseValue = reader.ReadToEnd();
+                    }
+                }
+                return responseValue;
+            }
+        }
+
+        private void RenderMap()
+        {
+            if (cmbDataKey.SelectedIndex != -1 && cmbShapeKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
+            {
+                string shapeKey = cmbShapeKey.SelectedItem.ToString();
+                string dataKey = cmbDataKey.SelectedItem.ToString();
+                string value = cmbValue.SelectedItem.ToString();
+                if (radShapeFile.IsChecked == true && provider!=null)
+                    provider.SetShapeRangeValues(dashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(txtDotValue.Text));
+                else if (radMapServer.IsChecked == true && Mapprovider!=null)
+                    Mapprovider.SetShapeRangeValues(dashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(txtDotValue.Text));
+                else if (radKML.IsChecked == true && KMLprovider!=null)
+                    KMLprovider.SetShapeRangeValues(dashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(txtDotValue.Text));
+            }
+        }
+
+        private void Addfilters()
+        {
+            string sfilterOperand = string.Empty;
+            string[] shilowvars;
+            string svarname;
+
+            this.dataFilters = rowFilterControl.DataFilters;
+
+            List<string> sconditionval = dataFilters.GetFilterConditionsAsList();
+            string strreadablecondition = dataFilters.GenerateReadableDataFilterString().Trim();
+            if (!(string.IsNullOrEmpty(strreadablecondition)))
+            {
+                if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_MISSING;
+                }
+
+                if (!(strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN)))
+                {
+                    svarname = strreadablecondition.Substring(strreadablecondition.IndexOf("[") + 1, strreadablecondition.IndexOf("]") - strreadablecondition.IndexOf("[") - 1);
+                    dashboardHelper.AddDataFilterCondition(sfilterOperand, sconditionval[0].ToString(), svarname, ConditionJoinType.And);
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_BETWEEN;
+                    string strcondition = strreadablecondition.Substring(0, strreadablecondition.IndexOf(sfilterOperand)).Trim();
+                    string[] strVarstrings = strcondition.Split(' ');
+                    svarname = strVarstrings[3].ToString();
+                    string sValues = strreadablecondition.ToString().Substring(strreadablecondition.IndexOf(sfilterOperand) + sfilterOperand.Length, (strreadablecondition.ToString().Length) - (strreadablecondition.ToString().IndexOf(sfilterOperand) + sfilterOperand.Length)).Trim();
+                    shilowvars = sValues.Split(' ');
+                    dashboardHelper.AddDataFilterCondition(sfilterOperand, shilowvars[0].ToString(), shilowvars[2].ToString(), svarname, ConditionJoinType.And);
+                }
+            }
+        }
+
         private void tbtnInfo_Checked(object sender, RoutedEventArgs e)
         {
             CheckButtonStates(sender as ToggleButton);
@@ -176,7 +276,7 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelHTML.Visibility = System.Windows.Visibility.Visible;
-           // panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -187,7 +287,7 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Visible;
             panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-           // panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -197,37 +297,23 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as SettingsToggleButton);
             panelHTML.Visibility = System.Windows.Visibility.Collapsed;
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            //panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;                          
             panelFilters.Visibility = System.Windows.Visibility.Visible;           
         }
-
-       
-        private void CheckButtonStates(ToggleButton sender)
-        {
-            foreach (UIElement element in panelSidebar.Children)
-            {
-                if (element is ToggleButton)
-                {
-                    ToggleButton tbtn = element as ToggleButton;
-                    if (tbtn != sender)
-                    {
-                        tbtn.IsChecked = false;
-                    }
-                }
-            }
-        }
-
+               
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             Addfilters();
             RenderMap();
-            if(layerprop!=null)
+            if (radShapeFile.IsChecked==true && provider!=null)
             layerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctHighColor.Fill));
-            else if(serverlayerprop!=null)
+            else if (radMapServer.IsChecked == true && Mapprovider!=null)
                 serverlayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctHighColor.Fill));
-            else if(kmllayerprop!=null)
+            else if (radKML.IsChecked == true && KMLprovider!=null)
+            {
                 kmllayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctHighColor.Fill));
+            }
             if (ChangesAccepted != null)
             {
                 ChangesAccepted(this, new EventArgs());
@@ -250,6 +336,7 @@ namespace EpiDashboard.Controls
             {
                 txtProjectPath.Text = dashboardHelper.Database.DbName;
                 FillComboBoxes();
+                panelBoundaries.IsEnabled = true;
                 this.dataFilters = new DataFilters(dashboardHelper);
                 rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dataFilters, true);
                 rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; rowFilterControl.FillSelectionComboboxes();
@@ -257,25 +344,7 @@ namespace EpiDashboard.Controls
                 txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
             }
         }
-       
-        private void FillComboBoxes()
-        {
-            cmbDataKey.Items.Clear();
-            cmbValue.Items.Clear();
-            List<string> fields = dashboardHelper.GetFieldsAsList(); // dashboardHelper.GetFormFields();
-            ColumnDataType columnDataType = ColumnDataType.Numeric;
-            List<string> numericFields = dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
-            foreach (string field in fields)
-            {
-                cmbDataKey.Items.Add(field);
-            }
-            foreach (string field in numericFields)
-            {
-                cmbValue.Items.Add(field);
-            }
-            cmbValue.Items.Insert(0, "{Record Count}");
-        }
-
+             
         private void cmbFormName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //if (cmbFormName.SelectedIndex >= 0)
@@ -309,6 +378,8 @@ namespace EpiDashboard.Controls
         {
             provider = new Mapping.DotDensityLayerProvider(myMap);           
             object[] shapeFileProperties = provider.LoadShapeFile();
+            if (shapeFileProperties != null)
+            {
             ILayerProperties layerProperties = null;
             layerProperties = new DotDensityLayerProperties(myMap, dashboardHelper, this.mapControl);
             layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
@@ -317,8 +388,7 @@ namespace EpiDashboard.Controls
             if (this.DashboardHelper != null)
                 layerprop.SetdashboardHelper(DashboardHelper);
             this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-            if (shapeFileProperties != null)
-            {
+           
                 if (shapeFileProperties.Length == 2)
                 {
                     txtShapePath.Text = shapeFileProperties[0].ToString();
@@ -336,24 +406,7 @@ namespace EpiDashboard.Controls
                 }
             }
            
-        }
-
-        private void RenderMap()
-        {
-            if (cmbDataKey.SelectedIndex != -1 && cmbShapeKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
-            {
-                string shapeKey = cmbShapeKey.SelectedItem.ToString();
-                string dataKey = cmbDataKey.SelectedItem.ToString();
-                string value = cmbValue.SelectedItem.ToString();               
-                if(provider!=null)
-                provider.SetShapeRangeValues(dashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(txtDotValue.Text));               
-                else if(Mapprovider!=null)
-                    Mapprovider.SetShapeRangeValues(dashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(txtDotValue.Text));               
-                else
-                    KMLprovider.SetShapeRangeValues(dashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(txtDotValue.Text));               
-
-            }
-        }    
+        }     
 
         private void rctHighColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -366,32 +419,64 @@ namespace EpiDashboard.Controls
 
         private void btnKMLFile_Click(object sender, RoutedEventArgs e)
         {
-            KMLprovider = new Mapping.DotDensityKmlLayerProvider(myMap);
+           /* KMLprovider = new Mapping.DotDensityKmlLayerProvider(myMap);
             KMLprovider.FeatureLoaded += new FeatureLoadedHandler(KMLprovider_FeatureLoaded);
-            KMLprovider.LoadKml();
-            ILayerProperties layerProperties = null;
-            layerProperties = new DotDensityKmlLayerProperties(myMap, dashboardHelper, this.mapControl);
-            layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
-            layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
-            this.kmllayerprop = (DotDensityKmlLayerProperties)layerProperties;
-            if( this.DashboardHelper!=null)
-                kmllayerprop.SetdashboardHelper(DashboardHelper); 
-            this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+           object[] kmlFileProperties= KMLprovider.LoadKml();
+           if (kmlFileProperties != null)
+           {
+               ILayerProperties layerProperties = null;
+               layerProperties = new DotDensityKmlLayerProperties(myMap, dashboardHelper, this.mapControl);
+               layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
+               layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
+               this.kmllayerprop = (DotDensityKmlLayerProperties)layerProperties;
+               if (this.DashboardHelper != null)
+                   kmllayerprop.SetdashboardHelper(DashboardHelper);
+               this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+           }*/
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "KML Files (*.kml)|*.kml|KMZ Files (*.kmz)|*.kmz";
+            dialog.Multiselect = false;
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                txtKMLpath.Text = dialog.FileName;
+                KMLMapServerName = txtKMLpath.Text;
+                if (KMLprovider == null)
+                {
+                    KMLprovider = new Mapping.DotDensityKmlLayerProvider(myMap);
+                    KMLprovider.FeatureLoaded += new FeatureLoadedHandler(KMLprovider_FeatureLoaded);
+                }               
+                object[] kmlFileProperties = KMLprovider.LoadKml(KMLMapServerName);
+                if (kmlFileProperties != null)
+                {
+                    ILayerProperties layerProperties = null;
+                    layerProperties = new DotDensityKmlLayerProperties(myMap, dashboardHelper, this.mapControl);
+                    layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
+                    layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
+                    this.kmllayerprop = (DotDensityKmlLayerProperties)layerProperties;
+                    if (this.DashboardHelper != null)
+                        kmllayerprop.SetdashboardHelper(DashboardHelper);
+                    this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                }
+            }
+
         }
 
         private void btnMapFile_Click(object sender, RoutedEventArgs e)
         {
-            Mapprovider = new Mapping.DotDensityServerLayerProvider(myMap);
+          /*  Mapprovider = new Mapping.DotDensityServerLayerProvider(myMap);
             Mapprovider.FeatureLoaded += new FeatureLoadedHandler(Mapprovider_FeatureLoaded);
-            Mapprovider.LoadShapeFile();
-            ILayerProperties layerProperties = null;
-            layerProperties = new DotDensityServerLayerProperties(myMap, dashboardHelper, this.mapControl);
-            layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
-            layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
-            this.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
-            if (this.DashboardHelper != null)
-                serverlayerprop.SetdashboardHelper(DashboardHelper); 
-            this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+              object[] mapFileProperties= Mapprovider.LoadShapeFile();
+              if (mapFileProperties != null)
+              {
+                  ILayerProperties layerProperties = null;
+                  layerProperties = new DotDensityServerLayerProperties(myMap, dashboardHelper, this.mapControl);
+                  layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
+                  layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
+                  this.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
+                  if (this.DashboardHelper != null)
+                      serverlayerprop.SetdashboardHelper(DashboardHelper);
+                  this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+              }*/
         }
 
         void Mapprovider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
@@ -483,95 +568,170 @@ namespace EpiDashboard.Controls
                 RenderMap();
             }
         }
-        /// <summary>
-        /// Handles the selection changed event for the Boundaries combo box
-        /// </summary>
-        /// <param name="sender">Object that fired the event</param>
-        /// <param name="e">.NET supplied event parameters</param>       
 
-        private void cmbBoundaries_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void radShapeFile_Checked(object sender, RoutedEventArgs e)
         {
-            if (panelShapeFile != null)
+            panelshape.IsEnabled = true;
+            panelmap.IsEnabled = false;
+            panelKml.IsEnabled = false;
+            cmbShapeKey.Items.Clear();
+            txtShapePath.Text = string.Empty;
+            txtKMLpath.Text = string.Empty;
+            cbxmapfeature.SelectedIndex = -1;
+            cbxmapserver.SelectedIndex = -1;
+            txtMapSeverpath.Text = string.Empty;
+            if (Mapprovider != null)
             {
-                if (cmbBoundaries.SelectedIndex == 0)
+                Mapprovider.FeatureLoaded -= new FeatureLoadedHandler(Mapprovider_FeatureLoaded);               
+                Mapprovider = null;
+            }
+            if (KMLprovider != null)
+            {
+                KMLprovider.FeatureLoaded -= new FeatureLoadedHandler(KMLprovider_FeatureLoaded);               
+                KMLprovider = null;
+            }
+        }                   
+
+        private void radKML_Checked(object sender, RoutedEventArgs e)
+        {
+            panelshape.IsEnabled = false;
+            panelmap.IsEnabled = false;
+            panelKml.IsEnabled = true;
+            cmbShapeKey.Items.Clear();
+            txtShapePath.Text = string.Empty;
+            txtKMLpath.Text = string.Empty;
+            cbxmapfeature.SelectedIndex = -1;
+            cbxmapserver.SelectedIndex = -1;
+            txtMapSeverpath.Text = string.Empty;
+            if (Mapprovider != null)
+            {
+                Mapprovider.FeatureLoaded -= new FeatureLoadedHandler(Mapprovider_FeatureLoaded);              
+                Mapprovider = null;
+            }
+            if (provider != null)
+            {
+               // provider.FeatureLoaded -= new FeatureLoadedHandler(provider_FeatureLoaded);
+                provider = null;               
+            }
+        }
+
+        private void radMapServer_Checked(object sender, RoutedEventArgs e)
+        {
+            panelshape.IsEnabled = false;
+            panelmap.IsEnabled = true;
+            panelKml.IsEnabled = false;
+            cmbShapeKey.Items.Clear();
+            txtShapePath.Text = string.Empty;
+            txtKMLpath.Text = string.Empty;
+            cbxmapfeature.SelectedIndex = -1;
+            cbxmapserver.SelectedIndex = -1;
+            txtMapSeverpath.Text = string.Empty;
+            if (KMLprovider != null)
+            {
+                KMLprovider.FeatureLoaded -= new FeatureLoadedHandler(KMLprovider_FeatureLoaded);
+                KMLprovider = null;
+            }
+            if (provider != null)
+            {              
+                provider = null;
+            }
+        }
+           
+        private void radconnectmapserver_Checked(object sender, RoutedEventArgs e)
+        {
+            panelmapconnect.IsEnabled = true;
+            panelmapserver.IsEnabled = false;
+            panelmapconnect.IsEnabled = true;
+            txtMapSeverpath.Text = string.Empty;
+        }
+
+        private void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbxmapserver.SelectedIndex > -1)
+            {
+                MapServerName = ((ComboBoxItem)cbxmapserver.SelectedItem).Content.ToString();
+                if (Mapprovider == null)
                 {
-                    panelShapeFile.Visibility = System.Windows.Visibility.Visible;
-                    panelMapServer.Visibility = System.Windows.Visibility.Collapsed;
-                    panelKML.Visibility = System.Windows.Visibility.Collapsed;
+                    Mapprovider = new Mapping.DotDensityServerLayerProvider(myMap);
+                    Mapprovider.FeatureLoaded += new FeatureLoadedHandler(Mapprovider_FeatureLoaded);
                 }
-                else if (cmbBoundaries.SelectedIndex == 1)
+                object[] mapFileProperties = Mapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
+                if (mapFileProperties != null)
                 {
-                    panelShapeFile.Visibility = System.Windows.Visibility.Collapsed;
-                    panelMapServer.Visibility = System.Windows.Visibility.Visible;
-                    panelKML.Visibility = System.Windows.Visibility.Collapsed;
+                    ILayerProperties layerProperties = null;
+                    layerProperties = new DotDensityServerLayerProperties(myMap, dashboardHelper, this.mapControl);
+                    layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
+                    layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
+                    this.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
+                    if (this.DashboardHelper != null)
+                        serverlayerprop.SetdashboardHelper(DashboardHelper);
+                    this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                }
+            }
+        }
+
+        private void radlocatemapserver_Checked(object sender, RoutedEventArgs e)
+        {
+            panelmapconnect.IsEnabled = false;
+            panelmapserver.IsEnabled = true;
+            panelmapconnect.IsEnabled = false;
+            cbxmapserver.SelectedIndex = -1;
+        }
+
+        private void btnMapserverlocate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string message = GetMessage(txtMapSeverpath.Text + "?f=json");
+                System.Web.Script.Serialization.JavaScriptSerializer ser = new System.Web.Script.Serialization.JavaScriptSerializer();
+                Rest rest = ser.Deserialize<Rest>(message);
+                cbxmapfeature.DataContext = rest.layers;
+            }
+            catch (Exception ex)
+            {
+                cbxmapfeature.DataContext = null;
+                System.Windows.Forms.MessageBox.Show("Invalid map server");
+            }
+        }
+
+        private void txtMapSeverpath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            btnMapserverlocate.IsEnabled = txtMapSeverpath.Text.Length > 0;
+        }
+
+        private void cbxmapfeature_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbxmapfeature.Items.Count > 0)
+            {
+                MapServerName = txtMapSeverpath.Text;
+                if (cbxmapfeature.SelectedIndex > -1)
+                {
+                    int visibleLayer = ((SubObject)cbxmapfeature.SelectedItem).id;
+                    MapVisibleLayer = visibleLayer;
+                    if (Mapprovider == null)
+                    {
+                        Mapprovider = new Mapping.DotDensityServerLayerProvider(myMap);
+                        Mapprovider.FeatureLoaded += new FeatureLoadedHandler(Mapprovider_FeatureLoaded);
+                    }
+                    object[] mapFileProperties = Mapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);                                     
+                    if (mapFileProperties != null)
+                    {
+                        ILayerProperties layerProperties = null;
+                        layerProperties = new DotDensityServerLayerProperties(myMap, dashboardHelper, this.mapControl);
+                        layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
+                        layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
+                        this.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
+                        if (this.DashboardHelper != null)
+                            serverlayerprop.SetdashboardHelper(DashboardHelper);
+                        this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                    }
                 }
                 else
                 {
-                    panelShapeFile.Visibility = System.Windows.Visibility.Collapsed;
-                    panelMapServer.Visibility = System.Windows.Visibility.Collapsed;
-                    panelKML.Visibility = System.Windows.Visibility.Visible;
+                    MapVisibleLayer = -1;
                 }
             }
         }
-
-        private void Addfilters()
-        {
-            string sfilterOperand = string.Empty;
-            string[] shilowvars;
-            string svarname;
-
-            this.dataFilters = rowFilterControl.DataFilters;
-
-            List<string> sconditionval = dataFilters.GetFilterConditionsAsList();
-            string strreadablecondition = dataFilters.GenerateReadableDataFilterString().Trim();
-            if (!(string.IsNullOrEmpty(strreadablecondition)))
-            {
-                if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_MISSING))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_MISSING;
-                }
-
-                if (!(strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN)))
-                {
-                    svarname = strreadablecondition.Substring(strreadablecondition.IndexOf("[") + 1, strreadablecondition.IndexOf("]") - strreadablecondition.IndexOf("[") - 1);
-                    dashboardHelper.AddDataFilterCondition(sfilterOperand, sconditionval[0].ToString(), svarname, ConditionJoinType.And);
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_BETWEEN;
-                    string strcondition = strreadablecondition.Substring(0, strreadablecondition.IndexOf(sfilterOperand)).Trim();
-                    string[] strVarstrings = strcondition.Split(' ');
-                    svarname = strVarstrings[3].ToString();
-                    string sValues = strreadablecondition.ToString().Substring(strreadablecondition.IndexOf(sfilterOperand) + sfilterOperand.Length, (strreadablecondition.ToString().Length) - (strreadablecondition.ToString().IndexOf(sfilterOperand) + sfilterOperand.Length)).Trim();
-                    shilowvars = sValues.Split(' ');
-                    dashboardHelper.AddDataFilterCondition(sfilterOperand, shilowvars[0].ToString(), shilowvars[2].ToString(), svarname, ConditionJoinType.And);
-                }
-            }
-        }
-       
+              
     }
 }

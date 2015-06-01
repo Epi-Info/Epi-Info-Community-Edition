@@ -83,17 +83,19 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public void LoadKml()
+        public object[] LoadKml()
         {
             KmlDialog dialog = new KmlDialog();
-
+            object[] kmlfile = null;
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                LoadKml(dialog.ServerName);
+                kmlfile=LoadKml(dialog.ServerName);
+                return kmlfile;
             }
+            else return null;
         }
 
-        public void LoadKml(string url)
+        public object[] LoadKml(string url)
         {
             if (!string.IsNullOrEmpty(url))
             {
@@ -111,7 +113,9 @@ namespace EpiDashboard.Mapping
                 myMap.Layers.Add(shapeLayer);
 
                 myMap.Extent = shapeLayer.FullExtent;
+                return new object[] { shapeLayer };
             }
+            else return null;
         }
 
         void shapeLayer_Initialized(object sender, EventArgs e)

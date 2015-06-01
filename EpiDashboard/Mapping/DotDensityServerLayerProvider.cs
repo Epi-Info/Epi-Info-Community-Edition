@@ -79,7 +79,7 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public void LoadShapeFile(string url)
+        public object[] LoadShapeFile(string url)
         {
             if (!string.IsNullOrEmpty(url))
             {
@@ -130,17 +130,23 @@ namespace EpiDashboard.Mapping
                 }
                 myMap.Layers.Add(graphicsLayer);
                 myMap.Cursor = Cursors.Wait;
+                return new object[] { graphicsLayer };
             }
+            else
+                return null;
         }
 
-        public void LoadShapeFile()
+        public object[] LoadShapeFile()
         {
             MapServerFeatureDialog dialog = new MapServerFeatureDialog();
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                LoadShapeFile(dialog.ServerName + "/" + dialog.VisibleLayer);
+                object[] graphicslayer= null;
+               graphicslayer= LoadShapeFile(dialog.ServerName + "/" + dialog.VisibleLayer);
+               return graphicslayer;
             }
+            else return null;
         }
 
         void graphicsLayer_UpdateFailed(object sender, TaskFailedEventArgs e)
