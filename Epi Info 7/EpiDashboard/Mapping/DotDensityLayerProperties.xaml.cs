@@ -23,7 +23,7 @@ namespace EpiDashboard.Mapping
     {
         private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
-        private DotDensityLayerProvider provider;
+        public DotDensityLayerProvider provider;
         private System.Xml.XmlElement currentElement;
 
         public event EventHandler MapGenerated;
