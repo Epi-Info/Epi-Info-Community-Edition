@@ -28,6 +28,9 @@ namespace EpiDashboard.Mapping
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
+        //--
+        public event EventHandler EditRequested;
+        //--
 
         private IMapControl mapControl;
 

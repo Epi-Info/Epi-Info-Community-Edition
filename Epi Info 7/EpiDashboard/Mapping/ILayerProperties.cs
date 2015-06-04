@@ -15,6 +15,7 @@ namespace EpiDashboard.Mapping
         void MoveDown();
         event EventHandler MapGenerated;
         event EventHandler FilterRequested;
+        event EventHandler EditRequested;
         Color FontColor { set; }
         DashboardHelper GetDashboardHelper();
         StackPanel LegendStackPanel { get; }
