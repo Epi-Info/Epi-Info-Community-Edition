@@ -31,16 +31,18 @@ namespace EpiDashboard.Controls
         private DashboardHelper dashboardHelper;
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
+        public event EventHandler EditRequested;
         private EpiDashboard.Mapping.PointLayerProvider provider;
         private SimpleMarkerSymbol.SimpleMarkerStyle style;
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;
         private IMapControl imapcontrol;
-        public PointLayerProperties layerprop;
+        private PointLayerProperties layerprop;
         private Brush colorselected;
         private RowFilterControl rowfiltercontrol;
-        private DataFilters datafilters;
+        public DataFilters datafilters;
+       
 
-        public PointofInterestProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
+        public PointofInterestProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap, PointLayerProperties pointlayerprop)
         {
             InitializeComponent();
 
@@ -49,23 +51,24 @@ namespace EpiDashboard.Controls
           
             mapControl.TimeVariableSet += new TimeVariableSetHandler(mapControl_TimeVariableSet);
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
-
-            provider = new PointLayerProvider(myMap);
-            provider.DateRangeDefined += new DateRangeDefinedHandler(provider_DateRangeDefined);
-            provider.RecordSelected += new RecordSelectedHandler(provider_RecordSelected);
-
-
+            layerprop = pointlayerprop;
+            provider = pointlayerprop.provider;
             rctSelectColor.Fill = new SolidColorBrush(Color.FromArgb(120,0,0,255));
             colorselected = new SolidColorBrush(Color.FromArgb(120, 0, 0, 255));
-        }
+            
+         }
      
-        
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;
+     
+        public Brush ColorSelected
+        {
+            set
+            {
+                colorselected = value;
+            }
+        }
 
-        public DashboardHelper DashboardHelper { get; private set; }
-        
-      
       
         public FileInfo ProjectFileInfo
         {
@@ -186,7 +189,7 @@ namespace EpiDashboard.Controls
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
           dashboardHelper = mapControl.GetNewDashboardHelper();
-          this.DashboardHelper = dashboardHelper;
+         // this.DashboardHelper = dashboardHelper;
           layerprop.SetdashboardHelper(dashboardHelper); 
           if (dashboardHelper != null)
             {
@@ -287,9 +290,11 @@ namespace EpiDashboard.Controls
         public StackPanel LegendStackPanel
         {
             get { return provider.LegendStackPanel; }
+            
         }
 
         #endregion
+
        
         public void MoveUp()
         {
@@ -304,12 +309,17 @@ namespace EpiDashboard.Controls
 
         void coord_SelectionChanged(object sender, EventArgs e)
         {
-            RenderMap();
+            //RenderMap();
         }
         
         public DashboardHelper GetDashboardHelper()
         {
             return this.dashboardHelper;
+        }
+
+        public void SetDashboardHelper(DashboardHelper dash)
+        {
+            this.dashboardHelper = dash;
         } 
 
         void provider_RecordSelected(int id)
@@ -331,17 +341,18 @@ namespace EpiDashboard.Controls
         {
             mapControl.OnDateRangeDefined(start, end, intervalCounts);
         }
-        private void SetFilter()
+        public void SetFilter()
         {
             //--for filters
-            rowfiltercontrol = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, null   , true);
+            rowfiltercontrol = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dashboardHelper.DataFilters, true);
             rowfiltercontrol.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             rowfiltercontrol.VerticalAlignment = System.Windows.VerticalAlignment.Top;
             panelFilter.Children.Add(rowfiltercontrol);
+                
             
         }
 
-        private void FillComboBoxes()
+        public void FillComboBoxes()
         {
             cmbLatitude.Items.Clear();
             cmbLongitude.Items.Clear();
@@ -367,6 +378,7 @@ namespace EpiDashboard.Controls
             Addfilters();
             RenderMap();
             layerprop.SetValues(txtDescription.Text, cmbLatitude.Text, cmbLongitude.Text, cmbStyle.Text, colorselected );
+            
             if (ChangesAccepted != null)
             {
                 ChangesAccepted(this, new EventArgs());
@@ -394,8 +406,7 @@ namespace EpiDashboard.Controls
             
             if (cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
             {
-                  provider.RenderPointMap(this.DashboardHelper, cmbLatitude.SelectedItem.ToString(), cmbLongitude.SelectedItem.ToString(), colorselected , string.Empty,(SimpleMarkerSymbol.SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerSymbol.SimpleMarkerStyle),  cmbStyle.SelectedItem.ToString()), txtDescription.Text);
-                
+                provider.RenderPointMap(dashboardHelper, cmbLatitude.SelectedItem.ToString(), cmbLongitude.SelectedItem.ToString(), colorselected , string.Empty,(SimpleMarkerSymbol.SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerSymbol.SimpleMarkerStyle),  cmbStyle.SelectedItem.ToString()), txtDescription.Text);
                 if (MapGenerated != null)
                 {
                     MapGenerated(layerprop, new EventArgs());
@@ -417,7 +428,8 @@ namespace EpiDashboard.Controls
         {
             SetFilter();
         }
-
+       
+ 
         private void Addfilters()
         {
             string sfilterOperand = string.Empty;
@@ -475,6 +487,7 @@ namespace EpiDashboard.Controls
                     dashboardHelper.AddDataFilterCondition(sfilterOperand, shilowvars[0].ToString(), shilowvars[2].ToString(), svarname, ConditionJoinType.And);
                 }
             }
+             
         }
   } 
 }

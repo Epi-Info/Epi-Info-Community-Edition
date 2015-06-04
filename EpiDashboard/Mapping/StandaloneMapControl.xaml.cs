@@ -66,6 +66,8 @@ namespace EpiDashboard.Mapping
         private bool bypassInternetCheck;
         private Brush defaultBackgroundColor = Brushes.White;
         private bool hidePanels = false;
+        private EpiDashboard.Controls.PointofInterestProperties pointofinterestproperties;
+        
         public StandaloneMapControl()
         {
             InitializeComponent();
@@ -626,7 +628,15 @@ namespace EpiDashboard.Mapping
             DashboardHelper dashboardHelper = layerProperties.GetDashboardHelper();
             AddSelectionCriteria(dashboardHelper);
         }
-
+       //--
+       public void ILayerProperties_EditRequested(object sender, EventArgs e)
+       {
+           ILayerProperties layerProperties = (ILayerProperties)sender;
+           PointLayerProperties pointlayerprop = (PointLayerProperties)layerProperties;
+           if (pointlayerprop.FlagRunEdit == false)
+           { GeneratePointofInterestMap(pointlayerprop); }
+       }
+       //--
        public void ILayerProperties_MapGenerated(object sender, EventArgs e)
         {
             if (grdLayerConfigContainer.Children.Contains((UIElement)sender))
@@ -765,7 +775,7 @@ namespace EpiDashboard.Mapping
 
             DragCanvas.SetCanBeDragged(dataFilteringControl, false);
         }
-
+       
         void dataFilteringControl_SelectionCriteriaChanged(object sender, EventArgs e)
         {
             if (MapDataChanged != null)
@@ -1054,6 +1064,7 @@ namespace EpiDashboard.Mapping
                     layerProperties.MakeReadOnly();
                     layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
                     layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+                    layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
                     layerProperties.CreateFromXml(element);
                     layerList.AddListItem(layerProperties, 0);
                 }
@@ -1160,6 +1171,57 @@ namespace EpiDashboard.Mapping
 
         private DashboardPopup popup;
 
+        public void GeneratePointofInterestMap(PointLayerProperties pointlayerprop)
+        {
+            ILayerProperties layerProperties = null;
+            DashboardHelper dashboardHelper ;
+
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
+                        
+            //old config
+            layerProperties = (PointLayerProperties) pointlayerprop;
+         
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
+            pointofinterestproperties = new EpiDashboard.Controls.PointofInterestProperties(this, myMap, (PointLayerProperties) layerProperties);
+          
+            dashboardHelper = pointlayerprop.GetDashboardHelper();
+            pointofinterestproperties.SetDashboardHelper(dashboardHelper);
+            pointofinterestproperties.txtProjectPath.Text = dashboardHelper.Database.DbName;
+            pointofinterestproperties.FillComboBoxes();
+            pointofinterestproperties.SetFilter();
+
+            pointofinterestproperties.txtDescription.Text = pointlayerprop.txtDescription.Text;
+            pointofinterestproperties.cmbLatitude.Text = pointlayerprop.cbxLatitude.Text;
+            pointofinterestproperties.cmbLongitude.Text = pointlayerprop.cbxLongitude.Text;
+            pointofinterestproperties.cmbStyle.Text = pointlayerprop.cbxStyle.Text;
+            pointofinterestproperties.rctSelectColor.Fill = pointlayerprop.rctColor.Fill;
+            pointofinterestproperties.ColorSelected = pointlayerprop.rctColor.Fill;
+
+            pointlayerprop.FlagRunEdit = true;
+                        
+            pointofinterestproperties.Width = 800;
+            pointofinterestproperties.Height = 600;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > pointofinterestproperties.Width)
+            {
+                pointofinterestproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > pointofinterestproperties.Height)
+            {
+                pointofinterestproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            pointofinterestproperties.Cancelled += new EventHandler(properties_Cancelled);
+            pointofinterestproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+           
+            popup.Content = pointofinterestproperties;
+            popup.Show();
+        }
+
         public void GeneratePointofInterestMap()
         {
            ILayerProperties layerProperties = null;
@@ -1167,32 +1229,32 @@ namespace EpiDashboard.Mapping
 
            popup = new DashboardPopup();
            popup.Parent = LayoutRoot;
-                                
-            EpiDashboard.Controls.PointofInterestProperties properties = new EpiDashboard.Controls.PointofInterestProperties(this, myMap);
+          
             //old config
             layerProperties = new PointLayerProperties(myMap, dashboardHelper, this);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
-            properties.layerprop = (PointLayerProperties) layerProperties;
-           
-            //
-            properties.Width = 800;
-            properties.Height = 600;
+            layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
+            pointofinterestproperties = new EpiDashboard.Controls.PointofInterestProperties(this, myMap, (PointLayerProperties) layerProperties);
+            pointofinterestproperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+         
+            pointofinterestproperties.Width = 800;
+            pointofinterestproperties.Height = 600;
 
-            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > pointofinterestproperties.Width)
             {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                pointofinterestproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
             }
 
-            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > pointofinterestproperties.Height)
             {
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+                pointofinterestproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
 
-            properties.Cancelled += new EventHandler(properties_Cancelled);
-            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            pointofinterestproperties.Cancelled += new EventHandler(properties_Cancelled);
+            pointofinterestproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
             grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-            popup.Content = properties;
+            popup.Content = pointofinterestproperties;
             popup.Show();
         }
 
@@ -1327,6 +1389,7 @@ namespace EpiDashboard.Mapping
             //}
 
             popup.Close();
+              
         }
 
         void properties_Cancelled(object sender, EventArgs e)

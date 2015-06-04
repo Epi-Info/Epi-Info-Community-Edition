@@ -31,6 +31,8 @@ namespace EpiDashboard.Controls
         private DashboardHelper dashboardHelper;
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
+        public event EventHandler EditRequested;
+        
         private EpiDashboard.Mapping.ClusterLayerProvider provider;
         private SimpleMarkerSymbol.SimpleMarkerStyle style;
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;

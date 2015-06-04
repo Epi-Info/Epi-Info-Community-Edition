@@ -23,14 +23,18 @@ namespace EpiDashboard.Mapping
     public partial class PointLayerProperties : UserControl, ILayerProperties
     {
 
-        private PointLayerProvider provider;
+        public PointLayerProvider provider;
         private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
 
+        public event EventHandler EditRequested;
+
         private IMapControl mapControl;
+        private bool flagrunedit;
+        private StackPanel legendStackPanel;
 
         public PointLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
@@ -49,8 +53,14 @@ namespace EpiDashboard.Mapping
             cbxLongitude.SelectionChanged += new SelectionChangedEventHandler(coord_SelectionChanged);
             rctColor.MouseUp += new MouseButtonEventHandler(rctColor_MouseUp);
             rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
-
+            rctEdit.MouseUp  += new MouseButtonEventHandler(rctEdit_MouseUp);
             FillComboBoxes();
+        }
+
+        public bool FlagRunEdit
+        {
+            set { flagrunedit = value; }
+            get { return flagrunedit; }
         }
 
         void rctFilter_MouseUp(object sender, MouseButtonEventArgs e)
@@ -70,7 +80,18 @@ namespace EpiDashboard.Mapping
                 RenderMap();
             }
         }
+        //--
+        void rctEdit_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (EditRequested != null)
+            {
+                flagrunedit = false;
+                EditRequested(this, new EventArgs());
+            }
+        }
 
+       
+        //--
         public void MoveUp()
         {
             provider.MoveUp();
@@ -124,11 +145,11 @@ namespace EpiDashboard.Mapping
                 }
             }
         }
-
+        
         void coord_SelectionChanged(object sender, EventArgs e)
         {
-            RenderMap();
-        }
+            //RenderMap();
+        } 
 
 
         private void FillComboBoxes()
@@ -177,7 +198,8 @@ namespace EpiDashboard.Mapping
             cbxStyle.IsEnabled = false;
             txtDescription.IsReadOnly = true;
             txtDescription.Width = 130;
-            btnChangeText.Visibility = System.Windows.Visibility.Visible;
+           // btnChangeText.Visibility = System.Windows.Visibility.Visible;
+            btnChangeText.Visibility = System.Windows.Visibility.Hidden;
             grdMain.Width = 700;
             lblTitle.Visibility = System.Windows.Visibility.Visible;
         }
@@ -267,6 +289,7 @@ namespace EpiDashboard.Mapping
         public StackPanel LegendStackPanel
         {
             get { return provider.LegendStackPanel; }
+            set { legendStackPanel = value; }
         }
 
         #endregion

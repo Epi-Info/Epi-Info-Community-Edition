@@ -1573,6 +1573,7 @@
     <Resource Include="Images\casecluster.png" />
     <Resource Include="Images\choropleth.png" />
     <Resource Include="Images\dotdensity.png" />
+    <Resource Include="Images\Edit1.png" />
     <Content Include="Images\labels.png" />
     <Resource Include="Images\saveHTML.png" />
     <Resource Include="Images\watermark_logo.png" />

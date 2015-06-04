@@ -11,7 +11,7 @@
                 <Label x:Name="lblDescription" HorizontalAlignment="Center">Description:</Label>
                 <StackPanel Orientation="Horizontal" Width="150">
                     <TextBox x:Name="txtDescription" Width="150"/>
-                    <Button x:Name="btnChangeText" Width="20" Content="..." Visibility="Collapsed" Click="btnChangeText_Click"/>
+                    <Button x:Name="btnChangeText" Width="20" Content="..." Visibility="Collapsed" Click="btnChangeText_Click"/> 
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical" Width="85">
@@ -27,15 +27,23 @@
                 <ComboBox x:Name="cbxLongitude" Width="110"/>
             </StackPanel>
         </StackPanel>
-        <Rectangle VerticalAlignment="Bottom" x:Name="rctColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#990011FF" Margin="0,0,30,0">
+
+        <Rectangle VerticalAlignment="Bottom" x:Name="rctColor" HorizontalAlignment="Right" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="#990011FF" Margin="0,0,30,0" Visibility="Hidden">
             <Rectangle.ToolTip>
                 <Label Content="Color"/>
             </Rectangle.ToolTip>
         </Rectangle>
-        <Image VerticalAlignment="Bottom" Source="../Images/filter1.png" Stretch="None" HorizontalAlignment="Right" Margin="0,0,11,5"/>
-        <Rectangle VerticalAlignment="Bottom" x:Name="rctFilter" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#00000000" Margin="0,0,8,0">
+        <Image VerticalAlignment="Bottom" Source= "../Images/filter1.png" Stretch="None" HorizontalAlignment="Right" Margin="0,0,11,5" Visibility="Hidden"/>
+        <Rectangle VerticalAlignment="Bottom" x:Name="rctFilter" HorizontalAlignment="Right" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="#00000000" Margin="0,0,8,0" Visibility="Hidden">
             <Rectangle.ToolTip>
                 <Label Content="Data filters"/>
+            </Rectangle.ToolTip>
+        </Rectangle>
+
+        <Image VerticalAlignment="Bottom" Source= "../Images/Edit1.png" Stretch="None" HorizontalAlignment="Right" Margin="0,0,55,5" Visibility= "Visible"/>
+        <Rectangle VerticalAlignment="Bottom" x:Name="rctEdit"  HorizontalAlignment="Right" Height="25" Width="35" Stroke="DarkGray" Cursor="Hand" Fill="#00000000" Margin="0,0,52,0" Visibility="Visible" >
+             <Rectangle.ToolTip>
+                <Label Content="Edit data layer map"/>
             </Rectangle.ToolTip>
         </Rectangle>
     </Grid>

@@ -28,6 +28,8 @@ namespace EpiDashboard.Mapping
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
+        public event EventHandler EditRequested;
+        
         private IMapControl mapControl;
         private string shapeFilePath;      
         public DotDensityLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
