@@ -4959,6 +4959,1123 @@ namespace EpiDashboard
             return stratifiedFrequencyTables;
         }
 
+
+        public Dictionary<DataTable, List<DescriptiveStatistics>> GenerateFrequencyTableforMap(GadgetParameters inputs)
+        {
+            //Stopwatch sw1 = new Stopwatch();
+            //sw1.Start();
+
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CHECKING_INPUTS);
+
+            #region Input Validation
+            if (inputs == null)
+            {
+                throw new ArgumentNullException("inputs");
+            }
+            if (string.IsNullOrEmpty(inputs.MainVariableName))
+            {
+                throw new ArgumentNullException("inputs.MainVariableName");
+            }
+            #endregion // Input Validation
+
+            string freqVar = inputs.MainVariableName;
+            string crosstabVar = inputs.CrosstabVariableName;
+            string weightVar = inputs.WeightVariableName;
+            bool includeMissing = inputs.ShouldIncludeMissing;
+            bool sortHighToLow = inputs.ShouldSortHighToLow;
+            bool useAllPossibleValues = inputs.ShouldUseAllPossibleValues;
+            bool includeFullSummaryStatistics = inputs.ShouldIncludeFullSummaryStatistics;
+            bool needsOutputTable = true;
+            bool useFieldPrompts = false;
+            bool isAberrationRoutine = false;
+            int timePeriod = int.MaxValue;
+            List<string> strataVars = inputs.StrataVariableNames;
+
+            if (inputs.InputVariableList.ContainsKey("aberration") && inputs.InputVariableList["aberration"].Equals("true"))
+            {
+                isAberrationRoutine = true;
+            }
+
+            if (inputs.InputVariableList.ContainsKey("usepromptforfield"))
+            {
+                if (inputs.InputVariableList["usepromptforfield"] == "true") useFieldPrompts = true;
+            }
+
+            if (inputs.InputVariableList.ContainsKey("NeedsOutputGrid"))
+            {
+                if (inputs.InputVariableList["NeedsOutputGrid"] == "false") needsOutputTable = false;
+            }
+
+            if (inputs.InputVariableList.ContainsKey("timeperiod"))
+            {
+                int.TryParse(inputs.InputVariableList["timeperiod"], out timePeriod);
+            }
+
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CREATING_VARIABLES);
+
+            bool doStratification = true;
+            bool doCrossTab = true;
+            bool doMeans = false;
+            bool valuesAreBool = false;
+
+            List<string> columnNames = new List<string>();
+            if (IsUserDefinedColumn(freqVar) == false)
+            {
+                columnNames.Add(freqVar);
+            }
+
+            if (strataVars == null || strataVars.Count == 0)
+            {
+                doStratification = false;
+            }
+            else
+            {
+                foreach (string str in strataVars)
+                {
+                    if (IsUserDefinedColumn(str) == false)
+                    {
+                        columnNames.Add(str);
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(crosstabVar.Trim()))
+            {
+                doCrossTab = false;
+            }
+            else if (IsUserDefinedColumn(crosstabVar) == false)
+            {
+                columnNames.Add(crosstabVar);
+            }
+
+            if (!string.IsNullOrEmpty(weightVar) && IsUserDefinedColumn(weightVar) == false)
+            {
+                columnNames.Add(weightVar);
+            }
+
+            if (inputs.IsRequestCancelled())
+            {
+                return null;
+            }
+
+            if (!string.IsNullOrEmpty(inputs.CustomFilter))
+            {
+                ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
+                List<string> dataColumnNames = GetFieldsAsList(columnDataType);
+                foreach (string name in dataColumnNames)
+                {
+                    if (inputs.CustomFilter.ToLower().Contains(name.ToLower()) && !columnNames.Contains(name, caseInsensitiveEqualityComparer))
+                    {
+                        columnNames.Add(name);
+                    }
+                }
+            }
+
+            Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = new Dictionary<DataTable, List<DescriptiveStatistics>>();
+
+            inputs.CustomSortColumnName = freqVar;
+            foreach (IDashboardRule rule in this.Rules)
+            {
+                if (rule is Rule_Format && (((Rule_Format)rule).FormatType.Equals(FormatTypes.RegularDate) || ((Rule_Format)rule).FormatType.Equals(FormatTypes.LongDate) || ((Rule_Format)rule).FormatType.Equals(FormatTypes.MonthAndFourDigitYear)) && ((Rule_Format)rule).DestinationColumnName.Equals(freqVar))
+                {
+                    inputs.CustomSortColumnName = ((Rule_Format)rule).SourceColumnName;
+                    break;
+                }
+            }
+
+            inputs.ColumnNames.AddRange(columnNames);
+
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_GENERATING_TABLE);
+            DataView dv = GenerateView(inputs);
+
+            DateTime? minDate = null;
+
+            if (isAberrationRoutine)
+            {
+                try
+                {
+                    DateTime? maxDate = null;
+                    FindUpperLowerDateValues(freqVar, ref minDate, ref maxDate, dv);
+
+                    DateTime dt1 = minDate.Value;
+                    DateTime dt2 = maxDate.Value;
+
+                    string dts1 = dt1.ToShortDateString();
+                    string dts2 = dt2.ToShortDateString();
+
+                    if (minDate.HasValue && maxDate.HasValue)
+                    {
+                        minDate = maxDate.Value.AddDays(-(timePeriod - 1));
+
+                        dt1 = minDate.Value;
+                        dts1 = dt1.ToShortDateString();
+                    }
+                }
+                catch
+                {
+                    minDate = DateTime.MinValue;
+                }
+
+                dv.RowFilter = CombineFilters(AddBracketsToString(freqVar) + " >= " + FormatValue(minDate.Value.ToString("MM/dd/yyyy"), "System.DateTime"), dv);
+            }
+
+            if (!minDate.HasValue)
+            {
+                isAberrationRoutine = false;
+            }
+
+            int overallRecordCount = 0;
+
+            if (dv != null && dv.Count > 0)
+            {
+                overallRecordCount = dv.Count;
+            }
+            else
+            {
+                return stratifiedFrequencyTables;
+            }
+
+            string columnType = string.Empty;
+            if (mainTable.Columns[freqVar] != null)
+            {
+                columnType = mainTable.Columns[freqVar].DataType.ToString();
+            }
+            else
+            {
+                return stratifiedFrequencyTables;
+            }
+
+            string crosstabColumnType = string.Empty;
+            if (mainTable.Columns[crosstabVar] != null)
+            {
+                crosstabColumnType = mainTable.Columns[crosstabVar].DataType.ToString();
+            }
+
+            if (columnType.Equals("System.Boolean"))
+            {
+                valuesAreBool = true;
+            }
+            else if (columnType.Equals("System.Int16")
+                || columnType.Equals("System.Int32")
+                || columnType.Equals("System.Int64")
+                || columnType.Equals("System.Double")
+                || columnType.Equals("System.Single")
+                || columnType.Equals("System.Decimal")
+                || columnType.Equals("System.Byte")
+                || columnType.Equals("System.SByte"))
+            {
+                doMeans = true;
+            }
+
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_STRATA_VALUES);
+            // Select distinct values for stratification            
+            List<Strata> stratas = new List<Strata>();
+            //Dictionary<string, string> stratas = new Dictionary<string, string>();
+            DataTable distinctTable = new DataTable();
+            DataTable sortedDistinctTable = new DataTable();
+
+            if (doStratification)
+            {
+                stratas = GetStrataValuesAsDictionary(strataVars, includeMissing, useFieldPrompts);
+            }
+            else
+            {
+                stratas.Add(new Strata(new List<string>(), new List<object>(), freqVar, freqVar));///*new KeyValuePair<string, string>(freqVar, freqVar)*/);
+            }
+
+            if (!inputs.ShouldIgnoreRowLimits && stratas.Count > Frequency_Strata_Limit)
+            {
+                string exMessage = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_STRATA_VALUES, strataVars[0], stratas.Count, Frequency_Strata_Limit);
+                throw new ApplicationException(exMessage);
+            }
+
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_FREQ_VALUES);
+
+            // Select distinct values for the main variable            
+            List<string> freqValues = new List<string>();
+
+            if (!freqVar.Equals(inputs.CustomSortColumnName))
+            {
+                distinctTable = SelectDistinct(inputs.CustomSortColumnName, dv, freqVar); // this needs to be checked
+            }
+            else
+            {
+                distinctTable = SelectDistinct(dv, freqVar);
+            }
+
+            if (inputs.IsRequestCancelled())
+            {
+                return null;
+            }
+
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_SORTING_FREQ_VALUES);
+            sortedDistinctTable = SortBySingleColumn(distinctTable, distinctTable.Columns[freqVar]);
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_COMPARING_FREQ_VALUES);
+
+            int count = 0;
+            int totalCount = sortedDistinctTable.Rows.Count;
+            foreach (DataRow row in sortedDistinctTable.Rows)
+            {
+                // WARNING: Values in sortedDistinctTable are case-sensitive, e.g. "EE" is treated as different than "ee".
+                // However, the .NET DataTable SELECT and COMPUTE methods treat both values as the same. Hence we must
+                // ignore case to ensure we don't end up double-counting some of the values.
+                if (!freqValues.Contains(row[0].ToString().TrimEnd()))
+                {
+                    if (inputs.IsRequestCancelled())
+                    {
+                        return null;
+                    }
+
+                    freqValues.Add(row[0].ToString().TrimEnd());
+                }
+
+                count++;
+
+                if (count % 500 == 0)
+                {
+                    string statusMessage = string.Format(SharedStrings.DASHBOARD_GADGET_STATUS_COMPARED_FREQ_VALUES, count.ToString("N0"), sortedDistinctTable.Rows.Count.ToString("N0"));
+                    inputs.UpdateGadgetStatus(statusMessage);
+                }
+            }
+
+            if (includeMissing)
+            {
+                if (freqValues.Contains(string.Empty))
+                {
+                    freqValues.Remove(string.Empty);
+                    freqValues.Add(string.Empty);
+                }
+            }
+
+            if (isAberrationRoutine && !inputs.ShouldIgnoreRowLimits && freqValues.Count > Aberration_Row_Limit)
+            {
+                string exMessage = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_VALUES, freqVar, freqValues.Count, Aberration_Row_Limit);
+                throw new ApplicationException(exMessage);
+            }
+            else if (!inputs.InputVariableList.ContainsKey("aberration") && !inputs.ShouldIgnoreRowLimits && freqValues.Count > Frequency_Row_Limit)
+            {
+                string exMessage = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_VALUES, freqVar, freqValues.Count, Frequency_Row_Limit);
+                throw new ApplicationException(exMessage);
+            }
+
+            if (!needsOutputTable)
+            {
+                string temp = freqValues[0];
+                freqValues.Clear();
+                freqValues.Add(temp);
+            }
+
+            Field field = null;
+
+            foreach (DataRow fieldRow in FieldTable.Rows)
+            {
+                if (fieldRow["columnname"].Equals(freqVar))
+                {
+                    if (fieldRow["epifieldtype"] is Field)
+                    {
+                        field = fieldRow["epifieldtype"] as Field;
+                    }
+                    break;
+                }
+            }
+
+            if (!valuesAreBool && field != null && field is YesNoField)
+            {
+                // special case as Epi 7 projects may implement Yes/No fields in such a way that they get read in as Int16s and therefore aren't caught above
+                valuesAreBool = true;
+                doMeans = true;
+            }
+
+            if (useAllPossibleValues && field != null)
+            {
+                inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_LIST_VALUES);
+
+                if (field is DDLFieldOfLegalValues)
+                {
+                    DataTable dataTable = ((TableBasedDropDownField)field).GetSourceData();
+                    Dictionary<string, string> fieldValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+                    foreach (System.Data.DataRow row in dataTable.Rows)
+                    {
+                        if (inputs.IsRequestCancelled())
+                        {
+                            return null;
+                        }
+
+                        if (!string.IsNullOrEmpty(((TableBasedDropDownField)field).CodeColumnName.Trim()))
+                        {
+                            string key = row[((TableBasedDropDownField)field).CodeColumnName.Trim()].ToString();
+                            if (!freqValues.Contains(key))
+                            {
+                                freqValues.Add(key);
+                            }
+                        }
+                    }
+                }
+                else if (field is DDLFieldOfCommentLegal)
+                {
+                    DataTable dataTable = ((TableBasedDropDownField)field).GetSourceData();
+                    Dictionary<string, string> fieldValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+                    foreach (System.Data.DataRow row in dataTable.Rows)
+                    {
+                        if (inputs.IsRequestCancelled())
+                        {
+                            return null;
+                        }
+
+                        if (!string.IsNullOrEmpty(((TableBasedDropDownField)field).TextColumnName.Trim()))
+                        {
+                            string key = row[((TableBasedDropDownField)field).TextColumnName.Trim()].ToString();
+
+                            int dash = key.IndexOf('-');
+                            string newKey = key.Substring(0, dash);
+
+                            if (!freqValues.Contains(newKey))
+                            {
+                                freqValues.Add(newKey);
+                            }
+                        }
+                    }
+                }
+                else if (field is DDLFieldOfCodes)
+                {
+                    DataTable dataTable = ((TableBasedDropDownField)field).GetSourceData();
+                    Dictionary<string, string> fieldValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+                    foreach (System.Data.DataRow row in dataTable.Rows)
+                    {
+                        if (inputs.IsRequestCancelled())
+                        {
+                            return null;
+                        }
+
+                        if (!string.IsNullOrEmpty(((TableBasedDropDownField)field).TextColumnName.Trim()))
+                        {
+                            string key = row[((TableBasedDropDownField)field).TextColumnName.Trim()].ToString();
+
+                            if (!freqValues.Contains(key))
+                            {
+                                freqValues.Add(key);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (useAllPossibleValues && IsUserDefinedColumn(freqVar))
+            {
+                List<IDashboardRule> rules = Rules.GetRules(freqVar);
+                foreach (IDashboardRule rule in rules)
+                {
+                    if (rule is Rule_Recode)
+                    {
+                        Rule_Recode recodeRule = rule as Rule_Recode;
+                        foreach (string s in recodeRule.GetToValues())
+                        {
+                            if (!freqValues.Contains(s))
+                            {
+                                freqValues.Add(s);
+                            }
+                        }
+                    }
+                    else if (rule is Rule_Format)
+                    {
+                        Rule_Format formatRule = rule as Rule_Format;
+
+                        if (formatRule.FormatType == FormatTypes.FullMonthName || formatRule.FormatType == FormatTypes.ShortMonthName)
+                        {
+                            DateTime[] dts = new DateTime[] { 
+                                new DateTime(2000, 1, 1) ,
+                                new DateTime(2000, 2, 1) ,
+                                new DateTime(2000, 3, 1) ,
+                                new DateTime(2000, 4, 1) ,
+                                new DateTime(2000, 5, 1) ,
+                                new DateTime(2000, 6, 1) ,
+                                new DateTime(2000, 7, 1) ,
+                                new DateTime(2000, 8, 1) ,
+                                new DateTime(2000, 9, 1) ,
+                                new DateTime(2000, 10, 1) ,
+                                new DateTime(2000, 11, 1) ,
+                                new DateTime(2000, 12, 1) ,
+                            };
+
+                            foreach (DateTime dt in dts)
+                            {
+                                string formattedValue = string.Format(System.Globalization.CultureInfo.CurrentCulture, formatRule.GetFormatString(), dt) + formatRule.Suffix;
+                                freqValues.Add(formattedValue);
+                            }
+                        }
+                        else if (formatRule.FormatType == FormatTypes.FullDayName || formatRule.FormatType == FormatTypes.ShortDayName)
+                        {
+                            DateTime[] dts = new DateTime[] { 
+                                new DateTime(2000, 1, 1) ,
+                                new DateTime(2000, 1, 2) ,
+                                new DateTime(2000, 1, 3) ,
+                                new DateTime(2000, 1, 4) ,
+                                new DateTime(2000, 1, 5) ,
+                                new DateTime(2000, 1, 6) ,
+                                new DateTime(2000, 1, 7) 
+                            };
+
+                            foreach (DateTime dt in dts)
+                            {
+                                string formattedValue = string.Format(System.Globalization.CultureInfo.CurrentCulture, formatRule.GetFormatString(), dt) + formatRule.Suffix;
+                                freqValues.Add(formattedValue);
+                            }
+                        }
+                    }
+                }
+            }
+
+            Dictionary<string, string> crosstabValues = new Dictionary<string, string>();
+            if (doCrossTab)
+            {
+                inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_CROSSTAB_VALUES);
+                crosstabValues = GetCrosstabValuesAsDictionary(crosstabVar, freqVar, includeMissing);
+
+                if (!inputs.ShouldIgnoreRowLimits && crosstabValues.Count > Frequency_Crosstab_Limit)
+                {
+                    string exMessage = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_CROSSTAB_VALUES, crosstabVar, crosstabValues.Count, Frequency_Crosstab_Limit);
+                    throw new ApplicationException(exMessage);
+                }
+            }
+
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CALCULATING_TOTALS);
+            foreach (Strata strataKvp in stratas)
+            {
+                if (inputs.IsRequestCancelled())
+                {
+                    return null;
+                }
+
+                double sum = -1;
+                double totalSum = 0;
+                DataTable freqTable = new DataTable(strataKvp.Filter);
+
+                if (valuesAreBool)
+                {
+                    freqTable.Columns.Add(freqVar, typeof(string));
+                }
+                else
+                {
+                    freqTable.Columns.Add(freqVar, mainTable.Columns[freqVar].DataType);
+                }
+                freqTable.Columns.Add("freq", typeof(double));
+
+                string nullColumnName = string.Empty;
+
+                foreach (string s in freqValues)
+                {
+                    //Stopwatch sw3 = new Stopwatch();
+                    //sw3.Start();
+
+                    if (inputs.IsRequestCancelled())
+                    {
+                        return null;
+                    }
+
+                    string value = s;
+                    string crosstabValue = string.Empty;
+
+                    string filter = string.Empty;
+                    string operand = " = ";
+
+                    if (doStratification)
+                    {
+                        filter = strataKvp.SafeFilter;
+                    }
+
+                    value = FormatValue(value, columnType);
+
+                    if (string.IsNullOrEmpty(s) && (includeMissing))
+                    {
+                        value = "is null";
+                        operand = string.Empty;
+                    }
+                    else if (string.IsNullOrEmpty(s))
+                    {
+                        continue;
+                    }
+
+                    if (columnType.Equals("System.DateTime"))
+                    {
+                        if (!value.Equals("is null"))
+                        {
+                            DateTime dateValue = DateTime.Parse(value.Trim('#'), System.Globalization.CultureInfo.CurrentCulture);
+                            value = "#" + dateValue.ToString("MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture) + "#";
+                        }
+                    }
+
+                    if (doStratification)
+                    {
+                        if (columnType.Equals("System.String") && value.ToLower().Equals("is null"))
+                        {
+                            filter = filter + " and " + "(" + AddBracketsToString(freqVar) + StringLiterals.SPACE + "= ''" + " or " + AddBracketsToString(freqVar) + StringLiterals.SPACE + operand + value + ")";
+                        }
+                        else
+                        {
+                            filter = filter + " and " + AddBracketsToString(freqVar) + StringLiterals.SPACE + operand + value;
+                        }
+                    }
+                    else
+                    {
+                        if (columnType.Equals("System.String") && value.ToLower().Equals("is null"))
+                        {
+                            filter = "(" + AddBracketsToString(freqVar) + StringLiterals.SPACE + "= ''" + " or " + AddBracketsToString(freqVar) + StringLiterals.SPACE + operand + value + ")";
+                        }
+                        else
+                        {
+                            filter = AddBracketsToString(freqVar) + StringLiterals.SPACE + operand + value;
+                        }
+                    }
+
+                    if (!doCrossTab)
+                    {
+                        if (string.IsNullOrEmpty(weightVar))
+                        {
+                            try
+                            {
+                                //Stopwatch sw2 = new Stopwatch();
+                                //sw2.Start();
+
+                                // special case because count(column) will never work with an 'is null' filter
+                                if (filter.EndsWith("is null"))
+                                {
+                                    // safe replacement in case column name includes "is null"
+                                    string originalFilter = filter;
+                                    string baseFilter = filter.Substring(0, filter.Length - 8);
+                                    baseFilter = baseFilter + StringLiterals.SPACE + "is not null";
+
+                                    string strataFilter = originalFilter;
+
+                                    if (strataFilter.EndsWith("is null"))
+                                    {
+                                        //sum = mainTable.Select(CombineFilters(filter)).Length;
+                                        DataView sumView = new DataView(mainTable, CombineFilters(filter, dv), string.Empty, DataViewRowState.CurrentRows);
+                                        sum = sumView.Count;
+                                    }
+                                    else
+                                    {
+                                        string strataFilter2 = baseFilter + " AND " + strataFilter;
+
+                                        double sumNotMissing = Convert.ToDouble(mainTable.Compute("count(" + AddBracketsToString(freqVar) + ")", CombineFilters(strataFilter2, dv)));
+                                        double sumTotal = Convert.ToDouble(mainTable.Compute("count(" + AddBracketsToString(strataKvp.SafeFilter) + ")", CombineFilters(strataFilter, dv)));
+                                        sum = sumTotal - sumNotMissing;
+                                    }
+                                }
+                                //else if (filter.ToLower().EndsWith("is null)"))
+                                //{
+                                //    // safe replacement in case column name includes "is null"
+                                //    string originalFilter = filter;
+                                //    string baseFilter = filter.Substring(0, filter.Length - 9);
+                                //    baseFilter = baseFilter + StringLiterals.SPACE + "is not null)";
+
+                                //    string strataFilter = originalFilter;
+
+                                //    if (strataFilter.EndsWith("is null)"))
+                                //    {
+                                //        //sum = mainTable.Select(CombineFilters(filter)).Length;
+                                //        DataView sumView = new DataView(mainTable, CombineFilters(filter, dv), string.Empty, DataViewRowState.CurrentRows);
+                                //        sum = sumView.Count;
+                                //    }
+                                //    else
+                                //    {
+                                //        string strataFilter2 = baseFilter + " AND " + strataFilter;
+
+                                //        double sumNotMissing = Convert.ToDouble(mainTable.Compute("count(" + AddBracketsToString(freqVar) + ")", CombineFilters(strataFilter2, dv)));
+                                //        double sumTotal = Convert.ToDouble(mainTable.Compute("count(" + AddBracketsToString(strataKvp.Key) + ")", CombineFilters(strataFilter, dv)));
+                                //        sum = sumTotal - sumNotMissing;
+                                //    }
+                                //}
+                                else
+                                {
+                                    string combinedFilter = CombineFilters(filter, dv);
+                                    sum = mainTable.Select(combinedFilter, "", DataViewRowState.CurrentRows).Length;
+
+                                    //DataView sumView = new DataView(mainTable, combinedFilter, "", DataViewRowState.CurrentRows);
+                                    //sum = sumView.Count;
+                                    //sum = Convert.ToDouble(mainTable.Compute("count(" + AddBracketsToString(freqVar) + ")", CombineFilters(filter, dv)));
+                                }
+
+                                //sw2.Stop();
+                                //Debug.Print("  Frequency value " + s + " finished computing count. Elapsed: " + sw2.Elapsed.Milliseconds);
+                            }
+                            catch (InvalidCastException)
+                            {
+                                sum = 0;
+                            }
+                            totalSum = totalSum + sum;
+                        }
+                        else
+                        {
+                            double trySum;
+                            bool success = double.TryParse(mainTable.Compute("sum(" + AddBracketsToString(weightVar) + ")", CombineFilters(filter, dv)).ToString(), out trySum);
+                            if (success)
+                            {
+                                sum = trySum;
+                            }
+                            else
+                            {
+                                sum = 0;
+                            }
+                            totalSum = totalSum + sum;
+                        }
+
+                        value = s;
+
+                        if (valuesAreBool)
+                        {
+                            value = RecodeBooleanToYesNo(s);
+                        }
+
+                        if (string.IsNullOrEmpty(value))
+                        {
+                            freqTable.Rows.Add(DBNull.Value, sum);
+                        }
+                        else
+                        {
+                            freqTable.Rows.Add(value, sum);
+                        }
+                    }
+                    // end if for !doCrosstab
+                    else
+                    {
+                        if (freqTable.Rows.Count == 0)
+                        {
+                            freqTable = new DataTable(strataKvp.Filter);
+
+                            if (valuesAreBool)
+                            {
+                                freqTable.Columns.Add(freqVar, typeof(string));
+                            }
+                            else
+                            {
+                                freqTable.Columns.Add(freqVar, mainTable.Columns[freqVar].DataType);
+                            }
+
+                            // do cross-tab
+                            foreach (KeyValuePair<string, string> csKvp in crosstabValues)
+                            {
+                                if (inputs.IsRequestCancelled())
+                                {
+                                    return null;
+                                }
+
+                                freqTable.Columns.Add(csKvp.Value, typeof(double));
+                                if (string.IsNullOrEmpty(csKvp.Value))
+                                {
+                                    nullColumnName = freqTable.Columns[freqTable.Columns.Count - 1].ColumnName;
+                                }
+                            }
+                        }
+
+                        value = s;
+
+                        if (valuesAreBool)
+                        {
+                            value = RecodeBooleanToYesNo(s);
+                        }
+
+                        if (string.IsNullOrEmpty(value))
+                        {
+                            freqTable.Rows.Add(DBNull.Value);
+                        }
+                        else
+                        {
+                            freqTable.Rows.Add(value);
+                        }
+
+                        string originalFilter = filter;
+
+                        freqTable.Rows[freqTable.Rows.Count - 1].BeginEdit();
+
+                        foreach (KeyValuePair<string, string> csKvp in crosstabValues)
+                        {
+                            if (inputs.IsRequestCancelled())
+                            {
+                                return null;
+                            }
+
+                            crosstabValue = csKvp.Key;
+                            crosstabValue = FormatValue(crosstabValue, crosstabColumnType);
+
+                            if (string.IsNullOrEmpty(crosstabValue) || crosstabValue.Equals("''"))
+                            {
+                                if (crosstabColumnType.Equals("System.String"))
+                                {
+                                    filter = originalFilter + " and (" + AddBracketsToString(crosstabVar) + " = '' or " + AddBracketsToString(crosstabVar) + " is null)";
+                                }
+                                else
+                                {
+                                    filter = originalFilter + " and " + AddBracketsToString(crosstabVar) + " is null";
+                                }
+                            }
+                            else
+                            {
+                                filter = originalFilter + " and " + AddBracketsToString(crosstabVar) + " = " + crosstabValue;
+                            }
+
+                            if (filter.StartsWith(" and "))
+                            {
+                                filter = filter.Remove(0, 4);
+                            }
+
+                            if (string.IsNullOrEmpty(weightVar))
+                            {
+                                try
+                                {
+                                    sum = mainTable.Select(CombineFilters(filter, dv), "", DataViewRowState.CurrentRows).Length;
+                                    //DataView sumView = new DataView(mainTable, CombineFilters(filter, dv), string.Empty, DataViewRowState.CurrentRows);
+                                    //sum = sumView.Count;
+                                }
+                                catch (InvalidCastException)
+                                {
+                                    sum = 0;
+                                }
+                                totalSum = totalSum + sum;
+                            }
+                            else
+                            {
+                                double trySum;
+                                bool success = double.TryParse(mainTable.Compute("sum(" + AddBracketsToString(weightVar) + ")", CombineFilters(filter, dv)).ToString(), out trySum);
+                                if (success)
+                                {
+                                    sum = trySum;
+                                }
+                                else
+                                {
+                                    sum = 0;
+                                }
+                                totalSum = totalSum + sum;
+                            }
+
+                            int lastRowAdded = freqTable.Rows.Count - 1;
+                            if (!string.IsNullOrEmpty(csKvp.Value))
+                            {
+                                freqTable.Rows[lastRowAdded][csKvp.Value] = sum;
+                            }
+                            else
+                            {
+                                freqTable.Rows[lastRowAdded][nullColumnName] = sum;
+                            }
+                        }
+                        freqTable.Rows[freqTable.Rows.Count - 1].EndEdit();
+                    }
+
+                    //sw3.Stop();
+                    //Debug.Print(" Frequency value " + s + " finished processing. Elapsed: " + sw3.Elapsed.Milliseconds);
+                }
+
+                if (!string.IsNullOrEmpty(nullColumnName))
+                {
+                    freqTable.Columns[nullColumnName].ColumnName = Config.Settings.RepresentationOfMissing;
+                }
+
+                DataTable sortedFreqTable = new DataTable();
+
+                if (sortHighToLow && string.IsNullOrEmpty(crosstabVar))
+                {
+                    sortedFreqTable = SortHighToLow(freqTable, freqTable.Columns["freq"]);
+                }
+                else
+                {
+                    sortedFreqTable = SortBySingleColumn(freqTable, freqTable.Columns[freqVar]);
+                }
+
+                if (inputs.IsRequestCancelled())
+                {
+                    return null;
+                }
+
+                List<DescriptiveStatistics> descriptiveStatistics = new List<DescriptiveStatistics>();
+
+                // do means
+                if (doMeans && includeFullSummaryStatistics)
+                {
+                    string outerFilter = string.Empty;
+                    if (doStratification)
+                    {
+                        outerFilter = strataKvp.SafeFilter;
+                    }
+                    if (doCrossTab)
+                    {
+                        foreach (KeyValuePair<string, string> csKvp in crosstabValues)
+                        {
+                            if (inputs.IsRequestCancelled())
+                            {
+                                return null;
+                            }
+
+                            string crosstabValue = csKvp.Key;
+                            crosstabValue = FormatValue(crosstabValue, crosstabColumnType);
+
+                            string filter = outerFilter + " and " + AddBracketsToString(crosstabVar) + " = " + crosstabValue;
+                            if (filter.StartsWith(" and "))
+                            {
+                                filter = filter.Remove(0, 4);
+                            }
+                            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CALCULATING_DESCRIPTIVE_STATISTICS);
+                            DataTable filteredTable = GenerateTable(inputs);
+                            DescriptiveStatistics means = DoMeansforMap(inputs, filteredTable, freqTable, filter, outerFilter);
+                            //if (means.observations > -1)
+                            //{
+                            descriptiveStatistics.Add(means);
+                            //}
+                        }
+
+                        bool showAnova = true;
+
+                        if (inputs.InputVariableList.ContainsKey("showanova"))
+                        {
+                            bool.TryParse(inputs.InputVariableList["showanova"], out showAnova);
+                        }
+                        //Don't do the ANOVA statistics if any crosstab values have zero observations (Classic Analysis does the same)
+                        foreach (DescriptiveStatistics stats in descriptiveStatistics)
+                            if (stats.observations == 0.0)
+                                showAnova = false;
+
+                        if (crosstabValues.Count >= 2 && crosstabValues.Count <= 127 && showAnova)
+                        {
+                            ////////////////////////////////////////////
+                            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CALCULATING_DESCRIPTIVE_STATISTICS_ADVANCED);
+
+                            List<double> observations = new List<double>();
+                            List<double> unweightedObservations = new List<double>();
+                            List<double> avgs = new List<double>();
+                            List<double> vars = new List<double>();
+                            double grandMean = 0;
+                            double grandTotal = 0;
+                            double unweightedTotal = 0;
+                            int crosstabs = 0;
+                            foreach (DescriptiveStatistics stats in descriptiveStatistics)
+                            {
+                                if (stats.mean > -1)
+                                {
+                                    observations.Add(stats.observations);
+                                    unweightedObservations.Add(stats.unweightedObservations);
+                                    grandTotal += stats.observations;
+                                    unweightedTotal += stats.unweightedObservations;
+                                    avgs.Add(stats.mean.Value);
+                                    vars.Add(stats.variance.Value);
+                                    grandMean = stats.grandMean.Value;
+
+                                    crosstabs++;
+                                }
+                            }
+                            DescriptiveStatistics ds = descriptiveStatistics[0];
+                            ds.ssBetween = CalculateSSBetween(grandMean, observations, avgs);
+                            ds.dfBetween = crosstabs - 1;
+                            ds.msBetween = ds.ssBetween / ds.dfBetween;
+                            ds.ssWithin = CalculateSSWithin(observations, vars);
+                            ds.dfWithin = grandTotal - crosstabs;
+                            ds.dfError = unweightedTotal - crosstabs;
+                            ds.msWithin = ds.ssWithin / ds.dfWithin;
+                            ds.fStatistic = ds.msBetween / ds.msWithin;
+                            ds.anovaPValue = new StatisticsRepository.statlib().PfromF(ds.fStatistic.Value, ds.dfBetween.Value, ds.dfError.Value);
+                            ds.chiSquare = CalculateChiSquare(ds.dfWithin.Value, ds.msWithin.Value, observations, vars);
+                            ds.bartlettPValue = new StatisticsRepository.statlib().PfromX2(ds.chiSquare.Value, ds.dfBetween.Value);
+                            ds.crosstabs = crosstabs;
+
+                            if (crosstabs == 2 && ds.dfBetween.HasValue && ds.anovaPValue.HasValue)
+                            {
+                                // do T-Statistics
+                                ds.SatterthwaiteDF = Math.Pow(vars[0] / observations[0] + vars[1] / observations[1], 2.0) / (1.0 / (unweightedObservations[0] - 1.0) * Math.Pow(vars[0] / observations[0], 2.0) + 1.0 / (unweightedObservations[1] - 1.0) * Math.Pow(vars[1] / observations[1], 2.0));
+                                double SEu = Math.Sqrt(vars[0] / observations[0] + vars[1] / observations[1]);
+                                ds.SatterthwaiteDF = Math.Pow(SEu, 4.0) / (1.0 / (unweightedObservations[0] - 1.0) * Math.Pow(vars[0] / observations[0], 2.0) + 1.0 / (unweightedObservations[1] - 1.0) * Math.Pow(vars[1] / observations[1], 2.0));
+                                ds.meansDiff = avgs[0] - avgs[1];
+                                ds.stdDevDiff = Math.Sqrt(((unweightedObservations[0] - 1) * vars[0] + (unweightedObservations[1] - 1) * vars[1]) / (unweightedObservations[0] + unweightedObservations[1] - 2));
+                                ds.df = (int)unweightedObservations[0] + (int)unweightedObservations[1] - 2;
+                                short shortDF = (short)ds.df;
+                                double tProbability = 0.05;
+                                double? intervalLength = new StatisticsRepository.statlib().TfromP(ref tProbability, ref shortDF) * ds.stdDevDiff * Math.Sqrt(1 / observations[0] + 1 / observations[1]);
+                                ds.tStatistic = ds.meansDiff / (ds.stdDevDiff * Math.Sqrt(1.0 / observations[0] + 1.0 / observations[1]));
+                                ds.pEqual = 2.0 * Epi.Statistics.SharedResources.PFromT(ds.tStatistic, (int)ds.df);
+                                ds.tStatisticUnequal = ds.meansDiff / SEu;
+                                double pUnequalLower = 2.0 * Epi.Statistics.SharedResources.PFromT(ds.tStatisticUnequal, (int)Math.Ceiling(ds.SatterthwaiteDF));
+                                double pUnequalUpper = 2.0 * Epi.Statistics.SharedResources.PFromT(ds.tStatisticUnequal, (int)Math.Floor(ds.SatterthwaiteDF));
+                                ds.pUneqal = pUnequalLower + (ds.SatterthwaiteDF - Math.Floor(ds.SatterthwaiteDF)) * (pUnequalUpper - pUnequalLower);
+                                short shortDFCeiling = (short)(int)Math.Ceiling(ds.SatterthwaiteDF);
+                                short shortDFFloor = (short)(int)Math.Floor(ds.SatterthwaiteDF);
+                                double? unEqualIntervalTLower = new StatisticsRepository.statlib().TfromP(ref tProbability, ref shortDFCeiling);
+                                double? unEqualIntervalTUpper = new StatisticsRepository.statlib().TfromP(ref tProbability, ref shortDFFloor);
+                                double unEqualIntervalT = (double)unEqualIntervalTLower + (ds.SatterthwaiteDF - Math.Floor(ds.SatterthwaiteDF)) * (double)(unEqualIntervalTUpper - unEqualIntervalTLower);
+
+                                ds.equalLCLMean = ds.meansDiff - (double)intervalLength;
+                                ds.equalUCLMean = ds.meansDiff + (double)intervalLength;
+                                ds.unequalLCLMean = ds.meansDiff - SEu * unEqualIntervalT;
+                                ds.unequalUCLMean = ds.meansDiff + SEu * unEqualIntervalT;
+                            }
+
+                            string nullFilter = AddBracketsToString(freqVar) + " is not null";
+                            string weightFilter = AddBracketsToString(weightVar) + " is not null";
+                            string crosstabFilter = AddBracketsToString(crosstabVar) + " is not null";
+                            string crosstabVarType = GetColumnType(crosstabVar);
+                            if (GetColumnType(crosstabVar).Equals("System.String"))
+                            {
+                                crosstabFilter = crosstabFilter + " and not " + AddBracketsToString(crosstabVar) + " = ''";
+                            }
+                            string fullFilter = string.Empty;
+                            if (string.IsNullOrEmpty(outerFilter))
+                            {
+                                fullFilter = nullFilter;
+                            }
+                            else
+                            {
+                                fullFilter = outerFilter + " and " + nullFilter;
+                            }
+
+                            if (!string.IsNullOrEmpty(weightVar))
+                            {
+                                if (string.IsNullOrEmpty(fullFilter))
+                                {
+                                    fullFilter = weightFilter;
+                                }
+                                else
+                                {
+                                    fullFilter = fullFilter + " and " + weightFilter;
+                                }
+                            }
+
+                            if (!string.IsNullOrEmpty(crosstabVar))
+                            {
+                                if (string.IsNullOrEmpty(fullFilter))
+                                {
+                                    fullFilter = crosstabVar;
+                                }
+                                else
+                                {
+                                    fullFilter = fullFilter + " and " + crosstabFilter;
+                                }
+                            }
+
+                            GadgetParameters newInputs = new GadgetParameters();
+                            newInputs.ShouldIncludeFullSummaryStatistics = false;
+                            newInputs.ShouldIncludeMissing = false;
+                            newInputs.ShouldIgnoreRowLimits = true;
+                            newInputs.MainVariableName = freqVar;
+                            if (!string.IsNullOrEmpty(inputs.CustomFilter.Trim()))
+                            {
+                                newInputs.CustomFilter = inputs.CustomFilter.Trim() + " and " + fullFilter;
+                            }
+                            else
+                            {
+                                newInputs.CustomFilter = fullFilter;
+                            }
+                            if (!string.IsNullOrEmpty(weightVar))
+                            {
+                                newInputs.WeightVariableName = weightVar;
+                            }
+
+                            DataTable freqHorizontal = ExtractFirstFrequencyTable(this.GenerateFrequencyTable(newInputs));
+
+                            newInputs = new GadgetParameters();
+                            newInputs.ShouldIncludeFullSummaryStatistics = false;
+                            newInputs.ShouldIncludeMissing = false;
+                            newInputs.ShouldIgnoreRowLimits = true;
+                            newInputs.MainVariableName = crosstabVar;
+                            if (!string.IsNullOrEmpty(inputs.CustomFilter.Trim()))
+                            {
+                                newInputs.CustomFilter = inputs.CustomFilter.Trim() + " and " + fullFilter;
+                            }
+                            else
+                            {
+                                newInputs.CustomFilter = fullFilter;
+                            }
+                            if (!string.IsNullOrEmpty(weightVar))
+                            {
+                                newInputs.WeightVariableName = weightVar;
+                            }
+
+                            //Debug.Print("Horizontal");
+                            //foreach (DataRow r in freqHorizontal.Rows)
+                            //{
+                            //    string line = string.Empty;
+                            //    foreach (object dstr in r.ItemArray)
+                            //    {
+                            //        line = line + dstr.ToString() + "  ";
+                            //    }
+                            //    Debug.Print(line);
+                            //}
+
+                            DataTable freqVertical = ExtractFirstFrequencyTable(this.GenerateFrequencyTable(newInputs));
+
+                            //Debug.Print("---");
+
+                            //Debug.Print("Vertical");
+                            //foreach (DataRow r in freqVertical.Rows)
+                            //{
+                            //    string line = string.Empty;
+                            //    foreach (object dstr in r.ItemArray)
+                            //    {
+                            //        line = line + dstr.ToString() + "  ";
+                            //    }
+                            //    Debug.Print(line);
+                            //}
+
+                            List<List<object>> allLocalFreqs = ConvertTableToListOfLists(freqTable);
+
+                            if (freqHorizontal != null && freqVertical != null)
+                            {
+                                ds.kruskalWallisH = CalculateKruskalWallisH(freqHorizontal, freqVertical, allLocalFreqs, grandTotal);
+                                ds.kruskalPValue = new StatisticsRepository.statlib().PfromX2(ds.kruskalWallisH.Value, ds.dfBetween.Value);
+                            }
+                            descriptiveStatistics[0] = ds;
+                            ////////////////////////////////////////////
+                        }
+                    }
+                    else
+                    {
+                        inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CALCULATING_DESCRIPTIVE_STATISTICS);
+                        DataTable filteredTable = GenerateTable(inputs);
+                        DescriptiveStatistics means = DoMeansforMap(inputs, filteredTable, freqTable, outerFilter, string.Empty);
+                        if (means.observations == -1)
+                        {
+                            return null;
+                        }
+                        descriptiveStatistics.Add(means);
+                    }
+                } // end if doMeans && includeFullSummaryStats
+                else
+                {
+                    DescriptiveStatistics means = new DescriptiveStatistics();
+                    means.observations = totalSum;
+                    descriptiveStatistics.Add(means);
+                }
+
+                #region Debug
+                //System.Diagnostics.Debug.Print(sortedFreqTable.TableName);
+                //for (int i = 0; i < sortedFreqTable.Rows.Count; i++)
+                //{
+                //    string line = string.Empty;
+                //    for (int j = 0; j < sortedFreqTable.Columns.Count; j++)
+                //    {
+                //        line = line + sortedFreqTable.Rows[i][j].ToString() + " ";
+                //    }
+                //System.Diagnostics.Debug.Print(line);
+                //}
+                //System.Diagnostics.Debug.Print(string.Empty);
+                #endregion // Debug
+
+                if (inputs != null && inputs.ShouldShowCommentLegalLabels && field != null && field is DDLFieldOfCommentLegal)
+                {
+                    AddCommentLegalLabelsToFreqTable(sortedFreqTable, freqVar, crosstabVar);
+                }
+                else if (inputs != null && inputs.ShouldShowCommentLegalLabels && field != null && field is OptionField)
+                {
+                    AddOptionLabelsToFreqTable(sortedFreqTable);
+                }
+
+                stratifiedFrequencyTables.Add(sortedFreqTable, descriptiveStatistics);
+                string processedStatusMessage = string.Format(SharedStrings.DASHBOARD_GADGET_STATUS_PROCESSED_TABLES, stratifiedFrequencyTables.Count.ToString());
+                inputs.UpdateGadgetStatus(processedStatusMessage);
+            } // end foreach strata
+
+            //sw1.Stop();
+            //Debug.Print("Done processing GenerateFrequenyTable. Elapsed: " + sw1.Elapsed.TotalMilliseconds);
+
+            return stratifiedFrequencyTables;
+        }
+
         /// <summary>
         /// Extracts the first frequency table from a dictionary of table-list of statistics pairs
         /// </summary>
@@ -8064,6 +9181,392 @@ namespace EpiDashboard
                 DataView sortedDv = new DataView(table, filter, table.Columns[freqVar].ToString(), DataViewRowState.CurrentRows);
 
                 if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
+                {
+                    means.observations = -1;
+                    return means;
+                }
+
+                means.observations = Convert.ToDouble(/*sortedFilteredTable*/table.Compute("count(" + safeFreqVar + ")", filter));
+                means.unweightedObservations = means.observations;
+                means.mode = 0;
+
+                if (includeFullSummaryStatistics)
+                {
+                    try
+                    {
+                        means.sum = Convert.ToDouble(/*sortedFilteredTable*/table.Compute("sum(" + safeFreqVar + ")", filter));
+                        means.min = Convert.ToDouble(/*sortedFilteredTable*/table.Compute("min(" + safeFreqVar + ")", filter));
+                        means.max = Convert.ToDouble(/*sortedFilteredTable*/table.Compute("max(" + safeFreqVar + ")", filter));
+                        means.mean = means.sum / means.observations;
+
+                        string grandMeanFilter = outerFilter;
+
+                        if (!string.IsNullOrEmpty(crosstabVar))
+                        {
+                            grandMeanFilter = grandMeanFilter + " and " + safeCrosstabVar + " is not null";
+
+                            if (GetColumnType(freqVar).Equals("System.Byte") || GetColumnType(freqVar).Equals("System.Int16") || GetColumnType(freqVar).Equals("System.Int32"))
+                            {
+                                DataTable copyOfTable = table.Clone();
+                                DataColumn dc = copyOfTable.Columns[freqVar];
+
+                                if (dc.DataType.ToString().Equals("System.Byte") || dc.DataType.ToString().Equals("System.Int16") || GetColumnType(freqVar).Equals("System.Int32"))
+                                {
+                                    dc.DataType = typeof(decimal);
+                                }
+
+                                foreach (DataRow row in table.Rows)
+                                {
+                                    copyOfTable.ImportRow(row);
+                                }
+
+                                DataTable tempTable = copyOfTable.Select(grandMeanFilter, string.Empty).CopyToDataTable().DefaultView.ToTable(copyOfTable.TableName);
+                                means.grandMean = Convert.ToDouble(tempTable.Compute("avg(" + safeFreqVar + ")", string.Empty));
+                            }
+                            else
+                            {
+                                // Commented out here is the old way of getting the grand mean... necessary, probably because Compute() isn't returning the right values in some instances
+                                //DataTable tempTable = table.Select(grandMeanFilter, string.Empty).CopyToDataTable().DefaultView.ToTable(table.TableName);
+                                //means.grandMean = Convert.ToDouble(tempTable.Compute("avg(" + safeFreqVar + ")", string.Empty));
+
+                                // Todo: Find a better way of getting the mean, this is not efficient
+                                double total = 0;
+                                DataView avgDataView = new DataView(table, grandMeanFilter, string.Empty, DataViewRowState.CurrentRows);
+                                foreach (DataRowView dataRowView in avgDataView)
+                                {
+                                    DataRow row = dataRowView.Row;
+                                    double value;
+                                    bool success = double.TryParse(row[freqVar].ToString(), out value);
+                                    if (success)
+                                    {
+                                        total = total + value;
+                                    }
+                                }
+
+                                means.grandMean = total / (double)avgDataView.Count;
+                            }
+                        }
+                        else
+                        {
+                            means.grandMean = means.mean;
+                        }
+                    }
+                    catch (InvalidCastException)
+                    {
+                        // do nothing
+                    }
+                    try
+                    {
+                        DataColumn varCalcColumn = new DataColumn();
+                        varCalcColumn.DataType = typeof(double);
+                        varCalcColumn.ColumnName = "___varcalc___";
+
+                        varCalcColumn.Expression = "(" + safeFreqVar + "*" + safeFreqVar + ")";
+                        table.Columns.Add(varCalcColumn);
+
+                        double sumOfSquares = Convert.ToDouble(table.Compute("sum(" + varCalcColumn.ColumnName + ")", filter));
+                        means.variance = (sumOfSquares - means.sum * means.mean) / (means.observations - 1);
+
+
+                        table.Columns.Remove(varCalcColumn.ColumnName);
+
+                        if (means.variance != null)
+                        {
+                            means.stdDev = Math.Sqrt((double)means.variance);
+                            means.stdError = means.stdDev / Math.Sqrt((double)means.observations);
+                            means.tZero = means.mean / means.stdError;
+                            means.tZeroP = 2.0 * Epi.Statistics.SharedResources.PFromT((double)means.tZero, (int)means.observations - 1);
+                        }
+
+                    }
+                    catch (InvalidCastException)
+                    {
+                        // do nothing
+                    }
+
+                    if (sortedDv.Count >= 1)
+                    {
+                        double quartileResult = 0;
+
+                        // odd number of rows
+                        if (((double)sortedDv.Count / 2.0) % 1 > 0)
+                        {
+                            int medianPosition = (sortedDv.Count / 2);
+
+                            means.median = Convert.ToDouble(sortedDv[medianPosition].Row[freqVar]);
+
+                            quartileResult = (double)sortedDv.Count / 4.0;
+                        }
+                        else if (sortedDv.Count > 1)
+                        {
+                            int lowerMedianPosition = (sortedDv.Count / 2) - 1;
+                            int upperMedianPosition = (sortedDv.Count / 2);
+                            means.median = (Convert.ToDouble(sortedDv[lowerMedianPosition].Row[freqVar])
+                                +
+                                Convert.ToDouble(sortedDv[upperMedianPosition].Row[freqVar])) / 2.0;
+
+                            quartileResult = (double)sortedDv.Count / 4.0;
+                        }
+
+                        if (((double)sortedDv.Count / 4.0) % 1 > 0)
+                        {
+                            int q1Position = (int)quartileResult;
+                            means.q1 = Convert.ToDouble(sortedDv[q1Position].Row[freqVar]/*sortedFilteredTable.Rows[q1Position][freqVar]*/);
+                            means.q3 = Convert.ToDouble(sortedDv[sortedDv.Count - 1 - q1Position].Row[freqVar]
+                                /*sortedFilteredTable.Rows[sortedFilteredTable.Rows.Count - 1 - q1Position][freqVar]*/);
+                        }
+                        else
+                        {
+                            int lowerQ1Position = ((int)quartileResult) - 1;
+                            int upperQ1Position = ((int)quartileResult);
+                            means.q1 = (Convert.ToDouble(sortedDv[lowerQ1Position].Row[freqVar]) + Convert.ToDouble(sortedDv[upperQ1Position].Row[freqVar])) / 2.0;
+                            means.q3 = (Convert.ToDouble(sortedDv[sortedDv.Count - 1 - lowerQ1Position].Row[freqVar]) + Convert.ToDouble(sortedDv[sortedDv.Count - 1 - upperQ1Position].Row[freqVar])) / 2.0;
+                        }
+
+                        means.mode = GetMode(/*sortedFilteredTable, freqVar, string.Empty*/sortedDv, freqVar);
+                    }
+                    //else
+                    //{
+                    //    means.median = (Convert.ToDouble(sortedFilteredTable.Rows[0][freqVar]) + Convert.ToDouble(sortedFilteredTable.Rows[0][freqVar])) / 2;
+                    //    means.q1 = means.median;
+                    //    means.q3 = means.median;
+                    //    means.mode = means.median;
+                    //}
+                }
+
+                //sw1.Stop();
+                //Debug.Print("DoMeans took " + sw1.Elapsed.ToString() + " seconds to complete.");
+            }
+            return means;
+        }
+
+        /// <summary>
+        /// Calculates various numeric statistics for a given frequency variable and filter criteria
+        /// </summary>
+        /// <param name="inputs">The gadget paramters</param>
+        /// <param name="table">The overall set of data to be processed</param>
+        /// <param name="freqTable">The frequencies of the data values for the frequency column</param>
+        /// <param name="filter">Any filter parameters to apply</param>
+        /// <param name="outerFilter">Outer filter</param>
+        /// <returns>DescriptiveStatistics</returns>
+        private DescriptiveStatistics DoMeansforMap(GadgetParameters inputs, DataTable table, DataTable freqTable, string filter, string outerFilter)
+        {
+            DescriptiveStatistics means = new DescriptiveStatistics();
+
+            string freqVar = inputs.MainVariableName;
+            string weightVar = inputs.WeightVariableName;
+            string crosstabVar = inputs.CrosstabVariableName;
+            bool includeFullSummaryStatistics = inputs.ShouldIncludeFullSummaryStatistics;
+
+            string safeFreqVar = AddBracketsToString(freqVar);
+            string safeWeightVar = AddBracketsToString(weightVar);
+            string safeCrosstabVar = AddBracketsToString(crosstabVar);
+
+            if (string.IsNullOrEmpty(filter))
+            {
+                filter = safeFreqVar + " is not null";
+            }
+            else
+            {
+                filter = filter + " and " + safeFreqVar + " is not null";
+            }
+
+            if (!string.IsNullOrEmpty(outerFilter))
+            {
+                outerFilter = outerFilter + " and " + safeFreqVar + " is not null";
+            }
+            else
+            {
+                outerFilter = safeFreqVar + " is not null";
+            }
+
+            if (!string.IsNullOrEmpty(weightVar))
+            {
+                DataTable sortedFilteredTable = SortBySingleColumn(table, table.Columns[weightVar]);
+
+                if (inputs.IsRequestCancelled())
+                {
+                    means.observations = -1;
+                    return means;
+                }
+
+                try
+                {
+                    means.observations = Convert.ToDouble(sortedFilteredTable.Compute("sum(" + safeWeightVar + ")", filter));
+                }
+                catch (InvalidCastException)
+                {
+                    means.observations = 0;
+                    return means;
+                }
+
+                if (includeFullSummaryStatistics)
+                {
+                    DataColumn squaresColumn = new DataColumn();
+                    squaresColumn.DataType = typeof(double);
+                    squaresColumn.ColumnName = "___squares___";
+                    squaresColumn.Expression = safeWeightVar + "*" + safeFreqVar;
+                    sortedFilteredTable.Columns.Add(squaresColumn);
+
+                    means.sum = Convert.ToDouble(sortedFilteredTable.Compute("sum(" + AddBracketsToString(squaresColumn.ColumnName) + ")", filter));
+                    means.min = Convert.ToDouble(sortedFilteredTable.Compute("min(" + safeFreqVar + ")", filter));
+                    means.max = Convert.ToDouble(sortedFilteredTable.Compute("max(" + safeFreqVar + ")", filter));
+                    means.mean = means.sum / means.observations;
+
+                    double grandObservations = Convert.ToDouble(sortedFilteredTable.Compute("sum(" + safeWeightVar + ")", outerFilter));
+                    double grandSum = Convert.ToDouble(sortedFilteredTable.Compute("sum(" + AddBracketsToString(squaresColumn.ColumnName) + ")", outerFilter));
+
+                    //means.grandMean = Convert.ToDouble(sortedFilteredTable.Compute("avg(" + AddBracketsToString(squaresColumn.ColumnName) + ")", outerFilter));
+
+                    means.grandMean = grandSum / grandObservations; //Convert.ToDouble(sortedFilteredTable.Select(outerFilter, string.Empty).CopyToDataTable().DefaultView.ToTable(sortedFilteredTable.TableName).Compute("avg(" + AddBracketsToString(freqVar) + ")", string.Empty));
+
+                    DataColumn varCalcColumn = new DataColumn();
+                    varCalcColumn.DataType = typeof(double);
+                    varCalcColumn.ColumnName = "___varcalc___";
+                    varCalcColumn.Expression = "((" + safeFreqVar + "*" + safeFreqVar + ") * " + safeWeightVar + ")";
+                    sortedFilteredTable.Columns.Add(varCalcColumn);
+
+                    //double sumOfSquares = Convert.ToDouble(sortedFilteredTable.Compute("sum(" + varCalcColumn.ColumnName + ")", filter));
+                    double sumOfSquares = 0.0;
+                    double mean = means.mean.Value;
+                    int k = 0;
+                    foreach (System.Data.DataRow row in sortedFilteredTable.Select(filter, safeFreqVar + " ASC"  /*,  freqVar + " ASC"*/))
+                    {
+                        double temp;
+                        double.TryParse(row[freqVar].ToString(), out temp);
+                        double currentCount;
+
+                        double.TryParse(row[weightVar].ToString(), out currentCount);
+
+                        sumOfSquares += Math.Pow(temp - mean, 2) * currentCount;
+                        k++;
+                    }
+
+                    //variance = Sum_Sqr / (i - 1);
+
+                    means.variance = sumOfSquares / (k - 1); //(sumOfSquares - means.sum * means.mean) / (means.observations - 1);
+                    means.unweightedObservations = (double)k;
+
+
+                    if (means.variance != null)
+                    {
+                        means.stdDev = Math.Sqrt((double)means.variance);
+                    }
+
+                    //DataRow[] rows = freqTable.Select("freq > 0", freqVar + " ASC");
+                    //DataRow[] rows = table.Select(filter, freqVar + " ASC");
+                    DataRow[] rows = sortedFilteredTable.Select(filter, safeFreqVar + " ASC"  /*,  freqVar + " ASC"*/);
+
+                    DataTable weightTable = new DataTable();
+                    DataColumn countColumn = new DataColumn();
+                    countColumn.DataType = typeof(double);
+                    countColumn.ColumnName = "___count___";
+                    weightTable.Columns.Add(countColumn);
+
+                    int rowCounter = 0;
+                    foreach (System.Data.DataRow row in rows)
+                    {
+                        if (!string.IsNullOrEmpty(row[weightVar].ToString()))
+                        {
+                            double frequencyValue;
+
+                            bool successValue = double.TryParse(row[freqVar].ToString(), out frequencyValue);
+
+                            double weightValue = 1;
+                            bool successWeight = double.TryParse(row[weightVar].ToString(), out weightValue);
+
+                            if (successWeight && successValue)
+                            {
+                                rowCounter++;
+                                for (double i = 0; i < weightValue; i++)
+                                {
+                                    weightTable.Rows.Add(frequencyValue);
+                                }
+                            }
+                        }
+                    }
+
+                    rows = weightTable.Select(string.Empty, countColumn.ColumnName + " ASC");
+
+                    double quartileResult = 0;
+
+                    // odd number of rows
+                    if (((double)rows.Length / 2.0) % 1 > 0)
+                    {
+                        int medianPosition = (rows.Length / 2);
+                        means.median = Convert.ToDouble(rows[medianPosition][countColumn.ColumnName]);
+
+                        quartileResult = (double)rows.Length / 4.0;
+                    }
+                    else if (rows.Length > 1)
+                    {
+                        int lowerMedianPosition = (rows.Length / 2) - 1;
+                        int upperMedianPosition = (rows.Length / 2);
+                        means.median = (Convert.ToDouble(rows[lowerMedianPosition][countColumn.ColumnName]) + Convert.ToDouble(rows[upperMedianPosition][countColumn.ColumnName])) / 2.0;
+
+                        quartileResult = (double)rows.Length / 4.0;
+                    }
+
+                    // odd number of rows in halves
+                    if ((quartileResult / 2.0) % 1 > 0)
+                    {
+                        int q1Position = (int)quartileResult;
+                        means.q1 = Convert.ToDouble(rows[q1Position][countColumn.ColumnName]);
+                        means.q3 = Convert.ToDouble(rows[rows.Length - 1 - q1Position][countColumn.ColumnName]);
+                    }
+                    else
+                    {
+                        int lowerQ1Position = ((int)quartileResult) - 1;
+                        int upperQ1Position = ((int)quartileResult);
+                        means.q1 = (Convert.ToDouble(rows[lowerQ1Position][countColumn.ColumnName]) + Convert.ToDouble(rows[upperQ1Position][countColumn.ColumnName])) / 2.0;
+                        means.q3 = (Convert.ToDouble(rows[rows.Length - 1 - lowerQ1Position][countColumn.ColumnName]) + Convert.ToDouble(rows[rows.Length - 1 - upperQ1Position][countColumn.ColumnName])) / 2.0;
+                    }
+
+                    DataTable modeTable = weightTable.Clone();
+
+                    foreach (DataRow row in weightTable.Rows)
+                    {
+                        modeTable.Rows.Add(row.ItemArray);
+                    }
+
+                    means.mode = GetMode(new DataView(modeTable), countColumn.ColumnName);
+
+                    sortedFilteredTable.Columns.Remove(squaresColumn.ColumnName);
+                    sortedFilteredTable.Columns.Remove(varCalcColumn.ColumnName);
+                }
+            }
+            else
+            {
+                //Stopwatch sw1 = new Stopwatch();
+                //sw1.Start();
+
+                //DataRow[] rowArray = table.Select(filter, string.Empty);
+
+                DataView dv = new DataView(table, filter, string.Empty, DataViewRowState.CurrentRows);
+
+                if (dv.Count == 0)
+                {
+                    return means;
+                }
+
+                if (inputs.IsRequestCancelled())
+                {
+                    means.observations = -1;
+                    return means;
+                }
+
+                //DataTable filteredTable = rowArray.CopyToDataTable().DefaultView.ToTable(table.TableName);
+
+                if (inputs.IsRequestCancelled())
+                {
+                    means.observations = -1;
+                    return means;
+                }
+
+                //DataTable sortedFilteredTable = SortBySingleColumn(filteredTable, filteredTable.Columns[freqVar]);
+                DataView sortedDv = new DataView(table, filter, table.Columns[freqVar].ToString(), DataViewRowState.CurrentRows);
+
+                if (inputs.IsRequestCancelled())
                 {
                     means.observations = -1;
                     return means;
