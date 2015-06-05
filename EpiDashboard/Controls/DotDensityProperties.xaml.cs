@@ -191,7 +191,7 @@ namespace EpiDashboard.Controls
                     KMLprovider.SetShapeRangeValues(dashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(txtDotValue.Text));
             }
         }
-
+       
         private void Addfilters()
         {
             string sfilterOperand = string.Empty;
@@ -385,6 +385,7 @@ namespace EpiDashboard.Controls
             layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
             this.layerprop = (DotDensityLayerProperties)layerProperties;
+            layerprop.provider = provider;
             if (this.DashboardHelper != null)
                 layerprop.SetdashboardHelper(DashboardHelper);
             this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
@@ -392,6 +393,7 @@ namespace EpiDashboard.Controls
                 if (shapeFileProperties.Length == 2)
                 {
                     txtShapePath.Text = shapeFileProperties[0].ToString();
+                    layerprop.shapeFilePath = shapeFileProperties[0].ToString();
                     IDictionary<string, object> shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
                     if (shapeAttributes != null)
                     {
@@ -418,21 +420,7 @@ namespace EpiDashboard.Controls
         }     
 
         private void btnKMLFile_Click(object sender, RoutedEventArgs e)
-        {
-           /* KMLprovider = new Mapping.DotDensityKmlLayerProvider(myMap);
-            KMLprovider.FeatureLoaded += new FeatureLoadedHandler(KMLprovider_FeatureLoaded);
-           object[] kmlFileProperties= KMLprovider.LoadKml();
-           if (kmlFileProperties != null)
-           {
-               ILayerProperties layerProperties = null;
-               layerProperties = new DotDensityKmlLayerProperties(myMap, dashboardHelper, this.mapControl);
-               layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
-               layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
-               this.kmllayerprop = (DotDensityKmlLayerProperties)layerProperties;
-               if (this.DashboardHelper != null)
-                   kmllayerprop.SetdashboardHelper(DashboardHelper);
-               this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-           }*/
+        {          
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "KML Files (*.kml)|*.kml|KMZ Files (*.kmz)|*.kmz";
             dialog.Multiselect = false;
@@ -453,6 +441,9 @@ namespace EpiDashboard.Controls
                     layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                     layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
                     this.kmllayerprop = (DotDensityKmlLayerProperties)layerProperties;
+                    kmllayerprop.shapeFilePath = KMLMapServerName;
+                    kmllayerprop.provider = KMLprovider;
+                    kmllayerprop.provider.FeatureLoaded += new FeatureLoadedHandler(kmllayerprop.provider_FeatureLoaded);
                     if (this.DashboardHelper != null)
                         kmllayerprop.SetdashboardHelper(DashboardHelper);
                     this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
@@ -663,6 +654,9 @@ namespace EpiDashboard.Controls
                     layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                     layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
                     this.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
+                    serverlayerprop.shapeFilePath = MapServerName;
+                    serverlayerprop.provider = Mapprovider;
+                    serverlayerprop.provider.FeatureLoaded += new FeatureLoadedHandler(serverlayerprop.provider_FeatureLoaded);
                     if (this.DashboardHelper != null)
                         serverlayerprop.SetdashboardHelper(DashboardHelper);
                     this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
@@ -713,7 +707,7 @@ namespace EpiDashboard.Controls
                         Mapprovider = new Mapping.DotDensityServerLayerProvider(myMap);
                         Mapprovider.FeatureLoaded += new FeatureLoadedHandler(Mapprovider_FeatureLoaded);
                     }
-                    object[] mapFileProperties = Mapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);                                     
+                    object[] mapFileProperties = Mapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);                           
                     if (mapFileProperties != null)
                     {
                         ILayerProperties layerProperties = null;
@@ -721,6 +715,9 @@ namespace EpiDashboard.Controls
                         layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                         layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
                         this.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
+                        serverlayerprop.shapeFilePath = MapServerName;
+                        serverlayerprop.provider = Mapprovider;
+                        serverlayerprop.provider.FeatureLoaded += new FeatureLoadedHandler(serverlayerprop.provider_FeatureLoaded);
                         if (this.DashboardHelper != null)
                             serverlayerprop.SetdashboardHelper(DashboardHelper);
                         this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
