@@ -30,6 +30,7 @@
     <SolidColorBrush x:Key="PrimaryButtonBackgroundColorDark" Color="#9A9A9A" />
     <SolidColorBrush x:Key="PrimaryButtonBackgroundColorLight" Color="#E9E9E9" />
     <SolidColorBrush x:Key="PrimaryButtonForegroundColor" Color="#003257" />
+    <SolidColorBrush x:Key="PrimaryButtonDisabledForegroundColor" Color="#C3C3C3" />
 
     <SolidColorBrush x:Key="ColumnHeaderBackgroundBrush" Color="#4F81BD"/>
     <SolidColorBrush x:Key="ColumnHeaderForegroundBrush" Color="White"/>
@@ -360,6 +361,10 @@
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="{StaticResource PrimaryButtonBackgroundColorLight}" />
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{StaticResource PrimaryButtonDisabledForegroundColor}"></Setter>
+            </Trigger>
+
         </Style.Triggers>
     </Style>
     

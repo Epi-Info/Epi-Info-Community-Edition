@@ -31,16 +31,13 @@ namespace EpiDashboard.Mapping
         public event EventHandler EditRequested;
         
         private IMapControl mapControl;
-        private string shapeFilePath;      
+        public string shapeFilePath;      
         public DotDensityLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
             this.myMap = myMap;
             this.dashboardHelper = dashboardHelper;
-            this.mapControl = mapControl;
-
-            provider = new DotDensityLayerProvider(myMap);
-
+            this.mapControl = mapControl;           
             FillComboBoxes();
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
             btnShapeFile.Click += new RoutedEventHandler(btnShapeFile_Click);
@@ -82,7 +79,7 @@ namespace EpiDashboard.Mapping
         private void RenderMap()
         {
             if (cbxDataKey.SelectedIndex != -1 && cbxShapeKey.SelectedIndex != -1 && cbxValue.SelectedIndex != -1)
-            {
+            {                
                 provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), ((SolidColorBrush)rctDotColor.Fill).Color, int.Parse(txtDotValue.Text));
                 if (MapGenerated != null)
                 {
@@ -106,7 +103,8 @@ namespace EpiDashboard.Mapping
 
         void mapControl_MapDataChanged(object sender, EventArgs e)
         {
-            provider.Refresh();
+            if(provider!=null)
+            provider.Refresh();           
         }
 
         void keys_SelectionChanged(object sender, EventArgs e)
@@ -115,7 +113,7 @@ namespace EpiDashboard.Mapping
         }
 
         void btnShapeFile_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             object[] shapeFileProperties = provider.LoadShapeFile();
             if (shapeFileProperties != null)
             {
@@ -237,6 +235,10 @@ namespace EpiDashboard.Mapping
             {
                 if (child.Name.Equals("shapeFile"))
                 {
+                    if (provider == null)
+                    {
+                        provider = new DotDensityLayerProvider(myMap);
+                    }
                     object[] shapeFileProperties = provider.LoadShapeFile(child.InnerText);
                     if (shapeFileProperties != null)
                     {

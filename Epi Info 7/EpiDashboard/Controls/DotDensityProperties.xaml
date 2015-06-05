@@ -92,12 +92,13 @@
                 <Label>SQL Query:</Label>
                 <TextBox x:Name="txtSQLQuery"></TextBox>
             </StackPanel>
+            <Label></Label>
             <StackPanel x:Name="panelBoundaries" IsEnabled="False">
             <Label Style="{StaticResource PropertiesSubHeading}">Boundaries
                 </Label>                         
              <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="ShapeFile" Checked="radShapeFile_Checked"  />
                 <Label></Label>
-                        <StackPanel x:Name="panelshape" IsEnabled="False">
+                <StackPanel x:Name="panelshape" IsEnabled="False" Width="470">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -111,7 +112,7 @@
                 <Label></Label>
                 <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="MapServer" Checked="radMapServer_Checked" />
                 <Label></Label>
-                <StackPanel x:Name="panelmap" IsEnabled="False">
+                <StackPanel x:Name="panelmap" IsEnabled="False" Width="470">
                    <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known Map Server" Checked="radconnectmapserver_Checked" />
                     <StackPanel x:Name="panelmapconnect" IsEnabled="False">
                     <Label></Label>
@@ -124,8 +125,8 @@
                     </StackPanel>
                     <Label></Label>
                     <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver"  Content="Provide location of another Map Server" Checked="radlocatemapserver_Checked" />
-                    <Label></Label>                   
-                    <StackPanel x:Name="panelmapserver" IsEnabled="False">
+                    <Label></Label>
+                    <StackPanel x:Name="panelmapserver" IsEnabled="False" Width="470">
                         <Label>URL:(example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer)</Label>
                         <Grid>
                                 <Grid.ColumnDefinitions>
@@ -142,8 +143,8 @@
                 </StackPanel>
                 <Label></Label>
                 <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" /> 
-                <Label></Label>               
-                        <StackPanel x:Name="panelKml" IsEnabled="False">
+                <Label></Label>
+                <StackPanel x:Name="panelKml" IsEnabled="False" Width="470">
                     <Label>Location: Type URL (example: http://code.google.com/apis/kml/documentation/us_states.kml)</Label>
                     <Label></Label>
                         <Grid>

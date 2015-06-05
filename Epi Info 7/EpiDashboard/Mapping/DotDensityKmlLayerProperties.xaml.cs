@@ -23,7 +23,7 @@ namespace EpiDashboard.Mapping
     {
         private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
-        private DotDensityKmlLayerProvider provider;
+        public DotDensityKmlLayerProvider provider;
         private System.Xml.XmlElement currentElement;
 
         public event EventHandler MapGenerated;
@@ -31,7 +31,7 @@ namespace EpiDashboard.Mapping
         public event EventHandler EditRequested;
         
         private IMapControl mapControl;
-        private string shapeFilePath;
+        public string shapeFilePath;
 
         public DotDensityKmlLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
@@ -40,8 +40,8 @@ namespace EpiDashboard.Mapping
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-            provider = new DotDensityKmlLayerProvider(myMap);
-            provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
+           // provider = new DotDensityKmlLayerProvider(myMap);
+           // provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
 
             FillComboBoxes();
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
@@ -53,7 +53,7 @@ namespace EpiDashboard.Mapping
             rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
         }
 
-        void provider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
+       public void provider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
         {
             if (!string.IsNullOrEmpty(serverName))
             {
@@ -132,7 +132,7 @@ namespace EpiDashboard.Mapping
             //worker.RunWorkerAsync();
 
             if (cbxDataKey.SelectedIndex != -1 && cbxShapeKey.SelectedIndex != -1 && cbxValue.SelectedIndex != -1)
-            {
+            {               
                 provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), ((SolidColorBrush)rctDotColor.Fill).Color, int.Parse(txtDotValue.Text));
                 if (MapGenerated != null)
                 {
@@ -291,6 +291,11 @@ namespace EpiDashboard.Mapping
             {
                 if (child.Name.Equals("shapeFile"))
                 {
+                    if (provider == null)
+                    {
+                        provider = new DotDensityKmlLayerProvider(myMap);
+                        provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
+                    }
                     provider.LoadKml(child.InnerText);
                 }
             }
