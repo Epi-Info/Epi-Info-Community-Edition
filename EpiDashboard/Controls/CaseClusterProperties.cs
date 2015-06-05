@@ -42,7 +42,7 @@ namespace EpiDashboard.Controls
         private RowFilterControl rowfiltercontrol;
         private DataFilters datafilters;
 
-        public CaseClusterProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
+        public CaseClusterProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap, ClusterLayerProperties clusterprop)
         {
             InitializeComponent();
 
@@ -52,10 +52,8 @@ namespace EpiDashboard.Controls
             mapControl.TimeVariableSet += new TimeVariableSetHandler(mapControl_TimeVariableSet);
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
 
-            provider = new ClusterLayerProvider(myMap);
-            provider.DateRangeDefined += new DateRangeDefinedHandler(provider_DateRangeDefined);
-            provider.RecordSelected += new RecordSelectedHandler(provider_RecordSelected);
-
+            provider = clusterprop.provider;
+            layerprop = clusterprop;
 
             rctSelectColor.Fill = new SolidColorBrush(Color.FromArgb(120,0,0,255));
             colorselected = new SolidColorBrush(Color.FromArgb(120, 0, 0, 255));
@@ -64,10 +62,15 @@ namespace EpiDashboard.Controls
         
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;
+       
 
-        public DashboardHelper DashboardHelper { get; private set; }
-        
-      
+        public Brush ColorSelected
+        {
+            set
+            {
+                colorselected = value;
+            }
+        }
       
         public FileInfo ProjectFileInfo
         {
@@ -188,7 +191,7 @@ namespace EpiDashboard.Controls
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
           dashboardHelper = mapControl.GetNewDashboardHelper();
-          this.DashboardHelper = dashboardHelper;
+         // this.DashboardHelper = dashboardHelper;
           layerprop.SetdashboardHelper(dashboardHelper); 
           if (dashboardHelper != null)
             {
@@ -301,14 +304,19 @@ namespace EpiDashboard.Controls
 
         void coord_SelectionChanged(object sender, EventArgs e)
         {
-            RenderMap();
+            //RenderMap();
         }
-        
+
         public DashboardHelper GetDashboardHelper()
         {
             return this.dashboardHelper;
-        } 
+        }
 
+        public void SetDashboardHelper(DashboardHelper dash)
+        {
+            this.dashboardHelper = dash;
+        }  
+        
         void provider_RecordSelected(int id)
         {
             mapControl.OnRecordSelected(id);
@@ -328,17 +336,17 @@ namespace EpiDashboard.Controls
         {
             mapControl.OnDateRangeDefined(start, end, intervalCounts);
         }
-        private void SetFilter()
+        public void SetFilter()
         {
             //--for filters
-            rowfiltercontrol = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, null   , true);
+            rowfiltercontrol = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dashboardHelper.DataFilters, true);
             rowfiltercontrol.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             rowfiltercontrol.VerticalAlignment = System.Windows.VerticalAlignment.Top;
             panelFilter.Children.Add(rowfiltercontrol);
             
         }
 
-        private void FillComboBoxes()
+        public void FillComboBoxes()
         {
             cmbLatitude.Items.Clear();
             cmbLongitude.Items.Clear();
@@ -362,7 +370,6 @@ namespace EpiDashboard.Controls
             Addfilters();
             RenderMap();
             layerprop.SetValues(txtDescription.Text, cmbLatitude.Text, cmbLongitude.Text, colorselected );
-            //mapControl.iconTimeLapse.IsEnabled = true;
             if (ChangesAccepted != null)
             {
                 ChangesAccepted(this, new EventArgs());
@@ -390,7 +397,7 @@ namespace EpiDashboard.Controls
             
             if (cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
             {
-                  provider.RenderClusterMap(this.DashboardHelper, cmbLatitude.SelectedItem.ToString(), cmbLongitude.SelectedItem.ToString(), colorselected , null, txtDescription.Text);
+                  provider.RenderClusterMap(dashboardHelper, cmbLatitude.SelectedItem.ToString(), cmbLongitude.SelectedItem.ToString(), colorselected , null, txtDescription.Text);
                 
                 if (MapGenerated != null)
                 {
