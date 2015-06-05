@@ -67,6 +67,7 @@ namespace EpiDashboard.Mapping
         private Brush defaultBackgroundColor = Brushes.White;
         private bool hidePanels = false;
         private EpiDashboard.Controls.PointofInterestProperties pointofinterestproperties;
+        private EpiDashboard.Controls.CaseClusterProperties caseclusterproperties;
         
         public StandaloneMapControl()
         {
@@ -632,9 +633,19 @@ namespace EpiDashboard.Mapping
        public void ILayerProperties_EditRequested(object sender, EventArgs e)
        {
            ILayerProperties layerProperties = (ILayerProperties)sender;
-           PointLayerProperties pointlayerprop = (PointLayerProperties)layerProperties;
-           if (pointlayerprop.FlagRunEdit == false)
-           { GeneratePointofInterestMap(pointlayerprop); }
+
+           if (layerProperties is PointLayerProperties)
+           {
+               PointLayerProperties pointlayerprop = (PointLayerProperties)layerProperties;
+               if (pointlayerprop.FlagRunEdit == false)
+               { GeneratePointofInterestMap(pointlayerprop); }
+           }
+           else if (layerProperties is ClusterLayerProperties)
+           {
+               ClusterLayerProperties clusterlayerprop = (ClusterLayerProperties)layerProperties;
+               if (clusterlayerprop.FlagRunEdit == false)
+               { GenerateCaseClusterMap(clusterlayerprop); }
+           }
        }
        //--
        public void ILayerProperties_MapGenerated(object sender, EventArgs e)
@@ -1265,34 +1276,87 @@ namespace EpiDashboard.Mapping
 
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
-
-            EpiDashboard.Controls.CaseClusterProperties properties = new EpiDashboard.Controls.CaseClusterProperties(this, myMap);
+                        
             //old config
             layerProperties = new ClusterLayerProperties(myMap, dashboardHelper, this);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
-            properties.layerprop = (ClusterLayerProperties)layerProperties;
+            layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            //
-            properties.Width = 800;
-            properties.Height = 600;
+            EpiDashboard.Controls.CaseClusterProperties caseclusterproperties = new EpiDashboard.Controls.CaseClusterProperties(this, myMap, (ClusterLayerProperties)layerProperties);
+            caseclusterproperties.layerprop = (ClusterLayerProperties)layerProperties;
+                       
+            caseclusterproperties.Width = 800;
+            caseclusterproperties.Height = 600;
 
-            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > caseclusterproperties.Width)
             {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                caseclusterproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
             }
 
-            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > caseclusterproperties.Height)
             {
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+               caseclusterproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
 
-            properties.Cancelled += new EventHandler(properties_Cancelled);
-            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            caseclusterproperties.Cancelled += new EventHandler(properties_Cancelled);
+            caseclusterproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
             grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-            popup.Content = properties;
+            popup.Content = caseclusterproperties;
             popup.Show();
         }
+
+        public void GenerateCaseClusterMap(ClusterLayerProperties clusterlayerprop)
+        {
+            ILayerProperties layerProperties = null;
+            DashboardHelper dashboardHelper;
+
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
+
+          
+            //old config
+            layerProperties = (ClusterLayerProperties)clusterlayerprop;
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
+
+            caseclusterproperties = new EpiDashboard.Controls.CaseClusterProperties(this, myMap, (ClusterLayerProperties) layerProperties);
+            caseclusterproperties.layerprop = (ClusterLayerProperties)layerProperties;
+
+            dashboardHelper = clusterlayerprop.GetDashboardHelper();
+            caseclusterproperties.SetDashboardHelper(dashboardHelper);
+            caseclusterproperties.txtProjectPath.Text = dashboardHelper.Database.DbName;
+            caseclusterproperties.FillComboBoxes();
+            caseclusterproperties.SetFilter();
+
+            caseclusterproperties.txtDescription.Text = clusterlayerprop.txtDescription.Text;
+            caseclusterproperties.cmbLatitude.Text = clusterlayerprop.cbxLatitude.Text;
+            caseclusterproperties.cmbLongitude.Text = clusterlayerprop.cbxLongitude.Text;
+            caseclusterproperties.rctSelectColor.Fill = clusterlayerprop.rctColor.Fill;
+            caseclusterproperties.ColorSelected = clusterlayerprop.rctColor.Fill;
+
+            clusterlayerprop.FlagRunEdit = true;
+            
+            caseclusterproperties.Width = 800;
+            caseclusterproperties.Height = 600;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > caseclusterproperties.Width)
+            {
+                caseclusterproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > caseclusterproperties.Height)
+            {
+                caseclusterproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            caseclusterproperties.Cancelled += new EventHandler(properties_Cancelled);
+            caseclusterproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            popup.Content = caseclusterproperties;
+            popup.Show();
+        }
+
         //--
 
 

@@ -22,15 +22,14 @@ namespace EpiDashboard.Mapping
     public partial class ClusterLayerProperties : UserControl, ILayerProperties
     {
 
-        private ClusterLayerProvider provider;
+        public ClusterLayerProvider provider;
         private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
-        //--
         public event EventHandler EditRequested;
-        //--
+        private bool flagrunedit;
 
         private IMapControl mapControl;
 
@@ -51,8 +50,15 @@ namespace EpiDashboard.Mapping
             cbxLongitude.SelectionChanged += new SelectionChangedEventHandler(coord_SelectionChanged);
             rctColor.MouseUp += new MouseButtonEventHandler(rctColor_MouseUp);
             rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
+            rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
 
             FillComboBoxes();
+        }
+
+        public bool FlagRunEdit
+        {
+            set { flagrunedit = value; }
+            get { return flagrunedit; }
         }
 
         void rctFilter_MouseUp(object sender, MouseButtonEventArgs e)
@@ -70,6 +76,15 @@ namespace EpiDashboard.Mapping
             {
                 rctColor.Fill = new SolidColorBrush(Color.FromArgb(0x99, dialog.Color.R, dialog.Color.G, dialog.Color.B));
                 RenderMap();
+            }
+        }
+
+        void rctEdit_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (EditRequested != null)
+            {
+                flagrunedit = false;
+                EditRequested(this, new EventArgs());
             }
         }
 
@@ -171,7 +186,8 @@ namespace EpiDashboard.Mapping
             cbxLongitude.IsEnabled = false;
             txtDescription.IsReadOnly = true;
             txtDescription.Width = 130;
-            btnChangeText.Visibility = System.Windows.Visibility.Visible;
+            //btnChangeText.Visibility = System.Windows.Visibility.Visible;
+            btnChangeText.Visibility = System.Windows.Visibility.Hidden;
             grdMain.Width = 700;
             lblTitle.Visibility = System.Windows.Visibility.Visible;
         }
