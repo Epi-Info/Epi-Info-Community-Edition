@@ -68,6 +68,15 @@ namespace EpiDashboard.Mapping
             }
         }
 
+        public void CheckMapGenerated()
+        {
+            if (MapGenerated != null)
+            {
+                MapGenerated(this, new EventArgs());
+            }
+
+        }
+
         #region ILayerProperties Members
 
         public void CloseLayer()
