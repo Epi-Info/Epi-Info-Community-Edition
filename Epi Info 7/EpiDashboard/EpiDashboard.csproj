@@ -256,6 +256,9 @@
       <DependentUpon>MeansProperties.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PointofInterestProperties.cs" />
+    <Compile Include="Controls\Referencelayer.xaml.cs">
+      <DependentUpon>Referencelayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\VariablesDisplayControl.xaml.cs">
       <DependentUpon>VariablesDisplayControl.xaml</DependentUpon>
     </Compile>
@@ -1005,6 +1008,10 @@
     <Page Include="Controls\PointofInterestProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Referencelayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\VariablesDisplayControl.xaml">
       <Generator>MSBuild:Compile</Generator>

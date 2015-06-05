@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="EpiDashboard.Controls.Referencelayer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+             mc:Ignorable="d" 
+              d:DesignHeight="460" d:DesignWidth="500" FontFamily="Global User Interface" FontSize="16" Background="White">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".37*" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width=".63*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
+            <Label FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Reference Layers</Label>
+
+
+            <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title=" Reference Layer" Description="Choose a Reference" IsChecked="True" />
+        </StackPanel>
+        <StackPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible" VerticalAlignment="Stretch">
+            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Reference Layers</Label>
+            <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="ShapeFile" Checked="radShapeFile_Checked"  />
+            <Label></Label>
+            <StackPanel x:Name="panelshape" IsEnabled="False"  >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtShapePath" IsReadOnly="True" TextChanged="txtShapePath_TextChanged"   ></TextBox>
+                    <Button x:Name="btnBrowseShape"  Grid.Column="2" Click="btnBrowseShape_Click" Height="Auto" >Browse</Button>
+                </Grid>
+            </StackPanel>
+            <Label></Label>
+            <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="MapServer" Checked="radMapServer_Checked" />
+            <Label></Label>
+            <StackPanel x:Name="panelmap" IsEnabled="False">
+                <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known Map Server" Checked="radconnectmapserver_Checked" />
+                <StackPanel x:Name="panelmapconnect" IsEnabled="False"  Width="470">
+                    <Label></Label>
+                    <ComboBox x:Name="cbxmapserver" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" Width="380">
+                        <ComboBoxItem>NationalMap.gov - New York County Boundaries</ComboBoxItem>
+                        <ComboBoxItem>NationalMap.gov - Rhode Island Zip Code Boundaries</ComboBoxItem>
+                        <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
+                        <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <Label></Label>
+                <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver"  Content="Provide location of another Map Server" Checked="radlocatemapserver_Checked" />
+                <Label></Label>
+                <StackPanel x:Name="panelmapserver" IsEnabled="False" >
+                    <Label>URL:(example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer)</Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="12"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txtMapSeverpath"  TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
+                        <Button x:Name="btnMapserverlocate" Height="Auto" Grid.Column="2"  IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
+                    </Grid>
+                    <Label>Select Feature:</Label>
+                    <!--<ComboBox x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged" Width="380"></ComboBox>-->
+                    <ScrollViewer x:Name="scrollViewerVarPro" VerticalAlignment="Stretch" Height="150"  >
+                        <StackPanel >
+                            <ListBox SelectionMode="Multiple" Name="lbxserverfield" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="lbxserverfield_SelectionChanged" />
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
+            </StackPanel>
+            <Label></Label>
+            <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
+            <Label></Label>
+            <StackPanel x:Name="panelKml" IsEnabled="False" >
+                <Label>Location: Type URL (example: http://code.google.com/apis/kml/documentation/us_states.kml)</Label>
+                <Label></Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtKMLpath" IsReadOnly="True" ></TextBox>
+                    <Button x:Name="btnKMLFile" Height="Auto" Grid.Column="2" Click="btnKMLFile_Click">Browse</Button>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+        <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="Button_Click" />
+
+        <DockPanel Grid.ColumnSpan="3" Grid.Row="1">
+            <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
+            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
+        </DockPanel>
+    </Grid>
+</UserControl>

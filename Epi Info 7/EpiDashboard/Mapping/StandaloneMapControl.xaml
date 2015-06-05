@@ -142,7 +142,7 @@
                             </Grid>
                         </DockPanel>
 
-                        <DockPanel x:Name="iconSave"
+                        <DockPanel x:Name="iconReference" MouseLeftButtonUp="iconReference_MouseLeftButtonUp"
                                    Style="{StaticResource menuIconStyle}"
                                    Grid.Row="5">
                             <DockPanel.ToolTip>

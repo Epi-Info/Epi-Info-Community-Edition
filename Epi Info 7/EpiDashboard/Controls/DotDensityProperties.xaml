@@ -98,7 +98,7 @@
                 </Label>                         
              <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="ShapeFile" Checked="radShapeFile_Checked"  />
                 <Label></Label>
-                <StackPanel x:Name="panelshape" IsEnabled="False" Width="470">
+                <StackPanel x:Name="panelshape" IsEnabled="False">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -112,7 +112,7 @@
                 <Label></Label>
                 <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="MapServer" Checked="radMapServer_Checked" />
                 <Label></Label>
-                <StackPanel x:Name="panelmap" IsEnabled="False" Width="470">
+                <StackPanel x:Name="panelmap" IsEnabled="False" >
                    <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known Map Server" Checked="radconnectmapserver_Checked" />
                     <StackPanel x:Name="panelmapconnect" IsEnabled="False">
                     <Label></Label>
@@ -126,7 +126,7 @@
                     <Label></Label>
                     <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver"  Content="Provide location of another Map Server" Checked="radlocatemapserver_Checked" />
                     <Label></Label>
-                    <StackPanel x:Name="panelmapserver" IsEnabled="False" Width="470">
+                    <StackPanel x:Name="panelmapserver" IsEnabled="False" >
                         <Label>URL:(example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer)</Label>
                         <Grid>
                                 <Grid.ColumnDefinitions>
@@ -144,7 +144,7 @@
                 <Label></Label>
                 <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" /> 
                 <Label></Label>
-                <StackPanel x:Name="panelKml" IsEnabled="False" Width="470">
+                <StackPanel x:Name="panelKml" IsEnabled="False" >
                     <Label>Location: Type URL (example: http://code.google.com/apis/kml/documentation/us_states.kml)</Label>
                     <Label></Label>
                         <Grid>

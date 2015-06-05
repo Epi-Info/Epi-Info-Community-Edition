@@ -1727,6 +1727,34 @@ namespace EpiDashboard.Mapping
             popup.Content = timeLaspe;
             popup.Show();                  
         }
+
+        private void iconReference_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            DashboardHelper dashboardHelper = new DashboardHelper();
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
+            EpiDashboard.Controls.Referencelayer properties = new EpiDashboard.Controls.Referencelayer(this, myMap);
+            properties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            properties.Width = 800;
+            properties.Height = 600;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            {
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            {
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            properties.Cancelled += new EventHandler(properties_Cancelled);
+            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+
+            popup.Content = properties;
+            popup.Show();
+
+        }
        
     }
 
