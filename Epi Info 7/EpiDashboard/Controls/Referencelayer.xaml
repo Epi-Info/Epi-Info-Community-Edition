@@ -77,7 +77,7 @@
                     <!--<ComboBox x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged" Width="380"></ComboBox>-->
                     <ScrollViewer x:Name="scrollViewerVarPro" VerticalAlignment="Stretch" Height="150"  >
                         <StackPanel >
-                            <ListBox SelectionMode="Multiple" Name="lbxserverfield" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="lbxserverfield_SelectionChanged" />
+                            <ListBox SelectionMode="Multiple" SelectedIndex="0" Name="lbxserverfield" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="lbxserverfield_SelectionChanged" />
                         </StackPanel>
                     </ScrollViewer>
                 </StackPanel>

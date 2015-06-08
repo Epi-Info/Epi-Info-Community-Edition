@@ -183,7 +183,7 @@ namespace EpiDashboard.Controls
         {
             if (radShapeFile.IsChecked == true && provider != null)
             {
-                provider.RenderShape(txtShapePath.Text);
+                provider.RenderShape(txtShapePath.Text);               
                 layerprop.CheckMapGenerated();
             }
             else if (radMapServer.IsChecked == true && Mapprovider != null)
@@ -211,7 +211,9 @@ namespace EpiDashboard.Controls
                 string message = GetMessage(txtMapSeverpath.Text + "?f=json");
                 System.Web.Script.Serialization.JavaScriptSerializer ser = new System.Web.Script.Serialization.JavaScriptSerializer();
                 Rest rest = ser.Deserialize<Rest>(message);
-                lbxserverfield.DataContext = rest.layers;
+                lbxserverfield.ItemsSource = rest.layers;
+                if (rest.layers.Count > 0)
+                    lbxserverfield.SelectedIndex = 0;
             }
             catch (Exception ex)
             {

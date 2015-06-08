@@ -679,7 +679,7 @@ namespace EpiDashboard.Controls
                 string message = GetMessage(txtMapSeverpath.Text + "?f=json");
                 System.Web.Script.Serialization.JavaScriptSerializer ser = new System.Web.Script.Serialization.JavaScriptSerializer();
                 Rest rest = ser.Deserialize<Rest>(message);
-                cbxmapfeature.DataContext = rest.layers;
+                cbxmapfeature.ItemsSource = rest.layers;
             }
             catch (Exception ex)
             {
