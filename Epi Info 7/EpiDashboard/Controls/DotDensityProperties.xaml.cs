@@ -680,6 +680,8 @@ namespace EpiDashboard.Controls
                 System.Web.Script.Serialization.JavaScriptSerializer ser = new System.Web.Script.Serialization.JavaScriptSerializer();
                 Rest rest = ser.Deserialize<Rest>(message);
                 cbxmapfeature.ItemsSource = rest.layers;
+                if (rest.layers.Count > 0)
+                    cbxmapfeature.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
