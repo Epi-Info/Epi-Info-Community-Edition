@@ -143,6 +143,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (cbxFieldStrata.SelectedIndex > -1)
             {
                 Parameters.StrataVariableNames = new List<string>();
+                Parameters.StrataVariableNames.Add(cbxFieldStrata.SelectedItem.ToString());
+                inputVariableList.Add("stratavar", cbxFieldStrata.SelectedItem.ToString());
             }
             else
                 Parameters.StrataVariableNames.Clear();
