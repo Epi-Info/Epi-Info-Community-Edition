@@ -23,7 +23,7 @@ namespace EpiDashboard.Mapping
     public partial class ShapeLayerProperties : UserControl, ILayerProperties, IReferenceLayerProperties
     {
 
-        private ShapeLayerProvider provider;
+        public ShapeLayerProvider provider;
         private ESRI.ArcGIS.Client.Map myMap;
 
         public event EventHandler MapGenerated;
@@ -38,7 +38,7 @@ namespace EpiDashboard.Mapping
 
             this.myMap = myMap;
 
-            provider = new ShapeLayerProvider(myMap);
+           // provider = new ShapeLayerProvider(myMap);
         }
 
         public void MoveUp()

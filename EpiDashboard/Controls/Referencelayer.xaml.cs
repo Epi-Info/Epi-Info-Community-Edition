@@ -108,9 +108,10 @@ namespace EpiDashboard.Controls
                         Mapprovider = new Mapping.MapServerLayerProvider(myMap);
                     }
                     ILayerProperties layerProperties = null;
-                    layerProperties = new MapServerLayerProperties(myMap);
+                    layerProperties = new MapServerLayerProperties(myMap);                    
                     layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                     this.serverlayerprop = (MapServerLayerProperties)layerProperties;
+                    serverlayerprop.provider = Mapprovider;
                     this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
                 }
                 else
@@ -156,9 +157,10 @@ namespace EpiDashboard.Controls
                     KMLprovider = new Mapping.KmlLayerProvider(myMap);
                 }
                 ILayerProperties layerProperties = null;
-                layerProperties = new KmlLayerProperties(myMap);
+                layerProperties = new KmlLayerProperties(myMap);               
                 layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                 this.kmllayerprop = (KmlLayerProperties)layerProperties;
+                kmllayerprop.provider = KMLprovider;
                 this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
             }
         }
@@ -281,10 +283,11 @@ namespace EpiDashboard.Controls
                     Mapprovider = new Mapping.MapServerLayerProvider(myMap);
                 }
                 ILayerProperties layerProperties = null;
-                layerProperties = new MapServerLayerProperties(myMap);
+                layerProperties = new MapServerLayerProperties(myMap);                
                 layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                 layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
                 this.serverlayerprop = (MapServerLayerProperties)layerProperties;
+                serverlayerprop.provider = Mapprovider;
                 this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
             }
         }
@@ -320,8 +323,7 @@ namespace EpiDashboard.Controls
 
         private void btnBrowseShape_Click(object sender, RoutedEventArgs e)
         {
-            provider = new Mapping.ShapeLayerProvider(myMap);
-            Guid layerId = Guid.NewGuid();
+            provider = new Mapping.ShapeLayerProvider(myMap);          
             //Create the dialog allowing the user to select the "*.shp" and the "*.dbf" files
             Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
             ofd.Filter = "ESRI Shapefiles (*.shp)|*.shp";
@@ -333,9 +335,10 @@ namespace EpiDashboard.Controls
                 {
                     txtShapePath.Text = retval;
                     ILayerProperties layerProperties = null;
-                    layerProperties = new ShapeLayerProperties(myMap);
+                    layerProperties = new ShapeLayerProperties(myMap);                    
                     layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                     this.layerprop = (ShapeLayerProperties)layerProperties;
+                    layerprop.provider = provider;
                     layerprop.lblFileName.Content = retval;
                     this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
                 }
