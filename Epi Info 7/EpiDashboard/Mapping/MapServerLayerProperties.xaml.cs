@@ -23,7 +23,7 @@ namespace EpiDashboard.Mapping
     public partial class MapServerLayerProperties : UserControl, ILayerProperties, IReferenceLayerProperties
     {
 
-        private MapServerLayerProvider provider;
+        public MapServerLayerProvider provider;
         private ESRI.ArcGIS.Client.Map myMap;
         private string serverName;
         private int[] visibleLayers;
@@ -40,7 +40,7 @@ namespace EpiDashboard.Mapping
 
             this.myMap = myMap;
 
-            provider = new MapServerLayerProvider(myMap);
+           // provider = new MapServerLayerProvider(myMap);
         }
 
         public void MoveUp()

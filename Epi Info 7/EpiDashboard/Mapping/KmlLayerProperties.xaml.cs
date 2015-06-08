@@ -23,7 +23,7 @@ namespace EpiDashboard.Mapping
     public partial class KmlLayerProperties : UserControl, ILayerProperties, IReferenceLayerProperties
     {
 
-        private KmlLayerProvider provider;
+        public KmlLayerProvider provider;
         private ESRI.ArcGIS.Client.Map myMap;
         private string serverName;
         private int[] visibleLayers;
@@ -40,7 +40,7 @@ namespace EpiDashboard.Mapping
 
             this.myMap = myMap;
 
-            provider = new KmlLayerProvider(myMap);
+          //  provider = new KmlLayerProvider(myMap);
         }
 
         public void MoveUp()
