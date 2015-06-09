@@ -2402,7 +2402,8 @@ namespace EpiDashboard
                 }
 
                 ds.Tables[0].CaseSensitive = true;
-                ds.Tables[0].DefaultView.RowFilter = filterCriteria; // GenerateFilterCriteria(); VHF-54
+               // ds.Tables[0].DefaultView.RowFilter = filterCriteria; // GenerateFilterCriteria(); VHF-54
+                ds.Tables[0].DefaultView.RowFilter = GenerateFilterCriteria(); // GenerateFilterCriteria(); VHF-54
                 ds.Tables[0].DefaultView.Sort = sortOrder;
 
                 DataView dv = ds.Tables[0].DefaultView;
