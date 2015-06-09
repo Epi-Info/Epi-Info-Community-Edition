@@ -1508,7 +1508,7 @@ namespace EpiDashboard
             ComplexSampleCrosstabParameters cscrossParameters = (ComplexSampleCrosstabParameters)Parameters;
             if (!LoadingCombos)
             {
-                if (cscrossParameters != null && !String.IsNullOrEmpty(cscrossParameters.ColumnNames[0]) && !String.IsNullOrEmpty(cscrossParameters.PSUVariableName))
+                if (cscrossParameters != null && cscrossParameters.ColumnNames.Count > 0 && !String.IsNullOrEmpty(cscrossParameters.ColumnNames[0]) && !String.IsNullOrEmpty(cscrossParameters.PSUVariableName))
                 {
                     CreateInputVariableList();
                     txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
@@ -1520,7 +1520,7 @@ namespace EpiDashboard
                     baseWorker.RunWorkerAsync();
                     base.RefreshResults();
                 }
-                else if (!LoadingCombos && String.IsNullOrEmpty(cscrossParameters.ColumnNames[0]))
+                else if (!LoadingCombos && (cscrossParameters.ColumnNames.Count == 0 || String.IsNullOrEmpty(cscrossParameters.ColumnNames[0]) || String.IsNullOrEmpty(cscrossParameters.PSUVariableName)))
                 {
                     ClearResults();
                     waitPanel.Visibility = System.Windows.Visibility.Collapsed;
