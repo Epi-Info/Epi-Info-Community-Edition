@@ -53,10 +53,13 @@
                 <StackPanel x:Name="panelmapconnect" IsEnabled="False"  Width="470">
                     <Label></Label>
                     <ComboBox x:Name="cbxmapserver" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" Width="380">
-                        <ComboBoxItem>NationalMap.gov - New York County Boundaries</ComboBoxItem>
-                        <ComboBoxItem>NationalMap.gov - Rhode Island Zip Code Boundaries</ComboBoxItem>
+                        <ComboBoxItem>NationalMap.gov - U.S. Zip Code Boundaries</ComboBoxItem>
                         <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
                         <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
+                        <ComboBoxItem>USGS.gov (Natural Hazards Support System) - Current Floods</ComboBoxItem>
+                        <ComboBoxItem>USGS.gov (Natural Hazards Support System) - Current Earthquakes</ComboBoxItem>
+                        <ComboBoxItem>SGS.gov (Natural Hazards Support System) - Current Hurricanes</ComboBoxItem>
+                        <ComboBoxItem>USGS.gov (Natural Hazards Support System) - Current Wildfires</ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
                 <Label></Label>
