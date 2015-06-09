@@ -367,9 +367,13 @@ namespace EpiDashboard.Controls
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            Addfilters();
-            RenderMap();
-            layerprop.SetValues(txtDescription.Text, cmbLatitude.Text, cmbLongitude.Text, colorselected );
+            if (txtProjectPath.Text.Length > 0 && provider != null)
+            {
+                Addfilters();
+                RenderMap();
+                layerprop.SetValues(txtDescription.Text, cmbLatitude.Text, cmbLongitude.Text, colorselected);
+            }
+            
             if (ChangesAccepted != null)
             {
                 ChangesAccepted(this, new EventArgs());
