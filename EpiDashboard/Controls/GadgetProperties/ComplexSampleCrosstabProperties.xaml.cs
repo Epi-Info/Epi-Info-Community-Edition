@@ -187,7 +187,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
 
             //Variables settings
-            Parameters.ColumnNames = new List<string>();
+//            Parameters.ColumnNames = new List<string>();
             Parameters.StrataVariableNames = new List<string>();
 
             if (cbxExposureField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString())
@@ -213,6 +213,28 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
             else
             {
+                if (cbxFieldPSU.SelectedIndex < 0 || string.IsNullOrEmpty(cbxFieldPSU.SelectedItem.ToString()))
+                    Parameters.PSUVariableName = "";
+                if (cbxOutcomeField.SelectedIndex < 0 || string.IsNullOrEmpty(cbxOutcomeField.SelectedItem.ToString()))
+                    Parameters.CrosstabVariableName = "";
+                if (cbxExposureField.SelectedIndex < 0 || string.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString()))
+                    Parameters.ColumnNames = new List<string>();
+                if (cbxFieldWeight.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
+                {
+                    inputVariableList.Add("WeightVar", cbxFieldWeight.SelectedItem.ToString());
+                    Parameters.WeightVariableName = cbxFieldWeight.SelectedItem.ToString();
+                }
+                else
+                {
+                    Parameters.WeightVariableName = String.Empty;
+                    inputVariableList.Add("WeightVar", String.Empty);
+                }
+                if (cbxFieldStrata.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldStrata.SelectedItem.ToString()))
+                {
+                    inputVariableList.Add("StratvarList", cbxFieldStrata.SelectedItem.ToString());
+                    Parameters.StrataVariableNames = new List<string>();
+                    Parameters.StrataVariableNames.Add(cbxFieldStrata.SelectedItem.ToString());
+                }
                 return;
             }
 
