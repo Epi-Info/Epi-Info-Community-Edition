@@ -2339,6 +2339,7 @@ namespace EpiDashboard
             Controls.GadgetProperties.MeansProperties properties = Popup.Content as Controls.GadgetProperties.MeansProperties;
             this.Parameters = properties.Parameters;
             this.DataFilters = properties.DataFilters;
+            this.Parameters.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
             Popup.Close();
             if (properties.HasSelectedFields)
             {
