@@ -430,7 +430,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             //Display settings ///////////////////////////////////////////
 
             Parameters.GadgetTitle = txtTitle.Text;
-            Parameters.GadgetDescription = txtDesc.Text;
+            //Parameters.GadgetDescription = txtDesc.Text;
             Parameters.ChartWidth = double.Parse(txtWidth.Text);
             Parameters.ChartHeight = double.Parse(txtHeight.Text);
             Parameters.ShowAllListValues = (bool)checkboxAllValues.IsChecked;
@@ -465,6 +465,23 @@ namespace EpiDashboard.Controls.GadgetProperties
                     break;
             }
 
+            switch (cmbLineType.SelectedIndex)
+            {
+                case 1:
+                    Parameters.LineKind = LineKind.Polygon;
+                    break;
+                case 2:
+                    Parameters.LineKind = LineKind.Smooth;
+                    break;
+                case 3:
+                    Parameters.LineKind = LineKind.Step;
+                    break;
+                default:
+                case 0:
+                    Parameters.LineKind = LineKind.Auto;
+                    break;
+            }
+
             if (cmbLineDashTypeY2.SelectedIndex >= 0)
             {
                 switch (cmbLineDashTypeY2.SelectedIndex)
@@ -486,10 +503,16 @@ namespace EpiDashboard.Controls.GadgetProperties
                         break;
                 }
             }
+            
 
             if (cmbLineThicknessY2.SelectedIndex >= 0)
             {
                 Parameters.Y2LineThickness = cmbLineThicknessY2.SelectedIndex + 1;
+            }
+
+            if (cmbLineThickness.SelectedIndex >= 0)
+            {
+                Parameters.LineThickness = cmbLineThickness.SelectedIndex + 1;
             }
 
             //Labels settings /////////////////////////////////
@@ -549,9 +572,10 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.XAxisAngle = int.Parse(txtXAxisAngle.Text);
             }
 
-            Parameters.ChartTitle = txtChartTitle.Text;
-
-            Parameters.ChartSubTitle = txtChartSubTitle.Text;
+            //Parameters.ChartTitle = txtChartTitle.Text;           
+            //Parameters.ChartSubTitle = txtChartSubTitle.Text;
+            Parameters.ChartTitle = txtTitle.Text;
+            Parameters.ChartSubTitle = txtDesc.Text;
 
             //Legend settings /////////////////////////////////
 
@@ -745,8 +769,10 @@ namespace EpiDashboard.Controls.GadgetProperties
             txtXAxisLabelValue.Text = Parameters.XAxisLabel;
             txtXAxisAngle.Text = Parameters.XAxisAngle.ToString();
 
-            txtChartTitle.Text = Parameters.ChartTitle;
-            txtChartSubTitle.Text = Parameters.ChartSubTitle;
+            //txtChartTitle.Text = Parameters.ChartTitle;
+            //txtChartSubTitle.Text = Parameters.ChartSubTitle;
+            Parameters.ChartTitle = txtTitle.Text;
+            Parameters.ChartSubTitle = txtDesc.Text;
 
             //Display Legend settings
             checkboxShowLegend.IsChecked = Parameters.ShowLegend;
