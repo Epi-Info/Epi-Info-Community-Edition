@@ -25,16 +25,23 @@
                 <ComboBox x:Name="cbxValue" Width="110"/>
             </StackPanel>
         </StackPanel>
-        <Rectangle VerticalAlignment="Bottom" x:Name="rctDotColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FF1100" Margin="0,0,30,0">
+        <Rectangle VerticalAlignment="Bottom" x:Name="rctDotColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FF1100" Margin="0,0,30,0" Visibility="Collapsed">
             <Rectangle.ToolTip>
                 <Label Content="High value color"/>
             </Rectangle.ToolTip>
         </Rectangle>
-        <Image VerticalAlignment="Bottom" Source="../Images/filter1.png" Stretch="None" HorizontalAlignment="Right" Margin="0,0,11,5"/>
-        <Rectangle VerticalAlignment="Bottom" x:Name="rctFilter" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#00000000" Margin="0,0,8,0">
+        <Image VerticalAlignment="Bottom" Source="../Images/filter1.png" Stretch="None" HorizontalAlignment="Right" Margin="0,0,11,5" Visibility="Collapsed" />
+        <Rectangle VerticalAlignment="Bottom" x:Name="rctFilter" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#00000000" Margin="0,0,8,0" Visibility="Collapsed">
             <Rectangle.ToolTip>
                 <Label Content="Data filters"/>
             </Rectangle.ToolTip>
         </Rectangle>
+        <Image VerticalAlignment="Bottom" Source= "../Images/Edit1.png" Stretch="None" HorizontalAlignment="Right" Margin="0,0,55,5" Visibility= "Visible"/>
+        <Rectangle VerticalAlignment="Bottom" x:Name="rctEdit"  HorizontalAlignment="Right" Height="25" Width="35" Stroke="DarkGray" Cursor="Hand" Fill="#00000000" Margin="0,0,52,0" Visibility="Visible" >
+            <Rectangle.ToolTip>
+                <Label Content="Edit data layer map"/>
+            </Rectangle.ToolTip>
+        </Rectangle>
+      
     </Grid>
 </UserControl>

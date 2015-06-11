@@ -25,13 +25,15 @@ namespace EpiDashboard.Mapping
         private DashboardHelper dashboardHelper;
         public DotDensityLayerProvider provider;
         private System.Xml.XmlElement currentElement;
-
+        private bool flagrunedit;
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
         public event EventHandler EditRequested;
         
         private IMapControl mapControl;
-        public string shapeFilePath;      
+        public string shapeFilePath;
+        public IDictionary<string, object> shapeAttributes;
+
         public DotDensityLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
@@ -46,8 +48,14 @@ namespace EpiDashboard.Mapping
             cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             rctDotColor.MouseUp += new MouseButtonEventHandler(rctDotColor_MouseUp);
             rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
+            rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
         }
 
+        public bool FlagRunEdit
+        {
+            set { flagrunedit = value; }
+            get { return flagrunedit; }
+        }
         void rctFilter_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (FilterRequested != null)
@@ -55,7 +63,14 @@ namespace EpiDashboard.Mapping
                 FilterRequested(this, new EventArgs());
             }
         }
-
+        void rctEdit_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (EditRequested != null)
+            {
+                flagrunedit = false;
+                EditRequested(this, new EventArgs());
+            }
+        }
         public void MoveUp()
         {
             provider.MoveUp();

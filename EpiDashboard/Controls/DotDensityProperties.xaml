@@ -189,7 +189,7 @@
                 <!--<Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors &amp; Ranges</Label>-->
 
                 <Label>Select Color:</Label>
-                <Rectangle x:Name="rctHighColor" MouseLeftButtonUp="rctHighColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                <Rectangle x:Name="rctDotColor" MouseLeftButtonUp="rctDotColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
                     <Rectangle.ToolTip>
                         <Label Content="Color"/>
                     </Rectangle.ToolTip>

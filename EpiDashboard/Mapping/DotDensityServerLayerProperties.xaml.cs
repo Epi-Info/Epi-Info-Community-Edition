@@ -25,13 +25,18 @@ namespace EpiDashboard.Mapping
         private DashboardHelper dashboardHelper;
         public DotDensityServerLayerProvider provider;
         private System.Xml.XmlElement currentElement;
-
+        private bool flagrunedit;
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
         public event EventHandler EditRequested;
         
         private IMapControl mapControl;
         public string shapeFilePath;
+        public string cbxMapserverText;
+        public string txtMapserverText;
+        public string cbxMapFeatureText;
+       
+        public IDictionary<string, object> curfeatureAttributes;
 
         public DotDensityServerLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
@@ -51,8 +56,14 @@ namespace EpiDashboard.Mapping
             cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             rctDotColor.MouseUp += new MouseButtonEventHandler(rctDotColor_MouseUp);
             rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
+            rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
         }
 
+        public bool FlagRunEdit
+        {
+            set { flagrunedit = value; }
+            get { return flagrunedit; }
+        }
         public void provider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
         {
             if (!string.IsNullOrEmpty(serverName))
@@ -60,11 +71,13 @@ namespace EpiDashboard.Mapping
                 shapeFilePath = serverName;
                 if (featureAttributes != null)
                 {
+                    curfeatureAttributes = featureAttributes;
                     cbxShapeKey.Items.Clear();
                     foreach (string key in featureAttributes.Keys)
                     {
                         cbxShapeKey.Items.Add(key);
                     }
+                   
                 }
             }
             if (currentElement != null)
@@ -91,6 +104,10 @@ namespace EpiDashboard.Mapping
                     {
                         rctDotColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
                     }
+                    if (child.Name.Equals("selectMapFeature"))
+                    {
+                       cbxMapFeatureText = child.InnerText;
+                    }
                 }
                 RenderMap();
             }
@@ -103,7 +120,14 @@ namespace EpiDashboard.Mapping
                 FilterRequested(this, new EventArgs());
             }
         }
-
+        void rctEdit_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (EditRequested != null)
+            {
+                flagrunedit = false;
+                EditRequested(this, new EventArgs());
+            }
+        }
         public void MoveUp()
         {
             provider.MoveUp();
@@ -272,7 +296,7 @@ namespace EpiDashboard.Mapping
             string shapeKey = cbxShapeKey.SelectedItem.ToString();
             string value = cbxValue.SelectedItem.ToString();
             SolidColorBrush dotColor = (SolidColorBrush)rctDotColor.Fill;
-            string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><dotColor>" + dotColor.Color.ToString() + "</dotColor><dotValue>" + txtDotValue.Text + "</dotValue><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>";
+            string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><dotColor>" + dotColor.Color.ToString() + "</dotColor><dotValue>" + txtDotValue.Text + "</dotValue><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value><selectMapFeature>" + cbxMapFeatureText + "</selectMapFeature> ";
             System.Xml.XmlElement element = doc.CreateElement("dataLayer");
             element.InnerXml = xmlString;
             element.AppendChild(dashboardHelper.Serialize(doc));

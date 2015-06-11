@@ -32,6 +32,8 @@ namespace EpiDashboard.Mapping
         
         private IMapControl mapControl;
         public string shapeFilePath;
+        private bool flagrunedit;
+        public IDictionary<string, object> curfeatureAttributes;
 
         public DotDensityKmlLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
@@ -51,20 +53,28 @@ namespace EpiDashboard.Mapping
             cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             rctDotColor.MouseUp += new MouseButtonEventHandler(rctDotColor_MouseUp);
             rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
+            rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
         }
-
+        public bool FlagRunEdit
+        {
+            set { flagrunedit = value; }
+            get { return flagrunedit; }
+       }
        public void provider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
         {
             if (!string.IsNullOrEmpty(serverName))
             {
                 shapeFilePath = serverName;
+                curfeatureAttributes = featureAttributes;
                 if (featureAttributes != null)
                 {
+                    string txtshapekey = cbxShapeKey.Text;
                     cbxShapeKey.Items.Clear();
                     foreach (string key in featureAttributes.Keys)
                     {
                         cbxShapeKey.Items.Add(key);
                     }
+                    if (cbxShapeKey.Items.Contains(txtshapekey)) { cbxShapeKey.Text = txtshapekey; }
                 }
             }
             if (currentElement != null)
@@ -103,7 +113,14 @@ namespace EpiDashboard.Mapping
                 FilterRequested(this, new EventArgs());
             }
         }
-
+        void rctEdit_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (EditRequested != null)
+            {
+                flagrunedit = false;
+                EditRequested(this, new EventArgs());
+            }
+        }
         public void MoveUp()
         {
             provider.MoveUp();
