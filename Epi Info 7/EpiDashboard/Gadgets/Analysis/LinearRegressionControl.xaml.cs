@@ -143,7 +143,7 @@ namespace EpiDashboard
 
             this.GadgetStatusUpdate += new GadgetStatusUpdateHandler(RequestUpdateStatusMessage);
             this.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(IsCancelled);
-            
+            this.headerPanel.IsDescriptionButtonAvailable = false;
             cbxFields.SelectionChanged += new SelectionChangedEventHandler(cbxFields_SelectionChanged);
 
             mnuSendToBack.Click += new RoutedEventHandler(mnuSendToBack_Click);

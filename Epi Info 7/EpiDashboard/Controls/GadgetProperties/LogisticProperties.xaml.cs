@@ -104,7 +104,10 @@ namespace EpiDashboard.Controls.GadgetProperties
             lrc.lbxInteractionTerms = this.lbxInteractionTerms;
             lrc.txtFilterString = null;
             lrc.DataFilters = RowFilterControl.DataFilters;
-
+            lrc.descriptionPanel.Text = this.txtDesc.Text;
+            lrc.headerPanel.Text = this.txtTitle.Text;
+            this.Parameters.GadgetDescription = lrc.descriptionPanel.Text;
+            this.Parameters.GadgetTitle = lrc.headerPanel.Text;
             lrc.RefreshResults();
             btnCancel_Click(sender, e);
 //            RefreshResults();
