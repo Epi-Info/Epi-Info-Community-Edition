@@ -68,6 +68,7 @@ namespace EpiDashboard.Mapping
         private bool hidePanels = false;
         private EpiDashboard.Controls.PointofInterestProperties pointofinterestproperties;
         private EpiDashboard.Controls.CaseClusterProperties caseclusterproperties;
+        private EpiDashboard.Controls.DotDensityProperties dotdensityproperties;
         
         public StandaloneMapControl()
         {
@@ -645,6 +646,24 @@ namespace EpiDashboard.Mapping
                ClusterLayerProperties clusterlayerprop = (ClusterLayerProperties)layerProperties;
                if (clusterlayerprop.FlagRunEdit == false)
                { GenerateCaseClusterMap(clusterlayerprop); }
+           }
+           else if (layerProperties is DotDensityLayerProperties)
+           {
+               DotDensityLayerProperties densitylayerprop = (DotDensityLayerProperties)layerProperties;
+               if (densitylayerprop.FlagRunEdit == false)
+               { GenerateShapeFileDotDensity(densitylayerprop); }
+           }
+           else if (layerProperties is DotDensityServerLayerProperties)
+           {
+               DotDensityServerLayerProperties densitylayerprop = (DotDensityServerLayerProperties)layerProperties;
+               if (densitylayerprop.FlagRunEdit == false)
+               { GenerateShapeFileDotDensity(densitylayerprop); }
+           }
+           else if (layerProperties is DotDensityKmlLayerProperties)
+           {
+               DotDensityKmlLayerProperties densitylayerprop = (DotDensityKmlLayerProperties)layerProperties;
+               if (densitylayerprop.FlagRunEdit == false)
+               { GenerateShapeFileDotDensity(densitylayerprop); }
            }
        }
        //--
@@ -1483,19 +1502,23 @@ namespace EpiDashboard.Mapping
 
         public void GenerateShapeFileDotDensity()
         {
-           // AddLayer(LayerType.DotDensityShapeFile);
-           // ILayerProperties layerProperties = null;
+                   
+            //ILayerProperties layerProperties = null;
             DashboardHelper dashboardHelper = new DashboardHelper();
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
+           
+            /*
+            layerProperties = new DotDensityLayerProperties(myMap, dashboardHelper, this);
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested); */
+          
             EpiDashboard.Controls.DotDensityProperties properties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
-
-            //layerProperties = new DotDensityLayerProperties(myMap, dashboardHelper, this);
-           // layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
-           // layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
            // properties.layerprop = (DotDensityLayerProperties)layerProperties;
             properties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             properties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            properties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
             properties.Width = 800;
             properties.Height = 600;
@@ -1512,11 +1535,252 @@ namespace EpiDashboard.Mapping
 
             properties.Cancelled += new EventHandler(properties_Cancelled);
             properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
-           // grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-           
+                     
             popup.Content = properties;
             popup.Show();
         }
+
+        public void GenerateShapeFileDotDensity(DotDensityLayerProperties densitylayerprop)
+        {
+
+            DashboardHelper dashboardHelper;
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
+            ILayerProperties layerProperties = null;
+
+            layerProperties = (DotDensityLayerProperties)densitylayerprop;
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
+
+            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
+            dotdensityproperties.layerprop = densitylayerprop;
+            dotdensityproperties.provider = densitylayerprop.provider;
+
+            dotdensityproperties.Width = 800;
+            dotdensityproperties.Height = 600;
+
+            dashboardHelper = densitylayerprop.GetDashboardHelper();
+            dotdensityproperties.SetDashboardHelper(dashboardHelper);
+            dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DbName;
+            dotdensityproperties.panelBoundaries.IsEnabled = true;
+
+            dotdensityproperties.dataFilters = new DataFilters(dashboardHelper);
+            dotdensityproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dotdensityproperties.dataFilters, true);
+            dotdensityproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; dotdensityproperties.rowFilterControl.FillSelectionComboboxes();
+            dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
+
+            dotdensityproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
+            if  (string.IsNullOrEmpty(densitylayerprop.shapeFilePath) == false)
+            {
+                dotdensityproperties.radShapeFile.IsChecked = true;
+                dotdensityproperties.txtShapePath.Text = densitylayerprop.shapeFilePath;
+                dotdensityproperties.shapeAttributes = densitylayerprop.shapeAttributes;
+                dotdensityproperties.cmbShapeKey.Items.Clear();
+                if (dotdensityproperties.shapeAttributes == null)
+                {
+                    object[] shapeFileProperties = densitylayerprop.provider.LoadShapeFile(densitylayerprop.shapeFilePath);
+                    dotdensityproperties.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
+                }
+                if (dotdensityproperties.shapeAttributes != null)
+                {
+                    foreach (string key in dotdensityproperties.shapeAttributes.Keys)
+                    { dotdensityproperties.cmbShapeKey.Items.Add(key); }
+                }
+            }
+           
+            dotdensityproperties.FillComboBoxes();
+            dotdensityproperties.cmbShapeKey.Text = densitylayerprop.cbxShapeKey.Text;
+            dotdensityproperties.cmbDataKey.Text = densitylayerprop.cbxDataKey.Text;
+            dotdensityproperties.cmbValue.Text = densitylayerprop.cbxValue.Text;
+            dotdensityproperties.rctDotColor.Fill = densitylayerprop.rctDotColor.Fill;
+            dotdensityproperties.txtDotValue.Text = densitylayerprop.txtDotValue.Text;
+
+            densitylayerprop.FlagRunEdit = true;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > dotdensityproperties.Width)
+            {
+                dotdensityproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > dotdensityproperties.Height)
+            {
+                dotdensityproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            dotdensityproperties.Cancelled += new EventHandler(properties_Cancelled);
+            dotdensityproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            
+            popup.Content = dotdensityproperties;
+            popup.Show();
+        }
+        public void GenerateShapeFileDotDensity(DotDensityServerLayerProperties densitylayerprop)
+        {
+
+            DashboardHelper dashboardHelper;
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
+            ILayerProperties layerProperties = null;
+
+            layerProperties = (DotDensityServerLayerProperties)densitylayerprop;
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
+
+            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
+
+            dotdensityproperties.Width = 800;
+            dotdensityproperties.Height = 600;
+
+            dashboardHelper = densitylayerprop.GetDashboardHelper();
+            dotdensityproperties.SetDashboardHelper(dashboardHelper);
+            dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DbName;
+            dotdensityproperties.panelBoundaries.IsEnabled = true;
+
+            dotdensityproperties.dataFilters = new DataFilters(dashboardHelper);
+            dotdensityproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dotdensityproperties.dataFilters, true);
+            dotdensityproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; dotdensityproperties.rowFilterControl.FillSelectionComboboxes();
+            dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
+
+            dotdensityproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
+
+            dotdensityproperties.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
+            dotdensityproperties.Mapprovider = dotdensityproperties.serverlayerprop.provider;
+            densitylayerprop.shapeFilePath = densitylayerprop.shapeFilePath.Trim();
+
+            if (string.IsNullOrEmpty (densitylayerprop.shapeFilePath) == false) 
+            {
+                dotdensityproperties.radMapServer.IsChecked = true;
+                if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13")
+                    densitylayerprop.cbxMapserverText = "NationalMap.gov - New York County Boundaries";
+                else if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19")
+                    densitylayerprop.cbxMapserverText = "NationalMap.gov - Rhode Island Zip Code Boundaries";
+                else if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17")
+                    densitylayerprop.cbxMapserverText = "NationalMap.gov - U.S. State Boundaries";
+                else if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17")
+                    densitylayerprop.cbxMapserverText = "NationalMap.gov - World Boundaries";
+                else
+                {
+                    string lastchar = densitylayerprop.shapeFilePath.Substring(densitylayerprop.shapeFilePath.Length - 1 , 1);
+                    if (char.IsNumber(lastchar,0) == true)
+                        densitylayerprop.txtMapserverText = densitylayerprop.shapeFilePath.Substring(0, densitylayerprop.shapeFilePath.Length - 2);
+                }
+
+                if (string.IsNullOrEmpty(densitylayerprop.cbxMapserverText) == false)
+                {
+                    dotdensityproperties.radconnectmapserver.IsChecked = true;
+                    dotdensityproperties.cbxmapserver.Text = densitylayerprop.cbxMapserverText;
+                }
+                else
+                {
+                    dotdensityproperties.radlocatemapserver.IsChecked = true;
+                    dotdensityproperties.txtMapSeverpath.Text = densitylayerprop.txtMapserverText;
+                    dotdensityproperties.MapServerConnect();
+                    dotdensityproperties.ResetMapServer();
+                    dotdensityproperties.cbxmapfeature.Text = densitylayerprop.cbxMapFeatureText;
+                    
+                }
+                if (dotdensityproperties.serverlayerprop.curfeatureAttributes != null)
+                {
+                    foreach (string key in dotdensityproperties.serverlayerprop.curfeatureAttributes.Keys)
+                    { dotdensityproperties.cmbShapeKey.Items.Add(key); }
+                }
+            }
+            dotdensityproperties.FillComboBoxes();
+            dotdensityproperties.cmbShapeKey.Text = densitylayerprop.cbxShapeKey.Text;
+            dotdensityproperties.cmbDataKey.Text = densitylayerprop.cbxDataKey.Text;
+            dotdensityproperties.cmbValue.Text = densitylayerprop.cbxValue.Text;
+            dotdensityproperties.rctDotColor.Fill = densitylayerprop.rctDotColor.Fill;
+            dotdensityproperties.txtDotValue.Text = densitylayerprop.txtDotValue.Text;
+
+            densitylayerprop.FlagRunEdit = true;
+           
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > dotdensityproperties.Width)
+            {
+                dotdensityproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > dotdensityproperties.Height)
+            {
+                dotdensityproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            dotdensityproperties.Cancelled += new EventHandler(properties_Cancelled);
+            dotdensityproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+
+            popup.Content = dotdensityproperties;
+            popup.Show();
+           
+        }
+        public void GenerateShapeFileDotDensity(DotDensityKmlLayerProperties densitylayerprop)
+        {
+
+            DashboardHelper dashboardHelper;
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
+            ILayerProperties layerProperties = null;
+
+            layerProperties = (DotDensityKmlLayerProperties)densitylayerprop;
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
+
+            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
+
+            dotdensityproperties.Width = 800;
+            dotdensityproperties.Height = 600;
+
+            dashboardHelper = densitylayerprop.GetDashboardHelper();
+            dotdensityproperties.SetDashboardHelper(dashboardHelper);
+            dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DbName;
+            dotdensityproperties.panelBoundaries.IsEnabled = true;
+
+            dotdensityproperties.dataFilters = new DataFilters(dashboardHelper);
+            dotdensityproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dotdensityproperties.dataFilters, true);
+            dotdensityproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; dotdensityproperties.rowFilterControl.FillSelectionComboboxes();
+            dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
+
+            dotdensityproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
+
+            dotdensityproperties.kmllayerprop = densitylayerprop;  
+            dotdensityproperties.KMLprovider = dotdensityproperties.kmllayerprop.provider;
+            if (string.IsNullOrEmpty(densitylayerprop.shapeFilePath) == false)
+            {
+                dotdensityproperties.radKML.IsChecked = true;
+                dotdensityproperties.txtKMLpath.Text = densitylayerprop.shapeFilePath;
+                if (dotdensityproperties.kmllayerprop.curfeatureAttributes != null)
+                {
+                    foreach (string key in dotdensityproperties.kmllayerprop.curfeatureAttributes.Keys)
+                    { dotdensityproperties.cmbShapeKey.Items.Add(key); }
+                }
+            }
+            dotdensityproperties.FillComboBoxes();
+            dotdensityproperties.cmbShapeKey.Text = densitylayerprop.cbxShapeKey.Text;
+            dotdensityproperties.cmbDataKey.Text = densitylayerprop.cbxDataKey.Text;
+            dotdensityproperties.cmbValue.Text = densitylayerprop.cbxValue.Text;
+            dotdensityproperties.rctDotColor.Fill = densitylayerprop.rctDotColor.Fill;
+            dotdensityproperties.txtDotValue.Text = densitylayerprop.txtDotValue.Text;
+
+            densitylayerprop.FlagRunEdit = true;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > dotdensityproperties.Width)
+            {
+                dotdensityproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > dotdensityproperties.Height)
+            {
+                dotdensityproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            dotdensityproperties.Cancelled += new EventHandler(properties_Cancelled);
+            dotdensityproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+
+            popup.Content = dotdensityproperties;
+            popup.Show();
+
+        }
+
 
         public void GenerateMapServerDotDensity()
         {

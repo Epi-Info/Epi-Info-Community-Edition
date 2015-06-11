@@ -31,21 +31,23 @@ namespace EpiDashboard.Controls
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;
         private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
-        private EpiDashboard.Mapping.DotDensityLayerProvider provider;       
-        public RowFilterControl rowFilterControl { get; protected set; }                  
+        public EpiDashboard.Mapping.DotDensityLayerProvider provider;       
+        //public RowFilterControl rowFilterControl { get; protected set; }                  
+        public RowFilterControl rowFilterControl { get; set; }  
         public DataFilters dataFilters;
         private System.Xml.XmlElement currentElement;
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
-        private EpiDashboard.Mapping.DotDensityKmlLayerProvider KMLprovider;
-        private EpiDashboard.Mapping.DotDensityServerLayerProvider Mapprovider;
+        public event EventHandler EditRequested;
+        public EpiDashboard.Mapping.DotDensityKmlLayerProvider KMLprovider;
+        public EpiDashboard.Mapping.DotDensityServerLayerProvider Mapprovider;
         public EpiDashboard.Mapping.DotDensityLayerProperties layerprop;
         public EpiDashboard.Mapping.DotDensityServerLayerProperties serverlayerprop;
         public EpiDashboard.Mapping.DotDensityKmlLayerProperties kmllayerprop;       
         private string shapeFilePath;
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;
-
+        public  IDictionary<string, object> shapeAttributes;
         # region Public Properties
         public DashboardHelper DashboardHelper { get; private set; }
 
@@ -109,6 +111,8 @@ namespace EpiDashboard.Controls
             this.myMap = myMap;           
             Epi.ApplicationIdentity appId = new Epi.ApplicationIdentity(typeof(Configuration).Assembly);
             tblockCurrentEpiVersion.Text = "Epi Info " + appId.Version;               
+          
+         
         }
 
         #endregion
@@ -128,13 +132,13 @@ namespace EpiDashboard.Controls
             }
         }
 
-        private void FillComboBoxes()
+        public void FillComboBoxes()
         {
             cmbDataKey.Items.Clear();
             cmbValue.Items.Clear();
-            List<string> fields = this.DashboardHelper.GetFieldsAsList(); // dashboardHelper.GetFormFields();
+            List<string> fields = this.dashboardHelper.GetFieldsAsList(); // dashboardHelper.GetFormFields();
             ColumnDataType columnDataType = ColumnDataType.Numeric;
-            List<string> numericFields = this.DashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
+            List<string> numericFields = dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
             foreach (string field in fields)
             {
                 cmbDataKey.Items.Add(field);
@@ -184,11 +188,11 @@ namespace EpiDashboard.Controls
                 string dataKey = cmbDataKey.SelectedItem.ToString();
                 string value = cmbValue.SelectedItem.ToString();
                 if (radShapeFile.IsChecked == true && provider!=null)
-                    provider.SetShapeRangeValues(this.DashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(txtDotValue.Text));
+                    provider.SetShapeRangeValues(this.DashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctDotColor.Fill).Color, int.Parse(txtDotValue.Text));
                 else if (radMapServer.IsChecked == true && Mapprovider!=null)
-                    Mapprovider.SetShapeRangeValues(this.DashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(txtDotValue.Text));
+                    Mapprovider.SetShapeRangeValues(this.DashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctDotColor.Fill).Color, int.Parse(txtDotValue.Text));
                 else if (radKML.IsChecked == true && KMLprovider!=null)
-                    KMLprovider.SetShapeRangeValues(this.DashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(txtDotValue.Text));
+                    KMLprovider.SetShapeRangeValues(this.DashboardHelper, cmbShapeKey.SelectedItem.ToString(), cmbDataKey.SelectedItem.ToString(), cmbValue.SelectedItem.ToString(), ((SolidColorBrush)rctDotColor.Fill).Color, int.Parse(txtDotValue.Text));
             }
         }
        
@@ -303,24 +307,27 @@ namespace EpiDashboard.Controls
         }
                
         private void btnOK_Click(object sender, RoutedEventArgs e)
-        {          
+        {
             if (radShapeFile.IsChecked == true && provider != null)
             {
                 Addfilters();
                 RenderMap();
-                layerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctHighColor.Fill));
+                layerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
             }
             else if (radMapServer.IsChecked == true && Mapprovider != null)
-            {
+                {
                 Addfilters();
                 RenderMap();
-                serverlayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctHighColor.Fill));
-            }
+                serverlayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
+                serverlayerprop.cbxMapserverText = cbxmapserver.Text;
+                serverlayerprop.txtMapserverText = txtMapSeverpath.Text;
+                serverlayerprop.cbxMapFeatureText = cbxmapfeature.Text;
+                }
             else if (radKML.IsChecked == true && KMLprovider != null)
             {
                 Addfilters();
                 RenderMap();
-                kmllayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctHighColor.Fill));
+                kmllayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
             }
             if (ChangesAccepted != null)
             {
@@ -336,9 +343,13 @@ namespace EpiDashboard.Controls
             }
         }
 
+        public void SetDashboardHelper(DashboardHelper dash)
+        {
+            dashboardHelper = dash;
+        }
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
-            dashboardHelper = mapControl.GetNewDashboardHelper();                                 
+            dashboardHelper = mapControl.GetNewDashboardHelper();
             if (dashboardHelper != null)
             {
                 this.DashboardHelper = dashboardHelper; 
@@ -388,21 +399,28 @@ namespace EpiDashboard.Controls
             object[] shapeFileProperties = provider.LoadShapeFile();
             if (shapeFileProperties != null)
             {
-            ILayerProperties layerProperties = null;
-            layerProperties = new DotDensityLayerProperties(myMap, this.DashboardHelper, this.mapControl);
-            layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
-            layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
-            this.layerprop = (DotDensityLayerProperties)layerProperties;
-            layerprop.provider = provider;
-            if (this.DashboardHelper != null)
+                if (layerprop == null)
+                {
+                    ILayerProperties layerProperties = null;
+                    layerProperties = new DotDensityLayerProperties(myMap, this.DashboardHelper, this.mapControl);
+                    layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
+                    layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
+                    layerProperties.EditRequested += new EventHandler(this.mapControl.ILayerProperties_EditRequested);
+                    this.layerprop = (DotDensityLayerProperties)layerProperties;
+                    this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                }
+
+                layerprop.provider = provider;
+                if (this.DashboardHelper != null)
                 layerprop.SetdashboardHelper(DashboardHelper);
-            this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-           
+                        
                 if (shapeFileProperties.Length == 2)
                 {
                     txtShapePath.Text = shapeFileProperties[0].ToString();
                     layerprop.shapeFilePath = shapeFileProperties[0].ToString();
-                    IDictionary<string, object> shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
+                    layerprop.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
+                    //IDictionary<string, object> shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
+                   shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
                     if (shapeAttributes != null)
                     {
                         cmbShapeKey.Items.Clear(); 
@@ -418,47 +436,54 @@ namespace EpiDashboard.Controls
            
         }     
 
-        private void rctHighColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void rctDotColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                rctHighColor.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                rctDotColor.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }     
 
         private void btnKMLFile_Click(object sender, RoutedEventArgs e)
-        {          
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "KML Files (*.kml)|*.kml|KMZ Files (*.kmz)|*.kmz";
-            dialog.Multiselect = false;
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                txtKMLpath.Text = dialog.FileName;
-                KMLMapServerName = txtKMLpath.Text;
+        {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "KML Files (*.kml)|*.kml|KMZ Files (*.kmz)|*.kmz";
+                dialog.Multiselect = false;
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    txtKMLpath.Text = dialog.FileName;
+                    KMLMapServerName = txtKMLpath.Text;
+                }
+
                 if (KMLprovider == null)
                 {
                     KMLprovider = new Mapping.DotDensityKmlLayerProvider(myMap);
                     KMLprovider.FeatureLoaded += new FeatureLoadedHandler(KMLprovider_FeatureLoaded);
-                }               
+                }
+            
                 object[] kmlFileProperties = KMLprovider.LoadKml(KMLMapServerName);
                 if (kmlFileProperties != null)
                 {
-                    ILayerProperties layerProperties = null;
-                    layerProperties = new DotDensityKmlLayerProperties(myMap, this.DashboardHelper, this.mapControl);
-                    layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
-                    layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
-                    this.kmllayerprop = (DotDensityKmlLayerProperties)layerProperties;
+                    if (kmllayerprop == null)
+                    {
+                        ILayerProperties layerProperties = null;
+                        layerProperties = new DotDensityKmlLayerProperties(myMap, this.DashboardHelper, this.mapControl);
+                        layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
+                        layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
+                        layerProperties.EditRequested += new EventHandler(this.mapControl.ILayerProperties_EditRequested);
+                        this.kmllayerprop = (DotDensityKmlLayerProperties)layerProperties;
+                        this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                    }
                     kmllayerprop.shapeFilePath = KMLMapServerName;
                     kmllayerprop.provider = KMLprovider;
                     kmllayerprop.provider.FeatureLoaded += new FeatureLoadedHandler(kmllayerprop.provider_FeatureLoaded);
                     if (this.DashboardHelper != null)
                         kmllayerprop.SetdashboardHelper(DashboardHelper);
-                    this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                    
                 }
             }
-
-        }
+                
 
         private void btnMapFile_Click(object sender, RoutedEventArgs e)
         {
@@ -492,7 +517,7 @@ namespace EpiDashboard.Controls
                         cmbShapeKey.Items.Add(key);
                         serverlayerprop.cbxShapeKey.Items.Add(key);
                     }
-                }
+                 }
             }
             if (currentElement != null)
             {
@@ -516,7 +541,7 @@ namespace EpiDashboard.Controls
                     }
                     if (child.Name.Equals("dotColor"))
                     {
-                       rctHighColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
+                       rctDotColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
                     }
                 }
                 RenderMap();
@@ -537,7 +562,7 @@ namespace EpiDashboard.Controls
                         cmbShapeKey.Items.Add(key);
                         kmllayerprop.cbxShapeKey.Items.Add(key);
                     }
-                }
+                 }
             }
             if (currentElement != null)
             {
@@ -561,7 +586,7 @@ namespace EpiDashboard.Controls
                     }
                     if (child.Name.Equals("dotColor"))
                     {
-                        rctHighColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
+                        rctDotColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
                     }
                 }
                 RenderMap();
@@ -646,9 +671,15 @@ namespace EpiDashboard.Controls
 
         private void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ResetMapServer(); 
+        }
+
+        public void ResetMapServer()
+        {
             if (cbxmapserver.SelectedIndex > -1)
             {
                 MapServerName = ((ComboBoxItem)cbxmapserver.SelectedItem).Content.ToString();
+              
                 if (Mapprovider == null)
                 {
                     Mapprovider = new Mapping.DotDensityServerLayerProvider(myMap);
@@ -657,17 +688,22 @@ namespace EpiDashboard.Controls
                 object[] mapFileProperties = Mapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
                 if (mapFileProperties != null)
                 {
-                    ILayerProperties layerProperties = null;
-                    layerProperties = new DotDensityServerLayerProperties(myMap, this.DashboardHelper, this.mapControl);
-                    layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
-                    layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
-                    this.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
+                    if (this.serverlayerprop == null)
+                    {
+                        ILayerProperties layerProperties = null;
+                        layerProperties = new DotDensityServerLayerProperties(myMap, this.DashboardHelper, this.mapControl);
+                        layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
+                        layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
+                        layerProperties.EditRequested += new EventHandler(this.mapControl.ILayerProperties_EditRequested);
+                        this.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
+                        this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                    }
                     serverlayerprop.shapeFilePath = MapServerName;
                     serverlayerprop.provider = Mapprovider;
                     serverlayerprop.provider.FeatureLoaded += new FeatureLoadedHandler(serverlayerprop.provider_FeatureLoaded);
                     if (this.DashboardHelper != null)
                         serverlayerprop.SetdashboardHelper(DashboardHelper);
-                    this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                   
                 }
             }
         }
@@ -681,6 +717,11 @@ namespace EpiDashboard.Controls
         }
 
         private void btnMapserverlocate_Click(object sender, RoutedEventArgs e)
+        {
+            MapServerConnect();
+        }
+
+        public void MapServerConnect()
         {
             try
             {
@@ -720,17 +761,22 @@ namespace EpiDashboard.Controls
                     object[] mapFileProperties = Mapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);                           
                     if (mapFileProperties != null)
                     {
-                        ILayerProperties layerProperties = null;
-                        layerProperties = new DotDensityServerLayerProperties(myMap, this.DashboardHelper, this.mapControl);
-                        layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
-                        layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
-                        this.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
+                        if (serverlayerprop == null)
+                        {
+                            ILayerProperties layerProperties = null;
+                            layerProperties = new DotDensityServerLayerProperties(myMap, this.DashboardHelper, this.mapControl);
+                            layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
+                            layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
+                            layerProperties.EditRequested += new EventHandler(this.mapControl.ILayerProperties_EditRequested);
+                            this.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
+                            this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                        }
                         serverlayerprop.shapeFilePath = MapServerName;
                         serverlayerprop.provider = Mapprovider;
                         serverlayerprop.provider.FeatureLoaded += new FeatureLoadedHandler(serverlayerprop.provider_FeatureLoaded);
                         if (this.DashboardHelper != null)
                             serverlayerprop.SetdashboardHelper(DashboardHelper);
-                        this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                       
                     }
                 }
                 else
