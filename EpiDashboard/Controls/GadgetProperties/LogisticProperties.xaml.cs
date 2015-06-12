@@ -105,7 +105,10 @@ namespace EpiDashboard.Controls.GadgetProperties
             lrc.txtFilterString = null;
             lrc.DataFilters = RowFilterControl.DataFilters;
             lrc.descriptionPanel.Text = this.txtDesc.Text;
-            lrc.headerPanel.Text = this.txtTitle.Text;
+            if (!String.IsNullOrEmpty(this.txtTitle.Text))
+                lrc.headerPanel.Text = this.txtTitle.Text;
+            else
+                lrc.headerPanel.Text = "Logistic Regression";
             this.Parameters.GadgetDescription = lrc.descriptionPanel.Text;
             this.Parameters.GadgetTitle = lrc.headerPanel.Text;
             lrc.RefreshResults();
