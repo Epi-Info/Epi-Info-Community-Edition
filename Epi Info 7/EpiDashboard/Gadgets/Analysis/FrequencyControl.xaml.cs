@@ -1019,6 +1019,13 @@ namespace EpiDashboard
             {
                 properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
+            if (properties.Height < 800.0)
+            {
+                properties.lbxField.Height = 100.0;
+                properties.scrollViewerVarPro.Height = 100.0;
+                properties.lbxFieldStrata.Height = 100;
+                properties.scrollViewerStrataProperties.Height = 100.0;
+            }
 
             properties.Cancelled += new EventHandler(properties_Cancelled);
             properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
