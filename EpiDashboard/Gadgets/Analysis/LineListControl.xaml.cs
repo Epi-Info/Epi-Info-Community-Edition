@@ -431,6 +431,8 @@ namespace EpiDashboard
                                 continue;
                             }
                             string tableHeading = listTable.TableName;
+                            if (Parameters.ColumnNames.Count != columnOrder.Count)
+                                columnOrder = new List<string>();
                             SetCustomColumnSort(listTable);
 
                             if (listTable.Columns.Count == 0)
@@ -887,6 +889,25 @@ namespace EpiDashboard
             element.AppendChild(customDescElement);
 
             SerializeAnchors(element);
+
+            // when user has re-ordered columns but not refreshed            
+            if (!string.IsNullOrEmpty(listParameters.CustomSortColumnName))
+            {
+                XmlElement customusercolumnsort = doc.CreateElement("customusercolumnsort");
+                customusercolumnsort.InnerText = listParameters.CustomSortColumnName;
+                element.AppendChild(customusercolumnsort);
+            }
+            else if (columnOrder != null && columnOrder.Count > 0) // when user has re-ordered columns but not refreshed
+            {
+                XmlElement customusercolumnsort = doc.CreateElement("customusercolumnsort");
+                WordBuilder wb = new WordBuilder("^");
+                for (int i = 0; i < columnOrder.Count; i++)
+                {
+                    wb.Add(columnOrder[i]);
+                }
+                customusercolumnsort.InnerText = wb.ToString();
+                element.AppendChild(customusercolumnsort);
+            }
 
             XmlElement listItemElement = doc.CreateElement("listFields");
 
