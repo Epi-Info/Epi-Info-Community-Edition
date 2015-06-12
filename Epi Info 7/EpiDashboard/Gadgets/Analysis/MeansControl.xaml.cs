@@ -2340,6 +2340,11 @@ namespace EpiDashboard
             this.Parameters = properties.Parameters;
             this.DataFilters = properties.DataFilters;
             this.Parameters.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
+            if (!String.IsNullOrEmpty(properties.txtTitle.Text))
+                this.headerPanel.Text = properties.txtTitle.Text;
+            else
+                this.headerPanel.Text = "Means";
+            this.descriptionPanel.Text = properties.txtDesc.Text;
             Popup.Close();
             if (properties.HasSelectedFields)
             {
