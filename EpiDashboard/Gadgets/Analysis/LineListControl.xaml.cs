@@ -248,11 +248,17 @@ namespace EpiDashboard
             dg.GroupStyle.Add(groupStyle2);
 
             string groupVar = String.Empty;
-
+          DataTable  dataTable = dv.ToTable();
+          if (dataTable.Rows.Count > ListParameters.MaxRows)
+            {
+                dataTable = dataTable.AsEnumerable().Skip(0).Take(ListParameters.MaxRows).CopyToDataTable();
+            }
+                      
+            DataView dataView = new DataView(dataTable);
             if (!String.IsNullOrEmpty(ListParameters.PrimaryGroupField.Trim()))
             {
                 groupVar = ListParameters.PrimaryGroupField.Trim();
-                ListCollectionView lcv = new ListCollectionView(dv);
+                ListCollectionView lcv = new ListCollectionView(dataView);
                 lcv.GroupDescriptions.Add(new PropertyGroupDescription(groupVar));
                 if (!String.IsNullOrEmpty(ListParameters.SecondaryGroupField.Trim()) && !ListParameters.SecondaryGroupField.Trim().Equals(groupVar))
                 {
@@ -263,10 +269,9 @@ namespace EpiDashboard
             }
             else
             {
-                dg.ItemsSource = dv;
+                dg.ItemsSource = dataView;
             }
-
-
+            
             if (Parameters.Height.HasValue)
             {
                 dg.MaxHeight = Parameters.Height.Value;
@@ -296,6 +301,11 @@ namespace EpiDashboard
             e.Column.IsReadOnly = true;
 
             DataGridTextColumn dataGridTextColumn = e.Column as DataGridTextColumn;
+            if (dataGridTextColumn.Header.ToString().Length > ((LineListParameters)Parameters).MaxColumnLength)
+              {
+                   dataGridTextColumn.Header = dataGridTextColumn.Header.ToString().Substring(0, ((LineListParameters)Parameters).MaxColumnLength) + StringLiterals.ELLIPSIS;
+              }
+                     
             if (dataGridTextColumn != null)
             {
                 if (e.PropertyType == typeof(DateTime))
@@ -374,6 +384,8 @@ namespace EpiDashboard
 
                 try
                 {
+                    int maxRows =( (LineListParameters)Parameters).MaxRows;
+                    bool exceededMaxRows = false;
                     Parameters.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
                     Parameters.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
                     if (this.DataFilters != null)
@@ -441,7 +453,10 @@ namespace EpiDashboard
                             }
 
                             int[] totals = new int[listTable.Columns.Count - 1];
-
+                            if (listTable.Rows.Count > maxRows)
+                            {
+                                exceededMaxRows = true;
+                            } 
                             this.Dispatcher.BeginInvoke(addDataGrid, listTable.AsDataView(), listTable.TableName);
                         }
 
@@ -451,6 +466,11 @@ namespace EpiDashboard
                         //}
                         //lineListTables.Clear();
                     }
+                    if(exceededMaxRows)
+                    {
+                          this.Dispatcher.BeginInvoke(new RenderFinishWithWarningDelegate(RenderFinishWithWarning), string.Format(SharedStrings.DASHBOARD_GADGET_STATUS_ROW_LIMIT, maxRows.ToString()));
+                    }
+                    else
 
                     this.Dispatcher.BeginInvoke(new SimpleCallback(RenderFinish));
                 }
@@ -888,6 +908,14 @@ namespace EpiDashboard
             customDescElement.InnerText = listParameters.GadgetDescription; // CustomOutputDescription.Replace("<", "&lt;");
             element.AppendChild(customDescElement);
 
+            XmlElement customMaxRowElement = doc.CreateElement("maxRows");
+            customMaxRowElement.InnerText = listParameters.MaxRows.ToString(); // CustomOutputHeading.Replace("<", "&lt;");
+            element.AppendChild(customMaxRowElement);
+
+            XmlElement customMaxColumnElement = doc.CreateElement("maxColumnNameLength");
+            customMaxColumnElement.InnerText = listParameters.MaxColumnLength.ToString(); // CustomOutputHeading.Replace("<", "&lt;");
+            element.AppendChild(customMaxColumnElement);
+
             SerializeAnchors(element);
 
             // when user has re-ordered columns but not refreshed            
@@ -981,6 +1009,16 @@ namespace EpiDashboard
                         {
                             ((LineListParameters)Parameters).SecondaryGroupField = child.InnerText.Trim();
                         }
+                        break;
+                    case "maxcolumnnamelength":
+                        int maxColumnLength = 24;
+                        int.TryParse(child.InnerText, out maxColumnLength);
+                        ((LineListParameters)Parameters).MaxColumnLength = maxColumnLength;
+                        break;
+                    case "maxrows":
+                        int maxRows = 50;
+                        int.TryParse(child.InnerText, out maxRows);
+                        ((LineListParameters)Parameters).MaxRows = maxRows;
                         break;
                     case "sortcolumnsbytaborder":
                         bool sortByTabs = false;

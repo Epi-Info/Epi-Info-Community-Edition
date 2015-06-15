@@ -16,6 +16,8 @@ namespace EpiDashboard
         public bool ShowNullLabels { get; set; }
         public string PrimaryGroupField { get; set; }
         public string SecondaryGroupField { get; set; }
+        public int MaxColumnLength { get; set; }
+        public int MaxRows { get; set; }
 
         public LineListParameters()
             : base()

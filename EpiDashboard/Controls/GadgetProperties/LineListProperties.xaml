@@ -127,7 +127,14 @@
              
             <Label x:Name="tblockMaxHeight" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max height:" Margin="0,5,0,0"  />
             <TextBox x:Name="txtMaxHeight" Width="40" HorizontalAlignment="Left" Text="500" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"></TextBox>
-            </StackPanel>
+
+                        <Label x:Name="tblockMaxVarNameLength" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max variable name length:" Margin="0,5,0,0"  />
+                        <TextBox x:Name="txtMaxVarNameLength" Width="40" HorizontalAlignment="Left" Text="24"  PreviewTextInput="txtMaxVarNameLength_PreviewTextInput"></TextBox>
+
+                        <Label x:Name="tblockMaxRows" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max rows to display:" Margin="0,5,0,0"  />
+                        <TextBox x:Name="txtMaxRows" Width="40" HorizontalAlignment="Left" Text="50" TextChanged="txtMaxRows_TextChanged" PreviewTextInput="txtMaxVarNameLength_PreviewTextInput"></TextBox>
+
+                    </StackPanel>
              </Border>
             </WrapPanel>
             

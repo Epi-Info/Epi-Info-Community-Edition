@@ -21,6 +21,7 @@ namespace EpiDashboard.Controls.GadgetProperties
     /// </summary>
     public partial class LineListProperties : GadgetPropertiesPanelBase
     {
+        private const int MAX_ROW_LIMIT = 2000;
         public LineListProperties(
             DashboardHelper dashboardHelper, 
             IGadget gadget, 
@@ -129,6 +130,8 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             double height = 0;
             double width = 0;
+            int maxrows = 0;
+            int maxColumnLength = 0;
 
             bool success = double.TryParse(txtMaxHeight.Text, out height);
             if (success)
@@ -140,6 +143,18 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (success)
             {
                 Parameters.Width = width;
+            }
+
+            success = int.TryParse(txtMaxVarNameLength.Text, out maxColumnLength);
+            if (success)
+            {
+                Parameters.MaxColumnLength = maxColumnLength;
+            }
+
+            success = int.TryParse(txtMaxRows.Text, out maxrows);
+            if (success)
+            {
+                Parameters.MaxRows = maxrows;
             }
 
             List<string> listFields = new List<string>();
@@ -310,6 +325,14 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 txtMaxWidth.Text = Parameters.Width.ToString();
             }
+            if (!String.IsNullOrEmpty(Parameters.MaxColumnLength.ToString()) & Parameters.MaxColumnLength!=0)
+            {
+                txtMaxVarNameLength.Text = Parameters.MaxColumnLength.ToString();
+            }
+            if (!String.IsNullOrEmpty(Parameters.MaxRows.ToString()) & Parameters.MaxRows!=0)
+            {
+                txtMaxRows.Text = Parameters.MaxRows.ToString();
+            }
 
             lbxAvailableVariables.Height = lbxAvailableVariables.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 868.0);
             lbxSortOrder.Height = lbxSortOrder.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 868.0);
@@ -430,6 +453,26 @@ namespace EpiDashboard.Controls.GadgetProperties
                     lbxAvailableVariables.Items.Add(item);
                 }
             }
+        }
+               
+        private void txtMaxVarNameLength_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Util.IsWholeNumber(e.Text);
+            base.OnPreviewTextInput(e);
+        }
+
+        private void txtMaxRows_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int rows = 0;
+
+            int.TryParse(txtMaxRows.Text, out rows);
+
+            if (rows > MAX_ROW_LIMIT)
+            {
+                rows = MAX_ROW_LIMIT;
+                txtMaxRows.Text = rows.ToString();
+            }
+
         }
     }
 }
