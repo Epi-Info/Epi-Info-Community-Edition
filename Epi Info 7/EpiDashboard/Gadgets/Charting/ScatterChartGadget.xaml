@@ -61,8 +61,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <TextBlock x:Name="tblockChartTitle" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Margin="0, 6, 0, 6" Visibility="Collapsed" />
-
+                        <!--<TextBlock x:Name="tblockChartTitle" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Margin="0, 6, 0, 6" Visibility="Collapsed" /> -->
+                       
                         <Canvas x:Name="yAxisLabelCanvas" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="Auto">
                             <TextBlock x:Name="tblockYAxisLabel" FontWeight="DemiBold" Canvas.Bottom="0" Canvas.Left="0" TextAlignment="Center" Margin="0,0,0,0" Text="Count" Visibility="Collapsed" >                    
                                 <TextBlock.RenderTransform>
@@ -72,7 +72,7 @@
                                 </TextBlock.RenderTransform>
                             </TextBlock>
                         </Canvas>
-
+                       
                         <TextBlock x:Name="tblockXAxisLabel" FontWeight="DemiBold" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0, 0, 0, 6" Visibility="Collapsed" />
 
                         <charting:XYChart x:Name="xyChart" Background="White" Grid.Row="0" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated" DataPointSubsamplingEnabled="False" AllowFractionalPointXRange="True">
@@ -106,7 +106,10 @@
                                 </charting:CoordinateStripes.StripeTemplate>
                             </charting:CoordinateStripes>-->
                         </charting:XYChart>
-
+                        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" >
+                            <TextBlock x:Name="tblockChartTitle"   HorizontalAlignment="Center" FontSize="22" FontWeight="Bold"  Margin="0, 0, 0, 6" Visibility="Collapsed"   />
+                            <TextBlock x:Name="tblockChartSubTitle"  HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0, 0, 0, 10" Visibility="Collapsed" />
+                        </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="1" x:Name="panelFormula" Visibility="Collapsed" >
                             <Border BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top">
                                 <StackPanel Margin="5">

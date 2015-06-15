@@ -201,6 +201,7 @@ namespace EpiDashboard.Gadgets.Charting
                 }
 
                 tblockChartTitle.Text = chtParameters.ChartTitle;
+                tblockChartSubTitle.Text = chtParameters.ChartSubTitle;
             }
 
             /// <summary>
@@ -300,6 +301,14 @@ namespace EpiDashboard.Gadgets.Charting
                 else
                 {
                     tblockChartTitle.Visibility = System.Windows.Visibility.Visible;
+                }
+                if (string.IsNullOrEmpty(tblockChartSubTitle.Text.Trim()))
+                {
+                    tblockChartSubTitle.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else
+                {
+                    tblockChartSubTitle.Visibility = System.Windows.Visibility.Visible;
                 }
             }
 
