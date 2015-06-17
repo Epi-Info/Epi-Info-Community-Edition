@@ -342,6 +342,8 @@ namespace EpiDashboard
                 {
                     dataGridTextColumn.CellStyle = this.Resources["RightAlignDataGridCellStyle"] as Style;
                 }
+                if(((LineListParameters)Parameters).ShowNullLabels)
+                    dataGridTextColumn.Binding.TargetNullValue = DashboardHelper.Config.Settings.RepresentationOfMissing;
             }
         }
 
