@@ -78,8 +78,6 @@
                     <TextBox x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"></TextBox>
                     <Button x:Name="btnBrowse" Height="Auto" Grid.Column="2" Click="btnBrowse_Click">Browse</Button>
                 </Grid>
-
-                
             </StackPanel>
 
             <StackPanel x:Name="panelDataSourceOther" Visibility="Collapsed">
@@ -117,7 +115,6 @@
 
         <StackPanel x:Name="panelInfo" Grid.Column="2" Margin="8" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Canvas Information</Label>
-
             <TextBlock x:Name="tblockRows" Text="2,255 unfiltered rows" Margin="0,0,0,16" />
             <TextBlock x:Name="tblockColumns" Text="252 columns" Margin="0,0,0,16" />
             <TextBlock x:Name="tblockCacheDateTime" Text="Data last cached at 12/16/2011 1:56 PM" Margin="0,0,0,16" />
@@ -133,10 +130,13 @@
             <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" Width="100" Margin="8,0,0,2">
                 <ComboBoxItem>2</ComboBoxItem>
                 <ComboBoxItem>3</ComboBoxItem>
-                <ComboBoxItem IsSelected="True">4</ComboBoxItem>
-                <ComboBoxItem>5</ComboBoxItem>
+                <ComboBoxItem>4</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">5</ComboBoxItem>
                 <ComboBoxItem>6</ComboBoxItem>
                 <ComboBoxItem>7</ComboBoxItem>
+                <ComboBoxItem>8</ComboBoxItem>
+                <ComboBoxItem>9</ComboBoxItem>
+                <ComboBoxItem>10</ComboBoxItem>
             </ComboBox>
             <StackPanel Orientation="Horizontal" Margin="8,0,0,2" >
                 <!--<CheckBox x:Name="useGradient" IsChecked="True" Click="CheckBox_Click">Use gradient</CheckBox>-->
@@ -154,7 +154,8 @@
                 </Rectangle>
             </StackPanel>
             <Button Click="ResetLegend_Click" HorizontalAlignment="Left" Width="134" Height="42" Margin="8,2,0,16">Reset Legend</Button>
-            <ScrollViewer Height="300">
+            <CheckBox x:Name="quintilesOption" Click="CheckBox_Quantiles_Click" HorizontalAlignment="Left" Width="134" Height="42" Margin="8,20,0,16">Quantiles</CheckBox>
+
             <Grid x:Name="stratGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -165,55 +166,91 @@
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
-                </Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="75"/>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="75"/>
+                    <ColumnDefinition Width="75" x:Name="quintileColumn"/>
                     <ColumnDefinition Width="220"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Color</TextBlock>
                 <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">Range</TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center">Legend Text</TextBlock>
-                <Rectangle Grid.Row="1" Grid.Column="0" x:Name="rctColor1" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor1_MouseLeftButtonUp"/>
-                <Rectangle Grid.Row="2" Grid.Column="0" x:Name="rctColor2" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor2_MouseLeftButtonUp"/>
-                <Rectangle Grid.Row="3" Grid.Column="0" x:Name="rctColor3" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor3_MouseLeftButtonUp"/>
-                <Rectangle Grid.Row="4" Grid.Column="0" x:Name="rctColor4" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor4_MouseLeftButtonUp"/>
-                <Rectangle Grid.Row="5" Grid.Column="0" x:Name="rctColor5" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor5_MouseLeftButtonUp"/>
-                <Rectangle Grid.Row="6" Grid.Column="0" x:Name="rctColor6" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor6_MouseLeftButtonUp"/>
-                <Rectangle Grid.Row="7" Grid.Column="0" x:Name="rctColor7" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
-                <TextBox Grid.Row="1" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                <TextBox Grid.Row="2" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                <TextBox Grid.Row="3" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                <TextBox Grid.Row="4" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                <TextBox Grid.Row="5" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                <TextBox Grid.Row="6" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                <TextBox Grid.Row="7" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                <TextBlock Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                <TextBlock Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                <TextBlock Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                <TextBlock Grid.Row="7" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                <TextBox Grid.Row="1" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                <TextBox Grid.Row="2" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                <TextBox Grid.Row="3" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                <TextBox Grid.Row="4" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                <TextBox Grid.Row="5" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                <TextBox Grid.Row="6" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                <TextBox Grid.Row="7" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                <TextBox Grid.Row="1" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                <TextBox Grid.Row="2" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                <TextBox Grid.Row="3" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                <TextBox Grid.Row="4" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                <TextBox Grid.Row="5" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                <TextBox Grid.Row="6" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                <TextBox Grid.Row="7" Grid.Column="4" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                </Grid>
-            </ScrollViewer>
+                <TextBlock Grid.Row="0" Grid.Column="4" x:Name="quintilesHeaderText" MinWidth="75" HorizontalAlignment="Center">Quantiles</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center">Legend Text</TextBlock>
+                
+                <Rectangle Grid.Row="01" Grid.Column="0" x:Name="rctColor01" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor1_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="02" Grid.Column="0" x:Name="rctColor02" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor2_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="03" Grid.Column="0" x:Name="rctColor03" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor3_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="04" Grid.Column="0" x:Name="rctColor04" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor4_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="05" Grid.Column="0" x:Name="rctColor05" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor5_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="06" Grid.Column="0" x:Name="rctColor06" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor6_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="07" Grid.Column="0" x:Name="rctColor07" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="08" Grid.Column="0" x:Name="rctColor08" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="09" Grid.Column="0" x:Name="rctColor09" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="10" Grid.Column="0" x:Name="rctColor10" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
+
+                <TextBox Grid.Row="01" x:Name="rampStart01" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="02" x:Name="rampStart02" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="03" x:Name="rampStart03" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="04" x:Name="rampStart04" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="05" x:Name="rampStart05" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="06" x:Name="rampStart06" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="07" x:Name="rampStart07" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="08" x:Name="rampStart08" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="09" x:Name="rampStart09" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="10" x:Name="rampStart10" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+
+                <TextBlock Grid.Row="01" x:Name="centerText01" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                <TextBlock Grid.Row="02" x:Name="centerText02" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                <TextBlock Grid.Row="03" x:Name="centerText03" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                <TextBlock Grid.Row="04" x:Name="centerText04" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                <TextBlock Grid.Row="05" x:Name="centerText05" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                <TextBlock Grid.Row="06" x:Name="centerText06" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                <TextBlock Grid.Row="07" x:Name="centerText07" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                <TextBlock Grid.Row="08" x:Name="centerText08" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                <TextBlock Grid.Row="09" x:Name="centerText09" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                <TextBlock Grid.Row="10" x:Name="centerText10" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+
+                <TextBox Grid.Row="01" x:Name="rampEnd01" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                <TextBox Grid.Row="02" x:Name="rampEnd02" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                <TextBox Grid.Row="03" x:Name="rampEnd03" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                <TextBox Grid.Row="04" x:Name="rampEnd04" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                <TextBox Grid.Row="05" x:Name="rampEnd05" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                <TextBox Grid.Row="06" x:Name="rampEnd06" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                <TextBox Grid.Row="07" x:Name="rampEnd07" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                <TextBox Grid.Row="08" x:Name="rampEnd08" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                <TextBox Grid.Row="09" x:Name="rampEnd09" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                <TextBox Grid.Row="10" x:Name="rampEnd10" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+
+                <TextBox Grid.Row="01" x:Name="quintile01" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="02" x:Name="quintile02" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="03" x:Name="quintile03" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="04" x:Name="quintile04" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="05" x:Name="quintile05" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="06" x:Name="quintile06" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="07" x:Name="quintile07" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="08" x:Name="quintile08" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="09" x:Name="quintile09" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="10" x:Name="quintile10" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+
+                <TextBox Grid.Row="01" x:Name="legendText01" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="02" x:Name="legendText02" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="03" x:Name="legendText03" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="04" x:Name="legendText04" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="05" x:Name="legendText05" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="06" x:Name="legendText06" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="07" x:Name="legendText07" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="08" x:Name="legendText08" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="09" x:Name="legendText09" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="10" x:Name="legendText10" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+            </Grid>
+
         </StackPanel>
         
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />

@@ -27,6 +27,10 @@ namespace EpiDashboard.Controls
         private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
         private EpiDashboard.Mapping.ChoroplethLayerProvider provider;
+        private int currentStratCount;
+        private SolidColorBrush currentColor_rampStart;
+        private SolidColorBrush currentColor_rampEnd;
+        private bool initialRampCalc;
 
         public ChoroplethProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
         {
@@ -77,7 +81,19 @@ namespace EpiDashboard.Controls
             //    }
             //}
 
+            if (int.TryParse(cmbClasses.Text, out currentStratCount) == false)
+            {
+                currentStratCount = 4;
+            }
+
+            currentColor_rampStart = (SolidColorBrush)rctLowColor.Fill;
+            currentColor_rampEnd = (SolidColorBrush)rctHighColor.Fill;
+
+            initialRampCalc = true;
+
             ResetLegend_Click(new object(), new RoutedEventArgs());
+
+            OnQuintileOptionChanged();
         }
 
         
@@ -290,12 +306,16 @@ namespace EpiDashboard.Controls
                 string value = cmbValue.SelectedItem.ToString();
                 
                 List<SolidColorBrush> brushList = new List<SolidColorBrush>() { 
-                    (SolidColorBrush)rctColor1.Fill, 
-                    (SolidColorBrush)rctColor2.Fill, 
-                    (SolidColorBrush)rctColor3.Fill, 
-                    (SolidColorBrush)rctColor4.Fill, 
-                    (SolidColorBrush)rctColor5.Fill, 
-                    (SolidColorBrush)rctColor6.Fill };
+                    (SolidColorBrush)rctColor01.Fill, 
+                    (SolidColorBrush)rctColor02.Fill, 
+                    (SolidColorBrush)rctColor03.Fill, 
+                    (SolidColorBrush)rctColor04.Fill, 
+                    (SolidColorBrush)rctColor05.Fill, 
+                    (SolidColorBrush)rctColor06.Fill, 
+                    (SolidColorBrush)rctColor07.Fill, 
+                    (SolidColorBrush)rctColor08.Fill, 
+                    (SolidColorBrush)rctColor09.Fill, 
+                    (SolidColorBrush)rctColor10.Fill };
 
                 int classCount;
                 if (int.TryParse(cmbClasses.Text, out classCount))
@@ -317,7 +337,7 @@ namespace EpiDashboard.Controls
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                rctColor1.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                rctColor01.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -326,7 +346,7 @@ namespace EpiDashboard.Controls
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                rctColor2.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                rctColor02.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -335,7 +355,7 @@ namespace EpiDashboard.Controls
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                rctColor3.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                rctColor03.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -344,7 +364,7 @@ namespace EpiDashboard.Controls
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                rctColor4.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                rctColor04.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -353,7 +373,7 @@ namespace EpiDashboard.Controls
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                rctColor5.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                rctColor05.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -362,7 +382,7 @@ namespace EpiDashboard.Controls
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                rctColor6.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                rctColor06.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -371,9 +391,37 @@ namespace EpiDashboard.Controls
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                rctColor7.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                rctColor07.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
+
+        private void rctColor08_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                rctColor08.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+            }
+        }
+
+        private void rctColor09_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                rctColor09.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+            }
+        }
+
+        private void rctColor10_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                rctColor10.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+            }
+        }
+
 
         private void rctLowColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -413,6 +461,20 @@ namespace EpiDashboard.Controls
             rampStart = (SolidColorBrush)rctLowColor.Fill;
             rampEnd = (SolidColorBrush)rctHighColor.Fill;
 
+            bool isNewColorRamp = true;
+
+            if (rampStart == currentColor_rampStart && rampEnd == currentColor_rampEnd && stratCount == currentStratCount)
+            {
+                if (initialRampCalc == false)
+                {
+                    isNewColorRamp = false;
+                }
+            }
+
+            currentStratCount = stratCount;
+            currentColor_rampStart = rampStart;
+            currentColor_rampEnd = rampEnd;
+
             int rd = rampStart.Color.R - rampEnd.Color.R;
             int gd = rampStart.Color.G - rampEnd.Color.G;
             int bd = rampStart.Color.B - rampEnd.Color.B;
@@ -421,57 +483,187 @@ namespace EpiDashboard.Controls
             byte gi = (byte)(gd / (stratCount - 1));
             byte bi = (byte)(bd / (stratCount - 1));
 
-            rctColor1.Fill = rampStart;
+            if (isNewColorRamp) rctColor01.Fill = rampStart;
 
             int i = 3;
 
             Color coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri), (byte)(rampStart.Color.G - gi), (byte)(rampStart.Color.B - bi));
-            rctColor2.Fill = new SolidColorBrush(coo);
+            if (isNewColorRamp) rctColor02.Fill = new SolidColorBrush(coo);
 
             coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 2), (byte)(rampStart.Color.G - gi * 2), (byte)(rampStart.Color.B - bi * 2));
-            rctColor3.Visibility = System.Windows.Visibility.Visible;
+            rctColor03.Visibility = System.Windows.Visibility.Visible;
+            rampStart03.Visibility = System.Windows.Visibility.Visible;
+            centerText03.Visibility = System.Windows.Visibility.Visible;
+            rampEnd03.Visibility = System.Windows.Visibility.Visible;
+            quintile03.Visibility = System.Windows.Visibility.Visible;
+            legendText03.Visibility = System.Windows.Visibility.Visible;
             if (i++ > stratCount)
             {
                 coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor3.Visibility = System.Windows.Visibility.Hidden;
+                rctColor03.Visibility = System.Windows.Visibility.Hidden;
+                rctColor03.Visibility = System.Windows.Visibility.Hidden;
+                rampStart03.Visibility = System.Windows.Visibility.Hidden;
+                centerText03.Visibility = System.Windows.Visibility.Hidden;
+                rampEnd03.Visibility = System.Windows.Visibility.Hidden;
+                quintile03.Visibility = System.Windows.Visibility.Hidden;
+                legendText03.Visibility = System.Windows.Visibility.Hidden;
             }
-            rctColor3.Fill = new SolidColorBrush(coo);
+            if(isNewColorRamp) rctColor03.Fill = new SolidColorBrush(coo);
 
             coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 3), (byte)(rampStart.Color.G - gi * 3), (byte)(rampStart.Color.B - bi * 3));
-            rctColor4.Visibility = System.Windows.Visibility.Visible;
+            rctColor04.Visibility = System.Windows.Visibility.Visible;
+            rampStart04.Visibility = System.Windows.Visibility.Visible;
+            centerText04.Visibility = System.Windows.Visibility.Visible;
+            rampEnd04.Visibility = System.Windows.Visibility.Visible;
+            quintile04.Visibility = System.Windows.Visibility.Visible;
+            legendText04.Visibility = System.Windows.Visibility.Visible;
             if (i++ > stratCount)
             {
                 coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor4.Visibility = System.Windows.Visibility.Hidden;
+                rctColor04.Visibility = System.Windows.Visibility.Hidden;
+                rampStart04.Visibility = System.Windows.Visibility.Hidden;
+                centerText04.Visibility = System.Windows.Visibility.Hidden;
+                rampEnd04.Visibility = System.Windows.Visibility.Hidden;
+                quintile04.Visibility = System.Windows.Visibility.Hidden;
+                legendText04.Visibility = System.Windows.Visibility.Hidden;
             }
-            rctColor4.Fill = new SolidColorBrush(coo);
+            
+            if (isNewColorRamp) rctColor04.Fill = new SolidColorBrush(coo);
 
             coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 4), (byte)(rampStart.Color.G - gi * 4), (byte)(rampStart.Color.B - bi * 4));
-            rctColor5.Visibility = System.Windows.Visibility.Visible; 
+            rctColor05.Visibility = System.Windows.Visibility.Visible;
+            rampStart05.Visibility = System.Windows.Visibility.Visible;
+            centerText05.Visibility = System.Windows.Visibility.Visible;
+            rampEnd05.Visibility = System.Windows.Visibility.Visible;
+            quintile05.Visibility = System.Windows.Visibility.Visible;
+            legendText05.Visibility = System.Windows.Visibility.Visible;
             if (i++ > stratCount)
             {
                 coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor5.Visibility = System.Windows.Visibility.Hidden;
+                rctColor05.Visibility = System.Windows.Visibility.Hidden;
+                rampStart05.Visibility = System.Windows.Visibility.Hidden;
+                centerText05.Visibility = System.Windows.Visibility.Hidden;
+                rampEnd05.Visibility = System.Windows.Visibility.Hidden;
+                quintile05.Visibility = System.Windows.Visibility.Hidden;
+                legendText05.Visibility = System.Windows.Visibility.Hidden;
             }
-            rctColor5.Fill = new SolidColorBrush(coo);
+            
+            if (isNewColorRamp) rctColor05.Fill = new SolidColorBrush(coo);
 
             coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 5), (byte)(rampStart.Color.G - gi * 5), (byte)(rampStart.Color.B - bi * 5));
-            rctColor6.Visibility = System.Windows.Visibility.Visible; 
+            rctColor06.Visibility = System.Windows.Visibility.Visible;
+            rampStart06.Visibility = System.Windows.Visibility.Visible;
+            centerText06.Visibility = System.Windows.Visibility.Visible;
+            rampEnd06.Visibility = System.Windows.Visibility.Visible;
+            quintile06.Visibility = System.Windows.Visibility.Visible;
+            legendText06.Visibility = System.Windows.Visibility.Visible;
             if (i++ > stratCount)
             {
                 coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor6.Visibility = System.Windows.Visibility.Hidden;
-            } 
-            rctColor6.Fill = new SolidColorBrush(coo);
+                rctColor06.Visibility = System.Windows.Visibility.Hidden;
+                rampStart06.Visibility = System.Windows.Visibility.Hidden;
+                centerText06.Visibility = System.Windows.Visibility.Hidden;
+                rampEnd06.Visibility = System.Windows.Visibility.Hidden;
+                quintile06.Visibility = System.Windows.Visibility.Hidden;
+                legendText06.Visibility = System.Windows.Visibility.Hidden;
+            }
+
+            if (isNewColorRamp) rctColor06.Fill = new SolidColorBrush(coo);
 
             coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 6), (byte)(rampStart.Color.G - gi * 6), (byte)(rampStart.Color.B - bi * 6));
-            rctColor7.Visibility = System.Windows.Visibility.Visible; 
+            rctColor07.Visibility = System.Windows.Visibility.Visible;
+            rampStart07.Visibility = System.Windows.Visibility.Visible;
+            centerText07.Visibility = System.Windows.Visibility.Visible;
+            rampEnd07.Visibility = System.Windows.Visibility.Visible;
+            quintile07.Visibility = System.Windows.Visibility.Visible;
+            legendText07.Visibility = System.Windows.Visibility.Visible;
             if (i++ > stratCount)
             {
                 coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor7.Visibility = System.Windows.Visibility.Hidden;
+                rctColor07.Visibility = System.Windows.Visibility.Hidden;
+                rampStart07.Visibility = System.Windows.Visibility.Hidden;
+                centerText07.Visibility = System.Windows.Visibility.Hidden;
+                rampEnd07.Visibility = System.Windows.Visibility.Hidden;
+                quintile07.Visibility = System.Windows.Visibility.Hidden;
+                legendText07.Visibility = System.Windows.Visibility.Hidden;
             }
-            rctColor7.Fill = new SolidColorBrush(coo);
+            if (isNewColorRamp) rctColor07.Fill = new SolidColorBrush(coo);
+
+            coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 7), (byte)(rampStart.Color.G - gi * 7), (byte)(rampStart.Color.B - bi * 7));
+            rctColor08.Visibility = System.Windows.Visibility.Visible;
+            rampStart08.Visibility = System.Windows.Visibility.Visible;
+            centerText08.Visibility = System.Windows.Visibility.Visible;
+            rampEnd08.Visibility = System.Windows.Visibility.Visible;
+            quintile08.Visibility = System.Windows.Visibility.Visible;
+            legendText08.Visibility = System.Windows.Visibility.Visible;
+            if (i++ > stratCount)
+            {
+                coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+                rctColor08.Visibility = System.Windows.Visibility.Hidden;
+                rampStart08.Visibility = System.Windows.Visibility.Hidden;
+                centerText08.Visibility = System.Windows.Visibility.Hidden;
+                rampEnd08.Visibility = System.Windows.Visibility.Hidden;
+                quintile08.Visibility = System.Windows.Visibility.Hidden;
+                legendText08.Visibility = System.Windows.Visibility.Hidden;
+            }
+            if (isNewColorRamp) rctColor08.Fill = new SolidColorBrush(coo);
+
+            coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 8), (byte)(rampStart.Color.G - gi * 8), (byte)(rampStart.Color.B - bi * 8));
+            rctColor09.Visibility = System.Windows.Visibility.Visible;
+            rampStart09.Visibility = System.Windows.Visibility.Visible;
+            centerText09.Visibility = System.Windows.Visibility.Visible;
+            rampEnd09.Visibility = System.Windows.Visibility.Visible;
+            quintile09.Visibility = System.Windows.Visibility.Visible;
+            legendText09.Visibility = System.Windows.Visibility.Visible;
+            if (i++ > stratCount)
+            {
+                coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+                rctColor09.Visibility = System.Windows.Visibility.Hidden;
+                rampStart09.Visibility = System.Windows.Visibility.Hidden;
+                centerText09.Visibility = System.Windows.Visibility.Hidden;
+                rampEnd09.Visibility = System.Windows.Visibility.Hidden;
+                quintile09.Visibility = System.Windows.Visibility.Hidden;
+                legendText09.Visibility = System.Windows.Visibility.Hidden;
+            }
+            if (isNewColorRamp) rctColor09.Fill = new SolidColorBrush(coo);
+
+            coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 6), (byte)(rampStart.Color.G - gi * 9), (byte)(rampStart.Color.B - bi * 9));
+            rctColor10.Visibility = System.Windows.Visibility.Visible;
+            rampStart10.Visibility = System.Windows.Visibility.Visible;
+            centerText10.Visibility = System.Windows.Visibility.Visible;
+            rampEnd10.Visibility = System.Windows.Visibility.Visible;
+            quintile10.Visibility = System.Windows.Visibility.Visible;
+            legendText10.Visibility = System.Windows.Visibility.Visible;
+            if (i++ > stratCount)
+            {
+                coo = Color.FromArgb(240, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+                rctColor10.Visibility = System.Windows.Visibility.Hidden;
+                rampStart10.Visibility = System.Windows.Visibility.Hidden;
+                centerText10.Visibility = System.Windows.Visibility.Hidden;
+                rampEnd10.Visibility = System.Windows.Visibility.Hidden;
+                quintile10.Visibility = System.Windows.Visibility.Hidden;
+                legendText10.Visibility = System.Windows.Visibility.Hidden;
+            }
+            if (isNewColorRamp) rctColor10.Fill = new SolidColorBrush(coo);
+
+            initialRampCalc = false;
+        }
+
+        private void CheckBox_Quantiles_Click(object sender, RoutedEventArgs e)
+        {
+            OnQuintileOptionChanged();
+        }
+
+        private void OnQuintileOptionChanged()
+        {
+            int width = 75;
+
+            if (quintilesOption.IsChecked == false)
+            {
+                width = 0;
+            }
+
+            quintileColumn.Width = new GridLength(width, GridUnitType.Pixel);
         }
     }
 }
