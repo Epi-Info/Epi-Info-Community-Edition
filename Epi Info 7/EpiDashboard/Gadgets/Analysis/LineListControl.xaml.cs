@@ -253,6 +253,19 @@ namespace EpiDashboard
             {
                 dataTable = dataTable.AsEnumerable().Skip(0).Take(ListParameters.MaxRows).CopyToDataTable();
             }
+          if (ListParameters.ShowLineColumn)
+          {
+              DataColumn dc = new DataColumn();
+              dc.ColumnName = "Line";
+              dc.DataType = typeof(System.Int32);            
+              dataTable.Columns.Add(dc);
+              dc.SetOrdinal(0);
+              int rowid = 1;
+              foreach (DataRow dr in dataTable.Rows)
+              {
+                  dr["Line"] = rowid++;
+              }
+          }            
                       
             DataView dataView = new DataView(dataTable);
             if (!String.IsNullOrEmpty(ListParameters.PrimaryGroupField.Trim()))
@@ -301,13 +314,13 @@ namespace EpiDashboard
             e.Column.IsReadOnly = true;
 
             DataGridTextColumn dataGridTextColumn = e.Column as DataGridTextColumn;
-            if (dataGridTextColumn.Header.ToString().Length > ((LineListParameters)Parameters).MaxColumnLength)
-              {
-                   dataGridTextColumn.Header = dataGridTextColumn.Header.ToString().Substring(0, ((LineListParameters)Parameters).MaxColumnLength) + StringLiterals.ELLIPSIS;
-              }
-                     
             if (dataGridTextColumn != null)
             {
+                if (dataGridTextColumn.Header.ToString().Length > ((LineListParameters)Parameters).MaxColumnLength)
+                {
+                   dataGridTextColumn.Header = dataGridTextColumn.Header.ToString().Substring(0, ((LineListParameters)Parameters).MaxColumnLength) + StringLiterals.ELLIPSIS;
+                }
+                                
                 if (e.PropertyType == typeof(DateTime))
                 {
                     dataGridTextColumn.CellStyle = this.Resources["RightAlignDataGridCellStyle"] as Style;
@@ -433,7 +446,7 @@ namespace EpiDashboard
                             }
                         }
 
-                        SetGadgetStatusMessage(SharedStrings.DASHBOARD_GADGET_STATUS_DISPLAYING_OUTPUT);
+                   //    SetGadgetStatusMessage(SharedStrings.DASHBOARD_GADGET_STATUS_DISPLAYING_OUTPUT);
 
                         foreach (DataTable listTable in lineListTables)
                         {
@@ -457,18 +470,12 @@ namespace EpiDashboard
                             {
                                 exceededMaxRows = true;
                             } 
-                            this.Dispatcher.BeginInvoke(addDataGrid, listTable.AsDataView(), listTable.TableName);
-                        }
-
-                        //for(int i = 0; i < lineListTables.Count; i++)
-                        //{
-                        //    lineListTables[i].Dispose();
-                        //}
-                        //lineListTables.Clear();
+                            this.Dispatcher.BeginInvoke(addDataGrid, listTable.AsDataView(), listTable.TableName);                            
+                        }                        
                     }
-                    if(exceededMaxRows)
+                    if (exceededMaxRows)
                     {
-                          this.Dispatcher.BeginInvoke(new RenderFinishWithWarningDelegate(RenderFinishWithWarning), string.Format(SharedStrings.DASHBOARD_GADGET_STATUS_ROW_LIMIT, maxRows.ToString()));
+                        this.Dispatcher.BeginInvoke(new RenderFinishWithWarningDelegate(RenderFinishWithWarning), string.Format(SharedStrings.DASHBOARD_GADGET_STATUS_ROW_LIMIT, maxRows.ToString()));                       
                     }
                     else
 
@@ -690,6 +697,8 @@ namespace EpiDashboard
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
             messagePanel.MessagePanelType = Controls.MessagePanelType.WarningPanel;
+           // messagePanel.Text = string.Empty;
+            //messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             messagePanel.Text = errorMessage;
             messagePanel.Visibility = System.Windows.Visibility.Visible;
 
@@ -1101,7 +1110,14 @@ namespace EpiDashboard
 
                             if (field.Name.ToLower().Equals("sortfield"))
                             {
-                                Parameters.SortVariables.Add(field.InnerText.Replace("&lt;", "<"), order);
+                                if (field.Attributes["order"]==null)
+                                {
+                                    if (field.InnerText.Contains("(ascending)"))
+                                        Parameters.SortVariables.Add(field.InnerText.Replace("&lt;", "<").Substring(0, field.InnerText.Replace("&lt;", "<").IndexOf("(") - 1), SortOrder.Ascending);
+                                    else Parameters.SortVariables.Add(field.InnerText.Replace("&lt;", "<").Substring(0, field.InnerText.Replace("&lt;", "<").IndexOf("(") - 1), SortOrder.Descending);
+                                }
+                                else
+                                    Parameters.SortVariables.Add(field.InnerText.Replace("&lt;", "<"), order);
                             }
                         }
                         break;
