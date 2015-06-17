@@ -316,6 +316,23 @@ namespace EpiDashboard
             DataGridTextColumn dataGridTextColumn = e.Column as DataGridTextColumn;
             if (dataGridTextColumn != null)
             {
+                if (((LineListParameters)Parameters).PrimaryGroupField != null &&! (((LineListParameters)Parameters).ColumnNames.Contains(((LineListParameters)Parameters).PrimaryGroupField)))
+                {
+                    if (dataGridTextColumn.Header.ToString() == ((LineListParameters)Parameters).PrimaryGroupField)
+                    {
+                        dataGridTextColumn.Visibility = System.Windows.Visibility.Collapsed;
+                        return;
+                    }
+                }
+                if (((LineListParameters)Parameters).SecondaryGroupField != null &&! (((LineListParameters)Parameters).ColumnNames.Contains(((LineListParameters)Parameters).SecondaryGroupField)))
+                {
+                    if (dataGridTextColumn.Header.ToString() == ((LineListParameters)Parameters).SecondaryGroupField)
+                    {
+                        dataGridTextColumn.Visibility = System.Windows.Visibility.Collapsed;
+                        return;
+                    }
+                }              
+
                 if (dataGridTextColumn.Header.ToString().Length > ((LineListParameters)Parameters).MaxColumnLength)
                 {
                    dataGridTextColumn.Header = dataGridTextColumn.Header.ToString().Substring(0, ((LineListParameters)Parameters).MaxColumnLength) + StringLiterals.ELLIPSIS;
