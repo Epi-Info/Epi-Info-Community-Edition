@@ -319,10 +319,11 @@ namespace EpiDashboard.Gadgets.Charting
                 messagePanel.MessagePanelType = EpiDashboard.Controls.MessagePanelType.StatusPanel;
                 messagePanel.Text = string.Empty;
                 messagePanel.Visibility = System.Windows.Visibility.Collapsed;
-
-                panelFormula.Visibility = System.Windows.Visibility.Visible;
-
-                ShowLabels();
+                if (series0.DataSource != null && series1.DataSource != null)
+                {
+                 panelFormula.Visibility = System.Windows.Visibility.Visible;
+                 ShowLabels();
+                }
                 HideConfigPanel();
                 CheckAndSetPosition();
             }
