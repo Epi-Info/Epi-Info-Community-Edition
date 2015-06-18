@@ -172,16 +172,16 @@
                     </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="75"/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="75"/>
+                    <ColumnDefinition Width="75" x:Name="rampStartColumn"/>
+                    <ColumnDefinition Width="50" x:Name="rampCompareColumn"/>
+                    <ColumnDefinition Width="75" x:Name="rampEndColumn"/>
                     <ColumnDefinition Width="75" x:Name="quintileColumn"/>
                     <ColumnDefinition Width="220"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Color</TextBlock>
                 <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">Range</TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column="4" x:Name="quintilesHeaderText" MinWidth="75" HorizontalAlignment="Center">Quantiles</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" x:Name="quintilesHeaderText" MinWidth="60">Quintiles</TextBlock>
                 <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center">Legend Text</TextBlock>
                 
                 <Rectangle Grid.Row="01" Grid.Column="0" x:Name="rctColor01" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor1_MouseLeftButtonUp"/>
