@@ -449,70 +449,7 @@ namespace EpiDashboard.Mapping
 
 
                 GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
-                ThematicItem thematicItem = new ThematicItem() { Name = dataKey, Description = dataKey, CalcField = "" };
-                List<double> valueList = new List<double>();
-                for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
-                {
-                    Graphic graphicFeature = graphicsLayer.Graphics[i];
-                    //string filterExpression = dataKey + " = '" + graphicFeature.Attributes[shapeKey].ToString().Trim() + "'";
-                    string filterExpression = "";
-                    if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
-                        filterExpression += "[";
-                    filterExpression += dataKey;
-                    if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
-                        filterExpression += "]";
-                    filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim() + "'";
-
-                    double graphicValue = Double.PositiveInfinity;
-                    try
-                    {
-                        graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][valueField]);
-                    }
-                    catch (Exception ex)
-                    {
-                        graphicValue = Double.PositiveInfinity;
-                    }
-
-                    string graphicName = graphicFeature.Attributes[shapeKey].ToString();
-
-                    if (i == 0)
-                    {
-                        thematicItem.Min = Double.PositiveInfinity;
-                        thematicItem.Max = Double.NegativeInfinity;
-                        thematicItem.MinName = string.Empty;
-                        thematicItem.MaxName = string.Empty;
-                    }
-                    else
-                    {
-                        if (graphicValue < thematicItem.Min) { thematicItem.Min = graphicValue; thematicItem.MinName = graphicName; }
-                        if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity) { thematicItem.Max = graphicValue; thematicItem.MaxName = graphicName; }
-                    }
-
-                    if (graphicValue < Double.PositiveInfinity)
-                    {
-                        valueList.Add(graphicValue);
-                    }
-                }
-                thematicItem.RangeStarts = new List<double>();
-
-                double totalRange = thematicItem.Max - thematicItem.Min;
-                double portion = totalRange / classCount;
-
-                thematicItem.RangeStarts.Add(thematicItem.Min);
-                double startRangeValue = thematicItem.Min;
-                IEnumerable<double> valueEnumerator =
-                from aValue in valueList
-                orderby aValue
-                select aValue;
-
-                int increment = Convert.ToInt32(Math.Round((double)valueList.Count / (double)classCount));
-                for (int i = increment; i < valueList.Count; i += increment)
-                {
-                    double value = valueEnumerator.ElementAt(i);
-                    if (value < thematicItem.Min)
-                        value = thematicItem.Min;
-                    thematicItem.RangeStarts.Add(value);
-                }
+                ThematicItem thematicItem = GetThematicItem(shapeKey, dataKey, valueField, classCount, loadedData, graphicsLayer);
 
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
@@ -659,6 +596,80 @@ namespace EpiDashboard.Mapping
             catch (Exception ex)
             {
             }
+        }
+
+        public List<object> GetRangeValues()
+        {
+            return new List<object>();
+        }
+
+        public ThematicItem GetThematicItem(string shapeKey, string dataKey, string valueField, int classCount, DataTable loadedData, GraphicsLayer graphicsLayer)
+        {
+            ThematicItem thematicItem = new ThematicItem() { Name = dataKey, Description = dataKey, CalcField = "" };
+            List<double> valueList = new List<double>();
+            for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
+            {
+                Graphic graphicFeature = graphicsLayer.Graphics[i];
+                //string filterExpression = dataKey + " = '" + graphicFeature.Attributes[shapeKey].ToString().Trim() + "'";
+                string filterExpression = "";
+                if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
+                    filterExpression += "[";
+                filterExpression += dataKey;
+                if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
+                    filterExpression += "]";
+                filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim() + "'";
+
+                double graphicValue = Double.PositiveInfinity;
+                try
+                {
+                    graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][valueField]);
+                }
+                catch (Exception ex)
+                {
+                    graphicValue = Double.PositiveInfinity;
+                }
+
+                string graphicName = graphicFeature.Attributes[shapeKey].ToString();
+
+                if (i == 0)
+                {
+                    thematicItem.Min = Double.PositiveInfinity;
+                    thematicItem.Max = Double.NegativeInfinity;
+                    thematicItem.MinName = string.Empty;
+                    thematicItem.MaxName = string.Empty;
+                }
+                else
+                {
+                    if (graphicValue < thematicItem.Min) { thematicItem.Min = graphicValue; thematicItem.MinName = graphicName; }
+                    if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity) { thematicItem.Max = graphicValue; thematicItem.MaxName = graphicName; }
+                }
+
+                if (graphicValue < Double.PositiveInfinity)
+                {
+                    valueList.Add(graphicValue);
+                }
+            }
+            thematicItem.RangeStarts = new List<double>();
+
+            double totalRange = thematicItem.Max - thematicItem.Min;
+            double portion = totalRange / classCount;
+
+            thematicItem.RangeStarts.Add(thematicItem.Min);
+            double startRangeValue = thematicItem.Min;
+            IEnumerable<double> valueEnumerator =
+            from aValue in valueList
+            orderby aValue
+            select aValue;
+
+            int increment = Convert.ToInt32(Math.Round((double)valueList.Count / (double)classCount));
+            for (int i = increment; i < valueList.Count; i += increment)
+            {
+                double value = valueEnumerator.ElementAt(i);
+                if (value < thematicItem.Min)
+                    value = thematicItem.Min;
+                thematicItem.RangeStarts.Add(value);
+            }
+            return thematicItem;
         }
 
         private StackPanel legendStackPanel;
