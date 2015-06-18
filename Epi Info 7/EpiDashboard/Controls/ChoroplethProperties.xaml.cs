@@ -329,6 +329,10 @@ namespace EpiDashboard.Controls
                     cmbValue.SelectedItem.ToString(),
                     brushList, 
                     classCount);
+
+                
+
+
             }
         }
 
@@ -655,14 +659,22 @@ namespace EpiDashboard.Controls
 
         private void OnQuintileOptionChanged()
         {
-            int width = 75;
+            int widthQuintile = 100;
+            int widthMinMax = 0;
+            int widthCompare = 0;
 
             if (quintilesOption.IsChecked == false)
             {
-                width = 0;
+                widthQuintile = 0;
+                widthMinMax = 75;
+                widthCompare = 50;
             }
 
-            quintileColumn.Width = new GridLength(width, GridUnitType.Pixel);
+            quintileColumn.Width = new GridLength(widthQuintile, GridUnitType.Pixel);
+
+            rampStartColumn.Width = new GridLength(widthMinMax, GridUnitType.Pixel);
+            rampCompareColumn.Width = new GridLength(widthCompare, GridUnitType.Pixel);
+            rampEndColumn.Width = new GridLength(widthMinMax, GridUnitType.Pixel);
         }
     }
 }
