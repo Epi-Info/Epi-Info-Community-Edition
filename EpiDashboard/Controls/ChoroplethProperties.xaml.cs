@@ -450,16 +450,15 @@ namespace EpiDashboard.Controls
             
             int stratCount;
             
-            SolidColorBrush rampStart;
-            SolidColorBrush rampEnd;
-
             if(int.TryParse(cmbClasses.Text, out stratCount) == false)
             {
                 stratCount = 4;
             }
 
-            rampStart = (SolidColorBrush)rctLowColor.Fill;
-            rampEnd = (SolidColorBrush)rctHighColor.Fill;
+            //List<object> rangeValues = provider.GetRangeValues();
+
+            SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
+            SolidColorBrush rampEnd = (SolidColorBrush)rctHighColor.Fill;
 
             bool isNewColorRamp = true;
 
