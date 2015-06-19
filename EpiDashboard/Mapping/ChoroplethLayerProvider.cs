@@ -42,7 +42,8 @@ namespace EpiDashboard.Mapping
         int _classCount;
         int _colorShadeIndex = 0;
         int _lastGeneratedClassCount = 0;
-        string[,] _rangeValues = new string[,]{{"",""},{"",""},{"",""},{"",""},{"",""},{"",""},{"",""},{"","" },{"",""},{"",""}};
+        string[,] _rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
+        float[] _quantileValues = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
 
         public ChoroplethLayerProvider(Map myMap)
         {
@@ -50,10 +51,18 @@ namespace EpiDashboard.Mapping
             _layerId = Guid.NewGuid();
         }
 
-        public string[,] RangeValue
+        public DashboardHelper DashboardHelper { get; set; }
+
+        public string[,] RangeValues
         {
             get { return _rangeValues; }
             set { _rangeValues = value; }
+        }
+
+        public float[] QuantileValues
+        {
+            get { return _quantileValues; }
+            set { _quantileValues = value; }
         }
 
         public struct ThematicItem
@@ -155,37 +164,6 @@ namespace EpiDashboard.Mapping
             return d;
         }
 
-        private void CreateColorList1(Color lowColor, Color highColor)
-        {
-            //LinearGradientBrush gradientBrush = new LinearGradientBrush(highColor, lowColor, 0);
-            //Rectangle temp = new Rectangle();
-            //temp.Width = 256;
-            //temp.Height = 256;
-            //temp.Fill = gradientBrush;
-            
-            //ColorList = new List<List<SolidColorBrush>>();
-
-            //List<SolidColorBrush> BlueShades = new List<SolidColorBrush>();
-
-            //int rgbFactor = 255 / classCount;
-            //Random rnd = new Random();
-            //for (int j = 0; j < 256; j = j + rgbFactor)
-            //{
-            //    Color color = Color.FromRgb((byte)rnd.Next(0, 255), (byte)rnd.Next(0, 255), (byte)rnd.Next(0, 255));// GetColorAtPoint(temp, new Point(j, j));
-            //    color.A = 0xF0;
-            //    BlueShades.Add(new SolidColorBrush(color));
-            //}
-
-            //ColorList.Add(BlueShades);
-
-            //foreach (List<SolidColorBrush> brushList in ColorList)
-            //{
-            //    brushList.Reverse();
-            //}
-
-            //_lastGeneratedClassCount = classCount;
-        }
-
         private int GetRangeIndex(double val, List<double> ranges)
         {
             int limit;
@@ -205,31 +183,6 @@ namespace EpiDashboard.Mapping
             public string Description { get; set; }
             public string Value { get; set; }
         }
-
-        //private void ColorBlendCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //if (ColorBlendCombo != null)
-        //{
-        //    _colorShadeIndex = ColorBlendCombo.SelectedIndex;
-        //    if (loadedData != null)
-        //    {
-        //        SetShapeRangeValues();
-        //    }
-        //}
-        //}
-
-        //private void ClassCountCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //if (ClassCountCombo != null)
-        //{
-        //    ComboBoxItem item = ClassCountCombo.SelectedItem as ComboBoxItem;
-        //    _classCount = Convert.ToInt32(item.Content);
-        //    if (loadedData != null)
-        //    {
-        //        SetShapeRangeValues();
-        //    }
-        //}
-        //}
 
         public object[] LoadShapeFile(string fileName)
         {
@@ -394,8 +347,6 @@ namespace EpiDashboard.Mapping
             return symbol;
         }
 
-
-
         public void Refresh()
         {
             if (_dashboardHelper != null)
@@ -415,45 +366,10 @@ namespace EpiDashboard.Mapping
                 _valueField = valueField;
                 _colors = colors;
 
-                List<string> columnNames = new List<string>();
-                if (dashboardHelper.IsUsingEpiProject)
-                {
-                    columnNames.Add("UniqueKey");
-                }
-                columnNames.Add(valueField);
-                columnNames.Add(dataKey);
-
-                DataTable loadedData;
-
-                if (valueField.Equals("{Record Count}"))
-                {
-                    GadgetParameters gadgetOptions = new GadgetParameters();
-                    gadgetOptions.MainVariableName = dataKey;
-
-                    Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
-                    inputVariableList.Add("freqvar", dataKey);
-                    inputVariableList.Add("allvalues", "false");
-                    inputVariableList.Add("showconflimits", "false");
-                    inputVariableList.Add("showcumulativepercent", "false");
-                    inputVariableList.Add("includemissing", "false");
-                    inputVariableList.Add("maxrows", "500");
-
-                    gadgetOptions.InputVariableList = inputVariableList;
-                    loadedData = dashboardHelper.GenerateFrequencyTable(gadgetOptions).First().Key;
-                    foreach (DataRow dr in loadedData.Rows)
-                    {
-                        dr[0] = dr[0].ToString().Trim();
-                    }
-                    valueField = "freq";
-                }
-                else
-                {
-                    loadedData = dashboardHelper.GenerateTable(columnNames);
-                }
-
+                DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
 
                 GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
-                ThematicItem thematicItem = GetThematicItem(shapeKey, dataKey, valueField, classCount, loadedData, graphicsLayer);
+                ThematicItem thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
 
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
@@ -511,9 +427,7 @@ namespace EpiDashboard.Mapping
 
                         graphicFeature.MapTip = border;
                     }
-
                 }
-
 
                 if (LegendStackPanel == null)
                 {
@@ -602,38 +516,102 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public List<object> GetRangeValues()
+        private DataTable GetLoadedData(DashboardHelper dashboardHelper, string dataKey, ref string valueField)
         {
-            return new List<object>();
+            if (dashboardHelper == null)
+            {
+                return null;
+            }
+            
+            List<string> columnNames = new List<string>();
+            if (dashboardHelper.IsUsingEpiProject)
+            {
+                columnNames.Add("UniqueKey");
+            }
+            columnNames.Add(valueField);
+            columnNames.Add(dataKey);
+            
+            DataTable loadedData;
+
+            if (valueField.Equals("{Record Count}"))
+            {
+                GadgetParameters gadgetOptions = new GadgetParameters();
+                gadgetOptions.MainVariableName = dataKey;
+
+                Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
+                inputVariableList.Add("freqvar", dataKey);
+                inputVariableList.Add("allvalues", "false");
+                inputVariableList.Add("showconflimits", "false");
+                inputVariableList.Add("showcumulativepercent", "false");
+                inputVariableList.Add("includemissing", "false");
+                inputVariableList.Add("maxrows", "500");
+
+                gadgetOptions.InputVariableList = inputVariableList;
+                loadedData = dashboardHelper.GenerateFrequencyTable(gadgetOptions).First().Key;
+                foreach (DataRow dr in loadedData.Rows)
+                {
+                    dr[0] = dr[0].ToString().Trim();
+                }
+                valueField = "freq";
+            }
+            else
+            {
+                loadedData = dashboardHelper.GenerateTable(columnNames);
+            }
+            return loadedData;
         }
 
-        public ThematicItem GetThematicItem(string shapeKey, string dataKey, string valueField, int classCount, DataTable loadedData, GraphicsLayer graphicsLayer)
+        public void ResetRangeValues()
         {
-            ThematicItem thematicItem = new ThematicItem() { Name = dataKey, Description = dataKey, CalcField = "" };
+            string valueField = string.Empty;
+            DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref valueField);
+            GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
+
+            if (graphicsLayer == null) return;
+
+            ThematicItem thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer );
+        }
+
+        public ThematicItem GetThematicItem(int classCount , DataTable loadedData, GraphicsLayer graphicsLayer)
+        {
+            ThematicItem thematicItem = new ThematicItem() 
+            { 
+                Name = _dataKey, Description = _dataKey, CalcField = "" 
+            };
+            
             List<double> valueList = new List<double>();
+            
             for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
             {
                 Graphic graphicFeature = graphicsLayer.Graphics[i];
-                //string filterExpression = dataKey + " = '" + graphicFeature.Attributes[shapeKey].ToString().Trim() + "'";
+
                 string filterExpression = "";
-                if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
+                
+                if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
+                {
                     filterExpression += "[";
-                filterExpression += dataKey;
-                if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
+                }
+                
+                filterExpression += _dataKey;
+                
+                if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
+                {
                     filterExpression += "]";
-                filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim() + "'";
+                }
+                
+                filterExpression += " = '" + graphicFeature.Attributes[_shapeKey].ToString().Replace("'", "''").Trim() + "'";
 
                 double graphicValue = Double.PositiveInfinity;
                 try
                 {
-                    graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][valueField]);
+                    graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][_valueField]);
                 }
                 catch (Exception ex)
                 {
                     graphicValue = Double.PositiveInfinity;
                 }
 
-                string graphicName = graphicFeature.Attributes[shapeKey].ToString();
+                string graphicName = graphicFeature.Attributes[_shapeKey].ToString();
 
                 if (i == 0)
                 {
@@ -653,6 +631,7 @@ namespace EpiDashboard.Mapping
                     valueList.Add(graphicValue);
                 }
             }
+            
             thematicItem.RangeStarts = new List<double>();
 
             double totalRange = thematicItem.Max - thematicItem.Min;
