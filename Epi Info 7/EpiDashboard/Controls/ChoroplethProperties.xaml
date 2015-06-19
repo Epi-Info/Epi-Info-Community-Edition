@@ -105,11 +105,11 @@
                 <Button x:Name="btnBrowseShape" Height="Auto" Grid.Column="2" Click="btnBrowseShapeFile_Click">Browse</Button>
             </Grid>
             <Label>Shape Key:</Label>
-            <ComboBox x:Name="cmbShapeKey"></ComboBox>
+            <ComboBox x:Name="cmbShapeKey" SelectionChanged="cmbShapeKey_SelectionChanged"></ComboBox>
             <Label>Data Key:</Label>
-            <ComboBox x:Name="cmbDataKey"></ComboBox>
+            <ComboBox x:Name="cmbDataKey" SelectionChanged="cmbDataKey_SelectionChanged"></ComboBox>
             <Label>Value:</Label>
-            <ComboBox x:Name="cmbValue"></ComboBox>
+            <ComboBox x:Name="cmbValue" SelectionChanged="cmbValue_SelectionChanged"></ComboBox>
 
         </StackPanel>
 
