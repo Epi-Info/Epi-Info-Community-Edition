@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
+using EpiDashboard.Mapping;
 
 namespace EpiDashboard.Controls
 {
@@ -31,6 +32,9 @@ namespace EpiDashboard.Controls
         private SolidColorBrush currentColor_rampStart;
         private SolidColorBrush currentColor_rampEnd;
         private bool initialRampCalc;
+
+        public ChoroplethLayerProperties layerprop;
+        IDictionary<string, object> shapeAttributes;
 
         public ChoroplethProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
         {
@@ -53,17 +57,17 @@ namespace EpiDashboard.Controls
             OnQuintileOptionChanged();
         }
 
-        
+
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;
 
         public DashboardHelper DashboardHelper { get; private set; }
-        
+
         public string DataSource { get; set; }
-        
+
         public FileInfo ProjectFileInfo
         {
-            get 
+            get
             {
                 FileInfo fi = new FileInfo(txtProjectPath.Text);
                 return fi;
@@ -162,6 +166,7 @@ namespace EpiDashboard.Controls
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             RenderMap();
+            layerprop.SetValues(txtShapePath.Text, cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, shapeAttributes);
             if (ChangesAccepted != null)
             {
                 ChangesAccepted(this, new EventArgs());
@@ -181,6 +186,7 @@ namespace EpiDashboard.Controls
             dashboardHelper = mapControl.GetNewDashboardHelper();
             if (dashboardHelper != null)
             {
+                provider = layerprop.provider;
                 txtProjectPath.Text = dashboardHelper.Database.DbName;
                 FillComboBoxes();
             }
@@ -214,14 +220,15 @@ namespace EpiDashboard.Controls
 
         private void btnBrowseShapeFile_Click(object sender, RoutedEventArgs e)
         {
-            provider = new Mapping.ChoroplethLayerProvider(myMap);
+            // provider = new Mapping.ChoroplethLayerProvider(myMap);
             object[] shapeFileProperties = provider.LoadShapeFile();
             if (shapeFileProperties != null)
             {
                 if (shapeFileProperties.Length == 2)
                 {
                     txtShapePath.Text = shapeFileProperties[0].ToString();
-                    IDictionary<string, object> shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
+                    layerprop.SetdashboardHelper(dashboardHelper);
+                    shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
                     if (shapeAttributes != null)
                     {
                         cmbShapeKey.Items.Clear();
@@ -241,7 +248,7 @@ namespace EpiDashboard.Controls
                 string shapeKey = cmbShapeKey.SelectedItem.ToString();
                 string dataKey = cmbDataKey.SelectedItem.ToString();
                 string value = cmbValue.SelectedItem.ToString();
-                
+
                 List<SolidColorBrush> brushList = new List<SolidColorBrush>() { 
                     (SolidColorBrush)rctColor01.Fill, 
                     (SolidColorBrush)rctColor02.Fill, 
@@ -260,15 +267,21 @@ namespace EpiDashboard.Controls
                     classCount = 4;
                 }
 
-                provider.SetShapeRangeValues(dashboardHelper, 
-                    cmbShapeKey.SelectedItem.ToString(), 
-                    cmbDataKey.SelectedItem.ToString(), 
+                provider.SetShapeRangeValues(dashboardHelper,
+                    cmbShapeKey.SelectedItem.ToString(),
+                    cmbDataKey.SelectedItem.ToString(),
                     cmbValue.SelectedItem.ToString(),
-                    brushList, 
+                    brushList,
                     classCount);
+           }
+        }
+        public StackPanel LegendStackPanel
+        {
+            get
+            {
+                return provider.LegendStackPanel;
             }
         }
-
         private void rctColor1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
@@ -384,10 +397,10 @@ namespace EpiDashboard.Controls
             {
                 return;
             }
-            
+
             int stratCount;
-            
-            if(int.TryParse(cmbClasses.Text, out stratCount) == false)
+
+            if (int.TryParse(cmbClasses.Text, out stratCount) == false)
             {
                 stratCount = 4;
             }
@@ -444,7 +457,7 @@ namespace EpiDashboard.Controls
                 quintile03.Visibility = System.Windows.Visibility.Hidden;
                 legendText03.Visibility = System.Windows.Visibility.Hidden;
             }
-            if(isNewColorRamp) rctColor03.Fill = new SolidColorBrush(coo);
+            if (isNewColorRamp) rctColor03.Fill = new SolidColorBrush(coo);
 
             coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 3), (byte)(rampStart.Color.G - gi * 3), (byte)(rampStart.Color.B - bi * 3));
             rctColor04.Visibility = System.Windows.Visibility.Visible;
@@ -463,7 +476,7 @@ namespace EpiDashboard.Controls
                 quintile04.Visibility = System.Windows.Visibility.Hidden;
                 legendText04.Visibility = System.Windows.Visibility.Hidden;
             }
-            
+
             if (isNewColorRamp) rctColor04.Fill = new SolidColorBrush(coo);
 
             coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 4), (byte)(rampStart.Color.G - gi * 4), (byte)(rampStart.Color.B - bi * 4));
@@ -483,7 +496,7 @@ namespace EpiDashboard.Controls
                 quintile05.Visibility = System.Windows.Visibility.Hidden;
                 legendText05.Visibility = System.Windows.Visibility.Hidden;
             }
-            
+
             if (isNewColorRamp) rctColor05.Fill = new SolidColorBrush(coo);
 
             coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 5), (byte)(rampStart.Color.G - gi * 5), (byte)(rampStart.Color.B - bi * 5));
@@ -609,5 +622,8 @@ namespace EpiDashboard.Controls
             rampCompareColumn.Width = new GridLength(widthCompare, GridUnitType.Pixel);
             rampEndColumn.Width = new GridLength(widthMinMax, GridUnitType.Pixel);
         }
+      
     }
+    
 }
+        
