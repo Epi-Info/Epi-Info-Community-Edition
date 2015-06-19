@@ -75,7 +75,7 @@
                         <ColumnDefinition Width="12" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"></TextBox>
+                    <TextBox x:Name="txtProjectPath" IsReadOnly="True"></TextBox>
                     <Button x:Name="btnBrowse" Height="Auto" Grid.Column="2" Click="btnBrowse_Click">Browse</Button>
                 </Grid>
             </StackPanel>
@@ -101,15 +101,15 @@
                     <ColumnDefinition Width="12" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="txtShapePath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"></TextBox>
+                <TextBox x:Name="txtShapePath" IsReadOnly="True"></TextBox>
                 <Button x:Name="btnBrowseShape" Height="Auto" Grid.Column="2" Click="btnBrowseShapeFile_Click">Browse</Button>
             </Grid>
             <Label>Shape Key:</Label>
-            <ComboBox x:Name="cmbShapeKey" SelectionChanged="cmbFormName_SelectionChanged"></ComboBox>
+            <ComboBox x:Name="cmbShapeKey"></ComboBox>
             <Label>Data Key:</Label>
-            <ComboBox x:Name="cmbDataKey" SelectionChanged="cmbFormName_SelectionChanged"></ComboBox>
+            <ComboBox x:Name="cmbDataKey"></ComboBox>
             <Label>Value:</Label>
-            <ComboBox x:Name="cmbValue" SelectionChanged="cmbFormName_SelectionChanged"></ComboBox>
+            <ComboBox x:Name="cmbValue"></ComboBox>
 
         </StackPanel>
 
