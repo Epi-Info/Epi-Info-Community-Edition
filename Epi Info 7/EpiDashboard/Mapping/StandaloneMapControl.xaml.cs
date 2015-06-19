@@ -482,6 +482,7 @@ namespace EpiDashboard.Mapping
             AddLayer(LayerType.Zone);
         }
 
+        public string ProjectFilepath { get; set; }
         public DashboardHelper GetNewDashboardHelper()
         {
             List<object> resultArray = DataSourceRequested();
@@ -495,12 +496,14 @@ namespace EpiDashboard.Mapping
                     Project project = (Project)dataSource;
                     View view = project.GetViewByName(dataMember);
                     IDbDriver dbDriver = DBReadExecute.GetDataDriver(project.FilePath);
+                    ProjectFilepath = project.FilePath;
                     dashboardHelper = new DashboardHelper(view, dbDriver);
                 }
                 else
                 {
                     IDbDriver dbDriver = (IDbDriver)dataSource;
                     dashboardHelper = new DashboardHelper(dataMember, dbDriver);
+                    ProjectFilepath = dashboardHelper.Database.DataSource;
                 }
                 dashboardHelper.PopulateDataSet();
                 return dashboardHelper;
@@ -1562,7 +1565,7 @@ namespace EpiDashboard.Mapping
 
             dashboardHelper = densitylayerprop.GetDashboardHelper();
             dotdensityproperties.SetDashboardHelper(dashboardHelper);
-            dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DbName;
+            dotdensityproperties.txtProjectPath.Text = ProjectFilepath;// dashboardHelper.Database.DbName;
             dotdensityproperties.panelBoundaries.IsEnabled = true;
 
             dotdensityproperties.dataFilters = new DataFilters(dashboardHelper);
@@ -1634,7 +1637,7 @@ namespace EpiDashboard.Mapping
 
             dashboardHelper = densitylayerprop.GetDashboardHelper();
             dotdensityproperties.SetDashboardHelper(dashboardHelper);
-            dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DbName;
+            dotdensityproperties.txtProjectPath.Text = ProjectFilepath;// dashboardHelper.Database.DbName;
             dotdensityproperties.panelBoundaries.IsEnabled = true;
 
             dotdensityproperties.dataFilters = new DataFilters(dashboardHelper);
@@ -1732,7 +1735,7 @@ namespace EpiDashboard.Mapping
 
             dashboardHelper = densitylayerprop.GetDashboardHelper();
             dotdensityproperties.SetDashboardHelper(dashboardHelper);
-            dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DbName;
+            dotdensityproperties.txtProjectPath.Text = ProjectFilepath;//Database.DbName;
             dotdensityproperties.panelBoundaries.IsEnabled = true;
 
             dotdensityproperties.dataFilters = new DataFilters(dashboardHelper);

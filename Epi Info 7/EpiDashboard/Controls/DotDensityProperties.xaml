@@ -105,7 +105,7 @@
                                 <ColumnDefinition Width="12" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="txtShapePath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"   ></TextBox>
+                        <TextBox x:Name="txtShapePath" IsReadOnly="False" TextChanged="txtProjectPath_TextChanged"   ></TextBox>
                         <Button x:Name="btnBrowseShape"  Grid.Column="2" Click="btnBrowseShapeFile_Click" Height="Auto" >Browse</Button>
                     </Grid>                       
                     </StackPanel>
@@ -153,7 +153,7 @@
                             <ColumnDefinition Width="12" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="txtKMLpath" IsReadOnly="True" ></TextBox>
+                        <TextBox x:Name="txtKMLpath" IsReadOnly="False" ></TextBox>
                         <Button x:Name="btnKMLFile" Height="Auto" Grid.Column="2" Click="btnKMLFile_Click">Browse</Button>                     
                             </Grid>
                         </StackPanel>                                 
@@ -189,7 +189,7 @@
                 <!--<Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors &amp; Ranges</Label>-->
 
                 <Label>Select Color:</Label>
-                <Rectangle x:Name="rctDotColor" MouseLeftButtonUp="rctDotColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+            <Rectangle x:Name="rctDotColor" MouseLeftButtonUp="rctDotColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00000FF">
                     <Rectangle.ToolTip>
                         <Label Content="Color"/>
                     </Rectangle.ToolTip>

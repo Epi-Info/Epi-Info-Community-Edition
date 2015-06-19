@@ -308,31 +308,36 @@ namespace EpiDashboard.Controls
                
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            if (radShapeFile.IsChecked == true && provider != null)
+            if (cmbDataKey.SelectedIndex > -1 && cmbShapeKey.SelectedIndex > -1 && cmbValue.SelectedIndex > -1)
             {
-                Addfilters();
-                RenderMap();
-                layerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
-            }
-            else if (radMapServer.IsChecked == true && Mapprovider != null)
+                if (radShapeFile.IsChecked == true && provider != null)
                 {
-                Addfilters();
-                RenderMap();
-                serverlayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
-                serverlayerprop.cbxMapserverText = cbxmapserver.Text;
-                serverlayerprop.txtMapserverText = txtMapSeverpath.Text;
-                serverlayerprop.cbxMapFeatureText = cbxmapfeature.Text;
+                    Addfilters();
+                    RenderMap();
+                    layerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
                 }
-            else if (radKML.IsChecked == true && KMLprovider != null)
-            {
-                Addfilters();
-                RenderMap();
-                kmllayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
+                else if (radMapServer.IsChecked == true && Mapprovider != null)
+                {
+                    Addfilters();
+                    RenderMap();
+                    serverlayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
+                    serverlayerprop.cbxMapserverText = cbxmapserver.Text;
+                    serverlayerprop.txtMapserverText = txtMapSeverpath.Text;
+                    serverlayerprop.cbxMapFeatureText = cbxmapfeature.Text;
+                }
+                else if (radKML.IsChecked == true && KMLprovider != null)
+                {
+                    Addfilters();
+                    RenderMap();
+                    kmllayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
+                }
+                if (ChangesAccepted != null)
+                {
+                    ChangesAccepted(this, new EventArgs());
+                }
             }
-            if (ChangesAccepted != null)
-            {
-                ChangesAccepted(this, new EventArgs());
-            }
+            else
+                tbtnDataSource.IsChecked = true;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -352,8 +357,8 @@ namespace EpiDashboard.Controls
             dashboardHelper = mapControl.GetNewDashboardHelper();
             if (dashboardHelper != null)
             {
-                this.DashboardHelper = dashboardHelper; 
-                txtProjectPath.Text = dashboardHelper.Database.DbName;
+                this.DashboardHelper = dashboardHelper;
+                txtProjectPath.Text = mapControl.ProjectFilepath;
                 FillComboBoxes();
                 panelBoundaries.IsEnabled = true;
                 this.dataFilters = new DataFilters(dashboardHelper);
@@ -438,10 +443,13 @@ namespace EpiDashboard.Controls
 
         private void rctDotColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();           
+            Brush brush = new SolidColorBrush(((SolidColorBrush)rctDotColor.Fill).Color);
+            dialog.Color = System.Drawing.Color.FromArgb(((brush as SolidColorBrush).Color).A, ((brush as SolidColorBrush).Color).R, ((brush as SolidColorBrush).Color).G, ((brush as SolidColorBrush).Color).B); ;
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                rctDotColor.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                rctDotColor.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));               
+                
             }
         }     
 
@@ -595,28 +603,40 @@ namespace EpiDashboard.Controls
 
         private void radShapeFile_Checked(object sender, RoutedEventArgs e)
         {
-            panelshape.IsEnabled = true;
-            panelmap.IsEnabled = false;
-            panelKml.IsEnabled = false;
-            cmbShapeKey.Items.Clear();
-            txtShapePath.Text = string.Empty;
-            txtKMLpath.Text = string.Empty;
-            cbxmapfeature.SelectedIndex = -1;
-            cbxmapserver.SelectedIndex = -1;
-            txtMapSeverpath.Text = string.Empty;
-            if (Mapprovider != null)
-            {
-                Mapprovider.FeatureLoaded -= new FeatureLoadedHandler(Mapprovider_FeatureLoaded);               
-                Mapprovider = null;
-            }
-            if (KMLprovider != null)
-            {
-                KMLprovider.FeatureLoaded -= new FeatureLoadedHandler(KMLprovider_FeatureLoaded);               
-                KMLprovider = null;
-            }
-        }                   
 
-        private void radKML_Checked(object sender, RoutedEventArgs e)
+            if (!string.IsNullOrEmpty(txtKMLpath.Text))
+            {
+                MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                {
+                    radShapeFile.IsChecked = false;
+                    radKML.IsChecked = true;
+                    return;
+                }
+                else
+                    ClearonShapeFile();
+            }
+            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text) || cbxmapserver.SelectedIndex != -1)
+            {
+                MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                {
+                    radShapeFile.IsChecked = false;
+                    radMapServer.IsChecked = true;
+                    return;
+                }
+                else
+                    ClearonShapeFile();
+            }
+            else if (!string.IsNullOrEmpty(txtShapePath.Text))
+            {
+                return;
+            }
+            else
+                ClearonShapeFile();                  
+        }
+
+        private void ClearonKML()
         {
             panelshape.IsEnabled = false;
             panelmap.IsEnabled = false;
@@ -626,20 +646,46 @@ namespace EpiDashboard.Controls
             txtKMLpath.Text = string.Empty;
             cbxmapfeature.SelectedIndex = -1;
             cbxmapserver.SelectedIndex = -1;
+            radlocatemapserver.IsChecked = false;
+            radconnectmapserver.IsChecked = false;
             txtMapSeverpath.Text = string.Empty;
             if (Mapprovider != null)
             {
-                Mapprovider.FeatureLoaded -= new FeatureLoadedHandler(Mapprovider_FeatureLoaded);              
+                Mapprovider.FeatureLoaded -= new FeatureLoadedHandler(Mapprovider_FeatureLoaded);
                 Mapprovider = null;
             }
             if (provider != null)
-            {
-               // provider.FeatureLoaded -= new FeatureLoadedHandler(provider_FeatureLoaded);
-                provider = null;               
+            {               
+                provider = null;
             }
         }
 
-        private void radMapServer_Checked(object sender, RoutedEventArgs e)
+        private void ClearonShapeFile()
+        {
+            panelshape.IsEnabled = true;
+            panelmap.IsEnabled = false;
+            panelKml.IsEnabled = false;
+            cmbShapeKey.Items.Clear();
+            txtShapePath.Text = string.Empty;
+            txtKMLpath.Text = string.Empty;
+            cbxmapfeature.SelectedIndex = -1;
+            cbxmapserver.SelectedIndex = -1;
+            radlocatemapserver.IsChecked = false;
+            radconnectmapserver.IsChecked = false;
+            txtMapSeverpath.Text = string.Empty;
+            if (Mapprovider != null)
+            {
+                Mapprovider.FeatureLoaded -= new FeatureLoadedHandler(Mapprovider_FeatureLoaded);
+                Mapprovider = null;
+            }
+            if (KMLprovider != null)
+            {
+                KMLprovider.FeatureLoaded -= new FeatureLoadedHandler(KMLprovider_FeatureLoaded);
+                KMLprovider = null;
+            }
+        }
+
+        private void ClearonMapServer()
         {
             panelshape.IsEnabled = false;
             panelmap.IsEnabled = true;
@@ -656,9 +702,78 @@ namespace EpiDashboard.Controls
                 KMLprovider = null;
             }
             if (provider != null)
-            {              
+            {
                 provider = null;
             }
+        }
+
+      
+        private void radKML_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtShapePath.Text))
+            {
+                MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                {
+                    radKML.IsChecked = false;
+                    radShapeFile.IsChecked = true;
+                    return;
+                }
+                else
+                    ClearonKML();
+            }
+            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text) || cbxmapserver.SelectedIndex != -1)
+            {
+                MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                {
+                    radKML.IsChecked = false;
+                    radMapServer.IsChecked = true;
+                    return;
+                }
+                else
+                    ClearonKML();
+            }
+            else if (!string.IsNullOrEmpty(txtKMLpath.Text))
+            {
+                return;
+            }
+            else
+                ClearonKML();            
+        }
+
+        private void radMapServer_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtShapePath.Text))
+            {
+                MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                {
+                    radMapServer.IsChecked = false;
+                    radShapeFile.IsChecked = true;
+                    return;
+                }
+                else
+                    ClearonMapServer();
+            }
+            else if (!string.IsNullOrEmpty(txtKMLpath.Text))
+            {
+                MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                {
+                    radMapServer.IsChecked = false;
+                    radKML.IsChecked = true;
+                    return;
+                }
+                else
+                    ClearonMapServer();
+            }
+            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text) || cbxmapserver.SelectedIndex != -1)
+            {
+                return;
+            }
+            else
+                ClearonMapServer();      
         }
            
         private void radconnectmapserver_Checked(object sender, RoutedEventArgs e)
@@ -671,7 +786,7 @@ namespace EpiDashboard.Controls
 
         private void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ResetMapServer(); 
+            ResetMapServer();
         }
 
         public void ResetMapServer()
