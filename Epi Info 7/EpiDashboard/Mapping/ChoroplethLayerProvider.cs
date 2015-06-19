@@ -32,24 +32,29 @@ namespace EpiDashboard.Mapping
     {
         #region Choropleth
 
-        private Map myMap;
-        private DashboardHelper dashboardHelper;
-        private string shapeKey;
-        private string dataKey;
-        private string valueField;
-        private Guid layerId;
-        private List<SolidColorBrush> colors;
-        private int classCount;
+        Map _myMap;
+        DashboardHelper _dashboardHelper;
+        string _shapeKey;
+        string _dataKey;
+        string _valueField;
+        Guid _layerId;
+        List<SolidColorBrush> _colors;
+        int _classCount;
+        int _colorShadeIndex = 0;
+        int _lastGeneratedClassCount = 0;
+        string[,] _rangeValues = new string[,]{{"",""},{"",""},{"",""},{"",""},{"",""},{"",""},{"",""},{"","" },{"",""},{"",""}};
 
         public ChoroplethLayerProvider(Map myMap)
         {
-            this.myMap = myMap;
-            this.layerId = Guid.NewGuid();
+            _myMap = myMap;
+            _layerId = Guid.NewGuid();
         }
 
-        int _colorShadeIndex = 0;
-        
-        int _lastGeneratedClassCount = 0;
+        public string[,] RangeValue
+        {
+            get { return _rangeValues; }
+            set { _rangeValues = value; }
+        }
 
         public struct ThematicItem
         {
@@ -61,28 +66,27 @@ namespace EpiDashboard.Mapping
             public string MinName { get; set; }
             public string MaxName { get; set; }
             public List<double> RangeStarts { get; set; }
-
         }
 
         public void MoveUp()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
-            if (currentIndex < myMap.Layers.Count - 1)
+            Layer layer = _myMap.Layers[_layerId.ToString()];
+            int currentIndex = _myMap.Layers.IndexOf(layer);
+            if (currentIndex < _myMap.Layers.Count - 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex + 1, layer);
+                _myMap.Layers.Remove(layer);
+                _myMap.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
+            Layer layer = _myMap.Layers[_layerId.ToString()];
+            int currentIndex = _myMap.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex - 1, layer);
+                _myMap.Layers.Remove(layer);
+                _myMap.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -185,7 +189,7 @@ namespace EpiDashboard.Mapping
         private int GetRangeIndex(double val, List<double> ranges)
         {
             int limit;
-            limit = ranges.Count < classCount ? ranges.Count : classCount;
+            limit = ranges.Count < _classCount ? ranges.Count : _classCount;
 
             int index = limit - 1;
             for (int r = 0; r < limit - 1; r++)
@@ -252,12 +256,12 @@ namespace EpiDashboard.Mapping
                     return null;
                 }
 
-                GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
                 if (graphicsLayer == null)
                 {
                     graphicsLayer = new GraphicsLayer();
-                    graphicsLayer.ID = layerId.ToString();
-                    myMap.Layers.Add(graphicsLayer);
+                    graphicsLayer.ID = _layerId.ToString();
+                    _myMap.Layers.Add(graphicsLayer);
                 }
 
                 int recCount = shapeFileReader.Records.Count;
@@ -278,19 +282,19 @@ namespace EpiDashboard.Mapping
                     Envelope shapeFileExtent = shapeFileReader.GetExtent();
                     if (shapeFileExtent.SpatialReference == null)
                     {
-                        myMap.Extent = shapeFileExtent;
+                        _myMap.Extent = shapeFileExtent;
                     }
                     else
                     {
                         if (shapeFileExtent.SpatialReference.WKID == 4326)
                         {
-                            myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                            _myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
                         }
                     }
                 }
                 else
                 {
-                    myMap.Extent = graphicsLayer.FullExtent;
+                    _myMap.Extent = graphicsLayer.FullExtent;
                 }
                 graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
                 return new object[] { fileName, graphicsLayer.Graphics[0].Attributes };
@@ -340,12 +344,12 @@ namespace EpiDashboard.Mapping
                     return null;
                 }
 
-                GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
                 if (graphicsLayer == null)
                 {
                     graphicsLayer = new GraphicsLayer();
-                    graphicsLayer.ID = layerId.ToString();
-                    myMap.Layers.Add(graphicsLayer);
+                    graphicsLayer.ID = _layerId.ToString();
+                    _myMap.Layers.Add(graphicsLayer);
                 }
 
                 int recCount = shapeFileReader.Records.Count;
@@ -366,13 +370,13 @@ namespace EpiDashboard.Mapping
                 Envelope shapeFileExtent = shapeFileReader.GetExtent();
                 if (shapeFileExtent.SpatialReference == null)
                 {
-                    myMap.Extent = shapeFileExtent;
+                    _myMap.Extent = shapeFileExtent;
                 }
                 else
                 {
                     if (shapeFileExtent.SpatialReference.WKID == 4326)
                     {
-                        myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                        _myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
                     }
                 }
                 graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
@@ -394,9 +398,9 @@ namespace EpiDashboard.Mapping
 
         public void Refresh()
         {
-            if (dashboardHelper != null)
+            if (_dashboardHelper != null)
             {
-                SetShapeRangeValues(dashboardHelper, shapeKey, dataKey, valueField, colors, classCount);
+                SetShapeRangeValues(_dashboardHelper, _shapeKey, _dataKey, _valueField, _colors, _classCount);
             }
         }
 
@@ -404,12 +408,12 @@ namespace EpiDashboard.Mapping
         {
             try
             {
-                this.classCount = classCount;
-                this.dashboardHelper = dashboardHelper;
-                this.shapeKey = shapeKey;
-                this.dataKey = dataKey;
-                this.valueField = valueField;
-                this.colors = colors;
+                _classCount = classCount;
+                _dashboardHelper = dashboardHelper;
+                _shapeKey = shapeKey;
+                _dataKey = dataKey;
+                _valueField = valueField;
+                _colors = colors;
 
                 List<string> columnNames = new List<string>();
                 if (dashboardHelper.IsUsingEpiProject)
@@ -448,7 +452,7 @@ namespace EpiDashboard.Mapping
                 }
 
 
-                GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
                 ThematicItem thematicItem = GetThematicItem(shapeKey, dataKey, valueField, classCount, loadedData, graphicsLayer);
 
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
@@ -692,10 +696,10 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
             if (graphicsLayer != null)
             {
-                myMap.Layers.Remove(graphicsLayer);
+                _myMap.Layers.Remove(graphicsLayer);
                 if (legendStackPanel != null)
                 {
                     legendStackPanel.Children.Clear();

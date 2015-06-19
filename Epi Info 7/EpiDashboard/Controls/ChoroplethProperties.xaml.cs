@@ -37,49 +37,9 @@ namespace EpiDashboard.Controls
             InitializeComponent();
             this.mapControl = mapControl;
             this.myMap = myMap;
-            ////this.DashboardHelper = dashboardHelper;
-
-            //if (DashboardHelper.IsUsingEpiProject)
-            //{
-            //    //txtProjectPath.Text = dashboardHelper.View.Project.FilePath;
-
-            //    if (System.IO.File.Exists(txtProjectPath.Text))
-            //    {
-            //        cmbFormName.Items.Clear();
-            //        Project project = new Project(txtProjectPath.Text);
-            //        foreach (View view in project.Views)
-            //        {
-            //            cmbFormName.Items.Add(view.Name);
-            //        }
-            //    }
-
-            //    //cmbFormName.Text = dashboardHelper.View.Name;
-            //}
-            //else
-            //{
-            //    //if (!string.IsNullOrEmpty(dashboardHelper.CustomQuery))
-            //    //{
-            //    //    SqlQuery = DashboardHelper.CustomQuery;
-            //    //}
-            //}
-
-            //tblockRows.Text = dashboardHelper.DataSet.Tables[0].Rows.Count.ToString() + " unfiltered rows";
-            //tblockColumns.Text = dashboardHelper.DataSet.Tables[0].Columns.Count.ToString() + " columns";
-            //tblockCacheDateTime.Text = "Data last cached at " + dashboardHelper.LastCacheTime.ToShortDateString() + " " + dashboardHelper.LastCacheTime.ToShortTimeString();
-            //tblockCacheTimeElapsed.Text = "Took " + dashboardHelper.TimeToCache + " to locally cache data";
 
             Epi.ApplicationIdentity appId = new Epi.ApplicationIdentity(typeof(Configuration).Assembly);
             tblockCurrentEpiVersion.Text = "Epi Info " + appId.Version;
-
-            //lbxRelatedDataSources.Items.Clear();
-            //if (dashboardHelper.ConnectionsForRelate.Count > 0)
-            //{
-            //    // Related Data
-            //    foreach (RelatedConnection rConn in dashboardHelper.ConnectionsForRelate)
-            //    {
-            //        lbxRelatedDataSources.Items.Add(rConn.db.ConnectionString);
-            //    }
-            //}
 
             if (int.TryParse(cmbClasses.Text, out currentStratCount) == false)
             {
@@ -88,11 +48,8 @@ namespace EpiDashboard.Controls
 
             currentColor_rampStart = (SolidColorBrush)rctLowColor.Fill;
             currentColor_rampEnd = (SolidColorBrush)rctHighColor.Fill;
-
             initialRampCalc = true;
-
             ResetLegend_Click(new object(), new RoutedEventArgs());
-
             OnQuintileOptionChanged();
         }
 
@@ -101,7 +58,9 @@ namespace EpiDashboard.Controls
         public event EventHandler ChangesAccepted;
 
         public DashboardHelper DashboardHelper { get; private set; }
-
+        
+        public string DataSource { get; set; }
+        
         public FileInfo ProjectFileInfo
         {
             get 
@@ -117,7 +76,6 @@ namespace EpiDashboard.Controls
                 panelDataSourceAdvanced.Visibility = Visibility.Collapsed;
             }
         }
-        
 
         public string ConnectionString
         {
@@ -246,27 +204,6 @@ namespace EpiDashboard.Controls
             cmbValue.Items.Insert(0, "{Record Count}");
         }
 
-        private void cmbFormName_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //if (cmbFormName.SelectedIndex >= 0)
-            //{
-            //    cmbFormName.Text = cmbFormName.SelectedItem.ToString();
-            //}
-        }
-
-        private void txtProjectPath_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //cmbFormName.Items.Clear();
-            //if (System.IO.File.Exists(txtProjectPath.Text))
-            //{
-            //    Project project = new Project(txtProjectPath.Text);
-            //    foreach (View view in project.Views)
-            //    {
-            //        cmbFormName.Items.Add(view.Name);
-            //    }
-            //}
-        }
-
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             if (Cancelled != null)
@@ -329,10 +266,6 @@ namespace EpiDashboard.Controls
                     cmbValue.SelectedItem.ToString(),
                     brushList, 
                     classCount);
-
-                
-
-
             }
         }
 
@@ -459,7 +392,7 @@ namespace EpiDashboard.Controls
                 stratCount = 4;
             }
 
-            //List<object> rangeValues = provider.GetRangeValues();
+            //provider.RangeValue[0,0] = "dpb";
 
             SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
             SolidColorBrush rampEnd = (SolidColorBrush)rctHighColor.Fill;
