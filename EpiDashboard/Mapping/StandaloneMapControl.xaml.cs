@@ -1385,9 +1385,21 @@ namespace EpiDashboard.Mapping
         public void GenerateShapeFileChoropleth()
         {
             //AddLayer(LayerType.ChoroplethShapeFile);
+
+            ILayerProperties layerProperties = null;
+
+            //old config
+            DashboardHelper dashboardHelper = new DashboardHelper();
+            layerProperties = new ChoroplethLayerProperties(myMap, dashboardHelper, this);
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
+            
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
             EpiDashboard.Controls.ChoroplethProperties properties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
+            properties.layerprop = (ChoroplethLayerProperties)layerProperties;
+
 
             properties.Width = 800;
             properties.Height = 600;
@@ -1404,6 +1416,7 @@ namespace EpiDashboard.Mapping
 
             properties.Cancelled += new EventHandler(properties_Cancelled);
             properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
             popup.Content = properties;
             popup.Show();
         }
