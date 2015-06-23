@@ -1216,8 +1216,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (cmbSecondYAxis.SelectedIndex == 0)  //Second Y-axis type = None
             {
                 tblockSecondYAxisVariable.Text = "Second y-axis variable:";
-                tblockSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
-                cmbSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
+               // tblockSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
+                //cmbSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
+                cmbSecondYAxisVariable.IsEnabled = false;
                 cmbSecondYAxisVariable.SelectedIndex = -1;
                 checkboxAnnotationsY2.IsEnabled = false;
                 checkboxAnnotationsY2.IsChecked = false;
@@ -1231,8 +1232,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
             else  //Second Y-axis type = Single field or Rate per 100k population
             {
-                tblockSecondYAxisVariable.Visibility = System.Windows.Visibility.Visible;
-                cmbSecondYAxisVariable.Visibility = System.Windows.Visibility.Visible;
+                //tblockSecondYAxisVariable.Visibility = System.Windows.Visibility.Visible;
+                //cmbSecondYAxisVariable.Visibility = System.Windows.Visibility.Visible;
+                cmbSecondYAxisVariable.IsEnabled = true;
                 checkboxAnnotationsY2.IsEnabled = true;
                 cmbLineDashTypeY2.IsEnabled = true;
                 cmbLineThicknessY2.IsEnabled = true;

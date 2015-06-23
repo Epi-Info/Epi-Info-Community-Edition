@@ -42,13 +42,19 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
-
-            <TextBlock x:Name="tblockExposureField" HorizontalAlignment="Left" TextAlignment="Center" Text="Exposure:" Margin="0,5,0,0"  />
-            <ComboBox x:Name="cbxExposureField" Width="216" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxExposureField_SelectionChanged" />
-            <StackPanel Height="12" />
-            <TextBlock x:Name="tblockOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Case/Control:" Margin="0,5,0,0"  />
-            <ComboBox x:Name="cbxOutcomeField" Width="216" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxOutcomeField_SelectionChanged" />
-
+            <StackPanel Orientation="Vertical">
+                <WrapPanel Height="Auto" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
+                    <StackPanel>
+                    <TextBlock x:Name="tblockExposureField" HorizontalAlignment="Left" TextAlignment="Center" Text="Exposure:" Margin="0,5,0,0"  />
+                        <ComboBox x:Name="cbxExposureField" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxExposureField_SelectionChanged" Style="{StaticResource PropertiesComboxStyleLarge}" />
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                    <StackPanel>
+                    <TextBlock x:Name="tblockOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Case/Control:" Margin="0,5,0,0"  />
+                        <ComboBox x:Name="cbxOutcomeField" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxOutcomeField_SelectionChanged" Style="{StaticResource PropertiesComboxStyleLarge}" />
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
             <!--<TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
             <ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" />-->
 
@@ -59,11 +65,9 @@
 
             <StackPanel Height="12" />
             <TextBlock x:Name="tblockStrataVariable">Pair Group ID:</TextBlock>
-            <ScrollViewer x:Name="scrollViewerStrataProperties" VerticalAlignment="Stretch" Height="290" >
-                <StackPanel>
-                    <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" Height="290"/>
-                </StackPanel>
-            </ScrollViewer>
+            <StackPanel x:Name="scrollViewerStrataProperties">
+                <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" Height="290"/>
+            </StackPanel>
         </StackPanel>
 
         <!--2x2 Value Mapping-->
@@ -122,24 +126,35 @@
             <ScrollViewer x:Name="scrollViewerProperties" Height="700">
                 <StackPanel>
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 10">Title and Description</Label>
-                    <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
-                    <TextBox x:Name="txtTitle" Width="360" HorizontalAlignment="Left"></TextBox>
-
-                    <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
-                    <TextBox x:Name="txtDesc" Width="360" AcceptsReturn="True" Height="128" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
-
+                    <StackPanel Orientation="Vertical">
+                        <WrapPanel Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <StackPanel>
+                            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
+                                <TextBox x:Name="txtTitle" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
+                            </StackPanel>
+                            <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                            <StackPanel>
+                            <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
+                                <TextBox x:Name="txtDesc" AcceptsReturn="True" Style="{StaticResource PropertiesGadgetDescription}" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
+                            </StackPanel>
+                        </WrapPanel>
+                    </StackPanel>
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 10" Visibility="Collapsed">Output Options</Label>
-                    <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values" Visibility="Collapsed" IsEnabled="true" />
-                    <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" Visibility="Collapsed" IsEnabled="true" />
-                    <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values" Visibility="Collapsed" IsChecked="False" />
-                    <CheckBox x:Name="checkboxOutcomeContinuous" Style="{StaticResource PropertiesPanelCheckbox}" Content="Outcome is continuous" Visibility="Collapsed" IsEnabled="True" />
-                    <CheckBox x:Name="checkboxSmartTable" Style="{StaticResource PropertiesPanelCheckbox}" Content="Smart 2x2 table" Visibility="Collapsed" IsEnabled="True" IsChecked="True" />
-                    <CheckBox x:Name="checkboxStrataSummaryOnly" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show strata summary only" Visibility="Collapsed" IsEnabled="True" IsChecked="False" />
-                    <CheckBox x:Name="checkboxRowColPercents" Style="{StaticResource PropertiesPanelCheckbox}" Content="Row / column percents"  HorizontalAlignment="Left" Visibility="Collapsed" IsEnabled="True" IsChecked="True" />
-                    <CheckBox x:Name="checkboxHorizontal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Horizontal 2x2 summary"  HorizontalAlignment="Left" Visibility="Collapsed" IsEnabled="True" IsChecked="True" />
-                    <TextBlock x:Name="tblockMaxColumnLength" HorizontalAlignment="Left" TextAlignment="Center" Text="Max column name length:" Visibility="Collapsed" />
-                    <TextBox x:Name="txtMaxColumnLength" Width="60" HorizontalAlignment="Left" Text="24" Visibility="Collapsed" ></TextBox>
-
+                    <WrapPanel ItemWidth="220" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" >
+                        <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values" Visibility="Collapsed" IsEnabled="true" />
+                        <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" Visibility="Collapsed" IsEnabled="true" />
+                        <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values" Visibility="Collapsed" IsChecked="False" />
+                        <CheckBox x:Name="checkboxOutcomeContinuous" Style="{StaticResource PropertiesPanelCheckbox}" Content="Outcome is continuous" Visibility="Collapsed" IsEnabled="True" />
+                        <CheckBox x:Name="checkboxSmartTable" Style="{StaticResource PropertiesPanelCheckbox}" Content="Smart 2x2 table" Visibility="Collapsed" IsEnabled="True" IsChecked="True" />
+                        <CheckBox x:Name="checkboxStrataSummaryOnly" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show strata summary only" Visibility="Collapsed" IsEnabled="True" IsChecked="False" />
+                        <CheckBox x:Name="checkboxRowColPercents" Style="{StaticResource PropertiesPanelCheckbox}" Content="Row / column percents"  HorizontalAlignment="Left" Visibility="Collapsed" IsEnabled="True" IsChecked="True" />
+                        <CheckBox x:Name="checkboxHorizontal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Horizontal 2x2 summary"  HorizontalAlignment="Left" Visibility="Collapsed" IsEnabled="True" IsChecked="True" />
+                        
+                    </WrapPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="tblockMaxColumnLength" HorizontalAlignment="Left" TextAlignment="Center" Text="Max column name length:" Visibility="Collapsed" />
+                        <TextBox x:Name="txtMaxColumnLength" Width="60" HorizontalAlignment="Left" Text="24" Visibility="Collapsed" Margin="5 0 0 0"></TextBox>
+                    </StackPanel>
                     <!--<Button x:Name="btnValueMappings" HorizontalAlignment="Left" Click="btnValueMappings_Click" >
                         Define 2x2 Value Mappings
                     </Button>-->

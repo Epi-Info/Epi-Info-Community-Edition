@@ -33,7 +33,7 @@
             <Controls:SettingsToggleButton x:Name="tbtnValueMapping" Title="2x2 Value Mapping" Description="Specify the values for Exposure and Outcome as Yes or No." IsChecked="False" Checked="tbtnValueMapping_Checked"/>
             <!--<Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Sorting and Grouping" Description="Set a sort order and create list groups." IsChecked="False" Checked="tbtnSorting_Checked"/>-->
             <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnDisplayColors" Title="Colors and Styles" Description="Set cell shading and color gradient." IsChecked="False" Checked="tbtnDisplayColors_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnDisplas" Title="Colors and Styles" Description="Set cell shading and color gradient." IsChecked="False" Checked="tbtnDisplayColors_Checked"/>
             <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
 
         </StackPanel>
@@ -44,10 +44,10 @@
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
 
             <TextBlock x:Name="tblockExposureField" HorizontalAlignment="Left" TextAlignment="Center" Text="Exposure:" Margin="0,5,0,0"  />
-            <ComboBox x:Name="cbxExposureField" Width="216" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxExposureField_SelectionChanged" />
+            <ComboBox x:Name="cbxExposureField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxExposureField_SelectionChanged" />
             <StackPanel Height="12" />
             <TextBlock x:Name="tblockOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Outcome:" Margin="0,5,0,0"  />
-            <ComboBox x:Name="cbxOutcomeField" Width="216" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxOutcomeField_SelectionChanged" />
+            <ComboBox x:Name="cbxOutcomeField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxOutcomeField_SelectionChanged" />
 
             <!--<TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
             <ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" />-->
@@ -55,15 +55,13 @@
             <StackPanel Height="12" />
 
             <TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
-            <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFieldWeight_SelectionChanged" />
+            <ComboBox x:Name="cbxFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFieldWeight_SelectionChanged" />
 
             <StackPanel Height="12" />
             <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
-            <ScrollViewer x:Name="scrollViewerStrataProperties" VerticalAlignment="Stretch" Height="290" >
-                <StackPanel>
+                <StackPanel x:Name="scrollViewerStrataProperties">
                     <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" Height="290"/>
                 </StackPanel>
-            </ScrollViewer>
         </StackPanel>
 
         <!--2x2 Value Mapping-->
@@ -117,30 +115,44 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
         <StackPanel x:Name="panelDisplay" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 0">Display</Label>
 
-            <ScrollViewer x:Name="scrollViewerProperties" Height="700">
+            <ScrollViewer x:Name="scrollViewerProperties" Height="586">
                 <StackPanel>
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 10">Title and Description</Label>
-                    <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
-                    <TextBox x:Name="txtTitle" Width="360" HorizontalAlignment="Left"></TextBox>
-
-                    <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
-                    <TextBox x:Name="txtDesc" Width="360" AcceptsReturn="True" Height="128" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
-
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 10">Output Options</Label>
-                    <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values" Visibility="Visible" IsEnabled="true" />
-                    <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" Visibility="Visible" IsEnabled="true" />
-                    <CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use field prompts" IsEnabled="true" Visibility="Visible" IsChecked="True" />
-                    <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values" IsChecked="False" />
-                    <CheckBox x:Name="checkboxOutcomeContinuous" Style="{StaticResource PropertiesPanelCheckbox}" Content="Outcome is continuous" IsEnabled="True" />
-                    <CheckBox x:Name="checkboxSmartTable" Style="{StaticResource PropertiesPanelCheckbox}" Content="Smart 2x2 table" IsEnabled="True" IsChecked="True" />
-                    <CheckBox x:Name="checkboxStrataSummaryOnly" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show strata summary only" IsEnabled="True" IsChecked="False" />
-                    <CheckBox x:Name="checkboxDisplayChiSq" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display Chi-Square" IsEnabled="True" IsChecked="True" />
-                    <CheckBox x:Name="checkboxRowColPercents" Style="{StaticResource PropertiesPanelCheckbox}" Content="Row / column percents"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="True" />
-                    <CheckBox x:Name="checkboxHorizontal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Horizontal 2x2 summary"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="True" />
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 0">Title and Description</Label>
+                    <StackPanel Orientation="Vertical">
+                        <WrapPanel Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <StackPanel>
+                                <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
+                                <TextBox x:Name="txtTitle" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
+                            </StackPanel>
+                            <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                            <StackPanel>
+                                <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
+                                <TextBox x:Name="txtDesc" AcceptsReturn="True" Style="{StaticResource PropertiesGadgetDescription}" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
+                            </StackPanel>
+                        </WrapPanel>
+                    </StackPanel>
+                    
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Output Options</Label>
+                    
+                        <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values" Visibility="Visible" IsEnabled="true" />
+                            <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" Visibility="Visible" IsEnabled="true" />
+                            <CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use field prompts" IsEnabled="true" Visibility="Visible" IsChecked="True" />
+                            <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values" IsChecked="False" />
+                            <CheckBox x:Name="checkboxOutcomeContinuous" Style="{StaticResource PropertiesPanelCheckbox}" Content="Outcome is continuous" IsEnabled="True" />
+                            <CheckBox x:Name="checkboxSmartTable" Style="{StaticResource PropertiesPanelCheckbox}" Content="Smart 2x2 table" IsEnabled="True" IsChecked="True" />
+                            <CheckBox x:Name="checkboxStrataSummaryOnly" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show strata summary only" IsEnabled="True" IsChecked="False" />
+                            <CheckBox x:Name="checkboxDisplayChiSq" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display Chi-Square" IsEnabled="True" IsChecked="True" />
+                            <CheckBox x:Name="checkboxRowColPercents" Style="{StaticResource PropertiesPanelCheckbox}" Content="Row / column percents"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="True" />
+                            <CheckBox x:Name="checkboxHorizontal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Horizontal 2x2 summary"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="True" />
+                            
+                        </WrapPanel>
+                    <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="tblockMaxColumnLength" HorizontalAlignment="Left" TextAlignment="Center" Text="Max column name length:" />
-                    <TextBox x:Name="txtMaxColumnLength" Width="60" HorizontalAlignment="Left" Text="24"></TextBox>
+                        <TextBox x:Name="txtMaxColumnLength" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="24" Margin="5 0 0 0"></TextBox>
+                    </StackPanel>
 
                     <!--<Button x:Name="btnValueMappings" HorizontalAlignment="Left" Click="btnValueMappings_Click" >
                         Define 2x2 Value Mappings
@@ -171,38 +183,38 @@
             <StackPanel x:Name="panelHeatMap2">
 
                 <TextBlock x:Name="tblockBreakType" HorizontalAlignment="Left" TextAlignment="Center" Text="Break type:" Margin="0,12,0,0"  />
-                <ComboBox x:Name="cmbBreakType" Width="216" HorizontalAlignment="Left" SelectedIndex="0" Margin="0,5,0,5" SelectionChanged="cmbBreakType_SelectionChanged">
+                <ComboBox x:Name="cmbBreakType" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="0" Margin="0,5,0,5" SelectionChanged="cmbBreakType_SelectionChanged">
                     <ComboBoxItem>Percent of total</ComboBoxItem>
                     <ComboBoxItem>Count</ComboBoxItem>
                 </ComboBox>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="tblockBreak1" VerticalAlignment="Center" Margin="0,12,4,0">Break 1:</TextBlock>
-                    <TextBox x:Name="txtPct1" Width="32" Margin="0,12,4,0">0</TextBox>
+                    <TextBox x:Name="txtPct1" Style="{StaticResource PropertiesTextBoxSmall}" Margin="0,12,4,0">0</TextBox>
                     <TextBlock x:Name="tblockPct1" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="tblockBreak2" VerticalAlignment="Center" Margin="0,12,4,0">Break 2:</TextBlock>
-                    <TextBox x:Name="txtPct2" Width="32" Margin="0,12,4,0">20</TextBox>
+                    <TextBox x:Name="txtPct2" Style="{StaticResource PropertiesTextBoxSmall}" Margin="0,12,4,0">20</TextBox>
                     <TextBlock x:Name="tblockPct2" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="tblockBreak3" VerticalAlignment="Center" Margin="0,12,4,0">Break 3:</TextBlock>
-                    <TextBox x:Name="txtPct3" Width="32" Margin="0,12,4,0">40</TextBox>
+                    <TextBox x:Name="txtPct3" Style="{StaticResource PropertiesTextBoxSmall}" Margin="0,12,4,0">40</TextBox>
                     <TextBlock x:Name="tblockPct3" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="tblockBreak4" VerticalAlignment="Center" Margin="0,12,4,0">Break 4:</TextBlock>
-                    <TextBox x:Name="txtPct4" Width="32" Margin="0,12,4,0">60</TextBox>
+                    <TextBox x:Name="txtPct4" Style="{StaticResource PropertiesTextBoxSmall}" Margin="0,12,4,0">60</TextBox>
                     <TextBlock x:Name="tblockPct4" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="tblockBreak5" VerticalAlignment="Center" Margin="0,12,4,0">Break 5:</TextBlock>
-                    <TextBox x:Name="txtPct5" Width="32" Margin="0,12,4,0">80</TextBox>
+                    <TextBox x:Name="txtPct5" Style="{StaticResource PropertiesTextBoxSmall}" Margin="0,12,4,0">80</TextBox>
                     <TextBlock x:Name="tblockPct5" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                 </StackPanel>
             </StackPanel>

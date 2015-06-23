@@ -510,7 +510,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             CheckButtonStates(sender as SettingsToggleButton);
             panelVariables.Visibility = System.Windows.Visibility.Visible;
-            //panelSorting.Visibility = System.Windows.Visibility.Collapsed;
+            panelSorting.Visibility = System.Windows.Visibility.Collapsed;
             panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -519,7 +519,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             CheckButtonStates(sender as SettingsToggleButton);
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
-            //panelSorting.Visibility = System.Windows.Visibility.Visible;
+            panelSorting.Visibility = System.Windows.Visibility.Visible;
             panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -528,7 +528,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             CheckButtonStates(sender as SettingsToggleButton);
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
-            //panelSorting.Visibility = System.Windows.Visibility.Collapsed;
+            panelSorting.Visibility = System.Windows.Visibility.Collapsed;
             panelDisplay.Visibility = System.Windows.Visibility.Visible;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -537,7 +537,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             CheckButtonStates(sender as SettingsToggleButton);
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
-            //panelSorting.Visibility = System.Windows.Visibility.Collapsed;
+            panelSorting.Visibility = System.Windows.Visibility.Collapsed;
             panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Visible;
         }
