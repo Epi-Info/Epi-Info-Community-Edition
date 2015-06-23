@@ -64,9 +64,18 @@
         <Setter Property="Background" Value="{StaticResource GadgetBackgroundBrush}"></Setter>
     </Style>
 
-    <Style TargetType="ComboBox" x:Key="PropertiesComboxStyle">
+    <Style TargetType="ComboBox" x:Key="PropertiesComboxStyleLarge">
         <Setter Property="Width" Value="300" />
     </Style>
+
+    <Style TargetType="ComboBox" x:Key="PropertiesComboxStyleMed">
+        <Setter Property="Width" Value="180" />
+    </Style>
+
+    <Style TargetType="ComboBox" x:Key="PropertiesComboxStyleSmall">
+        <Setter Property="Width" Value="60" />
+    </Style>
+
 
     <Style TargetType="PropertyPanels:GadgetPropertiesPanelBase" x:Key="PropertiesPanelStyle">
         <Setter Property="FontSize" Value="16" />
@@ -109,7 +118,11 @@
             </GradientStopCollection>
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
-
+    
+    <Style x:Key="FieldSpacer" TargetType="StackPanel">
+        <Setter Property="Width" Value="9" />
+    </Style>
+    
     <Style x:Key="CloseRectangle" TargetType="Rectangle">
         <Setter Property="Fill" Value="{StaticResource CloseButtonFillBrush}"/>
         <Setter Property="Stroke" Value="{StaticResource CloseButtonStrokeBrush}"/>
@@ -280,11 +293,10 @@
         <Setter Property="HorizontalAlignment" Value="Right" />
     </Style>
 
-    <Style 
-       TargetType="{x:Type DataGridRow}">
+    <Style TargetType="{x:Type DataGridRow}">
         <Setter Property="Background" Value="White" />
     </Style>
-
+    
     <Style 
        TargetType="{x:Type DataGrid}" x:Key="LineListDataGridStyle">
         <Setter Property="VerticalGridLinesBrush" Value="#D9E8F1" />
@@ -369,14 +381,52 @@
     </Style>
     
     <Style x:Key="PropertiesHeading" TargetType="Label">
-        <Setter Property="FontSize" Value="56" />
+        <Setter Property="FontSize" Value="54" />
         <Setter Property="FontWeight" Value="Light" />
+        <Setter Property="Padding" Value="0 5 0 5"/>
     </Style>
 
     <Style x:Key="PropertiesSubHeading" TargetType="Label">
         <Setter Property="FontSize" Value="24" />
         <Setter Property="FontWeight" Value="Light" />
+        <Setter Property="Padding" Value="0 0 0 0" />
         <Setter Property="Foreground" Value="{StaticResource PrimaryAccentColor}" />
+    </Style>
+    
+    <Style x:Key="PropertiesGadgetTitle" TargetType="TextBox">
+        <Setter Property="Width" Value="360" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="BorderBrush" Value="#8a8a8a" />
+    </Style>
+
+    <Style x:Key="PropertiesGadgetDescription" TargetType="TextBox">
+        <Setter Property="Width" Value="360" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="BorderBrush" Value="#8a8a8a" />
+    </Style>
+
+    <Style x:Key="PropertiesTextBoxLarge" TargetType="TextBox">
+        <Setter Property="Width" Value="300" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="BorderBrush" Value="#8a8a8a" />
+    </Style>
+
+    <Style x:Key="PropertiesTextBoxMed" TargetType="TextBox">
+        <Setter Property="Width" Value="180" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="BorderBrush" Value="#8a8a8a" />
+    </Style>
+    
+    <Style x:Key="PropertiesTextBoxSmall" TargetType="TextBox">
+        <Setter Property="Width" Value="60" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="BorderBrush" Value="#8a8a8a" />
+    </Style>
+    
+    <Style x:Key="PropertiesTextBoxExtraSmall" TargetType="TextBox">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="BorderBrush" Value="#8a8a8a" />
     </Style>
 
     <Style x:Key="ToggleSidebarButtonStyle" TargetType="ToggleButton">

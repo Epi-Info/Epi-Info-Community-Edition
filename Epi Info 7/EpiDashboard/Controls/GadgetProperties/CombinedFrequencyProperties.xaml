@@ -30,7 +30,7 @@
             <Label FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10" xml:space="preserve">Combined&#10;Frequency</Label>
 
             <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables" Description="Select items to include in the frequency." IsChecked="True" Checked="tbtnVariables_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Sorting and Grouping" Description="Set a sort order for the output." IsChecked="False" Checked="tbtnSorting_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Grouping and Sorting" Description="Set a sort order for the output." IsChecked="False" Checked="tbtnSorting_Checked"/>
             <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
             <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
 
@@ -61,34 +61,46 @@
         </StackPanel>
 
         <StackPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
+            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 0">Grouping and Sorting</Label>
 
             <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 4">Grouping</Label>
-            <Label>Combine mode:</Label>
-            <ComboBox x:Name="cmbCombineMode" Width="180" HorizontalAlignment="Left" SelectedIndex="0" Visibility="Visible" Margin="0,0,0,0" SelectionChanged="cmbCombineMode_SelectionChanged">
+            <StackPanel Orientation="Horizontal">
+            <TextBlock>Combine mode:</TextBlock>
+            <ComboBox x:Name="cmbCombineMode" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="0" Visibility="Visible" Margin="10,0,0,0" SelectionChanged="cmbCombineMode_SelectionChanged">
                 <ComboBoxItem>Automatic</ComboBoxItem>
                 <ComboBoxItem>Boolean</ComboBoxItem>
                 <ComboBoxItem>Categorical</ComboBoxItem>
             </ComboBox>
+            </StackPanel>
             <TextBlock x:Name="tblockTrueValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Value to treat as true:" Margin="0,12,0,0" Visibility="Hidden" />
-            <TextBox x:Name="txtTrueValue" Width="180" HorizontalAlignment="Left" Visibility="Hidden" />
+            <TextBox x:Name="txtTrueValue" Style="{StaticResource PropertiesTextBoxMed}" HorizontalAlignment="Left" Visibility="Hidden" />
 
             <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 30, 0, 4">Sorting</Label>
-
-            <Label>Sort Method:</Label>
-            <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort high to low" HorizontalAlignment="Left" IsChecked="true" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Method:</TextBlock>
+				<CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Margin="20 0 0 0" Content="Sort high to low" HorizontalAlignment="Left" IsChecked="true" BorderThickness="1" />
+            </StackPanel>
         </StackPanel>
 
         <StackPanel x:Name="panelDisplay" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
-
-            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
-            <TextBox x:Name="txtTitle" Width="360" HorizontalAlignment="Left"></TextBox>
-
-            <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
-            <TextBox x:Name="txtDesc" Width="360" AcceptsReturn="True" Height="128" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
-
+            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0,0,0">Title and Description</Label>
+            <StackPanel Orientation="Vertical">
+                <WrapPanel Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <StackPanel>
+                        <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
+                        <TextBox x:Name="txtTitle" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                    <StackPanel>
+                        <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
+                        <TextBox x:Name="txtDesc" AcceptsReturn="True" Style="{StaticResource PropertiesGadgetDescription}" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 20, 0, 4">Output Options</Label>
             <CheckBox x:Name="checkboxShowDenominator" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show denominator" HorizontalAlignment="Left" IsChecked="true" />
+               
         </StackPanel>
 
         <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
