@@ -1213,18 +1213,20 @@ namespace EpiDashboard
             ComplexSampleMeansParameters csmeansParameters = (ComplexSampleMeansParameters)Parameters;
             if (!LoadingCombos)
             {
-                if (csmeansParameters != null && !String.IsNullOrEmpty(csmeansParameters.ColumnNames[0]) && !String.IsNullOrEmpty(csmeansParameters.PSUVariableName))
-                CreateInputVariableList();
-                txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
-                waitPanel.Visibility = System.Windows.Visibility.Visible;
-                messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
-                descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
-                baseWorker = new BackgroundWorker();
-                baseWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(Execute);
-                baseWorker.RunWorkerAsync();
-                base.RefreshResults();
+                if (csmeansParameters != null && csmeansParameters.ColumnNames.Count != 0 && !String.IsNullOrEmpty(csmeansParameters.ColumnNames[0]) && !String.IsNullOrEmpty(csmeansParameters.PSUVariableName))
+                {
+                    CreateInputVariableList();
+                    txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
+                    waitPanel.Visibility = System.Windows.Visibility.Visible;
+                    messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
+                    descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
+                    baseWorker = new BackgroundWorker();
+                    baseWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(Execute);
+                    baseWorker.RunWorkerAsync();
+                    base.RefreshResults();
+                }
             }
-            else if (!LoadingCombos && String.IsNullOrEmpty(csmeansParameters.ColumnNames[0]))
+            else if (!LoadingCombos && csmeansParameters.ColumnNames.Count != 0 && String.IsNullOrEmpty(csmeansParameters.ColumnNames[0]))
             {
                 ClearResults();                
                 waitPanel.Visibility = System.Windows.Visibility.Collapsed;
