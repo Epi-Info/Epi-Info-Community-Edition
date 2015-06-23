@@ -133,8 +133,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.CrosstabVariableName = string.Empty;
             Parameters.PSUVariableName = string.Empty;
             
-            if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()) &&
-                cbxFieldPSU.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldPSU.SelectedItem.ToString()))
+            if (cbxField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxField.SelectedItem.ToString()) )
             {
                 inputVariableList.Add("IdentifierList", cbxField.SelectedItem.ToString());
                 if (Parameters.ColumnNames.Count > 0)
@@ -145,8 +144,11 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     Parameters.ColumnNames.Add(cbxField.SelectedItem.ToString());
                 }
+            }
+            if(cbxFieldPSU.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldPSU.SelectedItem.ToString()))
+            {
                 inputVariableList.Add("PSUVar", cbxFieldPSU.SelectedItem.ToString());
-                Parameters.PSUVariableName = cbxFieldPSU.SelectedItem.ToString();
+                Parameters.PSUVariableName = cbxFieldPSU.SelectedItem.ToString();            
             }
             else
             {

@@ -125,11 +125,11 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     Parameters.ColumnNames.Add(cbxField.SelectedItem.ToString());
                 }
-                if (cbxFieldPSU.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldPSU.SelectedItem.ToString()))
-                {
-                    inputVariableList.Add("PSUVar", cbxFieldPSU.SelectedItem.ToString());
-                    Parameters.PSUVariableName = cbxFieldPSU.SelectedItem.ToString();
-                }
+            }
+            if (cbxFieldPSU.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldPSU.SelectedItem.ToString()))
+            {
+                inputVariableList.Add("PSUVar", cbxFieldPSU.SelectedItem.ToString());
+                Parameters.PSUVariableName = cbxFieldPSU.SelectedItem.ToString();                
             }
             else
             {

@@ -1129,7 +1129,7 @@ namespace EpiDashboard
 
             if (!LoadingCombos)
             {
-                if (csfreqParameters != null && !String.IsNullOrEmpty(csfreqParameters.ColumnNames[0]) && !String.IsNullOrEmpty(csfreqParameters.PSUVariableName))
+                if (csfreqParameters != null && csfreqParameters.ColumnNames.Count >0  && !String.IsNullOrEmpty(csfreqParameters.ColumnNames[0]) && !String.IsNullOrEmpty(csfreqParameters.PSUVariableName))
                 {
                     CreateInputVariableList();
                     txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
@@ -1141,7 +1141,7 @@ namespace EpiDashboard
                     baseWorker.RunWorkerAsync();
                     base.RefreshResults();
                 }
-                else if (!LoadingCombos && String.IsNullOrEmpty(csfreqParameters.ColumnNames[0]))
+                else if (!LoadingCombos && csfreqParameters.ColumnNames.Count > 0  && String.IsNullOrEmpty(csfreqParameters.ColumnNames[0]))
                 {
                     ClearResults();
                     waitPanel.Visibility = System.Windows.Visibility.Collapsed;
