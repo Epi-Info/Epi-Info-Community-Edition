@@ -118,7 +118,7 @@ namespace EpiDashboard.Gadgets.Charting
                         break;
                 }
 
-                //SetMarkerType();
+                SetMarkerType(chtParameters.MarkerType);
                 xyChart.Legend.FontSize = chtParameters.LegendFontSize;
 
                 xAxisCoordinates.Angle = chtParameters.XAxisAngle;
@@ -274,6 +274,27 @@ namespace EpiDashboard.Gadgets.Charting
                 StrataExpanderList.Clear();
             }
 
+            private void SetMarkerType(int MarkerType)
+            {
+               // switch (cmbMarkerType.SelectedIndex)
+                switch (MarkerType) 
+                {
+                    default:
+                    case 0:
+                        series0.Marker = new ComponentArt.Win.DataVisualization.Common.Marker("Circle");
+                        break;
+                    case 1:
+                        series0.Marker = new ComponentArt.Win.DataVisualization.Common.Marker("Cross");
+                        break;
+                    case 2:
+                        series0.Marker = new ComponentArt.Win.DataVisualization.Common.Marker("Diamond");
+                        break;
+                    case 3:
+                        series0.Marker = new ComponentArt.Win.DataVisualization.Common.Marker("Square");
+                        break;
+                }
+            }
+
             private void ShowLabels()
             {
                 if (string.IsNullOrEmpty(tblockXAxisLabel.Text.Trim()))
@@ -427,7 +448,7 @@ namespace EpiDashboard.Gadgets.Charting
                 if (value > 0) { remvalue = 1; }
                 numx.To =  newMaxXvalue + remvalue ;
                //-- step  x
-                if (newMaxXvalue <= 100)    
+                if (newMaxXvalue <= 100 )  
                     { numx.Step = 10;} 
                 else if ((newMaxXvalue > 100) && (newMaxXvalue <= 1000))
                    {numx.Step = 100;}
@@ -465,12 +486,12 @@ namespace EpiDashboard.Gadgets.Charting
                 numy.Step = 50;
 
                 //step y
-                if (Ymaxvalue<= 500) 
-                 { numy.Step = 50;}
+                if (Ymaxvalue <= 500)
+                  { numy.Step = 50; }
                 else if ((Ymaxvalue > 500) && (Ymaxvalue <= 1000))
-                 { numy.Step = 100; }
+                { numy.Step = 100; }
                 else if (Ymaxvalue > 1000)
-                 { numy.Step = 5000; }
+                { numy.Step = 5000; }
                  
                 AxisCoordinates ay = new AxisCoordinates();
                 ay.Coordinates = numy;
