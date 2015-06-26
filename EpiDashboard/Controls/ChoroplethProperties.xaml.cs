@@ -26,14 +26,27 @@ namespace EpiDashboard.Controls
         private EpiDashboard.Mapping.StandaloneMapControl _mapControl;
         private ESRI.ArcGIS.Client.Map _myMap;
         private DashboardHelper _dashboardHelper;
-        private EpiDashboard.Mapping.ChoroplethLayerProvider _provider;
+        public EpiDashboard.Mapping.ChoroplethLayerProvider _provider;
         private int _currentStratCount;
         private SolidColorBrush _currentColor_rampStart;
         private SolidColorBrush _currentColor_rampEnd;
         private bool _initialRampCalc;
-
         public ChoroplethLayerProperties layerprop;
-        IDictionary<string, object> shapeAttributes;
+        public IDictionary<string, object> shapeAttributes;
+        private Dictionary<int, object> ClassAttribList = new Dictionary<int, object>();
+
+        string _shapeKey;
+        string _dataKey;
+        string _value;
+
+        private struct classAttributes
+        {
+           public Brush rctColor ;
+           public string quintile;
+           public string rampStart;
+           public string rampEnd;
+           public  string legendText;
+        }
 
         string _shapeKey;
         string _dataKey;
@@ -47,6 +60,7 @@ namespace EpiDashboard.Controls
             _provider = new Mapping.ChoroplethLayerProvider(_myMap);
             _provider.DashboardHelper = _dashboardHelper;
 
+
             Epi.ApplicationIdentity appId = new Epi.ApplicationIdentity(typeof(Configuration).Assembly);
             tblockCurrentEpiVersion.Text = "Epi Info " + appId.Version;
 
@@ -58,7 +72,6 @@ namespace EpiDashboard.Controls
             _currentColor_rampStart = (SolidColorBrush)rctLowColor.Fill;
             _currentColor_rampEnd = (SolidColorBrush)rctHighColor.Fill;
             _initialRampCalc = true;
-            
             ResetLegend_Click(new object(), new RoutedEventArgs());
             OnQuintileOptionChanged();
         }
@@ -67,12 +80,12 @@ namespace EpiDashboard.Controls
         public event EventHandler ChangesAccepted;
 
         public DashboardHelper DashboardHelper { get; private set; }
-        
+
         public string DataSource { get; set; }
-        
+
         public FileInfo ProjectFileInfo
         {
-            get 
+            get
             {
                 FileInfo fi = new FileInfo(txtProjectPath.Text);
                 return fi;
@@ -171,7 +184,12 @@ namespace EpiDashboard.Controls
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             RenderMap();
-            layerprop.SetValues(txtShapePath.Text, cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, shapeAttributes);
+            AddClassAttributes();
+                      
+             int numclasses = Convert.ToInt32(cmbClasses.Text);
+             bool flagquintiles = (bool) quintilesOption.IsChecked;
+
+             layerprop.SetValues(txtShapePath.Text, cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses);
             if (ChangesAccepted != null)
             {
                 ChangesAccepted(this, new EventArgs());
@@ -197,7 +215,7 @@ namespace EpiDashboard.Controls
             }
         }
 
-        private void FillComboBoxes()
+        public void FillComboBoxes()
         {
             cmbDataKey.Items.Clear();
             cmbValue.Items.Clear();
@@ -206,11 +224,13 @@ namespace EpiDashboard.Controls
             List<string> numericFields = _dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
             foreach (string field in fields)
             {
-                cmbDataKey.Items.Add(field);
+                if (!(field.ToUpper() == "RECSTATUS" || field.ToUpper() == "FKEY" || field.ToUpper() == "GLOBALRECORDID" || field.ToUpper() == "UNIQUEKEY" || field.ToUpper() == "FIRSTSAVETIME" || field.ToUpper() == "LASTSAVETIME" || field.ToUpper() == "SYSTEMDATE"))
+                { cmbDataKey.Items.Add(field); }
             }
             foreach (string field in numericFields)
             {
-                cmbValue.Items.Add(field);
+                if (!(field.ToUpper() == "RECSTATUS" || field.ToUpper() == "UNIQUEKEY"))
+                {cmbValue.Items.Add(field);  }
             }
             cmbValue.Items.Insert(0, "{Record Count}");
         }
@@ -246,6 +266,191 @@ namespace EpiDashboard.Controls
             }
         }
 
+        private void AddClassAttributes()
+        {
+            
+            classAttributes ca1 = new classAttributes();
+            ca1.rctColor = rctColor01.Fill;
+            ca1.rampStart = rampStart01.Text;
+            ca1.rampEnd = rampEnd01.Text;
+            ca1.quintile = quintile01.Text;
+            ca1.legendText = legendText01.Text;
+            ClassAttribList.Add(1, ca1);
+
+            classAttributes ca2 = new classAttributes();
+            ca2.rctColor = rctColor02.Fill;
+            ca2.rampStart = rampStart02.Text;
+            ca2.rampEnd = rampEnd02.Text;
+            ca2.quintile = quintile02.Text;
+            ca2.legendText = legendText02.Text;
+            ClassAttribList.Add(2, ca2);
+
+            classAttributes ca3 = new classAttributes();
+            ca3.rctColor = rctColor03.Fill;
+            ca3.rampStart = rampStart03.Text;
+            ca3.rampEnd = rampEnd03.Text;
+            ca3.quintile = quintile03.Text;
+            ca3.legendText = legendText03.Text;
+            ClassAttribList.Add(3, ca3);
+
+            classAttributes ca4 = new classAttributes();
+            ca4.rctColor = rctColor04.Fill;
+            ca4.rampStart = rampStart04.Text;
+            ca4.rampEnd = rampEnd04.Text;
+            ca4.quintile = quintile04.Text;
+            ca4.legendText = legendText04.Text;
+            ClassAttribList.Add(4, ca4);
+
+            classAttributes ca5 = new classAttributes();
+            ca5.rctColor = rctColor05.Fill;
+            ca5.rampStart = rampStart05.Text;
+            ca5.rampEnd = rampEnd05.Text;
+            ca5.quintile = quintile05.Text;
+            ca5.legendText = legendText05.Text;
+            ClassAttribList.Add(5, ca5);
+
+            classAttributes ca6 = new classAttributes();
+            ca6.rctColor = rctColor06.Fill;
+            ca6.rampStart = rampStart06.Text;
+            ca6.rampEnd = rampEnd06.Text;
+            ca6.quintile = quintile06.Text;
+            ca6.legendText = legendText06.Text;
+            ClassAttribList.Add(6, ca6);
+
+            classAttributes ca7 = new classAttributes();
+            ca7.rctColor = rctColor07.Fill;
+            ca7.rampStart = rampStart07.Text;
+            ca7.rampEnd = rampEnd07.Text;
+            ca7.quintile = quintile07.Text;
+            ca7.legendText = legendText07.Text;
+            ClassAttribList.Add(7, ca7);
+
+            classAttributes ca8 = new classAttributes();
+            ca8.rctColor = rctColor08.Fill;
+            ca8.rampStart = rampStart08.Text;
+            ca8.rampEnd = rampEnd08.Text;
+            ca8.quintile = quintile08.Text;
+            ca8.legendText = legendText08.Text;
+            ClassAttribList.Add(8, ca8);
+
+            classAttributes ca9 = new classAttributes();
+            ca9.rctColor = rctColor09.Fill;
+            ca9.rampStart = rampStart09.Text;
+            ca9.rampEnd = rampEnd09.Text;
+            ca9.quintile = quintile09.Text;
+            ca9.legendText = legendText09.Text;
+            ClassAttribList.Add(9, ca9);
+
+            classAttributes ca10 = new classAttributes();
+            ca10.rctColor = rctColor10.Fill;
+            ca10.rampStart = rampStart10.Text;
+            ca10.rampEnd = rampEnd10.Text;
+            ca10.quintile = quintile10.Text;
+            ca10.legendText = legendText10.Text;
+            ClassAttribList.Add(10, ca10);
+         }
+
+        public void SetClassAttributes(Dictionary<int, object> classAttrib)
+        {
+
+            foreach (int key in classAttrib.Keys)
+            {
+                var item = classAttrib.ElementAt(key-1);
+                classAttributes itemvalue = (classAttributes) item.Value;
+
+               if (key == 1)
+               {
+                    rctColor01.Fill = (Brush) itemvalue.rctColor;
+                    rampStart01.Text = itemvalue.rampStart;
+                    rampEnd01.Text = itemvalue.rampEnd;
+                    quintile01.Text = itemvalue.quintile;
+                    legendText01.Text = itemvalue.legendText;
+               }
+               else if (key == 2)
+               {
+                   rctColor02.Fill = (Brush)itemvalue.rctColor;
+                   rampStart02.Text = itemvalue.rampStart;
+                   rampEnd02.Text = itemvalue.rampEnd;
+                   quintile02.Text = itemvalue.quintile;
+                   legendText02.Text = itemvalue.legendText;
+               }
+               else if (key == 3)
+               {
+                   rctColor03.Fill = (Brush)itemvalue.rctColor;
+                   rampStart03.Text = itemvalue.rampStart;
+                   rampEnd03.Text = itemvalue.rampEnd;
+                   quintile03.Text = itemvalue.quintile;
+                   legendText03.Text = itemvalue.legendText;
+               }
+               else if (key == 4)
+               {
+                   rctColor04.Fill = (Brush)itemvalue.rctColor;
+                   rampStart04.Text = itemvalue.rampStart;
+                   rampEnd04.Text = itemvalue.rampEnd;
+                   quintile04.Text = itemvalue.quintile;
+                   legendText04.Text = itemvalue.legendText;
+               }
+               else if (key == 5)
+               {
+                  rctColor05.Fill = (Brush) itemvalue.rctColor;
+                  rampStart05.Text = itemvalue.rampStart;
+                  rampEnd05.Text = itemvalue.rampEnd;
+                  quintile05.Text = itemvalue.quintile;
+                  legendText05.Text = itemvalue.legendText;
+                
+               }
+               else if (key == 6)
+               {
+                   rctColor06.Fill = (Brush)itemvalue.rctColor;
+                   rampStart06.Text = itemvalue.rampStart;
+                   rampEnd06.Text = itemvalue.rampEnd;
+                   quintile06.Text = itemvalue.quintile;
+                   legendText06.Text = itemvalue.legendText; 
+                 
+               }
+               else if (key == 7)
+               {
+                   rctColor07.Fill = (Brush)itemvalue.rctColor;
+                   rampStart07.Text = itemvalue.rampStart;
+                   rampEnd07.Text = itemvalue.rampEnd;
+                   quintile07.Text = itemvalue.quintile;
+                   legendText07.Text = itemvalue.legendText;
+               }
+               else if (key == 8)
+               {
+                   rctColor08.Fill = (Brush) itemvalue.rctColor;
+                   rampStart08.Text = itemvalue.rampStart;
+                   rampEnd08.Text = itemvalue.rampEnd;
+                   quintile08.Text = itemvalue.quintile;
+                   legendText08.Text = itemvalue.legendText;
+                 
+               }
+               else if (key == 9)
+               {
+                  rctColor09.Fill = (Brush) itemvalue.rctColor;
+                  rampStart09.Text = itemvalue.rampStart;
+                  rampEnd09.Text = itemvalue.rampEnd;
+                  quintile09.Text = itemvalue.quintile;
+                  legendText09.Text = itemvalue.legendText;
+              
+               }
+               else if (key == 10)
+               {
+                   rctColor10.Fill = (Brush)itemvalue.rctColor;
+                   rampStart10.Text = itemvalue.rampStart;
+                   rampEnd10.Text = itemvalue.rampEnd;
+                   quintile10.Text = itemvalue.quintile;
+                   legendText10.Text = itemvalue.legendText;
+               }
+            }
+
+        }
+
+
+        public void SetDashboardHelper(DashboardHelper dash)
+        {
+            _dashboardHelper = dash;
+        }
         private void RenderMap()
         {
             if (cmbDataKey.SelectedIndex != -1 && cmbShapeKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
@@ -253,7 +458,7 @@ namespace EpiDashboard.Controls
                 string shapeKey = cmbShapeKey.SelectedItem.ToString();
                 string dataKey = cmbDataKey.SelectedItem.ToString();
                 string value = cmbValue.SelectedItem.ToString();
-                
+
                 List<SolidColorBrush> brushList = new List<SolidColorBrush>() { 
                     (SolidColorBrush)rctColor01.Fill, 
                     (SolidColorBrush)rctColor02.Fill, 
@@ -273,12 +478,12 @@ namespace EpiDashboard.Controls
                 }
 
                 _provider.SetShapeRangeValues(_dashboardHelper, 
-                    cmbShapeKey.SelectedItem.ToString(), 
-                    cmbDataKey.SelectedItem.ToString(), 
+                    cmbShapeKey.SelectedItem.ToString(),
+                    cmbDataKey.SelectedItem.ToString(),
                     cmbValue.SelectedItem.ToString(),
-                    brushList, 
+                    brushList,
                     classCount);
-            }
+           }
         }
         public StackPanel LegendStackPanel
         {
@@ -402,9 +607,9 @@ namespace EpiDashboard.Controls
             {
                 return;
             }
-            
+
             int stratCount;
-            
+
             if (int.TryParse(cmbClasses.Text, out stratCount) == false)
             {
                 stratCount = 4;
@@ -441,6 +646,7 @@ namespace EpiDashboard.Controls
             rampStart01.Text = _provider.RangeValues[0, 0];
             rampEnd01.Text = _provider.RangeValues[0, 1];
             quintile01.Text = _provider.QuantileValues[0].ToString();
+             
 
             Color coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri), (byte)(rampStart.Color.G - gi), (byte)(rampStart.Color.B - bi));
             if (isNewColorRamp) rctColor02.Fill = new SolidColorBrush(coo);
@@ -449,6 +655,7 @@ namespace EpiDashboard.Controls
             quintile02.Text = _provider.QuantileValues[1].ToString();
 
             int i = 3;
+
 
             coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri * 2), (byte)(rampStart.Color.G - gi * 2), (byte)(rampStart.Color.B - bi * 2));
             rctColor03.Visibility = System.Windows.Visibility.Visible;
@@ -468,7 +675,7 @@ namespace EpiDashboard.Controls
                 quintile03.Visibility = System.Windows.Visibility.Hidden;
                 legendText03.Visibility = System.Windows.Visibility.Hidden;
             }
-            if(isNewColorRamp) rctColor03.Fill = new SolidColorBrush(coo);
+            if (isNewColorRamp) rctColor03.Fill = new SolidColorBrush(coo);
             rampStart03.Text = _provider.RangeValues[i - 2, 0];
             rampEnd03.Text = _provider.RangeValues[i - 2, 1];
             quintile03.Text = _provider.QuantileValues[i - 2].ToString();
@@ -635,7 +842,7 @@ namespace EpiDashboard.Controls
             OnQuintileOptionChanged();
         }
 
-        private void OnQuintileOptionChanged()
+        public void OnQuintileOptionChanged()
         {
             int widthQuintile = 100;
             int widthMinMax = 0;
@@ -654,7 +861,6 @@ namespace EpiDashboard.Controls
             rampCompareColumn.Width = new GridLength(widthCompare, GridUnitType.Pixel);
             rampEndColumn.Width = new GridLength(widthMinMax, GridUnitType.Pixel);
         }
-
         private void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _shapeKey = cmbShapeKey.SelectedItem.ToString();
@@ -668,7 +874,8 @@ namespace EpiDashboard.Controls
         private void cmbValue_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _value = cmbValue.SelectedItem.ToString();
-        }
+        }  
+      
     }
     
 }

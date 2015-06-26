@@ -27,6 +27,7 @@ using ESRI.ArcGIS.Client.Tasks;
 using Epi;
 using Epi.Data;
 using EpiDashboard.Mapping.ShapeFileReader;
+using EpiDashboard.Controls;
 
 namespace EpiDashboard.Mapping
 {    
@@ -66,9 +67,10 @@ namespace EpiDashboard.Mapping
         private bool bypassInternetCheck;
         private Brush defaultBackgroundColor = Brushes.White;
         private bool hidePanels = false;
-        private EpiDashboard.Controls.PointofInterestProperties pointofinterestproperties;
-        private EpiDashboard.Controls.CaseClusterProperties caseclusterproperties;
-        private EpiDashboard.Controls.DotDensityProperties dotdensityproperties;
+        private PointofInterestProperties pointofinterestproperties;
+        private CaseClusterProperties caseclusterproperties;
+        private DotDensityProperties dotdensityproperties;
+        private ChoroplethProperties choroplethproperties;
         
         public StandaloneMapControl()
         {
@@ -667,6 +669,12 @@ namespace EpiDashboard.Mapping
                DotDensityKmlLayerProperties densitylayerprop = (DotDensityKmlLayerProperties)layerProperties;
                if (densitylayerprop.FlagRunEdit == false)
                { GenerateShapeFileDotDensity(densitylayerprop); }
+           }
+           else if (layerProperties is ChoroplethLayerProperties)
+           {
+               ChoroplethLayerProperties choroplethlayerprop = (ChoroplethLayerProperties)layerProperties;
+               if (choroplethlayerprop.FlagRunEdit == false)
+               { GenerateShapeFileChoropleth(choroplethlayerprop); }
            }
        }
        //--
@@ -1384,8 +1392,6 @@ namespace EpiDashboard.Mapping
 
         public void GenerateShapeFileChoropleth()
         {
-            //AddLayer(LayerType.ChoroplethShapeFile);
-
             ILayerProperties layerProperties = null;
 
             //old config
@@ -1420,6 +1426,83 @@ namespace EpiDashboard.Mapping
             popup.Content = properties;
             popup.Show();
         }
+        public void GenerateShapeFileChoropleth(ChoroplethLayerProperties choroplethlayerprop)
+        {
+
+            DashboardHelper dashboardHelper;
+            ILayerProperties layerProperties = null;
+
+            //old config
+            layerProperties = (ChoroplethLayerProperties)choroplethlayerprop;
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
+
+            
+            choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
+            choroplethproperties.layerprop = choroplethlayerprop;
+            choroplethproperties._provider = choroplethlayerprop.provider;
+
+            choroplethproperties.Width = 800;
+            choroplethproperties.Height = 600;
+
+            dashboardHelper = choroplethlayerprop.GetDashboardHelper();
+            choroplethproperties.SetDashboardHelper(dashboardHelper);
+            choroplethproperties.txtProjectPath.Text = dashboardHelper.Database.DbName;
+            choroplethproperties.cmbClasses.Text = choroplethlayerprop.cbxClasses.Text;
+            choroplethproperties.quintilesOption.IsChecked = choroplethlayerprop.flagQuantiles;
+            if (choroplethlayerprop.flagQuantiles == true) { choroplethproperties.OnQuintileOptionChanged(); }
+
+           /* choroplethproperties.panelBoundaries.IsEnabled = true;
+              choroplethproperties.dataFilters = new DataFilters(dashboardHelper);
+              choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.dataFilters, true);
+              choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
+              choroplethproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
+              choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only."; */
+
+            if (string.IsNullOrEmpty(choroplethlayerprop.shapeFilePath) == false)
+            {
+                choroplethproperties.txtShapePath.Text = choroplethlayerprop.shapeFilePath;
+                choroplethproperties.shapeAttributes = choroplethlayerprop.shapeAttributes;
+                choroplethproperties.cmbShapeKey.Items.Clear();
+                if (choroplethproperties.shapeAttributes == null)
+                {
+                    object[] shapeFileProperties = choroplethlayerprop.provider.LoadShapeFile(choroplethlayerprop.shapeFilePath);
+                    choroplethproperties.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
+                }
+                if (choroplethproperties.shapeAttributes != null)
+                {
+                    foreach (string key in choroplethproperties.shapeAttributes.Keys)
+                    { choroplethproperties.cmbShapeKey.Items.Add(key); }
+                }
+             }
+            if (choroplethlayerprop.classAttribList != null)
+             { choroplethproperties.SetClassAttributes(choroplethlayerprop.classAttribList); }
+            choroplethproperties.FillComboBoxes();
+            choroplethproperties.cmbShapeKey.Text = choroplethlayerprop.cbxShapeKey.Text;
+            choroplethproperties.cmbDataKey.Text = choroplethlayerprop.cbxDataKey.Text;
+            choroplethproperties.cmbValue.Text = choroplethlayerprop.cbxValue.Text;
+            choroplethproperties.rctHighColor.Fill = choroplethlayerprop.rctHighColor.Fill;
+            choroplethproperties.rctLowColor.Fill = choroplethlayerprop.rctLowColor.Fill;
+                   
+            choroplethlayerprop.FlagRunEdit = true;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > choroplethproperties.Width)
+            {
+                choroplethproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > choroplethproperties.Height)
+            {
+                choroplethproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            choroplethproperties.Cancelled += new EventHandler(properties_Cancelled);
+            choroplethproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            
+            popup.Content = choroplethproperties;
+            popup.Show();
+         }
 
         void properties_ChangesAccepted(object sender, EventArgs e)
         {
