@@ -48,10 +48,7 @@ namespace EpiDashboard.Controls
            public  string legendText;
         }
 
-        string _shapeKey;
-        string _dataKey;
-        string _value;
-
+       
         public ChoroplethProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
         {
             InitializeComponent();
