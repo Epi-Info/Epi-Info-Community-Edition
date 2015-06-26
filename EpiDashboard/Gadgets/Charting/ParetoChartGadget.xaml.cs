@@ -484,6 +484,9 @@ namespace EpiDashboard.Gadgets.Charting
                             case "charttitle":
                                 ((ParetoChartParameters)Parameters).ChartTitle = child.InnerText;
                                 break;
+                            case "chartsubtitle":
+                                ((ParetoChartParameters)Parameters).ChartSubTitle = child.InnerText;
+                                break;
                             case "showlegend":
                                 if (child.InnerText.ToLower().Equals("true")) { ((ParetoChartParameters)Parameters).ShowLegend = true; }
                                 else { ((ParetoChartParameters)Parameters).ShowLegend = false; }
@@ -737,6 +740,11 @@ namespace EpiDashboard.Gadgets.Charting
             chartTitleElement.InnerText = chtParameters.ChartTitle.ToString().Replace("<", "&lt;");
             element.AppendChild(chartTitleElement);
 
+            //chartSubTitle 
+            XmlElement chartSubTitleElement = doc.CreateElement("chartSubTitle");
+            chartSubTitleElement.InnerText = chtParameters.ChartSubTitle.ToString().Replace("<", "&lt;");
+            element.AppendChild(chartSubTitleElement);
+            
             //showLegend 
             XmlElement showLegendElement = doc.CreateElement("showLegend");
             showLegendElement.InnerText = chtParameters.ShowLegend.ToString().Replace("<", "&lt;");

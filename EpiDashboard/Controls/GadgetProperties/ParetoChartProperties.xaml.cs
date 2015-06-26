@@ -572,7 +572,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             txtXAxisAngle.Text = Parameters.XAxisAngle.ToString();
 
             txtChartTitle.Text = Parameters.ChartTitle;
-            //txtChartSubTitle.Text = Parameters.ChartSubTitle;
+            txtChartSubTitle.Text = Parameters.ChartSubTitle;
 
             //Display Legend settings
             checkboxShowLegend.IsChecked = Parameters.ShowLegend;
