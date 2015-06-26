@@ -141,11 +141,13 @@ namespace EpiDashboard.Controls
             List<string> numericFields = dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
             foreach (string field in fields)
             {
-                cmbDataKey.Items.Add(field);
+                if (!(field.ToUpper() == "RECSTATUS" || field.ToUpper() == "FKEY" || field.ToUpper() == "GLOBALRECORDID" || field.ToUpper() == "UNIQUEKEY" || field.ToUpper()== "FIRSTSAVETIME" || field.ToUpper() == "LASTSAVETIME" || field.ToUpper() == "SYSTEMDATE"))
+                { cmbDataKey.Items.Add(field);}
             }
             foreach (string field in numericFields)
             {
-                cmbValue.Items.Add(field);
+                if (!(field.ToUpper() == "RECSTATUS" || field.ToUpper() == "UNIQUEKEY"))
+                { cmbValue.Items.Add(field); }
             }
             cmbValue.Items.Insert(0, "{Record Count}");
         }

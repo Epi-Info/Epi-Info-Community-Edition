@@ -354,8 +354,11 @@ namespace EpiDashboard.Controls
             List<string> fields = dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
             foreach (string f in fields)
             {
-                cmbLatitude.Items.Add(f);
-                cmbLongitude.Items.Add(f);
+                if (!(f.ToUpper() == "RECSTATUS" || f.ToUpper() == "FKEY" || f.ToUpper() == "GLOBALRECORDID" || f.ToUpper() == "UNIQUEKEY"))
+                {
+                    cmbLatitude.Items.Add(f);
+                    cmbLongitude.Items.Add(f);
+                }
             }
             if (cmbLatitude.Items.Count > 0)
             {
