@@ -25,7 +25,7 @@ namespace EpiDashboard.Controls.Charting
     public partial class ColumnChart : ColumnChartBase
     {
         //public ColumnChartSettings ColumnChartSettings { get; set; }
-        
+
         public ColumnChart(DashboardHelper dashboardHelper, ColumnChartParameters parameters, List<XYColumnChartData> dataList)
         {
             InitializeComponent();
@@ -109,7 +109,7 @@ namespace EpiDashboard.Controls.Charting
 
             switch ((BarSpacing)ColumnChartParameters.BarSpace)
             {
-                case BarSpacing.None:                
+                case BarSpacing.None:
                     series0.RelativePointSpace = 0;
                     series0.BarRelativeBegin = 0;
                     series0.BarRelativeEnd = 0;
@@ -220,8 +220,15 @@ namespace EpiDashboard.Controls.Charting
             //xyChart.UseDifferentBarColors = ColumnChartSettings.UseDiffColors;
             //xyChart.LegendVisible = Settings.ShowLegend;
             //xyChart.Legend.FontSize = Settings.LegendFontSize;
+            if (ColumnChartParameters.Composition.ToString() == "Stacked100")
+            {
+                YAxisLabel = ColumnChartParameters.YAxisStacked100Label;
+            }
+            else
+            {
+                YAxisLabel = ColumnChartParameters.YAxisLabel;
+            }
 
-            YAxisLabel = ColumnChartParameters.YAxisLabel;
             Y2AxisLabel = ColumnChartParameters.Y2AxisLabel;
             Y2AxisLegendTitle = ColumnChartParameters.Y2AxisLegendTitle;
 
@@ -267,7 +274,7 @@ namespace EpiDashboard.Controls.Charting
                     tblockY2AxisLabel.Padding = new Thickness(((chartSize.Height - 144) / 2) - (textSizeY2.Width / 2), 2, 0, 2);
                     break;
             }
-            
+
             //tblockChartTitle.Text = Settings.ChartTitle;
             //tblockSubTitle.Text = Settings.ChartSubTitle;
             //tblockStrataTitle.Text = Settings.ChartStrataTitle;
@@ -275,7 +282,7 @@ namespace EpiDashboard.Controls.Charting
             tblockChartTitle.Text = ColumnChartParameters.ChartTitle;
             tblockSubTitle.Text = ColumnChartParameters.ChartSubTitle;
             tblockStrataTitle.Text = ColumnChartParameters.ChartStrataTitle;
-            
+
             //if (ColumnChartParameters.StrataVariableNames.Count > 0)
             //{
             //    tblockStrataTitle.Text = ColumnChartParameters.StrataVariableNames[0].ToString();
@@ -289,7 +296,7 @@ namespace EpiDashboard.Controls.Charting
 
             if (string.IsNullOrEmpty(tblockStrataTitle.Text)) tblockStrataTitle.Visibility = System.Windows.Visibility.Collapsed;
             else tblockStrataTitle.Visibility = System.Windows.Visibility.Visible;
-            
+
             //yAxis.UseReferenceValue = Settings.UseRefValues;
 
             //series0.ShowPointAnnotations = ColumnChartSettings.ShowAnnotations;
@@ -309,12 +316,12 @@ namespace EpiDashboard.Controls.Charting
             series1.DashStyle = ColumnChartParameters.Y2LineDashStyle;
             series1.LineKind = ColumnChartParameters.Y2LineKind;
             series1.Thickness = ColumnChartParameters.Y2LineThickness;
-           
-            if (ColumnChartParameters.ShowLegendBorder == true) 
+
+            if (ColumnChartParameters.ShowLegendBorder == true)
             {
                 xyChart.Legend.BorderThickness = new Thickness(1);
             }
-            else 
+            else
             {
                 xyChart.Legend.BorderThickness = new Thickness(0);
             }
@@ -322,7 +329,7 @@ namespace EpiDashboard.Controls.Charting
             //EI-98
             YAxisCoordinates.FontSize = ColumnChartParameters.YAxisFontSize;
             xAxisCoordinates.FontSize = ColumnChartParameters.XAxisFontSize;
-                                        
+
             tblockXAxisLabel.FontSize = ColumnChartParameters.XAxisLabelFontSize;
             tblockYAxisLabel.FontSize = ColumnChartParameters.YAxisLabelFontSize;
         }
