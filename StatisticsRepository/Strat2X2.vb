@@ -693,19 +693,35 @@
         LowerDesiredPValue = 0.025
         Dim UpperDesiredPValue As Double
         UpperDesiredPValue = 0.975
+        Dim a As Double
+        Dim b As Double
+        a = 0.0
+        b = 1.0
         If x > 0 Then
-            While Math.Abs(pvalue - LowerDesiredPValue) > 0.0001
-                pp = pp + 0.00001
+            While b - a > 0.00001
+                pp = (a + b) / 2.0
                 pvalue = ribetafunction(pp, x, n - x + 1)
+                If pvalue > LowerDesiredPValue Then
+                    b = pp
+                Else
+                    a = pp
+                End If
             End While
             lcl = Math.Round(pp * n)
         End If
         pp = 1.0
         pvalue = 0.0
+        a = 0.0
+        b = 1.0
         If x < n Then
-            While Math.Abs(pvalue - UpperDesiredPValue) > 0.0001
-                pp = pp - 0.00001
+            While b - a > 0.00001
+                pp = (a + b) / 2.0
                 pvalue = ribetafunction(pp, x + 1, n - x)
+                If pvalue > UpperDesiredPValue Then
+                    b = pp
+                Else
+                    a = pp
+                End If
             End While
             ucl = Math.Round(pp * n)
         End If
