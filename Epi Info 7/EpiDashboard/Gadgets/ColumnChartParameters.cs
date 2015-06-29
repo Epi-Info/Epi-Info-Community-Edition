@@ -22,6 +22,7 @@ namespace EpiDashboard
         public bool Y2IsCumulativePercent { get; set; }
         //public int Y2AxisType { get; set; }
         public string ChartStrataTitle { get; set; }
+        public string YAxisStacked100Label { get; set; }
 
         #endregion  // Properties
 
@@ -62,6 +63,7 @@ namespace EpiDashboard
             Y2LineThickness = 2;
             //  Labels
             YAxisLabel = "Count";
+            YAxisStacked100Label = "Percent";
             YAxisFormat = String.Empty;
             Y2AxisLabel = String.Empty;
             Y2AxisLegendTitle = String.Empty;
