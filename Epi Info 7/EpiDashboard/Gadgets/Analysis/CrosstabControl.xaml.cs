@@ -3635,7 +3635,8 @@ namespace EpiDashboard
             this.LoadingCombos = false;
 
             //CheckVariables();
-
+            this.YesValues = ((CrosstabParameters)Parameters).YesValues;
+            this.NoValues = ((CrosstabParameters)Parameters).NoValues;
             RefreshResults();
             //HideConfigPanel();
         }
