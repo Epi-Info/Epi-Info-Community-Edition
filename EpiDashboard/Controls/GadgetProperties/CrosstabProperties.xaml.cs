@@ -260,6 +260,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
 
             //2x2 Value mapping settings
+            Parameters.NoValues.Clear();
+            Parameters.YesValues.Clear();
             if (lbxYesValues.Items.Count > 0)
             {
                 foreach (string thisItem in lbxYesValues.Items)
