@@ -191,9 +191,9 @@
                 <Rectangle Grid.Row="05" Grid.Column="0" x:Name="rctColor05" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor5_MouseLeftButtonUp"/>
                 <Rectangle Grid.Row="06" Grid.Column="0" x:Name="rctColor06" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor6_MouseLeftButtonUp"/>
                 <Rectangle Grid.Row="07" Grid.Column="0" x:Name="rctColor07" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
-                <Rectangle Grid.Row="08" Grid.Column="0" x:Name="rctColor08" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
-                <Rectangle Grid.Row="09" Grid.Column="0" x:Name="rctColor09" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
-                <Rectangle Grid.Row="10" Grid.Column="0" x:Name="rctColor10" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="08" Grid.Column="0" x:Name="rctColor08" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor8_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="09" Grid.Column="0" x:Name="rctColor09" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor9_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="10" Grid.Column="0" x:Name="rctColor10" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor10_MouseLeftButtonUp"/>
 
                 <TextBox Grid.Row="01" x:Name="rampStart01" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
                 <TextBox Grid.Row="02" x:Name="rampStart02" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>

@@ -41,14 +41,14 @@ namespace EpiDashboard.Controls
 
         private struct classAttributes
         {
-           public Brush rctColor ;
-           public string quintile;
-           public string rampStart;
-           public string rampEnd;
-           public  string legendText;
+            public Brush rctColor;
+            public string quintile;
+            public string rampStart;
+            public string rampEnd;
+            public string legendText;
         }
 
-       
+
         public ChoroplethProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
         {
             InitializeComponent();
@@ -142,6 +142,12 @@ namespace EpiDashboard.Controls
             panelHTML.Visibility = System.Windows.Visibility.Collapsed;
             panelCharts.Visibility = System.Windows.Visibility.Visible;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            if (cmbShapeKey.SelectedItem != null &&
+                cmbDataKey.SelectedItem != null &&
+                cmbValue.SelectedItem != null)
+            {
+                SetRangeUISection();
+            }
         }
 
         private void tbtnHTML_Checked(object sender, RoutedEventArgs e)
@@ -181,12 +187,16 @@ namespace EpiDashboard.Controls
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             RenderMap();
-            AddClassAttributes();
-                      
-             int numclasses = Convert.ToInt32(cmbClasses.Text);
-             bool flagquintiles = (bool) quintilesOption.IsChecked;
 
-             layerprop.SetValues(txtShapePath.Text, cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses);
+            if (!ValidateRangeInput())
+                return;
+
+            AddClassAttributes();
+
+            int numclasses = Convert.ToInt32(cmbClasses.Text);
+            bool flagquintiles = (bool)quintilesOption.IsChecked;
+
+            layerprop.SetValues(txtShapePath.Text, cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses);
             if (ChangesAccepted != null)
             {
                 ChangesAccepted(this, new EventArgs());
@@ -227,7 +237,7 @@ namespace EpiDashboard.Controls
             foreach (string field in numericFields)
             {
                 if (!(field.ToUpper() == "RECSTATUS" || field.ToUpper() == "UNIQUEKEY"))
-                {cmbValue.Items.Add(field);  }
+                { cmbValue.Items.Add(field); }
             }
             cmbValue.Items.Insert(0, "{Record Count}");
         }
@@ -265,7 +275,7 @@ namespace EpiDashboard.Controls
 
         private void AddClassAttributes()
         {
-            
+
             classAttributes ca1 = new classAttributes();
             ca1.rctColor = rctColor01.Fill;
             ca1.rampStart = rampStart01.Text;
@@ -345,100 +355,195 @@ namespace EpiDashboard.Controls
             ca10.quintile = quintile10.Text;
             ca10.legendText = legendText10.Text;
             ClassAttribList.Add(10, ca10);
-         }
+        }
+
+        private bool ValidateInputValue(TextBox textBox)
+        {
+            double Value;
+            if (double.TryParse(textBox.Text, out Value))
+            {
+                if (Value >= double.Parse(_provider.RangeValues[0, 0].ToString()) && Value <= double.Parse(_provider.RangeValues[_provider.RangeCount - 1, 1].ToString()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool ValidateRangeInput()
+        {
+            int _rangeCount = _provider.RangeCount;
+            
+            if (_rangeCount >= 2)
+            {
+                if (!(ValidateInputValue(rampStart01) && ValidateInputValue(rampEnd01)
+                    && ValidateInputValue(rampStart02) && ValidateInputValue(rampEnd02)))
+                {
+                    MessageBox.Show("Incorrect input value.");
+                    return false;
+                }
+            }
+
+            if (_rangeCount >= 3)
+            {
+                if (!(ValidateInputValue(rampStart03) && ValidateInputValue(rampEnd03)))
+                {
+                    MessageBox.Show("Incorrect input value.");
+                    return false;
+                }
+            }
+
+            if (_rangeCount >= 4)
+            {
+                if (!(ValidateInputValue(rampStart04) && ValidateInputValue(rampEnd04)))
+                {
+                    MessageBox.Show("Incorrect input value.");
+                    return false;
+                }
+            }
+            if (_rangeCount >= 5)
+            {
+                if (!(ValidateInputValue(rampStart05) && ValidateInputValue(rampEnd05)))
+                {
+                    MessageBox.Show("Incorrect input value.");
+                    return false;
+                }
+            }
+            if (_rangeCount >= 6)
+            {
+                if (!(ValidateInputValue(rampStart06) && ValidateInputValue(rampEnd06)))
+                {
+                    MessageBox.Show("Incorrect input value.");
+                    return false;
+                }
+            }
+            if (_rangeCount >= 7)
+            {
+                if (!(ValidateInputValue(rampStart07) && ValidateInputValue(rampEnd07)))
+                {
+                    MessageBox.Show("Incorrect input value.");
+                    return false;
+                }
+            }
+            if (_rangeCount >= 8)
+            {
+                if (!(ValidateInputValue(rampStart08) && ValidateInputValue(rampEnd08)))
+                {
+                    MessageBox.Show("Incorrect input value.");
+                    return false;
+                }
+            }
+            if (_rangeCount >= 9)
+            {
+                if (!(ValidateInputValue(rampStart09) && ValidateInputValue(rampEnd09)))
+                {
+                    MessageBox.Show("Incorrect input value.");
+                    return false;
+                }
+            }
+            if (_rangeCount >= 10)
+            {
+                if (!(ValidateInputValue(rampStart10) && ValidateInputValue(rampEnd10)))
+                {
+                    MessageBox.Show("Incorrect input value.");
+                    return false;
+                }
+            }
+            return true;
+        }
 
         public void SetClassAttributes(Dictionary<int, object> classAttrib)
         {
 
             foreach (int key in classAttrib.Keys)
             {
-                var item = classAttrib.ElementAt(key-1);
-                classAttributes itemvalue = (classAttributes) item.Value;
+                var item = classAttrib.ElementAt(key - 1);
+                classAttributes itemvalue = (classAttributes)item.Value;
 
-               if (key == 1)
-               {
-                    rctColor01.Fill = (Brush) itemvalue.rctColor;
+                if (key == 1)
+                {
+                    rctColor01.Fill = (Brush)itemvalue.rctColor;
                     rampStart01.Text = itemvalue.rampStart;
                     rampEnd01.Text = itemvalue.rampEnd;
                     quintile01.Text = itemvalue.quintile;
                     legendText01.Text = itemvalue.legendText;
-               }
-               else if (key == 2)
-               {
-                   rctColor02.Fill = (Brush)itemvalue.rctColor;
-                   rampStart02.Text = itemvalue.rampStart;
-                   rampEnd02.Text = itemvalue.rampEnd;
-                   quintile02.Text = itemvalue.quintile;
-                   legendText02.Text = itemvalue.legendText;
-               }
-               else if (key == 3)
-               {
-                   rctColor03.Fill = (Brush)itemvalue.rctColor;
-                   rampStart03.Text = itemvalue.rampStart;
-                   rampEnd03.Text = itemvalue.rampEnd;
-                   quintile03.Text = itemvalue.quintile;
-                   legendText03.Text = itemvalue.legendText;
-               }
-               else if (key == 4)
-               {
-                   rctColor04.Fill = (Brush)itemvalue.rctColor;
-                   rampStart04.Text = itemvalue.rampStart;
-                   rampEnd04.Text = itemvalue.rampEnd;
-                   quintile04.Text = itemvalue.quintile;
-                   legendText04.Text = itemvalue.legendText;
-               }
-               else if (key == 5)
-               {
-                  rctColor05.Fill = (Brush) itemvalue.rctColor;
-                  rampStart05.Text = itemvalue.rampStart;
-                  rampEnd05.Text = itemvalue.rampEnd;
-                  quintile05.Text = itemvalue.quintile;
-                  legendText05.Text = itemvalue.legendText;
-                
-               }
-               else if (key == 6)
-               {
-                   rctColor06.Fill = (Brush)itemvalue.rctColor;
-                   rampStart06.Text = itemvalue.rampStart;
-                   rampEnd06.Text = itemvalue.rampEnd;
-                   quintile06.Text = itemvalue.quintile;
-                   legendText06.Text = itemvalue.legendText; 
-                 
-               }
-               else if (key == 7)
-               {
-                   rctColor07.Fill = (Brush)itemvalue.rctColor;
-                   rampStart07.Text = itemvalue.rampStart;
-                   rampEnd07.Text = itemvalue.rampEnd;
-                   quintile07.Text = itemvalue.quintile;
-                   legendText07.Text = itemvalue.legendText;
-               }
-               else if (key == 8)
-               {
-                   rctColor08.Fill = (Brush) itemvalue.rctColor;
-                   rampStart08.Text = itemvalue.rampStart;
-                   rampEnd08.Text = itemvalue.rampEnd;
-                   quintile08.Text = itemvalue.quintile;
-                   legendText08.Text = itemvalue.legendText;
-                 
-               }
-               else if (key == 9)
-               {
-                  rctColor09.Fill = (Brush) itemvalue.rctColor;
-                  rampStart09.Text = itemvalue.rampStart;
-                  rampEnd09.Text = itemvalue.rampEnd;
-                  quintile09.Text = itemvalue.quintile;
-                  legendText09.Text = itemvalue.legendText;
-              
-               }
-               else if (key == 10)
-               {
-                   rctColor10.Fill = (Brush)itemvalue.rctColor;
-                   rampStart10.Text = itemvalue.rampStart;
-                   rampEnd10.Text = itemvalue.rampEnd;
-                   quintile10.Text = itemvalue.quintile;
-                   legendText10.Text = itemvalue.legendText;
-               }
+                }
+                else if (key == 2)
+                {
+                    rctColor02.Fill = (Brush)itemvalue.rctColor;
+                    rampStart02.Text = itemvalue.rampStart;
+                    rampEnd02.Text = itemvalue.rampEnd;
+                    quintile02.Text = itemvalue.quintile;
+                    legendText02.Text = itemvalue.legendText;
+                }
+                else if (key == 3)
+                {
+                    rctColor03.Fill = (Brush)itemvalue.rctColor;
+                    rampStart03.Text = itemvalue.rampStart;
+                    rampEnd03.Text = itemvalue.rampEnd;
+                    quintile03.Text = itemvalue.quintile;
+                    legendText03.Text = itemvalue.legendText;
+                }
+                else if (key == 4)
+                {
+                    rctColor04.Fill = (Brush)itemvalue.rctColor;
+                    rampStart04.Text = itemvalue.rampStart;
+                    rampEnd04.Text = itemvalue.rampEnd;
+                    quintile04.Text = itemvalue.quintile;
+                    legendText04.Text = itemvalue.legendText;
+                }
+                else if (key == 5)
+                {
+                    rctColor05.Fill = (Brush)itemvalue.rctColor;
+                    rampStart05.Text = itemvalue.rampStart;
+                    rampEnd05.Text = itemvalue.rampEnd;
+                    quintile05.Text = itemvalue.quintile;
+                    legendText05.Text = itemvalue.legendText;
+
+                }
+                else if (key == 6)
+                {
+                    rctColor06.Fill = (Brush)itemvalue.rctColor;
+                    rampStart06.Text = itemvalue.rampStart;
+                    rampEnd06.Text = itemvalue.rampEnd;
+                    quintile06.Text = itemvalue.quintile;
+                    legendText06.Text = itemvalue.legendText;
+
+                }
+                else if (key == 7)
+                {
+                    rctColor07.Fill = (Brush)itemvalue.rctColor;
+                    rampStart07.Text = itemvalue.rampStart;
+                    rampEnd07.Text = itemvalue.rampEnd;
+                    quintile07.Text = itemvalue.quintile;
+                    legendText07.Text = itemvalue.legendText;
+                }
+                else if (key == 8)
+                {
+                    rctColor08.Fill = (Brush)itemvalue.rctColor;
+                    rampStart08.Text = itemvalue.rampStart;
+                    rampEnd08.Text = itemvalue.rampEnd;
+                    quintile08.Text = itemvalue.quintile;
+                    legendText08.Text = itemvalue.legendText;
+
+                }
+                else if (key == 9)
+                {
+                    rctColor09.Fill = (Brush)itemvalue.rctColor;
+                    rampStart09.Text = itemvalue.rampStart;
+                    rampEnd09.Text = itemvalue.rampEnd;
+                    quintile09.Text = itemvalue.quintile;
+                    legendText09.Text = itemvalue.legendText;
+
+                }
+                else if (key == 10)
+                {
+                    rctColor10.Fill = (Brush)itemvalue.rctColor;
+                    rampStart10.Text = itemvalue.rampStart;
+                    rampEnd10.Text = itemvalue.rampEnd;
+                    quintile10.Text = itemvalue.quintile;
+                    legendText10.Text = itemvalue.legendText;
+                }
             }
 
         }
@@ -469,18 +574,18 @@ namespace EpiDashboard.Controls
                     (SolidColorBrush)rctColor10.Fill };
 
                 int classCount;
-                if (int.TryParse(cmbClasses.Text, out classCount))
+                if (!int.TryParse(cmbClasses.Text, out classCount))
                 {
                     classCount = 4;
                 }
 
-                _provider.SetShapeRangeValues(_dashboardHelper, 
+                _provider.SetShapeRangeValues(_dashboardHelper,
                     cmbShapeKey.SelectedItem.ToString(),
                     cmbDataKey.SelectedItem.ToString(),
                     cmbValue.SelectedItem.ToString(),
                     brushList,
                     classCount);
-           }
+            }
         }
         public StackPanel LegendStackPanel
         {
@@ -552,7 +657,7 @@ namespace EpiDashboard.Controls
             }
         }
 
-        private void rctColor08_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void rctColor8_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -561,7 +666,7 @@ namespace EpiDashboard.Controls
             }
         }
 
-        private void rctColor09_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void rctColor9_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -617,6 +722,16 @@ namespace EpiDashboard.Controls
             SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
             SolidColorBrush rampEnd = (SolidColorBrush)rctHighColor.Fill;
 
+            if (cmbShapeKey.SelectedItem != null &&
+                cmbDataKey.SelectedItem != null &&
+                cmbValue.SelectedItem != null)
+            {
+                SetRangeUISection();
+            }
+        }
+
+        private void SetVisibility(int stratCount, SolidColorBrush rampStart, SolidColorBrush rampEnd)
+        {
             bool isNewColorRamp = true;
 
             if (rampStart == _currentColor_rampStart && rampEnd == _currentColor_rampEnd && stratCount == _currentStratCount)
@@ -643,7 +758,7 @@ namespace EpiDashboard.Controls
             rampStart01.Text = _provider.RangeValues[0, 0];
             rampEnd01.Text = _provider.RangeValues[0, 1];
             quintile01.Text = _provider.QuantileValues[0].ToString();
-             
+
 
             Color coo = Color.FromArgb(240, (byte)(rampStart.Color.R - ri), (byte)(rampStart.Color.G - gi), (byte)(rampStart.Color.B - bi));
             if (isNewColorRamp) rctColor02.Fill = new SolidColorBrush(coo);
@@ -871,9 +986,44 @@ namespace EpiDashboard.Controls
         private void cmbValue_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _value = cmbValue.SelectedItem.ToString();
-        }  
+        }
+
       
-    }
     
+
+        private void SetRangeUISection()
+        {
+            List<SolidColorBrush> brushList = new List<SolidColorBrush>() { 
+                    (SolidColorBrush)rctColor01.Fill, 
+                    (SolidColorBrush)rctColor02.Fill, 
+                    (SolidColorBrush)rctColor03.Fill, 
+                    (SolidColorBrush)rctColor04.Fill, 
+                    (SolidColorBrush)rctColor05.Fill, 
+                    (SolidColorBrush)rctColor06.Fill, 
+                    (SolidColorBrush)rctColor07.Fill, 
+                    (SolidColorBrush)rctColor08.Fill, 
+                    (SolidColorBrush)rctColor09.Fill, 
+                    (SolidColorBrush)rctColor10.Fill };
+
+            int classCount;
+            if (!int.TryParse(((ComboBoxItem)cmbClasses.SelectedItem).Content.ToString(), out classCount))
+            {
+                classCount = 4;
+            }
+
+            _provider.PopulateRangeValues(_dashboardHelper,
+                     cmbShapeKey.SelectedItem.ToString(),
+                     cmbDataKey.SelectedItem.ToString(),
+                     cmbValue.SelectedItem.ToString(),
+                     brushList,
+                     classCount);
+
+            SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
+            SolidColorBrush rampEnd = (SolidColorBrush)rctHighColor.Fill;
+
+            SetVisibility(classCount, rampStart, rampEnd);
+        }
+
+    }
+
 }
-        
