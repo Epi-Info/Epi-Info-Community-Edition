@@ -42,7 +42,8 @@ namespace EpiDashboard.Mapping
         int _classCount;
         int _colorShadeIndex = 0;
         int _lastGeneratedClassCount = 0;
-        string[,] _rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
+        string[,] _rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
+
         float[] _quantileValues = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
 
         public ChoroplethLayerProvider(Map myMap)
@@ -58,6 +59,8 @@ namespace EpiDashboard.Mapping
             get { return _rangeValues; }
             set { _rangeValues = value; }
         }
+
+        public int RangeCount { get; set; }
 
         public float[] QuantileValues
         {
@@ -100,21 +103,21 @@ namespace EpiDashboard.Mapping
         }
 
         private Color GetColorAtPoint(Rectangle theRec, Point thePoint)
-        {    
+        {
             LinearGradientBrush br = (LinearGradientBrush)theRec.Fill;
             double y3 = thePoint.Y; double x3 = thePoint.X;
             double x1 = br.StartPoint.X * theRec.Width;
             double y1 = br.StartPoint.Y * theRec.Height;
-            Point p1 = new Point(x1, y1); 
+            Point p1 = new Point(x1, y1);
             double x2 = br.EndPoint.X * theRec.Width;
             double y2 = br.EndPoint.Y * theRec.Height;
-            Point p2 = new Point(x2, y2);  
-            Point p4 = new Point(); 
-            if (y1 == y2) 
+            Point p2 = new Point(x2, y2);
+            Point p4 = new Point();
+            if (y1 == y2)
             { p4 = new Point(x3, y1); }
-            else if (x1 == x2) 
+            else if (x1 == x2)
             { p4 = new Point(x1, y3); }
-            else 
+            else
             {
                 double m = (y2 - y1) / (x2 - x1);
                 double m2 = -1 / m;
@@ -122,19 +125,19 @@ namespace EpiDashboard.Mapping
                 double c = y3 - m2 * x3;
                 double x4 = (c - b) / (m - m2);
                 double y4 = m * x4 + b; p4 = new Point(x4, y4);
-            }     
+            }
             double d4 = dist(p4, p1, p2);
             double d2 = dist(p2, p1, p2);
-            double x = d4 / d2;     
+            double x = d4 / d2;
             double max = br.GradientStops.Max(n => n.Offset);
             if (x > max) { x = max; }
             double min = br.GradientStops.Min(n => n.Offset);
-            if (x < min) { x = min; }     
+            if (x < min) { x = min; }
             GradientStop gs0 = br.GradientStops.Where(n => n.Offset <= x).OrderBy(n => n.Offset).Last();
             GradientStop gs1 = br.GradientStops.Where(n => n.Offset >= x).OrderBy(n => n.Offset).First();
             float y = 0f;
             if (gs0.Offset != gs1.Offset)
-            { y = (float)((x - gs0.Offset) / (gs1.Offset - gs0.Offset)); }     
+            { y = (float)((x - gs0.Offset) / (gs1.Offset - gs0.Offset)); }
             Color cx = new Color();
             if (br.ColorInterpolationMode == ColorInterpolationMode.ScRgbLinearInterpolation)
             {
@@ -156,11 +159,11 @@ namespace EpiDashboard.Mapping
         }
         private double dist(Point px, Point po, Point pf)
         {
-            double d = Math.Sqrt((px.Y - po.Y) * (px.Y - po.Y) + (px.X - po.X) * (px.X - po.X)); 
-            if (((px.Y < po.Y) && (pf.Y > po.Y)) || ((px.Y > po.Y) && (pf.Y < po.Y)) || ((px.Y == po.Y) && (px.X < po.X) && (pf.X > po.X)) || ((px.Y == po.Y) && (px.X > po.X) && (pf.X < po.X))) 
-            { 
-                d = -d; 
-            } 
+            double d = Math.Sqrt((px.Y - po.Y) * (px.Y - po.Y) + (px.X - po.X) * (px.X - po.X));
+            if (((px.Y < po.Y) && (pf.Y > po.Y)) || ((px.Y > po.Y) && (pf.Y < po.Y)) || ((px.Y == po.Y) && (px.X < po.X) && (pf.X > po.X)) || ((px.Y == po.Y) && (px.X > po.X) && (pf.X < po.X)))
+            {
+                d = -d;
+            }
             return d;
         }
 
@@ -215,20 +218,21 @@ namespace EpiDashboard.Mapping
                     graphicsLayer = new GraphicsLayer();
                     graphicsLayer.ID = _layerId.ToString();
                     _myMap.Layers.Add(graphicsLayer);
-                }
 
-                int recCount = shapeFileReader.Records.Count;
-                int rgbFactor = 255 / recCount;
-                int counter = 0;
-                foreach (ShapeFileReader.ShapeFileRecord record in shapeFileReader.Records)
-                {
-                    Graphic graphic = record.ToGraphic();
-                    if (graphic != null)
+
+                    int recCount = shapeFileReader.Records.Count;
+                    int rgbFactor = 255 / recCount;
+                    int counter = 0;
+                    foreach (ShapeFileReader.ShapeFileRecord record in shapeFileReader.Records)
                     {
-                        graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(240, 255, 255, 255)));
-                        graphicsLayer.Graphics.Add(graphic);
+                        Graphic graphic = record.ToGraphic();
+                        if (graphic != null)
+                        {
+                            graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(240, 255, 255, 255)));
+                            graphicsLayer.Graphics.Add(graphic);
+                        }
+                        counter += rgbFactor;
                     }
-                    counter += rgbFactor;
                 }
                 if (graphicsLayer.FullExtent == null)
                 {
@@ -522,7 +526,7 @@ namespace EpiDashboard.Mapping
             {
                 return null;
             }
-            
+
             List<string> columnNames = new List<string>();
             if (dashboardHelper.IsUsingEpiProject)
             {
@@ -530,7 +534,7 @@ namespace EpiDashboard.Mapping
             }
             columnNames.Add(valueField);
             columnNames.Add(dataKey);
-            
+
             DataTable loadedData;
 
             if (valueField.Equals("{Record Count}"))
@@ -563,42 +567,45 @@ namespace EpiDashboard.Mapping
 
         public void ResetRangeValues()
         {
-            string valueField = string.Empty;
+            string valueField = _valueField;
+
             DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref valueField);
             GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
 
             if (graphicsLayer == null) return;
 
-            ThematicItem thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer );
+            ThematicItem thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
         }
 
-        public ThematicItem GetThematicItem(int classCount , DataTable loadedData, GraphicsLayer graphicsLayer)
+        public ThematicItem GetThematicItem(int classCount, DataTable loadedData, GraphicsLayer graphicsLayer)
         {
-            ThematicItem thematicItem = new ThematicItem() 
-            { 
-                Name = _dataKey, Description = _dataKey, CalcField = "" 
+            ThematicItem thematicItem = new ThematicItem()
+            {
+                Name = _dataKey,
+                Description = _dataKey,
+                CalcField = ""
             };
-            
+
             List<double> valueList = new List<double>();
-            
+
             for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
             {
                 Graphic graphicFeature = graphicsLayer.Graphics[i];
 
                 string filterExpression = "";
-                
+
                 if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
                 {
                     filterExpression += "[";
                 }
-                
+
                 filterExpression += _dataKey;
-                
+
                 if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
                 {
                     filterExpression += "]";
                 }
-                
+
                 filterExpression += " = '" + graphicFeature.Attributes[_shapeKey].ToString().Replace("'", "''").Trim() + "'";
 
                 double graphicValue = Double.PositiveInfinity;
@@ -631,7 +638,7 @@ namespace EpiDashboard.Mapping
                     valueList.Add(graphicValue);
                 }
             }
-            
+
             thematicItem.RangeStarts = new List<double>();
 
             double totalRange = thematicItem.Max - thematicItem.Min;
@@ -653,6 +660,41 @@ namespace EpiDashboard.Mapping
                 thematicItem.RangeStarts.Add(value);
             }
             return thematicItem;
+        }
+
+        public void PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount)
+        {
+            _classCount = classCount;
+            _dashboardHelper = dashboardHelper;
+            _shapeKey = shapeKey;
+            _dataKey = dataKey;
+            _valueField = valueField;
+            _colors = colors;
+
+            DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
+
+            GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
+            ThematicItem thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+            RangeCount = thematicItem.RangeStarts.Count;
+            Array.Clear(RangeValues, 0, RangeValues.Length);
+            for (int i = 0; i < thematicItem.RangeStarts.Count; i++)
+            {
+                RangeValues[i, 0] = thematicItem.RangeStarts[i].ToString();
+
+
+                if (i < thematicItem.RangeStarts.Count - 1)
+                {
+                    RangeValues[i, 1] = thematicItem.RangeStarts[i + 1].ToString();
+                }
+                else
+                {
+                    RangeValues[i, 1] = thematicItem.Max.ToString();
+                }
+
+            }
+
+            //return thematicItem;
+
         }
 
         private StackPanel legendStackPanel;
