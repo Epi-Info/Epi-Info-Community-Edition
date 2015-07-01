@@ -38,9 +38,10 @@
             </ToggleButton>-->
 
             <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title="Shape Source" Description="Choose map boundaries." IsChecked="False" Checked="tbtnHTML_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title="Variables" Description="Choose map boundaries." IsChecked="False" Checked="tbtnHTML_Checked"/>
             <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsChecked="False" Checked="tbtnCharts_Checked"/>
-            
+            <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title=" Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
+
 
             <!--<ToggleButton x:Name="tbtnHTML" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnHTML_Checked">
                 <StackPanel>
@@ -89,22 +90,88 @@
                 <Label>SQL Query:</Label>
                 <TextBox x:Name="txtSQLQuery"></TextBox>
             </StackPanel>
+            <Label></Label>
+            <StackPanel x:Name="panelBoundaries" IsEnabled="False">
+                <Label Style="{StaticResource PropertiesSubHeading}">Boundaries
+                </Label>
+                <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="ShapeFile" Checked="radShapeFile_Checked"  />
+                <Label></Label>
+                <StackPanel x:Name="panelshape" IsEnabled="False">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txtShapePath" IsReadOnly="False" TextChanged="txtProjectPath_TextChanged"   ></TextBox>
+                        <Button x:Name="btnBrowseShape"  Grid.Column="2" Click="btnBrowseShapeFile_Click" Height="Auto" >Browse</Button>
+                    </Grid>
+                </StackPanel>
+                <Label></Label>
+                <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="MapServer" Checked="radMapServer_Checked" />
+                <Label></Label>
+                <StackPanel x:Name="panelmap" IsEnabled="False" >
+                    <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known Map Server" Checked="radconnectmapserver_Checked" />
+                    <StackPanel x:Name="panelmapconnect" IsEnabled="False">
+                        <Label></Label>
+                        <ComboBox x:Name="cbxmapserver" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" Width="380">
+                            <ComboBoxItem>NationalMap.gov - New York County Boundaries</ComboBoxItem>
+                            <ComboBoxItem>NationalMap.gov - Rhode Island Zip Code Boundaries</ComboBoxItem>
+                            <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
+                            <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <Label></Label>
+                    <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver"  Content="Provide location of another Map Server" Checked="radlocatemapserver_Checked" />
+                    <Label></Label>
+                    <StackPanel x:Name="panelmapserver" IsEnabled="False" >
+                        <Label>URL:(example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer)</Label>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="txtMapSeverpath"  TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
+                            <Button x:Name="btnMapserverlocate" Height="Auto" Grid.Column="2"  IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
+                        </Grid>
+                        <Label>Select Feature:</Label>
+                        <ComboBox x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged" Width="380"></ComboBox>
+                    </StackPanel>
+                </StackPanel>
+                <Label></Label>
+                <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
+                <Label></Label>
+                <StackPanel x:Name="panelKml" IsEnabled="False" >
+                    <Label>Location: Type URL (example: http://code.google.com/apis/kml/documentation/us_states.kml)</Label>
+                    <Label></Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txtKMLpath" IsReadOnly="False" ></TextBox>
+                        <Button x:Name="btnKMLFile" Height="Auto" Grid.Column="2" Click="btnKMLFile_Click">Browse</Button>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
-
+            
         <StackPanel x:Name="panelHTML" Grid.Column="2" Margin="8" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Shape Source</Label>
 
-            <Label>Shape File:</Label>
+           <!-- <Label>Shape File:</Label> -->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="12" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="txtShapePath" IsReadOnly="True"></TextBox>
-                <Button x:Name="btnBrowseShape" Height="Auto" Grid.Column="2" Click="btnBrowseShapeFile_Click">Browse</Button>
+                <!-- <TextBox x:Name="txtShapePath" IsReadOnly="True"></TextBox>
+                  <Button x:Name="btnBrowseShape" Height="Auto" Grid.Column="2" Click="btnBrowseShapeFile_Click">Browse</Button>  -->
             </Grid>
-            <Label>Shape Key:</Label>
+            <Label>Feature Key:</Label>
             <ComboBox x:Name="cmbShapeKey" SelectionChanged="cmbShapeKey_SelectionChanged"></ComboBox>
             <Label>Data Key:</Label>
             <ComboBox x:Name="cmbDataKey" SelectionChanged="cmbDataKey_SelectionChanged"></ComboBox>
@@ -191,9 +258,9 @@
                 <Rectangle Grid.Row="05" Grid.Column="0" x:Name="rctColor05" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor5_MouseLeftButtonUp"/>
                 <Rectangle Grid.Row="06" Grid.Column="0" x:Name="rctColor06" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor6_MouseLeftButtonUp"/>
                 <Rectangle Grid.Row="07" Grid.Column="0" x:Name="rctColor07" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
-                <Rectangle Grid.Row="08" Grid.Column="0" x:Name="rctColor08" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor8_MouseLeftButtonUp"/>
-                <Rectangle Grid.Row="09" Grid.Column="0" x:Name="rctColor09" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor9_MouseLeftButtonUp"/>
-                <Rectangle Grid.Row="10" Grid.Column="0" x:Name="rctColor10" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor10_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="08" Grid.Column="0" x:Name="rctColor08" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="09" Grid.Column="0" x:Name="rctColor09" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
+                <Rectangle Grid.Row="10" Grid.Column="0" x:Name="rctColor10" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
 
                 <TextBox Grid.Row="01" x:Name="rampStart01" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
                 <TextBox Grid.Row="02" x:Name="rampStart02" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
@@ -252,7 +319,14 @@
             </Grid>
 
         </StackPanel>
-        
+
+
+        <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
+            <!--<Label>Note: Any filters set here are applied to this gadget only.</Label>-->
+            <TextBlock x:Name="txtNote">Note:Please select the Datasource first to view the Filters:</TextBlock>
+        </StackPanel>
+
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="1">

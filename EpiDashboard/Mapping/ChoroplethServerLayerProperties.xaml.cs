@@ -23,7 +23,7 @@ namespace EpiDashboard.Mapping
     {
         private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
-        private ChoroplethServerLayerProvider provider;
+        public ChoroplethServerLayerProvider provider;
         private System.Xml.XmlElement currentElement;
 
         public event EventHandler MapGenerated;
@@ -31,7 +31,13 @@ namespace EpiDashboard.Mapping
         public event EventHandler EditRequested;
        
         private IMapControl mapControl;
-        private string shapeFilePath;
+        public string shapeFilePath;
+
+        public IDictionary<string, object> shapeAttributes;
+        private bool flagrunedit;
+        private int Numclasses;
+        public bool flagQuantiles;
+        public Dictionary<int, object> classAttribList;
 
         public ChoroplethServerLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
@@ -55,7 +61,7 @@ namespace EpiDashboard.Mapping
             rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
         }
 
-        void provider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
+        public void provider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
         {
             if (!string.IsNullOrEmpty(serverName))
             {
@@ -144,14 +150,23 @@ namespace EpiDashboard.Mapping
         {
             if (cbxDataKey.SelectedIndex != -1 && cbxShapeKey.SelectedIndex != -1 && cbxValue.SelectedIndex != -1)
             {
-                provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), ((SolidColorBrush)rctLowColor.Fill).Color, ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()) - 1);
+               // provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), ((SolidColorBrush)rctLowColor.Fill).Color, ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()) - 1);
                 if (MapGenerated != null)
                 {
                     MapGenerated(this, new EventArgs());
                 }
             }
         }
+        public void SetdashboardHelper(DashboardHelper dash)
+        {
+            this.dashboardHelper = dash;
+        }
 
+        public bool FlagRunEdit
+        {
+            set { flagrunedit = value; }
+            get { return flagrunedit; }
+        }
         public StackPanel LegendStackPanel
         {
             get
@@ -216,6 +231,32 @@ namespace EpiDashboard.Mapping
                 lblValueField.Foreground = brush;
             }
         }
+
+        public void SetValues(string shapefilepath, string shapekey, string datakey, string val, string classes, Brush Highcolor, Brush Lowcolor, IDictionary<string, object> shapeAttributes, Dictionary<int, object> classAttrib, bool flagquintiles, int numclasses)
+        {
+            FillComboBoxes();
+            if (shapeAttributes != null)
+            {
+                cbxShapeKey.Items.Clear();
+                foreach (string key in shapeAttributes.Keys)
+                {
+                    cbxShapeKey.Items.Add(key);
+                }
+            }
+            classAttribList = classAttrib;
+            flagQuantiles = flagquintiles;
+            Numclasses = numclasses;
+            shapeFilePath = shapefilepath;
+            rctHighColor.Fill = (SolidColorBrush)Highcolor;
+            rctLowColor.Fill = (SolidColorBrush)Lowcolor;
+            cbxClasses.Text = classes;
+            cbxShapeKey.Text = shapekey;
+            cbxDataKey.Text = datakey;
+            cbxValue.Text = val;
+            grdMain.Width = 700;
+        }
+        
+
 
         public void MakeReadOnly()
         {

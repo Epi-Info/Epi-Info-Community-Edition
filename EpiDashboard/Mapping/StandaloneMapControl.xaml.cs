@@ -1480,6 +1480,7 @@ namespace EpiDashboard.Mapping
              { choroplethproperties.SetClassAttributes(choroplethlayerprop.classAttribList); }
             choroplethproperties.FillComboBoxes();
             choroplethproperties.cmbShapeKey.Text = choroplethlayerprop.cbxShapeKey.Text;
+            choroplethproperties.radShapeFile.IsChecked = true; 
             choroplethproperties.cmbDataKey.Text = choroplethlayerprop.cbxDataKey.Text;
             choroplethproperties.cmbValue.Text = choroplethlayerprop.cbxValue.Text;
             choroplethproperties.rctHighColor.Fill = choroplethlayerprop.rctHighColor.Fill;
