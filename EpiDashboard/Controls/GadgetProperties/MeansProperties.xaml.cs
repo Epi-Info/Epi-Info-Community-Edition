@@ -230,6 +230,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             cbxFieldWeight.SelectedItem = Parameters.WeightVariableName;
             cbxFieldCrosstab.SelectedItem = Parameters.CrosstabVariableName;
             checkboxShowANOVA.IsChecked = Parameters.ShowANOVA;
+            checkboxListLabels.IsChecked = Parameters.ShowCommentLegalLabels;
             cbxFieldPrecision.SelectedIndex = Convert.ToInt32(Parameters.Precision);
             lvFieldStrata.MaxHeight = lvFieldStrata.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
             scrollViewerDisplay.Height = scrollViewerDisplay.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
