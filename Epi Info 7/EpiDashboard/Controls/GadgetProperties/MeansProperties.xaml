@@ -48,6 +48,8 @@
             
             <Label>Stratify by:</Label>
             <ListBox SelectionMode="Multiple" Name="lvFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="90" />
+            <CheckBox x:Name="checkboxShowANOVA" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display ANOVA statistics" IsChecked="True"  />
+
             <!--<ListView Name="lvFieldStrata" MaxHeight="450">
                 <ListView.View>
                     <GridView>
@@ -137,10 +139,10 @@
 
             <!--<CheckBox x:Name="checkboxTabOrder" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort variables by tab order" Visibility="Visible" IsEnabled="true" />
             <CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use field prompts" Visibility="Visible" IsEnabled="true" />-->
-                    <CheckBox x:Name="checkboxListLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" Margin="0,5,0,0" IsEnabled="true"/>
-                    <CheckBox x:Name="checkboxLineColumn" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show line column" Margin="0,5,0,0" IsChecked="True" />
-                    <CheckBox x:Name="checkboxColumnHeaders" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show column headings" Margin="0,5,0,0" IsChecked="True" />
-                    <CheckBox x:Name="checkboxShowNulls" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show missing representation" Margin="0,5,0,0" IsChecked="True" />
+                    <CheckBox x:Name="checkboxListLabels" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" Margin="0,5,0,0" IsEnabled="true"/>
+                    <CheckBox x:Name="checkboxLineColumn" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show line column" Margin="0,5,0,0" IsChecked="True" />
+                    <CheckBox x:Name="checkboxColumnHeaders" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show column headings" Margin="0,5,0,0" IsChecked="True" />
+                    <CheckBox x:Name="checkboxShowNulls" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show missing representation" Margin="0,5,0,0" IsChecked="True" />
             <TextBlock x:Name="tblockPrecision" HorizontalAlignment="Left" TextAlignment="Center" Text="Decimals to display:" Margin="0,5,0,0"  />
             <ComboBox x:Name="cbxFieldPrecision" HorizontalAlignment="Left" Width="45" SelectedIndex="5">
                 <ComboBoxItem>0</ComboBoxItem>
@@ -149,9 +151,9 @@
                 <ComboBoxItem>3</ComboBoxItem>
                 <ComboBoxItem>4</ComboBoxItem>
             </ComboBox>
-                            </WrapPanel>
-                        </StackPanel>
-                    </WrapPanel>
+                            <!--/WrapPanel-->
+                        <!--/StackPanel-->
+                    <!--/WrapPanel-->
                     <StackPanel Height="30"></StackPanel>
                     <Label x:Name="tblockOutputColumns" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Output columns to display:</Label>
                     <StackPanel>
