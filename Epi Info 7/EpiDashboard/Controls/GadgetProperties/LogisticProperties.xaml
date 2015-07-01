@@ -169,20 +169,20 @@
 
             <!--<CheckBox x:Name="checkboxTabOrder" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort variables by tab order" Visibility="Visible" IsEnabled="true" />
             <CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use field prompts" Visibility="Visible" IsEnabled="true" />-->
-            <CheckBox x:Name="checkboxListLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" IsEnabled="true"/>
-            <CheckBox x:Name="checkboxLineColumn" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show line column" IsChecked="True" />
-            <CheckBox x:Name="checkboxColumnHeaders" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show column headings" IsChecked="True" />
-            <CheckBox x:Name="checkboxShowNulls" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show missing representation" IsChecked="True" />
-            <TextBlock x:Name="tblockPrecision" HorizontalAlignment="Left" TextAlignment="Center" Text="Decimals to display:" Margin="0,5,0,0"  />
-            <ComboBox x:Name="cbxFieldPrecision" HorizontalAlignment="Left" Width="45" SelectedIndex="5">
+            <CheckBox x:Name="checkboxListLabels" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" IsEnabled="true"/>
+            <CheckBox x:Name="checkboxLineColumn" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show line column" IsChecked="True" />
+            <CheckBox x:Name="checkboxColumnHeaders" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show column headings" IsChecked="True" />
+            <CheckBox x:Name="checkboxShowNulls" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show missing representation" IsChecked="True" />
+            <TextBlock x:Name="tblockPrecision" Visibility="Collapsed" HorizontalAlignment="Left" TextAlignment="Center" Text="Decimals to display:" Margin="0,5,0,0"  />
+            <ComboBox x:Name="cbxFieldPrecision" Visibility="Collapsed" HorizontalAlignment="Left" Width="45" SelectedIndex="5">
                 <ComboBoxItem>0</ComboBoxItem>
                 <ComboBoxItem>1</ComboBoxItem>
                 <ComboBoxItem>2</ComboBoxItem>
                 <ComboBoxItem>3</ComboBoxItem>
                 <ComboBoxItem>4</ComboBoxItem>
             </ComboBox>
-            <TextBlock x:Name="tblockOutputColumns" Margin="0,5,0,0" >Output columns to display:</TextBlock>
-            <ListBox x:Name="lbxColumns" SelectionMode="Multiple" SelectionChanged="lbxColumns_SelectionChanged" />
+            <TextBlock x:Name="tblockOutputColumns" Visibility="Collapsed" Margin="0,5,0,0" >Output columns to display:</TextBlock>
+            <ListBox x:Name="lbxColumns" Visibility="Collapsed" SelectionMode="Multiple" SelectionChanged="lbxColumns_SelectionChanged" />
             <!--<CheckBox x:Name="checkboxAllowUpdates" Style="{StaticResource PropertiesPanelCheckbox}" Content="Allow updates" Visibility="Collapsed" IsEnabled="true" />-->
 
                 </StackPanel>
