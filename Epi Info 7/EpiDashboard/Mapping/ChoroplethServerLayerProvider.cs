@@ -43,6 +43,8 @@ namespace EpiDashboard.Mapping
         private Color lowColor;
         private Color highColor;
         private int classCount;
+        string[,] rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
+        float[]  quantileValues = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
 
         public event FeatureLoadedHandler FeatureLoaded;
 
@@ -56,6 +58,21 @@ namespace EpiDashboard.Mapping
         int _colorShadeIndex = 0;
         
         int _lastGeneratedClassCount = 0;
+
+        public string[,] RangeValues
+        {
+            get { return rangeValues; }
+            set { rangeValues = value; }
+        }
+
+        public float[] QuantileValues
+        {
+            get { return quantileValues; }
+            set { quantileValues = value; }
+        }
+
+        public int RangeCount { get; set; }
+
 
         public struct ThematicItem
         {
@@ -191,11 +208,20 @@ namespace EpiDashboard.Mapping
         private int GetRangeIndex(double val, List<double> ranges)
         {
             int index = classCount - 1;
-            for (int r = 0; r < classCount - 1; r++)
+            try
             {
-                if (val >= ranges[r] && val < ranges[r + 1]) index = r;
+               for (int r = 0; r < classCount - 1; r++)
+                {
+                    if (val >= ranges[r] && val < ranges[r + 1]) index = r;
+                }
+                return index;
             }
-            return index;
+
+            catch (Exception ex)
+            {
+                return index;
+            }
+       
         }
 
         public struct Values
@@ -230,7 +256,7 @@ namespace EpiDashboard.Mapping
         //}
         //}
 
-        public void LoadShapeFile(string url)
+        public object[] LoadShapeFile(string url)
         {
             if (!string.IsNullOrEmpty(url))
             {
@@ -281,17 +307,24 @@ namespace EpiDashboard.Mapping
                 }
                 myMap.Layers.Add(graphicsLayer);
                 myMap.Cursor = Cursors.Wait;
+                return new object[] { graphicsLayer };
             }
+            else
+                return null;
         }
 
-        public void LoadShapeFile()
+        public object[] LoadShapeFile()
         {
             MapServerFeatureDialog dialog = new MapServerFeatureDialog();
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                LoadShapeFile(dialog.ServerName + "/" + dialog.VisibleLayer);
+                object[] graphicslayer = null;
+                graphicslayer = LoadShapeFile(dialog.ServerName + "/" + dialog.VisibleLayer);
+                return graphicslayer;
             }
+            else return null;
+
         }
 
         void graphicsLayer_UpdateFailed(object sender, TaskFailedEventArgs e)
@@ -459,31 +492,34 @@ namespace EpiDashboard.Mapping
                 orderby aValue
                 select aValue;
 
-                if (classCount == 2)
+                if (valueList.Count > 0)
                 {
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 3));
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 3));
-                }
-                else if (classCount == 3)
-                {
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 4));
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 4));
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 3) / 4));
-                }
-                else if (classCount == 4)
-                {
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 5));
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 5));
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 3) / 5));
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 4) / 5));
-                }
-                else
-                {
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 6));
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 6));
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 3) / 6));
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 4) / 6));
-                    thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 5) / 6));
+                    if (classCount == 2)
+                    {
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 3));
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 3));
+                    }
+                    else if (classCount == 3)
+                    {
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 4));
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 4));
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 3) / 4));
+                    }
+                    else if (classCount == 4)
+                    {
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 5));
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 5));
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 3) / 5));
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 4) / 5));
+                    }
+                    else
+                    {
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 6));
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 6));
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 3) / 6));
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 4) / 6));
+                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 5) / 6));
+                    }
                 }
 
                 // Create graphic features and set symbol using the class range which contains the value 
@@ -717,6 +753,182 @@ namespace EpiDashboard.Mapping
             catch (Exception ex)
             {
             }
+        }
+
+        private DataTable GetLoadedData(DashboardHelper dashboardHelper, string dataKey, ref string valueField)
+        {
+            if (dashboardHelper == null)
+            {
+                return null;
+            }
+
+            List<string> columnNames = new List<string>();
+            if (dashboardHelper.IsUsingEpiProject)
+            {
+                columnNames.Add("UniqueKey");
+            }
+            columnNames.Add(valueField);
+            columnNames.Add(dataKey);
+
+            DataTable loadedData;
+
+            if (valueField.Equals("{Record Count}"))
+            {
+                GadgetParameters gadgetOptions = new GadgetParameters();
+                gadgetOptions.MainVariableName = dataKey;
+
+                Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
+                inputVariableList.Add("freqvar", dataKey);
+                inputVariableList.Add("allvalues", "false");
+                inputVariableList.Add("showconflimits", "false");
+                inputVariableList.Add("showcumulativepercent", "false");
+                inputVariableList.Add("includemissing", "false");
+                inputVariableList.Add("maxrows", "500");
+
+                gadgetOptions.InputVariableList = inputVariableList;
+                loadedData = dashboardHelper.GenerateFrequencyTable(gadgetOptions).First().Key;
+                foreach (DataRow dr in loadedData.Rows)
+                {
+                    dr[0] = dr[0].ToString().Trim();
+                }
+                valueField = "freq";
+            }
+            else
+            {
+                loadedData = dashboardHelper.GenerateTable(columnNames);
+            }
+            return loadedData;
+        }
+
+        public void ResetRangeValues()
+        {
+            string valueField = this.valueField;
+
+            DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
+            GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+
+            if (graphicsLayer == null) return;
+
+            ThematicItem thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
+        }
+
+        public ThematicItem GetThematicItem(int classCount, DataTable loadedData, GraphicsLayer graphicsLayer)
+        {
+            ThematicItem thematicItem = new ThematicItem()
+            {
+                Name = this.dataKey,
+                Description = this.dataKey,
+                CalcField = ""
+            };
+
+            List<double> valueList = new List<double>();
+
+            for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
+            {
+                Graphic graphicFeature = graphicsLayer.Graphics[i];
+
+                string filterExpression = "";
+
+                if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
+                {
+                    filterExpression += "[";
+                }
+
+                filterExpression += dataKey;
+
+                if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
+                {
+                    filterExpression += "]";
+                }
+
+                filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim() + "'";
+
+                double graphicValue = Double.PositiveInfinity;
+                try
+                {
+                    graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][valueField]);
+                }
+                catch (Exception ex)
+                {
+                    graphicValue = Double.PositiveInfinity;
+                }
+
+                string graphicName = graphicFeature.Attributes[shapeKey].ToString();
+
+                if (i == 0)
+                {
+                    thematicItem.Min = Double.PositiveInfinity;
+                    thematicItem.Max = Double.NegativeInfinity;
+                    thematicItem.MinName = string.Empty;
+                    thematicItem.MaxName = string.Empty;
+                }
+                else
+                {
+                    if (graphicValue < thematicItem.Min) { thematicItem.Min = graphicValue; thematicItem.MinName = graphicName; }
+                    if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity) { thematicItem.Max = graphicValue; thematicItem.MaxName = graphicName; }
+                }
+
+                if (graphicValue < Double.PositiveInfinity)
+                {
+                    valueList.Add(graphicValue);
+                }
+            }
+
+            thematicItem.RangeStarts = new List<double>();
+
+            double totalRange = thematicItem.Max - thematicItem.Min;
+            double portion = totalRange / classCount;
+
+            thematicItem.RangeStarts.Add(thematicItem.Min);
+            double startRangeValue = thematicItem.Min;
+            IEnumerable<double> valueEnumerator =
+            from aValue in valueList
+            orderby aValue
+            select aValue;
+
+            int increment = Convert.ToInt32(Math.Round((double)valueList.Count / (double)classCount));
+            for (int i = increment; i < valueList.Count; i += increment)
+            {
+                double value = valueEnumerator.ElementAt(i);
+                if (value < thematicItem.Min)
+                    value = thematicItem.Min;
+                thematicItem.RangeStarts.Add(value);
+            }
+            return thematicItem;
+        }
+
+        public void PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount)
+        {
+            this.classCount = classCount;
+            this.dashboardHelper = dashboardHelper;
+            this.shapeKey = shapeKey;
+            this.dataKey = dataKey;
+            this.valueField = valueField;
+            
+            DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
+
+            GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            ThematicItem thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
+            RangeCount = thematicItem.RangeStarts.Count;
+            Array.Clear(RangeValues, 0, RangeValues.Length);
+            for (int i = 0; i < thematicItem.RangeStarts.Count; i++)
+            {
+                RangeValues[i, 0] = thematicItem.RangeStarts[i].ToString();
+
+
+                if (i < thematicItem.RangeStarts.Count - 1)
+                {
+                    RangeValues[i, 1] = thematicItem.RangeStarts[i + 1].ToString();
+                }
+                else
+                {
+                    RangeValues[i, 1] = thematicItem.Max.ToString();
+                }
+
+            }
+
+            //return thematicItem;
+
         }
 
         private StackPanel legendStackPanel;
