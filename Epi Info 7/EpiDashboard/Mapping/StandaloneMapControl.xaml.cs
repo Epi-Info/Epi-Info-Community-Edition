@@ -1448,17 +1448,18 @@ namespace EpiDashboard.Mapping
 
             dashboardHelper = choroplethlayerprop.GetDashboardHelper();
             choroplethproperties.SetDashboardHelper(dashboardHelper);
-            choroplethproperties.txtProjectPath.Text = dashboardHelper.Database.DbName;
+            choroplethproperties.txtProjectPath.Text = ProjectFilepath;
             choroplethproperties.cmbClasses.Text = choroplethlayerprop.cbxClasses.Text;
             choroplethproperties.quintilesOption.IsChecked = choroplethlayerprop.flagQuantiles;
             if (choroplethlayerprop.flagQuantiles == true) { choroplethproperties.OnQuintileOptionChanged(); }
-
-           /* choroplethproperties.panelBoundaries.IsEnabled = true;
+            choroplethproperties.ClearonShapeFile();
+            
+              choroplethproperties.panelBoundaries.IsEnabled = true;
               choroplethproperties.dataFilters = new DataFilters(dashboardHelper);
               choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.dataFilters, true);
               choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
-              choroplethproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
-              choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only."; */
+              choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
+              choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only."; 
 
             if (string.IsNullOrEmpty(choroplethlayerprop.shapeFilePath) == false)
             {
@@ -1479,8 +1480,14 @@ namespace EpiDashboard.Mapping
             if (choroplethlayerprop.classAttribList != null)
              { choroplethproperties.SetClassAttributes(choroplethlayerprop.classAttribList); }
             choroplethproperties.FillComboBoxes();
+                       
+            choroplethproperties.panelBoundaries.IsEnabled = true;
+            choroplethproperties.radShapeFile.IsChecked = true;
+            choroplethproperties.radShapeFile.IsEnabled = true;
+            choroplethproperties.txtShapePath.IsEnabled = true;
+            choroplethproperties.btnBrowse.IsEnabled = true;
+             
             choroplethproperties.cmbShapeKey.Text = choroplethlayerprop.cbxShapeKey.Text;
-            choroplethproperties.radShapeFile.IsChecked = true; 
             choroplethproperties.cmbDataKey.Text = choroplethlayerprop.cbxDataKey.Text;
             choroplethproperties.cmbValue.Text = choroplethlayerprop.cbxValue.Text;
             choroplethproperties.rctHighColor.Fill = choroplethlayerprop.rctHighColor.Fill;
