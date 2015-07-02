@@ -80,12 +80,13 @@ namespace EpiDashboard.Controls
             _currentColor_rampStart = (SolidColorBrush)rctLowColor.Fill;
             _currentColor_rampEnd = (SolidColorBrush)rctHighColor.Fill;
             _initialRampCalc = true;
-                        
+
+            /*            
             if (_provider != null)
             {
             ResetLegend_Click(new object(), new RoutedEventArgs());
             OnQuintileOptionChanged();
-            } 
+            } */
         }
 
         public event EventHandler Cancelled;
@@ -163,6 +164,7 @@ namespace EpiDashboard.Controls
             panelHTML.Visibility = System.Windows.Visibility.Collapsed;
             panelCharts.Visibility = System.Windows.Visibility.Visible;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            panelFilters.Visibility = System.Windows.Visibility.Collapsed;
             if (cmbShapeKey.SelectedItem != null &&
                 cmbDataKey.SelectedItem != null &&
                 cmbValue.SelectedItem != null)
@@ -1209,17 +1211,20 @@ namespace EpiDashboard.Controls
         }
         private void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _shapeKey = cmbShapeKey.SelectedItem.ToString();
+            if (cmbShapeKey.SelectedItem != null)
+                { _shapeKey = cmbShapeKey.SelectedItem.ToString(); }
         }
 
         private void cmbDataKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _dataKey = cmbDataKey.SelectedItem.ToString();
+            if (cmbDataKey.SelectedItem != null)
+            { _dataKey = cmbDataKey.SelectedItem.ToString(); }
         }
 
         private void cmbValue_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _value = cmbValue.SelectedItem.ToString();
+            if (cmbValue.SelectedItem != null)
+             { _value = cmbValue.SelectedItem.ToString(); }
         }  
 
         private void SetRangeUISection()
@@ -1400,8 +1405,7 @@ namespace EpiDashboard.Controls
       
         private void radShapeFile_Checked(object sender, RoutedEventArgs e)
         {
-
-            if (!string.IsNullOrEmpty(txtKMLpath.Text))
+           if (!string.IsNullOrEmpty(txtKMLpath.Text))
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
@@ -1458,7 +1462,7 @@ namespace EpiDashboard.Controls
             }
         }
 
-        private void ClearonShapeFile()
+        public void ClearonShapeFile()
         {
             panelshape.IsEnabled = true;
             panelmap.IsEnabled = false;
