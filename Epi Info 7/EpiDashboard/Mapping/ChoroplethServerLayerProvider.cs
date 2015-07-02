@@ -840,13 +840,12 @@ namespace EpiDashboard.Mapping
                 {
                     filterExpression += "]";
                 }
-
+                               
                 filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim() + "'";
-
                 double graphicValue = Double.PositiveInfinity;
                 try
                 {
-                    graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][valueField]);
+                graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][valueField]);
                 }
                 catch (Exception ex)
                 {

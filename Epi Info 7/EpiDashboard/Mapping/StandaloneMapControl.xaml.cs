@@ -676,6 +676,12 @@ namespace EpiDashboard.Mapping
                if (choroplethlayerprop.FlagRunEdit == false)
                { GenerateShapeFileChoropleth(choroplethlayerprop); }
            }
+           else if (layerProperties is ChoroplethServerLayerProperties)
+           {
+               ChoroplethServerLayerProperties choroplethserverlayerprop = (ChoroplethServerLayerProperties)layerProperties;
+               if (choroplethserverlayerprop.FlagRunEdit == false)
+               { GenerateShapeFileChoropleth(choroplethserverlayerprop); }
+           }
        }
        //--
        public void ILayerProperties_MapGenerated(object sender, EventArgs e)
@@ -1511,7 +1517,108 @@ namespace EpiDashboard.Mapping
             popup.Content = choroplethproperties;
             popup.Show();
          }
+        public void GenerateShapeFileChoropleth(ChoroplethServerLayerProperties choroplethServerlayerprop)
+        {
 
+            DashboardHelper dashboardHelper;
+            ILayerProperties layerProperties = null;
+
+            //old config
+            layerProperties = (ChoroplethServerLayerProperties)choroplethServerlayerprop;
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
+
+
+            choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
+            choroplethproperties.choroserverlayerprop = choroplethServerlayerprop;
+            choroplethproperties.choroMapprovider = choroplethServerlayerprop.provider;
+
+            choroplethproperties.Width = 800;
+            choroplethproperties.Height = 600;
+
+            dashboardHelper = choroplethServerlayerprop.GetDashboardHelper();
+            choroplethproperties.SetDashboardHelper(dashboardHelper);
+            choroplethproperties.txtProjectPath.Text = ProjectFilepath;
+            choroplethproperties.cmbClasses.Text = choroplethServerlayerprop.cbxClasses.Text;
+            choroplethproperties.quintilesOption.IsChecked = choroplethServerlayerprop.flagQuantiles;
+            if (choroplethServerlayerprop.flagQuantiles == true) { choroplethproperties.OnQuintileOptionChanged(); }
+            choroplethproperties.ClearonMapServer();
+
+            choroplethproperties.panelBoundaries.IsEnabled = true;
+            choroplethproperties.dataFilters = new DataFilters(dashboardHelper);
+            choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.dataFilters, true);
+            choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
+            choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
+            choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
+            
+            if (string.IsNullOrEmpty(choroplethServerlayerprop.shapeFilePath) == false)
+            {
+                choroplethproperties.radMapServer.IsChecked = true;
+                if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13")
+                    choroplethServerlayerprop.cbxMapserverText = "NationalMap.gov - New York County Boundaries";
+                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19")
+                    choroplethServerlayerprop.cbxMapserverText = "NationalMap.gov - Rhode Island Zip Code Boundaries";
+                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17")
+                    choroplethServerlayerprop.cbxMapserverText = "NationalMap.gov - U.S. State Boundaries";
+                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17")
+                    choroplethServerlayerprop.cbxMapserverText = "NationalMap.gov - World Boundaries";
+                else
+                {
+                    string lastchar = choroplethServerlayerprop.shapeFilePath.Substring(choroplethServerlayerprop.shapeFilePath.Length - 1, 1);
+                    if (char.IsNumber(lastchar, 0) == true)
+                        choroplethServerlayerprop.txtMapserverText = choroplethServerlayerprop.shapeFilePath.Substring(0, choroplethServerlayerprop.shapeFilePath.Length - 2);
+                }
+
+                if (string.IsNullOrEmpty(choroplethServerlayerprop.cbxMapserverText) == false)
+                {
+                    choroplethproperties.radconnectmapserver.IsChecked = true;
+                    choroplethproperties.cbxmapserver.Text = choroplethServerlayerprop.cbxMapserverText;
+                }
+                else
+                {
+                    choroplethproperties.radlocatemapserver.IsChecked = true;
+                    choroplethproperties.txtMapSeverpath.Text = choroplethServerlayerprop.txtMapserverText;
+                    choroplethproperties.MapServerConnect();
+                    choroplethproperties.ResetMapServer();
+                    choroplethproperties.cbxmapfeature.Text = choroplethServerlayerprop.cbxMapFeatureText;
+
+                }
+                if (choroplethproperties.choroserverlayerprop.curfeatureAttributes != null)
+                {
+                    foreach (string key in choroplethproperties.choroserverlayerprop.curfeatureAttributes.Keys)
+                    { choroplethproperties.cmbShapeKey.Items.Add(key); }
+                }
+            }
+            
+            if (choroplethServerlayerprop.classAttribList != null)
+            { choroplethproperties.SetClassAttributes(choroplethServerlayerprop.classAttribList); }
+            choroplethproperties.FillComboBoxes();
+
+            choroplethproperties.cmbShapeKey.Text = choroplethServerlayerprop.cbxShapeKey.Text;
+            choroplethproperties.cmbDataKey.Text = choroplethServerlayerprop.cbxDataKey.Text;
+            choroplethproperties.cmbValue.Text = choroplethServerlayerprop.cbxValue.Text;
+            choroplethproperties.rctHighColor.Fill = choroplethServerlayerprop.rctHighColor.Fill;
+            choroplethproperties.rctLowColor.Fill = choroplethServerlayerprop.rctLowColor.Fill;
+
+            choroplethServerlayerprop.FlagRunEdit = true;
+
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > choroplethproperties.Width)
+            {
+                choroplethproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
+
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > choroplethproperties.Height)
+            {
+                choroplethproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+            choroplethproperties.Cancelled += new EventHandler(properties_Cancelled);
+            choroplethproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+
+            popup.Content = choroplethproperties;
+            popup.Show();
+        }
         void properties_ChangesAccepted(object sender, EventArgs e)
         {
             //DashboardProperties properties = popup.Content as DashboardProperties;

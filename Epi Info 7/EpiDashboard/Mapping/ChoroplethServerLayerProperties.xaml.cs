@@ -33,11 +33,18 @@ namespace EpiDashboard.Mapping
         private IMapControl mapControl;
         public string shapeFilePath;
 
-        public IDictionary<string, object> shapeAttributes;
+       // public IDictionary<string, object> shapeAttributes;
         private bool flagrunedit;
         private int Numclasses;
         public bool flagQuantiles;
         public Dictionary<int, object> classAttribList;
+
+        public string ShapeFilePath;
+        public string cbxMapserverText;
+        public string txtMapserverText;
+        public string cbxMapFeatureText;
+
+        public IDictionary<string, object> curfeatureAttributes;
 
         public ChoroplethServerLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
@@ -59,6 +66,7 @@ namespace EpiDashboard.Mapping
             rctHighColor.MouseUp += new MouseButtonEventHandler(rctHighColor_MouseUp);
             rctLowColor.MouseUp += new MouseButtonEventHandler(rctLowColor_MouseUp);
             rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
+            rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
         }
 
         public void provider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
@@ -68,6 +76,7 @@ namespace EpiDashboard.Mapping
                 shapeFilePath = serverName;
                 if (featureAttributes != null)
                 {
+                    curfeatureAttributes = featureAttributes;
                     cbxShapeKey.Items.Clear();
                     foreach (string key in featureAttributes.Keys)
                     {
@@ -143,6 +152,15 @@ namespace EpiDashboard.Mapping
             {
                 rctHighColor.Fill = new SolidColorBrush(Color.FromArgb(0xF0, dialog.Color.R, dialog.Color.G, dialog.Color.B));
                 RenderMap();
+            }
+        }
+
+        private void rctEdit_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (EditRequested != null)
+            {
+                flagrunedit = false;
+                EditRequested(this, new EventArgs());
             }
         }
 
@@ -232,7 +250,7 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public void SetValues(string shapefilepath, string shapekey, string datakey, string val, string classes, Brush Highcolor, Brush Lowcolor, IDictionary<string, object> shapeAttributes, Dictionary<int, object> classAttrib, bool flagquintiles, int numclasses)
+        public void SetValues(string shapekey, string datakey, string val, string classes, Brush Highcolor, Brush Lowcolor, IDictionary<string, object> shapeAttributes, Dictionary<int, object> classAttrib, bool flagquintiles, int numclasses)
         {
             FillComboBoxes();
             if (shapeAttributes != null)
@@ -246,7 +264,6 @@ namespace EpiDashboard.Mapping
             classAttribList = classAttrib;
             flagQuantiles = flagquintiles;
             Numclasses = numclasses;
-            shapeFilePath = shapefilepath;
             rctHighColor.Fill = (SolidColorBrush)Highcolor;
             rctLowColor.Fill = (SolidColorBrush)Lowcolor;
             cbxClasses.Text = classes;
