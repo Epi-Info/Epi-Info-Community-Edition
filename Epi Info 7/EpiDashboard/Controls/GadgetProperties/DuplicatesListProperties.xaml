@@ -38,7 +38,7 @@
 
         <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
-            <ScrollViewer x:Name="svVariables" Height="480">
+            <ScrollViewer x:Name="svVariables" Style="{StaticResource PropertiesScrollviewer}">
                 <WrapPanel Orientation="Horizontal">
                     <StackPanel Margin="0,0,10,0">
                         <Label>Key fields for duplicate checking:</Label>
@@ -87,14 +87,14 @@
         <StackPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
 
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 4">Grouping</Label>
+            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping</Label>
             <Label>Group By:</Label>
             <ComboBox x:Name="cmbGroupField" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left"/>
 
             <Label>Sub-group By:</Label>
             <ComboBox x:Name="cmbSecondaryGroupField" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left"/>
 
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 30, 0, 4">Sorting</Label>
+            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Sorting</Label>
 
             <Label>Sort Method:</Label>
             <ComboBox x:Name="cmbSortMethod" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left" SelectedIndex="0" Margin="0, 0, 0, 8">
@@ -123,23 +123,20 @@
         <StackPanel x:Name="panelDisplay" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0,0,0">Title and Description</Label>
+            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0,0,5">Title and Description</Label>
             <StackPanel Orientation="Vertical">
-                <WrapPanel Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <StackPanel>
+                <StackPanel>
                     <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
-                        <TextBox x:Name="txtTitle" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
-                    </StackPanel>
-                    <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
-                    <StackPanel>
+                    <TextBox x:Name="txtTitle" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="0 10 0 0">
                     <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
-                        <TextBox x:Name="txtDesc" AcceptsReturn="True" Style="{StaticResource PropertiesGadgetDescription}" HorizontalAlignment="Left"></TextBox>
+                    <TextBox x:Name="txtDesc" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetDescription}" HorizontalAlignment="Left"></TextBox>
                     </StackPanel>
-                </WrapPanel>
             </StackPanel>
 
             <StackPanel>
-                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 20, 0, 4">Dimensions</Label>
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Dimensions</Label>
                 <WrapPanel Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
                     <StackPanel>
                     <Label x:Name="tblockMaxWidth" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max width:" Margin="0,5,0,0"  />
@@ -154,7 +151,7 @@
             </StackPanel>
 
             <StackPanel>
-                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Output Options</Label>
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Output Options</Label>
                 <StackPanel Orientation="Vertical">
                     <WrapPanel Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
                         <CheckBox x:Name="checkboxTabOrder" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort variables by tab order" Visibility="Visible" IsEnabled="true" />
