@@ -43,20 +43,32 @@
 
         <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
-
-            <TextBlock x:Name="tblockMainVariable">Date:</TextBlock>
-            <ComboBox x:Name="cmbField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbField_SelectionChanged" />
-            
-
-            <TextBlock x:Name="tblockWeightVariable" Margin="0,12,0,0">Count (Optional):</TextBlock>
-            <ComboBox x:Name="cmbFieldWeight" Width="216" HorizontalAlignment="Left" Height="28"/>
-
-            <TextBlock x:Name="tblockLagTimeDays" Margin="0,12,0,0" HorizontalAlignment="Left" TextAlignment="Center" Text="Lag time (days):"/>
-            <TextBox x:Name="txtLagTime" Grid.Column="2" Grid.Row="5" Width="30" HorizontalAlignment="Left" Text="7" Margin="0, 0, 0, 00" TextChanged="txtLagTime_TextChanged"></TextBox>
-            <TextBlock x:Name="tblockThresh" Margin="0,12,0,0" HorizontalAlignment="Left" TextAlignment="Center" Text="Threshold (Std. Deviations):" />
-            <TextBox x:Name="txtDeviations" Grid.Column="2" Grid.Row="5" Width="30" HorizontalAlignment="Left" Text="3" Margin="0, 0, 0, 00" TextChanged="txtDeviations_TextChanged"></TextBox>
-            <TextBlock x:Name="tblockTimePeriod" Margin="0,12,0,0" HorizontalAlignment="Left" Text="Process records this many days prior:" />
-            <TextBox x:Name="txtTimePeriod" Width="30" HorizontalAlignment="Left" Text="365" Margin="0, 0, 0, 00" TextChanged="txtTimePeriod_TextChanged"></TextBox>
+            <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" >
+                <StackPanel>
+                    <TextBlock x:Name="tblockMainVariable">Date:</TextBlock>
+                    <ComboBox x:Name="cmbField" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbField_SelectionChanged" />
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock x:Name="tblockWeightVariable" Margin="0,0,0,0">Count (Optional):</TextBlock>
+                    <ComboBox x:Name="cmbFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28"/>
+                </StackPanel>
+            </WrapPanel>
+            <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" >
+                <StackPanel>
+                    <TextBlock x:Name="tblockLagTimeDays" Margin="0,12,0,0" HorizontalAlignment="Left"  Text="Lag time (days):"/>
+                    <TextBox x:Name="txtLagTime" Grid.Column="2" Grid.Row="5" Width="30" HorizontalAlignment="Left" Text="7" Margin="0, 0, 0, 00" TextChanged="txtLagTime_TextChanged"></TextBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock x:Name="tblockThresh" Margin="0,12,0,0" HorizontalAlignment="Left"  Text="Threshold (Std. Deviations):" />
+                    <TextBox x:Name="txtDeviations" Grid.Column="2" Grid.Row="5" Width="30" HorizontalAlignment="Left" Text="3" Margin="0, 0, 0, 00" TextChanged="txtDeviations_TextChanged"></TextBox>
+                </StackPanel>
+            </WrapPanel>
+            <WrapPanel ItemWidth="265" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" >
+            <StackPanel>
+                    <TextBlock x:Name="tblockTimePeriod" Margin="0,12,0,0" HorizontalAlignment="Left" Text="Process records this many days prior:" />
+                    <TextBox x:Name="txtTimePeriod" Width="30" HorizontalAlignment="Left" Text="365" Margin="0, 0, 0, 00" TextChanged="txtTimePeriod_TextChanged"></TextBox>
+                </StackPanel>
+            </WrapPanel>
         </StackPanel>
         <!--Sorting and Grouping-->
 <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
@@ -64,13 +76,12 @@
         <StackPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
 
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 4">Grouping</Label>
+            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping</Label>
             <Label>Indicators (Optional):</Label>
-            <ScrollViewer x:Name="scrollViewerStrataProperties" VerticalAlignment="Stretch" Height="300" >
-                <StackPanel>
-                    <ListBox SelectionMode="Multiple" Name="listboxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="listboxFieldStrata_SelectionChanged" />
-                </StackPanel>
-            </ScrollViewer>
+
+            <StackPanel>
+                <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible" Height="300" SelectionMode="Multiple" Name="listboxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="listboxFieldStrata_SelectionChanged" />
+            </StackPanel>
 
         </StackPanel>
 <!--Display-->
@@ -78,31 +89,31 @@
         <StackPanel x:Name="panelDisplay" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
 
-            <ScrollViewer x:Name="scrollViewerProperties" Height="480.0">
+            <ScrollViewer x:Name="scrollViewerProperties" Style="{StaticResource PropertiesScrollviewer}">
                 <StackPanel>
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 10">Title and Description</Label>
-                    <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
-                    <TextBox x:Name="txtTitle" Width="360" HorizontalAlignment="Left"></TextBox>
-
-                    <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
-                    <TextBox x:Name="txtDesc" Width="360" AcceptsReturn="True" Height="128" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 10">Dimensions</Label>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="5"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
-                            <TextBlock x:Name="tblockWidth" HorizontalAlignment="Left" TextAlignment="Center" Text="Width:" Margin="0,12,0,0"  />
-                            <TextBox x:Name="txtWidth" Text="800" TextChanged="txtWidth_TextChanged" />
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 5">Title and Description</Label>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel>
+                            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
+                            <TextBox x:Name="txtTitle" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
                         </StackPanel>
-
-                        <StackPanel Grid.Column="2">
-                            <TextBlock x:Name="tblockHeight" HorizontalAlignment="Left" TextAlignment="Center" Text="Height:" Margin="0,12,0,0"  />
-                            <TextBox x:Name="txtHeight" Text="500" TextChanged="txtHeight_TextChanged" />
+                        <StackPanel Margin="0 10 0 0">
+                            <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
+                            <TextBox x:Name="txtDesc" Style="{StaticResource PropertiesGadgetDescription}" AcceptsReturn="True" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
                         </StackPanel>
-                    </Grid>
+                    </StackPanel>
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Dimensions</Label>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <TextBlock x:Name="tblockWidth" HorizontalAlignment="Left"  Text="Width:" Margin="0,0,0,0"  />
+                            <TextBox x:Name="txtWidth" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="800" TextChanged="txtWidth_TextChanged" />
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="tblockHeight" HorizontalAlignment="Left"  Text="Height:" Margin="0,0,0,0"  />
+                            <TextBox x:Name="txtHeight" Style="{StaticResource PropertiesTextBoxSmall}"  HorizontalAlignment="Left" Text="500" TextChanged="txtHeight_TextChanged" />
+                        </StackPanel>
+                    </StackPanel>
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>
@@ -110,38 +121,54 @@
 <!--Labels-->
         <StackPanel x:Name="panelDisplayLabels" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Labels</Label>
-            <ScrollViewer x:Name="scrollViewerPropertiesLabels" Height="480.0">
+            <ScrollViewer x:Name="scrollViewerPropertiesLabels" Style="{StaticResource PropertiesScrollviewer}">
                 <StackPanel>
-                    <TextBlock x:Name="tblockYAxisLabelValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis label:" Margin="0,12,0,0"  />
-                    <TextBox x:Name="txtYAxisLabelValue" HorizontalAlignment="Stretch" Text="Count" />
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Y-Axis</Label>
+                    <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" >
+                        <StackPanel>
+                            <TextBlock x:Name="tblockYAxisLabelValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis label:" Margin="0,12,0,0"  />
+                            <TextBox x:Name="txtYAxisLabelValue" Style="{StaticResource PropertiesTextBoxMed}" HorizontalAlignment="Left" Text="Count" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="tblockYAxisLabelFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis label font size:" Margin="0,12,0,0"  />
+                            <TextBox x:Name="txtYAxisLabelFontSize" Style="{StaticResource PropertiesTextBoxMed}" HorizontalAlignment="Left" Text="" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="tblockYAxisFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis data values font size:" Margin="0,12,0,0"  />
+                            <TextBox x:Name="txtYAxisFontSize" Style="{StaticResource PropertiesTextBoxMed}" HorizontalAlignment="Left" Text="" />
+                        </StackPanel>
+                    </WrapPanel>
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">X-Axis</Label>
+                    <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" >
+                        <StackPanel>
+                            <TextBlock x:Name="tblockXAxisLabelType" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis label type:" Margin="0,12,0,0"  />
+                            <ComboBox x:Name="cmbXAxisLabelType" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cmbXAxisLabelType_SelectionChanged">
+                                <ComboBoxItem Content="Automatic"/>
+                                <ComboBoxItem Content="Field Prompt"/>
+                                <ComboBoxItem Content="None"/>
+                                <ComboBoxItem Content="Custom"/>
+                            </ComboBox>
+                        </StackPanel>
 
-                    <TextBlock x:Name="tblockYAxisLabelFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis label font size:" Margin="0,12,0,0"  />
-                    <TextBox x:Name="txtYAxisLabelFontSize" HorizontalAlignment="Stretch" Text="" />
-
-                    <TextBlock x:Name="tblockYAxisFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis data values font size:" Margin="0,12,0,0"  />
-                    <TextBox x:Name="txtYAxisFontSize" HorizontalAlignment="Stretch" Text="" />
-
-
-                    <TextBlock x:Name="tblockXAxisLabelType" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis label type:" Margin="0,12,0,0"  />
-                    <ComboBox x:Name="cmbXAxisLabelType" Width="216" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cmbXAxisLabelType_SelectionChanged">
-                        <ComboBoxItem Content="Automatic"/>
-                        <ComboBoxItem Content="Field Prompt"/>
-                        <ComboBoxItem Content="None"/>
-                        <ComboBoxItem Content="Custom"/>
-                    </ComboBox>
-
-                    <TextBlock x:Name="tblockXAxisLabelValue" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis label:" Margin="0,12,0,0" />
-                    <TextBox x:Name="txtXAxisLabelValue" HorizontalAlignment="Stretch" Text=""/>
-
-                    <TextBlock x:Name="tblockXAxisLabelFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis label font size:" Margin="0,12,0,0"  />
-                    <TextBox x:Name="txtXAxisLabelFontSize" HorizontalAlignment="Stretch" Text="" />
-
-                    <TextBlock x:Name="tblockXAxisFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis data values font size:" Margin="0,12,0,0"  />
-                    <TextBox x:Name="txtXAxisFontSize" HorizontalAlignment="Stretch" Text="" />
-
-
-                    <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart title:" Margin="0,12,0,0"  />
-                    <TextBox x:Name="txtChartTitle" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
+                        <StackPanel>
+                            <TextBlock x:Name="tblockXAxisLabelValue" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis label:" Margin="0,12,0,0" />
+                            <TextBox x:Name="txtXAxisLabelValue" Style="{StaticResource PropertiesTextBoxMed}" HorizontalAlignment="Left" Text=""/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="tblockXAxisLabelFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis label font size:" Margin="0,12,0,0"  />
+                            <TextBox x:Name="txtXAxisLabelFontSize" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="tblockXAxisFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis data values font size:" Margin="0,12,0,0"  />
+                            <TextBox x:Name="txtXAxisFontSize" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="" />
+                        </StackPanel>
+                       
+                    </WrapPanel>
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Title and Subtitle</Label>
+                    <StackPanel>
+                        <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart title:" Margin="0,12,0,0"  />
+                        <TextBox x:Name="txtChartTitle" Width="300" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
+                    </StackPanel>
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>

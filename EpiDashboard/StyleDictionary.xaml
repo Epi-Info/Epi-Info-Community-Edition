@@ -395,13 +395,23 @@
     
     <Style x:Key="PropertiesGadgetTitle" TargetType="TextBox">
         <Setter Property="Width" Value="360" />
-        <Setter Property="Height" Value="30" />
         <Setter Property="BorderBrush" Value="#8a8a8a" />
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style x:Key="PropertiesGadgetDescription" TargetType="TextBox">
         <Setter Property="Width" Value="360" />
-        <Setter Property="Height" Value="30" />
+        <Setter Property="BorderBrush" Value="#8a8a8a" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style x:Key="PropertiesChartTitle" TargetType="TextBox">
+        <Setter Property="Width" Value="180" />
+        <Setter Property="BorderBrush" Value="#8a8a8a" />
+    </Style>
+
+    <Style x:Key="PropertiesSubtitleDescription" TargetType="TextBox">
+        <Setter Property="Width" Value="180" />
         <Setter Property="BorderBrush" Value="#8a8a8a" />
     </Style>
 
@@ -429,6 +439,10 @@
         <Setter Property="BorderBrush" Value="#8a8a8a" />
     </Style>
 
+    <Style TargetType="ScrollViewer" x:Key="PropertiesScrollviewer">
+        <Setter Property="Height" Value="490" />
+    </Style>
+    
     <Style x:Key="ToggleSidebarButtonStyle" TargetType="ToggleButton">
         <Setter Property="Foreground" Value="#111111"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
