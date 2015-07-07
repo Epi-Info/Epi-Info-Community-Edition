@@ -160,7 +160,7 @@ namespace EpiDashboard.Controls
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
             if (cmbShapeKey.SelectedItem != null &&
                 cmbDataKey.SelectedItem != null &&
-                cmbValue.SelectedItem != null)
+                cmbValue.SelectedItem != null )
             {
                 SetRangeUISection();
         }
@@ -236,7 +236,7 @@ namespace EpiDashboard.Controls
                  choroserverlayerprop.cbxMapFeatureText = cbxmapfeature.Text;}
         
             else if (radKML.IsChecked == true  && choroKMLprovider !=null)
-                { chorokmllayerprop.SetValues(txtShapePath.Text, cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses); }
+                { chorokmllayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses); }
 
             if (ChangesAccepted != null)
             {
@@ -250,7 +250,7 @@ namespace EpiDashboard.Controls
                 { layerprop.CloseLayer(); }
             else if (radMapServer.IsChecked == true && choroMapprovider != null && choroserverlayerprop.classAttribList == null)
                 { choroserverlayerprop.CloseLayer(); }
-            else if (radKML.IsChecked == true && choroKMLprovider != null)
+            else if (radKML.IsChecked == true && choroKMLprovider != null && chorokmllayerprop.classAttribList == null)
                 { chorokmllayerprop.CloseLayer(); }
 
             if (Cancelled != null)
@@ -348,7 +348,9 @@ namespace EpiDashboard.Controls
 
         private void AddClassAttributes()
         {
-            
+
+            ClassAttribList.Clear();
+
             classAttributes ca1 = new classAttributes();
             ca1.rctColor = rctColor01.Fill;
             ca1.rampStart = rampStart01.Text;
@@ -844,8 +846,13 @@ namespace EpiDashboard.Controls
             {
                 stratCount = 4;
             }
+            
             if ((cmbShapeKey.SelectedItem != null &&  cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null) && (_provider != null))
                 { _provider.ResetRangeValues(); }
+            else if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null) && (choroMapprovider != null))
+                 { choroMapprovider.ResetRangeValues(); }
+            else if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null) && (choroKMLprovider != null))
+                 { choroKMLprovider.ResetRangeValues(); }
 
             SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
             SolidColorBrush rampEnd = (SolidColorBrush)rctHighColor.Fill;
@@ -1199,10 +1206,12 @@ namespace EpiDashboard.Controls
             rampCompareColumn.Width = new GridLength(widthCompare, GridUnitType.Pixel);
             rampEndColumn.Width = new GridLength(widthMinMax, GridUnitType.Pixel);
         }
-        private void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbShapeKey.SelectedItem != null)
-                { _shapeKey = cmbShapeKey.SelectedItem.ToString(); }
+             { _shapeKey = cmbShapeKey.SelectedItem.ToString(); }
+            else
+             { _shapeKey =  ""; }
         }
 
         private void cmbDataKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1248,18 +1257,34 @@ namespace EpiDashboard.Controls
                 SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
                 SolidColorBrush rampEnd = (SolidColorBrush)rctHighColor.Fill;
                 SetVisibility(classCount, rampStart, rampEnd);
+              
             }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
+            else if (radMapServer.IsChecked == true && choroMapprovider != null )
             {
-                choroMapprovider.PopulateRangeValues(_dashboardHelper,
-                         cmbShapeKey.SelectedItem.ToString(),
-                         cmbDataKey.SelectedItem.ToString(),
-                         cmbValue.SelectedItem.ToString(),
-                         brushList,
-                         classCount);
-                SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
-                SolidColorBrush rampEnd = (SolidColorBrush)rctHighColor.Fill;
-                SetVisibility(classCount, rampStart, rampEnd);
+               
+                    choroMapprovider.PopulateRangeValues(_dashboardHelper,
+                             cmbShapeKey.SelectedItem.ToString(),
+                             cmbDataKey.SelectedItem.ToString(),
+                             cmbValue.SelectedItem.ToString(),
+                             brushList,
+                             classCount);
+                    SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
+                    SolidColorBrush rampEnd = (SolidColorBrush)rctHighColor.Fill;
+                    SetVisibility(classCount, rampStart, rampEnd);
+                
+            }
+            else if (radKML.IsChecked == true && choroKMLprovider != null)
+            {
+                  choroKMLprovider.PopulateRangeValues(_dashboardHelper,
+                             cmbShapeKey.SelectedItem.ToString(),
+                             cmbDataKey.SelectedItem.ToString(),
+                             cmbValue.SelectedItem.ToString(),
+                             brushList,
+                             classCount);
+                    SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
+                    SolidColorBrush rampEnd = (SolidColorBrush)rctHighColor.Fill;
+                    SetVisibility(classCount, rampStart, rampEnd);
+                
             }
             
         }
@@ -1310,12 +1335,14 @@ namespace EpiDashboard.Controls
                 if (featureAttributes != null)
                 {
                     cmbShapeKey.Items.Clear();
+                    cmbShapeKey.SelectedIndex = -1;
                     choroserverlayerprop.cbxShapeKey.Items.Clear();
                     foreach (string key in featureAttributes.Keys)
                     {
                         cmbShapeKey.Items.Add(key);
                         choroserverlayerprop.cbxShapeKey.Items.Add(key);
                     }
+                    cmbShapeKey.Items.Refresh();
                 }
             }
             if (currentElement != null)
@@ -1395,6 +1422,8 @@ namespace EpiDashboard.Controls
       
         private void radShapeFile_Checked(object sender, RoutedEventArgs e)
         {
+           //check for edit mode
+           //if (ClassAttribList.Count != 0) { return; }
            if (!string.IsNullOrEmpty(txtKMLpath.Text))
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
@@ -1503,7 +1532,8 @@ namespace EpiDashboard.Controls
       
         private void radKML_Checked(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtShapePath.Text))
+           
+           if (!string.IsNullOrEmpty(txtShapePath.Text))
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
@@ -1537,6 +1567,7 @@ namespace EpiDashboard.Controls
 
         private void radMapServer_Checked(object sender, RoutedEventArgs e)
         {
+           
             if (!string.IsNullOrEmpty(txtShapePath.Text))
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
@@ -1587,7 +1618,7 @@ namespace EpiDashboard.Controls
             if (cbxmapserver.SelectedIndex > -1)
             {
                 MapServerName = ((ComboBoxItem)cbxmapserver.SelectedItem).Content.ToString();
-              
+                
                 if (choroMapprovider == null)
                 {
                     choroMapprovider =  new Mapping.ChoroplethServerLayerProvider(_myMap);
