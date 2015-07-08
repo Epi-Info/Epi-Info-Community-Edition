@@ -232,6 +232,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 return;
             }
 
+
             if (cbxOutcomeField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxOutcomeField.SelectedItem.ToString()))
             {
                 Parameters.CrosstabVariableName = cbxOutcomeField.SelectedItem.ToString();
@@ -891,6 +892,12 @@ namespace EpiDashboard.Controls.GadgetProperties
                 //Parameters.EndColorGreen = dialog.Color.G;
                 //Parameters.EndColorBlue = dialog.Color.B;
             }
+        }
+
+        private void txtMaxVarNameLength_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Util.IsWholeNumber(e.Text);
+            base.OnPreviewTextInput(e);
         }
     }
 }
