@@ -822,57 +822,58 @@ namespace EpiDashboard.Mapping
             };
 
             List<double> valueList = new List<double>();
-
-            for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
+            if (graphicsLayer != null)
             {
-                Graphic graphicFeature = graphicsLayer.Graphics[i];
-
-                string filterExpression = "";
-
-                if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
+                for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
                 {
-                    filterExpression += "[";
-                }
+                    Graphic graphicFeature = graphicsLayer.Graphics[i];
 
-                filterExpression += dataKey;
+                    string filterExpression = "";
 
-                if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
-                {
-                    filterExpression += "]";
-                }
-                               
-                filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim() + "'";
-                double graphicValue = Double.PositiveInfinity;
-                try
-                {
-                graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][valueField]);
-                }
-                catch (Exception ex)
-                {
-                    graphicValue = Double.PositiveInfinity;
-                }
+                    if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
+                    {
+                        filterExpression += "[";
+                    }
 
-                string graphicName = graphicFeature.Attributes[shapeKey].ToString();
+                    filterExpression += dataKey;
 
-                if (i == 0)
-                {
-                    thematicItem.Min = Double.PositiveInfinity;
-                    thematicItem.Max = Double.NegativeInfinity;
-                    thematicItem.MinName = string.Empty;
-                    thematicItem.MaxName = string.Empty;
-                }
-                else
-                {
-                    if (graphicValue < thematicItem.Min) { thematicItem.Min = graphicValue; thematicItem.MinName = graphicName; }
-                    if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity) { thematicItem.Max = graphicValue; thematicItem.MaxName = graphicName; }
-                }
+                    if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
+                    {
+                        filterExpression += "]";
+                    }
 
-                if (graphicValue < Double.PositiveInfinity)
-                {
-                    valueList.Add(graphicValue);
+                    filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim() + "'";
+                    double graphicValue = Double.PositiveInfinity;
+                    try
+                    {
+                        graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][valueField]);
+                    }
+                    catch (Exception ex)
+                    {
+                        graphicValue = Double.PositiveInfinity;
+                    }
+
+                    string graphicName = graphicFeature.Attributes[shapeKey].ToString();
+
+                    if (i == 0)
+                    {
+                        thematicItem.Min = Double.PositiveInfinity;
+                        thematicItem.Max = Double.NegativeInfinity;
+                        thematicItem.MinName = string.Empty;
+                        thematicItem.MaxName = string.Empty;
+                    }
+                    else
+                    {
+                        if (graphicValue < thematicItem.Min) { thematicItem.Min = graphicValue; thematicItem.MinName = graphicName; }
+                        if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity) { thematicItem.Max = graphicValue; thematicItem.MaxName = graphicName; }
+                    }
+
+                    if (graphicValue < Double.PositiveInfinity)
+                    {
+                        valueList.Add(graphicValue);
+                    }
                 }
             }
-
             thematicItem.RangeStarts = new List<double>();
 
             double totalRange = thematicItem.Max - thematicItem.Min;
