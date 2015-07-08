@@ -708,6 +708,9 @@
                 End If
             End While
             lcl = Math.Round(pp * n)
+            If Double.IsNaN(pvalue) Then
+                lcl = -1
+            End If
         End If
         pp = 1.0
         pvalue = 0.0
@@ -724,6 +727,9 @@
                 End If
             End While
             ucl = Math.Round(pp * n)
+            If Double.IsNaN(pvalue) Then
+                ucl = -1
+            End If
         End If
     End Function
 
