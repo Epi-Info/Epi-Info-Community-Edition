@@ -124,6 +124,8 @@ namespace EpiDashboard.Gadgets.StatCalc
                     txtGreaterThan.Text = greaterThan.ToString("F7");
                     txtPValue.Text = pValue.ToString("F7");
                     txt95Ci.Text = lcl + " - " + ucl;
+                    if (lcl == -1 || ucl == -1)
+                        txt95Ci.Text = "Cannot compute";
                 }
                 else
                 {
