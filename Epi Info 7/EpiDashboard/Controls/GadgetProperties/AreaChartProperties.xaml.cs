@@ -1396,5 +1396,11 @@ namespace EpiDashboard.Controls.GadgetProperties
                 txtLegendFontSize.Text = "12";
             }
         }
+
+        private void txtMaxVarNameLength_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Util.IsWholeNumber(e.Text);
+            base.OnPreviewTextInput(e);
+        }
     }
 }
