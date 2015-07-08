@@ -35,6 +35,11 @@
                 <ComboBox x:Name="cbxValue" Width="110"/>
             </StackPanel>
         </StackPanel>
+        <Rectangle VerticalAlignment="Bottom" x:Name="rctMissingColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#FFFF00" Margin="0,0,51,0" Visibility="Collapsed">
+            <Rectangle.ToolTip>
+                <Label Content="Missing value color"/>
+            </Rectangle.ToolTip>
+        </Rectangle>
         <Rectangle VerticalAlignment="Bottom" x:Name="rctLowColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,51,0" Visibility="Collapsed">
             <Rectangle.ToolTip>
                 <Label Content="Low value color"/>

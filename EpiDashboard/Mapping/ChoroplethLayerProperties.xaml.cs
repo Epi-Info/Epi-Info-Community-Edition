@@ -217,7 +217,7 @@ namespace EpiDashboard.Mapping
             lblTitle.Visibility = System.Windows.Visibility.Visible;
         }
                 
-        public void SetValues(string shapefilepath, string shapekey, string datakey, string val, string classes, Brush Highcolor, Brush Lowcolor, IDictionary<string, object> shapeAttributes, Dictionary<int, object> classAttrib, bool flagquintiles, int numclasses)
+        public void SetValues(string shapefilepath, string shapekey, string datakey, string val, string classes, Brush Highcolor, Brush Lowcolor, Brush Missingcolor, IDictionary<string, object> shapeAttributes, Dictionary<int, object> classAttrib, bool flagquintiles, int numclasses)
         {
             FillComboBoxes();
             if (shapeAttributes != null)
@@ -234,6 +234,7 @@ namespace EpiDashboard.Mapping
             shapeFilePath = shapefilepath;
             rctHighColor.Fill = (SolidColorBrush)Highcolor;
             rctLowColor.Fill = (SolidColorBrush)Lowcolor;
+            rctMissingColor.Fill = (SolidColorBrush)Missingcolor;
             cbxClasses.Text = classes;
             cbxShapeKey.Text = shapekey;
             cbxDataKey.Text = datakey;
@@ -263,7 +264,8 @@ namespace EpiDashboard.Mapping
             string value = cbxValue.SelectedItem.ToString();
             SolidColorBrush highColor = (SolidColorBrush)rctHighColor.Fill;
             SolidColorBrush lowColor = (SolidColorBrush)rctLowColor.Fill;
-            string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() + "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor><classes>" + cbxClasses.SelectedIndex.ToString() + "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>";
+            SolidColorBrush missingColor = (SolidColorBrush)rctMissingColor.Fill;
+            string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() + "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor><missingColor>" + missingColor.Color.ToString() + "</missingColor><classes>" + cbxClasses.SelectedIndex.ToString() + "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>";
             System.Xml.XmlElement element = doc.CreateElement("dataLayer");
             element.InnerXml = xmlString;
             element.AppendChild(dashboardHelper.Serialize(doc));
@@ -327,6 +329,10 @@ namespace EpiDashboard.Mapping
                 if (child.Name.Equals("lowColor"))
                 {
                     rctLowColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
+                }
+                if (child.Name.Equals("missingColor"))
+                {
+                    rctMissingColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
                 }
             }
             RenderMap();
