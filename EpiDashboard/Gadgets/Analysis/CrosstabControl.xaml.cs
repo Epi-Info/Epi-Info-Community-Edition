@@ -1479,6 +1479,11 @@ namespace EpiDashboard
                 {
                     //twoByTwoPanel.ExposureVariable = this.GadgetOptions.MainVariableName;
                     twoByTwoPanel.ExposureVariable = crosstabParameters.ColumnNames[0];
+                    //EI-403
+                    if (twoByTwoPanel.ExposureVariable.Length > MaxColumnLength)
+                    {
+                        twoByTwoPanel.ExposureVariable = twoByTwoPanel.ExposureVariable.Substring(0, MaxColumnLength) + "...";
+                    }
                     //--Ei-83
                     if (crosstabParameters.UsePromptsForColumnNames == true) { twoByTwoPanel.ExposureVariable = ShowFieldPrompt(crosstabParameters.ColumnNames[0]); }
                     //--
@@ -1488,8 +1493,12 @@ namespace EpiDashboard
                         expander.Visibility = System.Windows.Visibility.Collapsed;
                     }
                 }
-               
+               //EI-403
                 twoByTwoPanel.OutcomeVariable = crosstabParameters.CrosstabVariableName;
+                if (twoByTwoPanel.OutcomeVariable.Length > MaxColumnLength)
+                {
+                    twoByTwoPanel.OutcomeVariable = twoByTwoPanel.OutcomeVariable.Substring(0, MaxColumnLength) + "...";
+                }
                 //Ei-83
                  if (crosstabParameters.UsePromptsForColumnNames == true)
                     twoByTwoPanel.OutcomeVariable = ShowFieldPrompt(crosstabParameters.CrosstabVariableName);
