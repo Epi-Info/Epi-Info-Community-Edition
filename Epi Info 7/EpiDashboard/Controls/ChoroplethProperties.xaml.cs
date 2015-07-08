@@ -176,6 +176,26 @@ namespace EpiDashboard.Controls
             panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+            CheckandVerifyShapeKeys();
+        }
+
+        private void CheckandVerifyShapeKeys()
+        {
+            if (radMapServer.IsChecked == true)
+            {
+                foreach (string key in choroserverlayerprop.curfeatureAttributes.Keys)
+                {
+                    if (cmbShapeKey.Items.Contains(key))
+                    { return; }
+                }
+
+                cmbShapeKey.Items.Clear();
+                foreach (string key in choroserverlayerprop.curfeatureAttributes.Keys)
+                {
+                    cmbShapeKey.Items.Add(key);
+                }
+            }
+            
         }
 
         private void tbtnFilters_Checked(object sender, RoutedEventArgs e)
