@@ -268,6 +268,74 @@
         Return chooseyforgep
     End Function
 
+    Function chooseyforbeta(ByVal chooa As Double, ByVal choob As Double, ByVal p As Double, ByVal j As Integer)
+        Dim q As Double
+        q = 1 - p
+        Dim pPow As Integer
+        pPow = j
+        Dim qPow As Integer
+        qPow = chooa - j
+        Dim ccccc As Double
+        ccccc = chooa - choob
+        If choob < chooa / 2 Then
+            choob = ccccc
+        End If
+        Dim choosey As Double
+        choosey = 1.0
+        Dim oldchoosey As Double
+        oldchoosey = choosey
+        Dim positive200s As Integer
+        Dim negative200s As Integer
+        positive200s = 0
+        negative200s = 0
+
+        For i = choob + 1 To chooa
+            oldchoosey = choosey
+            If choosey < Math.Pow(10, -200) Then
+                choosey = choosey * Math.Pow(10, 200)
+                positive200s = positive200s + 1
+            End If
+            If choosey > Math.Pow(10, 200) Then
+                choosey = choosey * Math.Pow(10, -200)
+                negative200s = negative200s + 1
+            End If
+            If pPow > 0 Then
+                choosey = choosey * p
+                pPow = pPow - 1
+            End If
+            If qPow > 0 Then
+                choosey = choosey * q
+                qPow = qPow - 1
+            End If
+            choosey = (choosey * i) / (chooa - (i - 1))
+        Next
+
+        For i = 0 To pPow - 1
+            oldchoosey = choosey
+            choosey = choosey * p
+        Next
+
+        For i = 0 To qPow - 1
+            oldchoosey = choosey
+            choosey = choosey * q
+        Next
+        If positive200s > negative200s Then
+            positive200s = positive200s - negative200s
+            For i = 0 To positive200s - 1
+                oldchoosey = choosey
+                choosey = choosey * Math.Pow(10, -200)
+            Next
+        ElseIf positive200s < negative200s Then
+            negative200s = negative200s - positive200s
+            For i = 0 To negative200s - 1
+                oldchoosey = choosey
+                choosey = choosey * Math.Pow(10, 200)
+            Next
+        End If
+
+        Return choosey
+    End Function
+
     Function exactorln(ByVal aas() As Double, ByVal bbs() As Double, ByVal ccs() As Double, ByVal dds() As Double)
         Dim Tables As Double
         Tables = UBound(aas)
@@ -700,7 +768,7 @@
         If x > 0 Then
             While b - a > 0.00001
                 pp = (a + b) / 2.0
-                pvalue = ribetafunction(pp, x, n - x + 1)
+                pvalue = ribetafunction(pp, x, n - x + 1, True)
                 If pvalue > LowerDesiredPValue Then
                     b = pp
                 Else
@@ -719,7 +787,7 @@
         If x < n Then
             While b - a > 0.00001
                 pp = (a + b) / 2.0
-                pvalue = ribetafunction(pp, x + 1, n - x)
+                pvalue = ribetafunction(pp, x + 1, n - x, True)
                 If pvalue > UpperDesiredPValue Then
                     b = pp
                 Else
@@ -817,6 +885,20 @@
                 cc = cc * ((alpha + beta - 1 - j) - i)
             Next
             functionvalue = functionvalue + (aa / (bb * cc)) * p ^ j * (1 - p) ^ (alpha + beta - 1 - j)
+        Next
+
+        Return functionvalue
+    End Function
+
+    Function ribetafunction(ByVal p As Double, ByVal alpha As Integer, ByVal beta As Integer, UseChoosey As Boolean)
+        Dim functionvalue As Double
+        Dim functionadd As Double
+        functionvalue = 0.0
+        functionadd = 0.0
+
+        For j = alpha To alpha + beta - 1
+            functionadd = chooseyforbeta(alpha + beta - 1, j, p, j)
+            functionvalue = functionvalue + functionadd
         Next
 
         Return functionvalue
