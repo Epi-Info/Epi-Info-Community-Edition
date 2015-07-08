@@ -1507,6 +1507,7 @@ namespace EpiDashboard.Mapping
             choroplethproperties.cmbValue.Text = choroplethlayerprop.cbxValue.Text;
             choroplethproperties.rctHighColor.Fill = choroplethlayerprop.rctHighColor.Fill;
             choroplethproperties.rctLowColor.Fill = choroplethlayerprop.rctLowColor.Fill;
+            choroplethproperties.rctMissingColor.Fill = choroplethlayerprop.rctMissingColor.Fill;
                    
             choroplethlayerprop.FlagRunEdit = true;
 

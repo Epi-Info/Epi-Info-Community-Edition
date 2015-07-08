@@ -37,6 +37,7 @@ namespace EpiDashboard.Mapping
         string _shapeKey;
         string _dataKey;
         string _valueField;
+        string _missingText;
         Guid _layerId;
         List<SolidColorBrush> _colors;
         int _classCount;
@@ -355,11 +356,11 @@ namespace EpiDashboard.Mapping
         {
             if (_dashboardHelper != null)
             {
-                SetShapeRangeValues(_dashboardHelper, _shapeKey, _dataKey, _valueField, _colors, _classCount);
+                SetShapeRangeValues(_dashboardHelper, _shapeKey, _dataKey, _valueField, _colors, _classCount, _missingText);
             }
         }
 
-        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount)
+        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string missingText)
         {
             try
             {
@@ -369,6 +370,7 @@ namespace EpiDashboard.Mapping
                 _dataKey = dataKey;
                 _valueField = valueField;
                 _colors = colors;
+                _missingText = missingText;
 
                 DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
 
@@ -405,7 +407,7 @@ namespace EpiDashboard.Mapping
 
                         SimpleFillSymbol symbol = new SimpleFillSymbol()
                         {
-                            Fill = graphicValue == Double.PositiveInfinity ? new SolidColorBrush(Colors.Transparent) : colors[brushIndex],
+                            Fill = graphicValue == Double.PositiveInfinity ? colors[colors.Count-1] : colors[brushIndex],
                             BorderBrush = new SolidColorBrush(Colors.Black),
                             BorderThickness = 1
                         };
@@ -446,6 +448,23 @@ namespace EpiDashboard.Mapping
                 legendList.BorderThickness = new Thickness(3);
                 //LegendTitle.Text = thematicItem.Description;
 
+                Rectangle missingSwatchRect = new Rectangle()
+                {
+                    Width = 20,
+                    Height = 20,
+                    Stroke = new SolidColorBrush(Colors.Black),
+                    Fill = colors[colors.Count - 1]
+                };
+
+                TextBlock missingClassTextBlock = new TextBlock();
+                missingClassTextBlock.Text = String.Format("  " + missingText);
+                StackPanel missingClassStackPanel = new StackPanel();
+                missingClassStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+                missingClassStackPanel.Children.Add(missingSwatchRect);
+                missingClassStackPanel.Children.Add(missingClassTextBlock);
+
+                legendList.Items.Add(missingClassStackPanel);
+
                 for (int c = 0; c < classCount; c++)
                 {
                     try
@@ -460,14 +479,20 @@ namespace EpiDashboard.Mapping
 
                         TextBlock classTextBlock = new TextBlock();
 
-                        if (c == 0)
-                        {
-                            if (thematicItem.RangeStarts[1] == thematicItem.Min)
-                                classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(thematicItem.RangeStarts[1], 2));
-                            else
-                                classTextBlock.Text = String.Format("  Less than {0}", Math.Round(thematicItem.RangeStarts[1], 2));
-                        }
-                        else if (c == classCount - 1)
+                        //if (c == 0)
+                        //{
+                        //    //if (thematicItem.RangeStarts[1] == thematicItem.Min)
+                        //    //    classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(thematicItem.RangeStarts[1], 2));
+                        //    //else
+                        //    //    classTextBlock.Text = String.Format("  Less than {0}", Math.Round(thematicItem.RangeStarts[1], 2));
+                        //    if (thematicItem.RangeStarts[c] == thematicItem.RangeStarts[c + 1])
+                        //        classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(thematicItem.RangeStarts[c], 2));
+                        //    else
+                        //        classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(thematicItem.RangeStarts[c], 2), Math.Round(thematicItem.RangeStarts[c + 1], 2));
+                       
+                        //}
+                        //else 
+                        if (c == classCount - 1)
                             classTextBlock.Text = String.Format("  {0} and above", Math.Round(thematicItem.RangeStarts[c], 2));
                         else if (thematicItem.RangeStarts.Count <= c + 1)
                         {
@@ -497,6 +522,8 @@ namespace EpiDashboard.Mapping
                     {
                     }
                 }
+
+               
 
                 TextBlock minTextBlock = new TextBlock();
                 StackPanel minStackPanel = new StackPanel();
