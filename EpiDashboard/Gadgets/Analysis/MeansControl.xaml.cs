@@ -2559,6 +2559,18 @@ namespace EpiDashboard
 
             infoPanel.Visibility = System.Windows.Visibility.Collapsed;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
+            ((MeansParameters)Parameters).columnsToHide.Clear();
+           ((MeansParameters)Parameters).columnsToHide.Add(1);
+           ((MeansParameters)Parameters).columnsToHide.Add(2);
+           ((MeansParameters)Parameters).columnsToHide.Add(3);
+           ((MeansParameters)Parameters).columnsToHide.Add(4);
+           ((MeansParameters)Parameters).columnsToHide.Add(5);
+           ((MeansParameters)Parameters).columnsToHide.Add(6);
+           ((MeansParameters)Parameters).columnsToHide.Add(7);
+           ((MeansParameters)Parameters).columnsToHide.Add(8);
+           ((MeansParameters)Parameters).columnsToHide.Add(9);
+           ((MeansParameters)Parameters).columnsToHide.Add(10);
+           ((MeansParameters)Parameters).columnsToHide.Add(11);
 
             foreach (XmlElement child in element.ChildNodes)
             {
@@ -2645,7 +2657,7 @@ namespace EpiDashboard
                                 bool success = int.TryParse(s, out columnNumber);
                                 if (success)
                                 {
-                                    ((MeansParameters)Parameters).columnsToHide.Add(columnNumber);
+                                    ((MeansParameters)Parameters).columnsToHide.Remove(columnNumber);
                                 }
                             }
                             break;
