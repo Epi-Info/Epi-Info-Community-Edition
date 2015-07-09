@@ -111,7 +111,7 @@ namespace Epi.Analysis.Dialogs
 
                     if (epiView != null)
                     {
-                         if(epiView.Fields.Contains(currentColumn))
+                        if (epiView.Fields.TableColumnFields.Contains(currentColumn))
                          {
                             switch(epiView.Fields.TableColumnFields[column.Name].FieldType.ToString().ToUpper())
                             {
