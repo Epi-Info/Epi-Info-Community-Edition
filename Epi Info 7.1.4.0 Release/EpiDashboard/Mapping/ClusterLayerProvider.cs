@@ -83,7 +83,8 @@ namespace EpiDashboard.Mapping
             if (clusterLayer != null)
             {
                 clusterLayer.ClearGraphics();
-                RenderClusterMap(this.dashboardHelper, this.latVar, this.longVar, this.clusterColor, this.timeVar, this.description);
+                RenderClusterMap(this.dashboardHelper, this.latVar, this.longVar, this.clusterColor, 
+                    this.timeVar, this.description);
             }
         }
 
@@ -109,7 +110,8 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public void RenderClusterMap(DashboardHelper dashboardHelper, string latVar, string longVar, Brush clusterColor, string timeVar, string description)
+        public void RenderClusterMap(DashboardHelper dashboardHelper, string latVar, string longVar, Brush clusterColor, 
+            string timeVar, string description)
         {
             this.dashboardHelper = dashboardHelper;
             this.latVar = latVar;
@@ -199,7 +201,7 @@ namespace EpiDashboard.Mapping
                 LegendStackPanel.Children.Add(legendList);
             }
 
-
+            
             if (coordinateList.Coordinates.Count > 0)
             {
                 myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(minX - 0.01, minY - 0.01, geoReference)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(maxX + 0.01, maxY + 0.01, geoReference)));
@@ -210,7 +212,8 @@ namespace EpiDashboard.Mapping
 
                         intervalCounts = new List<KeyValuePair<DateTime, int>>();
                         DateTime previousInterval = DateTime.MinValue;
-                        IEnumerable<DateTime> intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(minTime, maxTime), new TimeSpan(1, 0, 0, 0));
+                        IEnumerable<DateTime> intervals = 
+                            TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(minTime, maxTime), new TimeSpan(1, 0, 0, 0));
                         foreach (DateTime interval in intervals)
                         {
                             int count = clusterLayer.Graphics.Count(x => x.TimeExtent.Start <= interval && x.TimeExtent.Start >= previousInterval);
@@ -238,17 +241,18 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        private CustomCoordinateList GetCoordinates(DashboardHelper dashboardHelper, string latVar, string longVar, string timeVar)
+        private CustomCoordinateList GetCoordinates(DashboardHelper dashboardHelper, string latVar, 
+            string longVar, string timeVar)
         {
             List<string> columnNames = new List<string>();
             if (dashboardHelper.IsUsingEpiProject)
                 columnNames.Add("UniqueKey");
             columnNames.Add(latVar);
-            if (!columnNames.Exists(delegate(string s) { return s.Equals(longVar); }))
+            if (!columnNames.Exists(s => s.Equals(longVar)))
                 columnNames.Add(longVar);
             if (!string.IsNullOrEmpty(timeVar))
             {
-                if (!columnNames.Exists(delegate(string s) { return s.Equals(timeVar); }))
+                if (!columnNames.Exists(s => s.Equals(timeVar)))
                     columnNames.Add(timeVar);
             }
             DataTable data = dashboardHelper.GenerateTable(columnNames);
