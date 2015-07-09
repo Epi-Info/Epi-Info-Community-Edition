@@ -1470,8 +1470,8 @@ namespace EpiDashboard.Mapping
              choroplethproperties.radMapServer.IsEnabled = false;
 
               choroplethproperties.panelBoundaries.IsEnabled = true;
-              choroplethproperties.dataFilters = new DataFilters(dashboardHelper);
-              choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.dataFilters, true);
+              choroplethproperties.datafilters = dashboardHelper.DataFilters;
+              choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.datafilters, true);
               choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
               choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
               choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only."; 
@@ -1559,8 +1559,8 @@ namespace EpiDashboard.Mapping
             choroplethproperties.radKML.IsEnabled = false;
 
             choroplethproperties.panelBoundaries.IsEnabled = true;
-            choroplethproperties.dataFilters = new DataFilters(dashboardHelper);
-            choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.dataFilters, true);
+            choroplethproperties.datafilters = dashboardHelper.DataFilters; //new DataFilters(dashboardHelper);
+            choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.datafilters, true);
             choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
             choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
             choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
@@ -1664,8 +1664,8 @@ namespace EpiDashboard.Mapping
             //choroplethproperties.ClearonMapServer();
 
             choroplethproperties.panelBoundaries.IsEnabled = true;
-            choroplethproperties.dataFilters = new DataFilters(dashboardHelper);
-            choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.dataFilters, true);
+            choroplethproperties.datafilters = dashboardHelper.DataFilters; // new DataFilters(dashboardHelper);
+            choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.datafilters, true);
             choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
             choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
             choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";

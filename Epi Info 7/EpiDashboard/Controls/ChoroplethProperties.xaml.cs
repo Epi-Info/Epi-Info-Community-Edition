@@ -38,7 +38,7 @@ namespace EpiDashboard.Controls
         public ChoroplethLayerProperties layerprop;
 
         public RowFilterControl rowFilterControl { get; set; }
-        public DataFilters dataFilters;
+        public DataFilters datafilters;
         private System.Xml.XmlElement currentElement;
         public EpiDashboard.Mapping.ChoroplethKmlLayerProvider choroKMLprovider;
         public EpiDashboard.Mapping.ChoroplethServerLayerProvider choroMapprovider;
@@ -239,6 +239,7 @@ namespace EpiDashboard.Controls
         }
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
+            Addfilters();
             RenderMap();
 
             if (_provider!= null && !ValidateRangeInput())
@@ -290,8 +291,8 @@ namespace EpiDashboard.Controls
                 txtProjectPath.Text = _mapControl.ProjectFilepath;
                 FillComboBoxes();
                 panelBoundaries.IsEnabled = true;
-                this.dataFilters = new DataFilters(_dashboardHelper);
-                rowFilterControl = new RowFilterControl(_dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dataFilters, true);
+                this.datafilters = new DataFilters(_dashboardHelper);
+                rowFilterControl = new RowFilterControl(_dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, datafilters, true);
                 rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; rowFilterControl.FillSelectionComboboxes();
                 panelFilters.Children.Add(rowFilterControl);
                 txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
@@ -1424,6 +1425,89 @@ namespace EpiDashboard.Controls
                 }
               //  RenderMap();
             }
+        }
+
+        private void Addfilters()
+        {
+            string sfilterOperand = string.Empty;
+            string[] shilowvars;
+            string svarname;
+
+            this.datafilters = rowFilterControl.DataFilters;
+
+            List<string> sconditionval = datafilters.GetFilterConditionsAsList();
+            string strreadablecondition = datafilters.GenerateReadableDataFilterString().Trim();
+            if (!(string.IsNullOrEmpty(strreadablecondition)))
+            {
+                if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_MISSING;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_OR))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_OR;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LIKE))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LIKE;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_AND))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_AND;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_IS_ANY_OF ))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_IS_ANY_OF;
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_IS_NOT_ANY_OF))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_IS_NOT_ANY_OF;
+                }
+                if (!(strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN)))
+                {
+                    svarname = strreadablecondition.Substring(strreadablecondition.IndexOf("[") + 1, strreadablecondition.IndexOf("]") - strreadablecondition.IndexOf("[") - 1);
+                    _dashboardHelper.AddDataFilterCondition(sfilterOperand, sconditionval[0].ToString(), svarname, ConditionJoinType.And);
+                }
+                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
+                {
+                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_BETWEEN;
+                    string strcondition = strreadablecondition.Substring(0, strreadablecondition.IndexOf(sfilterOperand)).Trim();
+                    string[] strVarstrings = strcondition.Split(' ');
+                    svarname = strVarstrings[3].ToString();
+                    string sValues = strreadablecondition.ToString().Substring(strreadablecondition.IndexOf(sfilterOperand) + sfilterOperand.Length, (strreadablecondition.ToString().Length) - (strreadablecondition.ToString().IndexOf(sfilterOperand) + sfilterOperand.Length)).Trim();
+                    shilowvars = sValues.Split(' ');
+                    _dashboardHelper.AddDataFilterCondition(sfilterOperand, shilowvars[0].ToString(), shilowvars[2].ToString(), svarname, ConditionJoinType.And);
+                }
+            }
+
         }
 
         void choroKMLprovider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
