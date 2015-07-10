@@ -111,7 +111,6 @@ namespace EpiDashboard.Mapping
                     MessageBox.Show("There are too many Time Stops associated with the selected field ", "Error",
                         MessageBoxButtons.OK);
                     cmbVariable.SelectedIndex = 0;
-
                     return;
                 }
             }
@@ -127,8 +126,7 @@ namespace EpiDashboard.Mapping
             }
         }       
 
-        public void Closep
-            opup()
+        public void Closepopup()
         {
 
   
