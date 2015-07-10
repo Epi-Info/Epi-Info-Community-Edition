@@ -9,8 +9,13 @@ using System.Windows.Forms;
 
 namespace EpiDashboard.Mapping
 {
+
     public partial class TimeConfigDialog : Form
     {
+
+        List<DashboardHelper> dashboardHelpers = new List<DashboardHelper>();
+
+
         public TimeConfigDialog(Epi.View view)
         {
             InitializeComponent();
@@ -20,6 +25,7 @@ namespace EpiDashboard.Mapping
         public TimeConfigDialog(List<DashboardHelper> dashboardHelpers)
         {
             InitializeComponent();
+            this.dashboardHelpers = dashboardHelpers;
             FillComboBox(dashboardHelpers);
         }
 
@@ -65,6 +71,20 @@ namespace EpiDashboard.Mapping
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            long count;
+            //    MapUIHelper muMapUiHelper = new MapUIHelper();
+
+            foreach (DashboardHelper dashboardHelper in dashboardHelpers)
+            {
+                count = MapUIHelper.CountTimeStopsByTimeInterval(dashboardHelper, cbxTime.SelectedItem.ToString());
+                if (count > 1000)
+                {
+                    MessageBox.Show("There are too many Time Stops associated with the selected field ", "Error",
+                        MessageBoxButtons.OK);
+                    return;
+                }
+            }
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

@@ -6,11 +6,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.Forms.MessageBox;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace EpiDashboard.Mapping
 {
@@ -24,6 +27,9 @@ namespace EpiDashboard.Mapping
         private IMapControl mapControl;
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;
+
+        List<DashboardHelper> dashboardHelpers = new List<DashboardHelper>();
+
 
         public string TimeVariable
         {
@@ -43,6 +49,7 @@ namespace EpiDashboard.Mapping
             provider = new ClusterLayerProvider(myMap);
             this.mapControl = mapControl;
             mapControl.TimeVariableSet += new TimeVariableSetHandler(mapControl_TimeVariableSet);
+            this.dashboardHelpers = dashboardHelpers;
             FillComboBox(dashboardHelpers);            
         }
 
@@ -94,6 +101,21 @@ namespace EpiDashboard.Mapping
 
         private void cmbVariable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            long count;
+
+            foreach (DashboardHelper dashboardHelper in dashboardHelpers)
+            {
+                count = MapUIHelper.CountTimeStopsByTimeInterval(dashboardHelper, cmbVariable.SelectedItem.ToString());
+                if (count > 1000)
+                {
+                    MessageBox.Show("There are too many Time Stops associated with the selected field ", "Error",
+                        MessageBoxButtons.OK);
+                    cmbVariable.SelectedIndex = 0;
+
+                    return;
+                }
+            }
+
             btnOK.IsEnabled = (cmbVariable.SelectedIndex != -1);
         }
 
@@ -105,8 +127,11 @@ namespace EpiDashboard.Mapping
             }
         }       
 
-        public void Closepopup()
+        public void Closep
+            opup()
         {
+
+  
             if (ChangesAccepted != null)
             {
                 ChangesAccepted(this, new EventArgs());

@@ -565,6 +565,7 @@
     <Compile Include="Mapping\ChoroplethKmlLayerProperties.xaml.cs">
       <DependentUpon>ChoroplethKmlLayerProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\MapUIHelper.cs" />
     <Compile Include="Mapping\PointLayerProperties.xaml.cs">
       <DependentUpon>PointLayerProperties.xaml</DependentUpon>
     </Compile>
