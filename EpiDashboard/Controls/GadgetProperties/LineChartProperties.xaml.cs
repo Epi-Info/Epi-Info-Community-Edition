@@ -430,7 +430,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             //Display settings ///////////////////////////////////////////
 
             Parameters.GadgetTitle = txtTitle.Text;
-            //Parameters.GadgetDescription = txtDesc.Text;
+            Parameters.GadgetDescription = txtDesc.Text;
             Parameters.ChartWidth = double.Parse(txtWidth.Text);
             Parameters.ChartHeight = double.Parse(txtHeight.Text);
             Parameters.ShowAllListValues = (bool)checkboxAllValues.IsChecked;
@@ -572,10 +572,10 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.XAxisAngle = int.Parse(txtXAxisAngle.Text);
             }
 
-            //Parameters.ChartTitle = txtChartTitle.Text;           
-            //Parameters.ChartSubTitle = txtChartSubTitle.Text;
-            Parameters.ChartTitle = txtTitle.Text;
-            Parameters.ChartSubTitle = txtDesc.Text;
+            Parameters.ChartTitle = txtChartTitle.Text;           
+            Parameters.ChartSubTitle = txtChartSubTitle.Text;
+           // Parameters.ChartTitle = txtTitle.Text;
+          //  Parameters.ChartSubTitle = txtDesc.Text;
 
             //Legend settings /////////////////////////////////
 
@@ -688,6 +688,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             scrollViewerProperties.MaxHeight = scrollViewerProperties.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
             txtTitle.Text = Parameters.GadgetTitle;
             txtDesc.Text = Parameters.GadgetDescription;
+            txtChartTitle.Text = Parameters.ChartTitle;
+            txtChartSubTitle.Text = Parameters.ChartSubTitle;
             txtWidth.Text = Parameters.ChartWidth.ToString();
             txtHeight.Text = Parameters.ChartHeight.ToString();
 
