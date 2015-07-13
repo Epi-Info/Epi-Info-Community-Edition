@@ -47,7 +47,7 @@ namespace EpiDashboard.Controls.Charting
             //xyChart.DefaultGridLinesVisible = Settings.ShowDefaultGridLines;
             //xyChart.LegendDock = Settings.LegendDock;
 
-            xyChart.Width = ColumnChartParameters.ChartWidth;
+            xyChart.Width = ColumnChartParameters.ChartWidth+64;
             xyChart.Height = ColumnChartParameters.ChartHeight;
 
             //xyChart.Palette = ColumnChartParameters.Palette;
