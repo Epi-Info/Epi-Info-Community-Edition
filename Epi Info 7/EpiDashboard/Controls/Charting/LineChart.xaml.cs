@@ -130,6 +130,7 @@ namespace EpiDashboard.Controls.Charting
 
             tblockChartTitle.Text = LineChartParameters.ChartTitle;
             tblockSubTitle.Text = LineChartParameters.ChartSubTitle;
+            
             tblockStrataTitle.Text = LineChartParameters.ChartStrataTitle;
 
             if (string.IsNullOrEmpty(tblockChartTitle.Text)) tblockChartTitle.Visibility = System.Windows.Visibility.Collapsed;

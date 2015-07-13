@@ -16,12 +16,15 @@ namespace EpiDashboard
             : base()
         {
             LineType = string.Empty;
-            GadgetTitle = "Line Chart";
             LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Right;
             YAxisFontSize = 12;
             YAxisLabelFontSize = 12;
             XAxisFontSize = 12;
             XAxisLabelFontSize = 12;
+            ChartTitle = String.Empty;
+            ChartSubTitle = String.Empty;
+            GadgetTitle = "Line Chart";
+            GadgetDescription = String.Empty;
         }
 
         /// <summary>
@@ -35,6 +38,10 @@ namespace EpiDashboard
             YAxisLabelFontSize = parameters.YAxisLabelFontSize;
             XAxisFontSize = parameters.XAxisFontSize;
             XAxisLabelFontSize = parameters.XAxisLabelFontSize;
+            ChartTitle = parameters.ChartTitle;
+            ChartSubTitle = parameters.ChartSubTitle;
+            GadgetTitle = parameters.GadgetTitle;
+            GadgetDescription = parameters.GadgetDescription;
         }
 
     }

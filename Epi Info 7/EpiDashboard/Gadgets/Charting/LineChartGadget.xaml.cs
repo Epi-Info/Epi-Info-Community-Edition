@@ -39,6 +39,15 @@ namespace EpiDashboard.Gadgets.Charting
         private bool IsRecoded { get; set; }
         private bool IsOptionField { get; set; }
 
+        /// A custom heading to use for this gadget's output
+        /// </summary>
+        private string customOutputHeading;
+
+        /// <summary>
+        /// A custom description to use for this gadget's output
+        /// </summary>
+        private string customOutputDescription;
+
         public LineChartGadget()
         {
             InitializeComponent();
@@ -1140,6 +1149,38 @@ namespace EpiDashboard.Gadgets.Charting
             properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
             Popup.Content = properties;
             Popup.Show();
+        }
+
+        /// <summary>
+        /// Gets/sets the gadget's custom output heading
+        /// </summary>
+        public override string CustomOutputHeading
+        {
+            get
+            {
+                return this.customOutputHeading;
+            }
+            set
+            {
+                this.customOutputHeading = value;
+                headerPanel.Text = CustomOutputHeading;
+            }
+        }
+
+        /// <summary>
+        /// Gets/sets the gadget's custom output description
+        /// </summary>
+        public override string CustomOutputDescription
+        {
+            get
+            {
+                return this.customOutputDescription;
+            }
+            set
+            {
+                this.customOutputDescription = value;
+                descriptionPanel.Text = CustomOutputDescription;
+            }
         }
 
         /// <summary>
