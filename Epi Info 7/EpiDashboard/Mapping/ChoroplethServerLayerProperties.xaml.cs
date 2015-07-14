@@ -43,6 +43,7 @@ namespace EpiDashboard.Mapping
         public string cbxMapserverText;
         public string txtMapserverText;
         public string cbxMapFeatureText;
+        public int cbxMapFeatureIndex;
 
         public IDictionary<string, object> curfeatureAttributes;
 
@@ -157,6 +158,7 @@ namespace EpiDashboard.Mapping
 
         private void rctEdit_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            flagrunedit = false;
             if (EditRequested != null)
             {
                 flagrunedit = false;

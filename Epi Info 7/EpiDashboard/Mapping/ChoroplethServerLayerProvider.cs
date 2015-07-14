@@ -45,6 +45,7 @@ namespace EpiDashboard.Mapping
         private int classCount;
         string[,] rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
         float[]  quantileValues = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+        private bool flagupdatetoglfailed ;
 
         public event FeatureLoadedHandler FeatureLoaded;
 
@@ -73,6 +74,11 @@ namespace EpiDashboard.Mapping
 
         public int RangeCount { get; set; }
 
+        public bool FlagUpdateToGLFailed
+        {
+            get { return flagupdatetoglfailed; }
+            set { flagupdatetoglfailed = value; }
+        }
 
         public struct ThematicItem
         {
@@ -333,6 +339,8 @@ namespace EpiDashboard.Mapping
             //int x = 5;
             //x++;
             myMap.Cursor = Cursors.Arrow;
+            flagupdatetoglfailed = true;
+           
         }
 
         void graphicsLayer_InitializationFailed(object sender, EventArgs e)
@@ -341,6 +349,7 @@ namespace EpiDashboard.Mapping
             //int x = 5;
             //x++;
             myMap.Cursor = Cursors.Arrow;
+            
         }
 
         void graphicsLayer_Initialized(object sender, EventArgs e)
@@ -353,6 +362,7 @@ namespace EpiDashboard.Mapping
         void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
         {
             FeatureLayer graphicsLayer = myMap.Layers[layerId.ToString()] as FeatureLayer;
+            flagupdatetoglfailed = false;
             if (graphicsLayer != null)
             {
                 if (graphicsLayer.Graphics.Count > 0)
