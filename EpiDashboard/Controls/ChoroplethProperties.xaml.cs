@@ -176,28 +176,10 @@ namespace EpiDashboard.Controls
             panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
-            CheckandVerifyShapeKeys();
+            if (choroserverlayerprop != null) 
+              if (choroserverlayerprop.provider.FlagUpdateToGLFailed ) { ResetShapeCombo(); }
+           
         }
-
-        private void CheckandVerifyShapeKeys()
-        {
-            if (radMapServer.IsChecked == true)
-            {
-                foreach (string key in choroserverlayerprop.curfeatureAttributes.Keys)
-                {
-                    if (cmbShapeKey.Items.Contains(key))
-                    { return; }
-                }
-
-                cmbShapeKey.Items.Clear();
-                foreach (string key in choroserverlayerprop.curfeatureAttributes.Keys)
-                {
-                    cmbShapeKey.Items.Add(key);
-                }
-            }
-            
-        }
-
         private void tbtnFilters_Checked(object sender, RoutedEventArgs e)
         {
             if (panelDataSource == null) return;
@@ -239,32 +221,40 @@ namespace EpiDashboard.Controls
         }
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            Addfilters();
-            RenderMap();
+            if (cmbDataKey.SelectedIndex > -1 && cmbShapeKey.SelectedIndex > -1 && cmbValue.SelectedIndex > -1)
+            {
+                Addfilters();
+                RenderMap();
 
-            if (_provider!= null && !ValidateRangeInput())
-                return;
+                if (_provider != null && !ValidateRangeInput())
+                    return;
 
-            AddClassAttributes();
-                      
-            int numclasses = Convert.ToInt32(cmbClasses.Text);
-            bool flagquintiles = (bool)quintilesOption.IsChecked;
+                AddClassAttributes();
 
-            if (radShapeFile.IsChecked == true && _provider != null)
-                 {layerprop.SetValues(txtShapePath.Text, cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, rctMissingColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses); }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
-                {choroserverlayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses); 
-                 choroserverlayerprop.cbxMapserverText = cbxmapserver.Text;
-                 choroserverlayerprop.txtMapserverText = txtMapSeverpath.Text;
-                 choroserverlayerprop.cbxMapFeatureText = cbxmapfeature.Text;}
-        
-            else if (radKML.IsChecked == true  && choroKMLprovider !=null)
+                int numclasses = Convert.ToInt32(cmbClasses.Text);
+                bool flagquintiles = (bool)quintilesOption.IsChecked;
+
+                if (radShapeFile.IsChecked == true && _provider != null)
+                { layerprop.SetValues(txtShapePath.Text, cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, rctMissingColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses); }
+                else if (radMapServer.IsChecked == true && choroMapprovider != null)
+                {
+                    choroserverlayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses);
+                    choroserverlayerprop.cbxMapserverText = cbxmapserver.Text;
+                    choroserverlayerprop.txtMapserverText = txtMapSeverpath.Text;
+                    choroserverlayerprop.cbxMapFeatureText = cbxmapfeature.Text;
+                    choroserverlayerprop.cbxMapFeatureIndex = cbxmapfeature.SelectedIndex;
+                }
+
+                else if (radKML.IsChecked == true && choroKMLprovider != null)
                 { chorokmllayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses); }
 
-            if (ChangesAccepted != null)
-            {
-                ChangesAccepted(this, new EventArgs());
+                if (ChangesAccepted != null)
+                {
+                    ChangesAccepted(this, new EventArgs());
+                }
             }
+            else
+                tbtnDataSource.IsChecked = true;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -1380,7 +1370,7 @@ namespace EpiDashboard.Controls
             }
         }
                 
-        void choroMapprovider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
+        public void choroMapprovider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
         {
             if (!string.IsNullOrEmpty(serverName))
             {
@@ -1395,9 +1385,8 @@ namespace EpiDashboard.Controls
                         cmbShapeKey.Items.Add(key);
                         choroserverlayerprop.cbxShapeKey.Items.Add(key);
                     }
-                    cmbShapeKey.Items.Refresh();
-                }
-            }
+                 }
+             }
             if (currentElement != null)
             {
                 foreach (System.Xml.XmlElement child in currentElement.ChildNodes)
@@ -1744,7 +1733,7 @@ namespace EpiDashboard.Controls
             txtMapSeverpath.Text = string.Empty;
         }
 
-        private void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ResetMapServer();
         }
@@ -1791,6 +1780,29 @@ namespace EpiDashboard.Controls
             cbxmapserver.SelectedIndex = -1;
         }
 
+        private void ResetShapeCombo()
+        {
+            //In case of map server
+            if (radMapServer.IsChecked == true )
+            {
+                cmbShapeKey.Items.Clear();
+                cmbShapeKey.SelectedIndex = -1;
+                if (choroserverlayerprop != null)
+                {
+                    choroserverlayerprop.cbxShapeKey.Items.Clear();
+                    choroserverlayerprop.cbxShapeKey.SelectedIndex = -1;
+                 }
+                /*
+                //set back choroMapprovider
+                if (choroMapprovider == null)
+                {
+                    choroMapprovider = new Mapping.ChoroplethServerLayerProvider(_myMap);
+                    choroMapprovider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
+                    choroserverlayerprop.provider.FeatureLoaded -= new FeatureLoadedHandler(choroserverlayerprop.provider_FeatureLoaded);
+                 } */
+            }
+        }
+
         private void btnMapserverlocate_Click(object sender, RoutedEventArgs e)
         {
             MapServerConnect();
@@ -1819,9 +1831,13 @@ namespace EpiDashboard.Controls
             btnMapserverlocate.IsEnabled = txtMapSeverpath.Text.Length > 0;
         }
 
-        private void cbxmapfeature_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void cbxmapfeature_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-          
+             MapfeatureSelectionChange();
+        }
+
+        public void MapfeatureSelectionChange()
+        {
             if (cbxmapfeature.Items.Count > 0)
             {
                 MapServerName = txtMapSeverpath.Text;

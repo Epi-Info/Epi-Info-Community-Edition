@@ -1453,8 +1453,7 @@ namespace EpiDashboard.Mapping
             
             choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
             choroplethproperties.layerprop = choroplethlayerprop;
-            choroplethproperties._provider = choroplethlayerprop.provider;
-
+           
             choroplethproperties.Width = 800;
             choroplethproperties.Height = 600;
 
@@ -1464,7 +1463,8 @@ namespace EpiDashboard.Mapping
             choroplethproperties.cmbClasses.Text = choroplethlayerprop.cbxClasses.Text;
             choroplethproperties.quintilesOption.IsChecked = choroplethlayerprop.flagQuantiles;
             if (choroplethlayerprop.flagQuantiles == true) { choroplethproperties.OnQuintileOptionChanged(); }
-            choroplethproperties.ClearonShapeFile();
+            choroplethproperties.ClearonMapServer();
+            choroplethproperties._provider = choroplethlayerprop.provider;
 
              choroplethproperties.radKML.IsEnabled = false;
              choroplethproperties.radMapServer.IsEnabled = false;
@@ -1539,7 +1539,7 @@ namespace EpiDashboard.Mapping
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-
+            choroplethServerlayerprop.CloseLayer();
             choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
             choroplethproperties.choroserverlayerprop = choroplethServerlayerprop;
             choroplethproperties.choroMapprovider = choroplethServerlayerprop.provider;
@@ -1553,7 +1553,7 @@ namespace EpiDashboard.Mapping
             choroplethproperties.cmbClasses.Text = choroplethServerlayerprop.cbxClasses.Text;
             choroplethproperties.quintilesOption.IsChecked = choroplethServerlayerprop.flagQuantiles;
             if (choroplethServerlayerprop.flagQuantiles == true) { choroplethproperties.OnQuintileOptionChanged(); }
-            choroplethproperties.ClearonMapServer();
+            choroplethproperties.ClearonShapeFile();
 
             choroplethproperties.radShapeFile.IsEnabled = false;
             choroplethproperties.radKML.IsEnabled = false;
@@ -1568,48 +1568,57 @@ namespace EpiDashboard.Mapping
             if (string.IsNullOrEmpty(choroplethServerlayerprop.shapeFilePath) == false)
             {
                 choroplethproperties.radMapServer.IsChecked = true;
-                if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13")
+                if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13" && choroplethServerlayerprop.cbxMapFeatureText == "")
                     choroplethServerlayerprop.cbxMapserverText = "NationalMap.gov - New York County Boundaries";
-                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19")
+                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19" && choroplethServerlayerprop.cbxMapFeatureText == "")
                     choroplethServerlayerprop.cbxMapserverText = "NationalMap.gov - Rhode Island Zip Code Boundaries";
-                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17")
+                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17" && choroplethServerlayerprop.cbxMapFeatureText == "")
                     choroplethServerlayerprop.cbxMapserverText = "NationalMap.gov - U.S. State Boundaries";
-                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17")
+                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17" && choroplethServerlayerprop.cbxMapFeatureText == "")
                     choroplethServerlayerprop.cbxMapserverText = "NationalMap.gov - World Boundaries";
                 else
                 {
                     string lastchar = choroplethServerlayerprop.shapeFilePath.Substring(choroplethServerlayerprop.shapeFilePath.Length - 1, 1);
-                    if (char.IsNumber(lastchar, 0) == true)
+                    string lastonebeforechar = choroplethServerlayerprop.shapeFilePath.Substring(choroplethServerlayerprop.shapeFilePath.Length - 2, 1);
+                    if (char.IsNumber(lastchar, 0) == true && char.IsNumber(lastonebeforechar,0) == false)
                         choroplethServerlayerprop.txtMapserverText = choroplethServerlayerprop.shapeFilePath.Substring(0, choroplethServerlayerprop.shapeFilePath.Length - 2);
+                    else if (char.IsNumber(lastchar, 0) == true && char.IsNumber(lastonebeforechar, 0) == true)
+                        choroplethServerlayerprop.txtMapserverText = choroplethServerlayerprop.shapeFilePath.Substring(0, choroplethServerlayerprop.shapeFilePath.Length - 3);
                 }
 
                
                 if (string.IsNullOrEmpty(choroplethServerlayerprop.cbxMapserverText) == false)
                 {
                     choroplethproperties.radconnectmapserver.IsChecked = true;
+                    choroplethproperties.cbxmapserver.SelectionChanged -= choroplethproperties.cbxmapserver_SelectionChanged;
                     choroplethproperties.cbxmapserver.Text = choroplethServerlayerprop.cbxMapserverText;
+                    choroplethproperties.ResetMapServer();
+                    choroplethproperties.cbxmapserver.SelectionChanged += choroplethproperties.cbxmapserver_SelectionChanged;
                 }
                 else
                 {
                     choroplethproperties.radlocatemapserver.IsChecked = true;
                     choroplethproperties.txtMapSeverpath.Text = choroplethServerlayerprop.txtMapserverText;
                     choroplethproperties.MapServerConnect();
-                    choroplethproperties.ResetMapServer();
+                    choroplethproperties.cbxmapfeature.SelectionChanged -= choroplethproperties.cbxmapfeature_SelectionChanged;
+                    choroplethproperties.cbxmapfeature.SelectedIndex = -1;
+                    choroplethproperties.cbxmapfeature.SelectedIndex = choroplethServerlayerprop.cbxMapFeatureIndex;
                     choroplethproperties.cbxmapfeature.Text = choroplethServerlayerprop.cbxMapFeatureText;
-
-                }
-                if (choroplethproperties.choroserverlayerprop.curfeatureAttributes != null)
+                    choroplethproperties.MapfeatureSelectionChange();
+                    choroplethproperties.cbxmapfeature.SelectionChanged += choroplethproperties.cbxmapfeature_SelectionChanged;
+                  }
+               /* if (choroplethproperties.choroserverlayerprop.curfeatureAttributes != null)
                 {
                     foreach (string key in choroplethproperties.choroserverlayerprop.curfeatureAttributes.Keys)
                     { choroplethproperties.cmbShapeKey.Items.Add(key); }
-                }
+                }*/
             }
             
             if (choroplethServerlayerprop.classAttribList != null)
             { choroplethproperties.SetClassAttributes(choroplethServerlayerprop.classAttribList); }
             choroplethproperties.FillComboBoxes();
 
-            choroplethproperties.cmbShapeKey.Text = choroplethServerlayerprop.cbxShapeKey.Text;
+            choroplethproperties.cmbShapeKey.SelectedItem = choroplethServerlayerprop.cbxShapeKey.Text;
             choroplethproperties.cmbDataKey.Text = choroplethServerlayerprop.cbxDataKey.Text;
             choroplethproperties.cmbValue.Text = choroplethServerlayerprop.cbxValue.Text;
             choroplethproperties.rctHighColor.Fill = choroplethServerlayerprop.rctHighColor.Fill;
@@ -1630,9 +1639,13 @@ namespace EpiDashboard.Mapping
             choroplethproperties.Cancelled += new EventHandler(properties_Cancelled);
             choroplethproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
             choroplethproperties.cmbShapeKey.SelectionChanged += new SelectionChangedEventHandler(choroplethproperties.cmbShapeKey_SelectionChanged);
-
+          
+                    
+            
             popup.Content = choroplethproperties;
             popup.Show();
+          
+            
         }
 
         public void GenerateShapeFileChoropleth(ChoroplethKmlLayerProperties choroplethKMLlayerprop)
