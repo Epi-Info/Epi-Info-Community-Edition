@@ -547,7 +547,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exact 95% LCL.
+        ///   Looks up a localized string similar to Exact 95% UCL.
         /// </summary>
         public static string COL_HEADER_EXACT_CI_UPPER {
             get {
@@ -565,7 +565,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fleiss 95% LCL.
+        ///   Looks up a localized string similar to Fleiss 95% UCL.
         /// </summary>
         public static string COL_HEADER_FLEISS_CI_UPPER {
             get {
