@@ -461,18 +461,26 @@ namespace Epi.Windows.MakeView.Forms
             {
                 if (((ViewNode)(projectTree.SelectedNode.Parent)).View.Pages.Count < 150) // TODO: Hard coded (magic) number not allowed. Not sure who wrote this code.
                 {
-                    Page page = ((ViewNode)projectTree.SelectedNode.Parent).View.CreatePage(SharedStrings.INSERTED_PAGE, projectTree.SelectedNode.Index);
-                    PageNode node = ((ViewNode)projectTree.SelectedNode.Parent).InsertPageNode(page, projectTree.SelectedNode.Index);
-                    projectTree.SelectedNode = node;
+                       RenamePageDialog dialog = new RenamePageDialog(this.mainForm, ((ViewNode)projectTree.SelectedNode.Parent).View);
+                       dialog.PageName = "InsertPage"; ;
+                       DialogResult result = dialog.ShowDialog();
+                       string pageName = dialog.PageName;
+                       if (result == DialogResult.OK)
+                       {
+                           Page page = ((ViewNode)projectTree.SelectedNode.Parent).View.CreatePage(pageName, projectTree.SelectedNode.Index);
+                           // Page page = ((ViewNode)projectTree.SelectedNode.Parent).View.CreatePage(SharedStrings.INSERTED_PAGE, projectTree.SelectedNode.Index);
+                           PageNode node = ((ViewNode)projectTree.SelectedNode.Parent).InsertPageNode(page, projectTree.SelectedNode.Index);
+                           projectTree.SelectedNode = node;
 
-                    foreach (TreeNode eachNode in node.Parent.Nodes)
-                    {
-                        if (eachNode is PageNode)
-                        {
-                            ((PageNode)eachNode).Page.Position = eachNode.Index;
-                            ((PageNode)eachNode).Page.SaveToDb();
-                        }
-                    }
+                           foreach (TreeNode eachNode in node.Parent.Nodes)
+                           {
+                               if (eachNode is PageNode)
+                               {
+                                   ((PageNode)eachNode).Page.Position = eachNode.Index;
+                                   ((PageNode)eachNode).Page.SaveToDb();
+                               }
+                           }
+                       }
                 }
                 else
                 {
@@ -483,16 +491,24 @@ namespace Epi.Windows.MakeView.Forms
             {
                 if (((ViewNode)projectTree.SelectedNode).View.Pages.Count < 150) // TODO: Hard coded (magic) number not allowed. Not sure who wrote this code.
                 {
-                    Page page = ((ViewNode)projectTree.SelectedNode).View.CreatePage(SharedStrings.INSERTED_PAGE, 0);
-                    PageNode node = ((ViewNode)projectTree.SelectedNode).InsertPageNode(page, 0);
-                    projectTree.SelectedNode = node;
-
-                    foreach (TreeNode eachNode in node.Parent.Nodes)
+                    RenamePageDialog dialog = new RenamePageDialog(this.mainForm, ((ViewNode)projectTree.SelectedNode).View) ;
+                    dialog.PageName = "InsertPage"; ;
+                    DialogResult result = dialog.ShowDialog();
+                    string pageName = dialog.PageName;
+                    if (result == DialogResult.OK)
                     {
-                        if (eachNode is PageNode)
+                      //Page page = ((ViewNode)projectTree.SelectedNode).View.CreatePage(SharedStrings.INSERTED_PAGE, 0);
+                        Page page = ((ViewNode)projectTree.SelectedNode).View.CreatePage(pageName, 0);
+                        PageNode node = ((ViewNode)projectTree.SelectedNode).InsertPageNode(page, 0);
+                        projectTree.SelectedNode = node;
+
+                        foreach (TreeNode eachNode in node.Parent.Nodes)
                         {
-                            ((PageNode)eachNode).Page.Position = eachNode.Index;
-                            ((PageNode)eachNode).Page.SaveToDb();
+                            if (eachNode is PageNode)
+                            {
+                                ((PageNode)eachNode).Page.Position = eachNode.Index;
+                                ((PageNode)eachNode).Page.SaveToDb();
+                            }
                         }
                     }
                 }
