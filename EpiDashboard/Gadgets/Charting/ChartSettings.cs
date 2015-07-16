@@ -148,8 +148,6 @@ namespace EpiDashboard.Gadgets.Charting
         public int ChartHeight { get; set; }
         public string YAxisFormattingString { get; set; }
         public string Y2AxisFormattingString { get; set; }
-        public bool Y2IsCumulativePercent { get; set; }
-
         public ComponentArt.Win.DataVisualization.Charting.Dock LegendDock { get; set; }
     }
 

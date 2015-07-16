@@ -566,6 +566,10 @@ namespace EpiDashboard.Gadgets.Charting
                                 case "secondyvartype":
                                     Y2Type y2Type = ((Y2Type)Int32.Parse(child.InnerText));
                                     ((ColumnChartParameters)Parameters).Y2AxisType = int.Parse(child.InnerText.Replace("&lt;", "<"));
+                                    if (((ColumnChartParameters)Parameters).Y2AxisType == 3)
+                                    {
+                                        ((ColumnChartParameters)Parameters).Y2AxisFormat = "P0";
+                                    }
                                     break;
                                 case "sort":
                                     if (child.InnerText.ToLower().Equals("highlow") || child.InnerText.ToLower().Equals("hightolow"))
