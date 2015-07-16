@@ -73,31 +73,8 @@ namespace Epi.UnitTests
         [TestMethod]
         public void LogisticRegressionTest()
         {
-            {
-                string configFilePath = "C:\\EpiInfoMain\\Build\\Debug\\Configuration\\EpiInfo.Config.xml";
-                Epi.DataSets.Config configDataSet = new Epi.DataSets.Config();
-                configDataSet.ReadXml(configFilePath);
-                Epi.Configuration.Load(configFilePath);
-                System.Data.Common.DbConnectionStringBuilder dbCnnStringBuilder = new System.Data.Common.DbConnectionStringBuilder();
-                string provider = "Epi.Data.Office.CsvFileFactory, Epi.Data.Office";
-                IDbDriverFactory dbFactory = null;
-//                Type myType = typeof(Epi.Data.Office.CsvFileFactory);
-                dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(provider);
-                IDbDriver db = dbFactory.CreateDatabaseObject(dbCnnStringBuilder);
-                string savedConnectionStringDescription = "CSV File: C:\\Users\\zfj4";
-                db.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Users\\zfj4;Extended Properties=\"text;HDR=Yes;FMT=Delimited\"";
-                object selectedDataSource = db;
+            getData("EColiFoodHistory");
 
-                string name = "";
-                string connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Users\\zfj4;Extended Properties=\"text;HDR=Yes;FMT=Delimited\"";
-                string dataProvider = "Epi.Data.Office.CsvFileFactory, Epi.Data.Office";
-
-                IDbDriver dbDriver = (IDbDriver)selectedDataSource;
-                DashboardHelper = new DashboardHelper("EColiFoodHistory#csv", dbDriver);
-                IGadgetParameters inputs = new GadgetParameters();
-                DashboardHelper.UserVarsNeedUpdating = true;
-                PopulateDataSet(inputs);
-            }
             Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
             inputVariableList.Add("ill", "dependvar");
             inputVariableList.Add("intercept", "true");
@@ -111,9 +88,37 @@ namespace Epi.UnitTests
 
             StatisticsRepository.LogisticRegression logisticRegression = new StatisticsRepository.LogisticRegression();
             results.regressionResults = logisticRegression.LogisticRegression(inputVariableList, mainTable);
+            System.Diagnostics.Trace.Write(results.regressionResults.variables[0].oddsRatio + "\t" +
+                results.regressionResults.variables[0].ninetyFivePercent + "\t" +
+                results.regressionResults.variables[0].ci + "\t" +
+                results.regressionResults.variables[0].coefficient + "\t" +
+                results.regressionResults.variables[0].se + "\t" +
+                results.regressionResults.variables[0].Z + "\t" +
+                results.regressionResults.variables[0].P + "\n");
         }
 
-        public void PopulateDataSet(IGadgetParameters inputs = null)
+        private void getData(string filename)
+        {
+            string configFilePath = "..\\..\\..\\Build\\Debug\\Configuration\\EpiInfo.Config.xml";
+            Epi.DataSets.Config configDataSet = new Epi.DataSets.Config();
+            configDataSet.ReadXml(configFilePath);
+            Epi.Configuration.Load(configFilePath);
+            System.Data.Common.DbConnectionStringBuilder dbCnnStringBuilder = new System.Data.Common.DbConnectionStringBuilder();
+            string provider = "Epi.Data.Office.CsvFileFactory, Epi.Data.Office";
+            IDbDriverFactory dbFactory = null;
+            dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(provider);
+            IDbDriver db = dbFactory.CreateDatabaseObject(dbCnnStringBuilder);
+            db.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Resources;Extended Properties=\"text;HDR=Yes;FMT=Delimited\"";
+            object selectedDataSource = db;
+
+            IDbDriver dbDriver = (IDbDriver)selectedDataSource;
+            DashboardHelper = new DashboardHelper(filename + "#csv", dbDriver);
+            IGadgetParameters inputs = new GadgetParameters();
+            DashboardHelper.UserVarsNeedUpdating = true;
+            PopulateDataSet(inputs);
+        }
+
+        private void PopulateDataSet(IGadgetParameters inputs = null)
         {
             DataTable unfilteredTable = new DataTable("unfilteredTable");
             unfilteredTable.CaseSensitive = true;
@@ -123,29 +128,15 @@ namespace Epi.UnitTests
                 inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CACHING_WAIT);
             }
 
-//            lock (syncLock)
             {
                 if (ds == null || ds.Tables.Count == 0 || (ds.Tables[0].Rows.Count == 0 && ds.Tables[0].Columns.Count == 0))
                 {
-//                    stopwatch.Start();
-
                     if (inputs != null)
                     {
                         inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CACHING);
                     }
 
-//                    else
-                    {
-//                        if (string.IsNullOrEmpty(this.CustomQuery))
-                        {
-                            unfilteredTable = DashboardHelper.Database.GetTableData(DashboardHelper.TableName);
-                        }
-//                        else
-//                       {
-//                           Query selectQuery = Database.CreateQuery(this.CustomQuery);
-//                            unfilteredTable = Database.Select(selectQuery);
-//                       }
-                    }
+                    unfilteredTable = DashboardHelper.Database.GetTableData(DashboardHelper.TableName);
 
                     if (DashboardHelper.ConnectionsForRelate.Count > 0)
                     {
@@ -158,8 +149,6 @@ namespace Epi.UnitTests
                                 relatedTable = conn.db.GetTableData(conn.TableName);
                                 relatedTable.TableName = conn.TableName;
                             }
-
-//                            RelateInto(unfilteredTable, relatedTable, conn.ParentKeyField, conn.ChildKeyField, conn.UseUnmatched, inputs);
                         }
                     }
 
@@ -169,14 +158,6 @@ namespace Epi.UnitTests
                     ds.Tables.Add(unfilteredTable); //ds.Tables.Add(ConvertTableColumns(unfilteredTable));
                     ds.Tables[0].CaseSensitive = true;
                     mainTable = ds.Tables[0];
-//                    stopwatch.Stop();
-
-//                    ConstructTableColumnNames();
-
-//                    if (UserVarsNeedUpdating)
-//                    {
-//                        ApplyDashboardRules(inputs);
-//                    }
 
                     #region Data Prep for values with spaces (Excel only)
 
@@ -193,10 +174,6 @@ namespace Epi.UnitTests
                         }
                     }
                     #endregion // Data Prep for values with trailing spaces
-
-//                    TimeToCache = stopwatch.Elapsed.ToString();
-//                    DataView tempView = new DataView(ds.Tables[0], GenerateFilterCriteria(), string.Empty, DataViewRowState.CurrentRows);
-//                    RecordCount = tempView.Count;
                 }
                 else
                 {
@@ -205,13 +182,6 @@ namespace Epi.UnitTests
                         inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_PROCESSING);
                     }
                 }
-
-                if (DashboardHelper.UserVarsNeedUpdating)
-                {
-//                    ApplyDashboardRules(inputs);
-                }
-
-//                LastCacheTime = DateTime.Now;
             }
 
             if (inputs != null)
