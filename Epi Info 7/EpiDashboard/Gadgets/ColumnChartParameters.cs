@@ -19,8 +19,6 @@ namespace EpiDashboard
         public CompositionKind Composition { get; set; }
         public Orientation Orientation { get; set; }
         public BarKind BarKind { get; set; }
-        public bool Y2IsCumulativePercent { get; set; }
-        //public int Y2AxisType { get; set; }
         public string ChartStrataTitle { get; set; }
         public string YAxisStacked100Label { get; set; }
 
@@ -150,7 +148,6 @@ namespace EpiDashboard
             ShowLegendVarNames = parameters.ShowLegendVarNames;
             //LegendFontSize in ChartGadgetParametersBase.cs
             LegendDock = parameters.LegendDock;
-            Y2IsCumulativePercent = parameters.Y2IsCumulativePercent;
             YAxisFontSize = parameters.YAxisFontSize;
             YAxisLabelFontSize = parameters.YAxisLabelFontSize;
             XAxisFontSize = parameters.XAxisFontSize;

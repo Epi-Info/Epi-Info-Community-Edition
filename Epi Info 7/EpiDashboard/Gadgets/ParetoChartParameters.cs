@@ -19,8 +19,6 @@ namespace EpiDashboard
         public CompositionKind Composition { get; set; }
         public Orientation Orientation { get; set; }
         public BarKind BarKind { get; set; }
-        public bool Y2IsCumulativePercent { get; set; }
-        //public int Y2AxisType { get; set; }
         public string ChartStrataTitle { get; set; }
 
         #endregion  // Properties
@@ -35,7 +33,6 @@ namespace EpiDashboard
             WeightVariableName = string.Empty;
             CrosstabVariableName = string.Empty;
             Y2AxisType = 0;
-            Y2IsCumulativePercent = true;
             //Parameters.Y2AxisVariable ==> ColumnNames[1]
             //  Sorting/Grouping
             StrataVariableNames = new List<string>();
@@ -149,8 +146,6 @@ namespace EpiDashboard
             ShowLegendVarNames = parameters.ShowLegendVarNames;
             //LegendFontSize in ChartGadgetParametersBase.cs
             LegendDock = parameters.LegendDock;
-            Y2IsCumulativePercent = parameters.Y2IsCumulativePercent;
-
             YAxisFontSize = parameters.YAxisFontSize;
             YAxisLabelFontSize = parameters.YAxisLabelFontSize;
             XAxisFontSize = parameters.XAxisFontSize;

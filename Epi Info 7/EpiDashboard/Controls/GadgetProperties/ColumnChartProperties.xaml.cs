@@ -322,7 +322,11 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
         }
 
-        public ColumnChartParameters Parameters { get; private set; }
+        public ColumnChartParameters Parameters 
+        { 
+            get; 
+            private set; 
+        }
         private List<Grid> StrataGridList { get; set; }
 
         /// <summary>
@@ -391,16 +395,8 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             Parameters.Y2AxisType = cmbSecondYAxis.SelectedIndex;
             if (Parameters.Y2AxisType == 3)
-            //Parameters.Y2LineType = cmbSecondYAxis.SelectedIndex;
-            //if (Parameters.Y2LineType == 3)
             {
-                //Parameters.Y2IsCumulativePercent doesn't appear to get used.
-                Parameters.Y2IsCumulativePercent = true;
                 Parameters.Y2AxisFormat = "P0";
-            }
-            else
-            {
-                Parameters.Y2IsCumulativePercent = false;
             }
 
             if (cmbSecondYAxisVariable.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbSecondYAxisVariable.SelectedItem.ToString()))

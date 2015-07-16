@@ -439,12 +439,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.Y2AxisType = cmbSecondYAxis.SelectedIndex;
             if (Parameters.Y2AxisType == 3)
             {
-                Parameters.Y2IsCumulativePercent = true;
                 Parameters.Y2AxisFormat = "P0";
-            }
-            else
-            {
-                Parameters.Y2IsCumulativePercent = false;
             }
 
             if (cmbSecondYAxisVariable.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbSecondYAxisVariable.SelectedItem.ToString()))
