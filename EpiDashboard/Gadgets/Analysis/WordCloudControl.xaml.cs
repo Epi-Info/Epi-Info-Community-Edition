@@ -86,6 +86,8 @@ namespace EpiDashboard
             public double Lower;
         }
 
+        private double currentWidth;
+
         #endregion // Private Members
 
         #region Delegates
@@ -658,7 +660,7 @@ namespace EpiDashboard
             {
                 headerPanel.Text = CustomOutputHeading;
             }
-
+            currentWidth = borderAll.ActualWidth;
             StrataGridList = new List<Grid>();
             StrataExpanderList = new List<Expander>();
             //cbxField.SelectionChanged += new SelectionChangedEventHandler(cbxField_SelectionChanged);
@@ -795,54 +797,21 @@ namespace EpiDashboard
         /// Collapses the output for the gadget
         /// </summary>
         public override void CollapseOutput()
-        {
-            foreach (Expander expander in this.StrataExpanderList)
-            {
-                expander.Visibility = System.Windows.Visibility.Collapsed;
-            }
-
-            foreach (Grid grid in this.StrataGridList)
-            {
-                grid.Visibility = System.Windows.Visibility.Collapsed;
-                Border border = new Border();
-                if (grid.Parent is Border)
-                {
-                    border = (grid.Parent) as Border;
-                    border.Visibility = System.Windows.Visibility.Collapsed;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(this.infoPanel.Text))
-            {
-                this.infoPanel.Visibility = System.Windows.Visibility.Collapsed;
-            }
+        {                     
+            borderAll.MinWidth = currentWidth;
+            panelMain.Visibility = System.Windows.Visibility.Collapsed;
 
             this.messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             this.infoPanel.Visibility = System.Windows.Visibility.Collapsed;
             //descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed; //EI-24
+            IsCollapsed = true;
         }
 
         /// <summary>
         /// Expands the output for the gadget
         /// </summary>
         public override void ExpandOutput()
-        {
-            foreach (Expander expander in this.StrataExpanderList)
-            {
-                expander.Visibility = System.Windows.Visibility.Visible;
-            }
-
-            foreach (Grid grid in this.StrataGridList)
-            {
-                grid.Visibility = System.Windows.Visibility.Visible;
-                Border border = new Border();
-                if (grid.Parent is Border)
-                {
-                    border = (grid.Parent) as Border;
-                    border.Visibility = System.Windows.Visibility.Visible;
-                }
-            }
-
+        {            
             if (this.messagePanel.MessagePanelType != Controls.MessagePanelType.StatusPanel)
             {
                 this.messagePanel.Visibility = System.Windows.Visibility.Visible;
@@ -852,6 +821,15 @@ namespace EpiDashboard
             {
                 this.infoPanel.Visibility = System.Windows.Visibility.Visible;
             }
+
+            if (!string.IsNullOrEmpty(this.descriptionPanel.Text))
+            {
+                descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.DisplayMode;
+            }
+
+            panelMain.Visibility = System.Windows.Visibility.Visible;
+
+            IsCollapsed = false;
         }
 
         /// <summary>
@@ -1005,7 +983,7 @@ namespace EpiDashboard
             if (IsCommentLegal || IsOptionField)
             {
             }
-
+            currentWidth = borderAll.ActualWidth;
             base.SetGadgetToFinishedState();
         }
 
