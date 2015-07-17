@@ -73,7 +73,7 @@ namespace Epi.UnitTests
         [TestMethod]
         public void LogisticRegressionTest()
         {
-            getData("EColiFoodHistory");
+            getData("EColiFoodHistory", "sex = 'M-Male'");
 
             Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
             inputVariableList.Add("ill", "dependvar");
@@ -97,7 +97,7 @@ namespace Epi.UnitTests
                 results.regressionResults.variables[0].P + "\n");
         }
 
-        private void getData(string filename)
+        private void getData(string filename, string filterstring = null)
         {
             string configFilePath = "..\\..\\..\\Build\\Debug\\Configuration\\EpiInfo.Config.xml";
             Epi.DataSets.Config configDataSet = new Epi.DataSets.Config();
@@ -115,10 +115,15 @@ namespace Epi.UnitTests
             DashboardHelper = new DashboardHelper(filename + "#csv", dbDriver);
             IGadgetParameters inputs = new GadgetParameters();
             DashboardHelper.UserVarsNeedUpdating = true;
-            PopulateDataSet(inputs);
+            string fs = null;
+            if (!String.IsNullOrEmpty(filterstring))
+            {
+                fs = "select * from " + filename + "#csv where " + filterstring;
+            }
+            PopulateDataSet(inputs, fs);
         }
 
-        private void PopulateDataSet(IGadgetParameters inputs = null)
+        private void PopulateDataSet(IGadgetParameters inputs = null, string filterstring = null)
         {
             DataTable unfilteredTable = new DataTable("unfilteredTable");
             unfilteredTable.CaseSensitive = true;
@@ -136,7 +141,15 @@ namespace Epi.UnitTests
                         inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CACHING);
                     }
 
-                    unfilteredTable = DashboardHelper.Database.GetTableData(DashboardHelper.TableName);
+                    if (string.IsNullOrEmpty(filterstring))
+                    {
+                        unfilteredTable = DashboardHelper.Database.GetTableData(DashboardHelper.TableName);
+                    }
+                    else
+                    {
+                        Query selectQuery = DashboardHelper.Database.CreateQuery(filterstring);
+                        unfilteredTable = DashboardHelper.Database.Select(selectQuery);
+                    }
 
                     if (DashboardHelper.ConnectionsForRelate.Count > 0)
                     {
@@ -157,6 +170,7 @@ namespace Epi.UnitTests
                     ds = new DataSet();
                     ds.Tables.Add(unfilteredTable); //ds.Tables.Add(ConvertTableColumns(unfilteredTable));
                     ds.Tables[0].CaseSensitive = true;
+                    DataRow[] rows = ds.Tables[0].Select("sex = 'M-Male'");
                     mainTable = ds.Tables[0];
 
                     #region Data Prep for values with spaces (Excel only)
