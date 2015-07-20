@@ -688,6 +688,11 @@
     <Compile Include="NutStat\GrowthMeasurement.cs" />
     <Compile Include="NutStat\GrowthReference.cs" />
     <Compile Include="NutStat\PercentileArrays.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RelatedConnection.cs" />
     <Compile Include="RowFilterControl.xaml.cs">
       <DependentUpon>RowFilterControl.xaml</DependentUpon>
@@ -1559,6 +1564,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Mapping\TimeConfigDialog.resx">
       <DependentUpon>TimeConfigDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Rules\SimpleAssignmentStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>

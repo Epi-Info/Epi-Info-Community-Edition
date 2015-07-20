@@ -106,10 +106,11 @@ namespace EpiDashboard.Mapping
             foreach (DashboardHelper dashboardHelper in dashboardHelpers)
             {
                 count = MapUIHelper.CountTimeStopsByTimeInterval(dashboardHelper, cmbVariable.SelectedItem.ToString());
+
                 if (count > 1000)
                 {
-                    MessageBox.Show("There are too many Time Stops associated with the selected field ", "Error",
-                        MessageBoxButtons.OK);
+                    MessageBox.Show("There are too many Time Stops associated with the selected field " + 
+                        cmbVariable.SelectedItem.ToString() , "Error",  MessageBoxButtons.OK);
                     cmbVariable.SelectedIndex = 0;
                     return;
                 }
