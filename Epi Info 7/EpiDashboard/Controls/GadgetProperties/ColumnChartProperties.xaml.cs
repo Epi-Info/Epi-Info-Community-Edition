@@ -439,8 +439,20 @@ namespace EpiDashboard.Controls.GadgetProperties
             
             Parameters.GadgetTitle = txtTitle.Text;
             Parameters.GadgetDescription = txtDesc.Text;
-            Parameters.ChartWidth = double.Parse(txtWidth.Text);
-            Parameters.ChartHeight = double.Parse(txtHeight.Text);
+            double height = 0;
+            double width = 0;
+           bool success = double.TryParse(txtWidth.Text, out width);
+            if (success)
+            {
+                Parameters.ChartWidth = width;
+            }
+            success = double.TryParse(txtHeight.Text, out height);
+            if (success)
+            {
+                Parameters.ChartHeight = height;
+            }
+          //  Parameters.ChartWidth = double.Parse(txtWidth.Text);
+           // Parameters.ChartHeight = double.Parse(txtHeight.Text);
             Parameters.ShowAllListValues = (bool)checkboxAllValues.IsChecked;
             Parameters.ShowCommentLegalLabels = (bool)checkboxCommentLegalLabels.IsChecked;
             Parameters.IncludeMissing = (bool)checkboxIncludeMissing.IsChecked;
@@ -1352,7 +1364,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (thisWidth > System.Windows.SystemParameters.PrimaryScreenWidth * 2)
             {
                 txtWidth.Text = (System.Windows.SystemParameters.PrimaryScreenWidth * 2 ).ToString();
-            }
+            }            
         }
 
         private void txtHeight_TextChanged(object sender, TextChangedEventArgs e)
@@ -1362,7 +1374,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (thisHeight > System.Windows.SystemParameters.PrimaryScreenHeight * 2)
             {
                 txtHeight.Text = (System.Windows.SystemParameters.PrimaryScreenHeight * 2).ToString();
-            }
+            }           
         }
 
         private void cmbXAxisLabelType_SelectionChanged(object sender, SelectionChangedEventArgs e)
