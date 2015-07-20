@@ -191,7 +191,7 @@
                     <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" >
                         <CheckBox x:Name="checkboxShowLegend" Margin="0,12,0,0" Content="Show legend" HorizontalAlignment="Left" IsChecked="False" Click="checkboxShowLegend_Click" />
                         <CheckBox x:Name="checkboxShowLegendBorder" Margin="0,12,0,0" Content="Show legend border" HorizontalAlignment="Left" IsChecked="False" />
-                        <CheckBox x:Name="checkboxShowVarName" Margin="0,12,0,0" Content="Show variable names" HorizontalAlignment="Left" IsChecked="False" />
+                        <CheckBox x:Name="checkboxShowVarName" Margin="0,12,0,0" Content="Show variable names" HorizontalAlignment="Left" IsChecked="False" Visibility="Collapsed" />
                     </WrapPanel>
                     <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" >
                         <StackPanel>
