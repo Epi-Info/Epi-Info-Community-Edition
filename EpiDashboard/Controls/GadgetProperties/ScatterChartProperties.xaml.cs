@@ -188,8 +188,18 @@ namespace EpiDashboard.Controls.GadgetProperties
             
             Parameters.GadgetTitle = txtTitle.Text;
             Parameters.GadgetDescription = txtDesc.Text;
-            Parameters.ChartWidth = double.Parse(txtWidth.Text);
-            Parameters.ChartHeight = double.Parse(txtHeight.Text);
+            double height = 0;
+            double width = 0;
+            bool success = double.TryParse(txtWidth.Text, out width);
+            if (success)
+            {
+                Parameters.ChartWidth = width;
+            }
+            success = double.TryParse(txtHeight.Text, out height);
+            if (success)
+            {
+                Parameters.ChartHeight = height;
+            }
 
             //Colors and Styles settings /////////////////////////////////
             if (cmbPalette.SelectedIndex >= 0)
