@@ -57,6 +57,7 @@ namespace EpiDashboard.Mapping
         string _shapeKey;
         string _dataKey;
         string _valueField;
+        string _missingText;
         Guid _layerId;
         List<SolidColorBrush> _colors;
         int _classCount;
@@ -65,8 +66,16 @@ namespace EpiDashboard.Mapping
 
         List<List<SolidColorBrush>> ColorList = new List<List<SolidColorBrush>>();
         int _colorShadeIndex = 0;
-        
+
         int _lastGeneratedClassCount = 0;
+        ThematicItem thematicItem;
+
+        private List<double> _range;
+        public List<double> Range
+        {
+            get { return _range; }
+            set { _range = value; }
+        }
 
         public struct ThematicItem
         {
@@ -127,21 +136,21 @@ namespace EpiDashboard.Mapping
         }
 
         private Color GetColorAtPoint(Rectangle theRec, Point thePoint)
-        {    
+        {
             LinearGradientBrush br = (LinearGradientBrush)theRec.Fill;
             double y3 = thePoint.Y; double x3 = thePoint.X;
             double x1 = br.StartPoint.X * theRec.Width;
             double y1 = br.StartPoint.Y * theRec.Height;
-            Point p1 = new Point(x1, y1); 
+            Point p1 = new Point(x1, y1);
             double x2 = br.EndPoint.X * theRec.Width;
             double y2 = br.EndPoint.Y * theRec.Height;
-            Point p2 = new Point(x2, y2);  
-            Point p4 = new Point(); 
-            if (y1 == y2) 
+            Point p2 = new Point(x2, y2);
+            Point p4 = new Point();
+            if (y1 == y2)
             { p4 = new Point(x3, y1); }
-            else if (x1 == x2) 
+            else if (x1 == x2)
             { p4 = new Point(x1, y3); }
-            else 
+            else
             {
                 double m = (y2 - y1) / (x2 - x1);
                 double m2 = -1 / m;
@@ -149,19 +158,19 @@ namespace EpiDashboard.Mapping
                 double c = y3 - m2 * x3;
                 double x4 = (c - b) / (m - m2);
                 double y4 = m * x4 + b; p4 = new Point(x4, y4);
-            }     
+            }
             double d4 = dist(p4, p1, p2);
             double d2 = dist(p2, p1, p2);
-            double x = d4 / d2;     
+            double x = d4 / d2;
             double max = br.GradientStops.Max(n => n.Offset);
             if (x > max) { x = max; }
             double min = br.GradientStops.Min(n => n.Offset);
-            if (x < min) { x = min; }     
+            if (x < min) { x = min; }
             GradientStop gs0 = br.GradientStops.Where(n => n.Offset <= x).OrderBy(n => n.Offset).Last();
             GradientStop gs1 = br.GradientStops.Where(n => n.Offset >= x).OrderBy(n => n.Offset).First();
             float y = 0f;
             if (gs0.Offset != gs1.Offset)
-            { y = (float)((x - gs0.Offset) / (gs1.Offset - gs0.Offset)); }     
+            { y = (float)((x - gs0.Offset) / (gs1.Offset - gs0.Offset)); }
             Color cx = new Color();
             if (br.ColorInterpolationMode == ColorInterpolationMode.ScRgbLinearInterpolation)
             {
@@ -183,11 +192,11 @@ namespace EpiDashboard.Mapping
         }
         private double dist(Point px, Point po, Point pf)
         {
-            double d = Math.Sqrt((px.Y - po.Y) * (px.Y - po.Y) + (px.X - po.X) * (px.X - po.X)); 
-            if (((px.Y < po.Y) && (pf.Y > po.Y)) || ((px.Y > po.Y) && (pf.Y < po.Y)) || ((px.Y == po.Y) && (px.X < po.X) && (pf.X > po.X)) || ((px.Y == po.Y) && (px.X > po.X) && (pf.X < po.X))) 
-            { 
-                d = -d; 
-            } 
+            double d = Math.Sqrt((px.Y - po.Y) * (px.Y - po.Y) + (px.X - po.X) * (px.X - po.X));
+            if (((px.Y < po.Y) && (pf.Y > po.Y)) || ((px.Y > po.Y) && (pf.Y < po.Y)) || ((px.Y == po.Y) && (px.X < po.X) && (pf.X > po.X)) || ((px.Y == po.Y) && (px.X > po.X) && (pf.X < po.X)))
+            {
+                d = -d;
+            }
             return d;
         }
 
@@ -198,7 +207,7 @@ namespace EpiDashboard.Mapping
             temp.Width = 256;
             temp.Height = 256;
             temp.Fill = gradientBrush;
-            
+
             ColorList = new List<List<SolidColorBrush>>();
 
             List<SolidColorBrush> BlueShades = new List<SolidColorBrush>();
@@ -275,7 +284,7 @@ namespace EpiDashboard.Mapping
                 return new object[] { shapeLayer };
             }
             else { return null; }
-            
+
         }
 
         void shapeLayer_Initialized(object sender, EventArgs e)
@@ -359,11 +368,11 @@ namespace EpiDashboard.Mapping
         {
             if (_dashboardHelper != null)
             {
-                SetShapeRangeValues(_dashboardHelper, _shapeKey, _dataKey, _valueField, _lowColor, _highColor, _classCount);
+                SetShapeRangeValues(_dashboardHelper, _shapeKey, _dataKey, _valueField, _colors, _classCount, _missingText);
             }
         }
 
-        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, Color lowColor, Color highColor, int classCount)
+        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string missingText)
         {
             try
             {
@@ -372,9 +381,10 @@ namespace EpiDashboard.Mapping
                 _shapeKey = shapeKey;
                 _dataKey = dataKey;
                 _valueField = valueField;
-                _lowColor = lowColor;
-                _highColor = highColor;
-
+                //_lowColor = lowColor;
+                //_highColor = highColor;
+                _colors = colors;
+                _missingText = missingText;
                 List<string> columnNames = new List<string>();
                 if (dashboardHelper.IsUsingEpiProject)
                 {
@@ -413,8 +423,11 @@ namespace EpiDashboard.Mapping
 
 
                 GraphicsLayer graphicsLayer = graphicsLayers[0];
-                CreateColorList(lowColor, highColor);
-                ThematicItem thematicItem = new ThematicItem() { Name = dataKey, Description = dataKey, CalcField = "" };
+                //CreateColorList(lowColor, highColor);
+                thematicItem = new ThematicItem() { Name = dataKey, Description = dataKey, CalcField = "" };
+
+
+
                 List<double> valueList = new List<double>();
                 for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
                 {
@@ -437,8 +450,8 @@ namespace EpiDashboard.Mapping
                     {
                         shapeValue = graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim();
                     }
-                    
-                    
+
+
                     string filterExpression = "";
                     if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
                         filterExpression += "[";
@@ -477,29 +490,37 @@ namespace EpiDashboard.Mapping
                         valueList.Add(graphicValue);
                     }
                 }
-                thematicItem.RangeStarts = new List<double>();
-
-                double totalRange = thematicItem.Max - thematicItem.Min;
-                double portion = totalRange / classCount;
-
-                thematicItem.RangeStarts.Add(thematicItem.Min);
-                double startRangeValue = thematicItem.Min;
-                IEnumerable<double> valueEnumerator =
-                from aValue in valueList
-                orderby aValue
-                select aValue;
-
-                int increment = Convert.ToInt32(Math.Round((double)valueList.Count / (double)classCount));
-                for (int i = increment; i < valueList.Count; i += increment)
+                if (Range != null &&
+                  Range.Count > 0)
                 {
-                    double value = valueEnumerator.ElementAt(i);
-                    if (value < thematicItem.Min)
-                        value = thematicItem.Min;
-                    thematicItem.RangeStarts.Add(value);
+                    thematicItem.RangeStarts = Range;
+                    PopulateRangeValues();
                 }
+                else
+                {
+                    thematicItem.RangeStarts = new List<double>();
 
+                    double totalRange = thematicItem.Max - thematicItem.Min;
+                    double portion = totalRange / classCount;
+
+                    thematicItem.RangeStarts.Add(thematicItem.Min);
+                    double startRangeValue = thematicItem.Min;
+                    IEnumerable<double> valueEnumerator =
+                    from aValue in valueList
+                    orderby aValue
+                    select aValue;
+
+                    int increment = Convert.ToInt32(Math.Round((double)valueList.Count / (double)classCount));
+                    for (int i = increment; i < valueList.Count; i += increment)
+                    {
+                        double value = valueEnumerator.ElementAt(i);
+                        if (value < thematicItem.Min)
+                            value = thematicItem.Min;
+                        thematicItem.RangeStarts.Add(value);
+                    }
+                }
                 // Create graphic features and set symbol using the class range which contains the value 
-                List<SolidColorBrush> brushList = ColorList[_colorShadeIndex];
+                //List<SolidColorBrush> brushList = ColorList[_colorShadeIndex];
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
 
@@ -524,7 +545,7 @@ namespace EpiDashboard.Mapping
                         {
                             shapeValue = graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim();
                         }
-                        
+
                         string filterExpression = "";
                         if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
                             filterExpression += "[";
@@ -547,7 +568,7 @@ namespace EpiDashboard.Mapping
 
                         SimpleFillSymbol symbol = new SimpleFillSymbol()
                         {
-                            Fill = graphicValue == Double.PositiveInfinity ? new SolidColorBrush(Colors.Transparent) : brushList[brushIndex],
+                            Fill = graphicValue == Double.PositiveInfinity ? colors[colors.Count - 1] : colors[brushIndex],
                             BorderBrush = new SolidColorBrush(Colors.Black),
                             BorderThickness = 1
                         };
@@ -577,90 +598,117 @@ namespace EpiDashboard.Mapping
                 }
 
 
-                if (LegendStackPanel == null)
-                {
-                    LegendStackPanel = new StackPanel();
-                }
-                LegendStackPanel.Children.Clear();
-
-                System.Windows.Controls.ListBox legendList = new System.Windows.Controls.ListBox();
-                legendList.Margin = new Thickness(5);
-                legendList.Background = Brushes.White;// new LinearGradientBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF), Color.FromArgb(0x7F, 0xFF, 0xFF, 0xFF), 45);
-                legendList.BorderBrush = Brushes.Black;
-                legendList.BorderThickness = new Thickness(3);
-                //LegendTitle.Text = thematicItem.Description;
-
-                for (int c = 0; c < classCount; c++)
-                {
-                    try
-                    {
-                        Rectangle swatchRect = new Rectangle()
-                        {
-                            Width = 20,
-                            Height = 20,
-                            Stroke = new SolidColorBrush(Colors.Black),
-                            Fill = brushList[c]
-                        };
-
-                        TextBlock classTextBlock = new TextBlock();
-
-                        if (c == 0)
-                        {
-                            if (thematicItem.RangeStarts[1] == thematicItem.Min)
-                                classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(thematicItem.RangeStarts[1], 2));
-                            else
-                                classTextBlock.Text = String.Format("  Less than {0}", Math.Round(thematicItem.RangeStarts[1], 2));
-                        }
-                        else if (c == classCount - 1)
-                            classTextBlock.Text = String.Format("  {0} and above", Math.Round(thematicItem.RangeStarts[c], 2));
-                        else if (thematicItem.RangeStarts.Count <= c + 1)
-                        {
-                            classTextBlock.Text = String.Format("  {0} and above", Math.Round(thematicItem.RangeStarts[c], 2));
-                        }
-                        // Middle classifications
-                        else
-                        {
-                            if (thematicItem.RangeStarts[c] == thematicItem.RangeStarts[c + 1])
-                                classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(thematicItem.RangeStarts[c], 2));
-                            else
-                                classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(thematicItem.RangeStarts[c], 2), Math.Round(thematicItem.RangeStarts[c + 1], 2));
-                        }
-
-                        StackPanel classStackPanel = new StackPanel();
-                        classStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-                        classStackPanel.Children.Add(swatchRect);
-                        classStackPanel.Children.Add(classTextBlock);
-
-                        legendList.Items.Add(classStackPanel);
-                        if (thematicItem.RangeStarts.Count <= c + 1)
-                        {
-                            break;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                    }
-                }
-
-                TextBlock minTextBlock = new TextBlock();
-                StackPanel minStackPanel = new StackPanel();
-                minStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-                minTextBlock.Text = thematicItem.MinName != null ? String.Format("Min: {0} ({1})", thematicItem.Min, thematicItem.MinName.Trim()) : String.Format("Min: {0} ({1})", thematicItem.Min, string.Empty);
-                minStackPanel.Children.Add(minTextBlock);
-                legendList.Items.Add(minStackPanel);
-
-                TextBlock maxTextBlock = new TextBlock();
-                StackPanel maxStackPanel = new StackPanel();
-                maxStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-                maxTextBlock.Text = thematicItem.MaxName != null ? String.Format("Max: {0} ({1})", thematicItem.Max, thematicItem.MaxName.Trim()) : String.Format("Max: {0} ({1})", thematicItem.Max, string.Empty);
-                maxStackPanel.Children.Add(maxTextBlock);
-                legendList.Items.Add(maxStackPanel);
-
-                LegendStackPanel.Children.Add(legendList);
+                SetLegendSection(classCount, colors, missingText, thematicItem);
 
             }
             catch (Exception ex)
             {
+            }
+        }
+
+        private void SetLegendSection(int classCount, List<SolidColorBrush> brushList, string missingText, ThematicItem thematicItem)
+        {
+            if (LegendStackPanel == null)
+            {
+                LegendStackPanel = new StackPanel();
+            }
+            LegendStackPanel.Children.Clear();
+
+            System.Windows.Controls.ListBox legendList = new System.Windows.Controls.ListBox();
+            legendList.Margin = new Thickness(5);
+            legendList.Background = Brushes.White;// new LinearGradientBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF), Color.FromArgb(0x7F, 0xFF, 0xFF, 0xFF), 45);
+            legendList.BorderBrush = Brushes.Black;
+            legendList.BorderThickness = new Thickness(3);
+            //LegendTitle.Text = thematicItem.Description;
+
+            Rectangle missingSwatchRect = new Rectangle()
+            {
+                Width = 20,
+                Height = 20,
+                Stroke = new SolidColorBrush(Colors.Black),
+                Fill = brushList[brushList.Count - 1]
+            };
+
+            TextBlock missingClassTextBlock = new TextBlock();
+            missingClassTextBlock.Text = String.Format("  " + missingText);
+            StackPanel missingClassStackPanel = new StackPanel();
+            missingClassStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+            missingClassStackPanel.Children.Add(missingSwatchRect);
+            missingClassStackPanel.Children.Add(missingClassTextBlock);
+
+            legendList.Items.Add(missingClassStackPanel);
+
+            SetLegendText(brushList, classCount, thematicItem.RangeStarts, legendList);
+
+            TextBlock minTextBlock = new TextBlock();
+            StackPanel minStackPanel = new StackPanel();
+            minStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+            minTextBlock.Text = thematicItem.MinName != null ? String.Format("Min: {0} ({1})", thematicItem.Min, thematicItem.MinName.Trim()) : String.Format("Min: {0} ({1})", thematicItem.Min, string.Empty);
+            minStackPanel.Children.Add(minTextBlock);
+            legendList.Items.Add(minStackPanel);
+
+            TextBlock maxTextBlock = new TextBlock();
+            StackPanel maxStackPanel = new StackPanel();
+            maxStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+            maxTextBlock.Text = thematicItem.MaxName != null ? String.Format("Max: {0} ({1})", thematicItem.Max, thematicItem.MaxName.Trim()) : String.Format("Max: {0} ({1})", thematicItem.Max, string.Empty);
+            maxStackPanel.Children.Add(maxTextBlock);
+            legendList.Items.Add(maxStackPanel);
+
+            LegendStackPanel.Children.Add(legendList);
+        }
+
+        private void SetLegendText(List<SolidColorBrush> brushList, int classCount, List<double> RangeStarts, System.Windows.Controls.ListBox legendList)
+        {
+            for (int c = 0; c < classCount; c++)
+            {
+                try
+                {
+                    Rectangle swatchRect = new Rectangle()
+                    {
+                        Width = 20,
+                        Height = 20,
+                        Stroke = new SolidColorBrush(Colors.Black),
+                        Fill = brushList[c]
+                    };
+
+                    TextBlock classTextBlock = new TextBlock();
+
+                    if (c == 0)
+                    {
+                        if (RangeStarts[1] == thematicItem.Min)
+                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(RangeStarts[1], 2));
+                        else
+                            classTextBlock.Text = String.Format("  Less than {0}", Math.Round(RangeStarts[1], 2));
+                    }
+                    else if (c == classCount - 1)
+                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(RangeStarts[c], 2));
+                    else if (thematicItem.RangeStarts.Count <= c + 1)
+                    {
+                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(RangeStarts[c], 2));
+                    }
+                    // Middle classifications
+                    else
+                    {
+                        if (thematicItem.RangeStarts[c] == thematicItem.RangeStarts[c + 1])
+                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(RangeStarts[c], 2));
+                        else
+                            classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(RangeStarts[c], 2), Math.Round(RangeStarts[c + 1], 2));
+                    }
+
+                    StackPanel classStackPanel = new StackPanel();
+                    classStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+                    classStackPanel.Children.Add(swatchRect);
+                    classStackPanel.Children.Add(classTextBlock);
+
+                    legendList.Items.Add(classStackPanel);
+                    if (RangeStarts.Count <= c + 1)
+                    {
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
             }
         }
 
@@ -714,8 +762,8 @@ namespace EpiDashboard.Mapping
             string valueField = _valueField;
 
             DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref valueField);
-            GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
 
+            GraphicsLayer graphicsLayer = graphicsLayers[0];
             if (graphicsLayer == null) return;
 
             ThematicItem thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
@@ -723,7 +771,7 @@ namespace EpiDashboard.Mapping
 
         public ThematicItem GetThematicItem(int classCount, DataTable loadedData, GraphicsLayer graphicsLayer)
         {
-           
+
             ThematicItem thematicItem = new ThematicItem()
             {
                 Name = _dataKey,
@@ -733,67 +781,79 @@ namespace EpiDashboard.Mapping
 
             List<double> valueList = new List<double>();
 
-            if (graphicsLayer != null)
+            for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
             {
-                for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
+                Graphic graphicFeature = graphicsLayer.Graphics[i];
+
+                string shapeValue = string.Empty;
+
+                if (!graphicFeature.Attributes.ContainsKey(_shapeKey))
                 {
-                    Graphic graphicFeature = graphicsLayer.Graphics[i];
-
-                    string filterExpression = "";
-
-                    if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
+                    List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicFeature.Attributes["extendedData"];
+                    foreach (KmlExtendedData ed in eds)
                     {
-                        filterExpression += "[";
+                        if (ed.Name.Equals(_shapeKey))
+                        {
+                            shapeValue = ed.Value.Replace("'", "''").Trim();
+                        }
                     }
+                }
+                else
+                {
+                    shapeValue = graphicFeature.Attributes[_shapeKey].ToString().Replace("'", "''").Trim();
+                }
 
-                    filterExpression += _dataKey;
 
-                    if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
-                    {
-                        filterExpression += "]";
-                    }
+                string filterExpression = "";
+                if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
+                    filterExpression += "[";
+                filterExpression += _dataKey;
+                if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
+                    filterExpression += "]";
+                filterExpression += " = '" + shapeValue + "'";
 
-                    filterExpression += " = '" + graphicFeature.Attributes[_shapeKey].ToString().Replace("'", "''").Trim() + "'";
+                double graphicValue = Double.PositiveInfinity;
+                try
+                {
+                    graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][_valueField]);
+                }
+                catch (Exception ex)
+                {
+                    graphicValue = Double.PositiveInfinity;
+                }
 
-                    double graphicValue = Double.PositiveInfinity;
-                    try
-                    {
-                        graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][_valueField]);
-                    }
-                    catch (Exception ex)
-                    {
-                        graphicValue = Double.PositiveInfinity;
-                    }
+                string graphicName = shapeValue;
 
-                    string graphicName = graphicFeature.Attributes[_shapeKey].ToString();
+                if (i == 0)
+                {
+                    thematicItem.Min = Double.PositiveInfinity;
+                    thematicItem.Max = Double.NegativeInfinity;
+                    thematicItem.MinName = string.Empty;
+                    thematicItem.MaxName = string.Empty;
+                }
+                else
+                {
+                    if (graphicValue < thematicItem.Min) { thematicItem.Min = graphicValue; thematicItem.MinName = graphicName; }
+                    if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity) { thematicItem.Max = graphicValue; thematicItem.MaxName = graphicName; }
+                }
 
-                    if (i == 0)
-                    {
-                        thematicItem.Min = Double.PositiveInfinity;
-                        thematicItem.Max = Double.NegativeInfinity;
-                        thematicItem.MinName = string.Empty;
-                        thematicItem.MaxName = string.Empty;
-                    }
-                    else
-                    {
-                        if (graphicValue < thematicItem.Min) { thematicItem.Min = graphicValue; thematicItem.MinName = graphicName; }
-                        if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity) { thematicItem.Max = graphicValue; thematicItem.MaxName = graphicName; }
-                    }
-
-                    if (graphicValue < Double.PositiveInfinity)
-                    {
-                        valueList.Add(graphicValue);
-                    }
-
+                if (graphicValue < Double.PositiveInfinity)
+                {
+                    valueList.Add(graphicValue);
                 }
             }
+            thematicItem.RangeStarts = CalculateThematicRange(classCount, thematicItem, valueList);
 
-            thematicItem.RangeStarts = new List<double>();
+            return thematicItem;
+        }
 
+        private List<double> CalculateThematicRange(int classCount, ThematicItem thematicItem, List<double> valueList)
+        {
             double totalRange = thematicItem.Max - thematicItem.Min;
             double portion = totalRange / classCount;
+            List<double> RangeStarts = new List<double>();
 
-            thematicItem.RangeStarts.Add(thematicItem.Min);
+            RangeStarts.Add(thematicItem.Min);
             double startRangeValue = thematicItem.Min;
             IEnumerable<double> valueEnumerator =
             from aValue in valueList
@@ -806,11 +866,11 @@ namespace EpiDashboard.Mapping
                 double value = valueEnumerator.ElementAt(i);
                 if (value < thematicItem.Min)
                     value = thematicItem.Min;
-                thematicItem.RangeStarts.Add(value);
+                RangeStarts.Add(value);
             }
-            return thematicItem;
+            return RangeStarts;
         }
-        
+
         public void PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount)
         {
             _classCount = classCount;
@@ -822,28 +882,39 @@ namespace EpiDashboard.Mapping
 
             DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref _valueField);
 
-            GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
-            ThematicItem thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+            GraphicsLayer graphicsLayer = graphicsLayers[0];
+
+            thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+
+            if (Range != null &&
+                Range.Count > 0)
+            {
+                thematicItem.RangeStarts = Range;
+            }
+
+            PopulateRangeValues();
+            //return thematicItem;
+
+        }
+
+        public void PopulateRangeValues()
+        {
             RangeCount = thematicItem.RangeStarts.Count;
-            Array.Clear(_rangeValues, 0, _rangeValues.Length);
+            Array.Clear(RangeValues, 0, RangeValues.Length);
             for (int i = 0; i < thematicItem.RangeStarts.Count; i++)
             {
-                _rangeValues[i, 0] = thematicItem.RangeStarts[i].ToString();
-
+                RangeValues[i, 0] = thematicItem.RangeStarts[i].ToString();
 
                 if (i < thematicItem.RangeStarts.Count - 1)
                 {
-                    _rangeValues[i, 1] = thematicItem.RangeStarts[i + 1].ToString();
+                    RangeValues[i, 1] = thematicItem.RangeStarts[i + 1].ToString();
                 }
                 else
                 {
-                    _rangeValues[i, 1] = thematicItem.Max.ToString();
+                    RangeValues[i, 1] = thematicItem.Max.ToString();
                 }
 
             }
-
-            //return thematicItem;
-
         }
         private StackPanel legendStackPanel;
 

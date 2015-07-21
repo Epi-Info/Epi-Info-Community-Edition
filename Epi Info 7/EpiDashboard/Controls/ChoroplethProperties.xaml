@@ -250,7 +250,7 @@
                     <ColumnDefinition Width="75" x:Name="rampStartColumn"/>
                     <ColumnDefinition Width="50" x:Name="rampCompareColumn"/>
                     <ColumnDefinition Width="75" x:Name="rampEndColumn"/>
-                    <ColumnDefinition Width="75" x:Name="quintileColumn"/>
+                    <ColumnDefinition Width="0" x:Name="quintileColumn"/>
                     <ColumnDefinition Width="220"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>

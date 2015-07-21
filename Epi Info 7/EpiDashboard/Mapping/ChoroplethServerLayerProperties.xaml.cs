@@ -54,8 +54,8 @@ namespace EpiDashboard.Mapping
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-            provider = new ChoroplethServerLayerProvider(myMap);
-            provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
+            //provider = new ChoroplethServerLayerProvider(myMap);
+            //provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
 
             FillComboBoxes();
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
@@ -64,10 +64,21 @@ namespace EpiDashboard.Mapping
             cbxShapeKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxClasses.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
+            rctMissingColor.MouseUp += new MouseButtonEventHandler(rctMissingColor_MouseUp);
             rctHighColor.MouseUp += new MouseButtonEventHandler(rctHighColor_MouseUp);
             rctLowColor.MouseUp += new MouseButtonEventHandler(rctLowColor_MouseUp);
             rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
             rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
+        }
+
+        private void rctMissingColor_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                rctMissingColor.Fill = new SolidColorBrush(Color.FromArgb(0xF0, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                RenderMap();
+            }
         }
 
         public void provider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
@@ -252,7 +263,7 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public void SetValues(string shapekey, string datakey, string val, string classes, Brush Highcolor, Brush Lowcolor, IDictionary<string, object> shapeAttributes, Dictionary<int, object> classAttrib, bool flagquintiles, int numclasses)
+        public void SetValues(string shapekey, string datakey, string val, string classes, Brush Highcolor, Brush Lowcolor, Brush Missingcolor, IDictionary<string, object> shapeAttributes, Dictionary<int, object> classAttrib, bool flagquintiles, int numclasses)
         {
             FillComboBoxes();
             if (shapeAttributes != null)
@@ -268,6 +279,7 @@ namespace EpiDashboard.Mapping
             Numclasses = numclasses;
             rctHighColor.Fill = (SolidColorBrush)Highcolor;
             rctLowColor.Fill = (SolidColorBrush)Lowcolor;
+            rctMissingColor.Fill = (SolidColorBrush)Missingcolor;
             cbxClasses.Text = classes;
             cbxShapeKey.Text = shapekey;
             cbxDataKey.Text = datakey;
