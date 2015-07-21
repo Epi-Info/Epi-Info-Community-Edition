@@ -83,6 +83,9 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="Data\BinomialTests.csv" />
+    <None Include="Data\LogisticCoefficientResults.csv" />
+    <None Include="Data\LogisticOddsRatioResults.csv" />
+    <None Include="Data\LogisticTestData.csv" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
