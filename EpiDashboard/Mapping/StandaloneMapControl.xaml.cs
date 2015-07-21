@@ -1405,7 +1405,7 @@ namespace EpiDashboard.Mapping
         public void GenerateShapeFileChoropleth()
         {
             ILayerProperties layerProperties = null;
-
+                       
             //old config
             DashboardHelper dashboardHelper = new DashboardHelper();
             layerProperties = new ChoroplethLayerProperties(myMap, dashboardHelper, this);
@@ -1444,6 +1444,9 @@ namespace EpiDashboard.Mapping
             DashboardHelper dashboardHelper;
             ILayerProperties layerProperties = null;
 
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
+            
             //old config
             layerProperties = (ChoroplethLayerProperties)choroplethlayerprop;
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
@@ -1459,7 +1462,7 @@ namespace EpiDashboard.Mapping
 
             dashboardHelper = choroplethlayerprop.GetDashboardHelper();
             choroplethproperties.SetDashboardHelper(dashboardHelper);
-            choroplethproperties.txtProjectPath.Text = ProjectFilepath;
+            choroplethproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;
             choroplethproperties.cmbClasses.Text = choroplethlayerprop.cbxClasses.Text;
             choroplethproperties.quintilesOption.IsChecked = choroplethlayerprop.flagQuantiles;
             if (choroplethlayerprop.flagQuantiles == true) { choroplethproperties.OnQuintileOptionChanged(); }
@@ -1470,7 +1473,12 @@ namespace EpiDashboard.Mapping
              choroplethproperties.radMapServer.IsEnabled = false;
 
               choroplethproperties.panelBoundaries.IsEnabled = true;
-              choroplethproperties.datafilters = dashboardHelper.DataFilters;
+
+              if (choroplethlayerprop.datafilters != null)
+                 choroplethproperties.datafilters = choroplethlayerprop.datafilters;
+              else
+                 choroplethproperties.datafilters = dashboardHelper.DataFilters;
+
               choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.datafilters, true);
               choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
               choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
@@ -1533,23 +1541,27 @@ namespace EpiDashboard.Mapping
             DashboardHelper dashboardHelper;
             ILayerProperties layerProperties = null;
 
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
+
             //old config
             layerProperties = (ChoroplethServerLayerProperties)choroplethServerlayerprop;
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
-
-            choroplethServerlayerprop.CloseLayer();
+                       
             choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
             choroplethproperties.choroserverlayerprop = choroplethServerlayerprop;
             choroplethproperties.choroMapprovider = choroplethServerlayerprop.provider;
+            choroplethproperties.choroMapprovider.CloseLayer();
 
             choroplethproperties.Width = 800;
             choroplethproperties.Height = 600;
 
             dashboardHelper = choroplethServerlayerprop.GetDashboardHelper();
             choroplethproperties.SetDashboardHelper(dashboardHelper);
-            choroplethproperties.txtProjectPath.Text = ProjectFilepath;
+            choroplethproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;
+
             choroplethproperties.cmbClasses.Text = choroplethServerlayerprop.cbxClasses.Text;
             choroplethproperties.quintilesOption.IsChecked = choroplethServerlayerprop.flagQuantiles;
             if (choroplethServerlayerprop.flagQuantiles == true) { choroplethproperties.OnQuintileOptionChanged(); }
@@ -1559,22 +1571,26 @@ namespace EpiDashboard.Mapping
             choroplethproperties.radKML.IsEnabled = false;
 
             choroplethproperties.panelBoundaries.IsEnabled = true;
-            choroplethproperties.datafilters = dashboardHelper.DataFilters; //new DataFilters(dashboardHelper);
+            if (choroplethServerlayerprop.datafilters != null)
+                choroplethproperties.datafilters = choroplethServerlayerprop.datafilters;
+            else
+                choroplethproperties.datafilters = dashboardHelper.DataFilters;
+
             choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.datafilters, true);
             choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
             choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
             choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
-            
+
             if (string.IsNullOrEmpty(choroplethServerlayerprop.shapeFilePath) == false)
             {
                 choroplethproperties.radMapServer.IsChecked = true;
-                if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13" && choroplethServerlayerprop.cbxMapFeatureText == "")
+                if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13" && string.IsNullOrEmpty(choroplethServerlayerprop.cbxMapFeatureText) == true)
                     choroplethServerlayerprop.cbxMapserverText = "NationalMap.gov - New York County Boundaries";
-                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19" && choroplethServerlayerprop.cbxMapFeatureText == "")
+                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19" && string.IsNullOrEmpty(choroplethServerlayerprop.cbxMapFeatureText) == true)
                     choroplethServerlayerprop.cbxMapserverText = "NationalMap.gov - Rhode Island Zip Code Boundaries";
-                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17" && choroplethServerlayerprop.cbxMapFeatureText == "")
+                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17" && string.IsNullOrEmpty(choroplethServerlayerprop.cbxMapFeatureText) == true)
                     choroplethServerlayerprop.cbxMapserverText = "NationalMap.gov - U.S. State Boundaries";
-                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17" && choroplethServerlayerprop.cbxMapFeatureText == "")
+                else if (choroplethServerlayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17" && string.IsNullOrEmpty(choroplethServerlayerprop.cbxMapFeatureText) == true)
                     choroplethServerlayerprop.cbxMapserverText = "NationalMap.gov - World Boundaries";
                 else
                 {
@@ -1584,7 +1600,7 @@ namespace EpiDashboard.Mapping
                         choroplethServerlayerprop.txtMapserverText = choroplethServerlayerprop.shapeFilePath.Substring(0, choroplethServerlayerprop.shapeFilePath.Length - 2);
                     else if (char.IsNumber(lastchar, 0) == true && char.IsNumber(lastonebeforechar, 0) == true)
                         choroplethServerlayerprop.txtMapserverText = choroplethServerlayerprop.shapeFilePath.Substring(0, choroplethServerlayerprop.shapeFilePath.Length - 3);
-                }
+                } 
 
                
                 if (string.IsNullOrEmpty(choroplethServerlayerprop.cbxMapserverText) == false)
@@ -1601,18 +1617,19 @@ namespace EpiDashboard.Mapping
                     choroplethproperties.txtMapSeverpath.Text = choroplethServerlayerprop.txtMapserverText;
                     choroplethproperties.MapServerConnect();
                     choroplethproperties.cbxmapfeature.SelectionChanged -= choroplethproperties.cbxmapfeature_SelectionChanged;
-                    choroplethproperties.cbxmapfeature.SelectedIndex = -1;
-                    choroplethproperties.cbxmapfeature.SelectedIndex = choroplethServerlayerprop.cbxMapFeatureIndex;
+                    choroplethproperties.cbxmapfeature.IsEditable = true;
                     choroplethproperties.cbxmapfeature.Text = choroplethServerlayerprop.cbxMapFeatureText;
+                    int Selectedindex = -1;
+                    for (int i = 0; i < choroplethproperties.cbxmapfeature.Items.Count; i++)
+                    {
+                        if (choroplethproperties.cbxmapfeature.Items[i].ToString() == choroplethServerlayerprop.cbxMapFeatureText)
+                        { Selectedindex = i; break; }
+                    }
+                    choroplethproperties.cbxmapfeature.SelectedIndex = Selectedindex;
                     choroplethproperties.MapfeatureSelectionChange();
                     choroplethproperties.cbxmapfeature.SelectionChanged += choroplethproperties.cbxmapfeature_SelectionChanged;
                   }
-               /* if (choroplethproperties.choroserverlayerprop.curfeatureAttributes != null)
-                {
-                    foreach (string key in choroplethproperties.choroserverlayerprop.curfeatureAttributes.Keys)
-                    { choroplethproperties.cmbShapeKey.Items.Add(key); }
-                }*/
-            }
+              }
             
             if (choroplethServerlayerprop.classAttribList != null)
             { choroplethproperties.SetClassAttributes(choroplethServerlayerprop.classAttribList); }
@@ -1655,6 +1672,9 @@ namespace EpiDashboard.Mapping
             DashboardHelper dashboardHelper;
             ILayerProperties layerProperties = null;
 
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
+
             //old config
             layerProperties = (ChoroplethKmlLayerProperties)choroplethKMLlayerprop;
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
@@ -1671,14 +1691,18 @@ namespace EpiDashboard.Mapping
 
             dashboardHelper = choroplethKMLlayerprop.GetDashboardHelper();
             choroplethproperties.SetDashboardHelper(dashboardHelper);
-            choroplethproperties.txtProjectPath.Text = ProjectFilepath;
+            choroplethproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;
             choroplethproperties.cmbClasses.Text = choroplethKMLlayerprop.cbxClasses.Text;
             choroplethproperties.quintilesOption.IsChecked = choroplethKMLlayerprop.flagQuantiles;
             if (choroplethKMLlayerprop.flagQuantiles == true) { choroplethproperties.OnQuintileOptionChanged(); }
             //choroplethproperties.ClearonMapServer();
 
             choroplethproperties.panelBoundaries.IsEnabled = true;
-            choroplethproperties.datafilters = dashboardHelper.DataFilters; // new DataFilters(dashboardHelper);
+            if (choroplethKMLlayerprop.datafilters != null)
+                choroplethproperties.datafilters = choroplethKMLlayerprop.datafilters;
+            else
+                choroplethproperties.datafilters = dashboardHelper.DataFilters;
+
             choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.datafilters, true);
             choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
             choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
@@ -1888,10 +1912,10 @@ namespace EpiDashboard.Mapping
 
             dashboardHelper = densitylayerprop.GetDashboardHelper();
             dotdensityproperties.SetDashboardHelper(dashboardHelper);
-            dotdensityproperties.txtProjectPath.Text = ProjectFilepath;// dashboardHelper.Database.DbName;
+            dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource; // dashboardHelper.Database.DbName;
             dotdensityproperties.panelBoundaries.IsEnabled = true;
 
-            dotdensityproperties.dataFilters = new DataFilters(dashboardHelper);
+            dotdensityproperties.dataFilters = dashboardHelper.DataFilters; //new DataFilters(dashboardHelper);
             dotdensityproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dotdensityproperties.dataFilters, true);
             dotdensityproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; dotdensityproperties.rowFilterControl.FillSelectionComboboxes();
             dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
@@ -1960,10 +1984,10 @@ namespace EpiDashboard.Mapping
 
             dashboardHelper = densitylayerprop.GetDashboardHelper();
             dotdensityproperties.SetDashboardHelper(dashboardHelper);
-            dotdensityproperties.txtProjectPath.Text = ProjectFilepath;// dashboardHelper.Database.DbName;
+            dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;// dashboardHelper.Database.DbName;
             dotdensityproperties.panelBoundaries.IsEnabled = true;
 
-            dotdensityproperties.dataFilters = new DataFilters(dashboardHelper);
+            dotdensityproperties.dataFilters = dashboardHelper.DataFilters; //new DataFilters(dashboardHelper);
             dotdensityproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dotdensityproperties.dataFilters, true);
             dotdensityproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; dotdensityproperties.rowFilterControl.FillSelectionComboboxes();
             dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
@@ -2058,10 +2082,10 @@ namespace EpiDashboard.Mapping
 
             dashboardHelper = densitylayerprop.GetDashboardHelper();
             dotdensityproperties.SetDashboardHelper(dashboardHelper);
-            dotdensityproperties.txtProjectPath.Text = ProjectFilepath;//Database.DbName;
+            dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource; // ProjectFilepath;//Database.DbName;
             dotdensityproperties.panelBoundaries.IsEnabled = true;
 
-            dotdensityproperties.dataFilters = new DataFilters(dashboardHelper);
+            dotdensityproperties.dataFilters = dashboardHelper.DataFilters; //new DataFilters(dashboardHelper);
             dotdensityproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dotdensityproperties.dataFilters, true);
             dotdensityproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; dotdensityproperties.rowFilterControl.FillSelectionComboboxes();
             dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
