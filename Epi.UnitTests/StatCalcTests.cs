@@ -9,7 +9,7 @@ using StatisticsRepository;
 namespace Epi.UnitTests
 {
     [TestClass]
-    public class StatCalcTests
+    public class StatCalcTests : StatisticsTests
     {
         [TestMethod]
         public void BinomialTest()
@@ -23,7 +23,7 @@ namespace Epi.UnitTests
             int lcl = 0;
             int ucl = 0;
 
-            var reader = new StreamReader(File.OpenRead(@"Resources\BinomialTests.csv"));
+            var reader = new StreamReader(File.OpenRead(@"..\..\Data\BinomialTests.csv"));
             int linesinfile = 5000;
             int[] ms = new int[linesinfile];
             int[] ns = new int[linesinfile];
