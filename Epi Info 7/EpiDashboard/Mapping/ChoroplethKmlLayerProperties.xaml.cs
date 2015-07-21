@@ -38,6 +38,7 @@ namespace EpiDashboard.Mapping
         public IDictionary<string, object> curfeatureAttributes;
         private int Numclasses;
         public bool flagQuantiles;
+        public DataFilters datafilters { get; set; }
         public Dictionary<int, object> classAttribList;
 
         public ChoroplethKmlLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)

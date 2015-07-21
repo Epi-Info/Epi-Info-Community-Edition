@@ -37,13 +37,14 @@ namespace EpiDashboard.Mapping
         private bool flagrunedit;
         private int Numclasses;
         public bool flagQuantiles;
+        public DataFilters datafilters { get; set; }
         public Dictionary<int, object> classAttribList;
 
         public string ShapeFilePath;
         public string cbxMapserverText;
         public string txtMapserverText;
         public string cbxMapFeatureText;
-        public int cbxMapFeatureIndex;
+
 
         public IDictionary<string, object> curfeatureAttributes;
 
@@ -60,6 +61,7 @@ namespace EpiDashboard.Mapping
             FillComboBoxes();
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
             btnShapeFile.Click += new RoutedEventHandler(btnShapeFile_Click);
+                       
             cbxDataKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxShapeKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
@@ -124,10 +126,15 @@ namespace EpiDashboard.Mapping
                     {
                         rctLowColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
                     }
+                    if (child.Name.Equals("selectMapFeature"))
+                    {
+                        cbxMapFeatureText = child.InnerText;
+                }
                 }
                 RenderMap();
             }
         }
+
 
         void rctFilter_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -169,7 +176,6 @@ namespace EpiDashboard.Mapping
 
         private void rctEdit_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            flagrunedit = false;
             if (EditRequested != null)
             {
                 flagrunedit = false;
@@ -181,13 +187,15 @@ namespace EpiDashboard.Mapping
         {
             if (cbxDataKey.SelectedIndex != -1 && cbxShapeKey.SelectedIndex != -1 && cbxValue.SelectedIndex != -1)
             {
-               // provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), ((SolidColorBrush)rctLowColor.Fill).Color, ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()) - 1);
+               // provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), ((SolidColorBrush)rctLowColor.Fill).Color, ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()) - 1, "");
                 if (MapGenerated != null)
                 {
                     MapGenerated(this, new EventArgs());
                 }
             }
         }
+       
+               
         public void SetdashboardHelper(DashboardHelper dash)
         {
             this.dashboardHelper = dash;
@@ -321,7 +329,7 @@ namespace EpiDashboard.Mapping
             string value = cbxValue.SelectedItem.ToString();
             SolidColorBrush highColor = (SolidColorBrush)rctHighColor.Fill;
             SolidColorBrush lowColor = (SolidColorBrush)rctLowColor.Fill;
-            string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() + "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor><classes>" + cbxClasses.SelectedIndex.ToString() + "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>";
+            string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() + "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor><classes>" + cbxClasses.SelectedIndex.ToString() + "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>" + "<selectMapFeature>" + cbxMapFeatureText + "</selectMapFeature> ";
             System.Xml.XmlElement element = doc.CreateElement("dataLayer");
             element.InnerXml = xmlString;
             element.AppendChild(dashboardHelper.Serialize(doc));
@@ -333,16 +341,56 @@ namespace EpiDashboard.Mapping
             return element;
         }
 
+        private string GetformattedUrl(string sUrl)
+        {
+            if (cbxMapserverText == "NationalMap.gov - New York County Boundaries" || cbxMapserverText == "NationalMap.gov - Rhode Island Zip Code Boundaries" || cbxMapserverText == "NationalMap.gov - U.S. State Boundaries" || cbxMapserverText == "NationalMap.gov - World Boundaries")
+            { sUrl = cbxMapserverText + "/0"; }
+
+            return sUrl;
+
+        }
+
+        private void SetValuesFromUrl(string sPath)
+        {
+               if (sPath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13" && string.IsNullOrEmpty(cbxMapFeatureText) == true )
+                   cbxMapserverText = "NationalMap.gov - New York County Boundaries";
+               else if (sPath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19" && string.IsNullOrEmpty(cbxMapFeatureText) == true) 
+                   cbxMapserverText = "NationalMap.gov - Rhode Island Zip Code Boundaries";
+               else if (sPath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17" && string.IsNullOrEmpty(cbxMapFeatureText) == true)
+                    cbxMapserverText = "NationalMap.gov - U.S. State Boundaries";
+               else if (sPath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17" && string.IsNullOrEmpty(cbxMapFeatureText) == true)
+                   cbxMapserverText = "NationalMap.gov - World Boundaries";
+                  
+                else
+                {
+                    string lastchar = sPath.Substring(sPath.Length - 1, 1);
+                    string lastonebeforechar = sPath.Substring(sPath.Length - 2, 1);
+                    if (char.IsNumber(lastchar, 0) == true && char.IsNumber(lastonebeforechar,0) == false)
+                        txtMapserverText = sPath.Substring(0, sPath.Length - 2);
+                    else if (char.IsNumber(lastchar, 0) == true && char.IsNumber(lastonebeforechar, 0) == true)
+                       txtMapserverText = sPath.Substring(0, sPath.Length - 3);
+                }
+             
+           }
+
         public void CreateFromXml(System.Xml.XmlElement element)
         {
+            string shapefileurl="";
             currentElement = element;
             foreach (System.Xml.XmlElement child in element.ChildNodes)
             {
                 if (child.Name.Equals("shapeFile"))
                 {
-                    provider.LoadShapeFile(child.InnerText);
+                   shapefileurl = child.InnerText; 
+                }
+                if (child.Name.Equals("selectMapFeature"))
+                {
+                    cbxMapFeatureText = child.InnerText;
                 }
             }
+            SetValuesFromUrl(shapefileurl);
+            string sUrl = GetformattedUrl(shapefileurl);
+            provider.LoadShapeFile(sUrl); 
         }
 
         #endregion
