@@ -42,7 +42,7 @@ namespace Epi.UnitTests
             IDbDriverFactory dbFactory = null;
             dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(provider);
             IDbDriver db = dbFactory.CreateDatabaseObject(dbCnnStringBuilder);
-            db.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Resources;Extended Properties=\"text;HDR=Yes;FMT=Delimited\"";
+            db.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..\\..\\Data;Extended Properties=\"text;HDR=Yes;FMT=Delimited\"";
             object selectedDataSource = db;
 
             IDbDriver dbDriver = (IDbDriver)selectedDataSource;
@@ -68,7 +68,8 @@ namespace Epi.UnitTests
             }
 
             {
-                if (ds == null || ds.Tables.Count == 0 || (ds.Tables[0].Rows.Count == 0 && ds.Tables[0].Columns.Count == 0))
+//                if (ds == null || ds.Tables.Count == 0 || (ds.Tables[0].Rows.Count == 0 && ds.Tables[0].Columns.Count == 0))
+                if (true)
                 {
                     if (inputs != null)
                     {
