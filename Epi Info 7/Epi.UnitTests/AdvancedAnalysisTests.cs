@@ -25,22 +25,8 @@ using EpiDashboard.Gadgets.Reporting;
 namespace Epi.UnitTests
 {
     [TestClass]
-    public class AdvancedAnalysisTests
+    public class AdvancedAnalysisTests : StatisticsTests
     {
-        public DashboardHelper DashboardHelper { get; private set; }
-        private DataSet ds;
-        private DataTable mainTable;
-        //        private IDbDriver db;
-//       public IDbDriver Database
-//        {
-//            get
-//            {
-//                return this.db;
-//            }
-//        }
-//        public string TableName { get; private set; }
-//        public List<RelatedConnection> ConnectionsForRelate { get; private set; }
-
         private struct VariableRow
         {
             public string variableName;
@@ -73,14 +59,15 @@ namespace Epi.UnitTests
         [TestMethod]
         public void LogisticRegressionTest()
         {
-            getData("EColiFoodHistory", "sex = 'M-Male'");
+            getData("LogisticTestData", "iteration = 1");
 
             Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
-            inputVariableList.Add("ill", "dependvar");
+            inputVariableList.Add("depvar", "dependvar");
             inputVariableList.Add("intercept", "true");
             inputVariableList.Add("includemissing", "false");
             inputVariableList.Add("P", "0.95");
-            inputVariableList.Add("beansprouts", "unsorted");
+            inputVariableList.Add("indepvar1", "unsorted");
+            inputVariableList.Add("indepvar2", "unsorted");
 
             DataTable regressTable = new DataTable();
 
@@ -95,114 +82,13 @@ namespace Epi.UnitTests
                 results.regressionResults.variables[0].se + "\t" +
                 results.regressionResults.variables[0].Z + "\t" +
                 results.regressionResults.variables[0].P + "\n");
-        }
-
-        private void getData(string filename, string filterstring = null)
-        {
-            string configFilePath = "..\\..\\..\\Build\\Debug\\Configuration\\EpiInfo.Config.xml";
-            Epi.DataSets.Config configDataSet = new Epi.DataSets.Config();
-            configDataSet.ReadXml(configFilePath);
-            Epi.Configuration.Load(configFilePath);
-            System.Data.Common.DbConnectionStringBuilder dbCnnStringBuilder = new System.Data.Common.DbConnectionStringBuilder();
-            string provider = "Epi.Data.Office.CsvFileFactory, Epi.Data.Office";
-            IDbDriverFactory dbFactory = null;
-            dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(provider);
-            IDbDriver db = dbFactory.CreateDatabaseObject(dbCnnStringBuilder);
-            db.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Resources;Extended Properties=\"text;HDR=Yes;FMT=Delimited\"";
-            object selectedDataSource = db;
-
-            IDbDriver dbDriver = (IDbDriver)selectedDataSource;
-            DashboardHelper = new DashboardHelper(filename + "#csv", dbDriver);
-            IGadgetParameters inputs = new GadgetParameters();
-            DashboardHelper.UserVarsNeedUpdating = true;
-            string fs = null;
-            if (!String.IsNullOrEmpty(filterstring))
-            {
-                fs = "select * from " + filename + "#csv where " + filterstring;
-            }
-            PopulateDataSet(inputs, fs);
-        }
-
-        private void PopulateDataSet(IGadgetParameters inputs = null, string filterstring = null)
-        {
-            DataTable unfilteredTable = new DataTable("unfilteredTable");
-            unfilteredTable.CaseSensitive = true;
-
-            if (inputs != null)
-            {
-                inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CACHING_WAIT);
-            }
-
-            {
-                if (ds == null || ds.Tables.Count == 0 || (ds.Tables[0].Rows.Count == 0 && ds.Tables[0].Columns.Count == 0))
-                {
-                    if (inputs != null)
-                    {
-                        inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CACHING);
-                    }
-
-                    if (string.IsNullOrEmpty(filterstring))
-                    {
-                        unfilteredTable = DashboardHelper.Database.GetTableData(DashboardHelper.TableName);
-                    }
-                    else
-                    {
-                        Query selectQuery = DashboardHelper.Database.CreateQuery(filterstring);
-                        unfilteredTable = DashboardHelper.Database.Select(selectQuery);
-                    }
-
-                    if (DashboardHelper.ConnectionsForRelate.Count > 0)
-                    {
-                        foreach (RelatedConnection conn in DashboardHelper.ConnectionsForRelate)
-                        {
-                            DataTable relatedTable = new DataTable();
-                            relatedTable.CaseSensitive = true;
-
-                            {
-                                relatedTable = conn.db.GetTableData(conn.TableName);
-                                relatedTable.TableName = conn.TableName;
-                            }
-                        }
-                    }
-
-                    DashboardHelper.AddSystemVariablesToTable(unfilteredTable);
-                    DashboardHelper.AddPermanentVariablesToTable(unfilteredTable);
-                    ds = new DataSet();
-                    ds.Tables.Add(unfilteredTable); //ds.Tables.Add(ConvertTableColumns(unfilteredTable));
-                    ds.Tables[0].CaseSensitive = true;
-                    DataRow[] rows = ds.Tables[0].Select("sex = 'M-Male'");
-                    mainTable = ds.Tables[0];
-
-                    #region Data Prep for values with spaces (Excel only)
-
-                    if (DashboardHelper.Database.ConnectionDescription.Contains("Excel")) // only run if it's Excel
-                    {
-                        List<string> strColumnNames = DashboardHelper.GetFieldsAsList(ColumnDataType.Text);
-
-                        foreach (DataRow row in ds.Tables[0].Rows)
-                        {
-                            foreach (string strColumnName in strColumnNames)
-                            {
-                                row[strColumnName] = row[strColumnName].ToString().Trim();
-                            }
-                        }
-                    }
-                    #endregion // Data Prep for values with trailing spaces
-                }
-                else
-                {
-                    if (inputs != null)
-                    {
-                        inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_PROCESSING);
-                    }
-                }
-            }
-
-            if (inputs != null)
-            {
-                inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_INSTRUCTIONS_FINISHED_CACHING);
-                inputs.UpdateGadgetProgress(0);
-            }
+            System.Diagnostics.Trace.Write(results.regressionResults.variables[1].oddsRatio + "\t" +
+                results.regressionResults.variables[1].ninetyFivePercent + "\t" +
+                results.regressionResults.variables[1].ci + "\t" +
+                results.regressionResults.variables[1].coefficient + "\t" +
+                results.regressionResults.variables[1].se + "\t" +
+                results.regressionResults.variables[1].Z + "\t" +
+                results.regressionResults.variables[1].P + "\n");
         }
     }
 }
