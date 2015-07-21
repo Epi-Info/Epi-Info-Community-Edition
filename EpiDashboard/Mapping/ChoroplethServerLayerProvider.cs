@@ -42,10 +42,18 @@ namespace EpiDashboard.Mapping
         private Guid layerId;
         private Color lowColor;
         private Color highColor;
+        private List<SolidColorBrush> colors;
         private int classCount;
+        string missingText;
         string[,] rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
-        float[]  quantileValues = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-        private bool flagupdatetoglfailed ;
+        float[] quantileValues = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+        private bool flagupdatetoglfailed;
+
+        private List<double> _range;
+        public List<double> Range {
+            get { return _range; } 
+            set { _range = value; } 
+        }
 
         public event FeatureLoadedHandler FeatureLoaded;
 
@@ -57,7 +65,7 @@ namespace EpiDashboard.Mapping
 
         List<List<SolidColorBrush>> ColorList = new List<List<SolidColorBrush>>();
         int _colorShadeIndex = 0;
-        
+
         int _lastGeneratedClassCount = 0;
 
         public string[,] RangeValues
@@ -116,21 +124,21 @@ namespace EpiDashboard.Mapping
         }
 
         private Color GetColorAtPoint(Rectangle theRec, Point thePoint)
-        {    
+        {
             LinearGradientBrush br = (LinearGradientBrush)theRec.Fill;
             double y3 = thePoint.Y; double x3 = thePoint.X;
             double x1 = br.StartPoint.X * theRec.Width;
             double y1 = br.StartPoint.Y * theRec.Height;
-            Point p1 = new Point(x1, y1); 
+            Point p1 = new Point(x1, y1);
             double x2 = br.EndPoint.X * theRec.Width;
             double y2 = br.EndPoint.Y * theRec.Height;
-            Point p2 = new Point(x2, y2);  
-            Point p4 = new Point(); 
-            if (y1 == y2) 
+            Point p2 = new Point(x2, y2);
+            Point p4 = new Point();
+            if (y1 == y2)
             { p4 = new Point(x3, y1); }
-            else if (x1 == x2) 
+            else if (x1 == x2)
             { p4 = new Point(x1, y3); }
-            else 
+            else
             {
                 double m = (y2 - y1) / (x2 - x1);
                 double m2 = -1 / m;
@@ -138,19 +146,19 @@ namespace EpiDashboard.Mapping
                 double c = y3 - m2 * x3;
                 double x4 = (c - b) / (m - m2);
                 double y4 = m * x4 + b; p4 = new Point(x4, y4);
-            }     
+            }
             double d4 = dist(p4, p1, p2);
             double d2 = dist(p2, p1, p2);
-            double x = d4 / d2;     
+            double x = d4 / d2;
             double max = br.GradientStops.Max(n => n.Offset);
             if (x > max) { x = max; }
             double min = br.GradientStops.Min(n => n.Offset);
-            if (x < min) { x = min; }     
+            if (x < min) { x = min; }
             GradientStop gs0 = br.GradientStops.Where(n => n.Offset <= x).OrderBy(n => n.Offset).Last();
             GradientStop gs1 = br.GradientStops.Where(n => n.Offset >= x).OrderBy(n => n.Offset).First();
             float y = 0f;
             if (gs0.Offset != gs1.Offset)
-            { y = (float)((x - gs0.Offset) / (gs1.Offset - gs0.Offset)); }     
+            { y = (float)((x - gs0.Offset) / (gs1.Offset - gs0.Offset)); }
             Color cx = new Color();
             if (br.ColorInterpolationMode == ColorInterpolationMode.ScRgbLinearInterpolation)
             {
@@ -172,11 +180,11 @@ namespace EpiDashboard.Mapping
         }
         private double dist(Point px, Point po, Point pf)
         {
-            double d = Math.Sqrt((px.Y - po.Y) * (px.Y - po.Y) + (px.X - po.X) * (px.X - po.X)); 
-            if (((px.Y < po.Y) && (pf.Y > po.Y)) || ((px.Y > po.Y) && (pf.Y < po.Y)) || ((px.Y == po.Y) && (px.X < po.X) && (pf.X > po.X)) || ((px.Y == po.Y) && (px.X > po.X) && (pf.X < po.X))) 
-            { 
-                d = -d; 
-            } 
+            double d = Math.Sqrt((px.Y - po.Y) * (px.Y - po.Y) + (px.X - po.X) * (px.X - po.X));
+            if (((px.Y < po.Y) && (pf.Y > po.Y)) || ((px.Y > po.Y) && (pf.Y < po.Y)) || ((px.Y == po.Y) && (px.X < po.X) && (pf.X > po.X)) || ((px.Y == po.Y) && (px.X > po.X) && (pf.X < po.X)))
+            {
+                d = -d;
+            }
             return d;
         }
 
@@ -187,7 +195,7 @@ namespace EpiDashboard.Mapping
             temp.Width = 256;
             temp.Height = 256;
             temp.Fill = gradientBrush;
-            
+
             ColorList = new List<List<SolidColorBrush>>();
 
             List<SolidColorBrush> BlueShades = new List<SolidColorBrush>();
@@ -216,7 +224,7 @@ namespace EpiDashboard.Mapping
             int index = classCount - 1;
             try
             {
-               for (int r = 0; r < classCount - 1; r++)
+                for (int r = 0; r < classCount - 1; r++)
                 {
                     if (val >= ranges[r] && val < ranges[r + 1]) index = r;
                 }
@@ -227,7 +235,7 @@ namespace EpiDashboard.Mapping
             {
                 return index;
             }
-       
+
         }
 
         public struct Values
@@ -340,7 +348,7 @@ namespace EpiDashboard.Mapping
             //x++;
             myMap.Cursor = Cursors.Arrow;
             flagupdatetoglfailed = true;
-           
+
         }
 
         void graphicsLayer_InitializationFailed(object sender, EventArgs e)
@@ -349,7 +357,7 @@ namespace EpiDashboard.Mapping
             //int x = 5;
             //x++;
             myMap.Cursor = Cursors.Arrow;
-            
+
         }
 
         void graphicsLayer_Initialized(object sender, EventArgs e)
@@ -391,11 +399,11 @@ namespace EpiDashboard.Mapping
         {
             if (dashboardHelper != null)
             {
-                SetShapeRangeValues(dashboardHelper, shapeKey, dataKey, valueField, lowColor, highColor, classCount);
+                SetShapeRangeValues(dashboardHelper, shapeKey, dataKey, valueField, colors, classCount, missingText);
             }
         }
 
-        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, Color lowColor, Color highColor, int classCount)
+        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string missingText)
         {
             try
             {
@@ -406,6 +414,7 @@ namespace EpiDashboard.Mapping
                 this.valueField = valueField;
                 this.lowColor = lowColor;
                 this.highColor = highColor;
+                this.missingText = missingText;
 
                 List<string> columnNames = new List<string>();
                 if (dashboardHelper.IsUsingEpiProject)
@@ -458,7 +467,7 @@ namespace EpiDashboard.Mapping
                     filterExpression += dataKey;
                     if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
                         filterExpression += "]";
-                    filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'","''").Trim() + "'";
+                    filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim() + "'";
 
                     double graphicValue = Double.PositiveInfinity;
                     try
@@ -490,50 +499,57 @@ namespace EpiDashboard.Mapping
                         valueList.Add(graphicValue);
                     }
                 }
-                thematicItem.RangeStarts = new List<double>();
 
-                double totalRange = thematicItem.Max - thematicItem.Min;
-                double portion = totalRange / classCount;
-
-                thematicItem.RangeStarts.Add(thematicItem.Min);
-                double startRangeValue = thematicItem.Min;
-                IEnumerable<double> valueEnumerator =
-                from aValue in valueList
-                orderby aValue
-                select aValue;
-
-                if (valueList.Count > 0)
+                if (Range != null && Range.Count > 0)
                 {
-                    if (classCount == 2)
+                    thematicItem.RangeStarts = Range;
+                }
+                else
+                {
+                    thematicItem.RangeStarts = new List<double>();
+
+                    double totalRange = thematicItem.Max - thematicItem.Min;
+                    double portion = totalRange / classCount;
+
+                    thematicItem.RangeStarts.Add(thematicItem.Min);
+                    double startRangeValue = thematicItem.Min;
+                    IEnumerable<double> valueEnumerator =
+                    from aValue in valueList
+                    orderby aValue
+                    select aValue;
+
+                    if (valueList.Count > 0)
                     {
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 3));
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 3));
-                    }
-                    else if (classCount == 3)
-                    {
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 4));
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 4));
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 3) / 4));
-                    }
-                    else if (classCount == 4)
-                    {
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 5));
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 5));
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 3) / 5));
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 4) / 5));
-                    }
-                    else
-                    {
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 6));
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 6));
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 3) / 6));
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 4) / 6));
-                        thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 5) / 6));
+                        if (classCount == 2)
+                        {
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 3));
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 3));
+                        }
+                        else if (classCount == 3)
+                        {
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 4));
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 4));
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 3) / 4));
+                        }
+                        else if (classCount == 4)
+                        {
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 5));
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 5));
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 3) / 5));
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 4) / 5));
+                        }
+                        else
+                        {
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt(valueList.Count / 6));
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 2) / 6));
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 3) / 6));
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 4) / 6));
+                            thematicItem.RangeStarts.Add(valueEnumerator.ElementAt((valueList.Count * 5) / 6));
+                        }
                     }
                 }
-
                 // Create graphic features and set symbol using the class range which contains the value 
-                List<SolidColorBrush> brushList = ColorList[_colorShadeIndex];
+               // List<SolidColorBrush> brushList = ColorList[_colorShadeIndex];
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
 
@@ -574,6 +590,15 @@ namespace EpiDashboard.Mapping
 
                         int brushIndex = GetRangeIndex(graphicValue, thematicItem.RangeStarts);
 
+                        SimpleFillSymbol symbol = new SimpleFillSymbol()
+                        {
+                            Fill = graphicValue == Double.PositiveInfinity ? colors[colors.Count - 1] : colors[brushIndex],
+                            BorderBrush = new SolidColorBrush(Colors.Black),
+                            BorderThickness = 1
+                        };
+
+                        graphicFeature.Symbol = symbol;
+
                         TextBlock t = new TextBlock();
                         t.Background = Brushes.White;
                         if (graphicValue == Double.PositiveInfinity)
@@ -597,7 +622,7 @@ namespace EpiDashboard.Mapping
                     renderer.Field = "EpiInfoValCol";
                     renderer.DefaultSymbol = new SimpleFillSymbol()
                         {
-                            Fill = new SolidColorBrush(Colors.Transparent),
+                            Fill = colors[colors.Count - 1],
                             BorderBrush = new SolidColorBrush(Colors.Black),
                             BorderThickness = 1
                         };
@@ -607,7 +632,7 @@ namespace EpiDashboard.Mapping
                         MaximumValue = thematicItem.RangeStarts[1],
                         Symbol = new SimpleFillSymbol()
                             {
-                                Fill = brushList[0],
+                                Fill = colors[0],
                                 BorderBrush = new SolidColorBrush(Colors.Black),
                                 BorderThickness = 1
                             }
@@ -618,20 +643,29 @@ namespace EpiDashboard.Mapping
                         MaximumValue = thematicItem.RangeStarts[2],
                         Symbol = new SimpleFillSymbol()
                         {
-                            Fill = brushList[1],
+                            Fill = colors[1],
                             BorderBrush = new SolidColorBrush(Colors.Black),
                             BorderThickness = 1
                         }
                     });
                     if (classCount > 2)
                     {
+                        double maxVal = 0.0, minVal = thematicItem.RangeStarts[2];
+                        if (thematicItem.RangeStarts.Count == 3)
+                        {
+                            maxVal = thematicItem.Max;
+                        }
+                        else
+                        {
+                            maxVal = thematicItem.RangeStarts[3];
+                        }
                         renderer.Classes.Add(new ClassBreakInfo()
                         {
-                            MinimumValue = thematicItem.RangeStarts[2],
-                            MaximumValue = thematicItem.RangeStarts[3],
+                            MinimumValue = minVal,
+                            MaximumValue = maxVal,
                             Symbol = new SimpleFillSymbol()
                             {
-                                Fill = brushList[2],
+                                Fill = colors[2],
                                 BorderBrush = new SolidColorBrush(Colors.Black),
                                 BorderThickness = 1
                             }
@@ -639,13 +673,22 @@ namespace EpiDashboard.Mapping
                     }
                     if (classCount > 3)
                     {
+                        double maxVal = 0.0, minVal = thematicItem.RangeStarts[3];
+                        if (thematicItem.RangeStarts.Count == 4)
+                        {
+                            maxVal = thematicItem.Max;
+                        }
+                        else
+                        {
+                            maxVal = thematicItem.RangeStarts[4];
+                        }
                         renderer.Classes.Add(new ClassBreakInfo()
                         {
-                            MinimumValue = thematicItem.RangeStarts[3],
-                            MaximumValue = thematicItem.RangeStarts[4],
+                            MinimumValue = minVal,
+                            MaximumValue = maxVal,
                             Symbol = new SimpleFillSymbol()
                             {
-                                Fill = brushList[3],
+                                Fill = colors[3],
                                 BorderBrush = new SolidColorBrush(Colors.Black),
                                 BorderThickness = 1
                             }
@@ -653,13 +696,22 @@ namespace EpiDashboard.Mapping
                     }
                     if (classCount > 4)
                     {
+                        double maxVal = 0.0, minVal = thematicItem.RangeStarts[4];
+                        if (thematicItem.RangeStarts.Count == 5)
+                        {
+                            maxVal = thematicItem.Max;
+                        }
+                        else
+                        {
+                            maxVal = thematicItem.RangeStarts[5];
+                        }
                         renderer.Classes.Add(new ClassBreakInfo()
                         {
-                            MinimumValue = thematicItem.RangeStarts[4],
-                            MaximumValue = thematicItem.RangeStarts[5],
+                            MinimumValue = minVal,
+                            MaximumValue = maxVal,
                             Symbol = new SimpleFillSymbol()
                             {
-                                Fill = brushList[4],
+                                Fill = colors[4],
                                 BorderBrush = new SolidColorBrush(Colors.Black),
                                 BorderThickness = 1
                             }
@@ -667,25 +719,136 @@ namespace EpiDashboard.Mapping
                     }
                     if (classCount > 5)
                     {
+                        double maxVal = 0.0, minVal = thematicItem.RangeStarts[5];
+                        if (thematicItem.RangeStarts.Count == 6)
+                        {
+                            maxVal = thematicItem.Max;
+                        }
+                        else
+                        {
+                            maxVal = thematicItem.RangeStarts[6];
+                        }
+
                         renderer.Classes.Add(new ClassBreakInfo()
                         {
-                            MinimumValue = thematicItem.RangeStarts[5],
-                            MaximumValue = thematicItem.RangeStarts[6],
+                            MinimumValue = minVal,
+                            MaximumValue = maxVal,
                             Symbol = new SimpleFillSymbol()
                             {
-                                Fill = brushList[5],
+                                Fill = colors[5],
                                 BorderBrush = new SolidColorBrush(Colors.Black),
                                 BorderThickness = 1
                             }
                         });
                     }
+
+                    if (classCount > 6)
+                    {
+                        double maxVal = 0.0, minVal = thematicItem.RangeStarts[6];
+                        if (thematicItem.RangeStarts.Count == 7)
+                        {
+                            maxVal = thematicItem.Max;
+                        }
+                        else
+                        {
+                            maxVal = thematicItem.RangeStarts[7];
+                        }
+
+                        renderer.Classes.Add(new ClassBreakInfo()
+                        {
+                            MinimumValue = minVal,
+                            MaximumValue = maxVal,
+                            Symbol = new SimpleFillSymbol()
+                            {
+                                Fill = colors[6],
+                                BorderBrush = new SolidColorBrush(Colors.Black),
+                                BorderThickness = 1
+                            }
+                        });
+                    }
+
+                    if (classCount > 7)
+                    {
+                        double maxVal = 0.0, minVal = thematicItem.RangeStarts[7];
+                        if (thematicItem.RangeStarts.Count == 8)
+                        {
+                            maxVal = thematicItem.Max;
+                        }
+                        else
+                        {
+                            maxVal = thematicItem.RangeStarts[8];
+                        }
+
+                        renderer.Classes.Add(new ClassBreakInfo()
+                        {
+                            MinimumValue = minVal,
+                            MaximumValue = maxVal,
+                            Symbol = new SimpleFillSymbol()
+                            {
+                                Fill = colors[7],
+                                BorderBrush = new SolidColorBrush(Colors.Black),
+                                BorderThickness = 1
+                            }
+                        });
+                    }
+
+                    if (classCount > 8)
+                    {
+                        double maxVal = 0.0, minVal = thematicItem.RangeStarts[8];
+                        if (thematicItem.RangeStarts.Count == 9)
+                        {
+                            maxVal = thematicItem.Max;
+                        }
+                        else
+                        {
+                            maxVal = thematicItem.RangeStarts[9];
+                        }
+
+                        renderer.Classes.Add(new ClassBreakInfo()
+                        {
+                            MinimumValue = minVal,
+                            MaximumValue = maxVal,
+                            Symbol = new SimpleFillSymbol()
+                            {
+                                Fill = colors[8],
+                                BorderBrush = new SolidColorBrush(Colors.Black),
+                                BorderThickness = 1
+                            }
+                        });
+                    }
+
+                    if (classCount > 9)
+                    {
+                        double maxVal = 0.0, minVal = thematicItem.RangeStarts[9];
+                        if (thematicItem.RangeStarts.Count == 7)
+                        {
+                            maxVal = thematicItem.Max;
+                        }
+                        else
+                        {
+                            maxVal = thematicItem.RangeStarts[7];
+                        }
+
+                        renderer.Classes.Add(new ClassBreakInfo()
+                        {
+                            MinimumValue = minVal,
+                            MaximumValue = maxVal,
+                            Symbol = new SimpleFillSymbol()
+                            {
+                                Fill = colors[9],
+                                BorderBrush = new SolidColorBrush(Colors.Black),
+                                BorderThickness = 1
+                            }
+                        });
+                    }
+
                     renderer.Classes.Add(new ClassBreakInfo()
                     {
                         MinimumValue = thematicItem.RangeStarts[classCount - 1],
                         MaximumValue = thematicItem.Max,
                         Symbol = new SimpleFillSymbol()
                         {
-                            Fill = brushList[classCount],
+                            Fill = colors[classCount],
                             BorderBrush = new SolidColorBrush(Colors.Black),
                             BorderThickness = 1
                         }
@@ -708,14 +871,31 @@ namespace EpiDashboard.Mapping
                 legendList.BorderThickness = new Thickness(3);
                 //LegendTitle.Text = thematicItem.Description;
 
-                for (int c = 0; c <= classCount; c++)
+                Rectangle missingSwatchRect = new Rectangle()
+                {
+                    Width = 20,
+                    Height = 20,
+                    Stroke = new SolidColorBrush(Colors.Black),
+                    Fill = colors[colors.Count - 1]
+                };
+
+                TextBlock missingClassTextBlock = new TextBlock();
+                missingClassTextBlock.Text = String.Format("  " + missingText);
+                StackPanel missingClassStackPanel = new StackPanel();
+                missingClassStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+                missingClassStackPanel.Children.Add(missingSwatchRect);
+                missingClassStackPanel.Children.Add(missingClassTextBlock);
+
+                legendList.Items.Add(missingClassStackPanel);
+
+                for (int c = 0; c < thematicItem.RangeStarts.Count; c++)
                 {
                     Rectangle swatchRect = new Rectangle()
                     {
                         Width = 20,
                         Height = 20,
                         Stroke = new SolidColorBrush(Colors.Black),
-                        Fill = brushList[c]
+                        Fill = colors[c]
                     };
 
                     TextBlock classTextBlock = new TextBlock();
@@ -724,15 +904,22 @@ namespace EpiDashboard.Mapping
                     if (c == 0)
                         classTextBlock.Text = String.Format("  Less than or equal to {0}", Math.Round(thematicItem.RangeStarts[1], 2));
                     // Last classification
-                    else if (c == classCount)
+                    else if (c == thematicItem.RangeStarts.Count - 1)
                         classTextBlock.Text = String.Format("  {0} and above", Math.Round(thematicItem.RangeStarts[c], 2));
                     // Middle classifications
                     else
                     {
-                        if (thematicItem.RangeStarts[c] == thematicItem.RangeStarts[c + 1])
-                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(thematicItem.RangeStarts[c], 2));
-                        else
-                            classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(thematicItem.RangeStarts[c], 2), Math.Round(thematicItem.RangeStarts[c + 1], 2));
+                        if (thematicItem.RangeStarts.Count > c + 1)
+                        {
+                            if (thematicItem.RangeStarts[c] == thematicItem.RangeStarts[c + 1])
+                                classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(thematicItem.RangeStarts[c], 2));
+                            else
+                                classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(thematicItem.RangeStarts[c], 2), Math.Round(thematicItem.RangeStarts[c + 1], 2));
+                        }
+                        //else
+                        //{
+                        //    classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(thematicItem.RangeStarts[c], 2), Math.Round(thematicItem.Max, 2));
+                        //}
                     }
 
                     StackPanel classStackPanel = new StackPanel();
@@ -914,12 +1101,18 @@ namespace EpiDashboard.Mapping
             this.shapeKey = shapeKey;
             this.dataKey = dataKey;
             this.valueField = valueField;
-            
+
             DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
 
             GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
             ThematicItem thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
             RangeCount = thematicItem.RangeStarts.Count;
+
+
+            if (Range != null && Range.Count > 0)
+            {
+                thematicItem.RangeStarts = Range;
+            }
             Array.Clear(RangeValues, 0, RangeValues.Length);
             for (int i = 0; i < thematicItem.RangeStarts.Count; i++)
             {
@@ -940,6 +1133,7 @@ namespace EpiDashboard.Mapping
             //return thematicItem;
 
         }
+       
 
         private StackPanel legendStackPanel;
 
@@ -973,5 +1167,13 @@ namespace EpiDashboard.Mapping
         }
 
         #endregion
+
+        internal void SetRangeFromAttributeList(Dictionary<int, object> dictionary)
+        {
+            //if (classCount >= 2)
+            //{
+            //    Range.Add((double)dictionary[1])
+            //}
+        }
     }
 }

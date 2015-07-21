@@ -1624,6 +1624,7 @@ namespace EpiDashboard.Mapping
             choroplethproperties.rctHighColor.Fill = choroplethServerlayerprop.rctHighColor.Fill;
             choroplethproperties.rctLowColor.Fill = choroplethServerlayerprop.rctLowColor.Fill;
 
+            choroplethproperties.rctMissingColor.Fill = choroplethServerlayerprop.rctMissingColor.Fill;
             choroplethServerlayerprop.FlagRunEdit = true;
 
             if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > choroplethproperties.Width)
@@ -1707,6 +1708,7 @@ namespace EpiDashboard.Mapping
             choroplethproperties.cmbValue.Text = choroplethKMLlayerprop.cbxValue.Text;
             choroplethproperties.rctHighColor.Fill = choroplethKMLlayerprop.rctHighColor.Fill;
             choroplethproperties.rctLowColor.Fill = choroplethKMLlayerprop.rctLowColor.Fill;
+            choroplethproperties.rctMissingColor.Fill = choroplethKMLlayerprop.rctMissingColor.Fill;
 
             choroplethKMLlayerprop.FlagRunEdit = true;
 
