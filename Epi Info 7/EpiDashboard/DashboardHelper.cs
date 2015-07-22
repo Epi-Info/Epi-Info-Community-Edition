@@ -315,6 +315,15 @@ namespace EpiDashboard
         }
 
         /// <summary>
+        /// Sets the datafilters that owns the dashboard helper
+        /// </summary>
+        /// <param name="DataFilters">The datafilters to set</param>
+        public void SetDatafilters(DataFilters datafilters)
+        {
+            this.DataFilters = datafilters;
+        }
+
+        /// <summary>
         /// Converts the relevant portions of the dashboard helper into HTML
         /// </summary>
         /// <returns>string</returns>
