@@ -1663,11 +1663,14 @@ namespace EpiDashboard.Controls
             if (radMapServer.IsChecked == true && this.choroserverlayerprop != null) {choroserverlayerprop.datafilters = rowFilterControl.DataFilters; }
             if (radKML.IsChecked == true && chorokmllayerprop != null) { chorokmllayerprop.datafilters = rowFilterControl.DataFilters; }
             
+            
+            this.datafilters = rowFilterControl.DataFilters;
+            _dashboardHelper.SetDatafilters(this.datafilters);
+
+            /*
             string sfilterOperand = string.Empty;
             string[] shilowvars;
             string svarname;
-
-            this.datafilters = rowFilterControl.DataFilters;
 
             List<string> sconditionval = datafilters.GetFilterConditionsAsList();
            
@@ -1741,7 +1744,7 @@ namespace EpiDashboard.Controls
                     shilowvars = sValues.Split(' ');
                     _dashboardHelper.AddDataFilterCondition(sfilterOperand, shilowvars[0].ToString(), shilowvars[2].ToString(), svarname, ConditionJoinType.And);
                 }
-            } 
+            } */
 
         }
 
