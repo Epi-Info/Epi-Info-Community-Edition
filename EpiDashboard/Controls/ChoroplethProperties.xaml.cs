@@ -46,7 +46,9 @@ namespace EpiDashboard.Controls
         public EpiDashboard.Mapping.ChoroplethServerLayerProperties choroserverlayerprop;
         public EpiDashboard.Mapping.ChoroplethKmlLayerProperties chorokmllayerprop;
         private string shapeFilePath;
- 
+
+        List<string> ListLegendText = new List<string>();
+
         public IDictionary<string, object> shapeAttributes;
         private Dictionary<int, object> ClassAttribList = new Dictionary<int, object>();
 
@@ -742,6 +744,7 @@ namespace EpiDashboard.Controls
                 if (radShapeFile.IsChecked == true && _provider != null)
                 {
                     _provider.Range = GetRangeValues(_provider.RangeCount);
+                    _provider.ListLegendText = ListLegendText;
                 _provider.SetShapeRangeValues(_dashboardHelper, 
                     cmbShapeKey.SelectedItem.ToString(),
                     cmbDataKey.SelectedItem.ToString(),
@@ -753,6 +756,7 @@ namespace EpiDashboard.Controls
                 else if (radMapServer.IsChecked == true && choroMapprovider != null)
                 {
                     choroMapprovider.Range = GetRangeValues(choroMapprovider.RangeCount);
+                    choroMapprovider.ListLegendText = ListLegendText;
                     choroMapprovider.SetShapeRangeValues(_dashboardHelper,
                     cmbShapeKey.SelectedItem.ToString(),
                     cmbDataKey.SelectedItem.ToString(),
@@ -764,6 +768,7 @@ namespace EpiDashboard.Controls
                 else if (radKML.IsChecked == true && choroKMLprovider != null)
                 {
                     choroKMLprovider.Range = GetRangeValues(choroKMLprovider.RangeCount);
+                    choroKMLprovider.ListLegendText = ListLegendText;
                     choroKMLprovider.SetShapeRangeValues(_dashboardHelper,
                     cmbShapeKey.SelectedItem.ToString(),
                     cmbDataKey.SelectedItem.ToString(),
@@ -780,7 +785,6 @@ namespace EpiDashboard.Controls
                     classCount); */
            }
         }
-
         private List<double> GetRangeValues(int RangeCount)
         {
             List<double> Range = new List<double>();
@@ -793,8 +797,12 @@ namespace EpiDashboard.Controls
                 double.TryParse(rampStart01.Text, out value);
                 Range.Add(value);
 
+                ListLegendText.Add(legendText01.Text);
+
                 double.TryParse(rampStart02.Text, out value);
                 Range.Add(value);
+
+                ListLegendText.Add(legendText02.Text);
             }
 
 
@@ -802,41 +810,49 @@ namespace EpiDashboard.Controls
             {
                 double.TryParse(rampStart03.Text, out value);
                 Range.Add(value);
+                ListLegendText.Add(legendText03.Text);
             }
             if (RangeCount >= 4)
             {
                 double.TryParse(rampStart04.Text, out value);
                 Range.Add(value);
+                ListLegendText.Add(legendText04.Text);
             }
             if (RangeCount >= 5)
             {
                 double.TryParse(rampStart05.Text, out value);
                 Range.Add(value);
+                ListLegendText.Add(legendText05.Text);
             }
             if (RangeCount >= 6)
             {
                 double.TryParse(rampStart06.Text, out value);
                 Range.Add(value);
+                ListLegendText.Add(legendText06.Text);
             }
             if (RangeCount >= 7)
             {
                 double.TryParse(rampStart07.Text, out value);
                 Range.Add(value);
+                ListLegendText.Add(legendText07.Text);
             }
             if (RangeCount >= 8)
             {
                 double.TryParse(rampStart08.Text, out value);
                 Range.Add(value);
+                ListLegendText.Add(legendText08.Text);
         }
             if (RangeCount >= 9)
             {
                 double.TryParse(rampStart09.Text, out value);
                 Range.Add(value);
+                ListLegendText.Add(legendText09.Text);
             }
             if (RangeCount >= 10)
             {
                 double.TryParse(rampStart10.Text, out value);
                 Range.Add(value);
+                ListLegendText.Add(legendText10.Text);
             }
 
             return Range;
