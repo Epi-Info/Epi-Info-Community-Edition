@@ -2834,4 +2834,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="ERROR_CANVAS_NOT_FOUND" xml:space="preserve">
     <value>The canvas file cannot be found: {0}   Make sure the .cvs7 file exists or that the /canvas: command line switch is used.</value>
   </data>
+  <data name="DASHBOARD_MISSING" xml:space="preserve">
+    <value>Missing</value>
+  </data>
 </root>

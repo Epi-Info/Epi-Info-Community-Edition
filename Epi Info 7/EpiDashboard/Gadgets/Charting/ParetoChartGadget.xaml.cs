@@ -119,6 +119,8 @@ namespace EpiDashboard.Gadgets.Charting
                             XYParetoChartData chartData = new XYParetoChartData();
                             chartData.X = row[0].ToString();
                             chartData.Y = (double)row[1];
+                            //ei-448
+                            if (string.IsNullOrEmpty(row[0].ToString()) && includeMissing) { chartData.X = SharedStrings.DASHBOARD_MISSING; }
                             //chartData.Z = row[0];
                             //GetConfLimit(ref chartData, count);
                             dataList.Add(chartData);
