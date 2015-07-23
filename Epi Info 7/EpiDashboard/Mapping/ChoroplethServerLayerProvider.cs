@@ -49,6 +49,8 @@ namespace EpiDashboard.Mapping
         float[] quantileValues = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
         private bool flagupdatetoglfailed;
 
+        public List<string> ListLegendText { get; set; }
+
         private List<double> _range;
         public List<double> Range {
             get { return _range; } 
@@ -902,19 +904,19 @@ namespace EpiDashboard.Mapping
 
                     // First classification
                     if (c == 0)
-                        classTextBlock.Text = String.Format("  Less than or equal to {0}", Math.Round(thematicItem.RangeStarts[1], 2));
+                        classTextBlock.Text = String.Format("  Less than or equal to {0}", Math.Round(thematicItem.RangeStarts[1], 2)) + " : " + ListLegendText[c];
                     // Last classification
                     else if (c == thematicItem.RangeStarts.Count - 1)
-                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(thematicItem.RangeStarts[c], 2));
+                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(thematicItem.RangeStarts[c], 2)) + " : " + ListLegendText[c];
                     // Middle classifications
                     else
                     {
                         if (thematicItem.RangeStarts.Count > c + 1)
                         {
                             if (thematicItem.RangeStarts[c] == thematicItem.RangeStarts[c + 1])
-                                classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(thematicItem.RangeStarts[c], 2));
+                                classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(thematicItem.RangeStarts[c], 2)) + " : " + ListLegendText[c];
                             else
-                                classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(thematicItem.RangeStarts[c], 2), Math.Round(thematicItem.RangeStarts[c + 1], 2));
+                                classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(thematicItem.RangeStarts[c], 2), Math.Round(thematicItem.RangeStarts[c + 1], 2)) + " : " + ListLegendText[c];
                         }
                         //else
                         //{
@@ -1175,5 +1177,6 @@ namespace EpiDashboard.Mapping
             //    Range.Add((double)dictionary[1])
             //}
         }
+
     }
 }

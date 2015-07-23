@@ -55,6 +55,15 @@ namespace EpiDashboard.Mapping
             set { _range = value; }
         }
 
+        private List<string> _ListLegendText;
+
+        public List<string> ListLegendText
+        {
+            get { return _ListLegendText; }
+            set { _ListLegendText = value; }
+        }
+
+
         public ChoroplethLayerProvider(Map myMap)
         {
             _myMap = myMap;
@@ -543,18 +552,18 @@ namespace EpiDashboard.Mapping
                     //}
                     //else 
                     if (c == classCount - 1)
-                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(RangeStarts[c], 2));
+                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(RangeStarts[c], 2)) + " : " + ListLegendText[c];
                     else if (RangeStarts.Count <= c + 1)
                     {
-                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(RangeStarts[c], 2));
+                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(RangeStarts[c], 2)) + " : " + ListLegendText[c];
                     }
                     // Middle classifications
                     else
                     {
                         if (RangeStarts[c] == RangeStarts[c + 1])
-                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(RangeStarts[c], 2));
+                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(RangeStarts[c], 2)) + " : " + ListLegendText[c];
                         else
-                            classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(RangeStarts[c], 2), Math.Round(RangeStarts[c + 1], 2));
+                            classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(RangeStarts[c], 2), Math.Round(RangeStarts[c + 1], 2)) + " : " + ListLegendText[c];
                     }
 
                     StackPanel classStackPanel = new StackPanel();

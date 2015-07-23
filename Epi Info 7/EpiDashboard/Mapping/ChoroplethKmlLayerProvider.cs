@@ -676,23 +676,23 @@ namespace EpiDashboard.Mapping
                     if (c == 0)
                     {
                         if (RangeStarts[1] == thematicItem.Min)
-                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(RangeStarts[1], 2));
+                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(RangeStarts[1], 2)) + " : " + ListLegendText[c];
                         else
-                            classTextBlock.Text = String.Format("  Less than {0}", Math.Round(RangeStarts[1], 2));
+                            classTextBlock.Text = String.Format("  Less than {0}", Math.Round(RangeStarts[1], 2)) + " : " + ListLegendText[c];
                     }
                     else if (c == classCount - 1)
-                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(RangeStarts[c], 2));
+                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(RangeStarts[c], 2)) + " : " + ListLegendText[c];
                     else if (thematicItem.RangeStarts.Count <= c + 1)
                     {
-                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(RangeStarts[c], 2));
+                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(RangeStarts[c], 2)) + " : " + ListLegendText[c];
                     }
                     // Middle classifications
                     else
                     {
                         if (thematicItem.RangeStarts[c] == thematicItem.RangeStarts[c + 1])
-                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(RangeStarts[c], 2));
+                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(RangeStarts[c], 2)) + " : " + ListLegendText[c];
                         else
-                            classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(RangeStarts[c], 2), Math.Round(RangeStarts[c + 1], 2));
+                            classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(RangeStarts[c], 2), Math.Round(RangeStarts[c + 1], 2)) + " : " + ListLegendText[c];
                     }
 
                     StackPanel classStackPanel = new StackPanel();
@@ -948,5 +948,7 @@ namespace EpiDashboard.Mapping
         }
 
         #endregion
+
+        public List<string> ListLegendText { get; set; }
     }
 }
