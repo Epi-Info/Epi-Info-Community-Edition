@@ -421,15 +421,19 @@ namespace EpiDashboard.Gadgets.Charting
                                 switch (child.InnerText)
                                 {
                                     case "Polygon":
+                                    case "1":
                                         ((AreaChartParameters)Parameters).AreaKind = LineKind.Polygon;
                                         break;
                                     case "Smooth":
+                                    case "2":
                                         ((AreaChartParameters)Parameters).AreaKind = LineKind.Smooth;
                                         break;
                                     case "Step":
+                                    case "3":
                                         ((AreaChartParameters)Parameters).AreaKind = LineKind.Step;
                                         break;
                                     case "Auto":
+                                    case "0":
                                         ((AreaChartParameters)Parameters).AreaKind = LineKind.Auto;
                                         break;
                                 }
