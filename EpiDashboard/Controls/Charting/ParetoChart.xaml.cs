@@ -108,6 +108,7 @@ namespace EpiDashboard.Controls.Charting
                     series0.RelativePointSpace = 0;
                     series0.BarRelativeBegin = 0;
                     series0.BarRelativeEnd = 0;
+                    if (ParetoChartParameters.Composition == CompositionKind.SideBySide) ParetoChartParameters.Composition = CompositionKind.Stacked;
                     break;
                 case BarSpacing.Small:
                     series0.RelativePointSpace = 0.1;
