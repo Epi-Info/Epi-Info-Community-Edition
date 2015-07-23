@@ -3087,6 +3087,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Missing.
+        /// </summary>
+        public static string DASHBOARD_MISSING {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MISSING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Display all list values.
         /// </summary>
         public static string DASHBOARD_OPTION_ALL_VALUES {
