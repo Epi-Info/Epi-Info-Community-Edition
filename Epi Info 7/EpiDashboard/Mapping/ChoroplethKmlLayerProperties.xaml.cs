@@ -180,7 +180,8 @@ namespace EpiDashboard.Mapping
         {
             if (cbxDataKey.SelectedIndex != -1 && cbxShapeKey.SelectedIndex != -1 && cbxValue.SelectedIndex != -1)
             {
-               // provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), ((SolidColorBrush)rctLowColor.Fill).Color, ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()));
+              // provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), ((SolidColorBrush)rctLowColor.Fill).Color, ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()),"" );
+                provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), new List<SolidColorBrush>() { (SolidColorBrush)rctHighColor.Fill }, int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()), "");             
                 if (MapGenerated != null)
                 {
                     MapGenerated(this, new EventArgs());
@@ -330,6 +331,13 @@ namespace EpiDashboard.Mapping
         public void CreateFromXml(System.Xml.XmlElement element)
         {
             currentElement = element;
+
+            if (provider == null)
+            {
+                provider = new ChoroplethKmlLayerProvider(myMap);
+                provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
+            }
+
             foreach (System.Xml.XmlElement child in element.ChildNodes)
             {
                 if (child.Name.Equals("shapeFile"))
