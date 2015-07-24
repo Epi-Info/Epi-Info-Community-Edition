@@ -59,7 +59,7 @@ namespace Epi.UnitTests
         [TestMethod]
         public void LogisticRegressionTest()
         {
-            int iterations = 100;
+            int iterations = 1;// 00;
 
             var reader = new StreamReader(File.OpenRead(@"..\..\Data\LogisticCoefficientResults.csv"));
             int linesinfile = 3 * iterations;
