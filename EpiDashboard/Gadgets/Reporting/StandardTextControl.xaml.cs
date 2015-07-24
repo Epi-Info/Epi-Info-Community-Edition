@@ -26,6 +26,7 @@ namespace EpiDashboard.Gadgets.Reporting
 
         private Brush textBoxBorderBrush;
 
+     
         public StandardTextControl()
         {
             InitializeComponent();
@@ -144,6 +145,8 @@ namespace EpiDashboard.Gadgets.Reporting
 
             System.Xml.XmlAttribute locationY = doc.CreateAttribute("top");
             System.Xml.XmlAttribute locationX = doc.CreateAttribute("left");
+            System.Xml.XmlAttribute id = doc.CreateAttribute("id");
+            id.Value = this.UniqueIdentifier.ToString();
 
             System.Xml.XmlAttribute width = doc.CreateAttribute("width");
             System.Xml.XmlAttribute height = doc.CreateAttribute("height");
@@ -162,13 +165,14 @@ namespace EpiDashboard.Gadgets.Reporting
 
             element.Attributes.Append(locationY);
             element.Attributes.Append(locationX);
+            element.Attributes.Append(id);
 
             element.Attributes.Append(width);
             element.Attributes.Append(height);
 
             element.Attributes.Append(collapsed);
             element.Attributes.Append(type);
-
+            SerializeAnchors(element);
             return element;
         }
 
@@ -343,6 +347,7 @@ namespace EpiDashboard.Gadgets.Reporting
                         break;
                 }
             }
+            base.CreateFromXml(element);
         }
 
         public override string ToHTML(string htmlFileName = "", int count = 0)
