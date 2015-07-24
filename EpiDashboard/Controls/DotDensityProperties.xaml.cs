@@ -206,55 +206,79 @@ namespace EpiDashboard.Controls
 
             this.dataFilters = rowFilterControl.DataFilters;
 
-            List<string> sconditionval = dataFilters.GetFilterConditionsAsList();
-            string strreadablecondition = dataFilters.GenerateReadableDataFilterString().Trim();
-            if (!(string.IsNullOrEmpty(strreadablecondition)))
-            {
-                if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_MISSING))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_MISSING;
-                }
+                 List<string> sconditionval = dataFilters.GetFilterConditionsAsList();
 
-                if (!(strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN)))
+                string strreadablecondition = dataFilters.GenerateReadableDataFilterString().Trim();
+                if (!(string.IsNullOrEmpty(strreadablecondition)))
                 {
-                    svarname = strreadablecondition.Substring(strreadablecondition.IndexOf("[") + 1, strreadablecondition.IndexOf("]") - strreadablecondition.IndexOf("[") - 1);
-                    this.DashboardHelper.AddDataFilterCondition(sfilterOperand, sconditionval[0].ToString(), svarname, ConditionJoinType.And);
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_BETWEEN;
-                    string strcondition = strreadablecondition.Substring(0, strreadablecondition.IndexOf(sfilterOperand)).Trim();
-                    string[] strVarstrings = strcondition.Split(' ');
-                    svarname = strVarstrings[3].ToString();
-                    string sValues = strreadablecondition.ToString().Substring(strreadablecondition.IndexOf(sfilterOperand) + sfilterOperand.Length, (strreadablecondition.ToString().Length) - (strreadablecondition.ToString().IndexOf(sfilterOperand) + sfilterOperand.Length)).Trim();
-                    shilowvars = sValues.Split(' ');
-                    this.DashboardHelper.AddDataFilterCondition(sfilterOperand, shilowvars[0].ToString(), shilowvars[2].ToString(), svarname, ConditionJoinType.And);
-                }
-            }
+                    if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO;
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN;
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL;
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN;
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL;
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING;
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_MISSING))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_MISSING;
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO;
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_OR))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_OR;
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LIKE))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LIKE;
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_AND))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_AND;
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_IS_ANY_OF))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_IS_ANY_OF;
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_IS_NOT_ANY_OF))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_IS_NOT_ANY_OF;
+                    }
+                    if (!(strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN)))
+                    {
+                        svarname = strreadablecondition.Substring(strreadablecondition.IndexOf("[") + 1, strreadablecondition.IndexOf("]") - strreadablecondition.IndexOf("[") - 1);
+                        this.dashboardHelper.AddDataFilterCondition(sfilterOperand, sconditionval[0].ToString(), svarname, ConditionJoinType.And);
+                    }
+                    else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
+                    {
+                        sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_BETWEEN;
+                        string strcondition = strreadablecondition.Substring(0, strreadablecondition.IndexOf(sfilterOperand)).Trim();
+                        string[] strVarstrings = strcondition.Split(' ');
+                        svarname = strVarstrings[3].ToString();
+                        string sValues = strreadablecondition.ToString().Substring(strreadablecondition.IndexOf(sfilterOperand) + sfilterOperand.Length, (strreadablecondition.ToString().Length) - (strreadablecondition.ToString().IndexOf(sfilterOperand) + sfilterOperand.Length)).Trim();
+                        shilowvars = sValues.Split(' ');
+                        this.dashboardHelper.AddDataFilterCondition(sfilterOperand, shilowvars[0].ToString(), shilowvars[2].ToString(), svarname, ConditionJoinType.And);
+                    }
+              }
         }
 
         private void tbtnInfo_Checked(object sender, RoutedEventArgs e)
