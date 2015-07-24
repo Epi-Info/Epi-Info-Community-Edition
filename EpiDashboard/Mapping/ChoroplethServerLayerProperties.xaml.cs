@@ -390,6 +390,13 @@ namespace EpiDashboard.Mapping
             }
             SetValuesFromUrl(shapefileurl);
             string sUrl = GetformattedUrl(shapefileurl);
+
+            if (provider == null)
+            {
+                provider = new ChoroplethServerLayerProvider(myMap);
+                provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
+            }
+
             provider.LoadShapeFile(sUrl); 
         }
 
