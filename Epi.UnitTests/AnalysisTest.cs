@@ -5,12 +5,32 @@ using Epi.Windows;
 using EpiDashboard;
 using Epi.Core;
 using StatisticsRepository;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Epi.UnitTests
 {
     [TestClass]
     public class AnalysisTest : StatisticsTests
     {
+        [TestMethod]
+        public void MeansTest()
+        {
+            int iterations = 1;
+            EpiDashboard.MeansParameters Parameters = new MeansParameters();
+            Parameters.CrosstabVariableName = "crosstabvar2";
+            Parameters.ColumnNames.Add("meanvar");
+            Parameters.ColumnNames.Add("crosstabvar2");
+            Parameters.IncludeFullSummaryStatistics = true;
+
+            for (int j = 0; j < iterations; j++)
+            {
+                getData("MeansTestData", "iteration = " + j);
+                Parameters.CustomFilter = "iteration = " + j;
+                Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(Parameters);
+            }
+        }
+
         [TestMethod]
         public void TwoByTwoTest()
         {
