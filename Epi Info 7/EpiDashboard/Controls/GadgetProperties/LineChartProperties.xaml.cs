@@ -1090,6 +1090,16 @@ namespace EpiDashboard.Controls.GadgetProperties
                 if (cmbField.SelectedIndex >= 0)
                 {
                     Field field = DashboardHelper.GetAssociatedField(cmbField.SelectedItem.ToString());
+                    //Disable Include Missing check box for Number field, 
+                    if (field != null && field is NumberField)
+                    {
+                        checkboxIncludeMissing.IsChecked = false;
+                        checkboxIncludeMissing.IsEnabled = false;
+                    }
+                    else
+                    {
+                        checkboxIncludeMissing.IsEnabled = true;
+                    }
                     if (field != null && field is RenderableField)
                     {
                         FieldFlags flags = SetFieldFlags(field as RenderableField);
