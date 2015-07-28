@@ -48,7 +48,8 @@ namespace EpiDashboard.Mapping
         string[,] rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
         float[] quantileValues = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
         private bool flagupdatetoglfailed;
-
+        private bool _areRangesSet = false;
+        public bool AreRangesSet { get { return _areRangesSet; } set { _areRangesSet = value; } }
         public List<string> ListLegendText { get; set; }
 
         private List<double> _range;

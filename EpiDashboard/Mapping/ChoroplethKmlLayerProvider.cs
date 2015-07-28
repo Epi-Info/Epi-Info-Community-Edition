@@ -950,5 +950,7 @@ namespace EpiDashboard.Mapping
         #endregion
 
         public List<string> ListLegendText { get; set; }
+
+        public bool AreRangesSet { get; set; }
     }
 }

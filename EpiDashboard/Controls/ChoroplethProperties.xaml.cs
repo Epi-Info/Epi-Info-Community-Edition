@@ -163,6 +163,11 @@ namespace EpiDashboard.Controls
             panelCharts.Visibility = System.Windows.Visibility.Visible;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+            SetDefaultRanges();
+        }
+
+        private void SetDefaultRanges()
+        {
             if (cmbShapeKey.SelectedItem != null &&
                 cmbDataKey.SelectedItem != null &&
                 cmbValue.SelectedItem != null)
@@ -195,7 +200,7 @@ namespace EpiDashboard.Controls
                        classCount);
                 }
                 else
-                    if (choroKMLprovider != null )
+                    if (choroKMLprovider != null)
                     {
                         choroKMLprovider.PopulateRangeValues(_dashboardHelper,
                            cmbShapeKey.SelectedItem.ToString(),
@@ -206,7 +211,7 @@ namespace EpiDashboard.Controls
                     }
 
                 SetRangeUISection();
-        }
+            }
         }
 
         private void tbtnHTML_Checked(object sender, RoutedEventArgs e)
@@ -265,6 +270,14 @@ namespace EpiDashboard.Controls
             if (cmbDataKey.SelectedIndex > -1 && cmbShapeKey.SelectedIndex > -1 && cmbValue.SelectedIndex > -1)
             {
                 Addfilters();
+                if ((_provider != null && !_provider.AreRangesSet) || 
+                    (choroMapprovider != null && !choroMapprovider.AreRangesSet) ||
+                    (choroKMLprovider != null && !choroKMLprovider.AreRangesSet)
+                    )
+                {
+                    SetDefaultRanges();
+                }
+
                 RenderMap();
 
                 if (_provider != null && !ValidateRangeInput())
@@ -276,7 +289,11 @@ namespace EpiDashboard.Controls
                 bool flagquintiles = (bool)quintilesOption.IsChecked;
 
                 if (radShapeFile.IsChecked == true && _provider != null)
-                { layerprop.SetValues(txtShapePath.Text, cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, rctMissingColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses); }
+                {
+                    
+
+                    layerprop.SetValues(txtShapePath.Text, cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, rctMissingColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses); 
+                }
                 else if (radMapServer.IsChecked == true && choroMapprovider != null)
                 {
                     choroserverlayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, rctMissingColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses);
@@ -1498,6 +1515,7 @@ namespace EpiDashboard.Controls
                 //        brushList,
                 //        classCount);
                 _provider.PopulateRangeValues();
+                _provider.AreRangesSet = true;
               
             }
             else if (radMapServer.IsChecked == true && choroMapprovider != null)
@@ -1509,11 +1527,12 @@ namespace EpiDashboard.Controls
                          cmbValue.SelectedItem.ToString(),
                          brushList,
                          classCount);
+                choroMapprovider.AreRangesSet = true;
             }
             else if (radKML.IsChecked == true && choroKMLprovider != null)
             {
                 choroKMLprovider.PopulateRangeValues();
-
+                choroKMLprovider.AreRangesSet = true;
             }
 
                 SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;

@@ -43,6 +43,7 @@ namespace EpiDashboard.Mapping
         int _classCount;
         int _colorShadeIndex = 0;
         int _lastGeneratedClassCount = 0;
+        public bool AreRangesSet { get; set; }
         string[,] _rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
 
         float[] _quantileValues = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
