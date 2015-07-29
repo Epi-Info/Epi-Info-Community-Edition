@@ -1915,7 +1915,12 @@ namespace EpiDashboard.Mapping
             dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource; // dashboardHelper.Database.DbName;
             dotdensityproperties.panelBoundaries.IsEnabled = true;
 
-            dotdensityproperties.dataFilters = dashboardHelper.DataFilters; //new DataFilters(dashboardHelper);
+            if (densitylayerprop.datafilters != null)
+                dotdensityproperties.dataFilters = densitylayerprop.datafilters;
+            else
+                dotdensityproperties.dataFilters = dashboardHelper.DataFilters;
+
+           // dotdensityproperties.dataFilters = dashboardHelper.DataFilters; //new DataFilters(dashboardHelper);
             dotdensityproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dotdensityproperties.dataFilters, true);
             dotdensityproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; dotdensityproperties.rowFilterControl.FillSelectionComboboxes();
             dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
@@ -1986,8 +1991,12 @@ namespace EpiDashboard.Mapping
             dotdensityproperties.SetDashboardHelper(dashboardHelper);
             dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;// dashboardHelper.Database.DbName;
             dotdensityproperties.panelBoundaries.IsEnabled = true;
-
-            dotdensityproperties.dataFilters = dashboardHelper.DataFilters; //new DataFilters(dashboardHelper);
+            if (densitylayerprop.datafilters != null)
+                dotdensityproperties.dataFilters = densitylayerprop.datafilters;
+            else
+                dotdensityproperties.dataFilters = dashboardHelper.DataFilters;
+            
+            //dotdensityproperties.dataFilters = dashboardHelper.DataFilters; //new DataFilters(dashboardHelper);
             dotdensityproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dotdensityproperties.dataFilters, true);
             dotdensityproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; dotdensityproperties.rowFilterControl.FillSelectionComboboxes();
             dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
@@ -2084,8 +2093,12 @@ namespace EpiDashboard.Mapping
             dotdensityproperties.SetDashboardHelper(dashboardHelper);
             dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource; // ProjectFilepath;//Database.DbName;
             dotdensityproperties.panelBoundaries.IsEnabled = true;
+            if (densitylayerprop.datafilters != null)
+                dotdensityproperties.dataFilters = densitylayerprop.datafilters;
+            else
+                dotdensityproperties.dataFilters = dashboardHelper.DataFilters;
 
-            dotdensityproperties.dataFilters = dashboardHelper.DataFilters; //new DataFilters(dashboardHelper);
+           // dotdensityproperties.dataFilters = dashboardHelper.DataFilters; //new DataFilters(dashboardHelper);
             dotdensityproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dotdensityproperties.dataFilters, true);
             dotdensityproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; dotdensityproperties.rowFilterControl.FillSelectionComboboxes();
             dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
