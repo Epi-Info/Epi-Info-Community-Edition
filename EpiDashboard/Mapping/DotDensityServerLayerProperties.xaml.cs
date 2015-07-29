@@ -29,7 +29,8 @@ namespace EpiDashboard.Mapping
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
         public event EventHandler EditRequested;
-        
+
+        public DataFilters datafilters { get; set; }
         private IMapControl mapControl;
         public string shapeFilePath;
         public string cbxMapserverText;

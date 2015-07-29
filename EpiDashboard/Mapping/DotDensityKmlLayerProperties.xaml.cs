@@ -33,6 +33,7 @@ namespace EpiDashboard.Mapping
         private IMapControl mapControl;
         public string shapeFilePath;
         private bool flagrunedit;
+        public DataFilters datafilters { get; set; }
         public IDictionary<string, object> curfeatureAttributes;
 
         public DotDensityKmlLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)

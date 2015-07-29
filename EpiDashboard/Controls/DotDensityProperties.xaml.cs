@@ -200,6 +200,16 @@ namespace EpiDashboard.Controls
        
         private void Addfilters()
         {
+            this.dataFilters = rowFilterControl.DataFilters;
+            if (radShapeFile.IsChecked == true && this.layerprop != null) { layerprop.datafilters = rowFilterControl.DataFilters; }
+            if (radMapServer.IsChecked == true && this.serverlayerprop != null) {serverlayerprop.datafilters = rowFilterControl.DataFilters; }
+            if (radKML.IsChecked == true && kmllayerprop != null) { kmllayerprop.datafilters = rowFilterControl.DataFilters; }
+
+
+            this.dataFilters = rowFilterControl.DataFilters;
+            dashboardHelper.SetDatafilters(this.dataFilters);
+
+            /*
             string sfilterOperand = string.Empty;
             string[] shilowvars;
             string svarname;
@@ -278,7 +288,7 @@ namespace EpiDashboard.Controls
                         shilowvars = sValues.Split(' ');
                         this.dashboardHelper.AddDataFilterCondition(sfilterOperand, shilowvars[0].ToString(), shilowvars[2].ToString(), svarname, ConditionJoinType.And);
                     }
-              }
+              } */
         }
 
         private void tbtnInfo_Checked(object sender, RoutedEventArgs e)
