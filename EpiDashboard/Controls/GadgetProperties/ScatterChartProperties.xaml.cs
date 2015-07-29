@@ -110,6 +110,11 @@ namespace EpiDashboard.Controls.GadgetProperties
                 isValid = false;
                 MessageBox.Show(DashboardSharedStrings.PROPERTIES_MAIN_VARIABLE_REQ);
             }
+            if (cmbOutcome.SelectedIndex <1)
+            {
+                isValid = false;
+                MessageBox.Show(DashboardSharedStrings.PROPERTIES_OUTCOME_VARIABLE_REQ);
+            }
 
             if (String.IsNullOrEmpty(txtLegendFontSize.Text))
             {

@@ -547,7 +547,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exact 95% LCL.
+        ///   Looks up a localized string similar to Exact 95% UCL.
         /// </summary>
         public static string COL_HEADER_EXACT_CI_UPPER {
             get {
@@ -565,7 +565,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fleiss 95% LCL.
+        ///   Looks up a localized string similar to Fleiss 95% UCL.
         /// </summary>
         public static string COL_HEADER_FLEISS_CI_UPPER {
             get {
@@ -1829,6 +1829,15 @@ namespace EpiDashboard {
         public static string PROPERTIES_MAIN_VARIABLE_REQ {
             get {
                 return ResourceManager.GetString("PROPERTIES_MAIN_VARIABLE_REQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outcome variable must be selected..
+        /// </summary>
+        public static string PROPERTIES_OUTCOME_VARIABLE_REQ {
+            get {
+                return ResourceManager.GetString("PROPERTIES_OUTCOME_VARIABLE_REQ", resourceCulture);
             }
         }
         

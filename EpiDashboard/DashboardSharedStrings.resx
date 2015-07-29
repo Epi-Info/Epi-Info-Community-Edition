@@ -872,6 +872,9 @@ of records or select fewer fields for the group.</value>
   <data name="PROPERTIES_MAIN_VARIABLE_REQ" xml:space="preserve">
     <value>Main variable must be selected.</value>
   </data>
+  <data name="PROPERTIES_OUTCOME_VARIABLE_REQ" xml:space="preserve">
+    <value>Outcome variable must be selected.</value>
+  </data>
   <data name="PROPERTIES_Y2_AXIS_VARIABLE_REQ" xml:space="preserve">
     <value>Second y-axis variable must be selected for this y-axis type.</value>
   </data>
