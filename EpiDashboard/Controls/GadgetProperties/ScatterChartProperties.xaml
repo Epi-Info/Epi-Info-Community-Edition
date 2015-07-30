@@ -170,15 +170,14 @@
                     </WrapPanel>
                     
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Title and Subtitle</Label>
-                    <WrapPanel ItemWidth="300" Orientation="Horizontal">
+                    <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
                         <StackPanel>
                             <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart title:" Margin="0,0,0,0"  />
-                            <TextBox x:Name="txtChartTitle" Style="{StaticResource PropertiesTextBoxLarge}"  HorizontalAlignment="Left" AcceptsReturn="True" TextWrapping="Wrap" />
+                            <TextBox x:Name="txtChartTitle" Style="{StaticResource PropertiesChartTitle}"  HorizontalAlignment="Left" AcceptsReturn="True" TextWrapping="Wrap" />
                         </StackPanel>
-                        <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
                         <StackPanel>
                             <TextBlock x:Name="tblockChartSubTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart subtitle:" Margin="0,0,0,0"  />
-                            <TextBox x:Name="txtChartSubTitle" Style="{StaticResource PropertiesTextBoxLarge}"  HorizontalAlignment="Left" AcceptsReturn="True" TextWrapping="Wrap" />
+                            <TextBox x:Name="txtChartSubTitle" Style="{StaticResource PropertiesSubtitleDescription}"  HorizontalAlignment="Left" AcceptsReturn="True" TextWrapping="Wrap" />
                         </StackPanel>
                     </WrapPanel>
                 </StackPanel>

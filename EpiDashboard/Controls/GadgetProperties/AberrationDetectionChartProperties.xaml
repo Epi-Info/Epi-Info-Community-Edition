@@ -167,7 +167,7 @@
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Title and Subtitle</Label>
                     <StackPanel>
                         <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart title:" Margin="0,12,0,0"  />
-                        <TextBox x:Name="txtChartTitle" Width="300" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
+                        <TextBox x:Name="txtChartTitle" Style="{StaticResource PropertiesChartTitle}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
