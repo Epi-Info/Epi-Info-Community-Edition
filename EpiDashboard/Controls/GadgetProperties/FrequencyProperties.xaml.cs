@@ -303,7 +303,10 @@ namespace EpiDashboard.Controls.GadgetProperties
                // cbxField.SelectedItem = Parameters.ColumnNames[0];
                // radOneVar.IsChecked = true;
             //}
-            if (Parameters.ColumnNames.Count == 1 || Parameters.StrataVariableNames.Count > 0)
+
+
+
+            if (Parameters.ColumnNames.Count == 1 || Parameters.StrataVariableNames.Count > 0 || !string.IsNullOrEmpty(Parameters.WeightVariableName))//EI-386
             {
                // radMultiVar.IsChecked = true;
                // scrollViewerVarPro.Visibility = System.Windows.Visibility.Visible;
