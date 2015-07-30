@@ -89,23 +89,23 @@ namespace EpiDashboard.Gadgets.Charting
             mnuCopy.Click += new RoutedEventHandler(mnuCopy_Click);
             mnuSendDataToHTML.Click += new RoutedEventHandler(mnuSendDataToHTML_Click);
 
-//#if LINUX_BUILD
-//            mnuSendDataToExcel.Visibility = Visibility.Collapsed;
-//#else
-//            mnuSendDataToExcel.Visibility = Visibility.Visible;
-//            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.ClassesRoot; Microsoft.Win32.RegistryKey excelKey = key.OpenSubKey("Excel.Application"); bool excelInstalled = excelKey == null ? false : true; key = Microsoft.Win32.Registry.ClassesRoot;
-//            excelKey = key.OpenSubKey("Excel.Application");
-//            excelInstalled = excelKey == null ? false : true;
+            //#if LINUX_BUILD
+            //            mnuSendDataToExcel.Visibility = Visibility.Collapsed;
+            //#else
+            //            mnuSendDataToExcel.Visibility = Visibility.Visible;
+            //            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.ClassesRoot; Microsoft.Win32.RegistryKey excelKey = key.OpenSubKey("Excel.Application"); bool excelInstalled = excelKey == null ? false : true; key = Microsoft.Win32.Registry.ClassesRoot;
+            //            excelKey = key.OpenSubKey("Excel.Application");
+            //            excelInstalled = excelKey == null ? false : true;
 
-//            if (!excelInstalled)
-//            {
-//                mnuSendDataToExcel.Visibility = Visibility.Collapsed;
-//            }
-//            else
-//            {
-//                mnuSendDataToExcel.Click += new RoutedEventHandler(mnuSendDataToExcel_Click);
-//            }
-//#endif
+            //            if (!excelInstalled)
+            //            {
+            //                mnuSendDataToExcel.Visibility = Visibility.Collapsed;
+            //            }
+            //            else
+            //            {
+            //                mnuSendDataToExcel.Click += new RoutedEventHandler(mnuSendDataToExcel_Click);
+            //            }
+            //#endif
 
             mnuSendToBack.Click += new RoutedEventHandler(mnuSendToBack_Click);
             mnuClose.Click += new RoutedEventHandler(mnuClose_Click);
@@ -150,7 +150,7 @@ namespace EpiDashboard.Gadgets.Charting
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             messagePanel.Text = string.Empty;
             descriptionPanel.PanelMode = EpiDashboard.Controls.GadgetDescriptionPanel.DescriptionPanelMode.Collapsed;
-            
+
             panelMain.Children.Clear();
 
             StrataGridList.Clear();
@@ -243,7 +243,7 @@ namespace EpiDashboard.Gadgets.Charting
                 string crosstabVar = LineChartParameters.CrosstabVariableName;
 
                 bool includeMissing = LineChartParameters.IncludeMissing;
-                
+
                 List<string> stratas = new List<string>();
 
                 try
@@ -525,14 +525,14 @@ namespace EpiDashboard.Gadgets.Charting
                                 }
                                 break;
                             case "stratavariable":
-                                    if (((LineChartParameters)Parameters).StrataVariableNames.Count > 0)
-                                    {
-                                        ((LineChartParameters)Parameters).StrataVariableNames[0] = child.InnerText.Replace("&lt;", "<");
-                                    }
-                                    else
-                                    {
-                                        ((LineChartParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
-                                    }
+                                if (((LineChartParameters)Parameters).StrataVariableNames.Count > 0)
+                                {
+                                    ((LineChartParameters)Parameters).StrataVariableNames[0] = child.InnerText.Replace("&lt;", "<");
+                                }
+                                else
+                                {
+                                    ((LineChartParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
+                                }
                                 break;
                             case "stratavariables":
                                 foreach (XmlElement field in child.ChildNodes)
@@ -545,24 +545,24 @@ namespace EpiDashboard.Gadgets.Charting
                                 }
                                 break;
                             case "weightvariable":
-                                    ((LineChartParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
+                                ((LineChartParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
                                 break;
                             case "crosstabvariable":
-                                    ((LineChartParameters)Parameters).CrosstabVariableName = child.InnerText.Replace("&lt;", "<");
+                                ((LineChartParameters)Parameters).CrosstabVariableName = child.InnerText.Replace("&lt;", "<");
                                 break;
                             case "secondyvar":
-                                    if (this.Parameters.ColumnNames.Count > 1)
-                                    {
-                                        ((LineChartParameters)Parameters).ColumnNames[1] = (child.InnerText.Replace("&lt;", "<"));
-                                    }
-                                    else
-                                    {
-                                        ((LineChartParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
-                                    }
+                                if (this.Parameters.ColumnNames.Count > 1)
+                                {
+                                    ((LineChartParameters)Parameters).ColumnNames[1] = (child.InnerText.Replace("&lt;", "<"));
+                                }
+                                else
+                                {
+                                    ((LineChartParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
+                                }
                                 break;
                             case "secondyvartype":
-                                    Y2Type y2Type = ((Y2Type)Int32.Parse(child.InnerText));
-                                    ((LineChartParameters)Parameters).Y2AxisType = int.Parse(child.InnerText.Replace("&lt;", "<"));
+                                Y2Type y2Type = ((Y2Type)Int32.Parse(child.InnerText));
+                                ((LineChartParameters)Parameters).Y2AxisType = int.Parse(child.InnerText.Replace("&lt;", "<"));
                                 break;
                             case "sort":
                                 if (child.InnerText.ToLower().Equals("highlow") || child.InnerText.ToLower().Equals("hightolow"))
@@ -644,7 +644,8 @@ namespace EpiDashboard.Gadgets.Charting
                                 ((LineChartParameters)Parameters).Palette = int.Parse(child.InnerText);
                                 break;
                             case "linetype":
-                                switch (child.InnerText)
+                                string linetypeText = getEnumText(child.InnerText);
+                                switch (linetypeText)
                                 {
                                     case "Polygon":
                                         ((LineChartParameters)Parameters).LineKind = LineKind.Polygon;
@@ -655,14 +656,16 @@ namespace EpiDashboard.Gadgets.Charting
                                     case "Step":
                                         ((LineChartParameters)Parameters).LineKind = LineKind.Step;
                                         break;
-                                    default:
                                     case "Auto":
+                                        ((LineChartParameters)Parameters).LineKind = LineKind.Auto;
+                                        break;
+                                    default:
                                         ((LineChartParameters)Parameters).LineKind = LineKind.Auto;
                                         break;
                                 }
                                 break;
                             case "linethickness":
-                                    ((LineChartParameters)Parameters).LineThickness = double.Parse(child.InnerText);
+                                ((LineChartParameters)Parameters).LineThickness = double.Parse(child.InnerText);
                                 break;
                             case "legenddock":
                                 {
@@ -703,73 +706,73 @@ namespace EpiDashboard.Gadgets.Charting
                                 break;
                             case "y2linedashstyle":
                                 {
-                                        switch (child.InnerText)
-                                        {
-                                            case "Solid":
-                                                ((LineChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.Solid;
-                                                break;
-                                            case "Dash":
-                                                ((LineChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.Dash;
-                                                break;
-                                            case "Dot":
-                                                ((LineChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.Dot;
-                                                break;
-                                            case "DashDot":
-                                                ((LineChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.DashDot;
-                                                break;
-                                            case "DashDotDot":
-                                                ((LineChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.DashDotDot;
-                                                break;
-                                        }
+                                    switch (child.InnerText)
+                                    {
+                                        case "Solid":
+                                            ((LineChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.Solid;
+                                            break;
+                                        case "Dash":
+                                            ((LineChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.Dash;
+                                            break;
+                                        case "Dot":
+                                            ((LineChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.Dot;
+                                            break;
+                                        case "DashDot":
+                                            ((LineChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.DashDot;
+                                            break;
+                                        case "DashDotDot":
+                                            ((LineChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.DashDotDot;
+                                            break;
+                                    }
                                 }
                                 break;
                             case "y2linethickness":
-                                    ((LineChartParameters)Parameters).Y2LineThickness = double.Parse(child.InnerText);
+                                ((LineChartParameters)Parameters).Y2LineThickness = double.Parse(child.InnerText);
                                 break;
                             case "yaxislabel":
-                                    ((LineChartParameters)Parameters).YAxisLabel = child.InnerText;
+                                ((LineChartParameters)Parameters).YAxisLabel = child.InnerText;
                                 break;
                             case "yaxisformatstring":
-                                    ((LineChartParameters)Parameters).YAxisFormat = child.InnerText;
+                                ((LineChartParameters)Parameters).YAxisFormat = child.InnerText;
                                 break;
                             case "y2axisformatstring":
-                                    ((LineChartParameters)Parameters).Y2AxisFormat = child.InnerText;
+                                ((LineChartParameters)Parameters).Y2AxisFormat = child.InnerText;
                                 break;
                             case "xaxislabeltype":
-                                    ((LineChartParameters)Parameters).XAxisLabelType = int.Parse(child.InnerText);
+                                ((LineChartParameters)Parameters).XAxisLabelType = int.Parse(child.InnerText);
                                 break;
                             case "xaxislabel":
-                                    ((LineChartParameters)Parameters).XAxisLabel = child.InnerText;
+                                ((LineChartParameters)Parameters).XAxisLabel = child.InnerText;
                                 break;
                             case "xaxisangle":
-                                    ((LineChartParameters)Parameters).XAxisAngle = int.Parse(child.InnerText);
+                                ((LineChartParameters)Parameters).XAxisAngle = int.Parse(child.InnerText);
                                 break;
                             case "charttitle":
-                                    ((LineChartParameters)Parameters).ChartTitle = child.InnerText;
+                                ((LineChartParameters)Parameters).ChartTitle = child.InnerText;
                                 break;
                             case "chartsubtitle":
-                                    ((LineChartParameters)Parameters).ChartSubTitle = child.InnerText;
+                                ((LineChartParameters)Parameters).ChartSubTitle = child.InnerText;
                                 break;
                             case "showlegend":
-                                    if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).ShowLegend = true; }
-                                    else { ((LineChartParameters)Parameters).ShowLegend = false; }
+                                if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).ShowLegend = true; }
+                                else { ((LineChartParameters)Parameters).ShowLegend = false; }
                                 break;
                             case "showlegendborder":
-                                    if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).ShowLegendBorder = true; }
-                                    else { ((LineChartParameters)Parameters).ShowLegendBorder = false; }
+                                if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).ShowLegendBorder = true; }
+                                else { ((LineChartParameters)Parameters).ShowLegendBorder = false; }
                                 break;
                             case "showlegendvarnames":
-                                    if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).ShowLegendVarNames = true; }
-                                    else { ((LineChartParameters)Parameters).ShowLegendVarNames = false; }
+                                if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).ShowLegendVarNames = true; }
+                                else { ((LineChartParameters)Parameters).ShowLegendVarNames = false; }
                                 break;
                             case "legendfontsize":
-                                    ((LineChartParameters)Parameters).LegendFontSize = int.Parse(child.InnerText);
+                                ((LineChartParameters)Parameters).LegendFontSize = int.Parse(child.InnerText);
                                 break;
                             case "height":
-                                    ((LineChartParameters)Parameters).ChartHeight = double.Parse(child.InnerText);
+                                ((LineChartParameters)Parameters).ChartHeight = double.Parse(child.InnerText);
                                 break;
                             case "width":
-                                    ((LineChartParameters)Parameters).ChartWidth = double.Parse(child.InnerText);
+                                ((LineChartParameters)Parameters).ChartWidth = double.Parse(child.InnerText);
                                 break;
                             //EI-98
                             case "yaxislabelfontsize":
@@ -794,6 +797,52 @@ namespace EpiDashboard.Gadgets.Charting
             this.LoadingCombos = false;
             RefreshResults();
             HideConfigPanel();
+        }
+
+
+        /// <summary>    
+        /// JIRA EI-429 - to maintain compatibility with canvases created with 7.1.5 and earlier 
+        /// the enum for LineKind from the 2011 release of the Component Art library is 
+        /// re-created here.  
+        /// 
+        /// Reference -- 
+        ///   http://docs.componentart.com/default.aspx?content=ComponentArt.Web.Visualization.Charting.server/ComponentArt.Web.Visualization.Charting~ComponentArt.Web.Visualization.Charting.LineKind.html#WinDataVisualization/2011/ComponentArt.Win.DataVisualization.API/ComponentArt.Win.DataVisualization.Charting~ComponentArt.Win.DataVisualization.Charting.LineKind.html
+        /// </summary>
+        private enum LineKind2011
+        {
+            Auto = 0,
+            Polygon = 1,
+            Smooth = 2,
+            Step = 3
+        }
+
+        /// <summary>
+        /// If the  testTextFromXml can parse into ah integer we assume that the canvas file was create 
+        /// with Component Art 2011.  So use the LineKind2011 enum to determine the line type     
+        /// Otherwise just return the text            
+        /// </summary>
+        /// <param name="testTextFromXml"></param>
+        /// <returns></returns>
+        private string getEnumText(string testTextFromXml)
+        {
+            int enumAsNum;
+            string enumAsText;
+
+            bool result = Int32.TryParse(testTextFromXml, out enumAsNum);
+            // if true cast the  int as appropriate enum      
+            if (result)
+            {
+                LineKind2011 lk = (LineKind2011)enumAsNum;
+                enumAsText = lk.ToString();
+                return enumAsText;
+            }
+            //  else just return orig text       
+            else
+            {
+                enumAsText = testTextFromXml;
+                return enumAsText;
+            }
+
         }
 
         /// <summary>
