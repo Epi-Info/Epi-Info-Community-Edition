@@ -343,13 +343,18 @@
                                 <TextBlock x:Name="tblockXAxisFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="X-axis data values font size:" Margin="0,12,0,0"  />
                                 <TextBox x:Name="txtXAxisFontSize" Style="{StaticResource PropertiesTextBoxMed}" HorizontalAlignment="Left" Text="" />
                             </StackPanel>
+                            
+                        </WrapPanel>
+                        
+                        <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Title and Subtitle</Label>
+                        <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
                             <StackPanel>
                                 <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart title:" Margin="0,12,0,0"  />
-                                <TextBox x:Name="txtChartTitle" Style="{StaticResource PropertiesTextBoxMed}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
+                                <TextBox x:Name="txtChartTitle" Style="{StaticResource PropertiesChartTitle}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
                             </StackPanel>
                             <StackPanel>
                                 <TextBlock x:Name="tblockChartSubTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart subtitle:" Margin="0,12,0,0"  />
-                                <TextBox x:Name="txtChartSubTitle" Style="{StaticResource PropertiesTextBoxMed}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
+                                <TextBox x:Name="txtChartSubTitle" Style="{StaticResource PropertiesSubtitleDescription}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
                             </StackPanel>
                         </WrapPanel>
                     </StackPanel>

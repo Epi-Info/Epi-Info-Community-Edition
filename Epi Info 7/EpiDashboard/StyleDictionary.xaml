@@ -374,7 +374,8 @@
                 <Setter Property="Background" Value="{StaticResource PrimaryButtonBackgroundColorLight}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="{StaticResource PrimaryButtonDisabledForegroundColor}"></Setter>
+                <Setter Property="Background" Value="{StaticResource PrimaryButtonDisabledForegroundColor}" />
+                <Setter Property="Foreground" Value="#828282" />
             </Trigger>
 
         </Style.Triggers>
@@ -441,6 +442,11 @@
 
     <Style TargetType="ScrollViewer" x:Key="PropertiesScrollviewer">
         <Setter Property="Height" Value="490" />
+    </Style>
+    
+    <Style TargetType="TextBlock" x:Key="PropertiesInstructionsText">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
     
     <Style x:Key="ToggleSidebarButtonStyle" TargetType="ToggleButton">
@@ -632,7 +638,7 @@
 
 
 
-
+   
 
 </ResourceDictionary>  
     
