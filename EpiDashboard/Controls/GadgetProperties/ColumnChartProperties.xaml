@@ -364,12 +364,12 @@
                                 <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtXAxisFontSize" HorizontalAlignment="Left" Text="" />
                             </StackPanel>
                             <StackPanel>
-                                <TextBlock x:Name="tblockxAxisMinValue" HorizontalAlignment="Left" Text="X-axis min value:" Margin="0,12,0,0" Visibility="Visible"  />
-                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtxAxisStartValue" HorizontalAlignment="Left" Visibility="Visible"/>
+                                <TextBlock x:Name="tblockxAxistartValue" HorizontalAlignment="Left" Text="X-axis start value:" Margin="0,12,0,0" Visibility ="Collapsed"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtxAxisStartValue" HorizontalAlignment="Left" Visibility="Collapsed"/>
                             </StackPanel>
                             <StackPanel>
-                                <TextBlock x:Name="tblockxAxismaxValue" HorizontalAlignment="Left" Text="X-axis max value:" Margin="0,12,0,0"  Visibility="Visible" />
-                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtxAxisEndValue" HorizontalAlignment="Left" Visibility="Visible" />
+                                <TextBlock x:Name="tblockxAxisendValue" HorizontalAlignment="Left" Text="X-axis end value:" Margin="0,12,0,0"  Visibility="Collapsed" />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtxAxisEndValue" HorizontalAlignment="Left" Visibility="Collapsed" />
                             </StackPanel>
                             <StackPanel>
                                 <TextBlock x:Name="tblockXAxisAngle" HorizontalAlignment="Left" Text="X-axis angle:" Margin="0,12,0,0"  />
