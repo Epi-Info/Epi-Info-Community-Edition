@@ -36,17 +36,18 @@ namespace EpiDashboard.Controls.GadgetProperties
             List<string> fields = new List<string>();
 
             ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
-            foreach (string fieldName in DashboardHelper.GetFieldsAsList(columnDataType))
-            {
-                items.Add(new FieldInfo()
-                {
-                    Name = fieldName,
-                    DataType = DashboardHelper.GetColumnDbType(fieldName).ToString(),
-                    VariableCategory = VariableCategory.Field
-                });
+            //Commenting for EI-392
+            //foreach (string fieldName in DashboardHelper.GetFieldsAsList(columnDataType)) 
+            //{
+            //    items.Add(new FieldInfo()
+            //    {
+            //        Name = fieldName,
+            //        DataType = DashboardHelper.GetColumnDbType(fieldName).ToString(),
+            //        VariableCategory = VariableCategory.Field
+            //    });
 
-                fields.Add(fieldName);
-            }
+            //    fields.Add(fieldName);
+            //}
 
             foreach (string fieldName in DashboardHelper.GetAllGroupsAsList())
             {
@@ -58,19 +59,19 @@ namespace EpiDashboard.Controls.GadgetProperties
                 };
                 items.Add(fieldInfo);
             }
-
-            if (DashboardHelper.IsUsingEpiProject)
-            {
-                for (int i = 0; i < DashboardHelper.View.Pages.Count; i++)
-                {
-                    items.Add(new FieldInfo()
-                    {
-                        Name = "Page " + (i + 1).ToString(),
-                        DataType = String.Empty,
-                        VariableCategory = VariableCategory.Page
-                    });
-                }
-            }
+            //Commenting for EI-392
+            //if (DashboardHelper.IsUsingEpiProject)
+            //{
+            //    for (int i = 0; i < DashboardHelper.View.Pages.Count; i++)
+            //    {
+            //        items.Add(new FieldInfo()
+            //        {
+            //            Name = "Page " + (i + 1).ToString(),
+            //            DataType = String.Empty,
+            //            VariableCategory = VariableCategory.Page
+            //        });
+            //    }
+            //}
 
             fields.Sort();
 
