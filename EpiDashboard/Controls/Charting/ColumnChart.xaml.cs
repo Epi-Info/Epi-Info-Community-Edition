@@ -132,7 +132,7 @@ namespace EpiDashboard.Controls.Charting
 
             //if (!string.IsNullOrEmpty(ColumnChartSettings.YAxisFormattingString.Trim()))
             //{
-            //    YAxisCoordinates.FormattingString = ColumnChartSettings.YAxisFormattingString;
+            //    YAxisCoordinates.FormattingString = ColumnChartSettings.YAxisFormattinCString;
             //}
             //if (!string.IsNullOrEmpty(ColumnChartSettings.Y2AxisFormattingString.Trim()))
             //{
@@ -146,9 +146,17 @@ namespace EpiDashboard.Controls.Charting
             {
                 YAxisCoordinates.FormattingString = ColumnChartParameters.YAxisFormat.Trim();
             }
-            if (!string.IsNullOrEmpty(ColumnChartParameters.Y2AxisFormat.Trim()))
+            if (ColumnChartParameters.YAxisFrom != 0) 
             {
-                Y2AxisCoordinates.FormattingString = ColumnChartParameters.Y2AxisFormat.Trim();
+               numberYCoordinates.From = ColumnChartParameters.YAxisFrom;
+            }
+            if (ColumnChartParameters.YAxisTo != 0)
+            {
+                numberYCoordinates.To = ColumnChartParameters.YAxisTo;
+            }
+            if (ColumnChartParameters.YAxisStep != 0)
+            {
+                numberYCoordinates.Step = ColumnChartParameters.YAxisStep;
             }
             xyChart.CompositionKind = ColumnChartParameters.Composition;
             xyChart.Orientation = ColumnChartParameters.Orientation;

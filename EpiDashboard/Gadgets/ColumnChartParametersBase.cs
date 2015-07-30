@@ -24,6 +24,9 @@ namespace EpiDashboard
         {
             BarSpace = BarSpacing.Default;
             BarType = BarKind.Rectangle;
+            YAxisFrom = 0;
+            YAxisTo = 0;
+            YAxisStep = 0;
         }
 
         /// <summary>
@@ -34,6 +37,9 @@ namespace EpiDashboard
         {
             BarSpace = parameters.BarSpace;
             BarType = parameters.BarType;
+            YAxisFrom = parameters.YAxisFrom;
+            YAxisTo = parameters.YAxisTo;
+            YAxisStep = parameters.YAxisStep;
         }
         
         #endregion     // Constructors
@@ -43,6 +49,10 @@ namespace EpiDashboard
         
         public BarSpacing BarSpace { get; set; }
         public BarKind BarType { get; set; }
+        //EI-418
+        public double YAxisFrom { get; set; }
+        public double YAxisTo { get; set; }
+        public double YAxisStep { get; set; }
         
         #endregion  // Properties
 
