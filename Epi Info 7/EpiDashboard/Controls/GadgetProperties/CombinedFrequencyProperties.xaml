@@ -40,7 +40,7 @@
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
             
                 <Label>Variables to display:</Label>
-                <ListView Name="lvGroupVariables">
+                <ListView Name="lvGroupVariables" SelectionMode="Single"><!--Adding SelectionMode EI-392-->
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}" />
