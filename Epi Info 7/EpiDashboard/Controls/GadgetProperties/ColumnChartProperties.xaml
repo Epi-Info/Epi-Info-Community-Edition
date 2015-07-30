@@ -313,6 +313,19 @@
                                 <TextBlock x:Name="tblockY2AxisLabelValue" HorizontalAlignment="Left" Text="Y2-axis label:" Margin="0,12,0,0"  />
                                 <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtY2AxisLabelValue" HorizontalAlignment="Left" />
                             </StackPanel>
+                            
+                            <StackPanel>
+                                <TextBlock x:Name="tblockYAxisMinValue" HorizontalAlignment="Left" Text="Y-axis min value:" Margin="0,12,0,0" Visibility="Visible"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisminValue" HorizontalAlignment="Left" Visibility="Visible"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock x:Name="tblockYAxismaxValue" HorizontalAlignment="Left" Text="Y-axis max value:" Margin="0,12,0,0"  Visibility="Visible" />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxismaxValue" HorizontalAlignment="Left" Visibility="Visible" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock x:Name="tblockYAxisstepValue" HorizontalAlignment="Left" Text="Y-axis step value:" Margin="0,12,0,0"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisstepValue" HorizontalAlignment="Left"  />
+                            </StackPanel>
                             <StackPanel>
                                 <TextBlock x:Name="tblockY2AxisLegendTitle" HorizontalAlignment="Left" Text="Y2-axis legend title:" Margin="0,12,0,0"  />
                                 <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtY2AxisLegendTitle" HorizontalAlignment="Left" />
@@ -321,6 +334,8 @@
                                 <TextBlock x:Name="tblockY2AxisFormatString" HorizontalAlignment="Left" Text="Y2-axis format:" Margin="0,12,0,0"  />
                                 <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtY2AxisFormatString" HorizontalAlignment="Left" Text="" />
                             </StackPanel>
+                         
+                 
                         </WrapPanel>
                     </StackPanel>
 
@@ -349,9 +364,18 @@
                                 <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtXAxisFontSize" HorizontalAlignment="Left" Text="" />
                             </StackPanel>
                             <StackPanel>
+                                <TextBlock x:Name="tblockxAxisMinValue" HorizontalAlignment="Left" Text="X-axis min value:" Margin="0,12,0,0" Visibility="Visible"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtxAxisStartValue" HorizontalAlignment="Left" Visibility="Visible"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock x:Name="tblockxAxismaxValue" HorizontalAlignment="Left" Text="X-axis max value:" Margin="0,12,0,0"  Visibility="Visible" />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtxAxisEndValue" HorizontalAlignment="Left" Visibility="Visible" />
+                            </StackPanel>
+                            <StackPanel>
                                 <TextBlock x:Name="tblockXAxisAngle" HorizontalAlignment="Left" Text="X-axis angle:" Margin="0,12,0,0"  />
                                 <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtXAxisAngle" HorizontalAlignment="Left" Text="0" />
                             </StackPanel>
+                           
                         </WrapPanel>
 
                         <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Title and Subtitle</Label>

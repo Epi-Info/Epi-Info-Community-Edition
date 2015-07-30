@@ -847,6 +847,17 @@ namespace EpiDashboard.Gadgets.Charting
                                 case "xaxisfontsize":
                                     ((ColumnChartParameters)Parameters).XAxisFontSize = double.Parse(child.InnerText);
                                     break;
+                                //EI-418
+                                case "yaxisto" :
+                                    ((ColumnChartParameters)Parameters).YAxisTo = double.Parse(child.InnerText);
+                                    break;
+                                case "yaxisfrom":
+                                    ((ColumnChartParameters)Parameters).YAxisFrom = double.Parse(child.InnerText);
+                                    break;
+                                case "yaxisstep" :
+                                    ((ColumnChartParameters)Parameters).YAxisStep = double.Parse(child.InnerText);
+                                    break;
+                            
                             }
                         }
                     }
@@ -1152,6 +1163,20 @@ namespace EpiDashboard.Gadgets.Charting
                 yAxisFormatStringElement.InnerText = chtParameters.YAxisFormat.ToString().Replace("<", "&lt;");
                 element.AppendChild(yAxisFormatStringElement);
 
+                //Ei-418
+                XmlElement yAxisFromElement = doc.CreateElement("yAxisFrom");
+                yAxisFromElement.InnerText = chtParameters.YAxisFrom.ToString().Replace("<", "&lt;");
+                element.AppendChild(yAxisFromElement);
+
+                XmlElement yAxisToElement = doc.CreateElement("yAxisTo");
+                yAxisToElement.InnerText = chtParameters.YAxisTo.ToString().Replace("<", "&lt;");
+                element.AppendChild(yAxisToElement);
+
+                XmlElement yAxisStepElement = doc.CreateElement("yAxisStep");
+                yAxisStepElement.InnerText = chtParameters.YAxisStep.ToString().Replace("<", "&lt;");
+                element.AppendChild(yAxisStepElement);
+                               
+                //
                 //y2AxisLabel 
                 XmlElement y2AxisLabelElement = doc.CreateElement("y2AxisLabel");
                 y2AxisLabelElement.InnerText = chtParameters.Y2AxisLabel.ToString().Replace("<", "&lt;");

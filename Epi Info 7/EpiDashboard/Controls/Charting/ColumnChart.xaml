@@ -33,7 +33,7 @@
             <TextBlock x:Name="tblockStrataTitle" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Margin="0, 20, 0, 0" />
        </StackPanel>
 
-        <charting:XYChart x:Name="xyChart" Margin="1" XPath="S" Grid.Row="1" Grid.Column="0" ProcessDataSourceInBackgroundThread="False" DataStructureCreated="xyChart_DataStructureCreated" AnimationCompleted="xyChart_AnimationCompleted" Background="White">
+        <charting:XYChart x:Name="xyChart" Margin="1" XPath="S" Grid.Row="1" Grid.Column="0" ProcessDataSourceInBackgroundThread="False" DataStructureCreated="xyChart_DataStructureCreated" AnimationCompleted="xyChart_AnimationCompleted" Background="White" >
             <charting:XYChart.XAxisArea>
                 <charting:AxisCoordinates x:Name="xAxisCoordinates" Angle="0">
                 </charting:AxisCoordinates>
@@ -46,9 +46,9 @@
             </charting:XYChart.XAxisArea>
 
             <charting:XYChart.YAxisArea>
-
-                <charting:AxisCoordinates x:Name="YAxisCoordinates">
-                </charting:AxisCoordinates>
+                  <charting:AxisCoordinates x:Name="YAxisCoordinates" >
+                    <charting:NumericCoordinates x:Name="numberYCoordinates"  />
+                  </charting:AxisCoordinates>
                 
                 <charting:ChartLabel x:Name="labelYAxis" Orientation="Vertical" >
                     <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">                        

@@ -63,6 +63,9 @@ namespace EpiDashboard
             YAxisLabel = "Count";
             YAxisStacked100Label = "Percent";
             YAxisFormat = String.Empty;
+            YAxisFrom = 0;
+            YAxisTo = 0;
+            YAxisStep = 0;
             Y2AxisLabel = String.Empty;
             Y2AxisLegendTitle = String.Empty;
             Y2AxisFormat = String.Empty;
@@ -82,6 +85,7 @@ namespace EpiDashboard
             YAxisLabelFontSize = 12;
             XAxisFontSize = 12;
             XAxisLabelFontSize = 12;
+         
         }
 
         /// <summary>

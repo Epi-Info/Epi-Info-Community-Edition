@@ -114,6 +114,11 @@ namespace EpiDashboard.Controls.GadgetProperties
             txtXAxisLabelFontSize.Text = parameters.XAxisLabelFontSize.ToString();
             txtYAxisLabelFontSize.Text = parameters.YAxisLabelFontSize.ToString();
 
+            //Ei-418
+            txtYAxismaxValue.Text = parameters.YAxisTo.ToString();
+            txtYAxisminValue.Text = parameters.YAxisFrom.ToString();
+            txtYAxisstepValue.Text = parameters.YAxisStep.ToString();
+          
             txtWidth.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
             txtHeight.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
             txtLegendFontSize.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
@@ -697,9 +702,26 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 Parameters.YAxisLabelFontSize = double.Parse(txtYAxisLabelFontSize.Text);
             }
-            
-     
-        }
+            //--Ei-418
+            double yaxisto;
+            success = double.TryParse(txtYAxismaxValue.Text, out yaxisto);
+            if (success)
+            {
+                Parameters.YAxisTo = yaxisto;
+            }
+            double yaxisfrom;
+            success = double.TryParse(txtYAxisminValue.Text, out yaxisfrom);
+            if (success)
+            {
+                Parameters.YAxisFrom = yaxisfrom;
+            }
+            double yaxisstep;
+            success = double.TryParse(txtYAxisstepValue.Text, out yaxisstep);
+            if (success)
+            {
+                Parameters.YAxisStep = yaxisstep;
+            }
+          }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
