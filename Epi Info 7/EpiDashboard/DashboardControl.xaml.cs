@@ -49,7 +49,7 @@ namespace EpiDashboard
     public delegate void NotificationEventHandler(object sender, string message);
     public delegate DashboardHelper DashboardHelperRequestedHandler();
     public delegate RelatedConnection RelatedDataRequestedHandler();
-    
+
     public delegate void SendNotificationMessageHandler(string message, bool showButtons, NotificationButtonType buttonType, bool requiresInteraction, int duration);
 
     public delegate void HTMLGeneratedHandler();
@@ -94,7 +94,7 @@ namespace EpiDashboard
         private string lastSavedOutputFileName;
         private string lastSavedCanvasFileName;
         private bool isWordInstalled = false;
-        private bool isExcelInstalled = false;        
+        private bool isExcelInstalled = false;
         private const int DEFAULT_TABLE_FONT_SIZE = 13;
         private const int DEFAULT_CANVAS_HEIGHT = 8000;
         private const int DEFAULT_ANCHOR_TOP_SPACE = 10;
@@ -160,13 +160,13 @@ namespace EpiDashboard
             statusStripButtonVerticalArrange.Click += new StatusStripButtonHandler(statusStripButtonVerticalArrange_Click);
 
             mnuDataSource.Click += new RoutedEventHandler(mnuDataSource_Click);
-            mnuExport.Click += new RoutedEventHandler(mnuExport_Click);                        
+            mnuExport.Click += new RoutedEventHandler(mnuExport_Click);
             mnuReset.Click += new RoutedEventHandler(mnuReset_Click);
             mnuRefresh.Click += new RoutedEventHandler(mnuRefresh_Click);
 
             mnuStatCalc2x2.Click += new RoutedEventHandler(mnuStatCalc2x2_Click);
-            mnuChiSquare.Click += new RoutedEventHandler(mnuChiSquare_Click);     
-            mnuSaveOutput.Click += new RoutedEventHandler(mnuSaveOutput_Click);            
+            mnuChiSquare.Click += new RoutedEventHandler(mnuChiSquare_Click);
+            mnuSaveOutput.Click += new RoutedEventHandler(mnuSaveOutput_Click);
             mnuProperties.Click += new RoutedEventHandler(mnuProperties_Click);
             mnuAutoArrange.Click += new RoutedEventHandler(mnuAutoArrange_Click);
             mnuDataDictionary.Click += new RoutedEventHandler(mnuDataDictionary_Click);
@@ -184,7 +184,7 @@ namespace EpiDashboard
                 GadgetMenuItem gmi = new GadgetMenuItem();
                 gmi.GadgetType = type;
                 gmi.Header = displayName;
-                gmi.Click +=new RoutedEventHandler(mnuGadgetMenuItem_Click);
+                gmi.Click += new RoutedEventHandler(mnuGadgetMenuItem_Click);
                 mnuCustomGadgets.Items.Add(gmi);
             }
 
@@ -233,7 +233,7 @@ namespace EpiDashboard
 
             #endregion // Growth Chart Add Events
 
-            this.Loaded +=new RoutedEventHandler(DashboardControl_Loaded);
+            this.Loaded += new RoutedEventHandler(DashboardControl_Loaded);
             this.ContextMenuOpening += new ContextMenuEventHandler(DashboardControl_ContextMenuOpening);
 
             lastSavedOutputFileName = string.Empty;
@@ -244,8 +244,8 @@ namespace EpiDashboard
             mnuSendOutputTo.Visibility = Visibility.Collapsed;
 #else
             mnuSendOutputTo.Visibility = Visibility.Collapsed;
-            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.ClassesRoot; 
-            Microsoft.Win32.RegistryKey excelKey = key.OpenSubKey("Excel.Application"); 
+            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.ClassesRoot;
+            Microsoft.Win32.RegistryKey excelKey = key.OpenSubKey("Excel.Application");
             isExcelInstalled = excelKey == null ? false : true;
 
             Microsoft.Win32.RegistryKey wordKey = key.OpenSubKey("Word.Application");
@@ -266,7 +266,7 @@ namespace EpiDashboard
 #endif
 
             CenterControlHorizontally(spTitle);
-            CenterControlHorizontally(instructionsPanel);            
+            CenterControlHorizontally(instructionsPanel);
 
             #region Translation
             // WPF has its own translation capabilities that would normally be used. However, Epi Info 7 has a translation 'tool' built in, and this
@@ -344,12 +344,12 @@ namespace EpiDashboard
             mnuHistogramChart.Header = DashboardSharedStrings.CMENU_ADD_EPICURVE_CHART;
 
             mnuCustomGadgets.Header = DashboardSharedStrings.CMENU_CUSTOM_GADGETS;
-            
+
             this.mnuChiSquare.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_CHI_GADGET;
-            this.mnuCohort.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_COHORT_GADGET;            
+            this.mnuCohort.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_COHORT_GADGET;
             this.mnuCox.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_COX_GADGET;
             this.mnuKM.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_KMSURVIVAL_GADGET;
-            this.mnuPopSurvey.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_POPULATION_GADGET;            
+            this.mnuPopSurvey.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_POPULATION_GADGET;
             this.mnuSampleSizePower.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_SAMPLE_SIZE_POWER_GADGET;
             this.mnuStatCalc2x2.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_2X2_GADGET;
             this.mnuUnmatched.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_UCC_GADGET;
@@ -374,8 +374,8 @@ namespace EpiDashboard
                 canvasMain.AllowDragging = true;
                 mnuAutoArrange.IsEnabled = true;
             }
-        }                   
-        
+        }
+
         void statusStripButtonShowBorders_Click()
         {
             if (statusStripButtonShowBorders.IsSelected)
@@ -507,7 +507,7 @@ namespace EpiDashboard
         private void mnuSendOutputToExcel_Click(object sender, RoutedEventArgs e)
         {
             if (this.DashboardHelper == null)
-            {                
+            {
                 return;
             }
 
@@ -520,14 +520,14 @@ namespace EpiDashboard
                 sw.WriteLine(this.ToHTML(fileName)); //ei-279
                 sw.Close();
                 sw.Dispose();
-                
+
                 if (!string.IsNullOrEmpty(fileName))
-                {                
+                {
                     System.Diagnostics.Process proc = new System.Diagnostics.Process();
                     proc.StartInfo.FileName = "excel";
                     proc.StartInfo.Arguments = "\"" + fileName + "\"";
                     proc.StartInfo.UseShellExecute = true;
-                    proc.Start(); 
+                    proc.Start();
                 }
             }
             finally
@@ -868,7 +868,7 @@ namespace EpiDashboard
         }
 
         private void AddGadgetToCanvas(IGadget gadget)
-        {            
+        {
             gadget.GadgetClosing += new GadgetClosingHandler(gadget_GadgetClosing);
             gadget.GadgetProcessingFinished += new GadgetProcessingFinishedHandler(gadget_GadgetFinished);
             gadget.GadgetRefreshed += new GadgetRefreshedHandler(gadget_GadgetRefreshed);
@@ -931,7 +931,7 @@ namespace EpiDashboard
         }
 
         void gadget_GadgetDragStart(object sender)
-        {            
+        {
         }
 
         private void gadget_GadgetDrag(object sender)
@@ -1175,7 +1175,7 @@ namespace EpiDashboard
         private void AppendChildNodes(XmlElement root, XmlDocument doc)
         {
             #region Input Validation
-            if (root == null) { throw new ArgumentNullException("root");  }
+            if (root == null) { throw new ArgumentNullException("root"); }
             if (doc == null) { throw new ArgumentNullException("doc"); }
             #endregion // Input Validation
 
@@ -1344,8 +1344,8 @@ namespace EpiDashboard
             {
                 try
                 {
-                tblockDataSource.Text = DashboardHelper.View.Project.Name + "\\" + DashboardHelper.View.Name;
-            }
+                    tblockDataSource.Text = DashboardHelper.View.Project.Name + "\\" + DashboardHelper.View.Name;
+                }
                 catch (Exception ex)
                 {
                     Epi.Windows.MsgBox.ShowError(SharedStrings.ERROR_CONNECT_DATA_SOURCE);
@@ -1361,8 +1361,8 @@ namespace EpiDashboard
             {
                 tblockDataSource.Text = DashboardHelper.Database.DbName;
             }
-            
-            
+
+
             string recordCounter = string.Format(DashboardSharedStrings.RECORD_COUNT, DashboardHelper.RecordCount.ToString("N0"));
             tblockRecordCount.Text = recordCounter;
             UpdateFieldCounter();
@@ -1389,7 +1389,7 @@ namespace EpiDashboard
                 }
                 else
                 {
-                    RecordCountChanged(DashboardHelper.RecordCount, DashboardHelper.Database.DbName + "\\" + DashboardHelper.TableName);                     
+                    RecordCountChanged(DashboardHelper.RecordCount, DashboardHelper.Database.DbName + "\\" + DashboardHelper.TableName);
                 }
             }
         }
@@ -1413,7 +1413,7 @@ namespace EpiDashboard
             CenterControlHorizontally(spTitle);
             CenterControlHorizontally(instructionsPanel);
             instructionsPanel.Visibility = Visibility.Collapsed;
-            
+
             loadingPanel.Visibility = System.Windows.Visibility.Visible;
             CenterControlHorizontally(loadingPanel);
 
@@ -1430,7 +1430,7 @@ namespace EpiDashboard
 
             EnableDisableMenus(false);
             mnuExport.IsEnabled = false;
-            mnuProperties.IsEnabled = false;            
+            mnuProperties.IsEnabled = false;
             mnuAutoArrange.IsEnabled = false;
             mnuDataDictionary.IsEnabled = false;
 
@@ -1449,7 +1449,7 @@ namespace EpiDashboard
             instructionsPanel.Visibility = System.Windows.Visibility.Visible;
             CenterControlHorizontally(instructionsPanel);
 
-            this.tblockInstructions.Text = SharedStrings.DASHBOARD_INSTRUCTIONS_FINISHED_CACHING;            
+            this.tblockInstructions.Text = SharedStrings.DASHBOARD_INSTRUCTIONS_FINISHED_CACHING;
             waitCursor.Visibility = System.Windows.Visibility.Hidden;
             IsPopulatingDataSet = false;
             mnuExport.IsEnabled = true;
@@ -1557,7 +1557,7 @@ namespace EpiDashboard
         /// </summary>
         /// <param name="progress">The progress value to use</param>
         private void SetProgressBarValue(double progress)
-        {   
+        {
             progressBar.Value = progress;
 
             if (progressBar.Value == 0)
@@ -1617,7 +1617,7 @@ namespace EpiDashboard
             panelNotification.Visibility = System.Windows.Visibility.Collapsed;
             panelNotification.Width = System.Windows.SystemParameters.PrimaryScreenWidth / 1.5;
             Grid.SetZIndex(panelNotification, 2000);
-            
+
             CenterControlHorizontally(introPanel);
             CenterControlHorizontally(introAvailableData);
             CenterControlHorizontally(spTitle);
@@ -1718,7 +1718,7 @@ namespace EpiDashboard
             grdRecentDataSources.RowDefinitions.Add(rowDef2);
             grdRecentDataSources.RowDefinitions.Add(rowDef3);
 
-            Border highlightBorder = new Border();            
+            Border highlightBorder = new Border();
             highlightBorder.Tag = fi;
             highlightBorder.Style = this.Resources["recentDataHighlightBorderStyle"] as Style;
             highlightBorder.MouseLeftButtonUp += new MouseButtonEventHandler(highlightBorder_MouseLeftButtonUp);
@@ -1846,7 +1846,7 @@ namespace EpiDashboard
             twoByTwo.GadgetProcessingFinished += new GadgetProcessingFinishedHandler(gadget_GadgetFinished);
             Gadgets.Add(twoByTwo);
             EnableDisableOptions();
-        }        
+        }
 
         void mnuRefresh_Click(object sender, RoutedEventArgs e)
         {
@@ -1948,39 +1948,39 @@ namespace EpiDashboard
                 if (gadgetMenuItem != null)
                 {
                     string gadgetType = gadgetMenuItem.GadgetType;
-                    Type typeFactory = Type.GetType(gadgetType);
+            Type typeFactory = Type.GetType(gadgetType);
 
-                    if (typeFactory == null)
-                    {
-                        typeFactory = GetGadgetType(gadgetType);
-                    }
+            if (typeFactory == null)
+            {
+                typeFactory = GetGadgetType(gadgetType);
+            }
 
-                    try
+            try
+            {
+                UserControl gadget = null;
+                // If StatCalc, create without Dashboard Helper since data source is not needed for calculators
+                if (typeFactory.ToString().Contains("Gadgets.StatCalc"))
+                {
+                    gadget = Activator.CreateInstance(typeFactory) as UserControl;
+                }
+                else
+                {
+                    gadget = Activator.CreateInstance(typeFactory, DashboardHelper) as UserControl;
+                }
+
+                if (gadget != null)
+                {
+                    AddGadgetToCanvasFromContextMenu(gadget);
+                    GadgetBase gBase = gadget as GadgetBase;
+                    if (gBase != null)
                     {
-                        UserControl gadget = null;
-                        // If StatCalc, create without Dashboard Helper since data source is not needed for calculators
-                        if (typeFactory.ToString().Contains("Gadgets.StatCalc"))
-                        {
-                            gadget = Activator.CreateInstance(typeFactory) as UserControl;
-                        }
-                        else
-                        {
-                            gadget = Activator.CreateInstance(typeFactory, DashboardHelper) as UserControl;
-                        }
-                        
-                        if (gadget != null)
-                        {
-                            AddGadgetToCanvasFromContextMenu(gadget);
-                            GadgetBase gBase = gadget as GadgetBase;
-                            if (gBase != null)
-                            {
-                                gBase.ShowHideConfigPanel();
-                            }
-                        }
+                        gBase.ShowHideConfigPanel();
                     }
-                    catch (Exception ex)
-                    {
-                        throw new ApplicationException("Cannot create instance of dbFactory" + ex.StackTrace);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Cannot create instance of dbFactory" + ex.StackTrace);
                     }
                 }
             }
@@ -2002,7 +2002,7 @@ namespace EpiDashboard
                 }
                 else
                 {
-                ShowCanvasProperties();
+                    ShowCanvasProperties();
                 }
             }
         }
@@ -2055,7 +2055,7 @@ namespace EpiDashboard
 
             foreach (UserControl control in Gadgets)
             {
-                if (control is IGadget && ((IGadget)control).IsProcessing == true )
+                if (control is IGadget && ((IGadget)control).IsProcessing == true)
                 {
                     allFinished = false;
                     break;
@@ -2138,13 +2138,13 @@ namespace EpiDashboard
 
             int x = 0;
             int y = 0;
-            int rowHeight = 0;            
+            int rowHeight = 0;
 
             while (nonPlacedGadgets.Count > 0)
             {
                 int nextGadget = -1;
 
-                for(int i = 0; i < nonPlacedGadgets.Count - 1; i++) 
+                for (int i = 0; i < nonPlacedGadgets.Count - 1; i++)
                 {
                     if (x + ((UserControl)nonPlacedGadgets[i]).ActualWidth <= canvasMain.Width)
                     {
@@ -2213,14 +2213,14 @@ namespace EpiDashboard
                     gadget.AnchorTop = null;
                     Canvas.SetLeft((UserControl)gadget, 40); // ensure left position is consistent
                     Canvas.SetTop((UserControl)gadget, runningTopPosition);
-                    runningTopPosition = runningTopPosition + ((UserControl)gadget).ActualHeight + 20;                    
+                    runningTopPosition = runningTopPosition + ((UserControl)gadget).ActualHeight + 20;
                 }
             }
 
             var unanchored = from g in Gadgets
                              where ((IGadget)g).AnchorLeft == null && ((IGadget)g).AnchorTop == null
-                       orderby Canvas.GetTop(g), Canvas.GetLeft(g)
-                       select g;
+                             orderby Canvas.GetTop(g), Canvas.GetLeft(g)
+                             select g;
 
             foreach (IGadget gadget in unanchored)
             {
@@ -2238,14 +2238,14 @@ namespace EpiDashboard
                 mnuReset.IsEnabled = true;
                 if (!this.IsPopulatingDataSet)
                 {
-                    instructionsPanel.Visibility = System.Windows.Visibility.Hidden;                    
+                    instructionsPanel.Visibility = System.Windows.Visibility.Hidden;
                 }
                 tooltipGadgets.IsEnabled = true;
                 tooltipGadgets.Visibility = System.Windows.Visibility.Visible;
 
                 Dictionary<string, int> gadgetCounts = new Dictionary<string, int>();
-                
-                for(int i = 0; i < Gadgets.Count; i++)
+
+                for (int i = 0; i < Gadgets.Count; i++)
                 {
                     UserControl control = Gadgets[i];
 
@@ -2348,11 +2348,11 @@ namespace EpiDashboard
         {
             get
             {
-                if (DashboardHelper == null) 
+                if (DashboardHelper == null)
                 {
                     return false;
                 }
-                if(Gadgets == null) 
+                if (Gadgets == null)
                 {
                     return false;
                 }
@@ -2418,7 +2418,7 @@ namespace EpiDashboard
         }
 
         void AddFilterGadget()
-        {            
+        {
             if (dataFilteringControl != null)
             {
                 canvasMain.Children.Remove(dataFilteringControl);
@@ -2432,14 +2432,14 @@ namespace EpiDashboard
             dataFilteringControl.Loaded += new RoutedEventHandler(dataFilteringControl_Loaded);
             DragCanvas.SetZIndex(dataFilteringControl, 10000);
             canvasMain.Children.Add(dataFilteringControl);
-            
+
             DragCanvas.SetCanBeDragged(dataFilteringControl, false);
         }
 
         void dataFilteringControl_Loaded(object sender, RoutedEventArgs e)
         {
             Canvas.SetRight(dataFilteringControl, -537);
-            Canvas.SetTop(dataFilteringControl, scrollViewer.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (dataFilteringControl.ActualHeight / 2.0));            
+            Canvas.SetTop(dataFilteringControl, scrollViewer.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (dataFilteringControl.ActualHeight / 2.0));
         }
 
         void dataExportControl_Loaded(object sender, RoutedEventArgs e)
@@ -2525,7 +2525,7 @@ namespace EpiDashboard
             anim.To = -20;
             anim.AccelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            variablesControl.BeginAnimation(Canvas.LeftProperty, anim); 
+            variablesControl.BeginAnimation(Canvas.LeftProperty, anim);
         }
 
         void CollapseRecodingGadget()
@@ -2538,7 +2538,7 @@ namespace EpiDashboard
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             variablesControl.BeginAnimation(Canvas.LeftProperty, anim);
         }
-        
+
         void dataRecodingControl_MouseLeave(object sender, MouseEventArgs e)
         {
             CollapseRecodingGadget();
@@ -2578,13 +2578,17 @@ namespace EpiDashboard
                         {
                             string destinationField = assignRule.DestinationColumnName;
 
-                            foreach (FilterCondition fc in gadgetBase.DataFilters)
+                            if (gadgetBase.DataFilters != null) //EI-362
                             {
-                                if (fc.RawColumnName.Equals(destinationField))
+                                foreach (FilterCondition fc in gadgetBase.DataFilters)
                                 {
-                                    return true;
+                                    if (fc.RawColumnName.Equals(destinationField))
+                                    {
+                                        return true;
+                                    }
                                 }
                             }
+
                         }
                     }
                 }
@@ -2617,7 +2621,7 @@ namespace EpiDashboard
             {
                 infoPanel.Visibility = Visibility.Visible;
                 infoPanel.Text = string.Format(DashboardSharedStrings.CANVAS_FILTERS_IN_EFFECT, DashboardHelper.DataFilters.GenerateReadableDataFilterString());
-            }            
+            }
             else
             {
                 infoPanel.Visibility = Visibility.Collapsed;
@@ -2734,7 +2738,7 @@ namespace EpiDashboard
                 }
             }
         }
-        
+
 
         public bool SaveOutputAsHTML(bool showSaveConfirmation = true)
         {
@@ -2820,7 +2824,7 @@ namespace EpiDashboard
                     proc.Start();
                 }
             }
-        }        
+        }
 
         public bool SaveCanvasAs()
         {
@@ -2841,7 +2845,7 @@ namespace EpiDashboard
             else if (DashboardHelper.IsUsingEpiProject && File.Exists(DashboardHelper.View.Project.FilePath))
             {
                 FileInfo fileInfo = new FileInfo(DashboardHelper.View.Project.FilePath);
-                dlg.InitialDirectory = fileInfo.DirectoryName;                
+                dlg.InitialDirectory = fileInfo.DirectoryName;
             }
 
             System.Windows.Forms.DialogResult result = dlg.ShowDialog();
@@ -2874,7 +2878,7 @@ namespace EpiDashboard
                         CanvasChanged(lastSavedCanvasFileName);
                     }
 
-                    return true;                    
+                    return true;
                 }
                 catch (IOException)
                 {
@@ -2904,10 +2908,10 @@ namespace EpiDashboard
                 fileToSave = this.CurrentCanvas;
             }
             else
-            {            
+            {
                 return this.SaveCanvasAs();
             }
-            
+
             System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
             System.Xml.XmlElement root = doc.CreateElement("DashboardCanvas");
 
@@ -3247,16 +3251,16 @@ namespace EpiDashboard
                     //dashboardHelper.GenerateRecordCount(true);
                     try
                     {
-                    UpdateRecordCount();
-                    ReCacheDataSource();
-                }
+                        UpdateRecordCount();
+                        ReCacheDataSource();
+                    }
                     catch (Exception ex)
                     {
                         Epi.Windows.MsgBox.ShowError(ex.Message);
                         return;
                     }
                 }
-                
+
                 if (element.Name.ToLower().Equals("gadgets"))
                 {
                     gadgetXmlElement = element;
@@ -3351,7 +3355,7 @@ namespace EpiDashboard
                                     {
                                         canvasMain.AllowDragging = false;
                                         statusStripButtonVerticalArrange.IsSelected = true;
-                                    }                                    
+                                    }
                                     break;
                             }
                         }
@@ -3381,7 +3385,7 @@ namespace EpiDashboard
             if (DashboardHelper.DataFilters.Count > 0)
             {
                 infoPanel.Visibility = Visibility.Visible;
-                infoPanel.Text = string.Format(DashboardSharedStrings.CANVAS_FILTERS_IN_EFFECT, DashboardHelper.DataFilters.GenerateReadableDataFilterString());                
+                infoPanel.Text = string.Format(DashboardSharedStrings.CANVAS_FILTERS_IN_EFFECT, DashboardHelper.DataFilters.GenerateReadableDataFilterString());
             }
             else
             {
@@ -3442,12 +3446,12 @@ namespace EpiDashboard
                 return;
             }
 
-            System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();            
+            System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
             dlg.Filter = "Epi Info 7 Dashboard Canvas File|*.cvs7";
             System.Windows.Forms.DialogResult result = dlg.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                CreateFromXml(dlg.FileName);                
+                CreateFromXml(dlg.FileName);
             }
         }
 
@@ -3468,12 +3472,12 @@ namespace EpiDashboard
         }
 
         public XmlNode SerializeGadgets(XmlDocument doc)
-        {            
+        {
             System.Xml.XmlElement root = doc.CreateElement("Gadgets");
 
-            var sortedGadgets = from g in Gadgets                           
-                           orderby Canvas.GetTop(g), Canvas.GetLeft(g)
-                           select g;
+            var sortedGadgets = from g in Gadgets
+                                orderby Canvas.GetTop(g), Canvas.GetLeft(g)
+                                select g;
 
             foreach (IGadget gadget in sortedGadgets)
             {
@@ -3505,7 +3509,7 @@ namespace EpiDashboard
            "<editMode>" + editMode + "</editMode>" +
            "<layoutMode>" + layoutMode + "</layoutMode>";
 
-           root.InnerXml = xmlString;
+            root.InnerXml = xmlString;
 
             return root;
         }
@@ -3513,7 +3517,7 @@ namespace EpiDashboard
         public XmlNode SerializeOutputSettings(XmlDocument doc)
         {
             System.Xml.XmlElement root = doc.CreateElement("OutputSettings");
-            
+
             string xmlString =
            "<showCanvasSummaryInfo>" + ShowCanvasSummaryInfoInOutput + "</showCanvasSummaryInfo>" +
            "<showGadgetHeadings>" + ShowGadgetHeadingsInOutput + "</showGadgetHeadings>" +
@@ -3528,7 +3532,7 @@ namespace EpiDashboard
            "<customTableFontFamily>" + CustomOutputTableFontFamily + "</customTableFontFamily>" +
            "<canvasHeight>" + canvasMain.Height.ToString("F0") + "</canvasHeight>" +
            "<sortGadgets>" + SortGadgetsTopToBottom + "</sortGadgets>";
-            
+
             root.InnerXml = xmlString;
 
             return root;
@@ -3722,7 +3726,7 @@ namespace EpiDashboard
         {
             StringBuilder htmlBuilder = new StringBuilder();
 
-            htmlBuilder.AppendLine("<!DOCTYPE html>");            
+            htmlBuilder.AppendLine("<!DOCTYPE html>");
             htmlBuilder.AppendLine("<html>");
             htmlBuilder.AppendLine(" <head>");
             htmlBuilder.AppendLine("  <meta name=\"description\" content=\"Dashboard Output\" />");
@@ -3765,13 +3769,13 @@ namespace EpiDashboard
 
             //gadgets
             if (SortGadgetsTopToBottom)
-            {                
+            {
                 SortedDictionary<double, IGadget> sortedGadgets = new SortedDictionary<double, IGadget>();
 
                 foreach (UserControl control in this.Gadgets)
                 {
                     if (control is IGadget && ((IGadget)control).IsProcessing == false)
-                    {                        
+                    {
                         double top = Canvas.GetTop(control);
                         if (!sortedGadgets.ContainsKey(top))
                         {
@@ -3794,7 +3798,7 @@ namespace EpiDashboard
                 {
                     IGadget gadget = kvp.Value;
                     if (gadget.IsProcessing == false)
-                    {                        
+                    {
                         htmlBuilder.Append(gadget.ToHTML(htmlFileName, count));
                         htmlBuilder.AppendLine("");
                         htmlBuilder.AppendLine("<p>&nbsp;</p>");
@@ -3871,7 +3875,7 @@ namespace EpiDashboard
             properties.Width = 800;
             properties.Height = 600;
 
-            if ( (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
             {
                 properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
             }
@@ -3946,7 +3950,7 @@ namespace EpiDashboard
 
                 DashboardHelper.ResetView(tempProject.Views[properties.FormName], false);
             }
-            else if (DashboardHelper.Database.ToString().Contains("SqlDatabase")) 
+            else if (DashboardHelper.Database.ToString().Contains("SqlDatabase"))
             {
                 Epi.Data.IDbDriver dbDriver = Epi.Data.DBReadExecute.GetDataDriver(properties.txtSQLConnectionString.Text);
                 DashboardHelper.SetDataSource(dbDriver, properties.TableName, properties.CustomQuery);
@@ -4095,7 +4099,7 @@ namespace EpiDashboard
         {
             if (DashboardHelper != null && this.IsCanvasDirty)
             {
-                System.Windows.Forms.DialogResult result = System.Windows.Forms.DialogResult.No;                
+                System.Windows.Forms.DialogResult result = System.Windows.Forms.DialogResult.No;
 
                 if (string.IsNullOrEmpty(lastSavedCanvasFileName))
                 {
@@ -4162,7 +4166,7 @@ namespace EpiDashboard
 
         private void panelAddSpace_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.canvasMain.Height = this.canvasMain.Height + 2000;            
+            this.canvasMain.Height = this.canvasMain.Height + 2000;
         }
 
         private void cmbView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -4175,7 +4179,7 @@ namespace EpiDashboard
                     dataDictionary.Visibility = System.Windows.Visibility.Collapsed;
                     duplicatesDisplay.Visibility = Visibility.Collapsed;
                 }
-                else if(cmbView.SelectedIndex == 1)
+                else if (cmbView.SelectedIndex == 1)
                 {
                     dataDisplay.SetDataView(DashboardHelper.GenerateView());
                     dataDisplay.Refresh();
@@ -4199,7 +4203,7 @@ namespace EpiDashboard
 
                 //    duplicatesDisplay.SetDataView(DashboardHelper.GenerateDuplicatesTable(DashboardHelper.DataSet.Tables[0].DefaultView, columnNames).DefaultView);
                 //    duplicatesDisplay.Refresh();
-                    
+
                 //    dataDictionary.Visibility = System.Windows.Visibility.Collapsed;
                 //    dataDisplay.Visibility = System.Windows.Visibility.Collapsed;
                 //    duplicatesDisplay.Visibility = Visibility.Visible;
