@@ -123,7 +123,7 @@ namespace EpiDashboard.Gadgets.Charting
 
                     // If there is only one table and the total for that table is zero, then no data can be displayed and thus no chart can be generated.
                     // Show a message to the user to this effect so they don't wonder why they're seeing a blank gadget.
-                    
+
                     // Commented out for now because of scenarios where the "One chart for each value of" option is used, and we're unsure how to handle
                     // showing this message in that case.
 
@@ -173,18 +173,84 @@ namespace EpiDashboard.Gadgets.Charting
                             foreach (DataRow dRow in DashboardHelper.DataSet.Tables[0].Rows)
                             {
                             }
-                            
+
                         }
 
                         chartData.S = row[0];
-                        if(chartData.S == null || string.IsNullOrEmpty(chartData.S.ToString().Trim())) 
+                        if (chartData.S == null || string.IsNullOrEmpty(chartData.S.ToString().Trim()))
                         {
                             chartData.S = Config.Settings.RepresentationOfMissing;
                         }
                         dataList.Add(chartData);
                     }
-                }
 
+                    //---
+                       var query = from chartData in dataList
+                                orderby chartData.S ascending
+                                select chartData;
+
+                       XYColumnChartData firstObj = query.First();
+                       XYColumnChartData lastObj = query.Last();
+                      
+                           if (chtParameters.XAxisStart > 0 &&
+                               (table.Columns[0].DataType.ToString().Equals("System.Single") ||
+                               table.Columns[0].DataType.ToString().Equals("System.Double") ||
+                               table.Columns[0].DataType.ToString().Equals("System.Decimal")))
+                           {
+                               XYColumnChartData fillerFirst = new XYColumnChartData();
+                               fillerFirst.Y = 0;
+                               fillerFirst.X = strataValue;
+                               fillerFirst.S = chtParameters.XAxisStart;
+                               dataList.Add(fillerFirst);
+
+                               List<XYColumnChartData> dataListtoRemove = new List<XYColumnChartData>();
+                               foreach (XYColumnChartData xyc in dataList)
+                               {
+                                   XYColumnChartData columnchartdatalistitem = new XYColumnChartData();
+                                   columnchartdatalistitem.X = xyc.X;
+                                   columnchartdatalistitem.Y = xyc.Y;
+                                   columnchartdatalistitem.S = xyc.S;
+                                   double svalue = Convert.ToDouble(columnchartdatalistitem.S);
+                                   if (svalue < chtParameters.XAxisStart)
+                                   { dataListtoRemove.Add(xyc); }
+                               }
+                               foreach (XYColumnChartData xyc in dataListtoRemove)
+                               {
+                                   if (dataList.Contains(xyc))
+                                   { dataList.Remove(xyc); }
+                               }
+                           }
+
+                           if (chtParameters.XAxisEnd > 0 &&
+                               (table.Columns[0].DataType.ToString().Equals("System.Single") ||
+                               table.Columns[0].DataType.ToString().Equals("System.Double") ||
+                               table.Columns[0].DataType.ToString().Equals("System.Decimal")))
+                           {
+                               XYColumnChartData fillerLast = new XYColumnChartData();
+                               fillerLast.Y = 0;
+                               fillerLast.X = strataValue;
+                               fillerLast.S = chtParameters.XAxisEnd;
+                               dataList.Add(fillerLast);
+                               List<XYColumnChartData> dataListtoRemove = new List<XYColumnChartData>();
+                               foreach (XYColumnChartData xyc in dataList)
+                               {
+                                   XYColumnChartData columnchartdatalistitem = new XYColumnChartData();
+                                   columnchartdatalistitem.X = xyc.X;
+                                   columnchartdatalistitem.Y = xyc.Y;
+                                   columnchartdatalistitem.S = xyc.S;
+                                   double svalue = Convert.ToDouble(columnchartdatalistitem.S);
+                                   if (svalue > chtParameters.XAxisEnd)
+                                   { dataListtoRemove.Add(xyc); }
+                               }
+                               foreach (XYColumnChartData xyc in dataListtoRemove)
+                               {
+                                   if (dataList.Contains(xyc))
+                                   { dataList.Remove(xyc); }
+                               }
+                           }
+                       
+                    //-- 
+                }
                 this.Dispatcher.BeginInvoke(new SetChartDataDelegate(SetChartData), dataList, strata);
             }
 
