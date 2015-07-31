@@ -857,7 +857,13 @@ namespace EpiDashboard.Gadgets.Charting
                                 case "yaxisstep" :
                                     ((ColumnChartParameters)Parameters).YAxisStep = double.Parse(child.InnerText);
                                     break;
-                            
+                                case "xaxisstartvalue":
+                                    ((ColumnChartParameters)Parameters).XAxisStart = double.Parse(child.InnerText);
+                                    break;
+                                case "xaxisendvalue":
+                                    ((ColumnChartParameters)Parameters).XAxisEnd = double.Parse(child.InnerText);
+                                    break;
+                                
                             }
                         }
                     }
@@ -1175,6 +1181,14 @@ namespace EpiDashboard.Gadgets.Charting
                 XmlElement yAxisStepElement = doc.CreateElement("yAxisStep");
                 yAxisStepElement.InnerText = chtParameters.YAxisStep.ToString().Replace("<", "&lt;");
                 element.AppendChild(yAxisStepElement);
+
+                XmlElement xAxisStartElement = doc.CreateElement("xAxisStartValue");
+                xAxisStartElement.InnerText = chtParameters.XAxisStart.ToString().Replace("<", "&lt;");
+                element.AppendChild(xAxisStartElement);
+
+                XmlElement xAxisendElement = doc.CreateElement("xAxisEndValue");
+                xAxisendElement.InnerText = chtParameters.XAxisEnd.ToString().Replace("<", "&lt;");
+                element.AppendChild(xAxisendElement);
                                
                 //
                 //y2AxisLabel 

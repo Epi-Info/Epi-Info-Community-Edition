@@ -27,6 +27,8 @@ namespace EpiDashboard
             YAxisFrom = 0;
             YAxisTo = 0;
             YAxisStep = 0;
+            XAxisStart = 0;
+            XAxisEnd = 0;
         }
 
         /// <summary>
@@ -40,6 +42,8 @@ namespace EpiDashboard
             YAxisFrom = parameters.YAxisFrom;
             YAxisTo = parameters.YAxisTo;
             YAxisStep = parameters.YAxisStep;
+            XAxisStart = parameters.XAxisStart;
+            XAxisEnd = parameters.XAxisEnd;
         }
         
         #endregion     // Constructors
@@ -53,7 +57,9 @@ namespace EpiDashboard
         public double YAxisFrom { get; set; }
         public double YAxisTo { get; set; }
         public double YAxisStep { get; set; }
-        
+        public double XAxisStart { get; set; }
+        public double XAxisEnd { get; set; }
+
         #endregion  // Properties
 
     }

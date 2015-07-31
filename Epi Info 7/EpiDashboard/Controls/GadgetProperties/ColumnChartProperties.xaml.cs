@@ -118,10 +118,23 @@ namespace EpiDashboard.Controls.GadgetProperties
             txtYAxismaxValue.Text = parameters.YAxisTo.ToString();
             txtYAxisminValue.Text = parameters.YAxisFrom.ToString();
             txtYAxisstepValue.Text = parameters.YAxisStep.ToString();
+
+            txtxAxisStartValue.Text = parameters.XAxisStart.ToString();
+            txtxAxisEndValue.Text = parameters.XAxisEnd.ToString();
           
             txtWidth.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
             txtHeight.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
             txtLegendFontSize.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
+
+            txtYAxismaxValue.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
+            txtYAxisminValue.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
+            txtYAxisstepValue.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
+
+            txtxAxisStartValue.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
+            txtxAxisEndValue.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
+                   
+            
+
 
             #region Translation
 
@@ -715,11 +728,27 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 Parameters.YAxisFrom = yaxisfrom;
             }
+         
             double yaxisstep;
             success = double.TryParse(txtYAxisstepValue.Text, out yaxisstep);
             if (success)
             {
                 Parameters.YAxisStep = yaxisstep;
+            }
+           
+            //Ei-466
+            double xaxisstartvalue;
+            success = double.TryParse(txtxAxisStartValue.Text, out xaxisstartvalue);
+            if (success)
+            {
+                Parameters.XAxisStart = xaxisstartvalue;
+            }
+           
+            double xaxisendvalue;
+            success = double.TryParse(txtxAxisEndValue.Text, out xaxisendvalue);
+            if (success)
+            {
+                Parameters.XAxisEnd = xaxisendvalue;
             }
           }
 
@@ -1213,10 +1242,16 @@ namespace EpiDashboard.Controls.GadgetProperties
                     {
                         checkboxIncludeMissing.IsChecked = false;
                         checkboxIncludeMissing.IsEnabled = false;
+                        //--EI-466
+                        txtxAxisStartValue.IsEnabled = true;
+                        txtxAxisEndValue.IsEnabled = true;
                     }
                     else
                     {
                         checkboxIncludeMissing.IsEnabled = true;
+                        //--EI-466
+                        txtxAxisStartValue.IsEnabled = false;
+                        txtxAxisEndValue.IsEnabled = false;
                     }
                     if (field != null && field is RenderableField)
                     {
@@ -1449,5 +1484,6 @@ namespace EpiDashboard.Controls.GadgetProperties
                 txtLegendFontSize.Text = "12";
             }
         }
+       
     }
 }

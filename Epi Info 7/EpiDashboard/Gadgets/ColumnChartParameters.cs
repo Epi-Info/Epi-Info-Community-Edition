@@ -66,6 +66,8 @@ namespace EpiDashboard
             YAxisFrom = 0;
             YAxisTo = 0;
             YAxisStep = 0;
+            XAxisStart = 0;
+            XAxisEnd = 0;
             Y2AxisLabel = String.Empty;
             Y2AxisLegendTitle = String.Empty;
             Y2AxisFormat = String.Empty;
@@ -85,6 +87,7 @@ namespace EpiDashboard
             YAxisLabelFontSize = 12;
             XAxisFontSize = 12;
             XAxisLabelFontSize = 12;
+           
          
         }
 
@@ -137,6 +140,11 @@ namespace EpiDashboard
             //  Labels
             YAxisLabel = parameters.YAxisLabel;
             YAxisFormat = parameters.YAxisFormat;
+            YAxisFrom = parameters.YAxisFrom;
+            YAxisTo = parameters.YAxisTo;
+            YAxisStep = parameters.YAxisStep;
+            XAxisStart = parameters.XAxisStart;
+            XAxisEnd = parameters.XAxisEnd;
             Y2AxisLabel = parameters.Y2AxisLabel;
             Y2AxisLegendTitle = parameters.Y2AxisLegendTitle;
             Y2AxisFormat = parameters.Y2AxisFormat;
@@ -156,6 +164,7 @@ namespace EpiDashboard
             YAxisLabelFontSize = parameters.YAxisLabelFontSize;
             XAxisFontSize = parameters.XAxisFontSize;
             XAxisLabelFontSize = parameters.XAxisLabelFontSize;
+           
         }
     }
 }
