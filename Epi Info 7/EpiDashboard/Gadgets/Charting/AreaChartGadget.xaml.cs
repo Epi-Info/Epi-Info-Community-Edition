@@ -183,7 +183,6 @@ namespace EpiDashboard.Gadgets.Charting
                 catch (Exception)
                 {
 
-                    item.S = 0.0;
                 }
 
             }
