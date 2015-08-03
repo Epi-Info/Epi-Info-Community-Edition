@@ -855,11 +855,15 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 checkboxShowLegendBorder.IsEnabled = true;
                 checkboxShowVarName.IsEnabled = true;
+                cmbLegendDock.IsEnabled = true;
+                txtLegendFontSize.IsEnabled = true;
             }
             else
             {
                 checkboxShowLegendBorder.IsEnabled = false;
                 checkboxShowVarName.IsEnabled = false;
+                cmbLegendDock.IsEnabled = false;
+                txtLegendFontSize.IsEnabled = false;
             }
         }
 
