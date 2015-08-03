@@ -126,12 +126,12 @@ namespace EpiDashboard.Controls.GadgetProperties
             txtHeight.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
             txtLegendFontSize.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
 
-            txtYAxismaxValue.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
-            txtYAxisminValue.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
-            txtYAxisstepValue.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
+            txtYAxismaxValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
+            txtYAxisminValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
+            txtYAxisstepValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
 
-            txtxAxisStartValue.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
-            txtxAxisEndValue.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
+            txtxAxisStartValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
+            txtxAxisEndValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
                    
             
 
@@ -1483,6 +1483,20 @@ namespace EpiDashboard.Controls.GadgetProperties
                 MessageBox.Show(DashboardSharedStrings.PROPERTIES_LEGEND_FONT_SIZE_INVALID);
                 txtLegendFontSize.Text = "12";
             }
+        }
+
+        private void txtInput_NumbersWithDecimals_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            bool isNumPadNumeric = (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) || e.Key == Key.OemMinus || e.Key == Key.OemPeriod;
+            bool isNumeric = (e.Key >= Key.D0 && e.Key <= Key.D9);
+
+            if ((isNumeric || isNumPadNumeric) && Keyboard.Modifiers != ModifierKeys.None)
+            {
+                e.Handled = true;
+                return;
+            }
+            bool isControl = ((Keyboard.Modifiers != ModifierKeys.None && Keyboard.Modifiers != ModifierKeys.Shift) || e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right || e.Key == Key.Up || e.Key == Key.Tab || e.Key == Key.PageDown || e.Key == Key.PageUp || e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Escape || e.Key == Key.Home || e.Key == Key.End);
+            e.Handled = !isControl && !isNumeric && !isNumPadNumeric;
         }
        
     }
