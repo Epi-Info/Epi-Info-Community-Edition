@@ -45,6 +45,10 @@
     <Reference Include="Epi.Data.Office">
       <HintPath>..\build\debug\Epi.Data.Office.dll</HintPath>
     </Reference>
+    <Reference Include="Epi.Statistics, Version=7.1.5694.15753, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\build\debug\Epi.Statistics.dll</HintPath>
+    </Reference>
     <Reference Include="Epi.Windows">
       <HintPath>..\build\debug\Epi.Windows.dll</HintPath>
     </Reference>
@@ -84,6 +88,8 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="Data\BinomialTests.csv" />
+    <None Include="Data\LinearRegressionResults.csv" />
+    <None Include="Data\LinearRegressionTestData.csv" />
     <None Include="Data\LogisticCoefficientResults.csv" />
     <None Include="Data\LogisticOddsRatioResults.csv" />
     <None Include="Data\LogisticTestData.csv" />
