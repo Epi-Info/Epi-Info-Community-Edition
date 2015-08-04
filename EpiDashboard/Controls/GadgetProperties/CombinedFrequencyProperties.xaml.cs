@@ -163,8 +163,8 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     if (info.Name == columnName)
                     {
-                        lvGroupVariables.SelectedItems.Add(info);
-                        continue;
+                        lvGroupVariables.SelectedItem = info;
+                        break;
                     }
                 }
             }
