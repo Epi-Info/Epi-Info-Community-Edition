@@ -474,5 +474,24 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
 
         }
+        private void txtWidth_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            double thisWidth = 0;
+            double.TryParse(txtMaxWidth.Text, out thisWidth);
+            if (thisWidth > System.Windows.SystemParameters.PrimaryScreenWidth * 2)
+            {
+                txtMaxWidth.Text = (System.Windows.SystemParameters.PrimaryScreenWidth * 2).ToString();
+            }
+        }
+
+        private void txtHeight_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            double thisHeight = 0;
+            double.TryParse(txtMaxHeight.Text, out thisHeight);
+            if (thisHeight > System.Windows.SystemParameters.PrimaryScreenHeight * 2)
+            {
+                txtMaxHeight.Text = (System.Windows.SystemParameters.PrimaryScreenHeight * 2).ToString();
+            }
+        }
     }
 }
