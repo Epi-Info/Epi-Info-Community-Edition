@@ -57,6 +57,7 @@ namespace EpiDashboard
             Orientation = Orientation.Vertical;
             Palette = 12;
             BarType = BarKind.Block;
+            BarKind = BarKind.Rectangle;
             Y2LineDashStyle = LineDashStyle.Solid;
             Y2LineThickness = 2;
             //  Labels
