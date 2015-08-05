@@ -331,7 +331,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                                 break;
                             case "Double":
                             case "Float":
-                                pBuilder.Append(string.Format("{0:0.##}", pRow[C.ColumnName]));
+                                pBuilder.Append(string.Format("{0:0.##########}", pRow[C.ColumnName]));
                                 break;
                             case "DateTime":
 
