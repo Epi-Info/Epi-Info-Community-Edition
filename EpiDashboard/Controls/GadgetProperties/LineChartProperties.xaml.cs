@@ -1091,7 +1091,14 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     Field field = DashboardHelper.GetAssociatedField(cmbField.SelectedItem.ToString());
                     //Disable Include Missing check box for Number, Date, time fields.
-                    if (field != null && (field is NumberField || field is DateField || field is TimeField))
+                    if (field != null &&
+                        (field is NumberField ||
+                        field is DateField ||
+                        field is TimeField ||
+                        field is DateTimeField ||
+                        field is FirstSaveTimeField ||
+                        field is LastSaveTimeField ||
+                        field is TimeField))
                     {
                         checkboxIncludeMissing.IsChecked = false;
                         checkboxIncludeMissing.IsEnabled = false;
