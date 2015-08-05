@@ -843,9 +843,14 @@ namespace Epi.ImportExport.ProjectPackagers
                         {
                             XmlElement element = IdList[guid];
 
+                            
                             foreach (Field field in page.Fields)
                             {
-                                if (field is IDataField && field is RenderableField && !(field is GridField) && !(FieldsToNull.ContainsKey(form.Name) && FieldsToNull[form.Name].Contains(field.Name)))
+                                //--Ei-431
+                                if (page.Fields.Count == 1 && field is GridField) { data.AppendChild(element); }
+                                //--
+
+                                if (field is IDataField && field is RenderableField &&  !(field is GridField) && !(FieldsToNull.ContainsKey(form.Name) && FieldsToNull[form.Name].Contains(field.Name)))
                                 {
                                     RenderableField renderableField = field as RenderableField;
                                     if (renderableField != null)
