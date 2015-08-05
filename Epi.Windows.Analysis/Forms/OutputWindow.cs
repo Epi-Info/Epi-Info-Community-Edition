@@ -1087,7 +1087,7 @@ namespace Epi.Windows.Analysis.Forms
             }
             dialog.DataSource = dt;
             dialog.IdentifierList = identifierList;
-                        
+            dialog.Validate();            
             dialog.ShowDialog();
         }
 
