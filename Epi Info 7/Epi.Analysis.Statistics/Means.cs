@@ -1696,7 +1696,7 @@ namespace Epi.Analysis.Statistics
                         result = (Convert.ToBoolean(pValue) ? pConfig["RepresentationOfYes"] : pConfig["RepresentationOfNo"]);
                         break;
                     case "Double":
-                        result = string.Format("{0:0.##}", pValue);
+                        result = string.Format("{0:0.##########}", pValue);
                         break;
                     default:
                         result = pValue.ToString();
