@@ -773,7 +773,7 @@ namespace Epi.Analysis.Statistics
                         pBuilder.Append((Convert.ToBoolean(pValue) ? pConfig["RepresentationOfYes"] : pConfig["RepresentationOfNo"]));
                         break;
                     case TypeCode.Double:
-                        pBuilder.Append(string.Format("{0:0.##}", pValue));
+                        pBuilder.Append(string.Format("{0:0.##########}", pValue));
                         break;
                     case TypeCode.DateTime:
                         switch (epiDataType)
