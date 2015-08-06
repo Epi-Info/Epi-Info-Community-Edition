@@ -8,6 +8,9 @@ using System.Windows.Forms;
 using Epi;
 using Epi.Data.Services;
 using Epi.Windows.Dialogs;
+using EpiInfo.Plugin;
+using System.Collections.Generic;
+
 
 #endregion //Namespaces
 
@@ -27,7 +30,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
 		public VariableAssignmentDialog()
 		{
 			InitializeComponent();
-		}
+        }
 
         /// <summary>
         /// Constructor for the Variable Assignment dialog
@@ -36,6 +39,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
 		public VariableAssignmentDialog(MainForm frm) : base(frm)
         {
             InitializeComponent();
+            this.EpiInterpreter = ((Epi.Windows.MakeView.Forms.MakeViewMainForm)frm).EpiInterpreter;
         }
 
         #endregion  //Constructors
@@ -48,6 +52,24 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
         {
             set
             {
+            
+                VariableType scopeWord = VariableType.Standard | VariableType.Global |
+                                                 VariableType.DataSource | VariableType.DataSourceRedefined | VariableType.Permanent;
+                
+                List<EpiInfo.Plugin.IVariable> vars = this.EpiInterpreter.Context.GetVariablesInScope((VariableScope)scopeWord);
+                foreach (EpiInfo.Plugin.IVariable var in vars)
+                {
+                    if (!(var is Epi.Fields.PredefinedDataField) && !(var is Fields.LabelField) && !(var is Fields.MirrorField))
+                    {
+                        cbxAvailVariables.Items.Add(var.Name);
+                        cbxAssignVariable.Items.Add(var.Name);
+                    }
+                    //--EI-99
+                    if (var is Fields.FirstSaveTimeField || var is Fields.LastSaveTimeField)
+                    { cbxAvailVariables.Items.Add(var.Name); }
+                }  
+                              
+                /*
                 foreach (Fields.Field field in value.Fields)
                 {
                     //--EI27
@@ -61,7 +83,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
                     if (field is Fields.FirstSaveTimeField || field is Fields.LastSaveTimeField)
                        { cbxAvailVariables.Items.Add(field.Name); }
                    //--
-                }
+                }  */
             }
         }
         #endregion  //Public Properties
