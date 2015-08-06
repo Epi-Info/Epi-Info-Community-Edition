@@ -34,47 +34,51 @@
             <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables" Description="Select the column for the frequency." IsChecked="True" Checked="tbtnVariables_Checked"/>
             <Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Grouping and Sorting" Description="Set a sort order and create list groups." IsChecked="False" Checked="tbtnSorting_Checked"/>
             <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters__xfe" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
 
         </StackPanel>
 
-        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10 , 0" Visibility="Visible">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
-
-            <TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
-            <!--<RadioButton x:Name="radOneVar" GroupName="mutlifreq" Content="One Variable" Checked="OneVar_Checked"/>
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10 , 0" Visibility="Visible">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom">
+                <TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
+                <!--<RadioButton x:Name="radOneVar" GroupName="mutlifreq" Content="One Variable" Checked="OneVar_Checked"/>
             <RadioButton x:Name="radMultiVar" GroupName="mutlifreq" Content="Multi-Variable" Checked="MultiVar_Checked"/>-->
 
-            <!--<ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" Visibility="Hidden" />-->
+                <!--<ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" Visibility="Hidden" />-->
 
-            <StackPanel  x:Name="scrollViewerVarPro">
-                <ListBox SelectionMode="Multiple" Name="lbxField" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="lbxField_SelectionChanged" />
+                <StackPanel  x:Name="scrollViewerVarPro">
+                    <ListBox SelectionMode="Multiple" Name="lbxField" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="lbxField_SelectionChanged" />
+                </StackPanel>
+                <StackPanel>
+                    <StackPanel Height="12" />
+
+                    <TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
+                    <ComboBox x:Name="cbxFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFieldWeight_SelectionChanged" />
+                </StackPanel>
             </StackPanel>
-            <StackPanel>
-                <StackPanel Height="12" />
-
-                <TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
-                <ComboBox x:Name="cbxFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFieldWeight_SelectionChanged" />
-
-
+        </DockPanel>
+        
+        <DockPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Grouping and Sorting</Label>
             </StackPanel>
-        </StackPanel>
-        <StackPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Grouping and Sorting</Label>
+            <StackPanel DockPanel.Dock="Bottom">
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping</Label>
 
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping</Label>
+                <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
 
-            <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
-
-            <StackPanel x:Name="scrollViewerStrataProperties" >
-                <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" />
-            </StackPanel>
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Sorting</Label>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="tblockSortMethod">Method:</TextBlock>
-                <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Margin="20 0 0 0" Content="Sort high to low" HorizontalAlignment="Left" IsChecked="true" />
-            </StackPanel>
-            <!--<CheckBox.ToolTip>
+                <StackPanel x:Name="scrollViewerStrataProperties" >
+                    <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" />
+                </StackPanel>
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Sorting</Label>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="tblockSortMethod">Method:</TextBlock>
+                    <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Margin="20 0 0 0" Content="Sort high to low" HorizontalAlignment="Left" IsChecked="true" />
+                </StackPanel>
+                <!--<CheckBox.ToolTip>
                     <StackPanel>
                         <Label FontWeight="Bold">Sort High to Low</Label>
                         <TextBlock 
@@ -84,13 +88,13 @@
                     </StackPanel>
                 </CheckBox.ToolTip>-->
 
-
-        </StackPanel>
+            </StackPanel>
+        </DockPanel>
+        
         <DockPanel x:Name="panelDisplay" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10" >Display</Label>
             </StackPanel>
-
             <ScrollViewer DockPanel.Dock="Bottom" Width="Auto" Height="Auto" x:Name="scrollViewerProperties">
                 <StackPanel>
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0,0,5">Title and Description</Label>

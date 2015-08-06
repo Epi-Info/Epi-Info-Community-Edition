@@ -36,32 +36,38 @@
 
         </StackPanel>
         
-        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+            </StackPanel>
 
-            <TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
-            <ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" />
-            
-            <StackPanel Height="12" />
-            
-            <TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
-            <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
+            <StackPanel DockPanel.Dock="Bottom">
+                <TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
+                <ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" />
 
-            <StackPanel Height="12" />
+                <StackPanel Height="12" />
 
-            <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
-            <ComboBox x:Name="cbxFieldStrata" Width="216" HorizontalAlignment="Left" Height="28" />
+                <TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
+                <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
 
-            <StackPanel Height="12" />
+                <StackPanel Height="12" />
 
-            <TextBlock x:Name="tblockPSU">PSU:</TextBlock>
-            <ComboBox x:Name="cbxFieldPSU" Width="216" HorizontalAlignment="Left" Height="28" />
+                <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
+                <ComboBox x:Name="cbxFieldStrata" Width="216" HorizontalAlignment="Left" Height="28" />
 
-        </StackPanel>
-        <StackPanel x:Name="panelDisplay" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+                <StackPanel Height="12" />
 
-            <ScrollViewer x:Name="scrollViewerProperties" Style="{StaticResource PropertiesScrollviewer}">
+                <TextBlock x:Name="tblockPSU">PSU:</TextBlock>
+                <ComboBox x:Name="cbxFieldPSU" Width="216" HorizontalAlignment="Left" Height="28" />
+            </StackPanel>
+        </DockPanel>
+        
+        <DockPanel x:Name="panelDisplay" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+            </StackPanel>
+
+            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerProperties">
                 <StackPanel>
                     
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 5">Title and Description</Label>
@@ -77,7 +83,7 @@
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
-        </StackPanel>
+        </DockPanel>
 
         <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>

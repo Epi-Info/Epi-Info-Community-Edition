@@ -36,72 +36,79 @@
 
         </StackPanel>
 
-        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+            </StackPanel>
 
-            <Label>Means of:</Label>
-            <ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" />
-            <Label>Weight:</Label>
-            <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
-            <StackPanel Height="12" />
-            <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
-            <ComboBox x:Name="cbxFieldStrata" Width="216" HorizontalAlignment="Left" Height="28" />
+            <StackPanel DockPanel.Dock="Bottom">
+                <Label>Means of:</Label>
+                <ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" />
+                <Label>Weight:</Label>
+                <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
+                <StackPanel Height="12" />
+                <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
+                <ComboBox x:Name="cbxFieldStrata" Width="216" HorizontalAlignment="Left" Height="28" />
 
-            <StackPanel Height="12" />
-            <TextBlock x:Name="tblockCrosstabVariable">Cross-tabulate by:</TextBlock>
-            <ComboBox x:Name="cbxFieldCrosstab" Width="216" HorizontalAlignment="Left" Height="28" />
-            
-            <StackPanel Height="12" />
+                <StackPanel Height="12" />
+                <TextBlock x:Name="tblockCrosstabVariable">Cross-tabulate by:</TextBlock>
+                <ComboBox x:Name="cbxFieldCrosstab" Width="216" HorizontalAlignment="Left" Height="28" />
 
-            <TextBlock x:Name="tblockPSU">PSU:</TextBlock>
-            <ComboBox x:Name="cbxFieldPSU" Width="216" HorizontalAlignment="Left" Height="28" />
+                <StackPanel Height="12" />
 
-        </StackPanel>
+                <TextBlock x:Name="tblockPSU">PSU:</TextBlock>
+                <ComboBox x:Name="cbxFieldPSU" Width="216" HorizontalAlignment="Left" Height="28" />
+            </StackPanel>
+        </DockPanel>
 
-        <StackPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
+        <DockPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
+            </StackPanel>
 
-            <ScrollViewer x:Name="scrollViewerProperties" Style="{StaticResource PropertiesScrollviewer}">
-            <StackPanel>
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping</Label>
-            <Label>Group By:</Label>
-            <ComboBox x:Name="cmbGroupField" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left"/>
+            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerProperties">
+                <StackPanel>
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping</Label>
+                    <Label>Group By:</Label>
+                    <ComboBox x:Name="cmbGroupField" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left"/>
 
-            <Label>Sub-group By:</Label>
-            <ComboBox x:Name="cmbSecondaryGroupField" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left"/>
+                    <Label>Sub-group By:</Label>
+                    <ComboBox x:Name="cmbSecondaryGroupField" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left"/>
 
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Sorting</Label>
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Sorting</Label>
 
-            <Label>Sort Method:</Label>
-            <ComboBox x:Name="cmbSortMethod" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left" SelectedIndex="0" Margin="0, 0, 0, 8">
-                <ComboBoxItem>Ascending</ComboBoxItem>
-                <ComboBoxItem>Descending</ComboBoxItem>
-            </ComboBox>
-            
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".5*" />
-                    <ColumnDefinition Width="10" />
-                    <ColumnDefinition Width=".5*" />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <Label>Available Variables:</Label>
-                    <ListBox x:Name="lbxAvailableVariables" Height="370" MouseDoubleClick="lbxAvailableVariables_MouseDoubleClick" />
-                </StackPanel>
+                    <Label>Sort Method:</Label>
+                    <ComboBox x:Name="cmbSortMethod" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left" SelectedIndex="0" Margin="0, 0, 0, 8">
+                        <ComboBoxItem>Ascending</ComboBoxItem>
+                        <ComboBoxItem>Descending</ComboBoxItem>
+                    </ComboBox>
 
-                <StackPanel Grid.Column="2">
-                    <Label>Sort Order:</Label>
-                    <ListBox x:Name="lbxSortOrder" Height="370" MouseDoubleClick="lbxSortOrder_MouseDoubleClick" />
-                </StackPanel>
-            </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width=".5*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <Label>Available Variables:</Label>
+                            <ListBox x:Name="lbxAvailableVariables" Height="370" MouseDoubleClick="lbxAvailableVariables_MouseDoubleClick" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <Label>Sort Order:</Label>
+                            <ListBox x:Name="lbxSortOrder" Height="370" MouseDoubleClick="lbxSortOrder_MouseDoubleClick" />
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
             </ScrollViewer>
-        </StackPanel>
+        </DockPanel>
 
-        <StackPanel x:Name="panelDisplay" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+        <DockPanel x:Name="panelDisplay" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+            </StackPanel>
 
-            <ScrollViewer x:Name="scrollViewerDisplay" Style="{StaticResource PropertiesScrollviewer}">
+            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerDisplay">
                 <StackPanel>
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 5">Title and Description</Label>
                     <StackPanel Orientation="Vertical">
@@ -116,7 +123,7 @@
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
-        </StackPanel>
+        </DockPanel>
 
         <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>

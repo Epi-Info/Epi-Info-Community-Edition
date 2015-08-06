@@ -43,40 +43,48 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
-        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+            </StackPanel>
 
-            <TextBlock x:Name="tblockMainVariable">Main variable:</TextBlock>
-            <ComboBox x:Name="cmbField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbField_SelectionChanged" />
-            
-            <TextBlock x:Name="tblockCrossTabVariable" Margin="0,12,0,0">One graph for each value of:</TextBlock>
-            <ComboBox x:Name="cmbFieldCrosstab" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbFieldWeight_SelectionChanged" />
+            <StackPanel DockPanel.Dock="Bottom">
 
-            <TextBlock x:Name="tblockWeightVariable" Margin="0,12,0,0">Weight:</TextBlock>
-            <ComboBox x:Name="cmbFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbFieldWeight_SelectionChanged" />
+                <TextBlock x:Name="tblockMainVariable">Main variable:</TextBlock>
+                <ComboBox x:Name="cmbField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbField_SelectionChanged" />
 
-            
+                <TextBlock x:Name="tblockCrossTabVariable" Margin="0,12,0,0">One graph for each value of:</TextBlock>
+                <ComboBox x:Name="cmbFieldCrosstab" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbFieldWeight_SelectionChanged" />
 
-            <!--Sorting and Grouping-->
-<!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+                <TextBlock x:Name="tblockWeightVariable" Margin="0,12,0,0">Weight:</TextBlock>
+                <ComboBox x:Name="cmbFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbFieldWeight_SelectionChanged" />
 
-        </StackPanel>
-        <StackPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
 
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping</Label>
-            <Label>Stratify by:</Label>
-            <ScrollViewer x:Name="scrollViewerStrataProperties" VerticalAlignment="Stretch" Height="300" >
-                <StackPanel>
-                    <ListBox SelectionMode="Multiple" Name="listboxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="listboxFieldStrata_SelectionChanged" />
-                </StackPanel>
-            </ScrollViewer>
 
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 30, 0, 4">Sorting</Label>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="tblockSortMethod">Method:</TextBlock>
-                <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Margin="20 0 0 0" Content="Sort high to low" HorizontalAlignment="Left" IsChecked="true">
-                    <!--<CheckBox.ToolTip>
+                <!--Sorting and Grouping-->
+                <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+            </StackPanel>
+        </DockPanel>
+        
+        <DockPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
+            </StackPanel>
+
+            <StackPanel DockPanel.Dock="Bottom">
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping</Label>
+                <Label>Stratify by:</Label>
+                <ScrollViewer x:Name="scrollViewerStrataProperties" VerticalAlignment="Stretch" Height="300" >
+                    <StackPanel>
+                        <ListBox SelectionMode="Multiple" Name="listboxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="listboxFieldStrata_SelectionChanged" />
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 30, 0, 4">Sorting</Label>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="tblockSortMethod">Method:</TextBlock>
+                    <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Margin="20 0 0 0" Content="Sort high to low" HorizontalAlignment="Left" IsChecked="true">
+                        <!--<CheckBox.ToolTip>
                     <StackPanel>
                         <Label FontWeight="Bold">Sort High to Low</Label>
                         <TextBlock 
@@ -85,15 +93,19 @@
                         will be sorted alphabetically.</TextBlock>
                     </StackPanel>
                 </CheckBox.ToolTip>-->
-                </CheckBox>
+                    </CheckBox>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </DockPanel>
 <!--Display-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-        <StackPanel x:Name="panelDisplay" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+        <DockPanel x:Name="panelDisplay" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
 
-            <ScrollViewer x:Name="scrollViewerProperties" Style="{StaticResource PropertiesScrollviewer}">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+            </StackPanel>
+
+            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerProperties">
                 <StackPanel>
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 5">Title and Description</Label>
                     <StackPanel Orientation="Vertical">
@@ -143,12 +155,16 @@
 
                 </StackPanel>
             </ScrollViewer>
-        </StackPanel>
+        </DockPanel>
 <!--Colors and Styles-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-        <StackPanel x:Name="panelDisplayColors" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed" >
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors and Styles</Label>
-            <ScrollViewer x:Name="scrollViewerPropertiesColors" Style="{StaticResource PropertiesScrollviewer}">
+        <DockPanel x:Name="panelDisplayColors" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed" >
+
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors and Styles</Label>
+            </StackPanel>
+
+            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesColors">
                 <StackPanel>
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Colors</Label>
                     <StackPanel Orientation="Vertical">
@@ -258,12 +274,15 @@
                         </StackPanel>
                     </StackPanel>
             </ScrollViewer>
-        </StackPanel>
+        </DockPanel>
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 <!--Labels-->
-        <StackPanel x:Name="panelDisplayLabels" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Labels</Label>
-            <ScrollViewer x:Name="scrollViewerPropertiesLabels" Style="{StaticResource PropertiesScrollviewer}">
+        <DockPanel x:Name="panelDisplayLabels" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Labels</Label>
+            </StackPanel>
+
+            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesLabels">
                 <StackPanel>
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Y-Axis</Label>
                     <StackPanel>
@@ -360,40 +379,42 @@
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
-        </StackPanel>
+        </DockPanel>
 <!--Legend-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-        <StackPanel x:Name="panelDisplayLegend" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Legend</Label>
-            <ScrollViewer x:Name="scrollViewerPropertiesLegend" Style="{StaticResource PropertiesScrollviewer}">
-                <StackPanel>
-                    <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                        <StackPanel>
-                            <CheckBox x:Name="checkboxShowLegend" Margin="0,12,0,0" Content="Show legend" HorizontalAlignment="Left" IsChecked="False" Click="checkboxShowLegend_Click" />
-                        </StackPanel>
-                        <StackPanel>
-                            <CheckBox x:Name="checkboxShowLegendBorder" Margin="0,12,0,0" Content="Show legend border" HorizontalAlignment="Left" IsChecked="False" />
-                        </StackPanel>
-                        <StackPanel>
-                            <CheckBox x:Name="checkboxShowVarName" Margin="0,12,0,0" Content="Show variable names" HorizontalAlignment="Left" IsChecked="False" />
-                        </StackPanel>
-                        <StackPanel>
-                            <TextBlock x:Name="tblockLegendFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend font size:" Margin="0,12,0,0"  />
-                            <TextBox x:Name="txtLegendFontSize" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="12" SelectionChanged="txtLegendFontSize_SelectionChanged" />
-                        </StackPanel>
-                        <StackPanel>
-                            <TextBlock x:Name="tblockLegendDock" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend placement:" Margin="0,12,0,0"  />
-                            <ComboBox x:Name="cmbLegendDock" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left">
-                                <ComboBox.Items> 
-                                    <ComboBoxItem>Left</ComboBoxItem>
-                                    <ComboBoxItem>Right</ComboBoxItem>
-                                    <ComboBoxItem>Top</ComboBoxItem>
-                                    <ComboBoxItem>Bottom</ComboBoxItem>
-                                </ComboBox.Items>
-                            </ComboBox>
-                        </StackPanel>
+        <DockPanel x:Name="panelDisplayLegend" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Legend</Label>
+            </StackPanel>
 
-                        <!--<TextBlock x:Name="tblockLegendFontFamily" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend font family:" Margin="0,12,0,0" />
+            <StackPanel DockPanel.Dock="Bottom">
+                <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <StackPanel>
+                        <CheckBox x:Name="checkboxShowLegend" Margin="0,12,0,0" Content="Show legend" HorizontalAlignment="Left" IsChecked="False" Click="checkboxShowLegend_Click" />
+                    </StackPanel>
+                    <StackPanel>
+                        <CheckBox x:Name="checkboxShowLegendBorder" Margin="0,12,0,0" Content="Show legend border" HorizontalAlignment="Left" IsChecked="False" />
+                    </StackPanel>
+                    <StackPanel>
+                        <CheckBox x:Name="checkboxShowVarName" Margin="0,12,0,0" Content="Show variable names" HorizontalAlignment="Left" IsChecked="False" />
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock x:Name="tblockLegendFontSize" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend font size:" Margin="0,12,0,0"  />
+                        <TextBox x:Name="txtLegendFontSize" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="12" SelectionChanged="txtLegendFontSize_SelectionChanged" />
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock x:Name="tblockLegendDock" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend placement:" Margin="0,12,0,0"  />
+                        <ComboBox x:Name="cmbLegendDock" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left">
+                            <ComboBox.Items>
+                                <ComboBoxItem>Left</ComboBoxItem>
+                                <ComboBoxItem>Right</ComboBoxItem>
+                                <ComboBoxItem>Top</ComboBoxItem>
+                                <ComboBoxItem>Bottom</ComboBoxItem>
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!--<TextBlock x:Name="tblockLegendFontFamily" HorizontalAlignment="Left" TextAlignment="Center" Text="Legend font family:" Margin="0,12,0,0" />
                                             <ComboBox Width="216" x:Name="cmbFontSelector" HorizontalAlignment="Left" SelectionChanged="cmbFontSelector_SelectionChanged">
                                                 <ComboBox.ItemTemplate>
                                                     <DataTemplate>
@@ -401,10 +422,9 @@
                                                     </DataTemplate>
                                                 </ComboBox.ItemTemplate>
                                             </ComboBox>-->
-                    </WrapPanel>
-                </StackPanel>
-            </ScrollViewer>
-        </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+        </DockPanel>
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
