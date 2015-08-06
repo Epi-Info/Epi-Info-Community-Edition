@@ -8,7 +8,7 @@
              d:DesignHeight="460" d:DesignWidth="800" FontFamily="Global User Interface" FontSize="16" Background="White">
     <UserControl.Resources>
             <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
+             <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="../StyleDictionary.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
@@ -30,86 +30,130 @@
             <Label FontWeight="Light" Foreground="White" FontSize="40" Margin="0, 0, 0, 10">Point of Interest</Label>
             <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked"/>
             <Controls:SettingsToggleButton  x:Name="tbtnVariables" Title="Variables" Description="Choose map boundaries." IsChecked="False" Checked="tbtnVariables_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors" Description="Set color representations." IsChecked="False" Checked="tbtnCharts_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors and Styles" Description="Set color representations." IsChecked="False" Checked="tbtnCharts_Checked"/>
             <Controls:SettingsToggleButton  x:Name="tbtnFilter" Title="Filters" Description="Set data filters." IsChecked="False" Checked="tbtnFilter_Checked"/>
         </StackPanel>
 
-        <StackPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Data Source</Label>
+        <DockPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
+            </StackPanel>
 
-            <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
+            <StackPanel DockPanel.Dock="Bottom" x:Name="panelDataSourceProject" Visibility="Visible">
+                
                 <Label>Data Source:</Label>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBox x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"></TextBox>
-                    <Button x:Name="btnBrowse" Height="Auto" Grid.Column="2" Click="btnBrowse_Click">Browse</Button>
-                </Grid>
+
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBox Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"></TextBox>
+                    <Button x:Name="btnBrowse" Height="Auto" Margin="20 0 0 0 " Click="btnBrowse_Click">Browse</Button>
+
+                </StackPanel>
 
                 
+
+           
+
+            <StackPanel Margin="0 30 0 0" x:Name="panelDataSourceOther" Visibility="Collapsed">
+                <StackPanel>
+                    <Label>Connection String:</Label>
+                    <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtDataSource" Margin="0,0,0,8" />
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel x:Name="panelDataSourceOther" Visibility="Collapsed">
-                <Label>Connection String:</Label>
-                <TextBox x:Name="txtDataSource" Margin="0,0,0,8" />
+                <StackPanel Margin="0 30 0 0" x:Name="panelDataSourceAdvanced" Visibility="Collapsed">
+                    <StackPanel>
+                        <Label>SQL Query:</Label>
+                        <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtSQLQuery"></TextBox>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
+        </DockPanel>
 
-            <StackPanel x:Name="panelDataSourceAdvanced" Visibility="Collapsed">
-                <Label>SQL Query:</Label>
-                <TextBox x:Name="txtSQLQuery"></TextBox>
-            </StackPanel>
-        </StackPanel>
-
-        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="8" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Select the variables for data layer</Label>
-
-            <Label>Description:</Label>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="8" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBox x:Name="txtDescription" ></TextBox>
-            </Grid>
-            <Label>Style:</Label>
-            <ComboBox x:Name="cmbStyle" > </ComboBox>
-            <Label Name="lblLatitude">Latitude Field:</Label>
-            <ComboBox x:Name="cmbLatitude" ></ComboBox>
-            <Label Name="lblLongitude">Longitude Field:</Label>
-            <ComboBox x:Name="cmbLongitude" ></ComboBox>
-        </StackPanel>
         
-        <StackPanel x:Name="panelFilter" Grid.Column="2"   Margin="8" Visibility="Collapsed"  >
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this gadget</Label>
-            <Label Margin="0, 0, 0, 20">Note: Select dataSource to add filter to data layer: </Label>
-       </StackPanel>
-        
-        <StackPanel x:Name="panelInfo" Grid.Column="2" Margin="8" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Canvas Information</Label>
-
-            <TextBlock x:Name="tblockRows" Text="2,255 unfiltered rows" Margin="0,0,0,16" />
-            <TextBlock x:Name="tblockColumns" Text="252 columns" Margin="0,0,0,16" />
-            <TextBlock x:Name="tblockCacheDateTime" Text="Data last cached at 12/16/2011 1:56 PM" Margin="0,0,0,16" />
-            <TextBlock x:Name="tblockCacheTimeElapsed" Text="Took 4:32:32 to locally cache data" Margin="0,0,0,16" />
-            <TextBlock x:Name="tblockCurrentEpiVersion" Text="Epi Info 7.0.0.0" Margin="0,0,0,16" />
-        </StackPanel>
-
-        <StackPanel x:Name="panelCharts" Grid.Column="2" Margin="8" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Colors</Label>
-         
-            <StackPanel Orientation="Horizontal" Margin="8,0,0,2" >
-                <TextBlock x:Name="tblcolor" Text="Select Color: "> </TextBlock>
-                <Rectangle x:Name="rctSelectColor" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,11,0">
-                    <Rectangle.ToolTip>
-                        <Label Content="select value color"/>
-                    </Rectangle.ToolTip>
-                </Rectangle>
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="8" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
             </StackPanel>
-        </StackPanel>
+
+            <StackPanel DockPanel.Dock="Bottom">
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Select the variables for data layer</Label>
+                <StackPanel>
+                    <Label Name="lblLatitude">Latitude Field:</Label>
+                    <ComboBox Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" x:Name="cmbLatitude" ></ComboBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                <StackPanel>
+                    <Label Name="lblLongitude">Longitude Field:</Label>
+                    <ComboBox Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" x:Name="cmbLongitude" ></ComboBox>
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+
+        <DockPanel x:Name="panelDisplay" Grid.Column="2" Margin="8" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+            </StackPanel>
+            
+            <StackPanel DockPanel.Dock="Bottom">
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Title and Description</Label>
+                <Label>Description:</Label>
+                <TextBox Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left" AcceptsReturn="True" TextWrapping="Wrap" x:Name="txtDescription" ></TextBox>
+            </StackPanel>
+        </DockPanel>
+
+
+        <DockPanel x:Name="panelFilter" Grid.Column="2"   Margin="8" Visibility="Collapsed"  >
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom">
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this gadget</Label>
+                <Label Margin="0, 0, 0, 20">Note: Select dataSource to add filter to data layer:</Label>
+            </StackPanel>
+        </DockPanel>
+        
+        <DockPanel x:Name="panelInfo" Grid.Column="2" Margin="8" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Canvas Information</Label>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom">
+                <TextBlock x:Name="tblockRows" Text="2,255 unfiltered rows" Margin="0,0,0,16" />
+                <TextBlock x:Name="tblockColumns" Text="252 columns" Margin="0,0,0,16" />
+                <TextBlock x:Name="tblockCacheDateTime" Text="Data last cached at 12/16/2011 1:56 PM" Margin="0,0,0,16" />
+                <TextBlock x:Name="tblockCacheTimeElapsed" Text="Took 4:32:32 to locally cache data" Margin="0,0,0,16" />
+                <TextBlock x:Name="tblockCurrentEpiVersion" Text="Epi Info 7.0.0.0" Margin="0,0,0,16" />
+            </StackPanel>
+        </DockPanel>
+
+        <DockPanel x:Name="panelCharts" Grid.Column="2" Margin="8" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors and Styles</Label>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom">
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Color</Label>
+                <StackPanel Orientation="Horizontal" Margin="8,0,0,2" >
+                    <TextBlock x:Name="tblcolor" Text="Select Color:"></TextBlock>
+                    <Rectangle x:Name="rctSelectColor" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="10,0,11,0">
+                        <Rectangle.ToolTip>
+                            <Label Content="select value color"/>
+                        </Rectangle.ToolTip>
+                    </Rectangle>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 30, 0, 0">Styles</Label>
+                    <TextBlock Style="{StaticResource PropertiesInstructionsText}">To select a shape, a Data Source should to be specified/selected in the Data Source panel.</TextBlock>
+                </StackPanel>
+                <StackPanel>
+
+                    <Label HorizontalAlignment="Left" Margin="0 10 0 0">Shape:</Label>
+                    <ComboBox Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" x:Name="cmbStyle" ></ComboBox>
+
+
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
         
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 

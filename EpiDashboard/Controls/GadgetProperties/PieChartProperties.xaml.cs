@@ -513,7 +513,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             txtAnnotationPercent.Text = Parameters.AnnotationPercent.ToString();
 
             //Display Labels settings
-            scrollViewerPropertiesLabels.MaxHeight = scrollViewerPropertiesLabels.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
+            //scrollViewerPropertiesLabels.MaxHeight = scrollViewerPropertiesLabels.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
 
             txtChartTitle.Text = Parameters.ChartTitle;
             txtChartSubTitle.Text = Parameters.ChartSubTitle;

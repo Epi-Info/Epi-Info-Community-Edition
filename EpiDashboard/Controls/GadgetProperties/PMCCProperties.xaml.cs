@@ -328,7 +328,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             cbxOutcomeField.SelectedItem = Parameters.CrosstabVariableName;
             //cbxFieldWeight.SelectedItem = Parameters.WeightVariableName;
             lbxFieldStrata.MaxHeight = lbxFieldStrata.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
-            scrollViewerStrataProperties.Height = scrollViewerStrataProperties.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
+            //scrollViewerStrataProperties.Height = scrollViewerStrataProperties.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
             if (Parameters.StrataVariableNames.Count > 0)
             {
                 foreach (string s in Parameters.StrataVariableNames)

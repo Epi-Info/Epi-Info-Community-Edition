@@ -807,6 +807,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             //Display settings
             scrollViewerProperties.MaxHeight = scrollViewerProperties.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
+           
             txtTitle.Text = Parameters.GadgetTitle;
             txtDesc.Text = Parameters.GadgetDescription;
             txtWidth.Text = Parameters.ChartWidth.ToString();

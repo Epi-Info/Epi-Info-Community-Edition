@@ -40,125 +40,134 @@
 
         <!--Variables-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
-            <StackPanel Orientation="Vertical">
-                <WrapPanel Height="Auto" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
-                    <StackPanel>
-                    <TextBlock x:Name="tblockExposureField" HorizontalAlignment="Left" TextAlignment="Center" Text="Exposure:" Margin="0,5,0,0"  />
-                        <ComboBox x:Name="cbxExposureField" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxExposureField_SelectionChanged" Style="{StaticResource PropertiesComboxStyleLarge}" />
-                    </StackPanel>
-                    <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
-                    <StackPanel>
-                    <TextBlock x:Name="tblockOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Case/Control:" Margin="0,5,0,0"  />
-                        <ComboBox x:Name="cbxOutcomeField" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxOutcomeField_SelectionChanged" Style="{StaticResource PropertiesComboxStyleLarge}" />
-                    </StackPanel>
-                </WrapPanel>
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
             </StackPanel>
-            <!--<TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
+            <StackPanel DockPanel.Dock="Bottom">
+                <StackPanel Orientation="Vertical">
+                    <WrapPanel Height="Auto" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
+                        <StackPanel>
+                            <TextBlock x:Name="tblockExposureField" HorizontalAlignment="Left" TextAlignment="Center" Text="Exposure:" Margin="0,5,0,0"  />
+                            <ComboBox x:Name="cbxExposureField" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxExposureField_SelectionChanged" Style="{StaticResource PropertiesComboxStyleLarge}" />
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="tblockOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Case/Control:" Margin="0,5,0,0"  />
+                            <ComboBox x:Name="cbxOutcomeField" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxOutcomeField_SelectionChanged" Style="{StaticResource PropertiesComboxStyleLarge}" />
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+                <!--<TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
             <ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" />-->
 
-            <StackPanel Height="12" />
+                <StackPanel Height="12" />
 
-            <!--<TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
+                <!--<TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
             <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFieldWeight_SelectionChanged" />-->
 
-            <StackPanel Height="12" />
-            <TextBlock x:Name="tblockStrataVariable">Pair Group ID:</TextBlock>
-            <StackPanel x:Name="scrollViewerStrataProperties">
-                <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" Height="290"/>
+                <StackPanel Height="12" />
+                <TextBlock x:Name="tblockStrataVariable">Pair Group ID:</TextBlock>
+                <StackPanel x:Name="scrollViewerStrataProperties">
+                    <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" Height="290"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </DockPanel>
 
         <!--2x2 Value Mapping-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
-        <StackPanel x:Name="panelValueMapping" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Value Mapping</Label>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+        <DockPanel x:Name="panelValueMapping" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Value Mapping</Label>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                <StackPanel Grid.Column = "0" Grid.RowSpan="7" >
-                    <TextBlock x:Name="tblockAllValues">All values:</TextBlock>
-                    <ScrollViewer x:Name="scrollViewerValueMapping" VerticalAlignment="Stretch" MinHeight="425" MinWidth="150">
-                        <StackPanel>
-                            <ListBox SelectionMode="Multiple" Name="lbxAllValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="425" />
-                        </StackPanel>
-                    </ScrollViewer>
-                </StackPanel>
-                <StackPanel Grid.Column="2" Grid.Row="1">
-                    <Button x:Name="btnAddYes" DockPanel.Dock="Right" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnAddYes_Click">&gt;</Button>
-                    <Button x:Name="btnRemoveYes" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnRemoveYes_Click" >&lt;</Button>
-                </StackPanel>
-                <StackPanel Grid.Column="2" Grid.Row="4">
-                    <Button x:Name="btnAddNo" DockPanel.Dock="Right" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnAddNo_Click">&gt;</Button>
-                    <Button x:Name="btnRemoveNo" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnRemoveNo_Click" >&lt;</Button>
-                </StackPanel>
+                    <StackPanel Grid.Column = "0" Grid.RowSpan="7" >
+                        <TextBlock x:Name="tblockAllValues">All values:</TextBlock>
+                        <ScrollViewer x:Name="scrollViewerValueMapping" VerticalAlignment="Stretch" MinHeight="425" MinWidth="150">
+                            <StackPanel>
+                                <ListBox SelectionMode="Multiple" Name="lbxAllValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="425" />
+                            </StackPanel>
+                        </ScrollViewer>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Grid.Row="1">
+                        <Button x:Name="btnAddYes" DockPanel.Dock="Right" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnAddYes_Click">&gt;</Button>
+                        <Button x:Name="btnRemoveYes" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnRemoveYes_Click" >&lt;</Button>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Grid.Row="4">
+                        <Button x:Name="btnAddNo" DockPanel.Dock="Right" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnAddNo_Click">&gt;</Button>
+                        <Button x:Name="btnRemoveNo" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnRemoveNo_Click" >&lt;</Button>
+                    </StackPanel>
 
-                <StackPanel Grid.Column = "3" Grid.Row="0" Grid.RowSpan="7">
-                    <TextBlock x:Name="tblockYesValues" Margin="0,0,0,0">Yes values:</TextBlock>
-                    <ListBox SelectionMode="Multiple" Name="lbxYesValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200" MinWidth="150"/>
-                    <TextBlock x:Name="tblockNoValues" Margin="0,8,0,0">No values:</TextBlock>
-                    <ListBox SelectionMode="Multiple" Name="lbxNoValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200"/>
-                </StackPanel>
-            </Grid>
-        </StackPanel>
+                    <StackPanel Grid.Column = "3" Grid.Row="0" Grid.RowSpan="7">
+                        <TextBlock x:Name="tblockYesValues" Margin="0,0,0,0">Yes values:</TextBlock>
+                        <ListBox SelectionMode="Multiple" Name="lbxYesValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200" MinWidth="150"/>
+                        <TextBlock x:Name="tblockNoValues" Margin="0,8,0,0">No values:</TextBlock>
+                        <ListBox SelectionMode="Multiple" Name="lbxNoValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </DockPanel>
         <!--Display-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
-        <StackPanel x:Name="panelDisplay" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+        <DockPanel x:Name="panelDisplay" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+            </StackPanel>
 
-            <ScrollViewer x:Name="scrollViewerProperties" Style="{StaticResource PropertiesScrollviewer}">
-                <StackPanel>
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 5">Title and Description</Label>
-                    <StackPanel Orientation="Vertical">
 
-                        <StackPanel>
-                            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
-                            <TextBox x:Name="txtTitle" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
-                        </StackPanel>
-                        <StackPanel Margin="0 10 0 0">
-                            <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
-                                <TextBox x:Name="txtDesc" AcceptsReturn="True" Style="{StaticResource PropertiesGadgetDescription}" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
-                            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom">
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 5">Title and Description</Label>
+                <StackPanel Orientation="Vertical">
+
+                    <StackPanel>
+                        <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
+                        <TextBox x:Name="txtTitle" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
                     </StackPanel>
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 10" Visibility="Collapsed">Output Options</Label>
-                    <WrapPanel ItemWidth="220" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" >
-                        <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values" Visibility="Collapsed" IsEnabled="true" />
-                        <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" Visibility="Collapsed" IsEnabled="true" />
-                        <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values" Visibility="Collapsed" IsChecked="False" />
-                        <CheckBox x:Name="checkboxOutcomeContinuous" Style="{StaticResource PropertiesPanelCheckbox}" Content="Outcome is continuous" Visibility="Collapsed" IsEnabled="True" />
-                        <CheckBox x:Name="checkboxSmartTable" Style="{StaticResource PropertiesPanelCheckbox}" Content="Smart 2x2 table" Visibility="Collapsed" IsEnabled="True" IsChecked="True" />
-                        <CheckBox x:Name="checkboxStrataSummaryOnly" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show strata summary only" Visibility="Collapsed" IsEnabled="True" IsChecked="False" />
-                        <CheckBox x:Name="checkboxRowColPercents" Style="{StaticResource PropertiesPanelCheckbox}" Content="Row / column percents"  HorizontalAlignment="Left" Visibility="Collapsed" IsEnabled="True" IsChecked="True" />
-                        <CheckBox x:Name="checkboxHorizontal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Horizontal 2x2 summary"  HorizontalAlignment="Left" Visibility="Collapsed" IsEnabled="True" IsChecked="True" />
-                        
-                    </WrapPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="tblockMaxColumnLength" HorizontalAlignment="Left" TextAlignment="Center" Text="Max column name length:" Visibility="Collapsed" />
-                        <TextBox x:Name="txtMaxColumnLength" Width="60" HorizontalAlignment="Left" Text="24" Visibility="Collapsed" Margin="5 0 0 0"></TextBox>
+                    <StackPanel Margin="0 10 0 0">
+                        <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
+                        <TextBox x:Name="txtDesc" AcceptsReturn="True" Style="{StaticResource PropertiesGadgetDescription}" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
                     </StackPanel>
-                    <!--<Button x:Name="btnValueMappings" HorizontalAlignment="Left" Click="btnValueMappings_Click" >
+                </StackPanel>
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 10" Visibility="Collapsed">Output Options</Label>
+                <WrapPanel ItemWidth="220" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" >
+                    <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values" Visibility="Collapsed" IsEnabled="true" />
+                    <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels" Visibility="Collapsed" IsEnabled="true" />
+                    <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values" Visibility="Collapsed" IsChecked="False" />
+                    <CheckBox x:Name="checkboxOutcomeContinuous" Style="{StaticResource PropertiesPanelCheckbox}" Content="Outcome is continuous" Visibility="Collapsed" IsEnabled="True" />
+                    <CheckBox x:Name="checkboxSmartTable" Style="{StaticResource PropertiesPanelCheckbox}" Content="Smart 2x2 table" Visibility="Collapsed" IsEnabled="True" IsChecked="True" />
+                    <CheckBox x:Name="checkboxStrataSummaryOnly" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show strata summary only" Visibility="Collapsed" IsEnabled="True" IsChecked="False" />
+                    <CheckBox x:Name="checkboxRowColPercents" Style="{StaticResource PropertiesPanelCheckbox}" Content="Row / column percents"  HorizontalAlignment="Left" Visibility="Collapsed" IsEnabled="True" IsChecked="True" />
+                    <CheckBox x:Name="checkboxHorizontal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Horizontal 2x2 summary"  HorizontalAlignment="Left" Visibility="Collapsed" IsEnabled="True" IsChecked="True" />
+
+                </WrapPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="tblockMaxColumnLength" HorizontalAlignment="Left" TextAlignment="Center" Text="Max column name length:" Visibility="Collapsed" />
+                    <TextBox x:Name="txtMaxColumnLength" Width="60" HorizontalAlignment="Left" Text="24" Visibility="Collapsed" Margin="5 0 0 0"></TextBox>
+                </StackPanel>
+                <!--<Button x:Name="btnValueMappings" HorizontalAlignment="Left" Click="btnValueMappings_Click" >
                         Define 2x2 Value Mappings
                     </Button>-->
-                </StackPanel>
-            </ScrollViewer>
-        </StackPanel>
+            </StackPanel>
+        </DockPanel>
 
         <!--Colors and Styles-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->

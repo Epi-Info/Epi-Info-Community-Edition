@@ -36,10 +36,12 @@
 
         </StackPanel>
 
-        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
-
-                <Label>Variables to display:</Label>
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom">
+            <Label>Variables to display:</Label>
                 <ListView Name="lvVariables" Height="300">
                     <ListView.View>
                         <GridView>
@@ -57,12 +59,14 @@
                         </GroupStyle>
                     </ListView.GroupStyle>
                 </ListView>
-            
-        </StackPanel>
+            </StackPanel>
+        </DockPanel>
 
-        <StackPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Groupig and Sorting</Label>
-                <StackPanel>
+        <DockPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Groupig and Sorting</Label>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom">
                 <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping</Label>
                 <StackPanel Orientation="Vertical">
                     <WrapPanel Height="Auto" Orientation="Vertical" HorizontalAlignment="Left">
@@ -101,7 +105,7 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-        </StackPanel>
+        </DockPanel>
 
         <DockPanel  x:Name="panelDisplay" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
 

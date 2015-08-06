@@ -121,6 +121,7 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Visible;
             panelFilter.Visibility = System.Windows.Visibility.Collapsed;
@@ -131,6 +132,7 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelCharts.Visibility = System.Windows.Visibility.Visible;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilter.Visibility = System.Windows.Visibility.Collapsed;
@@ -141,6 +143,7 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelVariables.Visibility = System.Windows.Visibility.Visible;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilter.Visibility = System.Windows.Visibility.Collapsed;
@@ -151,6 +154,7 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelFilter.Visibility = System.Windows.Visibility.Visible;
             panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
@@ -162,6 +166,19 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Visible;
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
+            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            panelFilter.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void tbtnDisplay_Checked(object sender, RoutedEventArgs e)
+        {
+            if (panelDataSource == null) return;
+            CheckButtonStates(sender as ToggleButton);
+            panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
+            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Visible;
             panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilter.Visibility = System.Windows.Visibility.Collapsed;
@@ -370,6 +387,7 @@ namespace EpiDashboard.Controls
             {
                 cmbLatitude.SelectedIndex = -1;
                 cmbLongitude.SelectedIndex = -1;
+          
             }
 
             cmbStyle.ItemsSource = Enum.GetNames(typeof(SimpleMarkerSymbol.SimpleMarkerStyle));

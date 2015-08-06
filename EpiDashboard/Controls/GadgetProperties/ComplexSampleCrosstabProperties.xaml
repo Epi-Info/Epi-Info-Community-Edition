@@ -40,87 +40,98 @@
 
         <!--Variables-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+            </StackPanel>
 
-            <TextBlock x:Name="tblockExposureField" HorizontalAlignment="Left" TextAlignment="Center" Text="Exposure:" Margin="0,5,0,0"  />
-            <ComboBox x:Name="cbxExposureField" Width="216" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxExposureField_SelectionChanged" />
-            <StackPanel Height="12" />
-            <TextBlock x:Name="tblockOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Outcome:" Margin="0,5,0,0"  />
-            <ComboBox x:Name="cbxOutcomeField" Width="216" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxOutcomeField_SelectionChanged" />
+            <StackPanel DockPanel.Dock="Bottom">
+                <TextBlock x:Name="tblockExposureField" HorizontalAlignment="Left" TextAlignment="Center" Text="Exposure:" Margin="0,5,0,0"  />
+                <ComboBox x:Name="cbxExposureField" Width="216" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxExposureField_SelectionChanged" />
+                <StackPanel Height="12" />
+                <TextBlock x:Name="tblockOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Outcome:" Margin="0,5,0,0"  />
+                <ComboBox x:Name="cbxOutcomeField" Width="216" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxOutcomeField_SelectionChanged" />
 
-            <!--<TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
+                <!--<TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
             <ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" />-->
 
-            <StackPanel Height="12" />
+                <StackPanel Height="12" />
 
-            <TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
-            <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
+                <TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
+                <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
 
-            <StackPanel Height="12" />
-            <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
-            <ComboBox x:Name="cbxFieldStrata" Width="216" HorizontalAlignment="Left" Height="28" />
+                <StackPanel Height="12" />
+                <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
+                <ComboBox x:Name="cbxFieldStrata" Width="216" HorizontalAlignment="Left" Height="28" />
 
-            <StackPanel Height="12" />
+                <StackPanel Height="12" />
 
-            <TextBlock x:Name="tblockPSU">PSU:</TextBlock>
-            <ComboBox x:Name="cbxFieldPSU" Width="216" HorizontalAlignment="Left" Height="28" />
-        </StackPanel>
+                <TextBlock x:Name="tblockPSU">PSU:</TextBlock>
+                <ComboBox x:Name="cbxFieldPSU" Width="216" HorizontalAlignment="Left" Height="28" />
+            </StackPanel>
+        </DockPanel>
 
         <!--2x2 Value Mapping-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
-        <StackPanel x:Name="panelValueMapping" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Value Mapping</Label>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+        <DockPanel x:Name="panelValueMapping" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Value Mapping</Label>
+            </StackPanel>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+            <StackPanel DockPanel.Dock="Bottom">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column = "0" Grid.RowSpan="7" >
-                    <TextBlock x:Name="tblockAllValues">All values:</TextBlock>
-                    <ScrollViewer x:Name="scrollViewerValueMapping" VerticalAlignment="Stretch" MinHeight="425" MinWidth="150">
-                        <StackPanel>
-                            <ListBox SelectionMode="Multiple" Name="lbxAllValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="425" />
-                        </StackPanel>
-                    </ScrollViewer>
-                </StackPanel>
-                <StackPanel Grid.Column="2" Grid.Row="1">
-                    <Button x:Name="btnAddYes" DockPanel.Dock="Right" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnAddYes_Click">&gt;</Button>
-                    <Button x:Name="btnRemoveYes" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnRemoveYes_Click" >&lt;</Button>
-                </StackPanel>
-                <StackPanel Grid.Column="2" Grid.Row="4">
-                    <Button x:Name="btnAddNo" DockPanel.Dock="Right" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnAddNo_Click">&gt;</Button>
-                    <Button x:Name="btnRemoveNo" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnRemoveNo_Click" >&lt;</Button>
-                </StackPanel>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                <StackPanel Grid.Column = "3" Grid.Row="0" Grid.RowSpan="7">
-                    <TextBlock x:Name="tblockYesValues" Margin="0,0,0,0">Yes values:</TextBlock>
-                    <ListBox SelectionMode="Multiple" Name="lbxYesValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200" MinWidth="150"/>
-                    <TextBlock x:Name="tblockNoValues" Margin="0,8,0,0">No values:</TextBlock>
-                    <ListBox SelectionMode="Multiple" Name="lbxNoValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200"/>
-                </StackPanel>
-            </Grid>
-        </StackPanel>
+                    <StackPanel Grid.Column = "0" Grid.RowSpan="7" >
+                        <TextBlock x:Name="tblockAllValues">All values:</TextBlock>
+                        <ScrollViewer x:Name="scrollViewerValueMapping" VerticalAlignment="Stretch" MinHeight="425" MinWidth="150">
+                            <StackPanel>
+                                <ListBox SelectionMode="Multiple" Name="lbxAllValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="425" />
+                            </StackPanel>
+                        </ScrollViewer>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Grid.Row="1">
+                        <Button x:Name="btnAddYes" DockPanel.Dock="Right" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnAddYes_Click">&gt;</Button>
+                        <Button x:Name="btnRemoveYes" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnRemoveYes_Click" >&lt;</Button>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Grid.Row="4">
+                        <Button x:Name="btnAddNo" DockPanel.Dock="Right" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnAddNo_Click">&gt;</Button>
+                        <Button x:Name="btnRemoveNo" HorizontalAlignment="Center" Margin="8,8,8,8" Width="50" Height="20" Click="btnRemoveNo_Click" >&lt;</Button>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column = "3" Grid.Row="0" Grid.RowSpan="7">
+                        <TextBlock x:Name="tblockYesValues" Margin="0,0,0,0">Yes values:</TextBlock>
+                        <ListBox SelectionMode="Multiple" Name="lbxYesValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200" MinWidth="150"/>
+                        <TextBlock x:Name="tblockNoValues" Margin="0,8,0,0">No values:</TextBlock>
+                        <ListBox SelectionMode="Multiple" Name="lbxNoValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </DockPanel>
         <!--Display-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
-        <StackPanel x:Name="panelDisplay" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+        <DockPanel x:Name="panelDisplay" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+            </StackPanel>
 
-            <ScrollViewer x:Name="scrollViewerProperties" Style="{StaticResource PropertiesScrollviewer}">
+            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerProperties">
                 <StackPanel>
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 5">Title and Description</Label>
                     <StackPanel Orientation="Vertical">
@@ -135,67 +146,70 @@
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
-        </StackPanel>
+        </DockPanel>
 
         <!--Colors and Styles-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-        <StackPanel x:Name="panelDisplayColors" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors and Styles</Label>
-            <CheckBox x:Name="checkboxConditionalShading" Margin="0,5,0,0" Content="Conditional cell shading"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="False" />
-            <StackPanel Orientation="Horizontal" Margin="0,4,0,4" x:Name="panelHeatMap1">
-                <TextBlock x:Name="tblockColorGradient" VerticalAlignment="Center" Margin="0,12,4,0">Color Gradient:</TextBlock>
-                <Rectangle VerticalAlignment="Bottom" x:Name="rctLowColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" MouseUp="rctLowColor_MouseUp" >
-                    <Rectangle.ToolTip>
-                        <Label Content="Low value color"/>
-                    </Rectangle.ToolTip>
-                </Rectangle>
-                <Rectangle VerticalAlignment="Bottom" x:Name="rctHighColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#FFFC5A54" MouseUp="rctHighColor_MouseUp">
-                    <Rectangle.ToolTip>
-                        <Label Content="High value color"/>
-                    </Rectangle.ToolTip>
-                </Rectangle>
+        <DockPanel x:Name="panelDisplayColors" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors and Styles</Label>
             </StackPanel>
-
-            <StackPanel x:Name="panelHeatMap2">
-
-                <TextBlock x:Name="tblockBreakType" HorizontalAlignment="Left" TextAlignment="Center" Text="Break type:" Margin="0,12,0,0"  />
-                <ComboBox x:Name="cmbBreakType" Width="216" HorizontalAlignment="Left" SelectedIndex="0" Margin="0,5,0,5" SelectionChanged="cmbBreakType_SelectionChanged">
-                    <ComboBoxItem>Percent of total</ComboBoxItem>
-                    <ComboBoxItem>Count</ComboBoxItem>
-                </ComboBox>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="tblockBreak1" VerticalAlignment="Center" Margin="0,12,4,0">Break 1:</TextBlock>
-                    <TextBox x:Name="txtPct1" Width="32" Margin="0,12,4,0">0</TextBox>
-                    <TextBlock x:Name="tblockPct1" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
+            <StackPanel DockPanel.Dock="Bottom">
+                <CheckBox x:Name="checkboxConditionalShading" Margin="0,5,0,0" Content="Conditional cell shading"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="False" />
+                <StackPanel Orientation="Horizontal" Margin="0,4,0,4" x:Name="panelHeatMap1">
+                    <TextBlock x:Name="tblockColorGradient" VerticalAlignment="Center" Margin="0,12,4,0">Color Gradient:</TextBlock>
+                    <Rectangle VerticalAlignment="Bottom" x:Name="rctLowColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" MouseUp="rctLowColor_MouseUp" >
+                        <Rectangle.ToolTip>
+                            <Label Content="Low value color"/>
+                        </Rectangle.ToolTip>
+                    </Rectangle>
+                    <Rectangle VerticalAlignment="Bottom" x:Name="rctHighColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#FFFC5A54" MouseUp="rctHighColor_MouseUp">
+                        <Rectangle.ToolTip>
+                            <Label Content="High value color"/>
+                        </Rectangle.ToolTip>
+                    </Rectangle>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="tblockBreak2" VerticalAlignment="Center" Margin="0,12,4,0">Break 2:</TextBlock>
-                    <TextBox x:Name="txtPct2" Width="32" Margin="0,12,4,0">20</TextBox>
-                    <TextBlock x:Name="tblockPct2" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
-                </StackPanel>
+                <StackPanel x:Name="panelHeatMap2">
 
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="tblockBreak3" VerticalAlignment="Center" Margin="0,12,4,0">Break 3:</TextBlock>
-                    <TextBox x:Name="txtPct3" Width="32" Margin="0,12,4,0">40</TextBox>
-                    <TextBlock x:Name="tblockPct3" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
-                </StackPanel>
+                    <TextBlock x:Name="tblockBreakType" HorizontalAlignment="Left" TextAlignment="Center" Text="Break type:" Margin="0,12,0,0"  />
+                    <ComboBox x:Name="cmbBreakType" Width="216" HorizontalAlignment="Left" SelectedIndex="0" Margin="0,5,0,5" SelectionChanged="cmbBreakType_SelectionChanged">
+                        <ComboBoxItem>Percent of total</ComboBoxItem>
+                        <ComboBoxItem>Count</ComboBoxItem>
+                    </ComboBox>
 
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="tblockBreak4" VerticalAlignment="Center" Margin="0,12,4,0">Break 4:</TextBlock>
-                    <TextBox x:Name="txtPct4" Width="32" Margin="0,12,4,0">60</TextBox>
-                    <TextBlock x:Name="tblockPct4" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
-                </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="tblockBreak1" VerticalAlignment="Center" Margin="0,12,4,0">Break 1:</TextBlock>
+                        <TextBox x:Name="txtPct1" Width="32" Margin="0,12,4,0">0</TextBox>
+                        <TextBlock x:Name="tblockPct1" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
+                    </StackPanel>
 
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="tblockBreak5" VerticalAlignment="Center" Margin="0,12,4,0">Break 5:</TextBlock>
-                    <TextBox x:Name="txtPct5" Width="32" Margin="0,12,4,0">80</TextBox>
-                    <TextBlock x:Name="tblockPct5" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="tblockBreak2" VerticalAlignment="Center" Margin="0,12,4,0">Break 2:</TextBlock>
+                        <TextBox x:Name="txtPct2" Width="32" Margin="0,12,4,0">20</TextBox>
+                        <TextBlock x:Name="tblockPct2" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="tblockBreak3" VerticalAlignment="Center" Margin="0,12,4,0">Break 3:</TextBlock>
+                        <TextBox x:Name="txtPct3" Width="32" Margin="0,12,4,0">40</TextBox>
+                        <TextBlock x:Name="tblockPct3" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="tblockBreak4" VerticalAlignment="Center" Margin="0,12,4,0">Break 4:</TextBlock>
+                        <TextBox x:Name="txtPct4" Width="32" Margin="0,12,4,0">60</TextBox>
+                        <TextBlock x:Name="tblockPct4" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="tblockBreak5" VerticalAlignment="Center" Margin="0,12,4,0">Break 5:</TextBlock>
+                        <TextBox x:Name="txtPct5" Width="32" Margin="0,12,4,0">80</TextBox>
+                        <TextBlock x:Name="tblockPct5" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-
-        </StackPanel>
+        </DockPanel>
 
         <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>

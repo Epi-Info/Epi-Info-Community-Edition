@@ -43,10 +43,13 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
-        <StackPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible"
-                    >
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
-           
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+            </StackPanel>
+
+            <StackPanel DockPanel.Dock="Bottom">
                 <TextBlock x:Name="tblockMainVariable">Main variable:</TextBlock>
                 <ComboBox x:Name="cmbField" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbField_SelectionChanged" />
 
@@ -69,8 +72,8 @@
 
                 <TextBlock x:Name="tblockSecondYAxisVariable" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,12,0,0" Text="Second y-axis variable:" Visibility="Collapsed"  />
                 <ComboBox x:Name="cmbSecondYAxisVariable"  Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Visibility="Collapsed" SelectionChanged="cmbSecondYAxisVariable_SelectionChanged"/>
-            
-            
+
+
                 <StackPanel>
                     <TextBlock x:Name="tblockStep" Margin="0,12,0,0" Grid.Row="0" HorizontalAlignment="Left" TextAlignment="Center" Text="Step:" />
                     <TextBox x:Name="txtStep" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left"  Text="1" />
@@ -97,32 +100,38 @@
                     <TextBlock x:Name="tblockEndValue" HorizontalAlignment="Left" TextAlignment="Center" Text="End value:" Margin="0,12,0,0"  />
                     <TextBox x:Name="txtEndValue" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left"  />
                 </StackPanel>
-                
-            <!--Sorting and Grouping-->
-<!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
-        </StackPanel>
-        <StackPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
+                <!--Sorting and Grouping-->
+                <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+            </StackPanel>
+        </DockPanel>
+        
+        <DockPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom">
+                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping</Label>
+                <Label>Stratify by:</Label>
+                <ScrollViewer x:Name="scrollViewerStrataProperties" VerticalAlignment="Stretch" Height="300" >
+                    <StackPanel>
+                        <ListBox SelectionMode="Multiple" Name="listboxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="listboxFieldStrata_SelectionChanged" />
+                    </StackPanel>
+                </ScrollViewer>
 
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping</Label>
-            <Label>Stratify by:</Label>
-            <ScrollViewer x:Name="scrollViewerStrataProperties" VerticalAlignment="Stretch" Height="300" >
-                <StackPanel>
-                    <ListBox SelectionMode="Multiple" Name="listboxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="listboxFieldStrata_SelectionChanged" />
-                </StackPanel>
-            </ScrollViewer>
-
-            <Label Style="{StaticResource PropertiesSubHeading}" Visibility="Collapsed" Margin="0, 30, 0, 4">Sorting</Label>
-            <!--<TextBlock x:Name="tblockSortMethod">Sort Method:</TextBlock>-->
-            <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Visibility="Collapsed" Content="Sort high to low" HorizontalAlignment="Left" IsChecked="true"></CheckBox>
-        </StackPanel>
+                <Label Style="{StaticResource PropertiesSubHeading}" Visibility="Collapsed" Margin="0, 30, 0, 4">Sorting</Label>
+                <!--<TextBlock x:Name="tblockSortMethod">Sort Method:</TextBlock>-->
+                <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Visibility="Collapsed" Content="Sort high to low" HorizontalAlignment="Left" IsChecked="true"></CheckBox>
+            </StackPanel>
+        </DockPanel>
 <!--Display-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-        <StackPanel x:Name="panelDisplay" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+        <DockPanel x:Name="panelDisplay" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+            </StackPanel>
 
-            <ScrollViewer x:Name="scrollViewerProperties" Style="{StaticResource PropertiesScrollviewer}">
+            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerProperties">
                 <StackPanel>
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 5">Title and Description</Label>
                     <StackPanel Orientation="Vertical">
@@ -168,12 +177,15 @@
                     </WrapPanel>
                 </StackPanel>
             </ScrollViewer>
-        </StackPanel>
+        </DockPanel>
 <!--Colors and Styles-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-        <StackPanel x:Name="panelDisplayColors" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed" >
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors and Styles</Label>
-            <ScrollViewer x:Name="scrollViewerPropertiesColors" Style="{StaticResource PropertiesScrollviewer}">
+        <DockPanel x:Name="panelDisplayColors" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed" >
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors and Styles</Label>
+            </StackPanel>
+            
+            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesColors">
                 <StackPanel>
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Colors</Label>
                     <WrapPanel ItemWidth="240" Orientation="Vertical">
@@ -258,12 +270,15 @@
                     </WrapPanel>
                 </StackPanel>
             </ScrollViewer>
-        </StackPanel>
+        </DockPanel>
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 <!--Labels-->
-        <StackPanel x:Name="panelDisplayLabels" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Labels</Label>
-            <ScrollViewer x:Name="scrollViewerPropertiesLabels" Style="{StaticResource PropertiesScrollviewer}">
+        <DockPanel x:Name="panelDisplayLabels" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Labels</Label>
+            </StackPanel>
+            
+            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesLabels">
                 <StackPanel>
                     <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Y-Axis</Label>
                     <WrapPanel ItemWidth="240" Orientation="Horizontal">
@@ -388,12 +403,15 @@
                     </WrapPanel>
                 </StackPanel>
             </ScrollViewer>
-        </StackPanel>
+        </DockPanel>
 <!--Legend-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-        <StackPanel x:Name="panelDisplayLegend" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Legend</Label>
-            <ScrollViewer x:Name="scrollViewerPropertiesLegend" Style="{StaticResource PropertiesScrollviewer}">
+        <DockPanel x:Name="panelDisplayLegend" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Legend</Label>
+            </StackPanel>
+            
+            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesLegend">
                 <StackPanel>
                     <WrapPanel ItemWidth="240" Orientation="Horizontal">
                         <CheckBox x:Name="checkboxShowLegend" Margin="0,12,0,0" Content="Show legend" HorizontalAlignment="Left" IsChecked="False" Click="checkboxShowLegend_Click" />
@@ -430,7 +448,7 @@
                     </WrapPanel>
                 </StackPanel>
             </ScrollViewer>
-        </StackPanel>
+        </DockPanel>
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
