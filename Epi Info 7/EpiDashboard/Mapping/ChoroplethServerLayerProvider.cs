@@ -1042,7 +1042,7 @@ namespace EpiDashboard.Mapping
                         filterExpression += "]";
                     }
 
-                    filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim() + "'";
+                    filterExpression += " = '" + Convert.ToString(graphicFeature.Attributes[shapeKey]).Replace("'", "''").Trim() + "'";
                     double graphicValue = Double.PositiveInfinity;
                     try
                     {
@@ -1053,7 +1053,7 @@ namespace EpiDashboard.Mapping
                         graphicValue = Double.PositiveInfinity;
                     }
 
-                    string graphicName = graphicFeature.Attributes[shapeKey].ToString();
+                    string graphicName = Convert.ToString(graphicFeature.Attributes[shapeKey]);
 
                     if (i == 0)
                     {
