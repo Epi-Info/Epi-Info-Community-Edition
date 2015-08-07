@@ -118,7 +118,40 @@ namespace EpiDashboard.Controls.GadgetProperties
             txtBarWidth.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
 
             #region Translation
-            
+
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_FREQUENCY;
+            tbtnSorting.Title = DashboardSharedStrings.GADGET_TABBUTTON_SORTING;
+            tbtnSorting.Description = DashboardSharedStrings.GADGET_TABDESC_SORTING;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockPanelSorting.Content = DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
+            tblockGroupingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_GROUPING;
+            tblockSortingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_SORTING;
+            tblockSortMethod.Text = DashboardSharedStrings.GADGET_SORT_METHOD;
+            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
+            checkboxAllValues.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_VALUE;
+            checkboxDrawBorders.Content = DashboardSharedStrings.GADGET_DRAW_BORDERS;
+            checkboxDrawHeader.Content = DashboardSharedStrings.GADGET_DRAW_HEADER_ROW;
+            checkboxDrawTotal.Content = DashboardSharedStrings.GADGET_DRAW_TOTAL_ROW;
+            tblockOutputDisplaySubheader.Content = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
+            checkboxColumnFrequency.Content = DashboardSharedStrings.GADGET_COLUMN_FREQUENCY;
+            checkboxColumnPercent.Content = DashboardSharedStrings.GADGET_COLUMN_PERCENT;
+            checkboxColumnCumulativePercent.Content = DashboardSharedStrings.GADGET_COLUMN_CUMULATIVE_PERCENT;
+            checkboxColumn95CILower.Content = DashboardSharedStrings.GADGET_COLUMN_95_CILOWER;
+            checkboxColumn95CIUpper.Content = DashboardSharedStrings.GADGET_COLUMN_95_CIUPPER;
+            checkboxColumnPercentBars.Content = DashboardSharedStrings.GADGET_COLUMN_PERCENTBAR;
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+
+
             lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_FREQUENCY;
             //expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
             //expanderDisplayOptions.Header = DashboardSharedStrings.GADGET_DISPLAY_OPTIONS;
@@ -127,13 +160,13 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockWeightVariable.Text = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
 
             //checkboxAllValues.Content = DashboardSharedStrings.GADGET_ALL_LIST_VALUES;
-            //checkboxCommentLegalLabels.Content = DashboardSharedStrings.GADGET_LIST_LABELS;
+            checkboxCommentLegalLabels.Content = DashboardSharedStrings.GADGET_LIST_LABELS;
             checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
 
             checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
             checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPT;
             //tblockOutputColumns.Text = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
-            //tblockPrecision.Text = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
+            tblockPrecision.Content = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
 
             tblockRows.Text = DashboardSharedStrings.GADGET_MAX_ROWS_TO_DISPLAY;
             tblockBarWidth.Text = DashboardSharedStrings.GADGET_MAX_PERCENT_BAR_WIDTH;
