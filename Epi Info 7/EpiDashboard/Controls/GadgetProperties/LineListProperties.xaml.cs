@@ -94,7 +94,52 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as LineListControl).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
+
+
+
+
+            #region Translation
+
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_LINE_LIST;
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_LINELIST;
+            tbtnSorting.Title = DashboardSharedStrings.GADGET_TABBUTTON_SORTING;
+            tbtnSorting.Description = DashboardSharedStrings.GADGET_TABDESC_SORTING;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockPanelSorting.Content = DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockGroupingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_GROUPING;
+            tblockSortingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_SORTING;
+            tblockSortMethod.Content = DashboardSharedStrings.GADGET_SORT_METHOD;
+            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockVariableToDisplay.Content = DashboardSharedStrings.GADGET_VARIABLES_TO_DISPLAY;
+            tblockGroupby.Content = DashboardSharedStrings.GADGET_GROUP_BY;
+            tblockSubGroupBy.Content = DashboardSharedStrings.GADGET_SUBGROUP_BY;
+            tblockAvailableVariables.Content = DashboardSharedStrings.GADGET_AVAILABLE_VARIABLES;
+            tblockSortOrder.Content = DashboardSharedStrings.GADGET_SORT_ORDER;
+            tblockDimensions.Content = DashboardSharedStrings.GADGET_DIMENSIONS;
+            checkboxTabOrder.Content = DashboardSharedStrings.EXPORT_SORT_BY_TAB_ORDER;
+            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USER_FIELDS_PROMPTS;
+            checkboxLineColumn.Content = DashboardSharedStrings.GADGET_SHOW_LINE_COLUMN;
+            checkboxColumnHeaders.Content = DashboardSharedStrings.GADGET_SHOW_COLUMN_HEADINGS;
+            checkboxShowNulls.Content = DashboardSharedStrings.GADGET_SHOW_MISSING_REP;
+            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            checkboxListLabels.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
+
+            #endregion // Translation
         }
+
+        
+
 
         public bool HasSelectedFields
         {

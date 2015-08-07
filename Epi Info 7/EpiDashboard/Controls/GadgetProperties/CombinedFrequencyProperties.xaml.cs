@@ -85,6 +85,42 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as CombinedFrequencyControl).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
+
+
+
+            #region Translation
+
+
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_COMBINEDFEQ;
+            tbtnSorting.Title = DashboardSharedStrings.GADGET_TABBUTTON_SORTING;
+            tbtnSorting.Description = DashboardSharedStrings.GADGET_TABDESC_SORTING;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockPanelSorting.Content = DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
+            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockSortingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_SORTING;
+            tblockGroupingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_GROUPING;
+            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
+            tblockSortMethod.Text = DashboardSharedStrings.GADGET_SORT_METHOD;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockVariablesToDisplay.Content = DashboardSharedStrings.GADGET_VARIABLES_TO_DISPLAY;
+            tblockCombineMode.Text = DashboardSharedStrings.GADGET_COMBINE_MODE;
+            checkboxShowDenominator.Content = DashboardSharedStrings.GADGET_SHOW_DENOMINATOR;
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_COMBINEDFEQ;
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
+
+
+
+            #endregion // Translation
+
         }
 
         public bool HasSelectedFields

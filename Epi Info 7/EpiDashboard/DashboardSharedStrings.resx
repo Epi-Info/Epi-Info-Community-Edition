@@ -867,7 +867,7 @@ of records or select fewer fields for the group.</value>
     <value>Save Successful</value>
   </data>
   <data name="GADGET_SORT_METHOD" xml:space="preserve">
-    <value>Sort Method:</value>
+    <value>Method:</value>
   </data>
   <data name="PROPERTIES_MAIN_VARIABLE_REQ" xml:space="preserve">
     <value>Main variable must be selected.</value>
@@ -889,5 +889,191 @@ of records or select fewer fields for the group.</value>
   </data>
   <data name="GADGET_TRUE_VALUE_REQ" xml:space="preserve">
     <value>Value to treat as true is required when combine mode is Boolean.</value>
+  </data>
+  <data name="GADGET_COLUMN_95_CILOWER" xml:space="preserve">
+    <value>95% CI lower</value>
+  </data>
+  <data name="GADGET_COLUMN_95_CIUPPER" xml:space="preserve">
+    <value>95% CI upper</value>
+  </data>
+  <data name="GADGET_COLUMN_CUMULATIVE_PERCENT" xml:space="preserve">
+    <value>Cumulative percent</value>
+  </data>
+  <data name="GADGET_COLUMN_FREQUENCY" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+  <data name="GADGET_COLUMN_PERCENT" xml:space="preserve">
+    <value>Percent</value>
+  </data>
+  <data name="GADGET_COLUMN_PERCENTBAR" xml:space="preserve">
+    <value>Percent bars</value>
+  </data>
+  <data name="GADGET_DESCRIPTION" xml:space="preserve">
+    <value>Gadget Description</value>
+  </data>
+  <data name="GADGET_DISPLAY_LIST_LABELS" xml:space="preserve">
+    <value>Display List Labels</value>
+  </data>
+  <data name="GADGET_DISPLAY_LIST_VALUE" xml:space="preserve">
+    <value>Display all list values</value>
+  </data>
+  <data name="GADGET_DRAW_BORDERS" xml:space="preserve">
+    <value>Draw Borders</value>
+  </data>
+  <data name="GADGET_DRAW_HEADER_ROW" xml:space="preserve">
+    <value>Draw header row</value>
+  </data>
+  <data name="GADGET_DRAW_TOTAL_ROW" xml:space="preserve">
+    <value>Draw total row</value>
+  </data>
+  <data name="GADGET_FILTER_GADGET_ONLY" xml:space="preserve">
+    <value>Note: Any filters set here are applied to this gadget only.</value>
+  </data>
+  <data name="GADGET_GADET_TITLE" xml:space="preserve">
+    <value>Gadget Title</value>
+  </data>
+  <data name="GADGET_OUTPUT_OPTIONS" xml:space="preserve">
+    <value>Output Options</value>
+  </data>
+  <data name="GADGET_PANELHEADER_DATA_FILTER" xml:space="preserve">
+    <value>Data Filters</value>
+  </data>
+  <data name="GADGET_PANELHEADER_DISPLAY" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="GADGET_PANELHEADER_SORTING" xml:space="preserve">
+    <value>Grouping and Sorting</value>
+  </data>
+  <data name="GADGET_PANELHEADER_VARIABLES" xml:space="preserve">
+    <value>Variables</value>
+  </data>
+  <data name="GADGET_PANELSUBHEADER_GROUPING" xml:space="preserve">
+    <value>Grouping</value>
+  </data>
+  <data name="GADGET_PANELSUBHEADER_SORTING" xml:space="preserve">
+    <value>Sorting</value>
+  </data>
+  <data name="GADGET_PANELSUBHEADER_TITLENDESC" xml:space="preserve">
+    <value>Title and Description</value>
+  </data>
+  <data name="GADGET_TABBUTTON_DISPLAY" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="GADGET_TABBUTTON_FILTERS" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="GADGET_TABBUTTON_SORTING" xml:space="preserve">
+    <value>Grouping and Sorting</value>
+  </data>
+  <data name="GADGET_TABBUTTON_VARIABLES" xml:space="preserve">
+    <value>Variables</value>
+  </data>
+  <data name="GADGET_TABDESC_DISPLAY" xml:space="preserve">
+    <value>Change display options.</value>
+  </data>
+  <data name="GADGET_TABDESC_FILTERS" xml:space="preserve">
+    <value>Set data filters for this gadget.</value>
+  </data>
+  <data name="GADGET_TABDESC_SORTING" xml:space="preserve">
+    <value>Set a sort order and create list groups.</value>
+  </data>
+  <data name="GADGET_22_VALUE_MAPPING" xml:space="preserve">
+    <value>2x2 Value Mapping</value>
+  </data>
+  <data name="GADGET_ALL_VALUES" xml:space="preserve">
+    <value>All values:</value>
+  </data>
+  <data name="GADGET_AVAILABLE_VARIABLES" xml:space="preserve">
+    <value>Available Variables</value>
+  </data>
+  <data name="GADGET_COMBINE_MODE" xml:space="preserve">
+    <value>Combine mode:</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_COMBINEDFEQ" xml:space="preserve">
+    <value>Combined Frequency</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_LINE_LIST" xml:space="preserve">
+    <value>Line List</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_WORDCLOUD" xml:space="preserve">
+    <value>Word Cloud</value>
+  </data>
+  <data name="GADGET_DIMENSIONS" xml:space="preserve">
+    <value>Dimensions</value>
+  </data>
+  <data name="GADGET_DISPLAY_CHISQUARE" xml:space="preserve">
+    <value>Display Chi-Square</value>
+  </data>
+  <data name="GADGET_GROUP_BY" xml:space="preserve">
+    <value>Group By</value>
+  </data>
+  <data name="GADGET_HIGH_VALUE_COLOR" xml:space="preserve">
+    <value>High value color</value>
+  </data>
+  <data name="GADGET_LOW_VALUE_COLOR" xml:space="preserve">
+    <value>Low value color</value>
+  </data>
+  <data name="GADGET_NO_VALUES" xml:space="preserve">
+    <value>No values:</value>
+  </data>
+  <data name="GADGET_PANEL_COLORS_STYLES" xml:space="preserve">
+    <value>Colors and Styles</value>
+  </data>
+  <data name="GADGET_SHOW_COLUMN_HEADINGS" xml:space="preserve">
+    <value>Show column headings</value>
+  </data>
+  <data name="GADGET_SHOW_LINE_COLUMN" xml:space="preserve">
+    <value>Show line column</value>
+  </data>
+  <data name="GADGET_SHOW_MISSING_REP" xml:space="preserve">
+    <value>Show missing representation</value>
+  </data>
+  <data name="GADGET_SORT_ORDER" xml:space="preserve">
+    <value>Sort Order:</value>
+  </data>
+  <data name="GADGET_SPECIFY_EXPOSURE_OUTCOME" xml:space="preserve">
+    <value>Specify the values for Exposure and Outcome as Yes or No.</value>
+  </data>
+  <data name="GADGET_SUBGROUP_BY" xml:space="preserve">
+    <value>Sub-Group By</value>
+  </data>
+  <data name="GADGET_TABDESC_COLORS_STYLES" xml:space="preserve">
+    <value>Set cell shading and color gradient.</value>
+  </data>
+  <data name="GADGET_TABDESC_COMBINEDFEQ" xml:space="preserve">
+    <value>Select items to include in the frequency.</value>
+  </data>
+  <data name="GADGET_TABDESC_EXPOSURE_OUTCOME" xml:space="preserve">
+    <value>Select the columns for exposure and outcome.</value>
+  </data>
+  <data name="GADGET_TABDESC_FREQUENCY" xml:space="preserve">
+    <value>Select the column for the frequency.</value>
+  </data>
+  <data name="GADGET_TABDESC_LINELIST" xml:space="preserve">
+    <value>Select columns to display in the list.</value>
+  </data>
+  <data name="GADGET_TABDESC_WORDCLOUD" xml:space="preserve">
+    <value>Select the text variable to parse to the word cloud.</value>
+  </data>
+  <data name="GADGET_TAB_COLORS_STYLES" xml:space="preserve">
+    <value>Colors and Styles</value>
+  </data>
+  <data name="GADGET_USER_FIELDS_PROMPTS" xml:space="preserve">
+    <value>User field Prompts</value>
+  </data>
+  <data name="GADGET_VALUE_MAPPING" xml:space="preserve">
+    <value>Value Mapping</value>
+  </data>
+  <data name="GADGET_VARIABLES_TO_DISPLAY" xml:space="preserve">
+    <value>Variables to display:</value>
+  </data>
+  <data name="GADGET_VARIABLE_PARSE" xml:space="preserve">
+    <value>Variable to parse:</value>
+  </data>
+  <data name="GADGET_WORDS_IGNORE" xml:space="preserve">
+    <value>Common words to ignore:</value>
+  </data>
+  <data name="GADGET_YES_VALUES" xml:space="preserve">
+    <value>Yes values:</value>
   </data>
 </root>

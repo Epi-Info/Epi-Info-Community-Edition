@@ -27,22 +27,22 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <Label FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10" xml:space="preserve">Word Cloud</Label>
+            <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10" xml:space="preserve">Word Cloud__xfe</Label>
 
-            <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables" Description="Select the text variable to parse to the word cloud." IsChecked="True" Checked="tbtnVariables_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables__xfe" Description="Select the text variable to parse to the word cloud.__xfe" IsChecked="True" Checked="tbtnVariables_Checked"/>
             <!--<Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Sorting and Grouping" Description="Set a sort order for the output." IsChecked="False" Checked="tbtnSorting_Checked"/>-->
-            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display__xfe" Description="Change display options.__xfe" IsChecked="False" Checked="tbtnDisplay_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters__xfe" Description="Set data filters for this gadget.__xfe" IsChecked="False" Checked="tbtnFilters_Checked"/>
 
         </StackPanel>
 
         <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+                <Label x:Name="tblockPanelVariables"  Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables__xfe</Label>
             </StackPanel>
 
             <StackPanel DockPanel.Dock="Bottom">
-                <Label>Variable to parse:</Label>
+                <Label x:Name="tblockVariableToParse">Variable to parse:__xfe</Label>
                 <!--<ListView Name="lvTextVariables">
                     <ListView.View>
                         <GridView>
@@ -61,7 +61,7 @@
                     </ListView.GroupStyle>
                 </ListView>-->
                 <ComboBox x:Name="cmbField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28"/>
-                <Label>Common words to ignore:</Label>
+                <Label x:Name="tblockWordsIgnore">Common words to ignore:__xfe</Label>
                 <TextBox x:Name="txtCommonWords" Width="360" AcceptsReturn="True" Height="128" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
             </StackPanel>
         </DockPanel>
@@ -87,10 +87,10 @@
 
         <DockPanel x:Name="panelDisplay" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+                <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom">
-                <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Title and Description</Label>
+                <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Title and Description__xfe</Label>
                 <StackPanel Orientation="Vertical">
 
                     <StackPanel>
@@ -106,8 +106,8 @@
         </DockPanel>
 
         <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
-            <Label>Note: Any filters set here are applied to this gadget only.</Label>
+            <Label x:Name="tblockPanelDataFilter"  Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
+            <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
         </StackPanel>
         
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
