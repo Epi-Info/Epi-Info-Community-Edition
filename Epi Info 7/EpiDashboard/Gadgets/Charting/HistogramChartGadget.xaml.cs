@@ -495,6 +495,22 @@ namespace EpiDashboard.Gadgets.Charting
 
                     string strataValue = tableKvp.Key.TableName;
                     DataTable table = tableKvp.Key;
+
+                    string startDate = (chtParameters.StartDate != null) ? Convert.ToString(chtParameters.StartDate) : string.Empty;
+                    string endDate = (chtParameters.EndDate != null) ? Convert.ToString(chtParameters.EndDate) : string.Empty;
+
+                    if(!string.IsNullOrEmpty(startDate))
+                    {
+                        string filterExp = table.Columns[0].ColumnName + " > '" + startDate + "'";
+                        table = table.Select(filterExp).CopyToDataTable();
+                    }
+
+                    if (!string.IsNullOrEmpty(endDate))
+                    {
+                        string filterExp = table.Columns[0].ColumnName + " < '" + endDate + "'";
+                        table = table.Select(filterExp).CopyToDataTable();
+                    }
+
                     DataTable epiCurveTable = new DataTable("epiCurveTable");
                     epiCurveTable.Columns.Add(new DataColumn(table.Columns[0].ColumnName, typeof(string)));
                     epiCurveTable.Columns.Add(new DataColumn(table.Columns[1].ColumnName, typeof(double)));
@@ -881,6 +897,12 @@ namespace EpiDashboard.Gadgets.Charting
                                 break;
                             case "weightvariable":
                                 ((HistogramChartParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
+                                break;
+                            case "startdate":
+                                ((HistogramChartParameters)Parameters).StartDate = Convert.ToDateTime(child.InnerText.Replace("&lt;", "<"));
+                                break;
+                            case "enddate":
+                                ((HistogramChartParameters)Parameters).EndDate = Convert.ToDateTime(child.InnerText.Replace("&lt;", "<"));
                                 break;
                             case "crosstabvariable":
                                 ((HistogramChartParameters)Parameters).CrosstabVariableName = child.InnerText.Replace("&lt;", "<");
@@ -1593,6 +1615,16 @@ namespace EpiDashboard.Gadgets.Charting
             legendFontSizeElement.InnerText = chtParameters.LegendFontSize.ToString();
             element.AppendChild(legendFontSizeElement);
 
+            //startdate 
+            XmlElement startDateElement = doc.CreateElement("startdate");
+            startDateElement.InnerText = chtParameters.StartDate.ToString();
+            element.AppendChild(startDateElement);
+
+            //enddate 
+            XmlElement endDateElement = doc.CreateElement("enddate");
+            endDateElement.InnerText = chtParameters.EndDate.ToString();
+            element.AppendChild(endDateElement);
+
             //legendDock 
             XmlElement legendDockElement = doc.CreateElement("legendDock");
             switch (chtParameters.LegendDock)
@@ -1757,6 +1789,7 @@ namespace EpiDashboard.Gadgets.Charting
                         chtParameters.CustomFilter = string.Empty;
                     }
 
+                    
                     if (!string.IsNullOrEmpty(crosstabVar.Trim()))
                     {
                         List<string> crosstabVarList = new List<string>();

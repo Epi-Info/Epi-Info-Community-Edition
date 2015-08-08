@@ -62,6 +62,7 @@
             <charting:XYChart.YAxisArea>
 
                 <charting:AxisCoordinates x:Name="YAxisCoordinates">
+                    <charting:NumericCoordinates x:Name="numberCoordinates" />
                 </charting:AxisCoordinates>
 
                 <charting:ChartLabel x:Name="labelYAxis" Orientation="Vertical" >
