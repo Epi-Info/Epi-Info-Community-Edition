@@ -694,6 +694,19 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.Y2AxisFormat = txtY2AxisFormatString.Text;
             }
 
+            if (!String.IsNullOrEmpty(txtToValue.Text))
+            {
+                Parameters.YAxisTo = Convert.ToDouble(txtToValue.Text);
+            }
+            if (!String.IsNullOrEmpty(txtFromValue.Text))
+            {
+                Parameters.YAxisFrom = Convert.ToDouble( txtFromValue.Text);
+            }
+            if (!String.IsNullOrEmpty(txtStepValue.Text))
+            {
+                Parameters.YAxisStep =  Convert.ToDouble(txtStepValue.Text);
+            }
+
             if (cmbXAxisLabelType.SelectedIndex >= 0)
             {
                 //switch (cmbXAxisLabelType.SelectedIndex)
@@ -941,42 +954,42 @@ namespace EpiDashboard.Controls.GadgetProperties
                     break;
             }
 
-            if (!string.IsNullOrEmpty(Parameters.StartValue))
+            if (!string.IsNullOrEmpty(Convert.ToString(Parameters.StartDate)))
             {
-                txtStartValue.Text = Parameters.StartValue;
-                DateTime stDt = DateTime.Now;
-                double stInt = -1;
-                if (DateTime.TryParse(Parameters.StartValue, out stDt))
-                {
-                    Parameters.StartDate = stDt;
-                }
-                else if (double.TryParse(Parameters.StartValue, out stInt))
-                {
-                    stDt = DateTime.Now;
-                    stDt = stDt.AddDays(stInt);
-                    Parameters.StartDate = stDt;
-                }
+                txtStartValue.Text = Convert.ToString( Parameters.StartDate);
+                //DateTime stDt = DateTime.Now;
+                //double stInt = -1;
+                //if (DateTime.TryParse(Convert.ToString(Parameters.StartDate), out stDt))
+                //{
+                //    Parameters.StartDate = stDt;
+                //}
+                //else if (double.TryParse(Parameters.StartValue, out stInt))
+                //{
+                //    stDt = DateTime.Now;
+                //    stDt = stDt.AddDays(stInt);
+                //    Parameters.StartDate = stDt;
+                //}
             }
 
-            if (!string.IsNullOrEmpty(txtEndValue.Text))
+            if (!string.IsNullOrEmpty(Convert.ToString(Parameters.EndDate)))
             {
-                txtEndValue.Text = Parameters.EndValue;
-                DateTime edDt = DateTime.Now;
-                double edInt = -1;
-                if (DateTime.TryParse(Parameters.EndValue, out edDt))
-                {
-                    Parameters.EndDate = edDt;
-                }
-                else if (double.TryParse(Parameters.EndValue, out edInt))
-                {
-                    edDt = DateTime.Now;
-                    edDt = edDt.AddDays(edInt);
-                    Parameters.EndDate = edDt;
-                }
-                else if (Parameters.EndValue.ToUpper() == "SYSTEMDATE" || Parameters.EndValue == "SYSTEMDATE")
-                {
-                    Parameters.EndDate = DateTime.Now;
-                }
+                txtEndValue.Text = Convert.ToString(Parameters.EndDate);
+                //DateTime edDt = DateTime.Now;
+                //double edInt = -1;
+                //if (DateTime.TryParse(Convert.ToString(Parameters.EndValue), out edDt))
+                //{
+                //    Parameters.EndDate = edDt;
+                //}
+                //else if (double.TryParse(Parameters.EndValue, out edInt))
+                //{
+                //    edDt = DateTime.Now;
+                //    edDt = edDt.AddDays(edInt);
+                //    Parameters.EndDate = edDt;
+                //}
+                //else if (Parameters.EndValue.ToUpper() == "SYSTEMDATE" || Parameters.EndValue == "SYSTEMDATE")
+                //{
+                //    Parameters.EndDate = DateTime.Now;
+                //}
             }
 
             txtToValue.Text = Parameters.YAxisTo.ToString();

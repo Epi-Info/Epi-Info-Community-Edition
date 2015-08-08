@@ -52,13 +52,17 @@ namespace EpiDashboard.Controls.Charting
         {
             List<XYHistogramChartData> histogramDataList = new List<XYHistogramChartData>();
 
-            foreach (XYColumnChartData dataItem in dataList)
+            //            var dList =.Select(x => (Convert.ToDateTime(x.S) < HistogramChartParameters.EndDate && Convert.ToDateTime( x.S) > HistogramChartParameters.StartDate))
+
+
+            foreach (XYColumnChartData dataItem in  dataList)
             {
                 XYHistogramChartData histogramDataListItem = new XYHistogramChartData();
                 histogramDataListItem.X = dataItem.X.ToString();
                 histogramDataListItem.Y = dataItem.Y;
                 histogramDataListItem.S = dataItem.S.ToString();
                 histogramDataList.Add(histogramDataListItem);
+                
             }
 
             if (dataList.Count > 0 && dataList[0].Y2.HasValue && series1 != null)
@@ -100,9 +104,63 @@ namespace EpiDashboard.Controls.Charting
 
             xyChart.Width = HistogramChartParameters.ChartWidth;
             xyChart.Height = HistogramChartParameters.ChartHeight;
+            xyChart.LegendDock = HistogramChartParameters.LegendDock;
+            xyChart.DefaultGridLinesVisible = HistogramChartParameters.ShowGridLines;
+            
+
+            switch (HistogramChartParameters.Palette)
+            {
+                case 0:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Atlantic");
+                    break;
+                case 1:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Breeze");
+                    break;
+                case 2:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("ComponentArt");
+                    break;
+                case 3:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Deep");
+                    break;
+                case 4:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Earth");
+                    break;
+                case 5:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Evergreen");
+                    break;
+                case 6:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Heatwave");
+                    break;
+                case 7:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Montreal");
+                    break;
+                case 8:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Pastel");
+                    break;
+                case 9:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Renaissance");
+                    break;
+                case 10:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("SharePoint");
+                    break;
+                case 11:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Study");
+                    break;
+                default:
+                case 12:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantA");
+                    break;
+                case 13:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantB");
+                    break;
+                case 14:
+                    xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantC");
+                    break;
+            }
 
             series0.BarRelativeBegin = double.NaN;
             series0.BarRelativeEnd = double.NaN;
+            
 
             switch (HistogramChartParameters.BarSpace)
             {
@@ -128,6 +186,8 @@ namespace EpiDashboard.Controls.Charting
 
             //xAxisCoordinates.Angle = Settings.XAxisLabelRotation;
             xAxisCoordinates.Angle = HistogramChartParameters.XAxisAngle;
+            
+            
 
             //switch ((EpiDashboard.XAxisLabelType)Settings.XAxisLabelType)
             switch ((EpiDashboard.XAxisLabelType)HistogramChartParameters.XAxisLabelType)
@@ -251,6 +311,13 @@ namespace EpiDashboard.Controls.Charting
             else tblockStrataTitle.Visibility = System.Windows.Visibility.Visible;
 
             yAxis.UseReferenceValue = HistogramChartParameters.UseRefValues;
+
+            if (HistogramChartParameters.YAxisTo != 0)
+                numberCoordinates.To = HistogramChartParameters.YAxisTo;
+            if (HistogramChartParameters.YAxisFrom != 0)
+                numberCoordinates.From = HistogramChartParameters.YAxisFrom;
+            if (HistogramChartParameters.YAxisStep != 0)
+                numberCoordinates.Step = HistogramChartParameters.YAxisStep;
 
             series0.ShowPointAnnotations = HistogramChartParameters.ShowAnnotations;
             series0.BarKind = HistogramChartParameters.BarKind;
