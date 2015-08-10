@@ -1041,6 +1041,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 2x2 Value Mapping.
+        /// </summary>
+        public static string GADGET_22_VALUE_MAPPING {
+            get {
+                return ResourceManager.GetString("GADGET_22_VALUE_MAPPING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Define 2x2 Value Mappings.
         /// </summary>
         public static string GADGET_2X2_VALUE_REMAPPING_BUTTON {
@@ -1131,6 +1140,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All values:.
+        /// </summary>
+        public static string GADGET_ALL_VALUES {
+            get {
+                return ResourceManager.GetString("GADGET_ALL_VALUES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available Variables.
+        /// </summary>
+        public static string GADGET_AVAILABLE_VARIABLES {
+            get {
+                return ResourceManager.GetString("GADGET_AVAILABLE_VARIABLES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Break type:.
         /// </summary>
         public static string GADGET_BREAK_TYPE {
@@ -1185,6 +1212,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Case/Control:.
+        /// </summary>
+        public static string GADGET_CASE_CONTROL {
+            get {
+                return ResourceManager.GetString("GADGET_CASE_CONTROL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Center horizontally.
         /// </summary>
         public static string GADGET_CENTER {
@@ -1199,6 +1235,69 @@ namespace EpiDashboard {
         public static string GADGET_COLOR_GRADIENT {
             get {
                 return ResourceManager.GetString("GADGET_COLOR_GRADIENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 95% CI lower.
+        /// </summary>
+        public static string GADGET_COLUMN_95_CILOWER {
+            get {
+                return ResourceManager.GetString("GADGET_COLUMN_95_CILOWER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 95% CI upper.
+        /// </summary>
+        public static string GADGET_COLUMN_95_CIUPPER {
+            get {
+                return ResourceManager.GetString("GADGET_COLUMN_95_CIUPPER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cumulative percent.
+        /// </summary>
+        public static string GADGET_COLUMN_CUMULATIVE_PERCENT {
+            get {
+                return ResourceManager.GetString("GADGET_COLUMN_CUMULATIVE_PERCENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Frequency.
+        /// </summary>
+        public static string GADGET_COLUMN_FREQUENCY {
+            get {
+                return ResourceManager.GetString("GADGET_COLUMN_FREQUENCY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Percent.
+        /// </summary>
+        public static string GADGET_COLUMN_PERCENT {
+            get {
+                return ResourceManager.GetString("GADGET_COLUMN_PERCENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Percent bars.
+        /// </summary>
+        public static string GADGET_COLUMN_PERCENTBAR {
+            get {
+                return ResourceManager.GetString("GADGET_COLUMN_PERCENTBAR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Combine mode:.
+        /// </summary>
+        public static string GADGET_COMBINE_MODE {
+            get {
+                return ResourceManager.GetString("GADGET_COMBINE_MODE", resourceCulture);
             }
         }
         
@@ -1230,6 +1329,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Combined Frequency.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_COMBINEDFEQ {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_COMBINEDFEQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crosstabulation.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_CROSSTABULATION {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_CROSSTABULATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Frequency.
         /// </summary>
         public static string GADGET_CONFIG_TITLE_FREQUENCY {
@@ -1239,11 +1356,29 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Line List.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_LINE_LIST {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_LINE_LIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Means Properties.
         /// </summary>
         public static string GADGET_CONFIG_TITLE_MEANS {
             get {
                 return ResourceManager.GetString("GADGET_CONFIG_TITLE_MEANS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matched Pair Case-Control.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_MPC_CONTROL {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_MPC_CONTROL", resourceCulture);
             }
         }
         
@@ -1262,6 +1397,15 @@ namespace EpiDashboard {
         public static string GADGET_CONFIG_TITLE_WORD_CLOUD {
             get {
                 return ResourceManager.GetString("GADGET_CONFIG_TITLE_WORD_CLOUD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Word Cloud.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_WORDCLOUD {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_WORDCLOUD", resourceCulture);
             }
         }
         
@@ -1329,6 +1473,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gadget Description.
+        /// </summary>
+        public static string GADGET_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("GADGET_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dimensions.
+        /// </summary>
+        public static string GADGET_DIMENSIONS {
+            get {
+                return ResourceManager.GetString("GADGET_DIMENSIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Horizontal 2x2 summary.
         /// </summary>
         public static string GADGET_DISPLAY_2X2_SUMMARY_HORIZONTALLY {
@@ -1343,6 +1505,33 @@ namespace EpiDashboard {
         public static string GADGET_DISPLAY_ANOVA {
             get {
                 return ResourceManager.GetString("GADGET_DISPLAY_ANOVA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display Chi-Square.
+        /// </summary>
+        public static string GADGET_DISPLAY_CHISQUARE {
+            get {
+                return ResourceManager.GetString("GADGET_DISPLAY_CHISQUARE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display List Labels.
+        /// </summary>
+        public static string GADGET_DISPLAY_LIST_LABELS {
+            get {
+                return ResourceManager.GetString("GADGET_DISPLAY_LIST_LABELS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display all list values.
+        /// </summary>
+        public static string GADGET_DISPLAY_LIST_VALUE {
+            get {
+                return ResourceManager.GetString("GADGET_DISPLAY_LIST_VALUE", resourceCulture);
             }
         }
         
@@ -1365,6 +1554,33 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Draw Borders.
+        /// </summary>
+        public static string GADGET_DRAW_BORDERS {
+            get {
+                return ResourceManager.GetString("GADGET_DRAW_BORDERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Draw header row.
+        /// </summary>
+        public static string GADGET_DRAW_HEADER_ROW {
+            get {
+                return ResourceManager.GetString("GADGET_DRAW_HEADER_ROW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Draw total row.
+        /// </summary>
+        public static string GADGET_DRAW_TOTAL_ROW {
+            get {
+                return ResourceManager.GetString("GADGET_DRAW_TOTAL_ROW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All gadgets will be erased from the canvas. Proceed?.
         /// </summary>
         public static string GADGET_ERASE_ALL_FROM_CANVAS {
@@ -1383,11 +1599,38 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Note: Any filters set here are applied to this gadget only..
+        /// </summary>
+        public static string GADGET_FILTER_GADGET_ONLY {
+            get {
+                return ResourceManager.GetString("GADGET_FILTER_GADGET_ONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Frequency of:.
         /// </summary>
         public static string GADGET_FREQUENCY_VARIABLE {
             get {
                 return ResourceManager.GetString("GADGET_FREQUENCY_VARIABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gadget Title.
+        /// </summary>
+        public static string GADGET_GADET_TITLE {
+            get {
+                return ResourceManager.GetString("GADGET_GADET_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Group By.
+        /// </summary>
+        public static string GADGET_GROUP_BY {
+            get {
+                return ResourceManager.GetString("GADGET_GROUP_BY", resourceCulture);
             }
         }
         
@@ -1406,6 +1649,15 @@ namespace EpiDashboard {
         public static string GADGET_HEIGHT {
             get {
                 return ResourceManager.GetString("GADGET_HEIGHT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to High value color.
+        /// </summary>
+        public static string GADGET_HIGH_VALUE_COLOR {
+            get {
+                return ResourceManager.GetString("GADGET_HIGH_VALUE_COLOR", resourceCulture);
             }
         }
         
@@ -1460,6 +1712,15 @@ namespace EpiDashboard {
         public static string GADGET_LOAD_ERROR {
             get {
                 return ResourceManager.GetString("GADGET_LOAD_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Low value color.
+        /// </summary>
+        public static string GADGET_LOW_VALUE_COLOR {
+            get {
+                return ResourceManager.GetString("GADGET_LOW_VALUE_COLOR", resourceCulture);
             }
         }
         
@@ -1554,6 +1815,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No values:.
+        /// </summary>
+        public static string GADGET_NO_VALUES {
+            get {
+                return ResourceManager.GetString("GADGET_NO_VALUES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Outcome is continuous.
         /// </summary>
         public static string GADGET_OUTCOME_CONTINUOUS {
@@ -1577,6 +1847,96 @@ namespace EpiDashboard {
         public static string GADGET_OUTPUT_COLUMNS_DISPLAY {
             get {
                 return ResourceManager.GetString("GADGET_OUTPUT_COLUMNS_DISPLAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output Options.
+        /// </summary>
+        public static string GADGET_OUTPUT_OPTIONS {
+            get {
+                return ResourceManager.GetString("GADGET_OUTPUT_OPTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pair Group ID:.
+        /// </summary>
+        public static string GADGET_PAIR_GROUP_ID {
+            get {
+                return ResourceManager.GetString("GADGET_PAIR_GROUP_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Colors and Styles.
+        /// </summary>
+        public static string GADGET_PANEL_COLORS_STYLES {
+            get {
+                return ResourceManager.GetString("GADGET_PANEL_COLORS_STYLES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Filters.
+        /// </summary>
+        public static string GADGET_PANELHEADER_DATA_FILTER {
+            get {
+                return ResourceManager.GetString("GADGET_PANELHEADER_DATA_FILTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display.
+        /// </summary>
+        public static string GADGET_PANELHEADER_DISPLAY {
+            get {
+                return ResourceManager.GetString("GADGET_PANELHEADER_DISPLAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grouping and Sorting.
+        /// </summary>
+        public static string GADGET_PANELHEADER_SORTING {
+            get {
+                return ResourceManager.GetString("GADGET_PANELHEADER_SORTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variables.
+        /// </summary>
+        public static string GADGET_PANELHEADER_VARIABLES {
+            get {
+                return ResourceManager.GetString("GADGET_PANELHEADER_VARIABLES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grouping.
+        /// </summary>
+        public static string GADGET_PANELSUBHEADER_GROUPING {
+            get {
+                return ResourceManager.GetString("GADGET_PANELSUBHEADER_GROUPING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorting.
+        /// </summary>
+        public static string GADGET_PANELSUBHEADER_SORTING {
+            get {
+                return ResourceManager.GetString("GADGET_PANELSUBHEADER_SORTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title and Description.
+        /// </summary>
+        public static string GADGET_PANELSUBHEADER_TITLENDESC {
+            get {
+                return ResourceManager.GetString("GADGET_PANELSUBHEADER_TITLENDESC", resourceCulture);
             }
         }
         
@@ -1608,11 +1968,38 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show column headings.
+        /// </summary>
+        public static string GADGET_SHOW_COLUMN_HEADINGS {
+            get {
+                return ResourceManager.GetString("GADGET_SHOW_COLUMN_HEADINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show denominator.
         /// </summary>
         public static string GADGET_SHOW_DENOMINATOR {
             get {
                 return ResourceManager.GetString("GADGET_SHOW_DENOMINATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show line column.
+        /// </summary>
+        public static string GADGET_SHOW_LINE_COLUMN {
+            get {
+                return ResourceManager.GetString("GADGET_SHOW_LINE_COLUMN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show missing representation.
+        /// </summary>
+        public static string GADGET_SHOW_MISSING_REP {
+            get {
+                return ResourceManager.GetString("GADGET_SHOW_MISSING_REP", resourceCulture);
             }
         }
         
@@ -1635,11 +2022,29 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sort Method:.
+        ///   Looks up a localized string similar to Method:.
         /// </summary>
         public static string GADGET_SORT_METHOD {
             get {
                 return ResourceManager.GetString("GADGET_SORT_METHOD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Order:.
+        /// </summary>
+        public static string GADGET_SORT_ORDER {
+            get {
+                return ResourceManager.GetString("GADGET_SORT_ORDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify the values for Exposure and Outcome as Yes or No..
+        /// </summary>
+        public static string GADGET_SPECIFY_EXPOSURE_OUTCOME {
+            get {
+                return ResourceManager.GetString("GADGET_SPECIFY_EXPOSURE_OUTCOME", resourceCulture);
             }
         }
         
@@ -1658,6 +2063,150 @@ namespace EpiDashboard {
         public static string GADGET_STRATA_VARIABLE {
             get {
                 return ResourceManager.GetString("GADGET_STRATA_VARIABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub-Group By.
+        /// </summary>
+        public static string GADGET_SUBGROUP_BY {
+            get {
+                return ResourceManager.GetString("GADGET_SUBGROUP_BY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Colors and Styles.
+        /// </summary>
+        public static string GADGET_TAB_COLORS_STYLES {
+            get {
+                return ResourceManager.GetString("GADGET_TAB_COLORS_STYLES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Define Value Mappings.
+        /// </summary>
+        public static string GADGET_TABBUTTON_DEFINE_VALMAPPING {
+            get {
+                return ResourceManager.GetString("GADGET_TABBUTTON_DEFINE_VALMAPPING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display.
+        /// </summary>
+        public static string GADGET_TABBUTTON_DISPLAY {
+            get {
+                return ResourceManager.GetString("GADGET_TABBUTTON_DISPLAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filters.
+        /// </summary>
+        public static string GADGET_TABBUTTON_FILTERS {
+            get {
+                return ResourceManager.GetString("GADGET_TABBUTTON_FILTERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grouping and Sorting.
+        /// </summary>
+        public static string GADGET_TABBUTTON_SORTING {
+            get {
+                return ResourceManager.GetString("GADGET_TABBUTTON_SORTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variables.
+        /// </summary>
+        public static string GADGET_TABBUTTON_VARIABLES {
+            get {
+                return ResourceManager.GetString("GADGET_TABBUTTON_VARIABLES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set cell shading and color gradient..
+        /// </summary>
+        public static string GADGET_TABDESC_COLORS_STYLES {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_COLORS_STYLES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select items to include in the frequency..
+        /// </summary>
+        public static string GADGET_TABDESC_COMBINEDFEQ {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_COMBINEDFEQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change display options..
+        /// </summary>
+        public static string GADGET_TABDESC_DISPLAY {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_DISPLAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the columns for exposure and outcome..
+        /// </summary>
+        public static string GADGET_TABDESC_EXPOSURE_OUTCOME {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_EXPOSURE_OUTCOME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set data filters for this gadget..
+        /// </summary>
+        public static string GADGET_TABDESC_FILTERS {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_FILTERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the column for the frequency..
+        /// </summary>
+        public static string GADGET_TABDESC_FREQUENCY {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_FREQUENCY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select columns to display in the list..
+        /// </summary>
+        public static string GADGET_TABDESC_LINELIST {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_LINELIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set a sort order and create list groups..
+        /// </summary>
+        public static string GADGET_TABDESC_SORTING {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_SORTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the text variable to parse to the word cloud..
+        /// </summary>
+        public static string GADGET_TABDESC_WORDCLOUD {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_WORDCLOUD", resourceCulture);
             }
         }
         
@@ -1707,6 +2256,42 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User field Prompts.
+        /// </summary>
+        public static string GADGET_USER_FIELDS_PROMPTS {
+            get {
+                return ResourceManager.GetString("GADGET_USER_FIELDS_PROMPTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value Mapping.
+        /// </summary>
+        public static string GADGET_VALUE_MAPPING {
+            get {
+                return ResourceManager.GetString("GADGET_VALUE_MAPPING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variable to parse:.
+        /// </summary>
+        public static string GADGET_VARIABLE_PARSE {
+            get {
+                return ResourceManager.GetString("GADGET_VARIABLE_PARSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variables to display:.
+        /// </summary>
+        public static string GADGET_VARIABLES_TO_DISPLAY {
+            get {
+                return ResourceManager.GetString("GADGET_VARIABLES_TO_DISPLAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Weight:.
         /// </summary>
         public static string GADGET_WEIGHT_VARIABLE {
@@ -1721,6 +2306,24 @@ namespace EpiDashboard {
         public static string GADGET_WIDTH {
             get {
                 return ResourceManager.GetString("GADGET_WIDTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Common words to ignore:.
+        /// </summary>
+        public static string GADGET_WORDS_IGNORE {
+            get {
+                return ResourceManager.GetString("GADGET_WORDS_IGNORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes values:.
+        /// </summary>
+        public static string GADGET_YES_VALUES {
+            get {
+                return ResourceManager.GetString("GADGET_YES_VALUES", resourceCulture);
             }
         }
         

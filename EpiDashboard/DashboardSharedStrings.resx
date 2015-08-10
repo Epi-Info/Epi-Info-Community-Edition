@@ -1076,7 +1076,19 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_YES_VALUES" xml:space="preserve">
     <value>Yes values:</value>
   </data>
+  <data name="GADGET_CASE_CONTROL" xml:space="preserve">
+    <value>Case/Control:</value>
+  </data>
   <data name="GADGET_CONFIG_TITLE_CROSSTABULATION" xml:space="preserve">
     <value>Crosstabulation</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_MPC_CONTROL" xml:space="preserve">
+    <value>Matched Pair Case-Control</value>
+  </data>
+  <data name="GADGET_PAIR_GROUP_ID" xml:space="preserve">
+    <value>Pair Group ID:</value>
+  </data>
+  <data name="GADGET_TABBUTTON_DEFINE_VALMAPPING" xml:space="preserve">
+    <value>Define Value Mappings</value>
   </data>
 </root>
