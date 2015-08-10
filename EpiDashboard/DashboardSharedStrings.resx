@@ -1076,4 +1076,7 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_YES_VALUES" xml:space="preserve">
     <value>Yes values:</value>
   </data>
+  <data name="GADGET_CONFIG_TITLE_CROSSTABULATION" xml:space="preserve">
+    <value>Crosstabulation</value>
+  </data>
 </root>
