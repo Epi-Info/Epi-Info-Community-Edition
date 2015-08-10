@@ -1506,11 +1506,15 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 checkboxShowLegendBorder.IsEnabled = true;
                 checkboxShowVarName.IsEnabled = true;
+                txtLegendFontSize.IsEnabled = true;
+                cmbLegendDock.IsEnabled = true;
             }
             else
             {
                 checkboxShowLegendBorder.IsEnabled = false;
                 checkboxShowVarName.IsEnabled = false;
+                txtLegendFontSize.IsEnabled = false;
+                cmbLegendDock.IsEnabled = false;
             }
         }
 
