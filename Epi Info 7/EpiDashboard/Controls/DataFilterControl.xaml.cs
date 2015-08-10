@@ -281,8 +281,10 @@ namespace EpiDashboard.Controls
                     DataTable dataTable = ((TableBasedDropDownField)field).GetSourceData();
                     Dictionary<string, string> fieldValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-                    if (field is DDLFieldOfLegalValues)
-                    {
+                    if (dataTable != null)
+                    { 
+                     if (field is DDLFieldOfLegalValues)
+                     {
                         foreach (System.Data.DataRow row in dataTable.Rows)
                         {
                             string codeColumnName = ((TableBasedDropDownField)field).CodeColumnName.Trim();
@@ -295,7 +297,7 @@ namespace EpiDashboard.Controls
                                 }
                             }
                         }
-                    }
+                      }
                     else if (field is DDLFieldOfCodes)
                     {
                         foreach (System.Data.DataRow row in dataTable.Rows)
@@ -342,6 +344,7 @@ namespace EpiDashboard.Controls
                         i++;
                     }
                     cbxValue.Items.Add(config.Settings.RepresentationOfMissing);
+                  }
                 }
             }
             else
