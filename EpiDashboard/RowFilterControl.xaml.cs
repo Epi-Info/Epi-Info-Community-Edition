@@ -290,6 +290,8 @@ namespace EpiDashboard
                 {
                     //DataTable dataTable = db.Select(db.CreateQuery("SELECT " + field.Name + " " + view.FromViewSQL));
                     DataTable dataTable = ((TableBasedDropDownField)field).GetSourceData();
+                   if (dataTable != null)
+                    { 
                     Dictionary<string, string> fieldValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
                     if (field is DDLFieldOfLegalValues)
@@ -354,6 +356,7 @@ namespace EpiDashboard
                     }
                     cmbValue.Items.Add(config.Settings.RepresentationOfMissing);
                 }
+              }
             }
             else
             {
