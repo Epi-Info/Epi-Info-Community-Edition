@@ -820,7 +820,7 @@ namespace EpiDashboard.Controls
             txtMapSeverpath.Text = string.Empty;
         }
 
-        private void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ResetMapServer();
         }
@@ -895,7 +895,12 @@ namespace EpiDashboard.Controls
             btnMapserverlocate.IsEnabled = txtMapSeverpath.Text.Length > 0;
         }
 
-        private void cbxmapfeature_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void cbxmapfeature_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MapfeatureSelectionChange();
+        }
+
+        public void MapfeatureSelectionChange()
         {
             if (cbxmapfeature.Items.Count > 0)
             {
