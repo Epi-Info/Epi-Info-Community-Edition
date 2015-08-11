@@ -755,14 +755,15 @@ namespace EpiDashboard.Rules
                 string value = row[textColumnName].ToString();
                 int indexOf = value.IndexOf(searchString);
 
-                if (indexOf == -1)
-                {
-                    row[this.DestinationColumnName] = DBNull.Value;
-                }
-                else
-                {
+                //Commenting for EI-361
+                //if (indexOf == -1)
+                //{
+                //    row[this.DestinationColumnName] = DBNull.Value;
+                //}
+                //else
+                //{
                     row[this.DestinationColumnName] = indexOf;
-                }
+                //}
             }
             else if (AssignmentType.Equals(SimpleAssignType.NumberToText))
             {
