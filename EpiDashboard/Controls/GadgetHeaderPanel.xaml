@@ -93,7 +93,7 @@
         </Style>
 
         <Style x:Key="configRectangle" TargetType="Rectangle">
-            <Setter Property="Fill" Value="SlateBlue"/>
+            <Setter Property="Fill"  Value="SlateBlue"/> 
             <Setter Property="Stroke" Value="{StaticResource brushWhiteTransparent}"/>
         </Style>
 
@@ -159,12 +159,16 @@
         </Grid>
 
         <Grid Grid.Column="3" x:Name="grdConfigure" Width="Auto" Height="24" Margin="4, 0, 4, 0" Visibility="Visible"  VerticalAlignment="Bottom" >
-            <Rectangle x:Name="configRectangle1" Style="{StaticResource configRectangle}" MouseEnter="PathConfig_MouseEnter" MouseLeave="PathConfig_MouseLeave" MouseLeftButtonUp="PathConfig_MouseLeftButtonUp">
+            <Rectangle x:Name="configRectangle1" Style="{StaticResource configRectangle}"  MouseEnter="PathConfig_MouseEnter" MouseLeave="PathConfig_MouseLeave" MouseLeftButtonUp="PathConfig_MouseLeftButtonUp">
                 <Rectangle.ToolTip>
                     <ToolTip x:Name="toolTipConfig">Opens the gadget configuration panel.</ToolTip>
                 </Rectangle.ToolTip>
             </Rectangle>
-            <TextBlock Margin="4, 2, 4, 2" FontSize="14" Foreground="White" VerticalAlignment="Center" IsHitTestVisible="False">Edit Properties</TextBlock>
+            
+            <!-- <TextBlock Margin="4, 2, 4, 2" FontSize="14" Foreground="White" VerticalAlignment="Center" IsHitTestVisible="False">Edit Properties</TextBlock> -->
+            <TextBlock Margin="4, 2, 4, 2" FontSize="14" Foreground="White" Height= "18" Width ="18"  VerticalAlignment="Center" IsHitTestVisible="False"></TextBlock>
+            <Image  Source= "../Images/gadget.png" Stretch="None"   Visibility= "Visible" MouseLeftButtonUp="PathConfig_MouseLeftButtonUp"/> 
+
         </Grid>
 
         <Grid Grid.Column="4" x:Name="grdDescription" Width="24" Height="24" Margin="4, 0, 4, 0" Visibility="Visible" VerticalAlignment="Bottom">
