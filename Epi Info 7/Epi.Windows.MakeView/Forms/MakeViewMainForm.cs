@@ -748,8 +748,7 @@ namespace Epi.Windows.MakeView.Forms
                 this.currentBackgroundImage = null;
                 this.currentBackgroundImageLayout = "None";
                 this.currentBackgroundColor = SystemColors.Window;
-            }
-        }
+            }        }
         #endregion // Public Methods
 
         #region Private Methods
@@ -1398,6 +1397,37 @@ namespace Epi.Windows.MakeView.Forms
                 }
             }
             return true;
+        }
+
+        /// <summary>
+        ///  Checks the form to be published for android for invalid field types
+        /// </summary>
+        /// <returns>
+        /// Returns a string listing field names of fields with invalid field type.
+        /// </returns>
+        private string ListFieldsNotSupportedForAndroid()
+        {
+            string invalidFields = String.Empty;
+            if (this.mediator.ProjectExplorer.SelectedPage != null && this.mediator.Project != null)
+            {
+                View currentView = this.mediator.ProjectExplorer.SelectedPage.GetView();
+                foreach (Epi.Fields.Field field in currentView.Fields)
+                {
+                    switch (field.FieldType.ToString())
+                    {
+                        case "Codes":
+                        case "GUID":
+                        case "PhoneNumber":
+                        case "DateTime":
+                        case "Mirror":
+                        case "Grid":
+                        case "Relate":
+                            invalidFields += field.Name + "(" + field.FieldType + ");";
+                            break;
+                    }
+                }
+            }
+            return invalidFields;
         }
 
         /// <summary>
@@ -2498,8 +2528,21 @@ namespace Epi.Windows.MakeView.Forms
 
         private void mnuCopyToPhone_Click(object sender, EventArgs e)
         {
-            Dialogs.CopyToAndroid dialog = new CopyToAndroid(CurrentView, this.mediator);
-            dialog.ShowDialog();
+           //--Ei-223
+            if (projectExplorer.CurrentView != null)
+            { 
+                string InvalidForAndroid = ListFieldsNotSupportedForAndroid();
+                if (InvalidForAndroid.Length > 0)
+                {
+                    SupportedFieldTypeAndroidDialog dialog = new SupportedFieldTypeAndroidDialog(InvalidForAndroid);
+                    dialog.ShowDialog();
+                }
+             else
+               {
+                 Dialogs.CopyToAndroid dialog = new CopyToAndroid(CurrentView, this.mediator);
+                 dialog.ShowDialog();
+                }
+            }
         }
 
         private void mnuImportTemplate_Click(object sender, EventArgs e)

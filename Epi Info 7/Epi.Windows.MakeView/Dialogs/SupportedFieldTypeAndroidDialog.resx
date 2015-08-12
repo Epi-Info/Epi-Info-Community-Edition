@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACs
-        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAFEAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAFMAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABJgEBAgABAQEAASAGAAEmAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8AbgAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8IAAPfAf8BHQGCAbUB/wEbAYEBswH/ARgBfgGw
         Af8BFgF8Aa4B/wETAXkBqwH/ARABdgGoAf8BDQFzAaUB/wELAXEBowH/AQgBbgGgAf8BBgFsAZ4B/wEE
@@ -977,7 +977,7 @@
     <value>17</value>
   </data>
   <data name="lblUnsupportedList.Text" xml:space="preserve">
-    <value>To copy a form to an Android device, do not use the following unsupported field types: Grid, Unique Identifier (GUID) or Relate.</value>
+    <value>To copy a form to an Android device, do not use the following unsupported field types: Mirror, Phone Number, Date Time, Codes, Grid, Unique Identifier (GUID) or Relate.</value>
   </data>
   <data name="&gt;&gt;lblUnsupportedList.Name" xml:space="preserve">
     <value>lblUnsupportedList</value>
@@ -1001,7 +1001,7 @@
     <value>18</value>
   </data>
   <data name="lblInstructions.Text" xml:space="preserve">
-    <value>Remove the fields listed below from your form, or change their field type, then select Publish Form To Web.</value>
+    <value>Remove the fields listed below from your form, or change their field type, then select Copy Form To Android Device.</value>
   </data>
   <data name="&gt;&gt;lblInstructions.Name" xml:space="preserve">
     <value>lblInstructions</value>
@@ -1070,6 +1070,6 @@
     <value>SupportedFieldTypeAndroidDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.4919.26472, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5700.18473, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
