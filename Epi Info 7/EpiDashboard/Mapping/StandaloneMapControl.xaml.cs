@@ -2034,7 +2034,7 @@ namespace EpiDashboard.Mapping
                     dotdensityproperties.cbxmapserver.SelectionChanged -= dotdensityproperties.cbxmapserver_SelectionChanged;
                     dotdensityproperties.cbxmapserver.Text = densitylayerprop.cbxMapserverText;
                     dotdensityproperties.ResetMapServer();
-                    dotdensityproperties.cbxmapserver.SelectionChanged += choroplethproperties.cbxmapserver_SelectionChanged;
+                    dotdensityproperties.cbxmapserver.SelectionChanged += dotdensityproperties.cbxmapserver_SelectionChanged;
                     //dotdensityproperties.cbxmapserver.Text = densitylayerprop.cbxMapserverText;
                 }
                 else
