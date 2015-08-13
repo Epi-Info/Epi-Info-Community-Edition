@@ -319,6 +319,8 @@ namespace EpiDashboard.Controls
             panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+            if (serverlayerprop != null)
+                if (serverlayerprop.provider.FlagUpdateToGLFailed) { ResetShapeCombo(); }
         }
 
         private void tbtnDataSource_Checked(object sender, RoutedEventArgs e)
@@ -434,6 +436,7 @@ namespace EpiDashboard.Controls
             }
         }
 
+        
         private void btnBrowseShapeFile_Click(object sender, RoutedEventArgs e)
         {
             provider = new Mapping.DotDensityLayerProvider(myMap);           
@@ -743,6 +746,21 @@ namespace EpiDashboard.Controls
             }
         }
 
+        private void ResetShapeCombo()
+        {
+             //In case of map server
+            if (radMapServer.IsChecked == true)
+            {
+                cmbShapeKey.Items.Clear();
+                cmbShapeKey.SelectedIndex = -1;
+                if (serverlayerprop != null)
+                {
+                    serverlayerprop.cbxShapeKey.Items.Clear();
+                    serverlayerprop.cbxShapeKey.SelectedIndex = -1;
+                }
+            }
+         
+        }
       
         private void radKML_Checked(object sender, RoutedEventArgs e)
         {

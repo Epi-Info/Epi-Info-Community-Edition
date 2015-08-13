@@ -2010,13 +2010,13 @@ namespace EpiDashboard.Mapping
             if (string.IsNullOrEmpty (densitylayerprop.shapeFilePath) == false) 
             {
                 dotdensityproperties.radMapServer.IsChecked = true;
-                if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13")
+                if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13" && string.IsNullOrEmpty(densitylayerprop.cbxMapFeatureText) == true)
                     densitylayerprop.cbxMapserverText = "NationalMap.gov - New York County Boundaries";
-                else if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19")
+                else if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19" && string.IsNullOrEmpty(densitylayerprop.cbxMapFeatureText) == true)
                     densitylayerprop.cbxMapserverText = "NationalMap.gov - Rhode Island Zip Code Boundaries";
-                else if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17")
+                else if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17" && string.IsNullOrEmpty(densitylayerprop.cbxMapFeatureText) == true)
                     densitylayerprop.cbxMapserverText = "NationalMap.gov - U.S. State Boundaries";
-                else if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17")
+                else if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17" && string.IsNullOrEmpty(densitylayerprop.cbxMapFeatureText) == true)
                     densitylayerprop.cbxMapserverText = "NationalMap.gov - World Boundaries";
                 else
                 {
