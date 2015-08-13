@@ -42,6 +42,7 @@ namespace EpiDashboard.Mapping
         private Color dotColor;
         private int dotValue;
         private string url;
+        private bool flagupdatetoglfailed;
 
         public DotDensityServerLayerProvider(Map myMap)
         {
@@ -155,6 +156,7 @@ namespace EpiDashboard.Mapping
             //int x = 5;
             //x++;
             myMap.Cursor = Cursors.Arrow;
+            flagupdatetoglfailed = true;
         }
 
         void graphicsLayer_InitializationFailed(object sender, EventArgs e)
@@ -175,6 +177,7 @@ namespace EpiDashboard.Mapping
         void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
         {
             FeatureLayer graphicsLayer = myMap.Layers[layerId.ToString()] as FeatureLayer;
+            flagupdatetoglfailed = false;
             if (graphicsLayer != null)
             {
                 if (graphicsLayer.Graphics.Count > 0)
@@ -197,6 +200,11 @@ namespace EpiDashboard.Mapping
             return symbol;
         }
 
+        public bool FlagUpdateToGLFailed
+        {
+            get { return flagupdatetoglfailed; }
+            set { flagupdatetoglfailed = value; }
+        }
 
 
         public void Refresh()
