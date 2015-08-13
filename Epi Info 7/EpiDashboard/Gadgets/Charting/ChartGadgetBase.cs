@@ -299,6 +299,7 @@ namespace EpiDashboard.Gadgets.Charting
                 switch ((Parameters as IChartGadgetParameters).Y2AxisType)
                 {
                     case 1:
+                        y2type = Y2Type.SingleField;//EI-430
                         if (Parameters.ColumnNames.Count > 1 && !String.IsNullOrEmpty(Parameters.ColumnNames[1]))
                         {
                             second_y_var = Parameters.ColumnNames[1];
