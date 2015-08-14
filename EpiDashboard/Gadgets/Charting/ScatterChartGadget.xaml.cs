@@ -433,6 +433,7 @@ namespace EpiDashboard.Gadgets.Charting
             
            private void SetXandYCoordinates(List<XYChartData> dataList, int newMinXvalue, int newMaxXvalue)
             {
+               
                 //---Ei-196
                 //adds one step before
                 int remvalue = 2;
@@ -442,6 +443,7 @@ namespace EpiDashboard.Gadgets.Charting
                 remvalue = 2;
                 xyChart.XRangeEnd = newMaxXvalue + remvalue;
 
+                /*
                 NumericCoordinates numx = new NumericCoordinates();
                 numx.From = newMinXvalue - remvalue ;
                 value = newMaxXvalue % 2;
@@ -461,7 +463,8 @@ namespace EpiDashboard.Gadgets.Charting
                 ax.Visibility = System.Windows.Visibility.Visible;
                 xyChart.XAxisArea.Clear();
                 xyChart.XAxisArea.Add(ax);
-                //--
+                //-- */
+
                 int Yminvalue = Int32.MaxValue;
                 int Ymaxvalue = Int32.MinValue;
                 remvalue = 0;
@@ -479,10 +482,12 @@ namespace EpiDashboard.Gadgets.Charting
                 if (value > 0) { remvalue = value;}
                 NumericCoordinates numy = new NumericCoordinates();
                 numy.From = (int)Yminvalue - remvalue;
+                /*              
                 value = Ymaxvalue % 10;
                 remvalue = 10;
                 if (value > 0) { remvalue = remvalue - value; }
                 numy.To = (int)Ymaxvalue + remvalue;
+                         
                 numy.Step = 50;
 
                 //step y
@@ -492,15 +497,15 @@ namespace EpiDashboard.Gadgets.Charting
                 { numy.Step = 100; }
                 else if (Ymaxvalue > 1000)
                 { numy.Step = 5000; }
-                 
+                */ 
                 AxisCoordinates ay = new AxisCoordinates();
                 ay.Coordinates = numy;
                 ay.Visibility = System.Windows.Visibility.Visible;
                 xyChart.YAxisArea.Clear();
                 xyChart.YAxisArea.Add(ay);
-                //--
+                //-- 
             }
-
+            
             private delegate void SetChartDataDelegate(List<XYChartData> dataList, StatisticsRepository.LinearRegression.LinearRegressionResults regresResults, NumericDataValue maxValue, NumericDataValue minValue);
 
         #endregion //Private and Protected Methods
