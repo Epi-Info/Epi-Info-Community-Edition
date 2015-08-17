@@ -131,7 +131,7 @@ namespace EpiDashboard.Gadgets.Charting
                 else
                  { xyChart.LegendVisible = false; }
 
-                if (chtParameters.ShowLegendBorder)
+              //  if (chtParameters.ShowLegendBorder)
                      if (chtParameters.ShowLegendBorder == true)
                      {
                          xyChart.Legend.BorderThickness = new Thickness(1);
