@@ -1371,6 +1371,8 @@ namespace EpiDashboard
                     return DbType.Boolean;
                 case "System.Byte":
                     return DbType.Byte;
+                case "System.Byte[]":
+                    return DbType.Byte;
                 case "System.SByte":
                     return DbType.SByte;
                 case "System.String":
