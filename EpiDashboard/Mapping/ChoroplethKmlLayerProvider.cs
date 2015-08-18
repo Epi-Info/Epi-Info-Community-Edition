@@ -952,5 +952,7 @@ namespace EpiDashboard.Mapping
         public List<string> ListLegendText { get; set; }
 
         public bool AreRangesSet { get; set; }
+
+        public byte Opacity { get; set; }
     }
 }

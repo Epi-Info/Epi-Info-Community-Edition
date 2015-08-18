@@ -34,6 +34,10 @@
                 <Label x:Name="lblValueField" HorizontalAlignment="Center">Value Field:</Label>
                 <ComboBox x:Name="cbxValue" Width="110"/>
             </StackPanel>
+            <StackPanel Orientation="Vertical" Width="150" Visibility="Collapsed">
+                <Label x:Name="lblColorOpacity" HorizontalAlignment="Center">Color Opacity:</Label>
+                <TextBox x:Name="txtOpacity" Width="110"/>
+            </StackPanel>
         </StackPanel>
         <Rectangle VerticalAlignment="Bottom" x:Name="rctMissingColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#FFFF00" Margin="0,0,51,0" Visibility="Collapsed">
             <Rectangle.ToolTip>
