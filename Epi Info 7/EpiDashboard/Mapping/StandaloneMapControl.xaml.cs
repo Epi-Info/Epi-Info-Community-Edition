@@ -1510,6 +1510,7 @@ namespace EpiDashboard.Mapping
             choroplethproperties.txtShapePath.IsEnabled = true;
             choroplethproperties.btnBrowse.IsEnabled = true;
              
+            
             choroplethproperties.cmbShapeKey.Text = choroplethlayerprop.cbxShapeKey.Text;
             choroplethproperties.cmbDataKey.Text = choroplethlayerprop.cbxDataKey.Text;
             choroplethproperties.cmbValue.Text = choroplethlayerprop.cbxValue.Text;

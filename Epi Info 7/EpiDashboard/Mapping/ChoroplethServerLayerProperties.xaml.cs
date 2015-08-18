@@ -45,6 +45,14 @@ namespace EpiDashboard.Mapping
         public string txtMapserverText;
         public string cbxMapFeatureText;
 
+        private byte opacity;
+
+        public byte Opacity
+        {
+            get { return opacity; }
+            set { opacity = value; }
+        }
+
 
         public IDictionary<string, object> curfeatureAttributes;
 
@@ -271,7 +279,7 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public void SetValues(string shapekey, string datakey, string val, string classes, Brush Highcolor, Brush Lowcolor, Brush Missingcolor, IDictionary<string, object> shapeAttributes, Dictionary<int, object> classAttrib, bool flagquintiles, int numclasses)
+        public void SetValues(string shapekey, string datakey, string val, string classes, Brush Highcolor, Brush Lowcolor, Brush Missingcolor, IDictionary<string, object> shapeAttributes, Dictionary<int, object> classAttrib, bool flagquintiles, int numclasses, byte opacity)
         {
             FillComboBoxes();
             if (shapeAttributes != null)
@@ -293,6 +301,7 @@ namespace EpiDashboard.Mapping
             cbxDataKey.Text = datakey;
             cbxValue.Text = val;
             grdMain.Width = 700;
+            Opacity = opacity;
         }
         
 

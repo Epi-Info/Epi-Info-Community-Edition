@@ -1179,5 +1179,14 @@ namespace EpiDashboard.Mapping
             //}
         }
 
+
+        private byte opacity;
+
+        public byte Opacity
+        {
+            get { return opacity; }
+            set { opacity = value; }
+        }
+
     }
 }

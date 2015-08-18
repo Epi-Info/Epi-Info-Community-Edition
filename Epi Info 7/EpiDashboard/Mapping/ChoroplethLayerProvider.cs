@@ -56,6 +56,15 @@ namespace EpiDashboard.Mapping
             set { _range = value; }
         }
 
+        private byte opacity;
+
+        public byte Opacity
+        {
+            get { return opacity; }
+            set { opacity = value; }
+        }
+
+
         private List<string> _ListLegendText;
 
         public List<string> ListLegendText
@@ -431,13 +440,14 @@ namespace EpiDashboard.Mapping
 
                         int brushIndex = GetRangeIndex(graphicValue, thematicItem.RangeStarts);
 
+
                         SimpleFillSymbol symbol = new SimpleFillSymbol()
                         {
                             Fill = graphicValue == Double.PositiveInfinity ? colors[colors.Count - 1] : colors[brushIndex],
                             BorderBrush = new SolidColorBrush(Colors.Black),
                             BorderThickness = 1
                         };
-
+                        
                         graphicFeature.Symbol = symbol;
 
                         TextBlock t = new TextBlock();

@@ -241,6 +241,42 @@
                         </Rectangle.ToolTip>
                     </Rectangle>
                 </StackPanel>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10">
+                    <TextBlock x:Name="tblockOpacity" Text="Set opacity" HorizontalAlignment="Left" Width="100" Height="20" />
+                    <Slider x:Name="sliderOpacity" Maximum="255" TickPlacement="BottomRight" TickFrequency="15.5" Minimum="100" Width="200" ValueChanged="Slider_ValueChanged" Value="177.5" />
+                    <TextBox x:Name="txtOpacity" IsEnabled="False"/>
+                    <!--<Border x:Name="brdSample" CornerRadius="10" 
+        BorderBrush="Black" 
+        BorderThickness="5"
+         >
+                        --><!--<TextBlock x:Name="tblockSample" Text="Sample Text" Background="Blue"/>--><!--
+                            <TextBlock Text="Sample Text">
+                                <TextBlock.Background>
+                                    <SolidColorBrush x:Name="brushSample" Color="blue" Opacity="0.5"/>
+                                </TextBlock.Background>
+                            </TextBlock>
+                    </Border>-->
+                    <!--<StackPanel x:Name="spSample">
+                        <StackPanel.Background>
+                            <DrawingBrush x:Name="brush" />
+                        </StackPanel.Background>
+                    <Image x:Name="imgSample" Source="..\Images\samplemap.png" Width="150" Height="150" Stretch="None" />
+                    </StackPanel>-->
+
+                    <Grid Width="150" Height="150">
+                        <Grid.Background>
+                            <!--<ImageBrush ImageSource="..\Images\samplemap.png" x:Name="brush"/>-->
+                            <VisualBrush>
+                                <VisualBrush.Visual>
+                                    <Grid >
+                                        <Image Source="..\Images\samplemap.png" Width="150" Height="150" />
+                                        <Rectangle Fill="Blue" x:Name="brush" Opacity="0.5"></Rectangle>
+                                    </Grid>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Grid.Background>
+                    </Grid>
+                </StackPanel>
                 <Button Click="ResetLegend_Click" HorizontalAlignment="Left" Width="134" Height="42" Margin="8,2,0,16">Reset Legend</Button>
                 <CheckBox x:Name="quintilesOption" Click="CheckBox_Quantiles_Click" HorizontalAlignment="Left" Width="134" Height="42" Margin="8,20,0,16">Quantiles</CheckBox>
 
