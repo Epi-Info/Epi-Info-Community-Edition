@@ -1585,6 +1585,7 @@
     <Resource Include="Images\copy.png" />
     <Content Include="ComponentArt.Win.DataVisualization.Charting.dll" />
     <Content Include="ComponentArt.Win.DataVisualization.Common.dll" />
+    <Resource Include="Images\samplemap.png" />
     <Content Include="DynamicDisplay\DynamicDataDisplay.dll" />
     <Resource Include="Images\casecluster.png" />
     <Resource Include="Images\choropleth.png" />
