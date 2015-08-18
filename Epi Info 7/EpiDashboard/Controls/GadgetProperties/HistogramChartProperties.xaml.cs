@@ -929,7 +929,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             txtStep.Text = Parameters.Step.ToString();
 
-            switch (Parameters.Interval)
+            switch (Parameters.Interval.ToLower())
             {
                 case "minute":
                     cmbInterval.SelectedIndex = 0;
@@ -956,7 +956,8 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             if (!string.IsNullOrEmpty(Convert.ToString(Parameters.StartDate)))
             {
-                txtStartValue.Text = Convert.ToString( Parameters.StartDate);
+                DateTime dt = Convert.ToDateTime(Parameters.StartDate);
+                txtStartValue.Text = dt.ToShortDateString();
                 //DateTime stDt = DateTime.Now;
                 //double stInt = -1;
                 //if (DateTime.TryParse(Convert.ToString(Parameters.StartDate), out stDt))
@@ -973,7 +974,8 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             if (!string.IsNullOrEmpty(Convert.ToString(Parameters.EndDate)))
             {
-                txtEndValue.Text = Convert.ToString(Parameters.EndDate);
+                DateTime dt = Convert.ToDateTime(Parameters.EndDate);
+                txtEndValue.Text = dt.ToShortDateString();
                 //DateTime edDt = DateTime.Now;
                 //double edInt = -1;
                 //if (DateTime.TryParse(Convert.ToString(Parameters.EndValue), out edDt))

@@ -526,7 +526,7 @@ namespace EpiDashboard.Gadgets.Charting
 
                     if (!String.IsNullOrEmpty(chtParameters.Interval))
                     {
-                        interval = chtParameters.Interval;
+                        interval = chtParameters.Interval.ToLower();//EI-479
                     }
 
                     switch (interval)
@@ -817,10 +817,10 @@ namespace EpiDashboard.Gadgets.Charting
                         ((HistogramChartParameters)Parameters).YAxisLabel = child.InnerText.Replace("&lt;", "<");
                         break;
                     case "xaxisstartvalue":
-                        ((HistogramChartParameters)Parameters).StartValue = child.InnerText;
+                        ((HistogramChartParameters)Parameters).StartDate = Convert.ToDateTime(child.InnerText);
                         break;
                     case "xaxisendvalue":
-                        ((HistogramChartParameters)Parameters).EndValue = child.InnerText;
+                        ((HistogramChartParameters)Parameters).EndDate = Convert.ToDateTime(child.InnerText);
                         break;
                     case "xaxisrotation":
                         switch (child.InnerText)
@@ -899,10 +899,30 @@ namespace EpiDashboard.Gadgets.Charting
                                 ((HistogramChartParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
                                 break;
                             case "startdate":
-                                ((HistogramChartParameters)Parameters).StartDate = Convert.ToDateTime(child.InnerText.Replace("&lt;", "<"));
+                            case "xaxisstartvalue":
+                                long ticks; 
+                                if ( long.TryParse(child.InnerText.Replace("&lt;", "<") , out ticks))
+                                {
+                                    ((HistogramChartParameters)Parameters).StartDate = new DateTime(ticks);
+                                }
+                                else
+                                {
+                                    ((HistogramChartParameters)Parameters).StartDate = Convert.ToDateTime(child.InnerText.Replace("&lt;", "<"));
+                                }
+                                
                                 break;
                             case "enddate":
-                                ((HistogramChartParameters)Parameters).EndDate = Convert.ToDateTime(child.InnerText.Replace("&lt;", "<"));
+                            case "xaxisendvalue":
+                                 long ticks2; 
+                                if ( long.TryParse(child.InnerText.Replace("&lt;", "<") , out ticks2))
+                                {
+                                    ((HistogramChartParameters)Parameters).EndDate = new DateTime(ticks2);
+                                }
+                                else
+                                {
+                                    ((HistogramChartParameters)Parameters).EndDate = Convert.ToDateTime(child.InnerText.Replace("&lt;", "<"));
+                                }
+                                //((HistogramChartParameters)Parameters).EndDate = new DateTime(Convert.ToInt64( child.InnerText.Replace("&lt;", "<")));
                                 break;
                             case "crosstabvariable":
                                 ((HistogramChartParameters)Parameters).CrosstabVariableName = child.InnerText.Replace("&lt;", "<");
@@ -1615,15 +1635,48 @@ namespace EpiDashboard.Gadgets.Charting
             legendFontSizeElement.InnerText = chtParameters.LegendFontSize.ToString();
             element.AppendChild(legendFontSizeElement);
 
-            //startdate 
-            XmlElement startDateElement = doc.CreateElement("startdate");
-            startDateElement.InnerText = chtParameters.StartDate.ToString();
-            element.AppendChild(startDateElement);
+            ////startdate 
+            //XmlElement startDateElement = doc.CreateElement("startdate");
+            //startDateElement.InnerText = chtParameters.StartDate.ToString();
+            //element.AppendChild(startDateElement);
 
-            //enddate 
-            XmlElement endDateElement = doc.CreateElement("enddate");
-            endDateElement.InnerText = chtParameters.EndDate.ToString();
-            element.AppendChild(endDateElement);
+            ////enddate 
+            //XmlElement endDateElement = doc.CreateElement("enddate");
+            //endDateElement.InnerText = chtParameters.EndDate.ToString();
+            //element.AppendChild(endDateElement);
+            if (!string.IsNullOrEmpty(chtParameters.EndDate.ToString()))
+            {
+                DateTime edDt = DateTime.Now;
+                if (DateTime.TryParse(chtParameters.EndDate.ToString(), out edDt))
+                {
+                    XmlElement endDateElement = doc.CreateElement("enddate");
+                    endDateElement.InnerText = edDt.Ticks.ToString();
+                    element.AppendChild(endDateElement);
+                }
+                else if (chtParameters.EndDate.ToString().ToUpper() == "SYSTEMDATE" || chtParameters.EndDate.ToString() == "SYSTEMDATE")
+                {
+                    XmlElement endDateElement = doc.CreateElement("SYSTEMDATE");
+                    endDateElement.InnerText = edDt.Ticks.ToString();
+                    element.AppendChild(endDateElement);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(chtParameters.StartDate.ToString()))
+            {
+                DateTime stDt = DateTime.Now;
+                if (DateTime.TryParse(chtParameters.StartDate.ToString(), out stDt))
+                {
+                    XmlElement stDateElement = doc.CreateElement("startdate");
+                    stDateElement.InnerText = stDt.Ticks.ToString();
+                    element.AppendChild(stDateElement);
+                }
+                else if (chtParameters.EndDate.ToString().ToUpper() == "SYSTEMDATE" || chtParameters.EndDate.ToString() == "SYSTEMDATE")
+                {
+                    XmlElement stDateElement = doc.CreateElement("SYSTEMDATE");
+                    stDateElement.InnerText = stDt.Ticks.ToString();
+                    element.AppendChild(stDateElement);
+                }
+            }
 
             //legendDock 
             XmlElement legendDockElement = doc.CreateElement("legendDock");
