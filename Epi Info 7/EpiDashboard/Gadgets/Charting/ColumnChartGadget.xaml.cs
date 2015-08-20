@@ -72,6 +72,7 @@ namespace EpiDashboard.Gadgets.Charting
                 StrataGridList = new List<Grid>();
                 StrataExpanderList = new List<Expander>();
 
+                //mnuClone.Click += new RoutedEventHandler(mnuClone_Click);
                 mnuCopy.Click += new RoutedEventHandler(mnuCopy_Click);
                 mnuSendDataToHTML.Click += new RoutedEventHandler(mnuSendDataToHTML_Click);
 

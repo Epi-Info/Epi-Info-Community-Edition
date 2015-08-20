@@ -23,6 +23,7 @@
         <Border Name="borderAll" Style="{DynamicResource mainGadgetBorder}" Background="White" >
             <Border.ContextMenu>
                 <ContextMenu x:Name="gadgetContextMenu">
+                    <!--<MenuItem x:Name="mnuClone" Header="Clone Chart"/>-->
                     <MenuItem x:Name="mnuCopy" Header="Copy all chart data to clipboard"/>
                     <MenuItem x:Name="mnuSendDataToHTML" Header="Send to web browser" />
                     <Separator x:Name="separatorCurrentChart" />
