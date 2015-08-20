@@ -24,7 +24,7 @@ using EpiDashboard.Controls;
 using EpiDashboard.Gadgets.Reporting;
 
 
-namespace EpiDashboard
+namespace EpiDashboard 
 {
     public delegate void NotificationButtonHandler();
 
@@ -1947,7 +1947,43 @@ namespace EpiDashboard
                 GadgetMenuItem gadgetMenuItem = sender as GadgetMenuItem;
                 if (gadgetMenuItem != null)
                 {
-                    string gadgetType = gadgetMenuItem.GadgetType;
+                    CreateGadget(gadgetMenuItem.GadgetType);
+                }
+            }
+        }
+
+        internal void CreateClone(Object control)
+        {
+            UserControl gadget = (UserControl)control;
+
+            Type typeFactory = Type.GetType(gadget.GetType().ToString());
+
+            if (typeFactory == null)
+            {
+                typeFactory = GetGadgetType(gadget.GetType().ToString());
+            }
+
+            UserControl newgadget = null;
+            // If StatCalc, create without Dashboard Helper since data source is not needed for calculators
+            if (typeFactory.ToString().Contains("Gadgets.StatCalc"))
+            {
+                newgadget = Activator.CreateInstance(typeFactory) as UserControl;
+            }
+            else
+            {
+                newgadget = Activator.CreateInstance(typeFactory, DashboardHelper) as UserControl;
+            }
+
+            ((GadgetBase)newgadget).CopyGadgetParameters(gadget);
+
+            AddGadgetToCanvasFromContextMenu(newgadget);
+
+            ((GadgetBase)newgadget).RefreshResults();
+        }
+
+        internal void CreateGadget(string gadgetType)
+        {
+            //string gadgetType = gadgetMenuItem.GadgetType;
             Type typeFactory = Type.GetType(gadgetType);
 
             if (typeFactory == null)
@@ -1981,8 +2017,6 @@ namespace EpiDashboard
             catch (Exception ex)
             {
                 throw new ApplicationException("Cannot create instance of dbFactory" + ex.StackTrace);
-                    }
-                }
             }
         }
 

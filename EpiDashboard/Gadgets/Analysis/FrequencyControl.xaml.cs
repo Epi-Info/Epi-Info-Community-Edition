@@ -668,7 +668,7 @@ namespace EpiDashboard
             StrataExpanderList = new List<Expander>();
             //checkboxUsePrompts.Checked += new RoutedEventHandler(checkboxUsePrompts_Checked);
             //checkboxUsePrompts.Unchecked += new RoutedEventHandler(checkboxUsePrompts_Unchecked);
-
+           // mnuClone.Click += new RoutedEventHandler(mnuClone_Click);
             mnuCopy.Click += new RoutedEventHandler(mnuCopy_Click);
             mnuSendDataToHTML.Click += new RoutedEventHandler(mnuSendDataToHTML_Click);
 
@@ -1032,6 +1032,7 @@ namespace EpiDashboard
             Popup.Content = properties;
             Popup.Show();
         }
+
 
         /// <summary>
         /// Accepts changes to the Properties panel and refreshes the results.

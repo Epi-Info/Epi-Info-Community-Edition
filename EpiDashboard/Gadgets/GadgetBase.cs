@@ -253,6 +253,11 @@ namespace EpiDashboard
         public virtual string ToHTML(string htmlFileName = "", int count = 0) { return string.Empty; }
         public virtual void UpdateVariableNames() { }
 
+        public virtual void CopyGadgetParameters(UserControl Gadget) 
+        {
+            this.Parameters = ((GadgetBase)Gadget).Parameters;
+        }
+
         public virtual void CollapseOutput() 
         {
             object element = this.FindName("panelMain");
@@ -1206,6 +1211,19 @@ namespace EpiDashboard
         protected void mnuCopy_Click(object sender, RoutedEventArgs e)
         {
             CopyToClipboard();
+        }
+
+        /// <summary>
+        /// Handles the click event for the 'Clone Gadget' context menu option
+        /// </summary>
+        /// <param name="sender">Object that fired the event</param>
+        /// <param name="e">.NET supplied event parameters</param>
+        protected void mnuClone_Click(object sender, RoutedEventArgs e)
+        {
+            GadgetBase gadget = (GadgetBase)this.MemberwiseClone();
+            gadget.UniqueIdentifier = Guid.NewGuid();
+
+            ((((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid).Parent as DashboardControl).CreateClone(gadget);
         }
 
         /// <summary>

@@ -16,6 +16,7 @@
         <Border Name="borderAll" Style="{DynamicResource mainGadgetBorder}"  >
             <Border.ContextMenu>
                 <ContextMenu x:Name="gadgetContextMenu">
+                    <!--<MenuItem x:Name="mnuClone" Header="Clone gadget"/>-->
                     <MenuItem x:Name="mnuCopy" Header="Copy data to clipboard"/>
                     <MenuItem x:Name="mnuSendDataToHTML" Header="Send data to web browser">
                         <MenuItem.Icon>
