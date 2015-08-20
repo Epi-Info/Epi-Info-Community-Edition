@@ -134,12 +134,13 @@
                                     <Label x:Name="tblockMaxWidth" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max width:__xfe" Margin="0,0,0,0"  />
                                     <TextBox x:Name="txtMaxWidth" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="800" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown" TextChanged="txtWidth_TextChanged"></TextBox>
                                 </StackPanel>
-                                <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                                
                                 <StackPanel>
                                     <Label x:Name="tblockMaxHeight" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max height:__xfe" Margin="0,0,0,0"  />
                                     <TextBox x:Name="txtMaxHeight" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="500" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"  TextChanged="txtHeight_TextChanged"></TextBox>
-
-                                    <Label x:Name="tblockMaxVarNameLength" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max variable name length:__xfe" Margin="0,0,0,0" Visibility="Collapsed" />
+                                </StackPanel>
+                                <StackPanel>
+                                <Label x:Name="tblockMaxVarNameLength" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max variable name length:__xfe" Margin="0,0,0,0" Visibility="Collapsed" />
                                     <TextBox x:Name="txtMaxVarNameLength" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="24"  PreviewTextInput="txtMaxVarNameLength_PreviewTextInput" Visibility="Collapsed"></TextBox>
 
                                     <Label x:Name="tblockMaxRows" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max rows to display:__xfe" Margin="0,0,0,0" />

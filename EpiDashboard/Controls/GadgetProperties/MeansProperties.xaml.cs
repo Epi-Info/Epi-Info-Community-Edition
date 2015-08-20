@@ -103,6 +103,46 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as MeansControl).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
+
+
+
+            #region Translation
+
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_MEANS;
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_MEANS;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            tblockWeight.Content = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
+            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockPrecision.Text = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockMeansOf.Content = DashboardSharedStrings.GADGET_MEANS_VARIABLE;
+            tblockCrossTabulateBy.Content = DashboardSharedStrings.GADGET_CROSSTAB_VARIABLE;
+            tblockStratifyBy.Content = DashboardSharedStrings.GADGET_STRATA_VARIABLE;
+            checkboxShowANOVA.Content = DashboardSharedStrings.GADGET_DISPLAY_ANOVA;
+            checkboxShowObservations.Content = DashboardSharedStrings.GADGET_OBSERVATIONS;
+            checkboxShowTotal.Content = DashboardSharedStrings.GADGET_TOTAL;
+            checkboxShowMean.Content = DashboardSharedStrings.GADGET_MEANS;
+            checkboxShowVariance.Content = DashboardSharedStrings.GADGET_VARIANCE;
+            checkboxShowStdDev.Content = DashboardSharedStrings.GADGET_STANDARD_DEVIATION;
+            checkboxShowMin.Content = DashboardSharedStrings.GADGET_MINIMUM;
+            checkboxShowQ1.Content = DashboardSharedStrings.GADGET_SHOWQ1;
+            checkboxShowMedian.Content = DashboardSharedStrings.GADGET_MEDIAN;
+            checkboxShowQ3.Content = DashboardSharedStrings.GADGET_SHOWQ3;
+            checkboxShowMax.Content = DashboardSharedStrings.GADGET_MAXIMUM;
+            checkboxShowMode.Content = DashboardSharedStrings.GADGET_MODE;
+            tblockOutputColumns.Content = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
+
+
+            #endregion // Translation
         }
 
         public bool HasSelectedFields

@@ -75,6 +75,66 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as LogisticRegressionControl).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
+
+
+
+            #region Translation
+
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_LOGISTIC_REGRESSION;
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_LOGISTIC_REGRESSION;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockOutcomeVariable.Content = DashboardSharedStrings.GADGET_OUTCOME_VARIABLE;
+            tblockWeightVariable.Content = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
+            checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
+            tblockPanelSorting.Content = DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
+            tblockGroupingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_GROUPING;
+            tblockSortingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_SORTING;
+            tblockSortMethod.Content = DashboardSharedStrings.GADGET_SORT_METHOD;
+            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
+            checkboxListLabels.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            checkboxShowANOVA.Content = DashboardSharedStrings.GADGET_DISPLAY_ANOVA;
+            tblockGroupby.Content = DashboardSharedStrings.GADGET_GROUP_BY;
+            tblockSubGroupBy.Content = DashboardSharedStrings.GADGET_SUBGROUP_BY;
+            tblockAvailableVariables.Content = DashboardSharedStrings.GADGET_AVAILABLE_VARIABLES;
+            tblockSortOrder.Content = DashboardSharedStrings.GADGET_SORT_ORDER;
+            checkboxLineColumn.Content = DashboardSharedStrings.GADGET_SHOW_LINE_COLUMN;
+            checkboxColumnHeaders.Content = DashboardSharedStrings.GADGET_SHOW_COLUMN_HEADINGS;
+            checkboxShowNulls.Content = DashboardSharedStrings.GADGET_SHOW_MISSING_REP;
+            tblockPrecision.Text = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
+            tblockOutputColumns.Text = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
+            btnMakeDummy.Content = DashboardSharedStrings.GADGET_MAKE_DUMMY;
+            btnClearInteractionTerms.Content = DashboardSharedStrings.GADGET_CLEAR_TERMS;
+            tblockConfidenceLimits.Content = DashboardSharedStrings.GADGET_CONFIDENCE_LIMITS;
+            tblockDummyVariables.Text = DashboardSharedStrings.GADGET_DUMMY_VARIABLES;
+            tblockInteractionTerms.Text = DashboardSharedStrings.GADGET_INTERACTION_TERMS;
+            checkboxNoIntercept.Content = DashboardSharedStrings.GADGET_NO_INTERCEPT;
+            tblockIndependentVariables.Content = DashboardSharedStrings.GADGET_INDEPENDENT_VARIABLES;
+            tblockMatchVariable.Content = DashboardSharedStrings.GADGET_MATCH_VARIABLE;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            #endregion // Translation
         }
 
         public bool HasSelectedFields
