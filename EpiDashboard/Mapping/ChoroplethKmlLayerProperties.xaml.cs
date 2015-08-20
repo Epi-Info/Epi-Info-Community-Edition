@@ -119,7 +119,8 @@ namespace EpiDashboard.Mapping
                         rctLowColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
                     }
                 }
-                RenderMap();
+              //  RenderMap();
+                GenerateMap();
             }
         }
 
@@ -182,6 +183,7 @@ namespace EpiDashboard.Mapping
             {
               // provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), ((SolidColorBrush)rctLowColor.Fill).Color, ((SolidColorBrush)rctHighColor.Fill).Color, int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()),"" );
                 provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), new List<SolidColorBrush>() { (SolidColorBrush)rctHighColor.Fill }, int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()), "");             
+            
                 if (MapGenerated != null)
                 {
                     MapGenerated(this, new EventArgs());
@@ -347,6 +349,31 @@ namespace EpiDashboard.Mapping
             }
         }
 
+
+        private void GenerateMap()
+        {
+            EpiDashboard.Controls.ChoroplethProperties choroplethprop = new Controls.ChoroplethProperties(this.mapControl as StandaloneMapControl, this.myMap);
+             choroplethprop.txtProjectPath.Text = dashboardHelper.Database.DataSource;
+            choroplethprop.SetDashboardHelper(dashboardHelper);
+            choroplethprop.radKML.IsChecked = true;
+            choroplethprop.txtShapePath.Text = shapeFilePath;
+            choroplethprop.cmbClasses.Text = cbxClasses.Text;
+            foreach (string str in cbxShapeKey.Items) { choroplethprop.cmbShapeKey.Items.Add(str); }
+            foreach (string str in cbxDataKey.Items) { choroplethprop.cmbDataKey.Items.Add(str); }
+            foreach (string str in cbxValue.Items) { choroplethprop.cmbValue.Items.Add(str); }
+            choroplethprop.cmbShapeKey.SelectedItem = cbxShapeKey.Text;
+            choroplethprop.cmbDataKey.SelectedItem = cbxDataKey.Text;
+            choroplethprop.cmbValue.SelectedItem = cbxValue.Text;
+            choroplethprop.rctHighColor.Fill = rctHighColor.Fill;
+            choroplethprop.rctLowColor.Fill = rctLowColor.Fill;
+            choroplethprop.rctMissingColor.Fill = rctMissingColor.Fill;
+            choroplethprop.choroKMLprovider = provider;
+            choroplethprop.SetDefaultRanges();
+            choroplethprop.GetRangeValues(provider.RangeCount);
+            provider.ListLegendText = choroplethprop.ListLegendText;
+            choroplethprop.RenderMap();
+
+        }
         #endregion
     }
 }
