@@ -55,7 +55,7 @@ namespace EpiDashboard.Mapping
             cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxClasses.SelectionChanged +=new SelectionChangedEventHandler(keys_SelectionChanged);
             rctHighColor.MouseUp += new MouseButtonEventHandler(rctHighColor_MouseUp);
-            rctLowColor.MouseUp += new MouseButtonEventHandler(rctLowColor_MouseUp);
+            rctLowColor.MouseUp += new MouseButtonEventHandler(rctLowColor_MouseUp); 
             rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
             rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
         }
@@ -116,8 +116,9 @@ namespace EpiDashboard.Mapping
         {
             if (cbxDataKey.SelectedIndex != -1 && cbxShapeKey.SelectedIndex != -1 && cbxValue.SelectedIndex != -1)
             {
-                provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), new List<SolidColorBrush>() { (SolidColorBrush)rctHighColor.Fill }, int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()),"");
+               provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), new List<SolidColorBrush>() { (SolidColorBrush)rctHighColor.Fill }, int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()),"");
 
+               
                 if (MapGenerated != null)
                 {
                     MapGenerated(this, new EventArgs());
@@ -296,6 +297,7 @@ namespace EpiDashboard.Mapping
                         {
                             shapeFilePath = shapeFileProperties[0].ToString();
                             IDictionary<string, object> shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
+                           
                             if (shapeAttributes != null)
                             {
                                 cbxShapeKey.Items.Clear();
@@ -336,9 +338,38 @@ namespace EpiDashboard.Mapping
                     rctMissingColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
                 }
             }
-            RenderMap();
+            GenerateMap();
+           //RenderMap();
         }
 
+        private void GenerateMap()
+        {
+            
+            EpiDashboard.Controls.ChoroplethProperties choroplethprop = new Controls.ChoroplethProperties(this.mapControl as StandaloneMapControl, this.myMap);
+                                  
+            choroplethprop.txtShapePath.Text = shapeFilePath;
+            choroplethprop.txtProjectPath.Text = dashboardHelper.Database.DataSource;
+            choroplethprop.SetDashboardHelper(dashboardHelper);
+            choroplethprop.cmbClasses.Text = cbxClasses.Text;
+            foreach (string str in cbxShapeKey.Items) { choroplethprop.cmbShapeKey.Items.Add(str); }
+            foreach (string str in cbxDataKey.Items) { choroplethprop.cmbDataKey.Items.Add(str); }
+            foreach (string str in cbxValue.Items) { choroplethprop.cmbValue.Items.Add(str); }
+            choroplethprop.cmbShapeKey.SelectedItem = cbxShapeKey.Text;
+            choroplethprop.cmbDataKey.SelectedItem = cbxDataKey.Text;
+            choroplethprop.cmbValue.SelectedItem = cbxValue.Text;
+            choroplethprop.rctHighColor.Fill = rctHighColor.Fill;
+            choroplethprop.rctLowColor.Fill = rctLowColor.Fill;
+            choroplethprop.rctMissingColor.Fill = rctMissingColor.Fill;
+            choroplethprop.radShapeFile.IsChecked = true;
+            choroplethprop._provider = provider;
+            choroplethprop.SetDefaultRanges();
+            choroplethprop.GetRangeValues(provider.RangeCount);
+            provider.ListLegendText = choroplethprop.ListLegendText;
+            choroplethprop.RenderMap();
+          }
         #endregion
+       
     }
+
+  
 }
