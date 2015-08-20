@@ -163,7 +163,29 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             #region Translation
 
-            //lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_FREQUENCY;
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_MPC_CONTROL;
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_EXPOSURE_OUTCOME;
+            tbtnValueMapping.Title = DashboardSharedStrings.GADGET_TABBUTTON_DEFINE_VALMAPPING;
+            tbtnValueMapping.Description = DashboardSharedStrings.GADGET_SPECIFY_EXPOSURE_OUTCOME;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockPanelValueMapping.Content = DashboardSharedStrings.GADGET_VALUE_MAPPING;
+            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockExposureField.Text = DashboardSharedStrings.GADGET_EXPOSURE_VARIABLE;
+            tblockOutcomeField.Text = DashboardSharedStrings.GADGET_CASE_CONTROL;
+            tblockStrataVariable.Text = DashboardSharedStrings.GADGET_PAIR_GROUP_ID;
+            tblockAllValues.Text = DashboardSharedStrings.GADGET_ALL_VALUES;
+            tblockYesValues.Text = DashboardSharedStrings.GADGET_YES_VALUES;
+            tblockNoValues.Text = DashboardSharedStrings.GADGET_NO_VALUES;
+            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
             ////expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
             ////expanderDisplayOptions.Header = DashboardSharedStrings.GADGET_DISPLAY_OPTIONS;
             //tblockMainVariable.Text = DashboardSharedStrings.GADGET_FREQUENCY_VARIABLE;

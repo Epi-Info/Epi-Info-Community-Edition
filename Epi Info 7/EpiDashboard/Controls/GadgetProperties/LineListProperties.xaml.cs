@@ -134,6 +134,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxShowNulls.Content = DashboardSharedStrings.GADGET_SHOW_MISSING_REP;
             tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
             checkboxListLabels.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
+            tblockMaxWidth.Content = DashboardSharedStrings.GADGET_MAX_WIDTH;
+            tblockMaxHeight.Content = DashboardSharedStrings.GADGET_MAX_HEIGHT;
+
 
             #endregion // Translation
         }

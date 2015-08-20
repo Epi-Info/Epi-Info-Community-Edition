@@ -159,6 +159,31 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as ComplexSampleTablesControl).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
+
+
+            #region Translation
+
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_COMPLEX_TABLES;
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_COMPLEX_TABLES;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockWeightVariable.Text = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
+            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockStrataVariable.Text = DashboardSharedStrings.GADGET_STRATA_VARIABLE;
+            tblockPSU.Text = DashboardSharedStrings.GADGET_PSU;
+            tblockOutcomeField.Text = DashboardSharedStrings.GADGET_OUTCOME_VARIABLE;
+            tblockExposureField.Text = DashboardSharedStrings.GADGET_EXPOSURE_VARIABLE;
+            #endregion // Translation
+
         }
 
         public bool HasSelectedFields

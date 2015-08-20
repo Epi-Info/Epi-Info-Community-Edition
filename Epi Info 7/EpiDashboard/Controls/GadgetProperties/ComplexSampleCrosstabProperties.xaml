@@ -27,14 +27,14 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10" xml:space="preserve">Complex Sample&#10;Tables</Label>
+            <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10" xml:space="preserve">Complex Sample&#10;Tables__xfe</Label>
 
-            <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables" Description="Select the columns for exposure and outcome." IsChecked="True" Checked="tbtnVariables_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnValueMapping" Title="2x2 Value Mapping" Description="Specify the values for Exposure and Outcome as Yes or No." IsChecked="False" Checked="tbtnValueMapping_Checked" Visibility="Collapsed"/>
+            <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables__xfe" Description="Select the columns for exposure and outcome." IsChecked="True" Checked="tbtnVariables_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnValueMapping" Title="2x2 Value Mapping__xfe" Description="Specify the values for Exposure and Outcome as Yes or No." IsChecked="False" Checked="tbtnValueMapping_Checked" Visibility="Collapsed"/>
             <!--<Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Sorting and Grouping" Description="Set a sort order and create list groups." IsChecked="False" Checked="tbtnSorting_Checked"/>-->
-            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnDisplayColors" Title="Colors and Styles" Description="Set cell shading and color gradient." IsChecked="False" Checked="tbtnDisplayColors_Checked" Visibility="Collapsed"/>
-            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display__xfe" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnDisplayColors" Title="Colors and Styles__xfe" Description="Set cell shading and color gradient." IsChecked="False" Checked="tbtnDisplayColors_Checked" Visibility="Collapsed"/>
+            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters__xfe" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
 
         </StackPanel>
 
@@ -42,14 +42,14 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
-                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+                <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables__xfe</Label>
             </StackPanel>
 
             <StackPanel DockPanel.Dock="Bottom">
-                <TextBlock x:Name="tblockExposureField" HorizontalAlignment="Left" TextAlignment="Center" Text="Exposure:" Margin="0,5,0,0"  />
+                <TextBlock x:Name="tblockExposureField" HorizontalAlignment="Left" TextAlignment="Center" Text="Exposure:__xfe" Margin="0,5,0,0"  />
                 <ComboBox x:Name="cbxExposureField" Width="216" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxExposureField_SelectionChanged" />
                 <StackPanel Height="12" />
-                <TextBlock x:Name="tblockOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Outcome:" Margin="0,5,0,0"  />
+                <TextBlock x:Name="tblockOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Outcome:__xfe" Margin="0,5,0,0"  />
                 <ComboBox x:Name="cbxOutcomeField" Width="216" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxOutcomeField_SelectionChanged" />
 
                 <!--<TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
@@ -57,16 +57,16 @@
 
                 <StackPanel Height="12" />
 
-                <TextBlock x:Name="tblockWeightVariable">Weight:</TextBlock>
+                <TextBlock x:Name="tblockWeightVariable">Weight:__xfe</TextBlock>
                 <ComboBox x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
 
                 <StackPanel Height="12" />
-                <TextBlock x:Name="tblockStrataVariable">Stratify by:</TextBlock>
+                <TextBlock x:Name="tblockStrataVariable">Stratify by:__xfe</TextBlock>
                 <ComboBox x:Name="cbxFieldStrata" Width="216" HorizontalAlignment="Left" Height="28" />
 
                 <StackPanel Height="12" />
 
-                <TextBlock x:Name="tblockPSU">PSU:</TextBlock>
+                <TextBlock x:Name="tblockPSU">PSU:__xfe</TextBlock>
                 <ComboBox x:Name="cbxFieldPSU" Width="216" HorizontalAlignment="Left" Height="28" />
             </StackPanel>
         </DockPanel>
@@ -76,7 +76,7 @@
 
         <DockPanel x:Name="panelValueMapping" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Value Mapping</Label>
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Value Mapping__xfe</Label>
             </StackPanel>
 
             <StackPanel DockPanel.Dock="Bottom">
@@ -98,7 +98,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Column = "0" Grid.RowSpan="7" >
-                        <TextBlock x:Name="tblockAllValues">All values:</TextBlock>
+                        <TextBlock x:Name="tblockAllValues">All values:__xfe</TextBlock>
                         <ScrollViewer x:Name="scrollViewerValueMapping" VerticalAlignment="Stretch" MinHeight="425" MinWidth="150">
                             <StackPanel>
                                 <ListBox SelectionMode="Multiple" Name="lbxAllValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="425" />
@@ -115,9 +115,9 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column = "3" Grid.Row="0" Grid.RowSpan="7">
-                        <TextBlock x:Name="tblockYesValues" Margin="0,0,0,0">Yes values:</TextBlock>
+                        <TextBlock x:Name="tblockYesValues" Margin="0,0,0,0">Yes values:__xfe</TextBlock>
                         <ListBox SelectionMode="Multiple" Name="lbxYesValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200" MinWidth="150"/>
-                        <TextBlock x:Name="tblockNoValues" Margin="0,8,0,0">No values:</TextBlock>
+                        <TextBlock x:Name="tblockNoValues" Margin="0,8,0,0">No values:__xfe</TextBlock>
                         <ListBox SelectionMode="Multiple" Name="lbxNoValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200"/>
                     </StackPanel>
                 </Grid>
@@ -128,19 +128,19 @@
 
         <DockPanel x:Name="panelDisplay" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+                <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
             </StackPanel>
 
             <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerProperties">
                 <StackPanel>
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 5">Title and Description</Label>
+                    <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 5">Title and Description__xfe</Label>
                     <StackPanel Orientation="Vertical">
                         <StackPanel>
-                            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
+                            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:__xfe" />
                             <TextBox x:Name="txtTitle" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
                         </StackPanel>
                         <StackPanel Margin="0 10 0 0">
-                            <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:" />
+                            <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:__xfe" />
                             <TextBox x:Name="txtDesc" Style="{StaticResource PropertiesGadgetDescription}" TextWrapping="Wrap" AcceptsReturn="True" HorizontalAlignment="Left"></TextBox>
                         </StackPanel>
                     </StackPanel>
@@ -152,58 +152,58 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <DockPanel x:Name="panelDisplayColors" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors and Styles</Label>
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors and Styles__xfe</Label>
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom">
-                <CheckBox x:Name="checkboxConditionalShading" Margin="0,5,0,0" Content="Conditional cell shading"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="False" />
+                <CheckBox x:Name="checkboxConditionalShading" Margin="0,5,0,0" Content="Conditional cell shading__xfe"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="False" />
                 <StackPanel Orientation="Horizontal" Margin="0,4,0,4" x:Name="panelHeatMap1">
-                    <TextBlock x:Name="tblockColorGradient" VerticalAlignment="Center" Margin="0,12,4,0">Color Gradient:</TextBlock>
+                    <TextBlock x:Name="tblockColorGradient" VerticalAlignment="Center" Margin="0,12,4,0">Color Gradient:__xfe</TextBlock>
                     <Rectangle VerticalAlignment="Bottom" x:Name="rctLowColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" MouseUp="rctLowColor_MouseUp" >
                         <Rectangle.ToolTip>
-                            <Label Content="Low value color"/>
+                            <Label Content="Low value color__xfe"/>
                         </Rectangle.ToolTip>
                     </Rectangle>
                     <Rectangle VerticalAlignment="Bottom" x:Name="rctHighColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#FFFC5A54" MouseUp="rctHighColor_MouseUp">
                         <Rectangle.ToolTip>
-                            <Label Content="High value color"/>
+                            <Label Content="High value color__xfe"/>
                         </Rectangle.ToolTip>
                     </Rectangle>
                 </StackPanel>
 
                 <StackPanel x:Name="panelHeatMap2">
 
-                    <TextBlock x:Name="tblockBreakType" HorizontalAlignment="Left" TextAlignment="Center" Text="Break type:" Margin="0,12,0,0"  />
+                    <TextBlock x:Name="tblockBreakType" HorizontalAlignment="Left" TextAlignment="Center" Text="Break type:__xfe" Margin="0,12,0,0"  />
                     <ComboBox x:Name="cmbBreakType" Width="216" HorizontalAlignment="Left" SelectedIndex="0" Margin="0,5,0,5" SelectionChanged="cmbBreakType_SelectionChanged">
-                        <ComboBoxItem>Percent of total</ComboBoxItem>
+                        <ComboBoxItem>Percent of total__xfe</ComboBoxItem>
                         <ComboBoxItem>Count</ComboBoxItem>
                     </ComboBox>
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="tblockBreak1" VerticalAlignment="Center" Margin="0,12,4,0">Break 1:</TextBlock>
+                        <TextBlock x:Name="tblockBreak1" VerticalAlignment="Center" Margin="0,12,4,0">Break 1:__xfe</TextBlock>
                         <TextBox x:Name="txtPct1" Width="32" Margin="0,12,4,0">0</TextBox>
                         <TextBlock x:Name="tblockPct1" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="tblockBreak2" VerticalAlignment="Center" Margin="0,12,4,0">Break 2:</TextBlock>
+                        <TextBlock x:Name="tblockBreak2" VerticalAlignment="Center" Margin="0,12,4,0">Break 2:__xfe</TextBlock>
                         <TextBox x:Name="txtPct2" Width="32" Margin="0,12,4,0">20</TextBox>
                         <TextBlock x:Name="tblockPct2" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="tblockBreak3" VerticalAlignment="Center" Margin="0,12,4,0">Break 3:</TextBlock>
+                        <TextBlock x:Name="tblockBreak3" VerticalAlignment="Center" Margin="0,12,4,0">Break 3:__xfe</TextBlock>
                         <TextBox x:Name="txtPct3" Width="32" Margin="0,12,4,0">40</TextBox>
                         <TextBlock x:Name="tblockPct3" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="tblockBreak4" VerticalAlignment="Center" Margin="0,12,4,0">Break 4:</TextBlock>
+                        <TextBlock x:Name="tblockBreak4" VerticalAlignment="Center" Margin="0,12,4,0">Break 4:__xfe</TextBlock>
                         <TextBox x:Name="txtPct4" Width="32" Margin="0,12,4,0">60</TextBox>
                         <TextBlock x:Name="tblockPct4" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="tblockBreak5" VerticalAlignment="Center" Margin="0,12,4,0">Break 5:</TextBlock>
+                        <TextBlock x:Name="tblockBreak5" VerticalAlignment="Center" Margin="0,12,4,0">Break 5:__xfe</TextBlock>
                         <TextBox x:Name="txtPct5" Width="32" Margin="0,12,4,0">80</TextBox>
                         <TextBlock x:Name="tblockPct5" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                     </StackPanel>
@@ -212,8 +212,8 @@
         </DockPanel>
 
         <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
-            <Label>Note: Any filters set here are applied to this gadget only.</Label>
+            <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
+            <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
         </StackPanel>
 
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />

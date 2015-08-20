@@ -90,6 +90,38 @@ namespace EpiDashboard
                 }
                 config = Configuration.GetNewInstance();
             }
+
+            #region Translation
+
+            tblockValueFieldName.Text = DashboardSharedStrings.GADGET_VALUE_FIELD_NAME;
+            tblockOperator.Text = DashboardSharedStrings.GADGET_OPERATOR;
+            txtValue.Text = DashboardSharedStrings.GADGET_VALUE_TEXT;
+            txtLoValue.Text = DashboardSharedStrings.GADGET_LOW_VALUE;
+            txtHiValue.Text = DashboardSharedStrings.GADGET_HIGH_VALUE;
+            tblockAddThisCondition.Content = DashboardSharedStrings.GADGET_ADD_CONDITION;
+            mnuAddWithAnd.Header = DashboardSharedStrings.GADGET_ADD_CONDITION_AND;
+            mnuAddWithOr.Header = DashboardSharedStrings.GADGET_ADD_CONDITION_OR;
+            tblockDataFilterListHeading.Text = DashboardSharedStrings.GADGET_DATAFILTER;
+            tblockRemoveSelected.Content = DashboardSharedStrings.GADGET_REMOVE_SELECTED;
+            tblockClearAllConditions.Content = DashboardSharedStrings.GADGET_CLEAR_ALL_CONDITIONS;
+            tblockAdvancedMode.Content = DashboardSharedStrings.GADGET_ADVANCED_MODE;
+            tblockAdvanceFilterMode.Text = DashboardSharedStrings.GADGET_ADVANCED_FILTER_MODE;
+            txtDesiredDataFilter.Text = DashboardSharedStrings.GADGET_DESIRED_DATA_FILTER;
+            txtNumericData.Text = DashboardSharedStrings.GADGET_NUMERIC_DATA;
+            txtTextData.Text = DashboardSharedStrings.GADGET_TEXT_DATA;
+            txtBooleanData.Text = DashboardSharedStrings.GADGET_BOOLEAN_DATA;
+            btnApplyAdvancedFilter.Content = DashboardSharedStrings.GADGET_APPLY_ADVANCED_FILTER;
+            btnGuidedMode.Content = DashboardSharedStrings.GADGET_GUIDED_MODE;
+
+
+
+
+
+
+
+
+            #endregion // Translation
+
         }
         #endregion // Constructors
 

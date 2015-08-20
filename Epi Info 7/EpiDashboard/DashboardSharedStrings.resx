@@ -411,7 +411,7 @@ Denominator = {0}</value>
     <value>Combined Frequency Properties</value>
   </data>
   <data name="GADGET_CONFIG_TITLE_MEANS" xml:space="preserve">
-    <value>Means Properties</value>
+    <value>Means</value>
   </data>
   <data name="GADGET_CONFIG_TITLE_MXN" xml:space="preserve">
     <value>Crosstabulation Properties</value>
@@ -463,7 +463,7 @@ Denominator = {0}</value>
     <value>Exposure:</value>
   </data>
   <data name="GADGET_OUTCOME_VARIABLE" xml:space="preserve">
-    <value>Outcome:</value>
+    <value>Outcome variable:</value>
   </data>
   <data name="GADGET_CROSSTAB_VARIABLE" xml:space="preserve">
     <value>Cross-tabulate by:</value>
@@ -912,13 +912,13 @@ of records or select fewer fields for the group.</value>
     <value>Gadget Description</value>
   </data>
   <data name="GADGET_DISPLAY_LIST_LABELS" xml:space="preserve">
-    <value>Display List Labels</value>
+    <value>Display list Labels</value>
   </data>
   <data name="GADGET_DISPLAY_LIST_VALUE" xml:space="preserve">
     <value>Display all list values</value>
   </data>
   <data name="GADGET_DRAW_BORDERS" xml:space="preserve">
-    <value>Draw Borders</value>
+    <value>Draw borders</value>
   </data>
   <data name="GADGET_DRAW_HEADER_ROW" xml:space="preserve">
     <value>Draw header row</value>
@@ -1090,5 +1090,425 @@ of records or select fewer fields for the group.</value>
   </data>
   <data name="GADGET_TABBUTTON_DEFINE_VALMAPPING" xml:space="preserve">
     <value>Define Value Mappings</value>
+  </data>
+  <data name="GADGET_ADDITIONAL_FIELDS_DISPLAY" xml:space="preserve">
+    <value>Additional fields to display:</value>
+  </data>
+  <data name="GADGET_BARTYPE" xml:space="preserve">
+    <value>Bar type:</value>
+  </data>
+  <data name="GADGET_CHART_SUBTITLE" xml:space="preserve">
+    <value>Chart subtitle:</value>
+  </data>
+  <data name="GADGET_CHART_TITLE" xml:space="preserve">
+    <value>Chart title:</value>
+  </data>
+  <data name="GADGET_COLOR_PALETTE" xml:space="preserve">
+    <value>Color palette:</value>
+  </data>
+  <data name="GADGET_COMPOSITION" xml:space="preserve">
+    <value>Composition:</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_COLUMNCHART" xml:space="preserve">
+    <value>Column Chart</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_DUPLICATELIST" xml:space="preserve">
+    <value>Duplicate List</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_LINECHART" xml:space="preserve">
+    <value>Line Chart</value>
+  </data>
+  <data name="GADGET_DIFFERENT_BAR_COLORS" xml:space="preserve">
+    <value>Different bar colors</value>
+  </data>
+  <data name="GADGET_KEY_DUPCHECKING" xml:space="preserve">
+    <value>Key fields for duplicate checking:</value>
+  </data>
+  <data name="GADGET_LEGEND_FONTSIZE" xml:space="preserve">
+    <value>Legend font size:</value>
+  </data>
+  <data name="GADGET_LEGEND_PLACEMENT" xml:space="preserve">
+    <value>Legend placement:</value>
+  </data>
+  <data name="GADGET_LINEDASH_STYLEY2" xml:space="preserve">
+    <value>Line dash style (Y2):</value>
+  </data>
+  <data name="GADGET_LINETYPE_Y2" xml:space="preserve">
+    <value>Line type (Y2):</value>
+  </data>
+  <data name="GADGET_LINE_THICKNESSY2" xml:space="preserve">
+    <value>Line thickness (Y2):</value>
+  </data>
+  <data name="GADGET_MAXIMUM" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="GADGET_MEANS" xml:space="preserve">
+    <value>Mean</value>
+  </data>
+  <data name="GADGET_MEDIAN" xml:space="preserve">
+    <value>Median</value>
+  </data>
+  <data name="GADGET_MINIMUM" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="GADGET_MODE" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="GADGET_OBSERVATIONS" xml:space="preserve">
+    <value>Observations</value>
+  </data>
+  <data name="GADGET_ONE_GRAPH_VALUE" xml:space="preserve">
+    <value>One graph for each value of:</value>
+  </data>
+  <data name="GADGET_ORIENTATION" xml:space="preserve">
+    <value>Orientation:</value>
+  </data>
+  <data name="GADGET_PANELSHEADER_LABELS" xml:space="preserve">
+    <value>Labels</value>
+  </data>
+  <data name="GADGET_PANELSUBHEADER_COLORS" xml:space="preserve">
+    <value>Colors</value>
+  </data>
+  <data name="GADGET_PANELSUBHEADER_STYLES" xml:space="preserve">
+    <value>Styles</value>
+  </data>
+  <data name="GADGET_PANELSUBHEADER_YAXIS" xml:space="preserve">
+    <value>Y-Axis</value>
+  </data>
+  <data name="GADGET_PANEL_LEGEND" xml:space="preserve">
+    <value>Legend</value>
+  </data>
+  <data name="GADGET_SECOND_YAXIS_TYPE" xml:space="preserve">
+    <value>Second y-axis type:</value>
+  </data>
+  <data name="GADGET_SECOND_YAXIS_VARIABLE" xml:space="preserve">
+    <value>Second y-axis variable:</value>
+  </data>
+  <data name="GADGET_SHOWQ1" xml:space="preserve">
+    <value>25%</value>
+  </data>
+  <data name="GADGET_SHOWQ3" xml:space="preserve">
+    <value>75%</value>
+  </data>
+  <data name="GADGET_SHOW_ANNOTATIONS" xml:space="preserve">
+    <value>Show annotations</value>
+  </data>
+  <data name="GADGET_SHOW_ANNOTATIONSY2" xml:space="preserve">
+    <value>Show annotations (Y2)</value>
+  </data>
+  <data name="GADGET_SHOW_LEGEND" xml:space="preserve">
+    <value>Show legend</value>
+  </data>
+  <data name="GADGET_SHOW_LEGEND_BORDER" xml:space="preserve">
+    <value>Show legend border</value>
+  </data>
+  <data name="GADGET_SHOW_ROW_NUM" xml:space="preserve">
+    <value>Show row numbers</value>
+  </data>
+  <data name="GADGET_SHOW_VARIABLE_NAME" xml:space="preserve">
+    <value>Show variable names</value>
+  </data>
+  <data name="GADGET_SPACE_BETWEEN_BARS" xml:space="preserve">
+    <value>Space between bars:</value>
+  </data>
+  <data name="GADGET_STANDARD_DEVIATION" xml:space="preserve">
+    <value>Standard Deviation</value>
+  </data>
+  <data name="GADGET_SUBHEADER_TITLESUBTITLE" xml:space="preserve">
+    <value>Title and Subtitle</value>
+  </data>
+  <data name="GADGET_TABBUTTON_LABELS" xml:space="preserve">
+    <value>Labels</value>
+  </data>
+  <data name="GADGET_TABBUTTON_LEGEND" xml:space="preserve">
+    <value>Legend</value>
+  </data>
+  <data name="GADGET_TABDESC_COLUMNS_CHART" xml:space="preserve">
+    <value>Select the variables for the column chart.</value>
+  </data>
+  <data name="GADGET_TABDESC_LABELS" xml:space="preserve">
+    <value>Customize chart labels.</value>
+  </data>
+  <data name="GADGET_TABDESC_LEGEND" xml:space="preserve">
+    <value>Set Legend options.</value>
+  </data>
+  <data name="GADGET_TABDESC_LINE_CHART" xml:space="preserve">
+    <value>Select the variables for the line  chart.</value>
+  </data>
+  <data name="GADGET_TABDESC_MEANS" xml:space="preserve">
+    <value>Select colunms to display in a list.</value>
+  </data>
+  <data name="GADGET_TOTAL" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="GADGET_USE_REFERENCE_VALUE" xml:space="preserve">
+    <value>Use reference value</value>
+  </data>
+  <data name="GADGET_VARIANCE" xml:space="preserve">
+    <value>Variance</value>
+  </data>
+  <data name="GADGET_XAXIS" xml:space="preserve">
+    <value>X-Axis</value>
+  </data>
+  <data name="GADGET_XAXIS_ANGLE" xml:space="preserve">
+    <value>X-axis angle:</value>
+  </data>
+  <data name="GADGET_XAXIS_DATA_FONTSIZE" xml:space="preserve">
+    <value>X-axis data values font-size:</value>
+  </data>
+  <data name="GADGET_XAXIS_ENDVALUE" xml:space="preserve">
+    <value>X-axis end value:</value>
+  </data>
+  <data name="GADGET_XAXIS_LABEL" xml:space="preserve">
+    <value>X-axis label type:</value>
+  </data>
+  <data name="GADGET_XAXIS_LABEL_FONTSIZE" xml:space="preserve">
+    <value>X-axis label font size:</value>
+  </data>
+  <data name="GADGET_XAXIS_LABEL_TYPE" xml:space="preserve">
+    <value>X-axis label type:</value>
+  </data>
+  <data name="GADGET_XAXIS_STARTVALUE" xml:space="preserve">
+    <value>X-axis start value:</value>
+  </data>
+  <data name="GADGET_Y2_AXISFORMAT" xml:space="preserve">
+    <value>Y2-axis format:</value>
+  </data>
+  <data name="GADGET_Y2_AXISLABEL" xml:space="preserve">
+    <value>Y2-axis label:</value>
+  </data>
+  <data name="GADGET_Y2_AXISLEGEND_TITLE" xml:space="preserve">
+    <value>Y2-axis legend title:</value>
+  </data>
+  <data name="GADGET_YAXIS_DATA_FONTSIZE" xml:space="preserve">
+    <value>Y-axis data values font size:</value>
+  </data>
+  <data name="GADGET_YAXIS_FORMAT" xml:space="preserve">
+    <value>Y-axis format:</value>
+  </data>
+  <data name="GADGET_YAXIS_LABEL" xml:space="preserve">
+    <value>Y-axis label:</value>
+  </data>
+  <data name="GADGET_YAXIS_LABEL_FONTSIZE" xml:space="preserve">
+    <value>Y-axis label font size:</value>
+  </data>
+  <data name="GADGET_YAXIS_MAXVALUE" xml:space="preserve">
+    <value>Y-axis max value:</value>
+  </data>
+  <data name="GADGET_YAXIS_MINVALUE" xml:space="preserve">
+    <value>Y-axis min value:</value>
+  </data>
+  <data name="GADGET_YAXIS_STEPVALUE" xml:space="preserve">
+    <value>Y-axis step value:</value>
+  </data>
+  <data name="GADGET_ADD_CONDITION" xml:space="preserve">
+    <value>Add this condition</value>
+  </data>
+  <data name="GADGET_ADD_CONDITION_AND" xml:space="preserve">
+    <value>Add Condition with AND</value>
+  </data>
+  <data name="GADGET_ADD_CONDITION_OR" xml:space="preserve">
+    <value>Add Condition with OR</value>
+  </data>
+  <data name="GADGET_ADVANCED_FILTER_MODE" xml:space="preserve">
+    <value>Advanced Filter Mode</value>
+  </data>
+  <data name="GADGET_ADVANCED_MODE" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="GADGET_ANNOTATION_PERCENT" xml:space="preserve">
+    <value>Annotation percent:</value>
+  </data>
+  <data name="GADGET_APPLY_ADVANCED_FILTER" xml:space="preserve">
+    <value>Apply Filter</value>
+  </data>
+  <data name="GADGET_AREA_TYPE" xml:space="preserve">
+    <value>Area Type:</value>
+  </data>
+  <data name="GADGET_BOOLEAN_DATA" xml:space="preserve">
+    <value>4. Boolean data:   (ILL = true)</value>
+  </data>
+  <data name="GADGET_CHART_KIND" xml:space="preserve">
+    <value>Chart kind:</value>
+  </data>
+  <data name="GADGET_CLEAR_ALL_CONDITIONS" xml:space="preserve">
+    <value>Clear all conditions</value>
+  </data>
+  <data name="GADGET_CLEAR_TERMS" xml:space="preserve">
+    <value>Clear Terms</value>
+  </data>
+  <data name="GADGET_CONFIDENCE_LIMITS" xml:space="preserve">
+    <value>Confidence Limits:</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_ABERRATION_CHART" xml:space="preserve">
+    <value>Aberration Detection Chart</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_AREACHART" xml:space="preserve">
+    <value>Area Chart</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_COMPLEX_MEANS" xml:space="preserve">
+    <value>Complex Sample Means</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_COMPLEX_SAMPLE" xml:space="preserve">
+    <value>Complex Sample Frequency</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_COMPLEX_TABLES" xml:space="preserve">
+    <value>Complex Sample Tables</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_EPICURVE_CHART" xml:space="preserve">
+    <value>EPI Curve Chart</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_LINEAR_REGRESSION" xml:space="preserve">
+    <value>Linear Regression</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_LOGISTIC_REGRESSION" xml:space="preserve">
+    <value>Logistic Regression</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_PARETO_CHART" xml:space="preserve">
+    <value>Pareto Chart</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_PIECHART" xml:space="preserve">
+    <value>Pie Chart</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_SCATTER_CHART" xml:space="preserve">
+    <value>Scatter Chart</value>
+  </data>
+  <data name="GADGET_DATAFILTER" xml:space="preserve">
+    <value>Data filters:</value>
+  </data>
+  <data name="GADGET_DATE_DATA" xml:space="preserve">
+    <value>3. Date data:   (DOB &gt;= #01/01/2000#) AND (DOB &lt;= #12/31/2000 23:59:59#)</value>
+  </data>
+  <data name="GADGET_DESIRED_DATA_FILTER" xml:space="preserve">
+    <value>Type the desired data filter string into the text box below. Several examples are provided:</value>
+  </data>
+  <data name="GADGET_DUMMY_VARIABLES" xml:space="preserve">
+    <value>Dummy variables:</value>
+  </data>
+  <data name="GADGET_END_VALUE" xml:space="preserve">
+    <value>End value:</value>
+  </data>
+  <data name="GADGET_FIELDS" xml:space="preserve">
+    <value>Fields:</value>
+  </data>
+  <data name="GADGET_GUIDED_MODE" xml:space="preserve">
+    <value>Guided Mode</value>
+  </data>
+  <data name="GADGET_HIGH_VALUE" xml:space="preserve">
+    <value>High value:</value>
+  </data>
+  <data name="GADGET_INDEPENDENT_VARIABLES" xml:space="preserve">
+    <value>Independent Variables:</value>
+  </data>
+  <data name="GADGET_INTERACTION_TERMS" xml:space="preserve">
+    <value>Interaction terms:</value>
+  </data>
+  <data name="GADGET_INTERVAL" xml:space="preserve">
+    <value>Interval:</value>
+  </data>
+  <data name="GADGET_LINE_THICKNESS" xml:space="preserve">
+    <value>Line thickness:</value>
+  </data>
+  <data name="GADGET_LINE_TYPE" xml:space="preserve">
+    <value>Line type:</value>
+  </data>
+  <data name="GADGET_LOW_VALUE" xml:space="preserve">
+    <value>Low Value:</value>
+  </data>
+  <data name="GADGET_MAKE_DUMMY" xml:space="preserve">
+    <value>Make Dummy</value>
+  </data>
+  <data name="GADGET_MARKER_TYPE" xml:space="preserve">
+    <value>Marker type:</value>
+  </data>
+  <data name="GADGET_MATCH_VARIABLE" xml:space="preserve">
+    <value>Match Variable:</value>
+  </data>
+  <data name="GADGET_NO_INTERCEPT" xml:space="preserve">
+    <value>No intercept</value>
+  </data>
+  <data name="GADGET_NUMERIC_DATA" xml:space="preserve">
+    <value>1. Numeric data:   (AGE &amp;&gt;= 15) AND (AGE &lt;= 45)</value>
+  </data>
+  <data name="GADGET_OPERATOR" xml:space="preserve">
+    <value>Operator:</value>
+  </data>
+  <data name="GADGET_PSU" xml:space="preserve">
+    <value>PSU:</value>
+  </data>
+  <data name="GADGET_REMOVE_SELECTED" xml:space="preserve">
+    <value>Remove selected</value>
+  </data>
+  <data name="GADGET_SHOW_ANNOTATIONS_LABEL" xml:space="preserve">
+    <value>Show annotation label</value>
+  </data>
+  <data name="GADGET_SHOW_ANNOTATIONS_PERCENT" xml:space="preserve">
+    <value>Show annotation percent</value>
+  </data>
+  <data name="GADGET_SHOW_ANNOTATIONS_VALUE" xml:space="preserve">
+    <value>Show annotation value</value>
+  </data>
+  <data name="GADGET_SHOW_GRID_LINES" xml:space="preserve">
+    <value>Show grid lines</value>
+  </data>
+  <data name="GADGET_SHOW_HIGH_LOW" xml:space="preserve">
+    <value>Show high to low</value>
+  </data>
+  <data name="GADGET_SHOW_SERIES_LINE" xml:space="preserve">
+    <value>Show series line</value>
+  </data>
+  <data name="GADGET_START_VALUE" xml:space="preserve">
+    <value>Start value:</value>
+  </data>
+  <data name="GADGET_STEP" xml:space="preserve">
+    <value>Step:</value>
+  </data>
+  <data name="GADGET_TABDESC_ABERRATION_CHART" xml:space="preserve">
+    <value>Select the variables for the aberration chart.</value>
+  </data>
+  <data name="GADGET_TABDESC_AREA_CHART" xml:space="preserve">
+    <value>Select the variables for the area  chart.</value>
+  </data>
+  <data name="GADGET_TABDESC_COMPLEX_MEANS" xml:space="preserve">
+    <value>Select the variables for the Complex Sample Means.</value>
+  </data>
+  <data name="GADGET_TABDESC_COMPLEX_SAMPLE" xml:space="preserve">
+    <value>Select the variables for the Complex Sample Frequency.</value>
+  </data>
+  <data name="GADGET_TABDESC_COMPLEX_TABLES" xml:space="preserve">
+    <value>Select the variables for the Complex Sample Tables.</value>
+  </data>
+  <data name="GADGET_TABDESC_EPICURVE_CHART" xml:space="preserve">
+    <value>Select the variables for the EPI curve chart.</value>
+  </data>
+  <data name="GADGET_TABDESC_LINEAR_REGRESSION" xml:space="preserve">
+    <value>Select the variables for the Linear Regression.</value>
+  </data>
+  <data name="GADGET_TABDESC_LOGISTIC_REGRESSION" xml:space="preserve">
+    <value>Select the variables for the Logistic Regression.</value>
+  </data>
+  <data name="GADGET_TABDESC_PARETO_CHART" xml:space="preserve">
+    <value>Select the variables for the pareto chart.</value>
+  </data>
+  <data name="GADGET_TABDESC_PIE_CHART" xml:space="preserve">
+    <value>Select the variables for the pie  chart.</value>
+  </data>
+  <data name="GADGET_TABDESC_SCATTER_CHART" xml:space="preserve">
+    <value>Select the variables for the scatter chart.</value>
+  </data>
+  <data name="GADGET_TEXT_DATA" xml:space="preserve">
+    <value>2. Text data:   (LastName LIKE '%sen') OR (LastName = 'Smith')</value>
+  </data>
+  <data name="GADGET_TRANSPARENCY_BOTTOM" xml:space="preserve">
+    <value>Transparency % (bottom):</value>
+  </data>
+  <data name="GADGET_TRANSPARENCY_TOP" xml:space="preserve">
+    <value>Transparency % (top):</value>
+  </data>
+  <data name="GADGET_VALUE_FIELD_NAME" xml:space="preserve">
+    <value>The value of Field Name:</value>
+  </data>
+  <data name="GADGET_VALUE_TEXT" xml:space="preserve">
+    <value>Value:</value>
   </data>
 </root>

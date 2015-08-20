@@ -131,6 +131,93 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             #region Translation
 
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_EPICURVE_CHART;
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_EPICURVE_CHART;
+            tbtnSorting.Title = DashboardSharedStrings.GADGET_TABBUTTON_SORTING;
+            tbtnSorting.Description = DashboardSharedStrings.GADGET_TABDESC_SORTING;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
+            tbtnDisplayColors.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
+            tbtnDisplayColors.Description = DashboardSharedStrings.GADGET_TABDESC_COLORS_STYLES;
+            tbtnDisplayLabels.Title = DashboardSharedStrings.GADGET_TABBUTTON_LABELS;
+            tbtnDisplayLabels.Description = DashboardSharedStrings.GADGET_TABDESC_LABELS;
+            tbtnDisplayLegend.Title = DashboardSharedStrings.GADGET_TABBUTTON_LEGEND;
+            tbtnDisplayLegend.Description = DashboardSharedStrings.GADGET_TABDESC_LEGEND;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockMainVariable.Text = DashboardSharedStrings.GADGET_MAIN_VARIABLE;
+            tblockCrossTabVariable.Text = DashboardSharedStrings.GADGET_ONE_GRAPH_VALUE;
+            tblockPanelSorting.Content = DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
+            tblockGroupingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_GROUPING;
+            tblockStrataVariable.Content = DashboardSharedStrings.GADGET_STRATA_VARIABLE;
+            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockDimensions.Content = DashboardSharedStrings.GADGET_DIMENSIONS;
+            tblockWidth.Text = DashboardSharedStrings.GADGET_WIDTH;
+            tblockHeight.Text = DashboardSharedStrings.GADGET_HEIGHT;
+            tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
+            checkboxAllValues.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_VALUE;
+            checkboxCommentLegalLabels.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
+            checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
+            tblockPanelColorsNStyles.Content = DashboardSharedStrings.GADGET_PANEL_COLORS_STYLES;
+            tblockColorsSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
+            checkboxUseDiffColors.Content = DashboardSharedStrings.GADGET_DIFFERENT_BAR_COLORS;
+            tblockPalette.Text = DashboardSharedStrings.GADGET_COLOR_PALETTE;
+            tblockStylesSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_STYLES;
+            checkboxUseRefValues.Content = DashboardSharedStrings.GADGET_USE_REFERENCE_VALUE;
+            checkboxAnnotations.Content = DashboardSharedStrings.GADGET_SHOW_ANNOTATIONS;
+            checkboxAnnotationsY2.Content = DashboardSharedStrings.GADGET_SHOW_ANNOTATIONSY2;
+            checkboxGridLines.Content = DashboardSharedStrings.GADGET_SHOW_GRID_LINES;
+            tblockBarSpacing.Text = DashboardSharedStrings.GADGET_SPACE_BETWEEN_BARS;
+            tblockOrientation.Text = DashboardSharedStrings.GADGET_ORIENTATION;
+            tblockBarType.Text = DashboardSharedStrings.GADGET_BARTYPE;
+            tblockPanelLabels.Content = DashboardSharedStrings.GADGET_PANELSHEADER_LABELS;
+            tblockYAxisSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_YAXIS;
+            tblockYAxisLabelValue.Text = DashboardSharedStrings.GADGET_YAXIS_LABEL;
+            tblockYAxisFormatString.Text = DashboardSharedStrings.GADGET_YAXIS_FORMAT;
+            tblockYAxisLabelFontSize.Text = DashboardSharedStrings.GADGET_YAXIS_LABEL_FONTSIZE;
+            tblockYAxisFontSize.Text = DashboardSharedStrings.GADGET_YAXIS_DATA_FONTSIZE;
+            tblockFromValue.Text = DashboardSharedStrings.GADGET_YAXIS_MINVALUE;
+            tblockToValue.Text = DashboardSharedStrings.GADGET_YAXIS_MAXVALUE;
+            tblocktStepValue.Text = DashboardSharedStrings.GADGET_YAXIS_STEPVALUE;
+            tblockXAxisSubheader.Content = DashboardSharedStrings.GADGET_XAXIS;
+            tblockXAxisLabelType.Text = DashboardSharedStrings.GADGET_XAXIS_LABEL_TYPE;
+            tblockXAxisLabelValue.Text = DashboardSharedStrings.GADGET_XAXIS_LABEL;
+            tblockXAxisLabelFontSize.Text = DashboardSharedStrings.GADGET_XAXIS_LABEL_FONTSIZE;
+            tblockXAxisFontSize.Text = DashboardSharedStrings.GADGET_XAXIS_DATA_FONTSIZE;
+            tblockXAxisAngle.Text = DashboardSharedStrings.GADGET_XAXIS_ANGLE;
+            tblockTitleSubTitle.Content = DashboardSharedStrings.GADGET_SUBHEADER_TITLESUBTITLE;
+            tblockChartTitleValue.Text = DashboardSharedStrings.GADGET_CHART_TITLE;
+            tblockChartSubTitleValue.Text = DashboardSharedStrings.GADGET_CHART_SUBTITLE;
+            tblockPanelLegend.Content = DashboardSharedStrings.GADGET_PANEL_LEGEND;
+            checkboxShowLegend.Content = DashboardSharedStrings.GADGET_SHOW_LEGEND;
+            checkboxShowLegendBorder.Content = DashboardSharedStrings.GADGET_SHOW_LEGEND_BORDER;
+            checkboxShowVarName.Content = DashboardSharedStrings.GADGET_SHOW_VARIABLE_NAME;
+            tblockLegendFontSize.Text = DashboardSharedStrings.GADGET_LEGEND_FONTSIZE;
+            tblockLegendDock.Text = DashboardSharedStrings.GADGET_LEGEND_PLACEMENT;
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockComposition.Text = DashboardSharedStrings.GADGET_COMPOSITION;
+            tblockWeightVariable.Text = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
+            tblockStep.Text = DashboardSharedStrings.GADGET_STEP;
+            tblockInterval.Text = DashboardSharedStrings.GADGET_INTERVAL;
+            tblockStartValue.Text = DashboardSharedStrings.GADGET_START_VALUE;
+            tblockEndValue.Text = DashboardSharedStrings.GADGET_END_VALUE;
+
+
+
+
+
+
+
+
+
+
+
 
             #endregion // Translation
 

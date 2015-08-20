@@ -106,6 +106,50 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             #region Translation
 
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_ABERRATION_CHART;
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_ABERRATION_CHART;
+            tbtnSorting.Title = DashboardSharedStrings.GADGET_TABBUTTON_SORTING;
+            tbtnSorting.Description = DashboardSharedStrings.GADGET_TABDESC_SORTING;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
+            tbtnDisplayLabels.Title = DashboardSharedStrings.GADGET_TABBUTTON_LABELS;
+            tbtnDisplayLabels.Description = DashboardSharedStrings.GADGET_TABDESC_LABELS;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockPanelSorting.Content = DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
+            tblockGroupingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_GROUPING;
+            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockDimensions.Content = DashboardSharedStrings.GADGET_DIMENSIONS;
+            tblockWidth.Text = DashboardSharedStrings.GADGET_WIDTH;
+            tblockHeight.Text = DashboardSharedStrings.GADGET_HEIGHT;
+            tblockYAxisSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_YAXIS;
+            tblockYAxisLabelValue.Text = DashboardSharedStrings.GADGET_YAXIS_LABEL;
+            tblockYAxisLabelFontSize.Text = DashboardSharedStrings.GADGET_YAXIS_LABEL_FONTSIZE;
+            tblockYAxisFontSize.Text = DashboardSharedStrings.GADGET_YAXIS_DATA_FONTSIZE;
+            tblockXAxisSubheader.Content = DashboardSharedStrings.GADGET_XAXIS;
+            tblockXAxisLabelType.Text = DashboardSharedStrings.GADGET_XAXIS_LABEL_TYPE;
+            tblockXAxisLabelValue.Text = DashboardSharedStrings.GADGET_XAXIS_LABEL;
+            tblockXAxisLabelFontSize.Text = DashboardSharedStrings.GADGET_XAXIS_LABEL_FONTSIZE;
+            tblockXAxisFontSize.Text = DashboardSharedStrings.GADGET_XAXIS_DATA_FONTSIZE;
+            tblockTitleSubTitle.Content = DashboardSharedStrings.GADGET_SUBHEADER_TITLESUBTITLE;
+            tblockChartTitleValue.Text = DashboardSharedStrings.GADGET_CHART_TITLE;
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockMainVariable.Text = DashboardSharedStrings.GADGET_DATE_VARIABLE;
+            tblockWeightVariable.Text = DashboardSharedStrings.GADGET_COUNT_VARIABLE_OPT;
+            tblockLagTimeDays.Text = DashboardSharedStrings.GADGET_LAG_TIME_DAYS;
+            tblockThresh.Text = DashboardSharedStrings.GADGET_THRESHOLD;
+            tblockTimePeriod.Text = DashboardSharedStrings.GADGET_DAYS_PRIOR;
+            tblockIndicator.Content = DashboardSharedStrings.GADGET_INDICATOR_VARIABLES_OPT;
+            tblockPanelLabels.Content = DashboardSharedStrings.GADGET_PANELSHEADER_LABELS;
+
+
+
 
             #endregion // Translation
 

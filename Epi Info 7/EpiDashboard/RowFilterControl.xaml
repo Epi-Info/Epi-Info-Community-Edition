@@ -34,19 +34,19 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                    <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Margin="5, 5, 5, 5" Text="The value of Field Name: " Grid.Row="0" Grid.Column="0" />
+                    <TextBlock x:Name="tblockValueFieldName" HorizontalAlignment="Left" TextAlignment="Center" Margin="5, 5, 5, 5" Text="The value of Field Name:__xfe " Grid.Row="0" Grid.Column="0" />
                 <!--<ListBox x:Name="lbxConditions" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6" Width="514" Visibility="Collapsed"/>-->
 
 
 
                 <ComboBox x:Name="cmbFieldName" Margin="5, 5, 5, 5" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="0" Grid.Column="1" MaxWidth="210" Width="210" SelectionChanged="cmbFieldName_SelectionChanged" />
 
-                    <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Operator:" Margin="5, 5, 5, 5"  Grid.Row="1" Grid.Column="0"  />
+                    <TextBlock x:Name="tblockOperator" HorizontalAlignment="Left" TextAlignment="Center" Text="Operator:__xfe" Margin="5, 5, 5, 5"  Grid.Row="1" Grid.Column="0"  />
                     <ComboBox x:Name="cmbOperator" Margin="5, 5, 5, 5" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="1" MaxWidth="210" Width="210" SelectionChanged="cmbOperator_SelectionChanged" />
 
                     <!--Single value controls-->
-                    <TextBlock x:Name="txtValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Value:" Margin="5, 5, 5, 5"  Grid.Row="3" Grid.Column="0"  />
-                    <TextBlock x:Name="txtLoValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Low Value:" Margin="5, 5, 5, 5"  Grid.Row="3" Grid.Column="0" Visibility="Hidden"  />
+                    <TextBlock x:Name="txtValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Value:__xfe" Margin="5, 5, 5, 5"  Grid.Row="3" Grid.Column="0"  />
+                    <TextBlock x:Name="txtLoValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Low Value:__xfe" Margin="5, 5, 5, 5"  Grid.Row="3" Grid.Column="0" Visibility="Hidden"  />
                     <ComboBox x:Name="cmbValue" Margin="5, 5, 5, 5"  HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" MaxWidth="210" Width="210"  IsEditable="True" Grid.ColumnSpan="3"/>
                     <DatePicker x:Name="dpValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" MaxWidth="210" Width="210" Visibility="Visible" />
                     <TextBox x:Name="tbxNumericValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" MaxWidth="210" Width="210"   Visibility="Visible" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
@@ -58,24 +58,24 @@
 
                     <TextBlock x:Name="txtAnd" Visibility="Visible" Text="and" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="4"/>
 
-                    <TextBlock x:Name="txtHiValue" HorizontalAlignment="Left" TextAlignment="Center" Text="High value:" Margin="5, 5, 5, 5"  Grid.Row="5" Grid.Column="0"  />
+                    <TextBlock x:Name="txtHiValue" HorizontalAlignment="Left" TextAlignment="Center" Text="High value:__xfe" Margin="5, 5, 5, 5"  Grid.Row="5" Grid.Column="0"  />
                     <TextBox x:Name="tbxHighValue" Margin="5, 5, 5, 5"  HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" MaxWidth="210" Width="210"  Visibility="Visible" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
                     <DatePicker x:Name="dpHighValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" MaxWidth="210" Width="210"  Visibility="Visible" />
 
             <Button x:Name="btnNewCondition" Width="Auto" MinWidth="155" Height="32" Grid.ColumnSpan="2" Grid.Row="6" HorizontalAlignment="Left" Click="btnNewCondition_Click">
                     <Button.Content>
-                        <Label>Add this condition</Label>
+                            <Label x:Name="tblockAddThisCondition">Add this condition__xfe</Label>
                     </Button.Content>
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="mnuAddWithAnd" Header="Add Condition with AND" Click="mnuAddWithAnd_Click" />
-                            <MenuItem x:Name="mnuAddWithOr" Header="Add Condition with OR" Click="mnuAddWithOr_Click" />
+                                <MenuItem x:Name="mnuAddWithAnd" Header="Add Condition with AND__xfe" Click="mnuAddWithAnd_Click" />
+                                <MenuItem x:Name="mnuAddWithOr" Header="Add Condition with OR__xfe" Click="mnuAddWithOr_Click" />
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
                 </Grid>
             </StackPanel>
-            <TextBlock x:Name="tblockDataFilterListHeading" HorizontalAlignment="Left" TextAlignment="Center" Text="Data filters:" Margin="0,5,0,0" Grid.Row="5" Grid.Column="0" />
+            <TextBlock x:Name="tblockDataFilterListHeading" HorizontalAlignment="Left" TextAlignment="Center" Text="Data filters:__xfe" Margin="0,5,0,0" Grid.Row="5" Grid.Column="0" />
                 <DataGrid x:Name="dgFilters" 
                                       HorizontalAlignment="Stretch" 
                                       HorizontalScrollBarVisibility="Hidden" 
@@ -104,43 +104,43 @@
 
                 <Button x:Name="btnRemoveCondition" Width="155" Height="Auto" HorizontalAlignment="Left" Click="btnRemoveCondition_Click">
                     <Button.Content>
-                        <Label>Remove selected</Label>
+                        <Label x:Name="tblockRemoveSelected">Remove selected__xfe</Label>
                     </Button.Content>
                 </Button>
                 <Button x:Name="btnClearConditions" Width="155" Height="Auto" Grid.Column="1" HorizontalAlignment="Left" Click="btnClearConditions_Click">
                     <Button.Content>
-                        <Label>Clear all conditions</Label>
+                        <Label x:Name="tblockClearAllConditions">Clear all conditions__xfe</Label>
                     </Button.Content>
                 </Button>
                 <Button x:Name="btnAdvancedMode" Width="155" Height="Auto" Grid.Column="2" HorizontalAlignment="Left" IsEnabled="False" Click="btnAdvancedMode_Click" >
                     <Button.Content>
-                        <Label>Advanced mode</Label>
+                        <Label x:Name="tblockAdvancedMode">Advanced mode__xfe</Label>
                     </Button.Content>
                 </Button>
             </Grid>
         </StackPanel>
 
         <StackPanel Grid.Row="4" x:Name="pnlAdvancedMode" VerticalAlignment="Top" Margin="20, 0, 0, 0" Visibility="Collapsed">
-            <TextBlock Text="Advanced Filter Mode" FontWeight="Bold" Margin="0, 0, 0, 3" />
-            <TextBlock Text="Type the desired data filter string into the text box below. Several examples are provided:" 
+            <TextBlock x:Name="tblockAdvanceFilterMode" Text="Advanced Filter Mode__xfe" FontWeight="Bold" Margin="0, 0, 0, 3" />
+            <TextBlock x:Name="txtDesiredDataFilter" Text="Type the desired data filter string into the text box below. Several examples are provided:__xfe" 
                                TextWrapping="WrapWithOverflow" 
                                Width="500"
                                HorizontalAlignment="Left"
                                Margin="0, 0, 0, 3" />
 
-            <TextBlock Text="  1. Numeric data:   (AGE &gt;= 15) AND (AGE &lt;= 45)" 
+            <TextBlock x:Name="txtNumericData" Text="  1. Numeric data:   (AGE &gt;= 15) AND (AGE &lt;= 45)__xfe" 
                                TextWrapping="WrapWithOverflow" 
                                Width="500"
                                HorizontalAlignment="Left" />
-            <TextBlock Text="  2. Text data:   (LastName LIKE '%sen') OR (LastName = 'Smith')" 
+            <TextBlock x:Name="txtTextData" Text="  2. Text data:   (LastName LIKE '%sen') OR (LastName = 'Smith')__xfe" 
                                TextWrapping="WrapWithOverflow" 
                                Width="500"
                                HorizontalAlignment="Left" />
-            <TextBlock Text="  3. Date data:   (DOB &gt;= #01/01/2000#) AND (DOB &lt;= #12/31/2000 23:59:59#)" 
+            <TextBlock x:Name="txtDateData" Text="  3. Date data:   (DOB &gt;= #01/01/2000#) AND (DOB &lt;= #12/31/2000 23:59:59#)__xfe" 
                                TextWrapping="WrapWithOverflow" 
                                Width="500"
                                HorizontalAlignment="Left" />
-            <TextBlock Text="  4. Boolean data:   (ILL = true)" 
+            <TextBlock x:Name="txtBooleanData" Text="  4. Boolean data:   (ILL = true)__xfe" 
                                TextWrapping="WrapWithOverflow" 
                                Width="500"
                                HorizontalAlignment="Left" />
@@ -160,8 +160,8 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
-                <Button x:Name="btnApplyAdvancedFilter" Grid.Row="1" Grid.Column="0" Width="120" Content="Apply Filter" HorizontalAlignment="Left" Click="btnApplyAdvancedFilter_Click" />
-                <Button x:Name="btnGuidedMode"          Grid.Row="1" Grid.Column="1" Width="120" Content="Guided Mode" Click="btnAdvancedMode_Click" HorizontalAlignment="Left" />
+                <Button x:Name="btnApplyAdvancedFilter" Grid.Row="1" Grid.Column="0" Width="120" Content="Apply Filter__xfe" HorizontalAlignment="Left" Click="btnApplyAdvancedFilter_Click" />
+                <Button x:Name="btnGuidedMode"          Grid.Row="1" Grid.Column="1" Width="120" Content="Guided Mode__xfe" Click="btnAdvancedMode_Click" HorizontalAlignment="Left" />
             </Grid>
 
 

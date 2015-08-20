@@ -96,6 +96,41 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as EpiDashboard.Gadgets.Analysis.DuplicatesListControl).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
+
+
+
+            #region Translation
+
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_DUPLICATELIST;
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_MEANS;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockDimensions.Content = DashboardSharedStrings.GADGET_DIMENSIONS;
+            tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
+            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USER_FIELDS_PROMPTS;
+            checkboxListLabels.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
+            checkboxColumnHeaders.Content = DashboardSharedStrings.GADGET_SHOW_COLUMN_HEADINGS;
+            checkboxShowNulls.Content = DashboardSharedStrings.GADGET_SHOW_MISSING_REP;
+            checkboxTabOrder.Content = DashboardSharedStrings.EXPORT_SORT_BY_TAB_ORDER;
+            tblockKeyDuplicateChecking.Content = DashboardSharedStrings.GADGET_KEY_DUPCHECKING;
+            tblockAdditionalFieldsDisplay.Content = DashboardSharedStrings.GADGET_ADDITIONAL_FIELDS_DISPLAY;
+            checkboxLineColumn.Content = DashboardSharedStrings.GADGET_SHOW_ROW_NUM;
+            tblockMaxWidth.Content = DashboardSharedStrings.GADGET_MAX_WIDTH;
+            tblockMaxHeight.Content = DashboardSharedStrings.GADGET_MAX_HEIGHT;
+
+
+            #endregion // Translation
+
         }
 
         public bool HasSelectedFields
