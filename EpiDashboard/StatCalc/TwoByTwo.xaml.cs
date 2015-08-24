@@ -392,7 +392,7 @@ namespace EpiDashboard.StatCalc
 
                     if (singleTableResults.FisherExact2P != -1)
                     {
-                        fisherExact2P = ((double)singleTableResults.FisherExact2P).ToString("F10");
+                        fisherExact2P = ((double)singleTableResults.FisherExact2P).ToString("F8");
                     }
 
                     if (singleTableResults.OddsRatioEstimate != null)
@@ -425,11 +425,11 @@ namespace EpiDashboard.StatCalc
                         riskRatioUpper = ((double)singleTableResults.RiskRatioUpper).ToString("F4");
                     }
 
-                    txtChiSqCorP.Text = singleTableResults.ChiSquareYates2P.ToString("F10");
+                    txtChiSqCorP.Text = singleTableResults.ChiSquareYates2P.ToString("F8");
                     txtChiSqCorVal.Text = singleTableResults.ChiSquareYatesVal.ToString("F4");
-                    txtChiSqManP.Text = singleTableResults.ChiSquareMantel2P.ToString("F10");
+                    txtChiSqManP.Text = singleTableResults.ChiSquareMantel2P.ToString("F8");
                     txtChiSqManVal.Text = singleTableResults.ChiSquareMantelVal.ToString("F4");
-                    txtChiSqUncP.Text = singleTableResults.ChiSquareUncorrected2P.ToString("F10");
+                    txtChiSqUncP.Text = singleTableResults.ChiSquareUncorrected2P.ToString("F8");
                     txtChiSqUncVal.Text = singleTableResults.ChiSquareUncorrectedVal.ToString("F4");
                     txtOddsRatioEstimate.Text = oddsRatioEstimate; // singleTableResults.OddsRatioEstimate.ToString("F4");
                     txtOddsRatioLower.Text = oddsRatioLower; //singleTableResults.OddsRatioLower.ToString("F4");
@@ -445,8 +445,8 @@ namespace EpiDashboard.StatCalc
                     txtRiskRatioEstimate.Text = riskRatioEstimate; // singleTableResults.RiskRatioEstimate.ToString("F4");
                     txtRiskRatioLower.Text = riskRatioLower; //singleTableResults.RiskRatioLower.ToString("F4");
                     txtRiskRatioUpper.Text = riskRatioUpper; //singleTableResults.RiskRatioUpper.ToString("F4");
-                    txtFisherExact.Text = singleTableResults.FisherExactP.ToString("F10");
-                    txtMidPExact.Text = singleTableResults.MidP.ToString("F10");
+                    txtFisherExact.Text = singleTableResults.FisherExactP.ToString("F8");
+                    txtMidPExact.Text = singleTableResults.MidP.ToString("F8");
                     txtFisherExact2P.Text = fisherExact2P;
 
                     this.currentSingleTableResults = singleTableResults;
