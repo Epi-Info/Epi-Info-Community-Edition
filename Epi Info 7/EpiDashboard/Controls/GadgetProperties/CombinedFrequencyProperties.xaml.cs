@@ -150,6 +150,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.ColumnNames = new List<string>();
             Parameters.GadgetTitle = txtTitle.Text;
             Parameters.GadgetDescription = txtDesc.Text;
+            Parameters.CustomFilter = this.DataFilters.GenerateDataFilterString();
             
             List<string> listFields = new List<string>();
 
