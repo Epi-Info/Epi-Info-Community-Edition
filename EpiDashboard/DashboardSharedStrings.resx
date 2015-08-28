@@ -1059,7 +1059,7 @@ of records or select fewer fields for the group.</value>
     <value>Colors and Styles</value>
   </data>
   <data name="GADGET_USER_FIELDS_PROMPTS" xml:space="preserve">
-    <value>User field Prompts</value>
+    <value>Use field Prompts</value>
   </data>
   <data name="GADGET_VALUE_MAPPING" xml:space="preserve">
     <value>Value Mapping</value>

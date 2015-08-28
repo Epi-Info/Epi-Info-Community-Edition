@@ -3327,7 +3327,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User field Prompts.
+        ///   Looks up a localized string similar to Use field Prompts.
         /// </summary>
         public static string GADGET_USER_FIELDS_PROMPTS {
             get {
