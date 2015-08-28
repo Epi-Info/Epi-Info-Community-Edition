@@ -241,6 +241,15 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.ShowNullLabels = checkboxShowNulls.IsChecked.Value;
             Parameters.ShowCommentLegalLabels = checkboxListLabels.IsChecked.Value;
 
+            if (checkboxUsePrompts.IsChecked == true)
+            {
+                inputVariableList.Add("usepromptsforcolumnnames", "true");
+            }
+            else
+            {
+                inputVariableList.Add("usepromptsforcolumnnames", "false");
+            }
+
             if (lbxSortOrder.Items.Count > 0)
             {
                 foreach (string item in lbxSortOrder.Items)
