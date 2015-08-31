@@ -196,6 +196,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             success = int.TryParse(txtMaxVarNameLength.Text, out maxColumnLength);
             if (success)
             {
+                if (maxColumnLength > 64)
+                    maxColumnLength = 64;
                 Parameters.MaxColumnLength = maxColumnLength;
             }
 
