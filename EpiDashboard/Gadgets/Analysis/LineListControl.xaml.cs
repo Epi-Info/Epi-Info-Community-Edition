@@ -1322,6 +1322,17 @@ namespace EpiDashboard
                         }
                         else
                         {
+                            if (dg.ItemsSource is DataView)
+                           {
+                                DataView dgItemSource = dg.ItemsSource as DataView;
+                                int dgtcindex = 0;
+                                foreach (DataColumn dc in dgItemSource.Table.Columns)
+                                {
+                                    dc.ColumnName = dg.Columns[dgtcindex].Header.ToString();
+                                    dgtcindex++;
+                                }
+//                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView));
+                            }
                             htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView));
                         }
                     }
