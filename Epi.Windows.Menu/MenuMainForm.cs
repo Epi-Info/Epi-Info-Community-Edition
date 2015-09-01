@@ -622,6 +622,11 @@ namespace Epi.Windows.Menu
             System.Diagnostics.Process.Start("mailto://epiinfo@cdc.gov");
         }
 
+        private void activEpicomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://activepi.com");
+        }
+        
         private void openEpicomToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://openepi.com");
@@ -641,6 +646,10 @@ namespace Epi.Windows.Menu
         {
             new StatCalc(StatCalc.Calculators.MatchedPairCaseControl).Show();
         }
-        
+
+        private void pbxBackground_Click(object sender, EventArgs e)
+        {
+
+        }        
     }
 }
