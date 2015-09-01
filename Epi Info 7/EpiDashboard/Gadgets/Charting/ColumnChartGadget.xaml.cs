@@ -741,46 +741,46 @@ namespace EpiDashboard.Gadgets.Charting
                                     }
                                     break;
                                 case "y2linetype":
-                                    switch (child.InnerText)
+                                    switch (int.Parse(child.InnerText))
                                     {
-                                        case "Polygon":
+                                        case 0:
+                                            ((ColumnChartParameters)Parameters).Y2LineKind = LineKind.Auto;
+                                            break;
+                                        case 1:
                                             ((ColumnChartParameters)Parameters).Y2LineKind = LineKind.Polygon;
                                             break;
-                                        case "Smooth":
+                                        case 2:
                                             ((ColumnChartParameters)Parameters).Y2LineKind = LineKind.Smooth;
                                             break;
-                                        case "Step":
+                                        case 3:
                                             ((ColumnChartParameters)Parameters).Y2LineKind = LineKind.Step;
-                                            break;
-                                        case "Auto":
-                                            ((ColumnChartParameters)Parameters).Y2LineKind = LineKind.Auto;
                                             break;
                                     }
                                     break;
                                 case "y2linedashstyle":
                                     {
-                                        switch (child.InnerText)
+                                        switch (int.Parse(child.InnerText))
                                         {
-                                            case "Solid":
-                                                ((ColumnChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.Solid;
-                                                break;
-                                            case "Dash":
+                                            case 0:
                                                 ((ColumnChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.Dash;
                                                 break;
-                                            case "Dot":
-                                                ((ColumnChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.Dot;
-                                                break;
-                                            case "DashDot":
+                                            case 1:
                                                 ((ColumnChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.DashDot;
                                                 break;
-                                            case "DashDotDot":
+                                            case 2:
                                                 ((ColumnChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.DashDotDot;
+                                                break; 
+                                            case 3:
+                                                ((ColumnChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.Dot;
+                                                break;
+                                            case 4:
+                                                ((ColumnChartParameters)Parameters).Y2LineDashStyle = LineDashStyle.Solid;
                                                 break;
                                         }
                                         break;
                                     }
                                 case "y2linethickness":
-                                    ((ColumnChartParameters)Parameters).Y2LineThickness = int.Parse(child.InnerText);
+                                    ((ColumnChartParameters)Parameters).Y2LineThickness = int.Parse(child.InnerText) + 1;
                                     break;
                                 case "yaxislabel":
                                     ((ColumnChartParameters)Parameters).YAxisLabel = child.InnerText;
@@ -1147,17 +1147,49 @@ namespace EpiDashboard.Gadgets.Charting
 
                 //y2LineType 
                 XmlElement y2LineTypeElement = doc.CreateElement("y2LineType");
-                y2LineTypeElement.InnerText = chtParameters.Y2LineKind.ToString();
+                switch(chtParameters.Y2LineKind.ToString())
+                {
+                    default:
+                    case "Auto":
+                        y2LineTypeElement.InnerText = "0";
+                        break;
+                    case "Polygon":
+                        y2LineTypeElement.InnerText = "1";
+                        break;
+                    case "Smooth":
+                        y2LineTypeElement.InnerText = "2";
+                        break;
+                    case "Step":
+                        y2LineTypeElement.InnerText = "3";
+                        break;
+                }
                 element.AppendChild(y2LineTypeElement);
 
                 //y2LineDashStyle 
                 XmlElement y2LineDashStyleElement = doc.CreateElement("y2LineDashStyle");
-                y2LineDashStyleElement.InnerText = chtParameters.Y2LineDashStyle.ToString();
+                switch(chtParameters.Y2LineDashStyle.ToString())
+                {
+                    case "Dash":
+                    y2LineDashStyleElement.InnerText = "0";
+                    break;
+                    case "DashDot":
+                    y2LineDashStyleElement.InnerText = "1";
+                    break;
+                    case "DashDotDot":
+                    y2LineDashStyleElement.InnerText = "2";
+                    break;
+                    case "Dot":
+                    y2LineDashStyleElement.InnerText = "3";
+                    break;
+                    case "Solid":
+                    y2LineDashStyleElement.InnerText = "4";
+                    break;
+                }               
                 element.AppendChild(y2LineDashStyleElement);
 
                 //y2LineThickness 
                 XmlElement y2LineThicknessElement = doc.CreateElement("y2LineThickness");
-                y2LineThicknessElement.InnerText = chtParameters.Y2LineThickness.ToString();
+                y2LineThicknessElement.InnerText = (chtParameters.Y2LineThickness - 1).ToString();
                 element.AppendChild(y2LineThicknessElement);
 
                 //yAxisLabel 
