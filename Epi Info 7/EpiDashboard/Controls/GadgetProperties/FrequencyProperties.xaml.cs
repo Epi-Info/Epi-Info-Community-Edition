@@ -290,6 +290,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (string.IsNullOrEmpty(txtRows.Text))
             {
                 Parameters.RowsToDisplay = null;
+                Parameters.IgnoreRowLimits = false;
             }
             else
             {
@@ -298,11 +299,13 @@ namespace EpiDashboard.Controls.GadgetProperties
                 if (success)
                 {
                     Parameters.RowsToDisplay = rows;
+                    Parameters.IgnoreRowLimits = true;
                 }
                 else
                 {
                     Parameters.RowsToDisplay = null;
                     txtRows.Text = string.Empty;
+                    Parameters.IgnoreRowLimits = false;
                 }
             }
 
