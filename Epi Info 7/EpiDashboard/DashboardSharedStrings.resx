@@ -517,7 +517,7 @@ Denominator = {0}</value>
     <value>Break 5:</value>
   </data>
   <data name="GADGET_MAX_ROWS_TO_DISPLAY" xml:space="preserve">
-    <value>Maxium rows to display:</value>
+    <value>Maximum rows to display:</value>
   </data>
   <data name="GADGET_MAX_PERCENT_BAR_WIDTH" xml:space="preserve">
     <value>Max width of percent bar:</value>
