@@ -118,14 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>135, 0</value>
+    <value>133, 17</value>
   </metadata>
   <data name="baseImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACw
-        cQAAAk1TRnQBSQFMAgEBRAEAAUYBAAGkAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        cQAAAk1TRnQBSQFMAgEBRAEAAUYBAAG0AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwAB/AMAAQEBAAEgBgAB/P8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wCjAAH/AwAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf9TAAH/AwAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8jAAH/AwAB/wMAAf8BgAIAAf8BgAIAAf8BgAIAAf8BgAIAAf8BgAIA
@@ -650,10 +650,10 @@
     <value>Trebuchet MS, 9pt, style=Bold</value>
   </data>
   <data name="btnWebsite.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 225</value>
+    <value>36, 225</value>
   </data>
   <data name="btnWebsite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 30</value>
+    <value>227, 30</value>
   </data>
   <data name="btnWebsite.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -677,10 +677,10 @@
     <value>Trebuchet MS, 9pt, style=Bold</value>
   </data>
   <data name="btnCreateReports.Location" type="System.Drawing.Point, System.Drawing">
-    <value>206, 189</value>
+    <value>269, 189</value>
   </data>
   <data name="btnCreateReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 30</value>
+    <value>227, 30</value>
   </data>
   <data name="btnCreateReports.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -707,10 +707,10 @@
     <value>Trebuchet MS, 9pt, style=Bold</value>
   </data>
   <data name="btnCreateMaps.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 189</value>
+    <value>36, 189</value>
   </data>
   <data name="btnCreateMaps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 30</value>
+    <value>227, 30</value>
   </data>
   <data name="btnCreateMaps.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -734,10 +734,10 @@
     <value>Trebuchet MS, 9pt, style=Bold</value>
   </data>
   <data name="btnExit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 261</value>
+    <value>36, 261</value>
   </data>
   <data name="btnExit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 30</value>
+    <value>227, 30</value>
   </data>
   <data name="btnExit.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -761,10 +761,10 @@
     <value>Trebuchet MS, 9pt, style=Bold</value>
   </data>
   <data name="btnEnterData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 79</value>
+    <value>36, 79</value>
   </data>
   <data name="btnEnterData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 30</value>
+    <value>227, 30</value>
   </data>
   <data name="btnEnterData.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -791,7 +791,7 @@
     <value>13, 22</value>
   </data>
   <data name="btnAnalyze.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 30</value>
+    <value>227, 30</value>
   </data>
   <data name="btnAnalyze.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -815,10 +815,10 @@
     <value>Trebuchet MS, 9pt, style=Bold</value>
   </data>
   <data name="btnMakeView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 43</value>
+    <value>36, 43</value>
   </data>
   <data name="btnMakeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 30</value>
+    <value>227, 30</value>
   </data>
   <data name="btnMakeView.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -839,40 +839,22 @@
     <value>6</value>
   </data>
   <metadata name="tltToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>380, 0</value>
+    <value>397, 17</value>
   </metadata>
   <metadata name="imlImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>484, 0</value>
+    <value>501, 17</value>
   </metadata>
   <data name="imlImageList.ImageSize" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
   </data>
   <metadata name="mnuMainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>0, 0</value>
+    <value>262, 17</value>
   </metadata>
-  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 22</value>
-  </data>
-  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
-    <value>E&amp;xit</value>
-  </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 20</value>
   </data>
   <data name="fileToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;File</value>
-  </data>
-  <data name="toolStripMenuItemStatusBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="toolStripMenuItemStatusBar.Text" xml:space="preserve">
-    <value>&amp;Status Bar</value>
-  </data>
-  <data name="epiInfoLogsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="epiInfoLogsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Epi Info &amp;Logs..</value>
   </data>
   <data name="viewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -880,119 +862,11 @@
   <data name="viewToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;View</value>
   </data>
-  <data name="makeViewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
-  </data>
-  <data name="makeViewToolStripMenuItem.Text" xml:space="preserve">
-    <value>Create &amp;Forms</value>
-  </data>
-  <data name="enterDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
-  </data>
-  <data name="enterDataToolStripMenuItem.Text" xml:space="preserve">
-    <value>E&amp;nter Data</value>
-  </data>
-  <data name="classicToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 22</value>
-  </data>
-  <data name="classicToolStripMenuItem.Text" xml:space="preserve">
-    <value>Classic</value>
-  </data>
-  <data name="dashboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 22</value>
-  </data>
-  <data name="dashboardToolStripMenuItem.Text" xml:space="preserve">
-    <value>Visual Dashboard</value>
-  </data>
-  <data name="analyzeDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
-  </data>
-  <data name="analyzeDataToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Analyze Data</value>
-  </data>
-  <data name="createMapsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
-  </data>
-  <data name="createMapsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Create &amp;Maps</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 6</value>
-  </data>
-  <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
-  </data>
-  <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Options</value>
-  </data>
   <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 20</value>
   </data>
   <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Tools</value>
-  </data>
-  <data name="populationSurveyToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
-  </data>
-  <data name="populationSurveyToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Population survey</value>
-  </data>
-  <data name="cohortOrCrossSectionalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
-  </data>
-  <data name="cohortOrCrossSectionalToolStripMenuItem.Text" xml:space="preserve">
-    <value>Cohort or cross-sectional</value>
-  </data>
-  <data name="unmatchedCasecontrolToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
-  </data>
-  <data name="unmatchedCasecontrolToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Unmatched case-control</value>
-  </data>
-  <data name="sampleSizeAndPowerToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 22</value>
-  </data>
-  <data name="sampleSizeAndPowerToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Sample Size and Power</value>
-  </data>
-  <data name="chiSquareForTrendToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 22</value>
-  </data>
-  <data name="chiSquareForTrendToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Chi Square for Trend</value>
-  </data>
-  <data name="tables2X22XNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 22</value>
-  </data>
-  <data name="tables2X22XNToolStripMenuItem.Text" xml:space="preserve">
-    <value>Tables (2 x 2 x n)</value>
-  </data>
-  <data name="mnuPoisson.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 22</value>
-  </data>
-  <data name="mnuPoisson.Text" xml:space="preserve">
-    <value>Poisson (rare event vs. std.)</value>
-  </data>
-  <data name="mnuBinomial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 22</value>
-  </data>
-  <data name="mnuBinomial.Text" xml:space="preserve">
-    <value>Binomial (proportion vs. std.)</value>
-  </data>
-  <data name="mnuMatchedPairCaseControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 22</value>
-  </data>
-  <data name="mnuMatchedPairCaseControl.Text" xml:space="preserve">
-    <value>Matched pair case control study</value>
-  </data>
-  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 6</value>
-  </data>
-  <data name="openEpicomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 22</value>
-  </data>
-  <data name="openEpicomToolStripMenuItem.Text" xml:space="preserve">
-    <value>OpenEpi.com</value>
   </data>
   <data name="statCalcToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 20</value>
@@ -1026,6 +900,24 @@
   </data>
   <data name="contactHelpdeskToolStripMenuItem.Text" xml:space="preserve">
     <value>Contact Help Desk</value>
+  </data>
+  <data name="activEpicomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="activEpicomToolStripMenuItem.Text" xml:space="preserve">
+    <value>ActivEpi.com</value>
+  </data>
+  <data name="openEpicomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="openEpicomToolStripMenuItem.Text" xml:space="preserve">
+    <value>OpenEpi.com</value>
+  </data>
+  <data name="otherEpiResourcesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 22</value>
+  </data>
+  <data name="otherEpiResourcesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Other Epi Resources</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 6</value>
@@ -1066,23 +958,122 @@
   <data name="&gt;&gt;mnuMainMenu.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="btnDashboard.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 9pt, style=Bold</value>
+  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 22</value>
   </data>
-  <data name="btnDashboard.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
+    <value>E&amp;xit</value>
   </data>
-  <data name="btnDashboard.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 22</value>
+  <data name="toolStripMenuItemStatusBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
   </data>
-  <data name="btnDashboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 30</value>
+  <data name="toolStripMenuItemStatusBar.Text" xml:space="preserve">
+    <value>&amp;Status Bar</value>
   </data>
-  <data name="btnDashboard.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="epiInfoLogsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
   </data>
-  <data name="btnDashboard.Text" xml:space="preserve">
-    <value>&amp;Visual Dashboard</value>
+  <data name="epiInfoLogsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Epi Info &amp;Logs..</value>
+  </data>
+  <data name="makeViewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 22</value>
+  </data>
+  <data name="makeViewToolStripMenuItem.Text" xml:space="preserve">
+    <value>Create &amp;Forms</value>
+  </data>
+  <data name="enterDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 22</value>
+  </data>
+  <data name="enterDataToolStripMenuItem.Text" xml:space="preserve">
+    <value>E&amp;nter Data</value>
+  </data>
+  <data name="analyzeDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 22</value>
+  </data>
+  <data name="analyzeDataToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Analyze Data</value>
+  </data>
+  <data name="classicToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 22</value>
+  </data>
+  <data name="classicToolStripMenuItem.Text" xml:space="preserve">
+    <value>Classic</value>
+  </data>
+  <data name="dashboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 22</value>
+  </data>
+  <data name="dashboardToolStripMenuItem.Text" xml:space="preserve">
+    <value>Visual Dashboard</value>
+  </data>
+  <data name="createMapsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 22</value>
+  </data>
+  <data name="createMapsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Create &amp;Maps</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 6</value>
+  </data>
+  <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 22</value>
+  </data>
+  <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Options</value>
+  </data>
+  <data name="sampleSizeAndPowerToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 22</value>
+  </data>
+  <data name="sampleSizeAndPowerToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Sample Size and Power</value>
+  </data>
+  <data name="populationSurveyToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="populationSurveyToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Population survey</value>
+  </data>
+  <data name="cohortOrCrossSectionalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="cohortOrCrossSectionalToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cohort or cross-sectional</value>
+  </data>
+  <data name="unmatchedCasecontrolToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 22</value>
+  </data>
+  <data name="unmatchedCasecontrolToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Unmatched case-control</value>
+  </data>
+  <data name="chiSquareForTrendToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 22</value>
+  </data>
+  <data name="chiSquareForTrendToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Chi Square for Trend</value>
+  </data>
+  <data name="tables2X22XNToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 22</value>
+  </data>
+  <data name="tables2X22XNToolStripMenuItem.Text" xml:space="preserve">
+    <value>Tables (2 x 2 x n)</value>
+  </data>
+  <data name="mnuPoisson.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 22</value>
+  </data>
+  <data name="mnuPoisson.Text" xml:space="preserve">
+    <value>Poisson (rare event vs. std.)</value>
+  </data>
+  <data name="mnuBinomial.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 22</value>
+  </data>
+  <data name="mnuBinomial.Text" xml:space="preserve">
+    <value>Binomial (proportion vs. std.)</value>
+  </data>
+  <data name="mnuMatchedPairCaseControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 22</value>
+  </data>
+  <data name="mnuMatchedPairCaseControl.Text" xml:space="preserve">
+    <value>Matched pair case control study</value>
   </data>
   <data name="&gt;&gt;btnDashboard.Name" xml:space="preserve">
     <value>btnDashboard</value>
@@ -1100,10 +1091,10 @@
     <value>Microsoft Sans Serif, 9pt, style=Bold</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>43, 115</value>
+    <value>23, 115</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>332, 68</value>
+    <value>489, 68</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1121,6 +1112,36 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnDashboard.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 9pt, style=Bold</value>
+  </data>
+  <data name="btnDashboard.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnDashboard.Location" type="System.Drawing.Point, System.Drawing">
+    <value>246, 22</value>
+  </data>
+  <data name="btnDashboard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 30</value>
+  </data>
+  <data name="btnDashboard.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="btnDashboard.Text" xml:space="preserve">
+    <value>&amp;Visual Dashboard</value>
+  </data>
+  <data name="&gt;&gt;btnDashboard.Name" xml:space="preserve">
+    <value>btnDashboard</value>
+  </data>
+  <data name="&gt;&gt;btnDashboard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnDashboard.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;btnDashboard.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -2464,18 +2485,6 @@
   <data name="&gt;&gt;mnuMatchedPairCaseControl.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
-    <value>toolStripSeparator3</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;openEpicomToolStripMenuItem.Name" xml:space="preserve">
-    <value>openEpicomToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;openEpicomToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
     <value>helpToolStripMenuItem</value>
   </data>
@@ -2506,6 +2515,24 @@
   <data name="&gt;&gt;contactHelpdeskToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;otherEpiResourcesToolStripMenuItem.Name" xml:space="preserve">
+    <value>otherEpiResourcesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;otherEpiResourcesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openEpicomToolStripMenuItem.Name" xml:space="preserve">
+    <value>openEpicomToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;openEpicomToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;activEpicomToolStripMenuItem.Name" xml:space="preserve">
+    <value>activEpicomToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;activEpicomToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
     <value>toolStripSeparator2</value>
   </data>
@@ -2522,6 +2549,6 @@
     <value>MenuMainForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.MainForm, Epi.Windows, Version=7.1.5045.22964, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.MainForm, Epi.Windows, Version=7.1.5721.18383, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -96,13 +96,14 @@ namespace Epi.Windows.Menu
             this.mnuPoisson = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBinomial = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMatchedPairCaseControl = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.openEpicomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.communityMessageBoardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contactHelpdeskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.otherEpiResourcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openEpicomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.activEpicomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutEpiInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -190,6 +191,7 @@ namespace Epi.Windows.Menu
             resources.ApplyResources(this.pbxBackground, "pbxBackground");
             this.pbxBackground.Name = "pbxBackground";
             this.pbxBackground.TabStop = false;
+            this.pbxBackground.Click += new System.EventHandler(this.pbxBackground_Click);
             // 
             // btnWebsite
             // 
@@ -403,9 +405,7 @@ namespace Epi.Windows.Menu
             this.tables2X22XNToolStripMenuItem,
             this.mnuPoisson,
             this.mnuBinomial,
-            this.mnuMatchedPairCaseControl,
-            this.toolStripSeparator3,
-            this.openEpicomToolStripMenuItem});
+            this.mnuMatchedPairCaseControl});
             this.statCalcToolStripMenuItem.Name = "statCalcToolStripMenuItem";
             resources.ApplyResources(this.statCalcToolStripMenuItem, "statCalcToolStripMenuItem");
             // 
@@ -466,17 +466,6 @@ namespace Epi.Windows.Menu
             resources.ApplyResources(this.mnuMatchedPairCaseControl, "mnuMatchedPairCaseControl");
             this.mnuMatchedPairCaseControl.Click += new System.EventHandler(this.mnuMatchedPairCaseControl_Click);
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
-            // 
-            // openEpicomToolStripMenuItem
-            // 
-            this.openEpicomToolStripMenuItem.Name = "openEpicomToolStripMenuItem";
-            resources.ApplyResources(this.openEpicomToolStripMenuItem, "openEpicomToolStripMenuItem");
-            this.openEpicomToolStripMenuItem.Click += new System.EventHandler(this.openEpicomToolStripMenuItem_Click);
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -484,6 +473,7 @@ namespace Epi.Windows.Menu
             this.videosToolStripMenuItem,
             this.communityMessageBoardToolStripMenuItem,
             this.contactHelpdeskToolStripMenuItem,
+            this.otherEpiResourcesToolStripMenuItem,
             this.toolStripSeparator2,
             this.aboutEpiInfoToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
@@ -512,6 +502,26 @@ namespace Epi.Windows.Menu
             this.contactHelpdeskToolStripMenuItem.Name = "contactHelpdeskToolStripMenuItem";
             resources.ApplyResources(this.contactHelpdeskToolStripMenuItem, "contactHelpdeskToolStripMenuItem");
             this.contactHelpdeskToolStripMenuItem.Click += new System.EventHandler(this.contactHelpdeskToolStripMenuItem_Click);
+            // 
+            // otherEpiResourcesToolStripMenuItem
+            // 
+            this.otherEpiResourcesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.activEpicomToolStripMenuItem,
+            this.openEpicomToolStripMenuItem});
+            this.otherEpiResourcesToolStripMenuItem.Name = "otherEpiResourcesToolStripMenuItem";
+            resources.ApplyResources(this.otherEpiResourcesToolStripMenuItem, "otherEpiResourcesToolStripMenuItem");
+            // 
+            // openEpicomToolStripMenuItem
+            // 
+            this.openEpicomToolStripMenuItem.Name = "openEpicomToolStripMenuItem";
+            resources.ApplyResources(this.openEpicomToolStripMenuItem, "openEpicomToolStripMenuItem");
+            this.openEpicomToolStripMenuItem.Click += new System.EventHandler(this.openEpicomToolStripMenuItem_Click);
+            // 
+            // activEpicomToolStripMenuItem
+            // 
+            this.activEpicomToolStripMenuItem.Name = "activEpicomToolStripMenuItem";
+            resources.ApplyResources(this.activEpicomToolStripMenuItem, "activEpicomToolStripMenuItem");
+            this.activEpicomToolStripMenuItem.Click += new System.EventHandler(this.activEpicomToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -612,10 +622,11 @@ namespace Epi.Windows.Menu
         private ToolStripMenuItem communityMessageBoardToolStripMenuItem;
         private ToolStripMenuItem contactHelpdeskToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator2;
-        private ToolStripSeparator toolStripSeparator3;
-        private ToolStripMenuItem openEpicomToolStripMenuItem;
         private ToolStripMenuItem mnuPoisson;
         private ToolStripMenuItem mnuBinomial;
         private ToolStripMenuItem mnuMatchedPairCaseControl;
+        private ToolStripMenuItem otherEpiResourcesToolStripMenuItem;
+        private ToolStripMenuItem openEpicomToolStripMenuItem;
+        private ToolStripMenuItem activEpicomToolStripMenuItem;
     }
 }
