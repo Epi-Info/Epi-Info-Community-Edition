@@ -657,8 +657,8 @@ namespace EpiDashboard.Controls.GadgetProperties
               //  cbxField.Visibility = System.Windows.Visibility.Visible;
                // scrollViewerVarPro.Visibility = System.Windows.Visibility.Hidden;
 
-                checkboxUsePrompts.IsChecked = true;
-                checkboxUsePrompts.IsEnabled = true;
+              //  checkboxUsePrompts.IsChecked = true;
+              //  checkboxUsePrompts.IsEnabled = true;
                 cbxFieldWeight.IsEnabled = true;
                 lbxFieldStrata.IsEnabled = true;
                 checkboxSortHighLow.IsEnabled = true;
@@ -671,8 +671,8 @@ namespace EpiDashboard.Controls.GadgetProperties
                // cbxField.Visibility = System.Windows.Visibility.Hidden;
               //  scrollViewerVarPro.Visibility = System.Windows.Visibility.Visible;
 
-                checkboxUsePrompts.IsChecked = false;
-                checkboxUsePrompts.IsEnabled = false;
+              //  checkboxUsePrompts.IsChecked = false;
+              //  checkboxUsePrompts.IsEnabled = false;
 
                 cbxFieldWeight.IsEnabled = false;
                 cbxFieldWeight.SelectedIndex = -1;

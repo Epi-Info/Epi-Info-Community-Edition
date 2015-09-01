@@ -378,7 +378,7 @@ namespace EpiDashboard
             grid.Children.Add(txtValHeader);
 
             //Dont show prompt if frequency is requested for more than one main variable.
-            if (freqParameters.UseFieldPrompts == true && fields.Count == 1) ShowFieldPrompt();
+            if (freqParameters.UseFieldPrompts == true && fields.Count > 0) ShowFieldPrompt();
             txtValHeader.MouseLeftButtonUp += new MouseButtonEventHandler(txtValHeader_MouseLeftButtonUp);
             txtValHeader.MouseEnter += new MouseEventHandler(txtValHeader_MouseEnter);
             txtValHeader.MouseLeave += new MouseEventHandler(txtValHeader_MouseLeave);
@@ -756,8 +756,11 @@ namespace EpiDashboard
         /// </summary>
         private void ShowFieldPrompt()
         {
+            int stratagridlistcounter = 1;
             foreach (Grid grid in this.StrataGridList)
             {
+                if (stratagridlistcounter++ < this.StrataGridList.Count)
+                    continue;
                 IEnumerable<UIElement> elements = grid.Children.Cast<UIElement>().Where(x => Grid.GetRow(x) == 0 && Grid.GetColumn(x) == 0);
                 TextBlock txt = null;
                 foreach (UIElement element in elements)
