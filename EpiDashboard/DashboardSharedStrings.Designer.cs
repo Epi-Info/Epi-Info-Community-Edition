@@ -2274,7 +2274,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maxium rows to display:.
+        ///   Looks up a localized string similar to Maximum rows to display:.
         /// </summary>
         public static string GADGET_MAX_ROWS_TO_DISPLAY {
             get {

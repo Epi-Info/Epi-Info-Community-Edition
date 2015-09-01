@@ -73,6 +73,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
           //  cbxField.ItemsSource = fields;
             lbxField.ItemsSource = fields;
+            // Set the height of the field list to fit
+            lbxField.Height = System.Windows.SystemParameters.PrimaryScreenHeight / 1.7;
             //Weight Fields
             weightFields.Add(String.Empty);
             columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
@@ -105,6 +107,8 @@ namespace EpiDashboard.Controls.GadgetProperties
                 }
             }
             lbxFieldStrata.ItemsSource = strataItems;
+            // Set the height of the stratification list to fit
+            lbxFieldStrata.Height = System.Windows.SystemParameters.PrimaryScreenHeight / 2.2;
 
            // CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cbxField.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
@@ -654,6 +658,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                // scrollViewerVarPro.Visibility = System.Windows.Visibility.Hidden;
 
                 checkboxUsePrompts.IsChecked = true;
+                checkboxUsePrompts.IsEnabled = true;
                 cbxFieldWeight.IsEnabled = true;
                 lbxFieldStrata.IsEnabled = true;
                 checkboxSortHighLow.IsEnabled = true;
@@ -667,6 +672,7 @@ namespace EpiDashboard.Controls.GadgetProperties
               //  scrollViewerVarPro.Visibility = System.Windows.Visibility.Visible;
 
                 checkboxUsePrompts.IsChecked = false;
+                checkboxUsePrompts.IsEnabled = false;
 
                 cbxFieldWeight.IsEnabled = false;
                 cbxFieldWeight.SelectedIndex = -1;
