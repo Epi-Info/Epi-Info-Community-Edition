@@ -8663,7 +8663,7 @@ namespace EpiDashboard
             //}
 
             DataView sourceView = ds.Tables[0].DefaultView;
-            DataView sortedSourceView = new DataView(ds.Tables[0], sourceView.RowFilter, string.Join(", ", safeColumnNames.ToArray()), DataViewRowState.CurrentRows);
+            DataView sortedSourceView = new DataView(ds.Tables[0], parameters.CustomFilter, string.Join(", ", safeColumnNames.ToArray()), DataViewRowState.CurrentRows);
             bool isFirstDuplicate = true;
             DataRow lastRow = null;
 
