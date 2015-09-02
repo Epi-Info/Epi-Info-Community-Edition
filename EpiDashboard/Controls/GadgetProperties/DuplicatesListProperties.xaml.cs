@@ -166,6 +166,15 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.GadgetTitle = txtTitle.Text;
             Parameters.GadgetDescription = txtDesc.Text;
 
+            if (checkboxUsePrompts.IsChecked == true)
+            {
+                Parameters.InputVariableList.Add("usepromptsforcolumnnames", "true");
+            }
+            else
+            {
+                Parameters.InputVariableList.Clear();
+            }
+
             double height = 0;
             double width = 0;
 
