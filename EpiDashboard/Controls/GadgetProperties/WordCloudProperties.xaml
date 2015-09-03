@@ -61,6 +61,7 @@
                     </ListView.GroupStyle>
                 </ListView>-->
                 <ComboBox x:Name="cmbField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28"/>
+                <StackPanel Height="50"></StackPanel>
                 <Label x:Name="tblockWordsIgnore">Common words to ignore:__xfe</Label>
                 <TextBox x:Name="txtCommonWords" Width="360" AcceptsReturn="True" Height="128" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
             </StackPanel>
