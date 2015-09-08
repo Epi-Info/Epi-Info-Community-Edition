@@ -41,6 +41,8 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width=".05*"/>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width=".05*" MaxWidth="32" />
@@ -149,7 +151,57 @@
                             </Grid>
                         </DockPanel>
 
-                        <StackPanel Grid.Column="8" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="8, 0, 8, 0">
+                        <DockPanel x:Name="iconCreateNewVariable"
+                                   Style="{StaticResource menuIconStyle}"
+                                   Grid.Column="7" MouseLeftButtonUp="iconCreateNewVariable_MouseLeftButtonUp">
+                            <DockPanel.ToolTip>
+                                <StackPanel>
+                                    <Label x:Name="tooltipCreateVariableHeader" FontWeight="Bold">Create New Variable</Label>
+                                    <TextBlock x:Name="tooltipCreateVariable"
+                                               Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
+                                        Expands the new variable gadget.
+                                    </TextBlock>
+                                </StackPanel>
+                            </DockPanel.ToolTip>
+                            <Grid Height="36" Width="36">
+                                <Ellipse Stroke="White" Fill="Transparent" StrokeThickness="3" />
+                                <Ellipse Height="12" Width="12" Stroke="White" Fill="White" StrokeThickness="1" />
+                                <!--<TextBlock Foreground="White" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, 2, 4, 0">*</TextBlock>-->
+                            </Grid>
+                        </DockPanel>
+
+                        <DockPanel x:Name="iconFilter"
+                                   Style="{StaticResource menuIconStyle}"
+                                   Grid.Column="8" MouseLeftButtonUp="iconFilter_MouseLeftButtonUp">
+                            <DockPanel.ToolTip>
+                                <StackPanel>
+                                    <Label x:Name="tooltipFilterHeader" FontWeight="Bold">Add/Remove Filters</Label>
+                                    <TextBlock x:Name="tooltipFilter"
+                                               Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
+                                        Expands the dashboard filters gadget.
+                                    </TextBlock>
+                                </StackPanel>
+                            </DockPanel.ToolTip>
+                            <Grid Height="36" Width="36">
+                                <Ellipse Stroke="White" Fill="Transparent" StrokeThickness="3" />
+                                <!--<TextBlock Foreground="White" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, 2, 4, 0">*</TextBlock>-->
+                                <Line X1="8" X2="28" Y1="10" Y2="10" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="8" X2="28" Y1="12" Y2="12" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="9" X2="27" Y1="13" Y2="13" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="10" X2="26" Y1="14" Y2="14" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="11" X2="25" Y1="15" Y2="15" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="12" X2="24" Y1="16" Y2="16" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="13" X2="23" Y1="17" Y2="17" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="14" X2="22" Y1="18" Y2="18" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="15" X2="21" Y1="19" Y2="19" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="15" X2="21" Y1="21" Y2="21" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="15" X2="21" Y1="23" Y2="23" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="15" X2="21" Y1="25" Y2="25" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="15" X2="21" Y1="27" Y2="27" Stroke="White" StrokeThickness="2"></Line>
+                            </Grid>
+                        </DockPanel>
+
+                        <StackPanel Grid.Column="9" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="8, 0, 8, 0">
 
                             <ComboBox x:Name="cmbView" SelectedIndex="0" FontSize="15" Visibility="Collapsed" SelectionChanged="cmbView_SelectionChanged" >
                                 <ComboBoxItem>Analysis</ComboBoxItem>

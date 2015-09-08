@@ -95,6 +95,8 @@ namespace EpiDashboard
         private string lastSavedCanvasFileName;
         private bool isWordInstalled = false;
         private bool isExcelInstalled = false;
+        private bool isCreatingNewVariable = false;
+        private bool isCreatingFilter = false;
         private const int DEFAULT_TABLE_FONT_SIZE = 13;
         private const int DEFAULT_CANVAS_HEIGHT = 8000;
         private const int DEFAULT_ANCHOR_TOP_SPACE = 10;
@@ -2511,6 +2513,7 @@ namespace EpiDashboard
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             dataFilteringControl.BeginAnimation(Canvas.RightProperty, anim);
             dataFilteringControl.SetExpanded();
+            this.isCreatingFilter = true;
         }
 
         void CollapseFilterGadget()
@@ -2523,6 +2526,7 @@ namespace EpiDashboard
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             dataFilteringControl.BeginAnimation(Canvas.RightProperty, anim);
             dataFilteringControl.SetCollapsed();
+            this.isCreatingFilter = false;
         }
 
         void AddDefinedVariablesGadget()
@@ -2560,6 +2564,7 @@ namespace EpiDashboard
             anim.AccelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             variablesControl.BeginAnimation(Canvas.LeftProperty, anim);
+            this.isCreatingNewVariable = true;
         }
 
         void CollapseRecodingGadget()
@@ -2571,6 +2576,7 @@ namespace EpiDashboard
             anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             variablesControl.BeginAnimation(Canvas.LeftProperty, anim);
+            this.isCreatingNewVariable = false;
         }
 
         void dataRecodingControl_MouseLeave(object sender, MouseEventArgs e)
@@ -4102,6 +4108,28 @@ namespace EpiDashboard
             if (DashboardHelper != null)
             {
                 SaveCanvasAs();
+            }
+        }
+
+        private void iconCreateNewVariable_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (DashboardHelper != null)
+            {
+                if (isCreatingNewVariable)
+                    CollapseRecodingGadget();
+                else
+                    ExpandRecodingGadget();
+            }
+        }
+
+        private void iconFilter_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (DashboardHelper != null)
+            {
+                if (isCreatingFilter)
+                    CollapseFilterGadget();
+                else
+                    ExpandFilterGadget();
             }
         }
 
