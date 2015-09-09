@@ -63,7 +63,32 @@ namespace Epi.Windows.Dialogs
             this.label3 = new System.Windows.Forms.Label();
             this.lbxLanguages = new System.Windows.Forms.ListBox();
             this.tabAnalysis = new System.Windows.Forms.TabPage();
-            this.settingsPanel = new Epi.Windows.Controls.SettingsPanel();
+            this.lblPrecision = new System.Windows.Forms.Label();
+            this.numericUpDownPrecision = new System.Windows.Forms.NumericUpDown();
+            this.gbxHTMLOutput = new System.Windows.Forms.GroupBox();
+            this.cbxShowPrompt = new System.Windows.Forms.CheckBox();
+            this.cbxTablesOutput = new System.Windows.Forms.CheckBox();
+            this.cbxPercents = new System.Windows.Forms.CheckBox();
+            this.cbxGraphics = new System.Windows.Forms.CheckBox();
+            this.cbxSelectCriteria = new System.Windows.Forms.CheckBox();
+            this.cbxHyperlinks = new System.Windows.Forms.CheckBox();
+            this.gbxRepresentBooleans = new System.Windows.Forms.GroupBox();
+            this.lblYesAs = new System.Windows.Forms.Label();
+            this.cmbYesAs = new System.Windows.Forms.ComboBox();
+            this.lblNoAs = new System.Windows.Forms.Label();
+            this.cmbNoAs = new System.Windows.Forms.ComboBox();
+            this.lblMissingAs = new System.Windows.Forms.Label();
+            this.cmbMissingAs = new System.Windows.Forms.ComboBox();
+            this.gbxStatistics = new System.Windows.Forms.GroupBox();
+            this.rdbAdvanced = new System.Windows.Forms.RadioButton();
+            this.rdbMinimal = new System.Windows.Forms.RadioButton();
+            this.rdbIntermediate = new System.Windows.Forms.RadioButton();
+            this.rdbNone = new System.Windows.Forms.RadioButton();
+            this.cbxIncludeMissing = new System.Windows.Forms.CheckBox();
+            this.gbxProcessRecords = new System.Windows.Forms.GroupBox();
+            this.rdbDeleted = new System.Windows.Forms.RadioButton();
+            this.rdbBoth = new System.Windows.Forms.RadioButton();
+            this.rdbNormal = new System.Windows.Forms.RadioButton();
             this.tabPlugIns = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnRemoveGadget = new System.Windows.Forms.Button();
@@ -106,6 +131,11 @@ namespace Epi.Windows.Dialogs
             ((System.ComponentModel.ISupportInitialize)(this.pbxPreview)).BeginInit();
             this.tabLanguage.SuspendLayout();
             this.tabAnalysis.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrecision)).BeginInit();
+            this.gbxHTMLOutput.SuspendLayout();
+            this.gbxRepresentBooleans.SuspendLayout();
+            this.gbxStatistics.SuspendLayout();
+            this.gbxProcessRecords.SuspendLayout();
             this.tabPlugIns.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupDataDrivers.SuspendLayout();
@@ -343,27 +373,193 @@ namespace Epi.Windows.Dialogs
             // 
             // tabAnalysis
             // 
-            this.tabAnalysis.Controls.Add(this.settingsPanel);
+            this.tabAnalysis.Controls.Add(this.lblPrecision);
+            this.tabAnalysis.Controls.Add(this.numericUpDownPrecision);
+            this.tabAnalysis.Controls.Add(this.gbxHTMLOutput);
+            this.tabAnalysis.Controls.Add(this.gbxRepresentBooleans);
+            this.tabAnalysis.Controls.Add(this.gbxStatistics);
+            this.tabAnalysis.Controls.Add(this.cbxIncludeMissing);
+            this.tabAnalysis.Controls.Add(this.gbxProcessRecords);
             resources.ApplyResources(this.tabAnalysis, "tabAnalysis");
             this.tabAnalysis.Name = "tabAnalysis";
             this.tabAnalysis.UseVisualStyleBackColor = true;
             // 
-            // settingsPanel
+            // lblPrecision
             // 
-            resources.ApplyResources(this.settingsPanel, "settingsPanel");
-            this.settingsPanel.Name = "settingsPanel";
-            this.settingsPanel.RepresentationOfYesChanged += new System.EventHandler(this.settingsPanel_SettingChanged);
-            this.settingsPanel.RepresentationOfNoChanged += new System.EventHandler(this.settingsPanel_SettingChanged);
-            this.settingsPanel.RepresentationOfMissingChanged += new System.EventHandler(this.settingsPanel_SettingChanged);
-            this.settingsPanel.ShowSelectCriteriaChanged += new System.EventHandler(this.settingsPanel_SettingChanged);
-            this.settingsPanel.ShowGraphicsChanged += new System.EventHandler(this.settingsPanel_SettingChanged);
-            this.settingsPanel.ShowHyperlinksChanged += new System.EventHandler(this.settingsPanel_SettingChanged);
-            this.settingsPanel.ShowPromptChanged += new System.EventHandler(this.settingsPanel_SettingChanged);
-            this.settingsPanel.ShowPercentsChanged += new System.EventHandler(this.settingsPanel_SettingChanged);
-            this.settingsPanel.ShowTablesOutputChanged += new System.EventHandler(this.settingsPanel_SettingChanged);
-            this.settingsPanel.ShowIncludeMissingChanged += new System.EventHandler(this.settingsPanel_SettingChanged);
-            this.settingsPanel.StatisticsLevelChanged += new System.EventHandler(this.settingsPanel_SettingChanged);
-            this.settingsPanel.ProcessRecordsChanged += new System.EventHandler(this.settingsPanel_SettingChanged);
+            resources.ApplyResources(this.lblPrecision, "lblPrecision");
+            this.lblPrecision.Name = "lblPrecision";
+            // 
+            // numericUpDownPrecision
+            // 
+            resources.ApplyResources(this.numericUpDownPrecision, "numericUpDownPrecision");
+            this.numericUpDownPrecision.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.numericUpDownPrecision.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownPrecision.Name = "numericUpDownPrecision";
+            this.numericUpDownPrecision.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // gbxHTMLOutput
+            // 
+            this.gbxHTMLOutput.Controls.Add(this.cbxShowPrompt);
+            this.gbxHTMLOutput.Controls.Add(this.cbxTablesOutput);
+            this.gbxHTMLOutput.Controls.Add(this.cbxPercents);
+            this.gbxHTMLOutput.Controls.Add(this.cbxGraphics);
+            this.gbxHTMLOutput.Controls.Add(this.cbxSelectCriteria);
+            this.gbxHTMLOutput.Controls.Add(this.cbxHyperlinks);
+            resources.ApplyResources(this.gbxHTMLOutput, "gbxHTMLOutput");
+            this.gbxHTMLOutput.Name = "gbxHTMLOutput";
+            this.gbxHTMLOutput.TabStop = false;
+            // 
+            // cbxShowPrompt
+            // 
+            resources.ApplyResources(this.cbxShowPrompt, "cbxShowPrompt");
+            this.cbxShowPrompt.Name = "cbxShowPrompt";
+            // 
+            // cbxTablesOutput
+            // 
+            resources.ApplyResources(this.cbxTablesOutput, "cbxTablesOutput");
+            this.cbxTablesOutput.Name = "cbxTablesOutput";
+            // 
+            // cbxPercents
+            // 
+            resources.ApplyResources(this.cbxPercents, "cbxPercents");
+            this.cbxPercents.Name = "cbxPercents";
+            // 
+            // cbxGraphics
+            // 
+            resources.ApplyResources(this.cbxGraphics, "cbxGraphics");
+            this.cbxGraphics.Name = "cbxGraphics";
+            // 
+            // cbxSelectCriteria
+            // 
+            resources.ApplyResources(this.cbxSelectCriteria, "cbxSelectCriteria");
+            this.cbxSelectCriteria.Name = "cbxSelectCriteria";
+            // 
+            // cbxHyperlinks
+            // 
+            resources.ApplyResources(this.cbxHyperlinks, "cbxHyperlinks");
+            this.cbxHyperlinks.Name = "cbxHyperlinks";
+            // 
+            // gbxRepresentBooleans
+            // 
+            this.gbxRepresentBooleans.Controls.Add(this.lblYesAs);
+            this.gbxRepresentBooleans.Controls.Add(this.cmbYesAs);
+            this.gbxRepresentBooleans.Controls.Add(this.lblNoAs);
+            this.gbxRepresentBooleans.Controls.Add(this.cmbNoAs);
+            this.gbxRepresentBooleans.Controls.Add(this.lblMissingAs);
+            this.gbxRepresentBooleans.Controls.Add(this.cmbMissingAs);
+            resources.ApplyResources(this.gbxRepresentBooleans, "gbxRepresentBooleans");
+            this.gbxRepresentBooleans.Name = "gbxRepresentBooleans";
+            this.gbxRepresentBooleans.TabStop = false;
+            // 
+            // lblYesAs
+            // 
+            resources.ApplyResources(this.lblYesAs, "lblYesAs");
+            this.lblYesAs.Name = "lblYesAs";
+            // 
+            // cmbYesAs
+            // 
+            resources.ApplyResources(this.cmbYesAs, "cmbYesAs");
+            this.cmbYesAs.Name = "cmbYesAs";
+            // 
+            // lblNoAs
+            // 
+            resources.ApplyResources(this.lblNoAs, "lblNoAs");
+            this.lblNoAs.Name = "lblNoAs";
+            // 
+            // cmbNoAs
+            // 
+            resources.ApplyResources(this.cmbNoAs, "cmbNoAs");
+            this.cmbNoAs.Name = "cmbNoAs";
+            // 
+            // lblMissingAs
+            // 
+            resources.ApplyResources(this.lblMissingAs, "lblMissingAs");
+            this.lblMissingAs.Name = "lblMissingAs";
+            // 
+            // cmbMissingAs
+            // 
+            resources.ApplyResources(this.cmbMissingAs, "cmbMissingAs");
+            this.cmbMissingAs.Name = "cmbMissingAs";
+            // 
+            // gbxStatistics
+            // 
+            this.gbxStatistics.Controls.Add(this.rdbAdvanced);
+            this.gbxStatistics.Controls.Add(this.rdbMinimal);
+            this.gbxStatistics.Controls.Add(this.rdbIntermediate);
+            this.gbxStatistics.Controls.Add(this.rdbNone);
+            resources.ApplyResources(this.gbxStatistics, "gbxStatistics");
+            this.gbxStatistics.Name = "gbxStatistics";
+            this.gbxStatistics.TabStop = false;
+            // 
+            // rdbAdvanced
+            // 
+            this.rdbAdvanced.Checked = true;
+            resources.ApplyResources(this.rdbAdvanced, "rdbAdvanced");
+            this.rdbAdvanced.Name = "rdbAdvanced";
+            this.rdbAdvanced.TabStop = true;
+            this.rdbAdvanced.Tag = "4";
+            // 
+            // rdbMinimal
+            // 
+            resources.ApplyResources(this.rdbMinimal, "rdbMinimal");
+            this.rdbMinimal.Name = "rdbMinimal";
+            this.rdbMinimal.Tag = "2";
+            // 
+            // rdbIntermediate
+            // 
+            resources.ApplyResources(this.rdbIntermediate, "rdbIntermediate");
+            this.rdbIntermediate.Name = "rdbIntermediate";
+            this.rdbIntermediate.Tag = "3";
+            // 
+            // rdbNone
+            // 
+            resources.ApplyResources(this.rdbNone, "rdbNone");
+            this.rdbNone.Name = "rdbNone";
+            this.rdbNone.Tag = "1";
+            // 
+            // cbxIncludeMissing
+            // 
+            resources.ApplyResources(this.cbxIncludeMissing, "cbxIncludeMissing");
+            this.cbxIncludeMissing.Name = "cbxIncludeMissing";
+            // 
+            // gbxProcessRecords
+            // 
+            this.gbxProcessRecords.Controls.Add(this.rdbDeleted);
+            this.gbxProcessRecords.Controls.Add(this.rdbBoth);
+            this.gbxProcessRecords.Controls.Add(this.rdbNormal);
+            resources.ApplyResources(this.gbxProcessRecords, "gbxProcessRecords");
+            this.gbxProcessRecords.Name = "gbxProcessRecords";
+            this.gbxProcessRecords.TabStop = false;
+            // 
+            // rdbDeleted
+            // 
+            resources.ApplyResources(this.rdbDeleted, "rdbDeleted");
+            this.rdbDeleted.Name = "rdbDeleted";
+            this.rdbDeleted.Tag = "2";
+            // 
+            // rdbBoth
+            // 
+            resources.ApplyResources(this.rdbBoth, "rdbBoth");
+            this.rdbBoth.Name = "rdbBoth";
+            this.rdbBoth.Tag = "3";
+            // 
+            // rdbNormal
+            // 
+            resources.ApplyResources(this.rdbNormal, "rdbNormal");
+            this.rdbNormal.Name = "rdbNormal";
+            this.rdbNormal.Tag = "1";
             // 
             // tabPlugIns
             // 
@@ -622,6 +818,11 @@ namespace Epi.Windows.Dialogs
             this.tabLanguage.ResumeLayout(false);
             this.tabLanguage.PerformLayout();
             this.tabAnalysis.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrecision)).EndInit();
+            this.gbxHTMLOutput.ResumeLayout(false);
+            this.gbxRepresentBooleans.ResumeLayout(false);
+            this.gbxStatistics.ResumeLayout(false);
+            this.gbxProcessRecords.ResumeLayout(false);
             this.tabPlugIns.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupDataDrivers.ResumeLayout(false);
@@ -666,8 +867,7 @@ namespace Epi.Windows.Dialogs
 		private System.Windows.Forms.Button btnDeleteTranslation;
 		private System.Windows.Forms.Button btnRestoreDefaults;
 		private System.Windows.Forms.Button btnApply;
-		private System.Windows.Forms.Label label7;
-		private Epi.Windows.Controls.SettingsPanel settingsPanel;
+        private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.TextBox txtWorkingDirectory;
         private System.Windows.Forms.Button btnEllipse;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -711,5 +911,31 @@ namespace Epi.Windows.Dialogs
         private System.Windows.Forms.RadioButton EWErbNoWindows;
         private System.Windows.Forms.RadioButton EWErbUseWindows;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblPrecision;
+        private System.Windows.Forms.NumericUpDown numericUpDownPrecision;
+        private System.Windows.Forms.GroupBox gbxHTMLOutput;
+        private System.Windows.Forms.CheckBox cbxShowPrompt;
+        private System.Windows.Forms.CheckBox cbxTablesOutput;
+        private System.Windows.Forms.CheckBox cbxPercents;
+        private System.Windows.Forms.CheckBox cbxGraphics;
+        private System.Windows.Forms.CheckBox cbxSelectCriteria;
+        private System.Windows.Forms.CheckBox cbxHyperlinks;
+        private System.Windows.Forms.GroupBox gbxRepresentBooleans;
+        private System.Windows.Forms.Label lblYesAs;
+        private System.Windows.Forms.ComboBox cmbYesAs;
+        private System.Windows.Forms.Label lblNoAs;
+        private System.Windows.Forms.ComboBox cmbNoAs;
+        private System.Windows.Forms.Label lblMissingAs;
+        private System.Windows.Forms.ComboBox cmbMissingAs;
+        private System.Windows.Forms.GroupBox gbxStatistics;
+        private System.Windows.Forms.RadioButton rdbAdvanced;
+        private System.Windows.Forms.RadioButton rdbMinimal;
+        private System.Windows.Forms.RadioButton rdbIntermediate;
+        private System.Windows.Forms.RadioButton rdbNone;
+        private System.Windows.Forms.CheckBox cbxIncludeMissing;
+        private System.Windows.Forms.GroupBox gbxProcessRecords;
+        private System.Windows.Forms.RadioButton rdbDeleted;
+        private System.Windows.Forms.RadioButton rdbBoth;
+        private System.Windows.Forms.RadioButton rdbNormal;
     }
 }
