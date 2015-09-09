@@ -61,64 +61,62 @@ namespace Epi.Windows.Analysis.Dialogs
             KeyValuePairCollection kvPairs = new KeyValuePairCollection();
             kvPairs.Delimiter = CharLiterals.SPACE;
 
-            if ((settingsPanel.RepresentationOfYes != config.Settings.RepresentationOfYes) || (hasYesAsChanged))
+            if ((cmbYesAs.Text != config.Settings.RepresentationOfYes) || (hasYesAsChanged))
             {
-                kvPairs.Add(new KeyValuePair(ShortHands.YES, Util.InsertInDoubleQuotes(settingsPanel.RepresentationOfYes)));
+                kvPairs.Add(new KeyValuePair(ShortHands.YES, Util.InsertInDoubleQuotes(cmbYesAs.Text)));
             }
-            if ((settingsPanel.RepresentationOfNo != config.Settings.RepresentationOfNo) || (hasNoAsChanged))
+            if ((cmbNoAs.Text != config.Settings.RepresentationOfNo) || (hasNoAsChanged))
             {
-                kvPairs.Add(new KeyValuePair(ShortHands.NO, Util.InsertInDoubleQuotes(settingsPanel.RepresentationOfNo)));
+                kvPairs.Add(new KeyValuePair(ShortHands.NO, Util.InsertInDoubleQuotes(cmbNoAs.Text)));
             }
-            if ((settingsPanel.RepresentationOfMissing != config.Settings.RepresentationOfMissing) || (hasMissingAsChanged))
+            if ((cmbMissingAs.Text != config.Settings.RepresentationOfMissing) || (hasMissingAsChanged))
             {
-                kvPairs.Add(new KeyValuePair(ShortHands.MISSING, Util.InsertInDoubleQuotes(settingsPanel.RepresentationOfMissing)));
+                kvPairs.Add(new KeyValuePair(ShortHands.MISSING, Util.InsertInDoubleQuotes(cmbMissingAs.Text)));
             }
-            if ((settingsPanel.ShowGraphics != config.Settings.ShowGraphics) || (hasShowGraphicChanged))
+            if ((cbxGraphics.Checked != config.Settings.ShowGraphics) || (hasShowGraphicChanged))
             {
                 kvPairs.Add(new KeyValuePair(CommandNames.FREQGRAPH,
-                    Epi.Util.GetShortHand(settingsPanel.ShowGraphics)));
+                    Epi.Util.GetShortHand(cbxGraphics.Checked)));
             }
-            if ((settingsPanel.ShowHyperlinks != config.Settings.ShowHyperlinks) || (hasShowHyperlinkChanged))
+            if ((cbxHyperlinks.Checked != config.Settings.ShowHyperlinks) || (hasShowHyperlinkChanged))
             {
                 kvPairs.Add(new KeyValuePair(CommandNames.HYPERLINKS,
-                    Epi.Util.GetShortHand(settingsPanel.ShowHyperlinks)));
+                    Epi.Util.GetShortHand(cbxHyperlinks.Checked)));
             }
-            if ((settingsPanel.ShowPercents != config.Settings.ShowPercents) || (hasShowPercentsChanged))
+            if ((cbxPercents.Checked != config.Settings.ShowPercents) || (hasShowPercentsChanged))
             {
                 kvPairs.Add(new KeyValuePair(CommandNames.PERCENTS,
-                    Epi.Util.GetShortHand(settingsPanel.ShowPercents)));
+                    Epi.Util.GetShortHand(cbxPercents.Checked)));
             }
-            if ((settingsPanel.ShowSelectCriteria != config.Settings.ShowSelection) || (hasShowSelectChanged))
+            if ((cbxSelectCriteria.Checked != config.Settings.ShowSelection) || (hasShowSelectChanged))
             {
                 kvPairs.Add(new KeyValuePair(CommandNames.SELECT,
-                    Epi.Util.GetShortHand(settingsPanel.ShowSelectCriteria)));
+                    Epi.Util.GetShortHand(cbxSelectCriteria.Checked)));
             }
-            if ((settingsPanel.ShowPrompt != config.Settings.ShowCompletePrompt) || (hasShowPromptChanged))
+            if ((cbxShowPrompt.Checked != config.Settings.ShowCompletePrompt) || (hasShowPromptChanged))
             {
                 kvPairs.Add(new KeyValuePair(CommandNames.SHOWPROMPTS,
-                    Epi.Util.GetShortHand(settingsPanel.ShowPrompt)));
+                    Epi.Util.GetShortHand(cbxShowPrompt.Checked)));
             }
-            if ((settingsPanel.ShowTablesOutput != config.Settings.ShowTables) || (hasShowTablesChanged))
+            if ((cbxTablesOutput.Checked != config.Settings.ShowTables) || (hasShowTablesChanged))
             {
                 kvPairs.Add(new KeyValuePair(CommandNames.TABLES,
-                    Epi.Util.GetShortHand(settingsPanel.ShowTablesOutput)));
+                    Epi.Util.GetShortHand(cbxTablesOutput.Checked)));
             }
-            if ((settingsPanel.ShowIncludeMissing != config.Settings.IncludeMissingValues) || (hasIncludeMissingChanged))
+            if ((cbxIncludeMissing.Checked != config.Settings.IncludeMissingValues) || (hasIncludeMissingChanged))
             {
                 kvPairs.Add(new KeyValuePair(CommandNames.MISSING,
-                    Epi.Util.GetShortHand(settingsPanel.ShowIncludeMissing)));
+                    Epi.Util.GetShortHand(cbxIncludeMissing.Checked)));
             }
             if (hasStatisticsLevelChanged)
             {
-                RadioButton rbSelected = settingsPanel.StatisticLevel;
-                StatisticsLevel levelIdSelected = (StatisticsLevel)short.Parse(rbSelected.Tag.ToString());
+                StatisticsLevel levelIdSelected = (StatisticsLevel)short.Parse(WinUtil.GetSelectedRadioButton(gbxStatistics).Tag.ToString());
                 string levelTagSelected = AppData.Instance.GetStatisticsLevelById(levelIdSelected).Tag;
                 kvPairs.Add(new KeyValuePair(CommandNames.STATISTICS, levelTagSelected));
             }
             if (hasProcessRecordsChanged)
             {
-                RadioButton rbSelected = settingsPanel.ProcessRecords;
-                RecordProcessingScope scopeIdSelected = (RecordProcessingScope)short.Parse(rbSelected.Tag.ToString());
+                RecordProcessingScope scopeIdSelected = (RecordProcessingScope)short.Parse(WinUtil.GetSelectedRadioButton(gbxProcessRecords).Tag.ToString());
                 string scopeTagSelected = AppData.Instance.GetRecordProcessessingScopeById(scopeIdSelected).Tag;
                 kvPairs.Add(new KeyValuePair(CommandNames.PROCESS, scopeTagSelected));
             }
@@ -170,6 +168,51 @@ namespace Epi.Windows.Analysis.Dialogs
         private bool hasProcessRecordsChanged;
         #endregion Private Attributes
 
+        #region Public Methods
+
+        /// <summary>
+        /// Loads the settings from the configuration file.
+        /// </summary>
+        public void ShowSettings(Configuration pConfig = null)
+        {
+            Configuration config = null;
+
+            if (pConfig == null)
+            {
+                config = Configuration.GetNewInstance();
+            }
+            else
+            {
+                config = pConfig;
+            }
+
+
+
+            Epi.DataSets.Config.SettingsRow settings = config.Settings;
+
+            // Representation of boolean values ...
+            cmbYesAs.SelectedItem = settings.RepresentationOfYes;
+            cmbNoAs.SelectedItem = settings.RepresentationOfNo;
+            cmbMissingAs.SelectedItem = settings.RepresentationOfMissing;
+
+            // HTML output options ...
+            cbxShowPrompt.Checked = settings.ShowCompletePrompt;
+            cbxSelectCriteria.Checked = settings.ShowSelection;
+            cbxPercents.Checked = settings.ShowPercents;
+            cbxGraphics.Checked = settings.ShowGraphics;
+            cbxHyperlinks.Checked = settings.ShowHyperlinks;
+            cbxTablesOutput.Checked = settings.ShowTables;
+
+            // Statistics Options
+            WinUtil.SetSelectedRadioButton(settings.StatisticsLevel.ToString(), gbxStatistics);
+            numericUpDownPrecision.Value = settings.PrecisionForStatistics;
+
+            // Record Processing
+            WinUtil.SetSelectedRadioButton(settings.RecordProcessingScope.ToString(), gbxProcessRecords);
+            cbxIncludeMissing.Checked = settings.IncludeMissingValues;
+        }
+        #endregion //Public Methods
+
         #region Private Methods
 
         private void Construct()
@@ -200,6 +243,83 @@ namespace Epi.Windows.Analysis.Dialogs
 			hasProcessRecordsChanged = changed;
 			
 		}
+
+        #region Private Methods
+
+        /// <summary>
+        /// Loads combobox with values for RepresentationsOfYes from application data file
+        /// </summary>
+        private void LoadRepresentionsOfYes()
+        {
+            string currentRepresentationOfYes = Configuration.GetNewInstance().Settings.RepresentationOfYes;
+            DataView dv = AppData.Instance.RepresentationsOfYesDataTable.DefaultView;
+            cmbYesAs.Items.Clear();
+            if (!string.IsNullOrEmpty(currentRepresentationOfYes))
+            {
+                cmbYesAs.Items.Add(currentRepresentationOfYes);
+            }
+            dv.Sort = ColumnNames.POSITION;
+            foreach (DataRowView row in dv)
+            {
+                string name = row[ColumnNames.NAME].ToString();
+                if (name != currentRepresentationOfYes)
+                {
+                    cmbYesAs.Items.Add(row[ColumnNames.NAME]);
+                }
+            }
+            cmbYesAs.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Loads combobox with values for RepresentationsOfNo from application data file
+        /// </summary>
+        private void LoadRepresentionsOfNo()
+        {
+            string currentRepresentationOfNo = Configuration.GetNewInstance().Settings.RepresentationOfNo;
+            DataView dv = AppData.Instance.RepresentationsOfNoDataTable.DefaultView;
+            cmbNoAs.Items.Clear();
+            if (!string.IsNullOrEmpty(currentRepresentationOfNo))
+            {
+                cmbNoAs.Items.Add(currentRepresentationOfNo);
+            }
+            dv.Sort = ColumnNames.POSITION;
+            foreach (DataRowView row in dv)
+            {
+                string name = row[ColumnNames.NAME].ToString();
+                if (name != currentRepresentationOfNo)
+                {
+                    cmbNoAs.Items.Add(name);
+                }
+            }
+            cmbNoAs.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Loads combobox with values for RepresentationsOfMissing from application data file
+        /// </summary>
+        private void LoadRepresentionsOfMissing()
+        {
+            string currentRepresentationOfMissing = Configuration.GetNewInstance().Settings.RepresentationOfMissing;
+            DataView dv = AppData.Instance.RepresentationsOfMissingDataTable.DefaultView;
+            cmbMissingAs.Items.Clear();
+            if (!string.IsNullOrEmpty(currentRepresentationOfMissing))
+            {
+                cmbMissingAs.Items.Add(currentRepresentationOfMissing);
+            }
+            dv.Sort = ColumnNames.POSITION;
+            foreach (DataRowView row in dv)
+            {
+                string name = row[ColumnNames.NAME].ToString();
+                if (name != currentRepresentationOfMissing)
+                {
+                    cmbMissingAs.Items.Add(name);
+                }
+            }
+            cmbMissingAs.SelectedIndex = 0;
+        }
+
+
+        #endregion Private Methods
 	
 		#endregion //Private Methods
 
@@ -214,124 +334,160 @@ namespace Epi.Windows.Analysis.Dialogs
             Configuration config = Configuration.GetNewInstance();
 
             this.EpiInterpreter.Context.ApplyOverridenConfigSettings(config);
-            this.settingsPanel.LoadLists();
-            this.settingsPanel.ShowSettings(config);
+            this.LoadRepresentionsOfYes();
+            this.LoadRepresentionsOfNo();
+            this.LoadRepresentionsOfMissing();
+            this.ShowSettings(config);
             ResetHasChangedValues(false);
         }
 
-        /// <summary>
-        /// Occurs when the value of RepresentationOfYes property changes.
-        /// </summary>
-        /// <param name="sender">Object that fired the event.</param>
-        /// <param name="e">.NET supplied event args.</param>
-        private void settingsPanel_RepresentationOfYesChanged(object sender, System.EventArgs e)
-        {
+        //##########################################################
+
+        		/// <summary>
+		/// Occurs when RepresentationOfYes property changes. 
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void cmbYesAs_SelectedIndexChanged(object sender, System.EventArgs e)
+		{		
             hasYesAsChanged = true;
-        }
+		}
 
-        /// <summary>
-        /// Occurs when the value of RepresentationOfNo property changes.
-        /// </summary>
-        /// <param name="sender">Object that fired the event.</param>
-        /// <param name="e">.NET supplied event args.</param>
-        private void settingsPanel_RepresentationOfNoChanged(object sender, System.EventArgs e)
-        {
+		/// <summary>
+		/// Occurs when RepresentationOfYes Text property changes. 
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void cmbYesAs_TextChanged(object sender, System.EventArgs e)
+		{
+            hasYesAsChanged = true;
+		}
+
+		/// <summary>
+		///Occurs when RepresentationOfNoproperty changes. 
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void cmbNoAs_SelectedIndexChanged(object sender, System.EventArgs e)
+		{
             hasNoAsChanged = true;
-        }
-        /// <summary>
-        /// Occurs when the value of RepresentationOfMissing property changes.
-        /// </summary>
-        /// <param name="sender">Object that fired the event.</param>
-        /// <param name="e">.NET supplied event args.</param>
-        private void settingsPanel_RepresentationOfMissingChanged(object sender, System.EventArgs e)
-        {
+		}
+
+		private void cmbNoAs_TextChanged(object sender, EventArgs e)
+		{
+            hasNoAsChanged = true;
+		}
+
+		/// <summary>
+		/// Occurs when RepresentationOfMissing property changes. 
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void cmbMissingAs_SelectedIndexChanged(object sender, System.EventArgs e)
+		{
             hasMissingAsChanged = true;
-        }
-        /// <summary>
-        /// Occurs when ShowPrompt property changes.
-        /// </summary>
-        /// <param name="sender">Object that fired the event.</param>
-        /// <param name="e">.NET supplied event args.</param>
-        private void settingsPanel_ShowPromptChanged(object sender, System.EventArgs e)
-        {
+		}
+
+		/// <summary>
+		/// Occurs when RepresentationOfMssing property changes.
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void cmbMissingAs_TextChanged(object sender, EventArgs e)
+		{
+            hasMissingAsChanged = true;
+		}
+
+		/// <summary>
+		/// Occurs when ShowPrompt property changes.
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void cbxShowPrompt_CheckedChanged(object sender, System.EventArgs e)
+		{
             hasShowPromptChanged = true;
-        }
-        /// <summary>
-        /// Occurs when the value of ShowSelectCriteria property changes.
-        /// </summary>
-        /// <param name="sender">Object that fired the event.</param>
-        /// <param name="e">.NET supplied event args.</param>
-        private void settingsPanel_ShowSelectCriteriaChanged(object sender, System.EventArgs e)
-        {
+		}
+
+		/// <summary>
+		/// Occurs when ShowSelectCriteria property changes.
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void cbxSelectCriteria_CheckedChanged(object sender, System.EventArgs e)
+		{
             hasShowSelectChanged = true;
-        }
-        /// <summary>
-        /// Occurs when the value of ShowGraphics property changes.
-        /// </summary>
-        /// <param name="sender">Object that fired the event.</param>
-        /// <param name="e">.NET supplied event args.</param>
-        private void settingsPanel_ShowGraphicsChanged(object sender, System.EventArgs e)
-        {
+		}
+
+		/// <summary>
+		/// Occurs when ShowGraphics property changes.
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void cbxGraphics_CheckedChanged(object sender, System.EventArgs e)
+		{
             hasShowGraphicChanged = true;
-        }
-        /// <summary>
-        /// Occurs when the value of ShowPercents property changes.
-        /// </summary>
-        /// <param name="sender">Object that fired the event.</param>
-        /// <param name="e">.NET supplied event args.</param>
-        private void settingsPanel_ShowPercentsChanged(object sender, System.EventArgs e)
-        {
+		}
+
+		/// <summary>
+		/// Occurs when ShowPercents property changes.
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void cbxPercents_CheckedChanged(object sender, System.EventArgs e)
+		{
             hasShowPercentsChanged = true;
-        }
-        /// <summary>
-        /// Occurs when the value of ShowHyperlinks property changes.
-        /// </summary>
-        /// <param name="sender">Object that fired the event.</param>
-        /// <param name="e">.NET supplied event args.</param>
-        private void settingsPanel_ShowHyperlinksChanged(object sender, System.EventArgs e)
-        {
+		}
+
+		/// <summary>
+		/// Occurs when ShowHyperlinks property changes.
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void cbxHyperlinks_CheckedChanged(object sender, System.EventArgs e)
+		{
             hasShowHyperlinkChanged = true;
-        }
-        /// <summary>
-        /// Occurs when the value of ShowTablesOutput property changes.
-        /// </summary>
-        /// <param name="sender">Object that fired the event.</param>
-        /// <param name="e">.NET supplied event args.</param>
-        private void settingsPanel_ShowTablesOutputChanged(object sender, System.EventArgs e)
-        {
+		}
+
+		/// <summary>
+		/// Occurs when ShowTablesOutput property changes.
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void cbxTablesOutput_CheckedChanged(object sender, System.EventArgs e)
+		{
             hasShowTablesChanged = true;
-        }
-        /// <summary>
-        /// Occurs when the value of StatisticsLevel property changes.
-        /// </summary>
-        /// <param name="sender">Object that fired the event.</param>
-        /// <param name="e">.NET supplied event args.</param>
-        private void settingsPanel_StatisticsLevelChanged(object sender, System.EventArgs e)
-        {
+		}
+
+		/// <summary>
+		/// Occurs when the value of StatisticsLevel property changes.
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void StatisticsRadioButtonClick(object sender, System.EventArgs e)
+		{
             hasStatisticsLevelChanged = true;
+		}
 
-        }
-        /// <summary>
-        /// Occurs when the value of ProcessRecords property changes.
-        /// </summary>
-        /// <param name="sender">Object that fired the event.</param>
-        /// <param name="e">.NET supplied event args.</param>
-        private void settingsPanel_ProcessRecordsChanged(object sender, System.EventArgs e)
-        {
+		/// <summary>
+		///Occures when the value of ProcessRecords changes.
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void ProcessRecordsRadioButtonClick(object sender, System.EventArgs e)
+		{
             hasProcessRecordsChanged = true;
+		}
 
-        }
-        /// <summary>
-        /// Occurs when the value of ShowIncludeMissing property changes.
-        /// </summary>
-        /// <param name="sender">Object that fired the event.</param>
-        /// <param name="e">.NET supplied event args.</param>
-        private void settingsPanel_ShowIncludeMissingChanged(object sender, System.EventArgs e)
-        {
+		/// <summary>
+		/// Occurs when ShowIncludeMissinge property changes.
+		/// </summary>
+		/// <param name="sender">Object that fired the event.</param>
+		/// <param name="e">.NET supplied event args.</param>
+		private void cbxIncludeMissing_CheckedChanged(object sender, System.EventArgs e)
+		{
             hasIncludeMissingChanged = true;
-
-        }
-
+		}
+				
         /// <summary>
         /// Opens a process to show the related help topic
         /// </summary>
@@ -342,11 +498,9 @@ namespace Epi.Windows.Analysis.Dialogs
             System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/user-guide/command-reference/analysis-commands-set.html");
         }
 
-        #endregion //Event Handlers
-
         private void btnClear_Click(object sender, EventArgs e)
         {
-            settingsPanel.ShowSettings();
+            ShowSettings();
         }
 
         /// <summary>
@@ -365,5 +519,8 @@ namespace Epi.Windows.Analysis.Dialogs
                 base.btnSaveOnly_Click(sender, e);
             }
         }
-	}
+
+        #endregion //Event Handlers
+
+    }
 }

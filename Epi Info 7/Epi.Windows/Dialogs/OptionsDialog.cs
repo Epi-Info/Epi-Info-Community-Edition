@@ -14,6 +14,7 @@ using System.Xml.XPath;
 using Epi;
 using Epi.Resources;
 
+using Epi.Data.Services;
 using Epi.DataSets;
 using Epi.Diagnostics;
 using Epi.Windows.Globalization;
@@ -210,9 +211,10 @@ namespace Epi.Windows.Dialogs
 
             //ctt7 commented out while working on data driver load mechanism
             //WinUtil.FillDataFormatsForRead(cmbDefaultDataFormat);
-            this.settingsPanel.LoadLists();            
-			ShowSettings();
-            this.settingsPanel.ShowSettings();
+            LoadRepresentionsOfYes();
+            LoadRepresentionsOfNo();
+            LoadRepresentionsOfMissing();
+            ShowSettings();
 			btnApply.Enabled = false;
 
             LoadPluginTab();
@@ -231,10 +233,10 @@ namespace Epi.Windows.Dialogs
             //lblDbDescription.Text = Localization.LocalizeString(description);
 		}
 		
-        private void settingsPanel_SettingChanged(object sender, System.EventArgs e)
-        {
-            btnApply.Enabled = true;
-        }
+        //private void settingsPanel_SettingChanged(object sender, System.EventArgs e)
+        //{
+        //    btnApply.Enabled = true;
+        //}
 
         private void settingsPanelDateTime_SettingChanged(object sender, System.EventArgs e)
         {
@@ -350,9 +352,87 @@ namespace Epi.Windows.Dialogs
             //}
 		}
 
-		#endregion Event handlers
+            #region Analysis Tab
+        /// <summary>
+        /// Occurs when the value of RepresentationOfYes property changes.
+        /// </summary>
+        public event System.EventHandler RepresentationOfYesChanged;
 
-		#region Private Functions
+        /// <summary>
+        /// Occurs when the value of RepresentationOfNo property changes.
+        /// </summary>
+        public event System.EventHandler RepresentationOfNoChanged;
+
+        /// <summary>
+        /// Occurs when the value of RepresentationOfMissing property changes.
+        /// </summary>
+        public event System.EventHandler RepresentationOfMissingChanged;
+
+        /// <summary>
+        /// Occurs when the value of ShowSelectCriteria property changes.
+        /// </summary>
+        public event System.EventHandler ShowSelectCriteriaChanged;
+
+        /// <summary>
+        /// Occurs when the value of ShowGraphics property changes.
+        /// </summary>
+        public event System.EventHandler ShowGraphicsChanged;
+
+        /// <summary>
+        /// Occurs when the value of ShowHyperlinks property changes.
+        /// </summary>
+        public event System.EventHandler ShowHyperlinksChanged;
+
+        /// <summary>
+        /// Occurs when the value of ShowPrompy property changes.
+        /// </summary>
+        public event System.EventHandler ShowPromptChanged;
+
+        /// <summary>
+        /// Occurs when the value of ShowPercents property changes.
+        /// </summary>
+        public event System.EventHandler ShowPercentsChanged;
+
+        /// <summary>
+        /// Occurs when the value of ShowTablesOutput property changes.
+        /// </summary>
+        public event System.EventHandler ShowTablesOutputChanged;
+
+        /// <summary>
+        /// Occurs when the value of ShowIncludeMissing property changes.
+        /// </summary>
+        public event System.EventHandler ShowIncludeMissingChanged;
+
+        /// <summary>
+        /// Occurs when the value of StatisticsLevel property changes.
+        /// </summary>
+        public event System.EventHandler StatisticsLevelChanged;
+
+        /// <summary>
+        /// Occurs when the value of ProcessRecords property changes.
+        /// </summary>
+        public event System.EventHandler ProcessRecordsChanged;
+
+        /// <summary>
+        /// Occurs when the value of RepresentationOfYes property changes.
+        /// </summary>
+        public event System.EventHandler RepresentationOfYesTextChanged;
+
+        /// <summary>
+        /// Occurs when the value of RepresentationOfNo property changes.
+        /// </summary>
+        public event System.EventHandler RepresentationOfNoTextChanged;
+
+        /// <summary>
+        /// Occurs when the value of RepresentationOfMissing property changes.
+        /// </summary>
+        public event System.EventHandler RepresentationOfMissingTextChanged;
+
+            #endregion
+
+        #endregion Event handlers
+
+        #region Private Functions
 
         private void LoadPluginTab()
         {
@@ -400,9 +480,42 @@ namespace Epi.Windows.Dialogs
 		/// <summary>
 		/// Loads the working directory set by the user
 		/// </summary>
-		private void ShowSettings()
+        private void ShowSettings(Configuration pConfig = null)
 		{
-			settingsPanel.ShowSettings();
+            Configuration config = null;
+
+            if (pConfig == null)
+            {
+                config = Configuration.GetNewInstance();
+            }
+            else
+            {
+                config = pConfig;
+            }
+
+            Epi.DataSets.Config.SettingsRow settings = config.Settings;
+
+            // Representation of boolean values ...
+            cmbYesAs.SelectedItem = settings.RepresentationOfYes;
+            cmbNoAs.SelectedItem = settings.RepresentationOfNo;
+            cmbMissingAs.SelectedItem = settings.RepresentationOfMissing;
+
+            // HTML output options ...
+            cbxShowPrompt.Checked = settings.ShowCompletePrompt;
+            cbxSelectCriteria.Checked = settings.ShowSelection;
+            cbxPercents.Checked = settings.ShowPercents;
+            cbxGraphics.Checked = settings.ShowGraphics;
+            cbxHyperlinks.Checked = settings.ShowHyperlinks;
+            cbxTablesOutput.Checked = settings.ShowTables;
+
+            // Statistics Options
+            WinUtil.SetSelectedRadioButton(settings.StatisticsLevel.ToString(), gbxStatistics);
+            numericUpDownPrecision.Value = settings.PrecisionForStatistics;
+
+            // Record Processing
+            WinUtil.SetSelectedRadioButton(settings.RecordProcessingScope.ToString(), gbxProcessRecords);
+            cbxIncludeMissing.Checked = settings.IncludeMissingValues;
+			//settingsPanel.ShowSettings();
 			ShowBackgroundImage();
             txtWorkingDirectory.Text = config.Directories.Working;
             txtMapKey.Text = config.Settings.MapServiceKey;
@@ -538,7 +651,7 @@ namespace Epi.Windows.Dialogs
 		/// </summary>
 		private void Save()
 		{
-            settingsPanel.GetSettings(config);
+            GetSettings(config);
 
             config.Directories.Working = txtWorkingDirectory.Text;
             config.Settings.MapServiceKey = txtMapKey.Text;
@@ -600,7 +713,35 @@ namespace Epi.Windows.Dialogs
                 this.ApplyChanges(this, new EventArgs());
             }
 		}
-		#endregion Private Methods
+
+        /// <summary>
+        /// Saves the current settings to the configuration file.
+        /// </summary>
+        public void GetSettings(Configuration newConfig)
+        {
+            Epi.DataSets.Config.SettingsRow settings = newConfig.Settings;
+
+            // Representation of boolean values ...
+            settings.RepresentationOfYes = cmbYesAs.Text;
+            settings.RepresentationOfNo = cmbNoAs.Text;
+            settings.RepresentationOfMissing = cmbMissingAs.Text;
+
+            // HTML output options ...
+            settings.ShowCompletePrompt = cbxShowPrompt.Checked;
+            settings.ShowSelection = cbxSelectCriteria.Checked;
+            settings.ShowPercents = cbxPercents.Checked;
+            settings.ShowGraphics = cbxGraphics.Checked;
+            settings.ShowTables = cbxTablesOutput.Checked;
+            settings.ShowHyperlinks = cbxHyperlinks.Checked;
+
+            // Statistics Options
+            settings.StatisticsLevel = int.Parse(WinUtil.GetSelectedRadioButton(gbxStatistics).Tag.ToString());
+            settings.PrecisionForStatistics = numericUpDownPrecision.Value;
+
+            // Record Processing
+            settings.RecordProcessingScope = int.Parse(WinUtil.GetSelectedRadioButton(gbxProcessRecords).Tag.ToString());
+            settings.IncludeMissingValues = cbxIncludeMissing.Checked;
+        }
 
         private void btnUseDefault_Click(object sender, EventArgs e)
         {
@@ -940,8 +1081,81 @@ namespace Epi.Windows.Dialogs
             }
         }
 
-        
-	}
+        /// <summary>
+        /// Loads combobox with values for RepresentationsOfYes from application data file
+        /// </summary>
+        private void LoadRepresentionsOfYes()
+        {
+            string currentRepresentationOfYes = Configuration.GetNewInstance().Settings.RepresentationOfYes;
+            DataView dv = AppData.Instance.RepresentationsOfYesDataTable.DefaultView;
+            cmbYesAs.Items.Clear();
+            if (!string.IsNullOrEmpty(currentRepresentationOfYes))
+            {
+                cmbYesAs.Items.Add(currentRepresentationOfYes);
+            }
+            dv.Sort = ColumnNames.POSITION;
+            foreach (DataRowView row in dv)
+            {
+                string name = row[ColumnNames.NAME].ToString();
+                if (name != currentRepresentationOfYes)
+                {
+                    cmbYesAs.Items.Add(row[ColumnNames.NAME]);
+                }
+            }
+            cmbYesAs.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Loads combobox with values for RepresentationsOfNo from application data file
+        /// </summary>
+        private void LoadRepresentionsOfNo()
+        {
+            string currentRepresentationOfNo = Configuration.GetNewInstance().Settings.RepresentationOfNo;
+            DataView dv = AppData.Instance.RepresentationsOfNoDataTable.DefaultView;
+            cmbNoAs.Items.Clear();
+            if (!string.IsNullOrEmpty(currentRepresentationOfNo))
+            {
+                cmbNoAs.Items.Add(currentRepresentationOfNo);
+            }
+            dv.Sort = ColumnNames.POSITION;
+            foreach (DataRowView row in dv)
+            {
+                string name = row[ColumnNames.NAME].ToString();
+                if (name != currentRepresentationOfNo)
+                {
+                    cmbNoAs.Items.Add(name);
+                }
+            }
+            cmbNoAs.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Loads combobox with values for RepresentationsOfMissing from application data file
+        /// </summary>
+        private void LoadRepresentionsOfMissing()
+        {
+            string currentRepresentationOfMissing = Configuration.GetNewInstance().Settings.RepresentationOfMissing;
+            DataView dv = AppData.Instance.RepresentationsOfMissingDataTable.DefaultView;
+            cmbMissingAs.Items.Clear();
+            if (!string.IsNullOrEmpty(currentRepresentationOfMissing))
+            {
+                cmbMissingAs.Items.Add(currentRepresentationOfMissing);
+            }
+            dv.Sort = ColumnNames.POSITION;
+            foreach (DataRowView row in dv)
+            {
+                string name = row[ColumnNames.NAME].ToString();
+                if (name != currentRepresentationOfMissing)
+                {
+                    cmbMissingAs.Items.Add(name);
+                }
+            }
+            cmbMissingAs.SelectedIndex = 0;
+        }
+
+        #endregion Private Methods
+
+    }
 
     /// <summary>
     /// class DropDownListItem
