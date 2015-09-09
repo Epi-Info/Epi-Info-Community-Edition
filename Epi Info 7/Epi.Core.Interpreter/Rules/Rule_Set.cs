@@ -150,7 +150,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             string Key = this.GetCommandElement(nonTermToken.Tokens, 0);
             string Value = null;
-            Token token = nonTermToken.Tokens[2];
+            Token token = nonTermToken.Tokens[1];
 
             if (token is NonterminalToken)
             {
