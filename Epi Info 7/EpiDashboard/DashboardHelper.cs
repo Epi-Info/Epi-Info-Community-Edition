@@ -4166,7 +4166,7 @@ namespace EpiDashboard
                 string exMessage = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_VALUES, freqVar, freqValues.Count, Aberration_Row_Limit);
                 throw new ApplicationException(exMessage);
             }
-            else if (!inputs.InputVariableList.ContainsKey("aberration") && !inputs.IgnoreRowLimits && freqValues.Count > Frequency_Row_Limit)
+            else if (!inputs.InputVariableList.ContainsKey("aberration") && !inputs.IgnoreRowLimits && freqValues.Count > Frequency_Row_Limit && ((FrequencyParameters)inputs).RowsToDisplay == null)
             {
                 string exMessage = string.Format(DashboardSharedStrings.ERROR_TOO_MANY_VALUES, freqVar, freqValues.Count, Frequency_Row_Limit);
                 throw new ApplicationException(exMessage);
