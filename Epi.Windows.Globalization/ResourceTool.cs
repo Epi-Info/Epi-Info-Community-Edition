@@ -232,12 +232,13 @@ namespace Epi.Windows.Globalization
         Version GetSatelliteContractVersion(Assembly a)
         {
             Version version;
-            object[] customAttributes = a.GetCustomAttributes(typeof(SatelliteContractVersionAttribute), false);
+            
+            object[] customAttributes = a.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false);
             if (customAttributes.Length == 0)
             {
                 return a.GetName().Version;
             }
-            string str = ((SatelliteContractVersionAttribute)customAttributes[0]).Version;
+            string str = ((AssemblyInformationalVersionAttribute)customAttributes[0]).InformationalVersion;
             try
             {
                 version = new Version(str);
