@@ -392,19 +392,22 @@ namespace EpiDashboard
             DataGrid dg = (sender as DataGrid);
             DataView dv = dg.ItemsSource as DataView;
 
-            int columnCount = 0;
-            foreach (DataColumn column in dv.Table.Columns)
+            if (dv != null)
             {
-                Field field = DashboardHelper.GetAssociatedField(column.ColumnName);
-                if (field != null && field is RenderableField)
+                int columnCount = 0;
+                foreach (DataColumn column in dv.Table.Columns)
                 {
-                    if (Parameters.InputVariableList.ContainsKey("usepromptsforcolumnnames") &&
-                        Parameters.InputVariableList["usepromptsforcolumnnames"] == "true")
+                    Field field = DashboardHelper.GetAssociatedField(column.ColumnName);
+                    if (field != null && field is RenderableField)
                     {
-                        dg.Columns[columnCount].Header = (((RenderableField)field).PromptText);
+                        if (Parameters.InputVariableList.ContainsKey("usepromptsforcolumnnames") &&
+                            Parameters.InputVariableList["usepromptsforcolumnnames"] == "true")
+                        {
+                            dg.Columns[columnCount].Header = (((RenderableField)field).PromptText);
+                        }
                     }
+                    columnCount++;
                 }
-                columnCount++;
             }
         }
 
