@@ -78,9 +78,14 @@ namespace Epi.Analysis.Dialogs
 
             if (dataGridView1.Columns.Count > 0)
             { 
+                List<string> colprocessed = new List<string>();
                 foreach (string idendifier in identifierList)
                 {
-                    dataGridView1.Columns[idendifier].DisplayIndex = displayIndex++; 
+                    if (colprocessed.Contains(idendifier) == false)
+                    {
+                        colprocessed.Add(idendifier);
+                        dataGridView1.Columns[idendifier].DisplayIndex = displayIndex++; 
+                    }
                 }
             }
 
@@ -166,9 +171,14 @@ namespace Epi.Analysis.Dialogs
             {
                 if (dataGridView1.Columns.Count > 0)
                 {
+                    List<string> colprocessed = new List<string>();
                     foreach (string idendifier in identifierList)
                     {
-                        dataGridView1.Columns[idendifier].DisplayIndex = displayIndex++;
+                        if (colprocessed.Contains(idendifier) == false)
+                        {
+                            colprocessed.Add(idendifier);
+                            dataGridView1.Columns[idendifier].DisplayIndex = displayIndex++;
+                        }
                     }
                 }
 
