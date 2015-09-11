@@ -128,7 +128,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockSortOrder.Content = DashboardSharedStrings.GADGET_SORT_ORDER;
             tblockDimensions.Content = DashboardSharedStrings.GADGET_DIMENSIONS;
             checkboxTabOrder.Content = DashboardSharedStrings.EXPORT_SORT_BY_TAB_ORDER;
-            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USER_FIELDS_PROMPTS;
+            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
             checkboxLineColumn.Content = DashboardSharedStrings.GADGET_SHOW_LINE_COLUMN;
             checkboxColumnHeaders.Content = DashboardSharedStrings.GADGET_SHOW_COLUMN_HEADINGS;
             checkboxShowNulls.Content = DashboardSharedStrings.GADGET_SHOW_MISSING_REP;

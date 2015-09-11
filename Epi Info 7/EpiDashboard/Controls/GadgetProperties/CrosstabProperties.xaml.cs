@@ -192,7 +192,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
             checkboxAllValues.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_VALUE;
             checkboxCommentLegalLabels.Content = DashboardSharedStrings.GADGET_LIST_LABELS;
-            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPT;
+            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
             checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
             checkboxOutcomeContinuous.Content = DashboardSharedStrings.GADGET_OUTCOME_CONTINUOUS;
             checkboxSmartTable.Content = DashboardSharedStrings.GADGET_SMART_2X2;
@@ -223,7 +223,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             //checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
 
             //checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
-            //checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPT;
+            //checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
             ////tblockOutputColumns.Text = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
             ////tblockPrecision.Text = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
 
