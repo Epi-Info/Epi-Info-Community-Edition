@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
-        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEkAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEsAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wAgAAF1AYQBjwH/
         AWYBgAGPAf8BYAF5AYcB/wFXAW4BewH/AU4BYgFvAf8BRAFWAWEB/wE5AUgBUgH/AS4BOgFDAf8BJQEu
         ATUB/wEbASIBKQH/ARQBGQEeAf8BDgESARYB/wEOARMBGAH/DAABdQGEAY8B/wFsAXoBhQH/AWABbQF3
@@ -1471,7 +1471,7 @@
     <value>8, 41</value>
   </data>
   <data name="rdbDeleted.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 16</value>
+    <value>473, 14</value>
   </data>
   <data name="rdbDeleted.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1498,7 +1498,7 @@
     <value>8, 61</value>
   </data>
   <data name="rdbBoth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 16</value>
+    <value>473, 14</value>
   </data>
   <data name="rdbBoth.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1525,7 +1525,7 @@
     <value>8, 19</value>
   </data>
   <data name="rdbNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 16</value>
+    <value>473, 16</value>
   </data>
   <data name="rdbNormal.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1552,7 +1552,7 @@
     <value>10, 296</value>
   </data>
   <data name="gbxProcessRecords.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 91</value>
+    <value>487, 91</value>
   </data>
   <data name="gbxProcessRecords.TabIndex" type="System.Int32, mscorlib">
     <value>63</value>
@@ -2758,6 +2758,6 @@
     <value>SetDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5730.24477, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5731.22962, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
