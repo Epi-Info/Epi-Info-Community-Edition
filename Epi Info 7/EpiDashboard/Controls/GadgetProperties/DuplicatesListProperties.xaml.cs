@@ -168,6 +168,8 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             if (checkboxUsePrompts.IsChecked == true)
             {
+                if (Parameters.InputVariableList.ContainsKey("usepromptsforcolumnnames"))
+                    Parameters.InputVariableList.Remove("usepromptsforcolumnnames");
                 Parameters.InputVariableList.Add("usepromptsforcolumnnames", "true");
             }
             else
