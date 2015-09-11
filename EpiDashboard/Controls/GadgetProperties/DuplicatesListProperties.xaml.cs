@@ -101,7 +101,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             #region Translation
 
-            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_DUPLICATELIST;
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_DUPLICATESLIST;
             tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
             tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_MEANS;
             tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
@@ -117,7 +117,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
             tblockDimensions.Content = DashboardSharedStrings.GADGET_DIMENSIONS;
             tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
-            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USER_FIELDS_PROMPTS;
+            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
             checkboxListLabels.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
             checkboxColumnHeaders.Content = DashboardSharedStrings.GADGET_SHOW_COLUMN_HEADINGS;
             checkboxShowNulls.Content = DashboardSharedStrings.GADGET_SHOW_MISSING_REP;
@@ -165,17 +165,6 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             Parameters.GadgetTitle = txtTitle.Text;
             Parameters.GadgetDescription = txtDesc.Text;
-
-            if (checkboxUsePrompts.IsChecked == true)
-            {
-                if (Parameters.InputVariableList.ContainsKey("usepromptsforcolumnnames"))
-                    Parameters.InputVariableList.Remove("usepromptsforcolumnnames");
-                Parameters.InputVariableList.Add("usepromptsforcolumnnames", "true");
-            }
-            else
-            {
-                Parameters.InputVariableList.Clear();
-            }
 
             double height = 0;
             double width = 0;
@@ -234,10 +223,8 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.ColumnNames.Add(field);
             }
 
-
-
             Parameters.SortColumnsByTabOrder = checkboxTabOrder.IsChecked.Value;
-            Parameters.UsePromptsForColumnNames = checkboxUsePrompts.IsChecked.Value;
+            Parameters.UseFieldPrompts = checkboxUsePrompts.IsChecked.Value;
             Parameters.ShowColumnHeadings = checkboxColumnHeaders.IsChecked.Value;
             Parameters.ShowLineColumn = checkboxLineColumn.IsChecked.Value;
             Parameters.ShowNullLabels = checkboxShowNulls.IsChecked.Value;
@@ -396,7 +383,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             lbxSortOrder.Height = lbxSortOrder.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 868.0);
             
             checkboxTabOrder.IsChecked = Parameters.SortColumnsByTabOrder;
-            checkboxUsePrompts.IsChecked = Parameters.UsePromptsForColumnNames;
+            checkboxUsePrompts.IsChecked = Parameters.UseFieldPrompts;
             checkboxColumnHeaders.IsChecked = Parameters.ShowColumnHeadings;
             checkboxLineColumn.IsChecked = Parameters.ShowLineColumn;
             checkboxShowNulls.IsChecked = Parameters.ShowNullLabels;

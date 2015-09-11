@@ -320,6 +320,7 @@ namespace EpiDashboard.Gadgets.Analysis
         {
             DataGrid dg = (sender as DataGrid);
             DataView dv = dg.ItemsSource as DataView;
+            DuplicatesListParameters dlParameters = (DuplicatesListParameters)Parameters;
 
             int columnCount = 0;
             foreach (DataColumn column in dv.Table.Columns)
@@ -327,8 +328,7 @@ namespace EpiDashboard.Gadgets.Analysis
                 Field field = DashboardHelper.GetAssociatedField(column.ColumnName);
                 if (field != null && field is RenderableField)
                 {
-                    if (Parameters.InputVariableList.ContainsKey("usepromptsforcolumnnames") &&
-                        Parameters.InputVariableList["usepromptsforcolumnnames"] == "true")
+                    if (dlParameters.UseFieldPrompts == true)
                     {
                         dg.Columns[columnCount].Header = (((RenderableField)field).PromptText);
                     }
@@ -861,8 +861,8 @@ namespace EpiDashboard.Gadgets.Analysis
             tabOrderElement.InnerText = listParameters.SortColumnsByTabOrder.ToString();
             element.AppendChild(tabOrderElement);
 
-            XmlElement usePromptsElement = doc.CreateElement("usepromptsforcolumnnames");
-            usePromptsElement.InnerText = listParameters.UsePromptsForColumnNames.ToString();
+            XmlElement usePromptsElement = doc.CreateElement("useFieldPrompts");
+            usePromptsElement.InnerText = listParameters.UseFieldPrompts.ToString();
             element.AppendChild(usePromptsElement);
 
             XmlElement showListLabelsElement = doc.CreateElement("showListLabels");
@@ -986,7 +986,7 @@ namespace EpiDashboard.Gadgets.Analysis
                     case "usefieldprompts":
                         bool usePrompts = false;
                         bool.TryParse(child.InnerText, out usePrompts);
-                        ((DuplicatesListParameters)Parameters).UsePromptsForColumnNames = usePrompts;
+                        ((DuplicatesListParameters)Parameters).UseFieldPrompts = usePrompts;
                         break;
                     case "showlinecolumn":
                         bool showLineColumn = true;

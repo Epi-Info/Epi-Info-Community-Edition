@@ -168,7 +168,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
 
             checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
-            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPT;
+            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
             //tblockOutputColumns.Text = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
             tblockPrecision.Content = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
 

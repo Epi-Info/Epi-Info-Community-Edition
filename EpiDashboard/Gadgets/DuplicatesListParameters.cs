@@ -10,7 +10,7 @@ namespace EpiDashboard
     public class DuplicatesListParameters : GadgetParametersBase
     {
         public bool SortColumnsByTabOrder { get; set; }
-        public bool UsePromptsForColumnNames { get; set; }
+        public bool UseFieldPrompts { get; set; }
         public bool ShowColumnHeadings { get; set; }
         public bool ShowLineColumn { get; set; }
         public bool ShowNullLabels { get; set; }
@@ -27,7 +27,7 @@ namespace EpiDashboard
             : base()
         {
             SortColumnsByTabOrder = false;
-            UsePromptsForColumnNames = false;
+            UseFieldPrompts = false; 
             ShowColumnHeadings = true;
             ShowLineColumn = true;
             ShowNullLabels = true;

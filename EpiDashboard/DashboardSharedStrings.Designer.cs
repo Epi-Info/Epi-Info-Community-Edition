@@ -1572,11 +1572,11 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Duplicate List.
+        ///   Looks up a localized string similar to Duplicates List.
         /// </summary>
-        public static string GADGET_CONFIG_TITLE_DUPLICATELIST {
+        public static string GADGET_CONFIG_TITLE_DUPLICATESLIST {
             get {
-                return ResourceManager.GetString("GADGET_CONFIG_TITLE_DUPLICATELIST", resourceCulture);
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_DUPLICATESLIST", resourceCulture);
             }
         }
         
@@ -3309,11 +3309,11 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use field prompt.
+        ///   Looks up a localized string similar to Use field prompts.
         /// </summary>
-        public static string GADGET_USE_FIELD_PROMPT {
+        public static string GADGET_USE_FIELD_PROMPTS {
             get {
-                return ResourceManager.GetString("GADGET_USE_FIELD_PROMPT", resourceCulture);
+                return ResourceManager.GetString("GADGET_USE_FIELD_PROMPTS", resourceCulture);
             }
         }
         
@@ -3323,15 +3323,6 @@ namespace EpiDashboard {
         public static string GADGET_USE_REFERENCE_VALUE {
             get {
                 return ResourceManager.GetString("GADGET_USE_REFERENCE_VALUE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use field Prompts.
-        /// </summary>
-        public static string GADGET_USER_FIELDS_PROMPTS {
-            get {
-                return ResourceManager.GetString("GADGET_USER_FIELDS_PROMPTS", resourceCulture);
             }
         }
         
