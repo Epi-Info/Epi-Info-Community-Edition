@@ -272,7 +272,7 @@ namespace Epi.Analysis.Statistics
                 }
 
                 string[] tmpString2 = null;
-                tmpString2 = SelectClause.ToString().Split(new string[] { "AND" }, StringSplitOptions.None);
+                tmpString2 = SelectClause.ToString().Split(new string[] { " AND " }, StringSplitOptions.None);
                 bool appendWithAND = false;
                 HTMLString.Append("<p><b>");
                 if (!(tmpString2.Length == 1 && tmpString2[0] == ""))
