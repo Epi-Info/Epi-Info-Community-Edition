@@ -1355,6 +1355,7 @@ namespace EpiDashboard
                             break;
                         case "weightvariable":
                             ((FrequencyParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
+                            ((FrequencyParameters)Parameters).ColumnNames.Remove(((FrequencyParameters)Parameters).WeightVariableName);
                             break;
                         case "stratavariable":
                             if (Parameters.StrataVariableNames.Count > 0)
