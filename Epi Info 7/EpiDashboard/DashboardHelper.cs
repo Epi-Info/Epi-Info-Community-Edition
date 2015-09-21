@@ -3910,10 +3910,10 @@ namespace EpiDashboard
             }
 
             //EI-206 (WeightVar should not be added to ColumnNames or results in WeightVar becoming a FreqVar in the output.)
-            //if (!string.IsNullOrEmpty(weightVar) && IsUserDefinedColumn(weightVar) == false)
-            //{
-            //    columnNames.Add(weightVar);
-            //}
+            if (!string.IsNullOrEmpty(weightVar) && IsUserDefinedColumn(weightVar) == false)
+            {
+                columnNames.Add(weightVar);
+            }
 
             if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
             {
