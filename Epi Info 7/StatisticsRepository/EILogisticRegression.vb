@@ -217,7 +217,7 @@ Option Compare Text
         mdblP = dist.ZFROMP(mdblC * 0.5)
         mlngIter = 15
         mdblConv = 0.00001
-        mdblToler = 0.00001
+        mdblToler = 0.000001
         mboolIntercept = True
         ReDim mStrADiscrete(0)
         ReDim DataArray(0, 0)
