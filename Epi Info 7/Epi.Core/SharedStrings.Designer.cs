@@ -4432,6 +4432,159 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancelling the import process may cause partially updated or incomplete records. Cancel anyway?.
+        /// </summary>
+        public static string IMPORT_DATA_CANCEL_IMPORT {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_CANCEL_IMPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import cancelled..
+        /// </summary>
+        public static string IMPORT_DATA_CANCELLED {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_CANCELLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import complete.  Time elapsed: {0}.
+        /// </summary>
+        public static string IMPORT_DATA_COMPLETE {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_COMPLETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error:.
+        /// </summary>
+        public static string IMPORT_DATA_ERROR {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import process complete for grid: {0}..
+        /// </summary>
+        public static string IMPORT_DATA_GRID_PROCESSING_COMPLETE {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_GRID_PROCESSING_COMPLETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import initiated for form:.
+        /// </summary>
+        public static string IMPORT_DATA_INITIATED {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_INITIATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Records with matching ID fields will be ignored. Records with no matching ID fields will be appended. .
+        /// </summary>
+        public static string IMPORT_DATA_MATCHING_IGNORED_ELSE_APPEND {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_MATCHING_IGNORED_ELSE_APPEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Records with matching ID fields will be updated.  Records with no matching ID fields records will be appended..
+        /// </summary>
+        public static string IMPORT_DATA_MATCHING_UPDATED_ELSE_APPEND {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_MATCHING_UPDATED_ELSE_APPEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Records with matching ID fields will be updated. Records with no matching ID fields records will be ignored..
+        /// </summary>
+        public static string IMPORT_DATA_MATCHING_UPDATED_ELSE_IGNORED {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_MATCHING_UPDATED_ELSE_IGNORED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import process complete for page: {0}..
+        /// </summary>
+        public static string IMPORT_DATA_PAGE_PROCESSING_COMPLETE {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_PAGE_PROCESSING_COMPLETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing records for grid: {0}..
+        /// </summary>
+        public static string IMPORT_DATA_PROCESSING_GRID {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_PROCESSING_GRID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing records on base table..
+        /// </summary>
+        public static string IMPORT_DATA_PROCESSING_RECS {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_PROCESSING_RECS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing records on page: {0}; Total pages: {1}..
+        /// </summary>
+        public static string IMPORT_DATA_PROCESSING_RECS_PAGE {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_PROCESSING_RECS_PAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loaded data import dialog. Ready..
+        /// </summary>
+        public static string IMPORT_DATA_READY {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_READY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Records inserted: {0}.
+        /// </summary>
+        public static string IMPORT_DATA_RECS_INSERTED {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_RECS_INSERTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Records updated: {0}.
+        /// </summary>
+        public static string IMPORT_DATA_RECS_UPDATED {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_RECS_UPDATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning:.
+        /// </summary>
+        public static string IMPORT_DATA_WARNING {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error: The database being imported contains a bad or out-of-range date value in View [{0}]. The import process has been aborted. Please update the source data and try the import again..
         /// </summary>
         public static string IMPORT_ERROR_BAD_DATE_DATA {
@@ -4450,6 +4603,132 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import process stopped because a code table is set up as a form in this project. Code tables can be imported as standalone data tables only..
+        /// </summary>
+        public static string IMPORT_ERROR_CODETABLE_AS_FORM {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_CODETABLE_AS_FORM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Errors were found while checking forms for similarity. Errors must be fixed before the importing. Errors found: {0}.
+        /// </summary>
+        public static string IMPORT_ERROR_COUNT {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_COUNT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data cannot import until a data table exists.  Open this form in Form Designer.  Select Tools &gt; Create Data Table from the menu.  Then try again to import the data..
+        /// </summary>
+        public static string IMPORT_ERROR_CREATE_DATA_TABLE {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_CREATE_DATA_TABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field is skipped during import because the source form does not have field: {0}.
+        /// </summary>
+        public static string IMPORT_ERROR_DESTINATION_FIELD_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_DESTINATION_FIELD_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field type in the source project does not equal the field type in the destination project for field: {0}.
+        /// </summary>
+        public static string IMPORT_ERROR_FIELD_TYPE_DIFFERS {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_FIELD_TYPE_DIFFERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data for field was not imported because the field type is not supported. Field: {0}.
+        /// </summary>
+        public static string IMPORT_ERROR_FORM_FIELD_UNSUPPORTED {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_FORM_FIELD_UNSUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GlobalRecordId field in the source project is invalid. GlobalRecordId must be a text column..
+        /// </summary>
+        public static string IMPORT_ERROR_ID_INVALID {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_ID_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import process stopped because GlobalRecordId field in the source form is not unique..
+        /// </summary>
+        public static string IMPORT_ERROR_ID_NOT_UNIQUE {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_ID_NOT_UNIQUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image field is not supported during import and will be skipped. Field: {0} .
+        /// </summary>
+        public static string IMPORT_ERROR_IMAGE_FIELD {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_IMAGE_FIELD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not a valid field type for grid..
+        /// </summary>
+        public static string IMPORT_ERROR_INVALID_GRID_TYPE {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_INVALID_GRID_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not a supported field type..
+        /// </summary>
+        public static string IMPORT_ERROR_INVALID_TYPE {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_INVALID_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The destination project does not have a data table for form: {0}.
+        /// </summary>
+        public static string IMPORT_ERROR_NO_DATA_TABLE {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_NO_DATA_TABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import process stopped because the count of pages for each form in the source project does not equal the count of pages for each form in the destination project..
+        /// </summary>
+        public static string IMPORT_ERROR_PAGE_COUNT_DIFFERS {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_PAGE_COUNT_DIFFERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import process stopped because GlobalRecordId field is not unique on page: {0}.
+        /// </summary>
+        public static string IMPORT_ERROR_PAGE_ID_NOT_UNIQUE {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_PAGE_ID_NOT_UNIQUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error: A null reference exception occurred while processing the View [{0}]..
         /// </summary>
         public static string IMPORT_ERROR_PROCESSING_VIEW {
@@ -4459,11 +4738,74 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RECSTATUS in the source project is invalid. RECSTATUS must be an integer column..
+        /// </summary>
+        public static string IMPORT_ERROR_RECSTATUS_INVALID {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_RECSTATUS_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import process stopped because RECSTATUS column has invalid data..
+        /// </summary>
+        public static string IMPORT_ERROR_RECSTATUS_INVALID_DATA {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_RECSTATUS_INVALID_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import process stopped because the source form is a related form..
+        /// </summary>
+        public static string IMPORT_ERROR_RELATED_SOURCE {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_RELATED_SOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source form has a field with an invalid field name. Field: {0}.
+        /// </summary>
+        public static string IMPORT_ERROR_SOURCE_FIELD_NAME_INVALID {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_SOURCE_FIELD_NAME_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source form has a field with a field name that is a reserved word. Field: {0}.
+        /// </summary>
+        public static string IMPORT_ERROR_SOURCE_FIELD_NAME_RESERVED {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_SOURCE_FIELD_NAME_RESERVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field is skipped during import because the destination form does not have field: {0}.
+        /// </summary>
+        public static string IMPORT_ERROR_SOURCE_FIELD_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_SOURCE_FIELD_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error: One of the View objects created from the source project is null. This is likely due to a corrupted project or corrupted metadata in the source project. The import has been aborted..
         /// </summary>
         public static string IMPORT_ERROR_SOURCE_VIEW_NULL {
             get {
                 return ResourceManager.GetString("IMPORT_ERROR_SOURCE_VIEW_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import process stopped because too many differences were detected..
+        /// </summary>
+        public static string IMPORT_ERROR_TOO_DIFFERENT {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_TOO_DIFFERENT", resourceCulture);
             }
         }
         

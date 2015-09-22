@@ -10,13 +10,14 @@ using System.Windows.Forms;
 using Epi;
 using Epi.Data;
 using Epi.Fields;
+using Epi.Windows.Dialogs;
 
 namespace Epi.Enter.Forms
 {
     /// <summary>
     /// A user interface element to update or append records to the currently-open form from another similar, or identical, Epi Info 7 form.
     /// </summary>
-    public partial class ImportDataForm : Form
+    public partial class ImportDataForm : DialogBase
     {
         #region Private Members
         private bool isBatchImport = false; // currently unused
@@ -103,8 +104,8 @@ namespace Epi.Enter.Forms
         /// Initiates a full import on a single form
         /// </summary>
         private void DoImport()
-        {            
-            string importTypeDescription = "Records with matching ID fields will be updated and unmatched records will be appended.";
+        {
+            string importTypeDescription = SharedStrings.IMPORT_DATA_MATCHING_UPDATED_ELSE_APPEND;
             if (cmbImportType.SelectedIndex == 0)
             {
                 update = true;
@@ -114,13 +115,13 @@ namespace Epi.Enter.Forms
             {
                 update = true;
                 append = false;
-                importTypeDescription = "Records with matching ID fields will be updated. Unmatched records will be ignored.";
+                importTypeDescription = SharedStrings.IMPORT_DATA_MATCHING_UPDATED_ELSE_IGNORED;
             }
             else
             {
                 update = false;
                 append = true;
-                importTypeDescription = "Records with no matching ID fields will be appended. Records with matching ID fields will be ignored.";
+                importTypeDescription = SharedStrings.IMPORT_DATA_MATCHING_IGNORED_ELSE_APPEND;
             }            
 
             if (cmbFormName.SelectedIndex >= 0)
@@ -190,7 +191,7 @@ namespace Epi.Enter.Forms
                     stopwatch = new Stopwatch();
                     stopwatch.Start();
 
-                    AddStatusMessage("Import initiated for form " + cmbFormName.SelectedItem.ToString() + ". " + importTypeDescription);
+                    AddStatusMessage(SharedStrings.IMPORT_DATA_INITIATED + " " + cmbFormName.SelectedItem.ToString() + "; " + importTypeDescription);
 
                     btnBrowse.Enabled = false;
                     btnCancel.Enabled = false;
@@ -261,7 +262,7 @@ namespace Epi.Enter.Forms
                 }
                 else
                 {
-                    this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), "No data table was detected for the form " + view.Name + " in the destination project. No data from the source project can be imported until a table has been created for this form. Please open this form in the Form Designer module and select Tools > Create Data Table from the menu, and then try the import process again.");
+                    this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), string.Format(SharedStrings.IMPORT_ERROR_NO_DATA_TABLE ,view.Name) + " " + SharedStrings.IMPORT_ERROR_CREATE_DATA_TABLE);
                 }
             }
         }
@@ -310,7 +311,7 @@ namespace Epi.Enter.Forms
                 {
                     int recordsUpdated = 0;
                     int recordsInserted = 0;
-                    this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records for grid " + gridField.Name + "...");
+                    this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), string.Format(SharedStrings.IMPORT_DATA_PROCESSING_GRID, gridField.Name));
 
                     try
                     {
@@ -391,7 +392,7 @@ namespace Epi.Enter.Forms
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Single, data));
                                             break;
                                         default:
-                                            throw new ApplicationException("Not a valid grid field type");
+                                            throw new ApplicationException(SharedStrings.IMPORT_ERROR_INVALID_GRID_TYPE);
                                     }
                                     sb.Append(StringLiterals.COMMA);
                                     columns++;
@@ -459,7 +460,7 @@ namespace Epi.Enter.Forms
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Single, data));
                                             break;
                                         default:
-                                            throw new ApplicationException("Not a valid grid field type");
+                                            throw new ApplicationException(SharedStrings.IMPORT_ERROR_INVALID_GRID_TYPE);
                                     }
                                     columns++;
                                 }
@@ -488,7 +489,7 @@ namespace Epi.Enter.Forms
                         sourceGridTableReader.Close();
                         sourceGridTableReader.Dispose();
 
-                        this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "For grid '" + gridField.Name + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");
+                        this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), string.Format(SharedStrings.IMPORT_DATA_GRID_PROCESSING_COMPLETE, gridField.Name) + "; " + string.Format(SharedStrings.IMPORT_DATA_RECS_INSERTED, recordsInserted.ToString()) + "; " + string.Format(SharedStrings.IMPORT_DATA_RECS_UPDATED, recordsUpdated.ToString() + "."));
                     }
                     catch (Exception ex)
                     {
@@ -507,7 +508,7 @@ namespace Epi.Enter.Forms
         private void ProcessBaseTable(View sourceView, View destinationView, List<string> destinationGUIDList)
         {
             sourceView.LoadFirstRecord();
-            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on base table...");
+            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), SharedStrings.IMPORT_DATA_PROCESSING_RECS);
 
             int recordsInserted = 0;
             int recordsUpdated = 0;
@@ -525,7 +526,7 @@ namespace Epi.Enter.Forms
 
                     if (importWorker.CancellationPending)
                     {
-                        this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import cancelled.");
+                        this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), SharedStrings.IMPORT_DATA_CANCELLED);
                         return;
                     }
 
@@ -642,7 +643,7 @@ namespace Epi.Enter.Forms
             finally
             {
             }
-            this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "On page '" + destinationTable + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");
+            this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), string.Format(SharedStrings.IMPORT_DATA_PAGE_PROCESSING_COMPLETE, destinationTable + "; " + string.Format(SharedStrings.IMPORT_DATA_RECS_INSERTED, recordsInserted.ToString()) + "; " + string.Format(SharedStrings.IMPORT_DATA_RECS_UPDATED, recordsUpdated.ToString()) + "."));
         }
 
         /// <summary>
@@ -656,7 +657,7 @@ namespace Epi.Enter.Forms
             for (int i = 0; i < sourceView.Pages.Count; i++)
             {
                 sourceView.LoadFirstRecord();
-                this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on page " + (i + 1).ToString() + " of " + sourceView.Pages.Count.ToString() + "...");
+                this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), string.Format(SharedStrings.IMPORT_DATA_PROCESSING_RECS_PAGE, (i + 1).ToString(), sourceView.Pages.Count.ToString()));
 
                 int recordsInserted = 0;
                 int recordsUpdated = 0;
@@ -688,7 +689,7 @@ namespace Epi.Enter.Forms
                     {
                         if (importWorker.CancellationPending)
                         {
-                            this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import cancelled.");
+                            this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), SharedStrings.IMPORT_DATA_CANCELLED);
                             return;
                         }
 
@@ -782,10 +783,10 @@ namespace Epi.Enter.Forms
                                                     break;
                                                 case MetaFieldType.Option:
                                                 case MetaFieldType.Image:
-                                                    this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), "The data for " + renderableField.Name + " was not imported. This field type is not supported.");
+                                                    this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), string.Format(SharedStrings.IMPORT_ERROR_FORM_FIELD_UNSUPPORTED, renderableField.Name));
                                                     continue;
                                                 default:
-                                                    throw new ApplicationException("Not a supported field type");
+                                                    throw new ApplicationException(SharedStrings.IMPORT_ERROR_INVALID_TYPE);
                                             }
                                             sb.Append(StringLiterals.LEFT_SQUARE_BRACKET);
                                             sb.Append(((Epi.INamedObject)dataField).Name);
@@ -907,10 +908,10 @@ namespace Epi.Enter.Forms
                                                     break;
                                                 case MetaFieldType.Option:
                                                 case MetaFieldType.Image:
-                                                    this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), "The data for " + fieldName + " was not imported. This field type is not supported.");
+                                                    this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), string.Format(SharedStrings.IMPORT_ERROR_FORM_FIELD_UNSUPPORTED, fieldName));
                                                     continue;
                                                 default:
-                                                    throw new ApplicationException("Not a supported field type");
+                                                    throw new ApplicationException(SharedStrings.IMPORT_ERROR_INVALID_TYPE);
                                             }
                                             fieldNames.Append(destinationProjectDataDriver.InsertInEscape(((Epi.INamedObject)dataField).Name));
                                             fieldValues.Append("@" + fieldName);
@@ -952,7 +953,7 @@ namespace Epi.Enter.Forms
                 finally
                 {
                 }
-                this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "On page '" + destinationPage.Name + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");                
+                this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), string.Format(SharedStrings.IMPORT_DATA_PAGE_PROCESSING_COMPLETE, destinationPage.Name + "; " + string.Format(SharedStrings.IMPORT_DATA_RECS_INSERTED, recordsInserted.ToString()) + "; " + string.Format(SharedStrings.IMPORT_DATA_RECS_UPDATED, recordsUpdated.ToString()) + "."));
             }
         }
 
@@ -973,7 +974,7 @@ namespace Epi.Enter.Forms
         /// <param name="statusMessage"></param>
         private void AddWarningMessage(string statusMessage)
         {
-            string message = DateTime.Now + ": Warning: " + statusMessage;
+            string message = DateTime.Now + ": " + SharedStrings.IMPORT_DATA_WARNING + " " + statusMessage;
             lbxStatus.Items.Add(message);            
             Logger.Log(message);
         }
@@ -984,7 +985,7 @@ namespace Epi.Enter.Forms
         /// <param name="statusMessage"></param>
         private void AddErrorStatusMessage(string statusMessage)
         {
-            string message = DateTime.Now + ": Error: " + statusMessage;
+            string message = DateTime.Now + ": " + SharedStrings.IMPORT_DATA_ERROR + " " + statusMessage;
             lbxStatus.Items.Add(message);
             Logger.Log(message);
         }
@@ -1000,7 +1001,7 @@ namespace Epi.Enter.Forms
 
             if (sourceView.Pages.Count != destinationView.Pages.Count)
             {
-                AddErrorStatusMessage("The page count for each form is different. Process halted.");
+                AddErrorStatusMessage(SharedStrings.IMPORT_ERROR_PAGE_COUNT_DIFFERS);
                 errorCount++;
                 return false;
             }
@@ -1024,19 +1025,19 @@ namespace Epi.Enter.Forms
 
                     if (destinationField.FieldType != sourceField.FieldType)
                     {
-                        AddErrorStatusMessage("The field type for " + destinationField.Name + " in the destination form doesn't match the field type in the source form.");
+                        AddErrorStatusMessage(string.Format(SharedStrings.IMPORT_ERROR_FIELD_TYPE_DIFFERS, destinationField.Name));
                         errorCount++;
                     }
                 }
                 else
                 {
-                    AddWarningMessage("The field " + sourceField.Name + " was not found in the destination form. It will be skipped during the import.");
+                    AddWarningMessage(string.Format(SharedStrings.IMPORT_ERROR_SOURCE_FIELD_NOT_FOUND, sourceField.Name ));
                     warningCount++;
                 }
 
                 if (sourceField is ImageField)
                 {
-                    AddWarningMessage("The field " + sourceField.Name + " is an image field. Image fields are not supported for importing and will be skipped.");                    
+                    AddWarningMessage(string.Format(SharedStrings.IMPORT_ERROR_IMAGE_FIELD, sourceField.Name));                    
                 }
             }
 
@@ -1044,7 +1045,7 @@ namespace Epi.Enter.Forms
             {
                 if (!sourceView.Fields.Contains(destinationField.Name))
                 {
-                    AddWarningMessage("The field " + destinationField.Name + " was not found in the source form. It will be skipped during the import.");
+                    AddWarningMessage(string.Format(SharedStrings.IMPORT_ERROR_DESTINATION_FIELD_NOT_FOUND, destinationField.Name));
                     warningCount++;
                 }
             }
@@ -1054,12 +1055,12 @@ namespace Epi.Enter.Forms
             {
                 if (!Util.IsFirstCharacterALetter(sourceField.Name))
                 {
-                    AddErrorStatusMessage("The field name for " + sourceField.Name + " in the source form is invalid.");
+                    AddErrorStatusMessage(string.Format(SharedStrings.IMPORT_ERROR_SOURCE_FIELD_NAME_INVALID, sourceField.Name));
                     errorCount++;
                 }
                 if (Epi.Data.Services.AppData.Instance.IsReservedWord(sourceField.Name) && (sourceField.Name.ToLower() != "uniquekey" && sourceField.Name.ToLower() != "recstatus" && sourceField.Name.ToLower() != "fkey"))
                 {
-                    AddWarningMessage("The field name for " + sourceField.Name + " in the source form is a reserved word. Problems may be encountered during the import.");
+                    AddWarningMessage(string.Format(SharedStrings.IMPORT_ERROR_SOURCE_FIELD_NAME_RESERVED, sourceField.Name));
                 }
             }
 
@@ -1071,18 +1072,13 @@ namespace Epi.Enter.Forms
 
             if (warningCount > ((double)destinationView.Fields.Count / 1.7)) // User may have selected to import the wrong form with this many differences?
             {
-                AddErrorStatusMessage("Too many differences were detected. The import process has been halted.");
+                AddErrorStatusMessage(SharedStrings.IMPORT_ERROR_TOO_DIFFERENT);
                 return false;
             }
 
-            if (errorCount > 1)
+            if (errorCount >= 1)
             {
-                AddErrorStatusMessage(errorCount.ToString() + " errors were encountered while checking the forms for similarity. These issues must be fixed before the import can proceed.");
-                return false;
-            }
-            else if (errorCount == 1)
-            {
-                AddErrorStatusMessage(errorCount.ToString() + " error was encountered while checking the forms for similarity. This issues must be fixed before the import can proceed.");
+                AddErrorStatusMessage(string.Format(SharedStrings.IMPORT_ERROR_COUNT, errorCount.ToString()));
                 return false;
             }
 
@@ -1171,8 +1167,8 @@ namespace Epi.Enter.Forms
         {
             stopwatch.Stop();
 
-            this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import complete. Time elapsed: " + stopwatch.Elapsed.ToString());
-            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Import complete. Time elapsed: " + stopwatch.Elapsed.ToString());
+            this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), string.Format(SharedStrings.IMPORT_DATA_COMPLETE, stopwatch.Elapsed.ToString()));
+            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), string.Format(SharedStrings.IMPORT_DATA_COMPLETE, stopwatch.Elapsed.ToString()));
 
             btnBrowse.Enabled = true;
             btnCancel.Enabled = true;
@@ -1230,13 +1226,13 @@ namespace Epi.Enter.Forms
                 // Check #2a - Make sure GlobalRecordId is a string.
                 if (!dt.Columns[0].DataType.ToString().Equals("System.String"))
                 {
-                    throw new ApplicationException("The GlobalRecordId field in the source project is invalid. It must be implemented as a text column.");
+                    throw new ApplicationException(SharedStrings.IMPORT_ERROR_ID_INVALID);
                 }
 
                 // Check #2b - Make sure RECSTATUS is a number
                 if (!(dt.Columns[1].DataType.ToString().Equals("System.Byte") || dt.Columns[1].DataType.ToString().Equals("System.Int16") || dt.Columns[1].DataType.ToString().Equals("System.Int32")))
                 {
-                    throw new ApplicationException("The RecStatus field in the source project is invalid. It must be implemented as an integer column.");
+                    throw new ApplicationException(SharedStrings.IMPORT_ERROR_RECSTATUS_INVALID);
                 }
 
                 // Check #3 - Make sure GlobalRecordId values haven't been replaced with something that isn't actually a GUID. 
@@ -1261,7 +1257,7 @@ namespace Epi.Enter.Forms
                 DataTable distinctTable = driver.Select(selectDistinctQuery);
                 if (distinctTable.Rows.Count != baseTableRowCount)
                 {
-                    throw new ApplicationException("The GlobalRecordId field in the source form is not unique. The import cannot proceed.");
+                    throw new ApplicationException(SharedStrings.IMPORT_ERROR_ID_NOT_UNIQUE);
                 }
 
                 // Check #4b - See if global record ID values are distinct on each page table.
@@ -1271,7 +1267,7 @@ namespace Epi.Enter.Forms
                     distinctTable = driver.Select(selectDistinctQuery);
                     if (distinctTable.Rows.Count != baseTableRowCount)
                     {
-                        throw new ApplicationException("The GlobalRecordId field on page " + page.TableName + " is not unique. The import cannot proceed.");
+                        throw new ApplicationException(string.Format(SharedStrings.IMPORT_ERROR_PAGE_ID_NOT_UNIQUE, page.TableName ));
                     }
                 }
 
@@ -1282,7 +1278,7 @@ namespace Epi.Enter.Forms
                 {
                     if (!row[0].ToString().Equals("1") && !row[0].ToString().Equals("0"))
                     {
-                        throw new ApplicationException("There are invalid values present in the RECSTATUS column. The import cannot proceed.");
+                        throw new ApplicationException(SharedStrings.IMPORT_ERROR_RECSTATUS_INVALID_DATA);
                     }
                 }
 
@@ -1303,14 +1299,14 @@ namespace Epi.Enter.Forms
                     {
                         if (dataTableNames.Contains(row[2].ToString()))
                         {
-                            throw new ApplicationException("A code table reference is set up as a form in this project. Code tables may only be implemented as standalone data tables for data packaging purposes. The import cannot proceed.");
+                            throw new ApplicationException(SharedStrings.IMPORT_ERROR_CODETABLE_AS_FORM);
                         }
                     }
                     else
                     {
                         if (dataTableNames.Contains(row[0].ToString()))
                         {
-                            throw new ApplicationException("A code table reference is set up as a form in this project. Code tables may only be implemented as standalone data tables for data packaging purposes. The import cannot proceed.");
+                            throw new ApplicationException(SharedStrings.IMPORT_ERROR_CODETABLE_AS_FORM);
                         }
                     }
                 }
@@ -1318,7 +1314,7 @@ namespace Epi.Enter.Forms
                 // Check #7 - Should never get here because the UI should prevent it, but do a check just in case
                 if (sourceView.IsRelatedView == true)
                 {
-                    throw new ApplicationException("The import cannot proceed because the source form is a related form.");
+                    throw new ApplicationException(SharedStrings.IMPORT_ERROR_RELATED_SOURCE);
                 }
 
                 distinctTable = null;
@@ -1352,7 +1348,7 @@ namespace Epi.Enter.Forms
         {
             if (importWorker.IsBusy)
             {
-                DialogResult result = Epi.Windows.MsgBox.ShowQuestion("Aborting the import process and may cause impartially-updated or incomplete records to exist. Proceed with abort?");
+                DialogResult result = Epi.Windows.MsgBox.ShowQuestion(SharedStrings.IMPORT_DATA_CANCEL_IMPORT);
                 if (result == DialogResult.Yes)
                 {
                     importWorker.CancelAsync();
@@ -1378,7 +1374,7 @@ namespace Epi.Enter.Forms
 
         private void ImportDataForm_Load(object sender, EventArgs e)
         {
-            AddStatusMessage("Loaded data import dialog. Ready.");
+            AddStatusMessage(SharedStrings.IMPORT_DATA_READY);
         }
         #endregion // Event Handlers        
     }

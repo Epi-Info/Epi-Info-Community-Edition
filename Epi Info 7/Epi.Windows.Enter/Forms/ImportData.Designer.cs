@@ -50,60 +50,128 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
+            // baseImageList
+            // 
+            this.baseImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("baseImageList.ImageStream")));
+            this.baseImageList.Images.SetKeyName(0, "");
+            this.baseImageList.Images.SetKeyName(1, "");
+            this.baseImageList.Images.SetKeyName(2, "");
+            this.baseImageList.Images.SetKeyName(3, "");
+            this.baseImageList.Images.SetKeyName(4, "");
+            this.baseImageList.Images.SetKeyName(5, "");
+            this.baseImageList.Images.SetKeyName(6, "");
+            this.baseImageList.Images.SetKeyName(7, "");
+            this.baseImageList.Images.SetKeyName(8, "");
+            this.baseImageList.Images.SetKeyName(9, "");
+            this.baseImageList.Images.SetKeyName(10, "");
+            this.baseImageList.Images.SetKeyName(11, "");
+            this.baseImageList.Images.SetKeyName(12, "");
+            this.baseImageList.Images.SetKeyName(13, "");
+            this.baseImageList.Images.SetKeyName(14, "");
+            this.baseImageList.Images.SetKeyName(15, "");
+            this.baseImageList.Images.SetKeyName(16, "");
+            this.baseImageList.Images.SetKeyName(17, "");
+            this.baseImageList.Images.SetKeyName(18, "");
+            this.baseImageList.Images.SetKeyName(19, "");
+            this.baseImageList.Images.SetKeyName(20, "");
+            this.baseImageList.Images.SetKeyName(21, "");
+            this.baseImageList.Images.SetKeyName(22, "");
+            this.baseImageList.Images.SetKeyName(23, "");
+            this.baseImageList.Images.SetKeyName(24, "");
+            this.baseImageList.Images.SetKeyName(25, "");
+            this.baseImageList.Images.SetKeyName(26, "");
+            this.baseImageList.Images.SetKeyName(27, "");
+            this.baseImageList.Images.SetKeyName(28, "");
+            this.baseImageList.Images.SetKeyName(29, "");
+            this.baseImageList.Images.SetKeyName(30, "");
+            this.baseImageList.Images.SetKeyName(31, "");
+            this.baseImageList.Images.SetKeyName(32, "");
+            this.baseImageList.Images.SetKeyName(33, "");
+            this.baseImageList.Images.SetKeyName(34, "");
+            this.baseImageList.Images.SetKeyName(35, "");
+            this.baseImageList.Images.SetKeyName(36, "");
+            this.baseImageList.Images.SetKeyName(37, "");
+            this.baseImageList.Images.SetKeyName(38, "");
+            this.baseImageList.Images.SetKeyName(39, "");
+            this.baseImageList.Images.SetKeyName(40, "");
+            this.baseImageList.Images.SetKeyName(41, "");
+            this.baseImageList.Images.SetKeyName(42, "");
+            this.baseImageList.Images.SetKeyName(43, "");
+            this.baseImageList.Images.SetKeyName(44, "");
+            this.baseImageList.Images.SetKeyName(45, "");
+            this.baseImageList.Images.SetKeyName(46, "");
+            this.baseImageList.Images.SetKeyName(47, "");
+            this.baseImageList.Images.SetKeyName(48, "");
+            this.baseImageList.Images.SetKeyName(49, "");
+            this.baseImageList.Images.SetKeyName(50, "");
+            this.baseImageList.Images.SetKeyName(51, "");
+            this.baseImageList.Images.SetKeyName(52, "");
+            this.baseImageList.Images.SetKeyName(53, "");
+            this.baseImageList.Images.SetKeyName(54, "");
+            this.baseImageList.Images.SetKeyName(55, "");
+            this.baseImageList.Images.SetKeyName(56, "");
+            this.baseImageList.Images.SetKeyName(57, "");
+            this.baseImageList.Images.SetKeyName(58, "");
+            this.baseImageList.Images.SetKeyName(59, "");
+            this.baseImageList.Images.SetKeyName(60, "");
+            this.baseImageList.Images.SetKeyName(61, "");
+            this.baseImageList.Images.SetKeyName(62, "");
+            this.baseImageList.Images.SetKeyName(63, "");
+            this.baseImageList.Images.SetKeyName(64, "");
+            this.baseImageList.Images.SetKeyName(65, "");
+            this.baseImageList.Images.SetKeyName(66, "");
+            this.baseImageList.Images.SetKeyName(67, "");
+            this.baseImageList.Images.SetKeyName(68, "");
+            this.baseImageList.Images.SetKeyName(69, "");
+            this.baseImageList.Images.SetKeyName(70, "");
+            this.baseImageList.Images.SetKeyName(71, "");
+            this.baseImageList.Images.SetKeyName(72, "");
+            this.baseImageList.Images.SetKeyName(73, "");
+            this.baseImageList.Images.SetKeyName(74, "");
+            this.baseImageList.Images.SetKeyName(75, "");
+            this.baseImageList.Images.SetKeyName(76, "");
+            this.baseImageList.Images.SetKeyName(77, "");
+            this.baseImageList.Images.SetKeyName(78, "");
+            this.baseImageList.Images.SetKeyName(79, "");
+            // 
             // lblDescription
             // 
-            this.lblDescription.Location = new System.Drawing.Point(12, 9);
+            resources.ApplyResources(this.lblDescription, "lblDescription");
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(505, 59);
-            this.lblDescription.TabIndex = 0;
-            this.lblDescription.Text = resources.GetString("lblDescription.Text");
             // 
             // lblProjectFile
             // 
-            this.lblProjectFile.Location = new System.Drawing.Point(6, 24);
+            resources.ApplyResources(this.lblProjectFile, "lblProjectFile");
             this.lblProjectFile.Name = "lblProjectFile";
-            this.lblProjectFile.Size = new System.Drawing.Size(460, 13);
-            this.lblProjectFile.TabIndex = 1;
-            this.lblProjectFile.Text = "Project containing the data to import:";
             // 
             // textProjectFile
             // 
-            this.textProjectFile.Location = new System.Drawing.Point(9, 40);
+            resources.ApplyResources(this.textProjectFile, "textProjectFile");
             this.textProjectFile.Name = "textProjectFile";
-            this.textProjectFile.Size = new System.Drawing.Size(457, 20);
-            this.textProjectFile.TabIndex = 1;
             // 
             // lblFormName
             // 
-            this.lblFormName.Location = new System.Drawing.Point(9, 63);
+            resources.ApplyResources(this.lblFormName, "lblFormName");
             this.lblFormName.Name = "lblFormName";
-            this.lblFormName.Size = new System.Drawing.Size(166, 13);
-            this.lblFormName.TabIndex = 3;
-            this.lblFormName.Text = "Form data to import:";
             // 
             // cmbFormName
             // 
             this.cmbFormName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFormName.FormattingEnabled = true;
-            this.cmbFormName.Location = new System.Drawing.Point(9, 79);
+            resources.ApplyResources(this.cmbFormName, "cmbFormName");
             this.cmbFormName.Name = "cmbFormName";
-            this.cmbFormName.Size = new System.Drawing.Size(166, 21);
-            this.cmbFormName.TabIndex = 3;
             this.cmbFormName.SelectedIndexChanged += new System.EventHandler(this.cmbFormName_SelectedIndexChanged);
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(472, 38);
+            resources.ApplyResources(this.btnBrowse, "btnBrowse");
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(24, 23);
-            this.btnBrowse.TabIndex = 2;
-            this.btnBrowse.Text = "...";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // groupImportInfo
             // 
-            this.groupImportInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.groupImportInfo, "groupImportInfo");
             this.groupImportInfo.Controls.Add(this.cmbImportType);
             this.groupImportInfo.Controls.Add(this.lblImportType);
             this.groupImportInfo.Controls.Add(this.btnBrowse);
@@ -111,122 +179,82 @@
             this.groupImportInfo.Controls.Add(this.textProjectFile);
             this.groupImportInfo.Controls.Add(this.lblFormName);
             this.groupImportInfo.Controls.Add(this.lblProjectFile);
-            this.groupImportInfo.Location = new System.Drawing.Point(15, 131);
             this.groupImportInfo.Name = "groupImportInfo";
-            this.groupImportInfo.Size = new System.Drawing.Size(502, 153);
-            this.groupImportInfo.TabIndex = 6;
             this.groupImportInfo.TabStop = false;
-            this.groupImportInfo.Text = "Import information";
             // 
             // cmbImportType
             // 
             this.cmbImportType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbImportType.FormattingEnabled = true;
             this.cmbImportType.Items.AddRange(new object[] {
-            "Update and append records",
-            "Update records only",
-            "Append records only"});
-            this.cmbImportType.Location = new System.Drawing.Point(9, 119);
+            resources.GetString("cmbImportType.Items"),
+            resources.GetString("cmbImportType.Items1"),
+            resources.GetString("cmbImportType.Items2")});
+            resources.ApplyResources(this.cmbImportType, "cmbImportType");
             this.cmbImportType.Name = "cmbImportType";
-            this.cmbImportType.Size = new System.Drawing.Size(166, 21);
-            this.cmbImportType.TabIndex = 4;
             // 
             // lblImportType
             // 
-            this.lblImportType.Location = new System.Drawing.Point(9, 103);
+            resources.ApplyResources(this.lblImportType, "lblImportType");
             this.lblImportType.Name = "lblImportType";
-            this.lblImportType.Size = new System.Drawing.Size(166, 13);
-            this.lblImportType.TabIndex = 6;
-            this.lblImportType.Text = "Type of import:";
             // 
             // textProgress
             // 
-            this.textProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textProgress.Location = new System.Drawing.Point(12, 417);
+            resources.ApplyResources(this.textProgress, "textProgress");
             this.textProgress.Name = "textProgress";
             this.textProgress.ReadOnly = true;
-            this.textProgress.Size = new System.Drawing.Size(505, 20);
-            this.textProgress.TabIndex = 13;
             this.textProgress.TabStop = false;
-            this.textProgress.Text = "Ready";
             // 
             // progressBar
             // 
-            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(12, 443);
+            resources.ApplyResources(this.progressBar, "progressBar");
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(505, 23);
-            this.progressBar.TabIndex = 12;
-            this.progressBar.Visible = false;
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(442, 473);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 6;
-            this.btnCancel.Text = "Close";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnOK
             // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Enabled = false;
-            this.btnOK.Location = new System.Drawing.Point(361, 473);
+            resources.ApplyResources(this.btnOK, "btnOK");
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 5;
-            this.btnOK.Text = "Import";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // lbxStatus
             // 
-            this.lbxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.lbxStatus, "lbxStatus");
             this.lbxStatus.FormattingEnabled = true;
-            this.lbxStatus.HorizontalScrollbar = true;
-            this.lbxStatus.Location = new System.Drawing.Point(12, 290);
             this.lbxStatus.Name = "lbxStatus";
-            this.lbxStatus.Size = new System.Drawing.Size(505, 121);
-            this.lbxStatus.TabIndex = 9;
             this.lbxStatus.TabStop = false;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Epi.Enter.Properties.Resources.warning;
-            this.pictureBox1.Location = new System.Drawing.Point(15, 87);
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(18, 18);
-            this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
             // lblWarning
             // 
-            this.lblWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWarning.Location = new System.Drawing.Point(36, 87);
+            resources.ApplyResources(this.lblWarning, "lblWarning");
             this.lblWarning.Name = "lblWarning";
-            this.lblWarning.Size = new System.Drawing.Size(71, 18);
-            this.lblWarning.TabIndex = 14;
-            this.lblWarning.Text = "Warning:";
             // 
             // lblWarningMessage
             // 
-            this.lblWarningMessage.Location = new System.Drawing.Point(103, 75);
+            resources.ApplyResources(this.lblWarningMessage, "lblWarningMessage");
             this.lblWarningMessage.Name = "lblWarningMessage";
-            this.lblWarningMessage.Size = new System.Drawing.Size(414, 44);
-            this.lblWarningMessage.TabIndex = 15;
-            this.lblWarningMessage.Text = resources.GetString("lblWarningMessage.Text");
             // 
             // ImportDataForm
             // 
             this.AcceptButton = this.btnOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(529, 508);
             this.Controls.Add(this.lblWarningMessage);
             this.Controls.Add(this.lblWarning);
             this.Controls.Add(this.pictureBox1);
@@ -237,12 +265,10 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.groupImportInfo);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ImportDataForm";
-            this.ShowIcon = false;
-            this.Text = "Import form data";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImportDataForm_FormClosing);
             this.Load += new System.EventHandler(this.ImportDataForm_Load);
             this.groupImportInfo.ResumeLayout(false);
