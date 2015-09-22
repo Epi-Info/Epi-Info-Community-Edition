@@ -2837,4 +2837,118 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="DASHBOARD_MISSING" xml:space="preserve">
     <value>Missing</value>
   </data>
+  <data name="IMPORT_DATA_CANCELLED" xml:space="preserve">
+    <value>Import cancelled.</value>
+  </data>
+  <data name="IMPORT_DATA_CANCEL_IMPORT" xml:space="preserve">
+    <value>Cancelling the import process may cause partially updated or incomplete records. Cancel anyway?</value>
+  </data>
+  <data name="IMPORT_DATA_COMPLETE" xml:space="preserve">
+    <value>Import complete.  Time elapsed: {0}</value>
+  </data>
+  <data name="IMPORT_DATA_ERROR" xml:space="preserve">
+    <value>Error:</value>
+  </data>
+  <data name="IMPORT_DATA_GRID_PROCESSING_COMPLETE" xml:space="preserve">
+    <value>Import process complete for grid: {0}.</value>
+  </data>
+  <data name="IMPORT_DATA_INITIATED" xml:space="preserve">
+    <value>Import initiated for form:</value>
+  </data>
+  <data name="IMPORT_DATA_MATCHING_IGNORED_ELSE_APPEND" xml:space="preserve">
+    <value>Records with matching ID fields will be ignored. Records with no matching ID fields will be appended. </value>
+  </data>
+  <data name="IMPORT_DATA_MATCHING_UPDATED_ELSE_APPEND" xml:space="preserve">
+    <value>Records with matching ID fields will be updated.  Records with no matching ID fields records will be appended.</value>
+  </data>
+  <data name="IMPORT_DATA_MATCHING_UPDATED_ELSE_IGNORED" xml:space="preserve">
+    <value>Records with matching ID fields will be updated. Records with no matching ID fields records will be ignored.</value>
+  </data>
+  <data name="IMPORT_DATA_PAGE_PROCESSING_COMPLETE" xml:space="preserve">
+    <value>Import process complete for page: {0}.</value>
+  </data>
+  <data name="IMPORT_DATA_PROCESSING_GRID" xml:space="preserve">
+    <value>Processing records for grid: {0}.</value>
+  </data>
+  <data name="IMPORT_DATA_PROCESSING_RECS" xml:space="preserve">
+    <value>Processing records on base table.</value>
+  </data>
+  <data name="IMPORT_DATA_PROCESSING_RECS_PAGE" xml:space="preserve">
+    <value>Processing records on page: {0}; Total pages: {1}.</value>
+  </data>
+  <data name="IMPORT_DATA_READY" xml:space="preserve">
+    <value>Loaded data import dialog. Ready.</value>
+  </data>
+  <data name="IMPORT_DATA_RECS_INSERTED" xml:space="preserve">
+    <value>Records inserted: {0}</value>
+  </data>
+  <data name="IMPORT_DATA_RECS_UPDATED" xml:space="preserve">
+    <value>Records updated: {0}</value>
+  </data>
+  <data name="IMPORT_DATA_WARNING" xml:space="preserve">
+    <value>Warning:</value>
+  </data>
+  <data name="IMPORT_ERROR_CODETABLE_AS_FORM" xml:space="preserve">
+    <value>Import process stopped because a code table is set up as a form in this project. Code tables can be imported as standalone data tables only.</value>
+  </data>
+  <data name="IMPORT_ERROR_COUNT" xml:space="preserve">
+    <value>Errors were found while checking forms for similarity. Errors must be fixed before the importing. Errors found: {0}</value>
+  </data>
+  <data name="IMPORT_ERROR_CREATE_DATA_TABLE" xml:space="preserve">
+    <value>Data cannot import until a data table exists.  Open this form in Form Designer.  Select Tools &gt; Create Data Table from the menu.  Then try again to import the data.</value>
+  </data>
+  <data name="IMPORT_ERROR_DESTINATION_FIELD_NOT_FOUND" xml:space="preserve">
+    <value>Field is skipped during import because the source form does not have field: {0}</value>
+  </data>
+  <data name="IMPORT_ERROR_FIELD_TYPE_DIFFERS" xml:space="preserve">
+    <value>Field type in the source project does not equal the field type in the destination project for field: {0}</value>
+  </data>
+  <data name="IMPORT_ERROR_FORM_FIELD_UNSUPPORTED" xml:space="preserve">
+    <value>Data for field was not imported because the field type is not supported. Field: {0}</value>
+  </data>
+  <data name="IMPORT_ERROR_ID_INVALID" xml:space="preserve">
+    <value>GlobalRecordId field in the source project is invalid. GlobalRecordId must be a text column.</value>
+  </data>
+  <data name="IMPORT_ERROR_ID_NOT_UNIQUE" xml:space="preserve">
+    <value>Import process stopped because GlobalRecordId field in the source form is not unique.</value>
+  </data>
+  <data name="IMPORT_ERROR_IMAGE_FIELD" xml:space="preserve">
+    <value>Image field is not supported during import and will be skipped. Field: {0} </value>
+  </data>
+  <data name="IMPORT_ERROR_INVALID_GRID_TYPE" xml:space="preserve">
+    <value>Not a valid field type for grid.</value>
+  </data>
+  <data name="IMPORT_ERROR_INVALID_TYPE" xml:space="preserve">
+    <value>Not a supported field type.</value>
+  </data>
+  <data name="IMPORT_ERROR_NO_DATA_TABLE" xml:space="preserve">
+    <value>The destination project does not have a data table for form: {0}</value>
+  </data>
+  <data name="IMPORT_ERROR_PAGE_COUNT_DIFFERS" xml:space="preserve">
+    <value>Import process stopped because the count of pages for each form in the source project does not equal the count of pages for each form in the destination project.</value>
+  </data>
+  <data name="IMPORT_ERROR_PAGE_ID_NOT_UNIQUE" xml:space="preserve">
+    <value>Import process stopped because GlobalRecordId field is not unique on page: {0}</value>
+  </data>
+  <data name="IMPORT_ERROR_RECSTATUS_INVALID" xml:space="preserve">
+    <value>RECSTATUS in the source project is invalid. RECSTATUS must be an integer column.</value>
+  </data>
+  <data name="IMPORT_ERROR_RECSTATUS_INVALID_DATA" xml:space="preserve">
+    <value>Import process stopped because RECSTATUS column has invalid data.</value>
+  </data>
+  <data name="IMPORT_ERROR_RELATED_SOURCE" xml:space="preserve">
+    <value>Import process stopped because the source form is a related form.</value>
+  </data>
+  <data name="IMPORT_ERROR_SOURCE_FIELD_NAME_INVALID" xml:space="preserve">
+    <value>Source form has a field with an invalid field name. Field: {0}</value>
+  </data>
+  <data name="IMPORT_ERROR_SOURCE_FIELD_NAME_RESERVED" xml:space="preserve">
+    <value>Source form has a field with a field name that is a reserved word. Field: {0}</value>
+  </data>
+  <data name="IMPORT_ERROR_SOURCE_FIELD_NOT_FOUND" xml:space="preserve">
+    <value>Field is skipped during import because the destination form does not have field: {0}</value>
+  </data>
+  <data name="IMPORT_ERROR_TOO_DIFFERENT" xml:space="preserve">
+    <value>Import process stopped because too many differences were detected.</value>
+  </data>
 </root>
