@@ -465,7 +465,7 @@ namespace Epi.Analysis.Statistics
 
                 if (m25 > result.Obs && m25 <= result.Obs + currentCount)
                 {
-                    if ((result.Obs + currentCount) % 2.0 == 0)
+                    if (m25 == result.Obs + currentCount)
                     {
                         if (SortedRowIndex + 1 < ROWS.Length)
                         {
@@ -503,7 +503,7 @@ namespace Epi.Analysis.Statistics
 
                 if (m75 > result.Obs && m75 <= result.Obs + currentCount)
                 {
-                    if ((result.Obs + currentCount) % 2.0 == 0)
+                    if (m75 == result.Obs + currentCount)
                     {
                         
                         if(SortedRowIndex + 1 < ROWS.Length)
