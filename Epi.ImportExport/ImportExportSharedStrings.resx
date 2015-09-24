@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ERROR" xml:space="preserve">
     <value>Error</value>
@@ -141,7 +141,6 @@
   <data name="ERROR_ITERATIONS_COUNT" xml:space="preserve">
     <value>The specified number of iterations is invalid.</value>
   </data>
-
   <data name="ERROR_EXPORT_CANNOT_OVERWRITE_META" xml:space="preserve">
     <value>Cannot overwrite a metadata table.</value>
   </data>
@@ -151,10 +150,6 @@
   <data name="ERROR_EXPORT_CANNOT_USE_EXISTING_FORM_NAME" xml:space="preserve">
     <value>Cannot use a table name that matches a form name or may become a page table name.</value>
   </data>
-
-
-
-
   <data name="ERROR_OUT_OF_MEMORY_CODE_TABLE" xml:space="preserve">
     <value>Out of memory - the code table being read is likely too long.</value>
   </data>
@@ -188,10 +183,6 @@
   <data name="ERROR_TABLE_TO_FORM_TAB_LESS_THAN_ZERO" xml:space="preserve">
     <value>Tab index for field {0} cannot be less than zero.</value>
   </data>
-  
-  
-  
-  
   <data name="ERROR_NO_PACKAGE" xml:space="preserve">
     <value>No project has been specified for packaging.</value>
   </data>
@@ -219,7 +210,6 @@
   <data name="ERROR_SAME_FOLDER" xml:space="preserve">
     <value>The data package should not be placed in the same folder as the source project.</value>
   </data>
-
   <data name="WARNING_FIELD_NOT_IMPORTED" xml:space="preserve">
     <value>Warning: The data for {0} was not imported. This field type is not supported.</value>
   </data>
@@ -232,7 +222,6 @@
   <data name="WARNING_COMPACT_FAILURE" xml:space="preserve">
     <value>"Warning: The database could not be compacted. Reason: {0}</value>
   </data>
-
   <data name="SCRIPT_SAVED" xml:space="preserve">
     <value>Package script saved.</value>
   </data>
@@ -257,39 +246,33 @@
   <data name="PACKAGE_FAILED" xml:space="preserve">
     <value>Error: Package creation FAILED. Time elapsed: {0}</value>
   </data>
-
   <data name="COLLECTED_DATA_COPY_START" xml:space="preserve">
     <value>Creating copy of collected data repository...</value>
   </data>
   <data name="COLLECTED_DATA_COPY_END" xml:space="preserve">
     <value>Collected data repository copy created successfully.</value>
   </data>
-
   <data name="FORM_COPY_START" xml:space="preserve">
     <value>Copying the selected form and associated data...</value>
   </data>
-
   <data name="ROW_FILTERS_START" xml:space="preserve">
     <value>Applying row filters...</value>
   </data>
   <data name="ROW_FILTERS_END" xml:space="preserve">
     <value>Row filters applied. Row count has been reduced to {0} from {1} records matching the specified criteria.</value>
   </data>
-
   <data name="ORPHAN_GRID_ROW_REMOVAL_START" xml:space="preserve">
     <value>Removing orphaned records in grid {0}...</value>
   </data>
   <data name="ORPHAN_GRID_ROW_REMOVAL_END" xml:space="preserve">
     <value>{0} orphan grid records removed across all grids on all forms.</value>
   </data>
-
   <data name="ORPHAN_ROW_REMOVAL_START" xml:space="preserve">
     <value>Removing orphaned records in form {0}...</value>
   </data>
   <data name="ORPHAN_ROW_REMOVAL_END" xml:space="preserve">
     <value>{0} orphan records removed across all forms.</value>
   </data>
-
   <data name="COLUMN_DATA_REMOVAL_START" xml:space="preserve">
     <value>Attempting to remove data from specified columns...</value>
   </data>
@@ -305,74 +288,63 @@
   <data name="COLUMN_DATA_REMOVAL_SUCCESS" xml:space="preserve">
     <value>Data in column [{0}] in table [{1}] was removed successfully.</value>
   </data>
-
-
   <data name="GRID_COLUMN_DATA_REMOVAL_FAIL" xml:space="preserve">
     <value>Warning: The program was unable to remove the data in grid column [{0}] located in grid [{1}]. This data will be present in the encrypted package that is created.</value>
   </data>
   <data name="GRID_COLUMN_DATA_REMOVAL_SUCCESS" xml:space="preserve">
     <value>Data in grid column [{0}] in grid [{1}] was removed successfully.</value>
   </data>
-
   <data name="TABLE_DATA_DELETION_SUCCESS" xml:space="preserve">
     <value>All data removed from table [{0}].</value>
   </data>
   <data name="TABLE_DATA_DELETION_FAIL" xml:space="preserve">
     <value>Warning: {0} of {1} records removed from table {2}</value>
   </data>
-
   <data name="CREATED_DATA_TABLE_FOR_FORM" xml:space="preserve">
     <value>Created data table for form [{0}].</value>
   </data>
   <data name="CREATED_DATA_TABLE_FOR_FORM_VERBOSE" xml:space="preserve">
     <value>The packager detected that form {0} did not have a data table; one has been created for it in the data package.</value>
   </data>
-  
   <data name="SETTING_UP_METADATA_START" xml:space="preserve">
     <value>Setting up metadata in destination project...</value>
   </data>
   <data name="SETTING_UP_METADATA_END" xml:space="preserve">
     <value>Completed setting up metadata in destination project.</value>
   </data>
-  
   <data name="PACKAGE_COMPRESSION_START" xml:space="preserve">
     <value>Compressing project...</value>
   </data>
   <data name="PACKAGE_COMPRESSION_END" xml:space="preserve">
     <value>Project compressed successfully.</value>
-  </data>  
+  </data>
   <data name="PACKAGE_COMPRESSION_FAIL" xml:space="preserve">
     <value>Project compression failed. Aborting.</value>
   </data>
-  
   <data name="PACKAGE_ENCRYPTION_START" xml:space="preserve">
     <value>Encrypting project package...</value>
   </data>
   <data name="PACKAGE_ENCRYPTION_END" xml:space="preserve">
     <value>Project package encryption successful.</value>
   </data>
-
   <data name="PACKAGE_DECRYPTION_START" xml:space="preserve">
     <value>Decrypting project package...</value>
   </data>
   <data name="PACKAGE_DECRYPTION_END" xml:space="preserve">
     <value>Project package decryption successful.</value>
   </data>
-
   <data name="PACKAGE_DECRYPTION_START_N_OF_N" xml:space="preserve">
     <value>Package {0} of {1}: Decrypting package...</value>
   </data>
   <data name="PACKAGE_DECRYPTION_END_N_OF_N" xml:space="preserve">
     <value>Package {0} of {1}: Decryption successful.</value>
   </data>
-  
   <data name="PRJ_FILE_COPY_START" xml:space="preserve">
     <value>Creating PRJ file copy...</value>
   </data>
   <data name="PRJ_FILE_COPY_END" xml:space="preserve">
     <value>PRJ file copy successful.</value>
   </data>
-  
   <data name="PROJECT_PACKAGE_CREATED_BY_USER" xml:space="preserve">
     <value>Project package [{0}] created in {1} by user [{2}].</value>
   </data>
@@ -421,28 +393,24 @@
   <data name="IMPORT_GRID_APPENDED" xml:space="preserve">
     <value>On grid '{0}', {1} record(s) inserted.</value>
   </data>
-
   <data name="IMPORT_CHECK_FORM_START" xml:space="preserve">
     <value>Starting similarity check on parent form {0}...</value>
   </data>
   <data name="IMPORT_CHECK_FORM_END" xml:space="preserve">
     <value>Done checking parent form {0} for similarity.</value>
   </data>
-
   <data name="IMPORT_CHECK_GRID_START" xml:space="preserve">
     <value>Starting similarity check on grid field {0}...</value>
   </data>
   <data name="IMPORT_CHECK_GRID_END" xml:space="preserve">
     <value>Done checking grid field {0} for similarity.</value>
   </data>
-  
   <data name="IMPORT_CHECK_DESCENDANT_FORM_START" xml:space="preserve">
     <value>Starting similarity check on descendant form {0}...</value>
   </data>
   <data name="IMPORT_CHECK_DESCENDANT_FORM_END" xml:space="preserve">
     <value>Done checking descendant form {0} for similarity.</value>
   </data>
-
   <data name="IMPORT_FAIL_EXCEPTION" xml:space="preserve">
     <value>Error: Import FAILED. {0}</value>
   </data>
@@ -452,7 +420,6 @@
   <data name="IMPORT_SUCCESS" xml:space="preserve">
     <value>Import complete. Time elapsed: {0}</value>
   </data>
-
   <data name="IMPORT_TYPE_UPDATE_ONLY" xml:space="preserve">
     <value>Records with matching ID fields will be updated. Unmatched records will be ignored.</value>
   </data>
@@ -462,7 +429,6 @@
   <data name="IMPORT_TYPE_UPDATE_AND_APPEND" xml:space="preserve">
     <value>Records with matching ID fields will be updated and unmatched records will be appended.</value>
   </data>
-
   <data name="ERROR_NO_PACKAGE_SELECTED" xml:space="preserve">
     <value>A data package has not been selected.</value>
   </data>
@@ -532,11 +498,9 @@
   <data name="ERROR_FIELD_PAGE_ORDER_MISMATCH" xml:space="preserve">
     <value>The field {0} in the source data is on a page with a mismatched page order relative to its corresponding destination field. Please ensure that the two fields appear on the same page and that the page ordering of the two forms are the same. The import has been halted.</value>
   </data>
-
   <data name="ERROR_DESCENDANT_FIELD_PAGE_ORDER_MISMATCH" xml:space="preserve">
     <value>The field {0} on descendant form {1} in the source data is on a page with a mismatched page order relative to its corresponding destination field. Please ensure that the two fields appear on the same page and that the page ordering of the two forms are the same. The import has been halted.</value>
   </data>
-
   <data name="ERROR_PACKAGER_CHECK_INVALID_GUID_COLUMN" xml:space="preserve">
     <value>The GlobalRecordId field in the source project is invalid. It must be implemented as a text column.</value>
   </data>
@@ -561,25 +525,21 @@
   <data name="ERROR_PACKAGER_CHECK_RELATED_FORM" xml:space="preserve">
     <value>The packaging cannot proceed because the source form is a related form.</value>
   </data>
-
   <data name="ERROR_PACKAGER_SELECT_CONDITION_COULD_NOT_BE_ADDED" xml:space="preserve">
     <value>The condition could not be added. Please check the inputs and try again.</value>
   </data>
   <data name="CONDITION_ALREADY_ADDED" xml:space="preserve">
     <value>This condition has already been added.</value>
   </data>
-
   <data name="SELECT_EDP_FILE" xml:space="preserve">
     <value>Select an encrypted data package</value>
   </data>
-
   <data name="START_SINGLE_IMPORT" xml:space="preserve">
     <value>Import initiated for data package {0}.</value>
   </data>
   <data name="START_BATCH_IMPORT" xml:space="preserve">
     <value>Import initiated for {0} data packages in {1}.</value>
   </data>
-
   <data name="TYPE" xml:space="preserve">
     <value>Type</value>
   </data>
@@ -589,7 +549,6 @@
   <data name="MESSAGE" xml:space="preserve">
     <value>Message</value>
   </data>
-
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E1000" xml:space="preserve">
     <value>A view in this project has no name.</value>
   </data>
@@ -647,7 +606,6 @@
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E1019" xml:space="preserve">
     <value>The view {0} has wide tables, but does not contain more than one DATA reference in the metadata. The view may be corrupted.</value>
   </data>
-
   <data name="WEB_CSV_EXPORT_CONNECTING" xml:space="preserve">
     <value>Connecting to web server...</value>
   </data>
@@ -659,8 +617,7 @@
   </data>
   <data name="WEB_CSV_EXPORT_COMPLETE" xml:space="preserve">
     <value>Complete.</value>
-  </data>  
-
+  </data>
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E1020" xml:space="preserve">
     <value>This project contains no views.</value>
   </data>
@@ -676,7 +633,6 @@
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E1024" xml:space="preserve">
     <value>View {0} contains a SOURCE reference called {1} that points to a code table called {2}, but {3} does not exist.</value>
   </data>
-
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E1030" xml:space="preserve">
     <value>View {0} is missing the PageNumber column.</value>
   </data>
@@ -701,7 +657,6 @@
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E1037" xml:space="preserve">
     <value>Type column in view {0} is implemented as {1}.</value>
   </data>
-
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E1070" xml:space="preserve">
     <value>View {0} is missing the Database column.</value>
   </data>
@@ -720,7 +675,6 @@
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E1075" xml:space="preserve">
     <value>Datatable column in view {0} is implemented as {1}.</value>
   </data>
-
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E2000" xml:space="preserve">
     <value>Duplicate RELATE buttons found in view {0}. Relate button field name: {1}.</value>
   </data>
@@ -736,7 +690,6 @@
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E2004" xml:space="preserve">
     <value>The view {0} is a related view, but contains empty (NULL) values for one or more of its foreign keys.</value>
   </data>
-
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E3000" xml:space="preserve">
     <value>The field {0} in view {1} contains an invalid leading character in its name.</value>
   </data>
@@ -779,12 +732,9 @@
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E3013" xml:space="preserve">
     <value>The field {0} in view {1} is a Legal Values or Comment Legal field that uses another view's data table for its list of values. This is unsupported in the project upgrader.</value>
   </data>
-
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_E4000" xml:space="preserve">
     <value>An exception was generated. Message: {0}</value>
   </data>
-
-
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_W5000" xml:space="preserve">
     <value>The view {0} contains no pages. It will be skipped during an upgrade.</value>
   </data>
@@ -800,11 +750,9 @@
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_W5004" xml:space="preserve">
     <value>The mirror field {0} in view {1} is mirroring a field that does not exist. The mirror field will be deleted.</value>
   </data>
-
   <data name="UPGRADE_PROBLEM_CHECK_ERROR_N6000" xml:space="preserve">
     <value>The relate button {0} in view {1} contains a relate condition. Relate conditions are not supported in Epi Info 7 and must be re-implemented using check code.</value>
   </data>
-
   <data name="UPGRADE_PROBLEM_CHECK_MESSAGE_ANALYZING_PROJECT" xml:space="preserve">
     <value>Analyzing {0} for problems...</value>
   </data>
@@ -817,8 +765,6 @@
   <data name="UPGRADE_PROBLEM_CHECK_MESSAGE_FINISHED" xml:space="preserve">
     <value>Finished analyzing {0} for problems.</value>
   </data>
-
-
   <data name="UPGRADE_ERRORS_DETECTED" xml:space="preserve">
     <value>Serious errors were detected in the Epi Info 3.5.x project {0}. The upgrade process cannot proceed.</value>
   </data>
@@ -828,8 +774,6 @@
   <data name="UPGRADE_NO_PROBLEMS_DETECTED" xml:space="preserve">
     <value>No problems were detected in {0}. Click the Next button to proceed.</value>
   </data>
-
-
   <data name="UNPACKAGE_PROBLEM_CHECK_ERROR_E3013" xml:space="preserve">
     <value>Field type mismatch for field {0} in form {1}. The data package has recorded the field's type as {2}; the form has implemented the field as type {3}. </value>
   </data>
@@ -839,9 +783,19 @@
   <data name="UNPACKAGE_PROBLEM_CHECK_ERROR_E3015" xml:space="preserve">
     <value>Field {0} exists on form {1} but is not included in the data package. No data for this field will be imported.</value>
   </data>
-
   <data name="UNPACKAGE_PROBLEM_CHECK_ERROR_E4000" xml:space="preserve">
     <value>An exception was generated. Message: {0}</value>
   </data>
-
+  <data name="IMPORT_DATA_APPEND_NONMATCHING" xml:space="preserve">
+    <value>Records with no matching ID fields will be appended.</value>
+  </data>
+  <data name="IMPORT_DATA_IGNORE_MATCHING" xml:space="preserve">
+    <value>Records with matching ID fields will be ignored.</value>
+  </data>
+  <data name="IMPORT_DATA_IGNORE_NONMATCHING" xml:space="preserve">
+    <value>Records with no matching ID fields will be ignored.</value>
+  </data>
+  <data name="IMPORT_DATA_UPDATE_MATCHING" xml:space="preserve">
+    <value>Records with matching ID fields will be updated.</value>
+  </data>
 </root>

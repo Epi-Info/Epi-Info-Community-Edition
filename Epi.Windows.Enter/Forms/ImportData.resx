@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACs
-        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAEUAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAFEAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABJgEBAgABAQEAASAGAAEmAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8AbgAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8IAAPfAf8BHQGCAbUB/wEbAYEBswH/ARgBfgGw
         Af8BFgF8Aa4B/wETAXkBqwH/ARABdgGoAf8BDQFzAaUB/wELAXEBowH/AQgBbgGgAf8BBgFsAZ4B/wEE
@@ -861,7 +861,7 @@
     <value>12, 9</value>
   </data>
   <data name="lblDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 94</value>
+    <value>505, 77</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblDescription.TabIndex" type="System.Int32, mscorlib">
@@ -880,7 +880,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDescription.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="lblProjectFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 24</value>
@@ -904,7 +904,7 @@
     <value>groupImportInfo</value>
   </data>
   <data name="&gt;&gt;lblProjectFile.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="textProjectFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 40</value>
@@ -925,7 +925,7 @@
     <value>groupImportInfo</value>
   </data>
   <data name="&gt;&gt;textProjectFile.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="lblFormName.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 63</value>
@@ -949,7 +949,7 @@
     <value>groupImportInfo</value>
   </data>
   <data name="&gt;&gt;lblFormName.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="cmbFormName.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 79</value>
@@ -970,7 +970,7 @@
     <value>groupImportInfo</value>
   </data>
   <data name="&gt;&gt;cmbFormName.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="btnBrowse.Location" type="System.Drawing.Point, System.Drawing">
     <value>370, 37</value>
@@ -994,41 +994,17 @@
     <value>groupImportInfo</value>
   </data>
   <data name="&gt;&gt;btnBrowse.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="groupImportInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="&gt;&gt;cmbImportType.Name" xml:space="preserve">
-    <value>cmbImportType</value>
-  </data>
-  <data name="&gt;&gt;cmbImportType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmbImportType.Parent" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;cmbImportType.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblImportType.Name" xml:space="preserve">
-    <value>lblImportType</value>
-  </data>
-  <data name="&gt;&gt;lblImportType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblImportType.Parent" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;lblImportType.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="groupImportInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 171</value>
+    <value>12, 169</value>
   </data>
   <data name="groupImportInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 153</value>
+    <value>502, 127</value>
   </data>
   <data name="groupImportInfo.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1046,73 +1022,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupImportInfo.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="cmbImportType.Items" xml:space="preserve">
-    <value>Update and append records</value>
-  </data>
-  <data name="cmbImportType.Items1" xml:space="preserve">
-    <value>Update records only</value>
-  </data>
-  <data name="cmbImportType.Items2" xml:space="preserve">
-    <value>Append records only</value>
-  </data>
-  <data name="cmbImportType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 119</value>
-  </data>
-  <data name="cmbImportType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 21</value>
-  </data>
-  <data name="cmbImportType.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;cmbImportType.Name" xml:space="preserve">
-    <value>cmbImportType</value>
-  </data>
-  <data name="&gt;&gt;cmbImportType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmbImportType.Parent" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;cmbImportType.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblImportType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 103</value>
-  </data>
-  <data name="lblImportType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 13</value>
-  </data>
-  <data name="lblImportType.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="lblImportType.Text" xml:space="preserve">
-    <value>Type of import:</value>
-  </data>
-  <data name="&gt;&gt;lblImportType.Name" xml:space="preserve">
-    <value>lblImportType</value>
-  </data>
-  <data name="&gt;&gt;lblImportType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblImportType.Parent" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;lblImportType.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>11</value>
   </data>
   <data name="textProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="textProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 457</value>
+    <value>12, 551</value>
   </data>
   <data name="textProgress.Size" type="System.Drawing.Size, System.Drawing">
     <value>505, 20</value>
   </data>
   <data name="textProgress.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
+  </data>
+  <data name="textProgress.Text" xml:space="preserve">
+    <value>Ready</value>
   </data>
   <data name="&gt;&gt;textProgress.Name" xml:space="preserve">
     <value>textProgress</value>
@@ -1124,13 +1049,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textProgress.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="progressBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 483</value>
+    <value>12, 577</value>
   </data>
   <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
     <value>505, 23</value>
@@ -1151,13 +1076,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;progressBar.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="btnCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 513</value>
+    <value>427, 607</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -1178,7 +1103,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="btnOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1187,7 +1112,7 @@
     <value>False</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 513</value>
+    <value>331, 607</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -1208,16 +1133,34 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="lbxStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
+  </data>
+  <metadata name="cmsStatus.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>146, 17</value>
+  </metadata>
+  <data name="toolStripMenuItem_Copy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 22</value>
+  </data>
+  <data name="toolStripMenuItem_Copy.Text" xml:space="preserve">
+    <value>Copy to Clipboard</value>
+  </data>
+  <data name="cmsStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 26</value>
+  </data>
+  <data name="&gt;&gt;cmsStatus.Name" xml:space="preserve">
+    <value>cmsStatus</value>
+  </data>
+  <data name="&gt;&gt;cmsStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lbxStatus.HorizontalScrollbar" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lbxStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 330</value>
+    <value>12, 424</value>
   </data>
   <data name="lbxStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>505, 121</value>
@@ -1235,10 +1178,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lbxStatus.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 106</value>
+    <value>15, 90</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>18, 20</value>
@@ -1256,13 +1199,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="lblWarning.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="lblWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 106</value>
+    <value>36, 90</value>
   </data>
   <data name="lblWarning.Size" type="System.Drawing.Size, System.Drawing">
     <value>475, 20</value>
@@ -1283,13 +1226,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblWarning.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="lblWarningMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 126</value>
+    <value>12, 111</value>
   </data>
   <data name="lblWarningMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 42</value>
+    <value>508, 55</value>
   </data>
   <data name="lblWarningMessage.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1307,7 +1250,148 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblWarningMessage.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;rdbAppend.Name" xml:space="preserve">
+    <value>rdbAppend</value>
+  </data>
+  <data name="&gt;&gt;rdbAppend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbAppend.Parent" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;rdbAppend.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdate.Name" xml:space="preserve">
+    <value>rdbUpdate</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdate.Parent" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdateAndAppend.Name" xml:space="preserve">
+    <value>rdbUpdateAndAppend</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdateAndAppend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdateAndAppend.Parent" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdateAndAppend.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpTypeOfImport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 302</value>
+  </data>
+  <data name="grpTypeOfImport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>505, 116</value>
+  </data>
+  <data name="grpTypeOfImport.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="grpTypeOfImport.Text" xml:space="preserve">
+    <value>Type of Import</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.Name" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdbAppend.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdbAppend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 85</value>
+  </data>
+  <data name="rdbAppend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>469, 25</value>
+  </data>
+  <data name="rdbAppend.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="rdbAppend.Text" xml:space="preserve">
+    <value>Append records only</value>
+  </data>
+  <data name="&gt;&gt;rdbAppend.Name" xml:space="preserve">
+    <value>rdbAppend</value>
+  </data>
+  <data name="&gt;&gt;rdbAppend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbAppend.Parent" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;rdbAppend.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdbUpdate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdbUpdate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 54</value>
+  </data>
+  <data name="rdbUpdate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>469, 25</value>
+  </data>
+  <data name="rdbUpdate.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="rdbUpdate.Text" xml:space="preserve">
+    <value>Update records only</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdate.Name" xml:space="preserve">
+    <value>rdbUpdate</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdate.Parent" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdbUpdateAndAppend.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdbUpdateAndAppend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 21</value>
+  </data>
+  <data name="rdbUpdateAndAppend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>469, 25</value>
+  </data>
+  <data name="rdbUpdateAndAppend.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="rdbUpdateAndAppend.Text" xml:space="preserve">
+    <value>Update and append records</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdateAndAppend.Name" xml:space="preserve">
+    <value>rdbUpdateAndAppend</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdateAndAppend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdateAndAppend.Parent" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdateAndAppend.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1316,7 +1400,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>529, 548</value>
+    <value>529, 642</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2483,7 +2567,7 @@
 </value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Import Form Data</value>
+    <value>Import Data From Form</value>
   </data>
   <data name="&gt;&gt;baseImageList.Name" xml:space="preserve">
     <value>baseImageList</value>
@@ -2491,10 +2575,16 @@
   <data name="&gt;&gt;baseImageList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItem_Copy.Name" xml:space="preserve">
+    <value>toolStripMenuItem_Copy</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem_Copy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ImportDataForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5743.18937, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5745.29050, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

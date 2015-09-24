@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportDataForm));
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblProjectFile = new System.Windows.Forms.Label();
@@ -36,8 +37,6 @@
             this.cmbFormName = new System.Windows.Forms.ComboBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.groupImportInfo = new System.Windows.Forms.GroupBox();
-            this.cmbImportType = new System.Windows.Forms.ComboBox();
-            this.lblImportType = new System.Windows.Forms.Label();
             this.textProgress = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -46,8 +45,16 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblWarning = new System.Windows.Forms.Label();
             this.lblWarningMessage = new System.Windows.Forms.Label();
+            this.grpTypeOfImport = new System.Windows.Forms.GroupBox();
+            this.rdbAppend = new System.Windows.Forms.RadioButton();
+            this.rdbUpdate = new System.Windows.Forms.RadioButton();
+            this.rdbUpdateAndAppend = new System.Windows.Forms.RadioButton();
+            this.cmsStatus = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
             this.groupImportInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.grpTypeOfImport.SuspendLayout();
+            this.cmsStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // baseImageList
@@ -172,8 +179,6 @@
             // groupImportInfo
             // 
             resources.ApplyResources(this.groupImportInfo, "groupImportInfo");
-            this.groupImportInfo.Controls.Add(this.cmbImportType);
-            this.groupImportInfo.Controls.Add(this.lblImportType);
             this.groupImportInfo.Controls.Add(this.btnBrowse);
             this.groupImportInfo.Controls.Add(this.cmbFormName);
             this.groupImportInfo.Controls.Add(this.textProjectFile);
@@ -181,22 +186,6 @@
             this.groupImportInfo.Controls.Add(this.lblProjectFile);
             this.groupImportInfo.Name = "groupImportInfo";
             this.groupImportInfo.TabStop = false;
-            // 
-            // cmbImportType
-            // 
-            this.cmbImportType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbImportType.FormattingEnabled = true;
-            this.cmbImportType.Items.AddRange(new object[] {
-            resources.GetString("cmbImportType.Items"),
-            resources.GetString("cmbImportType.Items1"),
-            resources.GetString("cmbImportType.Items2")});
-            resources.ApplyResources(this.cmbImportType, "cmbImportType");
-            this.cmbImportType.Name = "cmbImportType";
-            // 
-            // lblImportType
-            // 
-            resources.ApplyResources(this.lblImportType, "lblImportType");
-            this.lblImportType.Name = "lblImportType";
             // 
             // textProgress
             // 
@@ -228,6 +217,7 @@
             // lbxStatus
             // 
             resources.ApplyResources(this.lbxStatus, "lbxStatus");
+            this.lbxStatus.ContextMenuStrip = this.cmsStatus;
             this.lbxStatus.FormattingEnabled = true;
             this.lbxStatus.Name = "lbxStatus";
             this.lbxStatus.TabStop = false;
@@ -249,12 +239,56 @@
             resources.ApplyResources(this.lblWarningMessage, "lblWarningMessage");
             this.lblWarningMessage.Name = "lblWarningMessage";
             // 
+            // grpTypeOfImport
+            // 
+            this.grpTypeOfImport.Controls.Add(this.rdbAppend);
+            this.grpTypeOfImport.Controls.Add(this.rdbUpdate);
+            this.grpTypeOfImport.Controls.Add(this.rdbUpdateAndAppend);
+            resources.ApplyResources(this.grpTypeOfImport, "grpTypeOfImport");
+            this.grpTypeOfImport.Name = "grpTypeOfImport";
+            this.grpTypeOfImport.TabStop = false;
+            // 
+            // rdbAppend
+            // 
+            resources.ApplyResources(this.rdbAppend, "rdbAppend");
+            this.rdbAppend.Name = "rdbAppend";
+            this.rdbAppend.TabStop = true;
+            this.rdbAppend.UseVisualStyleBackColor = true;
+            // 
+            // rdbUpdate
+            // 
+            resources.ApplyResources(this.rdbUpdate, "rdbUpdate");
+            this.rdbUpdate.Name = "rdbUpdate";
+            this.rdbUpdate.TabStop = true;
+            this.rdbUpdate.UseVisualStyleBackColor = true;
+            // 
+            // rdbUpdateAndAppend
+            // 
+            resources.ApplyResources(this.rdbUpdateAndAppend, "rdbUpdateAndAppend");
+            this.rdbUpdateAndAppend.Name = "rdbUpdateAndAppend";
+            this.rdbUpdateAndAppend.TabStop = true;
+            this.rdbUpdateAndAppend.UseVisualStyleBackColor = true;
+            // 
+            // cmsStatus
+            // 
+            this.cmsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_Copy});
+            this.cmsStatus.Name = "cmsStatus";
+            resources.ApplyResources(this.cmsStatus, "cmsStatus");
+            this.cmsStatus.Click += new System.EventHandler(this.cmsStatus_Click);
+            // 
+            // toolStripMenuItem_Copy
+            // 
+            this.toolStripMenuItem_Copy.Name = "toolStripMenuItem_Copy";
+            resources.ApplyResources(this.toolStripMenuItem_Copy, "toolStripMenuItem_Copy");
+            // 
             // ImportDataForm
             // 
             this.AcceptButton = this.btnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
+            this.Controls.Add(this.grpTypeOfImport);
             this.Controls.Add(this.lblWarningMessage);
             this.Controls.Add(this.lblWarning);
             this.Controls.Add(this.pictureBox1);
@@ -274,6 +308,8 @@
             this.groupImportInfo.ResumeLayout(false);
             this.groupImportInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.grpTypeOfImport.ResumeLayout(false);
+            this.cmsStatus.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,7 +332,11 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblWarning;
         private System.Windows.Forms.Label lblWarningMessage;
-        private System.Windows.Forms.ComboBox cmbImportType;
-        private System.Windows.Forms.Label lblImportType;
+        private System.Windows.Forms.GroupBox grpTypeOfImport;
+        private System.Windows.Forms.RadioButton rdbAppend;
+        private System.Windows.Forms.RadioButton rdbUpdate;
+        private System.Windows.Forms.RadioButton rdbUpdateAndAppend;
+        private System.Windows.Forms.ContextMenuStrip cmsStatus;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Copy;
     }
 }

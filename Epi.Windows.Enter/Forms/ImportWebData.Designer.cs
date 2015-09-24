@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportWebDataForm));
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblProjectFile = new System.Windows.Forms.Label();
@@ -36,9 +37,7 @@
             this.textOrganization = new System.Windows.Forms.TextBox();
             this.lblOrganization = new System.Windows.Forms.Label();
             this.textData = new System.Windows.Forms.TextBox();
-            this.cmbImportType = new System.Windows.Forms.ComboBox();
             this.lblDataGUID = new System.Windows.Forms.Label();
-            this.lblImportType = new System.Windows.Forms.Label();
             this.textProgress = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -47,194 +46,186 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblWarning = new System.Windows.Forms.Label();
             this.lblWarningMessage = new System.Windows.Forms.Label();
+            this.rdbFinalMode = new System.Windows.Forms.RadioButton();
+            this.rdbDraftMode = new System.Windows.Forms.RadioButton();
+            this.rdbAllRecords = new System.Windows.Forms.RadioButton();
+            this.rdbSubmittedRecords = new System.Windows.Forms.RadioButton();
+            this.grpImportMode = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmsStatus = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
             this.groupImportInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.grpImportMode.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.cmsStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblDescription
             // 
-            this.lblDescription.Location = new System.Drawing.Point(12, 9);
+            resources.ApplyResources(this.lblDescription, "lblDescription");
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(505, 59);
-            this.lblDescription.TabIndex = 0;
-            this.lblDescription.Text = resources.GetString("lblDescription.Text");
             // 
             // lblProjectFile
             // 
-            this.lblProjectFile.Location = new System.Drawing.Point(6, 24);
+            resources.ApplyResources(this.lblProjectFile, "lblProjectFile");
             this.lblProjectFile.Name = "lblProjectFile";
-            this.lblProjectFile.Size = new System.Drawing.Size(460, 13);
-            this.lblProjectFile.TabIndex = 1;
-            this.lblProjectFile.Text = "Web Survey Key:";
             // 
             // textProject
             // 
-            this.textProject.Location = new System.Drawing.Point(9, 40);
+            resources.ApplyResources(this.textProject, "textProject");
             this.textProject.Name = "textProject";
-            this.textProject.Size = new System.Drawing.Size(487, 20);
-            this.textProject.TabIndex = 1;
             this.textProject.TextChanged += new System.EventHandler(this.textProject_TextChanged);
             // 
             // groupImportInfo
             // 
-            this.groupImportInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupImportInfo.Controls.Add(this.textOrganization);
             this.groupImportInfo.Controls.Add(this.lblOrganization);
             this.groupImportInfo.Controls.Add(this.textData);
-            this.groupImportInfo.Controls.Add(this.cmbImportType);
             this.groupImportInfo.Controls.Add(this.lblDataGUID);
-            this.groupImportInfo.Controls.Add(this.lblImportType);
             this.groupImportInfo.Controls.Add(this.textProject);
             this.groupImportInfo.Controls.Add(this.lblProjectFile);
-            this.groupImportInfo.Location = new System.Drawing.Point(12, 122);
+            resources.ApplyResources(this.groupImportInfo, "groupImportInfo");
             this.groupImportInfo.Name = "groupImportInfo";
-            this.groupImportInfo.Size = new System.Drawing.Size(505, 190);
-            this.groupImportInfo.TabIndex = 6;
             this.groupImportInfo.TabStop = false;
-            this.groupImportInfo.Text = "Import information";
             // 
             // textOrganization
             // 
-            this.textOrganization.Location = new System.Drawing.Point(9, 79);
+            resources.ApplyResources(this.textOrganization, "textOrganization");
             this.textOrganization.Name = "textOrganization";
-            this.textOrganization.Size = new System.Drawing.Size(487, 20);
-            this.textOrganization.TabIndex = 2;
             // 
             // lblOrganization
             // 
-            this.lblOrganization.Location = new System.Drawing.Point(6, 63);
+            resources.ApplyResources(this.lblOrganization, "lblOrganization");
             this.lblOrganization.Name = "lblOrganization";
-            this.lblOrganization.Size = new System.Drawing.Size(460, 13);
-            this.lblOrganization.TabIndex = 18;
-            this.lblOrganization.Text = "Organization Key:";
             // 
             // textData
             // 
-            this.textData.Location = new System.Drawing.Point(9, 118);
+            resources.ApplyResources(this.textData, "textData");
             this.textData.Name = "textData";
-            this.textData.PasswordChar = '*';
-            this.textData.Size = new System.Drawing.Size(487, 20);
-            this.textData.TabIndex = 3;
-            // 
-            // cmbImportType
-            // 
-            this.cmbImportType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbImportType.FormattingEnabled = true;
-            this.cmbImportType.Items.AddRange(new object[] {
-            "Completed records in draft mode",
-            "All records in draft mode",
-            "Completed records in final mode",
-            "All records in final mode"});
-            this.cmbImportType.Location = new System.Drawing.Point(9, 157);
-            this.cmbImportType.Name = "cmbImportType";
-            this.cmbImportType.Size = new System.Drawing.Size(182, 21);
-            this.cmbImportType.TabIndex = 4;
             // 
             // lblDataGUID
             // 
-            this.lblDataGUID.Location = new System.Drawing.Point(6, 102);
+            resources.ApplyResources(this.lblDataGUID, "lblDataGUID");
             this.lblDataGUID.Name = "lblDataGUID";
-            this.lblDataGUID.Size = new System.Drawing.Size(460, 13);
-            this.lblDataGUID.TabIndex = 16;
-            this.lblDataGUID.Text = "Security Token:";
-            // 
-            // lblImportType
-            // 
-            this.lblImportType.Location = new System.Drawing.Point(6, 141);
-            this.lblImportType.Name = "lblImportType";
-            this.lblImportType.Size = new System.Drawing.Size(166, 13);
-            this.lblImportType.TabIndex = 6;
-            this.lblImportType.Text = "Type of import:";
             // 
             // textProgress
             // 
-            this.textProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textProgress.Location = new System.Drawing.Point(12, 445);
+            resources.ApplyResources(this.textProgress, "textProgress");
             this.textProgress.Name = "textProgress";
             this.textProgress.ReadOnly = true;
-            this.textProgress.Size = new System.Drawing.Size(505, 20);
-            this.textProgress.TabIndex = 13;
             this.textProgress.TabStop = false;
-            this.textProgress.Text = "Ready";
             // 
             // progressBar
             // 
-            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(12, 471);
+            resources.ApplyResources(this.progressBar, "progressBar");
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(505, 23);
-            this.progressBar.TabIndex = 12;
-            this.progressBar.Visible = false;
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(442, 501);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 6;
-            this.btnCancel.Text = "Close";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnOK
             // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Enabled = false;
-            this.btnOK.Location = new System.Drawing.Point(361, 501);
+            resources.ApplyResources(this.btnOK, "btnOK");
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 5;
-            this.btnOK.Text = "Import";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // lbxStatus
             // 
-            this.lbxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.lbxStatus, "lbxStatus");
+            this.lbxStatus.ContextMenuStrip = this.cmsStatus;
             this.lbxStatus.FormattingEnabled = true;
-            this.lbxStatus.HorizontalScrollbar = true;
-            this.lbxStatus.Location = new System.Drawing.Point(12, 318);
             this.lbxStatus.Name = "lbxStatus";
-            this.lbxStatus.Size = new System.Drawing.Size(505, 121);
-            this.lbxStatus.TabIndex = 9;
             this.lbxStatus.TabStop = false;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Epi.Enter.Properties.Resources.warning;
-            this.pictureBox1.Location = new System.Drawing.Point(15, 87);
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(18, 18);
-            this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
             // lblWarning
             // 
-            this.lblWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWarning.Location = new System.Drawing.Point(36, 87);
+            resources.ApplyResources(this.lblWarning, "lblWarning");
             this.lblWarning.Name = "lblWarning";
-            this.lblWarning.Size = new System.Drawing.Size(71, 18);
-            this.lblWarning.TabIndex = 14;
-            this.lblWarning.Text = "Warning:";
             // 
             // lblWarningMessage
             // 
-            this.lblWarningMessage.Location = new System.Drawing.Point(94, 87);
+            resources.ApplyResources(this.lblWarningMessage, "lblWarningMessage");
             this.lblWarningMessage.Name = "lblWarningMessage";
-            this.lblWarningMessage.Size = new System.Drawing.Size(414, 30);
-            this.lblWarningMessage.TabIndex = 15;
-            this.lblWarningMessage.Text = "Import operations are permanent and cannot be undone. Be sure the form structures" +
-    " are the same before proceeding.";
+            // 
+            // rdbFinalMode
+            // 
+            resources.ApplyResources(this.rdbFinalMode, "rdbFinalMode");
+            this.rdbFinalMode.Name = "rdbFinalMode";
+            this.rdbFinalMode.TabStop = true;
+            this.rdbFinalMode.UseVisualStyleBackColor = true;
+            // 
+            // rdbDraftMode
+            // 
+            resources.ApplyResources(this.rdbDraftMode, "rdbDraftMode");
+            this.rdbDraftMode.Name = "rdbDraftMode";
+            this.rdbDraftMode.TabStop = true;
+            this.rdbDraftMode.UseVisualStyleBackColor = true;
+            // 
+            // rdbAllRecords
+            // 
+            resources.ApplyResources(this.rdbAllRecords, "rdbAllRecords");
+            this.rdbAllRecords.Name = "rdbAllRecords";
+            this.rdbAllRecords.TabStop = true;
+            this.rdbAllRecords.UseVisualStyleBackColor = true;
+            // 
+            // rdbSubmittedRecords
+            // 
+            resources.ApplyResources(this.rdbSubmittedRecords, "rdbSubmittedRecords");
+            this.rdbSubmittedRecords.Name = "rdbSubmittedRecords";
+            this.rdbSubmittedRecords.TabStop = true;
+            this.rdbSubmittedRecords.UseVisualStyleBackColor = true;
+            // 
+            // grpImportMode
+            // 
+            this.grpImportMode.Controls.Add(this.rdbDraftMode);
+            this.grpImportMode.Controls.Add(this.rdbFinalMode);
+            resources.ApplyResources(this.grpImportMode, "grpImportMode");
+            this.grpImportMode.Name = "grpImportMode";
+            this.grpImportMode.TabStop = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rdbSubmittedRecords);
+            this.groupBox1.Controls.Add(this.rdbAllRecords);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // cmsStatus
+            // 
+            this.cmsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_Copy});
+            this.cmsStatus.Name = "cmsStatus";
+            resources.ApplyResources(this.cmsStatus, "cmsStatus");
+            this.cmsStatus.Click += new System.EventHandler(this.cmsStatus_Click);
+            // 
+            // toolStripMenuItem_Copy
+            // 
+            this.toolStripMenuItem_Copy.Name = "toolStripMenuItem_Copy";
+            resources.ApplyResources(this.toolStripMenuItem_Copy, "toolStripMenuItem_Copy");
             // 
             // ImportWebDataForm
             // 
             this.AcceptButton = this.btnOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(529, 536);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grpImportMode);
             this.Controls.Add(this.lblWarningMessage);
             this.Controls.Add(this.lblWarning);
             this.Controls.Add(this.pictureBox1);
@@ -249,13 +240,14 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ImportWebDataForm";
-            this.ShowIcon = false;
-            this.Text = "Import web form data";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImportDataForm_FormClosing);
             this.Load += new System.EventHandler(this.ImportDataForm_Load);
             this.groupImportInfo.ResumeLayout(false);
             this.groupImportInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.grpImportMode.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.cmsStatus.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,11 +267,17 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblWarning;
         private System.Windows.Forms.Label lblWarningMessage;
-        private System.Windows.Forms.ComboBox cmbImportType;
-        private System.Windows.Forms.Label lblImportType;
         private System.Windows.Forms.TextBox textData;
         private System.Windows.Forms.Label lblDataGUID;
         private System.Windows.Forms.TextBox textOrganization;
         private System.Windows.Forms.Label lblOrganization;
+        private System.Windows.Forms.RadioButton rdbFinalMode;
+        private System.Windows.Forms.RadioButton rdbDraftMode;
+        private System.Windows.Forms.RadioButton rdbAllRecords;
+        private System.Windows.Forms.RadioButton rdbSubmittedRecords;
+        private System.Windows.Forms.GroupBox grpImportMode;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ContextMenuStrip cmsStatus;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Copy;
     }
 }

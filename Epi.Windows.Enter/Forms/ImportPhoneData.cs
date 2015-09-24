@@ -106,7 +106,9 @@ namespace Epi.Enter.Forms
 
             this.IsBatchImport = false;
 
-            this.cmbImportType.SelectedIndex = 2;
+            //this.cmbImportType.SelectedIndex = 2;  //Append records only
+            rdbAppend.Checked = true;
+
             //this.cmbImportType.Enabled = false;
         }
 
@@ -117,7 +119,9 @@ namespace Epi.Enter.Forms
         {
             btnCancel.Enabled = true;
             btnOK.Enabled = true;
-            cmbImportType.Enabled = true;
+            rdbUpdateAndAppend.Enabled = true;
+            rdbUpdate.Enabled = true;
+            rdbAppend.Enabled = true;
             txtPhoneDataFile.Enabled = true;
             progressBar.Visible = false;
             progressBar.Style = ProgressBarStyle.Continuous;
@@ -189,30 +193,34 @@ namespace Epi.Enter.Forms
                 stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                string importTypeDescription = "Records with matching ID fields will be updated and unmatched records will be appended.";
-                if (cmbImportType.SelectedIndex == 0)
+                string importTypeDescription;
+                if (rdbUpdateAndAppend.Checked)
                 {
                     update = true;
                     append = true;
+                    importTypeDescription = SharedStrings.IMPORT_DATA_UPDATE_MATCHING + " " + SharedStrings.IMPORT_DATA_APPEND_NONMATCHING;
                 }
-                else if (cmbImportType.SelectedIndex == 1)
+                else if (rdbUpdate.Checked)
                 {
                     update = true;
                     append = false;
-                    importTypeDescription = "Records with matching ID fields will be updated. Unmatched records will be ignored.";
+                    importTypeDescription = SharedStrings.IMPORT_DATA_UPDATE_MATCHING + " " + SharedStrings.IMPORT_DATA_IGNORE_NONMATCHING;
                 }
                 else
                 {
                     update = false;
                     append = true;
-                    importTypeDescription = "Records with no matching ID fields will be appended. Records with matching ID fields will be ignored.";
+                    importTypeDescription = SharedStrings.IMPORT_DATA_APPEND_NONMATCHING + " " + SharedStrings.IMPORT_DATA_IGNORE_MATCHING;
                 }
 
-                AddStatusMessage("Import initiated for sync file: " + txtPhoneDataFile.Text + ". " + importTypeDescription);
+
+                AddStatusMessage(SharedStrings.IMPORT_DATA_DEVICE_STARTED + " " + txtPhoneDataFile.Text + ". " + importTypeDescription);
 
                 btnCancel.Enabled = false;
                 btnOK.Enabled = false;
-                cmbImportType.Enabled = false;
+                rdbUpdateAndAppend.Enabled = false;
+                rdbUpdate.Enabled = false;
+                rdbAppend.Enabled = false;
                 txtPhoneDataFile.Enabled = false;
 
                 if (importWorker.WorkerSupportsCancellation)
@@ -231,7 +239,7 @@ namespace Epi.Enter.Forms
             }
             catch (System.ServiceModel.CommunicationException ex)
             {
-                this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), "Couldn't properly communicate with device. Import halted.");
+                this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), SharedStrings.IMPORT_ERROR_DEVICE_INTERUPT);
 
                 if (stopwatch != null)
                 {
@@ -240,7 +248,9 @@ namespace Epi.Enter.Forms
 
                 btnCancel.Enabled = true;
                 btnOK.Enabled = true;
-                cmbImportType.Enabled = true;
+                rdbUpdateAndAppend.Enabled = true;
+                rdbUpdate.Enabled = true;
+                rdbAppend.Enabled = true;
                 txtPhoneDataFile.Enabled = true;
                 progressBar.Visible = false;
 
@@ -250,7 +260,7 @@ namespace Epi.Enter.Forms
             }
             catch (Exception ex)
             {
-                this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), "Import from Android device failed.");
+                this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), SharedStrings.IMPORT_DATA_FAILED);
 
                 if (stopwatch != null)
                 {
@@ -259,7 +269,9 @@ namespace Epi.Enter.Forms
 
                 btnCancel.Enabled = true;
                 btnOK.Enabled = true;
-                cmbImportType.Enabled = true;
+                rdbUpdateAndAppend.Enabled = true;
+                rdbUpdate.Enabled = true;
+                rdbAppend.Enabled = true;
                 txtPhoneDataFile.Enabled = true;
                 progressBar.Visible = false;
 
@@ -296,7 +308,7 @@ namespace Epi.Enter.Forms
         /// <param name="destinationGUIDList">The list of GUIDs that exist in the destination</param>
         private void ProcessBaseTable(View destinationView, List<string> destinationGUIDList)
         {
-            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on base table...");
+            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), SharedStrings.IMPORT_DATA_PROCESSING_RECS);
 
             int recordsInserted = 0;
             int recordsUpdated = 0;
@@ -314,7 +326,7 @@ namespace Epi.Enter.Forms
 
                     if (importWorker.CancellationPending)
                     {
-                        this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import cancelled.");
+                        this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), SharedStrings.IMPORT_DATA_CANCELLED);
                         return;
                     }
 
@@ -494,7 +506,7 @@ namespace Epi.Enter.Forms
             }
             catch (Exception ex)
             {
-                this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), "Invalid password or sync file.");
+                this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), SharedStrings.IMPORT_ERROR_DEVICE_INVALID_FILE);
                 return;
             }
 
@@ -605,7 +617,7 @@ namespace Epi.Enter.Forms
 
                 for (int i = 0; i < destinationView.Pages.Count; i++)
                 {
-                    this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on page " + (i + 1).ToString() + " of " + destinationView.Pages.Count.ToString() + "...");
+                    this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), string.Format(SharedStrings.IMPORT_DATA_PROCESSING_RECS_PAGE, (i + 1).ToString(), destinationView.Pages.Count.ToString()));
 
                     int recordsInserted = 0;
                     int recordsUpdated = 0;
@@ -652,7 +664,7 @@ namespace Epi.Enter.Forms
 
                             if (importWorker.CancellationPending)
                             {
-                                this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import cancelled.");
+                                this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), SharedStrings.IMPORT_DATA_CANCELLED);
                                 return;
                             }
 
@@ -1100,7 +1112,7 @@ namespace Epi.Enter.Forms
                                 return new QueryParameter("@" + fieldName, DbType.Binary, null);
                             }
                         default:
-                            throw new ApplicationException("Not a supported field type");
+                            throw new ApplicationException(SharedStrings.IMPORT_ERROR_INVALID_TYPE);
                     }
                 }
             }
@@ -1125,7 +1137,7 @@ namespace Epi.Enter.Forms
         /// <param name="statusMessage"></param>
         private void AddWarningMessage(string statusMessage)
         {
-            string message = DateTime.Now + ": Warning: " + statusMessage;
+            string message = DateTime.Now + ": " + SharedStrings.IMPORT_DATA_WARNING + " " + statusMessage;
             lbxStatus.Items.Add(message);
             Logger.Log(message);
         }
@@ -1136,7 +1148,7 @@ namespace Epi.Enter.Forms
         /// <param name="statusMessage"></param>
         private void AddErrorStatusMessage(string statusMessage)
         {
-            string message = DateTime.Now + ": Error: " + statusMessage;
+            string message = DateTime.Now + ": " + SharedStrings.IMPORT_DATA_ERROR + " " + statusMessage;
             lbxStatus.Items.Add(message);
             Logger.Log(message);
         }
@@ -1278,7 +1290,7 @@ namespace Epi.Enter.Forms
                     }
                     catch (Exception ex)
                     {
-                        Epi.Windows.MsgBox.ShowError("There was a problem opening the mobile sync file.", ex);
+                        Epi.Windows.MsgBox.ShowError(SharedStrings.IMPORT_DATA_DEVICE_FILE_ERROR, ex);
                         txtPhoneDataFile.Text = string.Empty;
                         return;
                     }
@@ -1320,28 +1332,29 @@ namespace Epi.Enter.Forms
                 lbxStatus.Items.Clear();
 
                 textProgress.Text = string.Empty;
-                AddStatusMessage("Request for phone sync file initiated by user " + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString());
-                string importTypeDescription = "Records with matching ID fields will be updated and unmatched records will be appended.";
-
-                if (cmbImportType.SelectedIndex == 0)
+                AddStatusMessage(SharedStrings.IMPORT_DATA_DEVICE_REQUESTED + " " + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString());
+                
+                string importTypeDescription;
+                if (rdbUpdateAndAppend.Checked)
                 {
                     update = true;
                     append = true;
+                    importTypeDescription = SharedStrings.IMPORT_DATA_UPDATE_MATCHING + " " + SharedStrings.IMPORT_DATA_APPEND_NONMATCHING;
                 }
-                else if (cmbImportType.SelectedIndex == 1)
+                else if (rdbUpdate.Checked)
                 {
                     update = true;
                     append = false;
-                    importTypeDescription = "Records with matching ID fields will be updated. Unmatched records will be ignored.";
+                    importTypeDescription = SharedStrings.IMPORT_DATA_UPDATE_MATCHING + " " + SharedStrings.IMPORT_DATA_IGNORE_NONMATCHING;
                 }
                 else
                 {
                     update = false;
                     append = true;
-                    importTypeDescription = "Records with no matching ID fields will be appended. Records with matching ID fields will be ignored.";
+                    importTypeDescription = SharedStrings.IMPORT_DATA_APPEND_NONMATCHING + " " + SharedStrings.IMPORT_DATA_IGNORE_MATCHING;
                 }
 
-                AddStatusMessage("Import initiated for sync file: " + txtPhoneDataFile.Text + ". " + importTypeDescription);
+                AddStatusMessage(SharedStrings.IMPORT_DATA_DEVICE_STARTED + " " + txtPhoneDataFile.Text + ". " + importTypeDescription);
                 if (importWorker.WorkerSupportsCancellation)
                 {
                     importWorker.CancelAsync();
@@ -1367,8 +1380,8 @@ namespace Epi.Enter.Forms
         {
             stopwatch.Stop();
 
-            this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import complete. Time elapsed: " + stopwatch.Elapsed.ToString());
-            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Import complete. Time elapsed: " + stopwatch.Elapsed.ToString());
+            this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), SharedStrings.IMPORT_DATA_COMPLETE + " " + SharedStrings.IMPORT_DATA_TIME_ELAPSED + " " + stopwatch.Elapsed.ToString());
+            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), SharedStrings.IMPORT_DATA_COMPLETE + " " + SharedStrings.IMPORT_DATA_TIME_ELAPSED + " " + stopwatch.Elapsed.ToString());
 
             StopImport();
         }
@@ -1418,7 +1431,7 @@ namespace Epi.Enter.Forms
         {
             if (importWorker.IsBusy)
             {
-                DialogResult result = Epi.Windows.MsgBox.ShowQuestion("Aborting the import process and may cause impartially-updated or incomplete records to exist. Proceed with abort?");
+                DialogResult result = Epi.Windows.MsgBox.ShowQuestion(SharedStrings.IMPORT_DATA_CANCEL_IMPORT);
                 if (result == DialogResult.Yes)
                 {
                     importWorker.CancelAsync();
@@ -1432,8 +1445,21 @@ namespace Epi.Enter.Forms
 
         private void ImportDataForm_Load(object sender, EventArgs e)
         {
-            AddStatusMessage("Loaded data import dialog. Ready.");
+            AddStatusMessage(SharedStrings.IMPORT_DATA_READY);
         }
         #endregion // Event Handlers
+
+        private void cmsStatus_Click(object sender, EventArgs e)
+        {
+            if (lbxStatus.Items.Count > 0) 
+            {
+                string StatusText = string.Empty;
+                foreach(string item in lbxStatus.Items)
+                {
+                    StatusText = StatusText + System.Environment.NewLine + item;
+                }
+                Clipboard.SetText(StatusText);
+            }
+        }
     }
 }

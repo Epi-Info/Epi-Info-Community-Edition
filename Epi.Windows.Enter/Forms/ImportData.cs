@@ -96,8 +96,7 @@ namespace Epi.Enter.Forms
             this.importWorker.WorkerSupportsCancellation = true;
 
             this.IsBatchImport = false;
-
-            this.cmbImportType.SelectedIndex = 0;
+            this.rdbUpdateAndAppend.Checked = true;
         }
 
         /// <summary>
@@ -105,25 +104,26 @@ namespace Epi.Enter.Forms
         /// </summary>
         private void DoImport()
         {
-            string importTypeDescription = SharedStrings.IMPORT_DATA_MATCHING_UPDATED_ELSE_APPEND;
-            if (cmbImportType.SelectedIndex == 0)
+            string importTypeDescription;
+            if (rdbUpdateAndAppend.Checked)
             {
                 update = true;
                 append = true;
+                importTypeDescription = SharedStrings.IMPORT_DATA_UPDATE_MATCHING + " " + SharedStrings.IMPORT_DATA_APPEND_NONMATCHING;
             }
-            else if (cmbImportType.SelectedIndex == 1)
+            else if (rdbUpdate.Checked)
             {
                 update = true;
                 append = false;
-                importTypeDescription = SharedStrings.IMPORT_DATA_MATCHING_UPDATED_ELSE_IGNORED;
+                importTypeDescription = SharedStrings.IMPORT_DATA_UPDATE_MATCHING + " " + SharedStrings.IMPORT_DATA_IGNORE_NONMATCHING;
             }
             else
             {
                 update = false;
                 append = true;
-                importTypeDescription = SharedStrings.IMPORT_DATA_MATCHING_IGNORED_ELSE_APPEND;
-            }            
-
+                importTypeDescription = SharedStrings.IMPORT_DATA_APPEND_NONMATCHING + " " + SharedStrings.IMPORT_DATA_IGNORE_MATCHING;
+            }
+            
             if (cmbFormName.SelectedIndex >= 0)
             {
                 lbxStatus.Items.Clear();
@@ -191,13 +191,15 @@ namespace Epi.Enter.Forms
                     stopwatch = new Stopwatch();
                     stopwatch.Start();
 
-                    AddStatusMessage(SharedStrings.IMPORT_DATA_INITIATED + " " + cmbFormName.SelectedItem.ToString() + "; " + importTypeDescription);
+                    AddStatusMessage(SharedStrings.IMPORT_DATA_STARTED + " " + cmbFormName.SelectedItem.ToString() + "; " + importTypeDescription);
 
                     btnBrowse.Enabled = false;
                     btnCancel.Enabled = false;
                     btnOK.Enabled = false;
                     cmbFormName.Enabled = false;
-                    cmbImportType.Enabled = false;
+                    rdbUpdateAndAppend.Enabled = false;
+                    rdbUpdate.Enabled = false;
+                    rdbAppend.Enabled = false;
                     textProjectFile.Enabled = false;
 
                     if (importWorker.WorkerSupportsCancellation)
@@ -1167,14 +1169,16 @@ namespace Epi.Enter.Forms
         {
             stopwatch.Stop();
 
-            this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), string.Format(SharedStrings.IMPORT_DATA_COMPLETE, stopwatch.Elapsed.ToString()));
-            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), string.Format(SharedStrings.IMPORT_DATA_COMPLETE, stopwatch.Elapsed.ToString()));
+            this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), SharedStrings.IMPORT_DATA_COMPLETE + "; " + SharedStrings.IMPORT_DATA_TIME_ELAPSED + " " + stopwatch.Elapsed.ToString());
+            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), SharedStrings.IMPORT_DATA_COMPLETE + "; " + SharedStrings.IMPORT_DATA_TIME_ELAPSED + " " + stopwatch.Elapsed.ToString());
 
             btnBrowse.Enabled = true;
             btnCancel.Enabled = true;
             btnOK.Enabled = true;
             cmbFormName.Enabled = true;
-            cmbImportType.Enabled = true;
+            rdbUpdateAndAppend.Enabled = true;
+            rdbUpdate.Enabled = true;
+            rdbAppend.Enabled = true;
             textProjectFile.Enabled = true;
             progressBar.Visible = false;
 
@@ -1376,6 +1380,20 @@ namespace Epi.Enter.Forms
         {
             AddStatusMessage(SharedStrings.IMPORT_DATA_READY);
         }
-        #endregion // Event Handlers        
+
+        private void cmsStatus_Click(object sender, EventArgs e)
+        {
+            if (lbxStatus.Items.Count > 0)
+            {
+                string StatusText = string.Empty;
+                foreach (string item in lbxStatus.Items)
+                {
+                    StatusText = StatusText + System.Environment.NewLine + item;
+                }
+                Clipboard.SetText(StatusText);
+            }
+
+        }
+        #endregion // Event Handlers
     }
 }

@@ -4394,7 +4394,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The project being imported contains bad metadata for field {0} on page {1} in form {2}. The import process has been aborted. Please update the data then try the import again..
+        ///   Looks up a localized string similar to The project being imported contains invalid metadata for field {0} on page {1} in form {2}. The import process stopped. Please update the data then try the import again..
         /// </summary>
         public static string IMPORT_BAD_FIELD_DATA {
             get {
@@ -4432,6 +4432,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Records with no matching ID fields will be appended..
+        /// </summary>
+        public static string IMPORT_DATA_APPEND_NONMATCHING {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_APPEND_NONMATCHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancelling the import process may cause partially updated or incomplete records. Cancel anyway?.
         /// </summary>
         public static string IMPORT_DATA_CANCEL_IMPORT {
@@ -4450,11 +4459,38 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Import complete.  Time elapsed: {0}.
+        ///   Looks up a localized string similar to Import complete..
         /// </summary>
         public static string IMPORT_DATA_COMPLETE {
             get {
                 return ResourceManager.GetString("IMPORT_DATA_COMPLETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was a problem opening the mobile sync file..
+        /// </summary>
+        public static string IMPORT_DATA_DEVICE_FILE_ERROR {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_DEVICE_FILE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request for phone sync file started by user:.
+        /// </summary>
+        public static string IMPORT_DATA_DEVICE_REQUESTED {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_DEVICE_REQUESTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import started for sync file:.
+        /// </summary>
+        public static string IMPORT_DATA_DEVICE_STARTED {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_DEVICE_STARTED", resourceCulture);
             }
         }
         
@@ -4468,6 +4504,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import failed..
+        /// </summary>
+        public static string IMPORT_DATA_FAILED {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import process complete for grid: {0}..
         /// </summary>
         public static string IMPORT_DATA_GRID_PROCESSING_COMPLETE {
@@ -4477,38 +4522,20 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Import initiated for form:.
+        ///   Looks up a localized string similar to Records with matching ID fields will be ignored..
         /// </summary>
-        public static string IMPORT_DATA_INITIATED {
+        public static string IMPORT_DATA_IGNORE_MATCHING {
             get {
-                return ResourceManager.GetString("IMPORT_DATA_INITIATED", resourceCulture);
+                return ResourceManager.GetString("IMPORT_DATA_IGNORE_MATCHING", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Records with matching ID fields will be ignored. Records with no matching ID fields will be appended. .
+        ///   Looks up a localized string similar to Records with no matching ID fields will be ignored..
         /// </summary>
-        public static string IMPORT_DATA_MATCHING_IGNORED_ELSE_APPEND {
+        public static string IMPORT_DATA_IGNORE_NONMATCHING {
             get {
-                return ResourceManager.GetString("IMPORT_DATA_MATCHING_IGNORED_ELSE_APPEND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Records with matching ID fields will be updated.  Records with no matching ID fields records will be appended..
-        /// </summary>
-        public static string IMPORT_DATA_MATCHING_UPDATED_ELSE_APPEND {
-            get {
-                return ResourceManager.GetString("IMPORT_DATA_MATCHING_UPDATED_ELSE_APPEND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Records with matching ID fields will be updated. Records with no matching ID fields records will be ignored..
-        /// </summary>
-        public static string IMPORT_DATA_MATCHING_UPDATED_ELSE_IGNORED {
-            get {
-                return ResourceManager.GetString("IMPORT_DATA_MATCHING_UPDATED_ELSE_IGNORED", resourceCulture);
+                return ResourceManager.GetString("IMPORT_DATA_IGNORE_NONMATCHING", resourceCulture);
             }
         }
         
@@ -4576,11 +4603,47 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import started for form:.
+        /// </summary>
+        public static string IMPORT_DATA_STARTED {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_STARTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time elapsed:.
+        /// </summary>
+        public static string IMPORT_DATA_TIME_ELAPSED {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_TIME_ELAPSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Records with matching ID fields will be updated..
+        /// </summary>
+        public static string IMPORT_DATA_UPDATE_MATCHING {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_UPDATE_MATCHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Warning:.
         /// </summary>
         public static string IMPORT_DATA_WARNING {
             get {
                 return ResourceManager.GetString("IMPORT_DATA_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request for web data started by user:.
+        /// </summary>
+        public static string IMPORT_DATA_WEB_REQUESTED {
+            get {
+                return ResourceManager.GetString("IMPORT_DATA_WEB_REQUESTED", resourceCulture);
             }
         }
         
@@ -4612,6 +4675,24 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Communication with the web service failed..
+        /// </summary>
+        public static string IMPORT_ERROR_COMM_FAILED {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_COMM_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Communication with web service interupted.  Import stopped..
+        /// </summary>
+        public static string IMPORT_ERROR_COMM_INTERUPT {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_COMM_INTERUPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Errors were found while checking forms for similarity. Errors must be fixed before the importing. Errors found: {0}.
         /// </summary>
         public static string IMPORT_ERROR_COUNT {
@@ -4635,6 +4716,24 @@ namespace Epi {
         public static string IMPORT_ERROR_DESTINATION_FIELD_NOT_FOUND {
             get {
                 return ResourceManager.GetString("IMPORT_ERROR_DESTINATION_FIELD_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Communication with device interupted.  Import stopped..
+        /// </summary>
+        public static string IMPORT_ERROR_DEVICE_INTERUPT {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_DEVICE_INTERUPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid password or sync file..
+        /// </summary>
+        public static string IMPORT_ERROR_DEVICE_INVALID_FILE {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_DEVICE_INVALID_FILE", resourceCulture);
             }
         }
         
@@ -4806,6 +4905,33 @@ namespace Epi {
         public static string IMPORT_ERROR_TOO_DIFFERENT {
             get {
                 return ResourceManager.GetString("IMPORT_ERROR_TOO_DIFFERENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field data exceeds 255 characters and has been shortened for the following field and record:.
+        /// </summary>
+        public static string IMPORT_ERROR_WE_EXCEEDS_LENGTH {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_WE_EXCEEDS_LENGTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import from web survey failed..
+        /// </summary>
+        public static string IMPORT_ERROR_WEB_SURVEY_FAILED {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_WEB_SURVEY_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web service information was not found..
+        /// </summary>
+        public static string IMPORT_ERROR_WEB_SVC_NOTFOUND {
+            get {
+                return ResourceManager.GetString("IMPORT_ERROR_WEB_SVC_NOTFOUND", resourceCulture);
             }
         }
         

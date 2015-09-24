@@ -129,13 +129,16 @@ namespace Epi.Windows.ImportExport.Dialogs
             switch (mergeType)
             {
                 case DataMergeType.UpdateAndAppend:
-                    this.cmbImportType.SelectedIndex = 0;
+                    //this.cmbImportType.SelectedIndex = 0;
+                    rdbUpdateAndAppend.Checked = true;
                     break;
                 case DataMergeType.UpdateOnly:
-                    this.cmbImportType.SelectedIndex = 1;
+                    //this.cmbImportType.SelectedIndex = 1;
+                    rdbUpdate.Checked = true;
                     break;
                 case DataMergeType.AppendOnly:
-                    this.cmbImportType.SelectedIndex = 2;
+                    //this.cmbImportType.SelectedIndex = 2;
+                    rdbAppend.Checked = true;
                     break;
             }
         }
@@ -244,7 +247,9 @@ namespace Epi.Windows.ImportExport.Dialogs
             txtPackageFile.Enabled = true;
 
             checkboxBatchImport.Enabled = true;
-            cmbImportType.Enabled = true;
+            rdbUpdateAndAppend.Enabled = true;
+            rdbAppend.Enabled = true;
+            rdbUpdate.Enabled = true;
             btnAdvanced.Enabled = true;
             txtPassword.Enabled = true;
         }
@@ -257,7 +262,9 @@ namespace Epi.Windows.ImportExport.Dialogs
             txtPackageFile.Enabled = false;
 
             checkboxBatchImport.Enabled = false;
-            cmbImportType.Enabled = false;
+            rdbUpdateAndAppend.Enabled = false;
+            rdbAppend.Enabled = false;
+            rdbUpdate.Enabled = false;
             btnAdvanced.Enabled = false;
             txtPassword.Enabled = false;
         }
@@ -278,24 +285,24 @@ namespace Epi.Windows.ImportExport.Dialogs
 
             this.Cursor = Cursors.WaitCursor;
 
-            string importTypeDescription = ImportExportSharedStrings.IMPORT_TYPE_UPDATE_AND_APPEND;
-
-            if (cmbImportType.SelectedIndex == 0)
+            string importTypeDescription;
+            if (rdbUpdateAndAppend.Checked)
             {
                 update = true;
                 append = true;
+                importTypeDescription = ImportExportSharedStrings.IMPORT_DATA_UPDATE_MATCHING + " " + ImportExportSharedStrings.IMPORT_DATA_APPEND_NONMATCHING;
             }
-            else if (cmbImportType.SelectedIndex == 1)
+            else if (rdbUpdate.Checked)
             {
                 update = true;
                 append = false;
-                importTypeDescription = ImportExportSharedStrings.IMPORT_TYPE_UPDATE_ONLY;
+                importTypeDescription = ImportExportSharedStrings.IMPORT_DATA_UPDATE_MATCHING + " " + ImportExportSharedStrings.IMPORT_DATA_IGNORE_NONMATCHING;
             }
-            else
+            else 
             {
                 update = false;
                 append = true;
-                importTypeDescription = ImportExportSharedStrings.IMPORT_TYPE_APPEND_ONLY;
+                importTypeDescription = ImportExportSharedStrings.IMPORT_DATA_APPEND_NONMATCHING + " " + ImportExportSharedStrings.IMPORT_DATA_IGNORE_MATCHING;
             }
 
             progressBar.Visible = true;
@@ -629,6 +636,19 @@ namespace Epi.Windows.ImportExport.Dialogs
         private void checkboxBatchImport_CheckedChanged(object sender, EventArgs e)
         {
             txtPackageFile.Text = string.Empty;            
+        }
+
+        private void cmsStatus_Click(object sender, EventArgs e)
+        {
+            if (lbxStatus.Items.Count > 0)
+            {
+                string StatusText = string.Empty;
+                foreach (string item in lbxStatus.Items)
+                {
+                    StatusText = StatusText + System.Environment.NewLine + item;
+                }
+                Clipboard.SetText(StatusText);
+            }
         }
     }
 }
