@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PackageAdvancedOptionsDialog));
             this.lblInitVector = new System.Windows.Forms.Label();
             this.txtInitVector = new System.Windows.Forms.TextBox();
             this.lblMain = new System.Windows.Forms.Label();
@@ -49,51 +50,32 @@
             // 
             // lblInitVector
             // 
-            this.lblInitVector.Location = new System.Drawing.Point(6, 115);
+            resources.ApplyResources(this.lblInitVector, "lblInitVector");
             this.lblInitVector.Name = "lblInitVector";
-            this.lblInitVector.Size = new System.Drawing.Size(335, 13);
-            this.lblInitVector.TabIndex = 0;
-            this.lblInitVector.Text = "Custom Initialization Vector:";
             // 
             // txtInitVector
             // 
-            this.txtInitVector.Enabled = false;
-            this.txtInitVector.Location = new System.Drawing.Point(6, 131);
-            this.txtInitVector.MaxLength = 16;
+            resources.ApplyResources(this.txtInitVector, "txtInitVector");
             this.txtInitVector.Name = "txtInitVector";
-            this.txtInitVector.Size = new System.Drawing.Size(335, 20);
-            this.txtInitVector.TabIndex = 1;
             // 
             // lblMain
             // 
-            this.lblMain.Location = new System.Drawing.Point(6, 53);
+            resources.ApplyResources(this.lblMain, "lblMain");
             this.lblMain.Name = "lblMain";
-            this.lblMain.Size = new System.Drawing.Size(335, 63);
-            this.lblMain.TabIndex = 2;
-            this.lblMain.Text = "These options can be used to change the encryption parameters for the data packag" +
-    "e. These settings should only be modified by experienced users.";
             // 
             // txtSalt
             // 
-            this.txtSalt.Enabled = false;
-            this.txtSalt.Location = new System.Drawing.Point(6, 170);
-            this.txtSalt.MaxLength = 32;
+            resources.ApplyResources(this.txtSalt, "txtSalt");
             this.txtSalt.Name = "txtSalt";
-            this.txtSalt.Size = new System.Drawing.Size(335, 20);
-            this.txtSalt.TabIndex = 4;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(6, 154);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(335, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Custom Salt Value:";
             // 
             // nudIterations
             // 
-            this.nudIterations.Enabled = false;
-            this.nudIterations.Location = new System.Drawing.Point(9, 209);
+            resources.ApplyResources(this.nudIterations, "nudIterations");
             this.nudIterations.Maximum = new decimal(new int[] {
             30,
             0,
@@ -105,8 +87,6 @@
             0,
             0});
             this.nudIterations.Name = "nudIterations";
-            this.nudIterations.Size = new System.Drawing.Size(79, 20);
-            this.nudIterations.TabIndex = 5;
             this.nudIterations.Value = new decimal(new int[] {
             4,
             0,
@@ -115,32 +95,21 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(6, 193);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(335, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Iterations:";
             // 
             // btnOK
             // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(208, 355);
+            resources.ApplyResources(this.btnOK, "btnOK");
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 7;
-            this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(290, 355);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 8;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // grpSecurity
@@ -153,44 +122,29 @@
             this.grpSecurity.Controls.Add(this.label1);
             this.grpSecurity.Controls.Add(this.nudIterations);
             this.grpSecurity.Controls.Add(this.txtSalt);
-            this.grpSecurity.Location = new System.Drawing.Point(12, 114);
+            resources.ApplyResources(this.grpSecurity, "grpSecurity");
             this.grpSecurity.Name = "grpSecurity";
-            this.grpSecurity.Size = new System.Drawing.Size(351, 235);
-            this.grpSecurity.TabIndex = 9;
             this.grpSecurity.TabStop = false;
-            this.grpSecurity.Text = "Encryption";
             // 
             // checkboxCustomEncryption
             // 
-            this.checkboxCustomEncryption.AutoSize = true;
-            this.checkboxCustomEncryption.Location = new System.Drawing.Point(6, 23);
+            resources.ApplyResources(this.checkboxCustomEncryption, "checkboxCustomEncryption");
             this.checkboxCustomEncryption.Name = "checkboxCustomEncryption";
-            this.checkboxCustomEncryption.Size = new System.Drawing.Size(148, 17);
-            this.checkboxCustomEncryption.TabIndex = 10;
-            this.checkboxCustomEncryption.Text = "Enable custom encryption";
             this.checkboxCustomEncryption.UseVisualStyleBackColor = true;
             this.checkboxCustomEncryption.CheckedChanged += new System.EventHandler(this.checkboxCustomEncryption_CheckedChanged);
             // 
             // checkboxIncludeGrids
             // 
-            this.checkboxIncludeGrids.AutoSize = true;
+            resources.ApplyResources(this.checkboxIncludeGrids, "checkboxIncludeGrids");
             this.checkboxIncludeGrids.Checked = true;
             this.checkboxIncludeGrids.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkboxIncludeGrids.Location = new System.Drawing.Point(12, 58);
             this.checkboxIncludeGrids.Name = "checkboxIncludeGrids";
-            this.checkboxIncludeGrids.Size = new System.Drawing.Size(161, 17);
-            this.checkboxIncludeGrids.TabIndex = 10;
-            this.checkboxIncludeGrids.Text = "Include grid data in package";
             this.checkboxIncludeGrids.UseVisualStyleBackColor = true;
             // 
             // checkboxIncludeCodeTables
             // 
-            this.checkboxIncludeCodeTables.AutoSize = true;
-            this.checkboxIncludeCodeTables.Location = new System.Drawing.Point(12, 81);
+            resources.ApplyResources(this.checkboxIncludeCodeTables, "checkboxIncludeCodeTables");
             this.checkboxIncludeCodeTables.Name = "checkboxIncludeCodeTables";
-            this.checkboxIncludeCodeTables.Size = new System.Drawing.Size(175, 17);
-            this.checkboxIncludeCodeTables.TabIndex = 11;
-            this.checkboxIncludeCodeTables.Text = "Include code tables in package";
             this.checkboxIncludeCodeTables.UseVisualStyleBackColor = true;
             // 
             // cmbFormData
@@ -198,29 +152,23 @@
             this.cmbFormData.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFormData.FormattingEnabled = true;
             this.cmbFormData.Items.AddRange(new object[] {
-            "Selected form and all descendant forms",
-            "Selected form and direct descendants",
-            "Selected form only (no descendants)"});
-            this.cmbFormData.Location = new System.Drawing.Point(12, 29);
+            resources.GetString("cmbFormData.Items"),
+            resources.GetString("cmbFormData.Items1"),
+            resources.GetString("cmbFormData.Items2")});
+            resources.ApplyResources(this.cmbFormData, "cmbFormData");
             this.cmbFormData.Name = "cmbFormData";
-            this.cmbFormData.Size = new System.Drawing.Size(248, 21);
-            this.cmbFormData.TabIndex = 12;
             // 
             // lblFormDataToInclude
             // 
-            this.lblFormDataToInclude.Location = new System.Drawing.Point(12, 13);
+            resources.ApplyResources(this.lblFormDataToInclude, "lblFormDataToInclude");
             this.lblFormDataToInclude.Name = "lblFormDataToInclude";
-            this.lblFormDataToInclude.Size = new System.Drawing.Size(248, 13);
-            this.lblFormDataToInclude.TabIndex = 13;
-            this.lblFormDataToInclude.Text = "Form data to include:";
             // 
             // PackageAdvancedOptionsDialog
             // 
             this.AcceptButton = this.btnOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(377, 390);
             this.Controls.Add(this.lblFormDataToInclude);
             this.Controls.Add(this.cmbFormData);
             this.Controls.Add(this.checkboxIncludeCodeTables);
@@ -232,8 +180,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PackageAdvancedOptionsDialog";
-            this.ShowIcon = false;
-            this.Text = "Advanced Options";
             ((System.ComponentModel.ISupportInitialize)(this.nudIterations)).EndInit();
             this.grpSecurity.ResumeLayout(false);
             this.grpSecurity.PerformLayout();

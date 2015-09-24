@@ -116,7 +116,7 @@ namespace Epi.Enter.Forms
 
                 this.IsBatchImport = false;
 
-                this.cmbImportType.SelectedIndex = 0;
+                this.rdbDraftMode.Checked = true;
 
                 if (config.Settings.WebServiceAuthMode == 1) // Windows Authentication
                     {
@@ -238,7 +238,7 @@ namespace Epi.Enter.Forms
                 }
             catch (Exception ex)
                 {
-                SetStatusMessage("Error: Web service information was not found.");
+                SetStatusMessage(SharedStrings.IMPORT_DATA_ERROR + " " + SharedStrings.IMPORT_ERROR_WEB_SVC_NOTFOUND);
                 }
             }
 
@@ -298,7 +298,7 @@ namespace Epi.Enter.Forms
                         if (fieldData.FieldValue.ToString().Length > 255)
                             {
                             fieldData.FieldValue = fieldData.FieldValue.ToString().Substring(0, 255);
-                            AddStatusMessage("The field data for " + fieldData.FieldName + " in record " + fieldData.RecordGUID + " has been truncated because it exceeds 255 characters.");
+                            AddStatusMessage(SharedStrings.IMPORT_ERROR_WE_EXCEEDS_LENGTH + " " + fieldData.FieldName + "; " + fieldData.RecordGUID);
                             }
                         return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.Multiline:
@@ -335,7 +335,8 @@ namespace Epi.Enter.Forms
             {
             btnCancel.Enabled = true;
             btnOK.Enabled = true;
-            //cmbImportType.Enabled = true;
+            rdbDraftMode.Enabled = true;
+            rdbFinalMode.Enabled = true;
             textProject.Enabled = true;
             textData.Enabled = true;
             textOrganization.Enabled = true;
@@ -375,34 +376,17 @@ namespace Epi.Enter.Forms
                     progressBar.Maximum = recordCount * (destinationView.Pages.Count + 1);
                     progressBar.Maximum = progressBar.Maximum + gridRowCount;
 
-                    string importTypeDescription = "Records with matching ID fields will be updated and unmatched records will be appended.";
-                    //if (cmbImportType.SelectedIndex == 0)
-                    //{
-                    //    update = true;
-                    //    append = true;
-                    //}
-                    //else if (cmbImportType.SelectedIndex == 1)
-                    //{
-                    //    update = true;
-                    //    append = false;
-                    //    importTypeDescription = "Records with matching ID fields will be updated. Unmatched records will be ignored.";
-                    //}
-                    //else
-                    //{
-                    //    update = false;
-                    //    append = true;
-                    //    importTypeDescription = "Records with no matching ID fields will be appended. Records with matching ID fields will be ignored.";
-                    //}
-
                     update = false;
                     append = true;
-                    importTypeDescription = "Records with no matching ID fields will be appended. Records with matching ID fields will be ignored.";
-                    //DownLoadType = cmbImportType.SelectedIndex;
-                    AddStatusMessage("Import initiated for form " + textProject.Text + ". " + importTypeDescription);
+                    //  "Records with no matching ID fields will be appended. Records with matching ID fields will be ignored.";
+                    string importTypeDescription = SharedStrings.IMPORT_DATA_IGNORE_MATCHING + " " + SharedStrings.IMPORT_DATA_APPEND_NONMATCHING;
+
+                    AddStatusMessage(SharedStrings.IMPORT_DATA_STARTED + ": " + textProject.Text + ". " + importTypeDescription);
 
                     btnCancel.Enabled = false;
                     btnOK.Enabled = false;
-                    //cmbImportType.Enabled = false;
+                    rdbDraftMode.Enabled = false;
+                    rdbFinalMode.Enabled = false;
                     textProject.Enabled = false;
                     textData.Enabled = false;
                     textOrganization.Enabled = false;
@@ -423,7 +407,7 @@ namespace Epi.Enter.Forms
                     }
                 catch (System.ServiceModel.CommunicationException ex)
                     {
-                    this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), "Couldn't properly communicate with web service. Import halted.");
+                    this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), SharedStrings.IMPORT_ERROR_COMM_INTERUPT);
 
                     if (stopwatch != null)
                         {
@@ -432,7 +416,8 @@ namespace Epi.Enter.Forms
 
                     btnCancel.Enabled = true;
                     btnOK.Enabled = true;
-                    //cmbImportType.Enabled = true;
+                    rdbDraftMode.Enabled = true;
+                    rdbFinalMode.Enabled = true;
                     textProject.Enabled = true;
                     textData.Enabled = true;
                     textOrganization.Enabled = true;
@@ -444,7 +429,7 @@ namespace Epi.Enter.Forms
                     }
                 catch (Exception ex)
                     {
-                    this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), "Import from web failed.");
+                        this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), SharedStrings.IMPORT_ERROR_WEB_SURVEY_FAILED);
 
                     if (stopwatch != null)
                         {
@@ -453,7 +438,8 @@ namespace Epi.Enter.Forms
 
                     btnCancel.Enabled = true;
                     btnOK.Enabled = true;
-                    //cmbImportType.Enabled = true;
+                    rdbDraftMode.Enabled = true;
+                    rdbFinalMode.Enabled = true;
                     textProject.Enabled = true;
                     progressBar.Visible = false;
 
@@ -501,7 +487,7 @@ namespace Epi.Enter.Forms
         private void ProcessBaseTable(Dictionary<string, Dictionary<string, WebFieldData>> result, View destinationView, List<string> destinationGUIDList)
             {
             //sourceView.LoadFirstRecord();
-            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on base table...");
+            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), SharedStrings.IMPORT_DATA_PROCESSING_RECS);
 
             int recordsInserted = 0;
             int recordsUpdated = 0;
@@ -525,7 +511,7 @@ namespace Epi.Enter.Forms
 
                 if (importWorker.CancellationPending)
                     {
-                    this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import cancelled.");
+                    this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), SharedStrings.IMPORT_DATA_CANCELLED);
                     return;
                     }
 
@@ -724,7 +710,6 @@ namespace Epi.Enter.Forms
         private Dictionary<string, Dictionary<string, WebFieldData>> ParseXML(Epi.EWEManagerService.SurveyAnswerResponse pSurveyAnswer)
             {
             Dictionary<string, Dictionary<string, WebFieldData>> result = new Dictionary<string, Dictionary<string, WebFieldData>>(StringComparer.OrdinalIgnoreCase);
-           // SetFilterProperties(DownLoadType);
 
             foreach (Epi.EWEManagerService.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
                 {
@@ -875,7 +860,7 @@ namespace Epi.Enter.Forms
                   
                     for (int i = 0; i < destinationView.Pages.Count; i++)
                         {
-                        this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on page " + (i + 1).ToString() + " of " + destinationView.Pages.Count.ToString() + "...");
+                        this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), string.Format(SharedStrings.IMPORT_DATA_PROCESSING_RECS_PAGE, (i + 1).ToString(), destinationView.Pages.Count.ToString()));
 
                         int recordsInserted = 0;
 
@@ -892,7 +877,7 @@ namespace Epi.Enter.Forms
 
                             if (importWorker.CancellationPending)
                                 {
-                                this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import cancelled.");
+                                this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), SharedStrings.IMPORT_DATA_CANCELLED);
                                 return;
                                 }
 
@@ -1006,9 +991,9 @@ namespace Epi.Enter.Forms
         /// <param name="statusMessage"></param>
         private void AddWarningMessage(string statusMessage)
             {
-            string message = DateTime.Now + ": Warning: " + statusMessage;
-            lbxStatus.Items.Add(message);
-            Logger.Log(message);
+                string message = DateTime.Now + ": " + SharedStrings.IMPORT_DATA_WARNING + " " + statusMessage;
+                lbxStatus.Items.Add(message);
+                Logger.Log(message);
             }
 
         /// <summary>
@@ -1017,9 +1002,9 @@ namespace Epi.Enter.Forms
         /// <param name="statusMessage"></param>
         private void AddErrorStatusMessage(string statusMessage)
             {
-            string message = DateTime.Now + ": Error: " + statusMessage;
-            lbxStatus.Items.Add(message);
-            Logger.Log(message);
+                string message = DateTime.Now + ": " + SharedStrings.IMPORT_DATA_ERROR + " " + statusMessage;
+                lbxStatus.Items.Add(message);
+                Logger.Log(message);
             }
 
         /// <summary>
@@ -1122,32 +1107,6 @@ namespace Epi.Enter.Forms
             return true;
             }
 
-        private void SetFilterProperties(int UserSelection)
-            {
-
-            switch (UserSelection)
-                {
-                //case 0:
-                //    IsDraftMode = true;
-                //    SurveyStatus = 3;//Complete 
-                //    break;
-                //case 1:
-                //    IsDraftMode = true;
-                //    SurveyStatus = 0;//All
-                //    break;
-                case 0:
-                    IsDraftMode =true;
-                    //SurveyStatus = 3;//Complete 
-                    break;
-                case 1:
-                    IsDraftMode = false;
-                   // SurveyStatus = 3;//All 
-                    break;
-
-
-                }
-
-            }
         #endregion // Private Methods
 
         #region Event Handlers
@@ -1176,8 +1135,7 @@ namespace Epi.Enter.Forms
         private void btnOK_Click(object sender, EventArgs e)
             {
 
-            DownLoadType = cmbImportType.SelectedIndex;
-            SetFilterProperties(DownLoadType);
+                IsDraftMode = rdbDraftMode.Checked;
 
             if (!string.IsNullOrEmpty(textProject.Text))
                 {
@@ -1223,12 +1181,12 @@ namespace Epi.Enter.Forms
             if (e.Result != null && e.Result is EWEManagerService.SurveyAnswerRequest)
                 {
                 EWEManagerService.SurveyAnswerRequest Request = (EWEManagerService.SurveyAnswerRequest)e.Result;
-                AddStatusMessage("Request for web data completed.");
+                AddStatusMessage(SharedStrings.IMPORT_DATA_COMPLETE);
                 DoImport(Request);
                 }
             else
                 {
-                AddErrorStatusMessage("Communication with the web service failed.");
+                AddErrorStatusMessage(SharedStrings.IMPORT_ERROR_COMM_FAILED);
                 StopImport();
                 }
             }
@@ -1283,13 +1241,13 @@ namespace Epi.Enter.Forms
 
             if (e.Result is Exception)
                 {
-                this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import failed. Time elapsed: " + stopwatch.Elapsed.ToString());
-                this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Import failed. Time elapsed: " + stopwatch.Elapsed.ToString());
+                    this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), SharedStrings.IMPORT_DATA_FAILED + " " + SharedStrings.IMPORT_DATA_TIME_ELAPSED + ": " + stopwatch.Elapsed.ToString());
+                    this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), SharedStrings.IMPORT_DATA_FAILED + " " + SharedStrings.IMPORT_DATA_TIME_ELAPSED + ": " + stopwatch.Elapsed.ToString());
                 }
             else
                 {
-                this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import complete. Time elapsed: " + stopwatch.Elapsed.ToString());
-                this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Import complete. Time elapsed: " + stopwatch.Elapsed.ToString());
+                    this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), SharedStrings.IMPORT_DATA_COMPLETE + " " + SharedStrings.IMPORT_DATA_TIME_ELAPSED + ": " + stopwatch.Elapsed.ToString());
+                    this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), SharedStrings.IMPORT_DATA_COMPLETE + " " + SharedStrings.IMPORT_DATA_TIME_ELAPSED + ": " + stopwatch.Elapsed.ToString());
                 }
 
             StopImport();
@@ -1396,7 +1354,7 @@ namespace Epi.Enter.Forms
             {
             if (importWorker.IsBusy)
                 {
-                DialogResult result = Epi.Windows.MsgBox.ShowQuestion("Aborting the import process and may cause impartially-updated or incomplete records to exist. Proceed with abort?");
+                DialogResult result = Epi.Windows.MsgBox.ShowQuestion( SharedStrings.IMPORT_DATA_CANCEL_IMPORT);
                 if (result == DialogResult.Yes)
                     {
                     importWorker.CancelAsync();
@@ -1410,7 +1368,7 @@ namespace Epi.Enter.Forms
 
         private void ImportDataForm_Load(object sender, EventArgs e)
             {
-            AddStatusMessage("Loaded data import dialog. Ready.");
+            AddStatusMessage(SharedStrings.IMPORT_DATA_READY);
             }
 
         private void textProject_TextChanged(object sender, EventArgs e)

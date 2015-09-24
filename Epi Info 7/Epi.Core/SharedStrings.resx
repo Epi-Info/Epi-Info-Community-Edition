@@ -754,7 +754,7 @@ Do you wish to proceed with the creation of the project and overwrite any existi
     <value>Overwrite existing Epi Info 7 project metadata</value>
   </data>
   <data name="IMPORT_BAD_FIELD_DATA" xml:space="preserve">
-    <value>The project being imported contains bad metadata for field {0} on page {1} in form {2}. The import process has been aborted. Please update the data then try the import again.</value>
+    <value>The project being imported contains invalid metadata for field {0} on page {1} in form {2}. The import process stopped. Please update the data then try the import again.</value>
   </data>
   <data name="IMPORT_DATA_ALREADY_EXISTS" xml:space="preserve">
     <value>The importer has detected that data already exist in the specified database. The following tables will be overwritten if the import process proceeds: {0}
@@ -2844,7 +2844,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
     <value>Cancelling the import process may cause partially updated or incomplete records. Cancel anyway?</value>
   </data>
   <data name="IMPORT_DATA_COMPLETE" xml:space="preserve">
-    <value>Import complete.  Time elapsed: {0}</value>
+    <value>Import complete.</value>
   </data>
   <data name="IMPORT_DATA_ERROR" xml:space="preserve">
     <value>Error:</value>
@@ -2852,17 +2852,17 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="IMPORT_DATA_GRID_PROCESSING_COMPLETE" xml:space="preserve">
     <value>Import process complete for grid: {0}.</value>
   </data>
-  <data name="IMPORT_DATA_INITIATED" xml:space="preserve">
-    <value>Import initiated for form:</value>
+  <data name="IMPORT_DATA_STARTED" xml:space="preserve">
+    <value>Import started for form:</value>
   </data>
-  <data name="IMPORT_DATA_MATCHING_IGNORED_ELSE_APPEND" xml:space="preserve">
-    <value>Records with matching ID fields will be ignored. Records with no matching ID fields will be appended. </value>
+  <data name="IMPORT_DATA_IGNORE_MATCHING" xml:space="preserve">
+    <value>Records with matching ID fields will be ignored.</value>
   </data>
-  <data name="IMPORT_DATA_MATCHING_UPDATED_ELSE_APPEND" xml:space="preserve">
-    <value>Records with matching ID fields will be updated.  Records with no matching ID fields records will be appended.</value>
+  <data name="IMPORT_DATA_UPDATE_MATCHING" xml:space="preserve">
+    <value>Records with matching ID fields will be updated.</value>
   </data>
-  <data name="IMPORT_DATA_MATCHING_UPDATED_ELSE_IGNORED" xml:space="preserve">
-    <value>Records with matching ID fields will be updated. Records with no matching ID fields records will be ignored.</value>
+  <data name="IMPORT_DATA_APPEND_NONMATCHING" xml:space="preserve">
+    <value>Records with no matching ID fields will be appended.</value>
   </data>
   <data name="IMPORT_DATA_PAGE_PROCESSING_COMPLETE" xml:space="preserve">
     <value>Import process complete for page: {0}.</value>
@@ -2950,5 +2950,47 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   </data>
   <data name="IMPORT_ERROR_TOO_DIFFERENT" xml:space="preserve">
     <value>Import process stopped because too many differences were detected.</value>
+  </data>
+  <data name="IMPORT_DATA_IGNORE_NONMATCHING" xml:space="preserve">
+    <value>Records with no matching ID fields will be ignored.</value>
+  </data>
+  <data name="IMPORT_DATA_DEVICE_FILE_ERROR" xml:space="preserve">
+    <value>There was a problem opening the mobile sync file.</value>
+  </data>
+  <data name="IMPORT_DATA_DEVICE_REQUESTED" xml:space="preserve">
+    <value>Request for phone sync file started by user:</value>
+  </data>
+  <data name="IMPORT_DATA_DEVICE_STARTED" xml:space="preserve">
+    <value>Import started for sync file:</value>
+  </data>
+  <data name="IMPORT_DATA_FAILED" xml:space="preserve">
+    <value>Import failed.</value>
+  </data>
+  <data name="IMPORT_DATA_TIME_ELAPSED" xml:space="preserve">
+    <value>Time elapsed:</value>
+  </data>
+  <data name="IMPORT_DATA_WEB_REQUESTED" xml:space="preserve">
+    <value>Request for web data started by user:</value>
+  </data>
+  <data name="IMPORT_ERROR_COMM_FAILED" xml:space="preserve">
+    <value>Communication with the web service failed.</value>
+  </data>
+  <data name="IMPORT_ERROR_COMM_INTERUPT" xml:space="preserve">
+    <value>Communication with web service interupted.  Import stopped.</value>
+  </data>
+  <data name="IMPORT_ERROR_DEVICE_INTERUPT" xml:space="preserve">
+    <value>Communication with device interupted.  Import stopped.</value>
+  </data>
+  <data name="IMPORT_ERROR_DEVICE_INVALID_FILE" xml:space="preserve">
+    <value>Invalid password or sync file.</value>
+  </data>
+  <data name="IMPORT_ERROR_WEB_SURVEY_FAILED" xml:space="preserve">
+    <value>Import from web survey failed.</value>
+  </data>
+  <data name="IMPORT_ERROR_WEB_SVC_NOTFOUND" xml:space="preserve">
+    <value>Web service information was not found.</value>
+  </data>
+  <data name="IMPORT_ERROR_WE_EXCEEDS_LENGTH" xml:space="preserve">
+    <value>Field data exceeds 255 characters and has been shortened for the following field and record:</value>
   </data>
 </root>
