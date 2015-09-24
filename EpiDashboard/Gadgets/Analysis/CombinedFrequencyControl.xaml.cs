@@ -729,7 +729,7 @@ namespace EpiDashboard
                                 case "boolean":
                                     ((CombinedFrequencyParameters)Parameters).CombineMode = CombineModeTypes.Boolean;
                                     break;
-                                case "catagorical":
+                                case "categorical":
                                     ((CombinedFrequencyParameters)Parameters).CombineMode = CombineModeTypes.Categorical;
                                     break;
                                 case "automatic":
