@@ -49,8 +49,8 @@
 
                 <!--<ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxField_SelectionChanged" Visibility="Hidden" />-->
 
-                <StackPanel  x:Name="scrollViewerVarPro">
-                    <ListBox SelectionMode="Multiple" Name="lbxField" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="lbxField_SelectionChanged" />
+                <StackPanel x:Name="scrollViewerVarPro">
+                    <ListBox Style="{StaticResource PropertiesListBox}"  SelectionMode="Extended" Name="lbxField" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="lbxField_SelectionChanged" />
                 </StackPanel>
                 <StackPanel>
                     <StackPanel Height="12" />
@@ -71,7 +71,7 @@
                 <TextBlock x:Name="tblockStrataVariable">Stratify by:__xfe</TextBlock>
 
                 <StackPanel x:Name="scrollViewerStrataProperties" >
-                    <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" />
+                    <ListBox Style="{StaticResource PropertiesListBox}" Height="300" SelectionMode="Extended" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" />
                 </StackPanel>
                 <Label x:Name="tblockSortingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Sorting__xfe</Label>
                 <StackPanel Orientation="Horizontal">

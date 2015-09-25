@@ -96,12 +96,12 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
                         <Label x:Name="tblockAvailableVariables">Available Variables:__xfe</Label>
-                    <ListBox x:Name="lbxAvailableVariables" Height="175" MouseDoubleClick="lbxAvailableVariables_MouseDoubleClick" />
+                    <ListBox Style="{StaticResource PropertiesListBox}" x:Name="lbxAvailableVariables" Height="175" MouseDoubleClick="lbxAvailableVariables_MouseDoubleClick" />
                 </StackPanel>
 
                 <StackPanel Grid.Column="2">
                         <Label x:Name="tblockSortOrder">Sort Order:__xfe</Label>
-                    <ListBox x:Name="lbxSortOrder" Height="175" MouseDoubleClick="lbxSortOrder_MouseDoubleClick" />
+                    <ListBox Style="{StaticResource PropertiesListBox}" x:Name="lbxSortOrder" Height="175" MouseDoubleClick="lbxSortOrder_MouseDoubleClick" />
                 </StackPanel>
             </Grid>
         </StackPanel>

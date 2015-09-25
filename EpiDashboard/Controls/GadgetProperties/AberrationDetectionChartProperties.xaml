@@ -88,7 +88,7 @@
                 <Label x:Name="tblockIndicator">Indicators (Optional):__xfe</Label>
 
                 <StackPanel>
-                    <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible" Height="300" SelectionMode="Multiple" Name="listboxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="listboxFieldStrata_SelectionChanged" />
+                    <ListBox Style="{StaticResource PropertiesListBox}" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="300" SelectionMode="Multiple" Name="listboxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="listboxFieldStrata_SelectionChanged" />
                 </StackPanel>
             </StackPanel>
 

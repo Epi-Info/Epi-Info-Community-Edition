@@ -57,9 +57,15 @@
     </Style>
     
     <Style TargetType="ListView">
-        <Setter Property="BorderBrush" Value="#829eb2" />
+        <Setter Property="BorderBrush" Value="#8a8a8a" />
+        <Setter Property="BorderThickness" Value="1 1 1 1" />
     </Style>
-    
+
+    <Style TargetType="ListBox" x:Key="PropertiesListBox">
+        <Setter Property="BorderBrush" Value="#8a8a8a" />
+        <Setter Property="BorderThickness" Value="1 1 1 1" />
+    </Style>
+
     <Style x:Key="GadgetBorderStyle" TargetType="Border">
         <Setter Property="CornerRadius" Value="2"></Setter>
         <Setter Property="Padding" Value="0"></Setter>

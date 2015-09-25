@@ -203,8 +203,8 @@
             <StackPanel DockPanel.Dock="Top">
                 <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors &amp; Ranges</Label>
             </StackPanel>
-
-            <StackPanel DockPanel.Dock="Bottom">
+            <ScrollViewer DockPanel.Dock="Bottom">
+                <StackPanel>
                 <Label Margin="8,0,0,2">Classes:</Label>
 
                 <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" Width="100" Margin="8,0,0,2">
@@ -249,7 +249,9 @@
         BorderBrush="Black" 
         BorderThickness="5"
          >
-                        --><!--<TextBlock x:Name="tblockSample" Text="Sample Text" Background="Blue"/>--><!--
+                        -->
+                    <!--<TextBlock x:Name="tblockSample" Text="Sample Text" Background="Blue"/>-->
+                    <!--
                             <TextBlock Text="Sample Text">
                                 <TextBlock.Background>
                                     <SolidColorBrush x:Name="brushSample" Color="blue" Opacity="0.5"/>
@@ -263,13 +265,13 @@
                     <Image x:Name="imgSample" Source="..\Images\samplemap.png" Width="150" Height="150" Stretch="None" />
                     </StackPanel>-->
 
-                    <Grid Width="150" Height="150">
+                    <Grid Width="75" Height="75">
                         <Grid.Background>
                             <!--<ImageBrush ImageSource="..\Images\samplemap.png" x:Name="brush"/>-->
                             <VisualBrush>
                                 <VisualBrush.Visual>
                                     <Grid >
-                                        <Image Source="..\Images\samplemap.png" Width="150" Height="150" />
+                                        <Image Source="..\Images\samplemap.png" Width="75" Height="75" />
                                         <Rectangle Fill="Blue" x:Name="brush" Opacity="0.5"></Rectangle>
                                     </Grid>
                                 </VisualBrush.Visual>
@@ -277,7 +279,7 @@
                         </Grid.Background>
                     </Grid>
                 </StackPanel>
-                <Button Click="ResetLegend_Click" HorizontalAlignment="Left" Width="134" Height="42" Margin="8,2,0,16">Reset Legend</Button>
+                    <Button Click="ResetLegend_Click" HorizontalAlignment="Left" Width="134" Height="42" Margin="8">Reset Legend</Button>
                 <CheckBox x:Name="quintilesOption" Click="CheckBox_Quantiles_Click" HorizontalAlignment="Left" Width="134" Height="42" Margin="8,20,0,16">Quantiles</CheckBox>
 
                 <Grid x:Name="stratGrid">
@@ -380,6 +382,7 @@
                     <TextBox Grid.Row="11" x:Name="legendText10" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
                 </Grid>
             </StackPanel>
+            </ScrollViewer>
         </DockPanel>
 
 
