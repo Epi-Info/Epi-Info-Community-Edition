@@ -69,11 +69,10 @@
             <StackPanel DockPanel.Dock="Bottom">
                 <Label x:Name="tblockGroupingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping__xfe</Label>
                 <Label x:Name="tblockStrataVariable">Stratify by:__xfe</Label>
-                <ScrollViewer x:Name="scrollViewerStrataProperties" VerticalAlignment="Stretch" Height="300" >
-                    <StackPanel >
-                        <ListBox SelectionMode="Multiple" Name="listboxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="listboxFieldStrata_SelectionChanged" />
-                    </StackPanel>
-                </ScrollViewer>
+
+                <StackPanel x:Name="scrollViewerStrataProperties">
+                    <ListBox Style="{StaticResource PropertiesListBox}" Height="300" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionMode="Extended" Name="listboxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="listboxFieldStrata_SelectionChanged" />
+                </StackPanel>
 
                 <Label x:Name="tblockSortingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Sorting__xfe</Label>
                 <StackPanel Orientation="Horizontal">

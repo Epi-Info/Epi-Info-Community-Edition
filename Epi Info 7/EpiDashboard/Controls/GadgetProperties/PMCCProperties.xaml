@@ -69,7 +69,7 @@
                 <StackPanel Height="12" />
                 <TextBlock x:Name="tblockStrataVariable">Pair Group ID:__xfe</TextBlock>
                 <StackPanel x:Name="scrollViewerStrataProperties">
-                    <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" Height="290"/>
+                    <ListBox SelectionMode="Multiple" Name="lbxFieldStrata" Style="{StaticResource PropertiesListBox}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" Height="290"/>
                 </StackPanel>
             </StackPanel>
         </DockPanel>
@@ -103,7 +103,7 @@
                         <TextBlock x:Name="tblockAllValues">All values:__xfe</TextBlock>
                         <ScrollViewer x:Name="scrollViewerValueMapping" VerticalAlignment="Stretch" MinHeight="425" MinWidth="150">
                             <StackPanel>
-                                <ListBox SelectionMode="Multiple" Name="lbxAllValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="425" />
+                                <ListBox Style="{StaticResource PropertiesListBox}" SelectionMode="Multiple" Name="lbxAllValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="425" />
                             </StackPanel>
                         </ScrollViewer>
                     </StackPanel>
@@ -120,7 +120,7 @@
                         <TextBlock x:Name="tblockYesValues" Margin="0,0,0,0">Yes values:__xfe</TextBlock>
                         <ListBox SelectionMode="Multiple" Name="lbxYesValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200" MinWidth="150"/>
                         <TextBlock x:Name="tblockNoValues" Margin="0,8,0,0">No values:__xfe</TextBlock>
-                        <ListBox SelectionMode="Multiple" Name="lbxNoValues" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200"/>
+                        <ListBox SelectionMode="Multiple" Name="lbxNoValues" Style="{StaticResource PropertiesListBox}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>

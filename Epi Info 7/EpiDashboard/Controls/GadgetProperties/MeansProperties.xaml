@@ -49,7 +49,7 @@
                 <ComboBox x:Name="cbxFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" />
 
                 <Label x:Name="tblockStratifyBy">Stratify by:__xfe</Label>
-                <ListBox SelectionMode="Multiple" Name="lvFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="90" />
+                <ListBox SelectionMode="Multiple" Name="lvFieldStrata" Style="{StaticResource PropertiesListBox}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="90" />
                 <CheckBox x:Name="checkboxShowANOVA" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display ANOVA statistics" IsChecked="True"  />
 
                 <!--<ListView Name="lvFieldStrata" MaxHeight="450">
@@ -109,7 +109,7 @@
 
                         <StackPanel Grid.Column="2">
                             <Label>Sort Order:__xfe</Label>
-                            <ListBox x:Name="lbxSortOrder" Height="370" MouseDoubleClick="lbxSortOrder_MouseDoubleClick" />
+                            <ListBox x:Name="lbxSortOrder" Style="{StaticResource PropertiesListBox}" Height="370" MouseDoubleClick="lbxSortOrder_MouseDoubleClick" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
