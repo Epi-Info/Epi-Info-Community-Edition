@@ -236,6 +236,100 @@
                                     </ComboBox.Items>
                                 </ComboBox>
                             </StackPanel>
+                            
+                        </WrapPanel>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+        <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+<!--Labels-->
+        <DockPanel x:Name="panelDisplayLabels" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label x:Name="tblockPanelLabels" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Labels__xfe</Label>
+            </StackPanel>
+
+            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesLabels">
+                <StackPanel>
+                    <Label x:Name="tblockTitleSubTitle" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Title and Subtitle__xfe</Label>
+                    <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel>
+                            <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" Text="Chart title:__xfe" Margin="0,12,0,0"  />
+                            <TextBox Style="{StaticResource PropertiesChartTitle}" x:Name="txtChartTitle" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="tblockChartSubTitleValue" HorizontalAlignment="Left" Text="Chart subtitle:__xfe" Margin="0,12,0,0"  />
+                            <TextBox Style="{StaticResource PropertiesSubtitleDescription}" x:Name="txtChartSubTitle" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
+                        </StackPanel>
+                    </WrapPanel>
+                    
+                    <Label x:Name="tblockYAxisSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Y-Axis__xfe</Label>
+                    <StackPanel>
+                        <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+
+                            <StackPanel>
+                                <TextBlock x:Name="tblockYAxisLabelValue" HorizontalAlignment="Left" Text="Y-axis label:__xfe" Margin="0,12,0,0"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisLabelValue" HorizontalAlignment="Left" Text="Count" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock x:Name="tblockYAxisFormatString" HorizontalAlignment="Left" Text="Y-axis format:__xfe" Margin="0,12,0,0"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisFormatString" HorizontalAlignment="Left" Text="" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock x:Name="tblockYAxisLabelFontSize" HorizontalAlignment="Left" Text="Y-axis label font size:__xfe" Margin="0,12,0,0"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisLabelFontSize" HorizontalAlignment="Left" Text="" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock x:Name="tblockYAxisFontSize" HorizontalAlignment="Left" Text="Y-axis data values font size:__xfe" Margin="0,12,0,0"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisFontSize" HorizontalAlignment="Left" Text="" />
+                            </StackPanel>
+
+                            <StackPanel>
+                                <TextBlock x:Name="tblockYAxisMinValue" HorizontalAlignment="Left" Text="Y-axis min value:__xfe" Margin="0,12,0,0" Visibility="Visible"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisminValue" HorizontalAlignment="Left" Visibility="Visible"/>
+                            </StackPanel>
+
+                            <StackPanel>
+                                <TextBlock x:Name="tblockYAxismaxValue" HorizontalAlignment="Left" Text="Y-axis max value:__xfe" Margin="0,12,0,0"  Visibility="Visible" />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxismaxValue" HorizontalAlignment="Left" Visibility="Visible" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock x:Name="tblockYAxisstepValue" HorizontalAlignment="Left" Text="Y-axis step value:__xfe" Margin="0,12,0,0"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisstepValue" HorizontalAlignment="Left"  />
+                            </StackPanel>
+                        </WrapPanel>
+
+                        <Label x:Name="tblockY2AxisSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Y2-Axis__xfe</Label>
+                        <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <StackPanel>
+                                <TextBlock x:Name="tblockSecondYAxis" Text="Second y-axis type:__xfe" Margin="0,12,0,0"  />
+                                <ComboBox x:Name="cmbSecondYAxis" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" SelectedIndex="0" SelectionChanged="cmbSecondYAxis_SelectionChanged">
+                                    <ComboBox.Items>
+                                        <ComboBoxItem>None</ComboBoxItem>
+                                        <ComboBoxItem>Single field</ComboBoxItem>
+                                        <ComboBoxItem>Rate per 100k population</ComboBoxItem>
+                                        <ComboBoxItem>Cumulative percent</ComboBoxItem>
+                                    </ComboBox.Items>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock x:Name="tblockSecondYAxisVariable" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,12,0,0" Text="Second y-axis variable:__xfe" Visibility="Visible" />
+                                <ComboBox x:Name="cmbSecondYAxisVariable" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Visibility="Visible" SelectionChanged="cmbSecondYAxisVariable_SelectionChanged" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock x:Name="tblockY2AxisLabelValue" HorizontalAlignment="Left" Text="Y2-axis label:__xfe" Margin="0,12,0,0"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtY2AxisLabelValue" HorizontalAlignment="Left" />
+                            </StackPanel>
+                            
+                            <StackPanel>
+                                <TextBlock x:Name="tblockY2AxisLegendTitle" HorizontalAlignment="Left" Text="Y2-axis legend title:__xfe" Margin="0,12,0,0"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtY2AxisLegendTitle" HorizontalAlignment="Left" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock x:Name="tblockY2AxisFormatString" HorizontalAlignment="Left" Text="Y2-axis format:__xfe" Margin="0,12,0,0"  />
+                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtY2AxisFormatString" HorizontalAlignment="Left" Text="" />
+                            </StackPanel>
+
                             <StackPanel>
                                 <TextBlock x:Name="tblockLineTypeY2" HorizontalAlignment="Left" TextAlignment="Center" Text="Line type (Y2):__xfe" Margin="0,12,0,0" />
                                 <ComboBox x:Name="cmbLineTypeY2" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="0" IsEnabled="False">
@@ -271,84 +365,7 @@
                                     </ComboBox.Items>
                                 </ComboBox>
                             </StackPanel>
-                        </WrapPanel>
-                    </StackPanel>
-                </StackPanel>
-            </ScrollViewer>
-        </DockPanel>
-        <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-<!--Labels-->
-        <DockPanel x:Name="panelDisplayLabels" Grid.Column="2" VerticalAlignment="Stretch" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelLabels" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Labels__xfe</Label>
-            </StackPanel>
 
-            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesLabels">
-                <StackPanel>
-                    <Label x:Name="tblockYAxisSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Y-Axis__xfe</Label>
-                    <StackPanel>
-                        <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-
-                            <StackPanel>
-                                <TextBlock x:Name="tblockYAxisLabelValue" HorizontalAlignment="Left" Text="Y-axis label:__xfe" Margin="0,12,0,0"  />
-                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisLabelValue" HorizontalAlignment="Left" Text="Count" />
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="tblockYAxisFormatString" HorizontalAlignment="Left" Text="Y-axis format:__xfe" Margin="0,12,0,0"  />
-                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisFormatString" HorizontalAlignment="Left" Text="" />
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="tblockYAxisLabelFontSize" HorizontalAlignment="Left" Text="Y-axis label font size:__xfe" Margin="0,12,0,0"  />
-                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisLabelFontSize" HorizontalAlignment="Left" Text="" />
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="tblockYAxisFontSize" HorizontalAlignment="Left" Text="Y-axis data values font size:__xfe" Margin="0,12,0,0"  />
-                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisFontSize" HorizontalAlignment="Left" Text="" />
-                            </StackPanel>
-                        </WrapPanel>
-                        <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                            <StackPanel>
-                                <TextBlock x:Name="tblockSecondYAxis" Text="Second y-axis type:__xfe" Margin="0,12,0,0"  />
-                                <ComboBox x:Name="cmbSecondYAxis" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" SelectedIndex="0" SelectionChanged="cmbSecondYAxis_SelectionChanged">
-                                    <ComboBox.Items>
-                                        <ComboBoxItem>None</ComboBoxItem>
-                                        <ComboBoxItem>Single field</ComboBoxItem>
-                                        <ComboBoxItem>Rate per 100k population</ComboBoxItem>
-                                        <ComboBoxItem>Cumulative percent</ComboBoxItem>
-                                    </ComboBox.Items>
-                                </ComboBox>
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="tblockSecondYAxisVariable" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,12,0,0" Text="Second y-axis variable:__xfe" Visibility="Visible" />
-                                <ComboBox x:Name="cmbSecondYAxisVariable" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Visibility="Visible" SelectionChanged="cmbSecondYAxisVariable_SelectionChanged" />
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="tblockY2AxisLabelValue" HorizontalAlignment="Left" Text="Y2-axis label:__xfe" Margin="0,12,0,0"  />
-                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtY2AxisLabelValue" HorizontalAlignment="Left" />
-                            </StackPanel>
-                            
-                            <StackPanel>
-                                <TextBlock x:Name="tblockYAxisMinValue" HorizontalAlignment="Left" Text="Y-axis min value:__xfe" Margin="0,12,0,0" Visibility="Visible"  />
-                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisminValue" HorizontalAlignment="Left" Visibility="Visible"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="tblockYAxismaxValue" HorizontalAlignment="Left" Text="Y-axis max value:__xfe" Margin="0,12,0,0"  Visibility="Visible" />
-                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxismaxValue" HorizontalAlignment="Left" Visibility="Visible" />
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="tblockYAxisstepValue" HorizontalAlignment="Left" Text="Y-axis step value:__xfe" Margin="0,12,0,0"  />
-                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtYAxisstepValue" HorizontalAlignment="Left"  />
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="tblockY2AxisLegendTitle" HorizontalAlignment="Left" Text="Y2-axis legend title:__xfe" Margin="0,12,0,0"  />
-                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtY2AxisLegendTitle" HorizontalAlignment="Left" />
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="tblockY2AxisFormatString" HorizontalAlignment="Left" Text="Y2-axis format:__xfe" Margin="0,12,0,0"  />
-                                <TextBox Style="{StaticResource PropertiesTextBoxMed}" x:Name="txtY2AxisFormatString" HorizontalAlignment="Left" Text="" />
-                            </StackPanel>
-                         
-                 
                         </WrapPanel>
                     </StackPanel>
 
@@ -390,18 +407,7 @@
                             </StackPanel>
                            
                         </WrapPanel>
-
-                        <Label x:Name="tblockTitleSubTitle" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Title and Subtitle__xfe</Label>
-                        <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                            <StackPanel>
-                                <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" Text="Chart title:__xfe" Margin="0,12,0,0"  />
-                                <TextBox Style="{StaticResource PropertiesChartTitle}" x:Name="txtChartTitle" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="tblockChartSubTitleValue" HorizontalAlignment="Left" Text="Chart subtitle:__xfe" Margin="0,12,0,0"  />
-                                <TextBox Style="{StaticResource PropertiesSubtitleDescription}" x:Name="txtChartSubTitle" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
-                            </StackPanel>
-                        </WrapPanel>
+                      
                     </StackPanel>
 
                 </StackPanel>

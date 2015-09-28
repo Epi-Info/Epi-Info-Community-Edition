@@ -66,7 +66,7 @@
 
             <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerProperties">
                 <StackPanel>
-                    <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 5">Title and Description__xfe</Label>
+                    <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 0">Title and Description__xfe</Label>
                     <StackPanel Orientation="Vertical">
                             <StackPanel>
                             <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:__xfe" />
@@ -77,7 +77,7 @@
                                 <TextBox x:Name="txtDesc" Style="{StaticResource PropertiesGadgetDescription}"  AcceptsReturn="True" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
                             </StackPanel>
                     </StackPanel>
-                    <Label x:Name="tblockDimensions" Style="{StaticResource PropertiesSubHeading}" Margin="0,26, 0, 5">Dimensions__xfe</Label>
+                    <Label x:Name="tblockDimensions" Style="{StaticResource PropertiesSubHeading}" Margin="0,26, 0, 50">Dimensions__xfe</Label>
                     <WrapPanel  Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Orientation="Vertical">
@@ -93,13 +93,16 @@
                     </WrapPanel>
 
                     <StackPanel>
-                        <Label x:Name="tblockPanelOutputOpt" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Output Options__xfe</Label>
+                        <Label x:Name="tblockPanelOutputOpt" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Output Options__xfe</Label>
                         <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-
                             <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values__xfe" Visibility="Visible" IsEnabled="true" />
                             <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels__xfe" Visibility="Visible" IsEnabled="true" />
                             <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort high to low__xfe" HorizontalAlignment="Left" IsChecked="true"/>
                             <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values__xfe" IsChecked="True" />
+                            <CheckBox x:Name="checkboxAnnotations" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show annotations__xfe" HorizontalAlignment="Left" IsChecked="False" />
+                            <CheckBox x:Name="checkboxAnnotationLabel" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show annotation label__xfe" HorizontalAlignment="Left" IsChecked="False" />
+                            <CheckBox x:Name="checkboxAnnotationValue" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show annotation value__xfe" HorizontalAlignment="Left" IsChecked="False" />
+                            <CheckBox x:Name="checkboxAnnotationPercent" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show annotation percent__xfe" HorizontalAlignment="Left" IsChecked="False" />
                         </WrapPanel>
                     </StackPanel>
                 </StackPanel>
@@ -114,7 +117,7 @@
 
             <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesColors">
                 <StackPanel>
-                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Colors__xfe</Label>
+                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Colors__xfe</Label>
                     <StackPanel Orientation="Vertical">
                         <WrapPanel ItemWidth="240" Orientation="Vertical">
                             <StackPanel>
@@ -142,14 +145,8 @@
                         </WrapPanel>
                     </StackPanel>
 
-                    <Label x:Name="tblockStylesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Styles__xfe</Label>
+                    <Label x:Name="tblockStylesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Styles__xfe</Label>
                     <StackPanel Orientation="Vertical">
-                        <WrapPanel ItemWidth="240" Orientation="Horizontal">
-                            <CheckBox x:Name="checkboxAnnotations" Margin="0,12,0,0" Content="Show annotations__xfe" HorizontalAlignment="Left" IsChecked="False" />
-                            <CheckBox x:Name="checkboxAnnotationLabel" Margin="0,12,0,0" Content="Show annotation label__xfe" HorizontalAlignment="Left" IsChecked="False" />
-                            <CheckBox x:Name="checkboxAnnotationValue" Margin="0,12,0,0" Content="Show annotation value__xfe" HorizontalAlignment="Left" IsChecked="False" />
-                            <CheckBox x:Name="checkboxAnnotationPercent" Margin="0,12,0,0" Content="Show annotation percent__xfe" HorizontalAlignment="Left" IsChecked="False" />
-                        </WrapPanel>
                         <WrapPanel ItemWidth="240" Orientation="Horizontal">
                             <StackPanel>
                                 <TextBlock x:Name="tblockPieChartKind" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart kind:__xfe" Margin="0,12,0,0" />
@@ -179,7 +176,7 @@
             </StackPanel>
 
             <StackPanel DockPanel.Dock="Bottom">
-                <Label x:Name="tblockTitleSubTitle" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Title and Subtitle__xfe</Label>
+                <Label x:Name="tblockTitleSubTitle" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Title and Subtitle__xfe</Label>
                 <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
                     <StackPanel>
                         <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart title:__xfe" Margin="0,12,0,0"  />

@@ -158,9 +158,9 @@
                         <CheckBox x:Name="checkboxHorizontal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Horizontal 2x2 summary__xfe"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="True" />
                             
                         </WrapPanel>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Margin="0 10 0 0">
                         <TextBlock x:Name="tblockMaxColumnLength" HorizontalAlignment="Left" TextAlignment="Center" Text="Max column name length:__xfe" />
-                        <TextBox x:Name="txtMaxColumnLength" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="24" Margin="5 0 0 0"></TextBox>
+                        <TextBox x:Name="txtMaxColumnLength" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Margin="0 0 0 0"></TextBox>
                     </StackPanel>
 
                     <!--<Button x:Name="btnValueMappings" HorizontalAlignment="Left" Click="btnValueMappings_Click" >
