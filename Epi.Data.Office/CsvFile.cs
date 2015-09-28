@@ -48,7 +48,14 @@ namespace Epi.Data.Office
         {
             OleDbConnectionStringBuilder oleDBCnnStrBuilder = new OleDbConnectionStringBuilder(connectionString);
             oleDBCnnStrBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
-            oleDBCnnStrBuilder.Add("Extended Properties", "text;HDR=Yes;FMT=Delimited");
+            if(connectionString.ToUpper().Contains("UNICODE"))
+            {
+                oleDBCnnStrBuilder.Add("Extended Properties", "text;CharacterSet=UNICODE;HDR=Yes;FMT=Delimited");
+            }
+            else
+            {
+                oleDBCnnStrBuilder.Add("Extended Properties", "text;HDR=Yes;FMT=Delimited");
+            }
             return new OleDbConnection(oleDBCnnStrBuilder.ToString());
         }
 
