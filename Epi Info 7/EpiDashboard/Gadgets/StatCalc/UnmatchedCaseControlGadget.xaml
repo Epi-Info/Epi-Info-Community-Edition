@@ -123,8 +123,8 @@
                             <Border Grid.Row="2" Grid.Column="3" Style="{DynamicResource gridCellBorder}" BorderThickness="1,1,1,0"></Border>
                             <Border Grid.Row="3" Grid.Column="3" Style="{DynamicResource gridCellBorder}" BorderThickness="1,1,1,1"></Border>
 
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" FontWeight="Bold" Foreground="White">Exposed</TextBlock>                            
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" FontWeight="Bold" Foreground="White">Unexposed</TextBlock>                            
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" FontWeight="Bold" Foreground="White">Cases</TextBlock>                            
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" FontWeight="Bold" Foreground="White">Controls</TextBlock>                            
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" FontWeight="Bold" Foreground="White">Total</TextBlock>
                             <!-- -->
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" FontWeight="Bold" Foreground="White">Kelsey</TextBlock>                            

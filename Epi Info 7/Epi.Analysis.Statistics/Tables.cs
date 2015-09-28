@@ -298,7 +298,7 @@ namespace Epi.Analysis.Statistics
                     }
                     HTMLString.AppendLine("    </tr>");
                     HTMLString.AppendLine("    <TR>");
-                    HTMLString.AppendLine("        <TD class=\"stats\">Crude (MLE)</td>");
+                    HTMLString.AppendLine("        <TD class=\"stats\">Crude OR (MLE)</td>");
                     HTMLString.AppendLine("        <TD class=\"stats\" ALIGN=RIGHT>" + Math.Round((decimal)singleTableResults.OddsRatioMLEEstimate, 4).ToString() + "</td>"); //22.1490
                     HTMLString.AppendLine("        <TD class=\"stats\" ALIGN=RIGHT>" + Math.Round((decimal)singleTableResults.OddsRatioMLEMidPLower, 4).ToString() + ",</td>"); // 5.9280
                     HTMLString.AppendLine("        <TD class=\"stats\" ALIGN=RIGHT>" + Math.Round((decimal)singleTableResults.OddsRatioMLEMidPUpper, 4).ToString() + "<TT> (M)</TT></td>"); // 109.1473
@@ -337,13 +337,13 @@ namespace Epi.Analysis.Statistics
                     HTMLString.AppendLine("        <TD class=\"stats\">Crude Risk Ratio (RR)</td>");
                     HTMLString.AppendLine("        <TD class=\"stats\" ALIGN=RIGHT>" + Math.Round((decimal)singleTableResults.RiskRatioEstimate, 4).ToString() + "</td>"); // 5.5741
                     HTMLString.AppendLine("        <TD class=\"stats\" ALIGN=RIGHT>" + Math.Round((decimal)singleTableResults.RiskRatioLower, 4).ToString() + ",</td>"); // 1.9383
-                    HTMLString.AppendLine("        <TD class=\"stats\" ALIGN=RIGHT>" + Math.Round((decimal)singleTableResults.RiskRatioUpper, 4).ToString() + "</td>"); // 16.0296
+                    HTMLString.AppendLine("        <TD class=\"stats\" ALIGN=RIGHT>" + Math.Round((decimal)singleTableResults.RiskRatioUpper, 4).ToString() + "<TT> (T)</TT></td>"); // 16.0296
                     HTMLString.AppendLine("    </tr>");
                     HTMLString.AppendLine("    <TR>");
                     HTMLString.AppendLine("        <TD class=\"stats\">Adjusted RR (MH)</td>");
                     HTMLString.AppendLine("        <TD class=\"stats\" ALIGN=RIGHT>" + computedRR.ToString("N4") + "</td>");
                     HTMLString.AppendLine("        <TD class=\"stats\" ALIGN=RIGHT>" + computedRRMHLL.ToString("N4") + ",</td>"); // 1.9868
-                    HTMLString.AppendLine("        <TD class=\"stats\" ALIGN=RIGHT>" + computedRRMHUL.ToString("N4") + "</td>"); // 16.5127
+                    HTMLString.AppendLine("        <TD class=\"stats\" ALIGN=RIGHT>" + computedRRMHUL.ToString("N4") + "<TT> (T)</TT></td>"); // 16.5127
                     HTMLString.AppendLine("    </tr>");
                     HTMLString.AppendLine("</TABLE>");
                     HTMLString.AppendLine("");
