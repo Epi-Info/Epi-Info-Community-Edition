@@ -134,8 +134,8 @@
                                     <Label x:Name="tblockMaxWidth" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max width:__xfe" Margin="0,0,0,0"  />
                                     <TextBox x:Name="txtMaxWidth" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="800" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown" TextChanged="txtWidth_TextChanged"></TextBox>
                                 </StackPanel>
-                                
-                                <StackPanel Orientation="Horizontal">
+                              
+                                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
                                     <Label x:Name="tblockMaxHeight" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max height:__xfe" Margin="0,0,0,0"  />
                                     <TextBox x:Name="txtMaxHeight" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" Text="500" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"  TextChanged="txtHeight_TextChanged"></TextBox>
                                 </StackPanel>
@@ -145,7 +145,7 @@
                                 <Label x:Name="tblockMaxVarNameLength" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max var name length:" Margin="0,0,0,0" Visibility="Visible" />
                                     <TextBox x:Name="txtMaxVarNameLength" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" Text="24"  PreviewTextInput="txtMaxVarNameLength_PreviewTextInput" Visibility="Visible"></TextBox>
                                 </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
                                     <Label x:Name="tblockMaxRows" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max rows to display:" Margin="0,0,0,0" />
                                     <TextBox x:Name="txtMaxRows" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" Text="50" TextChanged="txtMaxRows_TextChanged" PreviewTextInput="txtMaxVarNameLength_PreviewTextInput"></TextBox>
                                 </StackPanel>

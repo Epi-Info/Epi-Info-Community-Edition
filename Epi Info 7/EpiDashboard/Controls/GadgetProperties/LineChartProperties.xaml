@@ -136,8 +136,10 @@
                             <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values__xfe" Visibility="Visible" IsEnabled="true" />
                             <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels__xfe" Visibility="Visible" IsEnabled="true" />
                             <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values__xfe" IsChecked="True" />
-                            <CheckBox x:Name="checkboxAnnotations" Margin="0,12,0,0" Content="Show annotations__xfe" HorizontalAlignment="Left" IsChecked="False" />
-                            <CheckBox x:Name="checkboxAnnotationsY2" Margin="0,12,0,0" Content="Show annotations (Y2)__xfe" HorizontalAlignment="Left" IsEnabled="False" IsChecked="False" />
+                            <CheckBox x:Name="checkboxAnnotations" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show annotations__xfe" HorizontalAlignment="Left" IsChecked="False" />
+                            <CheckBox x:Name="checkboxAnnotationsY2" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show annotations (Y2)__xfe" HorizontalAlignment="Left" IsEnabled="False" IsChecked="False" />
+                            <CheckBox x:Name="checkboxUseRefValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use reference values__xfe" HorizontalAlignment="Left" IsChecked="True" />
+                            <CheckBox x:Name="checkboxGridLines" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show grid lines__xfe" HorizontalAlignment="Left" IsChecked="True" />
                             <!--<CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use field prompts" Visibility="Visible" IsEnabled="true">-->
                             <!--<CheckBox.ToolTip>
                             <StackPanel>
@@ -187,46 +189,9 @@
                     </ComboBox>
 
                     <Label x:Name="tblockStylesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Styles__xfe</Label>
+                    
                     <WrapPanel ItemWidth="240" Orientation="Horizontal">
-                        <CheckBox x:Name="checkboxUseRefValues" Margin="0,12,0,0" Content="Use reference values__xfe" HorizontalAlignment="Left" IsChecked="True" />
-                        <CheckBox x:Name="checkboxGridLines" Margin="0,12,0,0" Content="Show grid lines__xfe" HorizontalAlignment="Left" IsChecked="True" />
-                    </WrapPanel>
-                    <WrapPanel ItemWidth="240" Orientation="Horizontal">
-                        <StackPanel>
-                            <TextBlock x:Name="tblockLineTypeY2" HorizontalAlignment="Left" TextAlignment="Center" Text="Line type (Y2):__xfe" Margin="0,12,0,0" />
-                            <ComboBox x:Name="cmbLineTypeY2" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="0" IsEnabled="False">
-                                <ComboBox.Items>
-                                    <ComboBoxItem>Auto</ComboBoxItem>
-                                    <ComboBoxItem>Polygon</ComboBoxItem>
-                                    <ComboBoxItem>Smooth</ComboBoxItem>
-                                    <ComboBoxItem>Step</ComboBoxItem>
-                                </ComboBox.Items>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel>
-                            <TextBlock x:Name="tblockLineDashTypeY2" HorizontalAlignment="Left" TextAlignment="Center" Text="Line dash style (Y2):__xfe" Margin="0,12,0,0"  />
-                            <ComboBox x:Name="cmbLineDashTypeY2" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="4" IsEnabled="False">
-                                <ComboBox.Items>
-                                    <ComboBoxItem>Dash</ComboBoxItem>
-                                    <ComboBoxItem>Dash Dot</ComboBoxItem>
-                                    <ComboBoxItem>Dash Dot Dot</ComboBoxItem>
-                                    <ComboBoxItem>Dot</ComboBoxItem>
-                                    <ComboBoxItem>Solid</ComboBoxItem>
-                                </ComboBox.Items>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel>
-                            <TextBlock x:Name="tblockLineThicknessY2" HorizontalAlignment="Left" TextAlignment="Center" Text="Line thickness (Y2):__xfe" Margin="0,12,0,0"  />
-                            <ComboBox x:Name="cmbLineThicknessY2" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="1" IsEnabled="False">
-                                <ComboBox.Items>
-                                    <ComboBoxItem>1</ComboBoxItem>
-                                    <ComboBoxItem>2</ComboBoxItem>
-                                    <ComboBoxItem>3</ComboBoxItem>
-                                    <ComboBoxItem>4</ComboBoxItem>
-                                    <ComboBoxItem>5</ComboBoxItem>
-                                </ComboBox.Items>
-                            </ComboBox>
-                        </StackPanel>
+                        
                         <StackPanel>
                             <TextBlock x:Name="tblockLineType" HorizontalAlignment="Left" TextAlignment="Center" Text="Line type:__xfe" Margin="0,12,0,0" />
                             <ComboBox x:Name="cmbLineType" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="0" IsEnabled="True">
@@ -263,7 +228,19 @@
 
             <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesLabels">
                 <StackPanel>
-                    <Label x:Name="tblockYAxisSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Y-Axis__xfe</Label>
+                    <Label x:Name="tblockTitleSubTitle" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Title and Subtitle__xfe</Label>
+                    <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel>
+                            <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" Text="Chart title:__xfe" Margin="0,12,0,0"  />
+                            <TextBox x:Name="txtChartTitle" AcceptsReturn="True" TextWrapping="Wrap"  Style="{StaticResource PropertiesChartTitle}" HorizontalAlignment="Left" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="tblockChartSubTitleValue" HorizontalAlignment="Left" Text="Chart subtitle:__xfe" Margin="0,12,0,0"  />
+                            <TextBox x:Name="txtChartSubTitle" Style="{StaticResource PropertiesSubtitleDescription}" AcceptsReturn="True" TextWrapping="Wrap"  HorizontalAlignment="Left" />
+                        </StackPanel>
+                    </WrapPanel>
+
+                    <Label x:Name="tblockYAxisSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Y-Axis__xfe</Label>
                     <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
                         <StackPanel>
                             <TextBlock x:Name="tblockYAxisLabelValue" HorizontalAlignment="Left" Text="Y-axis label:__xfe" Margin="0,12,0,0"  />
@@ -282,6 +259,8 @@
                             <TextBox x:Name="txtYAxisFontSize" Style="{StaticResource PropertiesTextBoxMed}" HorizontalAlignment="Left" Text="" />
                         </StackPanel>
                     </WrapPanel>
+
+                    <Label x:Name="tblockY2AxisSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Y2-Axis__xfe</Label>
                     <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
                         <StackPanel>
                             <TextBlock x:Name="tblockSecondYAxis" Text="Second y-axis type:__xfe" Margin="0,12,0,0"  />
@@ -310,7 +289,41 @@
                             <TextBlock x:Name="tblockY2AxisFormatString" HorizontalAlignment="Left" Text="Y2-axis format:__xfe" Margin="0,12,0,0"  />
                             <TextBox x:Name="txtY2AxisFormatString" Style="{StaticResource PropertiesTextBoxMed}" HorizontalAlignment="Left" Text="" />
                         </StackPanel>
-
+                        <StackPanel>
+                            <TextBlock x:Name="tblockLineTypeY2" HorizontalAlignment="Left" TextAlignment="Center" Text="Line type (Y2):__xfe" Margin="0,12,0,0" />
+                            <ComboBox x:Name="cmbLineTypeY2" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="0" IsEnabled="False">
+                                <ComboBox.Items>
+                                    <ComboBoxItem>Auto</ComboBoxItem>
+                                    <ComboBoxItem>Polygon</ComboBoxItem>
+                                    <ComboBoxItem>Smooth</ComboBoxItem>
+                                    <ComboBoxItem>Step</ComboBoxItem>
+                                </ComboBox.Items>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="tblockLineDashTypeY2" HorizontalAlignment="Left" TextAlignment="Center" Text="Line dash style (Y2):__xfe" Margin="0,12,0,0"  />
+                            <ComboBox x:Name="cmbLineDashTypeY2" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="4" IsEnabled="False">
+                                <ComboBox.Items>
+                                    <ComboBoxItem>Dash</ComboBoxItem>
+                                    <ComboBoxItem>Dash Dot</ComboBoxItem>
+                                    <ComboBoxItem>Dash Dot Dot</ComboBoxItem>
+                                    <ComboBoxItem>Dot</ComboBoxItem>
+                                    <ComboBoxItem>Solid</ComboBoxItem>
+                                </ComboBox.Items>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="tblockLineThicknessY2" HorizontalAlignment="Left" TextAlignment="Center" Text="Line thickness (Y2):__xfe" Margin="0,12,0,0"  />
+                            <ComboBox x:Name="cmbLineThicknessY2" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="1" IsEnabled="False">
+                                <ComboBox.Items>
+                                    <ComboBoxItem>1</ComboBoxItem>
+                                    <ComboBoxItem>2</ComboBoxItem>
+                                    <ComboBoxItem>3</ComboBoxItem>
+                                    <ComboBoxItem>4</ComboBoxItem>
+                                    <ComboBoxItem>5</ComboBoxItem>
+                                </ComboBox.Items>
+                            </ComboBox>
+                        </StackPanel>
                     </WrapPanel>
 
                     <Label x:Name="tblockXAxisSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0,5 ">X-Axis__xfe</Label>
@@ -342,17 +355,7 @@
                             <TextBox x:Name="txtXAxisFontSize" Style="{StaticResource PropertiesTextBoxMed}" HorizontalAlignment="Left" Text="" />
                         </StackPanel>
                     </WrapPanel>
-                    <Label x:Name="tblockTitleSubTitle" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Title and Subtitle__xfe</Label>
-                    <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                        <StackPanel>
-                            <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" Text="Chart title:__xfe" Margin="0,12,0,0"  />
-                            <TextBox x:Name="txtChartTitle" AcceptsReturn="True" TextWrapping="Wrap"  Style="{StaticResource PropertiesChartTitle}" HorizontalAlignment="Left" />
-                        </StackPanel>
-                        <StackPanel>
-                            <TextBlock x:Name="tblockChartSubTitleValue" HorizontalAlignment="Left" Text="Chart subtitle:__xfe" Margin="0,12,0,0"  />
-                            <TextBox x:Name="txtChartSubTitle" Style="{StaticResource PropertiesSubtitleDescription}" AcceptsReturn="True" TextWrapping="Wrap"  HorizontalAlignment="Left" />
-                        </StackPanel>
-                    </WrapPanel>
+                   
 
         </StackPanel>
             </ScrollViewer>

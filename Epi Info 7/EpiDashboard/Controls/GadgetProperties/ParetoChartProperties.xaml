@@ -124,7 +124,9 @@
                         <!--<CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values__xfe" Visibility="Visible" IsEnabled="true" />-->
                         <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels__xfe" Visibility="Visible" IsEnabled="true" />
                         <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values__xfe" IsChecked="True" />
-
+                        <CheckBox x:Name="checkboxUseRefValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use reference values__xfe" HorizontalAlignment="Left" IsChecked="True" />
+                        <CheckBox x:Name="checkboxAnnotations" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show annotations__xfe" HorizontalAlignment="Left" IsChecked="False" />
+                        <CheckBox x:Name="checkboxGridLines" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show grid lines__xfe" HorizontalAlignment="Left" IsChecked="True" />
                         <!--<CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use field prompts" Visibility="Visible" IsEnabled="true">-->
                         <!--<CheckBox.ToolTip>
                             <StackPanel>
@@ -180,9 +182,7 @@
 
                     <WrapPanel ItemWidth="240" Orientation="Horizontal">
                         <!--<CheckBox x:Name="checkboxUseDiffColors" Margin="0,12,0,0" Content="Different bar colors__xfe" HorizontalAlignment="Left" IsChecked="False" />-->
-                        <CheckBox x:Name="checkboxUseRefValues" Margin="0,12,0,0" Content="Use reference values__xfe" HorizontalAlignment="Left" IsChecked="True" />
-                        <CheckBox x:Name="checkboxAnnotations" Margin="0,12,0,0" Content="Show annotations__xfe" HorizontalAlignment="Left" IsChecked="False" />
-                        <CheckBox x:Name="checkboxGridLines" Margin="0,12,0,0" Content="Show grid lines__xfe" HorizontalAlignment="Left" IsChecked="True" />
+                        
                     </WrapPanel>
                     <WrapPanel ItemWidth="240" Orientation="Horizontal">
                         <StackPanel>
@@ -222,7 +222,19 @@
             
             <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesLabels">
                 <StackPanel>
-                    <Label x:Name="tblockYAxisSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Y-Axis__xfe</Label>
+                    <Label x:Name="tblockTitleSubTitle" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Title and Subtitle__xfe</Label>
+                    <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel>
+                            <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart title:__xfe" Margin="0,12,0,0"  />
+                            <TextBox x:Name="txtChartTitle" Style="{StaticResource PropertiesChartTitle}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock x:Name="tblockChartSubTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart subtitle:__xfe" Margin="0,12,0,0"  />
+                            <TextBox x:Name="txtChartSubTitle" Style="{StaticResource PropertiesSubtitleDescription}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
+                        </StackPanel>
+                    </WrapPanel>
+                    <Label x:Name="tblockYAxisSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Y-Axis__xfe</Label>
                     <WrapPanel ItemWidth="240" Orientation="Horizontal">
                         <StackPanel>
                             <TextBlock x:Name="tblockYAxisLabelValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Y-axis label:__xfe" Margin="0,12,0,0"  />
@@ -268,18 +280,7 @@
                         </StackPanel>
                     </WrapPanel>
 
-                    <Label x:Name="tblockTitleSubTitle" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Title and Subtitle__xfe</Label>
-                    <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                        <StackPanel>
-                            <TextBlock x:Name="tblockChartTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart title:__xfe" Margin="0,12,0,0"  />
-                            <TextBox x:Name="txtChartTitle" Style="{StaticResource PropertiesChartTitle}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
-                        </StackPanel>
-                       
-                        <StackPanel>
-                            <TextBlock x:Name="tblockChartSubTitleValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Chart subtitle:__xfe" Margin="0,12,0,0"  />
-                            <TextBox x:Name="txtChartSubTitle" Style="{StaticResource PropertiesSubtitleDescription}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
-                        </StackPanel>
-                    </WrapPanel>
+                    
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>

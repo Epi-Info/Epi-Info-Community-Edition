@@ -134,11 +134,11 @@
                         <CheckBox x:Name="checkboxDrawTotal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Draw total row__xfe" Visibility="Visible" IsEnabled="true" />
                     </WrapPanel >
                     <WrapPanel  ItemWidth="240" Height="auto" Width="Auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                        <StackPanel>
+                 
 
                             <StackPanel>
                                 <Label x:Name="tblockPrecision" HorizontalAlignment="Left" Padding="0 0 10 0" Margin="0,0,0,0" Content="Decimals to display:__xfe" />
-                                <ComboBox x:Name="cbxFieldPrecision" HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleSmall}" Height="20" SelectedIndex="2">
+                                <ComboBox x:Name="cbxFieldPrecision" HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleSmall}" Height="25" SelectedIndex="2">
                                     <ComboBoxItem>0</ComboBoxItem>
                                     <ComboBoxItem>1</ComboBoxItem>
                                     <ComboBoxItem>2</ComboBoxItem>
@@ -146,24 +146,23 @@
                                     <ComboBoxItem>4</ComboBoxItem>
                                 </ComboBox>
                             </StackPanel>
-                            <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                            
+                            <StackPanel>
+                                <TextBlock x:Name="tblockRows" HorizontalAlignment="Left" Text="Maximum rows to display:__xfe" Padding="0 0 0 0" Margin="0,0,0,0"  />
+                                <TextBox x:Name="txtRows" HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxSmall}" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock x:Name="tblockBarWidth" HorizontalAlignment="Left" Margin="0,0,0,0" Padding="0 0 0 0">Maximum width of percent bar:__xfe</TextBlock>
+                                <TextBox x:Name="txtBarWidth" HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxSmall}" />
+                            </StackPanel>
                             <StackPanel>
                                 <TextBlock x:Name="tblockPercentBarData" HorizontalAlignment="Left" Text="Percent bar display mode:__xfe" Padding="0 0 10 0" Margin="0,0,0,0" Visibility="Collapsed"  />
-                                <ComboBox  Style="{StaticResource PropertiesComboxStyleSmall}" x:Name="cmbPercentBarMode" SelectedIndex="0" Visibility="Collapsed">
+                                <ComboBox  Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" x:Name="cmbPercentBarMode" SelectedIndex="0" Visibility="Collapsed">
                                     <ComboBoxItem>Bar only__xfe</ComboBoxItem>
                                     <ComboBoxItem>Bar and percent__xfe</ComboBoxItem>
                                 </ComboBox>
                             </StackPanel>
-                            <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="tblockRows" HorizontalAlignment="Left" Text="Maximum rows to display:__xfe" Padding="0 0 10 0" Margin="0,10,0,0"  />
-                                <TextBox x:Name="txtRows" HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxSmall}" />
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="tblockBarWidth" HorizontalAlignment="Left" Margin="0,10,0,0" Padding="0 0 10 0">Maximum width of percent bar:__xfe</TextBlock>
-                                <TextBox x:Name="txtBarWidth" HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxSmall}" />
-                            </StackPanel>
-                        </StackPanel>
+
                     </WrapPanel>
 
                     <!--<TextBlock x:Name="tblockOutputColumns" Margin="0,5,0,0" >Output columns to display:__xfe</TextBlock>-->
