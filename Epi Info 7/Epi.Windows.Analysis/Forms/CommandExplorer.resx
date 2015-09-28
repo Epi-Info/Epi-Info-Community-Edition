@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
   </data>
   <data name="baseImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACG
-        5wAAAk1TRnQBSQFMAgEBYQEAAWMBAAEEAQABEAEAAQ4BAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACI
+        5wAAAk1TRnQBSQFMAgEBYQEAAWMBAAEQAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABXgEBAgABAQEAASAGAAFeAQH/AP8AEwABvQGcAXwF/wG9AZwBhAX/Ab0BnAF8Bf8BvQGcAYQF/wG9
         AZwBfAX/Ab0BnAGEBf8BvQGcAXwF/wG9AZwBhAH/xAA8/8QAAb0BnAGECf8BvQGlAYQB/wG9AZwBhAH/
         Ab0BpQGEBf8BvQGlAYQB/wG9AZwBhAH/Ab0BpQGEEf8BvQGcAXwB/8QACP8BxgGlAYQJ/wG9AZwBhAX/
@@ -1113,7 +1113,7 @@
         AQcB4AEPAcABBwGDAcAB4wGPAfwBPwHkAQ8B/AEfAeMBjwL/Af4BfwP/AZ8E/wEAAR8B/wGfAv8BjwH/
         AYABDwH/AT8BAAEBAYwBAQHAAQcB9wE/AX8B/QGPAf8B4AEDAfICfwH9Av8BAAEBAfACfwH9Av8BgAEP
         AfABDwF/Af0BjwH/AcABBwHwAR8BfwH9AYwBAQHgAQMB8AE/AX8B/QGPAf8BAAEBAfACfwH9Av8BgAEP
-        AfAB/wF/Af0C/wHAAQcB8QH/AX8B/QGPAf8B4AEDAfMB/wEAAQEBjAEBAfABAQH3A/8BjwH/Cw==
+        AfAB/wF/Af0C/wHAAQcB8QH/AX8B/QGPAf8B4AEDAfMB/wEAAQEBjAEBAfABAQH3A/8BjwH/FgAL
 </value>
   </data>
   <data name="Assign.Text" xml:space="preserve">
@@ -1280,5 +1280,8 @@
   </data>
   <data name="User Command.Text" xml:space="preserve">
     <value>User Command</value>
+  </data>
+  <data name="DELIMITER_HEADER_WARNING" xml:space="preserve">
+    <value>The file being read has the string "{0}" in it which is used by Excel to designate the delimiter. Remove this top line in the file being read or it will be used as the column names instead of the column names in the file.</value>
   </data>
 </root>

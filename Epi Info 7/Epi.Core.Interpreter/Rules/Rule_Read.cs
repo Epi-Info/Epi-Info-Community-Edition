@@ -7,6 +7,7 @@ using System.Text;
 using com.calitha.goldparser;
 using Epi.Data;
 using System.Data;
+
 namespace Epi.Core.AnalysisInterpreter.Rules
 {
     public partial class Rule_Read : AnalysisRule
@@ -187,8 +188,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 }
                 else
                 {
-                    outputTable = DBReadExecute.GetDataTable(File, "Select TOP 2 * from " + identifierBuilder.ToString());
-                    recordCount = int.Parse(DBReadExecute.GetScalar(File, "SELECT COUNT(*) FROM " + identifierBuilder.ToString()).ToString());
+                    String identifier = identifierBuilder.ToString();
+                    outputTable = DBReadExecute.GetDataTable(File, "Select TOP 2 * from " + identifier);
+                    recordCount = int.Parse(DBReadExecute.GetScalar(File, "SELECT COUNT(*) FROM " + identifier).ToString());
                 }
             }
 

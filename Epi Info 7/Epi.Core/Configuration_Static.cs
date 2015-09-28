@@ -767,7 +767,7 @@ namespace Epi
 
             Config.DataDriverRow dataDriverRowCsv = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverRowCsv.DataDriversRow = parentDataDriversRow;
-            dataDriverRowCsv.DisplayName = "Flat ASCII File";
+            dataDriverRowCsv.DisplayName = "CSV File";
             dataDriverRowCsv.Type = CsvDriver;
             dataDriverRowCsv.DataProvider = true;
             dataDriverRowCsv.MetadataProvider = false;

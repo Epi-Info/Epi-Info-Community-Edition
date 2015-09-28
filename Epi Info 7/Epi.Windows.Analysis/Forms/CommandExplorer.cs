@@ -670,6 +670,35 @@ namespace Epi.Windows.Analysis.Forms
                     //Some dialogs may not generate a command. No need to process command if command text is empty.
                     if (!string.IsNullOrEmpty(dlg.CommandText))
                     {
+                        String csvFilePath = GetFilePathGivenCommand(dlg.CommandText);
+
+                        if (System.IO.File.Exists(csvFilePath))
+                        {
+                            byte[] buffer = new byte[5];
+                            System.IO.FileStream file = new System.IO.FileStream(csvFilePath, System.IO.FileMode.Open);
+                            file.Read(buffer, 0, 5);
+                            file.Close();
+
+                            System.IO.StreamReader reader = new System.IO.StreamReader(csvFilePath);
+                            string line = reader.ReadLine();
+                            reader.Close();                            
+
+                            if(line.ToUpper().Contains("SEP="))
+                            {
+                                String message = String.Format(resources.GetString("DELIMITER_HEADER_WARNING"), line);
+                                MessageBox.Show(message);
+                            }
+
+                            string command = dlg.CommandText;
+
+                            if(buffer[0] == 255 && buffer[1] == 254)
+                            {
+                                command = command.Insert(command.IndexOf("HDR="), "CharacterSet=UNICODE;");
+                            }
+
+                            dlg.CommandText = command;
+                        }
+
                         if (CommandGenerated != null)
                         {
                             Epi.Windows.Analysis.Forms.CommandProcessingMode Mode = (Epi.Windows.Analysis.Forms.CommandProcessingMode) dlg.ProcessingMode;
@@ -696,6 +725,46 @@ namespace Epi.Windows.Analysis.Forms
             }//finally
         }
 
+
+
+        /// <summary>
+        /// READ {Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\cdc.gov\private\M131\ita3\_EI7\177;Extended Properties="text;HDR=Yes;FMT=Delimited"}:[VHF_Contacts_Export_Sans_Sep#csv] 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        private string GetFilePathGivenCommand(string command)
+        {
+            string directory = string.Empty;
+            string fileName = string.Empty;
+            List<string> segments = new List<string>(command.Split(';'));
+
+            foreach (string segment in segments)
+            {
+                if(segment.Contains("Data Source"))
+                {
+                    directory = segment.Replace("Data Source=", "");
+                }
+
+                if (segment.Contains("}:["))
+                {
+                    fileName = segment.Substring(segment.IndexOf("["));
+                    fileName = fileName.Replace("[", "");
+                    fileName = fileName.Replace("#", ".");
+                    fileName = fileName.Replace("]", "");
+                }
+            }
+            
+            string fullFilePath = System.IO.Path.Combine(directory, fileName);
+
+            if(System.IO.File.Exists(fullFilePath))
+            {
+                return fullFilePath;
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
         
         private void DesignUserDefinedCommand(UserDefinedCommands command)
         {
