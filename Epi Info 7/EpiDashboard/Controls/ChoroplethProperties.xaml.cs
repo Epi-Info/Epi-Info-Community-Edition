@@ -322,7 +322,10 @@ namespace EpiDashboard.Controls
                     SetDefaultRanges();
                 }
 
+                ResetLegend_Click(this, new RoutedEventArgs());        
+
                 RenderMap();
+
 
                 if (_provider != null && !ValidateRangeInput())
                     return;

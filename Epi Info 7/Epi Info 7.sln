@@ -3,6 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B8B36337-2618-4509-9B5F-811B8348A8BE}"
+	ProjectSection(SolutionItems) = preProject
+		Performance1.psess = Performance1.psess
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assemblies", "Assemblies", "{2BCEB9B0-B6AC-4FB4-9C93-2DA780EC6A75}"
 EndProject
@@ -78,7 +81,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinomialTestProject", "Bino
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 37
+		SccNumberOfProjects = 36
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs09
 		SccLocalPath0 = .
@@ -181,15 +184,12 @@ Global
 		SccProjectUniqueName33 = Utilities\\Utilities.csproj
 		SccProjectName33 = Utilities
 		SccLocalPath33 = Utilities
-		SccProjectUniqueName34 = SilverlightControls\\SilverlightControls.csproj
-		SccProjectName34 = SilverlightControls
-		SccLocalPath34 = SilverlightControls
-		SccProjectUniqueName35 = SilverlightControls.Web\\SilverlightControls.Web.csproj
-		SccProjectName35 = SilverlightControls.Web
-		SccLocalPath35 = SilverlightControls.Web
-		SccProjectUniqueName36 = BinomialTestProject\\BinomialTestProject.csproj
-		SccProjectName36 = BinomialTestProject
-		SccLocalPath36 = BinomialTestProject
+		SccProjectUniqueName34 = SilverlightControls.Web\\SilverlightControls.Web.csproj
+		SccProjectName34 = SilverlightControls.Web
+		SccLocalPath34 = SilverlightControls.Web
+		SccProjectUniqueName35 = BinomialTestProject\\BinomialTestProject.csproj
+		SccProjectName35 = BinomialTestProject
+		SccLocalPath35 = BinomialTestProject
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (Exclude EpiMap)|Any CPU = Debug (Exclude EpiMap)|Any CPU
@@ -1452,5 +1452,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2BCEB9B0-B6AC-4FB4-9C93-2DA780EC6A75} = {B8B36337-2618-4509-9B5F-811B8348A8BE}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
