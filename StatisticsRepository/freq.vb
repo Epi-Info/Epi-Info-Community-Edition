@@ -338,11 +338,28 @@ Option Explicit On
         Upper = System.Math.Abs((c7 + c8) / c6)
 
     End Sub '  { FLEISS )
-	'(****************************************************************************
-	'*      Exact confidence interval for proportion using the F-distribution    *
-	'*      algorythm of Rothman and Boice, 1982 Brownlee, 1965.                *
-	'*      adapted to EPI Info from code provided by A. Ray Simons.             *
-	'*****************************************************************************)
+    Sub WILSON(ByVal a As Double, ByVal m1 As Double, ByVal z As Double, ByRef LOWER As Double, ByRef Upper As Double)
+
+        Dim p, c7, c5, c3, c1, c2, c4, c6, c8, q As Double
+        p = a / m1
+        q = 1 - p
+        c1 = 2 * m1
+        c2 = z * z
+        c3 = p + c2 / c1
+        c4 = c3 - 1
+        c5 = z * System.Math.Sqrt((p * (1 - p) + c2 / (4 * m1)) / m1)
+        c6 = 1 + c2 / m1
+        c7 = 1 / c6
+        c8 = z * System.Math.Sqrt(c2 + (2 - 1 / m1) + 4 * p * (m1 * q - 1))
+        LOWER = (c3 - c5) * c7
+        Upper = (c3 + c5) * c7
+
+    End Sub '  { FLEISS )
+    '(****************************************************************************
+    '*      Exact confidence interval for proportion using the F-distribution    *
+    '*      algorythm of Rothman and Boice, 1982 Brownlee, 1965.                *
+    '*      adapted to EPI Info from code provided by A. Ray Simons.             *
+    '*****************************************************************************)
 	Private Sub SwapReal(ByRef n As Double, ByRef m As Double)
 		Dim x As Double
 		x = n

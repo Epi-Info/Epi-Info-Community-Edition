@@ -474,7 +474,7 @@ namespace Epi.Analysis.Statistics
                     if (Total < 300)
                         HTMLString.Append("<TABLE> <TD Class='Stats' ColSpan=\"3\"><B>Exact 95% Conf Limits</B></TD>");
                     else
-                        HTMLString.Append("<TABLE> <TD Class='Stats' ColSpan=\"3\"><B>Fleiss 95% Conf Limits</B></TD>");
+                        HTMLString.Append("<TABLE> <TD Class='Stats' ColSpan=\"3\"><B>Wilson 95% Conf Limits</B></TD>");
                     foreach (ConfLimit cl in confLimits)
                     {
                         HTMLString.Append("<TR><TD Class='Stats'>" + cl.Value + "</TD><TD Class='Stats'>" + ConvertToPercent(cl.Lower) + "</TD><TD Class='Stats'>" + ConvertToPercent(cl.Upper) + "</TD></TR>");
@@ -515,7 +515,7 @@ namespace Epi.Analysis.Statistics
             {
                 if (count >= 300)
                 {
-                    freq.FLEISS(frequency, (double)count, 1.96, ref lower, ref upper);
+                    freq.WILSON(frequency, (double)count, 1.96, ref lower, ref upper);
                 }
                 else
                 {

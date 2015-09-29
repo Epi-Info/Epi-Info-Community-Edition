@@ -283,6 +283,14 @@
     <value>Fleiss 95% UCL</value>
     <comment>Column header for the 95% CI upper</comment>
   </data>
+  <data name="COL_HEADER_WILSON_CI_LOWER" xml:space="preserve">
+    <value>Wilson 95% LCL</value>
+    <comment>Column header for the 95% CI lower</comment>
+  </data>
+  <data name="COL_HEADER_WILSON_CI_UPPER" xml:space="preserve">
+    <value>Wilson 95% UCL</value>
+    <comment>Column header for the 95% CI upper</comment>
+  </data>
   <data name="COL_HEADER_CUMULATIVE_PERCENT" xml:space="preserve">
     <value>Cum. Percent</value>
     <comment>Column header for the 'Cumulative Percent' label.</comment>
