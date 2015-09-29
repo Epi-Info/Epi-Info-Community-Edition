@@ -263,13 +263,13 @@ namespace EpiDashboard.Dialogs
                         cbxParam1.DataSource = fieldNames1;
                         break;
                     case 12:
-                        columnDataType = ColumnDataType.DateTime;
+                        columnDataType = ColumnDataType.DateTime | ColumnDataType.UserDefined;
                         fieldNames1 = dashboardHelper.GetFieldsAsList(columnDataType);
                         cbxParam1.DataSource = fieldNames1;
                         break;
                     case 13:
                     case 29:
-                        columnDataType = ColumnDataType.Text;
+                        columnDataType = ColumnDataType.Text | ColumnDataType.UserDefined;
                         fieldNames1 = dashboardHelper.GetFieldsAsList(columnDataType);
                         cbxParam1.DataSource = fieldNames1;
                         break;
@@ -302,12 +302,12 @@ namespace EpiDashboard.Dialogs
                         cbxParam1.DataSource = fieldNames1;
                         break;
                     case 28:
-                        columnDataType = ColumnDataType.DateTime;
+                        columnDataType = ColumnDataType.DateTime | ColumnDataType.UserDefined;
                         fieldNames1 = dashboardHelper.GetFieldsAsList(columnDataType);
                         cbxParam1.DataSource = fieldNames1;
                         break;
                     case 30:
-                        columnDataType = ColumnDataType.Numeric;
+                        columnDataType = ColumnDataType.Numeric | ColumnDataType.UserDefined;
                         cbxParam1.DataSource = dashboardHelper.GetFieldsAsList(columnDataType);
                         cbxParam2.DataSource = dashboardHelper.GetFieldsAsList(columnDataType);
                         cbxParam3.DataSource = dashboardHelper.GetFieldsAsList(columnDataType);
