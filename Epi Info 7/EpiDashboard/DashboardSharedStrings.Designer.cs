@@ -601,6 +601,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wilson 95% LCL.
+        /// </summary>
+        public static string COL_HEADER_WILSON_CI_LOWER {
+            get {
+                return ResourceManager.GetString("COL_HEADER_WILSON_CI_LOWER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wilson 95% UCL.
+        /// </summary>
+        public static string COL_HEADER_WILSON_CI_UPPER {
+            get {
+                return ResourceManager.GetString("COL_HEADER_WILSON_CI_UPPER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A field with this name already exists..
         /// </summary>
         public static string CREATE_VAR_GROUP_FIELD_ALREADY_EXISTS {

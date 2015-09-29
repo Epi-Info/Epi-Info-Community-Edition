@@ -408,7 +408,7 @@ namespace EpiDashboard
             if (observationCount < 300)
                 txtCILowHeader.Text = DashboardSharedStrings.COL_HEADER_EXACT_CI_LOWER;
             else
-                txtCILowHeader.Text = DashboardSharedStrings.COL_HEADER_FLEISS_CI_LOWER;
+                txtCILowHeader.Text = DashboardSharedStrings.COL_HEADER_WILSON_CI_LOWER;
             txtCILowHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtCILowHeader, 0);
             Grid.SetColumn(txtCILowHeader, 4);
@@ -418,7 +418,7 @@ namespace EpiDashboard
             if (observationCount < 300)
                 txtCIUpperHeader.Text = DashboardSharedStrings.COL_HEADER_EXACT_CI_UPPER;
             else
-                txtCIUpperHeader.Text = DashboardSharedStrings.COL_HEADER_FLEISS_CI_UPPER;
+                txtCIUpperHeader.Text = DashboardSharedStrings.COL_HEADER_WILSON_CI_UPPER;
             txtCIUpperHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtCIUpperHeader, 0);
             Grid.SetColumn(txtCIUpperHeader, 5);
@@ -636,7 +636,7 @@ namespace EpiDashboard
             {
                 if (count > 300)
                 {
-                    freq.FLEISS(frequency, (double)count, 1.96, ref lower, ref upper);
+                    freq.WILSON(frequency, (double)count, 1.96, ref lower, ref upper);
                 }
                 else
                 {
