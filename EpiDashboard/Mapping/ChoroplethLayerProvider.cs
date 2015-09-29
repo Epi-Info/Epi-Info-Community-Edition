@@ -411,6 +411,12 @@ namespace EpiDashboard.Mapping
                     thematicItem.RangeStarts = Range;
                     PopulateRangeValues();
                 }
+                else
+                {
+                    thematicItem.RangeStarts = new List<double>() { classCount };
+                    PopulateRangeValues();
+                }
+
 
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
@@ -457,6 +463,7 @@ namespace EpiDashboard.Mapping
                             t.Text = graphicFeature.Attributes[shapeKey].ToString().Trim() + " : No Data";
                         }
                         else
+
                         {
                             t.Text = graphicFeature.Attributes[shapeKey].ToString().Trim() + " : " + graphicValue.ToString();
                         }
@@ -502,6 +509,14 @@ namespace EpiDashboard.Mapping
                 Fill = colors[colors.Count - 1]
             };
 
+            TextBlock titleTextBlock = new TextBlock();
+            titleTextBlock.Text = _valueField;       //        String.Format("  " + "Title Text");
+            StackPanel titleTextStackPanel = new StackPanel();
+            titleTextStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+            //  titleTextStackPanel.Children.Add(missingSwatchRect);
+            titleTextStackPanel.Children.Add(titleTextBlock);
+
+
             TextBlock missingClassTextBlock = new TextBlock();
             missingClassTextBlock.Text = String.Format("  " + missingText);
             StackPanel missingClassStackPanel = new StackPanel();
@@ -509,8 +524,11 @@ namespace EpiDashboard.Mapping
             missingClassStackPanel.Children.Add(missingSwatchRect);
             missingClassStackPanel.Children.Add(missingClassTextBlock);
 
+            legendList.Items.Add(titleTextStackPanel);
+
             legendList.Items.Add(missingClassStackPanel);
 
+       
             SetLegendText(colors, classCount, thematicItem.RangeStarts, legendList);
 
 
