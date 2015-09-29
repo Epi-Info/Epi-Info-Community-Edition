@@ -360,6 +360,7 @@ namespace EpiDashboard.Rules
                 case SimpleAssignType.TextToDate:
                 case SimpleAssignType.AddDays:
                 case SimpleAssignType.StripDate:
+                case SimpleAssignType.NumberToDate:
                     return "System.DateTime";
                 case SimpleAssignType.DetermineNonExistantListValues:
                 case SimpleAssignType.DetermineCheckboxesCheckedInGroup:
@@ -746,6 +747,40 @@ namespace EpiDashboard.Rules
                         row[this.DestinationColumnName] = DBNull.Value;
                     }
                 }
+            }
+            else if (AssignmentType.Equals(SimpleAssignType.NumberToDate))
+            {
+                int year;
+                int month;
+                int day;
+
+                string columnNameDay = AssignmentParameters[0];
+                string columnNameMonth = AssignmentParameters[1];
+                string columnNameYear = AssignmentParameters[2];
+
+                string valueDay = row[columnNameDay].ToString().Trim();
+                string valueMonth = row[columnNameMonth].ToString().Trim();
+                string valueYear = row[columnNameYear].ToString().Trim();
+
+                if (Int32.TryParse(valueYear, out year))
+                {
+                    if (Int32.TryParse(valueMonth, out month))
+                    {
+                        if (Int32.TryParse(valueDay, out day))
+                        {
+                            try
+                            {
+                                DateTime? dateField = new DateTime(year, month, day);
+                                row[this.DestinationColumnName] = dateField;
+                            }
+                            catch (Exception)
+                            {
+                                row[this.DestinationColumnName] = DBNull.Value;
+                            }
+                        }
+                    }
+                }
+
             }
             else if (AssignmentType.Equals(SimpleAssignType.FindText))
             {

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="YEARS_DESCRIPTION" xml:space="preserve">
     <value>Variable type: Numeric
@@ -340,5 +340,19 @@ Determines if more than the specified number of fields within a group contain mi
   <data name="TEXT_TO_DATE_DESCRIPTION" xml:space="preserve">
     <value>Variable type: Date
 Attempts to convert data stored as text into date data. Useful if date are stored in a text column and operations need to be carried out on the data. Cannot convert alpha-numeric data, e.g. "A16" could not be converted.</value>
+  </data>
+  <data name="NUMBER_TO_DATE_DESCRIPTION" xml:space="preserve">
+    <value>Variable type: Date
+
+This function transforms three numbers into a date format. Useful if date are stored in a text column and operations need to be carried out on the data</value>
+  </data>
+  <data name="DAY_NUMERIC" xml:space="preserve">
+    <value>Day (Numeric):</value>
+  </data>
+  <data name="MONTH_NUMERIC" xml:space="preserve">
+    <value>Month (Numeric):</value>
+  </data>
+  <data name="YEAR_NUMERIC" xml:space="preserve">
+    <value>Year (Numeric):</value>
   </data>
 </root>

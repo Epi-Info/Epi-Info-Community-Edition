@@ -39,6 +39,7 @@ namespace EpiDashboard.Rules
         CountFieldsWithoutMissingInGroup = 29,
         DetermineFieldsWithMissingInGroup = 30,
         NumberToText = 31,
-        StripDate = 32
+        StripDate = 32,
+        NumberToDate = 33
     }
 }

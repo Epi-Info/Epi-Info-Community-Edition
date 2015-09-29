@@ -146,6 +146,9 @@ namespace EpiDashboard.Dialogs
                 case SimpleAssignType.TextToDate:
                     cbxAssignmentType.SelectedIndex = 29;
                     break;
+                case SimpleAssignType.NumberToDate:
+                    cbxAssignmentType.SelectedIndex = 30;
+                    break;
             }
 
             FillSelectionComboBoxes();
@@ -302,7 +305,13 @@ namespace EpiDashboard.Dialogs
                         columnDataType = ColumnDataType.DateTime;
                         fieldNames1 = dashboardHelper.GetFieldsAsList(columnDataType);
                         cbxParam1.DataSource = fieldNames1;
-                        break;                        
+                        break;
+                    case 30:
+                        columnDataType = ColumnDataType.Numeric;
+                        cbxParam1.DataSource = dashboardHelper.GetFieldsAsList(columnDataType);
+                        cbxParam2.DataSource = dashboardHelper.GetFieldsAsList(columnDataType);
+                        cbxParam3.DataSource = dashboardHelper.GetFieldsAsList(columnDataType);
+                        break; 
                 }
             }
 
@@ -556,6 +565,10 @@ namespace EpiDashboard.Dialogs
                     friendlyLabel = friendlyLabel + " the date representation of " + param1;
                     assignmentType = SimpleAssignType.TextToDate;
                     break;
+                case 30: //"Convert numeric data to date data":
+                    friendlyLabel = friendlyLabel + " the date representation of " + param1 + "(day) and " + param2 + "(month) and " + param3 + "(year)";
+                    assignmentType = SimpleAssignType.NumberToDate;
+                    break;
             }
             
             AssignRule = new Rule_SimpleAssign(this.dashboardHelper, friendlyLabel, txtDestinationField.Text, assignmentType, parameters);
@@ -660,6 +673,9 @@ namespace EpiDashboard.Dialogs
                     break;
                 case 29: //"Convert text data to date data":
                     txtDescription.Text = SimpleAssignmentStrings.TEXT_TO_DATE_DESCRIPTION;
+                    break;
+                case 30: //"Convert text data to date data":
+                    txtDescription.Text = SimpleAssignmentStrings.NUMBER_TO_DATE_DESCRIPTION;
                     break;
             }
         }
@@ -873,6 +889,20 @@ namespace EpiDashboard.Dialogs
                     lblParam3.Visible = false;
 
                     lblParam1.Text = SimpleAssignmentStrings.PARAM_DATE_FIELD;
+                    break;
+
+                case 30:
+                    cbxParam1.Visible = true;
+                    cbxParam2.Visible = true;
+                    cbxParam3.Visible = true;
+
+                    lblParam1.Visible = true;
+                    lblParam2.Visible = true;
+                    lblParam3.Visible = true;
+
+                    lblParam1.Text = SimpleAssignmentStrings.DAY_NUMERIC;
+                    lblParam2.Text = SimpleAssignmentStrings.MONTH_NUMERIC;
+                    lblParam3.Text = SimpleAssignmentStrings.YEAR_NUMERIC;
                     break;
 
                 //case "Difference in years":
