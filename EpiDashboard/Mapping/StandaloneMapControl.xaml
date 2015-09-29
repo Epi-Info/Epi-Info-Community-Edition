@@ -43,20 +43,23 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border Grid.Row="0" Grid.RowSpan="9" CornerRadius="0" BorderThickness="0" Background="#303030" ></Border>
-            <Image x:Name="imgPoi" Source="..\Images\poi.png" Stretch="None" Grid.Row="1" Cursor="Hand" MouseLeftButtonUp="imgPointofInterest_MouseLeftButtonUp"/>
-            <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="2" HorizontalAlignment="Center">Points of Interest</TextBlock>
-            <Image x:Name="imgCaseCluster" Source="..\Images\casecluster.png" Stretch="None" Grid.Row="3" Cursor="Hand" MouseLeftButtonUp="imgCaseCluster_MouseLeftButtonUp"/>
-            <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="4" HorizontalAlignment="Center">Case Cluster</TextBlock>
-            <Image x:Name="imgChoropleth" Source="..\Images\choropleth.png" Stretch="None" Grid.Row="5" Cursor="Hand" MouseLeftButtonUp="imgChoropleth_MouseLeftButtonUp"/>
-            <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="6" HorizontalAlignment="Center">Choropleth</TextBlock>
-            <Image x:Name="imgDotDensity" Source="..\Images\dotdensity.png" Stretch="None" Grid.Row="7" Cursor="Hand" MouseLeftButtonUp="imgDotDensity_MouseLeftButtonUp"/>
-            <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="8" HorizontalAlignment="Center">Dot Density</TextBlock>
+            <Border Grid.Row="0" Grid.RowSpan="10" CornerRadius="0" BorderThickness="0" Background="#303030" ></Border>
+            <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="1" HorizontalAlignment="Center">Points of Interest</TextBlock>
+            <Image x:Name="imgPoi" Source="..\Images\poi.png" Stretch="None" Grid.Row="2" Cursor="Hand" MouseLeftButtonUp="imgPointofInterest_MouseLeftButtonUp"/>
+            <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="3" HorizontalAlignment="Center" Margin="0 0 0 0 ">Case Cluster</TextBlock>
+            <Image x:Name="imgCaseCluster" Source="..\Images\casecluster.png" Stretch="None" Grid.Row="4" Cursor="Hand" MouseLeftButtonUp="imgCaseCluster_MouseLeftButtonUp"/>
+            <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="5" HorizontalAlignment="Center">Choropleth</TextBlock>
+            <Image x:Name="imgChoropleth" Source="..\Images\choropleth.png" Stretch="None" Grid.Row="6" Cursor="Hand" MouseLeftButtonUp="imgChoropleth_MouseLeftButtonUp"/>
+            <TextBlock Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="7" HorizontalAlignment="Center">Dot Density</TextBlock>
+            <Image x:Name="imgDotDensity" Source="..\Images\dotdensity.png" Stretch="None" Grid.Row="8" Cursor="Hand" MouseLeftButtonUp="imgDotDensity_MouseLeftButtonUp" />
+            <StackPanel Grid.Row="9"></StackPanel>
+            
         </Grid>
 
         <DockPanel SnapsToDevicePixels="True" Grid.Column="0">
