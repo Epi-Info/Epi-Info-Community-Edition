@@ -547,6 +547,17 @@ namespace EpiDashboard
             btnConnectionBrowse.IsEnabled = true;
             messagePanel.SetProgressBarValue(0);
             messagePanel.HideProgressBar();
+
+            if (worker != null && worker.WorkerSupportsCancellation)
+            {
+                worker.CancelAsync();
+            }
+
+            //if (worker != null)
+            //{
+            //    worker.DoWork -= new System.ComponentModel.DoWorkEventHandler(datadriverWorker_DoWork);
+            //    worker.RunWorkerCompleted -= new System.ComponentModel.RunWorkerCompletedEventHandler(datadriverWorker_WorkerCompleted);
+            //}
         }
 
         /// <summary>
@@ -563,6 +574,17 @@ namespace EpiDashboard
             btnConnectionBrowse.IsEnabled = true;
             messagePanel.SetProgressBarValue(0);
             messagePanel.HideProgressBar();
+
+            if (worker != null && worker.WorkerSupportsCancellation)
+            {
+                worker.CancelAsync();
+            }
+
+            //if (worker != null)
+            //{
+            //    worker.DoWork -= new System.ComponentModel.DoWorkEventHandler(datadriverWorker_DoWork);
+            //    worker.RunWorkerCompleted -= new System.ComponentModel.RunWorkerCompletedEventHandler(datadriverWorker_WorkerCompleted);
+            //}
         }
 
         /// <summary>
