@@ -8394,6 +8394,60 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Publish Form to Web.
+        /// </summary>
+        public static string WEBFORM_MENU_PUB_WEB {
+            get {
+                return ResourceManager.GetString("WEBFORM_MENU_PUB_WEB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publish Form to Web Enter.
+        /// </summary>
+        public static string WEBFORM_MENU_PUB_WEBENTER {
+            get {
+                return ResourceManager.GetString("WEBFORM_MENU_PUB_WEBENTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Republish Form to Web.
+        /// </summary>
+        public static string WEBFORM_MENU_REPUB_WEB {
+            get {
+                return ResourceManager.GetString("WEBFORM_MENU_REPUB_WEB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Republish Form to Web Enter.
+        /// </summary>
+        public static string WEBFORM_MENU_REPUB_WEBENTER {
+            get {
+                return ResourceManager.GetString("WEBFORM_MENU_REPUB_WEBENTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The organization key is required for security purposes before you can republish this survey..
+        /// </summary>
+        public static string WEBFORM_ORG_KEY_REPUBLISH {
+            get {
+                return ResourceManager.GetString("WEBFORM_ORG_KEY_REPUBLISH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The organization key has been successfully submitted!.
+        /// </summary>
+        public static string WEBFORM_ORG_KEY_SUCCESSFUL {
+            get {
+                return ResourceManager.GetString("WEBFORM_ORG_KEY_SUCCESSFUL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your Organization Name (optional).
         /// </summary>
         public static string WEBFORM_ORGANIZATION {

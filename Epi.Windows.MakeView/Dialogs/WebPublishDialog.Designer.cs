@@ -60,12 +60,12 @@
             this.rdbMultipleResponse = new System.Windows.Forms.RadioButton();
             this.grpExitText = new System.Windows.Forms.GroupBox();
             this.picExitCheckmark = new System.Windows.Forms.PictureBox();
-            this.txtSurveyIDMirror = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblDepMirr = new System.Windows.Forms.Label();
             this.lblOrgMirr = new System.Windows.Forms.Label();
             this.lblSurvNumMirr = new System.Windows.Forms.Label();
             this.txtOrganizationMirror = new System.Windows.Forms.TextBox();
+            this.txtSurveyIDMirror = new System.Windows.Forms.TextBox();
             this.txtDepartmentMirror = new System.Windows.Forms.TextBox();
             this.pnlSurveyNameMirror = new System.Windows.Forms.Panel();
             this.txtSurveyNameMirror = new System.Windows.Forms.TextBox();
@@ -101,10 +101,7 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.lblHeading1 = new System.Windows.Forms.Label();
             this.lblHeading2 = new System.Windows.Forms.Label();
-            this.OrganizationKeyLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.OrganizationKeyValueLabel = new System.Windows.Forms.Label();
             this.WebSurveyOptionsLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.DividerLabel = new System.Windows.Forms.Label();
             this.tabPublishWebForm.SuspendLayout();
             this.tabIntro.SuspendLayout();
             this.pnlSurveyName.SuspendLayout();
@@ -187,10 +184,10 @@
             // 
             // tabPublishWebForm
             // 
-            resources.ApplyResources(this.tabPublishWebForm, "tabPublishWebForm");
             this.tabPublishWebForm.Controls.Add(this.tabIntro);
             this.tabPublishWebForm.Controls.Add(this.tabExit);
             this.tabPublishWebForm.Controls.Add(this.tabEntry);
+            resources.ApplyResources(this.tabPublishWebForm, "tabPublishWebForm");
             this.tabPublishWebForm.Name = "tabPublishWebForm";
             this.tabPublishWebForm.SelectedIndex = 0;
             this.tabPublishWebForm.TabStop = false;
@@ -210,7 +207,6 @@
             this.tabIntro.Controls.Add(this.pnlSurveyName);
             this.tabIntro.Controls.Add(this.lblClosingDate);
             this.tabIntro.Controls.Add(this.txtIntroductionText);
-            this.tabIntro.Controls.Add(this.txtSurveyID);
             this.tabIntro.Controls.Add(this.dtpSurveyClosingDate);
             this.tabIntro.Controls.Add(this.pnlSurvNumOrgDept);
             this.tabIntro.Name = "tabIntro";
@@ -275,6 +271,7 @@
             this.pnlSurvNumOrgDept.Controls.Add(this.lblDepartment);
             this.pnlSurvNumOrgDept.Controls.Add(this.txtOrganization);
             this.pnlSurvNumOrgDept.Controls.Add(this.txtDepartment);
+            this.pnlSurvNumOrgDept.Controls.Add(this.txtSurveyID);
             resources.ApplyResources(this.pnlSurvNumOrgDept, "pnlSurvNumOrgDept");
             this.pnlSurvNumOrgDept.Name = "pnlSurvNumOrgDept";
             // 
@@ -299,7 +296,6 @@
             this.tabExit.Controls.Add(this.lblSurveyType);
             this.tabExit.Controls.Add(this.rdbMultipleResponse);
             this.tabExit.Controls.Add(this.grpExitText);
-            this.tabExit.Controls.Add(this.txtSurveyIDMirror);
             this.tabExit.Controls.Add(this.panel1);
             this.tabExit.Controls.Add(this.pnlSurveyNameMirror);
             resources.ApplyResources(this.tabExit, "tabExit");
@@ -344,14 +340,6 @@
             this.picExitCheckmark.Name = "picExitCheckmark";
             this.picExitCheckmark.TabStop = false;
             // 
-            // txtSurveyIDMirror
-            // 
-            resources.ApplyResources(this.txtSurveyIDMirror, "txtSurveyIDMirror");
-            this.txtSurveyIDMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.txtSurveyIDMirror.Name = "txtSurveyIDMirror";
-            this.txtSurveyIDMirror.ReadOnly = true;
-            this.txtSurveyIDMirror.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtSurveyIDMirror_MouseClick);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(214)))), ((int)(((byte)(155)))));
@@ -359,6 +347,7 @@
             this.panel1.Controls.Add(this.lblOrgMirr);
             this.panel1.Controls.Add(this.lblSurvNumMirr);
             this.panel1.Controls.Add(this.txtOrganizationMirror);
+            this.panel1.Controls.Add(this.txtSurveyIDMirror);
             this.panel1.Controls.Add(this.txtDepartmentMirror);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
@@ -385,6 +374,14 @@
             this.txtOrganizationMirror.Name = "txtOrganizationMirror";
             this.txtOrganizationMirror.ReadOnly = true;
             this.txtOrganizationMirror.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtOrganizationMirror_MouseClick);
+            // 
+            // txtSurveyIDMirror
+            // 
+            resources.ApplyResources(this.txtSurveyIDMirror, "txtSurveyIDMirror");
+            this.txtSurveyIDMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.txtSurveyIDMirror.Name = "txtSurveyIDMirror";
+            this.txtSurveyIDMirror.ReadOnly = true;
+            this.txtSurveyIDMirror.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtSurveyIDMirror_MouseClick);
             // 
             // txtDepartmentMirror
             // 
@@ -588,6 +585,7 @@
             // 
             // lblPublishModeStatus
             // 
+            this.lblPublishModeStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.lblPublishModeStatus, "lblPublishModeStatus");
             this.lblPublishModeStatus.Name = "lblPublishModeStatus";
             // 
@@ -620,19 +618,6 @@
             resources.ApplyResources(this.lblHeading2, "lblHeading2");
             this.lblHeading2.Name = "lblHeading2";
             // 
-            // OrganizationKeyLinkLabel
-            // 
-            resources.ApplyResources(this.OrganizationKeyLinkLabel, "OrganizationKeyLinkLabel");
-            this.OrganizationKeyLinkLabel.BackColor = System.Drawing.Color.Transparent;
-            this.OrganizationKeyLinkLabel.Name = "OrganizationKeyLinkLabel";
-            this.OrganizationKeyLinkLabel.TabStop = true;
-            this.OrganizationKeyLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // OrganizationKeyValueLabel
-            // 
-            resources.ApplyResources(this.OrganizationKeyValueLabel, "OrganizationKeyValueLabel");
-            this.OrganizationKeyValueLabel.Name = "OrganizationKeyValueLabel";
-            // 
             // WebSurveyOptionsLinkLabel
             // 
             resources.ApplyResources(this.WebSurveyOptionsLinkLabel, "WebSurveyOptionsLinkLabel");
@@ -641,19 +626,11 @@
             this.WebSurveyOptionsLinkLabel.TabStop = true;
             this.WebSurveyOptionsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
-            // DividerLabel
-            // 
-            resources.ApplyResources(this.DividerLabel, "DividerLabel");
-            this.DividerLabel.Name = "DividerLabel";
-            // 
             // WebPublishDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.DividerLabel);
             this.Controls.Add(this.WebSurveyOptionsLinkLabel);
-            this.Controls.Add(this.OrganizationKeyValueLabel);
-            this.Controls.Add(this.OrganizationKeyLinkLabel);
             this.Controls.Add(this.lblHeading2);
             this.Controls.Add(this.lblHeading1);
             this.Controls.Add(this.btnNext);
@@ -676,7 +653,6 @@
             this.pnlSurvNumOrgDept.ResumeLayout(false);
             this.pnlSurvNumOrgDept.PerformLayout();
             this.tabExit.ResumeLayout(false);
-            this.tabExit.PerformLayout();
             this.grpExitText.ResumeLayout(false);
             this.grpExitText.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picExitCheckmark)).EndInit();
@@ -760,10 +736,7 @@
         private System.Windows.Forms.Label lblURL;
         private System.Windows.Forms.Label lblPublishModeStatus;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel OrganizationKeyLinkLabel;
-        private System.Windows.Forms.Label OrganizationKeyValueLabel;
         private System.Windows.Forms.LinkLabel WebSurveyOptionsLinkLabel;
-        private System.Windows.Forms.Label DividerLabel;
         private System.Windows.Forms.TextBox txtOrganizationKey;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtStatusSummary;

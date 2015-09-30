@@ -2910,7 +2910,7 @@ namespace Epi.Windows.MakeView.Forms
                             switch (IsValidOKey)
                             {
                                 case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No:
-                                    OrgKey NewDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                    OrgKey NewDialog = new OrgKey(this.CurrentView.WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                                     DialogResult result = NewDialog.ShowDialog();
                                     if (result == System.Windows.Forms.DialogResult.OK)
                                         {
@@ -2929,7 +2929,7 @@ namespace Epi.Windows.MakeView.Forms
                                     DialogResult result1 = dialog1.ShowDialog();
                                     if (result1 == System.Windows.Forms.DialogResult.OK)
                                         {
-                                        OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                            OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                                         DialogResult result2 = OrgKeyDialog.ShowDialog();
                                         if (result2 == System.Windows.Forms.DialogResult.OK)
                                             {
@@ -2949,7 +2949,7 @@ namespace Epi.Windows.MakeView.Forms
                                     DialogResult result3 = dialog2.ShowDialog();
                                     if (result3 == System.Windows.Forms.DialogResult.OK)
                                         {
-                                        OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                            OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                                         DialogResult result4 = OrgKeyDialog.ShowDialog();
                                         if (result4 == System.Windows.Forms.DialogResult.OK)
                                             {
@@ -3127,7 +3127,7 @@ namespace Epi.Windows.MakeView.Forms
             {
                 toWebEnterToolStripMenuItem.Enabled = false;
                 EWEToolStripMenuItem.Enabled = false;
-                mnuPublishToWeb.Text = "Publish Form to Web";
+                mnuPublishToWeb.Text = SharedStrings.WEBFORM_MENU_PUB_WEB;
                 mnuPublishToWeb.Enabled = false;
             }
            
@@ -3140,7 +3140,7 @@ namespace Epi.Windows.MakeView.Forms
                     
                     if (!string.IsNullOrWhiteSpace(pView.WebSurveyId))
                     {
-                        mnuPublishToWeb.Text = "Republish Form to Web";
+                        mnuPublishToWeb.Text = SharedStrings.WEBFORM_MENU_REPUB_WEB;
                         mnuPublishToWeb.Enabled = true;
                         toWebSurveyToolStripMenuItem.Visible = true;
                         EIWSToolStripMenuItem.Visible = true;
@@ -3151,7 +3151,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     else
                     {
-                        mnuPublishToWeb.Text = "Publish Form to Web";
+                        mnuPublishToWeb.Text = SharedStrings.WEBFORM_MENU_PUB_WEB;
                         mnuPublishToWeb.Enabled = true;
                         toWebSurveyToolStripMenuItem.Enabled = false;
                         EIWSToolStripMenuItem.Enabled = false;
@@ -3162,7 +3162,7 @@ namespace Epi.Windows.MakeView.Forms
                         if (CheckforRepublishWebEnterMenuItem())
                         {
 
-                            toolStripPublishToWebEnter.Text = "Republish Form to Web Enter";
+                            toolStripPublishToWebEnter.Text = SharedStrings.WEBFORM_MENU_REPUB_WEBENTER;
                             // toolStripPublishToWebEnter.Enabled = true;
                             if (pView.IsRelatedView == true)
                             {
@@ -3180,7 +3180,7 @@ namespace Epi.Windows.MakeView.Forms
                         else
                         {
 
-                            toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
+                            toolStripPublishToWebEnter.Text = SharedStrings.WEBFORM_MENU_PUB_WEBENTER;
                             // toolStripPublishToWebEnter.Enabled = true;
                             toWebEnterToolStripMenuItem.Enabled = false;
                             EWEToolStripMenuItem.Enabled = false;
@@ -3194,9 +3194,9 @@ namespace Epi.Windows.MakeView.Forms
                 }
                 else
                 {
-                    mnuPublishToWeb.Text = "Publish Form to Web";
+                    mnuPublishToWeb.Text = SharedStrings.WEBFORM_MENU_PUB_WEB;
                     mnuPublishToWeb.Enabled = true;
-                    toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
+                    toolStripPublishToWebEnter.Text = SharedStrings.WEBFORM_MENU_PUB_WEBENTER;
                     if (pView.IsRelatedView == true)
                         toolStripPublishToWebEnter.Enabled = false;
                     else
@@ -3207,9 +3207,9 @@ namespace Epi.Windows.MakeView.Forms
             }
             catch(Exception ex)
             {
-                    mnuPublishToWeb.Text = "Publish Form to Web";
+                    mnuPublishToWeb.Text = SharedStrings.WEBFORM_MENU_PUB_WEB;
                     mnuPublishToWeb.Enabled = true;
-                    toolStripPublishToWebEnter.Text = "Publish Form to Web Enter";
+                    toolStripPublishToWebEnter.Text = SharedStrings.WEBFORM_MENU_PUB_WEBENTER;
                     toolStripPublishToWebEnter.Enabled = true;
                     QuickPublishtoolStripButton.Enabled = false;
                     ChangeModetoolStripDropDownButton.Enabled = false;
@@ -3374,7 +3374,7 @@ namespace Epi.Windows.MakeView.Forms
                 switch (IsValidOKey)
                     {
                         case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No:
-                        OrgKey NewDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                        OrgKey NewDialog = new OrgKey(this.CurrentView.WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                         DialogResult result = NewDialog.ShowDialog();
                         if (result == System.Windows.Forms.DialogResult.OK)
                             {
@@ -3391,7 +3391,7 @@ namespace Epi.Windows.MakeView.Forms
                         DialogResult result1 = dialog1.ShowDialog();
                         if (result1 == System.Windows.Forms.DialogResult.OK)
                             {
-                            OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                             DialogResult result2 = OrgKeyDialog.ShowDialog();
                             if (result2 == System.Windows.Forms.DialogResult.OK)
                                 {
@@ -3409,7 +3409,7 @@ namespace Epi.Windows.MakeView.Forms
                         DialogResult result3 = dialog2.ShowDialog();
                         if (result3 == System.Windows.Forms.DialogResult.OK)
                             {
-                            OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                             DialogResult result4 = OrgKeyDialog.ShowDialog();
                             if (result4 == System.Windows.Forms.DialogResult.OK)
                                 {
@@ -3518,7 +3518,7 @@ namespace Epi.Windows.MakeView.Forms
              switch (IsValidOKey)
                  {
                      case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.No:
-                        EWEOrgKey NewDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                         EWEOrgKey NewDialog = new EWEOrgKey(WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                         DialogResult result = NewDialog.ShowDialog();
                         if (result == System.Windows.Forms.DialogResult.OK)
                             {
@@ -3535,7 +3535,7 @@ namespace Epi.Windows.MakeView.Forms
                         DialogResult result1 = dialog1.ShowDialog();
                         if (result1 == System.Windows.Forms.DialogResult.OK)
                             {
-                            EWEOrgKey OrgKeyDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                EWEOrgKey OrgKeyDialog = new EWEOrgKey(WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                             DialogResult result2 = OrgKeyDialog.ShowDialog();
                             if (result2 == System.Windows.Forms.DialogResult.OK)
                                 {
@@ -3553,7 +3553,7 @@ namespace Epi.Windows.MakeView.Forms
                         DialogResult result3 = dialog2.ShowDialog();
                         if (result3 == System.Windows.Forms.DialogResult.OK)
                             {
-                            EWEOrgKey OrgKeyDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                EWEOrgKey OrgKeyDialog = new EWEOrgKey(WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                             DialogResult result4 = OrgKeyDialog.ShowDialog();
                             if (result4 == System.Windows.Forms.DialogResult.OK)
                                 {
@@ -4293,7 +4293,7 @@ namespace Epi.Windows.MakeView.Forms
                                 switch (IsValidOKey)
                                 {
                                     case Epi.Core.ServiceClient.EWEServiceClient.IsValidOrganizationKeyEnum.No:
-                                        EWEOrgKey NewDialog = new EWEOrgKey(this.CurrentView.EWEFormId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                        EWEOrgKey NewDialog = new EWEOrgKey(this.CurrentView.EWEFormId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                                         DialogResult result = NewDialog.ShowDialog();
                                         if (result == System.Windows.Forms.DialogResult.OK)
                                         {
@@ -4311,7 +4311,7 @@ namespace Epi.Windows.MakeView.Forms
                                         DialogResult result1 = dialog1.ShowDialog();
                                         if (result1 == System.Windows.Forms.DialogResult.OK)
                                         {
-                                            EWEOrgKey OrgKeyDialog = new EWEOrgKey(this.CurrentView.EWEFormId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                            EWEOrgKey OrgKeyDialog = new EWEOrgKey(this.CurrentView.EWEFormId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                                             DialogResult result2 = OrgKeyDialog.ShowDialog();
                                             if (result2 == System.Windows.Forms.DialogResult.OK)
                                             {
@@ -4330,7 +4330,7 @@ namespace Epi.Windows.MakeView.Forms
                                         DialogResult result3 = dialog2.ShowDialog();
                                         if (result3 == System.Windows.Forms.DialogResult.OK)
                                         {
-                                            EWEOrgKey OrgKeyDialog = new EWEOrgKey(this.CurrentView.EWEFormId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                            EWEOrgKey OrgKeyDialog = new EWEOrgKey(this.CurrentView.EWEFormId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                                             DialogResult result4 = OrgKeyDialog.ShowDialog();
                                             if (result4 == System.Windows.Forms.DialogResult.OK)
                                             {
@@ -4647,7 +4647,7 @@ namespace Epi.Windows.MakeView.Forms
                 switch (IsValidOKey)
                     {
                         case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No:
-                        OrgKey NewDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                            OrgKey NewDialog = new OrgKey(this.CurrentView.WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                         DialogResult result = NewDialog.ShowDialog();
                         if (result == System.Windows.Forms.DialogResult.OK)
                             {
@@ -4664,7 +4664,7 @@ namespace Epi.Windows.MakeView.Forms
                         DialogResult result1 = dialog1.ShowDialog();
                         if (result1 == System.Windows.Forms.DialogResult.OK)
                             {
-                            OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                             DialogResult result2 = OrgKeyDialog.ShowDialog();
                             if (result2 == System.Windows.Forms.DialogResult.OK)
                                 {
@@ -4682,7 +4682,7 @@ namespace Epi.Windows.MakeView.Forms
                         DialogResult result3 = dialog2.ShowDialog();
                         if (result3 == System.Windows.Forms.DialogResult.OK)
                             {
-                            OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                                OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                             DialogResult result4 = OrgKeyDialog.ShowDialog();
                             if (result4 == System.Windows.Forms.DialogResult.OK)
                                 {
@@ -4734,7 +4734,7 @@ namespace Epi.Windows.MakeView.Forms
             }
             else
             {
-                EWEOrgKey NewDialog = new EWEOrgKey(WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can republish this survey.");
+                EWEOrgKey NewDialog = new EWEOrgKey(WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
                 DialogResult result = NewDialog.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {

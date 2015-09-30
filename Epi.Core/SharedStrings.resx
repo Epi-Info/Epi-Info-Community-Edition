@@ -2993,4 +2993,22 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="IMPORT_ERROR_WE_EXCEEDS_LENGTH" xml:space="preserve">
     <value>Field data exceeds 255 characters and has been shortened for the following field and record:</value>
   </data>
+  <data name="WEBFORM_MENU_PUB_WEB" xml:space="preserve">
+    <value>Publish Form to Web</value>
+  </data>
+  <data name="WEBFORM_MENU_PUB_WEBENTER" xml:space="preserve">
+    <value>Publish Form to Web Enter</value>
+  </data>
+  <data name="WEBFORM_MENU_REPUB_WEB" xml:space="preserve">
+    <value>Republish Form to Web</value>
+  </data>
+  <data name="WEBFORM_MENU_REPUB_WEBENTER" xml:space="preserve">
+    <value>Republish Form to Web Enter</value>
+  </data>
+  <data name="WEBFORM_ORG_KEY_REPUBLISH" xml:space="preserve">
+    <value>The organization key is required for security purposes before you can republish this survey.</value>
+  </data>
+  <data name="WEBFORM_ORG_KEY_SUCCESSFUL" xml:space="preserve">
+    <value>The organization key has been successfully submitted!</value>
+  </data>
 </root>

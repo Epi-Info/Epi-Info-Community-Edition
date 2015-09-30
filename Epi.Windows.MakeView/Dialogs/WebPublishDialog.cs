@@ -826,10 +826,7 @@ namespace Epi.Windows.MakeView.Dialogs
                     this.StartDateDatePicker.Visible = false;
                     this.StartTimecomboBox.Visible = false;
                     this.StartTimelabel.Visible = false;
-                    this.OrganizationKeyLinkLabel.Visible = false;
-                    this.OrganizationKeyValueLabel.Visible = false;
                     this.WebSurveyOptionsLinkLabel.Visible = false;
-                    this.DividerLabel.Visible = false;
                     this.btnPublishForm.Enabled = true;
 
                     lblPublishModeStatus.Visible = false;
@@ -1306,15 +1303,6 @@ namespace Epi.Windows.MakeView.Dialogs
         private void grpExitText_Enter(object sender, EventArgs e)
         {
 
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-           // OrgKey OK = new OrgKey();
-            //OK.Show();
-            OrgKey NewDialog = new OrgKey(this.view.WebSurveyId, false, "The organization key has been successfully submitted!", "The organization key is required for security purposes before you can change the survey mode.");
-            DialogResult result = NewDialog.ShowDialog();
-           
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
