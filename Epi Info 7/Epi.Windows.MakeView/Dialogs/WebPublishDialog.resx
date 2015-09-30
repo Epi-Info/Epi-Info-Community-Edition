@@ -122,10 +122,10 @@
     <value>Calibri, 9.75pt</value>
   </data>
   <data name="dtpSurveyClosingDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>370, 347</value>
+    <value>409, 385</value>
   </data>
   <data name="dtpSurveyClosingDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 23</value>
+    <value>251, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dtpSurveyClosingDate.TabIndex" type="System.Int32, mscorlib">
@@ -141,19 +141,19 @@
     <value>tabIntro</value>
   </data>
   <data name="&gt;&gt;dtpSurveyClosingDate.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="txtDepartment.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="txtDepartment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>638, 6</value>
+    <value>582, 27</value>
   </data>
   <data name="txtDepartment.MaxLength" type="System.Int32, mscorlib">
     <value>500</value>
   </data>
   <data name="txtDepartment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 23</value>
+    <value>269, 23</value>
   </data>
   <data name="txtDepartment.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -174,7 +174,7 @@
     <value>Calibri, 12pt</value>
   </data>
   <data name="txtIntroductionText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 132</value>
+    <value>14, 170</value>
   </data>
   <data name="txtIntroductionText.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -232,13 +232,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="txtOrganization.Location" type="System.Drawing.Point, System.Drawing">
-    <value>365, 6</value>
+    <value>295, 27</value>
   </data>
   <data name="txtOrganization.MaxLength" type="System.Int32, mscorlib">
     <value>500</value>
   </data>
   <data name="txtOrganization.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 23</value>
+    <value>269, 23</value>
   </data>
   <data name="txtOrganization.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -259,13 +259,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="txtSurveyID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 57</value>
+    <value>9, 27</value>
   </data>
   <data name="txtSurveyID.MaxLength" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
   <data name="txtSurveyID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 23</value>
+    <value>269, 23</value>
   </data>
   <data name="txtSurveyID.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -277,10 +277,10 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtSurveyID.Parent" xml:space="preserve">
-    <value>tabIntro</value>
+    <value>pnlSurvNumOrgDept</value>
   </data>
   <data name="&gt;&gt;txtSurveyID.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>5</value>
   </data>
   <data name="txtSurveyName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 15.75pt, style=Bold</value>
@@ -316,10 +316,10 @@
     <value>NoControl</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>797, 485</value>
+    <value>761, 516</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>111, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -337,7 +337,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>5</value>
   </data>
   <data name="btnPrevious.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -349,10 +349,10 @@
     <value>NoControl</value>
   </data>
   <data name="btnPrevious.Location" type="System.Drawing.Point, System.Drawing">
-    <value>563, 485</value>
+    <value>530, 516</value>
   </data>
   <data name="btnPrevious.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>108, 23</value>
   </data>
   <data name="btnPrevious.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -370,10 +370,70 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnPrevious.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>4</value>
   </data>
-  <data name="tabPublishWebForm.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <data name="&gt;&gt;tabIntro.Name" xml:space="preserve">
+    <value>tabIntro</value>
+  </data>
+  <data name="&gt;&gt;tabIntro.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabIntro.Parent" xml:space="preserve">
+    <value>tabPublishWebForm</value>
+  </data>
+  <data name="&gt;&gt;tabIntro.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabExit.Name" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;tabExit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabExit.Parent" xml:space="preserve">
+    <value>tabPublishWebForm</value>
+  </data>
+  <data name="&gt;&gt;tabExit.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tabEntry.Name" xml:space="preserve">
+    <value>tabEntry</value>
+  </data>
+  <data name="&gt;&gt;tabEntry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabEntry.Parent" xml:space="preserve">
+    <value>tabPublishWebForm</value>
+  </data>
+  <data name="&gt;&gt;tabEntry.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tabPublishWebForm.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="tabPublishWebForm.ItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>119, 24</value>
+  </data>
+  <data name="tabPublishWebForm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 55</value>
+  </data>
+  <data name="tabPublishWebForm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>866, 455</value>
+  </data>
+  <data name="tabPublishWebForm.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabPublishWebForm.Name" xml:space="preserve">
+    <value>tabPublishWebForm</value>
+  </data>
+  <data name="&gt;&gt;tabPublishWebForm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPublishWebForm.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabPublishWebForm.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="tabIntro.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -496,7 +556,7 @@
     <value>tabIntro</value>
   </data>
   <data name="&gt;&gt;pnlSurvNumOrgDept.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="tabIntro.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 28</value>
@@ -505,7 +565,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabIntro.Size" type="System.Drawing.Size, System.Drawing">
-    <value>858, 392</value>
+    <value>858, 423</value>
   </data>
   <data name="tabIntro.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -524,6 +584,402 @@
   </data>
   <data name="&gt;&gt;tabIntro.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ClosingTimecomboBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="ClosingTimecomboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 385</value>
+  </data>
+  <data name="ClosingTimecomboBox.MaxLength" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="ClosingTimecomboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 23</value>
+  </data>
+  <data name="ClosingTimecomboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ClosingTimecomboBox.Name" xml:space="preserve">
+    <value>ClosingTimecomboBox</value>
+  </data>
+  <data name="&gt;&gt;ClosingTimecomboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ClosingTimecomboBox.Parent" xml:space="preserve">
+    <value>tabIntro</value>
+  </data>
+  <data name="&gt;&gt;ClosingTimecomboBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="closingTimelabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="closingTimelabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>668, 362</value>
+  </data>
+  <data name="closingTimelabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 15</value>
+  </data>
+  <data name="closingTimelabel.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="closingTimelabel.Text" xml:space="preserve">
+    <value>Closing Time</value>
+  </data>
+  <data name="&gt;&gt;closingTimelabel.Name" xml:space="preserve">
+    <value>closingTimelabel</value>
+  </data>
+  <data name="&gt;&gt;closingTimelabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;closingTimelabel.Parent" xml:space="preserve">
+    <value>tabIntro</value>
+  </data>
+  <data name="&gt;&gt;closingTimelabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="StartTimelabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="StartTimelabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>277, 362</value>
+  </data>
+  <data name="StartTimelabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 15</value>
+  </data>
+  <data name="StartTimelabel.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="StartTimelabel.Text" xml:space="preserve">
+    <value>Start Time</value>
+  </data>
+  <data name="&gt;&gt;StartTimelabel.Name" xml:space="preserve">
+    <value>StartTimelabel</value>
+  </data>
+  <data name="&gt;&gt;StartTimelabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;StartTimelabel.Parent" xml:space="preserve">
+    <value>tabIntro</value>
+  </data>
+  <data name="&gt;&gt;StartTimelabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="StartTimecomboBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="StartTimecomboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>280, 385</value>
+  </data>
+  <data name="StartTimecomboBox.MaxLength" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="StartTimecomboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 23</value>
+  </data>
+  <data name="StartTimecomboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;StartTimecomboBox.Name" xml:space="preserve">
+    <value>StartTimecomboBox</value>
+  </data>
+  <data name="&gt;&gt;StartTimecomboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;StartTimecomboBox.Parent" xml:space="preserve">
+    <value>tabIntro</value>
+  </data>
+  <data name="&gt;&gt;StartTimecomboBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="StartDateDatePicker.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Calibri, 9.75pt</value>
+  </data>
+  <data name="StartDateDatePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 385</value>
+  </data>
+  <data name="StartDateDatePicker.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 23</value>
+  </data>
+  <data name="StartDateDatePicker.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;StartDateDatePicker.Name" xml:space="preserve">
+    <value>StartDateDatePicker</value>
+  </data>
+  <data name="&gt;&gt;StartDateDatePicker.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;StartDateDatePicker.Parent" xml:space="preserve">
+    <value>tabIntro</value>
+  </data>
+  <data name="&gt;&gt;StartDateDatePicker.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblSurveyStartDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblSurveyStartDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSurveyStartDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 362</value>
+  </data>
+  <data name="lblSurveyStartDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 20</value>
+  </data>
+  <data name="lblSurveyStartDate.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="lblSurveyStartDate.Text" xml:space="preserve">
+    <value>Survey Start Date</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyStartDate.Name" xml:space="preserve">
+    <value>lblSurveyStartDate</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyStartDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyStartDate.Parent" xml:space="preserve">
+    <value>tabIntro</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyStartDate.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblWelcome.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblWelcome.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 14.25pt, style=Bold</value>
+  </data>
+  <data name="lblWelcome.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblWelcome.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 128</value>
+  </data>
+  <data name="lblWelcome.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 25</value>
+  </data>
+  <data name="lblWelcome.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="lblWelcome.Text" xml:space="preserve">
+    <value>Welcome!</value>
+  </data>
+  <data name="&gt;&gt;lblWelcome.Name" xml:space="preserve">
+    <value>lblWelcome</value>
+  </data>
+  <data name="&gt;&gt;lblWelcome.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblWelcome.Parent" xml:space="preserve">
+    <value>tabIntro</value>
+  </data>
+  <data name="&gt;&gt;lblWelcome.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="pnlSurveyName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-1, 4</value>
+  </data>
+  <data name="pnlSurveyName.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 4, 0, 0</value>
+  </data>
+  <data name="pnlSurveyName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>859, 47</value>
+  </data>
+  <data name="pnlSurveyName.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pnlSurveyName.Name" xml:space="preserve">
+    <value>pnlSurveyName</value>
+  </data>
+  <data name="&gt;&gt;pnlSurveyName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlSurveyName.Parent" xml:space="preserve">
+    <value>tabIntro</value>
+  </data>
+  <data name="&gt;&gt;pnlSurveyName.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblClosingDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblClosingDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblClosingDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>406, 362</value>
+  </data>
+  <data name="lblClosingDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 23</value>
+  </data>
+  <data name="lblClosingDate.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="lblClosingDate.Text" xml:space="preserve">
+    <value>Survey Closing Date</value>
+  </data>
+  <data name="&gt;&gt;lblClosingDate.Name" xml:space="preserve">
+    <value>lblClosingDate</value>
+  </data>
+  <data name="&gt;&gt;lblClosingDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblClosingDate.Parent" xml:space="preserve">
+    <value>tabIntro</value>
+  </data>
+  <data name="&gt;&gt;lblClosingDate.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lblOrganization.Name" xml:space="preserve">
+    <value>lblOrganization</value>
+  </data>
+  <data name="&gt;&gt;lblOrganization.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOrganization.Parent" xml:space="preserve">
+    <value>pnlSurvNumOrgDept</value>
+  </data>
+  <data name="&gt;&gt;lblOrganization.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNum.Name" xml:space="preserve">
+    <value>lblSurvNum</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNum.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNum.Parent" xml:space="preserve">
+    <value>pnlSurvNumOrgDept</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNum.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblDepartment.Name" xml:space="preserve">
+    <value>lblDepartment</value>
+  </data>
+  <data name="&gt;&gt;lblDepartment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDepartment.Parent" xml:space="preserve">
+    <value>pnlSurvNumOrgDept</value>
+  </data>
+  <data name="&gt;&gt;lblDepartment.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="pnlSurvNumOrgDept.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 52</value>
+  </data>
+  <data name="pnlSurvNumOrgDept.Size" type="System.Drawing.Size, System.Drawing">
+    <value>857, 58</value>
+  </data>
+  <data name="pnlSurvNumOrgDept.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;pnlSurvNumOrgDept.Name" xml:space="preserve">
+    <value>pnlSurvNumOrgDept</value>
+  </data>
+  <data name="&gt;&gt;pnlSurvNumOrgDept.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlSurvNumOrgDept.Parent" xml:space="preserve">
+    <value>tabIntro</value>
+  </data>
+  <data name="&gt;&gt;pnlSurvNumOrgDept.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="lblOrganization.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblOrganization.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblOrganization.Location" type="System.Drawing.Point, System.Drawing">
+    <value>292, 10</value>
+  </data>
+  <data name="lblOrganization.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 14</value>
+  </data>
+  <data name="lblOrganization.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="lblOrganization.Text" xml:space="preserve">
+    <value>Organization:</value>
+  </data>
+  <data name="&gt;&gt;lblOrganization.Name" xml:space="preserve">
+    <value>lblOrganization</value>
+  </data>
+  <data name="&gt;&gt;lblOrganization.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOrganization.Parent" xml:space="preserve">
+    <value>pnlSurvNumOrgDept</value>
+  </data>
+  <data name="&gt;&gt;lblOrganization.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblSurvNum.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblSurvNum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSurvNum.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 9</value>
+  </data>
+  <data name="lblSurvNum.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 16</value>
+  </data>
+  <data name="lblSurvNum.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="lblSurvNum.Text" xml:space="preserve">
+    <value>Survey Number:</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNum.Name" xml:space="preserve">
+    <value>lblSurvNum</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNum.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNum.Parent" xml:space="preserve">
+    <value>pnlSurvNumOrgDept</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNum.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblDepartment.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblDepartment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDepartment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>579, 9</value>
+  </data>
+  <data name="lblDepartment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 16</value>
+  </data>
+  <data name="lblDepartment.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="lblDepartment.Text" xml:space="preserve">
+    <value>Department:</value>
+  </data>
+  <data name="&gt;&gt;lblDepartment.Name" xml:space="preserve">
+    <value>lblDepartment</value>
+  </data>
+  <data name="&gt;&gt;lblDepartment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDepartment.Parent" xml:space="preserve">
+    <value>pnlSurvNumOrgDept</value>
+  </data>
+  <data name="&gt;&gt;lblDepartment.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;rdbSingleResponse.Name" xml:space="preserve">
     <value>rdbSingleResponse</value>
@@ -573,19 +1029,6 @@
   <data name="&gt;&gt;grpExitText.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;txtSurveyIDMirror.Name" xml:space="preserve">
-    <value>txtSurveyIDMirror</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyIDMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyIDMirror.Parent" xml:space="preserve">
-    <value>tabExit</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyIDMirror.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  
   <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
@@ -596,9 +1039,8 @@
     <value>tabExit</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
-  
   <data name="&gt;&gt;pnlSurveyNameMirror.Name" xml:space="preserve">
     <value>pnlSurveyNameMirror</value>
   </data>
@@ -609,7 +1051,7 @@
     <value>tabExit</value>
   </data>
   <data name="&gt;&gt;pnlSurveyNameMirror.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="tabExit.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 28</value>
@@ -618,7 +1060,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabExit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>858, 392</value>
+    <value>858, 423</value>
   </data>
   <data name="tabExit.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -637,6 +1079,471 @@
   </data>
   <data name="&gt;&gt;tabExit.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="rdbSingleResponse.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="rdbSingleResponse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdbSingleResponse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 216</value>
+  </data>
+  <data name="rdbSingleResponse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 27</value>
+  </data>
+  <data name="rdbSingleResponse.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="rdbSingleResponse.Text" xml:space="preserve">
+    <value>One response only</value>
+  </data>
+  <data name="&gt;&gt;rdbSingleResponse.Name" xml:space="preserve">
+    <value>rdbSingleResponse</value>
+  </data>
+  <data name="&gt;&gt;rdbSingleResponse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbSingleResponse.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;rdbSingleResponse.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblSurveyType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblSurveyType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSurveyType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 198</value>
+  </data>
+  <data name="lblSurveyType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 25</value>
+  </data>
+  <data name="lblSurveyType.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="lblSurveyType.Text" xml:space="preserve">
+    <value>Can a person submit a completed survey response only once or many times?</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyType.Name" xml:space="preserve">
+    <value>lblSurveyType</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyType.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;lblSurveyType.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdbMultipleResponse.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="rdbMultipleResponse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdbMultipleResponse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 216</value>
+  </data>
+  <data name="rdbMultipleResponse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 27</value>
+  </data>
+  <data name="rdbMultipleResponse.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="rdbMultipleResponse.Text" xml:space="preserve">
+    <value>Many responses allowed</value>
+  </data>
+  <data name="&gt;&gt;rdbMultipleResponse.Name" xml:space="preserve">
+    <value>rdbMultipleResponse</value>
+  </data>
+  <data name="&gt;&gt;rdbMultipleResponse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbMultipleResponse.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;rdbMultipleResponse.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;picExitCheckmark.Name" xml:space="preserve">
+    <value>picExitCheckmark</value>
+  </data>
+  <data name="&gt;&gt;picExitCheckmark.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picExitCheckmark.Parent" xml:space="preserve">
+    <value>grpExitText</value>
+  </data>
+  <data name="&gt;&gt;picExitCheckmark.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grpExitText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 115</value>
+  </data>
+  <data name="grpExitText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>828, 68</value>
+  </data>
+  <data name="grpExitText.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;grpExitText.Name" xml:space="preserve">
+    <value>grpExitText</value>
+  </data>
+  <data name="&gt;&gt;grpExitText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpExitText.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;grpExitText.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="picExitCheckmark.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="picExitCheckmark.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="picExitCheckmark.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 12</value>
+  </data>
+  <data name="picExitCheckmark.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 50</value>
+  </data>
+  <data name="picExitCheckmark.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;picExitCheckmark.Name" xml:space="preserve">
+    <value>picExitCheckmark</value>
+  </data>
+  <data name="&gt;&gt;picExitCheckmark.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picExitCheckmark.Parent" xml:space="preserve">
+    <value>grpExitText</value>
+  </data>
+  <data name="&gt;&gt;picExitCheckmark.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.Name" xml:space="preserve">
+    <value>lblDepMirr</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.Name" xml:space="preserve">
+    <value>lblOrgMirr</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.Name" xml:space="preserve">
+    <value>lblSurvNumMirr</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.Name" xml:space="preserve">
+    <value>txtOrganizationMirror</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyIDMirror.Name" xml:space="preserve">
+    <value>txtSurveyIDMirror</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyIDMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyIDMirror.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyIDMirror.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.Name" xml:space="preserve">
+    <value>txtDepartmentMirror</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 51</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>857, 58</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblDepMirr.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblDepMirr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDepMirr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>579, 9</value>
+  </data>
+  <data name="lblDepMirr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 16</value>
+  </data>
+  <data name="lblDepMirr.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="lblDepMirr.Text" xml:space="preserve">
+    <value>Department:</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.Name" xml:space="preserve">
+    <value>lblDepMirr</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lblDepMirr.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblOrgMirr.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblOrgMirr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblOrgMirr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>292, 10</value>
+  </data>
+  <data name="lblOrgMirr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 14</value>
+  </data>
+  <data name="lblOrgMirr.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="lblOrgMirr.Text" xml:space="preserve">
+    <value>Organization:</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.Name" xml:space="preserve">
+    <value>lblOrgMirr</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lblOrgMirr.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblSurvNumMirr.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblSurvNumMirr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSurvNumMirr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 9</value>
+  </data>
+  <data name="lblSurvNumMirr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 16</value>
+  </data>
+  <data name="lblSurvNumMirr.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="lblSurvNumMirr.Text" xml:space="preserve">
+    <value>Survey #:</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.Name" xml:space="preserve">
+    <value>lblSurvNumMirr</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;lblSurvNumMirr.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtOrganizationMirror.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="txtOrganizationMirror.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 27</value>
+  </data>
+  <data name="txtOrganizationMirror.Size" type="System.Drawing.Size, System.Drawing">
+    <value>269, 23</value>
+  </data>
+  <data name="txtOrganizationMirror.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.Name" xml:space="preserve">
+    <value>txtOrganizationMirror</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;txtOrganizationMirror.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="txtSurveyIDMirror.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="txtSurveyIDMirror.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 27</value>
+  </data>
+  <data name="txtSurveyIDMirror.Size" type="System.Drawing.Size, System.Drawing">
+    <value>269, 23</value>
+  </data>
+  <data name="txtSurveyIDMirror.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyIDMirror.Name" xml:space="preserve">
+    <value>txtSurveyIDMirror</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyIDMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyIDMirror.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyIDMirror.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="txtDepartmentMirror.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="txtDepartmentMirror.Location" type="System.Drawing.Point, System.Drawing">
+    <value>582, 27</value>
+  </data>
+  <data name="txtDepartmentMirror.Size" type="System.Drawing.Size, System.Drawing">
+    <value>269, 23</value>
+  </data>
+  <data name="txtDepartmentMirror.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.Name" xml:space="preserve">
+    <value>txtDepartmentMirror</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;txtDepartmentMirror.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyNameMirror.Name" xml:space="preserve">
+    <value>txtSurveyNameMirror</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyNameMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyNameMirror.Parent" xml:space="preserve">
+    <value>pnlSurveyNameMirror</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyNameMirror.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pnlSurveyNameMirror.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 3</value>
+  </data>
+  <data name="pnlSurveyNameMirror.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 4, 0, 0</value>
+  </data>
+  <data name="pnlSurveyNameMirror.Size" type="System.Drawing.Size, System.Drawing">
+    <value>859, 48</value>
+  </data>
+  <data name="pnlSurveyNameMirror.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pnlSurveyNameMirror.Name" xml:space="preserve">
+    <value>pnlSurveyNameMirror</value>
+  </data>
+  <data name="&gt;&gt;pnlSurveyNameMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlSurveyNameMirror.Parent" xml:space="preserve">
+    <value>tabExit</value>
+  </data>
+  <data name="&gt;&gt;pnlSurveyNameMirror.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="txtSurveyNameMirror.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 15.75pt, style=Bold</value>
+  </data>
+  <data name="txtSurveyNameMirror.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 7</value>
+  </data>
+  <data name="txtSurveyNameMirror.Size" type="System.Drawing.Size, System.Drawing">
+    <value>824, 35</value>
+  </data>
+  <data name="txtSurveyNameMirror.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyNameMirror.Name" xml:space="preserve">
+    <value>txtSurveyNameMirror</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyNameMirror.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyNameMirror.Parent" xml:space="preserve">
+    <value>pnlSurveyNameMirror</value>
+  </data>
+  <data name="&gt;&gt;txtSurveyNameMirror.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;progressBar.Name" xml:space="preserve">
     <value>progressBar</value>
@@ -729,7 +1636,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>858, 392</value>
+    <value>858, 423</value>
   </data>
   <data name="tabEntry.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -748,1194 +1655,6 @@
   </data>
   <data name="&gt;&gt;tabEntry.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="tabPublishWebForm.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="tabPublishWebForm.ItemSize" type="System.Drawing.Size, System.Drawing">
-    <value>119, 24</value>
-  </data>
-  <data name="tabPublishWebForm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 55</value>
-  </data>
-  <data name="tabPublishWebForm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>866, 424</value>
-  </data>
-  <data name="tabPublishWebForm.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tabPublishWebForm.Name" xml:space="preserve">
-    <value>tabPublishWebForm</value>
-  </data>
-  <data name="&gt;&gt;tabPublishWebForm.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPublishWebForm.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabPublishWebForm.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="ClosingTimecomboBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items" xml:space="preserve">
-    <value>12:00AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items1" xml:space="preserve">
-    <value>12:30AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items2" xml:space="preserve">
-    <value>01:00AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items3" xml:space="preserve">
-    <value>01:30AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items4" xml:space="preserve">
-    <value>02:00AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items5" xml:space="preserve">
-    <value>02:30AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items6" xml:space="preserve">
-    <value>03:00AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items7" xml:space="preserve">
-    <value>03:30AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items8" xml:space="preserve">
-    <value>04:00AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items9" xml:space="preserve">
-    <value>04:30AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items10" xml:space="preserve">
-    <value>05:00AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items11" xml:space="preserve">
-    <value>05:30AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items12" xml:space="preserve">
-    <value>06:00AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items13" xml:space="preserve">
-    <value>06:30AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items14" xml:space="preserve">
-    <value>07:00AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items15" xml:space="preserve">
-    <value>07:30AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items16" xml:space="preserve">
-    <value>08:00AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items17" xml:space="preserve">
-    <value>08:30AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items18" xml:space="preserve">
-    <value>09:00AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items19" xml:space="preserve">
-    <value>09:30AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items20" xml:space="preserve">
-    <value>10:00AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items21" xml:space="preserve">
-    <value>10:30AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items22" xml:space="preserve">
-    <value>11:00AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items23" xml:space="preserve">
-    <value>11:30AM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items24" xml:space="preserve">
-    <value>12:00PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items25" xml:space="preserve">
-    <value>12:30PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items26" xml:space="preserve">
-    <value>01:00PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items27" xml:space="preserve">
-    <value>01:30PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items28" xml:space="preserve">
-    <value>02:00PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items29" xml:space="preserve">
-    <value>02:30PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items30" xml:space="preserve">
-    <value>03:00PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items31" xml:space="preserve">
-    <value>03:30PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items32" xml:space="preserve">
-    <value>04:00PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items33" xml:space="preserve">
-    <value>04:30PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items34" xml:space="preserve">
-    <value>05:00PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items35" xml:space="preserve">
-    <value>05:30PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items36" xml:space="preserve">
-    <value>06:00PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items37" xml:space="preserve">
-    <value>06:30PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items38" xml:space="preserve">
-    <value>07:00PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items39" xml:space="preserve">
-    <value>07:30PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items40" xml:space="preserve">
-    <value>08:00PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items41" xml:space="preserve">
-    <value>08:30PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items42" xml:space="preserve">
-    <value>09:00PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items43" xml:space="preserve">
-    <value>09:30PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items44" xml:space="preserve">
-    <value>10:00PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items45" xml:space="preserve">
-    <value>10:30PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items46" xml:space="preserve">
-    <value>11:00PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Items47" xml:space="preserve">
-    <value>11:30PM</value>
-  </data>
-  <data name="ClosingTimecomboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>593, 347</value>
-  </data>
-  <data name="ClosingTimecomboBox.MaxLength" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="ClosingTimecomboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 23</value>
-  </data>
-  <data name="ClosingTimecomboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ClosingTimecomboBox.Name" xml:space="preserve">
-    <value>ClosingTimecomboBox</value>
-  </data>
-  <data name="&gt;&gt;ClosingTimecomboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ClosingTimecomboBox.Parent" xml:space="preserve">
-    <value>tabIntro</value>
-  </data>
-  <data name="&gt;&gt;ClosingTimecomboBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="closingTimelabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="closingTimelabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="closingTimelabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>590, 324</value>
-  </data>
-  <data name="closingTimelabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 15</value>
-  </data>
-  <data name="closingTimelabel.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
-  <data name="closingTimelabel.Text" xml:space="preserve">
-    <value>Closing Time</value>
-  </data>
-  <data name="&gt;&gt;closingTimelabel.Name" xml:space="preserve">
-    <value>closingTimelabel</value>
-  </data>
-  <data name="&gt;&gt;closingTimelabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;closingTimelabel.Parent" xml:space="preserve">
-    <value>tabIntro</value>
-  </data>
-  <data name="&gt;&gt;closingTimelabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="StartTimelabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="StartTimelabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="StartTimelabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 324</value>
-  </data>
-  <data name="StartTimelabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 15</value>
-  </data>
-  <data name="StartTimelabel.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="StartTimelabel.Text" xml:space="preserve">
-    <value>Start Time</value>
-  </data>
-  <data name="&gt;&gt;StartTimelabel.Name" xml:space="preserve">
-    <value>StartTimelabel</value>
-  </data>
-  <data name="&gt;&gt;StartTimelabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;StartTimelabel.Parent" xml:space="preserve">
-    <value>tabIntro</value>
-  </data>
-  <data name="&gt;&gt;StartTimelabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="StartTimecomboBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="StartTimecomboBox.Items" xml:space="preserve">
-    <value>12:00AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items1" xml:space="preserve">
-    <value>12:30AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items2" xml:space="preserve">
-    <value>01:00AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items3" xml:space="preserve">
-    <value>01:30AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items4" xml:space="preserve">
-    <value>02:00AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items5" xml:space="preserve">
-    <value>02:30AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items6" xml:space="preserve">
-    <value>03:00AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items7" xml:space="preserve">
-    <value>03:30AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items8" xml:space="preserve">
-    <value>04:00AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items9" xml:space="preserve">
-    <value>04:30AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items10" xml:space="preserve">
-    <value>05:00AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items11" xml:space="preserve">
-    <value>05:30AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items12" xml:space="preserve">
-    <value>06:00AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items13" xml:space="preserve">
-    <value>06:30AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items14" xml:space="preserve">
-    <value>07:00AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items15" xml:space="preserve">
-    <value>07:30AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items16" xml:space="preserve">
-    <value>08:00AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items17" xml:space="preserve">
-    <value>08:30AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items18" xml:space="preserve">
-    <value>09:00AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items19" xml:space="preserve">
-    <value>09:30AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items20" xml:space="preserve">
-    <value>10:00AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items21" xml:space="preserve">
-    <value>10:30AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items22" xml:space="preserve">
-    <value>11:00AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items23" xml:space="preserve">
-    <value>11:30AM</value>
-  </data>
-  <data name="StartTimecomboBox.Items24" xml:space="preserve">
-    <value>12:00PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items25" xml:space="preserve">
-    <value>12:30PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items26" xml:space="preserve">
-    <value>01:00PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items27" xml:space="preserve">
-    <value>01:30PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items28" xml:space="preserve">
-    <value>02:00PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items29" xml:space="preserve">
-    <value>02:30PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items30" xml:space="preserve">
-    <value>03:00PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items31" xml:space="preserve">
-    <value>03:30PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items32" xml:space="preserve">
-    <value>04:00PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items33" xml:space="preserve">
-    <value>04:30PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items34" xml:space="preserve">
-    <value>05:00PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items35" xml:space="preserve">
-    <value>05:30PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items36" xml:space="preserve">
-    <value>06:00PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items37" xml:space="preserve">
-    <value>06:30PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items38" xml:space="preserve">
-    <value>07:00PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items39" xml:space="preserve">
-    <value>07:30PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items40" xml:space="preserve">
-    <value>08:00PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items41" xml:space="preserve">
-    <value>08:30PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items42" xml:space="preserve">
-    <value>09:00PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items43" xml:space="preserve">
-    <value>09:30PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items44" xml:space="preserve">
-    <value>10:00PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items45" xml:space="preserve">
-    <value>10:30PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items46" xml:space="preserve">
-    <value>11:00PM</value>
-  </data>
-  <data name="StartTimecomboBox.Items47" xml:space="preserve">
-    <value>11:30PM</value>
-  </data>
-  <data name="StartTimecomboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 347</value>
-  </data>
-  <data name="StartTimecomboBox.MaxLength" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="StartTimecomboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 23</value>
-  </data>
-  <data name="StartTimecomboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;StartTimecomboBox.Name" xml:space="preserve">
-    <value>StartTimecomboBox</value>
-  </data>
-  <data name="&gt;&gt;StartTimecomboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;StartTimecomboBox.Parent" xml:space="preserve">
-    <value>tabIntro</value>
-  </data>
-  <data name="&gt;&gt;StartTimecomboBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="StartDateDatePicker.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Calibri, 9.75pt</value>
-  </data>
-  <data name="StartDateDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 347</value>
-  </data>
-  <data name="StartDateDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 23</value>
-  </data>
-  <data name="StartDateDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;StartDateDatePicker.Name" xml:space="preserve">
-    <value>StartDateDatePicker</value>
-  </data>
-  <data name="&gt;&gt;StartDateDatePicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;StartDateDatePicker.Parent" xml:space="preserve">
-    <value>tabIntro</value>
-  </data>
-  <data name="&gt;&gt;StartDateDatePicker.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lblSurveyStartDate.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblSurveyStartDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSurveyStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 324</value>
-  </data>
-  <data name="lblSurveyStartDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
-  </data>
-  <data name="lblSurveyStartDate.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="lblSurveyStartDate.Text" xml:space="preserve">
-    <value>Survey Start Date</value>
-  </data>
-  <data name="&gt;&gt;lblSurveyStartDate.Name" xml:space="preserve">
-    <value>lblSurveyStartDate</value>
-  </data>
-  <data name="&gt;&gt;lblSurveyStartDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSurveyStartDate.Parent" xml:space="preserve">
-    <value>tabIntro</value>
-  </data>
-  <data name="&gt;&gt;lblSurveyStartDate.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="lblWelcome.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblWelcome.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 14.25pt, style=Bold</value>
-  </data>
-  <data name="lblWelcome.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblWelcome.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 90</value>
-  </data>
-  <data name="lblWelcome.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 25</value>
-  </data>
-  <data name="lblWelcome.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="lblWelcome.Text" xml:space="preserve">
-    <value>Welcome!</value>
-  </data>
-  <data name="&gt;&gt;lblWelcome.Name" xml:space="preserve">
-    <value>lblWelcome</value>
-  </data>
-  <data name="&gt;&gt;lblWelcome.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblWelcome.Parent" xml:space="preserve">
-    <value>tabIntro</value>
-  </data>
-  <data name="&gt;&gt;lblWelcome.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="pnlSurveyName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-1, 4</value>
-  </data>
-  <data name="pnlSurveyName.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 4, 0, 0</value>
-  </data>
-  <data name="pnlSurveyName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>859, 47</value>
-  </data>
-  <data name="pnlSurveyName.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pnlSurveyName.Name" xml:space="preserve">
-    <value>pnlSurveyName</value>
-  </data>
-  <data name="&gt;&gt;pnlSurveyName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlSurveyName.Parent" xml:space="preserve">
-    <value>tabIntro</value>
-  </data>
-  <data name="&gt;&gt;pnlSurveyName.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="lblClosingDate.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblClosingDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblClosingDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>367, 324</value>
-  </data>
-  <data name="lblClosingDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 23</value>
-  </data>
-  <data name="lblClosingDate.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="lblClosingDate.Text" xml:space="preserve">
-    <value>Survey Closing Date</value>
-  </data>
-  <data name="&gt;&gt;lblClosingDate.Name" xml:space="preserve">
-    <value>lblClosingDate</value>
-  </data>
-  <data name="&gt;&gt;lblClosingDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblClosingDate.Parent" xml:space="preserve">
-    <value>tabIntro</value>
-  </data>
-  <data name="&gt;&gt;lblClosingDate.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;lblOrganization.Name" xml:space="preserve">
-    <value>lblOrganization</value>
-  </data>
-  <data name="&gt;&gt;lblOrganization.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblOrganization.Parent" xml:space="preserve">
-    <value>pnlSurvNumOrgDept</value>
-  </data>
-  <data name="&gt;&gt;lblOrganization.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNum.Name" xml:space="preserve">
-    <value>lblSurvNum</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNum.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNum.Parent" xml:space="preserve">
-    <value>pnlSurvNumOrgDept</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNum.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lblDepartment.Name" xml:space="preserve">
-    <value>lblDepartment</value>
-  </data>
-  <data name="&gt;&gt;lblDepartment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblDepartment.Parent" xml:space="preserve">
-    <value>pnlSurvNumOrgDept</value>
-  </data>
-  <data name="&gt;&gt;lblDepartment.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="pnlSurvNumOrgDept.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 52</value>
-  </data>
-  <data name="pnlSurvNumOrgDept.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 35</value>
-  </data>
-  <data name="pnlSurvNumOrgDept.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;pnlSurvNumOrgDept.Name" xml:space="preserve">
-    <value>pnlSurvNumOrgDept</value>
-  </data>
-  <data name="&gt;&gt;pnlSurvNumOrgDept.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlSurvNumOrgDept.Parent" xml:space="preserve">
-    <value>tabIntro</value>
-  </data>
-  <data name="&gt;&gt;pnlSurvNumOrgDept.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="lblOrganization.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblOrganization.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblOrganization.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblOrganization.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 10</value>
-  </data>
-  <data name="lblOrganization.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 15</value>
-  </data>
-  <data name="lblOrganization.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="lblOrganization.Text" xml:space="preserve">
-    <value>Organization:</value>
-  </data>
-  <data name="&gt;&gt;lblOrganization.Name" xml:space="preserve">
-    <value>lblOrganization</value>
-  </data>
-  <data name="&gt;&gt;lblOrganization.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblOrganization.Parent" xml:space="preserve">
-    <value>pnlSurvNumOrgDept</value>
-  </data>
-  <data name="&gt;&gt;lblOrganization.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblSurvNum.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSurvNum.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblSurvNum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSurvNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 9</value>
-  </data>
-  <data name="lblSurvNum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 15</value>
-  </data>
-  <data name="lblSurvNum.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="lblSurvNum.Text" xml:space="preserve">
-    <value>Survey #:</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNum.Name" xml:space="preserve">
-    <value>lblSurvNum</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNum.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNum.Parent" xml:space="preserve">
-    <value>pnlSurvNumOrgDept</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNum.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblDepartment.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblDepartment.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblDepartment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblDepartment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>553, 9</value>
-  </data>
-  <data name="lblDepartment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 15</value>
-  </data>
-  <data name="lblDepartment.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
-  </data>
-  <data name="lblDepartment.Text" xml:space="preserve">
-    <value>Department:</value>
-  </data>
-  <data name="&gt;&gt;lblDepartment.Name" xml:space="preserve">
-    <value>lblDepartment</value>
-  </data>
-  <data name="&gt;&gt;lblDepartment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblDepartment.Parent" xml:space="preserve">
-    <value>pnlSurvNumOrgDept</value>
-  </data>
-  <data name="&gt;&gt;lblDepartment.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="rdbSingleResponse.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="rdbSingleResponse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdbSingleResponse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 202</value>
-  </data>
-  <data name="rdbSingleResponse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 27</value>
-  </data>
-  <data name="rdbSingleResponse.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="rdbSingleResponse.Text" xml:space="preserve">
-    <value>One response only</value>
-  </data>
-  <data name="&gt;&gt;rdbSingleResponse.Name" xml:space="preserve">
-    <value>rdbSingleResponse</value>
-  </data>
-  <data name="&gt;&gt;rdbSingleResponse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdbSingleResponse.Parent" xml:space="preserve">
-    <value>tabExit</value>
-  </data>
-  <data name="&gt;&gt;rdbSingleResponse.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblSurveyType.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblSurveyType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSurveyType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 184</value>
-  </data>
-  <data name="lblSurveyType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 25</value>
-  </data>
-  <data name="lblSurveyType.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
-  </data>
-  <data name="lblSurveyType.Text" xml:space="preserve">
-    <value>Can a person submit a completed survey response only once or many times?</value>
-  </data>
-  <data name="&gt;&gt;lblSurveyType.Name" xml:space="preserve">
-    <value>lblSurveyType</value>
-  </data>
-  <data name="&gt;&gt;lblSurveyType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSurveyType.Parent" xml:space="preserve">
-    <value>tabExit</value>
-  </data>
-  <data name="&gt;&gt;lblSurveyType.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="rdbMultipleResponse.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="rdbMultipleResponse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdbMultipleResponse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 202</value>
-  </data>
-  <data name="rdbMultipleResponse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 27</value>
-  </data>
-  <data name="rdbMultipleResponse.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="rdbMultipleResponse.Text" xml:space="preserve">
-    <value>Many responses allowed</value>
-  </data>
-  <data name="&gt;&gt;rdbMultipleResponse.Name" xml:space="preserve">
-    <value>rdbMultipleResponse</value>
-  </data>
-  <data name="&gt;&gt;rdbMultipleResponse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdbMultipleResponse.Parent" xml:space="preserve">
-    <value>tabExit</value>
-  </data>
-  <data name="&gt;&gt;rdbMultipleResponse.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;picExitCheckmark.Name" xml:space="preserve">
-    <value>picExitCheckmark</value>
-  </data>
-  <data name="&gt;&gt;picExitCheckmark.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;picExitCheckmark.Parent" xml:space="preserve">
-    <value>grpExitText</value>
-  </data>
-  <data name="&gt;&gt;picExitCheckmark.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="grpExitText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 101</value>
-  </data>
-  <data name="grpExitText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>828, 68</value>
-  </data>
-  <data name="grpExitText.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;grpExitText.Name" xml:space="preserve">
-    <value>grpExitText</value>
-  </data>
-  <data name="&gt;&gt;grpExitText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpExitText.Parent" xml:space="preserve">
-    <value>tabExit</value>
-  </data>
-  <data name="&gt;&gt;grpExitText.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="picExitCheckmark.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="picExitCheckmark.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="picExitCheckmark.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 12</value>
-  </data>
-  <data name="picExitCheckmark.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 50</value>
-  </data>
-  <data name="picExitCheckmark.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;picExitCheckmark.Name" xml:space="preserve">
-    <value>picExitCheckmark</value>
-  </data>
-  <data name="&gt;&gt;picExitCheckmark.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;picExitCheckmark.Parent" xml:space="preserve">
-    <value>grpExitText</value>
-  </data>
-  <data name="&gt;&gt;picExitCheckmark.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="txtSurveyIDMirror.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="txtSurveyIDMirror.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 57</value>
-  </data>
-  <data name="txtSurveyIDMirror.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 23</value>
-  </data>
-  <data name="txtSurveyIDMirror.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyIDMirror.Name" xml:space="preserve">
-    <value>txtSurveyIDMirror</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyIDMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyIDMirror.Parent" xml:space="preserve">
-    <value>tabExit</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyIDMirror.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblDepMirr.Name" xml:space="preserve">
-    <value>lblDepMirr</value>
-  </data>
-  <data name="&gt;&gt;lblDepMirr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblDepMirr.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;lblDepMirr.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblOrgMirr.Name" xml:space="preserve">
-    <value>lblOrgMirr</value>
-  </data>
-  <data name="&gt;&gt;lblOrgMirr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblOrgMirr.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;lblOrgMirr.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNumMirr.Name" xml:space="preserve">
-    <value>lblSurvNumMirr</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNumMirr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNumMirr.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNumMirr.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;txtOrganizationMirror.Name" xml:space="preserve">
-    <value>txtOrganizationMirror</value>
-  </data>
-  <data name="&gt;&gt;txtOrganizationMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtOrganizationMirror.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;txtOrganizationMirror.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txtDepartmentMirror.Name" xml:space="preserve">
-    <value>txtDepartmentMirror</value>
-  </data>
-  <data name="&gt;&gt;txtDepartmentMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtDepartmentMirror.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;txtDepartmentMirror.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 51</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 35</value>
-  </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>tabExit</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="lblDepMirr.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblDepMirr.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblDepMirr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblDepMirr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>567, 9</value>
-  </data>
-  <data name="lblDepMirr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 15</value>
-  </data>
-  <data name="lblDepMirr.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
-  </data>
-  <data name="lblDepMirr.Text" xml:space="preserve">
-    <value>Department:</value>
-  </data>
-  <data name="&gt;&gt;lblDepMirr.Name" xml:space="preserve">
-    <value>lblDepMirr</value>
-  </data>
-  <data name="&gt;&gt;lblDepMirr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblDepMirr.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;lblDepMirr.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblOrgMirr.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblOrgMirr.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblOrgMirr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblOrgMirr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 9</value>
-  </data>
-  <data name="lblOrgMirr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 15</value>
-  </data>
-  <data name="lblOrgMirr.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="lblOrgMirr.Text" xml:space="preserve">
-    <value>Organization:</value>
-  </data>
-  <data name="&gt;&gt;lblOrgMirr.Name" xml:space="preserve">
-    <value>lblOrgMirr</value>
-  </data>
-  <data name="&gt;&gt;lblOrgMirr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblOrgMirr.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;lblOrgMirr.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblSurvNumMirr.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSurvNumMirr.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblSurvNumMirr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSurvNumMirr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 9</value>
-  </data>
-  <data name="lblSurvNumMirr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 15</value>
-  </data>
-  <data name="lblSurvNumMirr.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="lblSurvNumMirr.Text" xml:space="preserve">
-    <value>Survey #:</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNumMirr.Name" xml:space="preserve">
-    <value>lblSurvNumMirr</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNumMirr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNumMirr.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;lblSurvNumMirr.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="txtOrganizationMirror.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="txtOrganizationMirror.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 6</value>
-  </data>
-  <data name="txtOrganizationMirror.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 23</value>
-  </data>
-  <data name="txtOrganizationMirror.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;txtOrganizationMirror.Name" xml:space="preserve">
-    <value>txtOrganizationMirror</value>
-  </data>
-  <data name="&gt;&gt;txtOrganizationMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtOrganizationMirror.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;txtOrganizationMirror.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="txtDepartmentMirror.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="txtDepartmentMirror.Location" type="System.Drawing.Point, System.Drawing">
-    <value>652, 6</value>
-  </data>
-  <data name="txtDepartmentMirror.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 23</value>
-  </data>
-  <data name="txtDepartmentMirror.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txtDepartmentMirror.Name" xml:space="preserve">
-    <value>txtDepartmentMirror</value>
-  </data>
-  <data name="&gt;&gt;txtDepartmentMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtDepartmentMirror.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;txtDepartmentMirror.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyNameMirror.Name" xml:space="preserve">
-    <value>txtSurveyNameMirror</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyNameMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyNameMirror.Parent" xml:space="preserve">
-    <value>pnlSurveyNameMirror</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyNameMirror.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pnlSurveyNameMirror.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 3</value>
-  </data>
-  <data name="pnlSurveyNameMirror.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 4, 0, 0</value>
-  </data>
-  <data name="pnlSurveyNameMirror.Size" type="System.Drawing.Size, System.Drawing">
-    <value>859, 48</value>
-  </data>
-  <data name="pnlSurveyNameMirror.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pnlSurveyNameMirror.Name" xml:space="preserve">
-    <value>pnlSurveyNameMirror</value>
-  </data>
-  <data name="&gt;&gt;pnlSurveyNameMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlSurveyNameMirror.Parent" xml:space="preserve">
-    <value>tabExit</value>
-  </data>
-  <data name="&gt;&gt;pnlSurveyNameMirror.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="txtSurveyNameMirror.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 15.75pt, style=Bold</value>
-  </data>
-  <data name="txtSurveyNameMirror.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 7</value>
-  </data>
-  <data name="txtSurveyNameMirror.Size" type="System.Drawing.Size, System.Drawing">
-    <value>824, 35</value>
-  </data>
-  <data name="txtSurveyNameMirror.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyNameMirror.Name" xml:space="preserve">
-    <value>txtSurveyNameMirror</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyNameMirror.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyNameMirror.Parent" xml:space="preserve">
-    <value>pnlSurveyNameMirror</value>
-  </data>
-  <data name="&gt;&gt;txtSurveyNameMirror.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="progressBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1992,10 +1711,10 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 42</value>
+    <value>121, 14</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 20</value>
+    <value>355, 20</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -2904,16 +2623,19 @@
     <value>NoControl</value>
   </data>
   <data name="lblPublishModeStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 14</value>
+    <value>16, 39</value>
   </data>
   <data name="lblPublishModeStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 17</value>
+    <value>98, 23</value>
   </data>
   <data name="lblPublishModeStatus.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
   </data>
   <data name="lblPublishModeStatus.Text" xml:space="preserve">
     <value>DRAFT</value>
+  </data>
+  <data name="lblPublishModeStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;lblPublishModeStatus.Name" xml:space="preserve">
     <value>lblPublishModeStatus</value>
@@ -3000,10 +2722,10 @@
     <value>NoControl</value>
   </data>
   <data name="btnNext.Location" type="System.Drawing.Point, System.Drawing">
-    <value>680, 485</value>
+    <value>644, 516</value>
   </data>
   <data name="btnNext.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>111, 23</value>
   </data>
   <data name="btnNext.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3021,7 +2743,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnNext.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>3</value>
   </data>
   <data name="lblHeading1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3049,7 +2771,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblHeading1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="lblHeading2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3077,79 +2799,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblHeading2.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="OrganizationKeyLinkLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="OrganizationKeyLinkLabel.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="OrganizationKeyLinkLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="OrganizationKeyLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="OrganizationKeyLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>425, 58</value>
-  </data>
-  <data name="OrganizationKeyLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 15</value>
-  </data>
-  <data name="OrganizationKeyLinkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="OrganizationKeyLinkLabel.Text" xml:space="preserve">
-    <value>Organization Key:</value>
-  </data>
-  <data name="OrganizationKeyLinkLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;OrganizationKeyLinkLabel.Name" xml:space="preserve">
-    <value>OrganizationKeyLinkLabel</value>
-  </data>
-  <data name="&gt;&gt;OrganizationKeyLinkLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OrganizationKeyLinkLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;OrganizationKeyLinkLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="OrganizationKeyValueLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="OrganizationKeyValueLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="OrganizationKeyValueLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 60</value>
-  </data>
-  <data name="OrganizationKeyValueLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 13</value>
-  </data>
-  <data name="OrganizationKeyValueLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="OrganizationKeyValueLabel.Text" xml:space="preserve">
-    <value>dd2889ee-00cd-4d97-9c86-07e7db04d48f</value>
-  </data>
-  <data name="OrganizationKeyValueLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;OrganizationKeyValueLabel.Name" xml:space="preserve">
-    <value>OrganizationKeyValueLabel</value>
-  </data>
-  <data name="&gt;&gt;OrganizationKeyValueLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OrganizationKeyValueLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;OrganizationKeyValueLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="WebSurveyOptionsLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3185,42 +2835,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;WebSurveyOptionsLinkLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="DividerLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="DividerLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="DividerLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="DividerLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>736, 58</value>
-  </data>
-  <data name="DividerLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>11, 15</value>
-  </data>
-  <data name="DividerLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="DividerLabel.Text" xml:space="preserve">
-    <value>|</value>
-  </data>
-  <data name="DividerLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;DividerLabel.Name" xml:space="preserve">
-    <value>DividerLabel</value>
-  </data>
-  <data name="&gt;&gt;DividerLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DividerLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;DividerLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -3233,7 +2847,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>881, 514</value>
+    <value>881, 545</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

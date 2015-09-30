@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebSurveyOptions));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlError = new System.Windows.Forms.Panel();
             this.lblError = new System.Windows.Forms.Label();
@@ -53,42 +54,23 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Controls.Add(this.pnlError);
             this.flowLayoutPanel1.Controls.Add(this.pnlOrgKey);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(732, 268);
-            this.flowLayoutPanel1.TabIndex = 1;
             // 
             // pnlError
             // 
-            this.pnlError.AutoSize = true;
+            resources.ApplyResources(this.pnlError, "pnlError");
             this.pnlError.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.pnlError.Controls.Add(this.lblError);
-            this.pnlError.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlError.Location = new System.Drawing.Point(3, 3);
-            this.pnlError.MinimumSize = new System.Drawing.Size(622, 35);
             this.pnlError.Name = "pnlError";
-            this.pnlError.Padding = new System.Windows.Forms.Padding(9);
-            this.pnlError.Size = new System.Drawing.Size(727, 36);
-            this.pnlError.TabIndex = 4;
-            this.pnlError.Visible = false;
             // 
             // lblError
             // 
-            this.lblError.AutoSize = true;
-            this.lblError.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lblError, "lblError");
             this.lblError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(5)))), ((int)(((byte)(15)))));
-            this.lblError.Location = new System.Drawing.Point(12, 12);
-            this.lblError.Margin = new System.Windows.Forms.Padding(0);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(161, 15);
-            this.lblError.TabIndex = 0;
-            this.lblError.Text = "[Error Message Description]";
             // 
             // pnlOrgKey
             // 
@@ -100,29 +82,20 @@
             this.pnlOrgKey.Controls.Add(this.label1);
             this.pnlOrgKey.Controls.Add(this.label3);
             this.pnlOrgKey.Controls.Add(this.label2);
-            this.pnlOrgKey.Location = new System.Drawing.Point(3, 45);
-            this.pnlOrgKey.MinimumSize = new System.Drawing.Size(622, 0);
+            resources.ApplyResources(this.pnlOrgKey, "pnlOrgKey");
             this.pnlOrgKey.Name = "pnlOrgKey";
-            this.pnlOrgKey.Size = new System.Drawing.Size(727, 216);
-            this.pnlOrgKey.TabIndex = 3;
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(644, 169);
+            resources.ApplyResources(this.CancelButton, "CancelButton");
             this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(80, 32);
-            this.CancelButton.TabIndex = 10;
-            this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // OkButton
             // 
-            this.OkButton.Location = new System.Drawing.Point(504, 169);
+            resources.ApplyResources(this.OkButton, "OkButton");
             this.OkButton.Name = "OkButton";
-            this.OkButton.Size = new System.Drawing.Size(121, 32);
-            this.OkButton.TabIndex = 9;
-            this.OkButton.Text = "Apply Settings";
             this.OkButton.UseVisualStyleBackColor = true;
             this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
@@ -130,132 +103,77 @@
             // 
             this.groupBox2.Controls.Add(this.BasicRadioButton);
             this.groupBox2.Controls.Add(this.WsHTTpRadioButton);
-            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(312, 143);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(153, 58);
-            this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Binding Protocol:";
             // 
             // BasicRadioButton
             // 
-            this.BasicRadioButton.AutoSize = true;
-            this.BasicRadioButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BasicRadioButton.Location = new System.Drawing.Point(9, 28);
+            resources.ApplyResources(this.BasicRadioButton, "BasicRadioButton");
             this.BasicRadioButton.Name = "BasicRadioButton";
-            this.BasicRadioButton.Size = new System.Drawing.Size(52, 19);
-            this.BasicRadioButton.TabIndex = 6;
             this.BasicRadioButton.TabStop = true;
-            this.BasicRadioButton.Text = "basic";
             this.BasicRadioButton.UseVisualStyleBackColor = true;
             // 
             // WsHTTpRadioButton
             // 
-            this.WsHTTpRadioButton.AutoSize = true;
-            this.WsHTTpRadioButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WsHTTpRadioButton.Location = new System.Drawing.Point(67, 28);
+            resources.ApplyResources(this.WsHTTpRadioButton, "WsHTTpRadioButton");
             this.WsHTTpRadioButton.Name = "WsHTTpRadioButton";
-            this.WsHTTpRadioButton.Size = new System.Drawing.Size(69, 19);
-            this.WsHTTpRadioButton.TabIndex = 7;
             this.WsHTTpRadioButton.TabStop = true;
-            this.WsHTTpRadioButton.Text = "wsHTTP";
             this.WsHTTpRadioButton.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.YesRadioButton);
             this.groupBox1.Controls.Add(this.NoRadioButton);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(15, 143);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(291, 58);
-            this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Connect using Windows Authentication?";
             // 
             // YesRadioButton
             // 
-            this.YesRadioButton.AutoSize = true;
-            this.YesRadioButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.YesRadioButton.Location = new System.Drawing.Point(9, 28);
+            resources.ApplyResources(this.YesRadioButton, "YesRadioButton");
             this.YesRadioButton.Name = "YesRadioButton";
-            this.YesRadioButton.Size = new System.Drawing.Size(174, 19);
-            this.YesRadioButton.TabIndex = 6;
             this.YesRadioButton.TabStop = true;
-            this.YesRadioButton.Text = "Yes (requires basic protocol)";
             this.YesRadioButton.UseVisualStyleBackColor = true;
             // 
             // NoRadioButton
             // 
-            this.NoRadioButton.AutoSize = true;
-            this.NoRadioButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NoRadioButton.Location = new System.Drawing.Point(233, 28);
+            resources.ApplyResources(this.NoRadioButton, "NoRadioButton");
             this.NoRadioButton.Name = "NoRadioButton";
-            this.NoRadioButton.Size = new System.Drawing.Size(41, 19);
-            this.NoRadioButton.TabIndex = 7;
             this.NoRadioButton.TabStop = true;
-            this.NoRadioButton.Text = "No";
             this.NoRadioButton.UseVisualStyleBackColor = true;
             // 
             // EndPointTextBox
             // 
-            this.EndPointTextBox.Location = new System.Drawing.Point(15, 86);
-            this.EndPointTextBox.Multiline = true;
+            resources.ApplyResources(this.EndPointTextBox, "EndPointTextBox");
             this.EndPointTextBox.Name = "EndPointTextBox";
-            this.EndPointTextBox.Size = new System.Drawing.Size(709, 51);
-            this.EndPointTextBox.TabIndex = 3;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 41);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(518, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "You can also update this information by clicking the ‘Web Survey’ tab under the T" +
-    "ools > Options.";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 68);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 15);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Endpoint Address:";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 12);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(653, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Please contact your system administrator to provide you with the appropriate sett" +
-    "ings to publish surveys to the web.\u2028";
             // 
             // WebSurveyOptions
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(732, 268);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "WebSurveyOptions";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Web Survey Options";
             this.Load += new System.EventHandler(this.WebSurveyOptions_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.pnlError.ResumeLayout(false);
-            this.pnlError.PerformLayout();
             this.pnlOrgKey.ResumeLayout(false);
             this.pnlOrgKey.PerformLayout();
             this.groupBox2.ResumeLayout(false);

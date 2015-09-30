@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EWEOrgKey));
             this.pnlOrgKey = new System.Windows.Forms.Panel();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.tbOrgKey = new System.Windows.Forms.TextBox();
@@ -62,9 +63,9 @@
             // btnSubmit
             // 
             this.btnSubmit.Enabled = false;
-            this.btnSubmit.Location = new System.Drawing.Point(438, 31);
+            this.btnSubmit.Location = new System.Drawing.Point(438, 53);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(76, 31);
+            this.btnSubmit.Size = new System.Drawing.Size(90, 23);
             this.btnSubmit.TabIndex = 3;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
@@ -72,28 +73,26 @@
             // 
             // tbOrgKey
             // 
-            this.tbOrgKey.Location = new System.Drawing.Point(124, 35);
+            this.tbOrgKey.Location = new System.Drawing.Point(13, 54);
             this.tbOrgKey.Name = "tbOrgKey";
-            this.tbOrgKey.Size = new System.Drawing.Size(308, 23);
+            this.tbOrgKey.Size = new System.Drawing.Size(419, 23);
             this.tbOrgKey.TabIndex = 2;
             this.tbOrgKey.TextChanged += new System.EventHandler(this.tbOrgKey_TextChanged);
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 39);
+            this.label3.Location = new System.Drawing.Point(10, 35);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 15);
+            this.label3.Size = new System.Drawing.Size(422, 16);
             this.label3.TabIndex = 1;
             this.label3.Text = "Organization Key:";
             // 
             // DialogPromptLabel
             // 
-            this.DialogPromptLabel.AutoSize = true;
-            this.DialogPromptLabel.Location = new System.Drawing.Point(10, 10);
+            this.DialogPromptLabel.Location = new System.Drawing.Point(10, 0);
             this.DialogPromptLabel.Name = "DialogPromptLabel";
-            this.DialogPromptLabel.Size = new System.Drawing.Size(504, 15);
+            this.DialogPromptLabel.Size = new System.Drawing.Size(518, 35);
             this.DialogPromptLabel.TabIndex = 0;
             this.DialogPromptLabel.Text = "The organization key is required for security purposes before you publish the for" +
     "m to the web. ";
@@ -133,7 +132,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(545, 212);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(545, 204);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // pnlSuccess
@@ -143,14 +142,14 @@
             this.pnlSuccess.Controls.Add(this.pnlSuccessMsg);
             this.pnlSuccess.Location = new System.Drawing.Point(3, 128);
             this.pnlSuccess.Name = "pnlSuccess";
-            this.pnlSuccess.Size = new System.Drawing.Size(539, 81);
+            this.pnlSuccess.Size = new System.Drawing.Size(539, 73);
             this.pnlSuccess.TabIndex = 5;
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(227, 47);
+            this.btnClose.Location = new System.Drawing.Point(438, 47);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(76, 31);
+            this.btnClose.Size = new System.Drawing.Size(90, 23);
             this.btnClose.TabIndex = 6;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -181,7 +180,7 @@
             this.lblSuccess.TabIndex = 0;
             this.lblSuccess.Text = "[Success Message]";
             // 
-            // OrgKey
+            // EWEOrgKey
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -190,9 +189,10 @@
             this.ClientSize = new System.Drawing.Size(553, 218);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "OrgKey";
+            this.Name = "EWEOrgKey";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Enter Organization Key";
             this.pnlOrgKey.ResumeLayout(false);
