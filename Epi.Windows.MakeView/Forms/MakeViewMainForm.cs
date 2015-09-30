@@ -1047,7 +1047,7 @@ namespace Epi.Windows.MakeView.Forms
                       ChangeModetoolStripDropDownButton.Visible = true;
                       toolStripSeparator10.Visible = true;                     
                     }
-                if (config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress)))
+                else if (config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress)))
                 {
                     QuickPublishtoolStripButton.Visible = true;
                     ChangeModetoolStripDropDownButton.Visible = true;                   
