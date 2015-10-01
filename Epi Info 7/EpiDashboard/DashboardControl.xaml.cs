@@ -285,17 +285,29 @@ namespace EpiDashboard
             //tblockSave.Text = DashboardSharedStrings.MENU_SAVE;
             //tblockSaveAs.Text = DashboardSharedStrings.MENU_SAVE_AS;
 
-            tooltipSave.Text = DashboardSharedStrings.TOOLTIP_MENU_SAVE;
-            //tooltipSaveAs.Text = DashboardSharedStrings.TOOLTIP_MENU_SAVE_AS;
-            tooltipOpen.Text = DashboardSharedStrings.TOOLTIP_MENU_OPEN;
-            tooltipSetDataSource.Text = DashboardSharedStrings.TOOLTIP_MENU_SET_DATA_SOURCE;
-            tooltipRefresh.Text = DashboardSharedStrings.TOOLTIP_MENU_REFRESH;
+            tooltipFile.Text = DashboardSharedStrings.MENU_OPTIONS_TEXT;  //Options Button
+            tooltipFileHeader.Content = DashboardSharedStrings.MENU_OPTIONS;  //Options Button
 
-            tooltipSetDataSourceHeader.Content = DashboardSharedStrings.TOOLTIP_MENU_SET_DATA_SOURCE_HEADER;
-            tooltipOpenHeader.Content = DashboardSharedStrings.TOOLTIP_MENU_OPEN_HEADER;
-            tooltipSaveHeader.Content = DashboardSharedStrings.TOOLTIP_MENU_SAVE_HEADER;
-            //tooltipSaveAsHeader.Content = DashboardSharedStrings.TOOLTIP_MENU_SAVE_AS_HEADER;
-            tooltipRefreshHeader.Content = DashboardSharedStrings.TOOLTIP_MENU_REFRESH_HEADER;
+            tooltipRefresh.Text = DashboardSharedStrings.MENU_REFRESH_TEXT;
+            tooltipRefreshHeader.Content = DashboardSharedStrings.MENU_REFRESH;
+
+            tooltipSetDataSource.Text = DashboardSharedStrings.MENU_SET_DATA_SOURCE_TEXT;
+            tooltipSetDataSourceHeader.Content = DashboardSharedStrings.MENU_SET_DATA_SOURCE;
+
+            tooltipOpen.Text = DashboardSharedStrings.MENU_OPEN_TEXT;
+            tooltipOpenHeader.Content = DashboardSharedStrings.MENU_OPEN;
+
+            tooltipSave.Text = DashboardSharedStrings.MENU_SAVE_TEXT;
+            tooltipSaveHeader.Content = DashboardSharedStrings.MENU_SAVE;
+
+            tooltipSaveAs.Text = DashboardSharedStrings.MENU_SAVE_AS_TEXT;
+            tooltipSaveAsHeader.Content = DashboardSharedStrings.MENU_SAVE_AS;
+
+            tooltipCreateVariableHeader.Content = DashboardSharedStrings.MENU_NEW_VARIABLE_TEXT;
+            tooltipCreateVariable.Text = DashboardSharedStrings.MENU_NEW_VARIABLE;
+
+            tooltipFilter.Text = DashboardSharedStrings.MENU_FILTERS_TEXT;
+            tooltipFilterHeader.Content = DashboardSharedStrings.MENU_FILTERS;
 
             instructionsPanel.DescriptionText = DashboardSharedStrings.INSTRUCTIONS;
 

@@ -3624,11 +3624,47 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Map has been saved..
+        ///   Looks up a localized string similar to Map has been saved..
         /// </summary>
         public static string MAP_SAVED {
             get {
                 return ResourceManager.GetString("MAP_SAVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filters.
+        /// </summary>
+        public static string MENU_FILTERS {
+            get {
+                return ResourceManager.GetString("MENU_FILTERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expands the Dashboard Filters gadget to add or edit filters..
+        /// </summary>
+        public static string MENU_FILTERS_TEXT {
+            get {
+                return ResourceManager.GetString("MENU_FILTERS_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variables.
+        /// </summary>
+        public static string MENU_NEW_VARIABLE {
+            get {
+                return ResourceManager.GetString("MENU_NEW_VARIABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expands the Dashboard Variables gadget to add or edit variables..
+        /// </summary>
+        public static string MENU_NEW_VARIABLE_TEXT {
+            get {
+                return ResourceManager.GetString("MENU_NEW_VARIABLE_TEXT", resourceCulture);
             }
         }
         
@@ -3638,6 +3674,51 @@ namespace EpiDashboard {
         public static string MENU_OPEN {
             get {
                 return ResourceManager.GetString("MENU_OPEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opens an existing Dashboard canvas file..
+        /// </summary>
+        public static string MENU_OPEN_TEXT {
+            get {
+                return ResourceManager.GetString("MENU_OPEN_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string MENU_OPTIONS {
+            get {
+                return ResourceManager.GetString("MENU_OPTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shows a menu of options for the Dashboard application..
+        /// </summary>
+        public static string MENU_OPTIONS_TEXT {
+            get {
+                return ResourceManager.GetString("MENU_OPTIONS_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string MENU_REFRESH {
+            get {
+                return ResourceManager.GetString("MENU_REFRESH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updates and refreshes the current data source..
+        /// </summary>
+        public static string MENU_REFRESH_TEXT {
+            get {
+                return ResourceManager.GetString("MENU_REFRESH_TEXT", resourceCulture);
             }
         }
         
@@ -3660,11 +3741,38 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saves the current Dashboard canvas to a different file..
+        /// </summary>
+        public static string MENU_SAVE_AS_TEXT {
+            get {
+                return ResourceManager.GetString("MENU_SAVE_AS_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saves the current Dashboard canvas..
+        /// </summary>
+        public static string MENU_SAVE_TEXT {
+            get {
+                return ResourceManager.GetString("MENU_SAVE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set Data Source.
         /// </summary>
         public static string MENU_SET_DATA_SOURCE {
             get {
                 return ResourceManager.GetString("MENU_SET_DATA_SOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attaches a data source (Epi Info 7 project, Excel spreadsheet, etc.) to a new, blank Dashboard canvas..
+        /// </summary>
+        public static string MENU_SET_DATA_SOURCE_TEXT {
+            get {
+                return ResourceManager.GetString("MENU_SET_DATA_SOURCE_TEXT", resourceCulture);
             }
         }
         
@@ -3962,96 +4070,6 @@ namespace EpiDashboard {
         public static string TOOLTIP_GADGET_DESC_PANEL {
             get {
                 return ResourceManager.GetString("TOOLTIP_GADGET_DESC_PANEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Opens an existing Dashboard canvas file..
-        /// </summary>
-        public static string TOOLTIP_MENU_OPEN {
-            get {
-                return ResourceManager.GetString("TOOLTIP_MENU_OPEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open Button.
-        /// </summary>
-        public static string TOOLTIP_MENU_OPEN_HEADER {
-            get {
-                return ResourceManager.GetString("TOOLTIP_MENU_OPEN_HEADER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Updates and refreshes the current data source..
-        /// </summary>
-        public static string TOOLTIP_MENU_REFRESH {
-            get {
-                return ResourceManager.GetString("TOOLTIP_MENU_REFRESH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Refresh Button.
-        /// </summary>
-        public static string TOOLTIP_MENU_REFRESH_HEADER {
-            get {
-                return ResourceManager.GetString("TOOLTIP_MENU_REFRESH_HEADER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Saves the current Dashboard canvas..
-        /// </summary>
-        public static string TOOLTIP_MENU_SAVE {
-            get {
-                return ResourceManager.GetString("TOOLTIP_MENU_SAVE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Saves the current Dashboard canvas to a different file..
-        /// </summary>
-        public static string TOOLTIP_MENU_SAVE_AS {
-            get {
-                return ResourceManager.GetString("TOOLTIP_MENU_SAVE_AS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save As Button.
-        /// </summary>
-        public static string TOOLTIP_MENU_SAVE_AS_HEADER {
-            get {
-                return ResourceManager.GetString("TOOLTIP_MENU_SAVE_AS_HEADER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save Button.
-        /// </summary>
-        public static string TOOLTIP_MENU_SAVE_HEADER {
-            get {
-                return ResourceManager.GetString("TOOLTIP_MENU_SAVE_HEADER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Attaches a data source (Epi Info 7 project, Excel spreadsheet, etc.) to a new, blank Dashboard canvas..
-        /// </summary>
-        public static string TOOLTIP_MENU_SET_DATA_SOURCE {
-            get {
-                return ResourceManager.GetString("TOOLTIP_MENU_SET_DATA_SOURCE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Set Data Source Button.
-        /// </summary>
-        public static string TOOLTIP_MENU_SET_DATA_SOURCE_HEADER {
-            get {
-                return ResourceManager.GetString("TOOLTIP_MENU_SET_DATA_SOURCE_HEADER", resourceCulture);
             }
         }
         

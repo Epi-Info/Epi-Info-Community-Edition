@@ -721,35 +721,23 @@ Denominator = {0}</value>
   <data name="TOOLTIP_GADGET_DESC_PANEL" xml:space="preserve">
     <value>Expands the description panel.</value>
   </data>
-  <data name="TOOLTIP_MENU_OPEN" xml:space="preserve">
+  <data name="MENU_OPEN_TEXT" xml:space="preserve">
     <value>Opens an existing Dashboard canvas file.</value>
   </data>
-  <data name="TOOLTIP_MENU_REFRESH" xml:space="preserve">
+  <data name="MENU_REFRESH_TEXT" xml:space="preserve">
     <value>Updates and refreshes the current data source.</value>
   </data>
-  <data name="TOOLTIP_MENU_SAVE" xml:space="preserve">
+  <data name="MENU_SAVE_TEXT" xml:space="preserve">
     <value>Saves the current Dashboard canvas.</value>
   </data>
-  <data name="TOOLTIP_MENU_SAVE_AS" xml:space="preserve">
+  <data name="MENU_SAVE_AS_TEXT" xml:space="preserve">
     <value>Saves the current Dashboard canvas to a different file.</value>
   </data>
-  <data name="TOOLTIP_MENU_SET_DATA_SOURCE" xml:space="preserve">
+  <data name="MENU_SET_DATA_SOURCE_TEXT" xml:space="preserve">
     <value>Attaches a data source (Epi Info 7 project, Excel spreadsheet, etc.) to a new, blank Dashboard canvas.</value>
   </data>
-  <data name="TOOLTIP_MENU_SET_DATA_SOURCE_HEADER" xml:space="preserve">
-    <value>Set Data Source Button</value>
-  </data>
-  <data name="TOOLTIP_MENU_OPEN_HEADER" xml:space="preserve">
-    <value>Open Button</value>
-  </data>
-  <data name="TOOLTIP_MENU_SAVE_HEADER" xml:space="preserve">
-    <value>Save Button</value>
-  </data>
-  <data name="TOOLTIP_MENU_SAVE_AS_HEADER" xml:space="preserve">
-    <value>Save As Button</value>
-  </data>
-  <data name="TOOLTIP_MENU_REFRESH_HEADER" xml:space="preserve">
-    <value>Refresh Button</value>
+  <data name="MENU_REFRESH" xml:space="preserve">
+    <value>Refresh</value>
   </data>
   <data name="ERROR_TOO_MANY_VALUES" xml:space="preserve">
     <value>There are too many distinct values in the variable {0}. The number of distinct
@@ -866,7 +854,7 @@ of records or select fewer fields for the group.</value>
     <value>{0} fields specified in the group were not found and have been excluded.</value>
   </data>
   <data name="MAP_SAVED" xml:space="preserve">
-    <value>"Map has been saved.</value>
+    <value>Map has been saved.</value>
   </data>
   <data name="MAP_IMAGE_SAVED" xml:space="preserve">
     <value>Map image has been saved.</value>
@@ -1515,5 +1503,23 @@ of records or select fewer fields for the group.</value>
   </data>
   <data name="GADGET_VALUE_TEXT" xml:space="preserve">
     <value>Value:</value>
+  </data>
+  <data name="MENU_FILTERS" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="MENU_FILTERS_TEXT" xml:space="preserve">
+    <value>Expands the Dashboard Filters gadget to add or edit filters.</value>
+  </data>
+  <data name="MENU_NEW_VARIABLE" xml:space="preserve">
+    <value>Variables</value>
+  </data>
+  <data name="MENU_NEW_VARIABLE_TEXT" xml:space="preserve">
+    <value>Expands the Dashboard Variables gadget to add or edit variables.</value>
+  </data>
+  <data name="MENU_OPTIONS" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="MENU_OPTIONS_TEXT" xml:space="preserve">
+    <value>Shows a menu of options for the Dashboard application.</value>
   </data>
 </root>
