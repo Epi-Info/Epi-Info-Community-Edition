@@ -158,6 +158,8 @@ Public Class ComplexSampleTables
         Public UCLRD As Nullable(Of Double)
 
         Public ErrorMessage As String
+
+        Public NPQLT5 As Boolean
     End Structure
 
     Public Function ComplexSampleFrequencies(ByVal inputVariableList As Dictionary(Of String, String), ByVal dataTable As DataTable) As CSFrequencyResults
@@ -343,6 +345,10 @@ ErrorHandler:
         'vntResultsArray = ResultsArrayWithTotals()
 
         vntResultsArray = ResultsArray()
+        Dim sw1 As Double
+        sw1 = FirstDom.SumW
+        Dim sw2 As Double
+        sw2 = FirstDom.NextDom.SumW
         Dim vntOutTable(,) As Object
         vntOutTable = ResultsArrayWithTotals()
 
@@ -444,6 +450,18 @@ ErrorHandler:
                 tablesResults.Rows.Add(tRow)
             End If
         Next
+
+        Dim n1p1q1 As Double
+        Dim n2p2q2 As Double
+        If colPerCount = 3 Then
+            If tablesResults.Rows(0).Cells.Count = 2 Then
+                n1p1q1 = sw1 * tablesResults.Rows(0).Cells(0).RowPercent / 100 * (1 - tablesResults.Rows(0).Cells(0).RowPercent / 100)
+                n2p2q2 = sw2 * tablesResults.Rows(1).Cells(1).RowPercent / 100 * (1 - tablesResults.Rows(1).Cells(1).RowPercent / 100)
+                If n1p1q1 < 5 Or n2p2q2 < 5 Then
+                    tablesResults.NPQLT5 = True
+                End If
+            End If
+        End If
 
         'output = csOutputBuffer
 
