@@ -149,8 +149,8 @@ namespace Epi.Enter.Forms
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                    client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
-
+                  //  client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
+                     client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                     client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     client.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
                 }
@@ -195,8 +195,8 @@ namespace Epi.Enter.Forms
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                        client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
-
+                        //client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
+                        client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                     }
                     else
                     {
@@ -229,7 +229,8 @@ namespace Epi.Enter.Forms
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                        client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
+                        //client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
+                        client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                     }
 
                 }
@@ -922,6 +923,7 @@ namespace Epi.Enter.Forms
                 //this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "On page '" + destinationPage.Name + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");                
                 }
             }
+            var tempClient = this.client;
             if (GUIDList.Count > 0)
                 {
                  UpdateRecordStatus(GUIDList);
