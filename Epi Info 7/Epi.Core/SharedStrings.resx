@@ -3011,4 +3011,31 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="WEBFORM_ORG_KEY_SUCCESSFUL" xml:space="preserve">
     <value>The organization key has been successfully submitted!</value>
   </data>
+  <data name="WEBENTER_EMAIL_FORMAT" xml:space="preserve">
+    <value>Email address must include the @ symbol followed by the domain name as in someone@someplace.com.</value>
+  </data>
+  <data name="WEBENTER_EMAIL_REQUIRED" xml:space="preserve">
+    <value>Email address is required.</value>
+  </data>
+  <data name="WEBENTER_INVALID_LOGIN" xml:space="preserve">
+    <value>Credentials not valid. Verify email address and password and try again.</value>
+  </data>
+  <data name="WEBENTER_LOGIN_AGAIN" xml:space="preserve">
+    <value>Email address or password is not valid. Verify log in information and try again.</value>
+  </data>
+  <data name="WEBENTER_PW_REQUIRED" xml:space="preserve">
+    <value>Password is required.</value>
+  </data>
+  <data name="WEBSURVEY_MODE_DRAFT" xml:space="preserve">
+    <value>Survey mode updated to DRAFT.</value>
+  </data>
+  <data name="WEBSURVEY_MODE_FINAL" xml:space="preserve">
+    <value>Survey mode updated to FINAL.</value>
+  </data>
+  <data name="WEBSURVEY_SETTINGS_INVALID" xml:space="preserve">
+    <value>One or more settings are invalid. Enter the correct settings and try again.</value>
+  </data>
+  <data name="WEBSURVEY_UPDATE_SUCCESS" xml:space="preserve">
+    <value>Form update successful.</value>
+  </data>
 </root>

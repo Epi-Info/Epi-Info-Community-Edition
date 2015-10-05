@@ -9,8 +9,6 @@ using System.Windows.Forms;
 using System.Configuration;
 using Epi.Web.Common.Security;
 
-
-
 namespace Epi.Windows.MakeView.Dialogs
 {
     public partial class WebSurveyOptions : Form
@@ -69,7 +67,7 @@ namespace Epi.Windows.MakeView.Dialogs
                 this.pnlError.Visible = true;
                 this.pnlError.BackColor = System.Drawing.Color.FromArgb(243, 217, 217);
                 this.lblError.ForeColor = System.Drawing.Color.FromArgb(123, 5, 15);
-                this.lblError.Text = "One or more settings provided are invalid. Please enter the correct settings and try again.";
+                this.lblError.Text = SharedStrings.WEBSURVEY_SETTINGS_INVALID;
                
             }
         }
@@ -78,10 +76,6 @@ namespace Epi.Windows.MakeView.Dialogs
             this.Close();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
         private bool ValidateSittings() 
         {
             bool IsValid = true;
