@@ -156,7 +156,12 @@ namespace Epi.Windows.MakeView.Dialogs
                         {
                             this.Shareable.Checked = Result.SurveyInfoList[0].IsShareable;
                             this.DataAccessRuleList.Visible = false;
-                            this.DataAccessRuleList.SelectedValue = "";
+                            //this.DataAccessRuleList.SelectedValue = "";
+                            foreach (var item in FormSettingResponse.FormSetting.DataAccessRuleIds)
+                            {
+                                this.DataAccessRuleList.Items.Add(item.Value);
+
+                            }
                         }
                     }
                     else {
