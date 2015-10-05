@@ -93,6 +93,7 @@
     <None Include="Data\LogisticCoefficientResults.csv" />
     <None Include="Data\LogisticOddsRatioResults.csv" />
     <None Include="Data\LogisticTestData.csv" />
+    <None Include="Data\MatchedLogisticTestData.csv" />
     <None Include="Data\MeansFourValueResults.csv" />
     <None Include="Data\MeansTwoValueResults.csv" />
     <None Include="Data\TwoBy2Stats.csv" />
