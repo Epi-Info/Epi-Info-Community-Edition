@@ -128,28 +128,6 @@
   <data name="pnlError.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblError.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 6</value>
-  </data>
-  <data name="lblError.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="lblError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>796, 22</value>
-  </data>
-  <data name="lblError.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblError.Text" xml:space="preserve">
-    <value>[Error Message Description]</value>
-  </data>
-  <data name="lblError.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
   <data name="&gt;&gt;lblError.Name" xml:space="preserve">
     <value>lblError</value>
   </data>
@@ -165,6 +143,7 @@
   <data name="pnlError.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pnlError.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
@@ -195,18 +174,6 @@
   <data name="&gt;&gt;pnlError.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="CancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>721, 211</value>
-  </data>
-  <data name="CancelButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 23</value>
-  </data>
-  <data name="CancelButton.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="CancelButton.Text" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
   <data name="&gt;&gt;CancelButton.Name" xml:space="preserve">
     <value>CancelButton</value>
   </data>
@@ -218,18 +185,6 @@
   </data>
   <data name="&gt;&gt;CancelButton.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="OkButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>552, 211</value>
-  </data>
-  <data name="OkButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 23</value>
-  </data>
-  <data name="OkButton.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="OkButton.Text" xml:space="preserve">
-    <value>Apply Settings</value>
   </data>
   <data name="&gt;&gt;OkButton.Name" xml:space="preserve">
     <value>OkButton</value>
@@ -243,81 +198,6 @@
   <data name="&gt;&gt;OkButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="BasicRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="BasicRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="BasicRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 28</value>
-  </data>
-  <data name="BasicRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 19</value>
-  </data>
-  <data name="BasicRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="BasicRadioButton.Text" xml:space="preserve">
-    <value>basic</value>
-  </data>
-  <data name="&gt;&gt;BasicRadioButton.Name" xml:space="preserve">
-    <value>BasicRadioButton</value>
-  </data>
-  <data name="&gt;&gt;BasicRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BasicRadioButton.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;BasicRadioButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="WsHTTpRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="WsHTTpRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="WsHTTpRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 28</value>
-  </data>
-  <data name="WsHTTpRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 19</value>
-  </data>
-  <data name="WsHTTpRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="WsHTTpRadioButton.Text" xml:space="preserve">
-    <value>wsHTTP</value>
-  </data>
-  <data name="&gt;&gt;WsHTTpRadioButton.Name" xml:space="preserve">
-    <value>WsHTTpRadioButton</value>
-  </data>
-  <data name="&gt;&gt;WsHTTpRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;WsHTTpRadioButton.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;WsHTTpRadioButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>552, 143</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 58</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Binding Protocol:</value>
-  </data>
   <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
     <value>groupBox2</value>
   </data>
@@ -330,81 +210,6 @@
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="YesRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="YesRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="YesRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 28</value>
-  </data>
-  <data name="YesRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 19</value>
-  </data>
-  <data name="YesRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="YesRadioButton.Text" xml:space="preserve">
-    <value>Yes (requires basic protocol)</value>
-  </data>
-  <data name="&gt;&gt;YesRadioButton.Name" xml:space="preserve">
-    <value>YesRadioButton</value>
-  </data>
-  <data name="&gt;&gt;YesRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;YesRadioButton.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;YesRadioButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="NoRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="NoRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="NoRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>307, 28</value>
-  </data>
-  <data name="NoRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 19</value>
-  </data>
-  <data name="NoRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="NoRadioButton.Text" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="&gt;&gt;NoRadioButton.Name" xml:space="preserve">
-    <value>NoRadioButton</value>
-  </data>
-  <data name="&gt;&gt;NoRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;NoRadioButton.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;NoRadioButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 143</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>531, 58</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Connect using Windows Authentication?</value>
-  </data>
   <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
@@ -415,18 +220,6 @@
     <value>pnlOrgKey</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="EndPointTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 86</value>
-  </data>
-  <data name="EndPointTextBox.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="EndPointTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>793, 51</value>
-  </data>
-  <data name="EndPointTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="&gt;&gt;EndPointTextBox.Name" xml:space="preserve">
@@ -441,91 +234,40 @@
   <data name="&gt;&gt;EndPointTextBox.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="&gt;&gt;lblWebSurveyInstructions2.Name" xml:space="preserve">
+    <value>lblWebSurveyInstructions2</value>
   </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 41</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>796, 27</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>You can also update this information by clicking the ‘Web Survey’ tab under the Tools &gt; Options.</value>
-  </data>
-  <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblWebSurveyInstructions2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblWebSurveyInstructions2.Parent" xml:space="preserve">
     <value>pnlOrgKey</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblWebSurveyInstructions2.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
+  <data name="&gt;&gt;lblWebSurvEndPtAddr.Name" xml:space="preserve">
+    <value>lblWebSurvEndPtAddr</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 68</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>796, 15</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Endpoint Address:</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblWebSurvEndPtAddr.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblWebSurvEndPtAddr.Parent" xml:space="preserve">
     <value>pnlOrgKey</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblWebSurvEndPtAddr.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
+  <data name="&gt;&gt;lblWebSurveyInstructions1.Name" xml:space="preserve">
+    <value>lblWebSurveyInstructions1</value>
   </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 0</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>796, 28</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Please contact your system administrator to provide you with the appropriate settings to publish surveys to the web. </value>
-  </data>
-  <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblWebSurveyInstructions1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblWebSurveyInstructions1.Parent" xml:space="preserve">
     <value>pnlOrgKey</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblWebSurveyInstructions1.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="pnlOrgKey.Location" type="System.Drawing.Point, System.Drawing">
@@ -578,6 +320,411 @@
   </data>
   <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="lblError.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblError.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblError.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 6</value>
+  </data>
+  <data name="lblError.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblError.Size" type="System.Drawing.Size, System.Drawing">
+    <value>796, 22</value>
+  </data>
+  <data name="lblError.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblError.Text" xml:space="preserve">
+    <value>[Error Message Description]</value>
+  </data>
+  <data name="lblError.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblError.Name" xml:space="preserve">
+    <value>lblError</value>
+  </data>
+  <data name="&gt;&gt;lblError.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblError.Parent" xml:space="preserve">
+    <value>pnlError</value>
+  </data>
+  <data name="&gt;&gt;lblError.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="CancelButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>721, 211</value>
+  </data>
+  <data name="CancelButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="CancelButton.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="CancelButton.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;CancelButton.Name" xml:space="preserve">
+    <value>CancelButton</value>
+  </data>
+  <data name="&gt;&gt;CancelButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CancelButton.Parent" xml:space="preserve">
+    <value>pnlOrgKey</value>
+  </data>
+  <data name="&gt;&gt;CancelButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="OkButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>552, 211</value>
+  </data>
+  <data name="OkButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 23</value>
+  </data>
+  <data name="OkButton.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="OkButton.Text" xml:space="preserve">
+    <value>Apply Settings</value>
+  </data>
+  <data name="&gt;&gt;OkButton.Name" xml:space="preserve">
+    <value>OkButton</value>
+  </data>
+  <data name="&gt;&gt;OkButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OkButton.Parent" xml:space="preserve">
+    <value>pnlOrgKey</value>
+  </data>
+  <data name="&gt;&gt;OkButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;BasicRadioButton.Name" xml:space="preserve">
+    <value>BasicRadioButton</value>
+  </data>
+  <data name="&gt;&gt;BasicRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BasicRadioButton.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;BasicRadioButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;WsHTTpRadioButton.Name" xml:space="preserve">
+    <value>WsHTTpRadioButton</value>
+  </data>
+  <data name="&gt;&gt;WsHTTpRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WsHTTpRadioButton.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;WsHTTpRadioButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>552, 143</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 58</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Binding Protocol:</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>pnlOrgKey</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="BasicRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="BasicRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 18</value>
+  </data>
+  <data name="BasicRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 34</value>
+  </data>
+  <data name="BasicRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="BasicRadioButton.Text" xml:space="preserve">
+    <value>basic</value>
+  </data>
+  <data name="&gt;&gt;BasicRadioButton.Name" xml:space="preserve">
+    <value>BasicRadioButton</value>
+  </data>
+  <data name="&gt;&gt;BasicRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BasicRadioButton.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;BasicRadioButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="WsHTTpRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="WsHTTpRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>136, 18</value>
+  </data>
+  <data name="WsHTTpRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 34</value>
+  </data>
+  <data name="WsHTTpRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="WsHTTpRadioButton.Text" xml:space="preserve">
+    <value>wsHTTP</value>
+  </data>
+  <data name="&gt;&gt;WsHTTpRadioButton.Name" xml:space="preserve">
+    <value>WsHTTpRadioButton</value>
+  </data>
+  <data name="&gt;&gt;WsHTTpRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WsHTTpRadioButton.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;WsHTTpRadioButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;YesRadioButton.Name" xml:space="preserve">
+    <value>YesRadioButton</value>
+  </data>
+  <data name="&gt;&gt;YesRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;YesRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;YesRadioButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;NoRadioButton.Name" xml:space="preserve">
+    <value>NoRadioButton</value>
+  </data>
+  <data name="&gt;&gt;NoRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NoRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;NoRadioButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 143</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>531, 58</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Connect using Windows Authentication?</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>pnlOrgKey</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="YesRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="YesRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 18</value>
+  </data>
+  <data name="YesRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 34</value>
+  </data>
+  <data name="YesRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="YesRadioButton.Text" xml:space="preserve">
+    <value>Yes (requires basic protocol)</value>
+  </data>
+  <data name="&gt;&gt;YesRadioButton.Name" xml:space="preserve">
+    <value>YesRadioButton</value>
+  </data>
+  <data name="&gt;&gt;YesRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;YesRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;YesRadioButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="NoRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="NoRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>307, 18</value>
+  </data>
+  <data name="NoRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 34</value>
+  </data>
+  <data name="NoRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="NoRadioButton.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="&gt;&gt;NoRadioButton.Name" xml:space="preserve">
+    <value>NoRadioButton</value>
+  </data>
+  <data name="&gt;&gt;NoRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NoRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;NoRadioButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="EndPointTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 86</value>
+  </data>
+  <data name="EndPointTextBox.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="EndPointTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>793, 51</value>
+  </data>
+  <data name="EndPointTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;EndPointTextBox.Name" xml:space="preserve">
+    <value>EndPointTextBox</value>
+  </data>
+  <data name="&gt;&gt;EndPointTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EndPointTextBox.Parent" xml:space="preserve">
+    <value>pnlOrgKey</value>
+  </data>
+  <data name="&gt;&gt;EndPointTextBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblWebSurveyInstructions2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="lblWebSurveyInstructions2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 41</value>
+  </data>
+  <data name="lblWebSurveyInstructions2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>796, 28</value>
+  </data>
+  <data name="lblWebSurveyInstructions2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblWebSurveyInstructions2.Text" xml:space="preserve">
+    <value>You can also update this information by clicking the ‘Web Survey’ tab under the Tools &gt; Options.</value>
+  </data>
+  <data name="lblWebSurveyInstructions2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblWebSurveyInstructions2.Name" xml:space="preserve">
+    <value>lblWebSurveyInstructions2</value>
+  </data>
+  <data name="&gt;&gt;lblWebSurveyInstructions2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblWebSurveyInstructions2.Parent" xml:space="preserve">
+    <value>pnlOrgKey</value>
+  </data>
+  <data name="&gt;&gt;lblWebSurveyInstructions2.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblWebSurvEndPtAddr.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblWebSurvEndPtAddr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 68</value>
+  </data>
+  <data name="lblWebSurvEndPtAddr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>796, 15</value>
+  </data>
+  <data name="lblWebSurvEndPtAddr.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblWebSurvEndPtAddr.Text" xml:space="preserve">
+    <value>Endpoint Address:</value>
+  </data>
+  <data name="&gt;&gt;lblWebSurvEndPtAddr.Name" xml:space="preserve">
+    <value>lblWebSurvEndPtAddr</value>
+  </data>
+  <data name="&gt;&gt;lblWebSurvEndPtAddr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblWebSurvEndPtAddr.Parent" xml:space="preserve">
+    <value>pnlOrgKey</value>
+  </data>
+  <data name="&gt;&gt;lblWebSurvEndPtAddr.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblWebSurveyInstructions1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblWebSurveyInstructions1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 0</value>
+  </data>
+  <data name="lblWebSurveyInstructions1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>796, 28</value>
+  </data>
+  <data name="lblWebSurveyInstructions1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblWebSurveyInstructions1.Text" xml:space="preserve">
+    <value>Contact the system administrator to provide the settings to publish forms to Web Survey.</value>
+  </data>
+  <data name="lblWebSurveyInstructions1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblWebSurveyInstructions1.Name" xml:space="preserve">
+    <value>lblWebSurveyInstructions1</value>
+  </data>
+  <data name="&gt;&gt;lblWebSurveyInstructions1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblWebSurveyInstructions1.Parent" xml:space="preserve">
+    <value>pnlOrgKey</value>
+  </data>
+  <data name="&gt;&gt;lblWebSurveyInstructions1.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

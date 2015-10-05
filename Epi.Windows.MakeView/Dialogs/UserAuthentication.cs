@@ -26,12 +26,12 @@ namespace Epi.Windows.MakeView.Dialogs
                 }
             else if(string.IsNullOrEmpty(this.PassWordTextBox1.Text) ) 
                 {
-                this.errorProvider1.SetError(PassWordTextBox1, "Password is required.");
+                this.errorProvider1.SetError(PassWordTextBox1, SharedStrings.WEBENTER_PW_REQUIRED);
                 }
             else if (!ValidateUser(out errorMessage))
                 {
-                this.errorProvider1.SetError(PassWordTextBox1, "Password or/and Email address are not valid.Please try again.");
-                this.errorProvider1.SetError(EmailAddresstextBox1, "Password or/and Email address are not valid.Please try again.");
+                this.errorProvider1.SetError(PassWordTextBox1, SharedStrings.WEBENTER_LOGIN_AGAIN);
+                this.errorProvider1.SetError(EmailAddresstextBox1, SharedStrings.WEBENTER_LOGIN_AGAIN);
                 }
             else
                 {
@@ -83,7 +83,7 @@ namespace Epi.Windows.MakeView.Dialogs
             // Confirm that the e-mail address string is not empty. 
             if (emailAddress.Length == 0)
                 {
-                errorMessage = "e-mail address is required.";
+                errorMessage = SharedStrings.WEBENTER_EMAIL_REQUIRED;
                 return false;
                 }
 
@@ -92,17 +92,15 @@ namespace Epi.Windows.MakeView.Dialogs
                 {
                 if (emailAddress.IndexOf(".", emailAddress.IndexOf("@")) > emailAddress.IndexOf("@"))
                     {
-                    errorMessage = "";
+                    errorMessage = String.Empty;
                     return true;
                     }
                 }
 
-            errorMessage = "e-mail address must be valid e-mail address format.\n" +
-               "For example 'someone@example.com' ";
+                errorMessage = SharedStrings.WEBENTER_EMAIL_FORMAT;
+               
             return false;
             }
-
-        
 
         }
     }

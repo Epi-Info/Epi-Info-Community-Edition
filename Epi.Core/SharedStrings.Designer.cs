@@ -8349,6 +8349,51 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email address must include the @ symbol followed by the domain name as in someone@someplace.com..
+        /// </summary>
+        public static string WEBENTER_EMAIL_FORMAT {
+            get {
+                return ResourceManager.GetString("WEBENTER_EMAIL_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email address is required..
+        /// </summary>
+        public static string WEBENTER_EMAIL_REQUIRED {
+            get {
+                return ResourceManager.GetString("WEBENTER_EMAIL_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credentials not valid. Verify email address and password and try again..
+        /// </summary>
+        public static string WEBENTER_INVALID_LOGIN {
+            get {
+                return ResourceManager.GetString("WEBENTER_INVALID_LOGIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email address or password is not valid. Verify log in information and try again..
+        /// </summary>
+        public static string WEBENTER_LOGIN_AGAIN {
+            get {
+                return ResourceManager.GetString("WEBENTER_LOGIN_AGAIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is required..
+        /// </summary>
+        public static string WEBENTER_PW_REQUIRED {
+            get {
+                return ResourceManager.GetString("WEBENTER_PW_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your Department Name.
         /// </summary>
         public static string WEBFORM_DEPARTMENT {
@@ -8534,6 +8579,42 @@ namespace Epi {
         public static string WEBFORM_URLTOSEND {
             get {
                 return ResourceManager.GetString("WEBFORM_URLTOSEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Survey mode updated to DRAFT..
+        /// </summary>
+        public static string WEBSURVEY_MODE_DRAFT {
+            get {
+                return ResourceManager.GetString("WEBSURVEY_MODE_DRAFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Survey mode updated to FINAL..
+        /// </summary>
+        public static string WEBSURVEY_MODE_FINAL {
+            get {
+                return ResourceManager.GetString("WEBSURVEY_MODE_FINAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One or more settings are invalid. Enter the correct settings and try again..
+        /// </summary>
+        public static string WEBSURVEY_SETTINGS_INVALID {
+            get {
+                return ResourceManager.GetString("WEBSURVEY_SETTINGS_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Form update successful..
+        /// </summary>
+        public static string WEBSURVEY_UPDATE_SUCCESS {
+            get {
+                return ResourceManager.GetString("WEBSURVEY_UPDATE_SUCCESS", resourceCulture);
             }
         }
         

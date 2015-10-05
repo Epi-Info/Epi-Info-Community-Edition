@@ -42,9 +42,9 @@
             this.YesRadioButton = new System.Windows.Forms.RadioButton();
             this.NoRadioButton = new System.Windows.Forms.RadioButton();
             this.EndPointTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblWebSurveyInstructions2 = new System.Windows.Forms.Label();
+            this.lblWebSurvEndPtAddr = new System.Windows.Forms.Label();
+            this.lblWebSurveyInstructions1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.pnlError.SuspendLayout();
             this.pnlOrgKey.SuspendLayout();
@@ -79,9 +79,9 @@
             this.pnlOrgKey.Controls.Add(this.groupBox2);
             this.pnlOrgKey.Controls.Add(this.groupBox1);
             this.pnlOrgKey.Controls.Add(this.EndPointTextBox);
-            this.pnlOrgKey.Controls.Add(this.label1);
-            this.pnlOrgKey.Controls.Add(this.label3);
-            this.pnlOrgKey.Controls.Add(this.label2);
+            this.pnlOrgKey.Controls.Add(this.lblWebSurveyInstructions2);
+            this.pnlOrgKey.Controls.Add(this.lblWebSurvEndPtAddr);
+            this.pnlOrgKey.Controls.Add(this.lblWebSurveyInstructions1);
             resources.ApplyResources(this.pnlOrgKey, "pnlOrgKey");
             this.pnlOrgKey.Name = "pnlOrgKey";
             // 
@@ -148,27 +148,29 @@
             resources.ApplyResources(this.EndPointTextBox, "EndPointTextBox");
             this.EndPointTextBox.Name = "EndPointTextBox";
             // 
-            // label1
+            // lblWebSurveyInstructions2
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            resources.ApplyResources(this.lblWebSurveyInstructions2, "lblWebSurveyInstructions2");
+            this.lblWebSurveyInstructions2.Name = "lblWebSurveyInstructions2";
             // 
-            // label3
+            // lblWebSurvEndPtAddr
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.lblWebSurvEndPtAddr, "lblWebSurvEndPtAddr");
+            this.lblWebSurvEndPtAddr.Name = "lblWebSurvEndPtAddr";
             // 
-            // label2
+            // lblWebSurveyInstructions1
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.lblWebSurveyInstructions1, "lblWebSurveyInstructions1");
+            this.lblWebSurveyInstructions1.Name = "lblWebSurveyInstructions1";
             // 
             // WebSurveyOptions
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "WebSurveyOptions";
             this.Load += new System.EventHandler(this.WebSurveyOptions_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -177,9 +179,7 @@
             this.pnlOrgKey.ResumeLayout(false);
             this.pnlOrgKey.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,8 +200,8 @@
         private System.Windows.Forms.RadioButton YesRadioButton;
         private System.Windows.Forms.RadioButton NoRadioButton;
         private System.Windows.Forms.TextBox EndPointTextBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblWebSurveyInstructions2;
+        private System.Windows.Forms.Label lblWebSurvEndPtAddr;
+        private System.Windows.Forms.Label lblWebSurveyInstructions1;
     }
 }
