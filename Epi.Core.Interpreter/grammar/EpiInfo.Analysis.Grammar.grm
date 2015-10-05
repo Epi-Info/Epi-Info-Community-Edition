@@ -856,7 +856,7 @@ Comment_Chars             = ('***'{Valid Chars}*)
 <Recode_Statement>                      ::= RECODE Identifier TO Identifier  <RecodeList> END
 
 <RecodeList> ::= <Recode> | <RecodeList> <Recode> 
-<RecodeValue> ::= <Literal> | Boolean | Identifier | LOVALUE | HIVALUE
+<RecodeValue> ::= <Literal> | Boolean | Identifier | LOVALUE | HIVALUE| '-' <Value>
 <Recoded_Value> ::= <Literal> | Boolean | Identifier
 <Recode> ::=      <RecodeValue>  '-' <RecodeValue>  '=' <Recoded_Value> 
     | <RecodeValue>  '=' <RecodeValue> 

@@ -30,10 +30,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
              */
 
             // RECODE Identifier TO Identifier <RecodeList> END
-            this.Identifier1 = this.GetCommandElement(pToken.Tokens, 1).Trim(new char[] { '[',']' });
+            this.Identifier1 = this.GetCommandElement(pToken.Tokens, 1).Trim(new char[] { '[', ']' });
             this.Identifier2 = this.GetCommandElement(pToken.Tokens, 3).Trim(new char[] { '[', ']' });
             this._recodeList = new RecodeList(this.Identifier2, this.Identifier1);
-            this.SetRecodeList((NonterminalToken) pToken.Tokens[4]);
+            this.SetRecodeList((NonterminalToken)pToken.Tokens[4]);
             //RecodeRules = this.GetCommandElement(pToken.Tokens, 5).Split(new char[] {'\r','\n' }, StringSplitOptions.RemoveEmptyEntries);
             //this.RecodeList = new Rule_RecodeList(pContext, (NonterminalToken)pToken.Tokens[4]);
         }
@@ -65,7 +65,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             object rangeEnd = null;
             object equalValue = null;
             string recodeType = null;
-            
+
             /*
             <Recode> ::=      <Value> '-' <Value> '=' <Value>
                 | <Value> '–' HIVALUE '=' <Value>
@@ -75,23 +75,23 @@ namespace Epi.Core.AnalysisInterpreter.Rules
              */
             switch (pToken.Tokens.Length)
             {
-                    /*
-                case 3:
-                    fromValue = GetRecodeValue(pToken.Tokens[0]);
-                    equalValue =  GetRecodeValue(pToken.Tokens[2]);
-                    recodeType = ((TerminalToken)pToken.Tokens[1]).Text;
+                /*
+            case 3:
+                fromValue = GetRecodeValue(pToken.Tokens[0]);
+                equalValue =  GetRecodeValue(pToken.Tokens[2]);
+                recodeType = ((TerminalToken)pToken.Tokens[1]).Text;
 
-                    RecodeRange recodeRange = new RecodeRange(recodeType, fromValue, rangeEnd, equalValue);
-                    _recodeList.Ranges.Add(recodeRange);
-                    break;
+                RecodeRange recodeRange = new RecodeRange(recodeType, fromValue, rangeEnd, equalValue);
+                _recodeList.Ranges.Add(recodeRange);
+                break;
 
-                default:
-                    fromValue = GetRecodeValue(pToken.Tokens[0]);
-                    rangeEnd = GetRecodeValue(pToken.Tokens[2]);
-                    equalValue = GetRecodeValue(pToken.Tokens[4]);
-                    recodeType = ((TerminalToken)pToken.Tokens[1]).Text;
-                    _recodeList.Ranges.Add(new RecodeRange(recodeType, fromValue, rangeEnd, equalValue));
-                    break;*/
+            default:
+                fromValue = GetRecodeValue(pToken.Tokens[0]);
+                rangeEnd = GetRecodeValue(pToken.Tokens[2]);
+                equalValue = GetRecodeValue(pToken.Tokens[4]);
+                recodeType = ((TerminalToken)pToken.Tokens[1]).Text;
+                _recodeList.Ranges.Add(new RecodeRange(recodeType, fromValue, rangeEnd, equalValue));
+                break;*/
 
                 case 3:
                     fromValue = new Rule_Value(this.Context, pToken.Tokens[0]);
@@ -103,8 +103,18 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     break;
 
                 default:
-                    fromValue = new Rule_Value(this.Context, pToken.Tokens[0]);
-                    rangeEnd = new Rule_Value(this.Context, pToken.Tokens[2]);
+                    if (pToken.Tokens[0].ToString().Contains("-"))
+                    {
+                        fromValue = new Rule_NegateExp(this.Context, (NonterminalToken)pToken.Tokens[0]);
+
+                    }
+                    else
+                        fromValue = new Rule_Value(this.Context, pToken.Tokens[0]);
+
+                    if (pToken.Tokens[2].ToString().Contains("-"))
+                        rangeEnd = new Rule_NegateExp(this.Context, (NonterminalToken)pToken.Tokens[2]);
+                    else
+                        rangeEnd = new Rule_Value(this.Context, pToken.Tokens[2]);
                     equalValue = new Rule_Value(this.Context, pToken.Tokens[4]);
                     recodeType = ((TerminalToken)pToken.Tokens[1]).Text;
                     _recodeList.Ranges.Add(new RecodeRange(recodeType, fromValue, rangeEnd, equalValue));
@@ -122,7 +132,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 NonterminalToken NT = (NonterminalToken)pToken;
 
                 //<RecodeValue> ::= <Literal> | Boolean | Identifier
-                
+
                 string dataTypeIdentifier = NT.Rule.Rhs[0].ToString();
 
                 switch (dataTypeIdentifier)
@@ -148,7 +158,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             return result;
         }
 
-        
+
         private object GetRecodeValue(Token token)
         {
             object result = null;
@@ -156,7 +166,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             if (token is NonterminalToken)
             {
                 NonterminalToken nonterm = (NonterminalToken)token;
-                string os = Environment.OSVersion.VersionString; 
+                string os = Environment.OSVersion.VersionString;
 
                 //<RecodeValue> ::= <Literal> | Boolean | Identifier
 
@@ -211,13 +221,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 this.Context.Recodes.Add(KeyName, _recodeList);
             }
 
-            
+
 
             if (this.Context.DataSet.Tables.Contains("Output"))
             {
                 this.Context.GetOutput(RecodeMapFunction);
             }
-            
+
             return null;
         }
 
@@ -273,11 +283,15 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
         public object RangeEnd
         {
-            get 
+            get
             {
                 if (rangeEnd is Rule_Value)
                 {
                     return ((Rule_Value)rangeEnd).Execute();
+                }
+                else if (rangeEnd is Rule_NegateExp)
+                {
+                    return ((Rule_NegateExp)rangeEnd).Execute();
                 }
                 else
                 {
@@ -289,18 +303,22 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
         public object FromValue
         {
-            get 
+            get
             {
                 if (fromValue is Rule_Value)
                 {
                     return ((Rule_Value)fromValue).Execute();
+                }
+                else if (fromValue is Rule_NegateExp)
+                {
+                    return ((Rule_NegateExp)fromValue).Execute();
                 }
                 else
                 {
 
                     return fromValue;
                 }
-            
+
             }
             set { fromValue = value; }
         }
@@ -346,6 +364,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 fromValue = ((Rule_Value)this.fromValue).Execute();
             }
+            if (this.fromValue is Rule_NegateExp)
+            {
+                fromValue = ((Rule_NegateExp)this.fromValue).Execute();
+            }
             else
             {
                 fromValue = this.fromValue;
@@ -366,6 +388,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             if (this.rangeEnd is Rule_Value)
             {
                 rangeEnd = ((Rule_Value)this.rangeEnd).Execute();
+            }
+            else if (this.rangeEnd is Rule_NegateExp)
+            {
+                rangeEnd = ((Rule_NegateExp)this.rangeEnd).Execute();
             }
             else
             {
@@ -431,13 +457,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             LHSO = from.ToUpper();
                         }
                     }
-                    else 
+                    else
                     {
                         LHSO = fromValue;
                     }
                 }
             }
-            
+
             if (double.TryParse(pValue.ToString(), out double_compare))
             {
                 RHSO = double_compare;
@@ -562,8 +588,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             RHSO = bool.TrueString;
                         }
                         else
-                        { 
-                            RHSO = string.Empty; 
+                        {
+                            RHSO = string.Empty;
                         }
                     }
                 }
@@ -596,7 +622,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         i = ((IComparable)LHSO).CompareTo((IComparable)RHSO);
                     }
 
-            }
+                }
 
                 if (this.recodeType.ToUpper() == "=")
                 {
@@ -607,7 +633,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     check2 = (i <= 0);
                 }
             }
-            
+
             result = check1 && check2;
             return result;
         }
@@ -626,9 +652,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 fromValue = ((Rule_Value)this.fromValue).Execute();
             }
+            else if (this.fromValue is Rule_NegateExp)
+            {
+                fromValue = ((Rule_NegateExp)this.fromValue).Execute();
+            }
             else
             {
-                    fromValue = this.fromValue;
+                fromValue = this.fromValue;
             }
 
             if (fromValue.Equals("ELSE"))
@@ -642,7 +672,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     return true;
                 }
             }
-            else 
+            else
             {
                 if ((pValue.GetType().Name.ToUpper() != fromValue.GetType().Name.ToUpper()) && RecodeRange.NumericTypeList.Contains(fromValue.GetType().Name.ToUpper()) && RecodeRange.NumericTypeList.Contains(pValue.GetType().Name.ToUpper()))
                 {
@@ -717,7 +747,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     }
                 }
                 else
-                { 
+                {
                     if (range.ValueIsInRange(pValue))
                     {
                         if (EqualValue is string)
@@ -758,7 +788,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
     {
         AnalysisRule Recode = null;
         new AnalysisRule RecodeList;
-        public Rule_RecodeList(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_RecodeList(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             //<Recode> 
             //<RecodeList> <Recode> 
@@ -843,7 +874,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value2 = null;
         string equalValue = null;
 
-        public Rule_Recode_A(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_A(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             NonterminalToken T = (NonterminalToken)pToken.Tokens[0];
 
@@ -869,7 +901,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value1 = null;
         string equalValue = null;
 
-        public Rule_Recode_B(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_B(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             //this.value1 = this.CreateNegateRecode(pToken.Tokens[0]);
             this.value1 = this.GetCommandElement(pToken.Tokens, 0).Replace("\"", "");
@@ -889,7 +922,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value1 = null;
         string equalValue = null;
 
-        public Rule_Recode_C(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_C(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             this.value1 = this.GetCommandElement(pToken.Tokens, 0).Replace("\"", "");
             this.equalValue = this.GetCommandElement(pToken.Tokens, 2).Replace("\"", "");
@@ -909,11 +943,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value2 = null;
         string equalValue = null;
 
-        public Rule_Recode_D(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_D(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             NonterminalToken T = (NonterminalToken)pToken.Tokens[0];
             //this.value2 = this.CreateNegateRecode(T.Tokens[2]);
-            this.value2 = this.GetCommandElement(T.Tokens,2);
+            this.value2 = this.GetCommandElement(T.Tokens, 2);
             this.equalValue = this.GetCommandElement(pToken.Tokens, 4).Replace("\"", "");
 
         }
@@ -932,12 +967,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value2 = "HIVALUE";
         string equalValue = null;
 
-        public Rule_Recode_E(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_E(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             NonterminalToken T = (NonterminalToken)pToken.Tokens[0];
 
             //this.value1 = this.CreateNegateRecode(T.Tokens[0]);
-            this.value1 = this.GetCommandElement(T.Tokens,0);
+            this.value1 = this.GetCommandElement(T.Tokens, 0);
             //this.value2 = this.GetCommandElement(pToken.Tokens, 2);
             this.equalValue = this.GetCommandElement(pToken.Tokens, 4).Replace("\"", "");
 
@@ -957,7 +993,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value2 = "HIVALUE";
         string equalValue = null;
 
-        public Rule_Recode_F(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_F(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             //this.value1 = this.GetCommandElement(pToken.Tokens, 0);
             //this.value2 = this.GetCommandElement(pToken.Tokens, 2);
@@ -977,7 +1014,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value1 = "ELSE";
         string equalValue = null;
 
-        public Rule_Recode_G(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_G(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             //this.value1 = this.GetCommandElement(pToken.Tokens, 0);
             this.equalValue = this.GetCommandElement(pToken.Tokens, 2).Replace("\"", "");
@@ -997,14 +1035,15 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value2 = null;
         string equalValue = null;
 
-        public Rule_Recode_H(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_H(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             NonterminalToken T = (NonterminalToken)pToken.Tokens[0];
 
             //this.value1 = this.CreateNegateRecode(T.Tokens[0]);
             //this.value2 = this.CreateNegateRecode(T.Tokens[2]);
-            this.value1 = this.GetCommandElement(T.Tokens,0);
-            this.value2 = this.GetCommandElement(T.Tokens,2);
+            this.value1 = this.GetCommandElement(T.Tokens, 0);
+            this.value2 = this.GetCommandElement(T.Tokens, 2);
             this.equalValue = this.GetCommandElement(pToken.Tokens, 4).Replace("\"", "");
 
         }
@@ -1022,10 +1061,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value1 = null;
         string equalValue = null;
 
-        public Rule_Recode_I(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_I(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             //this.value1 = this.CreateNegateRecode(pToken.Tokens[0]);
-            this.value1 = this.GetCommandElement(pToken.Tokens,0);
+            this.value1 = this.GetCommandElement(pToken.Tokens, 0);
             this.equalValue = this.GetCommandElement(pToken.Tokens, 2).Replace("\"", "");
 
         }
@@ -1042,7 +1082,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value1 = null;
         string equalValue = null;
 
-        public Rule_Recode_J(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_J(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             this.value1 = this.GetCommandElement(pToken.Tokens, 0).Replace("\"", "");
             this.equalValue = this.GetCommandElement(pToken.Tokens, 2).Replace("\"", "");
@@ -1062,12 +1103,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value2 = null;
         string equalValue = null;
 
-        public Rule_Recode_K(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_K(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             NonterminalToken T = (NonterminalToken)pToken.Tokens[0];
 
             //this.value2 = this.CreateNegateRecode(T.Tokens[2]);
-            this.value2 = this.GetCommandElement(T.Tokens,2);
+            this.value2 = this.GetCommandElement(T.Tokens, 2);
             this.equalValue = this.GetCommandElement(pToken.Tokens, 4).Replace("\"", "");
 
         }
@@ -1086,12 +1128,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value2 = "HIVALUE";
         string equalValue = null;
 
-        public Rule_Recode_L(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_L(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             NonterminalToken T = (NonterminalToken)pToken.Tokens[0];
 
             //this.value1 = this.CreateNegateRecode(T.Tokens[0]);
-            this.value1 = this.GetCommandElement(T.Tokens,0);
+            this.value1 = this.GetCommandElement(T.Tokens, 0);
 
             this.equalValue = this.GetCommandElement(pToken.Tokens, 4).Replace("\"", "");
 
@@ -1111,7 +1154,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value2 = "HIVALUE";
         string equalValue = null;
 
-        public Rule_Recode_M(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_M(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             //this.value1 = this.GetCommandElement(pToken.Tokens, 0);
             //this.value2 = this.GetCommandElement(pToken.Tokens, 2);
@@ -1131,7 +1175,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string value1 = "ELSE";
         string equalValue = null;
 
-        public Rule_Recode_N(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_Recode_N(Rule_Context pContext, NonterminalToken pToken)
+            : base(pContext)
         {
             //this.value1 = this.GetCommandElement(pToken.Tokens, 0);
             this.equalValue = this.GetCommandElement(pToken.Tokens, 2).Replace("\"", "");
