@@ -304,6 +304,10 @@
                         </StackPanel>
                         <CheckBox x:Name="quintilesOption" Click="CheckBox_Quantiles_Click" HorizontalAlignment="Left" Width="134" Height="42" Margin="8,20,0,16">Quantiles</CheckBox>
 
+                        <TextBlock  HorizontalAlignment="Center">Legend Title</TextBlock>
+                        <TextBox  x:Name="legTitle"  MinWidth="60" Height="30"  />
+
+
                         <Grid x:Name="stratGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
