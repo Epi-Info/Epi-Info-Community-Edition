@@ -34,6 +34,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.lbxFields = new System.Windows.Forms.ListBox();
             this.chkDisplayList = new System.Windows.Forms.CheckBox();
             this.chkAlways = new System.Windows.Forms.CheckBox();
+            this.chkContinue = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // baseImageList
@@ -116,8 +117,8 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -149,10 +150,17 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.chkAlways.Name = "chkAlways";
             this.chkAlways.UseVisualStyleBackColor = true;
             // 
+            // chkContinue
+            // 
+            resources.ApplyResources(this.chkContinue, "chkContinue");
+            this.chkContinue.Name = "chkContinue";
+            this.chkContinue.UseVisualStyleBackColor = true;
+            // 
             // AutoSearchDialog
             // 
             resources.ApplyResources(this, "$this");
             this.CancelButton = this.btnCancel;
+            this.Controls.Add(this.chkContinue);
             this.Controls.Add(this.chkAlways);
             this.Controls.Add(this.chkDisplayList);
             this.Controls.Add(this.Button3);
@@ -177,5 +185,6 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
 		private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox chkDisplayList;
         private System.Windows.Forms.CheckBox chkAlways;
+        private System.Windows.Forms.CheckBox chkContinue;
     }
 }

@@ -64,6 +64,10 @@ namespace Epi
         /// </summary>
         public const string COLUMNSIZE = "COLUMNSIZE";
         /// <summary>
+        /// CONTINUENEW key word used with AUTOSEARCH command to prevent user from moving to matching record.
+        /// </summary>
+        public const string CONTINUENEW = "CONTINUENEW";
+        /// <summary>
         /// COS numeric function
         /// </summary>
         public const string COS = "COS";

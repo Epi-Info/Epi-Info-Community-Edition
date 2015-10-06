@@ -68,10 +68,16 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
                 }
             }
 
+            if (chkContinue.Checked)
+            {
+                Output += CommandNames.CONTINUENEW + StringLiterals.SPACE;
+            }
+
             if (chkAlways.Checked)
             {
                 Output += CommandNames.ALWAYS + StringLiterals.SPACE;
             }
+
 
             Output = Output.Trim();
             this.DialogResult = DialogResult.OK;
