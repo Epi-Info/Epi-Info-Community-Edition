@@ -1532,7 +1532,12 @@ namespace EpiDashboard.Mapping
 
             choroplethproperties.Cancelled += new EventHandler(properties_Cancelled);
             choroplethproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
-            
+
+
+            choroplethproperties.legTitle.Text = choroplethlayerprop.provider.LegendText;    
+
+
+
             popup.Content = choroplethproperties;
             popup.Show();
          }

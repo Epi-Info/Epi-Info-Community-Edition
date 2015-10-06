@@ -453,7 +453,7 @@ namespace EpiDashboard.Mapping
                             BorderBrush = new SolidColorBrush(Colors.Black),
                             BorderThickness = 1
                         };
-                        
+
                         graphicFeature.Symbol = symbol;
 
                         TextBlock t = new TextBlock();
@@ -463,7 +463,6 @@ namespace EpiDashboard.Mapping
                             t.Text = graphicFeature.Attributes[shapeKey].ToString().Trim() + " : No Data";
                         }
                         else
-
                         {
                             t.Text = graphicFeature.Attributes[shapeKey].ToString().Trim() + " : " + graphicValue.ToString();
                         }
@@ -478,6 +477,7 @@ namespace EpiDashboard.Mapping
                     }
                 }
 
+
                 SetLegendSection(colors, classCount, missingText, thematicItem);
 
             }
@@ -486,7 +486,7 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public void SetLegendSection(List<SolidColorBrush> colors, int classCount, string missingText, ThematicItem thematicItem)
+        public void SetLegendSection(List<SolidColorBrush> colors, int classCount, string missingText, ThematicItem thematicItem)  //        string  legText  )    
         {
             if (LegendStackPanel == null)
             {
@@ -510,10 +510,11 @@ namespace EpiDashboard.Mapping
             };
 
             TextBlock titleTextBlock = new TextBlock();
-            titleTextBlock.Text = _valueField;       //        String.Format("  " + "Title Text");
+            titleTextBlock.Text = LegendText;          //        String.Format("  " + "Title Text");
             StackPanel titleTextStackPanel = new StackPanel();
             titleTextStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
             //  titleTextStackPanel.Children.Add(missingSwatchRect);
+
             titleTextStackPanel.Children.Add(titleTextBlock);
 
 
@@ -528,7 +529,7 @@ namespace EpiDashboard.Mapping
 
             legendList.Items.Add(missingClassStackPanel);
 
-       
+
             SetLegendText(colors, classCount, thematicItem.RangeStarts, legendList);
 
 
@@ -762,13 +763,15 @@ namespace EpiDashboard.Mapping
             return RangeStarts;
         }
 
-        public void PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount)
+        public void PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField,
+            List<SolidColorBrush> colors, int classCount, string legendText)
         {
             _classCount = classCount;
             _dashboardHelper = dashboardHelper;
             _shapeKey = shapeKey;
             _dataKey = dataKey;
             _valueField = valueField;
+            LegendText = legendText;
             _colors = colors;
 
             DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
@@ -824,6 +827,7 @@ namespace EpiDashboard.Mapping
         }
 
         private StackPanel legendStackPanel;
+        private string _legendText;
 
         public StackPanel LegendStackPanel
         {
@@ -835,6 +839,12 @@ namespace EpiDashboard.Mapping
             {
                 legendStackPanel = value;
             }
+        }
+
+        public string LegendText
+        {
+            get { return _legendText; }
+            set { _legendText = value; }
         }
 
         #endregion
