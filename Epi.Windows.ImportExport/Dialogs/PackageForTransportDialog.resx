@@ -127,10 +127,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 548</value>
+    <value>328, 548</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>100, 23</value>
   </data>
   <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -154,10 +154,10 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 548</value>
+    <value>434, 548</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>100, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -184,7 +184,7 @@
     <value>12, 26</value>
   </data>
   <data name="txtProjectPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 20</value>
+    <value>423, 20</value>
   </data>
   <data name="txtProjectPath.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -205,7 +205,7 @@
     <value>12, 9</value>
   </data>
   <data name="lblProjectPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>340, 14</value>
+    <value>423, 14</value>
   </data>
   <data name="lblProjectPath.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -229,16 +229,16 @@
     <value>Top, Right</value>
   </data>
   <data name="btnBrowseProject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 24</value>
+    <value>441, 23</value>
   </data>
   <data name="btnBrowseProject.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>100, 23</value>
   </data>
   <data name="btnBrowseProject.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="btnBrowseProject.Text" xml:space="preserve">
-    <value>Browse...</value>
+    <value>Browse</value>
   </data>
   <data name="&gt;&gt;btnBrowseProject.Name" xml:space="preserve">
     <value>btnBrowseProject</value>
@@ -259,7 +259,7 @@
     <value>12, 107</value>
   </data>
   <data name="txtPackagePath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 20</value>
+    <value>423, 20</value>
   </data>
   <data name="txtPackagePath.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -280,7 +280,7 @@
     <value>12, 90</value>
   </data>
   <data name="lblPackagePath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>340, 14</value>
+    <value>423, 14</value>
   </data>
   <data name="lblPackagePath.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -304,16 +304,16 @@
     <value>Top, Right</value>
   </data>
   <data name="btnBrowsePackage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 105</value>
+    <value>441, 104</value>
   </data>
   <data name="btnBrowsePackage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>100, 23</value>
   </data>
   <data name="btnBrowsePackage.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="btnBrowsePackage.Text" xml:space="preserve">
-    <value>Browse...</value>
+    <value>Browse</value>
   </data>
   <data name="&gt;&gt;btnBrowsePackage.Name" xml:space="preserve">
     <value>btnBrowsePackage</value>
@@ -328,10 +328,10 @@
     <value>11</value>
   </data>
   <data name="lblPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 40</value>
+    <value>9, 55</value>
   </data>
   <data name="lblPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 14</value>
+    <value>284, 14</value>
   </data>
   <data name="lblPassword.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -352,10 +352,10 @@
     <value>7</value>
   </data>
   <data name="txtPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 57</value>
+    <value>6, 72</value>
   </data>
   <data name="txtPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 20</value>
+    <value>252, 20</value>
   </data>
   <data name="txtPassword.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -373,10 +373,10 @@
     <value>9</value>
   </data>
   <data name="txtVerifyPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 97</value>
+    <value>6, 115</value>
   </data>
   <data name="txtVerifyPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 20</value>
+    <value>252, 20</value>
   </data>
   <data name="txtVerifyPassword.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -394,10 +394,10 @@
     <value>6</value>
   </data>
   <data name="lblVerifyPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 80</value>
+    <value>6, 98</value>
   </data>
   <data name="lblVerifyPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 14</value>
+    <value>284, 14</value>
   </data>
   <data name="lblVerifyPassword.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -421,10 +421,10 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="btnKeyFields.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 125</value>
+    <value>293, 141</value>
   </data>
   <data name="btnKeyFields.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 23</value>
+    <value>220, 23</value>
   </data>
   <data name="btnKeyFields.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -445,10 +445,10 @@
     <value>0</value>
   </data>
   <data name="btnAdvanced.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 125</value>
+    <value>293, 140</value>
   </data>
   <data name="btnAdvanced.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 23</value>
+    <value>220, 23</value>
   </data>
   <data name="btnAdvanced.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -472,10 +472,10 @@
     <value>1</value>
   </data>
   <data name="btnRowFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 96</value>
+    <value>293, 112</value>
   </data>
   <data name="btnRowFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 23</value>
+    <value>220, 23</value>
   </data>
   <data name="btnRowFilter.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -496,10 +496,10 @@
     <value>2</value>
   </data>
   <data name="btnGridDataRemoval.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 67</value>
+    <value>293, 83</value>
   </data>
   <data name="btnGridDataRemoval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 23</value>
+    <value>220, 23</value>
   </data>
   <data name="btnGridDataRemoval.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -520,10 +520,10 @@
     <value>3</value>
   </data>
   <data name="btnFormDataRemoval.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 38</value>
+    <value>293, 54</value>
   </data>
   <data name="btnFormDataRemoval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 23</value>
+    <value>220, 23</value>
   </data>
   <data name="btnFormDataRemoval.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -547,7 +547,7 @@
     <value>6, 18</value>
   </data>
   <data name="lblDataRemoval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 17</value>
+    <value>507, 33</value>
   </data>
   <data name="lblDataRemoval.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -571,7 +571,7 @@
     <value>12, 178</value>
   </data>
   <data name="grpDataRemoval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 156</value>
+    <value>522, 169</value>
   </data>
   <data name="grpDataRemoval.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -595,10 +595,10 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 548</value>
+    <value>222, 548</value>
   </data>
   <data name="btnSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>100, 23</value>
   </data>
   <data name="btnSave.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -622,10 +622,10 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnLoad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 548</value>
+    <value>116, 548</value>
   </data>
   <data name="btnLoad.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>100, 23</value>
   </data>
   <data name="btnLoad.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -697,7 +697,7 @@
     <value>12, 519</value>
   </data>
   <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 23</value>
+    <value>522, 23</value>
   </data>
   <data name="progressBar.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -721,7 +721,7 @@
     <value>12, 493</value>
   </data>
   <data name="txtProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 20</value>
+    <value>522, 20</value>
   </data>
   <data name="txtProgress.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -748,10 +748,10 @@
     <value>True</value>
   </data>
   <data name="lbxStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 340</value>
+    <value>12, 353</value>
   </data>
   <data name="lbxStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 147</value>
+    <value>522, 134</value>
   </data>
   <data name="lbxStatus.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -772,7 +772,7 @@
     <value>12, 130</value>
   </data>
   <data name="lblPackageName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 14</value>
+    <value>248, 14</value>
   </data>
   <data name="lblPackageName.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -799,7 +799,7 @@
     <value>12, 147</value>
   </data>
   <data name="txtPackageName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 20</value>
+    <value>248, 20</value>
   </data>
   <data name="txtPackageName.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -816,14 +816,11 @@
   <data name="&gt;&gt;txtPackageName.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="checkboxIncludeTime.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="checkboxIncludeTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 149</value>
+    <value>266, 149</value>
   </data>
   <data name="checkboxIncludeTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 17</value>
+    <value>268, 18</value>
   </data>
   <data name="checkboxIncludeTime.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -850,7 +847,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>477, 583</value>
+    <value>546, 583</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Package data for transport</value>

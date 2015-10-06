@@ -123,10 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 264</value>
+    <value>74, 264</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
@@ -151,10 +151,10 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 264</value>
+    <value>266, 264</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -178,13 +178,16 @@
     <value>12, 9</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 66</value>
+    <value>341, 55</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Use this dialog to specify one or more fields to use as match keys. If no fields are selected, the Global Record Id value will be used as the match key.</value>
+  </data>
+  <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -202,13 +205,16 @@
     <value>12, 75</value>
   </data>
   <data name="lblFields.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 14</value>
+    <value>340, 27</value>
   </data>
   <data name="lblFields.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
   <data name="lblFields.Text" xml:space="preserve">
     <value>Select fields to use as the match key:</value>
+  </data>
+  <data name="lblFields.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;lblFields.Name" xml:space="preserve">
     <value>lblFields</value>
@@ -223,10 +229,10 @@
     <value>2</value>
   </data>
   <data name="lbxFields.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 92</value>
+    <value>12, 105</value>
   </data>
   <data name="lbxFields.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 160</value>
+    <value>344, 147</value>
   </data>
   <data name="lbxFields.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -250,10 +256,10 @@
     <value>NoControl</value>
   </data>
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 264</value>
+    <value>170, 264</value>
   </data>
   <data name="btnClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnClear.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -280,7 +286,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>311, 299</value>
+    <value>368, 299</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Select Match Fields</value>

@@ -574,6 +574,33 @@ namespace Epi.ImportExport {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom keys cannot be used when the source form contains child forms..
+        /// </summary>
+        public static string ERROR_PACKAGER_CUSTKEYS_WITH_RELATED {
+            get {
+                return ResourceManager.GetString("ERROR_PACKAGER_CUSTKEYS_WITH_RELATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom match key will not be used..
+        /// </summary>
+        public static string ERROR_PACKAGER_CUSTOM_MATCH_NOT_USED {
+            get {
+                return ResourceManager.GetString("ERROR_PACKAGER_CUSTOM_MATCH_NOT_USED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match key not found in this form: {0}  .
+        /// </summary>
+        public static string ERROR_PACKAGER_MATCH_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("ERROR_PACKAGER_MATCH_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The condition could not be added. Please check the inputs and try again..
         /// </summary>
         public static string ERROR_PACKAGER_SELECT_CONDITION_COULD_NOT_BE_ADDED {

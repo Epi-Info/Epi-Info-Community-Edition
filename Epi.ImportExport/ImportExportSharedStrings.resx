@@ -798,4 +798,13 @@
   <data name="IMPORT_DATA_UPDATE_MATCHING" xml:space="preserve">
     <value>Records with matching ID fields will be updated.</value>
   </data>
+  <data name="ERROR_PACKAGER_CUSTKEYS_WITH_RELATED" xml:space="preserve">
+    <value>Custom keys cannot be used when the source form contains child forms.</value>
+  </data>
+  <data name="ERROR_PACKAGER_CUSTOM_MATCH_NOT_USED" xml:space="preserve">
+    <value>Custom match key will not be used.</value>
+  </data>
+  <data name="ERROR_PACKAGER_MATCH_NOT_FOUND" xml:space="preserve">
+    <value>Match key not found in this form: {0}  </value>
+  </data>
 </root>
