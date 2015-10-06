@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PackageGridRemovalDialog));
             this.lblFields = new System.Windows.Forms.Label();
             this.lbxGridColumns = new System.Windows.Forms.ListBox();
             this.lblForm = new System.Windows.Forms.Label();
@@ -39,75 +40,53 @@
             // 
             // lblFields
             // 
-            this.lblFields.Location = new System.Drawing.Point(12, 104);
+            resources.ApplyResources(this.lblFields, "lblFields");
             this.lblFields.Name = "lblFields";
-            this.lblFields.Size = new System.Drawing.Size(283, 14);
-            this.lblFields.TabIndex = 23;
-            this.lblFields.Text = "Select grid columns to remove from the selected grid:";
             // 
             // lbxGridColumns
             // 
             this.lbxGridColumns.FormattingEnabled = true;
-            this.lbxGridColumns.Location = new System.Drawing.Point(12, 121);
+            resources.ApplyResources(this.lbxGridColumns, "lbxGridColumns");
             this.lbxGridColumns.Name = "lbxGridColumns";
             this.lbxGridColumns.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbxGridColumns.Size = new System.Drawing.Size(283, 160);
-            this.lbxGridColumns.TabIndex = 24;
             this.lbxGridColumns.SelectedIndexChanged += new System.EventHandler(this.lbxFields_SelectedIndexChanged);
             // 
             // lblForm
             // 
-            this.lblForm.Location = new System.Drawing.Point(12, 63);
+            resources.ApplyResources(this.lblForm, "lblForm");
             this.lblForm.Name = "lblForm";
-            this.lblForm.Size = new System.Drawing.Size(283, 14);
-            this.lblForm.TabIndex = 22;
-            this.lblForm.Text = "Select a grid on which to remove data:";
             // 
             // cmbGridSelector
             // 
             this.cmbGridSelector.FormattingEnabled = true;
-            this.cmbGridSelector.Location = new System.Drawing.Point(12, 80);
+            resources.ApplyResources(this.cmbGridSelector, "cmbGridSelector");
             this.cmbGridSelector.Name = "cmbGridSelector";
-            this.cmbGridSelector.Size = new System.Drawing.Size(283, 21);
-            this.cmbGridSelector.TabIndex = 21;
             this.cmbGridSelector.SelectedIndexChanged += new System.EventHandler(this.cmbFormSelector_SelectedIndexChanged);
             // 
             // btnOK
             // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.btnOK, "btnOK");
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(139, 296);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 25;
-            this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(220, 296);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 26;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(9, 9);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(284, 41);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "Use this dialog to remove data from columns in the selected grid.";
             // 
             // PackageGridRemovalDialog
             // 
             this.AcceptButton = this.btnOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(307, 331);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
@@ -120,7 +99,6 @@
             this.MinimizeBox = false;
             this.Name = "PackageGridRemovalDialog";
             this.ShowIcon = false;
-            this.Text = "Remove Columns from Data Package";
             this.ResumeLayout(false);
 
         }

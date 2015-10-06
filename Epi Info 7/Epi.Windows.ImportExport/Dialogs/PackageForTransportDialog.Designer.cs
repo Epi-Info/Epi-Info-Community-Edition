@@ -87,6 +87,7 @@
             // 
             resources.ApplyResources(this.lblProjectPath, "lblProjectPath");
             this.lblProjectPath.Name = "lblProjectPath";
+            this.lblProjectPath.Click += new System.EventHandler(this.lblProjectPath_Click);
             // 
             // btnBrowseProject
             // 
@@ -211,6 +212,7 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // cmbPackageForm
             // 

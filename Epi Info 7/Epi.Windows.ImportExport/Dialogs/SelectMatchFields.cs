@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using Epi.Data;
 using Epi.Fields;
+using Epi.ImportExport;
+
 
 namespace Epi.Windows.ImportExport.Dialogs
 {
@@ -113,7 +115,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                 {
                     if (otherForm != Form && Epi.ImportExport.ImportExportHelper.IsFormDescendant(otherForm, Form))
                     {
-                        Epi.Windows.MsgBox.ShowError("Custom match keys cannot be used to package a form that contains child forms.");
+                        Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_PACKAGER_CUSTKEYS_WITH_RELATED);
                         this.DialogResult = System.Windows.Forms.DialogResult.None;
                         return;
                     }

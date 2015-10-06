@@ -1035,7 +1035,7 @@ namespace Epi.Windows.ImportExport.Dialogs
 
                         if (!this.Form.Fields.Contains(fieldName))
                         {
-                            MsgBox.ShowError("Match key {0} not found in this form. Custom match key will not be used.");
+                            MsgBox.ShowError(string.Format(ImportExportSharedStrings.ERROR_PACKAGER_MATCH_NOT_FOUND, fieldName.ToString()) + " " + ImportExportSharedStrings.ERROR_PACKAGER_CUSTOM_MATCH_NOT_USED);
                             return;
                         }
                         else if (this.Form.Fields.Contains(fieldName))
@@ -1376,7 +1376,7 @@ namespace Epi.Windows.ImportExport.Dialogs
             {
                 if (otherForm.Name != Form.Name && Epi.ImportExport.ImportExportHelper.IsFormDescendant(otherForm, Form))
                 {
-                    MsgBox.ShowInformation("Custom keys cannot be used when the source form contains child forms.");
+                    MsgBox.ShowInformation(ImportExportSharedStrings.ERROR_PACKAGER_CUSTKEYS_WITH_RELATED);
                     return;
                 }
             }
@@ -1474,5 +1474,15 @@ namespace Epi.Windows.ImportExport.Dialogs
         {
         }
         #endregion // Event Handlers
+
+        private void lblProjectPath_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
