@@ -370,6 +370,38 @@ namespace Epi.UnitTests
                     break;
             }
 
+            reader = new StreamReader(File.OpenRead(@"..\..\Data\MatchedLogisticGlobalTestResults.csv"));
+            linesinfile = 2 * iterations;
+            double[] globalchisqs = new double[linesinfile];
+            double[] dfs = new double[linesinfile];
+            double[] probchisqs = new double[linesinfile];
+            i = 0;
+            while (!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                var values = line.Split(',');
+                bool rv = Double.TryParse(values[2], out globalchisqs[i]);
+                rv = Double.TryParse(values[3], out dfs[i]);
+                rv = Double.TryParse(values[4], out probchisqs[i]);
+                i++;
+                if (i == linesinfile)
+                    break;
+            }
+
+            reader = new StreamReader(File.OpenRead(@"..\..\Data\MatchedLogisticFitStatisticResults.csv"));
+            linesinfile = iterations;
+            double[] withcovariates = new double[linesinfile];
+            i = 0;
+            while (!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                var values = line.Split(',');
+                bool rv = Double.TryParse(values[1], out withcovariates[i]);
+                i++;
+                if (i == linesinfile)
+                    break;
+            }
+
             for (int j = 0; j < iterations; j++)
             {
                 getData("MatchedLogisticTestData", "iteration = " + j);
@@ -420,6 +452,14 @@ namespace Epi.UnitTests
                 Assert.AreEqual(results.regressionResults.variables[1].se, stderrs[j * 2 + 1], 0.01);
                 //                Assert.AreEqual(results.regressionResults.variables[1].Z, chisqs[j * 3 + 2], 0.01);
                 Assert.AreEqual(results.regressionResults.variables[1].P, ps[j * 2 + 1], 0.01);
+
+                Assert.AreEqual(results.regressionResults.finalLikelihood, withcovariates[j], 0.0001);
+                Assert.AreEqual(results.regressionResults.LRStatistic, globalchisqs[j * 2], 0.0001);
+                Assert.AreEqual(results.regressionResults.scoreStatistic, globalchisqs[j * 2 + 1], 0.0001);
+                Assert.AreEqual(results.regressionResults.LRDF, dfs[j * 2], 0.0001);
+                Assert.AreEqual(results.regressionResults.scoreDF, dfs[j * 2 + 1], 0.0001);
+                Assert.AreEqual(results.regressionResults.LRP, probchisqs[j * 2], 0.0001);
+                Assert.AreEqual(results.regressionResults.scoreP, probchisqs[j * 2 + 1], 0.0001);
             }
         }
     }
