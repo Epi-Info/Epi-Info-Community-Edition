@@ -116,8 +116,21 @@ namespace Epi.Enter.Forms
 
                 rdbDraftMode.Checked = true;
                 rdbSubmittedRecords.Checked = true;
-               
-                if (config.Settings.WebServiceAuthMode == 1) // Windows Authentication
+
+                if (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress) && (
+                    config.Settings.WebServiceEndpointAddress.Contains("SurveyManagerService.svc") || 
+                    config.Settings.WebServiceEndpointAddress.Contains("SurveyManagerServiceV2.svc")))
+                {
+                    chkIncremental.Checked = false;
+                    chkIncremental.Visible = false;
+                }
+                else
+                {
+                    chkIncremental.Checked = true;
+                    chkIncremental.Visible = true;
+                }
+                
+                    if (config.Settings.WebServiceAuthMode == 1) // Windows Authentication
                 {
                     System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
                     binding.Name = "BasicHttpBinding";
@@ -1139,11 +1152,11 @@ namespace Epi.Enter.Forms
                 //    2.  Completed records in final mode
                 //    3.  All records in final mode
                 IsDraftMode = rdbDraftMode.Checked;
-                SurveyStatus = 0;
-                if (rdbAllRecords.Checked) 
-                {
-                    SurveyStatus = 3;
-                }
+                SurveyStatus = 3;
+
+                if (rdbAllRecords.Checked) SurveyStatus = 0;
+
+                if (chkIncremental.Checked) SurveyStatus = 4;
 
                 requestWorker = new BackgroundWorker();
                 requestWorker.WorkerSupportsCancellation = true;
@@ -1375,6 +1388,18 @@ namespace Epi.Enter.Forms
                 }
                 Clipboard.SetText(StatusText);
             }
+        }
+
+        private void rdbAllRecords_Click(object sender, EventArgs e)
+        {
+            chkIncremental.Checked = false;
+            chkIncremental.Enabled = false;
+        }
+
+        private void rdbSubmittedRecords_Click(object sender, EventArgs e)
+        {
+            chkIncremental.Checked = true;
+            chkIncremental.Enabled = true;
         }
     }
 }

@@ -361,7 +361,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="textProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 551</value>
+    <value>12, 567</value>
   </data>
   <data name="textProgress.Size" type="System.Drawing.Size, System.Drawing">
     <value>505, 20</value>
@@ -388,7 +388,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 577</value>
+    <value>12, 593</value>
   </data>
   <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
     <value>505, 23</value>
@@ -415,7 +415,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 607</value>
+    <value>427, 623</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -445,7 +445,7 @@
     <value>False</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 607</value>
+    <value>331, 623</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -474,12 +474,6 @@
   <metadata name="cmsStatus.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="toolStripMenuItem_Copy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
-  </data>
-  <data name="toolStripMenuItem_Copy.Text" xml:space="preserve">
-    <value>Copy to Clipboard</value>
-  </data>
   <data name="cmsStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 26</value>
   </data>
@@ -493,7 +487,7 @@
     <value>True</value>
   </data>
   <data name="lbxStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 424</value>
+    <value>12, 440</value>
   </data>
   <data name="lbxStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>505, 121</value>
@@ -512,6 +506,12 @@
   </data>
   <data name="&gt;&gt;lbxStatus.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="toolStripMenuItem_Copy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 22</value>
+  </data>
+  <data name="toolStripMenuItem_Copy.Text" xml:space="preserve">
+    <value>Copy to Clipboard</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 90</value>
@@ -589,7 +589,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdbFinalMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 54</value>
+    <value>13, 74</value>
   </data>
   <data name="rdbFinalMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 24</value>
@@ -643,16 +643,16 @@
     <value>NoControl</value>
   </data>
   <data name="rdbAllRecords.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 48</value>
+    <value>12, 68</value>
   </data>
   <data name="rdbAllRecords.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 35</value>
+    <value>341, 29</value>
   </data>
   <data name="rdbAllRecords.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
   <data name="rdbAllRecords.Text" xml:space="preserve">
-    <value>Both unfinished and submitted records (all records) </value>
+    <value>Unfinished and submitted records (all records) </value>
   </data>
   <data name="&gt;&gt;rdbAllRecords.Name" xml:space="preserve">
     <value>rdbAllRecords</value>
@@ -664,7 +664,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;rdbAllRecords.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="rdbSubmittedRecords.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -673,7 +673,7 @@
     <value>12, 15</value>
   </data>
   <data name="rdbSubmittedRecords.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 32</value>
+    <value>347, 28</value>
   </data>
   <data name="rdbSubmittedRecords.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -691,13 +691,13 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;rdbSubmittedRecords.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="grpImportMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 324</value>
   </data>
   <data name="grpImportMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 94</value>
+    <value>133, 110</value>
   </data>
   <data name="grpImportMode.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -717,11 +717,35 @@
   <data name="&gt;&gt;grpImportMode.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="chkIncremental.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 38</value>
+  </data>
+  <data name="chkIncremental.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 24</value>
+  </data>
+  <data name="chkIncremental.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="chkIncremental.Text" xml:space="preserve">
+    <value>Incremental download</value>
+  </data>
+  <data name="&gt;&gt;chkIncremental.Name" xml:space="preserve">
+    <value>chkIncremental</value>
+  </data>
+  <data name="&gt;&gt;chkIncremental.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkIncremental.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;chkIncremental.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>155, 325</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>365, 93</value>
+    <value>365, 109</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -748,7 +772,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>529, 642</value>
+    <value>529, 658</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
