@@ -231,8 +231,7 @@ namespace Epi.Windows.MakeView.Forms
                 if (this.codeText.Lines[lineIndex].Contains(addCodeHere))
                 {
                     this.codeText.SelectionStart = this.codeText.GetFirstCharIndexFromLine(lineIndex);
-                    this.codeText.SelectionStart += this.codeText.Lines[lineIndex].IndexOf(addCodeHere);
-                    this.codeText.SelectionLength = addCodeHere.Length;
+                    this.codeText.SelectionLength = this.codeText.Lines[lineIndex].Length;
                 }
             }
         }
