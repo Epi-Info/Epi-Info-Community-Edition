@@ -223,7 +223,18 @@ namespace Epi.Windows.MakeView.Forms
                 this.GotoLine("field", "click", Identifier, true);
             }
             else
-            this.GotoLine("field", "", Identifier, true);
+            {
+                this.GotoLine("field", "after", Identifier, true);
+
+                int lineIndex = this.codeText.GetLineFromCharIndex(this.codeText.SelectionStart) - 1;
+                string addCodeHere = "//add code here";
+                if (this.codeText.Lines[lineIndex].Contains(addCodeHere))
+                {
+                    this.codeText.SelectionStart = this.codeText.GetFirstCharIndexFromLine(lineIndex);
+                    this.codeText.SelectionStart += this.codeText.Lines[lineIndex].IndexOf(addCodeHere);
+                    this.codeText.SelectionLength = addCodeHere.Length;
+                }
+            }
         }
 
         private void Construct()
