@@ -43,6 +43,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.lbxStatus = new System.Windows.Forms.ListBox();
+            this.cmsStatus = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblWarning = new System.Windows.Forms.Label();
             this.lblWarningMessage = new System.Windows.Forms.Label();
@@ -52,13 +54,12 @@
             this.rdbSubmittedRecords = new System.Windows.Forms.RadioButton();
             this.grpImportMode = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmsStatus = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.chkIncremental = new System.Windows.Forms.CheckBox();
             this.groupImportInfo.SuspendLayout();
+            this.cmsStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grpImportMode.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.cmsStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblDescription
@@ -144,6 +145,19 @@
             this.lbxStatus.Name = "lbxStatus";
             this.lbxStatus.TabStop = false;
             // 
+            // cmsStatus
+            // 
+            this.cmsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_Copy});
+            this.cmsStatus.Name = "cmsStatus";
+            resources.ApplyResources(this.cmsStatus, "cmsStatus");
+            this.cmsStatus.Click += new System.EventHandler(this.cmsStatus_Click);
+            // 
+            // toolStripMenuItem_Copy
+            // 
+            this.toolStripMenuItem_Copy.Name = "toolStripMenuItem_Copy";
+            resources.ApplyResources(this.toolStripMenuItem_Copy, "toolStripMenuItem_Copy");
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Epi.Enter.Properties.Resources.warning;
@@ -181,6 +195,7 @@
             this.rdbAllRecords.Name = "rdbAllRecords";
             this.rdbAllRecords.TabStop = true;
             this.rdbAllRecords.UseVisualStyleBackColor = true;
+            this.rdbAllRecords.Click += new System.EventHandler(this.rdbAllRecords_Click);
             // 
             // rdbSubmittedRecords
             // 
@@ -188,6 +203,7 @@
             this.rdbSubmittedRecords.Name = "rdbSubmittedRecords";
             this.rdbSubmittedRecords.TabStop = true;
             this.rdbSubmittedRecords.UseVisualStyleBackColor = true;
+            this.rdbSubmittedRecords.Click += new System.EventHandler(this.rdbSubmittedRecords_Click);
             // 
             // grpImportMode
             // 
@@ -199,24 +215,20 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkIncremental);
             this.groupBox1.Controls.Add(this.rdbSubmittedRecords);
             this.groupBox1.Controls.Add(this.rdbAllRecords);
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // cmsStatus
+            // chkIncremental
             // 
-            this.cmsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_Copy});
-            this.cmsStatus.Name = "cmsStatus";
-            resources.ApplyResources(this.cmsStatus, "cmsStatus");
-            this.cmsStatus.Click += new System.EventHandler(this.cmsStatus_Click);
-            // 
-            // toolStripMenuItem_Copy
-            // 
-            this.toolStripMenuItem_Copy.Name = "toolStripMenuItem_Copy";
-            resources.ApplyResources(this.toolStripMenuItem_Copy, "toolStripMenuItem_Copy");
+            this.chkIncremental.Checked = true;
+            this.chkIncremental.CheckState = System.Windows.Forms.CheckState.Checked;
+            resources.ApplyResources(this.chkIncremental, "chkIncremental");
+            this.chkIncremental.Name = "chkIncremental";
+            this.chkIncremental.UseVisualStyleBackColor = true;
             // 
             // ImportWebDataForm
             // 
@@ -244,10 +256,10 @@
             this.Load += new System.EventHandler(this.ImportDataForm_Load);
             this.groupImportInfo.ResumeLayout(false);
             this.groupImportInfo.PerformLayout();
+            this.cmsStatus.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grpImportMode.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.cmsStatus.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -279,5 +291,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ContextMenuStrip cmsStatus;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Copy;
+        private System.Windows.Forms.CheckBox chkIncremental;
     }
 }
