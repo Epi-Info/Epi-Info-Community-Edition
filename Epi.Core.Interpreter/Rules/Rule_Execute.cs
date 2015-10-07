@@ -48,7 +48,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             commandlineString = commandlineString.Trim(new char[] { '\"', '\'' });
 
-            if (!commandlineString.EndsWith(".xlx") & !commandlineString.EndsWith(".xls") & !commandlineString.EndsWith(".xlsx") & !commandlineString.EndsWith(".docx") & !commandlineString.EndsWith(".pdf"))
+            if (!commandlineString.EndsWith(".xlx") & !commandlineString.EndsWith(".xls") & !commandlineString.EndsWith(".xlsx") & !commandlineString.EndsWith(".docx") & !commandlineString.EndsWith(".pdf") & !commandlineString.EndsWith(".html") & !commandlineString.EndsWith(".htm"))
             {
                 List<string> temp = splitCommandLine(commandlineString);
 
