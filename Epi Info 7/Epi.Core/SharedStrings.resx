@@ -395,7 +395,7 @@ Error details: {0}</value>
     <value>Invalid form name:  A form with this name already exists. Please enter a different name for this form.</value>
   </data>
   <data name="INVALID_VIEW_NAME_TOO_LONG" xml:space="preserve">
-    <value>Invalid form name:  A form's name cannot consist of more than 64 characters. Please enter a shorter name for this form.</value>
+    <value>Invalid form name:  A form's name cannot consist of more than 40 characters. Please enter a shorter name for this form.</value>
   </data>
   <data name="INVALID_PROJECT_NAME" xml:space="preserve">
     <value>Invalid project name:  Project names cannot contain spaces or non-alphanumeric characters, other than underscores. Please enter a valid project name.</value>

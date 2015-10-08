@@ -906,7 +906,7 @@ namespace Epi
                 validationStatus = SharedStrings.INVALID_VIEW_NAME_RESERVED_WORD;
                 valid = false;
             }
-            else if (viewName.Length > 64)
+            else if (viewName.Length > 40)
             {
                 validationStatus = SharedStrings.INVALID_VIEW_NAME_TOO_LONG;
                 valid = false;
