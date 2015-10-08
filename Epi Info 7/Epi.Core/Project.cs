@@ -707,6 +707,13 @@ namespace Epi
                 validationStatus = SharedStrings.MISSING_PROJECT_NAME;
                 valid = false;
             }
+            else if (projectName.Contains("'"))
+            {
+                // if the project name contains an apostrophe.
+                validationStatus = SharedStrings.INVALID_PROJECT_NAME;
+                valid = false;
+                
+            }
             else if (AppData.Instance.IsReservedWord(projectName))
             {
                 // if the project name is a reserved word, invalidate it
