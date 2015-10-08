@@ -362,7 +362,7 @@ namespace Epi.Windows.Dialogs
         /// <param name="e">.NET supplied event parameters</param>
         private void txtViewName_Leave(object sender, EventArgs e)
         {
-            //ValidateViewName();
+            ValidateViewName();
         }
 
         private void cbxCollectedDataDriver_SelectedIndexChanged(object sender, EventArgs e)
