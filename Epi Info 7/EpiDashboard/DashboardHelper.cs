@@ -3928,7 +3928,13 @@ namespace EpiDashboard
                 {
                     if (inputs.CustomFilter.ToLower().Contains(name.ToLower()) && !columnNames.Contains(name, caseInsensitiveEqualityComparer))
                     {
-                        columnNames.Add(name);
+                        // Adding filter variables to columnNames causes Frequency to list the filter variables
+                        // among the frequency variables when the properties panel is re-opened.
+                        // The below if-block stops that from happening.
+                        if (!parameters.GetType().Name.ToString().Equals("FrequencyParameters"))
+                        {
+                            columnNames.Add(name);
+                        }
                     }
                 }
             }
