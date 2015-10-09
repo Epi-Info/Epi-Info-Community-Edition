@@ -845,17 +845,17 @@ namespace Epi.Windows.MakeView.Dialogs
                     this.lblDepartment.Visible = false;
 
 
-                        this.txtOrganization.Left = 381;
-                        this.txtOrganization.Size = new System.Drawing.Size(453, 23);
-                        this.lblOrganization.Left = 300;
+                        this.txtOrganization.Left = 295;
+                        this.txtOrganization.Size = new System.Drawing.Size(540, 23);
+                        this.lblOrganization.Left = 292;
 
 
                         this.lblDepMirr.Visible = false;
                         this.txtDepartmentMirror.Visible = false;
 
-                        this.txtOrganizationMirror.Left = 381;
-                        this.txtOrganizationMirror.Size = new System.Drawing.Size(453, 23);
-                        this.lblOrgMirr.Left = 300;
+                        this.txtOrganizationMirror.Left = 295;
+                        this.txtOrganizationMirror.Size = new System.Drawing.Size(540, 23);
+                        this.lblOrgMirr.Left = 292;
                        ClosingTimecomboBox.SelectedIndex = 0;
                        StartTimecomboBox.SelectedIndex = 0;
                        
@@ -870,17 +870,17 @@ namespace Epi.Windows.MakeView.Dialogs
                     this.lblDepartment.Visible = false;
                     
                    
-                    this.txtOrganization.Left = 381;
-                    this.txtOrganization.Size = new  System.Drawing.Size(453,23);
-                    this.lblOrganization.Left = 300;
+                    this.txtOrganization.Left = 295;
+                    this.txtOrganization.Size = new System.Drawing.Size(540, 23);
+                    this.lblOrganization.Left = 292;
                      
                      
                     this.lblDepMirr.Visible = false;
                     this.txtDepartmentMirror.Visible = false;
 
-                    this.txtOrganizationMirror.Left = 381;
-                    this.txtOrganizationMirror.Size = new System.Drawing.Size(453, 23);
-                    this.lblOrgMirr.Left = 300;
+                    this.txtOrganizationMirror.Left = 295;
+                    this.txtOrganizationMirror.Size = new System.Drawing.Size(540, 23);
+                    this.lblOrgMirr.Left = 292;
 
                      
                     ClosingTimecomboBox.SelectedIndex = 0;
