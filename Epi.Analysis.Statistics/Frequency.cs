@@ -62,6 +62,7 @@ namespace Epi.Analysis.Statistics
             System.Collections.Generic.Dictionary<string, System.Data.DataTable> Freq_ListSet = new Dictionary<string, System.Data.DataTable>();
             
             DataTable DT = new DataTable();
+            DT.CaseSensitive = true;
             DataTable OutDataTable = new DataTable();
 
             foreach (DataColumn column in this.Context.Columns)
