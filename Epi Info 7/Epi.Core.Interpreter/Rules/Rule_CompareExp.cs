@@ -241,7 +241,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                         if (LHSO.GetType().Name.ToUpper() == "STRING" && RHSO.GetType().Name.ToUpper() == "STRING")
                         {
-                            i = StringComparer.CurrentCultureIgnoreCase.Compare(LHSO.ToString().Trim(), RHSO.ToString().Trim());
+                            i = StringComparer.CurrentCulture.Compare(LHSO.ToString().Trim(), RHSO.ToString().Trim());
                         }
                         else if (LHSO is IComparable && RHSO is IComparable)
                         {
