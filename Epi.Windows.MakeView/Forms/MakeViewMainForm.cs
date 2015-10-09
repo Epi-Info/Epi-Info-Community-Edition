@@ -1454,9 +1454,6 @@ namespace Epi.Windows.MakeView.Forms
                         case "Image":
                         case "Mirror":
                         case "Grid":
-                        case "CommandButton":
-                            invalidFields += field.Name + " (" + field.FieldType + ");";
-                            break;
                         case "Relate":
                             if (PublishingToWebSurvey)
                             { 
