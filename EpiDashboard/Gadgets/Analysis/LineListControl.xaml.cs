@@ -161,7 +161,7 @@ namespace EpiDashboard
                 }
             }
         }
-
+        Controls.GadgetProperties.LineListProperties properties = null;
         public override void ShowHideConfigPanel()
         {
             Popup = new DashboardPopup();
@@ -174,14 +174,16 @@ namespace EpiDashboard
                 Popup.Parent = this.Parent as Grid;
             }
 
-            Controls.GadgetProperties.LineListProperties properties = new Controls.GadgetProperties.LineListProperties(this.DashboardHelper, this, (LineListParameters)Parameters, StrataGridList, columnOrder);
+           properties = new Controls.GadgetProperties.LineListProperties(this.DashboardHelper, this, (LineListParameters)Parameters, StrataGridList, columnOrder);
 
             properties.Width = 800;
             properties.Height = 600;
-
+            //MessageBox.Show(System.Windows.SizeToContent.Width.ToString());
+            //MessageBox.Show(" PrimaryWidth=" + System.Windows.SystemParameters.PrimaryScreenWidth.ToString() + "Height=" + System.Windows.SystemParameters.PrimaryScreenHeight.ToString());
             if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
             {
                 properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+
             }
 
             if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
@@ -193,6 +195,42 @@ namespace EpiDashboard
             properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
             Popup.Content = properties;
             Popup.Show();
+            //MessageBox.Show("Width="+properties.Width.ToString() + "Height=" + properties.Height.ToString());
+        }
+
+        public override void GadgetBase_SizeChanged(double width, double height)
+        {
+
+            //MessageBox.Show(" PrimaryWidth=" + System.Windows.SystemParameters.PrimaryScreenWidth.ToString() + "Height=" + System.Windows.SystemParameters.PrimaryScreenHeight.ToString());         
+           //MessageBox.Show(" Resized width=" + width.ToString() + "  ResizedHeight=" + height.ToString());
+            //MessageBox.Show(System.Windows.SystemParameters.WorkArea.Width.ToString());
+            var newWidthSize = width;
+
+            if (newWidthSize < 1100)
+            {
+                //ScrollViewer viewer = new ScrollViewer();
+                //viewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.7);
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight /1.7);
+            }
+            else if (newWidthSize > 1100)
+            {
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
+
+
+            //if(this.properties!=null)
+            //{
+            //    //properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 3.0);
+            //    //properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 3.0);
+            //}
+            //if (GadgetBase.WidthProperty.ToString) {
+            //    properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 3.0);
+            //    properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 3.0);
+            //}
+
+           
         }
 
         private void properties_ChangesAccepted(object sender, EventArgs e)
@@ -1495,5 +1533,9 @@ namespace EpiDashboard
                 //}
             }
         }
+
+        
+
+
     }
 }

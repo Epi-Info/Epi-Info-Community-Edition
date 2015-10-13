@@ -55,8 +55,19 @@ namespace EpiDashboard.Controls
             provider = pointlayerprop.provider;
             rctSelectColor.Fill = new SolidColorBrush(Color.FromArgb(120,0,0,255));
             colorselected = new SolidColorBrush(Color.FromArgb(120, 0, 0, 255));
-            
-         }
+
+            #region Translation
+
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_POINTOFINTEREST;
+            tbtnDataSource.Title = DashboardSharedStrings.GADGET_TABBUTTON_DATASOURCE;
+            tbtnDataSource.Description = DashboardSharedStrings.GADGET_TABDESC_DATASOURCE;
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_POF_VARIABLES;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
+
+            #endregion // Translation
+        }
      
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;

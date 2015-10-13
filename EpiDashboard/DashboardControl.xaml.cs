@@ -1952,6 +1952,18 @@ namespace EpiDashboard
                 Canvas.SetLeft(introAvailableData, width);
                 Canvas.SetTop(introAvailableData, 24);
             }
+            foreach (UserControl element in this.Gadgets)
+            {
+                if (element is GadgetBase)
+                {
+                    GadgetBase gadget = element as GadgetBase;
+                    if (gadget != null)
+                    {
+                        gadget.GadgetBase_SizeChanged(e.NewSize.Width, e.NewSize.Height);
+                    }
+                }
+            }
+
         }
 
         void mnuGadgetMenuItem_Click(object sender, RoutedEventArgs e)
@@ -3930,6 +3942,7 @@ namespace EpiDashboard
             if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
             {
                 properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                
             }
 
             if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
