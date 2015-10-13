@@ -9086,7 +9086,16 @@ namespace Epi.Data.Services
         /// <returns>Contents of the code table</returns>
         public virtual DataTable GetCodeTable(string tableName)
         {
-            throw new System.ApplicationException("Not implemented");
+            try
+            {
+                Query selectQuery = db.CreateQuery("select * from [" + tableName + "]");
+                DataTable table = db.Select(selectQuery);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                throw new GeneralException("Could not retrieve the code table.", ex);
+            }
         }
         /// <summary>
         /// Gets the field to view relations for a view

@@ -1388,8 +1388,14 @@ namespace EpiDashboard
                             }
                             break;
                         case "showlistlabels":
-                            if (child.InnerText.ToLower().Equals("true")) { ((FrequencyParameters)Parameters).ShowCommentLegalLabels = true; }
-                            else { ((FrequencyParameters)Parameters).ShowCommentLegalLabels = false; }
+                            if (child.InnerText.ToLower().Equals("true")) 
+                            { 
+                                ((FrequencyParameters)Parameters).ShowCommentLegalLabels = true; 
+                            }
+                            else 
+                            { 
+                                ((FrequencyParameters)Parameters).ShowCommentLegalLabels = false; 
+                            }
                             break;
                         case "sort":
                             if (child.InnerText.ToLower().Equals("highlow") || child.InnerText.ToLower().Equals("hightolow"))
