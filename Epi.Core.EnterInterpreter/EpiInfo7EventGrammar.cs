@@ -55,7 +55,7 @@ namespace Epi.Core.EnterInterpreter
         public Rule_Context RuleContext;
         public EnterRule ProgramStart = null;
         private string commandText = String.Empty;
-        private Stack<Token> tokenStack = new Stack<Token>();
+        private Stack<Token> tokenStack = new Stack<Token>();      
 
         public ICommandContext Context
         {
@@ -73,6 +73,11 @@ namespace Epi.Core.EnterInterpreter
             get { return this.host; }
             set{ this.host = value;}
 
+        }
+        public bool IsExecuteError
+        {
+            get;
+            set;
         }
 
         const string RESOURCES_LANGUAGE_RULES = "Epi.Core.EnterInterpreter.grammar.EpiInfoGrammar.cgt";
@@ -244,6 +249,7 @@ namespace Epi.Core.EnterInterpreter
             {
                 try
                 {
+                    IsExecuteError = false;
                     this.RuleContext.AssignVariableCheck = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
                     this.commandText = source;
                     this.IsExecuteMode = true;
@@ -256,6 +262,7 @@ namespace Epi.Core.EnterInterpreter
                 {
                     if (!ex.Message.ToUpper().Contains("STACK EMPTY"))
                     {
+                        IsExecuteError = true;
                         if (this.host.IsSuppressErrorsEnabled)
                         {
                             Logger.Log(string.Format("{0} - EnterInterpreter Parse Error. : source [{1}]\n message:\n{2}", DateTime.Now, ex.Source, ex.Message));
@@ -268,6 +275,7 @@ namespace Epi.Core.EnterInterpreter
                 }
                 catch (Exception ex)
                 {
+                    IsExecuteError = true;
                     if (this.host.IsSuppressErrorsEnabled)
                     {
                         Logger.Log(string.Format("{0} - EnterInterpreter Execute : source [{1}]\n message:\n{2}", DateTime.Now, ex.Source, ex.Message));

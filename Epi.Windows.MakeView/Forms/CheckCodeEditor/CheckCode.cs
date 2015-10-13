@@ -48,6 +48,7 @@ namespace Epi.Windows.MakeView.Forms
         private bool validData = false;
         private TreeNode SelectedDragNode = null;
         private int lastX, lastY;
+        private bool iserrcheckcode = false;      
 
         #endregion  //Private Data Members
 
@@ -109,9 +110,11 @@ namespace Epi.Windows.MakeView.Forms
                 codeText.Select(start, length);
                 codeText.SelectionColor = Color.Red;
                 codeText.Select(start, 0);
+                iserrcheckcode = true;
             }
             catch (Exception ex)
             {
+                iserrcheckcode = true;
                 this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", ex.Message));
             }
             return isValidCommand;
@@ -137,6 +140,8 @@ namespace Epi.Windows.MakeView.Forms
                 try
                 {
                     mainForm.EpiInterpreter.Execute(view.CheckCode);
+                    if (mainForm.EpiInterpreter.IsExecuteError)
+                        iserrcheckcode = true;
                 }
                 catch
                 {
@@ -166,7 +171,12 @@ namespace Epi.Windows.MakeView.Forms
             }
 
             BuildComboBox();
-
+            if (iserrcheckcode)
+            {
+                this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", "The Check Code does not compile."));
+                iserrcheckcode = false;               
+            }
+               
             this.codeText.SelectionStart = 0;
             this.codeText.SelectionLength = 0;
         }
@@ -184,6 +194,14 @@ namespace Epi.Windows.MakeView.Forms
             view = currentview;    
             Construct();                            
             BuildComboBox();
+            try
+            {
+                this.mainForm.EpiInterpreter.Parse(this.codeText.Text);
+            }
+            catch (Exception)
+            {
+                iserrcheckcode = true;
+            }
             string Identifier;
             if (page.Name.Trim().IndexOf(' ') > -1)
             {
@@ -194,6 +212,11 @@ namespace Epi.Windows.MakeView.Forms
                 Identifier = page.Name;
             }
             this.GotoLine("page", "", Identifier);
+            if (iserrcheckcode)
+            {
+                this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", "The Check Code does not compile."));
+                iserrcheckcode = false;                
+            }
         }
 
         /// <summary>
@@ -209,6 +232,14 @@ namespace Epi.Windows.MakeView.Forms
             view = currentview;  
             Construct();                                
             BuildComboBox();
+            try
+            {
+                this.mainForm.EpiInterpreter.Parse(this.codeText.Text);
+            }
+            catch(Exception)
+            {
+                iserrcheckcode=true;
+            }
             string Identifier;
             if (field.Name.Trim().IndexOf(' ') > -1)
             {
@@ -233,6 +264,11 @@ namespace Epi.Windows.MakeView.Forms
                     this.codeText.SelectionStart = this.codeText.GetFirstCharIndexFromLine(lineIndex);
                     this.codeText.SelectionLength = this.codeText.Lines[lineIndex].Length;
                 }
+            }
+            if (iserrcheckcode )
+            {
+                this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", "The Check Code does not compile."));
+                iserrcheckcode = false;               
             }
         }
 
@@ -2623,9 +2659,13 @@ namespace Epi.Windows.MakeView.Forms
                                 index1 = MC[i].Index;
                                 index2 = this.codeText.Text.ToLower().IndexOf("end-" + pLevel, index1);
                                 re = new Regex(string.Format("\\b{0}\\b", pEvent), RegexOptions.IgnoreCase);
-                                MC = re.Matches(this.codeText.Text.Substring(index1, index2 - index1));
-                                if (MC.Count > 0)
-                                    return result = index1 + MC[0].Index;
+                                if (index2 > 0)
+                                {
+                                    MC = re.Matches(this.codeText.Text.Substring(index1, index2 - index1));
+                                    if (MC.Count > 0)
+                                        return result = index1 + MC[0].Index;
+                                }
+                                else iserrcheckcode = true;
                             }
                         }
                     }
