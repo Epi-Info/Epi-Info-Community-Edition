@@ -139,9 +139,11 @@ namespace EpiDashboard.Controls.GadgetProperties
 
 
             #endregion // Translation
+
+
         }
 
-        
+
 
 
         public bool HasSelectedFields
@@ -393,8 +395,8 @@ namespace EpiDashboard.Controls.GadgetProperties
                 txtMaxRows.Text = Parameters.MaxRows.ToString();
             }
 
-            lbxAvailableVariables.Height = lbxAvailableVariables.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 868.0);
-            lbxSortOrder.Height = lbxSortOrder.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 868.0);
+            //lbxAvailableVariables.Height = lbxAvailableVariables.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 868.0);
+            //lbxSortOrder.Height = lbxSortOrder.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 868.0);
             
             checkboxTabOrder.IsChecked = Parameters.SortColumnsByTabOrder;
             checkboxUsePrompts.IsChecked = Parameters.UsePromptsForColumnNames;
@@ -552,5 +554,6 @@ namespace EpiDashboard.Controls.GadgetProperties
                 txtMaxHeight.Text = (System.Windows.SystemParameters.PrimaryScreenHeight * 2).ToString();
             }
         }
+
     }
 }

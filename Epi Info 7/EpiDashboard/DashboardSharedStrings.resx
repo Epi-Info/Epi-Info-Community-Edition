@@ -1522,4 +1522,16 @@ of records or select fewer fields for the group.</value>
   <data name="MENU_OPTIONS_TEXT" xml:space="preserve">
     <value>Shows a menu of options for the Dashboard application.</value>
   </data>
+  <data name="GADGET_CONFIG_TITLE_POINTOFINTEREST" xml:space="preserve">
+    <value>Point of Interest</value>
+  </data>
+  <data name="GADGET_TABBUTTON_DATASOURCE" xml:space="preserve">
+    <value>Data Source</value>
+  </data>
+  <data name="GADGET_TABDESC_DATASOURCE" xml:space="preserve">
+    <value>Choose data source.</value>
+  </data>
+  <data name="GADGET_TABDESC_POF_VARIABLES" xml:space="preserve">
+    <value>Choose map boundaries.</value>
+  </data>
 </root>

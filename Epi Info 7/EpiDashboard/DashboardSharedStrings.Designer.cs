@@ -1698,6 +1698,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Point of Interest.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_POINTOFINTEREST {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_POINTOFINTEREST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scatter Chart.
         /// </summary>
         public static string GADGET_CONFIG_TITLE_SCATTER_CHART {
@@ -2967,6 +2976,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data Source.
+        /// </summary>
+        public static string GADGET_TABBUTTON_DATASOURCE {
+            get {
+                return ResourceManager.GetString("GADGET_TABBUTTON_DATASOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Define Value Mappings.
         /// </summary>
         public static string GADGET_TABBUTTON_DEFINE_VALMAPPING {
@@ -3102,6 +3120,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose data source..
+        /// </summary>
+        public static string GADGET_TABDESC_DATASOURCE {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_DATASOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change display options..
         /// </summary>
         public static string GADGET_TABDESC_DISPLAY {
@@ -3224,6 +3251,15 @@ namespace EpiDashboard {
         public static string GADGET_TABDESC_PIE_CHART {
             get {
                 return ResourceManager.GetString("GADGET_TABDESC_PIE_CHART", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose map boundaries..
+        /// </summary>
+        public static string GADGET_TABDESC_POF_VARIABLES {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_POF_VARIABLES", resourceCulture);
             }
         }
         

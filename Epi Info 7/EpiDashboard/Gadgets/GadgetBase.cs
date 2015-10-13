@@ -1408,5 +1408,10 @@ namespace EpiDashboard
         {            
         }
         #endregion // Event Handlers
+
+        public virtual void GadgetBase_SizeChanged(double width, double height)
+        {
+        }
+
     }
 }

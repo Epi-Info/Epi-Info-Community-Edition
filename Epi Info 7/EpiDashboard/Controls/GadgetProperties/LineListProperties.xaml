@@ -6,7 +6,7 @@
              xmlns:PropertyPanels="clr-namespace:EpiDashboard.Controls.GadgetProperties"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800" Loaded="UserControl_Loaded" Style="{DynamicResource PropertiesPanelStyle}">
+             d:DesignHeight="600" d:DesignWidth="800" Loaded="UserControl_Loaded"  Style="{DynamicResource PropertiesPanelStyle}">
     <PropertyPanels:GadgetPropertiesPanelBase.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,6 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </PropertyPanels:GadgetPropertiesPanelBase.Resources>
+   
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="400" Width=".33*" />
@@ -179,7 +180,7 @@
         
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
-        <DockPanel Grid.ColumnSpan="3" Grid.Row="1">
+        <DockPanel x:Name="okCancelBtn" Grid.ColumnSpan="3" Grid.Row="1">
             <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
             <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
         </DockPanel>

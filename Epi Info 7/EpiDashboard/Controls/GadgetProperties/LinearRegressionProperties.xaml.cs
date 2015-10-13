@@ -263,6 +263,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
         }
 
+
+
         public LogisticParameters Parameters { get; private set; }
 
         /// <summary>
