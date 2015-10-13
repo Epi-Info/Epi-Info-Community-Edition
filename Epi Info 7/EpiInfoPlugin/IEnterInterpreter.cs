@@ -11,6 +11,7 @@ namespace EpiInfo.Plugin
         void Parse(string pCommandText);
         void Execute(string pCommandText);
         ICommandContext Context { get; set; }
+        bool IsExecuteError { get; set; }
 
         /*
         List<IVariable> GetVariablesInScope();
