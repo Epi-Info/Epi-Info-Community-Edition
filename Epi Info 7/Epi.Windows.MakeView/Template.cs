@@ -1157,7 +1157,7 @@ namespace Epi.Windows.MakeView
                         while (fieldSubtree.ReadToNextSibling("Field"));
                         break;
                     }
-                }
+                }               
             }
 
             CreateGridTables(templatePath);
@@ -1176,6 +1176,7 @@ namespace Epi.Windows.MakeView
                 mediator.ProjectExplorer.SelectPage( mediator.ProjectExplorer.currentPage);
                 mediator.LoadPage(mediator.ProjectExplorer.currentPage);
             }
+            mediator.OnViewFieldTabsChanged();
         }
         
         #endregion
