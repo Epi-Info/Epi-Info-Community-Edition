@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://www.yourcompany.com/types/" elementFormDefault="qualified" targetNamespace="http://www.yourcompany.com/types/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" />
+  <xs:import schemaLocation="http://localhost:59905/SurveyManagerServiceV3.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:59905/SurveyManagerServiceV3.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:59905/SurveyManagerServiceV3.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" />
   <xs:complexType name="PublishRequest">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:RequestBase">
@@ -27,10 +27,12 @@
   <xs:complexType name="SurveyInfoDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="ClosingDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DBConnectionString" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DepartmentName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ExitText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IntroductionText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsDraftMode" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSqlProject" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
       <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
       <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
@@ -185,6 +187,7 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="DateCompleted" type="xs:dateTime" />
           <xs:element minOccurs="0" name="IncludeOrderStatistics" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsDraftMode" type="xs:boolean" />
           <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
           <xs:element minOccurs="0" name="PageNumber" type="xs:int" />
           <xs:element minOccurs="0" name="PageSize" type="xs:int" />
@@ -231,4 +234,54 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SurveyAnswerResponse" nillable="true" type="tns:SurveyAnswerResponse" />
+  <xs:complexType name="PreFilledAnswerRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RequestBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AnswerInfo" nillable="true" type="tns:PreFilledAnswerDTO" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PreFilledAnswerRequest" nillable="true" type="tns:PreFilledAnswerRequest" />
+  <xs:complexType name="PreFilledAnswerDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
+      <xs:element minOccurs="0" name="SurveyId" type="ser:guid" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyQuestionAnswerList" nillable="true" type="q6:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PreFilledAnswerDTO" nillable="true" type="tns:PreFilledAnswerDTO" />
+  <xs:complexType name="PreFilledAnswerResponse">
+    <xs:sequence>
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessageList" nillable="true" type="q7:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SurveyResponseID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SurveyResponsePassCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SurveyResponseUrl" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PreFilledAnswerResponse" nillable="true" type="tns:PreFilledAnswerResponse" />
+  <xs:complexType name="SurveyControlsRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SurveyControlsRequest" nillable="true" type="tns:SurveyControlsRequest" />
+  <xs:complexType name="SurveyControlsResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+          <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="SurveyControlList" nillable="true" type="q8:ArrayOfSurveyControlDTO" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SurveyControlsResponse" nillable="true" type="tns:SurveyControlsResponse" />
 </xs:schema>

@@ -109,7 +109,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
         private void QueryForExistingSurveyInfo()
         {
-        SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+        SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
             SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();
             Request.Criteria.SurveyIdList = new string[]{this.view.WebSurveyId};
             Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
