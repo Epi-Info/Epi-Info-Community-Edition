@@ -72,6 +72,7 @@ namespace Epi.Windows.MakeView.Forms
         private string WebServiceBindingMode;
         private int WebServiceAuthMode;
         private string WebServiceEndpointAddress;
+        private Configuration config;
         BackgroundWorker worker = null;
         SplashScreenForm sf = null;
         private string RepublishOrgKey = null;
@@ -125,7 +126,7 @@ namespace Epi.Windows.MakeView.Forms
             projectExplorer.CreateFieldLayoutControl += new ProjectExplorerCreateFieldLayoutControlEventHandler(projectExplorer_CreateFieldLayoutControl);
             projectExplorer.AllowClose = false;
             projectExplorer.AllowUnDock = false;
-
+            this.config = Configuration.GetNewInstance();
             canvas = new Canvas(this);
             canvas.AllowClose = false;
             canvas.AllowUnDock = false;
@@ -2987,9 +2988,9 @@ namespace Epi.Windows.MakeView.Forms
                             {
                                 try
                                 {
-                                SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
-                                    SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
-                                    SurveyManagerService.OrganizationDTO orgDTO = new SurveyManagerService.OrganizationDTO();
+                                    Epi.SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                                Epi.SurveyManagerService.OrganizationRequest Request = new Epi.SurveyManagerService.OrganizationRequest();
+                                Epi.SurveyManagerService.OrganizationDTO orgDTO = new Epi.SurveyManagerService.OrganizationDTO();
                                     Request.Organization = orgDTO;
                                     var TestService = client.GetOrganization(Request);
 
@@ -3022,7 +3023,7 @@ namespace Epi.Windows.MakeView.Forms
                     {
                         try
                         {
-                        SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                            SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                             SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
                             SurveyManagerService.OrganizationDTO orgDTO = new SurveyManagerService.OrganizationDTO();
                             Request.Organization = orgDTO;
@@ -3621,7 +3622,7 @@ namespace Epi.Windows.MakeView.Forms
         {
             try
             {
-            SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 Configuration config = Configuration.GetNewInstance();
 
                 SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
@@ -3786,7 +3787,7 @@ namespace Epi.Windows.MakeView.Forms
         {
             try
             {
-               SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 Configuration config = Configuration.GetNewInstance();
 
                 SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
@@ -4015,55 +4016,45 @@ namespace Epi.Windows.MakeView.Forms
         }
         private void QuickSurveyInfoUpdate()
         {
+             this.config = Configuration.GetNewInstance();
             try
             {
                 Template template = new Template(this.mediator);
-                SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
-                Configuration config = Configuration.GetNewInstance();
+                var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
 
-                SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
-                SurveyManagerService.SurveyInfoResponse Result = new SurveyManagerService.SurveyInfoResponse();//(Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
-               
-                Request.Criteria = new SurveyManagerService.SurveyInfoCriteria();
-                Request.Criteria.ClosingDate = this.CloseDate;
-                Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
-                Request.Criteria.UserPublishKey = new Guid(this.UserPublishKey);
-                Request.Criteria.SurveyIdList = new string[]{this.SurveyId};
-                Request.Action = "Update";
 
-                SurveyManagerService.SurveyInfoDTO SurveyInfoDTO = new SurveyManagerService.SurveyInfoDTO();
-
-                SurveyInfoDTO.ClosingDate = this.CloseDate;
-                SurveyInfoDTO.StartDate = this.StartDate;
-                SurveyInfoDTO.SurveyId = new Guid(this.CurrentView.WebSurveyId).ToString();
-                SurveyInfoDTO.SurveyType = this.SurveyType;
-                SurveyInfoDTO.SurveyNumber = this.SurveyNumber;
-                SurveyInfoDTO.SurveyName = this.SurveyName;
-                SurveyInfoDTO.OrganizationKey = new Guid(OrganizationKey);
-                SurveyInfoDTO.OrganizationName = this.OrganizationName;
-                SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
-                SurveyInfoDTO.XML = template.CreateWebSurveyTemplate();
-                SurveyInfoDTO.ExitText = this.ExitText;
-                SurveyInfoDTO.IntroductionText = this.IntroductionText;
-                SurveyInfoDTO.DepartmentName = this.DepartmentName;
-                  if (this.mediator.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
-                        {
-                        SurveyInfoDTO.IsSqlProject  = true;
-                        } 
-
-                Request.Criteria.SurveyType = this.SurveyType;
-                Request.Criteria.IsDraftMode = true;
-                SurveyInfoDTO.IsDraftMode = this.IsDraftMode;
-                Request.SurveyInfoList = new SurveyManagerService.SurveyInfoDTO[] { SurveyInfoDTO };
-
-                Result = client.SetSurveyInfo(Request);
-
-                if (Result != null && Result.SurveyInfoList.Length > 0)
+                if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveysanagerservice) || ServiceVersion.Contains(Epi.Constants.surveysanagerservicev2)))
                 {
-                    //this.UpdateStatus("Survey was successfully updated!");
+                    SurveyManagerService.SurveyInfoRequest Request;
+                    SurveyManagerService.SurveyInfoResponse Result;
+                    SurveyManagerService.ManagerServiceV2Client client;
+                    SetMessageObject(template, out Request, out Result, out client);
+                    Result = client.SetSurveyInfo(Request);
+                    if (Result != null && Result.SurveyInfoList.Length > 0)
+                    {
+                        //this.UpdateStatus("Survey was successfully updated!");
 
-                MessageBox.Show("Survey was successfully updated.","",MessageBoxButtons.OK);
+                        MessageBox.Show("Survey was successfully updated.", "", MessageBoxButtons.OK);
+                    }
                 }
+                 if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveysanagerservicev3) ))
+                {
+                    SurveyManagerServiceV3.SurveyInfoRequest Request;
+                    SurveyManagerServiceV3.SurveyInfoResponse Result;
+                    SurveyManagerServiceV3.ManagerServiceV3Client client;
+                    SetMessageObjectV3(template, out Request, out Result, out client);
+                    Result = client.SetSurveyInfo(Request);
+                    if (Result != null && Result.SurveyInfoList.Length > 0)
+                    {
+                        //this.UpdateStatus("Survey was successfully updated!");
+
+                        MessageBox.Show("Survey was successfully updated.", "", MessageBoxButtons.OK);
+                    }
+
+                 }
+               
+
+                
             }
             catch (FaultException<CustomFaultException> cfe)
             {
@@ -4096,6 +4087,97 @@ namespace Epi.Windows.MakeView.Forms
 
             }
         }
+
+        private void SetMessageObject(Template template, out SurveyManagerService.SurveyInfoRequest Request, out SurveyManagerService.SurveyInfoResponse Result, out  SurveyManagerService.ManagerServiceV2Client client)
+        {
+
+            
+
+
+           
+                 client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+
+
+
+                Request = new SurveyManagerService.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
+                Result = new SurveyManagerService.SurveyInfoResponse();//(Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
+
+                Request.Criteria = new SurveyManagerService.SurveyInfoCriteria();
+                Request.Criteria.ClosingDate = this.CloseDate;
+                Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+                Request.Criteria.UserPublishKey = new Guid(this.UserPublishKey);
+                Request.Criteria.SurveyIdList = new string[] { this.SurveyId };
+                Request.Action = "Update";
+
+                SurveyManagerService.SurveyInfoDTO SurveyInfoDTO = new SurveyManagerService.SurveyInfoDTO();
+
+                SurveyInfoDTO.ClosingDate = this.CloseDate;
+                SurveyInfoDTO.StartDate = this.StartDate;
+                SurveyInfoDTO.SurveyId = new Guid(this.CurrentView.WebSurveyId).ToString();
+                SurveyInfoDTO.SurveyType = this.SurveyType;
+                SurveyInfoDTO.SurveyNumber = this.SurveyNumber;
+                SurveyInfoDTO.SurveyName = this.SurveyName;
+                SurveyInfoDTO.OrganizationKey = new Guid(OrganizationKey);
+                SurveyInfoDTO.OrganizationName = this.OrganizationName;
+                SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
+                SurveyInfoDTO.XML = template.CreateWebSurveyTemplate();
+                SurveyInfoDTO.ExitText = this.ExitText;
+                SurveyInfoDTO.IntroductionText = this.IntroductionText;
+                SurveyInfoDTO.DepartmentName = this.DepartmentName;
+                
+
+                Request.Criteria.SurveyType = this.SurveyType;
+                Request.Criteria.IsDraftMode = true;
+                SurveyInfoDTO.IsDraftMode = this.IsDraftMode;
+                Request.SurveyInfoList = new SurveyManagerService.SurveyInfoDTO[] { SurveyInfoDTO };
+            
+        }
+        private void SetMessageObjectV3(Template template, out SurveyManagerServiceV3.SurveyInfoRequest Request, out SurveyManagerServiceV3.SurveyInfoResponse Result, out  SurveyManagerServiceV3.ManagerServiceV3Client client)
+        {
+
+           
+
+     client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
+
+
+
+                Request = new SurveyManagerServiceV3.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
+                Result = new SurveyManagerServiceV3.SurveyInfoResponse();//(Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
+
+                Request.Criteria = new SurveyManagerServiceV3.SurveyInfoCriteria();
+                Request.Criteria.ClosingDate = this.CloseDate;
+                Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+                Request.Criteria.UserPublishKey = new Guid(this.UserPublishKey);
+                Request.Criteria.SurveyIdList = new string[] { this.SurveyId };
+                Request.Action = "Update";
+
+                SurveyManagerServiceV3.SurveyInfoDTO SurveyInfoDTO = new SurveyManagerServiceV3.SurveyInfoDTO();
+
+                SurveyInfoDTO.ClosingDate = this.CloseDate;
+                SurveyInfoDTO.StartDate = this.StartDate;
+                SurveyInfoDTO.SurveyId = new Guid(this.CurrentView.WebSurveyId).ToString();
+                SurveyInfoDTO.SurveyType = this.SurveyType;
+                SurveyInfoDTO.SurveyNumber = this.SurveyNumber;
+                SurveyInfoDTO.SurveyName = this.SurveyName;
+                SurveyInfoDTO.OrganizationKey = new Guid(OrganizationKey);
+                SurveyInfoDTO.OrganizationName = this.OrganizationName;
+                SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
+                SurveyInfoDTO.XML = template.CreateWebSurveyTemplate();
+                SurveyInfoDTO.ExitText = this.ExitText;
+                SurveyInfoDTO.IntroductionText = this.IntroductionText;
+                SurveyInfoDTO.DepartmentName = this.DepartmentName;
+                if (this.mediator.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+                {
+                    SurveyInfoDTO.IsSqlProject = true;
+                }
+
+                Request.Criteria.SurveyType = this.SurveyType;
+                Request.Criteria.IsDraftMode = true;
+                SurveyInfoDTO.IsDraftMode = this.IsDraftMode;
+                Request.SurveyInfoList = new SurveyManagerServiceV3.SurveyInfoDTO[] { SurveyInfoDTO };
+            
+        }
+
         private void QuickFormInfoUpdate()
             {
             try
@@ -4408,7 +4490,7 @@ namespace Epi.Windows.MakeView.Forms
                             try
                             {
 
-                                SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                                SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                                 SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
                                 SurveyManagerService.OrganizationDTO orgDTO = new SurveyManagerService.OrganizationDTO();
                                 Request.Organization = orgDTO;

@@ -12,6 +12,7 @@ using System.ServiceModel;
 using System.ServiceModel.Security;
 using Epi.Web.Common.Exception;
 using Epi.Windows.MakeView.PresentationLogic;
+  
 namespace Epi.Windows.MakeView.Dialogs
 {
     public partial class WebPublishDialog : Form
@@ -30,7 +31,8 @@ namespace Epi.Windows.MakeView.Dialogs
         private bool isRepublishableConfig = false;
         private GuiMediator mediater;
         private SurveyManagerService.SurveyInfoDTO currentSurveyInfoDTO ;
-
+        private SurveyManagerServiceV3.SurveyInfoDTO currentSurveyInfoDTOV3;
+        private Configuration config;
         //=======
         //private Epi.Web.Common.Message.PublishResponse Result;
         //=======
@@ -144,41 +146,117 @@ namespace Epi.Windows.MakeView.Dialogs
 
             stopwatch = new Stopwatch();
             stopwatch.Start();
-
+            var config = Configuration.GetNewInstance();
+            var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
           //  Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
-            SurveyManagerService.PublishRequest Request = new SurveyManagerService.PublishRequest();
-            Request.SurveyInfo = new SurveyManagerService.SurveyInfoDTO();
+            if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveysanagerservice) || ServiceVersion.Contains(Epi.Constants.surveysanagerservicev2)))
+            {
+                SurveyManagerService.PublishRequest Request = SetMessageObject();
+                try
+                {
+                    //  Epi.Web.Common.Message.PublishResponse Result = new Epi.Web.Common.Message.PublishResponse();
+                    SurveyManagerService.PublishResponse Result = new SurveyManagerService.PublishResponse();
+
+                    lock (syncLock)
+                    {
+                        this.Cursor = Cursors.WaitCursor;
+                        publishWorker = new BackgroundWorker();
+                        publishWorker.WorkerSupportsCancellation = true;
+                        publishWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(worker_DoWork);
+                        publishWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(worker_WorkerCompleted);
+                        object[] args = new object[2];
+                        args[0] = Request;
+                        args[1] = Result;
+                        publishWorker.RunWorkerAsync(args);
+                    }
+
+                    if (publishWorker.WorkerSupportsCancellation)
+                    {
+                        publishWorker.CancelAsync();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    txtStatusSummary.AppendText("An error occurred while trying to publish the survey.");
+                    txtStatus.AppendText(ex.ToString());
+                    btnDetails.Visible = true;
+                    this.progressBar.Visible = false;
+                    this.Cursor = Cursors.Default;
+                }
+            }
+            if (!string.IsNullOrEmpty(ServiceVersion) &&  ServiceVersion.Contains(Epi.Constants.surveysanagerservicev3))
+            {
+                SurveyManagerServiceV3.PublishRequest Request = SetMessageObjectV3();
+                try
+                {
+                    //  Epi.Web.Common.Message.PublishResponse Result = new Epi.Web.Common.Message.PublishResponse();
+                    SurveyManagerService.PublishResponse Result = new SurveyManagerService.PublishResponse();
+
+                    lock (syncLock)
+                    {
+                        this.Cursor = Cursors.WaitCursor;
+                        publishWorker = new BackgroundWorker();
+                        publishWorker.WorkerSupportsCancellation = true;
+                        publishWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(worker_DoWork);
+                        publishWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(worker_WorkerCompleted);
+                        object[] args = new object[2];
+                        args[0] = Request;
+                        args[1] = Result;
+                        publishWorker.RunWorkerAsync(args);
+                    }
+
+                    if (publishWorker.WorkerSupportsCancellation)
+                    {
+                        publishWorker.CancelAsync();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    txtStatusSummary.AppendText("An error occurred while trying to publish the survey.");
+                    txtStatus.AppendText(ex.ToString());
+                    btnDetails.Visible = true;
+                    this.progressBar.Visible = false;
+                    this.Cursor = Cursors.Default;
+                }
+            }
+            
+        }
+
+        private SurveyManagerServiceV3.PublishRequest SetMessageObjectV3()
+        {
+            SurveyManagerServiceV3.PublishRequest Request = new SurveyManagerServiceV3.PublishRequest();
+            Request.SurveyInfo = new SurveyManagerServiceV3.SurveyInfoDTO();
 
             if (string.IsNullOrEmpty(ClosingTimecomboBox.Text))
             {
                 Request.SurveyInfo.ClosingDate = dtpSurveyClosingDate.Value.Date + new TimeSpan(0, 23, 59, 0);
             }
-            else 
+            else
             {
-                Request.SurveyInfo.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text); 
+                Request.SurveyInfo.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text);
             }
-           
+
             if (string.IsNullOrEmpty(StartTimecomboBox.Text))
             {
                 Request.SurveyInfo.StartDate = StartDateDatePicker.Value.Date;
             }
             else
             {
-                Request.SurveyInfo.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date ,StartTimecomboBox.Text);
+                Request.SurveyInfo.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date, StartTimecomboBox.Text);
             }
 
             Request.SurveyInfo.DBConnectionString = RemoveUserName(this.mediater.Project.CollectedDataConnectionString);
 
             if (this.mediater.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
-                {
+            {
                 Request.SurveyInfo.IsSqlProject = true;
-                }
+            }
             Request.SurveyInfo.DepartmentName = txtDepartment.Text;
             Request.SurveyInfo.IntroductionText = txtIntroductionText.Text;
             Request.SurveyInfo.ExitText = txtExitText.Text;
-            
+
             Request.SurveyInfo.SurveyName = txtSurveyName.Text;
-            
+
             Request.SurveyInfo.OrganizationKey = new Guid(txtOrganizationKey.Text.ToString());
             Request.SurveyInfo.UserPublishKey = UserPublishGuid;
             Request.SurveyInfo.XML = template;
@@ -220,39 +298,65 @@ namespace Epi.Windows.MakeView.Dialogs
             {
                 Request.SurveyInfo.IsDraftMode = false;
             }
-            try
-            {
-              //  Epi.Web.Common.Message.PublishResponse Result = new Epi.Web.Common.Message.PublishResponse();
-                SurveyManagerService.PublishResponse Result = new SurveyManagerService.PublishResponse();
-               
-                lock (syncLock)
-                {
-                    this.Cursor = Cursors.WaitCursor;
-                    publishWorker = new BackgroundWorker();
-                    publishWorker.WorkerSupportsCancellation = true;
-                    publishWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(worker_DoWork);
-                    publishWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(worker_WorkerCompleted);
-                    object[] args = new object[2];
-                    args[0] = Request;
-                    args[1] = Result;
-                    publishWorker.RunWorkerAsync(args);
-                }
-
-                if (publishWorker.WorkerSupportsCancellation)
-                {
-                    publishWorker.CancelAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                txtStatusSummary.AppendText("An error occurred while trying to publish the survey.");
-                txtStatus.AppendText(ex.ToString());
-                btnDetails.Visible = true;
-                this.progressBar.Visible = false;
-                this.Cursor = Cursors.Default;
-            }
+            return Request;
         }
+        private SurveyManagerService.PublishRequest SetMessageObject()
+        {
+            SurveyManagerService.PublishRequest Request = new SurveyManagerService.PublishRequest();
+            Request.SurveyInfo = new SurveyManagerService.SurveyInfoDTO();
 
+            if (string.IsNullOrEmpty(ClosingTimecomboBox.Text))
+            {
+                Request.SurveyInfo.ClosingDate = dtpSurveyClosingDate.Value.Date + new TimeSpan(0, 23, 59, 0);
+            }
+            else
+            {
+                Request.SurveyInfo.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text);
+            }
+
+            if (string.IsNullOrEmpty(StartTimecomboBox.Text))
+            {
+                Request.SurveyInfo.StartDate = StartDateDatePicker.Value.Date;
+            }
+            else
+            {
+                Request.SurveyInfo.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date, StartTimecomboBox.Text);
+            }
+
+           
+            Request.SurveyInfo.DepartmentName = txtDepartment.Text;
+            Request.SurveyInfo.IntroductionText = txtIntroductionText.Text;
+            Request.SurveyInfo.ExitText = txtExitText.Text;
+
+            Request.SurveyInfo.SurveyName = txtSurveyName.Text;
+
+            Request.SurveyInfo.OrganizationKey = new Guid(txtOrganizationKey.Text.ToString());
+            Request.SurveyInfo.UserPublishKey = UserPublishGuid;
+            Request.SurveyInfo.XML = template;
+            Request.SurveyInfo.IsDraftMode = true;
+            Request.SurveyInfo.SurveyType = (rdbSingleResponse.Checked) ? 1 : 2;
+            if (txtOrganization.Text.Equals("Your Organization Name (optional)", StringComparison.OrdinalIgnoreCase))
+            {
+                Request.SurveyInfo.OrganizationName = null;
+            }
+            else
+            {
+                Request.SurveyInfo.OrganizationName = txtOrganization.Text;
+            }
+
+            if (txtSurveyID.Text.Equals("Your Survey ID (optional)", StringComparison.OrdinalIgnoreCase))
+            {
+                Request.SurveyInfo.SurveyNumber = null;
+            }
+            else
+            {
+                Request.SurveyInfo.SurveyNumber = txtSurveyID.Text;
+            }
+
+
+          
+            return Request;
+        }
         private string RemoveUserName(string ConnectionString)
             {
             int indexOfUserId = ConnectionString.IndexOf("User ID");
@@ -287,9 +391,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
             progressBar.Visible = true;
 
-            SurveyManagerService.PublishRequest Request = new SurveyManagerService.PublishRequest();
-            Request.Action = "Update";
-
+           
           
             //this.currentSurveyInfoDTO.ClosingDate =  dtpSurveyClosingDate.Value.Date + GetTimeFormat(ClosingTimecomboBox.Text);
              
@@ -331,90 +433,24 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             this.currentSurveyInfoDTO.SurveyType = (rdbSingleResponse.Checked) ? 1 : 2;
 
-            Request.SurveyInfo  = this.currentSurveyInfoDTO;
+            this.config = Configuration.GetNewInstance();
+           
 
-            Request.SurveyInfo.DBConnectionString = RemoveUserName(this.mediater.Project.CollectedDataConnectionString);
-
-            if (this.mediater.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
-                {
-                Request.SurveyInfo.IsSqlProject = true;
-                }
             try
             {
-            SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
-                SurveyManagerService.PublishResponse Result = client.RePublishSurvey(Request);
-
-                panel2.Visible = true;
-                panel3.Visible = true;
-
-                if (Result.PublishInfo.IsPulished)
+                var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
+                if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveysanagerservice) || ServiceVersion.Contains(Epi.Constants.surveysanagerservicev2)))
                 {
-                    panel3.Visible = true;
-
-                    txtURL.Text = Result.PublishInfo.URL;
-                    lblSuccessNotice.Visible = true;
-                    lblSuccessNotice2.Visible = true;
-                    lblSuccessNotice.Text = "Your survey has been published!  Please copy and paste the following URL and Keys to be used later.";
-                    lblSuccessNotice.BackColor = Color.FromArgb(230, 255, 191);
-                    lblSuccessNotice2.Visible = true;
-                    btnShowLog.Visible = true;
-                    this.btnKeyCopy.Enabled = true;
-                    this.btnCopyAllURLs.Enabled = true;
-                    this.btnDataKeyCopy.Enabled = true;
-                    this.btnGo.Enabled = true;
-                    this.btnURLCopy.Enabled = true;
-                   //txtURL.Text = Result.PublishInfo.URL;
-                    txtSurveyKey.Text = this.currentSurveyInfoDTO.SurveyId;
-
-                    txtDataKey.Text = this.currentSurveyInfoDTO.UserPublishKey.ToString();
-                    //txtDataKey.Text = txtSurveyKey.Text;
-                    txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
-                   // txtURL.Text = Result.PublishInfo.URL;
-
-                    //txtURL.Text =;
-
-                    //txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
-                    //txtStatusSummary.Text = "Your Form has been republished: " + Result.Message;
-
-                    lblSuccessNotice.Visible = true;
-                    lblSuccessNotice2.Visible = true;
-                    lblSuccessNotice.Text = "Your survey has been published!  Please copy and paste the following URL and Keys to be used later.";
-                    lblSuccessNotice.BackColor = Color.FromArgb(230, 255, 191);
-                    lblSuccessNotice2.Visible = true;
-                    btnPublishForm.Visible = true;
-                    btnPublishForm.Enabled = false;
-                    btnURLCopy.Enabled = true;
-                    btnGo.Enabled = true;
-                    btnKeyCopy.Enabled = true;
-                    btnDataKeyCopy.Enabled = true;
-                    btnShowLog.Enabled = true;
-                    btnShowLog.Visible = true;
-                    btnCopyAllURLs.Enabled = true;
-
-                    string message = DateTime.Now + ": " + SharedStrings.WEBFORM_SUCCESS + ": " + txtURL.Text; ///Result.PublishInfo.URL;
-                    Logger.Log(message);
-                    message = DateTime.Now + ": Survey Key= " + txtSurveyKey.Text;
-                    Logger.Log(message);
-                    message = DateTime.Now + ": Data Key= " + txtDataKey.Text;
-                    Logger.Log(message);
+                    SurveyManagerService.PublishRequest Request = new SurveyManagerService.PublishRequest();
+                    Request.Action = "Update";
+                    SetRepublishObject(Request);
                 }
-                else
+                if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveysanagerservicev3)))
                 {
-                    txtStatusSummary.Text = Result.Message;
-                    lblSuccessNotice.Text = "The survey failed to publish. Please check that the organization key is correct and try again.";
-                    //panel2.Visible = true;
-                    btnShowLog.Visible = false;
-                    lblSuccessNotice.BackColor = Color.FromArgb(243, 217, 217);
-                    panel3.Visible = true;
-                    lblSuccessNotice2.Visible = false;
-                    txtOrganizationKey.Enabled = true;
-                    btnPublishForm.Enabled = true;
+                    SurveyManagerServiceV3.PublishRequest Request = new SurveyManagerServiceV3.PublishRequest();
+                    Request.Action = "Update";
+                    SetRepublishObjectV3(Request);
                 }
-
-
-                //this.progressBar.Visible = false;
-                //this.btnPublish.Enabled = true;
-
             }
             catch (Exception ex)
             {
@@ -430,6 +466,170 @@ namespace Epi.Windows.MakeView.Dialogs
             //this.btnPublish.Enabled = true;
         }
 
+        private void SetRepublishObject(SurveyManagerService.PublishRequest Request)
+        {
+            Request.SurveyInfo = this.currentSurveyInfoDTO;
+
+
+            SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+            SurveyManagerService.PublishResponse Result = client.RePublishSurvey(Request);
+
+            panel2.Visible = true;
+            panel3.Visible = true;
+
+            if (Result.PublishInfo.IsPulished)
+            {
+                panel3.Visible = true;
+
+                txtURL.Text = Result.PublishInfo.URL;
+                lblSuccessNotice.Visible = true;
+                lblSuccessNotice2.Visible = true;
+                lblSuccessNotice.Text = "Your survey has been published!  Please copy and paste the following URL and Keys to be used later.";
+                lblSuccessNotice.BackColor = Color.FromArgb(230, 255, 191);
+                lblSuccessNotice2.Visible = true;
+                btnShowLog.Visible = true;
+                this.btnKeyCopy.Enabled = true;
+                this.btnCopyAllURLs.Enabled = true;
+                this.btnDataKeyCopy.Enabled = true;
+                this.btnGo.Enabled = true;
+                this.btnURLCopy.Enabled = true;
+                //txtURL.Text = Result.PublishInfo.URL;
+                txtSurveyKey.Text = this.currentSurveyInfoDTO.SurveyId;
+
+                txtDataKey.Text = this.currentSurveyInfoDTO.UserPublishKey.ToString();
+                //txtDataKey.Text = txtSurveyKey.Text;
+                txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
+                // txtURL.Text = Result.PublishInfo.URL;
+
+                //txtURL.Text =;
+
+                //txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
+                //txtStatusSummary.Text = "Your Form has been republished: " + Result.Message;
+
+                lblSuccessNotice.Visible = true;
+                lblSuccessNotice2.Visible = true;
+                lblSuccessNotice.Text = "Your survey has been published!  Please copy and paste the following URL and Keys to be used later.";
+                lblSuccessNotice.BackColor = Color.FromArgb(230, 255, 191);
+                lblSuccessNotice2.Visible = true;
+                btnPublishForm.Visible = true;
+                btnPublishForm.Enabled = false;
+                btnURLCopy.Enabled = true;
+                btnGo.Enabled = true;
+                btnKeyCopy.Enabled = true;
+                btnDataKeyCopy.Enabled = true;
+                btnShowLog.Enabled = true;
+                btnShowLog.Visible = true;
+                btnCopyAllURLs.Enabled = true;
+
+                string message = DateTime.Now + ": " + SharedStrings.WEBFORM_SUCCESS + ": " + txtURL.Text; ///Result.PublishInfo.URL;
+                Logger.Log(message);
+                message = DateTime.Now + ": Survey Key= " + txtSurveyKey.Text;
+                Logger.Log(message);
+                message = DateTime.Now + ": Data Key= " + txtDataKey.Text;
+                Logger.Log(message);
+            }
+            else
+            {
+                txtStatusSummary.Text = Result.Message;
+                lblSuccessNotice.Text = "The survey failed to publish. Please check that the organization key is correct and try again.";
+                //panel2.Visible = true;
+                btnShowLog.Visible = false;
+                lblSuccessNotice.BackColor = Color.FromArgb(243, 217, 217);
+                panel3.Visible = true;
+                lblSuccessNotice2.Visible = false;
+                txtOrganizationKey.Enabled = true;
+                btnPublishForm.Enabled = true;
+            }
+
+
+            //this.progressBar.Visible = false;
+            //this.btnPublish.Enabled = true;
+        }
+        private void SetRepublishObjectV3(SurveyManagerServiceV3.PublishRequest Request)
+        {
+            Request.SurveyInfo = this.currentSurveyInfoDTOV3;
+
+            Request.SurveyInfo.DBConnectionString = RemoveUserName(this.mediater.Project.CollectedDataConnectionString);
+
+            if (this.mediater.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+            {
+                Request.SurveyInfo.IsSqlProject = true;
+            }
+
+            SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
+            SurveyManagerServiceV3.PublishResponse Result = client.RePublishSurvey(Request);
+
+            panel2.Visible = true;
+            panel3.Visible = true;
+
+            if (Result.PublishInfo.IsPulished)
+            {
+                panel3.Visible = true;
+
+                txtURL.Text = Result.PublishInfo.URL;
+                lblSuccessNotice.Visible = true;
+                lblSuccessNotice2.Visible = true;
+                lblSuccessNotice.Text = "Your survey has been published!  Please copy and paste the following URL and Keys to be used later.";
+                lblSuccessNotice.BackColor = Color.FromArgb(230, 255, 191);
+                lblSuccessNotice2.Visible = true;
+                btnShowLog.Visible = true;
+                this.btnKeyCopy.Enabled = true;
+                this.btnCopyAllURLs.Enabled = true;
+                this.btnDataKeyCopy.Enabled = true;
+                this.btnGo.Enabled = true;
+                this.btnURLCopy.Enabled = true;
+                //txtURL.Text = Result.PublishInfo.URL;
+                txtSurveyKey.Text = this.currentSurveyInfoDTO.SurveyId;
+
+                txtDataKey.Text = this.currentSurveyInfoDTO.UserPublishKey.ToString();
+                //txtDataKey.Text = txtSurveyKey.Text;
+                txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
+                // txtURL.Text = Result.PublishInfo.URL;
+
+                //txtURL.Text =;
+
+                //txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
+                //txtStatusSummary.Text = "Your Form has been republished: " + Result.Message;
+
+                lblSuccessNotice.Visible = true;
+                lblSuccessNotice2.Visible = true;
+                lblSuccessNotice.Text = "Your survey has been published!  Please copy and paste the following URL and Keys to be used later.";
+                lblSuccessNotice.BackColor = Color.FromArgb(230, 255, 191);
+                lblSuccessNotice2.Visible = true;
+                btnPublishForm.Visible = true;
+                btnPublishForm.Enabled = false;
+                btnURLCopy.Enabled = true;
+                btnGo.Enabled = true;
+                btnKeyCopy.Enabled = true;
+                btnDataKeyCopy.Enabled = true;
+                btnShowLog.Enabled = true;
+                btnShowLog.Visible = true;
+                btnCopyAllURLs.Enabled = true;
+
+                string message = DateTime.Now + ": " + SharedStrings.WEBFORM_SUCCESS + ": " + txtURL.Text; ///Result.PublishInfo.URL;
+                Logger.Log(message);
+                message = DateTime.Now + ": Survey Key= " + txtSurveyKey.Text;
+                Logger.Log(message);
+                message = DateTime.Now + ": Data Key= " + txtDataKey.Text;
+                Logger.Log(message);
+            }
+            else
+            {
+                txtStatusSummary.Text = Result.Message;
+                lblSuccessNotice.Text = "The survey failed to publish. Please check that the organization key is correct and try again.";
+                //panel2.Visible = true;
+                btnShowLog.Visible = false;
+                lblSuccessNotice.BackColor = Color.FromArgb(243, 217, 217);
+                panel3.Visible = true;
+                lblSuccessNotice2.Visible = false;
+                txtOrganizationKey.Enabled = true;
+                btnPublishForm.Enabled = true;
+            }
+
+
+            //this.progressBar.Visible = false;
+            //this.btnPublish.Enabled = true;
+        }
         //private void AfterPublish(Epi.Web.Common.Message.PublishResponse Result)
         private void AfterPublish(SurveyManagerService.PublishResponse Result)
         {
@@ -864,7 +1064,7 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             else
             {
-            SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
 
                     this.txtDepartment.Visible = false;
                     this.lblDepartment.Visible = false;
@@ -1206,7 +1406,7 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-            SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 SurveyManagerService.PublishRequest Request = (SurveyManagerService.PublishRequest)((object[])e.Argument)[0];
                 SurveyManagerService.PublishResponse Result = (SurveyManagerService.PublishResponse)((object[])e.Argument)[1];
                 Result = client.PublishSurvey(Request);

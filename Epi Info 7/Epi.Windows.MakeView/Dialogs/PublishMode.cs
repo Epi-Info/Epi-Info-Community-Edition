@@ -120,7 +120,7 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-                SurveyManagerService.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 Configuration config = Configuration.GetNewInstance();
                 
                 SurveyManagerService.SurveyInfoRequest Request = (SurveyManagerService.SurveyInfoRequest)((object[])e.Argument)[0];
@@ -184,7 +184,7 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-            SurveyManagerService.ManagerServiceV3Client client;
+            SurveyManagerService.ManagerServiceV2Client client;
                 Configuration config = Configuration.GetNewInstance();
                 client = GetClient();
                 SurveyManagerService.SurveyInfoRequest Request = (SurveyManagerService.SurveyInfoRequest)((object[])e.Argument)[0];
@@ -262,9 +262,9 @@ namespace Epi.Windows.MakeView.Dialogs
             }
         }
 
-        public SurveyManagerService.ManagerServiceV3Client GetClient() {
+        public SurveyManagerService.ManagerServiceV2Client GetClient() {
 
-            SurveyManagerService.ManagerServiceV3Client client;
+            SurveyManagerService.ManagerServiceV2Client client;
             Configuration config = Configuration.GetNewInstance();
 
             if (config.Settings.WebServiceAuthMode == 1) // Windows Authentication
@@ -299,7 +299,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                 System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
+                client = new SurveyManagerService.ManagerServiceV2Client(binding, endpoint);
 
                 client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                 client.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
@@ -345,7 +345,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                    client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
+                    client = new SurveyManagerService.ManagerServiceV2Client(binding, endpoint);
 
                 }
                 else
@@ -379,7 +379,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                    client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
+                    client = new SurveyManagerService.ManagerServiceV2Client(binding, endpoint);
                 }
 
             }

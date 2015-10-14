@@ -287,6 +287,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\SurveyManagerServiceV3\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\SurveyManagerService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -706,8 +711,54 @@
     <None Include="Service References\EWEManagerService\EWEManagerServiceV25.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SurveyManagerService\configuration91.svcinfo" />
-    <None Include="Service References\SurveyManagerService\configuration.svcinfo" />
+    <None Include="Service References\EWEManagerService\EWEManagerServiceV2.disco" />
+    <None Include="Service References\EWEManagerService\configuration91.svcinfo" />
+    <None Include="Service References\EWEManagerService\configuration.svcinfo" />
+    <None Include="Service References\EWEManagerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\Epi.SurveyManagerServiceV3.OrganizationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\Epi.SurveyManagerServiceV3.PreFilledAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\Epi.SurveyManagerServiceV3.PublishResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\Epi.SurveyManagerServiceV3.SurveyAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\Epi.SurveyManagerServiceV3.SurveyControlsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\Epi.SurveyManagerServiceV3.SurveyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\ManagerServiceV3.wsdl" />
+    <None Include="Service References\SurveyManagerServiceV3\SurveyManagerServiceV3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\SurveyManagerServiceV31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\SurveyManagerServiceV32.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\SurveyManagerServiceV33.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\SurveyManagerServiceV34.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\SurveyManagerServiceV3.disco" />
+    <None Include="Service References\SurveyManagerServiceV3\configuration91.svcinfo" />
+    <None Include="Service References\SurveyManagerServiceV3\configuration.svcinfo" />
+    <None Include="Service References\SurveyManagerServiceV3\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Service References\SurveyManagerService\Epi.SurveyManagerService.OrganizationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -726,15 +777,10 @@
     <None Include="Service References\SurveyManagerService\Epi.SurveyManagerService.SurveyInfoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SurveyManagerService\ManagerServiceV31.wsdl" />
+    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV2.disco" />
+    <None Include="Service References\SurveyManagerService\configuration91.svcinfo" />
+    <None Include="Service References\SurveyManagerService\configuration.svcinfo" />
     <None Include="Service References\SurveyManagerService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\EWEManagerService\EWEManagerServiceV2.disco" />
-    <None Include="Service References\EWEManagerService\configuration91.svcinfo" />
-    <None Include="Service References\EWEManagerService\configuration.svcinfo" />
-    <None Include="Service References\EWEManagerService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -802,7 +848,9 @@
     <Content Include="Templates\Projects\[New Record] with [Repeat Last].xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ClassDiagram1.cd" />
     <None Include="DataSets\ANSI\TableColumnSchema.xsc">
       <DependentUpon>TableColumnSchema.xsd</DependentUpon>
@@ -1021,19 +1069,20 @@
     <None Include="Resources\Training Projects\Salmonellosis\Salmonellosis.prj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV35.xsd">
+    <None Include="Service References\SurveyManagerService\ManagerServiceV2.wsdl" />
+    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV36.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV21.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV37.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV22.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV38.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV23.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV39.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerServiceV24.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Services\Fields\Fields.cd" />
@@ -1274,6 +1323,8 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\EWEManagerService\" />
+    <WCFMetadataStorage Include="Service References\SurveyManagerServiceV3\" />
+    <WCFMetadataStorage Include="Service References\SurveyManagerService\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

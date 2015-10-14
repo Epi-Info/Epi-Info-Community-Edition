@@ -58,5 +58,8 @@ namespace Epi
         public const string SPECIALINFO = "Special Info";
 
         public const string Plus = "PLUS";
+        public const string surveysanagerservice = "surveymanagerservice.svc";
+        public const string surveysanagerservicev2 = "surveymanagerservicev2.svc";
+        public const string surveysanagerservicev3 = "surveymanagerservicev3.svc";
     }
 }

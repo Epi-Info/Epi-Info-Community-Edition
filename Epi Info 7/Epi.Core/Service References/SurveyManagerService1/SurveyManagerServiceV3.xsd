@@ -14,4 +14,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfOrganizationDTO" nillable="true" type="tns:ArrayOfOrganizationDTO" />
+  <xs:complexType name="ArrayOfSurveyControlDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SurveyControlDTO" nillable="true" type="tns:SurveyControlDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSurveyControlDTO" nillable="true" type="tns:ArrayOfSurveyControlDTO" />
+  <xs:complexType name="SurveyControlDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ControlId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ControlPrompt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ControlType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SurveyControlDTO" nillable="true" type="tns:SurveyControlDTO" />
 </xs:schema>

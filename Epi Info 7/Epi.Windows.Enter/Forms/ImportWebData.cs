@@ -44,7 +44,7 @@ namespace Epi.Enter.Forms
         private string SurveyId = string.Empty;
         private string OrganizationKey = string.Empty;
         private string PublishKey = string.Empty;
-        private SurveyManagerService.ManagerServiceV3Client client;
+        private SurveyManagerService.ManagerServiceV2Client client;
         private Dictionary<string, Dictionary<string, WebFieldData>> wfList;
         private bool IsDraftMode;
         private int SurveyStatus;
@@ -101,158 +101,36 @@ namespace Epi.Enter.Forms
         /// </summary>
         private void Construct()
         {
-            try
+            //try
+            //{
+            this.destinationProjectDataDriver = destinationProject.CollectedData.GetDbDriver();
+            this.config = Configuration.GetNewInstance();
+
+            this.importWorker = new BackgroundWorker();
+            this.importWorker.WorkerSupportsCancellation = true;
+
+            this.requestWorker = new BackgroundWorker();
+            this.requestWorker.WorkerSupportsCancellation = true;
+
+            this.IsBatchImport = false;
+
+            rdbDraftMode.Checked = true;
+            rdbSubmittedRecords.Checked = true;
+
+            if (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress.ToLower()) && (
+                config.Settings.WebServiceEndpointAddress.ToLower().Contains(Epi.Constants.surveysanagerservice) ||
+                config.Settings.WebServiceEndpointAddress.ToLower().Contains(Epi.Constants.surveysanagerservicev2)))
             {
-                this.destinationProjectDataDriver = destinationProject.CollectedData.GetDbDriver();
-                this.config = Configuration.GetNewInstance();
-
-                this.importWorker = new BackgroundWorker();
-                this.importWorker.WorkerSupportsCancellation = true;
-
-                this.requestWorker = new BackgroundWorker();
-                this.requestWorker.WorkerSupportsCancellation = true;
-
-                this.IsBatchImport = false;
-
-                rdbDraftMode.Checked = true;
-                rdbSubmittedRecords.Checked = true;
-
-                if (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress) && (
-                    config.Settings.WebServiceEndpointAddress.Contains("SurveyManagerService.svc") || 
-                    config.Settings.WebServiceEndpointAddress.Contains("SurveyManagerServiceV2.svc")))
-                {
-                    chkIncremental.Checked = false;
-                    chkIncremental.Visible = false;
-                }
-                else
-                {
-                    chkIncremental.Checked = true;
-                    chkIncremental.Visible = true;
-                }
+                chkIncremental.Checked = false;
+                chkIncremental.Visible = false;
+            }
+            else
+            {
+                chkIncremental.Checked = true;
+                chkIncremental.Visible = true;
+            }
                 
-                    if (config.Settings.WebServiceAuthMode == 1) // Windows Authentication
-                {
-                    System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
-                    binding.Name = "BasicHttpBinding";
-                    binding.CloseTimeout = new TimeSpan(0, 1, 0);
-                    binding.OpenTimeout = new TimeSpan(0, 1, 0);
-                    binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                    binding.SendTimeout = new TimeSpan(0, 1, 0);
-                    binding.AllowCookies = false;
-                    binding.BypassProxyOnLocal = false;
-                    binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
-                    binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;
-                    binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
-                    binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
-                    binding.TextEncoding = System.Text.Encoding.UTF8;
-                    binding.TransferMode = System.ServiceModel.TransferMode.Buffered;
-                    binding.UseDefaultWebProxy = true;
-                    binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;
-                    binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
-                    binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
-                    binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
-                    binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
-
-                    binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
-                    binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
-                    binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
-                    binding.Security.Transport.Realm = string.Empty;
-
-                    binding.Security.Message.ClientCredentialType = System.ServiceModel.BasicHttpMessageCredentialType.UserName;
-
-                    System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
-
-                  //  client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
-                     client = Epi.Core.ServiceClient.ServiceClient.GetClient();
-                    client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
-                    client.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
-                }
-                else
-                {
-
-
-                    if (config.Settings.WebServiceBindingMode.Equals("wshttp", StringComparison.OrdinalIgnoreCase))
-                    {
-                        System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();
-                        binding.Name = "WSHttpBinding";
-                        binding.CloseTimeout = new TimeSpan(0, 1, 0);
-                        binding.OpenTimeout = new TimeSpan(0, 1, 0);
-                        binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                        binding.SendTimeout = new TimeSpan(0, 1, 0);
-                        binding.BypassProxyOnLocal = false;
-                        binding.TransactionFlow = false;
-                        binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
-                        binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;
-                        binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
-                        binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
-                        binding.TextEncoding = System.Text.Encoding.UTF8;
-                        binding.UseDefaultWebProxy = true;
-                        binding.AllowCookies = false;
-
-                        binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;
-                        binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
-                        binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
-                        binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
-                        binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
-
-                        binding.ReliableSession.Ordered = true;
-                        binding.ReliableSession.InactivityTimeout = new TimeSpan(0, 10, 0);
-                        binding.ReliableSession.Enabled = false;
-
-                        binding.Security.Mode = System.ServiceModel.SecurityMode.Message;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
-                        binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
-                        binding.Security.Transport.Realm = string.Empty;
-                        binding.Security.Message.ClientCredentialType = System.ServiceModel.MessageCredentialType.Windows;
-                        binding.Security.Message.NegotiateServiceCredential = true;
-
-                        System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
-
-                        //client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
-                        client = Epi.Core.ServiceClient.ServiceClient.GetClient();
-                    }
-                    else
-                    {
-                        System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
-                        binding.Name = "BasicHttpBinding";
-                        binding.CloseTimeout = new TimeSpan(0, 1, 0);
-                        binding.OpenTimeout = new TimeSpan(0, 1, 0);
-                        binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                        binding.SendTimeout = new TimeSpan(0, 1, 0);
-                        binding.AllowCookies = false;
-                        binding.BypassProxyOnLocal = false;
-                        binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
-                        binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;
-                        binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
-                        binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
-                        binding.TextEncoding = System.Text.Encoding.UTF8;
-                        binding.TransferMode = System.ServiceModel.TransferMode.Buffered;
-                        binding.UseDefaultWebProxy = true;
-                        binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;
-                        binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
-                        binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
-                        binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
-                        binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
-
-
-                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
-                        binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
-                        binding.Security.Transport.Realm = string.Empty;
-
-                        System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
-
-                        //client = new SurveyManagerService.ManagerServiceV3Client(binding, endpoint);
-                        client = Epi.Core.ServiceClient.ServiceClient.GetClient();
-                    }
-
-                }
-                this.wfList = new Dictionary<string, Dictionary<string, WebFieldData>>(StringComparer.OrdinalIgnoreCase);
-            }
-            catch (Exception ex)
-            {
-                SetStatusMessage("Error: Web service information was not found.");
-            }
+           
         }
 
         /// <summary>
@@ -742,7 +620,30 @@ namespace Epi.Enter.Forms
 
             return result;
         }
+        private Dictionary<string, Dictionary<string, WebFieldData>> ParseXMLV3(SurveyManagerServiceV3.SurveyAnswerResponse pSurveyAnswer)
+        {
+            Dictionary<string, Dictionary<string, WebFieldData>> result = new Dictionary<string, Dictionary<string, WebFieldData>>(StringComparer.OrdinalIgnoreCase);
+            // SetFilterProperties(DownLoadType);
 
+            foreach (SurveyManagerServiceV3.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
+            {
+                if (SurveyStatus == 0)
+                {
+                   
+                        AddSurveyAnswerResultV3(result, surveyAnswer);
+                  
+                }
+                else
+                {
+                    if ((surveyAnswer.IsDraftMode == IsDraftMode) && (surveyAnswer.Status == SurveyStatus))
+                    {
+                        AddSurveyAnswerResultV3(result, surveyAnswer);
+                    }
+                }
+            }
+
+            return result;
+        }
         private void AddSurveyAnswerResult(Dictionary<string, Dictionary<string, WebFieldData>> result, SurveyManagerService.SurveyAnswerDTO surveyAnswer)
         {
             result.Add(surveyAnswer.ResponseId, new Dictionary<string, WebFieldData>(StringComparer.OrdinalIgnoreCase));
@@ -766,7 +667,29 @@ namespace Epi.Enter.Forms
                 }
             }
         }
+        private void AddSurveyAnswerResultV3(Dictionary<string, Dictionary<string, WebFieldData>> result, SurveyManagerServiceV3.SurveyAnswerDTO surveyAnswer)
+        {
+            result.Add(surveyAnswer.ResponseId, new Dictionary<string, WebFieldData>(StringComparer.OrdinalIgnoreCase));
+            System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+            doc.LoadXml(surveyAnswer.XML);
 
+            foreach (XmlNode docElement in doc.SelectNodes("//ResponseDetail"))
+            {
+                string fieldName = docElement.Attributes.GetNamedItem("QuestionName").Value;
+                object fieldValue = FormatWebFieldData(fieldName, docElement.InnerText);
+
+                WebFieldData wfData = new WebFieldData();
+                wfData.RecordGUID = surveyAnswer.ResponseId;
+                wfData.FieldName = fieldName;
+                wfData.FieldValue = fieldValue;
+                wfData.Status = surveyAnswer.Status;
+
+                if (result[surveyAnswer.ResponseId].Keys.Contains(wfData.FieldName) == false)
+                {
+                    result[surveyAnswer.ResponseId].Add(wfData.FieldName, wfData);
+                }
+            }
+        }
         /// <summary>
         /// Parses XML from the web survey
         /// </summary>
@@ -936,7 +859,7 @@ namespace Epi.Enter.Forms
                 //this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "On page '" + destinationPage.Name + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");                
                 }
             }
-            var tempClient = this.client;
+          //  var tempClient = this.client;
             if (GUIDList.Count > 0)
                 {
                  UpdateRecordStatus(GUIDList);
@@ -945,20 +868,21 @@ namespace Epi.Enter.Forms
 
         private void UpdateRecordStatus(List<string> GUIDList)
             {
-            Epi.SurveyManagerService.SurveyAnswerRequest Request = new Epi.SurveyManagerService.SurveyAnswerRequest();
-            List<Epi.SurveyManagerService.SurveyAnswerDTO> DTOList = new List<Epi.SurveyManagerService.SurveyAnswerDTO>();
+                Epi.SurveyManagerServiceV3.SurveyAnswerRequest Request = new Epi.SurveyManagerServiceV3.SurveyAnswerRequest();
+                List<Epi.SurveyManagerServiceV3.SurveyAnswerDTO> DTOList = new List<Epi.SurveyManagerServiceV3.SurveyAnswerDTO>();
             foreach (var Id in GUIDList)
                 {
 
-                Epi.SurveyManagerService.SurveyAnswerDTO DTO = new SurveyManagerService.SurveyAnswerDTO();
+                    Epi.SurveyManagerServiceV3.SurveyAnswerDTO DTO = new SurveyManagerServiceV3.SurveyAnswerDTO();
 
                 DTO.ResponseId = Id;
                 DTO.Status = 4;
                 DTOList.Add(DTO);
                 }
             Request.SurveyAnswerList = DTOList.ToArray();
-
-            client.UpdateRecordStatus(Request);
+            var MyClient = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
+            MyClient.UpdateRecordStatus(Request);
+           // client.UpdateRecordStatus(Request);
             }
 
         /// <summary>
@@ -1198,26 +1122,31 @@ namespace Epi.Enter.Forms
             {
                 try
                 {
-                //Epi.Web.Common.Message.SurveyAnswerRequest Request = new Epi.Web.Common.Message.SurveyAnswerRequest();
-                SurveyManagerService.SurveyAnswerRequest Request = new SurveyManagerService.SurveyAnswerRequest();
 
-                    Request.Criteria = new SurveyManagerService.SurveyAnswerCriteria();
-                    //Request.Criteria.SurveyAnswerIdList;
-                    Request.Criteria.SurveyId = SurveyId;
-                    //Request.Criteria.StatusId = -1;
-                    Request.Criteria.UserPublishKey = new Guid(PublishKey);
-                    Request.Criteria.OrganizationKey = new Guid(OrganizationKey);
-                    Request.Criteria.ReturnSizeInfoOnly = true;
+                    var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
 
-                    Request.Criteria.StatusId = SurveyStatus;
-                    Request.Criteria.IsDraftMode = IsDraftMode;
+                    if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveysanagerservice) || ServiceVersion.Contains(Epi.Constants.surveysanagerservicev2)))
+                    {
+                        SurveyManagerService.SurveyAnswerRequest Request = SetMessageObject(true);
+                      
+                        var MyClient = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                        var Result = MyClient.GetSurveyAnswer(Request);
+                        Pages = Result.NumberOfPages;
+                        PageSize = Result.PageSize;
+                        e.Result = Request;
+                    }
+                    if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveysanagerservicev3) ))
+                    {
+                        SurveyManagerServiceV3.SurveyAnswerRequest Request = SetMessageObjectV3(true);
 
+                        var MyClient = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
+                        SurveyManagerServiceV3.SurveyAnswerResponse Result = MyClient.GetSurveyAnswer(Request);
+                        Pages = Result.NumberOfPages;
+                        PageSize = Result.PageSize;
+                        e.Result = Request;
+                    }
 
-                    SurveyManagerService.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
-                    Pages = Result.NumberOfPages;
-                    PageSize = Result.PageSize;
-
-                    e.Result = Request;
+                    
                 }
                 catch (System.ServiceModel.CommunicationException ex)
                 {
@@ -1228,6 +1157,37 @@ namespace Epi.Enter.Forms
                     e.Result = null;                    
                 }
             }
+        }
+
+        private SurveyManagerService.SurveyAnswerRequest SetMessageObject(bool ReturnSizeInfoOnly)
+        {
+            SurveyManagerService.SurveyAnswerRequest Request = new SurveyManagerService.SurveyAnswerRequest();
+
+            Request.Criteria = new SurveyManagerService.SurveyAnswerCriteria();
+            Request.Criteria.SurveyId = SurveyId;
+            Request.Criteria.UserPublishKey = new Guid(PublishKey);
+            Request.Criteria.OrganizationKey = new Guid(OrganizationKey);
+            Request.Criteria.ReturnSizeInfoOnly = ReturnSizeInfoOnly;
+            Request.Criteria.StatusId = SurveyStatus;
+            Request.SurveyAnswerList = new List<SurveyManagerService.SurveyAnswerDTO>().ToArray();
+
+            
+            return Request;
+        }
+        private SurveyManagerServiceV3.SurveyAnswerRequest SetMessageObjectV3(bool ReturnSizeInfoOnly)
+        {
+            SurveyManagerServiceV3.SurveyAnswerRequest Request = new SurveyManagerServiceV3.SurveyAnswerRequest();
+
+            Request.Criteria = new SurveyManagerServiceV3.SurveyAnswerCriteria();
+            Request.Criteria.SurveyId = SurveyId;
+            Request.Criteria.UserPublishKey = new Guid(PublishKey);
+            Request.Criteria.OrganizationKey = new Guid(OrganizationKey);
+            Request.Criteria.ReturnSizeInfoOnly = ReturnSizeInfoOnly;
+            Request.Criteria.StatusId = SurveyStatus;
+            Request.Criteria.IsDraftMode = IsDraftMode;
+
+           
+            return Request;
         }
 
         /// <summary>
@@ -1265,71 +1225,131 @@ namespace Epi.Enter.Forms
             {
             if (e.Argument is SurveyManagerService.SurveyAnswerRequest)
                 {
-                    SurveyManagerService.SurveyAnswerRequest Request = e.Argument as SurveyManagerService.SurveyAnswerRequest;
-                    Request.Criteria.SurveyId = SurveyId;
-                  //  Request.Criteria.StatusId = 3;
-                    Request.Criteria.UserPublishKey = new Guid(PublishKey);
-                    Request.Criteria.OrganizationKey = new Guid(OrganizationKey);
-                    Request.Criteria.ReturnSizeInfoOnly = false;
-
-
-                    Request.Criteria.StatusId = SurveyStatus;
-                    Request.Criteria.IsDraftMode = IsDraftMode;
-
+                    var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
+                  
 
                     //List<SurveyManagerService.SurveyAnswerResponse> Results = new List<SurveyManagerService.SurveyAnswerResponse>();                    
 
                     for (int i = 1; i <= Pages; i++)
                     {
-
-                    List<SurveyManagerService.SurveyAnswerResponse> Results = new List<SurveyManagerService.SurveyAnswerResponse>();    
-                        Request.Criteria.PageNumber = i;
-                        Request.Criteria.PageSize = PageSize;
+                       // List<SurveyManagerService.SurveyAnswerResponse> Results = new List<SurveyManagerService.SurveyAnswerResponse>();
+                  
+                        
                         try
                         {
-                            SurveyManagerService.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
-                            Results.Add(Result);
-                        }
+                           
+                           
+
+                           if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveysanagerservice) || ServiceVersion.Contains(Epi.Constants.surveysanagerservicev2)))
+                           {
+                               List<SurveyManagerService.SurveyAnswerResponse> Results = new List<SurveyManagerService.SurveyAnswerResponse>();
+                               SurveyManagerService.SurveyAnswerRequest Request = SetMessageObject(false);
+
+                               Results = GetSurveyAnswerResponse(i, Request);
+                               this.BeginInvoke(new SetMaxProgressBarValueDelegate(SetProgressBarMaximum), Results.Count);
+
+                               foreach (SurveyManagerService.SurveyAnswerResponse Result in Results)
+                               {
+                                   try
+                                   {
+                                       Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + destinationView.TableName + "]");
+                                       IDataReader destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
+                                       List<string> destinationGUIDList = new List<string>();
+                                       while (destReader.Read())
+                                       {
+                                           destinationGUIDList.Add(destReader[0].ToString().ToUpper());
+                                       }
+
+                                       wfList = ParseXML(Result);
+
+                                       ProcessBaseTable(wfList, destinationView, destinationGUIDList);
+                                       ProcessPages(wfList, destinationView, destinationGUIDList);
+                                       //ProcessGridFields(sourceView, destinationView);
+                                       //ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
+                                   }
+                                   catch (Exception ex)
+                                   {
+                                       this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message);
+                                       e.Result = ex;
+                                       return;
+                                   }
+                               }
+                           }
+                           if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveysanagerservicev3)))
+                           {
+                               List<SurveyManagerServiceV3.SurveyAnswerResponse> Results = new List<SurveyManagerServiceV3.SurveyAnswerResponse>();
+                               SurveyManagerServiceV3.SurveyAnswerRequest Request = SetMessageObjectV3(false);
+
+                               Results = GetSurveyAnswerResponseV3(i, Request);
+                               this.BeginInvoke(new SetMaxProgressBarValueDelegate(SetProgressBarMaximum), Results.Count);
+
+                               foreach (SurveyManagerServiceV3.SurveyAnswerResponse Result in Results)
+                               {
+                                   try
+                                   {
+                                       Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + destinationView.TableName + "]");
+                                       IDataReader destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
+                                       List<string> destinationGUIDList = new List<string>();
+                                       while (destReader.Read())
+                                       {
+                                           destinationGUIDList.Add(destReader[0].ToString().ToUpper());
+                                       }
+
+                                       wfList = ParseXMLV3(Result);
+
+                                       ProcessBaseTable(wfList, destinationView, destinationGUIDList);
+                                       ProcessPages(wfList, destinationView, destinationGUIDList);
+                                       //ProcessGridFields(sourceView, destinationView);
+                                       //ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
+                                   }
+                                   catch (Exception ex)
+                                   {
+                                       this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message);
+                                       e.Result = ex;
+                                       return;
+                                   }
+                               }
+                           }
+
+                        
+
+                     
+                         }
                         catch (Exception ex)
                         {
                             this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message);
                             e.Result = ex;
                             return;
                         }
-
-                        this.BeginInvoke(new SetMaxProgressBarValueDelegate(SetProgressBarMaximum), Results.Count);
-
-                        foreach (SurveyManagerService.SurveyAnswerResponse Result in Results)
-                            {
-                                try
-                                {
-                                    Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + destinationView.TableName + "]");
-                                    IDataReader destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
-                                    List<string> destinationGUIDList = new List<string>();
-                                    while (destReader.Read())
-                                        {
-                                            destinationGUIDList.Add(destReader[0].ToString().ToUpper());
-                                        }
-
-                                    wfList = ParseXML(Result);
-
-                                    ProcessBaseTable(wfList, destinationView, destinationGUIDList);
-                                    ProcessPages(wfList, destinationView, destinationGUIDList);
-                                    //ProcessGridFields(sourceView, destinationView);
-                                    //ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
-                                }
-                                catch (Exception ex)
-                                {
-                                    this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message);
-                                    e.Result = ex;
-                                    return;
-                                }
-                            }
                     }
                 }
             }
         }
 
+        private List<SurveyManagerService.SurveyAnswerResponse> GetSurveyAnswerResponse(int i, SurveyManagerService.SurveyAnswerRequest Request)
+        {
+            List<SurveyManagerService.SurveyAnswerResponse> Results = new List<SurveyManagerService.SurveyAnswerResponse>();
+            Request.Criteria.PageNumber = i;
+            Request.Criteria.PageSize = PageSize;
+            var MyClient = Epi.Core.ServiceClient.ServiceClient.GetClient();
+            SurveyManagerService.SurveyAnswerResponse Result = MyClient.GetSurveyAnswer(Request);
+             
+            Results.Add(Result);
+
+            return Results;
+        }
+        private List<SurveyManagerServiceV3.SurveyAnswerResponse> GetSurveyAnswerResponseV3(int i, SurveyManagerServiceV3.SurveyAnswerRequest Request)
+        {
+            List<SurveyManagerServiceV3.SurveyAnswerResponse> Results = new List<SurveyManagerServiceV3.SurveyAnswerResponse>();
+            Request.Criteria.PageNumber = i;
+            Request.Criteria.PageSize = PageSize;
+            var MyClient = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
+            SurveyManagerServiceV3.SurveyAnswerResponse Result = MyClient.GetSurveyAnswer(Request);
+             
+            Results.Add(Result);
+
+            return Results;
+        }
         private void btnCancel_Click(object sender, EventArgs e)
         {
             if (importFinished)
