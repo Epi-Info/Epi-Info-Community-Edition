@@ -34,6 +34,8 @@ namespace EpiDashboard
     /// any related data columns. Columns are not sorted by default but, if using an Epi Info 7 project, they
     /// may also be sorted by their tab order (also known as the order of entry).
     /// </remarks>
+    /// 
+
     public partial class LineListControl : GadgetBase
     {
         #region Private Members
@@ -176,20 +178,22 @@ namespace EpiDashboard
 
            properties = new Controls.GadgetProperties.LineListProperties(this.DashboardHelper, this, (LineListParameters)Parameters, StrataGridList, columnOrder);
 
-            properties.Width = 800;
-            properties.Height = 600;
+           properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
+           properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight/ 1.15);
+            //properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth *0.2);
+            //properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight *0.2);
             //MessageBox.Show(System.Windows.SizeToContent.Width.ToString());
             //MessageBox.Show(" PrimaryWidth=" + System.Windows.SystemParameters.PrimaryScreenWidth.ToString() + "Height=" + System.Windows.SystemParameters.PrimaryScreenHeight.ToString());
-            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
-            {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            //if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            //{
+                
 
-            }
+            //}
 
-            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
-            {
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
-            }
+            //if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            //{
+                
+            //}
 
             properties.Cancelled += new EventHandler(properties_Cancelled);
             properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
@@ -204,21 +208,24 @@ namespace EpiDashboard
             //MessageBox.Show(" PrimaryWidth=" + System.Windows.SystemParameters.PrimaryScreenWidth.ToString() + "Height=" + System.Windows.SystemParameters.PrimaryScreenHeight.ToString());         
            //MessageBox.Show(" Resized width=" + width.ToString() + "  ResizedHeight=" + height.ToString());
             //MessageBox.Show(System.Windows.SystemParameters.WorkArea.Width.ToString());
-            var newWidthSize = width;
+           
+            //var newWidthSize = width;
+            //var newHeightSize = height;
 
-            if (newWidthSize < 1100)
-            {
-                //ScrollViewer viewer = new ScrollViewer();
-                //viewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.7);
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight /1.7);
-            }
-            else if (newWidthSize > 1100)
-            {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
-            }
+            //if (newWidthSize < 1100)
+            //{
+            //    //ScrollViewer viewer = new ScrollViewer();
+            //    //viewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            //    properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.7);
+            //    properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight /1.7);
+            //}
+            //else if (newWidthSize > 1100)
+            //{
+            //    properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            //    properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            //}
 
+           
 
             //if(this.properties!=null)
             //{
@@ -230,8 +237,22 @@ namespace EpiDashboard
             //    properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 3.0);
             //}
 
+            double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;//Developer Desktop Width Where the Form is Designed
+            double i_StandardWidth = System.Windows.SystemParameters.PrimaryScreenWidth; ////Developer Desktop Height Where the Form is Designed
+            //  MainWindow// ((System.Windows.Forms.Control)(((System.Windows.Forms.Integration.AvalonAdapter)(((EpiDashboard.DashboardControl)(Popup.Parent.Parent)).Parent))._hostControl)).Size=Size       {Width = 1920 Height = 1005}
+            float f_HeightRatio = new float();
+            float f_WidthRatio = new float();
+            f_HeightRatio = (float)((float)height / (float)i_StandardHeight);
+            f_WidthRatio = (float)((float)width / (float)i_StandardWidth);
+
+            properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
+            properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+            
+
+
            
         }
+
 
         private void properties_ChangesAccepted(object sender, EventArgs e)
         {
