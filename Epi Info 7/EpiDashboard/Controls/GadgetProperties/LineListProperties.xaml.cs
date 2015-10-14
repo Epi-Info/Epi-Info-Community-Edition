@@ -555,5 +555,10 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
         }
 
+        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+
+        }
+
     }
 }

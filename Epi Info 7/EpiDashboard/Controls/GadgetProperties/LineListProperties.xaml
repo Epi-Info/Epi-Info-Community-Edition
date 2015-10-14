@@ -17,7 +17,7 @@
    
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="400" Width=".33*" />
+            <ColumnDefinition MaxWidth="400" MinWidth="300" Width=".33*" />
             <ColumnDefinition Width="30" />
             <ColumnDefinition Width=".66*" />
         </Grid.ColumnDefinitions>
@@ -41,9 +41,11 @@
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables__xfe</Label>
             </StackPanel>
+            
             <StackPanel DockPanel.Dock="Bottom">
                 <Label x:Name="tblockVariableToDisplay">Variables to display:__xfe</Label>
-                <ListView Name="lvVariables" Height="300">
+
+                <ListView Name="lvVariables" HorizontalAlignment="Left" Width="Auto" Height="300">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}" />
@@ -64,10 +66,12 @@
         </DockPanel>
 
         <DockPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelSorting" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Groupig and Sorting__xfe</Label>
+            <StackPanel DockPanel.Dock="Top" >
+                <Label x:Name="tblockPanelSorting" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">
+                    Groupig and Sorting__xfe</Label>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Bottom">
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <StackPanel >
                 <Label x:Name="tblockGroupingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping__xfe</Label>
                 <StackPanel Orientation="Vertical">
                     <WrapPanel Height="Auto" Orientation="Vertical" HorizontalAlignment="Left">
@@ -106,6 +110,7 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
+            </ScrollViewer>
         </DockPanel>
 
         <DockPanel  x:Name="panelDisplay" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
@@ -113,7 +118,7 @@
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
             </StackPanel>
-            <ScrollViewer DockPanel.Dock="Bottom">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
             <StackPanel>
                     <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Title and Description__xfe</Label>
                     <StackPanel Orientation="Vertical">
