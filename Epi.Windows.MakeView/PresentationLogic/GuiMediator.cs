@@ -1898,7 +1898,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
             LoadPage(page);
             canvas.Text = page.GetView().Name + System.IO.Path.DirectorySeparatorChar + page.Name.Trim();
             canvas.HideUpdateEnd();
-
+            OnViewFieldTabsChanged();
             if (canvas.OpenForViewingOnly)
             {
                 canvas.EnablePagePanel(false);
