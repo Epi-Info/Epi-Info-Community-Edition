@@ -51,10 +51,12 @@
             this.rdbFinalMode = new System.Windows.Forms.RadioButton();
             this.rdbDraftMode = new System.Windows.Forms.RadioButton();
             this.rdbAllRecords = new System.Windows.Forms.RadioButton();
-            this.rdbSubmittedRecords = new System.Windows.Forms.RadioButton();
+            this.rdbSubmittedIncremental = new System.Windows.Forms.RadioButton();
             this.grpImportMode = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkIncremental = new System.Windows.Forms.CheckBox();
+            this.lblIncrementalImport = new System.Windows.Forms.Label();
+            this.lblFullImport = new System.Windows.Forms.Label();
+            this.rdbSubmittedFull = new System.Windows.Forms.RadioButton();
             this.groupImportInfo.SuspendLayout();
             this.cmsStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -195,15 +197,13 @@
             this.rdbAllRecords.Name = "rdbAllRecords";
             this.rdbAllRecords.TabStop = true;
             this.rdbAllRecords.UseVisualStyleBackColor = true;
-            this.rdbAllRecords.Click += new System.EventHandler(this.rdbAllRecords_Click);
             // 
-            // rdbSubmittedRecords
+            // rdbSubmittedIncremental
             // 
-            resources.ApplyResources(this.rdbSubmittedRecords, "rdbSubmittedRecords");
-            this.rdbSubmittedRecords.Name = "rdbSubmittedRecords";
-            this.rdbSubmittedRecords.TabStop = true;
-            this.rdbSubmittedRecords.UseVisualStyleBackColor = true;
-            this.rdbSubmittedRecords.Click += new System.EventHandler(this.rdbSubmittedRecords_Click);
+            resources.ApplyResources(this.rdbSubmittedIncremental, "rdbSubmittedIncremental");
+            this.rdbSubmittedIncremental.Name = "rdbSubmittedIncremental";
+            this.rdbSubmittedIncremental.TabStop = true;
+            this.rdbSubmittedIncremental.UseVisualStyleBackColor = true;
             // 
             // grpImportMode
             // 
@@ -215,20 +215,31 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.chkIncremental);
-            this.groupBox1.Controls.Add(this.rdbSubmittedRecords);
+            this.groupBox1.Controls.Add(this.rdbSubmittedFull);
+            this.groupBox1.Controls.Add(this.lblFullImport);
+            this.groupBox1.Controls.Add(this.lblIncrementalImport);
+            this.groupBox1.Controls.Add(this.rdbSubmittedIncremental);
             this.groupBox1.Controls.Add(this.rdbAllRecords);
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // chkIncremental
+            // lblIncrementalImport
             // 
-            this.chkIncremental.Checked = true;
-            this.chkIncremental.CheckState = System.Windows.Forms.CheckState.Checked;
-            resources.ApplyResources(this.chkIncremental, "chkIncremental");
-            this.chkIncremental.Name = "chkIncremental";
-            this.chkIncremental.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.lblIncrementalImport, "lblIncrementalImport");
+            this.lblIncrementalImport.Name = "lblIncrementalImport";
+            // 
+            // lblFullImport
+            // 
+            resources.ApplyResources(this.lblFullImport, "lblFullImport");
+            this.lblFullImport.Name = "lblFullImport";
+            // 
+            // rdbSubmittedFull
+            // 
+            resources.ApplyResources(this.rdbSubmittedFull, "rdbSubmittedFull");
+            this.rdbSubmittedFull.Name = "rdbSubmittedFull";
+            this.rdbSubmittedFull.TabStop = true;
+            this.rdbSubmittedFull.UseVisualStyleBackColor = true;
             // 
             // ImportWebDataForm
             // 
@@ -286,11 +297,13 @@
         private System.Windows.Forms.RadioButton rdbFinalMode;
         private System.Windows.Forms.RadioButton rdbDraftMode;
         private System.Windows.Forms.RadioButton rdbAllRecords;
-        private System.Windows.Forms.RadioButton rdbSubmittedRecords;
+        private System.Windows.Forms.RadioButton rdbSubmittedIncremental;
         private System.Windows.Forms.GroupBox grpImportMode;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ContextMenuStrip cmsStatus;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Copy;
-        private System.Windows.Forms.CheckBox chkIncremental;
+        private System.Windows.Forms.RadioButton rdbSubmittedFull;
+        private System.Windows.Forms.Label lblFullImport;
+        private System.Windows.Forms.Label lblIncrementalImport;
     }
 }
