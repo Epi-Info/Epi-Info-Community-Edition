@@ -17,13 +17,183 @@ namespace Epi.Core.ServiceClient
             GeneralException
         }
 
-        public static SurveyManagerService.ManagerServiceV2Client GetClient(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
+        //public static SurveyManagerService.ManagerServiceV2Client GetClient(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
+        //{
+        //    SurveyManagerService.ManagerServiceV2Client result = null;
+        //    try
+        //    {
+
+        //        Configuration config = Configuration.GetNewInstance();
+        //        if (pIsAuthenticated) // Windows Authentication
+        //        {
+        //            System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
+        //            binding.Name = "BasicHttpBinding";
+        //            binding.CloseTimeout = new TimeSpan(0, 1, 0);
+        //            binding.OpenTimeout = new TimeSpan(0, 1, 0);
+        //            binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
+        //            binding.SendTimeout = new TimeSpan(0, 1, 0);
+        //            binding.AllowCookies = false;
+        //            binding.BypassProxyOnLocal = false;
+        //            binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
+        //            binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;
+        //            binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
+        //            binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
+        //            binding.TextEncoding = System.Text.Encoding.UTF8;
+        //            binding.TransferMode = System.ServiceModel.TransferMode.Buffered;
+        //            binding.UseDefaultWebProxy = true;
+        //            binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;
+        //            binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
+        //            binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
+        //            binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
+        //            binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
+
+        //            binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+        //            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+        //            binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+        //            binding.Security.Transport.Realm = string.Empty;
+
+        //            binding.Security.Message.ClientCredentialType = System.ServiceModel.BasicHttpMessageCredentialType.UserName;
+
+        //            System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+
+        //            result = new SurveyManagerService.ManagerServiceV2Client(binding, endpoint);
+        //            result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
+        //            result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
+        //        }
+        //        else
+        //        {
+        //            if (pIsWsHttpBinding)
+        //            {
+        //                System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();
+        //                binding.Name = "WSHttpBinding";
+        //                binding.CloseTimeout = new TimeSpan(0, 1, 0);
+        //                binding.OpenTimeout = new TimeSpan(0, 1, 0);
+        //                binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
+        //                binding.SendTimeout = new TimeSpan(0, 1, 0);
+        //                binding.BypassProxyOnLocal = false;
+        //                binding.TransactionFlow = false;
+        //                binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
+        //                binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;
+        //                binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
+        //                binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
+        //                binding.TextEncoding = System.Text.Encoding.UTF8;
+        //                binding.UseDefaultWebProxy = true;
+        //                binding.AllowCookies = false;
+
+        //                binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;
+        //                binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
+        //                binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
+        //                binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
+        //                binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
+
+        //                binding.ReliableSession.Ordered = true;
+        //                binding.ReliableSession.InactivityTimeout = new TimeSpan(0, 10, 0);
+        //                binding.ReliableSession.Enabled = false;
+
+        //                binding.Security.Mode = System.ServiceModel.SecurityMode.Message;
+        //                binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+        //                binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+        //                binding.Security.Transport.Realm = string.Empty;
+        //                binding.Security.Message.ClientCredentialType = System.ServiceModel.MessageCredentialType.Windows;
+        //                binding.Security.Message.NegotiateServiceCredential = true;
+
+        //                System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+
+        //                result = new SurveyManagerService.ManagerServiceV2Client(binding, endpoint);
+
+        //            }
+        //            else
+        //            {
+        //                System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
+        //                binding.Name = "BasicHttpBinding";
+        //                binding.CloseTimeout = new TimeSpan(0, 1, 0);
+        //                binding.OpenTimeout = new TimeSpan(0, 1, 0);
+        //                binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
+        //                binding.SendTimeout = new TimeSpan(0, 1, 0);
+        //                binding.AllowCookies = false;
+        //                binding.BypassProxyOnLocal = false;
+        //                binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
+        //                binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;
+        //                binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
+        //                binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
+        //                binding.TextEncoding = System.Text.Encoding.UTF8;
+        //                binding.TransferMode = System.ServiceModel.TransferMode.Buffered;
+        //                binding.UseDefaultWebProxy = true;
+        //                binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;
+        //                binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
+        //                binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
+        //                binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
+        //                binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
+
+        //                binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+        //                binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+        //                binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+        //                binding.Security.Transport.Realm = string.Empty;
+
+        //                System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+
+        //                result = new SurveyManagerService.ManagerServiceV2Client(binding, endpoint);
+        //            }
+        //        }
+        //    }
+        //    catch (FaultException fe)
+        //    {
+        //        throw fe;
+        //    }
+        //    catch (SecurityNegotiationException sne)
+        //    {
+        //        throw sne;
+        //    }
+        //    catch (CommunicationException ce)
+        //    {
+        //        throw ce;
+        //    }
+        //    catch (TimeoutException te)
+        //    {
+        //        throw te;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    return result;
+        //}
+
+        //public static SurveyManagerService.ManagerServiceV2Client GetClient()
+        //{
+        //    Configuration config = Configuration.GetNewInstance();
+
+        //    string pEndPointAddress = config.Settings.WebServiceEndpointAddress;
+        //    bool pIsAuthenticated = false;
+        //    bool pIsWsHTTPBinding = true;
+        //    //string s = config.Settings.WebServiceAuthMode;// "Authentication_Use_Windows"];
+        //    if (config.Settings.WebServiceAuthMode == 1)
+        //    {
+        //            pIsAuthenticated = true;
+        //    }
+
+        //    string s = config.Settings.WebServiceBindingMode;// ConfigurationManager.AppSettings["WCF_BINDING_TYPE"];
+        //    if (!String.IsNullOrEmpty(s))
+        //    {
+        //        if (s.ToUpper() == "WSHTTP")
+        //        {
+        //            pIsWsHTTPBinding = true;
+        //        }
+        //        else
+        //        {
+        //            pIsWsHTTPBinding = false;
+        //        }
+        //    }
+
+        //    return GetClient(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
+        //}
+
+        public static SurveyManagerService.ManagerServiceClient GetClient(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
         {
-            SurveyManagerService.ManagerServiceV2Client result = null;
+            SurveyManagerService.ManagerServiceClient result = null;
+            Configuration config = Configuration.GetNewInstance();
             try
             {
-
-                Configuration config = Configuration.GetNewInstance();
                 if (pIsAuthenticated) // Windows Authentication
                 {
                     System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
@@ -35,17 +205,19 @@ namespace Epi.Core.ServiceClient
                     binding.AllowCookies = false;
                     binding.BypassProxyOnLocal = false;
                     binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
-                    binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;
+                    binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;//524288;
                     binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
                     binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
                     binding.TextEncoding = System.Text.Encoding.UTF8;
                     binding.TransferMode = System.ServiceModel.TransferMode.Buffered;
                     binding.UseDefaultWebProxy = true;
-                    binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;
+                    binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;//32;
+                   
                     binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
                     binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
                     binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
                     binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
+
 
                     binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
                     binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
@@ -56,7 +228,7 @@ namespace Epi.Core.ServiceClient
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
 
-                    result = new SurveyManagerService.ManagerServiceV2Client(binding, endpoint);
+                    result = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
                     result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
                 }
@@ -73,18 +245,20 @@ namespace Epi.Core.ServiceClient
                         binding.BypassProxyOnLocal = false;
                         binding.TransactionFlow = false;
                         binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
-                        binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;
+                        binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;//524288;
                         binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
                         binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
                         binding.TextEncoding = System.Text.Encoding.UTF8;
                         binding.UseDefaultWebProxy = true;
                         binding.AllowCookies = false;
 
-                        binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;
+                        binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;//32;
+
                         binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
                         binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
                         binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
                         binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
+
 
                         binding.ReliableSession.Ordered = true;
                         binding.ReliableSession.InactivityTimeout = new TimeSpan(0, 10, 0);
@@ -99,7 +273,7 @@ namespace Epi.Core.ServiceClient
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
 
-                        result = new SurveyManagerService.ManagerServiceV2Client(binding, endpoint);
+                        result = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
 
                     }
                     else
@@ -113,17 +287,19 @@ namespace Epi.Core.ServiceClient
                         binding.AllowCookies = false;
                         binding.BypassProxyOnLocal = false;
                         binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
-                        binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;
+                        binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;//524288;
                         binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
                         binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
                         binding.TextEncoding = System.Text.Encoding.UTF8;
                         binding.TransferMode = System.ServiceModel.TransferMode.Buffered;
                         binding.UseDefaultWebProxy = true;
-                        binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;
+                        binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;//32;
+
                         binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
                         binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
                         binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
                         binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
+
 
                         binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
                         binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
@@ -132,10 +308,11 @@ namespace Epi.Core.ServiceClient
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
 
-                        result = new SurveyManagerService.ManagerServiceV2Client(binding, endpoint);
+                        result = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
                     }
                 }
             }
+            
             catch (FaultException fe)
             {
                 throw fe;
@@ -159,17 +336,17 @@ namespace Epi.Core.ServiceClient
             return result;
         }
 
-        public static SurveyManagerService.ManagerServiceV2Client GetClient()
+        public static SurveyManagerService.ManagerServiceClient GetClient()
         {
             Configuration config = Configuration.GetNewInstance();
 
             string pEndPointAddress = config.Settings.WebServiceEndpointAddress;
             bool pIsAuthenticated = false;
             bool pIsWsHTTPBinding = true;
-            //string s = config.Settings.WebServiceAuthMode;// "Authentication_Use_Windows"];
+            //string s = config.Settings.WebServiceAuthMode;// "Authentication_Use_Windows"];r
             if (config.Settings.WebServiceAuthMode == 1)
             {
-                    pIsAuthenticated = true;
+                pIsAuthenticated = true;
             }
 
             string s = config.Settings.WebServiceBindingMode;// ConfigurationManager.AppSettings["WCF_BINDING_TYPE"];
@@ -188,16 +365,188 @@ namespace Epi.Core.ServiceClient
             return GetClient(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
         }
 
+        public static SurveyManagerServiceV2.ManagerServiceV2Client GetClientV2()
+        {
+            Configuration config = Configuration.GetNewInstance();
+
+            string pEndPointAddress = config.Settings.WebServiceEndpointAddress;
+            bool pIsAuthenticated = false;
+            bool pIsWsHTTPBinding = true;
+            //string s = config.Settings.WebServiceAuthMode;// "Authentication_Use_Windows"];r
+            if (config.Settings.WebServiceAuthMode == 1)
+            {
+                pIsAuthenticated = true;
+            }
+
+            string s = config.Settings.WebServiceBindingMode;// ConfigurationManager.AppSettings["WCF_BINDING_TYPE"];
+            if (!String.IsNullOrEmpty(s))
+            {
+                if (s.ToUpper() == "WSHTTP")
+                {
+                    pIsWsHTTPBinding = true;
+                }
+                else
+                {
+                    pIsWsHTTPBinding = false;
+                }
+            }
+
+            return GetClientV2(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
+        }
+        public static SurveyManagerServiceV2.ManagerServiceV2Client GetClientV2(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
+        {
+            Configuration config = Configuration.GetNewInstance();
+            SurveyManagerServiceV2.ManagerServiceV2Client result = null;
+            try
+            {
+                if (pIsAuthenticated) // Windows Authentication
+                {
+                    System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
+                    binding.Name = "BasicHttpBinding";
+                    binding.CloseTimeout = new TimeSpan(0, 1, 0);
+                    binding.OpenTimeout = new TimeSpan(0, 1, 0);
+                    binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
+                    binding.SendTimeout = new TimeSpan(0, 1, 0);
+                    binding.AllowCookies = false;
+                    binding.BypassProxyOnLocal = false;
+                    binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
+                    binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;//524288;
+                    binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
+                    binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
+                    binding.TextEncoding = System.Text.Encoding.UTF8;
+                    binding.TransferMode = System.ServiceModel.TransferMode.Buffered;
+                    binding.UseDefaultWebProxy = true;
+                    binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;//32;
+
+                    binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
+                    binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
+                    binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
+                    binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
+
+                    binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+                    binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                    binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+                    binding.Security.Transport.Realm = string.Empty;
+
+                    binding.Security.Message.ClientCredentialType = System.ServiceModel.BasicHttpMessageCredentialType.UserName;
+
+                    System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+
+                    result = new SurveyManagerServiceV2.ManagerServiceV2Client(binding, endpoint);
+                    result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
+                    result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
+                }
+                else
+                {
+                    if (pIsWsHttpBinding)
+                    {
+                        System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();
+                        binding.Name = "WSHttpBinding";
+                        binding.CloseTimeout = new TimeSpan(0, 1, 0);
+                        binding.OpenTimeout = new TimeSpan(0, 1, 0);
+                        binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
+                        binding.SendTimeout = new TimeSpan(0, 1, 0);
+                        binding.BypassProxyOnLocal = false;
+                        binding.TransactionFlow = false;
+                        binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
+                        binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;//524288;
+                        binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
+                        binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
+                        binding.TextEncoding = System.Text.Encoding.UTF8;
+                        binding.UseDefaultWebProxy = true;
+                        binding.AllowCookies = false;
+
+                        binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;//32;
+
+                        binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
+                        binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
+                        binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
+                        binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
+
+                        binding.ReliableSession.Ordered = true;
+                        binding.ReliableSession.InactivityTimeout = new TimeSpan(0, 10, 0);
+                        binding.ReliableSession.Enabled = false;
+
+                        binding.Security.Mode = System.ServiceModel.SecurityMode.Message;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                        binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+                        binding.Security.Transport.Realm = string.Empty;
+                        binding.Security.Message.ClientCredentialType = System.ServiceModel.MessageCredentialType.Windows;
+                        binding.Security.Message.NegotiateServiceCredential = true;
+
+                        System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+
+                        result = new SurveyManagerServiceV2.ManagerServiceV2Client(binding, endpoint);
+
+                    }
+                    else
+                    {
+                        System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
+                        binding.Name = "BasicHttpBinding";
+                        binding.CloseTimeout = new TimeSpan(0, 1, 0);
+                        binding.OpenTimeout = new TimeSpan(0, 1, 0);
+                        binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
+                        binding.SendTimeout = new TimeSpan(0, 1, 0);
+                        binding.AllowCookies = false;
+                        binding.BypassProxyOnLocal = false;
+                        binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
+                        binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;//524288;
+                        binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
+                        binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
+                        binding.TextEncoding = System.Text.Encoding.UTF8;
+                        binding.TransferMode = System.ServiceModel.TransferMode.Buffered;
+                        binding.UseDefaultWebProxy = true;
+                        binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;//32;
+
+                        binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
+                        binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
+                        binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
+                        binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
+
+                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                        binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+                        binding.Security.Transport.Realm = string.Empty;
+
+                        System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+
+                        result = new SurveyManagerServiceV2.ManagerServiceV2Client(binding, endpoint);
+                    }
+                }
+            }
+           
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (SecurityNegotiationException sne)
+            {
+                throw sne;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
 
         static public IsValidOrganizationKeyEnum IsValidOrgKey(string pOrganizationKey, string pSurveyId = null)
         {
             try
             {
-                SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerServiceV2.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV2();
                 Configuration config = Configuration.GetNewInstance();
 
-                SurveyManagerService.SurveyInfoRequest request = new SurveyManagerService.SurveyInfoRequest();
-                request.Criteria = new SurveyManagerService.SurveyInfoCriteria();
+                SurveyManagerServiceV2.SurveyInfoRequest request = new SurveyManagerServiceV2.SurveyInfoRequest();
+                request.Criteria = new SurveyManagerServiceV2.SurveyInfoCriteria();
                 //tbOrgKey
                 if (!string.IsNullOrEmpty(pOrganizationKey))
                 {

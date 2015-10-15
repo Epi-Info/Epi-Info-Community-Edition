@@ -82,9 +82,9 @@ namespace Epi.Windows.MakeView.Dialogs
           
             try
             {
-            SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
-                SurveyManagerService.OrganizationRequest Request = new SurveyManagerService.OrganizationRequest();
-                SurveyManagerService.OrganizationDTO orgDTO = new SurveyManagerService.OrganizationDTO();
+            SurveyManagerServiceV2.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV2();
+            SurveyManagerServiceV2.OrganizationRequest Request = new SurveyManagerServiceV2.OrganizationRequest();
+            SurveyManagerServiceV2.OrganizationDTO orgDTO = new SurveyManagerServiceV2.OrganizationDTO();
                 Request.Organization = orgDTO;
                 var Result = client.GetOrganization(Request);
 

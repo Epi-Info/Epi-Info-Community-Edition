@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Epi.SurveyManagerService {
+namespace Epi.SurveyManagerServiceV2 {
     using System.Runtime.Serialization;
     using System;
     
@@ -17,10 +17,11 @@ namespace Epi.SurveyManagerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="RequestBase", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.SurveyInfoRequest))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.OrganizationRequest))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.SurveyAnswerRequest))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.PublishRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.SurveyInfoRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.OrganizationRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.SurveyAnswerRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.PreFilledAnswerRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.PublishRequest))]
     public partial class RequestBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -146,16 +147,16 @@ namespace Epi.SurveyManagerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SurveyInfoRequest", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    public partial class SurveyInfoRequest : Epi.SurveyManagerService.RequestBase {
+    public partial class SurveyInfoRequest : Epi.SurveyManagerServiceV2.RequestBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerService.SurveyInfoCriteria CriteriaField;
+        private Epi.SurveyManagerServiceV2.SurveyInfoCriteria CriteriaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerService.SurveyInfoDTO[] SurveyInfoListField;
+        private Epi.SurveyManagerServiceV2.SurveyInfoDTO[] SurveyInfoListField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerService.SurveyInfoCriteria Criteria {
+        public Epi.SurveyManagerServiceV2.SurveyInfoCriteria Criteria {
             get {
                 return this.CriteriaField;
             }
@@ -168,7 +169,7 @@ namespace Epi.SurveyManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerService.SurveyInfoDTO[] SurveyInfoList {
+        public Epi.SurveyManagerServiceV2.SurveyInfoDTO[] SurveyInfoList {
             get {
                 return this.SurveyInfoListField;
             }
@@ -185,13 +186,13 @@ namespace Epi.SurveyManagerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OrganizationRequest", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    public partial class OrganizationRequest : Epi.SurveyManagerService.RequestBase {
+    public partial class OrganizationRequest : Epi.SurveyManagerServiceV2.RequestBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid AdminSecurityKeyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerService.OrganizationDTO OrganizationField;
+        private Epi.SurveyManagerServiceV2.OrganizationDTO OrganizationField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Guid AdminSecurityKey {
@@ -207,7 +208,7 @@ namespace Epi.SurveyManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerService.OrganizationDTO Organization {
+        public Epi.SurveyManagerServiceV2.OrganizationDTO Organization {
             get {
                 return this.OrganizationField;
             }
@@ -224,16 +225,16 @@ namespace Epi.SurveyManagerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SurveyAnswerRequest", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    public partial class SurveyAnswerRequest : Epi.SurveyManagerService.RequestBase {
+    public partial class SurveyAnswerRequest : Epi.SurveyManagerServiceV2.RequestBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerService.SurveyAnswerCriteria CriteriaField;
+        private Epi.SurveyManagerServiceV2.SurveyAnswerCriteria CriteriaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerService.SurveyAnswerDTO[] SurveyAnswerListField;
+        private Epi.SurveyManagerServiceV2.SurveyAnswerDTO[] SurveyAnswerListField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerService.SurveyAnswerCriteria Criteria {
+        public Epi.SurveyManagerServiceV2.SurveyAnswerCriteria Criteria {
             get {
                 return this.CriteriaField;
             }
@@ -246,7 +247,7 @@ namespace Epi.SurveyManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerService.SurveyAnswerDTO[] SurveyAnswerList {
+        public Epi.SurveyManagerServiceV2.SurveyAnswerDTO[] SurveyAnswerList {
             get {
                 return this.SurveyAnswerListField;
             }
@@ -261,15 +262,38 @@ namespace Epi.SurveyManagerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PublishRequest", Namespace="http://www.yourcompany.com/types/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PreFilledAnswerRequest", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    public partial class PublishRequest : Epi.SurveyManagerService.RequestBase {
+    public partial class PreFilledAnswerRequest : Epi.SurveyManagerServiceV2.RequestBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerService.SurveyInfoDTO SurveyInfoField;
+        private Epi.SurveyManagerServiceV2.PreFilledAnswerDTO AnswerInfoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerService.SurveyInfoDTO SurveyInfo {
+        public Epi.SurveyManagerServiceV2.PreFilledAnswerDTO AnswerInfo {
+            get {
+                return this.AnswerInfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AnswerInfoField, value) != true)) {
+                    this.AnswerInfoField = value;
+                    this.RaisePropertyChanged("AnswerInfo");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PublishRequest", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class PublishRequest : Epi.SurveyManagerServiceV2.RequestBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.SurveyManagerServiceV2.SurveyInfoDTO SurveyInfoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.SurveyManagerServiceV2.SurveyInfoDTO SurveyInfo {
             get {
                 return this.SurveyInfoField;
             }
@@ -555,7 +579,7 @@ namespace Epi.SurveyManagerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SurveyInfoCriteria", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    public partial class SurveyInfoCriteria : Epi.SurveyManagerService.Criteria {
+    public partial class SurveyInfoCriteria : Epi.SurveyManagerServiceV2.Criteria {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime ClosingDateField;
@@ -738,8 +762,8 @@ namespace Epi.SurveyManagerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Criteria", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.SurveyAnswerCriteria))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.SurveyInfoCriteria))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.SurveyAnswerCriteria))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.SurveyInfoCriteria))]
     public partial class Criteria : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -785,7 +809,7 @@ namespace Epi.SurveyManagerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SurveyAnswerCriteria", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    public partial class SurveyAnswerCriteria : Epi.SurveyManagerService.Criteria {
+    public partial class SurveyAnswerCriteria : Epi.SurveyManagerServiceV2.Criteria {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime DateCompletedField;
@@ -1216,19 +1240,114 @@ namespace Epi.SurveyManagerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PreFilledAnswerDTO", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class PreFilledAnswerDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid OrganizationKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid SurveyIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<string, string> SurveyQuestionAnswerListField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid UserPublishKeyField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid OrganizationKey {
+            get {
+                return this.OrganizationKeyField;
+            }
+            set {
+                if ((this.OrganizationKeyField.Equals(value) != true)) {
+                    this.OrganizationKeyField = value;
+                    this.RaisePropertyChanged("OrganizationKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid SurveyId {
+            get {
+                return this.SurveyIdField;
+            }
+            set {
+                if ((this.SurveyIdField.Equals(value) != true)) {
+                    this.SurveyIdField = value;
+                    this.RaisePropertyChanged("SurveyId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<string, string> SurveyQuestionAnswerList {
+            get {
+                return this.SurveyQuestionAnswerListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyQuestionAnswerListField, value) != true)) {
+                    this.SurveyQuestionAnswerListField = value;
+                    this.RaisePropertyChanged("SurveyQuestionAnswerList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid UserPublishKey {
+            get {
+                return this.UserPublishKeyField;
+            }
+            set {
+                if ((this.UserPublishKeyField.Equals(value) != true)) {
+                    this.UserPublishKeyField = value;
+                    this.RaisePropertyChanged("UserPublishKey");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseBase", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.SurveyInfoResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.OrganizationResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.SurveyAnswerResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerService.PublishResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.SurveyInfoResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.OrganizationResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.SurveyAnswerResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.SurveyControlsRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.SurveyControlsResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV2.PublishResponse))]
     public partial class ResponseBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerService.AcknowledgeType AcknowledgeField;
+        private Epi.SurveyManagerServiceV2.AcknowledgeType AcknowledgeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string BuildField;
@@ -1262,7 +1381,7 @@ namespace Epi.SurveyManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerService.AcknowledgeType Acknowledge {
+        public Epi.SurveyManagerServiceV2.AcknowledgeType Acknowledge {
             get {
                 return this.AcknowledgeField;
             }
@@ -1379,7 +1498,7 @@ namespace Epi.SurveyManagerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SurveyInfoResponse", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    public partial class SurveyInfoResponse : Epi.SurveyManagerService.ResponseBase {
+    public partial class SurveyInfoResponse : Epi.SurveyManagerServiceV2.ResponseBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int NumberOfPagesField;
@@ -1388,7 +1507,7 @@ namespace Epi.SurveyManagerService {
         private int PageSizeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerService.SurveyInfoDTO[] SurveyInfoListField;
+        private Epi.SurveyManagerServiceV2.SurveyInfoDTO[] SurveyInfoListField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int NumberOfPages {
@@ -1417,7 +1536,7 @@ namespace Epi.SurveyManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerService.SurveyInfoDTO[] SurveyInfoList {
+        public Epi.SurveyManagerServiceV2.SurveyInfoDTO[] SurveyInfoList {
             get {
                 return this.SurveyInfoListField;
             }
@@ -1434,13 +1553,13 @@ namespace Epi.SurveyManagerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OrganizationResponse", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    public partial class OrganizationResponse : Epi.SurveyManagerService.ResponseBase {
+    public partial class OrganizationResponse : Epi.SurveyManagerServiceV2.ResponseBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string Message1Field;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerService.OrganizationDTO[] OrganizationListField;
+        private Epi.SurveyManagerServiceV2.OrganizationDTO[] OrganizationListField;
         
         [System.Runtime.Serialization.DataMemberAttribute(Name="Message")]
         public string Message1 {
@@ -1456,7 +1575,7 @@ namespace Epi.SurveyManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerService.OrganizationDTO[] OrganizationList {
+        public Epi.SurveyManagerServiceV2.OrganizationDTO[] OrganizationList {
             get {
                 return this.OrganizationListField;
             }
@@ -1473,7 +1592,7 @@ namespace Epi.SurveyManagerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SurveyAnswerResponse", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    public partial class SurveyAnswerResponse : Epi.SurveyManagerService.ResponseBase {
+    public partial class SurveyAnswerResponse : Epi.SurveyManagerServiceV2.ResponseBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int NumberOfPagesField;
@@ -1482,7 +1601,7 @@ namespace Epi.SurveyManagerService {
         private int PageSizeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerService.SurveyAnswerDTO[] SurveyResponseListField;
+        private Epi.SurveyManagerServiceV2.SurveyAnswerDTO[] SurveyResponseListField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int NumberOfPages {
@@ -1511,7 +1630,7 @@ namespace Epi.SurveyManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerService.SurveyAnswerDTO[] SurveyResponseList {
+        public Epi.SurveyManagerServiceV2.SurveyAnswerDTO[] SurveyResponseList {
             get {
                 return this.SurveyResponseListField;
             }
@@ -1526,15 +1645,77 @@ namespace Epi.SurveyManagerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PublishResponse", Namespace="http://www.yourcompany.com/types/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SurveyControlsRequest", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
-    public partial class PublishResponse : Epi.SurveyManagerService.ResponseBase {
+    public partial class SurveyControlsRequest : Epi.SurveyManagerServiceV2.ResponseBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerService.PublishInfoDTO PublishInfoField;
+        private string SurveyIdField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerService.PublishInfoDTO PublishInfo {
+        public string SurveyId {
+            get {
+                return this.SurveyIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyIdField, value) != true)) {
+                    this.SurveyIdField = value;
+                    this.RaisePropertyChanged("SurveyId");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SurveyControlsResponse", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class SurveyControlsResponse : Epi.SurveyManagerServiceV2.ResponseBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Message1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.SurveyManagerServiceV2.SurveyControlDTO[] SurveyControlListField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Name="Message")]
+        public string Message1 {
+            get {
+                return this.Message1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Message1Field, value) != true)) {
+                    this.Message1Field = value;
+                    this.RaisePropertyChanged("Message1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.SurveyManagerServiceV2.SurveyControlDTO[] SurveyControlList {
+            get {
+                return this.SurveyControlListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyControlListField, value) != true)) {
+                    this.SurveyControlListField = value;
+                    this.RaisePropertyChanged("SurveyControlList");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PublishResponse", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class PublishResponse : Epi.SurveyManagerServiceV2.ResponseBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.SurveyManagerServiceV2.PublishInfoDTO PublishInfoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.SurveyManagerServiceV2.PublishInfoDTO PublishInfo {
             get {
                 return this.PublishInfoField;
             }
@@ -1621,6 +1802,83 @@ namespace Epi.SurveyManagerService {
                 if ((object.ReferenceEquals(this.URLField, value) != true)) {
                     this.URLField = value;
                     this.RaisePropertyChanged("URL");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SurveyControlDTO", Namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO")]
+    [System.SerializableAttribute()]
+    public partial class SurveyControlDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ControlIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ControlPromptField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ControlTypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ControlId {
+            get {
+                return this.ControlIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ControlIdField, value) != true)) {
+                    this.ControlIdField = value;
+                    this.RaisePropertyChanged("ControlId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ControlPrompt {
+            get {
+                return this.ControlPromptField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ControlPromptField, value) != true)) {
+                    this.ControlPromptField = value;
+                    this.RaisePropertyChanged("ControlPrompt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ControlType {
+            get {
+                return this.ControlTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ControlTypeField, value) != true)) {
+                    this.ControlTypeField = value;
+                    this.RaisePropertyChanged("ControlType");
                 }
             }
         }
@@ -1728,133 +1986,259 @@ namespace Epi.SurveyManagerService {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SurveyManagerService.IManagerService")]
-    public interface IManagerService {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PreFilledAnswerResponse", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class PreFilledAnswerResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/PublishSurvey", ReplyAction="http://tempuri.org/IManagerService/PublishSurveyResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/PublishSurveyCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.PublishResponse PublishSurvey(Epi.SurveyManagerService.PublishRequest pRequestMessage);
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetSurveyInfo", ReplyAction="http://tempuri.org/IManagerService/GetSurveyInfoResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/GetSurveyInfoCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.SurveyInfoResponse GetSurveyInfo(Epi.SurveyManagerService.SurveyInfoRequest pRequest);
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<string, string> ErrorMessageListField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetOrganization", ReplyAction="http://tempuri.org/IManagerService/GetOrganizationResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/GetOrganizationCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.OrganizationResponse GetOrganization(Epi.SurveyManagerService.OrganizationRequest pRequest);
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetOrganizationInfo", ReplyAction="http://tempuri.org/IManagerService/GetOrganizationInfoResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/GetOrganizationInfoCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.OrganizationResponse GetOrganizationInfo(Epi.SurveyManagerService.OrganizationRequest pRequest);
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurveyResponseIDField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetOrganizationNames", ReplyAction="http://tempuri.org/IManagerService/GetOrganizationNamesResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/GetOrganizationNamesCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.OrganizationResponse GetOrganizationNames(Epi.SurveyManagerService.OrganizationRequest pRequest);
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurveyResponsePassCodeField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetOrganizationByKey", ReplyAction="http://tempuri.org/IManagerService/GetOrganizationByKeyResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/GetOrganizationByKeyCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.OrganizationResponse GetOrganizationByKey(Epi.SurveyManagerService.OrganizationRequest pRequest);
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurveyResponseUrlField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/SetSurveyInfo", ReplyAction="http://tempuri.org/IManagerService/SetSurveyInfoResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/SetSurveyInfoCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.SurveyInfoResponse SetSurveyInfo(Epi.SurveyManagerService.SurveyInfoRequest pRequest);
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetSurveyAnswer", ReplyAction="http://tempuri.org/IManagerService/GetSurveyAnswerResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/GetSurveyAnswerCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.SurveyAnswerResponse GetSurveyAnswer(Epi.SurveyManagerService.SurveyAnswerRequest pRequest);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<string, string> ErrorMessageList {
+            get {
+                return this.ErrorMessageListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageListField, value) != true)) {
+                    this.ErrorMessageListField = value;
+                    this.RaisePropertyChanged("ErrorMessageList");
+                }
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/SetOrganization", ReplyAction="http://tempuri.org/IManagerService/SetOrganizationResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/SetOrganizationCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.OrganizationResponse SetOrganization(Epi.SurveyManagerService.OrganizationRequest pRequest);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/UpdateOrganizationInfo", ReplyAction="http://tempuri.org/IManagerService/UpdateOrganizationInfoResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/UpdateOrganizationInfoCustomFaultExceptionFaul" +
-            "t", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.OrganizationResponse UpdateOrganizationInfo(Epi.SurveyManagerService.OrganizationRequest pRequest);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SurveyResponseID {
+            get {
+                return this.SurveyResponseIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyResponseIDField, value) != true)) {
+                    this.SurveyResponseIDField = value;
+                    this.RaisePropertyChanged("SurveyResponseID");
+                }
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/IsValidOrgKey", ReplyAction="http://tempuri.org/IManagerService/IsValidOrgKeyResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/IsValidOrgKeyCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        bool IsValidOrgKey(Epi.SurveyManagerService.SurveyInfoRequest pRequest);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SurveyResponsePassCode {
+            get {
+                return this.SurveyResponsePassCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyResponsePassCodeField, value) != true)) {
+                    this.SurveyResponsePassCodeField = value;
+                    this.RaisePropertyChanged("SurveyResponsePassCode");
+                }
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/RePublishSurvey", ReplyAction="http://tempuri.org/IManagerService/RePublishSurveyResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/RePublishSurveyCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.PublishResponse RePublishSurvey(Epi.SurveyManagerService.PublishRequest pRequestMessage);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SurveyResponseUrl {
+            get {
+                return this.SurveyResponseUrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyResponseUrlField, value) != true)) {
+                    this.SurveyResponseUrlField = value;
+                    this.RaisePropertyChanged("SurveyResponseUrl");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IManagerServiceChannel : Epi.SurveyManagerService.IManagerService, System.ServiceModel.IClientChannel {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SurveyManagerServiceV2.IManagerServiceV2")]
+    public interface IManagerServiceV2 {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/PublishSurvey", ReplyAction="http://tempuri.org/IManagerService/PublishSurveyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/PublishSurveyCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.PublishResponse PublishSurvey(Epi.SurveyManagerServiceV2.PublishRequest pRequestMessage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetSurveyInfo", ReplyAction="http://tempuri.org/IManagerService/GetSurveyInfoResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/GetSurveyInfoCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.SurveyInfoResponse GetSurveyInfo(Epi.SurveyManagerServiceV2.SurveyInfoRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetOrganization", ReplyAction="http://tempuri.org/IManagerService/GetOrganizationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/GetOrganizationCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.OrganizationResponse GetOrganization(Epi.SurveyManagerServiceV2.OrganizationRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetOrganizationInfo", ReplyAction="http://tempuri.org/IManagerService/GetOrganizationInfoResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/GetOrganizationInfoCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.OrganizationResponse GetOrganizationInfo(Epi.SurveyManagerServiceV2.OrganizationRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetOrganizationNames", ReplyAction="http://tempuri.org/IManagerService/GetOrganizationNamesResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/GetOrganizationNamesCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.OrganizationResponse GetOrganizationNames(Epi.SurveyManagerServiceV2.OrganizationRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetOrganizationByKey", ReplyAction="http://tempuri.org/IManagerService/GetOrganizationByKeyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/GetOrganizationByKeyCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.OrganizationResponse GetOrganizationByKey(Epi.SurveyManagerServiceV2.OrganizationRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/SetSurveyInfo", ReplyAction="http://tempuri.org/IManagerService/SetSurveyInfoResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/SetSurveyInfoCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.SurveyInfoResponse SetSurveyInfo(Epi.SurveyManagerServiceV2.SurveyInfoRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetSurveyAnswer", ReplyAction="http://tempuri.org/IManagerService/GetSurveyAnswerResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/GetSurveyAnswerCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.SurveyAnswerResponse GetSurveyAnswer(Epi.SurveyManagerServiceV2.SurveyAnswerRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/SetOrganization", ReplyAction="http://tempuri.org/IManagerService/SetOrganizationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/SetOrganizationCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.OrganizationResponse SetOrganization(Epi.SurveyManagerServiceV2.OrganizationRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/UpdateOrganizationInfo", ReplyAction="http://tempuri.org/IManagerService/UpdateOrganizationInfoResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/UpdateOrganizationInfoCustomFaultExceptionFaul" +
+            "t", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.OrganizationResponse UpdateOrganizationInfo(Epi.SurveyManagerServiceV2.OrganizationRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/IsValidOrgKey", ReplyAction="http://tempuri.org/IManagerService/IsValidOrgKeyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/IsValidOrgKeyCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        bool IsValidOrgKey(Epi.SurveyManagerServiceV2.SurveyInfoRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/RePublishSurvey", ReplyAction="http://tempuri.org/IManagerService/RePublishSurveyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/RePublishSurveyCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.PublishResponse RePublishSurvey(Epi.SurveyManagerServiceV2.PublishRequest pRequestMessage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerServiceV2/SetSurveyAnswer", ReplyAction="http://tempuri.org/IManagerServiceV2/SetSurveyAnswerResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerServiceV2/SetSurveyAnswerCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.PreFilledAnswerResponse SetSurveyAnswer(Epi.SurveyManagerServiceV2.PreFilledAnswerRequest pRequestMessage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerServiceV2/GetSurveyControlList", ReplyAction="http://tempuri.org/IManagerServiceV2/GetSurveyControlListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerServiceV2/GetSurveyControlListCustomFaultExceptionFaul" +
+            "t", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV2.SurveyControlsResponse GetSurveyControlList(Epi.SurveyManagerServiceV2.SurveyControlsRequest pRequestMessage);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IManagerServiceV2Channel : Epi.SurveyManagerServiceV2.IManagerServiceV2, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ManagerServiceClient : System.ServiceModel.ClientBase<Epi.SurveyManagerService.IManagerService>, Epi.SurveyManagerService.IManagerService {
+    public partial class ManagerServiceV2Client : System.ServiceModel.ClientBase<Epi.SurveyManagerServiceV2.IManagerServiceV2>, Epi.SurveyManagerServiceV2.IManagerServiceV2 {
         
-        public ManagerServiceClient() {
+        public ManagerServiceV2Client() {
         }
         
-        public ManagerServiceClient(string endpointConfigurationName) : 
+        public ManagerServiceV2Client(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public ManagerServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public ManagerServiceV2Client(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ManagerServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ManagerServiceV2Client(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ManagerServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ManagerServiceV2Client(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public Epi.SurveyManagerService.PublishResponse PublishSurvey(Epi.SurveyManagerService.PublishRequest pRequestMessage) {
+        public Epi.SurveyManagerServiceV2.PublishResponse PublishSurvey(Epi.SurveyManagerServiceV2.PublishRequest pRequestMessage) {
             return base.Channel.PublishSurvey(pRequestMessage);
         }
         
-        public Epi.SurveyManagerService.SurveyInfoResponse GetSurveyInfo(Epi.SurveyManagerService.SurveyInfoRequest pRequest) {
+        public Epi.SurveyManagerServiceV2.SurveyInfoResponse GetSurveyInfo(Epi.SurveyManagerServiceV2.SurveyInfoRequest pRequest) {
             return base.Channel.GetSurveyInfo(pRequest);
         }
         
-        public Epi.SurveyManagerService.OrganizationResponse GetOrganization(Epi.SurveyManagerService.OrganizationRequest pRequest) {
+        public Epi.SurveyManagerServiceV2.OrganizationResponse GetOrganization(Epi.SurveyManagerServiceV2.OrganizationRequest pRequest) {
             return base.Channel.GetOrganization(pRequest);
         }
         
-        public Epi.SurveyManagerService.OrganizationResponse GetOrganizationInfo(Epi.SurveyManagerService.OrganizationRequest pRequest) {
+        public Epi.SurveyManagerServiceV2.OrganizationResponse GetOrganizationInfo(Epi.SurveyManagerServiceV2.OrganizationRequest pRequest) {
             return base.Channel.GetOrganizationInfo(pRequest);
         }
         
-        public Epi.SurveyManagerService.OrganizationResponse GetOrganizationNames(Epi.SurveyManagerService.OrganizationRequest pRequest) {
+        public Epi.SurveyManagerServiceV2.OrganizationResponse GetOrganizationNames(Epi.SurveyManagerServiceV2.OrganizationRequest pRequest) {
             return base.Channel.GetOrganizationNames(pRequest);
         }
         
-        public Epi.SurveyManagerService.OrganizationResponse GetOrganizationByKey(Epi.SurveyManagerService.OrganizationRequest pRequest) {
+        public Epi.SurveyManagerServiceV2.OrganizationResponse GetOrganizationByKey(Epi.SurveyManagerServiceV2.OrganizationRequest pRequest) {
             return base.Channel.GetOrganizationByKey(pRequest);
         }
         
-        public Epi.SurveyManagerService.SurveyInfoResponse SetSurveyInfo(Epi.SurveyManagerService.SurveyInfoRequest pRequest) {
+        public Epi.SurveyManagerServiceV2.SurveyInfoResponse SetSurveyInfo(Epi.SurveyManagerServiceV2.SurveyInfoRequest pRequest) {
             return base.Channel.SetSurveyInfo(pRequest);
         }
         
-        public Epi.SurveyManagerService.SurveyAnswerResponse GetSurveyAnswer(Epi.SurveyManagerService.SurveyAnswerRequest pRequest) {
+        public Epi.SurveyManagerServiceV2.SurveyAnswerResponse GetSurveyAnswer(Epi.SurveyManagerServiceV2.SurveyAnswerRequest pRequest) {
             return base.Channel.GetSurveyAnswer(pRequest);
         }
         
-        public Epi.SurveyManagerService.OrganizationResponse SetOrganization(Epi.SurveyManagerService.OrganizationRequest pRequest) {
+        public Epi.SurveyManagerServiceV2.OrganizationResponse SetOrganization(Epi.SurveyManagerServiceV2.OrganizationRequest pRequest) {
             return base.Channel.SetOrganization(pRequest);
         }
         
-        public Epi.SurveyManagerService.OrganizationResponse UpdateOrganizationInfo(Epi.SurveyManagerService.OrganizationRequest pRequest) {
+        public Epi.SurveyManagerServiceV2.OrganizationResponse UpdateOrganizationInfo(Epi.SurveyManagerServiceV2.OrganizationRequest pRequest) {
             return base.Channel.UpdateOrganizationInfo(pRequest);
         }
         
-        public bool IsValidOrgKey(Epi.SurveyManagerService.SurveyInfoRequest pRequest) {
+        public bool IsValidOrgKey(Epi.SurveyManagerServiceV2.SurveyInfoRequest pRequest) {
             return base.Channel.IsValidOrgKey(pRequest);
         }
         
-        public Epi.SurveyManagerService.PublishResponse RePublishSurvey(Epi.SurveyManagerService.PublishRequest pRequestMessage) {
+        public Epi.SurveyManagerServiceV2.PublishResponse RePublishSurvey(Epi.SurveyManagerServiceV2.PublishRequest pRequestMessage) {
             return base.Channel.RePublishSurvey(pRequestMessage);
+        }
+        
+        public Epi.SurveyManagerServiceV2.PreFilledAnswerResponse SetSurveyAnswer(Epi.SurveyManagerServiceV2.PreFilledAnswerRequest pRequestMessage) {
+            return base.Channel.SetSurveyAnswer(pRequestMessage);
+        }
+        
+        public Epi.SurveyManagerServiceV2.SurveyControlsResponse GetSurveyControlList(Epi.SurveyManagerServiceV2.SurveyControlsRequest pRequestMessage) {
+            return base.Channel.GetSurveyControlList(pRequestMessage);
         }
     }
 }

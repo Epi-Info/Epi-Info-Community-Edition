@@ -120,11 +120,11 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-                SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerServiceV2.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV2();
                 Configuration config = Configuration.GetNewInstance();
-                
-                SurveyManagerService.SurveyInfoRequest Request = (SurveyManagerService.SurveyInfoRequest)((object[])e.Argument)[0];
-                SurveyManagerService.SurveyInfoResponse Result = (SurveyManagerService.SurveyInfoResponse)((object[])e.Argument)[1];
+
+                SurveyManagerServiceV2.SurveyInfoRequest Request = (SurveyManagerServiceV2.SurveyInfoRequest)((object[])e.Argument)[0];
+                SurveyManagerServiceV2.SurveyInfoResponse Result = (SurveyManagerServiceV2.SurveyInfoResponse)((object[])e.Argument)[1];
             
                 Result = client.GetSurveyInfo(Request);
                 
@@ -184,9 +184,9 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-            SurveyManagerService.ManagerServiceV2Client client;
+            SurveyManagerService.ManagerServiceClient client;
                 Configuration config = Configuration.GetNewInstance();
-                client = GetClient();
+                client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 SurveyManagerService.SurveyInfoRequest Request = (SurveyManagerService.SurveyInfoRequest)((object[])e.Argument)[0];
                 SurveyManagerService.SurveyInfoResponse Result = (SurveyManagerService.SurveyInfoResponse)((object[])e.Argument)[1];
 
@@ -224,7 +224,7 @@ namespace Epi.Windows.MakeView.Dialogs
                     Request.Criteria.IsDraftMode = false;
                     SurveyInfoDTO.IsDraftMode = false;
                 }
-                 Request.SurveyInfoList = new SurveyManagerService.SurveyInfoDTO[]{SurveyInfoDTO};
+                Request.SurveyInfoList = new SurveyManagerService.SurveyInfoDTO[] { SurveyInfoDTO };
                
                 Result = client.SetSurveyInfo(Request);
 
@@ -262,9 +262,9 @@ namespace Epi.Windows.MakeView.Dialogs
             }
         }
 
-        public SurveyManagerService.ManagerServiceV2Client GetClient() {
+        public SurveyManagerServiceV3.ManagerServiceV3Client GetClient() {
 
-            SurveyManagerService.ManagerServiceV2Client client;
+            SurveyManagerServiceV3.ManagerServiceV3Client client;
             Configuration config = Configuration.GetNewInstance();
 
             if (config.Settings.WebServiceAuthMode == 1) // Windows Authentication
@@ -299,7 +299,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                 System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                client = new SurveyManagerService.ManagerServiceV2Client(binding, endpoint);
+                client = new SurveyManagerServiceV3.ManagerServiceV3Client(binding, endpoint);
 
                 client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                 client.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
@@ -345,7 +345,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                    client = new SurveyManagerService.ManagerServiceV2Client(binding, endpoint);
+                    client = new SurveyManagerServiceV3.ManagerServiceV3Client(binding, endpoint);
 
                 }
                 else
@@ -379,7 +379,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.WebServiceEndpointAddress);
 
-                    client = new SurveyManagerService.ManagerServiceV2Client(binding, endpoint);
+                    client = new SurveyManagerServiceV3.ManagerServiceV3Client(binding, endpoint);
                 }
 
             }

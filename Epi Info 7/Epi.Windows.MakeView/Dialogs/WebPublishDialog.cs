@@ -30,8 +30,10 @@ namespace Epi.Windows.MakeView.Dialogs
         private bool IsMetaDataOnly = false;
         private bool isRepublishableConfig = false;
         private GuiMediator mediater;
-        private SurveyManagerService.SurveyInfoDTO currentSurveyInfoDTO ;
+        private SurveyManagerService.SurveyInfoDTO currentSurveyInfoDTO;
+        private SurveyManagerServiceV2.SurveyInfoDTO currentSurveyInfoDTOV2;
         private SurveyManagerServiceV3.SurveyInfoDTO currentSurveyInfoDTOV3;
+        private  string ServiceVersion;
         private Configuration config;
         //=======
         //private Epi.Web.Common.Message.PublishResponse Result;
@@ -41,7 +43,9 @@ namespace Epi.Windows.MakeView.Dialogs
         #region Delegates
         private delegate void SetStatusDelegate(string statusMessage);
        // private delegate void PublishDelegate(Epi.Web.Common.Message.PublishResponse Result);
+        private delegate void PublishDelegateV2(SurveyManagerServiceV2.PublishResponse Result);
         private delegate void PublishDelegate(SurveyManagerService.PublishResponse Result);
+        private delegate void PublishDelegateV3(SurveyManagerServiceV3.PublishResponse Result);
         private delegate void FinishWithErrorDelegate(string errorMessage);
         private delegate void FinishWithCustomFaultExceptionDelegate(FaultException<CustomFaultException> cfe);
         private delegate void FinishWithFaultExceptionDelegate(FaultException fe);
@@ -79,7 +83,7 @@ namespace Epi.Windows.MakeView.Dialogs
             {
                 this.isRepublishableConfig = false;
             }
-
+            this.ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
             PopulateTimeDropDowns();
 
             Construct();
@@ -149,7 +153,7 @@ namespace Epi.Windows.MakeView.Dialogs
             var config = Configuration.GetNewInstance();
             var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
           //  Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
-            if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveysanagerservice) || ServiceVersion.Contains(Epi.Constants.surveysanagerservicev2)))
+            if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservice)))
             {
                 SurveyManagerService.PublishRequest Request = SetMessageObject();
                 try
@@ -184,7 +188,42 @@ namespace Epi.Windows.MakeView.Dialogs
                     this.Cursor = Cursors.Default;
                 }
             }
-            if (!string.IsNullOrEmpty(ServiceVersion) &&  ServiceVersion.Contains(Epi.Constants.surveysanagerservicev3))
+            if (!string.IsNullOrEmpty(ServiceVersion) && ServiceVersion.Contains(Epi.Constants.surveyManagerservicev2))
+            {
+                SurveyManagerServiceV2.PublishRequest Request = SetMessageObjectV2();
+                try
+                {
+                    //  Epi.Web.Common.Message.PublishResponse Result = new Epi.Web.Common.Message.PublishResponse();
+                    SurveyManagerServiceV2.PublishResponse Result = new SurveyManagerServiceV2.PublishResponse();
+
+                    lock (syncLock)
+                    {
+                        this.Cursor = Cursors.WaitCursor;
+                        publishWorker = new BackgroundWorker();
+                        publishWorker.WorkerSupportsCancellation = true;
+                        publishWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(worker_DoWorkV2);
+                        publishWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(worker_WorkerCompleted);
+                        object[] args = new object[2];
+                        args[0] = Request;
+                        args[1] = Result;
+                        publishWorker.RunWorkerAsync(args);
+                    }
+
+                    if (publishWorker.WorkerSupportsCancellation)
+                    {
+                        publishWorker.CancelAsync();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    txtStatusSummary.AppendText("An error occurred while trying to publish the survey.");
+                    txtStatus.AppendText(ex.ToString());
+                    btnDetails.Visible = true;
+                    this.progressBar.Visible = false;
+                    this.Cursor = Cursors.Default;
+                }
+            }
+            if (!string.IsNullOrEmpty(ServiceVersion) &&  ServiceVersion.Contains(Epi.Constants.surveyManagerservicev3))
             {
                 SurveyManagerServiceV3.PublishRequest Request = SetMessageObjectV3();
                 try
@@ -357,6 +396,63 @@ namespace Epi.Windows.MakeView.Dialogs
           
             return Request;
         }
+        private SurveyManagerServiceV2.PublishRequest SetMessageObjectV2()
+        {
+            SurveyManagerServiceV2.PublishRequest Request = new SurveyManagerServiceV2.PublishRequest();
+            Request.SurveyInfo = new SurveyManagerServiceV2.SurveyInfoDTO();
+
+            if (string.IsNullOrEmpty(ClosingTimecomboBox.Text))
+            {
+                Request.SurveyInfo.ClosingDate = dtpSurveyClosingDate.Value.Date + new TimeSpan(0, 23, 59, 0);
+            }
+            else
+            {
+                Request.SurveyInfo.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text);
+            }
+
+            if (string.IsNullOrEmpty(StartTimecomboBox.Text))
+            {
+                Request.SurveyInfo.StartDate = StartDateDatePicker.Value.Date;
+            }
+            else
+            {
+                Request.SurveyInfo.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date, StartTimecomboBox.Text);
+            }
+
+
+            Request.SurveyInfo.DepartmentName = txtDepartment.Text;
+            Request.SurveyInfo.IntroductionText = txtIntroductionText.Text;
+            Request.SurveyInfo.ExitText = txtExitText.Text;
+
+            Request.SurveyInfo.SurveyName = txtSurveyName.Text;
+
+            Request.SurveyInfo.OrganizationKey = new Guid(txtOrganizationKey.Text.ToString());
+            Request.SurveyInfo.UserPublishKey = UserPublishGuid;
+            Request.SurveyInfo.XML = template;
+            Request.SurveyInfo.IsDraftMode = true;
+            Request.SurveyInfo.SurveyType = (rdbSingleResponse.Checked) ? 1 : 2;
+            if (txtOrganization.Text.Equals("Your Organization Name (optional)", StringComparison.OrdinalIgnoreCase))
+            {
+                Request.SurveyInfo.OrganizationName = null;
+            }
+            else
+            {
+                Request.SurveyInfo.OrganizationName = txtOrganization.Text;
+            }
+
+            if (txtSurveyID.Text.Equals("Your Survey ID (optional)", StringComparison.OrdinalIgnoreCase))
+            {
+                Request.SurveyInfo.SurveyNumber = null;
+            }
+            else
+            {
+                Request.SurveyInfo.SurveyNumber = txtSurveyID.Text;
+            }
+
+
+
+            return Request;
+        }
         private string RemoveUserName(string ConnectionString)
             {
             int indexOfUserId = ConnectionString.IndexOf("User ID");
@@ -391,17 +487,63 @@ namespace Epi.Windows.MakeView.Dialogs
 
             progressBar.Visible = true;
 
-           
-          
-            //this.currentSurveyInfoDTO.ClosingDate =  dtpSurveyClosingDate.Value.Date + GetTimeFormat(ClosingTimecomboBox.Text);
-             
-             this.currentSurveyInfoDTO.ClosingDate = GetdateTimeFormat( dtpSurveyClosingDate.Value.Date ,ClosingTimecomboBox.Text); 
 
-            //this.currentSurveyInfoDTO.StartDate = StartDateDatePicker.Value.Date + GetTimeFormat(StartTimecomboBox.Text);
-            this.currentSurveyInfoDTO.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date,StartTimecomboBox.Text);
-            this.currentSurveyInfoDTO.DepartmentName = txtDepartment.Text;
+
+           
+
+            this.config = Configuration.GetNewInstance();
+           
+
+            try
+            {
+                var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
+                if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservice)))
+                {
+                    SetDTOObject();
+                    SurveyManagerService.PublishRequest Request = new SurveyManagerService.PublishRequest();
+                    Request.Action = "Update";
+                    SetRepublishObject(Request);
+                }
+                if (!string.IsNullOrEmpty(ServiceVersion) &&  ServiceVersion.Contains(Epi.Constants.surveyManagerservicev2))
+                {
+                    SetDTOObjectV2();
+                    SurveyManagerServiceV2.PublishRequest Request = new SurveyManagerServiceV2.PublishRequest();
+                    Request.Action = "Update";
+                    SetRepublishObjectV2(Request);
+                }
+                if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservicev3)))
+                {
+                    SetDTOObjectV3();
+                    SurveyManagerServiceV3.PublishRequest Request = new SurveyManagerServiceV3.PublishRequest();
+                    Request.Action = "Update";
+                    SetRepublishObjectV3(Request);
+                }
+            }
+            catch (Exception ex)
+            {
+                txtStatusSummary.AppendText("An error occurred while trying to publish the survey.");
+                txtStatus.AppendText(ex.ToString());
+                btnDetails.Visible = true;
+                //this.progressBar.Visible = false;
+                this.Cursor = Cursors.Default;
+            }
             
-            //this.currentSurveyInfoDTO.DepartmentName = txtDepartment.Text;
+
+            this.progressBar.Visible = false;
+            //this.btnPublish.Enabled = true;
+        }
+
+        private void SetDTOObject()
+        {
+             
+
+            this.currentSurveyInfoDTO.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text);
+
+             
+            this.currentSurveyInfoDTO.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date, StartTimecomboBox.Text);
+            this.currentSurveyInfoDTO.DepartmentName = txtDepartment.Text;
+
+             
             this.currentSurveyInfoDTO.IntroductionText = txtIntroductionText.Text;
             this.currentSurveyInfoDTO.ExitText = txtExitText.Text;
             if (txtOrganization.Text.Equals("Your Organization Name (optional)", StringComparison.OrdinalIgnoreCase))
@@ -424,54 +566,105 @@ namespace Epi.Windows.MakeView.Dialogs
 
 
             this.currentSurveyInfoDTO.SurveyName = txtSurveyName.Text;
-            
+
             this.currentSurveyInfoDTO.OrganizationKey = new Guid(txtOrganizationKey.Text.ToString());
-            //this.currentSurveyInfoDTO.UserPublishKey = UserPublishGuid;
+             
             if (!this.IsMetaDataOnly)
             {
                 this.currentSurveyInfoDTO.XML = this.template;
             }
             this.currentSurveyInfoDTO.SurveyType = (rdbSingleResponse.Checked) ? 1 : 2;
-
-            this.config = Configuration.GetNewInstance();
-           
-
-            try
-            {
-                var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
-                if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveysanagerservice) || ServiceVersion.Contains(Epi.Constants.surveysanagerservicev2)))
-                {
-                    SurveyManagerService.PublishRequest Request = new SurveyManagerService.PublishRequest();
-                    Request.Action = "Update";
-                    SetRepublishObject(Request);
-                }
-                if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveysanagerservicev3)))
-                {
-                    SurveyManagerServiceV3.PublishRequest Request = new SurveyManagerServiceV3.PublishRequest();
-                    Request.Action = "Update";
-                    SetRepublishObjectV3(Request);
-                }
-            }
-            catch (Exception ex)
-            {
-                txtStatusSummary.AppendText("An error occurred while trying to publish the survey.");
-                txtStatus.AppendText(ex.ToString());
-                btnDetails.Visible = true;
-                //this.progressBar.Visible = false;
-                this.Cursor = Cursors.Default;
-            }
-            
-
-            this.progressBar.Visible = false;
-            //this.btnPublish.Enabled = true;
         }
+        private void SetDTOObjectV2()
+        {
 
+
+            this.currentSurveyInfoDTOV2.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text);
+
+
+            this.currentSurveyInfoDTOV2.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date, StartTimecomboBox.Text);
+            this.currentSurveyInfoDTOV2.DepartmentName = txtDepartment.Text;
+
+
+            this.currentSurveyInfoDTOV2.IntroductionText = txtIntroductionText.Text;
+            this.currentSurveyInfoDTOV2.ExitText = txtExitText.Text;
+            if (txtOrganization.Text.Equals("Your Organization Name (optional)", StringComparison.OrdinalIgnoreCase))
+            {
+                this.currentSurveyInfoDTOV2.OrganizationName = null;
+            }
+            else
+            {
+                this.currentSurveyInfoDTOV2.OrganizationName = txtOrganization.Text;
+            }
+
+            if (txtSurveyID.Text.Equals("Your Survey ID (optional)", StringComparison.OrdinalIgnoreCase))
+            {
+                this.currentSurveyInfoDTOV2.SurveyNumber = null;
+            }
+            else
+            {
+                this.currentSurveyInfoDTOV2.SurveyNumber = txtSurveyID.Text;
+            }
+
+
+            this.currentSurveyInfoDTOV2.SurveyName = txtSurveyName.Text;
+
+            this.currentSurveyInfoDTOV2.OrganizationKey = new Guid(txtOrganizationKey.Text.ToString());
+
+            if (!this.IsMetaDataOnly)
+            {
+                this.currentSurveyInfoDTOV2.XML = this.template;
+            }
+            this.currentSurveyInfoDTOV2.SurveyType = (rdbSingleResponse.Checked) ? 1 : 2;
+        }
+        private void SetDTOObjectV3()
+        {
+
+
+            this.currentSurveyInfoDTOV3.ClosingDate = GetdateTimeFormat(dtpSurveyClosingDate.Value.Date, ClosingTimecomboBox.Text);
+
+
+            this.currentSurveyInfoDTOV3.StartDate = GetdateTimeFormat(StartDateDatePicker.Value.Date, StartTimecomboBox.Text);
+            this.currentSurveyInfoDTOV3.DepartmentName = txtDepartment.Text;
+
+
+            this.currentSurveyInfoDTOV3.IntroductionText = txtIntroductionText.Text;
+            this.currentSurveyInfoDTOV3.ExitText = txtExitText.Text;
+            if (txtOrganization.Text.Equals("Your Organization Name (optional)", StringComparison.OrdinalIgnoreCase))
+            {
+                this.currentSurveyInfoDTOV3.OrganizationName = null;
+            }
+            else
+            {
+                this.currentSurveyInfoDTOV3.OrganizationName = txtOrganization.Text;
+            }
+
+            if (txtSurveyID.Text.Equals("Your Survey ID (optional)", StringComparison.OrdinalIgnoreCase))
+            {
+                this.currentSurveyInfoDTOV3.SurveyNumber = null;
+            }
+            else
+            {
+                this.currentSurveyInfoDTOV3.SurveyNumber = txtSurveyID.Text;
+            }
+
+
+            this.currentSurveyInfoDTOV3.SurveyName = txtSurveyName.Text;
+
+            this.currentSurveyInfoDTOV3.OrganizationKey = new Guid(txtOrganizationKey.Text.ToString());
+
+            if (!this.IsMetaDataOnly)
+            {
+                this.currentSurveyInfoDTOV3.XML = this.template;
+            }
+            this.currentSurveyInfoDTOV3.SurveyType = (rdbSingleResponse.Checked) ? 1 : 2;
+        }
         private void SetRepublishObject(SurveyManagerService.PublishRequest Request)
         {
             Request.SurveyInfo = this.currentSurveyInfoDTO;
 
 
-            SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+            SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
             SurveyManagerService.PublishResponse Result = client.RePublishSurvey(Request);
 
             panel2.Visible = true;
@@ -497,6 +690,85 @@ namespace Epi.Windows.MakeView.Dialogs
                 txtSurveyKey.Text = this.currentSurveyInfoDTO.SurveyId;
 
                 txtDataKey.Text = this.currentSurveyInfoDTO.UserPublishKey.ToString();
+                //txtDataKey.Text = txtSurveyKey.Text;
+                txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
+                // txtURL.Text = Result.PublishInfo.URL;
+
+                //txtURL.Text =;
+
+                //txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
+                //txtStatusSummary.Text = "Your Form has been republished: " + Result.Message;
+
+                lblSuccessNotice.Visible = true;
+                lblSuccessNotice2.Visible = true;
+                lblSuccessNotice.Text = "Your survey has been published!  Please copy and paste the following URL and Keys to be used later.";
+                lblSuccessNotice.BackColor = Color.FromArgb(230, 255, 191);
+                lblSuccessNotice2.Visible = true;
+                btnPublishForm.Visible = true;
+                btnPublishForm.Enabled = false;
+                btnURLCopy.Enabled = true;
+                btnGo.Enabled = true;
+                btnKeyCopy.Enabled = true;
+                btnDataKeyCopy.Enabled = true;
+                btnShowLog.Enabled = true;
+                btnShowLog.Visible = true;
+                btnCopyAllURLs.Enabled = true;
+
+                string message = DateTime.Now + ": " + SharedStrings.WEBFORM_SUCCESS + ": " + txtURL.Text; ///Result.PublishInfo.URL;
+                Logger.Log(message);
+                message = DateTime.Now + ": Survey Key= " + txtSurveyKey.Text;
+                Logger.Log(message);
+                message = DateTime.Now + ": Data Key= " + txtDataKey.Text;
+                Logger.Log(message);
+            }
+            else
+            {
+                txtStatusSummary.Text = Result.Message;
+                lblSuccessNotice.Text = "The survey failed to publish. Please check that the organization key is correct and try again.";
+                //panel2.Visible = true;
+                btnShowLog.Visible = false;
+                lblSuccessNotice.BackColor = Color.FromArgb(243, 217, 217);
+                panel3.Visible = true;
+                lblSuccessNotice2.Visible = false;
+                txtOrganizationKey.Enabled = true;
+                btnPublishForm.Enabled = true;
+            }
+
+
+            //this.progressBar.Visible = false;
+            //this.btnPublish.Enabled = true;
+        }
+        private void SetRepublishObjectV2(SurveyManagerServiceV2.PublishRequest Request)
+        {
+            Request.SurveyInfo = this.currentSurveyInfoDTOV2;
+
+
+            SurveyManagerServiceV2.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV2();
+            SurveyManagerServiceV2.PublishResponse Result = client.RePublishSurvey(Request);
+
+            panel2.Visible = true;
+            panel3.Visible = true;
+
+            if (Result.PublishInfo.IsPulished)
+            {
+                panel3.Visible = true;
+
+                txtURL.Text = Result.PublishInfo.URL;
+                lblSuccessNotice.Visible = true;
+                lblSuccessNotice2.Visible = true;
+                lblSuccessNotice.Text = "Your survey has been published!  Please copy and paste the following URL and Keys to be used later.";
+                lblSuccessNotice.BackColor = Color.FromArgb(230, 255, 191);
+                lblSuccessNotice2.Visible = true;
+                btnShowLog.Visible = true;
+                this.btnKeyCopy.Enabled = true;
+                this.btnCopyAllURLs.Enabled = true;
+                this.btnDataKeyCopy.Enabled = true;
+                this.btnGo.Enabled = true;
+                this.btnURLCopy.Enabled = true;
+                //txtURL.Text = Result.PublishInfo.URL;
+                txtSurveyKey.Text = this.currentSurveyInfoDTOV2.SurveyId;
+
+                txtDataKey.Text = this.currentSurveyInfoDTOV2.UserPublishKey.ToString();
                 //txtDataKey.Text = txtSurveyKey.Text;
                 txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
                 // txtURL.Text = Result.PublishInfo.URL;
@@ -579,9 +851,9 @@ namespace Epi.Windows.MakeView.Dialogs
                 this.btnGo.Enabled = true;
                 this.btnURLCopy.Enabled = true;
                 //txtURL.Text = Result.PublishInfo.URL;
-                txtSurveyKey.Text = this.currentSurveyInfoDTO.SurveyId;
+                txtSurveyKey.Text = this.currentSurveyInfoDTOV3.SurveyId;
 
-                txtDataKey.Text = this.currentSurveyInfoDTO.UserPublishKey.ToString();
+                txtDataKey.Text = this.currentSurveyInfoDTOV3.UserPublishKey.ToString();
                 //txtDataKey.Text = txtSurveyKey.Text;
                 txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
                 // txtURL.Text = Result.PublishInfo.URL;
@@ -708,7 +980,159 @@ namespace Epi.Windows.MakeView.Dialogs
 
         }
 
+        private void AfterPublishV2(SurveyManagerServiceV2.PublishResponse Result)
+        {
+            if (Result.PublishInfo.IsPulished)
+            {
+                txtURL.Text = Result.PublishInfo.URL;
+                txtSurveyKey.Text = txtURL.Text.Substring(txtURL.Text.LastIndexOf('/') + 1);
 
+                txtDataKey.Text = UserPublishGuid.ToString();
+                //txtDataKey.Text = txtSurveyKey.Text;
+                txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
+                string message = DateTime.Now + ": " + SharedStrings.WEBFORM_SUCCESS + ": " + Result.PublishInfo.URL;
+                Logger.Log(message);
+                message = DateTime.Now + ": Survey Key= " + txtSurveyKey.Text;
+                Logger.Log(message);
+                message = DateTime.Now + ": Data Key= " + txtDataKey.Text;
+                Logger.Log(message);
+
+                lblSuccessNotice.Visible = true;
+                lblSuccessNotice2.Visible = true;
+                lblSuccessNotice.Text = "Your survey has been published!  Please copy and paste the following URL and Keys to be used later.";
+                lblSuccessNotice.BackColor = Color.FromArgb(230, 255, 191);
+                lblSuccessNotice2.Visible = true;
+                btnPublishForm.Visible = true;
+                btnPublishForm.Enabled = false;
+                btnURLCopy.Enabled = true;
+                btnGo.Enabled = true;
+                btnKeyCopy.Enabled = true;
+                btnDataKeyCopy.Enabled = true;
+                btnShowLog.Enabled = true;
+                btnShowLog.Visible = true;
+                btnCopyAllURLs.Enabled = true;
+
+                txtSurveyName.Enabled = true;
+                txtSurveyID.Enabled = true;
+                txtOrganization.Enabled = true;
+                txtDepartment.Enabled = true;
+                txtIntroductionText.Enabled = true;
+                txtExitText.Enabled = true;
+                dtpSurveyClosingDate.Enabled = true;
+                txtOrganizationKey.Enabled = false;
+                //txtOrganizationKey.Clear(); 
+                btnPrevious.Enabled = false;
+                //btnNext.Enabled = false;
+                panel3.Visible = true;
+                panel2.Visible = true;
+                if (this.isRepublishableConfig)
+                {
+                    // save survey id to metadata
+                    //this.viewma.metad
+                    this.view.WebSurveyId = txtSurveyKey.Text;
+                    this.view.SaveToDb();
+                    this.view.CheckCodeBefore = txtOrganizationKey.Text.ToString();
+                }
+            }
+            else
+            {
+                txtStatusSummary.Text = "The survey failed to publish. Please check that the organization key is correct and try again.";
+                lblSuccessNotice.Text = "The survey failed to publish. Please check that the organization key is correct and try again.";
+                lblSuccessNotice.BackColor = Color.FromArgb(243, 217, 217);
+                panel2.Visible = false;
+                panel3.Visible = true;
+                btnPublishForm.Enabled = true;
+                btnPublishForm.Visible = true;
+                txtOrganizationKey.Enabled = true;
+                btnPublishForm.Visible = true;
+                btnShowLog.Visible = false;
+                lblSuccessNotice2.Visible = false;
+            }
+            txtStatus.AppendText(Environment.NewLine);
+
+            // panel2.Visible = false;
+            panel3.Visible = true;
+
+
+
+        }
+
+        private void AfterPublishV3(SurveyManagerServiceV3.PublishResponse Result)
+        {
+            if (Result.PublishInfo.IsPulished)
+            {
+                txtURL.Text = Result.PublishInfo.URL;
+                txtSurveyKey.Text = txtURL.Text.Substring(txtURL.Text.LastIndexOf('/') + 1);
+
+                txtDataKey.Text = UserPublishGuid.ToString();
+                //txtDataKey.Text = txtSurveyKey.Text;
+                txtStatusSummary.Text = SharedStrings.WEBFORM_SUCCESS;
+                string message = DateTime.Now + ": " + SharedStrings.WEBFORM_SUCCESS + ": " + Result.PublishInfo.URL;
+                Logger.Log(message);
+                message = DateTime.Now + ": Survey Key= " + txtSurveyKey.Text;
+                Logger.Log(message);
+                message = DateTime.Now + ": Data Key= " + txtDataKey.Text;
+                Logger.Log(message);
+
+                lblSuccessNotice.Visible = true;
+                lblSuccessNotice2.Visible = true;
+                lblSuccessNotice.Text = "Your survey has been published!  Please copy and paste the following URL and Keys to be used later.";
+                lblSuccessNotice.BackColor = Color.FromArgb(230, 255, 191);
+                lblSuccessNotice2.Visible = true;
+                btnPublishForm.Visible = true;
+                btnPublishForm.Enabled = false;
+                btnURLCopy.Enabled = true;
+                btnGo.Enabled = true;
+                btnKeyCopy.Enabled = true;
+                btnDataKeyCopy.Enabled = true;
+                btnShowLog.Enabled = true;
+                btnShowLog.Visible = true;
+                btnCopyAllURLs.Enabled = true;
+
+                txtSurveyName.Enabled = true;
+                txtSurveyID.Enabled = true;
+                txtOrganization.Enabled = true;
+                txtDepartment.Enabled = true;
+                txtIntroductionText.Enabled = true;
+                txtExitText.Enabled = true;
+                dtpSurveyClosingDate.Enabled = true;
+                txtOrganizationKey.Enabled = false;
+                //txtOrganizationKey.Clear(); 
+                btnPrevious.Enabled = false;
+                //btnNext.Enabled = false;
+                panel3.Visible = true;
+                panel2.Visible = true;
+                if (this.isRepublishableConfig)
+                {
+                    // save survey id to metadata
+                    //this.viewma.metad
+                    this.view.WebSurveyId = txtSurveyKey.Text;
+                    this.view.SaveToDb();
+                    this.view.CheckCodeBefore = txtOrganizationKey.Text.ToString();
+                }
+            }
+            else
+            {
+                txtStatusSummary.Text = "The survey failed to publish. Please check that the organization key is correct and try again.";
+                lblSuccessNotice.Text = "The survey failed to publish. Please check that the organization key is correct and try again.";
+                lblSuccessNotice.BackColor = Color.FromArgb(243, 217, 217);
+                panel2.Visible = false;
+                panel3.Visible = true;
+                btnPublishForm.Enabled = true;
+                btnPublishForm.Visible = true;
+                txtOrganizationKey.Enabled = true;
+                btnPublishForm.Visible = true;
+                btnShowLog.Visible = false;
+                lblSuccessNotice2.Visible = false;
+            }
+            txtStatus.AppendText(Environment.NewLine);
+
+            // panel2.Visible = false;
+            panel3.Visible = true;
+
+
+
+        }
         /// <summary>
         /// Handles custom fault exception during publishing
         /// </summary>
@@ -995,6 +1419,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
         private void WebPublishDialog_Load(object sender, EventArgs e)
         {
+            
             if (!this.isRepublishableConfig || string.IsNullOrWhiteSpace(this.view.WebSurveyId))
             {
                 TimeSpan t = new TimeSpan(10, 23, 59, 59);
@@ -1064,84 +1489,219 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             else
             {
-                SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                //SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
 
-                    this.txtDepartment.Visible = false;
-                    this.lblDepartment.Visible = false;
-                    
-                   
-                    this.txtOrganization.Left = 295;
-                    this.txtOrganization.Size = new System.Drawing.Size(540, 23);
-                    this.lblOrganization.Left = 292;
-                     
-                     
-                    this.lblDepMirr.Visible = false;
-                    this.txtDepartmentMirror.Visible = false;
+                //SetDialogValues();
 
-                    this.txtOrganizationMirror.Left = 295;
-                    this.txtOrganizationMirror.Size = new System.Drawing.Size(540, 23);
-                    this.lblOrgMirr.Left = 292;
+                //SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();
+                //Request.Criteria = new SurveyManagerService.SurveyInfoCriteria();
+                //Request.Criteria.SurveyType = -1;
+                //Request.Criteria.SurveyIdList = new string[]{this.view.WebSurveyId};
+                //Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+                //SurveyManagerService.SurveyInfoResponse response = client.GetSurveyInfo(Request);
+                //if (response.SurveyInfoList.Length > 0)
+                //{
+                //       SetDTOObject(response);
+                //       btnPublishForm.Enabled = true;
+                //}
+             
 
-                     
-                    ClosingTimecomboBox.SelectedIndex = 0;
-                    StartTimecomboBox.SelectedIndex = 0;
-                  
-
-                this.txtOrganizationKey.Text = this.OrganizationKey;
-
-                SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();
-                Request.Criteria = new SurveyManagerService.SurveyInfoCriteria();
-                Request.Criteria.SurveyType = -1;
-                Request.Criteria.SurveyIdList = new string[]{this.view.WebSurveyId};
-                Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
-                SurveyManagerService.SurveyInfoResponse response = client.GetSurveyInfo(Request);
-                if (response.SurveyInfoList.Length > 0)
+                if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservice)))
                 {
-                    currentSurveyInfoDTO = response.SurveyInfoList[0];
-                    if (currentSurveyInfoDTO.IsDraftMode)
+                    SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+
+                    SetDialogValues();
+
+                    SurveyManagerService.SurveyInfoRequest Request = new SurveyManagerService.SurveyInfoRequest();
+                    Request.Criteria = new SurveyManagerService.SurveyInfoCriteria();
+                    Request.Criteria.SurveyType = -1;
+                    Request.Criteria.SurveyIdList = new string[] { this.view.WebSurveyId };
+                    Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+                    SurveyManagerService.SurveyInfoResponse response = client.GetSurveyInfo(Request);
+                    if (response.SurveyInfoList.Length > 0)
                     {
-                        this.lblPublishModeStatus.Text = "DRAFT";
-                    }
-                    else
-                    {
-                        this.lblPublishModeStatus.Text = "FINAL";
-                    }
-
-                        dtpSurveyClosingDate.Value = currentSurveyInfoDTO.ClosingDate;
-
-                        StartDateDatePicker.Value = currentSurveyInfoDTO.StartDate;
-                        DateTime CloseTime = Convert.ToDateTime(currentSurveyInfoDTO.ClosingDate);
-                        DateTime StartTime = Convert.ToDateTime(currentSurveyInfoDTO.StartDate);
-
-                        ClosingTimecomboBox.SelectedItem = CloseTime.ToShortTimeString();
-                        StartTimecomboBox.SelectedItem = StartTime.ToShortTimeString();
-
-                        txtSurveyName.Text = currentSurveyInfoDTO.SurveyName;
-                        //txtSurveyName.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        //txtSurveyNameMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        txtSurveyID.Text = currentSurveyInfoDTO.SurveyNumber;
-                        //txtSurveyID.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        //txtSurveyIDMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        txtSurveyIDMirror.Text = currentSurveyInfoDTO.SurveyNumber;
-                        txtOrganization.Text = currentSurveyInfoDTO.OrganizationName;
-                        //txtOrganization.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        //txtOrganizationMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        txtOrganizationMirror.Text = currentSurveyInfoDTO.OrganizationName;
-                        txtDepartment.Text = currentSurveyInfoDTO.DepartmentName;
-                        //txtDepartment.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        //txtDepartmentMirror.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        txtDepartmentMirror.Text = currentSurveyInfoDTO.DepartmentName;
-                        txtIntroductionText.Text = currentSurveyInfoDTO.IntroductionText;
-                        //txtIntroductionText.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        txtExitText.Text = currentSurveyInfoDTO.ExitText;
-                        //txtExitText.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-                        
+                        SetDTOObject(response);
                         btnPublishForm.Enabled = true;
                     }
-                //}
+                }
+                if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservicev2)))
+                {
+                    SurveyManagerServiceV2.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV2();
+
+                    SetDialogValues();
+
+                    SurveyManagerServiceV2.SurveyInfoRequest Request = new SurveyManagerServiceV2.SurveyInfoRequest();
+                    Request.Criteria = new SurveyManagerServiceV2.SurveyInfoCriteria();
+                    Request.Criteria.SurveyType = -1;
+                    Request.Criteria.SurveyIdList = new string[] { this.view.WebSurveyId };
+                    Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+                    SurveyManagerServiceV2.SurveyInfoResponse response = client.GetSurveyInfo(Request);
+                    if (response.SurveyInfoList.Length > 0)
+                    {
+                        SetDTOObjectV2(response);
+                        btnPublishForm.Enabled = true;
+                    }
+                }
+                if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservicev3)))
+                {
+                    SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
+
+                    SetDialogValues();
+
+                    SurveyManagerServiceV3.SurveyInfoRequest Request = new SurveyManagerServiceV3.SurveyInfoRequest();
+                    Request.Criteria = new SurveyManagerServiceV3.SurveyInfoCriteria();
+                    Request.Criteria.SurveyType = -1;
+                    Request.Criteria.SurveyIdList = new string[] { this.view.WebSurveyId };
+                    Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+                    SurveyManagerServiceV3.SurveyInfoResponse response = client.GetSurveyInfo(Request);
+                    if (response.SurveyInfoList.Length > 0)
+                    {
+                        SetDTOObjectV3(response);
+                        btnPublishForm.Enabled = true;
+                    }
+                }
             }
 
         }
+
+        private void SetDialogValues()
+        {
+            this.txtDepartment.Visible = false;
+            this.lblDepartment.Visible = false;
+
+
+            this.txtOrganization.Left = 295;
+            this.txtOrganization.Size = new System.Drawing.Size(540, 23);
+            this.lblOrganization.Left = 292;
+
+
+            this.lblDepMirr.Visible = false;
+            this.txtDepartmentMirror.Visible = false;
+
+            this.txtOrganizationMirror.Left = 295;
+            this.txtOrganizationMirror.Size = new System.Drawing.Size(540, 23);
+            this.lblOrgMirr.Left = 292;
+
+
+            ClosingTimecomboBox.SelectedIndex = 0;
+            StartTimecomboBox.SelectedIndex = 0;
+
+
+            this.txtOrganizationKey.Text = this.OrganizationKey;
+        }
+
+        private void SetDTOObject(SurveyManagerService.SurveyInfoResponse response)
+        {
+            currentSurveyInfoDTO = response.SurveyInfoList[0];
+            if (currentSurveyInfoDTO.IsDraftMode)
+            {
+                this.lblPublishModeStatus.Text = "DRAFT";
+            }
+            else
+            {
+                this.lblPublishModeStatus.Text = "FINAL";
+            }
+
+            dtpSurveyClosingDate.Value = currentSurveyInfoDTO.ClosingDate;
+
+            StartDateDatePicker.Value = currentSurveyInfoDTO.StartDate;
+            DateTime CloseTime = Convert.ToDateTime(currentSurveyInfoDTO.ClosingDate);
+            DateTime StartTime = Convert.ToDateTime(currentSurveyInfoDTO.StartDate);
+
+            ClosingTimecomboBox.SelectedItem = CloseTime.ToShortTimeString();
+            StartTimecomboBox.SelectedItem = StartTime.ToShortTimeString();
+
+            txtSurveyName.Text = currentSurveyInfoDTO.SurveyName;
+            
+            txtSurveyID.Text = currentSurveyInfoDTO.SurveyNumber;
+            
+            txtSurveyIDMirror.Text = currentSurveyInfoDTO.SurveyNumber;
+            txtOrganization.Text = currentSurveyInfoDTO.OrganizationName;
+           
+            txtOrganizationMirror.Text = currentSurveyInfoDTO.OrganizationName;
+            txtDepartment.Text = currentSurveyInfoDTO.DepartmentName;
+             
+            txtDepartmentMirror.Text = currentSurveyInfoDTO.DepartmentName;
+            txtIntroductionText.Text = currentSurveyInfoDTO.IntroductionText;
+           
+            txtExitText.Text = currentSurveyInfoDTO.ExitText;
+            
+        }
+        private void SetDTOObjectV2(SurveyManagerServiceV2.SurveyInfoResponse response)
+        {
+            currentSurveyInfoDTOV2 = response.SurveyInfoList[0];
+            if (currentSurveyInfoDTOV2.IsDraftMode)
+            {
+                this.lblPublishModeStatus.Text = "DRAFT";
+            }
+            else
+            {
+                this.lblPublishModeStatus.Text = "FINAL";
+            }
+
+            dtpSurveyClosingDate.Value = currentSurveyInfoDTOV2.ClosingDate;
+
+            StartDateDatePicker.Value = currentSurveyInfoDTOV2.StartDate;
+            DateTime CloseTime = Convert.ToDateTime(currentSurveyInfoDTOV2.ClosingDate);
+            DateTime StartTime = Convert.ToDateTime(currentSurveyInfoDTOV2.StartDate);
+
+            ClosingTimecomboBox.SelectedItem = CloseTime.ToShortTimeString();
+            StartTimecomboBox.SelectedItem = StartTime.ToShortTimeString();
+
+            txtSurveyName.Text = currentSurveyInfoDTOV2.SurveyName;
+
+            txtSurveyID.Text = currentSurveyInfoDTOV2.SurveyNumber;
+
+            txtSurveyIDMirror.Text = currentSurveyInfoDTOV2.SurveyNumber;
+            txtOrganization.Text = currentSurveyInfoDTOV2.OrganizationName;
+
+            txtOrganizationMirror.Text = currentSurveyInfoDTOV2.OrganizationName;
+            txtDepartment.Text = currentSurveyInfoDTOV2.DepartmentName;
+
+            txtDepartmentMirror.Text = currentSurveyInfoDTOV2.DepartmentName;
+            txtIntroductionText.Text = currentSurveyInfoDTOV2.IntroductionText;
+
+            txtExitText.Text = currentSurveyInfoDTOV2.ExitText;
+
+        }
+        private void SetDTOObjectV3(SurveyManagerServiceV3.SurveyInfoResponse response)
+        {
+            currentSurveyInfoDTOV3 = response.SurveyInfoList[0];
+            if (currentSurveyInfoDTOV3.IsDraftMode)
+            {
+                this.lblPublishModeStatus.Text = "DRAFT";
+            }
+            else
+            {
+                this.lblPublishModeStatus.Text = "FINAL";
+            }
+
+            dtpSurveyClosingDate.Value = currentSurveyInfoDTOV3.ClosingDate;
+
+            StartDateDatePicker.Value = currentSurveyInfoDTOV3.StartDate;
+            DateTime CloseTime = Convert.ToDateTime(currentSurveyInfoDTOV3.ClosingDate);
+            DateTime StartTime = Convert.ToDateTime(currentSurveyInfoDTOV3.StartDate);
+
+            ClosingTimecomboBox.SelectedItem = CloseTime.ToShortTimeString();
+            StartTimecomboBox.SelectedItem = StartTime.ToShortTimeString();
+
+            txtSurveyName.Text = currentSurveyInfoDTOV3.SurveyName;
+
+            txtSurveyID.Text = currentSurveyInfoDTOV3.SurveyNumber;
+
+            txtSurveyIDMirror.Text = currentSurveyInfoDTOV3.SurveyNumber;
+            txtOrganization.Text = currentSurveyInfoDTOV3.OrganizationName;
+
+            txtOrganizationMirror.Text = currentSurveyInfoDTOV3.OrganizationName;
+            txtDepartment.Text = currentSurveyInfoDTOV3.DepartmentName;
+
+            txtDepartmentMirror.Text = currentSurveyInfoDTOV3.DepartmentName;
+            txtIntroductionText.Text = currentSurveyInfoDTOV3.IntroductionText;
+
+            txtExitText.Text = currentSurveyInfoDTOV3.ExitText;
+
+        }
+
 
         private void txtSurveyName_Enter(object sender, EventArgs e)
         {
@@ -1406,7 +1966,7 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-                SurveyManagerService.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClient();
+                SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 SurveyManagerService.PublishRequest Request = (SurveyManagerService.PublishRequest)((object[])e.Argument)[0];
                 SurveyManagerService.PublishResponse Result = (SurveyManagerService.PublishResponse)((object[])e.Argument)[1];
                 Result = client.PublishSurvey(Request);
@@ -1437,7 +1997,76 @@ namespace Epi.Windows.MakeView.Dialogs
                 this.BeginInvoke(new FinishWithExceptionDelegate(FinishWithException), ex);
             }
         }
-
+        private void worker_DoWorkV2(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                SurveyManagerServiceV2.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV2();
+                SurveyManagerServiceV2.PublishRequest Request = (SurveyManagerServiceV2.PublishRequest)((object[])e.Argument)[0];
+                SurveyManagerServiceV2.PublishResponse Result = (SurveyManagerServiceV2.PublishResponse)((object[])e.Argument)[1];
+                Result = client.PublishSurvey(Request);
+                this.BeginInvoke(new PublishDelegateV2(AfterPublishV2), Result);
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                this.BeginInvoke(new FinishWithCustomFaultExceptionDelegate(FinishWithCustomFaultException), cfe);
+            }
+            catch (FaultException fe)
+            {
+                this.BeginInvoke(new FinishWithFaultExceptionDelegate(FinishWithFaultException), fe);
+            }
+            catch (SecurityNegotiationException sne)
+            {
+                this.BeginInvoke(new FinishWithSecurityNegotiationExceptionDelegate(FinishWithSecurityNegotiationException), sne);
+            }
+            catch (CommunicationException ce)
+            {
+                this.BeginInvoke(new FinishWithCommunicationExceptionDelegate(FinishWithCommunicationException), ce);
+            }
+            catch (TimeoutException te)
+            {
+                this.BeginInvoke(new FinishWithTimeoutExceptionDelegate(FinishWithTimeoutException), te);
+            }
+            catch (Exception ex)
+            {
+                this.BeginInvoke(new FinishWithExceptionDelegate(FinishWithException), ex);
+            }
+        }
+        private void worker_DoWorkV3(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
+                SurveyManagerServiceV3.PublishRequest Request = (SurveyManagerServiceV3.PublishRequest)((object[])e.Argument)[0];
+                SurveyManagerServiceV3.PublishResponse Result = (SurveyManagerServiceV3.PublishResponse)((object[])e.Argument)[1];
+                Result = client.PublishSurvey(Request);
+                this.BeginInvoke(new PublishDelegateV3(AfterPublishV3), Result);
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                this.BeginInvoke(new FinishWithCustomFaultExceptionDelegate(FinishWithCustomFaultException), cfe);
+            }
+            catch (FaultException fe)
+            {
+                this.BeginInvoke(new FinishWithFaultExceptionDelegate(FinishWithFaultException), fe);
+            }
+            catch (SecurityNegotiationException sne)
+            {
+                this.BeginInvoke(new FinishWithSecurityNegotiationExceptionDelegate(FinishWithSecurityNegotiationException), sne);
+            }
+            catch (CommunicationException ce)
+            {
+                this.BeginInvoke(new FinishWithCommunicationExceptionDelegate(FinishWithCommunicationException), ce);
+            }
+            catch (TimeoutException te)
+            {
+                this.BeginInvoke(new FinishWithTimeoutExceptionDelegate(FinishWithTimeoutException), te);
+            }
+            catch (Exception ex)
+            {
+                this.BeginInvoke(new FinishWithExceptionDelegate(FinishWithException), ex);
+            }
+        }
         private void btnNext_Click(object sender, EventArgs e)
         {
             if (this.tabPublishWebForm.SelectedIndex < 2)

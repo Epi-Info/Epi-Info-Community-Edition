@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3971554b-3aa7-45e7-ab52-1ef26ba84edf" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://EPISURVEYMANAGER.cdc.gov/SurveyManagerServiceV2.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SurveyManagerServiceV2.xsd" MetadataType="Schema" ID="6073f517-6730-4715-8a38-2305d938f089" SourceId="1" SourceUrl="http://episurveymanager.cdc.gov/SurveyManagerServiceV2.svc?xsd=xsd3" />
+    <MetadataFile FileName="SurveyManagerServiceV21.xsd" MetadataType="Schema" ID="fe8837f3-20a9-4122-949d-7e4b63b1b5aa" SourceId="1" SourceUrl="http://episurveymanager.cdc.gov/SurveyManagerServiceV2.svc?xsd=xsd0" />
+    <MetadataFile FileName="SurveyManagerServiceV22.xsd" MetadataType="Schema" ID="1bd50c4d-c04e-417d-b2d3-b03cdca5a6af" SourceId="1" SourceUrl="http://episurveymanager.cdc.gov/SurveyManagerServiceV2.svc?xsd=xsd4" />
+    <MetadataFile FileName="SurveyManagerServiceV23.xsd" MetadataType="Schema" ID="b6ba3148-0c6a-4aa4-90bd-da2ef05d4f5f" SourceId="1" SourceUrl="http://episurveymanager.cdc.gov/SurveyManagerServiceV2.svc?xsd=xsd1" />
+    <MetadataFile FileName="ManagerServiceV2.wsdl" MetadataType="Wsdl" ID="d3e02b70-a9ce-4481-b127-b7b6b05b6217" SourceId="1" SourceUrl="http://episurveymanager.cdc.gov/SurveyManagerServiceV2.svc?wsdl" />
+    <MetadataFile FileName="SurveyManagerServiceV2.disco" MetadataType="Disco" ID="b546e370-7060-4918-b848-026e217eeab2" SourceId="1" SourceUrl="http://episurveymanager.cdc.gov/SurveyManagerServiceV2.svc?disco" />
+    <MetadataFile FileName="SurveyManagerServiceV24.xsd" MetadataType="Schema" ID="859e97ce-2836-425b-a83f-f95b03013657" SourceId="1" SourceUrl="http://episurveymanager.cdc.gov/SurveyManagerServiceV2.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
