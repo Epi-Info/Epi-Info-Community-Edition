@@ -115,19 +115,22 @@ namespace Epi.Enter.Forms
             this.IsBatchImport = false;
 
             rdbDraftMode.Checked = true;
-            rdbSubmittedRecords.Checked = true;
+            rdbSubmittedIncremental.Checked = true;
 
             if (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress.ToLower()) && (
                 config.Settings.WebServiceEndpointAddress.ToLower().Contains(Epi.Constants.surveyManagerservice) ||
                 config.Settings.WebServiceEndpointAddress.ToLower().Contains(Epi.Constants.surveyManagerservicev2)))
             {
-                chkIncremental.Checked = false;
-                chkIncremental.Visible = false;
+                lblIncrementalImport.Visible = false;
+                rdbSubmittedIncremental.Visible = false;
+                lblFullImport.Location = new Point(6,19);
+                rdbSubmittedFull.Checked = true;
+                rdbSubmittedFull.Location = new Point(26, 34);
+                rdbAllRecords.Location = new Point(26, 78);              
             }
             else
             {
-                chkIncremental.Checked = true;
-                chkIncremental.Visible = true;
+                rdbSubmittedIncremental.Checked = true;
             }
                 
            
@@ -1080,7 +1083,7 @@ namespace Epi.Enter.Forms
 
                 if (rdbAllRecords.Checked) SurveyStatus = 0;
 
-                if (chkIncremental.Checked) SurveyStatus = 4;
+                if (rdbSubmittedIncremental.Checked) SurveyStatus = 4;
 
                 requestWorker = new BackgroundWorker();
                 requestWorker.WorkerSupportsCancellation = true;
@@ -1433,18 +1436,6 @@ namespace Epi.Enter.Forms
                 }
                 Clipboard.SetText(StatusText);
             }
-        }
-
-        private void rdbAllRecords_Click(object sender, EventArgs e)
-        {
-            chkIncremental.Checked = false;
-            chkIncremental.Enabled = false;
-        }
-
-        private void rdbSubmittedRecords_Click(object sender, EventArgs e)
-        {
-            chkIncremental.Checked = true;
-            chkIncremental.Enabled = true;
         }
     }
 }
