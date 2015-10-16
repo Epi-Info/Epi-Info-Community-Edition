@@ -11,8 +11,7 @@
 namespace Epi.SurveyManagerService {
     using System.Runtime.Serialization;
     using System;
-    using Epi.Web.Common;
-    
+    using System.Collections.Generic;
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -231,7 +230,7 @@ namespace Epi.SurveyManagerService {
         private Epi.SurveyManagerService.SurveyAnswerCriteria CriteriaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerService.SurveyAnswerDTO[] SurveyAnswerListField;
+        private List<Epi.SurveyManagerService.SurveyAnswerDTO> SurveyAnswerListField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public Epi.SurveyManagerService.SurveyAnswerCriteria Criteria {
@@ -247,7 +246,7 @@ namespace Epi.SurveyManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerService.SurveyAnswerDTO[] SurveyAnswerList {
+        public List<Epi.SurveyManagerService.SurveyAnswerDTO> SurveyAnswerList {
             get {
                 return this.SurveyAnswerListField;
             }
@@ -296,6 +295,9 @@ namespace Epi.SurveyManagerService {
         private System.DateTime ClosingDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DBConnectionStringField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DepartmentNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -306,6 +308,9 @@ namespace Epi.SurveyManagerService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsDraftModeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSqlProjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsSuccessField;
@@ -361,6 +366,19 @@ namespace Epi.SurveyManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DBConnectionString {
+            get {
+                return this.DBConnectionStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DBConnectionStringField, value) != true)) {
+                    this.DBConnectionStringField = value;
+                    this.RaisePropertyChanged("DBConnectionString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string DepartmentName {
             get {
                 return this.DepartmentNameField;
@@ -408,6 +426,19 @@ namespace Epi.SurveyManagerService {
                 if ((this.IsDraftModeField.Equals(value) != true)) {
                     this.IsDraftModeField = value;
                     this.RaisePropertyChanged("IsDraftMode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSqlProject {
+            get {
+                return this.IsSqlProjectField;
+            }
+            set {
+                if ((this.IsSqlProjectField.Equals(value) != true)) {
+                    this.IsSqlProjectField = value;
+                    this.RaisePropertyChanged("IsSqlProject");
                 }
             }
         }
@@ -795,6 +826,9 @@ namespace Epi.SurveyManagerService {
         private bool IncludeOrderStatisticsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsDraftModeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid OrganizationKeyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -810,7 +844,7 @@ namespace Epi.SurveyManagerService {
         private int StatusIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string[] SurveyAnswerIdListField;
+        private List<string> SurveyAnswerIdListField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SurveyIdField;
@@ -840,6 +874,19 @@ namespace Epi.SurveyManagerService {
                 if ((this.IncludeOrderStatisticsField.Equals(value) != true)) {
                     this.IncludeOrderStatisticsField = value;
                     this.RaisePropertyChanged("IncludeOrderStatistics");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsDraftMode {
+            get {
+                return this.IsDraftModeField;
+            }
+            set {
+                if ((this.IsDraftModeField.Equals(value) != true)) {
+                    this.IsDraftModeField = value;
+                    this.RaisePropertyChanged("IsDraftMode");
                 }
             }
         }
@@ -910,7 +957,7 @@ namespace Epi.SurveyManagerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string[] SurveyAnswerIdList {
+        public List<string> SurveyAnswerIdList {
             get {
                 return this.SurveyAnswerIdListField;
             }
@@ -1763,7 +1810,7 @@ namespace Epi.SurveyManagerService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetSurveyAnswer", ReplyAction="http://tempuri.org/IManagerService/GetSurveyAnswerResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/GetSurveyAnswerCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.SurveyAnswerResponse GetSurveyAnswer(Epi.Web.Common.Message.SurveyAnswerRequest pRequest);
+        Epi.SurveyManagerService.SurveyAnswerResponse GetSurveyAnswer(Epi.SurveyManagerService.SurveyAnswerRequest pRequest);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/SetOrganization", ReplyAction="http://tempuri.org/IManagerService/SetOrganizationResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/SetOrganizationCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
@@ -1838,7 +1885,7 @@ namespace Epi.SurveyManagerService {
             return base.Channel.SetSurveyInfo(pRequest);
         }
         
-        public Epi.SurveyManagerService.SurveyAnswerResponse GetSurveyAnswer(Epi.Web.Common.Message.SurveyAnswerRequest pRequest) {
+        public Epi.SurveyManagerService.SurveyAnswerResponse GetSurveyAnswer(Epi.SurveyManagerService.SurveyAnswerRequest pRequest) {
             return base.Channel.GetSurveyAnswer(pRequest);
         }
         
