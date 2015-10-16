@@ -2129,5 +2129,14 @@ namespace Epi.ImportExport {
                 return ResourceManager.GetString("WEB_CSV_EXPORTING", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request for web data initiated by user:.
+        /// </summary>
+        public static string WEB_IMPORT_INITIATED {
+            get {
+                return ResourceManager.GetString("WEB_IMPORT_INITIATED", resourceCulture);
+            }
+        }
     }
 }
