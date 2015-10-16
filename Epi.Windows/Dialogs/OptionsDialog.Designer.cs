@@ -365,9 +365,9 @@ namespace Epi.Windows.Dialogs
             // 
             // lbxLanguages
             // 
+            resources.ApplyResources(this.lbxLanguages, "lbxLanguages");
             this.lbxLanguages.Items.AddRange(new object[] {
             resources.GetString("lbxLanguages.Items")});
-            resources.ApplyResources(this.lbxLanguages, "lbxLanguages");
             this.lbxLanguages.Name = "lbxLanguages";
             this.lbxLanguages.SelectedIndexChanged += new System.EventHandler(this.lbxLanguages_SelectedIndexChanged);
             // 
@@ -749,6 +749,7 @@ namespace Epi.Windows.Dialogs
             this.EWErbUseWindows.Name = "EWErbUseWindows";
             this.EWErbUseWindows.TabStop = true;
             this.EWErbUseWindows.UseVisualStyleBackColor = true;
+            this.EWErbUseWindows.CheckedChanged += new System.EventHandler(this.EWErbUseWindows_CheckedChanged);
             // 
             // label10
             // 
