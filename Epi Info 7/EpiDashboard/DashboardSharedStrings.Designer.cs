@@ -61,6 +61,33 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse.
+        /// </summary>
+        public static string BUTTON_BROWSE {
+            get {
+                return ResourceManager.GetString("BUTTON_BROWSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string BUTTON_CANCEL {
+            get {
+                return ResourceManager.GetString("BUTTON_CANCEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string BUTTON_OK {
+            get {
+                return ResourceManager.GetString("BUTTON_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The variable could not be removed. Check to make sure that no data filters and/or other variables are dependent on this variable..
         /// </summary>
         public static string CANNOT_REMOVE_VARIABLE {
@@ -75,15 +102,6 @@ namespace EpiDashboard {
         public static string CANNOT_SAVE_CANVAS_NO_DATA_SOURCE {
             get {
                 return ResourceManager.GetString("CANNOT_SAVE_CANVAS_NO_DATA_SOURCE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Browse....
-        /// </summary>
-        public static string CANVAS_FILE_BROWSE {
-            get {
-                return ResourceManager.GetString("CANVAS_FILE_BROWSE", resourceCulture);
             }
         }
         
@@ -906,15 +924,6 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Browse....
-        /// </summary>
-        public static string EXPORT_BUTTON_BROWSE {
-            get {
-                return ResourceManager.GetString("EXPORT_BUTTON_BROWSE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string EXPORT_BUTTON_CLOSE {
@@ -1329,6 +1338,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Canvas Information.
+        /// </summary>
+        public static string GADGET_CANVAS_INFO {
+            get {
+                return ResourceManager.GetString("GADGET_CANVAS_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Case/Control:.
         /// </summary>
         public static string GADGET_CASE_CONTROL {
@@ -1734,6 +1752,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connection String:.
+        /// </summary>
+        public static string GADGET_CONNECTION_STRING {
+            get {
+                return ResourceManager.GetString("GADGET_CONNECTION_STRING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} gadgets.
         /// </summary>
         public static string GADGET_COUNT {
@@ -1766,6 +1793,15 @@ namespace EpiDashboard {
         public static string GADGET_CUSTOM_FILTER {
             get {
                 return ResourceManager.GetString("GADGET_CUSTOM_FILTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Source.
+        /// </summary>
+        public static string GADGET_DATA_SOURCE {
+            get {
+                return ResourceManager.GetString("GADGET_DATA_SOURCE", resourceCulture);
             }
         }
         
@@ -2103,6 +2139,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to unfiltered rows.
+        /// </summary>
+        public static string GADGET_INFO_UNFILTERED_ROWS {
+            get {
+                return ResourceManager.GetString("GADGET_INFO_UNFILTERED_ROWS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Interaction terms:.
         /// </summary>
         public static string GADGET_INTERACTION_TERMS {
@@ -2130,11 +2175,29 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string GADGET_LABEL_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("GADGET_LABEL_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lag time (days):.
         /// </summary>
         public static string GADGET_LAG_TIME_DAYS {
             get {
                 return ResourceManager.GetString("GADGET_LAG_TIME_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latitude Field:.
+        /// </summary>
+        public static string GADGET_LATITUDE_FIELD {
+            get {
+                return ResourceManager.GetString("GADGET_LATITUDE_FIELD", resourceCulture);
             }
         }
         
@@ -2216,6 +2279,15 @@ namespace EpiDashboard {
         public static string GADGET_LOAD_ERROR {
             get {
                 return ResourceManager.GetString("GADGET_LOAD_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Longitude Field:.
+        /// </summary>
+        public static string GADGET_LONGITUDE_FIELD {
+            get {
+                return ResourceManager.GetString("GADGET_LONGITUDE_FIELD", resourceCulture);
             }
         }
         
@@ -2571,6 +2643,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Color.
+        /// </summary>
+        public static string GADGET_PANELSUBHEADER_COLOR {
+            get {
+                return ResourceManager.GetString("GADGET_PANELSUBHEADER_COLOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Colors.
         /// </summary>
         public static string GADGET_PANELSUBHEADER_COLORS {
@@ -2634,6 +2715,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select variables for latitude and longitude coordinates..
+        /// </summary>
+        public static string GADGET_POF_COORD_VARIABLES {
+            get {
+                return ResourceManager.GetString("GADGET_POF_COORD_VARIABLES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PSU:.
         /// </summary>
         public static string GADGET_PSU {
@@ -2684,6 +2774,24 @@ namespace EpiDashboard {
         public static string GADGET_SECOND_YAXIS_VARIABLE {
             get {
                 return ResourceManager.GetString("GADGET_SECOND_YAXIS_VARIABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Color:.
+        /// </summary>
+        public static string GADGET_SELECT_COLOR {
+            get {
+                return ResourceManager.GetString("GADGET_SELECT_COLOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Shape:.
+        /// </summary>
+        public static string GADGET_SELECT_SHAPE {
+            get {
+                return ResourceManager.GetString("GADGET_SELECT_SHAPE", resourceCulture);
             }
         }
         
@@ -2904,6 +3012,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SQL Query:.
+        /// </summary>
+        public static string GADGET_SQL_QUERY {
+            get {
+                return ResourceManager.GetString("GADGET_SQL_QUERY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Standard Deviation.
         /// </summary>
         public static string GADGET_STANDARD_DEVIATION {
@@ -2949,6 +3066,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To select a shape, a Data Source should be selected on the Data Source panel..
+        /// </summary>
+        public static string GADGET_STYLE_PREREQ {
+            get {
+                return ResourceManager.GetString("GADGET_STYLE_PREREQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sub-Group By.
         /// </summary>
         public static string GADGET_SUBGROUP_BY {
@@ -2972,15 +3098,6 @@ namespace EpiDashboard {
         public static string GADGET_TAB_COLORS_STYLES {
             get {
                 return ResourceManager.GetString("GADGET_TAB_COLORS_STYLES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Data Source.
-        /// </summary>
-        public static string GADGET_TABBUTTON_DATASOURCE {
-            get {
-                return ResourceManager.GetString("GADGET_TABBUTTON_DATASOURCE", resourceCulture);
             }
         }
         
@@ -3165,6 +3282,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set data filters for this layer..
+        /// </summary>
+        public static string GADGET_TABDESC_FILTERS_MAPS {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_FILTERS_MAPS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the column for the frequency..
         /// </summary>
         public static string GADGET_TABDESC_FREQUENCY {
@@ -3255,7 +3381,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose map boundaries..
+        ///   Looks up a localized string similar to Choose variables for point coordinates..
         /// </summary>
         public static string GADGET_TABDESC_POF_VARIABLES {
             get {
@@ -3269,6 +3395,15 @@ namespace EpiDashboard {
         public static string GADGET_TABDESC_SCATTER_CHART {
             get {
                 return ResourceManager.GetString("GADGET_TABDESC_SCATTER_CHART", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set color representations..
+        /// </summary>
+        public static string GADGET_TABDESC_SETCOLORS {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_SETCOLORS", resourceCulture);
             }
         }
         

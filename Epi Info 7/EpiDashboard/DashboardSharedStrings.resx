@@ -127,9 +127,6 @@
     <value>Quick Access - Available Canvas Files</value>
     <comment>Header for the 'Open' menu</comment>
   </data>
-  <data name="CANVAS_FILE_BROWSE" xml:space="preserve">
-    <value>Browse...</value>
-  </data>
   <data name="CANVAS_LOADED" xml:space="preserve">
     <value>Canvas file {0} loaded successfully.</value>
   </data>
@@ -805,8 +802,8 @@ of records or select fewer fields for the group.</value>
   <data name="EXPORT_BUTTON_EXPORT" xml:space="preserve">
     <value>Export</value>
   </data>
-  <data name="EXPORT_BUTTON_BROWSE" xml:space="preserve">
-    <value>Browse...</value>
+  <data name="BUTTON_BROWSE" xml:space="preserve">
+    <value>Browse</value>
   </data>
   <data name="EXPORT_BUTTON_CLOSE" xml:space="preserve">
     <value>Close</value>
@@ -1525,13 +1522,61 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_CONFIG_TITLE_POINTOFINTEREST" xml:space="preserve">
     <value>Point of Interest</value>
   </data>
-  <data name="GADGET_TABBUTTON_DATASOURCE" xml:space="preserve">
+  <data name="GADGET_DATA_SOURCE" xml:space="preserve">
     <value>Data Source</value>
   </data>
   <data name="GADGET_TABDESC_DATASOURCE" xml:space="preserve">
     <value>Choose data source.</value>
   </data>
   <data name="GADGET_TABDESC_POF_VARIABLES" xml:space="preserve">
-    <value>Choose map boundaries.</value>
+    <value>Choose variables for point coordinates.</value>
+  </data>
+  <data name="BUTTON_CANCEL" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="BUTTON_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="GADGET_CANVAS_INFO" xml:space="preserve">
+    <value>Canvas Information</value>
+  </data>
+  <data name="GADGET_CONNECTION_STRING" xml:space="preserve">
+    <value>Connection String:</value>
+  </data>
+  <data name="GADGET_INFO_UNFILTERED_ROWS" xml:space="preserve">
+    <value>unfiltered rows</value>
+  </data>
+  <data name="GADGET_LABEL_DESCRIPTION" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="GADGET_LATITUDE_FIELD" xml:space="preserve">
+    <value>Latitude Field:</value>
+  </data>
+  <data name="GADGET_LONGITUDE_FIELD" xml:space="preserve">
+    <value>Longitude Field:</value>
+  </data>
+  <data name="GADGET_PANELSUBHEADER_COLOR" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="GADGET_POF_COORD_VARIABLES" xml:space="preserve">
+    <value>Select variables for latitude and longitude coordinates.</value>
+  </data>
+  <data name="GADGET_SELECT_COLOR" xml:space="preserve">
+    <value>Select Color:</value>
+  </data>
+  <data name="GADGET_SELECT_SHAPE" xml:space="preserve">
+    <value>Select Shape:</value>
+  </data>
+  <data name="GADGET_SQL_QUERY" xml:space="preserve">
+    <value>SQL Query:</value>
+  </data>
+  <data name="GADGET_STYLE_PREREQ" xml:space="preserve">
+    <value>To select a shape, a Data Source should be selected on the Data Source panel.</value>
+  </data>
+  <data name="GADGET_TABDESC_FILTERS_MAPS" xml:space="preserve">
+    <value>Set data filters for this layer.</value>
+  </data>
+  <data name="GADGET_TABDESC_SETCOLORS" xml:space="preserve">
+    <value>Set color representations.</value>
   </data>
 </root>

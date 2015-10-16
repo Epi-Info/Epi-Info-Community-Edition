@@ -278,7 +278,7 @@ namespace EpiDashboard
             tblockIntroText.Text = DashboardSharedStrings.DASHBOARD_INTRO_TEXT;
             tblockSetDataSourceNow.Text = DashboardSharedStrings.DASHBOARD_INTRO_SET_DATA_SOURCE;
             tblockCanvasFiles.Text = DashboardSharedStrings.CANVAS_FILES_HEADER;
-            tblockFindMoreCanvasFiles.Text = DashboardSharedStrings.CANVAS_FILE_BROWSE;
+            tblockFindMoreCanvasFiles.Text = DashboardSharedStrings.BUTTON_BROWSE;
 
             //tblockSetDataSource.Text = DashboardSharedStrings.MENU_SET_DATA_SOURCE;
             //tblockOpen.Text = DashboardSharedStrings.MENU_OPEN;

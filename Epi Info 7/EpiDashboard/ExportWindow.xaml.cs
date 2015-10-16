@@ -117,7 +117,7 @@ namespace EpiDashboard
             this.checkboxTabOrder.Content = DashboardSharedStrings.EXPORT_SORT_BY_TAB_ORDER;
             this.btnCancel.Content = DashboardSharedStrings.EXPORT_BUTTON_CLOSE;
             this.btnExport.Content = DashboardSharedStrings.EXPORT_BUTTON_EXPORT;
-            this.btnConnectionBrowse.Content = DashboardSharedStrings.EXPORT_BUTTON_BROWSE;
+            this.btnConnectionBrowse.Content = DashboardSharedStrings.BUTTON_BROWSE;
             #endregion // Translation
 
             EnableDisableExportButton();
