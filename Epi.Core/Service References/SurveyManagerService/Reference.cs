@@ -11,6 +11,7 @@
 namespace Epi.SurveyManagerService {
     using System.Runtime.Serialization;
     using System;
+    using Epi.Web.Common;
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1762,7 +1763,7 @@ namespace Epi.SurveyManagerService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetSurveyAnswer", ReplyAction="http://tempuri.org/IManagerService/GetSurveyAnswerResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/GetSurveyAnswerCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerService.SurveyAnswerResponse GetSurveyAnswer(Epi.SurveyManagerService.SurveyAnswerRequest pRequest);
+        Epi.SurveyManagerService.SurveyAnswerResponse GetSurveyAnswer(Epi.Web.Common.Message.SurveyAnswerRequest pRequest);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/SetOrganization", ReplyAction="http://tempuri.org/IManagerService/SetOrganizationResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerService.CustomFaultException), Action="http://tempuri.org/IManagerService/SetOrganizationCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
@@ -1837,7 +1838,7 @@ namespace Epi.SurveyManagerService {
             return base.Channel.SetSurveyInfo(pRequest);
         }
         
-        public Epi.SurveyManagerService.SurveyAnswerResponse GetSurveyAnswer(Epi.SurveyManagerService.SurveyAnswerRequest pRequest) {
+        public Epi.SurveyManagerService.SurveyAnswerResponse GetSurveyAnswer(Epi.Web.Common.Message.SurveyAnswerRequest pRequest) {
             return base.Channel.GetSurveyAnswer(pRequest);
         }
         
