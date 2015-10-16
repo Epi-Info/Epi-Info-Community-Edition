@@ -48,6 +48,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblWarning = new System.Windows.Forms.Label();
             this.lblWarningMessage = new System.Windows.Forms.Label();
+            this.chkIncremental = new System.Windows.Forms.CheckBox();
             this.groupImportInfo.SuspendLayout();
             this.grpImportMode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -71,13 +72,14 @@
             // 
             // groupImportInfo
             // 
-            this.groupImportInfo.Controls.Add(this.grpImportMode);
+            this.groupImportInfo.Controls.Add(this.chkIncremental);
             this.groupImportInfo.Controls.Add(this.textOrganization);
             this.groupImportInfo.Controls.Add(this.lblOrganization);
             this.groupImportInfo.Controls.Add(this.textData);
             this.groupImportInfo.Controls.Add(this.lblDataGUID);
             this.groupImportInfo.Controls.Add(this.textProject);
             this.groupImportInfo.Controls.Add(this.lblProjectFile);
+            this.groupImportInfo.Controls.Add(this.grpImportMode);
             resources.ApplyResources(this.groupImportInfo, "groupImportInfo");
             this.groupImportInfo.Name = "groupImportInfo";
             this.groupImportInfo.TabStop = false;
@@ -175,6 +177,12 @@
             resources.ApplyResources(this.lblWarningMessage, "lblWarningMessage");
             this.lblWarningMessage.Name = "lblWarningMessage";
             // 
+            // chkIncremental
+            // 
+            resources.ApplyResources(this.chkIncremental, "chkIncremental");
+            this.chkIncremental.Name = "chkIncremental";
+            this.chkIncremental.UseVisualStyleBackColor = true;
+            // 
             // ImportWebEnterDataForm
             // 
             this.AcceptButton = this.btnOK;
@@ -225,7 +233,8 @@
         private System.Windows.Forms.TextBox textOrganization;
         private System.Windows.Forms.Label lblOrganization;
         private System.Windows.Forms.GroupBox grpImportMode;
-        private System.Windows.Forms.RadioButton rdbDraftMode;
         private System.Windows.Forms.RadioButton rdbFinalMode;
+        private System.Windows.Forms.CheckBox chkIncremental;
+        public System.Windows.Forms.RadioButton rdbDraftMode;
     }
 }

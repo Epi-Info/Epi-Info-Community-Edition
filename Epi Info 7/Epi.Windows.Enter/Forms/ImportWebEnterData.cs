@@ -117,6 +117,7 @@ namespace Epi.Enter.Forms
                 this.IsBatchImport = false;
 
                 this.rdbDraftMode.Checked = true;
+                this.chkIncremental.Checked = true;
 
                 if (config.Settings.WebServiceAuthMode == 1) // Windows Authentication
                     {
@@ -1144,6 +1145,15 @@ namespace Epi.Enter.Forms
                 progressBar.Value = 0;
                 progressBar.Minimum = 0;
 
+                if (chkIncremental.Checked)
+                {
+                    SurveyStatus = 4;
+                }
+                else
+                {
+                    SurveyStatus = 3;
+                }
+
                 this.SurveyId = textProject.Text;
                 this.OrganizationKey = textOrganization.Text;
                 this.PublishKey = textData.Text;
@@ -1153,7 +1163,7 @@ namespace Epi.Enter.Forms
                 //lastRecordId = sourceView.GetLastRecordId();
 
                 textProgress.Text = string.Empty;
-                AddStatusMessage("Request for web data initiated by user " + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString());
+                AddStatusMessage(ImportExportSharedStrings.WEB_IMPORT_INITIATED + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString());
 
                 if (importWorker.WorkerSupportsCancellation)
                     {
