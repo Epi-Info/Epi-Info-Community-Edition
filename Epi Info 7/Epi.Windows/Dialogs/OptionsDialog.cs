@@ -1155,6 +1155,19 @@ namespace Epi.Windows.Dialogs
 
         #endregion Private Methods
 
+        private void EWErbUseWindows_CheckedChanged(object sender, EventArgs e)
+        {
+            if (EWErbUseWindows.Checked)
+            {
+                EWErbBasic.Checked = true;
+                groupBox8.Enabled = false;
+            }
+            else
+            {
+                groupBox8.Enabled = true;
+            }
+        }
+
     }
 
     /// <summary>
