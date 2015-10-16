@@ -59,7 +59,7 @@ namespace EpiDashboard.Controls
             colorselected = new SolidColorBrush(Color.FromArgb(120, 0, 0, 255));
 
 
-            tbtnDataSource.Title = DashboardSharedStrings.GADGET_TABBUTTON_DATASOURCE;
+            tbtnDataSource.Title = DashboardSharedStrings.GADGET_DATA_SOURCE;
         }
      
         

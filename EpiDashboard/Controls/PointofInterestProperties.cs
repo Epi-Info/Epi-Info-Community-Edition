@@ -20,7 +20,7 @@ using EpiDashboard.Mapping;
 namespace EpiDashboard.Controls
 {
     /// <summary>
-    /// Interaction logic for DashboardProperties.xaml
+    /// Interaction logic for PointofInterestProperties.xaml
     /// </summary>
    
 
@@ -58,13 +58,57 @@ namespace EpiDashboard.Controls
 
             #region Translation
 
+            //Point of Interest Left Panel
             lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_POINTOFINTEREST;
-            tbtnDataSource.Title = DashboardSharedStrings.GADGET_TABBUTTON_DATASOURCE;
+            tbtnDataSource.Title = DashboardSharedStrings.GADGET_DATA_SOURCE;
             tbtnDataSource.Description = DashboardSharedStrings.GADGET_TABDESC_DATASOURCE;
             tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
             tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_POF_VARIABLES;
             tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
             tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
+            tbtnCharts.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
+            tbtnCharts.Description = DashboardSharedStrings.GADGET_TABDESC_SETCOLORS;
+            tbtnFilter.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tbtnFilter.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS_MAPS;
+
+            //Data Source Panel
+            tblockPanelDataSource.Content = DashboardSharedStrings.GADGET_DATA_SOURCE;
+            tblockDataSource.Content = DashboardSharedStrings.GADGET_DATA_SOURCE;
+            btnBrowse.Content = DashboardSharedStrings.BUTTON_BROWSE;
+            tblockConnectionString.Content = DashboardSharedStrings.GADGET_CONNECTION_STRING;
+            tblockSQLQuery.Content = DashboardSharedStrings.GADGET_SQL_QUERY;
+
+            //Variables Panel
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tblockSelectVarData.Content = DashboardSharedStrings.GADGET_POF_COORD_VARIABLES;
+            lblLatitude.Content = DashboardSharedStrings.GADGET_LATITUDE_FIELD;
+            lblLongitude.Content = DashboardSharedStrings.GADGET_LONGITUDE_FIELD;
+
+            //Display Panel
+            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
+            tblockMapDesc.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
+
+            //Colors and Styles Panel
+            lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
+            lblColor.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLOR;
+            tblcolor.Text = DashboardSharedStrings.GADGET_SELECT_COLOR;
+            lblStyle.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_STYLES;
+            tblStylePreReq.Text = DashboardSharedStrings.GADGET_STYLE_PREREQ;
+            lblShape.Content = DashboardSharedStrings.GADGET_SELECT_SHAPE;
+
+            //Filters Panel
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockSetDataFilter.Content = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+
+            //Info Panel
+            //lblCanvasInfo.Content = DashboardSharedStrings.GADGET_CANVAS_INFO;
+            //tblockRows.Text = dashboardHelper.DataSet.Tables[0].Rows.Count.ToString() + DashboardSharedStrings.GADGET_INFO_UNFILTERED_ROWS;
+
+
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
             #endregion // Translation
         }
