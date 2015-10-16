@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://episurveymanager.cdc.gov/SurveyManagerService.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
+  <xs:import schemaLocation="http://localhost:59905/SurveyManagerService.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
   <xs:element name="PublishSurvey">
     <xs:complexType>
       <xs:sequence>

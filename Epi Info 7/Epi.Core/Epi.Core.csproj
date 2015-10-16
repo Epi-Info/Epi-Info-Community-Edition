@@ -680,6 +680,10 @@
     <Content Include="Resources\Training Projects\Salmonellosis\Salmonellosis.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Epi.Web.Common.Message.OrganizationResponse.datasource" />
+    <None Include="Epi.Web.Common.Message.PublishResponse.datasource" />
+    <None Include="Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
+    <None Include="Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
     <None Include="Service References\EWEManagerService\Epi.EWEManagerService.FormSettingResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -814,10 +818,9 @@
     <None Include="Service References\SurveyManagerService\Epi.SurveyManagerService.SurveyInfoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SurveyManagerService\ManagerService.wsdl" />
-    <None Include="Service References\SurveyManagerService\SurveyManagerService.disco" />
     <None Include="Service References\SurveyManagerService\configuration91.svcinfo" />
     <None Include="Service References\SurveyManagerService\configuration.svcinfo" />
+    <None Include="Service References\SurveyManagerService\ManagerService1.wsdl" />
     <None Include="Service References\SurveyManagerService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -829,6 +832,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\SurveyManagerService\SurveyManagerService1.disco" />
     <Content Include="Templates\Fields\debug - one of each field with different widths.xml" />
     <Content Include="Templates\Fields\debug - one of each field.xml" />
     <Content Include="Templates\Fields\States.xml">
@@ -1114,19 +1118,19 @@
     <None Include="Resources\Training Projects\Salmonellosis\Salmonellosis.prj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerService5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService1.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerService51.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService2.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerService52.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService3.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerService53.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService4.xsd">
+    <None Include="Service References\SurveyManagerService\SurveyManagerService54.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Services\Fields\Fields.cd" />

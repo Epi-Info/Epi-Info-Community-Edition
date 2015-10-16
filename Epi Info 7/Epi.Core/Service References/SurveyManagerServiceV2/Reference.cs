@@ -11,7 +11,7 @@
 namespace Epi.SurveyManagerServiceV2 {
     using System.Runtime.Serialization;
     using System;
-    
+    using System.Collections.Generic;
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -231,7 +231,7 @@ namespace Epi.SurveyManagerServiceV2 {
         private Epi.SurveyManagerServiceV2.SurveyAnswerCriteria CriteriaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerServiceV2.SurveyAnswerDTO[] SurveyAnswerListField;
+        private List<Epi.SurveyManagerServiceV2.SurveyAnswerDTO> SurveyAnswerListField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public Epi.SurveyManagerServiceV2.SurveyAnswerCriteria Criteria {
@@ -247,7 +247,7 @@ namespace Epi.SurveyManagerServiceV2 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerServiceV2.SurveyAnswerDTO[] SurveyAnswerList {
+        public List<Epi.SurveyManagerServiceV2.SurveyAnswerDTO> SurveyAnswerList {
             get {
                 return this.SurveyAnswerListField;
             }
@@ -833,7 +833,7 @@ namespace Epi.SurveyManagerServiceV2 {
         private int StatusIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string[] SurveyAnswerIdListField;
+        private List<string>  SurveyAnswerIdListField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SurveyIdField;
@@ -933,7 +933,7 @@ namespace Epi.SurveyManagerServiceV2 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string[] SurveyAnswerIdList {
+        public List<string>  SurveyAnswerIdList {
             get {
                 return this.SurveyAnswerIdListField;
             }
@@ -2129,7 +2129,7 @@ namespace Epi.SurveyManagerServiceV2 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetSurveyAnswer", ReplyAction="http://tempuri.org/IManagerService/GetSurveyAnswerResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/GetSurveyAnswerCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
-        Epi.SurveyManagerServiceV2.SurveyAnswerResponse GetSurveyAnswer(Epi.Web.Common.Message.SurveyAnswerRequest pRequest);
+        Epi.SurveyManagerServiceV2.SurveyAnswerResponse GetSurveyAnswer(SurveyManagerServiceV2.SurveyAnswerRequest pRequest);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/SetOrganization", ReplyAction="http://tempuri.org/IManagerService/SetOrganizationResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV2.CustomFaultException), Action="http://tempuri.org/IManagerService/SetOrganizationCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
@@ -2213,7 +2213,7 @@ namespace Epi.SurveyManagerServiceV2 {
             return base.Channel.SetSurveyInfo(pRequest);
         }
 
-        public Epi.SurveyManagerServiceV2.SurveyAnswerResponse GetSurveyAnswer(Epi.Web.Common.Message.SurveyAnswerRequest pRequest)
+        public Epi.SurveyManagerServiceV2.SurveyAnswerResponse GetSurveyAnswer(SurveyManagerServiceV2.SurveyAnswerRequest pRequest)
         {
             return base.Channel.GetSurveyAnswer(pRequest);
         }
