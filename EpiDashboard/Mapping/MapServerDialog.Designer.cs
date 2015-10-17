@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapServerDialog));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.lblExample = new System.Windows.Forms.Label();
@@ -54,86 +55,52 @@
             this.groupBox1.Controls.Add(this.rdbCustom);
             this.groupBox1.Controls.Add(this.cbxMapServers);
             this.groupBox1.Controls.Add(this.rdbKnown);
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(488, 340);
-            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Map Server Location";
             // 
             // btnConnect
             // 
-            this.btnConnect.Enabled = false;
-            this.btnConnect.Location = new System.Drawing.Point(413, 116);
+            resources.ApplyResources(this.btnConnect, "btnConnect");
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(65, 23);
-            this.btnConnect.TabIndex = 8;
-            this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // lblExample
             // 
-            this.lblExample.AutoSize = true;
-            this.lblExample.Enabled = false;
-            this.lblExample.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExample.Location = new System.Drawing.Point(44, 100);
+            resources.ApplyResources(this.lblExample, "lblExample");
             this.lblExample.Name = "lblExample";
-            this.lblExample.Size = new System.Drawing.Size(416, 13);
-            this.lblExample.TabIndex = 7;
-            this.lblExample.Text = "(example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer" +
-                ")";
             // 
             // lbxVisibleLayers
             // 
-            this.lbxVisibleLayers.Enabled = false;
+            resources.ApplyResources(this.lbxVisibleLayers, "lbxVisibleLayers");
             this.lbxVisibleLayers.FormattingEnabled = true;
-            this.lbxVisibleLayers.Location = new System.Drawing.Point(6, 157);
             this.lbxVisibleLayers.Name = "lbxVisibleLayers";
             this.lbxVisibleLayers.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbxVisibleLayers.Size = new System.Drawing.Size(475, 173);
-            this.lbxVisibleLayers.TabIndex = 6;
             this.lbxVisibleLayers.SelectedIndexChanged += new System.EventHandler(this.lbxVisibleLayers_SelectedIndexChanged);
             this.lbxVisibleLayers.DataSourceChanged += new System.EventHandler(this.lbxVisibleLayers_DataSourceChanged);
             // 
             // lblFeatures
             // 
-            this.lblFeatures.AutoSize = true;
-            this.lblFeatures.Enabled = false;
-            this.lblFeatures.Location = new System.Drawing.Point(6, 141);
+            resources.ApplyResources(this.lblFeatures, "lblFeatures");
             this.lblFeatures.Name = "lblFeatures";
-            this.lblFeatures.Size = new System.Drawing.Size(81, 13);
-            this.lblFeatures.TabIndex = 5;
-            this.lblFeatures.Text = "Select features:";
             // 
             // txtURL
             // 
-            this.txtURL.Enabled = false;
-            this.txtURL.Location = new System.Drawing.Point(7, 118);
+            resources.ApplyResources(this.txtURL, "txtURL");
             this.txtURL.Name = "txtURL";
-            this.txtURL.Size = new System.Drawing.Size(400, 20);
-            this.txtURL.TabIndex = 4;
             this.txtURL.TextChanged += new System.EventHandler(this.txtURL_TextChanged);
             // 
             // lblUrl
             // 
-            this.lblUrl.AutoSize = true;
-            this.lblUrl.Enabled = false;
-            this.lblUrl.Location = new System.Drawing.Point(6, 100);
+            resources.ApplyResources(this.lblUrl, "lblUrl");
             this.lblUrl.Name = "lblUrl";
-            this.lblUrl.Size = new System.Drawing.Size(32, 13);
-            this.lblUrl.TabIndex = 3;
-            this.lblUrl.Text = "URL:";
             // 
             // rdbCustom
             // 
-            this.rdbCustom.AutoSize = true;
-            this.rdbCustom.Location = new System.Drawing.Point(7, 77);
+            resources.ApplyResources(this.rdbCustom, "rdbCustom");
             this.rdbCustom.Name = "rdbCustom";
-            this.rdbCustom.Size = new System.Drawing.Size(210, 17);
-            this.rdbCustom.TabIndex = 2;
             this.rdbCustom.TabStop = true;
-            this.rdbCustom.Text = "Provide location of another Map Server";
             this.rdbCustom.UseVisualStyleBackColor = true;
             this.rdbCustom.CheckedChanged += new System.EventHandler(this.rdbCustom_CheckedChanged);
             // 
@@ -142,60 +109,46 @@
             this.cbxMapServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxMapServers.FormattingEnabled = true;
             this.cbxMapServers.Items.AddRange(new object[] {
-            "NationalMap.gov - U.S. Zip Code Boundaries",
-            "NationalMap.gov - U.S. State Boundaries",
-            "NationalMap.gov - World Boundaries",
-            "USGS.gov (Natural Hazards Support System) - Current Floods",
-            "USGS.gov (Natural Hazards Support System) - Current Earthquakes",
-            "USGS.gov (Natural Hazards Support System) - Current Hurricanes",
-            "USGS.gov (Natural Hazards Support System) - Current Wildfires"});
-            this.cbxMapServers.Location = new System.Drawing.Point(7, 43);
+            resources.GetString("cbxMapServers.Items"),
+            resources.GetString("cbxMapServers.Items1"),
+            resources.GetString("cbxMapServers.Items2"),
+            resources.GetString("cbxMapServers.Items3"),
+            resources.GetString("cbxMapServers.Items4"),
+            resources.GetString("cbxMapServers.Items5"),
+            resources.GetString("cbxMapServers.Items6")});
+            resources.ApplyResources(this.cbxMapServers, "cbxMapServers");
             this.cbxMapServers.Name = "cbxMapServers";
-            this.cbxMapServers.Size = new System.Drawing.Size(475, 21);
-            this.cbxMapServers.TabIndex = 1;
             this.cbxMapServers.SelectedIndexChanged += new System.EventHandler(this.cbxMapServers_SelectedIndexChanged);
             // 
             // rdbKnown
             // 
-            this.rdbKnown.AutoSize = true;
+            resources.ApplyResources(this.rdbKnown, "rdbKnown");
             this.rdbKnown.Checked = true;
-            this.rdbKnown.Location = new System.Drawing.Point(7, 20);
             this.rdbKnown.Name = "rdbKnown";
-            this.rdbKnown.Size = new System.Drawing.Size(179, 17);
-            this.rdbKnown.TabIndex = 0;
             this.rdbKnown.TabStop = true;
-            this.rdbKnown.Text = "Connect to a known Map Server";
             this.rdbKnown.UseVisualStyleBackColor = true;
             // 
             // btnOk
             // 
-            this.btnOk.Enabled = false;
-            this.btnOk.Location = new System.Drawing.Point(345, 359);
+            resources.ApplyResources(this.btnOk, "btnOk");
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 1;
-            this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(426, 359);
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 2;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // MapServerDialog
             // 
             this.AcceptButton = this.btnOk;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(513, 392);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.groupBox1);
@@ -203,8 +156,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MapServerDialog";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Map Server";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

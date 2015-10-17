@@ -47,6 +47,11 @@ namespace EpiDashboard.Mapping
             btnOK.Click += new RoutedEventHandler(btnOK_Click);
 
             FillComboBoxes();
+
+            #region translation
+            rctColorToolTip.Content = DashboardSharedStrings.MAP_POINT_COLOR; 
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            #endregion //translation
         }
 
         void btnOK_Click(object sender, RoutedEventArgs e)

@@ -39,12 +39,22 @@
                 <Label Content="Data filters"/>
             </Rectangle.ToolTip>
         </Rectangle>
-
-        <Image VerticalAlignment="Bottom" Source= "../Images/Edit1.png" Stretch="None" HorizontalAlignment="Right" Margin="0,0,55,5" Visibility= "Visible"/>
-        <Rectangle VerticalAlignment="Bottom" x:Name="rctEdit"  HorizontalAlignment="Right" Height="25" Width="35" Stroke="DarkGray" Cursor="Hand" Fill="#00000000" Margin="0,0,52,0" Visibility="Visible" >
+        <Border BorderBrush="#00000000" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
+        <Rectangle VerticalAlignment="Bottom" x:Name="rctEdit"  HorizontalAlignment="Right" Height="25" Width="25" Stroke="SlateBlue" Cursor="Hand" Fill="SlateBlue" Margin="0,0,52,0" Visibility="Visible" >
              <Rectangle.ToolTip>
-                <Label Content="Edit data layer map"/>
+                <Label x:Name="rctEditToolTip" Content="Edit data layer map"/>
             </Rectangle.ToolTip>
         </Rectangle>
+        </Border>
+        <Path Fill="White"                   
+                  HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                  Height="18" Width="18"  Margin="0,0,57,4"
+                  StrokeThickness="1" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                  IsHitTestVisible="False"
+                  Stretch="Uniform"
+                  Data="F0 M 189,0 L 227,54 273,54 313,0 359,15 354,82 388,113 453,98 479,139 429,190 437,232 500,265 489,314 422,320 400,358 427,421 390,454 334,415 290,432 272,500 225,500 205,430 166,413 109,451 72,419 100,356 78,317 10,311 0,261 64,230 71,187 23,137 49,94 115,112 149,82 144,14 189,0 M 250,137 L 267,138 282,142 295,147 305,152 315,159 323,167 330,174 337,182 342,190 347,199 351,210 354,222 356,236 356,251 355,265 351,278 346,291 340,302 332,312 324,321 315,329 305,336 291,343 281,347 265,350 251,351 239,351 224,348 209,343 195,336 185,329 177,322 169,314 164,307 157,297 153,287 149,277 146,267 144,258 144,244 144,234 146,224 148,214 151,204 156,195 160,185 167,177 173,169 180,162 188,156 195,151 202,147 211,143 220,140 230,138 240,136 250,137 M 250,162 L 259,163 269,164 277,167 286,171 294,175 302,180 309,188 314,194 320,201 324,209 328,217 330,226 331,233 332,240 332,250 330,259 328,268 324,277 320,286 316,293 311,298 306,304 299,310 290,315 280,320 270,324 260,325 249,326 239,325 229,323 218,320 208,314 197,305 190,298 183,289 177,278 173,268 171,260 170,250 170,238 171,229 174,220 176,212 181,204 185,196 191,190 198,183 205,177 212,172 219,169 225,166 233,164 241,162 250,162 M 252,214 L 258,215 264,217 270,221 275,226 278,232 280,239 280,244 279,250 276,255 272,260 266,264 259,267 252,268 246,267 239,265 233,262 229,258 226,252 224,246 224,236 227,228 232,221 238,217 244,214 252,214 Z"
+              />
+
+
     </Grid>
 </UserControl>

@@ -63,6 +63,11 @@ namespace EpiDashboard.Mapping
             rctLowColor.MouseUp += new MouseButtonEventHandler(rctLowColor_MouseUp);
             rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
             rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
+
+            #region translation;
+            rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT;
+            #endregion; //translation
+
         }
 
         private void rctMissingColor_MouseUp(object sender, MouseButtonEventArgs e)

@@ -1579,4 +1579,64 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_TABDESC_SETCOLORS" xml:space="preserve">
     <value>Set color representations.</value>
   </data>
+  <data name="GADGET_CONFIG_TITLE_BLANK" xml:space="preserve">
+    <value>Blank</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_CHOROPLETH" xml:space="preserve">
+    <value>Choropleth</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_CLUSTER" xml:space="preserve">
+    <value>Case Cluster</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_DOTDENSITY" xml:space="preserve">
+    <value>Dot Density</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_SATELLITE" xml:space="preserve">
+    <value>Satellite</value>
+  </data>
+  <data name="GADGET_CONFIG_TITLE_STREETS" xml:space="preserve">
+    <value>Streets</value>
+  </data>
+  <data name="MAP_LAYER_EDIT" xml:space="preserve">
+    <value>Edit data layer</value>
+  </data>
+  <data name="MAP_POINT_COLOR" xml:space="preserve">
+    <value>Color of points</value>
+  </data>
+  <data name="MENU_ADD_LAYER" xml:space="preserve">
+    <value>Add Data Layer</value>
+  </data>
+  <data name="MENU_ADD_LAYER_MAP" xml:space="preserve">
+    <value>Adds a data layer to the map.</value>
+  </data>
+  <data name="MENU_ADD_REFERENCE" xml:space="preserve">
+    <value>Add Reference Layer</value>
+  </data>
+  <data name="MENU_ADD_REFERENCE_MAP" xml:space="preserve">
+    <value>Adds a reference layer to the map.</value>
+  </data>
+  <data name="MENU_FULLSCREEN" xml:space="preserve">
+    <value>Full Screen</value>
+  </data>
+  <data name="MENU_FULLSCREEN_MODE" xml:space="preserve">
+    <value>Switches to full screen mode.</value>
+  </data>
+  <data name="MENU_OPEN_MAP" xml:space="preserve">
+    <value>Opens a previously saved map.</value>
+  </data>
+  <data name="MENU_SAVE_MAP" xml:space="preserve">
+    <value>Saves the current map.</value>
+  </data>
+  <data name="MENU_TIME_LAPSE" xml:space="preserve">
+    <value>Create Time Lapse</value>
+  </data>
+  <data name="MENU_TIME_LAPSE_MAP" xml:space="preserve">
+    <value>Creates a time lapse with case cluster layers on the map.</value>
+  </data>
+  <data name="MENU_WINDOW" xml:space="preserve">
+    <value>Window</value>
+  </data>
+  <data name="MENU_WINDOW_MODE" xml:space="preserve">
+    <value>Switches to window mode.</value>
+  </data>
 </root>

@@ -86,7 +86,7 @@
                         <DockPanel x:Name="iconOpenMap" Style="{StaticResource menuIconStyle}" Grid.Row="0" MouseLeftButtonUp="iconOpenMap_MouseLeftButtonUp">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipFileHeader" FontWeight="Bold">Open Button</Label>
+                                    <Label x:Name="tooltipFileHeader" FontWeight="Bold">Open</Label>
                                     <TextBlock x:Name="tooltipFile"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
                                         Opens a previously saved map.</TextBlock>
@@ -101,7 +101,7 @@
                         <DockPanel x:Name="iconSaveMap" Style="{StaticResource menuIconStyle}" Grid.Row="1" MouseLeftButtonUp="iconSaveMap_MouseLeftButtonUp">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipRefreshHeader" FontWeight="Bold">Save Button</Label>
+                                    <Label x:Name="tooltipRefreshHeader" FontWeight="Bold">Save</Label>
                                     <TextBlock x:Name="tooltipRefresh"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
                                         Saves the current map.</TextBlock>
@@ -132,7 +132,7 @@
                                    Style="{StaticResource menuIconStyle}" Grid.Row="4" MouseLeftButtonUp="iconAddDataLayer_MouseLeftButtonUp">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipOpenHeader" FontWeight="Bold">Add Data Layer Button</Label>
+                                    <Label x:Name="tooltipOpenHeader" FontWeight="Bold">Add Data Layer</Label>
                                     <TextBlock x:Name="tooltipOpen"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
                                         Adds a data layer to the map.
@@ -150,7 +150,7 @@
                                    Grid.Row="5">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipSaveHeader" FontWeight="Bold">Add Reference Layer Button</Label>
+                                    <Label x:Name="tooltipSaveHeader" FontWeight="Bold">Add Reference Layer</Label>
                                     <TextBlock x:Name="tooltipSave"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
                                         Adds a reference layer to the map.
@@ -168,7 +168,7 @@
                                    Grid.Row="6">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipTimeLapseHeader" FontWeight="Bold">Create Time Lapse Button</Label>
+                                    <Label x:Name="tooltipTimeLapseHeader" FontWeight="Bold">Create Time Lapse</Label>
                                     <TextBlock x:Name="tooltipTimeLapse"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
                                         Creates a time lapse with case cluster layers on the map.

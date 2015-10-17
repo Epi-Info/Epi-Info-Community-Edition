@@ -14,7 +14,7 @@
         </StackPanel>
         <Rectangle x:Name="rctColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" Margin="0,0,50,0">
             <Rectangle.ToolTip>
-                <Label Content="Point color"/>
+                <Label x:Name="rctColorToolTip" Content="Point color"/>
             </Rectangle.ToolTip>
         </Rectangle>
         <Button x:Name="btnOK" Content="OK" Width="30" HorizontalAlignment="Right" IsEnabled="False"/>
