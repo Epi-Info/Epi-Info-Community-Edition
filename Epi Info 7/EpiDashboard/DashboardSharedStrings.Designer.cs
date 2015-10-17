@@ -1536,11 +1536,38 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blank.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_BLANK {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_BLANK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chart Properties.
         /// </summary>
         public static string GADGET_CONFIG_TITLE_CHART {
             get {
                 return ResourceManager.GetString("GADGET_CONFIG_TITLE_CHART", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choropleth.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_CHOROPLETH {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_CHOROPLETH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Case Cluster.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_CLUSTER {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_CLUSTER", resourceCulture);
             }
         }
         
@@ -1604,6 +1631,15 @@ namespace EpiDashboard {
         public static string GADGET_CONFIG_TITLE_CROSSTABULATION {
             get {
                 return ResourceManager.GetString("GADGET_CONFIG_TITLE_CROSSTABULATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dot Density.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_DOTDENSITY {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_DOTDENSITY", resourceCulture);
             }
         }
         
@@ -1725,11 +1761,29 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Satellite.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_SATELLITE {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_SATELLITE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scatter Chart.
         /// </summary>
         public static string GADGET_CONFIG_TITLE_SCATTER_CHART {
             get {
                 return ResourceManager.GetString("GADGET_CONFIG_TITLE_SCATTER_CHART", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Streets.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_STREETS {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_STREETS", resourceCulture);
             }
         }
         
@@ -3795,11 +3849,65 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit data layer.
+        /// </summary>
+        public static string MAP_LAYER_EDIT {
+            get {
+                return ResourceManager.GetString("MAP_LAYER_EDIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color of points.
+        /// </summary>
+        public static string MAP_POINT_COLOR {
+            get {
+                return ResourceManager.GetString("MAP_POINT_COLOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Map has been saved..
         /// </summary>
         public static string MAP_SAVED {
             get {
                 return ResourceManager.GetString("MAP_SAVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Data Layer.
+        /// </summary>
+        public static string MENU_ADD_LAYER {
+            get {
+                return ResourceManager.GetString("MENU_ADD_LAYER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adds a data layer to the map..
+        /// </summary>
+        public static string MENU_ADD_LAYER_MAP {
+            get {
+                return ResourceManager.GetString("MENU_ADD_LAYER_MAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Reference Layer.
+        /// </summary>
+        public static string MENU_ADD_REFERENCE {
+            get {
+                return ResourceManager.GetString("MENU_ADD_REFERENCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adds a reference layer to the map..
+        /// </summary>
+        public static string MENU_ADD_REFERENCE_MAP {
+            get {
+                return ResourceManager.GetString("MENU_ADD_REFERENCE_MAP", resourceCulture);
             }
         }
         
@@ -3818,6 +3926,24 @@ namespace EpiDashboard {
         public static string MENU_FILTERS_TEXT {
             get {
                 return ResourceManager.GetString("MENU_FILTERS_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full Screen.
+        /// </summary>
+        public static string MENU_FULLSCREEN {
+            get {
+                return ResourceManager.GetString("MENU_FULLSCREEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Switches to full screen mode..
+        /// </summary>
+        public static string MENU_FULLSCREEN_MODE {
+            get {
+                return ResourceManager.GetString("MENU_FULLSCREEN_MODE", resourceCulture);
             }
         }
         
@@ -3845,6 +3971,15 @@ namespace EpiDashboard {
         public static string MENU_OPEN {
             get {
                 return ResourceManager.GetString("MENU_OPEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opens a previously saved map..
+        /// </summary>
+        public static string MENU_OPEN_MAP {
+            get {
+                return ResourceManager.GetString("MENU_OPEN_MAP", resourceCulture);
             }
         }
         
@@ -3921,6 +4056,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saves the current map..
+        /// </summary>
+        public static string MENU_SAVE_MAP {
+            get {
+                return ResourceManager.GetString("MENU_SAVE_MAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saves the current Dashboard canvas..
         /// </summary>
         public static string MENU_SAVE_TEXT {
@@ -3944,6 +4088,42 @@ namespace EpiDashboard {
         public static string MENU_SET_DATA_SOURCE_TEXT {
             get {
                 return ResourceManager.GetString("MENU_SET_DATA_SOURCE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Time Lapse.
+        /// </summary>
+        public static string MENU_TIME_LAPSE {
+            get {
+                return ResourceManager.GetString("MENU_TIME_LAPSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creates a time lapse with case cluster layers on the map..
+        /// </summary>
+        public static string MENU_TIME_LAPSE_MAP {
+            get {
+                return ResourceManager.GetString("MENU_TIME_LAPSE_MAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Window.
+        /// </summary>
+        public static string MENU_WINDOW {
+            get {
+                return ResourceManager.GetString("MENU_WINDOW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Switches to window mode..
+        /// </summary>
+        public static string MENU_WINDOW_MODE {
+            get {
+                return ResourceManager.GetString("MENU_WINDOW_MODE", resourceCulture);
             }
         }
         

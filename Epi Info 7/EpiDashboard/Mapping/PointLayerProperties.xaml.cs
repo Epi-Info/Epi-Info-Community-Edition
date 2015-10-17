@@ -55,6 +55,11 @@ namespace EpiDashboard.Mapping
             rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
             rctEdit.MouseUp  += new MouseButtonEventHandler(rctEdit_MouseUp);
             FillComboBoxes();
+            
+            #region translation;
+                rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT;
+            #endregion; //translation
+
         }
 
         public bool FlagRunEdit

@@ -77,6 +77,41 @@ namespace EpiDashboard.Mapping
             InitializeComponent();
             //btnBypass.Click += new RoutedEventHandler(btnBypass_Click);
             Construct();
+
+            #region Translation
+            txtPointOfInterest.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_POINTOFINTEREST;
+            txtCaseCluster.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_CLUSTER;
+            txtChoropleth.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_CHOROPLETH;
+            txtDotDensity.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_DOTDENSITY;
+
+            ImageryRadioButton.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_SATELLITE;
+            ImageryRadioButton_alt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_SATELLITE;
+            StreetsRadioButton.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_STREETS;
+            StreetsRadioButton_alt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_STREETS;
+            BlankRadioButton.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_BLANK;
+            BlankRadioButton_alt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_BLANK;
+            tooltipExpandHeader.Content = DashboardSharedStrings.MENU_FULLSCREEN;
+            tooltipExpand.Text = DashboardSharedStrings.MENU_FULLSCREEN_MODE;
+
+            tooltipRestoreHeader.Content = DashboardSharedStrings.MENU_WINDOW;
+            tooltipRestore.Text = DashboardSharedStrings.MENU_WINDOW_MODE;
+
+            tooltipFileHeader.Content = DashboardSharedStrings.MENU_OPEN;
+            tooltipFile.Text = DashboardSharedStrings.MENU_OPEN_MAP;
+
+            tooltipRefreshHeader.Content = DashboardSharedStrings.MENU_SAVE;
+            tooltipRefresh.Text = DashboardSharedStrings.MENU_SAVE_MAP;
+
+            tooltipOpenHeader.Content = DashboardSharedStrings.MENU_OPEN;
+            tooltipOpen.Text = DashboardSharedStrings.MENU_OPEN_MAP;
+
+            tooltipSaveHeader.Content = DashboardSharedStrings.MENU_ADD_LAYER;
+            tooltipSave.Text = DashboardSharedStrings.MENU_ADD_LAYER_MAP;
+
+            tooltipTimeLapseHeader.Content = DashboardSharedStrings.MENU_TIME_LAPSE;
+            tooltipTimeLapse.Text = DashboardSharedStrings.MENU_TIME_LAPSE_MAP;
+
+            #endregion
         }
 
         public StandaloneMapControl(Brush backgroundColor)
