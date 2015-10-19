@@ -139,19 +139,20 @@ namespace EpiDashboard.Controls.GadgetProperties
 
 
             #endregion // Translation
-
+           
 
         }
 
-
-
+        
 
         public bool HasSelectedFields
         {
             get
             {
+                
                 if (lvVariables.SelectedItems.Count > 0)
                 {
+                   
                     return true;
                 }
                 return false;
