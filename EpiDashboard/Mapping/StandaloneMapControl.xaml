@@ -86,8 +86,8 @@
                         <DockPanel x:Name="iconOpenMap" Style="{StaticResource menuIconStyle}" Grid.Row="0" MouseLeftButtonUp="iconOpenMap_MouseLeftButtonUp">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipFileHeader" FontWeight="Bold">Open</Label>
-                                    <TextBlock x:Name="tooltipFile"
+                                    <Label x:Name="tooltipOpenHeader" FontWeight="Bold">Open</Label>
+                                    <TextBlock x:Name="tooltipOpen"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
                                         Opens a previously saved map.</TextBlock>
                                 </StackPanel>
@@ -101,8 +101,8 @@
                         <DockPanel x:Name="iconSaveMap" Style="{StaticResource menuIconStyle}" Grid.Row="1" MouseLeftButtonUp="iconSaveMap_MouseLeftButtonUp">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipRefreshHeader" FontWeight="Bold">Save</Label>
-                                    <TextBlock x:Name="tooltipRefresh"
+                                    <Label x:Name="tooltipSaveHeader" FontWeight="Bold">Save</Label>
+                                    <TextBlock x:Name="tooltipSave"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
                                         Saves the current map.</TextBlock>
                                 </StackPanel>
@@ -116,8 +116,8 @@
                         <DockPanel x:Name="iconSaveAsImage" Style="{StaticResource menuIconStyle}" Grid.Row="3" MouseLeftButtonUp="iconSaveAsImage_MouseLeftButtonUp">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipSetDataSourceHeader" FontWeight="Bold">Save as Image Button</Label>
-                                    <TextBlock x:Name="tooltipSetDataSource"
+                                    <Label x:Name="tooltipSaveAsImageHeader" FontWeight="Bold">Save as Image</Label>
+                                    <TextBlock x:Name="tooltipSaveAsImage"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
                                         Saves the current map as an image.</TextBlock>
                                 </StackPanel>
@@ -132,8 +132,8 @@
                                    Style="{StaticResource menuIconStyle}" Grid.Row="4" MouseLeftButtonUp="iconAddDataLayer_MouseLeftButtonUp">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipOpenHeader" FontWeight="Bold">Add Data Layer</Label>
-                                    <TextBlock x:Name="tooltipOpen"
+                                    <Label x:Name="tooltipAddDataLayerHeader" FontWeight="Bold">Add Data Layer</Label>
+                                    <TextBlock x:Name="tooltipAddDataLayer"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
                                         Adds a data layer to the map.
                                     </TextBlock>
@@ -150,8 +150,8 @@
                                    Grid.Row="5">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipSaveHeader" FontWeight="Bold">Add Reference Layer</Label>
-                                    <TextBlock x:Name="tooltipSave"
+                                    <Label x:Name="tooltipAddReferenceLayerHeader" FontWeight="Bold">Add Reference Layer</Label>
+                                    <TextBlock x:Name="tooltipAddReferenceLayer"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
                                         Adds a reference layer to the map.
                                     </TextBlock>

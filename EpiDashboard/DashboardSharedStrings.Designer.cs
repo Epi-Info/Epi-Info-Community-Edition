@@ -3237,6 +3237,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Color Representation:.
+        /// </summary>
+        public static string GADGET_TABDESC_COLOR_REP {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_COLOR_REP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set cell shading and color gradient..
         /// </summary>
         public static string GADGET_TABDESC_COLORS_STYLES {
@@ -3449,6 +3458,15 @@ namespace EpiDashboard {
         public static string GADGET_TABDESC_SCATTER_CHART {
             get {
                 return ResourceManager.GetString("GADGET_TABDESC_SCATTER_CHART", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a Color.
+        /// </summary>
+        public static string GADGET_TABDESC_SETCOLOR {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_SETCOLOR", resourceCulture);
             }
         }
         
@@ -4043,6 +4061,24 @@ namespace EpiDashboard {
         public static string MENU_SAVE_AS {
             get {
                 return ResourceManager.GetString("MENU_SAVE_AS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as Image.
+        /// </summary>
+        public static string MENU_SAVE_AS_IMAGE {
+            get {
+                return ResourceManager.GetString("MENU_SAVE_AS_IMAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saves the current map as an image..
+        /// </summary>
+        public static string MENU_SAVE_AS_IMAGE_MAP {
+            get {
+                return ResourceManager.GetString("MENU_SAVE_AS_IMAGE_MAP", resourceCulture);
             }
         }
         
