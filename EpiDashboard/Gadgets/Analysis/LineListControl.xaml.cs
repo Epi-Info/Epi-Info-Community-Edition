@@ -163,9 +163,13 @@ namespace EpiDashboard
                 }
             }
         }
+        
         Controls.GadgetProperties.LineListProperties properties = null;
+
         public override void ShowHideConfigPanel()
         {
+
+            
             Popup = new DashboardPopup();
             if (this.Parent is DragCanvas)
             {
@@ -176,81 +180,45 @@ namespace EpiDashboard
                 Popup.Parent = this.Parent as Grid;
             }
 
-           properties = new Controls.GadgetProperties.LineListProperties(this.DashboardHelper, this, (LineListParameters)Parameters, StrataGridList, columnOrder);
+               properties = new Controls.GadgetProperties.LineListProperties(this.DashboardHelper, this, (LineListParameters)Parameters, StrataGridList, columnOrder);
 
-           properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
-           properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight/ 1.15);
-            //properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth *0.2);
-            //properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight *0.2);
-            //MessageBox.Show(System.Windows.SizeToContent.Width.ToString());
-            //MessageBox.Show(" PrimaryWidth=" + System.Windows.SystemParameters.PrimaryScreenWidth.ToString() + "Height=" + System.Windows.SystemParameters.PrimaryScreenHeight.ToString());
-            //if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
-            //{
-                
+            if (ResizedWidth != 0 & ResizedHeight != 0){
+                double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;//Developer Desktop Width Where the Form is Designed
+                double i_StandardWidth = System.Windows.SystemParameters.PrimaryScreenWidth; ////Developer Desktop Height Where the Form is Designed
+                float f_HeightRatio = new float();
+                float f_WidthRatio = new float();
+                f_HeightRatio = (float)((float)ResizedHeight / (float)i_StandardHeight);
+                f_WidthRatio = (float)((float)ResizedWidth / (float)i_StandardWidth);
 
-            //}
-
-            //if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
-            //{
-                
-            //}
-
-            properties.Cancelled += new EventHandler(properties_Cancelled);
-            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
-            Popup.Content = properties;
-            Popup.Show();
-            //MessageBox.Show("Width="+properties.Width.ToString() + "Height=" + properties.Height.ToString());
+                properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
+                properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+            
+            }
+            else{
+               properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
+               properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight/ 1.15);
+            }
+               properties.Cancelled += new EventHandler(properties_Cancelled);
+               properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+               Popup.Content = properties;
+               Popup.Show();
+         
         }
 
         public override void GadgetBase_SizeChanged(double width, double height)
         {
-
-            //MessageBox.Show(" PrimaryWidth=" + System.Windows.SystemParameters.PrimaryScreenWidth.ToString() + "Height=" + System.Windows.SystemParameters.PrimaryScreenHeight.ToString());         
-           //MessageBox.Show(" Resized width=" + width.ToString() + "  ResizedHeight=" + height.ToString());
-            //MessageBox.Show(System.Windows.SystemParameters.WorkArea.Width.ToString());
-           
-            //var newWidthSize = width;
-            //var newHeightSize = height;
-
-            //if (newWidthSize < 1100)
-            //{
-            //    //ScrollViewer viewer = new ScrollViewer();
-            //    //viewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-            //    properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.7);
-            //    properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight /1.7);
-            //}
-            //else if (newWidthSize > 1100)
-            //{
-            //    properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
-            //    properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
-            //}
-
-           
-
-            //if(this.properties!=null)
-            //{
-            //    //properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 3.0);
-            //    //properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 3.0);
-            //}
-            //if (GadgetBase.WidthProperty.ToString) {
-            //    properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 3.0);
-            //    properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 3.0);
-            //}
-
             double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;//Developer Desktop Width Where the Form is Designed
             double i_StandardWidth = System.Windows.SystemParameters.PrimaryScreenWidth; ////Developer Desktop Height Where the Form is Designed
-            //  MainWindow// ((System.Windows.Forms.Control)(((System.Windows.Forms.Integration.AvalonAdapter)(((EpiDashboard.DashboardControl)(Popup.Parent.Parent)).Parent))._hostControl)).Size=Size       {Width = 1920 Height = 1005}
             float f_HeightRatio = new float();
             float f_WidthRatio = new float();
             f_HeightRatio = (float)((float)height / (float)i_StandardHeight);
             f_WidthRatio = (float)((float)width / (float)i_StandardWidth);
+            ResizedWidth = width;
+            ResizedHeight = height;
 
             properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
             properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
-            
-
-
-           
+ 
         }
 
 

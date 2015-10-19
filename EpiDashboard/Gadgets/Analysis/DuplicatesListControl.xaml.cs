@@ -150,23 +150,30 @@ namespace EpiDashboard.Gadgets.Analysis
             }
         }
 
+        Controls.GadgetProperties.DuplicatesListProperties properties = null;
         public override void ShowHideConfigPanel()
         {
             Popup = new DashboardPopup();
             Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
-            Controls.GadgetProperties.DuplicatesListProperties properties = new Controls.GadgetProperties.DuplicatesListProperties(this.DashboardHelper, this, (DuplicatesListParameters)Parameters, StrataGridList, columnOrder);
+            properties = new Controls.GadgetProperties.DuplicatesListProperties(this.DashboardHelper, this, (DuplicatesListParameters)Parameters, StrataGridList, columnOrder);
 
-            properties.Width = 800;
-            properties.Height = 600;
-
-            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
+            if (ResizedWidth != 0 & ResizedHeight != 0)
             {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;//Developer Desktop Width Where the Form is Designed
+                double i_StandardWidth = System.Windows.SystemParameters.PrimaryScreenWidth; ////Developer Desktop Height Where the Form is Designed
+                float f_HeightRatio = new float();
+                float f_WidthRatio = new float();
+                f_HeightRatio = (float)((float)ResizedHeight / (float)i_StandardHeight);
+                f_WidthRatio = (float)((float)ResizedWidth / (float)i_StandardWidth);
+
+                properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
+                properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+
             }
-
-            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
+            else
             {
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.15);
             }
 
             properties.Cancelled += new EventHandler(properties_Cancelled);
@@ -174,6 +181,23 @@ namespace EpiDashboard.Gadgets.Analysis
             Popup.Content = properties;
             Popup.Show();
         }
+
+        public override void GadgetBase_SizeChanged(double width, double height)
+        {
+            double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;//Developer Desktop Width Where the Form is Designed
+            double i_StandardWidth = System.Windows.SystemParameters.PrimaryScreenWidth; ////Developer Desktop Height Where the Form is Designed
+            float f_HeightRatio = new float();
+            float f_WidthRatio = new float();
+            f_HeightRatio = (float)((float)height / (float)i_StandardHeight);
+            f_WidthRatio = (float)((float)width / (float)i_StandardWidth);
+            ResizedWidth = width;
+            ResizedHeight = height;
+
+            properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
+            properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+
+        }
+
 
         private void properties_ChangesAccepted(object sender, EventArgs e)
         {
