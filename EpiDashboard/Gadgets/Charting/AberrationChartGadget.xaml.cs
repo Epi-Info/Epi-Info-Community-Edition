@@ -335,6 +335,18 @@ namespace EpiDashboard.Gadgets.Charting
             this.LoadingCombos = true;
             infoPanel.Visibility = System.Windows.Visibility.Collapsed;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
+            foreach (XmlAttribute attribute in element.Attributes)
+            {
+                switch (attribute.Name.ToLower())
+                {
+                    case "actualheight":
+                        string actualHeight = attribute.Value.Replace(',', '.');
+                        double controlheight = 0.0;
+                        double.TryParse(actualHeight, out controlheight);
+                        this.Height = controlheight;
+                        break;
+                }
+            }
 
             if (element.Name.Equals("aberrationGadget") || element.Name.Equals("AberrationControl"))
             {
@@ -487,18 +499,21 @@ namespace EpiDashboard.Gadgets.Charting
             System.Xml.XmlAttribute locationX = doc.CreateAttribute("left");
             System.Xml.XmlAttribute collapsed = doc.CreateAttribute("collapsed");
             System.Xml.XmlAttribute type = doc.CreateAttribute("gadgetType");
+            System.Xml.XmlAttribute actualHeight = doc.CreateAttribute("actualHeight");
 
             id.Value = this.UniqueIdentifier.ToString();
             locationY.Value = Canvas.GetTop(this).ToString("F0");
             locationX.Value = Canvas.GetLeft(this).ToString("F0");
             collapsed.Value = "false"; // currently no way to collapse the gadget, so leave this 'false' for now
             type.Value = "EpiDashboard.Gadgets.Charting.AberrationChartGadget";
+            actualHeight.Value = this.ActualHeight.ToString();
 
             element.Attributes.Append(locationY);
             element.Attributes.Append(locationX);
             element.Attributes.Append(collapsed);
             element.Attributes.Append(type);
             element.Attributes.Append(id);
+            element.Attributes.Append(actualHeight);
 
             double height = 600;
             double width = 800;

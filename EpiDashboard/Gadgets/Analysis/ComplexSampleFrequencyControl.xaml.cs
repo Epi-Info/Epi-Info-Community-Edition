@@ -1185,18 +1185,21 @@ namespace EpiDashboard
             System.Xml.XmlAttribute locationX = doc.CreateAttribute("left");
             System.Xml.XmlAttribute collapsed = doc.CreateAttribute("collapsed");
             System.Xml.XmlAttribute type = doc.CreateAttribute("gadgetType");
+            System.Xml.XmlAttribute actualHeight = doc.CreateAttribute("actualHeight");
 
             id.Value = this.UniqueIdentifier.ToString();
             locationY.Value = Canvas.GetTop(this).ToString("F0");
             locationX.Value = Canvas.GetLeft(this).ToString("F0");
             collapsed.Value = IsCollapsed.ToString();
             type.Value = "EpiDashboard.ComplexSampleFrequencyControl";
+            actualHeight.Value = this.ActualHeight.ToString();
 
             element.Attributes.Append(locationY);
             element.Attributes.Append(locationX);
             element.Attributes.Append(collapsed);
             element.Attributes.Append(type);
             element.Attributes.Append(id);
+            element.Attributes.Append(actualHeight);
 
             CustomOutputHeading = headerPanel.Text;
             CustomOutputDescription = descriptionPanel.Text;
@@ -1301,6 +1304,18 @@ namespace EpiDashboard
 
             txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
+            foreach (XmlAttribute attribute in element.Attributes)
+            {
+                switch (attribute.Name.ToLower())
+                {
+                    case "actualheight":
+                        string actualHeight = attribute.Value.Replace(',', '.');
+                        double controlheight = 0.0;
+                        double.TryParse(actualHeight, out controlheight);
+                        this.Height = controlheight;
+                        break;
+                }
+            }
 
             foreach (XmlElement child in element.ChildNodes)
             {
