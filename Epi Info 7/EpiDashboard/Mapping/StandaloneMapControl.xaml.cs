@@ -92,21 +92,20 @@ namespace EpiDashboard.Mapping
             BlankRadioButton_alt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_BLANK;
             tooltipExpandHeader.Content = DashboardSharedStrings.MENU_FULLSCREEN;
             tooltipExpand.Text = DashboardSharedStrings.MENU_FULLSCREEN_MODE;
-
             tooltipRestoreHeader.Content = DashboardSharedStrings.MENU_WINDOW;
             tooltipRestore.Text = DashboardSharedStrings.MENU_WINDOW_MODE;
-
-            tooltipFileHeader.Content = DashboardSharedStrings.MENU_OPEN;
-            tooltipFile.Text = DashboardSharedStrings.MENU_OPEN_MAP;
-
-            tooltipRefreshHeader.Content = DashboardSharedStrings.MENU_SAVE;
-            tooltipRefresh.Text = DashboardSharedStrings.MENU_SAVE_MAP;
 
             tooltipOpenHeader.Content = DashboardSharedStrings.MENU_OPEN;
             tooltipOpen.Text = DashboardSharedStrings.MENU_OPEN_MAP;
 
-            tooltipSaveHeader.Content = DashboardSharedStrings.MENU_ADD_LAYER;
-            tooltipSave.Text = DashboardSharedStrings.MENU_ADD_LAYER_MAP;
+            tooltipSaveAsImageHeader.Content = DashboardSharedStrings.MENU_SAVE_AS_IMAGE;
+            tooltipSaveAsImage.Text = DashboardSharedStrings.MENU_SAVE_AS_IMAGE_MAP;
+
+            tooltipAddDataLayerHeader.Content = DashboardSharedStrings.MENU_ADD_LAYER;
+            tooltipAddDataLayer.Text = DashboardSharedStrings.MENU_ADD_LAYER_MAP;
+
+            tooltipAddReferenceLayerHeader.Content = DashboardSharedStrings.MENU_ADD_REFERENCE;
+            tooltipAddReferenceLayer.Text = DashboardSharedStrings.MENU_ADD_REFERENCE_MAP;
 
             tooltipTimeLapseHeader.Content = DashboardSharedStrings.MENU_TIME_LAPSE;
             tooltipTimeLapse.Text = DashboardSharedStrings.MENU_TIME_LAPSE_MAP;

@@ -1639,4 +1639,16 @@ of records or select fewer fields for the group.</value>
   <data name="MENU_WINDOW_MODE" xml:space="preserve">
     <value>Switches to window mode.</value>
   </data>
+  <data name="GADGET_TABDESC_COLOR_REP" xml:space="preserve">
+    <value>Color Representation:</value>
+  </data>
+  <data name="GADGET_TABDESC_SETCOLOR" xml:space="preserve">
+    <value>Select a Color</value>
+  </data>
+  <data name="MENU_SAVE_AS_IMAGE" xml:space="preserve">
+    <value>Save as Image</value>
+  </data>
+  <data name="MENU_SAVE_AS_IMAGE_MAP" xml:space="preserve">
+    <value>Saves the current map as an image.</value>
+  </data>
 </root>

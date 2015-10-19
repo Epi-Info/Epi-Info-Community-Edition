@@ -58,8 +58,49 @@ namespace EpiDashboard.Controls
             rctSelectColor.Fill = new SolidColorBrush(Color.FromArgb(120,0,0,255));
             colorselected = new SolidColorBrush(Color.FromArgb(120, 0, 0, 255));
 
-
+            #region Translation
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_CLUSTER;
             tbtnDataSource.Title = DashboardSharedStrings.GADGET_DATA_SOURCE;
+            tbtnDataSource.Description = DashboardSharedStrings.GADGET_TABDESC_DATASOURCE;
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_POF_VARIABLES;
+            tbtnCharts.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
+            tbtnCharts.Description = DashboardSharedStrings.GADGET_TABDESC_SETCOLORS;
+            tbtnFilter.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tbtnFilter.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS_MAPS;
+
+            //Data Source Panel
+            tblockPanelDataSource.Content = DashboardSharedStrings.GADGET_DATA_SOURCE;
+            tblockDataSource.Content = DashboardSharedStrings.GADGET_DATA_SOURCE;
+            btnBrowse.Content = DashboardSharedStrings.BUTTON_BROWSE;
+            tblockConnectionString.Content = DashboardSharedStrings.GADGET_CONNECTION_STRING;
+            tblockSQLQuery.Content = DashboardSharedStrings.GADGET_SQL_QUERY;
+
+            //Variables Panel
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tblockSelectVarData.Content = DashboardSharedStrings.GADGET_POF_COORD_VARIABLES;
+            lblLatitude.Content = DashboardSharedStrings.GADGET_LATITUDE_FIELD;
+            lblLongitude.Content = DashboardSharedStrings.GADGET_LONGITUDE_FIELD;
+
+            //Display Panel
+            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
+            tblockMapDesc.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
+
+            //Colors Panel
+            lblColor.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLOR;
+            lblSelectAColor.Content = DashboardSharedStrings.GADGET_TABDESC_SETCOLOR;
+            tblcolor.Text = DashboardSharedStrings.GADGET_TABDESC_COLOR_REP;
+
+            //Filters Panel
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockSetDataFilter.Content = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
+
+            #endregion
         }
      
         
@@ -126,6 +167,7 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Visible;
             panelFilter.Visibility = System.Windows.Visibility.Collapsed;
@@ -136,6 +178,7 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelCharts.Visibility = System.Windows.Visibility.Visible;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilter.Visibility = System.Windows.Visibility.Collapsed;
@@ -146,6 +189,18 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelVariables.Visibility = System.Windows.Visibility.Visible;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
+            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            panelFilter.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void tbtnDisplay_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckButtonStates(sender as ToggleButton);
+            panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
+            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Visible;
             panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilter.Visibility = System.Windows.Visibility.Collapsed;
@@ -156,6 +211,7 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelFilter.Visibility = System.Windows.Visibility.Visible;
             panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
@@ -167,6 +223,7 @@ namespace EpiDashboard.Controls
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Visible;
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelCharts.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilter.Visibility = System.Windows.Visibility.Collapsed;
