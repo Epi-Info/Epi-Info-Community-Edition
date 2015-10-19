@@ -229,14 +229,14 @@ namespace Epi.Windows.MakeView.Dialogs
                 try
                 {
                     //  Epi.Web.Common.Message.PublishResponse Result = new Epi.Web.Common.Message.PublishResponse();
-                    SurveyManagerService.PublishResponse Result = new SurveyManagerService.PublishResponse();
+                    SurveyManagerServiceV3.PublishResponse Result = new SurveyManagerServiceV3.PublishResponse();
 
                     lock (syncLock)
                     {
                         this.Cursor = Cursors.WaitCursor;
                         publishWorker = new BackgroundWorker();
                         publishWorker.WorkerSupportsCancellation = true;
-                        publishWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(worker_DoWork);
+                        publishWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(worker_DoWorkV3);
                         publishWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(worker_WorkerCompleted);
                         object[] args = new object[2];
                         args[0] = Request;
@@ -1968,7 +1968,7 @@ namespace Epi.Windows.MakeView.Dialogs
             {
                 SurveyManagerService.ManagerServiceClient client = Epi.Core.ServiceClient.ServiceClient.GetClient();
                 SurveyManagerService.PublishRequest Request = (SurveyManagerService.PublishRequest)((object[])e.Argument)[0];
-                SurveyManagerService.PublishResponse Result = (SurveyManagerService.PublishResponse)((object[])e.Argument)[1];
+                var Result = (SurveyManagerService.PublishResponse)((object[])e.Argument)[1];
                 Result = client.PublishSurvey(Request);
                 this.BeginInvoke(new PublishDelegate(AfterPublish), Result);
             }
@@ -2003,7 +2003,7 @@ namespace Epi.Windows.MakeView.Dialogs
             {
                 SurveyManagerServiceV2.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV2();
                 SurveyManagerServiceV2.PublishRequest Request = (SurveyManagerServiceV2.PublishRequest)((object[])e.Argument)[0];
-                SurveyManagerServiceV2.PublishResponse Result = (SurveyManagerServiceV2.PublishResponse)((object[])e.Argument)[1];
+                var Result = (SurveyManagerServiceV2.PublishResponse)((object[])e.Argument)[1];
                 Result = client.PublishSurvey(Request);
                 this.BeginInvoke(new PublishDelegateV2(AfterPublishV2), Result);
             }
@@ -2038,7 +2038,7 @@ namespace Epi.Windows.MakeView.Dialogs
             {
                 SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
                 SurveyManagerServiceV3.PublishRequest Request = (SurveyManagerServiceV3.PublishRequest)((object[])e.Argument)[0];
-                SurveyManagerServiceV3.PublishResponse Result = (SurveyManagerServiceV3.PublishResponse)((object[])e.Argument)[1];
+                var Result = (SurveyManagerServiceV3.PublishResponse)((object[])e.Argument)[1];
                 Result = client.PublishSurvey(Request);
                 this.BeginInvoke(new PublishDelegateV3(AfterPublishV3), Result);
             }

@@ -11,7 +11,7 @@
 namespace Epi.SurveyManagerServiceV3 {
     using System.Runtime.Serialization;
     using System;
-    
+    using System.Collections.Generic;
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -231,7 +231,7 @@ namespace Epi.SurveyManagerServiceV3 {
         private Epi.SurveyManagerServiceV3.SurveyAnswerCriteria CriteriaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Epi.SurveyManagerServiceV3.SurveyAnswerDTO[] SurveyAnswerListField;
+        private List<Epi.SurveyManagerServiceV3.SurveyAnswerDTO>SurveyAnswerListField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public Epi.SurveyManagerServiceV3.SurveyAnswerCriteria Criteria {
@@ -247,7 +247,7 @@ namespace Epi.SurveyManagerServiceV3 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Epi.SurveyManagerServiceV3.SurveyAnswerDTO[] SurveyAnswerList {
+        public List<Epi.SurveyManagerServiceV3.SurveyAnswerDTO> SurveyAnswerList {
             get {
                 return this.SurveyAnswerListField;
             }
@@ -868,7 +868,7 @@ namespace Epi.SurveyManagerServiceV3 {
         private int StatusIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string[] SurveyAnswerIdListField;
+        private List<string> SurveyAnswerIdListField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SurveyIdField;
@@ -981,7 +981,7 @@ namespace Epi.SurveyManagerServiceV3 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string[] SurveyAnswerIdList {
+        public List<string>  SurveyAnswerIdList {
             get {
                 return this.SurveyAnswerIdListField;
             }
