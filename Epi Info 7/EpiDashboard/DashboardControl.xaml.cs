@@ -1069,6 +1069,9 @@ namespace EpiDashboard
                     IGadget anchoredGadget = anchoredControl as IGadget;
                     if (control != null && anchoredControl != null && anchoredGadget != null)
                     {
+                        if (control.ActualHeight==0.0)
+                            Canvas.SetTop(anchoredControl, Canvas.GetTop(control) + control.Height + DEFAULT_ANCHOR_TOP_SPACE);
+                        else
                         Canvas.SetTop(anchoredControl, Canvas.GetTop(control) + control.ActualHeight + DEFAULT_ANCHOR_TOP_SPACE);
                         Canvas.SetLeft(anchoredControl, Canvas.GetLeft(control));
                         MoveAnchoredGadgets(anchoredGadget);
