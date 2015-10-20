@@ -60,7 +60,13 @@ namespace EpiDashboard.Mapping
             rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
 
             #region translation;
-            rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT;
+            lblTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_CHOROPLETH;
+            btnShapeFile.Content = DashboardSharedStrings.BUTTON_BROWSE_SHAPEFILE;
+            lblClasses.Content = DashboardSharedStrings.GADGET_CLASSES;
+            lblShapeKey.Content = DashboardSharedStrings.GADGET_MAP_FEATURE;
+            lblDataKey.Content = DashboardSharedStrings.GADGET_MAP_DATA;
+            lblValueField.Content = DashboardSharedStrings.GADGET_MAP_VALUE;
+            rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT; 
             #endregion; //translation
 
         }

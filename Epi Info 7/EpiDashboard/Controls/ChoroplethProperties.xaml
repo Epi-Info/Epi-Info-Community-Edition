@@ -65,7 +65,7 @@
             </ToggleButton>-->
         </StackPanel>
 
-        <DockPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+        <DockPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
             </StackPanel>
@@ -163,7 +163,7 @@
             </ScrollViewer>
         </DockPanel>
 
-        <DockPanel x:Name="panelHTML" Grid.Column="2" Margin="8" Visibility="Collapsed">
+        <DockPanel x:Name="panelHTML" Grid.Column="2" Margin="8" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
                 <Label x:Name="tblockSelectVarData" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Select variables for map.</Label>
@@ -190,7 +190,7 @@
                         <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbDataKey" SelectionChanged="cmbDataKey_SelectionChanged" Height="25" Width="300"></ComboBox>
                     </StackPanel>
                     <StackPanel>
-                        <Label x:Name="lblValue">Value:</Label>
+                        <Label x:Name="lblValue">Value Field:</Label>
                         <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbValue" SelectionChanged="cmbValue_SelectionChanged" Height="25" Width="300"></ComboBox>
                     </StackPanel>
                 </StackPanel>

@@ -57,7 +57,13 @@ namespace EpiDashboard.Mapping
             FillComboBoxes();
             
             #region translation;
-                rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT;
+            lblTitle.Content = DashboardSharedStrings.GADGET_LABEL_POINTS;
+            rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT;
+            lblDescription.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
+            lblStyle.Content = DashboardSharedStrings.GADGET_LABEL_STYLE;
+            lblLatitude.Content = DashboardSharedStrings.GADGET_LATITUDE_FIELD;
+            lblLongitude.Content = DashboardSharedStrings.GADGET_LONGITUDE_FIELD;
+            lblDataFilters.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
             #endregion; //translation
 
         }
