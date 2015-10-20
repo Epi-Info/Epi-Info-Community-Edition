@@ -70,6 +70,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse Shapefile.
+        /// </summary>
+        public static string BUTTON_BROWSE_SHAPEFILE {
+            get {
+                return ResourceManager.GetString("BUTTON_BROWSE_SHAPEFILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string BUTTON_CANCEL {
@@ -1419,6 +1428,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Classes:.
+        /// </summary>
+        public static string GADGET_CLASSES {
+            get {
+                return ResourceManager.GetString("GADGET_CLASSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear all conditions.
         /// </summary>
         public static string GADGET_CLEAR_ALL_CONDITIONS {
@@ -2310,6 +2328,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Points.
+        /// </summary>
+        public static string GADGET_LABEL_POINTS {
+            get {
+                return ResourceManager.GetString("GADGET_LABEL_POINTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Style:.
+        /// </summary>
+        public static string GADGET_LABEL_STYLE {
+            get {
+                return ResourceManager.GetString("GADGET_LABEL_STYLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lag time (days):.
         /// </summary>
         public static string GADGET_LAG_TIME_DAYS {
@@ -2580,7 +2616,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value:.
+        ///   Looks up a localized string similar to Value Field:.
         /// </summary>
         public static string GADGET_MAP_VALUE {
             get {

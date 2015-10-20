@@ -5,25 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" d:DesignWidth="800">
     <Grid x:Name="grdMain" Width="800">
+        <Border BorderBrush="#00000000" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
+            <Rectangle VerticalAlignment="Bottom" x:Name="rctEdit"  HorizontalAlignment="Right" Height="25" Width="25" Stroke="SlateBlue" Cursor="Hand" Fill="SlateBlue" Margin="0,0,52,0" Visibility="Visible" >
+                <Rectangle.ToolTip>
+                    <Label x:Name="rctEditToolTip" Content="Edit data layer map"/>
+                </Rectangle.ToolTip>
+            </Rectangle>
+        </Border>
         <StackPanel Orientation="Horizontal">
-            <Label x:Name="lblTitle" Width="80" FontWeight="Bold" Visibility="Collapsed" VerticalAlignment="Bottom">Points</Label>
-            <StackPanel Orientation="Vertical" Width="160">
-                <Label x:Name="lblDescription" HorizontalAlignment="Center">Description:</Label>
-                <StackPanel Orientation="Horizontal" Width="150">
+            <Label x:Name="lblTitle" Width="Auto" Margin="5,0,5,0" FontWeight="Bold" Visibility="Collapsed" VerticalAlignment="Bottom" Content="Points"/>
+            <StackPanel Orientation="Vertical" Width="Auto">
+                <Label x:Name="lblDescription" HorizontalAlignment="Center" Content="Description:"/>
+                <StackPanel Orientation="Horizontal" Width="Auto" Margin="5,0,5,0">
                     <TextBox x:Name="txtDescription" Width="150"/>
-                    <Button x:Name="btnChangeText" Width="20" Content="..." Visibility="Collapsed" Click="btnChangeText_Click"/> 
+                    <Button x:Name="btnChangeText" Width="20" Content="..." Visibility="Collapsed" Click="btnChangeText_Click"/>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Width="85">
-                <Label x:Name="lblStyle" HorizontalAlignment="Center">Style:</Label>
+            <StackPanel Orientation="Vertical" Width="Auto" Margin="5,0,5,0">
+                <Label x:Name="lblStyle" HorizontalAlignment="Center" Content="Style:"/>
                 <ComboBox x:Name="cbxStyle" Width="75" HorizontalAlignment="Center"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Width="150">
-                <Label x:Name="lblLatitude" HorizontalAlignment="Center">Latitude Field:</Label>
+            <StackPanel Orientation="Vertical" Width="Auto" Margin="5,0,5,0">
+                <Label x:Name="lblLatitude" HorizontalAlignment="Center" Content="Latitude Field:"/>
                 <ComboBox x:Name="cbxLatitude" Width="110"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Width="150">
-                <Label x:Name="lblLongitude" HorizontalAlignment="Center">Longitude Field:</Label>
+            <StackPanel Orientation="Vertical" Width="Auto" Margin="5,0,5,0" >
+                <Label x:Name="lblLongitude" HorizontalAlignment="Center" Content="Longitude Field:"/>
                 <ComboBox x:Name="cbxLongitude" Width="110"/>
             </StackPanel>
         </StackPanel>
@@ -36,16 +43,9 @@
         <Image VerticalAlignment="Bottom" Source= "../Images/filter1.png" Stretch="None" HorizontalAlignment="Right" Margin="0,0,11,5" Visibility="Hidden"/>
         <Rectangle VerticalAlignment="Bottom" x:Name="rctFilter" HorizontalAlignment="Right" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="#00000000" Margin="0,0,8,0" Visibility="Hidden">
             <Rectangle.ToolTip>
-                <Label Content="Data filters"/>
+                <Label x:Name="lblDataFilters" Content="Data filters"/>
             </Rectangle.ToolTip>
         </Rectangle>
-        <Border BorderBrush="#00000000" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
-        <Rectangle VerticalAlignment="Bottom" x:Name="rctEdit"  HorizontalAlignment="Right" Height="25" Width="25" Stroke="SlateBlue" Cursor="Hand" Fill="SlateBlue" Margin="0,0,52,0" Visibility="Visible" >
-             <Rectangle.ToolTip>
-                <Label x:Name="rctEditToolTip" Content="Edit data layer map"/>
-            </Rectangle.ToolTip>
-        </Rectangle>
-        </Border>
         <Path Fill="White"                   
                   HorizontalAlignment="Right" VerticalAlignment="Bottom"
                   Height="18" Width="18"  Margin="0,0,57,4"

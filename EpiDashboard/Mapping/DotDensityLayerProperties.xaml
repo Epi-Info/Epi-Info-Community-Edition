@@ -5,23 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" d:DesignWidth="800">
     <Grid x:Name="grdMain" Width="800">
+        <Border BorderBrush="#00000000" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
+            <Rectangle VerticalAlignment="Bottom" x:Name="rctEdit"  HorizontalAlignment="Right" Height="25" Width="25" Stroke="SlateBlue" Cursor="Hand" Fill="SlateBlue" Margin="0,0,52,0" Visibility="Visible" >
+                <Rectangle.ToolTip>
+                    <Label x:Name="rctEditToolTip"  Content="Edit data layer"/>
+                </Rectangle.ToolTip>
+            </Rectangle>
+        </Border>
         <StackPanel Orientation="Horizontal">
-            <Label x:Name="lblTitle" Width="80" FontWeight="Bold" Visibility="Collapsed" VerticalAlignment="Bottom">Dot Density</Label>
-            <Button x:Name="btnShapeFile" VerticalAlignment="Bottom">Browse ShapeFile...</Button>
+            <Label x:Name="lblTitle" Width="80" FontWeight="Bold" Visibility="Collapsed" VerticalAlignment="Bottom" Content="Dot Density"/>
+            <Button x:Name="btnShapeFile" VerticalAlignment="Bottom" Content="Browse Shapefile" Padding='5,0,5,0'/>
             <StackPanel Orientation="Vertical" Width="90">
-                <Label x:Name="lblClasses" HorizontalAlignment="Center">Dot Value:</Label>
+                <Label x:Name="lblClasses" HorizontalAlignment="Center" Content="Dot Value:"/>
                 <TextBox x:Name="txtDotValue" HorizontalAlignment="Center" Width="55" Text="1" TextAlignment="Right"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Width="150">
-                <Label x:Name="lblShapeKey" HorizontalAlignment="Center">Feature Key:</Label>
+                <Label x:Name="lblShapeKey" HorizontalAlignment="Center" Content="Feature Key:"/>
                 <ComboBox x:Name="cbxShapeKey" Width="110"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Width="150">
-                <Label x:Name="lblDataKey" HorizontalAlignment="Center">Data Key:</Label>
+                <Label x:Name="lblDataKey" HorizontalAlignment="Center" Content="Data Key:"/>
                 <ComboBox x:Name="cbxDataKey" Width="110"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Width="150">
-                <Label x:Name="lblValueField" HorizontalAlignment="Center">Value Field:</Label>
+                <Label x:Name="lblValueField" HorizontalAlignment="Center" Content="Value Field:"/>
                 <ComboBox x:Name="cbxValue" Width="110"/>
             </StackPanel>
         </StackPanel>
@@ -36,15 +43,6 @@
                 <Label Content="Data filters"/>
             </Rectangle.ToolTip>
         </Rectangle>
-        
-        <Image VerticalAlignment="Bottom" Source= "../Images/Edit1.png" Stretch="None" HorizontalAlignment="Right" Margin="0,0,55,5" Visibility= "Visible"/>
-        <Border BorderBrush="#00000000" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
-            <Rectangle VerticalAlignment="Bottom" x:Name="rctEdit"  HorizontalAlignment="Right" Height="25" Width="25" Stroke="SlateBlue" Cursor="Hand" Fill="SlateBlue" Margin="0,0,52,0" Visibility="Visible" >
-                <Rectangle.ToolTip>
-                    <Label x:Name="rctEditToolTip"  Content="Edit data layer"/>
-                </Rectangle.ToolTip>
-            </Rectangle>
-        </Border>
         <Path Fill="White"                   
                   HorizontalAlignment="Right" VerticalAlignment="Bottom"
                   Height="18" Width="18"  Margin="0,0,57,4"

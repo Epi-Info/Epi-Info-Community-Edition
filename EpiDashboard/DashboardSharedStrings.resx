@@ -1730,7 +1730,7 @@ of records or select fewer fields for the group.</value>
     <value>Start:</value>
   </data>
   <data name="GADGET_MAP_VALUE" xml:space="preserve">
-    <value>Value:</value>
+    <value>Value Field:</value>
   </data>
   <data name="GADGET_OTHER_MAPSERVER" xml:space="preserve">
     <value>Provide location of another map server</value>
@@ -1752,5 +1752,17 @@ of records or select fewer fields for the group.</value>
   </data>
   <data name="GADGET_VARIABLES_CHORPLTH" xml:space="preserve">
     <value>Select variables for map.</value>
+  </data>
+  <data name="BUTTON_BROWSE_SHAPEFILE" xml:space="preserve">
+    <value>Browse Shapefile</value>
+  </data>
+  <data name="GADGET_CLASSES" xml:space="preserve">
+    <value>Classes:</value>
+  </data>
+  <data name="GADGET_LABEL_POINTS" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="GADGET_LABEL_STYLE" xml:space="preserve">
+    <value>Style:</value>
   </data>
 </root>
