@@ -1355,6 +1355,7 @@ namespace Epi.Enter.Forms
             Request.Criteria.OrganizationKey = new Guid(OrganizationKey);
             Request.Criteria.ReturnSizeInfoOnly = ReturnSizeInfoOnly;
             Request.Criteria.StatusId = SurveyStatus;
+            Request.Criteria.IsDraftMode = this.IsDraftMode;
             Request.Criteria.SurveyAnswerIdList = new List<string>();
 
             List<SurveyManagerService.SurveyAnswerDTO> DTOList = new List<SurveyManagerService.SurveyAnswerDTO>();
@@ -1374,6 +1375,7 @@ namespace Epi.Enter.Forms
             Request.Criteria.OrganizationKey = new Guid(OrganizationKey);
             Request.Criteria.ReturnSizeInfoOnly = ReturnSizeInfoOnly;
             Request.Criteria.StatusId = SurveyStatus;
+            Request.Criteria.IsDraftMode = this.IsDraftMode;
             Request.Criteria.SurveyAnswerIdList = new List<string>();
             Request.SurveyAnswerList = new List<SurveyManagerServiceV2.SurveyAnswerDTO>();
 
@@ -1390,6 +1392,7 @@ namespace Epi.Enter.Forms
             Request.Criteria.OrganizationKey = new Guid(OrganizationKey);
             Request.Criteria.ReturnSizeInfoOnly = ReturnSizeInfoOnly;
             Request.Criteria.StatusId = SurveyStatus;
+            Request.Criteria.IsDraftMode = this.IsDraftMode;
             Request.Criteria.SurveyAnswerIdList = new List<string>();
             Request.SurveyAnswerList = new List<SurveyManagerServiceV3.SurveyAnswerDTO>();
 
