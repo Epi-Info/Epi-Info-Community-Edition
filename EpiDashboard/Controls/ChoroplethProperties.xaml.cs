@@ -92,7 +92,7 @@ namespace EpiDashboard.Controls
             tbtnDataSource.Title = DashboardSharedStrings.GADGET_DATA_SOURCE;
             tbtnDataSource.Description = DashboardSharedStrings.GADGET_TABDESC_DATASOURCE;
             tbtnHTML.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
-            tbtnHTML.Description = DashboardSharedStrings.GADGET_TABDESC_CHORPLTH_VARIABLES;
+            tbtnHTML.Description = DashboardSharedStrings.GADGET_TABDESC_MAP_VARIABLES;
             tbtnCharts.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
             tbtnCharts.Description = DashboardSharedStrings.GADGET_TABDESC_SETCOLORS;
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
@@ -120,28 +120,33 @@ namespace EpiDashboard.Controls
             tblockSQLQuery.Content = DashboardSharedStrings.GADGET_SQL_QUERY;
 
             //Variables Panel
-            //tblockPanelVariables.Content = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
-            //tblockSelectVarData.Content = DashboardSharedStrings.GADGET_POF_COORD_VARIABLES;
-            //lblLatitude.Content = DashboardSharedStrings.GADGET_LATITUDE_FIELD;
-            //lblLongitude.Content = DashboardSharedStrings.GADGET_LONGITUDE_FIELD;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tblockSelectVarData.Content = DashboardSharedStrings.GADGET_VARIABLES_CHORPLTH;
+            lblFeature.Content=DashboardSharedStrings.GADGET_MAP_FEATURE;
+            lblData.Content=DashboardSharedStrings.GADGET_MAP_DATA;
+            lblValue.Content = DashboardSharedStrings.GADGET_MAP_VALUE;
 
-            //Display Panel
-            //tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
-            //tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
-            //tblockMapDesc.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
-
-            //Colors and Styles Panel
-            //lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
-            //lblColor.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLOR;
-            //tblcolor.Text = DashboardSharedStrings.GADGET_SELECT_COLOR;
-            //lblStyle.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_STYLES;
-            //tblStylePreReq.Text = DashboardSharedStrings.GADGET_STYLE_PREREQ;
-            //lblShape.Content = DashboardSharedStrings.GADGET_SELECT_SHAPE;
+            //Colors & Ranges Panel
+            lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_TAB_COLORS_RANGES;
+            tblockColorsSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
+            lblMissingExcluded.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
+            lblColorRamp.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
+            lblColorStart.Content = DashboardSharedStrings.GADGET_MAP_START;
+            lblColorEnd.Content = DashboardSharedStrings.GADGET_MAP_END;
+            tblockOpacity.Text = DashboardSharedStrings.GADGET_MAP_OPACITY;
+            btnResetLegend.Content = DashboardSharedStrings.BUTTON_RESET_LEGEND;
+            tblockRangesSubheader.Content = DashboardSharedStrings.GADGET_MAP_RANGES;
+            lblClassBreaks.Content = DashboardSharedStrings.GADGET_MAP_CLASS_BREAKS;
+            quintilesOption.Content = DashboardSharedStrings.GADGET_MAP_QUANTILES;
+            lblLegTitle.Text = DashboardSharedStrings.GADGET_MAP_LEGEND_TITLE;
+            tblockColorRamp.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLOR;
+            tblockRange.Text = DashboardSharedStrings.GADGET_MAP_RANGE;
+            tblockLegText.Text = DashboardSharedStrings.GADGET_MAP_LEGEND_TEXT;
 
             //Filters Panel
-            //tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
-            //tblockSetDataFilter.Content = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
-            //tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockSetDataFilter.Content = DashboardSharedStrings.GADGET_TABDESC_FILTERS_MAPS;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_MAP_SELECT_DATASOURCE;
 
             //Info Panel
             //lblCanvasInfo.Content = DashboardSharedStrings.GADGET_CANVAS_INFO;
@@ -462,7 +467,7 @@ namespace EpiDashboard.Controls
                 rowFilterControl = new RowFilterControl(_dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, datafilters, true);
                 rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; rowFilterControl.FillSelectionComboboxes();
                 panelFilters.Children.Add(rowFilterControl);
-                txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
+                //txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
             }
 
         }

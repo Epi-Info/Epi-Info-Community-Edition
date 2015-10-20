@@ -36,7 +36,7 @@
             <!--<Controls:SettingsToggleButton  x:Name="tbtnInfo" Title="Canvas Info" Description="View details of this canvas." IsChecked="False" Checked="tbtnFilter_Checked"/>-->
         </StackPanel>
 
-        <DockPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+        <DockPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
             </StackPanel>
@@ -132,13 +132,13 @@
             </StackPanel>
         </DockPanel>
 
-        <DockPanel x:Name="panelFilter" Grid.Column="2"   Margin="8" Visibility="Collapsed"  >
+        <DockPanel x:Name="panelFilter" Grid.Column="2"   Margin="8" Visibility="Visible"  >
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data  Filters</Label>
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom">
                 <Label x:Name="tblockSetDataFilter" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this gadget</Label>
-                <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: Select dataSource to add filter to data layer:</Label>
+                <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: First select a data source to add a filter to layer.</Label>
             </StackPanel>
         </DockPanel>
         

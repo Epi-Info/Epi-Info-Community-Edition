@@ -97,6 +97,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset Legend.
+        /// </summary>
+        public static string BUTTON_RESET_LEGEND {
+            get {
+                return ResourceManager.GetString("BUTTON_RESET_LEGEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The variable could not be removed. Check to make sure that no data filters and/or other variables are dependent on this variable..
         /// </summary>
         public static string CANNOT_REMOVE_VARIABLE {
@@ -1770,7 +1779,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Point of Interest.
+        ///   Looks up a localized string similar to Points of Interest.
         /// </summary>
         public static string GADGET_CONFIG_TITLE_POINTOFINTEREST {
             get {
@@ -2441,6 +2450,141 @@ namespace EpiDashboard {
         public static string GADGET_MAKE_DUMMY {
             get {
                 return ResourceManager.GetString("GADGET_MAKE_DUMMY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class Breaks:.
+        /// </summary>
+        public static string GADGET_MAP_CLASS_BREAKS {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_CLASS_BREAKS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing or Excluded Color:.
+        /// </summary>
+        public static string GADGET_MAP_COLOR_MISSING {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_COLOR_MISSING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Key:.
+        /// </summary>
+        public static string GADGET_MAP_DATA {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dot Value:.
+        /// </summary>
+        public static string GADGET_MAP_DOT_VALUE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_DOT_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End:.
+        /// </summary>
+        public static string GADGET_MAP_END {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_END", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feature Key:.
+        /// </summary>
+        public static string GADGET_MAP_FEATURE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_FEATURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legend Text.
+        /// </summary>
+        public static string GADGET_MAP_LEGEND_TEXT {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_LEGEND_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legend Title.
+        /// </summary>
+        public static string GADGET_MAP_LEGEND_TITLE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_LEGEND_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set opacity:.
+        /// </summary>
+        public static string GADGET_MAP_OPACITY {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_OPACITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantiles.
+        /// </summary>
+        public static string GADGET_MAP_QUANTILES {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_QUANTILES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Range:.
+        /// </summary>
+        public static string GADGET_MAP_RANGE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ranges:.
+        /// </summary>
+        public static string GADGET_MAP_RANGES {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_RANGES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: First select a data source to add a filter to this layer..
+        /// </summary>
+        public static string GADGET_MAP_SELECT_DATASOURCE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_SELECT_DATASOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start:.
+        /// </summary>
+        public static string GADGET_MAP_START {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_START", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value:.
+        /// </summary>
+        public static string GADGET_MAP_VALUE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_VALUE", resourceCulture);
             }
         }
         
@@ -3246,7 +3390,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Colors &amp; Ranges.
+        ///   Looks up a localized string similar to Colors and Ranges.
         /// </summary>
         public static string GADGET_TAB_COLORS_RANGES {
             get {
@@ -3444,6 +3588,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set dot value and color representation..
+        /// </summary>
+        public static string GADGET_TABDESC_DOT_COLOR {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_DOT_COLOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the variables for the EPI curve chart..
         /// </summary>
         public static string GADGET_TABDESC_EPICURVE_CHART {
@@ -3539,6 +3692,15 @@ namespace EpiDashboard {
         public static string GADGET_TABDESC_LOGISTIC_REGRESSION {
             get {
                 return ResourceManager.GetString("GADGET_TABDESC_LOGISTIC_REGRESSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose variables for map..
+        /// </summary>
+        public static string GADGET_TABDESC_MAP_VARIABLES {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_MAP_VARIABLES", resourceCulture);
             }
         }
         
@@ -3755,6 +3917,15 @@ namespace EpiDashboard {
         public static string GADGET_VARIABLE_PARSE {
             get {
                 return ResourceManager.GetString("GADGET_VARIABLE_PARSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select variables for map..
+        /// </summary>
+        public static string GADGET_VARIABLES_CHORPLTH {
+            get {
+                return ResourceManager.GetString("GADGET_VARIABLES_CHORPLTH", resourceCulture);
             }
         }
         

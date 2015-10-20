@@ -99,8 +99,8 @@ namespace EpiDashboard.Controls
 
             //Filters Panel
             tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
-            tblockSetDataFilter.Content = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
-            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockSetDataFilter.Content = DashboardSharedStrings.GADGET_TABDESC_FILTERS_MAPS;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_MAP_SELECT_DATASOURCE;
 
             //Info Panel
             //lblCanvasInfo.Content = DashboardSharedStrings.GADGET_CANVAS_INFO;
