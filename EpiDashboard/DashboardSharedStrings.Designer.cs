@@ -79,6 +79,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connect.
+        /// </summary>
+        public static string BUTTON_CONNECT {
+            get {
+                return ResourceManager.GetString("BUTTON_CONNECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string BUTTON_OK {
@@ -1284,6 +1293,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Boundaries.
+        /// </summary>
+        public static string GADGET_BOUNDARIES {
+            get {
+                return ResourceManager.GetString("GADGET_BOUNDARIES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Break type:.
         /// </summary>
         public static string GADGET_BREAK_TYPE {
@@ -1806,6 +1824,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connect to a known map server.
+        /// </summary>
+        public static string GADGET_CONNECT_MAPSERVER {
+            get {
+                return ResourceManager.GetString("GADGET_CONNECT_MAPSERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connection String:.
         /// </summary>
         public static string GADGET_CONNECTION_STRING {
@@ -2058,6 +2085,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Example: http://code.google.com/apis/kml/documentation/us_states.kml.
+        /// </summary>
+        public static string GADGET_EXAMPLE_KMLFILE {
+            get {
+                return ResourceManager.GetString("GADGET_EXAMPLE_KMLFILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer.
+        /// </summary>
+        public static string GADGET_EXAMPLE_MAPSERVER {
+            get {
+                return ResourceManager.GetString("GADGET_EXAMPLE_MAPSERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exposure:.
         /// </summary>
         public static string GADGET_EXPOSURE_VARIABLE {
@@ -2229,6 +2274,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to KML File.
+        /// </summary>
+        public static string GADGET_KMLFILE {
+            get {
+                return ResourceManager.GetString("GADGET_KMLFILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location URL of KML File:.
+        /// </summary>
+        public static string GADGET_KMLFILE_LOCATION {
+            get {
+                return ResourceManager.GetString("GADGET_KMLFILE_LOCATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string GADGET_LABEL_DESCRIPTION {
@@ -2378,6 +2441,15 @@ namespace EpiDashboard {
         public static string GADGET_MAKE_DUMMY {
             get {
                 return ResourceManager.GetString("GADGET_MAKE_DUMMY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map Server.
+        /// </summary>
+        public static string GADGET_MAPSERVER {
+            get {
+                return ResourceManager.GetString("GADGET_MAPSERVER", resourceCulture);
             }
         }
         
@@ -2585,6 +2657,15 @@ namespace EpiDashboard {
         public static string GADGET_ORIENTATION {
             get {
                 return ResourceManager.GetString("GADGET_ORIENTATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provide location of another map server.
+        /// </summary>
+        public static string GADGET_OTHER_MAPSERVER {
+            get {
+                return ResourceManager.GetString("GADGET_OTHER_MAPSERVER", resourceCulture);
             }
         }
         
@@ -2841,11 +2922,29 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Feature:.
+        /// </summary>
+        public static string GADGET_SELECT_FEATURE {
+            get {
+                return ResourceManager.GetString("GADGET_SELECT_FEATURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Shape:.
         /// </summary>
         public static string GADGET_SELECT_SHAPE {
             get {
                 return ResourceManager.GetString("GADGET_SELECT_SHAPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shapefile:.
+        /// </summary>
+        public static string GADGET_SHAPEFILE {
+            get {
+                return ResourceManager.GetString("GADGET_SHAPEFILE", resourceCulture);
             }
         }
         
@@ -3147,6 +3246,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Colors &amp; Ranges.
+        /// </summary>
+        public static string GADGET_TAB_COLORS_RANGES {
+            get {
+                return ResourceManager.GetString("GADGET_TAB_COLORS_RANGES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Colors and Styles.
         /// </summary>
         public static string GADGET_TAB_COLORS_STYLES {
@@ -3237,11 +3345,29 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose map boundaries..
+        /// </summary>
+        public static string GADGET_TABDESC_CHORPLTH_VARIABLES {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_CHORPLTH_VARIABLES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color Representation:.
         /// </summary>
         public static string GADGET_TABDESC_COLOR_REP {
             get {
                 return ResourceManager.GetString("GADGET_TABDESC_COLOR_REP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set class breaks and color representations..
+        /// </summary>
+        public static string GADGET_TABDESC_COLORS_RANGES {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_COLORS_RANGES", resourceCulture);
             }
         }
         
@@ -3557,6 +3683,15 @@ namespace EpiDashboard {
         public static string GADGET_TRUE_VALUE_REQ {
             get {
                 return ResourceManager.GetString("GADGET_TRUE_VALUE_REQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to URL:.
+        /// </summary>
+        public static string GADGET_URL {
+            get {
+                return ResourceManager.GetString("GADGET_URL", resourceCulture);
             }
         }
         
@@ -4461,7 +4596,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Swaps the row positions for the exposure values. For example, if &apos;F&apos; were on the top and &apos;T&apos; were on the bottom, they would be switched..
+        ///   Looks up a localized string similar to Swaps the row positions for the exposure values. For example, if &apos;F&apos; was on the top and &apos;T&apos; was on the bottom, they would be switched..
         /// </summary>
         public static string TOOLTIP_SWAP_EXPOSURE {
             get {
@@ -4470,7 +4605,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Swaps the column positions for the outcome values. For example, if &apos;F&apos; were on the left and &apos;T&apos; were on the right, they would be switched..
+        ///   Looks up a localized string similar to Swaps the column positions for the outcome values. For example, if &apos;F&apos; was on the left and &apos;T&apos; was on the right, they would be switched..
         /// </summary>
         public static string TOOLTIP_SWAP_OUTCOME {
             get {

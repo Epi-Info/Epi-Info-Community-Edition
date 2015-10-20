@@ -698,10 +698,10 @@ Denominator = {0}</value>
     <value>Upper</value>
   </data>
   <data name="TOOLTIP_SWAP_OUTCOME" xml:space="preserve">
-    <value>Swaps the column positions for the outcome values. For example, if 'F' were on the left and 'T' were on the right, they would be switched.</value>
+    <value>Swaps the column positions for the outcome values. For example, if 'F' was on the left and 'T' was on the right, they would be switched.</value>
   </data>
   <data name="TOOLTIP_SWAP_EXPOSURE" xml:space="preserve">
-    <value>Swaps the row positions for the exposure values. For example, if 'F' were on the top and 'T' were on the bottom, they would be switched.</value>
+    <value>Swaps the row positions for the exposure values. For example, if 'F' was on the top and 'T' was on the bottom, they would be switched.</value>
   </data>
   <data name="TOOLTIP_CLOSE_GADGET" xml:space="preserve">
     <value>Closes the gadget.</value>
@@ -1639,16 +1639,61 @@ of records or select fewer fields for the group.</value>
   <data name="MENU_WINDOW_MODE" xml:space="preserve">
     <value>Switches to window mode.</value>
   </data>
+  <data name="GADGET_TABDESC_CHORPLTH_VARIABLES" xml:space="preserve">
+    <value>Choose map boundaries.</value>
+  </data>
+  <data name="GADGET_TABDESC_COLORS_RANGES" xml:space="preserve">
+    <value>Set class breaks and color representations.</value>
+  </data>
   <data name="GADGET_TABDESC_COLOR_REP" xml:space="preserve">
     <value>Color Representation:</value>
   </data>
   <data name="GADGET_TABDESC_SETCOLOR" xml:space="preserve">
     <value>Select a Color</value>
   </data>
+  <data name="GADGET_TAB_COLORS_RANGES" xml:space="preserve">
+    <value>Colors &amp; Ranges</value>
+  </data>
   <data name="MENU_SAVE_AS_IMAGE" xml:space="preserve">
     <value>Save as Image</value>
   </data>
   <data name="MENU_SAVE_AS_IMAGE_MAP" xml:space="preserve">
     <value>Saves the current map as an image.</value>
+  </data>
+  <data name="BUTTON_CONNECT" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="GADGET_BOUNDARIES" xml:space="preserve">
+    <value>Boundaries</value>
+  </data>
+  <data name="GADGET_CONNECT_MAPSERVER" xml:space="preserve">
+    <value>Connect to a known map server</value>
+  </data>
+  <data name="GADGET_EXAMPLE_KMLFILE" xml:space="preserve">
+    <value>Example: http://code.google.com/apis/kml/documentation/us_states.kml</value>
+  </data>
+  <data name="GADGET_EXAMPLE_MAPSERVER" xml:space="preserve">
+    <value>Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</value>
+  </data>
+  <data name="GADGET_KMLFILE" xml:space="preserve">
+    <value>KML File</value>
+  </data>
+  <data name="GADGET_KMLFILE_LOCATION" xml:space="preserve">
+    <value>Location URL of KML File:</value>
+  </data>
+  <data name="GADGET_MAPSERVER" xml:space="preserve">
+    <value>Map Server</value>
+  </data>
+  <data name="GADGET_OTHER_MAPSERVER" xml:space="preserve">
+    <value>Provide location of another map server</value>
+  </data>
+  <data name="GADGET_SELECT_FEATURE" xml:space="preserve">
+    <value>Select Feature:</value>
+  </data>
+  <data name="GADGET_SHAPEFILE" xml:space="preserve">
+    <value>Shapefile:</value>
+  </data>
+  <data name="GADGET_URL" xml:space="preserve">
+    <value>URL:</value>
   </data>
 </root>
