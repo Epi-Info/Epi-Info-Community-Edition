@@ -65,7 +65,7 @@
             </ToggleButton>-->
         </StackPanel>
 
-        <DockPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
+        <DockPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
             </StackPanel>
@@ -429,7 +429,7 @@
         </DockPanel>
 
 
-        <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Visible">
+        <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
             <!--<Label>Note: Any filters set here are applied to this gadget only.</Label>-->
             <StackPanel DockPanel.Dock="Bottom">
