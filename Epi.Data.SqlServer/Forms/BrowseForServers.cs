@@ -40,8 +40,9 @@ namespace Epi.Data.SqlServer.Forms
                     listBox.Items.Add(serverName);
                 }
                 else
-                {
-                    string serverName = string.Format("{0}\\{1}", row[0], row[1]);
+                {                       
+                    string serverName = string.Format("{0}\\{1}", row[0], row[1]);//appending instance name to the server name
+                    listBox.Items.Add(serverName);//adding  
                 }
             }
 
