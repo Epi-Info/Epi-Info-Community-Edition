@@ -3038,4 +3038,16 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="WEBSURVEY_UPDATE_SUCCESS" xml:space="preserve">
     <value>Form update successful.</value>
   </data>
+  <data name="ADD_CONDITION" xml:space="preserve">
+    <value>Add Condition</value>
+  </data>
+  <data name="ADD_FILTER" xml:space="preserve">
+    <value>Add Filter</value>
+  </data>
+  <data name="ADVANCED_FILTER_CHANGED" xml:space="preserve">
+    <value>Filter text has been changed. The previous filter is in effect until the new filter has been applied.</value>
+  </data>
+  <data name="CONDITIONS" xml:space="preserve">
+    <value>Conditions</value>
+  </data>
 </root>

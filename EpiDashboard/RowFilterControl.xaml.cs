@@ -113,13 +113,6 @@ namespace EpiDashboard
             btnApplyAdvancedFilter.Content = DashboardSharedStrings.GADGET_APPLY_ADVANCED_FILTER;
             btnGuidedMode.Content = DashboardSharedStrings.GADGET_GUIDED_MODE;
 
-
-
-
-
-
-
-
             #endregion // Translation
 
         }
@@ -140,13 +133,13 @@ namespace EpiDashboard
                 this.mode = value;
                 if (Mode == EpiDashboard.Dialogs.FilterDialogMode.RowFilterMode)
                 {
-                    this.btnNewCondition.Content = "Add filter";
-                    this.tblockDataFilterListHeading.Text = "Data filters";
+                    this.btnNewCondition.Content = SharedStrings.ADD_FILTER;
+                    this.tblockDataFilterListHeading.Text = SharedStrings.DATA_FILTERS;
                 }
                 else if (Mode == EpiDashboard.Dialogs.FilterDialogMode.ConditionalMode)
                 {
-                    this.btnNewCondition.Content = "Add condition";
-                    this.tblockDataFilterListHeading.Text = "Conditions";
+                    this.btnNewCondition.Content = SharedStrings.ADD_CONDITION;
+                    this.tblockDataFilterListHeading.Text = SharedStrings.CONDITIONS;
                 }
             }
         }
@@ -251,7 +244,7 @@ namespace EpiDashboard
         {
             btnApplyAdvancedFilter.IsEnabled = true;
             txtAdvancedFilter.Foreground = this.Resources["normalColor"] as Brush;
-            txtAdvancedFilterStatus.Text = "Filter text has been changed. The previous filter is in effect until the new filter has been applied.";
+            txtAdvancedFilterStatus.Text = SharedStrings.ADVANCED_FILTER_CHANGED;
         }
 
         /// <summary>

@@ -135,10 +135,8 @@
         <DockPanel x:Name="panelFilter" Grid.Column="2"   Margin="8" Visibility="Collapsed"  >
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data  Filters</Label>
-            </StackPanel>
-            <StackPanel DockPanel.Dock="Bottom">
                 <Label x:Name="tblockSetDataFilter" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this gadget</Label>
-                <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: First select a data source to add a filter to layer.</Label>
+                <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: First select a data source to add a filter to this layer.</Label>
             </StackPanel>
         </DockPanel>
         

@@ -95,6 +95,9 @@ namespace EpiDashboard.Mapping
             tooltipRestoreHeader.Content = DashboardSharedStrings.MENU_WINDOW;
             tooltipRestore.Text = DashboardSharedStrings.MENU_WINDOW_MODE;
 
+            tooltipSaveHeader.Content = DashboardSharedStrings.MENU_SAVE;
+            tooltipSave.Text = DashboardSharedStrings.MENU_SAVE_MAP;
+
             tooltipOpenHeader.Content = DashboardSharedStrings.MENU_OPEN;
             tooltipOpen.Text = DashboardSharedStrings.MENU_OPEN_MAP;
 
