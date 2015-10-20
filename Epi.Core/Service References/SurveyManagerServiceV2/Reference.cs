@@ -44,7 +44,7 @@ namespace Epi.SurveyManagerServiceV2 {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string VersionField;
-        
+       
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -840,7 +840,9 @@ namespace Epi.SurveyManagerServiceV2 {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid UserPublishKeyField;
-        
+
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsDraftModeField;
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime DateCompleted {
             get {
@@ -918,7 +920,22 @@ namespace Epi.SurveyManagerServiceV2 {
                 }
             }
         }
-        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsDraftMode
+        {
+            get
+            {
+                return this.IsDraftModeField;
+            }
+            set
+            {
+                if ((this.IsDraftModeField.Equals(value) != true))
+                {
+                    this.IsDraftModeField = value;
+                    this.RaisePropertyChanged("IsDraftMode");
+                }
+            }
+        }
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int StatusId {
             get {
