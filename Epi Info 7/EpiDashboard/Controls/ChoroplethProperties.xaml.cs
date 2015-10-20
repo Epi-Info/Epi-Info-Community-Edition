@@ -87,6 +87,69 @@ namespace EpiDashboard.Controls
 
             #region Translation
 
+            //Point of Interest Left Panel
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_CHOROPLETH;
+            tbtnDataSource.Title = DashboardSharedStrings.GADGET_DATA_SOURCE;
+            tbtnDataSource.Description = DashboardSharedStrings.GADGET_TABDESC_DATASOURCE;
+            tbtnHTML.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tbtnHTML.Description = DashboardSharedStrings.GADGET_TABDESC_CHORPLTH_VARIABLES;
+            tbtnCharts.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
+            tbtnCharts.Description = DashboardSharedStrings.GADGET_TABDESC_SETCOLORS;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS_MAPS;
+
+            //Data Source Panel
+            tblockPanelDataSource.Content = DashboardSharedStrings.GADGET_DATA_SOURCE;
+            tblockDataSource.Content = DashboardSharedStrings.GADGET_DATA_SOURCE;
+            btnBrowse.Content = DashboardSharedStrings.BUTTON_BROWSE;
+            lblBoundaries.Content = DashboardSharedStrings.GADGET_BOUNDARIES;
+            radShapeFile.Content = DashboardSharedStrings.GADGET_SHAPEFILE;
+            btnBrowseShape.Content = DashboardSharedStrings.BUTTON_BROWSE;
+            radMapServer.Content = DashboardSharedStrings.GADGET_MAPSERVER;
+            radconnectmapserver.Content = DashboardSharedStrings.GADGET_CONNECT_MAPSERVER;
+            radlocatemapserver.Content = DashboardSharedStrings.GADGET_OTHER_MAPSERVER;
+            lblURL.Content = DashboardSharedStrings.GADGET_URL;
+            btnMapserverlocate.Content = DashboardSharedStrings.BUTTON_CONNECT;
+            lblExampleMapServerURL.Content = DashboardSharedStrings.GADGET_EXAMPLE_MAPSERVER;
+            lblSelectFeature.Content = DashboardSharedStrings.GADGET_SELECT_FEATURE;
+            radKML.Content = DashboardSharedStrings.GADGET_KMLFILE;
+            lblURLOfKMLFile.Content = DashboardSharedStrings.GADGET_KMLFILE_LOCATION;
+
+
+            tblockConnectionString.Content = DashboardSharedStrings.GADGET_CONNECTION_STRING;
+            tblockSQLQuery.Content = DashboardSharedStrings.GADGET_SQL_QUERY;
+
+            //Variables Panel
+            //tblockPanelVariables.Content = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            //tblockSelectVarData.Content = DashboardSharedStrings.GADGET_POF_COORD_VARIABLES;
+            //lblLatitude.Content = DashboardSharedStrings.GADGET_LATITUDE_FIELD;
+            //lblLongitude.Content = DashboardSharedStrings.GADGET_LONGITUDE_FIELD;
+
+            //Display Panel
+            //tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            //tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
+            //tblockMapDesc.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
+
+            //Colors and Styles Panel
+            //lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
+            //lblColor.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLOR;
+            //tblcolor.Text = DashboardSharedStrings.GADGET_SELECT_COLOR;
+            //lblStyle.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_STYLES;
+            //tblStylePreReq.Text = DashboardSharedStrings.GADGET_STYLE_PREREQ;
+            //lblShape.Content = DashboardSharedStrings.GADGET_SELECT_SHAPE;
+
+            //Filters Panel
+            //tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            //tblockSetDataFilter.Content = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
+            //tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+
+            //Info Panel
+            //lblCanvasInfo.Content = DashboardSharedStrings.GADGET_CANVAS_INFO;
+            //tblockRows.Text = dashboardHelper.DataSet.Tables[0].Rows.Count.ToString() + DashboardSharedStrings.GADGET_INFO_UNFILTERED_ROWS;
+
+
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
