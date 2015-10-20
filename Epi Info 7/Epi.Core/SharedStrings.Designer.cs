@@ -125,6 +125,24 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Condition.
+        /// </summary>
+        public static string ADD_CONDITION {
+            get {
+                return ResourceManager.GetString("ADD_CONDITION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Filter.
+        /// </summary>
+        public static string ADD_FILTER {
+            get {
+                return ResourceManager.GetString("ADD_FILTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add &amp;Form.
         /// </summary>
         public static string ADD_FORM {
@@ -148,6 +166,15 @@ namespace Epi {
         public static string ADDITIONAL_INFORMATION {
             get {
                 return ResourceManager.GetString("ADDITIONAL_INFORMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter text has been changed. The previous filter is in effect until the new filter has been applied..
+        /// </summary>
+        public static string ADVANCED_FILTER_CHANGED {
+            get {
+                return ResourceManager.GetString("ADVANCED_FILTER_CHANGED", resourceCulture);
             }
         }
         
@@ -1921,6 +1948,15 @@ namespace Epi {
         public static string COMPLETE_ALL_SELECTION_FIELDS {
             get {
                 return ResourceManager.GetString("COMPLETE_ALL_SELECTION_FIELDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Conditions.
+        /// </summary>
+        public static string CONDITIONS {
+            get {
+                return ResourceManager.GetString("CONDITIONS", resourceCulture);
             }
         }
         
@@ -5746,7 +5782,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid form name:  A form&apos;s name cannot consist of more than 64 characters. Please enter a shorter name for this form..
+        ///   Looks up a localized string similar to Invalid form name:  A form&apos;s name cannot consist of more than 40 characters. Please enter a shorter name for this form..
         /// </summary>
         public static string INVALID_VIEW_NAME_TOO_LONG {
             get {
