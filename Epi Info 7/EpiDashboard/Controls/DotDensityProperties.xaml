@@ -38,9 +38,9 @@
             </ToggleButton>-->
 
             <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title=" Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title=" Variables" Description="Choose map boundaries." IsChecked="False" Checked="tbtnHTML_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsChecked="False" Checked="tbtnCharts_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title=" Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title=" Variables" Description="Choose map variables." IsChecked="False" Checked="tbtnHTML_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors and Ranges" Description="Set dot value and color representation." IsChecked="False" Checked="tbtnCharts_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title=" Filters" Description="Set data filters for this layer." IsChecked="False" Checked="tbtnFilters_Checked"/>
 
 
             <!--<ToggleButton x:Name="tbtnHTML" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnHTML_Checked">
@@ -65,7 +65,7 @@
             </ToggleButton>-->
         </StackPanel>
 
-        <StackPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible" VerticalAlignment="Stretch">
+        <StackPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed" VerticalAlignment="Stretch">
             <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
 
             <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
@@ -94,32 +94,32 @@
             </StackPanel>
             <Label></Label>
             <StackPanel x:Name="panelBoundaries" IsEnabled="False">
-                <Label x:Name="lblBoundaries" Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>                         
-             <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="Shapefile" Checked="radShapeFile_Checked"  />
+                <Label x:Name="lblBoundaries" Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
+                <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="Shapefile" Checked="radShapeFile_Checked"  />
                 <Label></Label>
                 <StackPanel x:Name="panelshape" IsEnabled="False">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="12" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="12" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="txtShapePath" IsReadOnly="False" TextChanged="txtProjectPath_TextChanged"   ></TextBox>
                         <Button x:Name="btnBrowseShape"  Grid.Column="2" Click="btnBrowseShapeFile_Click" Height="Auto" >Browse</Button>
-                    </Grid>                       
-                    </StackPanel>
+                    </Grid>
+                </StackPanel>
                 <Label></Label>
                 <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
                 <Label></Label>
                 <StackPanel x:Name="panelmap" IsEnabled="False" >
-                   <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known map server" Checked="radconnectmapserver_Checked" />
+                    <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known map server" Checked="radconnectmapserver_Checked" />
                     <StackPanel x:Name="panelmapconnect" IsEnabled="False">
-                    <Label></Label>
-                    <ComboBox x:Name="cbxmapserver" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" Width="380">
+                        <Label></Label>
+                        <ComboBox x:Name="cbxmapserver" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" Width="380">
                             <ComboBoxItem>NationalMap.gov - New York County Boundaries</ComboBoxItem>
                             <ComboBoxItem>NationalMap.gov - Rhode Island Zip Code Boundaries</ComboBoxItem>
                             <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
-                            <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>                           
+                            <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
                     <Label></Label>
@@ -128,8 +128,8 @@
                     <StackPanel x:Name="panelmapserver" IsEnabled="False" >
                         <Label x:Name="lblURL">URL:</Label>
                         <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
                                 <ColumnDefinition Width="12"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
@@ -138,40 +138,41 @@
                         </Grid>
                         <Label></Label>
                         <Label x:Name="lblExampleMapServerURL" Style="{StaticResource PropertiesExampleText}">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</Label>
-                        <Label x:Name="lblSelectFeature"> Select Feature:</Label>
-                        <ComboBox x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged" Width="380"></ComboBox>                                               
+                        <Label x:Name="lblSelectFeature">Select Feature:</Label>
+                        <ComboBox x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged" Width="380"></ComboBox>
                     </StackPanel>
                 </StackPanel>
                 <Label></Label>
-                <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KML File" Checked="radKML_Checked" /> 
+                <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KML File" Checked="radKML_Checked" />
                 <Label></Label>
                 <StackPanel x:Name="panelKml" IsEnabled="False" >
                     <Label x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
                     <Label></Label>
-                        <Grid>
-                                <Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition Width="12" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="txtKMLpath" IsReadOnly="False" ></TextBox>
-                        <Button x:Name="btnKMLFile" Height="Auto" Grid.Column="2" Click="btnKMLFile_Click">Browse</Button>                     
-                            </Grid>
+                        <Button x:Name="btnKMLFile" Height="Auto" Grid.Column="2" Click="btnKMLFile_Click">Browse</Button>
+                    </Grid>
                     <Label></Label>
                     <Label x:Name="lblExampleKMLFile" Style="{StaticResource PropertiesExampleText}">Example: http://code.google.com/apis/kml/documentation/us_states.kml</Label>
 
-                </StackPanel>                                 
-            </StackPanel>          
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
 
         <StackPanel x:Name="panelHTML" Grid.Column="2" Margin="8" Visibility="Collapsed">
-            <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables:</Label>                     
-            <Label>Feature Key:</Label>
-            <ComboBox x:Name="cmbShapeKey" SelectionChanged="cmbFormName_SelectionChanged"></ComboBox>
-            <Label>Data Key:</Label>
-            <ComboBox x:Name="cmbDataKey" SelectionChanged="cmbFormName_SelectionChanged"></ComboBox>
-            <Label>Value:</Label>
-            <ComboBox x:Name="cmbValue" SelectionChanged="cmbFormName_SelectionChanged"></ComboBox>
+            <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+            <Label x:Name="tblockSelectVarData" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Select variables for map.</Label>
+            <Label x:Name="lblFeature">Feature Key:</Label>
+            <ComboBox x:Name="cmbShapeKey" HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" SelectionChanged="cmbFormName_SelectionChanged" Width="300"></ComboBox>
+            <Label x:Name="lblData">Data Key:</Label>
+            <ComboBox x:Name="cmbDataKey" HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" SelectionChanged="cmbFormName_SelectionChanged" Height="25" Width="300"></ComboBox>
+            <Label x:Name="lblValue">Value:</Label>
+            <ComboBox x:Name="cmbValue" HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" SelectionChanged="cmbFormName_SelectionChanged" Height="25" Width="300"></ComboBox>
 
         </StackPanel>
 
@@ -186,26 +187,35 @@
         </StackPanel>
 
         <StackPanel x:Name="panelCharts" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
+            <Label x:Name="lblPanelHdrColorsAndStyles" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Color and Ranges</Label>
             <!--<Label>Note: Any filters set here are applied to this gadget only.</Label>-->
 
-           
-                <!--<Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors &amp; Ranges</Label>-->
 
-                <Label>Select Color:</Label>
-            <Rectangle x:Name="rctDotColor" MouseLeftButtonUp="rctDotColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00000FF">
-                    <Rectangle.ToolTip>
-                        <Label Content="Color"/>
-                    </Rectangle.ToolTip>
-                </Rectangle>
-                <Label>Dot Value:</Label>
+            <!--<Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors &amp; Ranges</Label>-->
+            <StackPanel Orientation="Horizontal">
+                <Label x:Name="tblcolor">Select Color:</Label>
+                <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+
+                <Rectangle x:Name="rctDotColor" MouseLeftButtonUp="rctDotColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00000FF">
+                <Rectangle.ToolTip>
+                    <Label Content="Color"/>
+                </Rectangle.ToolTip>
+            </Rectangle>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label x:Name="lblDotValue" Margin="0,0,15,0">Dot Value:</Label>
+                <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
                 <TextBox x:Name="txtDotValue" Text="1" ></TextBox>
-            </StackPanel>                  
+            </StackPanel>
+        </StackPanel>
 
-        <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10"> Color and Data Filters</Label>
-            <!--<Label>Note: Any filters set here are applied to this gadget only.</Label>-->           
-            <TextBlock x:Name="txtNote">Note:Please select the Datasource first to view the Filters:</TextBlock>
+        <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Visible">
+            <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
+            <!--<Label>Note: Any filters set here are applied to this gadget only.</Label>-->
+            <StackPanel DockPanel.Dock="Bottom">
+                <Label x:Name="tblockSetDataFilter" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this layer.</Label>
+                <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: First select a data source to add a filter to layer.</Label>
+            </StackPanel>
         </StackPanel>
 
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />

@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="860" d:DesignWidth="800" FontFamily="Global User Interface" FontSize="16" Background="White">
     <UserControl.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="../StyleDictionary.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -19,12 +19,12 @@
             <ColumnDefinition Width="30" />
             <ColumnDefinition Width=".63*" />
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
         <!--<Border Grid.ColumnSpan="100" Grid.RowSpan="100" BorderThickness="2" BorderBrush="#DDDDDD" />-->
 
         <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
@@ -41,7 +41,7 @@
             <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title="Variables" Description="Choose map boundaries." IsChecked="False" Checked="tbtnHTML_Checked"/>
             <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsChecked="False" Checked="tbtnCharts_Checked"/>
             <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title=" Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
-            
+
 
             <!--<ToggleButton x:Name="tbtnHTML" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnHTML_Checked">
                 <StackPanel>
@@ -111,7 +111,7 @@
                         </StackPanel>
 
                         <StackPanel Margin="0 30 0 0 ">
-                            
+
                             <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
 
                             <StackPanel Margin="20 10 0 0 "  x:Name="panelmap" IsEnabled="False" >
@@ -128,7 +128,7 @@
 
                                 <StackPanel Margin="0 30 0 0">
                                     <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver"  Content="Provide location of another map server" Checked="radlocatemapserver_Checked" />
-                                    
+
                                     <StackPanel x:Name="panelmapserver" IsEnabled="False" >
                                         <Label x:Name="lblURL">URL:</Label>
                                         <StackPanel Orientation="Horizontal" Margin="10 0 0 0 ">
@@ -144,14 +144,14 @@
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
-                        
+
                         <StackPanel Margin="0 30 0 0">
                             <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
 
                             <StackPanel x:Name="panelKml" IsEnabled="False" >
                                 <Label x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
                                 <StackPanel Orientation="Horizontal" Margin="10 0 0 0 ">
-                                        <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtKMLpath" IsReadOnly="False" ></TextBox>
+                                    <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtKMLpath" IsReadOnly="False" ></TextBox>
                                     <Button x:Name="btnKMLFile" Margin="10 0 0 0" HorizontalAlignment="Left" Height="Auto" Click="btnKMLFile_Click">Browse</Button>
                                 </StackPanel>
                                 <Label></Label>
@@ -163,9 +163,11 @@
             </ScrollViewer>
         </DockPanel>
 
-        <DockPanel x:Name="panelHTML" Grid.Column="2" Margin="8" Visibility="Visible">
+        <DockPanel x:Name="panelHTML" Grid.Column="2" Margin="8" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Shape Source</Label>
+                <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
+                <Label x:Name="tblockSelectVarData" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Select variables for map.</Label>
+
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom">
                 <!-- <Label>Shape File:</Label> -->
@@ -180,16 +182,16 @@
                 </Grid>
                 <StackPanel>
                     <StackPanel>
-                        <Label>Feature Key:</Label>
-                        <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbShapeKey" SelectionChanged="cmbShapeKey_SelectionChanged"></ComboBox>
+                        <Label x:Name="lblFeature">Feature Key:</Label>
+                        <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbShapeKey" SelectionChanged="cmbShapeKey_SelectionChanged" Width="300"></ComboBox>
                     </StackPanel>
                     <StackPanel>
-                        <Label>Data Key:</Label>
-                        <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbDataKey" SelectionChanged="cmbDataKey_SelectionChanged"></ComboBox>
+                        <Label x:Name="lblData">Data Key:</Label>
+                        <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbDataKey" SelectionChanged="cmbDataKey_SelectionChanged" Height="25" Width="300"></ComboBox>
                     </StackPanel>
                     <StackPanel>
-                        <Label>Value:</Label>
-                        <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbValue" SelectionChanged="cmbValue_SelectionChanged"></ComboBox>
+                        <Label x:Name="lblValue">Value:</Label>
+                        <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbValue" SelectionChanged="cmbValue_SelectionChanged" Height="25" Width="300"></ComboBox>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -210,25 +212,29 @@
 
         <DockPanel x:Name="panelCharts" Grid.Column="2" Margin="8" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label Style="{StaticResource PropertiesHeading}" Margin="0 0 0 10">Colors &amp; Ranges</Label>
+                <Label x:Name="lblPanelHdrColorsAndStyles" Style="{StaticResource PropertiesHeading}" Margin="0 0 0 10">Colors and Ranges</Label>
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom">
                 <StackPanel>
 
-                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Colors__xfe</Label>
-                    
-                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Colors</Label>
+
+                    <StackPanel Orientation="Vertical" Margin="0 10 0 0">
                         <StackPanel Orientation="Horizontal" Margin="0 0 0 0" >
                             <!--<CheckBox x:Name="useGradient" IsChecked="True" Click="CheckBox_Click">Use gradient</CheckBox>-->
-                            <Label>Missing Ramp:</Label>
-                            <Rectangle x:Name="rctMissingColor" MouseLeftButtonUp="rctMissingColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#FFFF00" Margin="0,0,11,0">
+                            <Label x:Name="lblMissingExcluded">Missing or Excluded Color:</Label>
+                            <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                            <Rectangle x:Name="rctMissingColor" MouseLeftButtonUp="rctMissingColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" Margin="0,0,11,0">
                                 <Rectangle.ToolTip>
                                     <Label Content="Missing value color"/>
                                 </Rectangle.ToolTip>
                             </Rectangle>
                         </StackPanel>
+                        <Label x:Name="lblColorRamp">Color Ramp:</Label>
                         <StackPanel Orientation="Horizontal" Margin="8,0,0,2" >
-                            <Label>Start Ramp:</Label>
+                            <Label x:Name="lblColorStart">Start:</Label>
+                            <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+
                             <Rectangle x:Name="rctLowColor" MouseLeftButtonUp="rctLowColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,11,0">
                                 <Rectangle.ToolTip>
                                     <Label Content="Low value color"/>
@@ -236,7 +242,8 @@
                             </Rectangle>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="8,0,0,2" >
-                            <Label>End Ramp:</Label>
+                            <Label x:Name="lblColorEnd" Margin="0,0,7,0">End:</Label>
+                            <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
                             <Rectangle x:Name="rctHighColor" MouseLeftButtonUp="rctHighColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
                                 <Rectangle.ToolTip>
                                     <Label Content="High value color"/>
@@ -246,7 +253,7 @@
                     </StackPanel>
 
                     <StackPanel HorizontalAlignment="Left" Margin="0 20 0 0">
-                        
+
                         <StackPanel Orientation="Horizontal">
                             <StackPanel>
                                 <TextBlock x:Name="tblockOpacity" Text="Set opacity" HorizontalAlignment="Left" Width="100" Height="20" />
@@ -290,13 +297,13 @@
                                 </Grid>
                             </StackPanel>
                         </StackPanel>
-                        <Button Click="ResetLegend_Click" HorizontalAlignment="Left" Width="110" Height="25" Margin="0 8 0 0">Reset Legend</Button>
+                        <Button x:Name="btnResetLegend" Click="ResetLegend_Click" HorizontalAlignment="Left" Width="110" Height="25" Margin="0 8 0 0">Reset Legend</Button>
                     </StackPanel>
-                    
+
                     <StackPanel Margin="0 26 0 0">
-                        <Label x:Name="tblockRangesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Ranges__xfe</Label>
+                        <Label x:Name="tblockRangesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Ranges</Label>
                         <StackPanel Orientation="Horizontal">
-                            <Label Margin="0,10,0,0">Class Breaks:</Label>
+                            <Label x:Name="lblClassBreaks" Margin="0,10,0,0">Class Breaks:</Label>
 
                             <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" Width="50" Height="25" Margin="0,10,0,0">
                                 <ComboBoxItem>2</ComboBoxItem>
@@ -309,11 +316,11 @@
                                 <ComboBoxItem>9</ComboBoxItem>
                                 <ComboBoxItem>10</ComboBoxItem>
                             </ComboBox>
-                            
+
                         </StackPanel>
                         <CheckBox x:Name="quintilesOption" Click="CheckBox_Quantiles_Click" HorizontalAlignment="Left" Width="134" Height="42" Margin="8,20,0,16">Quantiles</CheckBox>
 
-                        <TextBlock  HorizontalAlignment="Center">Legend Title</TextBlock>
+                        <TextBlock x:Name="lblLegTitle" HorizontalAlignment="Center">Legend Title</TextBlock>
                         <TextBox  x:Name="legTitle"  MinWidth="60" Height="30"  />
 
 
@@ -340,10 +347,10 @@
                                 <ColumnDefinition Width="220"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Color</TextBlock>
-                            <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">Range</TextBlock>
+                            <TextBlock x:Name="tblockColorRamp" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Color</TextBlock>
+                            <TextBlock x:Name="tblockRange" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">Range</TextBlock>
                             <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" x:Name="quintilesHeaderText" MinWidth="60">Quintiles</TextBlock>
-                            <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center">Legend Text</TextBlock>
+                            <TextBlock x:Name="tblockLegText" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center">Legend Text</TextBlock>
 
                             <Rectangle Grid.Row="01" Grid.Column="0" x:Name="rctColor00" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor0_MouseLeftButtonUp"/>
                             <Rectangle Grid.Row="02" Grid.Column="0" x:Name="rctColor01" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor1_MouseLeftButtonUp"/>
@@ -422,12 +429,15 @@
         </DockPanel>
 
 
-        <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
+        <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Visible">
+            <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
             <!--<Label>Note: Any filters set here are applied to this gadget only.</Label>-->
-            <TextBlock x:Name="txtNote">Note:Please select the Datasource first to view the Filters:</TextBlock>
+            <StackPanel DockPanel.Dock="Bottom">
+                <Label x:Name="tblockSetDataFilter" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this layer.</Label>
+                <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: First select a data source to add a filter to layer.</Label>
+            </StackPanel>
         </StackPanel>
-        
+
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="1">

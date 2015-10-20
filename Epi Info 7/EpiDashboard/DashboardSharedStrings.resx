@@ -1520,7 +1520,7 @@ of records or select fewer fields for the group.</value>
     <value>Shows a menu of options for the Dashboard application.</value>
   </data>
   <data name="GADGET_CONFIG_TITLE_POINTOFINTEREST" xml:space="preserve">
-    <value>Point of Interest</value>
+    <value>Points of Interest</value>
   </data>
   <data name="GADGET_DATA_SOURCE" xml:space="preserve">
     <value>Data Source</value>
@@ -1652,7 +1652,7 @@ of records or select fewer fields for the group.</value>
     <value>Select a Color</value>
   </data>
   <data name="GADGET_TAB_COLORS_RANGES" xml:space="preserve">
-    <value>Colors &amp; Ranges</value>
+    <value>Colors and Ranges</value>
   </data>
   <data name="MENU_SAVE_AS_IMAGE" xml:space="preserve">
     <value>Save as Image</value>
@@ -1662,6 +1662,9 @@ of records or select fewer fields for the group.</value>
   </data>
   <data name="BUTTON_CONNECT" xml:space="preserve">
     <value>Connect</value>
+  </data>
+  <data name="BUTTON_RESET_LEGEND" xml:space="preserve">
+    <value>Reset Legend</value>
   </data>
   <data name="GADGET_BOUNDARIES" xml:space="preserve">
     <value>Boundaries</value>
@@ -1684,6 +1687,51 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_MAPSERVER" xml:space="preserve">
     <value>Map Server</value>
   </data>
+  <data name="GADGET_MAP_CLASS_BREAKS" xml:space="preserve">
+    <value>Class Breaks:</value>
+  </data>
+  <data name="GADGET_MAP_COLOR_MISSING" xml:space="preserve">
+    <value>Missing or Excluded Color:</value>
+  </data>
+  <data name="GADGET_MAP_DATA" xml:space="preserve">
+    <value>Data Key:</value>
+  </data>
+  <data name="GADGET_MAP_DOT_VALUE" xml:space="preserve">
+    <value>Dot Value:</value>
+  </data>
+  <data name="GADGET_MAP_END" xml:space="preserve">
+    <value>End:</value>
+  </data>
+  <data name="GADGET_MAP_FEATURE" xml:space="preserve">
+    <value>Feature Key:</value>
+  </data>
+  <data name="GADGET_MAP_LEGEND_TEXT" xml:space="preserve">
+    <value>Legend Text</value>
+  </data>
+  <data name="GADGET_MAP_LEGEND_TITLE" xml:space="preserve">
+    <value>Legend Title</value>
+  </data>
+  <data name="GADGET_MAP_OPACITY" xml:space="preserve">
+    <value>Set opacity:</value>
+  </data>
+  <data name="GADGET_MAP_QUANTILES" xml:space="preserve">
+    <value>Quantiles</value>
+  </data>
+  <data name="GADGET_MAP_RANGE" xml:space="preserve">
+    <value>Range:</value>
+  </data>
+  <data name="GADGET_MAP_RANGES" xml:space="preserve">
+    <value>Ranges:</value>
+  </data>
+  <data name="GADGET_MAP_SELECT_DATASOURCE" xml:space="preserve">
+    <value>Note: First select a data source to add a filter to this layer.</value>
+  </data>
+  <data name="GADGET_MAP_START" xml:space="preserve">
+    <value>Start:</value>
+  </data>
+  <data name="GADGET_MAP_VALUE" xml:space="preserve">
+    <value>Value:</value>
+  </data>
   <data name="GADGET_OTHER_MAPSERVER" xml:space="preserve">
     <value>Provide location of another map server</value>
   </data>
@@ -1693,7 +1741,16 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_SHAPEFILE" xml:space="preserve">
     <value>Shapefile:</value>
   </data>
+  <data name="GADGET_TABDESC_DOT_COLOR" xml:space="preserve">
+    <value>Set dot value and color representation.</value>
+  </data>
+  <data name="GADGET_TABDESC_MAP_VARIABLES" xml:space="preserve">
+    <value>Choose variables for map.</value>
+  </data>
   <data name="GADGET_URL" xml:space="preserve">
     <value>URL:</value>
+  </data>
+  <data name="GADGET_VARIABLES_CHORPLTH" xml:space="preserve">
+    <value>Select variables for map.</value>
   </data>
 </root>

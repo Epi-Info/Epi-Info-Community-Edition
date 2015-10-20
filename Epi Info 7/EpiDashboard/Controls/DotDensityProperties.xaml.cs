@@ -114,14 +114,14 @@ namespace EpiDashboard.Controls
 
             #region Translation
 
-            //Point of Interest Left Panel
+            //Dot Density Left Panel
             lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_DOTDENSITY;
             tbtnDataSource.Title = DashboardSharedStrings.GADGET_DATA_SOURCE;
             tbtnDataSource.Description = DashboardSharedStrings.GADGET_TABDESC_DATASOURCE;
             tbtnHTML.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
-            tbtnHTML.Description = DashboardSharedStrings.GADGET_TABDESC_POF_VARIABLES;
+            tbtnHTML.Description = DashboardSharedStrings.GADGET_TABDESC_MAP_VARIABLES;
             tbtnCharts.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
-            tbtnCharts.Description = DashboardSharedStrings.GADGET_TABDESC_SETCOLORS;
+            tbtnCharts.Description = DashboardSharedStrings.GADGET_TABDESC_DOT_COLOR;
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS_MAPS;
 
@@ -148,28 +148,23 @@ namespace EpiDashboard.Controls
             tblockSQLQuery.Content = DashboardSharedStrings.GADGET_SQL_QUERY;
 
             //Variables Panel
-            //tblockPanelVariables.Content = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
-            //tblockSelectVarData.Content = DashboardSharedStrings.GADGET_POF_COORD_VARIABLES;
-            //lblLatitude.Content = DashboardSharedStrings.GADGET_LATITUDE_FIELD;
-            //lblLongitude.Content = DashboardSharedStrings.GADGET_LONGITUDE_FIELD;
+            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
+            tblockSelectVarData.Content = DashboardSharedStrings.GADGET_VARIABLES_CHORPLTH;
+            lblFeature.Content = DashboardSharedStrings.GADGET_MAP_FEATURE;
+            lblData.Content = DashboardSharedStrings.GADGET_MAP_DATA;
+            lblValue.Content = DashboardSharedStrings.GADGET_MAP_VALUE;
 
-            //Display Panel
-            //tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
-            //tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
-            //tblockMapDesc.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
 
             //Colors and Styles Panel
-            //lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
-            //lblColor.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLOR;
-            //tblcolor.Text = DashboardSharedStrings.GADGET_SELECT_COLOR;
-            //lblStyle.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_STYLES;
-            //tblStylePreReq.Text = DashboardSharedStrings.GADGET_STYLE_PREREQ;
-            //lblShape.Content = DashboardSharedStrings.GADGET_SELECT_SHAPE;
+            lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_TAB_COLORS_RANGES;
+
+            tblcolor.Content = DashboardSharedStrings.GADGET_SELECT_COLOR;
+            lblDotValue.Content = DashboardSharedStrings.GADGET_MAP_DOT_VALUE;
 
             //Filters Panel
-            //tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
-            //tblockSetDataFilter.Content = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
-            //tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockSetDataFilter.Content = DashboardSharedStrings.GADGET_TABDESC_FILTERS_MAPS;
+            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_MAP_SELECT_DATASOURCE;
 
             //Info Panel
             //lblCanvasInfo.Content = DashboardSharedStrings.GADGET_CANVAS_INFO;
@@ -471,7 +466,7 @@ namespace EpiDashboard.Controls
                 rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dataFilters, true);
                 rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; rowFilterControl.FillSelectionComboboxes();
                 panelFilters.Children.Add(rowFilterControl);
-                txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
+                //txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
             }
         }
              

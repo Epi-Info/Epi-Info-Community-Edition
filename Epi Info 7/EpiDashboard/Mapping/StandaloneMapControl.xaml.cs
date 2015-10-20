@@ -1516,7 +1516,7 @@ namespace EpiDashboard.Mapping
               choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.datafilters, true);
               choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
               choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
-              choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only."; 
+              //choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only."; 
 
             if (string.IsNullOrEmpty(choroplethlayerprop.shapeFilePath) == false)
             {
@@ -1619,7 +1619,7 @@ namespace EpiDashboard.Mapping
             choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.datafilters, true);
             choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
             choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
-            choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
+            //choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
 
             if (string.IsNullOrEmpty(choroplethServerlayerprop.shapeFilePath) == false)
             {
@@ -1746,7 +1746,7 @@ namespace EpiDashboard.Mapping
             choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.datafilters, true);
             choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
             choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
-            choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
+            //choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
 
             choroplethproperties.chorokmllayerprop = choroplethKMLlayerprop;
             choroplethproperties.choroKMLprovider = choroplethproperties.chorokmllayerprop.provider;
@@ -1965,7 +1965,7 @@ namespace EpiDashboard.Mapping
             dotdensityproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; dotdensityproperties.rowFilterControl.FillSelectionComboboxes();
             dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
 
-            dotdensityproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
+            //dotdensityproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
             if  (string.IsNullOrEmpty(densitylayerprop.shapeFilePath) == false)
             {
                 dotdensityproperties.radShapeFile.IsChecked = true;
@@ -2041,7 +2041,7 @@ namespace EpiDashboard.Mapping
             dotdensityproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; dotdensityproperties.rowFilterControl.FillSelectionComboboxes();
             dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
 
-            dotdensityproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
+            //dotdensityproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
 
             dotdensityproperties.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
             dotdensityproperties.Mapprovider = dotdensityproperties.serverlayerprop.provider;
@@ -2163,7 +2163,7 @@ namespace EpiDashboard.Mapping
             dotdensityproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; dotdensityproperties.rowFilterControl.FillSelectionComboboxes();
             dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
 
-            dotdensityproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
+            //dotdensityproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
 
             dotdensityproperties.kmllayerprop = densitylayerprop;  
             dotdensityproperties.KMLprovider = dotdensityproperties.kmllayerprop.provider;
