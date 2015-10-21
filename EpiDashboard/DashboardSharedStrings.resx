@@ -607,7 +607,7 @@ Denominator = {0}</value>
   <data name="GADGET_ABERRATION_DATE" xml:space="preserve">
     <value>Date</value>
   </data>
-  <data name="GADGET_ABERRATION_COUNT" xml:space="preserve">
+  <data name="COUNT" xml:space="preserve">
     <value>Count</value>
   </data>
   <data name="GADGET_ABERRATION_DIFF" xml:space="preserve">

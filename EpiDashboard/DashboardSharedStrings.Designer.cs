@@ -664,6 +664,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Count.
+        /// </summary>
+        public static string COUNT {
+            get {
+                return ResourceManager.GetString("COUNT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A field with this name already exists..
         /// </summary>
         public static string CREATE_VAR_GROUP_FIELD_ALREADY_EXISTS {
@@ -1172,15 +1181,6 @@ namespace EpiDashboard {
         public static string GADGET_ABERRATION_ACTUAL {
             get {
                 return ResourceManager.GetString("GADGET_ABERRATION_ACTUAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Count.
-        /// </summary>
-        public static string GADGET_ABERRATION_COUNT {
-            get {
-                return ResourceManager.GetString("GADGET_ABERRATION_COUNT", resourceCulture);
             }
         }
         
