@@ -115,7 +115,7 @@ namespace Epi.Windows.MakeView.Dialogs
               
             try
             {
-            EWEManagerService.EWEManagerServiceV2Client client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+            EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
 
                var Result = client.GetSurveyInfo(Request);
                 EWEManagerService.FormSettingRequest  FormSettingRequest = new EWEManagerService.FormSettingRequest ();
@@ -491,7 +491,7 @@ namespace Epi.Windows.MakeView.Dialogs
               }
             try
             {
-            EWEManagerService.EWEManagerServiceV2Client client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+            EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
           //  Epi.Web.Enter.Common.Message.PublishResponse Result = client.RePublishSurvey(Request);
                 //Epi.Web.Enter.Common.Message.PublishResponse Result = client.RePublishSurvey(Request);
                var Result = client.RePublishSurvey(Request);
@@ -1053,7 +1053,7 @@ namespace Epi.Windows.MakeView.Dialogs
                 }
             else
                 {
-                EWEManagerService.EWEManagerServiceV2Client client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+                EWEManagerService.EWEManagerServiceClient client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
 
                 //this.txtDepartment.Visible = false;
                 //this.lblDepartment.Visible = false;

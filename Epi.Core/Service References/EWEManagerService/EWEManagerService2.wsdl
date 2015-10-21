@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EWEManagerService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:54611/EWEManagerService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:54611/EWEManagerService.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
+      <xsd:import schemaLocation="http://localhost:54611/EWEManagerService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:54611/EWEManagerService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:54611/EWEManagerService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" />
+      <xsd:import schemaLocation="http://localhost:54611/EWEManagerService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.Constants" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IEWEManagerService_PublishSurvey_InputMessage">
+    <wsdl:part name="parameters" element="tns:PublishSurvey" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_PublishSurvey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PublishSurveyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_PublishSurvey_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://www.yourcompany.com/types/" name="detail" element="q1:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetSurveyInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetSurveyInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetSurveyInfo_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://www.yourcompany.com/types/" name="detail" element="q2:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetOrganization_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganization" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetOrganization_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetOrganization_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://www.yourcompany.com/types/" name="detail" element="q3:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetOrganizationInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetOrganizationInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetOrganizationInfo_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://www.yourcompany.com/types/" name="detail" element="q4:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetOrganizationNames_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationNames" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetOrganizationNames_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetOrganizationNames_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://www.yourcompany.com/types/" name="detail" element="q5:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetOrganizationByKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationByKey" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetOrganizationByKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationByKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetOrganizationByKey_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://www.yourcompany.com/types/" name="detail" element="q6:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyInfo_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://www.yourcompany.com/types/" name="detail" element="q7:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetSurveyAnswer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyAnswer" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetSurveyAnswer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyAnswerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetSurveyAnswer_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://www.yourcompany.com/types/" name="detail" element="q8:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetOrganization_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetOrganization" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetOrganization_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetOrganizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetOrganization_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://www.yourcompany.com/types/" name="detail" element="q9:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_UpdateOrganizationInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrganizationInfo" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_UpdateOrganizationInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrganizationInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_UpdateOrganizationInfo_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://www.yourcompany.com/types/" name="detail" element="q10:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_IsValidOrgKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidOrgKey" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_IsValidOrgKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidOrgKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_IsValidOrgKey_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://www.yourcompany.com/types/" name="detail" element="q11:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_RePublishSurvey_InputMessage">
+    <wsdl:part name="parameters" element="tns:RePublishSurvey" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_RePublishSurvey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RePublishSurveyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_RePublishSurvey_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://www.yourcompany.com/types/" name="detail" element="q12:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_UserLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserLogin" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_UserLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_UserLogin_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q13="http://www.yourcompany.com/types/" name="detail" element="q13:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_UpdateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_UpdateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_UpdateUser_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q14="http://www.yourcompany.com/types/" name="detail" element="q14:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetUser_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q15="http://www.yourcompany.com/types/" name="detail" element="q15:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyAnswer_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyAnswer" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyAnswer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyAnswerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyAnswer_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q16="http://www.yourcompany.com/types/" name="detail" element="q16:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_PingManagerService_InputMessage">
+    <wsdl:part name="parameters" element="tns:PingManagerService" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_PingManagerService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingManagerServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_PingManagerService_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q17="http://www.yourcompany.com/types/" name="detail" element="q17:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyAnswerStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyAnswerStatus" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyAnswerStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyAnswerStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_SetSurveyAnswerStatus_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q18="http://www.yourcompany.com/types/" name="detail" element="q18:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_UpdateRecordStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRecordStatus" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_UpdateRecordStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRecordStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_UpdateRecordStatus_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q19="http://www.yourcompany.com/types/" name="detail" element="q19:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetSettings_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSettings" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetSettings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEWEManagerService_GetSettings_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q20="http://www.yourcompany.com/types/" name="detail" element="q20:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:portType name="IEWEManagerService">
+    <wsdl:operation name="PublishSurvey">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/PublishSurvey" message="tns:IEWEManagerService_PublishSurvey_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/PublishSurveyResponse" message="tns:IEWEManagerService_PublishSurvey_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/PublishSurveyCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_PublishSurvey_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/GetSurveyInfo" message="tns:IEWEManagerService_GetSurveyInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/GetSurveyInfoResponse" message="tns:IEWEManagerService_GetSurveyInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/GetSurveyInfoCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_GetSurveyInfo_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganization">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/GetOrganization" message="tns:IEWEManagerService_GetOrganization_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/GetOrganizationResponse" message="tns:IEWEManagerService_GetOrganization_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/GetOrganizationCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_GetOrganization_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/GetOrganizationInfo" message="tns:IEWEManagerService_GetOrganizationInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/GetOrganizationInfoResponse" message="tns:IEWEManagerService_GetOrganizationInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/GetOrganizationInfoCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_GetOrganizationInfo_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationNames">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/GetOrganizationNames" message="tns:IEWEManagerService_GetOrganizationNames_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/GetOrganizationNamesResponse" message="tns:IEWEManagerService_GetOrganizationNames_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/GetOrganizationNamesCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_GetOrganizationNames_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationByKey">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/GetOrganizationByKey" message="tns:IEWEManagerService_GetOrganizationByKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/GetOrganizationByKeyResponse" message="tns:IEWEManagerService_GetOrganizationByKey_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/GetOrganizationByKeyCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_GetOrganizationByKey_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSurveyInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyInfo" message="tns:IEWEManagerService_SetSurveyInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyInfoResponse" message="tns:IEWEManagerService_SetSurveyInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyInfoCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_SetSurveyInfo_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyAnswer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/GetSurveyAnswer" message="tns:IEWEManagerService_GetSurveyAnswer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/GetSurveyAnswerResponse" message="tns:IEWEManagerService_GetSurveyAnswer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/GetSurveyAnswerCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_GetSurveyAnswer_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetOrganization">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/SetOrganization" message="tns:IEWEManagerService_SetOrganization_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/SetOrganizationResponse" message="tns:IEWEManagerService_SetOrganization_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/SetOrganizationCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_SetOrganization_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrganizationInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/UpdateOrganizationInfo" message="tns:IEWEManagerService_UpdateOrganizationInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/UpdateOrganizationInfoResponse" message="tns:IEWEManagerService_UpdateOrganizationInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/UpdateOrganizationInfoCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_UpdateOrganizationInfo_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidOrgKey">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/IsValidOrgKey" message="tns:IEWEManagerService_IsValidOrgKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/IsValidOrgKeyResponse" message="tns:IEWEManagerService_IsValidOrgKey_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/IsValidOrgKeyCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_IsValidOrgKey_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RePublishSurvey">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/RePublishSurvey" message="tns:IEWEManagerService_RePublishSurvey_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/RePublishSurveyResponse" message="tns:IEWEManagerService_RePublishSurvey_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/RePublishSurveyCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_RePublishSurvey_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/UserLogin" message="tns:IEWEManagerService_UserLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/UserLoginResponse" message="tns:IEWEManagerService_UserLogin_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/UserLoginCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_UserLogin_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/UpdateUser" message="tns:IEWEManagerService_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/UpdateUserResponse" message="tns:IEWEManagerService_UpdateUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/UpdateUserCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_UpdateUser_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/GetUser" message="tns:IEWEManagerService_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/GetUserResponse" message="tns:IEWEManagerService_GetUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/GetUserCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_GetUser_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSurveyAnswer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswer" message="tns:IEWEManagerService_SetSurveyAnswer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerResponse" message="tns:IEWEManagerService_SetSurveyAnswer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_SetSurveyAnswer_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PingManagerService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/PingManagerService" message="tns:IEWEManagerService_PingManagerService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/PingManagerServiceResponse" message="tns:IEWEManagerService_PingManagerService_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/PingManagerServiceCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_PingManagerService_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSurveyAnswerStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerStatus" message="tns:IEWEManagerService_SetSurveyAnswerStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerStatusResponse" message="tns:IEWEManagerService_SetSurveyAnswerStatus_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/SetSurveyAnswerStatusCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_SetSurveyAnswerStatus_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecordStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/UpdateRecordStatus" message="tns:IEWEManagerService_UpdateRecordStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/UpdateRecordStatusResponse" message="tns:IEWEManagerService_UpdateRecordStatus_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/UpdateRecordStatusCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_UpdateRecordStatus_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSettings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEWEManagerService/GetSettings" message="tns:IEWEManagerService_GetSettings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEWEManagerService/GetSettingsResponse" message="tns:IEWEManagerService_GetSettings_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEWEManagerService/GetSettingsCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IEWEManagerService_GetSettings_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IEWEManagerService" type="tns:IEWEManagerService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PublishSurvey">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/PublishSurvey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyInfo">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/GetSurveyInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganization">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/GetOrganization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationInfo">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/GetOrganizationInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationNames">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/GetOrganizationNames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationByKey">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/GetOrganizationByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetSurveyInfo">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/SetSurveyInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyAnswer">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/GetSurveyAnswer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetOrganization">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/SetOrganization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrganizationInfo">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/UpdateOrganizationInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidOrgKey">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/IsValidOrgKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RePublishSurvey">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/RePublishSurvey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/UserLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetSurveyAnswer">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/SetSurveyAnswer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PingManagerService">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/PingManagerService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetSurveyAnswerStatus">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/SetSurveyAnswerStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecordStatus">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/UpdateRecordStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSettings">
+      <soap:operation soapAction="http://tempuri.org/IEWEManagerService/GetSettings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EWEManagerService">
+    <wsdl:port name="BasicHttpBinding_IEWEManagerService" binding="tns:BasicHttpBinding_IEWEManagerService">
+      <soap:address location="http://localhost:54611/EWEManagerService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

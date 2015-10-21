@@ -18,17 +18,17 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:22587/EWEManagerServiceV2.SVC" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:54611/Ewemanagerservice.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="EWEManagerServiceV2.xsd" MetadataType="Schema" ID="2fce01f7-58f1-47e8-a3b1-0decabf8dd92" SourceId="1" SourceUrl="http://localhost:22587/EWEManagerServiceV2.svc?xsd=xsd3" />
-    <MetadataFile FileName="EWEManagerServiceV21.xsd" MetadataType="Schema" ID="4ba29266-09a3-46a4-b3ba-6db9ca3d57c7" SourceId="1" SourceUrl="http://localhost:22587/EWEManagerServiceV2.svc?xsd=xsd4" />
-    <MetadataFile FileName="EWEManagerServiceV22.xsd" MetadataType="Schema" ID="d4bc8a36-7eff-470b-a02d-5547df54f35b" SourceId="1" SourceUrl="http://localhost:22587/EWEManagerServiceV2.svc?xsd=xsd1" />
-    <MetadataFile FileName="EWEManagerServiceV2.wsdl" MetadataType="Wsdl" ID="cb476d07-5752-46ca-9ee3-ca39f4d84fc9" SourceId="1" SourceUrl="http://localhost:22587/EWEManagerServiceV2.svc?wsdl" />
-    <MetadataFile FileName="EWEManagerServiceV23.xsd" MetadataType="Schema" ID="1a8e31a0-c80a-4032-a8f7-8e0778e18700" SourceId="1" SourceUrl="http://localhost:22587/EWEManagerServiceV2.svc?xsd=xsd5" />
-    <MetadataFile FileName="EWEManagerServiceV24.xsd" MetadataType="Schema" ID="e4ace855-9b95-4235-82f9-8bd5a5663fa0" SourceId="1" SourceUrl="http://localhost:22587/EWEManagerServiceV2.svc?xsd=xsd2" />
-    <MetadataFile FileName="EWEManagerServiceV2.disco" MetadataType="Disco" ID="36807fea-3fbc-4b6d-a634-7f1ffe6a5879" SourceId="1" SourceUrl="http://localhost:22587/EWEManagerServiceV2.svc?disco" />
-    <MetadataFile FileName="EWEManagerServiceV25.xsd" MetadataType="Schema" ID="da94a7aa-5785-4d5e-ac2b-10fb53dba34a" SourceId="1" SourceUrl="http://localhost:22587/EWEManagerServiceV2.svc?xsd=xsd0" />
+    <MetadataFile FileName="EWEManagerService12.xsd" MetadataType="Schema" ID="97f61f45-89a2-4114-b783-d4f63262a6bd" SourceId="1" SourceUrl="http://localhost:54611/EWEManagerService.svc?xsd=xsd1" />
+    <MetadataFile FileName="EWEManagerService2.disco" MetadataType="Disco" ID="44cb8576-9d1c-4bc4-9fb8-b2b12e8dc636" SourceId="1" SourceUrl="http://localhost:54611/EWEManagerService.svc?disco" />
+    <MetadataFile FileName="EWEManagerService13.xsd" MetadataType="Schema" ID="c00d6085-d7a6-4112-8b81-22b8b1b631f5" SourceId="1" SourceUrl="http://localhost:54611/EWEManagerService.svc?xsd=xsd5" />
+    <MetadataFile FileName="EWEManagerService14.xsd" MetadataType="Schema" ID="4378e41d-4000-4ae8-9b17-3d718499c4b6" SourceId="1" SourceUrl="http://localhost:54611/EWEManagerService.svc?xsd=xsd4" />
+    <MetadataFile FileName="EWEManagerService15.xsd" MetadataType="Schema" ID="7283b4a1-77a8-4b85-b377-0c1dbb88e1c7" SourceId="1" SourceUrl="http://localhost:54611/EWEManagerService.svc?xsd=xsd0" />
+    <MetadataFile FileName="EWEManagerService2.wsdl" MetadataType="Wsdl" ID="d47d81ed-a37b-42cb-b7f8-030e7e60d499" SourceId="1" SourceUrl="http://localhost:54611/EWEManagerService.svc?wsdl" />
+    <MetadataFile FileName="EWEManagerService16.xsd" MetadataType="Schema" ID="2cc48c01-f671-4cd9-99bb-2c7c2a89434c" SourceId="1" SourceUrl="http://localhost:54611/EWEManagerService.svc?xsd=xsd3" />
+    <MetadataFile FileName="EWEManagerService17.xsd" MetadataType="Schema" ID="2a813cc2-f946-4ff8-80c1-e37d6b637baf" SourceId="1" SourceUrl="http://localhost:54611/EWEManagerService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

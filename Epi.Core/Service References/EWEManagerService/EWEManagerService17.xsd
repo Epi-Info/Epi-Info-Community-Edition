@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://www.yourcompany.com/types/" elementFormDefault="qualified" targetNamespace="http://www.yourcompany.com/types/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:22587/EWEManagerServiceV2.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import schemaLocation="http://localhost:22587/EWEManagerServiceV2.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:import schemaLocation="http://localhost:22587/EWEManagerServiceV2.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" />
+  <xs:import schemaLocation="http://localhost:54611/EWEManagerService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:54611/EWEManagerService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:54611/EWEManagerService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" />
   <xs:complexType name="PublishRequest">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:RequestBase">
@@ -235,10 +235,14 @@
       <xs:element minOccurs="0" name="DateCompleted" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DateUpdated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FormOwnerId" type="xs:int" />
       <xs:element minOccurs="0" name="IsDraftMode" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsLocked" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastActiveUserId" type="xs:int" />
+      <xs:element minOccurs="0" name="LoggedInUserId" type="xs:int" />
       <xs:element minOccurs="0" name="ParentRecordId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RecordSourceId" type="xs:int" />
+      <xs:element minOccurs="0" name="RecoverLastRecordVersion" type="xs:boolean" />
       <xs:element minOccurs="0" name="RelateParentId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ResponseHierarchyIds" nillable="true" type="tns:ArrayOfSurveyAnswerDTO" />
       <xs:element minOccurs="0" name="ResponseId" nillable="true" type="xs:string" />
@@ -273,6 +277,7 @@
       <xs:element minOccurs="0" name="FormId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FormName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FormNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HasDraftModeData" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsDraftMode" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsOwner" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsSQLProject" type="xs:boolean" />
@@ -281,6 +286,7 @@
       <xs:element minOccurs="0" name="OrganizationId" type="xs:int" />
       <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OwnerFName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OwnerId" type="xs:int" />
       <xs:element minOccurs="0" name="OwnerLName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserId" type="xs:int" />
     </xs:sequence>
@@ -341,6 +347,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:RequestBase">
         <xs:sequence>
+          <xs:element minOccurs="0" name="CurrentOrgId" type="xs:int" />
           <xs:element minOccurs="0" name="FormInfo" nillable="true" type="tns:FormInfoDTO" />
           <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" minOccurs="0" name="FormSetting" nillable="true" type="q14:ArrayOfFormSettingDTO" />
           <xs:element minOccurs="0" name="GetXml" type="xs:boolean" />
