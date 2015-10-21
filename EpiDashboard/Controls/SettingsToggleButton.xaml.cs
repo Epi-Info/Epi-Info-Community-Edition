@@ -29,11 +29,20 @@ namespace EpiDashboard.Controls
         {
             get
             {
+               
                 return this.tblockTitle.Text;
+                
             }
             set
             {
                 this.tblockTitle.Text = value;
+                
+
+                //if (this.tblockTitle.Text.Length > 25) { 
+                //  this.tblockTitle.ToolTip = "Panel Title: " + value;
+                //}
+                
+                //MessageBox.Show(this.tblockTitle.Text.Length.ToString());
             }
         }
 
@@ -48,5 +57,7 @@ namespace EpiDashboard.Controls
                 this.tblockDescription.Text = value;
             }
         }
+
+        
     }
 }

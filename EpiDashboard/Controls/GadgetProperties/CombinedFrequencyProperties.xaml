@@ -14,35 +14,44 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </PropertyPanels:GadgetPropertiesPanelBase.Resources>
+
+
     <Grid>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition MaxWidth="400" MinWidth="300" Width=".33*" />
             <ColumnDefinition Width="30" />
-            <ColumnDefinition Width=".66*" />
+            <ColumnDefinition MinWidth="275" Width=".66*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10" xml:space="preserve">Combined&#10;Frequency__xfe</Label>
-
-            <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables__xfe" Description="Select items to include in the frequency.__xfe" IsChecked="True" Checked="tbtnVariables_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Grouping and Sorting__xfe" Description="Set a sort order for the output.__xfe" IsChecked="False" Checked="tbtnSorting_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display__xfe" Description="Change display options.__xfe" IsChecked="False" Checked="tbtnDisplay_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters__xfe" Description="Set data filters for this gadget.__xfe" IsChecked="False" Checked="tbtnFilters_Checked"/>
-
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  Background="{StaticResource PrimaryAccentColorLight}" >
+            <Border BorderBrush="#015796" BorderThickness="0 0 0 1">
+               <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
+                <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10" xml:space="preserve">Combined Frequency__xfe</Label>
+               </Viewbox>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
+              <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables__xfe" Description="Select items to include in the frequency.__xfe" IsChecked="True" Checked="tbtnVariables_Checked" />
+              <Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Grouping and Sorting__xfe" Description="Set a sort order for the output.__xfe" IsChecked="False" Checked="tbtnSorting_Checked"/>
+              <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display__xfe" Description="Change display options.__xfe" IsChecked="False" Checked="tbtnDisplay_Checked"/>
+              <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters__xfe" Description="Set data filters for this gadget.__xfe" IsChecked="False" Checked="tbtnFilters_Checked"/>
         </StackPanel>
 
-        <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
+                
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables__xfe</Label>
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom">
                 <Label x:Name="tblockVariablesToDisplay">Variables to display:__xfe</Label>
-                <ListView Name="lvGroupVariables" SelectionMode="Single"><!--Adding SelectionMode EI-392-->
+                <ListView Name="lvGroupVariables" HorizontalAlignment="Left" SelectionMode="Single" Width="Auto" MaxWidth="350"><!--Adding SelectionMode EI-392-->
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}" />
@@ -50,21 +59,39 @@
                         </GridView>
                     </ListView.View>
                     <ListView.GroupStyle>
+                        
                         <GroupStyle>
-                            <GroupStyle.HeaderTemplate>
-                                <DataTemplate>
-                                    <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
-                                </DataTemplate>
-                            </GroupStyle.HeaderTemplate>
+                            <GroupStyle.ContainerStyle>
+                                <Style TargetType="{x:Type GroupItem}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Expander IsExpanded="True">
+                                                    <Expander.Header>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                                                            <TextBlock Text="{Binding ItemCount}" FontSize="11" Foreground="Silver" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                            <TextBlock Text=" item(s)" FontSize="11" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                        </StackPanel>
+                                                    </Expander.Header>
+                                                    <ItemsPresenter />
+                                                </Expander>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </GroupStyle.ContainerStyle>
                         </GroupStyle>
                     </ListView.GroupStyle>
                 </ListView>
             </StackPanel>
         </DockPanel>
 
-        <DockPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+        <DockPanel x:Name="panelSorting" Grid.Column="2" Grid.Row="1"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelSorting" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Grouping and Sorting__xfe</Label>
+                
+                    <Label x:Name="tblockPanelSorting" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Grouping and Sorting__xfe</Label>
+               
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom">
                 <Label x:Name="tblockGroupingSubheader"  Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping__xfe</Label>
@@ -87,7 +114,7 @@
             </StackPanel>
         </DockPanel>
 
-        <DockPanel x:Name="panelDisplay" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+        <DockPanel x:Name="panelDisplay" Grid.Column="2" Grid.Row="1"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
             </StackPanel>
@@ -109,14 +136,14 @@
             </StackPanel>
         </DockPanel>
 
-        <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+        <StackPanel x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
             <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
         </StackPanel>
         
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
-        <DockPanel Grid.ColumnSpan="3" Grid.Row="1">
+        <DockPanel Grid.ColumnSpan="3" Grid.Row="2">
             <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
             <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
         </DockPanel>

@@ -182,13 +182,14 @@ namespace EpiDashboard
 
                properties = new Controls.GadgetProperties.LineListProperties(this.DashboardHelper, this, (LineListParameters)Parameters, StrataGridList, columnOrder);
 
-            if (ResizedWidth != 0 & ResizedHeight != 0){
+               if (DashboardHelper.ResizedWidth != 0 & DashboardHelper.ResizedHeight != 0)
+               {
                 double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;//Developer Desktop Width Where the Form is Designed
                 double i_StandardWidth = System.Windows.SystemParameters.PrimaryScreenWidth; ////Developer Desktop Height Where the Form is Designed
                 float f_HeightRatio = new float();
                 float f_WidthRatio = new float();
-                f_HeightRatio = (float)((float)ResizedHeight / (float)i_StandardHeight);
-                f_WidthRatio = (float)((float)ResizedWidth / (float)i_StandardWidth);
+                f_HeightRatio = (float)((float)DashboardHelper.ResizedHeight / (float)i_StandardHeight);
+                f_WidthRatio = (float)((float)DashboardHelper.ResizedWidth / (float)i_StandardWidth);
 
                 properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
                 properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
@@ -213,8 +214,7 @@ namespace EpiDashboard
             float f_WidthRatio = new float();
             f_HeightRatio = (float)((float)height / (float)i_StandardHeight);
             f_WidthRatio = (float)((float)width / (float)i_StandardWidth);
-            ResizedWidth = width;
-            ResizedHeight = height;
+           
 
             properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
             properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;

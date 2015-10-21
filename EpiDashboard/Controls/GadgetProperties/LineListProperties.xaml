@@ -14,8 +14,9 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </PropertyPanels:GadgetPropertiesPanelBase.Resources>
-   
+
     <Grid>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition MaxWidth="400" MinWidth="300" Width=".33*" />
             <ColumnDefinition Width="30" />
@@ -23,27 +24,31 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
             <RowDefinition Height="70" />
         </Grid.RowDefinitions>
 
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  Background="{StaticResource PrimaryAccentColorLight}" >
+            <Border BorderBrush="#015796" BorderThickness="0 0 0 1">
+                <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
+                    <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Line List__xfe</Label>
+                </Viewbox>
+            </Border>
+        </StackPanel>
 
-        <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            
-            <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Line List__xfe</Label>
-
+        <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
             <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables__xfe" Description="Select columns to display in the list.__xfe" IsChecked="True" Checked="tbtnVariables_Checked"/>
             <Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Grouping and Sorting__xfe" Description="Set a sort order and create list groups.__xfe" IsChecked="False" Checked="tbtnSorting_Checked"/>
             <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display__xfe" Description="Change display options.__xfe" IsChecked="False" Checked="tbtnDisplay_Checked"/>
             <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters__xfe" Description="Set data filters for this gadget.__xfe" IsChecked="False" Checked="tbtnFilters_Checked"/>
-
         </StackPanel>
 
-        <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="0, 0, 10, 0">
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables__xfe</Label>
             </StackPanel>
-            
+
             <StackPanel DockPanel.Dock="Bottom">
                 <Label x:Name="tblockVariableToDisplay">Variables to display:__xfe</Label>
 
@@ -76,68 +81,69 @@
                                     </Setter>
                                 </Style>
                             </GroupStyle.ContainerStyle>
-                            
+
                         </GroupStyle>
                     </ListView.GroupStyle>
                 </ListView>
             </StackPanel>
         </DockPanel>
 
-        <DockPanel x:Name="panelSorting" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+        <DockPanel x:Name="panelSorting" Grid.Column="2" Grid.Row="1"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top" >
+
                 <Label x:Name="tblockPanelSorting" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">
                     Groupig and Sorting__xfe</Label>
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
-            <StackPanel >
-                <Label x:Name="tblockGroupingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping__xfe</Label>
-                <StackPanel Orientation="Vertical">
-                    <WrapPanel Height="Auto" Orientation="Vertical" HorizontalAlignment="Left">
-                        <StackPanel >
-                            <Label x:Name="tblockGroupby">Group By:__xfe</Label>
-                            <ComboBox x:Name="cmbGroupField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left"/>
-                        </StackPanel>
-                        <StackPanel>
-                            <Label x:Name="tblockSubGroupBy">Sub-group By:__xfe</Label>
-                            <ComboBox x:Name="cmbSecondaryGroupField" HorizontalAlignment="Left" Style="{DynamicResource PropertiesComboxStyleLarge}"/>
-                        </StackPanel>
-                     </WrapPanel>    
-                </StackPanel>
-                <Label x:Name="tblockSortingSubheader"  Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Sorting__xfe</Label>
+                <StackPanel >
+                    <Label x:Name="tblockGroupingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping__xfe</Label>
+                    <StackPanel Orientation="Vertical">
+                        <WrapPanel Height="Auto" Orientation="Vertical" HorizontalAlignment="Left">
+                            <StackPanel >
+                                <Label x:Name="tblockGroupby">Group By:__xfe</Label>
+                                <ComboBox x:Name="cmbGroupField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label x:Name="tblockSubGroupBy">Sub-group By:__xfe</Label>
+                                <ComboBox x:Name="cmbSecondaryGroupField" HorizontalAlignment="Left" Style="{DynamicResource PropertiesComboxStyleLarge}"/>
+                            </StackPanel>
+                        </WrapPanel>
+                    </StackPanel>
+                    <Label x:Name="tblockSortingSubheader"  Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Sorting__xfe</Label>
 
-                <Label x:Name="tblockSortMethod" >Sort Method:__xfe</Label>
-            <ComboBox x:Name="cmbSortMethod" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="0" Margin="0, 0, 0, 8">
-                <ComboBoxItem>Ascending</ComboBoxItem>
-                <ComboBoxItem>Descending</ComboBoxItem>
-            </ComboBox>
-            
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".5*" />
-                    <ColumnDefinition Width="10" />
-                    <ColumnDefinition Width=".5*" />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                        <Label x:Name="tblockAvailableVariables">Available Variables:__xfe</Label>
-                    <ListBox Style="{StaticResource PropertiesListBox}" x:Name="lbxAvailableVariables" Height="175" MouseDoubleClick="lbxAvailableVariables_MouseDoubleClick" />
-                </StackPanel>
+                    <Label x:Name="tblockSortMethod" >Sort Method:__xfe</Label>
+                    <ComboBox x:Name="cmbSortMethod" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="0" Margin="0, 0, 0, 8">
+                        <ComboBoxItem>Ascending</ComboBoxItem>
+                        <ComboBoxItem>Descending</ComboBoxItem>
+                    </ComboBox>
 
-                <StackPanel Grid.Column="2">
-                        <Label x:Name="tblockSortOrder">Sort Order:__xfe</Label>
-                    <ListBox Style="{StaticResource PropertiesListBox}" x:Name="lbxSortOrder" Height="175" MouseDoubleClick="lbxSortOrder_MouseDoubleClick" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width=".5*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <Label x:Name="tblockAvailableVariables">Available Variables:__xfe</Label>
+                            <ListBox Style="{StaticResource PropertiesListBox}" x:Name="lbxAvailableVariables" Height="175" MouseDoubleClick="lbxAvailableVariables_MouseDoubleClick" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <Label x:Name="tblockSortOrder">Sort Order:__xfe</Label>
+                            <ListBox Style="{StaticResource PropertiesListBox}" x:Name="lbxSortOrder" Height="175" MouseDoubleClick="lbxSortOrder_MouseDoubleClick" />
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
-            </Grid>
-        </StackPanel>
             </ScrollViewer>
         </DockPanel>
 
-        <DockPanel  x:Name="panelDisplay" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+        <DockPanel  x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
 
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
             </StackPanel>
             <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
-            <StackPanel>
+                <StackPanel>
                     <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Title and Description__xfe</Label>
                     <StackPanel Orientation="Vertical">
                         <StackPanel>
@@ -153,26 +159,25 @@
                     <StackPanel>
                         <Label x:Name="tblockDimensions" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Dimensions__xfe</Label>
                         <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                                <StackPanel Orientation="Horizontal">
-                                    <Label x:Name="tblockMaxWidth" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max width:__xfe" Margin="0,0,0,0"  />
-                                    <TextBox x:Name="txtMaxWidth" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="800" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown" TextChanged="txtWidth_TextChanged"></TextBox>
-                                </StackPanel>
-                              
-                                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                                    <Label x:Name="tblockMaxHeight" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max height:__xfe" Margin="0,0,0,0"  />
-                                    <TextBox x:Name="txtMaxHeight" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" Text="500" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"  TextChanged="txtHeight_TextChanged"></TextBox>
-                                </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                                <Label x:Name="tblockMaxWidth" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max width:__xfe" Margin="0,0,0,0"  />
+                                <TextBox x:Name="txtMaxWidth" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="800" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown" TextChanged="txtWidth_TextChanged"></TextBox>
                             </StackPanel>
-                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                                <StackPanel Orientation="Horizontal">
+
+                            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                                <Label x:Name="tblockMaxHeight" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max height:__xfe" Margin="0,0,0,0"  />
+                                <TextBox x:Name="txtMaxHeight" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" Text="500" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"  TextChanged="txtHeight_TextChanged"></TextBox>
+                            </StackPanel>
+
+
+                            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
                                 <Label x:Name="tblockMaxVarNameLength" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max var name length:" Margin="0,0,0,0" Visibility="Visible" />
-                                    <TextBox x:Name="txtMaxVarNameLength" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" Text="24"  PreviewTextInput="txtMaxVarNameLength_PreviewTextInput" Visibility="Visible"></TextBox>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                                    <Label x:Name="tblockMaxRows" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max rows to display:" Margin="0,0,0,0" />
-                                    <TextBox x:Name="txtMaxRows" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" Text="50" TextChanged="txtMaxRows_TextChanged" PreviewTextInput="txtMaxVarNameLength_PreviewTextInput"></TextBox>
-                                </StackPanel>
+                                <TextBox x:Name="txtMaxVarNameLength" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" Text="24"  PreviewTextInput="txtMaxVarNameLength_PreviewTextInput" Visibility="Visible"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                                <Label x:Name="tblockMaxRows" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max rows to display:" Margin="0,0,0,0" />
+                                <TextBox x:Name="txtMaxRows" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" Text="50" TextChanged="txtMaxRows_TextChanged" PreviewTextInput="txtMaxVarNameLength_PreviewTextInput"></TextBox>
                             </StackPanel>
                         </WrapPanel>
                     </StackPanel>
@@ -193,19 +198,21 @@
                     </WrapPanel>
                 </StackPanel>
             </ScrollViewer>
-            
-            
+
+
         </DockPanel>
-        <StackPanel x:Name="panelFilters" Grid.Column="2"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+
+        <StackPanel x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label x:Name="tblockPanelDataFilter"  Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
             <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
         </StackPanel>
-        
+
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
-        <DockPanel x:Name="okCancelBtn" Grid.ColumnSpan="3" Grid.Row="1">
+        <DockPanel x:Name="okCancelBtn" Grid.ColumnSpan="3" Grid.Row="2">
             <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
             <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
         </DockPanel>
+
     </Grid>
 </PropertyPanels:GadgetPropertiesPanelBase>
