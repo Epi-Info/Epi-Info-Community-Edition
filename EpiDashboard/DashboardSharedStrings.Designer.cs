@@ -978,6 +978,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File name.
+        /// </summary>
+        public static string EXPORT_DEST_FILENAME {
+            get {
+                return ResourceManager.GetString("EXPORT_DEST_FILENAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Destination table.
         /// </summary>
         public static string EXPORT_DEST_TABLE {

@@ -133,11 +133,11 @@ namespace EpiDashboard
             {
                 if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii"))
                 {
-                    tblockDestinationTable.Text = "File name";
+                    tblockDestinationTable.Text = DashboardSharedStrings.EXPORT_DEST_FILENAME;
                 }
                 else
                 {
-                    tblockDestinationTable.Text = "Destination table";
+                    tblockDestinationTable.Text = DashboardSharedStrings.EXPORT_DEST_TABLE;
                 }
             }
 

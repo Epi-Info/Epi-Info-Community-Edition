@@ -38,7 +38,7 @@
                 </Grid.ColumnDefinitions>                
                 
                 <TextBox x:Name="txtConnectionInformation" Grid.Row="0" Grid.Column="0" IsEnabled="False" HorizontalAlignment="Stretch" TextChanged="txtConnectionInformation_TextChanged" />                
-                <Button x:Name="btnConnectionBrowse" Content="Browse..." Grid.Row="0" Grid.Column="2" Click="btnConnectionBrowse_Click" />
+                <Button x:Name="btnConnectionBrowse" Content="Browse" Grid.Row="0" Grid.Column="2" Click="btnConnectionBrowse_Click" />
             </Grid>
 
             <TextBlock x:Name="tblockDestinationTable"  Text="Destination table" ></TextBlock>
