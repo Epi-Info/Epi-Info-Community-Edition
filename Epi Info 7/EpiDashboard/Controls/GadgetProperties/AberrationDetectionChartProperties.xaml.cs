@@ -148,8 +148,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockIndicator.Content = DashboardSharedStrings.GADGET_INDICATOR_VARIABLES_OPT;
             tblockPanelLabels.Content = DashboardSharedStrings.GADGET_PANELSHEADER_LABELS;
 
-
-
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
             #endregion // Translation
 

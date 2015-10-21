@@ -587,7 +587,7 @@ namespace EpiDashboard
                 grid.Children.Add(txtValHeader); //grdFreq.Children.Add(txtValHeader);
 
                 TextBlock txtFreqHeader = new TextBlock();
-                txtFreqHeader.Text = DashboardSharedStrings.GADGET_ABERRATION_COUNT;
+                txtFreqHeader.Text = DashboardSharedStrings.COUNT;
                 txtFreqHeader.Style = this.Resources["columnHeadingText"] as Style;
                 Grid.SetRow(txtFreqHeader, 0);
                 Grid.SetColumn(txtFreqHeader, 1);
