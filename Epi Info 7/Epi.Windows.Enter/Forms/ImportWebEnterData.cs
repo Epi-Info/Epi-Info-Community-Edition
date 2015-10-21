@@ -45,7 +45,7 @@ namespace Epi.Enter.Forms
         private string OrganizationKey = string.Empty;
         private string PublishKey = string.Empty;
         
-        private EWEManagerService.EWEManagerServiceV2Client client;
+        private EWEManagerService.EWEManagerServiceClient client;
         private Dictionary<string, Dictionary<string, WebFieldData>> _webFieldDataList;
         private bool IsDraftMode;
         private int SurveyStatus;
@@ -151,7 +151,7 @@ namespace Epi.Enter.Forms
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.EWEServiceEndpointAddress);
 
-                    client = new EWEManagerService.EWEManagerServiceV2Client(binding, endpoint);
+                    client = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
 
                     client.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     client.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
@@ -197,7 +197,7 @@ namespace Epi.Enter.Forms
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.EWEServiceEndpointAddress);
 
-                        client = new EWEManagerService.EWEManagerServiceV2Client(binding, endpoint);
+                        client = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
 
                         }
                     else
@@ -231,7 +231,7 @@ namespace Epi.Enter.Forms
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(config.Settings.EWEServiceEndpointAddress);
 
-                        client = new EWEManagerService.EWEManagerServiceV2Client(binding, endpoint);
+                        client = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
                         }
 
                     }
@@ -970,7 +970,7 @@ namespace Epi.Enter.Forms
                 DTO.Status = 4;
                 DTOList.Add(DTO);
                 }
-            Request.SurveyAnswerList = DTOList.ToArray();
+            Request.SurveyAnswerList = DTOList;
 
             client.UpdateRecordStatus(Request);
             }
@@ -1147,11 +1147,11 @@ namespace Epi.Enter.Forms
 
                 if (chkIncremental.Checked)
                 {
-                    SurveyStatus = 4;
+                    SurveyStatus = 3;
                 }
                 else
                 {
-                    SurveyStatus = 3;
+                    SurveyStatus = 4;
                 }
 
                 this.SurveyId = textProject.Text;
@@ -1221,9 +1221,11 @@ namespace Epi.Enter.Forms
                     Criteria.OrganizationKey = new Guid(OrganizationKey);
                     Criteria.ReturnSizeInfoOnly = true;
                     Criteria.SurveyAnswerIdList = new  string[0];
+                    Criteria.StatusId = this.SurveyStatus;
                     Request.Criteria = Criteria; 
 
                     EWEManagerService.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
+                     
                     Pages = Result.NumberOfPages;
                     PageSize = Result.PageSize;
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:22587/EWEManagerServiceV2.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.Constants" />
-  <xs:import schemaLocation="http://localhost:22587/EWEManagerServiceV2.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:import schemaLocation="http://localhost:22587/EWEManagerServiceV2.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:54611/EWEManagerService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.Constants" />
+  <xs:import schemaLocation="http://localhost:54611/EWEManagerService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:54611/EWEManagerService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="OrganizationDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="IsEnabled" type="xs:boolean" />
@@ -55,6 +55,7 @@
       <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ColumnNameList" nillable="true" type="q4:ArrayOfKeyValueOfintstring" />
       <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DataAccessRuleDescription" nillable="true" type="q5:ArrayOfKeyValueOfstringstring" />
       <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DataAccessRuleIds" nillable="true" type="q6:ArrayOfKeyValueOfintstring" />
+      <xs:element minOccurs="0" name="DeleteDraftData" type="xs:boolean" />
       <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FormControlNameList" nillable="true" type="q7:ArrayOfKeyValueOfintstring" />
       <xs:element minOccurs="0" name="FormId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsDisabled" type="xs:boolean" />
