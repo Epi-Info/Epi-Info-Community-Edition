@@ -80,7 +80,6 @@
                     <Button x:Name="btnBrowse" Height="Auto" Grid.Column="2" Click="btnBrowse_Click">Browse</Button>
                 </Grid>
 
-
             </StackPanel>
 
             <StackPanel x:Name="panelDataSourceOther" Visibility="Collapsed">
@@ -104,6 +103,7 @@
                             <ColumnDefinition Width="12" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
+                        
                         <TextBox x:Name="txtShapePath" IsReadOnly="False" TextChanged="txtProjectPath_TextChanged"   ></TextBox>
                         <Button x:Name="btnBrowseShape"  Grid.Column="2" Click="btnBrowseShapeFile_Click" Height="Auto" >Browse</Button>
                     </Grid>
@@ -111,7 +111,7 @@
                 <Label></Label>
                 <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
                 <Label></Label>
-                <StackPanel x:Name="panelmap" IsEnabled="False" >
+                <StackPanel x:Name="panelmap" IsEnabled="False" Margin="20 10 0 0 "   >
                     <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known map server" Checked="radconnectmapserver_Checked" />
                     <StackPanel x:Name="panelmapconnect" IsEnabled="False">
                         <Label></Label>
@@ -159,7 +159,6 @@
                     </Grid>
                     <Label></Label>
                     <Label x:Name="lblExampleKMLFile" Style="{StaticResource PropertiesExampleText}">Example: http://code.google.com/apis/kml/documentation/us_states.kml</Label>
-
                 </StackPanel>
             </StackPanel>
         </StackPanel>

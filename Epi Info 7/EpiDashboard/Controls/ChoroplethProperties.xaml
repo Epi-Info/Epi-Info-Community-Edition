@@ -65,105 +65,105 @@
             </ToggleButton>-->
         </StackPanel>
 
-        <DockPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
+        <StackPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible" VerticalAlignment="Stretch">
+            <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
+
+            <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
+                <Label x:Name="tblockDataSource">Data Source:</Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtProjectPath" IsReadOnly="True"></TextBox>
+                    <Button  x:Name="btnBrowse" Height="Auto" Grid.Column="2" Click="btnBrowse_Click">Browse</Button>
+                </Grid>
+            </StackPanel>
+            <StackPanel x:Name="panelDataSourceOther" Visibility="Collapsed">
+                <Label x:Name="tblockConnectionString">Connection String:</Label>
+                <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtDataSource" Margin="0,0,0,8" />
             </StackPanel>
 
-            <ScrollViewer DockPanel.Dock="Bottom" Width="Auto" Height="Auto" x:Name="scrollViewerProperties">
-                <StackPanel>
+            <StackPanel x:Name="panelDataSourceAdvanced" Visibility="Collapsed">
+                <Label x:Name="tblockSQLQuery">SQL Query:</Label>
+                <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtSQLQuery"></TextBox>
+            </StackPanel>
+            <Label></Label>
+            <StackPanel x:Name="panelBoundaries" IsEnabled="False">
+                <Label x:Name="lblBoundaries"  Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
+                <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="Shapefile" Checked="radShapeFile_Checked"  />
+                <Label></Label>
+                <StackPanel x:Name="panelshape" IsEnabled="False">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel x:Name="panelDataSourceProject" Visibility="Visible" Margin="0, 0, 10, 0" >
-                        <Label x:Name="tblockDataSource">Data Source:</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="12" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <TextBox Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtProjectPath" IsReadOnly="True"></TextBox>
-                                <Button  x:Name="btnBrowse" Margin="10 0 0 0" Grid.Column="2"  HorizontalAlignment="Left"  Height="Auto" Click="btnBrowse_Click">Browse</Button>
-                            </Grid>
-                        </StackPanel>
-
+                        <TextBox x:Name="txtShapePath" IsReadOnly="False" TextChanged="txtProjectPath_TextChanged"></TextBox>
+                        <Button x:Name="btnBrowseShape" Grid.Column="2" HorizontalAlignment="Left" Click="btnBrowseShapeFile_Click" Height="Auto" >Browse</Button>
+                    </Grid>
+                </StackPanel>
+                <Label></Label>
+                <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
+                <Label></Label>
+                <StackPanel x:Name="panelmap" IsEnabled="False" Margin="20 10 0 0 ">
+                    <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known map server" Checked="radconnectmapserver_Checked" />
+                    <StackPanel x:Name="panelmapconnect" IsEnabled="False">
+                        <Label></Label>
+                        <ComboBox x:Name="cbxmapserver" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" Width="380">
+                            <ComboBoxItem>NationalMap.gov - New York County Boundaries</ComboBoxItem>
+                            <ComboBoxItem>NationalMap.gov - Rhode Island Zip Code Boundaries</ComboBoxItem>
+                            <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
+                            <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
+                        </ComboBox>
                     </StackPanel>
-
-                    <StackPanel x:Name="panelDataSourceOther" Visibility="Collapsed">
-                        <Label x:Name="tblockConnectionString">Connection String:</Label>
-                        <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtDataSource" Margin="0,0,0,8" />
+                    <Label></Label>
+                    <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver"  Content="Provide location of another map server" Checked="radlocatemapserver_Checked" />
+                    <Label></Label>
+                    <StackPanel x:Name="panelmapserver" IsEnabled="False" >
+                        <Label x:Name="lblURL">URL:</Label>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="txtMapSeverpath" TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
+                            <Button x:Name="btnMapserverlocate" Height="Auto" Grid.Column="2" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
+                        </Grid>
+                        <Label></Label>
+                        <Label x:Name="lblExampleMapServerURL" Style="{StaticResource PropertiesExampleText}">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</Label>
+                        <StackPanel Margin="10 10 0 0">
+                            <Label x:Name="lblSelectFeature">Select Feature:</Label>
+                            <ComboBox x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged" Width="380"></ComboBox>
+                        </StackPanel>
                     </StackPanel>
-
-                    <StackPanel x:Name="panelDataSourceAdvanced" Visibility="Collapsed">
-                        <Label x:Name="tblockSQLQuery">SQL Query:</Label>
-                        <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtSQLQuery"></TextBox>
-                    </StackPanel>
-                    <StackPanel x:Name="panelBoundaries" IsEnabled="False">
-                        <Label x:Name="lblBoundaries" Margin="0 30 0 10 " Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
-
-                        <StackPanel>
-                            <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="Shapefile" Checked="radShapeFile_Checked"  />
-                            <StackPanel Orientation="Horizontal" Margin="20 0 0 0"  x:Name="panelshape" IsEnabled="False">
-                                <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtShapePath" IsReadOnly="False" TextChanged="txtProjectPath_TextChanged"></TextBox>
-                                <Button Margin="10 0 0 0" HorizontalAlignment="Left" x:Name="btnBrowseShape" Click="btnBrowseShapeFile_Click" Height="Auto" >Browse</Button>
-                            </StackPanel>
-                        </StackPanel>
-
-                        <StackPanel Margin="0 30 0 0 ">
-
-                            <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
-
-                            <StackPanel Margin="20 10 0 0 "  x:Name="panelmap" IsEnabled="False" >
-                                <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known map server" Checked="radconnectmapserver_Checked" />
-                                <StackPanel Margin="20 0 0 0" x:Name="panelmapconnect" IsEnabled="False">
-
-                                    <ComboBox Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cbxmapserver" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" Width="380">
-                                        <ComboBoxItem>NationalMap.gov - New York County Boundaries</ComboBoxItem>
-                                        <ComboBoxItem>NationalMap.gov - Rhode Island Zip Code Boundaries</ComboBoxItem>
-                                        <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
-                                        <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
-                                    </ComboBox>
-                                </StackPanel>
-
-                                <StackPanel Margin="0 30 0 0">
-                                    <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver"  Content="Provide location of another map server" Checked="radlocatemapserver_Checked" />
-
-                                    <StackPanel x:Name="panelmapserver" IsEnabled="False" >
-                                        <Label x:Name="lblURL">URL:</Label>
-                                        <StackPanel Orientation="Horizontal" Margin="10 0 0 0 ">
-                                            <TextBox Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtMapSeverpath" HorizontalAlignment="Left" TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
-                                            <Button Margin="10 0 0 0"  HorizontalAlignment="Left" x:Name="btnMapserverlocate" Height="Auto" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
-                                        </StackPanel>
-                                        <Label x:Name="lblExampleMapServerURL" Style="{StaticResource PropertiesExampleText}">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</Label>
-                                        <StackPanel Margin="10 10 0 0">
-                                            <Label x:Name="lblSelectFeature">Select Feature:</Label>
-                                            <ComboBox x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged" Width="380"></ComboBox>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </StackPanel>
-                            </StackPanel>
-                        </StackPanel>
-
-                        <StackPanel Margin="0 30 0 0">
-                            <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
-
-                            <StackPanel x:Name="panelKml" IsEnabled="False" >
-                                <Label x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
-                                <StackPanel Orientation="Horizontal" Margin="10 0 0 0 ">
-                                    <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtKMLpath" IsReadOnly="False" ></TextBox>
-                                    <Button x:Name="btnKMLFile" Margin="10 0 0 0" HorizontalAlignment="Left" Height="Auto" Click="btnKMLFile_Click">Browse</Button>
-                                </StackPanel>
-                                <Label></Label>
-                                <Label x:Name="lblExampleKMLFile" Style="{StaticResource PropertiesExampleText}">Example: http://code.google.com/apis/kml/documentation/us_states.kml</Label>
-                            </StackPanel>
-                        </StackPanel>
+                    <Label></Label>
+                    <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
+                    <Label></Label>
+                    <StackPanel x:Name="panelKml" IsEnabled="False" >
+                        <Label x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
+                        <Label></Label>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="txtKMLpath" IsReadOnly="False" ></TextBox>
+                            <Button x:Name="btnKMLFile" Height="Auto" Grid.Column="2" Click="btnKMLFile_Click">Browse</Button>
+                        </Grid>
+                        <Label></Label>
+                        <Label x:Name="lblExampleKMLFile" Style="{StaticResource PropertiesExampleText}">Example: http://code.google.com/apis/kml/documentation/us_states.kml</Label>
                     </StackPanel>
                 </StackPanel>
-            </ScrollViewer>
-        </DockPanel>
+            </StackPanel>
+        </StackPanel>
 
-        <DockPanel x:Name="panelHTML" Grid.Column="2" Margin="8" Visibility="Visible">
+        <DockPanel x:Name="panelHTML" Grid.Column="2" Margin="8" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
                 <Label x:Name="tblockSelectVarData" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Select variables for map.</Label>

@@ -1765,4 +1765,19 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_LABEL_STYLE" xml:space="preserve">
     <value>Style:</value>
   </data>
+  <data name="GADGET_MAP_ADD_LABEL" xml:space="preserve">
+    <value>Add label</value>
+  </data>
+  <data name="GADGET_MAP_ADD_MARKER" xml:space="preserve">
+    <value>Add marker</value>
+  </data>
+  <data name="GADGET_MAP_ADD_ZONE" xml:space="preserve">
+    <value>Add zone</value>
+  </data>
+  <data name="GADGET_MAP_LAYERS" xml:space="preserve">
+    <value>Map Layers</value>
+  </data>
+  <data name="GADGET_MAP_REMOVE_LAYERS" xml:space="preserve">
+    <value>Remove all layers</value>
+  </data>
 </root>

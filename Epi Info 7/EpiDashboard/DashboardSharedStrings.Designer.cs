@@ -2490,6 +2490,33 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add label.
+        /// </summary>
+        public static string GADGET_MAP_ADD_LABEL {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_ADD_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add marker.
+        /// </summary>
+        public static string GADGET_MAP_ADD_MARKER {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_ADD_MARKER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add zone.
+        /// </summary>
+        public static string GADGET_MAP_ADD_ZONE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_ADD_ZONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Class Breaks:.
         /// </summary>
         public static string GADGET_MAP_CLASS_BREAKS {
@@ -2544,6 +2571,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Map Layers.
+        /// </summary>
+        public static string GADGET_MAP_LAYERS {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_LAYERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Legend Text.
         /// </summary>
         public static string GADGET_MAP_LEGEND_TEXT {
@@ -2594,6 +2630,15 @@ namespace EpiDashboard {
         public static string GADGET_MAP_RANGES {
             get {
                 return ResourceManager.GetString("GADGET_MAP_RANGES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove all layers.
+        /// </summary>
+        public static string GADGET_MAP_REMOVE_LAYERS {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_REMOVE_LAYERS", resourceCulture);
             }
         }
         

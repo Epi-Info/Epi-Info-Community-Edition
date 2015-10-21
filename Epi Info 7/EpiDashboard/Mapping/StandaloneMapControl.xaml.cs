@@ -375,19 +375,19 @@ namespace EpiDashboard.Mapping
                 ContextMenu menu = new ContextMenu();
 
                 MenuItem mnuMarker = new MenuItem();
-                mnuMarker.Header = "Add marker";
+                mnuMarker.Header = DashboardSharedStrings.GADGET_MAP_ADD_MARKER;
                 mnuMarker.Click += new RoutedEventHandler(mnuMarker_Click);
                 menu.Items.Add(mnuMarker);
                 MenuItem mnuRadius = new MenuItem();
-                mnuRadius.Header = "Add zone";
+                mnuRadius.Header = DashboardSharedStrings.GADGET_MAP_ADD_ZONE;
                 mnuRadius.Click += new RoutedEventHandler(mnuRadius_Click);
                 menu.Items.Add(mnuRadius);
                 MenuItem mnuText = new MenuItem();
-                mnuText.Header = "Add label";
+                mnuText.Header = DashboardSharedStrings.GADGET_MAP_ADD_LABEL;
                 mnuText.Click += new RoutedEventHandler(mnuText_Click);
                 menu.Items.Add(mnuText);
                 MenuItem mnuClear = new MenuItem();
-                mnuClear.Header = "Remove all layers";
+                mnuClear.Header = DashboardSharedStrings.GADGET_MAP_REMOVE_LAYERS;
                 mnuClear.Click += new RoutedEventHandler(mnuClear_Click);
                 menu.Items.Add(mnuClear);
 
