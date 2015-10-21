@@ -709,6 +709,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide Gadget Borders.
+        /// </summary>
+        public static string DASHBOARD_HIDE_BORDERS {
+            get {
+                return ResourceManager.GetString("DASHBOARD_HIDE_BORDERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggles the display of the gadget borders and any buttons on the borders..
+        /// </summary>
+        public static string DASHBOARD_HIDE_BORDERS_DESC {
+            get {
+                return ResourceManager.GetString("DASHBOARD_HIDE_BORDERS_DESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set a data source now.
         /// </summary>
         public static string DASHBOARD_INTRO_SET_DATA_SOURCE {
@@ -732,6 +750,24 @@ namespace EpiDashboard {
         public static string DASHBOARD_TITLE {
             get {
                 return ResourceManager.GetString("DASHBOARD_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vertical Arrange.
+        /// </summary>
+        public static string DASHBOARD_VERTICAL_ARRANGE {
+            get {
+                return ResourceManager.GetString("DASHBOARD_VERTICAL_ARRANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggles a vertical stacking of gadgets. Canvas with Vertical Arrange mode turned on positions gadgets automatically and they cannot be indivually positioned..
+        /// </summary>
+        public static string DASHBOARD_VERTICAL_ARRANGE_DESC {
+            get {
+                return ResourceManager.GetString("DASHBOARD_VERTICAL_ARRANGE_DESC", resourceCulture);
             }
         }
         

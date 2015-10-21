@@ -1780,6 +1780,18 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_MAP_REMOVE_LAYERS" xml:space="preserve">
     <value>Remove all layers</value>
   </data>
+  <data name="DASHBOARD_HIDE_BORDERS" xml:space="preserve">
+    <value>Hide Gadget Borders</value>
+  </data>
+  <data name="DASHBOARD_HIDE_BORDERS_DESC" xml:space="preserve">
+    <value>Toggles the display of the gadget borders and any buttons on the borders.</value>
+  </data>
+  <data name="DASHBOARD_VERTICAL_ARRANGE" xml:space="preserve">
+    <value>Vertical Arrange</value>
+  </data>
+  <data name="DASHBOARD_VERTICAL_ARRANGE_DESC" xml:space="preserve">
+    <value>Toggles a vertical stacking of gadgets. Canvas with Vertical Arrange mode turned on positions gadgets automatically and they cannot be indivually positioned.</value>
+  </data>
   <data name="EXPORT_DEST_FILENAME" xml:space="preserve">
     <value>File name</value>
   </data>
