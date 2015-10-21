@@ -4677,6 +4677,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reference Layer.
+        /// </summary>
+        public static string REFERENCE_LAYER {
+            get {
+                return ResourceManager.GetString("REFERENCE_LAYER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The exposure and outcome are boolean. No remapping is needed..
         /// </summary>
         public static string REMAPPER_MESSAGE_ALREADY_BOOLEAN {

@@ -1795,4 +1795,7 @@ of records or select fewer fields for the group.</value>
   <data name="EXPORT_DEST_FILENAME" xml:space="preserve">
     <value>File name</value>
   </data>
+  <data name="REFERENCE_LAYER" xml:space="preserve">
+    <value>Reference Layer</value>
+  </data>
 </root>

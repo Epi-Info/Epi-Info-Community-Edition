@@ -47,7 +47,33 @@ namespace EpiDashboard.Controls
         {
             InitializeComponent();
             this.mapControl = mapControl;
-            this.myMap = myMap;  
+            this.myMap = myMap;
+
+            #region Translation
+
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.REFERENCE_LAYER;
+            tbtnDataSource.Title = DashboardSharedStrings.REFERENCE_LAYER;
+            tbtnDataSource.Description = DashboardSharedStrings.MENU_ADD_REFERENCE_MAP;
+            lblPanelHeader.Content = DashboardSharedStrings.REFERENCE_LAYER;
+
+            radShapeFile.Content = DashboardSharedStrings.GADGET_SHAPEFILE;
+            btnBrowseShape.Content = DashboardSharedStrings.BUTTON_BROWSE;
+            radMapServer.Content = DashboardSharedStrings.GADGET_MAPSERVER;
+            radconnectmapserver.Content = DashboardSharedStrings.GADGET_CONNECT_MAPSERVER;
+            radlocatemapserver.Content = DashboardSharedStrings.GADGET_OTHER_MAPSERVER;
+            lblURL.Content = DashboardSharedStrings.GADGET_URL;
+            btnMapserverlocate.Content = DashboardSharedStrings.BUTTON_CONNECT;
+            lblExampleMapServerURL.Content = DashboardSharedStrings.GADGET_EXAMPLE_MAPSERVER;
+            lblSelectFeature.Content = DashboardSharedStrings.GADGET_SELECT_FEATURE;
+            radKML.Content = DashboardSharedStrings.GADGET_KMLFILE;
+            lblURLOfKMLFile.Content = DashboardSharedStrings.GADGET_KMLFILE_LOCATION;
+            btnKMLFile.Content = DashboardSharedStrings.BUTTON_BROWSE;
+            lblExampleKMLURL.Content = DashboardSharedStrings.GADGET_EXAMPLE_KMLFILE;
+
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
+
+            #endregion //Translation
         }
 
         private HttpWebRequest CreateWebRequest(string endPoint)
