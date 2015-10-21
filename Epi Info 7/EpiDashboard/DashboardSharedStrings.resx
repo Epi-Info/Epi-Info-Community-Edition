@@ -1780,4 +1780,7 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_MAP_REMOVE_LAYERS" xml:space="preserve">
     <value>Remove all layers</value>
   </data>
+  <data name="EXPORT_DEST_FILENAME" xml:space="preserve">
+    <value>File name</value>
+  </data>
 </root>
