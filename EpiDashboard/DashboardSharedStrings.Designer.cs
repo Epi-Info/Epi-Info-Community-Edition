@@ -987,7 +987,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} fields selected.
+        ///   Looks up a localized string similar to Fields selected: {0}.
         /// </summary>
         public static string EXPORT_FIELD_COUNT {
             get {
@@ -1059,7 +1059,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} fields, {1} records.
+        ///   Looks up a localized string similar to Fields: {0}, Records: {1} .
         /// </summary>
         public static string FIELD_AND_RECORD_COUNT {
             get {
@@ -1068,7 +1068,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} fields.
+        ///   Looks up a localized string similar to Fields: {0}.
         /// </summary>
         public static string FIELD_COUNT {
             get {
@@ -1869,7 +1869,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} gadgets.
+        ///   Looks up a localized string similar to Gadgets: {0}.
         /// </summary>
         public static string GADGET_COUNT {
             get {
@@ -4623,7 +4623,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ({0} records).
+        ///   Looks up a localized string similar to (Records: {0}).
         /// </summary>
         public static string RECORD_COUNT {
             get {

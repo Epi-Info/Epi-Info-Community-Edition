@@ -384,10 +384,10 @@ Denominator = {0}</value>
     <value>The specified project file ({0}) that is associated with this canvas was not found. Please modify the canvas file to point to a valid Epi Info 7 project or select a new data source.</value>
   </data>
   <data name="FIELD_COUNT" xml:space="preserve">
-    <value>{0} fields</value>
+    <value>Fields: {0}</value>
   </data>
   <data name="FIELD_AND_RECORD_COUNT" xml:space="preserve">
-    <value>{0} fields, {1} records</value>
+    <value>Fields: {0}, Records: {1} </value>
   </data>
   <data name="GADGET_ADVANCED_OPTIONS" xml:space="preserve">
     <value>Advanced options</value>
@@ -425,7 +425,7 @@ Denominator = {0}</value>
     <value>Chart Properties</value>
   </data>
   <data name="GADGET_COUNT" xml:space="preserve">
-    <value>{0} gadgets</value>
+    <value>Gadgets: {0}</value>
     <comment>The gadget counter that shows up in the bottom left corner of the window.</comment>
   </data>
   <data name="GADGET_CUSTOM_FILTER" xml:space="preserve">
@@ -644,7 +644,7 @@ Denominator = {0}</value>
     <value>Output has been saved.</value>
   </data>
   <data name="RECORD_COUNT" xml:space="preserve">
-    <value>({0} records)</value>
+    <value>(Records: {0})</value>
   </data>
   <data name="SAVE_CHANGES" xml:space="preserve">
     <value>Do you wish to save the changes you made to this dashboard canvas?</value>
@@ -794,7 +794,7 @@ of records or select fewer fields for the group.</value>
     <value>Fields to export:</value>
   </data>
   <data name="EXPORT_FIELD_COUNT" xml:space="preserve">
-    <value>{0} fields selected</value>
+    <value>Fields selected: {0}</value>
   </data>
   <data name="EXPORT_SORT_BY_TAB_ORDER" xml:space="preserve">
     <value>Sort variables by tab order</value>
