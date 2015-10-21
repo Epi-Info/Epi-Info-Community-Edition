@@ -275,6 +275,7 @@ namespace EpiDashboard
             // tool does not work with the WPF translation mechanism. To make this as simple as possible and play nice with the rest of EI7
             // we're just going to use a RESX file.
             tblockIntroPanelTitle.Text = DashboardSharedStrings.DASHBOARD_TITLE;
+            tblockDataSourceLabel.Text = DashboardSharedStrings.GADGET_DATA_SOURCE;
             tblockIntroText.Text = DashboardSharedStrings.DASHBOARD_INTRO_TEXT;
             tblockSetDataSourceNow.Text = DashboardSharedStrings.DASHBOARD_INTRO_SET_DATA_SOURCE;
             tblockCanvasFiles.Text = DashboardSharedStrings.CANVAS_FILES_HEADER;
@@ -310,6 +311,14 @@ namespace EpiDashboard
             tooltipFilterHeader.Content = DashboardSharedStrings.MENU_FILTERS;
 
             instructionsPanel.DescriptionText = DashboardSharedStrings.INSTRUCTIONS;
+
+            //statusStripButtonShowBorders.ToolTip = 
+
+
+            //tooltipHideGadgetBordersTitle.Content = DashboardSharedStrings.DASHBOARD_HIDE_BORDERS;
+            //tooltipHideGadgetBorders.Text = DashboardSharedStrings.DASHBOARD_HIDE_BORDERS_DESC;
+            //tooltipVerticalArrangeHeader.Content = DashboardSharedStrings.DASHBOARD_VERTICAL_ARRANGE;
+            //tooltipVerticalArrange.Text = DashboardSharedStrings.DASHBOARD_VERTICAL_ARRANGE_DESC;
 
             mnuDataSource.Header = DashboardSharedStrings.CMENU_SET_DATA_SOURCE;
             mnuAddRelatedData.Header = DashboardSharedStrings.CMENU_ADD_RELATED_DATA;
