@@ -1962,6 +1962,8 @@ namespace EpiDashboard
                     GadgetBase gadget = element as GadgetBase;
                     if (gadget != null)
                     {
+                        DashboardHelper.ResizedWidth = e.NewSize.Width;
+                        DashboardHelper.ResizedHeight = e.NewSize.Height;
                         gadget.GadgetBase_SizeChanged(e.NewSize.Width, e.NewSize.Height);
                     }
                 }

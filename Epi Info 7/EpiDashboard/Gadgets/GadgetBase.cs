@@ -102,8 +102,6 @@ namespace EpiDashboard
         public Guid UniqueIdentifier { get; private set; }
         public bool IsCollapsed { get; protected set; }
         public DashboardPopup Popup { get; protected set; }
-        public double ResizedWidth { get;set;}
-        public double ResizedHeight { get; set; }
 
         /// <summary>
         /// Gets the data filters associated with this gadget
@@ -1414,6 +1412,7 @@ namespace EpiDashboard
         public virtual void GadgetBase_SizeChanged(double width, double height)
         {
         }
+
 
 
 

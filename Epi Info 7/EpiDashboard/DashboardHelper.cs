@@ -298,6 +298,9 @@ namespace EpiDashboard
         /// Gets the Epi Info configuration associated with this instance of the dashboard
         /// </summary>
         public Configuration Config { get; private set; }
+
+        public double ResizedWidth { get; set; }
+        public double ResizedHeight { get; set; }
         #endregion // Public Properties
 
         #region Events
