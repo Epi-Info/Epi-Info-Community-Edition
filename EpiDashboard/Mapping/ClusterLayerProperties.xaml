@@ -13,7 +13,7 @@
             </Rectangle>
         </Border>
         <StackPanel Orientation="Horizontal">
-            <Label x:Name="lblTitle" Width="80" FontWeight="Bold" Visibility="Collapsed" VerticalAlignment="Bottom" Content="Case Cluster"/>
+            <Label x:Name="lblTitle" Width="Auto" FontWeight="Bold" Visibility="Collapsed" VerticalAlignment="Bottom" Content="Case Cluster"/>
             <StackPanel Orientation="Vertical" Width="Auto">
                 <Label x:Name="lblDescription" HorizontalAlignment="Center" Content="Description:"/>
                 <StackPanel Orientation="Horizontal" Width="Auto" Margin="5,0,5,0">

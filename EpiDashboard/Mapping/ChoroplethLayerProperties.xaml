@@ -14,10 +14,12 @@
         </Border>
         <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
             <Label x:Name="lblTitle" Width="Auto" FontWeight="Bold" Visibility="Collapsed" VerticalAlignment="Bottom" Content="Choropleth"/>
+            <StackPanel VerticalAlignment="Bottom" Margin="5,0,5,0">
             <Button x:Name="btnShapeFile" VerticalAlignment="Bottom" Content="Browse Shapefile" Padding='5,0,5,0'/>
+            </StackPanel>
             <StackPanel Orientation="Vertical" Width="Auto" Margin="5,0,5,0">
                 <Label x:Name="lblClasses" HorizontalAlignment="Center" Content="Classes:"/>
-                <ComboBox x:Name="cbxClasses" SelectedIndex="1" HorizontalAlignment="Center" IsEnabled="False" >
+                <ComboBox x:Name="cbxClasses" SelectedIndex="1" HorizontalAlignment="Stretch" IsEnabled="False">
                     <ComboBoxItem Content="2"/>
                     <ComboBoxItem Content="3"/>
                     <ComboBoxItem Content="4"/>

@@ -32,6 +32,11 @@ namespace EpiDashboard.Mapping
             this.view = view;
             this.db = db;
             this.dashboardHelper = dashboardHelper;
+
+            #region Translation
+            tblockMapLayers.Text = DashboardSharedStrings.GADGET_MAP_LAYERS;
+            #endregion
+
         }
 
         public void AddListItem(ILayerProperties item, int index)

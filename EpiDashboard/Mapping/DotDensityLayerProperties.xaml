@@ -12,22 +12,22 @@
                 </Rectangle.ToolTip>
             </Rectangle>
         </Border>
-        <StackPanel Orientation="Horizontal">
-            <Label x:Name="lblTitle" Width="80" FontWeight="Bold" Visibility="Collapsed" VerticalAlignment="Bottom" Content="Dot Density"/>
+        <StackPanel Orientation="Horizontal" >
+            <Label x:Name="lblTitle" Width="Auto" FontWeight="Bold" Visibility="Collapsed" VerticalAlignment="Bottom" Content="Dot Density"/>
             <Button x:Name="btnShapeFile" VerticalAlignment="Bottom" Content="Browse Shapefile" Padding='5,0,5,0'/>
-            <StackPanel Orientation="Vertical" Width="90">
+            <StackPanel Orientation="Vertical" Width="Auto" Margin="5,0,5,0">
                 <Label x:Name="lblClasses" HorizontalAlignment="Center" Content="Dot Value:"/>
-                <TextBox x:Name="txtDotValue" HorizontalAlignment="Center" Width="55" Text="1" TextAlignment="Right"/>
+                <TextBox x:Name="txtDotValue"  HorizontalAlignment="Stretch" Text="1" TextAlignment="Right"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Width="150">
+            <StackPanel Orientation="Vertical" Width="Auto" Margin="5,0,5,0">
                 <Label x:Name="lblShapeKey" HorizontalAlignment="Center" Content="Feature Key:"/>
                 <ComboBox x:Name="cbxShapeKey" Width="110"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Width="150">
+            <StackPanel Orientation="Vertical" Width="Auto" Margin="5,0,5,0">
                 <Label x:Name="lblDataKey" HorizontalAlignment="Center" Content="Data Key:"/>
                 <ComboBox x:Name="cbxDataKey" Width="110"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Width="150">
+            <StackPanel Orientation="Vertical" Width="Auto"  Margin="5,0,5,0">
                 <Label x:Name="lblValueField" HorizontalAlignment="Center" Content="Value Field:"/>
                 <ComboBox x:Name="cbxValue" Width="110"/>
             </StackPanel>

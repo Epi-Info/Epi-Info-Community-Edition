@@ -531,11 +531,11 @@ namespace EpiDashboard.Controls
                     if (shapeAttributes != null)
                     {
                         cmbShapeKey.Items.Clear(); 
-                        layerprop.cbxShapeKey.Items.Clear();
+                        //layerprop.cbxShapeKey.Items.Clear();
                         foreach (string key in shapeAttributes.Keys)
                         {
                             cmbShapeKey.Items.Add(key);
-                            layerprop.cbxShapeKey.Items.Add(key);
+                            //layerprop.cbxShapeKey.Items.Add(key);
                         }
                     }
                 }
