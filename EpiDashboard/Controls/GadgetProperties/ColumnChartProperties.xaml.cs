@@ -1338,6 +1338,15 @@ namespace EpiDashboard.Controls.GadgetProperties
                         txtxAxisStartValue.IsEnabled = false;
                         txtxAxisEndValue.IsEnabled = false;
                     }
+
+                    if(field == null)
+                    { 
+                        txtxAxisStartValue.IsEnabled = true;
+                        txtxAxisEndValue.IsEnabled = true;
+                    }
+
+                    checkboxIncludeMissing.Visibility = System.Windows.Visibility.Hidden;
+
                     if (field != null && field is RenderableField)
                     {
                         FieldFlags flags = SetFieldFlags(field as RenderableField);
