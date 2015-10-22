@@ -17,18 +17,25 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition MaxWidth="400" MinWidth="300" Width=".33*" />
             <ColumnDefinition Width="30" />
-            <ColumnDefinition Width=".63*" />
+            <ColumnDefinition MinWidth="275" Width=".66*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!--<Border Grid.ColumnSpan="100" Grid.RowSpan="100" BorderThickness="2" BorderBrush="#DDDDDD" />-->
-
-        <StackPanel Grid.Column="0" Grid.RowSpan="3" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <Label FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Properties</Label>
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  Background="{StaticResource PrimaryAccentColorLight}" >
+            <Border BorderBrush="#015796" BorderThickness="0 0 0 1">
+                <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
+                    <Label FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Properties</Label>
+                </Viewbox>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
+            
 
             <!--<ToggleButton x:Name="tbtnDataSource" Style="{StaticResource ToggleSidebarButtonStyle}" IsChecked="True" Checked="tbtnDataSource_Checked">
                 <StackPanel>
@@ -64,95 +71,133 @@
             </ToggleButton>-->
         </StackPanel>
 
-        <StackPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
-            <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
-                <Label Content="Epi Info 7 Project:" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*" />
-                        <ColumnDefinition Width="28*"/>
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBox x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged" Grid.ColumnSpan="2"/>
-                    <Button x:Name="btnBrowse" Height="Auto" Grid.Column="3" Click="btnBrowse_Click" Content="Browse"/>
-                </Grid>
-                <Label Content="Form:"/>
-                <ComboBox x:Name="cmbFormName" SelectionChanged="cmbFormName_SelectionChanged"/>
-                <Label x:Name="lblRelatedDataSources" Content="Related Data Sources:"/>
-                <ListBox x:Name="lbxRelatedDataSources" MinHeight="100"/>
+        <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
+            <StackPanel DockPanel.Dock="Top" >
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
             </StackPanel>
-            <StackPanel x:Name="panelDataSourceOther" Visibility="Visible">
-                <Label Content="Data Source:" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*" />
-                        <ColumnDefinition Width="28*"/>
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBox x:Name="txtStandalonePath" IsReadOnly="True" TextChanged="txtStandalonePath_TextChanged" Grid.ColumnSpan="2"/>
-                    <Button x:Name="btnStandaloneBrowse" Height="Auto" Grid.Column="3" Click="btnStandaloneBrowse_Click" Content="Browse"/>
-                </Grid>
-                <Label>Table:</Label>
-                <ComboBox x:Name="cmbStandaloneFormName" SelectionChanged="cmbStandaloneFormName_SelectionChanged"/>
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel>
+                    <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
+                           
+                        <StackPanel>
+                            <Label Content="Epi Info 7 Project:" />
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
+                                <TextBox Width="Auto" TextWrapping="Wrap" MinWidth="300" HorizontalAlignment="Left" x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged" />
+                                <Button x:Name="btnBrowse" HorizontalAlignment="Left" Margin="5 0 0 0" Height="Auto"  Click="btnBrowse_Click" Content="Browse"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Margin="0 20 0 0">
+                            <Label Content="Form:"/>
+                            <ComboBox Width="Auto" MinWidth="300" HorizontalAlignment="Left" x:Name="cmbFormName" SelectionChanged="cmbFormName_SelectionChanged"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="0 20 0 0 ">
+                            <Label x:Name="lblRelatedDataSources" Content="Related Data Sources:"/>
+                            <ListBox Width="Auto" MinWidth="300" MaxWidth="400" HorizontalAlignment="Left" x:Name="lbxRelatedDataSources" MinHeight="100"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel x:Name="panelDataSourceOther" Visibility="Visible">
+                        <Label Content="Data Source:" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="28*"/>
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="txtStandalonePath" IsReadOnly="True" TextChanged="txtStandalonePath_TextChanged" Grid.ColumnSpan="2"/>
+                            <Button x:Name="btnStandaloneBrowse" Height="Auto" Grid.Column="3" Click="btnStandaloneBrowse_Click" Content="Browse"/>
+                        </Grid>
+                        <Label>Table:</Label>
+                        <ComboBox x:Name="cmbStandaloneFormName" SelectionChanged="cmbStandaloneFormName_SelectionChanged"/>
+                    </StackPanel>
+                    <StackPanel x:Name="panelDataSourceSql" Visibility="Visible">
+                        <Label>Connection String:</Label>
+                        <TextBox x:Name="txtSQLConnectionString"></TextBox>
+                        <Label>Table:</Label>
+                        <ComboBox x:Name="cmbSqlTable" SelectionChanged="cmbSqlTable_SelectionChanged"/>
+                    </StackPanel>
+                    <StackPanel x:Name="panelAdvancedSQLQuery" Visibility="Visible">
+                        <Label>Advanced Query:</Label>
+                        <TextBox x:Name="txtAdvancedSQLQuery" ></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+        <DockPanel x:Name="panelHTML" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">HTML Output</Label>
             </StackPanel>
-            <StackPanel x:Name="panelDataSourceSql" Visibility="Visible">
-                <Label>Connection String:</Label>
-                <TextBox x:Name="txtSQLConnectionString"></TextBox>
-                <Label>Table:</Label>
-                <ComboBox x:Name="cmbSqlTable" SelectionChanged="cmbSqlTable_SelectionChanged"/>
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel >
+                    
+                    <StackPanel>
+                        <Label>Title:</Label>
+                        <TextBox x:Name="txtTitle" Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" MaxWidth="300" AcceptsReturn="True" TextWrapping="Wrap" ></TextBox>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <Label>Summary:</Label>
+                        <TextBox x:Name="txtSummary" Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <Label>Conclusion:</Label>
+                        <TextBox x:Name="txtConclusion" Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+                    </StackPanel>
+
+                    <WrapPanel ItemWidth="260" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 20 0 0">
+                        <CheckBox Style="{StaticResource PropertiesPanelCheckbox}"  x:Name="checkboxGadgetHeadings" Content="Show gadget headings" IsChecked="True" />
+                        <CheckBox Style="{StaticResource PropertiesPanelCheckbox}"  x:Name="checkboxGadgetSettings" Content="Show gadget settings" IsChecked="True"  />
+                        <CheckBox Style="{StaticResource PropertiesPanelCheckbox}"  x:Name="checkboxCanvasSummary" Content="Show canvas summary" IsChecked="True" />
+                        <CheckBox Style="{StaticResource PropertiesPanelCheckbox}"  x:Name="checkboxAlternateColors" Content="Use alternating colors in tables" IsChecked="False" />
+                        <CheckBox Style="{StaticResource PropertiesPanelCheckbox}"  x:Name="checkboxTopToBottom" Content="Display gadgets in top-to-bottom order" IsChecked="True" />
+                    </WrapPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+        <DockPanel x:Name="panelInfo" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Canvas Information</Label>
             </StackPanel>
-            <StackPanel x:Name="panelAdvancedSQLQuery" Visibility="Visible">
-                <Label>Advanced Query:</Label>
-                <TextBox x:Name="txtAdvancedSQLQuery" ></TextBox>
+
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel>
+                    <TextBlock x:Name="tblockRows" Text="2,255 unfiltered rows" Margin="0,0,0,16" />
+                    <TextBlock x:Name="tblockColumns" Text="252 columns" Margin="0,0,0,16" />
+                    <TextBlock x:Name="tblockCacheDateTime" Text="Data last cached at 12/16/2011 1:56 PM" Margin="0,0,0,16" />
+                    <TextBlock x:Name="tblockCacheTimeElapsed" Text="Took 4:32:32 to locally cache data" Margin="0,0,0,16" />
+                    <TextBlock x:Name="tblockCurrentEpiVersion" Text="Epi Info 7.0.0.0" Margin="0,0,0,16" FontWeight="Bold"/>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+        <DockPanel x:Name="panelCharts" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Chart Settings</Label>
             </StackPanel>
-        </StackPanel>
 
-        <StackPanel x:Name="panelHTML" Grid.Column="2" Margin="8" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">HTML Output</Label>
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel >
+                    <StackPanel>
+                        <Label>Default Width:</Label>
+                        <TextBox Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" x:Name="txtDefaultChartWidth">800</TextBox>
+                    </StackPanel>
 
-            <Label>Title:</Label>
-            <TextBox x:Name="txtTitle"></TextBox>
-
-            <Label>Summary:</Label>
-            <TextBox x:Name="txtSummary"></TextBox>
-
-            <Label>Conclusion:</Label>
-            <TextBox x:Name="txtConclusion"></TextBox>
-
-            <CheckBox x:Name="checkboxGadgetHeadings" Content="Show gadget headings" IsChecked="True" Margin="0,16,0,16" />
-            <CheckBox x:Name="checkboxGadgetSettings" Content="Show gadget settings" IsChecked="True" Margin="0,0,0,16" />
-            <CheckBox x:Name="checkboxCanvasSummary" Content="Show canvas summary" IsChecked="True" Margin="0,0,0,16" />
-            <CheckBox x:Name="checkboxAlternateColors" Content="Use alternating colors in tables" IsChecked="False" Margin="0,0,0,16" />
-            <CheckBox x:Name="checkboxTopToBottom" Content="Display gadgets in top-to-bottom order" IsChecked="True" Margin="0,0,0,16" />
-
-        </StackPanel>
-
-        <StackPanel x:Name="panelInfo" Grid.Column="2" Margin="8" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Canvas Information</Label>
-
-            <TextBlock x:Name="tblockRows" Text="2,255 unfiltered rows" Margin="0,0,0,16" />
-            <TextBlock x:Name="tblockColumns" Text="252 columns" Margin="0,0,0,16" />
-            <TextBlock x:Name="tblockCacheDateTime" Text="Data last cached at 12/16/2011 1:56 PM" Margin="0,0,0,16" />
-            <TextBlock x:Name="tblockCacheTimeElapsed" Text="Took 4:32:32 to locally cache data" Margin="0,0,0,16" />
-            <TextBlock x:Name="tblockCurrentEpiVersion" Text="Epi Info 7.0.0.0" Margin="0,0,0,16" />
-        </StackPanel>
-
-        <StackPanel x:Name="panelCharts" Grid.Column="2" Margin="8" Visibility="Collapsed">
-            <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Chart Settings</Label>
-
-            <Label>Default Width:</Label>
-            <TextBox x:Name="txtDefaultChartWidth">800</TextBox>
-
-            <Label>Default Height:</Label>
-            <TextBox x:Name="txtDefaultChartHeight">500</TextBox>
-        </StackPanel>
+                    <StackPanel Margin="0 10 0 0">
+                        <Label>Default Height:</Label>
+                        <TextBox Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" x:Name="txtDefaultChartHeight">500</TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
 
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
-        <DockPanel Grid.ColumnSpan="3" Grid.Row="1">
+        <DockPanel Grid.ColumnSpan="3" Grid.Row="2">
             <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
             <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
         </DockPanel>

@@ -48,44 +48,45 @@
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables__xfe</Label>
             </StackPanel>
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel Margin="0 0 0 5">
+                    <Label x:Name="tblockVariableToDisplay">Variables to display:__xfe</Label>
 
-            <StackPanel DockPanel.Dock="Bottom">
-                <Label x:Name="tblockVariableToDisplay">Variables to display:__xfe</Label>
+                    <ListView Name="lvVariables" HorizontalAlignment="Left" Width="Auto" Height="300">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="Data Type" Width="Auto" DisplayMemberBinding="{Binding DataType}" />
+                            </GridView>
+                        </ListView.View>
+                        <ListView.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.ContainerStyle>
+                                    <Style TargetType="{x:Type GroupItem}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <Expander IsExpanded="True">
+                                                        <Expander.Header>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                                                                <TextBlock Text="{Binding ItemCount}" FontSize="11" Foreground="Silver" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                                <TextBlock Text=" item(s)" FontSize="11" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                            </StackPanel>
+                                                        </Expander.Header>
+                                                        <ItemsPresenter />
+                                                    </Expander>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </GroupStyle.ContainerStyle>
 
-                <ListView Name="lvVariables" HorizontalAlignment="Left" Width="Auto" Height="300">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}" />
-                            <GridViewColumn Header="Data Type" Width="Auto" DisplayMemberBinding="{Binding DataType}" />
-                        </GridView>
-                    </ListView.View>
-                    <ListView.GroupStyle>
-                        <GroupStyle>
-                            <GroupStyle.ContainerStyle>
-                                <Style TargetType="{x:Type GroupItem}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Expander IsExpanded="True">
-                                                    <Expander.Header>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
-                                                            <TextBlock Text="{Binding ItemCount}" FontSize="11" Foreground="Silver" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
-                                                            <TextBlock Text=" item(s)" FontSize="11" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom" />
-                                                        </StackPanel>
-                                                    </Expander.Header>
-                                                    <ItemsPresenter />
-                                                </Expander>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </GroupStyle.ContainerStyle>
-
-                        </GroupStyle>
-                    </ListView.GroupStyle>
-                </ListView>
-            </StackPanel>
+                            </GroupStyle>
+                        </ListView.GroupStyle>
+                    </ListView>
+                </StackPanel>
+            </ScrollViewer>
         </DockPanel>
 
         <DockPanel x:Name="panelSorting" Grid.Column="2" Grid.Row="1"  Margin="0, 0, 10, 0" Visibility="Collapsed">
@@ -95,8 +96,8 @@
                     Groupig and Sorting__xfe</Label>
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
-                <StackPanel >
-                    <Label x:Name="tblockGroupingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping__xfe</Label>
+                <StackPanel Margin="0 0 0 5">
+                    <Label x:Name="tblockGroupingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Grouping__xfe</Label>
                     <StackPanel Orientation="Vertical">
                         <WrapPanel Height="Auto" Orientation="Vertical" HorizontalAlignment="Left">
                             <StackPanel >
@@ -109,7 +110,7 @@
                             </StackPanel>
                         </WrapPanel>
                     </StackPanel>
-                    <Label x:Name="tblockSortingSubheader"  Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Sorting__xfe</Label>
+                    <Label x:Name="tblockSortingSubheader"  Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Sorting__xfe</Label>
 
                     <Label x:Name="tblockSortMethod" >Sort Method:__xfe</Label>
                     <ComboBox x:Name="cmbSortMethod" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="0" Margin="0, 0, 0, 8">
@@ -141,10 +142,10 @@
 
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
-            </StackPanel>
+            </StackPanel >
             <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
-                <StackPanel>
-                    <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Title and Description__xfe</Label>
+                <StackPanel Margin="0 0 0 5">
+                    <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Title and Description__xfe</Label>
                     <StackPanel Orientation="Vertical">
                         <StackPanel>
                             <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:__xfe" />
@@ -157,27 +158,27 @@
                         </StackPanel>
                     </StackPanel>
                     <StackPanel>
-                        <Label x:Name="tblockDimensions" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Dimensions__xfe</Label>
+                        <Label x:Name="tblockDimensions" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Dimensions__xfe</Label>
                         <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
 
-                            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                            <StackPanel Orientation="Vertical" Margin="0 10 0 0">
                                 <Label x:Name="tblockMaxWidth" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max width:__xfe" Margin="0,0,0,0"  />
-                                <TextBox x:Name="txtMaxWidth" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="800" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown" TextChanged="txtWidth_TextChanged"></TextBox>
+                                <TextBox x:Name="txtMaxWidth" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="800" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown" TextChanged="txtWidth_TextChanged"></TextBox>
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                            <StackPanel Orientation="Vertical" Margin="0 20 0 0">
                                 <Label x:Name="tblockMaxHeight" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max height:__xfe" Margin="0,0,0,0"  />
-                                <TextBox x:Name="txtMaxHeight" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" Text="500" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"  TextChanged="txtHeight_TextChanged"></TextBox>
+                                <TextBox x:Name="txtMaxHeight" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="500" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"  TextChanged="txtHeight_TextChanged"></TextBox>
                             </StackPanel>
 
 
-                            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                            <StackPanel Orientation="Vertical" Margin="0 20 0 0">
                                 <Label x:Name="tblockMaxVarNameLength" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max var name length:" Margin="0,0,0,0" Visibility="Visible" />
-                                <TextBox x:Name="txtMaxVarNameLength" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" Text="24"  PreviewTextInput="txtMaxVarNameLength_PreviewTextInput" Visibility="Visible"></TextBox>
+                                <TextBox x:Name="txtMaxVarNameLength" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="24"  PreviewTextInput="txtMaxVarNameLength_PreviewTextInput" Visibility="Visible"></TextBox>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                            <StackPanel Orientation="Vertical" Margin="0 20 0 0">
                                 <Label x:Name="tblockMaxRows" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max rows to display:" Margin="0,0,0,0" />
-                                <TextBox x:Name="txtMaxRows" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Right" Text="50" TextChanged="txtMaxRows_TextChanged" PreviewTextInput="txtMaxVarNameLength_PreviewTextInput"></TextBox>
+                                <TextBox x:Name="txtMaxRows" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="50" TextChanged="txtMaxRows_TextChanged" PreviewTextInput="txtMaxVarNameLength_PreviewTextInput"></TextBox>
                             </StackPanel>
                         </WrapPanel>
                     </StackPanel>
@@ -185,7 +186,7 @@
 
 
 
-                    <Label x:Name="tblockPanelOutputOpt" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Output Options__xfe</Label>
+                    <Label x:Name="tblockPanelOutputOpt" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Output Options__xfe</Label>
 
                     <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left">
                         <CheckBox x:Name="checkboxTabOrder" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort variables by tab order__xfe" Visibility="Visible" IsEnabled="true" />
@@ -198,15 +199,15 @@
                     </WrapPanel>
                 </StackPanel>
             </ScrollViewer>
-
-
         </DockPanel>
 
-        <StackPanel x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label x:Name="tblockPanelDataFilter"  Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
-            <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
-        </StackPanel>
-
+        <DockPanel  x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label x:Name="tblockPanelDataFilter"  Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
+                <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
+            </StackPanel>
+            
+        </DockPanel>
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
         <DockPanel x:Name="okCancelBtn" Grid.ColumnSpan="3" Grid.Row="2">

@@ -121,7 +121,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockMainVariable.Text = DashboardSharedStrings.GADGET_FREQUENCY_VARIABLE;
             tblockStrataVariable.Text = DashboardSharedStrings.GADGET_STRATA_VARIABLE;
             tblockPSU.Text = DashboardSharedStrings.GADGET_PSU;
-
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
             #endregion // Translation
         }
 

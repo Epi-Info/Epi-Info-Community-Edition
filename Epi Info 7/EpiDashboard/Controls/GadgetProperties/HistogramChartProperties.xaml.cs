@@ -207,7 +207,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockInterval.Text = DashboardSharedStrings.GADGET_INTERVAL;
             tblockStartValue.Text = DashboardSharedStrings.GADGET_START_VALUE;
             tblockEndValue.Text = DashboardSharedStrings.GADGET_END_VALUE;
-
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
 
 

@@ -160,7 +160,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockPieChartKind.Text = DashboardSharedStrings.GADGET_CHART_KIND;
             tblockAnnotationPercent.Text = DashboardSharedStrings.GADGET_ANNOTATION_PERCENT;
             checkboxAnnotations.Content = DashboardSharedStrings.GADGET_SHOW_ANNOTATIONS;
-
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
             #endregion // Translation
 

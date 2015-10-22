@@ -175,6 +175,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockRows.Text = DashboardSharedStrings.GADGET_MAX_ROWS_TO_DISPLAY;
             tblockBarWidth.Text = DashboardSharedStrings.GADGET_MAX_PERCENT_BAR_WIDTH;
 
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
             //btnRun.Content = DashboardSharedStrings.GADGET_RUN_BUTTON;
             #endregion // Translation
 

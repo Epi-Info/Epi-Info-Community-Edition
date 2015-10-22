@@ -175,7 +175,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
             tblockColorsSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
             tblockPanelLabels.Content = DashboardSharedStrings.GADGET_PANELSHEADER_LABELS;
-
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
 
 

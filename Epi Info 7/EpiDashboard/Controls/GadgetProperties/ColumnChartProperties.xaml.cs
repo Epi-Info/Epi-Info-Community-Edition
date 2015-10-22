@@ -132,8 +132,9 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             //txtxAxisStartValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
             //txtxAxisEndValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
-                   
-            
+                             
+
+
 
             #region Translation
 
@@ -222,7 +223,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxShowVarName.Content = DashboardSharedStrings.GADGET_SHOW_VARIABLE_NAME;
             tblockLegendFontSize.Text = DashboardSharedStrings.GADGET_LEGEND_FONTSIZE;
             tblockLegendDock.Text = DashboardSharedStrings.GADGET_LEGEND_PLACEMENT;
-
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
@@ -825,7 +825,7 @@ namespace EpiDashboard.Controls.GadgetProperties
            
             Parameters.XAxisStart = txtxAxisStartValue.Text;
             Parameters.XAxisEnd = txtxAxisEndValue.Text;
-          }
+            }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

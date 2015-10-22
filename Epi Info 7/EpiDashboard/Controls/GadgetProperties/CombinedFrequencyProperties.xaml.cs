@@ -116,7 +116,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_COMBINEDFEQ;
             tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
             checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
-
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
 
             #endregion // Translation

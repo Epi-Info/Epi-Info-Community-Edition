@@ -212,6 +212,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockBreak4.Text = DashboardSharedStrings.GADGET_BREAK4;
             tblockBreak5.Text = DashboardSharedStrings.GADGET_BREAK5;
             tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
             ////expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
             ////expanderDisplayOptions.Header = DashboardSharedStrings.GADGET_DISPLAY_OPTIONS;
             //tblockMainVariable.Text = DashboardSharedStrings.GADGET_FREQUENCY_VARIABLE;

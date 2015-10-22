@@ -140,7 +140,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxShowMax.Content = DashboardSharedStrings.GADGET_MAXIMUM;
             checkboxShowMode.Content = DashboardSharedStrings.GADGET_MODE;
             tblockOutputColumns.Content = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
-
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
             #endregion // Translation
         }

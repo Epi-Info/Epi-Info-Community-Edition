@@ -45,47 +45,48 @@
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables__xfe</Label>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Bottom">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*" />
-                        <ColumnDefinition Width="0.5*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Label x:Name="tblockOutcomeVariable" Grid.Column="0" Grid.Row="0">Outcome:__xfe</Label>
-                    <!--ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" /-->
-                    <ComboBox Grid.Column="0" Grid.Row="1" x:Name="cbxFieldOutcome" Width="216" HorizontalAlignment="Left" Height="28" />
-                    <Label x:Name="tblockWeightVariable" Grid.Column="2" Grid.Row="0">Weight:__xfe</Label>
-                    <ComboBox Grid.Column="2" Grid.Row="1" x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
-                    <Label x:Name="tblockFields" Grid.Column="0" Grid.Row="2">Fields:__xfe</Label>
-                    <ComboBox Grid.Column="0" Grid.Row="3" x:Name="cbxFields" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFields_SelectionChanged" />
-                    <!--ListBox SelectionMode="Multiple" Name="lvFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="90" /-->
-                    <ListBox Grid.Column="0" Grid.Row="4" SelectionMode="Extended" Name="lbxOtherFields" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="90" Width="216" SelectionChanged="lbxOtherFields_SelectionChanged" MouseDoubleClick="lbxOtherFields_MouseDoubleClick" />
-                    <Grid Grid.Row="4" Grid.Column="1">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
+                <StackPanel>
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="0.5*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Button x:Name="btnMakeDummy" Content="Make Dummy__xfe" Grid.Row="0" HorizontalAlignment="Left" Width="160" Grid.Column="0" Click="btnMakeDummy_Click" />
-                        <Label Height="5" Grid.Row="1" Grid.Column="0" />
-                        <Button x:Name="btnClearInteractionTerms" Content="Clear Terms__xfe" Grid.Row="2" Grid.Column="0" Width="160" HorizontalAlignment="Left" Click="btnClearInteractionTerms_Click" />
-                    </Grid>
-                    <!--<ListView Name="lvFieldStrata" MaxHeight="450">
+                        <Label x:Name="tblockOutcomeVariable" Grid.Column="0" Grid.Row="0">Outcome:__xfe</Label>
+                        <!--ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" /-->
+                        <ComboBox Grid.Column="0" Grid.Row="1" x:Name="cbxFieldOutcome" Width="216" HorizontalAlignment="Left" Height="28" />
+                        <Label x:Name="tblockWeightVariable" Grid.Column="2" Grid.Row="0">Weight:__xfe</Label>
+                        <ComboBox Grid.Column="2" Grid.Row="1" x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
+                        <Label x:Name="tblockFields" Grid.Column="0" Grid.Row="2">Fields:__xfe</Label>
+                        <ComboBox Grid.Column="0" Grid.Row="3" x:Name="cbxFields" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFields_SelectionChanged" />
+                        <!--ListBox SelectionMode="Multiple" Name="lvFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="90" /-->
+                        <ListBox Grid.Column="0" Grid.Row="4" SelectionMode="Extended" Name="lbxOtherFields" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="90" Width="216" SelectionChanged="lbxOtherFields_SelectionChanged" MouseDoubleClick="lbxOtherFields_MouseDoubleClick" />
+                        <Grid Grid.Row="4" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button x:Name="btnMakeDummy" Content="Make Dummy__xfe" Grid.Row="0" HorizontalAlignment="Left" Width="160" Grid.Column="0" Click="btnMakeDummy_Click" />
+                            <Label Height="5" Grid.Row="1" Grid.Column="0" />
+                            <Button x:Name="btnClearInteractionTerms" Content="Clear Terms__xfe" Grid.Row="2" Grid.Column="0" Width="160" HorizontalAlignment="Left" Click="btnClearInteractionTerms_Click" />
+                        </Grid>
+                        <!--<ListView Name="lvFieldStrata" MaxHeight="450">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}" />
@@ -102,21 +103,22 @@
                     </GroupStyle>
                 </ListView.GroupStyle>
             </ListView>-->
-                    <ComboBox Grid.Column="0" Grid.Row="8" x:Name="cbxFieldMatch" Width="216" HorizontalAlignment="Left" Height="28" Visibility="Collapsed" />
-                    
-                    <CheckBox x:Name="checkboxShowANOVA" Content="Display ANOVA statistics__xfe" IsChecked="True" Margin="0,8,0,0" Visibility="Collapsed" />
+                        <ComboBox Grid.Column="0" Grid.Row="8" x:Name="cbxFieldMatch" Width="216" HorizontalAlignment="Left" Height="28" Visibility="Collapsed" />
 
-                    <Label x:Name="tblockConfidenceLimits" Grid.Column="2" Grid.Row="7">Confidence Limits:__xfe</Label>
-                    <ComboBox Grid.Column="2" Grid.Row="8" x:Name="cbxConf" Width="216" HorizontalAlignment="Left" Height="28" />
+                        <CheckBox x:Name="checkboxShowANOVA" Content="Display ANOVA statistics__xfe" IsChecked="True" Margin="0,8,0,0" Visibility="Collapsed" />
 
-                    <TextBlock x:Name="tblockDummyVariables" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left" TextAlignment="Center" Text="Dummy variables:__xfe" Margin="0,5,0,0" />
-                    <ListBox Height="40" Grid.Column="0" Grid.Row="6" x:Name="lbxDummyTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="160"  Margin="0,5,0,0" Grid.RowSpan="1" SelectionMode="Single" MouseDoubleClick="lbxDummyTerms_MouseDoubleClick" />
-                    <TextBlock x:Name="tblockInteractionTerms" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" TextAlignment="Center" Text="Interaction terms:__xfe" Margin="0,5,0,0" />
-                    <ListBox Height="40" Grid.Column="2" Grid.Row="6" x:Name="lbxInteractionTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="160"  Margin="0,5,0,0" Grid.RowSpan="1" SelectionMode="Single" MouseDoubleClick="lbxInteractionTerms_MouseDoubleClick" />
-                    <CheckBox Grid.Column="0" Grid.Row="7" x:Name="checkboxNoIntercept" HorizontalAlignment="left" Content="No intercept__xfe" />
-                    <CheckBox Grid.Column="0" Grid.Row="8" x:Name="checkboxIncludeMissing" HorizontalAlignment="left" Content="Include missing__xfe" Visibility="Collapsed" />
-                </Grid>
-            </StackPanel>
+                        <Label x:Name="tblockConfidenceLimits" Grid.Column="2" Grid.Row="7">Confidence Limits:__xfe</Label>
+                        <ComboBox Grid.Column="2" Grid.Row="8" x:Name="cbxConf" Width="216" HorizontalAlignment="Left" Height="28" />
+
+                        <TextBlock x:Name="tblockDummyVariables" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left" TextAlignment="Center" Text="Dummy variables:__xfe" Margin="0,5,0,0" />
+                        <ListBox Height="40" Grid.Column="0" Grid.Row="6" x:Name="lbxDummyTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="160"  Margin="0,5,0,0" Grid.RowSpan="1" SelectionMode="Single" MouseDoubleClick="lbxDummyTerms_MouseDoubleClick" />
+                        <TextBlock x:Name="tblockInteractionTerms" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" TextAlignment="Center" Text="Interaction terms:__xfe" Margin="0,5,0,0" />
+                        <ListBox Height="40" Grid.Column="2" Grid.Row="6" x:Name="lbxInteractionTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="160"  Margin="0,5,0,0" Grid.RowSpan="1" SelectionMode="Single" MouseDoubleClick="lbxInteractionTerms_MouseDoubleClick" />
+                        <CheckBox Grid.Column="0" Grid.Row="7" x:Name="checkboxNoIntercept" HorizontalAlignment="left" Content="No intercept__xfe" />
+                        <CheckBox Grid.Column="0" Grid.Row="8" x:Name="checkboxIncludeMissing" HorizontalAlignment="left" Content="Include missing__xfe" Visibility="Collapsed" />
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
         </DockPanel>
 
         <DockPanel x:Name="panelSorting" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
@@ -124,7 +126,7 @@
                 <Label x:Name="tblockPanelSorting" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping__xfe</Label>
             </StackPanel>
 
-            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerProperties">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom" x:Name="scrollViewerProperties">
                 <StackPanel>
                     <Label x:Name="tblockGroupingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping__xfe</Label>
                     <Label x:Name="tblockGroupby">Group By:__xfe</Label>
@@ -166,7 +168,7 @@
                 <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
             </StackPanel>
 
-            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerDisplay">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom" x:Name="scrollViewerDisplay">
             <StackPanel>
                     <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 5">Title and Description__xfe</Label>
                     <StackPanel Orientation="Vertical">
@@ -207,11 +209,13 @@
             </ScrollViewer>
         </DockPanel>
 
-        <StackPanel x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
-            <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
-        </StackPanel>
-        
+        <DockPanel  x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
+                <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
+            </StackPanel>
+        </DockPanel>
+
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="2">

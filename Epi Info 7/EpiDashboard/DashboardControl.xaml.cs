@@ -146,6 +146,7 @@ namespace EpiDashboard
 
         private void Construct()
         {
+
             DefaultChartHeight = DEFAULT_CHART_HEIGHT;
             DefaultChartWidth = DEFAULT_CHART_WIDTH;
 

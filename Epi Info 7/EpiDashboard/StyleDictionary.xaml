@@ -441,19 +441,20 @@
 
     <Style x:Key="PropertiesTextBoxLarge" TargetType="TextBox">
         <Setter Property="Width" Value="300" />
-        <Setter Property="Height" Value="25" />
+        <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="BorderBrush" Value="#8a8a8a" />
     </Style>
 
     <Style x:Key="PropertiesTextBoxMed" TargetType="TextBox">
         <Setter Property="Width" Value="180" />
-        <Setter Property="Height" Value="25" />
+        <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="BorderBrush" Value="#8a8a8a" />
     </Style>
     
     <Style x:Key="PropertiesTextBoxSmall" TargetType="TextBox">
         <Setter Property="Width" Value="60" />
         <Setter Property="Height" Value="25" />
+        <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="BorderBrush" Value="#8a8a8a" />
     </Style>
     

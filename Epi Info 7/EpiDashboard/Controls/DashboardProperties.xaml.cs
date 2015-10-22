@@ -592,5 +592,6 @@ namespace EpiDashboard.Controls
                 cmbSqlTable.Text = cmbSqlTable.SelectedItem.ToString();
             }
         }
+
     }
 }

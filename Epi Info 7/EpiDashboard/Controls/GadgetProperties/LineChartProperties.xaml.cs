@@ -197,7 +197,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
             tblockLineType.Text = DashboardSharedStrings.GADGET_LINE_TYPE;
             tblockLineThickness.Text = DashboardSharedStrings.GADGET_LINE_THICKNESS;
-
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
             #endregion // Translation
 
         }
