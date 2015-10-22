@@ -871,10 +871,10 @@ namespace EpiDashboard.Gadgets.Charting
                                     ((ColumnChartParameters)Parameters).YAxisStep = double.Parse(child.InnerText);
                                     break;
                                 case "xaxisstartvalue":
-                                    ((ColumnChartParameters)Parameters).XAxisStart = double.Parse(child.InnerText);
+                                    ((ColumnChartParameters)Parameters).XAxisStart = child.InnerText;
                                     break;
                                 case "xaxisendvalue":
-                                    ((ColumnChartParameters)Parameters).XAxisEnd = double.Parse(child.InnerText);
+                                    ((ColumnChartParameters)Parameters).XAxisEnd = child.InnerText;
                                     break;
                                 
                             }

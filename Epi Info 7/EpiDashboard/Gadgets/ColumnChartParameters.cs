@@ -67,8 +67,8 @@ namespace EpiDashboard
             YAxisFrom = 0;
             YAxisTo = 0;
             YAxisStep = 0;
-            XAxisStart = 0;
-            XAxisEnd = 0;
+            XAxisStart = string.Empty;
+            XAxisEnd = string.Empty;
             Y2AxisLabel = String.Empty;
             Y2AxisLegendTitle = String.Empty;
             Y2AxisFormat = String.Empty;

@@ -130,10 +130,10 @@ namespace EpiDashboard.Controls.GadgetProperties
             txtYAxisminValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
             txtYAxisstepValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
 
-            txtxAxisStartValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
-            txtxAxisEndValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
-                             
-
+            //txtxAxisStartValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
+            //txtxAxisEndValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
+                   
+            
 
             #region Translation
 
@@ -823,20 +823,8 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.YAxisStep = yaxisstep;
             }
            
-            //Ei-466
-            double xaxisstartvalue;
-            success = double.TryParse(txtxAxisStartValue.Text, out xaxisstartvalue);
-            if (success)
-            {
-                Parameters.XAxisStart = xaxisstartvalue;
-            }
-           
-            double xaxisendvalue;
-            success = double.TryParse(txtxAxisEndValue.Text, out xaxisendvalue);
-            if (success)
-            {
-                Parameters.XAxisEnd = xaxisendvalue;
-            }
+            Parameters.XAxisStart = txtxAxisStartValue.Text;
+            Parameters.XAxisEnd = txtxAxisEndValue.Text;
           }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -1334,7 +1322,8 @@ namespace EpiDashboard.Controls.GadgetProperties
                         field is DateTimeField ||
                         field is FirstSaveTimeField || 
                         field is LastSaveTimeField || 
-                        field is TimeField))
+                        field is TimeField ||
+                        field is TextField))
                     {
                         checkboxIncludeMissing.IsChecked = false;
                         checkboxIncludeMissing.IsEnabled = false;

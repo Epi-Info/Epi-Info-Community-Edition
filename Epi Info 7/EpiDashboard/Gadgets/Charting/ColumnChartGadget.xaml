@@ -47,6 +47,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="1" />
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
@@ -55,7 +56,7 @@
                 <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
 
                 <Controls:GadgetInfoPanel Grid.Row="6" Visibility="Collapsed" Margin="4" x:Name="infoPanel"></Controls:GadgetInfoPanel>
-                <StackPanel Grid.Row="7" x:Name="panelMain" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <StackPanel Grid.Row="8" x:Name="panelMain" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Grid x:Name="gridChartLayoutRoot">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -63,6 +64,7 @@
                         </Grid.ColumnDefinitions>
                         
                         <Grid.RowDefinitions>
+                            <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
@@ -106,6 +108,7 @@
                         </StackPanel>
                     </Grid>
                 </StackPanel>
+                <TextBlock x:Name="tblockMissing" Text="Replace with missing value statement." FontWeight="DemiBold" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0, 0, 0, 6" Visibility="Collapsed" />
             </Grid>
         </Border>
     </Grid>
