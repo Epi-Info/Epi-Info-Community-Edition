@@ -182,6 +182,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockPSU.Text = DashboardSharedStrings.GADGET_PSU;
             tblockOutcomeField.Text = DashboardSharedStrings.GADGET_OUTCOME_VARIABLE;
             tblockExposureField.Text = DashboardSharedStrings.GADGET_EXPOSURE_VARIABLE;
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
             #endregion // Translation
 
         }

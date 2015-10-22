@@ -52,38 +52,41 @@
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables__xfe</Label>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Bottom">
-                <TextBlock x:Name="tblockMainVariable">Main variable:__xfe</TextBlock>
-                <ComboBox x:Name="cmbField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbField_SelectionChanged" />
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel>
+                    <TextBlock x:Name="tblockMainVariable">Main variable:__xfe</TextBlock>
+                    <ComboBox x:Name="cmbField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbField_SelectionChanged" />
 
-                <TextBlock x:Name="tblockCrossTabVariable" Margin="0,12,0,0">One graph for each value of:__xfe</TextBlock>
-                <ComboBox x:Name="cmbFieldCrosstab" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbFieldWeight_SelectionChanged" />
+                    <TextBlock x:Name="tblockCrossTabVariable" Margin="0,12,0,0">One graph for each value of:__xfe</TextBlock>
+                    <ComboBox x:Name="cmbFieldCrosstab" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbFieldWeight_SelectionChanged" />
 
-                <TextBlock x:Name="tblockWeightVariable" Margin="0,12,0,0">Weight:__xfe</TextBlock>
-                <ComboBox x:Name="cmbFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbFieldWeight_SelectionChanged" />
+                    <TextBlock x:Name="tblockWeightVariable" Margin="0,12,0,0">Weight:__xfe</TextBlock>
+                    <ComboBox x:Name="cmbFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" SelectionChanged="cmbFieldWeight_SelectionChanged" />
 
-                <!--Sorting and Grouping-->
-                <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-            </StackPanel>
+                    <!--Sorting and Grouping-->
+                    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+                </StackPanel>
+            </ScrollViewer>
         </DockPanel>
 
         <DockPanel x:Name="panelSorting" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelSorting" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Grouping and Sorting__xfe</Label>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Bottom">
-                <Label x:Name="tblockGroupingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping__xfe</Label>
-                <Label x:Name="tblockStrataVariable">Stratify by:__xfe</Label>
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel>
+                    <Label x:Name="tblockGroupingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping__xfe</Label>
+                    <Label x:Name="tblockStrataVariable">Stratify by:__xfe</Label>
 
-                <StackPanel x:Name="scrollViewerStrataProperties">
-                    <ListBox Style="{StaticResource PropertiesListBox}" Height="300" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionMode="Extended" Name="listboxFieldStrata" HorizontalAlignment="Left" VerticalAlignment="Stretch" SelectionChanged="listboxFieldStrata_SelectionChanged" />
-                </StackPanel>
+                    <StackPanel x:Name="scrollViewerStrataProperties">
+                        <ListBox Style="{StaticResource PropertiesListBox}" Height="300" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionMode="Extended" Name="listboxFieldStrata" HorizontalAlignment="Left" VerticalAlignment="Stretch" SelectionChanged="listboxFieldStrata_SelectionChanged" />
+                    </StackPanel>
 
-                <Label x:Name="tblockSortingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Sorting__xfe</Label>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="tblockSortMethod">Method:__xfe</TextBlock>
-                    <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Margin="20 0 0 0" Content="Sort high to low__xfe" HorizontalAlignment="Left" IsChecked="true">
-                        <!--<CheckBox.ToolTip>
+                    <Label x:Name="tblockSortingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Sorting__xfe</Label>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="tblockSortMethod">Method:__xfe</TextBlock>
+                        <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Margin="20 0 0 0" Content="Sort high to low__xfe" HorizontalAlignment="Left" IsChecked="true">
+                            <!--<CheckBox.ToolTip>
                     <StackPanel>
                         <Label FontWeight="Bold">Sort High to Low</Label>
                         <TextBlock 
@@ -92,9 +95,10 @@
                         will be sorted alphabetically.</TextBlock>
                     </StackPanel>
                 </CheckBox.ToolTip>-->
-                    </CheckBox>
+                        </CheckBox>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+            </ScrollViewer>
         </DockPanel>
 <!--Display-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
@@ -103,7 +107,7 @@
                 <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
             </StackPanel>
 
-            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerProperties" >
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto"  DockPanel.Dock="Bottom" x:Name="scrollViewerProperties" >
                 <StackPanel>
                     <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Title and Description__xfe</Label>
                     <StackPanel Orientation="Vertical">
@@ -118,7 +122,7 @@
                     </StackPanel>
                     <Label x:Name="tblockDimensions" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Dimensions__xfe</Label>
 
-                    <WrapPanel  Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
                                 <TextBlock x:Name="tblockWidth" VerticalAlignment="Bottom" HorizontalAlignment="Left" Text="Width:__xfe" Margin="0,0,0,0"  />
@@ -164,7 +168,7 @@
                 <Label x:Name="tblockPanelColorsNStyles" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors and Styles__xfe</Label>
             </StackPanel>
 
-            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesColors">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesColors">
                 <StackPanel>
                     <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Colors__xfe</Label>
                     <StackPanel>
@@ -254,7 +258,7 @@
                 <Label x:Name="tblockPanelLabels" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Labels__xfe</Label>
             </StackPanel>
 
-            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesLabels">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesLabels">
                 <StackPanel>
                     <Label x:Name="tblockTitleSubTitle" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Title and Subtitle__xfe</Label>
                     <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
@@ -425,7 +429,7 @@
                 <Label x:Name="tblockPanelLegend" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Legend__xfe</Label>
             </StackPanel>
 
-            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesLegend">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesLegend">
                 <StackPanel>
                     <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
                         <StackPanel>
@@ -470,10 +474,12 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--Filters-->
-        <StackPanel x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
-            <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
-        </StackPanel>
+        <DockPanel  x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
+                <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
+            </StackPanel>
+        </DockPanel>
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="2">

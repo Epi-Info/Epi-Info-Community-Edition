@@ -15,19 +15,25 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".37*" />
+            <ColumnDefinition MaxWidth="400" MinWidth="300" Width=".33*" />
             <ColumnDefinition Width="30" />
-            <ColumnDefinition Width=".63*" />
+            <ColumnDefinition MinWidth="275" Width=".66*" />
         </Grid.ColumnDefinitions>
         
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
-       
-        <StackPanel Grid.Column="0" Grid.RowSpan="4" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="40" Margin="0, 0, 0, 10">Points of Interest</Label>
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  Background="{StaticResource PrimaryAccentColorLight}" >
+            <Border BorderBrush="#015796" BorderThickness="0 0 0 1">
+                <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
+                    <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Points of Interest</Label>
+                </Viewbox>
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
             <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked"/>
             <Controls:SettingsToggleButton  x:Name="tbtnVariables" Title="Variables" Description="Choose map boundaries." IsChecked="False" Checked="tbtnVariables_Checked"/>
             <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
@@ -36,7 +42,7 @@
             <!--<Controls:SettingsToggleButton  x:Name="tbtnInfo" Title="Canvas Info" Description="View details of this canvas." IsChecked="False" Checked="tbtnFilter_Checked"/>-->
         </StackPanel>
 
-        <DockPanel x:Name="panelDataSource" Grid.Column="2" Margin="0, 0, 10, 0" Visibility="Visible">
+        <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
             </StackPanel>
@@ -72,75 +78,81 @@
             </StackPanel>
         </DockPanel>
 
-        
-        <DockPanel x:Name="panelVariables" Grid.Column="2" Margin="8" Visibility="Collapsed">
+
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
             </StackPanel>
 
-            <StackPanel DockPanel.Dock="Bottom">
-                <Label x:Name="tblockSelectVarData" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Select the variables for data layer</Label>
-                <StackPanel>
-                    <Label Name="lblLatitude">Latitude Field:</Label>
-                    <ComboBox Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" x:Name="cmbLatitude" Width="300" Height="25" />
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel Margin="0 0 0 5">
+                    <Label x:Name="tblockSelectVarData" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Select the variables for data layer</Label>
+                    <StackPanel>
+                        <Label Name="lblLatitude">Latitude Field:</Label>
+                        <ComboBox Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" x:Name="cmbLatitude" Width="300" Height="25" />
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                    <StackPanel>
+                        <Label Name="lblLongitude">Longitude Field:</Label>
+                        <ComboBox Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" x:Name="cmbLongitude" Width="300" ></ComboBox>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
-                <StackPanel>
-                    <Label Name="lblLongitude">Longitude Field:</Label>
-                    <ComboBox Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" x:Name="cmbLongitude" Width="300" ></ComboBox>
-                </StackPanel>
-            </StackPanel>
+            </ScrollViewer>
         </DockPanel>
 
-        <DockPanel x:Name="panelDisplay" Grid.Column="2" Margin="8" Visibility="Collapsed">
+        <DockPanel x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
             </StackPanel>
-            
-            <StackPanel DockPanel.Dock="Bottom">
-                <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Description</Label>
-                <Label x:Name="tblockMapDesc">Description:</Label>
-                <TextBox Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left" AcceptsReturn="True" TextWrapping="Wrap" x:Name="txtDescription" ></TextBox>
-            </StackPanel>
+
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel Margin="0 0 0 5">
+                    <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Description</Label>
+                    <Label x:Name="tblockMapDesc">Description:</Label>
+                    <TextBox Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left" AcceptsReturn="True" TextWrapping="Wrap" x:Name="txtDescription" ></TextBox>
+                </StackPanel>
+            </ScrollViewer>
         </DockPanel>
 
-        <DockPanel x:Name="panelCharts" Grid.Column="2" Margin="8" Visibility="Collapsed">
+        <DockPanel x:Name="panelCharts" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label Style="{StaticResource PropertiesHeading}" x:Name="lblPanelHdrColorsAndStyles" Margin="0, 0, 0, 10">Colors and Styles</Label>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Bottom">
-                <Label Style="{StaticResource PropertiesSubHeading}" x:Name="lblColor" Margin="0, 0, 0, 10">Color</Label>
-                <StackPanel Orientation="Horizontal" Margin="8,0,0,2" >
-                    <TextBlock x:Name="tblcolor" Text="Select Color:"></TextBlock>
-                    <Rectangle x:Name="rctSelectColor" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="10,0,11,0">
-                        <Rectangle.ToolTip>
-                            <Label Content="select value color"/>
-                        </Rectangle.ToolTip>
-                    </Rectangle>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label Style="{StaticResource PropertiesSubHeading}" x:Name="lblStyle" Margin="0, 30, 0, 0">Styles</Label>
-                    <TextBlock Style="{StaticResource PropertiesInstructionsText}" x:Name="tblStylePreReq" >To select a shape, a Data Source should be selected on the Data Source panel.</TextBlock>
-                </StackPanel>
-                <StackPanel>
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel Margin="0 0 0 5">
+                    <Label Style="{StaticResource PropertiesSubHeading}" x:Name="lblColor" Margin="0, 0, 0, 0">Color</Label>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" >
+                        <TextBlock x:Name="tblcolor" Text="Select Color:"></TextBlock>
+                        <Rectangle x:Name="rctSelectColor" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="10,0,11,0">
+                            <Rectangle.ToolTip>
+                                <Label Content="select value color"/>
+                            </Rectangle.ToolTip>
+                        </Rectangle>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Label Style="{StaticResource PropertiesSubHeading}" x:Name="lblStyle" Margin="0, 30, 0, 0">Styles</Label>
+                        <TextBlock Style="{StaticResource PropertiesInstructionsText}" x:Name="tblStylePreReq" >To select a shape, a Data Source should be selected on the Data Source panel.</TextBlock>
+                    </StackPanel>
+                    <StackPanel>
 
-                    <Label x:Name="lblShape" HorizontalAlignment="Left" Margin="0 10 0 0">Shape:</Label>
-                    <ComboBox Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" x:Name="cmbStyle" ></ComboBox>
+                        <Label x:Name="lblShape" HorizontalAlignment="Left" Margin="0 10 0 0">Shape:</Label>
+                        <ComboBox Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" x:Name="cmbStyle" ></ComboBox>
 
 
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+            </ScrollViewer>
         </DockPanel>
 
-        <DockPanel x:Name="panelFilter" Grid.Column="2"   Margin="8" Visibility="Collapsed"  >
+        <DockPanel x:Name="panelFilter" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed"  >
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data  Filters</Label>
                 <Label x:Name="tblockSetDataFilter" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this gadget</Label>
                 <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: First select a data source to add a filter to this layer.</Label>
             </StackPanel>
         </DockPanel>
-        
-        <DockPanel x:Name="panelInfo" Grid.Column="2" Margin="8" Visibility="Collapsed">
+
+        <DockPanel x:Name="panelInfo" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10" x:Name="lblCanvasInfo">Canvas Information</Label>
             </StackPanel>
@@ -155,7 +167,7 @@
        
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
-        <DockPanel Grid.ColumnSpan="3" Grid.Row="1">
+        <DockPanel Grid.ColumnSpan="3" Grid.Row="2">
             <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
             <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
         </DockPanel>

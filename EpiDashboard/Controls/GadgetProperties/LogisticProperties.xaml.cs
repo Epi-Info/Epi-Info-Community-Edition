@@ -120,7 +120,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxNoIntercept.Content = DashboardSharedStrings.GADGET_NO_INTERCEPT;
             tblockIndependentVariables.Content = DashboardSharedStrings.GADGET_INDEPENDENT_VARIABLES;
             tblockMatchVariable.Content = DashboardSharedStrings.GADGET_MATCH_VARIABLE;
-
+            btnRun.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
 
 

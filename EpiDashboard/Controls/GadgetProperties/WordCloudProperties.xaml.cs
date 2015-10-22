@@ -103,6 +103,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
             tblockVariableToParse.Content = DashboardSharedStrings.GADGET_VARIABLE_PARSE;
             tblockWordsIgnore.Content = DashboardSharedStrings.GADGET_WORDS_IGNORE;
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
         }
 
         public bool HasSelectedFields

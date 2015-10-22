@@ -200,7 +200,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxShowSeriesLine.Content = DashboardSharedStrings.GADGET_SHOW_SERIES_LINE;
             tblockAreaType.Text = DashboardSharedStrings.GADGET_AREA_TYPE;
             tblockComposition.Text = DashboardSharedStrings.GADGET_COMPOSITION;
-
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 

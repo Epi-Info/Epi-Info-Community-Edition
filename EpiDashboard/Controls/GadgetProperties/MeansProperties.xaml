@@ -45,19 +45,20 @@
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables__xfe</Label>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Bottom">
-                <Label x:Name="tblockMeansOf">Means of:__xfe</Label>
-                <ComboBox x:Name="cbxField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" />
-                <Label x:Name="tblockCrossTabulateBy">Cross-tabulate by:__xfe</Label>
-                <ComboBox x:Name="cbxFieldCrosstab" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" />
-                <Label x:Name="tblockWeight">Weight:__xfe</Label>
-                <ComboBox x:Name="cbxFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" />
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel>
+                    <Label x:Name="tblockMeansOf">Means of:__xfe</Label>
+                    <ComboBox x:Name="cbxField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" />
+                    <Label x:Name="tblockCrossTabulateBy">Cross-tabulate by:__xfe</Label>
+                    <ComboBox x:Name="cbxFieldCrosstab" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" />
+                    <Label x:Name="tblockWeight">Weight:__xfe</Label>
+                    <ComboBox x:Name="cbxFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" />
 
-                <Label x:Name="tblockStratifyBy">Stratify by:__xfe</Label>
-                <ListBox SelectionMode="Multiple" Name="lvFieldStrata" Style="{StaticResource PropertiesListBox}" HorizontalAlignment="Left" VerticalAlignment="Stretch" MaxHeight="90" />
-                
+                    <Label x:Name="tblockStratifyBy">Stratify by:__xfe</Label>
+                    <ListBox SelectionMode="Multiple" Name="lvFieldStrata" Style="{StaticResource PropertiesListBox}" HorizontalAlignment="Left" VerticalAlignment="Stretch" MaxHeight="90" />
 
-                <!--<ListView Name="lvFieldStrata" MaxHeight="450">
+
+                    <!--<ListView Name="lvFieldStrata" MaxHeight="450">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}" />
@@ -74,9 +75,9 @@
                     </GroupStyle>
                 </ListView.GroupStyle>
             </ListView>-->
-            </StackPanel>
+                </StackPanel>
 
-
+            </ScrollViewer>
         </DockPanel>
 
         <DockPanel x:Name="panelSorting" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
@@ -126,7 +127,7 @@
                 <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
             </StackPanel>
 
-            <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerDisplay" >
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom" x:Name="scrollViewerDisplay" >
             <StackPanel>
                     <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0,0,0,5">Title and Description__xfe</Label>
                     <StackPanel Orientation="Vertical">
@@ -190,11 +191,13 @@
             </ScrollViewer>
         </DockPanel>
 
-        <StackPanel x:Name="panelFilters" Grid.Column="2" Grid.Row="1"  Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
-            <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
-        </StackPanel>
-        
+        <DockPanel  x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
+                <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
+            </StackPanel>
+        </DockPanel>
+
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="2">

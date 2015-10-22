@@ -99,6 +99,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockPSU.Text = DashboardSharedStrings.GADGET_PSU;
             tblockCrosstabVariable.Text = DashboardSharedStrings.GADGET_CROSSTAB_VARIABLE;
             tblockMeansOf.Content = DashboardSharedStrings.GADGET_MEANS_VARIABLE;
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
             #endregion // Translation
         }
 

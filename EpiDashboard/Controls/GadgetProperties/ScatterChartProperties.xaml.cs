@@ -141,7 +141,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
             tblockOutcomeVariable.Text = DashboardSharedStrings.GADGET_OUTCOME_VARIABLE;
             tblockMarkerType.Text = DashboardSharedStrings.GADGET_MARKER_TYPE;
-
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
             #endregion // Translation
 

@@ -117,7 +117,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockDummyVariables.Text = DashboardSharedStrings.GADGET_DUMMY_VARIABLES;
             tblockInteractionTerms.Text = DashboardSharedStrings.GADGET_INTERACTION_TERMS;
             checkboxNoIntercept.Content = DashboardSharedStrings.GADGET_NO_INTERCEPT;
-
+            btnRun.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
 
 

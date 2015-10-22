@@ -136,6 +136,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxListLabels.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
             tblockMaxWidth.Content = DashboardSharedStrings.GADGET_MAX_WIDTH;
             tblockMaxHeight.Content = DashboardSharedStrings.GADGET_MAX_HEIGHT;
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
 
             #endregion // Translation
