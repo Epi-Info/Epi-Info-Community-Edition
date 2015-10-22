@@ -238,7 +238,6 @@ namespace EpiDashboard.Gadgets.Charting
                     break;
                 case "System.Single":
                 case "System.Double":
-                case "System.Decimal":
                     double xAxisStartDouble, xAxisEndDouble;
                     if (double.TryParse(chtParameters.XAxisStart, out xAxisStartDouble)
                         && ((double)chartData.S).CompareTo(xAxisStartDouble) < 0)
@@ -247,6 +246,19 @@ namespace EpiDashboard.Gadgets.Charting
                     }
                     if (double.TryParse(chtParameters.XAxisEnd, out xAxisEndDouble)
                         && ((double)chartData.S).CompareTo(xAxisEndDouble) > 0)
+                    {
+                        isOutsidelimits = true;
+                    }
+                    break;
+                case "System.Decimal":
+                    decimal xAxisStartDecimal, xAxisEndDecimal;
+                    if (decimal.TryParse(chtParameters.XAxisStart, out xAxisStartDecimal)
+                        && ((decimal)chartData.S).CompareTo(xAxisStartDecimal) < 0)
+                    {
+                            isOutsidelimits = true;
+                    }
+                    if (decimal.TryParse(chtParameters.XAxisEnd, out xAxisEndDecimal)
+                        && ((decimal)chartData.S).CompareTo(xAxisEndDecimal) > 0)
                     {
                         isOutsidelimits = true;
                     }
@@ -283,8 +295,10 @@ namespace EpiDashboard.Gadgets.Charting
                     break;
                 case "System.Single":
                 case "System.Double":
-                case "System.Decimal":
                     returnValue = ((double)dataOne.S).CompareTo((double)dataTwo.S);
+                    break;
+                case "System.Decimal":
+                    returnValue = ((decimal)dataOne.S).CompareTo((decimal)dataTwo.S);
                     break;
                 default:
                     returnValue = ((double)dataOne.S).CompareTo((double)dataTwo.S);
