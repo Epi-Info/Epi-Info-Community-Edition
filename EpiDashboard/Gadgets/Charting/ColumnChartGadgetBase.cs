@@ -89,6 +89,8 @@ namespace EpiDashboard.Gadgets.Charting
         
         protected virtual bool GenerateColumnChartData(Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables, Strata strata = null)
         {
+            int missingValueCount = 0;
+            
             lock (syncLockData)
             {
                 ColumnChartParameters chtParameters = (ColumnChartParameters)Parameters;
@@ -177,84 +179,119 @@ namespace EpiDashboard.Gadgets.Charting
                         }
 
                         chartData.S = row[0];
-                        if (chartData.S == null || string.IsNullOrEmpty(chartData.S.ToString().Trim()))
+
+                        string valueString = chartData.S.ToString().Trim();
+
+                        if (chartData.S == null || string.IsNullOrEmpty(valueString))
                         {
                             chartData.S = Config.Settings.RepresentationOfMissing;
+                            missingValueCount++;
                         }
                         dataList.Add(chartData);
                     }
 
-                    //---
-                       var query = from chartData in dataList
-                                orderby chartData.S ascending
-                                select chartData;
-
-                       XYColumnChartData firstObj = query.First();
-                       XYColumnChartData lastObj = query.Last();
-                      
-                           if (chtParameters.XAxisStart > 0 &&
-                               (table.Columns[0].DataType.ToString().Equals("System.Single") ||
-                               table.Columns[0].DataType.ToString().Equals("System.Double") ||
-                               table.Columns[0].DataType.ToString().Equals("System.Decimal")))
-                           {
-                               XYColumnChartData fillerFirst = new XYColumnChartData();
-                               fillerFirst.Y = 0;
-                               fillerFirst.X = strataValue;
-                               fillerFirst.S = chtParameters.XAxisStart;
-                               dataList.Add(fillerFirst);
-
-                               List<XYColumnChartData> dataListtoRemove = new List<XYColumnChartData>();
-                               foreach (XYColumnChartData xyc in dataList)
-                               {
-                                   XYColumnChartData columnchartdatalistitem = new XYColumnChartData();
-                                   columnchartdatalistitem.X = xyc.X;
-                                   columnchartdatalistitem.Y = xyc.Y;
-                                   columnchartdatalistitem.S = xyc.S;
-                                   double svalue = Convert.ToDouble(columnchartdatalistitem.S);
-                                   if (svalue < chtParameters.XAxisStart)
-                                   { dataListtoRemove.Add(xyc); }
-                               }
-                               foreach (XYColumnChartData xyc in dataListtoRemove)
-                               {
-                                   if (dataList.Contains(xyc))
-                                   { dataList.Remove(xyc); }
-                               }
-                           }
-
-                           if (chtParameters.XAxisEnd > 0 &&
-                               (table.Columns[0].DataType.ToString().Equals("System.Single") ||
-                               table.Columns[0].DataType.ToString().Equals("System.Double") ||
-                               table.Columns[0].DataType.ToString().Equals("System.Decimal")))
-                           {
-                               XYColumnChartData fillerLast = new XYColumnChartData();
-                               fillerLast.Y = 0;
-                               fillerLast.X = strataValue;
-                               fillerLast.S = chtParameters.XAxisEnd;
-                               dataList.Add(fillerLast);
-                               List<XYColumnChartData> dataListtoRemove = new List<XYColumnChartData>();
-                               foreach (XYColumnChartData xyc in dataList)
-                               {
-                                   XYColumnChartData columnchartdatalistitem = new XYColumnChartData();
-                                   columnchartdatalistitem.X = xyc.X;
-                                   columnchartdatalistitem.Y = xyc.Y;
-                                   columnchartdatalistitem.S = xyc.S;
-                                   double svalue = Convert.ToDouble(columnchartdatalistitem.S);
-                                   if (svalue > chtParameters.XAxisEnd)
-                                   { dataListtoRemove.Add(xyc); }
-                               }
-                               foreach (XYColumnChartData xyc in dataListtoRemove)
-                               {
-                                   if (dataList.Contains(xyc))
-                                   { dataList.Remove(xyc); }
-                               }
-                           }
-                       
-                    //-- 
+                    dataList.RemoveAll(ValueMissing);
+                    dataList.RemoveAll(OutsideLimits);
+                    dataList.Sort(new ChartDataComparer());
                 }
                 this.Dispatcher.BeginInvoke(new SetChartDataDelegate(SetChartData), dataList, strata);
             }
 
             return true;
+        }
+
+        private bool OutsideLimits(XYColumnChartData chartData)
+        {
+            ColumnChartParameters chtParameters = (ColumnChartParameters)Parameters;
+
+            bool isOutsidelimits = false;
+            string compareType;
+            Type datType = chartData.S.GetType();
+            compareType = datType.ToString();
+
+            switch (compareType)
+            {
+                case "System.DateTime":
+                    DateTime xAxisStartDateTime, xAxisEndDateTime;
+                    if (DateTime.TryParse(chtParameters.XAxisStart, out xAxisStartDateTime)
+                        && (((DateTime)chartData.S).CompareTo(xAxisStartDateTime) < 0))
+                    {
+                        isOutsidelimits = true;
+                    }
+                    if (DateTime.TryParse(chtParameters.XAxisEnd, out xAxisEndDateTime)
+                        && (((DateTime)chartData.S).CompareTo(xAxisEndDateTime) > 0))
+                    {
+                        isOutsidelimits = true;
+                    }
+                    break;
+                case "System.String":
+                    if (string.IsNullOrEmpty((string)chtParameters.XAxisStart) == false
+                        && ((string)chartData.S).CompareTo((string)chtParameters.XAxisStart) < 0)
+                    {
+                        isOutsidelimits = true;
+                    }
+                    if (string.IsNullOrEmpty((string)chtParameters.XAxisEnd) == false
+                        && ((string)chartData.S).CompareTo((string)chtParameters.XAxisEnd) > 0)
+                    {
+                        isOutsidelimits = true;
+                    }
+                    break;
+                case "System.Single":
+                case "System.Double":
+                case "System.Decimal":
+                    double xAxisStartDouble, xAxisEndDouble;
+                    if (double.TryParse(chtParameters.XAxisStart, out xAxisStartDouble)
+                        && ((double)chartData.S).CompareTo(xAxisStartDouble) < 0)
+                    {
+                            isOutsidelimits = true;
+                    }
+                    if (double.TryParse(chtParameters.XAxisEnd, out xAxisEndDouble)
+                        && ((double)chartData.S).CompareTo(xAxisEndDouble) > 0)
+                    {
+                        isOutsidelimits = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            return isOutsidelimits;
+        } 
+        
+        private bool ValueMissing(XYColumnChartData chartData)
+        {
+            return (chartData.S.ToString() == Config.Settings.RepresentationOfMissing);
+        }
+    }
+
+    public class ChartDataComparer : System.Collections.Generic.IComparer<XYColumnChartData>
+    {
+        public int Compare(XYColumnChartData dataOne, XYColumnChartData dataTwo)
+        {
+            int returnValue;
+            string compareType;
+            Type datType = dataOne.S.GetType(); // dpb should come from a metadata
+            compareType = datType.ToString();
+
+            switch (compareType)
+            {
+                case "System.DateTime":
+                    returnValue = ((DateTime)dataOne.S).CompareTo((DateTime)dataTwo.S);
+                    break;
+                case "System.String":
+                    returnValue = ((string)dataOne.S).CompareTo((string)dataTwo.S);
+                    break;
+                case "System.Single":
+                case "System.Double":
+                case "System.Decimal":
+                    returnValue = ((double)dataOne.S).CompareTo((double)dataTwo.S);
+                    break;
+                default:
+                    returnValue = ((double)dataOne.S).CompareTo((double)dataTwo.S);
+                    break;
+            }
+
+            return returnValue;
         }
     }
 }

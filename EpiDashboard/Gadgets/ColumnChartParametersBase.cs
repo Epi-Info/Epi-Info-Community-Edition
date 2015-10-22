@@ -19,16 +19,15 @@ namespace EpiDashboard
         /// <summary>
         /// Default constructor
         /// </summary>
-        public ColumnChartParametersBase()
-            : base()
+        public ColumnChartParametersBase() : base()
         {
             BarSpace = BarSpacing.Default;
             BarType = BarKind.Rectangle;
             YAxisFrom = 0;
             YAxisTo = 0;
             YAxisStep = 0;
-            XAxisStart = 0;
-            XAxisEnd = 0;
+            XAxisStart = string.Empty;
+            XAxisEnd = string.Empty;
         }
 
         /// <summary>
@@ -57,8 +56,9 @@ namespace EpiDashboard
         public double YAxisFrom { get; set; }
         public double YAxisTo { get; set; }
         public double YAxisStep { get; set; }
-        public double XAxisStart { get; set; }
-        public double XAxisEnd { get; set; }
+        public string XAxisStart { get; set; }
+        public string XAxisEnd { get; set; }
+        public object XAxisStep { get; set; }
 
         #endregion  // Properties
 
