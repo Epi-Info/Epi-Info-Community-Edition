@@ -631,8 +631,8 @@
                         <Controls:StatusBarBordersButton x:Name="statusStripButtonShowBorders" Margin="1,0,1,0">
                             <Controls:StatusBarBordersButton.ToolTip>
                                 <StackPanel>
-                                    <Label FontWeight="Bold">Hide Gadget Borders Button</Label>
-                                    <TextBlock
+                                    <Label Loaded="HideBorderLabel_Loaded" FontWeight="Bold">Hide Gadget Borders Button</Label>
+                                    <TextBlock Loaded="HideBorderText_Loaded"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
                                         Toggles the display of gadget borders and any buttons on the gadget's border.
                                     </TextBlock>
@@ -642,8 +642,8 @@
                         <Controls:StatusBarArrangeButton x:Name="statusStripButtonVerticalArrange" Margin="1,0,1,0">
                             <Controls:StatusBarArrangeButton.ToolTip>
                                 <StackPanel>
-                                    <Label FontWeight="Bold">Vertical Arrange Button</Label>
-                                    <TextBlock
+                                    <Label Loaded="VertArrangeLabel_Loaded" FontWeight="Bold">Vertical Arrange Button</Label>
+                                    <TextBlock Loaded="VertArrangeText_Loaded"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
                                         Toggles a vertical stacking of gadgets. When gadgets are in vertical stack mode, they are automatically positioned and the user cannot re-position them.
                                     </TextBlock>

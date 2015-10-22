@@ -727,7 +727,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toggles the display of the gadget borders and any buttons on the borders..
+        ///   Looks up a localized string similar to Toggles the display of the gadget borders and the buttons on the borders..
         /// </summary>
         public static string DASHBOARD_HIDE_BORDERS_DESC {
             get {
@@ -772,7 +772,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toggles a vertical stacking of gadgets. Canvas with Vertical Arrange mode turned on positions gadgets automatically and they cannot be indivually positioned..
+        ///   Looks up a localized string similar to Toggles a vertical stacking of gadgets. Canvas with Vertical Arrange turned on positions gadgets automatically so they do not need to be arranged indivually..
         /// </summary>
         public static string DASHBOARD_VERTICAL_ARRANGE_DESC {
             get {
