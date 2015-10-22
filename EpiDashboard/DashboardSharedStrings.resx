@@ -1784,13 +1784,13 @@ of records or select fewer fields for the group.</value>
     <value>Hide Gadget Borders</value>
   </data>
   <data name="DASHBOARD_HIDE_BORDERS_DESC" xml:space="preserve">
-    <value>Toggles the display of the gadget borders and any buttons on the borders.</value>
+    <value>Toggles the display of the gadget borders and the buttons on the borders.</value>
   </data>
   <data name="DASHBOARD_VERTICAL_ARRANGE" xml:space="preserve">
     <value>Vertical Arrange</value>
   </data>
   <data name="DASHBOARD_VERTICAL_ARRANGE_DESC" xml:space="preserve">
-    <value>Toggles a vertical stacking of gadgets. Canvas with Vertical Arrange mode turned on positions gadgets automatically and they cannot be indivually positioned.</value>
+    <value>Toggles a vertical stacking of gadgets. Canvas with Vertical Arrange turned on positions gadgets automatically so they do not need to be arranged indivually.</value>
   </data>
   <data name="EXPORT_DEST_FILENAME" xml:space="preserve">
     <value>File name</value>

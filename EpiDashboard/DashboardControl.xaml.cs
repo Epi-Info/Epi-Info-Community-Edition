@@ -4311,5 +4311,29 @@ namespace EpiDashboard
                 //}
             }
         }
+
+        private void HideBorderLabel_Loaded (object sender, RoutedEventArgs e)
+        {
+            Label HideBorderLabel = sender as Label;
+            HideBorderLabel.Content = DashboardSharedStrings.DASHBOARD_HIDE_BORDERS;
+        }
+
+        private void HideBorderText_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBlock HideBorderText = sender as TextBlock;
+            HideBorderText.Text = DashboardSharedStrings.DASHBOARD_HIDE_BORDERS_DESC;
+        }
+
+        private void VertArrangeLabel_Loaded(object sender, RoutedEventArgs e)
+        {
+            Label VertArrangeLabel = sender as Label;
+            VertArrangeLabel.Content = DashboardSharedStrings.DASHBOARD_VERTICAL_ARRANGE;
+        }
+
+        private void VertArrangeText_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBlock VertArrangeText = sender as TextBlock;
+            VertArrangeText.Text = DashboardSharedStrings.DASHBOARD_VERTICAL_ARRANGE_DESC;
+        }
     }
 }
