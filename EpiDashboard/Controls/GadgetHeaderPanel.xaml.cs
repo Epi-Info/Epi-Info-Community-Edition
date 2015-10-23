@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Epi.Windows;
 using EpiDashboard.Gadgets.Charting;
 
 namespace EpiDashboard.Controls
@@ -205,7 +206,7 @@ namespace EpiDashboard.Controls
             
             if (IsGadget())
             {
-                result = MessageBox.Show("Are you sure you want to remove/close this gadget from your canvas?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                result = MessageBox.Show(DashboardSharedStrings.WARNING_CONFIRM_CLOSE, DashboardSharedStrings.WARNING, MessageBoxButton.YesNo, MessageBoxImage.Warning);
             }
 
             if (GadgetCloseButtonClicked != null && result == MessageBoxResult.Yes)

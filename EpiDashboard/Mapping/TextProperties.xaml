@@ -3,21 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" d:DesignWidth="800">
-    <Grid x:Name="grdMain" Width="800">
-        <StackPanel Orientation="Horizontal">
-            <Label x:Name="lblTitle" Width="80" FontWeight="Bold" Visibility="Collapsed">Label</Label>
-            <Label x:Name="lblText">Text:</Label>
-            <TextBox x:Name="txtText" Width="330"/>
-            <Label x:Name="lblFont">Font:</Label>
-            <TextBox x:Name="txtFont" Width="120" IsReadOnly="True"/>
-            <Button x:Name="btnFont" Content="..." Width="30" Margin="10,0,0,0"/>
-        </StackPanel>
-        <Rectangle x:Name="rctColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#FFFF1100" Margin="0,0,50,0">
-            <Rectangle.ToolTip>
-                <Label Content="Point color"/>
-            </Rectangle.ToolTip>
-        </Rectangle>
-        <Button x:Name="btnOK" Content="OK" Width="30" HorizontalAlignment="Right" IsEnabled="False"/>
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="58">
+    <Grid x:Name="grdMain" Width="790">
+        <Border 
+                BorderBrush="Gray"
+                Background="White"
+                BorderThickness="1"
+                Padding="2">
+            <StackPanel Orientation="Horizontal" >
+                <Grid Width="780">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="lblTitle" Grid.Column="0" Width="80" FontWeight="Bold" VerticalAlignment="Center" Visibility="Visible">Label</Label>
+                    <StackPanel Orientation="Vertical" Width="Auto" Margin="5,-3,5,0" Grid.Column="1" Grid.ColumnSpan="2">
+                        <Label x:Name="lblText">Text:</Label>
+                        <TextBox x:Name="txtText" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Width="Auto" Margin="5,-3,5,0" Grid.Column="3">
+                        <Label x:Name="lblFont">Font Style:</Label>
+                        <TextBox x:Name="txtFont" IsReadOnly="True"/>
+                    </StackPanel>
+                    <Button x:Name="btnFont" Content="Change Font" Height="23" Width="Auto" Padding="5,0,5,0" Grid.Column="4" Margin="0,14,0,0"/>
+
+                    <Rectangle x:Name="rctColor" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" >
+                        <Rectangle.ToolTip>
+                            <Label Content="Point color"/>
+                        </Rectangle.ToolTip>
+                    </Rectangle>
+                    <StackPanel Orientation="Horizontal"  Grid.Column="7" VerticalAlignment="Center"  >
+                        <Button x:Name="btnOK" Content="OK" Margin="120,0,0,0" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

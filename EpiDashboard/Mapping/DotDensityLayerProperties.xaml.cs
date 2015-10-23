@@ -43,17 +43,17 @@ namespace EpiDashboard.Mapping
             this.mapControl = mapControl;           
             FillComboBoxes();
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
-            btnShapeFile.Click += new RoutedEventHandler(btnShapeFile_Click);
+            //btnShapeFile.Click += new RoutedEventHandler(btnShapeFile_Click);
             cbxDataKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxShapeKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             rctDotColor.MouseUp += new MouseButtonEventHandler(rctDotColor_MouseUp);
-            rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
+            //rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
             rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
 
             #region translation;
             lblTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_DOTDENSITY; 
-            btnShapeFile.Content = DashboardSharedStrings.BUTTON_BROWSE_SHAPEFILE;
+            //btnShapeFile.Content = DashboardSharedStrings.BUTTON_BROWSE_SHAPEFILE;
             lblClasses.Content = DashboardSharedStrings.GADGET_MAP_DOT_VALUE;
             lblShapeKey.Content = DashboardSharedStrings.GADGET_MAP_FEATURE;
             lblDataKey.Content = DashboardSharedStrings.GADGET_MAP_DATA;
@@ -219,7 +219,7 @@ namespace EpiDashboard.Mapping
             cbxShapeKey.IsEnabled = false;
             cbxValue.IsEnabled = false;
             txtDotValue.IsReadOnly = true;
-            btnShapeFile.Visibility = Visibility.Collapsed;
+            //btnShapeFile.Visibility = Visibility.Collapsed;
             grdMain.Width = 700;
             lblTitle.Visibility = System.Windows.Visibility.Visible;
         }

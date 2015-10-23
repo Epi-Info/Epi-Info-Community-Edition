@@ -30,7 +30,7 @@
         <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  Background="{StaticResource PrimaryAccentColorLight}" >
             <Border BorderBrush="#015796" BorderThickness="0 0 0 1">
                 <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
-                    <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Choropleth</Label>
+            <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Choropleth</Label>
                 </Viewbox>
             </Border>
         </StackPanel>
@@ -72,105 +72,105 @@
 
         <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible" VerticalAlignment="Stretch">
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
+            <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
             </StackPanel>
 
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel Margin="0 0 0 5">
-                    <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
-                        <Label x:Name="tblockDataSource">Data Source:</Label>
+            <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
+                <Label x:Name="tblockDataSource">Data Source:</Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtProjectPath" IsReadOnly="True"></TextBox>
+                    <Button  x:Name="btnBrowse" Height="Auto" Grid.Column="2" Click="btnBrowse_Click">Browse</Button>
+                </Grid>
+            </StackPanel>
+            <StackPanel x:Name="panelDataSourceOther" Visibility="Collapsed">
+                <Label x:Name="tblockConnectionString">Connection String:</Label>
+                <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtDataSource" Margin="0,0,0,8" />
+            </StackPanel>
+
+            <StackPanel x:Name="panelDataSourceAdvanced" Visibility="Collapsed">
+                <Label x:Name="tblockSQLQuery">SQL Query:</Label>
+                <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtSQLQuery"></TextBox>
+            </StackPanel>
+            <Label></Label>
+            <StackPanel x:Name="panelBoundaries" IsEnabled="False">
+                <Label x:Name="lblBoundaries"  Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
+                <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="Shapefile" Checked="radShapeFile_Checked"  />
+                <Label></Label>
+                <StackPanel x:Name="panelshape" IsEnabled="False">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="txtShapePath" IsReadOnly="False" TextChanged="txtProjectPath_TextChanged"></TextBox>
+                        <Button x:Name="btnBrowseShape" Grid.Column="2" HorizontalAlignment="Left" Click="btnBrowseShapeFile_Click" Height="Auto" >Browse</Button>
+                    </Grid>
+                </StackPanel>
+                <Label></Label>
+                <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
+                <Label></Label>
+                <StackPanel x:Name="panelmap" IsEnabled="False" Margin="20 10 0 0 ">
+                    <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known map server" Checked="radconnectmapserver_Checked" />
+                    <StackPanel x:Name="panelmapconnect" IsEnabled="False">
+                        <Label></Label>
+                        <ComboBox x:Name="cbxmapserver" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" Width="380">
+                            <ComboBoxItem>NationalMap.gov - New York County Boundaries</ComboBoxItem>
+                            <ComboBoxItem>NationalMap.gov - Rhode Island Zip Code Boundaries</ComboBoxItem>
+                            <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
+                            <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <Label></Label>
+                    <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver"  Content="Provide location of another map server" Checked="radlocatemapserver_Checked" />
+                    <Label></Label>
+                    <StackPanel x:Name="panelmapserver" IsEnabled="False" >
+                        <Label x:Name="lblURL">URL:</Label>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="txtMapSeverpath" TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
+                            <Button x:Name="btnMapserverlocate" Height="Auto" Grid.Column="2" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
+                        </Grid>
+                        <Label></Label>
+                        <Label x:Name="lblExampleMapServerURL" Style="{StaticResource PropertiesExampleText}">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</Label>
+                        <StackPanel Margin="10 10 0 0">
+                            <Label x:Name="lblSelectFeature">Select Feature:</Label>
+                            <ComboBox x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged" Width="380"></ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <Label></Label>
+                    <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
+                    <Label></Label>
+                    <StackPanel x:Name="panelKml" IsEnabled="False" >
+                        <Label x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
+                        <Label></Label>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="12" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBox x:Name="txtProjectPath" IsReadOnly="True"></TextBox>
-                            <Button  x:Name="btnBrowse" Height="Auto" Grid.Column="2" Click="btnBrowse_Click">Browse</Button>
+                            <TextBox x:Name="txtKMLpath" IsReadOnly="False" ></TextBox>
+                            <Button x:Name="btnKMLFile" Height="Auto" Grid.Column="2" Click="btnKMLFile_Click">Browse</Button>
                         </Grid>
-                    </StackPanel>
-                    <StackPanel x:Name="panelDataSourceOther" Visibility="Collapsed">
-                        <Label x:Name="tblockConnectionString">Connection String:</Label>
-                        <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtDataSource" Margin="0,0,0,8" />
-                    </StackPanel>
-
-                    <StackPanel x:Name="panelDataSourceAdvanced" Visibility="Collapsed">
-                        <Label x:Name="tblockSQLQuery">SQL Query:</Label>
-                        <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtSQLQuery"></TextBox>
-                    </StackPanel>
-                    <Label></Label>
-                    <StackPanel x:Name="panelBoundaries" IsEnabled="False">
-                        <Label x:Name="lblBoundaries"  Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
-                        <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="Shapefile" Checked="radShapeFile_Checked"  />
                         <Label></Label>
-                        <StackPanel x:Name="panelshape" IsEnabled="False">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="12" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <TextBox x:Name="txtShapePath" IsReadOnly="False" TextChanged="txtProjectPath_TextChanged"></TextBox>
-                                <Button x:Name="btnBrowseShape" Grid.Column="2" HorizontalAlignment="Left" Click="btnBrowseShapeFile_Click" Height="Auto" >Browse</Button>
-                            </Grid>
-                        </StackPanel>
-                        <Label></Label>
-                        <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
-                        <Label></Label>
-                        <StackPanel x:Name="panelmap" IsEnabled="False" Margin="20 10 0 0 ">
-                            <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known map server" Checked="radconnectmapserver_Checked" />
-                            <StackPanel x:Name="panelmapconnect" IsEnabled="False">
-                                <Label></Label>
-                                <ComboBox x:Name="cbxmapserver" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" Width="380">
-                                    <ComboBoxItem>NationalMap.gov - New York County Boundaries</ComboBoxItem>
-                                    <ComboBoxItem>NationalMap.gov - Rhode Island Zip Code Boundaries</ComboBoxItem>
-                                    <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
-                                    <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
-                                </ComboBox>
-                            </StackPanel>
-                            <Label></Label>
-                            <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver"  Content="Provide location of another map server" Checked="radlocatemapserver_Checked" />
-                            <Label></Label>
-                            <StackPanel x:Name="panelmapserver" IsEnabled="False" >
-                                <Label x:Name="lblURL">URL:</Label>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition Width="12"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox x:Name="txtMapSeverpath" TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
-                                    <Button x:Name="btnMapserverlocate" Height="Auto" Grid.Column="2" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
-                                </Grid>
-                                <Label></Label>
-                                <Label x:Name="lblExampleMapServerURL" Style="{StaticResource PropertiesExampleText}">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</Label>
-                                <StackPanel Margin="10 10 0 0">
-                                    <Label x:Name="lblSelectFeature">Select Feature:</Label>
-                                    <ComboBox x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged" Width="380"></ComboBox>
-                                </StackPanel>
-                            </StackPanel>
-                            <Label></Label>
-                            <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
-                            <Label></Label>
-                            <StackPanel x:Name="panelKml" IsEnabled="False" >
-                                <Label x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
-                                <Label></Label>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition Width="12" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox x:Name="txtKMLpath" IsReadOnly="False" ></TextBox>
-                                    <Button x:Name="btnKMLFile" Height="Auto" Grid.Column="2" Click="btnKMLFile_Click">Browse</Button>
-                                </Grid>
-                                <Label></Label>
-                                <Label x:Name="lblExampleKMLFile" Style="{StaticResource PropertiesExampleText}">Example: http://code.google.com/apis/kml/documentation/us_states.kml</Label>
-                            </StackPanel>
-                        </StackPanel>
+                        <Label x:Name="lblExampleKMLFile" Style="{StaticResource PropertiesExampleText}">Example: http://code.google.com/apis/kml/documentation/us_states.kml</Label>
                     </StackPanel>
                 </StackPanel>
+            </StackPanel>
+        </StackPanel>
             </ScrollViewer>
         </DockPanel>
 
@@ -182,31 +182,31 @@
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel Margin="0 0 0 5">
-                    <!-- <Label>Shape File:</Label> -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <!-- <TextBox x:Name="txtShapePath" IsReadOnly="True"></TextBox>
+                <!-- <Label>Shape File:</Label> -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <!-- <TextBox x:Name="txtShapePath" IsReadOnly="True"></TextBox>
                   <Button x:Name="btnBrowseShape" Height="Auto" Grid.Column="2" Click="btnBrowseShapeFile_Click">Browse</Button>  -->
-                    </Grid>
+                </Grid>
+                <StackPanel>
                     <StackPanel>
-                        <StackPanel>
-                            <Label x:Name="lblFeature">Feature Key:</Label>
-                            <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbShapeKey" SelectionChanged="cmbShapeKey_SelectionChanged" Width="300"></ComboBox>
-                        </StackPanel>
-                        <StackPanel>
-                            <Label x:Name="lblData">Data Key:</Label>
-                            <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbDataKey" SelectionChanged="cmbDataKey_SelectionChanged" Height="25" Width="300"></ComboBox>
-                        </StackPanel>
-                        <StackPanel>
-                            <Label x:Name="lblValue">Value Field:</Label>
-                            <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbValue" SelectionChanged="cmbValue_SelectionChanged" Height="25" Width="300"></ComboBox>
-                        </StackPanel>
+                        <Label x:Name="lblFeature">Feature Key:</Label>
+                        <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbShapeKey" SelectionChanged="cmbShapeKey_SelectionChanged" Width="300"></ComboBox>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label x:Name="lblData">Data Key:</Label>
+                        <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbDataKey" SelectionChanged="cmbDataKey_SelectionChanged" Height="25" Width="300"></ComboBox>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label x:Name="lblValue">Value Field:</Label>
+                        <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbValue" SelectionChanged="cmbValue_SelectionChanged" Height="25" Width="300"></ComboBox>
                     </StackPanel>
                 </StackPanel>
+            </StackPanel>
             </ScrollViewer>
         </DockPanel>
 
@@ -216,12 +216,12 @@
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel Margin="0 0 0 5">
-                    <TextBlock x:Name="tblockRows" Text="2,255 unfiltered rows" Margin="0,0,0,16" />
-                    <TextBlock x:Name="tblockColumns" Text="252 columns" Margin="0,0,0,16" />
-                    <TextBlock x:Name="tblockCacheDateTime" Text="Data last cached at 12/16/2011 1:56 PM" Margin="0,0,0,16" />
-                    <TextBlock x:Name="tblockCacheTimeElapsed" Text="Took 4:32:32 to locally cache data" Margin="0,0,0,16" />
-                    <TextBlock x:Name="tblockCurrentEpiVersion" Text="Epi Info 7.0.0.0" Margin="0,0,0,16" />
-                </StackPanel>
+                <TextBlock x:Name="tblockRows" Text="2,255 unfiltered rows" Margin="0,0,0,16" />
+                <TextBlock x:Name="tblockColumns" Text="252 columns" Margin="0,0,0,16" />
+                <TextBlock x:Name="tblockCacheDateTime" Text="Data last cached at 12/16/2011 1:56 PM" Margin="0,0,0,16" />
+                <TextBlock x:Name="tblockCacheTimeElapsed" Text="Took 4:32:32 to locally cache data" Margin="0,0,0,16" />
+                <TextBlock x:Name="tblockCurrentEpiVersion" Text="Epi Info 7.0.0.0" Margin="0,0,0,16" />
+            </StackPanel>
             </ScrollViewer>
         </DockPanel>
 
@@ -245,9 +245,9 @@
                                 </Rectangle.ToolTip>
                             </Rectangle>
                         </StackPanel>
-                        <Label x:Name="lblColorRamp">Color Ramp:</Label>
+                        <Label x:Name="lblColorRamp">Colors</Label>
                         <StackPanel Orientation="Horizontal" Margin="8,0,0,2" >
-                            <Label x:Name="lblColorStart">Start:</Label>
+                            <Label x:Name="lblColorStart">Start</Label>
                             <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
 
                             <Rectangle x:Name="rctLowColor" MouseLeftButtonUp="rctLowColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,11,0">
@@ -257,7 +257,7 @@
                             </Rectangle>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="8,0,0,2" >
-                            <Label x:Name="lblColorEnd" Margin="0,0,7,0">End:</Label>
+                            <Label x:Name="lblColorEnd" Margin="0,0,7,0">End</Label>
                             <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
                             <Rectangle x:Name="rctHighColor" MouseLeftButtonUp="rctHighColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
                                 <Rectangle.ToolTip>
@@ -329,126 +329,126 @@
                                 <Label x:Name="lblClassBreaks" >Class Breaks:</Label>
 
                                 <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" Width="50" Height="25" Margin="0,0,0,0">
-                                    <ComboBoxItem>2</ComboBoxItem>
-                                    <ComboBoxItem>3</ComboBoxItem>
-                                    <ComboBoxItem>4</ComboBoxItem>
-                                    <ComboBoxItem IsSelected="True">5</ComboBoxItem>
-                                    <ComboBoxItem>6</ComboBoxItem>
-                                    <ComboBoxItem>7</ComboBoxItem>
-                                    <ComboBoxItem>8</ComboBoxItem>
-                                    <ComboBoxItem>9</ComboBoxItem>
-                                    <ComboBoxItem>10</ComboBoxItem>
-                                </ComboBox>
+                                <ComboBoxItem>2</ComboBoxItem>
+                                <ComboBoxItem>3</ComboBoxItem>
+                                <ComboBoxItem>4</ComboBoxItem>
+                                <ComboBoxItem IsSelected="True">5</ComboBoxItem>
+                                <ComboBoxItem>6</ComboBoxItem>
+                                <ComboBoxItem>7</ComboBoxItem>
+                                <ComboBoxItem>8</ComboBoxItem>
+                                <ComboBoxItem>9</ComboBoxItem>
+                                <ComboBoxItem>10</ComboBoxItem>
+                            </ComboBox>
 
-                            </StackPanel>
+                        </StackPanel>
 
                         <StackPanel Margin="0 20 0 0">
                                 <CheckBox Style="{StaticResource PropertiesPanelCheckbox}" x:Name="quintilesOption" Click="CheckBox_Quantiles_Click" Content="Quantiles" HorizontalAlignment="Left" Margin=" 10,0,0,16" />
                             </StackPanel>
-                    
-                        
+
+
                         <StackPanel Margin="0 0 0 0">
-                            <Grid x:Name="stratGrid">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="35"/>
-                                    <RowDefinition Height="35"/>
-                                    <RowDefinition Height="35"/>
-                                    <RowDefinition Height="35"/>
-                                    <RowDefinition Height="35"/>
-                                    <RowDefinition Height="35"/>
-                                    <RowDefinition Height="35"/>
-                                    <RowDefinition Height="35"/>
-                                    <RowDefinition Height="35"/>
-                                    <RowDefinition Height="35"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="75" x:Name="rampStartColumn"/>
-                                    <ColumnDefinition Width="50" x:Name="rampCompareColumn"/>
-                                    <ColumnDefinition Width="75" x:Name="rampEndColumn"/>
-                                    <ColumnDefinition Width="0" x:Name="quintileColumn"/>
-                                    <ColumnDefinition Width="220"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock x:Name="tblockColorRamp" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Color</TextBlock>
-                                <TextBlock x:Name="tblockRange" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">Range</TextBlock>
-                                <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" x:Name="quintilesHeaderText" MinWidth="60">Quintiles</TextBlock>
-                                <TextBlock x:Name="tblockLegText" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center">Legend Text</TextBlock>
+                        <Grid x:Name="stratGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="75" x:Name="rampStartColumn"/>
+                                <ColumnDefinition Width="50" x:Name="rampCompareColumn"/>
+                                <ColumnDefinition Width="75" x:Name="rampEndColumn"/>
+                                <ColumnDefinition Width="0" x:Name="quintileColumn"/>
+                                <ColumnDefinition Width="220"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="tblockColorRamp" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Color</TextBlock>
+                            <TextBlock x:Name="tblockRange" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">Range</TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" x:Name="quintilesHeaderText" MinWidth="60">Quintiles</TextBlock>
+                            <TextBlock x:Name="tblockLegText" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center">Legend Text</TextBlock>
 
-                                <Rectangle Grid.Row="01" Grid.Column="0" x:Name="rctColor00" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor0_MouseLeftButtonUp"/>
-                                <Rectangle Grid.Row="02" Grid.Column="0" x:Name="rctColor01" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor1_MouseLeftButtonUp"/>
-                                <Rectangle Grid.Row="03" Grid.Column="0" x:Name="rctColor02" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor2_MouseLeftButtonUp"/>
-                                <Rectangle Grid.Row="04" Grid.Column="0" x:Name="rctColor03" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor3_MouseLeftButtonUp"/>
-                                <Rectangle Grid.Row="05" Grid.Column="0" x:Name="rctColor04" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor4_MouseLeftButtonUp"/>
-                                <Rectangle Grid.Row="06" Grid.Column="0" x:Name="rctColor05" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor5_MouseLeftButtonUp"/>
-                                <Rectangle Grid.Row="07" Grid.Column="0" x:Name="rctColor06" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor6_MouseLeftButtonUp"/>
-                                <Rectangle Grid.Row="08" Grid.Column="0" x:Name="rctColor07" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
-                                <Rectangle Grid.Row="09" Grid.Column="0" x:Name="rctColor08" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor8_MouseLeftButtonUp"/>
-                                <Rectangle Grid.Row="10" Grid.Column="0" x:Name="rctColor09" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor9_MouseLeftButtonUp"/>
-                                <Rectangle Grid.Row="11" Grid.Column="0" x:Name="rctColor10" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor10_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="01" Grid.Column="0" x:Name="rctColor00" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor0_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="02" Grid.Column="0" x:Name="rctColor01" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor1_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="03" Grid.Column="0" x:Name="rctColor02" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor2_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="04" Grid.Column="0" x:Name="rctColor03" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor3_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="05" Grid.Column="0" x:Name="rctColor04" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor4_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="06" Grid.Column="0" x:Name="rctColor05" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor5_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="07" Grid.Column="0" x:Name="rctColor06" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor6_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="08" Grid.Column="0" x:Name="rctColor07" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="09" Grid.Column="0" x:Name="rctColor08" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor8_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="10" Grid.Column="0" x:Name="rctColor09" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor9_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="11" Grid.Column="0" x:Name="rctColor10" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor10_MouseLeftButtonUp"/>
 
-                                <!--<TextBox Grid.Row="01" x:Name="rampStart00" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" Text="Missing" IsEnabled="False"/>-->
-                                <TextBox Grid.Row="02" x:Name="rampStart01" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="03" x:Name="rampStart02" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="04" x:Name="rampStart03" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="05" x:Name="rampStart04" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="06" x:Name="rampStart05" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="07" x:Name="rampStart06" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="08" x:Name="rampStart07" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="09" x:Name="rampStart08" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="10" x:Name="rampStart09" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="11" x:Name="rampStart10" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                            <!--<TextBox Grid.Row="01" x:Name="rampStart00" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" Text="Missing" IsEnabled="False"/>-->
+                            <TextBox Grid.Row="02" x:Name="rampStart01" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                            <TextBox Grid.Row="03" x:Name="rampStart02" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                            <TextBox Grid.Row="04" x:Name="rampStart03" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                            <TextBox Grid.Row="05" x:Name="rampStart04" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                            <TextBox Grid.Row="06" x:Name="rampStart05" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                            <TextBox Grid.Row="07" x:Name="rampStart06" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                            <TextBox Grid.Row="08" x:Name="rampStart07" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                            <TextBox Grid.Row="09" x:Name="rampStart08" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                            <TextBox Grid.Row="10" x:Name="rampStart09" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                            <TextBox Grid.Row="11" x:Name="rampStart10" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
 
-                                <!--<TextBlock Grid.Row="01" x:Name="centerText00" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">/</TextBlock>-->
-                                <TextBlock Grid.Row="02" x:Name="centerText01" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                                <TextBlock Grid.Row="03" x:Name="centerText02" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                                <TextBlock Grid.Row="04" x:Name="centerText03" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                                <TextBlock Grid.Row="05" x:Name="centerText04" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                                <TextBlock Grid.Row="06" x:Name="centerText05" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                                <TextBlock Grid.Row="07" x:Name="centerText06" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                                <TextBlock Grid.Row="08" x:Name="centerText07" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                                <TextBlock Grid.Row="09" x:Name="centerText08" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                                <TextBlock Grid.Row="10" x:Name="centerText09" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                                <TextBlock Grid.Row="11" x:Name="centerText10" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <!--<TextBlock Grid.Row="01" x:Name="centerText00" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">/</TextBlock>-->
+                            <TextBlock Grid.Row="02" x:Name="centerText01" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="03" x:Name="centerText02" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="04" x:Name="centerText03" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="05" x:Name="centerText04" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="06" x:Name="centerText05" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="07" x:Name="centerText06" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="08" x:Name="centerText07" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="09" x:Name="centerText08" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="10" x:Name="centerText09" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="11" x:Name="centerText10" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
 
-                                <!--<TextBox Grid.Row="01" x:Name="rampEnd00" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" Text="Excluded" IsEnabled="False"/>-->
-                                <TextBox Grid.Row="02" x:Name="rampEnd01" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="03" x:Name="rampEnd02" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="04" x:Name="rampEnd03" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="05" x:Name="rampEnd04" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="06" x:Name="rampEnd05" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="07" x:Name="rampEnd06" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="08" x:Name="rampEnd07" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="09" x:Name="rampEnd08" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="10" x:Name="rampEnd09" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="11" x:Name="rampEnd10" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                            <!--<TextBox Grid.Row="01" x:Name="rampEnd00" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" Text="Excluded" IsEnabled="False"/>-->
+                            <TextBox Grid.Row="02" x:Name="rampEnd01" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                            <TextBox Grid.Row="03" x:Name="rampEnd02" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                            <TextBox Grid.Row="04" x:Name="rampEnd03" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                            <TextBox Grid.Row="05" x:Name="rampEnd04" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                            <TextBox Grid.Row="06" x:Name="rampEnd05" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                            <TextBox Grid.Row="07" x:Name="rampEnd06" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                            <TextBox Grid.Row="08" x:Name="rampEnd07" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                            <TextBox Grid.Row="09" x:Name="rampEnd08" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                            <TextBox Grid.Row="10" x:Name="rampEnd09" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                            <TextBox Grid.Row="11" x:Name="rampEnd10" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
 
-                                <TextBox Grid.Row="02" x:Name="quintile01" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="03" x:Name="quintile02" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="04" x:Name="quintile03" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="05" x:Name="quintile04" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="06" x:Name="quintile05" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="07" x:Name="quintile06" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="08" x:Name="quintile07" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="09" x:Name="quintile08" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="10" x:Name="quintile09" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="11" x:Name="quintile10" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="02" x:Name="quintile01" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="03" x:Name="quintile02" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="04" x:Name="quintile03" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="05" x:Name="quintile04" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="06" x:Name="quintile05" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="07" x:Name="quintile06" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="08" x:Name="quintile07" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="09" x:Name="quintile08" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="10" x:Name="quintile09" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="11" x:Name="quintile10" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
 
-                                <TextBox Grid.Row="01" x:Name="legendText00" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center" Text="Missing / Excluded" IsEnabled="False"/>
-                                <TextBox Grid.Row="02" x:Name="legendText01" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="03" x:Name="legendText02" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="04" x:Name="legendText03" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="05" x:Name="legendText04" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="06" x:Name="legendText05" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="07" x:Name="legendText06" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="08" x:Name="legendText07" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="09" x:Name="legendText08" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="10" x:Name="legendText09" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="11" x:Name="legendText10" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                            </Grid>
-                        </StackPanel>
+                            <TextBox Grid.Row="01" x:Name="legendText00" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center" Text="Missing / Excluded" IsEnabled="False"/>
+                            <TextBox Grid.Row="02" x:Name="legendText01" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="03" x:Name="legendText02" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="04" x:Name="legendText03" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="05" x:Name="legendText04" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="06" x:Name="legendText05" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="07" x:Name="legendText06" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="08" x:Name="legendText07" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="09" x:Name="legendText08" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="10" x:Name="legendText09" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="11" x:Name="legendText10" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                        </Grid>
                     </StackPanel>
+                </StackPanel>
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>

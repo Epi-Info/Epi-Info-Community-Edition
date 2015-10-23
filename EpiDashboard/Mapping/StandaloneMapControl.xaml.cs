@@ -325,7 +325,7 @@ namespace EpiDashboard.Mapping
         private void PrepareToLoad()
         {
             //txtInternet.Visibility = Visibility.Collapsed;
-            txtLoading.Text = "Loading...";
+            txtLoading.Text = DashboardSharedStrings.MAP_LOADING;
             txtLoading.Visibility = Visibility.Visible;
             waitCursor.Visibility = Visibility.Visible;
         }
@@ -634,7 +634,8 @@ namespace EpiDashboard.Mapping
                 grdLayerConfig.Margin = new Thickness(0);
                 grdLayerConfig.Visibility = Visibility.Visible;
                 grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-
+                //grdMapDef.Children.Add((UIElement)layerProperties);
+                
                 DoubleAnimation opacityAnim = new DoubleAnimation();
                 opacityAnim.From = 0;
                 opacityAnim.To = 1;
