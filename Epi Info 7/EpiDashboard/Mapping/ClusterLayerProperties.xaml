@@ -15,7 +15,7 @@
         <StackPanel Orientation="Horizontal">
             <Label x:Name="lblTitle" Width="Auto" FontWeight="Bold" Visibility="Collapsed" VerticalAlignment="Bottom" Content="Case Cluster"/>
             <StackPanel Orientation="Vertical" Width="Auto">
-                <Label x:Name="lblDescription" HorizontalAlignment="Center" Content="Description:"/>
+                <Label x:Name="lblDescription" HorizontalAlignment="Left" Content="Description:"/>
                 <StackPanel Orientation="Horizontal" Width="Auto" Margin="5,0,5,0">
                     <TextBox x:Name="txtDescription" Width="150"/>
                     <Button x:Name="btnChangeText" Width="20" Content="..." Visibility="Collapsed" Click="btnChangeText_Click"/>
@@ -23,15 +23,15 @@
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Width="Auto" Margin="5,0,5,0">
-                <Label x:Name="lblLatitude" HorizontalAlignment="Center" Content="Latitude Field:"/>
+                <Label x:Name="lblLatitude" HorizontalAlignment="Left" Content="Latitude Field:"/>
                 <ComboBox x:Name="cbxLatitude" Width="110"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Width="Auto" Margin="5,0,5,0">
-                <Label x:Name="lblLongitude" HorizontalAlignment="Center" Content="Longitude Field:"/>
+                <Label x:Name="lblLongitude" HorizontalAlignment="Left" Content="Longitude Field:"/>
                 <ComboBox x:Name="cbxLongitude" Width="110"/>
             </StackPanel>
         </StackPanel>
-        <Rectangle VerticalAlignment="Bottom" x:Name="rctColor" HorizontalAlignment="Right" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" Margin="0,0,30,0" Visibility="Hidden" >
+        <Rectangle VerticalAlignment="Bottom" x:Name="rctColor" HorizontalAlignment="Right" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" Margin="0,0,30,0" Visibility="Visible" >
             <Rectangle.ToolTip>
                 <Label Content="Color"/>
             </Rectangle.ToolTip>

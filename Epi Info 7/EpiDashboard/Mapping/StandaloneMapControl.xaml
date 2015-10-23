@@ -128,8 +128,7 @@
                             </Grid>
                         </DockPanel>
 
-                        <DockPanel x:Name="iconAddDataLayer" 
-                                   Style="{StaticResource menuIconStyle}" Grid.Row="4" MouseLeftButtonUp="iconAddDataLayer_MouseLeftButtonUp">
+                        <DockPanel x:Name="iconAddDataLayer" Style="{StaticResource menuIconStyle}" Grid.Row="4" MouseLeftButtonUp="iconAddDataLayer_MouseLeftButtonUp">
                             <DockPanel.ToolTip>
                                 <StackPanel>
                                     <Label x:Name="tooltipAddDataLayerHeader" FontWeight="Bold">Add Data Layer</Label>
@@ -145,9 +144,7 @@
                             </Grid>
                         </DockPanel>
 
-                        <DockPanel x:Name="iconReference" MouseLeftButtonUp="iconReference_MouseLeftButtonUp"
-                                   Style="{StaticResource menuIconStyle}"
-                                   Grid.Row="5">
+                        <DockPanel x:Name="iconReference" Style="{StaticResource menuIconStyle}" Grid.Row="5" MouseLeftButtonUp="iconReference_MouseLeftButtonUp">
                             <DockPanel.ToolTip>
                                 <StackPanel>
                                     <Label x:Name="tooltipAddReferenceLayerHeader" FontWeight="Bold">Add Reference Layer</Label>
@@ -163,9 +160,7 @@
                             </Grid>
                         </DockPanel>
 
-                        <DockPanel x:Name="iconTimeLapse"
-                                   Style="{StaticResource menuIconStyle}" MouseLeftButtonUp="iconTimeLapse_MouseLeftButtonUp" IsEnabled="False"
-                                   Grid.Row="6">
+                        <DockPanel x:Name="iconTimeLapse" Style="{StaticResource menuIconStyle}" Grid.Row="6" MouseLeftButtonUp="iconTimeLapse_MouseLeftButtonUp" IsEnabled="False" >
                             <DockPanel.ToolTip>
                                 <StackPanel>
                                     <Label x:Name="tooltipTimeLapseHeader" FontWeight="Bold">Create Time Lapse</Label>
@@ -290,7 +285,7 @@
             </StackPanel>
 
         </Grid>
-       <Grid x:Name="grdLayerConfig" Visibility="Collapsed" HorizontalAlignment="Center" Width="850" Height="90" VerticalAlignment="Center">
+        <Grid x:Name="grdLayerConfig" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Center" Width="850" Height="90" VerticalAlignment="Center">
             <Rectangle Fill="#00919191" Stroke="Gray" Margin="0,0,0,5" />
             <Border Background="#DDFFFFFF" BorderBrush="DarkGray" Margin="10,10,10,15"
                     Width="850" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" >

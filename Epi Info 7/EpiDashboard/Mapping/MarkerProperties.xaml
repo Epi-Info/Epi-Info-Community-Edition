@@ -3,20 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" d:DesignWidth="800">
-    <Grid x:Name="grdMain" Width="800">
-        <StackPanel Orientation="Horizontal">
-            <Label x:Name="lblTitle" Width="80" FontWeight="Bold" Visibility="Collapsed">Marker</Label>
-            <Label x:Name="lblStyle">Style:</Label>
-            <ComboBox x:Name="cbxStyle" Width="100"/>
-            <Label x:Name="lblSize">Size:</Label>
-            <ComboBox x:Name="cbxSize" Width="100"/>
-        </StackPanel>
-        <Rectangle x:Name="rctColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" Margin="0,0,50,0">
-            <Rectangle.ToolTip>
-                <Label x:Name="rctColorToolTip" Content="Point color"/>
-            </Rectangle.ToolTip>
-        </Rectangle>
-        <Button x:Name="btnOK" Content="OK" Width="30" HorizontalAlignment="Right" IsEnabled="False"/>
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="58">
+    <Grid x:Name="grdMain" Width="790">
+        <Border 
+                BorderBrush="Gray"
+                Background="White"
+                BorderThickness="1"
+                Padding="2">
+            <StackPanel Orientation="Horizontal" >
+                <Grid Width="780">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="lblTitle" Width="80" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" Visibility="Visible">Marker</Label>
+                    <StackPanel Orientation="Vertical" Width="Auto" Margin="5,-3,5,0" Grid.Column="1" Grid.ColumnSpan="2">
+                        <Label x:Name="lblStyle">Style:</Label>
+                        <ComboBox x:Name="cbxStyle" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Width="Auto" Margin="5,-3,5,0" Grid.Column="3">
+                        <Label x:Name="lblSize">Size:</Label>
+                        <ComboBox x:Name="cbxSize" Width="100"/>
+                    </StackPanel>
+                    <Rectangle x:Name="rctColor" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" >
+                        <Rectangle.ToolTip>
+                            <Label x:Name="rctColorToolTip" Content="Point color"/>
+                        </Rectangle.ToolTip>
+                    </Rectangle>
+                    <StackPanel Orientation="Horizontal"  Grid.Column="6" VerticalAlignment="Center"  >
+                        <Button x:Name="btnOK" Content="OK" IsEnabled="False" Margin="120,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

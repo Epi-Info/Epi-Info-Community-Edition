@@ -1798,4 +1798,13 @@ of records or select fewer fields for the group.</value>
   <data name="REFERENCE_LAYER" xml:space="preserve">
     <value>Reference Layer</value>
   </data>
+  <data name="MAP_LOADING" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="WARNING" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="WARNING_CONFIRM_CLOSE" xml:space="preserve">
+    <value>Are you sure you want to remove this gadget from your canvas?</value>
+  </data>
 </root>

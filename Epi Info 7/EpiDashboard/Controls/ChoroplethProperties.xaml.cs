@@ -129,7 +129,7 @@ namespace EpiDashboard.Controls
             //Colors & Ranges Panel
             lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_TAB_COLORS_RANGES;
             tblockColorsSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
-            lblMissingExcluded.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
+            lblMissingExcluded.Content = DashboardSharedStrings.GADGET_MAP_COLOR_MISSING;
             lblColorRamp.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
             lblColorStart.Content = DashboardSharedStrings.GADGET_MAP_START;
             lblColorEnd.Content = DashboardSharedStrings.GADGET_MAP_END;

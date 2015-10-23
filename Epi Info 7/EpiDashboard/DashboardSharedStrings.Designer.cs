@@ -4308,6 +4308,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        public static string MAP_LOADING {
+            get {
+                return ResourceManager.GetString("MAP_LOADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color of points.
         /// </summary>
         public static string MAP_POINT_COLOR {
@@ -5015,6 +5024,24 @@ namespace EpiDashboard {
         public static string VARIABLE_CONTROL_TITLE {
             get {
                 return ResourceManager.GetString("VARIABLE_CONTROL_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string WARNING {
+            get {
+                return ResourceManager.GetString("WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove this gadget from your canvas?.
+        /// </summary>
+        public static string WARNING_CONFIRM_CLOSE {
+            get {
+                return ResourceManager.GetString("WARNING_CONFIRM_CLOSE", resourceCulture);
             }
         }
     }

@@ -3,20 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" d:DesignWidth="800">
-    <Grid x:Name="grdMain" Width="800">
-        <StackPanel Orientation="Horizontal">
-            <Label x:Name="lblTitle" Width="80" FontWeight="Bold" Visibility="Collapsed">Zone</Label>
-            <Label x:Name="lblRadius">Radius:</Label>
-            <TextBox x:Name="txtRadius" Width="100"/>
-            <Label x:Name="lblUnits">Units:</Label>
-            <ComboBox x:Name="cbxUnits" Width="100"/>
-        </StackPanel>
-        <Rectangle x:Name="rctColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" Margin="0,0,50,0">
-            <Rectangle.ToolTip>
-                <Label Content="Point color"/>
-            </Rectangle.ToolTip>
-        </Rectangle>
-        <Button x:Name="btnOK" Content="OK" Width="30" HorizontalAlignment="Right" IsEnabled="False"/>
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="58">
+    <Grid x:Name="grdMain" Width="790">
+        <Border 
+                BorderBrush="Gray"
+                Background="White"
+                BorderThickness="1"
+                Padding="2">
+
+            <StackPanel Orientation="Horizontal">
+                <Grid Width="780">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="lblTitle" Width="80" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" Visibility="Visible">Zone</Label>
+                    <StackPanel Orientation="Vertical" Width="Auto" Margin="5,-3,5,0" Grid.Column="1" Grid.ColumnSpan="2">
+                        <Label x:Name="lblRadius">Radius:</Label>
+                        <TextBox x:Name="txtRadius" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Width="Auto" Margin="5,-3,5,0" Grid.Column="3">
+                        <Label x:Name="lblUnits">Units:</Label>
+                        <ComboBox x:Name="cbxUnits" Width="100"/>
+                    </StackPanel>
+                    <Rectangle x:Name="rctColor" HorizontalAlignment="Right" Grid.Column="5" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" Margin="0,0,50,0">
+                        <Rectangle.ToolTip>
+                            <Label x:Name="rctColorToolTip" Content="Zone color"/>
+                        </Rectangle.ToolTip>
+                    </Rectangle>
+                    <StackPanel Orientation="Horizontal"  Grid.Column="7" VerticalAlignment="Center"  >
+                        <Button x:Name="btnOK" Content="OK" HorizontalAlignment="Right" IsEnabled="False" Margin="60,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>
