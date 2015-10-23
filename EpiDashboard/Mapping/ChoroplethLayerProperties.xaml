@@ -53,17 +53,17 @@
                         <TextBox x:Name="txtOpacity" Width="110"/>
                     </StackPanel>
                     <StackPanel Grid.Column="5" Orientation="Horizontal">
-                        <Rectangle x:Name="rctMissingColor" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" Margin="15,0,0,0" Visibility="Visible">
+                        <Rectangle x:Name="rctMissingColor" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" Margin="15,0,0,0" Visibility="Visible" MouseUp="rctEdit_MouseUp" >
                             <Rectangle.ToolTip>
                                 <Label x:Name="lblMissingValueColor" Content="Missing value color"/>
                             </Rectangle.ToolTip>
                         </Rectangle>
-                        <Rectangle x:Name="rctLowColor" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25"  Stroke="DarkGray" Cursor="Hand" Fill="White" Margin="3,0,3,0" Visibility="Visible">
+                        <Rectangle x:Name="rctLowColor" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25"  Stroke="DarkGray" Cursor="Hand" Fill="White" Margin="3,0,3,0" Visibility="Visible" MouseUp="rctEdit_MouseUp" >
                             <Rectangle.ToolTip>
                                 <Label x:Name="lblLoValueColor" Content="Low value color"/>
                             </Rectangle.ToolTip>
                         </Rectangle>
-                        <Rectangle  x:Name="rctHighColor"  VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="Navy" Margin="0,0,30,0" Visibility="Visible" >
+                        <Rectangle  x:Name="rctHighColor" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="Navy" Margin="0,0,30,0" Visibility="Visible" MouseUp="rctEdit_MouseUp">
                             <Rectangle.ToolTip>
                                 <Label x:Name="lblHiValueColor" Content="High value color"/>
                             </Rectangle.ToolTip>
