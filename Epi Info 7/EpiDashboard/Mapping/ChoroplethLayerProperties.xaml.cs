@@ -91,22 +91,22 @@ namespace EpiDashboard.Mapping
 
         void rctLowColor_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctLowColor.Fill = new SolidColorBrush(Color.FromArgb(0xF0, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                RenderMap();
-            }
+            //System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            //if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //{
+            //    rctLowColor.Fill = new SolidColorBrush(Color.FromArgb(0xF0, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+            //    RenderMap();
+            //}
         }
 
         void rctHighColor_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctHighColor.Fill = new SolidColorBrush(Color.FromArgb(0xF0, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                RenderMap();
-            }
+            //System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            //if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //{
+            //    rctHighColor.Fill = new SolidColorBrush(Color.FromArgb(0xF0, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+            //    RenderMap();
+            //}
         }
         public bool FlagRunEdit
         {

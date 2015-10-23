@@ -30,13 +30,13 @@
                         <Label x:Name="lblSize">Size:</Label>
                         <ComboBox x:Name="cbxSize" Width="100"/>
                     </StackPanel>
-                    <Rectangle x:Name="rctColor" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" >
+                    <Rectangle x:Name="rctColor" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" >
                         <Rectangle.ToolTip>
                             <Label x:Name="rctColorToolTip" Content="Point color"/>
                         </Rectangle.ToolTip>
                     </Rectangle>
                     <StackPanel Orientation="Horizontal"  Grid.Column="6" VerticalAlignment="Center"  >
-                        <Button x:Name="btnOK" Content="OK" IsEnabled="False" Margin="120,0,0,0"/>
+                        <Button x:Name="btnOK" Content="OK" IsEnabled="False" Margin="0,0,0,0"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>
