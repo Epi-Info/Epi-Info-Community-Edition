@@ -31,7 +31,7 @@
                         <Label x:Name="lblUnits">Units:</Label>
                         <ComboBox x:Name="cbxUnits" Width="100"/>
                     </StackPanel>
-                    <Rectangle x:Name="rctColor" HorizontalAlignment="Center" Grid.Column="5" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" >
+                    <Rectangle x:Name="rctColor" HorizontalAlignment="Center" Grid.Column="5" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="Yellow" >
                         <Rectangle.ToolTip>
                             <Label x:Name="rctColorToolTip" Content="Zone color"/>
                         </Rectangle.ToolTip>

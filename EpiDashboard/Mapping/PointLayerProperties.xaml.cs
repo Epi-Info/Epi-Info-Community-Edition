@@ -52,7 +52,7 @@ namespace EpiDashboard.Mapping
             cbxLatitude.SelectionChanged += new SelectionChangedEventHandler(coord_SelectionChanged);
             cbxLongitude.SelectionChanged += new SelectionChangedEventHandler(coord_SelectionChanged);
             rctColor.MouseUp += new MouseButtonEventHandler(rctColor_MouseUp);
-            rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
+            //rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
             rctEdit.MouseUp  += new MouseButtonEventHandler(rctEdit_MouseUp);
             FillComboBoxes();
             
@@ -63,7 +63,7 @@ namespace EpiDashboard.Mapping
             lblStyle.Content = DashboardSharedStrings.GADGET_LABEL_STYLE;
             lblLatitude.Content = DashboardSharedStrings.GADGET_LATITUDE_FIELD;
             lblLongitude.Content = DashboardSharedStrings.GADGET_LONGITUDE_FIELD;
-            lblDataFilters.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            //lblDataFilters.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
             #endregion; //translation
 
         }
@@ -210,7 +210,7 @@ namespace EpiDashboard.Mapping
             txtDescription.IsReadOnly = true;
             txtDescription.Width = 130;
            // btnChangeText.Visibility = System.Windows.Visibility.Visible;
-            btnChangeText.Visibility = System.Windows.Visibility.Hidden;
+            //btnChangeText.Visibility = System.Windows.Visibility.Hidden;
             grdMain.Width = 700;
             lblTitle.Visibility = System.Windows.Visibility.Visible;
         }
