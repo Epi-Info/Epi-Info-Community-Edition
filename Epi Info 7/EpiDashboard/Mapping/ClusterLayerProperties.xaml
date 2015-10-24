@@ -24,7 +24,7 @@
                     <Label x:Name="lblTitle" Grid.Column="0" Width="Auto" FontWeight="Bold" Visibility="Visible" VerticalAlignment="Center" Content="Case Cluster"/>
                     <StackPanel Orientation="Vertical" Width="Auto" Margin="5,-3,5,0" Grid.Column="1" Grid.ColumnSpan="2">
                         <Label x:Name="lblDescription" HorizontalAlignment="Left" Content="Description"/>
-                        <TextBox x:Name="txtDescription" Width="200"/>
+                        <TextBox x:Name="txtDescription" Width="200" HorizontalAlignment="Left"/>
                     </StackPanel>
                     <StackPanel Grid.Column="3" Orientation="Vertical" Width="Auto" Margin="5,-3,5,0" >
                         <Label x:Name="lblLatitude" HorizontalAlignment="Left" Content="Latitude Field"/>
@@ -34,19 +34,19 @@
                         <Label x:Name="lblLongitude" HorizontalAlignment="Left" Content="Longitude Field"/>
                         <ComboBox x:Name="cbxLongitude" Width="100"/>
                     </StackPanel>
-                    <Rectangle x:Name="rctColor" Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" Margin="0,0,30,0" Visibility="Visible" >
+                    <Rectangle x:Name="rctColor" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="Blue" Margin="0,0,30,0" Visibility="Visible" >
                         <Rectangle.ToolTip>
-                            <Label Content="Color"/>
+                            <Label x:Name="lblSetColor" Content="Color"/>
                         </Rectangle.ToolTip>
                     </Rectangle>
-                    <Rectangle VerticalAlignment="Bottom" x:Name="rctEdit"  HorizontalAlignment="Right" Height="25" Width="25" Stroke="SlateBlue" Cursor="Hand" Fill="SlateBlue" Margin="0,0,52,0" Visibility="Visible" >
+                    <Rectangle x:Name="rctEdit" Grid.Column="6"  VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Width="25" Stroke="SlateBlue" Cursor="Hand" Fill="SlateBlue" Margin="0,0,52,0" Visibility="Visible" >
                         <Rectangle.ToolTip>
                             <Label x:Name="rctEditToolTip"  Content="Edit data layer"/>
                         </Rectangle.ToolTip>
                     </Rectangle>
-                    <Path Fill="White"                   
-                  HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                  Height="18" Width="18"  Margin="0,0,57,4"
+                    <Path Fill="White" Grid.Column="6"                   
+                  HorizontalAlignment="Right" VerticalAlignment="Center" 
+                  Height="18" Width="18"  Margin="0,17,128,17"
                   StrokeThickness="1" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                   IsHitTestVisible="False"
                   Stretch="Uniform"

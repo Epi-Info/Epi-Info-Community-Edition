@@ -191,12 +191,10 @@ namespace EpiDashboard.Mapping
         public void MakeReadOnly()
         {
             this.FontColor = Colors.Black;
-            //cbxLatitude.IsEnabled = false;
-            //cbxLongitude.IsEnabled = false;
-            //txtDescription.IsReadOnly = true;
+            cbxLatitude.IsEnabled = false;
+            cbxLongitude.IsEnabled = false;
+            txtDescription.IsReadOnly = true;
             txtDescription.Width = 130;
-            //btnChangeText.Visibility = System.Windows.Visibility.Visible;
-            //btnChangeText.Visibility = System.Windows.Visibility.Hidden;
             grdMain.Width = 700;
             lblTitle.Visibility = System.Windows.Visibility.Visible;
         }
