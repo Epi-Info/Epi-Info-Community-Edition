@@ -433,6 +433,10 @@ namespace EpiDashboard
                 }
                 else
                 {
+                    if (dashboardHelper.TableColumnNames.ContainsKey(columnName))
+                    {
+                        columnType = dashboardHelper.TableColumnNames[columnName];
+                    }
                     ShowValueSelector(columnType);
                 }
             }
@@ -1143,6 +1147,7 @@ namespace EpiDashboard
             //Hiding Lo and Hi value controls
             txtAnd.Visibility = Visibility.Hidden;
             txtHiValue.Visibility = Visibility.Hidden;
+            txtLoValue.Visibility = Visibility.Hidden;
             dpLowValue.Visibility = Visibility.Hidden;
             dpHighValue.Visibility = Visibility.Hidden;
             tbxLowValue.Visibility = Visibility.Hidden;

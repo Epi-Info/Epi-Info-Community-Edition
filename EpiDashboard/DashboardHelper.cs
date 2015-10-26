@@ -7585,6 +7585,11 @@ namespace EpiDashboard
                     foreach (IDashboardRule rule in Rules)
                     {
                         rule.ApplyRule(row);
+                        if (rule.GetType().Name.Equals("Rule_ExpressionAssign"))
+                        {
+                            row.EndEdit();
+                            row.BeginEdit();
+                        }
                     }
                     row.EndEdit();
 
