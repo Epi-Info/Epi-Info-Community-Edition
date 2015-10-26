@@ -288,34 +288,15 @@ namespace EpiDashboard.Gadgets.Charting
     {
         public int Compare(XYColumnChartData dataOne, XYColumnChartData dataTwo)
         {
-            int returnValue;
-            string compareType;
-            Type datType = dataOne.S.GetType(); // dpb should come from a metadata
-            compareType = datType.ToString();
+            return Compare(dataOne.S, dataTwo.S);
+        }
+        
+        public int Compare(object dataOne, object dataTwo)
+        {
+            dynamic dynOne = dataOne;
+            dynamic dynTwo = dataTwo;
 
-            switch (compareType)
-            {
-                case "System.DateTime":
-                    returnValue = ((DateTime)dataOne.S).CompareTo((DateTime)dataTwo.S);
-                    break;
-                case "System.String":
-                    returnValue = ((string)dataOne.S).CompareTo((string)dataTwo.S);
-                    break;
-                case "System.Single":
-                    returnValue = ((Single)dataOne.S).CompareTo((Single)dataTwo.S);
-                    break;
-                case "System.Double":
-                    returnValue = ((double)dataOne.S).CompareTo((double)dataTwo.S);
-                    break;
-                case "System.Decimal":
-                    returnValue = ((decimal)dataOne.S).CompareTo((decimal)dataTwo.S);
-                    break;
-                default:
-                    returnValue = ((double)dataOne.S).CompareTo((double)dataTwo.S);
-                    break;
-            }
-
-            return returnValue;
+            return dynOne.CompareTo(dynTwo);
         }
     }
 }
