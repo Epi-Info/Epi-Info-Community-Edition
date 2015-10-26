@@ -202,69 +202,77 @@ namespace EpiDashboard.Gadgets.Charting
 
         private bool OutsideLimits(XYColumnChartData chartData)
         {
+            return OutsideLimits(chartData.S);
+        }
+
+        private bool OutsideLimits(object value)
+        {
             ColumnChartParameters chtParameters = (ColumnChartParameters)Parameters;
 
             bool isOutsidelimits = false;
-            string compareType;
-            Type datType = chartData.S.GetType();
-            compareType = datType.ToString();
 
-            switch (compareType)
+            if (value is IConvertible == false)
             {
-                case "System.DateTime":
-                    DateTime xAxisStartDateTime, xAxisEndDateTime;
-                    if (DateTime.TryParse(chtParameters.XAxisStart, out xAxisStartDateTime)
-                        && (((DateTime)chartData.S).CompareTo(xAxisStartDateTime) < 0))
+                return false;
+            }
+
+            Type referenceValueType = value.GetType();
+
+            object xAxisStart = null;
+            object xAxisEnd = null;
+
+            Convert.ChangeType(value, referenceValueType);
+
+            dynamic referenceValue = value;
+            Type dynamicType = referenceValue.GetType();
+            System.Reflection.MethodInfo methodInfo = dynamicType.GetMethod("Parse", new Type[] { typeof(string)});
+
+            if(methodInfo != null)
+            {
+                object classInstance = Activator.CreateInstance(referenceValueType, null);
+                try
+                {
+                    if (string.IsNullOrEmpty(chtParameters.XAxisStart) == false)
                     {
-                        isOutsidelimits = true;
-                    }
-                    if (DateTime.TryParse(chtParameters.XAxisEnd, out xAxisEndDateTime)
-                        && (((DateTime)chartData.S).CompareTo(xAxisEndDateTime) > 0))
-                    {
-                        isOutsidelimits = true;
-                    }
-                    break;
-                case "System.String":
-                    if (string.IsNullOrEmpty((string)chtParameters.XAxisStart) == false
-                        && ((string)chartData.S).CompareTo((string)chtParameters.XAxisStart) < 0)
-                    {
-                        isOutsidelimits = true;
-                    }
-                    if (string.IsNullOrEmpty((string)chtParameters.XAxisEnd) == false
-                        && ((string)chartData.S).CompareTo((string)chtParameters.XAxisEnd) > 0)
-                    {
-                        isOutsidelimits = true;
-                    }
-                    break;
-                case "System.Single":
-                case "System.Double":
-                    double xAxisStartDouble, xAxisEndDouble;
-                    if (double.TryParse(chtParameters.XAxisStart, out xAxisStartDouble)
-                        && ((double)chartData.S).CompareTo(xAxisStartDouble) < 0)
-                    {
+                        xAxisStart = methodInfo.Invoke(classInstance, new object[] { chtParameters.XAxisStart });
+                        if (referenceValue.CompareTo(xAxisStart) < 0)
+                        {
                             isOutsidelimits = true;
+                        }
                     }
-                    if (double.TryParse(chtParameters.XAxisEnd, out xAxisEndDouble)
-                        && ((double)chartData.S).CompareTo(xAxisEndDouble) > 0)
+                }
+                catch { }
+
+                try
+                {
+                    if (string.IsNullOrEmpty(chtParameters.XAxisEnd) == false)
                     {
-                        isOutsidelimits = true;
-                    }
-                    break;
-                case "System.Decimal":
-                    decimal xAxisStartDecimal, xAxisEndDecimal;
-                    if (decimal.TryParse(chtParameters.XAxisStart, out xAxisStartDecimal)
-                        && ((decimal)chartData.S).CompareTo(xAxisStartDecimal) < 0)
-                    {
+                        xAxisEnd = methodInfo.Invoke(classInstance, new object[] { chtParameters.XAxisEnd });
+                        if (referenceValue.CompareTo(xAxisEnd) > 0)
+                        {
                             isOutsidelimits = true;
+                        }
                     }
-                    if (decimal.TryParse(chtParameters.XAxisEnd, out xAxisEndDecimal)
-                        && ((decimal)chartData.S).CompareTo(xAxisEndDecimal) > 0)
+                }
+                catch { }
+            }
+            else if (referenceValueType.Name == "String")
+            {
+                if (string.IsNullOrEmpty(chtParameters.XAxisStart) == false)
+                {
+                    if (referenceValue.CompareTo(chtParameters.XAxisStart) < 0)
                     {
                         isOutsidelimits = true;
                     }
-                    break;
-                default:
-                    break;
+                }
+
+                if (string.IsNullOrEmpty(chtParameters.XAxisEnd) == false)
+                {
+                    if (referenceValue.CompareTo(chtParameters.XAxisEnd) > 0)
+                    {
+                        isOutsidelimits = true;
+                    }
+                }
             }
 
             return isOutsidelimits;
@@ -294,6 +302,8 @@ namespace EpiDashboard.Gadgets.Charting
                     returnValue = ((string)dataOne.S).CompareTo((string)dataTwo.S);
                     break;
                 case "System.Single":
+                    returnValue = ((Single)dataOne.S).CompareTo((Single)dataTwo.S);
+                    break;
                 case "System.Double":
                     returnValue = ((double)dataOne.S).CompareTo((double)dataTwo.S);
                     break;
