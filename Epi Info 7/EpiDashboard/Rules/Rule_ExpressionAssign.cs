@@ -268,7 +268,7 @@ namespace EpiDashboard.Rules
         /// Applies the rule
         /// </summary>
         public override void ApplyRule(DataRow row)
-        {   
+        {
         }
         #endregion // IDashboardRule Members
     }
