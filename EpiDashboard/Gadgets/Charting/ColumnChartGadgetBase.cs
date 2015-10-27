@@ -202,73 +202,33 @@ namespace EpiDashboard.Gadgets.Charting
 
         private bool OutsideLimits(XYColumnChartData chartData)
         {
-            return OutsideLimits(chartData.S);
+            ColumnChartParameters chtParameters = (ColumnChartParameters)Parameters;
+            return OutsideLimits(chartData.S, chtParameters.XAxisStart, chtParameters.XAxisEnd);
         }
 
-        private bool OutsideLimits(object value)
+        private bool OutsideLimits(object value, string start, string end)
         {
-            ColumnChartParameters chtParameters = (ColumnChartParameters)Parameters;
-
             bool isOutsidelimits = false;
-
-            if (value is IConvertible == false)
-            {
-                return false;
-            }
-
-            Type referenceValueType = value.GetType();
-
+            dynamic dynValue = value;
             object xAxisStart = null;
             object xAxisEnd = null;
 
-            Convert.ChangeType(value, referenceValueType);
-
-            dynamic referenceValue = value;
-            Type dynamicType = referenceValue.GetType();
-            System.Reflection.MethodInfo methodInfo = dynamicType.GetMethod("Parse", new Type[] { typeof(string)});
-
-            if(methodInfo != null)
+            if (string.IsNullOrEmpty(start) == false)
             {
-                object classInstance = Activator.CreateInstance(referenceValueType, null);
-                try
+                if (TryParseAs(start, value.GetType(), out xAxisStart))
                 {
-                    if (string.IsNullOrEmpty(chtParameters.XAxisStart) == false)
-                    {
-                        xAxisStart = methodInfo.Invoke(classInstance, new object[] { chtParameters.XAxisStart });
-                        if (referenceValue.CompareTo(xAxisStart) < 0)
-                        {
-                            isOutsidelimits = true;
-                        }
-                    }
-                }
-                catch { }
-
-                try
-                {
-                    if (string.IsNullOrEmpty(chtParameters.XAxisEnd) == false)
-                    {
-                        xAxisEnd = methodInfo.Invoke(classInstance, new object[] { chtParameters.XAxisEnd });
-                        if (referenceValue.CompareTo(xAxisEnd) > 0)
-                        {
-                            isOutsidelimits = true;
-                        }
-                    }
-                }
-                catch { }
-            }
-            else if (referenceValueType.Name == "String")
-            {
-                if (string.IsNullOrEmpty(chtParameters.XAxisStart) == false)
-                {
-                    if (referenceValue.CompareTo(chtParameters.XAxisStart) < 0)
+                    if (dynValue.CompareTo(xAxisStart) < 0)
                     {
                         isOutsidelimits = true;
                     }
                 }
+            }
 
-                if (string.IsNullOrEmpty(chtParameters.XAxisEnd) == false)
+            if (string.IsNullOrEmpty(end) == false)
+            {
+                if (TryParseAs(end, value.GetType(), out xAxisEnd))
                 {
-                    if (referenceValue.CompareTo(chtParameters.XAxisEnd) > 0)
+                    if (dynValue.CompareTo(xAxisEnd) > 0)
                     {
                         isOutsidelimits = true;
                     }
@@ -281,6 +241,40 @@ namespace EpiDashboard.Gadgets.Charting
         private bool ValueMissing(XYColumnChartData chartData)
         {
             return (chartData.S.ToString() == Config.Settings.RepresentationOfMissing);
+        }
+
+        private bool TryParseAs(string given, Type asType, out object value)
+        {
+            if (asType == typeof(string))
+            {
+                value = given;
+                return true;
+            }
+            
+            bool couldParse = false;
+            value = Activator.CreateInstance(asType);
+            System.Reflection.MethodInfo methodInfo = asType.GetMethod("TryParse", new Type[] { typeof(string), asType.MakeByRefType() });
+
+            if (methodInfo != null)
+            {
+                try
+                {
+                    object[] parameters = new object[] { given, null };
+                    object result = methodInfo.Invoke(null, parameters);
+                    couldParse = (bool)result;
+
+                    if (couldParse) 
+                    {
+                        value = parameters[1];
+                    }
+                }
+                catch 
+                { 
+                    couldParse = false; 
+                }
+            }
+
+            return couldParse;
         }
     }
 
