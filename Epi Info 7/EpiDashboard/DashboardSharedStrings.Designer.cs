@@ -61,6 +61,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alert.
+        /// </summary>
+        public static string ALERT {
+            get {
+                return ResourceManager.GetString("ALERT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Base Layer.
         /// </summary>
         public static string BASE_LAYER {
@@ -4295,6 +4304,24 @@ namespace EpiDashboard {
         public static string INSTRUCTIONS_FINISHED_CACHING {
             get {
                 return ResourceManager.GetString("INSTRUCTIONS_FINISHED_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to change to a different boundary format.  Are you sure you want to clear the current boundary settings?.
+        /// </summary>
+        public static string MAP_CHANGE_BOUNDARY_ALERT {
+            get {
+                return ResourceManager.GetString("MAP_CHANGE_BOUNDARY_ALERT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was a problem referencing an external cryptography DLL..
+        /// </summary>
+        public static string MAP_ERROR_CRYPTOGRAPHY {
+            get {
+                return ResourceManager.GetString("MAP_ERROR_CRYPTOGRAPHY", resourceCulture);
             }
         }
         

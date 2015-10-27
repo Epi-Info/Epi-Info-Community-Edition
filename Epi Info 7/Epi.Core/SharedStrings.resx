@@ -3050,4 +3050,13 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="CONDITIONS" xml:space="preserve">
     <value>Conditions</value>
   </data>
+  <data name="ERROR_APPDOMAIN_MASTER_SERVC_PRVDR" xml:space="preserve">
+    <value>Master service provider can only be set once per AppDomain.</value>
+  </data>
+  <data name="ERROR_LOADING_DEFINED_VARS" xml:space="preserve">
+    <value>Error loading defined variables.  {0}</value>
+  </data>
+  <data name="MAP_ERROR_CRYPTOGRAPHY" xml:space="preserve">
+    <value>There was a problem referencing an external cryptography DLL.</value>
+  </data>
 </root>

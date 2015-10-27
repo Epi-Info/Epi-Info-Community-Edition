@@ -462,6 +462,7 @@ namespace EpiDashboard.Controls
                 txtProjectPath.Text = mapControl.ProjectFilepath;
                 FillComboBoxes();
                 panelBoundaries.IsEnabled = true;
+                radShapeFile.IsChecked = true;
                 this.dataFilters = new DataFilters(dashboardHelper);
                 rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dataFilters, true);
                 rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; rowFilterControl.FillSelectionComboboxes();
@@ -708,7 +709,7 @@ namespace EpiDashboard.Controls
 
             if (!string.IsNullOrEmpty(txtKMLpath.Text))
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
+                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.MAP_CHANGE_BOUNDARY_ALERT, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
                 {
                     radShapeFile.IsChecked = false;
@@ -720,7 +721,7 @@ namespace EpiDashboard.Controls
             }
             else if (!string.IsNullOrEmpty(txtMapSeverpath.Text) || cbxmapserver.SelectedIndex != -1)
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
+                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.MAP_CHANGE_BOUNDARY_ALERT, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
                 {
                     radShapeFile.IsChecked = false;
@@ -829,7 +830,7 @@ namespace EpiDashboard.Controls
         {
             if (!string.IsNullOrEmpty(txtShapePath.Text))
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
+                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.MAP_CHANGE_BOUNDARY_ALERT, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
                 {
                     radKML.IsChecked = false;
@@ -841,7 +842,7 @@ namespace EpiDashboard.Controls
             }
             else if (!string.IsNullOrEmpty(txtMapSeverpath.Text) || cbxmapserver.SelectedIndex != -1)
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
+                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.MAP_CHANGE_BOUNDARY_ALERT, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
                 {
                     radKML.IsChecked = false;
@@ -863,7 +864,7 @@ namespace EpiDashboard.Controls
         {
             if (!string.IsNullOrEmpty(txtShapePath.Text))
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
+                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.MAP_CHANGE_BOUNDARY_ALERT, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
                 {
                     radMapServer.IsChecked = false;
@@ -875,7 +876,7 @@ namespace EpiDashboard.Controls
             }
             else if (!string.IsNullOrEmpty(txtKMLpath.Text))
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("You are about to change to a different boundary format. Are you sure you want to clear the current boundary settings?", "Alert", MessageBoxButton.YesNo);
+                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.MAP_CHANGE_BOUNDARY_ALERT, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
                 {
                     radMapServer.IsChecked = false;

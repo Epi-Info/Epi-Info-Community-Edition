@@ -108,7 +108,7 @@ namespace Epi
             {
                 if (masterServiceProvider != null)
                 {
-                    throw new GeneralException("Master service provider can only be set once per AppDomain.");
+                    throw new GeneralException(SharedStrings.ERROR_APPDOMAIN_MASTER_SERVC_PRVDR);
                 }
                 masterServiceProvider = value;
             }
@@ -232,7 +232,7 @@ namespace Epi
                 }
                 catch (ApplicationException aex)
                 {
-                    throw new ApplicationException(String.Format("Error loading defined variables.  {0}", aex.Message));
+                    throw new ApplicationException(String.Format(SharedStrings.ERROR_LOADING_DEFINED_VARS, aex.Message));
                 }
             }
 
@@ -1127,7 +1127,7 @@ namespace Epi
                         return str.ToString();
                     }
                 }
-                throw new ApplicationException("There was a problem referencing an external cryptography DLL.");
+                throw new ApplicationException(SharedStrings.MAP_ERROR_CRYPTOGRAPHY);
             }
             else
             {
@@ -1178,7 +1178,7 @@ namespace Epi
                         return str.ToString();
                     }
                 }
-                throw new ApplicationException("There was a problem referencing an external cryptography DLL.");
+                throw new ApplicationException(SharedStrings.MAP_ERROR_CRYPTOGRAPHY);
             }
             else
             {
@@ -1680,7 +1680,7 @@ namespace Epi
                         return obj.ToString();
                     }
                 }
-                throw new ApplicationException("There was a problem referencing an external crypto DLL.");
+                throw new ApplicationException(SharedStrings.MAP_ERROR_CRYPTOGRAPHY);
             }
             else
             {

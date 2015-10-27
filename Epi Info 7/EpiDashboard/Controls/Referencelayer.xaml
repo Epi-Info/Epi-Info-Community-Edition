@@ -102,7 +102,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Label x:Name="lblURLOfKMLFile">Location URL:</Label>
                                 <TextBox Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="txtKMLpath" IsReadOnly="True" ></TextBox>
-                                <Button x:Name="btnKMLFile" Height="Auto" HorizontalAlignment="Left" Click="btnKMLFile_Click">Browse</Button>
+                                <Button x:Name="btnKMLFile" Height="Auto" Margin="10 0 0 0" HorizontalAlignment="Left" Click="btnKMLFile_Click">Browse</Button>
                             </StackPanel>
                             <Label x:Name="lblExampleKMLURL" FontSize="12">(example: http://code.google.com/apis/kml/documentation/us_states.kml)</Label>
                         </StackPanel>

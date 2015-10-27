@@ -48,6 +48,7 @@ namespace EpiDashboard.Controls
             InitializeComponent();
             this.mapControl = mapControl;
             this.myMap = myMap;
+            this.radShapeFile.IsChecked = true;
 
             #region Translation
 
