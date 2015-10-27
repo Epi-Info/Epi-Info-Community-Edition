@@ -1537,7 +1537,9 @@ namespace EpiDashboard.Mapping
                     foreach (string key in choroplethproperties.shapeAttributes.Keys)
                     { choroplethproperties.cmbShapeKey.Items.Add(key); }
                 }
-             }
+             }    
+
+
             if (choroplethlayerprop.classAttribList != null)
              { choroplethproperties.SetClassAttributes(choroplethlayerprop.classAttribList); }
             choroplethproperties.FillComboBoxes();

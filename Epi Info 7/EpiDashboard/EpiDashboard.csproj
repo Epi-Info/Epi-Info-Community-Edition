@@ -158,6 +158,7 @@
     </Compile>
     <Compile Include="AberrationChartData.cs" />
     <Compile Include="BarSpacing.cs" />
+    <Compile Include="ChoroplethConstants.cs" />
     <Compile Include="ColumnDataType.cs" />
     <Compile Include="CombineModeTypes.cs" />
     <Compile Include="Controls\CaseClusterProperties.cs" />
@@ -565,6 +566,9 @@
     <Compile Include="Mapping\ChoroplethKmlLayerProperties.xaml.cs">
       <DependentUpon>ChoroplethKmlLayerProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\ClassRangesDictionary.cs" />
+    <Compile Include="Mapping\CustomColorsDictionary.cs" />
+    <Compile Include="Mapping\ListLegendTextDictionary.cs" />
     <Compile Include="Mapping\MapUIHelper.cs" />
     <Compile Include="Mapping\PointLayerProperties.xaml.cs">
       <DependentUpon>PointLayerProperties.xaml</DependentUpon>
@@ -1602,6 +1606,7 @@
     <Content Include="Mapping\ESRI_WPF\ESRI.ArcGIS.Client.dll" />
     <Content Include="Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Toolkit.DataSources.dll" />
     <Content Include="Mapping\ESRI_WPF\ESRI.ArcGIS.Client.Toolkit.dll" />
+    <Content Include="Mapping\XMLFile1.xml" />
     <Content Include="MS_WPF\Epi.DataVisualization.Toolkit.dll" />
     <Content Include="MS_WPF\Epi.DataVisualization.Toolkit.PieExtension.dll" />
     <Content Include="MS_WPF\System.Windows.Interactivity.dll" />

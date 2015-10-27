@@ -375,7 +375,7 @@ namespace EpiDashboard.Mapping
             choroplethprop.choroKMLprovider = provider;
             choroplethprop.SetDefaultRanges();
             choroplethprop.GetRangeValues(provider.RangeCount);
-            provider.ListLegendText = choroplethprop.ListLegendText;
+           //   provider.ListLegendText = choroplethprop.ListLegendText;
             choroplethprop.RenderMap();
 
         }
