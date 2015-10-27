@@ -3834,6 +3834,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Master service provider can only be set once per AppDomain..
+        /// </summary>
+        public static string ERROR_APPDOMAIN_MASTER_SERVC_PRVDR {
+            get {
+                return ResourceManager.GetString("ERROR_APPDOMAIN_MASTER_SERVC_PRVDR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The canvas file cannot be found: {0}   Make sure the .cvs7 file exists or that the /canvas: command line switch is used..
         /// </summary>
         public static string ERROR_CANVAS_NOT_FOUND {
@@ -3904,6 +3913,15 @@ namespace Epi {
         public static string ERROR_INCOMPATIBLE_TYPES {
             get {
                 return ResourceManager.GetString("ERROR_INCOMPATIBLE_TYPES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error loading defined variables.  {0}.
+        /// </summary>
+        public static string ERROR_LOADING_DEFINED_VARS {
+            get {
+                return ResourceManager.GetString("ERROR_LOADING_DEFINED_VARS", resourceCulture);
             }
         }
         
@@ -5967,6 +5985,15 @@ namespace Epi {
         public static string MAKE_VIEW_WINDOW_TITLE {
             get {
                 return ResourceManager.GetString("MAKE_VIEW_WINDOW_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was a problem referencing an external cryptography DLL..
+        /// </summary>
+        public static string MAP_ERROR_CRYPTOGRAPHY {
+            get {
+                return ResourceManager.GetString("MAP_ERROR_CRYPTOGRAPHY", resourceCulture);
             }
         }
         

@@ -1807,4 +1807,13 @@ of records or select fewer fields for the group.</value>
   <data name="WARNING_CONFIRM_CLOSE" xml:space="preserve">
     <value>Are you sure you want to remove this gadget from your canvas?</value>
   </data>
+  <data name="ALERT" xml:space="preserve">
+    <value>Alert</value>
+  </data>
+  <data name="MAP_CHANGE_BOUNDARY_ALERT" xml:space="preserve">
+    <value>You are about to change to a different boundary format.  Are you sure you want to clear the current boundary settings?</value>
+  </data>
+  <data name="MAP_ERROR_CRYPTOGRAPHY" xml:space="preserve">
+    <value>There was a problem referencing an external cryptography DLL.</value>
+  </data>
 </root>
