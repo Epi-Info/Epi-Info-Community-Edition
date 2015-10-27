@@ -3393,6 +3393,10 @@ namespace EpiDashboard
                         //cbxFieldWeight.Text = child.InnerText.Replace("&lt;", "<");
                         ((CrosstabParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
                         break;
+                    case "weightvar":
+                        //cbxFieldWeight.Text = child.InnerText.Replace("&lt;", "<");
+                        ((CrosstabParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
+                        break;
                     case "maxcolumnnamelength":
                         int maxColumnLength = 24;
                         int.TryParse(child.InnerText, out maxColumnLength);
