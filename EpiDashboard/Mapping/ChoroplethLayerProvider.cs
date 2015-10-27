@@ -32,6 +32,23 @@ namespace EpiDashboard.Mapping
     {
         #region Choropleth
 
+        public enum ColorRampType
+        {
+            Auto,
+            Custom
+        }
+
+        private ColorRampType _colorRampType = new ColorRampType();
+
+        private bool _useCustomColors;  //    = true;
+
+        private Dictionary<string, Color> _classesColorsDictionary = new Dictionary<string, Color>();
+
+
+
+
+
+
         Map _myMap;
         DashboardHelper _dashboardHelper;
         string _shapeKey;
@@ -47,7 +64,7 @@ namespace EpiDashboard.Mapping
         string[,] _rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
 
         float[] _quantileValues = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-        ThematicItem thematicItem;
+        ThematicItem _thematicItem;
 
         private List<double> _range;
         public List<double> Range
@@ -56,21 +73,24 @@ namespace EpiDashboard.Mapping
             set { _range = value; }
         }
 
-        private byte opacity;
+        private byte _opacity;
 
         public byte Opacity
         {
-            get { return opacity; }
-            set { opacity = value; }
+            get { return _opacity; }
+            set { _opacity = value; }
         }
 
 
-        private List<string> _ListLegendText;
+        private ListLegendTextDictionary _listLegendText = new ListLegendTextDictionary();
+        private CustomColorsDictionary _customColorsDictionary = new CustomColorsDictionary();
+        private ClassRangesDictionary _classRangesDictionary = new ClassRangesDictionary();
 
-        public List<string> ListLegendText
+
+        public ListLegendTextDictionary ListLegendText
         {
-            get { return _ListLegendText; }
-            set { _ListLegendText = value; }
+            get { return _listLegendText; }
+            set { _listLegendText = value; }
         }
 
 
@@ -154,8 +174,8 @@ namespace EpiDashboard.Mapping
                 double x4 = (c - b) / (m - m2);
                 double y4 = m * x4 + b; p4 = new Point(x4, y4);
             }
-            double d4 = dist(p4, p1, p2);
-            double d2 = dist(p2, p1, p2);
+            double d4 = Dist(p4, p1, p2);
+            double d2 = Dist(p2, p1, p2);
             double x = d4 / d2;
             double max = br.GradientStops.Max(n => n.Offset);
             if (x > max) { x = max; }
@@ -185,7 +205,7 @@ namespace EpiDashboard.Mapping
             }
             return cx;
         }
-        private double dist(Point px, Point po, Point pf)
+        private double Dist(Point px, Point po, Point pf)
         {
             double d = Math.Sqrt((px.Y - po.Y) * (px.Y - po.Y) + (px.X - po.X) * (px.X - po.X));
             if (((px.Y < po.Y) && (pf.Y > po.Y)) || ((px.Y > po.Y) && (pf.Y < po.Y)) || ((px.Y == po.Y) && (px.X < po.X) && (pf.X > po.X)) || ((px.Y == po.Y) && (px.X > po.X) && (pf.X < po.X)))
@@ -387,7 +407,8 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string missingText)
+        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField,
+                List<SolidColorBrush> colors, int classCount, string missingText)
         {
             try
             {
@@ -403,17 +424,17 @@ namespace EpiDashboard.Mapping
 
                 GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
 
-                thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
+                _thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
 
                 if (Range != null &&
                     Range.Count > 0)
                 {
-                    thematicItem.RangeStarts = Range;
+                    _thematicItem.RangeStarts = Range;
                     PopulateRangeValues();
                 }
                 else
                 {
-                    thematicItem.RangeStarts = new List<double>() { classCount };
+                    _thematicItem.RangeStarts = new List<double>() { classCount };
                     PopulateRangeValues();
                 }
 
@@ -444,7 +465,7 @@ namespace EpiDashboard.Mapping
                             graphicValue = Double.PositiveInfinity;
                         }
 
-                        int brushIndex = GetRangeIndex(graphicValue, thematicItem.RangeStarts);
+                        int brushIndex = GetRangeIndex(graphicValue, _thematicItem.RangeStarts);
 
 
                         SimpleFillSymbol symbol = new SimpleFillSymbol()
@@ -478,7 +499,7 @@ namespace EpiDashboard.Mapping
                 }
 
 
-                SetLegendSection(colors, classCount, missingText, thematicItem);
+                SetLegendSection(colors, classCount, missingText, _thematicItem);
 
             }
             catch (Exception ex)
@@ -552,7 +573,7 @@ namespace EpiDashboard.Mapping
             //return thematicItem;
         }
 
-        public void SetLegendText(List<SolidColorBrush> colors, int classCount, List<double> RangeStarts, System.Windows.Controls.ListBox legendList)
+        public void SetLegendText(List<SolidColorBrush> colors, int classCount, List<double> rangeStarts, System.Windows.Controls.ListBox legendList)
         {
             for (int c = 0; c < classCount; c++)
             {
@@ -582,19 +603,26 @@ namespace EpiDashboard.Mapping
                     //}
                     //else 
                     if (c == classCount - 1)
-                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(RangeStarts[c], 2)) + " : " + ListLegendText[c];
-                    else if (RangeStarts.Count <= c + 1)
+                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(rangeStarts[c], 2)) + " : " +
+                                              ListLegendText.GetAt(c + 1);
+                    else if (rangeStarts.Count <= c + 1)
                     {
-                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(RangeStarts[c], 2)) + " : " + ListLegendText[c];
+                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(rangeStarts[c], 2)) + " : " +
+                                              ListLegendText.GetAt(c + 1);
                     }
                     // Middle classifications
                     else
                     {
-                        if (RangeStarts[c] == RangeStarts[c + 1])
-                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(RangeStarts[c], 2)) + " : " + ListLegendText[c];
+                        if (rangeStarts[c] == rangeStarts[c + 1])
+                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(rangeStarts[c], 2)) + " : " +
+                                                  ListLegendText.GetAt(c + 1);
                         else
-                            classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(RangeStarts[c], 2), Math.Round(RangeStarts[c + 1], 2)) + " : " + ListLegendText[c];
+                            classTextBlock.Text =
+                                String.Format("  {0} to {1}", Math.Round(rangeStarts[c], 2),
+                                    Math.Round(rangeStarts[c + 1], 2)) + " : " + ListLegendText.GetAt(c + 1);
                     }
+
+
 
                     StackPanel classStackPanel = new StackPanel();
                     classStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
@@ -602,13 +630,14 @@ namespace EpiDashboard.Mapping
                     classStackPanel.Children.Add(classTextBlock);
 
                     legendList.Items.Add(classStackPanel);
-                    if (RangeStarts.Count <= c + 1)
+                    if (rangeStarts.Count <= c + 1)
                     {
                         break;
                     }
                 }
                 catch (Exception ex)
                 {
+                    throw new Exception(ex.Message);
                 }
             }
         }
@@ -669,7 +698,7 @@ namespace EpiDashboard.Mapping
 
             if (graphicsLayer == null) return;
 
-            thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+            _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
         }
 
         public ThematicItem GetThematicItem(int classCount, DataTable loadedData, GraphicsLayer graphicsLayer)
@@ -724,8 +753,16 @@ namespace EpiDashboard.Mapping
                 }
                 else
                 {
-                    if (graphicValue < thematicItem.Min) { thematicItem.Min = graphicValue; thematicItem.MinName = graphicName; }
-                    if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity) { thematicItem.Max = graphicValue; thematicItem.MaxName = graphicName; }
+                    if (graphicValue < thematicItem.Min)
+                    {
+                        thematicItem.Min = graphicValue;
+                        thematicItem.MinName = graphicName;
+                    }
+                    if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity)
+                    {
+                        thematicItem.Max = graphicValue;
+                        thematicItem.MaxName = graphicName;
+                    }
                 }
 
                 if (graphicValue < Double.PositiveInfinity)
@@ -739,28 +776,41 @@ namespace EpiDashboard.Mapping
             return thematicItem;
         }
 
+
         private List<double> CalculateThematicRange(int classCount, ThematicItem thematicItem, List<double> valueList)
         {
-            double totalRange = thematicItem.Max - thematicItem.Min;
-            double portion = totalRange / classCount;
-            List<double> RangeStarts = new List<double>();
 
-            RangeStarts.Add(thematicItem.Min);
-            double startRangeValue = thematicItem.Min;
-            IEnumerable<double> valueEnumerator =
-            from aValue in valueList
-            orderby aValue
-            select aValue;
+            List<double> rangeStarts = new List<double>();
 
-            int increment = Convert.ToInt32(Math.Round((double)valueList.Count / (double)classCount));
-            for (int i = increment; i < valueList.Count; i += increment)
+            if (RangesLoadedFromMapFile && RangeStartsFromMapFile != null)
             {
-                double value = valueEnumerator.ElementAt(i);
-                if (value < thematicItem.Min)
-                    value = thematicItem.Min;
-                RangeStarts.Add(value);
+                // create rangStarts from map7 file  
+                rangeStarts = this.RangeStartsFromMapFile;
             }
-            return RangeStarts;
+            else
+            {
+
+                double totalRange = thematicItem.Max - thematicItem.Min;
+                double portion = totalRange / classCount;
+
+                rangeStarts.Add(thematicItem.Min);
+                double startRangeValue = thematicItem.Min;
+                IEnumerable<double> valueEnumerator =
+                    from aValue in valueList
+                    orderby aValue
+                    select aValue;
+
+                int increment = Convert.ToInt32(Math.Round((double)valueList.Count / (double)classCount));
+                for (int i = increment; i < valueList.Count; i += increment)
+                {
+                    double value = valueEnumerator.ElementAt(i);
+                    if (value < thematicItem.Min)
+                        value = thematicItem.Min;
+                    rangeStarts.Add(value);
+                }
+            }
+
+            return rangeStarts;
         }
 
         public void PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField,
@@ -777,7 +827,7 @@ namespace EpiDashboard.Mapping
             DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
 
             GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
-            thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+            _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
             //RangeCount = thematicItem.RangeStarts.Count;
             //Array.Clear(RangeValues, 0, RangeValues.Length);
             //for (int i = 0; i < thematicItem.RangeStarts.Count; i++)
@@ -798,7 +848,7 @@ namespace EpiDashboard.Mapping
             if (Range != null &&
                 Range.Count > 0)
             {
-                thematicItem.RangeStarts = Range;
+                _thematicItem.RangeStarts = Range;
             }
 
             PopulateRangeValues();
@@ -808,36 +858,37 @@ namespace EpiDashboard.Mapping
 
         public void PopulateRangeValues()
         {
-            RangeCount = thematicItem.RangeStarts.Count;
+            RangeCount = _thematicItem.RangeStarts.Count;
             Array.Clear(RangeValues, 0, RangeValues.Length);
-            for (int i = 0; i < thematicItem.RangeStarts.Count; i++)
+            for (int i = 0; i < _thematicItem.RangeStarts.Count; i++)
             {
-                RangeValues[i, 0] = thematicItem.RangeStarts[i].ToString();
+                RangeValues[i, 0] = _thematicItem.RangeStarts[i].ToString();
 
-                if (i < thematicItem.RangeStarts.Count - 1)
+                if (i < _thematicItem.RangeStarts.Count - 1)
                 {
-                    RangeValues[i, 1] = thematicItem.RangeStarts[i + 1].ToString();
+                    RangeValues[i, 1] = _thematicItem.RangeStarts[i + 1].ToString();
                 }
                 else
                 {
-                    RangeValues[i, 1] = thematicItem.Max.ToString();
+                    RangeValues[i, 1] = _thematicItem.Max.ToString();
                 }
 
             }
         }
 
-        private StackPanel legendStackPanel;
+        private StackPanel _legendStackPanel;
         private string _legendText;
+        private bool _rangesLoadedFromMapFile;
 
         public StackPanel LegendStackPanel
         {
             get
             {
-                return legendStackPanel;
+                return _legendStackPanel;
             }
             set
             {
-                legendStackPanel = value;
+                _legendStackPanel = value;
             }
         }
 
@@ -845,6 +896,34 @@ namespace EpiDashboard.Mapping
         {
             get { return _legendText; }
             set { _legendText = value; }
+        }
+
+        public ColorRampType CurrentColorRampType
+        {
+            get { return _colorRampType; }
+            set { _colorRampType = value; }
+        }
+
+        public bool UseCustomColors
+        {
+            get { return _useCustomColors; }
+            set { _useCustomColors = value; }
+        }
+
+        public Dictionary<string, Color> ClassesColorsDictionary
+        {
+            get { return _classesColorsDictionary; }
+            set { _classesColorsDictionary = value; }
+        }
+
+        public CustomColorsDictionary CustomColorsDictionary
+        {
+            get { return _customColorsDictionary; }
+        }
+
+        public ClassRangesDictionary ClassRangesDictionary
+        {
+            get { return _classRangesDictionary; }
         }
 
         #endregion
@@ -857,13 +936,53 @@ namespace EpiDashboard.Mapping
             if (graphicsLayer != null)
             {
                 _myMap.Layers.Remove(graphicsLayer);
-                if (legendStackPanel != null)
+                if (_legendStackPanel != null)
                 {
-                    legendStackPanel.Children.Clear();
+                    _legendStackPanel.Children.Clear();
                 }
             }
         }
 
         #endregion
+
+        public Color GetCustomColor(string rectangleControlName)
+        {
+
+            Color coo;
+
+            try
+            {
+                //   coo = _classesColorsDictionary[rectangleControlName];    
+                coo = _customColorsDictionary.GetWithKey(rectangleControlName);
+            }
+            catch (NullReferenceException ex)
+            {
+
+                throw new NullReferenceException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+
+
+            return coo;
+
+        }
+
+        public void StoreColor(Rectangle rectangle, Color coo)
+        {
+            _customColorsDictionary.Add(rectangle.Name, coo);
+        }
+
+        public bool RangesLoadedFromMapFile
+        {
+
+            get { return _rangesLoadedFromMapFile; }
+            set { _rangesLoadedFromMapFile = value; }
+        }
+
+        public List<double> RangeStartsFromMapFile { get; set; }
     }
 }

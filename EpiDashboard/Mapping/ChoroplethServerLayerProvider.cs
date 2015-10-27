@@ -50,12 +50,13 @@ namespace EpiDashboard.Mapping
         private bool flagupdatetoglfailed;
         private bool _areRangesSet = false;
         public bool AreRangesSet { get { return _areRangesSet; } set { _areRangesSet = value; } }
-        public List<string> ListLegendText { get; set; }
+        public ListLegendTextDictionary ListLegendText { get; set; }
 
         private List<double> _range;
-        public List<double> Range {
-            get { return _range; } 
-            set { _range = value; } 
+        public List<double> Range
+        {
+            get { return _range; }
+            set { _range = value; }
         }
 
         public event FeatureLoadedHandler FeatureLoaded;
@@ -552,7 +553,7 @@ namespace EpiDashboard.Mapping
                     }
                 }
                 // Create graphic features and set symbol using the class range which contains the value 
-               // List<SolidColorBrush> brushList = ColorList[_colorShadeIndex];
+                // List<SolidColorBrush> brushList = ColorList[_colorShadeIndex];
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
 
@@ -905,19 +906,23 @@ namespace EpiDashboard.Mapping
 
                     // First classification
                     if (c == 0)
-                        classTextBlock.Text = String.Format("  Less than or equal to {0}", Math.Round(thematicItem.RangeStarts[1], 2)) + " : " + ListLegendText[c];
+                        classTextBlock.Text =
+                            String.Format("  Less than or equal to {0}", Math.Round(thematicItem.RangeStarts[1], 2)) +
+                            " : " + ListLegendText.GetAt(c);
                     // Last classification
                     else if (c == thematicItem.RangeStarts.Count - 1)
-                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(thematicItem.RangeStarts[c], 2)) + " : " + ListLegendText[c];
+                        classTextBlock.Text =
+                            String.Format("  {0} and above", Math.Round(thematicItem.RangeStarts[c], 2)) + " : " +
+                            ListLegendText.GetAt(c);
                     // Middle classifications
                     else
                     {
                         if (thematicItem.RangeStarts.Count > c + 1)
                         {
                             if (thematicItem.RangeStarts[c] == thematicItem.RangeStarts[c + 1])
-                                classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(thematicItem.RangeStarts[c], 2)) + " : " + ListLegendText[c];
+                                classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(thematicItem.RangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c);
                             else
-                                classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(thematicItem.RangeStarts[c], 2), Math.Round(thematicItem.RangeStarts[c + 1], 2)) + " : " + ListLegendText[c];
+                                classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(thematicItem.RangeStarts[c], 2), Math.Round(thematicItem.RangeStarts[c + 1], 2)) + " : " + ListLegendText.GetAt(c);
                         }
                         //else
                         //{
@@ -1136,7 +1141,7 @@ namespace EpiDashboard.Mapping
             //return thematicItem;
 
         }
-       
+
 
         private StackPanel legendStackPanel;
 
