@@ -305,8 +305,8 @@ namespace EpiDashboard
             tooltipSaveAs.Text = DashboardSharedStrings.MENU_SAVE_AS_TEXT;
             tooltipSaveAsHeader.Content = DashboardSharedStrings.MENU_SAVE_AS;
 
-            tooltipCreateVariableHeader.Content = DashboardSharedStrings.MENU_NEW_VARIABLE_TEXT;
-            tooltipCreateVariable.Text = DashboardSharedStrings.MENU_NEW_VARIABLE;
+            tooltipCreateVariableHeader.Content = DashboardSharedStrings.MENU_NEW_VARIABLE;
+            tooltipCreateVariable.Text = DashboardSharedStrings.MENU_NEW_VARIABLE_TEXT;
 
             tooltipFilter.Text = DashboardSharedStrings.MENU_FILTERS_TEXT;
             tooltipFilterHeader.Content = DashboardSharedStrings.MENU_FILTERS;

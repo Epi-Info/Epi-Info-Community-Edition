@@ -109,10 +109,10 @@ namespace EpiDashboard.Controls
                 }
             }
 
-            tblockRows.Text = dashboardHelper.DataSet.Tables[0].Rows.Count.ToString() + " unfiltered rows";
-            tblockColumns.Text = dashboardHelper.DataSet.Tables[0].Columns.Count.ToString() + " columns";
-            tblockCacheDateTime.Text = "Data last cached at " + dashboardHelper.LastCacheTime.ToShortDateString() + " " + dashboardHelper.LastCacheTime.ToShortTimeString();
-            tblockCacheTimeElapsed.Text = "Took " + dashboardHelper.TimeToCache + " to locally cache data";
+            tblockRows.Text = dashboardHelper.DataSet.Tables[0].Rows.Count.ToString() + DashboardSharedStrings.GADGET_INFO_UNFILTERED_ROWS;
+            tblockColumns.Text = dashboardHelper.DataSet.Tables[0].Columns.Count.ToString() + DashboardSharedStrings.CANVAS_COLUMNS;
+            tblockCacheDateTime.Text = DashboardSharedStrings.CANVAS_DATA_LAST_CACHED + dashboardHelper.LastCacheTime.ToShortDateString() + " " + dashboardHelper.LastCacheTime.ToShortTimeString();
+            tblockCacheTimeElapsed.Text = DashboardSharedStrings.CANVAS_INFO_TOOK + dashboardHelper.TimeToCache + DashboardSharedStrings.CANVAS_INFO_LOCALLY_CACHE_DATA;
 
             Epi.ApplicationIdentity appId = new Epi.ApplicationIdentity(typeof(Configuration).Assembly);
             tblockCurrentEpiVersion.Text = "Epi Info " + appId.Version;
@@ -126,6 +126,46 @@ namespace EpiDashboard.Controls
                     lbxRelatedDataSources.Items.Add(rConn.db.ConnectionString);
                 }
             }
+
+
+            #region Translation
+
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.CMENU_PROPERTIES;
+            tbtnDataSource.Title = DashboardSharedStrings.GADGET_DATA_SOURCE;
+            tbtnDataSource.Description = DashboardSharedStrings.CANVASPROPERTIES_TABDESC_DATASOURCE;
+            tbtnHTML.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
+            tbtnHTML.Description = DashboardSharedStrings.CANVASPROPERTIES_DESC_HTMLOUTPUT;
+            //tbtnCharts.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
+            //tbtnCharts.Description = DashboardSharedStrings.CANVASPROPERTIES_DESC_CHARTS;
+            tbtnInfo.Title = DashboardSharedStrings.CANVASPROPERTIES_TITLE_INFORMATION;
+            tbtnInfo.Description = DashboardSharedStrings.CANVASPROPERTIES_DESC_INFORMATION;
+
+            //Data Source Panel
+            tblockPanelDataSource.Content = DashboardSharedStrings.GADGET_DATA_SOURCE;
+            tblockEpiInfoPro.Content = DashboardSharedStrings.CANVAS_EPIINFOPRO;
+            btnBrowse.Content = DashboardSharedStrings.BUTTON_BROWSE;
+            tblockForm.Content = DashboardSharedStrings.CANVAS_FORM;
+            lblRelatedDataSources.Content = DashboardSharedStrings.RALATED_DATASOURCE;
+            
+            //Display Panel
+            tblockHTMLOutput.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockHTMLSetting.Content = DashboardSharedStrings.CANVAS_HTMLOUTPUT_SETTINGS;
+            txtTitle.Text = DashboardSharedStrings.CANVAS_TITLE;
+            txtSummary.Text = DashboardSharedStrings.CANVAS_SUMMARY;
+            txtConclusion.Text = DashboardSharedStrings.CANVAS_CONCLUSION;
+            checkboxGadgetHeadings.Content = DashboardSharedStrings.CANVAS_GADGET_HEADING;
+            checkboxGadgetSettings.Content = DashboardSharedStrings.CANVAS_GADGET_SETTINGS;
+            checkboxCanvasSummary.Content = DashboardSharedStrings.CANVAS_CANVAS_SUMMARY;
+            checkboxAlternateColors.Content = DashboardSharedStrings.CANVAS_ALTERNATING_COLORS;
+            checkboxTopToBottom.Content = DashboardSharedStrings.CANVAS_DISPLAY_TOPTO_BOTTOM;
+            tblockChartSetting.Content = DashboardSharedStrings.CANVAS_CHART_SETTINGS;
+            lbldefaultwidth.Content = DashboardSharedStrings.CANVAS_DEFAULT_WIDTH;
+            lbldefaultheight.Content = DashboardSharedStrings.CANVAS_DEFAULT_HEIGHT;
+
+            //Information Panel
+            lblCanvasInformation.Content = DashboardSharedStrings.GADGET_CANVAS_INFO;
+
+            #endregion // Translation
         }
 
         public string Conclusion
@@ -396,7 +436,7 @@ namespace EpiDashboard.Controls
                 CheckButtonStates(tb);
                 panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
                 panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-                panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+                //panelCharts.Visibility = System.Windows.Visibility.Collapsed;
                 panelInfo.Visibility = System.Windows.Visibility.Visible;
             }
         }
@@ -409,7 +449,7 @@ namespace EpiDashboard.Controls
                 CheckButtonStates(tb);
                 panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
                 panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-                panelCharts.Visibility = System.Windows.Visibility.Visible;
+                //panelCharts.Visibility = System.Windows.Visibility.Visible;
                 panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
@@ -422,7 +462,7 @@ namespace EpiDashboard.Controls
                 CheckButtonStates(tb);
                 panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
                 panelHTML.Visibility = System.Windows.Visibility.Visible;
-                panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+                //panelCharts.Visibility = System.Windows.Visibility.Collapsed;
                 panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
@@ -436,7 +476,7 @@ namespace EpiDashboard.Controls
                 CheckButtonStates(tb);
                 panelDataSource.Visibility = System.Windows.Visibility.Visible;
                 panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-                panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+                //panelCharts.Visibility = System.Windows.Visibility.Collapsed;
                 panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             }
         }

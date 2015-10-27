@@ -189,6 +189,7 @@
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel>
+                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Colors__xfe</Label>
                     <CheckBox x:Name="checkboxConditionalShading" Margin="0,5,0,0" Content="Conditional cell shading__xfe"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="False" />
                     <StackPanel Orientation="Horizontal" Margin="0,4,0,4" x:Name="panelHeatMap1">
                         <TextBlock x:Name="tblockColorGradient" VerticalAlignment="Center" Margin="0,12,4,0">Color Gradient:__xfe</TextBlock>
@@ -203,7 +204,7 @@
                             </Rectangle.ToolTip>
                         </Rectangle>
                     </StackPanel>
-
+                    <Label x:Name="tblockStylesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Styles__xfe</Label>
                     <StackPanel x:Name="panelHeatMap2">
 
                         <TextBlock x:Name="tblockBreakType" HorizontalAlignment="Left" TextAlignment="Center" Text="Break type:__xfe" Margin="0,12,0,0"  />

@@ -173,7 +173,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
             tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
-            tblockPanelValueMapping.Content = DashboardSharedStrings.GADGET_VALUE_MAPPING;
+            tblockPanelValueMapping.Content = DashboardSharedStrings.GADGET_DEFINE_VALUE_MAPPING;
             tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
             tblockExposureField.Text = DashboardSharedStrings.GADGET_EXPOSURE_VARIABLE;
             tblockOutcomeField.Text = DashboardSharedStrings.GADGET_CASE_CONTROL;

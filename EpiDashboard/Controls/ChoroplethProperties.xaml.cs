@@ -73,7 +73,7 @@ namespace EpiDashboard.Controls
             InitializeComponent();
             _mapControl = mapControl;
             _myMap = myMap;
-
+            mapControl.SizeChanged += mapControl_SizeChanged;
 
             Epi.ApplicationIdentity appId = new Epi.ApplicationIdentity(typeof(Configuration).Assembly);
             tblockCurrentEpiVersion.Text = "Epi Info " + appId.Version;
@@ -165,6 +165,31 @@ namespace EpiDashboard.Controls
 
             #endregion // Translation
         }
+
+        public void mapControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            _mapControl.ResizedWidth = e.NewSize.Width;
+            _mapControl.ResizedHeight = e.NewSize.Height;
+            if (_mapControl.ResizedWidth != 0 & _mapControl.ResizedHeight != 0)
+            {
+                double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;//Developer Desktop Width Where the Form is Designed
+                double i_StandardWidth = System.Windows.SystemParameters.PrimaryScreenWidth; ////Developer Desktop Height Where the Form is Designed
+                float f_HeightRatio = new float();
+                float f_WidthRatio = new float();
+                f_HeightRatio = (float)((float)_mapControl.ResizedHeight / (float)i_StandardHeight);
+                f_WidthRatio = (float)((float)_mapControl.ResizedWidth / (float)i_StandardWidth);
+
+                this.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
+                this.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+
+            }
+            else
+            {
+                this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
+                this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.15);
+            }
+        }
+
 
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;
