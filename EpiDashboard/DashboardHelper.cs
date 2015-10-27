@@ -3865,6 +3865,11 @@ namespace EpiDashboard
                 if (inputs.InputVariableList["usepromptforfield"] == "true") useFieldPrompts = true;
             }
 
+            if (inputs.UseFieldPrompts)
+            {
+                useFieldPrompts = true;
+            }
+
             if(inputs.InputVariableList.ContainsKey("NeedsOutputGrid")) 
             {
                 if (inputs.InputVariableList["NeedsOutputGrid"] == "false") needsOutputTable = false;

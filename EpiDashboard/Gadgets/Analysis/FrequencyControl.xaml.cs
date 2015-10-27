@@ -2047,6 +2047,14 @@ namespace EpiDashboard
                             if (stratifiedFrequencyTables.Count > 1)
                             {
                                 tableHeading = freqVar;// +": " + strataVar + " = " + frequencies.TableName;
+                                if (freqParameters.UseFieldPrompts)
+                                {
+                                    Field tmpField = DashboardHelper.GetAssociatedField(freqVar);
+                                    if (tmpField != null && tmpField is IDataField)
+                                    {
+                                        tableHeading = ((IDataField)tmpField).PromptText;
+                                    }
+                                }
                             }
 
                             if (!showCumulativePercent)
