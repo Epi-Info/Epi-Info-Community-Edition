@@ -29,16 +29,16 @@
         <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  Background="{StaticResource PrimaryAccentColorLight}" >
             <Border BorderBrush="#015796" BorderThickness="0 0 0 1">
                 <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
-                    <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Reference Layers</Label>
+                    <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Base Layers</Label>
                 </Viewbox>
             </Border>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title=" Reference Layer" Description="Choose a Reference" IsChecked="True" />
+            <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title=" Base Layer" Description="Choose a Base Layer" IsChecked="True" />
         </StackPanel>
         <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="lblPanelHeader" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Reference Layers</Label>
+                <Label x:Name="lblPanelHeader" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Base Layers</Label>
             </StackPanel>
 
             <ScrollViewer DockPanel.Dock="Bottom" Width="Auto" Height="Auto" x:Name="scrollViewerProperties">

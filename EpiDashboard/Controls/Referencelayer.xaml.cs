@@ -51,10 +51,10 @@ namespace EpiDashboard.Controls
 
             #region Translation
 
-            lblConfigExpandedTitle.Content = DashboardSharedStrings.REFERENCE_LAYER;
-            tbtnDataSource.Title = DashboardSharedStrings.REFERENCE_LAYER;
-            tbtnDataSource.Description = DashboardSharedStrings.MENU_ADD_REFERENCE_MAP;
-            lblPanelHeader.Content = DashboardSharedStrings.REFERENCE_LAYER;
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.BASE_LAYER;
+            tbtnDataSource.Title = DashboardSharedStrings.BASE_LAYER;
+            tbtnDataSource.Description = DashboardSharedStrings.MENU_ADD_BASELAYER_MAP;
+            lblPanelHeader.Content = DashboardSharedStrings.BASE_LAYER;
 
             radShapeFile.Content = DashboardSharedStrings.GADGET_SHAPEFILE;
             btnBrowseShape.Content = DashboardSharedStrings.BUTTON_BROWSE;

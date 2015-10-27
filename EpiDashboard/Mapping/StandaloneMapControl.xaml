@@ -50,14 +50,14 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border Grid.Row="0" Grid.RowSpan="10" CornerRadius="0" BorderThickness="0" Background="#303030" ></Border>
-            <TextBlock x:Name="txtPointOfInterest" Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="1" HorizontalAlignment="Center">Points of Interest</TextBlock>
-            <Image x:Name="imgPoi" Source="..\Images\poi.png" Stretch="None" Grid.Row="2" Cursor="Hand" MouseLeftButtonUp="imgPointofInterest_MouseLeftButtonUp"/>
-            <TextBlock x:Name="txtCaseCluster" Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="3" HorizontalAlignment="Center" Margin="0 0 0 0 ">Case Cluster</TextBlock>
-            <Image x:Name="imgCaseCluster" Source="..\Images\casecluster.png" Stretch="None" Grid.Row="4" Cursor="Hand" MouseLeftButtonUp="imgCaseCluster_MouseLeftButtonUp"/>
-            <TextBlock x:Name="txtChoropleth" Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="5" HorizontalAlignment="Center">Choropleth</TextBlock>
-            <Image x:Name="imgChoropleth" Source="..\Images\choropleth.png" Stretch="None" Grid.Row="6" Cursor="Hand" MouseLeftButtonUp="imgChoropleth_MouseLeftButtonUp"/>
-            <TextBlock x:Name="txtDotDensity" Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="7" HorizontalAlignment="Center">Dot Density</TextBlock>
-            <Image x:Name="imgDotDensity" Source="..\Images\dotdensity.png" Stretch="None" Grid.Row="8" Cursor="Hand" MouseLeftButtonUp="imgDotDensity_MouseLeftButtonUp" />
+            <TextBlock x:Name="txtChoropleth" Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="1" HorizontalAlignment="Center">Choropleth</TextBlock>
+            <Image x:Name="imgChoropleth" Source="..\Images\choropleth.png" Stretch="None" Grid.Row="2" Cursor="Hand" MouseLeftButtonUp="imgChoropleth_MouseLeftButtonUp"/>
+            <TextBlock x:Name="txtDotDensity" Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="3" HorizontalAlignment="Center">Dot Density</TextBlock>
+            <Image x:Name="imgDotDensity" Source="..\Images\dotdensity.png" Stretch="None" Grid.Row="4" Cursor="Hand" MouseLeftButtonUp="imgDotDensity_MouseLeftButtonUp" />
+            <TextBlock x:Name="txtCaseCluster" Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="5" HorizontalAlignment="Center" Margin="0 0 0 0 ">Case Cluster</TextBlock>
+            <Image x:Name="imgCaseCluster" Source="..\Images\casecluster.png" Stretch="None" Grid.Row="6" Cursor="Hand" MouseLeftButtonUp="imgCaseCluster_MouseLeftButtonUp"/>
+            <TextBlock x:Name="txtPointOfInterest" Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="7" HorizontalAlignment="Center">Spot Map</TextBlock>
+            <Image x:Name="imgPoi" Source="..\Images\poi.png" Stretch="None" Grid.Row="8" Cursor="Hand" MouseLeftButtonUp="imgPointofInterest_MouseLeftButtonUp"/>
             <StackPanel Grid.Row="9"></StackPanel>
             
         </Grid>
@@ -147,10 +147,10 @@
                         <DockPanel x:Name="iconReference" Style="{StaticResource menuIconStyle}" Grid.Row="5" MouseLeftButtonUp="iconReference_MouseLeftButtonUp">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipAddReferenceLayerHeader" FontWeight="Bold">Add Reference Layer</Label>
+                                    <Label x:Name="tooltipAddReferenceLayerHeader" FontWeight="Bold">Add Base Layer</Label>
                                     <TextBlock x:Name="tooltipAddReferenceLayer"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
-                                        Adds a reference layer to the map.
+                                        Adds a base layer to the map.
                                     </TextBlock>
                                 </StackPanel>
                             </DockPanel.ToolTip>

@@ -63,7 +63,7 @@ namespace EpiDashboard.Controls
             tbtnDataSource.Title = DashboardSharedStrings.GADGET_DATA_SOURCE;
             tbtnDataSource.Description = DashboardSharedStrings.GADGET_TABDESC_DATASOURCE;
             tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
-            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_POF_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_COORD_VARIABLES;
             tbtnCharts.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
             tbtnCharts.Description = DashboardSharedStrings.GADGET_TABDESC_SETCOLORS;
             tbtnFilter.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;

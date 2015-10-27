@@ -155,7 +155,7 @@
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(189, 24);
-            this.toolStripMenuItem1.Text = "Points of Interest";
+            this.toolStripMenuItem1.Text = "Spot Map";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // caseClusterToolStripMenuItem
@@ -239,7 +239,7 @@
             this.btnReference.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnReference.Name = "btnReference";
             this.btnReference.Size = new System.Drawing.Size(160, 24);
-            this.btnReference.Text = "Add Reference Layer";
+            this.btnReference.Text = "Add Base Layer";
             this.btnReference.Visible = false;
             // 
             // fromMapServerToolStripMenuItem

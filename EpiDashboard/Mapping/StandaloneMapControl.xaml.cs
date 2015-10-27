@@ -79,7 +79,7 @@ namespace EpiDashboard.Mapping
             Construct();
 
             #region Translation
-            txtPointOfInterest.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_POINTOFINTEREST;
+            txtPointOfInterest.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_SPOTMAP;
             txtCaseCluster.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_CLUSTER;
             txtChoropleth.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_CHOROPLETH;
             txtDotDensity.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_DOTDENSITY;
@@ -107,8 +107,8 @@ namespace EpiDashboard.Mapping
             tooltipAddDataLayerHeader.Content = DashboardSharedStrings.MENU_ADD_LAYER;
             tooltipAddDataLayer.Text = DashboardSharedStrings.MENU_ADD_LAYER_MAP;
 
-            tooltipAddReferenceLayerHeader.Content = DashboardSharedStrings.MENU_ADD_REFERENCE;
-            tooltipAddReferenceLayer.Text = DashboardSharedStrings.MENU_ADD_REFERENCE_MAP;
+            tooltipAddReferenceLayerHeader.Content = DashboardSharedStrings.MENU_ADD_BASELAYER ;
+            tooltipAddReferenceLayer.Text = DashboardSharedStrings.MENU_ADD_BASELAYER_MAP;
 
             tooltipTimeLapseHeader.Content = DashboardSharedStrings.MENU_TIME_LAPSE;
             tooltipTimeLapse.Text = DashboardSharedStrings.MENU_TIME_LAPSE_MAP;
