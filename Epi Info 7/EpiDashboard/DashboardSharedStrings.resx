@@ -227,7 +227,7 @@
     <value>Open canvas...</value>
   </data>
   <data name="CMENU_PROPERTIES" xml:space="preserve">
-    <value>Canvas properties</value>
+    <value>Canvas Properties</value>
   </data>
   <data name="CMENU_AUTO_ARRANGE" xml:space="preserve">
     <value>Auto-arrange gadgets</value>
@@ -953,7 +953,7 @@ of records or select fewer fields for the group.</value>
     <value>Display</value>
   </data>
   <data name="GADGET_TABBUTTON_FILTERS" xml:space="preserve">
-    <value>Filters</value>
+    <value>Data Filters</value>
   </data>
   <data name="GADGET_TABBUTTON_SORTING" xml:space="preserve">
     <value>Grouping and Sorting</value>
@@ -1052,7 +1052,7 @@ of records or select fewer fields for the group.</value>
     <value>Colors and Styles</value>
   </data>
   <data name="GADGET_VALUE_MAPPING" xml:space="preserve">
-    <value>Value Mapping</value>
+    <value>2x2 Value Mapping</value>
   </data>
   <data name="GADGET_VARIABLES_TO_DISPLAY" xml:space="preserve">
     <value>Variables to display:</value>
@@ -1544,7 +1544,7 @@ of records or select fewer fields for the group.</value>
     <value>Connection String:</value>
   </data>
   <data name="GADGET_INFO_UNFILTERED_ROWS" xml:space="preserve">
-    <value>unfiltered rows</value>
+    <value> unfiltered rows</value>
   </data>
   <data name="GADGET_LABEL_DESCRIPTION" xml:space="preserve">
     <value>Description</value>
@@ -1815,5 +1815,83 @@ of records or select fewer fields for the group.</value>
   </data>
   <data name="MAP_ERROR_CRYPTOGRAPHY" xml:space="preserve">
     <value>There was a problem referencing an external cryptography DLL.</value>
+  </data>
+  <data name="CANVASPROPERTIES_DESC_CHARTS" xml:space="preserve">
+    <value>Set default chart settings for this canvas.</value>
+  </data>
+  <data name="CANVASPROPERTIES_DESC_HTMLOUTPUT" xml:space="preserve">
+    <value>Modify or Set HTML output or default chart settings.</value>
+  </data>
+  <data name="CANVASPROPERTIES_DESC_INFORMATION" xml:space="preserve">
+    <value>View technical details about this canvas.</value>
+  </data>
+  <data name="CANVASPROPERTIES_TABDESC_DATASOURCE" xml:space="preserve">
+    <value>Change the data source for the current canvas.</value>
+  </data>
+  <data name="CANVASPROPERTIES_TITLE_INFORMATION" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="CANVAS_EPIINFOPRO" xml:space="preserve">
+    <value>Epi Info 7 Project</value>
+  </data>
+  <data name="CANVAS_FORM" xml:space="preserve">
+    <value>Form:</value>
+  </data>
+  <data name="CANVAS_HTMLOUTPUT" xml:space="preserve">
+    <value>HTML Output</value>
+  </data>
+  <data name="RALATED_DATASOURCE" xml:space="preserve">
+    <value>Related Data Sources:</value>
+  </data>
+  <data name="GADGET_DEFINE_VALUE_MAPPING" xml:space="preserve">
+    <value>Define Value Mappings</value>
+  </data>
+  <data name="CANVAS_ALTERNATING_COLORS" xml:space="preserve">
+    <value>Use alternating colors in tables</value>
+  </data>
+  <data name="CANVAS_CANVAS_SUMMARY" xml:space="preserve">
+    <value>Show canvas summary</value>
+  </data>
+  <data name="CANVAS_CHART_SETTINGS" xml:space="preserve">
+    <value>Chart Settings</value>
+  </data>
+  <data name="CANVAS_COLUMNS" xml:space="preserve">
+    <value> columns</value>
+  </data>
+  <data name="CANVAS_CONCLUSION" xml:space="preserve">
+    <value>Conclusion</value>
+  </data>
+  <data name="CANVAS_DATA_LAST_CACHED" xml:space="preserve">
+    <value> Data last cached at</value>
+  </data>
+  <data name="CANVAS_DEFAULT_HEIGHT" xml:space="preserve">
+    <value>Default Height</value>
+  </data>
+  <data name="CANVAS_DEFAULT_WIDTH" xml:space="preserve">
+    <value>Default Width</value>
+  </data>
+  <data name="CANVAS_DISPLAY_TOPTO_BOTTOM" xml:space="preserve">
+    <value>Display gadgets in top-to-bottom order</value>
+  </data>
+  <data name="CANVAS_GADGET_HEADING" xml:space="preserve">
+    <value>Show gadget headings</value>
+  </data>
+  <data name="CANVAS_GADGET_SETTINGS" xml:space="preserve">
+    <value>Show gadget settings</value>
+  </data>
+  <data name="CANVAS_HTMLOUTPUT_SETTINGS" xml:space="preserve">
+    <value>HTMLOutput Settings</value>
+  </data>
+  <data name="CANVAS_INFO_LOCALLY_CACHE_DATA" xml:space="preserve">
+    <value> to locally cache data</value>
+  </data>
+  <data name="CANVAS_INFO_TOOK" xml:space="preserve">
+    <value> Took</value>
+  </data>
+  <data name="CANVAS_SUMMARY" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="CANVAS_TITLE" xml:space="preserve">
+    <value>Title</value>
   </data>
 </root>

@@ -111,7 +111,7 @@ namespace EpiDashboard.Controls
             this.myMap = myMap;           
             Epi.ApplicationIdentity appId = new Epi.ApplicationIdentity(typeof(Configuration).Assembly);
             tblockCurrentEpiVersion.Text = "Epi Info " + appId.Version;
-
+            mapControl.SizeChanged+=mapControl_SizeChanged;
             #region Translation
 
             //Dot Density Left Panel
@@ -179,6 +179,31 @@ namespace EpiDashboard.Controls
         }
 
         #endregion
+
+        public void mapControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            mapControl.ResizedWidth = e.NewSize.Width;
+            mapControl.ResizedHeight = e.NewSize.Height;
+            if (mapControl.ResizedWidth != 0 & mapControl.ResizedHeight != 0)
+            {
+                double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;//Developer Desktop Width Where the Form is Designed
+                double i_StandardWidth = System.Windows.SystemParameters.PrimaryScreenWidth; ////Developer Desktop Height Where the Form is Designed
+                float f_HeightRatio = new float();
+                float f_WidthRatio = new float();
+                f_HeightRatio = (float)((float)mapControl.ResizedHeight / (float)i_StandardHeight);
+                f_WidthRatio = (float)((float)mapControl.ResizedWidth / (float)i_StandardWidth);
+
+                this.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
+                this.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+
+            }
+            else
+            {
+                this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
+                this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.15);
+            }
+        }
+
 
         private void CheckButtonStates(ToggleButton sender)
         {

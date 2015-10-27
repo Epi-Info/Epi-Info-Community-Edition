@@ -30,7 +30,7 @@
         <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  Background="{StaticResource PrimaryAccentColorLight}" >
             <Border BorderBrush="#015796" BorderThickness="0 0 0 1">
                 <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
-                    <Label FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Properties</Label>
+                    <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Canvas Properties</Label>
                 </Viewbox>
             </Border>
         </StackPanel>
@@ -45,8 +45,8 @@
             </ToggleButton>-->
 
             <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Change the data source for the current canvas." IsChecked="True" Checked="tbtnDataSource_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title="HTML Output" Description="Modify the HTML output settings." IsChecked="False" Checked="tbtnHTML_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Charts" Description="Set default chart settings for this canvas." IsChecked="False" Checked="tbtnCharts_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title="Display" Description="Modify HTML output or Set default chart settings." IsChecked="False" Checked="tbtnHTML_Checked"/>
+            <!--<Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Charts" Description="Set default chart settings for this canvas." IsChecked="False" Checked="tbtnCharts_Checked"/>-->
             <Controls:SettingsToggleButton  x:Name="tbtnInfo" Title="Information" Description="View technical details about this canvas." IsChecked="False" Checked="tbtnInfo_Checked"/>
 
             <!--<ToggleButton x:Name="tbtnHTML" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnHTML_Checked">
@@ -73,14 +73,14 @@
 
         <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top" >
-                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
+                <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel>
                     <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
                            
                         <StackPanel>
-                            <Label Content="Epi Info 7 Project:" />
+                            <Label x:Name="tblockEpiInfoPro" Content="Epi Info 7 Project:" />
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
                                 <TextBox Width="Auto" TextWrapping="Wrap" MinWidth="300" HorizontalAlignment="Left" x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged" />
                                 <Button x:Name="btnBrowse" HorizontalAlignment="Left" Margin="5 0 0 0" Height="Auto"  Click="btnBrowse_Click" Content="Browse"/>
@@ -88,7 +88,7 @@
                         </StackPanel>
 
                         <StackPanel Margin="0 20 0 0">
-                            <Label Content="Form:"/>
+                            <Label x:Name="tblockForm" Content="Form:"/>
                             <ComboBox Width="Auto" MinWidth="300" HorizontalAlignment="Left" x:Name="cmbFormName" SelectionChanged="cmbFormName_SelectionChanged"/>
                         </StackPanel>
 
@@ -128,11 +128,12 @@
 
         <DockPanel x:Name="panelHTML" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">HTML Output</Label>
+                <Label x:Name="tblockHTMLOutput" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
-                <StackPanel >
-                    
+                
+                <StackPanel>
+                    <Label x:Name="tblockHTMLSetting" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">HTML Output Settings</Label>
                     <StackPanel>
                         <Label>Title:</Label>
                         <TextBox x:Name="txtTitle" Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" MaxWidth="300" AcceptsReturn="True" TextWrapping="Wrap" ></TextBox>
@@ -155,13 +156,26 @@
                         <CheckBox Style="{StaticResource PropertiesPanelCheckbox}"  x:Name="checkboxAlternateColors" Content="Use alternating colors in tables" IsChecked="False" />
                         <CheckBox Style="{StaticResource PropertiesPanelCheckbox}"  x:Name="checkboxTopToBottom" Content="Display gadgets in top-to-bottom order" IsChecked="True" />
                     </WrapPanel>
+
+                    <Label x:Name="tblockChartSetting" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Chart Settings</Label>
+
+                    <StackPanel>
+                        <Label x:Name="lbldefaultwidth">Default Width:</Label>
+                        <TextBox Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" x:Name="txtDefaultChartWidth">800</TextBox>
+                    </StackPanel>
+
+                    <StackPanel Margin="0 10 0 0">
+                        <Label x:Name="lbldefaultheight" >Default Height:</Label>
+                        <TextBox Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" x:Name="txtDefaultChartHeight">500</TextBox>
+                    </StackPanel>
                 </StackPanel>
+                
             </ScrollViewer>
         </DockPanel>
 
         <DockPanel x:Name="panelInfo" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Canvas Information</Label>
+                <Label x:Name="lblCanvasInformation" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Canvas Information</Label>
             </StackPanel>
 
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
@@ -175,14 +189,14 @@
             </ScrollViewer>
         </DockPanel>
 
-        <DockPanel x:Name="panelCharts" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
+        <!--<DockPanel x:Name="panelCharts" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Chart Settings</Label>
             </StackPanel>
 
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel >
-                    <StackPanel>
+                    --><!--<StackPanel>
                         <Label>Default Width:</Label>
                         <TextBox Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" x:Name="txtDefaultChartWidth">800</TextBox>
                     </StackPanel>
@@ -190,10 +204,10 @@
                     <StackPanel Margin="0 10 0 0">
                         <Label>Default Height:</Label>
                         <TextBox Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" x:Name="txtDefaultChartHeight">500</TextBox>
-                    </StackPanel>
+                    </StackPanel>--><!--
                 </StackPanel>
             </ScrollViewer>
-        </DockPanel>
+        </DockPanel>-->
 
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 

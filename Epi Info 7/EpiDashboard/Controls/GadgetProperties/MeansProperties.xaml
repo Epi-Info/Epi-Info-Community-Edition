@@ -168,11 +168,12 @@
                             <CheckBox x:Name="checkboxShowQ3" Style="{StaticResource PropertiesPanelCheckbox}" Content="75%__xfe" IsEnabled="true"/>
                             <CheckBox x:Name="checkboxShowMax" Style="{StaticResource PropertiesPanelCheckbox}" Content="Maximum__xfe" IsEnabled="true"/>
                             <CheckBox x:Name="checkboxShowMode" Style="{StaticResource PropertiesPanelCheckbox}" Content="Mode__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxListLabels" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels__xfe" Margin="0,5,0,0" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxLineColumn" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show line column__xfe" Margin="0,5,0,0" IsChecked="True" />
-                            <CheckBox x:Name="checkboxColumnHeaders" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show column headings__xfe" Margin="0,5,0,0" IsChecked="True" />
-                            <CheckBox x:Name="checkboxShowNulls" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show missing representation__xfe" Margin="0,5,0,0" IsChecked="True" />
                             <CheckBox x:Name="checkboxShowANOVA" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display ANOVA statistics" IsChecked="True"  />
+                            <CheckBox x:Name="checkboxListLabels" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels__xfe" IsEnabled="true"/>
+                            <CheckBox x:Name="checkboxLineColumn" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show line column__xfe"  IsChecked="True" />
+                            <CheckBox x:Name="checkboxColumnHeaders" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show column headings__xfe" IsChecked="True" />
+                            <CheckBox x:Name="checkboxShowNulls" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show missing representation__xfe" IsChecked="True" />
+                            
                             <StackPanel>
                                 <TextBlock x:Name="tblockPrecision" HorizontalAlignment="Left" TextAlignment="Center" Text="Decimals to display:__xfe" Margin="0,10,0,0"  />
                                 <ComboBox x:Name="cbxFieldPrecision" HorizontalAlignment="Left" Width="45" SelectedIndex="5">

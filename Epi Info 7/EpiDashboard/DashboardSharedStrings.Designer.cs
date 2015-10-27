@@ -151,6 +151,96 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use alternating colors in tables.
+        /// </summary>
+        public static string CANVAS_ALTERNATING_COLORS {
+            get {
+                return ResourceManager.GetString("CANVAS_ALTERNATING_COLORS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show canvas summary.
+        /// </summary>
+        public static string CANVAS_CANVAS_SUMMARY {
+            get {
+                return ResourceManager.GetString("CANVAS_CANVAS_SUMMARY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chart Settings.
+        /// </summary>
+        public static string CANVAS_CHART_SETTINGS {
+            get {
+                return ResourceManager.GetString("CANVAS_CHART_SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  columns.
+        /// </summary>
+        public static string CANVAS_COLUMNS {
+            get {
+                return ResourceManager.GetString("CANVAS_COLUMNS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Conclusion.
+        /// </summary>
+        public static string CANVAS_CONCLUSION {
+            get {
+                return ResourceManager.GetString("CANVAS_CONCLUSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Data last cached at.
+        /// </summary>
+        public static string CANVAS_DATA_LAST_CACHED {
+            get {
+                return ResourceManager.GetString("CANVAS_DATA_LAST_CACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Height.
+        /// </summary>
+        public static string CANVAS_DEFAULT_HEIGHT {
+            get {
+                return ResourceManager.GetString("CANVAS_DEFAULT_HEIGHT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Width.
+        /// </summary>
+        public static string CANVAS_DEFAULT_WIDTH {
+            get {
+                return ResourceManager.GetString("CANVAS_DEFAULT_WIDTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display gadgets in top-to-bottom order.
+        /// </summary>
+        public static string CANVAS_DISPLAY_TOPTO_BOTTOM {
+            get {
+                return ResourceManager.GetString("CANVAS_DISPLAY_TOPTO_BOTTOM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Epi Info 7 Project.
+        /// </summary>
+        public static string CANVAS_EPIINFOPRO {
+            get {
+                return ResourceManager.GetString("CANVAS_EPIINFOPRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quick Access - Available Canvas Files.
         /// </summary>
         public static string CANVAS_FILES_HEADER {
@@ -169,11 +259,137 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Form:.
+        /// </summary>
+        public static string CANVAS_FORM {
+            get {
+                return ResourceManager.GetString("CANVAS_FORM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show gadget headings.
+        /// </summary>
+        public static string CANVAS_GADGET_HEADING {
+            get {
+                return ResourceManager.GetString("CANVAS_GADGET_HEADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show gadget settings.
+        /// </summary>
+        public static string CANVAS_GADGET_SETTINGS {
+            get {
+                return ResourceManager.GetString("CANVAS_GADGET_SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HTML Output.
+        /// </summary>
+        public static string CANVAS_HTMLOUTPUT {
+            get {
+                return ResourceManager.GetString("CANVAS_HTMLOUTPUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HTMLOutput Settings.
+        /// </summary>
+        public static string CANVAS_HTMLOUTPUT_SETTINGS {
+            get {
+                return ResourceManager.GetString("CANVAS_HTMLOUTPUT_SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  to locally cache data.
+        /// </summary>
+        public static string CANVAS_INFO_LOCALLY_CACHE_DATA {
+            get {
+                return ResourceManager.GetString("CANVAS_INFO_LOCALLY_CACHE_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Took.
+        /// </summary>
+        public static string CANVAS_INFO_TOOK {
+            get {
+                return ResourceManager.GetString("CANVAS_INFO_TOOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Canvas file {0} loaded successfully..
         /// </summary>
         public static string CANVAS_LOADED {
             get {
                 return ResourceManager.GetString("CANVAS_LOADED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summary.
+        /// </summary>
+        public static string CANVAS_SUMMARY {
+            get {
+                return ResourceManager.GetString("CANVAS_SUMMARY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string CANVAS_TITLE {
+            get {
+                return ResourceManager.GetString("CANVAS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set default chart settings for this canvas..
+        /// </summary>
+        public static string CANVASPROPERTIES_DESC_CHARTS {
+            get {
+                return ResourceManager.GetString("CANVASPROPERTIES_DESC_CHARTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modify or Set HTML output or default chart settings..
+        /// </summary>
+        public static string CANVASPROPERTIES_DESC_HTMLOUTPUT {
+            get {
+                return ResourceManager.GetString("CANVASPROPERTIES_DESC_HTMLOUTPUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View technical details about this canvas..
+        /// </summary>
+        public static string CANVASPROPERTIES_DESC_INFORMATION {
+            get {
+                return ResourceManager.GetString("CANVASPROPERTIES_DESC_INFORMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change the data source for the current canvas..
+        /// </summary>
+        public static string CANVASPROPERTIES_TABDESC_DATASOURCE {
+            get {
+                return ResourceManager.GetString("CANVASPROPERTIES_TABDESC_DATASOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string CANVASPROPERTIES_TITLE_INFORMATION {
+            get {
+                return ResourceManager.GetString("CANVASPROPERTIES_TITLE_INFORMATION", resourceCulture);
             }
         }
         
@@ -493,7 +709,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Canvas properties.
+        ///   Looks up a localized string similar to Canvas Properties.
         /// </summary>
         public static string CMENU_PROPERTIES {
             get {
@@ -2022,6 +2238,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Define Value Mappings.
+        /// </summary>
+        public static string GADGET_DEFINE_VALUE_MAPPING {
+            get {
+                return ResourceManager.GetString("GADGET_DEFINE_VALUE_MAPPING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gadget Description.
         /// </summary>
         public static string GADGET_DESCRIPTION {
@@ -2328,7 +2553,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to unfiltered rows.
+        ///   Looks up a localized string similar to  unfiltered rows.
         /// </summary>
         public static string GADGET_INFO_UNFILTERED_ROWS {
             get {
@@ -3570,7 +3795,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filters.
+        ///   Looks up a localized string similar to Data Filters.
         /// </summary>
         public static string GADGET_TABBUTTON_FILTERS {
             get {
@@ -4038,7 +4263,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value Mapping.
+        ///   Looks up a localized string similar to 2x2 Value Mapping.
         /// </summary>
         public static string GADGET_VALUE_MAPPING {
             get {
@@ -4709,6 +4934,15 @@ namespace EpiDashboard {
         public static string PROPERTIES_YAXIS_FONT_SIZE_INVALID {
             get {
                 return ResourceManager.GetString("PROPERTIES_YAXIS_FONT_SIZE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Related Data Sources:.
+        /// </summary>
+        public static string RALATED_DATASOURCE {
+            get {
+                return ResourceManager.GetString("RALATED_DATASOURCE", resourceCulture);
             }
         }
         

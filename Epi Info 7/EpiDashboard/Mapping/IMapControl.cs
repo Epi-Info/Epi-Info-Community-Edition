@@ -12,5 +12,6 @@ namespace EpiDashboard.Mapping
         void OnRecordSelected(int id);
         void OnDateRangeDefined(DateTime start, DateTime end, List<KeyValuePair<DateTime, int>> intervalCounts);
     }
+    
 
 }
