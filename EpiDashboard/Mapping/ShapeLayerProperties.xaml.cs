@@ -29,7 +29,8 @@ namespace EpiDashboard.Mapping
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
         public event EventHandler EditRequested;
-       
+        private bool flagrunedit;
+
         private bool isReadOnlyMode;
 
         public ShapeLayerProperties(ESRI.ArcGIS.Client.Map myMap)
@@ -71,6 +72,21 @@ namespace EpiDashboard.Mapping
                 MapGenerated(this, new EventArgs());
             }
 
+        }
+
+        public bool FlagRunEdit
+        {
+            set { flagrunedit = value; }
+            get { return flagrunedit; }
+        }
+
+        private void rctEdit_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (EditRequested != null)
+            {
+                flagrunedit = false;
+                EditRequested(this, new EventArgs());
+            }
         }
 
         #region ILayerProperties Members

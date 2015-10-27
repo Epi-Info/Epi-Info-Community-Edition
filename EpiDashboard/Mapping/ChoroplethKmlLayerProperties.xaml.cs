@@ -53,7 +53,6 @@ namespace EpiDashboard.Mapping
 
             FillComboBoxes();
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
-            btnShapeFile.Click += new RoutedEventHandler(btnShapeFile_Click);
             cbxDataKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxShapeKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
@@ -61,7 +60,6 @@ namespace EpiDashboard.Mapping
             rctMissingColor.MouseUp += new MouseButtonEventHandler(rctMissingColor_MouseUp);
             rctHighColor.MouseUp += new MouseButtonEventHandler(rctHighColor_MouseUp);
             rctLowColor.MouseUp += new MouseButtonEventHandler(rctLowColor_MouseUp);
-            rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
             rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
 
             #region translation;
@@ -297,7 +295,6 @@ namespace EpiDashboard.Mapping
             cbxDataKey.IsEnabled = false;
             cbxShapeKey.IsEnabled = false;
             cbxValue.IsEnabled = false;
-            btnShapeFile.Visibility = Visibility.Collapsed;
             grdMain.Width = 700;
             lblTitle.Visibility = System.Windows.Visibility.Visible;
         }
