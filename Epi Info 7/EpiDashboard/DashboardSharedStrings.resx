@@ -1519,8 +1519,8 @@ of records or select fewer fields for the group.</value>
   <data name="MENU_OPTIONS_TEXT" xml:space="preserve">
     <value>Shows a menu of options for the Dashboard application.</value>
   </data>
-  <data name="GADGET_CONFIG_TITLE_POINTOFINTEREST" xml:space="preserve">
-    <value>Points of Interest</value>
+  <data name="GADGET_CONFIG_TITLE_SPOTMAP" xml:space="preserve">
+    <value>Spot Map</value>
   </data>
   <data name="GADGET_DATA_SOURCE" xml:space="preserve">
     <value>Data Source</value>
@@ -1528,7 +1528,7 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_TABDESC_DATASOURCE" xml:space="preserve">
     <value>Choose data source.</value>
   </data>
-  <data name="GADGET_TABDESC_POF_VARIABLES" xml:space="preserve">
+  <data name="GADGET_TABDESC_COORD_VARIABLES" xml:space="preserve">
     <value>Choose variables for point coordinates.</value>
   </data>
   <data name="BUTTON_CANCEL" xml:space="preserve">
@@ -1609,11 +1609,11 @@ of records or select fewer fields for the group.</value>
   <data name="MENU_ADD_LAYER_MAP" xml:space="preserve">
     <value>Adds a data layer to the map.</value>
   </data>
-  <data name="MENU_ADD_REFERENCE" xml:space="preserve">
-    <value>Add Reference Layer</value>
+  <data name="MENU_ADD_BASELAYER" xml:space="preserve">
+    <value>Add Base Layer</value>
   </data>
-  <data name="MENU_ADD_REFERENCE_MAP" xml:space="preserve">
-    <value>Adds a reference layer to the map.</value>
+  <data name="MENU_ADD_BASELAYER_MAP" xml:space="preserve">
+    <value>Adds a base layer to the map.</value>
   </data>
   <data name="MENU_FULLSCREEN" xml:space="preserve">
     <value>Full Screen</value>
@@ -1795,8 +1795,8 @@ of records or select fewer fields for the group.</value>
   <data name="EXPORT_DEST_FILENAME" xml:space="preserve">
     <value>File name</value>
   </data>
-  <data name="REFERENCE_LAYER" xml:space="preserve">
-    <value>Reference Layer</value>
+  <data name="BASE_LAYER" xml:space="preserve">
+    <value>Base Layer</value>
   </data>
   <data name="MAP_LOADING" xml:space="preserve">
     <value>Loading...</value>

@@ -59,11 +59,11 @@ namespace EpiDashboard.Controls
             #region Translation
 
             //Point of Interest Left Panel
-            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_POINTOFINTEREST;
+            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_SPOTMAP;
             tbtnDataSource.Title = DashboardSharedStrings.GADGET_DATA_SOURCE;
             tbtnDataSource.Description = DashboardSharedStrings.GADGET_TABDESC_DATASOURCE;
             tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
-            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_POF_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_COORD_VARIABLES;
             tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
             tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
             tbtnCharts.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;

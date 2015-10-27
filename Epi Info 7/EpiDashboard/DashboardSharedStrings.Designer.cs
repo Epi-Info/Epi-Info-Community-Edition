@@ -61,6 +61,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Base Layer.
+        /// </summary>
+        public static string BASE_LAYER {
+            get {
+                return ResourceManager.GetString("BASE_LAYER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Browse.
         /// </summary>
         public static string BUTTON_BROWSE {
@@ -1842,15 +1851,6 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Points of Interest.
-        /// </summary>
-        public static string GADGET_CONFIG_TITLE_POINTOFINTEREST {
-            get {
-                return ResourceManager.GetString("GADGET_CONFIG_TITLE_POINTOFINTEREST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Satellite.
         /// </summary>
         public static string GADGET_CONFIG_TITLE_SATELLITE {
@@ -1865,6 +1865,15 @@ namespace EpiDashboard {
         public static string GADGET_CONFIG_TITLE_SCATTER_CHART {
             get {
                 return ResourceManager.GetString("GADGET_CONFIG_TITLE_SCATTER_CHART", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spot Map.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_SPOTMAP {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_SPOTMAP", resourceCulture);
             }
         }
         
@@ -3696,6 +3705,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose variables for point coordinates..
+        /// </summary>
+        public static string GADGET_TABDESC_COORD_VARIABLES {
+            get {
+                return ResourceManager.GetString("GADGET_TABDESC_COORD_VARIABLES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose data source..
         /// </summary>
         public static string GADGET_TABDESC_DATASOURCE {
@@ -3854,15 +3872,6 @@ namespace EpiDashboard {
         public static string GADGET_TABDESC_PIE_CHART {
             get {
                 return ResourceManager.GetString("GADGET_TABDESC_PIE_CHART", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Choose variables for point coordinates..
-        /// </summary>
-        public static string GADGET_TABDESC_POF_VARIABLES {
-            get {
-                return ResourceManager.GetString("GADGET_TABDESC_POF_VARIABLES", resourceCulture);
             }
         }
         
@@ -4335,6 +4344,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Base Layer.
+        /// </summary>
+        public static string MENU_ADD_BASELAYER {
+            get {
+                return ResourceManager.GetString("MENU_ADD_BASELAYER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adds a base layer to the map..
+        /// </summary>
+        public static string MENU_ADD_BASELAYER_MAP {
+            get {
+                return ResourceManager.GetString("MENU_ADD_BASELAYER_MAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Data Layer.
         /// </summary>
         public static string MENU_ADD_LAYER {
@@ -4349,24 +4376,6 @@ namespace EpiDashboard {
         public static string MENU_ADD_LAYER_MAP {
             get {
                 return ResourceManager.GetString("MENU_ADD_LAYER_MAP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add Reference Layer.
-        /// </summary>
-        public static string MENU_ADD_REFERENCE {
-            get {
-                return ResourceManager.GetString("MENU_ADD_REFERENCE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Adds a reference layer to the map..
-        /// </summary>
-        public static string MENU_ADD_REFERENCE_MAP {
-            get {
-                return ResourceManager.GetString("MENU_ADD_REFERENCE_MAP", resourceCulture);
             }
         }
         
@@ -4682,15 +4691,6 @@ namespace EpiDashboard {
         public static string RECORD_COUNT {
             get {
                 return ResourceManager.GetString("RECORD_COUNT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reference Layer.
-        /// </summary>
-        public static string REFERENCE_LAYER {
-            get {
-                return ResourceManager.GetString("REFERENCE_LAYER", resourceCulture);
             }
         }
         

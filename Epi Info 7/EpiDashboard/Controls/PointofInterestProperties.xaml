@@ -28,7 +28,7 @@
         <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  Background="{StaticResource PrimaryAccentColorLight}" >
             <Border BorderBrush="#015796" BorderThickness="0 0 0 1">
                 <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
-                    <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Points of Interest</Label>
+                    <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Spot Map</Label>
                 </Viewbox>
             </Border>
         </StackPanel>
