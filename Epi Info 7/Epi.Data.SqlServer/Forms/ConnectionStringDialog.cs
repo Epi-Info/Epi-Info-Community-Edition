@@ -173,7 +173,7 @@ namespace Epi.Data.SqlServer.Forms
         {
             OnCancelClick();
         }
-
+      
         /// <summary>
         /// Handles the Change event of the Server Name's selection
         /// </summary>
@@ -184,12 +184,28 @@ namespace Epi.Data.SqlServer.Forms
             // if last item in list (Browse for Servers)
             if ((string)cmbServerName.SelectedItem == SharedStrings.BROWSE_FOR_MORE)
             {
-                string serverName = BrowseForServers.BrowseNetworkServers();
+                string serverName = BrowseForServers.BrowseNetworkServers().ToString();
                 if (!string.IsNullOrEmpty(serverName))
-                {
+                {                   
                     this.cmbServerName.Items.Insert(0, serverName);
                     this.cmbServerName.SelectedIndex = 0;
-                    string database = this.cmbDatabaseName.Text;
+
+                    List<String> databases = new List<String>();               
+                    using (var con = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=master;Trusted_Connection=yes"))
+                    {                        
+                            con.Open();                       
+                        DataTable Databases = con.GetSchema("Databases");
+                        con.Close();
+                        foreach (DataRow databas in Databases.Rows)
+                        {
+                           databases.Add(databas.Field<String>("database_name"));
+                        }
+                    }
+                    if (databases.Count>0)
+                    cmbDatabaseName.DataSource = databases;
+
+
+                  /*  string database = this.cmbDatabaseName.Text;
                     Epi.Data.SqlServer.SqlDatabase db = new SqlDatabase();
 
                     dbConnectionStringBuilder = new System.Data.SqlClient.SqlConnectionStringBuilder();
@@ -224,7 +240,7 @@ namespace Epi.Data.SqlServer.Forms
                     catch (Exception ex)
                     {
                         MessageBox.Show("Connection failed: " + ex.Message); // TODO: hard coded string
-                    }
+                    }*/
 
                     return;
                 }
@@ -358,6 +374,11 @@ namespace Epi.Data.SqlServer.Forms
 
         }
         #endregion  //Protected Methods
+
+        private void cmbDatabaseName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
 
     }
 }

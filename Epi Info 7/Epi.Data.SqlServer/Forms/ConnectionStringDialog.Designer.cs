@@ -145,6 +145,7 @@ namespace Epi.Data.SqlServer.Forms
             this.cmbDatabaseName.FormattingEnabled = true;
             resources.ApplyResources(this.cmbDatabaseName, "cmbDatabaseName");
             this.cmbDatabaseName.Name = "cmbDatabaseName";
+            this.cmbDatabaseName.SelectedIndexChanged += new System.EventHandler(this.cmbDatabaseName_SelectedIndexChanged);
             // 
             // ConnectionStringDialog
             // 
