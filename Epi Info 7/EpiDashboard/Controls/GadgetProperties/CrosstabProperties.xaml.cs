@@ -844,7 +844,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         private void cbxExposureField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (panelVariables == null) return;
-            if (cbxExposureField.SelectedIndex > -1)
+           /* if (cbxExposureField.SelectedIndex > -1)
             {
                 if (!String.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString()))
                 {
@@ -856,23 +856,23 @@ namespace EpiDashboard.Controls.GadgetProperties
                     {
                         Parameters.ColumnNames.Add(cbxExposureField.SelectedItem.ToString());
                     }
-                    Update2x2ValueMappings();
+                   Update2x2ValueMappings();
                 }
-            }
+            }*/
             CheckVariables();
         }
 
         private void cbxOutcomeField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (panelVariables == null) return;
-            if (cbxOutcomeField.SelectedIndex > -1)
+          /*  if (cbxOutcomeField.SelectedIndex > -1)
             {
                 if (!String.IsNullOrEmpty(cbxOutcomeField.SelectedItem.ToString()))
                 {
                     Parameters.CrosstabVariableName = cbxOutcomeField.SelectedItem.ToString();
                     Update2x2ValueMappings();
                 }
-            }
+            }*/
         }
 
         private void btnAddYes_Click(object sender, RoutedEventArgs e)
