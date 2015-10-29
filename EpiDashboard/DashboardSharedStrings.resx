@@ -1691,7 +1691,7 @@ of records or select fewer fields for the group.</value>
     <value>Class Breaks:</value>
   </data>
   <data name="GADGET_MAP_COLOR_MISSING" xml:space="preserve">
-    <value>Missing or Excluded Color:</value>
+    <value>Missing or Excluded Color</value>
   </data>
   <data name="GADGET_MAP_DATA" xml:space="preserve">
     <value>Data Key:</value>
@@ -1893,5 +1893,23 @@ of records or select fewer fields for the group.</value>
   </data>
   <data name="CANVAS_TITLE" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="ERROR" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="GADGET_MAP_MARKER" xml:space="preserve">
+    <value>Marker</value>
+  </data>
+  <data name="GADGET_MAP_SIZE" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="MAP_ERROR_MANY_STOPS" xml:space="preserve">
+    <value>There are too many Time Stops associated with the selected field.</value>
+  </data>
+  <data name="MAP_TIMELAPSE" xml:space="preserve">
+    <value>Time Lapse</value>
+  </data>
+  <data name="MAP_TIME_FIELD" xml:space="preserve">
+    <value>Time Field</value>
   </data>
 </root>
