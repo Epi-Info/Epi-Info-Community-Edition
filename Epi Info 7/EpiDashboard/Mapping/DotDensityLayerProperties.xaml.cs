@@ -53,7 +53,6 @@ namespace EpiDashboard.Mapping
 
             #region translation;
             lblTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_DOTDENSITY; 
-            //btnShapeFile.Content = DashboardSharedStrings.BUTTON_BROWSE_SHAPEFILE;
             lblClasses.Content = DashboardSharedStrings.GADGET_MAP_DOT_VALUE;
             lblShapeKey.Content = DashboardSharedStrings.GADGET_MAP_FEATURE;
             lblDataKey.Content = DashboardSharedStrings.GADGET_MAP_DATA;

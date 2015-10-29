@@ -31,7 +31,7 @@ namespace EpiDashboard.Mapping
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
         public event EventHandler EditRequested;
-       
+
         private bool isReadOnlyMode;
 
         public KmlLayerProperties(ESRI.ArcGIS.Client.Map myMap)
@@ -40,7 +40,12 @@ namespace EpiDashboard.Mapping
 
             this.myMap = myMap;
 
-          //  provider = new KmlLayerProvider(myMap);
+            //  provider = new KmlLayerProvider(myMap);
+            #region Translation
+            lblTitle.Content = DashboardSharedStrings.GADGET_KMLFILE;
+            rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT;
+            #endregion //translation
+
         }
 
         public void MoveUp()
@@ -163,13 +168,13 @@ namespace EpiDashboard.Mapping
 
         public Color FontColor
         {
-            set 
-            { 
+            set
+            {
                 //do nothing
             }
         }
 
-        #endregion        
+        #endregion
 
     }
 }

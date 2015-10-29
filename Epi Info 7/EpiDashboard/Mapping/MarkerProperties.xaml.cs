@@ -49,6 +49,9 @@ namespace EpiDashboard.Mapping
             FillComboBoxes();
 
             #region translation
+            lblTitle.Content = DashboardSharedStrings.GADGET_MAP_MARKER;
+            lblStyle.Content = DashboardSharedStrings.GADGET_LABEL_STYLE;
+            lblSize.Content = DashboardSharedStrings.GADGET_MAP_SIZE;
             rctColorToolTip.Content = DashboardSharedStrings.MAP_POINT_COLOR; 
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             #endregion //translation

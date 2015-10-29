@@ -30,9 +30,9 @@
                         <Label x:Name="lblFont">Font Style:</Label>
                         <TextBox x:Name="txtFont" IsReadOnly="True"/>
                     </StackPanel>
-                    <Button x:Name="btnFont" Content="Change Font" Height="23" Width="Auto" Padding="5,0,5,0" Grid.Column="4" Margin="0,14,0,0"/>
+                    <Button x:Name="btnFont" Content="Font" Height="23" Width="Auto" Padding="5,0,5,0" Grid.Column="4" Margin="0,14,0,0"/>
 
-                    <Rectangle x:Name="rctColor" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="#99FF1100" >
+                    <Rectangle x:Name="rctColor" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="Black" >
                         <Rectangle.ToolTip>
                             <Label Content="Point color"/>
                         </Rectangle.ToolTip>

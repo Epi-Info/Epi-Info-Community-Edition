@@ -39,7 +39,13 @@ namespace EpiDashboard.Mapping
 
             this.myMap = myMap;
 
-           // provider = new ShapeLayerProvider(myMap);
+            // provider = new ShapeLayerProvider(myMap);
+
+            #region Translation
+            lblTitle.Content = DashboardSharedStrings.GADGET_SHAPEFILE;
+            rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT;
+
+            #endregion //translation
         }
 
         public void MoveUp()

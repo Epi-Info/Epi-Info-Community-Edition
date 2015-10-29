@@ -55,7 +55,7 @@
                     <StackPanel Grid.Column="5" Orientation="Horizontal">
                         <Rectangle x:Name="rctMissingColor" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" Margin="15,0,0,0" Visibility="Visible" MouseUp="rctEdit_MouseUp" >
                             <Rectangle.ToolTip>
-                                <Label x:Name="lblMissingValueColor" Content="Missing value color"/>
+                                <Label x:Name="lblMissingValueColor" Content="Missing  or Excluded color"/>
                             </Rectangle.ToolTip>
                         </Rectangle>
                         <Rectangle x:Name="rctLowColor" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25"  Stroke="DarkGray" Cursor="Hand" Fill="White" Margin="3,0,3,0" Visibility="Visible" MouseUp="rctEdit_MouseUp" >
@@ -69,7 +69,6 @@
                             </Rectangle.ToolTip>
                         </Rectangle>
                     </StackPanel>
-
                     <Rectangle x:Name="rctEdit" Grid.Column="6"  VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Width="25" Stroke="SlateBlue" Cursor="Hand" Fill="SlateBlue" Visibility="Visible" >
                         <Rectangle.ToolTip>
                             <Label x:Name="rctEditToolTip"  Content="Edit data layer"/>

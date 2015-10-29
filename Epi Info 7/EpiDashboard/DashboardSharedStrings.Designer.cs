@@ -1044,6 +1044,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string ERROR {
+            get {
+                return ResourceManager.GetString("ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid input detected..
         /// </summary>
         public static string ERROR_CANNOT_CONDITIONAL_ASSIGN_INVALID_INPUT {
@@ -2814,7 +2823,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing or Excluded Color:.
+        ///   Looks up a localized string similar to Missing or Excluded Color.
         /// </summary>
         public static string GADGET_MAP_COLOR_MISSING {
             get {
@@ -2886,6 +2895,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Marker.
+        /// </summary>
+        public static string GADGET_MAP_MARKER {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_MARKER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set opacity:.
         /// </summary>
         public static string GADGET_MAP_OPACITY {
@@ -2936,6 +2954,15 @@ namespace EpiDashboard {
         public static string GADGET_MAP_SELECT_DATASOURCE {
             get {
                 return ResourceManager.GetString("GADGET_MAP_SELECT_DATASOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Size.
+        /// </summary>
+        public static string GADGET_MAP_SIZE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_SIZE", resourceCulture);
             }
         }
         
@@ -4551,6 +4578,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are too many Time Stops associated with the selected field..
+        /// </summary>
+        public static string MAP_ERROR_MANY_STOPS {
+            get {
+                return ResourceManager.GetString("MAP_ERROR_MANY_STOPS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Map image has been saved..
         /// </summary>
         public static string MAP_IMAGE_SAVED {
@@ -4592,6 +4628,24 @@ namespace EpiDashboard {
         public static string MAP_SAVED {
             get {
                 return ResourceManager.GetString("MAP_SAVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Field.
+        /// </summary>
+        public static string MAP_TIME_FIELD {
+            get {
+                return ResourceManager.GetString("MAP_TIME_FIELD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Lapse.
+        /// </summary>
+        public static string MAP_TIMELAPSE {
+            get {
+                return ResourceManager.GetString("MAP_TIMELAPSE", resourceCulture);
             }
         }
         
