@@ -47,6 +47,15 @@ namespace EpiDashboard.Mapping
             btnOK.Click += new RoutedEventHandler(btnOK_Click);
 
             FillComboBoxes();
+
+            #region translation
+            lblTitle.Content = DashboardSharedStrings.GADGET_MAP_ZONE;
+            lblRadius.Content = DashboardSharedStrings.GADGET_MAP_ZONE_RADIUS;
+            lblUnits.Content = DashboardSharedStrings.GADGET_MAP_ZONE_UNITS;
+            rctColorToolTip.Content = DashboardSharedStrings.GADGET_MAP_ZONE_COLOR;
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            #endregion //translation
+
         }
 
         void btnOK_Click(object sender, RoutedEventArgs e)
@@ -64,6 +73,10 @@ namespace EpiDashboard.Mapping
             else
             {
                 btnOK.IsEnabled = false;
+            }
+            if (isReadOnlyMode)
+            {
+                RenderMap();
             }
         }
 
@@ -152,8 +165,8 @@ namespace EpiDashboard.Mapping
         public void MakeReadOnly()
         {
             this.FontColor = Colors.Black;
-            cbxUnits.IsEnabled = false;
-            txtRadius.IsEnabled = false;
+            //cbxUnits.IsEnabled = false;
+            //txtRadius.IsEnabled = false;
             grdMain.Width = 700;
             btnOK.Visibility = System.Windows.Visibility.Collapsed;
             rctColor.Margin = new Thickness(0, 0, 30, 0);
