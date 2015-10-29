@@ -2868,6 +2868,33 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Label.
+        /// </summary>
+        public static string GADGET_MAP_LABEL {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text color.
+        /// </summary>
+        public static string GADGET_MAP_LABEL_COLOR {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_LABEL_COLOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Font.
+        /// </summary>
+        public static string GADGET_MAP_LABEL_FONT {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_LABEL_FONT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Map Layers.
         /// </summary>
         public static string GADGET_MAP_LAYERS {
@@ -2981,6 +3008,42 @@ namespace EpiDashboard {
         public static string GADGET_MAP_VALUE {
             get {
                 return ResourceManager.GetString("GADGET_MAP_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zone.
+        /// </summary>
+        public static string GADGET_MAP_ZONE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_ZONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zone color.
+        /// </summary>
+        public static string GADGET_MAP_ZONE_COLOR {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_ZONE_COLOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Radius.
+        /// </summary>
+        public static string GADGET_MAP_ZONE_RADIUS {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_ZONE_RADIUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Units.
+        /// </summary>
+        public static string GADGET_MAP_ZONE_UNITS {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_ZONE_UNITS", resourceCulture);
             }
         }
         

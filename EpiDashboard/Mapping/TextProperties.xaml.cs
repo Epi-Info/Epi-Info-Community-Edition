@@ -32,7 +32,7 @@ namespace EpiDashboard.Mapping
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
         public event EventHandler EditRequested;
-       
+
 
         public TextProperties(ESRI.ArcGIS.Client.Map myMap, ESRI.ArcGIS.Client.Geometry.MapPoint point)
         {
@@ -41,13 +41,23 @@ namespace EpiDashboard.Mapping
 
             this.myMap = myMap;
             this.point = point;
-            
+
             provider = new TextProvider(myMap, point);
             txtFont.TextChanged += new TextChangedEventHandler(config_TextChanged);
             txtText.TextChanged += new TextChangedEventHandler(config_TextChanged);
             rctColor.MouseUp += new MouseButtonEventHandler(rctColor_MouseUp);
             btnFont.Click += new RoutedEventHandler(btnFont_Click);
             btnOK.Click += new RoutedEventHandler(btnOK_Click);
+
+            txtFont.Text = "Segoe UI";
+
+            #region Translation
+            lblTitle.Content = DashboardSharedStrings.GADGET_MAP_LABEL;
+            lblText.Content = DashboardSharedStrings.GADGET_MAP_LABEL;
+            lblFont.Content = DashboardSharedStrings.GADGET_MAP_LABEL_COLOR;
+            btnFont.Content = DashboardSharedStrings.GADGET_MAP_LABEL_FONT;
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            #endregion //Translation
         }
 
         void btnOK_Click(object sender, RoutedEventArgs e)
@@ -134,10 +144,10 @@ namespace EpiDashboard.Mapping
         {
             provider.CloseLayer();
         }
-        
+
         public Color FontColor
         {
-            set 
+            set
             {
                 SolidColorBrush brush = new SolidColorBrush(value);
                 lblFont.Foreground = brush;

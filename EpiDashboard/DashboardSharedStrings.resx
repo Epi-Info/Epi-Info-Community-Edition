@@ -1912,4 +1912,25 @@ of records or select fewer fields for the group.</value>
   <data name="MAP_TIME_FIELD" xml:space="preserve">
     <value>Time Field</value>
   </data>
+  <data name="GADGET_MAP_LABEL" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="GADGET_MAP_LABEL_COLOR" xml:space="preserve">
+    <value>Text color</value>
+  </data>
+  <data name="GADGET_MAP_LABEL_FONT" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="GADGET_MAP_ZONE" xml:space="preserve">
+    <value>Zone</value>
+  </data>
+  <data name="GADGET_MAP_ZONE_COLOR" xml:space="preserve">
+    <value>Zone color</value>
+  </data>
+  <data name="GADGET_MAP_ZONE_RADIUS" xml:space="preserve">
+    <value>Radius</value>
+  </data>
+  <data name="GADGET_MAP_ZONE_UNITS" xml:space="preserve">
+    <value>Units</value>
+  </data>
 </root>

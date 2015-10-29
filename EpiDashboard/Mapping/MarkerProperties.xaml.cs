@@ -115,6 +115,10 @@ namespace EpiDashboard.Mapping
             {
                 btnOK.IsEnabled = false;
             }
+            if (isReadOnlyMode)
+            {
+                RenderMap();
+            }
         }
 
 
@@ -151,8 +155,8 @@ namespace EpiDashboard.Mapping
         public void MakeReadOnly()
         {
             this.FontColor = Colors.Black;
-            cbxStyle.IsEnabled = false;
-            cbxSize.IsEnabled = false;
+            //cbxStyle.IsEnabled = false;
+            //cbxSize.IsEnabled = false;
             grdMain.Width = 700;
             btnOK.Visibility = System.Windows.Visibility.Collapsed;
             rctColor.Margin = new Thickness(0, 0, 30, 0);

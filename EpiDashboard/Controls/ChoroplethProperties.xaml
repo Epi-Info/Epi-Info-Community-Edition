@@ -83,7 +83,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="12" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition MaxWidth="100" />
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="txtProjectPath" IsReadOnly="True"></TextBox>
                             <Button  x:Name="btnBrowse" Height="Auto" Grid.Column="2" Click="btnBrowse_Click">Browse</Button>

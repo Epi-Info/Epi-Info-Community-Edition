@@ -13,7 +13,7 @@
             <StackPanel Orientation="Horizontal" >
                 <Grid Width="780">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="110"/>
                         <ColumnDefinition Width="110"/>
                         <ColumnDefinition Width="110"/>
                         <ColumnDefinition Width="110"/>
@@ -75,7 +75,7 @@
                         </Rectangle.ToolTip>
                     </Rectangle>
                     <Path Fill="White"                   
-                  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,17,128,17"
+                  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,17,98,17"
                   Height="18" Width="18" Grid.Column="6" 
                   StrokeThickness="1" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                   IsHitTestVisible="False"
