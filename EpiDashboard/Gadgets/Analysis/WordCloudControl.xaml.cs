@@ -165,7 +165,13 @@ namespace EpiDashboard
         protected override void CopyToClipboard()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (Grid grid in this.StrataGridList)
+            if (wordCloudDictionary!=null)
+            foreach(var key in wordCloudDictionary)
+            {
+                sb.Append(key.Key.ToString());
+                sb.Append("  ");
+            }
+           /* foreach (Grid grid in this.StrataGridList)
             {
                 string gridName = grid.Tag.ToString();
                 if (StrataGridList.Count > 1)
@@ -188,9 +194,10 @@ namespace EpiDashboard
                 }
 
                 sb.AppendLine();
-            }
+            }*/
             Clipboard.Clear();
-            Clipboard.SetText(sb.ToString());
+           Clipboard.SetText(sb.ToString());
+            //Clipboard.SetImage(ToBitmapSource(true));
         }
 
         /// <summary>
@@ -1302,7 +1309,7 @@ namespace EpiDashboard
 
             if (CustomOutputHeading == null || (string.IsNullOrEmpty(CustomOutputHeading) && !CustomOutputHeading.Equals("(none)")))
             {
-                htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Frequency</h2>");
+                htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">WordCloud</h2>");
             }
             else if (CustomOutputHeading != "(none)")
             {
@@ -1310,7 +1317,7 @@ namespace EpiDashboard
             }
 
             htmlBuilder.AppendLine("<p class=\"gadgetOptions\"><small>");
-            htmlBuilder.AppendLine("<em>Frequency variable:</em> <strong>" + Parameters.ColumnNames[0] + "</strong>");
+            htmlBuilder.AppendLine("<em>WordCloud variable:</em> <strong>" + Parameters.ColumnNames[0] + "</strong>");
             htmlBuilder.AppendLine("<br />");
 
             //if (cbxFieldStrata.SelectedIndex >= 0)
@@ -1474,7 +1481,7 @@ namespace EpiDashboard
         /// <returns>string</returns>
         public override string ToString()
         {
-            return "Frequency Gadget";
+            return "WordCloud Gadget";
         }
         #endregion
 
@@ -1591,7 +1598,7 @@ namespace EpiDashboard
             this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
             //System.Threading.Thread.Sleep(10000);
         }
-
+        Dictionary<string, double> wordCloudDictionary = null;
         /// <summary>
         /// Handles the DoWorker event for the worker
         /// </summary>
@@ -1692,7 +1699,7 @@ namespace EpiDashboard
                     wordCloudDictionary1.Add('x', new Dictionary<string, double>());
                     wordCloudDictionary1.Add('y', new Dictionary<string, double>());
                     wordCloudDictionary1.Add('z', new Dictionary<string, double>());
-                    Dictionary<string, double> wordCloudDictionary = new Dictionary<string, double>();
+                   wordCloudDictionary = new Dictionary<string, double>();
 
                     if (WordCloudParameters.ColumnNames.Count > 0 && !String.IsNullOrEmpty(WordCloudParameters.ColumnNames[0]))
                     {
