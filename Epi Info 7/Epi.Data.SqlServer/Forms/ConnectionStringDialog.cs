@@ -189,9 +189,9 @@ namespace Epi.Data.SqlServer.Forms
                 if (!string.IsNullOrEmpty(serverName))
                 {                   
                     this.cmbServerName.Items.Insert(0, serverName);
-                    this.cmbServerName.SelectedIndex = 0;
-                    PreferredDatabaseName = string.Empty; 
-                    cmbDatabaseName.Items.Clear();                    
+                    this.cmbServerName.SelectedIndex = 0;                   
+                    cmbDatabaseName.DataSource = null;
+                    PreferredDatabaseName = string.Empty;
                     List<String> databases = new List<String>();               
                     using (var con = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=master;Trusted_Connection=yes"))
                     {
@@ -261,9 +261,9 @@ namespace Epi.Data.SqlServer.Forms
                 string serverName = cmbServerName.Text;
                 if (!string.IsNullOrEmpty(serverName))
                 {
-                    List<String> databases = new List<String>();
-                    PreferredDatabaseName = string.Empty; 
-                    cmbDatabaseName.Items.Clear();                    
+                    List<String> databases = new List<String>();                   
+                    cmbDatabaseName.DataSource = null;
+                    PreferredDatabaseName = string.Empty;
                     using (var con = new SqlConnection("Data Source=" + serverName + ";Integrated Security=True"))
                     {
                         try
