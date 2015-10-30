@@ -107,7 +107,7 @@ namespace Epi.Enter.Forms
             this.IsBatchImport = false;
 
             //this.cmbImportType.SelectedIndex = 2;  //Append records only
-            rdbAppend.Checked = true;
+            rdbUpdateAndAppend.Checked = true;
 
             //this.cmbImportType.Enabled = false;
         }
