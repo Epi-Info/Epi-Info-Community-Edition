@@ -183,22 +183,31 @@ namespace Epi.Data.SqlServer.Forms
         {
             // if last item in list (Browse for Servers)
             if ((string)cmbServerName.SelectedItem == SharedStrings.BROWSE_FOR_MORE)
+            
             {
                 string serverName = BrowseForServers.BrowseNetworkServers().ToString();
                 if (!string.IsNullOrEmpty(serverName))
                 {                   
                     this.cmbServerName.Items.Insert(0, serverName);
                     this.cmbServerName.SelectedIndex = 0;
-
+                    PreferredDatabaseName = string.Empty; 
+                    cmbDatabaseName.Items.Clear();                    
                     List<String> databases = new List<String>();               
                     using (var con = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=master;Trusted_Connection=yes"))
-                    {                        
-                            con.Open();                       
-                        DataTable Databases = con.GetSchema("Databases");
-                        con.Close();
-                        foreach (DataRow databas in Databases.Rows)
+                    {
+                        try
                         {
-                           databases.Add(databas.Field<String>("database_name"));
+                            con.Open();
+                            DataTable Databases = con.GetSchema("Databases");
+                            con.Close();
+                            foreach (DataRow databas in Databases.Rows)
+                            {
+                                databases.Add(databas.Field<String>("database_name"));
+                            }
+                        }
+                        catch(Exception)
+                        {
+
                         }
                     }
                     if (databases.Count>0)
@@ -246,6 +255,36 @@ namespace Epi.Data.SqlServer.Forms
                 }
 
                 this.cmbServerName.SelectedText = string.Empty;
+            }
+            else
+            {
+                string serverName = cmbServerName.Text;
+                if (!string.IsNullOrEmpty(serverName))
+                {
+                    List<String> databases = new List<String>();
+                    PreferredDatabaseName = string.Empty; 
+                    cmbDatabaseName.Items.Clear();                    
+                    using (var con = new SqlConnection("Data Source=" + serverName + ";Integrated Security=True"))
+                    {
+                        try
+                        {
+                            con.Open();
+                            DataTable Databases = con.GetSchema("Databases");
+                            con.Close();
+                            foreach (DataRow databas in Databases.Rows)
+                            {
+                                databases.Add(databas.Field<String>("database_name"));
+                            }
+                        }
+                        catch(Exception )
+                        {
+
+                        }
+                    }
+                    if (databases.Count > 0)
+                        cmbDatabaseName.DataSource = databases;
+                }
+
             }
         }
 
