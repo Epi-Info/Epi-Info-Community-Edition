@@ -2895,6 +2895,33 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send layer back.
+        /// </summary>
+        public static string GADGET_MAP_LAYER_BACK {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_LAYER_BACK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close map layer.
+        /// </summary>
+        public static string GADGET_MAP_LAYER_CLOSE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_LAYER_CLOSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bring layer forward.
+        /// </summary>
+        public static string GADGET_MAP_LAYER_FORWARD {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_LAYER_FORWARD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Map Layers.
         /// </summary>
         public static string GADGET_MAP_LAYERS {

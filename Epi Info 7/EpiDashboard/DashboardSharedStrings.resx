@@ -1933,4 +1933,13 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_MAP_ZONE_UNITS" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="GADGET_MAP_LAYER_BACK" xml:space="preserve">
+    <value>Send layer back</value>
+  </data>
+  <data name="GADGET_MAP_LAYER_CLOSE" xml:space="preserve">
+    <value>Close map layer</value>
+  </data>
+  <data name="GADGET_MAP_LAYER_FORWARD" xml:space="preserve">
+    <value>Bring layer forward</value>
+  </data>
 </root>
