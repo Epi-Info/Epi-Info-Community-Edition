@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+             xmlns:EpiDashboard="clr-namespace:EpiDashboard"
              mc:Ignorable="d" 
              d:DesignHeight="860" d:DesignWidth="800" FontFamily="Global User Interface" FontSize="16" Background="White">
     <UserControl.Resources>
@@ -13,6 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MaxWidth="400" MinWidth="300" Width=".33*" />
@@ -78,6 +80,7 @@
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel Margin="0 0 0 5">
                     <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
+                     
                         <Label x:Name="tblockDataSource">Data Source:</Label>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -100,6 +103,8 @@
                     </StackPanel>
                     <Label></Label>
                     <StackPanel x:Name="panelBoundaries" IsEnabled="False">
+                        <EpiDashboard:WaitCursor x:Name="waitCursor" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" StackPanel.ZIndex="99"/>
+                        <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource gadgetWaitPanelStyle}" />
                         <Label x:Name="lblBoundaries"  Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
                         <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="Shapefile" Checked="radShapeFile_Checked"  />
                         <Label></Label>
@@ -470,5 +475,7 @@
             <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
             <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
         </DockPanel>
+        
     </Grid>
+    
 </UserControl>

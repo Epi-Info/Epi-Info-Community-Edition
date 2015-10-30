@@ -519,7 +519,14 @@ namespace EpiDashboard.Controls
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
+            //waitPanel.Visibility = Visibility.Visible;
+           // waitPanel.statusText.Text = "Loading Data Set";
+
+            waitCursor.Visibility = Visibility.Visible;
             _dashboardHelper = _mapControl.GetNewDashboardHelper();
+            waitCursor.Visibility = Visibility.Collapsed;
+           // waitPanel.Visibility = Visibility.Collapsed;
+            
             if (_dashboardHelper != null)
             {
                 this.DashboardHelper = _dashboardHelper;

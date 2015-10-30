@@ -479,7 +479,9 @@ namespace EpiDashboard.Controls
         }
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
+            waitCursor.Visibility = Visibility.Visible;
             dashboardHelper = mapControl.GetNewDashboardHelper();
+            waitCursor.Visibility = Visibility.Collapsed;
             if (dashboardHelper != null)
             {
                 this.DashboardHelper = dashboardHelper;
