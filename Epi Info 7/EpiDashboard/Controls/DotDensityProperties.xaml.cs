@@ -141,8 +141,7 @@ namespace EpiDashboard.Controls
             lblSelectFeature.Content = DashboardSharedStrings.GADGET_SELECT_FEATURE;
             radKML.Content = DashboardSharedStrings.GADGET_KMLFILE;
             lblURLOfKMLFile.Content = DashboardSharedStrings.GADGET_KMLFILE_LOCATION;
-
-
+            btnKMLFile.Content = DashboardSharedStrings.BUTTON_BROWSE;
 
             tblockConnectionString.Content = DashboardSharedStrings.GADGET_CONNECTION_STRING;
             tblockSQLQuery.Content = DashboardSharedStrings.GADGET_SQL_QUERY;
