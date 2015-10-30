@@ -588,6 +588,7 @@ namespace EpiDashboard
 
             mnuCopy.Click += new RoutedEventHandler(mnuCopy_Click);
             mnuSendDataToHTML.Click += new RoutedEventHandler(mnuSendDataToHTML_Click);
+            mnuRemoveSorts.Click += mnuRemoveSorts_Click;
 
 #if LINUX_BUILD
             mnuSendDataToExcel.Visibility = Visibility.Collapsed;
@@ -667,6 +668,15 @@ namespace EpiDashboard
 
             //btnRun.Content = LineListSharedStrings.GENERATE_LINE_LIST;
             #endregion // Translation
+        }
+
+        void mnuRemoveSorts_Click(object sender, RoutedEventArgs e)
+        {
+            if(properties!=null)
+            {
+                Parameters.SortVariables.Clear();
+                RefreshResults();                         
+            }
         }
 
         void mnuCenter_Click(object sender, RoutedEventArgs e)
