@@ -57,7 +57,7 @@ namespace EpiDashboard.Mapping
             pthUp.StrokeThickness = 0;
             pthUp.Tag = container;
             pthUp.Cursor = Cursors.Hand;
-            pthUp.ToolTip = new Label() { Content = "Bring layer forward" };
+            pthUp.ToolTip = new Label() { Content = DashboardSharedStrings.GADGET_MAP_LAYER_FORWARD };
             pthUp.MouseDown += new MouseButtonEventHandler(pthUp_MouseDown);
 
             Path pthDown = (Path)System.Windows.Markup.XamlReader.Parse("<Path xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'  Data=\"M85,25 L85,25 L87.5,30 L90,25 z\" RenderTransformOrigin=\"3.083,-1.417\"/>");
@@ -70,7 +70,7 @@ namespace EpiDashboard.Mapping
             pthDown.StrokeThickness = 0;
             pthDown.Tag = container;
             pthDown.Cursor = Cursors.Hand;
-            pthDown.ToolTip = new Label() { Content = "Send layer back" };
+            pthDown.ToolTip = new Label() { Content = DashboardSharedStrings.GADGET_MAP_LAYER_BACK };
             pthDown.MouseDown += new MouseButtonEventHandler(pthDown_MouseDown);
 
             Path pthClose = (Path)System.Windows.Markup.XamlReader.Parse("<Path xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'  Data=\"M85,25 L85,25 L90,30 M90,25 L90,25 L85,30\" RenderTransformOrigin=\"3.083,-1.417\"/>");
@@ -83,7 +83,7 @@ namespace EpiDashboard.Mapping
             pthClose.StrokeThickness = 2;
             pthClose.Tag = container;
             pthClose.Cursor = Cursors.Hand;
-            pthClose.ToolTip = new Label() { Content = "Close layer" };
+            pthClose.ToolTip = new Label() { Content = DashboardSharedStrings.GADGET_MAP_LAYER_CLOSE };
             pthClose.Margin = new Thickness(3, 0, 0, 0);
             pthClose.MouseDown += new MouseButtonEventHandler(pthClose_MouseDown);
 
