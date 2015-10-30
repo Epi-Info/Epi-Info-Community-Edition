@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+              xmlns:EpiDashboard="clr-namespace:EpiDashboard"
              mc:Ignorable="d" 
              d:DesignHeight="460" d:DesignWidth="800" FontFamily="Global User Interface" FontSize="16" Background="White">
     <UserControl.Resources>
@@ -53,6 +54,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBox Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"></TextBox>
                             <Button x:Name="btnBrowse" Margin="20 0 0 0 " Height="Auto" Click="btnBrowse_Click">Browse</Button>
+                            <EpiDashboard:WaitCursor x:Name="waitCursor" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" StackPanel.ZIndex="99"/>
                         </StackPanel>
                     </StackPanel>
 

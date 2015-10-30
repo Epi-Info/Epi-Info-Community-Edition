@@ -283,9 +283,11 @@ namespace EpiDashboard.Controls
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
+            waitCursor.Visibility = Visibility.Visible;
           dashboardHelper = mapControl.GetNewDashboardHelper();
          // this.DashboardHelper = dashboardHelper;
-          layerprop.SetdashboardHelper(dashboardHelper); 
+          layerprop.SetdashboardHelper(dashboardHelper);
+          waitCursor.Visibility = Visibility.Collapsed;
           if (dashboardHelper != null)
             {
                 txtProjectPath.Text = dashboardHelper.Database.DbName;
