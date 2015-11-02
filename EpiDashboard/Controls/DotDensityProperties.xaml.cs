@@ -380,7 +380,7 @@ namespace EpiDashboard.Controls
 
         private void tbtnInfo_Checked(object sender, RoutedEventArgs e)
         {
-            btnOK.Visibility = Visibility.Hidden;
+          //  btnOK.Visibility = Visibility.Hidden;
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelHTML.Visibility = System.Windows.Visibility.Collapsed;
@@ -391,7 +391,7 @@ namespace EpiDashboard.Controls
 
         private void tbtnCharts_Checked(object sender, RoutedEventArgs e)
         {
-            btnOK.Visibility = Visibility.Hidden;
+          //  btnOK.Visibility = Visibility.Hidden;
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelHTML.Visibility = System.Windows.Visibility.Collapsed;
@@ -410,7 +410,7 @@ namespace EpiDashboard.Controls
                     ||    (!string.IsNullOrEmpty(txtMapSeverpath.Text) 
                     || (!string.IsNullOrEmpty(txtKMLpath.Text)  )))
                 {
-                btnOK.Visibility = Visibility.Hidden;
+                //btnOK.Visibility = Visibility.Hidden;
                 CheckButtonStates(sender as ToggleButton);
                 panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
                 panelHTML.Visibility = System.Windows.Visibility.Visible;
@@ -452,7 +452,7 @@ namespace EpiDashboard.Controls
 
         private void tbtnFilters_Checked(object sender, RoutedEventArgs e)
         {
-            btnOK.Visibility = Visibility.Hidden;
+           // btnOK.Visibility = Visibility.Hidden;
             CheckButtonStates(sender as SettingsToggleButton);
             panelHTML.Visibility = System.Windows.Visibility.Collapsed;
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
@@ -493,7 +493,7 @@ namespace EpiDashboard.Controls
             }
             else
             {
-                tbtnDataSource.IsChecked = true;
+                //tbtnDataSource.IsChecked = true;
                 MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_VARIABLES, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
             }
         }
