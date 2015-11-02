@@ -50,12 +50,14 @@ namespace EpiDashboard.Mapping
             this.mapControl = mapControl;
             mapControl.TimeVariableSet += new TimeVariableSetHandler(mapControl_TimeVariableSet);
             this.dashboardHelpers = dashboardHelpers;
-            FillComboBox(dashboardHelpers);            
+            ApplyTranslation(); 
+            FillComboBox(dashboardHelpers);           
         }
 
         public TimeLapse(Epi.View view)
         {
             InitializeComponent();
+            ApplyTranslation();
             FillComboBox(view);
         }
 
@@ -68,6 +70,13 @@ namespace EpiDashboard.Mapping
             provider.TimeVar = timeVariable;
         }
 
+        private void ApplyTranslation()
+        {
+            lblTitle.Content = DashboardSharedStrings.MAP_TIMELAPSE;
+            lblTimeVariable.Content = DashboardSharedStrings.MAP_TIME_FIELD;
+            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
+            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
+        }
         private void FillComboBox(List<DashboardHelper> dashboardHelpers)
         {
             cmbVariable.Items.Clear();
