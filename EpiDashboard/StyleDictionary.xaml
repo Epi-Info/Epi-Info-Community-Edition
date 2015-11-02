@@ -61,7 +61,14 @@
         <Setter Property="BorderBrush" Value="#8a8a8a" />
         <Setter Property="BorderThickness" Value="1 1 1 1" />
     </Style>
-
+    <Style x:Key="gadgetWaitPanelStyle" TargetType="{x:Type Controls:GadgetWaitPanel}">
+        <!-- HorizontalAlignment="Center" Margin="10" Width="300" Height="140" VerticalAlignment="Top" -->
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Width" Value="300" />
+        <Setter Property="Height" Value="220" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
     <Style TargetType="ListBox" x:Key="PropertiesListBox">
         <Setter Property="BorderBrush" Value="#8a8a8a" />
         <Setter Property="BorderThickness" Value="1 1 1 1" />
