@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="180" d:DesignWidth="241" FontFamily="Global User Interface" FontSize="16" Background="White">
+             d:DesignHeight="160" FontFamily="Global User Interface" FontSize="16" Background="White" Width="305">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,23 +12,22 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid Height="181" Width="219">
+    <Grid Height="161" Width="300">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="124*" />
-            <ColumnDefinition Width="164*" />
             <ColumnDefinition Width="65*" />
-            <ColumnDefinition Width="7" />
         </Grid.ColumnDefinitions>
-        <StackPanel x:Name="panelVariable" Margin="0,0,28,68" Grid.ColumnSpan="3">
-            <Label Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 0">Configure Time</Label>
+        <StackPanel x:Name="panelVariable" Grid.ColumnSpan="3">
+            <Label x:Name="lblTitle" Margin="15,5,0,0" Style="{StaticResource PropertiesSubHeading}">Time Lapse</Label>
             <Label></Label>
-        <Label Width="143" HorizontalAlignment="Left"> Time Variable:</Label>
-            <ComboBox x:Name="cmbVariable" HorizontalAlignment="Left" SelectionChanged="cmbVariable_SelectionChanged" Width="162"></ComboBox>          
+            <Label x:Name="lblTimeVariable" Margin="15,0,0,0" Width="243" HorizontalAlignment="Left">Time field</Label>
+            <ComboBox x:Name="cmbVariable" Margin="15,0,0,0"  HorizontalAlignment="Left" SelectionChanged="cmbVariable_SelectionChanged" Width="262"></ComboBox>
         </StackPanel>
-        <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
-        <DockPanel Margin="0,110,15,29" Grid.ColumnSpan="2">
+        <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" RenderTransformOrigin="2.708,0.542" />
+        <StackPanel Margin="0,110,15,9" Orientation="Horizontal" HorizontalAlignment="Right"  Grid.ColumnSpan="3">
             <Button x:Name="btnOK"  HorizontalAlignment="Right"  Height="30" Width="65">OK</Button>
-            <Button x:Name="btnCancel"  HorizontalAlignment="Right"  Click="btnCancel_Click" Height="30" Width="76" >Cancel</Button>           
-        </DockPanel>
+            <Label></Label>
+            <Button x:Name="btnCancel"  HorizontalAlignment="Right"  Click="btnCancel_Click" Height="30" Width="76" >Cancel</Button>
+        </StackPanel>
     </Grid>
 </UserControl>

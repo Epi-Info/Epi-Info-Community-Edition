@@ -2461,8 +2461,8 @@ namespace EpiDashboard.Mapping
             timeLaspe = new EpiDashboard.Mapping.TimeLapse(dashboardHelpers, this, myMap);
             timeLaspe.btnOK.Click += new RoutedEventHandler(btn_TimeLapseClick);
            
-            timeLaspe.Width = 250;
-            timeLaspe.Height = 190;
+            timeLaspe.Width = 305;
+            timeLaspe.Height = 160;
 
             timeLaspe.Cancelled += new EventHandler(properties_Cancelled);
             timeLaspe.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
