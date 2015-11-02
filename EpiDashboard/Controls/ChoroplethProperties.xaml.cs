@@ -146,6 +146,7 @@ namespace EpiDashboard.Controls
             tblockColorRamp.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLOR;
             tblockRange.Text = DashboardSharedStrings.GADGET_MAP_RANGE;
             tblockLegText.Text = DashboardSharedStrings.GADGET_MAP_LEGEND_TEXT;
+            legendText0.Text = DashboardSharedStrings.GADGET_MAP_CHORPLTH_MISSEXCLUDED;
 
             //Filters Panel
             tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;

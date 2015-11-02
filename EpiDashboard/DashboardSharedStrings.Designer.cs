@@ -2814,6 +2814,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Missing / Excluded.
+        /// </summary>
+        public static string GADGET_MAP_CHORPLTH_MISSEXCLUDED {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_CHORPLTH_MISSEXCLUDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Class Breaks:.
         /// </summary>
         public static string GADGET_MAP_CLASS_BREAKS {
