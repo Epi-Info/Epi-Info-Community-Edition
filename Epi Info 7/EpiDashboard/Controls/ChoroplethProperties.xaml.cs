@@ -394,18 +394,41 @@ namespace EpiDashboard.Controls
 
         private void tbtnHTML_Checked(object sender, RoutedEventArgs e)
         {
-            CheckButtonStates(sender as ToggleButton);
-            panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            panelHTML.Visibility = System.Windows.Visibility.Visible;
-            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
-            panelInfo.Visibility = System.Windows.Visibility.Collapsed;
-            panelFilters.Visibility = System.Windows.Visibility.Collapsed;
-            if (choroserverlayerprop != null)
-                if (choroserverlayerprop.provider.FlagUpdateToGLFailed) { ResetShapeCombo(); }
-
+           
+           if (!string.IsNullOrEmpty(txtProjectPath.Text) )
+           {
+                if( !string.IsNullOrEmpty(txtShapePath.Text) 
+                    ||  cbxmapserver.SelectedIndex != -1   
+                    ||    (!string.IsNullOrEmpty(txtMapSeverpath.Text) 
+                    || (!string.IsNullOrEmpty(txtKMLpath.Text)  )))
+                {
+                    btnOK.Visibility = Visibility.Hidden;
+                    CheckButtonStates(sender as ToggleButton);
+                    panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
+                    panelHTML.Visibility = System.Windows.Visibility.Visible;
+                    panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+                    panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+                    panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+                    if (choroserverlayerprop != null)
+                        if (choroserverlayerprop.provider.FlagUpdateToGLFailed) { ResetShapeCombo(); }
+                }
+                else
+                {
+                    tbtnHTML.IsChecked = false;
+                    MessageBoxResult result = System.Windows.MessageBox.Show("Please add boundaries.", DashboardSharedStrings.ALERT, MessageBoxButton.OK);
+              
+                }
+           }
+           else
+           {
+               tbtnHTML.IsChecked = false;
+               MessageBoxResult result = System.Windows.MessageBox.Show("Please add a data source.", DashboardSharedStrings.ALERT, MessageBoxButton.OK);
+           
+           }
         }
         private void tbtnFilters_Checked(object sender, RoutedEventArgs e)
         {
+            btnOK.Visibility = Visibility.Hidden;
             if (panelDataSource == null) return;
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
@@ -417,6 +440,10 @@ namespace EpiDashboard.Controls
 
         private void tbtnDataSource_Checked(object sender, RoutedEventArgs e)
         {
+            if (btnOK != null)
+            {
+                btnOK.Visibility = Visibility.Visible;
+            }
             if (panelDataSource == null) return;
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Visible;
@@ -442,6 +469,7 @@ namespace EpiDashboard.Controls
         }
         private void txtProjectPath_TextChanged(object sender, TextChangedEventArgs e)
         {
+            EnableOkbtn();
         }
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
@@ -498,8 +526,10 @@ namespace EpiDashboard.Controls
                 }
             }
             else
+            {
                 tbtnDataSource.IsChecked = true;
-
+                MessageBoxResult result = System.Windows.MessageBox.Show("Before clicking the ok button you need to add map variables", DashboardSharedStrings.ALERT, MessageBoxButton.OK);
+            }
 
 
         }
@@ -2468,6 +2498,7 @@ namespace EpiDashboard.Controls
 
         public void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            EnableOkbtn();
             ResetMapServer();
         }
 
@@ -2561,11 +2592,13 @@ namespace EpiDashboard.Controls
 
         private void txtMapSeverpath_TextChanged(object sender, TextChangedEventArgs e)
         {
+            EnableOkbtn();
             btnMapserverlocate.IsEnabled = txtMapSeverpath.Text.Length > 0;
         }
 
         public void cbxmapfeature_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            EnableOkbtn();
             MapfeatureSelectionChange();
         }
 
@@ -2625,6 +2658,28 @@ namespace EpiDashboard.Controls
 
         }
 
+
+        private void EnableOkbtn()
+        {
+            if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text)
+                       || cbxmapserver.SelectedIndex != -1
+                       || (!string.IsNullOrEmpty(txtMapSeverpath.Text)
+                       || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
+            {
+                btnOK.IsEnabled = true;
+            }
+            else
+            {
+                btnOK.IsEnabled = false;
+            }
+
+
+        }
+
+        private void EnableOkbtn(object sender, TextChangedEventArgs e)
+        {
+            EnableOkbtn();
+        }
 
     }
 
