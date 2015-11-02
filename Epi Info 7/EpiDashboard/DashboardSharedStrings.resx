@@ -1933,6 +1933,9 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_MAP_ZONE_UNITS" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="GADGET_MAP_CHORPLTH_MISSEXCLUDED" xml:space="preserve">
+    <value>Missing / Excluded</value>
+  </data>
   <data name="GADGET_MAP_LAYER_BACK" xml:space="preserve">
     <value>Send layer back</value>
   </data>

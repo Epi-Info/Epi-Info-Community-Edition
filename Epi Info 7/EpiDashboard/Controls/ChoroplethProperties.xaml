@@ -72,7 +72,7 @@
             </ToggleButton>-->
         </StackPanel>
 
-        <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible" VerticalAlignment="Stretch">
+        <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed" VerticalAlignment="Stretch">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
             </StackPanel>
@@ -231,7 +231,7 @@
             </ScrollViewer>
         </DockPanel>
 
-        <DockPanel x:Name="panelCharts" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
+        <DockPanel x:Name="panelCharts" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="lblPanelHdrColorsAndStyles" Style="{StaticResource PropertiesHeading}" Margin="0 0 0 10">Colors and Ranges</Label>
             </StackPanel>
