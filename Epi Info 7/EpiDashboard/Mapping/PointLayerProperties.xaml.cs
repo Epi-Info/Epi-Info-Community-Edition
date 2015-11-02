@@ -57,7 +57,7 @@ namespace EpiDashboard.Mapping
             FillComboBoxes();
             
             #region translation;
-            lblTitle.Content = DashboardSharedStrings.GADGET_LABEL_POINTS;
+            lblTitle.Content = DashboardSharedStrings.GADGET_LABEL_SPOTS;
             lblDescription.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
             lblStyle.Content = DashboardSharedStrings.GADGET_LABEL_STYLE;
             lblLatitude.Content = DashboardSharedStrings.GADGET_LATITUDE_FIELD;

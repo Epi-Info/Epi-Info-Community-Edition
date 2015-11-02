@@ -13,7 +13,7 @@
             <StackPanel Orientation="Horizontal" >
                 <Grid Width="780">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="110"/>
                         <ColumnDefinition Width="110"/>
                         <ColumnDefinition Width="110"/>
                         <ColumnDefinition Width="110"/>
@@ -38,7 +38,7 @@
                         <Label x:Name="lblValueField" HorizontalAlignment="Left" Content="Value Field:"/>
                         <ComboBox x:Name="cbxValue" Width="100"/>
                     </StackPanel>
-                    <Rectangle x:Name="rctDotColor" Grid.Column="5" HorizontalAlignment="Center" Height="20" Width="20" VerticalAlignment="Center" Stroke="DarkGray" Cursor="Hand" Fill="#F0FF1100" Visibility="Visible" >
+                    <Rectangle x:Name="rctDotColor" Grid.Column="5" HorizontalAlignment="Center" Height="25" Width="25" VerticalAlignment="Center" Stroke="DarkGray" Cursor="Hand" Fill="#F0FF1100" Visibility="Visible" >
                         <Rectangle.ToolTip>
                             <Label x:Name="rctColorToolTip" Content="Point color"/>
                         </Rectangle.ToolTip>
@@ -48,9 +48,9 @@
                             <Label x:Name="rctEditToolTip"  Content="Edit data layer"/>
                         </Rectangle.ToolTip>
                     </Rectangle>
-                    <Path Fill="White"                   
-                  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4"
-                  Height="18" Width="18"  Grid.Column="6"
+                    <Path Fill="White" Grid.Column="6"                   
+                  HorizontalAlignment="Right" VerticalAlignment="Center" 
+                  Height="18" Width="18"  Margin="0,17,98,17"
                   StrokeThickness="1" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                   IsHitTestVisible="False"
                   Stretch="Uniform"

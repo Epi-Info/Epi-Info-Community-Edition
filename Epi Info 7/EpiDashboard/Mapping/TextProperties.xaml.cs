@@ -52,8 +52,9 @@ namespace EpiDashboard.Mapping
             #region Translation
             lblTitle.Content = DashboardSharedStrings.GADGET_MAP_LABEL;
             lblText.Content = DashboardSharedStrings.GADGET_MAP_LABEL;
-            lblFont.Content = DashboardSharedStrings.GADGET_MAP_LABEL_COLOR;
+            lblFont.Content = DashboardSharedStrings.GADGET_MAP_FONT_STYLE;
             btnFont.Content = DashboardSharedStrings.GADGET_MAP_LABEL_FONT;
+            rctColorToolTip.Content = DashboardSharedStrings.GADGET_MAP_LABEL_COLOR;
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             #endregion //Translation
         }
