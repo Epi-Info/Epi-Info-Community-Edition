@@ -423,14 +423,14 @@ namespace EpiDashboard.Controls
                 else
                 {
                     tbtnHTML.IsChecked = false;
-                    MessageBoxResult result = System.Windows.MessageBox.Show("Please add boundaries.", DashboardSharedStrings.ALERT, MessageBoxButton.OK);
+                    MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_BOUNDARY, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
 
                 }
            }
             else
             {
                 tbtnHTML.IsChecked = false;
-                MessageBoxResult result = System.Windows.MessageBox.Show("Please add a data source.", DashboardSharedStrings.ALERT, MessageBoxButton.OK);
+                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_DATA_SOURCE, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
 
             }
         }
@@ -494,7 +494,7 @@ namespace EpiDashboard.Controls
             else
             {
                 tbtnDataSource.IsChecked = true;
-                MessageBoxResult result = System.Windows.MessageBox.Show("Before clicking the ok button you need to add map variables", DashboardSharedStrings.ALERT, MessageBoxButton.OK);
+                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_VARIABLES, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
             }
         }
 

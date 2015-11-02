@@ -2787,6 +2787,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a shapefile, kml file, or map server for boundaries..
+        /// </summary>
+        public static string GADGET_MAP_ADD_BOUNDARY {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_ADD_BOUNDARY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a data source..
+        /// </summary>
+        public static string GADGET_MAP_ADD_DATA_SOURCE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_ADD_DATA_SOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add label.
         /// </summary>
         public static string GADGET_MAP_ADD_LABEL {
@@ -2801,6 +2819,15 @@ namespace EpiDashboard {
         public static string GADGET_MAP_ADD_MARKER {
             get {
                 return ResourceManager.GetString("GADGET_MAP_ADD_MARKER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select map layer variables before clicking OK..
+        /// </summary>
+        public static string GADGET_MAP_ADD_VARIABLES {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_ADD_VARIABLES", resourceCulture);
             }
         }
         

@@ -240,7 +240,7 @@ namespace EpiDashboard.Controls
             else
             {
                 tbtnVariables.IsChecked = false;
-                MessageBoxResult result = System.Windows.MessageBox.Show("Please add a data source.", DashboardSharedStrings.ALERT, MessageBoxButton.OK);
+                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_DATA_SOURCE, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
 
             }
         }
