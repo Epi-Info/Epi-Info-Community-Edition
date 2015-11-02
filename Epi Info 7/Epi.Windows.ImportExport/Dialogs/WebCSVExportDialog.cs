@@ -22,8 +22,8 @@ namespace Epi.Windows.ImportExport.Dialogs
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();            
-            dialog.Filter = "Comma separated values file (*.csv)|*.csv";
-            dialog.Title = "Select Web survey export file";
+            dialog.Filter = SharedStrings.COMMA_SEPARATED_VALUES_FILE + " (*.csv)|*.csv";
+            dialog.Title = ImportExportSharedStrings.WEB_EXPORT_SELECT_FILE;
             dialog.FilterIndex = 1;            
             DialogResult result = dialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -78,7 +78,7 @@ namespace Epi.Windows.ImportExport.Dialogs
 
         void exporter_FinishExport()
         {
-            MsgBox.ShowInformation("Export complete.");
+            MsgBox.ShowInformation(ImportExportSharedStrings.WEB_EXPORT_COMPLETE);
 
             this.Invoke(new SimpleEventHandler(EndExport));
             
@@ -122,31 +122,31 @@ namespace Epi.Windows.ImportExport.Dialogs
         {
             if (string.IsNullOrEmpty(txtFilePath.Text.Trim()))
             {
-                Epi.Windows.MsgBox.ShowError("No file path specified.");
+                Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_NO_PATH);
                 return false;
             }
 
             if (string.IsNullOrEmpty(txtWebSurveyKey.Text.Trim()))
             {
-                Epi.Windows.MsgBox.ShowError("No web survey key specified.");
+                Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_NO_SURV_KEY);
                 return false;
             }
 
             if (string.IsNullOrEmpty(txtOrgKey.Text.Trim()))
             {
-                Epi.Windows.MsgBox.ShowError("No organization key specified.");
+                Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_NO_ORG_KEY);
                 return false;
             }
 
             if (string.IsNullOrEmpty(txtSecKey.Text.Trim()))
             {
-                Epi.Windows.MsgBox.ShowError("No security token specified.");
+                Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_NO_SECURITY_TOKEN);
                 return false;
             }
 
             if (string.IsNullOrEmpty(Configuration.GetNewInstance().Settings.WebServiceEndpointAddress.Trim()))
             {
-                Epi.Windows.MsgBox.ShowError("No web survey endpoint address has been specified. Please enter the endpoint address using the Epi Info 7 Options menu.");
+                Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_NO_ENDPOINT);
                 return false;
             }
 
@@ -158,7 +158,7 @@ namespace Epi.Windows.ImportExport.Dialogs
             }
             catch (Exception ex)
             {
-                Epi.Windows.MsgBox.ShowError("One or more keys is invalid. Error: " + ex.Message);
+                Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_KEY_INVALID + ImportExportSharedStrings.ERROR + StringLiterals.COLON + ex.Message);
                 return false;
             }
 

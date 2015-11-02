@@ -439,11 +439,38 @@ namespace Epi.ImportExport {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to One or more keys is invalid..
+        /// </summary>
+        public static string ERROR_KEY_INVALID {
+            get {
+                return ResourceManager.GetString("ERROR_KEY_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No web survey endpoint address has been specified. Enter the endpoint address using the Epi Info 7 Options menu..
+        /// </summary>
+        public static string ERROR_NO_ENDPOINT {
+            get {
+                return ResourceManager.GetString("ERROR_NO_ENDPOINT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A form within the given project has not been specified for packaging..
         /// </summary>
         public static string ERROR_NO_FORM {
             get {
                 return ResourceManager.GetString("ERROR_NO_FORM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No organization key specified..
+        /// </summary>
+        public static string ERROR_NO_ORG_KEY {
+            get {
+                return ResourceManager.GetString("ERROR_NO_ORG_KEY", resourceCulture);
             }
         }
         
@@ -462,6 +489,33 @@ namespace Epi.ImportExport {
         public static string ERROR_NO_PACKAGE_SELECTED {
             get {
                 return ResourceManager.GetString("ERROR_NO_PACKAGE_SELECTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No file path specified..
+        /// </summary>
+        public static string ERROR_NO_PATH {
+            get {
+                return ResourceManager.GetString("ERROR_NO_PATH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No security token specified..
+        /// </summary>
+        public static string ERROR_NO_SECURITY_TOKEN {
+            get {
+                return ResourceManager.GetString("ERROR_NO_SECURITY_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No web survey key specified..
+        /// </summary>
+        public static string ERROR_NO_SURV_KEY {
+            get {
+                return ResourceManager.GetString("ERROR_NO_SURV_KEY", resourceCulture);
             }
         }
         
@@ -2127,6 +2181,24 @@ namespace Epi.ImportExport {
         public static string WEB_CSV_EXPORTING {
             get {
                 return ResourceManager.GetString("WEB_CSV_EXPORTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export complete..
+        /// </summary>
+        public static string WEB_EXPORT_COMPLETE {
+            get {
+                return ResourceManager.GetString("WEB_EXPORT_COMPLETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select web survey export file.
+        /// </summary>
+        public static string WEB_EXPORT_SELECT_FILE {
+            get {
+                return ResourceManager.GetString("WEB_EXPORT_SELECT_FILE", resourceCulture);
             }
         }
         
