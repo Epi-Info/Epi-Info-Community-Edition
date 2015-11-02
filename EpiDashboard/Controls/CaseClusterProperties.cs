@@ -212,12 +212,29 @@ namespace EpiDashboard.Controls
         private void tbtnVariables_Checked(object sender, RoutedEventArgs e)
         {
             CheckButtonStates(sender as ToggleButton);
-            panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            panelVariables.Visibility = System.Windows.Visibility.Visible;
-            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
-            panelInfo.Visibility = System.Windows.Visibility.Collapsed;
-            panelFilter.Visibility = System.Windows.Visibility.Collapsed;
+            //panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
+            //panelVariables.Visibility = System.Windows.Visibility.Visible;
+            //panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
+            //panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            //panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            //panelFilter.Visibility = System.Windows.Visibility.Collapsed;
+            if (!string.IsNullOrEmpty(txtProjectPath.Text))
+            {
+                 
+                    panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
+                    panelVariables.Visibility = System.Windows.Visibility.Visible;
+                    panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
+                    panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+                    panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+                    panelFilter.Visibility = System.Windows.Visibility.Collapsed;
+               
+            }
+            else
+            {
+                tbtnVariables.IsChecked = false;
+                MessageBoxResult result = System.Windows.MessageBox.Show("Please add a data source.", DashboardSharedStrings.ALERT, MessageBoxButton.OK);
+
+            }
         }
 
         private void tbtnDisplay_Checked(object sender, RoutedEventArgs e)
@@ -271,6 +288,7 @@ namespace EpiDashboard.Controls
 
         private void txtProjectPath_TextChanged(object sender, TextChangedEventArgs e)
         {
+            this.EnableOkbtn();
         }
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
@@ -572,6 +590,21 @@ namespace EpiDashboard.Controls
                     dashboardHelper.AddDataFilterCondition(sfilterOperand, shilowvars[0].ToString(), shilowvars[2].ToString(), svarname, ConditionJoinType.And);
                 }
             }
+        }
+
+
+        private void EnableOkbtn()
+        {
+            if (!string.IsNullOrEmpty(txtProjectPath.Text))
+            {
+                btnOK.IsEnabled = true;
+            }
+            else
+            {
+                btnOK.IsEnabled = false;
+            }
+
+
         }
   } 
 }

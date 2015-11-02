@@ -168,7 +168,7 @@
                                     <ColumnDefinition Width="12" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtKMLpath" IsReadOnly="False" ></TextBox>
+                                <TextBox x:Name="txtKMLpath" IsReadOnly="False" TextChanged="EnableOkbtn" ></TextBox>
                                 <Button x:Name="btnKMLFile" Height="Auto" Grid.Column="2" Click="btnKMLFile_Click">Browse</Button>
                             </Grid>
                             <Label></Label>
@@ -237,7 +237,7 @@
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="2">
             <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
-            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
+            <Button x:Name="btnOK" IsEnabled="false" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
         </DockPanel>
     </Grid>
 </UserControl>
