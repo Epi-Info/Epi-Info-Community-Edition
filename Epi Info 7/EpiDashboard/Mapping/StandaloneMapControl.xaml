@@ -160,7 +160,7 @@
                             </Grid>
                         </DockPanel>
 
-                        <DockPanel x:Name="iconTimeLapse" Style="{StaticResource menuIconStyle}" Grid.Row="6" MouseLeftButtonUp="iconTimeLapse_MouseLeftButtonUp" IsEnabled="False" >
+                        <DockPanel x:Name="iconTimeLapse" Style="{StaticResource menuIconStyle}" Grid.Row="6" MouseLeftButtonUp="iconTimeLapse_MouseLeftButtonUp" Visibility="Collapsed" >
                             <DockPanel.ToolTip>
                                 <StackPanel>
                                     <Label x:Name="tooltipTimeLapseHeader" FontWeight="Bold">Create Time Lapse</Label>

@@ -774,7 +774,11 @@ namespace EpiDashboard.Mapping
             if (MapLoaded != null)
             {
                 MapLoaded(this, layerList.ClusterLayers.Count > 0);
-                iconTimeLapse.IsEnabled = layerList.ClusterLayers.Count == 1;
+               // iconTimeLapse.IsEnabled = layerList.ClusterLayers.Count == 1;
+                if (layerList.ClusterLayers.Count == 1)
+                {
+                    iconTimeLapse.Visibility = Visibility.Visible;
+                }
             }
         }
 
@@ -813,7 +817,11 @@ namespace EpiDashboard.Mapping
             if (MapLoaded != null)
             {
                 MapLoaded(this, layerList.ClusterLayers.Count > 0);
-                iconTimeLapse.IsEnabled = layerList.ClusterLayers.Count == 1;
+               // iconTimeLapse.IsEnabled = layerList.ClusterLayers.Count == 1;
+                if (layerList.ClusterLayers.Count == 1)
+                {
+                    iconTimeLapse.Visibility = Visibility.Visible;
+                }
             }
         }
 
