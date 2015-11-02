@@ -49,8 +49,6 @@ namespace EpiDashboard.Mapping
             btnFont.Click += new RoutedEventHandler(btnFont_Click);
             btnOK.Click += new RoutedEventHandler(btnOK_Click);
 
-            txtFont.Text = "Segoe UI";
-
             #region Translation
             lblTitle.Content = DashboardSharedStrings.GADGET_MAP_LABEL;
             lblText.Content = DashboardSharedStrings.GADGET_MAP_LABEL;
