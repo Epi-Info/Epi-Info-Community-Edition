@@ -1948,4 +1948,13 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_MAP_FONT_STYLE" xml:space="preserve">
     <value>Font style</value>
   </data>
+  <data name="GADGET_MAP_ADD_BOUNDARY" xml:space="preserve">
+    <value>Select a shapefile, kml file, or map server for boundaries.</value>
+  </data>
+  <data name="GADGET_MAP_ADD_DATA_SOURCE" xml:space="preserve">
+    <value>Select a data source.</value>
+  </data>
+  <data name="GADGET_MAP_ADD_VARIABLES" xml:space="preserve">
+    <value>Select map layer variables before clicking OK.</value>
+  </data>
 </root>
