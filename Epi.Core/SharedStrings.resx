@@ -3059,4 +3059,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="MAP_ERROR_CRYPTOGRAPHY" xml:space="preserve">
     <value>There was a problem referencing an external cryptography DLL.</value>
   </data>
+  <data name="COMMA_SEPARATED_VALUES_FILE" xml:space="preserve">
+    <value>Comma separated valeus file</value>
+  </data>
 </root>

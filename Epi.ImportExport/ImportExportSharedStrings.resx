@@ -810,4 +810,28 @@
   <data name="WEB_IMPORT_INITIATED" xml:space="preserve">
     <value>Request for web data initiated by user:</value>
   </data>
+  <data name="ERROR_KEY_INVALID" xml:space="preserve">
+    <value>One or more keys is invalid.</value>
+  </data>
+  <data name="ERROR_NO_ENDPOINT" xml:space="preserve">
+    <value>No web survey endpoint address has been specified. Enter the endpoint address using the Epi Info 7 Options menu.</value>
+  </data>
+  <data name="ERROR_NO_ORG_KEY" xml:space="preserve">
+    <value>No organization key specified.</value>
+  </data>
+  <data name="ERROR_NO_PATH" xml:space="preserve">
+    <value>No file path specified.</value>
+  </data>
+  <data name="ERROR_NO_SECURITY_TOKEN" xml:space="preserve">
+    <value>No security token specified.</value>
+  </data>
+  <data name="ERROR_NO_SURV_KEY" xml:space="preserve">
+    <value>No web survey key specified.</value>
+  </data>
+  <data name="WEB_EXPORT_COMPLETE" xml:space="preserve">
+    <value>Export complete.</value>
+  </data>
+  <data name="WEB_EXPORT_SELECT_FILE" xml:space="preserve">
+    <value>Select web survey export file</value>
+  </data>
 </root>

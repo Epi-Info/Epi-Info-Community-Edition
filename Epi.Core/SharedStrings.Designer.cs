@@ -1934,6 +1934,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comma separated valeus file.
+        /// </summary>
+        public static string COMMA_SEPARATED_VALUES_FILE {
+            get {
+                return ResourceManager.GetString("COMMA_SEPARATED_VALUES_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Command cannot be identified..
         /// </summary>
         public static string COMMAND_NOT_IDENTIFIED {
