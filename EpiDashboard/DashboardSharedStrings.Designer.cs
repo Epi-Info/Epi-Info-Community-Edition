@@ -2625,11 +2625,11 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Points.
+        ///   Looks up a localized string similar to Spots.
         /// </summary>
-        public static string GADGET_LABEL_POINTS {
+        public static string GADGET_LABEL_SPOTS {
             get {
-                return ResourceManager.GetString("GADGET_LABEL_POINTS", resourceCulture);
+                return ResourceManager.GetString("GADGET_LABEL_SPOTS", resourceCulture);
             }
         }
         
@@ -2873,6 +2873,15 @@ namespace EpiDashboard {
         public static string GADGET_MAP_FEATURE {
             get {
                 return ResourceManager.GetString("GADGET_MAP_FEATURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Font style.
+        /// </summary>
+        public static string GADGET_MAP_FONT_STYLE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_FONT_STYLE", resourceCulture);
             }
         }
         

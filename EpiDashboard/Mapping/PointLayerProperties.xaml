@@ -13,7 +13,7 @@
             <StackPanel Orientation="Horizontal" >
                 <Grid Width="780">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="110"/>
                         <ColumnDefinition Width="110"/>
                         <ColumnDefinition Width="110"/>
                         <ColumnDefinition Width="110"/>
@@ -21,7 +21,7 @@
                         <ColumnDefinition Width="110"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label x:Name="lblTitle" Grid.Column="0" Width="Auto" FontWeight="Bold" Visibility="Visible" VerticalAlignment="Center" Content="Points"/>
+                    <Label x:Name="lblTitle" Grid.Column="0" Width="Auto" FontWeight="Bold" Visibility="Visible" VerticalAlignment="Center" Content="Spots"/>
                     <StackPanel Orientation="Vertical" Width="Auto" Margin="5,-3,5,0" Grid.Column="1" >
                         <Label x:Name="lblDescription" HorizontalAlignment="Left" Content="Description"/>
                         <StackPanel Orientation="Horizontal" Width="Auto" Margin="5,0,5,0">
@@ -52,7 +52,7 @@
                     </Rectangle>
                     <Path Fill="White" Grid.Column="6"                   
                   HorizontalAlignment="Right" VerticalAlignment="Center" 
-                  Height="18" Width="18"  Margin="0,17,128,17"
+                  Height="18" Width="18"  Margin="0,17,98,17"
                   StrokeThickness="1" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                   IsHitTestVisible="False"
                   Stretch="Uniform"
