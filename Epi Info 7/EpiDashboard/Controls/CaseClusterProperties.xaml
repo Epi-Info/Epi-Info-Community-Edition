@@ -151,7 +151,7 @@
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="2">
             <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
-            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
+            <Button x:Name="btnOK" IsEnabled="false" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
         </DockPanel>
     </Grid>
 </UserControl>
