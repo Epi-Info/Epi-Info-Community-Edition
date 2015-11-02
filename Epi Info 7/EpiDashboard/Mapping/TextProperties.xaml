@@ -28,7 +28,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Width="Auto" Margin="5,-3,5,0" Grid.Column="3">
                         <Label x:Name="lblFont">Font Style:</Label>
-                        <TextBox x:Name="txtFont" IsReadOnly="True">Segoe UI</TextBox>
+                        <TextBox x:Name="txtFont" IsReadOnly="True"/>
                     </StackPanel>
                     <Button x:Name="btnFont" Content="Font" Height="23" Width="Auto" Padding="5,0,5,0" Grid.Column="4" Margin="0,14,0,0"/>
 
