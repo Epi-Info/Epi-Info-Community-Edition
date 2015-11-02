@@ -529,7 +529,7 @@ namespace EpiDashboard.Controls
         
         private void btnBrowseShapeFile_Click(object sender, RoutedEventArgs e)
         {
-            provider = new Mapping.DotDensityLayerProvider(myMap);           
+            provider = new Mapping.DotDensityLayerProvider(myMap);   
             object[] shapeFileProperties = provider.LoadShapeFile();
             if (shapeFileProperties != null)
             {
@@ -558,11 +558,11 @@ namespace EpiDashboard.Controls
                     if (shapeAttributes != null)
                     {
                         cmbShapeKey.Items.Clear(); 
-                        //layerprop.cbxShapeKey.Items.Clear();
+                        layerprop.cbxShapeKey.Items.Clear();
                         foreach (string key in shapeAttributes.Keys)
                         {
                             cmbShapeKey.Items.Add(key);
-                            //layerprop.cbxShapeKey.Items.Add(key);
+                            layerprop.cbxShapeKey.Items.Add(key);
                         }
                     }
                 }
