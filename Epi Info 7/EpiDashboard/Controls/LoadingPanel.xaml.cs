@@ -11,6 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Epi;
+
+
 
 namespace EpiDashboard.Controls
 {
@@ -22,6 +25,8 @@ namespace EpiDashboard.Controls
         public LoadingPanel()
         {
             InitializeComponent();
+            tblockHeading.Text = SharedStrings.DASHBOARD_GADGET_PROCESSING;
+            tblockDescription.Text = SharedStrings.DASHBOARD_GADGET_STATUS_RELATING_PAGES_NO_PROGRESS;
         }
 
         public string HeadingText

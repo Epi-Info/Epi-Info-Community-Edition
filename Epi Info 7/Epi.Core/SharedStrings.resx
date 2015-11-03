@@ -3068,4 +3068,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="WEBENTER_URLTOLOGIN" xml:space="preserve">
     <value>URL to log in to Epi Info Web Enter.</value>
   </data>
+  <data name="DASHBOARD_GADGET_PROCESSING" xml:space="preserve">
+    <value>processing</value>
+  </data>
 </root>

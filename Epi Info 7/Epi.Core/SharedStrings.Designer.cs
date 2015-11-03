@@ -2682,6 +2682,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to processing.
+        /// </summary>
+        public static string DASHBOARD_GADGET_PROCESSING {
+            get {
+                return ResourceManager.GetString("DASHBOARD_GADGET_PROCESSING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assigning values to user variables ({0} complete)....
         /// </summary>
         public static string DASHBOARD_GADGET_STATUS_ASSIGNED_VALUES_TO {
