@@ -499,7 +499,7 @@ namespace EpiDashboard.Controls
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
+        {           
             if (Cancelled != null)
             {
                 Cancelled(this, new EventArgs());
@@ -570,6 +570,8 @@ namespace EpiDashboard.Controls
                 if (layerprop == null)
                 {
                     ILayerProperties layerProperties = null;
+                    if (DashboardHelper == null)
+                        DashboardHelper = dashboardHelper;
                     layerProperties = new DotDensityLayerProperties(myMap, this.DashboardHelper, this.mapControl);
                     layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                     layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
@@ -639,6 +641,8 @@ namespace EpiDashboard.Controls
                     if (kmllayerprop == null)
                     {
                         ILayerProperties layerProperties = null;
+                        if (DashboardHelper == null)
+                            DashboardHelper = dashboardHelper;
                         layerProperties = new DotDensityKmlLayerProperties(myMap, this.DashboardHelper, this.mapControl);
                         layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                         layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
@@ -715,7 +719,7 @@ namespace EpiDashboard.Controls
                        rctDotColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
                     }
                 }
-                RenderMap();
+              //  RenderMap();
             }
         }
 
@@ -760,7 +764,7 @@ namespace EpiDashboard.Controls
                         rctDotColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
                     }
                 }
-                RenderMap();
+             //   RenderMap();
             }
         }
 
@@ -979,12 +983,14 @@ namespace EpiDashboard.Controls
                     Mapprovider = new Mapping.DotDensityServerLayerProvider(myMap);
                     Mapprovider.FeatureLoaded += new FeatureLoadedHandler(Mapprovider_FeatureLoaded);
                 }
-                object[] mapFileProperties = Mapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
-                if (mapFileProperties != null)
-                {
+               object[] mapFileProperties = Mapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
+               if (mapFileProperties != null)
+             {
                     if (this.serverlayerprop == null)
                     {
                         ILayerProperties layerProperties = null;
+                        if (DashboardHelper == null)
+                            DashboardHelper = dashboardHelper;
                         layerProperties = new DotDensityServerLayerProperties(myMap, this.DashboardHelper, this.mapControl);
                         layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                         layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
