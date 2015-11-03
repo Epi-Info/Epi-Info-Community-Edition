@@ -1957,4 +1957,52 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_MAP_ADD_VARIABLES" xml:space="preserve">
     <value>Select map layer variables before clicking OK.</value>
   </data>
+  <data name="DASHBOARD_FILTER_VALUEOF" xml:space="preserve">
+    <value>The value of</value>
+  </data>
+  <data name="GADGET_ADDFILTER" xml:space="preserve">
+    <value>Add Filter</value>
+  </data>
+  <data name="GADGET_ADD_WITH_AND_OPERATOR" xml:space="preserve">
+    <value>Add with AND</value>
+  </data>
+  <data name="GADGET_ADD_WITH_OR_OPERATOR" xml:space="preserve">
+    <value>Add with OR</value>
+  </data>
+  <data name="GADGET_ADVANCED_FILTER_BOOLEAN" xml:space="preserve">
+    <value>4.  Boolean data:</value>
+  </data>
+  <data name="GADGET_ADVANCED_FILTER_DATE" xml:space="preserve">
+    <value>3.  Date data:</value>
+  </data>
+  <data name="GADGET_ADVANCED_FILTER_NUMERIC" xml:space="preserve">
+    <value>1.  Numeric data:</value>
+  </data>
+  <data name="GADGET_ADVANCED_FILTER_TEXT" xml:space="preserve">
+    <value>2. Text data:</value>
+  </data>
+  <data name="GADGET_ADV_FILTER_MODE" xml:space="preserve">
+    <value>Advanced Filter Mode</value>
+  </data>
+  <data name="GADGET_AND" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="GADGET_CLEAR_ALL" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="GADGET_DATA_FILTERS" xml:space="preserve">
+    <value>Data filters:</value>
+  </data>
+  <data name="GADGET_FIELDNAME" xml:space="preserve">
+    <value>Field Name:</value>
+  </data>
+  <data name="GADGET_FILTERS_NONE" xml:space="preserve">
+    <value>No advanced filters are in effect.</value>
+  </data>
+  <data name="GADGET_PROCESS_SCOPE" xml:space="preserve">
+    <value>Record processing scope</value>
+  </data>
+  <data name="GADGET_VALUE" xml:space="preserve">
+    <value>Value</value>
+  </data>
 </root>

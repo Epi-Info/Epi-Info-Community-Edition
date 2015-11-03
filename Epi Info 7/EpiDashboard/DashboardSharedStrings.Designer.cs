@@ -952,6 +952,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value of.
+        /// </summary>
+        public static string DASHBOARD_FILTER_VALUEOF {
+            get {
+                return ResourceManager.GetString("DASHBOARD_FILTER_VALUEOF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide Gadget Borders.
         /// </summary>
         public static string DASHBOARD_HIDE_BORDERS {
@@ -1491,6 +1500,33 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add with AND.
+        /// </summary>
+        public static string GADGET_ADD_WITH_AND_OPERATOR {
+            get {
+                return ResourceManager.GetString("GADGET_ADD_WITH_AND_OPERATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add with OR.
+        /// </summary>
+        public static string GADGET_ADD_WITH_OR_OPERATOR {
+            get {
+                return ResourceManager.GetString("GADGET_ADD_WITH_OR_OPERATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Filter.
+        /// </summary>
+        public static string GADGET_ADDFILTER {
+            get {
+                return ResourceManager.GetString("GADGET_ADDFILTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Additional fields to display:.
         /// </summary>
         public static string GADGET_ADDITIONAL_FIELDS_DISPLAY {
@@ -1502,9 +1538,54 @@ namespace EpiDashboard {
         /// <summary>
         ///   Looks up a localized string similar to Advanced Filter Mode.
         /// </summary>
+        public static string GADGET_ADV_FILTER_MODE {
+            get {
+                return ResourceManager.GetString("GADGET_ADV_FILTER_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4.  Boolean data:.
+        /// </summary>
+        public static string GADGET_ADVANCED_FILTER_BOOLEAN {
+            get {
+                return ResourceManager.GetString("GADGET_ADVANCED_FILTER_BOOLEAN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3.  Date data:.
+        /// </summary>
+        public static string GADGET_ADVANCED_FILTER_DATE {
+            get {
+                return ResourceManager.GetString("GADGET_ADVANCED_FILTER_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced Filter Mode.
+        /// </summary>
         public static string GADGET_ADVANCED_FILTER_MODE {
             get {
                 return ResourceManager.GetString("GADGET_ADVANCED_FILTER_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1.  Numeric data:.
+        /// </summary>
+        public static string GADGET_ADVANCED_FILTER_NUMERIC {
+            get {
+                return ResourceManager.GetString("GADGET_ADVANCED_FILTER_NUMERIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2. Text data:.
+        /// </summary>
+        public static string GADGET_ADVANCED_FILTER_TEXT {
+            get {
+                return ResourceManager.GetString("GADGET_ADVANCED_FILTER_TEXT", resourceCulture);
             }
         }
         
@@ -1541,6 +1622,15 @@ namespace EpiDashboard {
         public static string GADGET_ALL_VALUES {
             get {
                 return ResourceManager.GetString("GADGET_ALL_VALUES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to and.
+        /// </summary>
+        public static string GADGET_AND {
+            get {
+                return ResourceManager.GetString("GADGET_AND", resourceCulture);
             }
         }
         
@@ -1721,6 +1811,15 @@ namespace EpiDashboard {
         public static string GADGET_CLASSES {
             get {
                 return ResourceManager.GetString("GADGET_CLASSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear All.
+        /// </summary>
+        public static string GADGET_CLEAR_ALL {
+            get {
+                return ResourceManager.GetString("GADGET_CLEAR_ALL", resourceCulture);
             }
         }
         
@@ -2193,6 +2292,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data filters:.
+        /// </summary>
+        public static string GADGET_DATA_FILTERS {
+            get {
+                return ResourceManager.GetString("GADGET_DATA_FILTERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data Source.
         /// </summary>
         public static string GADGET_DATA_SOURCE {
@@ -2436,6 +2544,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Field Name:.
+        /// </summary>
+        public static string GADGET_FIELDNAME {
+            get {
+                return ResourceManager.GetString("GADGET_FIELDNAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fields:.
         /// </summary>
         public static string GADGET_FIELDS {
@@ -2450,6 +2567,15 @@ namespace EpiDashboard {
         public static string GADGET_FILTER_GADGET_ONLY {
             get {
                 return ResourceManager.GetString("GADGET_FILTER_GADGET_ONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No advanced filters are in effect..
+        /// </summary>
+        public static string GADGET_FILTERS_NONE {
+            get {
+                return ResourceManager.GetString("GADGET_FILTERS_NONE", resourceCulture);
             }
         }
         
@@ -3534,6 +3660,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Record processing scope.
+        /// </summary>
+        public static string GADGET_PROCESS_SCOPE {
+            get {
+                return ResourceManager.GetString("GADGET_PROCESS_SCOPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PSU:.
         /// </summary>
         public static string GADGET_PSU {
@@ -4412,6 +4547,15 @@ namespace EpiDashboard {
         public static string GADGET_USE_REFERENCE_VALUE {
             get {
                 return ResourceManager.GetString("GADGET_USE_REFERENCE_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        public static string GADGET_VALUE {
+            get {
+                return ResourceManager.GetString("GADGET_VALUE", resourceCulture);
             }
         }
         
