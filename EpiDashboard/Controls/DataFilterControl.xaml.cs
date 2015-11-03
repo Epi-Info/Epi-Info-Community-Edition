@@ -19,7 +19,7 @@ using Epi.Fields;
 using EpiDashboard;
 
 namespace EpiDashboard.Controls
-{    
+{
     /// <summary>
     /// Interaction logic for DataFilterControl.xaml
     /// </summary>
@@ -70,7 +70,34 @@ namespace EpiDashboard.Controls
             if (!dashboardHelper.IsUsingEpiProject)
             {
                 panelAdvanced.Visibility = Visibility.Collapsed;
-            }      
+            }
+
+            #region Translation
+
+            tbkTheValueOf.Text = DashboardSharedStrings.DASHBOARD_FILTER_VALUEOF;
+            lblFieldName.Text = DashboardSharedStrings.GADGET_FIELDNAME;
+            lblOperator.Text = DashboardSharedStrings.GADGET_OPERATOR;
+            txtValue.Text = DashboardSharedStrings.GADGET_VALUE;
+            txtAnd.Text = DashboardSharedStrings.GADGET_AND;
+            btnNewCondition.Content = DashboardSharedStrings.GADGET_ADDFILTER;
+            lblConditions.Text = DashboardSharedStrings.GADGET_DATA_FILTERS;
+            mnuAddWithAnd.Header = DashboardSharedStrings.GADGET_ADD_WITH_AND_OPERATOR;
+            mnuAddWithOr.Header = DashboardSharedStrings.GADGET_ADD_WITH_OR_OPERATOR;
+            lblRecordProcessScope.Text = DashboardSharedStrings.GADGET_PROCESS_SCOPE;
+            btnRemoveCondition.Content=DashboardSharedStrings.GADGET_REMOVE_SELECTED;
+            btnClearConditions.Content=DashboardSharedStrings.GADGET_CLEAR_ALL;
+            btnAdvancedMode.Content=DashboardSharedStrings.GADGET_ADVANCED_MODE;
+            lblAdvancedFilterMode.Text =DashboardSharedStrings.GADGET_ADVANCED_MODE;
+            tblockAdvancedInstruct.Text = DashboardSharedStrings.GADGET_DESIRED_DATA_FILTER;
+            lblAdvancedNumeric.Text = DashboardSharedStrings.GADGET_ADVANCED_FILTER_NUMERIC +  "  (AGE >= 15) AND (AGE <= 45)";
+            lblAdvancedText.Text = DashboardSharedStrings.GADGET_ADVANCED_FILTER_TEXT + "  (LastName LIKE '%sen') OR (LastName = 'Smith')";
+            lblAdvancedDate.Text = DashboardSharedStrings.GADGET_ADVANCED_FILTER_DATE + "  (DOB >= #01/01/2000#) AND (DOB <= #12/31/2000 23:59:59#)";
+            lblAdvancedBool.Text = DashboardSharedStrings.GADGET_ADVANCED_FILTER_BOOLEAN + "  (ILL = true)";
+
+            btnApplyAdvancedFilter.Content=DashboardSharedStrings.GADGET_GUIDED_MODE;
+            btnGuidedMode.Content=DashboardSharedStrings.GADGET_GUIDED_MODE;
+            #endregion //Translation
+
         }
         #endregion // Constructors
 
@@ -196,7 +223,7 @@ namespace EpiDashboard.Controls
             }
 
             e.Handled = true;
-            return;            
+            return;
         }
 
         /// <summary>
@@ -282,69 +309,69 @@ namespace EpiDashboard.Controls
                     Dictionary<string, string> fieldValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
                     if (dataTable != null)
-                    { 
-                     if (field is DDLFieldOfLegalValues)
-                     {
-                        foreach (System.Data.DataRow row in dataTable.Rows)
+                    {
+                        if (field is DDLFieldOfLegalValues)
                         {
-                            string codeColumnName = ((TableBasedDropDownField)field).CodeColumnName.Trim();
-                            if (!string.IsNullOrEmpty(codeColumnName))
+                            foreach (System.Data.DataRow row in dataTable.Rows)
                             {
-                                string Key = row[codeColumnName].ToString();
-                                if (!fieldValues.ContainsKey(Key))
+                                string codeColumnName = ((TableBasedDropDownField)field).CodeColumnName.Trim();
+                                if (!string.IsNullOrEmpty(codeColumnName))
                                 {
-                                    fieldValues.Add(Key, Key);
+                                    string Key = row[codeColumnName].ToString();
+                                    if (!fieldValues.ContainsKey(Key))
+                                    {
+                                        fieldValues.Add(Key, Key);
+                                    }
                                 }
                             }
                         }
-                      }
-                    else if (field is DDLFieldOfCodes)
-                    {
-                        foreach (System.Data.DataRow row in dataTable.Rows)
+                        else if (field is DDLFieldOfCodes)
                         {
-                            string codeColumnName = ((DDLFieldOfCodes)field).TextColumnName.Trim();                            
-                            if (!string.IsNullOrEmpty(codeColumnName))
+                            foreach (System.Data.DataRow row in dataTable.Rows)
                             {
-                                string Key = row[codeColumnName].ToString();
-                                if (!fieldValues.ContainsKey(Key))
+                                string codeColumnName = ((DDLFieldOfCodes)field).TextColumnName.Trim();
+                                if (!string.IsNullOrEmpty(codeColumnName))
                                 {
-                                    fieldValues.Add(Key, Key);
+                                    string Key = row[codeColumnName].ToString();
+                                    if (!fieldValues.ContainsKey(Key))
+                                    {
+                                        fieldValues.Add(Key, Key);
+                                    }
                                 }
                             }
                         }
-                    }
-                    else
-                    {
-                        foreach (System.Data.DataRow row in dataTable.Rows)
+                        else
                         {
-                            string codeColumnName = ((TableBasedDropDownField)field).TextColumnName.Trim();
-                            if (!string.IsNullOrEmpty(codeColumnName))
+                            foreach (System.Data.DataRow row in dataTable.Rows)
                             {
-                                string Key = row[codeColumnName].ToString();
-                                int dash = Key.IndexOf('-');
-                                Key = Key.Substring(0, dash);
-                                if (!fieldValues.ContainsKey(Key))
+                                string codeColumnName = ((TableBasedDropDownField)field).TextColumnName.Trim();
+                                if (!string.IsNullOrEmpty(codeColumnName))
                                 {
-                                    fieldValues.Add(Key, Key);
+                                    string Key = row[codeColumnName].ToString();
+                                    int dash = Key.IndexOf('-');
+                                    Key = Key.Substring(0, dash);
+                                    if (!fieldValues.ContainsKey(Key))
+                                    {
+                                        fieldValues.Add(Key, Key);
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    cbxValue.Items.Clear();
+                        cbxValue.Items.Clear();
 
-                    int i = 0;
-                    foreach (KeyValuePair<string, string> kvp in fieldValues)
-                    {
-                        if (kvp.Key.Length > 0)
+                        int i = 0;
+                        foreach (KeyValuePair<string, string> kvp in fieldValues)
                         {
-                            cbxValue.Items.Add(kvp.Key);
-                        }
+                            if (kvp.Key.Length > 0)
+                            {
+                                cbxValue.Items.Add(kvp.Key);
+                            }
 
-                        i++;
+                            i++;
+                        }
+                        cbxValue.Items.Add(config.Settings.RepresentationOfMissing);
                     }
-                    cbxValue.Items.Add(config.Settings.RepresentationOfMissing);
-                  }
                 }
             }
             else
@@ -353,8 +380,8 @@ namespace EpiDashboard.Controls
                 if (dashboardHelper.TableColumnNames.ContainsKey(columnName))
                 {
                     columnDataType = dashboardHelper.TableColumnNames[columnName];
-                }                
-                
+                }
+
                 cbxValue.IsEnabled = true;
                 cbxOperator.IsEnabled = true;
 
@@ -392,7 +419,7 @@ namespace EpiDashboard.Controls
                 }
 
                 if (field != null)
-                {   
+                {
                     ShowValueSelector(field);
                 }
                 else
@@ -415,7 +442,7 @@ namespace EpiDashboard.Controls
         private void btnRemoveCondition_Click(object sender, RoutedEventArgs e)
         {
             if (dgFilters.Items.Count > 0 && dgFilters.SelectedIndex >= 0)
-            {                
+            {
                 string friendlyCondition = ((DataRowView)dgFilters.SelectedItem).Row[DataFilters.COLUMN_FRIENDLY_FILTER].ToString();
                 dashboardHelper.RemoveDataFilterCondition(friendlyCondition);
                 UpdateFilterConditions();
@@ -556,7 +583,7 @@ namespace EpiDashboard.Controls
             dashboardHelper.UseAdvancedUserDataFilter = true;
             txtAdvancedFilter.Foreground = this.Resources["normalColor"] as Brush;
             btnApplyAdvancedFilter.IsEnabled = true;
-            txtAdvancedFilterStatus.Text = "No advanced filters are in effect.";
+            txtAdvancedFilterStatus.Text = DashboardSharedStrings.GADGET_FILTERS_NONE;
             txtTitle.Margin = new Thickness(-3, 0, 0, -270);
 
             if (dashboardHelper.DataFilters.Count > 0 && string.IsNullOrEmpty(txtAdvancedFilter.Text))
@@ -619,8 +646,8 @@ namespace EpiDashboard.Controls
                 filterConditions.Columns[DataFilters.COLUMN_FILTER].ColumnName = DataFilters.COLUMN_FRIENDLY_FILTER;
             }
 
-            dgFilters.ItemsSource = filterConditions.DefaultView;            
-       
+            dgFilters.ItemsSource = filterConditions.DefaultView;
+
             if (SelectionCriteriaChanged != null)
             {
                 SelectionCriteriaChanged(this, new EventArgs());
@@ -672,7 +699,7 @@ namespace EpiDashboard.Controls
         /// Fills in the 'operator' drop-down list based upon the type of field being used in the selection condition
         /// </summary>
         /// <param name="field">The field that the condition is based upon</param>
-        private void FillOperatorValues(Field field) 
+        private void FillOperatorValues(Field field)
         {
             if (field is IDataField)
             {
@@ -765,7 +792,7 @@ namespace EpiDashboard.Controls
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
                     cbxOperator.SelectedIndex = 0;
                     cbxValue.Items.Add(config.Settings.RepresentationOfYes);
-                    cbxValue.Items.Add(config.Settings.RepresentationOfNo);                    
+                    cbxValue.Items.Add(config.Settings.RepresentationOfNo);
                     cbxValue.IsEnabled = true;
                     break;
                 case "System.String":
@@ -782,7 +809,7 @@ namespace EpiDashboard.Controls
         /// Shows the appropriate value selection control to the user depending on the type of field that is being selected for
         /// </summary>
         /// <param name="field">The field that the condition is based upon</param>
-        private void ShowValueSelector(Field field) 
+        private void ShowValueSelector(Field field)
         {
             txtValue.Visibility = System.Windows.Visibility.Visible;
             if (field is IDataField)
@@ -844,7 +871,7 @@ namespace EpiDashboard.Controls
                     {
                         dateValue.Visibility = Visibility.Hidden;
                         tbxNumericValue.Visibility = Visibility.Visible;
-                        cbxValue.Visibility = Visibility.Hidden;                        
+                        cbxValue.Visibility = Visibility.Hidden;
                         tbxValue.Visibility = Visibility.Hidden;
 
                         if (cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING) || cbxOperator.SelectedItem.ToString().Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING))
@@ -909,7 +936,7 @@ namespace EpiDashboard.Controls
         /// <param name="column">The column that the condition is based upon</param>
         private void ShowValueSelector(string columnType)
         {
-            txtValue.Visibility = System.Windows.Visibility.Visible;            
+            txtValue.Visibility = System.Windows.Visibility.Visible;
 
             if (cbxOperator.SelectedValue != null)
             {

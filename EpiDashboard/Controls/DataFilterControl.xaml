@@ -51,11 +51,11 @@
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="90"/>
-                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="90"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Data filters:" Margin="0,5,0,0" Grid.Row="5" Grid.Column="0"  Grid.ColumnSpan="2" />
+                        <TextBlock x:Name="lblConditions" HorizontalAlignment="Left" TextAlignment="Center" Text="Data filters:" Margin="0,5,0,0" Grid.Row="5" Grid.Column="0"  Grid.ColumnSpan="2" />
                         <ListBox x:Name="lbxConditions" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6" Width="514" Visibility="Collapsed"/>
 
                         <toolkit:DataGrid x:Name="dgFilters" 
@@ -75,10 +75,10 @@
 
 
 
-                        <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Field Name:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="1"  />
+                        <TextBlock x:Name="lblFieldName" HorizontalAlignment="Left" TextAlignment="Center" Text="Field Name:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="1"  />
                         <ComboBox x:Name="cbxFieldName" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="1" MaxWidth="110" Width="110" SelectionChanged="cbxFieldName_SelectionChanged" />
 
-                        <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Operator:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="2"  />
+                        <TextBlock x:Name="lblOperator" HorizontalAlignment="Left" TextAlignment="Center" Text="Operator:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="2"  />
                         <ComboBox x:Name="cbxOperator" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="2" MaxWidth="110" Width="110" SelectionChanged="cbxOperator_SelectionChanged" />
 
                         <TextBlock x:Name="txtValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Value:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="3"  />
@@ -94,7 +94,7 @@
                         <toolkit:DatePicker toolkit:Name="dateLowValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" Width="90" Visibility="Hidden" />
                         <toolkit:DatePicker toolkit:Name="dateHighValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="5" MaxWidth="90" Width="90" Visibility="Hidden" />
 
-                        <TextBlock x:Name="txtAnd" Visibility="Hidden" Text="and" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="1"/>
+                        <TextBlock x:Name="txtAnd" Visibility="Visible" Text="and" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="0"/>
 
                         <Button x:Name="btnNewCondition" Width="100" Grid.ColumnSpan="2" Content="Add Filter" Grid.Row="3" HorizontalAlignment="Left" Click="btnNewCondition_Click">
                             <Button.ContextMenu>
@@ -106,46 +106,46 @@
                         </Button>
 
                         <StackPanel x:Name="panelAdvanced" Visibility="Collapsed" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" >
-                            <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Record processing scope:" Grid.ColumnSpan="2"/>
+                            <TextBlock x:Name="lblRecordProcessScope" HorizontalAlignment="Left" TextAlignment="Center" Text="Record processing scope:" Grid.ColumnSpan="2"/>
                             <ComboBox x:Name="cbxRecordProcessScope" HorizontalAlignment="Left" MaxWidth="140" Width="140" IsEditable="False" Grid.ColumnSpan="3" SelectionChanged="cbxRecordProcessScope_SelectionChanged" />
                         </StackPanel>
 
-                        <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="The value of  " Grid.Row="1" Grid.Column="0" />
+                        <TextBlock x:Name="tbkTheValueOf" HorizontalAlignment="Left" TextAlignment="Center" Text="The value of  " Grid.Row="1" Grid.Column="0" />
                     </Grid>
 
                     <Grid x:Name="grdGuidedModeButtons" VerticalAlignment="Top" Grid.Row="2" Margin="27, 5, 5, 5">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="115"/>
-                            <ColumnDefinition Width="115"/>
-                            <ColumnDefinition Width="115"/>
+                            <ColumnDefinition Width="135"/>
+                            <ColumnDefinition Width="135"/>
+                            <ColumnDefinition Width="135"/>
                         </Grid.ColumnDefinitions>
 
-                        <Button x:Name="btnRemoveCondition" Width="100" Grid.ColumnSpan="2" Content="Remove Selected" Grid.Row="0" HorizontalAlignment="Left" Click="btnRemoveCondition_Click" />
-                        <Button x:Name="btnClearConditions" Width="100" Grid.ColumnSpan="2" Content="Clear All" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Click="btnClearConditions_Click" />
-                        <Button x:Name="btnAdvancedMode" Width="100" Grid.ColumnSpan="2" Content="Advanced Mode" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" Click="btnAdvancedMode_Click" />
+                        <Button x:Name="btnRemoveCondition" Width="120" Grid.ColumnSpan="2" Content="Remove Selected" Grid.Row="0" HorizontalAlignment="Left" Click="btnRemoveCondition_Click" />
+                        <Button x:Name="btnClearConditions" Width="120" Grid.ColumnSpan="2" Content="Clear All" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Click="btnClearConditions_Click" />
+                        <Button x:Name="btnAdvancedMode" Width="120" Grid.ColumnSpan="2" Content="Advanced Mode" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" Click="btnAdvancedMode_Click" />
                     </Grid>
 
                     <StackPanel Grid.Row="4" x:Name="pnlAdvancedMode" VerticalAlignment="Top" Margin="27, 0, 0, 0">
-                        <TextBlock Text="Advanced Filter Mode" FontWeight="Bold" Margin="0, 0, 0, 3" />
-                        <TextBlock Text="Type the desired data filter string into the text box below. Several examples are provided:" 
+                        <TextBlock x:Name="lblAdvancedFilterMode" Text="Advanced Filter Mode" FontWeight="Bold" Margin="0, 0, 0, 3" />
+                        <TextBlock x:Name="tblockAdvancedInstruct" Text="Type the desired data filter string into the text box below. Several examples are provided:" 
                                TextWrapping="WrapWithOverflow" 
                                Width="500"
                                HorizontalAlignment="Left"
                                Margin="0, 0, 0, 3" />
 
-                        <TextBlock Text="  1. Numeric data:   (AGE &gt;= 15) AND (AGE &lt;= 45)" 
+                        <TextBlock x:Name="lblAdvancedNumeric" Text="  1. Numeric data:   (AGE &gt;= 15) AND (AGE &lt;= 45)" 
                                TextWrapping="WrapWithOverflow" 
                                Width="500"
                                HorizontalAlignment="Left" />
-                        <TextBlock Text="  2. Text data:   (LastName LIKE '%sen') OR (LastName = 'Smith')" 
+                        <TextBlock x:Name="lblAdvancedText" Text="  2. Text data:   (LastName LIKE '%sen') OR (LastName = 'Smith')" 
                                TextWrapping="WrapWithOverflow" 
                                Width="500"
                                HorizontalAlignment="Left" />
-                        <TextBlock Text="  3. Date data:   (DOB &gt;= #01/01/2000#) AND (DOB &lt;= #12/31/2000 23:59:59#)" 
+                        <TextBlock x:Name="lblAdvancedDate" Text="  3. Date data:   (DOB &gt;= #01/01/2000#) AND (DOB &lt;= #12/31/2000 23:59:59#)" 
                                TextWrapping="WrapWithOverflow" 
                                Width="500"
                                HorizontalAlignment="Left" />
-                        <TextBlock Text="  4. Boolean data:   (ILL = true)" 
+                        <TextBlock x:Name="lblAdvancedBool" Text="  4. Boolean data:   (ILL = true)" 
                                TextWrapping="WrapWithOverflow" 
                                Width="500"
                                HorizontalAlignment="Left" />
