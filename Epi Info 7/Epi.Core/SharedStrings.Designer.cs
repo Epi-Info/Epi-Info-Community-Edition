@@ -8439,6 +8439,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Form ID needed to access the form..
+        /// </summary>
+        public static string WEBENTER_FORMID {
+            get {
+                return ResourceManager.GetString("WEBENTER_FORMID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credentials not valid. Verify email address and password and try again..
         /// </summary>
         public static string WEBENTER_INVALID_LOGIN {
@@ -8462,6 +8471,15 @@ namespace Epi {
         public static string WEBENTER_PW_REQUIRED {
             get {
                 return ResourceManager.GetString("WEBENTER_PW_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to URL to log in to Epi Info Web Enter..
+        /// </summary>
+        public static string WEBENTER_URLTOLOGIN {
+            get {
+                return ResourceManager.GetString("WEBENTER_URLTOLOGIN", resourceCulture);
             }
         }
         
@@ -8592,7 +8610,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Security Token required for downloading data:.
+        ///   Looks up a localized string similar to Security Token required for importing data:.
         /// </summary>
         public static string WEBFORM_SECURITYTOKEN {
             get {

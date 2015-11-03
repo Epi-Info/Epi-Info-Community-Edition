@@ -40,6 +40,7 @@
             this.DividerLabel = new System.Windows.Forms.Label();
             this.btnGo = new System.Windows.Forms.Button();
             this.tabEntry = new System.Windows.Forms.TabPage();
+            this.DataAccessRuleList = new System.Windows.Forms.ComboBox();
             this.Shareable = new System.Windows.Forms.CheckBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.txtOrganizationKey = new System.Windows.Forms.TextBox();
@@ -65,7 +66,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnPublishForm = new System.Windows.Forms.Button();
             this.tabPublishWebForm = new System.Windows.Forms.TabControl();
-            this.DataAccessRuleList = new System.Windows.Forms.ComboBox();
             this.InfoToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabEntry.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -142,6 +142,13 @@
             this.tabEntry.Name = "tabEntry";
             this.tabEntry.UseVisualStyleBackColor = true;
             this.tabEntry.Click += new System.EventHandler(this.tabEntry_Click);
+            // 
+            // DataAccessRuleList
+            // 
+            resources.ApplyResources(this.DataAccessRuleList, "DataAccessRuleList");
+            this.DataAccessRuleList.FormattingEnabled = true;
+            this.DataAccessRuleList.Name = "DataAccessRuleList";
+            this.DataAccessRuleList.Tag = "Data Access Rules";
             // 
             // Shareable
             // 
@@ -304,13 +311,6 @@
             this.tabPublishWebForm.Controls.Add(this.tabEntry);
             this.tabPublishWebForm.Name = "tabPublishWebForm";
             this.tabPublishWebForm.SelectedIndex = 0;
-            // 
-            // DataAccessRuleList
-            // 
-            resources.ApplyResources(this.DataAccessRuleList, "DataAccessRuleList");
-            this.DataAccessRuleList.FormattingEnabled = true;
-            this.DataAccessRuleList.Name = "DataAccessRuleList";
-            this.DataAccessRuleList.Tag = "Data Access Rules";
             // 
             // InfoToolTip
             // 
