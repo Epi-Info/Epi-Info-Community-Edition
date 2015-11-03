@@ -586,10 +586,47 @@ namespace EpiDashboard.Controls
                 this.datafilters = new DataFilters(_dashboardHelper);
                 rowFilterControl = new RowFilterControl(_dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, datafilters, true);
                 rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; rowFilterControl.FillSelectionComboboxes();
+                if(HasFilter())
+                {
+                   RemoveFilter( );
+                 
+                }
                 panelFilters.Children.Add(rowFilterControl);
+                tblockAnyFilterGadgetOnly.Visibility = Visibility.Collapsed;
                 //txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
             }
 
+        }
+
+        private void RemoveFilter()
+        {
+           int ChildIndex = 0;
+            foreach (var child in panelFilters.Children)
+            {
+                
+                if (child.GetType().FullName.Contains("EpiDashboard.RowFilterControl"))
+                {
+
+                    panelFilters.Children.RemoveAt(ChildIndex);
+                    break;
+                }
+                 ChildIndex ++;
+            }
+        }
+
+        private bool HasFilter()
+        {
+            bool HasFilter = false;
+            foreach (var child in panelFilters.Children)
+            {
+                if (child.GetType().FullName.Contains("EpiDashboard.RowFilterControl"))
+                {
+
+                    HasFilter = true;
+                }
+
+            }
+            return HasFilter;
         }
 
         public void FillComboBoxes()
