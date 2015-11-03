@@ -330,6 +330,9 @@ namespace EpiDashboard.Mapping
 
                     //  foreach (Color color in provider.ClassesColorsDictionary)
 
+
+                  
+
                     foreach (KeyValuePair<string, Color> keyValuePair in provider.CustomColorsDictionary.Dict)
                     {
                         string customColor = "<" + keyValuePair.Key + ">";
@@ -422,21 +425,18 @@ namespace EpiDashboard.Mapping
 
                 if (child.Name.Equals("customColors"))
                 {
+
+                    provider.UseCustomColors = true;
+
                     foreach (System.Xml.XmlElement color in child)
                     {
 
                         string rgb = color.InnerText;
                         string[] co = rgb.Split(',');
                         Color newColor = Color.FromRgb(byte.Parse(co[0]), byte.Parse(co[1]), byte.Parse(co[2]));
-                        provider.ClassesColorsDictionary.Add(color.Name, newColor);
+                        provider.CustomColorsDictionary.Add(color.Name, newColor);
 
 
-
-                        //foreach (System.Xml.XmlElement c in color)
-                        //{
-
-
-                        //}
                     }
 
                 }
