@@ -912,8 +912,8 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             StringBuilder PubValues = new StringBuilder();
           //  PubValues.Append("Survey Name: " + StringLiterals.NEW_LINE + txtSurveyName.Text + StringLiterals.NEW_LINE + StringLiterals.NEW_LINE);
-            PubValues.Append(SharedStrings.WEBFORM_URLTOSEND + StringLiterals.NEW_LINE + txtURL.Text + StringLiterals.NEW_LINE + StringLiterals.NEW_LINE);
-            PubValues.Append(SharedStrings.WEBFORM_SURVEYKEY + StringLiterals.NEW_LINE + txtSurveyKey.Text + StringLiterals.NEW_LINE + StringLiterals.NEW_LINE);
+            PubValues.Append(SharedStrings.WEBENTER_URLTOLOGIN + StringLiterals.NEW_LINE + txtURL.Text + StringLiterals.NEW_LINE + StringLiterals.NEW_LINE);
+            PubValues.Append(SharedStrings.WEBENTER_FORMID + StringLiterals.NEW_LINE + txtSurveyKey.Text + StringLiterals.NEW_LINE + StringLiterals.NEW_LINE);
             PubValues.Append(SharedStrings.WEBFORM_SECURITYTOKEN + StringLiterals.NEW_LINE + txtDataKey.Text +StringLiterals.NEW_LINE + StringLiterals.NEW_LINE);
             // PubValues.Append(txtSurveyName.Text + StringLiterals.NEW_LINE);
             // PubValues.Append(txtSurveyID.Text + StringLiterals.SEMI_COLON + StringLiterals.SPACE + txtOrganization.Text + StringLiterals.SEMI_COLON + StringLiterals.SPACE + txtDepartment.Text + StringLiterals.NEW_LINE);

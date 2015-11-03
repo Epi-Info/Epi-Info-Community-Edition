@@ -2508,7 +2508,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
     <value>You are deleting a field that may contain collected data. Continue with delete?</value>
   </data>
   <data name="WEBFORM_SECURITYTOKEN" xml:space="preserve">
-    <value>Security Token required for downloading data:</value>
+    <value>Security Token required for importing data:</value>
   </data>
   <data name="WEBFORM_SURVEYKEY" xml:space="preserve">
     <value>Survey Key needed to access the survey:</value>
@@ -3061,5 +3061,11 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   </data>
   <data name="COMMA_SEPARATED_VALUES_FILE" xml:space="preserve">
     <value>Comma separated valeus file</value>
+  </data>
+  <data name="WEBENTER_FORMID" xml:space="preserve">
+    <value>Form ID needed to access the form.</value>
+  </data>
+  <data name="WEBENTER_URLTOLOGIN" xml:space="preserve">
+    <value>URL to log in to Epi Info Web Enter.</value>
   </data>
 </root>
