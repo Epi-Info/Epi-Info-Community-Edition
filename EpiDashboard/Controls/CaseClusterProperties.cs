@@ -447,10 +447,44 @@ namespace EpiDashboard.Controls
             rowfiltercontrol = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, dashboardHelper.DataFilters, true);
             rowfiltercontrol.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             rowfiltercontrol.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+            if (HasFilter())
+            {
+                RemoveFilter();
+
+            }
             panelFilter.Children.Add(rowfiltercontrol);
-            
+            tblockAnyFilterGadgetOnly.Visibility = Visibility.Collapsed;
+        }
+        private void RemoveFilter()
+        {
+            int ChildIndex = 0;
+            foreach (var child in panelFilter.Children)
+            {
+
+                if (child.GetType().FullName.Contains("EpiDashboard.RowFilterControl"))
+                {
+
+                    panelFilter.Children.RemoveAt(ChildIndex);
+                    break;
+                }
+                ChildIndex++;
+            }
         }
 
+        private bool HasFilter()
+        {
+            bool HasFilter = false;
+            foreach (var child in panelFilter.Children)
+            {
+                if (child.GetType().FullName.Contains("EpiDashboard.RowFilterControl"))
+                {
+
+                    HasFilter = true;
+                }
+
+            }
+            return HasFilter;
+        } 
         public void FillComboBoxes()
         {
             cmbLatitude.Items.Clear();

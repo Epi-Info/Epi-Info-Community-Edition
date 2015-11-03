@@ -462,10 +462,9 @@
         <DockPanel x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel Grid.Column="2" DockPanel.Dock="Top" >
                 <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
-                <StackPanel DockPanel.Dock="Bottom">
-                    <Label x:Name="tblockSetDataFilter" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this layer.</Label>
-                    <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: First select a data source to add a filter to layer.</Label>
-                </StackPanel>
+                <Label x:Name="tblockSetDataFilter" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this layer.</Label>
+                <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: First select a data source to add a filter to layer.</Label>
+                 
             </StackPanel>
         </DockPanel>
 
