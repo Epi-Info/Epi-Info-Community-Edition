@@ -40,9 +40,9 @@ namespace EpiDashboard.Mapping
 
         private ColorRampType _colorRampType = new ColorRampType();
 
-        private bool _useCustomColors;  //    = true;
+        private bool _useCustomColors;        //   = true;
 
-        private Dictionary<string, Color> _classesColorsDictionary = new Dictionary<string, Color>();
+        //  private Dictionary<string, Color> _classesColorsDictionary = new Dictionary<string, Color>();
 
 
 
@@ -910,11 +910,11 @@ namespace EpiDashboard.Mapping
             set { _useCustomColors = value; }
         }
 
-        public Dictionary<string, Color> ClassesColorsDictionary
-        {
-            get { return _classesColorsDictionary; }
-            set { _classesColorsDictionary = value; }
-        }
+        //public Dictionary<string, Color> ClassesColorsDictionary
+        //{
+        //    get { return _classesColorsDictionary; }
+        //    set { _classesColorsDictionary = value; }
+        //}
 
         public CustomColorsDictionary CustomColorsDictionary
         {

@@ -23,6 +23,20 @@ using Control = System.Windows.Controls.Control;
 
 namespace EpiDashboard.Controls
 {
+
+
+    public class UIControls
+    {
+        public Rectangle rectangle;
+        public System.Windows.Controls.TextBox rampStarts;
+        public System.Windows.Controls.TextBlock centerTexts;
+        public System.Windows.Controls.TextBox rampEnds;
+        public System.Windows.Controls.TextBox quintiles;
+        public System.Windows.Controls.TextBox legedTexts;
+
+    }
+
+
     /// <summary>
     /// Interaction logic for DashboardProperties.xaml
     /// </summary>
@@ -326,8 +340,6 @@ namespace EpiDashboard.Controls
                     (SolidColorBrush)rctColor10.Fill,  
                     (SolidColorBrush)rctColor0.Fill };
 
-                UpdateColorsCollection();
-
                 int classCount;
                 if (!int.TryParse(((ComboBoxItem)cmbClasses.SelectedItem).Content.ToString(), out classCount))
                 {
@@ -473,7 +485,10 @@ namespace EpiDashboard.Controls
         }
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            if (cmbDataKey.SelectedIndex > -1 && cmbShapeKey.SelectedIndex > -1 && cmbValue.SelectedIndex > -1)
+
+
+
+           if (cmbDataKey.SelectedIndex > -1 && cmbShapeKey.SelectedIndex > -1 && cmbValue.SelectedIndex > -1)
             {
                 Addfilters();
 
@@ -530,6 +545,8 @@ namespace EpiDashboard.Controls
                // tbtnDataSource.IsChecked = true;
                 MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_VARIABLES, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
             }
+
+
 
 
         }
@@ -836,90 +853,90 @@ namespace EpiDashboard.Controls
                 var item = classAttrib.ElementAt(key - 1);
                 classAttributes itemvalue = (classAttributes)item.Value;
 
-                if (key == 1)
-                {
-                    rctColor1.Fill = (Brush)itemvalue.rctColor;
-                    rampStart01.Text = itemvalue.rampStart;
-                    rampEnd01.Text = itemvalue.rampEnd;
-                    quintile01.Text = itemvalue.quintile;
-                    // legendText1.Text = itemvalue.legendText;
-                }
-                else if (key == 2)
-                {
-                    rctColor2.Fill = (Brush)itemvalue.rctColor;
-                    rampStart02.Text = itemvalue.rampStart;
-                    rampEnd02.Text = itemvalue.rampEnd;
-                    quintile02.Text = itemvalue.quintile;
-                    // legendText2.Text = itemvalue.legendText;
-                }
-                else if (key == 3)
-                {
-                    rctColor3.Fill = (Brush)itemvalue.rctColor;
-                    rampStart03.Text = itemvalue.rampStart;
-                    rampEnd03.Text = itemvalue.rampEnd;
-                    quintile03.Text = itemvalue.quintile;
-                    //  legendText3.Text = itemvalue.legendText;
-                }
-                else if (key == 4)
-                {
-                    rctColor4.Fill = (Brush)itemvalue.rctColor;
-                    rampStart04.Text = itemvalue.rampStart;
-                    rampEnd04.Text = itemvalue.rampEnd;
-                    quintile04.Text = itemvalue.quintile;
-                    // legendText4.Text = itemvalue.legendText;
-                }
-                else if (key == 5)
-                {
-                    rctColor5.Fill = (Brush)itemvalue.rctColor;
-                    rampStart05.Text = itemvalue.rampStart;
-                    rampEnd05.Text = itemvalue.rampEnd;
-                    quintile05.Text = itemvalue.quintile;
-                    // legendText5.Text = itemvalue.legendText;
+                //if (key == 1)
+                //{
+                //    rctColor1.Fill = (Brush)itemvalue.rctColor;
+                //    rampStart01.Text = itemvalue.rampStart;
+                //    rampEnd01.Text = itemvalue.rampEnd;
+                //    quintile01.Text = itemvalue.quintile;
+                //    // legendText1.Text = itemvalue.legendText;
+                //}
+                //else if (key == 2)
+                //{
+                //    rctColor2.Fill = (Brush)itemvalue.rctColor;
+                //    rampStart02.Text = itemvalue.rampStart;
+                //    rampEnd02.Text = itemvalue.rampEnd;
+                //    quintile02.Text = itemvalue.quintile;
+                //    // legendText2.Text = itemvalue.legendText;
+                //}
+                //else if (key == 3)
+                //{
+                //    rctColor3.Fill = (Brush)itemvalue.rctColor;
+                //    rampStart03.Text = itemvalue.rampStart;
+                //    rampEnd03.Text = itemvalue.rampEnd;
+                //    quintile03.Text = itemvalue.quintile;
+                //    //  legendText3.Text = itemvalue.legendText;
+                //}
+                //else if (key == 4)
+                //{
+                //    rctColor4.Fill = (Brush)itemvalue.rctColor;
+                //    rampStart04.Text = itemvalue.rampStart;
+                //    rampEnd04.Text = itemvalue.rampEnd;
+                //    quintile04.Text = itemvalue.quintile;
+                //    // legendText4.Text = itemvalue.legendText;
+                //}
+                //else if (key == 5)
+                //{
+                //    rctColor5.Fill = (Brush)itemvalue.rctColor;
+                //    rampStart05.Text = itemvalue.rampStart;
+                //    rampEnd05.Text = itemvalue.rampEnd;
+                //    quintile05.Text = itemvalue.quintile;
+                //    // legendText5.Text = itemvalue.legendText;
 
-                }
-                else if (key == 6)
-                {
-                    rctColor6.Fill = (Brush)itemvalue.rctColor;
-                    rampStart06.Text = itemvalue.rampStart;
-                    rampEnd06.Text = itemvalue.rampEnd;
-                    quintile06.Text = itemvalue.quintile;
-                    // legendText6.Text = itemvalue.legendText;
+                //}
+                //else if (key == 6)
+                //{
+                //    rctColor6.Fill = (Brush)itemvalue.rctColor;
+                //    rampStart06.Text = itemvalue.rampStart;
+                //    rampEnd06.Text = itemvalue.rampEnd;
+                //    quintile06.Text = itemvalue.quintile;
+                //    // legendText6.Text = itemvalue.legendText;
 
-                }
-                else if (key == 7)
-                {
-                    rctColor7.Fill = (Brush)itemvalue.rctColor;
-                    rampStart07.Text = itemvalue.rampStart;
-                    rampEnd07.Text = itemvalue.rampEnd;
-                    quintile07.Text = itemvalue.quintile;
-                    // legendText7.Text = itemvalue.legendText;
-                }
-                else if (key == 8)
-                {
-                    rctColor8.Fill = (Brush)itemvalue.rctColor;
-                    rampStart08.Text = itemvalue.rampStart;
-                    rampEnd08.Text = itemvalue.rampEnd;
-                    quintile08.Text = itemvalue.quintile;
-                    // legendText8.Text = itemvalue.legendText;
+                //}
+                //else if (key == 7)
+                //{
+                //    rctColor7.Fill = (Brush)itemvalue.rctColor;
+                //    rampStart07.Text = itemvalue.rampStart;
+                //    rampEnd07.Text = itemvalue.rampEnd;
+                //    quintile07.Text = itemvalue.quintile;
+                //    // legendText7.Text = itemvalue.legendText;
+                //}
+                //else if (key == 8)
+                //{
+                //    rctColor8.Fill = (Brush)itemvalue.rctColor;
+                //    rampStart08.Text = itemvalue.rampStart;
+                //    rampEnd08.Text = itemvalue.rampEnd;
+                //    quintile08.Text = itemvalue.quintile;
+                //    // legendText8.Text = itemvalue.legendText;
 
-                }
-                else if (key == 9)
-                {
-                    rctColor9.Fill = (Brush)itemvalue.rctColor;
-                    rampStart09.Text = itemvalue.rampStart;
-                    rampEnd09.Text = itemvalue.rampEnd;
-                    quintile09.Text = itemvalue.quintile;
-                    // legendText9.Text = itemvalue.legendText;
+                //}
+                //else if (key == 9)
+                //{
+                //    rctColor9.Fill = (Brush)itemvalue.rctColor;
+                //    rampStart09.Text = itemvalue.rampStart;
+                //    rampEnd09.Text = itemvalue.rampEnd;
+                //    quintile09.Text = itemvalue.quintile;
+                //    // legendText9.Text = itemvalue.legendText;
 
-                }
-                else if (key == 10)
-                {
-                    rctColor10.Fill = (Brush)itemvalue.rctColor;
-                    rampStart10.Text = itemvalue.rampStart;
-                    rampEnd10.Text = itemvalue.rampEnd;
-                    quintile10.Text = itemvalue.quintile;
-                    //  legendText10.Text = itemvalue.legendText;
-                }
+                //}
+                //else if (key == 10)
+                //{
+                //    rctColor10.Fill = (Brush)itemvalue.rctColor;
+                //    rampStart10.Text = itemvalue.rampStart;
+                //    rampEnd10.Text = itemvalue.rampEnd;
+                //    quintile10.Text = itemvalue.quintile;
+                //    //  legendText10.Text = itemvalue.legendText;
+                //}
             }
 
         }
@@ -983,8 +1000,7 @@ namespace EpiDashboard.Controls
                     (SolidColorBrush)rctColor10.Fill,  
                     (SolidColorBrush)rctColor0.Fill};
 
-                UpdateColorsCollection();
-
+             
 
                 int classCount;
                 if (!int.TryParse(cmbClasses.Text, out classCount))
@@ -1337,7 +1353,7 @@ namespace EpiDashboard.Controls
 
             int stratCount;
 
-          
+
 
             if (int.TryParse(cmbClasses.Text, out stratCount) == false)
             {
@@ -1432,8 +1448,24 @@ namespace EpiDashboard.Controls
             byte gi = (byte)(gd / (stratCount - 1));
             byte bi = (byte)(bd / (stratCount - 1));
 
-            if (isNewColorRamp) rctColor0.Fill = rampMissing;
-            if (isNewColorRamp) rctColor1.Fill = rampStart;
+            if (_provider.UseCustomColors)
+                rctColor0.Fill = new SolidColorBrush(_provider.CustomColorsDictionary.GetWithKey(rctColor0.Name));
+            else
+            {
+                rctColor0.Fill = rampMissing;
+                _provider.CustomColorsDictionary.Add(rctColor0.Name, rampMissing.Color);
+            }
+
+
+            if (_provider.UseCustomColors)
+                rctColor1.Fill = new SolidColorBrush(_provider.CustomColorsDictionary.GetWithKey(rctColor1.Name));
+            else
+            {
+                rctColor1.Fill = rampStart;
+                _provider.CustomColorsDictionary.Add(rctColor1.Name, rampStart.Color);
+            }
+
+
 
             if (radShapeFile.IsChecked == true && _provider != null)
             {
@@ -1455,438 +1487,186 @@ namespace EpiDashboard.Controls
             }
 
 
-            Color coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri), (byte)(rampStart.Color.G - gi),
-                    (byte)(rampStart.Color.B - bi));
+            Color coo;
 
-            Color dictColor = _provider.CustomColorsDictionary.GetWithKey(rctColor2.Name);
+            int i = 2;
 
+            int gradientControl = 1;
 
-            if (_provider.UseCustomColors)
-                coo = _provider.CustomColorsDictionary.GetWithKey(rctColor2.Name);
-            else
-            {
-                // coo  = GetSwatch(rctColor2, rampStart, ri, gi, bi);
-                coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri), (byte)(rampStart.Color.G - gi),
-                    (byte)(rampStart.Color.B - bi));
+            List<UIControls> uics = CreateUIControlsList();
 
-                _provider.StoreColor(rctColor2, coo);
+            foreach (UIControls uiControls in uics)
+            {
 
-            }
+                if (_provider.UseCustomColors)
+                    coo = _provider.GetCustomColor(uiControls.rectangle.Name);
+                else
+                {
+                    coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * gradientControl), (byte)(rampStart.Color.G - gi * gradientControl),
+                        (byte)(rampStart.Color.B - bi * gradientControl));
+                    _provider.CustomColorsDictionary.Add(uiControls.rectangle.Name, coo);
+                }
 
+                gradientControl++;
 
-            if (radShapeFile.IsChecked == true && _provider != null)
-            {
-                rampStart02.Text = _provider.RangeValues[1, 0];
-                rampEnd02.Text = _provider.RangeValues[1, 1];
-                quintile02.Text = _provider.QuantileValues[1].ToString();
-            }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
-            {
-                rampStart02.Text = choroMapprovider.RangeValues[1, 0];
-                rampEnd02.Text = choroMapprovider.RangeValues[1, 1];
-                quintile02.Text = choroMapprovider.QuantileValues[1].ToString();
-            }
-            else if (radKML.IsChecked == true && choroKMLprovider != null)
-            {
-                rampStart02.Text = choroKMLprovider.RangeValues[1, 0];
-                rampEnd02.Text = choroKMLprovider.RangeValues[1, 1];
-                quintile02.Text = choroKMLprovider.QuantileValues[1].ToString();
-            }
+                uiControls.rectangle.Visibility = System.Windows.Visibility.Visible;
+                uiControls.rampStarts.Visibility = System.Windows.Visibility.Visible;
+                uiControls.centerTexts.Visibility = System.Windows.Visibility.Visible;
+                uiControls.rampEnds.Visibility = System.Windows.Visibility.Visible;
+                uiControls.quintiles.Visibility = System.Windows.Visibility.Visible;
+                uiControls.legedTexts.Visibility = System.Windows.Visibility.Visible;
+                if (i++ > stratCount)
+                {
+                    coo = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+                    uiControls.rectangle.Visibility = System.Windows.Visibility.Hidden;
+                    uiControls.rampStarts.Visibility = System.Windows.Visibility.Hidden;
+                    uiControls.centerTexts.Visibility = System.Windows.Visibility.Hidden;
+                    uiControls.rampEnds.Visibility = System.Windows.Visibility.Hidden;
+                    uiControls.quintiles.Visibility = System.Windows.Visibility.Hidden;
+                    uiControls.legedTexts.Visibility = System.Windows.Visibility.Hidden;
+                }
+                if (isNewColorRamp) uiControls.rectangle.Fill = new SolidColorBrush(coo);
 
-            int i = 3;
-
-
-            if (_provider.UseCustomColors)
-                coo = _provider.GetCustomColor(rctColor3.Name);
-            else
-            {
-                coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * 2), (byte)(rampStart.Color.G - gi * 2),
-                    (byte)(rampStart.Color.B - bi * 2));
-                _provider.StoreColor(rctColor3, coo);
-            }
-
-            rctColor3.Visibility = System.Windows.Visibility.Visible;
-            rampStart03.Visibility = System.Windows.Visibility.Visible;
-            centerText03.Visibility = System.Windows.Visibility.Visible;
-            rampEnd03.Visibility = System.Windows.Visibility.Visible;
-            quintile03.Visibility = System.Windows.Visibility.Visible;
-            legendText3.Visibility = System.Windows.Visibility.Visible;
-            if (i++ > stratCount)
-            {
-                coo = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor3.Visibility = System.Windows.Visibility.Hidden;
-                rctColor3.Visibility = System.Windows.Visibility.Hidden;
-                rampStart03.Visibility = System.Windows.Visibility.Hidden;
-                centerText03.Visibility = System.Windows.Visibility.Hidden;
-                rampEnd03.Visibility = System.Windows.Visibility.Hidden;
-                quintile03.Visibility = System.Windows.Visibility.Hidden;
-                legendText3.Visibility = System.Windows.Visibility.Hidden;
-            }
-            if (isNewColorRamp) rctColor3.Fill = new SolidColorBrush(coo);
-
-            if (radShapeFile.IsChecked == true && _provider != null)
-            {
-                rampStart03.Text = _provider.RangeValues[i - 2, 0];
-                rampEnd03.Text = _provider.RangeValues[i - 2, 1];
-                quintile03.Text = _provider.QuantileValues[i - 2].ToString();
-            }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
-            {
-                rampStart03.Text = choroMapprovider.RangeValues[i - 2, 0];
-                rampEnd03.Text = choroMapprovider.RangeValues[i - 2, 1];
-                quintile03.Text = choroMapprovider.QuantileValues[i - 2].ToString();
-            }
-            else if (radKML.IsChecked == true && choroKMLprovider != null)
-            {
-                rampStart03.Text = choroKMLprovider.RangeValues[i - 2, 0];
-                rampEnd03.Text = choroKMLprovider.RangeValues[i - 2, 1];
-                quintile03.Text = choroKMLprovider.QuantileValues[i - 2].ToString();
-            }
-
-            if (_provider.UseCustomColors)
-                coo = _provider.GetCustomColor(rctColor4.Name);
-            else
-            {
-                coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * 3), (byte)(rampStart.Color.G - gi * 3),
-                    (byte)(rampStart.Color.B - bi * 3));
-                _provider.StoreColor(rctColor4, coo);
-            }
-            rctColor4.Visibility = System.Windows.Visibility.Visible;
-            rampStart04.Visibility = System.Windows.Visibility.Visible;
-            centerText04.Visibility = System.Windows.Visibility.Visible;
-            rampEnd04.Visibility = System.Windows.Visibility.Visible;
-            quintile04.Visibility = System.Windows.Visibility.Visible;
-            legendText4.Visibility = System.Windows.Visibility.Visible;
-            if (i++ > stratCount)
-            {
-                coo = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor4.Visibility = System.Windows.Visibility.Hidden;
-                rampStart04.Visibility = System.Windows.Visibility.Hidden;
-                centerText04.Visibility = System.Windows.Visibility.Hidden;
-                rampEnd04.Visibility = System.Windows.Visibility.Hidden;
-                quintile04.Visibility = System.Windows.Visibility.Hidden;
-                legendText4.Visibility = System.Windows.Visibility.Hidden;
-            }
-            if (isNewColorRamp) rctColor4.Fill = new SolidColorBrush(coo);
-
-            if (radShapeFile.IsChecked == true && _provider != null)
-            {
-                rampStart04.Text = _provider.RangeValues[i - 2, 0];
-                rampEnd04.Text = _provider.RangeValues[i - 2, 1];
-                quintile04.Text = _provider.QuantileValues[i - 2].ToString();
-            }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
-            {
-                rampStart04.Text = choroMapprovider.RangeValues[i - 2, 0];
-                rampEnd04.Text = choroMapprovider.RangeValues[i - 2, 1];
-                quintile04.Text = choroMapprovider.QuantileValues[i - 2].ToString();
-            }
-            else if (radKML.IsChecked == true && choroKMLprovider != null)
-            {
-                rampStart04.Text = choroKMLprovider.RangeValues[i - 2, 0];
-                rampEnd04.Text = choroKMLprovider.RangeValues[i - 2, 1];
-                quintile04.Text = choroKMLprovider.QuantileValues[i - 2].ToString();
-            }
-            if (_provider.UseCustomColors)
-                coo = _provider.GetCustomColor(rctColor5.Name);
-            else
-            {
-                coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * 4), (byte)(rampStart.Color.G - gi * 4),
-                    (byte)(rampStart.Color.B - bi * 4));
-                _provider.StoreColor(rctColor5, coo);
-            }
-
-            rctColor5.Visibility = System.Windows.Visibility.Visible;
-            rampStart05.Visibility = System.Windows.Visibility.Visible;
-            centerText05.Visibility = System.Windows.Visibility.Visible;
-            rampEnd05.Visibility = System.Windows.Visibility.Visible;
-            quintile05.Visibility = System.Windows.Visibility.Visible;
-            legendText5.Visibility = System.Windows.Visibility.Visible;
-            if (i++ > stratCount)
-            {
-                coo = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor5.Visibility = System.Windows.Visibility.Hidden;
-                rampStart05.Visibility = System.Windows.Visibility.Hidden;
-                centerText05.Visibility = System.Windows.Visibility.Hidden;
-                rampEnd05.Visibility = System.Windows.Visibility.Hidden;
-                quintile05.Visibility = System.Windows.Visibility.Hidden;
-                legendText5.Visibility = System.Windows.Visibility.Hidden;
-            }
-            if (isNewColorRamp) rctColor5.Fill = new SolidColorBrush(coo);
-
-            if (radShapeFile.IsChecked == true && _provider != null)
-            {
-                rampStart05.Text = _provider.RangeValues[i - 2, 0];
-                rampEnd05.Text = _provider.RangeValues[i - 2, 1];
-                quintile05.Text = _provider.QuantileValues[i - 2].ToString();
-            }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
-            {
-                rampStart05.Text = choroMapprovider.RangeValues[i - 2, 0];
-                rampEnd05.Text = choroMapprovider.RangeValues[i - 2, 1];
-                quintile05.Text = choroMapprovider.QuantileValues[i - 2].ToString();
-            }
-            else if (radKML.IsChecked == true && choroKMLprovider != null)
-            {
-                rampStart05.Text = choroKMLprovider.RangeValues[i - 2, 0];
-                rampEnd05.Text = choroKMLprovider.RangeValues[i - 2, 1];
-                quintile05.Text = choroKMLprovider.QuantileValues[i - 2].ToString();
-            }
-
-            if (_provider.UseCustomColors)
-                coo = _provider.GetCustomColor(rctColor6.Name);
-            else
-            {
-                coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * 5), (byte)(rampStart.Color.G - gi * 5),
-                    (byte)(rampStart.Color.B - bi * 5));
-                _provider.StoreColor(rctColor6, coo);
-            }
-
-            rctColor6.Visibility = System.Windows.Visibility.Visible;
-            rampStart06.Visibility = System.Windows.Visibility.Visible;
-            centerText06.Visibility = System.Windows.Visibility.Visible;
-            rampEnd06.Visibility = System.Windows.Visibility.Visible;
-            quintile06.Visibility = System.Windows.Visibility.Visible;
-            legendText6.Visibility = System.Windows.Visibility.Visible;
-            if (i++ > stratCount)
-            {
-                coo = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor6.Visibility = System.Windows.Visibility.Hidden;
-                rampStart06.Visibility = System.Windows.Visibility.Hidden;
-                centerText06.Visibility = System.Windows.Visibility.Hidden;
-                rampEnd06.Visibility = System.Windows.Visibility.Hidden;
-                quintile06.Visibility = System.Windows.Visibility.Hidden;
-                legendText6.Visibility = System.Windows.Visibility.Hidden;
-            }
-            if (isNewColorRamp) rctColor6.Fill = new SolidColorBrush(coo);
-
-            if (radShapeFile.IsChecked == true && _provider != null)
-            {
-                rampStart06.Text = _provider.RangeValues[i - 2, 0];
-                rampEnd06.Text = _provider.RangeValues[i - 2, 1];
-                quintile06.Text = _provider.QuantileValues[i - 2].ToString();
-            }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
-            {
-                rampStart06.Text = choroMapprovider.RangeValues[i - 2, 0];
-                rampEnd06.Text = choroMapprovider.RangeValues[i - 2, 1];
-                quintile06.Text = choroMapprovider.QuantileValues[i - 2].ToString();
-            }
-            else if (radKML.IsChecked == true && choroKMLprovider != null)
-            {
-                rampStart06.Text = choroKMLprovider.RangeValues[i - 2, 0];
-                rampEnd06.Text = choroKMLprovider.RangeValues[i - 2, 1];
-                quintile06.Text = choroKMLprovider.QuantileValues[i - 2].ToString();
-            }
-
-            //  Color xx = Color.FromRgb(44, 177, 199);    
+                if (radShapeFile.IsChecked == true && _provider != null)
+                {
+                    uiControls.rampStarts.Text = _provider.RangeValues[i - 2, 0];
+                    uiControls.rampEnds.Text = _provider.RangeValues[i - 2, 1];
+                    uiControls.quintiles.Text = _provider.QuantileValues[i - 2].ToString();
+                }
+                else if (radMapServer.IsChecked == true && choroMapprovider != null)
+                {
+                    uiControls.rampStarts.Text = choroMapprovider.RangeValues[i - 2, 0];
+                    uiControls.rampEnds.Text = choroMapprovider.RangeValues[i - 2, 1];
+                    uiControls.quintiles.Text = choroMapprovider.QuantileValues[i - 2].ToString();
+                }
+                else if (radKML.IsChecked == true && choroKMLprovider != null)
+                {
+                    uiControls.rampStarts.Text = choroKMLprovider.RangeValues[i - 2, 0];
+                    uiControls.rampEnds.Text = choroKMLprovider.RangeValues[i - 2, 1];
+                    uiControls.quintiles.Text = choroKMLprovider.QuantileValues[i - 2].ToString();
+                }
 
 
-            if (_provider.UseCustomColors)
-                coo = _provider.GetCustomColor(rctColor7.Name);
-            else
-            {
-                coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * 6), (byte)(rampStart.Color.G - gi * 6),
-                    (byte)(rampStart.Color.B - bi * 6));
-                _provider.StoreColor(rctColor7, coo);
             }
-            rctColor7.Visibility = System.Windows.Visibility.Visible;
-            rampStart07.Visibility = System.Windows.Visibility.Visible;
-            centerText07.Visibility = System.Windows.Visibility.Visible;
-            rampEnd07.Visibility = System.Windows.Visibility.Visible;
-            quintile07.Visibility = System.Windows.Visibility.Visible;
-            legendText7.Visibility = System.Windows.Visibility.Visible;
-            if (i++ > stratCount)
-            {
-                coo = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor7.Visibility = System.Windows.Visibility.Hidden;
-                rampStart07.Visibility = System.Windows.Visibility.Hidden;
-                centerText07.Visibility = System.Windows.Visibility.Hidden;
-                rampEnd07.Visibility = System.Windows.Visibility.Hidden;
-                quintile07.Visibility = System.Windows.Visibility.Hidden;
-                legendText7.Visibility = System.Windows.Visibility.Hidden;
-            }
-            if (isNewColorRamp) rctColor7.Fill = new SolidColorBrush(coo);
-
-            if (radShapeFile.IsChecked == true && _provider != null)
-            {
-                rampStart07.Text = _provider.RangeValues[i - 2, 0];
-                rampEnd07.Text = _provider.RangeValues[i - 2, 1];
-                quintile07.Text = _provider.QuantileValues[i - 2].ToString();
-            }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
-            {
-                rampStart07.Text = choroMapprovider.RangeValues[i - 2, 0];
-                rampEnd07.Text = choroMapprovider.RangeValues[i - 2, 1];
-                quintile07.Text = choroMapprovider.QuantileValues[i - 2].ToString();
-            }
-            else if (radKML.IsChecked == true && choroKMLprovider != null)
-            {
-                rampStart07.Text = choroKMLprovider.RangeValues[i - 2, 0];
-                rampEnd07.Text = choroKMLprovider.RangeValues[i - 2, 1];
-                quintile07.Text = choroKMLprovider.QuantileValues[i - 2].ToString();
-            }
-
-            if (_provider.UseCustomColors)
-                coo = _provider.GetCustomColor(rctColor8.Name);
-            else
-            {
-                coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * 7), (byte)(rampStart.Color.G - gi * 7),
-                    (byte)(rampStart.Color.B - bi * 7));
-                _provider.StoreColor(rctColor8, coo);
-            }
-
-            rctColor8.Visibility = System.Windows.Visibility.Visible;
-            rampStart08.Visibility = System.Windows.Visibility.Visible;
-            centerText08.Visibility = System.Windows.Visibility.Visible;
-            rampEnd08.Visibility = System.Windows.Visibility.Visible;
-            quintile08.Visibility = System.Windows.Visibility.Visible;
-            legendText8.Visibility = System.Windows.Visibility.Visible;
-            if (i++ > stratCount)
-            {
-                coo = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor8.Visibility = System.Windows.Visibility.Hidden;
-                rampStart08.Visibility = System.Windows.Visibility.Hidden;
-                centerText08.Visibility = System.Windows.Visibility.Hidden;
-                rampEnd08.Visibility = System.Windows.Visibility.Hidden;
-                quintile08.Visibility = System.Windows.Visibility.Hidden;
-                legendText8.Visibility = System.Windows.Visibility.Hidden;
-            }
-            if (isNewColorRamp) rctColor8.Fill = new SolidColorBrush(coo);
-
-            if (radShapeFile.IsChecked == true && _provider != null)
-            {
-                rampStart08.Text = _provider.RangeValues[i - 2, 0];
-                rampEnd08.Text = _provider.RangeValues[i - 2, 1];
-                quintile08.Text = _provider.QuantileValues[i - 2].ToString();
-            }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
-            {
-                rampStart08.Text = choroMapprovider.RangeValues[i - 2, 0];
-                rampEnd08.Text = choroMapprovider.RangeValues[i - 2, 1];
-                quintile08.Text = choroMapprovider.QuantileValues[i - 2].ToString();
-            }
-            else if (radKML.IsChecked == true && choroKMLprovider != null)
-            {
-                rampStart08.Text = choroKMLprovider.RangeValues[i - 2, 0];
-                rampEnd08.Text = choroKMLprovider.RangeValues[i - 2, 1];
-                quintile08.Text = choroKMLprovider.QuantileValues[i - 2].ToString();
-            }
-
-            if (_provider.UseCustomColors)
-                coo = _provider.GetCustomColor(rctColor9.Name);
-            else
-            {
-                coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * 8), (byte)(rampStart.Color.G - gi * 8),
-                    (byte)(rampStart.Color.B - bi * 8));
-                _provider.StoreColor(rctColor9, coo);
-            }
-
-            rctColor9.Visibility = System.Windows.Visibility.Visible;
-            rampStart09.Visibility = System.Windows.Visibility.Visible;
-            centerText09.Visibility = System.Windows.Visibility.Visible;
-            rampEnd09.Visibility = System.Windows.Visibility.Visible;
-            quintile09.Visibility = System.Windows.Visibility.Visible;
-            legendText9.Visibility = System.Windows.Visibility.Visible;
-            if (i++ > stratCount)
-            {
-                coo = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor9.Visibility = System.Windows.Visibility.Hidden;
-                rampStart09.Visibility = System.Windows.Visibility.Hidden;
-                centerText09.Visibility = System.Windows.Visibility.Hidden;
-                rampEnd09.Visibility = System.Windows.Visibility.Hidden;
-                quintile09.Visibility = System.Windows.Visibility.Hidden;
-                legendText9.Visibility = System.Windows.Visibility.Hidden;
-            }
-            if (isNewColorRamp) rctColor9.Fill = new SolidColorBrush(coo);
-
-            if (radShapeFile.IsChecked == true && _provider != null)
-            {
-                rampStart09.Text = _provider.RangeValues[i - 2, 0];
-                rampEnd09.Text = _provider.RangeValues[i - 2, 1];
-                quintile09.Text = _provider.QuantileValues[i - 2].ToString();
-            }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
-            {
-                rampStart09.Text = choroMapprovider.RangeValues[i - 2, 0];
-                rampEnd09.Text = choroMapprovider.RangeValues[i - 2, 1];
-                quintile09.Text = choroMapprovider.QuantileValues[i - 2].ToString();
-            }
-            else if (radKML.IsChecked == true && choroKMLprovider != null)
-            {
-                rampStart09.Text = choroKMLprovider.RangeValues[i - 2, 0];
-                rampEnd09.Text = choroKMLprovider.RangeValues[i - 2, 1];
-                quintile09.Text = choroKMLprovider.QuantileValues[i - 2].ToString();
-            }
-
-            if (_provider.UseCustomColors)
-                coo = _provider.GetCustomColor(rctColor10.Name);
-            else
-            {
-                coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * 6), (byte)(rampStart.Color.G - gi * 9),
-                    (byte)(rampStart.Color.B - bi * 9));
-                _provider.StoreColor(rctColor10, coo);
-            }
-
-            rctColor10.Visibility = System.Windows.Visibility.Visible;
-            rampStart10.Visibility = System.Windows.Visibility.Visible;
-            centerText10.Visibility = System.Windows.Visibility.Visible;
-            rampEnd10.Visibility = System.Windows.Visibility.Visible;
-            quintile10.Visibility = System.Windows.Visibility.Visible;
-            legendText10.Visibility = System.Windows.Visibility.Visible;
-            if (i++ > stratCount)
-            {
-                coo = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                rctColor10.Visibility = System.Windows.Visibility.Hidden;
-                rampStart10.Visibility = System.Windows.Visibility.Hidden;
-                centerText10.Visibility = System.Windows.Visibility.Hidden;
-                rampEnd10.Visibility = System.Windows.Visibility.Hidden;
-                quintile10.Visibility = System.Windows.Visibility.Hidden;
-                legendText10.Visibility = System.Windows.Visibility.Hidden;
-            }
-            if (isNewColorRamp) rctColor10.Fill = new SolidColorBrush(coo);
-
-            if (radShapeFile.IsChecked == true && _provider != null)
-            {
-                rampStart10.Text = _provider.RangeValues[i - 2, 0];
-                rampEnd10.Text = _provider.RangeValues[i - 2, 1];
-                quintile10.Text = _provider.QuantileValues[i - 2].ToString();
-            }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
-            {
-                rampStart10.Text = choroMapprovider.RangeValues[i - 2, 0];
-                rampEnd10.Text = choroMapprovider.RangeValues[i - 2, 1];
-                quintile10.Text = choroMapprovider.QuantileValues[i - 2].ToString();
-            }
-            else if (radKML.IsChecked == true && choroKMLprovider != null)
-            {
-                rampStart10.Text = choroKMLprovider.RangeValues[i - 2, 0];
-                rampEnd10.Text = choroKMLprovider.RangeValues[i - 2, 1];
-                quintile10.Text = choroKMLprovider.QuantileValues[i - 2].ToString();
-            }
-
-
-
 
 
             _initialRampCalc = false;
         }
 
-        //private Color GetSwatch(Rectangle rectangle, SolidColorBrush rampStart, byte ri, byte gi, byte bi)
-        //{
-        //    Color coo;
 
-        //    if (_provider.UseCustomColors)
-        //        coo = _provider.GetCustomColor(rectangle.Name);
-        //    else
-        //        coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri), (byte)(rampStart.Color.G - gi),
-        //            (byte)(rampStart.Color.B - bi));
+        private List<UIControls> CreateUIControlsList()
+        {
 
-        //    return coo;
+            // List<UIControls> uiControlsList = 
+
+            return new List<UIControls>()
+            {
+                new UIControls()
+                {
+                    centerTexts = centerText02,
+                    legedTexts = legendText2,
+                    rectangle = rctColor2,
+                    quintiles = quintile02,
+                    rampEnds = rampEnd02,
+                    rampStarts = rampStart02
 
 
-        //}
+                },
+                new UIControls()
+                {
+                    centerTexts = centerText03,
+                    legedTexts = legendText3,
+                    rectangle = rctColor3,
+                    quintiles = quintile03,
+                    rampEnds = rampEnd03,
+                    rampStarts = rampStart03
 
+
+                }, 
+                  new UIControls()
+                {
+                    centerTexts = centerText04,
+                    legedTexts = legendText4,
+                    rectangle = rctColor4,
+                    quintiles = quintile04,
+                    rampEnds = rampEnd04,
+                    rampStarts = rampStart04
+
+
+                },
+                new UIControls()
+                {
+                    centerTexts = centerText05,
+                    legedTexts = legendText5,
+                    rectangle = rctColor5,
+                    quintiles = quintile05,
+                    rampEnds = rampEnd05,
+                    rampStarts = rampStart05
+
+
+                },
+                new UIControls()
+                {
+                    centerTexts = centerText06,
+                    legedTexts = legendText6,
+                    rectangle = rctColor6,
+                    quintiles = quintile06,
+                    rampEnds = rampEnd06,
+                    rampStarts = rampStart06
+
+
+                },
+                new UIControls()
+                {
+                    centerTexts = centerText07,
+                    legedTexts = legendText7,
+                    rectangle = rctColor7,
+                    quintiles = quintile07,
+                    rampEnds = rampEnd07,
+                    rampStarts = rampStart07
+
+
+                },
+                new UIControls()
+                {
+                    centerTexts = centerText08,
+                    legedTexts = legendText8,
+                    rectangle = rctColor8,
+                    quintiles = quintile08,
+                    rampEnds = rampEnd08,
+                    rampStarts = rampStart08
+
+
+                },
+                new UIControls()
+                {
+                    centerTexts = centerText09,
+                    legedTexts = legendText9,
+                    rectangle = rctColor9,
+                    quintiles = quintile09,
+                    rampEnds = rampEnd09,
+                    rampStarts = rampStart09
+
+
+                },
+                new UIControls()
+                {
+                    centerTexts = centerText10,
+                    legedTexts = legendText10,
+                    rectangle = rctColor10,
+                    quintiles = quintile10,
+                    rampEnds = rampEnd10 ,
+                    rampStarts = rampStart10  
+
+
+                },
+ 
+            };
+
+
+        }
+
+    
         private void CheckBox_Quantiles_Click(object sender, RoutedEventArgs e)
         {
             OnQuintileOptionChanged();
@@ -1947,7 +1727,7 @@ namespace EpiDashboard.Controls
                     (SolidColorBrush)rctColor10.Fill,  
                     (SolidColorBrush)rctColor0.Fill };
 
-            UpdateColorsCollection();
+            //      UpdateColorsCollection();
 
 
             int classCount;
