@@ -1973,6 +1973,8 @@ namespace EpiDashboard
 
                     if (stratifiedFrequencyTables == null || stratifiedFrequencyTables.Count == 0)
                     {
+                        //Reset the column names to what were selected by the user
+                        freqParameters.ColumnNames = fields.ToList<string>();
                         this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), DashboardSharedStrings.GADGET_MSG_NO_DATA);
                         //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));                        
                         return;
