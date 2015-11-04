@@ -753,6 +753,7 @@ namespace EpiDashboard.Mapping
 
                 grdLayerConfigContainer.Children.Remove((UIElement)sender);
                 layerList.AddListItem((ILayerProperties)sender, 0);
+                
                 if (((ILayerProperties)sender).LegendStackPanel != null)
                 {
                     stkLegends.Children.Add(((ILayerProperties)sender).LegendStackPanel);
