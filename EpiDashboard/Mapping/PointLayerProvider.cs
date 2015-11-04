@@ -152,27 +152,39 @@ namespace EpiDashboard.Mapping
             {
                 LegendStackPanel = new StackPanel();
             }
-            LegendStackPanel.Children.Clear();
+
+            LegendStackPanel.Children.Clear();    
+
+            if (string.IsNullOrEmpty(description))
+            {
+                description = SharedStrings.CASES;
+            }
 
             if (!string.IsNullOrEmpty(description))
             {
                 System.Windows.Controls.ListBox legendList = new System.Windows.Controls.ListBox();
-                legendList.Margin = new Thickness(5);
-                legendList.Background = Brushes.White;// new LinearGradientBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF), Color.FromArgb(0x7F, 0xFF, 0xFF, 0xFF), 45);
+                legendList.Padding = new Thickness(0, 10, 0, 0);
+                legendList.Background = Brushes.White;
                 legendList.BorderBrush = Brushes.Black;
-                legendList.BorderThickness = new Thickness(3);
-                //LegendTitle.Text = thematicItem.Description;
+                legendList.BorderThickness = new Thickness(0);
+                legendList.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
 
                 TextBlock classTextBlock = new TextBlock();
-                classTextBlock.Text = "  " + description;
-                classTextBlock.FontSize = 15;
+                classTextBlock.Text = description;
+                classTextBlock.FontFamily = new FontFamily("Segoe");
+                classTextBlock.FontSize = 12;
+                classTextBlock.MaxWidth = 256;
+                classTextBlock.TextWrapping = TextWrapping.Wrap;
+                classTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
+                classTextBlock.VerticalAlignment = VerticalAlignment.Center;
+                classTextBlock.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
 
                 TextBlock symbolTextBlock = new TextBlock();
                 switch (style)
                 {
                     case SimpleMarkerSymbol.SimpleMarkerStyle.Circle:
                         symbolTextBlock.Text = "●";
-                        symbolTextBlock.FontSize = 18;
+                        symbolTextBlock.FontSize = 16;
                         break;
                     case SimpleMarkerSymbol.SimpleMarkerStyle.Cross:
                         symbolTextBlock.Text = "+";
@@ -196,15 +208,19 @@ namespace EpiDashboard.Mapping
                         symbolTextBlock.FontSize = 16;
                         break;
                 }
-                symbolTextBlock.Foreground = this.pointColor;
+                symbolTextBlock.FontSize = 28;
 
+                symbolTextBlock.VerticalAlignment = VerticalAlignment.Top;
+                symbolTextBlock.Margin = new Thickness(0, 4, 7, 4);
+                symbolTextBlock.Foreground = this.pointColor;
+                
                 StackPanel classStackPanel = new StackPanel();
+                classStackPanel.Margin = new Thickness(10, 0, 10, 10);
                 classStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
                 classStackPanel.Children.Add(symbolTextBlock);
                 classStackPanel.Children.Add(classTextBlock);
 
                 legendList.Items.Add(classStackPanel);
-
 
                 LegendStackPanel.Children.Add(legendList);
             }
