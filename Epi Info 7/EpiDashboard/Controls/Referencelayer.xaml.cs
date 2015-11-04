@@ -140,21 +140,21 @@ namespace EpiDashboard.Controls
                 MapServerName = txtMapSeverpath.Text;
                 if (lbxserverfield.SelectedIndex > -1)
                 {
-                    if (lbxserverfield.SelectedItems.Count > 0)
-                    {
-                        int[] visibleLayers = new int[lbxserverfield.SelectedItems.Count];
-                        int counter = 0;
-                        foreach (SubObject item in lbxserverfield.SelectedItems)
-                        {
-                            visibleLayers[counter] = item.id;
-                            counter++;
-                        }
-                        MapVisibleLayers = visibleLayers;
-                    }
-                    else
-                    {
-                        MapVisibleLayers = null;
-                    }
+                    //if (lbxserverfield.SelectedIndex.Count() > 0)
+                    //{
+                    //    int[] visibleLayers = new int[lbxserverfield.SelectedItems.Count];
+                    //    int counter = 0;
+                    //    foreach (SubObject item in lbxserverfield.SelectedItems)
+                    //    {
+                    //        visibleLayers[counter] = item.id;
+                    //        counter++;
+                    //    }
+                    //    MapVisibleLayers = visibleLayers;
+                    //}
+                    //else
+                    //{
+                    //    MapVisibleLayers = null;
+                    //}
 
                     if (Mapprovider == null)
                     {
@@ -411,7 +411,7 @@ namespace EpiDashboard.Controls
             panelKml.IsEnabled = false;
             txtShapePath.Text = string.Empty;
             txtKMLpath.Text = string.Empty;
-            lbxserverfield.SelectedIndex = -1;
+           // lbxserverfield.SelectedIndex = -1;
             cbxmapserver.SelectedIndex = -1;
             txtMapSeverpath.Text = string.Empty;
             if (Mapprovider != null)
