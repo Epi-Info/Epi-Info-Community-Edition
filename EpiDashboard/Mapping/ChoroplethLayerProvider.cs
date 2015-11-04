@@ -516,10 +516,9 @@ namespace EpiDashboard.Mapping
             LegendStackPanel.Children.Clear();
 
             System.Windows.Controls.ListBox legendList = new System.Windows.Controls.ListBox();
-            legendList.Margin = new Thickness(5);
             legendList.Background = Brushes.White;// new LinearGradientBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF), Color.FromArgb(0x7F, 0xFF, 0xFF, 0xFF), 45);
             legendList.BorderBrush = Brushes.Black;
-            legendList.BorderThickness = new Thickness(3);
+            legendList.BorderThickness = new Thickness(0);
             //LegendTitle.Text = thematicItem.Description;
 
             Rectangle missingSwatchRect = new Rectangle()

@@ -225,6 +225,7 @@ namespace EpiDashboard.Mapping
                         myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
                     }
                 }
+
                 return new object[] { ofd.FileName, graphicsLayer.Graphics[0].Attributes };
             }
             else return null;
@@ -443,6 +444,52 @@ namespace EpiDashboard.Mapping
                     dotLayer.Graphics.Add(g);
                 }
 
+                if (LegendStackPanel == null)
+                {
+                    LegendStackPanel = new StackPanel();
+                }
+                
+                LegendStackPanel.Children.Clear();
+
+                string description = "";
+
+                if (string.IsNullOrEmpty(description))
+                {
+                    description = dotValue.ToString() + "  " + valueField;
+                }
+
+                System.Windows.Controls.ListBox legendList = new System.Windows.Controls.ListBox();
+                legendList.Padding = new Thickness(0, 10, 0, 0);
+                legendList.Background = Brushes.White;
+                legendList.BorderBrush = Brushes.Black;
+                legendList.BorderThickness = new Thickness(0);
+                legendList.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
+
+                TextBlock classTextBlock = new TextBlock();
+                classTextBlock.Text = description; 
+                classTextBlock.FontSize = 15;
+                classTextBlock.MaxWidth = 256;
+                classTextBlock.TextWrapping = TextWrapping.Wrap;
+                classTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
+                classTextBlock.VerticalAlignment = VerticalAlignment.Center;
+                classTextBlock.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
+
+                Ellipse circle = new Ellipse();
+                circle.Width = 14;
+                circle.Height = 14;
+                circle.VerticalAlignment = VerticalAlignment.Top;
+                circle.Margin = new Thickness(0, 4, 7, 4);
+                circle.Fill = new SolidColorBrush(dotColor);// this.clusterColor; //dpb
+
+                StackPanel classStackPanel = new StackPanel();
+                classStackPanel.Margin = new Thickness(10, 0, 10, 10);
+                classStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+                classStackPanel.Children.Add(circle);
+                classStackPanel.Children.Add(classTextBlock);
+
+                legendList.Items.Add(classStackPanel);
+
+                LegendStackPanel.Children.Add(legendList);
             }
             catch (Exception ex)
             {
