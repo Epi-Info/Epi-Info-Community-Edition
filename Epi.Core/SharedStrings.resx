@@ -3131,4 +3131,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="TEMPLATE_FIELDS_OVERLAP_CONFIRM" xml:space="preserve">
     <value>The fields will overlap. Do you really want to drop this template?</value>
   </data>
+  <data name="DASHBOARD_MAX_LENGTH" xml:space="preserve">
+    <value>Max variable name length:</value>
+  </data>
 </root>

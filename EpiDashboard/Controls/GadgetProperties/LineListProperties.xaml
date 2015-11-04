@@ -194,7 +194,7 @@
                         <CheckBox x:Name="checkboxListLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels__xfe" IsEnabled="true"/>
                         <CheckBox x:Name="checkboxLineColumn" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show line column__xfe" IsChecked="True" />
                         <CheckBox x:Name="checkboxColumnHeaders" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show column headings__xfe" IsChecked="True" />
-                        <CheckBox x:Name="checkboxShowNulls" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show missing representation__xfe" IsChecked="True" Visibility="Collapsed" />
+                        <CheckBox x:Name="checkboxShowNulls" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show missing representation__xfe" IsChecked="True"/>
                         <!--<CheckBox x:Name="checkboxAllowUpdates" Style="{StaticResource PropertiesPanelCheckbox}" Content="Allow updates__xfe" Visibility="Collapsed" IsEnabled="true" />-->
                     </WrapPanel>
                 </StackPanel>
