@@ -448,8 +448,8 @@ namespace EpiDashboard.Mapping
                 {
                     LegendStackPanel = new StackPanel();
                 }
-                
-                LegendStackPanel.Children.Clear();
+
+                LegendStackPanel.Children.Clear();    
 
                 string description = "";
 
@@ -466,8 +466,9 @@ namespace EpiDashboard.Mapping
                 legendList.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
 
                 TextBlock classTextBlock = new TextBlock();
-                classTextBlock.Text = description; 
-                classTextBlock.FontSize = 15;
+                classTextBlock.Text = description;
+                classTextBlock.FontFamily = new FontFamily("Segoe");
+                classTextBlock.FontSize = 12;
                 classTextBlock.MaxWidth = 256;
                 classTextBlock.TextWrapping = TextWrapping.Wrap;
                 classTextBlock.HorizontalAlignment = HorizontalAlignment.Center;

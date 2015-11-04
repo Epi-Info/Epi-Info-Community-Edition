@@ -165,11 +165,12 @@ namespace EpiDashboard.Mapping
             };
             clusterLayer.Clusterer = clusterer;
             
-            if (LegendStackPanel == null)
+            if(LegendStackPanel == null)
             {
                 LegendStackPanel = new StackPanel();
             }
-            LegendStackPanel.Children.Clear();
+            
+            LegendStackPanel.Children.Clear();            
 
             if (string.IsNullOrEmpty(description))
             {
@@ -185,7 +186,8 @@ namespace EpiDashboard.Mapping
 
             TextBlock classTextBlock = new TextBlock();
             classTextBlock.Text = description;
-            classTextBlock.FontSize = 15;
+            classTextBlock.FontFamily = new FontFamily("Segoe");
+            classTextBlock.FontSize = 12;
             classTextBlock.MaxWidth = 256;
             classTextBlock.TextWrapping = TextWrapping.Wrap;
             classTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
