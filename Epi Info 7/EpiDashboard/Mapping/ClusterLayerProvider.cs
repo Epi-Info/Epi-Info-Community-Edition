@@ -173,27 +173,12 @@ namespace EpiDashboard.Mapping
 
             if (string.IsNullOrEmpty(description))
             {
-                description = ""; // dpb get default value from data
+                description = SharedStrings.CASES; 
             }
 
             if (!string.IsNullOrEmpty(description))
             {
-
-                TextBlock legendTitleTextBlock = new TextBlock();
-                legendTitleTextBlock.Text = "Map Legend";
-                legendTitleTextBlock.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0x6A, 0x6A, 0x6A));
-                legendTitleTextBlock.Foreground = Brushes.White;
-                legendTitleTextBlock.FontSize = 15;
-                legendTitleTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                legendTitleTextBlock.VerticalAlignment = VerticalAlignment.Center;
-                legendTitleTextBlock.Width = 310;
-                legendTitleTextBlock.Height = 40;
-                legendTitleTextBlock.Padding = new Thickness(10, 10, 10, 0);
-                legendTitleTextBlock.TextAlignment = TextAlignment.Center;
-                legendTitleTextBlock.FontFamily = new FontFamily("Segoe");
-
-                LegendStackPanel.Children.Add(legendTitleTextBlock);
-                
+     
                 System.Windows.Controls.ListBox legendList = new System.Windows.Controls.ListBox();
                 legendList.Padding = new Thickness(0,10,0,0);
                 legendList.Background = Brushes.White;
