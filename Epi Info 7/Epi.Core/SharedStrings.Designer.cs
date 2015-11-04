@@ -242,6 +242,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analysis Commands.
+        /// </summary>
+        public static string ANALYSIS_COMMANDS {
+            get {
+                return ResourceManager.GetString("ANALYSIS_COMMANDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forms for Android must have at least three input fields..
         /// </summary>
         public static string ANDROID_TOO_FEW_FIELDS {
@@ -5908,6 +5917,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last.
+        /// </summary>
+        public static string LAST {
+            get {
+                return ResourceManager.GetString("LAST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading module ....
         /// </summary>
         public static string LOADING_MODULE {
@@ -6039,6 +6057,15 @@ namespace Epi {
         public static string MAX_PAGES_REACHED {
             get {
                 return ResourceManager.GetString("MAX_PAGES_REACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximize.
+        /// </summary>
+        public static string MAXIMIZE {
+            get {
+                return ResourceManager.GetString("MAXIMIZE", resourceCulture);
             }
         }
         
@@ -6318,6 +6345,15 @@ namespace Epi {
         public static string NEW_RECORD {
             get {
                 return ResourceManager.GetString("NEW_RECORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        public static string NEXT {
+            get {
+                return ResourceManager.GetString("NEXT", resourceCulture);
             }
         }
         
@@ -7083,6 +7119,15 @@ namespace Epi {
         public static string PLEASE_WAIT_FIELD_BEING_CREATED {
             get {
                 return ResourceManager.GetString("PLEASE_WAIT_FIELD_BEING_CREATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous.
+        /// </summary>
+        public static string PREVIOUS {
+            get {
+                return ResourceManager.GetString("PREVIOUS", resourceCulture);
             }
         }
         

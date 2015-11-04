@@ -80,6 +80,7 @@ namespace Epi.Windows.Analysis.Forms
             this.copyToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -197,67 +198,43 @@ namespace Epi.Windows.Analysis.Forms
             this.btnPrint,
             this.btnRun,
             this.btnCancelRunningCommands});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(725, 25);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // btnNew
             // 
-            this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
-            this.btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            resources.ApplyResources(this.btnNew, "btnNew");
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(71, 22);
-            this.btnNew.Text = "&New Pgm";
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // btnOpen
             // 
-            this.btnOpen.Image = ((System.Drawing.Image)(resources.GetObject("btnOpen.Image")));
-            this.btnOpen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            resources.ApplyResources(this.btnOpen, "btnOpen");
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(76, 22);
-            this.btnOpen.Text = "&Open Pgm";
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            resources.ApplyResources(this.btnSave, "btnSave");
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(74, 22);
-            this.btnSave.Text = "&Save Pgm";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnPrint
             // 
-            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            resources.ApplyResources(this.btnPrint, "btnPrint");
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(61, 22);
-            this.btnPrint.Text = "&Print...";
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnRun
             // 
-            this.btnRun.Image = ((System.Drawing.Image)(resources.GetObject("btnRun.Image")));
-            this.btnRun.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnRun.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            resources.ApplyResources(this.btnRun, "btnRun");
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(101, 22);
-            this.btnRun.Text = "&Run Commands";
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
             // btnCancelRunningCommands
             // 
-            this.btnCancelRunningCommands.Enabled = false;
-            this.btnCancelRunningCommands.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancelRunningCommands.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            resources.ApplyResources(this.btnCancelRunningCommands, "btnCancelRunningCommands");
             this.btnCancelRunningCommands.Name = "btnCancelRunningCommands";
-            this.btnCancelRunningCommands.Size = new System.Drawing.Size(43, 22);
-            this.btnCancelRunningCommands.Text = "&Cancel";
-            this.btnCancelRunningCommands.Visible = false;
             this.btnCancelRunningCommands.Click += new System.EventHandler(this.btnCancelRunningCommands_Click);
             // 
             // menuStrip1
@@ -266,11 +243,8 @@ namespace Epi.Windows.Analysis.Forms
             this.mnuFile,
             this.mnuEdit,
             this.mnuFonts});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(725, 24);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // mnuFile
             // 
@@ -284,63 +258,52 @@ namespace Epi.Windows.Analysis.Forms
             this.mnuFilePrint,
             this.mnuFilePrintSetup});
             this.mnuFile.Name = "mnuFile";
-            this.mnuFile.Size = new System.Drawing.Size(35, 20);
-            this.mnuFile.Text = "&File";
+            resources.ApplyResources(this.mnuFile, "mnuFile");
             // 
             // mnuFileNew
             // 
             this.mnuFileNew.Name = "mnuFileNew";
-            this.mnuFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.mnuFileNew.Size = new System.Drawing.Size(172, 22);
-            this.mnuFileNew.Text = "&New…";
+            resources.ApplyResources(this.mnuFileNew, "mnuFileNew");
             this.mnuFileNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // mnuFileOpen
             // 
             this.mnuFileOpen.Name = "mnuFileOpen";
-            this.mnuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuFileOpen.Size = new System.Drawing.Size(172, 22);
-            this.mnuFileOpen.Text = "&Open Pgm…";
+            resources.ApplyResources(this.mnuFileOpen, "mnuFileOpen");
             this.mnuFileOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // mnuFileLine1
             // 
             this.mnuFileLine1.Name = "mnuFileLine1";
-            this.mnuFileLine1.Size = new System.Drawing.Size(169, 6);
+            resources.ApplyResources(this.mnuFileLine1, "mnuFileLine1");
             // 
             // mnuFileSave
             // 
             this.mnuFileSave.Name = "mnuFileSave";
-            this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuFileSave.Size = new System.Drawing.Size(172, 22);
-            this.mnuFileSave.Text = "&Save Pgm";
+            resources.ApplyResources(this.mnuFileSave, "mnuFileSave");
             this.mnuFileSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // mnuFileSaveAs
             // 
             this.mnuFileSaveAs.Name = "mnuFileSaveAs";
-            this.mnuFileSaveAs.Size = new System.Drawing.Size(172, 22);
-            this.mnuFileSaveAs.Text = "Save Pgm &As…";
+            resources.ApplyResources(this.mnuFileSaveAs, "mnuFileSaveAs");
             this.mnuFileSaveAs.Click += new System.EventHandler(this.mnuFileSaveAs_Click);
             // 
             // mnuFileLine2
             // 
             this.mnuFileLine2.Name = "mnuFileLine2";
-            this.mnuFileLine2.Size = new System.Drawing.Size(169, 6);
+            resources.ApplyResources(this.mnuFileLine2, "mnuFileLine2");
             // 
             // mnuFilePrint
             // 
             this.mnuFilePrint.Name = "mnuFilePrint";
-            this.mnuFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.mnuFilePrint.Size = new System.Drawing.Size(172, 22);
-            this.mnuFilePrint.Text = "&Print…";
+            resources.ApplyResources(this.mnuFilePrint, "mnuFilePrint");
             this.mnuFilePrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // mnuFilePrintSetup
             // 
             this.mnuFilePrintSetup.Name = "mnuFilePrintSetup";
-            this.mnuFilePrintSetup.Size = new System.Drawing.Size(172, 22);
-            this.mnuFilePrintSetup.Text = "Page Setu&p…";
+            resources.ApplyResources(this.mnuFilePrintSetup, "mnuFilePrintSetup");
             // 
             // mnuEdit
             // 
@@ -363,125 +326,103 @@ namespace Epi.Windows.Analysis.Forms
             this.mnuEditLine4,
             this.mnuEditInsertCommandAtCursor});
             this.mnuEdit.Name = "mnuEdit";
-            this.mnuEdit.Size = new System.Drawing.Size(37, 20);
-            this.mnuEdit.Text = "&Edit";
+            resources.ApplyResources(this.mnuEdit, "mnuEdit");
             // 
             // mnuEditUndo
             // 
             this.mnuEditUndo.Name = "mnuEditUndo";
-            this.mnuEditUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.mnuEditUndo.Size = new System.Drawing.Size(197, 22);
-            this.mnuEditUndo.Text = "Undo";
+            resources.ApplyResources(this.mnuEditUndo, "mnuEditUndo");
             this.mnuEditUndo.Click += new System.EventHandler(this.mnuEditUndo_Click);
             // 
             // mnuEditRedo
             // 
             this.mnuEditRedo.Name = "mnuEditRedo";
-            this.mnuEditRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.mnuEditRedo.Size = new System.Drawing.Size(197, 22);
-            this.mnuEditRedo.Text = "Redo";
+            resources.ApplyResources(this.mnuEditRedo, "mnuEditRedo");
             this.mnuEditRedo.Click += new System.EventHandler(this.mnuEditRedo_Click);
             // 
             // mnuSeparator1
             // 
             this.mnuSeparator1.Name = "mnuSeparator1";
-            this.mnuSeparator1.Size = new System.Drawing.Size(194, 6);
+            resources.ApplyResources(this.mnuSeparator1, "mnuSeparator1");
             // 
             // mnuEditCut
             // 
             this.mnuEditCut.Name = "mnuEditCut";
-            this.mnuEditCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuEditCut.Size = new System.Drawing.Size(197, 22);
-            this.mnuEditCut.Text = "Cu&t";
+            resources.ApplyResources(this.mnuEditCut, "mnuEditCut");
             this.mnuEditCut.Click += new System.EventHandler(this.mnuEditCut_Click);
             // 
             // mnuEditCopy
             // 
             this.mnuEditCopy.Name = "mnuEditCopy";
-            this.mnuEditCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.mnuEditCopy.Size = new System.Drawing.Size(197, 22);
-            this.mnuEditCopy.Text = SharedStrings.COPY;
+            resources.ApplyResources(this.mnuEditCopy, "mnuEditCopy");
             this.mnuEditCopy.Click += new System.EventHandler(this.mnuEditCopy_Click);
             // 
             // mnuEditPaste
             // 
             this.mnuEditPaste.Name = "mnuEditPaste";
-            this.mnuEditPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.mnuEditPaste.Size = new System.Drawing.Size(197, 22);
-            this.mnuEditPaste.Text = SharedStrings.PASTE;
+            resources.ApplyResources(this.mnuEditPaste, "mnuEditPaste");
             this.mnuEditPaste.Click += new System.EventHandler(this.mnuEditPaste_Click);
             // 
             // mnuEditLine2
             // 
             this.mnuEditLine2.Name = "mnuEditLine2";
-            this.mnuEditLine2.Size = new System.Drawing.Size(194, 6);
+            resources.ApplyResources(this.mnuEditLine2, "mnuEditLine2");
             // 
             // mnuEditFind
             // 
             this.mnuEditFind.Name = "mnuEditFind";
-            this.mnuEditFind.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.mnuEditFind.Size = new System.Drawing.Size(197, 22);
-            this.mnuEditFind.Text = "Find";
+            resources.ApplyResources(this.mnuEditFind, "mnuEditFind");
             this.mnuEditFind.Click += new System.EventHandler(this.mnuEditFind_Click);
             // 
             // mnuEditFindNext
             // 
             this.mnuEditFindNext.Name = "mnuEditFindNext";
-            this.mnuEditFindNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.mnuEditFindNext.Size = new System.Drawing.Size(197, 22);
-            this.mnuEditFindNext.Text = "Find Next";
+            resources.ApplyResources(this.mnuEditFindNext, "mnuEditFindNext");
             this.mnuEditFindNext.Click += new System.EventHandler(this.mnuEditFindNext_Click);
             // 
             // mnuEditReplace
             // 
             this.mnuEditReplace.Name = "mnuEditReplace";
-            this.mnuEditReplace.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.mnuEditReplace.Size = new System.Drawing.Size(197, 22);
-            this.mnuEditReplace.Text = "Replace";
+            resources.ApplyResources(this.mnuEditReplace, "mnuEditReplace");
             this.mnuEditReplace.Click += new System.EventHandler(this.mnuEditReplace_Click);
             // 
             // mnuEditLine3
             // 
             this.mnuEditLine3.Name = "mnuEditLine3";
-            this.mnuEditLine3.Size = new System.Drawing.Size(194, 6);
+            resources.ApplyResources(this.mnuEditLine3, "mnuEditLine3");
             // 
             // mnuSelectAll
             // 
             this.mnuSelectAll.Name = "mnuSelectAll";
-            this.mnuSelectAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.mnuSelectAll.Size = new System.Drawing.Size(197, 22);
-            this.mnuSelectAll.Text = "Select All";
+            resources.ApplyResources(this.mnuSelectAll, "mnuSelectAll");
             this.mnuSelectAll.Click += new System.EventHandler(this.mnuSelectAll_Click);
             // 
             // mnuEditLine5
             // 
             this.mnuEditLine5.Name = "mnuEditLine5";
-            this.mnuEditLine5.Size = new System.Drawing.Size(194, 6);
+            resources.ApplyResources(this.mnuEditLine5, "mnuEditLine5");
             // 
             // mnuEditProgramBeginning
             // 
             this.mnuEditProgramBeginning.Name = "mnuEditProgramBeginning";
-            this.mnuEditProgramBeginning.Size = new System.Drawing.Size(197, 22);
-            this.mnuEditProgramBeginning.Text = "Program Beginning";
+            resources.ApplyResources(this.mnuEditProgramBeginning, "mnuEditProgramBeginning");
             this.mnuEditProgramBeginning.Click += new System.EventHandler(this.mnuEditProgramBeginning_Click);
             // 
             // mnuEditProgramEnd
             // 
             this.mnuEditProgramEnd.Name = "mnuEditProgramEnd";
-            this.mnuEditProgramEnd.Size = new System.Drawing.Size(197, 22);
-            this.mnuEditProgramEnd.Text = "Program End";
+            resources.ApplyResources(this.mnuEditProgramEnd, "mnuEditProgramEnd");
             this.mnuEditProgramEnd.Click += new System.EventHandler(this.mnuEditProgramEnd_Click);
             // 
             // mnuEditLine4
             // 
             this.mnuEditLine4.Name = "mnuEditLine4";
-            this.mnuEditLine4.Size = new System.Drawing.Size(194, 6);
+            resources.ApplyResources(this.mnuEditLine4, "mnuEditLine4");
             // 
             // mnuEditInsertCommandAtCursor
             // 
             this.mnuEditInsertCommandAtCursor.Name = "mnuEditInsertCommandAtCursor";
-            this.mnuEditInsertCommandAtCursor.Size = new System.Drawing.Size(197, 22);
-            this.mnuEditInsertCommandAtCursor.Text = "Insert command at cursor";
+            resources.ApplyResources(this.mnuEditInsertCommandAtCursor, "mnuEditInsertCommandAtCursor");
             this.mnuEditInsertCommandAtCursor.Click += new System.EventHandler(this.mnuEditInsertCommandAtCursor_Click);
             // 
             // mnuFonts
@@ -489,22 +430,18 @@ namespace Epi.Windows.Analysis.Forms
             this.mnuFonts.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFontsSetEditorFont});
             this.mnuFonts.Name = "mnuFonts";
-            this.mnuFonts.Size = new System.Drawing.Size(46, 20);
-            this.mnuFonts.Text = "&Fonts";
+            resources.ApplyResources(this.mnuFonts, "mnuFonts");
             // 
             // mnuFontsSetEditorFont
             // 
             this.mnuFontsSetEditorFont.Name = "mnuFontsSetEditorFont";
-            this.mnuFontsSetEditorFont.Size = new System.Drawing.Size(146, 22);
-            this.mnuFontsSetEditorFont.Text = "Set Editor Font";
+            resources.ApplyResources(this.mnuFontsSetEditorFont, "mnuFontsSetEditorFont");
             this.mnuFontsSetEditorFont.Click += new System.EventHandler(this.mnuFontsSetEditorFont_Click);
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 49);
+            resources.ApplyResources(this.splitContainer1, "splitContainer1");
             this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
@@ -513,25 +450,14 @@ namespace Epi.Windows.Analysis.Forms
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.OutputTextBox);
-            this.splitContainer1.Size = new System.Drawing.Size(725, 418);
-            this.splitContainer1.SplitterDistance = 308;
-            this.splitContainer1.TabIndex = 4;
             // 
             // txtTextArea
             // 
             this.txtTextArea.AcceptsTab = true;
-            this.txtTextArea.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.txtTextArea, "txtTextArea");
             this.txtTextArea.ContextMenuStrip = this.contextMenuStrip1;
             this.txtTextArea.EnableAutoDragDrop = true;
-            this.txtTextArea.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTextArea.Location = new System.Drawing.Point(0, 3);
             this.txtTextArea.Name = "txtTextArea";
-            this.txtTextArea.Size = new System.Drawing.Size(725, 302);
-            this.txtTextArea.TabIndex = 2;
-            this.txtTextArea.Text = "";
-            this.txtTextArea.WordWrap = false;
             // 
             // contextMenuStrip1
             // 
@@ -541,77 +467,63 @@ namespace Epi.Windows.Analysis.Forms
             this.pasteToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(106, 92);
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
-            this.cutToolStripMenuItem.Text = SharedStrings.CUT;
+            resources.ApplyResources(this.cutToolStripMenuItem, "cutToolStripMenuItem");
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
-            this.copyToolStripMenuItem.Text = SharedStrings.COPY;
+            resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
-            this.pasteToolStripMenuItem.Text = SharedStrings.PASTE;
+            resources.ApplyResources(this.pasteToolStripMenuItem, "pasteToolStripMenuItem");
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
-            this.deleteToolStripMenuItem.Text = SharedStrings.DELETE;
+            resources.ApplyResources(this.deleteToolStripMenuItem, "deleteToolStripMenuItem");
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // OutputTextBox
             // 
-            this.OutputTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.OutputTextBox, "OutputTextBox");
             this.OutputTextBox.ContextMenuStrip = this.OutputTextBoxContextMenu;
-            this.OutputTextBox.Location = new System.Drawing.Point(3, 3);
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
-            this.OutputTextBox.Size = new System.Drawing.Size(719, 96);
-            this.OutputTextBox.TabIndex = 0;
-            this.OutputTextBox.Text = "";
             // 
             // OutputTextBoxContextMenu
             // 
             this.OutputTextBoxContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToolStripMenuItem2});
             this.OutputTextBoxContextMenu.Name = "contextMenuStrip1";
-            this.OutputTextBoxContextMenu.Size = new System.Drawing.Size(100, 26);
+            resources.ApplyResources(this.OutputTextBoxContextMenu, "OutputTextBoxContextMenu");
             // 
             // copyToolStripMenuItem2
             // 
             this.copyToolStripMenuItem2.Name = "copyToolStripMenuItem2";
-            this.copyToolStripMenuItem2.Size = new System.Drawing.Size(99, 22);
-            this.copyToolStripMenuItem2.Text = SharedStrings.COPY;
+            resources.ApplyResources(this.copyToolStripMenuItem2, "copyToolStripMenuItem2");
             this.copyToolStripMenuItem2.Click += new System.EventHandler(this.mnuOutputTextCopy_Click);
             // 
             // ProgramEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(725, 467);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.DockType = Epi.Windows.Docking.DockContainerType.ToolWindow;
             this.IsVisible = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(264, 409);
             this.Name = "ProgramEditor";
-            this.Text = "Program Editor";
             this.TextChanged += new System.EventHandler(this.ProgramEditor_TextChanged);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -619,6 +531,7 @@ namespace Epi.Windows.Analysis.Forms
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.OutputTextBoxContextMenu.ResumeLayout(false);
