@@ -858,6 +858,15 @@ namespace EpiDashboard.Mapping
                 anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
                 layerList.BeginAnimation(Canvas.BottomProperty, anim);
             }
+
+            if(layerList.ClusterLayers.Count > 0)
+            {
+                iconLegend.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                iconLegend.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         void layerList_Loaded(object sender, RoutedEventArgs e)
@@ -2370,9 +2379,26 @@ namespace EpiDashboard.Mapping
             }
         }
 
+        private void CollapseExpandLegend()
+        {
+            if (grdLegend.Margin.Left == 0)
+            {
+                grdLegend.BeginAnimation(Grid.MarginProperty, new ThicknessAnimation(new Thickness(-310, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
+            }
+            else
+            {
+                grdLegend.BeginAnimation(Grid.MarginProperty, new ThicknessAnimation(new Thickness(0, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
+            }
+        }
+
         private void iconAddDataLayer_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             CollapseExpandLayerChooser();
+        }
+
+        private void iconHideShowLegend_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            CollapseExpandLegend();
         }
 
         private void imgChoropleth_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

@@ -171,31 +171,63 @@ namespace EpiDashboard.Mapping
             }
             LegendStackPanel.Children.Clear();
 
+            if (string.IsNullOrEmpty(description))
+            {
+                description = ""; // dpb get default value from data
+            }
+
             if (!string.IsNullOrEmpty(description))
             {
+
+                TextBlock legendTitleTextBlock = new TextBlock();
+                legendTitleTextBlock.Text = "Map Legend";
+                legendTitleTextBlock.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0x6A, 0x6A, 0x6A));
+                legendTitleTextBlock.Foreground = Brushes.White;
+                legendTitleTextBlock.FontSize = 15;
+                legendTitleTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
+                legendTitleTextBlock.VerticalAlignment = VerticalAlignment.Center;
+                legendTitleTextBlock.Width = 310;
+                legendTitleTextBlock.Height = 40;
+                legendTitleTextBlock.Padding = new Thickness(10, 10, 10, 0);
+                legendTitleTextBlock.TextAlignment = TextAlignment.Center;
+                legendTitleTextBlock.FontFamily = new FontFamily("Segoe");
+
+                LegendStackPanel.Children.Add(legendTitleTextBlock);
+                
                 System.Windows.Controls.ListBox legendList = new System.Windows.Controls.ListBox();
-                legendList.Margin = new Thickness(5);
-                legendList.Background = Brushes.White;// new LinearGradientBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF), Color.FromArgb(0x7F, 0xFF, 0xFF, 0xFF), 45);
+                legendList.Padding = new Thickness(0,10,0,0);
+                legendList.Background = Brushes.White;
                 legendList.BorderBrush = Brushes.Black;
-                legendList.BorderThickness = new Thickness(3);
-                //LegendTitle.Text = thematicItem.Description;
+                legendList.BorderThickness = new Thickness(0);
+                legendList.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
 
-                TextBlock classTextBlock = new TextBlock();
-                classTextBlock.Text = "  " + description;
-                classTextBlock.FontSize = 15;
+                //for (int i = 0; i < 3; i++)
+                //{
+                    TextBlock classTextBlock = new TextBlock();
+                    classTextBlock.Text = description;
+                    classTextBlock.FontSize = 15;
+                    classTextBlock.MaxWidth = 256;
+                    classTextBlock.TextWrapping = TextWrapping.Wrap;
+                    classTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
+                    classTextBlock.VerticalAlignment = VerticalAlignment.Center;
+                    classTextBlock.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
 
-                Ellipse circle = new Ellipse();
-                circle.Width = 14;
-                circle.Height = 14;
-                circle.Fill = this.clusterColor;
+                    Ellipse circle = new Ellipse();
+                    circle.Width = 14;
+                    circle.Height = 14;
+                    circle.VerticalAlignment = VerticalAlignment.Top;
+                    circle.Margin = new Thickness(0, 4, 7, 4);
+                    circle.Fill = this.clusterColor;
 
-                StackPanel classStackPanel = new StackPanel();
-                classStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-                classStackPanel.Children.Add(circle);
-                classStackPanel.Children.Add(classTextBlock);
+                    StackPanel classStackPanel = new StackPanel();
+                    classStackPanel.Margin = new Thickness(10, 0, 10, 10);
+                    classStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+                    classStackPanel.Children.Add(circle);
+                    classStackPanel.Children.Add(classTextBlock);
 
-                legendList.Items.Add(classStackPanel);
-
+                    legendList.Items.Add(classStackPanel);
+                //}
+                
                 LegendStackPanel.Children.Add(legendList);
             }
 
