@@ -516,60 +516,67 @@ namespace EpiDashboard.Mapping
             LegendStackPanel.Children.Clear();
 
             System.Windows.Controls.ListBox legendList = new System.Windows.Controls.ListBox();
-            legendList.Background = Brushes.White;// new LinearGradientBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF), Color.FromArgb(0x7F, 0xFF, 0xFF, 0xFF), 45);
+            legendList.Padding = new Thickness(0, 10, 0, 0);
+            legendList.Background = Brushes.White;
             legendList.BorderBrush = Brushes.Black;
             legendList.BorderThickness = new Thickness(0);
-            //LegendTitle.Text = thematicItem.Description;
 
             Rectangle missingSwatchRect = new Rectangle()
             {
                 Width = 20,
                 Height = 20,
                 Stroke = new SolidColorBrush(Colors.Black),
-                Fill = colors[colors.Count - 1]
+                Fill = colors[colors.Count - 1],
+                Margin = new Thickness(0, 0, 5, 0),
+                VerticalAlignment = VerticalAlignment.Top
             };
 
+
             TextBlock titleTextBlock = new TextBlock();
-            titleTextBlock.Text = LegendText;          //        String.Format("  " + "Title Text");
+            titleTextBlock.Text = LegendText;
+            titleTextBlock.FontWeight = FontWeights.Bold;
+            titleTextBlock.MaxWidth = 256;
+            titleTextBlock.TextWrapping = TextWrapping.Wrap;
             StackPanel titleTextStackPanel = new StackPanel();
             titleTextStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-            //  titleTextStackPanel.Children.Add(missingSwatchRect);
-
             titleTextStackPanel.Children.Add(titleTextBlock);
-
+            titleTextStackPanel.Margin = new Thickness(10, 0, 10, 10);
+            legendList.Items.Add(titleTextStackPanel);
 
             TextBlock missingClassTextBlock = new TextBlock();
             missingClassTextBlock.Text = String.Format("  " + missingText);
+            missingClassTextBlock.MaxWidth = 256;
+            missingClassTextBlock.TextWrapping = TextWrapping.Wrap; 
             StackPanel missingClassStackPanel = new StackPanel();
             missingClassStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
             missingClassStackPanel.Children.Add(missingSwatchRect);
             missingClassStackPanel.Children.Add(missingClassTextBlock);
-
-            legendList.Items.Add(titleTextStackPanel);
-
+            missingClassStackPanel.Margin = new Thickness(10, 0, 10, 5);
             legendList.Items.Add(missingClassStackPanel);
 
-
             SetLegendText(colors, classCount, thematicItem.RangeStarts, legendList);
-
-
 
             TextBlock minTextBlock = new TextBlock();
             StackPanel minStackPanel = new StackPanel();
             minStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
             minTextBlock.Text = thematicItem.MinName != null ? String.Format("Min: {0} ({1})", thematicItem.Min, thematicItem.MinName.Trim()) : String.Format("Min: {0} ({1})", thematicItem.Min, string.Empty);
+            minTextBlock.MaxWidth = 256;
+            minTextBlock.TextWrapping = TextWrapping.Wrap; 
             minStackPanel.Children.Add(minTextBlock);
+            minStackPanel.Margin = new Thickness(10, 5, 10, 5);
             legendList.Items.Add(minStackPanel);
 
             TextBlock maxTextBlock = new TextBlock();
             StackPanel maxStackPanel = new StackPanel();
             maxStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
             maxTextBlock.Text = thematicItem.MaxName != null ? String.Format("Max: {0} ({1})", thematicItem.Max, thematicItem.MaxName.Trim()) : String.Format("Max: {0} ({1})", thematicItem.Max, string.Empty);
+            maxTextBlock.MaxWidth = 256;
+            maxTextBlock.TextWrapping = TextWrapping.Wrap; 
             maxStackPanel.Children.Add(maxTextBlock);
+            maxStackPanel.Margin = new Thickness(10, 0, 10, 10);
             legendList.Items.Add(maxStackPanel);
 
             LegendStackPanel.Children.Add(legendList);
-            //return thematicItem;
         }
 
         public void SetLegendText(List<SolidColorBrush> colors, int classCount, List<double> rangeStarts, System.Windows.Controls.ListBox legendList)
@@ -583,7 +590,9 @@ namespace EpiDashboard.Mapping
                         Width = 20,
                         Height = 20,
                         Stroke = new SolidColorBrush(Colors.Black),
-                        Fill = colors[c]
+                        Fill = colors[c],
+                        Margin = new Thickness(0, 0, 5, 0),
+                        VerticalAlignment = VerticalAlignment.Top
                     };
 
                     TextBlock classTextBlock = new TextBlock();
@@ -621,12 +630,14 @@ namespace EpiDashboard.Mapping
                                     Math.Round(rangeStarts[c + 1], 2)) + " : " + ListLegendText.GetAt(c + 1);
                     }
 
-
+                    classTextBlock.MaxWidth = 256;
+                    classTextBlock.TextWrapping = TextWrapping.Wrap; 
 
                     StackPanel classStackPanel = new StackPanel();
                     classStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
                     classStackPanel.Children.Add(swatchRect);
                     classStackPanel.Children.Add(classTextBlock);
+                    classStackPanel.Margin = new Thickness(10, 0, 10, 5);
 
                     legendList.Items.Add(classStackPanel);
                     if (rangeStarts.Count <= c + 1)
