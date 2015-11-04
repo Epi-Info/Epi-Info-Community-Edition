@@ -781,8 +781,8 @@ namespace EpiDashboard.Mapping
                 else
                 {
                     iconTimeLapse.Visibility = Visibility.Collapsed;
-                }
             }
+        }
         }
 
         void layerConfigCompleteAnim_Completed(object sender, EventArgs e)
@@ -882,6 +882,10 @@ namespace EpiDashboard.Mapping
             else
             {
                 iconTimeLapse.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            if (layerList.ClusterLayers.Count == 0)
+            {
+                iconTimeLapse.Visibility = Visibility.Collapsed;
             }
         }
 
