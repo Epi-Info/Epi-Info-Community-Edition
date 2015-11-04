@@ -665,6 +665,33 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to YES WILL DELETE all data for the field and rename the column..
+        /// </summary>
+        public static string CHANGE_NAME_CONFIRM {
+            get {
+                return ResourceManager.GetString("CHANGE_NAME_CONFIRM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changing a field name will cause data to be lost..
+        /// </summary>
+        public static string CHANGE_NAME_CONSEQUENCE {
+            get {
+                return ResourceManager.GetString("CHANGE_NAME_CONSEQUENCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NO will continue without changing the name of the field..
+        /// </summary>
+        public static string CHANGE_NAME_DECLINE {
+            get {
+                return ResourceManager.GetString("CHANGE_NAME_DECLINE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language change will not take effect until after the application is restarted..
         /// </summary>
         public static string CHANGE_NOT_EFFECT_UNTIL_RESTART {
@@ -6763,6 +6790,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Opening page....
+        /// </summary>
+        public static string OPENING_PAGE {
+            get {
+                return ResourceManager.GetString("OPENING_PAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Opening project..
         /// </summary>
         public static string OPENING_PROJECT {
@@ -7474,6 +7510,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Right click  for more options..
+        /// </summary>
+        public static string RIGHT_CLICK_FOR_OPTIONS {
+            get {
+                return ResourceManager.GetString("RIGHT_CLICK_FOR_OPTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to row.
         /// </summary>
         public static string ROW_WORD {
@@ -7771,6 +7816,60 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click to set the index and then click the next tab..
+        /// </summary>
+        public static string TAB_CLICK_TO_SET_INDEX {
+            get {
+                return ResourceManager.GetString("TAB_CLICK_TO_SET_INDEX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable tab.
+        /// </summary>
+        public static string TAB_DISABLE {
+            get {
+                return ResourceManager.GetString("TAB_DISABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable tab.
+        /// </summary>
+        public static string TAB_ENABLE {
+            get {
+                return ResourceManager.GetString("TAB_ENABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting the following field and tab index:  Field: {0}; Tab {1}.
+        /// </summary>
+        public static string TAB_ORDER_SET_FIELD_TO_TAB {
+            get {
+                return ResourceManager.GetString("TAB_ORDER_SET_FIELD_TO_TAB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set as first tab.
+        /// </summary>
+        public static string TAB_SET_FIRST {
+            get {
+                return ResourceManager.GetString("TAB_SET_FIRST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start setting the tab order....
+        /// </summary>
+        public static string TAB_START_SETTING_ORDER {
+            get {
+                return ResourceManager.GetString("TAB_START_SETTING_ORDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to delete this table.
         /// </summary>
         public static string TABLE_DELETE_ASK {
@@ -7839,6 +7938,24 @@ namespace Epi {
         public static string TEMPLATE_CANNOT_READ_FILE {
             get {
                 return ResourceManager.GetString("TEMPLATE_CANNOT_READ_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fields will overlap.
+        /// </summary>
+        public static string TEMPLATE_FIELDS_OVERLAP {
+            get {
+                return ResourceManager.GetString("TEMPLATE_FIELDS_OVERLAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The fields will overlap. Do you really want to drop this template?.
+        /// </summary>
+        public static string TEMPLATE_FIELDS_OVERLAP_CONFIRM {
+            get {
+                return ResourceManager.GetString("TEMPLATE_FIELDS_OVERLAP_CONFIRM", resourceCulture);
             }
         }
         
