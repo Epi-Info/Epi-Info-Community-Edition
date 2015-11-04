@@ -25,6 +25,11 @@ namespace EpiDashboard.Mapping
         private DashboardHelper dashboardHelper;
         public event EventHandler LayerClosed;
 
+        public bool HasLayers
+        {
+            get { return grdPlaceholder.Children.Count > 0; } 
+        }
+        
         public LayerList(ESRI.ArcGIS.Client.Map myMap, Epi.View view, Epi.Data.IDbDriver db, DashboardHelper dashboardHelper)
         {
             InitializeComponent();
@@ -227,6 +232,5 @@ namespace EpiDashboard.Mapping
                 return layers;
             }
         }
-
     }
 }
