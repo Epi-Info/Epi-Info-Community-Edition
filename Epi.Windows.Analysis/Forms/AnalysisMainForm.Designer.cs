@@ -154,8 +154,7 @@ namespace Epi.Windows.Analysis.Forms
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
+            resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // toolStripContainer1
@@ -164,13 +163,9 @@ namespace Epi.Windows.Analysis.Forms
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.dockManager1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(892, 618);
-            this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
+            resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(892, 642);
-            this.toolStripContainer1.TabIndex = 7;
-            this.toolStripContainer1.Text = "toolStripContainer1";
             // 
             // toolStripContainer1.TopToolStripPanel
             // 
@@ -179,32 +174,24 @@ namespace Epi.Windows.Analysis.Forms
             // dockManager1
             // 
             this.dockManager1.BackColor = System.Drawing.Color.Transparent;
-            this.dockManager1.Dock = System.Windows.Forms.DockStyle.Fill;
+            resources.ApplyResources(this.dockManager1, "dockManager1");
             this.dockManager1.DockBorder = 20;
             this.dockManager1.DockType = Epi.Windows.Docking.DockContainerType.Document;
             this.dockManager1.FastDrawing = true;
-            this.dockManager1.Location = new System.Drawing.Point(0, 0);
             this.dockManager1.Name = "dockManager1";
-            this.dockManager1.Padding = new System.Windows.Forms.Padding(2, 23, 2, 2);
             this.dockManager1.ShowIcons = true;
-            this.dockManager1.Size = new System.Drawing.Size(892, 618);
             this.dockManager1.SplitterWidth = 4;
-            this.dockManager1.TabIndex = 0;
             this.dockManager1.VisualStyle = Epi.Windows.Docking.DockVisualStyle.VS2003;
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(892, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -212,15 +199,12 @@ namespace Epi.Windows.Analysis.Forms
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
+            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Enabled = false;
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(201, 22);
-            this.toolStripMenuItem1.Text = "Add Statistics Plug-ins…";
             // 
             // viewToolStripMenuItem
             // 
@@ -228,23 +212,20 @@ namespace Epi.Windows.Analysis.Forms
             this.statusBarToolStripMenuItem,
             this.epiInfoLogsToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "&View";
+            resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
             // 
             // statusBarToolStripMenuItem
             // 
             this.statusBarToolStripMenuItem.Checked = true;
             this.statusBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.statusBarToolStripMenuItem.Name = "statusBarToolStripMenuItem";
-            this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.statusBarToolStripMenuItem.Text = "&Status Bar";
+            resources.ApplyResources(this.statusBarToolStripMenuItem, "statusBarToolStripMenuItem");
             this.statusBarToolStripMenuItem.Click += new System.EventHandler(this.statusBarToolStripMenuItem_Click);
             // 
             // epiInfoLogsToolStripMenuItem
             // 
             this.epiInfoLogsToolStripMenuItem.Name = "epiInfoLogsToolStripMenuItem";
-            this.epiInfoLogsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.epiInfoLogsToolStripMenuItem.Text = "Epi Info &Logs…";
+            resources.ApplyResources(this.epiInfoLogsToolStripMenuItem, "epiInfoLogsToolStripMenuItem");
             this.epiInfoLogsToolStripMenuItem.Click += new System.EventHandler(this.epiInfoLogsToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
@@ -252,14 +233,12 @@ namespace Epi.Windows.Analysis.Forms
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.toolsToolStripMenuItem.Text = "&Tools";
+            resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.optionsToolStripMenuItem.Text = "&Options…";
+            resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -268,34 +247,27 @@ namespace Epi.Windows.Analysis.Forms
             this.contentsToolStripMenuItem,
             this.aboutEpiInfo7ToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "&Help";
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             // 
             // contentsToolStripMenuItem
             // 
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            this.contentsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.contentsToolStripMenuItem.Text = "&Contents";
+            resources.ApplyResources(this.contentsToolStripMenuItem, "contentsToolStripMenuItem");
             this.contentsToolStripMenuItem.Click += new System.EventHandler(this.contentsToolStripMenuItem_Click);
             // 
             // aboutEpiInfo7ToolStripMenuItem
             // 
             this.aboutEpiInfo7ToolStripMenuItem.Name = "aboutEpiInfo7ToolStripMenuItem";
-            this.aboutEpiInfo7ToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.aboutEpiInfo7ToolStripMenuItem.Text = "&About Epi Info 7";
+            resources.ApplyResources(this.aboutEpiInfo7ToolStripMenuItem, "aboutEpiInfo7ToolStripMenuItem");
             this.aboutEpiInfo7ToolStripMenuItem.Click += new System.EventHandler(this.aboutEpiInfo7ToolStripMenuItem_Click);
             // 
             // AnalysisMainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 666);
             this.Controls.Add(this.toolStripContainer1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "AnalysisMainForm";
-            this.Text = "Epi Info 7 - Analysis";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AnalysisMainForm_FormClosed);
             this.Load += new System.EventHandler(this.Form_Load);

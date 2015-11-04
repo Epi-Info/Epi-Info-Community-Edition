@@ -117,7 +117,7 @@ namespace Epi.Windows.Analysis.Forms
             TreeValueNode node = new TreeValueNode();
             SuspendLayout();
             node.Name = "commandNode";
-            node.Text = "Analysis Commands";
+            node.Text = SharedStrings.ANALYSIS_COMMANDS;
             resources.ApplyResources(node, "commandNode");
 
             int commandGroupId = 0;

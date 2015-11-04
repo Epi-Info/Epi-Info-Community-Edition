@@ -173,7 +173,7 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbGoBack.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbGoBack.Name = "tsbGoBack";
             this.tsbGoBack.Size = new System.Drawing.Size(68, 22);
-            this.tsbGoBack.Text = "Previous";
+            this.tsbGoBack.Text = SharedStrings.PREVIOUS;
             resources.ApplyResources(this.tsbGoBack, "tsbGoBack");
             this.tsbGoBack.Click += new System.EventHandler(this.tsbGoBack_Click);
             // 
@@ -184,7 +184,7 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbGoForward.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbGoForward.Name = "tsbGoForward";
             this.tsbGoForward.Size = new System.Drawing.Size(50, 22);
-            this.tsbGoForward.Text = "Next";
+            this.tsbGoForward.Text = SharedStrings.NEXT;
             resources.ApplyResources(this.tsbGoForward, "tsbGoForward");
             this.tsbGoForward.Click += new System.EventHandler(this.tsbGoForward_Click);
             // 
@@ -195,7 +195,7 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbGoToLast.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbGoToLast.Name = "tsbGoToLast";
             this.tsbGoToLast.Size = new System.Drawing.Size(47, 22);
-            this.tsbGoToLast.Text = "Last";
+            this.tsbGoToLast.Text = SharedStrings.LAST;
             resources.ApplyResources(this.tsbGoToLast, "tsbGoToLast");
             this.tsbGoToLast.Click += new System.EventHandler(this.tsbGoToLast_Click);
             // 
@@ -247,7 +247,7 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbPrint.Name = "tsbPrint";
             this.tsbPrint.Size = new System.Drawing.Size(49, 22);
-            this.tsbPrint.Text = "Print";
+            this.tsbPrint.Text = SharedStrings.PRINT;
             resources.ApplyResources(this.tsbPrint, "tsbPrint");
             this.tsbPrint.Click += new System.EventHandler(this.tsbPrint_Click);
             // 
@@ -264,7 +264,7 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbWindowState.ImageTransparentColor = System.Drawing.SystemColors.ButtonFace;
             this.tsbWindowState.Name = "tsbWindowState";
             this.tsbWindowState.Size = new System.Drawing.Size(70, 22);
-            this.tsbWindowState.Text = "Maximize";
+            this.tsbWindowState.Text = SharedStrings.MAXIMIZE;
             resources.ApplyResources(this.tsbWindowState, "tsbWindowState");
             this.tsbWindowState.Visible = false;
             this.tsbWindowState.Click += new System.EventHandler(this.tsbWindowState_Click);
