@@ -3071,6 +3071,12 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="DASHBOARD_GADGET_PROCESSING" xml:space="preserve">
     <value>processing</value>
   </data>
+  <data name="CASES" xml:space="preserve">
+    <value>Cases</value>
+  </data>
+  <data name="MAP_LEGEND" xml:space="preserve">
+    <value>Map Legend</value>
+  </data>
   <data name="ANALYSIS_COMMANDS" xml:space="preserve">
     <value>Analysis Commands</value>
   </data>

@@ -656,6 +656,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cases.
+        /// </summary>
+        public static string CASES {
+            get {
+                return ResourceManager.GetString("CASES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language change will not take effect until after the application is restarted..
         /// </summary>
         public static string CHANGE_NOT_EFFECT_UNTIL_RESTART {
@@ -6030,6 +6039,15 @@ namespace Epi {
         public static string MAP_ERROR_CRYPTOGRAPHY {
             get {
                 return ResourceManager.GetString("MAP_ERROR_CRYPTOGRAPHY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map Legend.
+        /// </summary>
+        public static string MAP_LEGEND {
+            get {
+                return ResourceManager.GetString("MAP_LEGEND", resourceCulture);
             }
         }
         

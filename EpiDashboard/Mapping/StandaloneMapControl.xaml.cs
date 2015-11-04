@@ -2408,6 +2408,7 @@ namespace EpiDashboard.Mapping
             else
             {
                 grdLegend.BeginAnimation(Grid.MarginProperty, new ThicknessAnimation(new Thickness(0, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
+
             }
         }
 
