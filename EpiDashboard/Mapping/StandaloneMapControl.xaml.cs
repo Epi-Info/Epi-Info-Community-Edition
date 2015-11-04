@@ -774,10 +774,13 @@ namespace EpiDashboard.Mapping
             if (MapLoaded != null)
             {
                 MapLoaded(this, layerList.ClusterLayers.Count > 0);
-               // iconTimeLapse.IsEnabled = layerList.ClusterLayers.Count == 1;
                 if (layerList.ClusterLayers.Count == 1)
                 {
                     iconTimeLapse.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    iconTimeLapse.Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -817,10 +820,14 @@ namespace EpiDashboard.Mapping
             if (MapLoaded != null)
             {
                 MapLoaded(this, layerList.ClusterLayers.Count > 0);
-               // iconTimeLapse.IsEnabled = layerList.ClusterLayers.Count == 1;
+
                 if (layerList.ClusterLayers.Count == 1)
                 {
                     iconTimeLapse.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    iconTimeLapse.Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -866,6 +873,15 @@ namespace EpiDashboard.Mapping
             else
             {
                 iconLegend.Visibility = System.Windows.Visibility.Collapsed;
+            }
+
+            if (layerList.ClusterLayers.Count == 1)
+            {
+                iconTimeLapse.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                iconTimeLapse.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
