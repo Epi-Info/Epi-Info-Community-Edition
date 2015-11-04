@@ -1893,7 +1893,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
         public void projectExplorer_PageSelected(Page page)
         {
-            canvas.HideUpdateStart("Opening page...");
+            canvas.HideUpdateStart(SharedStrings.OPENING_PAGE);
             selectedFieldControls.Clear();
             LoadPage(page);
             canvas.Text = page.GetView().Name + System.IO.Path.DirectorySeparatorChar + page.Name.Trim();
@@ -1907,7 +1907,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
         private void AutoSetTabOrder()
         {
-            canvas.HideUpdateStart("Start setting the tab order...");
+            canvas.HideUpdateStart(SharedStrings.TAB_START_SETTING_ORDER);
             
             if (selectedFieldControls.Count == 0)
             {
@@ -1923,7 +1923,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                     if ((kvp.Key is PairedLabel == false && kvp.Key.Field != null) || isLabelField )
                     {
                         _fieldBefore = CloneField(kvp.Key.Field);
-                        canvas.UpdateHidePanel(string.Format("Setting {0} to tab stop {1}.",((RenderableField)kvp.Key.Field).Name, runningTabIndex));
+                        canvas.UpdateHidePanel(string.Format(SharedStrings.TAB_ORDER_SET_FIELD_TO_TAB,((RenderableField)kvp.Key.Field).Name, runningTabIndex));
                         ((RenderableField)kvp.Key.Field).TabIndex = runningTabIndex++;
                         PersistFieldChange(kvp.Key.Field, BackupFieldAction.Change);
                         PanelFieldUpdate(kvp.Key.Field);
@@ -1967,7 +1967,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                         toolTip.AutoPopDelay = 30000;
                         toolTip.ShowAlways = true;
                         toolTip.UseFading = false;
-                        String tip = "Left click to set the index and then click the next tab.\r\nRight click to for more options.";
+                        String tip = SharedStrings.TAB_CLICK_TO_SET_INDEX + "\r\n" + SharedStrings.RIGHT_CLICK_FOR_OPTIONS;
                         toolTip.SetToolTip(tabSquare, tip);
                         tabSquare.Tag = control;
                         canvas.TabIndexIndicators.Add(tabSquare as Control);
@@ -2026,7 +2026,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                         toolTip.AutoPopDelay = 30000;
                         toolTip.ShowAlways = true;
                         toolTip.UseFading = false;
-                        String tip = "Left click to set the index and then click the next tab.\r\nRight click to for more options.";
+                        String tip = SharedStrings.TAB_CLICK_TO_SET_INDEX + "\r\n" + SharedStrings.RIGHT_CLICK_FOR_OPTIONS;
                         toolTip.SetToolTip(tabSquare, tip);
                         tabSquare.Tag = control;
                         if (isShowFieldName)
@@ -2080,12 +2080,12 @@ namespace Epi.Windows.MakeView.PresentationLogic
                 RenderableField field = (RenderableField)((IFieldControl)((Control)sender).Tag).Field;
                 ContextMenu rightMouseClickMenu = new ContextMenu();
 
-                MenuItem setAsFirstTab = new MenuItem("Set as First Tab");
+                MenuItem setAsFirstTab = new MenuItem(SharedStrings.TAB_SET_FIRST);
                 setAsFirstTab.Click += new EventHandler(setAsFirstTab_Click);
                 setAsFirstTab.Tag = sender;
                 rightMouseClickMenu.MenuItems.Add(setAsFirstTab);
 
-                string enabledisableText = field.HasTabStop ? "Disable Tab" : "Enable Tab";
+                string enabledisableText = field.HasTabStop ? SharedStrings.TAB_DISABLE : SharedStrings.TAB_ENABLE;
 
                 MenuItem enableDisableTab = new MenuItem(enabledisableText);
                 enableDisableTab.Click += new EventHandler(enableDisableTab_Click);
@@ -2195,8 +2195,8 @@ namespace Epi.Windows.MakeView.PresentationLogic
                             {
                                 if (control.Bounds.IntersectsWith(canvas.SelectedFieldsFootprint.Bounds))
                                 {
-                                    DialogResult answer = MessageBox.Show("The fields will overlap. Do you really want to drop this template?",
-                                        "Fields will overlap",
+                                    DialogResult answer = MessageBox.Show(SharedStrings.TEMPLATE_FIELDS_OVERLAP_CONFIRM,
+                                        SharedStrings.TEMPLATE_FIELDS_OVERLAP,
                                         MessageBoxButtons.YesNoCancel);
 
                                     if (answer != DialogResult.Yes) { cancelTemplateDrop = true; }
@@ -2531,11 +2531,12 @@ namespace Epi.Windows.MakeView.PresentationLogic
                         {
                             DialogResult response = MessageBox.Show
                             (
-                                "================ WARNING: ================\n\r" +
+                                "================ " + SharedStrings.IMPORT_PREFIX_WARNING + " ================\n\r" +
+                                "\n\r" + SharedStrings.CHANGE_NAME_CONSEQUENCE +
+                                SharedStrings.CHANGE_NAME_CONFIRM +
                                 "\n\r" +
-                                "YES WILL DELETE all data for the field and rename the column.\n\r" +
-                                "NO will continue without changing the name of the field.",
-                                "WARNING",
+                                SharedStrings.CHANGE_NAME_DECLINE,
+                                SharedStrings.IMPORT_PREFIX_WARNING,
                                 MessageBoxButtons.YesNo
                             );
 

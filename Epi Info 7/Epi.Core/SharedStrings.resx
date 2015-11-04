@@ -3092,4 +3092,43 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="PREVIOUS" xml:space="preserve">
     <value>Previous</value>
   </data>
+  <data name="CHANGE_NAME_CONFIRM" xml:space="preserve">
+    <value>YES WILL DELETE all data for the field and rename the column.</value>
+  </data>
+  <data name="CHANGE_NAME_CONSEQUENCE" xml:space="preserve">
+    <value>Changing a field name will cause data to be lost.</value>
+  </data>
+  <data name="CHANGE_NAME_DECLINE" xml:space="preserve">
+    <value>NO will continue without changing the name of the field.</value>
+  </data>
+  <data name="OPENING_PAGE" xml:space="preserve">
+    <value>Opening page...</value>
+  </data>
+  <data name="RIGHT_CLICK_FOR_OPTIONS" xml:space="preserve">
+    <value>Right click  for more options.</value>
+  </data>
+  <data name="TAB_CLICK_TO_SET_INDEX" xml:space="preserve">
+    <value>Click to set the index and then click the next tab.</value>
+  </data>
+  <data name="TAB_DISABLE" xml:space="preserve">
+    <value>Disable tab</value>
+  </data>
+  <data name="TAB_ENABLE" xml:space="preserve">
+    <value>Enable tab</value>
+  </data>
+  <data name="TAB_ORDER_SET_FIELD_TO_TAB" xml:space="preserve">
+    <value>Setting the following field and tab index:  Field: {0}; Tab {1}</value>
+  </data>
+  <data name="TAB_SET_FIRST" xml:space="preserve">
+    <value>Set as first tab</value>
+  </data>
+  <data name="TAB_START_SETTING_ORDER" xml:space="preserve">
+    <value>Start setting the tab order...</value>
+  </data>
+  <data name="TEMPLATE_FIELDS_OVERLAP" xml:space="preserve">
+    <value>Fields will overlap</value>
+  </data>
+  <data name="TEMPLATE_FIELDS_OVERLAP_CONFIRM" xml:space="preserve">
+    <value>The fields will overlap. Do you really want to drop this template?</value>
+  </data>
 </root>
