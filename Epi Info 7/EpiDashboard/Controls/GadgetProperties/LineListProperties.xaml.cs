@@ -23,9 +23,9 @@ namespace EpiDashboard.Controls.GadgetProperties
     {
         private const int MAX_ROW_LIMIT = 2000;
         public LineListProperties(
-            DashboardHelper dashboardHelper, 
-            IGadget gadget, 
-            LineListParameters parameters, 
+            DashboardHelper dashboardHelper,
+            IGadget gadget,
+            LineListParameters parameters,
             List<Grid> strataGridList,
             List<string> columnOrder
             )
@@ -139,22 +139,23 @@ namespace EpiDashboard.Controls.GadgetProperties
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
-
+            tblockMaxVarNameLength.Content = SharedStrings.DASHBOARD_MAX_LENGTH;
+            tblockMaxRows.Content = SharedStrings.DASHBOARD_OPTION_MAX_ROWS;
             #endregion // Translation
-           
+
 
         }
 
-        
+
 
         public bool HasSelectedFields
         {
             get
             {
-                
+
                 if (lvVariables.SelectedItems.Count > 0)
                 {
-                   
+
                     return true;
                 }
                 return false;
@@ -230,9 +231,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 //if (dashboardHelper.IsUsingEpiProject && checkboxAllowUpdates.IsChecked == true)
                 //{
-                    if (listFields.Contains("UniqueKey"))
-                        listFields.Remove("UniqueKey");
-                    listFields.Add("UniqueKey");
+                if (listFields.Contains("UniqueKey"))
+                    listFields.Remove("UniqueKey");
+                listFields.Add("UniqueKey");
                 //}
             }
 
@@ -307,7 +308,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 }
             }
 
-            if (StrataGridList.Count >= 1) 
+            if (StrataGridList.Count >= 1)
             {
                 Grid grid = StrataGridList[0];
                 SortedDictionary<int, string> sortColumnDictionary = new SortedDictionary<int, string>();
@@ -359,7 +360,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                     ColumnOrder = new List<string>();
                 }
             }
-            
+
             Parameters.InputVariableList = inputVariableList;
         }
 
@@ -389,18 +390,18 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 txtMaxWidth.Text = Parameters.Width.ToString();
             }
-            if (!String.IsNullOrEmpty(Parameters.MaxColumnLength.ToString()) & Parameters.MaxColumnLength!=0)
+            if (!String.IsNullOrEmpty(Parameters.MaxColumnLength.ToString()) & Parameters.MaxColumnLength != 0)
             {
                 txtMaxVarNameLength.Text = Parameters.MaxColumnLength.ToString();
             }
-            if (!String.IsNullOrEmpty(Parameters.MaxRows.ToString()) & Parameters.MaxRows!=0)
+            if (!String.IsNullOrEmpty(Parameters.MaxRows.ToString()) & Parameters.MaxRows != 0)
             {
                 txtMaxRows.Text = Parameters.MaxRows.ToString();
             }
 
             //lbxAvailableVariables.Height = lbxAvailableVariables.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 868.0);
             //lbxSortOrder.Height = lbxSortOrder.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 868.0);
-            
+
             checkboxTabOrder.IsChecked = Parameters.SortColumnsByTabOrder;
             checkboxUsePrompts.IsChecked = Parameters.UsePromptsForColumnNames;
             checkboxColumnHeaders.IsChecked = Parameters.ShowColumnHeadings;
@@ -518,7 +519,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 }
             }
         }
-               
+
         private void txtMaxVarNameLength_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !Util.IsWholeNumber(e.Text);

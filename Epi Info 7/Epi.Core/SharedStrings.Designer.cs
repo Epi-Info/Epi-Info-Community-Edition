@@ -3060,6 +3060,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max variable name length:.
+        /// </summary>
+        public static string DASHBOARD_MAX_LENGTH {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MAX_LENGTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 25%.
         /// </summary>
         public static string DASHBOARD_MEANS_25 {
