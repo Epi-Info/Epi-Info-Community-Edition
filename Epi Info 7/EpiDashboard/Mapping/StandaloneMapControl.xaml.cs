@@ -859,7 +859,7 @@ namespace EpiDashboard.Mapping
                 layerList.BeginAnimation(Canvas.BottomProperty, anim);
             }
 
-            if(layerList.ClusterLayers.Count > 0)
+            if(layerList.HasLayers)
             {
                 iconLegend.Visibility = System.Windows.Visibility.Visible;
             }
