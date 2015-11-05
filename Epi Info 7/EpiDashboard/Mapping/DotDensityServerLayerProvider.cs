@@ -38,7 +38,7 @@ namespace EpiDashboard.Mapping
         private string shapeKey;
         private string dataKey;
         private string valueField;
-        private Guid layerId;
+        public Guid layerId;
         private Color dotColor;
         private int dotValue;
         private string url;

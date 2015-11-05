@@ -58,7 +58,7 @@ namespace EpiDashboard.Mapping
         string _dataKey;
         string _valueField;
         string _missingText;
-        Guid _layerId;
+       public Guid _layerId;
         List<SolidColorBrush> _colors;
         int _classCount;
         string[,] _rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };

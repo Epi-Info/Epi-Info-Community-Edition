@@ -18,6 +18,7 @@ using EpiDashboard.Mapping;
 using System.Windows.Forms;
 using System.Net;
 using Control = System.Windows.Controls.Control;
+using ESRI.ArcGIS.Client.Geometry;
 
 // ReSharper disable All
 
@@ -67,6 +68,8 @@ namespace EpiDashboard.Controls
 
         public IDictionary<string, object> shapeAttributes;
         private Dictionary<int, object> ClassAttribList = new Dictionary<int, object>();
+        public Envelope mapOriginalExtent;
+        public List<string> layerAddednew = new List<string>();
 
         string _shapeKey;
         string _dataKey;
@@ -101,6 +104,7 @@ namespace EpiDashboard.Controls
             _currentColor_rampStart = (SolidColorBrush)rctLowColor.Fill;
             _currentColor_rampEnd = (SolidColorBrush)rctHighColor.Fill;
             _initialRampCalc = true;
+            mapOriginalExtent = myMap.Extent;
 
             #region Translation
 
@@ -564,6 +568,13 @@ namespace EpiDashboard.Controls
             {
                 Cancelled(this, new EventArgs());
             }
+            foreach (string id in layerAddednew)
+            {
+                ESRI.ArcGIS.Client.GraphicsLayer graphicsLayer = _myMap.Layers[id] as ESRI.ArcGIS.Client.GraphicsLayer;
+                if (graphicsLayer != null)
+                    _myMap.Layers.Remove(graphicsLayer);
+            }
+            _myMap.Extent = mapOriginalExtent;
         }
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
@@ -676,6 +687,7 @@ namespace EpiDashboard.Controls
             object[] shapeFileProperties = _provider.LoadShapeFile();
             if (shapeFileProperties != null)
             {
+                layerAddednew.Add(_provider._layerId.ToString());
                 if (layerprop == null)
                 {
                     ILayerProperties layerProperties = null;
@@ -1948,6 +1960,7 @@ namespace EpiDashboard.Controls
             object[] kmlFileProperties = choroKMLprovider.LoadKml(KMLMapServerName);
             if (kmlFileProperties != null)
             {
+                layerAddednew.Add(choroKMLprovider._layerId.ToString());
                 if (chorokmllayerprop == null)
                 {
                     ILayerProperties layerProperties = null;
@@ -2362,6 +2375,7 @@ namespace EpiDashboard.Controls
                 object[] mapFileProperties = choroMapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
                 if (mapFileProperties != null)
                 {
+                    layerAddednew.Add(choroMapprovider.layerId.ToString());
                     if (this.choroserverlayerprop == null)
                     {
                         ILayerProperties layerProperties = null;
@@ -2465,6 +2479,7 @@ namespace EpiDashboard.Controls
                     object[] mapFileProperties = choroMapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
                     if (mapFileProperties != null)
                     {
+                        layerAddednew.Add(choroMapprovider.layerId.ToString());
                         if (choroserverlayerprop == null)
                         {
                             ILayerProperties layerProperties = null;
