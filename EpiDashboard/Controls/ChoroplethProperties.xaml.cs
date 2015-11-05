@@ -648,7 +648,20 @@ namespace EpiDashboard.Controls
             }
             cmbValue.Items.Insert(0, "{Record Count}");
         }
-
+        public void ReFillValueComboBoxes()
+        {
+           
+            cmbValue.Items.Clear();
+            ColumnDataType columnDataType = ColumnDataType.Numeric;
+            List<string> numericFields = _dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
+         
+            foreach (string field in numericFields)
+            {
+                if (!(field.ToUpper() == "RECSTATUS" || field.ToUpper() == "UNIQUEKEY"))
+                { cmbValue.Items.Add(field); }
+            }
+            cmbValue.Items.Insert(0, "{Record Count}");
+        }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             if (Cancelled != null)
@@ -1731,21 +1744,37 @@ namespace EpiDashboard.Controls
         public void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbShapeKey.SelectedItem != null)
-            { _shapeKey = cmbShapeKey.SelectedItem.ToString(); }
+            { _shapeKey = cmbShapeKey.SelectedItem.ToString();
+            cmbDataKey.IsEnabled = true;
+            }
             else
             { _shapeKey = ""; }
         }
 
         private void cmbDataKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ReFillValueComboBoxes();
             if (cmbDataKey.SelectedItem != null)
-            { _dataKey = cmbDataKey.SelectedItem.ToString(); }
+            { _dataKey = cmbDataKey.SelectedItem.ToString();
+            cmbValue.IsEnabled = true;
+            }
+
+            if (cmbValue.Items.Contains(_dataKey))
+            {
+                cmbValue.Items.Remove(_dataKey);
+            }
         }
 
         private void cmbValue_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+          
             if (cmbValue.SelectedItem != null)
-            { _value = cmbValue.SelectedItem.ToString(); }
+            { 
+                    _value = cmbValue.SelectedItem.ToString();
+                
+            }
+
+
         }
 
         private void SetRangeUISection()

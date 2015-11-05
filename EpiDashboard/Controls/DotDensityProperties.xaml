@@ -183,11 +183,11 @@
             <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
             <Label x:Name="tblockSelectVarData" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Select variables for map.</Label>
             <Label x:Name="lblFeature">Feature Key:</Label>
-            <ComboBox x:Name="cmbShapeKey" HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" SelectionChanged="cmbFormName_SelectionChanged" Width="300"></ComboBox>
+            <ComboBox x:Name="cmbShapeKey" HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}"  SelectionChanged="cmbShapeKey_SelectionChanged" Width="300"></ComboBox>
             <Label x:Name="lblData">Data Key:</Label>
-            <ComboBox x:Name="cmbDataKey" HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" SelectionChanged="cmbFormName_SelectionChanged" Height="25" Width="300"></ComboBox>
+            <ComboBox x:Name="cmbDataKey" HorizontalAlignment="Left" IsEnabled="false" Style="{StaticResource PropertiesComboxStyleLarge}" SelectionChanged="cmbDataKey_SelectionChanged" Height="25" Width="300"></ComboBox>
             <Label x:Name="lblValue">Value:</Label>
-            <ComboBox x:Name="cmbValue" HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" SelectionChanged="cmbFormName_SelectionChanged" Height="25" Width="300"></ComboBox>
+            <ComboBox x:Name="cmbValue" HorizontalAlignment="Left" IsEnabled="false" Style="{StaticResource PropertiesComboxStyleLarge}"   Height="25" Width="300"></ComboBox>
 
         </StackPanel>
 

@@ -90,12 +90,12 @@
                     <Label x:Name="tblockSelectVarData" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Select the variables for data layer</Label>
                     <StackPanel>
                         <Label Name="lblLatitude">Latitude Field:</Label>
-                        <ComboBox Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" x:Name="cmbLatitude" Width="300" Height="25" />
+                        <ComboBox Style="{StaticResource PropertiesComboxStyleMed}" SelectionChanged="cmbLatitude_SelectionChanged" HorizontalAlignment="Left" x:Name="cmbLatitude" Width="300" Height="25" />
                     </StackPanel>
                     <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
                     <StackPanel>
                         <Label Name="lblLongitude">Longitude Field:</Label>
-                        <ComboBox Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" x:Name="cmbLongitude" Width="300" ></ComboBox>
+                        <ComboBox Style="{StaticResource PropertiesComboxStyleMed}" IsEnabled="False" HorizontalAlignment="Left" x:Name="cmbLongitude" Width="300" ></ComboBox>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>

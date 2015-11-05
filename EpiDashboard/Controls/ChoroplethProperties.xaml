@@ -205,11 +205,11 @@
                         </StackPanel>
                         <StackPanel>
                             <Label x:Name="lblData">Data Key:</Label>
-                            <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbDataKey" SelectionChanged="cmbDataKey_SelectionChanged" Height="25" Width="300"></ComboBox>
+                            <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" IsEnabled="False"  x:Name="cmbDataKey" SelectionChanged="cmbDataKey_SelectionChanged" Height="25" Width="300"></ComboBox>
                         </StackPanel>
                         <StackPanel>
                             <Label x:Name="lblValue">Value Field:</Label>
-                            <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbValue" SelectionChanged="cmbValue_SelectionChanged" Height="25" Width="300"></ComboBox>
+                            <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" IsEnabled="False" x:Name="cmbValue" SelectionChanged="cmbValue_SelectionChanged" Height="25" Width="300"></ComboBox>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
