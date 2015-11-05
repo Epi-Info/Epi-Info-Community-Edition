@@ -39,7 +39,7 @@ namespace EpiDashboard.Mapping
         private string shapeKey;
         private string dataKey;
         private string valueField;
-        private Guid layerId;
+        public Guid layerId;
         private Color lowColor;
         private Color highColor;
         private List<SolidColorBrush> colors;

@@ -71,7 +71,7 @@ namespace EpiDashboard.Mapping
         private CaseClusterProperties caseclusterproperties;
         private DotDensityProperties dotdensityproperties;
         private ChoroplethProperties choroplethproperties;
-
+       
         public double ResizedWidth { get; set; }
         public double ResizedHeight { get; set; }
 
@@ -1501,8 +1501,8 @@ namespace EpiDashboard.Mapping
 
         public void GenerateShapeFileChoropleth()
         {
-            ILayerProperties layerProperties = null;
-                       
+            ILayerProperties layerProperties = null; 
+              
             //old config
             DashboardHelper dashboardHelper = new DashboardHelper();
             layerProperties = new ChoroplethLayerProperties(myMap, dashboardHelper, this);
@@ -1971,8 +1971,8 @@ namespace EpiDashboard.Mapping
             //ILayerProperties layerProperties = null;
             DashboardHelper dashboardHelper = new DashboardHelper();
             popup = new DashboardPopup();
-            popup.Parent = LayoutRoot;
-           
+            popup.Parent = LayoutRoot; 
+
             /*
             layerProperties = new DotDensityLayerProperties(myMap, dashboardHelper, this);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
@@ -2090,7 +2090,11 @@ namespace EpiDashboard.Mapping
 
             dotdensityproperties.Cancelled += new EventHandler(properties_Cancelled);
             dotdensityproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
-            
+
+            dotdensityproperties.panelmap.IsEnabled = false;
+            dotdensityproperties.panelKml.IsEnabled = false;
+            dotdensityproperties.radMapServer.IsEnabled = false;
+            dotdensityproperties.radKML.IsEnabled = false;
             popup.Content = dotdensityproperties;
             popup.Show();
         }
@@ -2212,6 +2216,10 @@ namespace EpiDashboard.Mapping
             dotdensityproperties.Cancelled += new EventHandler(properties_Cancelled);
             dotdensityproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
 
+            dotdensityproperties.panelshape.IsEnabled = false;
+            dotdensityproperties.panelKml.IsEnabled = false;
+            dotdensityproperties.radShapeFile.IsEnabled = false;
+            dotdensityproperties.radKML.IsEnabled = false;
             popup.Content = dotdensityproperties;
             popup.Show();
            
@@ -2284,6 +2292,10 @@ namespace EpiDashboard.Mapping
             dotdensityproperties.Cancelled += new EventHandler(properties_Cancelled);
             dotdensityproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
 
+            dotdensityproperties.panelmap.IsEnabled = false;
+            dotdensityproperties.panelshape.IsEnabled = false;
+            dotdensityproperties.radMapServer.IsEnabled = false;
+            dotdensityproperties.radShapeFile.IsEnabled = false;
             popup.Content = dotdensityproperties;
             popup.Show();
 
