@@ -152,15 +152,14 @@ namespace EpiDashboard.Controls
             lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_TAB_COLORS_RANGES;
             tblockColorsSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
             lblMissingExcluded.Content = DashboardSharedStrings.GADGET_MAP_COLOR_MISSING;
-            lblColorRamp.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
+            //lblColorRamp.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
             lblColorStart.Content = DashboardSharedStrings.GADGET_MAP_START;
             lblColorEnd.Content = DashboardSharedStrings.GADGET_MAP_END;
             tblockOpacity.Text = DashboardSharedStrings.GADGET_MAP_OPACITY;
-            btnResetLegend.Content = DashboardSharedStrings.BUTTON_RESET_LEGEND;
             tblockRangesSubheader.Content = DashboardSharedStrings.GADGET_MAP_RANGES;
             lblClassBreaks.Content = DashboardSharedStrings.GADGET_MAP_CLASS_BREAKS;
             quintilesOption.Content = DashboardSharedStrings.GADGET_MAP_QUANTILES;
-            lblLegTitle.Text = DashboardSharedStrings.GADGET_MAP_LEGEND_TITLE;
+            tblockLegendTitleSubheader.Content = DashboardSharedStrings.GADGET_MAP_LEGEND_TITLE;
             tblockColorRamp.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLOR;
             tblockRange.Text = DashboardSharedStrings.GADGET_MAP_RANGE;
             tblockLegText.Text = DashboardSharedStrings.GADGET_MAP_LEGEND_TEXT;
@@ -1000,9 +999,7 @@ namespace EpiDashboard.Controls
                 //    //  legendText10.Text = itemvalue.legendText;
                 //}
             }
-
         }
-
 
         public void SetDashboardHelper(DashboardHelper dash)
         {
@@ -1038,6 +1035,7 @@ namespace EpiDashboard.Controls
                 return responseValue;
             }
         }
+
         public void RenderMap()
         {
             if (cmbDataKey.SelectedIndex != -1 && cmbShapeKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
@@ -1062,15 +1060,11 @@ namespace EpiDashboard.Controls
                     (SolidColorBrush)rctColor10.Fill,  
                     (SolidColorBrush)rctColor0.Fill};
 
-             
-
                 int classCount;
                 if (!int.TryParse(cmbClasses.Text, out classCount))
                 {
                     classCount = 4;
                 }
-
-
 
                 if (radShapeFile.IsChecked == true && _provider != null)
                 {
@@ -1201,7 +1195,6 @@ namespace EpiDashboard.Controls
                 //   ListLegendText.Add(legendText2.Name, legendText2.Text);
             }
 
-
             if (RangeCount >= 3)
             {
                 double.TryParse(rampStart03.Text, out value);
@@ -1252,8 +1245,8 @@ namespace EpiDashboard.Controls
             }
 
             return Range;
-
         }
+        
         public StackPanel LegendStackPanel
         {
             get
@@ -1261,6 +1254,7 @@ namespace EpiDashboard.Controls
                 return _provider.LegendStackPanel;
             }
         }
+        
         private void rctColor0_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
@@ -1270,6 +1264,7 @@ namespace EpiDashboard.Controls
                 _provider.CustomColorsDictionary.Add(rctColor0.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
+
         private void rctColor1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
@@ -1280,17 +1275,13 @@ namespace EpiDashboard.Controls
             }
         }
 
-
         private void rctColor2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor2.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-
-                _provider.CustomColorsDictionary.Add(rctColor2.Name,
-                    Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-
+                _provider.CustomColorsDictionary.Add(rctColor2.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -1380,9 +1371,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctMissingColor.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-
                 _provider.CustomColorsDictionary.Add(rctMissingColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-
             }
         }
 
@@ -1394,6 +1383,8 @@ namespace EpiDashboard.Controls
                 rctLowColor.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
                 _provider.CustomColorsDictionary.Add(rctLowColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
+
+            Reset_Legend();
         }
 
         private void rctHighColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -1404,17 +1395,28 @@ namespace EpiDashboard.Controls
                 rctHighColor.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
                 _provider.CustomColorsDictionary.Add(rctHighColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
+            
+            Reset_Legend();
         }
 
-        private void ResetLegend_Click(object sender, RoutedEventArgs e)
+        private void ClassCount_Changed(object sender, SelectionChangedEventArgs e)
         {
+            Reset_Legend();
+        }
+
+        private void Reset_Legend()
+        {
+            if (((ComboBoxItem)cmbClasses.SelectedItem).Content == null || _provider == null)
+            {
+                return;
+            }
+            
             if (rctLowColor == null || rctHighColor == null)
             {
                 return;
             }
 
             int stratCount;
-
 
 
             if (int.TryParse(cmbClasses.Text, out stratCount) == false)
@@ -1465,16 +1467,15 @@ namespace EpiDashboard.Controls
             if (string.IsNullOrEmpty(legTitle.Text))
             {
                 if (_provider.LegendText != null)
+                {
                     legTitle.Text = _provider.LegendText;
+                }
                 else if (_value != null)
+                {
                     legTitle.Text = _value;
-
+                }
             }
-
-
         }
-
-
 
         public void SetVisibility(int stratCount, SolidColorBrush rampStart, SolidColorBrush rampEnd)
         {

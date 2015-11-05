@@ -416,68 +416,92 @@ namespace EpiDashboard.Mapping
                 {
                     foreach (System.Xml.XmlElement classTitle in child)
                     {
-                        // get control named like classTitles.Name    
-
                         provider.ListLegendText.Add(classTitle.Name, classTitle.InnerText);
-
                     }
                 }
 
                 if (child.Name.Equals("customColors"))
                 {
-
                     provider.UseCustomColors = true;
 
                     foreach (System.Xml.XmlElement color in child)
                     {
-
                         string rgb = color.InnerText;
                         string[] co = rgb.Split(',');
                         Color newColor = Color.FromRgb(byte.Parse(co[0]), byte.Parse(co[1]), byte.Parse(co[2]));
                         provider.CustomColorsDictionary.Add(color.Name, newColor);
-
-
                     }
-
                 }
 
                 if (child.Name.Equals("classRanges"))
                 {
-                    //  entries from the UI  
                     foreach (System.Xml.XmlElement classRangElement in child)
                     {
                         provider.ClassRangesDictionary.Add(classRangElement.Name, classRangElement.InnerText);
-
                     }
-                    // list of douhles for "rangeStarts" list    
+
                     List<double> rangeStartsFromMapFile = new List<double>();
+
+                    string doubleString = "";
 
                     try
                     {
-                        rangeStartsFromMapFile.Add(Convert.ToDouble(provider.ClassRangesDictionary.Dict["rampStart01"]));
-                        rangeStartsFromMapFile.Add(Convert.ToDouble(provider.ClassRangesDictionary.Dict["rampStart02"]));
-                        rangeStartsFromMapFile.Add(Convert.ToDouble(provider.ClassRangesDictionary.Dict["rampStart03"]));
-                        rangeStartsFromMapFile.Add(Convert.ToDouble(provider.ClassRangesDictionary.Dict["rampStart04"]));
-                        rangeStartsFromMapFile.Add(Convert.ToDouble(provider.ClassRangesDictionary.Dict["rampStart05"]));
-                        rangeStartsFromMapFile.Add(Convert.ToDouble(provider.ClassRangesDictionary.Dict["rampStart06"]));
-                        rangeStartsFromMapFile.Add(Convert.ToDouble(provider.ClassRangesDictionary.Dict["rampStart07"]));
-                        rangeStartsFromMapFile.Add(Convert.ToDouble(provider.ClassRangesDictionary.Dict["rampStart08"]));
-                        rangeStartsFromMapFile.Add(Convert.ToDouble(provider.ClassRangesDictionary.Dict["rampStart09"]));
-                        rangeStartsFromMapFile.Add(Convert.ToDouble(provider.ClassRangesDictionary.Dict["rampStart10"]));
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart01"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart02"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart03"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart04"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart05"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart06"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart07"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart08"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart09"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart10"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
                     }
-                    catch (Exception e) { }
-
+                    catch { }
 
                     provider.RangeStartsFromMapFile = rangeStartsFromMapFile;
                     provider.RangesLoadedFromMapFile = true;
-
-
                 }
-
-
-
-
-
 
                 if (child.Name.Equals("shapeFile"))
                 {

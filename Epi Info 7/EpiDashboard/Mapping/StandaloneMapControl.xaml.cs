@@ -1747,7 +1747,10 @@ namespace EpiDashboard.Mapping
               }
             
             if (choroplethServerlayerprop.classAttribList != null)
-            { choroplethproperties.SetClassAttributes(choroplethServerlayerprop.classAttribList); }
+            { 
+                choroplethproperties.SetClassAttributes(choroplethServerlayerprop.classAttribList); 
+            }
+            
             choroplethproperties.FillComboBoxes();
 
             choroplethproperties.cmbShapeKey.SelectedItem = choroplethServerlayerprop.cbxShapeKey.Text;
@@ -1772,13 +1775,9 @@ namespace EpiDashboard.Mapping
             choroplethproperties.Cancelled += new EventHandler(properties_Cancelled);
             choroplethproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
             choroplethproperties.cmbShapeKey.SelectionChanged += new SelectionChangedEventHandler(choroplethproperties.cmbShapeKey_SelectionChanged);
-          
-                    
             
             popup.Content = choroplethproperties;
             popup.Show();
-          
-            
         }
 
         public void GenerateShapeFileChoropleth(ChoroplethKmlLayerProperties choroplethKMLlayerprop)
