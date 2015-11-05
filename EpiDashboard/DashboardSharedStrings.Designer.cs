@@ -2976,7 +2976,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Class Breaks:.
+        ///   Looks up a localized string similar to Class Breaks.
         /// </summary>
         public static string GADGET_MAP_CLASS_BREAKS {
             get {
@@ -3012,7 +3012,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to End:.
+        ///   Looks up a localized string similar to End Color.
         /// </summary>
         public static string GADGET_MAP_END {
             get {
@@ -3129,7 +3129,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set opacity:.
+        ///   Looks up a localized string similar to Opacity.
         /// </summary>
         public static string GADGET_MAP_OPACITY {
             get {
@@ -3192,7 +3192,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start:.
+        ///   Looks up a localized string similar to Start Color.
         /// </summary>
         public static string GADGET_MAP_START {
             get {

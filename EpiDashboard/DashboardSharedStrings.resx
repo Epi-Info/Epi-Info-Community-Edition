@@ -1688,7 +1688,7 @@ of records or select fewer fields for the group.</value>
     <value>Map Server</value>
   </data>
   <data name="GADGET_MAP_CLASS_BREAKS" xml:space="preserve">
-    <value>Class Breaks:</value>
+    <value>Class Breaks</value>
   </data>
   <data name="GADGET_MAP_COLOR_MISSING" xml:space="preserve">
     <value>Missing or Excluded Color</value>
@@ -1700,7 +1700,7 @@ of records or select fewer fields for the group.</value>
     <value>Dot Value:</value>
   </data>
   <data name="GADGET_MAP_END" xml:space="preserve">
-    <value>End:</value>
+    <value>End Color</value>
   </data>
   <data name="GADGET_MAP_FEATURE" xml:space="preserve">
     <value>Feature Key:</value>
@@ -1712,7 +1712,7 @@ of records or select fewer fields for the group.</value>
     <value>Legend Title</value>
   </data>
   <data name="GADGET_MAP_OPACITY" xml:space="preserve">
-    <value>Set opacity:</value>
+    <value>Opacity</value>
   </data>
   <data name="GADGET_MAP_QUANTILES" xml:space="preserve">
     <value>Quantiles</value>
@@ -1727,7 +1727,7 @@ of records or select fewer fields for the group.</value>
     <value>Note: First select a data source to add a filter to this layer.</value>
   </data>
   <data name="GADGET_MAP_START" xml:space="preserve">
-    <value>Start:</value>
+    <value>Start Color</value>
   </data>
   <data name="GADGET_MAP_VALUE" xml:space="preserve">
     <value>Value Field:</value>

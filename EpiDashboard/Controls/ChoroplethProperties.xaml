@@ -238,103 +238,78 @@
             <ScrollViewer DockPanel.Dock="Bottom">
                 <StackPanel Margin="0 0 0 5">
 
-                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Colors</Label>
+                    <Label x:Name="tblockLegendTitleSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Legend Title</Label>
 
-                    <StackPanel Orientation="Vertical" Margin="0 10 0 0">
-                        <StackPanel Orientation="Horizontal" Margin="0 0 0 0" >
-                            <!--<CheckBox x:Name="useGradient" IsChecked="True" Click="CheckBox_Click">Use gradient</CheckBox>-->
-                            <Label x:Name="lblMissingExcluded">Missing or Excluded Color:</Label>
-                            <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
-                            <Rectangle x:Name="rctMissingColor" MouseLeftButtonUp="rctMissingColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" Margin="0,0,11,0">
-                                <Rectangle.ToolTip>
-                                    <Label Content="Missing value color"/>
-                                </Rectangle.ToolTip>
-                            </Rectangle>
-                        </StackPanel>
-                        <Label x:Name="lblColorRamp">Colors</Label>
-                        <StackPanel Orientation="Horizontal" Margin="8,0,0,2" >
-                            <Label x:Name="lblColorStart">Start</Label>
-                            <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
-
-                            <Rectangle x:Name="rctLowColor" MouseLeftButtonUp="rctLowColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,11,0">
-                                <Rectangle.ToolTip>
-                                    <Label Content="Low value color"/>
-                                </Rectangle.ToolTip>
-                            </Rectangle>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="8,0,0,2" >
-                            <Label x:Name="lblColorEnd" Margin="0,0,7,0">End</Label>
-                            <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
-                            <Rectangle x:Name="rctHighColor" MouseLeftButtonUp="rctHighColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
-                                <Rectangle.ToolTip>
-                                    <Label Content="High value color"/>
-                                </Rectangle.ToolTip>
-                            </Rectangle>
-                        </StackPanel>
+                    <StackPanel Margin="0 10 0 10">
+                        <TextBox  Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="legTitle" Margin="5, 0, 0, 0" />
                     </StackPanel>
 
-                    <StackPanel HorizontalAlignment="Left" Margin="0 20 0 0">
-
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel>
-                                <TextBlock x:Name="tblockOpacity" Text="Set opacity" HorizontalAlignment="Left" Width="100" Height="20" />
-                                <Slider x:Name="sliderOpacity" Maximum="255" TickPlacement="BottomRight" TickFrequency="15.5" Minimum="100" Width="200" ValueChanged="Slider_ValueChanged" Value="177.5" />
-                                <TextBox x:Name="txtOpacity" FontSize="10" IsEnabled="False" Margin="0 5 0 0"/>
+                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 16, 0, 0">Colors</Label>
+                    
+                    <WrapPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Margin="0 0 30 0">
+                            <StackPanel Orientation="Horizontal" Margin="0 0 0 0" >
+                                <Label x:Name="lblMissingExcluded">Missing or Excluded Color</Label>
+                                <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                                <Rectangle x:Name="rctMissingColor" MouseLeftButtonUp="rctMissingColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" Margin="0,0,11,0">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="Missing value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
                             </StackPanel>
-                            <StackPanel Margin="20 0 0 0">
-
-                                <!--<Border x:Name="brdSample" CornerRadius="10" 
-        BorderBrush="Black" 
-        BorderThickness="5"
-         >
-                        -->
-                                <!--<TextBlock x:Name="tblockSample" Text="Sample Text" Background="Blue"/>-->
-                                <!--
-                            <TextBlock Text="Sample Text">
-                                <TextBlock.Background>
-                                    <SolidColorBrush x:Name="brushSample" Color="blue" Opacity="0.5"/>
-                                </TextBlock.Background>
-                            </TextBlock>
-                    </Border>-->
-                                <!--<StackPanel x:Name="spSample">
-                        <StackPanel.Background>
-                            <DrawingBrush x:Name="brush" />
-                        </StackPanel.Background>
-                    <Image x:Name="imgSample" Source="..\Images\samplemap.png" Width="150" Height="150" Stretch="None" />
-                    </StackPanel>-->
-
-                                <Grid Width="75" Height="75">
-                                    <Grid.Background>
-                                        <!--<ImageBrush ImageSource="..\Images\samplemap.png" x:Name="brush"/>-->
-                                        <VisualBrush>
-                                            <VisualBrush.Visual>
-                                                <Grid >
-                                                    <Image Source="..\Images\samplemap.png" Width="75" Height="75" />
-                                                    <Rectangle Fill="Blue" x:Name="brush" Opacity="0.5"></Rectangle>
-                                                </Grid>
-                                            </VisualBrush.Visual>
-                                        </VisualBrush>
-                                    </Grid.Background>
-                                </Grid>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,2" >
+                                <Label x:Name="lblColorStart">Start Color</Label>
+                                <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                                <Rectangle x:Name="rctLowColor" MouseLeftButtonUp="rctLowColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,11,0">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="Low value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,2" >
+                                <Label x:Name="lblColorEnd" Margin="0,0,7,0">End</Label>
+                                <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                                <Rectangle x:Name="rctHighColor" MouseLeftButtonUp="rctHighColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
                             </StackPanel>
                         </StackPanel>
-                        <Button x:Name="btnResetLegend" Click="ResetLegend_Click" HorizontalAlignment="Left" Width="110" Height="25" Margin="0 8 0 0">Reset Legend</Button>
-                    </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Left" Margin="5 5 0 0">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel>
+                                    <TextBlock x:Name="tblockOpacity" Text="Opacity" HorizontalAlignment="Left" Width="100" Height="20" />
+                                    <Slider x:Name="sliderOpacity" Maximum="255" TickPlacement="BottomRight" TickFrequency="15.5" Minimum="100" Width="200" ValueChanged="Slider_ValueChanged" Value="177.5" />
+                                    <TextBox x:Name="txtOpacity" FontSize="10" IsEnabled="False" Margin="0 5 0 0"/>
+                                </StackPanel>
+                                <StackPanel Margin="20 0 0 0">
+                                    <Grid Width="75" Height="75">
+                                        <Grid.Background>
+                                            <!--<ImageBrush ImageSource="..\Images\samplemap.png" x:Name="brush"/>-->
+                                            <VisualBrush>
+                                                <VisualBrush.Visual>
+                                                    <Grid >
+                                                        <Image Source="..\Images\samplemap.png" Width="75" Height="75" />
+                                                        <Rectangle Fill="Blue" x:Name="brush" Opacity="0.5"></Rectangle>
+                                                    </Grid>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Grid.Background>
+                                    </Grid>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </WrapPanel>
 
                     <StackPanel Margin="0 26 0 0">
                         <Label x:Name="tblockRangesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Ranges</Label>
-
-                        <StackPanel Margin="0 10 0 0">
-                            <TextBlock x:Name="lblLegTitle" HorizontalAlignment="Left">Legend Title</TextBlock>
-                            <TextBox  Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="legTitle"  />
-                        </StackPanel>
-
-                       
                             
-                            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                                <Label x:Name="lblClassBreaks" >Class Breaks:</Label>
+                            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                                <Label x:Name="lblClassBreaks" >Class Breaks</Label>
 
-                                <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" Width="50" Height="25" Margin="0,0,0,0">
+                                <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" Width="50" Height="25" Margin="0,0,0,0" SelectionChanged="ClassCount_Changed">
                                     <ComboBoxItem>2</ComboBoxItem>
                                     <ComboBoxItem>3</ComboBoxItem>
                                     <ComboBoxItem>4</ComboBoxItem>
@@ -348,10 +323,9 @@
 
                             </StackPanel>
 
-                        <StackPanel Margin="0 20 0 0">
-                                <CheckBox Style="{StaticResource PropertiesPanelCheckbox}" x:Name="quintilesOption" Click="CheckBox_Quantiles_Click" Content="Quantiles" HorizontalAlignment="Left" Margin=" 10,0,0,16" />
-                            </StackPanel>
-                    
+                        <StackPanel Margin="0 10 0 0">
+                            <CheckBox Style="{StaticResource PropertiesPanelCheckbox}" x:Name="quintilesOption" Click="CheckBox_Quantiles_Click" Content="Quantiles" HorizontalAlignment="Left" Margin=" 5,0,0,16" />
+                        </StackPanel>
                         
                         <StackPanel Margin="0 0 0 0">
                             <Grid x:Name="stratGrid">
