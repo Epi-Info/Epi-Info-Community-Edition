@@ -506,7 +506,23 @@ namespace EpiDashboard.Controls
             }
         
         }
+        public void ReFillLongitudeComboBoxes()
+        {
+           
+            cmbLongitude.Items.Clear();
+            ColumnDataType columnDataType = ColumnDataType.Numeric;
+            List<string> fields = dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
+            foreach (string f in fields)
+            {
+                if (!(f.ToUpper() == "RECSTATUS" || f.ToUpper() == "FKEY" || f.ToUpper() == "GLOBALRECORDID" || f.ToUpper() == "UNIQUEKEY"))
+                {
+                    
+                    cmbLongitude.Items.Add(f);
+                }
+            }
+            
 
+        }
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             if (txtProjectPath.Text.Length > 0 && provider != null)
@@ -640,5 +656,22 @@ namespace EpiDashboard.Controls
 
 
         }
+
+
+     public void cmbLatitude_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbLatitude.SelectedItem != null)
+            {
+                cmbLongitude.IsEnabled = true;
+                ReFillLongitudeComboBoxes();
+                if (cmbLongitude.Items.Contains(cmbLatitude.SelectedItem))
+                {
+                    
+                    cmbLongitude.Items.Remove(cmbLatitude.SelectedItem);
+                }
+            }
+            
+        }
+
   } 
 }

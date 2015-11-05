@@ -238,7 +238,20 @@ namespace EpiDashboard.Controls
             }
             cmbValue.Items.Insert(0, "{Record Count}");
         }
+        public void ReFillValueComboBoxes()
+        {
 
+            cmbValue.Items.Clear();
+            ColumnDataType columnDataType = ColumnDataType.Numeric;
+            List<string> numericFields = dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
+
+            foreach (string field in numericFields)
+            {
+                if (!(field.ToUpper() == "RECSTATUS" || field.ToUpper() == "UNIQUEKEY"))
+                { cmbValue.Items.Add(field); }
+            }
+            cmbValue.Items.Insert(0, "{Record Count}");
+        }
         private HttpWebRequest CreateWebRequest(string endPoint)
         {
             var request = (HttpWebRequest)WebRequest.Create(endPoint);
@@ -565,13 +578,24 @@ namespace EpiDashboard.Controls
 
             }
             return HasFilter;
-        } 
-        private void cmbFormName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        }
+        private void cmbDataKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //if (cmbFormName.SelectedIndex >= 0)
             //{
             //    cmbFormName.Text = cmbFormName.SelectedItem.ToString();
             //}
+            if (cmbDataKey.SelectedIndex >= 0)
+            {
+                var Values = cmbDataKey.SelectedItem.ToString();
+                ReFillValueComboBoxes();
+
+                if (cmbValue.Items.Contains(Values))
+                {
+                    cmbValue.Items.Remove(Values);
+                }
+                cmbValue.IsEnabled = true;
+            }
         }
 
         private void txtProjectPath_TextChanged(object sender, TextChangedEventArgs e)
@@ -1147,6 +1171,14 @@ namespace EpiDashboard.Controls
         private void EnableOkbtn(object sender, TextChangedEventArgs e)
         {
             EnableOkbtn();
+        }
+
+        private void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbShapeKey.SelectedIndex >= 0)
+            {
+              cmbDataKey.IsEnabled = true;
+            }
         }
               
     }
