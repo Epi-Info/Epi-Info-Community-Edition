@@ -523,7 +523,7 @@ namespace EpiDashboard.Controls
             {
                 friendlyValue = GetValue();
 
-                if (string.IsNullOrEmpty(friendlyValue) && !friendlyOperand.Contains("missing"))
+                if (string.IsNullOrEmpty(friendlyValue) && !(friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_MISSING) || friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING)))
                 {
                     Epi.Windows.MsgBox.ShowInformation(SharedStrings.COMPLETE_ALL_SELECTION_FIELDS);
                     return;
