@@ -525,16 +525,23 @@ namespace EpiDashboard.Controls
         }
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            if (txtProjectPath.Text.Length > 0 && provider != null)
+            if (cmbLongitude.SelectedIndex > -1 && cmbLongitude.SelectedIndex > -1 )
             {
-                Addfilters();
-                RenderMap();
-                layerprop.SetValues(txtDescription.Text, cmbLatitude.Text, cmbLongitude.Text, colorselected);
+                if (txtProjectPath.Text.Length > 0 && provider != null)
+                {
+                    Addfilters();
+                    RenderMap();
+                    layerprop.SetValues(txtDescription.Text, cmbLatitude.Text, cmbLongitude.Text, colorselected);
+                }
+
+                if (ChangesAccepted != null)
+                {
+                    ChangesAccepted(this, new EventArgs());
+                }
             }
-            
-            if (ChangesAccepted != null)
+            else
             {
-                ChangesAccepted(this, new EventArgs());
+                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_VARIABLES, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
             }
         }
        
