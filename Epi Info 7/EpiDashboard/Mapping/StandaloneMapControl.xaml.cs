@@ -1217,6 +1217,7 @@ namespace EpiDashboard.Mapping
                     ToggleBlank();
                 }
             }
+            SetBackgroundImageType();
         }
 
         public void SaveMap()
