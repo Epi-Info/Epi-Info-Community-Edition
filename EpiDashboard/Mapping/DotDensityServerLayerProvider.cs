@@ -55,11 +55,12 @@ namespace EpiDashboard.Mapping
             Layer layer = myMap.Layers[layerId.ToString()];
             Layer dotLayer = myMap.Layers[layerId.ToString() + "_dotLayer"];
             int currentIndex = myMap.Layers.IndexOf(layer);
-            int currentDotIndex = myMap.Layers.IndexOf(dotLayer);
+            //int currentDotIndex = myMap.Layers.IndexOf(dotLayer);
             if (currentIndex < myMap.Layers.Count - 1)
             {
                 myMap.Layers.Remove(layer);
                 myMap.Layers.Insert(currentIndex + 1, layer);
+                int currentDotIndex = myMap.Layers.IndexOf(dotLayer);
                 myMap.Layers.Remove(dotLayer);
                 myMap.Layers.Insert(currentDotIndex + 1, dotLayer);
             }
