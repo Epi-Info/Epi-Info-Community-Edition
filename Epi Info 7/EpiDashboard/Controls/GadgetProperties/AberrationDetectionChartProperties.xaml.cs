@@ -165,6 +165,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 isValid = false;
                 MessageBox.Show(DashboardSharedStrings.PROPERTIES_MAIN_VARIABLE_REQ);
+                return isValid;
             }
 
             //EI-98
