@@ -43,7 +43,6 @@ namespace EpiDashboard.Mapping
 
             #region Translation
             lblTitle.Content = DashboardSharedStrings.GADGET_SHAPEFILE;
-            rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT;
 
             #endregion //translation
         }
