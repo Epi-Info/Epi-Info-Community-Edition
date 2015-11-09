@@ -176,6 +176,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 isValid = false;
                 MessageBox.Show(DashboardSharedStrings.PROPERTIES_MAIN_VARIABLE_REQ);
+                return isValid;
             }
 
             if (String.IsNullOrEmpty(txtLegendFontSize.Text))
@@ -190,6 +191,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     isValid = false;
                     MessageBox.Show(DashboardSharedStrings.PROPERTIES_LEGEND_FONT_SIZE_INVALID);
+                    return isValid;
                 }
             }
 

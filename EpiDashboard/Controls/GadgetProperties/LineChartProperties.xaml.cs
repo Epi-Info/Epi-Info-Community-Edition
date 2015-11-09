@@ -212,11 +212,13 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 isValid = false;
                 MessageBox.Show(DashboardSharedStrings.PROPERTIES_MAIN_VARIABLE_REQ);
+                return isValid;
             }
             else if ((cmbSecondYAxis.SelectedIndex == 1 || cmbSecondYAxis.SelectedIndex == 2) && (cmbSecondYAxisVariable.SelectedIndex == -1 || cmbSecondYAxisVariable.SelectedItem.ToString() == String.Empty))
             {
                 isValid = false;
                 MessageBox.Show(DashboardSharedStrings.PROPERTIES_Y2_AXIS_VARIABLE_REQ);
+                return isValid;
             }
             //EI-98
             ValidateFontSize(txtLegendFontSize, DashboardSharedStrings.PROPERTIES_LEGEND_FONT_SIZE_INVALID, out isValid);
