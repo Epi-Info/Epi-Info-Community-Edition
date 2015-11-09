@@ -104,6 +104,12 @@ namespace EpiDashboard.Controls.GadgetProperties
             #endregion // Translation
         }
 
+        protected new void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbxField.SelectedIndex >= 0 && cbxFieldPSU.SelectedIndex >= 0)
+                base.btnOK_Click(sender, e);
+        }
+
         public bool HasSelectedFields
         {
             get
