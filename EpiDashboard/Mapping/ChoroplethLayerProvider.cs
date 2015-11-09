@@ -673,7 +673,7 @@ namespace EpiDashboard.Mapping
             {
                 GadgetParameters gadgetOptions = new GadgetParameters();
                 gadgetOptions.MainVariableName = dataKey;
-
+                gadgetOptions.ColumnNames = columnNames;
                 Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
                 inputVariableList.Add("freqvar", dataKey);
                 inputVariableList.Add("allvalues", "false");
@@ -683,7 +683,8 @@ namespace EpiDashboard.Mapping
                 inputVariableList.Add("maxrows", "500");
 
                 gadgetOptions.InputVariableList = inputVariableList;
-                loadedData = dashboardHelper.GenerateFrequencyTable(gadgetOptions).First().Key;
+                //loadedData = dashboardHelper.GenerateFrequencyTable(gadgetOptions).First().Key;
+                loadedData = dashboardHelper.GenerateFrequencyTableforMap(gadgetOptions).First().Key;
                 foreach (DataRow dr in loadedData.Rows)
                 {
                     dr[0] = dr[0].ToString().Trim();
@@ -758,6 +759,8 @@ namespace EpiDashboard.Mapping
                 {
                     thematicItem.Min = Double.PositiveInfinity;
                     thematicItem.Max = Double.NegativeInfinity;
+                    //thematicItem.Min = Double.NegativeInfinity;
+                    //thematicItem.Max = Double.PositiveInfinity;
                     thematicItem.MinName = string.Empty;
                     thematicItem.MaxName = string.Empty;
                 }
@@ -780,6 +783,8 @@ namespace EpiDashboard.Mapping
                     valueList.Add(graphicValue);
                 }
             }
+
+            valueList.Sort();
 
             thematicItem.RangeStarts = CalculateThematicRange(classCount, thematicItem, valueList);
 
@@ -870,13 +875,14 @@ namespace EpiDashboard.Mapping
         {
             RangeCount = _thematicItem.RangeStarts.Count;
             Array.Clear(RangeValues, 0, RangeValues.Length);
-            for (int i = 0; i < _thematicItem.RangeStarts.Count; i++)
+            var RangeStarts = _thematicItem.RangeStarts;// RemoveOutOfRangeValues(_thematicItem);
+            for (int i = 0; i <  RangeStarts.Count; i++)
             {
-                RangeValues[i, 0] = _thematicItem.RangeStarts[i].ToString();
+                RangeValues[i, 0] =  RangeStarts[i].ToString();
 
                 if (i < _thematicItem.RangeStarts.Count - 1)
                 {
-                    RangeValues[i, 1] = _thematicItem.RangeStarts[i + 1].ToString();
+                    RangeValues[i, 1] =  RangeStarts[i + 1].ToString();
                 }
                 else
                 {
@@ -884,6 +890,22 @@ namespace EpiDashboard.Mapping
                 }
 
             }
+        }
+
+        private List<double> RemoveOutOfRangeValues(ThematicItem _thematicItem)
+        {
+            List<double> RangeList = new List<double>();
+
+            foreach (var Item in _thematicItem.RangeStarts)
+            {
+                if (Item >=_thematicItem.Min && Item <= _thematicItem.Max)
+            {
+                RangeList.Add(Item);
+            }
+            
+            }
+
+            return RangeList;
         }
 
         private StackPanel _legendStackPanel;
