@@ -43,7 +43,6 @@ namespace EpiDashboard.Mapping
             //  provider = new KmlLayerProvider(myMap);
             #region Translation
             lblTitle.Content = DashboardSharedStrings.GADGET_KMLFILE;
-            rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT;
             #endregion //translation
 
         }

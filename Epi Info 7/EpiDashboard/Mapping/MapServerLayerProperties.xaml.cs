@@ -43,7 +43,6 @@ namespace EpiDashboard.Mapping
            // provider = new MapServerLayerProvider(myMap);
             #region Translation
             lblTitle.Content = DashboardSharedStrings.GADGET_MAPSERVER;
-            rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT;
             #endregion //translation
             
         }
