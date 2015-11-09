@@ -188,6 +188,12 @@ namespace EpiDashboard.Controls.GadgetProperties
 
         }
 
+        protected new void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbxExposureField.SelectedIndex > 0 && cbxOutcomeField.SelectedIndex > 0 && cbxFieldPSU.SelectedIndex > 0)
+                base.btnOK_Click(sender, e);
+        }
+
         public bool HasSelectedFields
         {
             get
