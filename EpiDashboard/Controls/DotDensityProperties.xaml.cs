@@ -481,7 +481,7 @@ namespace EpiDashboard.Controls
                
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            if (cmbDataKey.SelectedIndex > -1 && cmbShapeKey.SelectedIndex > -1 && cmbValue.SelectedIndex > -1)
+            if (cmbDataKey.SelectedIndex > -1 && cmbShapeKey.SelectedIndex > -1 && cmbValue.SelectedIndex > -1 && !string.IsNullOrEmpty(txtDotValue.Text))
             {
                 if (radShapeFile.IsChecked == true && provider != null)
                 {
