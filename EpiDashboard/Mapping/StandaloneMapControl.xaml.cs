@@ -857,15 +857,15 @@ namespace EpiDashboard.Mapping
         {
             Canvas.SetLeft(layerList, (MapContainer.ActualWidth / 2.0) - (e.NewSize.Width / 2.0));
 
-            if (e.PreviousSize.Height < e.NewSize.Height)
-            {
+          //  if (e.PreviousSize.Height < e.NewSize.Height)
+           // {
                 DoubleAnimation anim = new DoubleAnimation();
                 anim.From = double.IsNaN(Canvas.GetBottom(layerList)) ? 0 : Canvas.GetBottom(layerList);
                 anim.To = (e.NewSize.Height * -1) + 30;
                 anim.DecelerationRatio = 0.8;
                 anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
                 layerList.BeginAnimation(Canvas.BottomProperty, anim);
-            }
+           //}
 
             if(layerList.HasLayers)
             {
