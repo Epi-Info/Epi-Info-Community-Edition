@@ -1,36 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.IO;
-using System.Net;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Toolkit;
-using ESRI.ArcGIS.Client.Bing;
 using ESRI.ArcGIS.Client.Geometry;
 using ESRI.ArcGIS.Client.Symbols;
 using ESRI.ArcGIS.Client.Tasks;
-using Epi;
-using Epi.Data;
-using EpiDashboard.Mapping.ShapeFileReader;
 
 namespace EpiDashboard.Mapping
 {
     public delegate void FeatureLoadedHandler(string serverName, IDictionary<string, object> featureAttributes);
 
-    public class ChoroplethServerLayerProvider : ILayerProvider
+    public class ChoroplethServerLayerProvider :         IChoroLayerProvider
     {
         #region Choropleth
 
@@ -51,6 +37,7 @@ namespace EpiDashboard.Mapping
         private bool _areRangesSet = false;
         public bool AreRangesSet { get { return _areRangesSet; } set { _areRangesSet = value; } }
         public ListLegendTextDictionary ListLegendText { get; set; }
+        public bool RangesLoadedFromMapFile { get; set; }
 
         private List<double> _range;
         public List<double> Range
@@ -83,6 +70,8 @@ namespace EpiDashboard.Mapping
             get { return quantileValues; }
             set { quantileValues = value; }
         }
+
+        public bool UseCustomColors { get; set; }
 
         public int RangeCount { get; set; }
 
@@ -331,6 +320,11 @@ namespace EpiDashboard.Mapping
                 return null;
         }
 
+        public void ResetRangeValues(string toString, string s, string toString1, int classCount)
+        {
+            throw new NotImplementedException();
+        }
+
         public object[] LoadShapeFile()
         {
             MapServerFeatureDialog dialog = new MapServerFeatureDialog();
@@ -344,6 +338,8 @@ namespace EpiDashboard.Mapping
             else return null;
 
         }
+
+        public string LegendText { get; set; }
 
         void graphicsLayer_UpdateFailed(object sender, TaskFailedEventArgs e)
         {
@@ -370,6 +366,36 @@ namespace EpiDashboard.Mapping
             //int x = 5;
             //x++;
         }
+
+        //private void GenerateMap()
+        //{
+        //    EpiDashboard.Controls.ChoroplethProperties choroplethprop = new Controls.ChoroplethProperties(this.mapControl as StandaloneMapControl, this.myMap);
+
+        //    //  choroplethprop.txtShapePath.Text = shapeFilePath;
+        //    choroplethprop.txtProjectPath.Text = dashboardHelper.Database.DataSource;
+        //    choroplethprop.SetDashboardHelper(dashboardHelper);
+        //    choroplethprop.cmbClasses.Text = cbxClasses.Text;
+        //    foreach (string str in cbxShapeKey.Items) { choroplethprop.cmbShapeKey.Items.Add(str); }
+        //    foreach (string str in cbxDataKey.Items) { choroplethprop.cmbDataKey.Items.Add(str); }
+        //    foreach (string str in cbxValue.Items) { choroplethprop.cmbValue.Items.Add(str); }
+        //    choroplethprop.cmbShapeKey.SelectedItem = cbxShapeKey.Text;
+        //    choroplethprop.cmbDataKey.SelectedItem = cbxDataKey.Text;
+        //    choroplethprop.cmbValue.SelectedItem = cbxValue.Text;
+        //    choroplethprop.rctHighColor.Fill = rctHighColor.Fill;
+        //    choroplethprop.rctLowColor.Fill = rctLowColor.Fill;
+        //    choroplethprop.rctMissingColor.Fill = rctMissingColor.Fill;
+        //    choroplethprop.radShapeFile.IsChecked = true;
+
+        //    choroplethprop.choroplethShapeLayerProvider = provider;
+        //    choroplethprop.thisProvider = provider;
+
+        //    choroplethprop.legTitle.Text = provider.LegendText;
+        //    choroplethprop.SetDefaultRanges();
+        //    choroplethprop.GetRangeValues(provider.RangeCount);
+        //    choroplethprop.ListLegendText = provider.ListLegendText;
+        //    //  choroplethprop.CustomColors = provider.CustomColors;     
+        //    choroplethprop.RenderMap();
+        //}    
 
         void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
         {
@@ -406,6 +432,8 @@ namespace EpiDashboard.Mapping
                 SetShapeRangeValues(dashboardHelper, shapeKey, dataKey, valueField, colors, classCount, missingText);
             }
         }
+
+        public Guid _layerId { get; set; }
 
         public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string missingText)
         {
@@ -1193,5 +1221,37 @@ namespace EpiDashboard.Mapping
             set { opacity = value; }
         }
 
+
+        #region ILayerProvider Members
+
+
+        public CustomColorsDictionary CustomColorsDictionary
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public ClassRangesDictionary ClassRangesDictionary
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public void PopulateRangeValues()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PopulateRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

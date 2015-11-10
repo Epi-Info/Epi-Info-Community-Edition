@@ -1,52 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.IO;
-using System.Net;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Toolkit;
-using ESRI.ArcGIS.Client.Bing;
 using ESRI.ArcGIS.Client.Geometry;
 using ESRI.ArcGIS.Client.Symbols;
-using ESRI.ArcGIS.Client.Tasks;
-using Epi;
-using Epi.Data;
 using EpiDashboard.Mapping.ShapeFileReader;
 
 namespace EpiDashboard.Mapping
 {
-    public class ChoroplethLayerProvider : ILayerProvider
+    public class ChoroplethShapeLayerProvider : IChoroLayerProvider
     {
         #region Choropleth
 
-        public enum ColorRampType
-        {
-            Auto,
-            Custom
-        }
-
-        private ColorRampType _colorRampType = new ColorRampType();
 
         private bool _useCustomColors;        //   = true;
-
-        //  private Dictionary<string, Color> _classesColorsDictionary = new Dictionary<string, Color>();
-
-
-
-
 
 
         Map _myMap;
@@ -55,11 +28,9 @@ namespace EpiDashboard.Mapping
         string _dataKey;
         string _valueField;
         string _missingText;
-       public Guid _layerId;
+        public Guid _layerId { get; set; }
         List<SolidColorBrush> _colors;
         int _classCount;
-        int _colorShadeIndex = 0;
-        int _lastGeneratedClassCount = 0;
         public bool AreRangesSet { get; set; }
         string[,] _rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
 
@@ -94,7 +65,7 @@ namespace EpiDashboard.Mapping
         }
 
 
-        public ChoroplethLayerProvider(Map myMap)
+        public ChoroplethShapeLayerProvider(Map myMap)
         {
             _myMap = myMap;
             _layerId = Guid.NewGuid();
@@ -407,6 +378,9 @@ namespace EpiDashboard.Mapping
             }
         }
 
+
+
+
         public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField,
                 List<SolidColorBrush> colors, int classCount, string missingText)
         {
@@ -546,7 +520,7 @@ namespace EpiDashboard.Mapping
             TextBlock missingClassTextBlock = new TextBlock();
             missingClassTextBlock.Text = String.Format("  " + missingText);
             missingClassTextBlock.MaxWidth = 256;
-            missingClassTextBlock.TextWrapping = TextWrapping.Wrap; 
+            missingClassTextBlock.TextWrapping = TextWrapping.Wrap;
             StackPanel missingClassStackPanel = new StackPanel();
             missingClassStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
             missingClassStackPanel.Children.Add(missingSwatchRect);
@@ -561,7 +535,7 @@ namespace EpiDashboard.Mapping
             minStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
             minTextBlock.Text = thematicItem.MinName != null ? String.Format("Min: {0} ({1})", thematicItem.Min, thematicItem.MinName.Trim()) : String.Format("Min: {0} ({1})", thematicItem.Min, string.Empty);
             minTextBlock.MaxWidth = 256;
-            minTextBlock.TextWrapping = TextWrapping.Wrap; 
+            minTextBlock.TextWrapping = TextWrapping.Wrap;
             minStackPanel.Children.Add(minTextBlock);
             minStackPanel.Margin = new Thickness(10, 5, 10, 5);
             legendList.Items.Add(minStackPanel);
@@ -571,7 +545,7 @@ namespace EpiDashboard.Mapping
             maxStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
             maxTextBlock.Text = thematicItem.MaxName != null ? String.Format("Max: {0} ({1})", thematicItem.Max, thematicItem.MaxName.Trim()) : String.Format("Max: {0} ({1})", thematicItem.Max, string.Empty);
             maxTextBlock.MaxWidth = 256;
-            maxTextBlock.TextWrapping = TextWrapping.Wrap; 
+            maxTextBlock.TextWrapping = TextWrapping.Wrap;
             maxStackPanel.Children.Add(maxTextBlock);
             maxStackPanel.Margin = new Thickness(10, 0, 10, 10);
             legendList.Items.Add(maxStackPanel);
@@ -631,7 +605,7 @@ namespace EpiDashboard.Mapping
                     }
 
                     classTextBlock.MaxWidth = 256;
-                    classTextBlock.TextWrapping = TextWrapping.Wrap; 
+                    classTextBlock.TextWrapping = TextWrapping.Wrap;
 
                     StackPanel classStackPanel = new StackPanel();
                     classStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
@@ -930,12 +904,6 @@ namespace EpiDashboard.Mapping
             set { _legendText = value; }
         }
 
-        public ColorRampType CurrentColorRampType
-        {
-            get { return _colorRampType; }
-            set { _colorRampType = value; }
-        }
-
         public bool UseCustomColors
         {
             get { return _useCustomColors; }
@@ -977,36 +945,6 @@ namespace EpiDashboard.Mapping
 
         #endregion
 
-        public Color GetCustomColor(string rectangleControlName)
-        {
-
-            Color coo;
-
-            try
-            {
-                //   coo = _classesColorsDictionary[rectangleControlName];    
-                coo = _customColorsDictionary.GetWithKey(rectangleControlName);
-            }
-            catch (NullReferenceException ex)
-            {
-
-                throw new NullReferenceException(ex.Message);
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-
-
-            return coo;
-
-        }
-
-        public void StoreColor(Rectangle rectangle, Color coo)
-        {
-            _customColorsDictionary.Add(rectangle.Name, coo);
-        }
 
         public bool RangesLoadedFromMapFile
         {

@@ -1,32 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Linq;
 using System.IO;
 using System.Net;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.DataVisualization.Charting;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ESRI.ArcGIS.Client;
 using ESRI.ArcGIS.Client.Toolkit;
 using ESRI.ArcGIS.Client.Bing;
 using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Symbols;
-using ESRI.ArcGIS.Client.Tasks;
 using Epi;
 using Epi.Data;
-using EpiDashboard.Mapping.ShapeFileReader;
 using EpiDashboard.Controls;
 
 namespace EpiDashboard.Mapping
@@ -600,7 +589,7 @@ namespace EpiDashboard.Mapping
                                     layerProperties = new ClusterLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.ChoroplethShapeFile:
-                                    layerProperties = new ChoroplethLayerProperties(myMap, dashboardHelper, this);
+                                    layerProperties = new ChoroplethShapeLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.ChoroplethMapServer:
                                     layerProperties = new ChoroplethServerLayerProperties(myMap, dashboardHelper, this);
@@ -711,9 +700,9 @@ namespace EpiDashboard.Mapping
                if (densitylayerprop.FlagRunEdit == false)
                { GenerateShapeFileDotDensity(densitylayerprop); }
            }
-           else if (layerProperties is ChoroplethLayerProperties)
+           else if (layerProperties is ChoroplethShapeLayerProperties)
            {
-               ChoroplethLayerProperties choroplethlayerprop = (ChoroplethLayerProperties)layerProperties;
+               ChoroplethShapeLayerProperties choroplethlayerprop = (ChoroplethShapeLayerProperties)layerProperties;
                if (choroplethlayerprop.FlagRunEdit == false)
                { GenerateShapeFileChoropleth(choroplethlayerprop); }
            }
@@ -1552,7 +1541,7 @@ namespace EpiDashboard.Mapping
               
             //old config
             DashboardHelper dashboardHelper = new DashboardHelper();
-            layerProperties = new ChoroplethLayerProperties(myMap, dashboardHelper, this);
+            layerProperties = new ChoroplethShapeLayerProperties(myMap, dashboardHelper, this);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
@@ -1560,7 +1549,7 @@ namespace EpiDashboard.Mapping
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
             EpiDashboard.Controls.ChoroplethProperties properties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
-            properties.layerprop = (ChoroplethLayerProperties)layerProperties;
+            properties.choroplethShapeLayerProperties = (ChoroplethShapeLayerProperties)layerProperties;
 
 
             //properties.Width = 800;
@@ -1592,7 +1581,7 @@ namespace EpiDashboard.Mapping
             popup.Content = properties;
             popup.Show();
         }
-        public void GenerateShapeFileChoropleth(ChoroplethLayerProperties choroplethlayerprop)
+        public void GenerateShapeFileChoropleth(ChoroplethShapeLayerProperties choroplethlayerprop)
         {
 
             DashboardHelper dashboardHelper;
@@ -1602,14 +1591,14 @@ namespace EpiDashboard.Mapping
             popup.Parent = LayoutRoot;
             
             //old config
-            layerProperties = (ChoroplethLayerProperties)choroplethlayerprop;
+            layerProperties = (ChoroplethShapeLayerProperties)choroplethlayerprop;
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
             
             choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
-            choroplethproperties.layerprop = choroplethlayerprop;
+            choroplethproperties.choroplethShapeLayerProperties = choroplethlayerprop;
            
             choroplethproperties.Width = 800;
             choroplethproperties.Height = 600;
@@ -1621,7 +1610,8 @@ namespace EpiDashboard.Mapping
             choroplethproperties.quintilesOption.IsChecked = choroplethlayerprop.flagQuantiles;
             if (choroplethlayerprop.flagQuantiles == true) { choroplethproperties.OnQuintileOptionChanged(); }
             choroplethproperties.ClearonMapServer();
-            choroplethproperties._provider = choroplethlayerprop.provider;
+            //  choroplethproperties.choroplethShapeLayerProvider = choroplethlayerprop.provider;
+            choroplethproperties.thisProvider = choroplethlayerprop.provider;    
 
              choroplethproperties.radKML.IsEnabled = false;
              choroplethproperties.radMapServer.IsEnabled = false;
@@ -1713,9 +1703,9 @@ namespace EpiDashboard.Mapping
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
                        
             choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
-            choroplethproperties.choroserverlayerprop = choroplethServerlayerprop;
-            choroplethproperties.choroMapprovider = choroplethServerlayerprop.provider;
-            choroplethproperties.choroMapprovider.CloseLayer();
+            choroplethproperties.choroplethServerLayerProperties = choroplethServerlayerprop;
+            choroplethproperties.choroplethServerLayerProvider = choroplethServerlayerprop.provider;
+            choroplethproperties.choroplethServerLayerProvider.CloseLayer();
 
             choroplethproperties.Width = 800;
             choroplethproperties.Height = 600;
@@ -1844,8 +1834,8 @@ namespace EpiDashboard.Mapping
 
 
             choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
-            choroplethproperties.chorokmllayerprop = choroplethKMLlayerprop;
-            choroplethproperties.choroKMLprovider = choroplethKMLlayerprop.provider;
+            choroplethproperties.choroplethKmlLayerProperties = choroplethKMLlayerprop;
+            choroplethproperties.choroplethKmlLayerProvider = choroplethKMLlayerprop.provider;
 
             choroplethproperties.Width = 800;
             choroplethproperties.Height = 600;
@@ -1869,15 +1859,15 @@ namespace EpiDashboard.Mapping
             choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
             //choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
 
-            choroplethproperties.chorokmllayerprop = choroplethKMLlayerprop;
-            choroplethproperties.choroKMLprovider = choroplethproperties.chorokmllayerprop.provider;
+            choroplethproperties.choroplethKmlLayerProperties = choroplethKMLlayerprop;
+            choroplethproperties.choroplethKmlLayerProvider = choroplethproperties.choroplethKmlLayerProperties.provider;
             if (string.IsNullOrEmpty(choroplethKMLlayerprop.shapeFilePath) == false)
             {
                 choroplethproperties.radKML.IsChecked = true;
                 choroplethproperties.txtKMLpath.Text = choroplethKMLlayerprop.shapeFilePath;
-                if (choroplethproperties.chorokmllayerprop.curfeatureAttributes != null)
+                if (choroplethproperties.choroplethKmlLayerProperties.curfeatureAttributes != null)
                 {
-                    foreach (string key in choroplethproperties.chorokmllayerprop.curfeatureAttributes.Keys)
+                    foreach (string key in choroplethproperties.choroplethKmlLayerProperties.curfeatureAttributes.Keys)
                     { choroplethproperties.cmbShapeKey.Items.Add(key); }
                 }
             }
@@ -2026,7 +2016,7 @@ namespace EpiDashboard.Mapping
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested); */
           
             EpiDashboard.Controls.DotDensityProperties properties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
-           // properties.layerprop = (DotDensityLayerProperties)layerProperties;
+           // properties.choroplethShapeLayerProperties = (DotDensityLayerProperties)layerProperties;
             properties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             properties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             properties.EditRequested += new EventHandler(ILayerProperties_EditRequested);

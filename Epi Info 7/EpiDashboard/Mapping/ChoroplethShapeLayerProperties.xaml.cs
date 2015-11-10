@@ -1,31 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Xml;
-using Epi;
-using Epi.Fields;
+
 // ReSharper disable All
 
 namespace EpiDashboard.Mapping
 {
     /// <summary>
-    /// Interaction logic for ChoroplethLayerProperties.xaml
+    /// Interaction logic for ChoroplethShapeLayerProperties.xaml
     /// </summary>
-    public partial class ChoroplethLayerProperties : UserControl, ILayerProperties
+    public partial class ChoroplethShapeLayerProperties : UserControl, ILayerProperties
     {
         private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
-        public ChoroplethLayerProvider provider;
+        public ChoroplethShapeLayerProvider provider;
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
@@ -62,14 +54,14 @@ namespace EpiDashboard.Mapping
         }
 
 
-        public ChoroplethLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public ChoroplethShapeLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
             this.myMap = myMap;
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-            provider = new ChoroplethLayerProvider(myMap);
+            provider = new ChoroplethShapeLayerProvider(myMap);
 
             FillComboBoxes();
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
@@ -331,7 +323,7 @@ namespace EpiDashboard.Mapping
                     //  foreach (Color color in provider.ClassesColorsDictionary)
 
 
-                  
+
 
                     foreach (KeyValuePair<string, Color> keyValuePair in provider.CustomColorsDictionary.Dict)
                     {
@@ -382,7 +374,7 @@ namespace EpiDashboard.Mapping
                 element.AppendChild(dashboardHelper.Serialize(doc));
 
                 XmlAttribute type = doc.CreateAttribute("layerType");
-                type.Value = "EpiDashboard.Mapping.ChoroplethLayerProperties";
+                type.Value = "EpiDashboard.Mapping.ChoroplethShapeLayerProperties";
                 element.Attributes.Append(type);
 
                 return element;
@@ -406,6 +398,8 @@ namespace EpiDashboard.Mapping
 
 
         private string[] classTitles;
+
+
 
 
         public void CreateFromXml(System.Xml.XmlElement element)
@@ -584,7 +578,10 @@ namespace EpiDashboard.Mapping
             choroplethprop.rctLowColor.Fill = rctLowColor.Fill;
             choroplethprop.rctMissingColor.Fill = rctMissingColor.Fill;
             choroplethprop.radShapeFile.IsChecked = true;
-            choroplethprop._provider = provider;
+    
+            choroplethprop.choroplethShapeLayerProvider = provider;
+            choroplethprop.thisProvider = provider;    
+
             choroplethprop.legTitle.Text = provider.LegendText;
             choroplethprop.SetDefaultRanges();
             choroplethprop.GetRangeValues(provider.RangeCount);

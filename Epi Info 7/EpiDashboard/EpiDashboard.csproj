@@ -568,6 +568,7 @@
     </Compile>
     <Compile Include="Mapping\ClassRangesDictionary.cs" />
     <Compile Include="Mapping\CustomColorsDictionary.cs" />
+    <Compile Include="Mapping\IChoroLayerProvider.cs" />
     <Compile Include="Mapping\ListLegendTextDictionary.cs" />
     <Compile Include="Mapping\MapUIHelper.cs" />
     <Compile Include="Mapping\PointLayerProperties.xaml.cs">
@@ -781,10 +782,10 @@
       <DependentUpon>DashboardControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="DragCanvas.cs" />
-    <Compile Include="Mapping\ChoroplethLayerProperties.xaml.cs">
-      <DependentUpon>ChoroplethLayerProperties.xaml</DependentUpon>
+    <Compile Include="Mapping\ChoroplethShapeLayerProperties.xaml.cs">
+      <DependentUpon>ChoroplethShapeLayerProperties.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Mapping\ChoroplethLayerProvider.cs" />
+    <Compile Include="Mapping\ChoroplethShapeLayerProvider.cs" />
     <Compile Include="Mapping\ClusterLayerProperties.xaml.cs">
       <DependentUpon>ClusterLayerProperties.xaml</DependentUpon>
     </Compile>
@@ -1433,7 +1434,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Mapping\ChoroplethLayerProperties.xaml">
+    <Page Include="Mapping\ChoroplethShapeLayerProperties.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
