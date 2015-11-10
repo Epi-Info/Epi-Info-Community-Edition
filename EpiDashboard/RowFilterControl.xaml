@@ -64,7 +64,7 @@
                         <TextBox x:Name="tbxHighValue" Margin="5, 5, 5, 5"  HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" MaxWidth="210" Width="210"  Visibility="Visible" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
                         <DatePicker x:Name="dpHighValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" MaxWidth="210" Width="210"  Visibility="Visible" />
 
-                        <Button x:Name="btnNewCondition" Width="Auto" MinWidth="155" Height="32" Grid.ColumnSpan="2" Grid.Row="6" HorizontalAlignment="Left" Click="btnNewCondition_Click">
+                        <Button x:Name="btnNewCondition" Width="Auto" IsEnabled="False" MinWidth="155" Height="32" Grid.ColumnSpan="2" Grid.Row="6" HorizontalAlignment="Left" Click="btnNewCondition_Click">
                             <Button.Content>
                                 <Label x:Name="tblockAddThisCondition">Add this condition</Label>
                             </Button.Content>
