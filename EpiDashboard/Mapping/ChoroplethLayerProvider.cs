@@ -689,7 +689,7 @@ namespace EpiDashboard.Mapping
                 {
                     dr[0] = dr[0].ToString().Trim();
                 }
-                valueField = "freq";
+                _valueField = valueField = "freq";
             }
             else
             {
