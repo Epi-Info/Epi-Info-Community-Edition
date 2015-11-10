@@ -2154,7 +2154,7 @@ namespace EpiDashboard.Mapping
 
             dashboardHelper = densitylayerprop.GetDashboardHelper();
             dotdensityproperties.SetDashboardHelper(dashboardHelper);
-            dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;// dashboardHelper.Database.DbName;
+           // dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;// dashboardHelper.Database.DbName;
             dotdensityproperties.panelBoundaries.IsEnabled = true;
             if (densitylayerprop.datafilters != null)
                 dotdensityproperties.dataFilters = densitylayerprop.datafilters;
@@ -2230,6 +2230,7 @@ namespace EpiDashboard.Mapping
                     { dotdensityproperties.cmbShapeKey.Items.Add(key); }
                 }
             }
+            dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;// dashboardHelper.Database.DbName;
             dotdensityproperties.FillComboBoxes();
             dotdensityproperties.cmbShapeKey.Text = densitylayerprop.cbxShapeKey.Text;
             dotdensityproperties.cmbDataKey.Text = densitylayerprop.cbxDataKey.Text;
