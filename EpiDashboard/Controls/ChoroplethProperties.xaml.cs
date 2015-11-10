@@ -2,16 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
 using EpiDashboard.Mapping;
@@ -20,7 +15,6 @@ using System.Net;
 using Control = System.Windows.Controls.Control;
 using ESRI.ArcGIS.Client.Geometry;
 
-// ReSharper disable All
 
 namespace EpiDashboard.Controls
 {
@@ -46,22 +40,29 @@ namespace EpiDashboard.Controls
         private EpiDashboard.Mapping.StandaloneMapControl _mapControl;
         private ESRI.ArcGIS.Client.Map _myMap;
         private DashboardHelper _dashboardHelper;
-        public EpiDashboard.Mapping.ChoroplethLayerProvider _provider;
         private int _currentStratCount;
         private SolidColorBrush _currentColor_rampMissing;
         private SolidColorBrush _currentColor_rampStart;
         private SolidColorBrush _currentColor_rampEnd;
         private bool _initialRampCalc;
-        public ChoroplethLayerProperties layerprop;
+
+
+        public IChoroLayerProvider thisProvider;    
+
+
+        public ChoroplethKmlLayerProvider choroplethKmlLayerProvider;
+        public ChoroplethServerLayerProvider choroplethServerLayerProvider;
+        public ChoroplethShapeLayerProvider choroplethShapeLayerProvider;
+
+        public ChoroplethShapeLayerProperties choroplethShapeLayerProperties;
+        public ChoroplethServerLayerProperties choroplethServerLayerProperties;
+        public ChoroplethKmlLayerProperties choroplethKmlLayerProperties;
+
 
         public RowFilterControl rowFilterControl { get; set; }
         public DataFilters datafilters { get; set; }
 
         private System.Xml.XmlElement currentElement;
-        public EpiDashboard.Mapping.ChoroplethKmlLayerProvider choroKMLprovider;
-        public EpiDashboard.Mapping.ChoroplethServerLayerProvider choroMapprovider;
-        public EpiDashboard.Mapping.ChoroplethServerLayerProperties choroserverlayerprop;
-        public EpiDashboard.Mapping.ChoroplethKmlLayerProperties chorokmllayerprop;
         private string shapeFilePath;
 
         public ListLegendTextDictionary ListLegendText = new ListLegendTextDictionary();
@@ -305,20 +306,20 @@ namespace EpiDashboard.Controls
                 cmbValue.SelectedItem != null)
             {
 
-                if (_provider != null && _provider.Opacity > 0)
+                if (thisProvider != null && thisProvider.Opacity > 0)
                 {
-                    Opacity = _provider.Opacity;
+                    Opacity = thisProvider.Opacity;
                     sliderOpacity.Value = Opacity;
                 }
-                else if (choroKMLprovider != null && choroKMLprovider.Opacity > 0)
+                else if (choroplethKmlLayerProvider != null && choroplethKmlLayerProvider.Opacity > 0)
                 {
-                    Opacity = choroKMLprovider.Opacity;
+                    Opacity = choroplethKmlLayerProvider.Opacity;
                     sliderOpacity.Value = Opacity;
                 }
-                else if (choroserverlayerprop != null && choroserverlayerprop.Opacity > 0)
+                else if (choroplethServerLayerProperties != null && choroplethServerLayerProperties.Opacity > 0)
                 {
 
-                    Opacity = choroserverlayerprop.Opacity;
+                    Opacity = choroplethServerLayerProperties.Opacity;
                     // Opacity = choroMapprovider.Opacity;
                     sliderOpacity.Value = Opacity;
                 }
@@ -349,9 +350,9 @@ namespace EpiDashboard.Controls
                     classCount = 4;
                 }
 
-                if (_provider != null)
+                if (thisProvider != null)
                 {
-                    _provider.PopulateRangeValues(_dashboardHelper,
+                    thisProvider.PopulateRangeValues(_dashboardHelper,
                        cmbShapeKey.SelectedItem.ToString(),
                        cmbDataKey.SelectedItem.ToString(),
                        cmbValue.SelectedItem.ToString(),
@@ -361,14 +362,15 @@ namespace EpiDashboard.Controls
 
                 }
                 else
-                    if (choroKMLprovider != null)
+                    if (choroplethKmlLayerProvider != null)
                     {
-                        choroKMLprovider.PopulateRangeValues(_dashboardHelper,
+                        choroplethKmlLayerProvider.PopulateRangeValues(_dashboardHelper,
                            cmbShapeKey.SelectedItem.ToString(),
                            cmbDataKey.SelectedItem.ToString(),
                            cmbValue.SelectedItem.ToString(),
                            brushList,
-                           classCount);
+                            classCount,
+                            legTitle.Text);
                     }
                 SetRangeUISection();
             }
@@ -382,7 +384,7 @@ namespace EpiDashboard.Controls
                 {
                     SolidColorBrush scBrush = ((Rectangle)element).Fill as SolidColorBrush;
                     Color color = scBrush.Color;
-                    _provider.CustomColorsDictionary.Add(((Rectangle)element).Name, color);
+                    thisProvider.CustomColorsDictionary.Add(((Rectangle)element).Name, color);
                 }
             }
         }
@@ -399,7 +401,7 @@ namespace EpiDashboard.Controls
                     if (elementName.StartsWith("ramp"))
                     {
 
-                        _provider.ClassRangesDictionary.Add(((System.Windows.Controls.TextBox)element).Name,
+                        thisProvider.ClassRangesDictionary.Add(((System.Windows.Controls.TextBox)element).Name,
                             ((System.Windows.Controls.TextBox)element).Text);
                     }
                 }
@@ -410,12 +412,12 @@ namespace EpiDashboard.Controls
         private void tbtnHTML_Checked(object sender, RoutedEventArgs e)
         {
            
-           if (!string.IsNullOrEmpty(txtProjectPath.Text) )
+            if (!string.IsNullOrEmpty(txtProjectPath.Text))
            {
-                if( !string.IsNullOrEmpty(txtShapePath.Text) 
-                    ||  cbxmapserver.SelectedIndex != -1   
-                    ||    (!string.IsNullOrEmpty(txtMapSeverpath.Text) 
-                    || (!string.IsNullOrEmpty(txtKMLpath.Text)  )))
+                if (!string.IsNullOrEmpty(txtShapePath.Text)
+                    || cbxmapserver.SelectedIndex != -1
+                    || (!string.IsNullOrEmpty(txtMapSeverpath.Text)
+                    || (!string.IsNullOrEmpty(txtKMLpath.Text))))
                 {
                    // btnOK.Visibility = Visibility.Hidden;
                     CheckButtonStates(sender as ToggleButton);
@@ -424,8 +426,8 @@ namespace EpiDashboard.Controls
                     panelCharts.Visibility = System.Windows.Visibility.Collapsed;
                     panelInfo.Visibility = System.Windows.Visibility.Collapsed;
                     panelFilters.Visibility = System.Windows.Visibility.Collapsed;
-                    if (choroserverlayerprop != null)
-                        if (choroserverlayerprop.provider.FlagUpdateToGLFailed) { ResetShapeCombo(); }
+                    if (choroplethServerLayerProperties != null)
+                        if (choroplethServerLayerProperties.provider.FlagUpdateToGLFailed) { ResetShapeCombo(); }
                 }
                 else
                 {
@@ -495,9 +497,9 @@ namespace EpiDashboard.Controls
             {
                 Addfilters();
 
-                if ((_provider != null && !_provider.AreRangesSet) ||
-                    (choroMapprovider != null && !choroMapprovider.AreRangesSet) ||
-                    (choroKMLprovider != null && !choroKMLprovider.AreRangesSet)
+                if ((thisProvider != null && !thisProvider.AreRangesSet) ||
+                    (choroplethServerLayerProvider != null && !choroplethServerLayerProvider.AreRangesSet) ||
+                    (choroplethKmlLayerProvider != null && !choroplethKmlLayerProvider.AreRangesSet)
                     )
                 {
                     SetDefaultRanges();
@@ -508,35 +510,42 @@ namespace EpiDashboard.Controls
                 RenderMap();
 
 
-                if (_provider != null && !ValidateRangeInput())
+                if (thisProvider != null && !ValidateRangeInput())
                     return;
 
                 AddClassAttributes();
 
                 int numclasses = Convert.ToInt32(cmbClasses.Text);
-                bool flagquintiles = (bool)quintilesOption.IsChecked;
+                bool flagquintiles = (bool) quintilesOption.IsChecked;
 
-                if (radShapeFile.IsChecked == true && _provider != null)
+                if (radShapeFile.IsChecked == true && thisProvider != null)
                 {
 
 
-                    layerprop.SetValues(txtShapePath.Text, cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text,
+                    choroplethShapeLayerProperties.SetValues(txtShapePath.Text, cmbShapeKey.Text, cmbDataKey.Text,
+                        cmbValue.Text,
                         cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, rctMissingColor.Fill, shapeAttributes,
                         ClassAttribList,
                         flagquintiles, numclasses, legTitle.Text);
 
 
                 }
-                else if (radMapServer.IsChecked == true && choroMapprovider != null)
+                else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
                 {
-                    choroserverlayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, rctMissingColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses, Opacity);
-                    choroserverlayerprop.cbxMapserverText = cbxmapserver.Text;
-                    choroserverlayerprop.txtMapserverText = txtMapSeverpath.Text;
-                    choroserverlayerprop.cbxMapFeatureText = cbxmapfeature.Text;
+                    choroplethServerLayerProperties.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text,
+                        cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, rctMissingColor.Fill, shapeAttributes,
+                        ClassAttribList, flagquintiles, numclasses, Opacity);
+                    choroplethServerLayerProperties.cbxMapserverText = cbxmapserver.Text;
+                    choroplethServerLayerProperties.txtMapserverText = txtMapSeverpath.Text;
+                    choroplethServerLayerProperties.cbxMapFeatureText = cbxmapfeature.Text;
                 }
 
-                else if (radKML.IsChecked == true && choroKMLprovider != null)
-                { chorokmllayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, rctMissingColor.Fill, shapeAttributes, ClassAttribList, flagquintiles, numclasses); }
+                else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
+                {
+                    choroplethKmlLayerProperties.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text,
+                        cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, rctMissingColor.Fill, shapeAttributes,
+                        ClassAttribList, flagquintiles, numclasses);
+                }
 
                 if (ChangesAccepted != null)
                 {
@@ -546,7 +555,8 @@ namespace EpiDashboard.Controls
             else
             {
                // tbtnDataSource.IsChecked = true;
-                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_VARIABLES, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
+                MessageBoxResult result = System.Windows.MessageBox.Show(
+                    DashboardSharedStrings.GADGET_MAP_ADD_VARIABLES, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
             }
 
 
@@ -556,12 +566,12 @@ namespace EpiDashboard.Controls
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            /* if (radShapeFile.IsChecked == true && _provider != null && layerprop.classAttribList == null) 
-                 { layerprop.CloseLayer(); }
-             else if (radMapServer.IsChecked == true && choroMapprovider != null && choroserverlayerprop.classAttribList == null)
-                 { choroserverlayerprop.CloseLayer(); }
-             else if (radKML.IsChecked == true && choroKMLprovider != null && chorokmllayerprop.classAttribList == null)
-                 { chorokmllayerprop.CloseLayer(); } */
+            /* if (radShapeFile.IsChecked == true && thisProvider != null && choroplethShapeLayerProperties.classAttribList == null) 
+                 { choroplethShapeLayerProperties.CloseLayer(); }
+             else if (radMapServer.IsChecked == true && choroMapprovider != null && choroplethServerLayerProperties.classAttribList == null)
+                 { choroplethServerLayerProperties.CloseLayer(); }
+             else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null && choroplethKmlLayerProperties.classAttribList == null)
+                 { choroplethKmlLayerProperties.CloseLayer(); } */
 
             if (Cancelled != null)
             {
@@ -596,9 +606,9 @@ namespace EpiDashboard.Controls
                 this.datafilters = new DataFilters(_dashboardHelper);
                 rowFilterControl = new RowFilterControl(_dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, datafilters, true);
                 rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; rowFilterControl.FillSelectionComboboxes();
-                if(HasFilter())
+                if (HasFilter())
                 {
-                   RemoveFilter( );
+                    RemoveFilter();
                  
                 }
                 panelFilters.Children.Add(rowFilterControl);
@@ -620,7 +630,7 @@ namespace EpiDashboard.Controls
                     panelFilters.Children.RemoveAt(ChildIndex);
                     break;
                 }
-                 ChildIndex ++;
+                ChildIndex++;
             }
         }
 
@@ -682,40 +692,41 @@ namespace EpiDashboard.Controls
 
         private void btnBrowseShapeFile_Click(object sender, RoutedEventArgs e)
         {
-            _provider = new Mapping.ChoroplethLayerProvider(_myMap);
-            object[] shapeFileProperties = _provider.LoadShapeFile();
+            thisProvider = new Mapping.ChoroplethShapeLayerProvider(_myMap);
+            object[] shapeFileProperties = thisProvider.LoadShapeFile();
             if (shapeFileProperties != null)
             {
-                layerAddednew.Add(_provider._layerId.ToString());
-                if (layerprop == null)
+                layerAddednew.Add(thisProvider._layerId.ToString());
+                if (choroplethShapeLayerProperties == null)
                 {
                     ILayerProperties layerProperties = null;
-                    layerProperties = new ChoroplethLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
+                    layerProperties = new ChoroplethShapeLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
                     layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
                     layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
                     layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);
-                    this.layerprop = (ChoroplethLayerProperties)layerProperties;
+                    this.choroplethShapeLayerProperties = (ChoroplethShapeLayerProperties)layerProperties;
                     this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
                 }
 
-                layerprop.provider = _provider;
+                choroplethShapeLayerProperties.provider = thisProvider  as  ChoroplethShapeLayerProvider;    
+
                 if (this.DashboardHelper != null)
-                    layerprop.SetdashboardHelper(DashboardHelper);
+                    choroplethShapeLayerProperties.SetdashboardHelper(DashboardHelper);
 
                 if (shapeFileProperties.Length == 2)
                 {
                     txtShapePath.Text = shapeFileProperties[0].ToString();
-                    layerprop.shapeFilePath = shapeFileProperties[0].ToString();
-                    layerprop.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
+                    choroplethShapeLayerProperties.shapeFilePath = shapeFileProperties[0].ToString();
+                    choroplethShapeLayerProperties.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
                     shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
                     if (shapeAttributes != null)
                     {
                         cmbShapeKey.Items.Clear();
-                        layerprop.cbxShapeKey.Items.Clear();
+                        choroplethShapeLayerProperties.cbxShapeKey.Items.Clear();
                         foreach (string key in shapeAttributes.Keys)
                         {
                             cmbShapeKey.Items.Add(key);
-                            layerprop.cbxShapeKey.Items.Add(key);
+                            choroplethShapeLayerProperties.cbxShapeKey.Items.Add(key);
                         }
                     }
                 }
@@ -816,7 +827,7 @@ namespace EpiDashboard.Controls
             double Value;
             if (double.TryParse(textBox.Text, out Value))
             {
-                if (Value >= double.Parse(_provider.RangeValues[0, 0].ToString()) && Value <= double.Parse(_provider.RangeValues[_provider.RangeCount - 1, 1].ToString()))
+                if (Value >= double.Parse(thisProvider.RangeValues[0, 0].ToString()) && Value <= double.Parse(thisProvider.RangeValues[thisProvider.RangeCount - 1, 1].ToString()))
                 {
                     return true;
                 }
@@ -826,7 +837,7 @@ namespace EpiDashboard.Controls
 
         private bool ValidateRangeInput()
         {
-            int _rangeCount = _provider.RangeCount;
+            int _rangeCount = thisProvider.RangeCount;
 
             if (_rangeCount >= 2)
             {
@@ -1066,12 +1077,14 @@ namespace EpiDashboard.Controls
                     classCount = 4;
                 }
 
-                if (radShapeFile.IsChecked == true && _provider != null)
+
+
+                if (radShapeFile.IsChecked == true && thisProvider != null)
                 {
-                    _provider.Range = GetRangeValues(_provider.RangeCount);
-                    _provider.ListLegendText = ListLegendText;
-                    _provider.Opacity = this.Opacity;
-                    _provider.SetShapeRangeValues(_dashboardHelper,
+                    thisProvider.Range = GetRangeValues(thisProvider.RangeCount);
+                    thisProvider.ListLegendText = ListLegendText;
+                    thisProvider.Opacity = this.Opacity;
+                    thisProvider.SetShapeRangeValues(_dashboardHelper,
                         cmbShapeKey.SelectedItem.ToString(),
                         cmbDataKey.SelectedItem.ToString(),
                         cmbValue.SelectedItem.ToString(),
@@ -1079,12 +1092,12 @@ namespace EpiDashboard.Controls
                         classCount,
                         missingText);
                 }
-                else if (radMapServer.IsChecked == true && choroMapprovider != null)
+                else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
                 {
-                    choroMapprovider.Range = GetRangeValues(choroMapprovider.RangeCount);
-                    choroMapprovider.ListLegendText = ListLegendText;
-                    choroMapprovider.Opacity = this.Opacity;
-                    choroMapprovider.SetShapeRangeValues(_dashboardHelper,
+                    choroplethServerLayerProvider.Range = GetRangeValues(choroplethServerLayerProvider.RangeCount);
+                    choroplethServerLayerProvider.ListLegendText = ListLegendText;
+                    choroplethServerLayerProvider.Opacity = this.Opacity;
+                    choroplethServerLayerProvider.SetShapeRangeValues(_dashboardHelper,
                     cmbShapeKey.SelectedItem.ToString(),
                     cmbDataKey.SelectedItem.ToString(),
                     cmbValue.SelectedItem.ToString(),
@@ -1092,12 +1105,12 @@ namespace EpiDashboard.Controls
                     classCount,
                     missingText);
                 }
-                else if (radKML.IsChecked == true && choroKMLprovider != null)
+                else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
                 {
-                    choroKMLprovider.Range = GetRangeValues(choroKMLprovider.RangeCount);
-                    // choroKMLprovider.ListLegendText = ListLegendText;
-                    choroKMLprovider.Opacity = this.Opacity;
-                    choroKMLprovider.SetShapeRangeValues(_dashboardHelper,
+                    choroplethKmlLayerProvider.Range = GetRangeValues(choroplethKmlLayerProvider.RangeCount);
+                    // choroplethKmlLayerProvider.ListLegendText = ListLegendText;
+                    choroplethKmlLayerProvider.Opacity = this.Opacity;
+                    choroplethKmlLayerProvider.SetShapeRangeValues(_dashboardHelper,
                     cmbShapeKey.SelectedItem.ToString(),
                     cmbDataKey.SelectedItem.ToString(),
                     cmbValue.SelectedItem.ToString(),
@@ -1105,7 +1118,7 @@ namespace EpiDashboard.Controls
                     classCount,
                     missingText);
                 }
-                /* _provider.SetShapeRangeValues(_dashboardHelper, 
+                /* thisProvider.SetShapeRangeValues(_dashboardHelper, 
                      cmbShapeKey.SelectedItem.ToString(),
                      cmbDataKey.SelectedItem.ToString(),
                      cmbValue.SelectedItem.ToString(),
@@ -1179,7 +1192,7 @@ namespace EpiDashboard.Controls
             ListLegendText.Add(legendText9.Name, legendText9.Text);
             ListLegendText.Add(legendText10.Name, legendText10.Text);
 
-            //int _rangeCount = _provider.RangeCount;
+            //int _rangeCount = thisProvider.RangeCount;
             double value = 0.0;
 
             if (RangeCount >= 2)
@@ -1251,7 +1264,7 @@ namespace EpiDashboard.Controls
         {
             get
             {
-                return _provider.LegendStackPanel;
+                return thisProvider.LegendStackPanel;
             }
         }
         
@@ -1261,7 +1274,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor0.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctColor0.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctColor0.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -1271,7 +1284,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor1.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctColor1.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctColor1.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -1281,7 +1294,10 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor2.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctColor2.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+                thisProvider.CustomColorsDictionary.Add(rctColor2.Name,
+                    Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
             }
         }
 
@@ -1291,7 +1307,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor3.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctColor3.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctColor3.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -1301,7 +1317,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor4.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctColor4.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctColor4.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -1311,7 +1327,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor5.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctColor5.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctColor5.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -1321,7 +1337,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor6.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctColor6.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctColor6.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -1331,7 +1347,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor7.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctColor7.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctColor7.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -1341,7 +1357,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor8.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctColor8.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctColor8.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -1351,7 +1367,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor9.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctColor9.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctColor9.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -1361,7 +1377,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor10.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctColor10.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctColor10.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -1371,7 +1387,9 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctMissingColor.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctMissingColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+                thisProvider.CustomColorsDictionary.Add(rctMissingColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
             }
         }
 
@@ -1381,7 +1399,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctLowColor.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctLowColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctLowColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
 
             Reset_Legend();
@@ -1393,7 +1411,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctHighColor.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                _provider.CustomColorsDictionary.Add(rctHighColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctHighColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
             
             Reset_Legend();
@@ -1406,8 +1424,8 @@ namespace EpiDashboard.Controls
 
         private void Reset_Legend()
         {
-            if (((ComboBoxItem)cmbClasses.SelectedItem).Content == null || _provider == null)
-            {
+            if (((ComboBoxItem)cmbClasses.SelectedItem).Content == null ||   thisProvider == null)
+        {
                 return;
             }
             
@@ -1431,11 +1449,11 @@ namespace EpiDashboard.Controls
             }
 
             if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null) &&
-                (_provider != null))
+                (thisProvider != null))
             {
-                _provider.RangesLoadedFromMapFile = false;
+                thisProvider.RangesLoadedFromMapFile = false;
 
-                _provider.ResetRangeValues(
+                thisProvider.ResetRangeValues(
                     cmbShapeKey.SelectedItem.ToString(),
                     cmbDataKey.SelectedItem.ToString(),
                     cmbValue.SelectedItem.ToString(),
@@ -1443,14 +1461,14 @@ namespace EpiDashboard.Controls
                     );
             }
             else if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null &&
-                      cmbValue.SelectedItem != null) && (choroMapprovider != null))
+                      cmbValue.SelectedItem != null) && (choroplethServerLayerProvider != null))
             {
-                choroMapprovider.ResetRangeValues();
+                choroplethServerLayerProvider.ResetRangeValues();
             }
             else if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null &&
-                      cmbValue.SelectedItem != null) && (choroKMLprovider != null))
+                      cmbValue.SelectedItem != null) && (choroplethKmlLayerProvider != null))
             {
-                choroKMLprovider.ResetRangeValues();
+                choroplethKmlLayerProvider.ResetRangeValues();
             }
 
             SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
@@ -1460,15 +1478,15 @@ namespace EpiDashboard.Controls
                 cmbDataKey.SelectedItem != null &&
                 cmbValue.SelectedItem != null)
             {
-                _provider.UseCustomColors = false;
+                thisProvider.UseCustomColors = false;
                 SetRangeUISection();
             }
 
             if (string.IsNullOrEmpty(legTitle.Text))
             {
-                if (_provider.LegendText != null)
+                if (thisProvider.LegendText != null)
                 {
-                    legTitle.Text = _provider.LegendText;
+                    legTitle.Text = thisProvider.LegendText;
                 }
                 else if (_value != null)
                 {
@@ -1511,42 +1529,42 @@ namespace EpiDashboard.Controls
             byte gi = (byte)(gd / (stratCount - 1));
             byte bi = (byte)(bd / (stratCount - 1));
 
-            if (_provider.UseCustomColors)
-                rctColor0.Fill = new SolidColorBrush(_provider.CustomColorsDictionary.GetWithKey(rctColor0.Name));
+            if (thisProvider.UseCustomColors)
+                rctColor0.Fill = new SolidColorBrush(thisProvider.CustomColorsDictionary.GetWithKey(rctColor0.Name));
             else
             {
                 rctColor0.Fill = rampMissing;
-                _provider.CustomColorsDictionary.Add(rctColor0.Name, rampMissing.Color);
+                thisProvider.CustomColorsDictionary.Add(rctColor0.Name, rampMissing.Color);
             }
 
 
-            if (_provider.UseCustomColors)
-                rctColor1.Fill = new SolidColorBrush(_provider.CustomColorsDictionary.GetWithKey(rctColor1.Name));
+            if (thisProvider.UseCustomColors)
+                rctColor1.Fill = new SolidColorBrush(thisProvider.CustomColorsDictionary.GetWithKey(rctColor1.Name));
             else
             {
                 rctColor1.Fill = rampStart;
-                _provider.CustomColorsDictionary.Add(rctColor1.Name, rampStart.Color);
+                thisProvider.CustomColorsDictionary.Add(rctColor1.Name, rampStart.Color);
             }
 
 
 
-            if (radShapeFile.IsChecked == true && _provider != null)
+            if (radShapeFile.IsChecked == true && thisProvider != null)
             {
-                rampStart01.Text = _provider.RangeValues[0, 0];
-                rampEnd01.Text = _provider.RangeValues[0, 1];
-                quintile01.Text = _provider.QuantileValues[0].ToString();
+                rampStart01.Text = thisProvider.RangeValues[0, 0];
+                rampEnd01.Text = thisProvider.RangeValues[0, 1];
+                quintile01.Text = thisProvider.QuantileValues[0].ToString();
             }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
+            else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
             {
-                rampStart01.Text = choroMapprovider.RangeValues[0, 0];
-                rampEnd01.Text = choroMapprovider.RangeValues[0, 1];
-                quintile01.Text = choroMapprovider.QuantileValues[0].ToString();
+                rampStart01.Text = choroplethServerLayerProvider.RangeValues[0, 0];
+                rampEnd01.Text = choroplethServerLayerProvider.RangeValues[0, 1];
+                quintile01.Text = choroplethServerLayerProvider.QuantileValues[0].ToString();
             }
-            else if (radKML.IsChecked == true && choroKMLprovider != null)
+            else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
             {
-                rampStart01.Text = choroKMLprovider.RangeValues[0, 0];
-                rampEnd01.Text = choroKMLprovider.RangeValues[0, 1];
-                quintile01.Text = choroKMLprovider.QuantileValues[0].ToString();
+                rampStart01.Text = choroplethKmlLayerProvider.RangeValues[0, 0];
+                rampEnd01.Text = choroplethKmlLayerProvider.RangeValues[0, 1];
+                quintile01.Text = choroplethKmlLayerProvider.QuantileValues[0].ToString();
             }
 
 
@@ -1561,13 +1579,13 @@ namespace EpiDashboard.Controls
             foreach (UIControls uiControls in uics)
             {
 
-                if (_provider.UseCustomColors)
-                    coo = _provider.GetCustomColor(uiControls.rectangle.Name);
+                if (thisProvider.UseCustomColors)
+                    coo = thisProvider.CustomColorsDictionary.GetWithKey(uiControls.rectangle.Name);
                 else
                 {
                     coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * gradientControl), (byte)(rampStart.Color.G - gi * gradientControl),
                         (byte)(rampStart.Color.B - bi * gradientControl));
-                    _provider.CustomColorsDictionary.Add(uiControls.rectangle.Name, coo);
+                    thisProvider.CustomColorsDictionary.Add(uiControls.rectangle.Name, coo);
                 }
 
                 gradientControl++;
@@ -1590,23 +1608,23 @@ namespace EpiDashboard.Controls
                 }
                 if (isNewColorRamp) uiControls.rectangle.Fill = new SolidColorBrush(coo);
 
-                if (radShapeFile.IsChecked == true && _provider != null)
+                if (radShapeFile.IsChecked == true && thisProvider != null)
                 {
-                    uiControls.rampStarts.Text = _provider.RangeValues[i - 2, 0];
-                    uiControls.rampEnds.Text = _provider.RangeValues[i - 2, 1];
-                    uiControls.quintiles.Text = _provider.QuantileValues[i - 2].ToString();
+                    uiControls.rampStarts.Text = thisProvider.RangeValues[i - 2, 0];
+                    uiControls.rampEnds.Text = thisProvider.RangeValues[i - 2, 1];
+                    uiControls.quintiles.Text = thisProvider.QuantileValues[i - 2].ToString();
                 }
-                else if (radMapServer.IsChecked == true && choroMapprovider != null)
+                else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
                 {
-                    uiControls.rampStarts.Text = choroMapprovider.RangeValues[i - 2, 0];
-                    uiControls.rampEnds.Text = choroMapprovider.RangeValues[i - 2, 1];
-                    uiControls.quintiles.Text = choroMapprovider.QuantileValues[i - 2].ToString();
+                    uiControls.rampStarts.Text = choroplethServerLayerProvider.RangeValues[i - 2, 0];
+                    uiControls.rampEnds.Text = choroplethServerLayerProvider.RangeValues[i - 2, 1];
+                    uiControls.quintiles.Text = choroplethServerLayerProvider.QuantileValues[i - 2].ToString();
                 }
-                else if (radKML.IsChecked == true && choroKMLprovider != null)
+                else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
                 {
-                    uiControls.rampStarts.Text = choroKMLprovider.RangeValues[i - 2, 0];
-                    uiControls.rampEnds.Text = choroKMLprovider.RangeValues[i - 2, 1];
-                    uiControls.quintiles.Text = choroKMLprovider.QuantileValues[i - 2].ToString();
+                    uiControls.rampStarts.Text = choroplethKmlLayerProvider.RangeValues[i - 2, 0];
+                    uiControls.rampEnds.Text = choroplethKmlLayerProvider.RangeValues[i - 2, 1];
+                    uiControls.quintiles.Text = choroplethKmlLayerProvider.QuantileValues[i - 2].ToString();
                 }
 
 
@@ -1757,7 +1775,8 @@ namespace EpiDashboard.Controls
         public void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbShapeKey.SelectedItem != null)
-            { _shapeKey = cmbShapeKey.SelectedItem.ToString();
+            {
+                _shapeKey = cmbShapeKey.SelectedItem.ToString();
             cmbDataKey.IsEnabled = true;
             }
             else
@@ -1768,7 +1787,8 @@ namespace EpiDashboard.Controls
         {
             ReFillValueComboBoxes();
             if (cmbDataKey.SelectedItem != null)
-            { _dataKey = cmbDataKey.SelectedItem.ToString();
+            {
+                _dataKey = cmbDataKey.SelectedItem.ToString();
             cmbValue.IsEnabled = true;
             }
 
@@ -1815,17 +1835,17 @@ namespace EpiDashboard.Controls
                 classCount = 4;
             }
 
-            if (radShapeFile.IsChecked == true && _provider != null)
+            if (radShapeFile.IsChecked == true && thisProvider != null)
             {
 
 
-                _provider.PopulateRangeValues();
+                thisProvider.PopulateRangeValues();
 
                 //  Leg Title        
                 if (string.IsNullOrEmpty(legTitle.Text))
-                    legTitle.Text = _provider.LegendText;
+                    legTitle.Text = thisProvider.LegendText;
                 else
-                    _provider.LegendText = legTitle.Text;
+                    thisProvider.LegendText = legTitle.Text;
 
 
                 try
@@ -1835,9 +1855,9 @@ namespace EpiDashboard.Controls
                     {
                         System.Windows.Controls.TextBox t = FindName(ChoroplethConstants.legendTextControlPrefix + x) as System.Windows.Controls.TextBox;
                         if (string.IsNullOrEmpty(t.Text))
-                            t.Text = _provider.ListLegendText.GetWithKey(ChoroplethConstants.legendTextControlPrefix + x);
+                            t.Text = thisProvider.ListLegendText.GetWithKey(ChoroplethConstants.legendTextControlPrefix + x);
                         else
-                            _provider.ListLegendText.Add(ChoroplethConstants.legendTextControlPrefix + x, t.Text);
+                            thisProvider.ListLegendText.Add(ChoroplethConstants.legendTextControlPrefix + x, t.Text);
                     }
 
 
@@ -1851,23 +1871,29 @@ namespace EpiDashboard.Controls
 
 
 
-                _provider.AreRangesSet = true;
+                thisProvider.AreRangesSet = true;
             }
-            else if (radMapServer.IsChecked == true && choroMapprovider != null)
+            else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
             {
-                choroMapprovider.Range = GetRangeValuesFromAttributeList(choroserverlayerprop.classAttribList, classCount);
-                choroMapprovider.PopulateRangeValues(_dashboardHelper,
+                choroplethServerLayerProvider.Range = GetRangeValuesFromAttributeList(choroplethServerLayerProperties.classAttribList, classCount);
+                choroplethServerLayerProvider.PopulateRangeValues(_dashboardHelper,
                          cmbShapeKey.SelectedItem.ToString(),
                          cmbDataKey.SelectedItem.ToString(),
                          cmbValue.SelectedItem.ToString(),
                          brushList,
                          classCount);
-                choroMapprovider.AreRangesSet = true;
+                choroplethServerLayerProvider.AreRangesSet = true;
             }
-            else if (radKML.IsChecked == true && choroKMLprovider != null)
+            else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
             {
-                choroKMLprovider.PopulateRangeValues();
-                choroKMLprovider.AreRangesSet = true;
+
+
+
+                choroplethKmlLayerProvider.PopulateRangeValues();
+                choroplethKmlLayerProvider.AreRangesSet = true;
+                thisProvider = choroplethKmlLayerProvider;    
+
+
             }
 
             SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
@@ -1952,31 +1978,33 @@ namespace EpiDashboard.Controls
                 KMLMapServerName = txtKMLpath.Text;
             }
 
-            if (choroKMLprovider == null)
+            if (choroplethKmlLayerProvider == null)
             {
-                choroKMLprovider = new Mapping.ChoroplethKmlLayerProvider(_myMap);
-                choroKMLprovider.FeatureLoaded += new FeatureLoadedHandler(choroKMLprovider_FeatureLoaded);
+                choroplethKmlLayerProvider = new Mapping.ChoroplethKmlLayerProvider(_myMap);
+                thisProvider = choroplethKmlLayerProvider;   
+
+                choroplethKmlLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroKMLprovider_FeatureLoaded);
             }
 
-            object[] kmlFileProperties = choroKMLprovider.LoadKml(KMLMapServerName);
+            object[] kmlFileProperties = choroplethKmlLayerProvider.LoadKml(KMLMapServerName);
             if (kmlFileProperties != null)
             {
-                layerAddednew.Add(choroKMLprovider._layerId.ToString());
-                if (chorokmllayerprop == null)
+                layerAddednew.Add(choroplethKmlLayerProvider._layerId.ToString());
+                if (choroplethKmlLayerProperties == null)
                 {
                     ILayerProperties layerProperties = null;
                     layerProperties = new ChoroplethKmlLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
                     layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
                     layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
                     layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);
-                    this.chorokmllayerprop = (ChoroplethKmlLayerProperties)layerProperties;
+                    this.choroplethKmlLayerProperties = (ChoroplethKmlLayerProperties)layerProperties;
                     this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
                 }
-                chorokmllayerprop.shapeFilePath = KMLMapServerName;
-                chorokmllayerprop.provider = choroKMLprovider;
-                chorokmllayerprop.provider.FeatureLoaded += new FeatureLoadedHandler(chorokmllayerprop.provider_FeatureLoaded);
+                choroplethKmlLayerProperties.shapeFilePath = KMLMapServerName;
+                choroplethKmlLayerProperties.provider = choroplethKmlLayerProvider;
+                choroplethKmlLayerProperties.provider.FeatureLoaded += new FeatureLoadedHandler(choroplethKmlLayerProperties.provider_FeatureLoaded);
                 if (this.DashboardHelper != null)
-                    chorokmllayerprop.SetdashboardHelper(DashboardHelper);
+                    choroplethKmlLayerProperties.SetdashboardHelper(DashboardHelper);
 
             }
         }
@@ -1990,11 +2018,11 @@ namespace EpiDashboard.Controls
                 {
                     cmbShapeKey.Items.Clear();
                     cmbShapeKey.SelectedIndex = -1;
-                    choroserverlayerprop.cbxShapeKey.Items.Clear();
+                    choroplethServerLayerProperties.cbxShapeKey.Items.Clear();
                     foreach (string key in featureAttributes.Keys)
                     {
                         cmbShapeKey.Items.Add(key);
-                        choroserverlayerprop.cbxShapeKey.Items.Add(key);
+                        choroplethServerLayerProperties.cbxShapeKey.Items.Add(key);
                     }
                 }
             }
@@ -2025,7 +2053,7 @@ namespace EpiDashboard.Controls
                 }
                 //  RenderMap();    
 
-                legTitle.Text = _provider.LegendText;
+                legTitle.Text = thisProvider.LegendText;
 
             }
         }
@@ -2033,9 +2061,9 @@ namespace EpiDashboard.Controls
         private void Addfilters()
         {
             this.datafilters = rowFilterControl.DataFilters;
-            if (radShapeFile.IsChecked == true && this.layerprop != null) { layerprop.datafilters = rowFilterControl.DataFilters; }
-            if (radMapServer.IsChecked == true && this.choroserverlayerprop != null) { choroserverlayerprop.datafilters = rowFilterControl.DataFilters; }
-            if (radKML.IsChecked == true && chorokmllayerprop != null) { chorokmllayerprop.datafilters = rowFilterControl.DataFilters; }
+            if (radShapeFile.IsChecked == true && this.choroplethShapeLayerProperties != null) { choroplethShapeLayerProperties.datafilters = rowFilterControl.DataFilters; }
+            if (radMapServer.IsChecked == true && this.choroplethServerLayerProperties != null) { choroplethServerLayerProperties.datafilters = rowFilterControl.DataFilters; }
+            if (radKML.IsChecked == true && choroplethKmlLayerProperties != null) { choroplethKmlLayerProperties.datafilters = rowFilterControl.DataFilters; }
 
 
             this.datafilters = rowFilterControl.DataFilters;
@@ -2130,11 +2158,11 @@ namespace EpiDashboard.Controls
                 if (featureAttributes != null)
                 {
                     cmbShapeKey.Items.Clear();
-                    chorokmllayerprop.cbxShapeKey.Items.Clear();
+                    choroplethKmlLayerProperties.cbxShapeKey.Items.Clear();
                     foreach (string key in featureAttributes.Keys)
                     {
                         cmbShapeKey.Items.Add(key);
-                        chorokmllayerprop.cbxShapeKey.Items.Add(key);
+                        choroplethKmlLayerProperties.cbxShapeKey.Items.Add(key);
                     }
                 }
             }
@@ -2217,15 +2245,15 @@ namespace EpiDashboard.Controls
             radlocatemapserver.IsChecked = false;
             radconnectmapserver.IsChecked = false;
             txtMapSeverpath.Text = string.Empty;
-            if (choroMapprovider != null)
+            if (choroplethServerLayerProvider != null)
             {
-                choroMapprovider.FeatureLoaded -= new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
-                choroMapprovider = null;
+                choroplethServerLayerProvider.FeatureLoaded -= new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
+                choroplethServerLayerProvider = null;
             }
-            if (_provider != null)
+            if (thisProvider != null)
             {
-                layerprop.CloseLayer();
-                _provider = null;
+                choroplethShapeLayerProperties.CloseLayer();
+                //thisProvider = null;
             }
         }
 
@@ -2242,15 +2270,15 @@ namespace EpiDashboard.Controls
             radlocatemapserver.IsChecked = false;
             radconnectmapserver.IsChecked = false;
             txtMapSeverpath.Text = string.Empty;
-            if (choroMapprovider != null)
+            if (choroplethServerLayerProvider != null)
             {
-                choroMapprovider.FeatureLoaded -= new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
-                choroMapprovider = null;
+                choroplethServerLayerProvider.FeatureLoaded -= new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
+                choroplethServerLayerProvider = null;
             }
-            if (choroKMLprovider != null)
+            if (choroplethKmlLayerProvider != null)
             {
-                choroKMLprovider.FeatureLoaded -= new FeatureLoadedHandler(choroKMLprovider_FeatureLoaded);
-                choroKMLprovider = null;
+                choroplethKmlLayerProvider.FeatureLoaded -= new FeatureLoadedHandler(choroKMLprovider_FeatureLoaded);
+                choroplethKmlLayerProvider = null;
             }
         }
 
@@ -2265,15 +2293,15 @@ namespace EpiDashboard.Controls
             cbxmapfeature.SelectedIndex = -1;
             cbxmapserver.SelectedIndex = -1;
             txtMapSeverpath.Text = string.Empty;
-            if (choroKMLprovider != null)
+            if (choroplethKmlLayerProvider != null)
             {
-                choroKMLprovider.FeatureLoaded -= new FeatureLoadedHandler(choroKMLprovider_FeatureLoaded);
-                choroKMLprovider = null;
+                choroplethKmlLayerProvider.FeatureLoaded -= new FeatureLoadedHandler(choroKMLprovider_FeatureLoaded);
+                choroplethKmlLayerProvider = null;
             }
-            if (_provider != null)
+            if (thisProvider != null)
             {
-                layerprop.CloseLayer();
-                _provider = null;
+                choroplethShapeLayerProperties.CloseLayer();
+                //  thisProvider = null;
             }
         }
 
@@ -2368,30 +2396,30 @@ namespace EpiDashboard.Controls
             {
                 MapServerName = ((ComboBoxItem)cbxmapserver.SelectedItem).Content.ToString();
 
-                if (choroMapprovider == null)
+                if (choroplethServerLayerProvider == null)
                 {
-                    choroMapprovider = new Mapping.ChoroplethServerLayerProvider(_myMap);
-                    choroMapprovider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
+                    choroplethServerLayerProvider = new Mapping.ChoroplethServerLayerProvider(_myMap);
+                    choroplethServerLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
                 }
-                object[] mapFileProperties = choroMapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
+                object[] mapFileProperties = choroplethServerLayerProvider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
                 if (mapFileProperties != null)
                 {
-                    layerAddednew.Add(choroMapprovider.layerId.ToString());
-                    if (this.choroserverlayerprop == null)
+                    layerAddednew.Add(choroplethServerLayerProvider.layerId.ToString());
+                    if (this.choroplethServerLayerProperties == null)
                     {
                         ILayerProperties layerProperties = null;
                         layerProperties = new ChoroplethServerLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
                         layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
                         layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
                         layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);
-                        this.choroserverlayerprop = (ChoroplethServerLayerProperties)layerProperties;
+                        this.choroplethServerLayerProperties = (ChoroplethServerLayerProperties)layerProperties;
                         this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
                     }
-                    choroserverlayerprop.shapeFilePath = MapServerName;
-                    choroserverlayerprop.provider = choroMapprovider;
-                    choroserverlayerprop.provider.FeatureLoaded += new FeatureLoadedHandler(choroserverlayerprop.provider_FeatureLoaded);
+                    choroplethServerLayerProperties.shapeFilePath = MapServerName;
+                    choroplethServerLayerProperties.provider = choroplethServerLayerProvider;
+                    choroplethServerLayerProperties.provider.FeatureLoaded += new FeatureLoadedHandler(choroplethServerLayerProperties.provider_FeatureLoaded);
                     if (this.DashboardHelper != null)
-                        choroserverlayerprop.SetdashboardHelper(DashboardHelper);
+                        choroplethServerLayerProperties.SetdashboardHelper(DashboardHelper);
 
                 }
             }
@@ -2412,10 +2440,10 @@ namespace EpiDashboard.Controls
             {
                 cmbShapeKey.Items.Clear();
                 cmbShapeKey.SelectedIndex = -1;
-                if (choroserverlayerprop != null)
+                if (choroplethServerLayerProperties != null)
                 {
-                    choroserverlayerprop.cbxShapeKey.Items.Clear();
-                    choroserverlayerprop.cbxShapeKey.SelectedIndex = -1;
+                    choroplethServerLayerProperties.cbxShapeKey.Items.Clear();
+                    choroplethServerLayerProperties.cbxShapeKey.SelectedIndex = -1;
                 }
                 /*
                 //set back choroMapprovider
@@ -2423,7 +2451,7 @@ namespace EpiDashboard.Controls
                 {
                     choroMapprovider = new Mapping.ChoroplethServerLayerProvider(_myMap);
                     choroMapprovider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
-                    choroserverlayerprop.provider.FeatureLoaded -= new FeatureLoadedHandler(choroserverlayerprop.provider_FeatureLoaded);
+                    choroplethServerLayerProperties.provider.FeatureLoaded -= new FeatureLoadedHandler(choroplethServerLayerProperties.provider_FeatureLoaded);
                  } */
             }
         }
@@ -2472,30 +2500,30 @@ namespace EpiDashboard.Controls
                 {
                     int visibleLayer = ((SubObject)cbxmapfeature.SelectedItem).id;
                     MapVisibleLayer = visibleLayer;
-                    if (choroMapprovider == null)
+                    if (choroplethServerLayerProvider == null)
                     {
-                        choroMapprovider = new Mapping.ChoroplethServerLayerProvider(_myMap);
-                        choroMapprovider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
+                        choroplethServerLayerProvider = new Mapping.ChoroplethServerLayerProvider(_myMap);
+                        choroplethServerLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
                     }
-                    object[] mapFileProperties = choroMapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
+                    object[] mapFileProperties = choroplethServerLayerProvider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
                     if (mapFileProperties != null)
                     {
-                        layerAddednew.Add(choroMapprovider.layerId.ToString());
-                        if (choroserverlayerprop == null)
+                        layerAddednew.Add(choroplethServerLayerProvider.layerId.ToString());
+                        if (choroplethServerLayerProperties == null)
                         {
                             ILayerProperties layerProperties = null;
                             layerProperties = new ChoroplethServerLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
                             layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
                             layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
                             layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);
-                            this.choroserverlayerprop = (ChoroplethServerLayerProperties)layerProperties;
+                            this.choroplethServerLayerProperties = (ChoroplethServerLayerProperties)layerProperties;
                             this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
                         }
-                        choroserverlayerprop.shapeFilePath = MapServerName;
-                        choroserverlayerprop.provider = choroMapprovider;
-                        choroserverlayerprop.provider.FeatureLoaded += new FeatureLoadedHandler(choroserverlayerprop.provider_FeatureLoaded);
+                        choroplethServerLayerProperties.shapeFilePath = MapServerName;
+                        choroplethServerLayerProperties.provider = choroplethServerLayerProvider;
+                        choroplethServerLayerProperties.provider.FeatureLoaded += new FeatureLoadedHandler(choroplethServerLayerProperties.provider_FeatureLoaded);
                         if (this.DashboardHelper != null)
-                            choroserverlayerprop.SetdashboardHelper(DashboardHelper);
+                            choroplethServerLayerProperties.SetdashboardHelper(DashboardHelper);
 
                     }
                 }

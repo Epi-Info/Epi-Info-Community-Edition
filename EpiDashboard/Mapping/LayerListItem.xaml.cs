@@ -52,7 +52,7 @@ namespace EpiDashboard.Mapping
                     LayerProperties = new ClusterLayerProperties(myMap, dashboardHelper, mapControl);
                     break;
                 case 1:
-                    LayerProperties = new ChoroplethLayerProperties(myMap, dashboardHelper, mapControl);
+                    LayerProperties = new ChoroplethShapeLayerProperties(myMap, dashboardHelper, mapControl);
                     break;
                 default:
                     LayerProperties = new ClusterLayerProperties(myMap, dashboardHelper, mapControl);
