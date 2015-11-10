@@ -1187,8 +1187,54 @@ namespace EpiDashboard.Mapping
                     {
                         if (child.Name.Equals("dashboardHelper"))
                         {
-                            helper.CreateFromXml(child);
-                            helper.PopulateDataSet();
+                            try
+                            {
+                                helper.CreateFromXml(child);
+                                helper.PopulateDataSet();
+                            }
+                            catch (ViewNotFoundException ex)
+                            {
+                                Epi.Windows.MsgBox.ShowError(ex.Message);
+                                return;
+                            }
+                            catch (System.Data.SqlClient.SqlException ex)
+                            {
+                                Epi.Windows.MsgBox.ShowError(ex.Message);
+                                return;
+                            }
+                            catch (System.Data.OleDb.OleDbException ex)
+                            {
+                                Epi.Windows.MsgBox.ShowError(ex.Message);
+                                return;
+                            }
+                            catch (System.IO.FileNotFoundException ex)
+                            {
+                                Epi.Windows.MsgBox.ShowError(ex.Message);
+                                return;
+                            }
+                            catch (GeneralException ex)
+                            {
+                                Epi.Windows.MsgBox.ShowError(ex.Message);
+                                return;
+                            }
+                            catch (ApplicationException ex)
+                            {
+                                string message = ex.Message;
+                                if (message.ToLower().Equals("error executing select query against the database."))
+                                {
+                                    message = DashboardSharedStrings.ERROR_DATA_SOURCE_PERMISSIONS;
+                                }
+                                Epi.Windows.MsgBox.ShowError(message);
+                                return;
+                            }
+                            catch (System.Security.Cryptography.CryptographicException ex)
+                            {
+                                Epi.Windows.MsgBox.ShowError(string.Format(SharedStrings.ERROR_CRYPTO_KEYS, ex.Message));
+                                return;
+                            }
+
+
+
                         }
                     }
 
