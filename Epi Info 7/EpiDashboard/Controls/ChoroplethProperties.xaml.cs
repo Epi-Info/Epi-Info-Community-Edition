@@ -497,21 +497,21 @@ namespace EpiDashboard.Controls
             {
                 Addfilters();
 
-                if ((thisProvider != null && !thisProvider.AreRangesSet) ||
-                    (choroplethServerLayerProvider != null && !choroplethServerLayerProvider.AreRangesSet) ||
-                    (choroplethKmlLayerProvider != null && !choroplethKmlLayerProvider.AreRangesSet)
-                    )
-                {
+                //if ((_provider != null && !_provider.AreRangesSet) ||
+                //    (choroMapprovider != null && !choroMapprovider.AreRangesSet) ||
+                //    (choroKMLprovider != null && !choroKMLprovider.AreRangesSet)
+                //    )
+                //{
                     SetDefaultRanges();
-                }
+              //}
 
                 //  ResetLegend_Click(this, new RoutedEventArgs());
 
                 RenderMap();
 
 
-                if (thisProvider != null && !ValidateRangeInput())
-                    return;
+          //      if (_provider != null && !ValidateRangeInput())
+            //        return;
 
                 AddClassAttributes();
 
