@@ -35,7 +35,8 @@
       <Ellipse Canvas.Top="10" Canvas.Left="10" Width="20" Height="20" Fill="#ff000000"/>
 
     </Canvas>
+       
   </Viewbox>
-
+   
 
 </UserControl>

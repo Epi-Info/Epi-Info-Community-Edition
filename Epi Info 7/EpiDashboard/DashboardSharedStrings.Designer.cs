@@ -2868,6 +2868,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading Data....
+        /// </summary>
+        public static string GADGET_LOADING_DATA {
+            get {
+                return ResourceManager.GetString("GADGET_LOADING_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Longitude Field:.
         /// </summary>
         public static string GADGET_LONGITUDE_FIELD {
@@ -4686,7 +4695,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to X-axis label type:.
+        ///   Looks up a localized string similar to X-axis label:.
         /// </summary>
         public static string GADGET_XAXIS_LABEL {
             get {

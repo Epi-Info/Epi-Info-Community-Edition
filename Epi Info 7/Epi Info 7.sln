@@ -2,13 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B8B36337-2618-4509-9B5F-811B8348A8BE}"
-	ProjectSection(SolutionItems) = preProject
-		Performance1.psess = Performance1.psess
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assemblies", "Assemblies", "{2BCEB9B0-B6AC-4FB4-9C93-2DA780EC6A75}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.ImportExport", "Epi.ImportExport\Epi.ImportExport.csproj", "{B5F72DDF-5349-4C03-9285-AE35110BA6CD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.MakeView", "Epi.Windows.MakeView\Epi.Windows.MakeView.csproj", "{C646CC38-C861-4E7C-8158-B2AAA0D90E01}"
@@ -1409,8 +1402,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{2BCEB9B0-B6AC-4FB4-9C93-2DA780EC6A75} = {B8B36337-2618-4509-9B5F-811B8348A8BE}
 	EndGlobalSection
 EndGlobal

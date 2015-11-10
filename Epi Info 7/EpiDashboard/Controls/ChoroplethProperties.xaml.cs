@@ -132,15 +132,16 @@ namespace EpiDashboard.Controls
             radlocatemapserver.Content = DashboardSharedStrings.GADGET_OTHER_MAPSERVER;
             lblURL.Content = DashboardSharedStrings.GADGET_URL;
             btnMapserverlocate.Content = DashboardSharedStrings.BUTTON_CONNECT;
-            lblExampleMapServerURL.Content = DashboardSharedStrings.GADGET_EXAMPLE_MAPSERVER;
+            lblExampleMapServerURL.Text = DashboardSharedStrings.GADGET_EXAMPLE_MAPSERVER;
             lblSelectFeature.Content = DashboardSharedStrings.GADGET_SELECT_FEATURE;
             radKML.Content = DashboardSharedStrings.GADGET_KMLFILE;
             lblURLOfKMLFile.Content = DashboardSharedStrings.GADGET_KMLFILE_LOCATION;
             btnKMLFile.Content = DashboardSharedStrings.BUTTON_BROWSE;
-            lblExampleKMLFile.Content = DashboardSharedStrings.GADGET_EXAMPLE_KMLFILE;
+            lblExampleKMLFile.Text = DashboardSharedStrings.GADGET_EXAMPLE_KMLFILE;
 
             tblockConnectionString.Content = DashboardSharedStrings.GADGET_CONNECTION_STRING;
             tblockSQLQuery.Content = DashboardSharedStrings.GADGET_SQL_QUERY;
+            tblockLoadingData.Text = DashboardSharedStrings.GADGET_LOADING_DATA;
 
             //Variables Panel
             tblockPanelVariables.Content = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
@@ -434,6 +435,7 @@ namespace EpiDashboard.Controls
                     tbtnHTML.IsChecked = false;
                     MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_BOUNDARY, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
               
+    
                 }
            }
            else
@@ -592,8 +594,11 @@ namespace EpiDashboard.Controls
            // waitPanel.statusText.Text = "Loading Data Set";
 
             waitCursor.Visibility = Visibility.Visible;
+            tblockLoadingData.Visibility = Visibility.Visible;
+            
             _dashboardHelper = _mapControl.GetNewDashboardHelper();
             waitCursor.Visibility = Visibility.Collapsed;
+            tblockLoadingData.Visibility = Visibility.Collapsed;
            // waitPanel.Visibility = Visibility.Collapsed;
             
             if (_dashboardHelper != null)
@@ -1425,7 +1430,7 @@ namespace EpiDashboard.Controls
         private void Reset_Legend()
         {
             if (((ComboBoxItem)cmbClasses.SelectedItem).Content == null ||   thisProvider == null)
-        {
+            {
                 return;
             }
             
