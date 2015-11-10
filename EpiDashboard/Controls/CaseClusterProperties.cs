@@ -77,6 +77,7 @@ namespace EpiDashboard.Controls
             btnBrowse.Content = DashboardSharedStrings.BUTTON_BROWSE;
             tblockConnectionString.Content = DashboardSharedStrings.GADGET_CONNECTION_STRING;
             tblockSQLQuery.Content = DashboardSharedStrings.GADGET_SQL_QUERY;
+            tblockLoadingData.Text = DashboardSharedStrings.GADGET_LOADING_DATA;
 
             //Variables Panel
             tblockPanelVariables.Content = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
@@ -294,10 +295,12 @@ namespace EpiDashboard.Controls
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
             waitCursor.Visibility = Visibility.Visible;
+            tblockLoadingData.Visibility = Visibility.Visible;
           dashboardHelper = mapControl.GetNewDashboardHelper();
          // this.DashboardHelper = dashboardHelper;
           layerprop.SetdashboardHelper(dashboardHelper);
           waitCursor.Visibility = Visibility.Collapsed;
+          tblockLoadingData.Visibility = Visibility.Collapsed;
           if (dashboardHelper != null)
             {
                 txtProjectPath.Text = dashboardHelper.Database.DbName;

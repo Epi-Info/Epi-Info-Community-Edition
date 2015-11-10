@@ -141,7 +141,7 @@ namespace EpiDashboard.Controls
             radlocatemapserver.Content = DashboardSharedStrings.GADGET_OTHER_MAPSERVER;
             lblURL.Content = DashboardSharedStrings.GADGET_URL;
             btnMapserverlocate.Content = DashboardSharedStrings.BUTTON_CONNECT;
-            lblExampleMapServerURL.Content = DashboardSharedStrings.GADGET_EXAMPLE_MAPSERVER;
+            lblExampleMapServerURL.Text = DashboardSharedStrings.GADGET_EXAMPLE_MAPSERVER;
             lblSelectFeature.Content = DashboardSharedStrings.GADGET_SELECT_FEATURE;
             radKML.Content = DashboardSharedStrings.GADGET_KMLFILE;
             lblURLOfKMLFile.Content = DashboardSharedStrings.GADGET_KMLFILE_LOCATION;
@@ -149,6 +149,7 @@ namespace EpiDashboard.Controls
 
             tblockConnectionString.Content = DashboardSharedStrings.GADGET_CONNECTION_STRING;
             tblockSQLQuery.Content = DashboardSharedStrings.GADGET_SQL_QUERY;
+            tblockLoadingData.Text = DashboardSharedStrings.GADGET_LOADING_DATA;
 
             //Variables Panel
             tblockPanelVariables.Content = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
@@ -566,8 +567,12 @@ namespace EpiDashboard.Controls
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
             waitCursor.Visibility = Visibility.Visible;
+            tblockLoadingData.Visibility = Visibility.Visible;
+
             dashboardHelper = mapControl.GetNewDashboardHelper();
+
             waitCursor.Visibility = Visibility.Collapsed;
+            tblockLoadingData.Visibility = Visibility.Collapsed;
             if (dashboardHelper != null)
             {
                 this.DashboardHelper = dashboardHelper;

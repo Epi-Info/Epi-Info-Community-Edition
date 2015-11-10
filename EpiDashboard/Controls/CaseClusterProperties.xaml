@@ -51,11 +51,18 @@
                 <StackPanel Margin="0 0 0 5">
                     <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
                         <Label x:Name="tblockDataSource">Data Source:</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"></TextBox>
-                            <Button x:Name="btnBrowse" Margin="20 0 0 0 " Height="Auto" Click="btnBrowse_Click">Browse</Button>
-                            <EpiDashboard:WaitCursor x:Name="waitCursor" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" StackPanel.ZIndex="99"/>
-                        </StackPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <StackPanel Margin="0 0 20 10">
+                                <TextBox TextWrapping="Wrap" MinWidth="250" MaxWidth="600" Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="txtProjectPath" IsReadOnly="True" TextChanged="txtProjectPath_TextChanged"></TextBox>
+                            </StackPanel>
+                            <StackPanel Margin="0 0 20 0">
+                                <Button x:Name="btnBrowse" Height="25" Click="btnBrowse_Click">Browse</Button>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Background="Transparent" >
+                                <EpiDashboard:WaitCursor x:Name="waitCursor" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" StackPanel.ZIndex="99"/>
+                                <TextBlock Margin="5 0 0 0" x:Name="tblockLoadingData" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PropertiesInstructionsText}" FontSize="10">Loading Data...</TextBlock>
+                            </StackPanel>
+                        </WrapPanel>
                     </StackPanel>
 
                     <StackPanel x:Name="panelDataSourceOther" Visibility="Collapsed">

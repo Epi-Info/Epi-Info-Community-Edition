@@ -45,22 +45,25 @@
                 <StackPanel>
                     <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="ShapeFile" Checked="radShapeFile_Checked"  />
 
-                    <StackPanel x:Name="panelshape" IsEnabled="False" Margin="0 10 0 0" >
-
-                        <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
-                            <TextBox x:Name="txtShapePath" Style="{StaticResource PropertiesTextBoxLarge}" IsReadOnly="True" TextChanged="txtShapePath_TextChanged"  HorizontalAlignment="Left" ></TextBox>
-                            <Button x:Name="btnBrowseShape"   Click="btnBrowseShape_Click" Height="Auto" Margin="10 0 0 0" HorizontalAlignment="Left">Browse</Button>
-                        </StackPanel>
+                    <StackPanel x:Name="panelshape" IsEnabled="False" Margin="18 5 0 0" >
+                        <WrapPanel Orientation="Horizontal">
+                            <StackPanel Margin="0 0 20 10">
+                                <TextBox TextWrapping="Wrap" MinWidth="300" MaxWidth="600" x:Name="txtShapePath" Style="{StaticResource PropertiesTextBoxLarge}" IsReadOnly="True" TextChanged="txtShapePath_TextChanged"  HorizontalAlignment="Left" ></TextBox>
+                            </StackPanel>
+                            <StackPanel>
+                                <Button x:Name="btnBrowseShape" Click="btnBrowseShape_Click" Height="25" HorizontalAlignment="Left">Browse</Button>
+                            </StackPanel>
+                        </WrapPanel>
                     </StackPanel>
 
                     <StackPanel Margin="0 30 0 0">
                         <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="MapServer" Checked="radMapServer_Checked" />
-
-                        <StackPanel x:Name="panelmap" IsEnabled="False" >
-                            <StackPanel Margin="20 10 0 0 ">
-                                <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known Map Server" Checked="radconnectmapserver_Checked" />
-                                <StackPanel x:Name="panelmapconnect" IsEnabled="False"  Margin="20 10 0 0">
-                                    <ComboBox x:Name="cbxmapserver" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" >
+                        <StackPanel  Margin="18 10 0 0 " x:Name="panelmap" IsEnabled="False" >
+                            <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known Map Server" Checked="radconnectmapserver_Checked" />
+                            <StackPanel Margin="18 5 0 0 ">
+                               
+                                <StackPanel x:Name="panelmapconnect" IsEnabled="False" >
+                                    <ComboBox MinWidth="210" Width="Auto" MaxWidth="600" x:Name="cbxmapserver" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" >
                                         <ComboBoxItem>NationalMap.gov - U.S. Zip Code Boundaries</ComboBoxItem>
                                         <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
                                         <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
@@ -71,21 +74,23 @@
                                     </ComboBox>
                                 </StackPanel>
                             </StackPanel>
-                            <StackPanel Margin="20 10 0 0 ">
+                            <StackPanel Margin="0 25 0 0 ">
                                 <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver"  Content="Provide location of another Map Server" Checked="radlocatemapserver_Checked" />
-
-                                <StackPanel Margin="20 0 0 0" x:Name="panelmapserver" IsEnabled="False" >
-
-                                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0 ">
-                                        <Label x:Name="lblURL">URL:</Label>
-                                        <TextBox x:Name="txtMapSeverpath"  HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
-                                        <Button x:Name="btnMapserverlocate" Height="Auto" Margin="10 0 0 0" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
-                                    </StackPanel>
-                                    <Label x:Name="lblExampleMapServerURL" FontSize="12">(example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer)</Label>
-                                    <StackPanel Margin="0 10 0 0">
-                                        <Label x:Name="lblSelectFeature">Select Feature:</Label>
+                                <StackPanel Margin="18 5 0 0" x:Name="panelmapserver" IsEnabled="False" >
+                                    <Label Padding="0" x:Name="lblURL">URL:</Label>
+                                    <WrapPanel Orientation="Horizontal" Margin="0 0 20 10 ">
+                                        <StackPanel Margin="0 0 20 10">
+                                            <TextBox TextWrapping="Wrap" MinWidth="300" MaxWidth="600" x:Name="txtMapSeverpath"  HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <Button x:Name="btnMapserverlocate" Height="25" Margin="10 0 0 0" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
+                                        </StackPanel>
+                                    </WrapPanel>
+                                    <TextBox TextWrapping="Wrap" x:Name="lblExampleMapServerURL" Style="{StaticResource PropertiesExampleText}">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</TextBox>
+                                    <StackPanel Margin="0 15 0 0">
+                                        <Label Padding="0" x:Name="lblSelectFeature">Select Feature:</Label>
                                          <!--<ComboBox x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged" Width="380"></ComboBox>-->
-                                        <ComboBox x:Name="lbxserverfield" HorizontalAlignment="Left"  SelectionChanged="lbxserverfield_SelectionChanged" Width="380"></ComboBox>
+                                        <ComboBox MinWidth="210" Width="Auto" MaxWidth="600" x:Name="lbxserverfield" HorizontalAlignment="Left"  SelectionChanged="lbxserverfield_SelectionChanged"></ComboBox>
 
                                         <!--<ScrollViewer  x:Name="scrollViewerVarPro" HorizontalAlignment="Left" Width="300"  VerticalAlignment="Stretch" Height="150"  >
                                             <StackPanel>
@@ -99,14 +104,18 @@
                     </StackPanel>
                     <StackPanel Margin="0 30 0 0">
                         <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
-                        <Label></Label>
-                        <StackPanel Margin="20 0 0 0" x:Name="panelKml" IsEnabled="False" >
-                            <StackPanel Orientation="Horizontal">
-                                <Label x:Name="lblURLOfKMLFile">Location URL:</Label>
-                                <TextBox Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="txtKMLpath" IsReadOnly="True" ></TextBox>
-                                <Button x:Name="btnKMLFile" Height="Auto" Margin="10 0 0 0" HorizontalAlignment="Left" Click="btnKMLFile_Click">Browse</Button>
-                            </StackPanel>
-                            <Label x:Name="lblExampleKMLURL" FontSize="12">(example: http://code.google.com/apis/kml/documentation/us_states.kml)</Label>
+                       
+                        <StackPanel Margin="18 5 0 0" x:Name="panelKml" IsEnabled="False" >
+                            <Label Padding="0" x:Name="lblURLOfKMLFile">Location URL:</Label>
+                            <WrapPanel Orientation="Horizontal">
+                                <StackPanel Margin="0 0 20 10">
+                                    <TextBox TextWrapping="Wrap" Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="txtKMLpath" IsReadOnly="True" ></TextBox>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Button x:Name="btnKMLFile" Height="25" HorizontalAlignment="Left" Click="btnKMLFile_Click">Browse</Button>
+                                </StackPanel>
+                            </WrapPanel>
+                            <TextBox TextWrapping="Wrap" x:Name="lblExampleKMLURL" Style="{StaticResource PropertiesExampleText}">Example: http://code.google.com/apis/kml/documentation/us_states.kml</TextBox>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>

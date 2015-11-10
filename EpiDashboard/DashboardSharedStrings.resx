@@ -1250,7 +1250,7 @@ of records or select fewer fields for the group.</value>
     <value>X-axis end value:</value>
   </data>
   <data name="GADGET_XAXIS_LABEL" xml:space="preserve">
-    <value>X-axis label type:</value>
+    <value>X-axis label:</value>
   </data>
   <data name="GADGET_XAXIS_LABEL_FONTSIZE" xml:space="preserve">
     <value>X-axis label font size:</value>
@@ -2004,5 +2004,8 @@ of records or select fewer fields for the group.</value>
   </data>
   <data name="GADGET_VALUE" xml:space="preserve">
     <value>Value</value>
+  </data>
+  <data name="GADGET_LOADING_DATA" xml:space="preserve">
+    <value>Loading Data...</value>
   </data>
 </root>
