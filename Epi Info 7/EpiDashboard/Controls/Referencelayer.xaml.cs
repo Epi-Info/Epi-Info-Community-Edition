@@ -49,6 +49,7 @@ namespace EpiDashboard.Controls
             this.mapControl = mapControl;
             this.myMap = myMap;
             this.radShapeFile.IsChecked = true;
+            mapControl.SizeChanged += mapControl_SizeChanged;
 
             #region Translation
 
