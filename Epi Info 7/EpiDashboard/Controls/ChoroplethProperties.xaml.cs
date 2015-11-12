@@ -499,21 +499,21 @@ namespace EpiDashboard.Controls
             {
                 Addfilters();
 
-                //if ((_provider != null && !_provider.AreRangesSet) ||
-                //    (choroMapprovider != null && !choroMapprovider.AreRangesSet) ||
-                //    (choroKMLprovider != null && !choroKMLprovider.AreRangesSet)
-                //    )
-                //{
+                if ((thisProvider != null && !thisProvider.AreRangesSet) ||
+                    (choroplethShapeLayerProvider != null && !choroplethShapeLayerProvider.AreRangesSet) ||
+                    (choroplethKmlLayerProvider != null && !choroplethKmlLayerProvider.AreRangesSet)
+                    )
+                {
                     SetDefaultRanges();
-              //}
+                }
 
                 //  ResetLegend_Click(this, new RoutedEventArgs());
 
                 RenderMap();
 
 
-          //      if (_provider != null && !ValidateRangeInput())
-            //        return;
+                if (thisProvider != null && !ValidateRangeInput())
+                    return;
 
                 AddClassAttributes();
 
@@ -2592,6 +2592,9 @@ namespace EpiDashboard.Controls
                 return;
             }
 
+
+            UpdateRangesCollection();
+            
             string name = textBox.Name;
 
             int classLevel = thisProvider.ClassRangesDictionary.GetClassLevelWithKey(name);
