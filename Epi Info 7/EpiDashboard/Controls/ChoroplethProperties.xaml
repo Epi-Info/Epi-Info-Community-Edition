@@ -110,9 +110,9 @@
                         
                         <Label x:Name="lblBoundaries"  Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
                         <StackPanel Margin="0 15 0 0" HorizontalAlignment="Left">
-                            <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="Shapefile" Checked="radShapeFile_Checked"  />
+                        <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="Shapefile" Checked="radShapeFile_Checked"  />
                             <StackPanel Margin="18 5 0 0" x:Name="panelshape" IsEnabled="False">
-                                <Grid>
+                            <Grid>
                                     <WrapPanel Orientation="Horizontal">
                                         <StackPanel Margin="0 0 20 10">
                                             <TextBox TextWrapping="Wrap" MinWidth="300" MaxWidth="600" x:Name="txtShapePath" IsReadOnly="False" TextChanged="txtProjectPath_TextChanged"></TextBox>
@@ -121,22 +121,22 @@
                                             <Button Height="25" x:Name="btnBrowseShape"  HorizontalAlignment="Left" Click="btnBrowseShapeFile_Click" >Browse</Button>
                                         </StackPanel>
                                     </WrapPanel>
-                                </Grid>
-                            </StackPanel>
+                            </Grid>
+                        </StackPanel>
                         </StackPanel>
                         <StackPanel Margin="0 30 0 0">
-                            <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
+                        <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
                             <StackPanel x:Name="panelmap" IsEnabled="False" Margin="18 10 0 0 " HorizontalAlignment="Left">
                                 <RadioButton  x:Name="radconnectmapserver"  GroupName="radmapserver" Checked="radconnectmapserver_Checked" Content="Connect to a known map server" />
                                 <StackPanel  Margin="18 5 0 0" x:Name="panelmapconnect" IsEnabled="False">
 
                                     <ComboBox MinWidth="210" Width="Auto" MaxWidth="600" x:Name="cbxmapserver" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" >
-                                        <ComboBoxItem>NationalMap.gov - New York County Boundaries</ComboBoxItem>
-                                        <ComboBoxItem>NationalMap.gov - Rhode Island Zip Code Boundaries</ComboBoxItem>
-                                        <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
-                                        <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
-                                    </ComboBox>
-                                </StackPanel>
+                                    <ComboBoxItem>NationalMap.gov - New York County Boundaries</ComboBoxItem>
+                                    <ComboBoxItem>NationalMap.gov - Rhode Island Zip Code Boundaries</ComboBoxItem>
+                                    <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
+                                    <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
                                 <StackPanel Margin="0 25 0 0 ">
                                     <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver" Content="Provide location of another map server" Checked="radlocatemapserver_Checked" />
                                     <StackPanel Margin="18 5 0 0" x:Name="panelmapserver" IsEnabled="False" HorizontalAlignment="Left" >
@@ -150,7 +150,7 @@
                                                     <Button Height="25" x:Name="btnMapserverlocate" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
                                                 </StackPanel>
                                             </WrapPanel>
-                                        </Grid>
+                                </Grid>
                                         <TextBox TextWrapping="Wrap" IsReadOnly="True" Style="{StaticResource PropertiesExampleText}" Margin="0 0 0 0" x:Name="lblExampleMapServerURL">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</TextBox>
                                             <StackPanel Margin="0 15 0 0">
                                                 <Label Padding="0" x:Name="lblSelectFeature">Select Feature:</Label>
@@ -159,13 +159,13 @@
                                     
                                     </StackPanel>
                                 </StackPanel>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
                         <StackPanel Margin="0 30 0 0">
                             <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
                             <StackPanel Margin="18 5 0 0" x:Name="panelKml" IsEnabled="False" >
                                 <Label Padding="0" x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
-
+                            
                                 <Grid >
                                     <WrapPanel Orientation="Horizontal">
                                         <StackPanel Margin="0 0 20 10">
@@ -173,13 +173,13 @@
                                         </StackPanel>
                                         <StackPanel>
                                             <Button x:Name="btnKMLFile" Height="25" Grid.Column="2" Click="btnKMLFile_Click">Browse</Button>
-                                        </StackPanel>
+                        </StackPanel>
                                     </WrapPanel>
                                 </Grid>
                                 <TextBox TextWrapping="Wrap" IsReadOnly="True" Style="{StaticResource PropertiesExampleText}" Margin="0 0 0 0" x:Name="lblExampleKMLFile">Example: http://code.google.com/apis/kml/documentation/us_states.kml</TextBox>
                             </StackPanel>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
                     </StackPanel>
             </ScrollViewer>
         </DockPanel>
@@ -373,16 +373,16 @@
                                 <Rectangle Grid.Row="11" Grid.Column="0" x:Name="rctColor10" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor10_MouseLeftButtonUp"/>
 
                                 <!--<TextBox Grid.Row="01" x:Name="rampStart00" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" Text="Missing" IsEnabled="False"/>-->
-                                <TextBox Grid.Row="02" x:Name="rampStart01" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="03" x:Name="rampStart02" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="04" x:Name="rampStart03" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="05" x:Name="rampStart04" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="06" x:Name="rampStart05" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="07" x:Name="rampStart06" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="08" x:Name="rampStart07" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="09" x:Name="rampStart08" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="10" x:Name="rampStart09" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="11" x:Name="rampStart10" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right"/>
+                                <TextBox Grid.Row="02" x:Name="rampStart01" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="03" x:Name="rampStart02" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="04" x:Name="rampStart03" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="05" x:Name="rampStart04" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="06" x:Name="rampStart05" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="07" x:Name="rampStart06" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="08" x:Name="rampStart07" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="09" x:Name="rampStart08" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="10" x:Name="rampStart09" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="11" x:Name="rampStart10" Grid.Column="1" MinWidth="60" Height="30" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
 
                                 <!--<TextBlock Grid.Row="01" x:Name="centerText00" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">/</TextBlock>-->
                                 <TextBlock Grid.Row="02" x:Name="centerText01" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
@@ -397,16 +397,16 @@
                                 <TextBlock Grid.Row="11" x:Name="centerText10" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
 
                                 <!--<TextBox Grid.Row="01" x:Name="rampEnd00" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" Text="Excluded" IsEnabled="False"/>-->
-                                <TextBox Grid.Row="02" x:Name="rampEnd01" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="03" x:Name="rampEnd02" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="04" x:Name="rampEnd03" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="05" x:Name="rampEnd04" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="06" x:Name="rampEnd05" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="07" x:Name="rampEnd06" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="08" x:Name="rampEnd07" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="09" x:Name="rampEnd08" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="10" x:Name="rampEnd09" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="11" x:Name="rampEnd10" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left"/>
+                                <TextBox Grid.Row="02" x:Name="rampEnd01" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="03" x:Name="rampEnd02" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="04" x:Name="rampEnd03" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="05" x:Name="rampEnd04" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="06" x:Name="rampEnd05" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="07" x:Name="rampEnd06" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="08" x:Name="rampEnd07" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="09" x:Name="rampEnd08" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="10" x:Name="rampEnd09" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                                <TextBox Grid.Row="11" x:Name="rampEnd10" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
 
                                 <TextBox Grid.Row="02" x:Name="quintile01" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
                                 <TextBox Grid.Row="03" x:Name="quintile02" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>

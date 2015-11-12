@@ -8,17 +8,52 @@ namespace EpiDashboard.Mapping
 {
     public class ClassRangesDictionary
     {
-
-        private Dictionary<string, string> dictionary;
+        private Dictionary<string, string> _dictionary;
+        private List<ClassLimits> _rangeValues;
 
         public ClassRangesDictionary()
         {
-            dictionary = new Dictionary<string, string>();
+            _dictionary = new Dictionary<string, string>();
         }
 
         public Dictionary<string, string> Dict
         {
-            get { return dictionary; }
+            get { return _dictionary; }
+        }
+
+        internal int PropertyPanelMaxClassCount
+        {
+            get { return _dictionary.Count / 2; }
+        }
+
+        public List<ClassLimits> GetLimitValues()
+        {
+            int classCount = 0;
+            foreach (KeyValuePair<string, string> kvp in _dictionary)
+            {
+                if (string.IsNullOrEmpty(kvp.Value)) break;
+                classCount++;
+            }
+
+            _rangeValues = new List<ClassLimits>();
+
+            for (int i = 0; i < classCount; i++)
+            {
+                float start, end;
+                string start_str, end_str, key_Start, key_End;
+
+                start_str = _dictionary.Values.ToList()[i];
+                end_str = _dictionary.Values.ToList()[i + PropertyPanelMaxClassCount];
+                key_Start = _dictionary.Keys.ToList()[i];
+                key_End = _dictionary.Keys.ToList()[i + PropertyPanelMaxClassCount];
+
+                if (float.TryParse(start_str, out start) && float.TryParse(end_str, out end))
+                {
+                    _rangeValues.Add(new ClassLimits(start, end, key_Start, key_End));
+                }
+            }
+
+            return _rangeValues;
         }
 
         /// <summary>
@@ -28,13 +63,12 @@ namespace EpiDashboard.Mapping
         /// <returns></returns>
         public string GetWithKey(string key)
         {
-            if (dictionary.ContainsKey(key) == false)
-                dictionary.Add(key, "");
+            if (_dictionary.ContainsKey(key) == false)
+            {
+                _dictionary.Add(key, "");
+            }
 
-
-            return dictionary[key];
-
-
+            return _dictionary[key];
         }
 
         /// <summary>
@@ -45,21 +79,116 @@ namespace EpiDashboard.Mapping
         public string GetAt(int pos)
         {
 
-            if (dictionary.ContainsKey(ChoroplethConstants.legendTextControlPrefix + pos))
-                return dictionary[ChoroplethConstants.legendTextControlPrefix + pos];
+            if (_dictionary.ContainsKey(ChoroplethConstants.legendTextControlPrefix + pos))
+            {
+                return _dictionary[ChoroplethConstants.legendTextControlPrefix + pos];
+            }
             else
+            {
                 return "";
-
+            }
         }
 
         public void Add(string key, string value)
         {
-            if (dictionary.ContainsKey(key))
-                dictionary[key] = value;
+            if (_dictionary.ContainsKey(key))
+            {
+                _dictionary[key] = value;
+            }
             else
-                dictionary.Add(key, value);
+            {
+                _dictionary.Add(key, value);
+            }
         }
 
+        internal int GetClassLevelWithKey(string name)
+        {
+            int index = 0;
 
+            if (_dictionary.ContainsKey(name) == false)
+            {
+                return -1;
+            }
+
+            foreach(string key in _dictionary.Keys)
+            {
+                if (key == name)
+                {
+                    break;
+                }
+                index++;
+            }
+
+            int indexOfFirstEnd = _dictionary.Count / 2;
+
+            return index % indexOfFirstEnd;
+        }
+
+        internal ClassLimitType GetLimitTypeWithKey(string name)
+        {
+            int index = 0;
+            ClassLimitType limitType = ClassLimitType.Indeterminate;
+
+            if (_dictionary.ContainsKey(name) == false)
+            {
+                return limitType;
+            }
+
+            foreach (string key in _dictionary.Keys)
+            {
+                if (key == name)
+                {
+                    break;
+                }
+                index++;
+            }
+
+            if (index < PropertyPanelMaxClassCount)
+            {
+                return ClassLimitType.Start;
+            }
+            else
+            {
+                return ClassLimitType.End;
+            }
+        }
+
+        internal void SetRangesDictionary(List<ClassLimits> limits)
+        {
+            foreach (ClassLimits classLimits in limits)
+            {
+                _dictionary[classLimits.Key_Start] = classLimits.Start.ToString();
+                _dictionary[classLimits.Key_End] = classLimits.End.ToString();
+            }
+        }
+    }
+
+    enum ClassLimitType
+    {
+        Start,
+        End,
+        Indeterminate
+    }
+
+    public class ClassLimits
+    {
+        public float Start { get; set; }
+        public float End { get; set; }
+        public string Key_Start { get; set; }
+        public string Key_End { get; set; }
+
+        public ClassLimits(float start, float end, string key_Start, string key_end)
+        {
+            Start = start;
+            End = end;
+            Key_Start = key_Start;
+            Key_End = key_end;
+        }
+
+        public ClassLimits(float start, float end)
+        {
+            Start = start;
+            End = end;
+        }
     }
 }
