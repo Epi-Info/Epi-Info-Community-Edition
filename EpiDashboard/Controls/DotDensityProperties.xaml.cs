@@ -421,14 +421,7 @@ namespace EpiDashboard.Controls
 
         private void tbtnHTML_Checked(object sender, RoutedEventArgs e)
         {
-             
-            if (!string.IsNullOrEmpty(txtProjectPath.Text) )
-           {
-                if( !string.IsNullOrEmpty(txtShapePath.Text) 
-                    ||  cbxmapserver.SelectedIndex != -1   
-                    ||    (!string.IsNullOrEmpty(txtMapSeverpath.Text) 
-                    || (!string.IsNullOrEmpty(txtKMLpath.Text)  )))
-                {
+            
                 //btnOK.Visibility = Visibility.Hidden;
                 CheckButtonStates(sender as ToggleButton);
                 panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
@@ -438,28 +431,15 @@ namespace EpiDashboard.Controls
                 panelFilters.Visibility = System.Windows.Visibility.Collapsed;
                 if (serverlayerprop != null)
                     if (serverlayerprop.provider.FlagUpdateToGLFailed) { ResetShapeCombo(); }
-                }
-                else
-                {
-                    tbtnHTML.IsChecked = false;
-                    MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_BOUNDARY, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
-
-                }
-           }
-            else
-            {
-                tbtnHTML.IsChecked = false;
-                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_DATA_SOURCE, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
-
-            }
+                
+                
+           
+            
         }
 
         private void tbtnDataSource_Checked(object sender, RoutedEventArgs e)
         {
-            if (btnOK != null)
-            {
-                btnOK.Visibility = Visibility.Visible;
-            }
+           
             if (panelDataSource == null) return;
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Visible;
@@ -471,7 +451,7 @@ namespace EpiDashboard.Controls
 
         private void tbtnFilters_Checked(object sender, RoutedEventArgs e)
         {
-           // btnOK.Visibility = Visibility.Hidden;
+           
             CheckButtonStates(sender as SettingsToggleButton);
             panelHTML.Visibility = System.Windows.Visibility.Collapsed;
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
@@ -638,9 +618,24 @@ namespace EpiDashboard.Controls
                 if (cmbValue.Items.Contains(Values))
                 {
                     cmbValue.Items.Remove(Values);
+                    EnableOkbtn();
                 }
                 cmbValue.IsEnabled = true;
+                EnableOkbtn();
             }
+        }
+
+        private void cmbValue_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (cmbValue.SelectedItem != null)
+            {
+                cmbValue.SelectedItem.ToString();
+                EnableOkbtn();
+
+            }
+
+
         }
 
         private void txtProjectPath_TextChanged(object sender, TextChangedEventArgs e)
@@ -1156,8 +1151,8 @@ namespace EpiDashboard.Controls
         { 
          if (!string.IsNullOrEmpty(txtProjectPath.Text) && ( !string.IsNullOrEmpty(txtShapePath.Text) 
                     ||  cbxmapserver.SelectedIndex != -1   
-                    ||    (!string.IsNullOrEmpty(txtMapSeverpath.Text) 
-                    || (!string.IsNullOrEmpty(txtKMLpath.Text)  ))))
+                    ||    (!string.IsNullOrEmpty(txtMapSeverpath.Text)
+                    || (!string.IsNullOrEmpty(txtKMLpath.Text)))) && cmbShapeKey.SelectedIndex != -1 && cmbDataKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
            {
             btnOK.IsEnabled = true;
            }
@@ -1227,6 +1222,7 @@ namespace EpiDashboard.Controls
             if (cmbShapeKey.SelectedIndex >= 0)
             {
               cmbDataKey.IsEnabled = true;
+              EnableOkbtn();
             }
         }
               

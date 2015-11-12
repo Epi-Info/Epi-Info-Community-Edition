@@ -219,30 +219,13 @@ namespace EpiDashboard.Controls
         private void tbtnVariables_Checked(object sender, RoutedEventArgs e)
         {
             CheckButtonStates(sender as ToggleButton);
-            //panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            //panelVariables.Visibility = System.Windows.Visibility.Visible;
-            //panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
-            //panelCharts.Visibility = System.Windows.Visibility.Collapsed;
-            //panelInfo.Visibility = System.Windows.Visibility.Collapsed;
-            //panelFilter.Visibility = System.Windows.Visibility.Collapsed;
-            if (!string.IsNullOrEmpty(txtProjectPath.Text))
-            {
-
+           
                 panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
                 panelVariables.Visibility = System.Windows.Visibility.Visible;
                 panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
                 panelCharts.Visibility = System.Windows.Visibility.Collapsed;
                 panelInfo.Visibility = System.Windows.Visibility.Collapsed;
                 panelFilter.Visibility = System.Windows.Visibility.Collapsed;
-
-
-            }
-            else
-            {
-                tbtnVariables.IsChecked = false;
-                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_DATA_SOURCE, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
-
-            }
         }
 
         private void tbtnFilter_Checked(object sender, RoutedEventArgs e)
@@ -676,7 +659,7 @@ namespace EpiDashboard.Controls
 
         private void EnableOkbtn()
         {
-            if (!string.IsNullOrEmpty(txtProjectPath.Text) )
+            if (!string.IsNullOrEmpty(txtProjectPath.Text) && cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
             {
                 btnOK.IsEnabled = true;
             }
@@ -693,13 +676,21 @@ namespace EpiDashboard.Controls
             if (cmbLatitude.SelectedItem != null)
             {
                 cmbLongitude.IsEnabled = true;
+                EnableOkbtn();
                 ReFillLongitudeComboBoxes();
                 if (cmbLongitude.Items.Contains(cmbLatitude.SelectedItem))
                 {
                     
                     cmbLongitude.Items.Remove(cmbLatitude.SelectedItem);
+                    EnableOkbtn();
                 }
             }
+
+        }
+
+        public void cmbLongitude_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EnableOkbtn();
 
         }
   } 

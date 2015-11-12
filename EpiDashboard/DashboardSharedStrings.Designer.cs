@@ -3696,6 +3696,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Required field.
+        /// </summary>
+        public static string GADGET_REQUIRED_FIELD {
+            get {
+                return ResourceManager.GetString("GADGET_REQUIRED_FIELD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Row / column percents.
         /// </summary>
         public static string GADGET_ROW_COL_PERCENTS {
