@@ -2594,16 +2594,16 @@ namespace EpiDashboard.Controls
 
             string name = textBox.Name;
 
-            int classLevel = _provider.ClassRangesDictionary.GetClassLevelWithKey(name);
-            ClassLimitType limit = _provider.ClassRangesDictionary.GetLimitTypeWithKey(name);
+            int classLevel = thisProvider.ClassRangesDictionary.GetClassLevelWithKey(name);
+            ClassLimitType limit = thisProvider.ClassRangesDictionary.GetLimitTypeWithKey(name);
 
-            List<ClassLimits> limits = _provider.ClassRangesDictionary.GetLimitValues();
+            List<ClassLimits> limits = thisProvider.ClassRangesDictionary.GetLimitValues();
 
             AdjustClassBreaks(limits, newValue, classLevel, limit);
 
-            _provider.ClassRangesDictionary.SetRangesDictionary(limits);
+            thisProvider.ClassRangesDictionary.SetRangesDictionary(limits);
 
-            foreach(KeyValuePair<string,string> kvp in _provider.ClassRangesDictionary.Dict)
+            foreach (KeyValuePair<string, string> kvp in thisProvider.ClassRangesDictionary.Dict)
             {
                 System.Windows.Controls.TextBox found = (System.Windows.Controls.TextBox)this.FindName(kvp.Key);
                 found.Text = kvp.Value;
