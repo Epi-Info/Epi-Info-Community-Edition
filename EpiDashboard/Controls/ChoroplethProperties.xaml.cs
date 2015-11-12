@@ -2576,8 +2576,92 @@ namespace EpiDashboard.Controls
             EnableOkbtn();
         }
 
-    }
+        private void rampValue_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if ((sender is System.Windows.Controls.TextBox) == false)
+            {
+                return;
+            }
 
+            System.Windows.Controls.TextBox textBox = ((System.Windows.Controls.TextBox)sender);
+            string newText = textBox.Text;
+            float newValue = float.NaN;
+
+            if (float.TryParse(newText, out newValue) == false)
+            {
+                return;
+            }
+
+            string name = textBox.Name;
+
+            int classLevel = _provider.ClassRangesDictionary.GetClassLevelWithKey(name);
+            ClassLimitType limit = _provider.ClassRangesDictionary.GetLimitTypeWithKey(name);
+
+            List<ClassLimits> limits = _provider.ClassRangesDictionary.GetLimitValues();
+
+            AdjustClassBreaks(limits, newValue, classLevel, limit);
+
+            _provider.ClassRangesDictionary.SetRangesDictionary(limits);
+
+            foreach(KeyValuePair<string,string> kvp in _provider.ClassRangesDictionary.Dict)
+            {
+                System.Windows.Controls.TextBox found = (System.Windows.Controls.TextBox)this.FindName(kvp.Key);
+                found.Text = kvp.Value;
+            }
+        }
+
+        private void AdjustClassBreaks(List<ClassLimits> classBreaks, float newValue, int classLevel, ClassLimitType limitType = ClassLimitType.Start)
+        {
+            ReplaceClassLimit(classBreaks, newValue, classLevel, limitType);
+
+            if (limitType == ClassLimitType.Start)
+            {
+                if (classBreaks[classLevel].End <= newValue)
+                {
+                    limitType = ClassLimitType.End;
+                    AdjustClassBreaks(classBreaks, newValue + (float)0.01, classLevel, limitType);
+                }
+
+                classLevel -= 1;
+                if (classLevel < 0) return;
+
+                if (classBreaks[classLevel].End != newValue)
+                {
+                    limitType = ClassLimitType.End;
+                    AdjustClassBreaks(classBreaks, newValue, classLevel, limitType);
+                }
+            }
+            else
+            {
+                if(classBreaks[classLevel].Start >= newValue)
+                {
+                    limitType = ClassLimitType.Start;
+                    AdjustClassBreaks(classBreaks, newValue - (float)0.01, classLevel, limitType);
+                }
+    
+                classLevel += 1;
+                if (classLevel == classBreaks.Count) return;
+
+                if (classBreaks[classLevel].Start != newValue)
+                {
+                    limitType = ClassLimitType.Start;
+                    AdjustClassBreaks(classBreaks, newValue, classLevel, limitType);
+                }
+            }
+        }
+
+        private void ReplaceClassLimit(List<ClassLimits> classBreaks, float newValue, int classLevel,  ClassLimitType limitType = ClassLimitType.Start)
+        {
+            if (limitType == ClassLimitType.Start)
+            {
+                classBreaks[classLevel].Start = newValue;
+            }
+            else
+            {
+                classBreaks[classLevel].End = newValue;
+            }
+        }
+    }
 }
 
 
