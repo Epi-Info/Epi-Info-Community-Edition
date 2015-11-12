@@ -15,7 +15,7 @@ using ESRI.ArcGIS.Client.Symbols;
 
 namespace EpiDashboard.Mapping
 {
-    public class ChoroplethKmlLayerProvider :     IChoroLayerProvider
+    public class ChoroplethKmlLayerProvider : IChoroLayerProvider
     {
         public event FeatureLoadedHandler FeatureLoaded;
 
@@ -44,7 +44,7 @@ namespace EpiDashboard.Mapping
         int _colorShadeIndex = 0;
 
         int _lastGeneratedClassCount = 0;
-        ThematicItem thematicItem;
+        ThematicItem _thematicItem;
 
         private List<double> _range;
         public List<double> Range
@@ -430,7 +430,7 @@ namespace EpiDashboard.Mapping
 
                 GraphicsLayer graphicsLayer = graphicsLayers[0];
                 //CreateColorList(lowColor, highColor);
-                thematicItem = new ThematicItem() { Name = dataKey, Description = dataKey, CalcField = "" };
+                _thematicItem = new ThematicItem() { Name = dataKey, Description = dataKey, CalcField = "" };
 
 
 
@@ -480,15 +480,15 @@ namespace EpiDashboard.Mapping
 
                     if (i == 0)
                     {
-                        thematicItem.Min = Double.PositiveInfinity;
-                        thematicItem.Max = Double.NegativeInfinity;
-                        thematicItem.MinName = string.Empty;
-                        thematicItem.MaxName = string.Empty;
+                        _thematicItem.Min = Double.PositiveInfinity;
+                        _thematicItem.Max = Double.NegativeInfinity;
+                        _thematicItem.MinName = string.Empty;
+                        _thematicItem.MaxName = string.Empty;
                     }
                     else
                     {
-                        if (graphicValue < thematicItem.Min) { thematicItem.Min = graphicValue; thematicItem.MinName = graphicName; }
-                        if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity) { thematicItem.Max = graphicValue; thematicItem.MaxName = graphicName; }
+                        if (graphicValue < _thematicItem.Min) { _thematicItem.Min = graphicValue; _thematicItem.MinName = graphicName; }
+                        if (graphicValue > _thematicItem.Max && graphicValue != Double.PositiveInfinity) { _thematicItem.Max = graphicValue; _thematicItem.MaxName = graphicName; }
                     }
 
                     if (graphicValue < Double.PositiveInfinity)
@@ -499,18 +499,18 @@ namespace EpiDashboard.Mapping
                 if (Range != null &&
                   Range.Count > 0)
                 {
-                    thematicItem.RangeStarts = Range;
+                    _thematicItem.RangeStarts = Range;
                     PopulateRangeValues();
                 }
                 else
                 {
-                    thematicItem.RangeStarts = new List<double>();
+                    _thematicItem.RangeStarts = new List<double>();
 
-                    double totalRange = thematicItem.Max - thematicItem.Min;
+                    double totalRange = _thematicItem.Max - _thematicItem.Min;
                     double portion = totalRange / classCount;
 
-                    thematicItem.RangeStarts.Add(thematicItem.Min);
-                    double startRangeValue = thematicItem.Min;
+                    _thematicItem.RangeStarts.Add(_thematicItem.Min);
+                    double startRangeValue = _thematicItem.Min;
                     IEnumerable<double> valueEnumerator =
                     from aValue in valueList
                     orderby aValue
@@ -520,9 +520,9 @@ namespace EpiDashboard.Mapping
                     for (int i = increment; i < valueList.Count; i += increment)
                     {
                         double value = valueEnumerator.ElementAt(i);
-                        if (value < thematicItem.Min)
-                            value = thematicItem.Min;
-                        thematicItem.RangeStarts.Add(value);
+                        if (value < _thematicItem.Min)
+                            value = _thematicItem.Min;
+                        _thematicItem.RangeStarts.Add(value);
                     }
                 }
                 // Create graphic features and set symbol using the class range which contains the value 
@@ -570,7 +570,7 @@ namespace EpiDashboard.Mapping
                             graphicValue = Double.PositiveInfinity;
                         }
 
-                        int brushIndex = GetRangeIndex(graphicValue, thematicItem.RangeStarts);
+                        int brushIndex = GetRangeIndex(graphicValue, _thematicItem.RangeStarts);
 
                         SimpleFillSymbol symbol = new SimpleFillSymbol()
                         {
@@ -604,7 +604,7 @@ namespace EpiDashboard.Mapping
                 }
 
 
-                SetLegendSection(classCount, colors, missingText, thematicItem);
+                SetLegendSection(classCount, colors, missingText, _thematicItem);
 
             }
             catch (Exception ex)
@@ -612,11 +612,21 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public void ResetRangeValues(string toString, string s, string toString1, int classCount)
+        public void ResetRangeValues(string shapeKey, string dataKey, string valueField, int classCount)
         {
-            throw new NotImplementedException();
+            _classCount = classCount;
+            _shapeKey = shapeKey;
+            _dataKey = dataKey;
+
+            DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref valueField);
+            GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
+
+            if (graphicsLayer == null) return;
+
+            _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
         }
 
+        //  xxxx
         public object[] LoadShapeFile()
         {
             throw new NotImplementedException();
@@ -937,12 +947,12 @@ namespace EpiDashboard.Mapping
 
             GraphicsLayer graphicsLayer = graphicsLayers[0];
 
-            thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+            _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
 
             if (Range != null &&
                 Range.Count > 0)
             {
-                thematicItem.RangeStarts = Range;
+                _thematicItem.RangeStarts = Range;
             }
 
             PopulateRangeValues();
@@ -952,19 +962,19 @@ namespace EpiDashboard.Mapping
 
         public void PopulateRangeValues()
         {
-            RangeCount = thematicItem.RangeStarts.Count;
+            RangeCount = _thematicItem.RangeStarts.Count;
             Array.Clear(RangeValues, 0, RangeValues.Length);
-            for (int i = 0; i < thematicItem.RangeStarts.Count; i++)
+            for (int i = 0; i < _thematicItem.RangeStarts.Count; i++)
             {
-                RangeValues[i, 0] = thematicItem.RangeStarts[i].ToString();
+                RangeValues[i, 0] = _thematicItem.RangeStarts[i].ToString();
 
-                if (i < thematicItem.RangeStarts.Count - 1)
+                if (i < _thematicItem.RangeStarts.Count - 1)
                 {
-                    RangeValues[i, 1] = thematicItem.RangeStarts[i + 1].ToString();
+                    RangeValues[i, 1] = _thematicItem.RangeStarts[i + 1].ToString();
                 }
                 else
                 {
-                    RangeValues[i, 1] = thematicItem.Max.ToString();
+                    RangeValues[i, 1] = _thematicItem.Max.ToString();
                 }
 
             }
@@ -972,7 +982,9 @@ namespace EpiDashboard.Mapping
         private StackPanel legendStackPanel;
         private string _legendText;
         private bool _rangesLoadedFromMapFile;
-        private bool _useCustomColors;
+
+        private bool _useCustomColors = true;
+
 
         public StackPanel LegendStackPanel
         {
@@ -1049,7 +1061,7 @@ namespace EpiDashboard.Mapping
 
         //public byte Opacity { get; set; }
 
-     
+
 
 
     }
