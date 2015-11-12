@@ -37,8 +37,8 @@ using Epi;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("7.1.*")]
-[assembly: AssemblyFileVersion("7.1.6.1502")]
-[assembly: AssemblyInformationalVersion("7.1.6.1502")]
+[assembly: AssemblyFileVersion("7.1.6.1503")]
+[assembly: AssemblyInformationalVersion("7.1.6.1503")]
 [assembly: SatelliteContractVersion("7.0.0.0")]
 [assembly: Epi.AssemblyReleaseDateAttribute("11/12/2015")]
 
