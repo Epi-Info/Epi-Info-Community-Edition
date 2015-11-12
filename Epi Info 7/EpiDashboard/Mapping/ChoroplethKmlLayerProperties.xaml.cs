@@ -1,18 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Epi;
-using Epi.Fields;
 
 namespace EpiDashboard.Mapping
 {
@@ -332,14 +323,26 @@ namespace EpiDashboard.Mapping
 
             string customColors = "";
 
+            //    Class titles 
+            string classTitles = "<classTitles> ";
+            long classTitleCount = 0;
+            string classTitleTagName = "";
+
+            foreach (KeyValuePair<string, string> entry in provider.ListLegendText.Dict)
+            {
+                // classTitleTagName = "legendText" + classTitleCount.ToString();
+                classTitleTagName = entry.Key;
+                classTitles += string.Format("<{1}>{0}</{1}>", entry.Value, classTitleTagName);
+                classTitleCount++;
+            }
+
+            classTitles += "</classTitles> ";
+
 
             //  Custom colors    
             if (provider.CustomColorsDictionary != null)
             {
                 customColors = "<customColors>";
-
-                //  foreach (Color color in provider.ClassesColorsDictionary)
-
 
 
 
@@ -382,6 +385,98 @@ namespace EpiDashboard.Mapping
                 {
                     provider.LoadKml(child.InnerText);
                 }
+
+                if (child.Name.Equals("classTitles"))
+                {
+                    foreach (System.Xml.XmlElement classTitle in child)
+                    {
+                        provider.ListLegendText.Add(classTitle.Name, classTitle.InnerText);
+                    }
+                }
+
+                if (child.Name.Equals("customColors"))
+                {
+                    provider.UseCustomColors = true;
+
+                    foreach (System.Xml.XmlElement color in child)
+                    {
+                        string rgb = color.InnerText;
+                        string[] co = rgb.Split(',');
+                        Color newColor = Color.FromRgb(byte.Parse(co[0]), byte.Parse(co[1]), byte.Parse(co[2]));
+                        provider.CustomColorsDictionary.Add(color.Name, newColor);
+                    }
+                }
+
+                if (child.Name.Equals("classRanges"))
+                {
+                    foreach (System.Xml.XmlElement classRangElement in child)
+                    {
+                        provider.ClassRangesDictionary.Add(classRangElement.Name, classRangElement.InnerText);
+                    }
+
+                    List<double> rangeStartsFromMapFile = new List<double>();
+
+                    string doubleString = "";
+
+                    try
+                    {
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart01"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart02"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart03"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart04"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart05"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart06"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart07"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart08"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart09"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                        doubleString = provider.ClassRangesDictionary.Dict["rampStart10"];
+                        if (string.IsNullOrEmpty(doubleString) == false)
+                        {
+                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
+                        }
+                    }
+                    catch { }
+
+                    provider.RangeStartsFromMapFile = rangeStartsFromMapFile;
+                    provider.RangesLoadedFromMapFile = true;
+                }
+
             }
         }
 
