@@ -409,6 +409,9 @@ namespace EpiDashboard.Mapping
 
                 if (child.Name.Equals("classRanges"))
                 {
+
+                    provider.UseCustomRanges = false;
+
                     foreach (System.Xml.XmlElement classRangElement in child)
                     {
                         provider.ClassRangesDictionary.Add(classRangElement.Name, classRangElement.InnerText);

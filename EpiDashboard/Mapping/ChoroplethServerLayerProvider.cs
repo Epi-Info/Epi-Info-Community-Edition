@@ -368,6 +368,7 @@ namespace EpiDashboard.Mapping
         }
 
         public string LegendText { get; set; }
+        public bool UseCustomRanges { get; set; }
 
         void graphicsLayer_UpdateFailed(object sender, TaskFailedEventArgs e)
         {

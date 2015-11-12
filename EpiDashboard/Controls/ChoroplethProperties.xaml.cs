@@ -395,6 +395,10 @@ namespace EpiDashboard.Controls
 
         private void UpdateRangesCollection()
         {
+
+            if (thisProvider == null)
+                return;
+
             foreach (UIElement element in stratGrid.Children)
             {
                 if (element is System.Windows.Controls.TextBox)
@@ -558,12 +562,7 @@ namespace EpiDashboard.Controls
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            /* if (radShapeFile.IsChecked == true && thisProvider != null && choroplethShapeLayerProperties.classAttribList == null) 
-                 { choroplethShapeLayerProperties.CloseLayer(); }
-             else if (radMapServer.IsChecked == true && choroMapprovider != null && choroplethServerLayerProperties.classAttribList == null)
-                 { choroplethServerLayerProperties.CloseLayer(); }
-             else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null && choroplethKmlLayerProperties.classAttribList == null)
-                 { choroplethKmlLayerProperties.CloseLayer(); } */
+    
 
             if (Cancelled != null)
             {
@@ -1474,6 +1473,8 @@ namespace EpiDashboard.Controls
                 cmbValue.SelectedItem != null)
             {
                 thisProvider.UseCustomColors = false;
+                thisProvider.UseCustomRanges = false;
+
                 SetRangeUISection();
             }
 
@@ -1605,9 +1606,18 @@ namespace EpiDashboard.Controls
 
                 if (radShapeFile.IsChecked == true && thisProvider != null)
                 {
-                    uiControls.rampStarts.Text = thisProvider.RangeValues[i - 2, 0];
-                    uiControls.rampEnds.Text = thisProvider.RangeValues[i - 2, 1];
-                    uiControls.quintiles.Text = thisProvider.QuantileValues[i - 2].ToString();
+                    if (thisProvider.UseCustomRanges)
+                    {
+                        uiControls.rampStarts.Text = thisProvider.ClassRangesDictionary.Dict[uiControls.rampStarts.Name];
+                        uiControls.rampEnds.Text = thisProvider.ClassRangesDictionary.Dict[uiControls.rampEnds.Name];
+                        uiControls.quintiles.Text = thisProvider.QuantileValues[i - 2].ToString();
+                    }
+                    else
+                    {
+                        uiControls.rampStarts.Text = thisProvider.RangeValues[i - 2, 0];
+                        uiControls.rampEnds.Text = thisProvider.RangeValues[i - 2, 1];
+                        uiControls.quintiles.Text = thisProvider.QuantileValues[i - 2].ToString();
+                    }
                 }
                 else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
                 {
@@ -2580,6 +2590,9 @@ namespace EpiDashboard.Controls
             {
                 return;
             }
+
+            thisProvider.UseCustomRanges = true;    
+
 
             System.Windows.Controls.TextBox textBox = ((System.Windows.Controls.TextBox)sender);
             string newText = textBox.Text;
