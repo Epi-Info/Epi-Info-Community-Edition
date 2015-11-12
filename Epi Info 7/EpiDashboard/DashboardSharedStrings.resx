@@ -2008,4 +2008,7 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_LOADING_DATA" xml:space="preserve">
     <value>Loading Data...</value>
   </data>
+  <data name="GADGET_REQUIRED_FIELD" xml:space="preserve">
+    <value>Required field</value>
+  </data>
 </root>

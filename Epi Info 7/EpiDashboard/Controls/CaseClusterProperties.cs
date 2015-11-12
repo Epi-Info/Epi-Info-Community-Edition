@@ -22,17 +22,17 @@ namespace EpiDashboard.Controls
     /// <summary>
     /// Interaction logic for DashboardProperties.xaml
     /// </summary>
-   
 
-     public partial class CaseClusterProperties : UserControl, ILayerProperties
-     {
-            
+
+    public partial class CaseClusterProperties : UserControl, ILayerProperties
+    {
+
         private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
         public event EventHandler EditRequested;
-        
+
         private EpiDashboard.Mapping.ClusterLayerProvider provider;
         private SimpleMarkerSymbol.SimpleMarkerStyle style;
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;
@@ -48,14 +48,14 @@ namespace EpiDashboard.Controls
 
             this.myMap = myMap;
             this.mapControl = mapControl;
-          
+
             mapControl.TimeVariableSet += new TimeVariableSetHandler(mapControl_TimeVariableSet);
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
 
             provider = clusterprop.provider;
             layerprop = clusterprop;
             mapControl.SizeChanged += mapControl_SizeChanged;
-            rctSelectColor.Fill = new SolidColorBrush(Color.FromArgb(120,0,0,255));
+            rctSelectColor.Fill = new SolidColorBrush(Color.FromArgb(120, 0, 0, 255));
             colorselected = new SolidColorBrush(Color.FromArgb(120, 0, 0, 255));
 
             #region Translation
@@ -132,7 +132,7 @@ namespace EpiDashboard.Controls
 
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;
-       
+
 
         public Brush ColorSelected
         {
@@ -141,10 +141,10 @@ namespace EpiDashboard.Controls
                 colorselected = value;
             }
         }
-      
+
         public FileInfo ProjectFileInfo
         {
-            get 
+            get
             {
                 FileInfo fi = new FileInfo(txtProjectPath.Text);
                 return fi;
@@ -157,7 +157,7 @@ namespace EpiDashboard.Controls
                 panelDataSourceAdvanced.Visibility = Visibility.Collapsed;
             }
         }
-        
+
         public string ConnectionString
         {
             get
@@ -213,29 +213,14 @@ namespace EpiDashboard.Controls
         private void tbtnVariables_Checked(object sender, RoutedEventArgs e)
         {
             CheckButtonStates(sender as ToggleButton);
-            //panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            //panelVariables.Visibility = System.Windows.Visibility.Visible;
-            //panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
-            //panelCharts.Visibility = System.Windows.Visibility.Collapsed;
-            //panelInfo.Visibility = System.Windows.Visibility.Collapsed;
-            //panelFilter.Visibility = System.Windows.Visibility.Collapsed;
-            if (!string.IsNullOrEmpty(txtProjectPath.Text))
-            {
-                 
-                    panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-                    panelVariables.Visibility = System.Windows.Visibility.Visible;
-                    panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
-                    panelCharts.Visibility = System.Windows.Visibility.Collapsed;
-                    panelInfo.Visibility = System.Windows.Visibility.Collapsed;
-                    panelFilter.Visibility = System.Windows.Visibility.Collapsed;
-               
-            }
-            else
-            {
-                tbtnVariables.IsChecked = false;
-                MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_DATA_SOURCE, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
+            panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
+            panelVariables.Visibility = System.Windows.Visibility.Visible;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
+            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            panelFilter.Visibility = System.Windows.Visibility.Collapsed;
 
-            }
+
         }
 
         private void tbtnDisplay_Checked(object sender, RoutedEventArgs e)
@@ -296,19 +281,19 @@ namespace EpiDashboard.Controls
         {
             waitCursor.Visibility = Visibility.Visible;
             tblockLoadingData.Visibility = Visibility.Visible;
-          dashboardHelper = mapControl.GetNewDashboardHelper();
-         // this.DashboardHelper = dashboardHelper;
-          layerprop.SetdashboardHelper(dashboardHelper);
-          waitCursor.Visibility = Visibility.Collapsed;
-          tblockLoadingData.Visibility = Visibility.Collapsed;
-          if (dashboardHelper != null)
+            dashboardHelper = mapControl.GetNewDashboardHelper();
+            // this.DashboardHelper = dashboardHelper;
+            layerprop.SetdashboardHelper(dashboardHelper);
+            waitCursor.Visibility = Visibility.Collapsed;
+            tblockLoadingData.Visibility = Visibility.Collapsed;
+            if (dashboardHelper != null)
             {
                 txtProjectPath.Text = dashboardHelper.Database.DbName;
                 FillComboBoxes();
                 SetFilter();
             }
         }
-        
+
         #region ILayerProperties Members
 
         public void CloseLayer()
@@ -328,7 +313,7 @@ namespace EpiDashboard.Controls
 
         public void MakeReadOnly()
         {
-           
+
         }
 
         public System.Xml.XmlNode Serialize(System.Xml.XmlDocument doc)
@@ -388,9 +373,9 @@ namespace EpiDashboard.Controls
         }
 
         #endregion
-      
+
         #region ILayerProperties Members
-       
+
 
         public StackPanel LegendStackPanel
         {
@@ -398,7 +383,7 @@ namespace EpiDashboard.Controls
         }
 
         #endregion
-       
+
         public void MoveUp()
         {
             provider.MoveUp();
@@ -408,7 +393,7 @@ namespace EpiDashboard.Controls
         {
             provider.MoveDown();
         }
-        
+
 
         void coord_SelectionChanged(object sender, EventArgs e)
         {
@@ -423,8 +408,8 @@ namespace EpiDashboard.Controls
         public void SetDashboardHelper(DashboardHelper dash)
         {
             this.dashboardHelper = dash;
-        }  
-        
+        }
+
         void provider_RecordSelected(int id)
         {
             mapControl.OnRecordSelected(id);
@@ -487,7 +472,7 @@ namespace EpiDashboard.Controls
 
             }
             return HasFilter;
-        } 
+        }
         public void FillComboBoxes()
         {
             cmbLatitude.Items.Clear();
@@ -507,11 +492,11 @@ namespace EpiDashboard.Controls
                 cmbLatitude.SelectedIndex = -1;
                 cmbLongitude.SelectedIndex = -1;
             }
-        
+
         }
         public void ReFillLongitudeComboBoxes()
         {
-           
+
             cmbLongitude.Items.Clear();
             ColumnDataType columnDataType = ColumnDataType.Numeric;
             List<string> fields = dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
@@ -519,16 +504,16 @@ namespace EpiDashboard.Controls
             {
                 if (!(f.ToUpper() == "RECSTATUS" || f.ToUpper() == "FKEY" || f.ToUpper() == "GLOBALRECORDID" || f.ToUpper() == "UNIQUEKEY"))
                 {
-                    
+
                     cmbLongitude.Items.Add(f);
                 }
             }
-            
+
 
         }
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            if (cmbLongitude.SelectedIndex > -1 && cmbLongitude.SelectedIndex > -1 )
+            if (cmbLongitude.SelectedIndex > -1 && cmbLongitude.SelectedIndex > -1)
             {
                 if (txtProjectPath.Text.Length > 0 && provider != null)
                 {
@@ -547,7 +532,7 @@ namespace EpiDashboard.Controls
                 MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.GADGET_MAP_ADD_VARIABLES, DashboardSharedStrings.ALERT, MessageBoxButton.OK);
             }
         }
-       
+
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             if (Cancelled != null)
@@ -556,7 +541,7 @@ namespace EpiDashboard.Controls
             }
         }
 
-             
+
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             if (Cancelled != null)
@@ -564,19 +549,19 @@ namespace EpiDashboard.Controls
                 Cancelled(this, new EventArgs());
             }
         }
-       private void RenderMap()
+        private void RenderMap()
         {
-            
+
             if (cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
             {
-                  provider.RenderClusterMap(dashboardHelper, cmbLatitude.SelectedItem.ToString(), cmbLongitude.SelectedItem.ToString(), colorselected , null, txtDescription.Text);
-                
+                provider.RenderClusterMap(dashboardHelper, cmbLatitude.SelectedItem.ToString(), cmbLongitude.SelectedItem.ToString(), colorselected, null, txtDescription.Text);
+
                 if (MapGenerated != null)
                 {
                     MapGenerated(layerprop, new EventArgs());
                 }
-             }
-        }    
+            }
+        }
 
         private void rctSelectColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -584,7 +569,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctSelectColor.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                colorselected = new SolidColorBrush (Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                colorselected = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
 
@@ -655,7 +640,7 @@ namespace EpiDashboard.Controls
 
         private void EnableOkbtn()
         {
-            if (!string.IsNullOrEmpty(txtProjectPath.Text))
+            if (!string.IsNullOrEmpty(txtProjectPath.Text) && cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
             {
                 btnOK.IsEnabled = true;
             }
@@ -668,20 +653,28 @@ namespace EpiDashboard.Controls
         }
 
 
-     public void cmbLatitude_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void cmbLatitude_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbLatitude.SelectedItem != null)
             {
                 cmbLongitude.IsEnabled = true;
+                EnableOkbtn();
                 ReFillLongitudeComboBoxes();
                 if (cmbLongitude.Items.Contains(cmbLatitude.SelectedItem))
                 {
-                    
+
                     cmbLongitude.Items.Remove(cmbLatitude.SelectedItem);
+                    EnableOkbtn();
                 }
             }
-            
+
         }
 
-  } 
+        public void cmbLongitude_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EnableOkbtn();
+
+        }
+
+    }
 }

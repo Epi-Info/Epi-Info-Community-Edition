@@ -35,6 +35,7 @@
                     <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Choropleth</Label>
                 </Viewbox>
             </Border>
+            
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
             <!--<ToggleButton x:Name="tbtnDataSource" Style="{StaticResource ToggleSidebarButtonStyle}" IsChecked="True" Checked="tbtnDataSource_Checked">
@@ -44,10 +45,10 @@
                 </StackPanel>
             </ToggleButton>-->
 
-            <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title="Variables" Description="Choose map boundaries." IsChecked="False" Checked="tbtnHTML_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsChecked="False" Checked="tbtnCharts_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked" />
+            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title="Variables" Description="Choose map boundaries." IsChecked="False" Checked="tbtnHTML_Checked" />
+            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsChecked="False" Checked="tbtnCharts_Checked" />
+            <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked" />
 
 
             <!--<ToggleButton x:Name="tbtnHTML" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnHTML_Checked">
@@ -74,13 +75,24 @@
 
         <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible" VerticalAlignment="Stretch">
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
+                <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 0">Data Source</Label>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontSize="15"  Foreground="Red" Margin="0 1 0 0 ">*</TextBlock>
+                    <TextBlock FontSize="10" Foreground="Red" Margin="3 0 0 10" x:Name="dataSourceRequiredFields"> = Required field(s)</TextBlock>
+                </StackPanel>
             </StackPanel>
 
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel Margin="0 0 0 5">
                     <StackPanel x:Name="panelDataSourceProject" Visibility="Visible" >
+                        <WrapPanel Orientation="Horizontal">
                         <Label Padding="0" x:Name="tblockDataSource">Data Source</Label>
+                            <TextBlock Style="{StaticResource requiredFieldInd}" VerticalAlignment="Top" Margin="2 0 0 0" Text="*">
+                                <TextBlock.ToolTip>
+                                    <TextBlock x:Name="dataSourceRequiredField">Required field</TextBlock>
+                                </TextBlock.ToolTip>   
+                         </TextBlock>
+                        </WrapPanel>
                         <Grid>
                             <WrapPanel Orientation="Horizontal">
                                 <StackPanel Margin="0 0 20 10">
@@ -107,8 +119,14 @@
                         <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtSQLQuery"></TextBox>
                     </StackPanel>
                     <StackPanel x:Name="panelBoundaries" IsEnabled="False" Margin="0 20 0 0">
-                        
-                        <Label x:Name="lblBoundaries"  Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
+                        <WrapPanel Orientation="Horizontal">
+                            <Label x:Name="lblBoundaries"  Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
+                            <TextBlock VerticalAlignment="Top" Style="{StaticResource requiredFieldInd}" Margin="2 0 0 0" Text="*">
+                                <TextBlock.ToolTip>
+                                    <TextBlock x:Name="boundariesRequiredField">Required - Select a Shapefile, Map Server or KML File</TextBlock>
+                                </TextBlock.ToolTip>   
+                            </TextBlock>
+                        </WrapPanel>
                         <StackPanel Margin="0 15 0 0" HorizontalAlignment="Left">
                         <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="Shapefile" Checked="radShapeFile_Checked"  />
                             <StackPanel Margin="18 5 0 0" x:Name="panelshape" IsEnabled="False">
@@ -188,6 +206,10 @@
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
                 <Label x:Name="tblockSelectVarData" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Select variables for map.</Label>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontSize="15"  Foreground="Red" Margin="0 1 0 0 ">*</TextBlock>
+                    <TextBlock FontSize="10" Foreground="Red" Margin="3 0 0 10" x:Name="variablesRequiredFields"> = Required field(s)</TextBlock>
+                </StackPanel>
 
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
@@ -204,15 +226,36 @@
                     </Grid>
                     <StackPanel>
                         <StackPanel>
-                            <Label x:Name="lblFeature">Feature Key:</Label>
+                            <WrapPanel Orientation="Horizontal">
+                                <Label x:Name="lblFeature">Feature Key:</Label>
+                                <TextBlock VerticalAlignment="Top" Style="{StaticResource requiredFieldInd}" Margin="0 0 0 0" Text="*">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock x:Name="featureKeyRequiredField">Required field</TextBlock>
+                                    </TextBlock.ToolTip>   
+                                </TextBlock>
+                            </WrapPanel>
                             <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbShapeKey" SelectionChanged="cmbShapeKey_SelectionChanged" Width="300"></ComboBox>
                         </StackPanel>
-                        <StackPanel>
-                            <Label x:Name="lblData">Data Key:</Label>
+                        <StackPanel Margin="0 5 0 0">
+                            <WrapPanel Orientation="Horizontal">
+                                <Label x:Name="lblData">Data Key:</Label>
+                                <TextBlock VerticalAlignment="Top" Style="{StaticResource requiredFieldInd}" Margin="2 0 0 0" Text="*">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock x:Name="dataKeyRequiredField">Required field</TextBlock>
+                                    </TextBlock.ToolTip>   
+                                </TextBlock>
+                            </WrapPanel>
                             <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" IsEnabled="False"  x:Name="cmbDataKey" SelectionChanged="cmbDataKey_SelectionChanged" Height="25" Width="300"></ComboBox>
                         </StackPanel>
-                        <StackPanel>
-                            <Label x:Name="lblValue">Value Field:</Label>
+                        <StackPanel Margin="0 5 0 0">
+                            <WrapPanel Orientation="Horizontal">
+                                <Label x:Name="lblValue">Value Field:</Label>
+                                <TextBlock VerticalAlignment="Top" Style="{StaticResource requiredFieldInd}" Margin="2 0 0 0" Text="*">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock x:Name="valueFieldRequiredField">Required field</TextBlock>
+                                    </TextBlock.ToolTip>   
+                                </TextBlock>
+                            </WrapPanel>
                             <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" IsEnabled="False" x:Name="cmbValue" SelectionChanged="cmbValue_SelectionChanged" Height="25" Width="300"></ComboBox>
                         </StackPanel>
                     </StackPanel>
