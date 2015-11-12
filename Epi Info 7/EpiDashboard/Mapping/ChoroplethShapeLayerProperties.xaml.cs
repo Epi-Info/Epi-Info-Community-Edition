@@ -429,6 +429,9 @@ namespace EpiDashboard.Mapping
 
                 if (child.Name.Equals("classRanges"))
                 {
+
+                    provider.UseCustomRanges = true;        
+
                     foreach (System.Xml.XmlElement classRangElement in child)
                     {
                         provider.ClassRangesDictionary.Add(classRangElement.Name, classRangElement.InnerText);
@@ -578,9 +581,9 @@ namespace EpiDashboard.Mapping
             choroplethprop.rctLowColor.Fill = rctLowColor.Fill;
             choroplethprop.rctMissingColor.Fill = rctMissingColor.Fill;
             choroplethprop.radShapeFile.IsChecked = true;
-    
+
             choroplethprop.choroplethShapeLayerProvider = provider;
-            choroplethprop.thisProvider = provider;    
+            choroplethprop.thisProvider = provider;
 
             choroplethprop.legTitle.Text = provider.LegendText;
             choroplethprop.SetDefaultRanges();

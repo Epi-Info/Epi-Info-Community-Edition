@@ -1004,6 +1004,8 @@ namespace EpiDashboard.Mapping
             set { _legendText = value; }
         }
 
+        public bool UseCustomRanges { get; set; }
+
         public bool UseCustomColors
         {
             get { return _useCustomColors; }

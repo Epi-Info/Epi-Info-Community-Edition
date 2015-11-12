@@ -36,6 +36,8 @@ namespace EpiDashboard.Mapping
         object[] LoadShapeFile();
         string LegendText { get; set; }
 
+
+        bool UseCustomRanges { get; set; }
     }
 }
 
