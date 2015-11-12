@@ -2550,7 +2550,7 @@ namespace EpiDashboard.Mapping
             List<DashboardHelper> dashboardHelpers = new List<DashboardHelper>();
             foreach (ILayerProperties layer in layers)
             {
-                if (layer.GetDashboardHelper() != null)
+                if (layer.GetDashboardHelper() != null && layer.GetType().Name.Contains("ClusterLayerProperties"))
                 {
                     dashboardHelpers.Add(layer.GetDashboardHelper());
                 }
