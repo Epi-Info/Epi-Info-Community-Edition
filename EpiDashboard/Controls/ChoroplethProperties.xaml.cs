@@ -375,6 +375,8 @@ namespace EpiDashboard.Controls
                     }
                 SetRangeUISection();
             }
+
+            UpdateRangesCollection();
         }
 
         private void UpdateColorsCollection()
@@ -2587,18 +2589,19 @@ namespace EpiDashboard.Controls
             string newText = textBox.Text;
             float newValue = float.NaN;
 
-            if (float.TryParse(newText, out newValue) == false)
-            {
-                return;
-            }
-
-
-            UpdateRangesCollection();
-            
             string name = textBox.Name;
 
             int classLevel = thisProvider.ClassRangesDictionary.GetClassLevelWithKey(name);
             ClassLimitType limit = thisProvider.ClassRangesDictionary.GetLimitTypeWithKey(name);
+
+            if (float.TryParse(newText, out newValue) == false)
+            {
+                System.Windows.Controls.TextBox found = (System.Windows.Controls.TextBox)this.FindName(name);
+                found.Text = thisProvider.ClassRangesDictionary.Dict[name];
+                return;
+            }
+
+            UpdateRangesCollection();
 
             List<ClassLimits> limits = thisProvider.ClassRangesDictionary.GetLimitValues();
 
