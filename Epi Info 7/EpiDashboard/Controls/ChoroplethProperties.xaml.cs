@@ -1779,15 +1779,17 @@ namespace EpiDashboard.Controls
 
         public void OnQuintileOptionChanged()
         {
-            int widthQuintile = 100;
-            int widthMinMax = 0;
-            int widthCompare = 0;
+            int widthQuintile = 0;
+            int widthMinMax = 75;
+            int widthCompare = 50;
 
             if (quintilesOption.IsChecked == false)
             {
-                widthQuintile = 0;
-                widthMinMax = 75;
-                widthCompare = 50;
+
+            }
+            else
+            {
+                // Reset_Legend();
             }
 
             quintileColumn.Width = new GridLength(widthQuintile, GridUnitType.Pixel);
@@ -1796,6 +1798,7 @@ namespace EpiDashboard.Controls
             rampCompareColumn.Width = new GridLength(widthCompare, GridUnitType.Pixel);
             rampEndColumn.Width = new GridLength(widthMinMax, GridUnitType.Pixel);
         }
+
         public void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbShapeKey.SelectedItem != null)

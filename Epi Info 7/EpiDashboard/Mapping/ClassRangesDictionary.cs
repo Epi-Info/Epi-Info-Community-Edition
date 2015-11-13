@@ -157,8 +157,8 @@ namespace EpiDashboard.Mapping
         {
             foreach (ClassLimits classLimits in limits)
             {
-                _dictionary[classLimits.Key_Start] = classLimits.Start.ToString("F2").TrimEnd(new char[] { '.', '0' });
-                _dictionary[classLimits.Key_End] = classLimits.End.ToString("F2").TrimEnd(new char[] { '.', '0' });
+                _dictionary[classLimits.Key_Start] = classLimits.Start.ToString("F2").TrimEnd(new char[] {'0'}).TrimEnd(new char[] { '.'});
+                _dictionary[classLimits.Key_End] = classLimits.End.ToString("F2").TrimEnd(new char[] { '0' }).TrimEnd(new char[] { '.' });
             }
         }
     }
