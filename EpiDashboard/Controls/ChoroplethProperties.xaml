@@ -295,7 +295,7 @@
                     
                     <WrapPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical" Margin="0 0 30 0">
-                            <StackPanel Orientation="Horizontal" Margin="0 0 0 0" >
+                            <StackPanel Orientation="Horizontal" Margin="0 0 0 0"   Visibility="Collapsed"   >
                                 <Label x:Name="lblMissingExcluded">Missing or Excluded Color</Label>
                                 <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
                                 <Rectangle x:Name="rctMissingColor" MouseLeftButtonUp="rctMissingColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" Margin="0,0,11,0">
@@ -354,7 +354,7 @@
                         <Label x:Name="tblockRangesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Ranges</Label>
                             
                             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                                <Label x:Name="lblClassBreaks" >Class Breaks</Label>
+                                <Label x:Name="lblClassBreaks" >Classes</Label>
 
                                 <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" Width="50" Height="25" Margin="0,0,0,0" SelectionChanged="ClassCount_Changed">
                                     <ComboBoxItem>2</ComboBoxItem>
