@@ -964,13 +964,14 @@ namespace EpiDashboard.Mapping
         {
             RangeCount = _thematicItem.RangeStarts.Count;
             Array.Clear(RangeValues, 0, RangeValues.Length);
-            for (int i = 0; i < _thematicItem.RangeStarts.Count; i++)
+            var RangeStarts = _thematicItem.RangeStarts;
+            for (int i = 0; i < RangeStarts.Count; i++)
             {
-                RangeValues[i, 0] = _thematicItem.RangeStarts[i].ToString();
+                RangeValues[i, 0] = RangeStarts[i].ToString();
 
                 if (i < _thematicItem.RangeStarts.Count - 1)
                 {
-                    RangeValues[i, 1] = _thematicItem.RangeStarts[i + 1].ToString();
+                    RangeValues[i, 1] = RangeStarts[i + 1].ToString();
                 }
                 else
                 {
@@ -983,7 +984,7 @@ namespace EpiDashboard.Mapping
         private string _legendText;
         private bool _rangesLoadedFromMapFile;
 
-        private bool _useCustomColors = false;    
+        private bool _useCustomColors = false;
 
 
         public StackPanel LegendStackPanel
