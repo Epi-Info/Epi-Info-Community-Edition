@@ -737,33 +737,41 @@ namespace Epi.Windows.Analysis.Forms
             string directory = string.Empty;
             string fileName = string.Empty;
             List<string> segments = new List<string>(command.Split(';'));
-
-            foreach (string segment in segments)
+            try
             {
-                if(segment.Contains("Data Source"))
+                foreach (string segment in segments)
                 {
-                    directory = segment.Replace("Data Source=", "");
+                    if(segment.Contains("Data Source"))
+                    {
+                        directory = segment.Replace("Data Source=", "");
+                    }
+
+                    if (segment.Contains("}:["))
+                    {
+                        fileName = segment.Substring(segment.IndexOf("["));
+                        fileName = fileName.Replace("[", "");
+                        fileName = fileName.Replace("#", ".");
+                        fileName = fileName.Replace("]", "");
+                    }
                 }
 
-                if (segment.Contains("}:["))
+                string fullFilePath = System.IO.Path.Combine(directory, fileName);
+
+                if(System.IO.File.Exists(fullFilePath))
                 {
-                    fileName = segment.Substring(segment.IndexOf("["));
-                    fileName = fileName.Replace("[", "");
-                    fileName = fileName.Replace("#", ".");
-                    fileName = fileName.Replace("]", "");
+                    return fullFilePath;
+                }
+                else
+                {
+                    return string.Empty;
                 }
             }
-            
-            string fullFilePath = System.IO.Path.Combine(directory, fileName);
+            catch (Exception ex)
+            {
 
-            if(System.IO.File.Exists(fullFilePath))
-            {
-                return fullFilePath;
             }
-            else
-            {
                 return string.Empty;
-            }
+          
         }
         
         private void DesignUserDefinedCommand(UserDefinedCommands command)
