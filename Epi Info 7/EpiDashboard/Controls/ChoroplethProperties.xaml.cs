@@ -1536,118 +1536,119 @@ namespace EpiDashboard.Controls
             byte ri = (byte)(rd / (stratCount - 1));
             byte gi = (byte)(gd / (stratCount - 1));
             byte bi = (byte)(bd / (stratCount - 1));
-
-            if (thisProvider.UseCustomColors)
-                rctColor0.Fill = new SolidColorBrush(thisProvider.CustomColorsDictionary.GetWithKey(rctColor0.Name));
-            else
+            if (thisProvider != null)
             {
-                rctColor0.Fill = rampMissing;
-                thisProvider.CustomColorsDictionary.Add(rctColor0.Name, rampMissing.Color);
-            }
-
-
-            if (thisProvider.UseCustomColors)
-                rctColor1.Fill = new SolidColorBrush(thisProvider.CustomColorsDictionary.GetWithKey(rctColor1.Name));
-            else
-            {
-                rctColor1.Fill = rampStart;
-                thisProvider.CustomColorsDictionary.Add(rctColor1.Name, rampStart.Color);
-            }
-
-
-
-            if (radShapeFile.IsChecked == true && thisProvider != null)
-            {
-                rampStart01.Text = thisProvider.RangeValues[0, 0];
-                rampEnd01.Text = thisProvider.RangeValues[0, 1];
-                quintile01.Text = thisProvider.QuantileValues[0].ToString();
-            }
-            else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
-            {
-                rampStart01.Text = choroplethServerLayerProvider.RangeValues[0, 0];
-                rampEnd01.Text = choroplethServerLayerProvider.RangeValues[0, 1];
-                quintile01.Text = choroplethServerLayerProvider.QuantileValues[0].ToString();
-            }
-            else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
-            {
-                rampStart01.Text = choroplethKmlLayerProvider.RangeValues[0, 0];
-                rampEnd01.Text = choroplethKmlLayerProvider.RangeValues[0, 1];
-                quintile01.Text = choroplethKmlLayerProvider.QuantileValues[0].ToString();
-            }
-
-
-            Color coo;
-
-            int i = 2;
-
-            int gradientControl = 1;
-
-            List<UIControls> uics = CreateUIControlsList();
-
-            foreach (UIControls uiControls in uics)
-            {
-
                 if (thisProvider.UseCustomColors)
-                    coo = thisProvider.CustomColorsDictionary.GetWithKey(uiControls.rectangle.Name);
+                    rctColor0.Fill = new SolidColorBrush(thisProvider.CustomColorsDictionary.GetWithKey(rctColor0.Name));
                 else
                 {
-                    coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * gradientControl), (byte)(rampStart.Color.G - gi * gradientControl),
-                        (byte)(rampStart.Color.B - bi * gradientControl));
-                    thisProvider.CustomColorsDictionary.Add(uiControls.rectangle.Name, coo);
+                    rctColor0.Fill = rampMissing;
+                    thisProvider.CustomColorsDictionary.Add(rctColor0.Name, rampMissing.Color);
                 }
 
-                gradientControl++;
 
-                uiControls.rectangle.Visibility = System.Windows.Visibility.Visible;
-                uiControls.rampStarts.Visibility = System.Windows.Visibility.Visible;
-                uiControls.centerTexts.Visibility = System.Windows.Visibility.Visible;
-                uiControls.rampEnds.Visibility = System.Windows.Visibility.Visible;
-                uiControls.quintiles.Visibility = System.Windows.Visibility.Visible;
-                uiControls.legedTexts.Visibility = System.Windows.Visibility.Visible;
-                if (i++ > stratCount)
+                if (thisProvider.UseCustomColors)
+                    rctColor1.Fill = new SolidColorBrush(thisProvider.CustomColorsDictionary.GetWithKey(rctColor1.Name));
+                else
                 {
-                    coo = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                    uiControls.rectangle.Visibility = System.Windows.Visibility.Hidden;
-                    uiControls.rampStarts.Visibility = System.Windows.Visibility.Hidden;
-                    uiControls.centerTexts.Visibility = System.Windows.Visibility.Hidden;
-                    uiControls.rampEnds.Visibility = System.Windows.Visibility.Hidden;
-                    uiControls.quintiles.Visibility = System.Windows.Visibility.Hidden;
-                    uiControls.legedTexts.Visibility = System.Windows.Visibility.Hidden;
+                    rctColor1.Fill = rampStart;
+                    thisProvider.CustomColorsDictionary.Add(rctColor1.Name, rampStart.Color);
                 }
-                if (isNewColorRamp) uiControls.rectangle.Fill = new SolidColorBrush(coo);
+
+
 
                 if (radShapeFile.IsChecked == true && thisProvider != null)
                 {
-                    if (thisProvider.UseCustomRanges)
-                    {
-                        uiControls.rampStarts.Text = thisProvider.ClassRangesDictionary.Dict[uiControls.rampStarts.Name];
-                        uiControls.rampEnds.Text = thisProvider.ClassRangesDictionary.Dict[uiControls.rampEnds.Name];
-                        uiControls.quintiles.Text = thisProvider.QuantileValues[i - 2].ToString();
-                    }
-                    else
-                    {
-                        uiControls.rampStarts.Text = thisProvider.RangeValues[i - 2, 0];
-                        uiControls.rampEnds.Text = thisProvider.RangeValues[i - 2, 1];
-                        uiControls.quintiles.Text = thisProvider.QuantileValues[i - 2].ToString();
-                    }
+                    rampStart01.Text = thisProvider.RangeValues[0, 0];
+                    rampEnd01.Text = thisProvider.RangeValues[0, 1];
+                    quintile01.Text = thisProvider.QuantileValues[0].ToString();
                 }
                 else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
                 {
-                    uiControls.rampStarts.Text = choroplethServerLayerProvider.RangeValues[i - 2, 0];
-                    uiControls.rampEnds.Text = choroplethServerLayerProvider.RangeValues[i - 2, 1];
-                    uiControls.quintiles.Text = choroplethServerLayerProvider.QuantileValues[i - 2].ToString();
+                    rampStart01.Text = choroplethServerLayerProvider.RangeValues[0, 0];
+                    rampEnd01.Text = choroplethServerLayerProvider.RangeValues[0, 1];
+                    quintile01.Text = choroplethServerLayerProvider.QuantileValues[0].ToString();
                 }
                 else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
                 {
-                    uiControls.rampStarts.Text = choroplethKmlLayerProvider.RangeValues[i - 2, 0];
-                    uiControls.rampEnds.Text = choroplethKmlLayerProvider.RangeValues[i - 2, 1];
-                    uiControls.quintiles.Text = choroplethKmlLayerProvider.QuantileValues[i - 2].ToString();
+                    rampStart01.Text = choroplethKmlLayerProvider.RangeValues[0, 0];
+                    rampEnd01.Text = choroplethKmlLayerProvider.RangeValues[0, 1];
+                    quintile01.Text = choroplethKmlLayerProvider.QuantileValues[0].ToString();
                 }
 
 
+                Color coo;
+
+                int i = 2;
+
+                int gradientControl = 1;
+
+                List<UIControls> uics = CreateUIControlsList();
+
+                foreach (UIControls uiControls in uics)
+                {
+
+                    if (thisProvider.UseCustomColors)
+                        coo = thisProvider.CustomColorsDictionary.GetWithKey(uiControls.rectangle.Name);
+                    else
+                    {
+                        coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * gradientControl), (byte)(rampStart.Color.G - gi * gradientControl),
+                            (byte)(rampStart.Color.B - bi * gradientControl));
+                        thisProvider.CustomColorsDictionary.Add(uiControls.rectangle.Name, coo);
+                    }
+
+                    gradientControl++;
+
+                    uiControls.rectangle.Visibility = System.Windows.Visibility.Visible;
+                    uiControls.rampStarts.Visibility = System.Windows.Visibility.Visible;
+                    uiControls.centerTexts.Visibility = System.Windows.Visibility.Visible;
+                    uiControls.rampEnds.Visibility = System.Windows.Visibility.Visible;
+                    uiControls.quintiles.Visibility = System.Windows.Visibility.Visible;
+                    uiControls.legedTexts.Visibility = System.Windows.Visibility.Visible;
+                    if (i++ > stratCount)
+                    {
+                        coo = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+                        uiControls.rectangle.Visibility = System.Windows.Visibility.Hidden;
+                        uiControls.rampStarts.Visibility = System.Windows.Visibility.Hidden;
+                        uiControls.centerTexts.Visibility = System.Windows.Visibility.Hidden;
+                        uiControls.rampEnds.Visibility = System.Windows.Visibility.Hidden;
+                        uiControls.quintiles.Visibility = System.Windows.Visibility.Hidden;
+                        uiControls.legedTexts.Visibility = System.Windows.Visibility.Hidden;
+                    }
+                    if (isNewColorRamp) uiControls.rectangle.Fill = new SolidColorBrush(coo);
+
+                    if (radShapeFile.IsChecked == true && thisProvider != null)
+                    {
+                        if (thisProvider.UseCustomRanges)
+                        {
+                            uiControls.rampStarts.Text = thisProvider.ClassRangesDictionary.Dict[uiControls.rampStarts.Name];
+                            uiControls.rampEnds.Text = thisProvider.ClassRangesDictionary.Dict[uiControls.rampEnds.Name];
+                            uiControls.quintiles.Text = thisProvider.QuantileValues[i - 2].ToString();
+                        }
+                        else
+                        {
+                            uiControls.rampStarts.Text = thisProvider.RangeValues[i - 2, 0];
+                            uiControls.rampEnds.Text = thisProvider.RangeValues[i - 2, 1];
+                            uiControls.quintiles.Text = thisProvider.QuantileValues[i - 2].ToString();
+                        }
+                    }
+                    else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
+                    {
+                        uiControls.rampStarts.Text = choroplethServerLayerProvider.RangeValues[i - 2, 0];
+                        uiControls.rampEnds.Text = choroplethServerLayerProvider.RangeValues[i - 2, 1];
+                        uiControls.quintiles.Text = choroplethServerLayerProvider.QuantileValues[i - 2].ToString();
+                    }
+                    else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
+                    {
+                        uiControls.rampStarts.Text = choroplethKmlLayerProvider.RangeValues[i - 2, 0];
+                        uiControls.rampEnds.Text = choroplethKmlLayerProvider.RangeValues[i - 2, 1];
+                        uiControls.quintiles.Text = choroplethKmlLayerProvider.QuantileValues[i - 2].ToString();
+                    }
+
+
+                }
+
             }
-
-
             _initialRampCalc = false;
         }
 
