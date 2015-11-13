@@ -21,8 +21,6 @@ namespace EpiDashboard.Mapping
 
         #region Choropleth
 
-        bool _asQuintile;
-
         private List<GraphicsLayer> graphicsLayers;
         private string url;
 
@@ -60,11 +58,7 @@ namespace EpiDashboard.Mapping
             set { _opacity = value; }
         }
 
-        public bool AsQuintile
-        {
-            get { return _asQuintile; }
-            set { _asQuintile = value; }
-        }
+        public bool AsQuantiles { get; set; }
 
         public struct ThematicItem
         {

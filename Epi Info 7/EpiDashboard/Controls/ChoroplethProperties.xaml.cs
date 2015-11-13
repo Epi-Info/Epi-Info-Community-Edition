@@ -1463,14 +1463,17 @@ namespace EpiDashboard.Controls
             if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null) &&
                 (thisProvider != null))
             {
-                thisProvider.RangesLoadedFromMapFile = false;
+                if (thisProvider.AsQuantiles)
+                {
+                    thisProvider.RangesLoadedFromMapFile = false;
 
-                thisProvider.ResetRangeValues(
-                    cmbShapeKey.SelectedItem.ToString(),
-                    cmbDataKey.SelectedItem.ToString(),
-                    cmbValue.SelectedItem.ToString(),
-                    classCount
-                    );
+                    thisProvider.ResetRangeValues(
+                        cmbShapeKey.SelectedItem.ToString(),
+                        cmbDataKey.SelectedItem.ToString(),
+                        cmbValue.SelectedItem.ToString(),
+                        classCount
+                        );
+                }
             }
             else if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null &&
                       cmbValue.SelectedItem != null) && (choroplethServerLayerProvider != null))
@@ -1516,6 +1519,8 @@ namespace EpiDashboard.Controls
             //Color col = (Color)ColorConverter.ConvertFromString("Yellow");
 
             //SolidColorBrush rampMissing = new SolidColorBrush(col);
+
+            quintilesOption.IsChecked = thisProvider.AsQuantiles;
 
             SolidColorBrush rampMissing = (SolidColorBrush)rctMissingColor.Fill;
 
@@ -1654,8 +1659,26 @@ namespace EpiDashboard.Controls
 
                 }
 
+                EnableDisableClassRangeInput();
+
             }
             _initialRampCalc = false;
+        }
+
+        private void EnableDisableClassRangeInput()
+        {
+            foreach (UIElement element in stratGrid.Children)
+            {
+                if (element is System.Windows.Controls.TextBox)
+                {
+                    string elementName = ((System.Windows.Controls.TextBox)element).Name;
+
+                    if (elementName.StartsWith("ramp"))
+                    {
+                        ((System.Windows.Controls.TextBox)element).IsEnabled = !(bool)quintilesOption.IsChecked;
+                    }
+                }
+            }
         }
 
 
@@ -1779,8 +1802,9 @@ namespace EpiDashboard.Controls
 
         public void OnQuintileOptionChanged()
         {
-            
-            int widthQuintile = 0;
+            thisProvider.AsQuantiles = (bool)quintilesOption.IsChecked;
+
+            int widthQuantile = 0;
             int widthMinMax = 75;
             int widthCompare = 50;
 
@@ -1793,29 +1817,15 @@ namespace EpiDashboard.Controls
                 Reset_Legend();
             }
 
-            quintileColumn.Width = new GridLength(widthQuintile, GridUnitType.Pixel);
+            quintileColumn.Width = new GridLength(widthQuantile, GridUnitType.Pixel);
 
             rampStartColumn.Width = new GridLength(widthMinMax, GridUnitType.Pixel);
             rampCompareColumn.Width = new GridLength(widthCompare, GridUnitType.Pixel);
             rampEndColumn.Width = new GridLength(widthMinMax, GridUnitType.Pixel);
 
-            foreach (UIElement element in stratGrid.Children)
-            {
-                if (element is System.Windows.Controls.TextBox)
-                {
-                    string elementName = ((System.Windows.Controls.TextBox)element).Name;
-
-                    if (elementName.StartsWith("ramp"))
-                    {
-                        ((System.Windows.Controls.TextBox)element).IsEnabled = !(bool)quintilesOption.IsChecked;
-                    }
-                }
-            }
+            EnableDisableClassRangeInput();
         }
-
-
-
-
+        
         public void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbShapeKey.SelectedItem != null)
