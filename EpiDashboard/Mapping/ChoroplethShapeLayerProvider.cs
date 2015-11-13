@@ -52,6 +52,7 @@ namespace EpiDashboard.Mapping
             set { _opacity = value; }
         }
 
+        public bool AsQuantiles { get; set; }
 
         private ListLegendTextDictionary _listLegendText = new ListLegendTextDictionary();
         private CustomColorsDictionary _customColorsDictionary = new CustomColorsDictionary();

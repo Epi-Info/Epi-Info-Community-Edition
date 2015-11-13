@@ -42,7 +42,6 @@ namespace EpiDashboard.Mapping
 
         private bool _useCustomColors;
 
-
         public ColorRampType CurrentColorRampType
         {
             get { return _colorRampType; }
@@ -339,7 +338,7 @@ namespace EpiDashboard.Mapping
 
                 //  Use custom colors   
                 string useCustomColorsTag = "<useCustomColors>" + provider.UseCustomColors + "</useCustomColors>";
-                string asQuintileTag = "<asQuintile>" + provider.AsQuintile + "</asQuintile>";
+                string asQuintileTag = "<asQuintiles>" + flagQuantiles + "</asQuintiles>";
                 string classRanges = "";
 
                 // Class ranges    
@@ -411,6 +410,13 @@ namespace EpiDashboard.Mapping
                     {
                         provider.ListLegendText.Add(classTitle.Name, classTitle.InnerText);
                     }
+                }
+
+                if (child.Name.Equals("asQuintiles"))
+                {
+                    bool asQuintiles = false;
+                    bool.TryParse(child.InnerText, out asQuintiles);
+                    provider.AsQuantiles = asQuintiles;
                 }
 
                 if (child.Name.Equals("customColors"))

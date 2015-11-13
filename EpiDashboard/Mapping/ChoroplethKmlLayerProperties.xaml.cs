@@ -64,7 +64,6 @@ namespace EpiDashboard.Mapping
             lblHiValueColor.Content = DashboardSharedStrings.GADGET_HIGH_VALUE_COLOR;
             rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT;
             #endregion; //translation
-
         }
 
         private void rctMissingColor_MouseUp(object sender, MouseButtonEventArgs e)
@@ -357,9 +356,9 @@ namespace EpiDashboard.Mapping
                 customColors += "</customColors>";
             }
 
-            string asQuintileTag = "<asQuintile>" + provider.AsQuintile + "</asQuintile>";
+            string asQuantileTag = "<asQuantiles>" + flagQuantiles + "</asQuantiles>";
 
-            string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() + "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor>" + customColors + asQuintileTag + "<classes>" + cbxClasses.SelectedIndex.ToString() + "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>";
+            string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() + "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor>" + customColors + asQuantileTag + "<classes>" + cbxClasses.SelectedIndex.ToString() + "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>";
             System.Xml.XmlElement element = doc.CreateElement("dataLayer");
             element.InnerXml = xmlString;
             element.AppendChild(dashboardHelper.Serialize(doc));
@@ -386,6 +385,13 @@ namespace EpiDashboard.Mapping
                 if (child.Name.Equals("shapeFile"))
                 {
                     provider.LoadKml(child.InnerText);
+                }
+
+                if (child.Name.Equals("asQuantiles"))
+                {
+                    bool asQuantiles = false;
+                    bool.TryParse(child.InnerText, out asQuantiles);
+                    provider.AsQuantiles = asQuantiles;
                 }
 
                 if (child.Name.Equals("classTitles"))

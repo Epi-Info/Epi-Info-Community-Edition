@@ -1255,6 +1255,7 @@ namespace EpiDashboard.Mapping
             set { opacity = value; }
         }
 
+        public bool AsQuantiles { get; set; }
 
         #region ILayerProvider Members
 
