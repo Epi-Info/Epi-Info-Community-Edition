@@ -70,8 +70,8 @@ namespace EpiDashboard.Mapping
             cbxShapeKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxClasses.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
-            rctHighColor.MouseUp += new MouseButtonEventHandler(rctHighColor_MouseUp);
-            rctLowColor.MouseUp += new MouseButtonEventHandler(rctLowColor_MouseUp);
+            //rctHighColor.MouseUp += new MouseButtonEventHandler(rctHighColor_MouseUp);
+            //rctLowColor.MouseUp += new MouseButtonEventHandler(rctLowColor_MouseUp);
             //rctFilter.MouseUp += new MouseButtonEventHandler(rctFilter_MouseUp);
             rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
 
