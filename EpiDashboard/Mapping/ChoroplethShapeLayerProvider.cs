@@ -765,7 +765,7 @@ namespace EpiDashboard.Mapping
             return thematicItem;
         }
 
-
+        // TODO  CalculateThematicRange    
         private List<double> CalculateThematicRange(int classCount, ThematicItem thematicItem, List<double> valueList)
         {
 
