@@ -1615,7 +1615,9 @@ namespace EpiDashboard.Mapping
 
              choroplethproperties.radKML.IsEnabled = false;
              choroplethproperties.radMapServer.IsEnabled = false;
-
+             choroplethproperties.radconnectmapserver.IsEnabled = false;
+             choroplethproperties.radlocatemapserver.IsEnabled = false;
+             choroplethproperties.radlocatemapserver.IsEnabled = false;
               choroplethproperties.panelBoundaries.IsEnabled = true;
 
               if (choroplethlayerprop.datafilters != null)
@@ -1655,7 +1657,7 @@ namespace EpiDashboard.Mapping
             choroplethproperties.radShapeFile.IsEnabled = true;
             choroplethproperties.txtShapePath.IsEnabled = true;
             choroplethproperties.btnBrowse.IsEnabled = true;
-             
+            choroplethproperties.panelshape.IsEnabled = true;
             
             choroplethproperties.cmbShapeKey.Text = choroplethlayerprop.cbxShapeKey.Text;
             choroplethproperties.cmbDataKey.Text = choroplethlayerprop.cbxDataKey.Text;
