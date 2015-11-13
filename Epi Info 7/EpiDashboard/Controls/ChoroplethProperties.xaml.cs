@@ -1921,7 +1921,8 @@ namespace EpiDashboard.Controls
             {
 
                 if (thisProvider == null)
-                    return;
+                    thisProvider = choroplethKmlLayerProvider;
+
 
                 thisProvider.PopulateRangeValues();
 
@@ -2052,10 +2053,12 @@ namespace EpiDashboard.Controls
             if (choroplethKmlLayerProvider == null)
             {
                 choroplethKmlLayerProvider = new Mapping.ChoroplethKmlLayerProvider(_myMap);
-                thisProvider = choroplethKmlLayerProvider;
-
+            
                 choroplethKmlLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroKMLprovider_FeatureLoaded);
             }
+
+            thisProvider = choroplethKmlLayerProvider;
+
 
             object[] kmlFileProperties = choroplethKmlLayerProvider.LoadKml(KMLMapServerName);
             if (kmlFileProperties != null)
@@ -2693,7 +2696,7 @@ namespace EpiDashboard.Controls
                 found.Text = kvp.Value;
             }
         }
-
+                                
         private void AdjustClassBreaks(List<ClassLimits> classBreaks, float newValue, int classLevel, ClassLimitType limitType = ClassLimitType.Start)
         {
             ReplaceClassLimit(classBreaks, newValue, classLevel, limitType);
