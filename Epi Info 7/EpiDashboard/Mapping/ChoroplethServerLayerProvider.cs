@@ -90,7 +90,11 @@ namespace EpiDashboard.Mapping
             set { quantileValues = value; }
         }
 
-        public bool UseCustomColors { get; set; }
+        public bool UseCustomColors
+        {
+            get { return _useCustomColors; }
+            set { _useCustomColors = value; }
+        }
 
         public int RangeCount { get; set; }
 
@@ -1243,6 +1247,7 @@ namespace EpiDashboard.Mapping
 
 
         private byte opacity;
+        private bool _useCustomColors;
 
         public byte Opacity
         {

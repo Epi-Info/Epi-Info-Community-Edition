@@ -983,7 +983,7 @@ namespace EpiDashboard.Mapping
         private string _legendText;
         private bool _rangesLoadedFromMapFile;
 
-        private bool _useCustomColors = true;
+        private bool _useCustomColors = false;    
 
 
         public StackPanel LegendStackPanel
