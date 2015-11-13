@@ -964,6 +964,9 @@ namespace EpiDashboard.Mapping
             {
                 layerList.CloseAllLayers();
             }
+
+            stkLegends.Children.Clear();
+            stkLegends.Children.Add(legendTitleTextBlock);
         }
 
         void myMap_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
