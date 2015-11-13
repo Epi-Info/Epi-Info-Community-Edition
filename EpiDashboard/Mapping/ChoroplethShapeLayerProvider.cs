@@ -19,8 +19,8 @@ namespace EpiDashboard.Mapping
         #region Choropleth
 
 
-        private bool _useCustomColors;        //   = true;
-
+        private bool _useCustomColors;
+        private bool _asQuintile;
 
         Map _myMap;
         DashboardHelper _dashboardHelper;
@@ -910,6 +910,12 @@ namespace EpiDashboard.Mapping
         {
             get { return _useCustomColors; }
             set { _useCustomColors = value; }
+        }
+
+        public bool AsQuintile
+        {
+            get { return _asQuintile; }
+            set { _asQuintile = value; }
         }
 
         //public Dictionary<string, Color> ClassesColorsDictionary

@@ -1850,9 +1850,12 @@ namespace EpiDashboard.Mapping
             choroplethproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;
             choroplethproperties.cmbClasses.Text = choroplethKMLlayerprop.cbxClasses.Text;
             choroplethproperties.quintilesOption.IsChecked = choroplethKMLlayerprop.flagQuantiles;
-            if (choroplethKMLlayerprop.flagQuantiles == true) { choroplethproperties.OnQuintileOptionChanged(); }
-            //choroplethproperties.ClearonMapServer();
-
+            
+            if (choroplethKMLlayerprop.flagQuantiles == true) 
+            { 
+                choroplethproperties.OnQuintileOptionChanged(); 
+            }
+            
             choroplethproperties.panelBoundaries.IsEnabled = true;
             if (choroplethKMLlayerprop.datafilters != null)
                 choroplethproperties.datafilters = choroplethKMLlayerprop.datafilters;

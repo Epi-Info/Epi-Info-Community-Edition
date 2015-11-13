@@ -2994,6 +2994,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Classes.
+        /// </summary>
+        public static string GADGET_MAP_CLASSES {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_CLASSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing or Excluded Color.
         /// </summary>
         public static string GADGET_MAP_COLOR_MISSING {
