@@ -140,6 +140,10 @@ namespace EpiDashboard.Mapping
                     lblFileName.Content = child.InnerText;
                 }
             }
+            if (provider == null)
+            {
+                provider = new ShapeLayerProvider(myMap);
+            }
             provider.RenderShape(lblFileName.Content.ToString());
             if (MapGenerated != null)
             {
