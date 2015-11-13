@@ -138,6 +138,8 @@ namespace EpiDashboard.Mapping
         void rctDotColor_MouseUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            Brush brush = new SolidColorBrush(((SolidColorBrush)rctDotColor.Fill).Color);
+            dialog.Color = System.Drawing.Color.FromArgb(((brush as SolidColorBrush).Color).A, ((brush as SolidColorBrush).Color).R, ((brush as SolidColorBrush).Color).G, ((brush as SolidColorBrush).Color).B);         
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctDotColor.Fill = new SolidColorBrush(Color.FromArgb(0xF0, dialog.Color.R, dialog.Color.G, dialog.Color.B));
