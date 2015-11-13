@@ -1688,7 +1688,7 @@ of records or select fewer fields for the group.</value>
     <value>Map Server</value>
   </data>
   <data name="GADGET_MAP_CLASS_BREAKS" xml:space="preserve">
-    <value>Class Breaks</value>
+    <value>Classes</value>
   </data>
   <data name="GADGET_MAP_COLOR_MISSING" xml:space="preserve">
     <value>Missing or Excluded Color</value>
