@@ -339,9 +339,8 @@ namespace EpiDashboard.Mapping
 
                 //  Use custom colors   
                 string useCustomColorsTag = "<useCustomColors>" + provider.UseCustomColors + "</useCustomColors>";
-
+                string asQuintileTag = "<asQuintile>" + provider.AsQuintile + "</asQuintile>";
                 string classRanges = "";
-
 
                 // Class ranges    
                 if (provider.ClassRangesDictionary != null)
@@ -362,7 +361,7 @@ namespace EpiDashboard.Mapping
 
 
                 string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() +
-                                   "</highColor><legTitle>" + provider.LegendText + "</legTitle>" + classTitles + classRanges + useCustomColorsTag + customColors + "<lowColor>" + lowColor.Color.ToString() +
+                                   "</highColor><legTitle>" + provider.LegendText + "</legTitle>" + classTitles + classRanges + useCustomColorsTag + asQuintileTag + customColors + "<lowColor>" + lowColor.Color.ToString() +
                                    "</lowColor><missingColor>" + missingColor.Color.ToString() + "</missingColor><classes>" + cbxClasses.SelectedIndex.ToString() +
                                    "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>";
 

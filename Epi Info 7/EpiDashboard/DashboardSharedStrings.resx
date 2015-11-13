@@ -2011,4 +2011,7 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_REQUIRED_FIELD" xml:space="preserve">
     <value>Required field</value>
   </data>
+  <data name="GADGET_MAP_CLASSES" xml:space="preserve">
+    <value>Classes</value>
+  </data>
 </root>

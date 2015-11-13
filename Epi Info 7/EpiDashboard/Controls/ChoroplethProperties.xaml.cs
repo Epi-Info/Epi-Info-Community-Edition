@@ -158,7 +158,7 @@ namespace EpiDashboard.Controls
             lblColorEnd.Content = DashboardSharedStrings.GADGET_MAP_END;
             tblockOpacity.Text = DashboardSharedStrings.GADGET_MAP_OPACITY;
             tblockRangesSubheader.Content = DashboardSharedStrings.GADGET_MAP_RANGES;
-            lblClassBreaks.Content = DashboardSharedStrings.GADGET_MAP_CLASS_BREAKS;
+            lblClassBreaks.Content = DashboardSharedStrings.GADGET_MAP_CLASSES;
             quintilesOption.Content = DashboardSharedStrings.GADGET_MAP_QUANTILES;
             tblockLegendTitleSubheader.Content = DashboardSharedStrings.GADGET_MAP_LEGEND_TITLE;
             tblockColorRamp.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLOR;
@@ -1779,6 +1779,7 @@ namespace EpiDashboard.Controls
 
         public void OnQuintileOptionChanged()
         {
+            
             int widthQuintile = 0;
             int widthMinMax = 75;
             int widthCompare = 50;
@@ -1789,7 +1790,7 @@ namespace EpiDashboard.Controls
             }
             else
             {
-                // Reset_Legend();
+                Reset_Legend();
             }
 
             quintileColumn.Width = new GridLength(widthQuintile, GridUnitType.Pixel);
@@ -1797,7 +1798,23 @@ namespace EpiDashboard.Controls
             rampStartColumn.Width = new GridLength(widthMinMax, GridUnitType.Pixel);
             rampCompareColumn.Width = new GridLength(widthCompare, GridUnitType.Pixel);
             rampEndColumn.Width = new GridLength(widthMinMax, GridUnitType.Pixel);
+
+            foreach (UIElement element in stratGrid.Children)
+            {
+                if (element is System.Windows.Controls.TextBox)
+                {
+                    string elementName = ((System.Windows.Controls.TextBox)element).Name;
+
+                    if (elementName.StartsWith("ramp"))
+                    {
+                        ((System.Windows.Controls.TextBox)element).IsEnabled = !(bool)quintilesOption.IsChecked;
+                    }
+                }
+            }
         }
+
+
+
 
         public void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
