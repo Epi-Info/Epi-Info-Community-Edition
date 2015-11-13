@@ -331,21 +331,23 @@ namespace EpiDashboard.Controls
 
                 SetOpacity();
 
-                List<SolidColorBrush> brushList = new List<SolidColorBrush>() { 
-                    (SolidColorBrush)rctColor1.Fill, 
-                    (SolidColorBrush)rctColor2.Fill, 
-                    (SolidColorBrush)rctColor3.Fill, 
-                    (SolidColorBrush)rctColor4.Fill, 
-                    (SolidColorBrush)rctColor5.Fill, 
-                    (SolidColorBrush)rctColor6.Fill, 
-                    (SolidColorBrush)rctColor7.Fill, 
-                    (SolidColorBrush)rctColor8.Fill, 
-                    (SolidColorBrush)rctColor9.Fill, 
-                    (SolidColorBrush)rctColor10.Fill,  
-                    (SolidColorBrush)rctColor0.Fill };
+                List<SolidColorBrush> brushList = new List<SolidColorBrush>()
+                {
+                    (SolidColorBrush) rctColor1.Fill,
+                    (SolidColorBrush) rctColor2.Fill,
+                    (SolidColorBrush) rctColor3.Fill,
+                    (SolidColorBrush) rctColor4.Fill,
+                    (SolidColorBrush) rctColor5.Fill,
+                    (SolidColorBrush) rctColor6.Fill,
+                    (SolidColorBrush) rctColor7.Fill,
+                    (SolidColorBrush) rctColor8.Fill,
+                    (SolidColorBrush) rctColor9.Fill,
+                    (SolidColorBrush) rctColor10.Fill,
+                    (SolidColorBrush) rctColor0.Fill
+                };
 
                 int classCount;
-                if (!int.TryParse(((ComboBoxItem)cmbClasses.SelectedItem).Content.ToString(), out classCount))
+                if (!int.TryParse(((ComboBoxItem) cmbClasses.SelectedItem).Content.ToString(), out classCount))
                 {
                     classCount = 4;
                 }
@@ -353,28 +355,27 @@ namespace EpiDashboard.Controls
                 if (thisProvider != null)
                 {
                     thisProvider.PopulateRangeValues(_dashboardHelper,
-                       cmbShapeKey.SelectedItem.ToString(),
-                       cmbDataKey.SelectedItem.ToString(),
-                       cmbValue.SelectedItem.ToString(),
-                       brushList,
-                       classCount,
+                        cmbShapeKey.SelectedItem.ToString(),
+                        cmbDataKey.SelectedItem.ToString(),
+                        cmbValue.SelectedItem.ToString(),
+                        brushList,
+                        classCount,
                         legTitle.Text);
 
                 }
-                else
-                    if (choroplethKmlLayerProvider != null)
-                    {
-                        choroplethKmlLayerProvider.PopulateRangeValues(_dashboardHelper,
-                           cmbShapeKey.SelectedItem.ToString(),
-                           cmbDataKey.SelectedItem.ToString(),
-                           cmbValue.SelectedItem.ToString(),
-                           brushList,
-                            classCount,
-                            legTitle.Text);
-                    }
+                else if (choroplethKmlLayerProvider != null)
+                {
+                    choroplethKmlLayerProvider.PopulateRangeValues(_dashboardHelper,
+                        cmbShapeKey.SelectedItem.ToString(),
+                        cmbDataKey.SelectedItem.ToString(),
+                        cmbValue.SelectedItem.ToString(),
+                        brushList,
+                        classCount,
+                        legTitle.Text);
+                }
                 SetRangeUISection();
 
-               
+
             }
 
             UpdateRangesCollection();
@@ -1278,6 +1279,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor1.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(rctColor1.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
@@ -1288,7 +1290,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor2.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-
+                thisProvider.UseCustomColors = true;    
                 thisProvider.CustomColorsDictionary.Add(rctColor2.Name,
                     Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
 
@@ -1301,6 +1303,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor3.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(rctColor3.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
@@ -1311,6 +1314,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor4.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(rctColor4.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
@@ -1321,6 +1325,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor5.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(rctColor5.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
@@ -1331,6 +1336,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor6.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(rctColor6.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
@@ -1341,6 +1347,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor7.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(rctColor7.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
@@ -1351,6 +1358,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor8.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(rctColor8.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
@@ -1361,6 +1369,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor9.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(rctColor9.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
@@ -1371,6 +1380,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctColor10.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(rctColor10.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
         }
@@ -1381,7 +1391,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctMissingColor.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-
+                thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(rctMissingColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
 
             }
@@ -1393,6 +1403,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctLowColor.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(rctLowColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
 
@@ -1405,6 +1416,7 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctHighColor.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(rctHighColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
             
@@ -1823,7 +1835,10 @@ namespace EpiDashboard.Controls
 
         private void SetRangeUISection()
         {
+
             SetOpacity();
+
+
             List<SolidColorBrush> brushList = new List<SolidColorBrush>() { 
                     (SolidColorBrush)rctColor1.Fill, 
                     (SolidColorBrush)rctColor2.Fill, 
@@ -1898,7 +1913,34 @@ namespace EpiDashboard.Controls
             else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
             {
 
+                thisProvider.PopulateRangeValues();
 
+                //  Leg Title        
+                if (string.IsNullOrEmpty(legTitle.Text))
+                    legTitle.Text = thisProvider.LegendText;
+                else
+                    thisProvider.LegendText = legTitle.Text;
+
+
+                try
+                {
+                    // Class titles                        
+                    for (int x = 1; x <= ChoroplethConstants.MAX_CLASS_DECRIPTION_COUNT; x++)
+                    {
+                        System.Windows.Controls.TextBox t = FindName(ChoroplethConstants.legendTextControlPrefix + x) as System.Windows.Controls.TextBox;
+                        if (string.IsNullOrEmpty(t.Text))
+                            t.Text = thisProvider.ListLegendText.GetWithKey(ChoroplethConstants.legendTextControlPrefix + x);
+                        else
+                            thisProvider.ListLegendText.Add(ChoroplethConstants.legendTextControlPrefix + x, t.Text);
+                    }
+
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
 
                 choroplethKmlLayerProvider.PopulateRangeValues();
                 choroplethKmlLayerProvider.AreRangesSet = true;
