@@ -235,8 +235,8 @@
 
                 <StackPanel Grid.Row="1" Grid.RowSpan="10" Margin="00,-15,-10,0"  HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Collapsed">
                     <Grid x:Name="ConfigGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,10,0" >
-                        <Rectangle Style="{DynamicResource rectangleConfigOuter}" />
-                        <Rectangle Style="{DynamicResource rectangleConfigInner}" />
+                        <!--<Rectangle Style="{DynamicResource rectangleConfigOuter}" />-->
+                        <!--<Rectangle Style="{DynamicResource rectangleConfigInner}" />-->
 
                         <Path x:Name="pathTriangle" 
                               Margin="0,-2,90,0"
