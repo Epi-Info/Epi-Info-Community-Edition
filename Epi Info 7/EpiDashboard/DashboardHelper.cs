@@ -2087,7 +2087,10 @@ namespace EpiDashboard
                     {
                         unfilteredTable.Columns["t.GlobalRecordId"].ColumnName = "GlobalRecordId";
                     }
-
+                    if (unfilteredTable.Columns.Contains("t.UniqueKey"))
+                    {
+                        unfilteredTable.Columns["t.UniqueKey"].ColumnName = "UniqueKey";
+                    }
                     foreach (Page page in vw.Pages)
                     {
                         string pageGUIDName = page.TableName + "." + "GlobalRecordId";
