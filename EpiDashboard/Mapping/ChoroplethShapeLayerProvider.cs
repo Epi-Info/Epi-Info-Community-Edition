@@ -45,14 +45,18 @@ namespace EpiDashboard.Mapping
         }
 
         private byte _opacity;
-
         public byte Opacity
         {
             get { return _opacity; }
             set { _opacity = value; }
         }
 
-        public bool AsQuantiles { get; set; }
+        private bool _asQuantiles = true;
+        public bool AsQuantiles
+        {
+            get { return _asQuantiles; }
+            set { _asQuantiles = value; }
+        }
 
         private ListLegendTextDictionary _listLegendText = new ListLegendTextDictionary();
         private CustomColorsDictionary _customColorsDictionary = new CustomColorsDictionary();
