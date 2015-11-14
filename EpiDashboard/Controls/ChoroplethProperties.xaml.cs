@@ -2714,6 +2714,23 @@ namespace EpiDashboard.Controls
 
             UpdateRangesCollection();
 
+            foreach (UIElement element in stratGrid.Children)
+            {
+                if (element is System.Windows.Controls.TextBox)
+                {
+                    string elementName = ((System.Windows.Controls.TextBox)element).Name;
+                    Visibility elementVisibility = ((System.Windows.Controls.TextBox)element).Visibility;
+                    if (elementName.StartsWith("ramp") && elementVisibility == Visibility.Visible)
+                    {
+                        float rangeValue;
+                        if(float.TryParse(((System.Windows.Controls.TextBox)element).Text, out rangeValue) == false)
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
+
             List<ClassLimits> limits = thisProvider.ClassRangesDictionary.GetLimitValues();
 
             AdjustClassBreaks(limits, newValue, classLevel, limit);

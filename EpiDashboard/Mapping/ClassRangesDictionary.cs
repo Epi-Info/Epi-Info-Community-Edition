@@ -44,10 +44,6 @@ namespace EpiDashboard.Mapping
                 {
                     _rangeValues.Add(new ClassLimits(start, end, key_Start, key_End));
                 }
-                else
-                {
-                    _rangeValues.Add(new ClassLimits(float.MaxValue, float.MinValue, key_Start, key_End));
-                }
             }
 
             return _rangeValues;
