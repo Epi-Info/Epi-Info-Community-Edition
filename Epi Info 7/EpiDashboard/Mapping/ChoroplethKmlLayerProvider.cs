@@ -58,7 +58,12 @@ namespace EpiDashboard.Mapping
             set { _opacity = value; }
         }
 
-        public bool AsQuantiles { get; set; }
+        private bool _asQuantiles = true;
+        public bool AsQuantiles 
+        {
+            get { return _asQuantiles; }
+            set { _asQuantiles = value; }
+        }
 
         public struct ThematicItem
         {
