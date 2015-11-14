@@ -1802,7 +1802,10 @@ namespace EpiDashboard.Controls
 
         public void OnQuintileOptionChanged()
         {
-            thisProvider.AsQuantiles = (bool)quintilesOption.IsChecked;
+            if(thisProvider != null)
+            { 
+                thisProvider.AsQuantiles = (bool)quintilesOption.IsChecked;
+            }
 
             int widthQuantile = 0;
             int widthMinMax = 75;
