@@ -28,16 +28,9 @@ namespace EpiDashboard.Mapping
 
         public List<ClassLimits> GetLimitValues()
         {
-            int classCount = 0;
-            foreach (KeyValuePair<string, string> kvp in _dictionary)
-            {
-                if (string.IsNullOrEmpty(kvp.Value)) break;
-                classCount++;
-            }
-
             _rangeValues = new List<ClassLimits>();
 
-            for (int i = 0; i < classCount; i++)
+            for (int i = 0; i < PropertyPanelMaxClassCount; i++)
             {
                 float start, end;
                 string start_str, end_str, key_Start, key_End;
@@ -50,6 +43,10 @@ namespace EpiDashboard.Mapping
                 if (float.TryParse(start_str, out start) && float.TryParse(end_str, out end))
                 {
                     _rangeValues.Add(new ClassLimits(start, end, key_Start, key_End));
+                }
+                else
+                {
+                    _rangeValues.Add(new ClassLimits(float.MaxValue, float.MinValue, key_Start, key_End));
                 }
             }
 
@@ -157,8 +154,23 @@ namespace EpiDashboard.Mapping
         {
             foreach (ClassLimits classLimits in limits)
             {
-                _dictionary[classLimits.Key_Start] = classLimits.Start.ToString("F2").TrimEnd(new char[] {'0'}).TrimEnd(new char[] { '.'});
-                _dictionary[classLimits.Key_End] = classLimits.End.ToString("F2").TrimEnd(new char[] { '0' }).TrimEnd(new char[] { '.' });
+                if (classLimits.Start != float.NaN)
+                { 
+                    _dictionary[classLimits.Key_Start] = classLimits.Start.ToString("F2").TrimEnd(new char[] {'0'}).TrimEnd(new char[] { '.'});
+                }
+                else
+                {
+                    _dictionary[classLimits.Key_Start] = string.Empty;
+                }
+
+                if (classLimits.End != float.NaN)
+                {
+                    _dictionary[classLimits.Key_End] = classLimits.End.ToString("F2").TrimEnd(new char[] { '0' }).TrimEnd(new char[] { '.' });
+                }
+                else
+                {
+                    _dictionary[classLimits.Key_End] = string.Empty;
+                }
             }
         }
     }
