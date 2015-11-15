@@ -268,11 +268,12 @@ namespace EpiDashboard.Mapping
             {
                 this.url = url;
                 KmlLayer shapeLayer = _myMap.Layers[_layerId.ToString()] as KmlLayer;
+                
                 if (shapeLayer != null)
                 {
                     _myMap.Layers.Remove(shapeLayer);
                 }
-
+                
                 shapeLayer = new KmlLayer();
                 shapeLayer.ID = _layerId.ToString();
                 shapeLayer.Url = new Uri(url);
@@ -615,7 +616,22 @@ namespace EpiDashboard.Mapping
             _dataKey = dataKey;
 
             DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref valueField);
-            GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
+
+            KmlLayer kmlLayer = _myMap.Layers[_layerId.ToString()] as KmlLayer;
+            GraphicsLayer graphicsLayer = null;
+
+            foreach (Layer layer in kmlLayer.ChildLayers)
+            {
+                if (layer is GraphicsLayer)
+                {
+                    graphicsLayer = layer as GraphicsLayer;
+                    break;
+                }
+                else if (layer is KmlLayer)
+                {
+                    FindGraphicsLayers((KmlLayer)layer);
+                }
+            }
 
             if (graphicsLayer == null) return;
 

@@ -1460,10 +1460,11 @@ namespace EpiDashboard.Controls
                 classCount = 4;
             }
 
+            
             if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null) &&
                 (thisProvider != null))
             {
-                if (thisProvider.AsQuantiles)
+                if (thisProvider.AsQuantiles )
                 {
                     thisProvider.RangesLoadedFromMapFile = false;
 
