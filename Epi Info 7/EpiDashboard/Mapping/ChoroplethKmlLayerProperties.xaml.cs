@@ -322,6 +322,24 @@ namespace EpiDashboard.Mapping
 
             string customColors = "";
 
+            //  Custom colors    
+            if (provider.CustomColorsDictionary != null)
+            {
+                customColors = "<customColors>";
+
+
+                foreach (KeyValuePair<string, Color> keyValuePair in provider.CustomColorsDictionary.Dict)
+                {
+                    string customColor = "<" + keyValuePair.Key + ">";
+                    string color = keyValuePair.Value.R + "," + keyValuePair.Value.G + "," + keyValuePair.Value.B;
+                    customColor += color + "</" + keyValuePair.Key + ">";
+                    customColors += customColor;
+                }
+
+                customColors += "</customColors>";
+            }
+
+
             //    Class titles 
             string classTitles = "<classTitles> ";
             long classTitleCount = 0;
@@ -338,27 +356,39 @@ namespace EpiDashboard.Mapping
             classTitles += "</classTitles> ";
 
 
-            //  Custom colors    
-            if (provider.CustomColorsDictionary != null)
+            //  Use custom colors   
+            string useCustomColors = "<useCustomColors>" + provider.UseCustomColors + "</useCustomColors>";
+
+            string classRanges = "";
+
+            // Class ranges    
+            if (provider.ClassRangesDictionary != null)
             {
-                customColors = "<customColors>";
+                classRanges = "<classRanges>";
 
-
-
-                foreach (KeyValuePair<string, Color> keyValuePair in provider.CustomColorsDictionary.Dict)
+                foreach (KeyValuePair<string, string> keyValuePair in provider.ClassRangesDictionary.Dict)
                 {
-                    string customColor = "<" + keyValuePair.Key + ">";
-                    string color = keyValuePair.Value.R + "," + keyValuePair.Value.G + "," + keyValuePair.Value.B;
-                    customColor += color + "</" + keyValuePair.Key + ">";
-                    customColors += customColor;
+                    string rangeName = "<" + keyValuePair.Key + ">";
+                    string rangeValue = keyValuePair.Value;
+                    rangeName += rangeValue + "</" + keyValuePair.Key + ">";
+                    classRanges += rangeName;
                 }
 
-                customColors += "</customColors>";
+                classRanges += "</classRanges>";
+
+         
             }
+
 
             string asQuantileTag = "<asQuantiles>" + flagQuantiles + "</asQuantiles>";
 
-            string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() + "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor>" + customColors + asQuantileTag + "<classes>" + cbxClasses.SelectedIndex.ToString() + "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>";
+            string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() +
+                               "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor>" + customColors +
+                               asQuantileTag + "<classes>" + cbxClasses.SelectedIndex.ToString() + "</classes><dataKey>" +
+                               dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>" +
+                               classRanges + customColors + classTitles;
+
+
             System.Xml.XmlElement element = doc.CreateElement("dataLayer");
             element.InnerXml = xmlString;
             element.AppendChild(dashboardHelper.Serialize(doc));
@@ -402,6 +432,7 @@ namespace EpiDashboard.Mapping
                     }
                 }
 
+                // Custom colors    
                 if (child.Name.Equals("customColors"))
                 {
                     provider.UseCustomColors = true;
@@ -415,6 +446,7 @@ namespace EpiDashboard.Mapping
                     }
                 }
 
+                // Class Ranges    
                 if (child.Name.Equals("classRanges"))
                 {
 

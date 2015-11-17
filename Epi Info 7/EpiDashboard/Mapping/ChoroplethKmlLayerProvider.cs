@@ -595,17 +595,21 @@ namespace EpiDashboard.Mapping
                         panel.Children.Add(t);
                         border.Child = panel;
 
-                        graphicFeature.MapTip = border;
+                        graphicFeature.MapTip = border;    
+
+                            
                     }
 
                 }
 
+                
 
                 SetLegendSection(classCount, colors, missingText, _thematicItem);
 
             }
             catch (Exception ex)
             {
+
             }
         }
 

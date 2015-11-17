@@ -14,6 +14,12 @@ using System.Windows.Forms;
 using System.Net;
 using ESRI.ArcGIS.Client.Geometry;
 
+using ESRI.ArcGIS.Client.Toolkit;
+
+
+
+
+
 
 namespace EpiDashboard.Controls
 {
@@ -1404,6 +1410,9 @@ namespace EpiDashboard.Controls
                 thisProvider.CustomColorsDictionary.Add(rctMissingColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
 
             }
+
+            Reset_Legend();
+
         }
 
         private void rctLowColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -1434,6 +1443,8 @@ namespace EpiDashboard.Controls
 
         private void ClassCount_Changed(object sender, SelectionChangedEventArgs e)
         {
+            if (thisProvider != null)
+                thisProvider.UseCustomRanges = false;
             Reset_Legend();
         }
 
@@ -1467,7 +1478,7 @@ namespace EpiDashboard.Controls
             if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null) &&
                 (thisProvider != null))
             {
-                if (thisProvider.AsQuantiles )
+                if (thisProvider.AsQuantiles)
                 {
                     thisProvider.RangesLoadedFromMapFile = false;
 
@@ -1553,6 +1564,8 @@ namespace EpiDashboard.Controls
             byte ri = (byte)(rd / (stratCount - 1));
             byte gi = (byte)(gd / (stratCount - 1));
             byte bi = (byte)(bd / (stratCount - 1));
+
+
             if (thisProvider != null)
             {
                 if (thisProvider.UseCustomColors)
@@ -1808,7 +1821,7 @@ namespace EpiDashboard.Controls
 
         public void OnQuintileOptionChanged()
         {
-            if(thisProvider != null)
+            if (thisProvider != null)
             { 
                 thisProvider.AsQuantiles = (bool)quintilesOption.IsChecked;
             }
@@ -1845,7 +1858,7 @@ namespace EpiDashboard.Controls
             else
             { 
                 _shapeKey = ""; 
-            }
+        }
 
             PropertyChanged_EnableDisable();
         }
@@ -2672,14 +2685,14 @@ namespace EpiDashboard.Controls
             tbtnHTML.Visibility = Visibility.Hidden;
             tbtnCharts.Visibility = Visibility.Hidden;
             tbtnFilters.Visibility = Visibility.Hidden;
-            
+
             if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text)
                        || cbxmapserver.SelectedIndex != -1
                        || (!string.IsNullOrEmpty(txtMapSeverpath.Text)
                        || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
             {
                 tbtnHTML.Visibility = Visibility.Visible;
-                
+
                 if(cmbShapeKey.SelectedIndex != -1 && cmbDataKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
                 {
                     tbtnCharts.Visibility = Visibility.Visible;
@@ -2687,10 +2700,10 @@ namespace EpiDashboard.Controls
 
                     if (IsMissingLimitValue() == false)
                     {
-                        btnOK.IsEnabled = true;
-                    }
-                }
+                btnOK.IsEnabled = true;
             }
+            }
+        }
         }
 
 
@@ -2728,9 +2741,9 @@ namespace EpiDashboard.Controls
             UpdateRangesCollection();
 
             if (IsMissingLimitValue())
-            {
-                return;
-            }
+                        {
+                            return;
+                        }
 
             List<ClassLimits> limits = thisProvider.ClassRangesDictionary.GetLimitValues();
 

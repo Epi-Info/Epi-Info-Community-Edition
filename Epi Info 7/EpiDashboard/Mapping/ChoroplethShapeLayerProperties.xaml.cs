@@ -319,11 +319,7 @@ namespace EpiDashboard.Mapping
                 {
                     customColors = "<customColors>";
 
-                    //  foreach (Color color in provider.ClassesColorsDictionary)
-
-
-
-
+            
                     foreach (KeyValuePair<string, Color> keyValuePair in provider.CustomColorsDictionary.Dict)
                     {
                         string customColor = "<" + keyValuePair.Key + ">";
@@ -419,6 +415,7 @@ namespace EpiDashboard.Mapping
                     provider.AsQuantiles = asQuintiles;
                 }
 
+                // Custom colors    
                 if (child.Name.Equals("customColors"))
                 {
                     provider.UseCustomColors = true;
@@ -432,6 +429,7 @@ namespace EpiDashboard.Mapping
                     }
                 }
 
+                // Class ranges  
                 if (child.Name.Equals("classRanges"))
                 {
 
