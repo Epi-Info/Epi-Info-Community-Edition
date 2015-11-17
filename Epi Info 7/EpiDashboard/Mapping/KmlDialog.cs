@@ -43,15 +43,12 @@ namespace EpiDashboard.Mapping
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "KML Files (*.kml)|*.kml|KMZ Files (*.kmz)|*.kmz";
+            dialog.Filter = "KML/KMZ Files (*.kml/*.kmz)|*.kml;*.kmz";
             dialog.Multiselect = false;
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 txtURL.Text = dialog.FileName;
             }
         }
-
-
-
     }
 }

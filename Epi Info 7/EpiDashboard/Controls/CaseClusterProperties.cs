@@ -640,16 +640,24 @@ namespace EpiDashboard.Controls
 
         private void PropertyChanged_EnableDisable()
         {
-            if (!string.IsNullOrEmpty(txtProjectPath.Text) && cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
+            tbtnVariables.Visibility = Visibility.Hidden;
+            tbtnDisplay.Visibility = Visibility.Hidden;
+            tbtnCharts.Visibility = Visibility.Hidden;
+            tbtnFilter.Visibility = Visibility.Hidden;
+            btnOK.IsEnabled = false;
+            
+            if (!string.IsNullOrEmpty(txtProjectPath.Text))
             {
-                btnOK.IsEnabled = true;
-            }
-            else
-            {
-                btnOK.IsEnabled = false;
-            }
+                tbtnVariables.Visibility = Visibility.Visible;
 
-
+                if(cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
+                {
+                    tbtnDisplay.Visibility = Visibility.Visible;
+                    tbtnCharts.Visibility = Visibility.Visible;
+                    tbtnFilter.Visibility = Visibility.Visible;
+                    btnOK.IsEnabled = true;
+                }
+            }
         }
 
 

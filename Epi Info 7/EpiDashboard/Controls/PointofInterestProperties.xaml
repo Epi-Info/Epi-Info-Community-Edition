@@ -36,10 +36,10 @@
 
         <StackPanel Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
             <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnVariables" Title="Variables" Description="Choose map boundaries." IsChecked="False" Checked="tbtnVariables_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors and Styles" Description="Set color representations." IsChecked="False" Checked="tbtnCharts_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnFilter" Title="Filters" Description="Set data filters." IsChecked="False" Checked="tbtnFilter_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnVariables" Title="Variables" Description="Choose map boundaries." IsChecked="False" Visibility="Hidden" Checked="tbtnVariables_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Visibility="Hidden" Checked="tbtnDisplay_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors and Styles" Description="Set color representations." IsChecked="False" Visibility="Hidden" Checked="tbtnCharts_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnFilter" Title="Filters" Description="Set data filters." IsChecked="False" Visibility="Hidden" Checked="tbtnFilter_Checked"/>
             <!--<Controls:SettingsToggleButton  x:Name="tbtnInfo" Title="Canvas Info" Description="View details of this canvas." IsChecked="False" Checked="tbtnFilter_Checked"/>-->
         </StackPanel>
 
@@ -161,7 +161,6 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <Label Style="{StaticResource PropertiesSubHeading}" x:Name="lblStyle" Margin="0, 30, 0, 0">Styles</Label>
-                        <TextBlock Style="{StaticResource PropertiesInstructionsText}" x:Name="tblStylePreReq" >To select a shape, a Data Source should be selected on the Data Source panel.</TextBlock>
                     </StackPanel>
                     <StackPanel>
 
@@ -178,7 +177,6 @@
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data  Filters</Label>
                 <Label x:Name="tblockSetDataFilter" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this gadget</Label>
-                <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: First select a data source to add a filter to this layer.</Label>
             </StackPanel>
         </DockPanel>
 

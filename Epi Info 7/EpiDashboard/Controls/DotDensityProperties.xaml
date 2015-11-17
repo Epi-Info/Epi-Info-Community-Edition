@@ -47,9 +47,9 @@
             </ToggleButton>-->
 
             <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title="Variables" Description="Choose map variables." IsChecked="False" Checked="tbtnHTML_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors and Ranges" Description="Set dot value and color representation." IsChecked="False" Checked="tbtnCharts_Checked"/>
-            <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title=" Filters" Description="Set data filters for this layer." IsChecked="False" Checked="tbtnFilters_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title="Variables" Description="Choose map variables." IsChecked="False" Visibility="Hidden" Checked="tbtnHTML_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors and Ranges" Description="Set dot value and color representation." IsChecked="False" Visibility="Hidden" Checked="tbtnCharts_Checked"/>
+            <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title=" Filters" Description="Set data filters for this layer." Visibility="Hidden" IsChecked="False" Checked="tbtnFilters_Checked"/>
 
 
             <!--<ToggleButton x:Name="tbtnHTML" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnHTML_Checked">
