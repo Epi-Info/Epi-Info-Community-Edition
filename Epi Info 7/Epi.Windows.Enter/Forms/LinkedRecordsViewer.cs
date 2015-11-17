@@ -111,7 +111,7 @@ namespace Epi.Windows.Enter
                         }
                     }
                 }
-                this.toolTip1.ToolTipTitle = "Record preview:";
+                this.toolTip1.ToolTipTitle = SharedStrings.LINKED_RECS_PREVIEW;
                 this.toolTip1.Show(sb.ToString().Substring(0, sb.Length - 2), enterMainForm, relativePosition.X + 5, relativePosition.Y - (15 + (counter * 13)));
             }
             catch (Exception ex)
@@ -229,7 +229,7 @@ namespace Epi.Windows.Enter
             }
             else
             {
-                MessageBox.Show("There are no records linked to the current record.", "Empty Social Network", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(SharedStrings.LINKED_RECS_NONE_LINKED, SharedStrings.LINKED_RECS_EMPTY, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -287,7 +287,7 @@ namespace Epi.Windows.Enter
             }
             else
             {
-                MessageBox.Show("Please save the current record prior to adding links.", "Unable to create link", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(SharedStrings.LINKED_RECS_FIRST_SAVE, SharedStrings.LINKED_RECS_CANT_CREATE, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -331,7 +331,7 @@ namespace Epi.Windows.Enter
             }
             else
             {
-                MessageBox.Show("Please save the current record prior to adding links.", "Unable to create link", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(SharedStrings.LINKED_RECS_FIRST_SAVE, SharedStrings.LINKED_RECS_CANT_CREATE, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
