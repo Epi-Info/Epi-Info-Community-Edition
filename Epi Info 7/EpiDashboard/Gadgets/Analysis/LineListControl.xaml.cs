@@ -347,7 +347,7 @@ namespace EpiDashboard
                 rowStyle.Setters.Add(new EventSetter(DataGridRow.MouseDoubleClickEvent, new MouseButtonEventHandler(Row_DoubleClick)));
                 dg.RowStyle = rowStyle;
             }
-
+            
             panelMain.Children.Add(dg);
         }
 
@@ -578,6 +578,8 @@ namespace EpiDashboard
             currentWidth = borderAll.ActualWidth;
             this.Parameters = new LineListParameters();
 
+            ((EpiDashboard.LineListParameters)(Parameters)).MaxRows = 50;
+            ((EpiDashboard.LineListParameters)(Parameters)).MaxColumnLength = 24;
             if (!string.IsNullOrEmpty(CustomOutputHeading))
             {
                 headerPanel.Text = CustomOutputHeading;
