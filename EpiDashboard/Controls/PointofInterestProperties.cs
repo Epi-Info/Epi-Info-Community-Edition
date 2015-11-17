@@ -94,18 +94,11 @@ namespace EpiDashboard.Controls
             lblColor.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLOR;
             tblcolor.Text = DashboardSharedStrings.GADGET_SELECT_COLOR;
             lblStyle.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_STYLES;
-            tblStylePreReq.Text = DashboardSharedStrings.GADGET_STYLE_PREREQ;
             lblShape.Content = DashboardSharedStrings.GADGET_SELECT_SHAPE;
 
             //Filters Panel
             tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
             tblockSetDataFilter.Content = DashboardSharedStrings.GADGET_TABDESC_FILTERS_MAPS;
-            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_MAP_SELECT_DATASOURCE;
-
-            //Info Panel
-            //lblCanvasInfo.Content = DashboardSharedStrings.GADGET_CANVAS_INFO;
-            //tblockRows.Text = dashboardHelper.DataSet.Tables[0].Rows.Count.ToString() + DashboardSharedStrings.GADGET_INFO_UNFILTERED_ROWS;
-
 
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
@@ -442,6 +435,7 @@ namespace EpiDashboard.Controls
         {
             mapControl.OnDateRangeDefined(start, end, intervalCounts);
         }
+        
         public void SetFilter()
         {
             //--for filters
@@ -454,15 +448,13 @@ namespace EpiDashboard.Controls
 
             }
             panelFilter.Children.Add(rowfiltercontrol);
-            tblockAnyFilterGadgetOnly.Visibility = Visibility.Collapsed;
-            
         }
+
         private void RemoveFilter()
         {
             int ChildIndex = 0;
             foreach (var child in panelFilter.Children)
             {
-
                 if (child.GetType().FullName.Contains("EpiDashboard.RowFilterControl"))
                 {
 
@@ -659,16 +651,24 @@ namespace EpiDashboard.Controls
 
         private void PropertyChanged_EnableDisable()
         {
-            if (!string.IsNullOrEmpty(txtProjectPath.Text) && cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
-            {
-                btnOK.IsEnabled = true;
-            }
-            else
-            {
-                btnOK.IsEnabled = false;
-            }
+            tbtnVariables.Visibility = Visibility.Hidden;
+            tbtnDisplay.Visibility = Visibility.Hidden;
+            tbtnCharts.Visibility = Visibility.Hidden;
+            tbtnFilter.Visibility = Visibility.Hidden;
+            btnOK.IsEnabled = false;
 
+            if (!string.IsNullOrEmpty(txtProjectPath.Text))
+            {
+                tbtnVariables.Visibility = Visibility.Visible;
 
+                if (cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
+                {
+                    tbtnDisplay.Visibility = Visibility.Visible;
+                    tbtnCharts.Visibility = Visibility.Visible;
+                    tbtnFilter.Visibility = Visibility.Visible;
+                    btnOK.IsEnabled = true;
+                }
+            }
         }
 
         public void cmbLatitude_SelectionChanged(object sender, SelectionChangedEventArgs e)

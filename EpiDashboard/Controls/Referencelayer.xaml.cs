@@ -200,7 +200,7 @@ namespace EpiDashboard.Controls
         private void btnKMLFile_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
-            dialog.Filter = "KML Files (*.kml)|*.kml|KMZ Files (*.kmz)|*.kmz";
+            dialog.Filter = "KML/KMZ Files (*.kml/*.kmz)|*.kml;*.kmz";
             dialog.Multiselect = false;
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

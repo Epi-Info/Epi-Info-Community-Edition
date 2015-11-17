@@ -722,7 +722,7 @@ namespace EpiDashboard.Controls
         private void btnKMLFile_Click(object sender, RoutedEventArgs e)
         {
                 OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "KML Files (*.kml)|*.kml|KMZ Files (*.kmz)|*.kmz";
+                dialog.Filter = "KML/KMZ Files (*.kml/*.kmz)|*.kml;*.kmz";
                 dialog.Multiselect = false;
               
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -1147,22 +1147,7 @@ namespace EpiDashboard.Controls
             PropertyChanged_EnableDisable();
             btnMapserverlocate.IsEnabled = txtMapSeverpath.Text.Length > 0;
         }
-        private void PropertyChanged_EnableDisable() 
-        { 
-         if (!string.IsNullOrEmpty(txtProjectPath.Text) && ( !string.IsNullOrEmpty(txtShapePath.Text) 
-                    ||  cbxmapserver.SelectedIndex != -1   
-                    ||    (!string.IsNullOrEmpty(txtMapSeverpath.Text)
-                    || (!string.IsNullOrEmpty(txtKMLpath.Text)))) && cmbShapeKey.SelectedIndex != -1 && cmbDataKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
-           {
-            btnOK.IsEnabled = true;
-           }
-            else  
-           {
-               btnOK.IsEnabled = false;
-           }
-        
-        
-        }
+
         public void cbxmapfeature_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             PropertyChanged_EnableDisable();
@@ -1215,6 +1200,30 @@ namespace EpiDashboard.Controls
         private void PropertyChanged_EnableDisable(object sender, TextChangedEventArgs e)
         {
             PropertyChanged_EnableDisable();
+        }
+
+        private void PropertyChanged_EnableDisable()
+        {
+            tbtnHTML.Visibility = Visibility.Hidden;
+            tbtnCharts.Visibility = Visibility.Hidden;
+            tbtnFilters.Visibility = Visibility.Hidden;
+            btnOK.IsEnabled = false;
+
+            if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text)
+                       || cbxmapserver.SelectedIndex != -1
+                       || (!string.IsNullOrEmpty(txtMapSeverpath.Text)
+                       || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
+            {
+                tbtnHTML.Visibility = Visibility.Visible;
+
+                if (cmbShapeKey.SelectedIndex != -1 && cmbDataKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
+                {
+                    tbtnHTML.Visibility = Visibility.Visible;
+                    tbtnCharts.Visibility = Visibility.Visible;
+                    tbtnFilters.Visibility = Visibility.Visible;
+                    btnOK.IsEnabled = true;
+                }
+            }
         }
 
         private void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
