@@ -5971,6 +5971,51 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to create link.
+        /// </summary>
+        public static string LINKED_RECS_CANT_CREATE {
+            get {
+                return ResourceManager.GetString("LINKED_RECS_CANT_CREATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty Social Network.
+        /// </summary>
+        public static string LINKED_RECS_EMPTY {
+            get {
+                return ResourceManager.GetString("LINKED_RECS_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please save the current record prior to adding links..
+        /// </summary>
+        public static string LINKED_RECS_FIRST_SAVE {
+            get {
+                return ResourceManager.GetString("LINKED_RECS_FIRST_SAVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no records linked to the current record..
+        /// </summary>
+        public static string LINKED_RECS_NONE_LINKED {
+            get {
+                return ResourceManager.GetString("LINKED_RECS_NONE_LINKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record preview:.
+        /// </summary>
+        public static string LINKED_RECS_PREVIEW {
+            get {
+                return ResourceManager.GetString("LINKED_RECS_PREVIEW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading module ....
         /// </summary>
         public static string LOADING_MODULE {

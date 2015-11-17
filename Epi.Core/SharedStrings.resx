@@ -3134,4 +3134,19 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="DASHBOARD_MAX_LENGTH" xml:space="preserve">
     <value>Max variable name length:</value>
   </data>
+  <data name="LINKED_RECS_CANT_CREATE" xml:space="preserve">
+    <value>Unable to create link</value>
+  </data>
+  <data name="LINKED_RECS_EMPTY" xml:space="preserve">
+    <value>Empty Social Network</value>
+  </data>
+  <data name="LINKED_RECS_FIRST_SAVE" xml:space="preserve">
+    <value>Please save the current record prior to adding links.</value>
+  </data>
+  <data name="LINKED_RECS_NONE_LINKED" xml:space="preserve">
+    <value>There are no records linked to the current record.</value>
+  </data>
+  <data name="LINKED_RECS_PREVIEW" xml:space="preserve">
+    <value>Record preview:</value>
+  </data>
 </root>

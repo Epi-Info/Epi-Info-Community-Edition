@@ -150,41 +150,27 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(2, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(254, 324);
-            this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.lvLinkedFrom);
             this.tabPage1.Controls.Add(this.btnUnlinkFrom);
             this.tabPage1.Controls.Add(this.btnNewLinkFrom);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(246, 298);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Exposed From";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // lvLinkedFrom
             // 
-            this.lvLinkedFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.lvLinkedFrom, "lvLinkedFrom");
             this.lvLinkedFrom.FullRowSelect = true;
             this.lvLinkedFrom.LargeImageList = this.imageList1;
-            this.lvLinkedFrom.Location = new System.Drawing.Point(3, 6);
             this.lvLinkedFrom.Name = "lvLinkedFrom";
-            this.lvLinkedFrom.Size = new System.Drawing.Size(237, 255);
-            this.lvLinkedFrom.TabIndex = 3;
             this.lvLinkedFrom.UseCompatibleStateImageBehavior = false;
             // 
             // imageList1
@@ -195,25 +181,15 @@
             // 
             // btnUnlinkFrom
             // 
-            this.btnUnlinkFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUnlinkFrom.Enabled = false;
-            this.btnUnlinkFrom.Location = new System.Drawing.Point(51, 267);
+            resources.ApplyResources(this.btnUnlinkFrom, "btnUnlinkFrom");
             this.btnUnlinkFrom.Name = "btnUnlinkFrom";
-            this.btnUnlinkFrom.Size = new System.Drawing.Size(75, 23);
-            this.btnUnlinkFrom.TabIndex = 2;
-            this.btnUnlinkFrom.Text = "Unlink";
             this.btnUnlinkFrom.UseVisualStyleBackColor = true;
             this.btnUnlinkFrom.Click += new System.EventHandler(this.btnUnlinkFrom_Click);
             // 
             // btnNewLinkFrom
             // 
-            this.btnNewLinkFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNewLinkFrom.Enabled = false;
-            this.btnNewLinkFrom.Location = new System.Drawing.Point(132, 267);
+            resources.ApplyResources(this.btnNewLinkFrom, "btnNewLinkFrom");
             this.btnNewLinkFrom.Name = "btnNewLinkFrom";
-            this.btnNewLinkFrom.Size = new System.Drawing.Size(108, 23);
-            this.btnNewLinkFrom.TabIndex = 1;
-            this.btnNewLinkFrom.Text = "Add Exposure...";
             this.btnNewLinkFrom.UseVisualStyleBackColor = true;
             this.btnNewLinkFrom.Click += new System.EventHandler(this.btnNewLinkFrom_Click);
             // 
@@ -222,60 +198,36 @@
             this.tabPage2.Controls.Add(this.btnUnlinkTo);
             this.tabPage2.Controls.Add(this.btnNewLinkTo);
             this.tabPage2.Controls.Add(this.lvLinkedTo);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(246, 298);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Exposed To";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // btnUnlinkTo
             // 
-            this.btnUnlinkTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUnlinkTo.Enabled = false;
-            this.btnUnlinkTo.Location = new System.Drawing.Point(51, 267);
+            resources.ApplyResources(this.btnUnlinkTo, "btnUnlinkTo");
             this.btnUnlinkTo.Name = "btnUnlinkTo";
-            this.btnUnlinkTo.Size = new System.Drawing.Size(75, 23);
-            this.btnUnlinkTo.TabIndex = 4;
-            this.btnUnlinkTo.Text = "Unlink";
             this.btnUnlinkTo.UseVisualStyleBackColor = true;
             this.btnUnlinkTo.Click += new System.EventHandler(this.btnUnlinkTo_Click);
             // 
             // btnNewLinkTo
             // 
-            this.btnNewLinkTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNewLinkTo.Enabled = false;
-            this.btnNewLinkTo.Location = new System.Drawing.Point(132, 267);
+            resources.ApplyResources(this.btnNewLinkTo, "btnNewLinkTo");
             this.btnNewLinkTo.Name = "btnNewLinkTo";
-            this.btnNewLinkTo.Size = new System.Drawing.Size(108, 23);
-            this.btnNewLinkTo.TabIndex = 3;
-            this.btnNewLinkTo.Text = "Add Exposure...";
             this.btnNewLinkTo.UseVisualStyleBackColor = true;
             this.btnNewLinkTo.Click += new System.EventHandler(this.btnNewLinkTo_Click);
             // 
             // lvLinkedTo
             // 
-            this.lvLinkedTo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.lvLinkedTo, "lvLinkedTo");
             this.lvLinkedTo.FullRowSelect = true;
             this.lvLinkedTo.LargeImageList = this.imageList1;
-            this.lvLinkedTo.Location = new System.Drawing.Point(3, 6);
             this.lvLinkedTo.Name = "lvLinkedTo";
-            this.lvLinkedTo.Size = new System.Drawing.Size(237, 255);
-            this.lvLinkedTo.TabIndex = 1;
             this.lvLinkedTo.UseCompatibleStateImageBehavior = false;
             // 
             // btnViewSNA
             // 
-            this.btnViewSNA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnViewSNA.Enabled = false;
-            this.btnViewSNA.Location = new System.Drawing.Point(138, 333);
+            resources.ApplyResources(this.btnViewSNA, "btnViewSNA");
             this.btnViewSNA.Name = "btnViewSNA";
-            this.btnViewSNA.Size = new System.Drawing.Size(114, 23);
-            this.btnViewSNA.TabIndex = 1;
-            this.btnViewSNA.Text = "View SNA Graph...";
             this.btnViewSNA.UseVisualStyleBackColor = true;
             this.btnViewSNA.Click += new System.EventHandler(this.btnViewSNA_Click);
             // 
@@ -285,15 +237,13 @@
             // 
             // LinkedRecordsViewer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(256, 364);
             this.Controls.Add(this.btnViewSNA);
             this.Controls.Add(this.tabControl1);
             this.DockType = Epi.Windows.Docking.DockContainerType.ToolWindow;
             this.IsVisible = true;
             this.Name = "LinkedRecordsViewer";
-            this.Text = "Linked Records";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
