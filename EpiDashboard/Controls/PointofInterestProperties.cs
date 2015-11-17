@@ -280,7 +280,7 @@ namespace EpiDashboard.Controls
 
         private void txtProjectPath_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.EnableOkbtn();
+            this.PropertyChanged_EnableDisable();
         }
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
@@ -657,7 +657,7 @@ namespace EpiDashboard.Controls
         }
 
 
-        private void EnableOkbtn()
+        private void PropertyChanged_EnableDisable()
         {
             if (!string.IsNullOrEmpty(txtProjectPath.Text) && cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
             {
@@ -676,13 +676,13 @@ namespace EpiDashboard.Controls
             if (cmbLatitude.SelectedItem != null)
             {
                 cmbLongitude.IsEnabled = true;
-                EnableOkbtn();
+                PropertyChanged_EnableDisable();
                 ReFillLongitudeComboBoxes();
                 if (cmbLongitude.Items.Contains(cmbLatitude.SelectedItem))
                 {
                     
                     cmbLongitude.Items.Remove(cmbLatitude.SelectedItem);
-                    EnableOkbtn();
+                    PropertyChanged_EnableDisable();
                 }
             }
 
@@ -690,7 +690,7 @@ namespace EpiDashboard.Controls
 
         public void cmbLongitude_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EnableOkbtn();
+            PropertyChanged_EnableDisable();
 
         }
   } 
