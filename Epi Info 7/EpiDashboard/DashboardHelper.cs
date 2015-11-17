@@ -411,8 +411,8 @@ namespace EpiDashboard
             }
 
             xmlString +=
-            "<advancedDataFilterCondition>" + this.AdvancedUserDataFilter + "</advancedDataFilterCondition>" +
-            "<useAdvancedDataFilterCondition>" + this.UseAdvancedUserDataFilter.ToString().Replace("&", "&amp;").Replace(">", "&gt;").Replace("<", "&lt;") + "</useAdvancedDataFilterCondition>";
+            "<useAdvancedDataFilterCondition>" + this.UseAdvancedUserDataFilter.ToString() + "</useAdvancedDataFilterCondition>" +
+            "<advancedDataFilterCondition>" + this.AdvancedUserDataFilter.ToString().Replace("&", "&amp;").Replace(">", "&gt;").Replace("<", "&lt;") + "</advancedDataFilterCondition>";
 
             root.InnerXml = xmlString;
             root.AppendChild(SerializeRelatedDataConnections(doc));
