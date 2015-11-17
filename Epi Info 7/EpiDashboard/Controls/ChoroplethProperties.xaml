@@ -46,9 +46,9 @@
             </ToggleButton>-->
 
             <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked" />
-            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title="Variables" Description="Choose map boundaries." IsChecked="False" Checked="tbtnHTML_Checked" />
-            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsChecked="False" Checked="tbtnCharts_Checked" />
-            <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked" />
+            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title="Variables" Description="Choose map boundaries." IsChecked="False" Visibility="Hidden" Checked="tbtnHTML_Checked" />
+            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsChecked="False" Visibility="Hidden" Checked="tbtnCharts_Checked" />
+            <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Visibility="Hidden" Checked="tbtnFilters_Checked" />
 
 
             <!--<ToggleButton x:Name="tbtnHTML" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnHTML_Checked">
@@ -96,7 +96,7 @@
                         <Grid>
                             <WrapPanel Orientation="Horizontal">
                                 <StackPanel Margin="0 0 20 10">
-                                    <TextBox TextWrapping="Wrap" MinWidth="250" MaxWidth="600" Margin="0 0 0 0" x:Name="txtProjectPath" IsReadOnly="True" TextChanged="EnableOkbtn"></TextBox>
+                                    <TextBox TextWrapping="Wrap" MinWidth="250" MaxWidth="600" Margin="0 0 0 0" x:Name="txtProjectPath" IsReadOnly="True" TextChanged="PropertyChanged_EnableDisable"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="0 0 20 0">
                                     <Button Height="25" x:Name="btnBrowse" Click="btnBrowse_Click">Browse</Button>
@@ -187,7 +187,7 @@
                                 <Grid >
                                     <WrapPanel Orientation="Horizontal">
                                         <StackPanel Margin="0 0 20 10">
-                                            <TextBox TextWrapping="Wrap" MinWidth="300" Width="Auto" MaxWidth="600" x:Name="txtKMLpath" IsReadOnly="False" TextChanged="EnableOkbtn" ></TextBox>
+                                            <TextBox TextWrapping="Wrap" MinWidth="300" Width="Auto" MaxWidth="600" x:Name="txtKMLpath" IsReadOnly="False" TextChanged="PropertyChanged_EnableDisable" ></TextBox>
                                         </StackPanel>
                                         <StackPanel>
                                             <Button x:Name="btnKMLFile" Height="25" Grid.Column="2" Click="btnKMLFile_Click">Browse</Button>

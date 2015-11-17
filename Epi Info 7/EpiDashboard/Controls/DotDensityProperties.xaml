@@ -193,7 +193,7 @@
                                 <Grid>
                                     <WrapPanel Orientation="Horizontal">
                                         <StackPanel Margin="0 0 20 10">
-                                            <TextBox TextWrapping="Wrap" MinWidth="300" Width="Auto" MaxWidth="600" x:Name="txtKMLpath" IsReadOnly="False" TextChanged="EnableOkbtn" ></TextBox>
+                                            <TextBox TextWrapping="Wrap" MinWidth="300" Width="Auto" MaxWidth="600" x:Name="txtKMLpath" IsReadOnly="False" TextChanged="PropertyChanged_EnableDisable" ></TextBox>
                                         </StackPanel>
                                         <StackPanel>
                                             <Button x:Name="btnKMLFile" Height="25" Click="btnKMLFile_Click">Browse</Button>

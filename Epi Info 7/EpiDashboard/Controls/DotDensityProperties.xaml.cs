@@ -618,10 +618,10 @@ namespace EpiDashboard.Controls
                 if (cmbValue.Items.Contains(Values))
                 {
                     cmbValue.Items.Remove(Values);
-                    EnableOkbtn();
+                    PropertyChanged_EnableDisable();
                 }
                 cmbValue.IsEnabled = true;
-                EnableOkbtn();
+                PropertyChanged_EnableDisable();
             }
         }
 
@@ -631,7 +631,7 @@ namespace EpiDashboard.Controls
             if (cmbValue.SelectedItem != null)
             {
                 cmbValue.SelectedItem.ToString();
-                EnableOkbtn();
+                PropertyChanged_EnableDisable();
 
             }
 
@@ -649,7 +649,7 @@ namespace EpiDashboard.Controls
             //        cmbFormName.Items.Add(view.Name);
             //    }
             //}
-            EnableOkbtn();
+            PropertyChanged_EnableDisable();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -1070,7 +1070,7 @@ namespace EpiDashboard.Controls
 
         public void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EnableOkbtn();
+            PropertyChanged_EnableDisable();
             ResetMapServer();
         }
 
@@ -1144,10 +1144,10 @@ namespace EpiDashboard.Controls
 
         private void txtMapSeverpath_TextChanged(object sender, TextChangedEventArgs e)
         {
-            EnableOkbtn();
+            PropertyChanged_EnableDisable();
             btnMapserverlocate.IsEnabled = txtMapSeverpath.Text.Length > 0;
         }
-        private void EnableOkbtn() 
+        private void PropertyChanged_EnableDisable() 
         { 
          if (!string.IsNullOrEmpty(txtProjectPath.Text) && ( !string.IsNullOrEmpty(txtShapePath.Text) 
                     ||  cbxmapserver.SelectedIndex != -1   
@@ -1165,7 +1165,7 @@ namespace EpiDashboard.Controls
         }
         public void cbxmapfeature_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EnableOkbtn();
+            PropertyChanged_EnableDisable();
             MapfeatureSelectionChange();
         }
 
@@ -1212,9 +1212,9 @@ namespace EpiDashboard.Controls
             }
         }
 
-        private void EnableOkbtn(object sender, TextChangedEventArgs e)
+        private void PropertyChanged_EnableDisable(object sender, TextChangedEventArgs e)
         {
-            EnableOkbtn();
+            PropertyChanged_EnableDisable();
         }
 
         private void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1222,7 +1222,7 @@ namespace EpiDashboard.Controls
             if (cmbShapeKey.SelectedIndex >= 0)
             {
               cmbDataKey.IsEnabled = true;
-              EnableOkbtn();
+              PropertyChanged_EnableDisable();
             }
         }
 

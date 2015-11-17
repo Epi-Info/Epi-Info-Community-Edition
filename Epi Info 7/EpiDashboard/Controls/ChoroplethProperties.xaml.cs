@@ -297,6 +297,7 @@ namespace EpiDashboard.Controls
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
             SetDefaultRanges();
+            PropertyChanged_EnableDisable();
         }
 
         public void SetDefaultRanges()
@@ -470,10 +471,12 @@ namespace EpiDashboard.Controls
                 }
             }
         }
+
         private void txtProjectPath_TextChanged(object sender, TextChangedEventArgs e)
         {
-            EnableOkbtn();
+            PropertyChanged_EnableDisable();
         }
+
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             string errorRoutine = "none";
@@ -486,7 +489,7 @@ namespace EpiDashboard.Controls
                     Addfilters();
 
                     errorRoutine = "SetDefaultRanges";
-                    SetDefaultRanges();
+                    //SetDefaultRanges();
 
                     //  ResetLegend_Click(this, new RoutedEventArgs());
 
@@ -1511,6 +1514,8 @@ namespace EpiDashboard.Controls
                     legTitle.Text = _value;
                 }
             }
+
+            PropertyChanged_EnableDisable();
         }
 
         public void SetVisibility(int stratCount, SolidColorBrush rampStart, SolidColorBrush rampEnd)
@@ -1836,49 +1841,45 @@ namespace EpiDashboard.Controls
             {
                 _shapeKey = cmbShapeKey.SelectedItem.ToString();
                 cmbDataKey.IsEnabled = true;
-                EnableOkbtn();
             }
             else
-            { _shapeKey = ""; }
-            EnableOkbtn();
-            ;
+            { 
+                _shapeKey = ""; 
+            }
+
+            PropertyChanged_EnableDisable();
         }
 
         private void cmbDataKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ReFillValueComboBoxes();
+
             if (cmbDataKey.SelectedItem != null)
             {
                 _dataKey = cmbDataKey.SelectedItem.ToString();
                 cmbValue.IsEnabled = true;
-                EnableOkbtn();
             }
 
             if (cmbValue.Items.Contains(_dataKey))
             {
                 cmbValue.Items.Remove(_dataKey);
-                EnableOkbtn();
             }
+
+            PropertyChanged_EnableDisable();
         }
 
         private void cmbValue_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             if (cmbValue.SelectedItem != null)
             {
                 _value = cmbValue.SelectedItem.ToString();
-                EnableOkbtn();
-
             }
-
-
+            PropertyChanged_EnableDisable();
         }
 
         private void SetRangeUISection()
         {
-
             SetOpacity();
-
 
             List<SolidColorBrush> brushList = new List<SolidColorBrush>() { 
                     (SolidColorBrush)rctColor1.Fill, 
@@ -2503,7 +2504,7 @@ namespace EpiDashboard.Controls
 
         public void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EnableOkbtn();
+            PropertyChanged_EnableDisable();
             ResetMapServer();
         }
 
@@ -2598,13 +2599,13 @@ namespace EpiDashboard.Controls
 
         private void txtMapSeverpath_TextChanged(object sender, TextChangedEventArgs e)
         {
-            EnableOkbtn();
+            PropertyChanged_EnableDisable();
             btnMapserverlocate.IsEnabled = txtMapSeverpath.Text.Length > 0;
         }
 
         public void cbxmapfeature_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EnableOkbtn();
+            PropertyChanged_EnableDisable();
             MapfeatureSelectionChange();
         }
 
@@ -2662,32 +2663,41 @@ namespace EpiDashboard.Controls
             txtOpacity.Text = string.Format("{0:N2}", calculatedPercentage * 100) + "%";
 
             brush.Opacity = calculatedPercentage;
-
         }
 
-
-        private void EnableOkbtn()
+        private void PropertyChanged_EnableDisable()
         {
+            if (btnOK == null) return;
+
+            btnOK.IsEnabled = false;
+            tbtnHTML.Visibility = Visibility.Hidden;
+            tbtnCharts.Visibility = Visibility.Hidden;
+            tbtnFilters.Visibility = Visibility.Hidden;
+            
             if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text)
                        || cbxmapserver.SelectedIndex != -1
                        || (!string.IsNullOrEmpty(txtMapSeverpath.Text)
-                       || (!string.IsNullOrEmpty(txtKMLpath.Text)))) && cmbShapeKey.SelectedIndex != -1 && cmbDataKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
+                       || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
             {
+                tbtnHTML.Visibility = Visibility.Visible;
+                
+                if(cmbShapeKey.SelectedIndex != -1 && cmbDataKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
+                {
+                    tbtnCharts.Visibility = Visibility.Visible;
+                    tbtnFilters.Visibility = Visibility.Visible;
 
-                btnOK.IsEnabled = true;
+                    if (IsMissingLimitValue() == false)
+                    {
+                        btnOK.IsEnabled = true;
+                    }
+                }
             }
-            else
-            {
-                btnOK.IsEnabled = false;
-
-            }
-
-
         }
 
-        private void EnableOkbtn(object sender, TextChangedEventArgs e)
+
+        private void PropertyChanged_EnableDisable(object sender, TextChangedEventArgs e)
         {
-            EnableOkbtn();
+            PropertyChanged_EnableDisable();
         }
 
         private void rampValue_LostFocus(object sender, RoutedEventArgs e)
@@ -2718,21 +2728,9 @@ namespace EpiDashboard.Controls
 
             UpdateRangesCollection();
 
-            foreach (UIElement element in stratGrid.Children)
+            if (IsMissingLimitValue())
             {
-                if (element is System.Windows.Controls.TextBox)
-                {
-                    string elementName = ((System.Windows.Controls.TextBox)element).Name;
-                    Visibility elementVisibility = ((System.Windows.Controls.TextBox)element).Visibility;
-                    if (elementName.StartsWith("ramp") && elementVisibility == Visibility.Visible)
-                    {
-                        float rangeValue;
-                        if(float.TryParse(((System.Windows.Controls.TextBox)element).Text, out rangeValue) == false)
-                        {
-                            return;
-                        }
-                    }
-                }
+                return;
             }
 
             List<ClassLimits> limits = thisProvider.ClassRangesDictionary.GetLimitValues();
@@ -2746,6 +2744,8 @@ namespace EpiDashboard.Controls
                 System.Windows.Controls.TextBox found = (System.Windows.Controls.TextBox)this.FindName(kvp.Key);
                 found.Text = kvp.Value;
             }
+
+            PropertyChanged_EnableDisable();
         }
                                 
         private void AdjustClassBreaks(List<ClassLimits> classBreaks, float newValue, int classLevel, ClassLimitType limitType = ClassLimitType.Start)
@@ -2798,6 +2798,28 @@ namespace EpiDashboard.Controls
             {
                 classBreaks[classLevel].End = newValue;
             }
+        }
+
+        private bool IsMissingLimitValue()
+        {
+            foreach (UIElement element in stratGrid.Children)
+            {
+                if (element is System.Windows.Controls.TextBox)
+                {
+                    string elementName = ((System.Windows.Controls.TextBox)element).Name;
+                    Visibility elementVisibility = ((System.Windows.Controls.TextBox)element).Visibility;
+                    if (elementName.StartsWith("ramp") && elementVisibility == Visibility.Visible)
+                    {
+                        float rangeValue;
+                        if(float.TryParse(((System.Windows.Controls.TextBox)element).Text, out rangeValue) == false)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
