@@ -564,6 +564,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LineListSharedStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\ChoroLayerProperties.cs" />
     <Compile Include="Mapping\ChoroplethKmlLayerProvider.cs" />
     <Compile Include="Mapping\ChoroplethKmlLayerProperties.xaml.cs">
       <DependentUpon>ChoroplethKmlLayerProperties.xaml</DependentUpon>
