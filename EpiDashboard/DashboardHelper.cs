@@ -410,6 +410,11 @@ namespace EpiDashboard
                 }
             }
 
+            if (AdvancedUserDataFilter == null)
+            {
+                AdvancedUserDataFilter = "";
+            }
+
             xmlString +=
             "<useAdvancedDataFilterCondition>" + this.UseAdvancedUserDataFilter.ToString() + "</useAdvancedDataFilterCondition>" +
             "<advancedDataFilterCondition>" + this.AdvancedUserDataFilter.ToString().Replace("&", "&amp;").Replace(">", "&gt;").Replace("<", "&lt;") + "</advancedDataFilterCondition>";
