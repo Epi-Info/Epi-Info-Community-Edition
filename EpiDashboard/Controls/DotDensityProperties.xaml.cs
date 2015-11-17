@@ -1225,6 +1225,20 @@ namespace EpiDashboard.Controls
               EnableOkbtn();
             }
         }
+
+        protected void txtInput_PositiveIntegerOnly_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            bool isNumPadNumeric = (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9);
+            bool isNumeric = (e.Key >= Key.D0 && e.Key <= Key.D9);
+
+            if ((isNumeric || isNumPadNumeric) && Keyboard.Modifiers != ModifierKeys.None)
+            {
+                e.Handled = true;
+                return;
+            }
+            bool isControl = ((Keyboard.Modifiers != ModifierKeys.None && Keyboard.Modifiers != ModifierKeys.Shift) || e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right || e.Key == Key.Up || e.Key == Key.Tab || e.Key == Key.PageDown || e.Key == Key.PageUp || e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Escape || e.Key == Key.Home || e.Key == Key.End);
+            e.Handled = !isControl && !isNumeric && !isNumPadNumeric;
+        }
               
     }
 }

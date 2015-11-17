@@ -280,7 +280,7 @@
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="lblDotValue" Margin="0,0,15,0">Dot Value:</Label>
                 <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
-                <TextBox x:Name="txtDotValue" Text="1" ></TextBox>
+                <TextBox x:Name="txtDotValue" Text="1" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown" ></TextBox>
             </StackPanel>
         </StackPanel>
 
