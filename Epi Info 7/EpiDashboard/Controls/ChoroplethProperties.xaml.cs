@@ -133,8 +133,6 @@ namespace EpiDashboard.Controls
             radShapeFile.Content = DashboardSharedStrings.GADGET_SHAPEFILE;
             btnBrowseShape.Content = DashboardSharedStrings.BUTTON_BROWSE;
             radMapServer.Content = DashboardSharedStrings.GADGET_MAPSERVER;
-            radconnectmapserver.Content = DashboardSharedStrings.GADGET_CONNECT_MAPSERVER;
-            radlocatemapserver.Content = DashboardSharedStrings.GADGET_OTHER_MAPSERVER;
             lblURL.Content = DashboardSharedStrings.GADGET_URL;
             btnMapserverlocate.Content = DashboardSharedStrings.BUTTON_CONNECT;
             lblExampleMapServerURL.Text = DashboardSharedStrings.GADGET_EXAMPLE_MAPSERVER;
@@ -530,7 +528,6 @@ namespace EpiDashboard.Controls
                         choroplethServerLayerProperties.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text,
                             cmbClasses.Text, rctHighColor.Fill, rctLowColor.Fill, rctMissingColor.Fill, shapeAttributes,
                             ClassAttribList, flagquintiles, numclasses, Opacity);
-                        choroplethServerLayerProperties.cbxMapserverText = cbxmapserver.Text;
                         choroplethServerLayerProperties.txtMapserverText = txtMapSeverpath.Text;
                         choroplethServerLayerProperties.cbxMapFeatureText = cbxmapfeature.Text;
                     }
@@ -1531,11 +1528,9 @@ namespace EpiDashboard.Controls
 
         public void SetVisibility(int stratCount, SolidColorBrush rampStart, SolidColorBrush rampEnd)
         {
+            if (thisProvider == null) return;
+            
             bool isNewColorRamp = true;
-
-            //Color col = (Color)ColorConverter.ConvertFromString("Yellow");
-
-            //SolidColorBrush rampMissing = new SolidColorBrush(col);
 
             quintilesOption.IsChecked = thisProvider.AsQuantiles;
 
@@ -2342,7 +2337,7 @@ namespace EpiDashboard.Controls
                 else
                     ClearonShapeFile();
             }
-            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text) || cbxmapserver.SelectedIndex != -1)
+            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text))
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.MAP_CHANGE_BOUNDARY_ALERT, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
@@ -2367,13 +2362,13 @@ namespace EpiDashboard.Controls
             panelshape.IsEnabled = false;
             panelmap.IsEnabled = false;
             panelKml.IsEnabled = true;
+
+            panelmapserver.IsEnabled = false;
+
             cmbShapeKey.Items.Clear();
             txtShapePath.Text = string.Empty;
             txtKMLpath.Text = string.Empty;
             cbxmapfeature.SelectedIndex = -1;
-            cbxmapserver.SelectedIndex = -1;
-            radlocatemapserver.IsChecked = false;
-            radconnectmapserver.IsChecked = false;
             txtMapSeverpath.Text = string.Empty;
             if (choroplethServerLayerProvider != null)
             {
@@ -2392,13 +2387,13 @@ namespace EpiDashboard.Controls
             panelshape.IsEnabled = true;
             panelmap.IsEnabled = false;
             panelKml.IsEnabled = false;
+
+            panelmapserver.IsEnabled = false;
+
             cmbShapeKey.Items.Clear();
             txtShapePath.Text = string.Empty;
             txtKMLpath.Text = string.Empty;
             cbxmapfeature.SelectedIndex = -1;
-            cbxmapserver.SelectedIndex = -1;
-            radlocatemapserver.IsChecked = false;
-            radconnectmapserver.IsChecked = false;
             txtMapSeverpath.Text = string.Empty;
             if (choroplethServerLayerProvider != null)
             {
@@ -2417,21 +2412,24 @@ namespace EpiDashboard.Controls
             panelshape.IsEnabled = false;
             panelmap.IsEnabled = true;
             panelKml.IsEnabled = false;
+
+            panelmapserver.IsEnabled = true;
+
             cmbShapeKey.Items.Clear();
             txtShapePath.Text = string.Empty;
             txtKMLpath.Text = string.Empty;
             cbxmapfeature.SelectedIndex = -1;
-            cbxmapserver.SelectedIndex = -1;
             txtMapSeverpath.Text = string.Empty;
+            
             if (choroplethKmlLayerProvider != null)
             {
                 choroplethKmlLayerProvider.FeatureLoaded -= new FeatureLoadedHandler(choroKMLprovider_FeatureLoaded);
                 choroplethKmlLayerProvider = null;
             }
+            
             if (thisProvider != null)
             {
                 choroplethShapeLayerProperties.CloseLayer();
-                //  thisProvider = null;
             }
         }
 
@@ -2451,7 +2449,7 @@ namespace EpiDashboard.Controls
                 else
                     ClearonKML();
             }
-            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text) || cbxmapserver.SelectedIndex != -1)
+            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text))
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.MAP_CHANGE_BOUNDARY_ALERT, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
@@ -2484,7 +2482,9 @@ namespace EpiDashboard.Controls
                     return;
                 }
                 else
+                {
                     ClearonMapServer();
+                }
             }
             else if (!string.IsNullOrEmpty(txtKMLpath.Text))
             {
@@ -2496,14 +2496,18 @@ namespace EpiDashboard.Controls
                     return;
                 }
                 else
+                {
                     ClearonMapServer();
+                }
             }
-            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text) || cbxmapserver.SelectedIndex != -1)
+            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text) )
             {
                 return;
             }
             else
+            {
                 ClearonMapServer();
+            }
         }
 
         private void radconnectmapserver_Checked(object sender, RoutedEventArgs e)
@@ -2512,55 +2516,15 @@ namespace EpiDashboard.Controls
             panelmapserver.IsEnabled = false;
             panelmapconnect.IsEnabled = true;
             txtMapSeverpath.Text = string.Empty;
+
+            panelmapconnect.IsEnabled = false;
+            panelmapserver.IsEnabled = true;
+            panelmapconnect.IsEnabled = false;
         }
 
         public void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             PropertyChanged_EnableDisable();
-            ResetMapServer();
-        }
-
-        public void ResetMapServer()
-        {
-            if (cbxmapserver.SelectedIndex > -1)
-            {
-                MapServerName = ((ComboBoxItem)cbxmapserver.SelectedItem).Content.ToString();
-
-                if (choroplethServerLayerProvider == null)
-                {
-                    choroplethServerLayerProvider = new Mapping.ChoroplethServerLayerProvider(_myMap);
-                    choroplethServerLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
-                }
-                object[] mapFileProperties = choroplethServerLayerProvider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
-                if (mapFileProperties != null)
-                {
-                    layerAddednew.Add(choroplethServerLayerProvider.layerId.ToString());
-                    if (this.choroplethServerLayerProperties == null)
-                    {
-                        ILayerProperties layerProperties = null;
-                        layerProperties = new ChoroplethServerLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
-                        layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
-                        layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
-                        layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);
-                        this.choroplethServerLayerProperties = (ChoroplethServerLayerProperties)layerProperties;
-                        this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-                    }
-                    choroplethServerLayerProperties.shapeFilePath = MapServerName;
-                    choroplethServerLayerProperties.provider = choroplethServerLayerProvider;
-                    choroplethServerLayerProperties.provider.FeatureLoaded += new FeatureLoadedHandler(choroplethServerLayerProperties.provider_FeatureLoaded);
-                    if (this.DashboardHelper != null)
-                        choroplethServerLayerProperties.SetdashboardHelper(DashboardHelper);
-
-                }
-            }
-        }
-
-        private void radlocatemapserver_Checked(object sender, RoutedEventArgs e)
-        {
-            panelmapconnect.IsEnabled = false;
-            panelmapserver.IsEnabled = true;
-            panelmapconnect.IsEnabled = false;
-            cbxmapserver.SelectedIndex = -1;
         }
 
         private void ResetShapeCombo()
@@ -2687,7 +2651,6 @@ namespace EpiDashboard.Controls
             tbtnFilters.Visibility = Visibility.Hidden;
 
             if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text)
-                       || cbxmapserver.SelectedIndex != -1
                        || (!string.IsNullOrEmpty(txtMapSeverpath.Text)
                        || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
             {
