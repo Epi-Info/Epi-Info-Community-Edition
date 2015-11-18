@@ -52,8 +52,8 @@
                         <Label x:Name="lblColorOpacity" HorizontalAlignment="Center" Content="Color Opacity:"/>
                         <TextBox x:Name="txtOpacity" Width="110"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="5" Orientation="Horizontal">
-                        <Rectangle x:Name="rctMissingColor" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" Margin="15,0,0,0" Visibility="Visible"   >
+                    <StackPanel Grid.Column="5" Orientation="Horizontal" Visibility="Hidden">
+                        <Rectangle x:Name="rctMissingColor" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Width="25" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" Margin="15,13,0,13.2" Visibility="Visible"   >
                             <Rectangle.ToolTip>
                                 <Label x:Name="lblMissingValueColor" Content="Missing value color"/>
                             </Rectangle.ToolTip>
