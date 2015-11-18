@@ -137,8 +137,6 @@ namespace EpiDashboard.Controls
             radShapeFile.Content = DashboardSharedStrings.GADGET_SHAPEFILE;
             btnBrowseShape.Content = DashboardSharedStrings.BUTTON_BROWSE;
             radMapServer.Content = DashboardSharedStrings.GADGET_MAPSERVER;
-            radconnectmapserver.Content = DashboardSharedStrings.GADGET_CONNECT_MAPSERVER;
-            radlocatemapserver.Content = DashboardSharedStrings.GADGET_OTHER_MAPSERVER;
             lblURL.Content = DashboardSharedStrings.GADGET_URL;
             btnMapserverlocate.Content = DashboardSharedStrings.BUTTON_CONNECT;
             lblExampleMapServerURL.Text = DashboardSharedStrings.GADGET_EXAMPLE_MAPSERVER;
@@ -475,7 +473,6 @@ namespace EpiDashboard.Controls
                     Addfilters();
                     RenderMap();
                     serverlayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
-                    serverlayerprop.cbxMapserverText = cbxmapserver.Text;
                     serverlayerprop.txtMapserverText = txtMapSeverpath.Text;
                     serverlayerprop.cbxMapFeatureText = cbxmapfeature.Text;
                 }
@@ -884,7 +881,7 @@ namespace EpiDashboard.Controls
                 else
                     ClearonShapeFile();
             }
-            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text) || cbxmapserver.SelectedIndex != -1)
+            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text))
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.MAP_CHANGE_BOUNDARY_ALERT, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
@@ -909,13 +906,13 @@ namespace EpiDashboard.Controls
             panelshape.IsEnabled = false;
             panelmap.IsEnabled = false;
             panelKml.IsEnabled = true;
+
+            panelmapserver.IsEnabled = true;
+
             cmbShapeKey.Items.Clear();
             txtShapePath.Text = string.Empty;
             txtKMLpath.Text = string.Empty;
             cbxmapfeature.SelectedIndex = -1;
-            cbxmapserver.SelectedIndex = -1;
-            radlocatemapserver.IsChecked = false;
-            radconnectmapserver.IsChecked = false;
             txtMapSeverpath.Text = string.Empty;
             if (Mapprovider != null)
             {
@@ -933,13 +930,13 @@ namespace EpiDashboard.Controls
             panelshape.IsEnabled = true;
             panelmap.IsEnabled = false;
             panelKml.IsEnabled = false;
+
+            panelmapserver.IsEnabled = true;
+
             cmbShapeKey.Items.Clear();
             txtShapePath.Text = string.Empty;
             txtKMLpath.Text = string.Empty;
             cbxmapfeature.SelectedIndex = -1;
-            cbxmapserver.SelectedIndex = -1;
-            radlocatemapserver.IsChecked = false;
-            radconnectmapserver.IsChecked = false;
             txtMapSeverpath.Text = string.Empty;
             if (Mapprovider != null)
             {
@@ -958,11 +955,13 @@ namespace EpiDashboard.Controls
             panelshape.IsEnabled = false;
             panelmap.IsEnabled = true;
             panelKml.IsEnabled = false;
+
+            panelmapserver.IsEnabled = true;
+
             cmbShapeKey.Items.Clear();
             txtShapePath.Text = string.Empty;
             txtKMLpath.Text = string.Empty;
             cbxmapfeature.SelectedIndex = -1;
-            cbxmapserver.SelectedIndex = -1;
             txtMapSeverpath.Text = string.Empty;
             if (KMLprovider != null)
             {
@@ -1005,7 +1004,7 @@ namespace EpiDashboard.Controls
                 else
                     ClearonKML();
             }
-            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text) || cbxmapserver.SelectedIndex != -1)
+            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text))
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.MAP_CHANGE_BOUNDARY_ALERT, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
@@ -1051,7 +1050,7 @@ namespace EpiDashboard.Controls
                 else
                     ClearonMapServer();
             }
-            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text) || cbxmapserver.SelectedIndex != -1)
+            else if (!string.IsNullOrEmpty(txtMapSeverpath.Text))
             {
                 return;
             }
@@ -1070,44 +1069,6 @@ namespace EpiDashboard.Controls
         public void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             PropertyChanged_EnableDisable();
-            ResetMapServer();
-        }
-
-        public void ResetMapServer()
-        {
-            if (cbxmapserver.SelectedIndex > -1)
-            {
-                MapServerName = ((ComboBoxItem)cbxmapserver.SelectedItem).Content.ToString();
-              
-                if (Mapprovider == null)
-                {
-                    Mapprovider = new Mapping.DotDensityServerLayerProvider(myMap);
-                    Mapprovider.FeatureLoaded += new FeatureLoadedHandler(Mapprovider_FeatureLoaded);
-                }       
-               object[] mapFileProperties = Mapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
-               layerAddednew.Add(Mapprovider.layerId.ToString());
-               if (mapFileProperties != null)
-             {
-                    if (this.serverlayerprop == null)
-                    {
-                        ILayerProperties layerProperties = null;
-                        if (DashboardHelper == null)
-                            DashboardHelper = dashboardHelper;
-                        layerProperties = new DotDensityServerLayerProperties(myMap, this.DashboardHelper, this.mapControl);
-                        layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
-                        layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
-                        layerProperties.EditRequested += new EventHandler(this.mapControl.ILayerProperties_EditRequested);
-                        this.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;
-                        this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-                    }
-                    serverlayerprop.shapeFilePath = MapServerName;
-                    serverlayerprop.provider = Mapprovider;
-                    serverlayerprop.provider.FeatureLoaded += new FeatureLoadedHandler(serverlayerprop.provider_FeatureLoaded);
-                    if (this.DashboardHelper != null)
-                        serverlayerprop.SetdashboardHelper(DashboardHelper);
-                   
-                }
-            }
         }
 
         private void radlocatemapserver_Checked(object sender, RoutedEventArgs e)
@@ -1115,7 +1076,6 @@ namespace EpiDashboard.Controls
             panelmapconnect.IsEnabled = false;
             panelmapserver.IsEnabled = true;
             panelmapconnect.IsEnabled = false;
-            cbxmapserver.SelectedIndex = -1;
         }
 
         private void btnMapserverlocate_Click(object sender, RoutedEventArgs e)
@@ -1209,7 +1169,6 @@ namespace EpiDashboard.Controls
             btnOK.IsEnabled = false;
 
             if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text)
-                       || cbxmapserver.SelectedIndex != -1
                        || (!string.IsNullOrEmpty(txtMapSeverpath.Text)
                        || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
             {
