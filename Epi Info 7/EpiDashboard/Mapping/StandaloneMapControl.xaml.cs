@@ -1614,24 +1614,21 @@ namespace EpiDashboard.Mapping
             if (choroplethlayerprop.flagQuantiles == true) { choroplethproperties.OnQuintileOptionChanged(); }
             choroplethproperties.ClearonMapServer();
             //  choroplethproperties.choroplethShapeLayerProvider = choroplethlayerprop.provider;
-            choroplethproperties.thisProvider = choroplethlayerprop.provider;    
+            choroplethproperties.thisProvider = choroplethlayerprop.provider;
 
-             choroplethproperties.radKML.IsEnabled = false;
-             choroplethproperties.radMapServer.IsEnabled = false;
-             choroplethproperties.radconnectmapserver.IsEnabled = false;
-             choroplethproperties.radlocatemapserver.IsEnabled = false;
-             choroplethproperties.radlocatemapserver.IsEnabled = false;
-              choroplethproperties.panelBoundaries.IsEnabled = true;
+            choroplethproperties.radKML.IsEnabled = false;
+            choroplethproperties.radMapServer.IsEnabled = false;
+            choroplethproperties.panelBoundaries.IsEnabled = true;
 
-              if (choroplethlayerprop.datafilters != null)
-                 choroplethproperties.datafilters = choroplethlayerprop.datafilters;
-              else
-                 choroplethproperties.datafilters = dashboardHelper.DataFilters;
+            if (choroplethlayerprop.datafilters != null)
+                choroplethproperties.datafilters = choroplethlayerprop.datafilters;
+            else
+                choroplethproperties.datafilters = dashboardHelper.DataFilters;
 
-              choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.datafilters, true);
-              choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
-              choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
-              //choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only."; 
+            choroplethproperties.rowFilterControl = new RowFilterControl(dashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, choroplethproperties.datafilters, true);
+            choroplethproperties.rowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left; choroplethproperties.rowFilterControl.FillSelectionComboboxes();
+            choroplethproperties.panelFilters.Children.Add(choroplethproperties.rowFilterControl);
+            //choroplethproperties.txtNote.Text = "Note: Any filters set here are applied to this gadget only."; 
 
             if (string.IsNullOrEmpty(choroplethlayerprop.shapeFilePath) == false)
             {
@@ -1694,7 +1691,6 @@ namespace EpiDashboard.Mapping
          }
         public void GenerateShapeFileChoropleth(ChoroplethServerLayerProperties choroplethServerlayerprop)
         {
-
             DashboardHelper dashboardHelper;
             ILayerProperties layerProperties = null;
 
@@ -1759,34 +1755,21 @@ namespace EpiDashboard.Mapping
                         choroplethServerlayerprop.txtMapserverText = choroplethServerlayerprop.shapeFilePath.Substring(0, choroplethServerlayerprop.shapeFilePath.Length - 3);
                 } 
 
-               
-                if (string.IsNullOrEmpty(choroplethServerlayerprop.cbxMapserverText) == false)
+                choroplethproperties.txtMapSeverpath.Text = choroplethServerlayerprop.txtMapserverText;
+                choroplethproperties.MapServerConnect();
+                choroplethproperties.cbxmapfeature.SelectionChanged -= choroplethproperties.cbxmapfeature_SelectionChanged;
+                choroplethproperties.cbxmapfeature.IsEditable = true;
+                choroplethproperties.cbxmapfeature.Text = choroplethServerlayerprop.cbxMapFeatureText;
+                int Selectedindex = -1;
+                for (int i = 0; i < choroplethproperties.cbxmapfeature.Items.Count; i++)
                 {
-                    choroplethproperties.radconnectmapserver.IsChecked = true;
-                    choroplethproperties.cbxmapserver.SelectionChanged -= choroplethproperties.cbxmapserver_SelectionChanged;
-                    choroplethproperties.cbxmapserver.Text = choroplethServerlayerprop.cbxMapserverText;
-                    choroplethproperties.ResetMapServer();
-                    choroplethproperties.cbxmapserver.SelectionChanged += choroplethproperties.cbxmapserver_SelectionChanged;
+                    if (choroplethproperties.cbxmapfeature.Items[i].ToString() == choroplethServerlayerprop.cbxMapFeatureText)
+                    { Selectedindex = i; break; }
                 }
-                else
-                {
-                    choroplethproperties.radlocatemapserver.IsChecked = true;
-                    choroplethproperties.txtMapSeverpath.Text = choroplethServerlayerprop.txtMapserverText;
-                    choroplethproperties.MapServerConnect();
-                    choroplethproperties.cbxmapfeature.SelectionChanged -= choroplethproperties.cbxmapfeature_SelectionChanged;
-                    choroplethproperties.cbxmapfeature.IsEditable = true;
-                    choroplethproperties.cbxmapfeature.Text = choroplethServerlayerprop.cbxMapFeatureText;
-                    int Selectedindex = -1;
-                    for (int i = 0; i < choroplethproperties.cbxmapfeature.Items.Count; i++)
-                    {
-                        if (choroplethproperties.cbxmapfeature.Items[i].ToString() == choroplethServerlayerprop.cbxMapFeatureText)
-                        { Selectedindex = i; break; }
-                    }
-                    choroplethproperties.cbxmapfeature.SelectedIndex = Selectedindex;
-                    choroplethproperties.MapfeatureSelectionChange();
-                    choroplethproperties.cbxmapfeature.SelectionChanged += choroplethproperties.cbxmapfeature_SelectionChanged;
-                  }
-              }
+                choroplethproperties.cbxmapfeature.SelectedIndex = Selectedindex;
+                choroplethproperties.MapfeatureSelectionChange();
+                choroplethproperties.cbxmapfeature.SelectionChanged += choroplethproperties.cbxmapfeature_SelectionChanged;
+            }
             
             if (choroplethServerlayerprop.classAttribList != null)
             { 
