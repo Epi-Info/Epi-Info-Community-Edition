@@ -2184,37 +2184,24 @@ namespace EpiDashboard.Mapping
                         densitylayerprop.txtMapserverText = densitylayerprop.shapeFilePath.Substring(0, densitylayerprop.shapeFilePath.Length - 3);
                 }
 
-                if (string.IsNullOrEmpty(densitylayerprop.cbxMapserverText) == false)
+                dotdensityproperties.txtMapSeverpath.Text = densitylayerprop.txtMapserverText;
+                dotdensityproperties.MapServerConnect();
+                dotdensityproperties.cbxmapfeature.SelectionChanged -= dotdensityproperties.cbxmapfeature_SelectionChanged;
+                dotdensityproperties.cbxmapfeature.IsEditable = true;
+                dotdensityproperties.cbxmapfeature.Text = densitylayerprop.cbxMapFeatureText;
+                
+                int Selectedindex = -1;
+                
+                for (int i = 0; i < dotdensityproperties.cbxmapfeature.Items.Count; i++)
                 {
-                    dotdensityproperties.radconnectmapserver.IsChecked = true;
-                    dotdensityproperties.cbxmapserver.SelectionChanged -= dotdensityproperties.cbxmapserver_SelectionChanged;
-                    dotdensityproperties.cbxmapserver.Text = densitylayerprop.cbxMapserverText;
-                    dotdensityproperties.ResetMapServer();
-                    dotdensityproperties.cbxmapserver.SelectionChanged += dotdensityproperties.cbxmapserver_SelectionChanged;
-                    //dotdensityproperties.cbxmapserver.Text = densitylayerprop.cbxMapserverText;
+                    if (dotdensityproperties.cbxmapfeature.Items[i].ToString() == densitylayerprop.cbxMapFeatureText)
+                    { Selectedindex = i; break; }
                 }
-                else
-                {
-                    dotdensityproperties.radlocatemapserver.IsChecked = true;
-                    dotdensityproperties.txtMapSeverpath.Text = densitylayerprop.txtMapserverText;
-                    dotdensityproperties.MapServerConnect();
-                    dotdensityproperties.cbxmapfeature.SelectionChanged -= dotdensityproperties.cbxmapfeature_SelectionChanged;
-                    dotdensityproperties.cbxmapfeature.IsEditable = true;
-                    dotdensityproperties.cbxmapfeature.Text = densitylayerprop.cbxMapFeatureText;
-                    int Selectedindex = -1;
-                    for (int i = 0; i < dotdensityproperties.cbxmapfeature.Items.Count; i++)
-                    {
-                        if (dotdensityproperties.cbxmapfeature.Items[i].ToString() == densitylayerprop.cbxMapFeatureText)
-                        { Selectedindex = i; break; }
-                    }
-                    dotdensityproperties.cbxmapfeature.SelectedIndex = Selectedindex;
-                    dotdensityproperties.MapfeatureSelectionChange();
-                    dotdensityproperties.cbxmapfeature.SelectionChanged += dotdensityproperties.cbxmapfeature_SelectionChanged;
 
-                   // dotdensityproperties.ResetMapServer();
-                   // dotdensityproperties.cbxmapfeature.Text = densitylayerprop.cbxMapFeatureText;
+                dotdensityproperties.cbxmapfeature.SelectedIndex = Selectedindex;
+                dotdensityproperties.MapfeatureSelectionChange();
+                dotdensityproperties.cbxmapfeature.SelectionChanged += dotdensityproperties.cbxmapfeature_SelectionChanged;
                     
-                }
                 if (dotdensityproperties.serverlayerprop.curfeatureAttributes != null)
                 {
                     foreach (string key in dotdensityproperties.serverlayerprop.curfeatureAttributes.Keys)
