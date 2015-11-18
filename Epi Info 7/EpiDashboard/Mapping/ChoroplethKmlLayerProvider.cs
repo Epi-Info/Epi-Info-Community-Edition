@@ -878,14 +878,24 @@ namespace EpiDashboard.Mapping
                 filterExpression += " = '" + shapeValue + "'";
 
                 double graphicValue = Double.PositiveInfinity;
+                
                 try
                 {
-                    graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][_valueField]);
+                    DataRow[] rows = loadedData.Select(filterExpression);
+
+                    if(rows.Length > 0)
+                    { 
+                        object found = rows[0][_valueField];
+                        string valueField;
+                    
+                        if(found is string)
+                        {
+                            valueField = (string)found;
+                            graphicValue = Convert.ToDouble(valueField);
+                        }
+                    }
                 }
-                catch (Exception ex)
-                {
-                    graphicValue = Double.PositiveInfinity;
-                }
+                catch { }
 
                 string graphicName = shapeValue;
 

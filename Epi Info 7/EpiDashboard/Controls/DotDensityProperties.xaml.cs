@@ -715,7 +715,6 @@ namespace EpiDashboard.Controls
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctDotColor.Fill = new SolidColorBrush(Color.FromArgb(240, dialog.Color.R, dialog.Color.G, dialog.Color.B));               
-                
             }
         }     
 
