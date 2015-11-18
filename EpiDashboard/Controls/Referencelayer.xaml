@@ -59,31 +59,19 @@
                     <StackPanel Margin="0 30 0 0">
                         <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="MapServer" Checked="radMapServer_Checked" />
                         <StackPanel  Margin="18 10 0 0 " x:Name="panelmap" IsEnabled="False" >
-                            <RadioButton x:Name="radconnectmapserver"  GroupName="radmapserver"  Content="Connect to a known Map Server" Checked="radconnectmapserver_Checked" />
                             <StackPanel Margin="18 5 0 0 ">
                                
-                                <StackPanel x:Name="panelmapconnect" IsEnabled="False" >
-                                    <ComboBox MinWidth="210" Width="Auto" MaxWidth="600" x:Name="cbxmapserver" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" >
-                                        <ComboBoxItem>NationalMap.gov - U.S. Zip Code Boundaries</ComboBoxItem>
-                                        <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
-                                        <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
-                                        <ComboBoxItem>USGS.gov (Natural Hazards Support System) - Current Floods</ComboBoxItem>
-                                        <ComboBoxItem>USGS.gov (Natural Hazards Support System) - Current Earthquakes</ComboBoxItem>
-                                        <ComboBoxItem>SGS.gov (Natural Hazards Support System) - Current Hurricanes</ComboBoxItem>
-                                        <ComboBoxItem>USGS.gov (Natural Hazards Support System) - Current Wildfires</ComboBoxItem>
-                                    </ComboBox>
-                                </StackPanel>
+                                <StackPanel x:Name="panelmapconnect" IsEnabled="False" />
                             </StackPanel>
-                            <StackPanel Margin="0 25 0 0 ">
-                                <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver"  Content="Provide location of another Map Server" Checked="radlocatemapserver_Checked" />
-                                <StackPanel Margin="18 5 0 0" x:Name="panelmapserver" IsEnabled="False" >
+                            <StackPanel Margin="0 0 0 0 ">
+                                <StackPanel Margin="0 0 0 0" x:Name="panelmapserver" IsEnabled="False" >
                                     <Label Padding="0" x:Name="lblURL">URL:</Label>
                                     <WrapPanel Orientation="Horizontal" Margin="0 0 20 10 ">
                                         <StackPanel Margin="0 0 20 10">
                                             <TextBox TextWrapping="Wrap" MinWidth="300" MaxWidth="600" x:Name="txtMapSeverpath"  HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
                                         </StackPanel>
                                         <StackPanel>
-                                            <Button x:Name="btnMapserverlocate" Height="25" Margin="10 0 0 0" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
+                                            <Button x:Name="btnMapserverlocate" Height="25" Margin="0 0 0 0" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
                                         </StackPanel>
                                     </WrapPanel>
                                     <TextBox TextWrapping="Wrap" x:Name="lblExampleMapServerURL" Style="{StaticResource PropertiesExampleText}">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</TextBox>

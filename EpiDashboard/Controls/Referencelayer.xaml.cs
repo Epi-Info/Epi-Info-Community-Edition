@@ -61,8 +61,6 @@ namespace EpiDashboard.Controls
             radShapeFile.Content = DashboardSharedStrings.GADGET_SHAPEFILE;
             btnBrowseShape.Content = DashboardSharedStrings.BUTTON_BROWSE;
             radMapServer.Content = DashboardSharedStrings.GADGET_MAPSERVER;
-            radconnectmapserver.Content = DashboardSharedStrings.GADGET_CONNECT_MAPSERVER;
-            radlocatemapserver.Content = DashboardSharedStrings.GADGET_OTHER_MAPSERVER;
             lblURL.Content = DashboardSharedStrings.GADGET_URL;
             btnMapserverlocate.Content = DashboardSharedStrings.BUTTON_CONNECT;
             lblExampleMapServerURL.Text = DashboardSharedStrings.GADGET_EXAMPLE_MAPSERVER;
@@ -184,7 +182,6 @@ namespace EpiDashboard.Controls
             txtShapePath.Text = string.Empty;
             txtKMLpath.Text = string.Empty;
             lbxserverfield.SelectedIndex = -1;
-            cbxmapserver.SelectedIndex = -1;
             txtMapSeverpath.Text = string.Empty;
             if (Mapprovider != null)
             {
@@ -289,61 +286,6 @@ namespace EpiDashboard.Controls
             panelmapconnect.IsEnabled = false;
             panelmapserver.IsEnabled = true;
             panelmapconnect.IsEnabled = false;
-            cbxmapserver.SelectedIndex = -1;
-        }
-
-        private void cbxmapserver_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cbxmapserver.SelectedIndex > -1)
-            {
-                MapServerName = ((ComboBoxItem)cbxmapserver.SelectedItem).Content.ToString();
-                if (cbxmapserver.SelectedIndex == 0)
-                {
-                    MapServerName = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer";
-                    MapVisibleLayers = new int[] { 7, 19, 21, 22 };
-                }
-                else if (cbxmapserver.SelectedIndex == 1)
-                {
-                    MapServerName = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer";
-                    MapVisibleLayers = new int[] { 21, 22 };
-                }
-                else if (cbxmapserver.SelectedIndex == 2)
-                {
-                    MapServerName = "http://services.nationalmap.gov/ArcGIS/rest/services/TNM_Blank_US/MapServer";
-                    MapVisibleLayers = new int[] { 3, 10, 17 };
-                }
-                else if (cbxmapserver.SelectedIndex == 3)
-                {
-                    MapServerName = "http://rmgsc.cr.usgs.gov/ArcGIS/rest/services/nhss_haz/MapServer";
-                    MapVisibleLayers = new int[] { 0 };
-                }
-                else if (cbxmapserver.SelectedIndex == 4)
-                {
-                    MapServerName = "http://rmgsc.cr.usgs.gov/ArcGIS/rest/services/nhss_haz/MapServer";
-                    MapVisibleLayers = new int[] { 3 };
-                }
-                else if (cbxmapserver.SelectedIndex == 5)
-                {
-                    MapServerName = "http://rmgsc.cr.usgs.gov/ArcGIS/rest/services/nhss_haz/MapServer";
-                    MapVisibleLayers = new int[] { 4 };
-                }
-                else if (cbxmapserver.SelectedIndex == 6)
-                {
-                    MapServerName = "http://rmgsc.cr.usgs.gov/ArcGIS/rest/services/nhss_haz/MapServer";
-                    MapVisibleLayers = new int[] { 5, 6 };
-                }
-                if (Mapprovider == null)
-                {
-                    Mapprovider = new Mapping.MapServerLayerProvider(myMap);
-                }
-                ILayerProperties layerProperties = null;
-                layerProperties = new MapServerLayerProperties(myMap);                
-                layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
-                layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
-                this.serverlayerprop = (MapServerLayerProperties)layerProperties;
-                serverlayerprop.provider = Mapprovider;
-                this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-            }
         }
 
         private void radconnectmapserver_Checked(object sender, RoutedEventArgs e)
@@ -359,10 +301,11 @@ namespace EpiDashboard.Controls
             panelshape.IsEnabled = false;
             panelmap.IsEnabled = true;
             panelKml.IsEnabled = false;
+            
             txtShapePath.Text = string.Empty;
             txtKMLpath.Text = string.Empty;
+            
             lbxserverfield.SelectedIndex = -1;
-            cbxmapserver.SelectedIndex = -1;
             txtMapSeverpath.Text = string.Empty;
             if (KMLprovider != null)
             {
@@ -373,6 +316,12 @@ namespace EpiDashboard.Controls
                 provider = null;
             }
 
+            panelmapconnect.IsEnabled = true;
+            panelmapserver.IsEnabled = false;
+            panelmapconnect.IsEnabled = true;
+            panelmapserver.IsEnabled = true;
+            txtMapSeverpath.IsEnabled = true;
+            txtMapSeverpath.Text = string.Empty;
         }
 
         private void btnBrowseShape_Click(object sender, RoutedEventArgs e)
@@ -406,24 +355,22 @@ namespace EpiDashboard.Controls
 
         private void radShapeFile_Checked(object sender, RoutedEventArgs e)
         {
-
             panelshape.IsEnabled = true;
             panelmap.IsEnabled = false;
             panelKml.IsEnabled = false;
             txtShapePath.Text = string.Empty;
             txtKMLpath.Text = string.Empty;
-           // lbxserverfield.SelectedIndex = -1;
-            cbxmapserver.SelectedIndex = -1;
             txtMapSeverpath.Text = string.Empty;
+            
             if (Mapprovider != null)
             {
                 Mapprovider = null;
             }
+            
             if (KMLprovider != null)
             {
                 KMLprovider = null;
             }
-
         }
 
         public EventHandler MapGenerated { get; set; }
