@@ -142,22 +142,12 @@
                             </Grid>
                         </StackPanel>
                         </StackPanel>
-                        <StackPanel Margin="0 30 0 0">
+                        <StackPanel Margin="0 15 0 0">
                         <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
                             <StackPanel x:Name="panelmap" IsEnabled="False" Margin="18 10 0 0 " HorizontalAlignment="Left">
-                                <RadioButton  x:Name="radconnectmapserver"  GroupName="radmapserver" Checked="radconnectmapserver_Checked" Content="Connect to a known map server" />
-                                <StackPanel  Margin="18 5 0 0" x:Name="panelmapconnect" IsEnabled="False">
-
-                                    <ComboBox MinWidth="210" Width="Auto" MaxWidth="600" x:Name="cbxmapserver" HorizontalAlignment="Left"  SelectionChanged="cbxmapserver_SelectionChanged" >
-                                    <ComboBoxItem>NationalMap.gov - New York County Boundaries</ComboBoxItem>
-                                    <ComboBoxItem>NationalMap.gov - Rhode Island Zip Code Boundaries</ComboBoxItem>
-                                    <ComboBoxItem>NationalMap.gov - U.S. State Boundaries</ComboBoxItem>
-                                    <ComboBoxItem>NationalMap.gov - World Boundaries</ComboBoxItem>
-                                </ComboBox>
-                            </StackPanel>
-                                <StackPanel Margin="0 25 0 0 ">
-                                    <RadioButton x:Name="radlocatemapserver"  GroupName="radmapserver" Content="Provide location of another map server" Checked="radlocatemapserver_Checked" />
-                                    <StackPanel Margin="18 5 0 0" x:Name="panelmapserver" IsEnabled="False" HorizontalAlignment="Left" >
+                                <StackPanel  Margin="18 5 0 0" x:Name="panelmapconnect" IsEnabled="False"/>
+                                <StackPanel Margin="0 0 0 0 ">
+                                    <StackPanel Margin="0 0 0 0" x:Name="panelmapserver" IsEnabled="False" HorizontalAlignment="Left" >
                                         <Label Padding="0 0 0 0" x:Name="lblURL">URL:</Label>
                                         <Grid >
                                             <WrapPanel Orientation="Horizontal">
@@ -179,7 +169,7 @@
                                 </StackPanel>
                                 </StackPanel>
                             </StackPanel>
-                        <StackPanel Margin="0 30 0 0">
+                        <StackPanel Margin="0 15 0 0">
                             <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
                             <StackPanel Margin="18 5 0 0" x:Name="panelKml" IsEnabled="False" >
                                 <Label Padding="0" x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
