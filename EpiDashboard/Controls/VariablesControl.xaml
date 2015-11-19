@@ -69,7 +69,12 @@
                     </Grid>
 
                 </StackPanel>
-                <TextBlock x:Name="txtTitle" HorizontalAlignment="Right" VerticalAlignment="Center"  TextAlignment="Center" Text="Defined Variables" Margin="0,0,-134,100" FontWeight="Bold" />
+                <TextBlock x:Name="txtTitle"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" TextWrapping="Wrap" TextAlignment="Center" Text="Defined Variables" FontWeight="Bold" >
+                    <TextBlock.RenderTransform>
+                        <RotateTransform Angle="90" CenterX="200" CenterY="221" />
+                    </TextBlock.RenderTransform>
+                    
+                </TextBlock>
             </Grid>
         </Border>
     </Grid>

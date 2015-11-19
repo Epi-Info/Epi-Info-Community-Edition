@@ -44,7 +44,7 @@ namespace EpiDashboard.Controls
         {
             InitializeComponent();
             this.dashboardHelper = dashboardHelper;
-            txtTitle.RenderTransform = new RotateTransform(270);
+            //txtTitle.RenderTransform = new RotateTransform(270);
             FillSelectionComboboxes();
 
             selectionGridHeight = grdSelectionProperties.Height;

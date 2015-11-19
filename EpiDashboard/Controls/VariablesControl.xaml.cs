@@ -51,7 +51,7 @@ namespace EpiDashboard.Controls
             InitializeComponent();
             this.dashboardHelper = dashboardHelper;
             this.dashboardControl = dashboardControl;
-            txtTitle.RenderTransform = new RotateTransform(90);
+            //txtTitle.RenderTransform = new RotateTransform(90);
             UpdateRules();
             Construct();
         }
