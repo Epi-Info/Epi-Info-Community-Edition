@@ -204,10 +204,10 @@ namespace EpiDashboard.Controls
             //EI-39
             MessageBoxResult result = MessageBoxResult.Yes;
             
-            if (IsGadget())
-            {
+         //  if (IsGadget()) 
+      //   {
                 result = MessageBox.Show(DashboardSharedStrings.WARNING_CONFIRM_CLOSE, DashboardSharedStrings.WARNING, MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            }
+       // }
 
             if (GadgetCloseButtonClicked != null && result == MessageBoxResult.Yes)
             {
