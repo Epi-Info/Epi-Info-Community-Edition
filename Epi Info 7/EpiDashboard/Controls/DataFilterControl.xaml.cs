@@ -708,7 +708,7 @@ namespace EpiDashboard.Controls
                 cbxOperator.Items.Clear();
 
                 // Set operator drop-down values
-                if (field is NumberField || field is DateField || field is DateTimeField || field is TimeField)
+                if (field is NumberField || field is DateField || field is DateTimeField || field is TimeField || field is LastSaveTimeField|| field is FirstSaveTimeField)
                 {
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO);
@@ -741,7 +741,7 @@ namespace EpiDashboard.Controls
                     cbxValue.Items.Add(config.Settings.RepresentationOfMissing);
                     cbxValue.IsEnabled = true;
                 }
-                else if (field is TextField || field is UpperCaseTextField || field is TableBasedDropDownField || field is PhoneNumberField)
+                else if (field is TextField || field is UpperCaseTextField || field is TableBasedDropDownField || field is PhoneNumberField || field is GlobalRecordIdField)
                 {
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO);
