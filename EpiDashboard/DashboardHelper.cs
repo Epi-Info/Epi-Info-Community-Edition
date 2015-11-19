@@ -792,76 +792,113 @@ namespace EpiDashboard
             string rawColumnName = columnName;
 
             columnName = AddBracketsToString(columnName);
-
-            if (columnType.Equals("System.DateTime") && friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
-            {
-                DateTime lowVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
-                string friendlyLowValue = lowVal.ToString("M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-
-                DateTime highVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
-                string friendlyHighValue = highVal.ToString("M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-
-                FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyLowValue, friendlyHighValue);
-                DataFilters.AddFilterCondition(newCondition, joinType);
-            }
-            else if (columnType.Equals("System.DateTime") && friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL))
-            {
-                DateTime dateVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
-
-                if (dateVal.Hour == 0)
-                    dateVal = dateVal.AddHours(23);
-                if (dateVal.Minute == 0)
-                    dateVal = dateVal.AddMinutes(59);
-                if (dateVal.Second == 0)
-                    dateVal = dateVal.AddSeconds(59);
-                if (dateVal.Millisecond == 0)
-                    dateVal = dateVal.AddMilliseconds(999);
-
-                friendlyValue = dateVal.ToString("M/d/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-
-                FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
-                DataFilters.AddFilterCondition(newCondition, joinType);
-            }
-            else if (columnType.Equals("System.DateTime") && friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN))
-            {
-                DateTime dateVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
-
-                if (dateVal.Hour == 0)
-                    dateVal = dateVal.AddHours(23);
-                if (dateVal.Minute == 0)
-                    dateVal = dateVal.AddMinutes(59);
-                if (dateVal.Second == 0)
-                    dateVal = dateVal.AddSeconds(59);
-                if (dateVal.Millisecond == 0)
-                    dateVal = dateVal.AddMilliseconds(999);
-
-                friendlyValue = dateVal.ToString("M/d/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-
-                FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
-                DataFilters.AddFilterCondition(newCondition, joinType);
-            }
-            else if (columnType.Equals("System.DateTime"))
-            {
-                if (string.IsNullOrEmpty(friendlyValue))
+           
+                if (columnType.Equals("System.DateTime") && friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
                 {
-                    friendlyValue = Config.Settings.RepresentationOfMissing;
+                     try
+                    {
+                    DateTime lowVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
+                    string friendlyLowValue = lowVal.ToString("M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
+                    DateTime highVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
+                    string friendlyHighValue = highVal.ToString("M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
+                    FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyLowValue, friendlyHighValue);
+                    DataFilters.AddFilterCondition(newCondition, joinType);
+                     }
+                     catch(Exception ex)
+                    {
+
+                        Epi.Windows.MsgBox.ShowError(SharedStrings.ENTER_VALID_DATE_AND_TIME, ex);
+                        return added; // cancelled
+                    }
+
+                }
+                else if (columnType.Equals("System.DateTime") && friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL))
+                {
+                    try
+                    {
+                        DateTime dateVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
+
+                        if (dateVal.Hour == 0)
+                            dateVal = dateVal.AddHours(23);
+                        if (dateVal.Minute == 0)
+                            dateVal = dateVal.AddMinutes(59);
+                        if (dateVal.Second == 0)
+                            dateVal = dateVal.AddSeconds(59);
+                        if (dateVal.Millisecond == 0)
+                            dateVal = dateVal.AddMilliseconds(999);
+
+                        friendlyValue = dateVal.ToString("M/d/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+
+                        FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
+                        DataFilters.AddFilterCondition(newCondition, joinType);
+                    }
+                     catch(Exception ex)
+                    {
+
+                        Epi.Windows.MsgBox.ShowError(SharedStrings.ENTER_VALID_DATE_AND_TIME, ex);
+                        return added; // cancelled
+                    }
+                }
+                else if (columnType.Equals("System.DateTime") && friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN))
+                {
+                    try
+                    {
+                        DateTime dateVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
+
+                        if (dateVal.Hour == 0)
+                            dateVal = dateVal.AddHours(23);
+                        if (dateVal.Minute == 0)
+                            dateVal = dateVal.AddMinutes(59);
+                        if (dateVal.Second == 0)
+                            dateVal = dateVal.AddSeconds(59);
+                        if (dateVal.Millisecond == 0)
+                            dateVal = dateVal.AddMilliseconds(999);
+
+                        friendlyValue = dateVal.ToString("M/d/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+
+                        FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
+                        DataFilters.AddFilterCondition(newCondition, joinType);
+                    }
+                     catch(Exception ex)
+                    {
+
+                        Epi.Windows.MsgBox.ShowError(SharedStrings.ENTER_VALID_DATE_AND_TIME, ex);
+                        return added; // cancelled
+                    }
+                }
+                else if (columnType.Equals("System.DateTime"))
+                {
+                    try
+                    {
+                        if (string.IsNullOrEmpty(friendlyValue))
+                        {
+                            friendlyValue = Config.Settings.RepresentationOfMissing;
+                        }
+                        else
+                        {
+                            DateTime dateVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
+                            friendlyValue = dateVal.ToString("M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        }
+
+                        FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
+                        DataFilters.AddFilterCondition(newCondition, joinType);
+                    }
+                     catch(Exception ex)
+                    {
+
+                        Epi.Windows.MsgBox.ShowError(SharedStrings.ENTER_VALID_DATE_AND_TIME, ex);
+                        return added; // cancelled
+                    }
                 }
                 else
                 {
-                    DateTime dateVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
-                    friendlyValue = dateVal.ToString("M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                    FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
+                    DataFilters.AddFilterCondition(newCondition, joinType);
                 }
 
-                FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
-                DataFilters.AddFilterCondition(newCondition, joinType);
-            }
-            else
-            {
-                FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
-                DataFilters.AddFilterCondition(newCondition, joinType);
-            }
-
-            return added;
+                return added;                     
         }
 
         /// <summary>
