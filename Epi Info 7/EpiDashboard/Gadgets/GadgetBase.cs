@@ -1309,7 +1309,14 @@ namespace EpiDashboard
 
         protected void mnuClose_Click(object sender, RoutedEventArgs e)
         {
-            CloseGadget();
+           // CloseGadget();
+            
+          MessageBoxResult result = MessageBox.Show(DashboardSharedStrings.WARNING_CONFIRM_CLOSE, DashboardSharedStrings.WARNING, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        
+           if (result == MessageBoxResult.Yes)
+            {
+                CloseGadget();
+            }
         }
 
         protected virtual void txtInput_PreviewKeyDown(object sender, KeyEventArgs e)
