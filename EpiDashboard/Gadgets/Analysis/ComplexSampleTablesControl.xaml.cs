@@ -1728,6 +1728,7 @@ namespace EpiDashboard
                     case "stratavariable":
                         //cbxFieldStrata.Text = child.InnerText.Replace("&lt;", "<");
                         ((ComplexSampleCrosstabParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
+                        inputVariableList.Add("stratvarlist", child.InnerText.Replace("&lt;", "<"));
                         break;
                     case "weightvariable":
                         //cbxFieldWeight.Text = child.InnerText.Replace("&lt;", "<");

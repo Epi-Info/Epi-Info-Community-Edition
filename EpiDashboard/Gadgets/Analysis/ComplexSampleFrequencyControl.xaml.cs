@@ -1362,9 +1362,9 @@ namespace EpiDashboard
                         break;
                     case "stratavariable":
                         //lbxFieldStrata.SelectedItems.Add(child.InnerText.Replace("&lt;", "<"));
-                        if (string.IsNullOrEmpty(child.InnerText))
+                        if (!string.IsNullOrEmpty(child.InnerText))
                         {
-                            ((ComplexSampleFrequencyParameters)Parameters).StrataVariableNames[0] = child.InnerText.Replace("&lt;", "<");
+                            ((ComplexSampleFrequencyParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
                             inputVariableList.Add("StratvarList", child.InnerText.Replace("&lt;", "<"));
                         }
                         break;
