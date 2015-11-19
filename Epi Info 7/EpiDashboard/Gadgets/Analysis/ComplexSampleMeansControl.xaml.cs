@@ -1354,6 +1354,13 @@ namespace EpiDashboard
                 element.AppendChild(psuVariableElement);
             }
 
+            XmlElement crosstabVariableElement = doc.CreateElement("crosstabVariable");
+            if (!String.IsNullOrEmpty(csmeansParameters.CrosstabVariableName))
+            {
+                crosstabVariableElement.InnerText = csmeansParameters.CrosstabVariableName;
+                element.AppendChild(crosstabVariableElement);
+            }
+
             //customHeading
             XmlElement customHeadingElement = doc.CreateElement("customHeading");
             customHeadingElement.InnerText = csmeansParameters.GadgetTitle; //CustomOutputHeading.Replace("<", "&lt;");
@@ -1422,10 +1429,12 @@ namespace EpiDashboard
                     case "stratavariable":
                         //cbxFieldStrata.Text = child.InnerText.Replace("&lt;", "<");
                         ((ComplexSampleMeansParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
+                        inputVariableList.Add("stratavar", child.InnerText.Replace("&lt;", "<"));
                         break;
                     case "weightvariable":
                         //cbxFieldWeight.Text = child.InnerText.Replace("&lt;", "<");
                         ((ComplexSampleMeansParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
+                        inputVariableList.Add("weightvar", child.InnerText.Replace("&lt;", "<"));
                         break;
                     case "psuvariable":
                         //cbxFieldPSU.Text = child.InnerText.Replace("&lt;", "<");
@@ -1435,6 +1444,7 @@ namespace EpiDashboard
                     case "crosstabvariable":
                         cbxFieldCrosstab.Text = child.InnerText.Replace("&lt;", "<");
                         ((ComplexSampleMeansParameters)Parameters).CrosstabVariableName = child.InnerText.Replace("&lt;", "<");
+                        inputVariableList.Add("cross_tabulation_variable", child.InnerText.Replace("&lt;", "<"));
                         break;
                     case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
