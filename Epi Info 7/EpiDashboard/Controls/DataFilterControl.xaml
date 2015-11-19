@@ -33,7 +33,11 @@
                         <RowDefinition x:Name="rowSpacer3" Height="0"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock x:Name="txtTitle" HorizontalAlignment="Left" TextAlignment="Center" VerticalAlignment="Center" Text="Data Filters" Margin="-3,0,0,-80" FontWeight="Bold" />
+                    <TextBlock x:Name="txtTitle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" TextWrapping="Wrap" TextAlignment="Center" Text="Data Filters" FontWeight="Bold" >
+                        <TextBlock.RenderTransform>
+                            <RotateTransform Angle="270" CenterX="80" CenterY="81" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
 
                     <Grid Name="grdSelectionProperties" Grid.Row="0" Width="Auto" HorizontalAlignment="Center" Margin="27,2,2,2" Visibility="Visible">
                         <Grid.RowDefinitions>
