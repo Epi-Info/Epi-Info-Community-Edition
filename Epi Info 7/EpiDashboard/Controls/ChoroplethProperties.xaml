@@ -46,8 +46,8 @@
             </ToggleButton>-->
 
             <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked" />
-            <Controls:SettingsToggleButton  x:Name="tbtnHTML" Title="Variables" Description="Choose map boundaries." IsChecked="False" Visibility="Hidden" Checked="tbtnHTML_Checked" />
-            <Controls:SettingsToggleButton  x:Name="tbtnCharts" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsChecked="False" Visibility="Hidden" Checked="tbtnCharts_Checked" />
+            <Controls:SettingsToggleButton  x:Name="tbtnVariables" Title="Variables" Description="Choose map boundaries." IsChecked="False" Visibility="Hidden" Checked="tbtnVariables_Checked" />
+            <Controls:SettingsToggleButton  x:Name="tbtnDisplay" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsChecked="False" Visibility="Hidden" Checked="tbtnDisplay_Checked" />
             <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Visibility="Hidden" Checked="tbtnFilters_Checked" />
 
 

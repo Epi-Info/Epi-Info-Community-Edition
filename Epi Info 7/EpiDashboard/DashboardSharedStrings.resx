@@ -1745,13 +1745,13 @@ of records or select fewer fields for the group.</value>
     <value>Set dot value and color representation.</value>
   </data>
   <data name="GADGET_TABDESC_MAP_VARIABLES" xml:space="preserve">
-    <value>Choose variables for map.</value>
+    <value>Step 2 of 3) Choose variables for map.</value>
   </data>
   <data name="GADGET_URL" xml:space="preserve">
     <value>URL:</value>
   </data>
   <data name="GADGET_VARIABLES_CHORPLTH" xml:space="preserve">
-    <value>Select variables for map.</value>
+    <value>Select variables for layer.</value>
   </data>
   <data name="BUTTON_BROWSE_SHAPEFILE" xml:space="preserve">
     <value>Browse Shapefile</value>
@@ -2013,5 +2013,29 @@ of records or select fewer fields for the group.</value>
   </data>
   <data name="GADGET_MAP_CLASSES" xml:space="preserve">
     <value>Classes</value>
+  </data>
+  <data name="GADGET_MAP_TABBUTTON_DATA_SOURCE" xml:space="preserve">
+    <value>Data Source</value>
+  </data>
+  <data name="GADGET_MAP_TABBUTTON_DISPLAY" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="GADGET_MAP_TABBUTTON_FILTERS" xml:space="preserve">
+    <value>Data Filters</value>
+  </data>
+  <data name="GADGET_MAP_TABBUTTON_VARIABLES" xml:space="preserve">
+    <value>Variables</value>
+  </data>
+  <data name="GADGET_MAP_TABDESC_DATASOURCE" xml:space="preserve">
+    <value>Step 1 of 3 - Choose data source.</value>
+  </data>
+  <data name="GADGET_MAP_TABDESC_FILTERS" xml:space="preserve">
+    <value>Optional - Set data filters for layer.</value>
+  </data>
+  <data name="GADGET_MAP_TABDESC_VARIABLES" xml:space="preserve">
+    <value>Step 2 of 3 - Choose variables for layer.</value>
+  </data>
+  <data name="GADGET_MAP_TABDESC_DISPLAY" xml:space="preserve">
+    <value>Step 3 of 3 - Choose display options.</value>
   </data>
 </root>
