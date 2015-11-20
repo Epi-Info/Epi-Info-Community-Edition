@@ -1396,7 +1396,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new ClearDialog(mainForm));
 
                     }
@@ -1414,7 +1414,7 @@ namespace Epi.Windows.MakeView.Forms
                      }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new GoToDialog(mainForm));
 
                     }
@@ -1433,7 +1433,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new GoToFormDialog(mainForm));
 
                     }
@@ -1453,7 +1453,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new HideDialog(mainForm));
 
                     }
@@ -1471,7 +1471,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new UnhideDialog(mainForm));
 
                     }
@@ -1489,7 +1489,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new DisableDialog(mainForm));
 
                     }
@@ -1507,7 +1507,7 @@ namespace Epi.Windows.MakeView.Forms
                      }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new EnableDialog(mainForm));
 
                     }
@@ -1525,7 +1525,7 @@ namespace Epi.Windows.MakeView.Forms
                       }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new HighlightDialog(mainForm));
 
                     }
@@ -1543,7 +1543,7 @@ namespace Epi.Windows.MakeView.Forms
                      }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new UnhighlightDialog(mainForm));
 
                     }
@@ -1561,7 +1561,7 @@ namespace Epi.Windows.MakeView.Forms
                      }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new GeocodeDialog(mainForm));
 
                     }
@@ -1579,7 +1579,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new SetRequiredDialog(mainForm));
 
                     }
@@ -1597,7 +1597,7 @@ namespace Epi.Windows.MakeView.Forms
                      }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new SetNotRequiredDialog(mainForm));
 
                     }
@@ -1630,7 +1630,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                         
+                        AddStatusErrorMessage(ex.Message);
                             DesignStatement(new CallDialog(this));
                         
                     }
@@ -1648,7 +1648,7 @@ namespace Epi.Windows.MakeView.Forms
                      }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new ExecuteDialog(mainForm));
                         
                     }
@@ -1666,7 +1666,7 @@ namespace Epi.Windows.MakeView.Forms
                       }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new QuitDialog(mainForm, true));
                         
                     }
@@ -1697,7 +1697,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new AutoSearchDialog(mainForm));
                     }
                     break;
@@ -1714,7 +1714,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new IfClauseDialog(mainForm));
                     }
                     break;
@@ -1731,7 +1731,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new NewRecordDialog(mainForm));
                     }
                     break;
@@ -1761,7 +1761,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignStatement(new DialogDialog(mainForm, this.view.GetProject()));
                     }
                     break;
@@ -1778,7 +1778,7 @@ namespace Epi.Windows.MakeView.Forms
                      }
                     catch (Exception ex)
                     {
-
+                        AddStatusErrorMessage(ex.Message);
                         DesignHelpStatement();
                     }
                     break;
@@ -1812,6 +1812,7 @@ namespace Epi.Windows.MakeView.Forms
                     {
                         if (ex.Source == Constants.VARIABLE_NAME_TEST_TOKEN)
                         {
+                            AddStatusErrorMessage(ex.Message);
                             DesignStatement(new AssignDialog(mainForm, true));
                         }
                         else
@@ -1843,6 +1844,7 @@ namespace Epi.Windows.MakeView.Forms
 
                         if (this.PreValidateCommand(" Define " + Constants.VARIABLE_NAME_TEST_TOKEN + " Numeric "))
                         {
+                            AddStatusErrorMessage(ex.Message);
                             isDefineCommand = true;
                             DesignStatement(new DefineVariableDialog(mainForm, true));
                         }

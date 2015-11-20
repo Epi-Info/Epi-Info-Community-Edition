@@ -537,6 +537,7 @@ namespace Epi.Core.EnterInterpreter
 
                     foreach (string name in _parsedUndefinedVariables)
                     {
+                        if (name != Constants.VARIABLE_NAME_TEST_TOKEN)
                         exceptionMessage = exceptionMessage + " " + name + " ";
                         exceptionSource = name;
                     }
