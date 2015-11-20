@@ -1685,6 +1685,8 @@ namespace EpiDashboard.Controls
             {
                 if (element is System.Windows.Controls.TextBox)
                 {
+                    
+                    
                     string elementName = ((System.Windows.Controls.TextBox)element).Name;
 
                     if (elementName.StartsWith("ramp"))

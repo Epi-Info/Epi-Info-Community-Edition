@@ -794,10 +794,14 @@ namespace EpiDashboard.Mapping
                     orderby aValue
                     select aValue;
 
-                int increment = Convert.ToInt32(Math.Round((double)valueList.Count / (double)classCount));
-                for (int i = increment; i < valueList.Count; i += increment)
+//                int increment = Convert.ToInt32(Math.Round((double)valueList.Count / (double)classCount));
+                double increment = (double)valueList.Count / (double)classCount;
+                for (double i = increment - 1.0; Math.Round(i, 4) < valueList.Count - 1; i += increment)
                 {
-                    double value = valueEnumerator.ElementAt(i);
+                    double value0 = valueEnumerator.ElementAt(Convert.ToInt32(Math.Floor(i)));
+                    double value1 = valueEnumerator.ElementAt(Convert.ToInt32(Math.Ceiling(i)));
+                    double value = (value1 + value0) / 2.0;
+//                    double value = valueEnumerator.ElementAt(i);
                     if (value < thematicItem.Min)
                         value = thematicItem.Min;
                     rangeStarts.Add(value);
