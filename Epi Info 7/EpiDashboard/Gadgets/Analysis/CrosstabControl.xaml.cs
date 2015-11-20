@@ -51,7 +51,7 @@ namespace EpiDashboard
         private bool exposureIsOptionField = false;
         private bool outcomeIsNumeric = false;
         private bool smartTable = true;
-        private bool showPercents = true;
+       // private bool showPercents = true;
         private bool? isRunningGrouped2x2 = null;
 
         private List<string> YesValues;
@@ -1519,7 +1519,7 @@ namespace EpiDashboard
                     twoByTwoPanel.ExposureNoLabel = Config.Settings.RepresentationOfNo;
                 }
 
-                if (showPercents)
+                if (crosstabParameters.ShowPercents)
                 {
                     twoByTwoPanel.ShowRowColumnPercents = true;
                 }
