@@ -4,6 +4,7 @@
     xmlns:EpiDashboard="clr-namespace:EpiDashboard"
     xmlns:Mapping="clr-namespace:EpiDashboard.Mapping"
     xmlns:Charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=Epi.DataVisualization.Toolkit"
+    xmlns:esri="http://schemas.esri.com/arcgis/client/2009"
     Background="White">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -24,6 +25,8 @@
             <EpiDashboard:WaitCursor x:Name="waitCursor" Width="25" Height="25" Visibility="Collapsed" StackPanel.ZIndex="99"/>
             <!--<Button Name="btnBypass" HorizontalAlignment="Center" Content="Bypass Internet Check" Margin="0,10,0,0"/>-->
         </StackPanel>
+
+   
         
         <Grid x:Name="grdMapDef" Grid.Column="1">
             <Grid.RowDefinitions>
@@ -32,6 +35,7 @@
             <Canvas Grid.Row="0" x:Name="MapContainer"/>
         </Grid>
 
+   
         <Grid x:Name="grdLegend" HorizontalAlignment="Left" Grid.Column="1" Width="310" Margin="-310,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -335,5 +339,19 @@
             <Grid x:Name="grdLayerConfigContainer" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Image x:Name="imgCloseLayer" Source="..\Images\x_over.png" Cursor="Hand" HorizontalAlignment="Right" Margin="2" VerticalAlignment="Top" Stretch="None" />
         </Grid>
+
+        <Grid x:Name="grdScale" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"    />     
+            </Grid.RowDefinitions>
+            <!--<esri:ScaleLine Name="ScaleLine11" Map="{Binding ElementName=myMap  }"
+     HorizontalAlignment="Right"  VerticalAlignment="Bottom"           
+     TargetWidth="200"        
+     Foreground="Orange"       FontFamily="Courier New" FontSize="18" />-->
+        </Grid>
+
+
+
     </Grid>
 </UserControl>
