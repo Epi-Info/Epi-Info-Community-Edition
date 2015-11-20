@@ -120,14 +120,14 @@ namespace EpiDashboard.Controls
 
             //Dot Density Left Panel
             lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_DOTDENSITY;
-            tbtnDataSource.Title = DashboardSharedStrings.GADGET_DATA_SOURCE;
-            tbtnDataSource.Description = DashboardSharedStrings.GADGET_TABDESC_DATASOURCE;
-            tbtnHTML.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
-            tbtnHTML.Description = DashboardSharedStrings.GADGET_TABDESC_MAP_VARIABLES;
-            tbtnCharts.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
-            tbtnCharts.Description = DashboardSharedStrings.GADGET_TABDESC_DOT_COLOR;
-            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
-            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS_MAPS;
+            tbtnDataSource.Title = DashboardSharedStrings.GADGET_MAP_TABBUTTON_DATA_SOURCE;
+            tbtnDataSource.Description = DashboardSharedStrings.GADGET_MAP_TABDESC_DATASOURCE;
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_MAP_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_MAP_TABDESC_VARIABLES;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_MAP_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_MAP_TABDESC_DISPLAY;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_MAP_TABBUTTON_FILTERS;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_MAP_TABDESC_FILTERS;
 
             //Data Source Panel
             tblockPanelDataSource.Content = DashboardSharedStrings.GADGET_DATA_SOURCE;
@@ -158,7 +158,7 @@ namespace EpiDashboard.Controls
 
 
             //Colors and Styles Panel
-            lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_TAB_COLORS_RANGES;
+            lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_MAP_TABBUTTON_DISPLAY;
 
             tblcolor.Content = DashboardSharedStrings.GADGET_SELECT_COLOR;
             lblDotValue.Content = DashboardSharedStrings.GADGET_MAP_DOT_VALUE;
@@ -406,7 +406,7 @@ namespace EpiDashboard.Controls
             panelInfo.Visibility = System.Windows.Visibility.Visible;
         }
 
-        private void tbtnCharts_Checked(object sender, RoutedEventArgs e)
+        private void tbtnDisplay_Checked(object sender, RoutedEventArgs e)
         {
           //  btnOK.Visibility = Visibility.Hidden;
             CheckButtonStates(sender as ToggleButton);
@@ -417,7 +417,7 @@ namespace EpiDashboard.Controls
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
 
-        private void tbtnHTML_Checked(object sender, RoutedEventArgs e)
+        private void tbtnVariables_Checked(object sender, RoutedEventArgs e)
         {
             
                 //btnOK.Visibility = Visibility.Hidden;
@@ -1163,24 +1163,42 @@ namespace EpiDashboard.Controls
 
         private void PropertyChanged_EnableDisable()
         {
-            tbtnHTML.Visibility = Visibility.Hidden;
-            tbtnCharts.Visibility = Visibility.Hidden;
-            tbtnFilters.Visibility = Visibility.Hidden;
-            btnOK.IsEnabled = false;
+            if (btnOK == null) return;
 
-            if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text)
-                       || (!string.IsNullOrEmpty(txtMapSeverpath.Text)
-                       || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
+            if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text) || (!string.IsNullOrEmpty(txtMapSeverpath.Text) || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
             {
-                tbtnHTML.Visibility = Visibility.Visible;
-
                 if (cmbShapeKey.SelectedIndex != -1 && cmbDataKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
                 {
-                    tbtnHTML.Visibility = Visibility.Visible;
-                    tbtnCharts.Visibility = Visibility.Visible;
-                    tbtnFilters.Visibility = Visibility.Visible;
                     btnOK.IsEnabled = true;
+
+                    if (tbtnDisplay.Visibility != System.Windows.Visibility.Visible)
+                    {
+                        tbtnDisplay.Visibility = Visibility.Visible;
+                        tbtnDisplay_Checked(this, new RoutedEventArgs());
+                    }
+
+                    tbtnFilters.Visibility = Visibility.Visible;
+                    return;
                 }
+                else
+                {
+                    tbtnDisplay.Visibility = Visibility.Hidden;
+                    tbtnFilters.Visibility = Visibility.Hidden;
+                    btnOK.IsEnabled = false;
+                }
+
+                if (tbtnVariables.Visibility != System.Windows.Visibility.Visible)
+                {
+                    tbtnVariables.Visibility = Visibility.Visible;
+                    tbtnVariables_Checked(this, new RoutedEventArgs());
+                }
+            }
+            else
+            {
+                tbtnVariables.Visibility = Visibility.Hidden;
+                tbtnDisplay.Visibility = Visibility.Hidden;
+                tbtnFilters.Visibility = Visibility.Hidden;
+                btnOK.IsEnabled = false;
             }
         }
 

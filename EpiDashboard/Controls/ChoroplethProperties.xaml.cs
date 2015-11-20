@@ -116,14 +116,14 @@ namespace EpiDashboard.Controls
 
             //Point of Interest Left Panel
             lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_CHOROPLETH;
-            tbtnDataSource.Title = DashboardSharedStrings.GADGET_DATA_SOURCE;
-            tbtnDataSource.Description = DashboardSharedStrings.GADGET_TABDESC_DATASOURCE;
-            tbtnHTML.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
-            tbtnHTML.Description = DashboardSharedStrings.GADGET_TABDESC_MAP_VARIABLES;
-            tbtnCharts.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
-            tbtnCharts.Description = DashboardSharedStrings.GADGET_TABDESC_SETCOLORS;
-            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
-            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS_MAPS;
+            tbtnDataSource.Title = DashboardSharedStrings.GADGET_MAP_TABBUTTON_DATA_SOURCE;
+            tbtnDataSource.Description = DashboardSharedStrings.GADGET_MAP_TABDESC_DATASOURCE;
+            tbtnVariables.Title = DashboardSharedStrings.GADGET_MAP_TABBUTTON_VARIABLES;
+            tbtnVariables.Description = DashboardSharedStrings.GADGET_MAP_TABDESC_VARIABLES;
+            tbtnDisplay.Title = DashboardSharedStrings.GADGET_MAP_TABBUTTON_DISPLAY;
+            tbtnDisplay.Description = DashboardSharedStrings.GADGET_MAP_TABDESC_DISPLAY;
+            tbtnFilters.Title = DashboardSharedStrings.GADGET_MAP_TABBUTTON_FILTERS;
+            tbtnFilters.Description = DashboardSharedStrings.GADGET_MAP_TABDESC_FILTERS;
 
             //Data Source Panel
             tblockPanelDataSource.Content = DashboardSharedStrings.GADGET_DATA_SOURCE;
@@ -154,7 +154,7 @@ namespace EpiDashboard.Controls
             lblValue.Content = DashboardSharedStrings.GADGET_MAP_VALUE;
 
             //Colors & Ranges Panel
-            lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_TAB_COLORS_RANGES;
+            lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_MAP_TABBUTTON_DISPLAY;
             tblockColorsSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
             lblMissingExcluded.Content = DashboardSharedStrings.GADGET_MAP_COLOR_MISSING;
             //lblColorRamp.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
@@ -183,8 +183,6 @@ namespace EpiDashboard.Controls
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
-            tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
-            tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
             tblockColorsSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
 
             #endregion // Translation
@@ -292,7 +290,7 @@ namespace EpiDashboard.Controls
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
 
-        private void tbtnCharts_Checked(object sender, RoutedEventArgs e)
+        private void tbtnDisplay_Checked(object sender, RoutedEventArgs e)
         {
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
@@ -423,7 +421,7 @@ namespace EpiDashboard.Controls
         }
 
 
-        private void tbtnHTML_Checked(object sender, RoutedEventArgs e)
+        private void tbtnVariables_Checked(object sender, RoutedEventArgs e)
         {
 
             CheckButtonStates(sender as ToggleButton);
@@ -2647,30 +2645,49 @@ namespace EpiDashboard.Controls
         {
             if (btnOK == null) return;
 
-            btnOK.IsEnabled = false;
-            tbtnHTML.Visibility = Visibility.Hidden;
-            tbtnCharts.Visibility = Visibility.Hidden;
-            tbtnFilters.Visibility = Visibility.Hidden;
-
-            if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text)
-                       || (!string.IsNullOrEmpty(txtMapSeverpath.Text)
-                       || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
+            if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text) || (!string.IsNullOrEmpty(txtMapSeverpath.Text) || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
             {
-                tbtnHTML.Visibility = Visibility.Visible;
-
                 if(cmbShapeKey.SelectedIndex != -1 && cmbDataKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
                 {
-                    tbtnCharts.Visibility = Visibility.Visible;
-                    tbtnFilters.Visibility = Visibility.Visible;
-
                     if (IsMissingLimitValue() == false)
                     {
-                btnOK.IsEnabled = true;
-            }
-            }
-        }
-        }
+                        btnOK.IsEnabled = true;
+                    }
+                    else
+                    {
+                        btnOK.IsEnabled = false;
+                    }
 
+                    if (tbtnDisplay.Visibility != System.Windows.Visibility.Visible)
+                    {
+                        tbtnDisplay.Visibility = Visibility.Visible;
+                        tbtnDisplay_Checked(this, new RoutedEventArgs());
+                    }
+                    
+                    tbtnFilters.Visibility = Visibility.Visible;
+                    return;                
+                }
+                else
+                {
+                    tbtnDisplay.Visibility = Visibility.Hidden;
+                    tbtnFilters.Visibility = Visibility.Hidden;
+                    btnOK.IsEnabled = false;
+                }
+
+                if (tbtnVariables.Visibility != System.Windows.Visibility.Visible)
+                {
+                    tbtnVariables.Visibility = Visibility.Visible;
+                    tbtnVariables_Checked(this, new RoutedEventArgs());
+                }
+            }
+            else
+            {
+                tbtnVariables.Visibility = Visibility.Hidden;
+                tbtnDisplay.Visibility = Visibility.Hidden;
+                tbtnFilters.Visibility = Visibility.Hidden;
+                btnOK.IsEnabled = false;
+            }
+        }
 
         private void PropertyChanged_EnableDisable(object sender, TextChangedEventArgs e)
         {
@@ -2706,9 +2723,9 @@ namespace EpiDashboard.Controls
             UpdateRangesCollection();
 
             if (IsMissingLimitValue())
-                        {
-                            return;
-                        }
+            {
+                return;
+            }
 
             List<ClassLimits> limits = thisProvider.ClassRangesDictionary.GetLimitValues();
 

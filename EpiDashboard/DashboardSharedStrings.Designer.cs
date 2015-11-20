@@ -2985,7 +2985,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Class Breaks.
+        ///   Looks up a localized string similar to Classes.
         /// </summary>
         public static string GADGET_MAP_CLASS_BREAKS {
             get {
@@ -3215,6 +3215,78 @@ namespace EpiDashboard {
         public static string GADGET_MAP_START {
             get {
                 return ResourceManager.GetString("GADGET_MAP_START", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Source.
+        /// </summary>
+        public static string GADGET_MAP_TABBUTTON_DATA_SOURCE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_TABBUTTON_DATA_SOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display.
+        /// </summary>
+        public static string GADGET_MAP_TABBUTTON_DISPLAY {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_TABBUTTON_DISPLAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Filters.
+        /// </summary>
+        public static string GADGET_MAP_TABBUTTON_FILTERS {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_TABBUTTON_FILTERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variables.
+        /// </summary>
+        public static string GADGET_MAP_TABBUTTON_VARIABLES {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_TABBUTTON_VARIABLES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step 1 of 3 - Choose data source..
+        /// </summary>
+        public static string GADGET_MAP_TABDESC_DATASOURCE {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_TABDESC_DATASOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step 3 of 3 - Choose display options..
+        /// </summary>
+        public static string GADGET_MAP_TABDESC_DISPLAY {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_TABDESC_DISPLAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Optional - Set data filters for layer..
+        /// </summary>
+        public static string GADGET_MAP_TABDESC_FILTERS {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_TABDESC_FILTERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step 2 of 3 - Choose variables for layer..
+        /// </summary>
+        public static string GADGET_MAP_TABDESC_VARIABLES {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_TABDESC_VARIABLES", resourceCulture);
             }
         }
         
@@ -4398,7 +4470,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose variables for map..
+        ///   Looks up a localized string similar to Step 2 of 3) Choose variables for map..
         /// </summary>
         public static string GADGET_TABDESC_MAP_VARIABLES {
             get {
@@ -4623,7 +4695,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select variables for map..
+        ///   Looks up a localized string similar to Select variables for layer..
         /// </summary>
         public static string GADGET_VARIABLES_CHORPLTH {
             get {
