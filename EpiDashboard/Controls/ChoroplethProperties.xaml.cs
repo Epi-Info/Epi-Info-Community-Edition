@@ -1562,23 +1562,17 @@ namespace EpiDashboard.Controls
             if (thisProvider != null)
             {
                 if (thisProvider.UseCustomColors)
+                {
                     rctColor0.Fill = new SolidColorBrush(thisProvider.CustomColorsDictionary.GetWithKey(rctColor0.Name));
+                    rctColor1.Fill = new SolidColorBrush(thisProvider.CustomColorsDictionary.GetWithKey(rctColor1.Name));
+                }
                 else
                 {
                     rctColor0.Fill = rampMissing;
                     thisProvider.CustomColorsDictionary.Add(rctColor0.Name, rampMissing.Color);
-                }
-
-
-                if (thisProvider.UseCustomColors)
-                    rctColor1.Fill = new SolidColorBrush(thisProvider.CustomColorsDictionary.GetWithKey(rctColor1.Name));
-                else
-                {
                     rctColor1.Fill = rampStart;
                     thisProvider.CustomColorsDictionary.Add(rctColor1.Name, rampStart.Color);
                 }
-
-
 
                 if (radShapeFile.IsChecked == true && thisProvider != null)
                 {
@@ -1599,25 +1593,26 @@ namespace EpiDashboard.Controls
                     quintile01.Text = choroplethKmlLayerProvider.QuantileValues[0].ToString();
                 }
 
-
-                Color coo;
-
+                Color color;
                 int i = 2;
-
                 int gradientControl = 1;
 
                 List<UIControls> uics = CreateUIControlsList();
 
                 foreach (UIControls uiControls in uics)
                 {
-
                     if (thisProvider.UseCustomColors)
-                        coo = thisProvider.CustomColorsDictionary.GetWithKey(uiControls.rectangle.Name);
+                    {
+                        color = thisProvider.CustomColorsDictionary.GetWithKey(uiControls.rectangle.Name);
+                    }
                     else
                     {
-                        coo = Color.FromArgb(Opacity, (byte)(rampStart.Color.R - ri * gradientControl), (byte)(rampStart.Color.G - gi * gradientControl),
+                        color = Color.FromArgb(Opacity, 
+                            (byte)(rampStart.Color.R - ri * gradientControl), 
+                            (byte)(rampStart.Color.G - gi * gradientControl), 
                             (byte)(rampStart.Color.B - bi * gradientControl));
-                        thisProvider.CustomColorsDictionary.Add(uiControls.rectangle.Name, coo);
+
+                        thisProvider.CustomColorsDictionary.Add(uiControls.rectangle.Name, color);
                     }
 
                     gradientControl++;
@@ -1628,9 +1623,10 @@ namespace EpiDashboard.Controls
                     uiControls.rampEnds.Visibility = System.Windows.Visibility.Visible;
                     uiControls.quintiles.Visibility = System.Windows.Visibility.Visible;
                     uiControls.legedTexts.Visibility = System.Windows.Visibility.Visible;
+                    
                     if (i++ > stratCount)
                     {
-                        coo = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+                        color = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
                         uiControls.rectangle.Visibility = System.Windows.Visibility.Hidden;
                         uiControls.rampStarts.Visibility = System.Windows.Visibility.Hidden;
                         uiControls.centerTexts.Visibility = System.Windows.Visibility.Hidden;
@@ -1638,7 +1634,8 @@ namespace EpiDashboard.Controls
                         uiControls.quintiles.Visibility = System.Windows.Visibility.Hidden;
                         uiControls.legedTexts.Visibility = System.Windows.Visibility.Hidden;
                     }
-                    if (isNewColorRamp) uiControls.rectangle.Fill = new SolidColorBrush(coo);
+
+                    if (isNewColorRamp) uiControls.rectangle.Fill = new SolidColorBrush(color);
 
                     if (radShapeFile.IsChecked == true && thisProvider != null)
                     {
@@ -1667,13 +1664,11 @@ namespace EpiDashboard.Controls
                         uiControls.rampEnds.Text = choroplethKmlLayerProvider.RangeValues[i - 2, 1];
                         uiControls.quintiles.Text = choroplethKmlLayerProvider.QuantileValues[i - 2].ToString();
                     }
-
-
                 }
 
                 EnableDisableClassRangeInput();
-
             }
+
             _initialRampCalc = false;
         }
 
@@ -1683,8 +1678,6 @@ namespace EpiDashboard.Controls
             {
                 if (element is System.Windows.Controls.TextBox)
                 {
-                    
-                    
                     string elementName = ((System.Windows.Controls.TextBox)element).Name;
 
                     if (elementName.StartsWith("ramp"))
@@ -1694,7 +1687,6 @@ namespace EpiDashboard.Controls
                 }
             }
         }
-
 
         private List<UIControls> CreateUIControlsList()
         {

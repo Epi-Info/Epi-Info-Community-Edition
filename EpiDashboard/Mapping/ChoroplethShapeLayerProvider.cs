@@ -32,7 +32,7 @@ namespace EpiDashboard.Mapping
         List<SolidColorBrush> _colors;
         int _classCount;
         public bool AreRangesSet { get; set; }
-        string[,] _rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
+        string[,] _rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }};
 
         float[] _quantileValues = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
         ThematicItem _thematicItem;
@@ -738,8 +738,6 @@ namespace EpiDashboard.Mapping
                 {
                     thematicItem.Min = Double.PositiveInfinity;
                     thematicItem.Max = Double.NegativeInfinity;
-                    //thematicItem.Min = Double.NegativeInfinity;
-                    //thematicItem.Max = Double.PositiveInfinity;
                     thematicItem.MinName = string.Empty;
                     thematicItem.MaxName = string.Empty;
                 }
@@ -773,37 +771,37 @@ namespace EpiDashboard.Mapping
         // TODO  CalculateThematicRange    
         private List<double> CalculateThematicRange(int classCount, ThematicItem thematicItem, List<double> valueList)
         {
-
             List<double> rangeStarts = new List<double>();
 
             if (RangesLoadedFromMapFile && RangeStartsFromMapFile != null)
             {
-                // create rangStarts from map7 file  
-                rangeStarts = this.RangeStartsFromMapFile;
+                rangeStarts = this.RangeStartsFromMapFile; // create rangStarts from map7 file 
             }
             else
             {
-
                 double totalRange = thematicItem.Max - thematicItem.Min;
                 double portion = totalRange / classCount;
-
                 rangeStarts.Add(thematicItem.Min);
                 double startRangeValue = thematicItem.Min;
+                
                 IEnumerable<double> valueEnumerator =
                     from aValue in valueList
                     orderby aValue
                     select aValue;
 
-//                int increment = Convert.ToInt32(Math.Round((double)valueList.Count / (double)classCount));
                 double increment = (double)valueList.Count / (double)classCount;
+
                 for (double i = increment - 1.0; Math.Round(i, 4) < valueList.Count - 1; i += increment)
                 {
                     double value0 = valueEnumerator.ElementAt(Convert.ToInt32(Math.Floor(i)));
                     double value1 = valueEnumerator.ElementAt(Convert.ToInt32(Math.Ceiling(i)));
                     double value = (value1 + value0) / 2.0;
-//                    double value = valueEnumerator.ElementAt(i);
+                    
                     if (value < thematicItem.Min)
+                    { 
                         value = thematicItem.Min;
+                    }
+
                     rangeStarts.Add(value);
                 }
             }
@@ -823,35 +821,15 @@ namespace EpiDashboard.Mapping
             _colors = colors;
 
             DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
-
             GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
             _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
-            //RangeCount = thematicItem.RangeStarts.Count;
-            //Array.Clear(RangeValues, 0, RangeValues.Length);
-            //for (int i = 0; i < thematicItem.RangeStarts.Count; i++)
-            //{
-            //    RangeValues[i, 0] = thematicItem.RangeStarts[i].ToString();
 
-
-            //    if (i < thematicItem.RangeStarts.Count - 1)
-            //    {
-            //        RangeValues[i, 1] = thematicItem.RangeStarts[i + 1].ToString();
-            //    }
-            //    else
-            //    {
-            //        RangeValues[i, 1] = thematicItem.Max.ToString();
-            //    }
-
-            //}
-            if (Range != null &&
-                Range.Count > 0)
+            if (Range != null && Range.Count > 0)
             {
                 _thematicItem.RangeStarts = Range;
             }
 
             PopulateRangeValues();
-            //return thematicItem;
-
         }
 
         public void PopulateRangeValues()
