@@ -197,7 +197,7 @@
             </ScrollViewer>
         </DockPanel>
 
-        <StackPanel x:Name="panelHTML" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
+        <StackPanel x:Name="panelVariables" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
             <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
             <Label x:Name="tblockSelectVarData" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Select variables for map.</Label>
             <StackPanel Orientation="Horizontal">
@@ -250,7 +250,7 @@
             <TextBlock x:Name="tblockCurrentEpiVersion" Text="Epi Info 7.0.0.0" Margin="0,0,0,16" />
         </StackPanel>
 
-        <StackPanel x:Name="panelCharts" Grid.Column="2" Grid.Row="1"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+        <StackPanel x:Name="panelDisplay" Grid.Column="2" Grid.Row="1"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <Label x:Name="lblPanelHdrColorsAndStyles" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Color and Ranges</Label>
             <!--<Label>Note: Any filters set here are applied to this gadget only.</Label>-->
 
