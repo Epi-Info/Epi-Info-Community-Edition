@@ -132,7 +132,7 @@ namespace EpiDashboard.Controls
 
             //Variables Panel
             tblockPanelVariables.Content = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
-            tblockSelectVarData.Content = DashboardSharedStrings.GADGET_VARIABLES_CHORPLTH;
+            //tblockSelectVarData.Content = DashboardSharedStrings.GADGET_VARIABLES_CHORPLTH;
             lblFeature.Content = DashboardSharedStrings.GADGET_MAP_FEATURE;
             lblData.Content = DashboardSharedStrings.GADGET_MAP_DATA;
             lblValue.Content = DashboardSharedStrings.GADGET_MAP_VALUE;
@@ -268,8 +268,8 @@ namespace EpiDashboard.Controls
         {
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Visible;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -278,8 +278,8 @@ namespace EpiDashboard.Controls
         {
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Visible;
+            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Visible;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
             SetDefaultRanges();
@@ -410,8 +410,8 @@ namespace EpiDashboard.Controls
 
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            panelHTML.Visibility = System.Windows.Visibility.Visible;
-            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelVariables.Visibility = System.Windows.Visibility.Visible;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
             if (choroplethServerLayerProperties != null)
@@ -426,8 +426,8 @@ namespace EpiDashboard.Controls
             if (panelDataSource == null) return;
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Visible;
         }
@@ -437,8 +437,8 @@ namespace EpiDashboard.Controls
             if (panelDataSource == null) return;
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Visible;
-            panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }

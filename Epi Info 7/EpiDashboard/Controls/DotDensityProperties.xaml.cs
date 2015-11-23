@@ -397,52 +397,47 @@ namespace EpiDashboard.Controls
 
         private void tbtnInfo_Checked(object sender, RoutedEventArgs e)
         {
-          //  btnOK.Visibility = Visibility.Hidden;
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Visible;
         }
 
         private void tbtnDisplay_Checked(object sender, RoutedEventArgs e)
         {
-          //  btnOK.Visibility = Visibility.Hidden;
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Visible;
+            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Visible;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private void tbtnVariables_Checked(object sender, RoutedEventArgs e)
         {
-            
-                //btnOK.Visibility = Visibility.Hidden;
-                CheckButtonStates(sender as ToggleButton);
-                panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-                panelHTML.Visibility = System.Windows.Visibility.Visible;
-                panelCharts.Visibility = System.Windows.Visibility.Collapsed;
-                panelInfo.Visibility = System.Windows.Visibility.Collapsed;
-                panelFilters.Visibility = System.Windows.Visibility.Collapsed;
-                if (serverlayerprop != null)
-                    if (serverlayerprop.provider.FlagUpdateToGLFailed) { ResetShapeCombo(); }
-                
-                
-           
-            
+            CheckButtonStates(sender as ToggleButton);
+            panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
+            panelVariables.Visibility = System.Windows.Visibility.Visible;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
+            panelInfo.Visibility = System.Windows.Visibility.Collapsed;
+            panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+
+            if (serverlayerprop != null)
+            {
+                if (serverlayerprop.provider.FlagUpdateToGLFailed) { ResetShapeCombo(); }
+            }
         }
 
         private void tbtnDataSource_Checked(object sender, RoutedEventArgs e)
         {
-           
             if (panelDataSource == null) return;
+
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Visible;
-            panelHTML.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -451,9 +446,9 @@ namespace EpiDashboard.Controls
         {
            
             CheckButtonStates(sender as SettingsToggleButton);
-            panelHTML.Visibility = System.Windows.Visibility.Collapsed;
+            panelVariables.Visibility = System.Windows.Visibility.Collapsed;
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Collapsed;
+            panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;                          
             panelFilters.Visibility = System.Windows.Visibility.Visible;           
         }
