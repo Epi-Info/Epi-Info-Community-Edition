@@ -157,7 +157,6 @@ namespace EpiDashboard.Controls
             //Filters Panel
             tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
             tblockSetDataFilter.Content = DashboardSharedStrings.GADGET_TABDESC_FILTERS_MAPS;
-            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_MAP_SELECT_DATASOURCE;
 
             //Info Panel
             //lblCanvasInfo.Content = DashboardSharedStrings.GADGET_CANVAS_INFO;
@@ -595,7 +594,6 @@ namespace EpiDashboard.Controls
 
                 }
                 panelFilters.Children.Add(rowFilterControl);
-                tblockAnyFilterGadgetOnly.Visibility = Visibility.Collapsed;
                 //txtNote.Text = "Note: Any filters set here are applied to this gadget only.";
             }
 
