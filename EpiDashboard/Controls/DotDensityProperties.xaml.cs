@@ -1103,7 +1103,7 @@ namespace EpiDashboard.Controls
 
         private void txtMapSeverpath_TextChanged(object sender, TextChangedEventArgs e)
         {
-            PropertyChanged_EnableDisable();
+            //PropertyChanged_EnableDisable();
             btnMapserverlocate.IsEnabled = txtMapSeverpath.Text.Length > 0;
         }
 
