@@ -344,9 +344,8 @@
                         <Label x:Name="tblockRangesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Ranges</Label>
                             
                             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                                <Label x:Name="lblClassBreaks" >Classes</Label>
-
-                                <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" Width="50" Height="25" Margin="0,0,0,0" SelectionChanged="ClassCount_Changed">
+                                <Label x:Name="lblClassBreaks" VerticalAlignment="Center" >Classes</Label>
+                                <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Height="25" Margin="0,0,0,0" SelectionChanged="ClassCount_Changed">
                                     <ComboBoxItem>2</ComboBoxItem>
                                     <ComboBoxItem>3</ComboBoxItem>
                                     <ComboBoxItem>4</ComboBoxItem>
@@ -357,14 +356,10 @@
                                     <ComboBoxItem>9</ComboBoxItem>
                                     <ComboBoxItem>10</ComboBoxItem>
                                 </ComboBox>
-
-                            </StackPanel>
-
-                        <StackPanel Margin="0 10 0 0">
-                            <CheckBox Style="{StaticResource PropertiesPanelCheckbox}" x:Name="quintilesOption" Click="CheckBox_Quantiles_Click" IsChecked="True"  Content="Quantiles" HorizontalAlignment="Left" Margin=" 5,0,0,16" />
+                                <CheckBox Style="{StaticResource PropertiesPanelCheckbox}" x:Name="quintilesOption" Click="CheckBox_Quantiles_Click" IsChecked="True" Content="Quantiles" HorizontalAlignment="Left" VerticalAlignment="Center" Margin=" 25,0,0,0" />
                         </StackPanel>
                         
-                        <StackPanel Margin="0 0 0 0">
+                        <StackPanel Margin="0 10 0 0">
                             <Grid x:Name="stratGrid">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -441,17 +436,6 @@
                                 <TextBox Grid.Row="09" x:Name="rampEnd08" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
                                 <TextBox Grid.Row="10" x:Name="rampEnd09" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
                                 <TextBox Grid.Row="11" x:Name="rampEnd10" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
-
-                                <TextBox Grid.Row="02" x:Name="quintile01" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="03" x:Name="quintile02" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="04" x:Name="quintile03" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="05" x:Name="quintile04" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="06" x:Name="quintile05" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="07" x:Name="quintile06" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="08" x:Name="quintile07" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="09" x:Name="quintile08" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="10" x:Name="quintile09" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
-                                <TextBox Grid.Row="11" x:Name="quintile10" Grid.Column="4" MinWidth="60" Height="30" HorizontalAlignment="Center"/>
 
                             <TextBox Grid.Row="01" x:Name="legendText0" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center" Text="Missing / Excluded" IsEnabled="False"/>
                             <TextBox Grid.Row="02" x:Name="legendText1" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>

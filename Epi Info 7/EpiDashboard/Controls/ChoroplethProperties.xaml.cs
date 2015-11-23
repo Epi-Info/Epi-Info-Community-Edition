@@ -13,29 +13,18 @@ using EpiDashboard.Mapping;
 using System.Windows.Forms;
 using System.Net;
 using ESRI.ArcGIS.Client.Geometry;
-
 using ESRI.ArcGIS.Client.Toolkit;
-
-
-
-
-
 
 namespace EpiDashboard.Controls
 {
-
-
     public class UIControls
     {
         public Rectangle rectangle;
         public System.Windows.Controls.TextBox rampStarts;
         public System.Windows.Controls.TextBlock centerTexts;
         public System.Windows.Controls.TextBox rampEnds;
-        public System.Windows.Controls.TextBox quintiles;
         public System.Windows.Controls.TextBox legedTexts;
-
     }
-
 
     /// <summary>
     /// Interaction logic for DashboardProperties.xaml
@@ -51,9 +40,7 @@ namespace EpiDashboard.Controls
         private SolidColorBrush _currentColor_rampEnd;
         private bool _initialRampCalc;
 
-
         public IChoroLayerProvider thisProvider;
-
 
         public ChoroplethKmlLayerProvider choroplethKmlLayerProvider;
         public ChoroplethServerLayerProvider choroplethServerLayerProvider;
@@ -62,7 +49,6 @@ namespace EpiDashboard.Controls
         public ChoroplethShapeLayerProperties choroplethShapeLayerProperties;
         public ChoroplethServerLayerProperties choroplethServerLayerProperties;
         public ChoroplethKmlLayerProperties choroplethKmlLayerProperties;
-
 
         public RowFilterControl rowFilterControl { get; set; }
         public DataFilters datafilters { get; set; }
@@ -84,12 +70,10 @@ namespace EpiDashboard.Controls
         private struct classAttributes
         {
             public Brush rctColor;
-            public string quintile;
             public string rampStart;
             public string rampEnd;
             public string legendText;
         }
-
 
         public ChoroplethProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
         {
@@ -734,14 +718,12 @@ namespace EpiDashboard.Controls
 
         private void AddClassAttributes()
         {
-
             ClassAttribList.Clear();
 
             classAttributes ca1 = new classAttributes();
             ca1.rctColor = rctColor1.Fill;
             ca1.rampStart = rampStart01.Text;
             ca1.rampEnd = rampEnd01.Text;
-            ca1.quintile = quintile01.Text;
             ca1.legendText = legendText1.Text;
             ClassAttribList.Add(1, ca1);
 
@@ -749,7 +731,6 @@ namespace EpiDashboard.Controls
             ca2.rctColor = rctColor2.Fill;
             ca2.rampStart = rampStart02.Text;
             ca2.rampEnd = rampEnd02.Text;
-            ca2.quintile = quintile02.Text;
             ca2.legendText = legendText2.Text;
             ClassAttribList.Add(2, ca2);
 
@@ -757,7 +738,6 @@ namespace EpiDashboard.Controls
             ca3.rctColor = rctColor3.Fill;
             ca3.rampStart = rampStart03.Text;
             ca3.rampEnd = rampEnd03.Text;
-            ca3.quintile = quintile03.Text;
             ca3.legendText = legendText3.Text;
             ClassAttribList.Add(3, ca3);
 
@@ -765,7 +745,6 @@ namespace EpiDashboard.Controls
             ca4.rctColor = rctColor4.Fill;
             ca4.rampStart = rampStart04.Text;
             ca4.rampEnd = rampEnd04.Text;
-            ca4.quintile = quintile04.Text;
             ca4.legendText = legendText4.Text;
             ClassAttribList.Add(4, ca4);
 
@@ -773,7 +752,6 @@ namespace EpiDashboard.Controls
             ca5.rctColor = rctColor5.Fill;
             ca5.rampStart = rampStart05.Text;
             ca5.rampEnd = rampEnd05.Text;
-            ca5.quintile = quintile05.Text;
             ca5.legendText = legendText5.Text;
             ClassAttribList.Add(5, ca5);
 
@@ -781,7 +759,6 @@ namespace EpiDashboard.Controls
             ca6.rctColor = rctColor6.Fill;
             ca6.rampStart = rampStart06.Text;
             ca6.rampEnd = rampEnd06.Text;
-            ca6.quintile = quintile06.Text;
             ca6.legendText = legendText6.Text;
             ClassAttribList.Add(6, ca6);
 
@@ -789,7 +766,6 @@ namespace EpiDashboard.Controls
             ca7.rctColor = rctColor7.Fill;
             ca7.rampStart = rampStart07.Text;
             ca7.rampEnd = rampEnd07.Text;
-            ca7.quintile = quintile07.Text;
             ca7.legendText = legendText7.Text;
             ClassAttribList.Add(7, ca7);
 
@@ -797,7 +773,6 @@ namespace EpiDashboard.Controls
             ca8.rctColor = rctColor8.Fill;
             ca8.rampStart = rampStart08.Text;
             ca8.rampEnd = rampEnd08.Text;
-            ca8.quintile = quintile08.Text;
             ca8.legendText = legendText8.Text;
             ClassAttribList.Add(8, ca8);
 
@@ -805,7 +780,6 @@ namespace EpiDashboard.Controls
             ca9.rctColor = rctColor9.Fill;
             ca9.rampStart = rampStart09.Text;
             ca9.rampEnd = rampEnd09.Text;
-            ca9.quintile = quintile09.Text;
             ca9.legendText = legendText9.Text;
             ClassAttribList.Add(9, ca9);
 
@@ -813,12 +787,10 @@ namespace EpiDashboard.Controls
             ca10.rctColor = rctColor10.Fill;
             ca10.rampStart = rampStart10.Text;
             ca10.rampEnd = rampEnd10.Text;
-            ca10.quintile = quintile10.Text;
             ca10.legendText = legendText10.Text;
             ClassAttribList.Add(10, ca10);
 
             UpdateRangesCollection();
-
         }
 
         private bool ValidateInputValue(System.Windows.Controls.TextBox textBox)
@@ -1578,19 +1550,16 @@ namespace EpiDashboard.Controls
                 {
                     rampStart01.Text = thisProvider.RangeValues[0, 0];
                     rampEnd01.Text = thisProvider.RangeValues[0, 1];
-                    quintile01.Text = thisProvider.QuantileValues[0].ToString();
                 }
                 else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
                 {
                     rampStart01.Text = choroplethServerLayerProvider.RangeValues[0, 0];
                     rampEnd01.Text = choroplethServerLayerProvider.RangeValues[0, 1];
-                    quintile01.Text = choroplethServerLayerProvider.QuantileValues[0].ToString();
                 }
                 else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
                 {
                     rampStart01.Text = choroplethKmlLayerProvider.RangeValues[0, 0];
                     rampEnd01.Text = choroplethKmlLayerProvider.RangeValues[0, 1];
-                    quintile01.Text = choroplethKmlLayerProvider.QuantileValues[0].ToString();
                 }
 
                 Color color;
@@ -1621,7 +1590,6 @@ namespace EpiDashboard.Controls
                     uiControls.rampStarts.Visibility = System.Windows.Visibility.Visible;
                     uiControls.centerTexts.Visibility = System.Windows.Visibility.Visible;
                     uiControls.rampEnds.Visibility = System.Windows.Visibility.Visible;
-                    uiControls.quintiles.Visibility = System.Windows.Visibility.Visible;
                     uiControls.legedTexts.Visibility = System.Windows.Visibility.Visible;
                     
                     if (i++ > stratCount)
@@ -1631,7 +1599,6 @@ namespace EpiDashboard.Controls
                         uiControls.rampStarts.Visibility = System.Windows.Visibility.Hidden;
                         uiControls.centerTexts.Visibility = System.Windows.Visibility.Hidden;
                         uiControls.rampEnds.Visibility = System.Windows.Visibility.Hidden;
-                        uiControls.quintiles.Visibility = System.Windows.Visibility.Hidden;
                         uiControls.legedTexts.Visibility = System.Windows.Visibility.Hidden;
                     }
 
@@ -1643,26 +1610,22 @@ namespace EpiDashboard.Controls
                         {
                             uiControls.rampStarts.Text = thisProvider.ClassRangesDictionary.Dict[uiControls.rampStarts.Name];
                             uiControls.rampEnds.Text = thisProvider.ClassRangesDictionary.Dict[uiControls.rampEnds.Name];
-                            uiControls.quintiles.Text = thisProvider.QuantileValues[i - 2].ToString();
                         }
                         else
                         {
                             uiControls.rampStarts.Text = thisProvider.RangeValues[i - 2, 0];
                             uiControls.rampEnds.Text = thisProvider.RangeValues[i - 2, 1];
-                            uiControls.quintiles.Text = thisProvider.QuantileValues[i - 2].ToString();
                         }
                     }
                     else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
                     {
                         uiControls.rampStarts.Text = choroplethServerLayerProvider.RangeValues[i - 2, 0];
                         uiControls.rampEnds.Text = choroplethServerLayerProvider.RangeValues[i - 2, 1];
-                        uiControls.quintiles.Text = choroplethServerLayerProvider.QuantileValues[i - 2].ToString();
                     }
                     else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
                     {
                         uiControls.rampStarts.Text = choroplethKmlLayerProvider.RangeValues[i - 2, 0];
                         uiControls.rampEnds.Text = choroplethKmlLayerProvider.RangeValues[i - 2, 1];
-                        uiControls.quintiles.Text = choroplethKmlLayerProvider.QuantileValues[i - 2].ToString();
                     }
                 }
 
@@ -1690,9 +1653,6 @@ namespace EpiDashboard.Controls
 
         private List<UIControls> CreateUIControlsList()
         {
-
-            // List<UIControls> uiControlsList = 
-
             return new List<UIControls>()
             {
                 new UIControls()
@@ -1700,106 +1660,75 @@ namespace EpiDashboard.Controls
                     centerTexts = centerText02,
                     legedTexts = legendText2,
                     rectangle = rctColor2,
-                    quintiles = quintile02,
                     rampEnds = rampEnd02,
                     rampStarts = rampStart02
-
-
                 },
                 new UIControls()
                 {
                     centerTexts = centerText03,
                     legedTexts = legendText3,
                     rectangle = rctColor3,
-                    quintiles = quintile03,
                     rampEnds = rampEnd03,
                     rampStarts = rampStart03
-
-
                 }, 
-                  new UIControls()
+                new UIControls()
                 {
                     centerTexts = centerText04,
                     legedTexts = legendText4,
                     rectangle = rctColor4,
-                    quintiles = quintile04,
                     rampEnds = rampEnd04,
                     rampStarts = rampStart04
-
-
                 },
                 new UIControls()
                 {
                     centerTexts = centerText05,
                     legedTexts = legendText5,
                     rectangle = rctColor5,
-                    quintiles = quintile05,
                     rampEnds = rampEnd05,
                     rampStarts = rampStart05
-
-
                 },
                 new UIControls()
                 {
                     centerTexts = centerText06,
                     legedTexts = legendText6,
                     rectangle = rctColor6,
-                    quintiles = quintile06,
                     rampEnds = rampEnd06,
                     rampStarts = rampStart06
-
-
                 },
                 new UIControls()
                 {
                     centerTexts = centerText07,
                     legedTexts = legendText7,
                     rectangle = rctColor7,
-                    quintiles = quintile07,
                     rampEnds = rampEnd07,
                     rampStarts = rampStart07
-
-
                 },
                 new UIControls()
                 {
                     centerTexts = centerText08,
                     legedTexts = legendText8,
                     rectangle = rctColor8,
-                    quintiles = quintile08,
                     rampEnds = rampEnd08,
                     rampStarts = rampStart08
-
-
                 },
                 new UIControls()
                 {
                     centerTexts = centerText09,
                     legedTexts = legendText9,
                     rectangle = rctColor9,
-                    quintiles = quintile09,
                     rampEnds = rampEnd09,
                     rampStarts = rampStart09
-
-
                 },
                 new UIControls()
                 {
                     centerTexts = centerText10,
                     legedTexts = legendText10,
                     rectangle = rctColor10,
-                    quintiles = quintile10,
                     rampEnds = rampEnd10 ,
                     rampStarts = rampStart10  
-
-
                 },
- 
             };
-
-
         }
-
 
         private void CheckBox_Quantiles_Click(object sender, RoutedEventArgs e)
         {
