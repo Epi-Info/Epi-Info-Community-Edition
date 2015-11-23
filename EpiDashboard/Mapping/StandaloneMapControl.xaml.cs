@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Windows;
@@ -19,6 +20,12 @@ using Epi.Data;
 using EpiDashboard.Controls;
 using ESRI.ArcGIS.Client.Symbols;
 using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
+using Brush = System.Windows.Media.Brush;
+using Brushes = System.Windows.Media.Brushes;
+using Color = System.Windows.Media.Color;
+using FontFamily = System.Windows.Media.FontFamily;
+using Point = System.Windows.Point;
+using Size = System.Windows.Size;
 
 namespace EpiDashboard.Mapping
 {
@@ -65,6 +72,10 @@ namespace EpiDashboard.Mapping
 
         public double ResizedWidth { get; set; }
         public double ResizedHeight { get; set; }
+
+        //Create a new ScaleLine Control and add it to the LayoutRoot (a Grid in the XAML)
+        ESRI.ArcGIS.Client.Toolkit.ScaleLine ScaleLine1 = new ESRI.ArcGIS.Client.Toolkit.ScaleLine();
+
 
         public StandaloneMapControl()
         {
@@ -416,6 +427,7 @@ namespace EpiDashboard.Mapping
                 myMap.MouseMove += new MouseEventHandler(myMap_MouseMove);
                 myMap.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
                 myMap.Loaded += new RoutedEventHandler(myMap_Loaded);
+                myMap.ExtentChanged += myMap_ExtentChanged;
 
                 MapContainer.Children.Add(myMap);
 
@@ -453,20 +465,19 @@ namespace EpiDashboard.Mapping
 
 
 
-                  MarkerSymbol  s = new KmlPlaceMarkerSymbol();
+                MarkerSymbol s = new KmlPlaceMarkerSymbol();
 
-                s.Angle = myMap.Rotation;    
+                s.Angle = myMap.Rotation;
 
 
 
                 //Create a new ScaleLine Control and add it to the LayoutRoot (a Grid in the XAML)
-                ESRI.ArcGIS.Client.Toolkit.ScaleLine ScaleLine1 = new ESRI.ArcGIS.Client.Toolkit.ScaleLine();
+                //  ESRI.ArcGIS.Client.Toolkit.ScaleLine ScaleLine1 = new ESRI.ArcGIS.Client.Toolkit.ScaleLine();
 
                 ScaleLine1.MouseDoubleClick += ScaleLine1_MouseDoubleClick;
                 grdScale.Children.Add(ScaleLine1);
 
                 Grid.SetRow(ScaleLine1, 0);
-                        
 
 
                 //Associate the ScaleLine with Map Control (analagous to a OneTime Binding). Most common coding pattern.
@@ -508,6 +519,270 @@ namespace EpiDashboard.Mapping
             {
             }
         }
+
+        void myMap_ExtentChanged(object sender, ExtentEventArgs e)
+        {
+            AdjustScaleLine();
+
+        }
+
+        //  scaleLocation.X, scaleLocation.Y, ScaleLine1.Width,
+        //  ScaleLine1.Height);
+        private void AdjustScaleLine()
+        {
+
+            if (ScaleLine1.ActualWidth == 0)
+                return;
+
+            Point scaleLocation = ScaleLine1.PointToScreen(new Point(0, 0));
+            Rect r = new Rect(ScaleLine1.RenderSize);
+            System.Drawing.Point p = new System.Drawing.Point((int)scaleLocation.X, (int)scaleLocation.Y);
+            System.Drawing.Size s = new System.Drawing.Size((int)ScaleLine1.RenderSize.Width, (int)ScaleLine1.RenderSize.Height);
+            //  System.Windows.Size s = new System.Windows.Size(scaleLocation.X, scaleLocation.Y);    
+
+            Rectangle controlRectangle = new Rectangle(p, s);  //  Convert.ToInt32(ScaleLine1.Width), Convert.ToInt32(ScaleLine1.Height));
+
+
+            Bitmap controlBitmap = GetControlBitmap(controlRectangle, p);
+            //  controlBitmap.Save(@"c:\temp\xx.jpg");
+            System.Drawing.Color domColor = getDominantColor(controlBitmap);
+            System.Windows.Media.Color complimentaryColor = GetContrast(ToMediaColor(domColor), false);
+
+            ScaleLine1.Foreground = new SolidColorBrush(complimentaryColor);
+
+
+        }
+
+
+
+
+        private Bitmap GetControlBitmap(Rectangle controlRectangle, System.Drawing.Point p)
+        {
+            Bitmap bmp = new Bitmap(controlRectangle.Width / 2, controlRectangle.Height);
+
+            Graphics g = Graphics.FromImage(bmp);
+            //g.CopyFromScreen(controlRectangle.X, controlRectangle.Y, controlRectangle.Right, controlRectangle.Bottom,
+            //    new System.Drawing.Size(controlRectangle.Width, controlRectangle.Height));
+            g.CopyFromScreen(p.X + controlRectangle.Width / 2, p.Y, 0, 0,
+                new System.Drawing.Size(controlRectangle.Width / 2, controlRectangle.Height));
+
+            return bmp;
+        }
+
+
+        public static System.Windows.Media.Color ToMediaColor(System.Drawing.Color color)
+        {
+            return System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+        }
+
+        public static System.Drawing.Color getDominantColor(Bitmap bmp)
+        {
+            //Used for tally
+            int r = 0;
+            int g = 0;
+            int b = 0;
+
+            int total = 0;
+
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+                    System.Drawing.Color clr = bmp.GetPixel(x, y);
+
+                    r += clr.R;
+                    g += clr.G;
+                    b += clr.B;
+
+                    total++;
+                }
+            }
+
+            //Calculate average
+            r /= total;
+            g /= total;
+            b /= total;
+
+            return System.Drawing.Color.FromArgb(Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b));
+        }
+
+
+        ////////////////////////////////////////////////////////////////////
+
+        public static Color GetContrast(Color Source, bool PreserveOpacity)
+        {
+            Color inputColor = Source;
+            //if RGB values are close to each other by a diff less than 10%, then if RGB values are lighter side, decrease the blue by 50% (eventually it will increase in conversion below), if RBB values are on darker side, decrease yellow by about 50% (it will increase in conversion)
+            byte avgColorValue = (byte)((Source.R + Source.G + Source.B) / 3);
+            int diff_r = Math.Abs(Source.R - avgColorValue);
+            int diff_g = Math.Abs(Source.G - avgColorValue);
+            int diff_b = Math.Abs(Source.B - avgColorValue);
+            if (diff_r < 20 && diff_g < 20 && diff_b < 20) //The color is a shade of gray
+            {
+                if (avgColorValue < 123) //color is dark
+                {
+                    inputColor = Color.FromArgb(Source.A, 220, 230, 50);
+                }
+                else
+                {
+                    inputColor = Color.FromArgb(Source.A, 255, 255, 50);
+                }
+            }
+
+            byte sourceAlphaValue = Source.A;
+            if (!PreserveOpacity)
+            {
+                sourceAlphaValue = Math.Max(Source.A, (byte)127); //We don't want contrast color to be more than 50% transparent ever.
+            }
+
+            RGB rgb = new RGB { R = inputColor.R, G = inputColor.G, B = inputColor.B };
+            HSB hsb = ConvertToHSB(rgb);
+            hsb.H = hsb.H < 180 ? hsb.H + 180 : hsb.H - 180;
+            //_hsb.B = _isColorDark ? 240 : 50; //Added to create dark on light, and light on dark
+            rgb = ConvertToRGB(hsb);
+            return Color.FromArgb(sourceAlphaValue, (byte)rgb.R, (byte)rgb.G, (byte)rgb.B);
+        }
+
+        #region Code from MSDN
+
+        internal static RGB ConvertToRGB(HSB hsb)
+        {
+            // Following code is taken as it is from MSDN. See link below.
+            // By: <a href="http://blogs.msdn.com/b/codefx/archive/2012/02/09/create-a-color-picker-for-windows-phone.aspx" title="MSDN" target="_blank">Yi-Lun Luo</a>
+            double chroma = hsb.S * hsb.B;
+            double hue2 = hsb.H / 60;
+            double x = chroma * (1 - Math.Abs(hue2 % 2 - 1));
+            double r1 = 0d;
+            double g1 = 0d;
+            double b1 = 0d;
+            if (hue2 >= 0 && hue2 < 1)
+            {
+                r1 = chroma;
+                g1 = x;
+            }
+            else if (hue2 >= 1 && hue2 < 2)
+            {
+                r1 = x;
+                g1 = chroma;
+            }
+            else if (hue2 >= 2 && hue2 < 3)
+            {
+                g1 = chroma;
+                b1 = x;
+            }
+            else if (hue2 >= 3 && hue2 < 4)
+            {
+                g1 = x;
+                b1 = chroma;
+            }
+            else if (hue2 >= 4 && hue2 < 5)
+            {
+                r1 = x;
+                b1 = chroma;
+            }
+            else if (hue2 >= 5 && hue2 <= 6)
+            {
+                r1 = chroma;
+                b1 = x;
+            }
+
+            double m = hsb.B - chroma;
+            return new RGB()
+            {
+                R = r1 + m,
+                G = g1 + m,
+                B = b1 + m
+            };
+        }
+
+        internal static HSB ConvertToHSB(RGB rgb)
+        {
+            // Following code is taken as it is from MSDN. See link below.
+            // By: <a href="http://blogs.msdn.com/b/codefx/archive/2012/02/09/create-a-color-picker-for-windows-phone.aspx" title="MSDN" target="_blank">Yi-Lun Luo</a>
+            double r = rgb.R;
+            double g = rgb.G;
+            double b = rgb.B;
+
+            double max = Max(r, g, b);
+            double min = Min(r, g, b);
+            double chroma = max - min;
+            double hue2 = 0d;
+            if (chroma != 0)
+            {
+                if (max == r)
+                {
+                    hue2 = (g - b) / chroma;
+                }
+                else if (max == g)
+                {
+                    hue2 = (b - r) / chroma + 2;
+                }
+                else
+                {
+                    hue2 = (r - g) / chroma + 4;
+                }
+            }
+
+            double hue = hue2 * 60;
+            if (hue < 0)
+            {
+                hue += 360;
+            }
+
+            double brightness = max;
+            double saturation = 0;
+            if (chroma != 0)
+            {
+                saturation = chroma / brightness;
+            }
+
+            return new HSB()
+            {
+                H = hue,
+                S = saturation,
+                B = brightness
+            };
+        }
+
+        private static double Max(double d1, double d2, double d3)
+        {
+            if (d1 > d2)
+            {
+                return Math.Max(d1, d3);
+            }
+
+            return Math.Max(d2, d3);
+        }
+
+        private static double Min(double d1, double d2, double d3)
+        {
+            if (d1 < d2)
+            {
+                return Math.Min(d1, d3);
+            }
+
+            return Math.Min(d2, d3);
+        }
+
+        internal struct RGB
+        {
+            internal double R;
+            internal double G;
+            internal double B;
+        }
+
+        internal struct HSB
+        {
+            internal double H;
+            internal double S;
+            internal double B;
+        }
+
+        #endregion //Code from MSDN
+
+
+
+        //////////////////////////////////////////////////////////////////////
 
         void ScaleLine1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
