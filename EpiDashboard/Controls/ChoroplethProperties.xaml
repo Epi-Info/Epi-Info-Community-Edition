@@ -44,7 +44,7 @@
             <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Visibility="Hidden" Checked="tbtnFilters_Checked" />
         </StackPanel>
 
-        <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible" VerticalAlignment="Stretch">
+        <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 0">Data Source</Label>
                 <StackPanel Orientation="Horizontal">
@@ -163,10 +163,9 @@
             </ScrollViewer>
         </DockPanel>
 
-        <DockPanel x:Name="panelVariables" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
+        <DockPanel x:Name="panelVariables" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables</Label>
-                <!--<Label x:Name="tblockSelectVarData" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Select variables for map.</Label>-->
+                <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 0">Variables</Label>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock FontSize="15"  Foreground="Red" Margin="0 1 0 0 ">*</TextBlock>
                     <TextBlock FontSize="10" Foreground="Red" Margin="3 0 0 10" x:Name="variablesRequiredFields"> = Required field(s)</TextBlock>
@@ -227,7 +226,7 @@
             </ScrollViewer>
         </DockPanel>
 
-        <DockPanel x:Name="panelInfo" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
+        <DockPanel x:Name="panelInfo" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Canvas Information</Label>
             </StackPanel>
@@ -242,7 +241,7 @@
             </ScrollViewer>
         </DockPanel>
 
-        <DockPanel x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="8" Visibility="Collapsed">
+        <DockPanel x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="lblPanelHdrColorsAndStyles" Style="{StaticResource PropertiesHeading}" Margin="0 0 0 10">Colors and Ranges</Label>
             </StackPanel>
@@ -433,13 +432,9 @@
             <StackPanel Grid.Column="2" DockPanel.Dock="Top" >
                 <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
                 <Label x:Name="tblockSetDataFilter" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this layer.</Label>
-                <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: First select a data source to add a filter to layer.</Label>
-                 
             </StackPanel>
         </DockPanel>
-
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
-
         <DockPanel Grid.ColumnSpan="3" Grid.Row="2">
             <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
             <Button x:Name="btnOK" DockPanel.Dock="Right" IsEnabled="false" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
