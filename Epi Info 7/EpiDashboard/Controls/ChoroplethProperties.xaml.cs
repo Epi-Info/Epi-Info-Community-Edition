@@ -624,10 +624,8 @@ namespace EpiDashboard.Controls
             {
                 if (child.GetType().FullName.Contains("EpiDashboard.RowFilterControl"))
                 {
-
                     HasFilter = true;
                 }
-
             }
             return HasFilter;
         }
@@ -651,6 +649,7 @@ namespace EpiDashboard.Controls
             }
             cmbValue.Items.Insert(0, "{Record Count}");
         }
+        
         public void ReFillValueComboBoxes()
         {
 
@@ -665,6 +664,7 @@ namespace EpiDashboard.Controls
             }
             cmbValue.Items.Insert(0, "{Record Count}");
         }
+        
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             if (Cancelled != null)
@@ -1411,7 +1411,10 @@ namespace EpiDashboard.Controls
         private void ClassCount_Changed(object sender, SelectionChangedEventArgs e)
         {
             if (thisProvider != null)
+            { 
                 thisProvider.UseCustomRanges = false;
+            }
+
             Reset_Legend();
         }
 
@@ -1440,7 +1443,6 @@ namespace EpiDashboard.Controls
             {
                 classCount = 4;
             }
-
             
             if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null) &&
                 (thisProvider != null))
@@ -1471,9 +1473,7 @@ namespace EpiDashboard.Controls
             SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
             SolidColorBrush rampEnd = (SolidColorBrush)rctHighColor.Fill;
 
-            if (cmbShapeKey.SelectedItem != null &&
-                cmbDataKey.SelectedItem != null &&
-                cmbValue.SelectedItem != null)
+            if (cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null)
             {
                 thisProvider.UseCustomColors = false;
                 thisProvider.UseCustomRanges = false;
@@ -2484,10 +2484,8 @@ namespace EpiDashboard.Controls
                 System.Web.Script.Serialization.JavaScriptSerializer ser = new System.Web.Script.Serialization.JavaScriptSerializer();
                 Rest rest = ser.Deserialize<Rest>(message);
                 cbxmapfeature.ItemsSource = rest.layers;
-                if (rest.layers.Count > 0)
-                    cbxmapfeature.SelectedIndex = 0;
             }
-            catch (Exception ex)
+            catch
             {
                 cbxmapfeature.DataContext = null;
                 System.Windows.Forms.MessageBox.Show("Invalid map server");
@@ -2496,13 +2494,19 @@ namespace EpiDashboard.Controls
 
         private void txtMapSeverpath_TextChanged(object sender, TextChangedEventArgs e)
         {
-            PropertyChanged_EnableDisable();
             btnMapserverlocate.IsEnabled = txtMapSeverpath.Text.Length > 0;
         }
 
         public void cbxmapfeature_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            PropertyChanged_EnableDisable();
+            if(sender is System.Windows.Controls.ComboBox)
+            {
+                if (((System.Windows.Controls.ComboBox)sender).SelectedIndex != -1)
+                {
+                    PropertyChanged_EnableDisable();
+                }
+            }
+
             MapfeatureSelectionChange();
         }
 
@@ -2623,7 +2627,6 @@ namespace EpiDashboard.Controls
             }
 
             thisProvider.UseCustomRanges = true;
-
 
             System.Windows.Controls.TextBox textBox = ((System.Windows.Controls.TextBox)sender);
             string newText = textBox.Text;

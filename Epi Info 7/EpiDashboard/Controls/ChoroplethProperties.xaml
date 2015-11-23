@@ -38,39 +38,10 @@
             
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <!--<ToggleButton x:Name="tbtnDataSource" Style="{StaticResource ToggleSidebarButtonStyle}" IsChecked="True" Checked="tbtnDataSource_Checked">
-                <StackPanel>
-                    <TextBlock Margin="4" FontSize="28" FontWeight="Light">Data Source</TextBlock>
-                    <TextBlock Margin="4, 0, 4, 0" FontSize="12" TextWrapping="WrapWithOverflow">Change the data source for the current canvas.</TextBlock>
-                </StackPanel>
-            </ToggleButton>-->
-
             <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked" />
             <Controls:SettingsToggleButton  x:Name="tbtnVariables" Title="Variables" Description="Choose map boundaries." IsChecked="False" Visibility="Hidden" Checked="tbtnVariables_Checked" />
             <Controls:SettingsToggleButton  x:Name="tbtnDisplay" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsChecked="False" Visibility="Hidden" Checked="tbtnDisplay_Checked" />
             <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Visibility="Hidden" Checked="tbtnFilters_Checked" />
-
-
-            <!--<ToggleButton x:Name="tbtnHTML" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnHTML_Checked">
-                <StackPanel>
-                    <TextBlock Margin="4" FontSize="28" FontWeight="Light">HTML Output</TextBlock>
-                    <TextBlock Margin="4, 0, 4, 0" FontSize="12" TextWrapping="WrapWithOverflow">Modify the HTML output settings.</TextBlock>
-                </StackPanel>
-            </ToggleButton>
-
-            <ToggleButton x:Name="tbtnCharts" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnCharts_Checked">
-                <StackPanel>
-                    <TextBlock Margin="4" FontSize="28" FontWeight="Light">Charts</TextBlock>
-                    <TextBlock Margin="4, 0, 4, 0" FontSize="12" TextWrapping="WrapWithOverflow">Set default chart settings for this canvas.</TextBlock>
-                </StackPanel>
-            </ToggleButton>
-
-            <ToggleButton x:Name="tbtnInfo" Style="{StaticResource ToggleSidebarButtonStyle}" Checked="tbtnInfo_Checked">
-                <StackPanel>
-                    <TextBlock Margin="4" FontSize="28" FontWeight="Light">Information</TextBlock>
-                    <TextBlock Margin="4, 0, 4, 0" FontSize="12" TextWrapping="WrapWithOverflow">View technical details about this canvas.</TextBlock>
-                </StackPanel>
-            </ToggleButton>-->
         </StackPanel>
 
         <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible" VerticalAlignment="Stretch">
@@ -86,7 +57,7 @@
                 <StackPanel Margin="0 0 0 5">
                     <StackPanel x:Name="panelDataSourceProject" Visibility="Visible" >
                         <WrapPanel Orientation="Horizontal">
-                        <Label Padding="0" x:Name="tblockDataSource">Data Source</Label>
+                            <Label Padding="0" x:Name="tblockDataSource" Style="{StaticResource PropertiesSubHeading}">Data Source</Label>
                             <TextBlock Style="{StaticResource requiredFieldInd}" VerticalAlignment="Top" Margin="2 0 0 0" Text="*">
                                 <TextBlock.ToolTip>
                                     <TextBlock x:Name="dataSourceRequiredField">Required field</TextBlock>
@@ -158,7 +129,7 @@
                                                     <Button Height="25" x:Name="btnMapserverlocate" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
                                                 </StackPanel>
                                             </WrapPanel>
-                                </Grid>
+                                        </Grid>
                                         <TextBox TextWrapping="Wrap" IsReadOnly="True" Style="{StaticResource PropertiesExampleText}" Margin="0 0 0 0" x:Name="lblExampleMapServerURL">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</TextBox>
                                             <StackPanel Margin="0 15 0 0">
                                                 <Label Padding="0" x:Name="lblSelectFeature">Select Feature:</Label>
@@ -214,18 +185,8 @@
                         <!-- <TextBox x:Name="txtShapePath" IsReadOnly="True"></TextBox>
                   <Button x:Name="btnBrowseShape" Height="Auto" Grid.Column="2" Click="btnBrowseShapeFile_Click">Browse</Button>  -->
                     </Grid>
-                    <StackPanel>
-                        <StackPanel>
-                            <WrapPanel Orientation="Horizontal">
-                                <Label x:Name="lblFeature">Feature Key:</Label>
-                                <TextBlock VerticalAlignment="Top" Style="{StaticResource requiredFieldInd}" Margin="0 0 0 0" Text="*">
-                                    <TextBlock.ToolTip>
-                                        <TextBlock x:Name="featureKeyRequiredField">Required field</TextBlock>
-                                    </TextBlock.ToolTip>   
-                                </TextBlock>
-                            </WrapPanel>
-                            <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbShapeKey" SelectionChanged="cmbShapeKey_SelectionChanged" Width="300"></ComboBox>
-                        </StackPanel>
+                    <StackPanel Margin="0 5 0 0">
+                        <Label Padding="0" x:Name="tblockDataSourceVariables" Style="{StaticResource PropertiesSubHeading}">Data Source</Label>
                         <StackPanel Margin="0 5 0 0">
                             <WrapPanel Orientation="Horizontal">
                                 <Label x:Name="lblData">Data Key:</Label>
@@ -247,6 +208,19 @@
                                 </TextBlock>
                             </WrapPanel>
                             <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" IsEnabled="False" x:Name="cmbValue" SelectionChanged="cmbValue_SelectionChanged" Height="25" Width="300"></ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Margin="0 5 0 0">
+                            <Label x:Name="lblBoundarieVariable"  Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
+                            <WrapPanel Orientation="Horizontal">
+                                <Label x:Name="lblFeature">Feature Key:</Label>
+                                <TextBlock VerticalAlignment="Top" Style="{StaticResource requiredFieldInd}" Margin="0 0 0 0" Text="*">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock x:Name="featureKeyRequiredField">Required field</TextBlock>
+                                    </TextBlock.ToolTip>   
+                                </TextBlock>
+                            </WrapPanel>
+                            <ComboBox HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}" x:Name="cmbShapeKey" SelectionChanged="cmbShapeKey_SelectionChanged" Width="300"></ComboBox>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
