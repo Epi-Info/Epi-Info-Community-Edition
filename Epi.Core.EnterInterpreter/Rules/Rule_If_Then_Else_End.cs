@@ -24,16 +24,85 @@ namespace Epi.Core.EnterInterpreter.Rules
              */
 
             IfClause = EnterRule.BuildStatments(pContext, pToken.Tokens[1]);
+            var IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' ');
+            IdentifierList = RemoveOp(IdentifierList);
+
+            if (IdentifierList.Length > 0)
+            {
+                foreach (var item in IdentifierList)
+                {
+                    if (!this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                    {
+                        this.Context.CommandVariableCheck.Add(item, "If");
+                    }
+                }
+            }
+
+
+
+
             ThenClause = EnterRule.BuildStatments(pContext, pToken.Tokens[3]);
             if (this.GetCommandElement(pToken.Tokens, 4).Equals("Else", StringComparison.OrdinalIgnoreCase))
             {
                 ElseClause = EnterRule.BuildStatments(pContext, pToken.Tokens[5]);
             }
+
+          //var temp =   (( Rule_Value)((( Rule_CompareExp)(IfClause)).CompareExp)).Id;
                 /*
             else
             {
                 ElseClause = EnterRule.BuildStatments(pContext, pToken.Tokens[4]);
             }*/
+        }
+
+        private string[] RemoveOp(string[] IdentifierList)
+        {
+            List<string>  NewList= new List<string>();
+            List<string> OpList = new List<string>();
+            
+             
+           
+            OpList.Add("(");
+            OpList.Add(")");
+            OpList.Add("/");
+            OpList.Add("(.)");
+            OpList.Add("(+)");
+            OpList.Add("(-)");
+            OpList.Add("=");
+            OpList.Add("+");
+            OpList.Add("-");
+            OpList.Add(">");
+            OpList.Add("<");
+            OpList.Add(">=");
+            OpList.Add("<=");
+            OpList.Add("<>");
+            OpList.Add("^");
+            OpList.Add("&");
+            OpList.Add("*");
+            OpList.Add("%");
+            OpList.Add("mod");
+            OpList.Add("(.)");
+            OpList.Add("not");
+            OpList.Add("or");
+            OpList.Add("and");
+            OpList.Add("xor"); 
+            OpList.Add("Yes");
+            OpList.Add("No");
+            OpList.Add("Missing");
+            OpList.Add("AND");
+            OpList.Add("OR");
+            foreach (var item in IdentifierList)
+            {
+                int number;
+                bool isNumeric = int.TryParse(item, out number);
+                if (!OpList.Contains(item) && !isNumeric)
+                {
+
+                    NewList.Add(item);
+                }
+            }
+
+            return NewList.ToArray();
         }
 
         /// <summary>

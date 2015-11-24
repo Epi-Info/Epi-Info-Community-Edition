@@ -131,6 +131,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             //<TextBox_Dialog_Statement> ::= DIALOG String Identifier TEXTINPUT <MaskOpt> <TitleOpt>
             Prompt = this.GetCommandElement(token.Tokens, 1);
             Identifier = this.GetCommandElement(token.Tokens, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             MaskOpt = this.GetCommandElement(token.Tokens, 4);
             TitleText = this.GetCommandElement(token.Tokens, 5);
         }
@@ -150,6 +159,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             //<Numeric_Dialog_Explicit_Statement> ::= DIALOG String Identifier NUMERIC <MaskOpt> <TitleOpt>
             this.Prompt = GetCommandElement(token.Tokens, 1);
             this.Identifier = GetCommandElement(token.Tokens, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             this.MaskOpt = GetCommandElement(token.Tokens, 4);
             this.TitleText = GetCommandElement(token.Tokens, 5);
         }
@@ -168,6 +186,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             //<Db_Values_Dialog_Statement> ::= DIALOG String Identifier DBVALUES Identifier Identifier <TitleOpt>
             Prompt = GetElement(token, 1);
             Identifier = GetElement(token, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             Modifier = GetElement(token, 3);
             TitleText = GetElement(token, 6);
             tableName = GetElement(token, 4);
@@ -192,6 +219,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             //<YN_Dialog_Statement>	::= DIALOG String Identifier YN <TitleOpt>
             this.Prompt = this.GetCommandElement(token.Tokens, 1);
             this.Identifier = this.GetCommandElement(token.Tokens, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             this.TitleText = this.GetCommandElement(token.Tokens, 4);
         }
         public override object Execute()
@@ -209,6 +245,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             //<Db_Views_Dialog_Statement> ::= DIALOG String Identifier DBVIEWS <titleOpt>
             Prompt = GetElement(token, 1);
             Identifier = GetElement(token, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             Modifier = GetElement(token, 3);
             TitleText = GetElement(token, 4);
         }
@@ -250,7 +295,16 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             //<Databases_Dialog_Statement> ::= DIALOG String Identifier DATABASES <TitleOpt>
             Prompt = this.GetCommandElement(token.Tokens, 1);
-            Identifier = GetElement(token, 2); 
+            Identifier = GetElement(token, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             Modifier = this.GetCommandElement(token.Tokens, 3);
             TitleText = this.GetCommandElement(token.Tokens, 4);
         }
@@ -269,6 +323,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             //<Db_Variables_Dialog_Statement> ::= DIALOG String Identifier DBVARIABLES <TitleOpt>
             Prompt = GetElement(token, 1);
             Identifier = GetElement(token, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             Modifier = GetElement(token, 3);
             TitleText = GetElement(token, 4);
         }
@@ -295,6 +358,15 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             this.Prompt = this.GetCommandElement(token.Tokens, 1);
             this.Identifier = this.GetCommandElement(token.Tokens, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             this.StringList = this.GetCommandElement(token.Tokens, 3);
             this.TitleText = this.GetCommandElement(token.Tokens, 4);
         }
@@ -322,6 +394,15 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             Filter = this.GetCommandElement(token.Tokens, 1);
             Identifier = this.GetCommandElement(token.Tokens, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             Modifier = this.GetCommandElement(token.Tokens, 3);
             TitleText = this.GetCommandElement(token.Tokens, 4);
         }
@@ -343,6 +424,15 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             Filter = this.GetCommandElement(token.Tokens, 1);
             Identifier = this.GetCommandElement(token.Tokens, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             Modifier = this.GetCommandElement(token.Tokens, 3);
             TitleText = this.GetCommandElement(token.Tokens, 5);
         }
@@ -364,6 +454,15 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             Filter = this.GetCommandElement(token.Tokens, 1);
             Identifier = this.GetCommandElement(token.Tokens, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             Modifier = this.GetCommandElement(token.Tokens, 3);
             TitleText = this.GetCommandElement(token.Tokens, 4);
         }
@@ -385,6 +484,15 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             Filter = this.GetCommandElement(token.Tokens, 1);
             Identifier = this.GetCommandElement(token.Tokens, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             Modifier = this.GetCommandElement(token.Tokens, 3);
             TitleText = this.GetCommandElement(token.Tokens, 5);
         }
@@ -404,6 +512,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             //<Dialog_Date_Statement> ::= DIALOG String Identifier DATEFORMAT <TitleOpt>
             Prompt = this.GetCommandElement(token.Tokens, 1);
             Identifier = this.GetCommandElement(token.Tokens, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             TitleText = this.GetCommandElement(token.Tokens, 4);
         }
         public override object Execute()
@@ -421,6 +538,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             //<Dialog_Date_Statement> ::= DIALOG String Identifier TIMEFORMAT <TitleOpt>
             Prompt = this.GetCommandElement(token.Tokens, 1);
             Identifier = this.GetCommandElement(token.Tokens, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             TitleText = this.GetCommandElement(token.Tokens, 4);
         }
         public override object Execute()
@@ -438,6 +564,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             //<Dialog_Date_Statement> ::= DIALOG String Identifier DATETIMEFORMAT <TitleOpt>
             Prompt = this.GetCommandElement(token.Tokens, 1);
             Identifier = this.GetCommandElement(token.Tokens, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             TitleText = this.GetCommandElement(token.Tokens, 4);
         }
         public override object Execute()
@@ -455,6 +590,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             //<Dialog_Date_Mask_Statement> ::= DIALOG String Identifier DATEFORMAT String <TitleOpt>
             Prompt = this.GetCommandElement(token.Tokens, 1);
             Identifier = this.GetCommandElement(token.Tokens, 2);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "dialog");
+                }
+
+            }
             MaskOpt = this.GetCommandElement(token.Tokens, 4);
             TitleText = this.GetCommandElement(token.Tokens, 5);
         }

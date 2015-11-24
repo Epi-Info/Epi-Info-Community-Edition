@@ -26,6 +26,18 @@ namespace Epi.Core.EnterInterpreter.Rules
                 //<Hide_Some_Statement> ::= HIDE <IdentifierList>
                 this.IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' ');
             }
+            if (IdentifierList.Length > 0)
+            {
+                foreach (var item in IdentifierList)
+                {
+                    if (!this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                    {
+                        this.Context.CommandVariableCheck.Add(item, "enable");
+                    }
+                }
+            }
+
+
         }
 
 

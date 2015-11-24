@@ -24,6 +24,15 @@ namespace Epi.Core.EnterInterpreter.Rules
                     {
                         _form = this.GetCommandElement(pToken.Tokens, 1);
                     }
+                    if (!string.IsNullOrEmpty(_form))
+                    {
+
+                        if (!this.Context.CommandVariableCheck.ContainsKey(_form.ToLower()))
+                        {
+                            this.Context.CommandVariableCheck.Add(_form.ToLower(), "gototform");
+                        }
+
+                    }
                     break;
 
                 case "GOTOPAGE":
@@ -44,6 +53,15 @@ namespace Epi.Core.EnterInterpreter.Rules
                     else
                     {
                         _destination = this.GetCommandElement(pToken.Tokens, 1) + this.GetCommandElement(pToken.Tokens, 2);
+                    }
+                    if (!string.IsNullOrEmpty(_destination))
+                    {
+
+                        if (!this.Context.CommandVariableCheck.ContainsKey(_destination.ToLower()))
+                        {
+                            this.Context.CommandVariableCheck.Add(_destination.ToLower(), "gototpage");
+                        }
+
                     }
                     break;
 
@@ -72,6 +90,15 @@ namespace Epi.Core.EnterInterpreter.Rules
                     else
                     {
                         _destination = this.GetCommandElement(pToken.Tokens, 1) + this.GetCommandElement(pToken.Tokens, 2);
+                    }
+                    if (!string.IsNullOrEmpty(_destination))
+                    {
+
+                        if (!this.Context.CommandVariableCheck.ContainsKey(_destination.ToLower()))
+                        {
+                            this.Context.CommandVariableCheck.Add(_destination.ToLower(), "gotot");
+                        }
+
                     }
                     break;
             }

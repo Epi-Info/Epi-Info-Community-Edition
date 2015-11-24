@@ -4097,7 +4097,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error--Variable is assigned but not defined:.
+        ///   Looks up a localized string similar to Error--Variable not defined:.
         /// </summary>
         public static string ERROR_VARIABLE_NOT_DEFINED {
             get {

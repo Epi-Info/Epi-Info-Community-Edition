@@ -21,6 +21,16 @@ namespace Epi.Core.EnterInterpreter.Rules
 
 
             this.IdentifierList = this.GetCommandElement(pToken.Tokens, 1).Split(' ');
+            if (IdentifierList.Length > 0)
+            {
+                foreach (var item in IdentifierList)
+                {
+                    if (!this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                    {
+                        this.Context.CommandVariableCheck.Add(item, "autosearch");
+                    }
+                }
+            }
             if (pToken.Tokens.Length > 2)
             {
 

@@ -21,7 +21,7 @@ namespace Epi.Core.EnterInterpreter
         public StringBuilder ProgramText;
 
         public Dictionary<string, string> StandardVariables;
-        public Dictionary<string, string> AssignVariableCheck;
+        public Dictionary<string, string> CommandVariableCheck;
 
         private List<string> _parsedUndefinedVariables;
         private List<string> _parsedFieldNames;
@@ -48,7 +48,7 @@ namespace Epi.Core.EnterInterpreter
         public Dictionary<string, EnterRule> FieldAfterCheckCode;
         public Dictionary<string, EnterRule> FieldClickCheckCode;
         public Dictionary<string, EnterRule> Subroutine;
-
+        public List<String> SelectCommandList = new List<String>();
         private string[] parseGetCommandSearchText(string pSearchText)
         {
             string[] result = null;
@@ -328,6 +328,56 @@ namespace Epi.Core.EnterInterpreter
             FieldAfterCheckCode = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
             FieldClickCheckCode = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
             Subroutine = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
+            SelectCommandList.Add(CommandNames.ABS);
+            SelectCommandList.Add(CommandNames.AND);
+            SelectCommandList.Add(CommandNames.ALWAYS);
+            SelectCommandList.Add(CommandNames.APPEND);
+            SelectCommandList.Add(CommandNames.MOD);
+            SelectCommandList.Add(CommandNames.LIKE);
+            SelectCommandList.Add(CommandNames.OR);
+            SelectCommandList.Add(CommandNames.XOR);
+            SelectCommandList.Add(CommandNames.NOT);
+            SelectCommandList.Add(CommandNames.EXP);
+            SelectCommandList.Add(CommandNames.LN);
+            SelectCommandList.Add(CommandNames.LOG);
+            SelectCommandList.Add(CommandNames.NUMTODATE);
+            SelectCommandList.Add(CommandNames.NUMTOTIME);
+            SelectCommandList.Add(CommandNames.RECORDCOUNT);
+            SelectCommandList.Add(CommandNames.RND);
+            SelectCommandList.Add(CommandNames.ROUND);
+            SelectCommandList.Add(CommandNames.STEP);
+            SelectCommandList.Add(CommandNames.SIN);
+            SelectCommandList.Add(CommandNames.COS);
+            SelectCommandList.Add(CommandNames.TAN);
+            SelectCommandList.Add(CommandNames.TRUNC);
+            SelectCommandList.Add(CommandNames.PFROMZ);
+            SelectCommandList.Add(CommandNames.ZSCORE);
+            SelectCommandList.Add(CommandNames.YEARS);
+            SelectCommandList.Add(CommandNames.MONTHS);
+            SelectCommandList.Add(CommandNames.DAYS);
+            SelectCommandList.Add(CommandNames.YEAR);
+            SelectCommandList.Add(CommandNames.MONTH);
+            SelectCommandList.Add(CommandNames.DAY);
+            SelectCommandList.Add(CommandNames.CURRENTUSER);
+            SelectCommandList.Add(CommandNames.EXISTS);
+            SelectCommandList.Add(CommandNames.FILEDATE);
+            SelectCommandList.Add(CommandNames.SYSTEMDATE);
+            SelectCommandList.Add(CommandNames.SYSTEMTIME);
+            SelectCommandList.Add(CommandNames.HOURS);
+            SelectCommandList.Add(CommandNames.MINUTES);
+            SelectCommandList.Add(CommandNames.SECONDS);
+            SelectCommandList.Add(CommandNames.HOUR);
+            SelectCommandList.Add(CommandNames.MINUTE);
+            SelectCommandList.Add(CommandNames.SECOND);
+            SelectCommandList.Add(CommandNames.FINDTEXT);
+            SelectCommandList.Add(CommandNames.FORMAT);
+            SelectCommandList.Add(CommandNames.LINEBREAK);
+            SelectCommandList.Add(CommandNames.STRLEN);
+            SelectCommandList.Add(CommandNames.SUBSTRING);
+            SelectCommandList.Add(CommandNames.TXTTONUM);
+            SelectCommandList.Add(CommandNames.TXTTODATE);
+            SelectCommandList.Add(CommandNames.UPPERCASE);
+            SelectCommandList.Add(CommandNames.ISUNIQUE);
         }
 
         public static void DeletePermanentVariable(string variableName)
@@ -516,13 +566,13 @@ namespace Epi.Core.EnterInterpreter
             return result;
         }
 
-        public void CheckAssignedVariables()
+        public void CheckCommandVariables()
         {
             _parsedUndefinedVariables.Clear();
 
             if (currentScope.SymbolList.Count > 0)
             { 
-                foreach (System.Collections.Generic.KeyValuePair<string, string> kvp in this.AssignVariableCheck)
+                foreach (System.Collections.Generic.KeyValuePair<string, string> kvp in this.CommandVariableCheck)
                 {
                     if (this.currentScope.Resolve(kvp.Key) == null)
                     {
@@ -532,19 +582,28 @@ namespace Epi.Core.EnterInterpreter
 
                 if (_parsedUndefinedVariables.Count > 0)
                 {
-                    string exceptionMessage = SharedStrings.ERROR_VARIABLE_NOT_DEFINED;
+                  //  string exceptionMessage = SharedStrings.ERROR_VARIABLE_NOT_DEFINED;
                     string exceptionSource = null;
-
+                    string Message = null;
                     foreach (string name in _parsedUndefinedVariables)
                     {
-                        if (name != Constants.VARIABLE_NAME_TEST_TOKEN)
-                        exceptionMessage = exceptionMessage + " " + name + " ";
-                        exceptionSource = name;
-                    }
+                        
 
-                    Exception exception = new Exception(exceptionMessage);
+                        if (!name.Contains("\"") && !SelectCommandList.Contains(name.ToUpper()))
+                      {
+                        string exceptionMessage = SharedStrings.ERROR_VARIABLE_NOT_DEFINED;
+                        if (name != Constants.VARIABLE_NAME_TEST_TOKEN)
+                         Message +=  exceptionMessage + " " + name + "\n" ;
+                        exceptionSource = name;
+                      }
+                    }
+                    if (Message != null)
+                    {
+                    Exception exception = new Exception(Message);
                     exception.Source = exceptionSource;
                     throw exception;
+                    }
+                    
                 }
             }
         }

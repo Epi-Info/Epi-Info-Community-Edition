@@ -2712,7 +2712,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
     <value>Error on line number: {0}; Column number: {1}</value>
   </data>
   <data name="ERROR_VARIABLE_NOT_DEFINED" xml:space="preserve">
-    <value>Error--Variable is assigned but not defined:</value>
+    <value>Error--Variable not defined:</value>
   </data>
   <data name="INVALID_TEMPLATE_FILE" xml:space="preserve">
     <value>The selected file is not a valid Epi Info template.</value>
