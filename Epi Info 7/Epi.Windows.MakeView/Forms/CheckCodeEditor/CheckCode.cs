@@ -438,6 +438,7 @@ namespace Epi.Windows.MakeView.Forms
             commandList.Add("not");
             commandList.Add("or");
             commandList.Add("geocode");
+            commandList.Add("field");
 
         }
 
