@@ -688,5 +688,10 @@ namespace Epi
         /// ZSCORE numeric function
         /// </summary>
         public const string ZSCORE = "ZSCORE";
+        /// <summary>
+        /// FieldSelector Display
+        /// </summary>
+        public const string FieldSelector = "FieldSelector";
+
     }
 }

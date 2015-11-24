@@ -33,6 +33,7 @@ namespace Epi.Windows.MakeView.Forms
 
         private List<string> keywords;
         private List<string> operators;
+        private List<string> commandList;
 
         private bool isDefineCommand;
         private View view;
@@ -48,7 +49,7 @@ namespace Epi.Windows.MakeView.Forms
         private bool validData = false;
         private TreeNode SelectedDragNode = null;
         private int lastX, lastY;
-        private bool iserrcheckcode = false;      
+        private bool iserrcheckcode = false;
 
         #endregion  //Private Data Members
 
@@ -128,8 +129,8 @@ namespace Epi.Windows.MakeView.Forms
         public CheckCode(View currentview, MakeViewMainForm frm)
         {
             mainForm = frm;
-            if(currentview!=null)
-            currentview.MustRefreshFieldCollection = true;
+            if (currentview != null)
+                currentview.MustRefreshFieldCollection = true;
             view = currentview;
             Construct();
             EpiInfo.Plugin.IEnterInterpreter MR = mainForm.EpiInterpreter;
@@ -174,9 +175,9 @@ namespace Epi.Windows.MakeView.Forms
             if (iserrcheckcode)
             {
                 this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", "The Check Code does not compile."));
-                iserrcheckcode = false;               
+                iserrcheckcode = false;
             }
-               
+
             this.codeText.SelectionStart = 0;
             this.codeText.SelectionLength = 0;
         }
@@ -186,13 +187,13 @@ namespace Epi.Windows.MakeView.Forms
         /// </summary>
         /// <param name="page">The Page to load check code for</param>
         /// <param name="frm">The main form</param>
-        public CheckCode(Page page, MakeViewMainForm frm,View currentview)
+        public CheckCode(Page page, MakeViewMainForm frm, View currentview)
         {
             mainForm = frm;
             if (currentview != null)
-            currentview.MustRefreshFieldCollection = true;         
-            view = currentview;    
-            Construct();                            
+                currentview.MustRefreshFieldCollection = true;
+            view = currentview;
+            Construct();
             BuildComboBox();
             try
             {
@@ -215,7 +216,7 @@ namespace Epi.Windows.MakeView.Forms
             if (iserrcheckcode)
             {
                 this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", "The Check Code does not compile."));
-                iserrcheckcode = false;                
+                iserrcheckcode = false;
             }
         }
 
@@ -224,21 +225,21 @@ namespace Epi.Windows.MakeView.Forms
         /// </summary>
         /// <param name="field">The Field to load check code for</param>
         /// <param name="frm">The main form</param>
-        public CheckCode(Field field, MakeViewMainForm frm,View currentview)
+        public CheckCode(Field field, MakeViewMainForm frm, View currentview)
         {
             mainForm = frm;
             if (currentview != null)
-            currentview.MustRefreshFieldCollection = true;
-            view = currentview;  
-            Construct();                                
+                currentview.MustRefreshFieldCollection = true;
+            view = currentview;
+            Construct();
             BuildComboBox();
             try
             {
                 this.mainForm.EpiInterpreter.Parse(this.codeText.Text);
             }
-            catch(Exception)
+            catch (Exception)
             {
-                iserrcheckcode=true;
+                iserrcheckcode = true;
             }
             string Identifier;
             if (field.Name.Trim().IndexOf(' ') > -1)
@@ -265,10 +266,10 @@ namespace Epi.Windows.MakeView.Forms
                     this.codeText.SelectionLength = this.codeText.Lines[lineIndex].Length;
                 }
             }
-            if (iserrcheckcode )
+            if (iserrcheckcode)
             {
                 this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", "The Check Code does not compile."));
-                iserrcheckcode = false;               
+                iserrcheckcode = false;
             }
         }
 
@@ -332,6 +333,7 @@ namespace Epi.Windows.MakeView.Forms
             this.keywords.Add("execute");
 
             this.keywords.Add("field");
+            this.keywords.Add("fieldselector");
             this.keywords.Add("form");
             this.keywords.Add("format");
 
@@ -419,6 +421,24 @@ namespace Epi.Windows.MakeView.Forms
 
             this.isDirty = false;
             this.WindowState = FormWindowState.Maximized;
+
+            commandList = new List<string>();
+            commandList.Add("assign");
+            commandList.Add("hide");
+            commandList.Add("unhide");
+            commandList.Add("clear");
+            commandList.Add("disable");
+            commandList.Add("enable");
+            commandList.Add("if");
+            commandList.Add("autosearch");
+            commandList.Add("goto");
+            commandList.Add("set-required");
+            commandList.Add("set-not-required");
+            commandList.Add("and");
+            commandList.Add("not");
+            commandList.Add("or");
+            commandList.Add("geocode");
+
         }
 
         #endregion
@@ -1038,30 +1058,30 @@ namespace Epi.Windows.MakeView.Forms
                 int location = codeText.SelectionStart;
                 string text = codeText.SelectedText;
                 ReplaceDialog dlg = new ReplaceDialog(text);
-                
+
                 if (dlg.ShowDialog(this) == DialogResult.OK)
                 {
                     currentSearchOpts = (RichTextBoxFinds)0;
                     currentSearchString = dlg.ReplaceString;
-                    
+
                     if (dlg.CaseSensitive)
                     {
                         currentSearchOpts |= RichTextBoxFinds.MatchCase;
                     }
-                    
+
                     currentSearchOpts |= (dlg.WholeWord) ? RichTextBoxFinds.WholeWord : RichTextBoxFinds.None;
-                    
+
                     do
                     {
                         location = codeText.Find(currentSearchString, currentSearchOpts);
-                        
+
                         if (location > 0)
                         {
                             codeText.SelectionStart = location;
                             codeText.SelectionLength = currentSearchString.Length;
                             codeText.SelectedText = dlg.ReplacementString;
                         }
-                    } 
+                    }
                     while (location > 0 && dlg.ReplaceAll);
                 }
             }
@@ -1155,7 +1175,7 @@ namespace Epi.Windows.MakeView.Forms
             saveFileDialog.CheckPathExists = true;
             saveFileDialog.OverwritePrompt = true;
             DialogResult result = saveFileDialog.ShowDialog();
-            
+
             if (result == DialogResult.OK)
             {
                 System.IO.TextWriter file = new System.IO.StreamWriter(saveFileDialog.FileName);
@@ -1171,7 +1191,7 @@ namespace Epi.Windows.MakeView.Forms
             string EWEFormId = ViewRow.ItemArray[3].ToString();
             this.view.EWEFormId = EWEFormId;
             string OrganizationKey = ViewRow.ItemArray[2].ToString();
-            this.view.EWEOrganizationKey = OrganizationKey;           
+            this.view.EWEOrganizationKey = OrganizationKey;
         }
 
         #endregion  //Event Handlers
@@ -1196,7 +1216,7 @@ namespace Epi.Windows.MakeView.Forms
             if (index > -1)
             {
                 int Findline = codeText.GetLineFromCharIndex(index);
-                
+
                 if (codeText.Text[index] == '\n')
                 {
                     Findline++;
@@ -1219,7 +1239,7 @@ namespace Epi.Windows.MakeView.Forms
                     this.codeText.SelectionStart = this.SetBlockCodeInsertionPoint(pLevel, pEvent, pIdentifier);
                 }
             }
-            
+
             return result;
         }
 
@@ -1402,16 +1422,17 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     break;
                 case Enums.FieldCommands.GoTo:
-                    try{
-                    if (this.PreValidateCommand(" Goto 1 "))
+                    try
                     {
-                        DesignStatement(new GoToDialog(mainForm));
+                        if (this.PreValidateCommand(" Goto 1 "))
+                        {
+                            DesignStatement(new GoToDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Goto command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
-                    else
-                    {
-                        AddStatusErrorMessage("Goto command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
-                     }
                     catch (Exception ex)
                     {
                         AddStatusErrorMessage(ex.Message);
@@ -1421,15 +1442,16 @@ namespace Epi.Windows.MakeView.Forms
                     break;
                 //---GotoForm
                 case Enums.FieldCommands.GoToForm:
-                    try{
-                    if (this.PreValidateCommand(" Gotoform relatedform "))
+                    try
                     {
-                        DesignStatement(new GoToFormDialog(mainForm));
-                    }
-                    else
-                    {
-                        AddStatusErrorMessage("Gotoform command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
+                        if (this.PreValidateCommand(" Gotoform relatedform "))
+                        {
+                            DesignStatement(new GoToFormDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Gotoform command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1459,15 +1481,16 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     break;
                 case Enums.FieldCommands.Unhide:
-                    try{
-                    if (this.PreValidateCommand(" UnHide Address "))
+                    try
                     {
-                        DesignStatement(new UnhideDialog(mainForm));
-                    }
-                    else
-                    {
-                        AddStatusErrorMessage("UnHide command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
+                        if (this.PreValidateCommand(" UnHide Address "))
+                        {
+                            DesignStatement(new UnhideDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("UnHide command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1477,15 +1500,16 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     break;
                 case Enums.FieldCommands.Disable:
-                    try{
-                    if (this.PreValidateCommand(" Hide Address "))
+                    try
                     {
-                        DesignStatement(new DisableDialog(mainForm));
-                    }
-                    else
-                    {
-                        AddStatusErrorMessage("Disable command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
+                        if (this.PreValidateCommand(" Hide Address "))
+                        {
+                            DesignStatement(new DisableDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Disable command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1495,16 +1519,17 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     break;
                 case Enums.FieldCommands.Enable:
-                    try{
-                    if (this.PreValidateCommand(" UnHide Address "))
+                    try
                     {
-                        DesignStatement(new EnableDialog(mainForm));
+                        if (this.PreValidateCommand(" UnHide Address "))
+                        {
+                            DesignStatement(new EnableDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Enable command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
-                    else
-                    {
-                        AddStatusErrorMessage("Enable command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
-                     }
                     catch (Exception ex)
                     {
                         AddStatusErrorMessage(ex.Message);
@@ -1513,16 +1538,17 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     break;
                 case Enums.FieldCommands.Highlight:
-                    try{
-                    if (this.PreValidateCommand(" Highlight Address "))
+                    try
                     {
-                        DesignStatement(new HighlightDialog(mainForm));
+                        if (this.PreValidateCommand(" Highlight Address "))
+                        {
+                            DesignStatement(new HighlightDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Highlight command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
-                    else
-                    {
-                        AddStatusErrorMessage("Highlight command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
-                      }
                     catch (Exception ex)
                     {
                         AddStatusErrorMessage(ex.Message);
@@ -1531,16 +1557,17 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     break;
                 case Enums.FieldCommands.Unhighlight:
-                    try{
-                    if (this.PreValidateCommand(" Unhighlight Address "))
+                    try
                     {
-                        DesignStatement(new UnhighlightDialog(mainForm));
+                        if (this.PreValidateCommand(" Unhighlight Address "))
+                        {
+                            DesignStatement(new UnhighlightDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Unhighlight command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
-                    else
-                    {
-                        AddStatusErrorMessage("Unhighlight command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
-                     }
                     catch (Exception ex)
                     {
                         AddStatusErrorMessage(ex.Message);
@@ -1549,16 +1576,17 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     break;
                 case Enums.FieldCommands.Geocode:
-                    try{
-                    if (this.PreValidateCommand("Geocode Address, Latitude, Longitude"))
+                    try
                     {
-                        DesignStatement(new GeocodeDialog(mainForm));
+                        if (this.PreValidateCommand("Geocode Address, Latitude, Longitude"))
+                        {
+                            DesignStatement(new GeocodeDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Geocode command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
-                    else
-                    {
-                        AddStatusErrorMessage("Geocode command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
-                     }
                     catch (Exception ex)
                     {
                         AddStatusErrorMessage(ex.Message);
@@ -1567,15 +1595,16 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     break;
                 case Enums.FieldCommands.Set_Required:
-                    try{
-                    if (this.PreValidateCommand("Set-Required Address"))
+                    try
                     {
-                        DesignStatement(new SetRequiredDialog(mainForm));
-                    }
-                    else
-                    {
-                        AddStatusErrorMessage("Set-Required command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
+                        if (this.PreValidateCommand("Set-Required Address"))
+                        {
+                            DesignStatement(new SetRequiredDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Set-Required command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1585,20 +1614,40 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     break;
                 case Enums.FieldCommands.Set_Not_Required:
-                    try{
-                    if (this.PreValidateCommand("Set-Not-Required Address"))
+                    try
                     {
-                        DesignStatement(new SetNotRequiredDialog(mainForm));
+                        if (this.PreValidateCommand("Set-Not-Required Address"))
+                        {
+                            DesignStatement(new SetNotRequiredDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Set-Not-Required command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
-                    else
-                    {
-                        AddStatusErrorMessage("Set-Not-Required command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
-                     }
                     catch (Exception ex)
                     {
                         AddStatusErrorMessage(ex.Message);
                         DesignStatement(new SetNotRequiredDialog(mainForm));
+
+                    }
+                    break;
+                case Enums.FieldCommands.FieldSelector:
+                    try
+                    {
+                        if (this.PreValidateCommandforFieldSelector(" "))
+                        {
+                            DesignStatement(new FieldSelectorDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("FieldSelector command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        AddStatusErrorMessage(ex.Message);
+                        DesignStatement(new FieldSelectorDialog(mainForm));
 
                     }
                     break;
@@ -1626,49 +1675,51 @@ namespace Epi.Windows.MakeView.Forms
                         {
                             AddStatusErrorMessage("Execute command: invalid cursor location.\nPlease place cursor inside a code block.");
                         }
-                        
+
                     }
                     catch (Exception ex)
                     {
                         AddStatusErrorMessage(ex.Message);
-                            DesignStatement(new CallDialog(this));
-                        
+                        DesignStatement(new CallDialog(this));
+
                     }
                     break;
                 case Enums.ProgramCommands.Execute:
-                    try{
-                    if (this.PreValidateCommand(" EXECUTE 'c:\\text.txt' "))
+                    try
                     {
-                        DesignStatement(new ExecuteDialog(mainForm));
+                        if (this.PreValidateCommand(" EXECUTE 'c:\\text.txt' "))
+                        {
+                            DesignStatement(new ExecuteDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Execute command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
-                    else
-                    {
-                        AddStatusErrorMessage("Execute command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
-                     }
                     catch (Exception ex)
                     {
                         AddStatusErrorMessage(ex.Message);
                         DesignStatement(new ExecuteDialog(mainForm));
-                        
+
                     }
                     break;
                 case Enums.ProgramCommands.Quit:
-                    try{
-                    if (this.PreValidateCommand(" Quit "))
+                    try
                     {
-                        DesignStatement(new QuitDialog(mainForm, true));
+                        if (this.PreValidateCommand(" Quit "))
+                        {
+                            DesignStatement(new QuitDialog(mainForm, true));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Quit command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
-                    else
-                    {
-                        AddStatusErrorMessage("Quit command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
-                      }
                     catch (Exception ex)
                     {
                         AddStatusErrorMessage(ex.Message);
                         DesignStatement(new QuitDialog(mainForm, true));
-                        
+
                     }
                     break;
                 default:
@@ -1685,15 +1736,16 @@ namespace Epi.Windows.MakeView.Forms
             switch (command)
             {
                 case Enums.RecordCommands.AutoSearch:
-                    try{
-                    if (this.PreValidateCommand(" AUTOSEARCH vaccinated "))
+                    try
                     {
-                        DesignStatement(new AutoSearchDialog(mainForm));
-                    }
-                    else
-                    {
-                        AddStatusErrorMessage("Autosearch command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
+                        if (this.PreValidateCommand(" AUTOSEARCH vaccinated "))
+                        {
+                            DesignStatement(new AutoSearchDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Autosearch command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1702,15 +1754,16 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     break;
                 case Enums.RecordCommands.If:
-                    try{
-                    if (this.PreValidateCommand(" If " + Constants.VARIABLE_NAME_TEST_TOKEN + " > 10 Then NewRecord End-If"))
+                    try
                     {
-                        DesignStatement(new IfClauseDialog(mainForm));
-                    }
-                    else
-                    {
-                        AddStatusErrorMessage("If command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
+                        if (this.PreValidateCommand(" If " + Constants.VARIABLE_NAME_TEST_TOKEN + " > 10 Then NewRecord End-If"))
+                        {
+                            DesignStatement(new IfClauseDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("If command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1719,15 +1772,16 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     break;
                 case Enums.RecordCommands.NewRecord:
-                    try{
-                    if (this.PreValidateCommand(" NewRecord "))
+                    try
                     {
-                        DesignStatement(new NewRecordDialog(mainForm));
-                    }
-                    else
-                    {
-                        AddStatusErrorMessage("NewRecord command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
+                        if (this.PreValidateCommand(" NewRecord "))
+                        {
+                            DesignStatement(new NewRecordDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("NewRecord command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1749,15 +1803,16 @@ namespace Epi.Windows.MakeView.Forms
             switch (command)
             {
                 case Enums.UserInteractionCommands.Dialog:
-                    try{
-                    if (this.PreValidateCommand("Dialog \"\" TitleText=\"\""))
+                    try
                     {
-                        DesignStatement(new DialogDialog(mainForm, this.view.GetProject()));
-                    }
-                    else
-                    {
-                        AddStatusErrorMessage("Dialog command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
+                        if (this.PreValidateCommand("Dialog \"\" TitleText=\"\""))
+                        {
+                            DesignStatement(new DialogDialog(mainForm, this.view.GetProject()));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Dialog command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1766,16 +1821,17 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     break;
                 case Enums.UserInteractionCommands.Help:
-                    try{
-                    if (this.PreValidateCommand(" HELP 'C:\\Epi_Info\\English\\Help\\EIHelp.chm' \"\" "))
+                    try
                     {
-                        DesignHelpStatement();
+                        if (this.PreValidateCommand(" HELP 'C:\\Epi_Info\\English\\Help\\EIHelp.chm' \"\" "))
+                        {
+                            DesignHelpStatement();
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Help command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
                     }
-                    else
-                    {
-                        AddStatusErrorMessage("Help command: invalid cursor location.\nPlease place cursor inside a code block.");
-                    }
-                     }
                     catch (Exception ex)
                     {
                         AddStatusErrorMessage(ex.Message);
@@ -1823,21 +1879,22 @@ namespace Epi.Windows.MakeView.Forms
                     break;
 
                 case Enums.VariableCommands.Define:
-                try{
-                    if (EpiInterpreter.Context.Scope.Resolve(Constants.VARIABLE_NAME_TEST_TOKEN) != null)
+                    try
                     {
-                        EpiInterpreter.Context.Scope.Undefine(Constants.VARIABLE_NAME_TEST_TOKEN);
-                    }
-                    
-                    if (this.PreValidateCommand(" Define " + Constants.VARIABLE_NAME_TEST_TOKEN + " Numeric "))
-                    {
-                        isDefineCommand = true;
-                        DesignStatement(new DefineVariableDialog(mainForm, true));
-                    }
-                    else
-                    {
-                        AddStatusErrorMessage("Define command: Please place cursor inside the DefineVariables code block.");
-                    }
+                        if (EpiInterpreter.Context.Scope.Resolve(Constants.VARIABLE_NAME_TEST_TOKEN) != null)
+                        {
+                            EpiInterpreter.Context.Scope.Undefine(Constants.VARIABLE_NAME_TEST_TOKEN);
+                        }
+
+                        if (this.PreValidateCommand(" Define " + Constants.VARIABLE_NAME_TEST_TOKEN + " Numeric "))
+                        {
+                            isDefineCommand = true;
+                            DesignStatement(new DefineVariableDialog(mainForm, true));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Define command: Please place cursor inside the DefineVariables code block.");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -1854,7 +1911,7 @@ namespace Epi.Windows.MakeView.Forms
                         }
                     }
                     break;
-                
+
                 default:
                     break;
             }
@@ -1870,9 +1927,16 @@ namespace Epi.Windows.MakeView.Forms
             DialogResult result = ((Form)dialog).ShowDialog();
             if (result == DialogResult.OK)
             {
-                if (CheckCodeCommandDesigned != null)
+                if (dialog is FieldSelectorDialog)
                 {
-                    CheckCodeCommandDesigned(dialog.Output);
+                    this.ParseText("\t" + dialog.Output + "\n");
+                }
+                else
+                {
+                    if (CheckCodeCommandDesigned != null)
+                    {
+                        CheckCodeCommandDesigned(dialog.Output);
+                    }
                 }
                 ((Form)dialog).Close();
             }
@@ -2038,6 +2102,9 @@ namespace Epi.Windows.MakeView.Forms
                     case "define":
                         DesignVariableCommand(Enums.VariableCommands.Define);
                         break;
+                    case "fieldselector":
+                        DesignFieldCommand(Enums.FieldCommands.FieldSelector);
+                        break;
 
                     default:
                         break;
@@ -2078,6 +2145,30 @@ namespace Epi.Windows.MakeView.Forms
                 codeText.Select(start, length);
                 codeText.SelectionColor = Color.Red;
                 codeText.Select(start, 0);*/
+            }
+            return result;
+        }
+
+        private bool PreValidateCommandforFieldSelector(string pCommandText)
+        {
+            bool result = false;
+            string start = null;
+            string finish = null;
+
+            start = codeText.Text.Substring(0, codeText.SelectionStart);
+            finish = codeText.Text.Substring(codeText.SelectionStart, codeText.Text.Length - codeText.SelectionStart);
+            string lastcommand = start.Substring(start.LastIndexOf("\n") + 1);
+            string[] splitstring = lastcommand.Split(' ');
+
+            if (splitstring.Length == 1)
+            {
+                if (commandList.Contains(splitstring[0]))
+                    result = true;
+            }
+            else if (splitstring.Length > 1)
+            {
+                if (commandList.Contains(splitstring[splitstring.Length - 1]))
+                    result = true;
             }
             return result;
         }
@@ -2747,7 +2838,7 @@ namespace Epi.Windows.MakeView.Forms
             int index1, index2;
 
             if (string.IsNullOrEmpty(pIdentifier))
-            {                
+            {
                 if (string.IsNullOrEmpty(pEvent))
                 {
                     re = new Regex(string.Format("\\b{0}\\b[\\w\\W]*?\\bend-{0}\\b", pLevel), RegexOptions.IgnoreCase);

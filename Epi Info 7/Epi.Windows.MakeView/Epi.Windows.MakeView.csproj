@@ -222,6 +222,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\FieldSelectorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\FieldSelectorDialog.Designer.cs">
+      <DependentUpon>FieldSelectorDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\CheckCodeCommandDialogs\GoToFormDialog.cs">
       <SubType>Form</SubType>
     </Compile>
