@@ -79,7 +79,12 @@ namespace Epi.Windows.MakeView.Enums
         /// <summary>
         /// Sets a field not required
         /// </summary>
-        Set_Not_Required
+        Set_Not_Required,
+
+         /// <summary>
+        /// Select FieldSelector
+        /// </summary>
+        FieldSelector
 	}
 
 	/// <summary>

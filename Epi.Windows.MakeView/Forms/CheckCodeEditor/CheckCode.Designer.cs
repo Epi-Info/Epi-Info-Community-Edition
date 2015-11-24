@@ -125,6 +125,7 @@ namespace Epi.Windows.MakeView.Forms
             // 
             // CommandContextMenu
             // 
+            this.CommandContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.CommandContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cutToolStripMenuItem,
             this.copyToolStripMenuItem,
@@ -159,6 +160,7 @@ namespace Epi.Windows.MakeView.Forms
             // 
             // CheckCodeStatusBar
             // 
+            this.CheckCodeStatusBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.CheckCodeStatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.LineNumberLabel,
@@ -234,6 +236,7 @@ namespace Epi.Windows.MakeView.Forms
             // 
             this.toolStrip1.GripMargin = new System.Windows.Forms.Padding(0);
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ValidateCodeToolStripButton,
             this.btnCancel,
@@ -335,7 +338,8 @@ namespace Epi.Windows.MakeView.Forms
             resources.GetString("Commands.Items18"),
             resources.GetString("Commands.Items19"),
             resources.GetString("Commands.Items20"),
-            resources.GetString("Commands.Items21")});
+            resources.GetString("Commands.Items21"),
+            resources.GetString("Commands.Items22")});
             this.Commands.Name = "Commands";
             this.Commands.SelectedIndexChanged += new System.EventHandler(this.Commands_SelectedIndexChanged);
             // 
@@ -375,6 +379,7 @@ namespace Epi.Windows.MakeView.Forms
             // 
             // CheckCodeMenu
             // 
+            this.CheckCodeMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.CheckCodeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFile,
             this.mnuEdit,
