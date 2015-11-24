@@ -568,6 +568,7 @@
     <Compile Include="Mapping\ChoroplethKmlLayerProperties.xaml.cs">
       <DependentUpon>ChoroplethKmlLayerProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\ChoroplethLayerProvider.cs" />
     <Compile Include="Mapping\ClassRangesDictionary.cs" />
     <Compile Include="Mapping\CustomColorsDictionary.cs" />
     <Compile Include="Mapping\IChoroLayerProvider.cs" />

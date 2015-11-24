@@ -16,7 +16,7 @@ namespace EpiDashboard.Mapping
 {
     public delegate void FeatureLoadedHandler(string serverName, IDictionary<string, object> featureAttributes);
 
-    public class ChoroplethServerLayerProvider : IChoroLayerProvider
+    public class ChoroplethServerLayerProvider : ChoroplethLayerProvider , IChoroLayerProvider
     {
         #region Choropleth
 
@@ -102,19 +102,6 @@ namespace EpiDashboard.Mapping
         {
             get { return flagupdatetoglfailed; }
             set { flagupdatetoglfailed = value; }
-        }
-
-        public struct ThematicItem
-        {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public string CalcField { get; set; }
-            public double Min { get; set; }
-            public double Max { get; set; }
-            public string MinName { get; set; }
-            public string MaxName { get; set; }
-            public List<double> RangeStarts { get; set; }
-
         }
 
         public void MoveUp()
@@ -1140,26 +1127,11 @@ namespace EpiDashboard.Mapping
                     }
                 }
             }
-            thematicItem.RangeStarts = new List<double>();
 
-            double totalRange = thematicItem.Max - thematicItem.Min;
-            double portion = totalRange / classCount;
+            valueList.Sort();
 
-            thematicItem.RangeStarts.Add(thematicItem.Min);
-            double startRangeValue = thematicItem.Min;
-            IEnumerable<double> valueEnumerator =
-            from aValue in valueList
-            orderby aValue
-            select aValue;
+            thematicItem.RangeStarts = CalculateThematicRange(classCount, thematicItem, valueList);
 
-            int increment = Convert.ToInt32(Math.Round((double)valueList.Count / (double)classCount));
-            for (int i = increment; i < valueList.Count; i += increment)
-            {
-                double value = valueEnumerator.ElementAt(i);
-                if (value < thematicItem.Min)
-                    value = thematicItem.Min;
-                thematicItem.RangeStarts.Add(value);
-            }
             return thematicItem;
         }
 
@@ -1293,9 +1265,7 @@ namespace EpiDashboard.Mapping
                 {
                     RangeValues[i, 1] = _thematicItem.Max.ToString();
                 }
-
             }
-
         }
 
         public void PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField,

@@ -1494,6 +1494,7 @@ namespace EpiDashboard.Controls
             PropertyChanged_EnableDisable();
         }
 
+
         public void SetVisibility(int stratCount, SolidColorBrush rampStart, SolidColorBrush rampEnd)
         {
             if (thisProvider == null) return;

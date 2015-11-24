@@ -15,7 +15,7 @@ using ESRI.ArcGIS.Client.Symbols;
 
 namespace EpiDashboard.Mapping
 {
-    public class ChoroplethKmlLayerProvider : IChoroLayerProvider
+    public class ChoroplethKmlLayerProvider : ChoroplethLayerProvider, IChoroLayerProvider
     {
         public event FeatureLoadedHandler FeatureLoaded;
 
@@ -63,19 +63,6 @@ namespace EpiDashboard.Mapping
         {
             get { return _asQuantiles; }
             set { _asQuantiles = value; }
-        }
-
-        public struct ThematicItem
-        {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public string CalcField { get; set; }
-            public double Min { get; set; }
-            public double Max { get; set; }
-            public string MinName { get; set; }
-            public string MaxName { get; set; }
-            public List<double> RangeStarts { get; set; }
-
         }
 
         private ListLegendTextDictionary _listLegendText = new ListLegendTextDictionary();
@@ -922,42 +909,6 @@ namespace EpiDashboard.Mapping
             return thematicItem;
         }
 
-        private List<double> CalculateThematicRange(int classCount, ThematicItem thematicItem, List<double> valueList)
-        {
-
-            List<double> rangeStarts = new List<double>();
-
-            if (RangesLoadedFromMapFile && RangeStartsFromMapFile != null)
-            {
-                // create rangStarts from map7 file  
-                rangeStarts = this.RangeStartsFromMapFile;
-            }
-            else
-            {
-
-                double totalRange = thematicItem.Max - thematicItem.Min;
-                double portion = totalRange / classCount;
-
-                rangeStarts.Add(thematicItem.Min);
-                double startRangeValue = thematicItem.Min;
-                IEnumerable<double> valueEnumerator =
-                    from aValue in valueList
-                    orderby aValue
-                    select aValue;
-
-                int increment = Convert.ToInt32(Math.Round((double)valueList.Count / (double)classCount));
-                for (int i = increment; i < valueList.Count; i += increment)
-                {
-                    double value = valueEnumerator.ElementAt(i);
-                    if (value < thematicItem.Min)
-                        value = thematicItem.Min;
-                    rangeStarts.Add(value);
-                }
-            }
-
-            return rangeStarts;
-        }
-
         public void PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField,
             List<SolidColorBrush> colors, int classCount, string legendText)
         {
@@ -982,8 +933,6 @@ namespace EpiDashboard.Mapping
             }
 
             PopulateRangeValues();
-            //return thematicItem;
-
         }
 
         public void PopulateRangeValues()
