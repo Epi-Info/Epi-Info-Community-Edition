@@ -43,9 +43,28 @@ namespace Epi.Core.EnterInterpreter.Rules
                         this.QualifiedId = this.GetCommandElement(T.Tokens, 0);
                     }
                     this.value = EnterRule.BuildStatments(pContext, pTokens.Tokens[3]);
-                    if (!this.Context.AssignVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
+                    if (!this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
                     {
-                        this.Context.AssignVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
+                        this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), "assign");
+                    }
+
+                      T = (NonterminalToken)pTokens.Tokens[3];
+                    
+                
+                    if (T.Symbol.ToString() == "<Fully_Qualified_Id>")
+                    {
+                        
+                        this.QualifiedId = this.GetCommandElement(T.Tokens,2);
+                    }
+                    else
+                    {
+                        this.QualifiedId = this.GetCommandElement(T.Tokens, 0);
+                    }
+                      int number;
+                      bool isNumeric = int.TryParse(QualifiedId, out number);
+                      if (!this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()) && !isNumeric)
+                    {
+                        this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), "assign");
                     }
                     break;
                 case "<Let_Statement>":
@@ -64,9 +83,28 @@ namespace Epi.Core.EnterInterpreter.Rules
                     
                     this.value = EnterRule.BuildStatments(pContext, pTokens.Tokens[3]);
 
-                    if (!this.Context.AssignVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
+                    if (!this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
                     {
-                        this.Context.AssignVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
+                        this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
+                    }
+                    T = (NonterminalToken)pTokens.Tokens[3];
+                    if (T.Symbol.ToString() == "<Fully_Qualified_Id>")
+                    {
+                        
+                        this.QualifiedId = this.GetCommandElement(T.Tokens, 2);
+                    }
+                    else
+                    {
+                        this.QualifiedId = this.GetCommandElement(T.Tokens, 0);
+                    }
+
+                     
+                     isNumeric = int.TryParse(QualifiedId, out number);
+
+
+                     if (!this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()) && !isNumeric)
+                    {
+                        this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
                     }
                     break;
                 case "<Simple_Assign_Statement>":
@@ -113,9 +151,9 @@ namespace Epi.Core.EnterInterpreter.Rules
 
                     
                     this.value = EnterRule.BuildStatments(pContext, pTokens.Tokens[2]);
-                    if (!this.Context.AssignVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
+                    if (!this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
                     {
-                        this.Context.AssignVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
+                        this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
                     }
                     break;
 

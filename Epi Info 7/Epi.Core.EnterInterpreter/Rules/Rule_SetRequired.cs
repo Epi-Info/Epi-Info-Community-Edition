@@ -31,6 +31,16 @@ namespace Epi.Core.EnterInterpreter.Rules
                     this.IdentifierList[i] = field.Name.ToLower();
                     i++;
                 }
+                if (IdentifierList.Length > 0)
+                {
+                    foreach (var item in IdentifierList)
+                    {
+                        if (!this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                        {
+                            this.Context.CommandVariableCheck.Add(item, "SetRequired");
+                        }
+                    }
+                }
             }
 
             this.Context.EnterCheckCodeInterface.SetRequired(this.IdentifierList);

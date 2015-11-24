@@ -23,7 +23,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             this.TextField = this.ExtractTokensWithFormat(pToken.Tokens);
 
             this.Identifier = this.GetCommandElement(pToken.Tokens, 1).Trim(new char[] { '[',']'});
+            if (!string.IsNullOrEmpty(Identifier))
+            {
 
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "Field");
+                }
+
+            }
             if (Context.ParsedFieldNames.Contains(Identifier.ToLower()) == false)
             {
                 Context.ParsedFieldNames.Add(Identifier.ToLower());

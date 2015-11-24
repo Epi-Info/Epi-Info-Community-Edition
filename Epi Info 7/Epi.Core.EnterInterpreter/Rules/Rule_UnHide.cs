@@ -23,6 +23,16 @@ namespace Epi.Core.EnterInterpreter.Rules
                 //<Unhide_Some_Statement> ::= UNHIDE <IdentifierList>
                 this.IdentifierList = this.GetCommandElement(pToken.Tokens,1).ToString().Split(' ');
             }
+            if (IdentifierList.Length > 0)
+            {
+                foreach (var item in IdentifierList)
+                {
+                    if (!this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                    {
+                        this.Context.CommandVariableCheck.Add(item, "unhide");
+                    }
+                }
+            }
         }
         /// <summary>
         /// performs execution of the UNHIDE command via the EnterCheckCodeInterface.UnHide method

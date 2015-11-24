@@ -289,6 +289,8 @@ namespace Epi.Windows.MakeView.Forms
             resources.ApplyResources(this.StatusTextBox, "StatusTextBox");
             this.StatusTextBox.Name = "StatusTextBox";
             this.StatusTextBox.ReadOnly = true;
+            this.StatusTextBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusTextBox_MouseMove);
+            this.StatusTextBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.StatusTextBox_MouseUp);
             // 
             // groupBox1
             // 

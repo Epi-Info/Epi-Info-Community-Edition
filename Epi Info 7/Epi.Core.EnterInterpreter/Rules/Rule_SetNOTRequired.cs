@@ -14,7 +14,19 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         public Rule_SetNOTRequired(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
         {
-            this.IdentifierList = this.IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' '); 
+            this.IdentifierList = this.IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' ');
+
+            if (IdentifierList.Length > 0)
+            {
+                foreach (var item in IdentifierList)
+                {
+                    if (!this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                    {
+                        this.Context.CommandVariableCheck.Add(item, "SetNOTRequired");
+                    }
+                }
+            }
+
         }
 
         /// <summary>

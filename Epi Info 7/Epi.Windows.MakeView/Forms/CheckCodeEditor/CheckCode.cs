@@ -960,7 +960,7 @@ namespace Epi.Windows.MakeView.Forms
         /// <param name="e">.NET supplied event parameters</param>
         private void mnuEditFind_Click(object sender, EventArgs e)
         {
-            StatusTextBox.Clear();
+          //  StatusTextBox.Clear();
             if (codeText.TextLength > 0)
             {
                 SearchDialog dlg = new SearchDialog(codeText.SelectedText);
@@ -1867,9 +1867,12 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        if (ex.Source == Constants.VARIABLE_NAME_TEST_TOKEN)
+                        if (ex.Source == Constants.VARIABLE_NAME_TEST_TOKEN || ex.Source == "10")
                         {
+                            if (ex.Source != Constants.VARIABLE_NAME_TEST_TOKEN && ex.Source != "10")
+                            {
                             AddStatusErrorMessage(ex.Message);
+                            }
                             DesignStatement(new AssignDialog(mainForm, true));
                         }
                         else
@@ -3570,5 +3573,39 @@ namespace Epi.Windows.MakeView.Forms
             return start;
         }
         #endregion //Private Methods
+
+        private void StatusTextBox_MouseUp(object sender, MouseEventArgs e)
+        {
+
+            CopyToClipboard(e);
+        }
+
+        private void CopyToClipboard(MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                ContextMenu contextMenu = new System.Windows.Forms.ContextMenu();
+                MenuItem menuItem = new MenuItem("Copy");
+                menuItem.Click += new EventHandler(CopyAction);
+                contextMenu.MenuItems.Add(menuItem);
+                StatusTextBox.ContextMenu = contextMenu;
+            }
+        }
+     
+
+        
+        void CopyAction(object sender, EventArgs e)
+        {
+            Clipboard.SetText(StatusTextBox.SelectedText);
+        }
+
+        private void StatusTextBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            CopyToClipboard(e);
+        }
+
+       
+
+         
     }
 }

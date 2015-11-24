@@ -225,14 +225,14 @@ namespace Epi.Core.EnterInterpreter
         {
             try
             {
-                this.RuleContext.AssignVariableCheck = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                this.RuleContext.CommandVariableCheck = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
                 this.commandText = source;
                 this.IsExecuteMode = false;
                 parser.TrimReductions = true;
                 parser.Parse(source);
 
-                this.RuleContext.AssignVariableCheck = null;
+                this.RuleContext.CommandVariableCheck = null;
             }
             catch(InvalidOperationException ex)
             {
@@ -250,12 +250,12 @@ namespace Epi.Core.EnterInterpreter
                 try
                 {
                     IsExecuteError = false;
-                    this.RuleContext.AssignVariableCheck = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                    this.RuleContext.CommandVariableCheck = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
                     this.commandText = source;
                     this.IsExecuteMode = true;
                     parser.TrimReductions = true;
                     parser.Parse(source);
-                    this.RuleContext.AssignVariableCheck = null;
+                    this.RuleContext.CommandVariableCheck = null;
 
                 }
                 catch (InvalidOperationException ex)
@@ -341,7 +341,7 @@ namespace Epi.Core.EnterInterpreter
 
             program.Execute();
             
-            RuleContext.CheckAssignedVariables();
+            RuleContext.CheckCommandVariables();
         }
 
         private void TokenErrorEvent(LALRParser parser, TokenErrorEventArgs args)

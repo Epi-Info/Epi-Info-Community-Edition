@@ -40,6 +40,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             //DEFINE Identifier '=' <Expression>
 
             Identifier = GetCommandElement(pToken.Tokens, 1);
+            if (!string.IsNullOrEmpty(Identifier))
+            {
+
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(Identifier, "define");
+                }
+
+            }
             if (GetCommandElement(pToken.Tokens, 2) == "=")
             {
                 this.Expression = EnterRule.BuildStatments(pContext, pToken.Tokens[3]);
