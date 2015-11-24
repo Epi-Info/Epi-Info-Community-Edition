@@ -202,24 +202,22 @@
                             </DockPanel.ToolTip>
                             <Grid Height="36" Width="36">
 								<!--<Path Margin="0 45 0 0" Width="13" Height="13" Stretch="Fill" Fill="White" Data="M 182,176 364,176 273,242  "/>-->
-                                <Path Width="20" Height="24" Stretch="Fill" Fill="White" Data="M298.5,639c0,0-68-74.5-72.5-82.5c0,0-43-63.5-50.5-80.5c0,0-34-78-35.5-92.5c0,0-15-56.5-5-99.5
-		c0,0,6-48,55-91.5c0,0,36-35.5,104-40.5c0,0,66-4,118.5,45.5c0,0,48,41,54,110c0,0,3,68-33,143.5c0,0-26.5,58.5-61.5,105.5
-		C372,556.5,308,634.5,298.5,639z" />
-                                <Path Width="16" Height="16" Margin="0 7 2 0" Stretch="Fill" Fill="#3696D2"  Data="M294.5,297.5c0,0-6.2-25.8,20-37.5c0,0,30.5-11,41.5,21.8c0,0,7.3,23.8-17,37.2c0,0-9.2,4.7-22.2,2.2
-		c0,0,9.2-9.2,2-19.7c0,0-8.3-9.4-16.5-7.8L294.5,297.5z M249.3,346.8L299,297c0,0,10.2-1.5,14.5,3.8c0,0,7.7,7,4.7,14.2c0,0-0.7,4-10.3,12.8l-1.8,0.3l-7-1.3l0.3,10
-		l-9.7-0.8l0.3,10.2l-10.2-0.7l0.7,10.2l-10-0.8c0,0,1.5,8.3-3.2,12.5c0,0-8.5,1.5-14.8-6.8C252.5,360.5,246.7,356.7,249.3,346.8z" >
-                                    <Path.RenderTransform>
-                                        <RotateTransform Angle="-25" />
-                                    </Path.RenderTransform>
-                                </Path>
+                                <Path Width="4"  Margin="0 0 15 13"  Height="3" Stretch="Fill" Fill="White" Data="F1 M 19,23L 27,23L 27,31L 19,31L 19,23 Z" />
+                                <Path Width="12.5" Margin="5 0 0 13" Height="2.5" Stretch="Fill" Fill="White" Data="F1 M 31,45L 57,45L 57,53L 31,53L 31,45 Z" />
+                                <Path Width="4" Margin="0 0 15 1.3" Height="4" Stretch="Fill" Fill="White" Data="F1 M 211.7,177.7 142.4,177.7 177,137.7 Z" />
+                                <Path Width="12.5" Margin="5 0 0 0" Height="2.5" Stretch="Fill" Fill="White" Data="F1 M 31,45L 57,45L 57,53L 31,53L 31,45 Z" />
+                                <Ellipse Width="4" Height="3.5" Margin="0 12 15 0" Fill="White" />
+                                <Path Width="12.5" Margin="5 13 0 0" Height="2.5" Stretch="Fill" Fill="White" Data="F1 M 31,45L 57,45L 57,53L 31,53L 31,45 Z" />
+                               
                                 <Ellipse Width="36" Height="36" Stroke="White" Fill="Transparent" StrokeThickness="3" />
-                                <Path Data="M7.2,3.6 C7.2,5.5882251 5.5882251,7.2 3.6,7.2 C1.6117749,7.2 0,5.5882251 0,3.6 C0,1.6117749 1.6117749,0 3.6,0 C5.5882251,0 7.2,1.6117749 7.2,3.6 z" Fill="White" Width="2" Height="2" Stretch="Fill" Margin="7 0 0 13"/>
-
-
+                                
+                              
 
                             </Grid>
 							
                         </DockPanel>
+
+                        
 
                         <DockPanel x:Name="whiteUnderlineRefresh" Background="White" Height="3" VerticalAlignment="Bottom"  Grid.Column="1" Visibility="Collapsed"></DockPanel>
                         <DockPanel x:Name="whiteUnderlineSetData" Background="White" Width="{Binding ElementName=tblockSetDataSource, Path=ActualWidth}" Height="3" VerticalAlignment="Bottom"  Grid.Column="2" Visibility="Collapsed"></DockPanel>
