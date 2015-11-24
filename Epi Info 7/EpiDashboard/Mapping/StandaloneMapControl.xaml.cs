@@ -385,8 +385,19 @@ namespace EpiDashboard.Mapping
                 menu.Items.Add(mnuMarker);
 
                 MenuItem mnuScale = new MenuItem();
-                mnuScale.Header = "Scale ";    //      DashboardSharedStrings.GADGET_MAP_ADD_MARKER;
+                mnuScale.Header = "Scale bar";    //      DashboardSharedStrings.GADGET_MAP_ADD_MARKER;    
+                mnuScale.IsCheckable = true;
+                mnuScale.IsChecked = true;
                 mnuScale.Click += new RoutedEventHandler(mnuScale_Click);
+
+                MenuItem mnuAutoContrastItem = new MenuItem();
+                mnuAutoContrastItem.Header = "Auto Contrast ";    //      DashboardSharedStrings.GADGET_MAP_ADD_MARKER;    
+                mnuAutoContrastItem.IsCheckable = true;
+                mnuAutoContrastItem.IsChecked = true;
+                mnuAutoContrastItem.Click += mnuAutoContrastItem_Click;
+                mnuScale.Items.Add(mnuAutoContrastItem);
+
+                mnuScale.IsSubmenuOpen = true;
                 menu.Items.Add(mnuScale);
 
 
@@ -513,16 +524,29 @@ namespace EpiDashboard.Mapping
             }
             catch (Exception ex)
             {
-                //
+                throw new Exception("Error from RenderMap " + ex.Message + ex.StackTrace);
             }
-            finally
-            {
-            }
+
+        }
+
+        private bool autoContrast = true;
+
+
+        void mnuAutoContrastItem_Click(object sender, RoutedEventArgs e)
+        {
+
+            autoContrast = ((MenuItem)sender).IsChecked;
+
         }
 
         void myMap_ExtentChanged(object sender, ExtentEventArgs e)
         {
-            AdjustScaleLine();
+            try
+            {
+                if (autoContrast)
+                    AdjustScaleLine();
+            }
+            catch { }
 
         }
 
@@ -531,25 +555,18 @@ namespace EpiDashboard.Mapping
         private void AdjustScaleLine()
         {
 
-            if (ScaleLine1.ActualWidth == 0)
-                return;
-
             Point scaleLocation = ScaleLine1.PointToScreen(new Point(0, 0));
-            Rect r = new Rect(ScaleLine1.RenderSize);
             System.Drawing.Point p = new System.Drawing.Point((int)scaleLocation.X, (int)scaleLocation.Y);
             System.Drawing.Size s = new System.Drawing.Size((int)ScaleLine1.RenderSize.Width, (int)ScaleLine1.RenderSize.Height);
-            //  System.Windows.Size s = new System.Windows.Size(scaleLocation.X, scaleLocation.Y);    
 
             Rectangle controlRectangle = new Rectangle(p, s);  //  Convert.ToInt32(ScaleLine1.Width), Convert.ToInt32(ScaleLine1.Height));
 
-
             Bitmap controlBitmap = GetControlBitmap(controlRectangle, p);
             //  controlBitmap.Save(@"c:\temp\xx.jpg");
-            System.Drawing.Color domColor = getDominantColor(controlBitmap);
+            System.Drawing.Color domColor = GetDominantColor(controlBitmap);
             System.Windows.Media.Color complimentaryColor = GetContrast(ToMediaColor(domColor), false);
 
             ScaleLine1.Foreground = new SolidColorBrush(complimentaryColor);
-
 
         }
 
@@ -558,15 +575,15 @@ namespace EpiDashboard.Mapping
 
         private Bitmap GetControlBitmap(Rectangle controlRectangle, System.Drawing.Point p)
         {
+            //  Width / 2 to gaurante text has high contrast                   
             Bitmap bmp = new Bitmap(controlRectangle.Width / 2, controlRectangle.Height);
 
             Graphics g = Graphics.FromImage(bmp);
-            //g.CopyFromScreen(controlRectangle.X, controlRectangle.Y, controlRectangle.Right, controlRectangle.Bottom,
-            //    new System.Drawing.Size(controlRectangle.Width, controlRectangle.Height));
             g.CopyFromScreen(p.X + controlRectangle.Width / 2, p.Y, 0, 0,
                 new System.Drawing.Size(controlRectangle.Width / 2, controlRectangle.Height));
 
             return bmp;
+
         }
 
 
@@ -575,7 +592,7 @@ namespace EpiDashboard.Mapping
             return System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
         }
 
-        public static System.Drawing.Color getDominantColor(Bitmap bmp)
+        public static System.Drawing.Color GetDominantColor(Bitmap bmp)
         {
             //Used for tally
             int r = 0;
@@ -632,13 +649,14 @@ namespace EpiDashboard.Mapping
             byte sourceAlphaValue = Source.A;
             if (!PreserveOpacity)
             {
-                sourceAlphaValue = Math.Max(Source.A, (byte)127); //We don't want contrast color to be more than 50% transparent ever.
+                //  sourceAlphaValue = Math.Max(Source.A, (byte)127); //We don't want contrast color to be more than 50% transparent ever.        
+                sourceAlphaValue = 255;
             }
 
             RGB rgb = new RGB { R = inputColor.R, G = inputColor.G, B = inputColor.B };
             HSB hsb = ConvertToHSB(rgb);
             hsb.H = hsb.H < 180 ? hsb.H + 180 : hsb.H - 180;
-            //_hsb.B = _isColorDark ? 240 : 50; //Added to create dark on light, and light on dark
+            hsb.B = avgColorValue < 123 ? 240 : 50; //Added to create dark on light, and light on dark  //  _isColorDark
             rgb = ConvertToRGB(hsb);
             return Color.FromArgb(sourceAlphaValue, (byte)rgb.R, (byte)rgb.G, (byte)rgb.B);
         }
@@ -795,6 +813,8 @@ namespace EpiDashboard.Mapping
 
         void mnuScale_Click(object sender, RoutedEventArgs e)
         {
+            //    ((MenuItem) sender).IsChecked = !((MenuItem) sender).IsChecked;
+
             if (grdScale.Visibility == Visibility.Hidden)
                 grdScale.Visibility = Visibility.Visible;
             else
