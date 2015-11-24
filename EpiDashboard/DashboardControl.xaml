@@ -164,28 +164,21 @@
                                 </StackPanel>
                             </DockPanel.ToolTip>
                             <Grid Height="36" Width="36">
+                                <Path Width="20" Height="19"  Stretch="Fill" Fill="White" Data="M194.5,278.2h191.8l0.2,117.8c0,0,2.2,12.5-10,13.5H204.3c0,0-11.8-0.8-9.8-12.7V278.2z"  />
+                                <Path Width="18" Height="15"  Stretch="Fill" Fill="#016FC1" Data="M177,277.7v-18.2c0,0,1-21.7,23.8-24.8h71.7h91.2h16.8c0,0,20,1.2,23.5,23V326v54.2v20.7
+		c0,0,1.2,20.7-23.2,25.5h-90.3h-83.3h-6.8c0,0-19.8-1.3-23.3-23.3v-72.5V277.7z"  />
+                                <Path Width="14" Height="9"  Stretch="Fill" Fill="White" Data="M250.8,375.8h5.1c0,0-4,6.3-4.3,16.5c0,0-0.6,9,2.5,15.2l2.8,5.9h-4.8c0,0-6.5-9.6-6.5-16.5
+		c0,0-1.3-8.2,2.8-16.8L250.8,375.8z M264.5,385.4l0.5-2.3c0,0,4.6-2.4,8.3-2.2c0,0,4.8-0.7,6.8,4.3l1.4,5l3.5-5.2c0,0,1.7-2.5,2.3-2.9
+		c0,0,3.8-3.3,6.8-0.3c0,0,2.8,3.2-0.5,6.7c0,0-1.1,2-6.3,1l-2-0.7l-3.2,3.9l1.5,5.5l1.3,4c0,0,0.3,2.2,2.8,2.9c0,0,2,0.5,4.9-0.8
+		l-0.5,2.4c0,0-4.5,1.9-5.4,1.9c0,0-5.3,1.1-7.6-0.9c0,0-1.6-0.5-3-5.6l-0.5-2.5h-0.4l-2.3,3.6c0,0-2.5,4.3-4.6,5.1
+		c0,0-4,1.8-6.1-1.6c0,0-1.6-4.7,2.5-6.5c0,0,0.8-1.8,7.1,0.5l3.2-3.8l-2.3-8.3c0,0-1.1-3.5-3.7-4
+		C268.9,384.7,266.8,384.7,264.5,385.4z M301,376h5.1c0,0,4.5,7.6,5,12.5c0,0,1,7.7-0.8,13.5c0,0-2,6.8-5.5,11.5h-5c0,0,4.3-8.6,4.4-10
+		c0,0,1.5-7,1.2-11.9c0,0-1.5-10.4-2.5-11.7L301,376z" Stroke="White" StrokeThickness="0.3" />
+                                
+                               
                                 <Ellipse Stroke="White" Fill="Transparent" StrokeThickness="3" />
                                 <!--Ellipse Height="12" Width="12" Stroke="White" Fill="White" StrokeThickness="1" /-->
-                                <Line X1="10" X2="16" Y1="12" Y2="10" Stroke="White" StrokeThickness="1"></Line>
-                                <Line X1="10" X2="13.4" Y1="12" Y2="7.5" Stroke="White" StrokeThickness="1"></Line>
-                                <Line X1="10" X2="10" Y1="12" Y2="6" Stroke="White" StrokeThickness="1"></Line>
-                                <Line X1="10" X2="6.6" Y1="12" Y2="7.5" Stroke="White" StrokeThickness="1"></Line>
-                                <Line X1="10" X2="4" Y1="12" Y2="10" Stroke="White" StrokeThickness="1"></Line>
-                                <Line X1="10" X2="4.4" Y1="12" Y2="14" Stroke="White" StrokeThickness="1"></Line>
-                                <Line X1="10" X2="5.6" Y1="12" Y2="16.5" Stroke="White" StrokeThickness="1"></Line>
-                                <Line X1="10" X2="8" Y1="12" Y2="18" Stroke="White" StrokeThickness="1"></Line>
-                                <Line X1="10" X2="26" Y1="12" Y2="12" Stroke="White" StrokeThickness="2"></Line>
-                                <Line X1="10" X2="26" Y1="14" Y2="14" Stroke="White" StrokeThickness="2"></Line>
-                                <Line X1="10" X2="26" Y1="16" Y2="16" Stroke="White" StrokeThickness="2"></Line>
-                                <Line X1="10" X2="26" Y1="18" Y2="18" Stroke="White" StrokeThickness="2"></Line>
-                                <Line X1="10" X2="26" Y1="20" Y2="20" Stroke="White" StrokeThickness="2"></Line>
-                                <Line X1="10" X2="26" Y1="22" Y2="22" Stroke="White" StrokeThickness="2"></Line>
-                                <Line X1="10" X2="26" Y1="23" Y2="23" Stroke="White" StrokeThickness="2"></Line>
-                                <Line X1="10" X2="26" Y1="24" Y2="24" Stroke="White" StrokeThickness="2"></Line>
-                                <Line X1="10" X2="25" Y1="25" Y2="25" Stroke="White" StrokeThickness="2"></Line>
-                                <Line X1="10" X2="24" Y1="26" Y2="26" Stroke="White" StrokeThickness="2"></Line>
-                                <Line X1="10" X2="23" Y1="27" Y2="27" Stroke="White" StrokeThickness="2"></Line>
-                                <Line X1="10" X2="22" Y1="28" Y2="28" Stroke="White" StrokeThickness="2"></Line>
+                                
                                 <!--<TextBlock Foreground="White" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, 2, 4, 0">*</TextBlock>-->
                             </Grid>
                         </DockPanel>
