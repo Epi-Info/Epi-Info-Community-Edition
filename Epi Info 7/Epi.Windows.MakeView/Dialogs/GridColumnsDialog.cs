@@ -122,6 +122,8 @@ namespace Epi.Windows.MakeView.Dialogs
 
             DataRow fieldType = fieldTypes.Rows[cmbFieldType.SelectedIndex];
             cbxRange.Enabled = (bool)(fieldType["HasRange"]);
+            if (!cbxRange.Enabled)
+                cbxRange.Checked = false;
             cbxReadOnly.Enabled = (bool)(fieldType["HasReadOnly"]);
             cbxRequired.Enabled = (bool)(fieldType["HasRequired"]);
 
