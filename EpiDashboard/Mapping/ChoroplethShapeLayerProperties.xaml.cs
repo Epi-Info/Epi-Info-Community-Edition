@@ -40,12 +40,14 @@ namespace EpiDashboard.Mapping
 
         private ColorRampType _colorRampType = new ColorRampType();
 
-        private bool _useCustomColors;
 
         public ColorRampType CurrentColorRampType
         {
             get { return _colorRampType; }
         }
+
+
+        private bool _useCustomColors;
 
         public bool UseCustomColors
         {

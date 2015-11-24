@@ -7,22 +7,18 @@ using System.Windows.Media;
 
 namespace EpiDashboard.Mapping
 {
-
     public interface IChoroLayerProvider : ILayerProvider
     {
+        byte Opacity { get; set; }
 
         CustomColorsDictionary CustomColorsDictionary { get; }
-        byte Opacity { get; set; }
         ClassRangesDictionary ClassRangesDictionary { get; }
 
         void PopulateRangeValues();
-
-        void PopulateRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1,
-            List<SolidColorBrush> brushList, int classCount, string text);
+        void PopulateRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string text);
 
         bool AreRangesSet { get; set; }
         string[,] RangeValues { get; set; }
-        float[] QuantileValues { get; set; }
 
         bool UseCustomColors { get; set; }
         StackPanel LegendStackPanel { get; set; }
@@ -36,7 +32,6 @@ namespace EpiDashboard.Mapping
         void ResetRangeValues(string toString, string s, string toString1, int classCount);
         object[] LoadShapeFile();
         string LegendText { get; set; }
-
 
         bool UseCustomRanges { get; set; }
     }
