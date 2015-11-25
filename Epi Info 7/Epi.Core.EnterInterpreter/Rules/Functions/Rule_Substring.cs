@@ -21,6 +21,19 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             //SUBSTRING(fullString,startingIndex,length)
             this.ParameterList = EnterRule.GetFunctionParameters(pContext, pToken);
+            if (ParameterList.Count() > 0)
+            {
+                foreach (var item in ParameterList)
+                {
+                    if (!this.Context.CommandVariableCheck.ContainsKey(((Rule_Value)(item)).Id.ToLower()))
+                    {
+                        this.Context.CommandVariableCheck.Add((( Rule_Value)(item)).Id, "substring");
+                    }
+                }
+            }
+
+
+
             
         }
         /// <summary>

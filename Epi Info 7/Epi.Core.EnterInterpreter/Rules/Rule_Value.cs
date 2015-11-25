@@ -7,7 +7,7 @@ namespace Epi.Core.EnterInterpreter.Rules
 {
     public class Rule_Value : EnterRule
     {
-        string Id = null;
+        public string Id = null;
         string Namespace = null;
         object value = null;
         int Index0 = -1;
