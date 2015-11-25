@@ -287,11 +287,8 @@ namespace EpiDashboard.Controls
 
         public void SetDefaultRanges()
         {
-            if (cmbShapeKey.SelectedItem != null &&
-                cmbDataKey.SelectedItem != null &&
-                cmbValue.SelectedItem != null)
+            if (cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null)
             {
-
                 if (thisProvider != null && thisProvider.Opacity > 0)
                 {
                     Opacity = thisProvider.Opacity;
@@ -304,16 +301,13 @@ namespace EpiDashboard.Controls
                 }
                 else if (choroplethServerLayerProperties != null && choroplethServerLayerProperties.Opacity > 0)
                 {
-
                     Opacity = choroplethServerLayerProperties.Opacity;
-                    // Opacity = choroMapprovider.Opacity;
                     sliderOpacity.Value = Opacity;
                 }
                 else
                 {
                     Opacity = Convert.ToByte(sliderOpacity.Value);
                 }
-
 
                 SetOpacity();
 
@@ -359,9 +353,8 @@ namespace EpiDashboard.Controls
                         classCount,
                         legTitle.Text);
                 }
+
                 SetRangeUISection();
-
-
             }
 
             UpdateRangesCollection();
