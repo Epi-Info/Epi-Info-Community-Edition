@@ -20,8 +20,6 @@ namespace EpiDashboard.Mapping
         
         public ChoroplethShapeLayerProvider(Map clientMap) : base(clientMap)
         {
-            ClientMap = clientMap;
-            this._layerId = Guid.NewGuid();
         }
 
         public object[] LoadShapeFile(string fileName)
@@ -49,12 +47,12 @@ namespace EpiDashboard.Mapping
                     return null;
                 }
 
-                GraphicsLayer graphicsLayer = ClientMap.Layers[_layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
                 if (graphicsLayer == null)
                 {
                     graphicsLayer = new GraphicsLayer();
                     graphicsLayer.ID = _layerId.ToString();
-                    ClientMap.Layers.Add(graphicsLayer);
+                    ArcGIS_Map.Layers.Add(graphicsLayer);
 
 
                     int recCount = shapeFileReader.Records.Count;
@@ -76,19 +74,19 @@ namespace EpiDashboard.Mapping
                     Envelope shapeFileExtent = shapeFileReader.GetExtent();
                     if (shapeFileExtent.SpatialReference == null)
                     {
-                        ClientMap.Extent = shapeFileExtent;
+                        ArcGIS_Map.Extent = shapeFileExtent;
                     }
                     else
                     {
                         if (shapeFileExtent.SpatialReference.WKID == 4326)
                         {
-                            ClientMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                            ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
                         }
                     }
                 }
                 else
                 {
-                    ClientMap.Extent = graphicsLayer.FullExtent;
+                    ArcGIS_Map.Extent = graphicsLayer.FullExtent;
                 }
                 graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
                 return new object[] { fileName, graphicsLayer.Graphics[0].Attributes };
@@ -138,12 +136,12 @@ namespace EpiDashboard.Mapping
                     return null;
                 }
 
-                GraphicsLayer graphicsLayer = ClientMap.Layers[_layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
                 if (graphicsLayer == null)
                 {
                     graphicsLayer = new GraphicsLayer();
-                    graphicsLayer.ID = ClientMap.ToString();
-                    ClientMap.Layers.Add(graphicsLayer);
+                    graphicsLayer.ID = _layerId.ToString();
+                    ArcGIS_Map.Layers.Add(graphicsLayer);
                 }
 
                 int recCount = shapeFileReader.Records.Count;
@@ -164,13 +162,13 @@ namespace EpiDashboard.Mapping
                 Envelope shapeFileExtent = shapeFileReader.GetExtent();
                 if (shapeFileExtent.SpatialReference == null)
                 {
-                    ClientMap.Extent = shapeFileExtent;
+                    ArcGIS_Map.Extent = shapeFileExtent;
                 }
                 else
                 {
                     if (shapeFileExtent.SpatialReference.WKID == 4326)
                     {
-                        ClientMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                        ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
                     }
                 }
                 graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
@@ -250,7 +248,7 @@ namespace EpiDashboard.Mapping
             _dataKey = dataKey;
 
             DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref valueField);
-            GraphicsLayer graphicsLayer = ClientMap.Layers[_layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
 
             if (graphicsLayer == null) return;
 
@@ -374,7 +372,7 @@ namespace EpiDashboard.Mapping
 
                 DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
 
-                GraphicsLayer graphicsLayer = ClientMap.Layers[_layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
 
                 _thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
 
@@ -472,7 +470,9 @@ namespace EpiDashboard.Mapping
 
             DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
 
-            GraphicsLayer graphicsLayer = ClientMap.Layers[_layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
+
+            if (graphicsLayer == null) return;
 
             _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
 
@@ -491,10 +491,10 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            GraphicsLayer graphicsLayer = ClientMap.Layers[_layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
             if (graphicsLayer != null)
             {
-                ClientMap.Layers.Remove(graphicsLayer);
+                ArcGIS_Map.Layers.Remove(graphicsLayer);
                 if (_legendStackPanel != null)
                 {
                     _legendStackPanel.Children.Clear();

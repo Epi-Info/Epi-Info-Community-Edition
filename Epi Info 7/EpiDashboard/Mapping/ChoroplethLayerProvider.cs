@@ -41,11 +41,11 @@ namespace EpiDashboard.Mapping
 
         public List<GraphicsLayer> _graphicsLayers;
 
-        Map _clientMap;
-        public Map ClientMap
+        Map arcGIS_Map;
+        public Map ArcGIS_Map
         {
-            get { return _clientMap; }
-            set { _clientMap = value; }
+            get { return arcGIS_Map; }
+            set { arcGIS_Map = value; }
         }
 
         List<double> _range;
@@ -91,7 +91,7 @@ namespace EpiDashboard.Mapping
 
         public ChoroplethLayerProvider(Map myMap)
         {
-            _clientMap = myMap;
+            arcGIS_Map = myMap;
             _layerId = Guid.NewGuid();
             _graphicsLayers = new List<GraphicsLayer>();
         }
@@ -108,23 +108,23 @@ namespace EpiDashboard.Mapping
 
         public void MoveUp()
         {
-            Layer layer = _clientMap.Layers[_layerId.ToString()];
-            int currentIndex = _clientMap.Layers.IndexOf(layer);
-            if (currentIndex < _clientMap.Layers.Count - 1)
+            Layer layer = arcGIS_Map.Layers[_layerId.ToString()];
+            int currentIndex = arcGIS_Map.Layers.IndexOf(layer);
+            if (currentIndex < arcGIS_Map.Layers.Count - 1)
             {
-                _clientMap.Layers.Remove(layer);
-                _clientMap.Layers.Insert(currentIndex + 1, layer);
+                arcGIS_Map.Layers.Remove(layer);
+                arcGIS_Map.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = _clientMap.Layers[_layerId.ToString()];
-            int currentIndex = _clientMap.Layers.IndexOf(layer);
+            Layer layer = arcGIS_Map.Layers[_layerId.ToString()];
+            int currentIndex = arcGIS_Map.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                _clientMap.Layers.Remove(layer);
-                _clientMap.Layers.Insert(currentIndex - 1, layer);
+                arcGIS_Map.Layers.Remove(layer);
+                arcGIS_Map.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -317,7 +317,6 @@ namespace EpiDashboard.Mapping
                 {
                     RangeValues[i, 1] = _thematicItem.Max.ToString();
                 }
-
             }
         }
 
@@ -353,109 +352,21 @@ namespace EpiDashboard.Mapping
 
                 gadgetOptions.InputVariableList = inputVariableList;
                 loadedData = dashboardHelper.GenerateFrequencyTable(gadgetOptions).First().Key;
+                
                 foreach (DataRow dr in loadedData.Rows)
                 {
                     dr[0] = dr[0].ToString().Trim();
                 }
+                
                 valueField = "freq";
             }
             else
             {
                 loadedData = dashboardHelper.GenerateTable(columnNames);
             }
+            
             return loadedData;
         }
-
-        //public ThematicItem GetThematicItem(int classCount, DataTable loadedData, GraphicsLayer graphicsLayer)
-        //{
-
-        //    ThematicItem thematicItem = new ThematicItem()
-        //    {
-        //        Name = _dataKey,
-        //        Description = _dataKey,
-        //        CalcField = ""
-        //    };
-
-        //    List<double> valueList = new List<double>();
-
-        //    for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
-        //    {
-        //        Graphic graphicFeature = graphicsLayer.Graphics[i];
-
-        //        string shapeValue = string.Empty;
-
-        //        if (!graphicFeature.Attributes.ContainsKey(_shapeKey))
-        //        {
-        //            List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicFeature.Attributes["extendedData"];
-        //            foreach (KmlExtendedData ed in eds)
-        //            {
-        //                if (ed.Name.Equals(_shapeKey))
-        //                {
-        //                    shapeValue = ed.Value.Replace("'", "''").Trim();
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            shapeValue = graphicFeature.Attributes[_shapeKey].ToString().Replace("'", "''").Trim();
-        //        }
-
-
-        //        string filterExpression = "";
-        //        if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
-        //            filterExpression += "[";
-        //        filterExpression += _dataKey;
-        //        if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
-        //            filterExpression += "]";
-        //        filterExpression += " = '" + shapeValue + "'";
-
-        //        double graphicValue = Double.PositiveInfinity;
-
-        //        try
-        //        {
-        //            DataRow[] rows = loadedData.Select(filterExpression);
-
-        //            if (rows.Length > 0)
-        //            {
-        //                object found = rows[0][_valueField];
-        //                string valueField;
-
-        //                if (found is string)
-        //                {
-        //                    valueField = (string)found;
-        //                    graphicValue = Convert.ToDouble(valueField);
-        //                }
-        //            }
-        //        }
-        //        catch { }
-
-        //        string graphicName = shapeValue;
-
-        //        if (i == 0)
-        //        {
-        //            thematicItem.Min = Double.PositiveInfinity;
-        //            thematicItem.Max = Double.NegativeInfinity;
-        //            thematicItem.MinName = string.Empty;
-        //            thematicItem.MaxName = string.Empty;
-        //        }
-        //        else
-        //        {
-        //            if (graphicValue < thematicItem.Min) { thematicItem.Min = graphicValue; thematicItem.MinName = graphicName; }
-        //            if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity) { thematicItem.Max = graphicValue; thematicItem.MaxName = graphicName; }
-        //        }
-
-        //        if (graphicValue < Double.PositiveInfinity)
-        //        {
-        //            valueList.Add(graphicValue);
-        //        }
-        //    }
-            
-        //    thematicItem.RangeStarts = CalculateThematicRange(classCount, thematicItem, valueList);
-
-        //    return thematicItem;
-        //}
-
-
 
         public void SetLegendSection(List<SolidColorBrush> colors, int classCount, string missingText, ThematicItem thematicItem)  //        string  legText  )    
         {
@@ -463,6 +374,7 @@ namespace EpiDashboard.Mapping
             {
                 LegendStackPanel = new StackPanel();
             }
+            
             LegendStackPanel.Children.Clear();
 
             System.Windows.Controls.ListBox legendList = new System.Windows.Controls.ListBox();
@@ -480,7 +392,6 @@ namespace EpiDashboard.Mapping
                 Margin = new Thickness(0, 0, 5, 0),
                 VerticalAlignment = VerticalAlignment.Top
             };
-
 
             TextBlock titleTextBlock = new TextBlock();
             titleTextBlock.Text = LegendText;
@@ -548,23 +459,23 @@ namespace EpiDashboard.Mapping
                     TextBlock classTextBlock = new TextBlock();
 
                     if (c == classCount - 1)
-                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(rangeStarts[c], 2)) + " : " +
-                                              ListLegendText.GetAt(c + 1);
+                    {
+                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(rangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c + 1);
+                    }
                     else if (rangeStarts.Count <= c + 1)
                     {
-                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(rangeStarts[c], 2)) + " : " +
-                                              ListLegendText.GetAt(c + 1);
+                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(rangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c + 1);
                     }
-                    // Middle classifications
                     else
                     {
                         if (rangeStarts[c] == rangeStarts[c + 1])
-                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(rangeStarts[c], 2)) + " : " +
-                                                  ListLegendText.GetAt(c + 1);
+                        {
+                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(rangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c + 1);
+                        }
                         else
-                            classTextBlock.Text =
-                                String.Format("  {0} to {1}", Math.Round(rangeStarts[c], 2),
-                                    Math.Round(rangeStarts[c + 1], 2)) + " : " + ListLegendText.GetAt(c + 1);
+                        {
+                            classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(rangeStarts[c], 2), Math.Round(rangeStarts[c + 1], 2)) + " : " + ListLegendText.GetAt(c + 1);
+                        }
                     }
 
                     classTextBlock.MaxWidth = 256;

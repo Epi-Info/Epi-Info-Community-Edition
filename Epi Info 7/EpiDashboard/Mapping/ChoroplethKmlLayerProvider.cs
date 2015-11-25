@@ -23,7 +23,7 @@ namespace EpiDashboard.Mapping
 
         public ChoroplethKmlLayerProvider(Map clientMap) : base(clientMap)
         {
-            ClientMap = clientMap;
+            ArcGIS_Map = clientMap;
             this._layerId = Guid.NewGuid();
         }
 
@@ -54,20 +54,20 @@ namespace EpiDashboard.Mapping
             if (!string.IsNullOrEmpty(url))
             {
                 _kmlURL = url;
-                KmlLayer shapeLayer = ClientMap.Layers[_layerId.ToString()] as KmlLayer;
+                KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
                 
                 if (shapeLayer != null)
                 {
-                    ClientMap.Layers.Remove(shapeLayer);
+                    ArcGIS_Map.Layers.Remove(shapeLayer);
                 }
                 
                 shapeLayer = new KmlLayer();
                 shapeLayer.ID = _layerId.ToString();
                 shapeLayer.Url = new Uri(url);
                 shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
-                ClientMap.Layers.Add(shapeLayer);
+                ArcGIS_Map.Layers.Add(shapeLayer);
 
-                ClientMap.Extent = shapeLayer.FullExtent;
+                ArcGIS_Map.Extent = shapeLayer.FullExtent;
                 return new object[] { shapeLayer };
             }
             else { return null; }
@@ -76,7 +76,7 @@ namespace EpiDashboard.Mapping
 
         void shapeLayer_Initialized(object sender, EventArgs e)
         {
-            KmlLayer shapeLayer = ClientMap.Layers[_layerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
 
             FindGraphicsLayers(shapeLayer);
             if (_graphicsLayers.Count > 0)
@@ -121,7 +121,7 @@ namespace EpiDashboard.Mapping
                     ymax = g.Geometry.Extent.YMax;
             }
 
-            ClientMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5)));
+            ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5)));
         }
 
         private void FindGraphicsLayers(KmlLayer kmlLayer)
@@ -168,7 +168,7 @@ namespace EpiDashboard.Mapping
 
             DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref valueField);
 
-            KmlLayer kmlLayer = ClientMap.Layers[_layerId.ToString()] as KmlLayer;
+            KmlLayer kmlLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
             GraphicsLayer graphicsLayer = null;
 
             foreach (Layer layer in kmlLayer.ChildLayers)
@@ -372,7 +372,7 @@ namespace EpiDashboard.Mapping
 
                 DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
 
-                GraphicsLayer graphicsLayer = ClientMap.Layers[_layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
 
                 _thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
 
@@ -486,10 +486,10 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            KmlLayer shapeLayer = ClientMap.Layers[_layerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
             if (shapeLayer != null)
             {
-                ClientMap.Layers.Remove(shapeLayer);
+                ArcGIS_Map.Layers.Remove(shapeLayer);
                 
                 if (LegendStackPanel != null)
                 {

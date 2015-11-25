@@ -20,29 +20,20 @@ namespace EpiDashboard.Mapping
     {
         public ChoroplethServerLayerProvider(Map clientMap) : base(clientMap)
         {
-            ClientMap = clientMap;
+            ArcGIS_Map = clientMap;
             this._layerId = Guid.NewGuid();
         }
 
-        private Map _myMap;
         private string shapeKey;
         private string dataKey;
         private string valueField;
         public Guid layerId;
-        private Color lowColor;
-        private Color highColor;
-        private List<SolidColorBrush> colors;
+
         private int classCount;
-        string missingText;
+
         string[,] rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
         float[] quantileValues = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
         private bool flagupdatetoglfailed;
-        private bool _areRangesSet = false;
-
-        private ThematicItem _serverThematicItem;
-
-
-
 
 
         private ListLegendTextDictionary _listLegendText = new ListLegendTextDictionary();
@@ -50,15 +41,10 @@ namespace EpiDashboard.Mapping
         private ClassRangesDictionary _classRangesDictionary = new ClassRangesDictionary();
 
 
-
-        private List<double> _range;
-
         public event FeatureLoadedHandler FeatureLoaded;
 
         List<List<SolidColorBrush>> ColorList = new List<List<SolidColorBrush>>();
-        int _colorShadeIndex = 0;
 
-        int _lastGeneratedClassCount = 0;
 
         public bool FlagUpdateToGLFailed
         {
@@ -80,10 +66,10 @@ namespace EpiDashboard.Mapping
         {
             if (!string.IsNullOrEmpty(url))
             {
-                FeatureLayer graphicsLayer = _myMap.Layers[layerId.ToString()] as FeatureLayer;
+                FeatureLayer graphicsLayer = ArcGIS_Map.Layers[layerId.ToString()] as FeatureLayer;
                 if (graphicsLayer != null)
                 {
-                    _myMap.Layers.Remove(graphicsLayer);
+                    ArcGIS_Map.Layers.Remove(graphicsLayer);
                 }
                 graphicsLayer = new FeatureLayer();
                 graphicsLayer.ID = layerId.ToString();
@@ -98,7 +84,7 @@ namespace EpiDashboard.Mapping
                     graphicsLayer.OutFields.Add("STATE_FIPSCODE");
                     graphicsLayer.OutFields.Add("COUNTY_NAME");
                     graphicsLayer.Where = "STATE_FIPSCODE = '36'";
-                    _myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-80, 45.1)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 40)));
+                    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-80, 45.1)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 40)));
                 }
                 else if (url.Split('/')[0].Equals("NationalMap.gov - Rhode Island Zip Code Boundaries") || url.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/19"))
                 {
@@ -106,7 +92,7 @@ namespace EpiDashboard.Mapping
                     graphicsLayer.OutFields.Add("STATE_FIPSCODE");
                     graphicsLayer.OutFields.Add("NAME");
                     graphicsLayer.Where = "STATE_FIPSCODE = '44'";
-                    _myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-72, 42.03)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 41)));
+                    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-72, 42.03)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 41)));
                 }
                 else if (url.Split('/')[0].Equals("NationalMap.gov - U.S. State Boundaries") || url.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/17"))
                 {
@@ -114,19 +100,19 @@ namespace EpiDashboard.Mapping
                     graphicsLayer.OutFields.Add("STATE_FIPSCODE");
                     graphicsLayer.OutFields.Add("STATE_ABBR");
                     graphicsLayer.OutFields.Add("STATE_NAME");
-                    _myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-196, 72)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-61, 14.5)));
+                    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-196, 72)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-61, 14.5)));
                 }
                 else if (url.Split('/')[0].Equals("NationalMap.gov - World Boundaries"))
                 {
                     graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/TNM_Blank_US/MapServer/17";
-                    _myMap.Extent = graphicsLayer.FullExtent;
+                    ArcGIS_Map.Extent = graphicsLayer.FullExtent;
                 }
                 else
                 {
                     graphicsLayer.Url = url;
                 }
-                _myMap.Layers.Add(graphicsLayer);
-                _myMap.Cursor = Cursors.Wait;
+                ArcGIS_Map.Layers.Add(graphicsLayer);
+                ArcGIS_Map.Cursor = Cursors.Wait;
                 return new object[] { graphicsLayer };
             }
             else
@@ -140,7 +126,7 @@ namespace EpiDashboard.Mapping
             _dataKey = dataKey;
 
             DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref valueField);
-            GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
 
             if (graphicsLayer == null) return;
 
@@ -166,7 +152,7 @@ namespace EpiDashboard.Mapping
             //FeatureLayer graphicsLayer = _myMap.Layers[layerId.ToString()] as FeatureLayer;
             //int x = 5;
             //x++;
-            _myMap.Cursor = Cursors.Arrow;
+            ArcGIS_Map.Cursor = Cursors.Arrow;
             flagupdatetoglfailed = true;
 
         }
@@ -176,7 +162,7 @@ namespace EpiDashboard.Mapping
             //FeatureLayer graphicsLayer = _myMap.Layers[layerId.ToString()] as FeatureLayer;
             //int x = 5;
             //x++;
-            _myMap.Cursor = Cursors.Arrow;
+            ArcGIS_Map.Cursor = Cursors.Arrow;
 
         }
 
@@ -219,7 +205,7 @@ namespace EpiDashboard.Mapping
 
         void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
         {
-            FeatureLayer graphicsLayer = _myMap.Layers[layerId.ToString()] as FeatureLayer;
+            FeatureLayer graphicsLayer = ArcGIS_Map.Layers[layerId.ToString()] as FeatureLayer;
             flagupdatetoglfailed = false;
             if (graphicsLayer != null)
             {
@@ -231,7 +217,7 @@ namespace EpiDashboard.Mapping
                     }
                 }
             }
-            _myMap.Cursor = Cursors.Arrow;
+            ArcGIS_Map.Cursor = Cursors.Arrow;
         }
 
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
@@ -249,7 +235,7 @@ namespace EpiDashboard.Mapping
         {
             if (_dashboardHelper != null)
             {
-                SetShapeRangeValues(_dashboardHelper, shapeKey, dataKey, valueField, colors, classCount, missingText);
+                SetShapeRangeValues(_dashboardHelper, _shapeKey, _dataKey, _valueField, _colors, _classCount, _missingText);
             }
         }
 
@@ -258,7 +244,7 @@ namespace EpiDashboard.Mapping
             string valueField = this.valueField;
 
             DataTable loadedData = GetLoadedData(_dashboardHelper, dataKey, ref valueField);
-            GraphicsLayer graphicsLayer = _myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[layerId.ToString()] as GraphicsLayer;
 
             if (graphicsLayer == null) return;
 
@@ -345,7 +331,7 @@ namespace EpiDashboard.Mapping
 
             DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
 
-            GraphicsLayer graphicsLayer = _myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[layerId.ToString()] as GraphicsLayer;
             ThematicItem thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
             RangeCount = thematicItem.RangeStarts.Count;
 
@@ -359,7 +345,6 @@ namespace EpiDashboard.Mapping
             {
                 RangeValues[i, 0] = thematicItem.RangeStarts[i].ToString();
 
-
                 if (i < thematicItem.RangeStarts.Count - 1)
                 {
                     RangeValues[i, 1] = thematicItem.RangeStarts[i + 1].ToString();
@@ -368,27 +353,20 @@ namespace EpiDashboard.Mapping
                 {
                     RangeValues[i, 1] = thematicItem.Max.ToString();
                 }
-
             }
-
-            //return thematicItem;
-
         }
-
-
-        private StackPanel legendStackPanel;
 
         #region ILayerProvider Members
 
         public void CloseLayer()
         {
-            GraphicsLayer graphicsLayer = _myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (graphicsLayer != null)
             {
-                _myMap.Layers.Remove(graphicsLayer);
-                if (legendStackPanel != null)
+                ArcGIS_Map.Layers.Remove(graphicsLayer);
+                if (LegendStackPanel != null)
                 {
-                    legendStackPanel.Children.Clear();
+                    LegendStackPanel.Children.Clear();
                 }
             }
         }
@@ -409,7 +387,7 @@ namespace EpiDashboard.Mapping
 
                 DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
 
-                GraphicsLayer graphicsLayer = ClientMap.Layers[_layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
 
                 _thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
 
@@ -507,7 +485,7 @@ namespace EpiDashboard.Mapping
 
             DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
 
-            GraphicsLayer graphicsLayer = _myMap.Layers[_layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
 
             _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
 
@@ -528,9 +506,6 @@ namespace EpiDashboard.Mapping
             //}
         }
 
-
-        private byte opacity;
-        private bool _useCustomColors;
 
         #region ILayerProvider Members
         
