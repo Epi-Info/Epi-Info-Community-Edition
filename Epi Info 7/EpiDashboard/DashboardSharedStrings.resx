@@ -1346,7 +1346,7 @@ of records or select fewer fields for the group.</value>
     <value>Complex Sample Tables</value>
   </data>
   <data name="GADGET_CONFIG_TITLE_EPICURVE_CHART" xml:space="preserve">
-    <value>EPI Curve Chart</value>
+    <value>Epi Curve Chart</value>
   </data>
   <data name="GADGET_CONFIG_TITLE_LINEAR_REGRESSION" xml:space="preserve">
     <value>Linear Regression</value>
@@ -1469,7 +1469,7 @@ of records or select fewer fields for the group.</value>
     <value>Select the variables for the Complex Sample Tables.</value>
   </data>
   <data name="GADGET_TABDESC_EPICURVE_CHART" xml:space="preserve">
-    <value>Select the variables for the EPI curve chart.</value>
+    <value>Select the variables for the Epi curve chart.</value>
   </data>
   <data name="GADGET_TABDESC_LINEAR_REGRESSION" xml:space="preserve">
     <value>Select the variables for the Linear Regression.</value>
