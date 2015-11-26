@@ -2642,6 +2642,8 @@ namespace Epi.Windows.MakeView.PresentationLogic
             ((RenderableField)newField).IsControlResizable = ((RenderableField)rightClickedControl.Field).IsControlResizable;
             ((RenderableField)newField).HasTabStop = ((RenderableField)rightClickedControl.Field).HasTabStop;
             ((RenderableField)newField).ControlFont = ((RenderableField)rightClickedControl.Field).ControlFont;
+            if(newField is Epi.Fields.CommandButtonField)
+                ((RenderableField)newField).ControlFont = ((RenderableField)rightClickedControl.Field).PromptFont;
 
             FieldDefinitionDialogFactory dialogFactory = FieldDefinitionDialogFactory.GetInstance(this.serviceProvider);
             Dialogs.FieldDefinitionDialogs.FieldDefinition dialog = dialogFactory.GetFieldDefinitionDialog(newField);
