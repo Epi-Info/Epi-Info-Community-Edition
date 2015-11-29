@@ -226,7 +226,6 @@
     <Compile Include="Controls\GadgetProperties\LinearRegressionProperties.xaml.cs">
       <DependentUpon>LinearRegressionProperties.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GadgetProperties\Mscorlib_CollectionDebugView.cs" />
     <Compile Include="Controls\GadgetProperties\PMCCProperties.xaml.cs">
       <DependentUpon>PMCCProperties.xaml</DependentUpon>
     </Compile>
