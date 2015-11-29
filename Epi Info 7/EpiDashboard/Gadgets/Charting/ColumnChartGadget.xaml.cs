@@ -714,6 +714,42 @@ namespace EpiDashboard.Gadgets.Charting
                                 case "palette":
                                     ((ColumnChartParameters)Parameters).Palette = int.Parse(child.InnerText);
                                     break;
+                                case "palettecolor1":
+                                    ((ColumnChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                    break;
+                                case "palettecolor2":
+                                    ((ColumnChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                    break;
+                                case "palettecolor3":
+                                    ((ColumnChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                    break;
+                                case "palettecolor4":
+                                    ((ColumnChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                    break;
+                                case "palettecolor5":
+                                    ((ColumnChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                    break;
+                                case "palettecolor6":
+                                    ((ColumnChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                    break;
+                                case "palettecolor7":
+                                    ((ColumnChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                    break;
+                                case "palettecolor8":
+                                    ((ColumnChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                    break;
+                                case "palettecolor9":
+                                    ((ColumnChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                    break;
+                                case "palettecolor10":
+                                    ((ColumnChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                    break;
+                                case "palettecolor11":
+                                    ((ColumnChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                    break;
+                                case "palettecolor12":
+                                    ((ColumnChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                    break;
                                 case "bartype":
                                     switch (child.InnerText.ToString())
                                     {
@@ -1140,7 +1176,13 @@ namespace EpiDashboard.Gadgets.Charting
                 XmlElement paletteElement = doc.CreateElement("palette");
                 paletteElement.InnerText = chtParameters.Palette.ToString();
                 element.AppendChild(paletteElement);
-
+                //Palette Colors
+                for (int i = 0; i < chtParameters.PaletteColors.Count() ;i++ )
+                {
+                    XmlElement palettecolorsElement = doc.CreateElement("paletteColor" + (i+1));
+                    palettecolorsElement.InnerText = chtParameters.PaletteColors[i].ToString();
+                    element.AppendChild(palettecolorsElement);
+                }
                 //barType 
                 XmlElement barTypeElement = doc.CreateElement("barType");
                 switch (chtParameters.BarKind.ToString())

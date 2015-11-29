@@ -25,6 +25,7 @@ namespace EpiDashboard
             ChartSubTitle = String.Empty;
             GadgetTitle = "Line Chart";
             GadgetDescription = String.Empty;
+            PaletteColors = new List<string>();
         }
 
         /// <summary>
@@ -42,6 +43,7 @@ namespace EpiDashboard
             ChartSubTitle = parameters.ChartSubTitle;
             GadgetTitle = parameters.GadgetTitle;
             GadgetDescription = parameters.GadgetDescription;
+            PaletteColors = parameters.PaletteColors;
         }
 
     }

@@ -57,7 +57,7 @@ namespace EpiDashboard
         public bool ShowAnnotationPercent { get; set; }
         public PieChartKind PieChartKind { get; set; }
         public double AnnotationPercent { get; set; }
-
+        public List<string> PaletteColors { get; set; }
         #endregion  // Properties
 
     }

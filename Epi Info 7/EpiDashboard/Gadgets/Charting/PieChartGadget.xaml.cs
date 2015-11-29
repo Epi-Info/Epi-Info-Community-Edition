@@ -627,6 +627,42 @@ namespace EpiDashboard.Gadgets.Charting
                             case "palette":
                                ((PieChartParameters)Parameters).Palette = int.Parse(child.InnerText);
                                 break;
+                            case "palettecolor1":
+                                ((PieChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor2":
+                                ((PieChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor3":
+                                ((PieChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor4":
+                                ((PieChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor5":
+                                ((PieChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor6":
+                                ((PieChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor7":
+                                ((PieChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor8":
+                                ((PieChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor9":
+                                ((PieChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor10":
+                                ((PieChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor11":
+                                ((PieChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor12":
+                                ((PieChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
                             case "charttitle":
                                 ((PieChartParameters)Parameters).ChartTitle = child.InnerText;
                                 break;
@@ -882,7 +918,13 @@ namespace EpiDashboard.Gadgets.Charting
             XmlElement paletteElement = doc.CreateElement("palette");
             paletteElement.InnerText = chtParameters.Palette.ToString();
             element.AppendChild(paletteElement);
-
+            //Palette Colors
+            for (int i = 0; i < chtParameters.PaletteColors.Count(); i++)
+            {
+                XmlElement palettecolorsElement = doc.CreateElement("paletteColor" + (i + 1));
+                palettecolorsElement.InnerText = chtParameters.PaletteColors[i].ToString();
+                element.AppendChild(palettecolorsElement);
+            }
             //annotation Percent
             XmlElement annotationPercentElement = doc.CreateElement("annotationPercent");
             annotationPercentElement.InnerText = chtParameters.AnnotationPercent.ToString();

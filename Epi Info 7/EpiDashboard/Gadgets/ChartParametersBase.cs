@@ -130,7 +130,7 @@ namespace EpiDashboard
         public double ChartWidth { get; set; }
         public double ChartHeight { get; set; }
         public int Palette { get; set; }
-
+        public List<string> PaletteColors { get; set; }
         public ComponentArt.Win.DataVisualization.Charting.Dock LegendDock { get; set; }
         #endregion  // Properties
     }

@@ -16,7 +16,7 @@ using ComponentArt.Win.DataVisualization.Charting;
 using Epi.Fields;
 using EpiDashboard;
 using EpiDashboard.Gadgets.Charting;
-
+using System.Collections;
 namespace EpiDashboard.Controls.Charting
 {
     /// <summary>
@@ -100,7 +100,23 @@ namespace EpiDashboard.Controls.Charting
                     xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantC");
                     break;
             }
+            if (LineChartParameters.PaletteColors.Count() == 12)
+            {
+                ComponentArt.Win.DataVisualization.Palette CorpColorPalette = new ComponentArt.Win.DataVisualization.Palette();
+                CorpColorPalette.PaletteName = "CorpColorPalette";
+                CorpColorPalette.ChartingDataPoints12 = new Object();
+                var NewPalette = (IList)xyChart.Palette.ChartingDataPoints12;
 
+                for (int i = 0; i < LineChartParameters.PaletteColors.Count(); i++)
+                {
+                    NewPalette[i] = (Color)ColorConverter.ConvertFromString(LineChartParameters.PaletteColors[i].ToString());
+
+                }
+
+                CorpColorPalette.ChartingDataPoints12 = (Object)NewPalette;
+                xyChart.Palette.ChartingDataPoints12 = CorpColorPalette.ChartingDataPoints12;
+
+            }
             xyChart.DefaultGridLinesVisible = LineChartParameters.ShowGridLines;
             xyChart.LegendDock = LineChartParameters.LegendDock;
 
