@@ -23,6 +23,7 @@ namespace EpiDashboard
             LineType = string.Empty;
             LineKind = LineKind.Auto;
             Y2LineKind = LineKind.Auto;
+            
         }
 
         /// <summary>
@@ -34,6 +35,7 @@ namespace EpiDashboard
             LineType = parameters.LineType;
             LineKind = parameters.LineKind;
             Y2LineKind = parameters.Y2LineKind;
+          
         }
 
         #endregion //Constructors
@@ -48,7 +50,7 @@ namespace EpiDashboard
         public LineKind LineKind { get; set; }
         public LineKind Y2LineKind { get; set; }
         public double LineThickness { get; set; }
-
+        public List<string> PaletteColors { get; set; }
         #endregion //Properties
 
     }

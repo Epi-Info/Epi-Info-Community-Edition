@@ -56,6 +56,7 @@ namespace EpiDashboard
             BarSpace = BarSpacing.Default;
             Orientation = Orientation.Vertical;
             Palette = 12;
+            PaletteColors = new List<string>();
             BarType = BarKind.Block;
             BarKind = BarKind.Rectangle;
             Y2LineDashStyle = LineDashStyle.Solid;
@@ -135,6 +136,7 @@ namespace EpiDashboard
             Y2ShowAnnotations = parameters.Y2ShowAnnotations;
             ShowGridLines = parameters.ShowGridLines;
             Palette = parameters.Palette;
+            PaletteColors = parameters.PaletteColors;
             //Y2LineType = parameters.Y2LineType;
             Y2LineDashStyle = parameters.Y2LineDashStyle;
             Y2LineThickness = parameters.Y2LineThickness;

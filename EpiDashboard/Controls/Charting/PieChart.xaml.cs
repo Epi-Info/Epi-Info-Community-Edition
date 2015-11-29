@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using ComponentArt.Win.DataVisualization.Charting;
 using EpiDashboard;
 using EpiDashboard.Gadgets.Charting;
-
+using System.Collections;
 namespace EpiDashboard.Controls.Charting
 {
     /// <summary>
@@ -104,7 +104,23 @@ namespace EpiDashboard.Controls.Charting
                     xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantC");
                     break;
             }
+            if (PieChartParameters.PaletteColors.Count() == 12)
+            {
+                ComponentArt.Win.DataVisualization.Palette CorpColorPalette = new ComponentArt.Win.DataVisualization.Palette();
+                CorpColorPalette.PaletteName = "CorpColorPalette";
+                CorpColorPalette.ChartingDataPoints12 = new Object();
+                var NewPalette = (IList)xyChart.Palette.ChartingDataPoints12;
 
+                for (int i = 0; i < PieChartParameters.PaletteColors.Count(); i++)
+                {
+                    NewPalette[i] = (Color)ColorConverter.ConvertFromString(PieChartParameters.PaletteColors[i].ToString());
+
+                }
+
+                CorpColorPalette.ChartingDataPoints12 = (Object)NewPalette;
+                xyChart.Palette.ChartingDataPoints12 = CorpColorPalette.ChartingDataPoints12;
+
+            }
             if (string.IsNullOrEmpty(tblockChartTitle.Text)) tblockChartTitle.Visibility = System.Windows.Visibility.Collapsed;
             else tblockChartTitle.Visibility = System.Windows.Visibility.Visible;
 

@@ -377,6 +377,7 @@ namespace EpiDashboard.Gadgets.Charting
                     //        checkboxShowHorizontalGridLines.IsChecked = false;
                     //    }
                     //    break;
+                    
                     case "singlevariable":
                         if ((this.Parameters.ColumnNames.Count > 0) && (!String.IsNullOrEmpty(child.InnerText.Trim())))
                         {
@@ -651,6 +652,42 @@ namespace EpiDashboard.Gadgets.Charting
                             case "showgridlines":
                                 if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).ShowGridLines = true; }
                                 else { ((LineChartParameters)Parameters).ShowGridLines = false; }
+                                break;
+                            case "palettecolor1":
+                                ((LineChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor2":
+                                ((LineChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor3":
+                                ((LineChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor4":
+                                ((LineChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor5":
+                                ((LineChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor6":
+                                ((LineChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor7":
+                                ((LineChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor8":
+                                ((LineChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor9":
+                                ((LineChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor10":
+                                ((LineChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor11":
+                                ((LineChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor12":
+                                ((LineChartParameters)Parameters).PaletteColors.Add(child.InnerText);
                                 break;
                             case "palette":
                                 ((LineChartParameters)Parameters).Palette = int.Parse(child.InnerText);
@@ -1049,7 +1086,13 @@ namespace EpiDashboard.Gadgets.Charting
             XmlElement paletteElement = doc.CreateElement("palette");
             paletteElement.InnerText = LineChartParameters.Palette.ToString();
             element.AppendChild(paletteElement);
-
+            //Palette Colors
+            for (int i = 0; i < LineChartParameters.PaletteColors.Count(); i++)
+            {
+                XmlElement palettecolorsElement = doc.CreateElement("paletteColor" + (i + 1));
+                palettecolorsElement.InnerText = LineChartParameters.PaletteColors[i].ToString();
+                element.AppendChild(palettecolorsElement);
+            }
             //lineType
             XmlElement lineTypeElement = doc.CreateElement("lineType");
             lineTypeElement.InnerText = LineChartParameters.LineKind.ToString();
