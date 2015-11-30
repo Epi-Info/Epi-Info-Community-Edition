@@ -1568,7 +1568,7 @@ namespace EpiDashboard.Controls
                     }
                     else
                     {
-                        color = Color.FromArgb(Opacity, 
+                        color = Color.FromArgb(255, 
                             (byte)(rampStart.Color.R - ri * gradientControl), 
                             (byte)(rampStart.Color.G - gi * gradientControl), 
                             (byte)(rampStart.Color.B - bi * gradientControl));
