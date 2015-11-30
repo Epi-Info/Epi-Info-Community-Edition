@@ -56,6 +56,7 @@ namespace EpiDashboard
             //--
             LegendFontSize = 12;
             LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Right;
+            PaletteColors = new List<string>();
         }
 
         /// <summary>
@@ -92,6 +93,7 @@ namespace EpiDashboard
             ShowLegendVarNames = parameters.ShowLegendVarNames;
             //LegendFontSize in ChartGadgetParametersBase.cs
             LegendDock = parameters.LegendDock;
+            PaletteColors = parameters.PaletteColors;
         }
     }
 }

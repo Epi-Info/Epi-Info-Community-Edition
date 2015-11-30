@@ -427,6 +427,42 @@ namespace EpiDashboard.Gadgets.Charting
                         case "palette":
                             ((AreaChartParameters)Parameters).Palette = int.Parse(child.InnerText);
                             break;
+                        case "palettecolor1":
+                            ((AreaChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                            break;
+                        case "palettecolor2":
+                            ((AreaChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                            break;
+                        case "palettecolor3":
+                            ((AreaChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                            break;
+                        case "palettecolor4":
+                            ((AreaChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                            break;
+                        case "palettecolor5":
+                            ((AreaChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                            break;
+                        case "palettecolor6":
+                            ((AreaChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                            break;
+                        case "palettecolor7":
+                            ((AreaChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                            break;
+                        case "palettecolor8":
+                            ((AreaChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                            break;
+                        case "palettecolor9":
+                            ((AreaChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                            break;
+                        case "palettecolor10":
+                            ((AreaChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                            break;
+                        case "palettecolor11":
+                            ((AreaChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                            break;
+                        case "palettecolor12":
+                            ((AreaChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                            break;
                         case "areatype":
                             {
                                 switch (child.InnerText)
@@ -853,7 +889,13 @@ namespace EpiDashboard.Gadgets.Charting
             XmlElement paletteElement = doc.CreateElement("palette");
             paletteElement.InnerText = chtParameters.Palette.ToString();
             element.AppendChild(paletteElement);
-
+            //Palette Colors
+            for (int i = 0; i < chtParameters.PaletteColors.Count(); i++)
+            {
+                XmlElement palettecolorsElement = doc.CreateElement("paletteColor" + (i + 1));
+                palettecolorsElement.InnerText = chtParameters.PaletteColors[i].ToString();
+                element.AppendChild(palettecolorsElement);
+            }
             //areaType
             XmlElement areaTypeElement = doc.CreateElement("areaType");
             areaTypeElement.InnerText = chtParameters.AreaKind.ToString();

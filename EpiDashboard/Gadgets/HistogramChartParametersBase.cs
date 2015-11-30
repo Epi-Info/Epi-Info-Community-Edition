@@ -43,7 +43,7 @@ namespace EpiDashboard
         
         public BarSpacing BarSpace { get; set; }
         public BarKind BarType { get; set; }
-        
+        public List<string> PaletteColors { get; set; }
         #endregion  // Properties
 
     }

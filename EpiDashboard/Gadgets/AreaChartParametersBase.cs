@@ -54,7 +54,7 @@ namespace EpiDashboard
         public LineKind AreaKind { get; set; }
         public double TransTop { get; set; }
         public double TransBottom { get; set; }
-
+        public List<string> PaletteColors { get; set; }
         #endregion  // Properties
 
     }

@@ -16,6 +16,7 @@ using ComponentArt.Win.DataVisualization.Charting;
 using Epi.Fields;
 using EpiDashboard;
 using EpiDashboard.Gadgets.Charting;
+using System.Collections;
 
 namespace EpiDashboard.Controls.Charting
 {
@@ -157,7 +158,131 @@ namespace EpiDashboard.Controls.Charting
                     xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantC");
                     break;
             }
+            if (HistogramChartParameters.PaletteColors.Count() == 12)
+            {
+                ComponentArt.Win.DataVisualization.Palette CorpColorPalette = new ComponentArt.Win.DataVisualization.Palette();
+                CorpColorPalette.PaletteName = "CorpColorPalette";
+                /////////////////////////////////////
+                CorpColorPalette.ChartingDataPoints12 = new Object();
+                var NewPalette12 = (IList)xyChart.Palette.ChartingDataPoints12;
+                for (int j = 0; j < HistogramChartParameters.PaletteColors.Count(); j++)
+                {
+                    NewPalette12[j] = (Color)ColorConverter.ConvertFromString(HistogramChartParameters.PaletteColors[j].ToString());
 
+                }
+                CorpColorPalette.ChartingDataPoints12 = (Object)NewPalette12;
+                xyChart.Palette.ChartingDataPoints12 = CorpColorPalette.ChartingDataPoints12;
+                //////////////////////////////////
+                CorpColorPalette.ChartingDataPoints11 = new Object();
+                var NewPalette11 = (IList)xyChart.Palette.ChartingDataPoints11;
+                for (int j = 0; j < HistogramChartParameters.PaletteColors.Count() - 1; j++)
+                {
+                    NewPalette11[j] = (Color)ColorConverter.ConvertFromString(HistogramChartParameters.PaletteColors[j].ToString());
+
+                }
+                CorpColorPalette.ChartingDataPoints11 = (Object)NewPalette11;
+                xyChart.Palette.ChartingDataPoints11 = CorpColorPalette.ChartingDataPoints11;
+                //////////////////////////////////
+                CorpColorPalette.ChartingDataPoints10 = new Object();
+                var NewPalette10 = (IList)xyChart.Palette.ChartingDataPoints10;
+                for (int j = 0; j < HistogramChartParameters.PaletteColors.Count() - 2; j++)
+                {
+                    NewPalette10[j] = (Color)ColorConverter.ConvertFromString(HistogramChartParameters.PaletteColors[j].ToString());
+
+                }
+                CorpColorPalette.ChartingDataPoints10 = (Object)NewPalette10;
+                xyChart.Palette.ChartingDataPoints10 = CorpColorPalette.ChartingDataPoints10;
+                //////////////////////////////////
+                CorpColorPalette.ChartingDataPoints9 = new Object();
+                var NewPalette9 = (IList)xyChart.Palette.ChartingDataPoints9;
+                for (int j = 0; j < HistogramChartParameters.PaletteColors.Count() - 3; j++)
+                {
+                    NewPalette9[j] = (Color)ColorConverter.ConvertFromString(HistogramChartParameters.PaletteColors[j].ToString());
+
+                }
+                CorpColorPalette.ChartingDataPoints9 = (Object)NewPalette9;
+                xyChart.Palette.ChartingDataPoints9 = CorpColorPalette.ChartingDataPoints9;
+                //////////////////////////////////
+                CorpColorPalette.ChartingDataPoints8 = new Object();
+                var NewPalette8 = (IList)xyChart.Palette.ChartingDataPoints8;
+                for (int j = 0; j < HistogramChartParameters.PaletteColors.Count() - 4; j++)
+                {
+                    NewPalette8[j] = (Color)ColorConverter.ConvertFromString(HistogramChartParameters.PaletteColors[j].ToString());
+
+                }
+                CorpColorPalette.ChartingDataPoints8 = (Object)NewPalette8;
+                xyChart.Palette.ChartingDataPoints8 = CorpColorPalette.ChartingDataPoints8;
+                //////////////////////////////////
+                CorpColorPalette.ChartingDataPoints7 = new Object();
+                var NewPalette7 = (IList)xyChart.Palette.ChartingDataPoints7;
+                for (int j = 0; j < HistogramChartParameters.PaletteColors.Count() - 5; j++)
+                {
+                    NewPalette7[j] = (Color)ColorConverter.ConvertFromString(HistogramChartParameters.PaletteColors[j].ToString());
+
+                }
+                CorpColorPalette.ChartingDataPoints7 = (Object)NewPalette7;
+                xyChart.Palette.ChartingDataPoints7 = CorpColorPalette.ChartingDataPoints7;
+                //////////////////////////////////
+                CorpColorPalette.ChartingDataPoints6 = new Object();
+                var NewPalette6 = (IList)xyChart.Palette.ChartingDataPoints6;
+                for (int j = 0; j < HistogramChartParameters.PaletteColors.Count() - 6; j++)
+                {
+                    NewPalette6[j] = (Color)ColorConverter.ConvertFromString(HistogramChartParameters.PaletteColors[j].ToString());
+
+                }
+                CorpColorPalette.ChartingDataPoints6 = (Object)NewPalette6;
+                xyChart.Palette.ChartingDataPoints6 = CorpColorPalette.ChartingDataPoints6;
+                //////////////////////////////////
+                CorpColorPalette.ChartingDataPoints5 = new Object();
+                var NewPalette5 = (IList)xyChart.Palette.ChartingDataPoints5;
+                for (int j = 0; j < HistogramChartParameters.PaletteColors.Count() - 7; j++)
+                {
+                    NewPalette5[j] = (Color)ColorConverter.ConvertFromString(HistogramChartParameters.PaletteColors[j].ToString());
+
+                }
+                CorpColorPalette.ChartingDataPoints5 = (Object)NewPalette5;
+                xyChart.Palette.ChartingDataPoints5 = CorpColorPalette.ChartingDataPoints5;
+                //////////////////////////////////
+                CorpColorPalette.ChartingDataPoints4 = new Object();
+                var NewPalette4 = (IList)xyChart.Palette.ChartingDataPoints4;
+                for (int j = 0; j < HistogramChartParameters.PaletteColors.Count() - 8; j++)
+                {
+                    NewPalette4[j] = (Color)ColorConverter.ConvertFromString(HistogramChartParameters.PaletteColors[j].ToString());
+
+                }
+                CorpColorPalette.ChartingDataPoints4 = (Object)NewPalette4;
+                xyChart.Palette.ChartingDataPoints4 = CorpColorPalette.ChartingDataPoints4;
+                //////////////////////////////////
+                CorpColorPalette.ChartingDataPoints3 = new Object();
+                var NewPalette3 = (IList)xyChart.Palette.ChartingDataPoints3;
+                for (int j = 0; j < HistogramChartParameters.PaletteColors.Count() - 9; j++)
+                {
+                    NewPalette3[j] = (Color)ColorConverter.ConvertFromString(HistogramChartParameters.PaletteColors[j].ToString());
+
+                }
+                CorpColorPalette.ChartingDataPoints3 = (Object)NewPalette3;
+                xyChart.Palette.ChartingDataPoints3 = CorpColorPalette.ChartingDataPoints3;
+                //////////////////////////////////
+                CorpColorPalette.ChartingDataPoints2 = new Object();
+                var NewPalette2 = (IList)xyChart.Palette.ChartingDataPoints2;
+                for (int j = 0; j < HistogramChartParameters.PaletteColors.Count() - 10; j++)
+                {
+                    NewPalette2[j] = (Color)ColorConverter.ConvertFromString(HistogramChartParameters.PaletteColors[j].ToString());
+
+                }
+                CorpColorPalette.ChartingDataPoints2 = (Object)NewPalette2;
+                xyChart.Palette.ChartingDataPoints2 = CorpColorPalette.ChartingDataPoints2;
+                //////////////////////////////////
+                CorpColorPalette.ChartingDataPoints1 = new Object();
+                var NewPalette1 = (IList)xyChart.Palette.ChartingDataPoints1;
+                for (int j = 0; j < HistogramChartParameters.PaletteColors.Count() - 11; j++)
+                {
+                    NewPalette1[j] = (Color)ColorConverter.ConvertFromString(HistogramChartParameters.PaletteColors[j].ToString());
+
+                }
+                CorpColorPalette.ChartingDataPoints1 = (Object)NewPalette1;
+                xyChart.Palette.ChartingDataPoints1 = CorpColorPalette.ChartingDataPoints1;
+            }
             series0.BarRelativeBegin = double.NaN;
             series0.BarRelativeEnd = double.NaN;
             

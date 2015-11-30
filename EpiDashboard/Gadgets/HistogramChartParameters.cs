@@ -103,6 +103,7 @@ namespace EpiDashboard
             LegendFontSize = 12;
             LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Right;
             ChartStrataTitle = String.Empty;
+            PaletteColors = new List<string>();
         }
 
         /// <summary>
@@ -180,6 +181,7 @@ namespace EpiDashboard
             EndValue = parameters.EndValue;
             StartDate = parameters.StartDate;
             EndDate = parameters.EndDate;
+            PaletteColors = parameters.PaletteColors;
         }
     }
 }

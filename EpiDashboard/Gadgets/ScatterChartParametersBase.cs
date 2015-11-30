@@ -38,7 +38,7 @@ namespace EpiDashboard
 
         #region Properties
         //IChartGadgetParameters Properties
-
+        public List<string> PaletteColors { get; set; }
         #endregion  // Properties
 
     }

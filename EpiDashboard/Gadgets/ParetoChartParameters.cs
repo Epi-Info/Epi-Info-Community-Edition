@@ -58,6 +58,7 @@ namespace EpiDashboard
             BarKind = BarKind.Rectangle;
             Y2LineDashStyle = LineDashStyle.Solid;
             Y2LineThickness = 2;
+            PaletteColors = new List<string>();
             //  Labels
             YAxisLabel = "Count";
             YAxisFormat = String.Empty;
@@ -150,6 +151,7 @@ namespace EpiDashboard
             YAxisLabelFontSize = parameters.YAxisLabelFontSize;
             XAxisFontSize = parameters.XAxisFontSize;
             XAxisLabelFontSize = parameters.XAxisLabelFontSize;
+            PaletteColors = parameters.PaletteColors;
         }
     }
 }
