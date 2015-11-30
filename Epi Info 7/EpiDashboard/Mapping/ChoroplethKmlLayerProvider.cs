@@ -27,16 +27,6 @@ namespace EpiDashboard.Mapping
             this._layerId = Guid.NewGuid();
         }
 
-        //private double dist(Point px, Point po, Point pf)
-        //{
-        //    double d = Math.Sqrt((px.Y - po.Y) * (px.Y - po.Y) + (px.X - po.X) * (px.X - po.X));
-        //    if (((px.Y < po.Y) && (pf.Y > po.Y)) || ((px.Y > po.Y) && (pf.Y < po.Y)) || ((px.Y == po.Y) && (px.X < po.X) && (pf.X > po.X)) || ((px.Y == po.Y) && (px.X > po.X) && (pf.X < po.X)))
-        //    {
-        //        d = -d;
-        //    }
-        //    return d;
-        //}
-
         public object[] LoadKml()
         {
             KmlDialog dialog = new KmlDialog();
@@ -78,18 +68,22 @@ namespace EpiDashboard.Mapping
         {
             KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
 
-            FindGraphicsLayers(shapeLayer);
-            if (_graphicsLayers.Count > 0)
+            GraphicsLayer graphicsLayer = GetGraphicsLayer(shapeLayer);
+
+            if (graphicsLayer != null)
             {
-                IDictionary<string, object> coreAttributes = _graphicsLayers[0].Graphics[0].Attributes;
+                IDictionary<string, object> coreAttributes = graphicsLayer.Graphics[0].Attributes;
                 Dictionary<string, object> allAttributes = new Dictionary<string, object>();
+                
                 foreach (KeyValuePair<string, object> attr in coreAttributes)
                 {
                     allAttributes.Add(attr.Key, attr.Value);
                 }
-                if (_graphicsLayers[0].Graphics[0].Attributes.ContainsKey("extendedData"))
+
+                if (graphicsLayer.Graphics[0].Attributes.ContainsKey("extendedData"))
                 {
-                    List<KmlExtendedData> eds = (List<KmlExtendedData>)_graphicsLayers[0].Graphics[0].Attributes["extendedData"];
+                    List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicsLayer.Graphics[0].Attributes["extendedData"];
+                    
                     foreach (KmlExtendedData ed in eds)
                     {
                         allAttributes.Add(ed.Name, ed.Value);
@@ -102,11 +96,12 @@ namespace EpiDashboard.Mapping
                 }
             }
 
-            double xmin = _graphicsLayers[0].Graphics[0].Geometry.Extent.XMin;
-            double xmax = _graphicsLayers[0].Graphics[0].Geometry.Extent.XMax;
-            double ymin = _graphicsLayers[0].Graphics[0].Geometry.Extent.YMin;
-            double ymax = _graphicsLayers[0].Graphics[0].Geometry.Extent.YMax;
-            foreach (Graphic g in _graphicsLayers[0].Graphics)
+            double xmin = graphicsLayer.Graphics[0].Geometry.Extent.XMin;
+            double xmax = graphicsLayer.Graphics[0].Geometry.Extent.XMax;
+            double ymin = graphicsLayer.Graphics[0].Geometry.Extent.YMin;
+            double ymax = graphicsLayer.Graphics[0].Geometry.Extent.YMax;
+
+            foreach (Graphic g in graphicsLayer.Graphics)
             {
                 if (g.Geometry.Extent.XMin < xmin)
                     xmin = g.Geometry.Extent.XMin;
@@ -124,21 +119,6 @@ namespace EpiDashboard.Mapping
             ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5)));
         }
 
-        private void FindGraphicsLayers(KmlLayer kmlLayer)
-        {
-            foreach (Layer layer in kmlLayer.ChildLayers)
-            {
-                if (layer is GraphicsLayer)
-                {
-                    _graphicsLayers.Add((GraphicsLayer)layer);
-                }
-                else if (layer is KmlLayer)
-                {
-                    FindGraphicsLayers((KmlLayer)layer);
-                }
-            }
-        }
-
 
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
@@ -149,8 +129,6 @@ namespace EpiDashboard.Mapping
             return symbol;
         }
 
-
-
         public void Refresh()
         {
             if (_dashboardHelper != null)
@@ -159,38 +137,7 @@ namespace EpiDashboard.Mapping
             }
         }
 
-
-        public void ResetRangeValues(string shapeKey, string dataKey, string valueField, int classCount)
-        {
-            _classCount = classCount;
-            _shapeKey = shapeKey;
-            _dataKey = dataKey;
-
-            DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref valueField);
-
-            KmlLayer kmlLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
-            GraphicsLayer graphicsLayer = null;
-
-            foreach (Layer layer in kmlLayer.ChildLayers)
-            {
-                if (layer is GraphicsLayer)
-                {
-                    graphicsLayer = layer as GraphicsLayer;
-                    break;
-                }
-                else if (layer is KmlLayer)
-                {
-                    FindGraphicsLayers((KmlLayer)layer);
-                }
-            }
-
-            if (graphicsLayer == null) return;
-
-            _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
-        }
-
-        //  xxxx
-        public object[] LoadShapeFile()
+       public object[] LoadShapeFile()
         {
             throw new NotImplementedException();
         }
@@ -208,7 +155,6 @@ namespace EpiDashboard.Mapping
             legendList.Background = Brushes.White;// new LinearGradientBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF), Color.FromArgb(0x7F, 0xFF, 0xFF, 0xFF), 45);
             legendList.BorderBrush = Brushes.Black;
             legendList.BorderThickness = new Thickness(3);
-            //LegendTitle.Text = thematicItem.Description;
 
             Rectangle missingSwatchRect = new Rectangle()
             {
@@ -257,231 +203,27 @@ namespace EpiDashboard.Mapping
             LegendStackPanel.Children.Add(legendList);
         }
 
-        public void ResetRangeValues()
+        override public string GetShapeValue(Graphic graphicFeature, string shapeValue)
         {
-            string valueField = _valueField;
-
-            DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref valueField);
-
-            GraphicsLayer graphicsLayer = _graphicsLayers[0];
-            if (graphicsLayer == null) return;
-
-            ThematicItem thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
-        }
-
-
-        public ThematicItem GetThematicItem(int classCount, DataTable loadedData, GraphicsLayer graphicsLayer)
-        {
-
-            ThematicItem thematicItem = new ThematicItem()
+            if (!graphicFeature.Attributes.ContainsKey(_shapeKey))
             {
-                Name = _dataKey,
-                Description = _dataKey,
-                CalcField = ""
-            };
-
-            List<double> valueList = new List<double>();
-
-            for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
-            {
-                Graphic graphicFeature = graphicsLayer.Graphics[i];
-
-                string shapeValue = string.Empty;
-
-                if (!graphicFeature.Attributes.ContainsKey(_shapeKey))
+                List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicFeature.Attributes["extendedData"];
+                foreach (KmlExtendedData ed in eds)
                 {
-                    List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicFeature.Attributes["extendedData"];
-                    foreach (KmlExtendedData ed in eds)
+                    if (ed.Name.Equals(_shapeKey))
                     {
-                        if (ed.Name.Equals(_shapeKey))
-                        {
-                            shapeValue = ed.Value.Replace("'", "''").Trim();
-                        }
+                        shapeValue = ed.Value.Replace("'", "''").Trim();
                     }
                 }
-                else
-                {
-                    shapeValue = graphicFeature.Attributes[_shapeKey].ToString().Replace("'", "''").Trim();
-                }
-
-
-                string filterExpression = "";
-                if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
-                    filterExpression += "[";
-                filterExpression += _dataKey;
-                if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
-                    filterExpression += "]";
-                filterExpression += " = '" + shapeValue + "'";
-
-                double graphicValue = Double.PositiveInfinity;
-
-                try
-                {
-                    DataRow[] rows = loadedData.Select(filterExpression);
-
-                    if (rows.Length > 0)
-                    {
-                        object found = rows[0][_valueField];
-                        string valueField;
-
-                        if (found is string)
-                        {
-                            valueField = (string)found;
-                            graphicValue = Convert.ToDouble(valueField);
-                        }
-                    }
-                }
-                catch { }
-
-                string graphicName = shapeValue;
-
-                if (i == 0)
-                {
-                    thematicItem.Min = Double.PositiveInfinity;
-                    thematicItem.Max = Double.NegativeInfinity;
-                    thematicItem.MinName = string.Empty;
-                    thematicItem.MaxName = string.Empty;
-                }
-                else
-                {
-                    if (graphicValue < thematicItem.Min) { thematicItem.Min = graphicValue; thematicItem.MinName = graphicName; }
-                    if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity) { thematicItem.Max = graphicValue; thematicItem.MaxName = graphicName; }
-                }
-
-                if (graphicValue < Double.PositiveInfinity)
-                {
-                    valueList.Add(graphicValue);
-                }
             }
-            thematicItem.RangeStarts = CalculateThematicRange(classCount, thematicItem, valueList);
+            else
+            {
+                shapeValue = graphicFeature.Attributes[_shapeKey].ToString().Replace("'", "''").Trim();
+            }
 
-            return thematicItem;
+            return shapeValue;
         }
 
-        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string missingText)
-        {
-            try
-            {
-                _classCount = classCount;
-                _dashboardHelper = dashboardHelper;
-                _shapeKey = shapeKey;
-                _dataKey = dataKey;
-                _valueField = valueField;
-                _colors = colors;
-                _missingText = missingText;
-
-                DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
-
-                GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
-
-                _thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
-
-                if (Range != null &&
-                    Range.Count > 0)
-                {
-                    _thematicItem.RangeStarts = Range;
-                    PopulateRangeValues();
-                }
-                else
-                {
-                    _thematicItem.RangeStarts = new List<double>() { classCount };
-                    PopulateRangeValues();
-                }
-
-
-                if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
-                {
-
-                    for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
-                    {
-                        Graphic graphicFeature = graphicsLayer.Graphics[i];
-
-                        //string filterExpression = dataKey + " = '" + graphicFeature.Attributes[shapeKey].ToString().Trim() + "'";
-                        string filterExpression = "";
-                        if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
-                            filterExpression += "[";
-                        filterExpression += dataKey;
-                        if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
-                            filterExpression += "]";
-                        filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim() + "'";
-
-                        double graphicValue = Double.PositiveInfinity;
-                        try
-                        {
-                            graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][valueField]);
-                        }
-                        catch (Exception)
-                        {
-                            graphicValue = Double.PositiveInfinity;
-                        }
-
-                        int brushIndex = GetRangeIndex(graphicValue, _thematicItem.RangeStarts);
-
-
-                        SimpleFillSymbol symbol = new SimpleFillSymbol()
-                        {
-                            Fill = graphicValue == Double.PositiveInfinity ? colors[colors.Count - 1] : colors[brushIndex],
-                            BorderBrush = new SolidColorBrush(Colors.Black),
-                            BorderThickness = 1
-                        };
-
-                        graphicFeature.Symbol = symbol;
-
-                        TextBlock t = new TextBlock();
-                        t.Background = Brushes.White;
-                        if (graphicValue == Double.PositiveInfinity)
-                        {
-                            t.Text = graphicFeature.Attributes[shapeKey].ToString().Trim() + " : No Data";
-                        }
-                        else
-                        {
-                            t.Text = graphicFeature.Attributes[shapeKey].ToString().Trim() + " : " + graphicValue.ToString();
-                        }
-                        t.FontSize = 14;
-                        Border border = new Border();
-                        border.BorderThickness = new Thickness(1);
-                        Panel panel = new StackPanel();
-                        panel.Children.Add(t);
-                        border.Child = panel;
-
-                        graphicFeature.MapTip = border;
-                    }
-                }
-
-
-                SetLegendSection(colors, classCount, missingText, _thematicItem);
-
-            }
-            catch
-            {
-            }
-        }
-
-
-        public void PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string legendText)
-        {
-            _classCount = classCount;
-            _dashboardHelper = dashboardHelper;
-            _shapeKey = shapeKey;
-            _dataKey = dataKey;
-            _valueField = valueField;
-            LegendText = legendText;
-            _colors = colors;
-
-            DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
-
-            GraphicsLayer graphicsLayer = _graphicsLayers[0];
-
-            _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
-
-            if (Range != null &&
-                Range.Count > 0)
-            {
-                _thematicItem.RangeStarts = Range;
-            }
-
-            PopulateRangeValues();
-        }
         #region ILayerProvider Members
 
         public void CloseLayer()

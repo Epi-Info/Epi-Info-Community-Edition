@@ -10,11 +10,13 @@ using System.Windows.Shapes;
 using ESRI.ArcGIS.Client;
 using ESRI.ArcGIS.Client.Geometry;
 using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Toolkit.DataSources;
+using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
 using EpiDashboard.Mapping.ShapeFileReader;
 
 namespace EpiDashboard.Mapping
 {
-    public class ChoroplethLayerProvider
+    public abstract class ChoroplethLayerProvider
     {
         bool _useCustomColors;
         public bool UseCustomColors
@@ -320,6 +322,85 @@ namespace EpiDashboard.Mapping
             }
         }
 
+        public void PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string legendText)
+        {
+            _classCount = classCount;
+            _dashboardHelper = dashboardHelper;
+            _shapeKey = shapeKey;
+            _dataKey = dataKey;
+            _valueField = valueField;
+            LegendText = legendText;
+            _colors = colors;
+
+            DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
+
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
+
+            if (graphicsLayer == null)
+            {
+                KmlLayer kmlLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
+                graphicsLayer = GetGraphicsLayer((KmlLayer)kmlLayer);
+            }
+
+            _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+
+            if (Range != null && Range.Count > 0)
+            {
+                _thematicItem.RangeStarts = Range;
+            }
+
+            PopulateRangeValues();
+        }
+
+        public void ResetRangeValues(string shapeKey, string dataKey, string valueField, int classCount)
+        {
+            _classCount = classCount;
+            _shapeKey = shapeKey;
+            _dataKey = dataKey;
+
+            DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref valueField);
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
+
+            if (graphicsLayer == null)
+            {
+                KmlLayer kmlLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
+
+                foreach (Layer layer in kmlLayer.ChildLayers)
+                {
+                    if (layer is GraphicsLayer)
+                    {
+                        graphicsLayer = layer as GraphicsLayer;
+                        break;
+                    }
+                    else if (layer is KmlLayer)
+                    {
+                        graphicsLayer = GetGraphicsLayer((KmlLayer)layer);
+                    }
+                }
+            }
+
+            if (graphicsLayer == null) return;
+
+            _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+        }
+
+        public GraphicsLayer GetGraphicsLayer(KmlLayer kmlLayer)
+        {
+            foreach (Layer layer in kmlLayer.ChildLayers)
+            {
+                if (layer is GraphicsLayer)
+                {
+                    return (GraphicsLayer)layer;
+                }
+                else if (layer is KmlLayer)
+                {
+                    GetGraphicsLayer((KmlLayer)layer);
+                }
+            }
+
+            return null;
+        }
+
         public DataTable GetLoadedData(DashboardHelper dashboardHelper, string dataKey, ref string valueField)
         {
             if (dashboardHelper == null)
@@ -500,5 +581,213 @@ namespace EpiDashboard.Mapping
                 }
             }
         }
+
+        public ThematicItem GetThematicItem(int classCount, DataTable loadedData, GraphicsLayer graphicsLayer)
+        {
+            ThematicItem thematicItem = new ThematicItem()
+            {
+                Name = _dataKey,
+                Description = _dataKey,
+                CalcField = ""
+            };
+
+            List<double> valueList = new List<double>();
+
+            for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
+            {
+                Graphic graphicFeature = graphicsLayer.Graphics[i];
+
+                string shapeValue = string.Empty;
+
+                shapeValue = GetShapeValue(graphicFeature, shapeValue);
+
+                string filterExpression = "";
+
+                if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
+                {
+                    filterExpression += "[";
+                }
+
+                filterExpression += _dataKey;
+
+                if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
+                {
+                    filterExpression += "]";
+                }
+
+                filterExpression += " = '" + shapeValue + "'";
+
+                double graphicValue = Double.PositiveInfinity;
+
+                try
+                {
+                    DataRow[] rows = loadedData.Select(filterExpression);
+
+                    if (rows.Length > 0)
+                    {
+                        object found = rows[0][_valueField];
+                        string valueField;
+
+                        if (found is string)
+                        {
+                            valueField = (string)found;
+                            graphicValue = Convert.ToDouble(valueField);
+                        }
+                        else if (found is double)
+                        {
+                            graphicValue = (Double)found;
+                        }
+                    }
+                }
+                catch { }
+
+                string graphicName = shapeValue;
+
+                if (i == 0)
+                {
+                    thematicItem.Min = Double.PositiveInfinity;
+                    thematicItem.Max = Double.NegativeInfinity;
+                    thematicItem.MinName = string.Empty;
+                    thematicItem.MaxName = string.Empty;
+                }
+                else
+                {
+                    if (graphicValue < thematicItem.Min)
+                    {
+                        thematicItem.Min = graphicValue;
+                        thematicItem.MinName = graphicName;
+                    }
+                    
+                    if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity)
+                    {
+                        thematicItem.Max = graphicValue;
+                        thematicItem.MaxName = graphicName;
+                    }
+                }
+
+                if (graphicValue < Double.PositiveInfinity)
+                {
+                    valueList.Add(graphicValue);
+                }
+            }
+
+            valueList.Sort();
+
+            thematicItem.RangeStarts = CalculateThematicRange(classCount, thematicItem, valueList);
+
+            return thematicItem;
+        }
+
+        abstract public string GetShapeValue(Graphic graphicFeature, string shapeValue);
+
+        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string missingText)
+        {
+            try
+            {
+                _classCount = classCount;
+                _dashboardHelper = dashboardHelper;
+                _shapeKey = shapeKey;
+                _dataKey = dataKey;
+                _valueField = valueField;
+                _colors = colors;
+                _missingText = missingText;
+
+                DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
+
+                GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
+
+                if (graphicsLayer == null)
+                {
+                    graphicsLayer = GetGraphicsLayer(ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer);
+                }
+
+                _thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
+
+                if (Range != null &&
+                    Range.Count > 0)
+                {
+                    _thematicItem.RangeStarts = Range;
+                    PopulateRangeValues();
+                }
+                else
+                {
+                    _thematicItem.RangeStarts = new List<double>() { classCount };
+                    PopulateRangeValues();
+                }
+
+
+                if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
+                {
+
+                    for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
+                    {
+                        Graphic graphicFeature = graphicsLayer.Graphics[i];
+
+                        string filterExpression = "";
+
+                        if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
+                        {
+                            filterExpression += "[";
+                        }
+
+                        filterExpression += dataKey;
+
+                        if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
+                        {
+                            filterExpression += "]";
+                        }
+
+                        filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim() + "'";
+
+                        double graphicValue = Double.PositiveInfinity;
+                        try
+                        {
+                            graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][valueField]);
+                        }
+                        catch (Exception)
+                        {
+                            graphicValue = Double.PositiveInfinity;
+                        }
+
+                        int brushIndex = GetRangeIndex(graphicValue, _thematicItem.RangeStarts);
+
+                        SimpleFillSymbol symbol = new SimpleFillSymbol()
+                        {
+                            Fill = graphicValue == Double.PositiveInfinity ? colors[colors.Count - 1] : colors[brushIndex],
+                            BorderBrush = new SolidColorBrush(Colors.Black),
+                            BorderThickness = 1
+                        };
+
+                        graphicFeature.Symbol = symbol;
+
+                        TextBlock t = new TextBlock();
+                        t.Background = Brushes.White;
+                        if (graphicValue == Double.PositiveInfinity)
+                        {
+                            t.Text = graphicFeature.Attributes[shapeKey].ToString().Trim() + " : No Data";
+                        }
+                        else
+                        {
+                            t.Text = graphicFeature.Attributes[shapeKey].ToString().Trim() + " : " + graphicValue.ToString();
+                        }
+                        t.FontSize = 14;
+                        Border border = new Border();
+                        border.BorderThickness = new Thickness(1);
+                        Panel panel = new StackPanel();
+                        panel.Children.Add(t);
+                        border.Child = panel;
+
+                        graphicFeature.MapTip = border;
+                    }
+                }
+
+                SetLegendSection(colors, classCount, missingText, _thematicItem);
+            }
+            catch
+            {
+            }
+        }   
+
+
     }
 }
