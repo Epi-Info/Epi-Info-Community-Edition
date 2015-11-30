@@ -597,6 +597,7 @@ Comment				= ('***'{Valid Chars}*)
 
 <FreqOpt> 							::= <WeightOpt>
 								| <FreqOptStrata>
+								| <FreqOptStatistics>
 								| <OutTableOpt>
 								| <SetClause>
 								| <FreqOptNoWrap>
@@ -605,6 +606,7 @@ Comment				= ('***'{Valid Chars}*)
 
 <WeightOpt>							::= WEIGHTVAR '=' Identifier
 <FreqOptStrata>						::= STRATAVAR '=' <IdentifierList>
+<FreqOptStatistics>					::= STATISTICS '=' Identifier
 <FreqOptNoWrap>						::= NOWRAP
 <FreqOptColumnSize>						::= COLUMNSIZE '=' DecLiteral
 <FreqOptPsuvar>						::= PSUVAR '=' Identifier
