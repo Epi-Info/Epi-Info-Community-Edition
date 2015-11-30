@@ -159,10 +159,12 @@
             <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom" x:Name="scrollViewerPropertiesColors">
                 <StackPanel>
                     <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Colors__xfe</Label>
-                    <WrapPanel ItemWidth="240" Orientation="Horizontal">
-                        <StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <WrapPanel ItemWidth="700" Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" Margin="0,0,0,1" >
                             <TextBlock x:Name="tblockPalette" HorizontalAlignment="Left" TextAlignment="Center" Text="Color palette:__xfe" Margin="0,12,0,0"  />
-                            <ComboBox x:Name="cmbPalette" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="12">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,2" >
+                                    <ComboBox x:Name="cmbPalette" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="12" SelectionChanged="cmbPalette_SelectionChanged">
                                 <ComboBox.Items>
                                     <ComboBoxItem>Atlantic</ComboBoxItem>
                                     <ComboBoxItem>Breeze</ComboBoxItem>
@@ -181,10 +183,97 @@
                                     <ComboBoxItem>VibrantC</ComboBoxItem>
                                 </ComboBox.Items>
                             </ComboBox>
-                        </StackPanel>
-                    </WrapPanel>
 
-                    <Label x:Name="tblockStylesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Styles__xfe</Label>
+                            <StackPanel Orientation="Horizontal" Margin="20,0,0,1" >
+                                <Rectangle x:Name="Color1" MouseLeftButtonUp="rctColor1_MouseLeftButtonUp"  HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,1" >
+                                <Rectangle x:Name="Color2" MouseLeftButtonUp="rctColor2_MouseLeftButtonUp"  HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,1" >
+                                <Rectangle x:Name="Color3" MouseLeftButtonUp="rctColor3_MouseLeftButtonUp"  HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,1" >
+                                <Rectangle x:Name="Color4" MouseLeftButtonUp="rctColor4_MouseLeftButtonUp"  HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,1" >
+                                <Rectangle x:Name="Color5" MouseLeftButtonUp="rctColor5_MouseLeftButtonUp"  HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,1" >
+                                <Rectangle x:Name="Color6" MouseLeftButtonUp="rctColor6_MouseLeftButtonUp"  HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,1" >
+                                <Rectangle x:Name="Color7" MouseLeftButtonUp="rctColor7_MouseLeftButtonUp"  HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,1" >
+                                <Rectangle x:Name="Color8" MouseLeftButtonUp="rctColor8_MouseLeftButtonUp"  HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,1" >
+                                <Rectangle x:Name="Color9" MouseLeftButtonUp="rctColor9_MouseLeftButtonUp"  HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,1" >
+                                <Rectangle x:Name="Color10" MouseLeftButtonUp="rctColor10_MouseLeftButtonUp"  HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,1" >
+                                <Rectangle x:Name="Color11" MouseLeftButtonUp="rctColor11_MouseLeftButtonUp"  HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,0,1" >
+                                <Rectangle x:Name="Color12" MouseLeftButtonUp="rctColor12_MouseLeftButtonUp"  HorizontalAlignment="Right" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                    <Rectangle.ToolTip>
+                                        <Label Content="High value color"/>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                            </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+
+                <Label x:Name="tblockStylesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Styles__xfe</Label>
 
                     <WrapPanel ItemWidth="240" Orientation="Horizontal">
                         <!--<CheckBox x:Name="checkboxUseDiffColors" Margin="0,12,0,0" Content="Different bar colors__xfe" HorizontalAlignment="Left" IsChecked="False" />-->

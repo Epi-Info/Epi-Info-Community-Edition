@@ -1086,6 +1086,42 @@ namespace EpiDashboard.Gadgets.Charting
                                     ((HistogramChartParameters)Parameters).Orientation = Orientation.Horizontal;
                                 }
                                 break;
+                            case "palettecolor1":
+                                ((HistogramChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor2":
+                                ((HistogramChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor3":
+                                ((HistogramChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor4":
+                                ((HistogramChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor5":
+                                ((HistogramChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor6":
+                                ((HistogramChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor7":
+                                ((HistogramChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor8":
+                                ((HistogramChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor9":
+                                ((HistogramChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor10":
+                                ((HistogramChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor11":
+                                ((HistogramChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
+                            case "palettecolor12":
+                                ((HistogramChartParameters)Parameters).PaletteColors.Add(child.InnerText);
+                                break;
                             case "palette":
                                 ((HistogramChartParameters)Parameters).Palette = int.Parse(child.InnerText);
                                 break;
@@ -1515,7 +1551,13 @@ namespace EpiDashboard.Gadgets.Charting
             XmlElement paletteElement = doc.CreateElement("palette");
             paletteElement.InnerText = chtParameters.Palette.ToString();
             element.AppendChild(paletteElement);
-
+            //Palette Colors
+            for (int i = 0; i < chtParameters.PaletteColors.Count(); i++)
+            {
+                XmlElement palettecolorsElement = doc.CreateElement("paletteColor" + (i + 1));
+                palettecolorsElement.InnerText = chtParameters.PaletteColors[i].ToString();
+                element.AppendChild(palettecolorsElement);
+            }
             //barType 
             XmlElement barTypeElement = doc.CreateElement("barType");
             switch (chtParameters.BarKind.ToString())

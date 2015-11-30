@@ -18,7 +18,7 @@ using EpiDashboard;
 using EpiDashboard.Rules;
 using EpiDashboard.Gadgets.Charting;
 using ComponentArt.Win.DataVisualization.Charting;
-
+using System.Collections;
 namespace EpiDashboard.Controls.GadgetProperties
 {
     /// <summary>
@@ -26,6 +26,14 @@ namespace EpiDashboard.Controls.GadgetProperties
     /// </summary>
     public partial class ParetoChartProperties : GadgetPropertiesPanelBase
     {
+
+        private byte _opacity = 240;
+
+        public byte Opacity
+        {
+            get { return _opacity; }
+            set { _opacity = value; }
+        }
         public ParetoChartProperties(
             DashboardHelper dashboardHelper, 
             IGadget gadget, 
@@ -490,6 +498,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (cmbPalette.SelectedIndex >= 0)
             {
                 Parameters.Palette = cmbPalette.SelectedIndex;
+                Parameters.PaletteColors = GetPaletteColores();
+
             }
 
             if (cmbBarType.SelectedIndex >= 0)
@@ -667,7 +677,15 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             txtChartTitle.Text = Parameters.ChartTitle;
             txtChartSubTitle.Text = Parameters.ChartSubTitle;
-
+            cmbPalette.SelectedIndex = Parameters.Palette;
+            if (Parameters.PaletteColors.Count() > 0)
+            {
+                FillColorSquare(null, 0, Parameters.PaletteColors);
+            }
+            else
+            {
+                FillColorSquare(null, cmbPalette.SelectedIndex, null);
+            }
             //Display Legend settings
             checkboxShowLegend.IsChecked = Parameters.ShowLegend;
             checkboxShowLegendBorder.IsChecked = Parameters.ShowLegendBorder;
@@ -1030,5 +1048,279 @@ namespace EpiDashboard.Controls.GadgetProperties
                 txtLegendFontSize.Text = "12";
             }
         }
+    
+    
+      private List<string> GetPaletteColores()
+        {
+            List<string> PaletteColors = new List<string>();
+            PaletteColors.Add(Color1.Fill.ToString());
+            PaletteColors.Add(Color2.Fill.ToString());
+            PaletteColors.Add(Color3.Fill.ToString());
+            PaletteColors.Add(Color4.Fill.ToString());
+            PaletteColors.Add(Color5.Fill.ToString());
+            PaletteColors.Add(Color6.Fill.ToString());
+            PaletteColors.Add(Color7.Fill.ToString());
+            PaletteColors.Add(Color8.Fill.ToString());
+            PaletteColors.Add(Color9.Fill.ToString());
+            PaletteColors.Add(Color10.Fill.ToString());
+            PaletteColors.Add(Color11.Fill.ToString());
+            PaletteColors.Add(Color12.Fill.ToString());
+            return PaletteColors;
+        }
+        private void rctColor1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Color1.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+            }
+
+
+        }
+        private void rctColor2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Color2.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+            }
+
+
+        }
+        private void rctColor3_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Color3.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+            }
+
+
+        }
+        private void rctColor4_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Color4.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+            }
+
+        }
+        private void rctColor5_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Color5.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+            }
+
+
+        }
+        private void rctColor6_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Color6.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+            }
+
+
+        }
+        private void rctColor7_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Color7.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+            }
+
+
+        }
+        private void rctColor8_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Color8.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+            }
+
+
+        }
+        private void rctColor9_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Color9.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+            }
+
+
+        }
+        private void rctColor10_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Color10.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+            }
+
+
+        }
+        private void rctColor11_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Color11.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+            }
+
+
+        }
+        private void rctColor12_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Color12.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+            }
+
+
+        }
+
+
+        private static Brush ConvertToBrush(string Color)
+        {
+            var converter = new System.Windows.Media.BrushConverter();
+            var brush = (Brush)converter.ConvertFromString(Color);
+            return brush;
+        }
+
+
+
+        private void cmbPalette_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FillColorSquare(sender);
+        }
+
+        private void FillColorSquare(object sender = null, int selectedIndex = 0, List<string> PaletteColors = null)
+        {
+            XYChart xyChart = new XYChart();
+
+            if (PaletteColors == null)
+            {
+                int Index = 0;
+                if (sender != null)
+                {
+                    Index = ((System.Windows.Controls.Primitives.Selector)(sender)).SelectedIndex;
+                }
+                else
+                {
+                    Index = selectedIndex;
+                }
+
+                switch (Index)
+                {
+                    case 0:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Atlantic");
+                        break;
+                    case 1:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Breeze");
+                        break;
+                    case 2:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("ComponentArt");
+                        break;
+                    case 3:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Deep");
+                        break;
+                    case 4:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Earth");
+                        break;
+                    case 5:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Evergreen");
+                        break;
+                    case 6:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Heatwave");
+                        break;
+                    case 7:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Montreal");
+                        break;
+                    case 8:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Pastel");
+                        break;
+                    case 9:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Renaissance");
+                        break;
+                    case 10:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("SharePoint");
+                        break;
+                    case 11:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("Study");
+                        break;
+                    default:
+                    case 12:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantA");
+                        break;
+                    case 13:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantB");
+                        break;
+                    case 14:
+                        xyChart.Palette = ComponentArt.Win.DataVisualization.Palette.GetPalette("VibrantC");
+                        break;
+                }
+            }
+            try
+            {
+                IList Colorcollection;
+                if (PaletteColors == null)
+                {
+                    Colorcollection = (IList)xyChart.Palette.ChartingDataPoints12;
+                }
+                else
+                {
+                    Colorcollection = (IList)PaletteColors;
+
+                }
+                if (Color1 != null && Color12 != null)
+                {
+                    this.Color1.Fill = ConvertToBrush(Colorcollection[0].ToString());
+                    this.Color2.Fill = ConvertToBrush(Colorcollection[1].ToString());
+                    this.Color3.Fill = ConvertToBrush(Colorcollection[2].ToString());
+                    this.Color4.Fill = ConvertToBrush(Colorcollection[3].ToString());
+                    this.Color5.Fill = ConvertToBrush(Colorcollection[4].ToString());
+                    this.Color6.Fill = ConvertToBrush(Colorcollection[5].ToString());
+                    this.Color7.Fill = ConvertToBrush(Colorcollection[6].ToString());
+                    this.Color8.Fill = ConvertToBrush(Colorcollection[7].ToString());
+                    this.Color9.Fill = ConvertToBrush(Colorcollection[8].ToString());
+                    this.Color10.Fill = ConvertToBrush(Colorcollection[9].ToString());
+                    this.Color11.Fill = ConvertToBrush(Colorcollection[10].ToString());
+                    this.Color12.Fill = ConvertToBrush(Colorcollection[11].ToString());
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+      
+    
+    
     }
+
+
+
 }

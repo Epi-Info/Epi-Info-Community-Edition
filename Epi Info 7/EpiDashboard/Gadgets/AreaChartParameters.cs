@@ -70,6 +70,9 @@ namespace EpiDashboard
             YAxisLabelFontSize = 12;
             XAxisFontSize = 12;
             XAxisLabelFontSize = 12;
+            PaletteColors = new List<string>();
+
+
         }
 
         /// <summary>
@@ -136,6 +139,7 @@ namespace EpiDashboard
             YAxisLabelFontSize = parameters.YAxisLabelFontSize;
             XAxisFontSize = parameters.XAxisFontSize;
             XAxisLabelFontSize = parameters.XAxisLabelFontSize;
+            PaletteColors = parameters.PaletteColors;
         }
     }
 }
