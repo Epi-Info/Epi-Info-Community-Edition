@@ -55,6 +55,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string[] FrequencyOptions = null;
         string commandText = string.Empty;
 
+        public bool tablesShowStatistics = true;
+
         string parameter1 = null;
         string parameter2 = null;
         string parameter3 = null;
@@ -173,6 +175,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                     
                     break;
+                case "STATISTICS":
+                    if (this.GetCommandElement(pT.Tokens, 2).Equals("NONE"))
+                    {
+                        this.tablesShowStatistics = false;
+                    }
+                    break;
                 case "OUTTABLE":
                     this.OutTable = this.GetCommandElement(pT.Tokens, 2).Trim(new char[] { '[', ']' });
                     //inputVariableList.Add("OUTTABLE", this.GetCommandElement(pT.Tokens, 2).Trim(new char[] { '[', ']' }));
@@ -238,6 +246,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     if (!string.IsNullOrEmpty(WeightVar))
                     {
                         inputVariableList.Add("WeightVar", WeightVar);
+                    }
+                    if (!tablesShowStatistics)
+                    {
+                        inputVariableList.Add("STATISTICS", "NONE");
                     }
                     inputVariableList.Add("commandText", commandText);
                     if (!string.IsNullOrEmpty(PSUVar))

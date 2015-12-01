@@ -29,6 +29,8 @@ namespace Epi.Analysis.Statistics
         public StatisticsRepository.cTable.SingleTableResults singleTableResults;
         private Configuration config = null;
 
+        bool tablesShowStatistics = true;
+
         static private System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<object>> PermutationList;
         static private System.Collections.Generic.List<string> SelectClauses;
 
@@ -70,6 +72,14 @@ namespace Epi.Analysis.Statistics
             if (this.Context.InputVariableList.ContainsKey("WeightVar"))
             {
                 this.WeightVar = this.Context.InputVariableList["WeightVar"];
+            }
+
+            if (this.Context.InputVariableList.ContainsKey("STATISTICS"))
+            {
+                if (this.Context.InputVariableList["STATISTICS"].Equals("NONE"))
+                {
+                    tablesShowStatistics = false;
+                }
             }
 
             this.commandText = this.Context.InputVariableList["commandText"];
@@ -181,6 +191,7 @@ namespace Epi.Analysis.Statistics
 //                double cochranQ = executeCochran(this.Exposure, this.Outcome, "ColumnValues", DT, this.Exposure, yyList, StrataVarNameList, StrataVarValueList, this.WeightVar);
 //                double cochranQP = PValFromChiSq(cochranQ, 1 + StrataVarNameList.Count);
 
+                if (tablesShowStatistics)
                 try
                 {
                     StatisticsRepository.Strat2x2 strat2x2 = new StatisticsRepository.Strat2x2();
@@ -929,7 +940,7 @@ namespace Epi.Analysis.Statistics
 
             pHTMLString.Append("</table>");
 
-            if (twobytwo)
+            if (twobytwo && tablesShowStatistics)
             {
                 DataRow[] SortedRows = DT.Select(SelectedStatement, SelectOrder);
                 if (this.Context.Columns[this.Outcome].DataType == typeof(bool) || this.Context.Columns[this.Outcome].DataType == typeof(byte))
@@ -1093,7 +1104,46 @@ namespace Epi.Analysis.Statistics
                 }
 
             }
-            else
+            else if (twobytwo)
+            {
+                DataRow[] SortedRows = DT.Select(SelectedStatement, SelectOrder);
+                if (this.Context.Columns[this.Outcome].DataType == typeof(bool) || this.Context.Columns[this.Outcome].DataType == typeof(byte))
+                {
+                    yy = double.Parse(SortedRows[0][3].ToString());
+                    yn = double.Parse(SortedRows[0][2].ToString());
+                    ny = double.Parse(SortedRows[1][3].ToString());
+                    nn = double.Parse(SortedRows[1][2].ToString());
+                }
+                else
+                {
+                    yy = double.Parse(SortedRows[0][2].ToString());
+                    yn = double.Parse(SortedRows[0][3].ToString());
+                    ny = double.Parse(SortedRows[1][2].ToString());
+                    nn = double.Parse(SortedRows[1][3].ToString());
+                }
+
+                tt = yy + yn + ny + nn;
+
+                if (string.IsNullOrEmpty(singleTableResults.ErrorMessage))
+                {
+                    double yyPct = ((double)yy / (double)tt) * 160;
+                    double ynPct = ((double)yn / (double)tt) * 160;
+                    double nyPct = ((double)ny / (double)tt) * 160;
+                    double nnPct = ((double)nn / (double)tt) * 160;
+
+                    pHTMLString.AppendLine("<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" style=\"padding-left: 50px;\">");
+                    pHTMLString.AppendLine(" <tr>");
+                    pHTMLString.AppendLine("  <td class=\"TwoByTwo\" valign=\"bottom\" align=\"right\"><div style=\"background-color: red; width:" + yyPct.ToString("F0") + "; height:" + yyPct.ToString("F0") + ";\"><!-- --></td>");
+                    pHTMLString.AppendLine("  <td class=\"TwoByTwo\" valign=\"bottom\" align=\"left\"><div style=\"background-color: orange; width:" + ynPct.ToString("F0") + "; height:" + ynPct.ToString("F0") + ";\"><!-- --></td>");
+                    pHTMLString.AppendLine(" </tr><tr>");
+                    pHTMLString.AppendLine("  <td class=\"TwoByTwo\" valign=\"top\" align=\"right\"><div style=\"background-color: yellow; width:" + nyPct.ToString("F0") + "; height:" + nyPct.ToString("F0") + ";\"><!-- --></td>");
+                    pHTMLString.AppendLine("  <td class=\"TwoByTwo\" valign=\"top\" align=\"left\"><div style=\"background-color: green; width:" + nnPct.ToString("F0") + "; height:" + nnPct.ToString("F0") + ";\"><!-- --></td>");
+                    pHTMLString.AppendLine(" </tr></table>");
+                    pHTMLString.AppendLine("<br clear=\"all\" />");
+                }
+
+            }
+            else if (tablesShowStatistics)
             {
                 DataRow[] SortedRows = DT.Select(SelectedStatement, SelectOrder);
                 double[] tableChiSq = Epi.Statistics.SingleMxN.CalcChiSq(SortedRows, true);
