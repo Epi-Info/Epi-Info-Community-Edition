@@ -36,9 +36,9 @@
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
             <Controls:SettingsToggleButton x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables" Description="Choose map boundaries." IsChecked="False" Visibility="Hidden" Checked="tbtnVariables_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Visibility="Hidden" Checked="tbtnDisplay_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters" Description="Set data filters." IsChecked="False" Visibility="Hidden" Checked="tbtnFilter_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables" Description="Choose map boundaries." IsEnabled="False" IsChecked="False" Checked="tbtnVariables_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsEnabled="False" IsChecked="False" Checked="tbtnDisplay_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters" Description="Set data filters." IsEnabled="False" IsChecked="False" Checked="tbtnFilter_Checked"/>
         </StackPanel>
 
         <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
@@ -46,7 +46,7 @@
                 <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Source</Label>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock FontSize="15"  Foreground="Red" Margin="0 1 0 0 ">*</TextBlock>
-                    <TextBlock FontSize="10" Foreground="Red" Margin="3 0 0 10" x:Name="dataSourceRequiredFields"> = Required field(s)</TextBlock>
+                    <TextBlock FontSize="10" Foreground="Red" Margin="3 0 0 10" x:Name="dataSourceRequiredFields"> = Required</TextBlock>
                 </StackPanel>
             </StackPanel>
 
@@ -99,7 +99,7 @@
                     <Label x:Name="tblockSelectVarData" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 20">Select the variables for data layer</Label>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontSize="15"  Foreground="Red" Margin="0 1 0 0 ">*</TextBlock>
-                        <TextBlock FontSize="10" Foreground="Red" Margin="3 0 0 10" x:Name="variablesRequiredFields"> = Required field(s)</TextBlock>
+                        <TextBlock FontSize="10" Foreground="Red" Margin="3 0 0 10" x:Name="variablesRequiredFields"> = Required</TextBlock>
                     </StackPanel>
                     <StackPanel>
                         <WrapPanel Orientation="Horizontal">

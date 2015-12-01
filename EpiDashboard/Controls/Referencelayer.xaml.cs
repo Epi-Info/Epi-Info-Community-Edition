@@ -89,14 +89,14 @@ namespace EpiDashboard.Controls
                 f_HeightRatio = (float)((float)mapControl.ResizedHeight / (float)i_StandardHeight);
                 f_WidthRatio = (float)((float)mapControl.ResizedWidth / (float)i_StandardWidth);
 
-                this.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
-                this.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+                this.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
+                this.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
 
             }
             else
             {
-                this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
-                this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.15);
+                this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.13);
+                this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.16);
             }
         }
 

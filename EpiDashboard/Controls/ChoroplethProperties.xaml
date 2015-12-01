@@ -14,7 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MaxWidth="400" MinWidth="300" Width=".33*" />
@@ -24,8 +24,8 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
         </Grid.RowDefinitions>
 
         <!--<Border Grid.ColumnSpan="100" Grid.RowSpan="100" BorderThickness="2" BorderBrush="#DDDDDD" />-->
@@ -35,13 +35,13 @@
                     <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Choropleth</Label>
                 </Viewbox>
             </Border>
-            
+
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
             <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked" />
-            <Controls:SettingsToggleButton  x:Name="tbtnVariables" Title="Variables" Description="Choose map boundaries." IsChecked="False" Visibility="Hidden" Checked="tbtnVariables_Checked" />
-            <Controls:SettingsToggleButton  x:Name="tbtnDisplay" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsChecked="False" Visibility="Hidden" Checked="tbtnDisplay_Checked" />
-            <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Visibility="Hidden" Checked="tbtnFilters_Checked" />
+            <Controls:SettingsToggleButton  x:Name="tbtnVariables" Title="Variables" Description="Choose map boundaries." IsEnabled="False" IsChecked="False" Checked="tbtnVariables_Checked" />
+            <Controls:SettingsToggleButton  x:Name="tbtnDisplay" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsEnabled="False" IsChecked="False" Checked="tbtnDisplay_Checked" />
+            <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsEnabled="False" IsChecked="False" Checked="tbtnFilters_Checked" />
         </StackPanel>
 
         <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
@@ -49,7 +49,7 @@
                 <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 0">Data Source</Label>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock FontSize="15"  Foreground="Red" Margin="0 1 0 0 ">*</TextBlock>
-                    <TextBlock FontSize="10" Foreground="Red" Margin="3 0 0 10" x:Name="dataSourceRequiredFields"> = Required field(s)</TextBlock>
+                    <TextBlock FontSize="10" Foreground="Red" Margin="3 0 0 10" x:Name="dataSourceRequiredFields"> = Required</TextBlock>
                 </StackPanel>
             </StackPanel>
 
@@ -67,7 +67,7 @@
                         <Grid>
                             <WrapPanel Orientation="Horizontal">
                                 <StackPanel Margin="0 0 20 10">
-                                    <TextBox TextWrapping="Wrap" MinWidth="250" MaxWidth="600" Margin="0 0 0 0" x:Name="txtProjectPath" IsReadOnly="True" TextChanged="PropertyChanged_EnableDisable"></TextBox>
+                                    <TextBox TextWrapping="Wrap" MinWidth="300" MaxWidth="600" Margin="0 0 0 0" x:Name="txtProjectPath" IsReadOnly="True" TextChanged="PropertyChanged_EnableDisable"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="0 0 20 0">
                                     <Button Height="25" x:Name="btnBrowse" Click="btnBrowse_Click">Browse</Button>
@@ -90,6 +90,7 @@
                         <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtSQLQuery"></TextBox>
                     </StackPanel>
                     <StackPanel x:Name="panelBoundaries" IsEnabled="False" Margin="0 20 0 0">
+                        
                         <WrapPanel Orientation="Horizontal">
                             <Label x:Name="lblBoundaries"  Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
                             <TextBlock VerticalAlignment="Top" Style="{StaticResource requiredFieldInd}" Margin="2 0 0 0" Text="*">
@@ -99,9 +100,9 @@
                             </TextBlock>
                         </WrapPanel>
                         <StackPanel Margin="0 15 0 0" HorizontalAlignment="Left">
-                        <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="Shapefile" Checked="radShapeFile_Checked"  />
+                            <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="Shapefile" Checked="radShapeFile_Checked"  />
                             <StackPanel Margin="18 5 0 0" x:Name="panelshape" IsEnabled="False">
-                            <Grid>
+                                <Grid>
                                     <WrapPanel Orientation="Horizontal">
                                         <StackPanel Margin="0 0 20 10">
                                             <TextBox TextWrapping="Wrap" MinWidth="300" MaxWidth="600" x:Name="txtShapePath" IsReadOnly="False" TextChanged="txtProjectPath_TextChanged"></TextBox>
@@ -110,56 +111,60 @@
                                             <Button Height="25" x:Name="btnBrowseShape"  HorizontalAlignment="Left" Click="btnBrowseShapeFile_Click" >Browse</Button>
                                         </StackPanel>
                                     </WrapPanel>
-                            </Grid>
+                                </Grid>
+                            </StackPanel>
                         </StackPanel>
-                        </StackPanel>
-                        <StackPanel Margin="0 15 0 0">
-                        <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
-                            <StackPanel x:Name="panelmap" IsEnabled="False" Margin="18 10 0 0 " HorizontalAlignment="Left">
-                                <StackPanel  Margin="18 5 0 0" x:Name="panelmapconnect" IsEnabled="False"/>
-                                <StackPanel Margin="0 0 0 0 ">
-                                    <StackPanel Margin="0 0 0 0" x:Name="panelmapserver" IsEnabled="False" HorizontalAlignment="Left" >
-                                        <Label Padding="0 0 0 0" x:Name="lblURL">URL:</Label>
-                                        <Grid >
-                                            <WrapPanel Orientation="Horizontal">
-                                                <StackPanel Margin="0 0 20 10">
-                                                    <TextBox TextWrapping="Wrap" MinWidth="300" Width="Auto" MaxWidth="600" x:Name="txtMapSeverpath" TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
-                                                </StackPanel>
-                                                <StackPanel >
-                                                    <Button Height="25" x:Name="btnMapserverlocate" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
-                                                </StackPanel>
-                                            </WrapPanel>
-                                        </Grid>
-                                        <TextBox TextWrapping="Wrap" IsReadOnly="True" Style="{StaticResource PropertiesExampleText}" Margin="0 0 0 0" x:Name="lblExampleMapServerURL">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</TextBox>
+
+                        <WrapPanel Orientation="Horizontal">
+                            <StackPanel Margin="0 20 20 0">
+                                <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
+                                <StackPanel x:Name="panelmap" IsEnabled="False" Margin="0 0 0 0 ">
+                                    <StackPanel  Margin="18 5 0 0" x:Name="panelmapconnect" IsEnabled="False"/>
+                                    <StackPanel Margin="0 0 0 0 ">
+                                        <StackPanel Margin="18 5 0 0" x:Name="panelmapserver" IsEnabled="False" HorizontalAlignment="Left" >
+                                            <Label Padding="0 0 0 0" x:Name="lblURL">URL:</Label>
+                                            <Grid >
+                                                <WrapPanel Orientation="Horizontal">
+                                                    <StackPanel Margin="0 0 20 10">
+                                                        <TextBox TextWrapping="Wrap" MinWidth="200" Width="200" x:Name="txtMapSeverpath" TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
+                                                    </StackPanel>
+                                                    <StackPanel >
+                                                        <Button Height="25" x:Name="btnMapserverlocate" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
+                                                    </StackPanel>
+                                                </WrapPanel>
+                                            </Grid>
+                                            <TextBox TextWrapping="Wrap" HorizontalAlignment="Left" MinWidth="320" Width="320" IsReadOnly="True" Style="{StaticResource PropertiesExampleText}" Margin="0 0 0 0" x:Name="lblExampleMapServerURL">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</TextBox>
                                             <StackPanel Margin="0 15 0 0">
                                                 <Label Padding="0" x:Name="lblSelectFeature">Select Feature:</Label>
-                                                <ComboBox MinWidth="210" Width="Auto" MaxWidth="600" x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged"></ComboBox>
+                                                <ComboBox MinWidth="320"  x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged"></ComboBox>
                                             </StackPanel>
-                                    
+
+                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel Margin="0 20 0 0">
+                                <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
+                                <StackPanel Margin="18 10 0 0" x:Name="panelKml" IsEnabled="False" >
+                                    <Label Padding="0" x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
+
+                                    <Grid >
+                                        <WrapPanel Orientation="Horizontal">
+                                            <StackPanel Margin="0 0 20 10">
+                                                <TextBox TextWrapping="Wrap" MinWidth="200" Width="200" x:Name="txtKMLpath" IsReadOnly="False" TextChanged="PropertyChanged_EnableDisable" ></TextBox>
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <Button x:Name="btnKMLFile" Height="25"  Click="btnKMLFile_Click">Browse</Button>
+                                            </StackPanel>
+                                        </WrapPanel>
+                                    </Grid>
+                                    <TextBox TextWrapping="Wrap" HorizontalAlignment="Left" MinWidth="320" Width="320" IsReadOnly="True" Style="{StaticResource PropertiesExampleText}" Margin="0 0 0 0" x:Name="lblExampleKMLFile">Example: http://code.google.com/apis/kml/documentation/us_states.kml</TextBox>
                                 </StackPanel>
                             </StackPanel>
-                        <StackPanel Margin="0 15 0 0">
-                            <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
-                            <StackPanel Margin="18 5 0 0" x:Name="panelKml" IsEnabled="False" >
-                                <Label Padding="0" x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
-                            
-                                <Grid >
-                                    <WrapPanel Orientation="Horizontal">
-                                        <StackPanel Margin="0 0 20 10">
-                                            <TextBox TextWrapping="Wrap" MinWidth="300" Width="Auto" MaxWidth="600" x:Name="txtKMLpath" IsReadOnly="False" TextChanged="PropertyChanged_EnableDisable" ></TextBox>
-                                        </StackPanel>
-                                        <StackPanel>
-                                            <Button x:Name="btnKMLFile" Height="25" Grid.Column="2" Click="btnKMLFile_Click">Browse</Button>
-                        </StackPanel>
-                                    </WrapPanel>
-                                </Grid>
-                                <TextBox TextWrapping="Wrap" IsReadOnly="True" Style="{StaticResource PropertiesExampleText}" Margin="0 0 0 0" x:Name="lblExampleKMLFile">Example: http://code.google.com/apis/kml/documentation/us_states.kml</TextBox>
-                            </StackPanel>
-                            </StackPanel>
-                        </StackPanel>
+                        </WrapPanel>
                     </StackPanel>
+                </StackPanel>
             </ScrollViewer>
         </DockPanel>
 
@@ -168,7 +173,7 @@
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 0">Variables</Label>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock FontSize="15"  Foreground="Red" Margin="0 1 0 0 ">*</TextBlock>
-                    <TextBlock FontSize="10" Foreground="Red" Margin="3 0 0 10" x:Name="variablesRequiredFields"> = Required field(s)</TextBlock>
+                    <TextBlock FontSize="10" Foreground="Red" Margin="3 0 0 10" x:Name="variablesRequiredFields"> = Required</TextBlock>
                 </StackPanel>
 
             </StackPanel>
@@ -255,7 +260,7 @@
                     </StackPanel>
 
                     <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 16, 0, 0">Colors</Label>
-                    
+
                     <WrapPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical" Margin="0 0 30 0">
                             <StackPanel Orientation="Horizontal" Margin="0 0 0 0"   Visibility="Collapsed"   >
@@ -315,23 +320,23 @@
 
                     <StackPanel Margin="0 26 0 0">
                         <Label x:Name="tblockRangesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Ranges</Label>
-                            
-                            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                                <Label x:Name="lblClassBreaks" VerticalAlignment="Center" >Classes</Label>
-                                <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Height="25" Margin="0,0,0,0" SelectionChanged="ClassCount_Changed">
-                                    <ComboBoxItem>2</ComboBoxItem>
-                                    <ComboBoxItem>3</ComboBoxItem>
-                                    <ComboBoxItem>4</ComboBoxItem>
-                                    <ComboBoxItem IsSelected="True">5</ComboBoxItem>
-                                    <ComboBoxItem>6</ComboBoxItem>
-                                    <ComboBoxItem>7</ComboBoxItem>
-                                    <ComboBoxItem>8</ComboBoxItem>
-                                    <ComboBoxItem>9</ComboBoxItem>
-                                    <ComboBoxItem>10</ComboBoxItem>
-                                </ComboBox>
-                                <CheckBox Style="{StaticResource PropertiesPanelCheckbox}" x:Name="quintilesOption" Click="CheckBox_Quantiles_Click" IsChecked="True" Content="Quantiles" HorizontalAlignment="Left" VerticalAlignment="Center" Margin=" 25,0,0,0" />
+
+                        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                            <Label x:Name="lblClassBreaks" VerticalAlignment="Center" >Classes</Label>
+                            <ComboBox x:Name="cmbClasses" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Height="25" Margin="0,0,0,0" SelectionChanged="ClassCount_Changed">
+                                <ComboBoxItem>2</ComboBoxItem>
+                                <ComboBoxItem>3</ComboBoxItem>
+                                <ComboBoxItem>4</ComboBoxItem>
+                                <ComboBoxItem IsSelected="True">5</ComboBoxItem>
+                                <ComboBoxItem>6</ComboBoxItem>
+                                <ComboBoxItem>7</ComboBoxItem>
+                                <ComboBoxItem>8</ComboBoxItem>
+                                <ComboBoxItem>9</ComboBoxItem>
+                                <ComboBoxItem>10</ComboBoxItem>
+                            </ComboBox>
+                            <CheckBox Style="{StaticResource PropertiesPanelCheckbox}" x:Name="quintilesOption" Click="CheckBox_Quantiles_Click" IsChecked="True" Content="Quantiles" HorizontalAlignment="Left" VerticalAlignment="Center" Margin=" 25,0,0,0" />
                         </StackPanel>
-                        
+
                         <StackPanel Margin="0 10 0 0">
                             <Grid x:Name="stratGrid">
                                 <Grid.RowDefinitions>
@@ -349,7 +354,7 @@
                                     <RowDefinition Height="35"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="75" x:Name="rampStartColumn"/>
                                     <ColumnDefinition Width="50" x:Name="rampCompareColumn"/>
                                     <ColumnDefinition Width="75" x:Name="rampEndColumn"/>
@@ -410,17 +415,17 @@
                                 <TextBox Grid.Row="10" x:Name="rampEnd09" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
                                 <TextBox Grid.Row="11" x:Name="rampEnd10" Grid.Column="3" MinWidth="60" Height="30" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
 
-                            <TextBox Grid.Row="01" x:Name="legendText0" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center" Text="Missing / Excluded" IsEnabled="False"/>
-                            <TextBox Grid.Row="02" x:Name="legendText1" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                            <TextBox Grid.Row="03" x:Name="legendText2" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                            <TextBox Grid.Row="04" x:Name="legendText3" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                            <TextBox Grid.Row="05" x:Name="legendText4" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                            <TextBox Grid.Row="06" x:Name="legendText5" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                            <TextBox Grid.Row="07" x:Name="legendText6" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                            <TextBox Grid.Row="08" x:Name="legendText7" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                            <TextBox Grid.Row="09" x:Name="legendText8" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                            <TextBox Grid.Row="10" x:Name="legendText9" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
-                            <TextBox Grid.Row="11" x:Name="legendText10" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                                <TextBox Grid.Row="01" x:Name="legendText0" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center" Text="Missing / Excluded" IsEnabled="False"/>
+                                <TextBox Grid.Row="02" x:Name="legendText1" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                                <TextBox Grid.Row="03" x:Name="legendText2" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                                <TextBox Grid.Row="04" x:Name="legendText3" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                                <TextBox Grid.Row="05" x:Name="legendText4" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                                <TextBox Grid.Row="06" x:Name="legendText5" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                                <TextBox Grid.Row="07" x:Name="legendText6" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                                <TextBox Grid.Row="08" x:Name="legendText7" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                                <TextBox Grid.Row="09" x:Name="legendText8" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                                <TextBox Grid.Row="10" x:Name="legendText9" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
+                                <TextBox Grid.Row="11" x:Name="legendText10" Grid.Column="5" MinWidth="200" Height="30" HorizontalAlignment="Center"/>
                             </Grid>
                         </StackPanel>
                     </StackPanel>
@@ -429,17 +434,18 @@
         </DockPanel>
 
         <DockPanel x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
-            <StackPanel Grid.Column="2" DockPanel.Dock="Top" >
+            <StackPanel DockPanel.Dock="Top" >
                 <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
                 <Label x:Name="tblockSetDataFilter" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this layer.</Label>
             </StackPanel>
+
         </DockPanel>
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
         <DockPanel Grid.ColumnSpan="3" Grid.Row="2">
             <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
             <Button x:Name="btnOK" DockPanel.Dock="Right" IsEnabled="false" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
         </DockPanel>
- 
+
     </Grid>
-    
+
 </UserControl>
