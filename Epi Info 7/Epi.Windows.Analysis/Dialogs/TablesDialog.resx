@@ -1475,7 +1475,31 @@
   <data name="&gt;&gt;cbxColumns.Parent" xml:space="preserve">
     <value>gbxPageSettings</value>
   </data>
-  <data name="&gt;&gt;cbxColumns.ZOrder" xml:space="preserve">
+  <data name="cbxStatistics.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>System</value>
+  </data>
+  <data name="cbxStatistics.Location" type="System.Drawing.Point, System.Drawing">
+    <value>400, 288</value>
+  </data>
+  <data name="cbxStatistics.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 24</value>
+  </data>
+  <data name="cbxStatistics.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cbxStatistics.Text" xml:space="preserve">
+    <value>Show Statistics</value>
+  </data>
+  <data name="&gt;&gt;cbxStatistics.Name" xml:space="preserve">
+    <value>cbxColumns</value>
+  </data>
+  <data name="&gt;&gt;cbxStatistics.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbxStatistics.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbxStatistics.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="gbxPageSettings.Enabled" type="System.Boolean, mscorlib">
