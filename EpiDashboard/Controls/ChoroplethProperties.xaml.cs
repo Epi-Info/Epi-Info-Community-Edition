@@ -2667,7 +2667,7 @@ namespace EpiDashboard.Controls
                 if (classBreaks[classLevel].End <= newValue)
                 {
                     limitType = ClassLimitType.End;
-                    AdjustClassBreaks(classBreaks, newValue + (float)0.01, classLevel, limitType);
+                    AdjustClassBreaks(classBreaks, (float)(newValue + 0.01), classLevel, limitType);
                 }
 
                 classLevel -= 1;
@@ -2684,7 +2684,7 @@ namespace EpiDashboard.Controls
                 if (classBreaks[classLevel].Start >= newValue)
                 {
                     limitType = ClassLimitType.Start;
-                    AdjustClassBreaks(classBreaks, newValue - (float)0.01, classLevel, limitType);
+                    AdjustClassBreaks(classBreaks, (float)(newValue - 0.01), classLevel, limitType);
                 }
 
                 classLevel += 1;
