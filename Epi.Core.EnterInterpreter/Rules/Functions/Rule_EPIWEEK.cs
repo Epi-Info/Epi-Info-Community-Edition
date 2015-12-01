@@ -19,6 +19,20 @@ namespace Epi.Core.EnterInterpreter.Rules
         public Rule_EPIWEEK(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
         {
             this.ParameterList = EnterRule.GetFunctionParameters(pContext, pToken);
+
+            if (ParameterList.Count > 0)
+            {
+                foreach (var item in ParameterList)
+                {
+                    var id = ((Epi.Core.EnterInterpreter.Rules.Rule_Value)(item)).Id;
+                    if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLower()))
+                    {
+                        this.Context.CommandVariableCheck.Add(id.ToLower(), "epiweek");
+                    }
+                }
+            }
+
+
         }
 
         /// <summary>

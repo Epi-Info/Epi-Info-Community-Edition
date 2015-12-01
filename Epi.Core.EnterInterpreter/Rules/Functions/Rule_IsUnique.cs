@@ -34,6 +34,17 @@ namespace Epi.Core.EnterInterpreter.Rules
                     }
                 }
                 this.IdentifierList = tokensInTree.Split(',');
+                if (IdentifierList.Length > 0)
+                {
+                    foreach (var item in IdentifierList)
+                    {
+
+                        if (!this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                        {
+                            this.Context.CommandVariableCheck.Add(item.ToLower(), "isunique");
+                        }
+                    }
+                }
             }
         }
 
