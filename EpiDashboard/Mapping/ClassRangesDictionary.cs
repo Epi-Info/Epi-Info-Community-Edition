@@ -151,8 +151,8 @@ namespace EpiDashboard.Mapping
             foreach (ClassLimits classLimits in limits)
             {
                 if (classLimits.Start != float.NaN)
-                { 
-                    _dictionary[classLimits.Key_Start] = classLimits.Start.ToString("F2").TrimEnd(new char[] {'0'}).TrimEnd(new char[] { '.'});
+                {
+                    _dictionary[classLimits.Key_Start] = string.Format("{0:N2}", classLimits.Start); 
                 }
                 else
                 {
@@ -161,7 +161,7 @@ namespace EpiDashboard.Mapping
 
                 if (classLimits.End != float.NaN)
                 {
-                    _dictionary[classLimits.Key_End] = classLimits.End.ToString("F2").TrimEnd(new char[] { '0' }).TrimEnd(new char[] { '.' });
+                    _dictionary[classLimits.Key_End] = string.Format("{0:N2}", classLimits.End); 
                 }
                 else
                 {

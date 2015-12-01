@@ -308,15 +308,15 @@ namespace EpiDashboard.Mapping
             
             for (int i = 0; i < RangeStarts.Count; i++)
             {
-                RangeValues[i, 0] = RangeStarts[i].ToString();
+                RangeValues[i, 0] = string.Format("{0:N2}",RangeStarts[i]);
 
                 if (i < _thematicItem.RangeStarts.Count - 1)
                 {
-                    RangeValues[i, 1] = RangeStarts[i + 1].ToString();
+                    RangeValues[i, 1] = string.Format("{0:N2}",RangeStarts[i + 1]);
                 }
                 else
                 {
-                    RangeValues[i, 1] = _thematicItem.Max.ToString();
+                    RangeValues[i, 1] = string.Format("{0:N2}", _thematicItem.Max);
                 }
             }
         }

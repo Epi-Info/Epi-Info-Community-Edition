@@ -109,54 +109,6 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        private DataTable GetLoadedData(DashboardHelper dashboardHelper, string dataKey, ref string valueField)
-        {
-            if (dashboardHelper == null)
-            {
-                return null;
-            }
-
-            List<string> columnNames = new List<string>();
-            if (dashboardHelper.IsUsingEpiProject)
-            {
-                columnNames.Add("UniqueKey");
-            }
-            columnNames.Add(valueField);
-            columnNames.Add(dataKey);
-
-            DataTable loadedData;
-
-            if (valueField.Equals("{Record Count}"))
-            {
-                GadgetParameters gadgetOptions = new GadgetParameters();
-                gadgetOptions.MainVariableName = dataKey;
-                gadgetOptions.ColumnNames = columnNames;
-                Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
-                inputVariableList.Add("freqvar", dataKey);
-                inputVariableList.Add("allvalues", "false");
-                inputVariableList.Add("showconflimits", "false");
-                inputVariableList.Add("showcumulativepercent", "false");
-                inputVariableList.Add("includemissing", "false");
-                inputVariableList.Add("maxrows", "500");
-
-                gadgetOptions.InputVariableList = inputVariableList;
-                loadedData = dashboardHelper.GenerateFrequencyTableforMap(gadgetOptions).First().Key;
-                
-                foreach (DataRow dr in loadedData.Rows)
-                {
-                    dr[0] = dr[0].ToString().Trim();
-                }
-                
-                _valueField = valueField = "freq";
-            }
-            else
-            {
-                loadedData = dashboardHelper.GenerateTable(columnNames);
-            }
-            
-            return loadedData;
-        }
-
         private List<double> RemoveOutOfRangeValues(ThematicItem thematicItem)
         {
             List<double> RangeList = new List<double>();
@@ -171,10 +123,6 @@ namespace EpiDashboard.Mapping
 
             return RangeList;
         }
-
-        private StackPanel _legendStackPanel;
-        private string _legendText;
-        private bool _rangesLoadedFromMapFile;
 
         public bool AsQuintile
         {
@@ -198,9 +146,9 @@ namespace EpiDashboard.Mapping
             if (graphicsLayer != null)
             {
                 ArcGIS_Map.Layers.Remove(graphicsLayer);
-                if (_legendStackPanel != null)
+                if (LegendStackPanel != null)
                 {
-                    _legendStackPanel.Children.Clear();
+                    LegendStackPanel.Children.Clear();
                 }
             }
         }
