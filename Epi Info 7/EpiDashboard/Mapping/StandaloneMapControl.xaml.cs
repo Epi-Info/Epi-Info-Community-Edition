@@ -1787,14 +1787,14 @@ namespace EpiDashboard.Mapping
                 f_HeightRatio = (float)((float)ResizedHeight / (float)i_StandardHeight);
                 f_WidthRatio = (float)((float)ResizedWidth / (float)i_StandardWidth);
 
-                pointofinterestproperties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
-                pointofinterestproperties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+                pointofinterestproperties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
+                pointofinterestproperties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
 
             }
             else
             {
-                pointofinterestproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
-                pointofinterestproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.15);
+                pointofinterestproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                pointofinterestproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
 
 
@@ -1834,14 +1834,14 @@ namespace EpiDashboard.Mapping
                 f_HeightRatio = (float)((float)ResizedHeight / (float)i_StandardHeight);
                 f_WidthRatio = (float)((float)ResizedWidth / (float)i_StandardWidth);
 
-                caseclusterproperties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
-                caseclusterproperties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+                caseclusterproperties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
+                caseclusterproperties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
 
             }
             else
             {
-                caseclusterproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
-                caseclusterproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.15);
+                caseclusterproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                caseclusterproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
 
             caseclusterproperties.Cancelled += new EventHandler(properties_Cancelled);
@@ -1927,6 +1927,7 @@ namespace EpiDashboard.Mapping
 
             if (ResizedWidth != 0 & ResizedHeight != 0)
             {
+                //System.Windows.MessageBox.Show("3");
                 double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;//Developer Desktop Width Where the Form is Designed
                 double i_StandardWidth = System.Windows.SystemParameters.PrimaryScreenWidth; ////Developer Desktop Height Where the Form is Designed
                 float f_HeightRatio = new float();
@@ -1934,14 +1935,15 @@ namespace EpiDashboard.Mapping
                 f_HeightRatio = (float)((float)ResizedHeight / (float)i_StandardHeight);
                 f_WidthRatio = (float)((float)ResizedWidth / (float)i_StandardWidth);
 
-                properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
-                properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+                properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
+                properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
 
             }
             else
             {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.15);
+                //System.Windows.MessageBox.Show("4");
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
 
 
@@ -2384,6 +2386,7 @@ namespace EpiDashboard.Mapping
 
             if (ResizedWidth != 0 & ResizedHeight != 0)
             {
+                //System.Windows.MessageBox.Show("3");
                 double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;//Developer Desktop Width Where the Form is Designed
                 double i_StandardWidth = System.Windows.SystemParameters.PrimaryScreenWidth; ////Developer Desktop Height Where the Form is Designed
                 float f_HeightRatio = new float();
@@ -2391,14 +2394,15 @@ namespace EpiDashboard.Mapping
                 f_HeightRatio = (float)((float)ResizedHeight / (float)i_StandardHeight);
                 f_WidthRatio = (float)((float)ResizedWidth / (float)i_StandardWidth);
 
-                properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
-                properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+                properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
+                properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
 
             }
             else
             {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.15);
+                //System.Windows.MessageBox.Show("4");
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
 
 
@@ -2919,11 +2923,12 @@ namespace EpiDashboard.Mapping
             popup.Parent = LayoutRoot;
             EpiDashboard.Controls.Referencelayer properties = new EpiDashboard.Controls.Referencelayer(this, myMap);
             properties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
-            properties.Width = 800;
-            properties.Height = 600;
+            //properties.Width = 800;
+            //properties.Height = 600;
 
             if (ResizedWidth != 0 & ResizedHeight != 0)
             {
+                //System.Windows.MessageBox.Show("1");
                 double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;//Developer Desktop Width Where the Form is Designed
                 double i_StandardWidth = System.Windows.SystemParameters.PrimaryScreenWidth; ////Developer Desktop Height Where the Form is Designed
                 float f_HeightRatio = new float();
@@ -2931,14 +2936,15 @@ namespace EpiDashboard.Mapping
                 f_HeightRatio = (float)((float)ResizedHeight / (float)i_StandardHeight);
                 f_WidthRatio = (float)((float)ResizedWidth / (float)i_StandardWidth);
 
-                properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
-                properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+                properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
+                properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
 
             }
             else
             {
-                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
-                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.15);
+                //System.Windows.MessageBox.Show("1");
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
 
 

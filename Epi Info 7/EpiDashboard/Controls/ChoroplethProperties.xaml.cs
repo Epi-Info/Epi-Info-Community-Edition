@@ -177,6 +177,9 @@ namespace EpiDashboard.Controls
             _mapControl.ResizedHeight = e.NewSize.Height;
             if (_mapControl.ResizedWidth != 0 & _mapControl.ResizedHeight != 0)
             {
+                //System.Windows.MessageBox.Show("1");
+                //System.Windows.MessageBox.Show(_mapControl.ResizedWidth.ToString());
+                //System.Windows.MessageBox.Show(_mapControl.ResizedHeight.ToString());
                 double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;//Developer Desktop Width Where the Form is Designed
                 double i_StandardWidth = System.Windows.SystemParameters.PrimaryScreenWidth; ////Developer Desktop Height Where the Form is Designed
                 float f_HeightRatio = new float();
@@ -184,14 +187,15 @@ namespace EpiDashboard.Controls
                 f_HeightRatio = (float)((float)_mapControl.ResizedHeight / (float)i_StandardHeight);
                 f_WidthRatio = (float)((float)_mapControl.ResizedWidth / (float)i_StandardWidth);
 
-                this.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
-                this.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+                this.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
+                this.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
 
             }
             else
             {
-                this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
-                this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.15);
+                //System.Windows.MessageBox.Show("2");
+                this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
         }
 
@@ -595,6 +599,8 @@ namespace EpiDashboard.Controls
 
                 panelFilters.Children.Add(rowFilterControl);
             }
+
+
         }
 
         private void RemoveFilter()
@@ -657,7 +663,7 @@ namespace EpiDashboard.Controls
                 if (!(field.ToUpper() == "RECSTATUS" || field.ToUpper() == "UNIQUEKEY"))
                 { 
                     cmbValue.Items.Add(field); 
-                }
+            }
             }
 
             cmbValue.Items.Insert(0, "{Record Count}");
@@ -1074,12 +1080,12 @@ namespace EpiDashboard.Controls
                     
                     choroplethServerLayerProvider.SetShapeRangeValues(
                         _dashboardHelper,
-                        cmbShapeKey.SelectedItem.ToString(),
-                        cmbDataKey.SelectedItem.ToString(),
-                        cmbValue.SelectedItem.ToString(),
-                        brushList,
-                        classCount,
-                        missingText);
+                    cmbShapeKey.SelectedItem.ToString(),
+                    cmbDataKey.SelectedItem.ToString(),
+                    cmbValue.SelectedItem.ToString(),
+                    brushList,
+                    classCount,
+                    missingText);
                 }
                 else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
                 {
@@ -1850,7 +1856,7 @@ namespace EpiDashboard.Controls
                         else
                         {
                             thisProvider.ListLegendText.Add(ChoroplethConstants.legendTextControlPrefix + x, t.Text);
-                        }
+                    }
                     }
                 }
                 catch (Exception)
@@ -1902,7 +1908,7 @@ namespace EpiDashboard.Controls
                         else
                         {
                             thisProvider.ListLegendText.Add(ChoroplethConstants.legendTextControlPrefix + x, t.Text);
-                        }
+                    }
                     }
                 }
                 catch (Exception)
@@ -2093,7 +2099,7 @@ namespace EpiDashboard.Controls
                 {
                     choroplethServerLayerProperties.datafilters = rowFilterControl.DataFilters;
                 }
-                
+
                 if (radKML.IsChecked == true && choroplethKmlLayerProperties != null)
                 {
                     choroplethKmlLayerProperties.datafilters = rowFilterControl.DataFilters;
@@ -2564,8 +2570,10 @@ namespace EpiDashboard.Controls
 
             if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text) || (!string.IsNullOrEmpty(txtMapSeverpath.Text) || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
             {
+                tbtnVariables.IsEnabled = true;
                 if(cmbShapeKey.SelectedIndex != -1 && cmbDataKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
                 {
+
                     if (IsMissingLimitValue() == false)
                     {
                         btnOK.IsEnabled = true;
@@ -2575,35 +2583,17 @@ namespace EpiDashboard.Controls
                         btnOK.IsEnabled = false;
                     }
 
-                    if (tbtnDisplay.Visibility != System.Windows.Visibility.Visible)
-                    {
-                        tbtnDisplay.Visibility = Visibility.Visible;
-                        tbtnDisplay_Checked(this, new RoutedEventArgs());
-                    }
                     
+
+                    tbtnDisplay.IsEnabled = true;
+                    tbtnFilters.IsEnabled = true;
                     tbtnFilters.Visibility = Visibility.Visible;
                     return;                
                 }
-                else
-                {
-                    tbtnDisplay.Visibility = Visibility.Hidden;
-                    tbtnFilters.Visibility = Visibility.Hidden;
-                    btnOK.IsEnabled = false;
-                }
 
-                if (tbtnVariables.Visibility != System.Windows.Visibility.Visible)
-                {
-                    tbtnVariables.Visibility = Visibility.Visible;
-                    tbtnVariables_Checked(this, new RoutedEventArgs());
-                }
+               
             }
-            else
-            {
-                tbtnVariables.Visibility = Visibility.Hidden;
-                tbtnDisplay.Visibility = Visibility.Hidden;
-                tbtnFilters.Visibility = Visibility.Hidden;
-                btnOK.IsEnabled = false;
-            }
+           
         }
 
         private void PropertyChanged_EnableDisable(object sender, TextChangedEventArgs e)

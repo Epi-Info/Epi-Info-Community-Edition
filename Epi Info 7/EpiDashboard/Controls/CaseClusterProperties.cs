@@ -112,14 +112,14 @@ namespace EpiDashboard.Controls
                 f_HeightRatio = (float)((float)mapControl.ResizedHeight / (float)i_StandardHeight);
                 f_WidthRatio = (float)((float)mapControl.ResizedWidth / (float)i_StandardWidth);
 
-                this.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
-                this.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+                this.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
+                this.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
 
             }
             else
             {
-                this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
-                this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.15);
+                this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
         }
 
@@ -619,39 +619,19 @@ namespace EpiDashboard.Controls
 
             if (!string.IsNullOrEmpty(txtProjectPath.Text))
             {
+                tbtnVariables.IsEnabled = true;
                 if (cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
                 {
                     btnOK.IsEnabled = true;
 
-                    if (tbtnDisplay.Visibility != System.Windows.Visibility.Visible)
-                    {
-                        tbtnDisplay.Visibility = Visibility.Visible;
-                        tbtnDisplay_Checked(this, new RoutedEventArgs());
-                    }
-
+                    tbtnDisplay.IsEnabled = true;
+                    tbtnFilters.IsEnabled = true;
                     tbtnFilters.Visibility = Visibility.Visible;
                     return;
                 }
-                else
-                {
-                    tbtnDisplay.Visibility = Visibility.Hidden;
-                    tbtnFilters.Visibility = Visibility.Hidden;
-                    btnOK.IsEnabled = false;
-                }
-
-                if (tbtnVariables.Visibility != System.Windows.Visibility.Visible)
-                {
-                    tbtnVariables.Visibility = Visibility.Visible;
-                    tbtnVariables_Checked(this, new RoutedEventArgs());
-                }
+                
             }
-            else
-            {
-                tbtnVariables.Visibility = Visibility.Hidden;
-                tbtnDisplay.Visibility = Visibility.Hidden;
-                tbtnFilters.Visibility = Visibility.Hidden;
-                btnOK.IsEnabled = false;
-            }
+         
         }
 
         public void cmbLatitude_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -66,8 +66,8 @@ namespace EpiDashboard.Controls
             tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_COORD_VARIABLES;
             tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
             tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
-            tbtnCharts.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
-            tbtnCharts.Description = DashboardSharedStrings.GADGET_TABDESC_SETCOLORS;
+            //tbtnCharts.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
+            //tbtnCharts.Description = DashboardSharedStrings.GADGET_TABDESC_SETCOLORS;
             tbtnFilter.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilter.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS_MAPS;
 
@@ -118,14 +118,14 @@ namespace EpiDashboard.Controls
                 f_HeightRatio = (float)((float)mapControl.ResizedHeight / (float)i_StandardHeight);
                 f_WidthRatio = (float)((float)mapControl.ResizedWidth / (float)i_StandardWidth);
 
-                this.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
-                this.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
+                this.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
+                this.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
 
             }
             else
             {
-                this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.07);
-                this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.15);
+                this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
         }
 
@@ -204,7 +204,7 @@ namespace EpiDashboard.Controls
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelVariables.Visibility = System.Windows.Visibility.Collapsed;
             panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
-            panelCharts.Visibility = System.Windows.Visibility.Visible;
+            //panelCharts.Visibility = System.Windows.Visibility.Visible;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilter.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -651,20 +651,21 @@ namespace EpiDashboard.Controls
 
         private void PropertyChanged_EnableDisable()
         {
-            tbtnVariables.Visibility = Visibility.Hidden;
-            tbtnDisplay.Visibility = Visibility.Hidden;
-            tbtnCharts.Visibility = Visibility.Hidden;
-            tbtnFilter.Visibility = Visibility.Hidden;
+            //tbtnVariables.Visibility = Visibility.Hidden;
+            //tbtnDisplay.Visibility = Visibility.Hidden;
+            ////tbtnCharts.Visibility = Visibility.Hidden;
+            //tbtnFilter.Visibility = Visibility.Hidden;
             btnOK.IsEnabled = false;
 
             if (!string.IsNullOrEmpty(txtProjectPath.Text))
             {
-                tbtnVariables.Visibility = Visibility.Visible;
+                tbtnVariables.IsEnabled = true;
 
                 if (cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
                 {
-                    tbtnDisplay.Visibility = Visibility.Visible;
-                    tbtnCharts.Visibility = Visibility.Visible;
+                    tbtnDisplay.IsEnabled = true;
+                    tbtnFilter.IsEnabled = true;
+                    //tbtnCharts.Visibility = Visibility.Visible;
                     tbtnFilter.Visibility = Visibility.Visible;
                     btnOK.IsEnabled = true;
                 }
