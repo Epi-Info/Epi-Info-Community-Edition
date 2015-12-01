@@ -26,7 +26,6 @@ namespace EpiDashboard.Mapping
         {
             if (!string.IsNullOrEmpty(fileName))
             {
-                //Get the file info objects for the SHP and the DBF file selected by the user
                 FileInfo shapeFile = new FileInfo(fileName);
                 FileInfo dbfFile = new FileInfo(fileName.ToLower().Replace(".shp", ".dbf"));
                 if (!dbfFile.Exists)
@@ -35,7 +34,6 @@ namespace EpiDashboard.Mapping
                     return null;
                 }
 
-                //Read the SHP and DBF files into the ShapeFileReader
                 ShapeFileReader.ShapeFile shapeFileReader = new ShapeFileReader.ShapeFile();
                 if (shapeFile != null && dbfFile != null)
                 {
@@ -88,7 +86,9 @@ namespace EpiDashboard.Mapping
                 {
                     ArcGIS_Map.Extent = graphicsLayer.FullExtent;
                 }
+                
                 graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
+                
                 return new object[] { fileName, graphicsLayer.Graphics[0].Attributes };
             }
             else return null;
@@ -96,107 +96,16 @@ namespace EpiDashboard.Mapping
 
         public object[] LoadShapeFile()
         {
-            //Create the dialog allowing the user to select the "*.shp" and the "*.dbf" files
             Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
             ofd.Filter = "ESRI Shapefiles (*.shp)|*.shp";
-            //ofd.Multiselect = true;
 
             if (ofd.ShowDialog().Value)
             {
-                //Get the file info objects for the SHP and the DBF file selected by the user
-                FileInfo shapeFile = new FileInfo(ofd.FileName);
-                FileInfo dbfFile = new FileInfo(ofd.FileName.ToLower().Replace(".shp", ".dbf"));
-                if (!dbfFile.Exists)
-                {
-                    System.Windows.MessageBox.Show("Associated DBF file not found");
-                    return null;
-                }
-                foreach (string fname in ofd.FileNames)
-                {
-                    FileInfo fi = new FileInfo(fname);
-                    if (fi.Extension.ToLower() == ".shp")
-                    {
-                        shapeFile = fi;
-                    }
-                    if (fi.Extension.ToLower() == ".dbf")
-                    {
-                        dbfFile = fi;
-                    }
-                }
-
-                //Read the SHP and DBF files into the ShapeFileReader
-                ShapeFileReader.ShapeFile shapeFileReader = new ShapeFileReader.ShapeFile();
-                if (shapeFile != null && dbfFile != null)
-                {
-                    shapeFileReader.Read(shapeFile, dbfFile);
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("Please select a SP and a DBF file to proceed.");
-                    return null;
-                }
-
-                GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
-                if (graphicsLayer == null)
-                {
-                    graphicsLayer = new GraphicsLayer();
-                    graphicsLayer.ID = _layerId.ToString();
-                    ArcGIS_Map.Layers.Add(graphicsLayer);
-                }
-
-                int recCount = shapeFileReader.Records.Count;
-                int rgbFactor = 255 / recCount;
-                int counter = 0;
-
-                foreach (ShapeFileReader.ShapeFileRecord record in shapeFileReader.Records)
-                {
-                    Graphic graphic = record.ToGraphic();
-                    if (graphic != null)
-                    {
-                        graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(240, 255, 255, 255)));
-                        graphicsLayer.Graphics.Add(graphic);
-                    }
-                    counter += rgbFactor;
-                }
-                
-                Envelope shapeFileExtent = shapeFileReader.GetExtent();
-                
-                if (shapeFileExtent.SpatialReference == null)
-                {
-                    ArcGIS_Map.Extent = shapeFileExtent;
-                }
-                else
-                {
-                    if (shapeFileExtent.SpatialReference.WKID == 4326)
-                    {
-                        ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
-                    }
-                }
-                
-                graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
-                
-                return new object[] { ofd.FileName, graphicsLayer.Graphics[0].Attributes };
+                return LoadShapeFile(ofd.FileName);
             }
             else 
             {
                 return null;
-            }
-        }
-
-        public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
-        {
-            SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Fill = brush;
-            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
-            symbol.BorderThickness = 1;
-            return symbol;
-        }
-
-        public void Refresh()
-        {
-            if (_dashboardHelper != null)
-            {
-                SetShapeRangeValues(_dashboardHelper, _shapeKey, _dataKey, _valueField, _colors, _classCount, _missingText);
             }
         }
 
@@ -244,6 +153,7 @@ namespace EpiDashboard.Mapping
             {
                 loadedData = dashboardHelper.GenerateTable(columnNames);
             }
+            
             return loadedData;
         }
 
@@ -257,7 +167,6 @@ namespace EpiDashboard.Mapping
                 {
                     RangeList.Add(Item);
                 }
-
             }
 
             return RangeList;
