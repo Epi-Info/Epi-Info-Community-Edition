@@ -17,6 +17,17 @@ namespace Epi.Core.EnterInterpreter.Rules
             : base(pContext)
         {
             this.ParameterList = EnterRule.GetFunctionParameters(pContext, pToken);
+            if (ParameterList.Count > 0)
+            {
+                foreach (var item in ParameterList)
+                {
+                    var id = ((Epi.Core.EnterInterpreter.Rules.Rule_Value)(item)).Id;
+                    if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLower()))
+                    {
+                        this.Context.CommandVariableCheck.Add(id.ToLower(), "filedate");
+                    }
+                }
+            }
         }
 
         /// <summary>
