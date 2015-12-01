@@ -164,14 +164,6 @@ namespace EpiDashboard.Mapping
             return symbol;
         }
 
-        public void Refresh()
-        {
-            if (_dashboardHelper != null)
-            {
-                SetShapeRangeValues(_dashboardHelper, _shapeKey, _dataKey, _valueField, _colors, _classCount, _missingText);
-            }
-        }
-
         override public string GetShapeValue(Graphic graphicFeature, string shapeValue)
         {
             shapeValue = graphicFeature.Attributes[_shapeKey].ToString().Replace("'", "''").Trim();
@@ -195,12 +187,7 @@ namespace EpiDashboard.Mapping
 
         #endregion
 
-        internal void SetRangeFromAttributeList(Dictionary<int, object> dictionary)
-        {
-        }
-
         #region ILayerProvider Members
-        
         #endregion
     }
 }

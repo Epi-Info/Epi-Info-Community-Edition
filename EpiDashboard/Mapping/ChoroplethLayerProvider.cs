@@ -24,7 +24,7 @@ namespace EpiDashboard.Mapping
             get { return _useCustomColors; }
             set { _useCustomColors = value; }
         }
-        
+
         public bool _asQuintile;
 
         public DashboardHelper _dashboardHelper;
@@ -98,7 +98,7 @@ namespace EpiDashboard.Mapping
             _graphicsLayers = new List<GraphicsLayer>();
         }
 
-        public  DashboardHelper DashboardHelper { get; set; }
+        public DashboardHelper DashboardHelper { get; set; }
 
         public string[,] RangeValues
         {
@@ -195,7 +195,7 @@ namespace EpiDashboard.Mapping
             }
             return d;
         }
-        
+
         bool _rangesLoadedFromMapFile;
         public bool RangesLoadedFromMapFile
         {
@@ -204,7 +204,7 @@ namespace EpiDashboard.Mapping
         }
 
         public List<double> RangeStartsFromMapFile { get; set; }
-        
+
         public struct ThematicItem
         {
             public string Name { get; set; }
@@ -240,7 +240,6 @@ namespace EpiDashboard.Mapping
 
         public bool UseCustomRanges { get; set; }
 
-
         public int GetRangeIndex(double val, List<double> ranges)
         {
             int limit;
@@ -267,7 +266,7 @@ namespace EpiDashboard.Mapping
 
             if (RangesLoadedFromMapFile && RangeStartsFromMapFile != null)
             {
-                rangeStarts = this.RangeStartsFromMapFile;  
+                rangeStarts = this.RangeStartsFromMapFile;
             }
             else
             {
@@ -275,7 +274,7 @@ namespace EpiDashboard.Mapping
                 double portion = totalRange / classCount;
                 rangeStarts.Add(thematicItem.Min);
                 double startRangeValue = thematicItem.Min;
-                
+
                 IEnumerable<double> valueEnumerator =
                     from aValue in valueList
                     orderby aValue
@@ -288,9 +287,9 @@ namespace EpiDashboard.Mapping
                     double value0 = valueEnumerator.ElementAt(Convert.ToInt32(Math.Floor(i)));
                     double value1 = valueEnumerator.ElementAt(Convert.ToInt32(Math.Ceiling(i)));
                     double value = (value1 + value0) / 2.0;
-                    
+
                     if (value < thematicItem.Min)
-                    { 
+                    {
                         value = thematicItem.Min;
                     }
 
@@ -301,12 +300,12 @@ namespace EpiDashboard.Mapping
             return rangeStarts;
         }
 
-
         public void PopulateRangeValues()
         {
             RangeCount = _thematicItem.RangeStarts.Count;
             Array.Clear(RangeValues, 0, RangeValues.Length);
             var RangeStarts = _thematicItem.RangeStarts;
+            
             for (int i = 0; i < RangeStarts.Count; i++)
             {
                 RangeValues[i, 0] = RangeStarts[i].ToString();
@@ -384,6 +383,23 @@ namespace EpiDashboard.Mapping
             _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
         }
 
+        public void Refresh()
+        {
+            if (_dashboardHelper != null)
+            {
+                SetShapeRangeValues(_dashboardHelper, _shapeKey, _dataKey, _valueField, _colors, _classCount, _missingText);
+            }
+        }
+
+        public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
+        {
+            SimpleFillSymbol symbol = new SimpleFillSymbol();
+            symbol.Fill = brush;
+            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
+            symbol.BorderThickness = 1;
+            return symbol;
+        }
+
         public GraphicsLayer GetGraphicsLayer(KmlLayer kmlLayer)
         {
             foreach (Layer layer in kmlLayer.ChildLayers)
@@ -433,19 +449,19 @@ namespace EpiDashboard.Mapping
 
                 gadgetOptions.InputVariableList = inputVariableList;
                 loadedData = dashboardHelper.GenerateFrequencyTable(gadgetOptions).First().Key;
-                
+
                 foreach (DataRow dr in loadedData.Rows)
                 {
                     dr[0] = dr[0].ToString().Trim();
                 }
-                
+
                 valueField = "freq";
             }
             else
             {
                 loadedData = dashboardHelper.GenerateTable(columnNames);
             }
-            
+
             return loadedData;
         }
 
@@ -455,7 +471,7 @@ namespace EpiDashboard.Mapping
             {
                 LegendStackPanel = new StackPanel();
             }
-            
+
             LegendStackPanel.Children.Clear();
 
             System.Windows.Controls.ListBox legendList = new System.Windows.Controls.ListBox();
@@ -569,7 +585,7 @@ namespace EpiDashboard.Mapping
                     classStackPanel.Margin = new Thickness(10, 0, 10, 5);
 
                     legendList.Items.Add(classStackPanel);
-                    
+
                     if (rangeStarts.Count <= c + 1)
                     {
                         break;
@@ -657,7 +673,7 @@ namespace EpiDashboard.Mapping
                         thematicItem.Min = graphicValue;
                         thematicItem.MinName = graphicName;
                     }
-                    
+
                     if (graphicValue > thematicItem.Max && graphicValue != Double.PositiveInfinity)
                     {
                         thematicItem.Max = graphicValue;
@@ -715,10 +731,8 @@ namespace EpiDashboard.Mapping
                     PopulateRangeValues();
                 }
 
-
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
-
                     for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
                     {
                         Graphic graphicFeature = graphicsLayer.Graphics[i];
@@ -786,8 +800,6 @@ namespace EpiDashboard.Mapping
             catch
             {
             }
-        }   
-
-
+        }
     }
 }

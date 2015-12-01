@@ -31,12 +31,16 @@ namespace EpiDashboard.Mapping
         {
             KmlDialog dialog = new KmlDialog();
             object[] kmlfile = null;
+            
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 kmlfile = LoadKml(dialog.ServerName);
                 return kmlfile;
             }
-            else return null;
+            else
+            {
+                return null;
+            }
         }
 
         public object[] LoadKml(string url)
@@ -60,8 +64,10 @@ namespace EpiDashboard.Mapping
                 ArcGIS_Map.Extent = shapeLayer.FullExtent;
                 return new object[] { shapeLayer };
             }
-            else { return null; }
-
+            else 
+            { 
+                return null; 
+            }
         }
 
         void shapeLayer_Initialized(object sender, EventArgs e)
@@ -119,88 +125,9 @@ namespace EpiDashboard.Mapping
             ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5)));
         }
 
-
-        public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
-        {
-            SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Fill = brush;
-            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
-            symbol.BorderThickness = 1;
-            return symbol;
-        }
-
-        public void Refresh()
-        {
-            if (_dashboardHelper != null)
-            {
-                SetShapeRangeValues(_dashboardHelper, _shapeKey, _dataKey, _valueField, _colors, _classCount, _missingText);
-            }
-        }
-
-       public object[] LoadShapeFile()
+        public object[] LoadShapeFile()
         {
             throw new NotImplementedException();
-        }
-
-        private void SetLegendSection(int classCount, List<SolidColorBrush> brushList, string missingText, ThematicItem thematicItem)
-        {
-            if (LegendStackPanel == null)
-            {
-                LegendStackPanel = new StackPanel();
-            }
-            LegendStackPanel.Children.Clear();
-
-            System.Windows.Controls.ListBox legendList = new System.Windows.Controls.ListBox();
-            legendList.Margin = new Thickness(5);
-            legendList.Background = Brushes.White;// new LinearGradientBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF), Color.FromArgb(0x7F, 0xFF, 0xFF, 0xFF), 45);
-            legendList.BorderBrush = Brushes.Black;
-            legendList.BorderThickness = new Thickness(3);
-
-            Rectangle missingSwatchRect = new Rectangle()
-            {
-                Width = 20,
-                Height = 20,
-                Stroke = new SolidColorBrush(Colors.Black),
-                Fill = brushList[brushList.Count - 1]
-            };
-
-            TextBlock titleTextBlock = new TextBlock();
-            titleTextBlock.Text = LegendText;          //        String.Format("  " + "Title Text");
-            StackPanel titleTextStackPanel = new StackPanel();
-            titleTextStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-            //  titleTextStackPanel.Children.Add(missingSwatchRect);
-
-            titleTextStackPanel.Children.Add(titleTextBlock);
-
-
-            TextBlock missingClassTextBlock = new TextBlock();
-            missingClassTextBlock.Text = String.Format("  " + missingText);
-            StackPanel missingClassStackPanel = new StackPanel();
-            missingClassStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-            missingClassStackPanel.Children.Add(missingSwatchRect);
-            missingClassStackPanel.Children.Add(missingClassTextBlock);
-
-            legendList.Items.Add(titleTextStackPanel);
-
-            legendList.Items.Add(missingClassStackPanel);
-
-            SetLegendText(brushList, classCount, thematicItem.RangeStarts, legendList);
-
-            TextBlock minTextBlock = new TextBlock();
-            StackPanel minStackPanel = new StackPanel();
-            minStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-            minTextBlock.Text = thematicItem.MinName != null ? String.Format("Min: {0} ({1})", thematicItem.Min, thematicItem.MinName.Trim()) : String.Format("Min: {0} ({1})", thematicItem.Min, string.Empty);
-            minStackPanel.Children.Add(minTextBlock);
-            legendList.Items.Add(minStackPanel);
-
-            TextBlock maxTextBlock = new TextBlock();
-            StackPanel maxStackPanel = new StackPanel();
-            maxStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-            maxTextBlock.Text = thematicItem.MaxName != null ? String.Format("Max: {0} ({1})", thematicItem.Max, thematicItem.MaxName.Trim()) : String.Format("Max: {0} ({1})", thematicItem.Max, string.Empty);
-            maxStackPanel.Children.Add(maxTextBlock);
-            legendList.Items.Add(maxStackPanel);
-
-            LegendStackPanel.Children.Add(legendList);
         }
 
         override public string GetShapeValue(Graphic graphicFeature, string shapeValue)
