@@ -43,6 +43,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.txtNumCol = new System.Windows.Forms.TextBox();
             this.cbxNoLineWrap = new System.Windows.Forms.CheckBox();
             this.cbxColumns = new System.Windows.Forms.CheckBox();
+            this.cbxStatistics = new System.Windows.Forms.CheckBox();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -197,6 +198,11 @@ namespace Epi.Windows.Analysis.Dialogs
             this.cbxMatch.Name = "cbxMatch";
             this.cbxMatch.CheckedChanged += new System.EventHandler(this.cbxMatch_CheckedChanged);
             // 
+            // cbxStatistics
+            // 
+            resources.ApplyResources(this.cbxStatistics, "cbxStatistics");
+            this.cbxMatch.Name = "cbxStatistics";
+            // 
             // lbxStratifyBy
             // 
             resources.ApplyResources(this.lbxStratifyBy, "lbxStratifyBy");
@@ -283,6 +289,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.gbxPageSettings);
             this.Controls.Add(this.lbxStratifyBy);
             this.Controls.Add(this.cbxMatch);
+            this.Controls.Add(this.cbxStatistics);
             this.Controls.Add(this.pbxheight);
             this.Controls.Add(this.cmbStratifyBy);
             this.Controls.Add(this.lblStratifyBy);
@@ -322,7 +329,8 @@ namespace Epi.Windows.Analysis.Dialogs
 		private System.Windows.Forms.TextBox txtNumCol;
 		private System.Windows.Forms.CheckBox cbxNoLineWrap;
 		private System.Windows.Forms.CheckBox cbxColumns;
-		private System.Windows.Forms.Button btnHelp;
+        private System.Windows.Forms.CheckBox cbxStatistics;
+        private System.Windows.Forms.Button btnHelp;
 		private System.Windows.Forms.Button btnClear;
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOK;

@@ -58,6 +58,7 @@ namespace Epi.Windows.Analysis.Dialogs
                 this.btnSaveOnly.Click += new System.EventHandler(this.btnSaveOnly_Click);
             }
             this.cbxMatch.Visible = false; // fix for defect #603
+            this.cbxStatistics.Checked = true;
         }
 
         private void TablesDialog_Load( object sender, EventArgs e )
@@ -144,6 +145,14 @@ namespace Epi.Windows.Analysis.Dialogs
                 sb.Append("OUTTABLE");
                 sb.Append(StringLiterals.EQUAL);
                 sb.Append(FieldNameNeedsBrackets(this.txtOutput.Text) ? Util.InsertInSquareBrackets(this.txtOutput.Text) : this.txtOutput.Text);
+                sb.Append(StringLiterals.SPACE);
+            }
+
+            if (!cbxStatistics.Checked)
+            {
+                sb.Append("STATISTICS");
+                sb.Append(StringLiterals.EQUAL);
+                sb.Append("NONE");
                 sb.Append(StringLiterals.SPACE);
             }
 
