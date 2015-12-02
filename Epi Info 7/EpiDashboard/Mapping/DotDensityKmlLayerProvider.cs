@@ -251,10 +251,12 @@ namespace EpiDashboard.Mapping
 
                     gadgetOptions.InputVariableList = inputVariableList;
                     loadedData = dashboardHelper.GenerateFrequencyTableforMap(gadgetOptions).First().Key;
+                    
                     foreach (DataRow dr in loadedData.Rows)
                     {
                         dr[0] = dr[0].ToString().Trim();
                     }
+                    
                     valueField = "freq";
                 }
                 else
@@ -296,7 +298,6 @@ namespace EpiDashboard.Mapping
                     {
                         shapeValue = graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim();
                     }
-                    
                     
                     string filterExpression = "";
                     if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
@@ -368,7 +369,7 @@ namespace EpiDashboard.Mapping
                                                 break;
                                             }
                                         }
-                                        catch (Exception ex)
+                                        catch
                                         {
                                             pointInGraphic = false;
                                         }
@@ -379,7 +380,7 @@ namespace EpiDashboard.Mapping
                         }
 
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         graphicValue = Double.PositiveInfinity;
                     }

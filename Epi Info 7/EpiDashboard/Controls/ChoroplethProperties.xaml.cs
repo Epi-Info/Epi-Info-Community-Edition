@@ -2570,30 +2570,36 @@ namespace EpiDashboard.Controls
 
             if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text) || (!string.IsNullOrEmpty(txtMapSeverpath.Text) || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
             {
-                tbtnVariables.IsEnabled = true;
+                if (tbtnVariables.IsEnabled == false)
+                {
+                    tbtnVariables.IsEnabled = true;
+                    tbtnVariables_Checked(this, new RoutedEventArgs());
+                }
+
                 if(cmbShapeKey.SelectedIndex != -1 && cmbDataKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
                 {
 
+                    if (tbtnDisplay.IsEnabled == false)
+                    {
+                        tbtnDisplay.IsEnabled = true;
+                        tbtnDisplay_Checked(this, new RoutedEventArgs());
+                    }
+                    
                     if (IsMissingLimitValue() == false)
                     {
-                        btnOK.IsEnabled = true;
+                        btnOK.IsEnabled = true; 
                     }
                     else
                     {
                         btnOK.IsEnabled = false;
                     }
 
-                    
-
                     tbtnDisplay.IsEnabled = true;
                     tbtnFilters.IsEnabled = true;
                     tbtnFilters.Visibility = Visibility.Visible;
                     return;                
                 }
-
-               
             }
-           
         }
 
         private void PropertyChanged_EnableDisable(object sender, TextChangedEventArgs e)
