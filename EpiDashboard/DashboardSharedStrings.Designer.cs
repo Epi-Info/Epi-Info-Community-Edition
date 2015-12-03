@@ -2085,7 +2085,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EPI Curve Chart.
+        ///   Looks up a localized string similar to Epi Curve Chart.
         /// </summary>
         public static string GADGET_CONFIG_TITLE_EPICURVE_CHART {
             get {
@@ -2724,7 +2724,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to KML File.
+        ///   Looks up a localized string similar to KML/KMZ File.
         /// </summary>
         public static string GADGET_KMLFILE {
             get {
@@ -2733,7 +2733,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Location URL of KML File:.
+        ///   Looks up a localized string similar to Location URL of KML/KMZ File:.
         /// </summary>
         public static string GADGET_KMLFILE_LOCATION {
             get {
@@ -4371,7 +4371,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the variables for the EPI curve chart..
+        ///   Looks up a localized string similar to Select the variables for the Epi curve chart..
         /// </summary>
         public static string GADGET_TABDESC_EPICURVE_CHART {
             get {
