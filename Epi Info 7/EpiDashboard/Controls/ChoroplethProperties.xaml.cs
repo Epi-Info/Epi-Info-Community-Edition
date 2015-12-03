@@ -1460,16 +1460,6 @@ namespace EpiDashboard.Controls
                         );
                 }
             }
-            //else if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null &&
-            //          cmbValue.SelectedItem != null) && (choroplethServerLayerProvider != null))
-            //{
-            //    choroplethServerLayerProvider.ResetRangeValues();
-            //}
-            //else if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null &&
-            //          cmbValue.SelectedItem != null) && (choroplethKmlLayerProvider != null))
-            //{
-            //    choroplethKmlLayerProvider.ResetRangeValues();
-            //}
 
             SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
             SolidColorBrush rampEnd = (SolidColorBrush)rctHighColor.Fill;
@@ -1547,20 +1537,10 @@ namespace EpiDashboard.Controls
                     thisProvider.CustomColorsDictionary.Add(rctColor1.Name, rampStart.Color);
                 }
 
-                if (radShapeFile.IsChecked == true && thisProvider != null)
+                if (thisProvider != null && quintilesOption.IsChecked == true)
                 {
                     rampStart01.Text = thisProvider.RangeValues[0, 0];
                     rampEnd01.Text = thisProvider.RangeValues[0, 1];
-                }
-                else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
-                {
-                    rampStart01.Text = choroplethServerLayerProvider.RangeValues[0, 0];
-                    rampEnd01.Text = choroplethServerLayerProvider.RangeValues[0, 1];
-                }
-                else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
-                {
-                    rampStart01.Text = choroplethKmlLayerProvider.RangeValues[0, 0];
-                    rampEnd01.Text = choroplethKmlLayerProvider.RangeValues[0, 1];
                 }
 
                 Color color;
@@ -1605,7 +1585,7 @@ namespace EpiDashboard.Controls
 
                     if (isNewColorRamp) uiControls.rectangle.Fill = new SolidColorBrush(color);
 
-                    if (radShapeFile.IsChecked == true && thisProvider != null)
+                    if (thisProvider != null && quintilesOption.IsChecked == true)
                     {
                         if (thisProvider.UseCustomRanges)
                         {
@@ -1617,16 +1597,6 @@ namespace EpiDashboard.Controls
                             uiControls.rampStarts.Text = thisProvider.RangeValues[i - 2, 0];
                             uiControls.rampEnds.Text = thisProvider.RangeValues[i - 2, 1];
                         }
-                    }
-                    else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
-                    {
-                        uiControls.rampStarts.Text = choroplethServerLayerProvider.RangeValues[i - 2, 0];
-                        uiControls.rampEnds.Text = choroplethServerLayerProvider.RangeValues[i - 2, 1];
-                    }
-                    else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
-                    {
-                        uiControls.rampStarts.Text = choroplethKmlLayerProvider.RangeValues[i - 2, 0];
-                        uiControls.rampEnds.Text = choroplethKmlLayerProvider.RangeValues[i - 2, 1];
                     }
                 }
 
@@ -1833,7 +1803,10 @@ namespace EpiDashboard.Controls
 
             if (radShapeFile.IsChecked == true && thisProvider != null)
             {
-                thisProvider.PopulateRangeValues();
+                if (quintilesOption.IsChecked == true)
+                {
+                    thisProvider.PopulateRangeValues();
+                }
 
                 if (string.IsNullOrEmpty(legTitle.Text))
                 {
@@ -1885,7 +1858,10 @@ namespace EpiDashboard.Controls
                     thisProvider = choroplethKmlLayerProvider;
                 }
 
-                thisProvider.PopulateRangeValues();
+                if (quintilesOption.IsChecked == true)
+                {
+                    thisProvider.PopulateRangeValues();
+                }
 
                 if (string.IsNullOrEmpty(legTitle.Text))
                 {
