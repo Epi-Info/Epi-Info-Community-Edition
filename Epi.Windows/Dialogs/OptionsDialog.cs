@@ -1168,6 +1168,72 @@ namespace Epi.Windows.Dialogs
             }
         }
 
+        private void Ping_Click(object sender, EventArgs e)
+        {
+            Save();
+            if (ValidateEIWSSittings())
+            {
+                MessageBox.Show("Succeeded!", "", MessageBoxButtons.OK);
+            }
+            else 
+            {
+                MessageBox.Show("Failed!", "", MessageBoxButtons.OK);
+            }
+        }
+        private bool ValidateEIWSSittings()
+        {
+            bool IsValid = true;
+
+            try
+            {
+                
+                SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
+                SurveyManagerServiceV3.OrganizationRequest Request = new SurveyManagerServiceV3.OrganizationRequest();
+                SurveyManagerServiceV3.OrganizationDTO orgDTO = new SurveyManagerServiceV3.OrganizationDTO();
+                Request.Organization = orgDTO;
+                var Result = client.GetOrganization(Request);
+
+            }
+            catch (Exception ex)
+            {
+                IsValid = false;
+            }
+            return IsValid;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Save();
+            if (ValidateEWESittings())
+            {
+                MessageBox.Show("Succeeded!", "", MessageBoxButtons.OK);
+            }
+            else
+            {
+                MessageBox.Show("Failed!", "", MessageBoxButtons.OK);
+            }
+        }
+        private bool ValidateEWESittings()
+        {
+            bool IsValid = true;
+
+            try
+            {
+                 
+                EWEManagerService.EWEManagerServiceClient   client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+                EWEManagerService.OrganizationRequest Request = new EWEManagerService.OrganizationRequest();
+                EWEManagerService.OrganizationDTO orgDTO = new EWEManagerService.OrganizationDTO();
+                Request.Organization = orgDTO;
+                var Result = client.GetOrganization(Request);
+
+            }
+            catch (Exception ex)
+            {
+                IsValid = false;
+            }
+            return IsValid;
+        }
+
     }
 
     /// <summary>
