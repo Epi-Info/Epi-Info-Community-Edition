@@ -99,6 +99,7 @@ namespace Epi.Windows.Dialogs
             this.btnImportDriver = new System.Windows.Forms.Button();
             this.lbxDataDriverPlugins = new System.Windows.Forms.ListBox();
             this.tabPageWebSurvey = new System.Windows.Forms.TabPage();
+            this.Ping = new System.Windows.Forms.Button();
             this.txtEndpoint = new System.Windows.Forms.TextBox();
             this.BindingGroupBox = new System.Windows.Forms.GroupBox();
             this.rbWSHTTP = new System.Windows.Forms.RadioButton();
@@ -122,6 +123,7 @@ namespace Epi.Windows.Dialogs
             this.btnApply = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.openFileDialogDataDriver = new System.Windows.Forms.OpenFileDialog();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControlDateTime.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -365,9 +367,9 @@ namespace Epi.Windows.Dialogs
             // 
             // lbxLanguages
             // 
+            resources.ApplyResources(this.lbxLanguages, "lbxLanguages");
             this.lbxLanguages.Items.AddRange(new object[] {
             resources.GetString("lbxLanguages.Items")});
-            resources.ApplyResources(this.lbxLanguages, "lbxLanguages");
             this.lbxLanguages.Name = "lbxLanguages";
             this.lbxLanguages.SelectedIndexChanged += new System.EventHandler(this.lbxLanguages_SelectedIndexChanged);
             // 
@@ -628,6 +630,7 @@ namespace Epi.Windows.Dialogs
             // 
             // tabPageWebSurvey
             // 
+            this.tabPageWebSurvey.Controls.Add(this.Ping);
             this.tabPageWebSurvey.Controls.Add(this.txtEndpoint);
             this.tabPageWebSurvey.Controls.Add(this.BindingGroupBox);
             this.tabPageWebSurvey.Controls.Add(this.groupBox6);
@@ -635,6 +638,13 @@ namespace Epi.Windows.Dialogs
             resources.ApplyResources(this.tabPageWebSurvey, "tabPageWebSurvey");
             this.tabPageWebSurvey.Name = "tabPageWebSurvey";
             this.tabPageWebSurvey.UseVisualStyleBackColor = true;
+            // 
+            // Ping
+            // 
+            resources.ApplyResources(this.Ping, "Ping");
+            this.Ping.Name = "Ping";
+            this.Ping.UseVisualStyleBackColor = true;
+            this.Ping.Click += new System.EventHandler(this.Ping_Click);
             // 
             // txtEndpoint
             // 
@@ -693,6 +703,7 @@ namespace Epi.Windows.Dialogs
             // 
             // tabPageWebEnter
             // 
+            this.tabPageWebEnter.Controls.Add(this.button1);
             this.tabPageWebEnter.Controls.Add(this.groupBox8);
             this.tabPageWebEnter.Controls.Add(this.EWEEndPointTextBox);
             this.tabPageWebEnter.Controls.Add(this.groupBox7);
@@ -791,6 +802,13 @@ namespace Epi.Windows.Dialogs
             // openFileDialogDataDriver
             // 
             resources.ApplyResources(this.openFileDialogDataDriver, "openFileDialogDataDriver");
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // OptionsDialog
             // 
@@ -938,5 +956,7 @@ namespace Epi.Windows.Dialogs
         private System.Windows.Forms.RadioButton rdbDeleted;
         private System.Windows.Forms.RadioButton rdbBoth;
         private System.Windows.Forms.RadioButton rdbNormal;
+        private System.Windows.Forms.Button Ping;
+        private System.Windows.Forms.Button button1;
     }
 }
