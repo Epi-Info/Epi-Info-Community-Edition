@@ -2296,8 +2296,7 @@ namespace EpiDashboard.Controls
             }
             if (thisProvider != null)
             {
-                choroplethShapeLayerProperties.CloseLayer();
-                //thisProvider = null;
+                thisProvider.CloseLayer();
             }
         }
 
@@ -2599,6 +2598,19 @@ namespace EpiDashboard.Controls
                     tbtnFilters.Visibility = Visibility.Visible;
                     return;                
                 }
+                else
+                {
+                    tbtnDisplay.IsEnabled = false;
+                    tbtnFilters.IsEnabled = false;
+                    btnOK.IsEnabled = false;
+                }
+            }
+            else
+            {
+                tbtnVariables.IsEnabled = false;
+                tbtnDisplay.IsEnabled = false;
+                tbtnFilters.IsEnabled = false;
+                btnOK.IsEnabled = false;
             }
         }
 
