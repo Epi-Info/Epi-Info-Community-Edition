@@ -144,15 +144,6 @@ namespace EpiDashboard.Mapping
             ArcGIS_Map.Cursor = Cursors.Arrow;
         }
 
-        public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
-        {
-            SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Fill = brush;
-            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
-            symbol.BorderThickness = 1;
-            return symbol;
-        }
-
         override public string GetShapeValue(Graphic graphicFeature, string shapeValue)
         {
             shapeValue = graphicFeature.Attributes[_shapeKey].ToString().Replace("'", "''").Trim();
@@ -164,25 +155,5 @@ namespace EpiDashboard.Mapping
             FeatureLayer featureLayer = ArcGIS_Map.Layers[_layerId.ToString()] as FeatureLayer;
             return featureLayer;
         }
-
-        #region ILayerProvider Members
-
-        public void CloseLayer()
-        {
-            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
-            if (graphicsLayer != null)
-            {
-                ArcGIS_Map.Layers.Remove(graphicsLayer);
-                if (LegendStackPanel != null)
-                {
-                    LegendStackPanel.Children.Clear();
-                }
-            }
-        }
-
-        #endregion
-
-        #region ILayerProvider Members
-        #endregion
     }
 }
