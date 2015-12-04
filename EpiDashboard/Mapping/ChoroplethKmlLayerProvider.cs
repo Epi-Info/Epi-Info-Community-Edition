@@ -151,6 +151,31 @@ namespace EpiDashboard.Mapping
             return shapeValue;
         }
 
+
+        override public GraphicsLayer GetGraphicsLayer()
+        {
+            KmlLayer kmlLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
+            GraphicsLayer graphicsLayer = GetGraphicsLayer(kmlLayer);
+            return graphicsLayer;
+        }
+
+        public GraphicsLayer GetGraphicsLayer(KmlLayer kmlLayer)
+        {
+            foreach (Layer layer in kmlLayer.ChildLayers)
+            {
+                if (layer is GraphicsLayer)
+                {
+                    return (GraphicsLayer)layer;
+                }
+                else if (layer is KmlLayer)
+                {
+                    GetGraphicsLayer((KmlLayer)layer);
+                }
+            }
+
+            return null;
+        }
+
         #region ILayerProvider Members
 
         public void CloseLayer()
