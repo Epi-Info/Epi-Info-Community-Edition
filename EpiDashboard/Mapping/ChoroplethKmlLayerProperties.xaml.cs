@@ -223,7 +223,7 @@ namespace EpiDashboard.Mapping
 
         void btnShapeFile_Click(object sender, RoutedEventArgs e)
         {
-            provider.LoadKml();
+            provider.Load();
         }
 
         private void FillComboBoxes()
@@ -414,7 +414,7 @@ namespace EpiDashboard.Mapping
             {
                 if (child.Name.Equals("shapeFile"))
                 {
-                    provider.LoadKml(child.InnerText);
+                    provider.Load(child.InnerText);
                 }
 
                 if (child.Name.Equals("asQuantiles"))

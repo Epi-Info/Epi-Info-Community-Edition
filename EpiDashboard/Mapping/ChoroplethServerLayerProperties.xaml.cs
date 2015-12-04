@@ -250,7 +250,7 @@ namespace EpiDashboard.Mapping
 
         void btnShapeFile_Click(object sender, RoutedEventArgs e)
         {
-            provider.LoadShapeFile();
+            provider.Load();
         }
 
         private void FillComboBoxes()
@@ -416,7 +416,7 @@ namespace EpiDashboard.Mapping
                 provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
             }
 
-            provider.LoadShapeFile(sUrl); 
+            provider.Load(sUrl); 
         }
 
         #endregion

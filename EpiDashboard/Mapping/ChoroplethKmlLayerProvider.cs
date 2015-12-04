@@ -27,27 +27,23 @@ namespace EpiDashboard.Mapping
             this._layerId = Guid.NewGuid();
         }
 
-        public object[] LoadKml()
+        sealed override public object[] Load()
         {
             KmlDialog dialog = new KmlDialog();
-            object[] kmlfile = null;
             
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                kmlfile = LoadKml(dialog.ServerName);
-                return kmlfile;
+                return Load(dialog.ServerName);
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
-        public object[] LoadKml(string url)
+        sealed override public object[] Load(string boundrySourceLocation)
         {
-            if (!string.IsNullOrEmpty(url))
+            if (!string.IsNullOrEmpty(boundrySourceLocation))
             {
-                _kmlURL = url;
+                _kmlURL = boundrySourceLocation;
                 KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
                 
                 if (shapeLayer != null)
@@ -57,7 +53,7 @@ namespace EpiDashboard.Mapping
                 
                 shapeLayer = new KmlLayer();
                 shapeLayer.ID = _layerId.ToString();
-                shapeLayer.Url = new Uri(url);
+                shapeLayer.Url = new Uri(boundrySourceLocation);
                 shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
                 ArcGIS_Map.Layers.Add(shapeLayer);
 
@@ -73,7 +69,6 @@ namespace EpiDashboard.Mapping
         void shapeLayer_Initialized(object sender, EventArgs e)
         {
             KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
-
             GraphicsLayer graphicsLayer = GetGraphicsLayer(shapeLayer);
 
             if (graphicsLayer != null)
@@ -125,11 +120,6 @@ namespace EpiDashboard.Mapping
             ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5)));
         }
 
-        public object[] LoadShapeFile()
-        {
-            throw new NotImplementedException();
-        }
-
         override public string GetShapeValue(Graphic graphicFeature, string shapeValue)
         {
             if (!graphicFeature.Attributes.ContainsKey(_shapeKey))
@@ -151,7 +141,6 @@ namespace EpiDashboard.Mapping
             return shapeValue;
         }
 
-
         override public GraphicsLayer GetGraphicsLayer()
         {
             KmlLayer kmlLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
@@ -159,7 +148,7 @@ namespace EpiDashboard.Mapping
             return graphicsLayer;
         }
 
-        public GraphicsLayer GetGraphicsLayer(KmlLayer kmlLayer)
+        private GraphicsLayer GetGraphicsLayer(KmlLayer kmlLayer)
         {
             foreach (Layer layer in kmlLayer.ChildLayers)
             {
@@ -176,8 +165,6 @@ namespace EpiDashboard.Mapping
             return null;
         }
 
-        #region ILayerProvider Members
-
         override public void CloseLayer()
         {
             KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
@@ -191,7 +178,5 @@ namespace EpiDashboard.Mapping
                 }
             }
         }
-
-        #endregion
     }
 }
