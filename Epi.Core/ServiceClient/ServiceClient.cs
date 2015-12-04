@@ -218,19 +218,33 @@ namespace Epi.Core.ServiceClient
                     binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
                     binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
 
+                    System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+                    if (endpoint.Uri.Scheme == "http")
+                    {
+                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                        binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+                        binding.Security.Transport.Realm = string.Empty;
+                    }
+                    else
+                    {
+                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
 
-                    binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
-                    binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
-                    binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
-                    binding.Security.Transport.Realm = string.Empty;
 
+                    }
                     binding.Security.Message.ClientCredentialType = System.ServiceModel.BasicHttpMessageCredentialType.UserName;
 
-                    System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
-
+                    
                     result = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
                     result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
+                    System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+                        (se, cert, chain, sslerror) =>
+                        {
+                            return true;
+                        };
+
                 }
                 else
                 {
@@ -300,15 +314,30 @@ namespace Epi.Core.ServiceClient
                         binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
                         binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
 
-
-                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
-                        binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
-                        binding.Security.Transport.Realm = string.Empty;
-
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+                        if (endpoint.Uri.Scheme == "http")
+                        {
+                            binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                            binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+                            binding.Security.Transport.Realm = string.Empty;
+                        }
+                        else
+                        {
+                            binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+
+
+                        }
+                       
 
                         result = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
+                        System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+                        (se, cert, chain, sslerror) =>
+                        {
+                            return true;
+                        };
+
                     }
                 }
             }
@@ -423,18 +452,35 @@ namespace Epi.Core.ServiceClient
                     binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
                     binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
 
-                    binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
-                    binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
-                    binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
-                    binding.Security.Transport.Realm = string.Empty;
+                    System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+                    if (endpoint.Uri.Scheme == "http")
+                    {
+                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                        binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+                        binding.Security.Transport.Realm = string.Empty;
+                    }
+                    else
+                    {
+                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+
+
+                    }
 
                     binding.Security.Message.ClientCredentialType = System.ServiceModel.BasicHttpMessageCredentialType.UserName;
 
-                    System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+                   
 
                     result = new SurveyManagerServiceV2.ManagerServiceV2Client(binding, endpoint);
                     result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
+                    System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+                        (se, cert, chain, sslerror) =>
+                        {
+                            return true;
+                        };
+
                 }
                 else
                 {
@@ -503,14 +549,31 @@ namespace Epi.Core.ServiceClient
                         binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
                         binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
 
-                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
-                        binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
-                        binding.Security.Transport.Realm = string.Empty;
-
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+                        if (endpoint.Uri.Scheme == "http")
+                        {
+                            binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                            binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+                            binding.Security.Transport.Realm = string.Empty;
+                        }
+                        else
+                        {
+                            binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+
+
+                        }
+
+                       
 
                         result = new SurveyManagerServiceV2.ManagerServiceV2Client(binding, endpoint);
+                        System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+                        (se, cert, chain, sslerror) =>
+                        {
+                            return true;
+                        };
+
                     }
                 }
             }
@@ -608,18 +671,36 @@ namespace Epi.Core.ServiceClient
                     binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
                     binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
 
-                    binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
-                    binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
-                    binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
-                    binding.Security.Transport.Realm = string.Empty;
+                    System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+                    if (endpoint.Uri.Scheme == "http")
+                    {
+                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                        binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+                        binding.Security.Transport.Realm = string.Empty;
+                    }
+                    else
+                    {
+                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+
+
+                    }
 
                     binding.Security.Message.ClientCredentialType = System.ServiceModel.BasicHttpMessageCredentialType.UserName;
 
-                    System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+ 
 
                     result = new SurveyManagerServiceV3.ManagerServiceV3Client(binding, endpoint);
+
                     result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
+                    System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+                        (se, cert, chain, sslerror) =>
+                        {
+                            return true;
+                        };
+
                 }
                 else
                 {
@@ -686,14 +767,31 @@ namespace Epi.Core.ServiceClient
                         binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
                         binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
 
-                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
-                        binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
-                        binding.Security.Transport.Realm = string.Empty;
-
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+                        if (endpoint.Uri.Scheme == "http")
+                        {
+                            binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                            binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+                            binding.Security.Transport.Realm = string.Empty;
+                        }
+                        else
+                        {
+                            binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+
+
+                        }
+
+                     
 
                         result = new SurveyManagerServiceV3.ManagerServiceV3Client(binding, endpoint);
+                        System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+                        (se, cert, chain, sslerror) =>
+                        {
+                            return true;
+                        };
+
                     }
                 }
             }
