@@ -178,7 +178,7 @@ namespace EpiDashboard.Mapping
 
         #region ILayerProvider Members
 
-        public void CloseLayer()
+        override public void CloseLayer()
         {
             KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
             if (shapeLayer != null)

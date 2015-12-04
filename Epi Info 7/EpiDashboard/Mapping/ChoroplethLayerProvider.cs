@@ -18,15 +18,14 @@ namespace EpiDashboard.Mapping
 {
     public abstract class ChoroplethLayerProvider
     {
-        bool _useCustomColors;
-        public bool UseCustomColors
+        public ChoroplethLayerProvider(Map myMap)
         {
-            get { return _useCustomColors; }
-            set { _useCustomColors = value; }
+            arcGIS_Map = myMap;
+            _layerId = Guid.NewGuid();
+            _graphicsLayers = new List<GraphicsLayer>();
         }
 
         public bool _asQuintile;
-
         public DashboardHelper _dashboardHelper;
         public string _shapeKey;
         public string _dataKey;
@@ -35,19 +34,29 @@ namespace EpiDashboard.Mapping
         public Guid _layerId { get; set; }
         public List<SolidColorBrush> _colors;
         public int _classCount;
-        public string[,] _rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
-
         public ThematicItem _thematicItem;
-
         public bool AreRangesSet { get; set; }
-
         public List<GraphicsLayer> _graphicsLayers;
+
+        public string[,] _rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
+        public string[,] RangeValues
+        {
+            get { return _rangeValues; }
+            set { _rangeValues = value; }
+        }
 
         Map arcGIS_Map;
         public Map ArcGIS_Map
         {
             get { return arcGIS_Map; }
             set { arcGIS_Map = value; }
+        }
+
+        bool _useCustomColors;
+        public bool UseCustomColors
+        {
+            get { return _useCustomColors; }
+            set { _useCustomColors = value; }
         }
 
         List<double> _range;
@@ -71,8 +80,6 @@ namespace EpiDashboard.Mapping
             set { _asQuantiles = value; }
         }
 
-        ListLegendTextDictionary _listLegendText = new ListLegendTextDictionary();
-
         CustomColorsDictionary _customColorsDictionary = new CustomColorsDictionary();
         public CustomColorsDictionary CustomColorsDictionary
         {
@@ -85,28 +92,73 @@ namespace EpiDashboard.Mapping
             get { return _classRangesDictionary; }
         }
 
+        ListLegendTextDictionary _listLegendText = new ListLegendTextDictionary();
         public ListLegendTextDictionary ListLegendText
         {
             get { return _listLegendText; }
             set { _listLegendText = value; }
         }
 
-        public ChoroplethLayerProvider(Map myMap)
+        bool _rangesLoadedFromMapFile;
+        public bool RangesLoadedFromMapFile
         {
-            arcGIS_Map = myMap;
-            _layerId = Guid.NewGuid();
-            _graphicsLayers = new List<GraphicsLayer>();
+            get { return _rangesLoadedFromMapFile; }
+            set { _rangesLoadedFromMapFile = value; }
         }
 
         public DashboardHelper DashboardHelper { get; set; }
+        public int RangeCount { get; set; }
+        public List<double> RangeStartsFromMapFile { get; set; }
+        public bool UseCustomRanges { get; set; }
 
-        public string[,] RangeValues
+        private string _legendText;
+        public string LegendText
         {
-            get { return _rangeValues; }
-            set { _rangeValues = value; }
+            get { return _legendText; }
+            set { _legendText = value; }
         }
 
-        public int RangeCount { get; set; }
+        private StackPanel _legendStackPanel;
+        public StackPanel LegendStackPanel
+        {
+            get { return _legendStackPanel; }
+            set { _legendStackPanel = value; }
+        }
+
+        public struct ThematicItem
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public string CalcField { get; set; }
+            public double Min { get; set; }
+            public double Max { get; set; }
+            public string MinName { get; set; }
+            public string MaxName { get; set; }
+            public List<double> RangeStarts { get; set; }
+        }
+
+        public struct Values
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public string Value { get; set; }
+        }
+
+        abstract public GraphicsLayer GetGraphicsLayer();
+        abstract public string GetShapeValue(Graphic graphicFeature, string shapeValue);
+
+        virtual public void CloseLayer()
+        {
+            GraphicsLayer graphicsLayer = GetGraphicsLayer();
+            if (graphicsLayer != null)
+            {
+                ArcGIS_Map.Layers.Remove(graphicsLayer);
+                if (LegendStackPanel != null)
+                {
+                    LegendStackPanel.Children.Clear();
+                }
+            }
+        }
 
         public void MoveUp()
         {
@@ -196,50 +248,6 @@ namespace EpiDashboard.Mapping
             return d;
         }
 
-        bool _rangesLoadedFromMapFile;
-        public bool RangesLoadedFromMapFile
-        {
-            get { return _rangesLoadedFromMapFile; }
-            set { _rangesLoadedFromMapFile = value; }
-        }
-
-        public List<double> RangeStartsFromMapFile { get; set; }
-
-        public struct ThematicItem
-        {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public string CalcField { get; set; }
-            public double Min { get; set; }
-            public double Max { get; set; }
-            public string MinName { get; set; }
-            public string MaxName { get; set; }
-            public List<double> RangeStarts { get; set; }
-        }
-
-        private StackPanel legendStackPanel;
-        private string _legendText;
-
-        public StackPanel LegendStackPanel
-        {
-            get
-            {
-                return legendStackPanel;
-            }
-            set
-            {
-                legendStackPanel = value;
-            }
-        }
-
-        public string LegendText
-        {
-            get { return _legendText; }
-            set { _legendText = value; }
-        }
-
-        public bool UseCustomRanges { get; set; }
-
         public int GetRangeIndex(double val, List<double> ranges)
         {
             int limit;
@@ -251,13 +259,6 @@ namespace EpiDashboard.Mapping
                 if (val >= ranges[r] && val < ranges[r + 1]) index = r;
             }
             return index;
-        }
-
-        public struct Values
-        {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public string Value { get; set; }
         }
 
         public List<double> CalculateThematicRange(int classCount, ThematicItem thematicItem, List<double> valueList)
@@ -304,7 +305,6 @@ namespace EpiDashboard.Mapping
         {
             try
             {
-
                 RangeCount = _thematicItem.RangeStarts.Count;
                 Array.Clear(RangeValues, 0, RangeValues.Length);
                 var RangeStarts = _thematicItem.RangeStarts;
@@ -391,25 +391,6 @@ namespace EpiDashboard.Mapping
             symbol.BorderThickness = 1;
             return symbol;
         }
-
-        abstract public GraphicsLayer GetGraphicsLayer();
-
-        //public GraphicsLayer GetGraphicsLayer(KmlLayer kmlLayer)
-        //{
-        //    foreach (Layer layer in kmlLayer.ChildLayers)
-        //    {
-        //        if (layer is GraphicsLayer)
-        //        {
-        //            return (GraphicsLayer)layer;
-        //        }
-        //        else if (layer is KmlLayer)
-        //        {
-        //            GetGraphicsLayer((KmlLayer)layer);
-        //        }
-        //    }
-
-        //    return null;
-        //}
 
         public DataTable GetLoadedData(DashboardHelper dashboardHelper, string dataKey, ref string valueField)
         {
@@ -689,8 +670,6 @@ namespace EpiDashboard.Mapping
 
             return thematicItem;
         }
-
-        abstract public string GetShapeValue(Graphic graphicFeature, string shapeValue);
 
         public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string missingText)
         {

@@ -124,12 +124,6 @@ namespace EpiDashboard.Mapping
             return RangeList;
         }
 
-        public bool AsQuintile
-        {
-            get { return _asQuintile; }
-            set { _asQuintile = value; }
-        }
-
         override public string GetShapeValue(Graphic graphicFeature, string shapeValue)
         {
             shapeValue = graphicFeature.Attributes[_shapeKey].ToString().Replace("'", "''").Trim();
@@ -142,18 +136,6 @@ namespace EpiDashboard.Mapping
             return graphicsLayer;
         }
 
-        public void CloseLayer()
-        {
-            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
-            if (graphicsLayer != null)
-            {
-                ArcGIS_Map.Layers.Remove(graphicsLayer);
-                if (LegendStackPanel != null)
-                {
-                    LegendStackPanel.Children.Clear();
-                }
-            }
-        }
 
         #endregion
     }
