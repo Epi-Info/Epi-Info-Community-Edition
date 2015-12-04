@@ -585,6 +585,7 @@ namespace EpiDashboard.Mapping
             };
 
             List<double> valueList = new List<double>();
+            List<string> usedShapeValues = new List<string>();
 
             for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
             {
@@ -593,6 +594,11 @@ namespace EpiDashboard.Mapping
                 string shapeValue = string.Empty;
 
                 shapeValue = GetShapeValue(graphicFeature, shapeValue);
+
+                if (usedShapeValues.Contains(shapeValue))
+                    continue;
+
+                usedShapeValues.Add(shapeValue);
 
                 string filterExpression = "";
 
