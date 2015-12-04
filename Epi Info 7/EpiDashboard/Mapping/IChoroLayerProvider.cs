@@ -30,7 +30,8 @@ namespace EpiDashboard.Mapping
         Guid _layerId { get; set; }
         void SetShapeRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string missingText);
         void ResetRangeValues(string toString, string s, string toString1, int classCount);
-        object[] LoadShapeFile();
+        object[] Load();
+        object[] Load(string boundrySourceLocation);
         string LegendText { get; set; }
 
         bool UseCustomRanges { get; set; }

@@ -42,7 +42,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1" x:Name="stkLegends" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Bottom" Background="#303030" Visibility="Visible">
                 <TextBlock x:Name="legendTitleTextBlock" Foreground="White"  Background="#6a6a6a" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Width="310" Height="40" 
-                           Padding="10,10,10,0" TextAlignment="Center" FontFamily="Segoe">Map Legend/Key</TextBlock>
+                           Padding="10,10,10,0" TextAlignment="Center" FontFamily="Segoe">Map Legend</TextBlock>
             </StackPanel>
         </Grid>
 

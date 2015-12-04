@@ -146,6 +146,8 @@ namespace EpiDashboard.Mapping
 
         abstract public GraphicsLayer GetGraphicsLayer();
         abstract public string GetShapeValue(Graphic graphicFeature, string shapeValue);
+        abstract public object[] Load();
+        abstract public object[] Load(string boundrySourceLocation);
 
         virtual public void CloseLayer()
         {

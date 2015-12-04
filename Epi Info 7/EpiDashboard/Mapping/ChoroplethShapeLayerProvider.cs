@@ -16,18 +16,29 @@ namespace EpiDashboard.Mapping
 {
     public class ChoroplethShapeLayerProvider : ChoroplethLayerProvider, IChoroLayerProvider
     {
-        #region Choropleth
-        
         public ChoroplethShapeLayerProvider(Map clientMap) : base(clientMap)
         {
         }
 
-        public object[] LoadShapeFile(string fileName)
+        override public object[] Load()
         {
-            if (!string.IsNullOrEmpty(fileName))
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.Filter = "ESRI Shapefiles (*.shp)|*.shp";
+
+            if (dialog.ShowDialog().Value)
             {
-                FileInfo shapeFile = new FileInfo(fileName);
-                FileInfo dbfFile = new FileInfo(fileName.ToLower().Replace(".shp", ".dbf"));
+                return Load(dialog.FileName);
+            }
+
+            return null;
+        }
+        
+        override public object[] Load(string boundrySourceLocation)
+        {
+            if (!string.IsNullOrEmpty(boundrySourceLocation))
+            {
+                FileInfo shapeFile = new FileInfo(boundrySourceLocation);
+                FileInfo dbfFile = new FileInfo(boundrySourceLocation.ToLower().Replace(".shp", ".dbf"));
                 if (!dbfFile.Exists)
                 {
                     System.Windows.MessageBox.Show("Associated DBF file not found");
@@ -45,17 +56,18 @@ namespace EpiDashboard.Mapping
                     return null;
                 }
 
-                GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = GetGraphicsLayer();
+                
                 if (graphicsLayer == null)
                 {
                     graphicsLayer = new GraphicsLayer();
                     graphicsLayer.ID = _layerId.ToString();
                     ArcGIS_Map.Layers.Add(graphicsLayer);
 
-
                     int recCount = shapeFileReader.Records.Count;
                     int rgbFactor = 255 / recCount;
                     int counter = 0;
+                    
                     foreach (ShapeFileReader.ShapeFileRecord record in shapeFileReader.Records)
                     {
                         Graphic graphic = record.ToGraphic();
@@ -67,6 +79,7 @@ namespace EpiDashboard.Mapping
                         counter += rgbFactor;
                     }
                 }
+                
                 if (graphicsLayer.FullExtent == null)
                 {
                     Envelope shapeFileExtent = shapeFileReader.GetExtent();
@@ -88,25 +101,10 @@ namespace EpiDashboard.Mapping
                 }
                 
                 graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
-                
-                return new object[] { fileName, graphicsLayer.Graphics[0].Attributes };
+
+                return new object[] { boundrySourceLocation, graphicsLayer.Graphics[0].Attributes };
             }
             else return null;
-        }
-
-        public object[] LoadShapeFile()
-        {
-            Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
-            ofd.Filter = "ESRI Shapefiles (*.shp)|*.shp";
-
-            if (ofd.ShowDialog().Value)
-            {
-                return LoadShapeFile(ofd.FileName);
-            }
-            else 
-            {
-                return null;
-            }
         }
 
         private List<double> RemoveOutOfRangeValues(ThematicItem thematicItem)
@@ -135,8 +133,5 @@ namespace EpiDashboard.Mapping
             GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
             return graphicsLayer;
         }
-
-
-        #endregion
     }
 }

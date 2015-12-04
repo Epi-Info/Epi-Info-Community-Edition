@@ -188,7 +188,7 @@ namespace EpiDashboard.Mapping
 
         void btnShapeFile_Click(object sender, RoutedEventArgs e)
         {
-            object[] shapeFileProperties = provider.LoadShapeFile();
+            object[] shapeFileProperties = provider.Load();
             if (shapeFileProperties != null)
             {
                 if (shapeFileProperties.Length == 2)
@@ -507,7 +507,7 @@ namespace EpiDashboard.Mapping
 
                 if (child.Name.Equals("shapeFile"))
                 {
-                    object[] shapeFileProperties = provider.LoadShapeFile(child.InnerText);
+                    object[] shapeFileProperties = provider.Load(child.InnerText);
                     if (shapeFileProperties != null)
                     {
                         if (shapeFileProperties.Length == 2)

@@ -680,7 +680,7 @@ namespace EpiDashboard.Controls
         private void btnBrowseShapeFile_Click(object sender, RoutedEventArgs e)
         {
             thisProvider = new Mapping.ChoroplethShapeLayerProvider(_myMap);
-            object[] shapeFileProperties = thisProvider.LoadShapeFile();
+            object[] shapeFileProperties = thisProvider.Load();
             
             if (shapeFileProperties != null)
             {
@@ -1057,7 +1057,7 @@ namespace EpiDashboard.Controls
                     classCount = 4;
                 }
 
-                if (radShapeFile.IsChecked == true && thisProvider != null)
+                if (thisProvider != null)
                 {
                     thisProvider.Range = GetRangeValues(thisProvider.RangeCount);
                     thisProvider.ListLegendText = ListLegendText;
@@ -1072,87 +1072,58 @@ namespace EpiDashboard.Controls
                         classCount,
                         missingText);
                 }
-                else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
-                {
-                    choroplethServerLayerProvider.Range = GetRangeValues(choroplethServerLayerProvider.RangeCount);
-                    choroplethServerLayerProvider.ListLegendText = ListLegendText;
-                    choroplethServerLayerProvider.Opacity = this.Opacity;
-                    
-                    choroplethServerLayerProvider.SetShapeRangeValues(
-                        _dashboardHelper,
-                    cmbShapeKey.SelectedItem.ToString(),
-                    cmbDataKey.SelectedItem.ToString(),
-                    cmbValue.SelectedItem.ToString(),
-                    brushList,
-                    classCount,
-                    missingText);
-                }
-                else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
-                {
-                    choroplethKmlLayerProvider.Range = GetRangeValues(choroplethKmlLayerProvider.RangeCount);
-                    choroplethKmlLayerProvider.ListLegendText = ListLegendText;
-                    choroplethKmlLayerProvider.Opacity = this.Opacity;
-
-                    choroplethKmlLayerProvider.SetShapeRangeValues(_dashboardHelper,
-                        cmbShapeKey.SelectedItem.ToString(),
-                        cmbDataKey.SelectedItem.ToString(),
-                        cmbValue.SelectedItem.ToString(),
-                        brushList,
-                        classCount,
-                        missingText);
-                }
             }
         }
         
         private void SetOpacity()
         {
-            Color col = (rctColor0.Fill as SolidColorBrush).Color;
-            col.A = Opacity;
-            rctColor0.Fill = new SolidColorBrush(col);
+            Color color = (rctColor0.Fill as SolidColorBrush).Color;
+            color.A = Opacity;
+            rctColor0.Fill = new SolidColorBrush(color);
 
-            col = (rctColor1.Fill as SolidColorBrush).Color;
-            col.A = Opacity;
-            rctColor1.Fill = new SolidColorBrush(col);
+            color = (rctColor1.Fill as SolidColorBrush).Color;
+            color.A = Opacity;
+            rctColor1.Fill = new SolidColorBrush(color);
 
-            col = (rctColor2.Fill as SolidColorBrush).Color;
-            col.A = Opacity;
-            rctColor2.Fill = new SolidColorBrush(col);
+            color = (rctColor2.Fill as SolidColorBrush).Color;
+            color.A = Opacity;
+            rctColor2.Fill = new SolidColorBrush(color);
 
-            col = (rctColor3.Fill as SolidColorBrush).Color;
-            col.A = Opacity;
-            rctColor3.Fill = new SolidColorBrush(col);
+            color = (rctColor3.Fill as SolidColorBrush).Color;
+            color.A = Opacity;
+            rctColor3.Fill = new SolidColorBrush(color);
 
-            col = (rctColor4.Fill as SolidColorBrush).Color;
-            col.A = Opacity;
-            rctColor4.Fill = new SolidColorBrush(col);
+            color = (rctColor4.Fill as SolidColorBrush).Color;
+            color.A = Opacity;
+            rctColor4.Fill = new SolidColorBrush(color);
 
-            col = (rctColor5.Fill as SolidColorBrush).Color;
-            col.A = Opacity;
-            rctColor5.Fill = new SolidColorBrush(col);
+            color = (rctColor5.Fill as SolidColorBrush).Color;
+            color.A = Opacity;
+            rctColor5.Fill = new SolidColorBrush(color);
 
-            col = (rctColor6.Fill as SolidColorBrush).Color;
-            col.A = Opacity;
-            rctColor6.Fill = new SolidColorBrush(col);
+            color = (rctColor6.Fill as SolidColorBrush).Color;
+            color.A = Opacity;
+            rctColor6.Fill = new SolidColorBrush(color);
 
-            col = (rctColor7.Fill as SolidColorBrush).Color;
-            col.A = Opacity;
-            rctColor7.Fill = new SolidColorBrush(col);
+            color = (rctColor7.Fill as SolidColorBrush).Color;
+            color.A = Opacity;
+            rctColor7.Fill = new SolidColorBrush(color);
 
-            col = (rctColor8.Fill as SolidColorBrush).Color;
-            col.A = Opacity;
-            rctColor8.Fill = new SolidColorBrush(col);
+            color = (rctColor8.Fill as SolidColorBrush).Color;
+            color.A = Opacity;
+            rctColor8.Fill = new SolidColorBrush(color);
 
-            col = (rctColor9.Fill as SolidColorBrush).Color;
-            col.A = Opacity;
-            rctColor9.Fill = new SolidColorBrush(col);
+            color = (rctColor9.Fill as SolidColorBrush).Color;
+            color.A = Opacity;
+            rctColor9.Fill = new SolidColorBrush(color);
 
-            col = (rctColor10.Fill as SolidColorBrush).Color;
-            col.A = Opacity;
-            rctColor10.Fill = new SolidColorBrush(col);
+            color = (rctColor10.Fill as SolidColorBrush).Color;
+            color.A = Opacity;
+            rctColor10.Fill = new SolidColorBrush(color);
 
-            col = (rctMissingColor.Fill as SolidColorBrush).Color;
-            col.A = Opacity;
-            rctMissingColor.Fill = new SolidColorBrush(col);
+            color = (rctMissingColor.Fill as SolidColorBrush).Color;
+            color.A = Opacity;
+            rctMissingColor.Fill = new SolidColorBrush(color);
         }
 
         public List<double> GetRangeValues(int RangeCount)
@@ -1170,69 +1141,74 @@ namespace EpiDashboard.Controls
             ListLegendText.Add(legendText9.Name, legendText9.Text);
             ListLegendText.Add(legendText10.Name, legendText10.Text);
 
-            //int _rangeCount = thisProvider.RangeCount;
             double value = 0.0;
 
             if (RangeCount >= 2)
             {
+                value = 0.0;
                 double.TryParse(rampStart01.Text, out value);
                 Range.Add(value);
 
-                //   ListLegendText.Add(legendText1.Name, legendText1.Text);
 
+                value = 0.0;
                 double.TryParse(rampStart02.Text, out value);
                 Range.Add(value);
-
-                //   ListLegendText.Add(legendText2.Name, legendText2.Text);
             }
 
             if (RangeCount >= 3)
             {
+                value = 0.0;
                 double.TryParse(rampStart03.Text, out value);
                 Range.Add(value);
-                // ListLegendText.Add(legendText3.Name, legendText3.Text);
             }
+
             if (RangeCount >= 4)
             {
+                value = 0.0;
                 double.TryParse(rampStart04.Text, out value);
                 Range.Add(value);
-                // ListLegendText.Add(legendText4.Name, legendText4.Text);
             }
+            
             if (RangeCount >= 5)
             {
+                value = 0.0;
                 double.TryParse(rampStart05.Text, out value);
                 Range.Add(value);
-                // ListLegendText.Add(legendText5.Name, legendText5.Text);
             }
+            
             if (RangeCount >= 6)
             {
+                value = 0.0;
                 double.TryParse(rampStart06.Text, out value);
                 Range.Add(value);
-                // ListLegendText.Add(legendText6.Name, legendText6.Text);
             }
+
             if (RangeCount >= 7)
             {
+                value = 0.0;
                 double.TryParse(rampStart07.Text, out value);
                 Range.Add(value);
-                // ListLegendText.Add(legendText7.Name, legendText7.Text);
             }
+            
             if (RangeCount >= 8)
             {
+                value = 0.0;
                 double.TryParse(rampStart08.Text, out value);
                 Range.Add(value);
-                // ListLegendText.Add(legendText8.Name, legendText8.Text);
             }
+            
             if (RangeCount >= 9)
             {
+                value = 0.0;
                 double.TryParse(rampStart09.Text, out value);
                 Range.Add(value);
-                // ListLegendText.Add(legendText9.Name, legendText9.Text);
             }
+            
             if (RangeCount >= 10)
             {
+                value = 0.0;
                 double.TryParse(rampStart10.Text, out value);
                 Range.Add(value);
-                // ListLegendText.Add(legendText10.Name, legendText10.Text);
             }
 
             return Range;
@@ -2020,7 +1996,7 @@ namespace EpiDashboard.Controls
             thisProvider = choroplethKmlLayerProvider;
 
 
-            object[] kmlFileProperties = choroplethKmlLayerProvider.LoadKml(KMLMapServerName);
+            object[] kmlFileProperties = choroplethKmlLayerProvider.Load(KMLMapServerName);
             if (kmlFileProperties != null)
             {
                 layerAddednew.Add(choroplethKmlLayerProvider._layerId.ToString());
@@ -2529,7 +2505,7 @@ namespace EpiDashboard.Controls
                         choroplethServerLayerProvider = new Mapping.ChoroplethServerLayerProvider(_myMap);
                         choroplethServerLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
                     }
-                    object[] mapFileProperties = choroplethServerLayerProvider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
+                    object[] mapFileProperties = choroplethServerLayerProvider.Load(MapServerName + "/" + MapVisibleLayer);
                     if (mapFileProperties != null)
                     {
                         layerAddednew.Add(choroplethServerLayerProvider._layerId.ToString());

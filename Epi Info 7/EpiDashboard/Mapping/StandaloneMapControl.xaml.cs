@@ -2006,7 +2006,7 @@ namespace EpiDashboard.Mapping
                 choroplethproperties.cmbShapeKey.Items.Clear();
                 if (choroplethproperties.shapeAttributes == null)
                 {
-                    object[] shapeFileProperties = choroplethlayerprop.provider.LoadShapeFile(choroplethlayerprop.shapeFilePath);
+                    object[] shapeFileProperties = choroplethlayerprop.provider.Load(choroplethlayerprop.shapeFilePath);
                     choroplethproperties.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
                 }
                 if (choroplethproperties.shapeAttributes != null)
@@ -2015,7 +2015,6 @@ namespace EpiDashboard.Mapping
                     { choroplethproperties.cmbShapeKey.Items.Add(key); }
                 }
             }
-
 
             if (choroplethlayerprop.classAttribList != null)
             { choroplethproperties.SetClassAttributes(choroplethlayerprop.classAttribList); }
