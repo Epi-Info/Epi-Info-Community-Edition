@@ -23,17 +23,7 @@ namespace EpiDashboard.Mapping
             ArcGIS_Map = clientMap;
             this._layerId = Guid.NewGuid();
         }
-
-        private string shapeKey;
-        private string dataKey;
-        private string valueField;
-        public Guid layerId;
-
-        private int classCount;
-
-        string[,] rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
         private bool flagupdatetoglfailed;
-
 
         private ListLegendTextDictionary _listLegendText = new ListLegendTextDictionary();
         private CustomColorsDictionary _customColorsDictionary = new CustomColorsDictionary();
@@ -42,7 +32,6 @@ namespace EpiDashboard.Mapping
         public event FeatureLoadedHandler FeatureLoaded;
 
         List<List<SolidColorBrush>> ColorList = new List<List<SolidColorBrush>>();
-
 
         public bool FlagUpdateToGLFailed
         {
@@ -54,13 +43,13 @@ namespace EpiDashboard.Mapping
         {
             if (!string.IsNullOrEmpty(url))
             {
-                FeatureLayer graphicsLayer = ArcGIS_Map.Layers[layerId.ToString()] as FeatureLayer;
+                FeatureLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as FeatureLayer;
                 if (graphicsLayer != null)
                 {
                     ArcGIS_Map.Layers.Remove(graphicsLayer);
                 }
                 graphicsLayer = new FeatureLayer();
-                graphicsLayer.ID = layerId.ToString();
+                graphicsLayer.ID = _layerId.ToString();
                 graphicsLayer.UpdateCompleted += new EventHandler(graphicsLayer_UpdateCompleted);
                 graphicsLayer.Initialized += new EventHandler<EventArgs>(graphicsLayer_Initialized);
                 graphicsLayer.InitializationFailed += new EventHandler<EventArgs>(graphicsLayer_InitializationFailed);
@@ -140,7 +129,7 @@ namespace EpiDashboard.Mapping
 
         void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
         {
-            FeatureLayer graphicsLayer = ArcGIS_Map.Layers[layerId.ToString()] as FeatureLayer;
+            FeatureLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as FeatureLayer;
             flagupdatetoglfailed = false;
             if (graphicsLayer != null)
             {
@@ -170,11 +159,17 @@ namespace EpiDashboard.Mapping
             return shapeValue;
         }
 
+        override public GraphicsLayer GetGraphicsLayer()
+        {
+            FeatureLayer featureLayer = ArcGIS_Map.Layers[_layerId.ToString()] as FeatureLayer;
+            return featureLayer;
+        }
+
         #region ILayerProvider Members
 
         public void CloseLayer()
         {
-            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
             if (graphicsLayer != null)
             {
                 ArcGIS_Map.Layers.Remove(graphicsLayer);

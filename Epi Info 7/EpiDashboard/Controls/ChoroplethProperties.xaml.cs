@@ -1745,7 +1745,7 @@ namespace EpiDashboard.Controls
             else
             { 
                 _shapeKey = ""; 
-        }
+            }
 
             PropertyChanged_EnableDisable();
         }
@@ -1841,15 +1841,47 @@ namespace EpiDashboard.Controls
             }
             else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
             {
-                choroplethServerLayerProvider.Range = GetRangeValuesFromAttributeList(choroplethServerLayerProperties.classAttribList, classCount);
-                choroplethServerLayerProvider.PopulateRangeValues(_dashboardHelper,
-                         cmbShapeKey.SelectedItem.ToString(),
-                         cmbDataKey.SelectedItem.ToString(),
-                         cmbValue.SelectedItem.ToString(),
-                         brushList,
-                         classCount,
-                         "legend dpb text");
-                choroplethServerLayerProvider.AreRangesSet = true;
+                if (thisProvider == null)
+                {
+                    thisProvider = choroplethServerLayerProvider;
+                }
+
+                if (quintilesOption.IsChecked == true)
+                {
+                    thisProvider.PopulateRangeValues();
+                }
+
+                if (string.IsNullOrEmpty(legTitle.Text))
+                {
+                    legTitle.Text = thisProvider.LegendText;
+                }
+                else
+                {
+                    thisProvider.LegendText = legTitle.Text;
+                }
+
+                try
+                {
+                    for (int x = 1; x <= ChoroplethConstants.MAX_CLASS_DECRIPTION_COUNT; x++)
+                    {
+                        System.Windows.Controls.TextBox t = FindName(ChoroplethConstants.legendTextControlPrefix + x) as System.Windows.Controls.TextBox;
+                        if (string.IsNullOrEmpty(t.Text))
+                        {
+                            t.Text = thisProvider.ListLegendText.GetWithKey(ChoroplethConstants.legendTextControlPrefix + x);
+                        }
+                        else
+                        {
+                            thisProvider.ListLegendText.Add(ChoroplethConstants.legendTextControlPrefix + x, t.Text);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                thisProvider = choroplethServerLayerProvider;
+                thisProvider.AreRangesSet = true;
             }
             else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
             {
@@ -2500,7 +2532,7 @@ namespace EpiDashboard.Controls
                     object[] mapFileProperties = choroplethServerLayerProvider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
                     if (mapFileProperties != null)
                     {
-                        layerAddednew.Add(choroplethServerLayerProvider.layerId.ToString());
+                        layerAddednew.Add(choroplethServerLayerProvider._layerId.ToString());
                         if (choroplethServerLayerProperties == null)
                         {
                             ILayerProperties layerProperties = null;

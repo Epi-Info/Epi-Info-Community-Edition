@@ -300,28 +300,38 @@ namespace EpiDashboard.Mapping
             return rangeStarts;
         }
 
-        public void PopulateRangeValues()
+        public bool PopulateRangeValues()
         {
-            RangeCount = _thematicItem.RangeStarts.Count;
-            Array.Clear(RangeValues, 0, RangeValues.Length);
-            var RangeStarts = _thematicItem.RangeStarts;
-            
-            for (int i = 0; i < RangeStarts.Count; i++)
+            try
             {
-                RangeValues[i, 0] = string.Format("{0:N2}",RangeStarts[i]);
 
-                if (i < _thematicItem.RangeStarts.Count - 1)
+                RangeCount = _thematicItem.RangeStarts.Count;
+                Array.Clear(RangeValues, 0, RangeValues.Length);
+                var RangeStarts = _thematicItem.RangeStarts;
+
+                for (int i = 0; i < RangeStarts.Count; i++)
                 {
-                    RangeValues[i, 1] = string.Format("{0:N2}",RangeStarts[i + 1]);
+                    RangeValues[i, 0] = string.Format("{0:N2}", RangeStarts[i]);
+
+                    if (i < _thematicItem.RangeStarts.Count - 1)
+                    {
+                        RangeValues[i, 1] = string.Format("{0:N2}", RangeStarts[i + 1]);
+                    }
+                    else
+                    {
+                        RangeValues[i, 1] = string.Format("{0:N2}", _thematicItem.Max);
+                    }
                 }
-                else
-                {
-                    RangeValues[i, 1] = string.Format("{0:N2}", _thematicItem.Max);
-                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
-        public void PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string legendText)
+        public bool PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string legendText)
         {
             _classCount = classCount;
             _dashboardHelper = dashboardHelper;
@@ -331,24 +341,24 @@ namespace EpiDashboard.Mapping
             LegendText = legendText;
             _colors = colors;
 
-            DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
-
-            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
-
-            if (graphicsLayer == null)
+            try
             {
-                KmlLayer kmlLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
-                graphicsLayer = GetGraphicsLayer((KmlLayer)kmlLayer);
+                DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
+                GraphicsLayer graphicsLayer = GetGraphicsLayer();
+
+                _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+
+                if (Range != null && Range.Count > 0)
+                {
+                    _thematicItem.RangeStarts = Range;
+                }
+
+                return PopulateRangeValues();
             }
-
-            _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
-
-            if (Range != null && Range.Count > 0)
+            catch
             {
-                _thematicItem.RangeStarts = Range;
+                return false;
             }
-
-            PopulateRangeValues();
         }
 
         public void ResetRangeValues(string shapeKey, string dataKey, string valueField, int classCount)
@@ -358,25 +368,7 @@ namespace EpiDashboard.Mapping
             _dataKey = dataKey;
 
             DataTable loadedData = GetLoadedData(_dashboardHelper, _dataKey, ref valueField);
-            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
-
-            if (graphicsLayer == null)
-            {
-                KmlLayer kmlLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
-
-                foreach (Layer layer in kmlLayer.ChildLayers)
-                {
-                    if (layer is GraphicsLayer)
-                    {
-                        graphicsLayer = layer as GraphicsLayer;
-                        break;
-                    }
-                    else if (layer is KmlLayer)
-                    {
-                        graphicsLayer = GetGraphicsLayer((KmlLayer)layer);
-                    }
-                }
-            }
+            GraphicsLayer graphicsLayer = graphicsLayer = GetGraphicsLayer();
 
             if (graphicsLayer == null) return;
 
@@ -400,22 +392,24 @@ namespace EpiDashboard.Mapping
             return symbol;
         }
 
-        public GraphicsLayer GetGraphicsLayer(KmlLayer kmlLayer)
-        {
-            foreach (Layer layer in kmlLayer.ChildLayers)
-            {
-                if (layer is GraphicsLayer)
-                {
-                    return (GraphicsLayer)layer;
-                }
-                else if (layer is KmlLayer)
-                {
-                    GetGraphicsLayer((KmlLayer)layer);
-                }
-            }
+        abstract public GraphicsLayer GetGraphicsLayer();
 
-            return null;
-        }
+        //public GraphicsLayer GetGraphicsLayer(KmlLayer kmlLayer)
+        //{
+        //    foreach (Layer layer in kmlLayer.ChildLayers)
+        //    {
+        //        if (layer is GraphicsLayer)
+        //        {
+        //            return (GraphicsLayer)layer;
+        //        }
+        //        else if (layer is KmlLayer)
+        //        {
+        //            GetGraphicsLayer((KmlLayer)layer);
+        //        }
+        //    }
+
+        //    return null;
+        //}
 
         public DataTable GetLoadedData(DashboardHelper dashboardHelper, string dataKey, ref string valueField)
         {
@@ -637,6 +631,8 @@ namespace EpiDashboard.Mapping
 
                 try
                 {
+                    loadedData.CaseSensitive = false;
+                    
                     DataRow[] rows = loadedData.Select(filterExpression);
 
                     if (rows.Length > 0)
@@ -709,13 +705,7 @@ namespace EpiDashboard.Mapping
                 _missingText = missingText;
 
                 DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
-
-                GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
-
-                if (graphicsLayer == null)
-                {
-                    graphicsLayer = GetGraphicsLayer(ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer);
-                }
+                GraphicsLayer graphicsLayer = GetGraphicsLayer();
 
                 _thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
 

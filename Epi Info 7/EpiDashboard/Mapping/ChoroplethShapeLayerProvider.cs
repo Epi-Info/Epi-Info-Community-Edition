@@ -136,9 +136,11 @@ namespace EpiDashboard.Mapping
             return shapeValue;
         }
 
-        #endregion
-
-        #region ILayerProvider Members
+        override public GraphicsLayer GetGraphicsLayer() 
+        {
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
+            return graphicsLayer;
+        }
 
         public void CloseLayer()
         {

@@ -14,8 +14,8 @@ namespace EpiDashboard.Mapping
         CustomColorsDictionary CustomColorsDictionary { get; }
         ClassRangesDictionary ClassRangesDictionary { get; }
 
-        void PopulateRangeValues();
-        void PopulateRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string text);
+        bool PopulateRangeValues();
+        bool PopulateRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string text);
 
         bool AreRangesSet { get; set; }
         string[,] RangeValues { get; set; }
