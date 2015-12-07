@@ -62,7 +62,8 @@ namespace EpiDashboard.Gadgets.StatCalc
             txtPopulationSize.Text = "999999";
             txtExpectedFreq.Text = "50";
             txtConfidenceLimits.Text = "5";
-            txtDesignEffect.Text = "1.0";
+            string separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+            txtDesignEffect.Text = "1" + separator + "0";
             txtNumberOfClusters.Text = "1";
 
             base.Construct();
