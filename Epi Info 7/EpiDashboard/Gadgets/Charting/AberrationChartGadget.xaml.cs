@@ -702,8 +702,9 @@ namespace EpiDashboard.Gadgets.Charting
             float f_WidthRatio = new float();
             f_HeightRatio = (float)((float)height / (float)i_StandardHeight);
             f_WidthRatio = (float)((float)width / (float)i_StandardWidth);
-          
 
+            if (properties == null)
+                properties = new Controls.GadgetProperties.AberrationDetectionChartProperties(this.DashboardHelper, this, (AberrationDetectionChartParameters)Parameters, StrataGridList);
             properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
             properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
 

@@ -889,6 +889,24 @@ namespace EpiDashboard
                 {
                     introAvailableData.Visibility = System.Windows.Visibility.Collapsed;
                 }
+                if (DashboardHelper != null)
+                {
+                    if (DashboardHelper.ResizedHeight != 0 & DashboardHelper.ResizedWidth != 0)
+                    {
+                        foreach (UserControl element in this.Gadgets)
+                        {
+                            if (element is GadgetBase)
+                            {
+                                GadgetBase gadget = element as GadgetBase;
+                                if (gadget != null)
+                                {
+                                    gadget.GadgetBase_SizeChanged(DashboardHelper.ResizedWidth, DashboardHelper.ResizedHeight);
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
         }
 
