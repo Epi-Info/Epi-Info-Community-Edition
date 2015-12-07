@@ -36,6 +36,7 @@ namespace EpiDashboard
     public partial class FrequencyControl : GadgetBase
     {
         #region Private Members
+       
         /// <summary>
         /// A custom heading to use for this gadget's output
         /// </summary>
@@ -1022,6 +1023,7 @@ namespace EpiDashboard
                 f_HeightRatio = (float)((float)DashboardHelper.ResizedHeight / (float)i_StandardHeight);
                 f_WidthRatio = (float)((float)DashboardHelper.ResizedWidth / (float)i_StandardWidth);
 
+
                 properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
                 properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
 
@@ -1047,6 +1049,8 @@ namespace EpiDashboard
             f_HeightRatio = (float)((float)height / (float)i_StandardHeight);
             f_WidthRatio = (float)((float)width / (float)i_StandardWidth);
 
+            if (properties == null)
+                properties = new Controls.GadgetProperties.FrequencyProperties(this.DashboardHelper, this, (FrequencyParameters)Parameters, StrataGridList);
             properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
             properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
 
