@@ -12,6 +12,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
 {
     public partial class FieldSelectorDialog : CheckCodeDesignDialog
     {
+        protected EpiInfo.Plugin.IEnterInterpreter EpiInterpreter;
 
          #region Constructors
         [Obsolete("Use of default constructor not allowed", true)]
@@ -23,10 +24,11 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
         /// Constructor for the class
         /// </summary>
         /// <param name="frm">The main form</param>
-        public FieldSelectorDialog(MainForm frm)
+        public FieldSelectorDialog(Epi.Windows.MakeView.Forms.MakeViewMainForm frm)
             : base(frm)
 		{
 			InitializeComponent();
+            this.EpiInterpreter = frm.EpiInterpreter;
         }
 
         #endregion  //Constructors
@@ -100,7 +102,16 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
                     {
                         lbxFields.Items.Add(field.Name);
                     }
-                }
+                }               
+                VariableType scopeWord = VariableType.Standard;//User defined variables
+                List<EpiInfo.Plugin.IVariable> vars = this.EpiInterpreter.Context.GetVariablesInScope((EpiInfo.Plugin.VariableScope)scopeWord);              
+                 foreach (EpiInfo.Plugin.IVariable var in vars)
+                 {
+                     if (!(var is Epi.Fields.PredefinedDataField))
+                     {
+                         lbxFields.Items.Add(var.Name.ToString());
+                     }
+                 }
             }
         }
         #endregion  //Public Properties

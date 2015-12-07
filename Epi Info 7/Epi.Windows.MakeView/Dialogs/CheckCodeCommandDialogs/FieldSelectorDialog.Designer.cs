@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisableDialog));
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
@@ -37,109 +36,53 @@
             // 
             // baseImageList
             // 
-            this.baseImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("baseImageList.ImageStream")));
-            this.baseImageList.Images.SetKeyName(0, "");
-            this.baseImageList.Images.SetKeyName(1, "");
-            this.baseImageList.Images.SetKeyName(2, "");
-            this.baseImageList.Images.SetKeyName(3, "");
-            this.baseImageList.Images.SetKeyName(4, "");
-            this.baseImageList.Images.SetKeyName(5, "");
-            this.baseImageList.Images.SetKeyName(6, "");
-            this.baseImageList.Images.SetKeyName(7, "");
-            this.baseImageList.Images.SetKeyName(8, "");
-            this.baseImageList.Images.SetKeyName(9, "");
-            this.baseImageList.Images.SetKeyName(10, "");
-            this.baseImageList.Images.SetKeyName(11, "");
-            this.baseImageList.Images.SetKeyName(12, "");
-            this.baseImageList.Images.SetKeyName(13, "");
-            this.baseImageList.Images.SetKeyName(14, "");
-            this.baseImageList.Images.SetKeyName(15, "");
-            this.baseImageList.Images.SetKeyName(16, "");
-            this.baseImageList.Images.SetKeyName(17, "");
-            this.baseImageList.Images.SetKeyName(18, "");
-            this.baseImageList.Images.SetKeyName(19, "");
-            this.baseImageList.Images.SetKeyName(20, "");
-            this.baseImageList.Images.SetKeyName(21, "");
-            this.baseImageList.Images.SetKeyName(22, "");
-            this.baseImageList.Images.SetKeyName(23, "");
-            this.baseImageList.Images.SetKeyName(24, "");
-            this.baseImageList.Images.SetKeyName(25, "");
-            this.baseImageList.Images.SetKeyName(26, "");
-            this.baseImageList.Images.SetKeyName(27, "");
-            this.baseImageList.Images.SetKeyName(28, "");
-            this.baseImageList.Images.SetKeyName(29, "");
-            this.baseImageList.Images.SetKeyName(30, "");
-            this.baseImageList.Images.SetKeyName(31, "");
-            this.baseImageList.Images.SetKeyName(32, "");
-            this.baseImageList.Images.SetKeyName(33, "");
-            this.baseImageList.Images.SetKeyName(34, "");
-            this.baseImageList.Images.SetKeyName(35, "");
-            this.baseImageList.Images.SetKeyName(36, "");
-            this.baseImageList.Images.SetKeyName(37, "");
-            this.baseImageList.Images.SetKeyName(38, "");
-            this.baseImageList.Images.SetKeyName(39, "");
-            this.baseImageList.Images.SetKeyName(40, "");
-            this.baseImageList.Images.SetKeyName(41, "");
-            this.baseImageList.Images.SetKeyName(42, "");
-            this.baseImageList.Images.SetKeyName(43, "");
-            this.baseImageList.Images.SetKeyName(44, "");
-            this.baseImageList.Images.SetKeyName(45, "");
-            this.baseImageList.Images.SetKeyName(46, "");
-            this.baseImageList.Images.SetKeyName(47, "");
-            this.baseImageList.Images.SetKeyName(48, "");
-            this.baseImageList.Images.SetKeyName(49, "");
-            this.baseImageList.Images.SetKeyName(50, "");
-            this.baseImageList.Images.SetKeyName(51, "");
-            this.baseImageList.Images.SetKeyName(52, "");
-            this.baseImageList.Images.SetKeyName(53, "");
-            this.baseImageList.Images.SetKeyName(54, "");
-            this.baseImageList.Images.SetKeyName(55, "");
-            this.baseImageList.Images.SetKeyName(56, "");
-            this.baseImageList.Images.SetKeyName(57, "");
-            this.baseImageList.Images.SetKeyName(58, "");
-            this.baseImageList.Images.SetKeyName(59, "");
-            this.baseImageList.Images.SetKeyName(60, "");
-            this.baseImageList.Images.SetKeyName(61, "");
-            this.baseImageList.Images.SetKeyName(62, "");
-            this.baseImageList.Images.SetKeyName(63, "");
-            this.baseImageList.Images.SetKeyName(64, "");
-            this.baseImageList.Images.SetKeyName(65, "");
-            this.baseImageList.Images.SetKeyName(66, "");
-            this.baseImageList.Images.SetKeyName(67, "");
-            this.baseImageList.Images.SetKeyName(68, "");
-            this.baseImageList.Images.SetKeyName(69, "");
+            this.baseImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.baseImageList.ImageSize = new System.Drawing.Size(16, 14);
+            this.baseImageList.ImageStream = null;
             // 
             // btnHelp
             // 
-            resources.ApplyResources(this.btnHelp, "btnHelp");
+            this.btnHelp.Location = new System.Drawing.Point(184, 195);
             this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(75, 23);
+            this.btnHelp.TabIndex = 0;
+            this.btnHelp.Text = "Help";
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.Location = new System.Drawing.Point(103, 195);
             this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnOk
             // 
-            resources.ApplyResources(this.btnOk, "btnOk");
+            this.btnOk.Location = new System.Drawing.Point(22, 195);
             this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.TabIndex = 2;
+            this.btnOk.Text = "OK";
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // lbxFields
             // 
-            resources.ApplyResources(this.lbxFields, "lbxFields");
+            this.lbxFields.ItemHeight = 16;
+            this.lbxFields.Location = new System.Drawing.Point(10, 9);
             this.lbxFields.Name = "lbxFields";
             this.lbxFields.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbxFields.Size = new System.Drawing.Size(267, 180);
             this.lbxFields.Sorted = true;
+            this.lbxFields.TabIndex = 3;
             this.lbxFields.SelectedIndexChanged += new System.EventHandler(this.lbxFields_SelectedIndexChanged);
             // 
-            // DisableDialog
+            // FieldSelectorDialog
             // 
-            resources.ApplyResources(this, "$this");
             this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(282, 224);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -149,6 +92,8 @@
             this.MinimizeBox = false;
             this.Name = "FieldSelectorDialog";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "FieldSelector";
             this.ResumeLayout(false);
 
         }

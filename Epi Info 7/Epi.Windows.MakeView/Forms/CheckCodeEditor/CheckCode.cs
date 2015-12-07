@@ -33,7 +33,6 @@ namespace Epi.Windows.MakeView.Forms
 
         private List<string> keywords;
         private List<string> operators;
-        private List<string> commandList;
 
         private bool isDefineCommand;
         private View view;
@@ -421,24 +420,6 @@ namespace Epi.Windows.MakeView.Forms
 
             this.isDirty = false;
             this.WindowState = FormWindowState.Maximized;
-
-            commandList = new List<string>();
-            commandList.Add("assign");
-            commandList.Add("hide");
-            commandList.Add("unhide");
-            commandList.Add("clear");
-            commandList.Add("disable");
-            commandList.Add("enable");
-            commandList.Add("if");
-            commandList.Add("autosearch");
-            commandList.Add("goto");
-            commandList.Add("set-required");
-            commandList.Add("set-not-required");
-            commandList.Add("and");
-            commandList.Add("not");
-            commandList.Add("or");
-            commandList.Add("geocode");
-            commandList.Add("field");
 
         }
 
@@ -1636,14 +1617,7 @@ namespace Epi.Windows.MakeView.Forms
                 case Enums.FieldCommands.FieldSelector:
                     try
                     {
-                        if (this.PreValidateCommandforFieldSelector(" "))
-                        {
                             DesignStatement(new FieldSelectorDialog(mainForm));
-                        }
-                        else
-                        {
-                            AddStatusErrorMessage("FieldSelector command: invalid cursor location.\nPlease place cursor inside a code block.");
-                        }
                     }
                     catch (Exception ex)
                     {
@@ -2149,30 +2123,6 @@ namespace Epi.Windows.MakeView.Forms
                 codeText.Select(start, length);
                 codeText.SelectionColor = Color.Red;
                 codeText.Select(start, 0);*/
-            }
-            return result;
-        }
-
-        private bool PreValidateCommandforFieldSelector(string pCommandText)
-        {
-            bool result = false;
-            string start = null;
-            string finish = null;
-
-            start = codeText.Text.Substring(0, codeText.SelectionStart);
-            finish = codeText.Text.Substring(codeText.SelectionStart, codeText.Text.Length - codeText.SelectionStart);
-            string lastcommand = start.Substring(start.LastIndexOf("\n") + 1);
-            string[] splitstring = lastcommand.Split(' ');
-
-            if (splitstring.Length == 1)
-            {
-                if (commandList.Contains(splitstring[0]))
-                    result = true;
-            }
-            else if (splitstring.Length > 1)
-            {
-                if (commandList.Contains(splitstring[splitstring.Length - 1]))
-                    result = true;
             }
             return result;
         }
