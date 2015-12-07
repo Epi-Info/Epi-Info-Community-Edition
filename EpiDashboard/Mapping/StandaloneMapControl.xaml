@@ -18,7 +18,7 @@
             <ColumnDefinition Width="58"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel>
+        <StackPanel  x:Name="StackPanel1"  >
             <TextBlock Name="txtMap" HorizontalAlignment="Center" Text="Epi Info Map" Margin="0,10,0,0" FontSize="14" FontWeight="Bold"></TextBlock>
             <!--<TextBlock Name="txtInternet" HorizontalAlignment="Center" Text="This feature requires Internet connectivity." Margin="0,10,0,0" FontSize="12"></TextBlock>-->
             <TextBlock Name="txtLoading" HorizontalAlignment="Center" Text="Loading..." Margin="0,10,0,0" FontSize="12" Visibility="Collapsed"></TextBlock>
@@ -75,7 +75,7 @@
             
         </Grid>
 
-        <DockPanel SnapsToDevicePixels="True" Grid.Column="0">
+        <DockPanel SnapsToDevicePixels="True"  x:Name="DockPanel1" Grid.Column="0">
             <Grid>
                 <Rectangle Style="{DynamicResource shadowRectangle}"></Rectangle>
                 <DockPanel Background="{DynamicResource menuBarBackground}">
@@ -231,7 +231,7 @@
             </Grid>
         </DockPanel>
 
-        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1">
+        <Grid HorizontalAlignment="Right"  x:Name="grdBaseMap" VerticalAlignment="Top" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -299,6 +299,25 @@
                 </Grid>
             </DockPanel>
         </Grid>
+
+    
+        <Grid x:Name="grdScale" Grid.Column="1"  Cursor="Hand"      >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40"    />
+            </Grid.RowDefinitions>
+            <Button   Grid.Row="1"       Foreground="Orange"  HorizontalAlignment="Right" Width="100"  FontSize="24" x:Name="NorthArrowText"    >N
+                <Button.RenderTransform>
+                    <RotateTransform  />
+                </Button.RenderTransform>
+            </Button>
+            <!--<esri:ScaleLine Name="ScaleLine11" Map="{Binding ElementName=myMap  }"
+     HorizontalAlignment="Right"  VerticalAlignment="Bottom"           
+     TargetWidth="200"        
+     Foreground="Orange"       FontFamily="Courier New" FontSize="18" />-->
+        </Grid>
+    
         <Grid x:Name="grdLapse" Visibility="Collapsed" HorizontalAlignment="Center"  StackPanel.ZIndex="2000"  VerticalAlignment="Bottom"  Grid.Column="1"  Margin="0,10,10,30" >
 
             <Grid x:Name="grdTimeLapse" Visibility="Collapsed" HorizontalAlignment="Center"    VerticalAlignment="Bottom"  Grid.Column="1"  Margin="0,10,10,30" >
@@ -338,18 +357,6 @@
             <Image x:Name="imgCloseLayer" Source="..\Images\x_over.png" Cursor="Hand" HorizontalAlignment="Right" Margin="2" VerticalAlignment="Top" Stretch="None" />
         </Grid>
 
-        <Grid x:Name="grdScale" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="40"    />     
-            </Grid.RowDefinitions>
-            <!--<esri:ScaleLine Name="ScaleLine11" Map="{Binding ElementName=myMap  }"
-     HorizontalAlignment="Right"  VerticalAlignment="Bottom"           
-     TargetWidth="200"        
-     Foreground="Orange"       FontFamily="Courier New" FontSize="18" />-->
-        </Grid>
-
-
-
+     
     </Grid>
 </UserControl>

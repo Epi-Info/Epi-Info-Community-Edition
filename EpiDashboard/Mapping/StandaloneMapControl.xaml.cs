@@ -7,6 +7,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.DataVisualization.Charting;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -23,9 +24,17 @@ using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 using Color = System.Windows.Media.Color;
+using ContextMenu = System.Windows.Controls.ContextMenu;
 using FontFamily = System.Windows.Media.FontFamily;
+using HorizontalAlignment = System.Windows.HorizontalAlignment;
+using MenuItem = System.Windows.Controls.MenuItem;
+using MessageBox = System.Windows.MessageBox;
+using MouseEventArgs = System.Windows.Input.MouseEventArgs;
+using MouseEventHandler = System.Windows.Input.MouseEventHandler;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
+using UserControl = System.Windows.Controls.UserControl;
+using View = Epi.View;
 
 namespace EpiDashboard.Mapping
 {
@@ -390,16 +399,15 @@ namespace EpiDashboard.Mapping
                 mnuScale.IsChecked = true;
                 mnuScale.Click += new RoutedEventHandler(mnuScale_Click);
 
-                MenuItem mnuAutoContrastItem = new MenuItem();
-                mnuAutoContrastItem.Header = "Auto Contrast ";    //      DashboardSharedStrings.GADGET_MAP_ADD_MARKER;    
-                mnuAutoContrastItem.IsCheckable = true;
-                mnuAutoContrastItem.IsChecked = true;
-                mnuAutoContrastItem.Click += mnuAutoContrastItem_Click;
-                mnuScale.Items.Add(mnuAutoContrastItem);
+                //MenuItem mnuAutoContrastItem = new MenuItem();
+                //mnuAutoContrastItem.Header = "Auto Contrast ";    //      DashboardSharedStrings.GADGET_MAP_ADD_MARKER;    
+                //mnuAutoContrastItem.IsCheckable = true;
+                //mnuAutoContrastItem.IsChecked = true;
+                //mnuAutoContrastItem.Click += mnuAutoContrastItem_Click;
+                //mnuScale.Items.Add(mnuAutoContrastItem);
 
                 mnuScale.IsSubmenuOpen = true;
                 menu.Items.Add(mnuScale);
-
 
 
                 MenuItem mnuRadius = new MenuItem();
@@ -440,6 +448,8 @@ namespace EpiDashboard.Mapping
                 myMap.Loaded += new RoutedEventHandler(myMap_Loaded);
                 myMap.ExtentChanged += myMap_ExtentChanged;
 
+                myMap.RotationChanged += myMap_RotationChanged;
+
                 MapContainer.Children.Add(myMap);
 
                 ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
@@ -475,33 +485,19 @@ namespace EpiDashboard.Mapping
                 AddLayerList();
 
 
-
-                MarkerSymbol s = new KmlPlaceMarkerSymbol();
-
-                s.Angle = myMap.Rotation;
-
-
-
                 //Create a new ScaleLine Control and add it to the LayoutRoot (a Grid in the XAML)
                 //  ESRI.ArcGIS.Client.Toolkit.ScaleLine ScaleLine1 = new ESRI.ArcGIS.Client.Toolkit.ScaleLine();
 
                 ScaleLine1.MouseDoubleClick += ScaleLine1_MouseDoubleClick;
                 grdScale.Children.Add(ScaleLine1);
-
                 Grid.SetRow(ScaleLine1, 0);
-
 
                 //Associate the ScaleLine with Map Control (analagous to a OneTime Binding). Most common coding pattern.
                 ScaleLine1.Map = myMap;
 
-
                 //Set the alignment properties relative the hosting Grid Control
-
                 ScaleLine1.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
                 ScaleLine1.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-
-
-                //    ESRI.ArcGIS.Client.Symbols      
 
                 //Set the Map units for the ScaleLine
                 ScaleLine1.MapUnit = ESRI.ArcGIS.Client.Toolkit.ScaleLine.ScaleLineUnit.DecimalDegrees;
@@ -510,10 +506,35 @@ namespace EpiDashboard.Mapping
                 ScaleLine1.TargetWidth = 200;
 
                 //Set ScaleLine color and related Font information
-                System.Windows.Media.Color myScaleLineColor = Color.FromArgb(255, 0, 255, 0);
+                var myScaleLineColor = Color.FromArgb(255, 0, 255, 0);
                 ScaleLine1.Foreground = new System.Windows.Media.SolidColorBrush(myScaleLineColor);
                 ScaleLine1.FontFamily = new FontFamily("Courier New");
                 ScaleLine1.FontSize = 18;
+
+                //  Context menu for Scale 
+                ContextMenu scaleContextMenu = new ContextMenu();
+                ScaleLine1.ContextMenu = scaleContextMenu;
+
+                MenuItem mnuScaleContextItem = new MenuItem();
+                mnuScaleContextItem.Header = "Auto Adjust Color";
+                mnuScaleContextItem.IsCheckable = true;
+                mnuScaleContextItem.IsChecked = true;
+                mnuScaleContextItem.Click += mnuScaleContextItem_Click;
+                scaleContextMenu.Items.Add(mnuScaleContextItem);
+
+
+                //MenuItem mnuAutoContrastItem = new MenuItem();
+                //mnuAutoContrastItem.Header = "Auto Contrast ";    //      DashboardSharedStrings.GADGET_MAP_ADD_MARKER;    
+                //mnuAutoContrastItem.IsCheckable = true;
+                //mnuAutoContrastItem.IsChecked = true;
+                //mnuAutoContrastItem.Click += mnuAutoContrastItem_Click;
+                //mnuScale.Items.Add(mnuAutoContrastItem);
+
+                //mnuScale.IsSubmenuOpen = true;
+                //menu.Items.Add(mnuScale);
+
+
+
 
 
 
@@ -529,6 +550,26 @@ namespace EpiDashboard.Mapping
 
         }
 
+        void mnuScaleContextItem_Click(object sender, RoutedEventArgs e)
+        {
+            autoContrast = ((MenuItem)sender).IsChecked;
+
+        }
+
+        void myMap_RotationChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            //  northArrow.Rota =      myMap.Rotation        
+
+
+            NorthArrowText.RenderTransformOrigin = new Point(.5, .5);
+
+            var rt = (RotateTransform)NorthArrowText.RenderTransform;
+            //    rt.BeginAnimation(RotateTransform.AngleProperty, rotateAnimation);
+
+            rt.Angle = myMap.Rotation;
+
+        }
+
         private bool autoContrast = true;
 
 
@@ -537,12 +578,16 @@ namespace EpiDashboard.Mapping
 
             autoContrast = ((MenuItem)sender).IsChecked;
 
+
         }
 
         void myMap_ExtentChanged(object sender, ExtentEventArgs e)
         {
             try
             {
+                if (e.NewExtent.Equals(e.OldExtent))
+                    return;
+    
                 if (autoContrast)
                     AdjustScaleLine();
             }
@@ -804,10 +849,14 @@ namespace EpiDashboard.Mapping
 
         void ScaleLine1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (autoContrast == false)
             {
-                ((ScaleLine)sender).Foreground = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    ((ScaleLine)sender).Foreground =
+                        new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                }
             }
         }
 
@@ -1666,17 +1715,52 @@ namespace EpiDashboard.Mapping
             {
                 layerList.Visibility = System.Windows.Visibility.Collapsed;
                 nav.Visibility = Visibility.Collapsed;
+                grdLayerTypeChooser.Visibility = Visibility.Collapsed;
+                grdBaseMap.Visibility = Visibility.Collapsed;
+                if (grdLegend.Margin.Left < 0)
+                    grdLegend.Visibility = Visibility.Collapsed;
 
-                BitmapSource img = (BitmapSource)ToImageSource(grdMapDef);
+
+                DockPanel1.Visibility = Visibility.Collapsed;
+                StackPanel1.Visibility = Visibility.Collapsed;
+
+
+                //////////////
+
+                BitmapSource imgLayout = (BitmapSource)ToImageSource(LayoutRoot);
+
+                //BitmapSource img = (BitmapSource)ToImageSource(grdMapDef);
+
+                //BitmapSource imgLeg = (BitmapSource)ToImageSource(grdLegend);
+
+                //BitmapSource imgScale = (BitmapSource)ToImageSource(grdScale);
+
 
                 FileStream stream = new FileStream(dlg.FileName, FileMode.Create);
                 PngBitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(img));
+                encoder.Frames.Add(BitmapFrame.Create(imgLayout));
+                //encoder.Frames.Add(BitmapFrame.Create(imgScale)); 
+                //encoder.Frames.Add(BitmapFrame.Create(imgLeg));
+                //encoder.Frames.Add(BitmapFrame.Create(img));
+
+
+
                 encoder.Save(stream);
+
+                ////////////////////
+
                 stream.Close();
 
                 layerList.Visibility = System.Windows.Visibility.Visible;
                 nav.Visibility = System.Windows.Visibility.Visible;
+                grdLayerTypeChooser.Visibility = Visibility.Visible;
+                grdBaseMap.Visibility = Visibility.Visible;
+                if (grdLegend.Visibility == Visibility.Collapsed)
+                    grdLegend.Visibility = Visibility.Visible;
+
+                StackPanel1.Visibility = Visibility.Visible;
+                DockPanel1.Visibility = Visibility.Visible;
+
                 MessageBox.Show(DashboardSharedStrings.MAP_IMAGE_SAVED, DashboardSharedStrings.SAVE_SUCCESSFUL, MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
