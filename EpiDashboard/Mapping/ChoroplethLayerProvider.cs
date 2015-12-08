@@ -742,12 +742,20 @@ namespace EpiDashboard.Mapping
 
                         int brushIndex = GetRangeIndex(graphicValue, _thematicItem.RangeStarts);
 
-                        SimpleFillSymbol symbol = new SimpleFillSymbol()
+                        Color color = ((SolidColorBrush)colors[brushIndex]).Color;
+                        Brush fill = new SolidColorBrush(Color.FromArgb(Opacity, color.R, color.G, color.B));
+
+                        if (graphicValue == Double.PositiveInfinity)
                         {
-                            Fill = graphicValue == Double.PositiveInfinity ? colors[colors.Count - 1] : colors[brushIndex],
-                            BorderBrush = new SolidColorBrush(Colors.Black),
-                            BorderThickness = 1
-                        };
+                            color = ((SolidColorBrush)colors[colors.Count - 1]).Color;
+                            fill = new SolidColorBrush(Color.FromArgb(Opacity, color.R, color.G, color.B));
+                        }
+
+                        SimpleFillSymbol symbol = new SimpleFillSymbol();
+
+                        symbol.Fill = fill;
+                        symbol.BorderBrush = new SolidColorBrush(Colors.Black);
+                        symbol.BorderThickness = 1;
 
                         graphicFeature.Symbol = symbol;
 

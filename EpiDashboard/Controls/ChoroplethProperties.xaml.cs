@@ -215,7 +215,6 @@ namespace EpiDashboard.Controls
             set { _opacity = value; }
         }
 
-
         public FileInfo ProjectFileInfo
         {
             get
@@ -312,8 +311,6 @@ namespace EpiDashboard.Controls
                 {
                     Opacity = Convert.ToByte(sliderOpacity.Value);
                 }
-
-                SetOpacity();
 
                 List<SolidColorBrush> brushList = new List<SolidColorBrush>()
                 {
@@ -599,8 +596,6 @@ namespace EpiDashboard.Controls
 
                 panelFilters.Children.Add(rowFilterControl);
             }
-
-
         }
 
         private void RemoveFilter()
@@ -663,7 +658,7 @@ namespace EpiDashboard.Controls
                 if (!(field.ToUpper() == "RECSTATUS" || field.ToUpper() == "UNIQUEKEY"))
                 { 
                     cmbValue.Items.Add(field); 
-            }
+                }
             }
 
             cmbValue.Items.Insert(0, "{Record Count}");
@@ -674,53 +669,6 @@ namespace EpiDashboard.Controls
             if (Cancelled != null)
             {
                 Cancelled(this, new EventArgs());
-            }
-        }
-
-        private void btnBrowseShapeFile_Click(object sender, RoutedEventArgs e)
-        {
-            thisProvider = new Mapping.ChoroplethShapeLayerProvider(_myMap);
-            object[] shapeFileProperties = thisProvider.Load();
-            
-            if (shapeFileProperties != null)
-            {
-                layerAddednew.Add(thisProvider._layerId.ToString());
-                if (choroplethShapeLayerProperties == null)
-                {
-                    ILayerProperties layerProperties = null;
-                    layerProperties = new ChoroplethShapeLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
-                    layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
-                    layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
-                    layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);
-                    this.choroplethShapeLayerProperties = (ChoroplethShapeLayerProperties)layerProperties;
-                    this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-                }
-
-                choroplethShapeLayerProperties.provider = thisProvider as ChoroplethShapeLayerProvider;
-
-                if (this.DashboardHelper != null)
-                {
-                    choroplethShapeLayerProperties.SetdashboardHelper(DashboardHelper);
-                }
-
-                if (shapeFileProperties.Length == 2)
-                {
-                    txtShapePath.Text = shapeFileProperties[0].ToString();
-                    choroplethShapeLayerProperties.shapeFilePath = shapeFileProperties[0].ToString();
-                    choroplethShapeLayerProperties.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
-                    shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
-                    
-                    if (shapeAttributes != null)
-                    {
-                        cmbShapeKey.Items.Clear();
-                        choroplethShapeLayerProperties.cbxShapeKey.Items.Clear();
-                        foreach (string key in shapeAttributes.Keys)
-                        {
-                            cmbShapeKey.Items.Add(key);
-                            choroplethShapeLayerProperties.cbxShapeKey.Items.Add(key);
-                        }
-                    }
-                }
             }
         }
 
@@ -903,91 +851,6 @@ namespace EpiDashboard.Controls
             {
                 var item = classAttrib.ElementAt(key - 1);
                 classAttributes itemvalue = (classAttributes)item.Value;
-
-                //if (key == 1)
-                //{
-                //    rctColor1.Fill = (Brush)itemvalue.rctColor;
-                //    rampStart01.Text = itemvalue.rampStart;
-                //    rampEnd01.Text = itemvalue.rampEnd;
-                //    quintile01.Text = itemvalue.quintile;
-                //    // legendText1.Text = itemvalue.legendText;
-                //}
-                //else if (key == 2)
-                //{
-                //    rctColor2.Fill = (Brush)itemvalue.rctColor;
-                //    rampStart02.Text = itemvalue.rampStart;
-                //    rampEnd02.Text = itemvalue.rampEnd;
-                //    quintile02.Text = itemvalue.quintile;
-                //    // legendText2.Text = itemvalue.legendText;
-                //}
-                //else if (key == 3)
-                //{
-                //    rctColor3.Fill = (Brush)itemvalue.rctColor;
-                //    rampStart03.Text = itemvalue.rampStart;
-                //    rampEnd03.Text = itemvalue.rampEnd;
-                //    quintile03.Text = itemvalue.quintile;
-                //    //  legendText3.Text = itemvalue.legendText;
-                //}
-                //else if (key == 4)
-                //{
-                //    rctColor4.Fill = (Brush)itemvalue.rctColor;
-                //    rampStart04.Text = itemvalue.rampStart;
-                //    rampEnd04.Text = itemvalue.rampEnd;
-                //    quintile04.Text = itemvalue.quintile;
-                //    // legendText4.Text = itemvalue.legendText;
-                //}
-                //else if (key == 5)
-                //{
-                //    rctColor5.Fill = (Brush)itemvalue.rctColor;
-                //    rampStart05.Text = itemvalue.rampStart;
-                //    rampEnd05.Text = itemvalue.rampEnd;
-                //    quintile05.Text = itemvalue.quintile;
-                //    // legendText5.Text = itemvalue.legendText;
-
-                //}
-                //else if (key == 6)
-                //{
-                //    rctColor6.Fill = (Brush)itemvalue.rctColor;
-                //    rampStart06.Text = itemvalue.rampStart;
-                //    rampEnd06.Text = itemvalue.rampEnd;
-                //    quintile06.Text = itemvalue.quintile;
-                //    // legendText6.Text = itemvalue.legendText;
-
-                //}
-                //else if (key == 7)
-                //{
-                //    rctColor7.Fill = (Brush)itemvalue.rctColor;
-                //    rampStart07.Text = itemvalue.rampStart;
-                //    rampEnd07.Text = itemvalue.rampEnd;
-                //    quintile07.Text = itemvalue.quintile;
-                //    // legendText7.Text = itemvalue.legendText;
-                //}
-                //else if (key == 8)
-                //{
-                //    rctColor8.Fill = (Brush)itemvalue.rctColor;
-                //    rampStart08.Text = itemvalue.rampStart;
-                //    rampEnd08.Text = itemvalue.rampEnd;
-                //    quintile08.Text = itemvalue.quintile;
-                //    // legendText8.Text = itemvalue.legendText;
-
-                //}
-                //else if (key == 9)
-                //{
-                //    rctColor9.Fill = (Brush)itemvalue.rctColor;
-                //    rampStart09.Text = itemvalue.rampStart;
-                //    rampEnd09.Text = itemvalue.rampEnd;
-                //    quintile09.Text = itemvalue.quintile;
-                //    // legendText9.Text = itemvalue.legendText;
-
-                //}
-                //else if (key == 10)
-                //{
-                //    rctColor10.Fill = (Brush)itemvalue.rctColor;
-                //    rampStart10.Text = itemvalue.rampStart;
-                //    rampEnd10.Text = itemvalue.rampEnd;
-                //    quintile10.Text = itemvalue.quintile;
-                //    //  legendText10.Text = itemvalue.legendText;
-                //}
             }
         }
 
@@ -1035,7 +898,6 @@ namespace EpiDashboard.Controls
                 string value = cmbValue.SelectedItem.ToString();
                 string missingText = legendText0.Text.ToString();
                 Opacity = Convert.ToByte(sliderOpacity.Value);
-                SetOpacity();
 
                 List<SolidColorBrush> brushList = new List<SolidColorBrush>() { 
                     (SolidColorBrush)rctColor1.Fill, 
@@ -1073,57 +935,6 @@ namespace EpiDashboard.Controls
                         missingText);
                 }
             }
-        }
-        
-        private void SetOpacity()
-        {
-            Color color = (rctColor0.Fill as SolidColorBrush).Color;
-            color.A = Opacity;
-            rctColor0.Fill = new SolidColorBrush(color);
-
-            color = (rctColor1.Fill as SolidColorBrush).Color;
-            color.A = Opacity;
-            rctColor1.Fill = new SolidColorBrush(color);
-
-            color = (rctColor2.Fill as SolidColorBrush).Color;
-            color.A = Opacity;
-            rctColor2.Fill = new SolidColorBrush(color);
-
-            color = (rctColor3.Fill as SolidColorBrush).Color;
-            color.A = Opacity;
-            rctColor3.Fill = new SolidColorBrush(color);
-
-            color = (rctColor4.Fill as SolidColorBrush).Color;
-            color.A = Opacity;
-            rctColor4.Fill = new SolidColorBrush(color);
-
-            color = (rctColor5.Fill as SolidColorBrush).Color;
-            color.A = Opacity;
-            rctColor5.Fill = new SolidColorBrush(color);
-
-            color = (rctColor6.Fill as SolidColorBrush).Color;
-            color.A = Opacity;
-            rctColor6.Fill = new SolidColorBrush(color);
-
-            color = (rctColor7.Fill as SolidColorBrush).Color;
-            color.A = Opacity;
-            rctColor7.Fill = new SolidColorBrush(color);
-
-            color = (rctColor8.Fill as SolidColorBrush).Color;
-            color.A = Opacity;
-            rctColor8.Fill = new SolidColorBrush(color);
-
-            color = (rctColor9.Fill as SolidColorBrush).Color;
-            color.A = Opacity;
-            rctColor9.Fill = new SolidColorBrush(color);
-
-            color = (rctColor10.Fill as SolidColorBrush).Color;
-            color.A = Opacity;
-            rctColor10.Fill = new SolidColorBrush(color);
-
-            color = (rctMissingColor.Fill as SolidColorBrush).Color;
-            color.A = Opacity;
-            rctMissingColor.Fill = new SolidColorBrush(color);
         }
 
         public List<double> GetRangeValues(int RangeCount)
@@ -1222,141 +1033,16 @@ namespace EpiDashboard.Controls
             }
         }
 
-        private void rctColor0_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctColor0.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.CustomColorsDictionary.Add(rctColor0.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-        }
-
-        private void rctColor1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctColor1.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctColor1.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-        }
-
-        private void rctColor2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctColor2.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctColor2.Name,
-                    Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-
-            }
-        }
-
-        private void rctColor3_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctColor3.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctColor3.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-        }
-
-        private void rctColor4_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctColor4.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctColor4.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-        }
-
-        private void rctColor5_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctColor5.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctColor5.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-        }
-
-        private void rctColor6_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctColor6.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctColor6.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-        }
-
-        private void rctColor7_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctColor7.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctColor7.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-        }
-
-        private void rctColor8_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctColor8.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctColor8.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-        }
-
-        private void rctColor9_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctColor9.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctColor9.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-        }
-
-        private void rctColor10_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctColor10.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctColor10.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-        }
-
         private void rctMissingColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                rctMissingColor.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                rctMissingColor.Fill = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
                 thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctMissingColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
-
+                thisProvider.CustomColorsDictionary.Add(rctMissingColor.Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
-
             Reset_Legend();
-
         }
 
         private void rctLowColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -1364,25 +1050,35 @@ namespace EpiDashboard.Controls
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                rctLowColor.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                rctLowColor.Fill = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
                 thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctLowColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(rctLowColor.Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
-
             Reset_Legend();
         }
 
         private void rctHighColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+
+            if (new System.Windows.Forms.ColorDialog().ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                rctHighColor.Fill = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.UseCustomColors = true;
+                thisProvider.CustomColorsDictionary.Add(rctHighColor.Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
+            }
+            Reset_Legend();
+        }
+
+        private void rctColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                rctHighColor.Fill = new SolidColorBrush(Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                ((System.Windows.Shapes.Rectangle)sender).Fill = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
                 thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctHighColor.Name, Color.FromArgb(Opacity, dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                thisProvider.CustomColorsDictionary.Add(((System.Windows.Shapes.Rectangle)sender).Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
             }
-
-            Reset_Legend();
         }
 
         private void ClassCount_Changed(object sender, SelectionChangedEventArgs e)
@@ -1755,8 +1451,6 @@ namespace EpiDashboard.Controls
 
         private void SetRangeUISection()
         {
-            SetOpacity();
-
             List<SolidColorBrush> brushList = new List<SolidColorBrush>() { 
                     (SolidColorBrush)rctColor1.Fill, 
                     (SolidColorBrush)rctColor2.Fill, 
@@ -1798,6 +1492,7 @@ namespace EpiDashboard.Controls
                     for (int x = 1; x <= ChoroplethConstants.MAX_CLASS_DECRIPTION_COUNT; x++)
                     {
                         System.Windows.Controls.TextBox t = FindName(ChoroplethConstants.legendTextControlPrefix + x) as System.Windows.Controls.TextBox;
+                        
                         if (string.IsNullOrEmpty(t.Text))
                         {
                             t.Text = thisProvider.ListLegendText.GetWithKey(ChoroplethConstants.legendTextControlPrefix + x);
@@ -1973,13 +1668,63 @@ namespace EpiDashboard.Controls
             }
 
             return RangeAttr;
-
         }
+
+        private void btnBrowseShapeFile_Click(object sender, RoutedEventArgs e)
+        {
+            thisProvider = new Mapping.ChoroplethShapeLayerProvider(_myMap);
+            object[] shapeFileProperties = thisProvider.Load();
+
+            if (shapeFileProperties != null)
+            {
+                layerAddednew.Add(thisProvider._layerId.ToString());
+                
+                if (choroplethShapeLayerProperties == null)
+                {
+                    ILayerProperties layerProperties = null;
+                    layerProperties = new ChoroplethShapeLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
+                    layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
+                    layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
+                    layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);
+                    this.choroplethShapeLayerProperties = (ChoroplethShapeLayerProperties)layerProperties;
+                    this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                }
+
+                choroplethShapeLayerProperties.provider = thisProvider as ChoroplethShapeLayerProvider;
+
+                if (this.DashboardHelper != null)
+                {
+                    choroplethShapeLayerProperties.SetdashboardHelper(DashboardHelper);
+                }
+
+                if (shapeFileProperties.Length == 2)
+                {
+                    txtShapePath.Text = shapeFileProperties[0].ToString();
+                    choroplethShapeLayerProperties.shapeFilePath = shapeFileProperties[0].ToString();
+                    choroplethShapeLayerProperties.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
+                    shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
+
+                    if (shapeAttributes != null)
+                    {
+                        cmbShapeKey.Items.Clear();
+                        choroplethShapeLayerProperties.cbxShapeKey.Items.Clear();
+                        
+                        foreach (string key in shapeAttributes.Keys)
+                        {
+                            cmbShapeKey.Items.Add(key);
+                            choroplethShapeLayerProperties.cbxShapeKey.Items.Add(key);
+                        }
+                    }
+                }
+            }
+        }
+
         private void btnKMLFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "KML/KMZ Files (*.kml/*.kmz)|*.kml;*.kmz";
             dialog.Multiselect = false;
+
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 txtKMLpath.Text = dialog.FileName;
@@ -1989,17 +1734,17 @@ namespace EpiDashboard.Controls
             if (choroplethKmlLayerProvider == null)
             {
                 choroplethKmlLayerProvider = new Mapping.ChoroplethKmlLayerProvider(_myMap);
-            
                 choroplethKmlLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroKMLprovider_FeatureLoaded);
             }
 
             thisProvider = choroplethKmlLayerProvider;
 
-
             object[] kmlFileProperties = choroplethKmlLayerProvider.Load(KMLMapServerName);
+
             if (kmlFileProperties != null)
             {
                 layerAddednew.Add(choroplethKmlLayerProvider._layerId.ToString());
+                
                 if (choroplethKmlLayerProperties == null)
                 {
                     ILayerProperties layerProperties = null;
@@ -2010,12 +1755,96 @@ namespace EpiDashboard.Controls
                     this.choroplethKmlLayerProperties = (ChoroplethKmlLayerProperties)layerProperties;
                     this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
                 }
+                
                 choroplethKmlLayerProperties.shapeFilePath = KMLMapServerName;
                 choroplethKmlLayerProperties.provider = choroplethKmlLayerProvider;
                 choroplethKmlLayerProperties.provider.FeatureLoaded += new FeatureLoadedHandler(choroplethKmlLayerProperties.provider_FeatureLoaded);
+                
                 if (this.DashboardHelper != null)
+                {
                     choroplethKmlLayerProperties.SetdashboardHelper(DashboardHelper);
+                }
+            }
+        }
 
+        public void MapFeatureSelectionChange()
+        {
+            if (cbxmapfeature.Items.Count > 0)
+            {
+                MapServerName = txtMapSeverpath.Text;
+                
+                if (cbxmapfeature.SelectedIndex > -1)
+                {
+                    int visibleLayer = ((SubObject)cbxmapfeature.SelectedItem).id;
+                    MapVisibleLayer = visibleLayer;
+                    
+                    if (choroplethServerLayerProvider == null)
+                    {
+                        choroplethServerLayerProvider = new Mapping.ChoroplethServerLayerProvider(_myMap);
+                        choroplethServerLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
+                    }
+                    
+                    object[] mapFileProperties = choroplethServerLayerProvider.Load(MapServerName + "/" + MapVisibleLayer);
+                    
+                    if (mapFileProperties != null)
+                    {
+                        layerAddednew.Add(choroplethServerLayerProvider._layerId.ToString());
+                        
+                        if (choroplethServerLayerProperties == null)
+                        {
+                            ILayerProperties layerProperties = null;
+                            layerProperties = new ChoroplethServerLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
+                            layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
+                            layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
+                            layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);
+                            this.choroplethServerLayerProperties = (ChoroplethServerLayerProperties)layerProperties;
+                            this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                        }
+                        
+                        choroplethServerLayerProperties.shapeFilePath = MapServerName;
+                        choroplethServerLayerProperties.provider = choroplethServerLayerProvider;
+                        choroplethServerLayerProperties.provider.FeatureLoaded += new FeatureLoadedHandler(choroplethServerLayerProperties.provider_FeatureLoaded);
+
+                        if (this.DashboardHelper != null)
+                        {
+                            choroplethServerLayerProperties.SetdashboardHelper(DashboardHelper);
+                        }
+                    }
+                }
+                else
+                {
+                    MapVisibleLayer = -1;
+                }
+            }
+        }
+
+        private void Addfilters()
+        {
+            try
+            {
+                this.datafilters = rowFilterControl.DataFilters;
+
+                if (radShapeFile.IsChecked == true && this.choroplethShapeLayerProperties != null) 
+                { 
+                    choroplethShapeLayerProperties.datafilters = rowFilterControl.DataFilters; 
+                }
+                
+                if (radMapServer.IsChecked == true && this.choroplethServerLayerProperties != null) 
+                {
+                    choroplethServerLayerProperties.datafilters = rowFilterControl.DataFilters;
+                }
+
+                if (radKML.IsChecked == true && choroplethKmlLayerProperties != null)
+                {
+                    choroplethKmlLayerProperties.datafilters = rowFilterControl.DataFilters;
+                }
+
+                this.datafilters = rowFilterControl.DataFilters;
+                _dashboardHelper.SetDatafilters(this.datafilters);
+            }
+            catch (Exception)
+            {
+                throw new Exception();
             }
         }
 
@@ -2061,121 +1890,9 @@ namespace EpiDashboard.Controls
                         //rctDotColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
                     }
                 }
-                //  RenderMap();    
 
                 legTitle.Text = thisProvider.LegendText;
-
             }
-        }
-
-        private void Addfilters()
-        {
-            try
-            {
-                this.datafilters = rowFilterControl.DataFilters;
-
-                if (radShapeFile.IsChecked == true && this.choroplethShapeLayerProperties != null) 
-                { 
-                    choroplethShapeLayerProperties.datafilters = rowFilterControl.DataFilters; 
-                }
-                
-                if (radMapServer.IsChecked == true && this.choroplethServerLayerProperties != null) 
-                {
-                    choroplethServerLayerProperties.datafilters = rowFilterControl.DataFilters;
-                }
-
-                if (radKML.IsChecked == true && choroplethKmlLayerProperties != null)
-                {
-                    choroplethKmlLayerProperties.datafilters = rowFilterControl.DataFilters;
-                }
-
-                this.datafilters = rowFilterControl.DataFilters;
-                _dashboardHelper.SetDatafilters(this.datafilters);
-            }
-            catch (Exception)
-            {
-                throw new Exception();
-            }
-            
-            /*
-            string sfilterOperand = string.Empty;
-            string[] shilowvars;
-            string svarname;
-
-            List<string> sconditionval = datafilters.GetFilterConditionsAsList();
-           
-            string strreadablecondition = datafilters.GenerateReadableDataFilterString().Trim();
-            if (!(string.IsNullOrEmpty(strreadablecondition)))
-            {
-                if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_MISSING))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_MISSING;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_OR))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_OR;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LIKE))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LIKE;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_AND))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_AND;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_IS_ANY_OF))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_IS_ANY_OF;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_IS_NOT_ANY_OF))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_IS_NOT_ANY_OF;
-                }
-                if (!(strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN)))
-                {
-                    svarname = strreadablecondition.Substring(strreadablecondition.IndexOf("[") + 1, strreadablecondition.IndexOf("]") - strreadablecondition.IndexOf("[") - 1);
-                    _dashboardHelper.AddDataFilterCondition(sfilterOperand, sconditionval[0].ToString(), svarname, ConditionJoinType.And);
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_BETWEEN;
-                    string strcondition = strreadablecondition.Substring(0, strreadablecondition.IndexOf(sfilterOperand)).Trim();
-                    string[] strVarstrings = strcondition.Split(' ');
-                    svarname = strVarstrings[3].ToString();
-                    string sValues = strreadablecondition.ToString().Substring(strreadablecondition.IndexOf(sfilterOperand) + sfilterOperand.Length, (strreadablecondition.ToString().Length) - (strreadablecondition.ToString().IndexOf(sfilterOperand) + sfilterOperand.Length)).Trim();
-                    shilowvars = sValues.Split(' ');
-                    _dashboardHelper.AddDataFilterCondition(sfilterOperand, shilowvars[0].ToString(), shilowvars[2].ToString(), svarname, ConditionJoinType.And);
-                }
-            } */
-
         }
 
         void choroKMLprovider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)
@@ -2488,50 +2205,7 @@ namespace EpiDashboard.Controls
                 }
             }
 
-            MapfeatureSelectionChange();
-        }
-
-        public void MapfeatureSelectionChange()
-        {
-            if (cbxmapfeature.Items.Count > 0)
-            {
-                MapServerName = txtMapSeverpath.Text;
-                if (cbxmapfeature.SelectedIndex > -1)
-                {
-                    int visibleLayer = ((SubObject)cbxmapfeature.SelectedItem).id;
-                    MapVisibleLayer = visibleLayer;
-                    if (choroplethServerLayerProvider == null)
-                    {
-                        choroplethServerLayerProvider = new Mapping.ChoroplethServerLayerProvider(_myMap);
-                        choroplethServerLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
-                    }
-                    object[] mapFileProperties = choroplethServerLayerProvider.Load(MapServerName + "/" + MapVisibleLayer);
-                    if (mapFileProperties != null)
-                    {
-                        layerAddednew.Add(choroplethServerLayerProvider._layerId.ToString());
-                        if (choroplethServerLayerProperties == null)
-                        {
-                            ILayerProperties layerProperties = null;
-                            layerProperties = new ChoroplethServerLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
-                            layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
-                            layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
-                            layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);
-                            this.choroplethServerLayerProperties = (ChoroplethServerLayerProperties)layerProperties;
-                            this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-                        }
-                        choroplethServerLayerProperties.shapeFilePath = MapServerName;
-                        choroplethServerLayerProperties.provider = choroplethServerLayerProvider;
-                        choroplethServerLayerProperties.provider.FeatureLoaded += new FeatureLoadedHandler(choroplethServerLayerProperties.provider_FeatureLoaded);
-                        if (this.DashboardHelper != null)
-                            choroplethServerLayerProperties.SetdashboardHelper(DashboardHelper);
-
-                    }
-                }
-                else
-                {
-                    MapVisibleLayer = -1;
-                }
-            }
+            MapFeatureSelectionChange();
         }
 
         private void Slider_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
