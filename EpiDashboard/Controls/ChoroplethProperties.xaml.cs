@@ -346,7 +346,6 @@ namespace EpiDashboard.Controls
                         legTitle.Text);
                 }
 
-
                 SetRangeUISection();
             }
 
@@ -2279,7 +2278,7 @@ namespace EpiDashboard.Controls
                         classCount = 4;
                     }
                     
-                    bool couldPopulateRangeValues = false;
+                    bool couldPopulateRangeValues = true;
 
                     if (thisProvider != null)
                     {
