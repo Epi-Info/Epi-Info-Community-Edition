@@ -1171,18 +1171,19 @@ namespace Epi.Windows.Dialogs
         private void Ping_Click(object sender, EventArgs e)
         {
             Save();
-            if (ValidateEIWSSittings())
+            string Message = ValidateEIWSSittings();
+            if (Message.Contains("Success"))
             {
                 MessageBox.Show("Succeeded!", "", MessageBoxButtons.OK);
             }
             else 
             {
-                MessageBox.Show("Failed!", "", MessageBoxButtons.OK);
+                MessageBox.Show(Message, "", MessageBoxButtons.OK);
             }
         }
-        private bool ValidateEIWSSittings()
+        private string  ValidateEIWSSittings()
         {
-            bool IsValid = true;
+            string  IsValid = "Success";
 
             try
             {
@@ -1196,7 +1197,7 @@ namespace Epi.Windows.Dialogs
             }
             catch (Exception ex)
             {
-                IsValid = false;
+                IsValid = ex.InnerException.ToString();
             }
             return IsValid;
         }
@@ -1204,18 +1205,19 @@ namespace Epi.Windows.Dialogs
         private void button1_Click(object sender, EventArgs e)
         {
             Save();
-            if (ValidateEWESittings())
+            string Message = ValidateEWESittings();
+            if (Message.Contains("Success"))
             {
                 MessageBox.Show("Succeeded!", "", MessageBoxButtons.OK);
             }
             else
             {
-                MessageBox.Show("Failed!", "", MessageBoxButtons.OK);
+                MessageBox.Show(Message, "", MessageBoxButtons.OK);
             }
         }
-        private bool ValidateEWESittings()
+        private string ValidateEWESittings()
         {
-            bool IsValid = true;
+            string IsValid = "Success";
 
             try
             {
@@ -1229,7 +1231,7 @@ namespace Epi.Windows.Dialogs
             }
             catch (Exception ex)
             {
-                IsValid = false;
+                IsValid = ex.InnerException.ToString();
             }
             return IsValid;
         }
