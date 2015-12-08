@@ -799,12 +799,12 @@ namespace Epi.ImportExport.ProjectPackagers
                     QueryParameter parameter = GetQueryParameterForField(fieldData, gridField);
                     if (parameter != null)
                     {
-                        if (AppData.Instance.IsReservedWord(fieldData.FieldName.ToString()))//to support reserved words for the Grid column field if any existing
-                        {
+                       // if (AppData.Instance.IsReservedWord(fieldData.FieldName.ToString()))//to support reserved words for the Grid column field if any existing
+                       // {
                             setFieldText.Append(StringLiterals.LEFT_SQUARE_BRACKET + fieldData.FieldName + StringLiterals.RIGHT_SQUARE_BRACKET + " = " + "@" + fieldData.FieldName);
-                        }
-                        else
-                        setFieldText.Append(fieldData.FieldName + " = " + "@" + fieldData.FieldName);
+                        //}
+                       // else
+                      //  setFieldText.Append(fieldData.FieldName + " = " + "@" + fieldData.FieldName);
                         fieldValueParams.Add(parameter);
                     }
                     lastGuid = guid;
