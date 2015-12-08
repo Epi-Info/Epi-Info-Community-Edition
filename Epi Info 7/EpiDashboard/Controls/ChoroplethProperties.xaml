@@ -266,7 +266,7 @@
                             <StackPanel Orientation="Horizontal" Margin="0 0 0 0"   Visibility="Collapsed"   >
                                 <Label x:Name="lblMissingExcluded">Missing or Excluded Color</Label>
                                 <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
-                                <Rectangle x:Name="rctMissingColor" MouseLeftButtonUp="rctMissingColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" Margin="0,0,11,0">
+                                <Rectangle x:Name="rctMissingColor" MouseLeftButtonUp="rctColor_MouseLeftButtonUp" Tag="Reset_Legend" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" Margin="0,0,11,0">
                                     <Rectangle.ToolTip>
                                         <Label Content="Missing value color"/>
                                     </Rectangle.ToolTip>
@@ -275,7 +275,7 @@
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,2" >
                                 <Label x:Name="lblColorStart">Start Color</Label>
                                 <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
-                                <Rectangle x:Name="rctLowColor" MouseLeftButtonUp="rctLowColor_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,11,0">
+                                <Rectangle x:Name="rctLowColor" MouseLeftButtonUp="rctColor_MouseLeftButtonUp" Tag="Reset_Legend" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,11,0">
                                     <Rectangle.ToolTip>
                                         <Label Content="Low value color"/>
                                     </Rectangle.ToolTip>
@@ -284,7 +284,7 @@
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,2" >
                                 <Label x:Name="lblColorEnd" Margin="0,0,7,0">End</Label>
                                 <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
-                                <Rectangle x:Name="rctHighColor" MouseLeftButtonUp="rctHighColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
+                                <Rectangle x:Name="rctHighColor" MouseLeftButtonUp="rctColor_MouseLeftButtonUp" Tag="Reset_Legend" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF">
                                     <Rectangle.ToolTip>
                                         <Label Content="High value color"/>
                                     </Rectangle.ToolTip>
