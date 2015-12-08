@@ -333,9 +333,11 @@ namespace EpiDashboard.Controls
                     classCount = 4;
                 }
 
+                bool couldPopulateRangeValues = false;
+
                 if (thisProvider != null)
                 {
-                    thisProvider.PopulateRangeValues(_dashboardHelper,
+                    couldPopulateRangeValues = thisProvider.PopulateRangeValues(_dashboardHelper,
                         cmbShapeKey.SelectedItem.ToString(),
                         cmbDataKey.SelectedItem.ToString(),
                         cmbValue.SelectedItem.ToString(),
@@ -343,6 +345,7 @@ namespace EpiDashboard.Controls
                         classCount,
                         legTitle.Text);
                 }
+
 
                 SetRangeUISection();
             }
@@ -2189,62 +2192,6 @@ namespace EpiDashboard.Controls
             brush.Opacity = calculatedPercentage;
         }
 
-        private void PropertyChanged_EnableDisable()
-        {
-            if (btnOK == null) return;
-
-            if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text) || (!string.IsNullOrEmpty(txtMapSeverpath.Text) || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
-            {
-                if (tbtnVariables.IsEnabled == false)
-                {
-                    tbtnVariables.IsEnabled = true;
-                    tbtnVariables_Checked(this, new RoutedEventArgs());
-                }
-
-                if(cmbShapeKey.SelectedIndex != -1 && cmbDataKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
-                {
-
-                    if (tbtnDisplay.IsEnabled == false)
-                    {
-                        tbtnDisplay.IsEnabled = true;
-                        tbtnDisplay_Checked(this, new RoutedEventArgs());
-                    }
-                    
-                    if (IsMissingLimitValue() == false)
-                    {
-                        btnOK.IsEnabled = true; 
-                    }
-                    else
-                    {
-                        btnOK.IsEnabled = false;
-                    }
-
-                    tbtnDisplay.IsEnabled = true;
-                    tbtnFilters.IsEnabled = true;
-                    tbtnFilters.Visibility = Visibility.Visible;
-                    return;                
-                }
-                else
-                {
-                    tbtnDisplay.IsEnabled = false;
-                    tbtnFilters.IsEnabled = false;
-                    btnOK.IsEnabled = false;
-                }
-            }
-            else
-            {
-                tbtnVariables.IsEnabled = false;
-                tbtnDisplay.IsEnabled = false;
-                tbtnFilters.IsEnabled = false;
-                btnOK.IsEnabled = false;
-            }
-        }
-
-        private void PropertyChanged_EnableDisable(object sender, TextChangedEventArgs e)
-        {
-            PropertyChanged_EnableDisable();
-        }
-
         private void rampValue_LostFocus(object sender, RoutedEventArgs e)
         {
             if ((sender is System.Windows.Controls.TextBox) == false)
@@ -2291,7 +2238,106 @@ namespace EpiDashboard.Controls
 
             PropertyChanged_EnableDisable();
         }
-                                
+
+        private void PropertyChanged_EnableDisable(object sender, TextChangedEventArgs e)
+        {
+            PropertyChanged_EnableDisable();
+        }
+
+        private void PropertyChanged_EnableDisable()
+        {
+            if (btnOK == null) return;
+
+            if (!string.IsNullOrEmpty(txtProjectPath.Text) && (!string.IsNullOrEmpty(txtShapePath.Text) || (!string.IsNullOrEmpty(txtMapSeverpath.Text) || (!string.IsNullOrEmpty(txtKMLpath.Text)))))
+            {
+                if (tbtnVariables.IsEnabled == false)
+                {
+                    tbtnVariables.IsEnabled = true;
+                    tbtnVariables_Checked(this, new RoutedEventArgs());
+                }
+
+                if (cmbShapeKey.SelectedIndex != -1 && cmbDataKey.SelectedIndex != -1 && cmbValue.SelectedIndex != -1)
+                {
+                    List<SolidColorBrush> brushList = new List<SolidColorBrush>()
+                    {
+                        (SolidColorBrush) rctColor1.Fill,
+                        (SolidColorBrush) rctColor2.Fill,
+                        (SolidColorBrush) rctColor3.Fill,
+                        (SolidColorBrush) rctColor4.Fill,
+                        (SolidColorBrush) rctColor5.Fill,
+                        (SolidColorBrush) rctColor6.Fill,
+                        (SolidColorBrush) rctColor7.Fill,
+                        (SolidColorBrush) rctColor8.Fill,
+                        (SolidColorBrush) rctColor9.Fill,
+                        (SolidColorBrush) rctColor10.Fill,
+                        (SolidColorBrush) rctColor0.Fill
+                    };
+
+                    int classCount;
+                    if (!int.TryParse(((ComboBoxItem)cmbClasses.SelectedItem).Content.ToString(), out classCount))
+                    {
+                        classCount = 4;
+                    }
+                    
+                    bool couldPopulateRangeValues = false;
+
+                    if (thisProvider != null)
+                    {
+                        couldPopulateRangeValues = thisProvider.PopulateRangeValues(_dashboardHelper,
+                            cmbShapeKey.SelectedItem.ToString(),
+                            cmbDataKey.SelectedItem.ToString(),
+                            cmbValue.SelectedItem.ToString(),
+                            brushList,
+                            classCount,
+                            legTitle.Text);
+                    }
+
+                    if (couldPopulateRangeValues == false)
+                    {
+                        tbtnDisplay.IsEnabled = false;
+                        tbtnFilters.IsEnabled = false;
+                        btnOK.IsEnabled = false;
+                    }
+                    else
+                    {
+                        if (tbtnDisplay.IsEnabled == false)
+                        {
+                            tbtnDisplay.IsEnabled = true;
+                            tbtnDisplay_Checked(this, new RoutedEventArgs());
+                        }
+
+                        if (IsMissingLimitValue() == false)
+                        {
+                            btnOK.IsEnabled = true;
+                        }
+                        else
+                        {
+                            btnOK.IsEnabled = false;
+                        }
+
+                        tbtnDisplay.IsEnabled = true;
+                        tbtnFilters.IsEnabled = true;
+                        tbtnFilters.Visibility = Visibility.Visible;
+                    }
+
+                    return;
+                }
+                else
+                {
+                    tbtnDisplay.IsEnabled = false;
+                    tbtnFilters.IsEnabled = false;
+                    btnOK.IsEnabled = false;
+                }
+            }
+            else
+            {
+                tbtnVariables.IsEnabled = false;
+                tbtnDisplay.IsEnabled = false;
+                tbtnFilters.IsEnabled = false;
+                btnOK.IsEnabled = false;
+            }
+        }
+                
         private void AdjustClassBreaks(List<ClassLimits> classBreaks, float newValue, int classLevel, ClassLimitType limitType = ClassLimitType.Start)
         {
             ReplaceClassLimit(classBreaks, newValue, classLevel, limitType);
