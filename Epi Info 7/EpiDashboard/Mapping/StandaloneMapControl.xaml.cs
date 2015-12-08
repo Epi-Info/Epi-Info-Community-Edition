@@ -1159,6 +1159,11 @@ namespace EpiDashboard.Mapping
                 grdLayerConfigContainer.Children.Remove((UIElement)sender);
                 layerList.AddListItem((ILayerProperties)sender, 0);
 
+                if (!stkLegends.Children.Contains(legendTitleTextBlock))
+                {
+                    stkLegends.Children.Add(legendTitleTextBlock);
+                }
+
                 if (((ILayerProperties)sender).LegendStackPanel != null)
                 {
                     stkLegends.Children.Add(((ILayerProperties)sender).LegendStackPanel);
@@ -1171,10 +1176,18 @@ namespace EpiDashboard.Mapping
                 {
                     layerList.AddListItem((ILayerProperties)sender, 0);
                 }
+                
                 if (((ILayerProperties)sender).LegendStackPanel != null)
                 {
+                    if (!stkLegends.Children.Contains(legendTitleTextBlock))
+                    {
+                        stkLegends.Children.Add(legendTitleTextBlock);
+                    }
+                    
                     if (!stkLegends.Children.Contains(((ILayerProperties)sender).LegendStackPanel))
+                    {
                         stkLegends.Children.Add(((ILayerProperties)sender).LegendStackPanel);
+                    }
                 }
             }
             if (MapLoaded != null)
@@ -1382,7 +1395,6 @@ namespace EpiDashboard.Mapping
             }
 
             stkLegends.Children.Clear();
-            stkLegends.Children.Add(legendTitleTextBlock);
         }
 
         void myMap_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
