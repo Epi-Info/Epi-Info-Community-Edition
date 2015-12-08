@@ -2219,7 +2219,7 @@ namespace EpiDashboard.Mapping
                     { Selectedindex = i; break; }
                 }
                 choroplethproperties.cbxmapfeature.SelectedIndex = Selectedindex;
-                choroplethproperties.MapfeatureSelectionChange();
+                choroplethproperties.MapFeatureSelectionChange();
                 choroplethproperties.cbxmapfeature.SelectionChanged += choroplethproperties.cbxmapfeature_SelectionChanged;
             }
 
