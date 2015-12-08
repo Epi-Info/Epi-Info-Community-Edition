@@ -1033,43 +1033,6 @@ namespace EpiDashboard.Controls
             }
         }
 
-        private void rctMissingColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctMissingColor.Fill = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctMissingColor.Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-            Reset_Legend();
-        }
-
-        private void rctLowColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctLowColor.Fill = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctLowColor.Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-            Reset_Legend();
-        }
-
-        private void rctHighColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
-
-            if (new System.Windows.Forms.ColorDialog().ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                rctHighColor.Fill = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
-                thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(rctHighColor.Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
-            Reset_Legend();
-        }
-
         private void rctColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
@@ -1078,6 +1041,11 @@ namespace EpiDashboard.Controls
                 ((System.Windows.Shapes.Rectangle)sender).Fill = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
                 thisProvider.UseCustomColors = true;
                 thisProvider.CustomColorsDictionary.Add(((System.Windows.Shapes.Rectangle)sender).Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
+            }
+
+            if (((System.Windows.Shapes.Rectangle)sender).Tag is String && ((String)((System.Windows.Shapes.Rectangle)sender).Tag) == "Reset_Legend")
+            {
+                Reset_Legend();
             }
         }
 
