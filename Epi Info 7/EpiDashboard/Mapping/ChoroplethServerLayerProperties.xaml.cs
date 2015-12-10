@@ -206,14 +206,21 @@ namespace EpiDashboard.Mapping
         {
             if (cbxDataKey.SelectedIndex != -1 && cbxShapeKey.SelectedIndex != -1 && cbxValue.SelectedIndex != -1)
             {
-                provider.SetShapeRangeValues(dashboardHelper, cbxShapeKey.SelectedItem.ToString(), cbxDataKey.SelectedItem.ToString(), cbxValue.SelectedItem.ToString(), new List<SolidColorBrush>() { (SolidColorBrush)rctHighColor.Fill }, int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()) - 1, "");
+                provider.SetShapeRangeValues(
+                    dashboardHelper,
+                    cbxShapeKey.SelectedItem.ToString(),
+                    cbxDataKey.SelectedItem.ToString(),
+                    cbxValue.SelectedItem.ToString(),
+                    null,
+                    int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()),
+                    "");
+                
                 if (MapGenerated != null)
                 {
                     MapGenerated(this, new EventArgs());
                 }
             }
         }
-       
                
         public void SetdashboardHelper(DashboardHelper dash)
         {

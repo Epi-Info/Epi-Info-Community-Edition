@@ -449,35 +449,19 @@ namespace EpiDashboard.Controls
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            string errorRoutine = "none";
-
             try
             {
                 if (cmbDataKey.SelectedIndex > -1 && cmbShapeKey.SelectedIndex > -1 && cmbValue.SelectedIndex > -1)
                 {
-                    errorRoutine = "Addfilters";
                     Addfilters();
-
-                    errorRoutine = "SetDefaultRanges";
-                    //SetDefaultRanges();
-
-                    //  ResetLegend_Click(this, new RoutedEventArgs());
-
-                    errorRoutine = "RenderMap";
                     RenderMap();
-
-                    errorRoutine = "AddClassAttributes";
                     AddClassAttributes();
-
-                    errorRoutine = "none";
 
                     int numclasses = Convert.ToInt32(cmbClasses.Text);
                     bool flagquintiles = (bool)quintilesOption.IsChecked;
 
                     if (radShapeFile.IsChecked == true && thisProvider != null)
                     {
-                        errorRoutine = "choroplethShapeLayerProperties.SetValues";
-                        
                         choroplethShapeLayerProperties.SetValues(
                             txtShapePath.Text,
                             cmbShapeKey.Text,
@@ -495,8 +479,6 @@ namespace EpiDashboard.Controls
                     }
                     else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
                     {
-                        errorRoutine = "choroplethServerLayerProperties.SetValues";
-                        
                         choroplethServerLayerProperties.SetValues(
                             cmbShapeKey.Text,
                             cmbDataKey.Text,
@@ -517,8 +499,6 @@ namespace EpiDashboard.Controls
 
                     else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
                     {
-                        errorRoutine = "choroplethKmlLayerProperties.SetValues";
-                        
                         choroplethKmlLayerProperties.SetValues(
                             cmbShapeKey.Text, 
                             cmbDataKey.Text, 
@@ -532,8 +512,6 @@ namespace EpiDashboard.Controls
                             flagquintiles, 
                             numclasses);
                     }
-
-                    errorRoutine = "none";
 
                     if (ChangesAccepted != null)
                     {
@@ -550,7 +528,7 @@ namespace EpiDashboard.Controls
             }
             catch (Exception ex)
             {
-                throw new Exception("Error with map properties errorRoutine  --  " + errorRoutine + " -- " + ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 

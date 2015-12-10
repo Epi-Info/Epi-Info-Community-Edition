@@ -688,16 +688,16 @@ namespace EpiDashboard.Mapping
                 _shapeKey = shapeKey;
                 _dataKey = dataKey;
                 _valueField = valueField;
-                _colors = colors;
                 _missingText = missingText;
+
+                if(colors != null) _colors = colors;
 
                 DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
                 GraphicsLayer graphicsLayer = GetGraphicsLayer();
 
                 _thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
 
-                if (Range != null &&
-                    Range.Count > 0)
+                if (Range != null && Range.Count > 0)
                 {
                     _thematicItem.RangeStarts = Range;
                     PopulateRangeValues();

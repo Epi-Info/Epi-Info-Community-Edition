@@ -1652,9 +1652,6 @@ namespace EpiDashboard.Mapping
                                 Epi.Windows.MsgBox.ShowError(string.Format(SharedStrings.ERROR_CRYPTO_KEYS, ex.Message));
                                 return;
                             }
-
-
-
                         }
                     }
 
