@@ -143,7 +143,7 @@ namespace Epi.Data.SqlServer.Forms
                 return dialog.listBox.Text;
             }
 
-            return null;
+            return "";
         }
 
         private void listBox_DoubleClick(object sender, EventArgs e)
