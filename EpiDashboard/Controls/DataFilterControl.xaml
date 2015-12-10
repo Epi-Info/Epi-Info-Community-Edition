@@ -6,7 +6,9 @@
              xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
              xmlns:Controls="clr-namespace:EpiDashboard.Controls"
              mc:Ignorable="d" 
-             xmlns:EpiDashboard="clr-namespace:EpiDashboard">
+             xmlns:EpiDashboard="clr-namespace:EpiDashboard"
+             >
+         
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -18,7 +20,7 @@
 
     <Grid>
         <Rectangle Fill="White" Style="{DynamicResource shadowRectangleWhite}"></Rectangle>
-        <Border Name="borderAll" CornerRadius="0" Style="{DynamicResource mainGadgetBorder}" >
+        <Border Width="Auto" Name="borderAll" CornerRadius="0" Style="{DynamicResource mainGadgetBorder}" >
             <Grid x:Name="ConfigGrid" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5,5,5,5" >
                 <!--<Rectangle Fill="#22000000" RadiusX="10" RadiusY="10" Margin="0,4,0,0" />
                 <Rectangle Fill="#775C90B2" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0,0,0,5" />
@@ -42,7 +44,7 @@
                     <Grid Name="grdSelectionProperties" Grid.Row="0" Width="Auto" HorizontalAlignment="Center" Margin="27,2,2,2" Visibility="Visible">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="20"/>
-                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="23"/>
                             <RowDefinition Height="7"/>
                             <RowDefinition Height="20"/>
                             <RowDefinition Height="12"/>
@@ -62,9 +64,9 @@
                         <TextBlock x:Name="lblConditions" HorizontalAlignment="Left" TextAlignment="Center" Text="Data filters:" Margin="0,5,0,0" Grid.Row="5" Grid.Column="0"  Grid.ColumnSpan="2" />
                         <ListBox x:Name="lbxConditions" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6" Width="514" Visibility="Collapsed"/>
 
-                        <toolkit:DataGrid x:Name="dgFilters" 
+                        <DataGrid x:Name="dgFilters" 
                                       Width="514" 
-                                      HorizontalAlignment="Left" 
+                                      HorizontalAlignment="Stretch" 
                                       HorizontalScrollBarVisibility="Hidden" 
                                       Grid.Row="6" 
                                       Grid.Column="0" 
@@ -75,30 +77,72 @@
                                       CanUserSortColumns="False"                                       
                                       CanUserAddRows="False" 
                                       CanUserDeleteRows="False"
-                                      RowHeaderWidth="17" RowHeight="17" IsReadOnly="True" SelectionMode="Single" />
+                                      RowHeight="18" IsReadOnly="True" SelectionMode="Single" SelectionChanged="dgFilters_SelectionChanged" >
+                            
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="SemiBold" />
+                                    <Setter Property="FontFamily" Value="Calibri, Global User Interface" />
+                                    <Setter Property="Background" Value="#4F81BD" />
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="BorderThickness" Value="0,0,1,1" />
+                                    <Setter Property="BorderBrush" Value="#D5D5D5" />
+                                    <Setter Property="Padding" Value="4" />
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                            
+                            <DataGrid.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="FontSize" Value="12" />
+                                    <Setter Property="FontFamily" Value="Calibri, Global User Interface" />
+                                    <Setter Property="FontWeight" Value="Normal"/>
+
+                                </Style>
+                            </DataGrid.CellStyle>
+                        </DataGrid>
 
 
 
                         <TextBlock x:Name="lblFieldName" HorizontalAlignment="Left" TextAlignment="Center" Text="Field Name:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="1"  />
-                        <ComboBox x:Name="cbxFieldName" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="1" MaxWidth="110" Width="110" SelectionChanged="cbxFieldName_SelectionChanged" />
+                        <ComboBox x:Name="cbxFieldName" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="1" MaxWidth="110" MinWidth="110" SelectionChanged="cbxFieldName_SelectionChanged" />
 
                         <TextBlock x:Name="lblOperator" HorizontalAlignment="Left" TextAlignment="Center" Text="Operator:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="2"  />
-                        <ComboBox x:Name="cbxOperator" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="2" MaxWidth="110" Width="110" SelectionChanged="cbxOperator_SelectionChanged" />
+                        <ComboBox x:Name="cbxOperator"  HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="2" MaxWidth="110" MinWidth="110" SelectionChanged="cbxOperator_SelectionChanged" />
 
                         <TextBlock x:Name="txtValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Value:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="3"  />
-                        <ComboBox x:Name="cbxValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="110" Width="110" IsEditable="True" Grid.ColumnSpan="3"/>
+                        <ComboBox IsTextSearchEnabled="True" IsEditable="False" x:Name="cbxValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="110" MinWidth="110" Grid.ColumnSpan="3"/>
 
-                        <toolkit:DatePicker toolkit:Name="dateValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" Width="90" Visibility="Hidden" />
-                        <TextBox x:Name="tbxNumericValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" Width="90" Visibility="Hidden" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
-                        <TextBox x:Name="tbxValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" Width="90" Visibility="Hidden" />
+                        <DatePicker x:Name="dateValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" MinWidth="90" Visibility="Hidden" >
+                            <DatePicker.Resources>
+                                <Style TargetType="Button">
+                                   <Setter Property="MaxHeight" Value="30" />
+                                </Style>
+                            </DatePicker.Resources>
 
-                        <TextBox x:Name="tbxLowValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" Width="90" Visibility="Hidden" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
-                        <TextBox x:Name="tbxHighValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="5" MaxWidth="90" Width="90" Visibility="Hidden" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
+                        </DatePicker>
+                        <TextBox x:Name="tbxNumericValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" MinWidth="90" Visibility="Hidden" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
+                        <TextBox x:Name="tbxValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" MinWidth="90" Visibility="Hidden" />
 
-                        <toolkit:DatePicker toolkit:Name="dateLowValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" Width="90" Visibility="Hidden" />
-                        <toolkit:DatePicker toolkit:Name="dateHighValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="5" MaxWidth="90" Width="90" Visibility="Hidden" />
+                        <TextBox x:Name="tbxLowValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" MinWidth="90" Visibility="Hidden" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
+                        <TextBox x:Name="tbxHighValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="5" MaxWidth="90" MinWidth="90" Visibility="Hidden" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
 
-                        <TextBlock x:Name="txtAnd" Visibility="Visible" Text="and" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="0"/>
+                        <DatePicker x:Name="dateLowValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" MinWidth="90" Visibility="Hidden">
+                            <DatePicker.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="MaxHeight" Value="30" />
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
+                        <DatePicker x:Name="dateHighValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="5" MaxWidth="90" MinWidth="90" Visibility="Hidden">
+                            <DatePicker.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="MaxHeight" Value="30" />
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
+
+                        <TextBlock x:Name="txtAnd" Visibility="Visible" Text="and" HorizontalAlignment="Center" Margin="0,5,0,0" Grid.Column="4" Grid.Row="0"/>
 
                         <Button x:Name="btnNewCondition" Width="100" Grid.ColumnSpan="2" Content="Add Filter" Grid.Row="3" HorizontalAlignment="Left" Click="btnNewCondition_Click">
                             <Button.ContextMenu>
@@ -114,7 +158,7 @@
                             <ComboBox x:Name="cbxRecordProcessScope" HorizontalAlignment="Left" MaxWidth="140" Width="140" IsEditable="False" Grid.ColumnSpan="3" SelectionChanged="cbxRecordProcessScope_SelectionChanged" />
                         </StackPanel>
 
-                        <TextBlock x:Name="tbkTheValueOf" HorizontalAlignment="Left" TextAlignment="Center" Text="The value of  " Grid.Row="1" Grid.Column="0" />
+                        <TextBlock x:Name="tbkTheValueOf" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Center" Text="The value of  " Grid.Row="1" Grid.Column="0" />
                     </Grid>
 
                     <Grid x:Name="grdGuidedModeButtons" VerticalAlignment="Top" Grid.Row="2" Margin="27, 5, 5, 5">
