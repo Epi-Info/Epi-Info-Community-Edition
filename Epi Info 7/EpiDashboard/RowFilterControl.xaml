@@ -50,21 +50,39 @@
                         <TextBlock x:Name="txtValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Value:" Margin="5, 5, 5, 5"  Grid.Row="3" Grid.Column="0"  />
                         <TextBlock x:Name="txtLoValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Low Value:" Margin="5, 5, 5, 5"  Grid.Row="3" Grid.Column="0" Visibility="Hidden"  />
                         <ComboBox x:Name="cmbValue" Margin="5, 5, 5, 5"  HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" MaxWidth="210" Width="210"  IsEditable="True" Grid.ColumnSpan="3"/>
-                        <DatePicker x:Name="dpValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" MaxWidth="210" Width="210" Visibility="Visible" />
-                        <TextBox x:Name="tbxNumericValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" MaxWidth="210" Width="210"   Visibility="Visible" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
+                            <DatePicker x:Name="dpValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" MaxWidth="210" Width="210" Visibility="Visible">
+                                <DatePicker.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="MaxHeight" Value="30" />
+                                    </Style>
+                                </DatePicker.Resources>
+                            </DatePicker>
+                            <TextBox x:Name="tbxNumericValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" MaxWidth="210" Width="210"   Visibility="Visible" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
                         <TextBox x:Name="tbxValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" MaxWidth="210" Width="210"   Visibility="Visible" />
 
                         <!--Between Lo and Hi value controls -->
                         <TextBox x:Name="tbxLowValue" Margin="5, 5, 5, 5"  HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" MaxWidth="210" Width="210"  Visibility="Visible" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
-                        <DatePicker x:Name="dpLowValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" MaxWidth="210" Width="210"  Visibility="Visible" />
+                            <DatePicker x:Name="dpLowValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" MaxWidth="210" Width="210"  Visibility="Visible">
+                                <DatePicker.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="MaxHeight" Value="30" />
+                                    </Style>
+                                </DatePicker.Resources>
+                            </DatePicker>
 
-                        <TextBlock x:Name="txtAnd" Visibility="Visible" Text="and" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="4"/>
+                            <TextBlock x:Name="txtAnd" Visibility="Visible" Text="and" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="4"/>
 
                         <TextBlock x:Name="txtHiValue" HorizontalAlignment="Left" TextAlignment="Center" Text="High value:" Margin="5, 5, 5, 5"  Grid.Row="5" Grid.Column="0"  />
                         <TextBox x:Name="tbxHighValue" Margin="5, 5, 5, 5"  HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" MaxWidth="210" Width="210"  Visibility="Visible" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
-                        <DatePicker x:Name="dpHighValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" MaxWidth="210" Width="210"  Visibility="Visible" />
+                            <DatePicker x:Name="dpHighValue" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" MaxWidth="210" Width="210"  Visibility="Visible">
+                                <DatePicker.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="MaxHeight" Value="30" />
+                                    </Style>
+                                </DatePicker.Resources>
+                            </DatePicker>
 
-                        <Button x:Name="btnNewCondition" Width="Auto" IsEnabled="False" MinWidth="155" Height="32" Grid.ColumnSpan="2" Grid.Row="6" HorizontalAlignment="Left" Click="btnNewCondition_Click">
+                            <Button x:Name="btnNewCondition" Width="Auto" IsEnabled="False" MinWidth="155" Height="32" Grid.ColumnSpan="2" Grid.Row="6" HorizontalAlignment="Left" Click="btnNewCondition_Click">
                             <Button.Content>
                                 <Label x:Name="tblockAddThisCondition">Add this condition</Label>
                             </Button.Content>

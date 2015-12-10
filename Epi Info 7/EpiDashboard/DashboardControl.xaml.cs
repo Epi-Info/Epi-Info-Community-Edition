@@ -2532,7 +2532,7 @@ namespace EpiDashboard
 
         void dataFilteringControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Canvas.SetRight(dataFilteringControl, -537);
+            Canvas.SetRight(dataFilteringControl, -540);
             Canvas.SetTop(dataFilteringControl, scrollViewer.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (dataFilteringControl.ActualHeight / 2.0));
         }
 
@@ -2566,7 +2566,7 @@ namespace EpiDashboard
         {
             DoubleAnimation anim = new DoubleAnimation();
             anim.From = Canvas.GetRight(dataFilteringControl);
-            anim.To = -20;
+            anim.To = -10;
             anim.AccelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             dataFilteringControl.BeginAnimation(Canvas.RightProperty, anim);

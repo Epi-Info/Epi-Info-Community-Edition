@@ -76,8 +76,9 @@ namespace EpiDashboard
             ConditionTable.Columns.Add(COLUMN_JOIN, typeof(string));
             ConditionTable.Columns.Add(filterColumn);
             ConditionTable.Columns.Add(COLUMN_GROUP, typeof(int));
-
+            
             this.dashboardHelper = dashboardHelper;
+            
         }
         #endregion // Constructors
 

@@ -71,7 +71,7 @@ namespace EpiDashboard.Controls
             {
                 panelAdvanced.Visibility = Visibility.Collapsed;
             }
-
+            
             #region Translation
 
             tbkTheValueOf.Text = DashboardSharedStrings.DASHBOARD_FILTER_VALUEOF;
@@ -934,6 +934,9 @@ namespace EpiDashboard.Controls
         /// Shows the appropriate value selection control to the user depending on the type of column that is being selected for
         /// </summary>
         /// <param name="column">The column that the condition is based upon</param>
+        /// 
+        
+
         private void ShowValueSelector(string columnType)
         {
             txtValue.Visibility = System.Windows.Visibility.Visible;
@@ -1188,5 +1191,13 @@ namespace EpiDashboard.Controls
             return true;
         }
         #endregion // Private Methods
+
+        private void dgFilters_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
     }
+
+
+
 }
