@@ -144,24 +144,27 @@ namespace EpiDashboard.Mapping
         override public GraphicsLayer GetGraphicsLayer()
         {
             KmlLayer kmlLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
-            GraphicsLayer graphicsLayer = GetGraphicsLayer(kmlLayer);
+            GraphicsLayer graphicsLayer = GetGraphicsLayer(kmlLayer as Layer);
             return graphicsLayer;
         }
 
-        private GraphicsLayer GetGraphicsLayer(KmlLayer kmlLayer)
+        private GraphicsLayer GetGraphicsLayer(Layer givenLayer)
         {
-            foreach (Layer layer in kmlLayer.ChildLayers)
+            if(givenLayer is GroupLayer)
             {
-                if (layer is GraphicsLayer)
+                foreach (Layer layer in ((GroupLayer)givenLayer).ChildLayers)
                 {
-                    return (GraphicsLayer)layer;
-                }
-                else if (layer is KmlLayer)
-                {
-                    GetGraphicsLayer((KmlLayer)layer);
+                    if (layer is GraphicsLayer)
+                    {
+                        return (GraphicsLayer)layer;
+                    }
+                    else if (layer is Layer)
+                    {
+                        return GetGraphicsLayer((Layer)layer);
+                    }
                 }
             }
-
+            
             return null;
         }
 
