@@ -134,6 +134,7 @@ namespace EpiDashboard.Mapping
                     cbxValue.SelectedItem.ToString(), 
                     null,
                     int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()),
+                    "",
                     "");
 
                 if (MapGenerated != null)

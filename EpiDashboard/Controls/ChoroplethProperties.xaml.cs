@@ -912,7 +912,8 @@ namespace EpiDashboard.Controls
                         cmbValue.SelectedItem.ToString(),
                         brushList,
                         classCount,
-                        missingText);
+                        missingText,
+                        legTitle.Text);
                 }
             }
         }
@@ -1016,16 +1017,95 @@ namespace EpiDashboard.Controls
         private void rctColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            System.Windows.Media.Color currentColor = ((SolidColorBrush)((System.Windows.Shapes.Rectangle)sender).Fill).Color;
+            System.Drawing.Color initColor = System.Drawing.Color.FromArgb(255, currentColor.R, currentColor.G, currentColor.B);
+
+            List<Int32> baseColors = new List<Int32>() 
+            {
+                -32640,
+                -128,
+                -8323200,
+                -16711808,
+                -8323073,
+                -16744193,
+                -32576,
+                -32513,
+            
+                -65536,
+                -256,
+                -8323328,
+                -16711872,
+                -16711681,
+                -16744256,
+                -8355648,
+                -65281,
+                        
+                -8372160,
+                -32704,
+                -16711936,
+                -16744320,
+                -16760704,
+                -8355585,
+                -8388544,
+                -65408,
+                        
+                -8388608,
+                -32768,
+                -16744448,
+                -16744384,
+                -16776961,
+                -16777056,
+                -8388480,
+                -8388353,
+                        
+                -12582912,
+                -32768,
+                -16744448,
+                -16744384,
+                -16776961,
+                -16777056,
+                -8388480,
+                -8388353,
+                        
+                -12582912,
+                -8372224,
+                -16760832,
+                -16760768,
+                -16777088,
+                -16777152,
+                -12582848,
+                -12582784,
+                                    
+                -16777216,
+                -8355840,
+                -8355776,
+                -8355712,
+                -12550016,
+                -4144960,
+                -12582848,
+                -1
+            };
+
+            Int32 initColorString = initColor.ToArgb();
+
+            if (baseColors.Contains(initColorString))
+            {
+                dialog.Color = initColor;
+            }
+            
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 ((System.Windows.Shapes.Rectangle)sender).Fill = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
                 thisProvider.UseCustomColors = true;
-                thisProvider.CustomColorsDictionary.Add(((System.Windows.Shapes.Rectangle)sender).Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
-            }
 
-            if (((System.Windows.Shapes.Rectangle)sender).Tag is String && ((String)((System.Windows.Shapes.Rectangle)sender).Tag) == "Reset_Legend")
-            {
-                Reset_Legend();
+                Int32 colValue = dialog.Color.ToArgb();
+
+                thisProvider.CustomColorsDictionary.Add(((System.Windows.Shapes.Rectangle)sender).Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+                if (((System.Windows.Shapes.Rectangle)sender).Tag is String && ((String)((System.Windows.Shapes.Rectangle)sender).Tag) == "Reset_Legend")
+                {
+                    Reset_Legend();
+                }
             }
         }
 
