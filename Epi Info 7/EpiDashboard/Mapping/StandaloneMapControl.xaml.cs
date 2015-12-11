@@ -937,6 +937,7 @@ namespace EpiDashboard.Mapping
             {
                 object dataSource = resultArray[0];
                 string dataMember = resultArray[1].ToString();
+                string sqlQuery = resultArray[2].ToString();
                 DashboardHelper dashboardHelper;
                 if (dataSource is Project)
                 {
@@ -945,14 +946,31 @@ namespace EpiDashboard.Mapping
                     IDbDriver dbDriver = DBReadExecute.GetDataDriver(project.FilePath);
                     ProjectFilepath = project.FilePath;
                     dashboardHelper = new DashboardHelper(view, dbDriver);
+                    dashboardHelper.PopulateDataSet();
                 }
                 else
                 {
                     IDbDriver dbDriver = (IDbDriver)dataSource;
-                    dashboardHelper = new DashboardHelper(dataMember, dbDriver);
+                    if (string.IsNullOrEmpty(sqlQuery))
+                    {
+                        dashboardHelper = new DashboardHelper(dataMember, dbDriver);
+                        dashboardHelper.PopulateDataSet();
+                    }
+                    else
+                    {
+                        dashboardHelper = new DashboardHelper(dataMember, sqlQuery,dbDriver);
+                        try
+                        {
+                            dashboardHelper.PopulateDataSet();
+                        }
+                        catch(Exception ex)
+                        {
+                            Epi.Windows.MsgBox.ShowInformation("Query is not valid. Please try again.");
+                            return dashboardHelper;
+                        }
+                    }
                     ProjectFilepath = dashboardHelper.Database.DataSource;
-                }
-                dashboardHelper.PopulateDataSet();
+                }             
                 return dashboardHelper;
             }
             else
