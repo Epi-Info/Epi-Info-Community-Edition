@@ -28,7 +28,7 @@ namespace EpiDashboard.Mapping
         bool RangesLoadedFromMapFile { get; set; }
         bool AsQuantiles { get; set; }
         Guid _layerId { get; set; }
-        void SetShapeRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string missingText);
+        void SetShapeRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string missingText, string legendText);
         void ResetRangeValues(string toString, string s, string toString1, int classCount);
         object[] Load();
         object[] Load(string boundrySourceLocation);

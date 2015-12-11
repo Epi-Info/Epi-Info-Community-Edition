@@ -381,7 +381,7 @@ namespace EpiDashboard.Mapping
         {
             if (_dashboardHelper != null)
             {
-                SetShapeRangeValues(_dashboardHelper, _shapeKey, _dataKey, _valueField, _colors, _classCount, _missingText);
+                SetShapeRangeValues(_dashboardHelper, _shapeKey, _dataKey, _valueField, _colors, _classCount, _missingText, _legendText);
             }
         }
 
@@ -679,7 +679,7 @@ namespace EpiDashboard.Mapping
             return thematicItem;
         }
 
-        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string missingText)
+        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string missingText, string legendText)
         {
             try
             {
@@ -689,6 +689,7 @@ namespace EpiDashboard.Mapping
                 _dataKey = dataKey;
                 _valueField = valueField;
                 _missingText = missingText;
+                _legendText = legendText;
 
                 if(colors != null) _colors = colors;
 
