@@ -26,8 +26,8 @@
             <!--<Button Name="btnBypass" HorizontalAlignment="Center" Content="Bypass Internet Check" Margin="0,10,0,0"/>-->
         </StackPanel>
 
-   
-        
+
+
         <Grid x:Name="grdMapDef" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -35,7 +35,7 @@
             <Canvas Grid.Row="0" x:Name="MapContainer"/>
         </Grid>
 
-   
+
         <Grid x:Name="grdLegend" HorizontalAlignment="Left" Grid.Column="1" Width="310" Margin="-310,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -72,7 +72,7 @@
             <TextBlock x:Name="txtPointOfInterest" Foreground="White" FontWeight="Light" FontSize="16" Grid.Row="7" HorizontalAlignment="Center">Spot Map</TextBlock>
             <Image x:Name="imgPoi" Source="..\Images\poi.png" Stretch="None" Grid.Row="8" Cursor="Hand" MouseLeftButtonUp="imgPointofInterest_MouseLeftButtonUp"/>
             <StackPanel Grid.Row="9"></StackPanel>
-            
+
         </Grid>
 
         <DockPanel SnapsToDevicePixels="True"  x:Name="DockPanel1" Grid.Column="0">
@@ -201,23 +201,23 @@
                                 </StackPanel>
                             </DockPanel.ToolTip>
                             <Grid Height="36" Width="36">
-								<!--<Path Margin="0 45 0 0" Width="13" Height="13" Stretch="Fill" Fill="White" Data="M 182,176 364,176 273,242  "/>-->
+                                <!--<Path Margin="0 45 0 0" Width="13" Height="13" Stretch="Fill" Fill="White" Data="M 182,176 364,176 273,242  "/>-->
                                 <Path Width="4"  Margin="0 0 15 13"  Height="3" Stretch="Fill" Fill="White" Data="F1 M 19,23L 27,23L 27,31L 19,31L 19,23 Z" />
                                 <Path Width="12.5" Margin="5 0 0 13" Height="2.5" Stretch="Fill" Fill="White" Data="F1 M 31,45L 57,45L 57,53L 31,53L 31,45 Z" />
                                 <Path Width="4" Margin="0 0 15 1.3" Height="4" Stretch="Fill" Fill="White" Data="F1 M 211.7,177.7 142.4,177.7 177,137.7 Z" />
                                 <Path Width="12.5" Margin="5 0 0 0" Height="2.5" Stretch="Fill" Fill="White" Data="F1 M 31,45L 57,45L 57,53L 31,53L 31,45 Z" />
                                 <Ellipse Width="4" Height="3.5" Margin="0 12 15 0" Fill="White" />
                                 <Path Width="12.5" Margin="5 13 0 0" Height="2.5" Stretch="Fill" Fill="White" Data="F1 M 31,45L 57,45L 57,53L 31,53L 31,45 Z" />
-                               
+
                                 <Ellipse Width="36" Height="36" Stroke="White" Fill="Transparent" StrokeThickness="3" />
-                                
-                              
+
+
 
                             </Grid>
-							
+
                         </DockPanel>
 
-                        
+
 
                         <DockPanel x:Name="whiteUnderlineRefresh" Background="White" Height="3" VerticalAlignment="Bottom"  Grid.Column="1" Visibility="Collapsed"></DockPanel>
                         <DockPanel x:Name="whiteUnderlineSetData" Background="White" Width="{Binding ElementName=tblockSetDataSource, Path=ActualWidth}" Height="3" VerticalAlignment="Bottom"  Grid.Column="2" Visibility="Collapsed"></DockPanel>
@@ -300,38 +300,61 @@
             </DockPanel>
         </Grid>
 
-    
-        <Grid x:Name="grdScale" Grid.Column="1"  Cursor="Hand"      >
+
+        <Grid x:Name="grdScale" Grid.Column="1"  Cursor="Hand" Margin="0.4,0,10,50"      >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40"    />
+                <RowDefinition Height="120" />
+                <RowDefinition Height="50"    />
             </Grid.RowDefinitions>
-            <Button   Grid.Row="1"       Foreground="Orange"  HorizontalAlignment="Right" Width="100"  FontSize="24" x:Name="NorthArrowText"    >N
+
+            <Ellipse Grid.Row="1" Margin="0 0 29 -11" HorizontalAlignment="Right" Width="70" Height="70"  Fill="White" StrokeThickness="3">
+                <Ellipse.Stroke>
+                    <LinearGradientBrush>
+                        <GradientStop Offset="0" Color="#0E4C59"/>
+                        <GradientStop Offset="1" Color="#0C3F4A"/>
+                    </LinearGradientBrush>
+                </Ellipse.Stroke>
+            </Ellipse>
+            <StackPanel  Grid.Row="1"  HorizontalAlignment="Right" Margin="0 0 39.6 5"  Width="50"  x:Name="NorthArrowText" Height="100" VerticalAlignment="Bottom"  >
+                <StackPanel.RenderTransform>
+                    <RotateTransform />
+                </StackPanel.RenderTransform>
+                <Path Width="12" Height="16" Stroke="#0D3B45" StrokeThickness="1" StrokeStartLineCap="Round" Stretch="Fill" Fill="White" Margin="0 -2 0 00" Data="M1498.000,910.000 L1498.000,885.000 L1502.000,885.000 L1513.000,905.000 L1513.000,885.000 L1516.000,885.000 L1516.000,910.000 L1512.000,910.000 L1501.000,892.000 L1501.000,910.000 L1498.000,910.000 Z">
+
+                </Path>
+                <Path Stretch="Fill" Width="50" Height="50" Margin="0 11 0 0" Data="M16,29 C23.1797021,29 29,23.1797021 29,16 C29,8.8202979 23.1797021,3 16,3 C8.8202979,3 3,8.8202979 3,16 C3,23.1797021 8.8202979,29 16,29 L16,29 Z M16,28 C22.6274173,28 28,22.6274173 28,16 C28,9.37258267 22.6274173,4 16,4 C9.37258267,4 4,9.37258267 4,16 C4,22.6274173 9.37258267,28 16,28 L16,28 Z M16,27 C22.0751325,27 27,22.0751325 27,16 C27,9.92486745 22.0751325,5 16,5 C9.92486745,5 5,9.92486745 5,16 C5,22.0751325 9.92486745,27 16,27 L16,27 Z M16,7 C16,7 19,14 19,16 C19,16.668068 19,16 19,16 C19,17.6568542 17.6534829,19 16,19 C14.3431458,19 13,17.6631378 13,16 C13,16 13,17.2099991 13,16 C13,14 16,7 16,7 L16,7 Z M16,18 C17.1045696,18 18,17.1045696 18,16 C18,14.8954304 17.1045696,14 16,14 C14.8954304,14 14,14.8954304 14,16 C14,17.1045696 14.8954304,18 16,18 L16,18 Z ">
+                    <Path.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0" Color="#0E4C59"/>
+                            <GradientStop Offset="1" Color="#0C3F4A"/>
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
+            </StackPanel>
+
+            <!--<Button Grid.Row="1" Foreground="Orange"  HorizontalAlignment="Right" Width="100"  FontSize="24">N
                 <Button.RenderTransform>
                     <RotateTransform  />
                 </Button.RenderTransform>
-            </Button>
-            <!--<esri:ScaleLine Name="ScaleLine11" Map="{Binding ElementName=myMap  }"
-     HorizontalAlignment="Right"  VerticalAlignment="Bottom"           
-     TargetWidth="200"        
-     Foreground="Orange"       FontFamily="Courier New" FontSize="18" />-->
+            </Button>-->
+
         </Grid>
-    
+
         <Grid x:Name="grdLapse" Visibility="Collapsed" HorizontalAlignment="Center"  StackPanel.ZIndex="2000"  VerticalAlignment="Bottom"  Grid.Column="1"  Margin="0,10,10,30" >
 
             <Grid x:Name="grdTimeLapse" Visibility="Collapsed" HorizontalAlignment="Center"    VerticalAlignment="Bottom"  Grid.Column="1"  Margin="0,10,10,30" >
 
-            <Rectangle Fill="#00919191" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0,0,0,5" >
-                <Rectangle.Effect>
-                    <DropShadowEffect/>
-                </Rectangle.Effect>
-            </Rectangle>
-            <Border x:Name="grdTimeLapseBorder" Background="#DDFFFFFF" BorderBrush="DarkGray" CornerRadius="5" Margin="10,10,10,15"
+                <Rectangle Fill="#00919191" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0,0,0,5" >
+                    <Rectangle.Effect>
+                        <DropShadowEffect/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Border x:Name="grdTimeLapseBorder" Background="#DDFFFFFF" BorderBrush="DarkGray" CornerRadius="5" Margin="10,10,10,15"
                     Width="550" Height="120" HorizontalAlignment="Center" VerticalAlignment="Top" >
 
-            </Border>
-            <Image x:Name="imgClose" Source="..\Images\x_over.png" Cursor="Hand" HorizontalAlignment="Right" Margin="2" VerticalAlignment="Top" Stretch="None" />
+                </Border>
+                <Image x:Name="imgClose" Source="..\Images\x_over.png" Cursor="Hand" HorizontalAlignment="Right" Margin="2" VerticalAlignment="Top" Stretch="None" />
             </Grid>
             <Charting:Chart Width="500" Visibility="Collapsed" x:Name="chrtTimeLapse"   Background="#00000000" Padding="1" HorizontalAlignment="Center"  VerticalAlignment="Bottom"  Margin="0,10,20,70" BorderThickness="0">
                 <Charting:AreaSeries x:Name="areaSeries">
@@ -357,6 +380,6 @@
             <Image x:Name="imgCloseLayer" Source="..\Images\x_over.png" Cursor="Hand" HorizontalAlignment="Right" Margin="2" VerticalAlignment="Top" Stretch="None" />
         </Grid>
 
-     
+
     </Grid>
 </UserControl>
