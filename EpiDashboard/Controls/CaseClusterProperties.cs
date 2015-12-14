@@ -86,7 +86,7 @@ namespace EpiDashboard.Controls
             //Display Panel
             tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
             tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
-            tblockMapDesc.Content = DashboardSharedStrings.GADGET_LABEL_DESCRIPTION;
+            tblockMapDesc.Content = DashboardSharedStrings.GADGET_LEGEND_DESCRIPTION;
 
             //Filters Panel
             tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
