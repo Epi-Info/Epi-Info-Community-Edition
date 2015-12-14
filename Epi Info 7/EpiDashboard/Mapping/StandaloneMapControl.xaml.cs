@@ -72,7 +72,7 @@ namespace EpiDashboard.Mapping
         private string defaultMapPath = string.Empty;
         private MapBackgroundType defaultBackgroundType = MapBackgroundType.Satellite;
         private bool bypassInternetCheck;
-        private Brush defaultBackgroundColor = Brushes.White;
+        private Brush defaultBackgroundColor = Brushes.DarkSlateGray;
         private bool hidePanels = false;
         private PointofInterestProperties pointofinterestproperties;
         private CaseClusterProperties caseclusterproperties;
@@ -490,7 +490,7 @@ namespace EpiDashboard.Mapping
 
                 ScaleLine1.MouseDoubleClick += ScaleLine1_MouseDoubleClick;
                 grdScale.Children.Add(ScaleLine1);
-                Grid.SetRow(ScaleLine1, 0);
+                Grid.SetRow(ScaleLine1, 2);
 
                 //Associate the ScaleLine with Map Control (analagous to a OneTime Binding). Most common coding pattern.
                 ScaleLine1.Map = myMap;
@@ -498,6 +498,7 @@ namespace EpiDashboard.Mapping
                 //Set the alignment properties relative the hosting Grid Control
                 ScaleLine1.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
                 ScaleLine1.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                ScaleLine1.Margin = new System.Windows.Thickness { Right=10 };
 
                 //Set the Map units for the ScaleLine
                 ScaleLine1.MapUnit = ESRI.ArcGIS.Client.Toolkit.ScaleLine.ScaleLineUnit.DecimalDegrees;
@@ -561,13 +562,11 @@ namespace EpiDashboard.Mapping
             //  northArrow.Rota =      myMap.Rotation        
 
 
-            NorthArrowText.RenderTransformOrigin = new Point(.5, .5);
-
+            NorthArrowText.RenderTransformOrigin = new Point(0.5, 0.5);
             var rt = (RotateTransform)NorthArrowText.RenderTransform;
             //    rt.BeginAnimation(RotateTransform.AngleProperty, rotateAnimation);
 
             rt.Angle = myMap.Rotation;
-
         }
 
         private bool autoContrast = true;
@@ -2837,6 +2836,7 @@ namespace EpiDashboard.Mapping
         {
             if (myMap != null)
             {
+                
                 if (myMap.Layers.Count > 0)
                 {
                     if (myMap.Layers[0] is TileLayer)
