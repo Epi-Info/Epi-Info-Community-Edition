@@ -139,7 +139,7 @@
                 <StackPanel>
                     <StackPanel Margin="0 0 0 5">
                         <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Description</Label>
-                        <Label x:Name="tblockMapDesc">Description:</Label>
+                        <Label x:Name="tblockMapDesc">Legend Description:</Label>
                         <TextBox Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left" AcceptsReturn="True" TextWrapping="Wrap" x:Name="txtDescription" ></TextBox>
                     </StackPanel>
                     <StackPanel Margin="0 26 0 5">

@@ -2038,4 +2038,7 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_MAP_TABDESC_DISPLAY" xml:space="preserve">
     <value>Step 3 of 3 - Choose display options.</value>
   </data>
+  <data name="GADGET_LEGEND_DESCRIPTION" xml:space="preserve">
+    <value>Legend Description</value>
+  </data>
 </root>

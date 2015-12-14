@@ -135,18 +135,21 @@
 
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel Margin="0 0 0 5">
+
                     <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Description</Label>
-                    <Label x:Name="tblockMapDesc">Description:</Label>
+                    <Label x:Name="tblockMapDesc">Legend Description:</Label>
                     <TextBox Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left" AcceptsReturn="True" TextWrapping="Wrap" x:Name="txtDescription" ></TextBox>
-                    <Label x:Name="lblSelectAColor" Style="{StaticResource PropertiesSubHeading}" Margin="0, 10, 0, 0">Select A Color</Label>
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock x:Name="tblcolor" Text="Color Representation: "></TextBlock>
-                        <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
-                        <Rectangle x:Name="rctSelectColor" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp" HorizontalAlignment="Left"  Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,11,0">
-                            <Rectangle.ToolTip>
-                                <Label Content="select value color"/>
-                            </Rectangle.ToolTip>
-                        </Rectangle>
+                    <StackPanel Margin="0 26 0 5">
+                        <Label x:Name="lblSelectAColor" Style="{StaticResource PropertiesSubHeading}" Margin="0, 10, 0, 0">Select a color</Label>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock x:Name="tblcolor" Text="Color Representation: "></TextBlock>
+                            <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
+                            <Rectangle x:Name="rctSelectColor" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp" HorizontalAlignment="Left"  Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" Margin="0,0,11,0">
+                                <Rectangle.ToolTip>
+                                    <Label Content="select value color"/>
+                                </Rectangle.ToolTip>
+                            </Rectangle>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
