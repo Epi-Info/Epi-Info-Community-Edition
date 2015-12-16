@@ -74,37 +74,13 @@ namespace Epi.Windows.Mapping
                 List<object> resultsArray = new List<object>();
                 resultsArray.Add(dlg.SelectedDataSource);
                 resultsArray.Add(dlg.SelectedDataMember);
-                resultsArray.Add(dlg.SQLQuery);
-                if (!string.IsNullOrEmpty(dlg.SQLQuery))
-                {
-                    if (Validate(dlg.SQLQuery.ToLower()))
-                        return resultsArray;
-                    else
-                        MsgBox.ShowInformation("Query is not valid.Query cannot have any sql functions. Please try again.");
-                        return null;
-                }
-                else
-                    return resultsArray;
-                
+                resultsArray.Add(dlg.SQLQuery);               
+                    return resultsArray;                
             }
             else
                 return null;
         }
-
-        private bool Validate(string query)
-        {
-            bool valid = true;       
-           if (query.Contains(" Group by ") || query.Contains(" having ") || query.Contains(" avg") || query.Contains(" order by ")
-                || query.Contains(" min") || query.Contains(" max") || query.Contains(" sum") || query.Contains(" count")
-                || query.Contains(" stdev") || query.Contains(" count_big") || query.Contains(" stdevp") || query.Contains(" grouping")
-                || query.Contains(" var") || query.Contains(" varp") || query.Contains(" grouping_id") || query.Contains(" checksum_agg")
-               || query.Contains("(") || query.Contains(")") || query.Contains("@"))
-            {
-                valid = false;              
-            }
-            return valid;
-        }
-
+     
         private void btnOpen_Click(object sender, EventArgs e)
         {
             mapControl.OpenMap();
