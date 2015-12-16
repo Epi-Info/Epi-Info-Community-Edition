@@ -2787,6 +2787,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Legend Description:.
+        /// </summary>
+        public static string GADGET_LEGEND_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("GADGET_LEGEND_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Legend font size:.
         /// </summary>
         public static string GADGET_LEGEND_FONTSIZE {
