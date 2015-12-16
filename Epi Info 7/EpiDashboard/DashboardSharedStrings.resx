@@ -2039,6 +2039,6 @@ of records or select fewer fields for the group.</value>
     <value>Step 3 of 3 - Choose display options.</value>
   </data>
   <data name="GADGET_LEGEND_DESCRIPTION" xml:space="preserve">
-    <value>Legend Description</value>
+    <value>Legend Description:</value>
   </data>
 </root>
