@@ -79,35 +79,36 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Core Team:
+        ///   Looks up a localized string similar to Epi Info™ Team (in alphabetical order)
         ///______________________________________________
         ///
+        ///Sachin Agnihotri
         ///José Aponte
-        ///David Brown (McKing Consulting)
+        ///David Brown
         ///Harold Collins
         ///John Copeland
-        ///James Haines (McKing Consulting)
+        ///Ninad Date
+        ///Karen DeRosa
+        ///Roger Friedman
+        ///Zack Gao
+        ///James Haines
         ///Asad Islam (Team Leader)
+        ///Estrilita Jones
         ///Gerald Jones
+        ///Pallavi Karanam
         ///Erik Knudsen
+        ///Mohammed Lamtahri
+        ///Matthew Lantinga
+        ///Leslyn McNabb
+        ///Kishore Meduri
         ///Roger Mir
+        ///Victor Natick
+        ///Chelsea Navo
         ///David Nitschke
-        ///Carol Worsham
-        ///
-        ///Special thanks to:
-        ///______________________________________________
-        ///
-        ///Sara Bedrosian
-        ///Douglas Bialecki
-        ///Karl August Brendel, III
-        ///Andy Dean
-        ///Robert Fagan
-        ///Gabriel Rainisch
-        ///Donald Chris Smith
-        ///
-        ///EIS Epi Info™ 7 Workgroup:
-        ///- Sudhir Bunga
-        ///-  [rest of string was truncated]&quot;;.
+        ///Sumalatha Paritala
+        ///Julio Rodriguez Estevez
+        ///Uma Shanmugam
+        ///Daniel Sh [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ABOUT_EPIINFO_LINE3 {
             get {
@@ -4498,6 +4499,15 @@ namespace Epi {
         public static string GRIDTABLE_TITLE {
             get {
                 return ResourceManager.GetString("GRIDTABLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Epi Info™ Help Desk Portal is hosted on Atlassian.net. Please create an account and Log In to submit an Epi Info™ Help Desk ticket..
+        /// </summary>
+        public static string HELPDESK_LOGIN {
+            get {
+                return ResourceManager.GetString("HELPDESK_LOGIN", resourceCulture);
             }
         }
         

@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACw
-        cQAAAk1TRnQBSQFMAgEBRAEAAUYBAAG0AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        cQAAAk1TRnQBSQFMAgEBRAEAAUYBAAG8AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwAB/AMAAQEBAAEgBgAB/P8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wCjAAH/AwAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf9TAAH/AwAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8jAAH/AwAB/wMAAf8BgAIAAf8BgAIAAf8BgAIAAf8BgAIAAf8BgAIA
@@ -659,7 +659,7 @@
     <value>12</value>
   </data>
   <data name="btnWebsite.Text" xml:space="preserve">
-    <value>Epi Info &amp;Website</value>
+    <value>Epi Info™ &amp;Website</value>
   </data>
   <data name="&gt;&gt;btnWebsite.Name" xml:space="preserve">
     <value>btnWebsite</value>
@@ -890,28 +890,16 @@
     <value>"How To" Videos</value>
   </data>
   <data name="communityMessageBoardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>251, 22</value>
+    <value>205, 22</value>
   </data>
   <data name="communityMessageBoardToolStripMenuItem.Text" xml:space="preserve">
-    <value>phConnect.org Discussion Forum</value>
+    <value>Epi Info™ Questions Wiki</value>
   </data>
   <data name="contactHelpdeskToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>251, 22</value>
   </data>
   <data name="contactHelpdeskToolStripMenuItem.Text" xml:space="preserve">
     <value>Contact Help Desk</value>
-  </data>
-  <data name="activEpicomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="activEpicomToolStripMenuItem.Text" xml:space="preserve">
-    <value>ActivEpi.com</value>
-  </data>
-  <data name="openEpicomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="openEpicomToolStripMenuItem.Text" xml:space="preserve">
-    <value>OpenEpi.com</value>
   </data>
   <data name="otherEpiResourcesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>251, 22</value>
@@ -977,19 +965,19 @@
     <value>Epi Info &amp;Logs..</value>
   </data>
   <data name="makeViewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="makeViewToolStripMenuItem.Text" xml:space="preserve">
     <value>Create &amp;Forms</value>
   </data>
   <data name="enterDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="enterDataToolStripMenuItem.Text" xml:space="preserve">
     <value>E&amp;nter Data</value>
   </data>
   <data name="analyzeDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="analyzeDataToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Analyze Data</value>
@@ -1007,16 +995,16 @@
     <value>Visual Dashboard</value>
   </data>
   <data name="createMapsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="createMapsToolStripMenuItem.Text" xml:space="preserve">
     <value>Create &amp;Maps</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 6</value>
+    <value>149, 6</value>
   </data>
   <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Options</value>
@@ -1074,6 +1062,24 @@
   </data>
   <data name="mnuMatchedPairCaseControl.Text" xml:space="preserve">
     <value>Matched pair case control study</value>
+  </data>
+  <data name="activEpicomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="activEpicomToolStripMenuItem.Text" xml:space="preserve">
+    <value>ActivEpi.com</value>
+  </data>
+  <data name="activEpicomToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>ActivEpi explains concepts and methods.</value>
+  </data>
+  <data name="openEpicomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="openEpicomToolStripMenuItem.Text" xml:space="preserve">
+    <value>OpenEpi.com</value>
+  </data>
+  <data name="openEpicomToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>OpenEpi makes calculations.</value>
   </data>
   <data name="&gt;&gt;btnDashboard.Name" xml:space="preserve">
     <value>btnDashboard</value>
@@ -2521,16 +2527,16 @@
   <data name="&gt;&gt;otherEpiResourcesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;openEpicomToolStripMenuItem.Name" xml:space="preserve">
-    <value>openEpicomToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;openEpicomToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;activEpicomToolStripMenuItem.Name" xml:space="preserve">
     <value>activEpicomToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;activEpicomToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openEpicomToolStripMenuItem.Name" xml:space="preserve">
+    <value>openEpicomToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;openEpicomToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
@@ -2549,6 +2555,6 @@
     <value>MenuMainForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.MainForm, Epi.Windows, Version=7.1.5721.18383, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.MainForm, Epi.Windows, Version=7.1.5829.18364, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

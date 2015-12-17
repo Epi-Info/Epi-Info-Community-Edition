@@ -60,7 +60,7 @@ namespace Epi.Windows.Menu
 
         private void Construct()
         {
-            this.Text = "Epi Info 7 - Menu";// SharedStrings.MENU;
+            this.Text = "Epi Info™ 7 - Menu";// SharedStrings.MENU;
         }
 
         private void ChangeAllButtonStyles(bool useDefault)
@@ -351,7 +351,7 @@ namespace Epi.Windows.Menu
         private void Contents_Activate(object sender, System.EventArgs e)
         {
             //base.DisplayFeatureNotImplementedMessage();
-            System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/user-guide/index.htm");
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/index.htm");
         }
 
         private void Exit_Activate(object sender, EventArgs e)
@@ -398,7 +398,18 @@ namespace Epi.Windows.Menu
 
         private void epiInfoLogsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WinUtil.OpenTextFile(Logger.GetLogFilePath());
+            string logFilePath = Logger.GetLogFilePath();
+            //WinUtil.OpenTextFile(Logger.GetLogFilePath());
+
+            if (File.Exists(logFilePath))
+            {
+                string containingFolder = Path.GetDirectoryName(logFilePath);
+                System.Diagnostics.Process.Start(containingFolder);
+            }
+            else if (Directory.Exists(logFilePath))
+            {
+                System.Diagnostics.Process.Start(logFilePath);
+            }
         }
 
         #endregion Event Handlers
@@ -614,12 +625,13 @@ namespace Epi.Windows.Menu
 
         private void communityMessageBoardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.phconnect.org/group/epiinfo/forum");
+            System.Diagnostics.Process.Start("https://epiinfo.atlassian.net/wiki/questions");
         }
 
         private void contactHelpdeskToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("mailto://epiinfo@cdc.gov");
+            Epi.Windows.MsgBox.ShowInformation(SharedStrings.HELPDESK_LOGIN);
+            System.Diagnostics.Process.Start("https://epiinfo.atlassian.net/browse/DESK");
         }
 
         private void activEpicomToolStripMenuItem_Click(object sender, EventArgs e)
