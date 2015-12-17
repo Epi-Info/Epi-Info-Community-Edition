@@ -102,8 +102,8 @@ namespace Epi.Windows.Menu
             this.communityMessageBoardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contactHelpdeskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otherEpiResourcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openEpicomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.activEpicomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openEpicomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutEpiInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -511,17 +511,17 @@ namespace Epi.Windows.Menu
             this.otherEpiResourcesToolStripMenuItem.Name = "otherEpiResourcesToolStripMenuItem";
             resources.ApplyResources(this.otherEpiResourcesToolStripMenuItem, "otherEpiResourcesToolStripMenuItem");
             // 
-            // openEpicomToolStripMenuItem
-            // 
-            this.openEpicomToolStripMenuItem.Name = "openEpicomToolStripMenuItem";
-            resources.ApplyResources(this.openEpicomToolStripMenuItem, "openEpicomToolStripMenuItem");
-            this.openEpicomToolStripMenuItem.Click += new System.EventHandler(this.openEpicomToolStripMenuItem_Click);
-            // 
             // activEpicomToolStripMenuItem
             // 
             this.activEpicomToolStripMenuItem.Name = "activEpicomToolStripMenuItem";
             resources.ApplyResources(this.activEpicomToolStripMenuItem, "activEpicomToolStripMenuItem");
             this.activEpicomToolStripMenuItem.Click += new System.EventHandler(this.activEpicomToolStripMenuItem_Click);
+            // 
+            // openEpicomToolStripMenuItem
+            // 
+            this.openEpicomToolStripMenuItem.Name = "openEpicomToolStripMenuItem";
+            resources.ApplyResources(this.openEpicomToolStripMenuItem, "openEpicomToolStripMenuItem");
+            this.openEpicomToolStripMenuItem.Click += new System.EventHandler(this.openEpicomToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
