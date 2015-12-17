@@ -72,7 +72,7 @@ namespace EpiDashboard.Mapping
         private string defaultMapPath = string.Empty;
         private MapBackgroundType defaultBackgroundType = MapBackgroundType.Satellite;
         private bool bypassInternetCheck;
-        private Brush defaultBackgroundColor = Brushes.DarkSlateGray;
+        private Brush defaultBackgroundColor = Brushes.White;
         private bool hidePanels = false;
         private PointofInterestProperties pointofinterestproperties;
         private CaseClusterProperties caseclusterproperties;
