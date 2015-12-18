@@ -4503,7 +4503,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Epi Info™ Help Desk Portal is hosted on Atlassian.net. Please create an account and Log In to submit an Epi Info™ Help Desk ticket..
+        ///   Looks up a localized string similar to The Epi Info™ Help Desk Customer Portal is hosted on Atlassian.net. Please create an account and Log In to submit an Epi Info™ Help Desk ticket..
         /// </summary>
         public static string HELPDESK_LOGIN {
             get {

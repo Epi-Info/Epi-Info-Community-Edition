@@ -3174,6 +3174,6 @@ Do you wish to proceed with the import and overwrite these tables? This action c
     <value>Record preview:</value>
   </data>
   <data name="HELPDESK_LOGIN" xml:space="preserve">
-    <value>The Epi Info™ Help Desk Portal is hosted on Atlassian.net. Please create an account and Log In to submit an Epi Info™ Help Desk ticket.</value>
+    <value>The Epi Info™ Help Desk Customer Portal is hosted on Atlassian.net. Please create an account and Log In to submit an Epi Info™ Help Desk ticket.</value>
   </data>
 </root>
