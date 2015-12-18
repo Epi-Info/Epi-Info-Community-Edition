@@ -1162,6 +1162,10 @@ namespace Epi.Data.Office
                 Query query = this.CreateQuery(queryString);
 
                 DataTable returnTable = Select(query);
+                foreach (DataColumn column in returnTable.Columns)//EI-665
+                {
+                   column.ColumnName=column.ColumnName.Trim();
+                }
                 return returnTable;
             }
             finally
