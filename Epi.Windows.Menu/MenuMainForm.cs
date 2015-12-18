@@ -631,7 +631,7 @@ namespace Epi.Windows.Menu
         private void contactHelpdeskToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Epi.Windows.MsgBox.ShowInformation(SharedStrings.HELPDESK_LOGIN);
-            System.Diagnostics.Process.Start("https://epiinfo.atlassian.net/browse/DESK");
+            System.Diagnostics.Process.Start("https://epiinfo.atlassian.net/servicedesk/customer/portal/1");
         }
 
         private void activEpicomToolStripMenuItem_Click(object sender, EventArgs e)
