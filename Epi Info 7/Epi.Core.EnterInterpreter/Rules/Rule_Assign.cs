@@ -48,18 +48,18 @@ namespace Epi.Core.EnterInterpreter.Rules
                         this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), "assign");
                     }
 
-                      T = (NonterminalToken)pTokens.Tokens[3];
+                    //  T = (NonterminalToken)pTokens.Tokens[3];
                     
                 
-                    if (T.Symbol.ToString() == "<Fully_Qualified_Id>")
-                    {
+                    //if (T.Symbol.ToString() == "<Fully_Qualified_Id>")
+                    //{
                         
-                        this.QualifiedId = this.GetCommandElement(T.Tokens,2);
-                    }
-                    else
-                    {
-                        this.QualifiedId = this.GetCommandElement(T.Tokens, 0);
-                    }
+                    //    this.QualifiedId = this.GetCommandElement(T.Tokens,2);
+                    //}
+                    //else
+                    //{
+                    //    this.QualifiedId = this.GetCommandElement(T.Tokens, 0);
+                    //}
                       int number;
                       bool isNumeric = int.TryParse(QualifiedId, out number);
                       if (!this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()) && !isNumeric)
@@ -87,16 +87,16 @@ namespace Epi.Core.EnterInterpreter.Rules
                     {
                         this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
                     }
-                    T = (NonterminalToken)pTokens.Tokens[3];
-                    if (T.Symbol.ToString() == "<Fully_Qualified_Id>")
-                    {
+                    //T = (NonterminalToken)pTokens.Tokens[3];
+                    //if (T.Symbol.ToString() == "<Fully_Qualified_Id>")
+                    //{
                         
-                        this.QualifiedId = this.GetCommandElement(T.Tokens, 2);
-                    }
-                    else
-                    {
-                        this.QualifiedId = this.GetCommandElement(T.Tokens, 0);
-                    }
+                    //    this.QualifiedId = this.GetCommandElement(T.Tokens, 2);
+                    //}
+                    //else
+                    //{
+                    //    this.QualifiedId = this.GetCommandElement(T.Tokens, 0);
+                    //}
 
                      
                      isNumeric = int.TryParse(QualifiedId, out number);

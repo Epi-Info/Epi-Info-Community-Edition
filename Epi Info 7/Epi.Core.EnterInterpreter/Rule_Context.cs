@@ -378,6 +378,7 @@ namespace Epi.Core.EnterInterpreter
             SelectCommandList.Add(CommandNames.TXTTODATE);
             SelectCommandList.Add(CommandNames.UPPERCASE);
             SelectCommandList.Add(CommandNames.ISUNIQUE);
+            SelectCommandList.Add("(");
         }
 
         public static void DeletePermanentVariable(string variableName)
@@ -578,7 +579,7 @@ namespace Epi.Core.EnterInterpreter
                     {
                         _parsedUndefinedVariables.Add(kvp.Key);
                     }
-                }
+                };
 
                 if (_parsedUndefinedVariables.Count > 0)
                 {
