@@ -19,29 +19,36 @@ namespace EpiDashboard.Mapping
     /// </summary>
     public partial class LayerList : UserControl
     {
-        private ESRI.ArcGIS.Client.Map myMap;
-        private Epi.View view;
-        private Epi.Data.IDbDriver db;
-        private DashboardHelper dashboardHelper;
         public event EventHandler LayerClosed;
 
-        public bool HasLayers
+        public bool HasDataLayer
         {
-            get { return grdPlaceholder.Children.Count > 0; } 
+            get 
+            {
+                if (grdPlaceholder.Children.Count == 0) return false;
+
+                foreach (UIElement element in grdPlaceholder.Children)
+                {
+                    if (element is Grid)
+                    {
+                        if (((Grid)element).Children[0] is ILayerProperties && (((Grid)element).Children[0] is IReferenceLayerProperties == false))
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                return false; 
+            } 
         }
         
         public LayerList(ESRI.ArcGIS.Client.Map myMap, Epi.View view, Epi.Data.IDbDriver db, DashboardHelper dashboardHelper)
         {
             InitializeComponent();
-            this.myMap = myMap;
-            this.view = view;
-            this.db = db;
-            this.dashboardHelper = dashboardHelper;
 
             #region Translation
             tblockMapLayers.Text = DashboardSharedStrings.GADGET_MAP_LAYERS;
             #endregion
-
         }
 
         public void AddListItem(ILayerProperties item, int index)
@@ -110,6 +117,7 @@ namespace EpiDashboard.Mapping
             ((ILayerProperties)item.Children[0]).CloseLayer();
             grdPlaceholder.Children.Remove(item);
             txtLayerCount.Text = grdPlaceholder.Children.Count.ToString();
+            
             if (LayerClosed != null)
             {
                 LayerClosed(this, new EventArgs());
@@ -133,15 +141,19 @@ namespace EpiDashboard.Mapping
                     }
                 }
             }
+            
             foreach (Grid grid in grids)
             {
                 grdPlaceholder.Children.Remove(grid);
             }
+            
             txtLayerCount.Text = "0";
+            
             if (LayerClosed != null)
             {
                 LayerClosed(this, new EventArgs());
             }
+            
             EpiDashboard.Mapping.ShapeFileReader.ExtensionMethods.ClearPoints();
         }
 
@@ -149,6 +161,7 @@ namespace EpiDashboard.Mapping
         {
             System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
             System.Xml.XmlElement root = doc.CreateElement("Layers");
+            
             foreach (UIElement child in grdPlaceholder.Children)
             {
                 if (child is Grid)
@@ -162,6 +175,7 @@ namespace EpiDashboard.Mapping
                     }
                 }
             }
+            
             return root;
         }
 
