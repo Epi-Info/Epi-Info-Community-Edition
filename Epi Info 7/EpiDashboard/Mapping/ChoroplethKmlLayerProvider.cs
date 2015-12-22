@@ -198,6 +198,7 @@ namespace EpiDashboard.Mapping
                     if (ed.Name.Equals(_shapeKey))
                     {
                         shapeValue = ed.Value.Replace("'", "''").Trim();
+                        break;
                     }
                 }
             }
