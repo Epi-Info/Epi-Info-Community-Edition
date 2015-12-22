@@ -81,6 +81,8 @@ namespace EpiDashboard.Mapping
                     allAttributes.Add(attr.Key, attr.Value);
                 }
 
+                AddSchemaDataAttributes(_kmlURL, graphicsLayer.Graphics);
+
                 if (graphicsLayer.Graphics[0].Attributes.ContainsKey("extendedData"))
                 {
                     List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicsLayer.Graphics[0].Attributes["extendedData"];
@@ -118,6 +120,72 @@ namespace EpiDashboard.Mapping
             }
 
             ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5)));
+        }
+
+        private void AddSchemaDataAttributes(string _kmlURL, GraphicCollection graphics)
+        {
+            try
+            {
+                Dictionary<string, Dictionary<string, string>> extendedData = new Dictionary<string, Dictionary<string, string>>();
+
+                using (System.Xml.XmlReader reader = System.Xml.XmlReader.Create(_kmlURL))
+                {
+                    while (reader.ReadToFollowing("Placemark"))
+                    {
+                        string description = string.Empty;
+                        Dictionary<string, string> extendedData_SimpleData = new Dictionary<string, string>();
+
+                        if (reader.ReadToFollowing("description"))
+                        {
+                            description = reader.ReadElementString();
+                        }
+
+                        if (reader.ReadToFollowing("SimpleData"))
+                        {
+                            while (reader.ReadToNextSibling("SimpleData"))
+                            {
+
+                                if (reader.MoveToFirstAttribute())
+                                {
+                                    extendedData_SimpleData.Add(reader.Value, reader.ReadElementString());
+                                }
+                            }
+                        }
+
+                        if (extendedData.ContainsKey(description) == false)
+                        {
+                            extendedData.Add(description, extendedData_SimpleData);
+                        }
+                    }
+                }
+
+                foreach (Graphic graphic in graphics)
+                {
+                    if (graphic.Attributes.ContainsKey("name"))
+                    {
+                        string name = (string)graphic.Attributes["name"];
+                        string description = (string)graphic.Attributes["description"];
+
+                        if (graphic.Attributes.ContainsKey("extendedData") == false)
+                        {
+                            graphic.Attributes.Add("extendedData", new List<KmlExtendedData>());
+                        }
+
+                        if (extendedData.ContainsKey(description))
+                        {
+                            foreach (KeyValuePair<string, string> kvp in extendedData[description])
+                            {
+                                KmlExtendedData datum = new KmlExtendedData();
+                                datum.DisplayName = kvp.Key;
+                                datum.Name = kvp.Key;
+                                datum.Value = kvp.Value;
+                                ((List<KmlExtendedData>)graphic.Attributes["extendedData"]).Add(datum);
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
         }
 
         override public string GetShapeValue(Graphic graphicFeature, string shapeValue)
