@@ -738,7 +738,7 @@ namespace EpiDashboard.Mapping
                             filterExpression += "]";
                         }
 
-                        filterExpression += " = '" + graphicFeature.Attributes[shapeKey].ToString().Replace("'", "''").Trim() + "'";
+                        filterExpression += " = '" + GetShapeValue(graphicFeature, shapeKey) + "'";
 
                         double graphicValue = Double.PositiveInfinity;
                         try
@@ -773,11 +773,11 @@ namespace EpiDashboard.Mapping
                         t.Background = Brushes.White;
                         if (graphicValue == Double.PositiveInfinity)
                         {
-                            t.Text = graphicFeature.Attributes[shapeKey].ToString().Trim() + " : No Data";
+                            t.Text = GetShapeValue(graphicFeature, shapeKey) + " : No Data";
                         }
                         else
                         {
-                            t.Text = graphicFeature.Attributes[shapeKey].ToString().Trim() + " : " + graphicValue.ToString();
+                            t.Text = GetShapeValue(graphicFeature, shapeKey) + " : " + graphicValue.ToString();
                         }
                         t.FontSize = 14;
                         Border border = new Border();
