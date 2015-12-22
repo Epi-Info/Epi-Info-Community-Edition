@@ -2724,7 +2724,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to KML/KMZ/ZIP File.
+        ///   Looks up a localized string similar to KML/KMZ File.
         /// </summary>
         public static string GADGET_KMLFILE {
             get {
@@ -2733,7 +2733,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Location URL of KML/KMZ/ZIP File:.
+        ///   Looks up a localized string similar to Location URL of KML/KMZ File:.
         /// </summary>
         public static string GADGET_KMLFILE_LOCATION {
             get {

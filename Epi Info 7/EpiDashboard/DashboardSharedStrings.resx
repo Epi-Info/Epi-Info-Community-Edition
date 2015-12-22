@@ -1679,10 +1679,10 @@ of records or select fewer fields for the group.</value>
     <value>Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</value>
   </data>
   <data name="GADGET_KMLFILE" xml:space="preserve">
-    <value>KML/KMZ/ZIP File</value>
+    <value>KML/KMZ File</value>
   </data>
   <data name="GADGET_KMLFILE_LOCATION" xml:space="preserve">
-    <value>Location URL of KML/KMZ/ZIP File:</value>
+    <value>Location URL of KML/KMZ File:</value>
   </data>
   <data name="GADGET_MAPSERVER" xml:space="preserve">
     <value>Map Server</value>
