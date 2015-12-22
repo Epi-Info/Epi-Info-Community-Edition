@@ -265,6 +265,11 @@ namespace EpiDashboard.Mapping
 
         public List<double> CalculateThematicRange(int classCount, ThematicItem thematicItem, List<double> valueList)
         {
+            if (classCount > valueList.Count)
+            {
+                throw new System.ArgumentException(string.Format("There are {0} classes but only {1} values to map.", classCount, valueList.Count));
+            }
+            
             List<double> rangeStarts = new List<double>();
 
             if (RangesLoadedFromMapFile && RangeStartsFromMapFile != null)
@@ -303,7 +308,7 @@ namespace EpiDashboard.Mapping
             return rangeStarts;
         }
 
-        public bool PopulateRangeValues()
+        public string PopulateRangeValues()
         {
             try
             {
@@ -325,15 +330,15 @@ namespace EpiDashboard.Mapping
                     }
                 }
 
-                return true;
+                return string.Empty;
             }
             catch
             {
-                return false;
+                return "Unable to set the range values.";
             }
         }
 
-        public bool PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string legendText)
+        public string PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string legendText)
         {
             _classCount = classCount;
             _dashboardHelper = dashboardHelper;
@@ -357,9 +362,13 @@ namespace EpiDashboard.Mapping
 
                 return PopulateRangeValues();
             }
+            catch (ArgumentException exception)
+            {
+                return exception.Message;
+            }
             catch
             {
-                return false;
+                return "Could not load the data with the given data key and value key.";
             }
         }
 

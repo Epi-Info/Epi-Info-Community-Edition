@@ -333,11 +333,11 @@ namespace EpiDashboard.Controls
                     classCount = 4;
                 }
 
-                bool couldPopulateRangeValues = false;
+                string validationMessage = string.Empty;
 
                 if (thisProvider != null)
                 {
-                    couldPopulateRangeValues = thisProvider.PopulateRangeValues(_dashboardHelper,
+                    validationMessage = thisProvider.PopulateRangeValues(_dashboardHelper,
                         cmbShapeKey.SelectedItem.ToString(),
                         cmbDataKey.SelectedItem.ToString(),
                         cmbValue.SelectedItem.ToString(),
@@ -2336,11 +2336,11 @@ namespace EpiDashboard.Controls
                         classCount = 4;
                     }
                     
-                    bool couldPopulateRangeValues = true;
+                    string validationMessage = string.Empty;
 
                     if (thisProvider != null)
                     {
-                        couldPopulateRangeValues = thisProvider.PopulateRangeValues(_dashboardHelper,
+                        validationMessage = thisProvider.PopulateRangeValues(_dashboardHelper,
                             cmbShapeKey.SelectedItem.ToString(),
                             cmbDataKey.SelectedItem.ToString(),
                             cmbValue.SelectedItem.ToString(),
@@ -2349,7 +2349,9 @@ namespace EpiDashboard.Controls
                             legTitle.Text);
                     }
 
-                    if (couldPopulateRangeValues == false)
+                    validationText.Text = validationMessage;
+
+                    if (validationMessage != string.Empty)
                     {
                         tbtnDisplay.IsEnabled = false;
                         tbtnFilters.IsEnabled = false;
