@@ -148,7 +148,7 @@ namespace Epi.Windows.MakeView.Forms
 
                 }
             }
-
+            List<string> CommandButtonFieldList = new List<string>();
             foreach (Field field in view.Fields)
             {
                 if (field is IDataField)
@@ -165,11 +165,13 @@ namespace Epi.Windows.MakeView.Forms
                     p.DataType = EpiInfo.Plugin.DataType.Text;
                     MR.Context.DefineVariable(p);
                 }
-                else
+                else if (field is Epi.Fields.CommandButtonField || field is Epi.Fields.RelatedViewField)
                 {
+                   
+                    CommandButtonFieldList.Add(field.Name);
                 }
             }
-
+            MR.Context.AddToCommandButtonFieldList(CommandButtonFieldList);
             BuildComboBox();
             if (iserrcheckcode)
             {
