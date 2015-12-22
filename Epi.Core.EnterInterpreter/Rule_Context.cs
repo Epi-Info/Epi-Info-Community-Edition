@@ -49,6 +49,7 @@ namespace Epi.Core.EnterInterpreter
         public Dictionary<string, EnterRule> FieldClickCheckCode;
         public Dictionary<string, EnterRule> Subroutine;
         public List<String> SelectCommandList = new List<String>();
+        public List<String> CommandButtonFieldList = new List<String>();
         private string[] parseGetCommandSearchText(string pSearchText)
         {
             string[] result = null;
@@ -379,6 +380,8 @@ namespace Epi.Core.EnterInterpreter
             SelectCommandList.Add(CommandNames.UPPERCASE);
             SelectCommandList.Add(CommandNames.ISUNIQUE);
             SelectCommandList.Add("(");
+            SelectCommandList.Add(",");
+           
         }
 
         public static void DeletePermanentVariable(string variableName)
@@ -508,7 +511,10 @@ namespace Epi.Core.EnterInterpreter
         {
             this.currentScope.RemoveVariablesInScope(varTypes);
         }
-
+        public void AddToCommandButtonFieldList(List<string> List)
+        {
+            this.CommandButtonFieldList = List;
+        }
 
         public void DefineVariable(EpiInfo.Plugin.IVariable variable)
         {
@@ -575,7 +581,8 @@ namespace Epi.Core.EnterInterpreter
             { 
                 foreach (System.Collections.Generic.KeyValuePair<string, string> kvp in this.CommandVariableCheck)
                 {
-                    if (this.currentScope.Resolve(kvp.Key) == null)
+                    var _CurrentScope = this.currentScope.Resolve(kvp.Key);
+                    if (_CurrentScope == null )
                     {
                         _parsedUndefinedVariables.Add(kvp.Key);
                     }
@@ -588,9 +595,9 @@ namespace Epi.Core.EnterInterpreter
                     string Message = null;
                     foreach (string name in _parsedUndefinedVariables)
                     {
-                        
 
-                        if (!name.Contains("\"") && !SelectCommandList.Contains(name.ToUpper()))
+
+                     if (!name.Contains("\"") && !SelectCommandList.Contains(name.ToUpper()) && !this.Subroutine.ContainsKey(name) && !this.CommandButtonFieldList.Contains(name))
                       {
                         string exceptionMessage = SharedStrings.ERROR_VARIABLE_NOT_DEFINED;
                         if (name != Constants.VARIABLE_NAME_TEST_TOKEN)

@@ -24,5 +24,7 @@ namespace EpiInfo.Plugin
         string ExpectedTokens { get; set; }
         string NextToken { get; set; }
         string UnexpectedToken { get; set; }
+
+        void AddToCommandButtonFieldList(List<string> List);
     }
 }
