@@ -101,14 +101,14 @@ namespace Epi {
         ///Matthew Lantinga
         ///Leslyn McNabb
         ///Kishore Meduri
+        ///Jeremy Miller
         ///Roger Mir
         ///Victor Natick
         ///Chelsea Navo
         ///David Nitschke
         ///Sumalatha Paritala
         ///Julio Rodriguez Estevez
-        ///Uma Shanmugam
-        ///Daniel Sh [rest of string was truncated]&quot;;.
+        ///Uma Shanm [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ABOUT_EPIINFO_LINE3 {
             get {
