@@ -337,7 +337,7 @@ namespace EpiDashboard
                 }
             }
 
-            if (e.PropertyName == DashboardSharedStrings.COL_HEADER_PERCENT)
+            if (e.PropertyName == DashboardSharedStrings.COL_HEADER_PERCENT || e.PropertyName == "Percent")
             {
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "P2";
             }
