@@ -27,6 +27,8 @@ namespace Epi.Core.EnterInterpreter.Rules
             //<Assign_DLL_Statement> ::= ASSIGN <Qualified ID> '=' identifier'!'<FunctionCall>
             string[] temp;
             NonterminalToken T;
+            int number;
+            bool isNumeric;
             switch(pTokens.Rule.Lhs.ToString())
             {
                   
@@ -43,29 +45,28 @@ namespace Epi.Core.EnterInterpreter.Rules
                         this.QualifiedId = this.GetCommandElement(T.Tokens, 0);
                     }
                     this.value = EnterRule.BuildStatments(pContext, pTokens.Tokens[3]);
-                    if (!this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
-                    {
-                        this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), "assign");
-                    }
+                     
 
-                    //  T = (NonterminalToken)pTokens.Tokens[3];
-                    
-                
-                    //if (T.Symbol.ToString() == "<Fully_Qualified_Id>")
-                    //{
-                        
-                    //    this.QualifiedId = this.GetCommandElement(T.Tokens,2);
-                    //}
-                    //else
-                    //{
-                    //    this.QualifiedId = this.GetCommandElement(T.Tokens, 0);
-                    //}
-                      int number;
-                      bool isNumeric = int.TryParse(QualifiedId, out number);
-                      if (!this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()) && !isNumeric)
+
+                    for (int i = 0; pTokens.Tokens.Length > i; i++)
                     {
-                        this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), "assign");
-                    }
+                        var IdentifierList = this.GetCommandElement(pTokens.Tokens, i).ToString().Split(' ');
+                        IdentifierList = RemoveOp(IdentifierList);
+                        if (IdentifierList.Length > 0)
+                        {
+                            foreach (var Identifier in IdentifierList)
+                             {
+                                 isNumeric = int.TryParse(Identifier, out number);
+                                 if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()) && !isNumeric)
+                                    {
+                                        this.Context.CommandVariableCheck.Add(Identifier, "assign");
+                                    }
+                             }
+                         }
+                     }
+                    
+
+                    
                     break;
                 case "<Let_Statement>":
                     T = (NonterminalToken)pTokens.Tokens[1];
@@ -83,28 +84,21 @@ namespace Epi.Core.EnterInterpreter.Rules
                     
                     this.value = EnterRule.BuildStatments(pContext, pTokens.Tokens[3]);
 
-                    if (!this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
+                    for (int i = 0; pTokens.Tokens.Length > i; i++)
                     {
-                        this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
-                    }
-                    //T = (NonterminalToken)pTokens.Tokens[3];
-                    //if (T.Symbol.ToString() == "<Fully_Qualified_Id>")
-                    //{
-                        
-                    //    this.QualifiedId = this.GetCommandElement(T.Tokens, 2);
-                    //}
-                    //else
-                    //{
-                    //    this.QualifiedId = this.GetCommandElement(T.Tokens, 0);
-                    //}
-
-                     
-                     isNumeric = int.TryParse(QualifiedId, out number);
-
-
-                     if (!this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()) && !isNumeric)
-                    {
-                        this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
+                        var IdentifierList = this.GetCommandElement(pTokens.Tokens, i).ToString().Split(' ');
+                        IdentifierList = RemoveOp(IdentifierList);
+                        if (IdentifierList.Length > 0)
+                        {
+                            foreach (var Identifier in IdentifierList)
+                            {
+                                isNumeric = int.TryParse(Identifier, out number);
+                                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()) && !isNumeric)
+                                {
+                                    this.Context.CommandVariableCheck.Add(Identifier, "assign");
+                                }
+                            }
+                        }
                     }
                     break;
                 case "<Simple_Assign_Statement>":
@@ -259,6 +253,55 @@ namespace Epi.Core.EnterInterpreter.Rules
             return DataType.Unknown;
         }
 
+        private string[] RemoveOp(string[] IdentifierList)
+        {
+            List<string> NewList = new List<string>();
+            List<string> OpList = new List<string>();
 
+
+
+            OpList.Add("(");
+            OpList.Add(")");
+            OpList.Add("/");
+            OpList.Add("(.)");
+            OpList.Add("(+)");
+            OpList.Add("(-)");
+            OpList.Add("=");
+            OpList.Add("+");
+            OpList.Add("-");
+            OpList.Add(">");
+            OpList.Add("<");
+            OpList.Add(">=");
+            OpList.Add("<=");
+            OpList.Add("<>");
+            OpList.Add("^");
+            OpList.Add("&");
+            OpList.Add("*");
+            OpList.Add("%");
+            OpList.Add("mod");
+            OpList.Add("(.)");
+            OpList.Add("not");
+            OpList.Add("or");
+            OpList.Add("and");
+            OpList.Add("xor");
+            OpList.Add("Yes");
+            OpList.Add("No");
+            OpList.Add("Missing");
+            OpList.Add("AND");
+            OpList.Add("OR");
+            OpList.Add("ASSIGN");
+            foreach (var item in IdentifierList)
+            {
+                int number;
+                bool isNumeric = int.TryParse(item, out number);
+                if (!OpList.Contains(item) && !isNumeric)
+                {
+
+                    NewList.Add(item);
+                }
+            }
+
+            return NewList.ToArray();
+        }
     }
 }
