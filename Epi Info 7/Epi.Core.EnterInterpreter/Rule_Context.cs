@@ -379,6 +379,7 @@ namespace Epi.Core.EnterInterpreter
             SelectCommandList.Add(CommandNames.TXTTODATE);
             SelectCommandList.Add(CommandNames.UPPERCASE);
             SelectCommandList.Add(CommandNames.ISUNIQUE);
+            SelectCommandList.Add(CommandNames.EPIWEEK);
             SelectCommandList.Add("(");
             SelectCommandList.Add(",");
            
