@@ -40,7 +40,7 @@ namespace EpiDashboard.Controls
         private SolidColorBrush _currentColor_rampEnd;
         private bool _initialRampCalc;
 
-        public IChoroLayerProvider thisProvider;
+        public ChoroplethLayerProvider thisProvider;
 
         public ChoroplethKmlLayerProvider choroplethKmlLayerProvider;
         public ChoroplethServerLayerProvider choroplethServerLayerProvider;
@@ -284,11 +284,11 @@ namespace EpiDashboard.Controls
             panelDisplay.Visibility = System.Windows.Visibility.Visible;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
-            SetDefaultRanges();
+            SetProperties();
             PropertyChanged_EnableDisable();
         }
 
-        public void SetDefaultRanges()
+        public void SetProperties()
         {
             if (cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null)
             {
@@ -349,7 +349,7 @@ namespace EpiDashboard.Controls
                 SetRangeUISection();
             }
 
-            UpdateRangesCollection();
+            UpdateClassRangesDictionary_FromControls();
         }
 
         private void UpdateColorsCollection()
@@ -365,24 +365,19 @@ namespace EpiDashboard.Controls
             }
         }
 
-        private void UpdateRangesCollection()
+        private void UpdateClassRangesDictionary_FromControls()
         {
-
-            if (thisProvider == null)
-                return;
+            if (thisProvider == null) return;
 
             foreach (UIElement element in stratGrid.Children)
             {
                 if (element is System.Windows.Controls.TextBox)
                 {
-
                     string elementName = ((System.Windows.Controls.TextBox)element).Name;
 
                     if (elementName.StartsWith("ramp"))
                     {
-
-                        thisProvider.ClassRangesDictionary.Add(((System.Windows.Controls.TextBox)element).Name,
-                            ((System.Windows.Controls.TextBox)element).Text);
+                        thisProvider.ClassRangesDictionary.Add(((System.Windows.Controls.TextBox)element).Name, ((System.Windows.Controls.TextBox)element).Text);
                     }
                 }
             }
@@ -391,17 +386,20 @@ namespace EpiDashboard.Controls
 
         private void tbtnVariables_Checked(object sender, RoutedEventArgs e)
         {
-
             CheckButtonStates(sender as ToggleButton);
             panelDataSource.Visibility = System.Windows.Visibility.Collapsed;
             panelVariables.Visibility = System.Windows.Visibility.Visible;
             panelDisplay.Visibility = System.Windows.Visibility.Collapsed;
             panelInfo.Visibility = System.Windows.Visibility.Collapsed;
             panelFilters.Visibility = System.Windows.Visibility.Collapsed;
+
             if (choroplethServerLayerProperties != null)
-                if (choroplethServerLayerProperties.provider.FlagUpdateToGLFailed) { ResetShapeCombo(); }
-
-
+            {
+                if (choroplethServerLayerProperties.provider.FlagUpdateToGLFailed) 
+                { 
+                    ResetShapeCombo(); 
+                }
+            }
         }
 
         private void tbtnFilters_Checked(object sender, RoutedEventArgs e)
@@ -726,15 +724,19 @@ namespace EpiDashboard.Controls
             ca10.legendText = legendText10.Text;
             ClassAttribList.Add(10, ca10);
 
-            UpdateRangesCollection();
+            UpdateClassRangesDictionary_FromControls();
         }
 
         private bool ValidateInputValue(System.Windows.Controls.TextBox textBox)
         {
-            double Value;
-            if (double.TryParse(textBox.Text, out Value))
+            double textboxValue, rangeStartValue, rangeEndValue;
+
+            if (double.TryParse(textBox.Text, out textboxValue))
             {
-                if (Value >= double.Parse(thisProvider.RangeValues[0, 0].ToString()) && Value <= double.Parse(thisProvider.RangeValues[thisProvider.RangeCount - 1, 1].ToString()))
+                rangeStartValue = double.Parse(thisProvider.RangeValues[0, 0].ToString());
+                rangeEndValue = double.Parse(thisProvider.RangeValues[thisProvider.RangeCount - 1, 1].ToString());
+                
+                if (textboxValue >= rangeStartValue && textboxValue <= rangeEndValue)
                 {
                     return true;
                 }
@@ -901,7 +903,7 @@ namespace EpiDashboard.Controls
 
                 if (thisProvider != null)
                 {
-                    thisProvider.Range = GetRangeValues(thisProvider.RangeCount);
+                    thisProvider.RangeStarts_FromControls = GetRangeValues_FromControls(thisProvider.RangeCount);
                     thisProvider.ListLegendText = ListLegendText;
                     thisProvider.Opacity = this.Opacity;
 
@@ -918,7 +920,7 @@ namespace EpiDashboard.Controls
             }
         }
 
-        public List<double> GetRangeValues(int RangeCount)
+        public List<double> GetRangeValues_FromControls(int RangeCount)
         {
             List<double> Range = new List<double>();
 
@@ -1111,11 +1113,6 @@ namespace EpiDashboard.Controls
 
         private void ClassCount_Changed(object sender, SelectionChangedEventArgs e)
         {
-            if (thisProvider != null)
-            { 
-                thisProvider.UseCustomRanges = false;
-            }
-
             Reset_Legend();
         }
 
@@ -1144,11 +1141,12 @@ namespace EpiDashboard.Controls
             {
                 classCount = 4;
             }
-            
-            if ((cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null) &&
-                (thisProvider != null))
+
+            bool allVariablesSelected = (cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null);
+
+            if (thisProvider != null && allVariablesSelected )
             {
-                if (thisProvider.AsQuantiles)
+                if (quintilesOption.IsChecked == true)
                 {
                     thisProvider.RangesLoadedFromMapFile = false;
 
@@ -1167,7 +1165,6 @@ namespace EpiDashboard.Controls
             if (cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null)
             {
                 thisProvider.UseCustomColors = false;
-                thisProvider.UseCustomRanges = false;
 
                 SetRangeUISection();
             }
@@ -1194,7 +1191,7 @@ namespace EpiDashboard.Controls
             
             bool isNewColorRamp = true;
 
-            quintilesOption.IsChecked = thisProvider.AsQuantiles;
+            quintilesOption.IsChecked = thisProvider.UseQuantiles;
 
             SolidColorBrush rampMissing = (SolidColorBrush)rctMissingColor.Fill;
 
@@ -1237,10 +1234,15 @@ namespace EpiDashboard.Controls
                     thisProvider.CustomColorsDictionary.Add(rctColor1.Name, rampStart.Color);
                 }
 
-                if (thisProvider != null && quintilesOption.IsChecked == true)
+                if (thisProvider != null)
                 {
-                    rampStart01.Text = thisProvider.RangeValues[0, 0];
-                    rampEnd01.Text = thisProvider.RangeValues[0, 1];
+                    if(thisProvider.ClassRangesDictionary.RangeDictionary.Count == 0)
+                    {
+                        thisProvider.ClassRangesDictionary.SetRangesDictionary(thisProvider.RangeValues);
+                    }
+                    
+                    rampStart01.Text = thisProvider.ClassRangesDictionary.GetAt("rampStart01");
+                    rampEnd01.Text = thisProvider.ClassRangesDictionary.GetAt("rampEnd01");
                 }
 
                 Color color;
@@ -1285,18 +1287,10 @@ namespace EpiDashboard.Controls
 
                     if (isNewColorRamp) uiControls.rectangle.Fill = new SolidColorBrush(color);
 
-                    if (thisProvider != null && quintilesOption.IsChecked == true)
+                    if (thisProvider != null )
                     {
-                        if (thisProvider.UseCustomRanges)
-                        {
-                            uiControls.rampStarts.Text = thisProvider.ClassRangesDictionary.Dict[uiControls.rampStarts.Name];
-                            uiControls.rampEnds.Text = thisProvider.ClassRangesDictionary.Dict[uiControls.rampEnds.Name];
-                        }
-                        else
-                        {
-                            uiControls.rampStarts.Text = thisProvider.RangeValues[i - 2, 0];
-                            uiControls.rampEnds.Text = thisProvider.RangeValues[i - 2, 1];
-                        }
+                        uiControls.rampStarts.Text = thisProvider.ClassRangesDictionary.GetAt(uiControls.rampStarts.Name);
+                        uiControls.rampEnds.Text = thisProvider.ClassRangesDictionary.GetAt(uiControls.rampEnds.Name);
                     }
                 }
 
@@ -1409,8 +1403,8 @@ namespace EpiDashboard.Controls
         public void OnQuintileOptionChanged()
         {
             if (thisProvider != null)
-            { 
-                thisProvider.AsQuantiles = (bool)quintilesOption.IsChecked;
+            {
+                thisProvider.UseQuantiles = (bool)quintilesOption.IsChecked;
             }
 
             int widthQuantile = 0;
@@ -1468,7 +1462,7 @@ namespace EpiDashboard.Controls
             PropertyChanged_EnableDisable();
         }
 
-        private void cmbValue_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void cmbValue_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbValue.SelectedItem != null)
             {
@@ -1535,8 +1529,6 @@ namespace EpiDashboard.Controls
                 {
                     throw;
                 }
-
-                thisProvider.AreRangesSet = true;
             }
             else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
             {
@@ -1580,7 +1572,6 @@ namespace EpiDashboard.Controls
                 }
 
                 thisProvider = choroplethServerLayerProvider;
-                thisProvider.AreRangesSet = true;
             }
             else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
             {
@@ -1624,7 +1615,6 @@ namespace EpiDashboard.Controls
                 }
 
                 thisProvider = choroplethKmlLayerProvider;
-                thisProvider.AreRangesSet = true;
             }
 
             SolidColorBrush rampStart = (SolidColorBrush)rctLowColor.Fill;
@@ -2256,8 +2246,6 @@ namespace EpiDashboard.Controls
                 return;
             }
 
-            thisProvider.UseCustomRanges = true;
-
             System.Windows.Controls.TextBox textBox = ((System.Windows.Controls.TextBox)sender);
             string newText = textBox.Text;
             float newValue = float.NaN;
@@ -2270,11 +2258,11 @@ namespace EpiDashboard.Controls
             if (float.TryParse(newText, out newValue) == false)
             {
                 System.Windows.Controls.TextBox found = (System.Windows.Controls.TextBox)this.FindName(name);
-                found.Text = thisProvider.ClassRangesDictionary.Dict[name];
+                found.Text = thisProvider.ClassRangesDictionary.RangeDictionary[name];
                 return;
             }
 
-            UpdateRangesCollection();
+            UpdateClassRangesDictionary_FromControls();
 
             if (IsMissingLimitValue())
             {
@@ -2287,7 +2275,7 @@ namespace EpiDashboard.Controls
 
             thisProvider.ClassRangesDictionary.SetRangesDictionary(limits);
 
-            foreach (KeyValuePair<string, string> kvp in thisProvider.ClassRangesDictionary.Dict)
+            foreach (KeyValuePair<string, string> kvp in thisProvider.ClassRangesDictionary.RangeDictionary)
             {
                 System.Windows.Controls.TextBox found = (System.Windows.Controls.TextBox)this.FindName(kvp.Key);
                 found.Text = kvp.Value;

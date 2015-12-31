@@ -2087,8 +2087,13 @@ namespace EpiDashboard.Mapping
             choroplethproperties.SetDashboardHelper(dashboardHelper);
             choroplethproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;
             choroplethproperties.cmbClasses.Text = choroplethlayerprop.cbxClasses.Text;
-            choroplethproperties.quintilesOption.IsChecked = choroplethlayerprop.flagQuantiles;
-            if (choroplethlayerprop.flagQuantiles == true) { choroplethproperties.OnQuintileOptionChanged(); }
+            choroplethproperties.quintilesOption.IsChecked = choroplethlayerprop.partitionSetUsingQuantiles;
+            
+            if (choroplethlayerprop.partitionSetUsingQuantiles == true) 
+            { 
+                choroplethproperties.OnQuintileOptionChanged();
+            }
+            
             choroplethproperties.ClearonMapServer();
             //  choroplethproperties.choroplethShapeLayerProvider = choroplethlayerprop.provider;
             choroplethproperties.thisProvider = choroplethlayerprop.provider;
@@ -2125,7 +2130,10 @@ namespace EpiDashboard.Mapping
             }
 
             if (choroplethlayerprop.classAttribList != null)
-            { choroplethproperties.SetClassAttributes(choroplethlayerprop.classAttribList); }
+            { 
+                choroplethproperties.SetClassAttributes(choroplethlayerprop.classAttribList); 
+            }
+            
             choroplethproperties.FillComboBoxes();
 
             choroplethproperties.panelBoundaries.IsEnabled = true;
