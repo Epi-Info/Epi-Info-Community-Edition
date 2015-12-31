@@ -28,7 +28,7 @@ namespace EpiDashboard.Mapping
         public IDictionary<string, object> shapeAttributes;
         private bool flagrunedit;
         private int Numclasses;
-        public bool flagQuantiles;
+        public bool partitionSetUsingQuantiles;
         public DataFilters datafilters { get; set; }
         public Dictionary<int, object> classAttribList;
 
@@ -239,7 +239,7 @@ namespace EpiDashboard.Mapping
 
         public void SetValues(string shapefilepath, string shapekey, string datakey, string val,
             string classes, Brush Highcolor, Brush Lowcolor, Brush Missingcolor, IDictionary<string, object> shapeAttributes,
-            Dictionary<int, object> classAttrib, bool flagquintiles, int numclasses, string LegendText)
+            Dictionary<int, object> classAttrib, bool quintilesChecked, int numclasses, string LegendText)
         {
             FillComboBoxes();
             if (shapeAttributes != null)
@@ -251,7 +251,7 @@ namespace EpiDashboard.Mapping
                 }
             }
             classAttribList = classAttrib;
-            flagQuantiles = flagquintiles;
+            partitionSetUsingQuantiles = quintilesChecked;
             Numclasses = numclasses;
             shapeFilePath = shapefilepath;
             rctHighColor.Fill = (SolidColorBrush)Highcolor;
@@ -276,63 +276,72 @@ namespace EpiDashboard.Mapping
                 SolidColorBrush lowColor = (SolidColorBrush)rctLowColor.Fill;
                 SolidColorBrush missingColor = (SolidColorBrush)rctMissingColor.Fill;
 
-                string classTitles = "<classTitles> ";
+                string classTitles = "<classTitles>" + Environment.NewLine; ;
                 long classTitleCount = 0;
                 string classTitleTagName = "";
 
                 foreach (KeyValuePair<string, string> entry in provider.ListLegendText.Dict)
                 {
                     classTitleTagName = entry.Key;
-                    classTitles += string.Format("<{1}>{0}</{1}>", entry.Value, classTitleTagName);
+                    classTitles += string.Format("<{1}>{0}</{1}>", entry.Value, classTitleTagName) + Environment.NewLine;
                     classTitleCount++;
                 }
 
-                classTitles += "</classTitles> ";
+                classTitles += "</classTitles>" + Environment.NewLine;
 
                 string customColors = "";
 
-                //  Custom colors    
                 if (provider.CustomColorsDictionary != null)
                 {
-                    customColors = "<customColors>";
+                    customColors = "<customColors>" + Environment.NewLine;
             
                     foreach (KeyValuePair<string, Color> keyValuePair in provider.CustomColorsDictionary.Dict)
                     {
                         string customColor = "<" + keyValuePair.Key + ">";
                         string color = keyValuePair.Value.R + "," + keyValuePair.Value.G + "," + keyValuePair.Value.B;
-                        customColor += color + "</" + keyValuePair.Key + ">";
+                        customColor += color + "</" + keyValuePair.Key + ">" + Environment.NewLine;
                         customColors += customColor;
                     }
 
-                    customColors += "</customColors>";
+                    customColors += "</customColors>" + Environment.NewLine;
                 }
 
-
-                //  Use custom colors   
-                string useCustomColorsTag = "<useCustomColors>" + provider.UseCustomColors + "</useCustomColors>";
-                string asQuintileTag = "<asQuintiles>" + flagQuantiles + "</asQuintiles>";
+                string useCustomColorsTag = "<useCustomColors>" + provider.UseCustomColors + "</useCustomColors>" + Environment.NewLine;
+                string asQuintileTag = "<partitionUsingQuantiles>" + provider.UseQuantiles + "</partitionUsingQuantiles>" + Environment.NewLine;
                 string classRanges = "";
 
-                // Class ranges    
-                if (provider.ClassRangesDictionary != null)
+                if (provider.UseQuantiles == false)
                 {
-                    classRanges = "<classRanges>";
-
-                    foreach (KeyValuePair<string, string> keyValuePair in provider.ClassRangesDictionary.Dict)
+                    if (provider.ClassRangesDictionary != null)
                     {
-                        string rangeName = "<" + keyValuePair.Key + ">";
-                        string rangeValue = keyValuePair.Value;
-                        rangeName += rangeValue + "</" + keyValuePair.Key + ">";
-                        classRanges += rangeName;
-                    }
+                        classRanges = "<classRanges>" + Environment.NewLine;
 
-                    classRanges += "</classRanges>";
+                        foreach (KeyValuePair<string, string> keyValuePair in provider.ClassRangesDictionary.RangeDictionary)
+                        {
+                            string rangeName = "<" + keyValuePair.Key + ">";
+                            string rangeValue = keyValuePair.Value;
+                            rangeName += rangeValue + "</" + keyValuePair.Key + ">" + Environment.NewLine;
+                            classRanges += rangeName;
+                        }
+
+                        classRanges += "</classRanges>" + Environment.NewLine;
+                    }
                 }
 
-                string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() +
-                                   "</highColor><legTitle>" + provider.LegendText + "</legTitle>" + classTitles + classRanges + useCustomColorsTag + asQuintileTag + customColors + "<lowColor>" + lowColor.Color.ToString() +
-                                   "</lowColor><missingColor>" + missingColor.Color.ToString() + "</missingColor><classes>" + cbxClasses.SelectedIndex.ToString() +
-                                   "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>";
+                string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile>" + Environment.NewLine +
+                                   "<highColor>" + highColor.Color.ToString() + "</highColor>" + Environment.NewLine +
+                                   "<legTitle>" + provider.LegendText + "</legTitle>" + Environment.NewLine +
+                                   classTitles + 
+                                   classRanges + 
+                                   useCustomColorsTag + 
+                                   asQuintileTag + 
+                                   customColors +
+                                   "<lowColor>" + lowColor.Color.ToString() + "</lowColor>" + Environment.NewLine +
+                                   "<missingColor>" + missingColor.Color.ToString() + "</missingColor>" + Environment.NewLine +
+                                   "<classes>" + cbxClasses.SelectedIndex.ToString() + "</classes>" + Environment.NewLine +
+                                   "<dataKey>" + dataKey + "</dataKey>" + Environment.NewLine +
+                                   "<shapeKey>" + shapeKey + "</shapeKey>" + Environment.NewLine +
+                                   "<value>" + value + "</value>" + Environment.NewLine;
 
                 doc.PreserveWhitespace = true;
 
@@ -371,11 +380,11 @@ namespace EpiDashboard.Mapping
                     }
                 }
 
-                if (child.Name.Equals("asQuintiles"))
+                if (child.Name.Equals("partitionUsingQuantiles"))
                 {
                     bool asQuintiles = false;
                     bool.TryParse(child.InnerText, out asQuintiles);
-                    provider.AsQuantiles = asQuintiles;
+                    provider.UseQuantiles = asQuintiles;
                 }
 
                 if (child.Name.Equals("customColors"))
@@ -393,8 +402,6 @@ namespace EpiDashboard.Mapping
 
                 if (child.Name.Equals("classRanges"))
                 {
-                    provider.UseCustomRanges = true;        
-
                     foreach (System.Xml.XmlElement classRangElement in child)
                     {
                         provider.ClassRangesDictionary.Add(classRangElement.Name, classRangElement.InnerText);
@@ -406,52 +413,52 @@ namespace EpiDashboard.Mapping
 
                     try
                     {
-                        doubleString = provider.ClassRangesDictionary.Dict["rampStart01"];
+                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart01"];
                         if (string.IsNullOrEmpty(doubleString) == false)
                         {
                             rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
                         }
-                        doubleString = provider.ClassRangesDictionary.Dict["rampStart02"];
+                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart02"];
                         if (string.IsNullOrEmpty(doubleString) == false)
                         {
                             rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
                         }
-                        doubleString = provider.ClassRangesDictionary.Dict["rampStart03"];
+                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart03"];
                         if (string.IsNullOrEmpty(doubleString) == false)
                         {
                             rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
                         }
-                        doubleString = provider.ClassRangesDictionary.Dict["rampStart04"];
+                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart04"];
                         if (string.IsNullOrEmpty(doubleString) == false)
                         {
                             rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
                         }
-                        doubleString = provider.ClassRangesDictionary.Dict["rampStart05"];
+                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart05"];
                         if (string.IsNullOrEmpty(doubleString) == false)
                         {
                             rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
                         }
-                        doubleString = provider.ClassRangesDictionary.Dict["rampStart06"];
+                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart06"];
                         if (string.IsNullOrEmpty(doubleString) == false)
                         {
                             rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
                         }
-                        doubleString = provider.ClassRangesDictionary.Dict["rampStart07"];
+                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart07"];
                         if (string.IsNullOrEmpty(doubleString) == false)
                         {
                             rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
                         }
-                        doubleString = provider.ClassRangesDictionary.Dict["rampStart08"];
+                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart08"];
                         if (string.IsNullOrEmpty(doubleString) == false)
                         {
                             rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
                         }
-                        doubleString = provider.ClassRangesDictionary.Dict["rampStart09"];
+                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart09"];
                         if (string.IsNullOrEmpty(doubleString) == false)
                         {
                             rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
                         }
-                        doubleString = provider.ClassRangesDictionary.Dict["rampStart10"];
+                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart10"];
                         if (string.IsNullOrEmpty(doubleString) == false)
                         {
                             rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
@@ -487,22 +494,30 @@ namespace EpiDashboard.Mapping
                 
                 if (child.Name.Equals("dataKey"))
                 {
+                    cbxDataKey.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
                     cbxDataKey.SelectedItem = child.InnerText;
+                    cbxDataKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
                 }
                 
                 if (child.Name.Equals("shapeKey"))
                 {
+                    cbxShapeKey.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
                     cbxShapeKey.SelectedItem = child.InnerText;
+                    cbxShapeKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
                 }
                 
                 if (child.Name.Equals("classes"))
                 {
+                    cbxClasses.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
                     cbxClasses.SelectedIndex = int.Parse(child.InnerText);
+                    cbxClasses.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
                 }
                 
                 if (child.Name.Equals("value"))
                 {
+                    cbxValue.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
                     cbxValue.SelectedItem = child.InnerText;
+                    cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
                 }
                 
                 if (child.Name.Equals("highColor"))
@@ -540,9 +555,14 @@ namespace EpiDashboard.Mapping
             foreach (string str in cbxShapeKey.Items) { choroplethprop.cmbShapeKey.Items.Add(str); }
             foreach (string str in cbxDataKey.Items) { choroplethprop.cmbDataKey.Items.Add(str); }
             foreach (string str in cbxValue.Items) { choroplethprop.cmbValue.Items.Add(str); }
+
             choroplethprop.cmbShapeKey.SelectedItem = cbxShapeKey.Text;
             choroplethprop.cmbDataKey.SelectedItem = cbxDataKey.Text;
+
+            choroplethprop.cmbValue.SelectionChanged -= new System.Windows.Controls.SelectionChangedEventHandler(choroplethprop.cmbValue_SelectionChanged);
             choroplethprop.cmbValue.SelectedItem = cbxValue.Text;
+            choroplethprop.cmbValue.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(choroplethprop.cmbValue_SelectionChanged);
+            
             choroplethprop.rctHighColor.Fill = rctHighColor.Fill;
             choroplethprop.rctLowColor.Fill = rctLowColor.Fill;
             choroplethprop.rctMissingColor.Fill = rctMissingColor.Fill;
@@ -552,9 +572,9 @@ namespace EpiDashboard.Mapping
             choroplethprop.thisProvider = provider;
 
             choroplethprop.legTitle.Text = provider.LegendText;
-            choroplethprop.SetDefaultRanges();
-            choroplethprop.GetRangeValues(provider.RangeCount);
             choroplethprop.ListLegendText = provider.ListLegendText;
+
+            choroplethprop.SetProperties();
   
             choroplethprop.RenderMap();
         }

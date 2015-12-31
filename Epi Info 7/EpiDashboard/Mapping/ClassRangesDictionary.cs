@@ -6,19 +6,47 @@ using System.Windows.Media;
 
 namespace EpiDashboard.Mapping
 {
-    public class ClassRangesDictionary
+    public class ClassRangeDictionary
     {
         private Dictionary<string, string> _dictionary;
         private List<ClassLimits> _rangeValues;
 
-        public ClassRangesDictionary()
+        public ClassRangeDictionary()
         {
             _dictionary = new Dictionary<string, string>();
         }
 
-        public Dictionary<string, string> Dict
+        public Dictionary<string, string> RangeDictionary
         {
             get { return _dictionary; }
+        }
+
+        public List<double> RangeStarts
+        {
+            get 
+            {
+                List<double> starts = new List<double>();
+
+                for (int classOrdinal = 1; classOrdinal < 11; classOrdinal++)
+                {
+                    float start;
+                    string start_str, key_Start;
+
+                    key_Start = "rampStart" + string.Format("{0:D2}", classOrdinal);
+                    start_str = GetAt(key_Start);
+
+                    if (float.TryParse(start_str, out start))
+                    {
+                        starts.Add(start);
+                    }
+                    else
+                    {
+                        return starts;
+                    }
+                }
+
+                return starts; 
+            }
         }
 
         internal int PropertyPanelMaxClassCount
@@ -29,32 +57,32 @@ namespace EpiDashboard.Mapping
         public List<ClassLimits> GetLimitValues()
         {
             _rangeValues = new List<ClassLimits>();
-
-            for (int i = 0; i < PropertyPanelMaxClassCount; i++)
+            
+            for (int classOrdinal = 1; classOrdinal < 11; classOrdinal++)
             {
                 float start, end;
                 string start_str, end_str, key_Start, key_End;
 
-                start_str = _dictionary.Values.ToList()[i];
-                end_str = _dictionary.Values.ToList()[i + PropertyPanelMaxClassCount];
-                key_Start = _dictionary.Keys.ToList()[i];
-                key_End = _dictionary.Keys.ToList()[i + PropertyPanelMaxClassCount];
+                key_Start = "rampStart" + string.Format("{0:D2}", classOrdinal);
+                key_End = "rampEnd" + string.Format("{0:D2}", classOrdinal);
+
+                start_str = GetAt(key_Start);
+                end_str = GetAt(key_End);
 
                 if (float.TryParse(start_str, out start) && float.TryParse(end_str, out end))
                 {
                     _rangeValues.Add(new ClassLimits(start, end, key_Start, key_End));
+                }
+                else
+                {
+                    return _rangeValues;
                 }
             }
 
             return _rangeValues;
         }
 
-        /// <summary>
-        /// Use the whole leg class desc tex hox to get its text    
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public string GetWithKey(string key)
+        public string GetAt(string key)
         {
             if (_dictionary.ContainsKey(key) == false)
             {
@@ -64,11 +92,6 @@ namespace EpiDashboard.Mapping
             return _dictionary[key];
         }
 
-        /// <summary>
-        ///  Use the numeric part of the leg class desc text hox to get its text    
-        /// </summary>
-        /// <param name="pos"></param>
-        /// <returns></returns>
         public string GetAt(int pos)
         {
 
@@ -96,30 +119,22 @@ namespace EpiDashboard.Mapping
 
         internal int GetClassLevelWithKey(string name)
         {
-            int index = 0;
-
+            int result = -1;
+            
             if (_dictionary.ContainsKey(name) == false)
             {
-                return -1;
+                return result;
             }
 
-            foreach(string key in _dictionary.Keys)
-            {
-                if (key == name)
-                {
-                    break;
-                }
-                index++;
-            }
+            string parse = name.Replace("rampStart", "").Replace("rampEnd", "");
 
-            int indexOfFirstEnd = _dictionary.Count / 2;
+            int.TryParse(parse, out result);
 
-            return index % indexOfFirstEnd;
+            return result - 1;
         }
 
         internal ClassLimitType GetLimitTypeWithKey(string name)
         {
-            int index = 0;
             ClassLimitType limitType = ClassLimitType.Indeterminate;
 
             if (_dictionary.ContainsKey(name) == false)
@@ -127,16 +142,7 @@ namespace EpiDashboard.Mapping
                 return limitType;
             }
 
-            foreach (string key in _dictionary.Keys)
-            {
-                if (key == name)
-                {
-                    break;
-                }
-                index++;
-            }
-
-            if (index < PropertyPanelMaxClassCount)
+            if (name.Contains("Start"))
             {
                 return ClassLimitType.Start;
             }
@@ -166,6 +172,32 @@ namespace EpiDashboard.Mapping
                 else
                 {
                     _dictionary[classLimits.Key_End] = string.Empty;
+                }
+            }
+        }
+
+        internal void SetRangesDictionary(string[,] rangeValues)
+        {
+            int classOrdinal = 1;
+            string limitType = "rampStart";
+            string compound = string.Empty;
+            _dictionary.Clear();
+
+            foreach (string value in rangeValues)
+            {
+                if (value == null) break;
+                
+                compound = limitType + string.Format("{0:D2}", classOrdinal);
+                _dictionary.Add(compound, value);
+
+                if (limitType == "rampStart")
+                {
+                    limitType = "rampEnd";
+                }
+                else
+                {
+                    limitType = "rampStart";
+                    classOrdinal++;
                 }
             }
         }

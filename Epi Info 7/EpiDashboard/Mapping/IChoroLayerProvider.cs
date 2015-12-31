@@ -12,21 +12,20 @@ namespace EpiDashboard.Mapping
         byte Opacity { get; set; }
 
         CustomColorsDictionary CustomColorsDictionary { get; }
-        ClassRangesDictionary ClassRangesDictionary { get; }
+        ClassRangeDictionary ClassRangesDictionary { get; }
 
         string PopulateRangeValues();
         string PopulateRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string text);
 
-        bool AreRangesSet { get; set; }
         string[,] RangeValues { get; set; }
 
         bool UseCustomColors { get; set; }
         StackPanel LegendStackPanel { get; set; }
         int RangeCount { get; set; }
-        List<double> Range { get; set; }
+        List<double> RangeStarts_FromControls { get; set; }
         ListLegendTextDictionary ListLegendText { get; set; }
         bool RangesLoadedFromMapFile { get; set; }
-        bool AsQuantiles { get; set; }
+        bool UseQuantiles { get; set; }
         Guid _layerId { get; set; }
         void SetShapeRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string missingText, string legendText);
         void ResetRangeValues(string toString, string s, string toString1, int classCount);
@@ -34,7 +33,6 @@ namespace EpiDashboard.Mapping
         object[] Load(string boundrySourceLocation);
         string LegendText { get; set; }
 
-        bool UseCustomRanges { get; set; }
     }
 }
 
