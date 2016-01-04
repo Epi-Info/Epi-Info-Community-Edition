@@ -828,11 +828,85 @@ namespace EpiDashboard.Controls
 
         public void SetClassAttributes(Dictionary<int, object> classAttrib)
         {
-
             foreach (int key in classAttrib.Keys)
             {
                 var item = classAttrib.ElementAt(key - 1);
                 classAttributes itemvalue = (classAttributes)item.Value;
+
+                if (key == 1)
+                {
+                    rctColor1.Fill = (Brush)itemvalue.rctColor;
+                    rampStart01.Text = itemvalue.rampStart;
+                    rampEnd01.Text = itemvalue.rampEnd;
+                    legendText1.Text = itemvalue.legendText;
+                }
+                else if (key == 2)
+                {
+                    rctColor2.Fill = (Brush)itemvalue.rctColor;
+                    rampStart02.Text = itemvalue.rampStart;
+                    rampEnd02.Text = itemvalue.rampEnd;
+                    legendText2.Text = itemvalue.legendText;
+                }
+                else if (key == 3)
+                {
+                    rctColor3.Fill = (Brush)itemvalue.rctColor;
+                    rampStart03.Text = itemvalue.rampStart;
+                    rampEnd03.Text = itemvalue.rampEnd;
+                    legendText3.Text = itemvalue.legendText;
+                }
+                else if (key == 4)
+                {
+                    rctColor4.Fill = (Brush)itemvalue.rctColor;
+                    rampStart04.Text = itemvalue.rampStart;
+                    rampEnd04.Text = itemvalue.rampEnd;
+                    legendText4.Text = itemvalue.legendText;
+                }
+                else if (key == 5)
+                {
+                    rctColor5.Fill = (Brush)itemvalue.rctColor;
+                    rampStart05.Text = itemvalue.rampStart;
+                    rampEnd05.Text = itemvalue.rampEnd;
+                    legendText5.Text = itemvalue.legendText;
+
+                }
+                else if (key == 6)
+                {
+                    rctColor6.Fill = (Brush)itemvalue.rctColor;
+                    rampStart06.Text = itemvalue.rampStart;
+                    rampEnd06.Text = itemvalue.rampEnd;
+                    legendText6.Text = itemvalue.legendText;
+
+                }
+                else if (key == 7)
+                {
+                    rctColor7.Fill = (Brush)itemvalue.rctColor;
+                    rampStart07.Text = itemvalue.rampStart;
+                    rampEnd07.Text = itemvalue.rampEnd;
+                    legendText7.Text = itemvalue.legendText;
+                }
+                else if (key == 8)
+                {
+                    rctColor8.Fill = (Brush)itemvalue.rctColor;
+                    rampStart08.Text = itemvalue.rampStart;
+                    rampEnd08.Text = itemvalue.rampEnd;
+                    legendText8.Text = itemvalue.legendText;
+
+                }
+                else if (key == 9)
+                {
+                    rctColor9.Fill = (Brush)itemvalue.rctColor;
+                    rampStart09.Text = itemvalue.rampStart;
+                    rampEnd09.Text = itemvalue.rampEnd;
+                    legendText9.Text = itemvalue.legendText;
+
+                }
+                else if (key == 10)
+                {
+                    rctColor10.Fill = (Brush)itemvalue.rctColor;
+                    rampStart10.Text = itemvalue.rampStart;
+                    rampEnd10.Text = itemvalue.rampEnd;
+                    legendText10.Text = itemvalue.legendText;
+                }
             }
         }
 
