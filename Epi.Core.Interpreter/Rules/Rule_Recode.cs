@@ -360,11 +360,17 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             object RHSO = null;
 
             object fromValue = null;
+            if (pValue.ToString().Contains("- "))
+            {
+                object newval = pValue.ToString().Substring(0, pValue.ToString().IndexOf("-"));
+                pValue = newval;
+            }
+
             if (this.fromValue is Rule_Value)
             {
                 fromValue = ((Rule_Value)this.fromValue).Execute();
             }
-            if (this.fromValue is Rule_NegateExp)
+            else if (this.fromValue is Rule_NegateExp)
             {
                 fromValue = ((Rule_NegateExp)this.fromValue).Execute();
             }
