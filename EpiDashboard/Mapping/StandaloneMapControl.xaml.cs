@@ -2129,11 +2129,6 @@ namespace EpiDashboard.Mapping
                 }
             }
 
-            if (choroplethlayerprop.classAttribList != null)
-            { 
-                choroplethproperties.SetClassAttributes(choroplethlayerprop.classAttribList); 
-            }
-            
             choroplethproperties.FillComboBoxes();
 
             choroplethproperties.panelBoundaries.IsEnabled = true;
@@ -2149,6 +2144,11 @@ namespace EpiDashboard.Mapping
             choroplethproperties.rctHighColor.Fill = choroplethlayerprop.rctHighColor.Fill;
             choroplethproperties.rctLowColor.Fill = choroplethlayerprop.rctLowColor.Fill;
             choroplethproperties.rctMissingColor.Fill = choroplethlayerprop.rctMissingColor.Fill;
+
+            if (choroplethlayerprop.classAttribList != null)
+            { 
+                choroplethproperties.SetClassAttributes(choroplethlayerprop.classAttribList); 
+            }
 
             choroplethlayerprop.FlagRunEdit = true;
 
