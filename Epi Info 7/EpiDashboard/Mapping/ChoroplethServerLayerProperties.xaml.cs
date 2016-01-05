@@ -19,7 +19,7 @@ namespace EpiDashboard.Mapping
     /// <summary>
     /// Interaction logic for ChoroplethLayerProperties.xaml
     /// </summary>
-    public partial class ChoroplethServerLayerProperties : UserControl, ILayerProperties
+    public partial class ChoroplethServerLayerProperties : ChoroplethLayerPropertiesUserControlBase, ILayerProperties
     {
         private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
