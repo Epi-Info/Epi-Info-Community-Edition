@@ -1741,37 +1741,21 @@ namespace EpiDashboard.Mapping
                 nav.Visibility = Visibility.Collapsed;
                 grdLayerTypeChooser.Visibility = Visibility.Collapsed;
                 grdBaseMap.Visibility = Visibility.Collapsed;
-                if (grdLegend.Margin.Left < 0)
-                    grdLegend.Visibility = Visibility.Collapsed;
 
+                if (grdLegend.Margin.Left < 0)
+                {
+                    grdLegend.Visibility = Visibility.Collapsed;
+                }
 
                 DockPanel1.Visibility = Visibility.Collapsed;
                 StackPanel1.Visibility = Visibility.Collapsed;
 
-
-                //////////////
-
                 BitmapSource imgLayout = (BitmapSource)ToImageSource(LayoutRoot);
-
-                //BitmapSource img = (BitmapSource)ToImageSource(grdMapDef);
-
-                //BitmapSource imgLeg = (BitmapSource)ToImageSource(grdLegend);
-
-                //BitmapSource imgScale = (BitmapSource)ToImageSource(grdScale);
-
-
                 FileStream stream = new FileStream(dlg.FileName, FileMode.Create);
                 PngBitmapEncoder encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(imgLayout));
-                //encoder.Frames.Add(BitmapFrame.Create(imgScale)); 
-                //encoder.Frames.Add(BitmapFrame.Create(imgLeg));
-                //encoder.Frames.Add(BitmapFrame.Create(img));
-
-
 
                 encoder.Save(stream);
-
-                ////////////////////
 
                 stream.Close();
 
@@ -1779,8 +1763,11 @@ namespace EpiDashboard.Mapping
                 nav.Visibility = System.Windows.Visibility.Visible;
                 grdLayerTypeChooser.Visibility = Visibility.Visible;
                 grdBaseMap.Visibility = Visibility.Visible;
+
                 if (grdLegend.Visibility == Visibility.Collapsed)
+                {
                     grdLegend.Visibility = Visibility.Visible;
+                }
 
                 StackPanel1.Visibility = Visibility.Visible;
                 DockPanel1.Visibility = Visibility.Visible;

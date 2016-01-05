@@ -10,7 +10,7 @@ namespace EpiDashboard.Mapping
     /// <summary>
     /// Interaction logic for ChoroplethShapeLayerProperties.xaml
     /// </summary>
-    public partial class ChoroplethKmlLayerProperties : UserControl, ILayerProperties
+    public partial class ChoroplethKmlLayerProperties : ChoroplethLayerPropertiesUserControlBase, ILayerProperties
     {
         private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
@@ -244,7 +244,6 @@ namespace EpiDashboard.Mapping
             grdMain.Width = 700;
         }
 
-
         public void MakeReadOnly()
         {
             this.FontColor = Colors.Black;
@@ -257,212 +256,117 @@ namespace EpiDashboard.Mapping
 
         public System.Xml.XmlNode Serialize(System.Xml.XmlDocument doc)
         {
-            string connectionString = string.Empty;
-            string tableName = string.Empty;
-            string projectPath = string.Empty;
-            string viewName = string.Empty;
-            
-            if (dashboardHelper.View == null)
+            try
             {
-                connectionString = dashboardHelper.Database.ConnectionString;
-                tableName = dashboardHelper.TableName;
+                string dataKey = cbxDataKey.SelectedItem.ToString();
+                string shapeKey = cbxShapeKey.SelectedItem.ToString();
+                string value = cbxValue.SelectedItem.ToString();
+                string classCount = cbxClasses.SelectedIndex.ToString();
+                SolidColorBrush highColor = (SolidColorBrush)rctHighColor.Fill;
+                SolidColorBrush lowColor = (SolidColorBrush)rctLowColor.Fill;
+                SolidColorBrush missingColor = (SolidColorBrush)rctMissingColor.Fill;
+
+                string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile>" + Environment.NewLine;
+
+                System.Xml.XmlAttribute type = doc.CreateAttribute("layerType");
+                type.Value = "EpiDashboard.Mapping.ChoroplethKmlLayerProperties";
+
+                return ChoroplethLayerPropertiesUserControlBase.Serialize(
+                    doc,
+                    provider,
+                    dataKey,
+                    shapeKey,
+                    value,
+                    classCount,
+                    highColor,
+                    lowColor,
+                    missingColor,
+                    xmlString,
+                    dashboardHelper,
+                    type);
             }
-            else
+            catch (Exception e)
             {
-                projectPath = dashboardHelper.View.Project.FilePath;
-                viewName = dashboardHelper.View.Name;
+                throw new Exception(e.Message);
             }
-            
-            string dataKey = cbxDataKey.SelectedItem.ToString();
-            string shapeKey = cbxShapeKey.SelectedItem.ToString();
-            string value = cbxValue.SelectedItem.ToString();
-            
-            SolidColorBrush highColor = (SolidColorBrush)rctHighColor.Fill;
-            SolidColorBrush lowColor = (SolidColorBrush)rctLowColor.Fill;
-
-            string customColors = "";
-
-            if (provider.CustomColorsDictionary != null)
-            {
-                customColors = "<customColors>";
-
-                foreach (KeyValuePair<string, Color> keyValuePair in provider.CustomColorsDictionary.Dict)
-                {
-                    string customColor = "<" + keyValuePair.Key + ">";
-                    string color = keyValuePair.Value.R + "," + keyValuePair.Value.G + "," + keyValuePair.Value.B;
-                    customColor += color + "</" + keyValuePair.Key + ">";
-                    customColors += customColor;
-                }
-
-                customColors += "</customColors>";
-            }
-
-            string classTitles = "<classTitles> ";
-            long classTitleCount = 0;
-            string classTitleTagName = "";
-
-            foreach (KeyValuePair<string, string> entry in provider.ListLegendText.Dict)
-            {
-                classTitleTagName = entry.Key;
-                classTitles += string.Format("<{1}>{0}</{1}>", entry.Value, classTitleTagName);
-                classTitleCount++;
-            }
-
-            classTitles += "</classTitles> ";
-
-            string useCustomColors = "<useCustomColors>" + provider.UseCustomColors + "</useCustomColors>";
-
-            string classRanges = "";
-
-            if (provider.ClassRangesDictionary != null)
-            {
-                classRanges = "<classRanges>";
-
-                foreach (KeyValuePair<string, string> keyValuePair in provider.ClassRangesDictionary.RangeDictionary)
-                {
-                    string rangeName = "<" + keyValuePair.Key + ">";
-                    string rangeValue = keyValuePair.Value;
-                    rangeName += rangeValue + "</" + keyValuePair.Key + ">";
-                    classRanges += rangeName;
-                }
-
-                classRanges += "</classRanges>";
-            }
-
-            string asQuantileTag = "<asQuantiles>" + flagQuantiles + "</asQuantiles>";
-
-            string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() +
-                               "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor>" + customColors +
-                               asQuantileTag + "<classes>" + cbxClasses.SelectedIndex.ToString() + "</classes><dataKey>" +
-                               dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>" +
-                               classRanges + customColors + classTitles;
-
-            System.Xml.XmlElement element = doc.CreateElement("dataLayer");
-            element.InnerXml = xmlString;
-            element.AppendChild(dashboardHelper.Serialize(doc));
-
-            System.Xml.XmlAttribute type = doc.CreateAttribute("layerType");
-            type.Value = "EpiDashboard.Mapping.ChoroplethKmlLayerProperties";
-            element.Attributes.Append(type);
-
-            return element;
         }
 
         public void CreateFromXml(System.Xml.XmlElement element)
         {
-            currentElement = element;
-
             if (provider == null)
             {
                 provider = new ChoroplethKmlLayerProvider(myMap);
                 provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
             }
 
+            base.CreateFromXml(element, provider);
+
             foreach (System.Xml.XmlElement child in element.ChildNodes)
             {
                 if (child.Name.Equals("shapeFile"))
                 {
-                    provider.Load(child.InnerText);
-                }
-
-                if (child.Name.Equals("asQuantiles"))
-                {
-                    bool asQuantiles = false;
-                    bool.TryParse(child.InnerText, out asQuantiles);
-                    provider.UseQuantiles = asQuantiles;
-                }
-
-                if (child.Name.Equals("classTitles"))
-                {
-                    foreach (System.Xml.XmlElement classTitle in child)
+                    object[] shapeFileProperties = provider.Load(child.InnerText);
+                    if (shapeFileProperties != null)
                     {
-                        provider.ListLegendText.Add(classTitle.Name, classTitle.InnerText);
+                        if (shapeFileProperties.Length == 2)
+                        {
+                            shapeFilePath = shapeFileProperties[0].ToString();
+                            IDictionary<string, object> shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
+
+                            if (shapeAttributes != null)
+                            {
+                                cbxShapeKey.Items.Clear();
+                                foreach (string key in shapeAttributes.Keys)
+                                {
+                                    cbxShapeKey.Items.Add(key);
+                                }
+                            }
+                        }
                     }
                 }
 
-                if (child.Name.Equals("customColors"))
+                if (child.Name.Equals("dataKey"))
                 {
-                    provider.UseCustomColors = true;
-
-                    foreach (System.Xml.XmlElement color in child)
-                    {
-                        string rgb = color.InnerText;
-                        string[] co = rgb.Split(',');
-                        Color newColor = Color.FromRgb(byte.Parse(co[0]), byte.Parse(co[1]), byte.Parse(co[2]));
-                        provider.CustomColorsDictionary.Add(color.Name, newColor);
-                    }
-                }
- 
-                if (child.Name.Equals("classRanges"))
-                {
-                    foreach (System.Xml.XmlElement classRangElement in child)
-                    {
-                        provider.ClassRangesDictionary.Add(classRangElement.Name, classRangElement.InnerText);
-                    }
-
-                    List<double> rangeStartsFromMapFile = new List<double>();
-
-                    string doubleString = "";
-
-                    try
-                    {
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart01"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart02"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart03"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart04"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart05"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart06"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart07"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart08"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart09"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart10"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                    }
-                    catch { }
-
-                    provider.RangeStartsFromMapFile = rangeStartsFromMapFile;
-                    provider.RangesLoadedFromMapFile = true;
+                    cbxDataKey.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
+                    cbxDataKey.SelectedItem = child.InnerText;
+                    cbxDataKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
                 }
 
+                if (child.Name.Equals("shapeKey"))
+                {
+                    cbxShapeKey.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
+                    cbxShapeKey.SelectedItem = child.InnerText;
+                    cbxShapeKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
+                }
+
+                if (child.Name.Equals("classes"))
+                {
+                    cbxClasses.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
+                    cbxClasses.SelectedIndex = int.Parse(child.InnerText);
+                    cbxClasses.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
+                }
+
+                if (child.Name.Equals("value"))
+                {
+                    cbxValue.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
+                    cbxValue.SelectedItem = child.InnerText;
+                    cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
+                }
+
+                if (child.Name.Equals("highColor"))
+                {
+                    rctHighColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
+                }
+
+                if (child.Name.Equals("lowColor"))
+                {
+                    rctLowColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
+                }
+
+                if (child.Name.Equals("missingColor"))
+                {
+                    rctMissingColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
+                }
             }
         }
 
