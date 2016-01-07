@@ -10,22 +10,18 @@ namespace EpiDashboard.Mapping
 {
     public partial class ChoroplethShapeLayerProperties : ChoroplethLayerPropertiesUserControlBase, ILayerProperties
     {
-        private ESRI.ArcGIS.Client.Map myMap;
-        private DashboardHelper dashboardHelper;
         public ChoroplethShapeLayerProvider provider;
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
         public event EventHandler EditRequested;
 
-        private IMapControl mapControl;
-        public string shapeFilePath;
         public IDictionary<string, object> shapeAttributes;
         private bool flagrunedit;
         private int Numclasses;
-        public bool partitionSetUsingQuantiles;
+
         public DataFilters datafilters { get; set; }
-        public Dictionary<int, object> classAttribList;
+
 
         public enum ColorRampType
         {
@@ -167,7 +163,7 @@ namespace EpiDashboard.Mapping
             {
                 if (shapeFileProperties.Length == 2)
                 {
-                    shapeFilePath = shapeFileProperties[0].ToString();
+                    boundryFilePath = shapeFileProperties[0].ToString();
                     shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
                     if (shapeAttributes != null)
                     {
@@ -243,10 +239,10 @@ namespace EpiDashboard.Mapping
                     cbxShapeKey.Items.Add(key);
                 }
             }
-            classAttribList = classAttrib;
+            ClassAttributeList = classAttrib;
             partitionSetUsingQuantiles = quintilesChecked;
             Numclasses = numclasses;
-            shapeFilePath = shapefilepath;
+            boundryFilePath = shapefilepath;
             rctHighColor.Fill = (SolidColorBrush)Highcolor;
             rctLowColor.Fill = (SolidColorBrush)Lowcolor;
             rctMissingColor.Fill = (SolidColorBrush)Missingcolor;
@@ -270,7 +266,7 @@ namespace EpiDashboard.Mapping
                 SolidColorBrush lowColor = (SolidColorBrush)rctLowColor.Fill;
                 SolidColorBrush missingColor = (SolidColorBrush)rctMissingColor.Fill;
 
-                string xmlString = "<shapeFile>" + shapeFilePath + "</shapeFile>" + Environment.NewLine;
+                string xmlString = "<shapeFile>" + boundryFilePath + "</shapeFile>" + Environment.NewLine;
 
                 XmlAttribute type = doc.CreateAttribute("layerType");
                 type.Value = "EpiDashboard.Mapping.ChoroplethShapeLayerProperties";
@@ -313,7 +309,7 @@ namespace EpiDashboard.Mapping
                     {
                         if (shapeFileProperties.Length == 2)
                         {
-                            shapeFilePath = shapeFileProperties[0].ToString();
+                            boundryFilePath = shapeFileProperties[0].ToString();
                             IDictionary<string, object> shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
 
                             if (shapeAttributes != null)
@@ -377,41 +373,8 @@ namespace EpiDashboard.Mapping
 
         private void ChoroplethProperties_RenderMap()
         {
-            EpiDashboard.Controls.ChoroplethProperties choroplethprop = new Controls.ChoroplethProperties(this.mapControl as StandaloneMapControl, this.myMap);
-
-            choroplethprop.txtShapePath.Text = shapeFilePath;
-            choroplethprop.txtProjectPath.Text = dashboardHelper.Database.DataSource;
-            choroplethprop.SetDashboardHelper(dashboardHelper);
-            choroplethprop.cmbClasses.Text = cbxClasses.Text;
-            foreach (string str in cbxShapeKey.Items) { choroplethprop.cmbShapeKey.Items.Add(str); }
-            foreach (string str in cbxDataKey.Items) { choroplethprop.cmbDataKey.Items.Add(str); }
-            foreach (string str in cbxValue.Items) { choroplethprop.cmbValue.Items.Add(str); }
-
-            choroplethprop.cmbShapeKey.SelectedItem = cbxShapeKey.Text;
-            choroplethprop.cmbDataKey.SelectedItem = cbxDataKey.Text;
-
-            choroplethprop.cmbValue.SelectionChanged -= new System.Windows.Controls.SelectionChangedEventHandler(choroplethprop.cmbValue_SelectionChanged);
-            choroplethprop.cmbValue.SelectedItem = cbxValue.Text;
-            choroplethprop.cmbValue.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(choroplethprop.cmbValue_SelectionChanged);
-            
-            choroplethprop.rctHighColor.Fill = rctHighColor.Fill;
-            choroplethprop.rctLowColor.Fill = rctLowColor.Fill;
-            choroplethprop.rctMissingColor.Fill = rctMissingColor.Fill;
-            choroplethprop.radShapeFile.IsChecked = true;
-
-            choroplethprop.choroplethShapeLayerProvider = provider;
-            choroplethprop.thisProvider = provider;
-
-            choroplethprop.legTitle.Text = provider.LegendText;
-            choroplethprop.ListLegendText = provider.ListLegendText;
-
-            choroplethprop.SetProperties();
-  
-            choroplethprop.RenderMap();
+            base.ChoroplethProperties_RenderMap(provider);
         }
         #endregion
-
     }
-
-
 }

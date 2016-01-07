@@ -58,7 +58,72 @@ namespace EpiDashboard.Mapping
                 ArcGIS_Map.Layers.Add(shapeLayer);
 
                 ArcGIS_Map.Extent = shapeLayer.FullExtent;
-                return new object[] { shapeLayer };
+
+                //KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
+                GraphicsLayer graphicsLayer = GetGraphicsLayer(shapeLayer);
+
+                if (graphicsLayer != null)
+                {
+                    IDictionary<string, object> coreAttributes = graphicsLayer.Graphics[0].Attributes;
+                    Dictionary<string, object> allAttributes = new Dictionary<string, object>();
+
+                    foreach (KeyValuePair<string, object> attr in coreAttributes)
+                    {
+                        allAttributes.Add(attr.Key, attr.Value);
+                    }
+
+                    AddSchemaDataAttributes(_kmlURL, graphicsLayer.Graphics);
+
+                    if (graphicsLayer.Graphics[0].Attributes.ContainsKey("extendedData"))
+                    {
+                        List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicsLayer.Graphics[0].Attributes["extendedData"];
+
+                        foreach (KmlExtendedData ed in eds)
+                        {
+                            allAttributes.Add(ed.Name, ed.Value);
+                        }
+                    }
+
+                    if (FeatureLoaded != null)
+                    {
+                        FeatureLoaded(_kmlURL, allAttributes);
+                    }
+
+
+                    double xmin = graphicsLayer.Graphics[0].Geometry.Extent.XMin;
+                    double xmax = graphicsLayer.Graphics[0].Geometry.Extent.XMax;
+                    double ymin = graphicsLayer.Graphics[0].Geometry.Extent.YMin;
+                    double ymax = graphicsLayer.Graphics[0].Geometry.Extent.YMax;
+
+                    foreach (Graphic g in graphicsLayer.Graphics)
+                    {
+                        if (g.Geometry.Extent.XMin < xmin)
+                            xmin = g.Geometry.Extent.XMin;
+
+                        if (g.Geometry.Extent.YMin < ymin)
+                            ymin = g.Geometry.Extent.YMin;
+
+                        if (g.Geometry.Extent.XMax > xmax)
+                            xmax = g.Geometry.Extent.XMax;
+
+                        if (g.Geometry.Extent.YMax > ymax)
+                            ymax = g.Geometry.Extent.YMax;
+                    }
+
+                    ArcGIS_Map.Extent = new Envelope(
+                        ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)),
+                        ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5))
+                        );
+                }
+
+                if (graphicsLayer == null)
+                {
+                    return new object[] { boundrySourceLocation, null };
+                }
+                else
+                {
+                    return new object[] { boundrySourceLocation, graphicsLayer.Graphics[0].Attributes };
+                }
             }
             else 
             { 
@@ -75,7 +140,7 @@ namespace EpiDashboard.Mapping
             {
                 IDictionary<string, object> coreAttributes = graphicsLayer.Graphics[0].Attributes;
                 Dictionary<string, object> allAttributes = new Dictionary<string, object>();
-                
+
                 foreach (KeyValuePair<string, object> attr in coreAttributes)
                 {
                     allAttributes.Add(attr.Key, attr.Value);
@@ -86,7 +151,7 @@ namespace EpiDashboard.Mapping
                 if (graphicsLayer.Graphics[0].Attributes.ContainsKey("extendedData"))
                 {
                     List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicsLayer.Graphics[0].Attributes["extendedData"];
-                    
+
                     foreach (KmlExtendedData ed in eds)
                     {
                         allAttributes.Add(ed.Name, ed.Value);
@@ -119,7 +184,10 @@ namespace EpiDashboard.Mapping
                     ymax = g.Geometry.Extent.YMax;
             }
 
-            ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5)));
+            ArcGIS_Map.Extent = new Envelope(
+                ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)),
+                ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5))
+                );
         }
 
         private void AddSchemaDataAttributes(string _kmlURL, GraphicCollection graphics)

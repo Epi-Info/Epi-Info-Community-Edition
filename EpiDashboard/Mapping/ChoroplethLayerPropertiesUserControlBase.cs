@@ -10,6 +10,19 @@ namespace EpiDashboard.Mapping
 {
     public class ChoroplethLayerPropertiesUserControlBase : UserControl
     {
+        public ESRI.ArcGIS.Client.Map myMap;
+        public DashboardHelper dashboardHelper;
+        public string boundryFilePath;
+        public IMapControl mapControl;
+        public bool partitionSetUsingQuantiles;
+
+        private Dictionary<int, object> _classAttribList;
+        public Dictionary<int, object> ClassAttributeList
+        {
+            get { return _classAttribList; }
+            set { _classAttribList = value; }
+        }
+
         public void CreateFromXml(System.Xml.XmlElement element, ChoroplethLayerProvider provider)
         {
             foreach (System.Xml.XmlElement child in element.ChildNodes)
@@ -205,6 +218,55 @@ namespace EpiDashboard.Mapping
             {
                 throw new Exception(e.Message);
             }
+        }
+
+        protected void ChoroplethProperties_RenderMap(ChoroplethLayerProvider provider)
+        {
+            dynamic layerPropertiesControl = this;
+
+            EpiDashboard.Controls.ChoroplethProperties choroplethprop = new Controls.ChoroplethProperties(mapControl as StandaloneMapControl, myMap);
+
+            choroplethprop.txtShapePath.Text = boundryFilePath;
+            choroplethprop.txtProjectPath.Text = dashboardHelper.Database.DataSource;
+            choroplethprop.SetDashboardHelper(dashboardHelper);
+            choroplethprop.cmbClasses.Text = layerPropertiesControl.cbxClasses.Text;
+            foreach (string str in layerPropertiesControl.cbxShapeKey.Items) { choroplethprop.cmbShapeKey.Items.Add(str); }
+            foreach (string str in layerPropertiesControl.cbxDataKey.Items) { choroplethprop.cmbDataKey.Items.Add(str); }
+            foreach (string str in layerPropertiesControl.cbxValue.Items) { choroplethprop.cmbValue.Items.Add(str); }
+
+            choroplethprop.cmbShapeKey.SelectedItem = layerPropertiesControl.cbxShapeKey.Text;
+            choroplethprop.cmbDataKey.SelectedItem = layerPropertiesControl.cbxDataKey.Text;
+
+            choroplethprop.cmbValue.SelectionChanged -= new System.Windows.Controls.SelectionChangedEventHandler(choroplethprop.cmbValue_SelectionChanged);
+            choroplethprop.cmbValue.SelectedItem = layerPropertiesControl.cbxValue.Text;
+            choroplethprop.cmbValue.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(choroplethprop.cmbValue_SelectionChanged);
+
+            choroplethprop.rctHighColor.Fill = layerPropertiesControl.rctHighColor.Fill;
+            choroplethprop.rctLowColor.Fill = layerPropertiesControl.rctLowColor.Fill;
+            choroplethprop.rctMissingColor.Fill = layerPropertiesControl.rctMissingColor.Fill;
+            choroplethprop.radShapeFile.IsChecked = true;
+
+            if(provider is ChoroplethShapeLayerProvider)
+            {
+                choroplethprop.choroplethShapeLayerProvider = (ChoroplethShapeLayerProvider)provider;
+            }
+            else if (provider is ChoroplethKmlLayerProvider)
+            {
+                choroplethprop.choroplethKmlLayerProvider = (ChoroplethKmlLayerProvider)provider;
+            }
+            else if (provider is ChoroplethServerLayerProvider)
+            {
+                choroplethprop.choroplethServerLayerProvider = (ChoroplethServerLayerProvider)provider;
+            }
+
+            choroplethprop.thisProvider = provider;
+
+            choroplethprop.legTitle.Text = provider.LegendText;
+            choroplethprop.ListLegendText = provider.ListLegendText;
+
+            choroplethprop.SetProperties();
+
+            choroplethprop.RenderMap();
         }
     }
 }
