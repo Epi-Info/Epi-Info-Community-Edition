@@ -517,7 +517,25 @@ namespace Epi.Data.Services
         {
             return dbDriver.GetTableColumnNames(tableName);
         }
-
+        /// <summary>
+        /// Get table name
+        /// </summary>
+        /// <param name="columnName">Name of the column.</param>
+        ///  <param name="view">view object.</param>
+        /// <returns>Table name that holds column name.</returns>
+        public Page GetTableName(string columnName, View view)
+        {
+            Page Page = new Page();
+            foreach (Page page in view.Pages)
+            {
+                if (page.Fields.Contains(columnName)) 
+                {
+                    Page = page;
+                    break;
+                }
+            }
+            return Page;
+        }
         /// <summary>
         /// Creates physical database.
         /// </summary>
@@ -1832,9 +1850,22 @@ namespace Epi.Data.Services
 
                 string selectText = "SELECT baseTable.GlobalRecordId FROM ";
                 string joinText = Util.InsertInSquareBrackets(view.TableName) + " baseTable ";
-                
-                foreach (Page page in view.Pages)
+                //////////EI-674 start
+                List<Page> Pages = new List<Page>();
+                foreach (var columnName in searchFields)
                 {
+                    Page NewPage = GetTableName(columnName, view);
+                    if (!Pages.Contains(NewPage))
+                    {
+                        Pages.Add(NewPage);
+                    }
+                }
+                
+                //foreach (Page page in view.Pages)
+                //{
+                foreach (Page page in Pages)
+                {
+                    //////////EI-674 End
                     string tableVarName = " pageTable" + page.Id.ToString();
                     
                     string join = "("
