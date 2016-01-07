@@ -159,15 +159,18 @@ namespace EpiDashboard.Mapping
         void btnShapeFile_Click(object sender, RoutedEventArgs e)
         {
             object[] shapeFileProperties = provider.Load();
+            
             if (shapeFileProperties != null)
             {
                 if (shapeFileProperties.Length == 2)
                 {
                     boundryFilePath = shapeFileProperties[0].ToString();
                     shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
+                    
                     if (shapeAttributes != null)
                     {
                         cbxShapeKey.Items.Clear();
+                        
                         foreach (string key in shapeAttributes.Keys)
                         {
                             cbxShapeKey.Items.Add(key);
@@ -231,6 +234,7 @@ namespace EpiDashboard.Mapping
             Dictionary<int, object> classAttrib, bool quintilesChecked, int numclasses, string LegendText)
         {
             FillComboBoxes();
+            
             if (shapeAttributes != null)
             {
                 cbxShapeKey.Items.Clear();
@@ -239,6 +243,7 @@ namespace EpiDashboard.Mapping
                     cbxShapeKey.Items.Add(key);
                 }
             }
+            
             ClassAttributeList = classAttrib;
             partitionSetUsingQuantiles = quintilesChecked;
             Numclasses = numclasses;
@@ -374,6 +379,11 @@ namespace EpiDashboard.Mapping
         private void ChoroplethProperties_RenderMap()
         {
             base.ChoroplethProperties_RenderMap(provider);
+            
+            if (MapGenerated != null)
+            {
+                MapGenerated(this, new EventArgs());
+            }
         }
         #endregion
     }

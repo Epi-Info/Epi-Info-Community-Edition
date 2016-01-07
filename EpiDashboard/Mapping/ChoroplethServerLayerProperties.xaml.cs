@@ -57,9 +57,6 @@ namespace EpiDashboard.Mapping
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-            //provider = new ChoroplethServerLayerProvider(myMap);
-            //provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
-
             FillComboBoxes();
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
                        
@@ -67,9 +64,7 @@ namespace EpiDashboard.Mapping
             cbxShapeKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxClasses.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
-            //rctMissingColor.MouseUp += new MouseButtonEventHandler(rctMissingColor_MouseUp);
-            //rctHighColor.MouseUp += new MouseButtonEventHandler(rctHighColor_MouseUp);
-            //rctLowColor.MouseUp += new MouseButtonEventHandler(rctLowColor_MouseUp);
+
             rctEdit.MouseUp += new MouseButtonEventHandler(rctEdit_MouseUp);
 
             #region translation;
@@ -82,13 +77,13 @@ namespace EpiDashboard.Mapping
             lblLoValueColor.Content = DashboardSharedStrings.GADGET_LOW_VALUE_COLOR;
             lblHiValueColor.Content = DashboardSharedStrings.GADGET_HIGH_VALUE_COLOR;
             rctEditToolTip.Content = DashboardSharedStrings.MAP_LAYER_EDIT;
-            #endregion; //translation
-
+            #endregion; 
         }
 
         private void rctMissingColor_MouseUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 rctMissingColor.Fill = new SolidColorBrush(Color.FromArgb(0xF0, dialog.Color.R, dialog.Color.G, dialog.Color.B));
@@ -111,6 +106,7 @@ namespace EpiDashboard.Mapping
                     }
                 }
             }
+            
             if (currentElement != null)
             {
                 foreach (System.Xml.XmlElement child in currentElement.ChildNodes)
@@ -142,12 +138,12 @@ namespace EpiDashboard.Mapping
                     if (child.Name.Equals("selectMapFeature"))
                     {
                         cbxMapFeatureText = child.InnerText;
+                    }
                 }
-                }
+                
                 ChoroplethProperties_RenderMap();
             }
         }
-
 
         void rctFilter_MouseUp(object sender, MouseButtonEventArgs e)
         {

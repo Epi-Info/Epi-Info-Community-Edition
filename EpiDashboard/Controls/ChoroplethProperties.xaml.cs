@@ -991,6 +991,7 @@ namespace EpiDashboard.Controls
                         missingText,
                         legTitle.Text);
                 }
+
             }
         }
 

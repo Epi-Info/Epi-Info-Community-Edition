@@ -412,6 +412,11 @@ namespace EpiDashboard.Mapping
         private void ChoroplethProperties_RenderMap()
         {
             base.ChoroplethProperties_RenderMap(provider);
+
+            if (MapGenerated != null)
+            {
+                MapGenerated(this, new EventArgs());
+            }
         }
         #endregion
     }
