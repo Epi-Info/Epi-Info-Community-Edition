@@ -475,7 +475,7 @@ namespace EpiDashboard.Controls
                             numclasses,
                             legTitle.Text);
                     }
-                    else if (radMapServer.IsChecked == true && choroplethServerLayerProvider != null)
+                    else if (radMapServer.IsChecked == true && thisProvider != null)
                     {
                         choroplethServerLayerProperties.SetValues(
                             cmbShapeKey.Text,
@@ -495,7 +495,7 @@ namespace EpiDashboard.Controls
                         choroplethServerLayerProperties.cbxMapFeatureText = cbxmapfeature.Text;
                     }
 
-                    else if (radKML.IsChecked == true && choroplethKmlLayerProvider != null)
+                    else if (radKML.IsChecked == true && thisProvider != null)
                     {
                         choroplethKmlLayerProperties.SetValues(
                             cmbShapeKey.Text, 
@@ -1792,7 +1792,7 @@ namespace EpiDashboard.Controls
                 if (shapeFileProperties.Length == 2)
                 {
                     txtShapePath.Text = shapeFileProperties[0].ToString();
-                    choroplethShapeLayerProperties.shapeFilePath = shapeFileProperties[0].ToString();
+                    choroplethShapeLayerProperties.boundryFilePath = shapeFileProperties[0].ToString();
                     choroplethShapeLayerProperties.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
                     shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
 
@@ -1848,7 +1848,7 @@ namespace EpiDashboard.Controls
                     this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
                 }
                 
-                choroplethKmlLayerProperties.shapeFilePath = KMLMapServerName;
+                choroplethKmlLayerProperties.boundryFilePath = KMLMapServerName;
                 choroplethKmlLayerProperties.provider = choroplethKmlLayerProvider;
                 choroplethKmlLayerProperties.provider.FeatureLoaded += new FeatureLoadedHandler(choroplethKmlLayerProperties.provider_FeatureLoaded);
                 
@@ -1893,7 +1893,7 @@ namespace EpiDashboard.Controls
                             this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
                         }
                         
-                        choroplethServerLayerProperties.shapeFilePath = MapServerName;
+                        choroplethServerLayerProperties.boundryFilePath = MapServerName;
                         choroplethServerLayerProperties.provider = choroplethServerLayerProvider;
                         choroplethServerLayerProperties.provider.FeatureLoaded += new FeatureLoadedHandler(choroplethServerLayerProperties.provider_FeatureLoaded);
 

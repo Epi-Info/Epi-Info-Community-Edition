@@ -56,7 +56,7 @@ namespace EpiDashboard.Mapping
                 {
                     ArcGIS_Map.Layers.Remove(graphicsLayer);
                 }
-                
+
                 graphicsLayer = new FeatureLayer();
                 graphicsLayer.ID = _layerId.ToString();
                 graphicsLayer.UpdateCompleted += new EventHandler(graphicsLayer_UpdateCompleted);
@@ -97,12 +97,16 @@ namespace EpiDashboard.Mapping
                 {
                     graphicsLayer.Url = boundrySourceLocation;
                 }
+
                 ArcGIS_Map.Layers.Add(graphicsLayer);
                 ArcGIS_Map.Cursor = Cursors.Wait;
-                return new object[] { graphicsLayer };
+
+                return new object[] { boundrySourceLocation, graphicsLayer };
             }
             else
+            {
                 return null;
+            }
         }
 
         void graphicsLayer_UpdateFailed(object sender, TaskFailedEventArgs e)
