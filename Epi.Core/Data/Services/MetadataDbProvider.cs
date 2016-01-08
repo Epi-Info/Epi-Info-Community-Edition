@@ -1083,7 +1083,7 @@ namespace Epi.Data.Services
                     "F.[ShouldRepeatLast], F.[IsRequired], F.[IsReadOnly],  " +
                     "F.[ShouldRetainImageSize], F.[Pattern], F.[MaxLength], F.[ShowTextOnRight], " +
                     "F.[Lower], F.[Upper], F.[RelateCondition], F.[ShouldReturnToParent], F.[RelatedViewId], F.[List]," +
-                    "F.[SourceTableName], F.[CodeColumnName], F.[TextColumnName], " +
+                    "F.[SourceTableName], F.[CodeColumnName], F.[TextColumnName],  F.[BackgroundColor], " +
                     "F.[Sort], F.[IsExclusiveTable], F.[TabIndex], F.[HasTabStop],F.[SourceFieldId] " +
                     "from ((metaFields F " +
                     "LEFT JOIN metaPages P on P.[PageId] = F.[PageId]) " +
