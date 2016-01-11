@@ -264,9 +264,14 @@ namespace EpiDashboard.Mapping
 
         public List<double> CalculateRangeStarts(int classCount, ThematicItem thematicItem, List<double> valueList)
         {
-            if (classCount > valueList.Count)
+            List<double> uniqueValues = valueList
+                .Select(e => e)
+                .Distinct()
+                .ToList();
+
+            if (classCount > uniqueValues.Count)
             {
-                throw new System.ArgumentException(string.Format("There are {0} classes but only {1} values to map.", classCount, valueList.Count));
+                throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
             }
             
             List<double> rangeStarts = new List<double>();
@@ -596,7 +601,9 @@ namespace EpiDashboard.Mapping
                 shapeValue = GetShapeValue(graphicFeature, shapeValue);
 
                 if (usedShapeValues.Contains(shapeValue))
+                {
                     continue;
+                }
 
                 usedShapeValues.Add(shapeValue);
 
@@ -637,6 +644,10 @@ namespace EpiDashboard.Mapping
                         else if (found is double)
                         {
                             graphicValue = (Double)found;
+                        }
+                        else
+                        {
+                            graphicValue = Convert.ToDouble(found);
                         }
                     }
                 }

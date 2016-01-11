@@ -3156,6 +3156,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are not enough values in the value field selected to generate {0} classes..
+        /// </summary>
+        public static string GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES {
+            get {
+                return ResourceManager.GetString("GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Opacity.
         /// </summary>
         public static string GADGET_MAP_OPACITY {

@@ -561,6 +561,7 @@ namespace EpiDashboard.Controls
                 this.DashboardHelper = _dashboardHelper;
                 txtProjectPath.Text = _mapControl.ProjectFilepath;
                 FillComboBoxes();
+                validationText.Text = string.Empty;
                 panelBoundaries.IsEnabled = true;
                 radShapeFile.IsChecked = true;
                 this.datafilters = new DataFilters(_dashboardHelper);
