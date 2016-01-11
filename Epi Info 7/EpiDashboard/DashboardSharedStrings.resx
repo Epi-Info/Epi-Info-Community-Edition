@@ -2041,4 +2041,7 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_LEGEND_DESCRIPTION" xml:space="preserve">
     <value>Legend Description:</value>
   </data>
+  <data name="GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES" xml:space="preserve">
+    <value>There are not enough values in the value field selected to generate {0} classes.</value>
+  </data>
 </root>

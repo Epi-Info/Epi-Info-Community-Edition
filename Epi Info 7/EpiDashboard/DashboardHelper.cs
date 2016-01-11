@@ -455,7 +455,10 @@ namespace EpiDashboard
                         viewName = child.InnerText;
                         break;
                     case "connectionstring":
-                        if (!string.IsNullOrEmpty(child.InnerText)) { connectionString = Configuration.Decrypt(child.InnerText); }
+                        if (!string.IsNullOrEmpty(child.InnerText)) 
+                        { 
+                            connectionString = Configuration.Decrypt(child.InnerText); 
+                        }
                         break;
                     case "tablename":
                         table = child.InnerText.Replace("&amp;", "&");
