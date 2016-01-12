@@ -1084,6 +1084,7 @@ namespace Epi.Windows.MakeView.Dialogs
                 //{
                 // this.OrganizationKey = inputDialog.OrganizationKey;
                 this.txtOrganizationKey.Text = this.OrganizationKey;
+                this.txtOrganizationKey.Enabled = false;
 
                 // Epi.Web.Enter.Common.Message.SurveyInfoRequest Request = new Epi.Web.Enter.Common.Message.SurveyInfoRequest();
                 EWEManagerService.SurveyInfoRequest Request = new EWEManagerService.SurveyInfoRequest();
