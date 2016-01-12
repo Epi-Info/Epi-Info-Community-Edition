@@ -454,7 +454,7 @@ namespace Epi
                 }
 
 
-                if (pageName.IndexOf(". ") > -1)
+                if (pageName.IndexOf(".") > -1)//EI-683
                 {
                     validationStatus = SharedStrings.INVALID_PAGE_NAME;
                     valid = false;
