@@ -430,14 +430,14 @@ namespace EpiDashboard.Mapping
                 inputVariableList.Add("maxrows", "500");
 
                 gadgetOptions.InputVariableList = inputVariableList;
-                loadedData = dashboardHelper.GenerateFrequencyTable(gadgetOptions).First().Key;
+                loadedData = dashboardHelper.GenerateFrequencyTableforMap(gadgetOptions).First().Key;
 
                 foreach (DataRow dr in loadedData.Rows)
                 {
                     dr[0] = dr[0].ToString().Trim();
                 }
 
-                valueField = "freq";
+                _valueField = "freq";
             }
             else
             {
@@ -712,6 +712,10 @@ namespace EpiDashboard.Mapping
                 if(colors != null) _colors = colors;
 
                 DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
+
+                if (_valueField == "{Record Count}") _valueField = "freq";
+
+
                 GraphicsLayer graphicsLayer = GetGraphicsLayer();
 
                 _thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
@@ -752,7 +756,7 @@ namespace EpiDashboard.Mapping
                         double graphicValue = Double.PositiveInfinity;
                         try
                         {
-                            graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][valueField]);
+                            graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][_valueField]);
                         }
                         catch (Exception)
                         {
