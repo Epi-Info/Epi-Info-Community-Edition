@@ -396,7 +396,10 @@ namespace Epi.Analysis.Statistics
 
                     HTMLString.Append("<table cellpadding=\"2\">");
                     HTMLString.Append("<tr><th>");
-                    HTMLString.Append(Key.Key);
+                    if (this.Context.EpiViewVariableList.ContainsKey(Key.Key) && this.config.Settings.ShowCompletePrompt)
+                        HTMLString.Append(this.Context.EpiViewVariableList[Key.Key].Prompt);
+                    else
+                        HTMLString.Append(Key.Key);
                     HTMLString.Append("</th><th>Frequency</th><th>Percent</th><th>Cum. Percent</th><th style=\"width:100px\">&nbsp;</th></tr>");
                     double AccumulatedTotal = 0;
                     List<ConfLimit> confLimits = new List<ConfLimit>();
