@@ -165,9 +165,8 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             // 
             resources.ApplyResources(this.cbxAvailVariables, "cbxAvailVariables");
             this.cbxAvailVariables.Name = "cbxAvailVariables";
-            this.cbxAvailVariables.SelectedIndexChanged += new System.EventHandler(this.cbxAvailVariables_SelectedIndexChanged);
-            //--EI-149
             this.cbxAvailVariables.Sorted = true;
+            this.cbxAvailVariables.SelectedIndexChanged += new System.EventHandler(this.cbxAvailVariables_SelectedIndexChanged);
             // 
             // lblAvailableVariables
             // 
@@ -191,9 +190,8 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             // 
             resources.ApplyResources(this.cbxAssignVariable, "cbxAssignVariable");
             this.cbxAssignVariable.Name = "cbxAssignVariable";
-            this.cbxAssignVariable.SelectedIndexChanged += new System.EventHandler(this.cbxAssignVariable_SelectedIndexChanged);
-            //--EI-149
             this.cbxAssignVariable.Sorted = true;
+            this.cbxAssignVariable.SelectedIndexChanged += new System.EventHandler(this.cbxAssignVariable_SelectedIndexChanged);
             // 
             // lblAssignTo
             // 
