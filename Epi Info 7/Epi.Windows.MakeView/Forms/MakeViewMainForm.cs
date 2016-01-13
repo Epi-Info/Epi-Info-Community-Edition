@@ -3231,11 +3231,15 @@ namespace Epi.Windows.MakeView.Forms
             {
                 DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(view.Id);
 
-                DataRow ViewRow = table.Rows[0];
-
-                if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[2].ToString()))
+                DataRow ViewRow = table.Rows[0];             
+                if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[2].ToString()))//Checking if the OrgKey is encrypted in the database
                 {
-                    RepublishOrgKey = ViewRow.ItemArray[2].ToString();
+                    Guid guid;             
+                    bool isValid = Guid.TryParse(ViewRow.ItemArray[2].ToString(), out guid);
+                    if (!isValid)
+                        RepublishOrgKey = Configuration.Decrypt(ViewRow.ItemArray[2].ToString());
+                    else
+                        RepublishOrgKey = ViewRow.ItemArray[2].ToString();
                     return true;
                 }
             }
@@ -3467,7 +3471,16 @@ namespace Epi.Windows.MakeView.Forms
             }
 
             DataRow ViewRow = table.Rows[0];
-            string OrganizationKey = ViewRow.ItemArray[2].ToString(); ;
+            string OrganizationKey = null;
+            if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[2].ToString()))//Checking if the OrgKey is encrypted in the database
+            {
+                Guid guid;
+                bool isValid = Guid.TryParse(ViewRow.ItemArray[2].ToString(), out guid);
+                if (!isValid)
+                    OrganizationKey = Configuration.Decrypt(ViewRow.ItemArray[2].ToString());
+                else
+                    OrganizationKey = ViewRow.ItemArray[2].ToString();
+            }
             string WebSurveyId = ViewRow.ItemArray[3].ToString();
 
             if (ValidateUser())
@@ -3712,7 +3725,16 @@ namespace Epi.Windows.MakeView.Forms
                 DataRow ViewRow = table.Rows[0];
 
                 string WebSurveyId = ViewRow.ItemArray[3].ToString();
-                string OrganizationKey = ViewRow.ItemArray[2].ToString();
+                 string OrganizationKey=null;
+                 if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[2].ToString()))//Checking if the OrgKey is encrypted in the database
+                 {
+                     Guid guid;
+                     bool isValid = Guid.TryParse(ViewRow.ItemArray[2].ToString(), out guid);
+                     if (!isValid)
+                         OrganizationKey = Configuration.Decrypt(ViewRow.ItemArray[2].ToString());
+                     else
+                         OrganizationKey = ViewRow.ItemArray[2].ToString();
+                 }
 
 
                 Configuration config = Configuration.GetNewInstance();
@@ -4331,7 +4353,16 @@ namespace Epi.Windows.MakeView.Forms
             DataRow ViewRow = table.Rows[0];
 
             string WebSurveyId = ViewRow.ItemArray[3].ToString();
-            string OrganizationKey = ViewRow.ItemArray[2].ToString();
+            string OrganizationKey = null;
+            if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[2].ToString()))//Checking if the OrgKey is encrypted in the database
+            {
+                Guid guid;
+                bool isValid = Guid.TryParse(ViewRow.ItemArray[2].ToString(), out guid);
+                if (!isValid)
+                    OrganizationKey = Configuration.Decrypt(ViewRow.ItemArray[2].ToString());
+                else
+                    OrganizationKey = ViewRow.ItemArray[2].ToString();
+            }
 
 
             Configuration config = Configuration.GetNewInstance();
@@ -4386,8 +4417,16 @@ namespace Epi.Windows.MakeView.Forms
             DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(this.projectExplorer.CurrentView.Id);
             DataRow ViewRow = table.Rows[0];
             // this.OrganizationKey = this.projectExplorer.CurrentView.EWEOrganizationKey;
-            this.EWEOrganizationKey = ViewRow.ItemArray[2].ToString();
-            if (string.IsNullOrEmpty(EWEOrganizationKey))
+            if (!string.IsNullOrEmpty(ViewRow.ItemArray[2].ToString()))//Checking if the OrgKey is encrypted in the database
+            {
+                Guid guid;
+                bool isValid = Guid.TryParse(ViewRow.ItemArray[2].ToString(), out guid);
+                if (!isValid)
+                    this.EWEOrganizationKey = Configuration.Decrypt(ViewRow.ItemArray[2].ToString());
+                else
+                    this.EWEOrganizationKey = ViewRow.ItemArray[2].ToString();
+            }
+             if (string.IsNullOrEmpty(this.EWEOrganizationKey))
                 if (RepublishOrgKey != null)
                     EWEOrganizationKey = RepublishOrgKey;
 
@@ -4885,8 +4924,16 @@ namespace Epi.Windows.MakeView.Forms
                 }
                 DataRow ViewRow = table.Rows[0];
 
-                string WebSurveyId = ViewRow.ItemArray[2].ToString();
-                this.EWEOrganizationKey = ViewRow.ItemArray[3].ToString();
+                string WebSurveyId = ViewRow.ItemArray[3].ToString();
+                if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[2].ToString()))//Checking if the OrgKey is encrypted in the database
+                {
+                    Guid guid;
+                    bool isValid = Guid.TryParse(ViewRow.ItemArray[2].ToString(), out guid);
+                    if (!isValid)
+                        this.EWEOrganizationKey = Configuration.Decrypt(ViewRow.ItemArray[2].ToString());
+                    else
+                        this.EWEOrganizationKey = ViewRow.ItemArray[2].ToString();
+                }
 
                 if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
                 {

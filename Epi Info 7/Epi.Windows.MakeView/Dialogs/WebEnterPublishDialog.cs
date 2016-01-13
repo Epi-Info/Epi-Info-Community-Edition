@@ -643,7 +643,7 @@ namespace Epi.Windows.MakeView.Dialogs
  
                      
                        NewView.EWEFormId = item.Value;
-                       NewView.EWEOrganizationKey = txtOrganizationKey.Text.ToString();
+                       NewView.EWEOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
                        NewView.SaveToDb();
                        
                        }
