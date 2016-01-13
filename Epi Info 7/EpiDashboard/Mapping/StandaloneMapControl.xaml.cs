@@ -2015,6 +2015,8 @@ namespace EpiDashboard.Mapping
                 choroplethproperties.btnBrowse.IsEnabled = true;
                 choroplethproperties.panelshape.IsEnabled = true;
 
+                choroplethproperties.legTitle.Text = choroplethLayerProperties.provider.LegendText;
+
                 choroplethproperties.cmbShapeKey.Text = choroplethLayerProperties.cbxShapeKey.Text;
                 choroplethproperties.cmbDataKey.Text = choroplethLayerProperties.cbxDataKey.Text;
                 choroplethproperties.cmbValue.Text = choroplethLayerProperties.cbxValue.Text;
@@ -2041,9 +2043,6 @@ namespace EpiDashboard.Mapping
 
                 choroplethproperties.Cancelled += new EventHandler(properties_Cancelled);
                 choroplethproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
-
-                choroplethproperties.legTitle.Text = choroplethLayerProperties.provider.LegendText;
-
             }
             catch(Exception)
             {
