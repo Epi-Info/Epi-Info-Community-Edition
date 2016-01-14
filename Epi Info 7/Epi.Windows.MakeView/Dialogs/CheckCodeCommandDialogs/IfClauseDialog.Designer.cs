@@ -161,8 +161,8 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -208,8 +208,8 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             // 
             // Label1
             // 
-            this.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.Label1, "Label1");
+            this.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.Label1.Name = "Label1";
             // 
             // txtThen
