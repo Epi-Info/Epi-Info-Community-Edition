@@ -1248,12 +1248,12 @@ namespace Epi.Windows.MakeView.Forms
             multilineNode.Value = MetaFieldType.Multiline;
             fieldsNode.Nodes.Add(multilineNode);
 
-            OpenFieldNode guidNode = new OpenFieldNode();
-            guidNode.Text = SharedStrings.PE_GUID_NODE;                
-            guidNode.ImageIndex = 7;
-            guidNode.SelectedImageIndex = 7;
-            guidNode.Value = MetaFieldType.GUID;
-            fieldsNode.Nodes.Add(guidNode);
+            //OpenFieldNode guidNode = new OpenFieldNode();
+            //guidNode.Text = SharedStrings.PE_GUID_NODE;                
+            //guidNode.ImageIndex = 7;
+            //guidNode.SelectedImageIndex = 7;
+            //guidNode.Value = MetaFieldType.GUID;
+            //fieldsNode.Nodes.Add(guidNode);
 
             OpenFieldNode numberNode = new OpenFieldNode();
             numberNode.Text = SharedStrings.PE_NUMBER_NODE;
