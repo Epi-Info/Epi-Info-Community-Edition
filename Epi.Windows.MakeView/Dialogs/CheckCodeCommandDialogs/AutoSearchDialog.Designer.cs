@@ -28,7 +28,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
 		private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutoSearchDialog));
-            this.Button3 = new System.Windows.Forms.Button();
+            this.btnHelp = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.lbxFields = new System.Windows.Forms.ListBox();
@@ -109,11 +109,11 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.baseImageList.Images.SetKeyName(66, "");
             this.baseImageList.Images.SetKeyName(67, "");
             // 
-            // Button3
+            // btnHelp
             // 
-            resources.ApplyResources(this.Button3, "Button3");
-            this.Button3.Name = "Button3";
-            this.Button3.Click += new System.EventHandler(this.btnHelp_Click);
+            resources.ApplyResources(this.btnHelp, "btnHelp");
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // btnCancel
             // 
@@ -163,7 +163,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.Controls.Add(this.chkContinue);
             this.Controls.Add(this.chkAlways);
             this.Controls.Add(this.chkDisplayList);
-            this.Controls.Add(this.Button3);
+            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.lbxFields);
@@ -179,7 +179,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
 
 
 
-		private System.Windows.Forms.Button Button3;
+		private System.Windows.Forms.Button btnHelp;
 		private System.Windows.Forms.Button btnOk;
 		private System.Windows.Forms.ListBox lbxFields;
 		private System.Windows.Forms.Button btnCancel;
