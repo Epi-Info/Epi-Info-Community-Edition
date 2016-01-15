@@ -1692,10 +1692,10 @@ namespace Epi.Windows.MakeView.Forms
             mnuText.Click += new EventHandler(mnuText_Click);
             mnuText.ImageIndex = 12;
 
-            ToolStripMenuItem mnuGUID = new ToolStripMenuItem(SharedStrings.PE_GUID_NODE);
-            mnuGUID.Click += new EventHandler(mnuGUID_Click);
-            mnuGUID.ImageIndex = 12;
-            mnuGUID.Enabled = true;
+            //ToolStripMenuItem mnuGUID = new ToolStripMenuItem(SharedStrings.PE_GUID_NODE);
+            //mnuGUID.Click += new EventHandler(mnuGUID_Click);
+            //mnuGUID.ImageIndex = 12;
+            //mnuGUID.Enabled = true;
 
             ToolStripMenuItem mnuTime = new ToolStripMenuItem(SharedStrings.PE_TIME_NODE);
             mnuTime.ImageIndex = 2;
