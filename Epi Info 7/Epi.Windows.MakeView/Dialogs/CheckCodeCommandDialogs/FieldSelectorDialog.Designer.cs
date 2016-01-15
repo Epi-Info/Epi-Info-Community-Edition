@@ -42,7 +42,8 @@
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(184, 195);
+            this.btnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHelp.Location = new System.Drawing.Point(315, 188);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(75, 23);
             this.btnHelp.TabIndex = 0;
@@ -51,8 +52,9 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(103, 195);
+            this.btnCancel.Location = new System.Drawing.Point(234, 188);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -61,7 +63,8 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(22, 195);
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.Location = new System.Drawing.Point(153, 188);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 2;
@@ -70,11 +73,11 @@
             // 
             // lbxFields
             // 
-            this.lbxFields.ItemHeight = 16;
+            this.lbxFields.HorizontalScrollbar = true;
             this.lbxFields.Location = new System.Drawing.Point(10, 9);
             this.lbxFields.Name = "lbxFields";
             this.lbxFields.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbxFields.Size = new System.Drawing.Size(267, 180);
+            this.lbxFields.Size = new System.Drawing.Size(380, 173);
             this.lbxFields.Sorted = true;
             this.lbxFields.TabIndex = 3;
             this.lbxFields.SelectedIndexChanged += new System.EventHandler(this.lbxFields_SelectedIndexChanged);
@@ -82,7 +85,7 @@
             // FieldSelectorDialog
             // 
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(282, 224);
+            this.ClientSize = new System.Drawing.Size(400, 217);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);

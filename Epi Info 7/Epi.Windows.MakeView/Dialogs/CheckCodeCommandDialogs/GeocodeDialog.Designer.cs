@@ -28,7 +28,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
 		private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeocodeDialog));
-            this.Button3 = new System.Windows.Forms.Button();
+            this.btnHelp = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -113,10 +113,11 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.baseImageList.Images.SetKeyName(68, "");
             this.baseImageList.Images.SetKeyName(69, "");
             // 
-            // Button3
+            // btnHelp
             // 
-            resources.ApplyResources(this.Button3, "Button3");
-            this.Button3.Name = "Button3";
+            resources.ApplyResources(this.btnHelp, "btnHelp");
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // btnCancel
             // 
@@ -178,7 +179,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbxAddress);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Button3);
+            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -194,7 +195,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
 
 
 
-		private System.Windows.Forms.Button Button3;
+		private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.Button btnOk;
 		private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label1;
