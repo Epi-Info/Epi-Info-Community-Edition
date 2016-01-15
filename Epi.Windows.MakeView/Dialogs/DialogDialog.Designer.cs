@@ -162,8 +162,8 @@ namespace Epi.Windows.MakeView.Dialogs
             // 
             // rdbSimple
             // 
-            this.rdbSimple.Checked = true;
             resources.ApplyResources(this.rdbSimple, "rdbSimple");
+            this.rdbSimple.Checked = true;
             this.rdbSimple.Name = "rdbSimple";
             this.rdbSimple.TabStop = true;
             this.rdbSimple.Click += new System.EventHandler(this.RadioButtonClick);
@@ -326,13 +326,7 @@ namespace Epi.Windows.MakeView.Dialogs
             resources.ApplyResources(this, "$this");
             this.CancelButton = this.btnCancel;
             this.Controls.Add(this.btnSaveOnly);
-            this.Controls.Add(this.txtLength);
-            this.Controls.Add(this.lblLength);
             this.Controls.Add(this.cmbVarType);
-            this.Controls.Add(this.lblInputMask);
-            this.Controls.Add(this.cmbInputMask);
-            this.Controls.Add(this.lblShowVar);
-            this.Controls.Add(this.cmbShowVar);
             this.Controls.Add(this.lblShowTable);
             this.Controls.Add(this.cmbShowTable);
             this.Controls.Add(this.lblVarType);
@@ -349,6 +343,12 @@ namespace Epi.Windows.MakeView.Dialogs
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.gbxDialogType);
+            this.Controls.Add(this.lblShowVar);
+            this.Controls.Add(this.cmbShowVar);
+            this.Controls.Add(this.txtLength);
+            this.Controls.Add(this.lblLength);
+            this.Controls.Add(this.lblInputMask);
+            this.Controls.Add(this.cmbInputMask);
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
