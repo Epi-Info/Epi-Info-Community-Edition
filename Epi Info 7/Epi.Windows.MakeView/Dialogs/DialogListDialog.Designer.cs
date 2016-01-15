@@ -127,122 +127,84 @@ namespace Epi.Windows.MakeView.Dialogs
             // 
             // btnHelp
             // 
-            this.btnHelp.Enabled = false;
-            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnHelp.Location = new System.Drawing.Point(249, 320);
+            resources.ApplyResources(this.btnHelp, "btnHelp");
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(75, 23);
-            this.btnHelp.TabIndex = 5;
-            this.btnHelp.Text = "&Help";
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // btnCancel
             // 
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(89, 320);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Cancel";
             // 
             // btnOK
             // 
+            resources.ApplyResources(this.btnOK, "btnOK");
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Enabled = false;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOK.Location = new System.Drawing.Point(9, 320);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 2;
-            this.btnOK.Text = "OK";
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnClear
             // 
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnClear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnClear.Location = new System.Drawing.Point(169, 320);
+            resources.ApplyResources(this.btnClear, "btnClear");
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
-            this.btnClear.TabIndex = 4;
-            this.btnClear.Text = "C&lear";
             // 
             // gbxSelections
             // 
+            resources.ApplyResources(this.gbxSelections, "gbxSelections");
             this.gbxSelections.Controls.Add(this.dgList);
             this.gbxSelections.Controls.Add(this.btnDelete);
             this.gbxSelections.Controls.Add(this.btnInsert);
-            this.gbxSelections.Location = new System.Drawing.Point(13, 12);
             this.gbxSelections.Name = "gbxSelections";
-            this.gbxSelections.Size = new System.Drawing.Size(311, 291);
-            this.gbxSelections.TabIndex = 21;
             this.gbxSelections.TabStop = false;
-            this.gbxSelections.Text = "Selections";
             // 
             // dgList
             // 
             this.dgList.AlternatingBackColor = System.Drawing.Color.GhostWhite;
+            resources.ApplyResources(this.dgList, "dgList");
             this.dgList.BackColor = System.Drawing.Color.GhostWhite;
             this.dgList.BackgroundColor = System.Drawing.Color.Lavender;
             this.dgList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgList.CaptionBackColor = System.Drawing.Color.RoyalBlue;
-            this.dgList.CaptionFont = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.dgList.CaptionForeColor = System.Drawing.Color.White;
             this.dgList.CaptionVisible = false;
             this.dgList.DataMember = "";
-            this.dgList.Font = new System.Drawing.Font("Tahoma", 8F);
             this.dgList.ForeColor = System.Drawing.Color.MidnightBlue;
             this.dgList.GridLineColor = System.Drawing.Color.RoyalBlue;
             this.dgList.HeaderBackColor = System.Drawing.Color.MidnightBlue;
             this.dgList.HeaderFont = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
             this.dgList.HeaderForeColor = System.Drawing.Color.Lavender;
             this.dgList.LinkColor = System.Drawing.Color.Teal;
-            this.dgList.Location = new System.Drawing.Point(10, 19);
             this.dgList.Name = "dgList";
             this.dgList.ParentRowsBackColor = System.Drawing.Color.Lavender;
             this.dgList.ParentRowsForeColor = System.Drawing.Color.MidnightBlue;
             this.dgList.SelectionBackColor = System.Drawing.Color.Teal;
             this.dgList.SelectionForeColor = System.Drawing.Color.PaleGreen;
-            this.dgList.Size = new System.Drawing.Size(176, 252);
-            this.dgList.TabIndex = 1;
             this.dgList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgList_MouseClick);
             // 
             // btnDelete
             // 
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnDelete.Location = new System.Drawing.Point(208, 154);
+            resources.ApplyResources(this.btnDelete, "btnDelete");
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 7;
-            this.btnDelete.Text = SharedStrings.DELETE;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnInsert
             // 
-            this.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnInsert.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnInsert.Location = new System.Drawing.Point(208, 113);
+            resources.ApplyResources(this.btnInsert, "btnInsert");
             this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(75, 23);
-            this.btnInsert.TabIndex = 6;
-            this.btnInsert.Text = "Insert";
             this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
             // DialogListDialog
             // 
-            this.ClientSize = new System.Drawing.Size(340, 353);
+            resources.ApplyResources(this, "$this");
             this.Controls.Add(this.gbxSelections);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnClear);
             this.Name = "DialogListDialog";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Multi-Choice Items";
             this.gbxSelections.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgList)).EndInit();
             this.ResumeLayout(false);
