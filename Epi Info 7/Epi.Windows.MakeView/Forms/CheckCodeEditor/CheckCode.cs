@@ -1917,8 +1917,8 @@ namespace Epi.Windows.MakeView.Forms
             if (result == DialogResult.OK)
             {
                 if (dialog is FieldSelectorDialog)
-                {
-                    this.ParseText("\t" + dialog.Output + "\n");
+                {                  
+                    this.ParseText(" "+ dialog.Output);
                 }
                 else
                 {
