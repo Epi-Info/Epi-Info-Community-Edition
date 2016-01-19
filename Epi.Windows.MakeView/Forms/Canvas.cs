@@ -1896,7 +1896,7 @@ namespace Epi.Windows.MakeView.Forms
                 mnuText, 
                 mnuUpperCase, 
                 mnuMultiline, 
-                mnuGUID, 
+               // mnuGUID, 
                 mnuNumber, 
                 mnuPhoneNumber, 
                 mnuDate, 
