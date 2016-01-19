@@ -2121,6 +2121,18 @@ namespace EpiDashboard
             // Get the form's field count, adding base table fields plus GUID field for each page. If less than 255, use SQL relate; otherwise, >255 exceeds OLE field capacity and we need to use a less efficient method
             if (vw.Fields.DataFields.Count + vw.Pages.Count + 5 < 255 && vw.Pages.Count < 15)
             {
+                if (isRelatedView)
+                {
+                    foreach (RelatedConnection conn in ConnectionsForRelate)
+                    {
+                        if(conn.view.Name==vw.Name)
+                        {
+                            unfilteredTable = conn.db.Select(conn.db.CreateQuery("SELECT * " + vw.FromViewSQL));
+                            break;
+                        }
+                    }
+                }
+                else
                     unfilteredTable = db.Select(db.CreateQuery("SELECT * " + vw.FromViewSQL));
 
                     if (unfilteredTable.Columns["RecStatus"] == null && unfilteredTable.Columns["t.RecStatus"] != null)
@@ -2325,8 +2337,8 @@ namespace EpiDashboard
                             relatedTable.CaseSensitive = true;
 
                             if (conn.IsEpiInfoProject)
-                            {
-                                relatedTable = JoinPageTables(conn.view, true, inputs);
+                            {                                                                   
+                                relatedTable = JoinPageTables(conn.view, true, inputs);                               
 
                                 if (relatedTable == null)
                                 {
