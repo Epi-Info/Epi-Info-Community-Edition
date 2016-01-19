@@ -1184,7 +1184,10 @@ namespace Epi.Windows.MakeView.Forms
                 else
                     OrganizationKey = ViewRow.ItemArray[2].ToString();
             }
+            if (OrganizationKey != null)
+            {
             this.view.EWEOrganizationKey = OrganizationKey;
+            }
         }
 
         #endregion  //Event Handlers
