@@ -3481,6 +3481,8 @@ namespace Epi.Windows.MakeView.Forms
                 else
                     OrganizationKey = ViewRow.ItemArray[2].ToString();
             }
+            else 
+                OrganizationKey = ViewRow.ItemArray[2].ToString();
             string WebSurveyId = ViewRow.ItemArray[3].ToString();
 
             if (ValidateUser())
@@ -3735,6 +3737,8 @@ namespace Epi.Windows.MakeView.Forms
                      else
                          OrganizationKey = ViewRow.ItemArray[2].ToString();
                  }
+                 else
+                     OrganizationKey = ViewRow.ItemArray[2].ToString();
 
 
                 Configuration config = Configuration.GetNewInstance();
@@ -4363,6 +4367,8 @@ namespace Epi.Windows.MakeView.Forms
                 else
                     OrganizationKey = ViewRow.ItemArray[2].ToString();
             }
+            else 
+                OrganizationKey = ViewRow.ItemArray[2].ToString();
 
 
             Configuration config = Configuration.GetNewInstance();
@@ -4426,6 +4432,8 @@ namespace Epi.Windows.MakeView.Forms
                 else
                     this.EWEOrganizationKey = ViewRow.ItemArray[2].ToString();
             }
+            else
+                OrganizationKey = ViewRow.ItemArray[2].ToString();
              if (string.IsNullOrEmpty(this.EWEOrganizationKey))
                 if (RepublishOrgKey != null)
                     EWEOrganizationKey = RepublishOrgKey;
@@ -4934,6 +4942,8 @@ namespace Epi.Windows.MakeView.Forms
                     else
                         this.EWEOrganizationKey = ViewRow.ItemArray[2].ToString();
                 }
+                else
+                    OrganizationKey = ViewRow.ItemArray[2].ToString();
 
                 if (!string.IsNullOrWhiteSpace(EWEOrganizationKey))
                 {
