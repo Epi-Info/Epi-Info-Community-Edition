@@ -2190,8 +2190,14 @@ namespace EpiDashboard
                 }
                 catch (Exception ex)
                 {
-                    this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), ex.Message);
-                    //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
+                    if (fields.Count <= 1)
+                    {
+                        this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), ex.Message);
+                    }
+                    else
+                    {
+                        this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
+                    }
                 }
                 finally
                 {
