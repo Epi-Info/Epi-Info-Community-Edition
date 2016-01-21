@@ -575,7 +575,7 @@ namespace Epi.Windows.MakeView.Dialogs
         /// <param name="e">.NET supplied event args.</param>
         protected override void btnHelp_Click(object sender, System.EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/user-guide/command-reference/analysis-commands-dialog.html");
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/command-reference/analysis-commands-dialog.html");
         }
 
         #endregion //Event Handlers

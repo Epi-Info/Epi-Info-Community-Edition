@@ -87,7 +87,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
         /// <param name="e">.NET supplied event args.</param>
         protected override void btnHelp_Click(object sender, System.EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/user-guide/command-reference/check-commands-set-not-required.html");
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/command-reference/check-commands-set-not-required.html");
         }
 
         #endregion  //Private Event Handlers
