@@ -555,11 +555,11 @@ namespace EpiDashboard
             {
                 freqGrid.Visibility = Visibility.Visible;
             }
-
+          
             messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
             messagePanel.Text = string.Empty;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
-
+             
             HideConfigPanel();
             ShowHideOutputColumns();
             CheckAndSetPosition();
@@ -584,10 +584,10 @@ namespace EpiDashboard
                 freqGrid.Visibility = Visibility.Visible;
             }
 
-            messagePanel.MessagePanelType = Controls.MessagePanelType.WarningPanel;
-            messagePanel.Text = errorMessage;
-            messagePanel.Visibility = System.Windows.Visibility.Visible;
-
+            messagePanel2.MessagePanelType = Controls.MessagePanelType.WarningPanel;
+            messagePanel2.Text += "\n" + errorMessage;
+            messagePanel2.Visibility = System.Windows.Visibility.Visible;
+            
             HideConfigPanel();
             CheckAndSetPosition();
         }
@@ -949,6 +949,9 @@ namespace EpiDashboard
 
             StrataGridList.Clear();
             StrataExpanderList.Clear();
+
+            messagePanel2.Text = "";
+             
         }
 
         #endregion // Private and Protected Methods
@@ -1886,6 +1889,7 @@ namespace EpiDashboard
         {
             lock (syncLock)
             {
+               
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
@@ -2190,14 +2194,17 @@ namespace EpiDashboard
                 }
                 catch (Exception ex)
                 {
-                    if (fields.Count <= 1)
-                    {
-                        this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), ex.Message);
-                    }
-                    else
-                    {
-                        this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
-                    }
+                   // if (fields.Count <= 1)
+                   // {
+                      // // this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithError), ex.Message);
+                       
+                        this.Dispatcher.BeginInvoke(new RenderFinishWithErrorDelegate(RenderFinishWithWarning), ex.Message);
+                        
+                  //  }
+                   // else
+                   // {
+                  //      this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
+                  //  }
                 }
                 finally
                 {

@@ -49,7 +49,7 @@
 
                 <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsDescriptionButtonAvailable="False" IsFilterButtonAvailable="False" Text="Frequency" />
                 <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel" Grid.Row="2" Text="" />
-                
+                <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel2" Grid.Row="2" Text=""  Visibility="Collapsed"/>
                 <StackPanel Grid.Row="4">
                     <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel" />
                     <Controls:GadgetInfoPanel Grid.Row="4" Visibility="Collapsed" Margin="4" x:Name="infoPanel"></Controls:GadgetInfoPanel>
