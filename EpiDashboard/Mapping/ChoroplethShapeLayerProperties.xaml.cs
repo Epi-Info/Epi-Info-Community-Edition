@@ -10,7 +10,12 @@ namespace EpiDashboard.Mapping
 {
     public partial class ChoroplethShapeLayerProperties : ChoroplethLayerPropertiesUserControlBase, ILayerProperties
     {
-        public ChoroplethShapeLayerProvider provider;
+        private ChoroplethShapeLayerProvider _provider;
+        public ChoroplethShapeLayerProvider Provider
+        {
+            set { _provider = value; }
+            get { return _provider; }
+        }
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
@@ -21,7 +26,6 @@ namespace EpiDashboard.Mapping
         private int Numclasses;
 
         public DataFilters datafilters { get; set; }
-
 
         public enum ColorRampType
         {
@@ -48,7 +52,7 @@ namespace EpiDashboard.Mapping
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-            provider = new ChoroplethShapeLayerProvider(myMap);
+            Provider = new ChoroplethShapeLayerProvider(myMap);
 
             FillComboBoxes();
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
@@ -81,12 +85,12 @@ namespace EpiDashboard.Mapping
 
         public void MoveUp()
         {
-            provider.MoveUp();
+            Provider.MoveUp();
         }
 
         public void MoveDown()
         {
-            provider.MoveDown();
+            Provider.MoveDown();
         }
 
         void rctLowColor_MouseUp(object sender, MouseButtonEventArgs e)
@@ -116,7 +120,7 @@ namespace EpiDashboard.Mapping
         {
             if (cbxDataKey.SelectedIndex != -1 && cbxShapeKey.SelectedIndex != -1 && cbxValue.SelectedIndex != -1)
             {
-                provider.SetShapeRangeValues(
+                Provider.SetShapeRangeValues(
                     dashboardHelper, 
                     cbxShapeKey.SelectedItem.ToString(),
                     cbxDataKey.SelectedItem.ToString(),
@@ -137,7 +141,7 @@ namespace EpiDashboard.Mapping
         {
             get
             {
-                return provider.LegendStackPanel;
+                return Provider.LegendStackPanel;
             }
         }
 
@@ -148,7 +152,7 @@ namespace EpiDashboard.Mapping
 
         void mapControl_MapDataChanged(object sender, EventArgs e)
         {
-            provider.Refresh();
+            Provider.Refresh();
         }
 
         void keys_SelectionChanged(object sender, EventArgs e)
@@ -158,7 +162,7 @@ namespace EpiDashboard.Mapping
 
         void btnShapeFile_Click(object sender, RoutedEventArgs e)
         {
-            object[] shapeFileProperties = provider.Load();
+            object[] shapeFileProperties = Provider.Load();
             
             if (shapeFileProperties != null)
             {
@@ -205,7 +209,7 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            provider.CloseLayer();
+            Provider.CloseLayer();
         }
 
         public Color FontColor
@@ -256,7 +260,7 @@ namespace EpiDashboard.Mapping
             cbxDataKey.Text = datakey;
             cbxValue.Text = val;
             grdMain.Width = 700;
-            provider.LegendText = LegendText;
+            Provider.LegendText = LegendText;
         }
 
         public XmlNode Serialize(System.Xml.XmlDocument doc)
@@ -278,7 +282,7 @@ namespace EpiDashboard.Mapping
 
                 return ChoroplethLayerPropertiesUserControlBase.Serialize(
                     doc,
-                    provider,
+                    Provider,
                     dataKey,
                     shapeKey,
                     value,
@@ -303,13 +307,14 @@ namespace EpiDashboard.Mapping
 
         public void CreateFromXml(System.Xml.XmlElement element)
         {
-            base.CreateFromXml(element, provider);
+            
+            base.CreateFromXml(element, Provider);
             
             foreach (System.Xml.XmlElement child in element.ChildNodes)
             {
                 if (child.Name.Equals("shapeFile"))
                 {
-                    object[] shapeFileProperties = provider.Load(child.InnerText);
+                    object[] shapeFileProperties = Provider.Load(child.InnerText);
                     if (shapeFileProperties != null)
                     {
                         if (shapeFileProperties.Length == 2)
@@ -378,7 +383,7 @@ namespace EpiDashboard.Mapping
 
         private void ChoroplethProperties_RenderMap()
         {
-            base.ChoroplethProperties_RenderMap(provider);
+            base.ChoroplethProperties_RenderMap(Provider);
             
             if (MapGenerated != null)
             {

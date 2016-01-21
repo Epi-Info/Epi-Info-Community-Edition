@@ -31,12 +31,18 @@ namespace EpiDashboard.Mapping
         public string _dataKey;
         public string _valueField;
         public string _missingText;
-        public Guid _layerId { get; set; }
         public List<SolidColorBrush> _colors;
         public int _classCount;
         public ThematicItem _thematicItem;
         public bool AreRangesSet { get; set; }
         public List<GraphicsLayer> _graphicsLayers;
+
+        Guid _layerId { get; set; }
+        public Guid LayerId 
+        {
+            get { return _layerId; }
+            set { _layerId = value; }
+        }
 
         public string[,] _rangeValues = new string[,] { { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" }, { "", "" } };
         public string[,] RangeValues
@@ -362,7 +368,7 @@ namespace EpiDashboard.Mapping
             }
             catch
             {
-                return "Could not load the data with the given data key and value key.";
+                return string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount);
             }
         }
 
@@ -449,6 +455,8 @@ namespace EpiDashboard.Mapping
 
         public void SetLegendSection(List<SolidColorBrush> colors, int classCount, string missingText, ThematicItem thematicItem)
         {
+            if (colors == null) return;
+
             if (LegendStackPanel == null)
             {
                 LegendStackPanel = new StackPanel();
@@ -683,7 +691,12 @@ namespace EpiDashboard.Mapping
                 }
             }
 
-            valueList.Sort();
+            if(valueList.Count == 0)
+            {
+                throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
+            }
+
+            valueList.Sort(); 
 
             if (this.UseQuantiles)
             {
@@ -714,7 +727,6 @@ namespace EpiDashboard.Mapping
                 DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
 
                 if (_valueField == "{Record Count}") _valueField = "freq";
-
 
                 GraphicsLayer graphicsLayer = GetGraphicsLayer();
 
@@ -756,7 +768,12 @@ namespace EpiDashboard.Mapping
                         double graphicValue = Double.PositiveInfinity;
                         try
                         {
-                            graphicValue = Convert.ToDouble(loadedData.Select(filterExpression)[0][_valueField]);
+                            DataRow[] postFilterExpression = loadedData.Select(filterExpression);
+                            
+                            if(postFilterExpression.Length > 0)
+                            {
+                                graphicValue = Convert.ToDouble(postFilterExpression[0][_valueField]);
+                            }
                         }
                         catch (Exception)
                         {
@@ -765,25 +782,29 @@ namespace EpiDashboard.Mapping
 
                         int brushIndex = GetRangeIndex(graphicValue, _thematicItem.RangeStarts);
 
-                        Color color = ((SolidColorBrush)colors[brushIndex]).Color;
-                        Brush fill = new SolidColorBrush(Color.FromArgb(Opacity, color.R, color.G, color.B));
-
-                        if (graphicValue == Double.PositiveInfinity)
+                        if(colors != null)
                         {
-                            color = ((SolidColorBrush)colors[colors.Count - 1]).Color;
-                            fill = new SolidColorBrush(Color.FromArgb(Opacity, color.R, color.G, color.B));
+                            Color color = ((SolidColorBrush)colors[brushIndex]).Color;
+                            Brush fill = new SolidColorBrush(Color.FromArgb(Opacity, color.R, color.G, color.B));
+
+                            if (graphicValue == Double.PositiveInfinity)
+                            {
+                                color = ((SolidColorBrush)colors[colors.Count - 1]).Color;
+                                fill = new SolidColorBrush(Color.FromArgb(Opacity, color.R, color.G, color.B));
+                            }
+
+                            SimpleFillSymbol symbol = new SimpleFillSymbol();
+
+                            symbol.Fill = fill;
+                            symbol.BorderBrush = new SolidColorBrush(Colors.Black);
+                            symbol.BorderThickness = 1;
+
+                            graphicFeature.Symbol = symbol;
                         }
-
-                        SimpleFillSymbol symbol = new SimpleFillSymbol();
-
-                        symbol.Fill = fill;
-                        symbol.BorderBrush = new SolidColorBrush(Colors.Black);
-                        symbol.BorderThickness = 1;
-
-                        graphicFeature.Symbol = symbol;
 
                         TextBlock t = new TextBlock();
                         t.Background = Brushes.White;
+
                         if (graphicValue == Double.PositiveInfinity)
                         {
                             t.Text = GetShapeValue(graphicFeature, shapeKey) + " : No Data";
@@ -792,7 +813,9 @@ namespace EpiDashboard.Mapping
                         {
                             t.Text = GetShapeValue(graphicFeature, shapeKey) + " : " + graphicValue.ToString();
                         }
+                        
                         t.FontSize = 14;
+                        
                         Border border = new Border();
                         border.BorderThickness = new Thickness(1);
                         Panel panel = new StackPanel();

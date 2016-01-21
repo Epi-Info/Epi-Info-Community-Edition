@@ -265,15 +265,17 @@ namespace EpiDashboard.Controls
                 System.Web.Script.Serialization.JavaScriptSerializer ser = new System.Web.Script.Serialization.JavaScriptSerializer();
                 Rest rest = ser.Deserialize<Rest>(message);
                 lbxserverfield.ItemsSource = rest.layers;
+
                 if (rest.layers.Count > 0)
+                {
                     lbxserverfield.SelectedIndex = 0;
+                }
             }
-            catch (Exception ex)
+            catch
             {
                 lbxserverfield.DataContext = null;
                 System.Windows.Forms.MessageBox.Show("Invalid map server");
             }
-
         }
 
         private void txtMapSeverpath_TextChanged(object sender, TextChangedEventArgs e)

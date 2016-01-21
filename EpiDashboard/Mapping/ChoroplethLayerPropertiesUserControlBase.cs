@@ -63,7 +63,6 @@ namespace EpiDashboard.Mapping
                     }
 
                     List<double> rangeStartsFromMapFile = new List<double>();
-
                     string doubleString = "";
 
                     try
@@ -230,9 +229,21 @@ namespace EpiDashboard.Mapping
             choroplethprop.txtProjectPath.Text = dashboardHelper.Database.DataSource;
             choroplethprop.SetDashboardHelper(dashboardHelper);
             choroplethprop.cmbClasses.Text = layerPropertiesControl.cbxClasses.Text;
-            foreach (string str in layerPropertiesControl.cbxShapeKey.Items) { choroplethprop.cmbShapeKey.Items.Add(str); }
-            foreach (string str in layerPropertiesControl.cbxDataKey.Items) { choroplethprop.cmbDataKey.Items.Add(str); }
-            foreach (string str in layerPropertiesControl.cbxValue.Items) { choroplethprop.cmbValue.Items.Add(str); }
+
+            foreach (string str in layerPropertiesControl.cbxShapeKey.Items)
+            { 
+                choroplethprop.cmbShapeKey.Items.Add(str); 
+            }
+
+            foreach (string str in layerPropertiesControl.cbxDataKey.Items)
+            {
+                choroplethprop.cmbDataKey.Items.Add(str);
+            }
+
+            foreach (string str in layerPropertiesControl.cbxValue.Items)
+            {
+                choroplethprop.cmbValue.Items.Add(str);
+            }
 
             choroplethprop.cmbShapeKey.SelectedItem = layerPropertiesControl.cbxShapeKey.Text;
             choroplethprop.cmbDataKey.SelectedItem = layerPropertiesControl.cbxDataKey.Text;
@@ -259,7 +270,7 @@ namespace EpiDashboard.Mapping
                 choroplethprop.choroplethServerLayerProvider = (ChoroplethServerLayerProvider)provider;
             }
 
-            choroplethprop.thisProvider = provider;
+            choroplethprop.LayerProvider = provider;
 
             choroplethprop.legTitle.Text = provider.LegendText;
             choroplethprop.ListLegendText = provider.ListLegendText;

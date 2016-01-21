@@ -26,7 +26,7 @@ namespace EpiDashboard.Mapping
         ListLegendTextDictionary ListLegendText { get; set; }
         bool RangesLoadedFromMapFile { get; set; }
         bool UseQuantiles { get; set; }
-        Guid _layerId { get; set; }
+        Guid LayerId { get; set; }
         void SetShapeRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string missingText, string legendText);
         void ResetRangeValues(string toString, string s, string toString1, int classCount);
         object[] Load();
