@@ -13,6 +13,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
 using Epi.Fields;
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Tasks;
 
 namespace EpiDashboard.Mapping
 {
@@ -21,14 +25,16 @@ namespace EpiDashboard.Mapping
     /// </summary>
     public partial class ChoroplethServerLayerProperties : ChoroplethLayerPropertiesUserControlBase, ILayerProperties
     {
-        public ChoroplethServerLayerProvider provider;
-        private System.Xml.XmlElement currentElement;
+        private ChoroplethServerLayerProvider _provider;
+        public ChoroplethServerLayerProvider Provider
+        {
+            set { _provider = value; }
+            get { return _provider; }
+        }
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
         public event EventHandler EditRequested;
-       
-        private IMapControl mapControl;
 
        // public IDictionary<string, object> shapeAttributes;
         private bool flagrunedit;
@@ -40,8 +46,9 @@ namespace EpiDashboard.Mapping
         public string txtMapserverText;
         public string cbxMapFeatureText;
 
-        private byte opacity;
+        private System.Xml.XmlElement currentElement;
 
+        private byte opacity;
         public byte Opacity
         {
             get { return opacity; }
@@ -57,9 +64,11 @@ namespace EpiDashboard.Mapping
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
+            Provider = new ChoroplethServerLayerProvider(myMap);
+            Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
+
             FillComboBoxes();
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
-                       
             cbxDataKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxShapeKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
@@ -113,19 +122,27 @@ namespace EpiDashboard.Mapping
                 {
                     if (child.Name.Equals("dataKey"))
                     {
+                        cbxDataKey.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
                         cbxDataKey.SelectedItem = child.InnerText;
+                        cbxDataKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
                     }
                     if (child.Name.Equals("shapeKey"))
                     {
+                        cbxShapeKey.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
                         cbxShapeKey.SelectedItem = child.InnerText;
+                        cbxShapeKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
                     }
                     if (child.Name.Equals("value"))
                     {
+                        cbxValue.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
                         cbxValue.SelectedItem = child.InnerText;
+                        cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
                     }
                     if (child.Name.Equals("classes"))
                     {
+                        cbxClasses.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
                         cbxClasses.SelectedIndex = int.Parse(child.InnerText);
+                        cbxClasses.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
                     }
                     if (child.Name.Equals("highColor"))
                     {
@@ -155,12 +172,12 @@ namespace EpiDashboard.Mapping
 
         public void MoveUp()
         {
-            provider.MoveUp();
+            Provider.MoveUp();
         }
 
         public void MoveDown()
         {
-            provider.MoveDown();
+            Provider.MoveDown();
         }
 
         void rctLowColor_MouseUp(object sender, MouseButtonEventArgs e)
@@ -196,15 +213,17 @@ namespace EpiDashboard.Mapping
         {
             if (cbxDataKey.SelectedIndex != -1 && cbxShapeKey.SelectedIndex != -1 && cbxValue.SelectedIndex != -1)
             {
-                provider.SetShapeRangeValues(
-                    dashboardHelper,
-                    cbxShapeKey.SelectedItem.ToString(),
-                    cbxDataKey.SelectedItem.ToString(),
-                    cbxValue.SelectedItem.ToString(),
-                    null,
-                    int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()),
-                    "",
-                    "");
+                base.ChoroplethProperties_RenderMap(Provider);
+                
+                //Provider.SetShapeRangeValues(
+                //    dashboardHelper,
+                //    cbxShapeKey.SelectedItem.ToString(),
+                //    cbxDataKey.SelectedItem.ToString(),
+                //    cbxValue.SelectedItem.ToString(),
+                //    null,
+                //    int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()),
+                //    "",
+                //    "");
                 
                 if (MapGenerated != null)
                 {
@@ -227,7 +246,7 @@ namespace EpiDashboard.Mapping
         {
             get
             {
-                return provider.LegendStackPanel;
+                return Provider.LegendStackPanel;
             }
         }
 
@@ -238,7 +257,7 @@ namespace EpiDashboard.Mapping
 
         void mapControl_MapDataChanged(object sender, EventArgs e)
         {
-            provider.Refresh();
+            Provider.Refresh();
         }
 
         void keys_SelectionChanged(object sender, EventArgs e)
@@ -248,17 +267,24 @@ namespace EpiDashboard.Mapping
 
         void btnShapeFile_Click(object sender, RoutedEventArgs e)
         {
-            provider.Load();
+            Provider.Load();
         }
 
         private void FillComboBoxes()
         {
+            cbxDataKey.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxDataKey.Items.Clear();
+            cbxDataKey.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
+
+            cbxValue.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxValue.Items.Clear();
+            cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
+            
             ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
             List<string> fields = dashboardHelper.GetFieldsAsList(columnDataType); // dashboardHelper.GetFormFields();
             columnDataType = ColumnDataType.Numeric;
             List<string> numericFields = dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
+            
             foreach (string field in fields)
             {
                 cbxDataKey.Items.Add(field);
@@ -267,6 +293,7 @@ namespace EpiDashboard.Mapping
             {
                 cbxValue.Items.Add(field);
             }
+            
             cbxValue.Items.Insert(0, "{Record Count}");
         }
 
@@ -274,7 +301,7 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            provider.CloseLayer();
+            Provider.CloseLayer();
         }
 
         public Color FontColor
@@ -310,12 +337,14 @@ namespace EpiDashboard.Mapping
             cbxClasses.Text = classes;
             cbxShapeKey.Text = shapekey;
             cbxDataKey.Text = datakey;
+
+            cbxValue.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
             cbxValue.Text = val;
+            cbxValue.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
+
             grdMain.Width = 700;
             Opacity = opacity;
         }
-        
-
 
         public void MakeReadOnly()
         {
@@ -333,6 +362,7 @@ namespace EpiDashboard.Mapping
             string tableName = string.Empty;
             string projectPath = string.Empty;
             string viewName = string.Empty;
+            
             if (dashboardHelper.View == null)
             {
                 connectionString = dashboardHelper.Database.ConnectionString;
@@ -343,6 +373,7 @@ namespace EpiDashboard.Mapping
                 projectPath = dashboardHelper.View.Project.FilePath;
                 viewName = dashboardHelper.View.Name;
             }
+            
             string dataKey = cbxDataKey.SelectedItem.ToString();
             string shapeKey = cbxShapeKey.SelectedItem.ToString();
             string value = cbxValue.SelectedItem.ToString();
@@ -394,29 +425,89 @@ namespace EpiDashboard.Mapping
 
         public void CreateFromXml(System.Xml.XmlElement element)
         {
-            string shapefileurl="";
             currentElement = element;
+            base.CreateFromXml(element, Provider);
+
+            foreach (System.Xml.XmlElement child in element.ChildNodes)
+            {
+                if (child.Name.Equals("shapeFile"))
+                {
+                    object[] shapeFileProperties = Provider.Load(child.InnerText);
+                    if (shapeFileProperties != null)
+                    {
+                        if (shapeFileProperties.Length == 2)
+                        {
+                            boundryFilePath = shapeFileProperties[0].ToString();
+                            FeatureLayer graphicsLayer = (FeatureLayer)shapeFileProperties[1];
+
+                        //    if (shapeAttributes != null)
+                        //    {
+                        //        cbxShapeKey.Items.Clear();
+                        //        foreach (string key in shapeAttributes.Keys)
+                        //        {
+                        //            cbxShapeKey.Items.Add(key);
+                        //        }
+                        //    }
+                        }
+                    }
+                }
+            }
+
+            string shapefileurl="";
+
             foreach (System.Xml.XmlElement child in element.ChildNodes)
             {
                 if (child.Name.Equals("shapeFile"))
                 {
                    shapefileurl = child.InnerText; 
                 }
+                
                 if (child.Name.Equals("selectMapFeature"))
                 {
                     cbxMapFeatureText = child.InnerText;
                 }
             }
-            SetValuesFromUrl(shapefileurl);
+
+            if (shapefileurl.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13" && string.IsNullOrEmpty(cbxMapFeatureText) == true)
+            {
+                cbxMapserverText = "NationalMap.gov - New York County Boundaries";
+            }
+            else if (shapefileurl.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19" && string.IsNullOrEmpty(cbxMapFeatureText) == true)
+            {
+                cbxMapserverText = "NationalMap.gov - Rhode Island Zip Code Boundaries";
+            }
+            else if (shapefileurl.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17" && string.IsNullOrEmpty(cbxMapFeatureText) == true)
+            {
+                cbxMapserverText = "NationalMap.gov - U.S. State Boundaries";
+            }
+            else if (shapefileurl.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17" && string.IsNullOrEmpty(cbxMapFeatureText) == true)
+            {
+                cbxMapserverText = "NationalMap.gov - World Boundaries";
+            }
+            else
+            {
+                string lastchar = shapefileurl.Substring(shapefileurl.Length - 1, 1);
+                string lastonebeforechar = shapefileurl.Substring(shapefileurl.Length - 2, 1);
+
+                if (char.IsNumber(lastchar, 0) == true && char.IsNumber(lastonebeforechar, 0) == false)
+                {
+                    txtMapserverText = shapefileurl.Substring(0, shapefileurl.Length - 2);
+                }
+                else if (char.IsNumber(lastchar, 0) == true && char.IsNumber(lastonebeforechar, 0) == true)
+                {
+                    txtMapserverText = shapefileurl.Substring(0, shapefileurl.Length - 3);
+                }
+            }
+            
             string sUrl = GetformattedUrl(shapefileurl);
 
-            if (provider == null)
+            if (Provider == null)
             {
-                provider = new ChoroplethServerLayerProvider(myMap);
-                provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
+                Provider = new ChoroplethServerLayerProvider(myMap);
+                Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
             }
 
-            provider.Load(sUrl); 
+            Provider.Load(sUrl); 
         }
 
         #endregion

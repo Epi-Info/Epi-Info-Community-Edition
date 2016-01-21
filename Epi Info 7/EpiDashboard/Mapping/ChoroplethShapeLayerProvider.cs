@@ -61,7 +61,7 @@ namespace EpiDashboard.Mapping
                 if (graphicsLayer == null)
                 {
                     graphicsLayer = new GraphicsLayer();
-                    graphicsLayer.ID = _layerId.ToString();
+                    graphicsLayer.ID = LayerId.ToString();
                     ArcGIS_Map.Layers.Add(graphicsLayer);
 
                     int recCount = shapeFileReader.Records.Count;
@@ -132,7 +132,7 @@ namespace EpiDashboard.Mapping
 
         override public GraphicsLayer GetGraphicsLayer() 
         {
-            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[LayerId.ToString()] as GraphicsLayer;
             return graphicsLayer;
         }
     }

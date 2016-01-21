@@ -23,8 +23,8 @@ namespace EpiDashboard.Mapping
 
         public ChoroplethKmlLayerProvider(Map clientMap) : base(clientMap)
         {
-            ArcGIS_Map = clientMap;
-            this._layerId = Guid.NewGuid();
+            //ArcGIS_Map = clientMap;
+            //this.LayerId = Guid.NewGuid();
         }
 
         sealed override public object[] Load()
@@ -44,7 +44,7 @@ namespace EpiDashboard.Mapping
             if (!string.IsNullOrEmpty(boundrySourceLocation))
             {
                 _kmlURL = boundrySourceLocation;
-                KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
+                KmlLayer shapeLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
                 
                 if (shapeLayer != null)
                 {
@@ -52,7 +52,7 @@ namespace EpiDashboard.Mapping
                 }
                 
                 shapeLayer = new KmlLayer();
-                shapeLayer.ID = _layerId.ToString();
+                shapeLayer.ID = LayerId.ToString();
                 shapeLayer.Url = new Uri(boundrySourceLocation);
                 shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
                 ArcGIS_Map.Layers.Add(shapeLayer);
@@ -133,7 +133,7 @@ namespace EpiDashboard.Mapping
 
         void shapeLayer_Initialized(object sender, EventArgs e)
         {
-            KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
             GraphicsLayer graphicsLayer = GetGraphicsLayer(shapeLayer);
 
             if (graphicsLayer != null)
@@ -280,7 +280,7 @@ namespace EpiDashboard.Mapping
 
         override public GraphicsLayer GetGraphicsLayer()
         {
-            KmlLayer kmlLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
+            KmlLayer kmlLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
             GraphicsLayer graphicsLayer = GetGraphicsLayer(kmlLayer as Layer);
             return graphicsLayer;
         }
@@ -307,7 +307,7 @@ namespace EpiDashboard.Mapping
 
         override public void CloseLayer()
         {
-            KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
             if (shapeLayer != null)
             {
                 ArcGIS_Map.Layers.Remove(shapeLayer);

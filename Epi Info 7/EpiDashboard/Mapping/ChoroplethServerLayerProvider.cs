@@ -20,8 +20,8 @@ namespace EpiDashboard.Mapping
     {
         public ChoroplethServerLayerProvider(Map clientMap) : base(clientMap)
         {
-            ArcGIS_Map = clientMap;
-            this._layerId = Guid.NewGuid();
+            //ArcGIS_Map = clientMap;
+            //this.LayerId = Guid.NewGuid();
         }
         
         private bool _flagUpdateToGraphicsLayerFailed;
@@ -51,57 +51,57 @@ namespace EpiDashboard.Mapping
         {
             if (!string.IsNullOrEmpty(boundrySourceLocation))
             {
-                FeatureLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as FeatureLayer;
+                FeatureLayer graphicsLayer = ArcGIS_Map.Layers[LayerId.ToString()] as FeatureLayer;
                 if (graphicsLayer != null)
                 {
                     ArcGIS_Map.Layers.Remove(graphicsLayer);
                 }
 
                 graphicsLayer = new FeatureLayer();
-                graphicsLayer.ID = _layerId.ToString();
+                graphicsLayer.ID = LayerId.ToString();
                 graphicsLayer.UpdateCompleted += new EventHandler(graphicsLayer_UpdateCompleted);
                 graphicsLayer.Initialized += new EventHandler<EventArgs>(graphicsLayer_Initialized);
                 graphicsLayer.InitializationFailed += new EventHandler<EventArgs>(graphicsLayer_InitializationFailed);
                 graphicsLayer.UpdateFailed += new EventHandler<TaskFailedEventArgs>(graphicsLayer_UpdateFailed);
 
-                if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - New York County Boundaries") || boundrySourceLocation.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/13"))
-                {
-                    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/13";
-                    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
-                    graphicsLayer.OutFields.Add("COUNTY_NAME");
-                    graphicsLayer.Where = "STATE_FIPSCODE = '36'";
-                    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-80, 45.1)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 40)));
-                }
-                else if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - Rhode Island Zip Code Boundaries") || boundrySourceLocation.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/19"))
-                {
-                    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/19";
-                    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
-                    graphicsLayer.OutFields.Add("NAME");
-                    graphicsLayer.Where = "STATE_FIPSCODE = '44'";
-                    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-72, 42.03)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 41)));
-                }
-                else if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - U.S. State Boundaries") || boundrySourceLocation.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/17"))
-                {
-                    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/17";
-                    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
-                    graphicsLayer.OutFields.Add("STATE_ABBR");
-                    graphicsLayer.OutFields.Add("STATE_NAME");
-                    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-196, 72)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-61, 14.5)));
-                }
-                else if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - World Boundaries"))
-                {
-                    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/TNM_Blank_US/MapServer/17";
-                    ArcGIS_Map.Extent = graphicsLayer.FullExtent;
-                }
-                else
-                {
+                //if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - New York County Boundaries") || boundrySourceLocation.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/13"))
+                //{
+                //    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/13";
+                //    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
+                //    graphicsLayer.OutFields.Add("COUNTY_NAME");
+                //    graphicsLayer.Where = "STATE_FIPSCODE = '36'";
+                //    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-80, 45.1)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 40)));
+                //}
+                //else if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - Rhode Island Zip Code Boundaries") || boundrySourceLocation.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/19"))
+                //{
+                //    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/19";
+                //    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
+                //    graphicsLayer.OutFields.Add("NAME");
+                //    graphicsLayer.Where = "STATE_FIPSCODE = '44'";
+                //    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-72, 42.03)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 41)));
+                //}
+                //else if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - U.S. State Boundaries") || boundrySourceLocation.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/17"))
+                //{
+                //    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/17";
+                //    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
+                //    graphicsLayer.OutFields.Add("STATE_ABBR");
+                //    graphicsLayer.OutFields.Add("STATE_NAME");
+                //    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-196, 72)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-61, 14.5)));
+                //}
+                //else if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - World Boundaries"))
+                //{
+                //    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/TNM_Blank_US/MapServer/17";
+                //    ArcGIS_Map.Extent = graphicsLayer.FullExtent;
+                //}
+                //else
+                //{
                     graphicsLayer.Url = boundrySourceLocation;
-                }
+                //}
 
                 ArcGIS_Map.Layers.Add(graphicsLayer);
                 ArcGIS_Map.Cursor = Cursors.Wait;
 
-                return new object[] { boundrySourceLocation, graphicsLayer };
+                return new object[] { boundrySourceLocation, graphicsLayer};
             }
             else
             {
@@ -129,7 +129,7 @@ namespace EpiDashboard.Mapping
 
         void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
         {
-            FeatureLayer graphicsLayer = ArcGIS_Map.Layers[_layerId.ToString()] as FeatureLayer;
+            FeatureLayer graphicsLayer = ArcGIS_Map.Layers[LayerId.ToString()] as FeatureLayer;
             _flagUpdateToGraphicsLayerFailed = false;
             
             if (graphicsLayer != null)
@@ -154,7 +154,7 @@ namespace EpiDashboard.Mapping
 
         override public GraphicsLayer GetGraphicsLayer()
         {
-            FeatureLayer featureLayer = ArcGIS_Map.Layers[_layerId.ToString()] as FeatureLayer;
+            FeatureLayer featureLayer = ArcGIS_Map.Layers[LayerId.ToString()] as FeatureLayer;
             return featureLayer;
         }
     }
