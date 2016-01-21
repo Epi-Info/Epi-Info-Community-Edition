@@ -2857,7 +2857,7 @@ namespace Epi.Windows.MakeView.Forms
 
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/user-guide/form-designer/Introduction.html");
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/form-designer/Introduction.html");
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)

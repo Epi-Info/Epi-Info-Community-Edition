@@ -207,7 +207,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
         /// <param name="e">.NET supplied event args.</param>
         protected override void btnHelp_Click(object sender, System.EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/user-guide/form-designer/how-to-Create-a-Dialog.html");
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/form-designer/how-to-Create-a-Dialog.html");
         }
 
         #endregion //Private Event Handlers       
