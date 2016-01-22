@@ -747,7 +747,7 @@ namespace EpiDashboard.Mapping
                 renderer.Field = "EpiInfoValCol";
                 renderer.DefaultSymbol = new SimpleFillSymbol()
                 {
-                    Fill = new SolidColorBrush(Colors.Pink),
+                    Fill = new SolidColorBrush(Colors.Transparent),
                     BorderBrush = new SolidColorBrush(Colors.Black),
                     BorderThickness = 1
                 };
@@ -804,7 +804,7 @@ namespace EpiDashboard.Mapping
 
                             SimpleFillSymbol symbol = new SimpleFillSymbol();
 
-                            symbol.Fill = (SolidColorBrush)brushList[brushIndex];
+                            symbol.Fill = fill;
                             symbol.BorderBrush = new SolidColorBrush(Colors.Black);
                             symbol.BorderThickness = 1;
 
@@ -815,7 +815,6 @@ namespace EpiDashboard.Mapping
                             classBreakInfo.MaximumValue = double.Parse(RangeValues[brushIndex, 1]);
                             classBreakInfo.Symbol = symbol;
                             renderer.Classes.Add(classBreakInfo);
-
                         }
 
                         TextBlock t = new TextBlock();
@@ -839,13 +838,22 @@ namespace EpiDashboard.Mapping
                         border.Child = panel;
 
                         graphicFeature.MapTip = border;
+
+                        if (graphicFeature.Attributes.Keys.Contains("EpiInfoValCol"))
+                        {
+                            graphicFeature.Attributes["EpiInfoValCol"] = graphicValue;
+                        }
+                        else
+                        {
+                            graphicFeature.Attributes.Add("EpiInfoValCol", graphicValue);
+                        }
                     }
 
                     if (graphicsLayer is FeatureLayer)
                     {
                         graphicsLayer.Renderer = renderer;
                     }
-            }
+                }
 
                 SetLegendSection(brushList, classCount, missingText, _thematicItem);
             }
