@@ -507,7 +507,8 @@ namespace EpiDashboard.Mapping
                 Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
             }
 
-            Provider.Load(sUrl); 
+            //Provider.Load(sUrl); 
+            //ChoroplethProperties_RenderMap();
         }
 
         #endregion

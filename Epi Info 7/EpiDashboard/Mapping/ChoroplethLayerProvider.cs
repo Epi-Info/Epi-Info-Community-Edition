@@ -710,7 +710,7 @@ namespace EpiDashboard.Mapping
             return thematicItem;
         }
 
-        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string missingText, string legendText)
+        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> brushList, int classCount, string missingText, string legendText)
         {
             try
             {
@@ -722,13 +722,13 @@ namespace EpiDashboard.Mapping
                 _missingText = missingText;
                 _legendText = legendText;
 
-                if(colors != null) _colors = colors;
+                if (brushList != null) _colors = brushList;
 
                 DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
 
                 if (_valueField == "{Record Count}") _valueField = "freq";
 
-                GraphicsLayer graphicsLayer = GetGraphicsLayer();
+                GraphicsLayer graphicsLayer = GetGraphicsLayer() as GraphicsLayer;
 
                 _thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
 
@@ -742,6 +742,15 @@ namespace EpiDashboard.Mapping
                     _thematicItem.RangeStarts = new List<double>() { classCount };
                     PopulateRangeValues();
                 }
+
+                ClassBreaksRenderer renderer = new ClassBreaksRenderer();
+                renderer.Field = "EpiInfoValCol";
+                renderer.DefaultSymbol = new SimpleFillSymbol()
+                {
+                    Fill = new SolidColorBrush(Colors.Pink),
+                    BorderBrush = new SolidColorBrush(Colors.Black),
+                    BorderThickness = 1
+                };
 
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
@@ -782,24 +791,31 @@ namespace EpiDashboard.Mapping
 
                         int brushIndex = GetRangeIndex(graphicValue, _thematicItem.RangeStarts);
 
-                        if(colors != null)
+                        if (brushList != null)
                         {
-                            Color color = ((SolidColorBrush)colors[brushIndex]).Color;
+                            Color color = ((SolidColorBrush)brushList[brushIndex]).Color;
                             Brush fill = new SolidColorBrush(Color.FromArgb(Opacity, color.R, color.G, color.B));
 
                             if (graphicValue == Double.PositiveInfinity)
                             {
-                                color = ((SolidColorBrush)colors[colors.Count - 1]).Color;
+                                color = ((SolidColorBrush)brushList[brushList.Count - 1]).Color;
                                 fill = new SolidColorBrush(Color.FromArgb(Opacity, color.R, color.G, color.B));
                             }
 
                             SimpleFillSymbol symbol = new SimpleFillSymbol();
 
-                            symbol.Fill = fill;
+                            symbol.Fill = (SolidColorBrush)brushList[brushIndex];
                             symbol.BorderBrush = new SolidColorBrush(Colors.Black);
                             symbol.BorderThickness = 1;
 
                             graphicFeature.Symbol = symbol;
+
+                            ClassBreakInfo classBreakInfo = new ClassBreakInfo();
+                            classBreakInfo.MinimumValue = double.Parse(RangeValues[brushIndex, 0]);
+                            classBreakInfo.MaximumValue = double.Parse(RangeValues[brushIndex, 1]);
+                            classBreakInfo.Symbol = symbol;
+                            renderer.Classes.Add(classBreakInfo);
+
                         }
 
                         TextBlock t = new TextBlock();
@@ -824,9 +840,14 @@ namespace EpiDashboard.Mapping
 
                         graphicFeature.MapTip = border;
                     }
-                }
 
-                SetLegendSection(colors, classCount, missingText, _thematicItem);
+                    if (graphicsLayer is FeatureLayer)
+                    {
+                        graphicsLayer.Renderer = renderer;
+                    }
+            }
+
+                SetLegendSection(brushList, classCount, missingText, _thematicItem);
             }
             catch
             {

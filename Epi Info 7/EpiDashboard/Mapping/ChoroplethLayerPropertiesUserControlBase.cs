@@ -225,7 +225,19 @@ namespace EpiDashboard.Mapping
 
             EpiDashboard.Controls.ChoroplethProperties choroplethprop = new Controls.ChoroplethProperties(mapControl as StandaloneMapControl, myMap);
 
-            choroplethprop.txtShapePath.Text = boundryFilePath;
+            if (provider is ChoroplethShapeLayerProvider)
+            {
+                choroplethprop.txtShapePath.Text = boundryFilePath;
+            }
+            else if (provider is ChoroplethKmlLayerProvider)
+            {
+                choroplethprop.txtKMLpath.Text = boundryFilePath;
+            }
+            else if (provider is ChoroplethServerLayerProvider)
+            {
+                choroplethprop.txtMapSeverpath.Text = boundryFilePath;
+            }
+
             choroplethprop.txtProjectPath.Text = dashboardHelper.Database.DataSource;
             choroplethprop.SetDashboardHelper(dashboardHelper);
             choroplethprop.cmbClasses.Text = layerPropertiesControl.cbxClasses.Text;
@@ -255,18 +267,20 @@ namespace EpiDashboard.Mapping
             choroplethprop.rctHighColor.Fill = layerPropertiesControl.rctHighColor.Fill;
             choroplethprop.rctLowColor.Fill = layerPropertiesControl.rctLowColor.Fill;
             choroplethprop.rctMissingColor.Fill = layerPropertiesControl.rctMissingColor.Fill;
-            choroplethprop.radShapeFile.IsChecked = true;
 
             if(provider is ChoroplethShapeLayerProvider)
             {
+                choroplethprop.radShapeFile.IsChecked = true;
                 choroplethprop.choroplethShapeLayerProvider = (ChoroplethShapeLayerProvider)provider;
             }
             else if (provider is ChoroplethKmlLayerProvider)
             {
+                choroplethprop.radKML.IsChecked = true;
                 choroplethprop.choroplethKmlLayerProvider = (ChoroplethKmlLayerProvider)provider;
             }
             else if (provider is ChoroplethServerLayerProvider)
             {
+                choroplethprop.radMapServer.IsChecked = true;
                 choroplethprop.choroplethServerLayerProvider = (ChoroplethServerLayerProvider)provider;
             }
 

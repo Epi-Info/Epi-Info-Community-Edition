@@ -154,8 +154,8 @@ namespace EpiDashboard.Mapping
 
         override public GraphicsLayer GetGraphicsLayer()
         {
-            FeatureLayer featureLayer = ArcGIS_Map.Layers[LayerId.ToString()] as FeatureLayer;
-            return featureLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[LayerId.ToString()] as GraphicsLayer;
+            return graphicsLayer;
         }
     }
 }
