@@ -502,6 +502,9 @@ namespace Epi
         /// EWEFormID
         /// </summary>
         public const string EWEForm_ID = "EWEFormID";
-       
+        /// <summary>
+        /// LastSaveTime
+        /// </summary>
+        public const string RECORD_GLOBAL_ID = "GlobalRecordId";
     }
 }
