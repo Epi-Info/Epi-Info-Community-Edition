@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
-        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAFcAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAFkAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wAgAAF1AYQBjwH/
         AWYBgAGPAf8BYAF5AYcB/wFXAW4BewH/AU4BYgFvAf8BRAFWAWEB/wE5AUgBUgH/AS4BOgFDAf8BJQEu
         ATUB/wEbASIBKQH/ARQBGQEeAf8BDgESARYB/wEOARMBGAH/DAABdQGEAY8B/wFsAXoBhQH/AWABbQF3
@@ -720,10 +720,10 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="rdbListofValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>506, 16</value>
+    <value>607, 18</value>
   </data>
   <data name="rdbListofValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 24</value>
+    <value>287, 28</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdbListofValues.TabIndex" type="System.Int32, mscorlib">
@@ -754,10 +754,10 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="rdbGetVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 16</value>
+    <value>313, 18</value>
   </data>
   <data name="rdbGetVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 24</value>
+    <value>287, 28</value>
   </data>
   <data name="rdbGetVar.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -787,10 +787,10 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="rdbSimple.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 16</value>
+    <value>19, 18</value>
   </data>
   <data name="rdbSimple.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 24</value>
+    <value>287, 28</value>
   </data>
   <data name="rdbSimple.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -814,10 +814,10 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="gbxDialogType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 13</value>
+    <value>-66, -5</value>
   </data>
   <data name="gbxDialogType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>764, 48</value>
+    <value>917, 55</value>
   </data>
   <data name="gbxDialogType.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -841,10 +841,10 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 64</value>
+    <value>10, 74</value>
   </data>
   <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 16</value>
+    <value>456, 18</value>
   </data>
   <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -865,10 +865,10 @@
     <value>16</value>
   </data>
   <data name="txtTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 80</value>
+    <value>10, 92</value>
   </data>
   <data name="txtTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 20</value>
+    <value>456, 22</value>
   </data>
   <data name="txtTitle.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -889,10 +889,10 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblPrompt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 107</value>
+    <value>10, 123</value>
   </data>
   <data name="lblPrompt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 16</value>
+    <value>456, 19</value>
   </data>
   <data name="lblPrompt.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -913,7 +913,7 @@
     <value>13</value>
   </data>
   <data name="txtPrompt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 123</value>
+    <value>10, 142</value>
   </data>
   <data name="txtPrompt.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -922,7 +922,7 @@
     <value>Both</value>
   </data>
   <data name="txtPrompt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 37</value>
+    <value>456, 43</value>
   </data>
   <data name="txtPrompt.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -943,10 +943,10 @@
     <value>System</value>
   </data>
   <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>701, 223</value>
+    <value>841, 257</value>
   </data>
   <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 27</value>
   </data>
   <data name="btnHelp.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -970,10 +970,10 @@
     <value>System</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>541, 223</value>
+    <value>649, 257</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 27</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1000,10 +1000,10 @@
     <value>System</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>461, 223</value>
+    <value>553, 257</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 27</value>
   </data>
   <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1027,10 +1027,10 @@
     <value>System</value>
   </data>
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>621, 223</value>
+    <value>745, 257</value>
   </data>
   <data name="btnClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 27</value>
   </data>
   <data name="btnClear.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1051,10 +1051,10 @@
     <value>12</value>
   </data>
   <data name="cmbInputVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 181</value>
+    <value>10, 209</value>
   </data>
   <data name="cmbInputVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 21</value>
+    <value>456, 24</value>
   </data>
   <data name="cmbInputVar.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1075,10 +1075,10 @@
     <value>8</value>
   </data>
   <data name="lblInputVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 165</value>
+    <value>10, 190</value>
   </data>
   <data name="lblInputVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 16</value>
+    <value>456, 19</value>
   </data>
   <data name="lblInputVar.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1102,10 +1102,10 @@
     <value>7</value>
   </data>
   <data name="cmbDialogType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 123</value>
+    <value>473, 142</value>
   </data>
   <data name="cmbDialogType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 21</value>
+    <value>456, 24</value>
   </data>
   <data name="cmbDialogType.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1117,7 +1117,7 @@
     <value>cmbDialogType</value>
   </data>
   <data name="&gt;&gt;cmbDialogType.Type" xml:space="preserve">
-    <value>Epi.Windows.Controls.LocalizedComboBox, Epi.Windows, Version=7.1.5858.17434, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Controls.LocalizedComboBox, Epi.Windows, Version=7.1.5865.14839, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cmbDialogType.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1126,10 +1126,10 @@
     <value>6</value>
   </data>
   <data name="lblDialogType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 107</value>
+    <value>473, 123</value>
   </data>
   <data name="lblDialogType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 16</value>
+    <value>456, 19</value>
   </data>
   <data name="lblDialogType.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1156,10 +1156,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblVarType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 64</value>
+    <value>473, 74</value>
   </data>
   <data name="lblVarType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 16</value>
+    <value>456, 18</value>
   </data>
   <data name="lblVarType.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1186,10 +1186,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblShowTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 107</value>
+    <value>473, 123</value>
   </data>
   <data name="lblShowTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 16</value>
+    <value>456, 19</value>
   </data>
   <data name="lblShowTable.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1225,10 +1225,10 @@
     <value>Column4</value>
   </data>
   <data name="cmbShowTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 123</value>
+    <value>473, 142</value>
   </data>
   <data name="cmbShowTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 21</value>
+    <value>456, 24</value>
   </data>
   <data name="cmbShowTable.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1252,10 +1252,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblShowVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 162</value>
+    <value>473, 187</value>
   </data>
   <data name="lblShowVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 16</value>
+    <value>456, 18</value>
   </data>
   <data name="lblShowVar.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1291,10 +1291,10 @@
     <value>Column4</value>
   </data>
   <data name="cmbShowVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 181</value>
+    <value>473, 209</value>
   </data>
   <data name="cmbShowVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 21</value>
+    <value>456, 24</value>
   </data>
   <data name="cmbShowVar.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1318,10 +1318,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblInputMask.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 162</value>
+    <value>473, 187</value>
   </data>
   <data name="lblInputMask.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 16</value>
+    <value>456, 18</value>
   </data>
   <data name="lblInputMask.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -1345,10 +1345,10 @@
     <value>22</value>
   </data>
   <data name="cmbInputMask.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 181</value>
+    <value>473, 209</value>
   </data>
   <data name="cmbInputMask.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 21</value>
+    <value>456, 24</value>
   </data>
   <data name="cmbInputMask.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -1369,10 +1369,10 @@
     <value>23</value>
   </data>
   <data name="cmbVarType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>396, 80</value>
+    <value>475, 92</value>
   </data>
   <data name="cmbVarType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 21</value>
+    <value>456, 24</value>
   </data>
   <data name="cmbVarType.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -1384,7 +1384,7 @@
     <value>cmbVarType</value>
   </data>
   <data name="&gt;&gt;cmbVarType.Type" xml:space="preserve">
-    <value>Epi.Windows.Controls.LocalizedComboBox, Epi.Windows, Version=7.1.5858.17434, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Controls.LocalizedComboBox, Epi.Windows, Version=7.1.5865.14839, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cmbVarType.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1399,10 +1399,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 162</value>
+    <value>473, 187</value>
   </data>
   <data name="lblLength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 16</value>
+    <value>456, 18</value>
   </data>
   <data name="lblLength.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -1423,13 +1423,13 @@
     <value>21</value>
   </data>
   <data name="txtLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 181</value>
+    <value>473, 209</value>
   </data>
   <data name="txtLength.Mask" xml:space="preserve">
     <value>00000</value>
   </data>
   <data name="txtLength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 20</value>
+    <value>456, 22</value>
   </data>
   <data name="txtLength.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -1456,10 +1456,10 @@
     <value>NoControl</value>
   </data>
   <data name="btnSaveOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>381, 223</value>
+    <value>457, 257</value>
   </data>
   <data name="btnSaveOnly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 27</value>
   </data>
   <data name="btnSaveOnly.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -1483,7 +1483,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
-    <value>5, 13</value>
+    <value>6, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>785, 258</value>
@@ -1504,6 +1504,6 @@
     <value>DialogDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.MakeView.Dialogs.CommandDesignDialog, MakeView, Version=7.1.5858.17912, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.MakeView.Dialogs.CommandDesignDialog, MakeView, Version=7.1.5865.14841, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
