@@ -432,7 +432,7 @@ namespace Epi.Windows.Enter
         /// <param name="e">.NET supplied event parameters</param>
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/user-guide/enter-data/introduction.html");
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/enter-data/introduction.html");
         }
 
         /// <summary>

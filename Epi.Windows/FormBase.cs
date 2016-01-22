@@ -68,7 +68,7 @@ namespace Epi.Windows
         /// <param name="e">.NET supplied event parameters</param>
 		protected virtual void btnHelp_Click(object sender, System.EventArgs e)
 		{
-            System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/user-guide/index.htm");
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/index.htm");
         }
 
         /// <summary>
