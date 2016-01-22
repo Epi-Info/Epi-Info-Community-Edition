@@ -311,7 +311,11 @@ namespace Epi.Windows.MakeView.Dialogs
                 cmb.Items.Clear();
                 foreach (EpiInfo.Plugin.IVariable var in vars)
                 {
-                    if (var.Name != ColumnNames.REC_STATUS && var.Name != ColumnNames.UNIQUE_KEY)
+                    if (var.Name != ColumnNames.REC_STATUS 
+                        && var.Name != ColumnNames.UNIQUE_KEY 
+                        && var.Name != ColumnNames.RECORD_FIRST_SAVE_TIME
+                        && var.Name != ColumnNames.RECORD_LAST_SAVE_TIME
+                        && var.Name != ColumnNames.RECORD_GLOBAL_ID)
                     {
                         cmb.Items.Add(var.Name.ToString());
                     }
