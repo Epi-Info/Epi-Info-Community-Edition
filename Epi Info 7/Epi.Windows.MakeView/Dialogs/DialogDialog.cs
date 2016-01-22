@@ -379,7 +379,7 @@ namespace Epi.Windows.MakeView.Dialogs
                     List<string> names = project.GetDataTableNames();
                     foreach (string name in names)
                     {
-                        if (name != string.Empty)
+                        if (name != string.Empty && name.ToUpper().IndexOf("META")!=0)
                         {
                             cmb.Items.Add(name);
                         }
