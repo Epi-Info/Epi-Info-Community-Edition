@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
-        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAFkAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAF0AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wAgAAF1AYQBjwH/
         AWYBgAGPAf8BYAF5AYcB/wFXAW4BewH/AU4BYgFvAf8BRAFWAWEB/wE5AUgBUgH/AS4BOgFDAf8BJQEu
         ATUB/wEbASIBKQH/ARQBGQEeAf8BDgESARYB/wEOARMBGAH/DAABdQGEAY8B/wFsAXoBhQH/AWABbQF3
@@ -814,7 +814,7 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="gbxDialogType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-66, -5</value>
+    <value>10, 12</value>
   </data>
   <data name="gbxDialogType.Size" type="System.Drawing.Size, System.Drawing">
     <value>917, 55</value>
@@ -1117,7 +1117,7 @@
     <value>cmbDialogType</value>
   </data>
   <data name="&gt;&gt;cmbDialogType.Type" xml:space="preserve">
-    <value>Epi.Windows.Controls.LocalizedComboBox, Epi.Windows, Version=7.1.5865.14839, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Controls.LocalizedComboBox, Epi.Windows, Version=7.1.5865.16621, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cmbDialogType.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1384,7 +1384,7 @@
     <value>cmbVarType</value>
   </data>
   <data name="&gt;&gt;cmbVarType.Type" xml:space="preserve">
-    <value>Epi.Windows.Controls.LocalizedComboBox, Epi.Windows, Version=7.1.5865.14839, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Controls.LocalizedComboBox, Epi.Windows, Version=7.1.5865.16621, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cmbVarType.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1486,7 +1486,7 @@
     <value>6, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>785, 258</value>
+    <value>937, 258</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>WindowsDefaultLocation</value>
@@ -1504,6 +1504,6 @@
     <value>DialogDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.MakeView.Dialogs.CommandDesignDialog, MakeView, Version=7.1.5865.14841, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.MakeView.Dialogs.CommandDesignDialog, MakeView, Version=7.1.5865.16623, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
