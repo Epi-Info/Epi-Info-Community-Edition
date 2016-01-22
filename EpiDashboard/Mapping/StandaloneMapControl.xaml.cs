@@ -2078,7 +2078,7 @@ namespace EpiDashboard.Mapping
         {
             if (string.IsNullOrEmpty(choroplethLayerProperties.boundryFilePath) == false)
             {
-                choroplethproperties.txtShapePath.Text = choroplethLayerProperties.boundryFilePath;
+                choroplethproperties.txtMapSeverpath.Text = choroplethLayerProperties.boundryFilePath;
                 //choroplethproperties.shapeAttributes = choroplethLayerProperties.shapeAttributes;
                 choroplethproperties.cmbShapeKey.Items.Clear();
 
