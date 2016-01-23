@@ -268,6 +268,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReadDialog";
+            this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Load += new System.EventHandler(this.ReadDialog_Load);
             this.gbxExplorer.ResumeLayout(false);

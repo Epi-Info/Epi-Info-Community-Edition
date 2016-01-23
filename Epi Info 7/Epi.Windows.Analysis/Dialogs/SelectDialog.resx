@@ -112,20 +112,20 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="baseImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
-        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEsAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAE0AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wAgAAF1AYQBjwH/
         AWYBgAGPAf8BYAF5AYcB/wFXAW4BewH/AU4BYgFvAf8BRAFWAWEB/wE5AUgBUgH/AS4BOgFDAf8BJQEu
         ATUB/wEbASIBKQH/ARQBGQEeAf8BDgESARYB/wEOARMBGAH/DAABdQGEAY8B/wFsAXoBhQH/AWABbQF3
@@ -705,18 +705,18 @@
         AfABAQHzAf8BAAEBAYwBAQH4AQAB9wP/AY8B/xYACw==
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnHelp.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 173</value>
+    <value>501, 187</value>
   </data>
   <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnHelp.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
@@ -727,7 +727,7 @@
     <value>btnHelp</value>
   </data>
   <data name="&gt;&gt;btnHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnHelp.Parent" xml:space="preserve">
     <value>$this</value>
@@ -739,10 +739,10 @@
     <value>System</value>
   </data>
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>356, 173</value>
+    <value>309, 187</value>
   </data>
   <data name="btnClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnClear.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -754,7 +754,7 @@
     <value>btnClear</value>
   </data>
   <data name="&gt;&gt;btnClear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnClear.Parent" xml:space="preserve">
     <value>$this</value>
@@ -766,10 +766,10 @@
     <value>System</value>
   </data>
   <data name="btnFunctions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 173</value>
+    <value>12, 187</value>
   </data>
   <data name="btnFunctions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnFunctions.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -781,7 +781,7 @@
     <value>btnFunctions</value>
   </data>
   <data name="&gt;&gt;btnFunctions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnFunctions.Parent" xml:space="preserve">
     <value>$this</value>
@@ -793,10 +793,10 @@
     <value>System</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 173</value>
+    <value>213, 187</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -808,7 +808,7 @@
     <value>btnCancel</value>
   </data>
   <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -823,10 +823,10 @@
     <value>System</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 173</value>
+    <value>117, 187</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -838,7 +838,7 @@
     <value>btnOK</value>
   </data>
   <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
     <value>$this</value>
@@ -853,7 +853,7 @@
     <value>12, 11</value>
   </data>
   <data name="lblAvailableVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 16</value>
+    <value>579, 16</value>
   </data>
   <data name="lblAvailableVar.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -865,7 +865,7 @@
     <value>lblAvailableVar</value>
   </data>
   <data name="&gt;&gt;lblAvailableVar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblAvailableVar.Parent" xml:space="preserve">
     <value>$this</value>
@@ -877,7 +877,7 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="txtSelectCriteria.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 96</value>
+    <value>12, 125</value>
   </data>
   <data name="txtSelectCriteria.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -895,7 +895,7 @@
     <value>txtSelectCriteria</value>
   </data>
   <data name="&gt;&gt;txtSelectCriteria.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtSelectCriteria.Parent" xml:space="preserve">
     <value>$this</value>
@@ -907,10 +907,10 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="lblSelectCriteria.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 77</value>
+    <value>12, 106</value>
   </data>
   <data name="lblSelectCriteria.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 16</value>
+    <value>541, 16</value>
   </data>
   <data name="lblSelectCriteria.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -922,7 +922,7 @@
     <value>lblSelectCriteria</value>
   </data>
   <data name="&gt;&gt;lblSelectCriteria.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblSelectCriteria.Parent" xml:space="preserve">
     <value>$this</value>
@@ -934,7 +934,7 @@
     <value>System</value>
   </data>
   <data name="btnMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 51</value>
+    <value>312, 78</value>
   </data>
   <data name="btnMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -949,7 +949,7 @@
     <value>btnMissing</value>
   </data>
   <data name="&gt;&gt;btnMissing.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnMissing.Parent" xml:space="preserve">
     <value>$this</value>
@@ -961,7 +961,7 @@
     <value>System</value>
   </data>
   <data name="btnNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 51</value>
+    <value>237, 78</value>
   </data>
   <data name="btnNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -976,7 +976,7 @@
     <value>btnNo</value>
   </data>
   <data name="&gt;&gt;btnNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnNo.Parent" xml:space="preserve">
     <value>$this</value>
@@ -988,7 +988,7 @@
     <value>System</value>
   </data>
   <data name="btnYes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>366, 51</value>
+    <value>162, 78</value>
   </data>
   <data name="btnYes.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1003,7 +1003,7 @@
     <value>btnYes</value>
   </data>
   <data name="&gt;&gt;btnYes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnYes.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1015,7 +1015,7 @@
     <value>System</value>
   </data>
   <data name="btnOr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 51</value>
+    <value>87, 78</value>
   </data>
   <data name="btnOr.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1030,7 +1030,7 @@
     <value>btnOr</value>
   </data>
   <data name="&gt;&gt;btnOr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnOr.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1042,7 +1042,7 @@
     <value>System</value>
   </data>
   <data name="btnAnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 51</value>
+    <value>12, 78</value>
   </data>
   <data name="btnAnd.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1057,7 +1057,7 @@
     <value>btnAnd</value>
   </data>
   <data name="&gt;&gt;btnAnd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnAnd.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1069,7 +1069,7 @@
     <value>System</value>
   </data>
   <data name="btnClosedParen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>556, 27</value>
+    <value>352, 54</value>
   </data>
   <data name="btnClosedParen.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 23</value>
@@ -1084,7 +1084,7 @@
     <value>btnClosedParen</value>
   </data>
   <data name="&gt;&gt;btnClosedParen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnClosedParen.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1096,7 +1096,7 @@
     <value>System</value>
   </data>
   <data name="btnOpenParen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>522, 27</value>
+    <value>318, 54</value>
   </data>
   <data name="btnOpenParen.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1111,7 +1111,7 @@
     <value>btnOpenParen</value>
   </data>
   <data name="&gt;&gt;btnOpenParen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnOpenParen.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1123,7 +1123,7 @@
     <value>System</value>
   </data>
   <data name="btnQuote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>488, 27</value>
+    <value>284, 54</value>
   </data>
   <data name="btnQuote.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1138,7 +1138,7 @@
     <value>btnQuote</value>
   </data>
   <data name="&gt;&gt;btnQuote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnQuote.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1150,7 +1150,7 @@
     <value>System</value>
   </data>
   <data name="btnAmpersand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>454, 27</value>
+    <value>250, 54</value>
   </data>
   <data name="btnAmpersand.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1165,7 +1165,7 @@
     <value>btnAmpersand</value>
   </data>
   <data name="&gt;&gt;btnAmpersand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnAmpersand.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1177,7 +1177,7 @@
     <value>System</value>
   </data>
   <data name="btnGreaterThan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>420, 27</value>
+    <value>216, 54</value>
   </data>
   <data name="btnGreaterThan.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1192,7 +1192,7 @@
     <value>btnGreaterThan</value>
   </data>
   <data name="&gt;&gt;btnGreaterThan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnGreaterThan.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1204,7 +1204,7 @@
     <value>System</value>
   </data>
   <data name="btnLessThan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>386, 27</value>
+    <value>182, 54</value>
   </data>
   <data name="btnLessThan.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1219,7 +1219,7 @@
     <value>btnLessThan</value>
   </data>
   <data name="&gt;&gt;btnLessThan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnLessThan.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1231,7 +1231,7 @@
     <value>System</value>
   </data>
   <data name="btnAdd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 27</value>
+    <value>12, 54</value>
   </data>
   <data name="btnAdd.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1246,7 +1246,7 @@
     <value>btnAdd</value>
   </data>
   <data name="&gt;&gt;btnAdd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnAdd.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1258,7 +1258,7 @@
     <value>System</value>
   </data>
   <data name="btnMinus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 27</value>
+    <value>46, 54</value>
   </data>
   <data name="btnMinus.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1273,7 +1273,7 @@
     <value>btnMinus</value>
   </data>
   <data name="&gt;&gt;btnMinus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnMinus.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1285,7 +1285,7 @@
     <value>System</value>
   </data>
   <data name="btnMultiply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>284, 27</value>
+    <value>80, 54</value>
   </data>
   <data name="btnMultiply.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1300,7 +1300,7 @@
     <value>btnMultiply</value>
   </data>
   <data name="&gt;&gt;btnMultiply.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnMultiply.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1312,7 +1312,7 @@
     <value>System</value>
   </data>
   <data name="btnDivide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 27</value>
+    <value>114, 54</value>
   </data>
   <data name="btnDivide.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1327,7 +1327,7 @@
     <value>btnDivide</value>
   </data>
   <data name="&gt;&gt;btnDivide.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnDivide.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1339,7 +1339,7 @@
     <value>System</value>
   </data>
   <data name="btnEqual.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 27</value>
+    <value>148, 54</value>
   </data>
   <data name="btnEqual.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1354,7 +1354,7 @@
     <value>btnEqual</value>
   </data>
   <data name="&gt;&gt;btnEqual.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnEqual.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1378,7 +1378,7 @@
     <value>12, 27</value>
   </data>
   <data name="cmbAvailableVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 21</value>
+    <value>579, 21</value>
   </data>
   <data name="cmbAvailableVar.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1387,7 +1387,7 @@
     <value>cmbAvailableVar</value>
   </data>
   <data name="&gt;&gt;cmbAvailableVar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmbAvailableVar.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1402,10 +1402,10 @@
     <value>System</value>
   </data>
   <data name="btnSaveOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>436, 173</value>
+    <value>405, 187</value>
   </data>
   <data name="btnSaveOnly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnSaveOnly.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -1417,7 +1417,7 @@
     <value>btnSaveOnly</value>
   </data>
   <data name="&gt;&gt;btnSaveOnly.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnSaveOnly.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1432,7 +1432,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>559, 96</value>
+    <value>559, 125</value>
   </data>
   <data name="btnFunction.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 23</value>
@@ -1447,7 +1447,7 @@
     <value>btnFunction</value>
   </data>
   <data name="&gt;&gt;btnFunction.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnFunction.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1455,14 +1455,14 @@
   <data name="&gt;&gt;btnFunction.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
     <value>5, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>603, 208</value>
+    <value>603, 222</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Select</value>
@@ -1471,12 +1471,12 @@
     <value>baseImageList</value>
   </data>
   <data name="&gt;&gt;baseImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SelectDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.4716.31051, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5866.24884, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
