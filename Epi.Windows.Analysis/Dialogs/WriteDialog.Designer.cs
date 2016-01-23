@@ -154,10 +154,10 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // gbxOutputMode
             // 
+            resources.ApplyResources(this.gbxOutputMode, "gbxOutputMode");
             this.gbxOutputMode.Controls.Add(this.rdbReplace);
             this.gbxOutputMode.Controls.Add(this.rdbAppend);
             this.gbxOutputMode.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            resources.ApplyResources(this.gbxOutputMode, "gbxOutputMode");
             this.gbxOutputMode.Name = "gbxOutputMode";
             this.gbxOutputMode.TabStop = false;
             // 
@@ -175,14 +175,14 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblOutputFormat
             // 
-            this.lblOutputFormat.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblOutputFormat, "lblOutputFormat");
+            this.lblOutputFormat.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblOutputFormat.Name = "lblOutputFormat";
             // 
             // cmbOutputFormat
             // 
-            this.cmbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbOutputFormat, "cmbOutputFormat");
+            this.cmbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOutputFormat.Items.AddRange(new object[] {
             resources.GetString("cmbOutputFormat.Items"),
             resources.GetString("cmbOutputFormat.Items1"),
@@ -206,8 +206,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblFilename
             // 
-            this.lblFilename.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblFilename, "lblFilename");
+            this.lblFilename.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblFilename.Name = "lblFilename";
             // 
             // cmbDataTable
@@ -218,8 +218,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblDataTable
             // 
-            this.lblDataTable.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblDataTable, "lblDataTable");
+            this.lblDataTable.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblDataTable.Name = "lblDataTable";
             // 
             // btnHelp
@@ -230,8 +230,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             // 
             // btnOK
