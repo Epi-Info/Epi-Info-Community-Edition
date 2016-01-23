@@ -109,6 +109,7 @@ namespace Epi.Windows.Dialogs
             this.rbUseWindows = new System.Windows.Forms.RadioButton();
             this.lblEndpoint = new System.Windows.Forms.Label();
             this.tabPageWebEnter = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.EWErbWSHTTP = new System.Windows.Forms.RadioButton();
             this.EWErbBasic = new System.Windows.Forms.RadioButton();
@@ -123,7 +124,6 @@ namespace Epi.Windows.Dialogs
             this.btnApply = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.openFileDialogDataDriver = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControlDateTime.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -367,9 +367,9 @@ namespace Epi.Windows.Dialogs
             // 
             // lbxLanguages
             // 
-            resources.ApplyResources(this.lbxLanguages, "lbxLanguages");
             this.lbxLanguages.Items.AddRange(new object[] {
             resources.GetString("lbxLanguages.Items")});
+            resources.ApplyResources(this.lbxLanguages, "lbxLanguages");
             this.lbxLanguages.Name = "lbxLanguages";
             this.lbxLanguages.SelectedIndexChanged += new System.EventHandler(this.lbxLanguages_SelectedIndexChanged);
             // 
@@ -712,6 +712,13 @@ namespace Epi.Windows.Dialogs
             this.tabPageWebEnter.Name = "tabPageWebEnter";
             this.tabPageWebEnter.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.EWErbWSHTTP);
@@ -802,13 +809,6 @@ namespace Epi.Windows.Dialogs
             // openFileDialogDataDriver
             // 
             resources.ApplyResources(this.openFileDialogDataDriver, "openFileDialogDataDriver");
-            // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // OptionsDialog
             // 
