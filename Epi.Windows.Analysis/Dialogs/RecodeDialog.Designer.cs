@@ -170,8 +170,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblUSFormats
             // 
-            this.lblUSFormats.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblUSFormats, "lblUSFormats");
+            this.lblUSFormats.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblUSFormats.Name = "lblUSFormats";
             // 
             // btnHelp
@@ -182,8 +182,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             // 
             // btnOK
@@ -210,14 +210,14 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblStart
             // 
-            this.lblStart.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblStart, "lblStart");
+            this.lblStart.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblStart.Name = "lblStart";
             // 
             // lblEnd
             // 
-            this.lblEnd.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblEnd, "lblEnd");
+            this.lblEnd.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblEnd.Name = "lblEnd";
             // 
             // txtEnd
@@ -228,8 +228,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblBy
             // 
-            this.lblBy.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblBy, "lblBy");
+            this.lblBy.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblBy.Name = "lblBy";
             // 
             // txtBy
@@ -245,8 +245,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // dataGrid
             // 
-            this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(this.dataGrid, "dataGrid");
+            this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGrid.Name = "dataGrid";
             // 
             // RecodeDialog

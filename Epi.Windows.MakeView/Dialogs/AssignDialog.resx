@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABS
-        dQAAAk1TRnQBSQFMAgEBRgEAAUoBAAE0AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        dQAAAk1TRnQBSQFMAgEBRgEAAUoBAAE8AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwAB/AMAAQEBAAEgBgAB/CEAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
         FwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf+XAAH/AQABgAEAAf8BAAGA
         AQAB/wMAGf8DAAH/FwAl/wMAAf+XAAH/AQABgAEAAf8BAAGAAQAB/wMAGf8DAAH/FwAl/wMAAf+LAAH/
@@ -634,10 +634,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>502, 193</value>
+    <value>492, 193</value>
   </data>
   <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnHelp.TabIndex" type="System.Int32, mscorlib">
@@ -662,10 +662,10 @@
     <value>System</value>
   </data>
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>421, 193</value>
+    <value>396, 193</value>
   </data>
   <data name="btnClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnClear.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -689,10 +689,10 @@
     <value>System</value>
   </data>
   <data name="btnFunctions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>340, 193</value>
+    <value>300, 193</value>
   </data>
   <data name="btnFunctions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnFunctions.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -716,10 +716,10 @@
     <value>System</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 193</value>
+    <value>204, 193</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -746,10 +746,10 @@
     <value>System</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 193</value>
+    <value>108, 193</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -773,7 +773,7 @@
     <value>12, 124</value>
   </data>
   <data name="cmbAvailVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>565, 21</value>
+    <value>570, 21</value>
   </data>
   <data name="cmbAvailVar.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -866,7 +866,7 @@
     <value>12, 25</value>
   </data>
   <data name="cmbAssignVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>565, 21</value>
+    <value>570, 21</value>
   </data>
   <data name="cmbAssignVar.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -920,10 +920,10 @@
     <value>NoControl</value>
   </data>
   <data name="btnSaveOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 193</value>
+    <value>12, 193</value>
   </data>
   <data name="btnSaveOnly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnSaveOnly.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -953,7 +953,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 76</value>
+    <value>312, 76</value>
   </data>
   <data name="btnMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -983,7 +983,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 76</value>
+    <value>237, 76</value>
   </data>
   <data name="btnNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1013,7 +1013,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnYes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 76</value>
+    <value>162, 76</value>
   </data>
   <data name="btnYes.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1043,7 +1043,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnOr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 76</value>
+    <value>87, 76</value>
   </data>
   <data name="btnOr.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1073,7 +1073,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnAnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 76</value>
+    <value>12, 76</value>
   </data>
   <data name="btnAnd.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1103,7 +1103,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnCloseParen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>354, 52</value>
+    <value>352, 52</value>
   </data>
   <data name="btnCloseParen.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 23</value>
@@ -1133,7 +1133,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnOpenParen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>320, 52</value>
+    <value>318, 52</value>
   </data>
   <data name="btnOpenParen.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1163,7 +1163,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnQuote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 52</value>
+    <value>284, 52</value>
   </data>
   <data name="btnQuote.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1193,7 +1193,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnAmp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 52</value>
+    <value>250, 52</value>
   </data>
   <data name="btnAmp.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1223,7 +1223,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnGreat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 52</value>
+    <value>216, 52</value>
   </data>
   <data name="btnGreat.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1253,7 +1253,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnLess.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 52</value>
+    <value>182, 52</value>
   </data>
   <data name="btnLess.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1283,7 +1283,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnPlus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 52</value>
+    <value>12, 52</value>
   </data>
   <data name="btnPlus.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1313,7 +1313,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnMinus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>48, 52</value>
+    <value>46, 52</value>
   </data>
   <data name="btnMinus.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1343,7 +1343,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnTimes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 52</value>
+    <value>80, 52</value>
   </data>
   <data name="btnTimes.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1373,7 +1373,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnDivide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 52</value>
+    <value>114, 52</value>
   </data>
   <data name="btnDivide.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1403,7 +1403,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnEqual.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 52</value>
+    <value>148, 52</value>
   </data>
   <data name="btnEqual.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1436,7 +1436,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnFx.Location" type="System.Drawing.Point, System.Drawing">
-    <value>545, 164</value>
+    <value>550, 164</value>
   </data>
   <data name="btnFx.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 23</value>
@@ -1466,7 +1466,7 @@
     <value>5, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>585, 222</value>
+    <value>589, 222</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Assign</value>
@@ -1481,6 +1481,6 @@
     <value>AssignDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.MakeView.Dialogs.CommandDesignDialog, MakeView, Version=7.1.5856.29383, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.MakeView.Dialogs.CommandDesignDialog, MakeView, Version=7.1.5866.22834, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

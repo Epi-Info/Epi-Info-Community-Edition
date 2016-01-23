@@ -112,20 +112,20 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="baseImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABS
-        dQAAAk1TRnQBSQFMAgEBRgEAAUoBAAFEAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        dQAAAk1TRnQBSQFMAgEBRgEAAUoBAAFMAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwAB/AMAAQEBAAEgBgAB/CEAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
         FwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf+XAAH/AQABgAEAAf8BAAGA
         AQAB/wMAGf8DAAH/FwAl/wMAAf+XAAH/AQABgAEAAf8BAAGAAQAB/wMAGf8DAAH/FwAl/wMAAf+LAAH/
@@ -628,18 +628,18 @@
         AX8B/QGPAf8B8AEBAfMB/wEAAQEBjAEBAfgBAAH3A/8BjwH/FgAL
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnHelp.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>499, 166</value>
+    <value>492, 192</value>
   </data>
   <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnHelp.TabIndex" type="System.Int32, mscorlib">
     <value>67</value>
   </data>
@@ -650,7 +650,7 @@
     <value>btnHelp</value>
   </data>
   <data name="&gt;&gt;btnHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnHelp.Parent" xml:space="preserve">
     <value>$this</value>
@@ -662,10 +662,10 @@
     <value>System</value>
   </data>
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>418, 166</value>
+    <value>396, 192</value>
   </data>
   <data name="btnClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnClear.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
@@ -677,7 +677,7 @@
     <value>btnClear</value>
   </data>
   <data name="&gt;&gt;btnClear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnClear.Parent" xml:space="preserve">
     <value>$this</value>
@@ -689,10 +689,10 @@
     <value>System</value>
   </data>
   <data name="btnFunctions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>337, 166</value>
+    <value>300, 192</value>
   </data>
   <data name="btnFunctions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnFunctions.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
@@ -704,7 +704,7 @@
     <value>btnFunctions</value>
   </data>
   <data name="&gt;&gt;btnFunctions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnFunctions.Parent" xml:space="preserve">
     <value>$this</value>
@@ -716,10 +716,10 @@
     <value>System</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 166</value>
+    <value>204, 192</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>64</value>
@@ -731,7 +731,7 @@
     <value>btnCancel</value>
   </data>
   <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -746,10 +746,10 @@
     <value>System</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 166</value>
+    <value>108, 192</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
     <value>63</value>
@@ -761,7 +761,7 @@
     <value>btnOK</value>
   </data>
   <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
     <value>$this</value>
@@ -770,10 +770,10 @@
     <value>27</value>
   </data>
   <data name="cmbAvailVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 139</value>
+    <value>12, 123</value>
   </data>
   <data name="cmbAvailVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 21</value>
+    <value>567, 21</value>
   </data>
   <data name="cmbAvailVar.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -782,7 +782,7 @@
     <value>cmbAvailVar</value>
   </data>
   <data name="&gt;&gt;cmbAvailVar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmbAvailVar.Parent" xml:space="preserve">
     <value>$this</value>
@@ -791,10 +791,10 @@
     <value>21</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 123</value>
+    <value>12, 107</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 13</value>
+    <value>567, 13</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -806,7 +806,7 @@
     <value>Label3</value>
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>$this</value>
@@ -815,10 +815,10 @@
     <value>22</value>
   </data>
   <data name="txtExpression.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 92</value>
+    <value>12, 163</value>
   </data>
   <data name="txtExpression.Size" type="System.Drawing.Size, System.Drawing">
-    <value>524, 20</value>
+    <value>532, 20</value>
   </data>
   <data name="txtExpression.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -827,7 +827,7 @@
     <value>txtExpression</value>
   </data>
   <data name="&gt;&gt;txtExpression.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtExpression.Parent" xml:space="preserve">
     <value>$this</value>
@@ -839,7 +839,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 76</value>
+    <value>12, 147</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>524, 13</value>
@@ -854,7 +854,7 @@
     <value>Label2</value>
   </data>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -866,7 +866,7 @@
     <value>12, 24</value>
   </data>
   <data name="cmbAssignVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 21</value>
+    <value>567, 21</value>
   </data>
   <data name="cmbAssignVar.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -875,7 +875,7 @@
     <value>cmbAssignVar</value>
   </data>
   <data name="&gt;&gt;cmbAssignVar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmbAssignVar.Parent" xml:space="preserve">
     <value>$this</value>
@@ -890,7 +890,7 @@
     <value>12, 8</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 13</value>
+    <value>567, 13</value>
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
@@ -902,7 +902,7 @@
     <value>Label1</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -920,10 +920,10 @@
     <value>NoControl</value>
   </data>
   <data name="btnSaveOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 166</value>
+    <value>12, 192</value>
   </data>
   <data name="btnSaveOnly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnSaveOnly.TabIndex" type="System.Int32, mscorlib">
     <value>69</value>
@@ -938,7 +938,7 @@
     <value>btnSaveOnly</value>
   </data>
   <data name="&gt;&gt;btnSaveOnly.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnSaveOnly.Parent" xml:space="preserve">
     <value>$this</value>
@@ -953,7 +953,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>499, 48</value>
+    <value>312, 73</value>
   </data>
   <data name="btnMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -968,7 +968,7 @@
     <value>btnMissing</value>
   </data>
   <data name="&gt;&gt;btnMissing.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnMissing.Parent" xml:space="preserve">
     <value>$this</value>
@@ -983,7 +983,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>424, 48</value>
+    <value>237, 73</value>
   </data>
   <data name="btnNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -998,7 +998,7 @@
     <value>btnNo</value>
   </data>
   <data name="&gt;&gt;btnNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnNo.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1013,7 +1013,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnYes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 48</value>
+    <value>162, 73</value>
   </data>
   <data name="btnYes.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1028,7 +1028,7 @@
     <value>btnYes</value>
   </data>
   <data name="&gt;&gt;btnYes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnYes.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1043,7 +1043,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnOr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 48</value>
+    <value>87, 73</value>
   </data>
   <data name="btnOr.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1058,7 +1058,7 @@
     <value>btnOr</value>
   </data>
   <data name="&gt;&gt;btnOr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnOr.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1073,7 +1073,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnAnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 48</value>
+    <value>12, 73</value>
   </data>
   <data name="btnAnd.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1088,7 +1088,7 @@
     <value>btnAnd</value>
   </data>
   <data name="&gt;&gt;btnAnd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnAnd.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1103,7 +1103,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnCloseParen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>539, 24</value>
+    <value>352, 49</value>
   </data>
   <data name="btnCloseParen.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 23</value>
@@ -1118,7 +1118,7 @@
     <value>btnCloseParen</value>
   </data>
   <data name="&gt;&gt;btnCloseParen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnCloseParen.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1133,7 +1133,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnOpenParen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>505, 24</value>
+    <value>318, 49</value>
   </data>
   <data name="btnOpenParen.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1148,7 +1148,7 @@
     <value>btnOpenParen</value>
   </data>
   <data name="&gt;&gt;btnOpenParen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnOpenParen.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1163,7 +1163,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnQuote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>471, 24</value>
+    <value>284, 49</value>
   </data>
   <data name="btnQuote.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1178,7 +1178,7 @@
     <value>btnQuote</value>
   </data>
   <data name="&gt;&gt;btnQuote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnQuote.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1193,7 +1193,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnAmp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>437, 24</value>
+    <value>250, 49</value>
   </data>
   <data name="btnAmp.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1208,7 +1208,7 @@
     <value>btnAmp</value>
   </data>
   <data name="&gt;&gt;btnAmp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnAmp.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1223,7 +1223,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnGreat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>403, 24</value>
+    <value>216, 49</value>
   </data>
   <data name="btnGreat.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1238,7 +1238,7 @@
     <value>btnGreat</value>
   </data>
   <data name="&gt;&gt;btnGreat.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnGreat.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1253,7 +1253,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnLess.Location" type="System.Drawing.Point, System.Drawing">
-    <value>369, 24</value>
+    <value>182, 49</value>
   </data>
   <data name="btnLess.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1268,7 +1268,7 @@
     <value>btnLess</value>
   </data>
   <data name="&gt;&gt;btnLess.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnLess.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1283,7 +1283,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnPlus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 24</value>
+    <value>12, 49</value>
   </data>
   <data name="btnPlus.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1298,7 +1298,7 @@
     <value>btnPlus</value>
   </data>
   <data name="&gt;&gt;btnPlus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnPlus.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1313,7 +1313,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnMinus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 24</value>
+    <value>46, 49</value>
   </data>
   <data name="btnMinus.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1328,7 +1328,7 @@
     <value>btnMinus</value>
   </data>
   <data name="&gt;&gt;btnMinus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnMinus.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1343,7 +1343,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnTimes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 24</value>
+    <value>80, 49</value>
   </data>
   <data name="btnTimes.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1358,7 +1358,7 @@
     <value>btnTimes</value>
   </data>
   <data name="&gt;&gt;btnTimes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnTimes.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1373,7 +1373,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnDivide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 24</value>
+    <value>114, 49</value>
   </data>
   <data name="btnDivide.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1388,7 +1388,7 @@
     <value>btnDivide</value>
   </data>
   <data name="&gt;&gt;btnDivide.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnDivide.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1403,7 +1403,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnEqual.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 24</value>
+    <value>148, 49</value>
   </data>
   <data name="btnEqual.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 23</value>
@@ -1418,7 +1418,7 @@
     <value>btnEqual</value>
   </data>
   <data name="&gt;&gt;btnEqual.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnEqual.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1426,9 +1426,54 @@
   <data name="&gt;&gt;btnEqual.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <metadata name="cmsFunction.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="cmsFunction.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>146, 17</value>
   </metadata>
+  <data name="cmsFunction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 164</value>
+  </data>
+  <data name="&gt;&gt;cmsFunction.Name" xml:space="preserve">
+    <value>cmsFunction</value>
+  </data>
+  <data name="&gt;&gt;cmsFunction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnFunction.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 8.25pt, style=Italic</value>
+  </data>
+  <data name="btnFunction.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnFunction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>550, 163</value>
+  </data>
+  <data name="btnFunction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 23</value>
+  </data>
+  <data name="btnFunction.TabIndex" type="System.Int32, mscorlib">
+    <value>86</value>
+  </data>
+  <data name="btnFunction.Text" xml:space="preserve">
+    <value>f(x)</value>
+  </data>
+  <data name="&gt;&gt;btnFunction.Name" xml:space="preserve">
+    <value>btnFunction</value>
+  </data>
+  <data name="&gt;&gt;btnFunction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnFunction.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnFunction.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="operatorsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="operatorsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Operators</value>
+  </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 22</value>
   </data>
@@ -1510,14 +1555,14 @@
   <data name="lIKEToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>LIKE</value>
   </data>
-  <data name="operatorsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="operatorsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Operators</value>
-  </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 6</value>
+  </data>
+  <data name="booleanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="booleanToolStripMenuItem.Text" xml:space="preserve">
+    <value>Boolean Functions</value>
   </data>
   <data name="aNDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 22</value>
@@ -1555,11 +1600,11 @@
   <data name="nOTToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>NOT</value>
   </data>
-  <data name="booleanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="numericToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="booleanToolStripMenuItem.Text" xml:space="preserve">
-    <value>Boolean Functions</value>
+  <data name="numericToolStripMenuItem.Text" xml:space="preserve">
+    <value>Numeric Functions</value>
   </data>
   <data name="aBSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
@@ -1705,11 +1750,11 @@
   <data name="zSCOREToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>ZSCORE( &lt;reference&gt;, &lt;metric&gt;, &lt;measurement&gt;, &lt;co_metric&gt;, &lt;sex&gt; )</value>
   </data>
-  <data name="numericToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="dateFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="numericToolStripMenuItem.Text" xml:space="preserve">
-    <value>Numeric Functions</value>
+  <data name="dateFunctionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Date Functions</value>
   </data>
   <data name="yEARSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 22</value>
@@ -1774,11 +1819,11 @@
   <data name="EPIWEEKToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>EPIWEEK( &lt;date_time&gt;, &lt;first_day_of_the_week&gt; )</value>
   </data>
-  <data name="dateFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="systemFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="dateFunctionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Date Functions</value>
+  <data name="systemFunctionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>System Functions</value>
   </data>
   <data name="cURRENTUSERToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>153, 22</value>
@@ -1834,11 +1879,11 @@
   <data name="sYSTEMTIMEToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>SYSTEMTIME</value>
   </data>
-  <data name="systemFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="timeFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="systemFunctionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>System Functions</value>
+  <data name="timeFunctionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Time Functions</value>
   </data>
   <data name="hOURSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 22</value>
@@ -1894,11 +1939,11 @@
   <data name="sECONDToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>SECOND( &lt;date_time&gt; )</value>
   </data>
-  <data name="timeFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="textFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="timeFunctionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Time Functions</value>
+  <data name="textFunctionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Text Functions</value>
   </data>
   <data name="fINDTEXTToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 22</value>
@@ -1908,6 +1953,21 @@
   </data>
   <data name="fINDTEXTToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>FINDTEXT( &lt;letters_to_find&gt;, &lt;text_to_search&gt; )</value>
+  </data>
+  <data name="fORMATToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 22</value>
+  </data>
+  <data name="fORMATToolStripMenuItem.Text" xml:space="preserve">
+    <value>FORMAT</value>
+  </data>
+  <data name="fORMATToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>FORMAT( &lt;variable&gt; )</value>
+  </data>
+  <data name="dateFormatsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 22</value>
+  </data>
+  <data name="dateFormatsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Date Formats</value>
   </data>
   <data name="generalDateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 22</value>
@@ -1972,11 +2032,11 @@
   <data name="shortTimeToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>FORMAT( &lt;variable&gt;, "Short Time" )</value>
   </data>
-  <data name="dateFormatsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="numberFormatsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
   </data>
-  <data name="dateFormatsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Date Formats</value>
+  <data name="numberFormatsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Number Formats</value>
   </data>
   <data name="generalNumberToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
@@ -2059,21 +2119,6 @@
   <data name="onOff01ToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>FORMAT( &lt;variable&gt;, "On/Off" )</value>
   </data>
-  <data name="numberFormatsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 22</value>
-  </data>
-  <data name="numberFormatsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Number Formats</value>
-  </data>
-  <data name="fORMATToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 22</value>
-  </data>
-  <data name="fORMATToolStripMenuItem.Text" xml:space="preserve">
-    <value>FORMAT</value>
-  </data>
-  <data name="fORMATToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>FORMAT( &lt;variable&gt; )</value>
-  </data>
   <data name="lINEBREAKToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 22</value>
   </data>
@@ -2128,62 +2173,20 @@
   <data name="uPPERCASEToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>UPPERCASE( &lt;variable&gt; )</value>
   </data>
-  <data name="textFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="textFunctionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Text Functions</value>
-  </data>
-  <data name="cmsFunction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 186</value>
-  </data>
-  <data name="&gt;&gt;cmsFunction.Name" xml:space="preserve">
-    <value>cmsFunction</value>
-  </data>
-  <data name="&gt;&gt;cmsFunction.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="btnFunction.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Times New Roman, 8.25pt, style=Italic</value>
-  </data>
-  <data name="btnFunction.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>542, 92</value>
-  </data>
-  <data name="btnFunction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 23</value>
-  </data>
-  <data name="btnFunction.TabIndex" type="System.Int32, mscorlib">
-    <value>86</value>
-  </data>
-  <data name="btnFunction.Text" xml:space="preserve">
-    <value>f(x)</value>
-  </data>
-  <data name="&gt;&gt;btnFunction.Name" xml:space="preserve">
-    <value>btnFunction</value>
-  </data>
-  <data name="&gt;&gt;btnFunction.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnFunction.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnFunction.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>105</value>
   </metadata>
   <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
     <value>5, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>585, 199</value>
+    <value>591, 222</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>WindowsDefaultLocation</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Assign</value>
@@ -2192,498 +2195,504 @@
     <value>baseImageList</value>
   </data>
   <data name="&gt;&gt;baseImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;operatorsToolStripMenuItem.Name" xml:space="preserve">
     <value>operatorsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;operatorsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem2.Name" xml:space="preserve">
     <value>toolStripMenuItem2</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mODToolStripMenuItem.Name" xml:space="preserve">
     <value>mODToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;mODToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem3.Name" xml:space="preserve">
     <value>toolStripMenuItem3</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem4.Name" xml:space="preserve">
     <value>toolStripMenuItem4</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem5.Name" xml:space="preserve">
     <value>toolStripMenuItem5</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem6.Name" xml:space="preserve">
     <value>toolStripMenuItem6</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem7.Name" xml:space="preserve">
     <value>toolStripMenuItem7</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem8.Name" xml:space="preserve">
     <value>toolStripMenuItem8</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lIKEToolStripMenuItem.Name" xml:space="preserve">
     <value>lIKEToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;lIKEToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
     <value>toolStripMenuItem1</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;booleanToolStripMenuItem.Name" xml:space="preserve">
     <value>booleanToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;booleanToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;aNDToolStripMenuItem.Name" xml:space="preserve">
     <value>aNDToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;aNDToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;oRToolStripMenuItem.Name" xml:space="preserve">
     <value>oRToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;oRToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;xORToolStripMenuItem.Name" xml:space="preserve">
     <value>xORToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;xORToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;nOTToolStripMenuItem.Name" xml:space="preserve">
     <value>nOTToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;nOTToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;numericToolStripMenuItem.Name" xml:space="preserve">
     <value>numericToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;numericToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;aBSToolStripMenuItem.Name" xml:space="preserve">
     <value>aBSToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;aBSToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;eXPToolStripMenuItem.Name" xml:space="preserve">
     <value>eXPToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;eXPToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lNToolStripMenuItem.Name" xml:space="preserve">
     <value>lNToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;lNToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lOGToolStripMenuItem.Name" xml:space="preserve">
     <value>lOGToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;lOGToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;nUMTODATEToolStripMenuItem.Name" xml:space="preserve">
     <value>nUMTODATEToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;nUMTODATEToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;nUMTOTIMEToolStripMenuItem.Name" xml:space="preserve">
     <value>nUMTOTIMEToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;nUMTOTIMEToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rECORDCOUNTToolStripMenuItem.Name" xml:space="preserve">
     <value>rECORDCOUNTToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;rECORDCOUNTToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rNDToolStripMenuItem.Name" xml:space="preserve">
     <value>rNDToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;rNDToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rOUNDToolStripMenuItem.Name" xml:space="preserve">
     <value>rOUNDToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;rOUNDToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sTEPToolStripMenuItem.Name" xml:space="preserve">
     <value>sTEPToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;sTEPToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sINToolStripMenuItem.Name" xml:space="preserve">
     <value>sINToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;sINToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cOSToolStripMenuItem.Name" xml:space="preserve">
     <value>cOSToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;cOSToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tANToolStripMenuItem.Name" xml:space="preserve">
     <value>tANToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;tANToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tRUNCToolStripMenuItem.Name" xml:space="preserve">
     <value>tRUNCToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;tRUNCToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pFROMZToolStripMenuItem.Name" xml:space="preserve">
     <value>pFROMZToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;pFROMZToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;zSCOREToolStripMenuItem.Name" xml:space="preserve">
     <value>zSCOREToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;zSCOREToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dateFunctionsToolStripMenuItem.Name" xml:space="preserve">
     <value>dateFunctionsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;dateFunctionsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;yEARSToolStripMenuItem.Name" xml:space="preserve">
     <value>yEARSToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;yEARSToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mONTHSToolStripMenuItem.Name" xml:space="preserve">
     <value>mONTHSToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;mONTHSToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dAYSToolStripMenuItem.Name" xml:space="preserve">
     <value>dAYSToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;dAYSToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;yEARToolStripMenuItem.Name" xml:space="preserve">
     <value>yEARToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;yEARToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mONTHToolStripMenuItem.Name" xml:space="preserve">
     <value>mONTHToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;mONTHToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dAYToolStripMenuItem.Name" xml:space="preserve">
     <value>dAYToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;dAYToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EPIWEEKToolStripMenuItem.Name" xml:space="preserve">
+    <value>EPIWEEKToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;EPIWEEKToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;systemFunctionsToolStripMenuItem.Name" xml:space="preserve">
     <value>systemFunctionsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;systemFunctionsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cURRENTUSERToolStripMenuItem.Name" xml:space="preserve">
     <value>cURRENTUSERToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;cURRENTUSERToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;eNVIRONToolStripMenuItem.Name" xml:space="preserve">
     <value>eNVIRONToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;eNVIRONToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;eXISTSToolStripMenuItem.Name" xml:space="preserve">
     <value>eXISTSToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;eXISTSToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fILEDATEToolStripMenuItem.Name" xml:space="preserve">
     <value>fILEDATEToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;fILEDATEToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sYSTEMDATEToolStripMenuItem.Name" xml:space="preserve">
     <value>sYSTEMDATEToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;sYSTEMDATEToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sYSTEMTIMEToolStripMenuItem.Name" xml:space="preserve">
     <value>sYSTEMTIMEToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;sYSTEMTIMEToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;timeFunctionsToolStripMenuItem.Name" xml:space="preserve">
     <value>timeFunctionsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;timeFunctionsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;hOURSToolStripMenuItem.Name" xml:space="preserve">
     <value>hOURSToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;hOURSToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mINUTESToolStripMenuItem.Name" xml:space="preserve">
     <value>mINUTESToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;mINUTESToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sECONDSToolStripMenuItem.Name" xml:space="preserve">
     <value>sECONDSToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;sECONDSToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;hOURToolStripMenuItem.Name" xml:space="preserve">
     <value>hOURToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;hOURToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mINUTEToolStripMenuItem.Name" xml:space="preserve">
     <value>mINUTEToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;mINUTEToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sECONDToolStripMenuItem.Name" xml:space="preserve">
     <value>sECONDToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;sECONDToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textFunctionsToolStripMenuItem.Name" xml:space="preserve">
     <value>textFunctionsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;textFunctionsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fINDTEXTToolStripMenuItem.Name" xml:space="preserve">
     <value>fINDTEXTToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;fINDTEXTToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fORMATToolStripMenuItem.Name" xml:space="preserve">
     <value>fORMATToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;fORMATToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dateFormatsToolStripMenuItem.Name" xml:space="preserve">
     <value>dateFormatsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;dateFormatsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;generalDateToolStripMenuItem.Name" xml:space="preserve">
     <value>generalDateToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;generalDateToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;longDateToolStripMenuItem.Name" xml:space="preserve">
     <value>longDateToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;longDateToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mediumDateToolStripMenuItem.Name" xml:space="preserve">
     <value>mediumDateToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;mediumDateToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;shortDateToolStripMenuItem.Name" xml:space="preserve">
     <value>shortDateToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;shortDateToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;longTimeToolStripMenuItem.Name" xml:space="preserve">
     <value>longTimeToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;longTimeToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mediumTimeToolStripMenuItem.Name" xml:space="preserve">
     <value>mediumTimeToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;mediumTimeToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;shortTimeToolStripMenuItem.Name" xml:space="preserve">
     <value>shortTimeToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;shortTimeToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;numberFormatsToolStripMenuItem.Name" xml:space="preserve">
     <value>numberFormatsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;numberFormatsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;generalNumberToolStripMenuItem.Name" xml:space="preserve">
     <value>generalNumberToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;generalNumberToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;currencyToolStripMenuItem.Name" xml:space="preserve">
     <value>currencyToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;currencyToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fixedToolStripMenuItem.Name" xml:space="preserve">
     <value>fixedToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;fixedToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;standardToolStripMenuItem.Name" xml:space="preserve">
     <value>standardToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;standardToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;percentToolStripMenuItem.Name" xml:space="preserve">
     <value>percentToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;percentToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;scientificToolStripMenuItem.Name" xml:space="preserve">
     <value>scientificToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;scientificToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;yesNoToolStripMenuItem.Name" xml:space="preserve">
     <value>yesNoToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;yesNoToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;trueFalseToolStripMenuItem.Name" xml:space="preserve">
     <value>trueFalseToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;trueFalseToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;onOff01ToolStripMenuItem.Name" xml:space="preserve">
     <value>onOff01ToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;onOff01ToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lINEBREAKToolStripMenuItem.Name" xml:space="preserve">
     <value>lINEBREAKToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;lINEBREAKToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sTRLENToolStripMenuItem.Name" xml:space="preserve">
     <value>sTRLENToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;sTRLENToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sUBSTRINGToolStripMenuItem.Name" xml:space="preserve">
     <value>sUBSTRINGToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;sUBSTRINGToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tXTTODATEToolStripMenuItem.Name" xml:space="preserve">
     <value>tXTTODATEToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;tXTTODATEToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tXTTONUMToolStripMenuItem.Name" xml:space="preserve">
     <value>tXTTONUMToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;tXTTONUMToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;uPPERCASEToolStripMenuItem.Name" xml:space="preserve">
     <value>uPPERCASEToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;uPPERCASEToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AssignDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.4708.29099, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5866.22846, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

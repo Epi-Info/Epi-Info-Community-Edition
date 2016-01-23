@@ -148,7 +148,7 @@ namespace Epi.Windows.Menu.Dialogs
             // btnHelp
             // 
             resources.ApplyResources(this.btnHelp, "btnHelp");
-            this.btnHelp.Name = "btnHelp"; btnHelp.Enabled = false;
+            this.btnHelp.Name = "btnHelp";
             this.btnHelp.UseVisualStyleBackColor = true;
             // 
             // lblHelp
@@ -170,6 +170,7 @@ namespace Epi.Windows.Menu.Dialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SelectLanguage";
+            this.ShowIcon = false;
             this.ResumeLayout(false);
 
         }
