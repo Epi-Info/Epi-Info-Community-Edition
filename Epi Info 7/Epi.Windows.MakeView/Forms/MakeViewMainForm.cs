@@ -2759,7 +2759,7 @@ namespace Epi.Windows.MakeView.Forms
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.CheckFileExists = true;
             openFileDialog.Filter = SharedStrings.MS_ACCESS_FILES + " (*.mdb)|*.mdb";
-
+            openFileDialog.InitialDirectory = System.IO.Directory.GetCurrentDirectory(); 
             DialogResult result = openFileDialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
