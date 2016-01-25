@@ -354,7 +354,7 @@ namespace Epi.Windows.Analysis.Dialogs
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.Title = SharedStrings.SELECT_DATA_SOURCE;
                 openFileDialog.Filter = "Epi Info " + SharedStrings.PROJECT_FILE + " (*.prj)|*.prj";
-
+                openFileDialog.InitialDirectory = System.IO.Directory.GetCurrentDirectory(); 
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.Multiselect = false;
 
