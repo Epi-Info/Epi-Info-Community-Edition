@@ -171,7 +171,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.Title = ImportExportSharedStrings.SELECT_EDP_FILE;
                 openFileDialog.Filter = "Epi Info Encrypted Data Package (*.edp7)|*.edp7";
-
+                openFileDialog.InitialDirectory = System.IO.Directory.GetCurrentDirectory(); 
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.Multiselect = false;
 
