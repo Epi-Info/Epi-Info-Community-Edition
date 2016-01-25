@@ -2354,7 +2354,10 @@ namespace EpiDashboard.Controls
                     if (validationText.Text != string.Empty)
                     {
                         tbtnDisplay.IsEnabled = false;
-                        tbtnFilters.IsEnabled = false;
+                        if(HasFilter() == false)
+                        { 
+                            tbtnFilters.IsEnabled = false;
+                        }
                         btnOK.IsEnabled = false;
                     }
                     else
@@ -2384,7 +2387,10 @@ namespace EpiDashboard.Controls
                 else
                 {
                     tbtnDisplay.IsEnabled = false;
-                    tbtnFilters.IsEnabled = false;
+                    if (HasFilter() == false)
+                    {
+                        tbtnFilters.IsEnabled = false;
+                    }
                     btnOK.IsEnabled = false;
                 }
             }
@@ -2392,7 +2398,10 @@ namespace EpiDashboard.Controls
             {
                 tbtnVariables.IsEnabled = false;
                 tbtnDisplay.IsEnabled = false;
-                tbtnFilters.IsEnabled = false;
+                if (HasFilter() == false)
+                {
+                    tbtnFilters.IsEnabled = false;
+                }
                 btnOK.IsEnabled = false;
             }
         }
