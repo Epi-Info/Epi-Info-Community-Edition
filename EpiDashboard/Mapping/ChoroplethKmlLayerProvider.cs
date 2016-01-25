@@ -23,8 +23,6 @@ namespace EpiDashboard.Mapping
 
         public ChoroplethKmlLayerProvider(Map clientMap) : base(clientMap)
         {
-            //ArcGIS_Map = clientMap;
-            //this.LayerId = Guid.NewGuid();
         }
 
         sealed override public object[] Load()
