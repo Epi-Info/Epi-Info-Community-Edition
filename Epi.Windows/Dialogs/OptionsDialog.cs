@@ -1259,15 +1259,15 @@ namespace Epi.Windows.Dialogs
         }
 
         private void EWEEndPointTextBox_TextChanged(object sender, EventArgs e)
-        {
+       {
             string URL = ((System.Windows.Forms.TextBox)(sender)).Text;
             if (!string.IsNullOrEmpty(URL) && URL.ToUpper().Contains(".SVC"))
             {
-                Ping.Enabled = true;
+                button1.Enabled = true;
             }
             else
             {
-                Ping.Enabled = false;
+                button1.Enabled = false;
             }
         }
 
