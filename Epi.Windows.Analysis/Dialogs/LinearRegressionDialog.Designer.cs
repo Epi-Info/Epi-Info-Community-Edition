@@ -141,14 +141,14 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblWeight
             // 
-            resources.ApplyResources(this.lblWeight, "lblWeight");
             this.lblWeight.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lblWeight, "lblWeight");
             this.lblWeight.Name = "lblWeight";
             // 
             // lblOutput
             // 
-            resources.ApplyResources(this.lblOutput, "lblOutput");
             this.lblOutput.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lblOutput, "lblOutput");
             this.lblOutput.Name = "lblOutput";
             // 
             // txtOutput
@@ -165,8 +165,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblOutcomeVar
             // 
-            resources.ApplyResources(this.lblOutcomeVar, "lblOutcomeVar");
             this.lblOutcomeVar.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lblOutcomeVar, "lblOutcomeVar");
             this.lblOutcomeVar.Name = "lblOutcomeVar";
             // 
             // lbxOther
@@ -201,8 +201,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // cmbOther
             // 
-            this.cmbOther.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbOther, "cmbOther");
+            this.cmbOther.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOther.Name = "cmbOther";
             this.cmbOther.SelectedIndexChanged += new System.EventHandler(this.cmbOther_SelectedIndexChanged);
             // 
@@ -220,8 +220,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblConfLimits
             // 
-            resources.ApplyResources(this.lblConfLimits, "lblConfLimits");
             this.lblConfLimits.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lblConfLimits, "lblConfLimits");
             this.lblConfLimits.Name = "lblConfLimits";
             // 
             // btnModifyTerm
@@ -285,7 +285,6 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.cmbWeight);
             this.Controls.Add(this.lblWeight);
             this.Controls.Add(this.lblOther);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LinearRegressionDialog";

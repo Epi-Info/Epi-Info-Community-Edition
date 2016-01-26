@@ -143,14 +143,14 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblWeight
             // 
-            resources.ApplyResources(this.lblWeight, "lblWeight");
             this.lblWeight.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lblWeight, "lblWeight");
             this.lblWeight.Name = "lblWeight";
             // 
             // lblOutput
             // 
-            resources.ApplyResources(this.lblOutput, "lblOutput");
             this.lblOutput.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lblOutput, "lblOutput");
             this.lblOutput.Name = "lblOutput";
             // 
             // txtOutput
@@ -167,8 +167,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblOutcomeVar
             // 
-            resources.ApplyResources(this.lblOutcomeVar, "lblOutcomeVar");
             this.lblOutcomeVar.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lblOutcomeVar, "lblOutcomeVar");
             this.lblOutcomeVar.Name = "lblOutcomeVar";
             // 
             // lbxOther
@@ -210,8 +210,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblOther
             // 
-            resources.ApplyResources(this.lblOther, "lblOther");
             this.lblOther.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.lblOther, "lblOther");
             this.lblOther.Name = "lblOther";
             // 
             // cmbConfLimits
@@ -222,8 +222,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblConfLimits
             // 
-            resources.ApplyResources(this.lblConfLimits, "lblConfLimits");
             this.lblConfLimits.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lblConfLimits, "lblConfLimits");
             this.lblConfLimits.Name = "lblConfLimits";
             // 
             // btnModifyTerm
@@ -234,8 +234,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblDummyVar
             // 
-            resources.ApplyResources(this.lblDummyVar, "lblDummyVar");
             this.lblDummyVar.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lblDummyVar, "lblDummyVar");
             this.lblDummyVar.Name = "lblDummyVar";
             // 
             // lblInteractionTerms
@@ -271,8 +271,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblMatch
             // 
-            resources.ApplyResources(this.lblMatch, "lblMatch");
             this.lblMatch.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lblMatch, "lblMatch");
             this.lblMatch.Name = "lblMatch";
             // 
             // LogisticRegressionDialog
@@ -303,7 +303,6 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.cmbWeight);
             this.Controls.Add(this.lblWeight);
             this.Controls.Add(this.lblOther);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LogisticRegressionDialog";

@@ -334,10 +334,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.lblWeight);
             this.Controls.Add(this.cmbMeansOf);
             this.Controls.Add(this.lblMeansOf);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ComplexSampleMeansDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.ComplexSampleMeansDialog_Load);
             this.gbxPageSettings.ResumeLayout(false);
             this.gbxPageSettings.PerformLayout();
