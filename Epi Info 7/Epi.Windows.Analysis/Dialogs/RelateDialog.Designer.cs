@@ -171,14 +171,14 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblDataSource
             // 
-            this.lblDataSource.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblDataSource, "lblDataSource");
+            this.lblDataSource.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblDataSource.Name = "lblDataSource";
             // 
             // lblDataFormats
             // 
-            this.lblDataFormats.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblDataFormats, "lblDataFormats");
+            this.lblDataFormats.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblDataFormats.Name = "lblDataFormats";
             // 
             // lblKey
@@ -205,10 +205,10 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // gbxShow
             // 
+            resources.ApplyResources(this.gbxShow, "gbxShow");
             this.gbxShow.Controls.Add(this.rbAll);
             this.gbxShow.Controls.Add(this.rbView);
             this.gbxShow.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            resources.ApplyResources(this.gbxShow, "gbxShow");
             this.gbxShow.Name = "gbxShow";
             this.gbxShow.TabStop = false;
             // 
@@ -263,6 +263,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RelateDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.RelateDialog_Load);
             this.gbxShow.ResumeLayout(false);
             this.ResumeLayout(false);
