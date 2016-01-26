@@ -7547,10 +7547,10 @@ namespace EpiDashboard
                     foreach (DataColumn dc in mainTable.Columns)
                     {
                         if (!TableColumnNames.ContainsKey(dc.ColumnName) && !dc.ColumnName.Equals("RECSTATUS"))
-                        {
-                            TableColumnNames.Add(dc.ColumnName, dc.DataType.ToString());
+                        {                           
                             if (View.Fields.Contains(dc.ColumnName))
                             {
+                                TableColumnNames.Add(dc.ColumnName, dc.DataType.ToString());
                                 FieldTable.Rows.Add(dc.ColumnName, dc.DataType.ToString(), page.TableName, View.Name, View.Fields[dc.ColumnName]);                                
                             }
                         }                        
@@ -7589,6 +7589,61 @@ namespace EpiDashboard
                             FieldTable.Rows.Add(dc.ColumnName, dc.DataType.ToString(), TableName, string.Empty, null);
                         }
                     }                      
+                }
+            }
+
+            if (ConnectionsForRelate.Count > 0)
+            {
+                foreach (RelatedConnection conn in ConnectionsForRelate)
+                {
+                    DataTable relatedTable = new DataTable();
+                    relatedTable.CaseSensitive = true;
+
+                    if (conn.IsEpiInfoProject)
+                    {
+                        foreach (Page page in conn.view.Pages)
+                        {
+                            foreach (DataColumn dc in mainTable.Columns)
+                            {
+                                if (!TableColumnNames.ContainsKey(dc.ColumnName) && !dc.ColumnName.Equals("RECSTATUS"))
+                                {                                   
+                                    if (conn.view.Fields.Contains(dc.ColumnName))
+                                    {
+                                        if (!FieldTable.Columns.Contains(dc.ColumnName))
+                                        {
+                                            FieldTable.Rows.Add(dc.ColumnName, dc.DataType.ToString(), page.TableName, conn.view.Name, conn.view.Fields[dc.ColumnName]);
+                                            TableColumnNames.Add(dc.ColumnName, dc.DataType.ToString());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        relatedTable = conn.db.GetTableData(conn.TableName);
+                        foreach (DataColumn dc in relatedTable.Columns)
+                        {
+                            if (!TableColumnNames.ContainsKey(dc.ColumnName))
+                            {
+                                if (dc.ColumnName.ToLower().Equals("recstatus") && !TableColumnNames.ContainsKey(dc.ColumnName.ToUpper()))
+                                {
+                                    TableColumnNames.Add("RecStatus", dc.DataType.ToString());
+                                    FieldTable.Rows.Add("RecStatus", dc.DataType.ToString(), conn.TableName, string.Empty, null);
+                                }
+                                else if (dc.ColumnName.ToLower().Equals("uniquekey"))
+                                {
+                                    TableColumnNames.Add("UniqueKey", dc.DataType.ToString());
+                                    FieldTable.Rows.Add("UniqueKey", dc.DataType.ToString(), conn.TableName, string.Empty, null);
+                                }
+                                else
+                                {
+                                    TableColumnNames.Add(dc.ColumnName, dc.DataType.ToString());
+                                    FieldTable.Rows.Add(dc.ColumnName, dc.DataType.ToString(), conn.TableName, string.Empty, null);
+                                }
+                            }        
+                        }
+                    }
                 }
             }
 
