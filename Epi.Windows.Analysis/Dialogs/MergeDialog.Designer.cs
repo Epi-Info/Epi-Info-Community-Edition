@@ -283,6 +283,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MergeDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.Merge_Load);
             this.tabctrlShow.ResumeLayout(false);
             this.tabPageViews.ResumeLayout(false);

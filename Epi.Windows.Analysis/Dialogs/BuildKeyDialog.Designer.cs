@@ -147,7 +147,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.txtKeyComponent.Multiline = true;
             this.txtKeyComponent.Name = "txtKeyComponent";
             this.txtKeyComponent.ReadOnly = true;
-            this.txtKeyComponent.Size = new System.Drawing.Size(497, 106);
+            this.txtKeyComponent.Size = new System.Drawing.Size(676, 106);
             this.txtKeyComponent.TabIndex = 1;
             this.txtKeyComponent.TabStop = false;
             // 
@@ -155,33 +155,35 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             this.lblAvailableVariables.Location = new System.Drawing.Point(15, 292);
             this.lblAvailableVariables.Name = "lblAvailableVariables";
-            this.lblAvailableVariables.Size = new System.Drawing.Size(242, 13);
+            this.lblAvailableVariables.Size = new System.Drawing.Size(338, 13);
             this.lblAvailableVariables.TabIndex = 1;
             this.lblAvailableVariables.Text = "Current Data Variables";
             // 
             // lbxCurrentTableFields
             // 
             this.lbxCurrentTableFields.FormattingEnabled = true;
+            this.lbxCurrentTableFields.HorizontalScrollbar = true;
             this.lbxCurrentTableFields.Location = new System.Drawing.Point(18, 308);
             this.lbxCurrentTableFields.Name = "lbxCurrentTableFields";
-            this.lbxCurrentTableFields.Size = new System.Drawing.Size(239, 95);
+            this.lbxCurrentTableFields.Size = new System.Drawing.Size(335, 95);
             this.lbxCurrentTableFields.TabIndex = 2;
             this.lbxCurrentTableFields.SelectedIndexChanged += new System.EventHandler(this.lbxCurrentTableFields_SelectedIndexChanged);
             // 
             // lbxRelatedTableFields
             // 
             this.lbxRelatedTableFields.FormattingEnabled = true;
-            this.lbxRelatedTableFields.Location = new System.Drawing.Point(276, 308);
+            this.lbxRelatedTableFields.HorizontalScrollbar = true;
+            this.lbxRelatedTableFields.Location = new System.Drawing.Point(359, 308);
             this.lbxRelatedTableFields.Name = "lbxRelatedTableFields";
-            this.lbxRelatedTableFields.Size = new System.Drawing.Size(239, 95);
+            this.lbxRelatedTableFields.Size = new System.Drawing.Size(335, 95);
             this.lbxRelatedTableFields.TabIndex = 5;
             this.lbxRelatedTableFields.SelectedIndexChanged += new System.EventHandler(this.lbxRelatedTableFields_SelectedIndexChanged);
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(197, 438);
+            this.btnOK.Location = new System.Drawing.Point(144, 438);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(133, 23);
             this.btnOK.TabIndex = 9;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -189,18 +191,18 @@ namespace Epi.Windows.Analysis.Dialogs
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(278, 438);
+            this.btnCancel.Location = new System.Drawing.Point(283, 438);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(133, 23);
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(273, 292);
+            this.label1.Location = new System.Drawing.Point(356, 292);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(240, 13);
+            this.label1.Size = new System.Drawing.Size(338, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Related Table Variables";
             // 
@@ -214,9 +216,9 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // AddCommandButton
             // 
-            this.AddCommandButton.Location = new System.Drawing.Point(420, 409);
+            this.AddCommandButton.Location = new System.Drawing.Point(561, 409);
             this.AddCommandButton.Name = "AddCommandButton";
-            this.AddCommandButton.Size = new System.Drawing.Size(95, 23);
+            this.AddCommandButton.Size = new System.Drawing.Size(133, 23);
             this.AddCommandButton.TabIndex = 7;
             this.AddCommandButton.Text = "Add Relation";
             this.AddCommandButton.UseVisualStyleBackColor = true;
@@ -233,10 +235,9 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(15, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(443, 143);
+            this.label3.Size = new System.Drawing.Size(679, 143);
             this.label3.TabIndex = 10;
             this.label3.Text = resources.GetString("label3.Text");
             // 
@@ -244,9 +245,9 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnHelp.Location = new System.Drawing.Point(440, 438);
+            this.btnHelp.Location = new System.Drawing.Point(561, 438);
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(75, 23);
+            this.btnHelp.Size = new System.Drawing.Size(133, 23);
             this.btnHelp.TabIndex = 19;
             this.btnHelp.Text = "Help";
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
@@ -255,9 +256,9 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnClear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnClear.Location = new System.Drawing.Point(359, 438);
+            this.btnClear.Location = new System.Drawing.Point(422, 438);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(133, 23);
             this.btnClear.TabIndex = 20;
             this.btnClear.Text = "Clear";
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -268,7 +269,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(526, 470);
+            this.ClientSize = new System.Drawing.Size(706, 473);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.label3);
