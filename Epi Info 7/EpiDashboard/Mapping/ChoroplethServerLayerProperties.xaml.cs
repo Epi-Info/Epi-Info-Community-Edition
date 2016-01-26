@@ -64,8 +64,8 @@ namespace EpiDashboard.Mapping
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-            Provider = new ChoroplethServerLayerProvider(myMap);
-            Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
+           // Provider = new ChoroplethServerLayerProvider(myMap);
+           // Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
 
             FillComboBoxes();
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
@@ -158,7 +158,7 @@ namespace EpiDashboard.Mapping
                     }
                 }
                 
-                ChoroplethProperties_RenderMap();
+               ChoroplethProperties_RenderMap();
             }
         }
 
@@ -427,6 +427,11 @@ namespace EpiDashboard.Mapping
         {
             currentElement = element;
             base.CreateFromXml(element, Provider);
+            if (Provider == null)
+            {
+                Provider = new ChoroplethServerLayerProvider(myMap);
+                Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
+            }
 
             foreach (System.Xml.XmlElement child in element.ChildNodes)
             {
@@ -501,11 +506,7 @@ namespace EpiDashboard.Mapping
             
             string sUrl = GetformattedUrl(shapefileurl);
 
-            if (Provider == null)
-            {
-                Provider = new ChoroplethServerLayerProvider(myMap);
-                Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
-            }
+           
 
             //Provider.Load(sUrl); 
             //ChoroplethProperties_RenderMap();

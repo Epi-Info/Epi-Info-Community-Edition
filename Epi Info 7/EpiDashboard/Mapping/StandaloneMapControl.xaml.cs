@@ -1957,6 +1957,9 @@ namespace EpiDashboard.Mapping
                     choroplethproperties.choroplethShapeLayerProperties = choroplethLayerProperties;
                     choroplethproperties.radShapeFile.IsEnabled = true;
                     choroplethproperties.radShapeFile.IsChecked = true;
+                    choroplethproperties.txtShapePath.IsEnabled = true;
+                    choroplethproperties.btnBrowse.IsEnabled = true;
+                    choroplethproperties.panelshape.IsEnabled = true;
                 }
                 else if (choroplethLayerProperties is ChoroplethKmlLayerProperties)
                 {
@@ -2008,9 +2011,7 @@ namespace EpiDashboard.Mapping
 
                 choroplethproperties.panelBoundaries.IsEnabled = true;
 
-                choroplethproperties.txtShapePath.IsEnabled = true;
-                choroplethproperties.btnBrowse.IsEnabled = true;
-                choroplethproperties.panelshape.IsEnabled = true;
+              
 
                 choroplethproperties.legTitle.Text = choroplethLayerProperties.Provider.LegendText;
 
@@ -2024,8 +2025,7 @@ namespace EpiDashboard.Mapping
                 if (choroplethLayerProperties.ClassAttributeList != null)
                 {
                     choroplethproperties.SetClassAttributes(choroplethLayerProperties.ClassAttributeList);
-                }
-
+                }                
                 choroplethLayerProperties.FlagRunEdit = true;
 
                 if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > choroplethproperties.Width)
@@ -2078,28 +2078,32 @@ namespace EpiDashboard.Mapping
         {
             if (string.IsNullOrEmpty(choroplethLayerProperties.boundryFilePath) == false)
             {
-                choroplethproperties.txtMapSeverpath.Text = choroplethLayerProperties.boundryFilePath;
-                //choroplethproperties.shapeAttributes = choroplethLayerProperties.shapeAttributes;
+                //choroplethproperties.txtMapSeverpath.Text = choroplethLayerProperties.boundryFilePath;
+                choroplethproperties.txtMapSeverpath.Text = choroplethLayerProperties.boundryFilePath.Substring(0,choroplethLayerProperties.boundryFilePath.LastIndexOf("/"));
                 choroplethproperties.cmbShapeKey.Items.Clear();
 
                 if (choroplethproperties.shapeAttributes == null)
-                {
-                    object[] shapeFileProperties = choroplethLayerProperties.Provider.Load(choroplethLayerProperties.boundryFilePath);
-                    
+                {                   
+                    object[] shapeFileProperties = choroplethLayerProperties.Provider.Load(choroplethLayerProperties.boundryFilePath);                   
+
                     if (shapeFileProperties[1] is FeatureLayer)
                     {
-                        FeatureLayer featureLayer = (FeatureLayer)shapeFileProperties[1];
+                        FeatureLayer featureLayer = (FeatureLayer)shapeFileProperties[1];                     
                         
                         if(featureLayer.Graphics.Count > 0)
                         {
                             choroplethproperties.shapeAttributes = featureLayer.Graphics[0].Attributes;
                         }
+                        choroplethproperties.MapServerConnect();
                     }
                     else if (shapeFileProperties[1] is IDictionary<string, object>)
                     {
                         choroplethproperties.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
                     }
-                }
+                   
+                    choroplethproperties.cbxmapfeature.Text = choroplethLayerProperties.cbxMapFeatureText;
+                    choroplethproperties.layerAddednew.Clear();
+                }              
 
                 if (choroplethproperties.shapeAttributes != null)
                 {
