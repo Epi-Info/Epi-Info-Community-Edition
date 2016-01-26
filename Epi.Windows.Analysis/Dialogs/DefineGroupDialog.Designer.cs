@@ -189,10 +189,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lbxVariables);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DefineGroupDialog";
+            this.ShowIcon = false;
             this.ResumeLayout(false);
             this.PerformLayout();
 

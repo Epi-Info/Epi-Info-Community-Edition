@@ -133,11 +133,11 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // gbxDelete
             // 
-            resources.ApplyResources(this.gbxDelete, "gbxDelete");
             this.gbxDelete.Controls.Add(this.rdbView);
             this.gbxDelete.Controls.Add(this.rdbTable);
             this.gbxDelete.Controls.Add(this.rdbFiles);
             this.gbxDelete.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.gbxDelete, "gbxDelete");
             this.gbxDelete.Name = "gbxDelete";
             this.gbxDelete.TabStop = false;
             // 
@@ -280,10 +280,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.txtFileName);
             this.Controls.Add(this.lblDatabase);
             this.Controls.Add(this.lblViewName);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DeleteFileTableDialog";
+            this.ShowIcon = false;
             this.gbxDelete.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

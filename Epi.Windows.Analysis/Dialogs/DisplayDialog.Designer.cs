@@ -132,8 +132,8 @@ namespace Epi.Windows.Analysis.Dialogs
             this.gbxInfoFor.Controls.Add(this.rdbTables);
             this.gbxInfoFor.Controls.Add(this.rdbViews);
             this.gbxInfoFor.Controls.Add(this.rdbVariables);
-            resources.ApplyResources(this.gbxInfoFor, "gbxInfoFor");
             this.gbxInfoFor.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.gbxInfoFor, "gbxInfoFor");
             this.gbxInfoFor.Name = "gbxInfoFor";
             this.gbxInfoFor.TabStop = false;
             // 
@@ -247,10 +247,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.btnEllipse);
             this.Controls.Add(this.txtDatabase);
             this.Controls.Add(this.lbxVariables);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DisplayDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.DisplayDialog_Load);
             this.gbxInfoFor.ResumeLayout(false);
             this.ResumeLayout(false);

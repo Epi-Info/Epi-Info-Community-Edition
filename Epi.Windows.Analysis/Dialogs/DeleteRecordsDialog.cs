@@ -790,6 +790,21 @@ namespace Epi.Windows.Analysis.Dialogs
         }
 
         #endregion  //Function Context Menu
+
+        private void gbxDelete_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblRecAffected_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFunction_Click(object sender, EventArgs e)
+        {
+
+        }
 	}
 }
 

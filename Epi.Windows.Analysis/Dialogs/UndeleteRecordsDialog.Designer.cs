@@ -158,8 +158,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             // 
             // btnOK
@@ -187,8 +187,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblRecAffected
             // 
-            this.lblRecAffected.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblRecAffected, "lblRecAffected");
+            this.lblRecAffected.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblRecAffected.Name = "lblRecAffected";
             // 
             // btnMissing
@@ -348,10 +348,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.btnDivide);
             this.Controls.Add(this.btnEqual);
             this.Controls.Add(this.cmbAvailableVar);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "UndeleteRecordsDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.UndeleteRecordsDialog_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

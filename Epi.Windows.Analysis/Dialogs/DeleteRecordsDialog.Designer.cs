@@ -157,9 +157,10 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblRecAffected
             // 
-            this.lblRecAffected.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblRecAffected, "lblRecAffected");
+            this.lblRecAffected.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblRecAffected.Name = "lblRecAffected";
+            this.lblRecAffected.Click += new System.EventHandler(this.lblRecAffected_Click);
             // 
             // btnMissing
             // 
@@ -283,6 +284,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.gbxDelete.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.gbxDelete.Name = "gbxDelete";
             this.gbxDelete.TabStop = false;
+            this.gbxDelete.Enter += new System.EventHandler(this.gbxDelete_Enter);
             // 
             // rdbMarkDel
             // 
@@ -321,8 +323,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             // 
             // btnOK
@@ -339,6 +341,7 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             resources.ApplyResources(this.btnFunction, "btnFunction");
             this.btnFunction.Name = "btnFunction";
+            this.btnFunction.Click += new System.EventHandler(this.btnFunction_Click);
             this.btnFunction.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnFunction_MouseDown);
             // 
             // DeleteRecordsDialog
@@ -375,10 +378,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.btnDivide);
             this.Controls.Add(this.btnEqual);
             this.Controls.Add(this.cmbAvailableVar);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DeleteRecordsDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.DeleteRecordsDialog_Load);
             this.gbxDelete.ResumeLayout(false);
             this.ResumeLayout(false);

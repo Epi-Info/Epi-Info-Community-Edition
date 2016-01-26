@@ -157,11 +157,11 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.lblDLLObjectDef);
             this.groupBox1.Controls.Add(this.txtDLLObjectDef);
             this.groupBox1.Controls.Add(this.cmbVarType);
             this.groupBox1.Controls.Add(this.lblVarType);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -212,8 +212,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblVarName
             // 
-            this.lblVarName.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblVarName, "lblVarName");
+            this.lblVarName.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblVarName.Name = "lblVarName";
             // 
             // txtVarName
@@ -226,11 +226,11 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // gbxScope
             // 
+            resources.ApplyResources(this.gbxScope, "gbxScope");
             this.gbxScope.Controls.Add(this.rdbPermanent);
             this.gbxScope.Controls.Add(this.rdbGlobal);
             this.gbxScope.Controls.Add(this.rdbStandard);
             this.gbxScope.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            resources.ApplyResources(this.gbxScope, "gbxScope");
             this.gbxScope.Name = "gbxScope";
             this.gbxScope.TabStop = false;
             // 
@@ -258,10 +258,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnClear);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DefineVariableDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.DefineVariableDialog_Load);
             this.Leave += new System.EventHandler(this.txtVarName_Leave);
             this.groupBox1.ResumeLayout(false);
