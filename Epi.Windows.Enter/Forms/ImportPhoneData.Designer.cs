@@ -42,6 +42,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.lbxStatus = new System.Windows.Forms.ListBox();
+            this.cmsStatus = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblWarning = new System.Windows.Forms.Label();
             this.lblWarningMessage = new System.Windows.Forms.Label();
@@ -49,12 +51,12 @@
             this.rdbAppend = new System.Windows.Forms.RadioButton();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.rdbUpdateAndAppend = new System.Windows.Forms.RadioButton();
-            this.cmsStatus = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewsList = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupImportInfo.SuspendLayout();
+            this.cmsStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grpTypeOfImport.SuspendLayout();
-            this.cmsStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblDescription
@@ -136,6 +138,19 @@
             this.lbxStatus.Name = "lbxStatus";
             this.lbxStatus.TabStop = false;
             // 
+            // cmsStatus
+            // 
+            this.cmsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_Copy});
+            this.cmsStatus.Name = "cmsStatus";
+            resources.ApplyResources(this.cmsStatus, "cmsStatus");
+            this.cmsStatus.Click += new System.EventHandler(this.cmsStatus_Click);
+            // 
+            // toolStripMenuItem_Copy
+            // 
+            this.toolStripMenuItem_Copy.Name = "toolStripMenuItem_Copy";
+            resources.ApplyResources(this.toolStripMenuItem_Copy, "toolStripMenuItem_Copy");
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Epi.Enter.Properties.Resources.warning;
@@ -155,6 +170,8 @@
             // 
             // grpTypeOfImport
             // 
+            this.grpTypeOfImport.Controls.Add(this.label1);
+            this.grpTypeOfImport.Controls.Add(this.viewsList);
             this.grpTypeOfImport.Controls.Add(this.rdbAppend);
             this.grpTypeOfImport.Controls.Add(this.rdbUpdate);
             this.grpTypeOfImport.Controls.Add(this.rdbUpdateAndAppend);
@@ -182,19 +199,20 @@
             this.rdbUpdateAndAppend.Name = "rdbUpdateAndAppend";
             this.rdbUpdateAndAppend.TabStop = true;
             this.rdbUpdateAndAppend.UseVisualStyleBackColor = true;
+            this.rdbUpdateAndAppend.CheckedChanged += new System.EventHandler(this.rdbUpdateAndAppend_CheckedChanged);
             // 
-            // cmsStatus
+            // viewsList
             // 
-            this.cmsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_Copy});
-            this.cmsStatus.Name = "cmsStatus";
-            resources.ApplyResources(this.cmsStatus, "cmsStatus");
-            this.cmsStatus.Click += new System.EventHandler(this.cmsStatus_Click);
+            this.viewsList.FormattingEnabled = true;
+            resources.ApplyResources(this.viewsList, "viewsList");
+            this.viewsList.Name = "viewsList";
+            this.viewsList.SelectedIndexChanged += new System.EventHandler(this.viewsList_SelectedIndexChanged);
             // 
-            // toolStripMenuItem_Copy
+            // label1
             // 
-            this.toolStripMenuItem_Copy.Name = "toolStripMenuItem_Copy";
-            resources.ApplyResources(this.toolStripMenuItem_Copy, "toolStripMenuItem_Copy");
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // ImportPhoneDataForm
             // 
@@ -221,9 +239,10 @@
             this.Load += new System.EventHandler(this.ImportDataForm_Load);
             this.groupImportInfo.ResumeLayout(false);
             this.groupImportInfo.PerformLayout();
+            this.cmsStatus.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grpTypeOfImport.ResumeLayout(false);
-            this.cmsStatus.ResumeLayout(false);
+            this.grpTypeOfImport.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,5 +271,7 @@
         private System.Windows.Forms.RadioButton rdbUpdateAndAppend;
         private System.Windows.Forms.ContextMenuStrip cmsStatus;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Copy;
+        private System.Windows.Forms.ComboBox viewsList;
+        private System.Windows.Forms.Label label1;
     }
 }
