@@ -69,6 +69,7 @@ namespace Epi.Enter.Forms
             this.destinationProject = destinationView.Project;
             this.destinationView = destinationView;
 
+
             Construct();
         }
         #endregion // Constructors
@@ -105,6 +106,30 @@ namespace Epi.Enter.Forms
             this.importWorker.WorkerSupportsCancellation = true;
 
             this.IsBatchImport = false;
+
+            List<View> thisList = new List<View>();
+            var xViewDefault = new object();
+
+            foreach (View xView in destinationProject.views)
+            {
+
+                thisList.Add(xView);
+
+                if (xView.Name == destinationView.Name)
+                    xViewDefault = xView;
+
+                //  viewsList.SelectedItem = xView;
+
+
+                // viewsList.Items.Add(xView);        
+            }
+
+            viewsList.DataSource = thisList;
+
+            viewsList.DisplayMember = "Name";
+
+            viewsList.SelectedItem = xViewDefault;
+
 
             //this.cmbImportType.SelectedIndex = 2;  //Append records only
             rdbUpdateAndAppend.Checked = true;
@@ -1333,7 +1358,7 @@ namespace Epi.Enter.Forms
 
                 textProgress.Text = string.Empty;
                 AddStatusMessage(SharedStrings.IMPORT_DATA_DEVICE_REQUESTED + " " + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString());
-                
+
                 string importTypeDescription;
                 if (rdbUpdateAndAppend.Checked)
                 {
@@ -1451,15 +1476,41 @@ namespace Epi.Enter.Forms
 
         private void cmsStatus_Click(object sender, EventArgs e)
         {
-            if (lbxStatus.Items.Count > 0) 
+            if (lbxStatus.Items.Count > 0)
             {
                 string StatusText = string.Empty;
-                foreach(string item in lbxStatus.Items)
+                foreach (string item in lbxStatus.Items)
                 {
                     StatusText = StatusText + System.Environment.NewLine + item;
                 }
                 Clipboard.SetText(StatusText);
             }
+        }
+
+        private void rdbUpdateAndAppend_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void viewsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
+            var   c = sender as ComboBox;
+
+            View thisView = (View) c.SelectedItem;
+
+
+            destinationView = thisView;
+            destinationProject = thisView.Project;
+
+
+
         }
     }
 }
