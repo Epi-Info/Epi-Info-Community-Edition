@@ -175,10 +175,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.btnEllipse);
             this.Controls.Add(this.txtFilename);
             this.Controls.Add(this.lblFilename);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PrintoutDialog";
+            this.ShowIcon = false;
             this.ResumeLayout(false);
             this.PerformLayout();
 

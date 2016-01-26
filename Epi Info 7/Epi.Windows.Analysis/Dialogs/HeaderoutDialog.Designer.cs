@@ -416,10 +416,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HeaderoutDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.HeaderoutDialog_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

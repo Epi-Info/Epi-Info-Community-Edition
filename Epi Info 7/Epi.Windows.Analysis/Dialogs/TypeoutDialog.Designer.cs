@@ -468,10 +468,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.optRichText);
             this.Controls.Add(this.optFilename);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TypeoutDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.TypeoutDialog_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
