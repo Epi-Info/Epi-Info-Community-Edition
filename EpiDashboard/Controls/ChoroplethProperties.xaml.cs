@@ -67,7 +67,7 @@ namespace EpiDashboard.Controls
         private Dictionary<int, object> ClassAttribList = new Dictionary<int, object>();
         public Envelope mapOriginalExtent;
         public List<string> layerAddednew = new List<string>();
-
+    
         string _shapeKey;
         string _dataKey;
         string _value;
@@ -1514,7 +1514,7 @@ namespace EpiDashboard.Controls
             if (cmbShapeKey.SelectedItem != null)
             {
                 _shapeKey = cmbShapeKey.SelectedItem.ToString();
-                cmbDataKey.IsEnabled = true;
+                cmbDataKey.IsEnabled = true;               
             }
             else
             { 
@@ -1806,11 +1806,13 @@ namespace EpiDashboard.Controls
                     
                     if (choroplethServerLayerProvider == null)
                     {
-                        choroplethServerLayerProvider = new Mapping.ChoroplethServerLayerProvider(_myMap);
+                      //  choroplethServerLayerProvider = new Mapping.ChoroplethServerLayerProvider(_myMap);
+                        choroplethServerLayerProvider = (ChoroplethServerLayerProvider)LayerProvider;
                         choroplethServerLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
                     }
                     
-                    object[] mapFileProperties = choroplethServerLayerProvider.Load(MapServerName + "/" + MapVisibleLayer);
+                    object[] mapFileProperties = choroplethServerLayerProvider.Load(MapServerName + "/" + MapVisibleLayer);                   
+                    
                     
                     if (mapFileProperties != null)
                     {
@@ -1820,6 +1822,9 @@ namespace EpiDashboard.Controls
                         {
                             ILayerProperties layerProperties = null;
                             layerProperties = new ChoroplethServerLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
+                            ((ChoroplethServerLayerProperties)layerProperties).Provider = choroplethServerLayerProvider;
+                            ((ChoroplethServerLayerProperties)layerProperties).Provider.LayerId = choroplethServerLayerProvider.LayerId;
+                            ((ChoroplethServerLayerProperties)layerProperties).Provider.FeatureLoaded += new FeatureLoadedHandler(((ChoroplethServerLayerProperties)layerProperties).provider_FeatureLoaded);
                             layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
                             layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
                             layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);
@@ -1830,6 +1835,7 @@ namespace EpiDashboard.Controls
                         choroplethServerLayerProperties.boundryFilePath = MapServerName;
                         choroplethServerLayerProperties.Provider = choroplethServerLayerProvider;
                         choroplethServerLayerProperties.Provider.FeatureLoaded += new FeatureLoadedHandler(choroplethServerLayerProperties.provider_FeatureLoaded);
+                        choroplethServerLayerProperties.Provider.LayerId = choroplethServerLayerProvider.LayerId;
 
                         if (this.DashboardHelper != null)
                         {
@@ -1886,10 +1892,15 @@ namespace EpiDashboard.Controls
                     choroplethServerLayerProperties.cbxShapeKey.Items.Clear();
                     foreach (string key in featureAttributes.Keys)
                     {
-                        cmbShapeKey.Items.Add(key);
-                        choroplethServerLayerProperties.cbxShapeKey.Items.Add(key);
+                        if (key != "EpiInfoValCol")
+                        {
+                            cmbShapeKey.Items.Add(key);
+                            choroplethServerLayerProperties.cbxShapeKey.Items.Add(key);
+                        }
                     }
                     cmbShapeKey.Items.Refresh();
+                    if (!string.IsNullOrEmpty(((EpiDashboard.Mapping.ChoroplethLayerProvider)(choroplethServerLayerProvider))._shapeKey))
+                        cmbShapeKey.SelectedItem = ((EpiDashboard.Mapping.ChoroplethLayerProvider)(choroplethServerLayerProvider))._shapeKey;
                 }
             }
 
