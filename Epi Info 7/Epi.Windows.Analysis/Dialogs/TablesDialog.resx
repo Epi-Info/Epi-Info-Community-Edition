@@ -112,20 +112,20 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="baseImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
-        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEUAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEkAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wAgAAF1AYQBjwH/
         AWYBgAGPAf8BYAF5AYcB/wFXAW4BewH/AU4BYgFvAf8BRAFWAWEB/wE5AUgBUgH/AS4BOgFDAf8BJQEu
         ATUB/wEbASIBKQH/ARQBGQEeAf8BDgESARYB/wEOARMBGAH/DAABdQGEAY8B/wFsAXoBhQH/AWABbQF3
@@ -705,17 +705,21 @@
         AfABAQHzAf8BAAEBAYwBAQH4AQAB9wP/AY8B/xYACw==
 </value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmbWeight.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmbWeight.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="cmbWeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 133</value>
+    <value>11, 133</value>
   </data>
   <data name="cmbWeight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 21</value>
+    <value>244, 21</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmbWeight.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
@@ -723,22 +727,25 @@
     <value>cmbWeight</value>
   </data>
   <data name="&gt;&gt;cmbWeight.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmbWeight.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmbWeight.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
+  </data>
+  <data name="lblWeight.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="lblWeight.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblWeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 117</value>
+    <value>11, 117</value>
   </data>
   <data name="lblWeight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 16</value>
+    <value>244, 16</value>
   </data>
   <data name="lblWeight.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -750,22 +757,25 @@
     <value>lblWeight</value>
   </data>
   <data name="&gt;&gt;lblWeight.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblWeight.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblWeight.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
+  </data>
+  <data name="lblOutput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="lblOutput.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 189</value>
+    <value>11, 189</value>
   </data>
   <data name="lblOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 16</value>
+    <value>244, 16</value>
   </data>
   <data name="lblOutput.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -777,22 +787,25 @@
     <value>lblOutput</value>
   </data>
   <data name="&gt;&gt;lblOutput.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblOutput.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblOutput.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
+  </data>
+  <data name="txtOutput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="txtOutput.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="txtOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 208</value>
+    <value>11, 208</value>
   </data>
   <data name="txtOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 20</value>
+    <value>244, 20</value>
   </data>
   <data name="txtOutput.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -801,22 +814,25 @@
     <value>txtOutput</value>
   </data>
   <data name="&gt;&gt;txtOutput.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtOutput.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtOutput.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
+  </data>
+  <data name="cmbOutcome.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="cmbOutcome.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="cmbOutcome.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 25</value>
+    <value>248, 25</value>
   </data>
   <data name="cmbOutcome.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 21</value>
+    <value>244, 21</value>
   </data>
   <data name="cmbOutcome.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -825,22 +841,25 @@
     <value>cmbOutcome</value>
   </data>
   <data name="&gt;&gt;cmbOutcome.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmbOutcome.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmbOutcome.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
+  </data>
+  <data name="lblOutcomeVar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="lblOutcomeVar.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="lblOutcomeVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 9</value>
+    <value>248, 9</value>
   </data>
   <data name="lblOutcomeVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 16</value>
+    <value>244, 16</value>
   </data>
   <data name="lblOutcomeVar.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -852,22 +871,25 @@
     <value>lblOutcomeVar</value>
   </data>
   <data name="&gt;&gt;lblOutcomeVar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblOutcomeVar.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblOutcomeVar.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
+  </data>
+  <data name="cmbStratifyBy.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="cmbStratifyBy.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="cmbStratifyBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 25</value>
+    <value>498, 25</value>
   </data>
   <data name="cmbStratifyBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 21</value>
+    <value>244, 21</value>
   </data>
   <data name="cmbStratifyBy.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -876,22 +898,25 @@
     <value>cmbStratifyBy</value>
   </data>
   <data name="&gt;&gt;cmbStratifyBy.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmbStratifyBy.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmbStratifyBy.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
+  </data>
+  <data name="lblStratifyBy.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="lblStratifyBy.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblStratifyBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 9</value>
+    <value>498, 9</value>
   </data>
   <data name="lblStratifyBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 16</value>
+    <value>244, 16</value>
   </data>
   <data name="lblStratifyBy.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -903,13 +928,16 @@
     <value>lblStratifyBy</value>
   </data>
   <data name="&gt;&gt;lblStratifyBy.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblStratifyBy.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblStratifyBy.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
+  </data>
+  <data name="pbxheight.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="pbxheight.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1116,7 +1144,6 @@
         Dg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4A
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pbxheight.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1326,7 +1353,7 @@
 </value>
   </data>
   <data name="pbxheight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 88</value>
+    <value>270, 88</value>
   </data>
   <data name="pbxheight.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 96</value>
@@ -1338,13 +1365,16 @@
     <value>pbxheight</value>
   </data>
   <data name="&gt;&gt;pbxheight.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pbxheight.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pbxheight.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
+  </data>
+  <data name="cbxMatch.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="cbxMatch.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1356,10 +1386,10 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="cbxMatch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>400, 64</value>
+    <value>500, 64</value>
   </data>
   <data name="cbxMatch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 24</value>
+    <value>244, 24</value>
   </data>
   <data name="cbxMatch.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1371,7 +1401,7 @@
     <value>cbxMatch</value>
   </data>
   <data name="&gt;&gt;cbxMatch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbxMatch.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1379,14 +1409,17 @@
   <data name="&gt;&gt;cbxMatch.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="lbxStratifyBy.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="lbxStratifyBy.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lbxStratifyBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>400, 88</value>
+    <value>500, 88</value>
   </data>
   <data name="lbxStratifyBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 108</value>
+    <value>244, 108</value>
   </data>
   <data name="lbxStratifyBy.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1395,13 +1428,16 @@
     <value>lbxStratifyBy</value>
   </data>
   <data name="&gt;&gt;lbxStratifyBy.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbxStratifyBy.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lbxStratifyBy.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="gbxPageSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="txtNumCol.Location" type="System.Drawing.Point, System.Drawing">
     <value>136, 24</value>
@@ -1416,7 +1452,7 @@
     <value>txtNumCol</value>
   </data>
   <data name="&gt;&gt;txtNumCol.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtNumCol.Parent" xml:space="preserve">
     <value>gbxPageSettings</value>
@@ -1443,7 +1479,7 @@
     <value>cbxNoLineWrap</value>
   </data>
   <data name="&gt;&gt;cbxNoLineWrap.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbxNoLineWrap.Parent" xml:space="preserve">
     <value>gbxPageSettings</value>
@@ -1470,36 +1506,12 @@
     <value>cbxColumns</value>
   </data>
   <data name="&gt;&gt;cbxColumns.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbxColumns.Parent" xml:space="preserve">
     <value>gbxPageSettings</value>
   </data>
-  <data name="cbxStatistics.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>System</value>
-  </data>
-  <data name="cbxStatistics.Location" type="System.Drawing.Point, System.Drawing">
-    <value>400, 288</value>
-  </data>
-  <data name="cbxStatistics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 24</value>
-  </data>
-  <data name="cbxStatistics.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="cbxStatistics.Text" xml:space="preserve">
-    <value>Show Statistics</value>
-  </data>
-  <data name="&gt;&gt;cbxStatistics.Name" xml:space="preserve">
-    <value>cbxColumns</value>
-  </data>
-  <data name="&gt;&gt;cbxStatistics.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbxStatistics.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cbxStatistics.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cbxColumns.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="gbxPageSettings.Enabled" type="System.Boolean, mscorlib">
@@ -1509,10 +1521,10 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="gbxPageSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>400, 208</value>
+    <value>500, 208</value>
   </data>
   <data name="gbxPageSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 80</value>
+    <value>244, 80</value>
   </data>
   <data name="gbxPageSettings.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1524,7 +1536,7 @@
     <value>gbxPageSettings</value>
   </data>
   <data name="&gt;&gt;gbxPageSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;gbxPageSettings.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1532,14 +1544,47 @@
   <data name="&gt;&gt;gbxPageSettings.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="cbxStatistics.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="cbxStatistics.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>System</value>
+  </data>
+  <data name="cbxStatistics.Location" type="System.Drawing.Point, System.Drawing">
+    <value>508, 290</value>
+  </data>
+  <data name="cbxStatistics.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 24</value>
+  </data>
+  <data name="cbxStatistics.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cbxStatistics.Text" xml:space="preserve">
+    <value>Show Statistics</value>
+  </data>
+  <data name="&gt;&gt;cbxStatistics.Name" xml:space="preserve">
+    <value>cbxStatistics</value>
+  </data>
+  <data name="&gt;&gt;cbxStatistics.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbxStatistics.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbxStatistics.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="btnHelp.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="btnHelp.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
   <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>494, 320</value>
+    <value>654, 320</value>
   </data>
   <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnHelp.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1551,7 +1596,7 @@
     <value>btnHelp</value>
   </data>
   <data name="&gt;&gt;btnHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnHelp.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1559,14 +1604,17 @@
   <data name="&gt;&gt;btnHelp.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="btnClear.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="btnClear.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 320</value>
+    <value>462, 320</value>
   </data>
   <data name="btnClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnClear.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1578,7 +1626,7 @@
     <value>btnClear</value>
   </data>
   <data name="&gt;&gt;btnClear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnClear.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1586,14 +1634,17 @@
   <data name="&gt;&gt;btnClear.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="btnCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="btnCancel.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 320</value>
+    <value>366, 320</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1605,13 +1656,16 @@
     <value>btnCancel</value>
   </data>
   <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="btnOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="btnOK.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1620,10 +1674,10 @@
     <value>System</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 320</value>
+    <value>270, 320</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1635,13 +1689,16 @@
     <value>btnOK</value>
   </data>
   <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="btnSaveOnly.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="btnSaveOnly.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1650,10 +1707,10 @@
     <value>System</value>
   </data>
   <data name="btnSaveOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 320</value>
+    <value>558, 320</value>
   </data>
   <data name="btnSaveOnly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnSaveOnly.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1665,7 +1722,7 @@
     <value>btnSaveOnly</value>
   </data>
   <data name="&gt;&gt;btnSaveOnly.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnSaveOnly.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1673,14 +1730,17 @@
   <data name="&gt;&gt;btnSaveOnly.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="cmbExposure.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="cmbExposure.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="cmbExposure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 88</value>
+    <value>11, 88</value>
   </data>
   <data name="cmbExposure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 21</value>
+    <value>244, 21</value>
   </data>
   <data name="cmbExposure.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1689,13 +1749,16 @@
     <value>cmbExposure</value>
   </data>
   <data name="&gt;&gt;cmbExposure.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmbExposure.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmbExposure.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="lblExposure.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="lblExposure.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1704,7 +1767,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="lblExposure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 69</value>
+    <value>11, 69</value>
   </data>
   <data name="lblExposure.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 13</value>
@@ -1719,7 +1782,7 @@
     <value>lblExposure</value>
   </data>
   <data name="&gt;&gt;lblExposure.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblExposure.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1727,14 +1790,14 @@
   <data name="&gt;&gt;lblExposure.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
     <value>5, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>578, 352</value>
+    <value>754, 352</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Tables</value>
@@ -1743,12 +1806,12 @@
     <value>baseImageList</value>
   </data>
   <data name="&gt;&gt;baseImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TablesDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.4716.31561, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5869.21005, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -137,22 +137,22 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // cmbWeight
             // 
-            this.cmbWeight.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbWeight, "cmbWeight");
+            this.cmbWeight.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbWeight.Name = "cmbWeight";
             this.cmbWeight.SelectedIndexChanged += new System.EventHandler(this.cmbWeight_SelectedIndexChanged);
             this.cmbWeight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbWeight_KeyDown);
             // 
             // lblWeight
             // 
-            this.lblWeight.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblWeight, "lblWeight");
+            this.lblWeight.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblWeight.Name = "lblWeight";
             // 
             // lblOutput
             // 
-            this.lblOutput.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblOutput, "lblOutput");
+            this.lblOutput.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblOutput.Name = "lblOutput";
             // 
             // txtOutput
@@ -162,28 +162,28 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // cmbOutcome
             // 
-            this.cmbOutcome.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbOutcome, "cmbOutcome");
+            this.cmbOutcome.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOutcome.Name = "cmbOutcome";
             this.cmbOutcome.SelectedIndexChanged += new System.EventHandler(this.cmbOutcome_SelectedIndexChanged);
             // 
             // lblOutcomeVar
             // 
-            this.lblOutcomeVar.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblOutcomeVar, "lblOutcomeVar");
+            this.lblOutcomeVar.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblOutcomeVar.Name = "lblOutcomeVar";
             // 
             // cmbStratifyBy
             // 
-            this.cmbStratifyBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbStratifyBy, "cmbStratifyBy");
+            this.cmbStratifyBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStratifyBy.Name = "cmbStratifyBy";
             this.cmbStratifyBy.SelectedIndexChanged += new System.EventHandler(this.cmbStratifyBy_SelectedIndexChanged);
             // 
             // lblStratifyBy
             // 
-            this.lblStratifyBy.FlatStyle = System.Windows.Forms.FlatStyle.System;
             resources.ApplyResources(this.lblStratifyBy, "lblStratifyBy");
+            this.lblStratifyBy.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblStratifyBy.Name = "lblStratifyBy";
             // 
             // pbxheight
@@ -198,11 +198,6 @@ namespace Epi.Windows.Analysis.Dialogs
             this.cbxMatch.Name = "cbxMatch";
             this.cbxMatch.CheckedChanged += new System.EventHandler(this.cbxMatch_CheckedChanged);
             // 
-            // cbxStatistics
-            // 
-            resources.ApplyResources(this.cbxStatistics, "cbxStatistics");
-            this.cbxMatch.Name = "cbxStatistics";
-            // 
             // lbxStratifyBy
             // 
             resources.ApplyResources(this.lbxStratifyBy, "lbxStratifyBy");
@@ -211,10 +206,10 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // gbxPageSettings
             // 
+            resources.ApplyResources(this.gbxPageSettings, "gbxPageSettings");
             this.gbxPageSettings.Controls.Add(this.txtNumCol);
             this.gbxPageSettings.Controls.Add(this.cbxNoLineWrap);
             this.gbxPageSettings.Controls.Add(this.cbxColumns);
-            resources.ApplyResources(this.gbxPageSettings, "gbxPageSettings");
             this.gbxPageSettings.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.gbxPageSettings.Name = "gbxPageSettings";
             this.gbxPageSettings.TabStop = false;
@@ -234,6 +229,11 @@ namespace Epi.Windows.Analysis.Dialogs
             resources.ApplyResources(this.cbxColumns, "cbxColumns");
             this.cbxColumns.Name = "cbxColumns";
             // 
+            // cbxStatistics
+            // 
+            resources.ApplyResources(this.cbxStatistics, "cbxStatistics");
+            this.cbxStatistics.Name = "cbxStatistics";
+            // 
             // btnHelp
             // 
             resources.ApplyResources(this.btnHelp, "btnHelp");
@@ -248,8 +248,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             // 
             // btnOK
@@ -264,8 +264,8 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // cmbExposure
             // 
-            this.cmbExposure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbExposure, "cmbExposure");
+            this.cmbExposure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbExposure.Name = "cmbExposure";
             this.cmbExposure.SelectedIndexChanged += new System.EventHandler(this.cmbExposure_SelectedIndexChanged);
             // 
