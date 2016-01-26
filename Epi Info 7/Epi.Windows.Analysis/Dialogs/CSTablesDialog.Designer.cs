@@ -330,10 +330,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.txtOutput);
             this.Controls.Add(this.cmbWeight);
             this.Controls.Add(this.lblWeight);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ComplexSampleTablesDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.TablesDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxheight)).EndInit();
             this.gbxPageSettings.ResumeLayout(false);

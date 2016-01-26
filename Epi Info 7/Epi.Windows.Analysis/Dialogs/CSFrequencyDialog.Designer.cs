@@ -294,10 +294,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.cmbWeight);
             this.Controls.Add(this.lblWeight);
             this.Controls.Add(this.pbxFreq);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ComplexSampleFrequencyDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.ComplexSampleFrequencyDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxFreq)).EndInit();
             this.ResumeLayout(false);

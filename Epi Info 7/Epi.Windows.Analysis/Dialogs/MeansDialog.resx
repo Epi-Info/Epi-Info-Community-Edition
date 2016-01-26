@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
-        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEcAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEkAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wAgAAF1AYQBjwH/
         AWYBgAGPAf8BYAF5AYcB/wFXAW4BewH/AU4BYgFvAf8BRAFWAWEB/wE5AUgBUgH/AS4BOgFDAf8BJQEu
         ATUB/wEbASIBKQH/ARQBGQEeAf8BDgESARYB/wEOARMBGAH/DAABdQGEAY8B/wFsAXoBhQH/AWABbQF3
@@ -849,72 +849,6 @@
   <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>gbxPageSettings</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txtNumCol.Name" xml:space="preserve">
-    <value>txtNumCol</value>
-  </data>
-  <data name="&gt;&gt;txtNumCol.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtNumCol.Parent" xml:space="preserve">
-    <value>gbxPageSettings</value>
-  </data>
-  <data name="&gt;&gt;txtNumCol.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cbxNoLineWrap.Name" xml:space="preserve">
-    <value>cbxNoLineWrap</value>
-  </data>
-  <data name="&gt;&gt;cbxNoLineWrap.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbxNoLineWrap.Parent" xml:space="preserve">
-    <value>gbxPageSettings</value>
-  </data>
-  <data name="&gt;&gt;cbxNoLineWrap.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="gbxPageSettings.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="gbxPageSettings.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="gbxPageSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>508, 94</value>
-  </data>
-  <data name="gbxPageSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 61</value>
-  </data>
-  <data name="gbxPageSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="gbxPageSettings.Text" xml:space="preserve">
-    <value>Optional Page Settings</value>
-  </data>
-  <data name="&gt;&gt;gbxPageSettings.Name" xml:space="preserve">
-    <value>gbxPageSettings</value>
-  </data>
-  <data name="&gt;&gt;gbxPageSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbxPageSettings.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gbxPageSettings.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -995,6 +929,36 @@
   </data>
   <data name="&gt;&gt;cbxNoLineWrap.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="gbxPageSettings.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="gbxPageSettings.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="gbxPageSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>508, 94</value>
+  </data>
+  <data name="gbxPageSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 61</value>
+  </data>
+  <data name="gbxPageSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="gbxPageSettings.Text" xml:space="preserve">
+    <value>Optional Page Settings</value>
+  </data>
+  <data name="&gt;&gt;gbxPageSettings.Name" xml:space="preserve">
+    <value>gbxPageSettings</value>
+  </data>
+  <data name="&gt;&gt;gbxPageSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxPageSettings.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbxPageSettings.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="lbxStratifyBy.HorizontalScrollbar" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1365,6 +1329,6 @@
     <value>MeansDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5869.19665, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5869.29209, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

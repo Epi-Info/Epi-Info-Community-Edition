@@ -455,10 +455,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.cmbWeightVar);
             this.Controls.Add(this.lblWeight);
             this.Controls.Add(this.lblOther);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "KaplanMeierSurvivalDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.KaplanMeierSurvivalDialog_Load);
             this.grpGraphOpts.ResumeLayout(false);
             this.grpGraphOpts.PerformLayout();
