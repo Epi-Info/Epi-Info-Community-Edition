@@ -112,12 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="baseImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
-        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEUAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEkAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wAgAAF1AYQBjwH/
         AWYBgAGPAf8BYAF5AYcB/wFXAW4BewH/AU4BYgFvAf8BRAFWAWEB/wE5AUgBUgH/AS4BOgFDAf8BJQEu
         ATUB/wEbASIBKQH/ARQBGQEeAf8BDgESARYB/wEOARMBGAH/DAABdQGEAY8B/wFsAXoBhQH/AWABbQF3
@@ -705,11 +705,11 @@
         AfABAQHzAf8BAAEBAYwBAQH4AQAB9wP/AY8B/xYACw==
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdbTables.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdbTables.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
@@ -719,7 +719,7 @@
   <data name="rdbTables.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 24</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdbTables.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -730,7 +730,7 @@
     <value>rdbTables</value>
   </data>
   <data name="&gt;&gt;rdbTables.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rdbTables.Parent" xml:space="preserve">
     <value>gbxInfoFor</value>
@@ -760,7 +760,7 @@
     <value>rdbViews</value>
   </data>
   <data name="&gt;&gt;rdbViews.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rdbViews.Parent" xml:space="preserve">
     <value>gbxInfoFor</value>
@@ -790,7 +790,7 @@
     <value>rdbVariables</value>
   </data>
   <data name="&gt;&gt;rdbVariables.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rdbVariables.Parent" xml:space="preserve">
     <value>gbxInfoFor</value>
@@ -798,17 +798,14 @@
   <data name="&gt;&gt;rdbVariables.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="gbxInfoFor.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
   <data name="gbxInfoFor.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="gbxInfoFor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>6, 10</value>
   </data>
   <data name="gbxInfoFor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>442, 48</value>
+    <value>506, 48</value>
   </data>
   <data name="gbxInfoFor.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -820,7 +817,7 @@
     <value>gbxInfoFor</value>
   </data>
   <data name="&gt;&gt;gbxInfoFor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;gbxInfoFor.Parent" xml:space="preserve">
     <value>$this</value>
@@ -844,7 +841,7 @@
     <value>8, 79</value>
   </data>
   <data name="cmbVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 21</value>
+    <value>408, 21</value>
   </data>
   <data name="cmbVariables.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -856,7 +853,7 @@
     <value>cmbVariables</value>
   </data>
   <data name="&gt;&gt;cmbVariables.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmbVariables.Parent" xml:space="preserve">
     <value>$this</value>
@@ -883,7 +880,7 @@
     <value>lblFrom</value>
   </data>
   <data name="&gt;&gt;lblFrom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblFrom.Parent" xml:space="preserve">
     <value>$this</value>
@@ -910,7 +907,7 @@
     <value>lblOutput</value>
   </data>
   <data name="&gt;&gt;lblOutput.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblOutput.Parent" xml:space="preserve">
     <value>$this</value>
@@ -919,7 +916,7 @@
     <value>5</value>
   </data>
   <data name="txtOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 119</value>
+    <value>8, 119</value>
   </data>
   <data name="txtOutput.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 20</value>
@@ -931,7 +928,7 @@
     <value>txtOutput</value>
   </data>
   <data name="&gt;&gt;txtOutput.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtOutput.Parent" xml:space="preserve">
     <value>$this</value>
@@ -943,10 +940,10 @@
     <value>System</value>
   </data>
   <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 150</value>
+    <value>422, 150</value>
   </data>
   <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnHelp.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -958,7 +955,7 @@
     <value>btnHelp</value>
   </data>
   <data name="&gt;&gt;btnHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnHelp.Parent" xml:space="preserve">
     <value>$this</value>
@@ -970,10 +967,10 @@
     <value>System</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 150</value>
+    <value>134, 150</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -985,7 +982,7 @@
     <value>btnCancel</value>
   </data>
   <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -997,10 +994,10 @@
     <value>System</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 150</value>
+    <value>38, 150</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1012,7 +1009,7 @@
     <value>btnOK</value>
   </data>
   <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1024,10 +1021,10 @@
     <value>System</value>
   </data>
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 150</value>
+    <value>230, 150</value>
   </data>
   <data name="btnClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnClear.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1039,7 +1036,7 @@
     <value>btnClear</value>
   </data>
   <data name="&gt;&gt;btnClear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnClear.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1051,10 +1048,10 @@
     <value>System</value>
   </data>
   <data name="btnSaveOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 150</value>
+    <value>326, 150</value>
   </data>
   <data name="btnSaveOnly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnSaveOnly.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1066,7 +1063,7 @@
     <value>btnSaveOnly</value>
   </data>
   <data name="&gt;&gt;btnSaveOnly.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnSaveOnly.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1087,7 +1084,7 @@
     <value>txtDatabase</value>
   </data>
   <data name="&gt;&gt;txtDatabase.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtDatabase.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1102,22 +1099,22 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="btnEllipse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>411, 80</value>
+    <value>422, 77</value>
   </data>
   <data name="btnEllipse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnEllipse.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="btnEllipse.Text" xml:space="preserve">
-    <value>...</value>
+    <value>Browse</value>
   </data>
   <data name="&gt;&gt;btnEllipse.Name" xml:space="preserve">
     <value>btnEllipse</value>
   </data>
   <data name="&gt;&gt;btnEllipse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnEllipse.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1125,11 +1122,14 @@
   <data name="&gt;&gt;btnEllipse.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="lbxVariables.HorizontalScrollbar" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="lbxVariables.Location" type="System.Drawing.Point, System.Drawing">
     <value>268, 119</value>
   </data>
   <data name="lbxVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 199</value>
+    <value>244, 199</value>
   </data>
   <data name="lbxVariables.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1141,7 +1141,7 @@
     <value>lbxVariables</value>
   </data>
   <data name="&gt;&gt;lbxVariables.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbxVariables.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1149,14 +1149,14 @@
   <data name="&gt;&gt;lbxVariables.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
     <value>5, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>442, 181</value>
+    <value>519, 181</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Display</value>
@@ -1165,12 +1165,12 @@
     <value>baseImageList</value>
   </data>
   <data name="&gt;&gt;baseImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>DisplayDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.4779.29263, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5869.31668, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
