@@ -1170,16 +1170,22 @@ namespace Epi.Windows.Dialogs
 
         private void Ping_Click(object sender, EventArgs e)
         {
-            Save();
-            string Message = ValidateEIWSSittings();
-            if (Message.Contains("Success"))
+            try
             {
-                MessageBox.Show("Succeeded!", "", MessageBoxButtons.OK);
+                Save();
+                string Message = ValidateEIWSSittings();
+                if (Message.Contains("Success"))
+                {
+                    MessageBox.Show("Succeeded!", "", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    MessageBox.Show(Message, "", MessageBoxButtons.OK);
+                }
+            }catch(Exception ex){
+                MessageBox.Show("Error!", "", MessageBoxButtons.OK);
             }
-            else 
-            {
-                MessageBox.Show(Message, "", MessageBoxButtons.OK);
-            }
+
         }
         private string  ValidateEIWSSittings()
         {
@@ -1234,6 +1240,17 @@ namespace Epi.Windows.Dialogs
                 IsValid = ex.InnerException.ToString();
             }
             return IsValid;
+        }
+
+        private void txtEndpoint_TextChanged(object sender, EventArgs e)
+        {
+            string URL =((System.Windows.Forms.TextBox)(sender)).Text;
+            if (!string.IsNullOrEmpty (URL) && URL.ToUpper().Contains(".SVC"))
+            {
+            Ping.Enabled = true;
+            }else{
+             Ping.Enabled = false;
+            }
         }
 
     }

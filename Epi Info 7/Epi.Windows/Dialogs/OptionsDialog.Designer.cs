@@ -650,6 +650,7 @@ namespace Epi.Windows.Dialogs
             // 
             resources.ApplyResources(this.txtEndpoint, "txtEndpoint");
             this.txtEndpoint.Name = "txtEndpoint";
+            this.txtEndpoint.TextChanged += new System.EventHandler(this.txtEndpoint_TextChanged);
             // 
             // BindingGroupBox
             // 
