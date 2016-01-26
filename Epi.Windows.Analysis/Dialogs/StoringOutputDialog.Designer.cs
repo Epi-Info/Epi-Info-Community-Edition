@@ -151,40 +151,37 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // txtOutputPrefix
             // 
-            this.txtOutputPrefix.Location = new System.Drawing.Point(128, 22);
+            this.txtOutputPrefix.Location = new System.Drawing.Point(15, 25);
             this.txtOutputPrefix.Name = "txtOutputPrefix";
-            this.txtOutputPrefix.Size = new System.Drawing.Size(135, 20);
+            this.txtOutputPrefix.Size = new System.Drawing.Size(186, 20);
             this.txtOutputPrefix.TabIndex = 0;
             // 
             // lblOutputPrefix
             // 
-            this.lblOutputPrefix.AutoSize = true;
-            this.lblOutputPrefix.Location = new System.Drawing.Point(9, 25);
+            this.lblOutputPrefix.Location = new System.Drawing.Point(15, 9);
             this.lblOutputPrefix.Name = "lblOutputPrefix";
-            this.lblOutputPrefix.Size = new System.Drawing.Size(90, 13);
+            this.lblOutputPrefix.Size = new System.Drawing.Size(186, 13);
             this.lblOutputPrefix.TabIndex = 1;
             this.lblOutputPrefix.Text = "Output File Prefix:";
             // 
             // lblOutputSequence
             // 
-            this.lblOutputSequence.AutoSize = true;
-            this.lblOutputSequence.Location = new System.Drawing.Point(9, 51);
+            this.lblOutputSequence.Location = new System.Drawing.Point(15, 51);
             this.lblOutputSequence.Name = "lblOutputSequence";
-            this.lblOutputSequence.Size = new System.Drawing.Size(113, 13);
+            this.lblOutputSequence.Size = new System.Drawing.Size(186, 13);
             this.lblOutputSequence.TabIndex = 3;
             this.lblOutputSequence.Text = "Output File Sequence:";
             // 
             // txtOutputSequence
             // 
-            this.txtOutputSequence.Location = new System.Drawing.Point(128, 48);
+            this.txtOutputSequence.Location = new System.Drawing.Point(15, 67);
             this.txtOutputSequence.Name = "txtOutputSequence";
-            this.txtOutputSequence.Size = new System.Drawing.Size(135, 20);
+            this.txtOutputSequence.Size = new System.Drawing.Size(186, 20);
             this.txtOutputSequence.TabIndex = 2;
             // 
             // lblResultsFolder
             // 
-            this.lblResultsFolder.AutoSize = true;
-            this.lblResultsFolder.Location = new System.Drawing.Point(9, 94);
+            this.lblResultsFolder.Location = new System.Drawing.Point(12, 96);
             this.lblResultsFolder.Name = "lblResultsFolder";
             this.lblResultsFolder.Size = new System.Drawing.Size(77, 13);
             this.lblResultsFolder.TabIndex = 5;
@@ -192,15 +189,14 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // txtResultsFolder
             // 
-            this.txtResultsFolder.Location = new System.Drawing.Point(89, 91);
+            this.txtResultsFolder.Location = new System.Drawing.Point(15, 112);
             this.txtResultsFolder.Name = "txtResultsFolder";
             this.txtResultsFolder.Size = new System.Drawing.Size(334, 20);
             this.txtResultsFolder.TabIndex = 4;
             // 
             // lblArchiveFolder
             // 
-            this.lblArchiveFolder.AutoSize = true;
-            this.lblArchiveFolder.Location = new System.Drawing.Point(8, 165);
+            this.lblArchiveFolder.Location = new System.Drawing.Point(12, 174);
             this.lblArchiveFolder.Name = "lblArchiveFolder";
             this.lblArchiveFolder.Size = new System.Drawing.Size(78, 13);
             this.lblArchiveFolder.TabIndex = 7;
@@ -208,36 +204,36 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // txtArchiveFolder
             // 
-            this.txtArchiveFolder.Location = new System.Drawing.Point(89, 162);
+            this.txtArchiveFolder.Location = new System.Drawing.Point(15, 190);
             this.txtArchiveFolder.Name = "txtArchiveFolder";
             this.txtArchiveFolder.Size = new System.Drawing.Size(334, 20);
             this.txtArchiveFolder.TabIndex = 6;
             // 
             // btnResultsFolder
             // 
-            this.btnResultsFolder.Location = new System.Drawing.Point(429, 91);
+            this.btnResultsFolder.Location = new System.Drawing.Point(355, 110);
             this.btnResultsFolder.Name = "btnResultsFolder";
-            this.btnResultsFolder.Size = new System.Drawing.Size(24, 20);
+            this.btnResultsFolder.Size = new System.Drawing.Size(90, 23);
             this.btnResultsFolder.TabIndex = 8;
-            this.btnResultsFolder.Text = "...";
+            this.btnResultsFolder.Text = "Browse";
             this.btnResultsFolder.UseVisualStyleBackColor = true;
             this.btnResultsFolder.Click += new System.EventHandler(this.btnResultsFolder_Click);
             // 
             // btnArchiveFolder
             // 
-            this.btnArchiveFolder.Location = new System.Drawing.Point(429, 162);
+            this.btnArchiveFolder.Location = new System.Drawing.Point(355, 188);
             this.btnArchiveFolder.Name = "btnArchiveFolder";
-            this.btnArchiveFolder.Size = new System.Drawing.Size(24, 20);
+            this.btnArchiveFolder.Size = new System.Drawing.Size(90, 23);
             this.btnArchiveFolder.TabIndex = 9;
-            this.btnArchiveFolder.Text = "...";
+            this.btnArchiveFolder.Text = "Browse";
             this.btnArchiveFolder.UseVisualStyleBackColor = true;
             this.btnArchiveFolder.Click += new System.EventHandler(this.btnArchiveFolder_Click);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(217, 365);
+            this.btnOk.Location = new System.Drawing.Point(163, 393);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.Size = new System.Drawing.Size(90, 23);
             this.btnOk.TabIndex = 10;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -246,9 +242,9 @@ namespace Epi.Windows.Analysis.Dialogs
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(379, 365);
+            this.btnCancel.Location = new System.Drawing.Point(355, 393);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -261,16 +257,15 @@ namespace Epi.Windows.Analysis.Dialogs
             this.groupBox1.Controls.Add(this.txtFlagNumber);
             this.groupBox1.Controls.Add(this.lblFlagDays);
             this.groupBox1.Controls.Add(this.txtFlagAge);
-            this.groupBox1.Location = new System.Drawing.Point(12, 236);
+            this.groupBox1.Location = new System.Drawing.Point(12, 264);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(441, 123);
+            this.groupBox1.Size = new System.Drawing.Size(433, 123);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Flag Output Files Exceeding These Limits";
             // 
             // lblFlagSize
             // 
-            this.lblFlagSize.AutoSize = true;
             this.lblFlagSize.Location = new System.Drawing.Point(6, 85);
             this.lblFlagSize.Name = "lblFlagSize";
             this.lblFlagSize.Size = new System.Drawing.Size(72, 13);
@@ -286,7 +281,6 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblFlagNumber
             // 
-            this.lblFlagNumber.AutoSize = true;
             this.lblFlagNumber.Location = new System.Drawing.Point(6, 59);
             this.lblFlagNumber.Name = "lblFlagNumber";
             this.lblFlagNumber.Size = new System.Drawing.Size(97, 13);
@@ -302,7 +296,6 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // lblFlagDays
             // 
-            this.lblFlagDays.AutoSize = true;
             this.lblFlagDays.Location = new System.Drawing.Point(6, 33);
             this.lblFlagDays.Name = "lblFlagDays";
             this.lblFlagDays.Size = new System.Drawing.Size(68, 13);
@@ -318,9 +311,9 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // btnArchiveResults
             // 
-            this.btnArchiveResults.Location = new System.Drawing.Point(170, 117);
+            this.btnArchiveResults.Location = new System.Drawing.Point(111, 138);
             this.btnArchiveResults.Name = "btnArchiveResults";
-            this.btnArchiveResults.Size = new System.Drawing.Size(75, 23);
+            this.btnArchiveResults.Size = new System.Drawing.Size(90, 23);
             this.btnArchiveResults.TabIndex = 14;
             this.btnArchiveResults.Text = "Archive...";
             this.btnArchiveResults.UseVisualStyleBackColor = true;
@@ -328,9 +321,9 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // btnDeleteResults
             // 
-            this.btnDeleteResults.Location = new System.Drawing.Point(251, 117);
+            this.btnDeleteResults.Location = new System.Drawing.Point(207, 138);
             this.btnDeleteResults.Name = "btnDeleteResults";
-            this.btnDeleteResults.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteResults.Size = new System.Drawing.Size(90, 23);
             this.btnDeleteResults.TabIndex = 16;
             this.btnDeleteResults.Text = "Delete...";
             this.btnDeleteResults.UseVisualStyleBackColor = true;
@@ -338,9 +331,9 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // btnDeleteArchive
             // 
-            this.btnDeleteArchive.Location = new System.Drawing.Point(170, 188);
+            this.btnDeleteArchive.Location = new System.Drawing.Point(111, 216);
             this.btnDeleteArchive.Name = "btnDeleteArchive";
-            this.btnDeleteArchive.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteArchive.Size = new System.Drawing.Size(90, 23);
             this.btnDeleteArchive.TabIndex = 17;
             this.btnDeleteArchive.Text = "Delete...";
             this.btnDeleteArchive.UseVisualStyleBackColor = true;
@@ -348,9 +341,9 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // btnViewResults
             // 
-            this.btnViewResults.Location = new System.Drawing.Point(89, 117);
+            this.btnViewResults.Location = new System.Drawing.Point(15, 138);
             this.btnViewResults.Name = "btnViewResults";
-            this.btnViewResults.Size = new System.Drawing.Size(75, 23);
+            this.btnViewResults.Size = new System.Drawing.Size(90, 23);
             this.btnViewResults.TabIndex = 18;
             this.btnViewResults.Text = "View...";
             this.btnViewResults.UseVisualStyleBackColor = true;
@@ -358,9 +351,9 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // btnViewArchive
             // 
-            this.btnViewArchive.Location = new System.Drawing.Point(89, 188);
+            this.btnViewArchive.Location = new System.Drawing.Point(15, 216);
             this.btnViewArchive.Name = "btnViewArchive";
-            this.btnViewArchive.Size = new System.Drawing.Size(75, 23);
+            this.btnViewArchive.Size = new System.Drawing.Size(90, 23);
             this.btnViewArchive.TabIndex = 19;
             this.btnViewArchive.Text = "View...";
             this.btnViewArchive.UseVisualStyleBackColor = true;
@@ -372,9 +365,9 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             // btnApply
             // 
-            this.btnApply.Location = new System.Drawing.Point(298, 365);
+            this.btnApply.Location = new System.Drawing.Point(259, 393);
             this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(75, 23);
+            this.btnApply.Size = new System.Drawing.Size(90, 23);
             this.btnApply.TabIndex = 20;
             this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
@@ -385,7 +378,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(464, 398);
+            this.ClientSize = new System.Drawing.Size(455, 425);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.btnViewArchive);
             this.Controls.Add(this.btnViewResults);
@@ -405,6 +398,8 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.txtOutputSequence);
             this.Controls.Add(this.lblOutputPrefix);
             this.Controls.Add(this.txtOutputPrefix);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "StoringOutputDialog";
             this.ShowIcon = false;
             this.Text = "Storing Output";

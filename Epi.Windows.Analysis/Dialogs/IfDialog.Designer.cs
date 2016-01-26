@@ -403,10 +403,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.lblAvailableVar);
             this.Controls.Add(this.txtIfCondition);
             this.Controls.Add(this.lblIfCondition);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "IfDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.IfDialog_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

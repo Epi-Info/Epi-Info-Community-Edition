@@ -185,10 +185,10 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.lblOutputFile);
             this.Controls.Add(this.btnEllipse);
             this.Controls.Add(this.txtOutputFile);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RouteoutDialog";
+            this.ShowIcon = false;
             this.ResumeLayout(false);
             this.PerformLayout();
 
