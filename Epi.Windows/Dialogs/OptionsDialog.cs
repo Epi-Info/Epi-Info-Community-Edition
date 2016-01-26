@@ -1210,6 +1210,8 @@ namespace Epi.Windows.Dialogs
 
         private void button1_Click(object sender, EventArgs e)
         {
+            try
+            {
             Save();
             string Message = ValidateEWESittings();
             if (Message.Contains("Success"))
@@ -1219,6 +1221,9 @@ namespace Epi.Windows.Dialogs
             else
             {
                 MessageBox.Show(Message, "", MessageBoxButtons.OK);
+            }
+             }catch(Exception ex){
+                MessageBox.Show("Error!", "", MessageBoxButtons.OK);
             }
         }
         private string ValidateEWESittings()
@@ -1250,6 +1255,19 @@ namespace Epi.Windows.Dialogs
             Ping.Enabled = true;
             }else{
              Ping.Enabled = false;
+            }
+        }
+
+        private void EWEEndPointTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string URL = ((System.Windows.Forms.TextBox)(sender)).Text;
+            if (!string.IsNullOrEmpty(URL) && URL.ToUpper().Contains(".SVC"))
+            {
+                Ping.Enabled = true;
+            }
+            else
+            {
+                Ping.Enabled = false;
             }
         }
 
