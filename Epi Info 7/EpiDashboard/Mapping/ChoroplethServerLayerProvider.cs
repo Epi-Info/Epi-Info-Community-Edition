@@ -20,8 +20,6 @@ namespace EpiDashboard.Mapping
     {
         public ChoroplethServerLayerProvider(Map clientMap) : base(clientMap)
         {
-            //ArcGIS_Map = clientMap;
-            //this.LayerId = Guid.NewGuid();
         }
         
         private bool _flagUpdateToGraphicsLayerFailed;
