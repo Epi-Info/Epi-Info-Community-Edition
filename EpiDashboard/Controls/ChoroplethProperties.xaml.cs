@@ -67,6 +67,7 @@ namespace EpiDashboard.Controls
         private Dictionary<int, object> ClassAttribList = new Dictionary<int, object>();
         public Envelope mapOriginalExtent;
         public List<string> layerAddednew = new List<string>();
+        public string ShapeKey { get; set; }
     
         string _shapeKey;
         string _dataKey;
@@ -547,8 +548,20 @@ namespace EpiDashboard.Controls
                 if (graphicsLayer != null)
                     _myMap.Layers.Remove(graphicsLayer);
             }
+            if (choroplethServerLayerProperties != null && shapeAttributes != null & !string.IsNullOrEmpty(ShapeKey))
+            {
+                choroplethServerLayerProperties.curfeatureAttributes = shapeAttributes;
+                    cmbShapeKey.Items.Clear();
+                    choroplethServerLayerProperties.cbxShapeKey.Items.Clear();
+                    foreach (string key in shapeAttributes.Keys)
+                    {
+                        cmbShapeKey.Items.Add(key);
+                        choroplethServerLayerProperties.cbxShapeKey.Items.Add(key);                       
+                    }
+                    choroplethServerLayerProperties.cbxShapeKey.Text = ShapeKey;                                
+            }
             
-            _myMap.Extent = mapOriginalExtent;
+           // _myMap.Extent = mapOriginalExtent;
         }
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
@@ -1811,8 +1824,7 @@ namespace EpiDashboard.Controls
                         choroplethServerLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
                     }
                     
-                    object[] mapFileProperties = choroplethServerLayerProvider.Load(MapServerName + "/" + MapVisibleLayer);                   
-                    
+                    object[] mapFileProperties = choroplethServerLayerProvider.Load(MapServerName + "/" + MapVisibleLayer);              
                     
                     if (mapFileProperties != null)
                     {
@@ -1828,7 +1840,7 @@ namespace EpiDashboard.Controls
                             layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
                             layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
                             layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);
-                            this.choroplethServerLayerProperties = (ChoroplethServerLayerProperties)layerProperties;
+                            this.choroplethServerLayerProperties = (ChoroplethServerLayerProperties)layerProperties;                         
                             this._mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
                         }
                         
