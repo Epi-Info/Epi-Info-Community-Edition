@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DefineUserCommandDialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RunSavedPGMDialog));
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.btnOpenFile = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
@@ -136,19 +136,19 @@
             // 
             // btnOpenFile
             // 
-            this.btnOpenFile.Location = new System.Drawing.Point(390, 30);
+            this.btnOpenFile.Location = new System.Drawing.Point(396, 30);
             this.btnOpenFile.Name = "btnOpenFile";
-            this.btnOpenFile.Size = new System.Drawing.Size(24, 23);
+            this.btnOpenFile.Size = new System.Drawing.Size(90, 23);
             this.btnOpenFile.TabIndex = 1;
-            this.btnOpenFile.Text = "...";
+            this.btnOpenFile.Text = "Browse";
             this.btnOpenFile.UseVisualStyleBackColor = true;
             this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(13, 105);
+            this.btnOK.Location = new System.Drawing.Point(12, 110);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(90, 23);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -156,27 +156,27 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(94, 105);
+            this.btnCancel.Location = new System.Drawing.Point(108, 110);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSaveOnly
             // 
-            this.btnSaveOnly.Location = new System.Drawing.Point(256, 105);
+            this.btnSaveOnly.Location = new System.Drawing.Point(300, 110);
             this.btnSaveOnly.Name = "btnSaveOnly";
-            this.btnSaveOnly.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveOnly.Size = new System.Drawing.Size(90, 23);
             this.btnSaveOnly.TabIndex = 4;
             this.btnSaveOnly.Text = "Save Only";
             this.btnSaveOnly.UseVisualStyleBackColor = true;
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(175, 105);
+            this.btnClear.Location = new System.Drawing.Point(204, 110);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(90, 23);
             this.btnClear.TabIndex = 5;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -184,9 +184,9 @@
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(337, 105);
+            this.btnHelp.Location = new System.Drawing.Point(396, 110);
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(75, 23);
+            this.btnHelp.Size = new System.Drawing.Size(90, 23);
             this.btnHelp.TabIndex = 6;
             this.btnHelp.Text = "Help";
             this.btnHelp.UseVisualStyleBackColor = true;
@@ -197,7 +197,7 @@
             this.cmbProgram.FormattingEnabled = true;
             this.cmbProgram.Location = new System.Drawing.Point(11, 73);
             this.cmbProgram.Name = "cmbProgram";
-            this.cmbProgram.Size = new System.Drawing.Size(403, 21);
+            this.cmbProgram.Size = new System.Drawing.Size(475, 21);
             this.cmbProgram.TabIndex = 7;
             this.cmbProgram.SelectedIndexChanged += new System.EventHandler(this.cmbProgram_SelectedIndexChanged);
             // 
@@ -222,7 +222,7 @@
             // 
             this.AcceptButton = this.btnOK;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(424, 145);
+            this.ClientSize = new System.Drawing.Size(493, 145);
             this.Controls.Add(this.lblProgram);
             this.Controls.Add(this.lblFilename);
             this.Controls.Add(this.cmbProgram);
@@ -233,7 +233,10 @@
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnOpenFile);
             this.Controls.Add(this.txtFileName);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "RunSavedPGMDialog";
+            this.ShowIcon = false;
             this.Text = "Run Saved Program";
             this.ResumeLayout(false);
             this.PerformLayout();

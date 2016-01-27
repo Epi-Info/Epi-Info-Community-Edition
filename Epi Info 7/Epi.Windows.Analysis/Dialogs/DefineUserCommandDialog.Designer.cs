@@ -136,9 +136,9 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(397, 339);
+            this.btnOK.Location = new System.Drawing.Point(352, 339);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(90, 23);
             this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -147,9 +147,9 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(559, 339);
+            this.btnCancel.Location = new System.Drawing.Point(544, 339);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -157,9 +157,9 @@
             // btnSaveOnly
             // 
             this.btnSaveOnly.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveOnly.Location = new System.Drawing.Point(478, 339);
+            this.btnSaveOnly.Location = new System.Drawing.Point(448, 339);
             this.btnSaveOnly.Name = "btnSaveOnly";
-            this.btnSaveOnly.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveOnly.Size = new System.Drawing.Size(90, 23);
             this.btnSaveOnly.TabIndex = 4;
             this.btnSaveOnly.Text = "Save Only";
             this.btnSaveOnly.UseVisualStyleBackColor = true;
@@ -169,7 +169,7 @@
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnClear.Location = new System.Drawing.Point(13, 339);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(90, 23);
             this.btnClear.TabIndex = 6;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -198,11 +198,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxCommandList.Location = new System.Drawing.Point(13, 111);
-            this.textBoxCommandList.WordWrap = false;
             this.textBoxCommandList.Multiline = true;
             this.textBoxCommandList.Name = "textBoxCommandList";
             this.textBoxCommandList.Size = new System.Drawing.Size(621, 213);
             this.textBoxCommandList.TabIndex = 2;
+            this.textBoxCommandList.WordWrap = false;
             this.textBoxCommandList.TextChanged += new System.EventHandler(this.textBoxCommandList_TextChanged);
             // 
             // GenerateCommandButton
@@ -230,7 +230,10 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.txtFileName);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "DefineUserCommandDialog";
+            this.ShowIcon = false;
             this.Text = "Define User Command";
             this.ResumeLayout(false);
             this.PerformLayout();

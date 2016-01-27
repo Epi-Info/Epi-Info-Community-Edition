@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
-        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAGEAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAGMAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wAgAAF1AYQBjwH/
         AWYBgAGPAf8BYAF5AYcB/wFXAW4BewH/AU4BYgFvAf8BRAFWAWEB/wE5AUgBUgH/AS4BOgFDAf8BJQEu
         ATUB/wEbASIBKQH/ARQBGQEeAf8BDgESARYB/wEOARMBGAH/DAABdQGEAY8B/wFsAXoBhQH/AWABbQF3
@@ -709,13 +709,77 @@
   <data name="gbxDialogType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
+  <data name="&gt;&gt;rdbListofValues.Name" xml:space="preserve">
+    <value>rdbListofValues</value>
+  </data>
+  <data name="&gt;&gt;rdbListofValues.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbListofValues.Parent" xml:space="preserve">
+    <value>gbxDialogType</value>
+  </data>
+  <data name="&gt;&gt;rdbListofValues.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rdbGetVar.Name" xml:space="preserve">
+    <value>rdbGetVar</value>
+  </data>
+  <data name="&gt;&gt;rdbGetVar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbGetVar.Parent" xml:space="preserve">
+    <value>gbxDialogType</value>
+  </data>
+  <data name="&gt;&gt;rdbGetVar.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rdbSimple.Name" xml:space="preserve">
+    <value>rdbSimple</value>
+  </data>
+  <data name="&gt;&gt;rdbSimple.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbSimple.Parent" xml:space="preserve">
+    <value>gbxDialogType</value>
+  </data>
+  <data name="&gt;&gt;rdbSimple.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="gbxDialogType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="gbxDialogType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 12</value>
+  </data>
+  <data name="gbxDialogType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>764, 48</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="gbxDialogType.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="gbxDialogType.Text" xml:space="preserve">
+    <value>Dialog T&amp;ype</value>
+  </data>
+  <data name="&gt;&gt;gbxDialogType.Name" xml:space="preserve">
+    <value>gbxDialogType</value>
+  </data>
+  <data name="&gt;&gt;gbxDialogType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxDialogType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbxDialogType.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
   <data name="rdbListofValues.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
   </data>
   <data name="rdbListofValues.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdbListofValues.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
@@ -725,7 +789,6 @@
   <data name="rdbListofValues.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 24</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdbListofValues.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -810,33 +873,6 @@
   <data name="&gt;&gt;rdbSimple.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="gbxDialogType.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="gbxDialogType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 12</value>
-  </data>
-  <data name="gbxDialogType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>764, 48</value>
-  </data>
-  <data name="gbxDialogType.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="gbxDialogType.Text" xml:space="preserve">
-    <value>Dialog T&amp;ype</value>
-  </data>
-  <data name="&gt;&gt;gbxDialogType.Name" xml:space="preserve">
-    <value>gbxDialogType</value>
-  </data>
-  <data name="&gt;&gt;gbxDialogType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbxDialogType.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gbxDialogType.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
   <data name="lblTitle.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
@@ -862,7 +898,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>12</value>
   </data>
   <data name="txtTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 80</value>
@@ -883,7 +919,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtTitle.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>11</value>
   </data>
   <data name="lblPrompt.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -910,7 +946,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPrompt.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>9</value>
   </data>
   <data name="txtPrompt.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 123</value>
@@ -937,7 +973,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtPrompt.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>10</value>
   </data>
   <data name="btnHelp.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
@@ -964,7 +1000,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnHelp.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>5</value>
   </data>
   <data name="btnCancel.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
@@ -991,7 +1027,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>6</value>
   </data>
   <data name="btnOK.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1021,7 +1057,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>7</value>
   </data>
   <data name="btnClear.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
@@ -1048,7 +1084,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnClear.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>8</value>
   </data>
   <data name="cmbInputVar.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 181</value>
@@ -1072,7 +1108,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmbInputVar.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>4</value>
   </data>
   <data name="lblInputVar.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 165</value>
@@ -1099,10 +1135,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblInputVar.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>3</value>
   </data>
   <data name="cmbDialogType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 123</value>
+    <value>396, 123</value>
   </data>
   <data name="cmbDialogType.Size" type="System.Drawing.Size, System.Drawing">
     <value>380, 21</value>
@@ -1117,16 +1153,16 @@
     <value>cmbDialogType</value>
   </data>
   <data name="&gt;&gt;cmbDialogType.Type" xml:space="preserve">
-    <value>Epi.Windows.Controls.LocalizedComboBox, Epi.Windows, Version=7.1.5869.17298, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Controls.LocalizedComboBox, Epi.Windows, Version=7.1.5870.30320, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cmbDialogType.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmbDialogType.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>19</value>
   </data>
   <data name="lblDialogType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 107</value>
+    <value>396, 107</value>
   </data>
   <data name="lblDialogType.Size" type="System.Drawing.Size, System.Drawing">
     <value>380, 16</value>
@@ -1150,7 +1186,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDialogType.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>18</value>
   </data>
   <data name="lblVarType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1180,13 +1216,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVarType.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="lblShowTable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblShowTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 107</value>
+    <value>396, 107</value>
   </data>
   <data name="lblShowTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>380, 16</value>
@@ -1210,7 +1246,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblShowTable.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>16</value>
   </data>
   <data name="cmbShowTable.Items" xml:space="preserve">
     <value>Column1</value>
@@ -1225,7 +1261,7 @@
     <value>Column4</value>
   </data>
   <data name="cmbShowTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 123</value>
+    <value>396, 123</value>
   </data>
   <data name="cmbShowTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>380, 21</value>
@@ -1246,13 +1282,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmbShowTable.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>17</value>
   </data>
   <data name="lblShowVar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblShowVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 162</value>
+    <value>396, 162</value>
   </data>
   <data name="lblShowVar.Size" type="System.Drawing.Size, System.Drawing">
     <value>380, 16</value>
@@ -1276,7 +1312,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblShowVar.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>20</value>
   </data>
   <data name="cmbShowVar.Items" xml:space="preserve">
     <value>Column1</value>
@@ -1291,7 +1327,7 @@
     <value>Column4</value>
   </data>
   <data name="cmbShowVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 181</value>
+    <value>396, 181</value>
   </data>
   <data name="cmbShowVar.Size" type="System.Drawing.Size, System.Drawing">
     <value>380, 21</value>
@@ -1312,13 +1348,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmbShowVar.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>21</value>
   </data>
   <data name="lblInputMask.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblInputMask.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 162</value>
+    <value>396, 162</value>
   </data>
   <data name="lblInputMask.Size" type="System.Drawing.Size, System.Drawing">
     <value>380, 16</value>
@@ -1342,10 +1378,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblInputMask.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>14</value>
   </data>
   <data name="cmbInputMask.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 181</value>
+    <value>396, 181</value>
   </data>
   <data name="cmbInputMask.Size" type="System.Drawing.Size, System.Drawing">
     <value>380, 21</value>
@@ -1366,7 +1402,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmbInputMask.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>15</value>
   </data>
   <data name="cmbVarType.Location" type="System.Drawing.Point, System.Drawing">
     <value>396, 80</value>
@@ -1384,7 +1420,7 @@
     <value>cmbVarType</value>
   </data>
   <data name="&gt;&gt;cmbVarType.Type" xml:space="preserve">
-    <value>Epi.Windows.Controls.LocalizedComboBox, Epi.Windows, Version=7.1.5869.17298, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Controls.LocalizedComboBox, Epi.Windows, Version=7.1.5870.30320, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cmbVarType.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1399,7 +1435,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 162</value>
+    <value>396, 162</value>
   </data>
   <data name="lblLength.Size" type="System.Drawing.Size, System.Drawing">
     <value>380, 16</value>
@@ -1420,10 +1456,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLength.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>23</value>
   </data>
   <data name="txtLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 181</value>
+    <value>396, 181</value>
   </data>
   <data name="txtLength.Mask" xml:space="preserve">
     <value>00000</value>
@@ -1444,7 +1480,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtLength.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>22</value>
   </data>
   <data name="btnSaveOnly.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1507,6 +1543,6 @@
     <value>DialogDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.MakeView.Dialogs.CommandDesignDialog, MakeView, Version=7.1.5869.23795, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.MakeView.Dialogs.CommandDesignDialog, MakeView, Version=7.1.5870.30331, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

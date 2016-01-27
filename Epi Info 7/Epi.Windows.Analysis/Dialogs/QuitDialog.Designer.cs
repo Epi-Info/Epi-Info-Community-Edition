@@ -153,7 +153,6 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "QuitDialog";
