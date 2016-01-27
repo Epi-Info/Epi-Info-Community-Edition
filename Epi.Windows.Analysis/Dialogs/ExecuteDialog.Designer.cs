@@ -129,7 +129,7 @@
             // 
             this.btnOK.Location = new System.Drawing.Point(36, 86);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(90, 23);
             this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -137,27 +137,27 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(117, 86);
+            this.btnCancel.Location = new System.Drawing.Point(132, 86);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSaveOnly
             // 
-            this.btnSaveOnly.Location = new System.Drawing.Point(279, 86);
+            this.btnSaveOnly.Location = new System.Drawing.Point(324, 86);
             this.btnSaveOnly.Name = "btnSaveOnly";
-            this.btnSaveOnly.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveOnly.Size = new System.Drawing.Size(90, 23);
             this.btnSaveOnly.TabIndex = 6;
             this.btnSaveOnly.Text = "Save Only";
             this.btnSaveOnly.UseVisualStyleBackColor = true;
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(360, 86);
+            this.btnHelp.Location = new System.Drawing.Point(420, 86);
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(75, 23);
+            this.btnHelp.Size = new System.Drawing.Size(90, 23);
             this.btnHelp.TabIndex = 7;
             this.btnHelp.Text = "Help";
             this.btnHelp.UseVisualStyleBackColor = true;
@@ -165,9 +165,9 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(198, 86);
+            this.btnClear.Location = new System.Drawing.Point(228, 86);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(90, 23);
             this.btnClear.TabIndex = 5;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -195,7 +195,7 @@
             this.lblFilename.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFilename.Location = new System.Drawing.Point(9, 9);
             this.lblFilename.Name = "lblFilename";
-            this.lblFilename.Size = new System.Drawing.Size(426, 13);
+            this.lblFilename.Size = new System.Drawing.Size(405, 13);
             this.lblFilename.TabIndex = 8;
             this.lblFilename.Text = "Filename or Command";
             // 
@@ -207,11 +207,11 @@
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(411, 24);
+            this.btnBrowse.Location = new System.Drawing.Point(420, 22);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(24, 22);
+            this.btnBrowse.Size = new System.Drawing.Size(90, 23);
             this.btnBrowse.TabIndex = 1;
-            this.btnBrowse.Text = "...";
+            this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
@@ -220,7 +220,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(444, 121);
+            this.ClientSize = new System.Drawing.Size(519, 121);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtFilename);
             this.Controls.Add(this.chkWaitForExit);
