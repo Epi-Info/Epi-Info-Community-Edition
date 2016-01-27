@@ -780,7 +780,7 @@ namespace EpiDashboard.Controls
                 if (!(ValidateInputValue(rampStart01) && ValidateInputValue(rampEnd01)
                     && ValidateInputValue(rampStart02) && ValidateInputValue(rampEnd02)))
                 {
-                    System.Windows.MessageBox.Show("Incorrect input value.");
+                    System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_INCORRECT_INPUT_VALUE);
                     return false;
                 }
             }
@@ -789,7 +789,7 @@ namespace EpiDashboard.Controls
             {
                 if (!(ValidateInputValue(rampStart03) && ValidateInputValue(rampEnd03)))
                 {
-                    System.Windows.MessageBox.Show("Incorrect input value.");
+                    System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_INCORRECT_INPUT_VALUE);
                     return false;
                 }
             }
@@ -798,7 +798,7 @@ namespace EpiDashboard.Controls
             {
                 if (!(ValidateInputValue(rampStart04) && ValidateInputValue(rampEnd04)))
                 {
-                    System.Windows.MessageBox.Show("Incorrect input value.");
+                    System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_INCORRECT_INPUT_VALUE);
                     return false;
                 }
             }
@@ -806,7 +806,7 @@ namespace EpiDashboard.Controls
             {
                 if (!(ValidateInputValue(rampStart05) && ValidateInputValue(rampEnd05)))
                 {
-                    System.Windows.MessageBox.Show("Incorrect input value.");
+                    System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_INCORRECT_INPUT_VALUE);
                     return false;
                 }
             }
@@ -814,7 +814,7 @@ namespace EpiDashboard.Controls
             {
                 if (!(ValidateInputValue(rampStart06) && ValidateInputValue(rampEnd06)))
                 {
-                    System.Windows.MessageBox.Show("Incorrect input value.");
+                    System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_INCORRECT_INPUT_VALUE);
                     return false;
                 }
             }
@@ -822,7 +822,7 @@ namespace EpiDashboard.Controls
             {
                 if (!(ValidateInputValue(rampStart07) && ValidateInputValue(rampEnd07)))
                 {
-                    System.Windows.MessageBox.Show("Incorrect input value.");
+                    System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_INCORRECT_INPUT_VALUE);
                     return false;
                 }
             }
@@ -830,7 +830,7 @@ namespace EpiDashboard.Controls
             {
                 if (!(ValidateInputValue(rampStart08) && ValidateInputValue(rampEnd08)))
                 {
-                    System.Windows.MessageBox.Show("Incorrect input value.");
+                    System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_INCORRECT_INPUT_VALUE);
                     return false;
                 }
             }
@@ -838,7 +838,7 @@ namespace EpiDashboard.Controls
             {
                 if (!(ValidateInputValue(rampStart09) && ValidateInputValue(rampEnd09)))
                 {
-                    System.Windows.MessageBox.Show("Incorrect input value.");
+                    System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_INCORRECT_INPUT_VALUE);
                     return false;
                 }
             }
@@ -846,7 +846,7 @@ namespace EpiDashboard.Controls
             {
                 if (!(ValidateInputValue(rampStart10) && ValidateInputValue(rampEnd10)))
                 {
-                    System.Windows.MessageBox.Show("Incorrect input value.");
+                    System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_INCORRECT_INPUT_VALUE);
                     return false;
                 }
             }
@@ -1828,7 +1828,6 @@ namespace EpiDashboard.Controls
                     
                     if (choroplethServerLayerProvider == null)
                     {
-                      //  choroplethServerLayerProvider = new Mapping.ChoroplethServerLayerProvider(_myMap);
                         choroplethServerLayerProvider = (ChoroplethServerLayerProvider)LayerProvider;
                         choroplethServerLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
                     }
@@ -2004,8 +2003,6 @@ namespace EpiDashboard.Controls
 
         private void radShapeFile_Checked(object sender, RoutedEventArgs e)
         {
-            //check for edit mode
-            //if (ClassAttribList.Count != 0) { return; }
             if (!string.IsNullOrEmpty(txtKMLpath.Text))
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.MAP_CHANGE_BOUNDARY_ALERT, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
@@ -2035,7 +2032,9 @@ namespace EpiDashboard.Controls
                 return;
             }
             else
+            {
                 ClearonShapeFile();
+            }
         }
 
         private void ClearonKML()
@@ -2209,7 +2208,6 @@ namespace EpiDashboard.Controls
 
         private void ResetShapeCombo()
         {
-            //In case of map server
             if (radMapServer.IsChecked == true)
             {
                 cmbShapeKey.Items.Clear();
@@ -2219,14 +2217,6 @@ namespace EpiDashboard.Controls
                     choroplethServerLayerProperties.cbxShapeKey.Items.Clear();
                     choroplethServerLayerProperties.cbxShapeKey.SelectedIndex = -1;
                 }
-                /*
-                //set back choroMapprovider
-                if (choroMapprovider == null)
-                {
-                    choroMapprovider = new Mapping.ChoroplethServerLayerProvider(_myMap);
-                    choroMapprovider.FeatureLoaded += new FeatureLoadedHandler(choroMapprovider_FeatureLoaded);
-                    choroplethServerLayerProperties.provider.FeatureLoaded -= new FeatureLoadedHandler(choroplethServerLayerProperties.provider_FeatureLoaded);
-                 } */
             }
         }
 
@@ -2248,7 +2238,7 @@ namespace EpiDashboard.Controls
             catch
             {
                 cbxmapfeature.DataContext = null;
-                System.Windows.Forms.MessageBox.Show("Invalid map server");
+                System.Windows.Forms.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_INVALID_MAP_SERVER);
             }
         }
 

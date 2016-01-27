@@ -997,6 +997,69 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exactly {0}.
+        /// </summary>
+        public static string DASHBOARD_MAP_EXACTLY_N {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MAP_EXACTLY_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incorrect input value..
+        /// </summary>
+        public static string DASHBOARD_MAP_INCORRECT_INPUT_VALUE {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MAP_INCORRECT_INPUT_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid map server.
+        /// </summary>
+        public static string DASHBOARD_MAP_INVALID_MAP_SERVER {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MAP_INVALID_MAP_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} and above.
+        /// </summary>
+        public static string DASHBOARD_MAP_N_AND_ABOVE {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MAP_N_AND_ABOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} to {1}.
+        /// </summary>
+        public static string DASHBOARD_MAP_N_TO_N {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MAP_N_TO_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to : No Data.
+        /// </summary>
+        public static string DASHBOARD_MAP_NO_DATA {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MAP_NO_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to set the range values..
+        /// </summary>
+        public static string DASHBOARD_MAP_UNABLE_TO_SET_THE_RANGE_VALUES {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MAP_UNABLE_TO_SET_THE_RANGE_VALUES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Epi Info 7 Dashboard.
         /// </summary>
         public static string DASHBOARD_TITLE {
