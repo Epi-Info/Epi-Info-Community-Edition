@@ -277,7 +277,14 @@ namespace EpiDashboard.Mapping
 
             if (classCount > uniqueValues.Count)
             {
-                throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
+                if (uniqueValues.Count > 2)
+                {
+                    classCount = uniqueValues.Count;
+                }
+                else
+                {
+                    throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
+                }
             }
             
             List<double> rangeStarts = new List<double>();

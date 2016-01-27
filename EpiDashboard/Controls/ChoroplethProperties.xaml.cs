@@ -349,6 +349,15 @@ namespace EpiDashboard.Controls
                         brushList,
                         classCount,
                         legTitle.Text);
+
+
+                    if(LayerProvider.RangeCount != classCount)
+                    {
+                        classCount = LayerProvider.RangeCount;
+                        LayerProvider._classCount = LayerProvider.RangeCount;
+                        _currentStratCount = LayerProvider.RangeCount;
+                        cmbClasses.Text = classCount.ToString();
+                    }
                 }
 
                 SetRangeUISection();
