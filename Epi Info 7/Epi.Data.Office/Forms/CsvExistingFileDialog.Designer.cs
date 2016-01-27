@@ -80,7 +80,7 @@ namespace Epi.Data.Office.Forms
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFileName.Location = new System.Drawing.Point(12, 57);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.ReadOnly = true;
+           // this.txtFileName.ReadOnly = true;
             this.txtFileName.Size = new System.Drawing.Size(384, 20);
             this.txtFileName.TabIndex = 28;
             this.txtFileName.TextChanged += new System.EventHandler(this.txtFileName_TextChanged);
