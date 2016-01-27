@@ -229,6 +229,8 @@ namespace Epi.Windows.MakeView.Forms
         public CheckCode(Field field, MakeViewMainForm frm, View currentview)
         {
             mainForm = frm;
+            List<string> CommandButtonFieldList = new List<string>();
+            EpiInfo.Plugin.IEnterInterpreter MR = mainForm.EpiInterpreter;
             if (currentview != null)
                 currentview.MustRefreshFieldCollection = true;
             view = currentview;
@@ -254,6 +256,7 @@ namespace Epi.Windows.MakeView.Forms
             if (field is Epi.Fields.CommandButtonField)
             {
                 this.GotoLine("field", "click", Identifier, true);
+                CommandButtonFieldList.Add(field.Name);
             }
             else
             {
@@ -267,6 +270,7 @@ namespace Epi.Windows.MakeView.Forms
                     this.codeText.SelectionLength = this.codeText.Lines[lineIndex].Length;
                 }
             }
+            MR.Context.AddToCommandButtonFieldList(CommandButtonFieldList);
             if (iserrcheckcode)
             {
                 this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", "The Check Code does not compile."));
