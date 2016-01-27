@@ -2044,4 +2044,25 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES" xml:space="preserve">
     <value>There are not enough values in the value field selected to generate {0} classes.</value>
   </data>
+  <data name="DASHBOARD_MAP_EXACTLY_N" xml:space="preserve">
+    <value>Exactly {0}</value>
+  </data>
+  <data name="DASHBOARD_MAP_INCORRECT_INPUT_VALUE" xml:space="preserve">
+    <value>Incorrect input value.</value>
+  </data>
+  <data name="DASHBOARD_MAP_INVALID_MAP_SERVER" xml:space="preserve">
+    <value>Invalid map server</value>
+  </data>
+  <data name="DASHBOARD_MAP_NO_DATA" xml:space="preserve">
+    <value>: No Data</value>
+  </data>
+  <data name="DASHBOARD_MAP_N_AND_ABOVE" xml:space="preserve">
+    <value>{0} and above</value>
+  </data>
+  <data name="DASHBOARD_MAP_N_TO_N" xml:space="preserve">
+    <value>{0} to {1}</value>
+  </data>
+  <data name="DASHBOARD_MAP_UNABLE_TO_SET_THE_RANGE_VALUES" xml:space="preserve">
+    <value>Unable to set the range values.</value>
+  </data>
 </root>

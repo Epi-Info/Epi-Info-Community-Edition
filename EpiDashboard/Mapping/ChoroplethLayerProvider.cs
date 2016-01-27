@@ -346,7 +346,7 @@ namespace EpiDashboard.Mapping
             }
             catch
             {
-                return "Unable to set the range values.";
+                return DashboardSharedStrings.DASHBOARD_MAP_UNABLE_TO_SET_THE_RANGE_VALUES;
             }
         }
 
@@ -554,21 +554,21 @@ namespace EpiDashboard.Mapping
 
                     if (c == classCount - 1)
                     {
-                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(rangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c + 1);
+                        classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_N_AND_ABOVE, Math.Round(rangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c + 1);
                     }
                     else if (rangeStarts.Count <= c + 1)
                     {
-                        classTextBlock.Text = String.Format("  {0} and above", Math.Round(rangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c + 1);
+                        classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_N_AND_ABOVE, Math.Round(rangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c + 1);
                     }
                     else
                     {
                         if (rangeStarts[c] == rangeStarts[c + 1])
                         {
-                            classTextBlock.Text = String.Format("  Exactly {0}", Math.Round(rangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c + 1);
+                            classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_EXACTLY_N, Math.Round(rangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c + 1);
                         }
                         else
                         {
-                            classTextBlock.Text = String.Format("  {0} to {1}", Math.Round(rangeStarts[c], 2), Math.Round(rangeStarts[c + 1], 2)) + " : " + ListLegendText.GetAt(c + 1);
+                            classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_N_TO_N, Math.Round(rangeStarts[c], 2), Math.Round(rangeStarts[c + 1], 2)) + " : " + ListLegendText.GetAt(c + 1);
                         }
                     }
 
@@ -829,7 +829,7 @@ namespace EpiDashboard.Mapping
 
                         if (graphicValue == Double.PositiveInfinity)
                         {
-                            t.Text = GetShapeValue(graphicFeature, shapeKey) + " : No Data";
+                            t.Text = GetShapeValue(graphicFeature, shapeKey) + " " + DashboardSharedStrings.DASHBOARD_MAP_NO_DATA;
                         }
                         else
                         {
