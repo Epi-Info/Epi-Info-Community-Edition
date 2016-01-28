@@ -53,23 +53,34 @@ namespace EpiDashboard.Mapping
             graphicsLayers = new List<GraphicsLayer>();
         }
 
-        public void MoveUp()
+       /* public void MoveUp()
         {
             Layer layer = myMap.Layers[layerId.ToString()];
             Layer dotLayer = myMap.Layers[layerId.ToString() + "_dotLayer"];
             int currentIndex = myMap.Layers.IndexOf(layer);
-           // int currentDotIndex = myMap.Layers.IndexOf(dotLayer);
+            int currentDotIndex = myMap.Layers.IndexOf(dotLayer);
             if (currentIndex < myMap.Layers.Count - 1)
             {
                 myMap.Layers.Remove(layer);
                 myMap.Layers.Insert(currentIndex + 1, layer);
-                int currentDotIndex = myMap.Layers.IndexOf(dotLayer);
+                // int currentDotIndex = myMap.Layers.IndexOf(dotLayer);
                 myMap.Layers.Remove(dotLayer);
                 myMap.Layers.Insert(currentDotIndex + 1, dotLayer);
             }
+        }*/
+
+        public void MoveUp()
+        {
+            Layer layer = myMap.Layers[layerId.ToString()];
+            int currentIndex = myMap.Layers.IndexOf(layer);
+            if (currentIndex < myMap.Layers.Count - 1)
+            {
+                myMap.Layers.Remove(layer);
+                myMap.Layers.Insert(currentIndex + 1, layer);
+            }
         }
 
-        public void MoveDown()
+       /* public void MoveDown()
         {
             Layer layer = myMap.Layers[layerId.ToString()];
             Layer dotLayer = myMap.Layers[layerId.ToString() + "_dotLayer"];
@@ -81,6 +92,17 @@ namespace EpiDashboard.Mapping
                 myMap.Layers.Insert(currentIndex - 1, layer);
                 myMap.Layers.Remove(dotLayer);
                 myMap.Layers.Insert(currentDotIndex - 1, dotLayer);
+            }
+        }*/
+
+        public void MoveDown()
+        {
+            Layer layer = myMap.Layers[layerId.ToString()];
+            int currentIndex = myMap.Layers.IndexOf(layer);
+            if (currentIndex > 1)
+            {
+                myMap.Layers.Remove(layer);
+                myMap.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
