@@ -586,12 +586,12 @@ namespace EpiDashboard.Mapping.ShapeFileReader
             }
 
             // Points.           
-            for( int i = 0; i < numPoints; i++ )
+            for (int i = 0; i < numPoints; i++)
             {
                 Point p = new Point();
-                p.X = ShapeFile.ReadDouble64_LE( stream );
-                p.Y = ShapeFile.ReadDouble64_LE( stream );
-                record.Points.Add( p );
+                p.X = ShapeFile.ReadDouble64_LE(stream);
+                p.Y = ShapeFile.ReadDouble64_LE(stream);
+                record.Points.Add(p);
             }
         }
 

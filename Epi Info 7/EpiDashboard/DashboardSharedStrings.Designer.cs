@@ -1033,6 +1033,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of Polygons in the selected file exceeds maximum number of Polygons that can be read..
+        /// </summary>
+        public static string DASHBOARD_MAP_N_POLYGONS_EXCEEDED {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MAP_N_POLYGONS_EXCEEDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} to {1}.
         /// </summary>
         public static string DASHBOARD_MAP_N_TO_N {

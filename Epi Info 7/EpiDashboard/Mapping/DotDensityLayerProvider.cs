@@ -87,7 +87,11 @@ namespace EpiDashboard.Mapping
             {
                 //Get the file info objects for the SHP and the DBF file selected by the user
                 FileInfo shapeFile = new FileInfo(fileName);
-                FileInfo dbfFile = new FileInfo(fileName.ToLower().Replace(".shp", ".dbf"));
+                string directoryName = System.IO.Path.GetDirectoryName(fileName);
+                string dbfFilename = System.IO.Path.GetFileName(fileName).ToLower().Replace(".shp", ".dbf");
+                string dbfFullPath = System.IO.Path.Combine(directoryName, dbfFilename);
+                FileInfo dbfFile = new FileInfo(dbfFullPath);
+
                 if (!dbfFile.Exists)
                 {
                     System.Windows.MessageBox.Show("Associated DBF file not found");
@@ -98,7 +102,15 @@ namespace EpiDashboard.Mapping
                 ShapeFileReader.ShapeFile shapeFileReader = new ShapeFileReader.ShapeFile();
                 if (shapeFile != null && dbfFile != null)
                 {
-                    shapeFileReader.Read(shapeFile, dbfFile);
+                    try
+                    {
+                        shapeFileReader.Read(shapeFile, dbfFile);
+                    }
+                    catch
+                    {
+                        System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_N_POLYGONS_EXCEEDED);
+                        return null;
+                    }
                 }
                 else
                 {
@@ -162,12 +174,17 @@ namespace EpiDashboard.Mapping
             {
                 //Get the file info objects for the SHP and the DBF file selected by the user
                 FileInfo shapeFile = new FileInfo(ofd.FileName);
-                FileInfo dbfFile = new FileInfo(ofd.FileName.ToLower().Replace(".shp", ".dbf"));
+                string directoryName = System.IO.Path.GetDirectoryName(ofd.FileName);
+                string dbfFilename = System.IO.Path.GetFileName(ofd.FileName).ToLower().Replace(".shp", ".dbf");
+                string dbfFullPath = System.IO.Path.Combine(directoryName, dbfFilename);
+                FileInfo dbfFile = new FileInfo(dbfFullPath);
+
                 if (!dbfFile.Exists)
                 {
                     System.Windows.MessageBox.Show("Associated DBF file not found");
                     return null;
                 }
+
                 foreach (string fname in ofd.FileNames)
                 {
                     FileInfo fi = new FileInfo(fname);
@@ -185,7 +202,15 @@ namespace EpiDashboard.Mapping
                 ShapeFileReader.ShapeFile shapeFileReader = new ShapeFileReader.ShapeFile();
                 if (shapeFile != null && dbfFile != null)
                 {
-                    shapeFileReader.Read(shapeFile, dbfFile);
+                    try
+                    {
+                        shapeFileReader.Read(shapeFile, dbfFile);
+                    }
+                    catch
+                    {
+                        System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_N_POLYGONS_EXCEEDED);
+                        return null;
+                    }
                 }
                 else
                 {

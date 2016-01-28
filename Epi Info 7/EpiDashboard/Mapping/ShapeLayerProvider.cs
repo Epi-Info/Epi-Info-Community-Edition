@@ -82,7 +82,15 @@ namespace EpiDashboard.Mapping
             ShapeFileReader.ShapeFile shapeFileReader = new ShapeFileReader.ShapeFile();
             if (shapeFile != null && dbfFile != null)
             {
-                shapeFileReader.Read(shapeFile, dbfFile);
+                try
+                {
+                    shapeFileReader.Read(shapeFile, dbfFile);
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_N_POLYGONS_EXCEEDED);
+                    return;
+                }
             }
             else
             {

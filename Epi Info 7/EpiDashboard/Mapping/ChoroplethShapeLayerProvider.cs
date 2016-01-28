@@ -38,7 +38,11 @@ namespace EpiDashboard.Mapping
             if (!string.IsNullOrEmpty(boundrySourceLocation))
             {
                 FileInfo shapeFile = new FileInfo(boundrySourceLocation);
-                FileInfo dbfFile = new FileInfo(boundrySourceLocation.ToLower().Replace(".shp", ".dbf"));
+                string directoryName = System.IO.Path.GetDirectoryName(boundrySourceLocation);
+                string dbfFilename = System.IO.Path.GetFileName(boundrySourceLocation).ToLower().Replace(".shp", ".dbf");
+                string dbfFullPath = System.IO.Path.Combine(directoryName, dbfFilename);
+                FileInfo dbfFile = new FileInfo(dbfFullPath);
+
                 if (!dbfFile.Exists)
                 {
                     System.Windows.MessageBox.Show("Associated DBF file not found");
@@ -48,7 +52,15 @@ namespace EpiDashboard.Mapping
                 ShapeFileReader.ShapeFile shapeFileReader = new ShapeFileReader.ShapeFile();
                 if (shapeFile != null && dbfFile != null)
                 {
-                    shapeFileReader.Read(shapeFile, dbfFile);
+                    try
+                    {
+                        shapeFileReader.Read(shapeFile, dbfFile);
+                    }
+                    catch
+                    {
+                        System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_N_POLYGONS_EXCEEDED);
+                        return null;
+                    }
                 }
                 else
                 {
