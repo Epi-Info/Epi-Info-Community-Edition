@@ -580,6 +580,10 @@ namespace EpiDashboard.Mapping
             {
                 myMap.Layers.Remove(dotLayer);
             }
+            if (LegendStackPanel != null)
+            {
+                LegendStackPanel.Children.Clear();
+            }
         }
 
         #endregion
