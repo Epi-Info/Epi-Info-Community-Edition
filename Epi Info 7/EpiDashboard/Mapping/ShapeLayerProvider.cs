@@ -68,7 +68,10 @@ namespace EpiDashboard.Mapping
 
             //Get the file info objects for the SHP and the DBF file selected by the user
             FileInfo shapeFile = new FileInfo(fileName);
-            FileInfo dbfFile = new FileInfo(fileName.ToLower().Replace(".shp", ".dbf"));
+            string directoryName = Path.GetDirectoryName(fileName);
+            string dbfFilename = Path.GetFileName(fileName).ToLower().Replace(".shp", ".dbf");
+            string dbfFullPath = Path.Combine(directoryName, dbfFilename);
+            FileInfo dbfFile = new FileInfo(dbfFullPath);
             if (!dbfFile.Exists)
             {
                 System.Windows.MessageBox.Show("Associated DBF file not found");
