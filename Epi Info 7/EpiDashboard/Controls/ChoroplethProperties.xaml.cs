@@ -1330,8 +1330,6 @@ namespace EpiDashboard.Controls
                 }
                 else
                 {
-                    rctColor0.Fill = rampMissing;
-                    LayerProvider.CustomColorsDictionary.Add(rctColor0.Name, rampMissing.Color);
                     rctColor1.Fill = rampStart;
                     LayerProvider.CustomColorsDictionary.Add(rctColor1.Name, rampStart.Color);
                 }
