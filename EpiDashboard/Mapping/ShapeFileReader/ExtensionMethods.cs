@@ -141,7 +141,7 @@ namespace EpiDashboard.Mapping.ShapeFileReader
 
         public static Graphic ToGraphic( this ShapeFileRecord record )
         {
-            if( record == null )
+            if( record == null || record.Attributes == null)
                 return null;
 
             Graphic graphic = new Graphic();
