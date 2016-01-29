@@ -263,7 +263,7 @@ namespace EpiDashboard.Controls
             tblockLoadingData.Visibility = Visibility.Collapsed;
             if (dashboardHelper != null)
             {
-                txtProjectPath.Text = dashboardHelper.Database.DbName;
+                txtProjectPath.Text = mapControl.ProjectFilepath;
                 FillComboBoxes();
                 SetFilter();
             }
@@ -619,17 +619,23 @@ namespace EpiDashboard.Controls
 
             if (!string.IsNullOrEmpty(txtProjectPath.Text))
             {
-                tbtnVariables.IsEnabled = true;
+                if (tbtnVariables.IsEnabled == false)
+                {
+                    tbtnVariables.IsEnabled = true;
+                    tbtnVariables_Checked(this, new RoutedEventArgs());
+                }
                 if (cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
                 {
-                    btnOK.IsEnabled = true;
-
-                    tbtnDisplay.IsEnabled = true;
+                    if (tbtnDisplay.IsEnabled == false)
+                    {
+                        tbtnDisplay.IsEnabled = true;
+                        tbtnDisplay_Checked(this, new RoutedEventArgs());
+                    }
                     tbtnFilters.IsEnabled = true;
                     tbtnFilters.Visibility = Visibility.Visible;
+                    btnOK.IsEnabled = true;
                     return;
                 }
-                
             }
          
         }

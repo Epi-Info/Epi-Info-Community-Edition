@@ -1725,7 +1725,7 @@ namespace EpiDashboard.Mapping
 
             dashboardHelper = pointlayerprop.GetDashboardHelper();
             pointofinterestproperties.SetDashboardHelper(dashboardHelper);
-            pointofinterestproperties.txtProjectPath.Text = dashboardHelper.Database.DbName;
+            pointofinterestproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;
             pointofinterestproperties.FillComboBoxes();
             pointofinterestproperties.SetFilter();
 
@@ -1861,7 +1861,7 @@ namespace EpiDashboard.Mapping
 
             dashboardHelper = clusterlayerprop.GetDashboardHelper();
             caseclusterproperties.SetDashboardHelper(dashboardHelper);
-            caseclusterproperties.txtProjectPath.Text = dashboardHelper.Database.DbName;
+            caseclusterproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;
             caseclusterproperties.FillComboBoxes();
             caseclusterproperties.SetFilter();
 

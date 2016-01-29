@@ -287,7 +287,7 @@ namespace EpiDashboard.Controls
           tblockLoadingData.Visibility = Visibility.Collapsed;
           if (dashboardHelper != null)
             {
-                txtProjectPath.Text = dashboardHelper.Database.DbName;
+                txtProjectPath.Text = mapControl.ProjectFilepath;
                 FillComboBoxes();
                 SetFilter();
             }
@@ -650,24 +650,27 @@ namespace EpiDashboard.Controls
 
 
         private void PropertyChanged_EnableDisable()
-        {
-            //tbtnVariables.Visibility = Visibility.Hidden;
-            //tbtnDisplay.Visibility = Visibility.Hidden;
-            ////tbtnCharts.Visibility = Visibility.Hidden;
-            //tbtnFilter.Visibility = Visibility.Hidden;
+        {           
             btnOK.IsEnabled = false;
 
             if (!string.IsNullOrEmpty(txtProjectPath.Text))
-            {
-                tbtnVariables.IsEnabled = true;
-
-                if (cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
+            {               
+                if (tbtnVariables.IsEnabled == false)
                 {
-                    tbtnDisplay.IsEnabled = true;
-                    tbtnFilter.IsEnabled = true;
-                    //tbtnCharts.Visibility = Visibility.Visible;
+                    tbtnVariables.IsEnabled = true;
+                    tbtnVariables_Checked(this, new RoutedEventArgs());
+                }                
+                if (cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
+                {                 
+                    if (tbtnDisplay.IsEnabled == false)
+                    {
+                        tbtnDisplay.IsEnabled = true;
+                        tbtnDisplay_Checked(this, new RoutedEventArgs());
+                    }
+                    tbtnFilter.IsEnabled = true;                  
                     tbtnFilter.Visibility = Visibility.Visible;
                     btnOK.IsEnabled = true;
+                    return;
                 }
             }
         }
