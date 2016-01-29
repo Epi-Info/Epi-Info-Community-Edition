@@ -4410,9 +4410,13 @@ namespace Epi.Data.Services
                 }
                 #endregion
 
-                Query query = db.CreateQuery("select F.[FieldTypeId],  F.[Name],  F.[HasRepeatLast], F.[HasRequired], F.[HasReadOnly], F.[HasRetainImageSize],  F.[HasFont], F.[IsGridColumn], F.[IsDropDown] " +
-                "from metaFieldTypes F " +
-                "where [F.FieldTypeId]=@FieldTypeId");
+                //Query query = db.CreateQuery("select F.[FieldTypeId],  F.[Name],  F.[HasRepeatLast], F.[HasRequired], F.[HasReadOnly], F.[HasRetainImageSize],  F.[HasFont], F.[IsGridColumn], F.[IsDropDown] " +
+                //"from metaFieldTypes F " +
+                //"where [F.FieldTypeId]=@FieldTypeId");
+                Query query = db.CreateQuery("select [FieldTypeId],  [Name],  [HasRepeatLast], [HasRequired], [HasReadOnly], [HasRetainImageSize],  [HasFont],[IsGridColumn], [IsDropDown] " +
+              "from metaFieldTypes  " +
+              "where [FieldTypeId]=@FieldTypeId");
+
                 query.Parameters.Add(new QueryParameter("@FieldTypeId", DbType.Int32, (int)column.GridColumnType));
                 DataTable dt = db.Select(query);
                 if (dt.Rows.Count == 0)
