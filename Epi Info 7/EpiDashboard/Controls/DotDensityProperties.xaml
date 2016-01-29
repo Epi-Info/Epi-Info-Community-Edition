@@ -213,18 +213,9 @@
 
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel>
-                    <StackPanel >
-                        <WrapPanel Orientation="Horizontal">
-                            <Label x:Name="lblFeature">Feature Key:</Label>
-                            <TextBlock VerticalAlignment="Top" Style="{StaticResource requiredFieldInd}" Margin="0 0 0 0" Text="*">
-                                <TextBlock.ToolTip>
-                                    <TextBlock x:Name="featureKeyRequiredField">Required field</TextBlock>
-                                </TextBlock.ToolTip>   
-                             </TextBlock>
-                        </WrapPanel>
-                        <ComboBox x:Name="cmbShapeKey" HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}"  SelectionChanged="cmbShapeKey_SelectionChanged" Width="300"></ComboBox>
-                    </StackPanel>
+
                     <StackPanel Margin="0 5 0 0">
+                        <Label Padding="0" x:Name="tblockDataSourceVariables" Style="{StaticResource PropertiesSubHeading}">Data Source</Label>
                         <WrapPanel Orientation="Horizontal">
                             <Label x:Name="lblData">Data Key:</Label>
                             <TextBlock VerticalAlignment="Top" Style="{StaticResource requiredFieldInd}" Margin="2 0 0 0" Text="*">
@@ -233,7 +224,7 @@
                                 </TextBlock.ToolTip>   
                                 </TextBlock>
                         </WrapPanel>
-                        <ComboBox x:Name="cmbDataKey" HorizontalAlignment="Left" IsEnabled="false" Style="{StaticResource PropertiesComboxStyleLarge}" SelectionChanged="cmbDataKey_SelectionChanged" Height="25" Width="300"></ComboBox>
+                        <ComboBox x:Name="cmbDataKey" HorizontalAlignment="Left" IsEnabled="True" Style="{StaticResource PropertiesComboxStyleLarge}" SelectionChanged="cmbDataKey_SelectionChanged" Height="25" Width="300"></ComboBox>
                     </StackPanel>
                     <StackPanel Margin="0 5 0 0">
                         <WrapPanel Orientation="Horizontal">
@@ -246,6 +237,20 @@
                         </WrapPanel>
                         <ComboBox x:Name="cmbValue" HorizontalAlignment="Left" IsEnabled="false" Style="{StaticResource PropertiesComboxStyleLarge}" SelectionChanged="cmbValue_SelectionChanged"  Height="25" Width="300"></ComboBox>
                     </StackPanel>
+
+                    <StackPanel Margin="0 25 0 0">
+                        <Label x:Name="lblBoundarieVariable"  Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
+                        <WrapPanel Orientation="Horizontal">
+                            <Label x:Name="lblFeature">Feature Key:</Label>
+                            <TextBlock VerticalAlignment="Top" Style="{StaticResource requiredFieldInd}" Margin="0 0 0 0" Text="*">
+                                <TextBlock.ToolTip>
+                                    <TextBlock x:Name="featureKeyRequiredField">Required field</TextBlock>
+                                </TextBlock.ToolTip>   
+                             </TextBlock>
+                        </WrapPanel>
+                        <ComboBox x:Name="cmbShapeKey" HorizontalAlignment="Left" Style="{StaticResource PropertiesComboxStyleLarge}"  SelectionChanged="cmbShapeKey_SelectionChanged" Width="300"></ComboBox>
+                    </StackPanel>
+
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>
