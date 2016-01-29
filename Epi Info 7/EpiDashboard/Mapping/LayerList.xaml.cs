@@ -199,15 +199,17 @@ namespace EpiDashboard.Mapping
         void pthUp_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Grid item = (Grid)((Path)sender).Tag;
-
-            ILayerProperties layer = ((ILayerProperties)item.Children[0]);
-            int currentIndex = grdPlaceholder.Children.IndexOf(item);
-            if (currentIndex > 0)
+            if (item.Children[0] is ILayerProperties)
             {
-                item.Children.Remove((UIElement)layer);
-                grdPlaceholder.Children.Remove(item);
-                AddListItem(layer, currentIndex - 1);
-                layer.MoveUp();
+                ILayerProperties layer = ((ILayerProperties)item.Children[0]);
+                int currentIndex = grdPlaceholder.Children.IndexOf(item);
+                if (currentIndex > 0)
+                {
+                    item.Children.Remove((UIElement)layer);
+                    grdPlaceholder.Children.Remove(item);
+                    AddListItem(layer, currentIndex - 1);
+                    layer.MoveUp();
+                }
             }
         }
 
