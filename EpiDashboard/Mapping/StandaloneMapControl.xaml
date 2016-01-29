@@ -341,7 +341,7 @@
 
         </Grid>
 
-        <Grid x:Name="grdLapse" Visibility="Collapsed" HorizontalAlignment="Center"  StackPanel.ZIndex="2000"  VerticalAlignment="Bottom"  Grid.Column="1"  Margin="0,10,10,30" >
+        <Grid x:Name="grdLapse" Visibility="Collapsed" HorizontalAlignment="Center"    VerticalAlignment="Bottom"  Grid.Column="1"  Margin="0,10,10,30" >
 
             <Grid x:Name="grdTimeLapse" Visibility="Collapsed" HorizontalAlignment="Center"    VerticalAlignment="Bottom"  Grid.Column="1"  Margin="0,10,10,30" >
 
