@@ -146,37 +146,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
         private void txtFormName_TextChanged(object sender, EventArgs e)
         {
-            if (txtFormName.Text.Length > 0)
-            {
-                string strTestForSymbols = txtFormName.Text;
-                Regex regex = new Regex("[\\w\\d]", RegexOptions.IgnoreCase);
-                string strResultOfSymbolTest = regex.Replace(strTestForSymbols, string.Empty);
-
-                if (strResultOfSymbolTest.Length > 0)
-                {
-                    btnCopy.Enabled = false;
-                    txtFormName.ForeColor = Color.Red;
-                }
-                else
-                {
-                    if (!Util.IsFirstCharacterALetter(txtFormName.Text))
-                    {
-                        btnCopy.Enabled = false;
-                        txtFormName.ForeColor = Color.Red;
-                    }
-                    else
-                    {
-                        txtFormName.ForeColor = SystemColors.ControlText;
-                        btnCopy.Enabled = true;
-                    }
-                }
-            }
-            else
-            {
-                txtFormName.ForeColor = SystemColors.ControlText;
-                btnCopy.Enabled = false;
-            }
+            btnCopy.Enabled = txtFormName.Text.Length > 0 ? true : false;
         }
-
     }
 }
