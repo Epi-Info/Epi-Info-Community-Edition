@@ -1166,6 +1166,7 @@ namespace EpiDashboard.Mapping
                 {
                     iconTimeLapse.Visibility = Visibility.Collapsed;
                 }
+                stkLegends.Children.Clear();
             }
         }
 
