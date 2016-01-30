@@ -186,6 +186,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GeocodeDialog";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.ResumeLayout(false);
             this.PerformLayout();
