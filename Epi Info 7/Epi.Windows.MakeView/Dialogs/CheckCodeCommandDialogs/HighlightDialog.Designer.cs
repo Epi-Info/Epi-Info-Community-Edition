@@ -145,6 +145,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HighlightDialog";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.ResumeLayout(false);
 

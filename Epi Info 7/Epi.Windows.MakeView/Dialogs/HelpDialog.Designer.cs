@@ -130,38 +130,33 @@ namespace Epi.Windows.MakeView.Dialogs
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBrowse.Location = new System.Drawing.Point(391, 29);
+            this.btnBrowse.Location = new System.Drawing.Point(420, 30);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(24, 23);
+            this.btnBrowse.Size = new System.Drawing.Size(90, 23);
             this.btnBrowse.TabIndex = 16;
-            this.btnBrowse.Text = "...";
+            this.btnBrowse.Text = "Browse";
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // cmbAnchor
             // 
-            this.cmbAnchor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbAnchor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAnchor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.cmbAnchor.Location = new System.Drawing.Point(22, 73);
+            this.cmbAnchor.Location = new System.Drawing.Point(12, 73);
             this.cmbAnchor.Name = "cmbAnchor";
-            this.cmbAnchor.Size = new System.Drawing.Size(329, 21);
+            this.cmbAnchor.Size = new System.Drawing.Size(498, 21);
             this.cmbAnchor.TabIndex = 18;
             this.cmbAnchor.TextChanged += new System.EventHandler(this.txtFilename_TextChanged);
             // 
             // txtFilename
             // 
-            this.txtFilename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilename.BackColor = System.Drawing.SystemColors.Window;
             this.txtFilename.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtFilename.Location = new System.Drawing.Point(22, 30);
+            this.txtFilename.Location = new System.Drawing.Point(12, 30);
             this.txtFilename.Name = "txtFilename";
             this.txtFilename.ReadOnly = true;
-            this.txtFilename.Size = new System.Drawing.Size(379, 20);
+            this.txtFilename.Size = new System.Drawing.Size(402, 20);
             this.txtFilename.TabIndex = 15;
             this.txtFilename.TextChanged += new System.EventHandler(this.txtFilename_TextChanged);
             // 
@@ -170,7 +165,7 @@ namespace Epi.Windows.MakeView.Dialogs
             this.lblAnchor.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblAnchor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblAnchor.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblAnchor.Location = new System.Drawing.Point(22, 55);
+            this.lblAnchor.Location = new System.Drawing.Point(12, 55);
             this.lblAnchor.Name = "lblAnchor";
             this.lblAnchor.Size = new System.Drawing.Size(329, 13);
             this.lblAnchor.TabIndex = 17;
@@ -181,7 +176,7 @@ namespace Epi.Windows.MakeView.Dialogs
             this.lblFilename.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblFilename.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblFilename.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblFilename.Location = new System.Drawing.Point(22, 14);
+            this.lblFilename.Location = new System.Drawing.Point(12, 14);
             this.lblFilename.Name = "lblFilename";
             this.lblFilename.Size = new System.Drawing.Size(379, 13);
             this.lblFilename.TabIndex = 14;
@@ -193,19 +188,20 @@ namespace Epi.Windows.MakeView.Dialogs
             this.btnSaveOnly.Enabled = false;
             this.btnSaveOnly.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnSaveOnly.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSaveOnly.Location = new System.Drawing.Point(22, 120);
+            this.btnSaveOnly.Location = new System.Drawing.Point(36, 120);
             this.btnSaveOnly.Name = "btnSaveOnly";
-            this.btnSaveOnly.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveOnly.Size = new System.Drawing.Size(90, 23);
             this.btnSaveOnly.TabIndex = 39;
             this.btnSaveOnly.Text = "&Save Only";
             // 
             // btnHelp
             // 
+            this.btnHelp.Enabled = false;
             this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnHelp.Location = new System.Drawing.Point(342, 120);
-            this.btnHelp.Name = "btnHelp"; btnHelp.Enabled = false;
-            this.btnHelp.Size = new System.Drawing.Size(75, 23);
+            this.btnHelp.Location = new System.Drawing.Point(420, 120);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(90, 23);
             this.btnHelp.TabIndex = 38;
             this.btnHelp.Text = "&Help";
             // 
@@ -214,9 +210,9 @@ namespace Epi.Windows.MakeView.Dialogs
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(182, 120);
+            this.btnCancel.Location = new System.Drawing.Point(228, 120);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 36;
             this.btnCancel.Text = "Cancel";
             // 
@@ -225,9 +221,9 @@ namespace Epi.Windows.MakeView.Dialogs
             this.btnOK.Enabled = false;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOK.Location = new System.Drawing.Point(102, 120);
+            this.btnOK.Location = new System.Drawing.Point(132, 120);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(90, 23);
             this.btnOK.TabIndex = 35;
             this.btnOK.Text = "OK";
             // 
@@ -235,15 +231,15 @@ namespace Epi.Windows.MakeView.Dialogs
             // 
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnClear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnClear.Location = new System.Drawing.Point(262, 120);
+            this.btnClear.Location = new System.Drawing.Point(324, 120);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(90, 23);
             this.btnClear.TabIndex = 37;
             this.btnClear.Text = "C&lear";
             // 
             // HelpDialog
             // 
-            this.ClientSize = new System.Drawing.Size(439, 155);
+            this.ClientSize = new System.Drawing.Size(520, 155);
             this.Controls.Add(this.btnSaveOnly);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnCancel);
@@ -254,7 +250,10 @@ namespace Epi.Windows.MakeView.Dialogs
             this.Controls.Add(this.txtFilename);
             this.Controls.Add(this.lblAnchor);
             this.Controls.Add(this.lblFilename);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "HelpDialog";
+            this.ShowIcon = false;
             this.Text = "Help";
             this.Load += new System.EventHandler(this.HelpDialog_Load);
             this.ResumeLayout(false);

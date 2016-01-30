@@ -226,6 +226,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "VariableDefinitionDialog";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.gbxScope.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

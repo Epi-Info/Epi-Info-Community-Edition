@@ -124,9 +124,9 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(213, 53);
+            this.btnCancel.Location = new System.Drawing.Point(178, 49);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 20;
             this.btnCancel.Text = "Cancel";
             // 
@@ -134,9 +134,9 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             // 
             this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnHelp.Location = new System.Drawing.Point(293, 53);
+            this.btnHelp.Location = new System.Drawing.Point(274, 49);
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(75, 23);
+            this.btnHelp.Size = new System.Drawing.Size(90, 23);
             this.btnHelp.TabIndex = 19;
             this.btnHelp.Text = "Help";
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
@@ -145,9 +145,9 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             // 
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnOk.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOk.Location = new System.Drawing.Point(133, 53);
+            this.btnOk.Location = new System.Drawing.Point(82, 49);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.Size = new System.Drawing.Size(90, 23);
             this.btnOk.TabIndex = 18;
             this.btnOk.Text = "OK";
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -157,11 +157,11 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.lblNewRecord.AutoSize = true;
             this.lblNewRecord.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblNewRecord.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblNewRecord.Location = new System.Drawing.Point(8, 8);
+            this.lblNewRecord.Location = new System.Drawing.Point(12, 9);
             this.lblNewRecord.Name = "lblNewRecord";
-            this.lblNewRecord.Size = new System.Drawing.Size(234, 13);
+            this.lblNewRecord.Size = new System.Drawing.Size(237, 13);
             this.lblNewRecord.TabIndex = 16;
-            this.lblNewRecord.Text = "Save the current record and begin a new record";
+            this.lblNewRecord.Text = "Save the current record and begin a new record.";
             // 
             // NewRecordDialog
             // 
@@ -175,6 +175,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewRecordDialog";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "New Record";
             this.ResumeLayout(false);
