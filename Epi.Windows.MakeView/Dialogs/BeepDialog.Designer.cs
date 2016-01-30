@@ -118,7 +118,7 @@ namespace Epi.Windows.MakeView.Dialogs
             // btnHelp
             // 
             resources.ApplyResources(this.btnHelp, "btnHelp");
-            this.btnHelp.Name = "btnHelp"; btnHelp.Enabled = false;
+            this.btnHelp.Name = "btnHelp";
             // 
             // lblNoOptions
             // 
@@ -152,7 +152,6 @@ namespace Epi.Windows.MakeView.Dialogs
             this.Controls.Add(this.lblNoOptions);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
