@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABS
-        dQAAAk1TRnQBSQFMAgEBRgEAAUoBAAEcAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        dQAAAk1TRnQBSQFMAgEBRgEAAUoBAAEsAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwAB/AMAAQEBAAEgBgAB/CEAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
         FwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf+XAAH/AQABgAEAAf8BAAGA
         AQAB/wMAGf8DAAH/FwAl/wMAAf+XAAH/AQABgAEAAf8BAAGAAQAB/wMAGf8DAAH/FwAl/wMAAf+LAAH/
@@ -641,10 +641,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 192</value>
+    <value>298, 189</value>
   </data>
   <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnHelp.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -671,10 +671,10 @@
     <value>System</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 192</value>
+    <value>202, 189</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -704,10 +704,10 @@
     <value>System</value>
   </data>
   <data name="btnOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 192</value>
+    <value>106, 189</value>
   </data>
   <data name="btnOk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnOk.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -776,6 +776,6 @@
     <value>EnableDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs.CheckCodeDesignDialog, MakeView, Version=7.1.5858.20774, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs.CheckCodeDesignDialog, MakeView, Version=7.1.5873.18322, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
