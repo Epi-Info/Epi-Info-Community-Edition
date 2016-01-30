@@ -258,10 +258,10 @@ namespace Epi.Windows.MakeView.Dialogs
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnClear);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DefineVariableDialog";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.DefineVariableDialog_Load);
             this.Leave += new System.EventHandler(this.txtVarName_Leave);
             this.groupBox1.ResumeLayout(false);
