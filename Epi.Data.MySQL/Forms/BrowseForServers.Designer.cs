@@ -40,9 +40,9 @@ namespace Epi.Data.MySQL.Forms
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(206, 238);
+            this.btnOK.Location = new System.Drawing.Point(244, 238);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(90, 23);
             this.btnOK.TabIndex = 0;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -51,9 +51,9 @@ namespace Epi.Data.MySQL.Forms
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(287, 238);
+            this.btnCancel.Location = new System.Drawing.Point(340, 238);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -63,7 +63,7 @@ namespace Epi.Data.MySQL.Forms
             // 
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(318, 27);
+            this.label1.Size = new System.Drawing.Size(423, 27);
             this.label1.TabIndex = 2;
             this.label1.Text = "Select a MySQL Server instance in the network for your connection:";
             // 
@@ -72,9 +72,9 @@ namespace Epi.Data.MySQL.Forms
             this.btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnBrowse.Location = new System.Drawing.Point(345, 79);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(25, 23);
+            this.btnBrowse.Size = new System.Drawing.Size(90, 23);
             this.btnBrowse.TabIndex = 25;
-            this.btnBrowse.Text = "...";
+            this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
@@ -91,7 +91,7 @@ namespace Epi.Data.MySQL.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(376, 273);
+            this.ClientSize = new System.Drawing.Size(442, 273);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtFileName);
             this.Controls.Add(this.label1);
