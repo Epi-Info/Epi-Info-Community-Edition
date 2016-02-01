@@ -10,7 +10,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid Width="768">
         <Border Style="{StaticResource GadgetBorderStyle}">
             <Grid>
                 <Grid.ContextMenu>
