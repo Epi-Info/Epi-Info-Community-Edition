@@ -31,16 +31,58 @@ namespace Epi.Data.MySQL.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExistingConnectionStringDialog));
             this.SuspendLayout();
             // 
+            // lblInstructions
+            // 
+            this.lblInstructions.AutoSize = false;
+            this.lblInstructions.Location = new System.Drawing.Point(9, 9);
+            this.lblInstructions.Size = new System.Drawing.Size(295, 27);
+            // 
+            // lblServerName
+            // 
+            this.lblServerName.AutoSize = false;
+            this.lblServerName.Location = new System.Drawing.Point(9, 36);
+            this.lblServerName.Size = new System.Drawing.Size(295, 13);
+            // 
             // btnOK
             // 
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Enabled = true;
-            this.btnOK.Location = new System.Drawing.Point(152, 261);
+            this.btnOK.Location = new System.Drawing.Point(118, 261);
+            this.btnOK.Size = new System.Drawing.Size(90, 23);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(233, 261);
+            this.btnCancel.Location = new System.Drawing.Point(214, 261);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
+            // 
+            // lblDatabaseName
+            // 
+            this.lblDatabaseName.AutoSize = false;
+            this.lblDatabaseName.Location = new System.Drawing.Point(9, 78);
+            this.lblDatabaseName.Size = new System.Drawing.Size(295, 13);
+            // 
+            // cmbServerName
+            // 
+            this.cmbServerName.Location = new System.Drawing.Point(9, 54);
+            this.cmbServerName.Size = new System.Drawing.Size(295, 21);
+            // 
+            // lblUserName
+            // 
+            this.lblUserName.AutoSize = false;
+            this.lblUserName.Location = new System.Drawing.Point(9, 156);
+            this.lblUserName.Size = new System.Drawing.Size(295, 13);
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = false;
+            this.lblPassword.Location = new System.Drawing.Point(9, 195);
+            this.lblPassword.Size = new System.Drawing.Size(295, 13);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = false;
+            this.label1.Location = new System.Drawing.Point(9, 117);
+            this.label1.Size = new System.Drawing.Size(295, 13);
             // 
             // baseImageList
             // 
