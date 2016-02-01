@@ -39,9 +39,9 @@ namespace Epi.Data.Office.Forms
             // btnCancel
             // 
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(329, 92);
+            this.btnCancel.Location = new System.Drawing.Point(382, 92);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 25;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -51,9 +51,9 @@ namespace Epi.Data.Office.Forms
             // 
             this.btnOK.Enabled = false;
             this.btnOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOK.Location = new System.Drawing.Point(248, 92);
+            this.btnOK.Location = new System.Drawing.Point(286, 92);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(90, 23);
             this.btnOK.TabIndex = 24;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -62,11 +62,11 @@ namespace Epi.Data.Office.Forms
             // btnBrowse
             // 
             this.btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBrowse.Location = new System.Drawing.Point(378, 50);
+            this.btnBrowse.Location = new System.Drawing.Point(382, 50);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(25, 23);
+            this.btnBrowse.Size = new System.Drawing.Size(90, 23);
             this.btnBrowse.TabIndex = 23;
-            this.btnBrowse.Text = "...";
+            this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
@@ -80,21 +80,19 @@ namespace Epi.Data.Office.Forms
             // 
             // lblFileName
             // 
-            this.lblFileName.AutoSize = true;
             this.lblFileName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblFileName.Location = new System.Drawing.Point(12, 36);
+            this.lblFileName.Location = new System.Drawing.Point(15, 36);
             this.lblFileName.Name = "lblFileName";
-            this.lblFileName.Size = new System.Drawing.Size(101, 13);
+            this.lblFileName.Size = new System.Drawing.Size(361, 13);
             this.lblFileName.TabIndex = 21;
             this.lblFileName.Text = "Database file name:";
             // 
             // lblHeader
             // 
-            this.lblHeader.AutoSize = true;
             this.lblHeader.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblHeader.Location = new System.Drawing.Point(12, 9);
+            this.lblHeader.Location = new System.Drawing.Point(15, 9);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(252, 13);
+            this.lblHeader.Size = new System.Drawing.Size(361, 13);
             this.lblHeader.TabIndex = 20;
             this.lblHeader.Text = "Enter information to create the Microsoft Access file.";
             // 
@@ -102,7 +100,7 @@ namespace Epi.Data.Office.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(416, 127);
+            this.ClientSize = new System.Drawing.Size(480, 127);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnBrowse);

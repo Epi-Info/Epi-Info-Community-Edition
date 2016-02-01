@@ -38,11 +38,10 @@ namespace Epi.Data.Office.Forms
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(259, 138);
+            this.btnCancel.Location = new System.Drawing.Point(365, 95);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 31;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -50,12 +49,11 @@ namespace Epi.Data.Office.Forms
             // 
             // btnOK
             // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.Enabled = false;
             this.btnOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOK.Location = new System.Drawing.Point(178, 138);
+            this.btnOK.Location = new System.Drawing.Point(269, 95);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(90, 23);
             this.btnOK.TabIndex = 30;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -63,23 +61,20 @@ namespace Epi.Data.Office.Forms
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBrowse.Location = new System.Drawing.Point(311, 55);
+            this.btnBrowse.Location = new System.Drawing.Point(365, 55);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(25, 23);
+            this.btnBrowse.Size = new System.Drawing.Size(90, 23);
             this.btnBrowse.TabIndex = 29;
-            this.btnBrowse.Text = "...";
+            this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // txtFileName
             // 
-            this.txtFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFileName.Location = new System.Drawing.Point(12, 57);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(297, 20);
+            this.txtFileName.Size = new System.Drawing.Size(347, 20);
             this.txtFileName.TabIndex = 28;
             this.txtFileName.TextChanged += new System.EventHandler(this.txtFileName_TextChanged);
             // 
@@ -89,7 +84,7 @@ namespace Epi.Data.Office.Forms
             this.lblFileName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblFileName.Location = new System.Drawing.Point(9, 41);
             this.lblFileName.Name = "lblFileName";
-            this.lblFileName.Size = new System.Drawing.Size(57, 15);
+            this.lblFileName.Size = new System.Drawing.Size(51, 13);
             this.lblFileName.TabIndex = 27;
             this.lblFileName.Text = "Location:";
             // 
@@ -99,7 +94,7 @@ namespace Epi.Data.Office.Forms
             this.lblHeader.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblHeader.Location = new System.Drawing.Point(9, 14);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(293, 15);
+            this.lblHeader.Size = new System.Drawing.Size(254, 13);
             this.lblHeader.TabIndex = 26;
             this.lblHeader.Text = "Please enter the new Excel filename and path below";
             // 
@@ -107,14 +102,17 @@ namespace Epi.Data.Office.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(346, 173);
+            this.ClientSize = new System.Drawing.Size(465, 130);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtFileName);
             this.Controls.Add(this.lblFileName);
             this.Controls.Add(this.lblHeader);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ExcelNewFileDialog";
+            this.ShowIcon = false;
             this.Text = "Create New File";
             this.ResumeLayout(false);
             this.PerformLayout();
