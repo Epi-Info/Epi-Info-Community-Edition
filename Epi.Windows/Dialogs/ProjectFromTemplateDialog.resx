@@ -112,20 +112,20 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="baseImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACs
-        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAEsAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAE0AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABJgEBAgABAQEAASAGAAEmAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8AbgAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8IAAPfAf8BHQGCAbUB/wEbAYEBswH/ARgBfgGw
         Af8BFgF8Aa4B/wETAXkBqwH/ARABdgGoAf8BDQFzAaUB/wELAXEBowH/AQgBbgGgAf8BBgFsAZ4B/wEE
@@ -856,7 +856,7 @@
         AQEB8AEBAfcD/wGPAf8WAAs=
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="grpProject.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
@@ -866,25 +866,25 @@
   <data name="btnBrowseProjectLocation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnBrowseProjectLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>346, 76</value>
+    <value>281, 70</value>
   </data>
   <data name="btnBrowseProjectLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>90, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnBrowseProjectLocation.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="btnBrowseProjectLocation.Text" xml:space="preserve">
-    <value>...</value>
+    <value>Browse</value>
   </data>
   <data name="&gt;&gt;btnBrowseProjectLocation.Name" xml:space="preserve">
     <value>btnBrowseProjectLocation</value>
   </data>
   <data name="&gt;&gt;btnBrowseProjectLocation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnBrowseProjectLocation.Parent" xml:space="preserve">
     <value>grpProject</value>
@@ -896,10 +896,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="txtProjectLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 76</value>
+    <value>13, 99</value>
   </data>
   <data name="txtProjectLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 20</value>
+    <value>358, 20</value>
   </data>
   <data name="txtProjectLocation.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -908,7 +908,7 @@
     <value>txtProjectLocation</value>
   </data>
   <data name="&gt;&gt;txtProjectLocation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtProjectLocation.Parent" xml:space="preserve">
     <value>grpProject</value>
@@ -932,7 +932,7 @@
     <value>lblProjectName</value>
   </data>
   <data name="&gt;&gt;lblProjectName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblProjectName.Parent" xml:space="preserve">
     <value>grpProject</value>
@@ -959,7 +959,7 @@
     <value>txtProjectName</value>
   </data>
   <data name="&gt;&gt;txtProjectName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtProjectName.Parent" xml:space="preserve">
     <value>grpProject</value>
@@ -968,7 +968,7 @@
     <value>3</value>
   </data>
   <data name="lblLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 60</value>
+    <value>13, 83</value>
   </data>
   <data name="lblLocation.Size" type="System.Drawing.Size, System.Drawing">
     <value>310, 13</value>
@@ -983,7 +983,7 @@
     <value>lblLocation</value>
   </data>
   <data name="&gt;&gt;lblLocation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblLocation.Parent" xml:space="preserve">
     <value>grpProject</value>
@@ -992,13 +992,13 @@
     <value>4</value>
   </data>
   <data name="grpProject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 250</value>
+    <value>13, 226</value>
   </data>
   <data name="grpProject.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 7, 7, 7</value>
   </data>
   <data name="grpProject.Size" type="System.Drawing.Size, System.Drawing">
-    <value>384, 109</value>
+    <value>384, 129</value>
   </data>
   <data name="grpProject.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1010,7 +1010,7 @@
     <value>grpProject</value>
   </data>
   <data name="&gt;&gt;grpProject.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;grpProject.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1031,22 +1031,22 @@
     <value>NoControl</value>
   </data>
   <data name="btnBuildCollectedDataConnectionString.Location" type="System.Drawing.Point, System.Drawing">
-    <value>382, 74</value>
+    <value>317, 74</value>
   </data>
   <data name="btnBuildCollectedDataConnectionString.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 22</value>
+    <value>90, 23</value>
   </data>
   <data name="btnBuildCollectedDataConnectionString.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="btnBuildCollectedDataConnectionString.Text" xml:space="preserve">
-    <value>...</value>
+    <value>Browse</value>
   </data>
   <data name="&gt;&gt;btnBuildCollectedDataConnectionString.Name" xml:space="preserve">
     <value>btnBuildCollectedDataConnectionString</value>
   </data>
   <data name="&gt;&gt;btnBuildCollectedDataConnectionString.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnBuildCollectedDataConnectionString.Parent" xml:space="preserve">
     <value>grpData</value>
@@ -1070,7 +1070,7 @@
     <value>lblCollectedData</value>
   </data>
   <data name="&gt;&gt;lblCollectedData.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblCollectedData.Parent" xml:space="preserve">
     <value>grpData</value>
@@ -1082,10 +1082,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="txtCollectedData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 76</value>
+    <value>13, 100</value>
   </data>
   <data name="txtCollectedData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 20</value>
+    <value>394, 20</value>
   </data>
   <data name="txtCollectedData.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1094,7 +1094,7 @@
     <value>txtCollectedData</value>
   </data>
   <data name="&gt;&gt;txtCollectedData.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtCollectedData.Parent" xml:space="preserve">
     <value>grpData</value>
@@ -1118,7 +1118,7 @@
     <value>cbxCollectedDataDriver</value>
   </data>
   <data name="&gt;&gt;cbxCollectedDataDriver.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbxCollectedDataDriver.Parent" xml:space="preserve">
     <value>grpData</value>
@@ -1127,13 +1127,13 @@
     <value>3</value>
   </data>
   <data name="grpData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>403, 250</value>
+    <value>403, 226</value>
   </data>
   <data name="grpData.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 7, 7, 7</value>
   </data>
   <data name="grpData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 109</value>
+    <value>417, 133</value>
   </data>
   <data name="grpData.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1145,7 +1145,7 @@
     <value>grpData</value>
   </data>
   <data name="&gt;&gt;grpData.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;grpData.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1160,10 +1160,10 @@
     <value>False</value>
   </data>
   <data name="btnOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>583, 376</value>
+    <value>538, 371</value>
   </data>
   <data name="btnOk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnOk.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1175,7 +1175,7 @@
     <value>btnOk</value>
   </data>
   <data name="&gt;&gt;btnOk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnOk.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1187,10 +1187,10 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>664, 376</value>
+    <value>634, 371</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1202,7 +1202,7 @@
     <value>btnCancel</value>
   </data>
   <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1217,10 +1217,10 @@
     <value>False</value>
   </data>
   <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>745, 376</value>
+    <value>730, 371</value>
   </data>
   <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="btnHelp.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1232,7 +1232,7 @@
     <value>btnHelp</value>
   </data>
   <data name="&gt;&gt;btnHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnHelp.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1243,15 +1243,15 @@
   <data name="projectTemplateListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="imageListProjectTemplate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="imageListProjectTemplate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>146, 17</value>
   </metadata>
   <data name="imageListProjectTemplate.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADi
-        lgAAAk1TRnQBSQFMAwEBAAEsAQABLAEAAUgBAAFiAQAE/wEZAQAI/wFCAU0BNgcAATYDAAEoAwABIAEB
+        lgAAAk1TRnQBSQFMAwEBAAE0AQABNAEAAUgBAAFiAQAE/wEZAQAI/wFCAU0BNgcAATYDAAEoAwABIAEB
         AgABYgMAAQEBAAEYBQABwAFKAQERANj//wD/AIoAA/8BuQGkAZYBYAFIATABYAFIATABYAFIATABYAFI
         ATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFI
         ATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFI
@@ -1901,7 +1901,7 @@
     <value>13, 13</value>
   </data>
   <data name="projectTemplateListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>807, 231</value>
+    <value>807, 207</value>
   </data>
   <data name="projectTemplateListView.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1910,7 +1910,7 @@
     <value>projectTemplateListView</value>
   </data>
   <data name="&gt;&gt;projectTemplateListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;projectTemplateListView.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1918,10 +1918,10 @@
   <data name="&gt;&gt;projectTemplateListView.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>129</value>
   </metadata>
   <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
@@ -1943,18 +1943,18 @@
     <value>baseImageList</value>
   </data>
   <data name="&gt;&gt;baseImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;imageListProjectTemplate.Name" xml:space="preserve">
     <value>imageListProjectTemplate</value>
   </data>
   <data name="&gt;&gt;imageListProjectTemplate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ProjectFromTemplateDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.0.4436.26439, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5875.11447, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

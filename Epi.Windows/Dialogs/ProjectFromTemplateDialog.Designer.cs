@@ -262,7 +262,6 @@ namespace Epi.Windows.Dialogs
             this.Controls.Add(this.grpData);
             this.MinimizeBox = false;
             this.Name = "ProjectFromTemplateDialog";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.ProjectCreationDialog_Load);
             this.grpProject.ResumeLayout(false);
