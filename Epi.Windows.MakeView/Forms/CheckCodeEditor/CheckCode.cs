@@ -1416,7 +1416,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                     //   AddStatusErrorMessage(ex.Message);
                         DesignStatement(new ClearDialog(mainForm));
 
                     }
@@ -1672,7 +1672,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                      //  AddStatusErrorMessage(ex.Message);
                         DesignStatement(new CallDialog(this));
 
                     }
