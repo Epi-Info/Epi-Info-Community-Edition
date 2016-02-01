@@ -231,9 +231,9 @@ namespace Epi.Windows.Dialogs
             // 
             // cbxCollectedDataDriver
             // 
-            resources.ApplyResources(this.cbxCollectedDataDriver, "cbxCollectedDataDriver");
             this.cbxCollectedDataDriver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCollectedDataDriver.FormattingEnabled = true;
+            resources.ApplyResources(this.cbxCollectedDataDriver, "cbxCollectedDataDriver");
             this.cbxCollectedDataDriver.Name = "cbxCollectedDataDriver";
             this.cbxCollectedDataDriver.SelectedIndexChanged += new System.EventHandler(this.cbxCollectedDataDriver_SelectedIndexChanged);
             // 
@@ -357,7 +357,6 @@ namespace Epi.Windows.Dialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ProjectCreationDialog";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.ProjectCreationDialog_Load);
             this.grpProject.ResumeLayout(false);

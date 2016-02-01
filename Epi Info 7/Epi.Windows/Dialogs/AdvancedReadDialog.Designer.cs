@@ -164,7 +164,6 @@
             this.Controls.Add(this.lblDescription);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AdvancedReadDialog";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.AdvancedReadDialog_Load);
             this.ResumeLayout(false);

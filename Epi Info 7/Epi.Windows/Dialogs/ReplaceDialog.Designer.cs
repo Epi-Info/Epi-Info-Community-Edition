@@ -147,9 +147,9 @@ namespace Epi.Windows.Dialogs
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(224, 188);
+            this.btnCancel.Location = new System.Drawing.Point(209, 188);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             // 
@@ -159,9 +159,9 @@ namespace Epi.Windows.Dialogs
             this.btnOK.Enabled = false;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOK.Location = new System.Drawing.Point(144, 188);
+            this.btnOK.Location = new System.Drawing.Point(113, 188);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(90, 23);
             this.btnOK.TabIndex = 5;
             this.btnOK.Text = "OK";
             // 

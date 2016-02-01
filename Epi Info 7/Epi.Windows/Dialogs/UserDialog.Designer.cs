@@ -174,9 +174,9 @@ namespace Epi.Windows.Dialogs
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(182, 13);
+            this.btnCancel.Location = new System.Drawing.Point(198, 12);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -186,9 +186,9 @@ namespace Epi.Windows.Dialogs
             this.btnYes.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.btnYes.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnYes.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnYes.Location = new System.Drawing.Point(22, 13);
+            this.btnYes.Location = new System.Drawing.Point(6, 12);
             this.btnYes.Name = "btnYes";
-            this.btnYes.Size = new System.Drawing.Size(75, 23);
+            this.btnYes.Size = new System.Drawing.Size(90, 23);
             this.btnYes.TabIndex = 0;
             this.btnYes.Text = "Yes";
             this.btnYes.Click += new System.EventHandler(this.btnYes_Click);
@@ -200,7 +200,7 @@ namespace Epi.Windows.Dialogs
             this.btnNo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnNo.Location = new System.Drawing.Point(102, 13);
             this.btnNo.Name = "btnNo";
-            this.btnNo.Size = new System.Drawing.Size(75, 23);
+            this.btnNo.Size = new System.Drawing.Size(90, 23);
             this.btnNo.TabIndex = 0;
             this.btnNo.Text = "No";
             this.btnNo.Click += new System.EventHandler(this.btnNo_Click);
@@ -210,9 +210,9 @@ namespace Epi.Windows.Dialogs
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnOk.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOk.Location = new System.Drawing.Point(102, 13);
+            this.btnOk.Location = new System.Drawing.Point(102, 12);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.Size = new System.Drawing.Size(90, 23);
             this.btnOk.TabIndex = 1;
             this.btnOk.Text = "OK";
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
