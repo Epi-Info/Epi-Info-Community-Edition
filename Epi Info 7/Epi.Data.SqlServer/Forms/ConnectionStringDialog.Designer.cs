@@ -166,10 +166,10 @@ namespace Epi.Data.SqlServer.Forms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConnectionStringDialog";
+            this.ShowIcon = false;
             this.groupBoxAuthentication.ResumeLayout(false);
             this.groupBoxAuthentication.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
