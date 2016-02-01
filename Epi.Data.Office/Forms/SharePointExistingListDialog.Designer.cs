@@ -39,9 +39,9 @@ namespace Epi.Data.Office.Forms
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(463, 87);
+            this.btnCancel.Location = new System.Drawing.Point(448, 87);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 31;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -52,9 +52,9 @@ namespace Epi.Data.Office.Forms
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.Enabled = false;
             this.btnOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOK.Location = new System.Drawing.Point(382, 87);
+            this.btnOK.Location = new System.Drawing.Point(352, 87);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(90, 23);
             this.btnOK.TabIndex = 30;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -62,8 +62,8 @@ namespace Epi.Data.Office.Forms
             // 
             // txtUrl
             // 
-            this.txtUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUrl.Location = new System.Drawing.Point(12, 57);
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(526, 20);
@@ -72,21 +72,19 @@ namespace Epi.Data.Office.Forms
             // 
             // lblFileName
             // 
-            this.lblFileName.AutoSize = true;
             this.lblFileName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblFileName.Location = new System.Drawing.Point(9, 41);
+            this.lblFileName.Location = new System.Drawing.Point(12, 41);
             this.lblFileName.Name = "lblFileName";
-            this.lblFileName.Size = new System.Drawing.Size(32, 13);
+            this.lblFileName.Size = new System.Drawing.Size(526, 13);
             this.lblFileName.TabIndex = 27;
             this.lblFileName.Text = "URL:";
             // 
             // lblHeader
             // 
-            this.lblHeader.AutoSize = true;
             this.lblHeader.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblHeader.Location = new System.Drawing.Point(9, 14);
+            this.lblHeader.Location = new System.Drawing.Point(12, 14);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(210, 13);
+            this.lblHeader.Size = new System.Drawing.Size(526, 13);
             this.lblHeader.TabIndex = 26;
             this.lblHeader.Text = "Please enter the SharePoint list URL below";
             // 

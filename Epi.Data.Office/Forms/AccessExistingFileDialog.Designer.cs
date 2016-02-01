@@ -59,9 +59,9 @@ namespace Epi.Data.Office.Forms
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(328, 129);
+            this.btnCancel.Location = new System.Drawing.Point(382, 129);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             this.btnCancel.TabIndex = 25;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -72,9 +72,9 @@ namespace Epi.Data.Office.Forms
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.Enabled = false;
             this.btnOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOK.Location = new System.Drawing.Point(247, 129);
+            this.btnOK.Location = new System.Drawing.Point(286, 129);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(90, 23);
             this.btnOK.TabIndex = 24;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -83,11 +83,11 @@ namespace Epi.Data.Office.Forms
             // btnBrowse
             // 
             this.btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBrowse.Location = new System.Drawing.Point(378, 50);
+            this.btnBrowse.Location = new System.Drawing.Point(382, 50);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(25, 23);
+            this.btnBrowse.Size = new System.Drawing.Size(90, 23);
             this.btnBrowse.TabIndex = 23;
-            this.btnBrowse.Text = "...";
+            this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
@@ -123,7 +123,7 @@ namespace Epi.Data.Office.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 164);
+            this.ClientSize = new System.Drawing.Size(483, 164);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtFileName);
             this.Controls.Add(this.lblFileName);
