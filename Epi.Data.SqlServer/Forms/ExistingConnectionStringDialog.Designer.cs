@@ -41,15 +41,40 @@ namespace Epi.Data.SqlServer.Forms
             // 
             // groupBoxAuthentication
             // 
+            this.groupBoxAuthentication.Size = new System.Drawing.Size(302, 162);
             this.groupBoxAuthentication.TabIndex = 5;
+            // 
+            // lblUserName
+            // 
+            this.lblUserName.AutoSize = false;
+            this.lblUserName.Location = new System.Drawing.Point(33, 69);
+            this.lblUserName.Size = new System.Drawing.Size(263, 13);
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = false;
+            this.lblPassword.Location = new System.Drawing.Point(33, 108);
+            this.lblPassword.Size = new System.Drawing.Size(263, 13);
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(33, 124);
+            this.txtPassword.Size = new System.Drawing.Size(263, 20);
+            // 
+            // txtUserName
+            // 
+            this.txtUserName.Location = new System.Drawing.Point(33, 85);
+            this.txtUserName.Size = new System.Drawing.Size(263, 20);
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(152, 261);
+            this.btnOK.Location = new System.Drawing.Point(122, 290);
+            this.btnOK.Size = new System.Drawing.Size(90, 23);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(233, 261);
+            this.btnCancel.Location = new System.Drawing.Point(218, 290);
+            this.btnCancel.Size = new System.Drawing.Size(90, 23);
             // 
             // cmbServerName
             // 
@@ -57,7 +82,8 @@ namespace Epi.Data.SqlServer.Forms
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(71, 261);
+            this.btnTest.Location = new System.Drawing.Point(26, 290);
+            this.btnTest.Size = new System.Drawing.Size(90, 23);
             // 
             // cmbDatabaseName
             // 
@@ -66,7 +92,7 @@ namespace Epi.Data.SqlServer.Forms
             // ExistingConnectionStringDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(317, 296);
+            this.ClientSize = new System.Drawing.Size(317, 325);
             this.Name = "ExistingConnectionStringDialog";
             this.Load += new System.EventHandler(this.ExistingConnectionStringDialog_Load);
             this.groupBoxAuthentication.ResumeLayout(false);
