@@ -231,6 +231,47 @@
             </Grid>
         </DockPanel>
 
+        <Grid x:Name="grdScale" Grid.Column="1"  Cursor="Hand" Margin="0.4,0,10,50"     >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="120" />
+                <RowDefinition Height="50"    />
+            </Grid.RowDefinitions>
+
+            <Ellipse Grid.Row="1" Margin="0 0 29 -11" HorizontalAlignment="Right" Width="70" Height="70"  Fill="White" StrokeThickness="3">
+                <Ellipse.Stroke>
+                    <LinearGradientBrush>
+                        <GradientStop Offset="0" Color="#0E4C59"/>
+                        <GradientStop Offset="1" Color="#0C3F4A"/>
+                    </LinearGradientBrush>
+                </Ellipse.Stroke>
+            </Ellipse>
+            <StackPanel  Grid.Row="1"  HorizontalAlignment="Right" Margin="0 0 39.6 5"  Width="50"  x:Name="NorthArrowText" Height="100" VerticalAlignment="Bottom"  >
+                <StackPanel.RenderTransform>
+                    <RotateTransform />
+                </StackPanel.RenderTransform>
+                <Path Width="12" Height="16" Stroke="#0D3B45" StrokeThickness="1" StrokeStartLineCap="Round" Stretch="Fill" Fill="White" Margin="0 -2 0 00" Data="M1498.000,910.000 L1498.000,885.000 L1502.000,885.000 L1513.000,905.000 L1513.000,885.000 L1516.000,885.000 L1516.000,910.000 L1512.000,910.000 L1501.000,892.000 L1501.000,910.000 L1498.000,910.000 Z">
+
+                </Path>
+                <Path Stretch="Fill" Width="50" Height="50" Margin="0 11 0 0" Data="M16,29 C23.1797021,29 29,23.1797021 29,16 C29,8.8202979 23.1797021,3 16,3 C8.8202979,3 3,8.8202979 3,16 C3,23.1797021 8.8202979,29 16,29 L16,29 Z M16,28 C22.6274173,28 28,22.6274173 28,16 C28,9.37258267 22.6274173,4 16,4 C9.37258267,4 4,9.37258267 4,16 C4,22.6274173 9.37258267,28 16,28 L16,28 Z M16,27 C22.0751325,27 27,22.0751325 27,16 C27,9.92486745 22.0751325,5 16,5 C9.92486745,5 5,9.92486745 5,16 C5,22.0751325 9.92486745,27 16,27 L16,27 Z M16,7 C16,7 19,14 19,16 C19,16.668068 19,16 19,16 C19,17.6568542 17.6534829,19 16,19 C14.3431458,19 13,17.6631378 13,16 C13,16 13,17.2099991 13,16 C13,14 16,7 16,7 L16,7 Z M16,18 C17.1045696,18 18,17.1045696 18,16 C18,14.8954304 17.1045696,14 16,14 C14.8954304,14 14,14.8954304 14,16 C14,17.1045696 14.8954304,18 16,18 L16,18 Z ">
+                    <Path.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0" Color="#0E4C59"/>
+                            <GradientStop Offset="1" Color="#0C3F4A"/>
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
+            </StackPanel>
+
+            <!--<Button Grid.Row="1" Foreground="Orange"  HorizontalAlignment="Right" Width="100"  FontSize="24">N
+                <Button.RenderTransform>
+                    <RotateTransform  />
+                </Button.RenderTransform>
+            </Button>-->
+
+        </Grid>
+
+        
         <Grid HorizontalAlignment="Right"  x:Name="grdBaseMap" VerticalAlignment="Top" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -300,46 +341,8 @@
             </DockPanel>
         </Grid>
 
+  
 
-        <Grid x:Name="grdScale" Grid.Column="1"  Cursor="Hand" Margin="0.4,0,10,50"      >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="120" />
-                <RowDefinition Height="50"    />
-            </Grid.RowDefinitions>
-
-            <Ellipse Grid.Row="1" Margin="0 0 29 -11" HorizontalAlignment="Right" Width="70" Height="70"  Fill="White" StrokeThickness="3">
-                <Ellipse.Stroke>
-                    <LinearGradientBrush>
-                        <GradientStop Offset="0" Color="#0E4C59"/>
-                        <GradientStop Offset="1" Color="#0C3F4A"/>
-                    </LinearGradientBrush>
-                </Ellipse.Stroke>
-            </Ellipse>
-            <StackPanel  Grid.Row="1"  HorizontalAlignment="Right" Margin="0 0 39.6 5"  Width="50"  x:Name="NorthArrowText" Height="100" VerticalAlignment="Bottom"  >
-                <StackPanel.RenderTransform>
-                    <RotateTransform />
-                </StackPanel.RenderTransform>
-                <Path Width="12" Height="16" Stroke="#0D3B45" StrokeThickness="1" StrokeStartLineCap="Round" Stretch="Fill" Fill="White" Margin="0 -2 0 00" Data="M1498.000,910.000 L1498.000,885.000 L1502.000,885.000 L1513.000,905.000 L1513.000,885.000 L1516.000,885.000 L1516.000,910.000 L1512.000,910.000 L1501.000,892.000 L1501.000,910.000 L1498.000,910.000 Z">
-
-                </Path>
-                <Path Stretch="Fill" Width="50" Height="50" Margin="0 11 0 0" Data="M16,29 C23.1797021,29 29,23.1797021 29,16 C29,8.8202979 23.1797021,3 16,3 C8.8202979,3 3,8.8202979 3,16 C3,23.1797021 8.8202979,29 16,29 L16,29 Z M16,28 C22.6274173,28 28,22.6274173 28,16 C28,9.37258267 22.6274173,4 16,4 C9.37258267,4 4,9.37258267 4,16 C4,22.6274173 9.37258267,28 16,28 L16,28 Z M16,27 C22.0751325,27 27,22.0751325 27,16 C27,9.92486745 22.0751325,5 16,5 C9.92486745,5 5,9.92486745 5,16 C5,22.0751325 9.92486745,27 16,27 L16,27 Z M16,7 C16,7 19,14 19,16 C19,16.668068 19,16 19,16 C19,17.6568542 17.6534829,19 16,19 C14.3431458,19 13,17.6631378 13,16 C13,16 13,17.2099991 13,16 C13,14 16,7 16,7 L16,7 Z M16,18 C17.1045696,18 18,17.1045696 18,16 C18,14.8954304 17.1045696,14 16,14 C14.8954304,14 14,14.8954304 14,16 C14,17.1045696 14.8954304,18 16,18 L16,18 Z ">
-                    <Path.Fill>
-                        <LinearGradientBrush>
-                            <GradientStop Offset="0" Color="#0E4C59"/>
-                            <GradientStop Offset="1" Color="#0C3F4A"/>
-                        </LinearGradientBrush>
-                    </Path.Fill>
-                </Path>
-            </StackPanel>
-
-            <!--<Button Grid.Row="1" Foreground="Orange"  HorizontalAlignment="Right" Width="100"  FontSize="24">N
-                <Button.RenderTransform>
-                    <RotateTransform  />
-                </Button.RenderTransform>
-            </Button>-->
-
-        </Grid>
 
         <Grid x:Name="grdLapse" Visibility="Collapsed" HorizontalAlignment="Center"    VerticalAlignment="Bottom"  Grid.Column="1"  Margin="0,10,10,30" >
 
@@ -380,6 +383,6 @@
             <Image x:Name="imgCloseLayer" Source="..\Images\x_over.png" Cursor="Hand" HorizontalAlignment="Right" Margin="2" VerticalAlignment="Top" Stretch="None" />
         </Grid>
 
-
+      
     </Grid>
 </UserControl>

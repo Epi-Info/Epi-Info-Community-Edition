@@ -1179,6 +1179,7 @@ namespace EpiDashboard.Mapping
             anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             layerList.BeginAnimation(Canvas.BottomProperty, anim);
+             grdScale.Visibility = Visibility.Visible;    
         }
 
         void layerList_MouseEnter(object sender, MouseEventArgs e)
@@ -1189,6 +1190,7 @@ namespace EpiDashboard.Mapping
             anim.AccelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             layerList.BeginAnimation(Canvas.BottomProperty, anim);
+            grdScale.Visibility = Visibility.Collapsed;
         }
 
         void layerList_SizeChanged(object sender, SizeChangedEventArgs e)
