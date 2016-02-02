@@ -720,15 +720,6 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to for associated program:.
-        /// </summary>
-        public static string CHECK_CODE_EXECUTION_WAS_UNSUCCESSFUL_FOR_ASSOCIATED_PROGRAM {
-            get {
-                return ResourceManager.GetString("CHECK_CODE_EXECUTION_WAS_UNSUCCESSFUL_FOR_ASSOCIATED_PROGRAM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The checkcode for this field has changed. Would you like to save it?.
         /// </summary>
         public static string CHECKCODE_CHANGED {
@@ -8940,6 +8931,24 @@ namespace Epi {
         public static string WEBSURVEY_MODE_FINAL {
             get {
                 return ResourceManager.GetString("WEBSURVEY_MODE_FINAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error. Ping not successful..
+        /// </summary>
+        public static string WEBSURVEY_PING_ERROR {
+            get {
+                return ResourceManager.GetString("WEBSURVEY_PING_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ping was successful..
+        /// </summary>
+        public static string WEBSURVEY_PING_SUCCESS {
+            get {
+                return ResourceManager.GetString("WEBSURVEY_PING_SUCCESS", resourceCulture);
             }
         }
         

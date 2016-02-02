@@ -912,9 +912,6 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="UNIQUE_KEY" xml:space="preserve">
     <value>Unique key</value>
   </data>
-  <data name="CHECK_CODE_EXECUTION_WAS_UNSUCCESSFUL_FOR_ASSOCIATED_PROGRAM" xml:space="preserve">
-    <value>for associated program:</value>
-  </data>
   <data name="AUTOSEARCH" xml:space="preserve">
     <value>Autosearch will display similar sounding names.  Select a record and click 'OK' if there is a match or click 'Cancel' to continue.</value>
   </data>
@@ -3176,5 +3173,11 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   </data>
   <data name="HELPDESK_LOGIN" xml:space="preserve">
     <value>The Epi Info™ Help Desk Customer Portal is hosted on Atlassian.net. Please create an account and Log In to submit an Epi Info™ Help Desk ticket.</value>
+  </data>
+  <data name="WEBSURVEY_PING_ERROR" xml:space="preserve">
+    <value>Error. Ping not successful.</value>
+  </data>
+  <data name="WEBSURVEY_PING_SUCCESS" xml:space="preserve">
+    <value>Ping was successful.</value>
   </data>
 </root>

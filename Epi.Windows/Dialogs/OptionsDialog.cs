@@ -1176,14 +1176,14 @@ namespace Epi.Windows.Dialogs
                 string Message = ValidateEIWSSittings();
                 if (Message.Contains("Success"))
                 {
-                    MessageBox.Show("Succeeded!", "", MessageBoxButtons.OK);
+                    MessageBox.Show(SharedStrings.WEBSURVEY_PING_SUCCESS, "", MessageBoxButtons.OK);
                 }
                 else
                 {
                     MessageBox.Show(Message, "", MessageBoxButtons.OK);
                 }
             }catch(Exception ex){
-                MessageBox.Show("Error!", "", MessageBoxButtons.OK);
+                MessageBox.Show(SharedStrings.WEBSURVEY_PING_ERROR, "", MessageBoxButtons.OK);
             }
 
         }
@@ -1216,14 +1216,14 @@ namespace Epi.Windows.Dialogs
             string Message = ValidateEWESittings();
             if (Message.Contains("Success"))
             {
-                MessageBox.Show("Succeeded!", "", MessageBoxButtons.OK);
+                MessageBox.Show(SharedStrings.WEBSURVEY_PING_SUCCESS, "", MessageBoxButtons.OK);
             }
             else
             {
                 MessageBox.Show(Message, "", MessageBoxButtons.OK);
             }
              }catch(Exception ex){
-                MessageBox.Show("Error!", "", MessageBoxButtons.OK);
+                 MessageBox.Show(SharedStrings.WEBSURVEY_PING_ERROR, "", MessageBoxButtons.OK);
             }
         }
         private string ValidateEWESittings()
