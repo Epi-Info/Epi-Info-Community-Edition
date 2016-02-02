@@ -261,7 +261,7 @@ namespace EpiDashboard.Mapping
         {
             foreach (System.Xml.XmlElement child in element.ChildNodes)
             {
-                if (child.Name.Equals("shapeFile"))
+                if (child.Name.Equals("shapeFile") && BoundryFilePathExists(child.InnerText))
                 {
                     if (provider == null)
                     {
@@ -307,6 +307,19 @@ namespace EpiDashboard.Mapping
                 }
             }
             RenderMap();
+        }
+
+        public bool BoundryFilePathExists(string path)
+        {
+            if (System.IO.File.Exists(path))
+            {
+                return true;
+            }
+            else
+            {
+                Epi.Windows.MsgBox.ShowInformation("The boundry file does not exist with the given path.");
+                return false;
+            }
         }
 
         #endregion

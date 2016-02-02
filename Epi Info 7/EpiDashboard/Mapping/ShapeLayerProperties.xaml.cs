@@ -135,7 +135,7 @@ namespace EpiDashboard.Mapping
             string fileName = string.Empty;
             foreach (System.Xml.XmlElement child in element.ChildNodes[0].ChildNodes)
             {
-                if (child.Name.Equals("fileName"))
+                if (child.Name.Equals("fileName") && BoundryFilePathExists(child.InnerText))
                 {
                     lblFileName.Content = child.InnerText;
                 }
@@ -156,6 +156,19 @@ namespace EpiDashboard.Mapping
             set 
             { 
                 //do nothing
+            }
+        }
+
+        public bool BoundryFilePathExists(string path)
+        {
+            if (System.IO.File.Exists(path))
+            {
+                return true;
+            }
+            else
+            {
+                Epi.Windows.MsgBox.ShowInformation("The boundry file does not exist with the given path.");
+                return false;
             }
         }
 
