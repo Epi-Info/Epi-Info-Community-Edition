@@ -299,7 +299,7 @@ namespace EpiDashboard.Mapping
 
             foreach (System.Xml.XmlElement child in element.ChildNodes)
             {
-                if (child.Name.Equals("shapeFile"))
+                if (child.Name.Equals("shapeFile") && BoundryFilePathExists(child.InnerText))
                 {
                     object[] shapeFileProperties = Provider.Load(child.InnerText);
                     if (shapeFileProperties != null)

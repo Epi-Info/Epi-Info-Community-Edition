@@ -23,6 +23,19 @@ namespace EpiDashboard.Mapping
             set { _classAttribList = value; }
         }
 
+        public bool BoundryFilePathExists(string path)
+        {
+            if (System.IO.File.Exists(path))
+            {
+                return true;
+            }
+            else
+            {
+                Epi.Windows.MsgBox.ShowInformation("The boundry file does not exist with the given path.");
+                return false;
+            }
+        }
+
         public void CreateFromXml(System.Xml.XmlElement element, ChoroplethLayerProvider provider)
         {
             foreach (System.Xml.XmlElement child in element.ChildNodes)
