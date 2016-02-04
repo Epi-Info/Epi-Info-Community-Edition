@@ -332,38 +332,41 @@ namespace EpiDashboard.Controls
                     (SolidColorBrush) rctColor0.Fill
                 };
 
-                int classCount;
-                if (!int.TryParse(((ComboBoxItem)cmbClasses.SelectedItem).Content.ToString(), out classCount))
+                int classCount = 0;
+                if (cmbClasses.SelectedItem != null)
                 {
-                    classCount = 4;
-                }
-
-                string validationMessage = string.Empty;
-
-                if (LayerProvider != null)
-                {
-                    validationMessage = LayerProvider.PopulateRangeValues(_dashboardHelper,
-                        cmbShapeKey.SelectedItem.ToString(),
-                        cmbDataKey.SelectedItem.ToString(),
-                        cmbValue.SelectedItem.ToString(),
-                        brushList,
-                        classCount,
-                        legTitle.Text);
-
-
-                    if(LayerProvider.RangeCount != classCount)
+                    if (!int.TryParse(((ComboBoxItem)cmbClasses.SelectedItem).Content.ToString(), out classCount))
                     {
-                        classCount = LayerProvider.RangeCount;
-                        LayerProvider._classCount = LayerProvider.RangeCount;
-                        _currentStratCount = LayerProvider.RangeCount;
-                        cmbClasses.Text = classCount.ToString();
+                        classCount = 4;
                     }
+
+                    string validationMessage = string.Empty;
+
+                    if (LayerProvider != null)
+                    {
+                        validationMessage = LayerProvider.PopulateRangeValues(_dashboardHelper,
+                            cmbShapeKey.SelectedItem.ToString(),
+                            cmbDataKey.SelectedItem.ToString(),
+                            cmbValue.SelectedItem.ToString(),
+                            brushList,
+                            classCount,
+                            legTitle.Text);
+
+
+                        if (LayerProvider.RangeCount != classCount)
+                        {
+                            classCount = LayerProvider.RangeCount;
+                            LayerProvider._classCount = LayerProvider.RangeCount;
+                            _currentStratCount = LayerProvider.RangeCount;
+                            cmbClasses.Text = classCount.ToString();
+                        }
+                    }
+
+                    SetRangeUISection();
                 }
 
-                SetRangeUISection();
+                UpdateClassRangesDictionary_FromControls();
             }
-
-            UpdateClassRangesDictionary_FromControls();
         }
 
         private void UpdateColorsCollection()
@@ -1220,9 +1223,12 @@ namespace EpiDashboard.Controls
 
         private void Reset_Legend()
         {
-            if (((ComboBoxItem)cmbClasses.SelectedItem).Content == null || LayerProvider == null)
+            if (cmbClasses.SelectedItem != null)
             {
-                return;
+                if (((ComboBoxItem)cmbClasses.SelectedItem).Content == null || LayerProvider == null)
+                {
+                    return;
+                }
             }
 
             if (rctLowColor == null || rctHighColor == null)
@@ -1238,10 +1244,13 @@ namespace EpiDashboard.Controls
                 stratCount = 4;
             }
 
-            int classCount;
-            if (!int.TryParse(((ComboBoxItem)cmbClasses.SelectedItem).Content.ToString(), out classCount))
+            int classCount=0;
+            if (cmbClasses.SelectedItem != null)
             {
-                classCount = 4;
+                if (!int.TryParse(((ComboBoxItem)cmbClasses.SelectedItem).Content.ToString(), out classCount))
+                {
+                    classCount = 4;
+                }
             }
 
             bool allVariablesSelected = (cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null);
@@ -1586,8 +1595,8 @@ namespace EpiDashboard.Controls
                     (SolidColorBrush)rctColor10.Fill,  
                     (SolidColorBrush)rctColor0.Fill };
 
-            int classCount;
-
+            int classCount=0;
+            if (cmbClasses.SelectedItem!=null)
             if (!int.TryParse(((ComboBoxItem)cmbClasses.SelectedItem).Content.ToString(), out classCount))
             {
                 classCount = 4;
@@ -2350,7 +2359,8 @@ namespace EpiDashboard.Controls
                         (SolidColorBrush) rctColor0.Fill
                     };
 
-                    int classCount;
+                    int classCount=0;
+                    if (cmbClasses.SelectedItem!=null)
                     if (!int.TryParse(((ComboBoxItem)cmbClasses.SelectedItem).Content.ToString(), out classCount))
                     {
                         classCount = 4;
