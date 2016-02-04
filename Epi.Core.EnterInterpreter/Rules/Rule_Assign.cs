@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using com.calitha.goldparser;
 using Epi.Data;
-
+using System.Linq;
 namespace Epi.Core.EnterInterpreter.Rules
 {
     public class Rule_Assign : EnterRule
@@ -290,11 +290,34 @@ namespace Epi.Core.EnterInterpreter.Rules
             OpList.Add("AND");
             OpList.Add("OR");
             OpList.Add("ASSIGN");
+            
+            var QuotationCount = IdentifierList.Where(x => x.Contains("\"")).Count();
+        
+            List<int> IndexList = new List<int>();
+            for (int i = 0; IdentifierList.Count() > i;i++ )
+            {
+                if (IdentifierList[i].Contains("\""))
+                {
+                    IndexList.Add(i);
+                }
+            }
+            int j = 0;
+            List<string> RemoveList = new List<string> () ;
+            for(int i=0 ; QuotationCount/2 > i; i++)
+            {
+                var List = IdentifierList.Skip(IndexList[j]).Take(IndexList[j + 1] + 1).ToList();
+                foreach (var _item in List ){
+                RemoveList.Add(_item);
+                }
+               
+                j = j + 2;
+            }
+
             foreach (var item in IdentifierList)
             {
                 int number;
                 bool isNumeric = int.TryParse(item, out number);
-                if (!OpList.Contains(item) && !isNumeric)
+                if (!OpList.Contains(item) && !isNumeric && !RemoveList.Contains(item))
                 {
 
                     NewList.Add(item);
