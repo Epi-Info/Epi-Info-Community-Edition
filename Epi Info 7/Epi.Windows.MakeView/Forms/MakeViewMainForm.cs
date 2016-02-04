@@ -4836,7 +4836,7 @@ namespace Epi.Windows.MakeView.Forms
                 {
 
                     Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No;
-                    if (string.IsNullOrWhiteSpace(this.projectExplorer.CurrentView.WebSurveyId))
+                    if (string.IsNullOrWhiteSpace(this.CurrentView.WebSurveyId))
                     {
                         IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrgKey(this.OrganizationKey);
                     }
