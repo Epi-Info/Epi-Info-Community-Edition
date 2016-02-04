@@ -4836,14 +4836,18 @@ namespace Epi.Windows.MakeView.Forms
                 {
 
                     Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.No;
-                    if (string.IsNullOrWhiteSpace(this.CurrentView.WebSurveyId))
-                    {
-                        IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrgKey(this.OrganizationKey);
-                    }
-                    else
-                    {
+                    //if (string.IsNullOrWhiteSpace(this.CurrentView.WebSurveyId))
+                    //{
+                    //    IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrgKey(this.OrganizationKey);
+                    //}
+                    //else
+                    //{
                         IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrgKey(this.OrganizationKey, this.projectExplorer.CurrentView.WebSurveyId);
-                    }
+                   // }
+                        if (string.IsNullOrEmpty(this.CurrentView.WebSurveyId) && this.projectExplorer.CurrentView.WebSurveyId != null)
+                        {
+                            this.CurrentView.WebSurveyId = this.projectExplorer.CurrentView.WebSurveyId;
+                        }
                     WebPublishDialog dialog = null;
 
                     switch (IsValidOKey)
