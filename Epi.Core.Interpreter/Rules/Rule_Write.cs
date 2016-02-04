@@ -749,7 +749,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             TextWriter stream = System.IO.File.AppendText(string.Format("{0}\\{1}",curFile,TableName.ToString().Replace("#",".")));
 
-            if (TableColumns.Count > Max_Number_Columns)
+            if (TableColumns.Count < Max_Number_Columns)
             {
                 for (int i = 0; i < TableColumns.Count; i++)
                 {
