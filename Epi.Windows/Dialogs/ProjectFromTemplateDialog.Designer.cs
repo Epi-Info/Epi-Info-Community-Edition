@@ -222,8 +222,8 @@ namespace Epi.Windows.Dialogs
             // 
             // btnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -236,8 +236,8 @@ namespace Epi.Windows.Dialogs
             // 
             // projectTemplateListView
             // 
-            resources.ApplyResources(this.projectTemplateListView, "projectTemplateListView");
             this.projectTemplateListView.LargeImageList = this.imageListProjectTemplate;
+            resources.ApplyResources(this.projectTemplateListView, "projectTemplateListView");
             this.projectTemplateListView.MultiSelect = false;
             this.projectTemplateListView.Name = "projectTemplateListView";
             this.projectTemplateListView.UseCompatibleStateImageBehavior = false;

@@ -148,6 +148,7 @@ namespace Epi.Windows.Dialogs
             // 
             // grpProject
             // 
+            resources.ApplyResources(this.grpProject, "grpProject");
             this.grpProject.Controls.Add(this.btnBrowseProjectLocation);
             this.grpProject.Controls.Add(this.txtProjectDescription);
             this.grpProject.Controls.Add(this.lblDescription);
@@ -155,7 +156,6 @@ namespace Epi.Windows.Dialogs
             this.grpProject.Controls.Add(this.lblProjectName);
             this.grpProject.Controls.Add(this.txtProjectName);
             this.grpProject.Controls.Add(this.lblLocation);
-            resources.ApplyResources(this.grpProject, "grpProject");
             this.grpProject.Name = "grpProject";
             this.grpProject.TabStop = false;
             // 
@@ -202,11 +202,11 @@ namespace Epi.Windows.Dialogs
             // 
             // grpData
             // 
+            resources.ApplyResources(this.grpData, "grpData");
             this.grpData.Controls.Add(this.btnBuildCollectedDataConnectionString);
             this.grpData.Controls.Add(this.lblCollectedData);
             this.grpData.Controls.Add(this.txtCollectedData);
             this.grpData.Controls.Add(this.cbxCollectedDataDriver);
-            resources.ApplyResources(this.grpData, "grpData");
             this.grpData.Name = "grpData";
             this.grpData.TabStop = false;
             // 
@@ -298,9 +298,9 @@ namespace Epi.Windows.Dialogs
             // 
             // grpView
             // 
+            resources.ApplyResources(this.grpView, "grpView");
             this.grpView.Controls.Add(this.txtViewName);
             this.grpView.Controls.Add(this.lblViewName);
-            resources.ApplyResources(this.grpView, "grpView");
             this.grpView.Name = "grpView";
             this.grpView.TabStop = false;
             // 
@@ -325,8 +325,8 @@ namespace Epi.Windows.Dialogs
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);

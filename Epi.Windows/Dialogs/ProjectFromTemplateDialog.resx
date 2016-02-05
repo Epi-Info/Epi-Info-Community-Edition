@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACs
-        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAE8AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAFEAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABJgEBAgABAQEAASAGAAEmAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8AbgAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8IAAPfAf8BHQGCAbUB/wEbAYEBswH/ARgBfgGw
         Af8BFgF8Aa4B/wETAXkBqwH/ARABdgGoAf8BDQFzAaUB/wELAXEBowH/AQgBbgGgAf8BBgFsAZ4B/wEE
@@ -857,9 +857,6 @@
 </value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="grpProject.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
   <data name="grpProject.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -868,7 +865,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnBrowseProjectLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>281, 70</value>
+    <value>281, 71</value>
   </data>
   <data name="btnBrowseProjectLocation.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -896,10 +893,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="txtProjectLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 99</value>
+    <value>16, 73</value>
   </data>
   <data name="txtProjectLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 20</value>
+    <value>260, 20</value>
   </data>
   <data name="txtProjectLocation.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -967,11 +964,14 @@
   <data name="&gt;&gt;txtProjectName.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="lblLocation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 83</value>
+    <value>16, 57</value>
   </data>
   <data name="lblLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>310, 13</value>
+    <value>260, 13</value>
   </data>
   <data name="lblLocation.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -992,13 +992,13 @@
     <value>4</value>
   </data>
   <data name="grpProject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 226</value>
+    <value>13, 223</value>
   </data>
   <data name="grpProject.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 7, 7, 7</value>
   </data>
   <data name="grpProject.Size" type="System.Drawing.Size, System.Drawing">
-    <value>384, 133</value>
+    <value>384, 105</value>
   </data>
   <data name="grpProject.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1018,9 +1018,6 @@
   <data name="&gt;&gt;grpProject.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="grpData.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
   <data name="grpData.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -1031,7 +1028,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnBuildCollectedDataConnectionString.Location" type="System.Drawing.Point, System.Drawing">
-    <value>317, 74</value>
+    <value>317, 71</value>
   </data>
   <data name="btnBuildCollectedDataConnectionString.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -1082,10 +1079,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="txtCollectedData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 100</value>
+    <value>10, 73</value>
   </data>
   <data name="txtCollectedData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 20</value>
+    <value>299, 20</value>
   </data>
   <data name="txtCollectedData.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1127,13 +1124,13 @@
     <value>3</value>
   </data>
   <data name="grpData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>403, 226</value>
+    <value>403, 223</value>
   </data>
   <data name="grpData.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 7, 7, 7</value>
   </data>
   <data name="grpData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 133</value>
+    <value>417, 105</value>
   </data>
   <data name="grpData.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1153,14 +1150,11 @@
   <data name="&gt;&gt;grpData.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="btnOk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
   <data name="btnOk.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="btnOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>538, 371</value>
+    <value>538, 334</value>
   </data>
   <data name="btnOk.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -1183,11 +1177,8 @@
   <data name="&gt;&gt;btnOk.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>634, 371</value>
+    <value>634, 334</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -1210,14 +1201,11 @@
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="btnHelp.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
   <data name="btnHelp.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>730, 371</value>
+    <value>730, 334</value>
   </data>
   <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -1240,9 +1228,6 @@
   <data name="&gt;&gt;btnHelp.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="projectTemplateListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <metadata name="imageListProjectTemplate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>146, 17</value>
   </metadata>
@@ -1251,7 +1236,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADi
-        lgAAAk1TRnQBSQFMAwEBAAE8AQABPAEAAUgBAAFiAQAE/wEZAQAI/wFCAU0BNgcAATYDAAEoAwABIAEB
+        lgAAAk1TRnQBSQFMAwEBAAFEAQABRAEAAUgBAAFiAQAE/wEZAQAI/wFCAU0BNgcAATYDAAEoAwABIAEB
         AgABYgMAAQEBAAEYBQABwAFKAQERANj//wD/AIoAA/8BuQGkAZYBYAFIATABYAFIATABYAFIATABYAFI
         ATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFI
         ATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFI
@@ -1901,7 +1886,7 @@
     <value>13, 13</value>
   </data>
   <data name="projectTemplateListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>807, 207</value>
+    <value>807, 204</value>
   </data>
   <data name="projectTemplateListView.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1928,10 +1913,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>830, 406</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>838, 444</value>
+    <value>830, 366</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
@@ -1955,6 +1937,6 @@
     <value>ProjectFromTemplateDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5875.17543, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5878.24715, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

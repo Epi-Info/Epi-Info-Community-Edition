@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAI
-        qQAAAk1TRnQBSQFMAgEBTwEAAVQBAAEkAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        qQAAAk1TRnQBSQFMAgEBTwEAAVQBAAEsAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQFgAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
         AwAB/wgAA98B/wEdAYIBtQH/ARsBgQGzAf8BGAF+AbAB/wEWAXwBrgH/ARMBeQGrAf8BEAF2AagB/wEN
         AXMBpQH/AQsBcQGjAf8BCAFuAaAB/wEGAWwBngH/AQQBagGcAf8BAgFoAZoB/wEBAWcBmQH/A0sB/wOC
@@ -931,7 +931,7 @@
     <value>System</value>
   </data>
   <data name="btnFindProject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>326, 12</value>
+    <value>328, 39</value>
   </data>
   <data name="btnFindProject.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -961,7 +961,7 @@
     <value>10, 41</value>
   </data>
   <data name="txtCurrentProj.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 20</value>
+    <value>312, 20</value>
   </data>
   <data name="txtCurrentProj.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1054,6 +1054,6 @@
     <value>ViewSelectionDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5875.11447, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5878.24715, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
