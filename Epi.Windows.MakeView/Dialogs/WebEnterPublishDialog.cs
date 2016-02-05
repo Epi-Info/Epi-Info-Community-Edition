@@ -265,8 +265,8 @@ namespace Epi.Windows.MakeView.Dialogs
             Request.SurveyInfo.StartDate = DateTime.Now;
             Request.SurveyInfo.IsShareable = this.Shareable.Checked;
             //Request.SurveyInfo.ShowAllRecords = this.AccessAll.Checked;
-            //if (this.DataAccessRuleList.SelectedItem != null)
-            //{
+            if (this.DataAccessRuleList.SelectedItem != null)
+           {
             if (_DataAccessRuleIds.Count() > 0 && this.DataAccessRuleList.SelectedItem != null)
                 {
                     foreach (var Rule in _DataAccessRuleIds)
@@ -284,12 +284,12 @@ namespace Epi.Windows.MakeView.Dialogs
                     Request.SurveyInfo.DataAccessRuleId = 1;
 
                 }
-            //}
+            }
             //else {
 
-            //    Request.SurveyInfo.DataAccessRuleId = 1;
+            //   Request.SurveyInfo.DataAccessRuleId = 1;
             
-            //}
+            // }
             
             //Request.SurveyInfo.SurveyType = (rdbSingleResponse.Checked) ? 1 : 2;
             //if (txtOrganization.Text.Equals("Your Organization Name (optional)", StringComparison.OrdinalIgnoreCase))
