@@ -476,12 +476,14 @@ namespace Epi.Windows.MakeView.Dialogs
               {
                   foreach (var Rule in _DataAccessRuleIds)
                   {
-                      if (this.DataAccessRuleList.SelectedItem.ToString() == Rule.Value)
+                      if (this.DataAccessRuleList.SelectedItem != null)
                       {
-                          Request.SurveyInfo.DataAccessRuleId = Rule.Key;
+                          if (this.DataAccessRuleList.SelectedItem.ToString() == Rule.Value)
+                          {
+                              Request.SurveyInfo.DataAccessRuleId = Rule.Key;
 
+                          }
                       }
-
                   }
               }
               else
