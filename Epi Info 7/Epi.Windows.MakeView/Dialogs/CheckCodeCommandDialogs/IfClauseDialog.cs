@@ -67,7 +67,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
                     }
                 }
 
-                foreach (EpiInfo.Plugin.IVariable var in this.EpiInterpreter.Context.GetVariablesInScope(EpiInfo.Plugin.VariableScope.Global | EpiInfo.Plugin.VariableScope.Permanent))
+                foreach (EpiInfo.Plugin.IVariable var in this.EpiInterpreter.Context.GetVariablesInScope(EpiInfo.Plugin.VariableScope.Global | EpiInfo.Plugin.VariableScope.Permanent | EpiInfo.Plugin.VariableScope.Standard))
                 {
                     cbxVariables.Items.Add(var.Name);
                 }
