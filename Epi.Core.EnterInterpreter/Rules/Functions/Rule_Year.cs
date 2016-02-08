@@ -19,10 +19,13 @@ namespace Epi.Core.EnterInterpreter.Rules
             {
                 foreach (var item in ParameterList)
                 {
-                    var id = ((Epi.Core.EnterInterpreter.Rules.Rule_Value)(item)).Id;
-                    if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLower()))
+                    if (item is Rule_Value)
                     {
-                        this.Context.CommandVariableCheck.Add(id.ToLower(), "year");
+                        var id = ((Epi.Core.EnterInterpreter.Rules.Rule_Value)(item)).Id;
+                        if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLower()))
+                        {
+                            this.Context.CommandVariableCheck.Add(id.ToLower(), "year");
+                        }
                     }
                 }
             }
