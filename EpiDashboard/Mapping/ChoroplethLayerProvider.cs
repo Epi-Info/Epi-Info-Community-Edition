@@ -514,7 +514,7 @@ namespace EpiDashboard.Mapping
             TextBlock minTextBlock = new TextBlock();
             StackPanel minStackPanel = new StackPanel();
             minStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-            minTextBlock.Text = thematicItem.MinName != null ? String.Format("Min: {0} ({1})", thematicItem.Min, thematicItem.MinName.Trim()) : String.Format("Min: {0} ({1})", thematicItem.Min, string.Empty);
+            minTextBlock.Text = thematicItem.MinName != null ? DashboardSharedStrings.DASHBOARD_MAP_MIN + String.Format(" {0} ({1})", thematicItem.Min, thematicItem.MinName.Trim()) : DashboardSharedStrings.DASHBOARD_MAP_MIN + String.Format(" {0} ({1})", thematicItem.Min, string.Empty);
             minTextBlock.MaxWidth = 256;
             minTextBlock.TextWrapping = TextWrapping.Wrap;
             minStackPanel.Children.Add(minTextBlock);
@@ -524,7 +524,7 @@ namespace EpiDashboard.Mapping
             TextBlock maxTextBlock = new TextBlock();
             StackPanel maxStackPanel = new StackPanel();
             maxStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-            maxTextBlock.Text = thematicItem.MaxName != null ? String.Format("Max: {0} ({1})", thematicItem.Max, thematicItem.MaxName.Trim()) : String.Format("Max: {0} ({1})", thematicItem.Max, string.Empty);
+            maxTextBlock.Text = thematicItem.MaxName != null ? DashboardSharedStrings.DASHBOARD_MAP_MAX + String.Format(" {0} ({1})", thematicItem.Max, thematicItem.MaxName.Trim()) : DashboardSharedStrings.DASHBOARD_MAP_MAX + String.Format(" {0} ({1})", thematicItem.Max, string.Empty);
             maxTextBlock.MaxWidth = 256;
             maxTextBlock.TextWrapping = TextWrapping.Wrap;
             maxStackPanel.Children.Add(maxTextBlock);
