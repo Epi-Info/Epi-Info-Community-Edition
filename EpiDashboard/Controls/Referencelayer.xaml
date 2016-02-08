@@ -49,7 +49,7 @@
                         
                         <WrapPanel Orientation="Horizontal">
                             <StackPanel Margin="0 0 20 10">
-                                <TextBox TextWrapping="Wrap" MinWidth="300" MaxWidth="600" x:Name="txtShapePath" Style="{StaticResource PropertiesTextBoxLarge}" IsReadOnly="True" TextChanged="txtShapePath_TextChanged"  HorizontalAlignment="Left" ></TextBox>
+                                <TextBox TextWrapping="Wrap" MinWidth="300" MaxWidth="600" x:Name="txtShapePath" Style="{StaticResource PropertiesTextBoxLarge}" IsReadOnly="False" TextChanged="txtShapePath_TextChanged"  HorizontalAlignment="Left" ></TextBox>
                             </StackPanel>
                             <StackPanel>
                                 <Button x:Name="btnBrowseShape" Click="btnBrowseShape_Click" Height="25" HorizontalAlignment="Left">Browse</Button>
@@ -97,7 +97,7 @@
                                 <Label Padding="0" x:Name="lblURLOfKMLFile">Location URL:</Label>
                                 <WrapPanel Orientation="Horizontal">
                                     <StackPanel Margin="0 0 20 10">
-                                        <TextBox TextWrapping="Wrap" MinWidth="200" Width="200" Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="txtKMLpath" IsReadOnly="True" ></TextBox>
+                                        <TextBox TextWrapping="Wrap" MinWidth="200" Width="200" Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="txtKMLpath" IsReadOnly="False" ></TextBox>
                                     </StackPanel>
                                     <StackPanel>
                                         <Button x:Name="btnKMLFile" Height="25" HorizontalAlignment="Left" Click="btnKMLFile_Click">Browse</Button>
