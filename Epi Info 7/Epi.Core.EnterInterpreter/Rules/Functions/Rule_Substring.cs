@@ -23,11 +23,15 @@ namespace Epi.Core.EnterInterpreter.Rules
             this.ParameterList = EnterRule.GetFunctionParameters(pContext, pToken);
             if (ParameterList.Count() > 0)
             {
+
                 foreach (var item in ParameterList)
                 {
-                    if (!this.Context.CommandVariableCheck.ContainsKey(((Rule_Value)(item)).Id.ToLower()))
+                    if (item is Rule_Value)
                     {
-                        this.Context.CommandVariableCheck.Add((( Rule_Value)(item)).Id, "substring");
+                        if (!this.Context.CommandVariableCheck.ContainsKey(((Rule_Value)(item)).Id.ToLower()))
+                        {
+                            this.Context.CommandVariableCheck.Add(((Rule_Value)(item)).Id, "substring");
+                        }
                     }
                 }
             }
