@@ -149,6 +149,9 @@ namespace Epi.Windows.MakeView.Forms
                 }
             }
             List<string> CommandButtonFieldList = new List<string>();
+            List<string> MerrorFieldList = new List<string>();
+            List<string> GroupFieldList = new List<string>();
+            List<string> GridFieldList = new List<string>();
             foreach (Field field in view.Fields)
             {
                 if (field is IDataField)
@@ -170,8 +173,23 @@ namespace Epi.Windows.MakeView.Forms
                    
                     CommandButtonFieldList.Add(field.Name);
                 }
+                else if (field is Epi.Fields.GroupField)
+                {
+
+                    GroupFieldList.Add(field.Name);
+                }
+                else if (field is Epi.Fields.MirrorField)
+                {
+
+                    MerrorFieldList.Add(field.Name);
+                }
+                else if ( field is Epi.Fields.GridField)
+                {
+
+                    GridFieldList.Add(field.Name);
+                }
             }
-            MR.Context.AddToCommandButtonFieldList(CommandButtonFieldList);
+            MR.Context.AddToFieldList(CommandButtonFieldList, GroupFieldList, MerrorFieldList, GridFieldList);
             BuildComboBox();
             if (iserrcheckcode)
             {
@@ -228,6 +246,9 @@ namespace Epi.Windows.MakeView.Forms
         /// <param name="frm">The main form</param>
         public CheckCode(Field field, MakeViewMainForm frm, View currentview)
         {
+            List<string> MerrorFieldList = new List<string>();
+            List<string> GroupFieldList = new List<string>();
+            List<string> GridFieldList = new List<string>();
             mainForm = frm;
             List<string> CommandButtonFieldList = new List<string>();
             EpiInfo.Plugin.IEnterInterpreter MR = mainForm.EpiInterpreter;
@@ -253,11 +274,12 @@ namespace Epi.Windows.MakeView.Forms
             {
                 Identifier = field.Name;
             }
-            if (field is Epi.Fields.CommandButtonField)
+            if (field is Epi.Fields.CommandButtonField || field is Epi.Fields.RelatedViewField)
             {
                 this.GotoLine("field", "click", Identifier, true);
-                CommandButtonFieldList.Add(field.Name);
+               
             }
+            
             else
             {
                 this.GotoLine("field", "after", Identifier, true);
@@ -270,7 +292,45 @@ namespace Epi.Windows.MakeView.Forms
                     this.codeText.SelectionLength = this.codeText.Lines[lineIndex].Length;
                 }
             }
-            MR.Context.AddToCommandButtonFieldList(CommandButtonFieldList);
+            foreach (Field Viewfield in view.Fields)
+            {
+                //if (Viewfield is IDataField)
+                //{
+                //    EpiInfo.Plugin.IVariable definedVar = (EpiInfo.Plugin.IVariable)Viewfield;
+                //    MR.Context.DefineVariable(definedVar);
+                //}
+                //else if (Viewfield is Epi.Fields.LabelField)
+                //{
+                //    PluginVariable p = new PluginVariable();
+                //    p.Name = Viewfield.Name;
+                //    p.Prompt = ((Epi.Fields.LabelField)Viewfield).PromptText;
+                //    p.VariableScope = EpiInfo.Plugin.VariableScope.DataSource;
+                //    p.DataType = EpiInfo.Plugin.DataType.Text;
+                //    MR.Context.DefineVariable(p);
+                //}
+                //else 
+                if (Viewfield is Epi.Fields.CommandButtonField || Viewfield is Epi.Fields.RelatedViewField)
+                {
+
+                    CommandButtonFieldList.Add(Viewfield.Name);
+                }
+                else if (Viewfield is Epi.Fields.GroupField)
+                {
+
+                    GroupFieldList.Add(Viewfield.Name);
+                }
+                else if (Viewfield is Epi.Fields.MirrorField)
+                {
+
+                    MerrorFieldList.Add(Viewfield.Name);
+                }
+                else if (Viewfield is Epi.Fields.GridField)
+                {
+
+                    GridFieldList.Add(Viewfield.Name);
+                }
+            }
+            MR.Context.AddToFieldList(CommandButtonFieldList, GroupFieldList, MerrorFieldList, GridFieldList);
             if (iserrcheckcode)
             {
                 this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", "The Check Code does not compile."));
@@ -1416,7 +1476,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                     //   AddStatusErrorMessage(ex.Message);
+                     //   //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new ClearDialog(mainForm));
 
                     }
@@ -1435,7 +1495,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new GoToDialog(mainForm));
 
                     }
@@ -1455,7 +1515,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new GoToFormDialog(mainForm));
 
                     }
@@ -1475,7 +1535,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new HideDialog(mainForm));
 
                     }
@@ -1494,7 +1554,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new UnhideDialog(mainForm));
 
                     }
@@ -1513,7 +1573,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new DisableDialog(mainForm));
 
                     }
@@ -1532,7 +1592,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new EnableDialog(mainForm));
 
                     }
@@ -1551,7 +1611,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new HighlightDialog(mainForm));
 
                     }
@@ -1570,7 +1630,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new UnhighlightDialog(mainForm));
 
                     }
@@ -1589,7 +1649,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new GeocodeDialog(mainForm));
 
                     }
@@ -1608,7 +1668,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new SetRequiredDialog(mainForm));
 
                     }
@@ -1627,7 +1687,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new SetNotRequiredDialog(mainForm));
 
                     }
@@ -1639,7 +1699,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new FieldSelectorDialog(mainForm));
 
                     }
@@ -1672,7 +1732,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                      //  AddStatusErrorMessage(ex.Message);
+                      //  //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new CallDialog(this));
 
                     }
@@ -1691,7 +1751,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new ExecuteDialog(mainForm));
 
                     }
@@ -1710,7 +1770,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new QuitDialog(mainForm, true));
 
                     }
@@ -1742,7 +1802,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new AutoSearchDialog(mainForm));
                     }
                     break;
@@ -1760,7 +1820,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                      //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new IfClauseDialog(mainForm));
                     }
                     break;
@@ -1778,7 +1838,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new NewRecordDialog(mainForm));
                     }
                     break;
@@ -1809,7 +1869,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignStatement(new DialogDialog(mainForm, this.view.GetProject()));
                     }
                     break;
@@ -1827,7 +1887,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
                     catch (Exception ex)
                     {
-                        AddStatusErrorMessage(ex.Message);
+                        //AddStatusErrorMessage(ex.Message);
                         DesignHelpStatement();
                     }
                     break;
@@ -1863,7 +1923,7 @@ namespace Epi.Windows.MakeView.Forms
                         {
                             if (ex.Source != Constants.VARIABLE_NAME_TEST_TOKEN && ex.Source != "10")
                             {
-                            AddStatusErrorMessage(ex.Message);
+                            //AddStatusErrorMessage(ex.Message);
                             }
                             DesignStatement(new AssignDialog(mainForm, true));
                         }
@@ -1897,7 +1957,7 @@ namespace Epi.Windows.MakeView.Forms
 
                         if (this.PreValidateCommand(" Define " + Constants.VARIABLE_NAME_TEST_TOKEN + " Numeric "))
                         {
-                            AddStatusErrorMessage(ex.Message);
+                            //AddStatusErrorMessage(ex.Message);
                             isDefineCommand = true;
                             DesignStatement(new DefineVariableDialog(mainForm, true));
                         }

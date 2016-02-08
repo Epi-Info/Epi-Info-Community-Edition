@@ -50,6 +50,9 @@ namespace Epi.Core.EnterInterpreter
         public Dictionary<string, EnterRule> Subroutine;
         public List<String> SelectCommandList = new List<String>();
         public List<String> CommandButtonFieldList = new List<String>();
+        public List<String> MirrorFieldList = new List<String>();
+        public List<String> GroupBoxFieldList = new List<String>();
+        public List<String> GridFieldList = new List<String>();
         private string[] parseGetCommandSearchText(string pSearchText)
         {
             string[] result = null;
@@ -512,9 +515,13 @@ namespace Epi.Core.EnterInterpreter
         {
             this.currentScope.RemoveVariablesInScope(varTypes);
         }
-        public void AddToCommandButtonFieldList(List<string> List)
+       // List<string> CommandButtonList, List<string> GroupBoxList, List<string> MirrorList, List<string> GridList
+        public void AddToFieldList(List<string> CommandButtonList, List<string> GroupBoxList, List<string> MirrorList, List<string> GridList)
         {
-            this.CommandButtonFieldList = List;
+            this.CommandButtonFieldList = CommandButtonList;
+            this.GroupBoxFieldList = GroupBoxList;
+            this.MirrorFieldList = MirrorList;
+            this.GridFieldList = GridList;
         }
 
         public void DefineVariable(EpiInfo.Plugin.IVariable variable)
@@ -578,42 +585,56 @@ namespace Epi.Core.EnterInterpreter
         {
             _parsedUndefinedVariables.Clear();
 
-            if (currentScope.SymbolList.Count > 0)
-            { 
-                foreach (System.Collections.Generic.KeyValuePair<string, string> kvp in this.CommandVariableCheck)
+            try
+            {
+                if (currentScope.SymbolList.Count > 0)
                 {
-                    var _CurrentScope = this.currentScope.Resolve(kvp.Key);
-                    if (_CurrentScope == null )
+                    foreach (System.Collections.Generic.KeyValuePair<string, string> kvp in this.CommandVariableCheck)
                     {
-                        _parsedUndefinedVariables.Add(kvp.Key);
-                    }
-                };
+                        var _CurrentScope = this.currentScope.Resolve(kvp.Key);
+                        if (_CurrentScope == null)
+                        {
+                            _parsedUndefinedVariables.Add(kvp.Key);
+                        }
+                    };
 
-                if (_parsedUndefinedVariables.Count > 0)
-                {
-                  //  string exceptionMessage = SharedStrings.ERROR_VARIABLE_NOT_DEFINED;
-                    string exceptionSource = null;
-                    string Message = null;
-                    foreach (string name in _parsedUndefinedVariables)
+                    if (_parsedUndefinedVariables.Count > 0)
                     {
+                        //  string exceptionMessage = SharedStrings.ERROR_VARIABLE_NOT_DEFINED;
+                        string exceptionSource = null;
+                        string Message = null;
+                        foreach (string name in _parsedUndefinedVariables)
+                        {
 
 
-                     if (!name.Contains("\"") && !SelectCommandList.Contains(name.ToUpper()) && !this.Subroutine.ContainsKey(name) && !this.CommandButtonFieldList.Contains(name))
-                      {
-                        string exceptionMessage = SharedStrings.ERROR_VARIABLE_NOT_DEFINED;
-                        if (name != Constants.VARIABLE_NAME_TEST_TOKEN)
-                         Message +=  exceptionMessage + " " + name + "\n" ;
-                        exceptionSource = name;
-                      }
+                            if (!name.Contains("\"") && !SelectCommandList.Contains(name.ToUpper()) 
+                                && !this.Subroutine.ContainsKey(name) 
+                                && !this.CommandButtonFieldList.Contains(name)
+                                && !this.GroupBoxFieldList.Contains(name)
+                                && !this.MirrorFieldList.Contains(name)
+                                && !this.GridFieldList.Contains(name)
+                                
+                                )
+                            {
+                                string exceptionMessage = SharedStrings.ERROR_VARIABLE_NOT_DEFINED;
+                                if (name != Constants.VARIABLE_NAME_TEST_TOKEN)
+                                    Message += exceptionMessage + " " + name + "\n";
+                                exceptionSource = name;
+                            }
+                        }
+                        if (Message != null)
+                        {
+                            Exception exception = new Exception(Message);
+                            exception.Source = exceptionSource;
+                            throw exception;
+                        }
+
                     }
-                    if (Message != null)
-                    {
-                    Exception exception = new Exception(Message);
-                    exception.Source = exceptionSource;
-                    throw exception;
-                    }
-                    
                 }
+            }
+            catch(Exception ex){
+                throw ex;
+            
             }
         }
         public IScope GetNewScope(string pName, IScope pParent)
