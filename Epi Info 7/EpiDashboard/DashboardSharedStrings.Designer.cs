@@ -1024,6 +1024,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max:.
+        /// </summary>
+        public static string DASHBOARD_MAP_MAX {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MAP_MAX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min:.
+        /// </summary>
+        public static string DASHBOARD_MAP_MIN {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MAP_MIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} and above.
         /// </summary>
         public static string DASHBOARD_MAP_N_AND_ABOVE {

@@ -2068,4 +2068,10 @@ of records or select fewer fields for the group.</value>
   <data name="DASHBOARD_MAP_N_POLYGONS_EXCEEDED" xml:space="preserve">
     <value>The number of Polygons in the selected file exceeds maximum number of Polygons that can be read.</value>
   </data>
+  <data name="DASHBOARD_MAP_MAX" xml:space="preserve">
+    <value>Max:</value>
+  </data>
+  <data name="DASHBOARD_MAP_MIN" xml:space="preserve">
+    <value>Min:</value>
+  </data>
 </root>
