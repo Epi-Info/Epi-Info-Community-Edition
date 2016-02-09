@@ -24,7 +24,7 @@ namespace EpiInfo.Plugin
         string ExpectedTokens { get; set; }
         string NextToken { get; set; }
         string UnexpectedToken { get; set; }
-
+        bool IsVariableValidationEnable { get; set; }
         void AddToFieldList(List<string> CommandButtonList, List<string> GroupBoxList, List<string> MirrorList, List<string> GridList);
     }
 }

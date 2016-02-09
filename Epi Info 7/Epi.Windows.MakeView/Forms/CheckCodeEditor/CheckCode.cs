@@ -49,7 +49,7 @@ namespace Epi.Windows.MakeView.Forms
         private TreeNode SelectedDragNode = null;
         private int lastX, lastY;
         private bool iserrcheckcode = false;
-
+      
         #endregion  //Private Data Members
 
         #region Public Data Members
@@ -349,7 +349,19 @@ namespace Epi.Windows.MakeView.Forms
             InitializeComponent();
             DockManager.FastMoveDraw = false;
             DockManager.Style = DockVisualStyle.VS2005;
-
+            Configuration config = Configuration.GetNewInstance();
+            if (config.Settings.IsVariableValidationEnable  == true)
+            {
+                this.enableVariableValidationToolStripMenuItem.Checked = true;
+                enableVariableValidationToolStripMenuItem.CheckState = CheckState.Checked;
+                this.mainForm.EpiInterpreter.Context.IsVariableValidationEnable = true;
+            }
+            else
+            {
+                this.enableVariableValidationToolStripMenuItem.Checked = false;
+                this.mainForm.EpiInterpreter.Context.IsVariableValidationEnable = false;
+                enableVariableValidationToolStripMenuItem.CheckState = CheckState.Unchecked;
+            }
             if (view == null)
             {
                 view = mainForm.CurrentView;
@@ -3637,6 +3649,26 @@ namespace Epi.Windows.MakeView.Forms
         {
             CopyToClipboard(e);
         }
+
+        private void enableVariableValidationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Configuration config = Configuration.GetNewInstance();
+            if (enableVariableValidationToolStripMenuItem.CheckState == CheckState.Checked)
+            {
+                
+                this.mainForm.EpiInterpreter.Context.IsVariableValidationEnable = true;
+                config.Settings.IsVariableValidationEnable = true;
+            }
+            else {
+
+                this.mainForm.EpiInterpreter.Context.IsVariableValidationEnable = false;
+                config.Settings.IsVariableValidationEnable = false;
+            }
+            Configuration.Save(config);
+        }
+ 
+
+     
 
        
 
