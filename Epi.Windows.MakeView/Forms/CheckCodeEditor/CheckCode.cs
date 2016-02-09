@@ -115,7 +115,13 @@ namespace Epi.Windows.MakeView.Forms
             catch (Exception ex)
             {
                 iserrcheckcode = true;
-                this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", ex.Message));
+                if (ex.Message.ToUpper().Contains("WARNING"))
+                {
+                this.AddStatusInformationMessage(string.Format( "\n{0}", ex.Message));
+                }
+                else{
+                    this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", ex.Message));
+                }
             }
             return isValidCommand;
         }

@@ -616,7 +616,7 @@ namespace Epi.Core.EnterInterpreter
                                 
                                 )
                             {
-                                string exceptionMessage = SharedStrings.ERROR_VARIABLE_NOT_DEFINED;
+                                string exceptionMessage = SharedStrings.WARNING_VARIABLE_NOT_DEFINED;
                                 if (name != Constants.VARIABLE_NAME_TEST_TOKEN)
                                     Message += exceptionMessage + " " + name + "\n";
                                 exceptionSource = name;
@@ -627,6 +627,7 @@ namespace Epi.Core.EnterInterpreter
                             Exception exception = new Exception(Message);
                             exception.Source = exceptionSource;
                             throw exception;
+                           
                         }
 
                     }
@@ -641,5 +642,6 @@ namespace Epi.Core.EnterInterpreter
         {
             return new SymbolTable(pName, pParent);
         }
+        
     }
 }
