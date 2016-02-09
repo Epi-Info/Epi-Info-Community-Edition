@@ -150,7 +150,7 @@ namespace EpiDashboard.Controls
             //Colors & Ranges Panel
             lblPanelHdrColorsAndStyles.Content = DashboardSharedStrings.GADGET_MAP_TABBUTTON_DISPLAY;
             tblockColorsSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
-            lblMissingExcluded.Content = DashboardSharedStrings.GADGET_MAP_COLOR_MISSING;
+            //lblMissingExcluded.Content = DashboardSharedStrings.GADGET_MAP_COLOR_MISSING;
             //lblColorRamp.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
             lblColorStart.Content = DashboardSharedStrings.GADGET_MAP_START;
             lblColorEnd.Content = DashboardSharedStrings.GADGET_MAP_END;
@@ -329,7 +329,7 @@ namespace EpiDashboard.Controls
                     (SolidColorBrush) rctColor8.Fill,
                     (SolidColorBrush) rctColor9.Fill,
                     (SolidColorBrush) rctColor10.Fill,
-                    (SolidColorBrush) rctColor0.Fill
+                    (SolidColorBrush) rctMissingColor.Fill
                 };
 
                 int classCount = 0;
@@ -492,7 +492,7 @@ namespace EpiDashboard.Controls
                             numclasses,
                             legTitle.Text);
                     }
-                    else if (radMapServer.IsChecked == true && LayerProvider != null)
+                    else if ((radMapServer.IsChecked == true && LayerProvider != null) || (LayerProvider is ChoroplethServerLayerProvider))
                     {
                         choroplethServerLayerProperties.SetValues(
                             cmbShapeKey.Text,
@@ -996,7 +996,7 @@ namespace EpiDashboard.Controls
                     (SolidColorBrush)rctColor8.Fill, 
                     (SolidColorBrush)rctColor9.Fill, 
                     (SolidColorBrush)rctColor10.Fill,  
-                    (SolidColorBrush)rctColor0.Fill};
+                    (SolidColorBrush)rctMissingColor.Fill};
 
                 int classCount;
 
@@ -1334,7 +1334,7 @@ namespace EpiDashboard.Controls
             {
                 if (LayerProvider.UseCustomColors)
                 {
-                    rctColor0.Fill = new SolidColorBrush(LayerProvider.CustomColorsDictionary.GetWithKey(rctColor0.Name));
+                    rctMissingColor.Fill = new SolidColorBrush(LayerProvider.CustomColorsDictionary.GetWithKey(rctMissingColor.Name));
                     rctColor1.Fill = new SolidColorBrush(LayerProvider.CustomColorsDictionary.GetWithKey(rctColor1.Name));
                 }
                 else
@@ -1593,7 +1593,7 @@ namespace EpiDashboard.Controls
                     (SolidColorBrush)rctColor8.Fill, 
                     (SolidColorBrush)rctColor9.Fill, 
                     (SolidColorBrush)rctColor10.Fill,  
-                    (SolidColorBrush)rctColor0.Fill };
+                    (SolidColorBrush)rctMissingColor.Fill };
 
             int classCount=0;
             if (cmbClasses.SelectedItem!=null)
@@ -2356,7 +2356,7 @@ namespace EpiDashboard.Controls
                         (SolidColorBrush) rctColor8.Fill,
                         (SolidColorBrush) rctColor9.Fill,
                         (SolidColorBrush) rctColor10.Fill,
-                        (SolidColorBrush) rctColor0.Fill
+                        (SolidColorBrush) rctMissingColor.Fill
                     };
 
                     int classCount=0;

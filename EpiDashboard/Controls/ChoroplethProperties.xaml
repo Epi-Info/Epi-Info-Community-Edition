@@ -268,7 +268,7 @@
 
                     <WrapPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical" Margin="0 0 30 0">
-                            <StackPanel Orientation="Horizontal" Margin="0 0 0 0"   Visibility="Collapsed"   >
+                            <!--<StackPanel Orientation="Horizontal" Margin="0 0 0 0"   Visibility="Collapsed"   >
                                 <Label x:Name="lblMissingExcluded">Missing or Excluded Color</Label>
                                 <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
                                 <Rectangle x:Name="rctMissingColor" MouseLeftButtonUp="rctColor_MouseLeftButtonUp" Tag="Reset_Legend" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" Margin="0,0,11,0">
@@ -276,7 +276,7 @@
                                         <Label Content="Missing value color"/>
                                     </Rectangle.ToolTip>
                                 </Rectangle>
-                            </StackPanel>
+                            </StackPanel>-->
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,2" >
                                 <Label x:Name="lblColorStart">Start Color</Label>
                                 <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
@@ -372,7 +372,7 @@
                                 <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" x:Name="quintilesHeaderText" MinWidth="60">Quintiles</TextBlock>
                                 <TextBlock x:Name="tblockLegText" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center">Legend Text</TextBlock>
 
-                                <Rectangle Grid.Row="01" Grid.Column="0" x:Name="rctColor0" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor_MouseLeftButtonUp"/>
+                                <Rectangle Grid.Row="01" Grid.Column="0" x:Name="rctMissingColor" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor_MouseLeftButtonUp"/>
                                 <Rectangle Grid.Row="02" Grid.Column="0" x:Name="rctColor1" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor_MouseLeftButtonUp"/>
                                 <Rectangle Grid.Row="03" Grid.Column="0" x:Name="rctColor2" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor_MouseLeftButtonUp"/>
                                 <Rectangle Grid.Row="04" Grid.Column="0" x:Name="rctColor3" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor_MouseLeftButtonUp"/>
