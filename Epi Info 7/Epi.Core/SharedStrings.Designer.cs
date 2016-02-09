@@ -8665,6 +8665,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Warning--Variable not defined:.
+        /// </summary>
+        public static string WARNING_VARIABLE_NOT_DEFINED {
+            get {
+                return ResourceManager.GetString("WARNING_VARIABLE_NOT_DEFINED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email address must include the @ symbol followed by the domain name as in someone@someplace.com..
         /// </summary>
         public static string WEBENTER_EMAIL_FORMAT {

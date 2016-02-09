@@ -3180,4 +3180,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="WEBSURVEY_PING_SUCCESS" xml:space="preserve">
     <value>Ping was successful.</value>
   </data>
+  <data name="WARNING_VARIABLE_NOT_DEFINED" xml:space="preserve">
+    <value>Warning--Variable not defined:</value>
+  </data>
 </root>
