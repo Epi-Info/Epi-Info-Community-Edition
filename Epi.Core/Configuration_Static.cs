@@ -713,6 +713,7 @@ namespace Epi
 
             row.DefaultDataFormatForRead = 3;
             row.FrameworkTcpPort = 11532;
+            row.IsVariableValidationEnable = false;
             configDataSet.Settings.Rows.Add(row);
 
             // Data Drivers

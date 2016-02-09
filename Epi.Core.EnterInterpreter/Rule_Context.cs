@@ -30,7 +30,7 @@ namespace Epi.Core.EnterInterpreter
         private string _expectedTokens;
         private string _nextToken;
         private string _unexpectedToken;
-
+        private bool _IsVariableValidationEnable;
         private IScope currentScope;
 
         public Rule_DefineVariables_Statement DefineVariablesCheckcode;
@@ -118,6 +118,17 @@ namespace Epi.Core.EnterInterpreter
             }
         }
 
+        public bool IsVariableValidationEnable
+        {
+            get
+            {
+                return _IsVariableValidationEnable;
+            }
+            set
+            {
+                _IsVariableValidationEnable = value;
+            }
+        }
         public string NextToken
         {
             get

@@ -84,6 +84,8 @@ namespace Epi.Windows.MakeView.Forms
             this.mnuEditReplace = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFonts = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFontsSetEditorFont = new System.Windows.Forms.ToolStripMenuItem();
+            this.validationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enableVariableValidationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CheckCodeFontDialog = new System.Windows.Forms.FontDialog();
             this.CommandContextMenu.SuspendLayout();
             this.CheckCodeStatusBar.SuspendLayout();
@@ -385,7 +387,8 @@ namespace Epi.Windows.MakeView.Forms
             this.CheckCodeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFile,
             this.mnuEdit,
-            this.mnuFonts});
+            this.mnuFonts,
+            this.validationToolStripMenuItem});
             resources.ApplyResources(this.CheckCodeMenu, "CheckCodeMenu");
             this.CheckCodeMenu.Name = "CheckCodeMenu";
             // 
@@ -517,6 +520,20 @@ namespace Epi.Windows.MakeView.Forms
             resources.ApplyResources(this.mnuFontsSetEditorFont, "mnuFontsSetEditorFont");
             this.mnuFontsSetEditorFont.Click += new System.EventHandler(this.mnuFontsSetEditorFont_Click);
             // 
+            // validationToolStripMenuItem
+            // 
+            this.validationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enableVariableValidationToolStripMenuItem});
+            this.validationToolStripMenuItem.Name = "validationToolStripMenuItem";
+            resources.ApplyResources(this.validationToolStripMenuItem, "validationToolStripMenuItem");
+            // 
+            // enableVariableValidationToolStripMenuItem
+            // 
+            this.enableVariableValidationToolStripMenuItem.CheckOnClick = true;
+            this.enableVariableValidationToolStripMenuItem.Name = "enableVariableValidationToolStripMenuItem";
+            resources.ApplyResources(this.enableVariableValidationToolStripMenuItem, "enableVariableValidationToolStripMenuItem");
+            this.enableVariableValidationToolStripMenuItem.Click += new System.EventHandler(this.enableVariableValidationToolStripMenuItem_Click);
+            // 
             // CheckCode
             // 
             resources.ApplyResources(this, "$this");
@@ -612,5 +629,7 @@ namespace Epi.Windows.MakeView.Forms
         private System.Windows.Forms.ToolStripMenuItem mnuFileClose;
         private System.Windows.Forms.ToolStripMenuItem mnuFontsSetEditorFont;
         private System.Windows.Forms.FontDialog CheckCodeFontDialog;
+        private System.Windows.Forms.ToolStripMenuItem validationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enableVariableValidationToolStripMenuItem;
     }
 }

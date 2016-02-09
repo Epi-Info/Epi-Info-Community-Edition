@@ -340,8 +340,10 @@ namespace Epi.Core.EnterInterpreter
             EnterRule program = EnterRule.BuildStatments(RuleContext, nonterminalToken);
 
             program.Execute();
-            
-            RuleContext.CheckCommandVariables();
+            if (RuleContext.IsVariableValidationEnable)
+            {
+                RuleContext.CheckCommandVariables();
+            }
         }
 
         private void TokenErrorEvent(LALRParser parser, TokenErrorEventArgs args)
