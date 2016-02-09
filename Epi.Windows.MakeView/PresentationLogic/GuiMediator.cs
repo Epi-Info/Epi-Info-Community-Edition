@@ -1996,7 +1996,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
             {
                 if (control is IFieldControl)
                 {
-                    bool isInputField = control is PairedLabel == false && ((IFieldControl)control).Field.FieldType != MetaFieldType.Group;
+                    bool isInputField = control is PairedLabel == false;// ((IFieldControl)control).Field.FieldType != MetaFieldType.Group;
                     bool isLabelField = ((IFieldControl)control).Field.FieldType == MetaFieldType.LabelTitle;
 
                     if (isInputField || isLabelField)
