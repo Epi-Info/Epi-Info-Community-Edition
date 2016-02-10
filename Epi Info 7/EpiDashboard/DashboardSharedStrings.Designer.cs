@@ -2724,6 +2724,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide/Show Legend.
+        /// </summary>
+        public static string GADGET_HIDE_SHOW_LEGEND {
+            get {
+                return ResourceManager.GetString("GADGET_HIDE_SHOW_LEGEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide or show the map legend/key of the layers on the map..
+        /// </summary>
+        public static string GADGET_HIDESHOW_DESCRP {
+            get {
+                return ResourceManager.GetString("GADGET_HIDESHOW_DESCRP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to High value:.
         /// </summary>
         public static string GADGET_HIGH_VALUE {
@@ -3440,6 +3458,15 @@ namespace EpiDashboard {
         public static string GADGET_MAP_ZONE_UNITS {
             get {
                 return ResourceManager.GetString("GADGET_MAP_ZONE_UNITS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map Legend.
+        /// </summary>
+        public static string GADGET_MAPLEGEND_HEADERTITLE {
+            get {
+                return ResourceManager.GetString("GADGET_MAPLEGEND_HEADERTITLE", resourceCulture);
             }
         }
         
