@@ -124,6 +124,9 @@ namespace EpiDashboard.Mapping
 
             tooltipTimeLapseHeader.Content = DashboardSharedStrings.MENU_TIME_LAPSE;
             tooltipTimeLapse.Text = DashboardSharedStrings.MENU_TIME_LAPSE_MAP;
+            tooltipLegendHeader.Content = DashboardSharedStrings.GADGET_HIDE_SHOW_LEGEND;
+            tooltipLegend.Text = DashboardSharedStrings.GADGET_HIDESHOW_DESCRP;
+            legendTitleTextBlock.Text = DashboardSharedStrings.GADGET_MAPLEGEND_HEADERTITLE;
 
             #endregion
         }
@@ -222,7 +225,7 @@ namespace EpiDashboard.Mapping
                 currentTimeVariable = null;
                 TimeVariableSet(null);
             }
-            
+
             grdTimeLapse.Visibility = Visibility.Collapsed;
             stkTimeLapse.Visibility = Visibility.Collapsed;
             chrtTimeLapse.Visibility = Visibility.Collapsed;
@@ -243,7 +246,7 @@ namespace EpiDashboard.Mapping
             {
                 Canvas.SetTop(dataFilteringControl, (e.NewSize.Height / 2.0) - (dataFilteringControl.ActualHeight / 2.0));
             }
-            
+
             if (layerList != null)
             {
                 Canvas.SetLeft(layerList, (e.NewSize.Width / 2.0) - (layerList.ActualWidth / 2.0));
@@ -522,7 +525,7 @@ namespace EpiDashboard.Mapping
             System.Drawing.Point p = new System.Drawing.Point((int)scaleLocation.X, (int)scaleLocation.Y);
             System.Drawing.Size s = new System.Drawing.Size((int)ScaleLine1.RenderSize.Width, (int)ScaleLine1.RenderSize.Height);
 
-            Rectangle controlRectangle = new Rectangle(p, s); 
+            Rectangle controlRectangle = new Rectangle(p, s);
 
             Bitmap controlBitmap = GetControlBitmap(controlRectangle, p);
             System.Drawing.Color domColor = GetDominantColor(controlBitmap);
@@ -869,7 +872,7 @@ namespace EpiDashboard.Mapping
                         }
                     }
                     ProjectFilepath = dashboardHelper.Database.DataSource;
-                }             
+                }
                 return dashboardHelper;
             }
             else
@@ -1092,21 +1095,21 @@ namespace EpiDashboard.Mapping
                 {
                     layerList.AddListItem((ILayerProperties)sender, 0);
                 }
-                
+
                 if (((ILayerProperties)sender).LegendStackPanel != null)
                 {
                     if (!stkLegends.Children.Contains(legendTitleTextBlock))
                     {
                         stkLegends.Children.Add(legendTitleTextBlock);
                     }
-                    
+
                     if (!stkLegends.Children.Contains(((ILayerProperties)sender).LegendStackPanel))
                     {
                         stkLegends.Children.Add(((ILayerProperties)sender).LegendStackPanel);
                     }
                 }
             }
-            
+
             if (MapLoaded != null)
             {
                 MapLoaded(this, layerList.ClusterLayers.Count > 0);
@@ -1167,7 +1170,7 @@ namespace EpiDashboard.Mapping
                     iconTimeLapse.Visibility = Visibility.Collapsed;
                 }
                 if (layerList.Layers.Count==0)
-                stkLegends.Children.Clear();
+                    stkLegends.Children.Clear();
             }
         }
 
@@ -1179,7 +1182,7 @@ namespace EpiDashboard.Mapping
             anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             layerList.BeginAnimation(Canvas.BottomProperty, anim);
-             grdScale.Visibility = Visibility.Visible;    
+            grdScale.Visibility = Visibility.Visible;
         }
 
         void layerList_MouseEnter(object sender, MouseEventArgs e)
@@ -1203,7 +1206,7 @@ namespace EpiDashboard.Mapping
             anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             layerList.BeginAnimation(Canvas.BottomProperty, anim);
-            
+
             if (layerList.HasDataLayer)
             {
                 iconLegend.Visibility = System.Windows.Visibility.Visible;
@@ -1221,7 +1224,7 @@ namespace EpiDashboard.Mapping
             {
                 iconTimeLapse.Visibility = System.Windows.Visibility.Collapsed;
             }
-            
+
             if (layerList.ClusterLayers.Count == 0)
             {
                 iconTimeLapse.Visibility = Visibility.Collapsed;
@@ -1287,7 +1290,7 @@ namespace EpiDashboard.Mapping
             obj.Arrange(new Rect(size));
 
             RenderTargetBitmap bmp = new RenderTargetBitmap(
-                (int)obj.ActualWidth, 
+                (int)obj.ActualWidth,
                 (int)obj.ActualHeight, 96, 96, PixelFormats.Pbgra32
                 );
 
@@ -1324,7 +1327,7 @@ namespace EpiDashboard.Mapping
             {
                 myMap.MouseMove -= new MouseEventHandler(myMap_MouseMove);
             }
-            
+
             this.myMap = null;
             this.worker = null;
         }
@@ -1339,7 +1342,7 @@ namespace EpiDashboard.Mapping
                 {
                     myMap.Focus();
                 }
-                
+
                 MapPoint wmPoint = myMap.ScreenToMap(e.GetPosition(myMap));
 
                 if (MouseCoordinatesChanged != null)
@@ -1426,7 +1429,7 @@ namespace EpiDashboard.Mapping
                 grdLapse.Visibility = Visibility.Visible;
                 grdTimeLapse.Visibility = Visibility.Visible;
                 stkTimeLapse.Visibility = Visibility.Visible;
-                
+
                 if (layerList.ClusterLayers.Count == 1)
                 {
                     chrtTimeLapse.Visibility = Visibility.Visible;
@@ -1496,11 +1499,11 @@ namespace EpiDashboard.Mapping
             {
                 elementStack.Push(element);
             }
-            
+
             while (elementStack.Count > 0)
             {
                 System.Xml.XmlElement element = elementStack.Pop();
-                
+
                 if (element.Name.Equals("referenceLayer"))
                 {
                     ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap });
@@ -1508,7 +1511,7 @@ namespace EpiDashboard.Mapping
                     layerProperties.CreateFromXml(element);
                     layerList.AddListItem(layerProperties, 0);
                 }
-                
+
                 if (element.Name.Equals("graphicsLayer"))
                 {
                     ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap, new MapPoint(double.Parse(element.Attributes["locationX"].Value), double.Parse(element.Attributes["locationY"].Value)) });
@@ -1516,7 +1519,7 @@ namespace EpiDashboard.Mapping
                     layerProperties.CreateFromXml(element);
                     layerList.AddListItem(layerProperties, 0);
                 }
-                
+
                 if (element.Name.Equals("dataLayer"))
                 {
                     DashboardHelper helper = new DashboardHelper();
@@ -1601,7 +1604,7 @@ namespace EpiDashboard.Mapping
                     ToggleBlank();
                 }
             }
-            
+
             SetBackgroundImageType();
         }
 
@@ -1773,7 +1776,7 @@ namespace EpiDashboard.Mapping
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
-            
+
             pointofinterestproperties = new EpiDashboard.Controls.PointofInterestProperties(this, myMap, (PointLayerProperties)layerProperties);
             pointofinterestproperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
 
@@ -1908,7 +1911,7 @@ namespace EpiDashboard.Mapping
             popup.Parent = LayoutRoot;
             EpiDashboard.Controls.ChoroplethProperties properties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
             properties.choroplethShapeLayerProperties = (ChoroplethShapeLayerProperties)layerProperties;
-            
+
             if (ResizedWidth != 0 & ResizedHeight != 0)
             {
                 double i_StandardHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
@@ -1919,7 +1922,7 @@ namespace EpiDashboard.Mapping
                 f_WidthRatio = (float)((float)ResizedWidth / (float)i_StandardWidth);
 
                 properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
-                properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;                                                                            
+                properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
 
             }
             else
@@ -2015,7 +2018,7 @@ namespace EpiDashboard.Mapping
 
                 choroplethproperties.panelBoundaries.IsEnabled = true;
 
-              
+
 
                 choroplethproperties.legTitle.Text = choroplethLayerProperties.Provider.LegendText;
 
@@ -2029,7 +2032,7 @@ namespace EpiDashboard.Mapping
                 if (choroplethLayerProperties.ClassAttributeList != null)
                 {
                     choroplethproperties.SetClassAttributes(choroplethLayerProperties.ClassAttributeList);
-                }                
+                }
                 choroplethLayerProperties.FlagRunEdit = true;
 
                 if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > choroplethproperties.Width)
@@ -2043,7 +2046,7 @@ namespace EpiDashboard.Mapping
                 }
 
                 choroplethproperties.Cancelled += new EventHandler(properties_Cancelled);
-                choroplethproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);               
+                choroplethproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
             }
             catch(Exception)
             {
@@ -2061,13 +2064,13 @@ namespace EpiDashboard.Mapping
                 choroplethproperties.txtShapePath.Text = choroplethLayerProperties.boundryFilePath;
                 choroplethproperties.shapeAttributes = choroplethLayerProperties.shapeAttributes;
                 choroplethproperties.cmbShapeKey.Items.Clear();
-                
+
                 if (choroplethproperties.shapeAttributes == null)
                 {
                     object[] shapeFileProperties = choroplethLayerProperties.Provider.Load(choroplethLayerProperties.boundryFilePath);
                     choroplethproperties.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
                 }
-                
+
                 if (choroplethproperties.shapeAttributes != null)
                 {
                     foreach (string key in choroplethproperties.shapeAttributes.Keys)
@@ -2077,11 +2080,11 @@ namespace EpiDashboard.Mapping
                 }
             }
         }
-        
+
         public void GenerateShapeFileChoropleth(ChoroplethServerLayerProperties choroplethLayerProperties)
         {
             if (string.IsNullOrEmpty(choroplethLayerProperties.boundryFilePath) == false)
-            {                
+            {
                 choroplethproperties.txtMapSeverpath.Text = choroplethLayerProperties.boundryFilePath.Substring(0,choroplethLayerProperties.boundryFilePath.LastIndexOf("/"));
                 choroplethproperties.shapeAttributes = choroplethLayerProperties.curfeatureAttributes;
                 choroplethproperties.cmbShapeKey.Items.Clear();
@@ -2089,13 +2092,13 @@ namespace EpiDashboard.Mapping
                 choroplethproperties.cbxmapfeature.Text = choroplethLayerProperties.cbxMapFeatureText;
 
                 if (choroplethproperties.shapeAttributes == null)
-                {                   
-                    object[] shapeFileProperties = choroplethLayerProperties.Provider.Load(choroplethLayerProperties.boundryFilePath);                   
+                {
+                    object[] shapeFileProperties = choroplethLayerProperties.Provider.Load(choroplethLayerProperties.boundryFilePath);
 
                     if (shapeFileProperties[1] is FeatureLayer)
                     {
-                        FeatureLayer featureLayer = (FeatureLayer)shapeFileProperties[1];                     
-                        
+                        FeatureLayer featureLayer = (FeatureLayer)shapeFileProperties[1];
+
                         if(featureLayer.Graphics.Count > 0)
                         {
                             choroplethproperties.shapeAttributes = featureLayer.Graphics[0].Attributes;
@@ -2106,9 +2109,9 @@ namespace EpiDashboard.Mapping
                     {
                         choroplethproperties.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
                     }
-                   
-                    choroplethproperties.cbxmapfeature.Text = choroplethLayerProperties.cbxMapFeatureText;                  
-                }              
+
+                    choroplethproperties.cbxmapfeature.Text = choroplethLayerProperties.cbxMapFeatureText;
+                }
 
                 if (choroplethproperties.shapeAttributes != null)
                 {
@@ -2118,9 +2121,9 @@ namespace EpiDashboard.Mapping
                     }
                 }
                 choroplethproperties.ShapeKey = choroplethLayerProperties.cbxShapeKey.Text;
-               
+
             }
-            
+
             //choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
             //choroplethproperties.choroplethServerLayerProperties = choroplethLayerProperties;
             //choroplethproperties.choroplethServerLayerProvider = choroplethLayerProperties.provider;
@@ -2140,13 +2143,13 @@ namespace EpiDashboard.Mapping
             //{ 
             //    choroplethproperties.OnQuintileOptionChanged(); 
             //}
-            
+
             //choroplethproperties.ClearonShapeFile();
 
             //choroplethproperties.radShapeFile.IsEnabled = false;
             //choroplethproperties.radKML.IsEnabled = false;
             //choroplethproperties.panelBoundaries.IsEnabled = true;
-            
+
             //if (choroplethLayerProperties.datafilters != null)
             //{
             //    choroplethproperties.datafilters = choroplethLayerProperties.datafilters;
@@ -2183,7 +2186,7 @@ namespace EpiDashboard.Mapping
             //    {
             //        string lastchar = choroplethLayerProperties.boundryFilePath.Substring(choroplethLayerProperties.boundryFilePath.Length - 1, 1);
             //        string lastonebeforechar = choroplethLayerProperties.boundryFilePath.Substring(choroplethLayerProperties.boundryFilePath.Length - 2, 1);
-                    
+
             //        if (char.IsNumber(lastchar, 0) == true && char.IsNumber(lastonebeforechar, 0) == false)
             //        {
             //            choroplethLayerProperties.txtMapserverText = choroplethLayerProperties.boundryFilePath.Substring(0, choroplethLayerProperties.boundryFilePath.Length - 2);
@@ -2256,12 +2259,12 @@ namespace EpiDashboard.Mapping
             {
                 choroplethproperties.radKML.IsChecked = true;
                 choroplethproperties.txtKMLpath.Text = choroplethLayerProperties.boundryFilePath;
-                
+
                 if (choroplethproperties.choroplethKmlLayerProperties.curfeatureAttributes != null)
                 {
                     foreach (string key in choroplethproperties.choroplethKmlLayerProperties.curfeatureAttributes.Keys)
-                    { 
-                        choroplethproperties.cmbShapeKey.Items.Add(key); 
+                    {
+                        choroplethproperties.cmbShapeKey.Items.Add(key);
                     }
                 }
             }
@@ -2555,7 +2558,7 @@ namespace EpiDashboard.Mapping
             dotdensityproperties.SetDashboardHelper(dashboardHelper);
             dotdensityproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource; // ProjectFilepath;//Database.DbName;
             dotdensityproperties.panelBoundaries.IsEnabled = true;
-            
+
             if (densitylayerprop.datafilters != null)
                 dotdensityproperties.dataFilters = densitylayerprop.datafilters;
             else
@@ -2566,7 +2569,7 @@ namespace EpiDashboard.Mapping
             dotdensityproperties.panelFilters.Children.Add(dotdensityproperties.rowFilterControl);
             dotdensityproperties.kmllayerprop = densitylayerprop;
             dotdensityproperties.KMLprovider = dotdensityproperties.kmllayerprop.provider;
-            
+
             if (string.IsNullOrEmpty(densitylayerprop.shapeFilePath) == false)
             {
                 dotdensityproperties.radKML.IsChecked = true;
@@ -2647,7 +2650,7 @@ namespace EpiDashboard.Mapping
         {
             if (myMap != null)
             {
-                
+
                 if (myMap.Layers.Count > 0)
                 {
                     if (myMap.Layers[0] is TileLayer)
