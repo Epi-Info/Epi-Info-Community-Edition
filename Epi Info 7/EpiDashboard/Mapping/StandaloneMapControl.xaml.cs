@@ -1577,8 +1577,13 @@ namespace EpiDashboard.Mapping
                             }
                         }
                     }
-
-                    ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap, helper, this });
+                    ILayerProperties layerProperties=null;
+                    if(element.Attributes["layerType"].Value.ToString()=="EpiDashboard.Mapping.ChoroplethLayerProperties")
+                    {
+                        layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType("EpiDashboard.Mapping.ChoroplethShapeLayerProperties"), new object[] { myMap, helper, this });
+                    }
+                    else
+                     layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap, helper, this });
                     layerProperties.MakeReadOnly();
                     layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
                     layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);

@@ -700,7 +700,8 @@ namespace EpiDashboard.Mapping
 
             if(valueList.Count == 0)
             {
-                throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
+                MessageBox.Show(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
+               // throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
             }
 
             valueList.Sort(); 
