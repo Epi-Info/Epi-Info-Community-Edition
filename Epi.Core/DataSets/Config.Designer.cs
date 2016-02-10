@@ -11506,7 +11506,8 @@ namespace Epi.DataSets {
                         return ((bool)(this[this.tableSettings.IsVariableValidationEnableColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'IsVariableValidationEnable\' in table \'Settings\' is DBNull.", e);
+                        //throw new global::System.Data.StrongTypingException("The value for column \'IsVariableValidationEnable\' in table \'Settings\' is DBNull.", e);
+                        return false;
                     }
                 }
                 set {
