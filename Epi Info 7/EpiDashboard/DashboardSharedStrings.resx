@@ -2074,4 +2074,13 @@ of records or select fewer fields for the group.</value>
   <data name="DASHBOARD_MAP_MIN" xml:space="preserve">
     <value>Min:</value>
   </data>
+  <data name="GADGET_HIDESHOW_DESCRP" xml:space="preserve">
+    <value>Hide or show the map legend/key of the layers on the map.</value>
+  </data>
+  <data name="GADGET_HIDE_SHOW_LEGEND" xml:space="preserve">
+    <value>Hide/Show Legend</value>
+  </data>
+  <data name="GADGET_MAPLEGEND_HEADERTITLE" xml:space="preserve">
+    <value>Map Legend</value>
+  </data>
 </root>
