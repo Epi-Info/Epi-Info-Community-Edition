@@ -278,7 +278,7 @@ namespace EpiDashboard.Mapping
                 string xmlString = "<shapeFile>" + boundryFilePath + "</shapeFile>" + Environment.NewLine;
 
                 XmlAttribute type = doc.CreateAttribute("layerType");
-                type.Value = "EpiDashboard.Mapping.ChoroplethShapeLayerProperties";
+                type.Value = "EpiDashboard.Mapping.ChoroplethLayerProperties";
 
                 return ChoroplethLayerPropertiesUserControlBase.Serialize(
                     doc,
