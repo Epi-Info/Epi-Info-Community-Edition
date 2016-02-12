@@ -93,6 +93,17 @@ namespace Epi.Windows.MakeView.Dialogs
 
         private void buttonPrint_Click_1(object sender, EventArgs e)
         {
+            if (this.selectPages_All.Checked)
+            {
+                _pageNumberStart = 1;
+                _pageNumberEnd = mediator.ProjectExplorer.currentPage.view.Pages.Count();
+
+            }
+            else
+            {
+                _pageNumberStart = Convert.ToInt32(pageStart.Text);
+                _pageNumberEnd = Convert.ToInt32(pageEnd.Text);
+            }
             mediator.Print(_pageNumberStart, _pageNumberEnd);
         }
 
