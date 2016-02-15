@@ -183,7 +183,12 @@ namespace Epi.Windows.Analysis.Dialogs
                     {
                         foreach(Epi.Fields.IField field in project.Views[RelatedTable].Fields)
                         {
-                            relatedFields.Add(field.Name);
+                            if (!(field is Epi.Fields.LabelField) & !(field is Epi.Fields.CommandButtonField) & !(field is Epi.Fields.PhoneNumberField)//EI-705
+                                & !(field is Epi.Fields.MultilineTextField) & !(field is Epi.Fields.GroupField) & !(field is Epi.Fields.CheckBoxField)
+                                & !(field is Epi.Fields.ImageField) & !(field is Epi.Fields.OptionField) & !(field is Epi.Fields.GridField)
+                                & !(field is Epi.Fields.MirrorField))
+
+                                    relatedFields.Add(field.Name);
                         }
                     }
                     else
@@ -192,10 +197,16 @@ namespace Epi.Windows.Analysis.Dialogs
                     }
                 }
                 if (this.EpiInterpreter.Context.DataSet != null)
-                {
+                {                  
+                    View CurrentView = this.EpiInterpreter.Context.CurrentProject.GetViewByName(this.EpiInterpreter.Context.CurrentRead.Identifier);//EI-705
                     foreach (DataColumn column in this.EpiInterpreter.Context.DataSet.Tables["Output"].Columns)
                     {
-                        currentFields.Add(column.ColumnName);
+                        if ((CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.LabelField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.CommandButtonField)) & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.PhoneNumberField))
+                               & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.MultilineTextField)) & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.GroupField)) &(CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.CheckBoxField))
+                               & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.ImageField)) & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.OptionField)) & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.GridField))
+                               & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.MirrorField)))
+
+                           currentFields.Add(column.ColumnName);
                     }
                 }
                 currentFields.Sort();
