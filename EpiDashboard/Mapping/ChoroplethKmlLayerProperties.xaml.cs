@@ -410,9 +410,10 @@ namespace EpiDashboard.Mapping
                         rctLowColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
                     }
                 }
+                ChoroplethProperties_RenderMap();
             }
 
-            ChoroplethProperties_RenderMap();
+            
         }
 
         private void ChoroplethProperties_RenderMap()
