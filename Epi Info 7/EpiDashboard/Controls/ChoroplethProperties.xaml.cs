@@ -556,9 +556,18 @@ namespace EpiDashboard.Controls
 
             foreach (string id in layerAddednew)
             {
-                ESRI.ArcGIS.Client.GraphicsLayer graphicsLayer = _myMap.Layers[id] as ESRI.ArcGIS.Client.GraphicsLayer;
-                if (graphicsLayer != null)
-                    _myMap.Layers.Remove(graphicsLayer);
+                if (choroplethKmlLayerProperties != null)
+                {
+                    ESRI.ArcGIS.Client.Toolkit.DataSources.KmlLayer shapeLayer = _myMap.Layers[id] as ESRI.ArcGIS.Client.Toolkit.DataSources.KmlLayer;
+                    if (shapeLayer != null)
+                        _myMap.Layers.Remove(shapeLayer);
+                }
+                else
+                {
+                    ESRI.ArcGIS.Client.GraphicsLayer graphicsLayer = _myMap.Layers[id] as ESRI.ArcGIS.Client.GraphicsLayer;
+                    if (graphicsLayer != null)
+                        _myMap.Layers.Remove(graphicsLayer);
+                }
             }
             if (choroplethServerLayerProperties != null && shapeAttributes != null & !string.IsNullOrEmpty(ShapeKey))
             {
@@ -1814,6 +1823,7 @@ namespace EpiDashboard.Controls
                 choroplethKmlLayerProperties.boundryFilePath = KMLMapServerName;
                 choroplethKmlLayerProperties.Provider = choroplethKmlLayerProvider;
                 choroplethKmlLayerProperties.Provider.FeatureLoaded += new FeatureLoadedHandler(choroplethKmlLayerProperties.provider_FeatureLoaded);
+                choroplethKmlLayerProperties.Provider.LayerId = choroplethKmlLayerProvider.LayerId;
                 
                 if (this.DashboardHelper != null)
                 {
