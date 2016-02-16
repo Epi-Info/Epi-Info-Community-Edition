@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
-        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEUAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAEcAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wAgAAF1AYQBjwH/
         AWYBgAGPAf8BYAF5AYcB/wFXAW4BewH/AU4BYgFvAf8BRAFWAWEB/wE5AUgBUgH/AS4BOgFDAf8BJQEu
         ATUB/wEbASIBKQH/ARQBGQEeAf8BDgESARYB/wEOARMBGAH/DAABdQGEAY8B/wFsAXoBhQH/AWABbQF3
@@ -710,7 +710,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="lblAvailableVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 7</value>
+    <value>12, 63</value>
   </data>
   <data name="lblAvailableVar.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 16</value>
@@ -741,7 +741,7 @@
     <value>True</value>
   </data>
   <data name="lbxAvailableVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 24</value>
+    <value>12, 80</value>
   </data>
   <data name="lbxAvailableVar.Size" type="System.Drawing.Size, System.Drawing">
     <value>488, 160</value>
@@ -766,10 +766,10 @@
     <value>System</value>
   </data>
   <data name="rdbRemoveSort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 64</value>
+    <value>313, 16</value>
   </data>
   <data name="rdbRemoveSort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 24</value>
+    <value>169, 24</value>
   </data>
   <data name="rdbRemoveSort.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -793,7 +793,7 @@
     <value>System</value>
   </data>
   <data name="rdbDescending.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
+    <value>171, 16</value>
   </data>
   <data name="rdbDescending.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 24</value>
@@ -823,7 +823,7 @@
     <value>8, 16</value>
   </data>
   <data name="rdbAscending.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 24</value>
+    <value>157, 24</value>
   </data>
   <data name="rdbAscending.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -847,10 +847,10 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="gbxSortOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 216</value>
+    <value>12, 12</value>
   </data>
   <data name="gbxSortOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 96</value>
+    <value>488, 48</value>
   </data>
   <data name="gbxSortOrder.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -877,10 +877,10 @@
     <value>True</value>
   </data>
   <data name="lbxSortVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 217</value>
+    <value>12, 273</value>
   </data>
   <data name="lbxSortVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>274, 95</value>
+    <value>488, 95</value>
   </data>
   <data name="lbxSortVar.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -901,7 +901,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="lblSortVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 191</value>
+    <value>16, 247</value>
   </data>
   <data name="lblSortVar.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 18</value>
@@ -928,7 +928,7 @@
     <value>System</value>
   </data>
   <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>406, 318</value>
+    <value>410, 374</value>
   </data>
   <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -955,7 +955,7 @@
     <value>System</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 318</value>
+    <value>122, 374</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -985,7 +985,7 @@
     <value>System</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 318</value>
+    <value>26, 374</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -1012,7 +1012,7 @@
     <value>System</value>
   </data>
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>214, 318</value>
+    <value>218, 374</value>
   </data>
   <data name="btnClear.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -1042,7 +1042,7 @@
     <value>System</value>
   </data>
   <data name="btnSaveOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>310, 318</value>
+    <value>314, 374</value>
   </data>
   <data name="btnSaveOnly.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -1072,7 +1072,7 @@
     <value>5, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>508, 349</value>
+    <value>512, 407</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Sort</value>
@@ -1087,6 +1087,6 @@
     <value>SortDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5866.24884, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5890.17102, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
