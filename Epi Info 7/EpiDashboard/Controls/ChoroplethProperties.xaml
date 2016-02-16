@@ -372,7 +372,7 @@
                                 <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" x:Name="quintilesHeaderText" MinWidth="60">Quintiles</TextBlock>
                                 <TextBlock x:Name="tblockLegText" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center">Legend Text</TextBlock>
 
-                                <Rectangle Grid.Row="01" Grid.Column="0" x:Name="rctMissingColor" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor_MouseLeftButtonUp"/>
+                                <Rectangle Grid.Row="01" Grid.Column="0" x:Name="rctMissingColor" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="LightGray" MouseLeftButtonUp="rctColor_MouseLeftButtonUp"/>
                                 <Rectangle Grid.Row="02" Grid.Column="0" x:Name="rctColor1" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor_MouseLeftButtonUp"/>
                                 <Rectangle Grid.Row="03" Grid.Column="0" x:Name="rctColor2" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor_MouseLeftButtonUp"/>
                                 <Rectangle Grid.Row="04" Grid.Column="0" x:Name="rctColor3" HorizontalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctColor_MouseLeftButtonUp"/>
