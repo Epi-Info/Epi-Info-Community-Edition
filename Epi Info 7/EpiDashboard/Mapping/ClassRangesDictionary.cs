@@ -8,19 +8,15 @@ namespace EpiDashboard.Mapping
 {
     public class ClassRangeDictionary
     {
-        private Dictionary<string, string> _dictionary;
         private List<ClassLimits> _rangeValues;
 
         public ClassRangeDictionary()
         {
-            _dictionary = new Dictionary<string, string>();
+            RangeDictionary = new Dictionary<string, string>();
         }
 
-        public Dictionary<string, string> RangeDictionary
-        {
-            get { return _dictionary; }
-        }
-
+        public Dictionary<string, string> RangeDictionary { get; set; }
+        
         public List<double> RangeStarts
         {
             get 
@@ -51,7 +47,7 @@ namespace EpiDashboard.Mapping
 
         internal int PropertyPanelMaxClassCount
         {
-            get { return _dictionary.Count / 2; }
+            get { return RangeDictionary.Count / 2; }
         }
 
         public List<ClassLimits> GetLimitValues()
@@ -84,20 +80,20 @@ namespace EpiDashboard.Mapping
 
         public string GetAt(string key)
         {
-            if (_dictionary.ContainsKey(key) == false)
+            if (RangeDictionary.ContainsKey(key) == false)
             {
-                _dictionary.Add(key, "");
+                RangeDictionary.Add(key, "");
             }
 
-            return _dictionary[key];
+            return RangeDictionary[key];
         }
 
         public string GetAt(int pos)
         {
 
-            if (_dictionary.ContainsKey(ChoroplethConstants.legendTextControlPrefix + pos))
+            if (RangeDictionary.ContainsKey(ChoroplethConstants.legendTextControlPrefix + pos))
             {
-                return _dictionary[ChoroplethConstants.legendTextControlPrefix + pos];
+                return RangeDictionary[ChoroplethConstants.legendTextControlPrefix + pos];
             }
             else
             {
@@ -107,21 +103,21 @@ namespace EpiDashboard.Mapping
 
         public void Add(string key, string value)
         {
-            if (_dictionary.ContainsKey(key))
+            if (RangeDictionary.ContainsKey(key))
             {
-                _dictionary[key] = value;
+                RangeDictionary[key] = value;
             }
             else
             {
-                _dictionary.Add(key, value);
+                RangeDictionary.Add(key, value);
             }
         }
 
         internal int GetClassLevelWithKey(string name)
         {
             int result = -1;
-            
-            if (_dictionary.ContainsKey(name) == false)
+
+            if (RangeDictionary.ContainsKey(name) == false)
             {
                 return result;
             }
@@ -137,7 +133,7 @@ namespace EpiDashboard.Mapping
         {
             ClassLimitType limitType = ClassLimitType.Indeterminate;
 
-            if (_dictionary.ContainsKey(name) == false)
+            if (RangeDictionary.ContainsKey(name) == false)
             {
                 return limitType;
             }
@@ -158,20 +154,20 @@ namespace EpiDashboard.Mapping
             {
                 if (classLimits.Start != float.NaN)
                 {
-                    _dictionary[classLimits.Key_Start] = string.Format("{0:N2}", classLimits.Start); 
+                    RangeDictionary[classLimits.Key_Start] = string.Format("{0:N2}", classLimits.Start); 
                 }
                 else
                 {
-                    _dictionary[classLimits.Key_Start] = string.Empty;
+                    RangeDictionary[classLimits.Key_Start] = string.Empty;
                 }
 
                 if (classLimits.End != float.NaN)
                 {
-                    _dictionary[classLimits.Key_End] = string.Format("{0:N2}", classLimits.End); 
+                    RangeDictionary[classLimits.Key_End] = string.Format("{0:N2}", classLimits.End); 
                 }
                 else
                 {
-                    _dictionary[classLimits.Key_End] = string.Empty;
+                    RangeDictionary[classLimits.Key_End] = string.Empty;
                 }
             }
         }
@@ -181,14 +177,14 @@ namespace EpiDashboard.Mapping
             int classOrdinal = 1;
             string limitType = "rampStart";
             string compound = string.Empty;
-            _dictionary.Clear();
+            RangeDictionary.Clear();
 
             foreach (string value in rangeValues)
             {
                 if (value == null) break;
                 
                 compound = limitType + string.Format("{0:D2}", classOrdinal);
-                _dictionary.Add(compound, value);
+                RangeDictionary.Add(compound, value);
 
                 if (limitType == "rampStart")
                 {

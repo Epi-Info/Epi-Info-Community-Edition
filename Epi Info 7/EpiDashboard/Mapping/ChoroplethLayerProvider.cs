@@ -747,7 +747,7 @@ namespace EpiDashboard.Mapping
                 }
                 else
                 {
-                    _thematicItem.RangeStarts = new List<double>() { classCount };
+                    //_thematicItem.RangeStarts = new List<double>() { classCount };
                     PopulateRangeValues();
                 }
 

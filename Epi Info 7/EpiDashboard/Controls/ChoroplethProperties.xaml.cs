@@ -1016,7 +1016,7 @@ namespace EpiDashboard.Controls
 
                 if (LayerProvider != null)
                 {
-                    LayerProvider.RangeStarts_FromControls = GetRangeValues_FromControls(LayerProvider.RangeCount);
+                    LayerProvider.RangeStarts_FromControls = GetRangeValues_FromControls(classCount);
                     LayerProvider.ListLegendText = ListLegendText;
                     LayerProvider.Opacity = this.Opacity;
 
