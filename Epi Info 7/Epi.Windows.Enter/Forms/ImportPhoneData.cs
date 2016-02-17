@@ -43,6 +43,7 @@ namespace Epi.Enter.Forms
         private bool importFinished = false;
         private Dictionary<string, List<PhoneFieldData>> _surveyResponses;
         private Dictionary<string, string> surveyGUIDs;
+       // private List<string> RelatedViews;
         #endregion // Private Members
 
         #region Delegates
@@ -135,6 +136,7 @@ namespace Epi.Enter.Forms
             rdbUpdateAndAppend.Checked = true;
 
             //this.cmbImportType.Enabled = false;
+          //  RelatedViews = new List<string>();
         }
 
         /// <summary>
@@ -1347,6 +1349,7 @@ namespace Epi.Enter.Forms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+
             if (!string.IsNullOrEmpty(txtPhoneDataFile.Text))
             {
                 progressBar.Style = ProgressBarStyle.Marquee;
@@ -1384,7 +1387,21 @@ namespace Epi.Enter.Forms
                 {
                     importWorker.CancelAsync();
                 }
+                ////////Related forms 
 
+               //var AllViewNames = destinationProject.GetViewNames();
+               // var AllViews = destinationProject.views;
+               //var RootView = this.viewsList.SelectedItem;
+             
+               //this.RelatedViews.Add(((Epi.View)(RootView)).Name);
+               // foreach(View view in AllViews)
+               // {
+               //     if (view.Name != RootView && view.IsRelatedView && (view.ParentView.Name == ((Epi.View)(RootView)).Name || RelatedViews.Contains(view.ParentView.Name)))
+               //     {
+               //         this.RelatedViews.Add(view.Name.ToString());
+               //     }
+               // }
+                ////////////////////////
                 this.Cursor = Cursors.WaitCursor;
 
                 importWorker = new BackgroundWorker();
@@ -1420,10 +1437,14 @@ namespace Epi.Enter.Forms
         {
             lock (syncLock)
             {
+                //foreach (var ViewName in this.RelatedViews)
+                //{
+              //  View View = destinationProject.GetViewByName(ViewName);
                 string syncFilePath = (string)e.Argument;
                 stopwatch = new Stopwatch();
                 stopwatch.Start();
-                Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + destinationView.TableName + "]");
+               Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + destinationView.TableName + "]");
+                //Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + ViewName + "]");
                 IDataReader destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
                 List<string> destinationGUIDList = new List<string>();
                 while (destReader.Read())
@@ -1432,11 +1453,14 @@ namespace Epi.Enter.Forms
                 }
                 destReader.Close();
                 ParseXML(syncFilePath);
-                ProcessBaseTable(destinationView, destinationGUIDList);
-                ProcessPages(destinationView, destinationGUIDList, syncFilePath);
+                 ProcessBaseTable(destinationView, destinationGUIDList);
+                 ProcessPages(destinationView, destinationGUIDList, syncFilePath);
+                //ProcessBaseTable(View, destinationGUIDList);
+               // ProcessPages(View, destinationGUIDList, syncFilePath);
+                }
                 //ProcessGridFields(sourceView, destinationView);
                 //ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
-            }
+            //}
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
