@@ -257,7 +257,7 @@ namespace EpiDashboard.Mapping
                 string dataKey = cbxDataKey.SelectedItem.ToString();
                 string shapeKey = cbxShapeKey.SelectedItem.ToString();
                 string value = cbxValue.SelectedItem.ToString();
-                string classCount = cbxClasses.SelectedIndex.ToString();
+                string legacyClassCountIndex = (cbxClasses.SelectedIndex - 1).ToString();
                 SolidColorBrush highColor = (SolidColorBrush)rctHighColor.Fill;
                 SolidColorBrush lowColor = (SolidColorBrush)rctLowColor.Fill;
                 SolidColorBrush missingColor = (SolidColorBrush)rctMissingColor.Fill;
@@ -273,7 +273,7 @@ namespace EpiDashboard.Mapping
                     dataKey,
                     shapeKey,
                     value,
-                    classCount,
+                    legacyClassCountIndex,
                     highColor,
                     lowColor,
                     missingColor,
@@ -338,7 +338,7 @@ namespace EpiDashboard.Mapping
                 if (child.Name.Equals("classes"))
                 {
                     cbxClasses.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
-                    cbxClasses.SelectedIndex = int.Parse(child.InnerText);
+                    cbxClasses.SelectedIndex = int.Parse(child.InnerText) + 1;
                     cbxClasses.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
                 }
 

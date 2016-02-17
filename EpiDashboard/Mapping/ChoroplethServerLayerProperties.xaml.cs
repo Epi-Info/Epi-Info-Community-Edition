@@ -141,7 +141,7 @@ namespace EpiDashboard.Mapping
                     if (child.Name.Equals("classes"))
                     {
                         cbxClasses.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
-                        cbxClasses.SelectedIndex = int.Parse(child.InnerText);
+                        cbxClasses.SelectedIndex = int.Parse(child.InnerText) + 1;
                         cbxClasses.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
                     }
                     if (child.Name.Equals("highColor"))
@@ -362,6 +362,8 @@ namespace EpiDashboard.Mapping
             string tableName = string.Empty;
             string projectPath = string.Empty;
             string viewName = string.Empty;
+
+            string legacyClassCountIndex = (cbxClasses.SelectedIndex - 1).ToString();
             
             if (dashboardHelper.View == null)
             {
@@ -379,7 +381,7 @@ namespace EpiDashboard.Mapping
             string value = cbxValue.SelectedItem.ToString();
             SolidColorBrush highColor = (SolidColorBrush)rctHighColor.Fill;
             SolidColorBrush lowColor = (SolidColorBrush)rctLowColor.Fill;
-            string xmlString = "<shapeFile>" + boundryFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() + "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor><classes>" + cbxClasses.SelectedIndex.ToString() + "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>" + "<selectMapFeature>" + cbxMapFeatureText + "</selectMapFeature> ";
+            string xmlString = "<shapeFile>" + boundryFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() + "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor><classes>" + legacyClassCountIndex + "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>" + "<selectMapFeature>" + cbxMapFeatureText + "</selectMapFeature> ";
             System.Xml.XmlElement element = doc.CreateElement("dataLayer");
             element.InnerXml = xmlString;
             element.AppendChild(dashboardHelper.Serialize(doc));

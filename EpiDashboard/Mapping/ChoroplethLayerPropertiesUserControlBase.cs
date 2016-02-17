@@ -55,6 +55,20 @@ namespace EpiDashboard.Mapping
                     provider.UseQuantiles = asQuintiles;
                 }
 
+                if (child.Name.Equals("classes"))
+                {
+                    int legacyClassCountIndex = 2;
+                    int.TryParse(child.InnerText, out legacyClassCountIndex);
+                    provider._classCount = legacyClassCountIndex + 3;
+                }
+
+                if (child.Name.Equals("partitionUsingQuantiles"))
+                {
+                    bool asQuintiles = false;
+                    bool.TryParse(child.InnerText, out asQuintiles);
+                    provider.UseQuantiles = asQuintiles;
+                }
+
                 if (child.Name.Equals("customColors"))
                 {
                     provider.UseCustomColors = true;
@@ -70,66 +84,27 @@ namespace EpiDashboard.Mapping
 
                 if (child.Name.Equals("classRanges"))
                 {
+                    provider.ClassRangesDictionary.RangeDictionary = new Dictionary<string, string>();
+                    
                     foreach (System.Xml.XmlElement classRangElement in child)
                     {
                         provider.ClassRangesDictionary.Add(classRangElement.Name, classRangElement.InnerText);
                     }
 
                     List<double> rangeStartsFromMapFile = new List<double>();
-                    string doubleString = "";
 
                     try
                     {
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart01"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart02"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart03"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart04"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart05"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart06"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart07"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart08"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart09"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
-                        doubleString = provider.ClassRangesDictionary.RangeDictionary["rampStart10"];
-                        if (string.IsNullOrEmpty(doubleString) == false)
-                        {
-                            rangeStartsFromMapFile.Add(Convert.ToDouble(doubleString));
-                        }
+                        AddRangeStarts(provider, rangeStartsFromMapFile, "rampStart01");
+                        AddRangeStarts(provider, rangeStartsFromMapFile, "rampStart02");
+                        AddRangeStarts(provider, rangeStartsFromMapFile, "rampStart03");
+                        AddRangeStarts(provider, rangeStartsFromMapFile, "rampStart04");
+                        AddRangeStarts(provider, rangeStartsFromMapFile, "rampStart05");
+                        AddRangeStarts(provider, rangeStartsFromMapFile, "rampStart06");
+                        AddRangeStarts(provider, rangeStartsFromMapFile, "rampStart07");
+                        AddRangeStarts(provider, rangeStartsFromMapFile, "rampStart08");
+                        AddRangeStarts(provider, rangeStartsFromMapFile, "rampStart09");
+                        AddRangeStarts(provider, rangeStartsFromMapFile, "rampStart10");
                     }
                     catch { }
 
@@ -144,8 +119,20 @@ namespace EpiDashboard.Mapping
             }
 
         }
-        
-        public static XmlNode Serialize(System.Xml.XmlDocument doc, ChoroplethLayerProvider provider, string dataKey, string shapeKey, string value, string classCount, SolidColorBrush highColor, SolidColorBrush lowColor, SolidColorBrush missingColor, string uniqueXmlString, DashboardHelper dashboardHelper, XmlAttribute type)
+
+        private static void AddRangeStarts(ChoroplethLayerProvider provider, List<double> rangeStartsFromMapFile, string rampKey)
+        {
+            if (provider.ClassRangesDictionary.RangeDictionary.ContainsKey(rampKey))
+            {
+                string double_String = provider.ClassRangesDictionary.RangeDictionary[rampKey];
+                if (string.IsNullOrEmpty(double_String) == false)
+                {
+                    rangeStartsFromMapFile.Add(Convert.ToDouble(double_String));
+                }
+            }
+        }
+
+        public static XmlNode Serialize(System.Xml.XmlDocument doc, ChoroplethLayerProvider provider, string dataKey, string shapeKey, string value, string legacyClassCountIndex, SolidColorBrush highColor, SolidColorBrush lowColor, SolidColorBrush missingColor, string uniqueXmlString, DashboardHelper dashboardHelper, XmlAttribute type)
         {
             try
             {
@@ -211,7 +198,7 @@ namespace EpiDashboard.Mapping
                                    customColors +
                                    "<lowColor>" + lowColor.Color.ToString() + "</lowColor>" + Environment.NewLine +
                                    "<missingColor>" + missingColor.Color.ToString() + "</missingColor>" + Environment.NewLine +
-                                   "<classes>" + classCount + "</classes>" + Environment.NewLine +
+                                   "<classes>" + legacyClassCountIndex + "</classes>" + Environment.NewLine +
                                    "<dataKey>" + dataKey + "</dataKey>" + Environment.NewLine +
                                    "<shapeKey>" + shapeKey + "</shapeKey>" + Environment.NewLine +
                                    "<value>" + value + "</value>" + Environment.NewLine;
