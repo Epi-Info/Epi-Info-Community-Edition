@@ -1988,20 +1988,16 @@ namespace EpiDashboard.Mapping
 
                 choroplethproperties.Width = 800;
                 choroplethproperties.Height = 600;
-
+                choroplethproperties.LayerProvider = choroplethLayerProperties.Provider;
                 dashboardHelper = choroplethLayerProperties.GetDashboardHelper();
                 choroplethproperties.SetDashboardHelper(dashboardHelper);
                 choroplethproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;
-                choroplethproperties.cmbClasses.Text = choroplethLayerProperties.cbxClasses.Text;
-                choroplethproperties.quintilesOption.IsChecked = choroplethLayerProperties.partitionSetUsingQuantiles;
-
+               
                 if (choroplethLayerProperties.partitionSetUsingQuantiles == true)
                 {
                     choroplethproperties.OnQuintileOptionChanged();
                 }
-
-                //choroplethproperties.ClearonMapServer();
-                choroplethproperties.LayerProvider = choroplethLayerProperties.Provider;
+               
                 choroplethproperties.panelBoundaries.IsEnabled = true;
 
                 if (choroplethLayerProperties.datafilters != null)
@@ -2033,6 +2029,8 @@ namespace EpiDashboard.Mapping
                 choroplethproperties.rctHighColor.Fill = choroplethLayerProperties.rctHighColor.Fill;
                 choroplethproperties.rctLowColor.Fill = choroplethLayerProperties.rctLowColor.Fill;
                 choroplethproperties.rctMissingColor.Fill = choroplethLayerProperties.rctMissingColor.Fill;
+                choroplethproperties.cmbClasses.Text = choroplethLayerProperties.cbxClasses.Text;
+                choroplethproperties.quintilesOption.IsChecked = choroplethLayerProperties.partitionSetUsingQuantiles;
 
                 if (choroplethLayerProperties.ClassAttributeList != null)
                 {

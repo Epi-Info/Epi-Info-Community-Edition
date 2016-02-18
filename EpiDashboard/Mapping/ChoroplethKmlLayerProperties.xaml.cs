@@ -293,10 +293,9 @@ namespace EpiDashboard.Mapping
             {
                 Provider = new ChoroplethKmlLayerProvider(myMap);
                 Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
-            }
-
+            }          
             base.CreateFromXml(element, Provider);
-
+            currentElement = element;
             foreach (System.Xml.XmlElement child in element.ChildNodes)
             {
                 if (child.Name.Equals("shapeFile") && BoundryFilePathExists(child.InnerText))
@@ -363,7 +362,7 @@ namespace EpiDashboard.Mapping
                 {
                     rctMissingColor.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(child.InnerText));
                 }
-            }
+            }         
         }
 
         public void provider_FeatureLoaded(string serverName, IDictionary<string, object> featureAttributes)

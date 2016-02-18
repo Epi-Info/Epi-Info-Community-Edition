@@ -237,7 +237,7 @@ namespace EpiDashboard.Mapping
             {
                 choroplethprop.txtMapSeverpath.Text = boundryFilePath;
             }
-
+            choroplethprop.LayerProvider = provider;
             choroplethprop.txtProjectPath.Text = dashboardHelper.Database.DataSource;
             choroplethprop.SetDashboardHelper(dashboardHelper);
             choroplethprop.cmbClasses.Text = layerPropertiesControl.cbxClasses.Text;
@@ -283,8 +283,7 @@ namespace EpiDashboard.Mapping
                 choroplethprop.radMapServer.IsChecked = true;
                 choroplethprop.choroplethServerLayerProvider = (ChoroplethServerLayerProvider)provider;
             }
-
-            choroplethprop.LayerProvider = provider;
+           
 
             choroplethprop.legTitle.Text = provider.LegendText;
             choroplethprop.ListLegendText = provider.ListLegendText;
