@@ -1363,17 +1363,34 @@ namespace EpiDashboard.Controls
                     rampEnd01.Text = LayerProvider.ClassRangesDictionary.GetAt("rampEnd01");
                 }
 
+                rctColor1.Visibility = System.Windows.Visibility.Visible;
+
+                if (LayerProvider.UseQuantiles)
+                {
+                    rampStart01.Visibility = System.Windows.Visibility.Hidden;
+                    centerText01.Text = "   X <";
+                }
+                else
+                {
+                    rampStart01.Visibility = System.Windows.Visibility.Visible;
+                    centerText01.Text = "\u2264 X <";
+                }
+
+                centerText01.Visibility = System.Windows.Visibility.Visible;
+                rampEnd01.Visibility = System.Windows.Visibility.Visible;
+                legendText1.Visibility = System.Windows.Visibility.Visible;
+
                 Color color;
                 int i = 2;
                 int gradientControl = 1;
 
-                List<UIControls> uics = CreateUIControlsList();
+                List<UIControls> classControls = CreateUIControlsList();
 
-                foreach (UIControls uiControls in uics)
+                foreach (UIControls rowControls in classControls)
                 {
                     if (LayerProvider.UseCustomColors)
                     {
-                        color = LayerProvider.CustomColorsDictionary.GetWithKey(uiControls.rectangle.Name);
+                        color = LayerProvider.CustomColorsDictionary.GetWithKey(rowControls.rectangle.Name);
                     }
                     else
                     {
@@ -1382,33 +1399,63 @@ namespace EpiDashboard.Controls
                             (byte)(rampStart.Color.G - gi * gradientControl), 
                             (byte)(rampStart.Color.B - bi * gradientControl));
 
-                        LayerProvider.CustomColorsDictionary.Add(uiControls.rectangle.Name, color);
+                        LayerProvider.CustomColorsDictionary.Add(rowControls.rectangle.Name, color);
                     }
 
                     gradientControl++;
 
-                    uiControls.rectangle.Visibility = System.Windows.Visibility.Visible;
-                    uiControls.rampStarts.Visibility = System.Windows.Visibility.Visible;
-                    uiControls.centerTexts.Visibility = System.Windows.Visibility.Visible;
-                    uiControls.rampEnds.Visibility = System.Windows.Visibility.Visible;
-                    uiControls.legedTexts.Visibility = System.Windows.Visibility.Visible;
-                    
-                    if (i++ > stratCount)
+                    rowControls.rectangle.Visibility = System.Windows.Visibility.Hidden;
+                    rowControls.rampStarts.Visibility = System.Windows.Visibility.Hidden;
+                    rowControls.centerTexts.Visibility = System.Windows.Visibility.Hidden;
+                    rowControls.rampEnds.Visibility = System.Windows.Visibility.Hidden;
+                    rowControls.legedTexts.Visibility = System.Windows.Visibility.Hidden;
+
+                    if (i < stratCount) // MIDDLE CLASSES
+                    {
+                        rowControls.rectangle.Visibility = System.Windows.Visibility.Visible;
+                        rowControls.rampStarts.Visibility = System.Windows.Visibility.Visible;
+                        rowControls.centerTexts.Visibility = System.Windows.Visibility.Visible;
+                        rowControls.rampEnds.Visibility = System.Windows.Visibility.Visible;
+                        rowControls.legedTexts.Visibility = System.Windows.Visibility.Visible;
+
+                    }
+                    else if (i == stratCount) // LAST CLASS
+                    {
+                        rowControls.rectangle.Visibility = System.Windows.Visibility.Visible;
+                        rowControls.rampStarts.Visibility = System.Windows.Visibility.Visible;
+                        rowControls.centerTexts.Visibility = System.Windows.Visibility.Visible;
+                        rowControls.rampEnds.Visibility = System.Windows.Visibility.Visible;
+
+                        if (LayerProvider.UseQuantiles)
+                        {
+                            rowControls.rampEnds.Visibility = System.Windows.Visibility.Hidden;
+                            rowControls.centerTexts.Text = "\u2264 X   ";
+                        }
+                        else
+                        {
+                            rowControls.centerTexts.Text = "\u2264 X <";
+                        }
+
+                        rowControls.legedTexts.Visibility = System.Windows.Visibility.Visible;
+                    }
+                    else
                     {
                         color = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                        uiControls.rectangle.Visibility = System.Windows.Visibility.Hidden;
-                        uiControls.rampStarts.Visibility = System.Windows.Visibility.Hidden;
-                        uiControls.centerTexts.Visibility = System.Windows.Visibility.Hidden;
-                        uiControls.rampEnds.Visibility = System.Windows.Visibility.Hidden;
-                        uiControls.legedTexts.Visibility = System.Windows.Visibility.Hidden;
+                        rowControls.rectangle.Visibility = System.Windows.Visibility.Hidden;
+                        rowControls.rampStarts.Visibility = System.Windows.Visibility.Hidden;
+                        rowControls.centerTexts.Visibility = System.Windows.Visibility.Hidden;
+                        rowControls.rampEnds.Visibility = System.Windows.Visibility.Hidden;
+                        rowControls.legedTexts.Visibility = System.Windows.Visibility.Hidden;
                     }
 
-                    if (isNewColorRamp) uiControls.rectangle.Fill = new SolidColorBrush(color);
+                    i++;
+
+                    if (isNewColorRamp) rowControls.rectangle.Fill = new SolidColorBrush(color);
 
                     if (LayerProvider != null )
                     {
-                        uiControls.rampStarts.Text = LayerProvider.ClassRangesDictionary.GetAt(uiControls.rampStarts.Name);
-                        uiControls.rampEnds.Text = LayerProvider.ClassRangesDictionary.GetAt(uiControls.rampEnds.Name);
+                        rowControls.rampStarts.Text = LayerProvider.ClassRangesDictionary.GetAt(rowControls.rampStarts.Name);
+                        rowControls.rampEnds.Text = LayerProvider.ClassRangesDictionary.GetAt(rowControls.rampEnds.Name);
                     }
                 }
 
