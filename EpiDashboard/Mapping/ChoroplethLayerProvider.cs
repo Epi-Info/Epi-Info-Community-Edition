@@ -552,23 +552,29 @@ namespace EpiDashboard.Mapping
 
                     TextBlock classTextBlock = new TextBlock();
 
-                    if (c == classCount - 1)
+                    string spacer = ListLegendText.GetAt(c + 1) == string.Empty ? "   " : " : ";
+
+                    if (c == 0)
                     {
-                        classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_N_AND_ABOVE, Math.Round(rangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c + 1);
+                        classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_LESS_THAN_N, Math.Round(rangeStarts[c + 1], 2)) + spacer + ListLegendText.GetAt(c + 1);
+                    }
+                    else if (c == classCount - 1)
+                    {
+                        classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_N_AND_ABOVE, Math.Round(rangeStarts[c], 2)) + spacer + ListLegendText.GetAt(c + 1);
                     }
                     else if (rangeStarts.Count <= c + 1)
                     {
-                        classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_N_AND_ABOVE, Math.Round(rangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c + 1);
+                        classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_N_AND_ABOVE, Math.Round(rangeStarts[c], 2)) + spacer + ListLegendText.GetAt(c + 1);
                     }
                     else
                     {
                         if (rangeStarts[c] == rangeStarts[c + 1])
                         {
-                            classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_EXACTLY_N, Math.Round(rangeStarts[c], 2)) + " : " + ListLegendText.GetAt(c + 1);
+                            classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_EXACTLY_N, Math.Round(rangeStarts[c], 2)) + spacer + ListLegendText.GetAt(c + 1);
                         }
                         else
                         {
-                            classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_N_TO_N, Math.Round(rangeStarts[c], 2), Math.Round(rangeStarts[c + 1], 2)) + " : " + ListLegendText.GetAt(c + 1);
+                            classTextBlock.Text = "  " + String.Format(DashboardSharedStrings.DASHBOARD_MAP_N_TO_N, Math.Round(rangeStarts[c], 2), Math.Round(rangeStarts[c + 1], 2)) + spacer + ListLegendText.GetAt(c + 1);
                         }
                     }
 

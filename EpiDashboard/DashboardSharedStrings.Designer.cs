@@ -1024,6 +1024,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Less than {0}.
+        /// </summary>
+        public static string DASHBOARD_MAP_LESS_THAN_N {
+            get {
+                return ResourceManager.GetString("DASHBOARD_MAP_LESS_THAN_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max:.
         /// </summary>
         public static string DASHBOARD_MAP_MAX {
