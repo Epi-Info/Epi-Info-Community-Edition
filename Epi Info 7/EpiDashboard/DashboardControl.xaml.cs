@@ -238,6 +238,7 @@ namespace EpiDashboard
 
             this.Loaded += new RoutedEventHandler(DashboardControl_Loaded);
             this.ContextMenuOpening += new ContextMenuEventHandler(DashboardControl_ContextMenuOpening);
+            this.MouseDown+=new MouseButtonEventHandler (DashboardControl_MouseDown);
 
             lastSavedOutputFileName = string.Empty;
             IsCanvasDirty = false;
@@ -379,6 +380,11 @@ namespace EpiDashboard
             this.mnuStatCalc2x2.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_2X2_GADGET;
             this.mnuUnmatched.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_UCC_GADGET;
             #endregion // Translation
+        }
+
+        private void DashboardControl_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            introAvailableData.Visibility = Visibility.Collapsed;
         }
 
         void mnuAutoArrange_Click(object sender, RoutedEventArgs e)
@@ -975,6 +981,7 @@ namespace EpiDashboard
 
         void gadget_GadgetDragStart(object sender)
         {
+            introAvailableData.Visibility = Visibility.Collapsed;
         }
 
         private void gadget_GadgetDrag(object sender)
@@ -2136,6 +2143,7 @@ namespace EpiDashboard
             {
                 CanvasChanged(this.CurrentCanvas);
             }
+            introAvailableData.Visibility = Visibility.Collapsed;
         }
 
         void gadget_GadgetFinished(UserControl gadget)
@@ -2144,6 +2152,7 @@ namespace EpiDashboard
             {
                 CanvasChanged(this.CurrentCanvas);
             }
+            introAvailableData.Visibility = Visibility.Collapsed;
 
             bool allFinished = true;
 
@@ -4317,6 +4326,7 @@ namespace EpiDashboard
                     dataDisplay.Visibility = System.Windows.Visibility.Collapsed;
                     duplicatesDisplay.Visibility = Visibility.Collapsed;
                 }
+                introAvailableData.Visibility = Visibility.Collapsed;
                 //else if (cmbView.SelectedIndex == 3)
                 //{
                 //    string[] columnNames = new string[1];
@@ -4329,7 +4339,7 @@ namespace EpiDashboard
                 //    dataDisplay.Visibility = System.Windows.Visibility.Collapsed;
                 //    duplicatesDisplay.Visibility = Visibility.Visible;
                 //}
-            }
+            }            
         }
 
         private void HideBorderLabel_Loaded (object sender, RoutedEventArgs e)
@@ -4355,5 +4365,11 @@ namespace EpiDashboard
             TextBlock VertArrangeText = sender as TextBlock;
             VertArrangeText.Text = DashboardSharedStrings.DASHBOARD_VERTICAL_ARRANGE_DESC;
         }
+
+        private void canvasMain_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            introAvailableData.Visibility = Visibility.Collapsed;
+        }
+ 
     }
 }
