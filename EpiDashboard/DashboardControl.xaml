@@ -27,7 +27,7 @@
         <!--<DockPanel Grid.Row="1" Background="#CBCFD4"></DockPanel>-->
 
         <Controls:GadgetInfoPanel x:Name="infoPanel" Grid.Row="2" Margin="4" Visibility="Collapsed" />
-        
+
         <DockPanel SnapsToDevicePixels="True" Grid.Row="0">
             <Grid>
                 <Rectangle Style="{DynamicResource shadowRectangle}"></Rectangle>
@@ -251,7 +251,7 @@
             </Grid>
         </DockPanel>        
         
-        <Controls:NotificationPanel Visibility="Visible" IsHitTestVisible="False" x:Name="panelNotification" Grid.Row="3" Height="52" MinWidth="720" VerticalAlignment="Bottom"></Controls:NotificationPanel>               
+        <Controls:NotificationPanel Visibility="Visible" IsHitTestVisible="False" x:Name="panelNotification" Grid.Row="3" Height="52" MinWidth="720" VerticalAlignment="Bottom"></Controls:NotificationPanel>
 
         <Image Margin="0, 10, 30, 0" Opacity="0.15" Width="79" Height="77" Source="Images/watermark_logo.png" Visibility="Visible" IsHitTestVisible="False" x:Name="imageWatermark" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
@@ -396,14 +396,14 @@
                 </ContextMenu>
             </ScrollViewer.ContextMenu>
 
-            
-            <dashboard:DragCanvas x:Name="canvasMain" AllowDragging="True" AllowDragOutOfView="True" Width="Auto" Height="8000">
+
+            <dashboard:DragCanvas x:Name="canvasMain" AllowDragging="True" AllowDragOutOfView="True" Width="Auto" Height="8000" MouseDown="canvasMain_MouseDown">
                 <dashboard:DragCanvas.LayoutTransform >
                     <ScaleTransform x:Name="m_canvasTransform"/>
                 </dashboard:DragCanvas.LayoutTransform >
 
                 <Line x:Name="anchorLine" Stroke="Red" StrokeThickness="2" Visibility="Collapsed" />
-                
+
                 <StackPanel x:Name="spTitle" Visibility="Collapsed" dashboard:DragCanvas.CanBeDragged="False" Canvas.Top="100" Width="400">
                     <dashboard:WaitCursor x:Name="waitCursor" Width="25" Height="25" Visibility="Hidden" StackPanel.ZIndex="99" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 50, 0, 0"/>
                     <TextBlock x:Name="tblockDashboardTitle" HorizontalAlignment="Center" Text="Dashboard" Margin="0,12,0,0" FontSize="14" FontWeight="Bold"></TextBlock>
@@ -412,9 +412,9 @@
                 </StackPanel>
 
                 <Controls:InstructionsPanel x:Name="instructionsPanel" Canvas.Top="90" Canvas.Left="100" dashboard:DragCanvas.CanBeDragged="False" Visibility="Hidden" ></Controls:InstructionsPanel>
-                <Controls:LoadingPanel x:Name="loadingPanel" Canvas.Top="90" Canvas.Left="200" dashboard:DragCanvas.CanBeDragged="False" Visibility="Hidden" Panel.ZIndex="6000"></Controls:LoadingPanel>               
-                
-                    <DockPanel x:Name="introPanel" Canvas.Top="40" Canvas.Left="300" Width="450" Height="Auto" dashboard:DragCanvas.CanBeDragged="False">
+                <Controls:LoadingPanel x:Name="loadingPanel" Canvas.Top="90" Canvas.Left="200" dashboard:DragCanvas.CanBeDragged="False" Visibility="Hidden" Panel.ZIndex="6000"></Controls:LoadingPanel>
+
+                <DockPanel x:Name="introPanel" Canvas.Top="40" Canvas.Left="300" Width="450" Height="Auto" dashboard:DragCanvas.CanBeDragged="False">
                         <Grid>
                             <Rectangle Style="{DynamicResource shadowRectangle}"></Rectangle>
                             <Grid Background="{StaticResource PrimaryAccentColorLight}">
@@ -515,8 +515,8 @@
                             <DockPanel>
                                 <TextBlock x:Name="tblockCanvasFiles" FontWeight="Light" Margin="10, 10, 10, 0" FontSize="22" Foreground="DarkSlateGray">Quick Access - Available Canvas Files</TextBlock>
                             </DockPanel>
-                            
-                            <DockPanel Grid.Row="4">
+
+                                <DockPanel Grid.Row="4">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="24"></RowDefinition>
@@ -541,8 +541,8 @@
                             </DockPanel>
 
                             <Line Grid.Row="1" X1="10" Y1="10" X2="1540" Y2="10" Stroke="Gray" StrokeDashArray="1, 4" StrokeThickness="1" />
-                            <ScrollViewer x:Name="svAvailableCanvasFiles" MaxHeight="504" Grid.Row="2">
-                            <Grid x:Name="grdRecentDataSources" Margin="5">
+                                <ScrollViewer x:Name="svAvailableCanvasFiles" MaxHeight="504" Grid.Row="2">
+                                    <Grid x:Name="grdRecentDataSources" Margin="5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="32"></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
