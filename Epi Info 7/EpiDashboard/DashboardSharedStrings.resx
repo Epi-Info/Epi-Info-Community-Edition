@@ -2083,4 +2083,7 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_MAPLEGEND_HEADERTITLE" xml:space="preserve">
     <value>Map Legend</value>
   </data>
+  <data name="DASHBOARD_MAP_LESS_THAN_N" xml:space="preserve">
+    <value>Less than {0}</value>
+  </data>
 </root>
