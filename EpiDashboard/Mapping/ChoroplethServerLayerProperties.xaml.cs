@@ -428,12 +428,14 @@ namespace EpiDashboard.Mapping
         public void CreateFromXml(System.Xml.XmlElement element)
         {
             currentElement = element;
-            base.CreateFromXml(element, Provider);
+
             if (Provider == null)
             {
                 Provider = new ChoroplethServerLayerProvider(myMap);
                 Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
             }
+
+            base.CreateFromXml(element, Provider);
 
             foreach (System.Xml.XmlElement child in element.ChildNodes)
             {
