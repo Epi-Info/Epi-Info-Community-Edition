@@ -2086,4 +2086,10 @@ of records or select fewer fields for the group.</value>
   <data name="DASHBOARD_MAP_LESS_THAN_N" xml:space="preserve">
     <value>Less than {0}</value>
   </data>
+  <data name="MAP_OPEN" xml:space="preserve">
+    <value>Map Open</value>
+  </data>
+  <data name="MAP_OPEN_UNSUCCESSFUL" xml:space="preserve">
+    <value>Unable to open the selected map file.</value>
+  </data>
 </root>
