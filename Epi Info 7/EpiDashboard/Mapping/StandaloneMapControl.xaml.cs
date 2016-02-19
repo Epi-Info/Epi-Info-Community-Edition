@@ -1490,127 +1490,136 @@ namespace EpiDashboard.Mapping
 
         public void OpenMap(string filePath)
         {
-            ClearGraphics();
-            System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
-            doc.Load(filePath);
-            Stack<System.Xml.XmlElement> elementStack = new Stack<System.Xml.XmlElement>();
-
-            foreach (System.Xml.XmlElement element in doc.DocumentElement.ChildNodes)
+            try
             {
-                elementStack.Push(element);
-            }
 
-            while (elementStack.Count > 0)
-            {
-                System.Xml.XmlElement element = elementStack.Pop();
+                ClearGraphics();
+                System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+                doc.Load(filePath);
+                Stack<System.Xml.XmlElement> elementStack = new Stack<System.Xml.XmlElement>();
 
-                if (element.Name.Equals("referenceLayer"))
+                foreach (System.Xml.XmlElement element in doc.DocumentElement.ChildNodes)
                 {
-                    ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap });
-                    layerProperties.MakeReadOnly();
-                    layerProperties.CreateFromXml(element);
-                    layerList.AddListItem(layerProperties, 0);
+                    elementStack.Push(element);
                 }
 
-                if (element.Name.Equals("graphicsLayer"))
+                while (elementStack.Count > 0)
                 {
-                    ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap, new MapPoint(double.Parse(element.Attributes["locationX"].Value), double.Parse(element.Attributes["locationY"].Value)) });
-                    layerProperties.MakeReadOnly();
-                    layerProperties.CreateFromXml(element);
-                    layerList.AddListItem(layerProperties, 0);
-                }
+                    System.Xml.XmlElement element = elementStack.Pop();
 
-                if (element.Name.Equals("dataLayer"))
-                {
-                    DashboardHelper helper = new DashboardHelper();
-                    string dataLayerConn = string.Empty;
-                    string dataLayerTable = string.Empty;
-
-                    foreach (System.Xml.XmlElement child in element.ChildNodes)
+                    if (element.Name.Equals("referenceLayer"))
                     {
-                        if (child.Name.Equals("dashboardHelper"))
+                        ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap });
+                        layerProperties.MakeReadOnly();
+                        layerProperties.CreateFromXml(element);
+                        layerList.AddListItem(layerProperties, 0);
+                    }
+
+                    if (element.Name.Equals("graphicsLayer"))
+                    {
+                        ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap, new MapPoint(double.Parse(element.Attributes["locationX"].Value), double.Parse(element.Attributes["locationY"].Value)) });
+                        layerProperties.MakeReadOnly();
+                        layerProperties.CreateFromXml(element);
+                        layerList.AddListItem(layerProperties, 0);
+                    }
+
+                    if (element.Name.Equals("dataLayer"))
+                    {
+                        DashboardHelper helper = new DashboardHelper();
+                        string dataLayerConn = string.Empty;
+                        string dataLayerTable = string.Empty;
+
+                        foreach (System.Xml.XmlElement child in element.ChildNodes)
                         {
-                            try
+                            if (child.Name.Equals("dashboardHelper"))
                             {
-                                helper.CreateFromXml(child);
-                                helper.PopulateDataSet();
-                            }
-                            catch (ViewNotFoundException ex)
-                            {
-                                Epi.Windows.MsgBox.ShowError(ex.Message);
-                                return;
-                            }
-                            catch (System.Data.SqlClient.SqlException ex)
-                            {
-                                Epi.Windows.MsgBox.ShowError(ex.Message);
-                                return;
-                            }
-                            catch (System.Data.OleDb.OleDbException ex)
-                            {
-                                Epi.Windows.MsgBox.ShowError(ex.Message);
-                                return;
-                            }
-                            catch (System.IO.FileNotFoundException ex)
-                            {
-                                Epi.Windows.MsgBox.ShowError(ex.Message);
-                                return;
-                            }
-                            catch (GeneralException ex)
-                            {
-                                Epi.Windows.MsgBox.ShowError(ex.Message);
-                                return;
-                            }
-                            catch (ApplicationException ex)
-                            {
-                                string message = ex.Message;
-                                if (message.ToLower().Equals("error executing select query against the database."))
+                                try
                                 {
-                                    message = DashboardSharedStrings.ERROR_DATA_SOURCE_PERMISSIONS;
+                                    helper.CreateFromXml(child);
+                                    helper.PopulateDataSet();
                                 }
-                                Epi.Windows.MsgBox.ShowError(message);
-                                return;
-                            }
-                            catch (System.Security.Cryptography.CryptographicException ex)
-                            {
-                                Epi.Windows.MsgBox.ShowError(string.Format(SharedStrings.ERROR_CRYPTO_KEYS, ex.Message));
-                                return;
+                                catch (ViewNotFoundException ex)
+                                {
+                                    Epi.Windows.MsgBox.ShowError(ex.Message);
+                                    return;
+                                }
+                                catch (System.Data.SqlClient.SqlException ex)
+                                {
+                                    Epi.Windows.MsgBox.ShowError(ex.Message);
+                                    return;
+                                }
+                                catch (System.Data.OleDb.OleDbException ex)
+                                {
+                                    Epi.Windows.MsgBox.ShowError(ex.Message);
+                                    return;
+                                }
+                                catch (System.IO.FileNotFoundException ex)
+                                {
+                                    Epi.Windows.MsgBox.ShowError(ex.Message);
+                                    return;
+                                }
+                                catch (GeneralException ex)
+                                {
+                                    Epi.Windows.MsgBox.ShowError(ex.Message);
+                                    return;
+                                }
+                                catch (ApplicationException ex)
+                                {
+                                    string message = ex.Message;
+                                    if (message.ToLower().Equals("error executing select query against the database."))
+                                    {
+                                        message = DashboardSharedStrings.ERROR_DATA_SOURCE_PERMISSIONS;
+                                    }
+                                    Epi.Windows.MsgBox.ShowError(message);
+                                    return;
+                                }
+                                catch (System.Security.Cryptography.CryptographicException ex)
+                                {
+                                    Epi.Windows.MsgBox.ShowError(string.Format(SharedStrings.ERROR_CRYPTO_KEYS, ex.Message));
+                                    return;
+                                }
                             }
                         }
+                        ILayerProperties layerProperties = null;
+                        if (element.Attributes["layerType"].Value.ToString() == "EpiDashboard.Mapping.ChoroplethLayerProperties")
+                        {
+                            layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType("EpiDashboard.Mapping.ChoroplethShapeLayerProperties"), new object[] { myMap, helper, this });
+                        }
+                        else
+                            layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap, helper, this });
+                        layerProperties.MakeReadOnly();
+                        layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+                        layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+                        layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
+                        layerProperties.CreateFromXml(element);
+                        layerList.AddListItem(layerProperties, 0);
                     }
-                    ILayerProperties layerProperties=null;
-                    if(element.Attributes["layerType"].Value.ToString()=="EpiDashboard.Mapping.ChoroplethLayerProperties")
+                }
+
+                if (doc.DocumentElement.Attributes.Count > 0)
+                {
+                    string baseMapType = doc.DocumentElement.Attributes["baseMapType"].Value;
+                    if (baseMapType.Equals("street"))
                     {
-                        layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType("EpiDashboard.Mapping.ChoroplethShapeLayerProperties"), new object[] { myMap, helper, this });
+                        ToggleStreet();
+                    }
+                    else if (baseMapType.Equals("satellite"))
+                    {
+                        ToggleSatellite();
                     }
                     else
-                     layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap, helper, this });
-                    layerProperties.MakeReadOnly();
-                    layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
-                    layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
-                    layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
-                    layerProperties.CreateFromXml(element);
-                    layerList.AddListItem(layerProperties, 0);
+                    {
+                        ToggleBlank();
+                    }
                 }
-            }
 
-            if (doc.DocumentElement.Attributes.Count > 0)
+                SetBackgroundImageType();
+            }
+            catch(Exception exception)
             {
-                string baseMapType = doc.DocumentElement.Attributes["baseMapType"].Value;
-                if (baseMapType.Equals("street"))
-                {
-                    ToggleStreet();
-                }
-                else if (baseMapType.Equals("satellite"))
-                {
-                    ToggleSatellite();
-                }
-                else
-                {
-                    ToggleBlank();
-                }
+                MessageBox.Show(DashboardSharedStrings.MAP_OPEN_UNSUCCESSFUL, DashboardSharedStrings.MAP_OPEN, MessageBoxButton.OK, MessageBoxImage.Information);
+                Logger.Log(DashboardSharedStrings.MAP_OPEN_UNSUCCESSFUL + Environment.NewLine + exception.Message);
             }
-
-            SetBackgroundImageType();
         }
 
         public void SaveMap()

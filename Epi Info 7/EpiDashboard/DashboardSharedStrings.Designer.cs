@@ -5136,6 +5136,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Map Open.
+        /// </summary>
+        public static string MAP_OPEN {
+            get {
+                return ResourceManager.GetString("MAP_OPEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to open the selected map file..
+        /// </summary>
+        public static string MAP_OPEN_UNSUCCESSFUL {
+            get {
+                return ResourceManager.GetString("MAP_OPEN_UNSUCCESSFUL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color of points.
         /// </summary>
         public static string MAP_POINT_COLOR {
