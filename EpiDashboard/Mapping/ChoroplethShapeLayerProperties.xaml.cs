@@ -351,7 +351,7 @@ namespace EpiDashboard.Mapping
                 if (child.Name.Equals("classes"))
                 {
                     cbxClasses.SelectionChanged -= new SelectionChangedEventHandler(keys_SelectionChanged);
-                    cbxClasses.SelectedIndex = int.Parse(child.InnerText) + 1;
+                    cbxClasses.Text = (Provider._classCount).ToString();
                     cbxClasses.SelectionChanged += new SelectionChangedEventHandler(keys_SelectionChanged);
                 }
                 

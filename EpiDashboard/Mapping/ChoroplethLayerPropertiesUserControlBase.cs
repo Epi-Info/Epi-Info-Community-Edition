@@ -53,6 +53,7 @@ namespace EpiDashboard.Mapping
                     bool asQuintiles = false;
                     bool.TryParse(child.InnerText, out asQuintiles);
                     provider.UseQuantiles = asQuintiles;
+                    partitionSetUsingQuantiles = asQuintiles;
                 }
 
                 if (child.Name.Equals("classes"))
@@ -60,13 +61,6 @@ namespace EpiDashboard.Mapping
                     int legacyClassCountIndex = 2;
                     int.TryParse(child.InnerText, out legacyClassCountIndex);
                     provider._classCount = legacyClassCountIndex + 3;
-                }
-
-                if (child.Name.Equals("partitionUsingQuantiles"))
-                {
-                    bool asQuintiles = false;
-                    bool.TryParse(child.InnerText, out asQuintiles);
-                    provider.UseQuantiles = asQuintiles;
                 }
 
                 if (child.Name.Equals("customColors"))
