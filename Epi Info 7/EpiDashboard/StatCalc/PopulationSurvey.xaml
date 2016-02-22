@@ -73,7 +73,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Rectangle Grid.Column="0" Grid.Row="0" Fill="{x:Static SystemColors.MenuHighlightBrush}" Stroke="Black"/>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White" TextAlignment="Center" Margin="5,-1,5,0">Confidence<LineBreak></LineBreak>Level</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White" TextAlignment="Center" Margin="5,-1,5,0">Power</TextBlock>
                         <Rectangle Grid.Column="0" Grid.Row="1" Stroke="Black"/>
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1">80%</TextBlock>
                         <Rectangle Grid.Column="0" Grid.Row="2" Stroke="Black"/>
