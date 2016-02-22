@@ -161,7 +161,7 @@ namespace EpiDashboard.Mapping
 
         private void GeometryService_Failed(object sender, TaskFailedEventArgs e)
         {
-            MessageBox.Show("Geometry Service error: " + e.Error);
+            Logger.Log("Geometry Service error: " + e.Error);
         }
 
         private Symbol SimplePointSymbol
