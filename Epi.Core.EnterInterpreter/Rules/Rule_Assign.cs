@@ -317,7 +317,10 @@ namespace Epi.Core.EnterInterpreter.Rules
             {
                 int number;
                 bool isNumeric = int.TryParse(item, out number);
-                if (!OpList.Contains(item) && !isNumeric && !RemoveList.Contains(item))
+                DateTime date;
+                bool IsDate = DateTime.TryParse(item, out date);
+
+                if (!OpList.Contains(item) && !isNumeric && !RemoveList.Contains(item) && !IsDate)
                 {
 
                     NewList.Add(item);
