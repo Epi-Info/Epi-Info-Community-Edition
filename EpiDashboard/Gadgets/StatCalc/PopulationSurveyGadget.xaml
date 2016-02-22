@@ -132,7 +132,7 @@
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" FontWeight="Bold">99.9%</TextBlock>
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="7" FontWeight="Bold">99.99%</TextBlock>
                             <!-- -->
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" TextAlignment="Center" FontWeight="Bold" Margin="3" Foreground="White">Power</TextBlock>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" TextAlignment="Center" FontWeight="Bold" Margin="3" Foreground="White">Confidence<LineBreak />Level</TextBlock>
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" TextAlignment="Center" FontWeight="Bold" Margin="3" Foreground="White">Cluster<LineBreak />Size</TextBlock>
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" TextAlignment="Center" FontWeight="Bold" Margin="3" Foreground="White">Total<LineBreak />Sample</TextBlock>
                             <!-- -->
