@@ -1815,12 +1815,16 @@ namespace EpiDashboard.Controls
                     choroplethShapeLayerProperties.shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
                     shapeAttributes = (IDictionary<string, object>)shapeFileProperties[1];
 
+                    List<string> keyList = new List<string>();
+
                     if (shapeAttributes != null)
                     {
+                        keyList = shapeAttributes.Keys.ToList();
+                        
                         cmbShapeKey.Items.Clear();
                         choroplethShapeLayerProperties.cbxShapeKey.Items.Clear();
-                        
-                        foreach (string key in shapeAttributes.Keys)
+
+                        foreach (string key in keyList)
                         {
                             cmbShapeKey.Items.Add(key);
                             choroplethShapeLayerProperties.cbxShapeKey.Items.Add(key);
