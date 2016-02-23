@@ -215,16 +215,6 @@ namespace EpiDashboard.Mapping
             {
                 base.ChoroplethProperties_RenderMap(Provider);
                 
-                //Provider.SetShapeRangeValues(
-                //    dashboardHelper,
-                //    cbxShapeKey.SelectedItem.ToString(),
-                //    cbxDataKey.SelectedItem.ToString(),
-                //    cbxValue.SelectedItem.ToString(),
-                //    null,
-                //    int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()),
-                //    "",
-                //    "");
-                
                 if (MapGenerated != null)
                 {
                     MapGenerated(this, new EventArgs());
@@ -509,11 +499,6 @@ namespace EpiDashboard.Mapping
             }
             
             string sUrl = GetformattedUrl(shapefileurl);
-
-           
-
-            //Provider.Load(sUrl); 
-            //ChoroplethProperties_RenderMap();
         }
 
         #endregion

@@ -365,9 +365,18 @@ namespace EpiDashboard.Mapping
                 DataTable loadedData = GetLoadedData(dashboardHelper, dataKey, ref valueField);
                 GraphicsLayer graphicsLayer = GetGraphicsLayer();
 
-                _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+                bool layerContainsGraphics = graphicsLayer.Graphics.Count == 0 ? false : true;
 
-                return PopulateRangeValues();
+                if (layerContainsGraphics)
+                {
+                    _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+
+                    return PopulateRangeValues();
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
             catch (ArgumentException exception)
             {
@@ -390,9 +399,13 @@ namespace EpiDashboard.Mapping
 
             if (graphicsLayer == null) return;
 
-            _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+            bool layerContainsGraphics = graphicsLayer.Graphics == null || graphicsLayer.Graphics.Count == 0 ? false : true;
 
-            PopulateRangeValues();
+            if (layerContainsGraphics)
+            {
+                _thematicItem = GetThematicItem(_classCount, loadedData, graphicsLayer);
+                PopulateRangeValues();
+            }
         }
 
         public void Refresh()
@@ -706,8 +719,8 @@ namespace EpiDashboard.Mapping
 
             if(valueList.Count == 0)
             {
-                MessageBox.Show(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
-               // throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
+                //MessageBox.Show(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
+                throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
             }
 
             valueList.Sort(); 
