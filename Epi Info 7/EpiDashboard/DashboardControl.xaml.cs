@@ -4267,6 +4267,7 @@ namespace EpiDashboard
         private void introArrowSetDataSource_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             SetDataSource();
+            introAvailableData.Visibility = Visibility.Collapsed;
         }
 
         private void introArrowFindMore_MouseEnter(object sender, MouseEventArgs e)
@@ -4368,7 +4369,7 @@ namespace EpiDashboard
 
         private void canvasMain_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            introAvailableData.Visibility = Visibility.Collapsed;
+           // introAvailableData.Visibility = Visibility.Collapsed;
         }
  
     }
