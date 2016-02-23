@@ -352,7 +352,6 @@ namespace EpiDashboard.Controls
                             classCount,
                             legTitle.Text);
 
-
                         if (LayerProvider.RangeCount != classCount)
                         {
                             classCount = LayerProvider.RangeCount;
@@ -1365,16 +1364,8 @@ namespace EpiDashboard.Controls
 
                 rctColor1.Visibility = System.Windows.Visibility.Visible;
 
-                if (LayerProvider.UseQuantiles)
-                {
-                    rampStart01.Visibility = System.Windows.Visibility.Hidden;
-                    centerText01.Text = "   X <";
-                }
-                else
-                {
-                    rampStart01.Visibility = System.Windows.Visibility.Visible;
-                    centerText01.Text = "\u2264 X <";
-                }
+                rampStart01.Visibility = System.Windows.Visibility.Hidden;
+                centerText01.Text = "   X <";
 
                 centerText01.Visibility = System.Windows.Visibility.Visible;
                 rampEnd01.Visibility = System.Windows.Visibility.Visible;
@@ -1415,6 +1406,7 @@ namespace EpiDashboard.Controls
                         rowControls.rectangle.Visibility = System.Windows.Visibility.Visible;
                         rowControls.rampStarts.Visibility = System.Windows.Visibility.Visible;
                         rowControls.centerTexts.Visibility = System.Windows.Visibility.Visible;
+                        rowControls.centerTexts.Text = "\u2264 X <";
                         rowControls.rampEnds.Visibility = System.Windows.Visibility.Visible;
                         rowControls.legedTexts.Visibility = System.Windows.Visibility.Visible;
 
@@ -1426,15 +1418,8 @@ namespace EpiDashboard.Controls
                         rowControls.centerTexts.Visibility = System.Windows.Visibility.Visible;
                         rowControls.rampEnds.Visibility = System.Windows.Visibility.Visible;
 
-                        if (LayerProvider.UseQuantiles)
-                        {
-                            rowControls.rampEnds.Visibility = System.Windows.Visibility.Hidden;
-                            rowControls.centerTexts.Text = "\u2264 X   ";
-                        }
-                        else
-                        {
-                            rowControls.centerTexts.Text = "\u2264 X <";
-                        }
+                        rowControls.rampEnds.Visibility = System.Windows.Visibility.Hidden;
+                        rowControls.centerTexts.Text = "\u2264 X   ";
 
                         rowControls.legedTexts.Visibility = System.Windows.Visibility.Visible;
                     }

@@ -2028,7 +2028,7 @@ namespace EpiDashboard.Mapping
 
                 choroplethproperties.panelBoundaries.IsEnabled = true;
 
-
+                choroplethproperties.cmbClasses.Text = choroplethLayerProperties.cbxClasses.Text;
 
                 choroplethproperties.legTitle.Text = choroplethLayerProperties.Provider.LegendText;
 
@@ -2038,7 +2038,7 @@ namespace EpiDashboard.Mapping
                 choroplethproperties.rctHighColor.Fill = choroplethLayerProperties.rctHighColor.Fill;
                 choroplethproperties.rctLowColor.Fill = choroplethLayerProperties.rctLowColor.Fill;
                 choroplethproperties.rctMissingColor.Fill = choroplethLayerProperties.rctMissingColor.Fill;
-                choroplethproperties.cmbClasses.Text = choroplethLayerProperties.cbxClasses.Text;
+
                 choroplethproperties.quintilesOption.IsChecked = choroplethLayerProperties.partitionSetUsingQuantiles;
 
                 if (choroplethLayerProperties.ClassAttributeList != null)
