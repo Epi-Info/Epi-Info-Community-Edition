@@ -2145,13 +2145,12 @@ namespace Epi.Windows.MakeView.PresentationLogic
         {
             GroupField group = (GroupField)projectExplorer.currentPage.CreateField(MetaFieldType.Group);
             Dialogs.FieldDefinitionDialogs.GroupFieldDefinition dialog = new Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs.GroupFieldDefinition(projectExplorer.MainForm, group);
+            group.BackgroundColor = Color.White;
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
                 PositionGroupOnPanel(group, panel, outline);
-
                 group.ChildFieldNames = GetFieldsNamesInRectangle(panel, outline);
-                group.BackgroundColor = ((Dialogs.FieldDefinitionDialogs.GroupFieldDefinition)dialog).BackColor;
                 SaveField(group, panel, new Point(outline.X, outline.Y));
             }
             PersistChildFieldNames();
