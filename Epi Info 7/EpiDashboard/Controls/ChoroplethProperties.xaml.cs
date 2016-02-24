@@ -1303,12 +1303,12 @@ namespace EpiDashboard.Controls
             PropertyChanged_EnableDisable();
         }
 
-
         public void SetVisibility(int stratCount, SolidColorBrush rampStart, SolidColorBrush rampEnd)
         {
             if (LayerProvider == null) return;
             
             bool isNewColorRamp = true;
+            minMaxText.Text = DashboardSharedStrings.DASHBOARD_MAP_MIN + ": ";
 
             quintilesOption.IsChecked = LayerProvider.UseQuantiles;
 
@@ -1360,6 +1360,8 @@ namespace EpiDashboard.Controls
                     
                     rampStart01.Text = LayerProvider.ClassRangesDictionary.GetAt("rampStart01");
                     rampEnd01.Text = LayerProvider.ClassRangesDictionary.GetAt("rampEnd01");
+
+                    minMaxText.Text = DashboardSharedStrings.DASHBOARD_MAP_MIN + " " + rampStart01.Text + "; ";
                 }
 
                 rctColor1.Visibility = System.Windows.Visibility.Visible;
@@ -1395,11 +1397,11 @@ namespace EpiDashboard.Controls
 
                     gradientControl++;
 
-                    rowControls.rectangle.Visibility = System.Windows.Visibility.Hidden;
-                    rowControls.rampStarts.Visibility = System.Windows.Visibility.Hidden;
-                    rowControls.centerTexts.Visibility = System.Windows.Visibility.Hidden;
-                    rowControls.rampEnds.Visibility = System.Windows.Visibility.Hidden;
-                    rowControls.legedTexts.Visibility = System.Windows.Visibility.Hidden;
+                    rowControls.rectangle.Visibility = System.Windows.Visibility.Collapsed;
+                    rowControls.rampStarts.Visibility = System.Windows.Visibility.Collapsed;
+                    rowControls.centerTexts.Visibility = System.Windows.Visibility.Collapsed;
+                    rowControls.rampEnds.Visibility = System.Windows.Visibility.Collapsed;
+                    rowControls.legedTexts.Visibility = System.Windows.Visibility.Collapsed;
 
                     if (i < stratCount) // MIDDLE CLASSES
                     {
@@ -1422,15 +1424,17 @@ namespace EpiDashboard.Controls
                         rowControls.centerTexts.Text = "\u2264 X   ";
 
                         rowControls.legedTexts.Visibility = System.Windows.Visibility.Visible;
+
+                        minMaxText.Text += DashboardSharedStrings.DASHBOARD_MAP_MAX + " " + LayerProvider.ClassRangesDictionary.GetAt(rowControls.rampEnds.Name);
                     }
                     else
                     {
                         color = Color.FromArgb(Opacity, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-                        rowControls.rectangle.Visibility = System.Windows.Visibility.Hidden;
-                        rowControls.rampStarts.Visibility = System.Windows.Visibility.Hidden;
-                        rowControls.centerTexts.Visibility = System.Windows.Visibility.Hidden;
-                        rowControls.rampEnds.Visibility = System.Windows.Visibility.Hidden;
-                        rowControls.legedTexts.Visibility = System.Windows.Visibility.Hidden;
+                        rowControls.rectangle.Visibility = System.Windows.Visibility.Collapsed;
+                        rowControls.rampStarts.Visibility = System.Windows.Visibility.Collapsed;
+                        rowControls.centerTexts.Visibility = System.Windows.Visibility.Collapsed;
+                        rowControls.rampEnds.Visibility = System.Windows.Visibility.Collapsed;
+                        rowControls.legedTexts.Visibility = System.Windows.Visibility.Collapsed;
                     }
 
                     i++;
