@@ -579,8 +579,9 @@ namespace Epi.Enter.Forms
                                 sb.Remove(0, sb.ToString().Length);
                                 fieldValueParams.Clear();
 
-                                recordsUpdated++;
+                                //recordsUpdated++;
                             }
+                            recordsUpdated++;
                         }
                     //}
                     //else
