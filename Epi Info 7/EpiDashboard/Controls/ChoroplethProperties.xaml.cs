@@ -1308,7 +1308,8 @@ namespace EpiDashboard.Controls
             if (LayerProvider == null) return;
             
             bool isNewColorRamp = true;
-            minMaxText.Text = DashboardSharedStrings.DASHBOARD_MAP_MIN + ": ";
+            minMaxText.Text = DashboardSharedStrings.DASHBOARD_MAP_MIN + " " + _layerProvider._thematicItem.Min + "; ";
+            minMaxText.Text += DashboardSharedStrings.DASHBOARD_MAP_MAX + " " + _layerProvider._thematicItem.Max + "; N = " + _layerProvider._thematicItem.RowCount + "" ;
 
             quintilesOption.IsChecked = LayerProvider.UseQuantiles;
 
@@ -1360,8 +1361,6 @@ namespace EpiDashboard.Controls
                     
                     rampStart01.Text = LayerProvider.ClassRangesDictionary.GetAt("rampStart01");
                     rampEnd01.Text = LayerProvider.ClassRangesDictionary.GetAt("rampEnd01");
-
-                    minMaxText.Text = DashboardSharedStrings.DASHBOARD_MAP_MIN + " " + rampStart01.Text + "; ";
                 }
 
                 rctColor1.Visibility = System.Windows.Visibility.Visible;
@@ -1424,8 +1423,6 @@ namespace EpiDashboard.Controls
                         rowControls.centerTexts.Text = "\u2264 X   ";
 
                         rowControls.legedTexts.Visibility = System.Windows.Visibility.Visible;
-
-                        minMaxText.Text += DashboardSharedStrings.DASHBOARD_MAP_MAX + " " + LayerProvider.ClassRangesDictionary.GetAt(rowControls.rampEnds.Name);
                     }
                     else
                     {

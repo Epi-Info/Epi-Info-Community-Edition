@@ -140,6 +140,7 @@ namespace EpiDashboard.Mapping
             public string MinName { get; set; }
             public string MaxName { get; set; }
             public List<double> RangeStarts { get; set; }
+            public int RowCount { get; set; }
         }
 
         public struct Values
@@ -626,6 +627,8 @@ namespace EpiDashboard.Mapping
             List<double> valueList = new List<double>();
             List<string> usedShapeValues = new List<string>();
 
+            thematicItem.RowCount = loadedData.Rows.Count;
+
             for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
             {
                 Graphic graphicFeature = graphicsLayer.Graphics[i];
@@ -759,7 +762,7 @@ namespace EpiDashboard.Mapping
 
                 _thematicItem = GetThematicItem(classCount, loadedData, graphicsLayer);
 
-                if (RangeStarts_FromControls != null && RangeStarts_FromControls.Count > 0)
+                if ( this.UseQuantiles == false && RangeStarts_FromControls != null && RangeStarts_FromControls.Count > 0)
                 {
                     _thematicItem.RangeStarts = RangeStarts_FromControls;
                     PopulateRangeValues();
