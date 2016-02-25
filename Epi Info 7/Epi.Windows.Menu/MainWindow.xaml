@@ -1,0 +1,332 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="Epi.Windows.Menu.MainWindow"
+       xmlns:Controls="Epi.Windows.Menu.MainWindow"
+        Height="560" MaxHeight="570" Width="690" MaxWidth="690">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Simple Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Storyboard x:Key="sbShowRightMenu" >
+                <!--<ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,-340,0,0" To="0,-340,0,0" DecelerationRatio=".9" Duration="0:0:1" />-->
+                <!--<DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="5.0"  Duration="0:0:0.5" />-->
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="0" To="200"  Duration="0:0:0.1" />
+            </Storyboard>
+            <Storyboard x:Key="sbHideRightMenu">
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="200" To="0"  Duration="0:0:0.2" />
+                <!--<ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,-340,0,0" To="0,-340,0,0" AccelerationRatio=".9" Duration="0:0:1" />-->
+                <!--<DoubleAnimation Storyboard.TargetProperty="Opacity" From="1.0" To="0.0"  Duration="0:0:0.2" />-->
+            </Storyboard>
+
+            <Storyboard x:Key="showEpiResource">
+                <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="0" To="50"  Duration="0:0:0.1" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="200" To="240"  Duration="0:0:0.1" />
+            </Storyboard>
+            <Storyboard x:Key="hideEpiResource">
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="240" To="200"  Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="50" To="0"  Duration="0:0:0.2" />
+            </Storyboard>
+
+        </ResourceDictionary>
+
+
+
+    </UserControl.Resources>
+    <Grid x:Name="grdMain" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Panel.ZIndex="2" DockPanel.Dock="Top" Name="pnlRightMenu" Orientation="Horizontal" Height="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,70,15,0" Background="Transparent">
+            <!--<Grid>
+                <Button Name="btnRightMenuHide" Width="48" Height="48" Click="btnRightMenuHide_Click" Content="Hide" Visibility="Hidden"/>
+                <Button Name="btnRightMenuShow" Width="48" Height="48" Click="btnRightMenuShow_Click" Content="Show"/>
+            </Grid>-->
+            <Border BorderBrush="#5c5d5f" BorderThickness="1" Width="170" Height="Auto" Background="White"  >
+                <WrapPanel Orientation="Vertical">
+                    <ContentControl MouseDown="contents_Click">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource setting_buttons}">CONTENTS</TextBlock>
+                        </StackPanel>
+                    </ContentControl>
+                    <ContentControl MouseDown="howToVideo_Click">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource setting_buttons}">HOW TO' VIDEOS</TextBlock>
+                        </StackPanel>
+                    </ContentControl>
+                    <ContentControl MouseDown="epiInfoQA_Click">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource setting_buttons}">EPI INFO Q&amp;A</TextBlock>
+                        </StackPanel>
+                    </ContentControl>
+                    <ContentControl MouseDown="contactHelpDesk_Click">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource setting_buttons}">CONTACT HELP DESK</TextBlock>
+                        </StackPanel>
+                    </ContentControl>
+                    <ContentControl MouseDown="Other_EpiResource_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource setting_buttons}">OTHER EPI RESOURCES
+                                            <Image HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="HighQuality" Width="11" Margin="5 0 0 -1">
+                                                <Image.Source>
+                                                    <BitmapImage UriSource="images/showandhide_arrow.png"/>
+                                                </Image.Source>
+                                            </Image>
+                            </TextBlock>
+
+                        </StackPanel>
+                    </ContentControl>
+                    <StackPanel x:Name="submenuEpiResouces" Height="0">
+                        <ContentControl MouseDown="activEpi_Click">
+                            <StackPanel Background="#e6e7e8">
+                                <TextBlock Style="{StaticResource setting_buttons}" Margin="10 0 0 0">ACTIVEEPI.com</TextBlock>
+                            </StackPanel>
+                        </ContentControl>
+                        <ContentControl MouseDown="openEpi_Click">
+                            <StackPanel Background="#e6e7e8" >
+                                <TextBlock Style="{StaticResource setting_buttons}" Margin="10 0 0 0">OPENEPI.com</TextBlock>
+                            </StackPanel>
+                        </ContentControl>
+                    </StackPanel>
+                    <ContentControl MouseDown="epi_InfoLogs_Click">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource setting_buttons}">EPI INFO LOGS</TextBlock>
+                        </StackPanel>
+                    </ContentControl>
+                    <ContentControl MouseDown="options_Click">
+                        <StackPanel>
+                            <Border BorderBrush="#c8c8c8" BorderThickness="0 0 0 1">
+                                <TextBlock Style="{StaticResource setting_buttons}">OPTIONS</TextBlock>
+                            </Border>
+                        </StackPanel>
+                    </ContentControl>
+                    <ContentControl MouseDown="exit_Click">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource setting_buttons}">EXIT</TextBlock>
+                        </StackPanel>
+                    </ContentControl>
+                </WrapPanel>
+            </Border>
+        </StackPanel>
+        <DockPanel Grid.Column="0">
+
+            <StackPanel DockPanel.Dock="Top"  Panel.ZIndex="0">
+                <Grid Height="70" Margin="0 10 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="60" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Background="Transparent" Grid.Column="0" Margin="15 0 0 0" Orientation="Horizontal">
+                        <Image ToolTip="Epi Info Logo" HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="HighQuality" Width="250" Margin="0 0 0 0">
+                            <Image.Source>
+                                <BitmapImage UriSource="images/epi_info_logo_full.png"/>
+                            </Image.Source>
+                        </Image>
+
+                    </StackPanel>
+                    <!--<Menu Grid.Column="1" Height="40" Style="{DynamicResource SimpleMenu}" VerticalAlignment="Center" Background="White" >
+					<MenuItem Header="FILE" Height="34.933" Margin="0" Style="{DynamicResource SimpleMenuItem}" VerticalAlignment="Top" Click="MenuItem_Click">
+						<MenuItem Header="MenuItem1" Style="{DynamicResource SimpleMenuItem}" HorizontalAlignment="Left" Width="144.506666666667"/>
+						
+					</MenuItem>
+					<MenuItem Header="VIEW" Height="55.2" Margin="0" Style="{DynamicResource SimpleMenuItem}" VerticalAlignment="Top"/>
+					<MenuItem Header="TOOLS" Height="52" Margin="0" Style="{DynamicResource SimpleMenuItem}" VerticalAlignment="Top"/>
+					<MenuItem Header="STATCAL" Height="52" Margin="0" Style="{DynamicResource SimpleMenuItem}" VerticalAlignment="Top"/>
+					<MenuItem Header="HELP" Height="52" Margin="0" Style="{DynamicResource SimpleMenuItem}" VerticalAlignment="Top"/>
+				</Menu>-->
+                    <!--<StackPanel Grid.Column="2">
+                    <TextBlock>x</TextBlock>
+                </StackPanel>-->
+                    <StackPanel Grid.Column="1">
+                        <!--<ContentControl Name="btnRightMenuShow"  MouseDown="btnRightMenuShow_Click">
+                            <Image ToolTip="Other Options"  RenderOptions.BitmapScalingMode="HighQuality" Width="25" Margin="0 30 0 0" Cursor="Hand">
+                                <Image.Source>
+                                    <BitmapImage UriSource="/images/helpandother.png" />
+                                </Image.Source>
+                            </Image>
+                            
+                        </ContentControl>-->
+                        <ContentControl Name="btnRightMenuHide"  MouseDown="btnRightMenuHide_Click" Visibility="Visible">
+                            <Image RenderOptions.BitmapScalingMode="HighQuality" Width="25" Margin="0 30 0 0" Cursor="Hand">
+                                <Image.Source>
+                                    <BitmapImage UriSource="/images/helpandother.png" />
+                                </Image.Source>
+                            </Image>
+                        </ContentControl>
+                        <!--<Menu Background="Transparent"   >
+
+                            <MenuItem x:Name="setting_button"    >
+                                
+                                <MenuItem.Header>
+                                    <Image RenderOptions.BitmapScalingMode="HighQuality" Width="30" Margin="0 10 0 0">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="/images/settings_icon.png" />
+                                        </Image.Source>
+                                    </Image>
+                                </MenuItem.Header>
+                                <MenuItem Header="Contents" Padding="15 2 0 2" Style="{DynamicResource SimpleMenuItem}" HorizontalAlignment="Right" Width="160" Click="contents_Click"/>
+                                <MenuItem Header="'How To' Videos" Padding="15 2 0 2" Style="{DynamicResource SimpleMenuItem}" HorizontalAlignment="Right" Width="160" Click="howToVideo_Click"/>
+                                <MenuItem Header="Epi Info Q&amp;A" Padding="15 2 0 2" Style="{DynamicResource SimpleMenuItem}" HorizontalAlignment="Right" Width="160" Click="epiInfoQA_Click"/>
+                                <MenuItem Header="Contact Help Desk" Padding="15 2 0 2" Style="{DynamicResource SimpleMenuItem}" HorizontalAlignment="Right" Width="160" Click="contactHelpDesk_Click"/>
+                                <MenuItem Header="Other Epi Resources" Padding="15 2 0 2" Style="{DynamicResource SimpleMenuItem}" HorizontalAlignment="Right" Width="160">
+
+                                    <MenuItem Header="ActivEpi.com"  Style="{DynamicResource SimpleMenuItem}" HorizontalAlignment="Left" Width="144.506666666667" Click="activEpi_Click"></MenuItem>
+                                    <MenuItem Header="OpenEpi.com" Style="{DynamicResource SimpleMenuItem}" HorizontalAlignment="Left" Width="144.506666666667" Click="openEpi_Click"></MenuItem>
+
+                                </MenuItem>
+                                <MenuItem Header="Epi Info Logs" Padding="15 2 0 2" Style="{DynamicResource SimpleMenuItem}" HorizontalAlignment="Right" Width="160" Click="epi_InfoLogs_Click"/>
+                                <MenuItem Header="Options" Padding="15 2 0 2" Style="{DynamicResource SimpleMenuItem}" HorizontalAlignment="Right" Width="160" Click="options_Click"/>
+                                <MenuItem Header="Exit" Padding="15 2 0 2" Style="{DynamicResource SimpleMenuItem}" HorizontalAlignment="Right" Width="160" Click="exit_Click"/>
+                            </MenuItem>
+                        </Menu>-->
+                        <!--<Image RenderOptions.BitmapScalingMode="HighQuality" Width="25" Margin="0 10 0 0">
+                        <Image.Source>
+                            <BitmapImage UriSource="/images/settings_icon.png" />
+                        </Image.Source>
+                    </Image>-->
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <DockPanel DockPanel.Dock="Top"  >
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <!--<StackPanel.Background>
+        		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        			<GradientStop Color="#FFF3F3F3" Offset="0.009"/>
+        			<GradientStop Color="White" Offset="0.552"/>
+        			<GradientStop Color="#FFEBEBEB" Offset="1"/>
+        		</LinearGradientBrush>
+        	</StackPanel.Background>-->
+                    <!--<Rectangle Height="2" Fill="#69bc45" />-->
+                    <StackPanel DockPanel.Dock="Top">
+                        <StackPanel Margin="0 10 0 20">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MinWidth="60"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Panel.ZIndex="1" >
+
+                                    <WrapPanel Margin="85 0 0 0" Orientation="Horizontal">
+                                        <ContentControl  MouseDown="createForms_Click" Cursor="Hand" >
+
+                                            <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="240" Height="120" Margin="0 10 40 0" HorizontalAlignment="Left">
+                                                <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
+                                                    <!--<Path Data="M49.5,25 C49.5,38.530976 38.530976,49.5 25,49.5 C11.469024,49.5 0.5,38.530976 0.5,25 C0.5,11.469024 11.469024,0.5 25,0.5 C38.530976,0.5 49.5,11.469024 49.5,25 z" Fill="#FF1D60AC" Height="35" Stretch="Fill" Width="35"/>-->
+
+                                                    <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2Zm14.23,32a2.59,2.59,0,0,1-2.59,2.59H13.36a2.59,2.59,0,0,1-2.59-2.59V15.95a2.59,2.59,0,0,1,2.59-2.59H36.64a2.59,2.59,0,0,1,2.59,2.59V34.05Z M13.36,21.12H25v2.59H13.36V21.12Z M13.36,15.95H25v2.59H13.36V15.95Z" Fill="#1d60ac" Height="35" Stretch="Fill" Width="35"/>
+                                                    <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" ><Run Text="CREATE FORMS"/></TextBlock>
+                                                    <TextBlock Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" ><Run Text="Create surveys or questionnaires with field validation and skip logic."/></TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                        </ContentControl>
+                                        <ContentControl MouseEnter="button_MouseOver" MouseDown="enterData_Click" Cursor="Hand">
+                                            <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="240" Height="120" Margin="0 10 0 0"  HorizontalAlignment="Left">
+                                                <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
+                                                    <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2ZM11.07,15.25H27.79V18H11.07V15.25ZM22.21,29.18H11.07V26.39H22.21v2.79ZM11.07,23.61V20.82H27.79v2.79H11.07Zm27.87,5.57H33.36v5.57H30.57V29.18H25V26.39h5.57V20.82h2.79v5.57h5.57v2.79Z" Fill="#f37c60" Height="35" Stretch="Fill" Width="35"/>
+                                                    <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center"><Run Text="ENTER DATA"/>
+
+                                                    </TextBlock>
+                                                    <TextBlock Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="Enter data, browse records, and search the database."/></TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                        </ContentControl>
+                                    </WrapPanel>
+
+                                    <WrapPanel Margin="85 0 0 0" Orientation="Horizontal">
+                                        <ContentControl MouseEnter="button_MouseOver" MouseDown="createMaps_Click" Cursor="Hand">
+                                            <Border Background="White" x:Name="enterDataLink" BorderBrush="#58595b" BorderThickness="1" Width="240" Height="120" Margin="0 20 40 0"  HorizontalAlignment="Left">
+                                                <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
+                                                    <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2Zm3.86,27.19L13.19,36.48l7.29-15.68,15.68-7.29Z M22.57,25a2.11,2.11,0,1,1,2.11,2.11A2.1,2.1,0,0,1,22.57,25Z" Fill="#00817e" Height="35" Stretch="Fill" Width="35"/>
+                                                    <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center"><Run Text="CREATE MAPS"/></TextBlock>
+                                                    <TextBlock Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="Map data with coordinates, by choropleth, or dot density."/></TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                        </ContentControl>
+                                        <ContentControl MouseEnter="button_MouseOver" MouseDown="statCalc_Click" Cursor="Hand">
+                                            <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="240" Height="120" Margin="0 20 0 0" HorizontalAlignment="Left">
+                                                <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
+                                                    <Path Data="M25,1.94A23.06,23.06,0,1,0,48.06,25,23.06,23.06,0,0,0,25,1.94ZM20.58,39H14.69V33.1h5.89V39Zm0-7.36H14.69V25.74h5.89v5.89Zm0-7.36H14.69V18.37h5.89v5.89Zm0-7.36H14.69V11h5.89V16.9ZM27.95,39H22.05V33.1h5.89V39Zm0-7.36H22.05V25.74h5.89v5.89Zm0-7.36H22.05V18.37h5.89v5.89Zm0-7.36H22.05V11h5.89V16.9ZM35.31,39H29.42V33.1h5.89V39Zm0-7.36H29.42V25.74h5.89v5.89Zm0-7.36H29.42V18.37h5.89v5.89Zm0-7.36H29.42V11h5.89V16.9Z" Fill="#69bc45" Height="35" Stretch="Fill" Width="35"/>
+                                                    <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center"><Run Text="STATCALC"/></TextBlock>
+                                                    <TextBlock Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="Statistical calculators for sample size, power, and more."/></TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                        </ContentControl>
+                                    </WrapPanel>
+                                </StackPanel>
+
+                            </Grid>
+                        </StackPanel>
+
+                        <Border Padding="0 0 0 10" Background="#e6e7e8" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" BorderBrush="#58595b"  Width="75" Height="105" Margin="5 0 0 0" HorizontalAlignment="Center">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                        <!--<Path Data="M49.5,25 C49.5,38.530976 38.530976,49.5 25,49.5 C11.469024,49.5 0.5,38.530976 0.5,25 C0.5,11.469024 11.469024,0.5 25,0.5 C38.530976,0.5 49.5,11.469024 49.5,25 z" Fill="#f37c60" Height="35" Stretch="Fill" Width="35"/>-->
+                                        <TextBlock Style="{StaticResource sectionTitle}" FontSize="14" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Width="75" HorizontalAlignment="Center"><Run Text="ANALYZE DATA"/></TextBlock>
+                                    </StackPanel>
+                                </Border>
+                                <WrapPanel Grid.Column="1" Orientation="Horizontal">
+
+
+                                    <ContentControl Padding="0 0 0 0" MouseEnter="button_MouseOver" MouseDown="classicAnalyze_Click" Cursor="Hand">
+                                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="240" Height="120" Margin="5 15 35 0" HorizontalAlignment="Left">
+                                            <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
+                                                <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2ZM21,32l-2.14,2.14L9.73,25l9.16-9.16L21,18l-7,7Zm10.08,2.14L29,32l7-7-7-7,2.14-2.14L40.27,25Z" Fill="#1d60ac" Height="35" Stretch="Fill" Width="35"/>
+                                                <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center"><Run Text="CLASSIC"/></TextBlock>
+                                                <TextBlock Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="Clean, transform, and analyze data with commands."/></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                    </ContentControl>
+                                    <ContentControl MouseEnter="button_MouseOver" MouseDown="visualAnalyze_Click" Cursor="Hand">
+                                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="240" Height="120" Margin="5 15 0 0" HorizontalAlignment="Left">
+                                            <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
+                                                <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2ZM18.45,35.79H14.22V21h4.23v14.8Zm8.46,0H22.68V14.65h4.23V35.79Zm8.46,0H31.14V27.34h4.23v8.46Z" Fill="#1d60ac" Height="35" Stretch="Fill" Width="35"/>
+                                                <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center"><Run Text="VISUAL DASHBOARD"/></TextBlock>
+                                                <TextBlock Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="Visualize analytical results with gadgets, charts, and tables."/></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                    </ContentControl>
+                                </WrapPanel>
+                            </Grid>
+                        </Border>
+
+                        <StackPanel  Background="#123b6a" Height="35" Margin="0 0 0 0">
+                            <StackPanel Orientation="Horizontal" Margin="10 7 10 0">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBlock ><Hyperlink Foreground="White" TextDecorations="None" FontWeight="SemiBold" RequestNavigate="Hyperlink_epiInfoWebsite" NavigateUri="http://wwwn.cdc.gov/epiinfo/"> EPI INFO WEBSITE</Hyperlink></TextBlock>
+                                    <TextBlock Foreground="White" Padding="10 0 10 0">|</TextBlock>
+                                    <ContentControl Cursor="Hand" MouseDown="aboutEpiInfo_click">
+                                        <TextBlock Foreground="White">ABOUT EPI INFO</TextBlock>
+                                    </ContentControl>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="250 0 0 0">
+                                    <ContentControl  Cursor="Hand" MouseDown="btnLocaleClick">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="White" Padding="0 0 5 0">LANGUAGE:</TextBlock>
+                                            <TextBlock Foreground="White" x:Name="tsslLocale"></TextBlock>
+                                        </StackPanel>
+                                    </ContentControl>
+                                    <StackPanel Orientation="Horizontal" Margin="15 0 5 0">
+                                        <TextBlock Foreground="#4a80bd">VERSION:</TextBlock>
+                                        <TextBlock Foreground="#4a80bd" x:Name="tsslVersion"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
+
+        </DockPanel>
+    </Grid>
+
+</UserControl>

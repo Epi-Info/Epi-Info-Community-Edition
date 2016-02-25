@@ -11,7 +11,8 @@ namespace Epi.Windows.Menu
     public class MenuWindowsModule : ModuleBase, IWindowsModule
 	{
         #region Private Attributes
-        private MenuMainForm form = null;
+       // private MenuMainForm form = null;
+        private WindowMain form = null;
         private Container container = null;
         //private MenuCommandProcessor processor = null;
         private string mnuFile = String.Empty;
@@ -59,7 +60,8 @@ namespace Epi.Windows.Menu
                 if (form == null)
                 {
                     // Create main form
-                    form = new MenuMainForm(this);
+                   // form = new MenuMainForm(this);
+                    form = new WindowMain();
                     container.Add(form);
                     form.Closed += new EventHandler(MainForm_Closed);
                     form.Disposed += new EventHandler(MainForm_Disposed);
