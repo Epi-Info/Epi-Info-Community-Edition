@@ -476,7 +476,7 @@ namespace Epi.Windows.Menu
                 else if (pnlRightMenuHeight == "240")
                 {
                     this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
-                    this.BeginStoryboard(FindResource("showEpiResource") as Storyboard);
+                   // this.BeginStoryboard(FindResource("showEpiResource") as Storyboard);
 
                 }
         
