@@ -383,8 +383,7 @@ namespace EpiDashboard
         }
 
         private void DashboardControl_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            introAvailableData.Visibility = Visibility.Collapsed;
+        {           
         }
 
         void mnuAutoArrange_Click(object sender, RoutedEventArgs e)
@@ -4006,7 +4005,7 @@ namespace EpiDashboard
                 scrollViewer.ContextMenu.PlacementTarget = iconFile;
                 scrollViewer.ContextMenu.IsOpen = true;
             }
-
+            introAvailableData.Visibility = Visibility.Collapsed;
             e.Handled = true;
             return;
         }
@@ -4098,6 +4097,7 @@ namespace EpiDashboard
 
         private void iconRefresh_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            introAvailableData.Visibility = Visibility.Collapsed;
             Refresh();
         }
 
@@ -4119,6 +4119,7 @@ namespace EpiDashboard
 
         private void iconDb_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            introAvailableData.Visibility = Visibility.Collapsed;
             if (!IsPopulatingDataSet)
             {
                 SetDataSource();
@@ -4165,6 +4166,7 @@ namespace EpiDashboard
 
         private void iconSave_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            introAvailableData.Visibility = Visibility.Collapsed;
             if (DashboardHelper != null)
             {
                 SaveCanvas();
@@ -4173,6 +4175,7 @@ namespace EpiDashboard
 
         private void iconSaveAs_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            introAvailableData.Visibility = Visibility.Collapsed;
             if (DashboardHelper != null)
             {
                 SaveCanvasAs();
@@ -4181,6 +4184,7 @@ namespace EpiDashboard
 
         private void iconCreateNewVariable_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            introAvailableData.Visibility = Visibility.Collapsed;
             if (DashboardHelper != null)
             {
                 if (isCreatingNewVariable)
@@ -4192,6 +4196,7 @@ namespace EpiDashboard
 
         private void iconFilter_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            introAvailableData.Visibility = Visibility.Collapsed;
             if (DashboardHelper != null)
             {
                 if (isCreatingFilter)
