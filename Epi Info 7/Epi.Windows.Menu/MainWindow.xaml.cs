@@ -451,7 +451,7 @@ namespace Epi.Windows.Menu
                
 
             }
-            else if (pnlRightMenuHeight == "183")
+            else if (pnlRightMenuHeight == "173")
             {
                 this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
 
@@ -467,7 +467,7 @@ namespace Epi.Windows.Menu
         private void HideStoryBoard() {
             var pnlRightMenuHeight = pnlRightMenu.Height.ToString();
 
-            if (pnlRightMenuHeight == "183")
+            if (pnlRightMenuHeight == "173")
                 {
                     this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
 
