@@ -388,12 +388,11 @@ namespace EpiDashboard.Mapping
 
             double increment = (double)valueList.Count / (double)classCount;
 
-            for (double i = increment - 1.0; Math.Round(i, 4) < valueList.Count - 1 ; i += increment)
+            for (double i = increment - 1.0; Math.Round(i, 4) < valueList.Count - 1; i += increment)
             {
-                //double value0 = valueEnumerator.ElementAt(Convert.ToInt32(Math.Floor(i)));
-                //double value1 = valueEnumerator.ElementAt(Convert.ToInt32(Math.Ceiling(i)));
-                //double value = (value1 + value0) / 2.0;
-                double value = valueEnumerator.ElementAt(Convert.ToInt32(Math.Ceiling(i)));
+                double value0 = valueEnumerator.ElementAt(Convert.ToInt32(Math.Floor(i)));
+                double value1 = valueEnumerator.ElementAt(Convert.ToInt32(Math.Ceiling(i)));
+                double value = (value1 + value0) / 2.0;
 
                 if (value < thematicItem.Min)
                 {
