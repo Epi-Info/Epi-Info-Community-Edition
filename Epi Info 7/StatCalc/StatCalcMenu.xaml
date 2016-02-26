@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="500" Height="500" Width="500">
+             Height="370" Width="530">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,7 +16,7 @@
     <Grid Background="White">
         <DockPanel>
             <StackPanel Background="Transparent" DockPanel.Dock="Top" Margin="15 0 0 0" Orientation="Horizontal">
-                <Image HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="HighQuality" Width="300" Margin="0 0 0 0">
+                <Image HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="HighQuality" Width="225" Margin="0 10 0 0">
                     <Image.Source>
                         <BitmapImage UriSource="/images/statcalc_logo_full.png"/>
                     </Image.Source>
@@ -24,19 +24,19 @@
 
             </StackPanel>
 
-            <StackPanel DockPanel.Dock="Bottom" Margin="0 20 0 0 ">
+            <StackPanel DockPanel.Dock="Top" Margin="20 20 0 0 ">
                 <WrapPanel Margin="25 0 0 0" Orientation="Horizontal">
                     <ContentControl Cursor="Hand" MouseDown="populationSurveyControl_Click" >
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="200" Height="auto" Margin="0 10 40 0" HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" Margin="0 7 0 0">
-                                <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" ><Run Text="Population survey"/></TextBlock>
+                        <Border Background="White"  BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 40 10">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 0">
+                                <TextBlock x:Name="txtPopulationSurvey" Style="{StaticResource sectionTitle}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"><Run Text="POPULATION SURVEY"/></TextBlock>
                             </StackPanel>
                         </Border>
                     </ContentControl>
                     <ContentControl Cursor="Hand" MouseDown="cohortCrossControl_Click">
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="200" Height="auto" Margin="0 10 0 0"  HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" Margin="0 7 0 0">
-                                <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center"><Run Text="Cohort or cross-sectional"/></TextBlock>
+                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 0 10"  HorizontalAlignment="Left">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                                <TextBlock x:Name="txtCohortorCross" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="COHORT OR&#10;CROSS-SECTIONAL"/></TextBlock>
                             </StackPanel>
                         </Border>
                     </ContentControl>
@@ -44,16 +44,16 @@
 
                 <WrapPanel Margin="25 0 0 0" Orientation="Horizontal">
                     <ContentControl Cursor="Hand" MouseDown="unmatchedControl_Click" >
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="200" Height="auto" Margin="0 10 40 0" HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" Margin="0 7 0 0">
-                                <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" ><Run Text="unmatched case-conrol"/></TextBlock>
+                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 40 10" HorizontalAlignment="Left">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                                <TextBlock x:Name="unmatchedCaseControl" Style="{StaticResource sectionTitle}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" ><Run Text="UNMATCHED&#10;CASE-CONTROL"/></TextBlock>
                             </StackPanel>
                         </Border>
                     </ContentControl>
                     <ContentControl Cursor="Hand" MouseDown="chiSquareTrend_Click">
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="200" Height="auto" Margin="0 10 0 0"  HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" Margin="0 7 0 0">
-                                <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center"><Run Text="chi square for trend"/></TextBlock>
+                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 0 10"  HorizontalAlignment="Left">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                                <TextBlock x:Name="txtChiSquare" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="CHI SQUARE&#10;FOR TREND"/></TextBlock>
                             </StackPanel>
                         </Border>
                     </ContentControl>
@@ -61,16 +61,16 @@
 
                 <WrapPanel Margin="25 0 0 0" Orientation="Horizontal">
                     <ContentControl Cursor="Hand" MouseDown="tables2x2Control_Click" >
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="200" Height="auto" Margin="0 10 40 0" HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" Margin="0 7 0 0">
-                                <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" ><Run Text="tables (2 x 2 x n)"/></TextBlock>
+                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 40 10" HorizontalAlignment="Left">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                                <TextBlock x:Name="txtTables22N" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center" ><Run Text="TABLES (2 x 2 x N)"/></TextBlock>
                             </StackPanel>
                         </Border>
                     </ContentControl>
                     <ContentControl Cursor="Hand" MouseDown="poissonControl_Click">
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="200" Height="auto" Margin="0 10 0 0"  HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" Margin="0 7 0 0">
-                                <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center"><Run Text="poisson (rare event vs. std)"/></TextBlock>
+                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 0 10"  HorizontalAlignment="Left">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                                <TextBlock x:Name="txtPoisson" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="POISSON&#10;(RARE EVENT VS. STD)"/></TextBlock>
                             </StackPanel>
                         </Border>
                     </ContentControl>
@@ -78,21 +78,47 @@
 
                 <WrapPanel Margin="25 0 0 0" Orientation="Horizontal">
                     <ContentControl Cursor="Hand" MouseDown="populationBinomial_Click" >
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="200" Height="auto" Margin="0 10 40 0" HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" Margin="0 7 0 0">
-                                <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" ><Run Text="Population binomial (proportion vs. std.)"/></TextBlock>
+                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 40 10" HorizontalAlignment="Left">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                                <TextBlock x:Name="txtPopulationBinomial" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center" ><Run Text="POPULATION BINOMIAL&#10;(PROPORTION VS. STD.)"/></TextBlock>
                             </StackPanel>
                         </Border>
                     </ContentControl>
                     <ContentControl Cursor="Hand" MouseDown="matchedPairControl_Click">
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1" Width="200" Height="auto" Margin="0 10 0 0"  HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" Margin="0 7 0 0">
-                                <TextBlock Style="{StaticResource sectionTitle}" HorizontalAlignment="Center"><Run Text="Matched Pair case control study"/></TextBlock>
+                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 0 10"  HorizontalAlignment="Left">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                                <TextBlock x:Name="txtMatchedPairCase" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="MATCHED PAIR&#10;CASE CONTROL STUDY"/></TextBlock>
                             </StackPanel>
                         </Border>
                     </ContentControl>
                 </WrapPanel>
 
+            </StackPanel>
+
+            <StackPanel  Background="#123b6a" Height="28" Margin="0 17 0 0">
+                <StackPanel Orientation="Horizontal" Margin="15 7 15 0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock ><Hyperlink Foreground="#d2dfee" TextDecorations="None" RequestNavigate="Hyperlink_epiInfoWebsite" NavigateUri="http://wwwn.cdc.gov/epiinfo/"> EPI INFO WEBSITE</Hyperlink></TextBlock>
+                        <TextBlock Foreground="#d2dfee" Padding="10 0 10 0">|</TextBlock>
+                        <ContentControl Cursor="Hand" MouseDown="aboutEpiInfo_click">
+                            <TextBlock Foreground="#d2dfee">ABOUT EPI INFO</TextBlock>
+                        </ContentControl>
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="100 0 0 0">
+                        <ContentControl  Cursor="Hand" MouseDown="btnLocaleClick">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="txtLanguage" Foreground="#d2dfee" Padding="0 0 5 0">LANGUAGE:</TextBlock>
+                                <TextBlock Foreground="#d2dfee" x:Name="tsslLocale"></TextBlock>
+                            </StackPanel>
+                        </ContentControl>
+                        <StackPanel Orientation="Horizontal" Margin="15 0 5 0">
+                            <TextBlock Foreground="#8eafd5">VERSION:</TextBlock>
+                            <TextBlock Foreground="#8eafd5" x:Name="tsslVersion"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
             </StackPanel>
 
         </DockPanel>

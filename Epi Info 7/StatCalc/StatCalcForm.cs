@@ -23,5 +23,12 @@ namespace StatCalc
             host.Child = form;
             this.Controls.Add(host);
         }
+
+        
+        
+        
+        
+
+        
     }
 }

@@ -18,7 +18,7 @@ namespace Epi.Windows.Menu
         public WindowMain() 
         {
             InitializeComponent();
-            this.Text = "Epi Info 7 - Menu";// SharedStrings.MENU;
+            //this.Text = "Epi Info 7 - Menu";// SharedStrings.MENU;
             host = new ElementHost();
             host.Dock = DockStyle.Fill; 
             form = new MainWindow();           
@@ -42,6 +42,12 @@ namespace Epi.Windows.Menu
         private void WindowMain_Load(object sender, EventArgs e)
         {
 
-        }       
+        }
+
+        
+
+        
+
+       
     }
 }

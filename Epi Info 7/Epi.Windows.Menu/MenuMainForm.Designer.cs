@@ -292,6 +292,7 @@ namespace Epi.Windows.Menu
             // 
             // mnuMainMenu
             // 
+            this.mnuMainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mnuMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.viewToolStripMenuItem,
@@ -300,6 +301,7 @@ namespace Epi.Windows.Menu
             this.helpToolStripMenuItem});
             resources.ApplyResources(this.mnuMainMenu, "mnuMainMenu");
             this.mnuMainMenu.Name = "mnuMainMenu";
+            this.mnuMainMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mnuMainMenu_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -417,6 +419,7 @@ namespace Epi.Windows.Menu
             this.unmatchedCasecontrolToolStripMenuItem1});
             this.sampleSizeAndPowerToolStripMenuItem1.Name = "sampleSizeAndPowerToolStripMenuItem1";
             resources.ApplyResources(this.sampleSizeAndPowerToolStripMenuItem1, "sampleSizeAndPowerToolStripMenuItem1");
+            this.sampleSizeAndPowerToolStripMenuItem1.Click += new System.EventHandler(this.sampleSizeAndPowerToolStripMenuItem1_Click);
             // 
             // populationSurveyToolStripMenuItem1
             // 
@@ -543,6 +546,7 @@ namespace Epi.Windows.Menu
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnDashboard
             // 
