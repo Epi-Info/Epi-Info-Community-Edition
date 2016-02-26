@@ -197,17 +197,28 @@ namespace Epi.Windows.Analysis.Dialogs
                     }
                 }
                 if (this.EpiInterpreter.Context.DataSet != null)
-                {                  
-                    View CurrentView = this.EpiInterpreter.Context.CurrentProject.GetViewByName(this.EpiInterpreter.Context.CurrentRead.Identifier);//EI-705
-                    foreach (DataColumn column in this.EpiInterpreter.Context.DataSet.Tables["Output"].Columns)
-                    {
-                        if ((CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.LabelField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.CommandButtonField)) & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.PhoneNumberField))
-                               & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.MultilineTextField)) & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.GroupField)) &(CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.CheckBoxField))
-                               & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.ImageField)) & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.OptionField)) & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.GridField))
-                               & (CurrentView.Fields.Exists(column.ColumnName) &&!(CurrentView.Fields[column.ColumnName] is Epi.Fields.MirrorField)))
+                {    
+                     View CurrentView=null;
+                     if (this.EpiInterpreter.Context.CurrentProject != null)
+                     {
+                         CurrentView = this.EpiInterpreter.Context.CurrentProject.GetViewByName(this.EpiInterpreter.Context.CurrentRead.Identifier);//EI-705
+                         foreach (DataColumn column in this.EpiInterpreter.Context.DataSet.Tables["Output"].Columns)
+                         {
+                             if ((CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.LabelField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.CommandButtonField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.PhoneNumberField))
+                                & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.MultilineTextField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.GroupField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.CheckBoxField))
+                                & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.ImageField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.OptionField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.GridField))
+                                & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.MirrorField)))
 
-                           currentFields.Add(column.ColumnName);
-                    }
+                                 currentFields.Add(column.ColumnName);
+                         }
+                     }
+                     else
+                     {                        
+                         foreach (DataColumn column in this.EpiInterpreter.Context.DataSet.Tables["Output"].Columns)
+                         {
+                             currentFields.Add(column.ColumnName);
+                         }
+                     }
                 }
                 currentFields.Sort();
             }
