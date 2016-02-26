@@ -13,7 +13,7 @@
 
     <Style TargetType="TextBlock" x:Key="sectionTitle">
         <Setter Property="FontSize" Value="18" />
-        <Setter Property="FontFamily" Value="/StatCalc;Component/Fonts/#Century Gothic, Segoe UI" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Foreground" Value="#1d60ac" />
         <Setter Property="FontWeight" Value="SemiBold" />
     </Style>

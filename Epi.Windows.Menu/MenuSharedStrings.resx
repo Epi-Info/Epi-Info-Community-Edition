@@ -117,4 +117,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MENU_ANALYZE_DATA" xml:space="preserve">
+    <value>ANALYZE DATA</value>
+  </data>
+  <data name="MENU_CLASSIC_ANALYZE" xml:space="preserve">
+    <value>CLASSIC</value>
+  </data>
+  <data name="MENU_CLASSIC_ANALYZEDSCP" xml:space="preserve">
+    <value>Clean, transform, and analyze data with commands.</value>
+  </data>
+  <data name="MENU_CONTACT_HELP_DESK" xml:space="preserve">
+    <value>CONTACT HELP DESK</value>
+  </data>
+  <data name="MENU_CONTENT" xml:space="preserve">
+    <value>CONTENTS</value>
+  </data>
+  <data name="MENU_CREATE_FORMS" xml:space="preserve">
+    <value>CREATE FORMS</value>
+  </data>
+  <data name="MENU_CREATE_FORMS_DESCP" xml:space="preserve">
+    <value>Create surveys or questionnaires with field validation and skip logic.</value>
+  </data>
+  <data name="MENU_CREATE_MAPS" xml:space="preserve">
+    <value>CREATE MAPS</value>
+  </data>
+  <data name="MENU_CREATE_MAPS_DESCP" xml:space="preserve">
+    <value>Map data with coordinates, by choropleth, or dot density.</value>
+  </data>
+  <data name="MENU_ENTER_DATA" xml:space="preserve">
+    <value>ENTER DATA</value>
+  </data>
+  <data name="MENU_ENTER_DATA_DESCP" xml:space="preserve">
+    <value>Enter data, browse records, and search the database.</value>
+  </data>
+  <data name="MENU_EPI_INFO_LOGS" xml:space="preserve">
+    <value>EPI INFO™ LOGS</value>
+  </data>
+  <data name="MENU_EPI_INFO_QA" xml:space="preserve">
+    <value>EPI INFO™ Q&amp;A</value>
+  </data>
+  <data name="MENU_EXIT" xml:space="preserve">
+    <value>EXIT</value>
+  </data>
+  <data name="MENU_HOW_TO_VIDEOS" xml:space="preserve">
+    <value>HOW TO' VIDEOS</value>
+  </data>
+  <data name="MENU_LANGUAGE" xml:space="preserve">
+    <value>LANGUAGE</value>
+  </data>
+  <data name="MENU_OPTIONS" xml:space="preserve">
+    <value>OPTIONS</value>
+  </data>
+  <data name="MENU_OTHER_RESOURCES" xml:space="preserve">
+    <value>OTHER EPI RESOURCES</value>
+  </data>
+  <data name="MENU_STATCALC" xml:space="preserve">
+    <value>STATCALC</value>
+  </data>
+  <data name="MENU_STATCALC_DESCP" xml:space="preserve">
+    <value>Statistical calculators for sample size, power, and more.</value>
+  </data>
+  <data name="MENU_VISUALDASHBOARD" xml:space="preserve">
+    <value>VISUAL DASHBOARD</value>
+  </data>
+  <data name="MENU_VISUALDASHBOARD_DESCP" xml:space="preserve">
+    <value>Visualize analytical results with gadgets, charts, and tables.</value>
+  </data>
 </root>

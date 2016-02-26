@@ -39,6 +39,35 @@ namespace Epi.Windows.Menu
                 this.tsslLocale.Text = Thread.CurrentThread.CurrentUICulture.Name;
                 this.tsslVersion.Text = appId.Version;
                 mainform = new MainForm();
+
+            #region Translation
+
+            txtlblCreateForms.Text = MenuSharedStrings.MENU_CREATE_FORMS;
+            txtlblCreateFormsDescp.Text = MenuSharedStrings.MENU_CREATE_FORMS_DESCP;
+            txtlblEnterData.Text = MenuSharedStrings.MENU_ENTER_DATA;
+            txtlblEnterDataDescp.Text = MenuSharedStrings.MENU_ENTER_DATA_DESCP;
+            txtlblCreateMaps.Text = MenuSharedStrings.MENU_CREATE_MAPS;
+            txtlblCreateMapsDescp.Text = MenuSharedStrings.MENU_CREATE_MAPS_DESCP;
+            txtlblStatCalc.Text = MenuSharedStrings.MENU_STATCALC;
+            txtlblStatCalcDescp.Text = MenuSharedStrings.MENU_STATCALC_DESCP;
+            txtlblAnalyzeData.Text = MenuSharedStrings.MENU_ANALYZE_DATA;
+            txtlblClassic.Text = MenuSharedStrings.MENU_CLASSIC_ANALYZE;
+            txtlblClassicDescp.Text = MenuSharedStrings.MENU_CLASSIC_ANALYZEDSCP;
+            txtlblVisualDashboard.Text = MenuSharedStrings.MENU_VISUALDASHBOARD;
+            txtlblVisualDashboardDscp.Text = MenuSharedStrings.MENU_VISUALDASHBOARD_DESCP;
+            txtLanguage.Text = MenuSharedStrings.MENU_LANGUAGE;
+            txtContents.Text = MenuSharedStrings.MENU_CONTENT;
+            txtHowToVideos.Text = MenuSharedStrings.MENU_HOW_TO_VIDEOS;
+            txtEpiInfoQA.Text = MenuSharedStrings.MENU_EPI_INFO_QA;
+            txtContactHelpDesk.Text = MenuSharedStrings.MENU_CONTACT_HELP_DESK;
+            txtOtherEpiResources.Text = MenuSharedStrings.MENU_OTHER_RESOURCES;
+            txtEpiInfoLogs.Text = MenuSharedStrings.MENU_EPI_INFO_LOGS;
+            txtOptions.Text = MenuSharedStrings.MENU_OPTIONS;
+            txtExit.Text = MenuSharedStrings.MENU_EXIT;
+
+
+
+            #endregion 
         }
 
         #endregion
@@ -77,19 +106,93 @@ namespace Epi.Windows.Menu
             LoadModule("MAKEVIEW");
         }
 
+        private void createForms_hover(object sender, EventArgs e)
+        {
+
+            createFormsBox.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#f3f3f3"));
+           
+        }
+
+        private void createForms_Leave(object sender, EventArgs e)
+        {
+            createFormsBox.Background = Brushes.White;
+
+        }
+
+        private void enterData_Leave(object sender, EventArgs e)
+        {
+            enterDataBox.Background = Brushes.White;
+        }
+
+        private void enterData_hover(object sender, EventArgs e)
+        {
+
+            enterDataBox.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#f3f3f3"));
+
+        }
+
+        private void createMaps_Leave(object sender, EventArgs e)
+        {
+            createMapsBox.Background = Brushes.White;
+        }
+
+        private void createMaps_hover(object sender, EventArgs e)
+        {
+
+            createMapsBox.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#f3f3f3"));
+
+        }
+
+        private void statCalc_Leave(object sender, EventArgs e)
+        {
+            statCalcBox.Background = Brushes.White;
+        }
+
+        private void statCalc_hover(object sender, EventArgs e)
+        {
+
+            statCalcBox.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#f3f3f3"));
+
+        }
+
+        private void classic_hover(object sender, EventArgs e)
+        {
+            classicBox.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#f3f3f3"));
+        }
+
+        private void classic_Leave(object sender, EventArgs e)
+        {
+            classicBox.Background = Brushes.White;
+        }
+
+
+        private void visualDashboard_hover(object sender, EventArgs e)
+        {
+            visualDashboardBox.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#f3f3f3"));
+        }
+
+        private void visualDashboard_Leave(object sender, EventArgs e)
+        {
+            visualDashboardBox.Background = Brushes.White;
+        }
+
+
         //Link for Epi Info Website - located in footer
         private void Hyperlink_epiInfoWebsite(object sender, RequestNavigateEventArgs e)
         {
+            HideStoryBoard();
             System.Diagnostics.Process.Start(e.Uri.ToString());
         }
 
         private void contents_Click(object sender, EventArgs e)
         {
+            HideStoryBoard();
             System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/index.htm");
         }
 
         private void howToVideo_Click(object sender, EventArgs e)
         {
+            HideStoryBoard();
             try
             {
                 System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
@@ -112,27 +215,32 @@ namespace Epi.Windows.Menu
 
         private void epiInfoQA_Click(object sender, EventArgs e)
         {
+            HideStoryBoard();
             System.Diagnostics.Process.Start("https://epiinfo.atlassian.net/wiki/questions");
         }
 
         private void contactHelpDesk_Click(object sender, EventArgs e)
         {
+            HideStoryBoard();
             Epi.Windows.MsgBox.ShowInformation(SharedStrings.HELPDESK_LOGIN);
             System.Diagnostics.Process.Start("https://epiinfo.atlassian.net/servicedesk/customer/portal/1");
         }
 
         private void activEpi_Click(object sender, EventArgs e)
         {
+            HideStoryBoard();
             System.Diagnostics.Process.Start("http://activepi.com");
         }
 
         private void openEpi_Click(object sender, EventArgs e)
         {
+            HideStoryBoard();
             System.Diagnostics.Process.Start("http://openepi.com");
         }
 
         private void epi_InfoLogs_Click(object sender, EventArgs e)
         {
+            HideStoryBoard();
             string logFilePath = Logger.GetLogFilePath();
             //WinUtil.OpenTextFile(Logger.GetLogFilePath());
 
@@ -149,6 +257,7 @@ namespace Epi.Windows.Menu
 
         private void options_Click(object sender, EventArgs e)
         {
+            HideStoryBoard();
             OnOptionsClicked(OptionsDialog.OptionsTabIndex.General);
         }
 
@@ -157,6 +266,7 @@ namespace Epi.Windows.Menu
         /// </summary>
         protected void OnAboutClicked()
         {
+            HideStoryBoard();
             if (mainform == null)
                 mainform = new MainForm();
             AboutEpiInfoDialog dlg = new AboutEpiInfoDialog(mainform);
@@ -177,13 +287,10 @@ namespace Epi.Windows.Menu
                 Close(this, new RoutedEventArgs());   
         }
 
-        void MainWindow_Unloaded(object sender, RoutedEventArgs e)
-        {
-           // throw new NotImplementedException();
-        }
-
+       
         private void LoadModule(string moduleType)
         {
+            HideStoryBoard();
             try
             {
                // BeginBusy(SharedStrings.LOADING_MODULE);
@@ -281,7 +388,8 @@ namespace Epi.Windows.Menu
 
         private void btnLocaleClick(object sender, RoutedEventArgs e)
         {
-            OnOptionsClicked(OptionsDialog.OptionsTabIndex.General);
+            HideStoryBoard();
+            OnOptionsClicked(OptionsDialog.OptionsTabIndex.Language);
         }
 
         /// <summary>
@@ -328,6 +436,7 @@ namespace Epi.Windows.Menu
 
         private void aboutEpiInfo_click(object sender, MouseEventArgs e)
         {
+            HideStoryBoard();
             OnAboutClicked();
         }
 
@@ -339,22 +448,38 @@ namespace Epi.Windows.Menu
             if (pnlRightMenuHeight == "0")
             {
                 this.BeginStoryboard(FindResource("sbShowRightMenu") as Storyboard);
+               
 
             }
-            else if (pnlRightMenuHeight == "200")
+            else if (pnlRightMenuHeight == "183")
             {
                 this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
-
 
             }
             else if (pnlRightMenuHeight == "240")
             {
                 this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
-
-
             }
 
             //MessageBox.Show("Hide");
+        }
+
+        private void HideStoryBoard() {
+            var pnlRightMenuHeight = pnlRightMenu.Height.ToString();
+
+            if (pnlRightMenuHeight == "183")
+                {
+                    this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
+
+
+                }
+                else if (pnlRightMenuHeight == "240")
+                {
+                    this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
+                    this.BeginStoryboard(FindResource("showEpiResource2") as Storyboard);
+
+                }
+        
         }
 
         private void Other_EpiResource_Click(object sender, EventArgs e)
@@ -374,6 +499,25 @@ namespace Epi.Windows.Menu
 
 
             }
-        }    
+        }
+
+      
+
+        
+
+
+       
+        
+
+       
+
+
+
+        //private void helpandother_leave(object sender, MouseEventArgs e)
+        //{
+        //    this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
+        //}
+
+           
     }
 }
