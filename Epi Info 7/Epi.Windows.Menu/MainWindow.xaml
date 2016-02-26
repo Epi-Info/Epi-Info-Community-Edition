@@ -148,13 +148,15 @@
                             </Image>
                             
                         </ContentControl>-->
-                        <ContentControl Name="btnRightMenuHide"  MouseDown="btnRightMenuHide_Click" Visibility="Visible">
-                            <Image RenderOptions.BitmapScalingMode="HighQuality" Width="25" Margin="0 30 0 0" Cursor="Hand">
+                        <ContentControl Name="btnRightMenuHide"  MouseDown="btnRightMenuHide_Click" Margin="0,0,0,0">
+                            <!--<Image Width="25" Margin="0 30 0 0" Cursor="Hand">
                                 <Image.Source>
                                     <BitmapImage UriSource="/images/helpandother.png" />
                                 </Image.Source>
-                            </Image>
+                            </Image>-->
+                            <Path Margin="4 29 0 0" Cursor="Hand" Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2Zm0,27.6-9.2-9.2H34.2Z " Fill="#58595b" Height="25" Stretch="Fill" Width="25"/>
                         </ContentControl>
+
                         <!--<Menu Background="Transparent"   >
 
                             <MenuItem x:Name="setting_button"    >
