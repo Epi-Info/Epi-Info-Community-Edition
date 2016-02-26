@@ -141,6 +141,14 @@ namespace EpiDashboard.Mapping
             public string MaxName { get; set; }
             public List<double> RangeStarts { get; set; }
             public int RowCount { get; set; }
+            public Dictionary<double, ClassDescription> ClassDescriptions { get; set; }
+        }
+
+        public struct ClassDescription
+        {
+            public double Start { get; set; }
+            public double End { get; set; }
+            public double ValueCount { get; set; }
         }
 
         public struct Values
@@ -269,7 +277,7 @@ namespace EpiDashboard.Mapping
             return index;
         }
 
-        public List<double> CalculateRangeStarts(int classCount, ThematicItem thematicItem, List<double> valueList)
+        public Dictionary<double, ClassDescription> CalculateQuantiles(int classCount, ThematicItem thematicItem, List<double> valueList)
         {
             List<double> uniqueValues = valueList
                 .Select(e => e)
@@ -288,6 +296,84 @@ namespace EpiDashboard.Mapping
                 }
             }
             
+            List<double> rangeStarts = new List<double>();
+
+            double totalRange = thematicItem.Max - thematicItem.Min;
+            double portion = totalRange / classCount;
+
+            Dictionary<double, ClassDescription> classDetail = new Dictionary<double, ClassDescription>();
+
+            IEnumerable<double> valueEnumerator =
+                from aValue in valueList
+                orderby aValue
+                select aValue;
+
+            double increment = (double)valueList.Count / (double)classCount;
+
+            List<double> inClass = new List<double>();
+
+            int ordinalStart = 0;
+            int ordinalEnd = 0;
+            int ordinalUnderCut = 0;
+            int ordinalOverCut = 0;
+
+            double valueUnderCut = valueEnumerator.ElementAt(ordinalUnderCut);
+            double valueOverCut = valueEnumerator.ElementAt(ordinalOverCut);
+            double cutpoint = (valueUnderCut + valueOverCut) / 2.0;
+
+            for (int classOrdinal = 1; classOrdinal <= classCount; classOrdinal++)
+            {
+                if (classOrdinal == 1)
+                {
+                    ordinalStart = 0;
+                    ordinalEnd = Convert.ToInt32(Convert.ToInt32(Math.Floor(increment * classOrdinal))) - 1;
+
+                    cutpoint = Math.Round(valueEnumerator.ElementAt(ordinalStart), 4);
+                }
+                else
+                {
+                    ordinalStart = Convert.ToInt32(Convert.ToInt32(Math.Ceiling(increment * (classOrdinal - 1)))) - 1;
+                    ordinalEnd = Convert.ToInt32(Convert.ToInt32(Math.Floor(increment * classOrdinal))) - 1;
+                    ordinalUnderCut = Convert.ToInt32(Convert.ToInt32(Math.Floor(increment * (classOrdinal - 1)))) - 1;
+                    ordinalOverCut = Convert.ToInt32(Convert.ToInt32(Math.Ceiling(increment * (classOrdinal - 1)))) - 1;
+
+                    valueUnderCut = valueEnumerator.ElementAt(ordinalUnderCut);
+                    valueOverCut = valueEnumerator.ElementAt(ordinalOverCut);
+
+                    cutpoint = Math.Round((valueUnderCut + valueOverCut) / 2.0, 4);
+                }
+                
+                ClassDescription description = new ClassDescription();
+                description.Start = valueEnumerator.ElementAt(ordinalStart);
+                description.End = valueEnumerator.ElementAt(ordinalEnd);
+                description.ValueCount = 1 + ordinalEnd - ordinalStart;
+                
+                classDetail.Add(cutpoint, description);
+                rangeStarts.Add(cutpoint);
+            }
+
+            return classDetail;
+        }
+
+        public List<double> CalculateRangeStarts(int classCount, ThematicItem thematicItem, List<double> valueList)
+        {
+            List<double> uniqueValues = valueList
+                .Select(e => e)
+                .Distinct()
+                .ToList();
+
+            if (classCount > uniqueValues.Count)
+            {
+                if (uniqueValues.Count > 2)
+                {
+                    classCount = uniqueValues.Count;
+                }
+                else
+                {
+                    throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
+                }
+            }
+
             List<double> rangeStarts = new List<double>();
 
             double totalRange = thematicItem.Max - thematicItem.Min;
@@ -731,6 +817,7 @@ namespace EpiDashboard.Mapping
             if (this.UseQuantiles)
             {
                 thematicItem.RangeStarts = CalculateRangeStarts(classCount, thematicItem, valueList);
+                // dpb thematicItem.ClassDescriptions = CalculateQuantiles(classCount, thematicItem, valueList);
             }
             else
             {
