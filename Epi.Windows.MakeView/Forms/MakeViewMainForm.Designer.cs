@@ -270,8 +270,8 @@ namespace Epi.Windows.MakeView.Forms
             // 
             // MainToolStripContainer.TopToolStripPanel
             // 
-            this.MainToolStripContainer.TopToolStripPanel.Controls.Add(this.MainMenu);
             this.MainToolStripContainer.TopToolStripPanel.Controls.Add(this.MainToolStrip);
+            this.MainToolStripContainer.TopToolStripPanel.Controls.Add(this.MainMenu);
             // 
             // dockManager1
             // 
@@ -288,6 +288,7 @@ namespace Epi.Windows.MakeView.Forms
             // MainMenu
             // 
             resources.ApplyResources(this.MainMenu, "MainMenu");
+            this.MainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
@@ -769,6 +770,7 @@ namespace Epi.Windows.MakeView.Forms
             // MainToolStrip
             // 
             resources.ApplyResources(this.MainToolStrip, "MainToolStrip");
+            this.MainToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNew,
             this.btnOpen,

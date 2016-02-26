@@ -41,7 +41,7 @@
     <StartupObject>Epi.Windows.AnalysisDashboard.EntryPoint</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>App.ico</ApplicationIcon>
+    <ApplicationIcon>App_old.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
+    <Content Include="App_old.ico" />
     <Content Include="TestCases\TestCanvas01_output.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

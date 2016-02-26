@@ -42,7 +42,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1" x:Name="stkLegends" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Bottom" Background="#303030" Visibility="Visible">
                 <TextBlock x:Name="legendTitleTextBlock" Foreground="White"  Background="#6a6a6a" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Width="310" Height="40" 
-                           Padding="10,10,10,0" TextAlignment="Center" FontFamily="Segoe">Map Legend</TextBlock>
+                           Padding="10,10,10,0" TextAlignment="Center" FontFamily="Segoe">xfe__Map Legend</TextBlock>
             </StackPanel>
         </Grid>
 
@@ -193,10 +193,10 @@
                         <DockPanel x:Name="iconLegend"  Margin="5" Style="{StaticResource menuIconStyle}" Grid.Row="7" MouseLeftButtonUp="iconHideShowLegend_MouseLeftButtonUp" IsEnabled="True" Visibility="Visible">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipLegendHeader" FontWeight="Bold">Hide/Show Legend</Label>
+                                    <Label x:Name="tooltipLegendHeader" FontWeight="Bold">xfe_Hide/Show Legend</Label>
                                     <TextBlock x:Name="tooltipLegend"
                                                Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">
-                                        Hide or show the map legend/key of the layers on the map.
+                                        xfe_Hide or show the map legend/key of the layers on the map.
                                     </TextBlock>
                                 </StackPanel>
                             </DockPanel.ToolTip>
@@ -377,12 +377,9 @@
             <Rectangle Fill="#00919191" Stroke="Gray" Margin="0,0,0,5" />
             <Border Background="#DDFFFFFF" BorderBrush="DarkGray" Margin="10,10,10,15"
                     Width="850" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" >
-
             </Border>
             <Grid x:Name="grdLayerConfigContainer" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Image x:Name="imgCloseLayer" Source="..\Images\x_over.png" Cursor="Hand" HorizontalAlignment="Right" Margin="2" VerticalAlignment="Top" Stretch="None" />
         </Grid>
-
-      
     </Grid>
 </UserControl>

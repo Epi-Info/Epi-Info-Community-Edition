@@ -132,6 +132,7 @@ namespace EpiDashboard
             CloseGadget();
         }
 
+
         /// <summary>
         /// Tells the gadget to begin processing output on a new worker thread
         /// </summary>
