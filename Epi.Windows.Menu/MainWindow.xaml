@@ -11,18 +11,18 @@
             </ResourceDictionary.MergedDictionaries>
 
             <Storyboard x:Key="sbShowRightMenu" >
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="0" To="183"  Duration="0:0:0.1" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="0" To="173"  Duration="0:0:0.1" />
             </Storyboard>
             <Storyboard x:Key="sbHideRightMenu">
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="183" To="0"  Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="173" To="0"  Duration="0:0:0.2" />
             </Storyboard>
 
             <Storyboard x:Key="showEpiResource">
                 <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="0" To="50"  Duration="0:0:0.1" />
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="183" To="240"  Duration="0:0:0.1" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="173" To="240"  Duration="0:0:0.1" />
             </Storyboard>
             <Storyboard x:Key="hideEpiResource">
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="240" To="183"  Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="240" To="173"  Duration="0:0:0.2" />
                 <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="50" To="0"  Duration="0:0:0.2" />
             </Storyboard>
 
@@ -40,6 +40,13 @@
             
             <Border BorderBrush="#5c5d5f" BorderThickness="1" Width="170" Height="Auto" Background="White"  >
                 <WrapPanel Orientation="Vertical">
+                    <ContentControl MouseDown="options_Click">
+                        <StackPanel>
+                            
+                                <TextBlock x:Name="txtOptions" Style="{StaticResource setting_buttons}">OPTIONS</TextBlock>
+                            
+                        </StackPanel>
+                    </ContentControl>
                     <ContentControl MouseDown="contents_Click">
                         <StackPanel>
                             <TextBlock x:Name="txtContents" Style="{StaticResource setting_buttons}">CONTENTS</TextBlock>
@@ -89,14 +96,8 @@
                             <TextBlock x:Name="txtEpiInfoLogs" Style="{StaticResource setting_buttons}">EPI INFO™ LOGS</TextBlock>
                         </StackPanel>
                     </ContentControl>
-                    <ContentControl MouseDown="options_Click">
-                        <StackPanel>
-                            <Border BorderBrush="#c8c8c8" BorderThickness="0 0 0 1">
-                                <TextBlock x:Name="txtOptions" Style="{StaticResource setting_buttons}">OPTIONS</TextBlock>
-                            </Border>
-                        </StackPanel>
-                    </ContentControl>
-                    <ContentControl MouseDown="exit_Click">
+                    
+                    <ContentControl MouseDown="exit_Click" Visibility="Collapsed">
                         <StackPanel>
                             <TextBlock x:Name="txtExit" Style="{StaticResource setting_buttons}">EXIT</TextBlock>
                         </StackPanel>
