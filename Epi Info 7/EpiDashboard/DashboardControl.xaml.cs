@@ -29,7 +29,7 @@ namespace EpiDashboard
     public delegate void NotificationButtonHandler();
 
     public delegate void StatusStripButtonHandler();
-
+     
     public delegate void GadgetCloseButtonHandler();
     public delegate void GadgetConfigButtonHandler();
     public delegate void GadgetDescriptionButtonHandler();
@@ -2121,7 +2121,8 @@ namespace EpiDashboard
                 dataDictionaryControl.GadgetClosing += new GadgetClosingHandler(gadget_GadgetClosing);
                 DragCanvas.SetZIndex(dataDictionaryControl, 10000);
                 canvasMain.Children.Add(dataDictionaryControl);
-
+                dataDictionaryControl.Width = System.Windows.SystemParameters.PrimaryScreenWidth / 1.2;
+                //MessageBox.Show(System.Windows.SystemParameters.PrimaryScreenHeight.ToString());
                 DragCanvas.SetCanBeDragged(dataDictionaryControl, true);
             }
         }
@@ -4322,6 +4323,7 @@ namespace EpiDashboard
                     dataDisplay.Visibility = System.Windows.Visibility.Visible;
                     dataDictionary.Visibility = System.Windows.Visibility.Collapsed;
                     duplicatesDisplay.Visibility = Visibility.Collapsed;
+                    
                 }
                 else if (cmbView.SelectedIndex == 2)
                 {

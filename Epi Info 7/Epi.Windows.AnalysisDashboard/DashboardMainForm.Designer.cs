@@ -53,11 +53,13 @@
             // 
             // toolStripContainer1.ContentPanel
             // 
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(804, 507);
+            this.toolStripContainer1.ContentPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1072, 628);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(804, 532);
+            this.toolStripContainer1.Size = new System.Drawing.Size(1072, 655);
             this.toolStripContainer1.TabIndex = 0;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -68,6 +70,7 @@
             // toolStrip1
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnOpen,
             this.btnSave,
@@ -83,7 +86,7 @@
             this.lblRecordCount});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(139, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(140, 27);
             this.toolStrip1.TabIndex = 0;
             // 
             // btnOpen
@@ -92,7 +95,7 @@
             this.btnOpen.Image = ((System.Drawing.Image)(resources.GetObject("btnOpen.Image")));
             this.btnOpen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(23, 22);
+            this.btnOpen.Size = new System.Drawing.Size(23, 24);
             this.btnOpen.Text = "Open";
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
@@ -103,7 +106,7 @@
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(23, 22);
+            this.btnSave.Size = new System.Drawing.Size(23, 24);
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -114,14 +117,14 @@
             this.btnSaveHtml.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveHtml.Image")));
             this.btnSaveHtml.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSaveHtml.Name = "btnSaveHtml";
-            this.btnSaveHtml.Size = new System.Drawing.Size(23, 22);
+            this.btnSaveHtml.Size = new System.Drawing.Size(23, 24);
             this.btnSaveHtml.Text = "Save as HTML";
             this.btnSaveHtml.Click += new System.EventHandler(this.btnSaveHtml_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // btnDataSource
             // 
@@ -129,7 +132,7 @@
             this.btnDataSource.Image = ((System.Drawing.Image)(resources.GetObject("btnDataSource.Image")));
             this.btnDataSource.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDataSource.Name = "btnDataSource";
-            this.btnDataSource.Size = new System.Drawing.Size(23, 22);
+            this.btnDataSource.Size = new System.Drawing.Size(23, 24);
             this.btnDataSource.Text = "Set Data Source";
             this.btnDataSource.Click += new System.EventHandler(this.btnDataSource_Click);
             // 
@@ -140,19 +143,19 @@
             this.toolStripBtnAddRelate.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnAddRelate.Image")));
             this.toolStripBtnAddRelate.ImageTransparentColor = System.Drawing.Color.White;
             this.toolStripBtnAddRelate.Name = "toolStripBtnAddRelate";
-            this.toolStripBtnAddRelate.Size = new System.Drawing.Size(23, 22);
+            this.toolStripBtnAddRelate.Size = new System.Drawing.Size(24, 24);
             this.toolStripBtnAddRelate.Text = "Add Related Data";
             this.toolStripBtnAddRelate.Click += new System.EventHandler(this.toolStripBtnAddRelate_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // lblDataSource
             // 
             this.lblDataSource.Name = "lblDataSource";
-            this.lblDataSource.Size = new System.Drawing.Size(73, 22);
+            this.lblDataSource.Size = new System.Drawing.Size(93, 24);
             this.lblDataSource.Text = "Data Source:";
             this.lblDataSource.Visible = false;
             // 
@@ -160,7 +163,7 @@
             // 
             this.txtDataSource.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtDataSource.Name = "txtDataSource";
-            this.txtDataSource.Size = new System.Drawing.Size(0, 22);
+            this.txtDataSource.Size = new System.Drawing.Size(0, 24);
             this.txtDataSource.Visible = false;
             // 
             // lblRecordsPrefix
@@ -175,23 +178,24 @@
             // 
             this.txtRecordCount.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtRecordCount.Name = "txtRecordCount";
-            this.txtRecordCount.Size = new System.Drawing.Size(0, 22);
+            this.txtRecordCount.Size = new System.Drawing.Size(0, 24);
             this.txtRecordCount.Visible = false;
             // 
             // lblRecordCount
             // 
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(53, 22);
+            this.lblRecordCount.Size = new System.Drawing.Size(67, 24);
             this.lblRecordCount.Text = "records )";
             this.lblRecordCount.Visible = false;
             // 
             // DashboardMainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 532);
+            this.ClientSize = new System.Drawing.Size(1072, 655);
             this.Controls.Add(this.toolStripContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "DashboardMainForm";
             this.Text = "Dashboard";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

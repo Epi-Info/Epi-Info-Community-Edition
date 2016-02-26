@@ -57,6 +57,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     
+   
     <Style TargetType="ListView">
         <Setter Property="BorderBrush" Value="#8a8a8a" />
         <Setter Property="BorderThickness" Value="1 1 1 1" />
@@ -88,6 +89,7 @@
         <Setter Property="Background" Value="{StaticResource GadgetBackgroundBrush}"></Setter>
     </Style>
 
+    
     <Style TargetType="ComboBox" x:Key="PropertiesComboxStyleLarge">
         <Setter Property="MaxWidth" Value="360" />
         <Setter Property="MinWidth" Value="240" />
@@ -102,13 +104,14 @@
     <Style TargetType="ComboBox" x:Key="PropertiesComboxStyleSmall">
         <Setter Property="Width" Value="60" />
     </Style>
-
-
     <Style TargetType="PropertyPanels:GadgetPropertiesPanelBase" x:Key="PropertiesPanelStyle">
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontFamily" Value="Global User Interface" />
         <Setter Property="Background" Value="White" />
     </Style>
+
+    
+
 
     <Style x:Key="PropertiesPanelCheckbox" TargetType="CheckBox">
         <Setter Property="Margin" Value="0,16,20,16" />
@@ -190,6 +193,7 @@
         <Setter Property="StrokeEndLineCap" Value="Round" />
         <Setter Property="Data" Value="M 200,0 L 0,200 M 0,0 L 200,200" />
     </Style>
+  
 
     <Style x:Key="CloseButtonStyle" TargetType="Button" >
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -241,6 +245,11 @@
         </DockPanel>
     </DataTemplate>
 
+    <Style TargetType="DataGrid" x:Key="dataGridHeader">
+      
+    </Style>
+
+
     <Style TargetType="DataGridColumnHeader">
         <Setter Property="Background" Value="{StaticResource ColumnHeaderBackgroundBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ColumnHeaderForegroundBrush}" />
@@ -284,10 +293,11 @@
         </Style.Triggers>
     </Style>
 
+
     <Style TargetType="{x:Type DataGridCell}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Template">
             <Setter.Value>
@@ -408,6 +418,10 @@
         </Style.Triggers>
     </Style>
     
+    <!--<Style TargetType="Label">
+        <Setter Property="Padding" Value="0" />
+    </Style>-->
+    
     <Style x:Key="PropertiesHeading" TargetType="Label">
         <Setter Property="FontSize" Value="54" />
         <Setter Property="FontWeight" Value="Light" />
@@ -490,6 +504,7 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource PrimaryAccentColor}" />
+        
 
     </Style>
 
@@ -601,7 +616,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+   
     <Style TargetType="Controls:SettingsToggleButton">
         <!--<Setter Property="Foreground" Value="#111111"/>-->
         <Setter Property="Foreground" Value="White"/>

@@ -961,6 +961,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
+    <Content Include="App_old.ico" />
     <Content Include="TestCases\AggregateStatistics.txt" />
     <Content Include="TestCases\Histogram.txt" />
     <Content Include="TestCases\Graph.txt" />

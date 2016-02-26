@@ -604,6 +604,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
+    <Content Include="App_old.ico" />
     <Content Include="epi2000c.ico" />
     <Content Include="Resources\GenericTablet.png" />
     <Content Include="Resources\MarkupCursor.cur" />
