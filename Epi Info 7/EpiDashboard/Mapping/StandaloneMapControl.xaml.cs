@@ -839,7 +839,7 @@ namespace EpiDashboard.Mapping
             {
                 object dataSource = resultArray[0];
                 string dataMember = resultArray[1].ToString();
-                string sqlQuery = resultArray[2].ToString();
+                string sqlQuery = resultArray.Count > 2 ? resultArray[2].ToString() : string.Empty;
                 DashboardHelper dashboardHelper;
                 if (dataSource is Project)
                 {
