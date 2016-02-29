@@ -4889,7 +4889,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                            Field field = factory.GetAssociatedField(control);
                            field = view.Fields[field.Name];
 
-                           if (control is DragableGroupBox == false)
+                           if (field is GroupField == false)
                            {
                                try
                                {
@@ -5147,7 +5147,10 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
                        foreach (Control control in pageControls)
                        {
-                           if (control is DragableGroupBox)
+                           Field field = factory.GetAssociatedField(control);
+                           field = view.Fields[field.Name];
+
+                           if (field is GroupField)
                            {
                                Label label = new Label();
                                label.Width = control.Width;
