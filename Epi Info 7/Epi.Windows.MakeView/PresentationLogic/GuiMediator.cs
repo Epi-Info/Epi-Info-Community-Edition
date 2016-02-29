@@ -2019,7 +2019,16 @@ namespace Epi.Windows.MakeView.PresentationLogic
                        // tabSquare.Size = TextRenderer.MeasureText("000", tabSquare.Font);
                         tabSquare.Size = TextRenderer.MeasureText(tabSquare.Text, tabSquare.Font);
                         tabSquare.Size = new Size(tabSquare.Size.Width + tabSquare.Padding.Size.Width, tabSquare.Size.Height + tabSquare.Padding.Size.Height);
-                      //  tabSquare.MouseClick += new MouseEventHandler(TabSquare_MouseClick);
+
+                        if (control is GroupBox)
+                        {
+                            tabSquare.Location = new Point(control.Location.X, control.Location.Y + tabSquare.Size.Height);
+                        }
+                        else
+                        {
+                            tabSquare.Location = new Point(control.Location.X, control.Location.Y);
+                        }
+
                         ToolTip toolTip = new ToolTip();
                         toolTip.InitialDelay = 1;
                         toolTip.ReshowDelay = 1;
@@ -5027,16 +5036,25 @@ namespace Epi.Windows.MakeView.PresentationLogic
                                            lbTabSquare.Padding = new Padding(2);
                                            lbTabSquare.ForeColor = Color.White;
                                            lbTabSquare.BorderStyle = BorderStyle.None;
-                                           lbTabSquare.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold);
+                                           lbTabSquare.Font = new Font(FontFamily.GenericSansSerif, 7, FontStyle.Bold);
                                            if (isShowFieldName && isShowTabOrder)
                                                lbTabSquare.Text = control.TabIndex.ToString() + "  " + field.Name;
                                            else if (isShowFieldName && !isShowTabOrder)
                                                lbTabSquare.Text = field.Name;
                                            else if (!isShowFieldName && isShowTabOrder)
                                                lbTabSquare.Text = control.TabIndex.ToString();                                         
-                                           lbTabSquare.Location = new Point(control.Location.X, control.Location.Y);
                                            lbTabSquare.Size = TextRenderer.MeasureText(lbTabSquare.Text, lbTabSquare.Font);
                                            lbTabSquare.Size = new Size(lbTabSquare.Size.Width + lbTabSquare.Padding.Size.Width, lbTabSquare.Size.Height + lbTabSquare.Padding.Size.Height);
+                                           
+                                           if(control is GroupBox)
+                                           {
+                                               lbTabSquare.Location = new Point(control.Location.X, control.Location.Y + lbTabSquare.Size.Height);
+                                           }
+                                           else
+                                           {
+                                               lbTabSquare.Location = new Point(control.Location.X, control.Location.Y);
+                                           }
+
                                            lbTabSquare.Tag = "showtab";
                                            lbTabSquare.BringToFront();
                                            printPanel.Controls.Add(lbTabSquare);
@@ -5054,16 +5072,26 @@ namespace Epi.Windows.MakeView.PresentationLogic
                                            lbTabSquare.Padding = new Padding(2);
                                            lbTabSquare.ForeColor = Color.White;
                                            lbTabSquare.BorderStyle = BorderStyle.None;
-                                           lbTabSquare.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold);
+                                           lbTabSquare.Font = new Font(FontFamily.GenericSansSerif, 7, FontStyle.Bold);
                                            if (isShowFieldName && isShowTabOrder)
                                                lbTabSquare.Text = control.TabIndex.ToString() + "  " + field.Name;
                                            else if (isShowFieldName && !isShowTabOrder)
                                                lbTabSquare.Text = field.Name;
                                            else if (!isShowFieldName && isShowTabOrder)
                                                lbTabSquare.Text = control.TabIndex.ToString();                                          
-                                           lbTabSquare.Location = new Point(control.Location.X, control.Location.Y);
+
                                            lbTabSquare.Size = TextRenderer.MeasureText(lbTabSquare.Text, lbTabSquare.Font);
-                                           lbTabSquare.Size = new Size(lbTabSquare.Size.Width + lbTabSquare.Padding.Size.Width, lbTabSquare.Size.Height + lbTabSquare.Padding.Size.Height);                                           
+                                           lbTabSquare.Size = new Size(lbTabSquare.Size.Width + lbTabSquare.Padding.Size.Width, lbTabSquare.Size.Height + lbTabSquare.Padding.Size.Height);
+
+                                           if (control is GroupBox)
+                                           {
+                                               lbTabSquare.Location = new Point(control.Location.X, control.Location.Y + lbTabSquare.Size.Height);
+                                           }
+                                           else
+                                           {
+                                               lbTabSquare.Location = new Point(control.Location.X, control.Location.Y);
+                                           }
+
                                            lbTabSquare.BringToFront();
                                            printPanel.Controls.Add(lbTabSquare);
                                        }
