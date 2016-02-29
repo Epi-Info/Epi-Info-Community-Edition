@@ -308,7 +308,7 @@
     </Compile>
     <Compile Include="LoginInfo.cs" />
     <Content Include="App.ico" />
-    <Content Include="Appold.ico" />
+    <Content Include="App_old.ico" />
     <Content Include="Forms\CheckCodeEditor\CheckCodeHelp.txt" />
     <Content Include="labelAlignHorizontal.bmp" />
     <Content Include="labelAlignVertical.bmp" />

@@ -50,7 +50,7 @@ namespace Epi.Windows.Menu
             txtlblCreateMapsDescp.Text = MenuSharedStrings.MENU_CREATE_MAPS_DESCP;
             txtlblStatCalc.Text = MenuSharedStrings.MENU_STATCALC;
             txtlblStatCalcDescp.Text = MenuSharedStrings.MENU_STATCALC_DESCP;
-            txtlblAnalyzeData.Text = MenuSharedStrings.MENU_ANALYZE_DATA;
+            //txtlblAnalyzeData.Text = MenuSharedStrings.MENU_ANALYZE_DATA;
             txtlblClassic.Text = MenuSharedStrings.MENU_CLASSIC_ANALYZE;
             txtlblClassicDescp.Text = MenuSharedStrings.MENU_CLASSIC_ANALYZEDSCP;
             txtlblVisualDashboard.Text = MenuSharedStrings.MENU_VISUALDASHBOARD;
@@ -451,14 +451,15 @@ namespace Epi.Windows.Menu
                
 
             }
-            else if (pnlRightMenuHeight == "173")
+            else if (pnlRightMenuHeight == "163")
             {
                 this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
 
             }
-            else if (pnlRightMenuHeight == "240")
+            else if (pnlRightMenuHeight == "220")
             {
                 this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
+
             }
 
             //MessageBox.Show("Hide");
@@ -467,16 +468,15 @@ namespace Epi.Windows.Menu
         private void HideStoryBoard() {
             var pnlRightMenuHeight = pnlRightMenu.Height.ToString();
 
-            if (pnlRightMenuHeight == "173")
+            if (pnlRightMenuHeight == "163")
                 {
                     this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
 
 
                 }
-                else if (pnlRightMenuHeight == "240")
+                else if (pnlRightMenuHeight == "220")
                 {
                     this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
-                   // this.BeginStoryboard(FindResource("showEpiResource") as Storyboard);
 
                 }
         
@@ -501,7 +501,6 @@ namespace Epi.Windows.Menu
             }
         }
 
-
       
 
         
@@ -511,6 +510,7 @@ namespace Epi.Windows.Menu
         
 
        
+
 
 
         //private void helpandother_leave(object sender, MouseEventArgs e)

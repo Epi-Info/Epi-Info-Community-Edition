@@ -11,19 +11,21 @@
             </ResourceDictionary.MergedDictionaries>
 
             <Storyboard x:Key="sbShowRightMenu" >
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="0" To="173"  Duration="0:0:0.1" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="0" To="163"  Duration="0:0:0.1" />
             </Storyboard>
             <Storyboard x:Key="sbHideRightMenu">
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="173" To="0"  Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="163" To="0"  Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="50" To="0"  Duration="0:0:0.2" />
             </Storyboard>
 
             <Storyboard x:Key="showEpiResource">
                 <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="0" To="50"  Duration="0:0:0.1" />
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="173" To="240"  Duration="0:0:0.1" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="163" To="220"  Duration="0:0:0.1" />
             </Storyboard>
             <Storyboard x:Key="hideEpiResource">
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="240" To="173"  Duration="0:0:0.2" />
                 <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="50" To="0"  Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="220" To="163"  Duration="0:0:0.3" />
+                
             </Storyboard>
 
 
@@ -79,7 +81,7 @@
 
                         </StackPanel>
                     </ContentControl>
-                    <StackPanel x:Name="submenuEpiResouces" Height="0">
+                    <StackPanel x:Name="submenuEpiResouces" Height="0" >
                         <ContentControl MouseDown="activEpi_Click">
                             <StackPanel Background="#e6e7e8">
                                 <TextBlock Style="{StaticResource setting_buttons}" Margin="10 0 0 0">ACTIVEEPI.com</TextBlock>
@@ -91,8 +93,8 @@
                             </StackPanel>
                         </ContentControl>
                     </StackPanel>
-                    <ContentControl MouseDown="epi_InfoLogs_Click">
-                        <StackPanel>
+                    <ContentControl MouseDown="epi_InfoLogs_Click" >
+                        <StackPanel >
                             <TextBlock x:Name="txtEpiInfoLogs" Style="{StaticResource setting_buttons}">EPI INFO™ LOGS</TextBlock>
                         </StackPanel>
                     </ContentControl>
@@ -204,11 +206,7 @@
                                     <ColumnDefinition Width="80"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Border Grid.Column="0" BorderBrush="#58595b"  Width="75" Height="105" Margin="13 1 0 0" HorizontalAlignment="Center">
-                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
-                                        <TextBlock x:Name="txtlblAnalyzeData" Style="{StaticResource sectionTitle}" FontSize="14" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Width="75" HorizontalAlignment="Center" FontWeight="Bold"><Run Text="ANALYZE DATA"/></TextBlock>
-                                    </StackPanel>
-                                </Border>
+                                
                                 <WrapPanel Grid.Column="1" Orientation="Horizontal">
 
 
@@ -243,7 +241,7 @@
                                         <TextBlock Foreground="#d2dfee">ABOUT EPI INFO™</TextBlock>
                                     </ContentControl>
                                 </StackPanel>
-                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="258 0 0 0">
+                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="245 0 0 0">
                                     <ContentControl  Cursor="Hand" MouseDown="btnLocaleClick">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock x:Name="txtLanguage" Foreground="#d2dfee" Padding="0 0 5 0">LANGUAGE:</TextBlock>
