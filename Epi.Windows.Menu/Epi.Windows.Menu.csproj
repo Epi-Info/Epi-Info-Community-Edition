@@ -256,11 +256,19 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WindowMain.Designer.cs" />
+    <Compile Include="WindowMain1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WindowMain.resx</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MenuSharedStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MenuSharedStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="WindowMain.resx" />
+    <EmbeddedResource Include="WindowMain.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WindowMain1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="ConfigSchema.xsd">
       <SubType>
