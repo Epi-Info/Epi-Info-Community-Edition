@@ -310,8 +310,8 @@ namespace Epi.Windows.MakeView.Forms
             this.openProjectToolStripMenuItem,
             this.closeProjectToolStripMenuItem,
             this.mnuImportTemplate,
-            this.mnuCopyToPhone,
             this.toolStripMenuItemPrint,
+            this.mnuCopyToPhone,            
             this.toolStripPublishToWebEnter,
             this.mnuPublishToWeb,
             this.toolStripSeparator3,
@@ -482,10 +482,10 @@ namespace Epi.Windows.MakeView.Forms
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusBarToolStripMenuItem,
-            this.vocabularyFieldsToolStripMenuItem,
-            this.epiInfoLogsToolStripMenuItem,
+            this.vocabularyFieldsToolStripMenuItem,           
             this.fieldNamesToolStripMenuItem,
-            this.tabOrderToolStripMenuItem});
+            this.tabOrderToolStripMenuItem,
+            this.epiInfoLogsToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
             // 
