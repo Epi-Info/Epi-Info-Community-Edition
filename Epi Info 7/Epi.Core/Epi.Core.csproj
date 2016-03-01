@@ -1157,7 +1157,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <EmbeddedResource Include="Resources\Configuration\EpiInfo.mnu" />
+    <None Include="Resources\Configuration\EpiInfo.mnu.2" />
     <None Include="Resources\Configuration\Project.xsx">
       <DependentUpon>Project.xsd</DependentUpon>
     </None>
