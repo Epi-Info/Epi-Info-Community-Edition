@@ -20,10 +20,12 @@ namespace Epi.Windows.Menu
             InitializeComponent();
             this.MaximumSize = new System.Drawing.Size(857, 745);
             this.MinimumSize = new System.Drawing.Size(500, 400);
+            //this.Width++;
+            //this.Width--;
             if (this.Width == 659 && this.Height == 641)
             {
-               this.Size = new Size(690, 600);
-               this.MaximumSize = new System.Drawing.Size(690, 600);
+               this.Size = new Size(700, 600);
+               this.MaximumSize = new System.Drawing.Size(700, 600);
                this.MinimumSize = new System.Drawing.Size(450, 400);
             }
           
