@@ -32,6 +32,7 @@ namespace Epi.Windows.Menu
           
             host = new ElementHost();
             host.Dock = DockStyle.Fill;
+            host.AutoSize = true;
             form = new MainWindow();
  
             host.Child = form;
