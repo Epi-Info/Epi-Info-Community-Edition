@@ -18,32 +18,20 @@ namespace Epi.Windows.Menu
         public WindowMain() 
         {
             InitializeComponent();
-            //this.Text = "Epi Info 7 - Menu";// SharedStrings.MENU;
+            this.MaximumSize = new System.Drawing.Size(857, 745);
+            this.MinimumSize = new System.Drawing.Size(500, 400);
+            if (this.Width == 659 && this.Height == 641)
+            {
+               this.Size = new Size(690, 600);               
+            }
+          
             host = new ElementHost();
             host.Dock = DockStyle.Fill;
             form = new MainWindow();
  
             host.Child = form;
             this.Controls.Add(host);
-            this.FormClosed += new FormClosedEventHandler(WindowMain_FormClosed);
-            form.Close += MainwindowClose;
         }       
-
-        void WindowMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            System.Windows.Application.Current.Shutdown();
-        }
-        private void MainwindowClose(object sender, System.Windows.RoutedEventArgs e)
-        {
-           // System.Windows.Application.Current.Shutdown();
-           // ((System.Windows.Threading.DispatcherObject)(form.Parent)).Dispatcher.InvokeShutdown();
-            this.Close();
-        }
-
-        private void WindowMain_Load(object sender, EventArgs e)
-        {
-
-        }
 
         
 
