@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="Epi.Windows.Menu.MainWindow"
        xmlns:Controls="Epi.Windows.Menu.MainWindow"
-        Height="560" MaxHeight="560" Width="690" MaxWidth="690"  >
+         >
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
