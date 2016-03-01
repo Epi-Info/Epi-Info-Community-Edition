@@ -97,10 +97,10 @@
             <StackPanel  Background="#123b6a" Height="28" Margin="0 17 0 0">
                 <StackPanel Orientation="Horizontal" Margin="15 7 15 0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <TextBlock ><Hyperlink Foreground="#d2dfee" TextDecorations="None" RequestNavigate="Hyperlink_epiInfoWebsite" NavigateUri="http://wwwn.cdc.gov/epiinfo/"> EPI INFO WEBSITE</Hyperlink></TextBlock>
+                        <TextBlock ><Hyperlink Foreground="#d2dfee" TextDecorations="None" RequestNavigate="Hyperlink_epiInfoWebsite" NavigateUri="http://wwwn.cdc.gov/epiinfo/"> EPI INFO™ WEBSITE</Hyperlink></TextBlock>
                         <TextBlock Foreground="#d2dfee" Padding="10 0 10 0">|</TextBlock>
                         <ContentControl Cursor="Hand" MouseDown="aboutEpiInfo_click">
-                            <TextBlock Foreground="#d2dfee">ABOUT EPI INFO</TextBlock>
+                            <TextBlock Foreground="#d2dfee">ABOUT EPI INFO™</TextBlock>
                         </ContentControl>
                     </StackPanel>
 
