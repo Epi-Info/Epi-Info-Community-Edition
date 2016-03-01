@@ -20,8 +20,9 @@ namespace Epi.Windows.Menu
             InitializeComponent();
             //this.Text = "Epi Info 7 - Menu";// SharedStrings.MENU;
             host = new ElementHost();
-            host.Dock = DockStyle.Fill; 
-            form = new MainWindow();           
+            host.Dock = DockStyle.Fill;
+            form = new MainWindow();
+ 
             host.Child = form;
             this.Controls.Add(host);
             this.FormClosed += new FormClosedEventHandler(WindowMain_FormClosed);
@@ -43,6 +44,8 @@ namespace Epi.Windows.Menu
         {
 
         }
+
+        
 
         
 

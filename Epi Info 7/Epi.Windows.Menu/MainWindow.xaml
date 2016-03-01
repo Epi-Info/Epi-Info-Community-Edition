@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="Epi.Windows.Menu.MainWindow"
        xmlns:Controls="Epi.Windows.Menu.MainWindow"
-        Height="560" MaxHeight="570" Width="690" MaxWidth="690">
+        Height="560" MaxHeight="560" Width="690" MaxWidth="690"  >
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -34,11 +34,11 @@
 
 
     </UserControl.Resources>
-    <Grid x:Name="grdMain" Background="White" Cursor="Arrow">
+    <Grid x:Name="grdMain" Background="White" Cursor="Arrow"  >
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Panel.ZIndex="2" DockPanel.Dock="Top"  Name="pnlRightMenu" Orientation="Horizontal" Height="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,15,0" Background="Transparent">
+        <StackPanel Grid.Column="0"  Panel.ZIndex="2" DockPanel.Dock="Top"  Name="pnlRightMenu" Orientation="Horizontal" Height="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,15,0" Background="Transparent">
             
             <Border BorderBrush="#5c5d5f" BorderThickness="1" Width="170" Height="Auto" Background="White"  >
                 <WrapPanel Orientation="Vertical">
@@ -107,10 +107,10 @@
                 </WrapPanel>
             </Border>
         </StackPanel>
-        <DockPanel Grid.Column="0">
+        <DockPanel Grid.Column="0" Height="560">
 
-            <StackPanel DockPanel.Dock="Top"  Panel.ZIndex="0">
-                <Grid Height="70" Margin="0 5 0 0">
+            <Border Padding="0 0 0 10" DockPanel.Dock="Top" Panel.ZIndex="0" >
+                <Grid Height="75" Margin="0 0 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition Width="60" />
@@ -135,127 +135,126 @@
                         
                     </StackPanel>
                 </Grid>
-            </StackPanel>
+            </Border>
 
-            <DockPanel DockPanel.Dock="Top"  >
-                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <DockPanel  DockPanel.Dock="Top"   >
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto"  >
                     
-                    <StackPanel DockPanel.Dock="Top">
-                        <StackPanel Margin="0 15 0 20">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition MinWidth="60"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Panel.ZIndex="1" >
-
-                                    <WrapPanel Margin="85 0 0 0" Orientation="Horizontal">
-                                        <ContentControl  MouseDown="createForms_Click" Cursor="Hand" >
-
-                                            <Border x:Name="createFormsBox" MouseEnter="createForms_hover" MouseLeave="createForms_Leave"  Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="240" Height="120" Margin="0 0 35 20" HorizontalAlignment="Left">
-                                                <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
-                                                    <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2Zm14.23,32a2.59,2.59,0,0,1-2.59,2.59H13.36a2.59,2.59,0,0,1-2.59-2.59V15.95a2.59,2.59,0,0,1,2.59-2.59H36.64a2.59,2.59,0,0,1,2.59,2.59V34.05Z M13.36,21.12H25v2.59H13.36V21.12Z M13.36,15.95H25v2.59H13.36V15.95Z" Fill="#1d60ac" Height="35" Stretch="Fill" Width="35"/>
-                                                    <TextBlock x:Name="txtlblCreateForms" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold" ><Run Text="CREATE FORMS"/></TextBlock>
-                                                    <TextBlock x:Name="txtlblCreateFormsDescp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200" ><Run Text="Create surveys or questionnaires with field validation and skip logic."/></TextBlock>
-                                                </StackPanel>
-                                            </Border>
-                                        </ContentControl>
-                                        <ContentControl MouseEnter="button_MouseOver" MouseDown="enterData_Click" Cursor="Hand">
-                                            <Border x:Name="enterDataBox" MouseEnter="enterData_hover" MouseLeave="enterData_Leave" Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="240" Height="120" Margin="0 0 0 20"  HorizontalAlignment="Left">
-                                                <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
-                                                    <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2ZM11.07,15.25H27.79V18H11.07V15.25ZM22.21,29.18H11.07V26.39H22.21v2.79ZM11.07,23.61V20.82H27.79v2.79H11.07Zm27.87,5.57H33.36v5.57H30.57V29.18H25V26.39h5.57V20.82h2.79v5.57h5.57v2.79Z" Fill="#f37c60" Height="35" Stretch="Fill" Width="35"/>
-                                                    <TextBlock x:Name="txtlblEnterData" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold"><Run Text="ENTER DATA"/>
-
-                                                    </TextBlock>
-                                                    <TextBlock x:Name="txtlblEnterDataDescp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200"><Run Text="Enter data, browse records, and search the database."/></TextBlock>
-                                                </StackPanel>
-                                            </Border>
-                                        </ContentControl>
-                                    </WrapPanel>
-
-                                    <WrapPanel Margin="85 0 0 0" Orientation="Horizontal">
-                                        <ContentControl MouseEnter="button_MouseOver" MouseDown="createMaps_Click" Cursor="Hand">
-                                            <Border x:Name="createMapsBox" MouseEnter="createMaps_hover" MouseLeave="createMaps_Leave" Background="White"  BorderBrush="#58595b" BorderThickness="1.5" Width="240" Height="120" Margin="0 0 35 20"  HorizontalAlignment="Left">
-                                                <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
-                                                    <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2Zm3.86,27.19L13.19,36.48l7.29-15.68,15.68-7.29Z M22.57,25a2.11,2.11,0,1,1,2.11,2.11A2.1,2.1,0,0,1,22.57,25Z" Fill="#00817e" Height="35" Stretch="Fill" Width="35"/>
-                                                    <TextBlock x:Name="txtlblCreateMaps" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold"><Run Text="CREATE MAPS"/></TextBlock>
-                                                    <TextBlock x:Name="txtlblCreateMapsDescp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200"><Run Text="Map data with coordinates, by choropleth, or dot density."/></TextBlock>
-                                                </StackPanel>
-                                            </Border>
-                                        </ContentControl>
-                                        <ContentControl MouseEnter="button_MouseOver" MouseDown="statCalc_Click" Cursor="Hand">
-                                            <Border x:Name="statCalcBox" MouseEnter="statCalc_hover" MouseLeave="statCalc_Leave" Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="240" Height="120" Margin="0 0 0 20" HorizontalAlignment="Left">
-                                                <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
-                                                    <Path Data="M25,1.94A23.06,23.06,0,1,0,48.06,25,23.06,23.06,0,0,0,25,1.94ZM20.58,39H14.69V33.1h5.89V39Zm0-7.36H14.69V25.74h5.89v5.89Zm0-7.36H14.69V18.37h5.89v5.89Zm0-7.36H14.69V11h5.89V16.9ZM27.95,39H22.05V33.1h5.89V39Zm0-7.36H22.05V25.74h5.89v5.89Zm0-7.36H22.05V18.37h5.89v5.89Zm0-7.36H22.05V11h5.89V16.9ZM35.31,39H29.42V33.1h5.89V39Zm0-7.36H29.42V25.74h5.89v5.89Zm0-7.36H29.42V18.37h5.89v5.89Zm0-7.36H29.42V11h5.89V16.9Z" Fill="#69bc45" Height="35" Stretch="Fill" Width="35"/>
-                                                    <TextBlock x:Name="txtlblStatCalc" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold"><Run Text="STATCALC"/></TextBlock>
-                                                    <TextBlock x:Name="txtlblStatCalcDescp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200"><Run Text="Statistical calculators for sample size, power, and more."/></TextBlock>
-                                                </StackPanel>
-                                            </Border>
-                                        </ContentControl>
-                                    </WrapPanel>
-                                </StackPanel>
-
-                            </Grid>
-                        </StackPanel>
-						
-                        <Border Margin="0 -19 0 0" Padding="0 0 0 0" MinHeight="156" Background="#e6e7e8" >
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                        <StackPanel DockPanel.Dock="Top">
+                            
+                            <StackPanel Margin="0 0 0 0">
                                 
-                                <WrapPanel Grid.Column="1" Orientation="Horizontal">
+                                    <StackPanel Panel.ZIndex="1" >
 
+                                        <WrapPanel Margin="85 0 0 0" Orientation="Horizontal">
+                                            <ContentControl  MouseDown="createForms_Click" Cursor="Hand"  >
 
-                                    <ContentControl Padding="0 0 0 0" MouseDown="classicAnalyze_Click" Cursor="Hand">
-                                        <Border x:Name="classicBox" MouseEnter="classic_hover" MouseLeave="classic_Leave" Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="240" Height="120" Margin="5 20 30 10" HorizontalAlignment="Left">
-                                            <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
-                                                <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2ZM21,32l-2.14,2.14L9.73,25l9.16-9.16L21,18l-7,7Zm10.08,2.14L29,32l7-7-7-7,2.14-2.14L40.27,25Z" Fill="#1d60ac" Height="35" Stretch="Fill" Width="35"/>
-                                                <TextBlock x:Name="txtlblClassic" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold"><Run Text="CLASSIC"/></TextBlock>
-                                                <TextBlock x:Name="txtlblClassicDescp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200"><Run Text="Clean, transform, and analyze data with commands."/></TextBlock>
-                                            </StackPanel>
-                                        </Border>
-                                    </ContentControl>
-                                    <ContentControl MouseEnter="button_MouseOver" MouseDown="visualAnalyze_Click" Cursor="Hand">
-                                        <Border x:Name="visualDashboardBox" MouseEnter="visualDashboard_hover" MouseLeave="visualDashboard_Leave" Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="240" Height="120" Margin="5 20 0 10" HorizontalAlignment="Left">
-                                            <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
-                                                <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2ZM18.45,35.79H14.22V21h4.23v14.8Zm8.46,0H22.68V14.65h4.23V35.79Zm8.46,0H31.14V27.34h4.23v8.46Z" Fill="#1d60ac" Height="35" Stretch="Fill" Width="35"/>
-                                                <TextBlock x:Name="txtlblVisualDashboard" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold"><Run Text="VISUAL DASHBOARD"/></TextBlock>
-                                                <TextBlock x:Name="txtlblVisualDashboardDscp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200"><Run Text="Visualize analytical results with gadgets, charts, and tables."/></TextBlock>
-                                            </StackPanel>
-                                        </Border>
-                                    </ContentControl>
-                                </WrapPanel>
-                            </Grid>
-                        </Border>
+                                                <Border x:Name="createFormsBox" MouseEnter="createForms_hover" MouseLeave="createForms_Leave"  Background="White" BorderBrush="#58595b" BorderThickness="1.5" MaxWidth="240" Width="239" Height="120" Margin="0 0 35 20" HorizontalAlignment="Left">
+                                                    <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
+                                                        <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2Zm14.23,32a2.59,2.59,0,0,1-2.59,2.59H13.36a2.59,2.59,0,0,1-2.59-2.59V15.95a2.59,2.59,0,0,1,2.59-2.59H36.64a2.59,2.59,0,0,1,2.59,2.59V34.05Z M13.36,21.12H25v2.59H13.36V21.12Z M13.36,15.95H25v2.59H13.36V15.95Z" Fill="#1d60ac" Height="35" Stretch="Fill" Width="35"/>
+                                                        <TextBlock x:Name="txtlblCreateForms" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold" ><Run Text="CREATE FORMS"/></TextBlock>
+                                                        <TextBlock x:Name="txtlblCreateFormsDescp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200" ><Run Text="Create surveys or questionnaires with field validation and skip logic."/></TextBlock>
+                                                    </StackPanel>
+                                                </Border>
+                                            </ContentControl>
+                                            <ContentControl MouseEnter="button_MouseOver" MouseDown="enterData_Click" Cursor="Hand">
+                                        <Border x:Name="enterDataBox" MouseEnter="enterData_hover" MouseLeave="enterData_Leave" Background="White" BorderBrush="#58595b" BorderThickness="1.5" MaxWidth="240" Width="240" Height="120" Margin="0 0 0 20"  HorizontalAlignment="Left">
+                                                    <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
+                                                        <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2ZM11.07,15.25H27.79V18H11.07V15.25ZM22.21,29.18H11.07V26.39H22.21v2.79ZM11.07,23.61V20.82H27.79v2.79H11.07Zm27.87,5.57H33.36v5.57H30.57V29.18H25V26.39h5.57V20.82h2.79v5.57h5.57v2.79Z" Fill="#f37c60" Height="35" Stretch="Fill" Width="35"/>
+                                                        <TextBlock x:Name="txtlblEnterData" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold"><Run Text="ENTER DATA"/>
 
-                        <StackPanel  Background="#123b6a" Height="33" Margin="0 0 0 0">
-                            <StackPanel Orientation="Horizontal" Margin="15 12 15 0">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                    <TextBlock ><Hyperlink Foreground="#d2dfee " TextDecorations="None" RequestNavigate="Hyperlink_epiInfoWebsite" NavigateUri="http://wwwn.cdc.gov/epiinfo/"> EPI INFO™ WEBSITE</Hyperlink></TextBlock>
-                                    <TextBlock Foreground="#d2dfee" Padding="10 0 10 0">|</TextBlock>
-                                    <ContentControl Cursor="Hand" MouseDown="aboutEpiInfo_click">
-                                        <TextBlock Foreground="#d2dfee">ABOUT EPI INFO™</TextBlock>
-                                    </ContentControl>
-                                </StackPanel>
-                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="245 0 0 0">
-                                    <ContentControl  Cursor="Hand" MouseDown="btnLocaleClick">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock x:Name="txtLanguage" Foreground="#d2dfee" Padding="0 0 5 0">LANGUAGE:</TextBlock>
-                                            <TextBlock Foreground="#d2dfee" x:Name="tsslLocale" Padding="0 0 5 0"></TextBlock>
+                                                        </TextBlock>
+                                                        <TextBlock x:Name="txtlblEnterDataDescp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200"><Run Text="Enter data, browse records, and search the database."/></TextBlock>
+                                                    </StackPanel>
+                                                </Border>
+                                            </ContentControl>
+                                        </WrapPanel>
+
+                                        <WrapPanel Margin="85 0 0 0" Orientation="Horizontal">
+                                            <ContentControl MouseEnter="button_MouseOver" MouseDown="createMaps_Click" Cursor="Hand">
+                                                <Border x:Name="createMapsBox" MouseEnter="createMaps_hover" MouseLeave="createMaps_Leave" Background="White"  BorderBrush="#58595b" BorderThickness="1.5" MaxWidth="240" Width="240" Height="120" Margin="0 0 35 20"  HorizontalAlignment="Left">
+                                                    <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
+                                                        <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2Zm3.86,27.19L13.19,36.48l7.29-15.68,15.68-7.29Z M22.57,25a2.11,2.11,0,1,1,2.11,2.11A2.1,2.1,0,0,1,22.57,25Z" Fill="#00817e" Height="35" Stretch="Fill" Width="35"/>
+                                                        <TextBlock x:Name="txtlblCreateMaps" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold"><Run Text="CREATE MAPS"/></TextBlock>
+                                                        <TextBlock x:Name="txtlblCreateMapsDescp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200"><Run Text="Map data with coordinates, by choropleth, or dot density."/></TextBlock>
+                                                    </StackPanel>
+                                                </Border>
+                                            </ContentControl>
+                                            <ContentControl MouseEnter="button_MouseOver" MouseDown="statCalc_Click" Cursor="Hand">
+                                        <Border x:Name="statCalcBox" MouseEnter="statCalc_hover" MouseLeave="statCalc_Leave" Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="240" MaxWidth="240" Height="120" Margin="0 0 0 20" HorizontalAlignment="Left">
+                                                    <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
+                                                        <Path Data="M25,1.94A23.06,23.06,0,1,0,48.06,25,23.06,23.06,0,0,0,25,1.94ZM20.58,39H14.69V33.1h5.89V39Zm0-7.36H14.69V25.74h5.89v5.89Zm0-7.36H14.69V18.37h5.89v5.89Zm0-7.36H14.69V11h5.89V16.9ZM27.95,39H22.05V33.1h5.89V39Zm0-7.36H22.05V25.74h5.89v5.89Zm0-7.36H22.05V18.37h5.89v5.89Zm0-7.36H22.05V11h5.89V16.9ZM35.31,39H29.42V33.1h5.89V39Zm0-7.36H29.42V25.74h5.89v5.89Zm0-7.36H29.42V18.37h5.89v5.89Zm0-7.36H29.42V11h5.89V16.9Z" Fill="#69bc45" Height="35" Stretch="Fill" Width="35"/>
+                                                        <TextBlock x:Name="txtlblStatCalc" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold"><Run Text="STATCALC"/></TextBlock>
+                                                        <TextBlock x:Name="txtlblStatCalcDescp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200"><Run Text="Statistical calculators for sample size, power, and more."/></TextBlock>
+                                                    </StackPanel>
+                                                </Border>
+                                            </ContentControl>
+                                        </WrapPanel>
+                                    </StackPanel>
+
+                                
+                            </StackPanel>
+
+                            <Border Margin="0 0 0 0" Padding="0 0 0 12" MinHeight="156" Background="#e6e7e8" >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" BorderBrush="#58595b"  Width="75" Height="105" Margin="13 1 0 0" HorizontalAlignment="Center">
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                            <TextBlock x:Name="txtlblAnalyzeData" Style="{StaticResource sectionTitle}" FontSize="14" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Width="75" HorizontalAlignment="Center" FontWeight="Bold"><Run Text="ANALYZE DATA"/></TextBlock>
                                         </StackPanel>
-                                    </ContentControl>
-                                    <StackPanel Orientation="Horizontal" Margin="0 0 5 0">
-                                        <TextBlock Margin="0 0 3 0" Foreground="#8eafd5">VERSION:</TextBlock>
-                                        <TextBlock Foreground="#8eafd5" x:Name="tsslVersion"></TextBlock>
+                                    </Border>
+                                    <WrapPanel Grid.Column="1" Orientation="Horizontal">
+
+
+                                        <ContentControl Padding="0 0 0 0" MouseDown="classicAnalyze_Click" Cursor="Hand">
+                                        <Border x:Name="classicBox" MouseEnter="classic_hover" MouseLeave="classic_Leave" Background="White" BorderBrush="#58595b" BorderThickness="1.5" MaxWidth="240" Width="240" Height="120" Margin="5 20 30 10" HorizontalAlignment="Left">
+                                                <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
+                                                    <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2ZM21,32l-2.14,2.14L9.73,25l9.16-9.16L21,18l-7,7Zm10.08,2.14L29,32l7-7-7-7,2.14-2.14L40.27,25Z" Fill="#1d60ac" Height="35" Stretch="Fill" Width="35"/>
+                                                    <TextBlock x:Name="txtlblClassic" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold"><Run Text="CLASSIC"/></TextBlock>
+                                                    <TextBlock x:Name="txtlblClassicDescp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200"><Run Text="Clean, transform, and analyze data with commands."/></TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                        </ContentControl>
+                                        <ContentControl MouseEnter="button_MouseOver" MouseDown="visualAnalyze_Click" Cursor="Hand">
+                                        <Border x:Name="visualDashboardBox" MouseEnter="visualDashboard_hover" MouseLeave="visualDashboard_Leave" Background="White" BorderBrush="#58595b" BorderThickness="1.5" MaxWidth="240" Width="240" Height="120" Margin="5 20 0 10" HorizontalAlignment="Left">
+                                                <StackPanel HorizontalAlignment="Center" Margin="0 12 0 0">
+                                                    <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2ZM18.45,35.79H14.22V21h4.23v14.8Zm8.46,0H22.68V14.65h4.23V35.79Zm8.46,0H31.14V27.34h4.23v8.46Z" Fill="#1d60ac" Height="35" Stretch="Fill" Width="35"/>
+                                                    <TextBlock x:Name="txtlblVisualDashboard" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold"><Run Text="VISUAL DASHBOARD"/></TextBlock>
+                                                    <TextBlock x:Name="txtlblVisualDashboardDscp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200"><Run Text="Visualize analytical results with gadgets, charts, and tables."/></TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                        </ContentControl>
+                                    </WrapPanel>
+                                </Grid>
+                            </Border>
+
+                            <StackPanel  Background="#123b6a" Height="33" Margin="0 0 0 0">
+                                <StackPanel Orientation="Horizontal" Margin="15 12 15 0">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <TextBlock ><Hyperlink Foreground="#d2dfee " TextDecorations="None" RequestNavigate="Hyperlink_epiInfoWebsite" NavigateUri="http://wwwn.cdc.gov/epiinfo/"> EPI INFO™ WEBSITE</Hyperlink></TextBlock>
+                                        <TextBlock Foreground="#d2dfee" Padding="10 0 10 0">|</TextBlock>
+                                        <ContentControl Cursor="Hand" MouseDown="aboutEpiInfo_click">
+                                            <TextBlock Foreground="#d2dfee">ABOUT EPI INFO™</TextBlock>
+                                        </ContentControl>
+                                    </StackPanel>
+                                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="245 0 0 0">
+                                        <ContentControl  Cursor="Hand" MouseDown="btnLocaleClick">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock x:Name="txtLanguage" Foreground="#d2dfee" Padding="0 0 5 0">LANGUAGE:</TextBlock>
+                                                <TextBlock Foreground="#d2dfee" x:Name="tsslLocale" Padding="0 0 5 0"></TextBlock>
+                                            </StackPanel>
+                                        </ContentControl>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 5 0">
+                                            <TextBlock Margin="0 0 3 0" Foreground="#8eafd5">VERSION:</TextBlock>
+                                            <TextBlock Foreground="#8eafd5" x:Name="tsslVersion"></TextBlock>
+                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
-                    </StackPanel>
                 </ScrollViewer>
             </DockPanel>
 
