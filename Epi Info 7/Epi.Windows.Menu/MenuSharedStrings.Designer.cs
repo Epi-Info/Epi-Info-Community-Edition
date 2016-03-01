@@ -22,7 +22,7 @@ namespace Epi.Windows.Menu {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class MenuSharedStrings {
+    public class MenuSharedStrings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Epi.Windows.Menu {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Epi.Windows.Menu.MenuSharedStrings", typeof(MenuSharedStrings).Assembly);
@@ -51,7 +51,7 @@ namespace Epi.Windows.Menu {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to ANALYZE DATA.
         /// </summary>
-        internal static string MENU_ANALYZE_DATA {
+        public static string MENU_ANALYZE_DATA {
             get {
                 return ResourceManager.GetString("MENU_ANALYZE_DATA", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to CLASSIC.
         /// </summary>
-        internal static string MENU_CLASSIC_ANALYZE {
+        public static string MENU_CLASSIC_ANALYZE {
             get {
                 return ResourceManager.GetString("MENU_CLASSIC_ANALYZE", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to Clean, transform, and analyze data with commands..
         /// </summary>
-        internal static string MENU_CLASSIC_ANALYZEDSCP {
+        public static string MENU_CLASSIC_ANALYZEDSCP {
             get {
                 return ResourceManager.GetString("MENU_CLASSIC_ANALYZEDSCP", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to CONTACT HELP DESK.
         /// </summary>
-        internal static string MENU_CONTACT_HELP_DESK {
+        public static string MENU_CONTACT_HELP_DESK {
             get {
                 return ResourceManager.GetString("MENU_CONTACT_HELP_DESK", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to CONTENTS.
         /// </summary>
-        internal static string MENU_CONTENT {
+        public static string MENU_CONTENT {
             get {
                 return ResourceManager.GetString("MENU_CONTENT", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to CREATE FORMS.
         /// </summary>
-        internal static string MENU_CREATE_FORMS {
+        public static string MENU_CREATE_FORMS {
             get {
                 return ResourceManager.GetString("MENU_CREATE_FORMS", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to Create surveys or questionnaires with field validation and skip logic..
         /// </summary>
-        internal static string MENU_CREATE_FORMS_DESCP {
+        public static string MENU_CREATE_FORMS_DESCP {
             get {
                 return ResourceManager.GetString("MENU_CREATE_FORMS_DESCP", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to CREATE MAPS.
         /// </summary>
-        internal static string MENU_CREATE_MAPS {
+        public static string MENU_CREATE_MAPS {
             get {
                 return ResourceManager.GetString("MENU_CREATE_MAPS", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to Map data with coordinates, by choropleth, or dot density..
         /// </summary>
-        internal static string MENU_CREATE_MAPS_DESCP {
+        public static string MENU_CREATE_MAPS_DESCP {
             get {
                 return ResourceManager.GetString("MENU_CREATE_MAPS_DESCP", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to ENTER DATA.
         /// </summary>
-        internal static string MENU_ENTER_DATA {
+        public static string MENU_ENTER_DATA {
             get {
                 return ResourceManager.GetString("MENU_ENTER_DATA", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to Enter data, browse records, and search the database..
         /// </summary>
-        internal static string MENU_ENTER_DATA_DESCP {
+        public static string MENU_ENTER_DATA_DESCP {
             get {
                 return ResourceManager.GetString("MENU_ENTER_DATA_DESCP", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to EPI INFO™ LOGS.
         /// </summary>
-        internal static string MENU_EPI_INFO_LOGS {
+        public static string MENU_EPI_INFO_LOGS {
             get {
                 return ResourceManager.GetString("MENU_EPI_INFO_LOGS", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to EPI INFO™ Q&amp;A.
         /// </summary>
-        internal static string MENU_EPI_INFO_QA {
+        public static string MENU_EPI_INFO_QA {
             get {
                 return ResourceManager.GetString("MENU_EPI_INFO_QA", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to EXIT.
         /// </summary>
-        internal static string MENU_EXIT {
+        public static string MENU_EXIT {
             get {
                 return ResourceManager.GetString("MENU_EXIT", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to HOW TO&apos; VIDEOS.
         /// </summary>
-        internal static string MENU_HOW_TO_VIDEOS {
+        public static string MENU_HOW_TO_VIDEOS {
             get {
                 return ResourceManager.GetString("MENU_HOW_TO_VIDEOS", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to LANGUAGE.
         /// </summary>
-        internal static string MENU_LANGUAGE {
+        public static string MENU_LANGUAGE {
             get {
                 return ResourceManager.GetString("MENU_LANGUAGE", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to OPTIONS.
         /// </summary>
-        internal static string MENU_OPTIONS {
+        public static string MENU_OPTIONS {
             get {
                 return ResourceManager.GetString("MENU_OPTIONS", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to OTHER EPI RESOURCES.
         /// </summary>
-        internal static string MENU_OTHER_RESOURCES {
+        public static string MENU_OTHER_RESOURCES {
             get {
                 return ResourceManager.GetString("MENU_OTHER_RESOURCES", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to STATCALC.
         /// </summary>
-        internal static string MENU_STATCALC {
+        public static string MENU_STATCALC {
             get {
                 return ResourceManager.GetString("MENU_STATCALC", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to Statistical calculators for sample size, power, and more..
         /// </summary>
-        internal static string MENU_STATCALC_DESCP {
+        public static string MENU_STATCALC_DESCP {
             get {
                 return ResourceManager.GetString("MENU_STATCALC_DESCP", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to VISUAL DASHBOARD.
         /// </summary>
-        internal static string MENU_VISUALDASHBOARD {
+        public static string MENU_VISUALDASHBOARD {
             get {
                 return ResourceManager.GetString("MENU_VISUALDASHBOARD", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace Epi.Windows.Menu {
         /// <summary>
         ///   Looks up a localized string similar to Visualize analytical results with gadgets, charts, and tables..
         /// </summary>
-        internal static string MENU_VISUALDASHBOARD_DESCP {
+        public static string MENU_VISUALDASHBOARD_DESCP {
             get {
                 return ResourceManager.GetString("MENU_VISUALDASHBOARD_DESCP", resourceCulture);
             }
