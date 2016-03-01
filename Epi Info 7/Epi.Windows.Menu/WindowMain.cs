@@ -22,7 +22,9 @@ namespace Epi.Windows.Menu
             this.MinimumSize = new System.Drawing.Size(500, 400);
             if (this.Width == 659 && this.Height == 641)
             {
-               this.Size = new Size(690, 600);               
+               this.Size = new Size(690, 600);
+               this.MaximumSize = new System.Drawing.Size(690, 600);
+               this.MinimumSize = new System.Drawing.Size(450, 400);
             }
           
             host = new ElementHost();
