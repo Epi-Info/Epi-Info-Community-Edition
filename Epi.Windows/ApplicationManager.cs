@@ -491,7 +491,7 @@ namespace Epi.Windows
             }
 
             // Mnu file
-            if (!File.Exists(Files.MnuFilePath))
+          /*  if (!File.Exists(Files.MnuFilePath))
             {
                 using (FileStream fs = new FileStream(Files.MnuFilePath, FileMode.CreateNew, FileAccess.Write))
                 {
@@ -501,7 +501,7 @@ namespace Epi.Windows
                         fs.Close();
                     }
                 }
-            }
+            }*/
 
             // Sample7 prj and mdb ...
             string samplePrj = Path.Combine(config.Directories.Configuration, "Sample7.prj");
