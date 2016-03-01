@@ -22,7 +22,7 @@ namespace StatCalc
             //this.Width++;
             //this.Width--;
             //this.Height++;
-            if (this.Width == 526 && Height == 445)
+            if (this.Width == 525 && Height == 410)
             {
                 this.Size = new Size(550,405);
             }
