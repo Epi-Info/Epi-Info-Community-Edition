@@ -104,7 +104,7 @@
                         </ContentControl>
                     </StackPanel>
 
-                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="100 0 0 0">
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="80 0 0 0">
                         <ContentControl  Cursor="Hand" MouseDown="btnLocaleClick">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock x:Name="txtLanguage" Foreground="#d2dfee" Padding="0 0 5 0">LANGUAGE:</TextBlock>

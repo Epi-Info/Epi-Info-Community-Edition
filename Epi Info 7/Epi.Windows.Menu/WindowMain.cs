@@ -25,6 +25,7 @@ namespace Epi.Windows.Menu
             if (this.Width == 659 && this.Height == 641)
             {
                this.Size = new Size(700, 600);
+               
                this.MaximumSize = new System.Drawing.Size(700, 600);
                this.MinimumSize = new System.Drawing.Size(450, 400);
             }
