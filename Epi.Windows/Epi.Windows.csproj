@@ -667,6 +667,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\App.ico" />
+    <Content Include="Resources\App_old.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

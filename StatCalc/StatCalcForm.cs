@@ -37,6 +37,10 @@ namespace StatCalc
             this.Controls.Add(host);
         }
 
+       
+
+      
+
         
 
        

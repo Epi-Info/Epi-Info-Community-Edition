@@ -39,7 +39,6 @@
             //this.BackColor = System.Drawing.SystemColors.WindowText;
             this.ClientSize = new System.Drawing.Size(857, 745);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-          
             this.Name = "WindowMain";  
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
