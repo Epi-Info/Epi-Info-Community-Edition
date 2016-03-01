@@ -442,7 +442,7 @@ namespace Epi.Windows.Menu
 
         private void btnRightMenuHide_Click(object sender, RoutedEventArgs e)
         {
-
+           
             var pnlRightMenuHeight = pnlRightMenu.Height.ToString();
 
             if (pnlRightMenuHeight == "0")
