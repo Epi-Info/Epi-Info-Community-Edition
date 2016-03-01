@@ -51,6 +51,28 @@ namespace Epi.Windows.MakeView.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MakeViewMainForm));
             this.MainToolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.dockManager1 = new Epi.Windows.Docking.DockManager(this.components);
+            this.MainToolStrip = new System.Windows.Forms.ToolStrip();
+            this.btnNew = new System.Windows.Forms.ToolStripButton();
+            this.btnOpen = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonCloseProject = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonUndo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonRedo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparatorAfterUndoRedo = new System.Windows.Forms.ToolStripSeparator();
+            this.btnCheckCode = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.QuickPublishtoolStripButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toWebSurveyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toWebEnterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.ChangeModetoolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.EIWSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.draftToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.finalToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.EWEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.draftToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.finalToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnEnterData = new System.Windows.Forms.ToolStripButton();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NewProjectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,8 +83,8 @@ namespace Epi.Windows.MakeView.Forms
             this.openProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportTemplate = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCopyToPhone = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemPrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCopyToPhone = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripPublishToWebEnter = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPublishToWeb = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -81,9 +103,9 @@ namespace Epi.Windows.MakeView.Forms
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusBarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vocabularyFieldsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.epiInfoLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fieldNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.epiInfoLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.insertPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,28 +142,6 @@ namespace Epi.Windows.MakeView.Forms
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutEpiInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MainToolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnNew = new System.Windows.Forms.ToolStripButton();
-            this.btnOpen = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonCloseProject = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonUndo = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonRedo = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparatorAfterUndoRedo = new System.Windows.Forms.ToolStripSeparator();
-            this.btnCheckCode = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.QuickPublishtoolStripButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toWebSurveyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toWebEnterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.ChangeModetoolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.EIWSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.draftToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.finalToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.EWEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.draftToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.finalToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnEnterData = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -153,8 +153,8 @@ namespace Epi.Windows.MakeView.Forms
             this.MainToolStripContainer.ContentPanel.SuspendLayout();
             this.MainToolStripContainer.TopToolStripPanel.SuspendLayout();
             this.MainToolStripContainer.SuspendLayout();
-            this.MainMenu.SuspendLayout();
             this.MainToolStrip.SuspendLayout();
+            this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // baseImageList
@@ -285,6 +285,166 @@ namespace Epi.Windows.MakeView.Forms
             this.dockManager1.SplitterWidth = 4;
             this.dockManager1.VisualStyle = Epi.Windows.Docking.DockVisualStyle.VS2003;
             // 
+            // MainToolStrip
+            // 
+            resources.ApplyResources(this.MainToolStrip, "MainToolStrip");
+            this.MainToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.MainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnNew,
+            this.btnOpen,
+            this.toolStripButtonCloseProject,
+            this.toolStripSeparator2,
+            this.toolStripButtonUndo,
+            this.toolStripButtonRedo,
+            this.toolStripSeparatorAfterUndoRedo,
+            this.btnCheckCode,
+            this.toolStripSeparator10,
+            this.QuickPublishtoolStripButton,
+            this.toolStripSeparator11,
+            this.ChangeModetoolStripDropDownButton,
+            this.btnEnterData});
+            this.MainToolStrip.Name = "MainToolStrip";
+            this.MainToolStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.MainToolStrip_ItemClicked);
+            // 
+            // btnNew
+            // 
+            resources.ApplyResources(this.btnNew, "btnNew");
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Click += new System.EventHandler(this.NewProjectMenuItem_Click);
+            // 
+            // btnOpen
+            // 
+            resources.ApplyResources(this.btnOpen, "btnOpen");
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Click += new System.EventHandler(this.OpenProject_Click);
+            // 
+            // toolStripButtonCloseProject
+            // 
+            resources.ApplyResources(this.toolStripButtonCloseProject, "toolStripButtonCloseProject");
+            this.toolStripButtonCloseProject.Name = "toolStripButtonCloseProject";
+            this.toolStripButtonCloseProject.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            // 
+            // toolStripButtonUndo
+            // 
+            this.toolStripButtonUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripButtonUndo, "toolStripButtonUndo");
+            this.toolStripButtonUndo.Name = "toolStripButtonUndo";
+            this.toolStripButtonUndo.Click += new System.EventHandler(this.toolStripButtonUndo_Click);
+            // 
+            // toolStripButtonRedo
+            // 
+            this.toolStripButtonRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripButtonRedo, "toolStripButtonRedo");
+            this.toolStripButtonRedo.Name = "toolStripButtonRedo";
+            this.toolStripButtonRedo.Click += new System.EventHandler(this.toolStripButtonRedo_Click);
+            // 
+            // toolStripSeparatorAfterUndoRedo
+            // 
+            this.toolStripSeparatorAfterUndoRedo.Name = "toolStripSeparatorAfterUndoRedo";
+            resources.ApplyResources(this.toolStripSeparatorAfterUndoRedo, "toolStripSeparatorAfterUndoRedo");
+            // 
+            // btnCheckCode
+            // 
+            resources.ApplyResources(this.btnCheckCode, "btnCheckCode");
+            this.btnCheckCode.Name = "btnCheckCode";
+            this.btnCheckCode.Click += new System.EventHandler(this.btnCheckCode_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
+            // 
+            // QuickPublishtoolStripButton
+            // 
+            this.QuickPublishtoolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toWebSurveyToolStripMenuItem,
+            this.toWebEnterToolStripMenuItem});
+            resources.ApplyResources(this.QuickPublishtoolStripButton, "QuickPublishtoolStripButton");
+            this.QuickPublishtoolStripButton.Image = global::Epi.Windows.MakeView.Properties.Resources.Publish;
+            this.QuickPublishtoolStripButton.Name = "QuickPublishtoolStripButton";
+            // 
+            // toWebSurveyToolStripMenuItem
+            // 
+            this.toWebSurveyToolStripMenuItem.Name = "toWebSurveyToolStripMenuItem";
+            resources.ApplyResources(this.toWebSurveyToolStripMenuItem, "toWebSurveyToolStripMenuItem");
+            this.toWebSurveyToolStripMenuItem.Click += new System.EventHandler(this.toWebSurveyToolStripMenuItem_Click);
+            // 
+            // toWebEnterToolStripMenuItem
+            // 
+            this.toWebEnterToolStripMenuItem.Name = "toWebEnterToolStripMenuItem";
+            resources.ApplyResources(this.toWebEnterToolStripMenuItem, "toWebEnterToolStripMenuItem");
+            this.toWebEnterToolStripMenuItem.Click += new System.EventHandler(this.toWebEnterToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
+            // 
+            // ChangeModetoolStripDropDownButton
+            // 
+            this.ChangeModetoolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ChangeModetoolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.EIWSToolStripMenuItem,
+            this.EWEToolStripMenuItem});
+            resources.ApplyResources(this.ChangeModetoolStripDropDownButton, "ChangeModetoolStripDropDownButton");
+            this.ChangeModetoolStripDropDownButton.Name = "ChangeModetoolStripDropDownButton";
+            this.ChangeModetoolStripDropDownButton.Click += new System.EventHandler(this.ChangeModetoolStripDropDownButton_Click);
+            // 
+            // EIWSToolStripMenuItem
+            // 
+            this.EIWSToolStripMenuItem.CheckOnClick = true;
+            this.EIWSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.draftToolStripMenuItem1,
+            this.finalToolStripMenuItem1});
+            this.EIWSToolStripMenuItem.Name = "EIWSToolStripMenuItem";
+            resources.ApplyResources(this.EIWSToolStripMenuItem, "EIWSToolStripMenuItem");
+            this.EIWSToolStripMenuItem.Click += new System.EventHandler(this.draftToolStripMenuItem_Click);
+            // 
+            // draftToolStripMenuItem1
+            // 
+            this.draftToolStripMenuItem1.Name = "draftToolStripMenuItem1";
+            resources.ApplyResources(this.draftToolStripMenuItem1, "draftToolStripMenuItem1");
+            this.draftToolStripMenuItem1.Click += new System.EventHandler(this.draftToolStripMenuItem1_Click);
+            // 
+            // finalToolStripMenuItem1
+            // 
+            this.finalToolStripMenuItem1.Name = "finalToolStripMenuItem1";
+            resources.ApplyResources(this.finalToolStripMenuItem1, "finalToolStripMenuItem1");
+            this.finalToolStripMenuItem1.Click += new System.EventHandler(this.finalToolStripMenuItem1_Click);
+            // 
+            // EWEToolStripMenuItem
+            // 
+            this.EWEToolStripMenuItem.CheckOnClick = true;
+            this.EWEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.draftToolStripMenuItem2,
+            this.finalToolStripMenuItem2});
+            this.EWEToolStripMenuItem.Name = "EWEToolStripMenuItem";
+            resources.ApplyResources(this.EWEToolStripMenuItem, "EWEToolStripMenuItem");
+            this.EWEToolStripMenuItem.Click += new System.EventHandler(this.finalToolStripMenuItem_Click);
+            // 
+            // draftToolStripMenuItem2
+            // 
+            this.draftToolStripMenuItem2.Name = "draftToolStripMenuItem2";
+            resources.ApplyResources(this.draftToolStripMenuItem2, "draftToolStripMenuItem2");
+            this.draftToolStripMenuItem2.Click += new System.EventHandler(this.draftToolStripMenuItem2_Click);
+            // 
+            // finalToolStripMenuItem2
+            // 
+            this.finalToolStripMenuItem2.Name = "finalToolStripMenuItem2";
+            resources.ApplyResources(this.finalToolStripMenuItem2, "finalToolStripMenuItem2");
+            this.finalToolStripMenuItem2.Click += new System.EventHandler(this.finalToolStripMenuItem2_Click);
+            // 
+            // btnEnterData
+            // 
+            resources.ApplyResources(this.btnEnterData, "btnEnterData");
+            this.btnEnterData.Name = "btnEnterData";
+            this.btnEnterData.Click += new System.EventHandler(this.btnEnterData_Click);
+            // 
             // MainMenu
             // 
             resources.ApplyResources(this.MainMenu, "MainMenu");
@@ -311,7 +471,7 @@ namespace Epi.Windows.MakeView.Forms
             this.closeProjectToolStripMenuItem,
             this.mnuImportTemplate,
             this.toolStripMenuItemPrint,
-            this.mnuCopyToPhone,            
+            this.mnuCopyToPhone,
             this.toolStripPublishToWebEnter,
             this.mnuPublishToWeb,
             this.toolStripSeparator3,
@@ -368,18 +528,18 @@ namespace Epi.Windows.MakeView.Forms
             resources.ApplyResources(this.mnuImportTemplate, "mnuImportTemplate");
             this.mnuImportTemplate.Click += new System.EventHandler(this.mnuImportTemplate_Click);
             // 
+            // toolStripMenuItemPrint
+            // 
+            resources.ApplyResources(this.toolStripMenuItemPrint, "toolStripMenuItemPrint");
+            this.toolStripMenuItemPrint.Name = "toolStripMenuItemPrint";
+            this.toolStripMenuItemPrint.Click += new System.EventHandler(this.toolStripMenuItemPrint_Click);
+            // 
             // mnuCopyToPhone
             // 
             resources.ApplyResources(this.mnuCopyToPhone, "mnuCopyToPhone");
             this.mnuCopyToPhone.Image = global::Epi.Windows.MakeView.Properties.Resources.android_icon;
             this.mnuCopyToPhone.Name = "mnuCopyToPhone";
             this.mnuCopyToPhone.Click += new System.EventHandler(this.mnuCopyToPhone_Click);
-            // 
-            // toolStripMenuItemPrint
-            // 
-            resources.ApplyResources(this.toolStripMenuItemPrint, "toolStripMenuItemPrint");
-            this.toolStripMenuItemPrint.Name = "toolStripMenuItemPrint";
-            this.toolStripMenuItemPrint.Click += new System.EventHandler(this.toolStripMenuItemPrint_Click);
             // 
             // toolStripPublishToWebEnter
             // 
@@ -482,7 +642,7 @@ namespace Epi.Windows.MakeView.Forms
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusBarToolStripMenuItem,
-            this.vocabularyFieldsToolStripMenuItem,           
+            this.vocabularyFieldsToolStripMenuItem,
             this.fieldNamesToolStripMenuItem,
             this.tabOrderToolStripMenuItem,
             this.epiInfoLogsToolStripMenuItem});
@@ -504,12 +664,6 @@ namespace Epi.Windows.MakeView.Forms
             resources.ApplyResources(this.vocabularyFieldsToolStripMenuItem, "vocabularyFieldsToolStripMenuItem");
             this.vocabularyFieldsToolStripMenuItem.Click += new System.EventHandler(this.VocabularyFieldsToolStripMenuItem_Click);
             // 
-            // epiInfoLogsToolStripMenuItem
-            // 
-            this.epiInfoLogsToolStripMenuItem.Name = "epiInfoLogsToolStripMenuItem";
-            resources.ApplyResources(this.epiInfoLogsToolStripMenuItem, "epiInfoLogsToolStripMenuItem");
-            this.epiInfoLogsToolStripMenuItem.Click += new System.EventHandler(this.epiInfoLogsToolStripMenuItem_Click);
-            // 
             // fieldNamesToolStripMenuItem
             // 
             this.fieldNamesToolStripMenuItem.CheckOnClick = true;
@@ -523,6 +677,12 @@ namespace Epi.Windows.MakeView.Forms
             this.tabOrderToolStripMenuItem.Name = "tabOrderToolStripMenuItem";
             resources.ApplyResources(this.tabOrderToolStripMenuItem, "tabOrderToolStripMenuItem");
             this.tabOrderToolStripMenuItem.Click += new System.EventHandler(this.tabOrderToolStripMenuItem_Click);
+            // 
+            // epiInfoLogsToolStripMenuItem
+            // 
+            this.epiInfoLogsToolStripMenuItem.Name = "epiInfoLogsToolStripMenuItem";
+            resources.ApplyResources(this.epiInfoLogsToolStripMenuItem, "epiInfoLogsToolStripMenuItem");
+            this.epiInfoLogsToolStripMenuItem.Click += new System.EventHandler(this.epiInfoLogsToolStripMenuItem_Click);
             // 
             // insertToolStripMenuItem
             // 
@@ -767,166 +927,6 @@ namespace Epi.Windows.MakeView.Forms
             resources.ApplyResources(this.aboutEpiInfoToolStripMenuItem, "aboutEpiInfoToolStripMenuItem");
             this.aboutEpiInfoToolStripMenuItem.Click += new System.EventHandler(this.aboutEpiInfoToolStripMenuItem_Click);
             // 
-            // MainToolStrip
-            // 
-            resources.ApplyResources(this.MainToolStrip, "MainToolStrip");
-            this.MainToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.MainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNew,
-            this.btnOpen,
-            this.toolStripButtonCloseProject,
-            this.toolStripSeparator2,
-            this.toolStripButtonUndo,
-            this.toolStripButtonRedo,
-            this.toolStripSeparatorAfterUndoRedo,
-            this.btnCheckCode,
-            this.toolStripSeparator10,
-            this.QuickPublishtoolStripButton,
-            this.toolStripSeparator11,
-            this.ChangeModetoolStripDropDownButton,
-            this.btnEnterData});
-            this.MainToolStrip.Name = "MainToolStrip";
-            this.MainToolStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.MainToolStrip_ItemClicked);
-            // 
-            // btnNew
-            // 
-            resources.ApplyResources(this.btnNew, "btnNew");
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Click += new System.EventHandler(this.NewProjectMenuItem_Click);
-            // 
-            // btnOpen
-            // 
-            resources.ApplyResources(this.btnOpen, "btnOpen");
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Click += new System.EventHandler(this.OpenProject_Click);
-            // 
-            // toolStripButtonCloseProject
-            // 
-            resources.ApplyResources(this.toolStripButtonCloseProject, "toolStripButtonCloseProject");
-            this.toolStripButtonCloseProject.Name = "toolStripButtonCloseProject";
-            this.toolStripButtonCloseProject.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
-            // 
-            // toolStripButtonUndo
-            // 
-            this.toolStripButtonUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripButtonUndo, "toolStripButtonUndo");
-            this.toolStripButtonUndo.Name = "toolStripButtonUndo";
-            this.toolStripButtonUndo.Click += new System.EventHandler(this.toolStripButtonUndo_Click);
-            // 
-            // toolStripButtonRedo
-            // 
-            this.toolStripButtonRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripButtonRedo, "toolStripButtonRedo");
-            this.toolStripButtonRedo.Name = "toolStripButtonRedo";
-            this.toolStripButtonRedo.Click += new System.EventHandler(this.toolStripButtonRedo_Click);
-            // 
-            // toolStripSeparatorAfterUndoRedo
-            // 
-            this.toolStripSeparatorAfterUndoRedo.Name = "toolStripSeparatorAfterUndoRedo";
-            resources.ApplyResources(this.toolStripSeparatorAfterUndoRedo, "toolStripSeparatorAfterUndoRedo");
-            // 
-            // btnCheckCode
-            // 
-            resources.ApplyResources(this.btnCheckCode, "btnCheckCode");
-            this.btnCheckCode.Name = "btnCheckCode";
-            this.btnCheckCode.Click += new System.EventHandler(this.btnCheckCode_Click);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
-            // 
-            // QuickPublishtoolStripButton
-            // 
-            this.QuickPublishtoolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toWebSurveyToolStripMenuItem,
-            this.toWebEnterToolStripMenuItem});
-            resources.ApplyResources(this.QuickPublishtoolStripButton, "QuickPublishtoolStripButton");
-            this.QuickPublishtoolStripButton.Image = global::Epi.Windows.MakeView.Properties.Resources.Publish;
-            this.QuickPublishtoolStripButton.Name = "QuickPublishtoolStripButton";
-            // 
-            // toWebSurveyToolStripMenuItem
-            // 
-            this.toWebSurveyToolStripMenuItem.Name = "toWebSurveyToolStripMenuItem";
-            resources.ApplyResources(this.toWebSurveyToolStripMenuItem, "toWebSurveyToolStripMenuItem");
-            this.toWebSurveyToolStripMenuItem.Click += new System.EventHandler(this.toWebSurveyToolStripMenuItem_Click);
-            // 
-            // toWebEnterToolStripMenuItem
-            // 
-            this.toWebEnterToolStripMenuItem.Name = "toWebEnterToolStripMenuItem";
-            resources.ApplyResources(this.toWebEnterToolStripMenuItem, "toWebEnterToolStripMenuItem");
-            this.toWebEnterToolStripMenuItem.Click += new System.EventHandler(this.toWebEnterToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
-            // 
-            // ChangeModetoolStripDropDownButton
-            // 
-            this.ChangeModetoolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ChangeModetoolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.EIWSToolStripMenuItem,
-            this.EWEToolStripMenuItem});
-            resources.ApplyResources(this.ChangeModetoolStripDropDownButton, "ChangeModetoolStripDropDownButton");
-            this.ChangeModetoolStripDropDownButton.Name = "ChangeModetoolStripDropDownButton";
-            this.ChangeModetoolStripDropDownButton.Click += new System.EventHandler(this.ChangeModetoolStripDropDownButton_Click);
-            // 
-            // EIWSToolStripMenuItem
-            // 
-            this.EIWSToolStripMenuItem.CheckOnClick = true;
-            this.EIWSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.draftToolStripMenuItem1,
-            this.finalToolStripMenuItem1});
-            this.EIWSToolStripMenuItem.Name = "EIWSToolStripMenuItem";
-            resources.ApplyResources(this.EIWSToolStripMenuItem, "EIWSToolStripMenuItem");
-            this.EIWSToolStripMenuItem.Click += new System.EventHandler(this.draftToolStripMenuItem_Click);
-            // 
-            // draftToolStripMenuItem1
-            // 
-            this.draftToolStripMenuItem1.Name = "draftToolStripMenuItem1";
-            resources.ApplyResources(this.draftToolStripMenuItem1, "draftToolStripMenuItem1");
-            this.draftToolStripMenuItem1.Click += new System.EventHandler(this.draftToolStripMenuItem1_Click);
-            // 
-            // finalToolStripMenuItem1
-            // 
-            this.finalToolStripMenuItem1.Name = "finalToolStripMenuItem1";
-            resources.ApplyResources(this.finalToolStripMenuItem1, "finalToolStripMenuItem1");
-            this.finalToolStripMenuItem1.Click += new System.EventHandler(this.finalToolStripMenuItem1_Click);
-            // 
-            // EWEToolStripMenuItem
-            // 
-            this.EWEToolStripMenuItem.CheckOnClick = true;
-            this.EWEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.draftToolStripMenuItem2,
-            this.finalToolStripMenuItem2});
-            this.EWEToolStripMenuItem.Name = "EWEToolStripMenuItem";
-            resources.ApplyResources(this.EWEToolStripMenuItem, "EWEToolStripMenuItem");
-            this.EWEToolStripMenuItem.Click += new System.EventHandler(this.finalToolStripMenuItem_Click);
-            // 
-            // draftToolStripMenuItem2
-            // 
-            this.draftToolStripMenuItem2.Name = "draftToolStripMenuItem2";
-            resources.ApplyResources(this.draftToolStripMenuItem2, "draftToolStripMenuItem2");
-            this.draftToolStripMenuItem2.Click += new System.EventHandler(this.draftToolStripMenuItem2_Click);
-            // 
-            // finalToolStripMenuItem2
-            // 
-            this.finalToolStripMenuItem2.Name = "finalToolStripMenuItem2";
-            resources.ApplyResources(this.finalToolStripMenuItem2, "finalToolStripMenuItem2");
-            this.finalToolStripMenuItem2.Click += new System.EventHandler(this.finalToolStripMenuItem2_Click);
-            // 
-            // btnEnterData
-            // 
-            resources.ApplyResources(this.btnEnterData, "btnEnterData");
-            this.btnEnterData.Name = "btnEnterData";
-            this.btnEnterData.Click += new System.EventHandler(this.btnEnterData_Click);
-            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
@@ -987,10 +987,10 @@ namespace Epi.Windows.MakeView.Forms
             this.MainToolStripContainer.TopToolStripPanel.PerformLayout();
             this.MainToolStripContainer.ResumeLayout(false);
             this.MainToolStripContainer.PerformLayout();
-            this.MainMenu.ResumeLayout(false);
-            this.MainMenu.PerformLayout();
             this.MainToolStrip.ResumeLayout(false);
             this.MainToolStrip.PerformLayout();
+            this.MainMenu.ResumeLayout(false);
+            this.MainMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

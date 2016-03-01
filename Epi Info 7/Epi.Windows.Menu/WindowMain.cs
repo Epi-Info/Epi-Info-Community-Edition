@@ -37,7 +37,11 @@ namespace Epi.Windows.Menu
  
             host.Child = form;
             this.Controls.Add(host);
-        }       
+        }
+
+      
+
+       
 
         
 

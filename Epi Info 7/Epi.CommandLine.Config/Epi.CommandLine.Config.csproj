@@ -38,7 +38,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>App.ico</ApplicationIcon>
+    <ApplicationIcon>App_old.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
+    <Content Include="App_old.ico" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="BooleanVariableControl.xaml">
