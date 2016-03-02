@@ -58,6 +58,11 @@
   <ItemGroup>
     <Compile Include="EntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatCalcSharedStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StatCalcSharedStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="StatCalc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +84,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="StatCalcSharedStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StatCalcSharedStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="StatCalc.resx" />
     <EmbeddedResource Include="StatCalcForm.resx" />
     <None Include="Properties\Settings.settings">

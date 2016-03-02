@@ -33,7 +33,21 @@ namespace StatCalc
            Epi.ApplicationIdentity appId = new Epi.ApplicationIdentity(typeof(Configuration).Assembly);
            this.tsslLocale.Text = Thread.CurrentThread.CurrentUICulture.Name;
            this.tsslVersion.Text = appId.Version;
-           
+
+            #region Translation
+
+            txtPopulationSurvey.Text = StatCalcSharedStrings.STATCALC_POPULATION_SURVEY;
+            txtCohortorCross.Text = StatCalcSharedStrings.STATCALC_COHORT_CROSS;
+            unmatchedCaseControl.Text = StatCalcSharedStrings.STATCALC_UNMATCHED_CASE;
+            txtChiSquare.Text = StatCalcSharedStrings.STATCALC_CHI_SQUARE;
+            txtTables22N.Text = StatCalcSharedStrings.STATCALC_TABLES_22N;
+            txtPoisson.Text = StatCalcSharedStrings.STATCALC_POISSON_RARE;
+            txtPopulationBinomial.Text = StatCalcSharedStrings.STATCALC_POPULATION_BINOMIAL;
+            txtMatchedPairCase.Text = StatCalcSharedStrings.STATCALC_MATCHED_PAIR_CASE;
+            txtLanguage.Text = StatCalcSharedStrings.STATCALC_LANGUAGE;
+            txtVersion.Text = StatCalcSharedStrings.STATCALC_VERSION;
+            #endregion Translation
+
         }
 
         private void populationSurveyControl_Click(object sender, MouseButtonEventArgs e)

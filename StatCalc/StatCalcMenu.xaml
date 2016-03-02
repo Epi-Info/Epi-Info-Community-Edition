@@ -112,7 +112,7 @@
                             </StackPanel>
                         </ContentControl>
                         <StackPanel Orientation="Horizontal" Margin="15 0 5 0">
-                            <TextBlock Foreground="#8eafd5">VERSION:</TextBlock>
+                            <TextBlock x:Name="txtVersion" Foreground="#8eafd5">VERSION:</TextBlock>
                             <TextBlock Foreground="#8eafd5" x:Name="tsslVersion"></TextBlock>
                         </StackPanel>
                     </StackPanel>
