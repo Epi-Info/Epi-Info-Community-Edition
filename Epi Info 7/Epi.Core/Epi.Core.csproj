@@ -11,8 +11,7 @@
     <SccProvider>SAK</SccProvider>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>Resources\ImagesNotToBeDeployed\App.ico</ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>Epi.Core</AssemblyName>
@@ -671,6 +670,7 @@
     <Content Include="Projects\Sample\Sample.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\ImagesNotToBeDeployed\App.ico" />
     <Content Include="Resources\Training Projects\CommunityHealthAssessment\albany_demogz.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1285,7 +1285,7 @@
     <EmbeddedResource Include="Resources\Scripts\MetadataTableScript.sql" />
     <Content Include="Resources\Configuration\WARNING.rtf" />
     <None Include="Resources\ImagesNotToBeDeployed\epi2000c.ico" />
-    <None Include="Resources\ImagesNotToBeDeployed\App.ico" />
+    <None Include="Resources\ImagesNotToBeDeployed\App_old.ico" />
     <EmbeddedResource Include="Resources\Templates\ReportTemplate.EPT" />
     <EmbeddedResource Include="Resources\Templates\ReportTemplate.epx" />
     <EmbeddedResource Include="Resources\Images\EpiInfo.jpg" />
