@@ -4891,41 +4891,53 @@ namespace Epi.Windows.MakeView.PresentationLogic
                        ArrayList namesOfChildenOnPage = new ArrayList();
 
                        Panel panel = canvas.PagePanel;
+                       
+                       foreach (Control control in pageControls)
+                       {
+                           if (control is GroupBox)
+                           {
+                               control.SendToBack();
+                               printPanel.Controls.Add(control);
+                           }
+                       }
 
                        foreach (Control control in pageControls)
                        {
+                           if (control is GroupBox) continue;
+                           
                            Control printControl = control;
                            Field field = factory.GetAssociatedField(control);
                            field = view.Fields[field.Name];
 
-                           if (field is GroupField == false)
-                           {
-                               try
-                               {
-                                   if (control is RichTextBox)
-                                   {
-                                       printControl = new TextBox();
+                            try
+                            {
+                                if (control is RichTextBox || control is System.Windows.Forms.PictureBox)
+                                {
+                                    printControl = new TextBox();
 
-                                       ((TextBoxBase)printControl).BorderStyle = ((TextBoxBase)control).BorderStyle;
-                                       ((TextBoxBase)printControl).Multiline = true;
+                                    if (control is TextBoxBase)
+                                    {
+                                        ((TextBoxBase)printControl).BorderStyle = ((TextBoxBase)control).BorderStyle;
+                                    }
+                                    
+                                    ((TextBoxBase)printControl).Multiline = true;
 
-                                       printControl.Left = control.Left;
-                                       printControl.Top = control.Top;
-                                       printControl.Height = control.Height;
-                                       printControl.Width = control.Width;
-                                       printControl.Font = control.Font;
-                                   }
+                                    printControl.Left = control.Left;
+                                    printControl.Top = control.Top;
+                                    printControl.Height = control.Height;
+                                    printControl.Width = control.Width;
+                                    printControl.Font = control.Font;
 
-                                   printPanel.Controls.Add(printControl);
-                               }
-                               catch
-                               {
-                                   return false;
-                               }
-                           }
+                                }
 
+                                printPanel.Controls.Add(printControl);
+                            }
+                            catch
+                            {
+                                return false;
+                            }
+ 
                            if (printControl is Label) continue;
-                           if (printControl is FieldGroupBox) continue;
                           
                            if (printControl is TextBox || printControl is ComboBox)
                            {
@@ -4944,7 +4956,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                                }
                            }                           
                        }
-                      
+
                        int colorValue;
                        DataTable backgroundTable = page.GetMetadata().GetPageBackgroundData(page);
                        DataRow[] rows = backgroundTable.Select("BackgroundId=" + page.BackgroundId);
@@ -5027,7 +5039,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                                    Field field = factory.GetAssociatedField(control);
                                    if (control.TabStop == true)
                                    {
-                                       bool isInputField = ((Control)control) is PairedLabel == false && field.FieldType != MetaFieldType.Group;
+                                       bool isInputField = ((Control)control) is PairedLabel == false ;
                                        bool isLabelField = field.FieldType == MetaFieldType.LabelTitle;
                                        if (isInputField || isLabelField)
                                        {
@@ -5062,8 +5074,9 @@ namespace Epi.Windows.MakeView.PresentationLogic
                                    }
                                    else
                                    {
-                                       bool isInputField = ((Control)control) is PairedLabel == false && field.FieldType != MetaFieldType.Group;
+                                       bool isInputField = ((Control)control) is PairedLabel == false ;
                                        bool isLabelField = field.FieldType == MetaFieldType.LabelTitle;
+                                       
                                        if (isInputField || isLabelField)
                                        {
                                            Label lbTabSquare = new Label();
@@ -5098,7 +5111,9 @@ namespace Epi.Windows.MakeView.PresentationLogic
                                    }
                                }
                            }                          
+
                            printPanel.BackgroundImageLayout = ImageLayout.None;
+                           
                            if (printPanel.Size.Width > 0 && printPanel.Size.Height > 0)
                            {
                                try
@@ -5141,23 +5156,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                                                break;
                                        }
                                    }
-
-                                   foreach (Control control in pageControls)
-                                   {
-                                       if (control is DragableGroupBox)
-                                       {
-                                           Pen pen = new Pen(Color.Black);
-                                           Point ul = control.Location;
-                                           Point ur = new Point(control.Location.X + control.Width, control.Location.Y);
-                                           Point ll = new Point(control.Location.X, control.Location.Y + control.Height);
-                                           Point lr = new Point(control.Location.X + control.Width, control.Location.Y + control.Height);
-                                           bufferGraphics.DrawLine(pen, ul, ur);
-                                           bufferGraphics.DrawLine(pen, ur, lr);
-                                           bufferGraphics.DrawLine(pen, lr, ll);
-                                           bufferGraphics.DrawLine(pen, ll, ul);
-                                       }
-                                   }
-                                   
+                                  
                                    bufferGraphics.DrawImage(b, 0, 0);
                                    bufferBitmap = b;
                                    printPanel.BackgroundImage = b;
@@ -5170,26 +5169,6 @@ namespace Epi.Windows.MakeView.PresentationLogic
                                    pageImageList = null;
                                    return false;
                                }
-                           }
-                       }
-
-                       foreach (Control control in pageControls)
-                       {
-                           Field field = factory.GetAssociatedField(control);
-                           field = view.Fields[field.Name];
-
-                           if (field is GroupField)
-                           {
-                               Label label = new Label();
-                               label.Width = control.Width;
-                               label.Text = control.Text;
-                               Size textSize = TextRenderer.MeasureText(graphics, label.Text, label.Font);
-                               label.Left = control.Left + 12;
-                               label.Top = control.Top - textSize.Height / 2;
-                               label.Width = textSize.Width + 12;
-                               label.Font = control.Font;
-                               label.AutoSize = true;
-                               printPanel.Controls.Add(label);
                            }
                        }
 
