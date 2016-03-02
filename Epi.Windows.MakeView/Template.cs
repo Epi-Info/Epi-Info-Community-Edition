@@ -512,7 +512,10 @@ namespace Epi.Windows.MakeView
 
                 foreach (DataColumn column in table.Columns)
                 {
-                    writer.WriteAttributeString(column.ColumnName, row[column.ColumnName].ToString());
+                    if (row[column.ColumnName].ToString() != string.Empty)
+                    {
+                        writer.WriteAttributeString(column.ColumnName, row[column.ColumnName].ToString());
+                    }
 
                     if (column.ColumnName == ColumnNames.FIELD_TYPE_ID)
                     {
