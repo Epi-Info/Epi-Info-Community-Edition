@@ -748,8 +748,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             List<DataRow> Rows = this.Context.GetOutput();
 
             TextWriter stream = System.IO.File.AppendText(string.Format("{0}\\{1}",curFile,TableName.ToString().Replace("#",".")));           
-            if (!this.WriteMode.Equals("REPLACE", StringComparison.OrdinalIgnoreCase))
-            if (TableColumns.Count < Max_Number_Columns)
+            //if (!this.WriteMode.Equals("REPLACE", StringComparison.OrdinalIgnoreCase))
+            if (TableColumns.Count > Max_Number_Columns)
             {
                 for (int i = 0; i < TableColumns.Count; i++)
                 {
@@ -774,7 +774,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         stream.Write('\n');
                     }
                 }
-            }
+           }
 
 
             foreach (DataRow row in Rows)
