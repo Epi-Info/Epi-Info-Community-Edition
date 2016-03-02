@@ -39,6 +39,23 @@ namespace Epi.Windows.Menu
             this.Controls.Add(host);
         }
 
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WindowMain));
+            this.SuspendLayout();
+            // 
+            // WindowMain
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 255);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "WindowMain";
+            this.ResumeLayout(false);
+
+        }
+
+       
+      
+
        
 
       

@@ -37,6 +37,20 @@ namespace StatCalc
             this.Controls.Add(host);
         }
 
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatCalcForm));
+            this.SuspendLayout();
+            // 
+            // StatCalcForm
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 255);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "StatCalcForm";
+            this.ResumeLayout(false);
+
+        }
+
        
 
       

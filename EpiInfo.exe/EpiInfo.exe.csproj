@@ -7,7 +7,8 @@
     <ProjectGuid>{F98A02B9-9B0B-4786-9F59-71F9BA683AD9}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ApplicationIcon>App_old.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>EpiInfo</AssemblyName>
@@ -222,6 +223,9 @@
     <EmbeddedResource Include="Dialogs\ReadMe.resx">
       <DependentUpon>ReadMe.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
