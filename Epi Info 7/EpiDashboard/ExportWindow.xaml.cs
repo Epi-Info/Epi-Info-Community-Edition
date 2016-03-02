@@ -1043,13 +1043,13 @@ namespace EpiDashboard
             }            
 
             string fileName = db.DataSource + "\\" + tableName;
-
+            bool writeToFlatFile = false;
             if (!fileName.ToLower().EndsWith(".csv") && !fileName.ToLower().EndsWith(".txt"))
             {
                 fileName = fileName + ".csv";
+                writeToFlatFile = true;
             }
-
-            bool writeToFlatFile = false;
+           
             if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii"))
             {
                 writeToFlatFile = true;
