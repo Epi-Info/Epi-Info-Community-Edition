@@ -38,6 +38,9 @@
   <PropertyGroup>
     <StartupObject>StatCalc.EntryPoint</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
