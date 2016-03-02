@@ -167,9 +167,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\x86\Epi.Enter.ServiceApplication\</OutputPath>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="CalithaLib, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -267,9 +265,6 @@
       <DependentUpon>WindowMain.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="app.manifest">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="ConfigSchema.xsd">
       <SubType>
       </SubType>
