@@ -13,32 +13,42 @@ namespace Epi.Windows.Menu
 {
     public partial class WindowMain : Form
     {
-        private ElementHost host;
+        private ElementHost host;       
+      
         MainWindow form = null;
         public WindowMain() 
         {
-            InitializeComponent();
+            InitializeComponent();          
             this.MaximumSize = new System.Drawing.Size(857, 745);
             this.MinimumSize = new System.Drawing.Size(500, 400);
-            //this.Width++;
-            //this.Width--;
-            if (this.Width == 659 && this.Height == 641)
+           
+            if (this.ClientSize.Width >840 && this.ClientSize.Height> 700)
             {
-               this.Size = new Size(700, 600);
-               
-               this.MaximumSize = new System.Drawing.Size(700, 600);
-               this.MinimumSize = new System.Drawing.Size(450, 400);
+                this.Size = new Size(700, 600);
+
+                this.MaximumSize = new System.Drawing.Size(700, 600);
+                this.MinimumSize = new System.Drawing.Size(450, 400);
             }
           
             host = new ElementHost();
             host.Dock = DockStyle.Fill;
-            host.AutoSize = true;
+           // host.AutoSize = true;
             form = new MainWindow();
  
             host.Child = form;
             this.Controls.Add(host);
         }
 
+       
+
+      
+      
+
+       
+        
+       
+
+       
       
 
        
