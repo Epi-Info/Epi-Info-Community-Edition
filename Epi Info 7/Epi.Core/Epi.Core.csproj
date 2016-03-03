@@ -305,6 +305,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ServiceClient\EWEConfigValues.cs" />
     <Compile Include="ServiceClient\EWEServiceClient.cs" />
     <Compile Include="ServiceClient\ServiceClient.cs" />
     <Compile Include="Services\Fields\FirstSaveTime.cs" />
