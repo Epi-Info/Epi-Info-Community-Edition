@@ -77,6 +77,7 @@ namespace Epi.Windows.MakeView.Forms
         SplashScreenForm sf = null;
         private string RepublishOrgKey = null;
         private bool iscancel = false;
+        private   Configuration ConfigFile;
         //private GuiMediator mediater = null;
         /// <summary>
         /// PageChanged EventHandler
@@ -1027,13 +1028,34 @@ namespace Epi.Windows.MakeView.Forms
         /// </summary>		
         private void LoadRecentProjects()
         {
-            Configuration config = Configuration.GetNewInstance();
-            DataView dv = config.RecentProjects.DefaultView;
+           // Configuration config = Configuration.GetNewInstance();
+            LoadConfiguration();
+            Configuration _config = ConfigFile;
+            string EWEServiceEndpointAddress ="";
+            try
+            {
+                EWEServiceEndpointAddress = _config.Settings.EWEServiceEndpointAddress  ;
+            }catch (Exception ex){
+                _config.Settings.EWEServiceAuthMode = 0; // 0 = Anon, 1 = NT
+
+                _config.Settings.EWEServiceEndpointAddress = string.Empty;
+                
+                _config.Settings.EWEServiceBindingMode = "BASIC";
+                _config.Settings.EWEServiceMaxBufferPoolSize = 524288;
+                _config.Settings.EWEServiceMaxReceivedMessageSize = 999999999;
+                _config.Settings.EWEServiceReaderMaxDepth = 32;
+                _config.Settings.EWEServiceReaderMaxStringContentLength = 2048000;
+                _config.Settings.EWEServiceReaderMaxArrayLength = 16384;
+                _config.Settings.EWEServiceReaderMaxBytesPerRead = 4096;
+                _config.Settings.EWEServiceReaderMaxNameTableCharCount = 16384;
+                Configuration.Save(_config);
+            }
+            DataView dv = _config.RecentProjects.DefaultView;
             try
             {
                 dv.Sort = "LastAccessed desc";
                 recentProjectsToolStripMenuItem.DropDownItems.Clear();
-                int countToShow = Math.Min(dv.Count, config.Settings.MRUProjectsCount);
+                int countToShow = Math.Min(dv.Count, _config.Settings.MRUProjectsCount);
                 for (int index = 0; index < countToShow; index++)
                 {
                     string projectFullPath = "&" + (index + 1) + " " + dv[index]["Location"].ToString();
@@ -1043,13 +1065,13 @@ namespace Epi.Windows.MakeView.Forms
                     recentProjectsToolStripMenuItem.DropDownItems.Add(recentProjectItem);
                 }
                 recentProjectsToolStripMenuItem.Enabled = (recentProjectsToolStripMenuItem.DropDownItems.Count > 0);
-                if (config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress)))
+                if (_config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(_config.Settings.WebServiceEndpointAddress)))
                 {
                     QuickPublishtoolStripButton.Visible = true;
                     ChangeModetoolStripDropDownButton.Visible = true;
                     toolStripSeparator10.Visible = true;
                 }
-                else if (config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress)))
+                else if (_config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(EWEServiceEndpointAddress)))
                 {
                     QuickPublishtoolStripButton.Visible = true;
                     ChangeModetoolStripDropDownButton.Visible = true;
@@ -5123,6 +5145,43 @@ namespace Epi.Windows.MakeView.Forms
             }
         }
 
+        private   bool LoadConfiguration()
+        {
+            string configFilePath = Configuration.DefaultConfigurationPath;
 
+            bool configurationOk = true;
+            try
+            {
+                string directoryName = Path.GetDirectoryName(configFilePath);
+                if (!Directory.Exists(directoryName))
+                {
+                    Directory.CreateDirectory(directoryName);
+                }
+
+                if (!File.Exists(configFilePath))
+                {
+                    Configuration defaultConfig = Configuration.CreateDefaultConfiguration();
+                    Configuration.Save(defaultConfig);
+                    ConfigFile = defaultConfig;
+
+                }
+                else
+                {
+                    ConfigFile = Configuration.GetNewInstance();
+                }
+                Configuration.Load(configFilePath);
+            }
+            catch (ConfigurationException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                configurationOk = ex.Message == "";
+            }
+
+            return configurationOk;
+        }
+      
     }
 }

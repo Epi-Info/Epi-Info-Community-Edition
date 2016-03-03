@@ -23,44 +23,7 @@ namespace Epi.Core.ServiceClient
             EndPointNotFound,
             GeneralException
         }
-        private static  bool LoadConfiguration()
-        {
-            string configFilePath = Configuration.DefaultConfigurationPath;
-
-            bool configurationOk = true;
-            try
-            {
-                string directoryName = Path.GetDirectoryName(configFilePath);
-                if (!Directory.Exists(directoryName))
-                {
-                    Directory.CreateDirectory(directoryName);
-                }
-
-                if (!File.Exists(configFilePath))
-                {
-                    Configuration defaultConfig = Configuration.CreateDefaultConfiguration();
-                    Configuration.Save(defaultConfig);
-                    ConfigFile = defaultConfig;
-
-                }
-                else
-                {
-                    ConfigFile = Configuration.GetNewInstance();
-                }
-                 Configuration.Load(configFilePath);
-            }
-            catch (ConfigurationException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                configurationOk = ex.Message == "";
-            }
-
-            return configurationOk;
-        }
-        
+     
 
 	
         public static EWEManagerService.EWEManagerServiceClient GetClient(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
@@ -69,8 +32,9 @@ namespace Epi.Core.ServiceClient
             
             try
             {
-                LoadConfiguration();
-                Configuration config = ConfigFile;
+                
+                
+                Configuration config = Configuration.GetNewInstance(); ;
                 if (pIsAuthenticated) // Windows Authentication
                 {
                     System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
@@ -208,8 +172,9 @@ namespace Epi.Core.ServiceClient
 
         public static EWEManagerService.EWEManagerServiceClient GetClient()
         {
-            LoadConfiguration();
-            Configuration config = ConfigFile;
+            Epi.ServiceClient.EWEConfigValues EWEConfigValues = new Epi.ServiceClient.EWEConfigValues();
+            EWEConfigValues.SetConfigFile();
+            Configuration config = Configuration.GetNewInstance(); ;
             string pEndPointAddress = config.Settings.EWEServiceEndpointAddress;
             bool pIsAuthenticated = false;
             bool pIsWsHTTPBinding = true;
@@ -240,8 +205,8 @@ namespace Epi.Core.ServiceClient
         {
             try
             {
-                LoadConfiguration();
-                Configuration config = ConfigFile;
+                
+                Configuration config = Configuration.GetNewInstance(); ;
                 EWEManagerService.EWEManagerServiceClient client = EWEServiceClient.GetClient();
                
                 var Request = new EWEManagerService.SurveyInfoRequest(); 

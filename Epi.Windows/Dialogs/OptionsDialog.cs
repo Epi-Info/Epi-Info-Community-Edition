@@ -487,18 +487,27 @@ namespace Epi.Windows.Dialogs
                 {
                     rbNoWindows.Checked = true;
                 }
-                if (config.Settings.EWEServiceAuthMode == 1)
-                    {
-                    EWErbUseWindows.Checked = true;
-                    }
-                else
-                    {
-                    EWErbNoWindows.Checked = true;
-                    }
-            //}
-
                 try
                 {
+                    if (config.Settings.EWEServiceAuthMode == 1)
+                    {
+                        EWErbUseWindows.Checked = true;
+                    }
+                    else
+                    {
+                        EWErbNoWindows.Checked = true;
+                    }
+                }
+                catch (Exception)
+                {
+                    Configuration _config = Configuration.GetNewInstance();
+                    _config.Settings.EWEServiceAuthMode = 0; // 0 = Anon, 1 = NT
+                    Configuration.Save(_config);
+
+                }
+            //}
+                try { 
+               
                     if (config.Settings.WebServiceBindingMode == "wshttp")
                     {
                         rbWSHTTP.Checked = true;
@@ -519,6 +528,7 @@ namespace Epi.Windows.Dialogs
                 catch (Exception ex)
                 {
                     rbBasic.Checked = true;
+                   
                 }
 
             txtEndpoint.Text = config.Settings.WebServiceEndpointAddress;
