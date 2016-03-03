@@ -48,38 +48,6 @@ namespace Epi.Windows.Enter
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnterMainForm));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.enterDockManager = new Epi.Windows.Docking.DockManager(this.components);
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btiOpen = new System.Windows.Forms.ToolStripButton();
-            this.btiSave = new System.Windows.Forms.ToolStripButton();
-            this.btiPrint = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.btiFind = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.btiNew = new System.Windows.Forms.ToolStripButton();
-            this.toolStripFirstButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripPreviousButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripRecordNumber = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripOfLabel = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripRecordCount = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripNextButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLastButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.btiMarkDeleted = new System.Windows.Forms.ToolStripButton();
-            this.btiUndelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.LineListingToolStripButton = new System.Windows.Forms.ToolStripSplitButton();
-            this.gridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printableHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.excelLineListMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbDashboard = new System.Windows.Forms.ToolStripButton();
-            this.tsbMap = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.btiEditView = new System.Windows.Forms.ToolStripButton();
-            this.btiHelp = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.btnHome = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnBack = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,6 +88,38 @@ namespace Epi.Windows.Enter
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutEpiInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.btnHome = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnBack = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btiOpen = new System.Windows.Forms.ToolStripButton();
+            this.btiSave = new System.Windows.Forms.ToolStripButton();
+            this.btiPrint = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.btiFind = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.btiNew = new System.Windows.Forms.ToolStripButton();
+            this.toolStripFirstButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripPreviousButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripRecordNumber = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripOfLabel = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripRecordCount = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripNextButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLastButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.btiMarkDeleted = new System.Windows.Forms.ToolStripButton();
+            this.btiUndelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.LineListingToolStripButton = new System.Windows.Forms.ToolStripSplitButton();
+            this.gridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printableHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.excelLineListMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbDashboard = new System.Windows.Forms.ToolStripButton();
+            this.tsbMap = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.btiEditView = new System.Windows.Forms.ToolStripButton();
+            this.btiHelp = new System.Windows.Forms.ToolStripButton();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -128,9 +128,9 @@ namespace Epi.Windows.Enter
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // baseImageList
@@ -262,234 +262,6 @@ namespace Epi.Windows.Enter
             this.enterDockManager.SplitterWidth = 4;
             this.enterDockManager.VisualStyle = Epi.Windows.Docking.DockVisualStyle.VS2003;
             // 
-            // toolStrip1
-            // 
-            resources.ApplyResources(this.toolStrip1, "toolStrip1");
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btiOpen,
-            this.btiSave,
-            this.btiPrint,
-            this.toolStripSeparator5,
-            this.btiFind,
-            this.toolStripSeparator6,
-            this.btiNew,
-            this.toolStripFirstButton,
-            this.toolStripPreviousButton,
-            this.toolStripRecordNumber,
-            this.toolStripOfLabel,
-            this.toolStripRecordCount,
-            this.toolStripNextButton,
-            this.toolStripLastButton,
-            this.toolStripSeparator8,
-            this.btiMarkDeleted,
-            this.btiUndelete,
-            this.toolStripSeparator7,
-            this.LineListingToolStripButton,
-            this.tsbDashboard,
-            this.tsbMap,
-            this.toolStripSeparator10,
-            this.btiEditView,
-            this.btiHelp});
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
-            // 
-            // btiOpen
-            // 
-            resources.ApplyResources(this.btiOpen, "btiOpen");
-            this.btiOpen.Name = "btiOpen";
-            this.btiOpen.Click += new System.EventHandler(this.openViewToolStripMenuItem_Click);
-            // 
-            // btiSave
-            // 
-            resources.ApplyResources(this.btiSave, "btiSave");
-            this.btiSave.Name = "btiSave";
-            this.btiSave.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // btiPrint
-            // 
-            resources.ApplyResources(this.btiPrint, "btiPrint");
-            this.btiPrint.Name = "btiPrint";
-            this.btiPrint.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
-            // 
-            // btiFind
-            // 
-            resources.ApplyResources(this.btiFind, "btiFind");
-            this.btiFind.Name = "btiFind";
-            this.btiFind.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
-            // 
-            // btiNew
-            // 
-            this.btiNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.btiNew, "btiNew");
-            this.btiNew.Name = "btiNew";
-            this.btiNew.Click += new System.EventHandler(this.newRecordToolStripMenuItem_Click);
-            // 
-            // toolStripFirstButton
-            // 
-            this.toolStripFirstButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.toolStripFirstButton, "toolStripFirstButton");
-            this.toolStripFirstButton.Name = "toolStripFirstButton";
-            this.toolStripFirstButton.Click += new System.EventHandler(this.toolStripFirstButton_Click);
-            // 
-            // toolStripPreviousButton
-            // 
-            this.toolStripPreviousButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.toolStripPreviousButton, "toolStripPreviousButton");
-            this.toolStripPreviousButton.Name = "toolStripPreviousButton";
-            this.toolStripPreviousButton.Click += new System.EventHandler(this.toolStripPreviousButton_Click);
-            // 
-            // toolStripRecordNumber
-            // 
-            this.toolStripRecordNumber.AcceptsReturn = true;
-            this.toolStripRecordNumber.AcceptsTab = true;
-            resources.ApplyResources(this.toolStripRecordNumber, "toolStripRecordNumber");
-            this.toolStripRecordNumber.Name = "toolStripRecordNumber";
-            this.toolStripRecordNumber.Leave += new System.EventHandler(this.toolStripPageNumber_Leave);
-            this.toolStripRecordNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripRecordNumber_KeyDown);
-            // 
-            // toolStripOfLabel
-            // 
-            resources.ApplyResources(this.toolStripOfLabel, "toolStripOfLabel");
-            this.toolStripOfLabel.Name = "toolStripOfLabel";
-            // 
-            // toolStripRecordCount
-            // 
-            resources.ApplyResources(this.toolStripRecordCount, "toolStripRecordCount");
-            this.toolStripRecordCount.Name = "toolStripRecordCount";
-            // 
-            // toolStripNextButton
-            // 
-            this.toolStripNextButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.toolStripNextButton, "toolStripNextButton");
-            this.toolStripNextButton.Name = "toolStripNextButton";
-            this.toolStripNextButton.Click += new System.EventHandler(this.toolStripNextButton_Click);
-            // 
-            // toolStripLastButton
-            // 
-            this.toolStripLastButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.toolStripLastButton, "toolStripLastButton");
-            this.toolStripLastButton.Name = "toolStripLastButton";
-            this.toolStripLastButton.Click += new System.EventHandler(this.toolStripLastButton_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
-            // 
-            // btiMarkDeleted
-            // 
-            this.btiMarkDeleted.BackColor = System.Drawing.SystemColors.Control;
-            resources.ApplyResources(this.btiMarkDeleted, "btiMarkDeleted");
-            this.btiMarkDeleted.Name = "btiMarkDeleted";
-            this.btiMarkDeleted.Click += new System.EventHandler(this.markAsDeletedToolStripMenuItem_Click);
-            // 
-            // btiUndelete
-            // 
-            resources.ApplyResources(this.btiUndelete, "btiUndelete");
-            this.btiUndelete.Name = "btiUndelete";
-            this.btiUndelete.Click += new System.EventHandler(this.undeleteToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
-            // 
-            // LineListingToolStripButton
-            // 
-            this.LineListingToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gridToolStripMenuItem,
-            this.printableHTMLToolStripMenuItem,
-            this.excelLineListMenuItem});
-            resources.ApplyResources(this.LineListingToolStripButton, "LineListingToolStripButton");
-            this.LineListingToolStripButton.Name = "LineListingToolStripButton";
-            this.LineListingToolStripButton.ButtonClick += new System.EventHandler(this.gridToolStripMenuItem_Click);
-            // 
-            // gridToolStripMenuItem
-            // 
-            resources.ApplyResources(this.gridToolStripMenuItem, "gridToolStripMenuItem");
-            this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
-            // 
-            // printableHTMLToolStripMenuItem
-            // 
-            resources.ApplyResources(this.printableHTMLToolStripMenuItem, "printableHTMLToolStripMenuItem");
-            this.printableHTMLToolStripMenuItem.Name = "printableHTMLToolStripMenuItem";
-            this.printableHTMLToolStripMenuItem.Click += new System.EventHandler(this.printableHTMLToolStripMenuItem_Click);
-            // 
-            // excelLineListMenuItem
-            // 
-            resources.ApplyResources(this.excelLineListMenuItem, "excelLineListMenuItem");
-            this.excelLineListMenuItem.Name = "excelLineListMenuItem";
-            this.excelLineListMenuItem.Click += new System.EventHandler(this.excelLineListMenuItem_Click);
-            // 
-            // tsbDashboard
-            // 
-            resources.ApplyResources(this.tsbDashboard, "tsbDashboard");
-            this.tsbDashboard.Name = "tsbDashboard";
-            this.tsbDashboard.Click += new System.EventHandler(this.tsbDashboard_Click);
-            // 
-            // tsbMap
-            // 
-            resources.ApplyResources(this.tsbMap, "tsbMap");
-            this.tsbMap.Name = "tsbMap";
-            this.tsbMap.Click += new System.EventHandler(this.tsbMap_Click);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
-            // 
-            // btiEditView
-            // 
-            resources.ApplyResources(this.btiEditView, "btiEditView");
-            this.btiEditView.Name = "btiEditView";
-            this.btiEditView.Click += new System.EventHandler(this.editViewToolStripMenuItem_Click);
-            // 
-            // btiHelp
-            // 
-            resources.ApplyResources(this.btiHelp, "btiHelp");
-            this.btiHelp.Name = "btiHelp";
-            // 
-            // toolStrip2
-            // 
-            resources.ApplyResources(this.toolStrip2, "toolStrip2");
-            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnHome,
-            this.toolStripSeparator9,
-            this.btnBack});
-            this.toolStrip2.Name = "toolStrip2";
-            // 
-            // btnHome
-            // 
-            this.btnHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.btnHome, "btnHome");
-            this.btnHome.Name = "btnHome";
-            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
-            // 
-            // btnBack
-            // 
-            this.btnBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.btnBack, "btnBack");
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
             // menuStrip1
             // 
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
@@ -564,9 +336,9 @@ namespace Epi.Windows.Enter
             this.importDataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuImportFromPhone,
             this.mnuImportFromWeb,
+            this.fromWebEnterToolStripMenuItem,
             this.mnuImportFromForm,
-            this.mnuImportFromDataPackage,
-            this.fromWebEnterToolStripMenuItem});
+            this.mnuImportFromDataPackage});
             this.importDataToolStripMenuItem.Name = "importDataToolStripMenuItem";
             resources.ApplyResources(this.importDataToolStripMenuItem, "importDataToolStripMenuItem");
             // 
@@ -772,6 +544,234 @@ namespace Epi.Windows.Enter
             resources.ApplyResources(this.aboutEpiInfoToolStripMenuItem, "aboutEpiInfoToolStripMenuItem");
             this.aboutEpiInfoToolStripMenuItem.Click += new System.EventHandler(this.aboutEpiInfoToolStripMenuItem_Click);
             // 
+            // toolStrip2
+            // 
+            resources.ApplyResources(this.toolStrip2, "toolStrip2");
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnHome,
+            this.toolStripSeparator9,
+            this.btnBack});
+            this.toolStrip2.Name = "toolStrip2";
+            // 
+            // btnHome
+            // 
+            this.btnHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.btnHome, "btnHome");
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
+            // 
+            // btnBack
+            // 
+            this.btnBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.btnBack, "btnBack");
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // toolStrip1
+            // 
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btiOpen,
+            this.btiSave,
+            this.btiPrint,
+            this.toolStripSeparator5,
+            this.btiFind,
+            this.toolStripSeparator6,
+            this.btiNew,
+            this.toolStripFirstButton,
+            this.toolStripPreviousButton,
+            this.toolStripRecordNumber,
+            this.toolStripOfLabel,
+            this.toolStripRecordCount,
+            this.toolStripNextButton,
+            this.toolStripLastButton,
+            this.toolStripSeparator8,
+            this.btiMarkDeleted,
+            this.btiUndelete,
+            this.toolStripSeparator7,
+            this.LineListingToolStripButton,
+            this.tsbDashboard,
+            this.tsbMap,
+            this.toolStripSeparator10,
+            this.btiEditView,
+            this.btiHelp});
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
+            // 
+            // btiOpen
+            // 
+            resources.ApplyResources(this.btiOpen, "btiOpen");
+            this.btiOpen.Name = "btiOpen";
+            this.btiOpen.Click += new System.EventHandler(this.openViewToolStripMenuItem_Click);
+            // 
+            // btiSave
+            // 
+            resources.ApplyResources(this.btiSave, "btiSave");
+            this.btiSave.Name = "btiSave";
+            this.btiSave.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // btiPrint
+            // 
+            resources.ApplyResources(this.btiPrint, "btiPrint");
+            this.btiPrint.Name = "btiPrint";
+            this.btiPrint.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
+            // 
+            // btiFind
+            // 
+            resources.ApplyResources(this.btiFind, "btiFind");
+            this.btiFind.Name = "btiFind";
+            this.btiFind.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
+            // 
+            // btiNew
+            // 
+            this.btiNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.btiNew, "btiNew");
+            this.btiNew.Name = "btiNew";
+            this.btiNew.Click += new System.EventHandler(this.newRecordToolStripMenuItem_Click);
+            // 
+            // toolStripFirstButton
+            // 
+            this.toolStripFirstButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.toolStripFirstButton, "toolStripFirstButton");
+            this.toolStripFirstButton.Name = "toolStripFirstButton";
+            this.toolStripFirstButton.Click += new System.EventHandler(this.toolStripFirstButton_Click);
+            // 
+            // toolStripPreviousButton
+            // 
+            this.toolStripPreviousButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.toolStripPreviousButton, "toolStripPreviousButton");
+            this.toolStripPreviousButton.Name = "toolStripPreviousButton";
+            this.toolStripPreviousButton.Click += new System.EventHandler(this.toolStripPreviousButton_Click);
+            // 
+            // toolStripRecordNumber
+            // 
+            this.toolStripRecordNumber.AcceptsReturn = true;
+            this.toolStripRecordNumber.AcceptsTab = true;
+            resources.ApplyResources(this.toolStripRecordNumber, "toolStripRecordNumber");
+            this.toolStripRecordNumber.Name = "toolStripRecordNumber";
+            this.toolStripRecordNumber.Leave += new System.EventHandler(this.toolStripPageNumber_Leave);
+            this.toolStripRecordNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripRecordNumber_KeyDown);
+            // 
+            // toolStripOfLabel
+            // 
+            resources.ApplyResources(this.toolStripOfLabel, "toolStripOfLabel");
+            this.toolStripOfLabel.Name = "toolStripOfLabel";
+            // 
+            // toolStripRecordCount
+            // 
+            resources.ApplyResources(this.toolStripRecordCount, "toolStripRecordCount");
+            this.toolStripRecordCount.Name = "toolStripRecordCount";
+            // 
+            // toolStripNextButton
+            // 
+            this.toolStripNextButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.toolStripNextButton, "toolStripNextButton");
+            this.toolStripNextButton.Name = "toolStripNextButton";
+            this.toolStripNextButton.Click += new System.EventHandler(this.toolStripNextButton_Click);
+            // 
+            // toolStripLastButton
+            // 
+            this.toolStripLastButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.toolStripLastButton, "toolStripLastButton");
+            this.toolStripLastButton.Name = "toolStripLastButton";
+            this.toolStripLastButton.Click += new System.EventHandler(this.toolStripLastButton_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
+            // 
+            // btiMarkDeleted
+            // 
+            this.btiMarkDeleted.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.btiMarkDeleted, "btiMarkDeleted");
+            this.btiMarkDeleted.Name = "btiMarkDeleted";
+            this.btiMarkDeleted.Click += new System.EventHandler(this.markAsDeletedToolStripMenuItem_Click);
+            // 
+            // btiUndelete
+            // 
+            resources.ApplyResources(this.btiUndelete, "btiUndelete");
+            this.btiUndelete.Name = "btiUndelete";
+            this.btiUndelete.Click += new System.EventHandler(this.undeleteToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
+            // 
+            // LineListingToolStripButton
+            // 
+            this.LineListingToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gridToolStripMenuItem,
+            this.printableHTMLToolStripMenuItem,
+            this.excelLineListMenuItem});
+            resources.ApplyResources(this.LineListingToolStripButton, "LineListingToolStripButton");
+            this.LineListingToolStripButton.Name = "LineListingToolStripButton";
+            this.LineListingToolStripButton.ButtonClick += new System.EventHandler(this.gridToolStripMenuItem_Click);
+            // 
+            // gridToolStripMenuItem
+            // 
+            resources.ApplyResources(this.gridToolStripMenuItem, "gridToolStripMenuItem");
+            this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
+            this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
+            // 
+            // printableHTMLToolStripMenuItem
+            // 
+            resources.ApplyResources(this.printableHTMLToolStripMenuItem, "printableHTMLToolStripMenuItem");
+            this.printableHTMLToolStripMenuItem.Name = "printableHTMLToolStripMenuItem";
+            this.printableHTMLToolStripMenuItem.Click += new System.EventHandler(this.printableHTMLToolStripMenuItem_Click);
+            // 
+            // excelLineListMenuItem
+            // 
+            resources.ApplyResources(this.excelLineListMenuItem, "excelLineListMenuItem");
+            this.excelLineListMenuItem.Name = "excelLineListMenuItem";
+            this.excelLineListMenuItem.Click += new System.EventHandler(this.excelLineListMenuItem_Click);
+            // 
+            // tsbDashboard
+            // 
+            resources.ApplyResources(this.tsbDashboard, "tsbDashboard");
+            this.tsbDashboard.Name = "tsbDashboard";
+            this.tsbDashboard.Click += new System.EventHandler(this.tsbDashboard_Click);
+            // 
+            // tsbMap
+            // 
+            resources.ApplyResources(this.tsbMap, "tsbMap");
+            this.tsbMap.Name = "tsbMap";
+            this.tsbMap.Click += new System.EventHandler(this.tsbMap_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
+            // 
+            // btiEditView
+            // 
+            resources.ApplyResources(this.btiEditView, "btiEditView");
+            this.btiEditView.Name = "btiEditView";
+            this.btiEditView.Click += new System.EventHandler(this.editViewToolStripMenuItem_Click);
+            // 
+            // btiHelp
+            // 
+            resources.ApplyResources(this.btiHelp, "btiHelp");
+            this.btiHelp.Name = "btiHelp";
+            // 
             // BottomToolStripPanel
             // 
             resources.ApplyResources(this.BottomToolStripPanel, "BottomToolStripPanel");
@@ -821,12 +821,12 @@ namespace Epi.Windows.Enter
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

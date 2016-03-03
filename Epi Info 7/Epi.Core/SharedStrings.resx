@@ -3016,13 +3016,13 @@ Do you wish to proceed with the import and overwrite these tables? This action c
     <value>Field data exceeds 255 characters and has been shortened for the following field and record:</value>
   </data>
   <data name="WEBFORM_MENU_PUB_WEB" xml:space="preserve">
-    <value>Publish Form to Web</value>
+    <value>Publish Form to Web Survey</value>
   </data>
   <data name="WEBFORM_MENU_PUB_WEBENTER" xml:space="preserve">
     <value>Publish Form to Web Enter</value>
   </data>
   <data name="WEBFORM_MENU_REPUB_WEB" xml:space="preserve">
-    <value>Republish Form to Web</value>
+    <value>Republish Form to Web Survey</value>
   </data>
   <data name="WEBFORM_MENU_REPUB_WEBENTER" xml:space="preserve">
     <value>Republish Form to Web Enter</value>

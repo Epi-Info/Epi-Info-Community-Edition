@@ -2202,7 +2202,17 @@ namespace Epi.Windows.Enter
 
         private void epiInfoLogsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WinUtil.OpenTextFile(Logger.GetLogFilePath());
+            string logFilePath = Logger.GetLogFilePath();
+
+            if (File.Exists(logFilePath))
+            {
+                string containingFolder = Path.GetDirectoryName(logFilePath);
+                System.Diagnostics.Process.Start(containingFolder);
+            }
+            else if (Directory.Exists(logFilePath))
+            {
+                System.Diagnostics.Process.Start(logFilePath);
+            }
         }
 
         private void printableHTMLToolStripMenuItem_Click(object sender, EventArgs e)
