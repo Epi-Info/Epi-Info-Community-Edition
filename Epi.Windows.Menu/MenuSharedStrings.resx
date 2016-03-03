@@ -177,6 +177,9 @@
   <data name="MENU_STATCALC_DESCP" xml:space="preserve">
     <value>Statistical calculators for sample size, power, and more.</value>
   </data>
+  <data name="MENU_VERSION_TEXT" xml:space="preserve">
+    <value>VERSION:</value>
+  </data>
   <data name="MENU_VISUALDASHBOARD" xml:space="preserve">
     <value>VISUAL DASHBOARD</value>
   </data>

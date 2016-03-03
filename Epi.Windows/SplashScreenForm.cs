@@ -14,6 +14,7 @@ namespace Epi.Windows
         public SplashScreenForm()
         {
             InitializeComponent();
+            this.ClientSize = new System.Drawing.Size(350, 425);
             this.label1.Parent = this.pictureBox1;
             this.label1.BackColor = Color.Transparent;
         }

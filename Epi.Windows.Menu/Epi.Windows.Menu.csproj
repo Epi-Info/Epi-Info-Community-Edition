@@ -260,6 +260,7 @@
     <EmbeddedResource Include="MenuSharedStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MenuSharedStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WindowMain.resx">
       <DependentUpon>WindowMain.cs</DependentUpon>

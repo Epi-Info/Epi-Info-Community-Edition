@@ -3183,4 +3183,13 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="WARNING_VARIABLE_NOT_DEFINED" xml:space="preserve">
     <value>Warning--Variable not defined:</value>
   </data>
+  <data name="DASHBOARD_CONTEXTMENU_BINOMIAL_PROPORTION" xml:space="preserve">
+    <value>Binomial (Proportion vs. std.)</value>
+  </data>
+  <data name="DASHBOARD_CONTEXTMENU_POISSON_RAREEVENTS" xml:space="preserve">
+    <value>Poisson (Rare event vs. std.)</value>
+  </data>
+  <data name="DASHBOARD_MATCHED_PAIR_CASE_CONTROL" xml:space="preserve">
+    <value>Matched pair case control</value>
+  </data>
 </root>

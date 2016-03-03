@@ -2092,4 +2092,88 @@ of records or select fewer fields for the group.</value>
   <data name="MAP_OPEN_UNSUCCESSFUL" xml:space="preserve">
     <value>Unable to open the selected map file.</value>
   </data>
+  <data name="CMENU_CDC200_BODY_MASS_INDEX" xml:space="preserve">
+    <value>Body mass index (BMI) for age</value>
+  </data>
+  <data name="CMENU_CDC200_GROWTH_REFERENCE" xml:space="preserve">
+    <value>CDC 2000 Growth Reference</value>
+  </data>
+  <data name="CMENU_CDC200_HEAD_CIRCUMFERENCEFORAGE" xml:space="preserve">
+    <value>Head circumference for age</value>
+  </data>
+  <data name="CMENU_CDC200_HEIGHTS_FOR_AGE" xml:space="preserve">
+    <value>Height for age</value>
+  </data>
+  <data name="CMENU_CDC200_LENGTH_FOR_AGE" xml:space="preserve">
+    <value>Length for age</value>
+  </data>
+  <data name="CMENU_CDC200_WEIGHT_FOR_AGE" xml:space="preserve">
+    <value>Weight for age</value>
+  </data>
+  <data name="CMENU_CDC200_WEIGHT_FOR_HEIGHT" xml:space="preserve">
+    <value>Weight for height</value>
+  </data>
+  <data name="CMENU_CDC200_WEIGHT_FOR_LENGTH" xml:space="preserve">
+    <value>Weight for length</value>
+  </data>
+  <data name="CMENU_CDCWHO_1978" xml:space="preserve">
+    <value>CDC/WHO 1978</value>
+  </data>
+  <data name="CMENU_CDCWHO_HEIGHT_FORAGE" xml:space="preserve">
+    <value>Height for age</value>
+  </data>
+  <data name="CMENU_CDCWHO_LENGTH_FORAGE" xml:space="preserve">
+    <value>Length for age</value>
+  </data>
+  <data name="CMENU_CDCWHO_WEIGHT_FORAGE" xml:space="preserve">
+    <value>Weight for age</value>
+  </data>
+  <data name="CMENU_CDCWHO_WEIGHT_FORHEIGHT" xml:space="preserve">
+    <value>Weight for height</value>
+  </data>
+  <data name="CMENU_CDCWHO_WEIGHT_FORLENGTH" xml:space="preserve">
+    <value>Weight for length</value>
+  </data>
+  <data name="CMENU_DUPLICATES_LIST" xml:space="preserve">
+    <value>Duplicates List</value>
+  </data>
+  <data name="CMENU_WHOCHILD_ARM_CIRCUMFERENCEFORAGE" xml:space="preserve">
+    <value>Arm circumference for age</value>
+  </data>
+  <data name="CMENU_WHOCHILD_BODY_MASS_INDEX" xml:space="preserve">
+    <value>Body mass index (BMI) for age</value>
+  </data>
+  <data name="CMENU_WHOCHILD_HEAD_CIRCUMFERENCEFORAGE" xml:space="preserve">
+    <value>Head circumference for age</value>
+  </data>
+  <data name="CMENU_WHOCHILD_HEIGHT_FOR_AGE" xml:space="preserve">
+    <value>Height for age</value>
+  </data>
+  <data name="CMENU_WHOCHILD_LENGTH_FORAGE" xml:space="preserve">
+    <value>Length for age</value>
+  </data>
+  <data name="CMENU_WHOCHILD_WEIGHT_FORAGE" xml:space="preserve">
+    <value>Weight for age</value>
+  </data>
+  <data name="CMENU_WHOCHILD_WEIGHT_FOR_HEIGHT" xml:space="preserve">
+    <value>Weight for height</value>
+  </data>
+  <data name="CMENU_WHOCHILD_WEIGHT_FOR_LENGTH" xml:space="preserve">
+    <value>Weight for length</value>
+  </data>
+  <data name="CMENU_WHOREF_BODY_MASS_INDEX" xml:space="preserve">
+    <value>Body mass index (BMI) for age</value>
+  </data>
+  <data name="CMENU_WHOREF_HEIGHT_OFAGE" xml:space="preserve">
+    <value>Height for age</value>
+  </data>
+  <data name="CMENU_WHOREF_WEIGHT_FORAGE" xml:space="preserve">
+    <value>Weight for age</value>
+  </data>
+  <data name="CMENU_WHO_CHILD_GROWTH" xml:space="preserve">
+    <value>WHO Child Growth Standards</value>
+  </data>
+  <data name="CMENU_WHO_REFERENCE_2007" xml:space="preserve">
+    <value>WHO Reference 2007</value>
+  </data>
 </root>

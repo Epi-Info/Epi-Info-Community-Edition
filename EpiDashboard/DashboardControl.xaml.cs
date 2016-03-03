@@ -351,6 +351,7 @@ namespace EpiDashboard
             mnuWordCloud.Header = DashboardSharedStrings.CMENU_ADD_WORD_CLOUD;
             mnuMxN.Header = DashboardSharedStrings.CMENU_ADD_MXN;
             mnuMeans.Header = DashboardSharedStrings.CMENU_ADD_MEANS;
+            mnuDuplicates.Header = DashboardSharedStrings.CMENU_DUPLICATES_LIST;
             mnuPMCC.Header = DashboardSharedStrings.CMENU_ADD_MATCHED_PAIR_CASE_CONTROL;
             mnuAdvStats.Header = DashboardSharedStrings.CMENU_ADV_STATS;
             mnuLinear.Header = DashboardSharedStrings.CMENU_ADD_LINEAR;
@@ -379,6 +380,43 @@ namespace EpiDashboard
             this.mnuSampleSizePower.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_SAMPLE_SIZE_POWER_GADGET;
             this.mnuStatCalc2x2.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_2X2_GADGET;
             this.mnuUnmatched.Header = SharedStrings.DASHBOARD_CONTEXTMENU_ADD_STATCALC_UCC_GADGET;
+
+            mnuPoisson.Header = SharedStrings.DASHBOARD_CONTEXTMENU_POISSON_RAREEVENTS;
+            mnuBinomial.Header = SharedStrings.DASHBOARD_CONTEXTMENU_BINOMIAL_PROPORTION;
+            mnuMatchedPairCC.Header = SharedStrings.DASHBOARD_MATCHED_PAIR_CASE_CONTROL;
+
+            mnuNutStatCDC2000.Header = DashboardSharedStrings.CMENU_CDC200_GROWTH_REFERENCE;
+            mnuCDC2000BMI.Header = DashboardSharedStrings.CMENU_CDC200_BODY_MASS_INDEX;
+            mnuCDC2000HA.Header = DashboardSharedStrings.CMENU_CDC200_HEIGHTS_FOR_AGE;
+            mnuCDC2000HCA.Header = DashboardSharedStrings.CMENU_CDC200_HEAD_CIRCUMFERENCEFORAGE;
+            mnuCDC2000LA.Header = DashboardSharedStrings.CMENU_CDC200_LENGTH_FOR_AGE;
+            mnuCDC2000WA.Header = DashboardSharedStrings.CMENU_CDC200_WEIGHT_FOR_AGE;
+            mnuCDC2000WH.Header = DashboardSharedStrings.CMENU_CDC200_WEIGHT_FOR_HEIGHT;
+            mnuCDC2000WL.Header = DashboardSharedStrings.CMENU_CDC200_WEIGHT_FOR_LENGTH;
+
+            mnuNutStatWHOCGS.Header = DashboardSharedStrings.CMENU_WHO_CHILD_GROWTH;
+            mnuWHOCGSBMI.Header = DashboardSharedStrings.CMENU_WHOCHILD_BODY_MASS_INDEX;
+            mnuWHOCGSHA.Header = DashboardSharedStrings.CMENU_WHOCHILD_HEIGHT_FOR_AGE;
+            mnuWHOCGSHCA.Header = DashboardSharedStrings.CMENU_WHOCHILD_HEAD_CIRCUMFERENCEFORAGE;
+            mnuWHOCGSMUACA.Header = DashboardSharedStrings.CMENU_WHOCHILD_ARM_CIRCUMFERENCEFORAGE;
+            mnuWHOCGSLA.Header = DashboardSharedStrings.CMENU_WHOCHILD_LENGTH_FORAGE;
+            mnuWHOCGSWA.Header = DashboardSharedStrings.CMENU_WHOCHILD_WEIGHT_FORAGE;
+            mnuWHOCGSWH.Header = DashboardSharedStrings.CMENU_WHOCHILD_WEIGHT_FOR_HEIGHT;
+            mnuWHOCGSWL.Header = DashboardSharedStrings.CMENU_WHOCHILD_WEIGHT_FOR_LENGTH;
+
+            mnuNutStatWHO2007.Header = DashboardSharedStrings.CMENU_WHO_REFERENCE_2007;
+            mnuWHO2007BMI.Header = DashboardSharedStrings.CMENU_WHOREF_BODY_MASS_INDEX;
+            mnuWHO2007HA.Header = DashboardSharedStrings.CMENU_WHOREF_HEIGHT_OFAGE;
+            mnuWHO2007WA.Header = DashboardSharedStrings.CMENU_WHOREF_WEIGHT_FORAGE;
+
+            mnuNutStatWHO1978.Header = DashboardSharedStrings.CMENU_CDCWHO_1978;
+            mnuWHO1978HA.Header = DashboardSharedStrings.CMENU_CDCWHO_HEIGHT_FORAGE;
+            mnuWHO1978LA.Header = DashboardSharedStrings.CMENU_CDCWHO_LENGTH_FORAGE;
+            mnuWHO1978WA.Header = DashboardSharedStrings.CMENU_CDCWHO_WEIGHT_FORAGE;
+            mnuWHO1978WH.Header = DashboardSharedStrings.CMENU_CDCWHO_WEIGHT_FORHEIGHT;
+            mnuWHO1978WL.Header = DashboardSharedStrings.CMENU_CDCWHO_WEIGHT_FORLENGTH;
+
+
             #endregion // Translation
         }
 
