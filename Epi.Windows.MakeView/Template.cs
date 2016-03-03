@@ -512,7 +512,9 @@ namespace Epi.Windows.MakeView
 
                 foreach (DataColumn column in table.Columns)
                 {
-                    if (row[column.ColumnName].ToString() != string.Empty)
+                    bool skipAddAttribute = column.ColumnName == "BackgroundColor" && row[column.ColumnName].ToString() == "";
+
+                    if (skipAddAttribute == false)
                     {
                         writer.WriteAttributeString(column.ColumnName, row[column.ColumnName].ToString());
                     }
