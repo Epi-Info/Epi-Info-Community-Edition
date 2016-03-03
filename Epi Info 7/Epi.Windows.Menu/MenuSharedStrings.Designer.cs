@@ -241,6 +241,15 @@ namespace Epi.Windows.Menu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VERSION:.
+        /// </summary>
+        public static string MENU_VERSION_TEXT {
+            get {
+                return ResourceManager.GetString("MENU_VERSION_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VISUAL DASHBOARD.
         /// </summary>
         public static string MENU_VISUALDASHBOARD {

@@ -41,7 +41,7 @@ namespace Epi.Windows.Menu
                 mainform = new MainForm();
 
             #region Translation
-
+            
             txtlblCreateForms.Text = MenuSharedStrings.MENU_CREATE_FORMS;
             txtlblCreateFormsDescp.Text = MenuSharedStrings.MENU_CREATE_FORMS_DESCP;
             txtlblEnterData.Text = MenuSharedStrings.MENU_ENTER_DATA;
@@ -50,7 +50,7 @@ namespace Epi.Windows.Menu
             txtlblCreateMapsDescp.Text = MenuSharedStrings.MENU_CREATE_MAPS_DESCP;
             txtlblStatCalc.Text = MenuSharedStrings.MENU_STATCALC;
             txtlblStatCalcDescp.Text = MenuSharedStrings.MENU_STATCALC_DESCP;
-            //txtlblAnalyzeData.Text = MenuSharedStrings.MENU_ANALYZE_DATA;
+            txtlblAnalyzeData.Text = MenuSharedStrings.MENU_ANALYZE_DATA;
             txtlblClassic.Text = MenuSharedStrings.MENU_CLASSIC_ANALYZE;
             txtlblClassicDescp.Text = MenuSharedStrings.MENU_CLASSIC_ANALYZEDSCP;
             txtlblVisualDashboard.Text = MenuSharedStrings.MENU_VISUALDASHBOARD;
@@ -64,6 +64,7 @@ namespace Epi.Windows.Menu
             txtEpiInfoLogs.Text = MenuSharedStrings.MENU_EPI_INFO_LOGS;
             txtOptions.Text = MenuSharedStrings.MENU_OPTIONS;
             txtExit.Text = MenuSharedStrings.MENU_EXIT;
+            txtVersion.Text = MenuSharedStrings.MENU_VERSION_TEXT;
 
 
 

@@ -3,6 +3,7 @@
                     xmlns:toolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=Epi.DataVisualization.Toolkit"                    
                     xmlns:EpiDashboard="clr-namespace:EpiDashboard"
                     xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+                    xml:space="preserve"
                     xmlns:PropertyPanels="clr-namespace:EpiDashboard.Controls.GadgetProperties">
     
     <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
@@ -246,7 +247,6 @@
     </DataTemplate>
 
     <Style TargetType="DataGrid" x:Key="dataGridHeader">
-      
     </Style>
 
 
