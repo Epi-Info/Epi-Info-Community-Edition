@@ -667,6 +667,7 @@
   <ItemGroup>
     <Content Include="Resources\App.ico" />
     <Content Include="Resources\App_old.ico" />
+    <None Include="Resources\pbxEPIInfo.Image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
