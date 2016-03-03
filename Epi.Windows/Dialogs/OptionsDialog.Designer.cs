@@ -48,11 +48,6 @@ namespace Epi.Windows.Dialogs
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnUserInterfaceSettings = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnUseDefault = new System.Windows.Forms.Button();
-            this.btnBrowseImage = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pbxPreview = new System.Windows.Forms.PictureBox();
             this.tabLanguage = new System.Windows.Forms.TabPage();
             this.statusStrip = new System.Windows.Forms.Label();
             this.btnDeleteTranslation = new System.Windows.Forms.Button();
@@ -129,8 +124,6 @@ namespace Epi.Windows.Dialogs
             this.groupBox5.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxPreview)).BeginInit();
             this.tabLanguage.SuspendLayout();
             this.tabAnalysis.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrecision)).BeginInit();
@@ -176,7 +169,6 @@ namespace Epi.Windows.Dialogs
             this.tabGeneral.Controls.Add(this.btnEllipse);
             this.tabGeneral.Controls.Add(this.txtWorkingDirectory);
             this.tabGeneral.Controls.Add(this.groupBox3);
-            this.tabGeneral.Controls.Add(this.groupBox2);
             resources.ApplyResources(this.tabGeneral, "tabGeneral");
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.UseVisualStyleBackColor = true;
@@ -277,40 +269,6 @@ namespace Epi.Windows.Dialogs
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnUseDefault);
-            this.groupBox2.Controls.Add(this.btnBrowseImage);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.pbxPreview);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
-            // 
-            // btnUseDefault
-            // 
-            resources.ApplyResources(this.btnUseDefault, "btnUseDefault");
-            this.btnUseDefault.Name = "btnUseDefault";
-            this.btnUseDefault.Click += new System.EventHandler(this.btnUseDefault_Click);
-            // 
-            // btnBrowseImage
-            // 
-            resources.ApplyResources(this.btnBrowseImage, "btnBrowseImage");
-            this.btnBrowseImage.Name = "btnBrowseImage";
-            this.btnBrowseImage.Click += new System.EventHandler(this.btnBrowseImage_Click);
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // pbxPreview
-            // 
-            this.pbxPreview.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            resources.ApplyResources(this.pbxPreview, "pbxPreview");
-            this.pbxPreview.Name = "pbxPreview";
-            this.pbxPreview.TabStop = false;
             // 
             // tabLanguage
             // 
@@ -834,8 +792,6 @@ namespace Epi.Windows.Dialogs
             this.groupBox5.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxPreview)).EndInit();
             this.tabLanguage.ResumeLayout(false);
             this.tabLanguage.PerformLayout();
             this.tabAnalysis.ResumeLayout(false);
@@ -870,13 +826,9 @@ namespace Epi.Windows.Dialogs
 		private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TabPage tabLanguage;
-		private System.Windows.Forms.TabPage tabGeneral;
-		private System.Windows.Forms.GroupBox groupBox2;
-		private System.Windows.Forms.PictureBox pbxPreview;
-		private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TabPage tabGeneral;
 		private System.Windows.Forms.GroupBox groupBox3;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Button btnBrowseImage;
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnUserInterfaceSettings;
 		private System.Windows.Forms.TabPage tabAnalysis;
 		private System.Windows.Forms.Button btnOk;
@@ -898,7 +850,6 @@ namespace Epi.Windows.Dialogs
         private System.Windows.Forms.ComboBox cmbDefaultDataFormat;
         private System.Windows.Forms.TabPage tabPlugIns;
         private System.Windows.Forms.Button btnHelp;
-        private System.Windows.Forms.Button btnUseDefault;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnRemoveGadget;
         private System.Windows.Forms.ListBox lbxDashboardGadgetPlugins;

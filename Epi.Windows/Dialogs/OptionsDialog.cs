@@ -142,43 +142,7 @@ namespace Epi.Windows.Dialogs
 		{		
 		}
 
-		/// <summary>
-		/// Browses for image files and saves the selected image file name to the config file
-		/// </summary>
-		/// <param name="sender">Object that fired the event.</param>
-		/// <param name="e">.NET supplied event args.</param>
-		private void btnBrowseImage_Click(object sender, System.EventArgs e)
-		{			
-			OpenFileDialog dialog = new OpenFileDialog();
-			dialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.WMF;*.EMF)|" +
-				"*.BMP;*.JPG;*.GIF|" +
-				"JPEG files (*.jpg;*.jpeg)|*.jpg;*.jpeg|"      +
-				"GIF Files (*.gif)|*.gif|"                     +
-				"BMP Files (*.bmp)|*.bmp|"					   +
-				"WMF Files (*.wmf)|*.wmf|"					   +
-				"EMF Files (*.emf)|*.emf";
-			dialog.FilterIndex = 1 ;
-			dialog.Multiselect = false;
-			if(dialog.ShowDialog() == DialogResult.OK)
-			{
-				try
-				{
-					Image img = Image.FromFile(dialog.FileName); 
-					this.pbxPreview.Image = img; 
-					config.Settings.BackgroundImage = dialog.FileName;
-					this.btnApply.Enabled = true;
-				}
-				catch (OutOfMemoryException ex)
-				{
-					Debugger.Break();
-					Debugger.LogException(ex);
-
-					// cannot recover from this error, application should shut down
-					throw;
-				}
-			}
-		}
-
+		
 		/// <summary>
 		/// Displays EpiInfo.MNU in Wordpad
 		/// </summary>
@@ -454,30 +418,6 @@ namespace Epi.Windows.Dialogs
         }
 
 		/// <summary>
-		/// Method for showing background image
-		/// </summary>
-		private void ShowBackgroundImage()
-		{
-			try
-			{
-                string imageFile = config.Settings.BackgroundImage;
-                if (File.Exists(imageFile))
-                {
-                    pbxPreview.Image = Image.FromFile(imageFile);
-                }
-                else
-                {
-                    pbxPreview.Image = ResourceLoader.GetImage(ResourceLoader.IMAGES_BACKGROUND);
-                }
-			}
-			catch (FileNotFoundException ex)
-			{
-				MsgBox.ShowException(ex);
-				//throw;
-			}
-		}
-
-		/// <summary>
 		/// Loads the working directory set by the user
 		/// </summary>
         private void ShowSettings(Configuration pConfig = null)
@@ -516,8 +456,7 @@ namespace Epi.Windows.Dialogs
             WinUtil.SetSelectedRadioButton(settings.RecordProcessingScope.ToString(), gbxProcessRecords);
             cbxIncludeMissing.Checked = settings.IncludeMissingValues;
 			//settingsPanel.ShowSettings();
-			ShowBackgroundImage();
-            txtWorkingDirectory.Text = config.Directories.Working;
+			txtWorkingDirectory.Text = config.Directories.Working;
             txtMapKey.Text = config.Settings.MapServiceKey;
             object selectedItem = null;
             foreach (object item in lbxLanguages.Items)
@@ -741,13 +680,6 @@ namespace Epi.Windows.Dialogs
             // Record Processing
             settings.RecordProcessingScope = int.Parse(WinUtil.GetSelectedRadioButton(gbxProcessRecords).Tag.ToString());
             settings.IncludeMissingValues = cbxIncludeMissing.Checked;
-        }
-
-        private void btnUseDefault_Click(object sender, EventArgs e)
-        {
-            config.Settings.BackgroundImage = string.Empty;
-            ShowBackgroundImage();
-            this.btnApply.Enabled = true;
         }
 
         private void btnRemoveSource_Click(object sender, EventArgs e)
