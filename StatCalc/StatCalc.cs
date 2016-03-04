@@ -91,11 +91,13 @@ namespace StatCalc
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatCalc));
             this.SuspendLayout();
             // 
             // StatCalc
             // 
             this.ClientSize = new System.Drawing.Size(682, 555);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "StatCalc";
             this.ResumeLayout(false);
 
