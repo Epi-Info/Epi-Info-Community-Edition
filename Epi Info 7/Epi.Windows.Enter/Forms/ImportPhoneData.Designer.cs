@@ -48,11 +48,11 @@
             this.lblWarning = new System.Windows.Forms.Label();
             this.lblWarningMessage = new System.Windows.Forms.Label();
             this.grpTypeOfImport = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.viewsList = new System.Windows.Forms.ComboBox();
             this.rdbAppend = new System.Windows.Forms.RadioButton();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.rdbUpdateAndAppend = new System.Windows.Forms.RadioButton();
-            this.viewsList = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupImportInfo.SuspendLayout();
             this.cmsStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -140,6 +140,7 @@
             // 
             // cmsStatus
             // 
+            this.cmsStatus.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_Copy});
             this.cmsStatus.Name = "cmsStatus";
@@ -179,6 +180,19 @@
             this.grpTypeOfImport.Name = "grpTypeOfImport";
             this.grpTypeOfImport.TabStop = false;
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // viewsList
+            // 
+            this.viewsList.FormattingEnabled = true;
+            resources.ApplyResources(this.viewsList, "viewsList");
+            this.viewsList.Name = "viewsList";
+            this.viewsList.SelectedIndexChanged += new System.EventHandler(this.viewsList_SelectedIndexChanged);
+            // 
             // rdbAppend
             // 
             resources.ApplyResources(this.rdbAppend, "rdbAppend");
@@ -200,19 +214,6 @@
             this.rdbUpdateAndAppend.TabStop = true;
             this.rdbUpdateAndAppend.UseVisualStyleBackColor = true;
             this.rdbUpdateAndAppend.CheckedChanged += new System.EventHandler(this.rdbUpdateAndAppend_CheckedChanged);
-            // 
-            // viewsList
-            // 
-            this.viewsList.FormattingEnabled = true;
-            resources.ApplyResources(this.viewsList, "viewsList");
-            this.viewsList.Name = "viewsList";
-            this.viewsList.SelectedIndexChanged += new System.EventHandler(this.viewsList_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // ImportPhoneDataForm
             // 

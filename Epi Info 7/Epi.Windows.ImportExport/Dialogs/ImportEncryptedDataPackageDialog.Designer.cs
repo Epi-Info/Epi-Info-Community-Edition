@@ -37,6 +37,8 @@
             this.txtProgress = new System.Windows.Forms.TextBox();
             this.lblProjectFile = new System.Windows.Forms.Label();
             this.lbxStatus = new System.Windows.Forms.ListBox();
+            this.cmsStatus = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -51,12 +53,10 @@
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.rdbUpdateAndAppend = new System.Windows.Forms.RadioButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cmsStatus = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsStatus.SuspendLayout();
             this.groupImportInfo.SuspendLayout();
             this.grpTypeOfImport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.cmsStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblWarningMessage
@@ -101,6 +101,20 @@
             this.lbxStatus.FormattingEnabled = true;
             this.lbxStatus.Name = "lbxStatus";
             this.lbxStatus.TabStop = false;
+            // 
+            // cmsStatus
+            // 
+            this.cmsStatus.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_Copy});
+            this.cmsStatus.Name = "cmsStatus";
+            resources.ApplyResources(this.cmsStatus, "cmsStatus");
+            this.cmsStatus.Click += new System.EventHandler(this.cmsStatus_Click);
+            // 
+            // toolStripMenuItem_Copy
+            // 
+            this.toolStripMenuItem_Copy.Name = "toolStripMenuItem_Copy";
+            resources.ApplyResources(this.toolStripMenuItem_Copy, "toolStripMenuItem_Copy");
             // 
             // progressBar
             // 
@@ -201,19 +215,6 @@
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
-            // cmsStatus
-            // 
-            this.cmsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_Copy});
-            this.cmsStatus.Name = "cmsStatus";
-            resources.ApplyResources(this.cmsStatus, "cmsStatus");
-            this.cmsStatus.Click += new System.EventHandler(this.cmsStatus_Click);
-            // 
-            // toolStripMenuItem_Copy
-            // 
-            this.toolStripMenuItem_Copy.Name = "toolStripMenuItem_Copy";
-            resources.ApplyResources(this.toolStripMenuItem_Copy, "toolStripMenuItem_Copy");
-            // 
             // ImportEncryptedDataPackageDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -232,11 +233,11 @@
             this.Controls.Add(this.groupImportInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ImportEncryptedDataPackageDialog";
+            this.cmsStatus.ResumeLayout(false);
             this.groupImportInfo.ResumeLayout(false);
             this.groupImportInfo.PerformLayout();
             this.grpTypeOfImport.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.cmsStatus.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
