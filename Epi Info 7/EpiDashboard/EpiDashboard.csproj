@@ -67,6 +67,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>..\build\Release\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ComponentArt.Win.DataVisualization.Charting, Version=2012.1.1871.0, Culture=neutral, PublicKeyToken=9bc9f846553156bb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -1593,6 +1596,7 @@
     <Resource Include="Images\db_add.png" />
     <Resource Include="Images\save.png" />
     <Resource Include="Images\copy.png" />
+    <Content Include="App.ico" />
     <Content Include="ComponentArt.Win.DataVisualization.Charting.dll" />
     <Content Include="ComponentArt.Win.DataVisualization.Common.dll" />
     <Resource Include="Images\samplemap.png" />
