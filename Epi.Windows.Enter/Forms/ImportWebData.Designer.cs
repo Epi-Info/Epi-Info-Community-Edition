@@ -54,9 +54,9 @@
             this.rdbSubmittedIncremental = new System.Windows.Forms.RadioButton();
             this.grpImportMode = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblIncrementalImport = new System.Windows.Forms.Label();
-            this.lblFullImport = new System.Windows.Forms.Label();
             this.rdbSubmittedFull = new System.Windows.Forms.RadioButton();
+            this.lblFullImport = new System.Windows.Forms.Label();
+            this.lblIncrementalImport = new System.Windows.Forms.Label();
             this.groupImportInfo.SuspendLayout();
             this.cmsStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -149,6 +149,7 @@
             // 
             // cmsStatus
             // 
+            this.cmsStatus.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_Copy});
             this.cmsStatus.Name = "cmsStatus";
@@ -224,22 +225,22 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // lblIncrementalImport
-            // 
-            resources.ApplyResources(this.lblIncrementalImport, "lblIncrementalImport");
-            this.lblIncrementalImport.Name = "lblIncrementalImport";
-            // 
-            // lblFullImport
-            // 
-            resources.ApplyResources(this.lblFullImport, "lblFullImport");
-            this.lblFullImport.Name = "lblFullImport";
-            // 
             // rdbSubmittedFull
             // 
             resources.ApplyResources(this.rdbSubmittedFull, "rdbSubmittedFull");
             this.rdbSubmittedFull.Name = "rdbSubmittedFull";
             this.rdbSubmittedFull.TabStop = true;
             this.rdbSubmittedFull.UseVisualStyleBackColor = true;
+            // 
+            // lblFullImport
+            // 
+            resources.ApplyResources(this.lblFullImport, "lblFullImport");
+            this.lblFullImport.Name = "lblFullImport";
+            // 
+            // lblIncrementalImport
+            // 
+            resources.ApplyResources(this.lblIncrementalImport, "lblIncrementalImport");
+            this.lblIncrementalImport.Name = "lblIncrementalImport";
             // 
             // ImportWebDataForm
             // 

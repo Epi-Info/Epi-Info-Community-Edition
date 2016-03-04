@@ -33,13 +33,14 @@
             this.lblProjectFile = new System.Windows.Forms.Label();
             this.textProject = new System.Windows.Forms.TextBox();
             this.groupImportInfo = new System.Windows.Forms.GroupBox();
-            this.grpImportMode = new System.Windows.Forms.GroupBox();
-            this.rdbDraftMode = new System.Windows.Forms.RadioButton();
-            this.rdbFinalMode = new System.Windows.Forms.RadioButton();
+            this.chkIncremental = new System.Windows.Forms.CheckBox();
             this.textOrganization = new System.Windows.Forms.TextBox();
             this.lblOrganization = new System.Windows.Forms.Label();
             this.textData = new System.Windows.Forms.TextBox();
             this.lblDataGUID = new System.Windows.Forms.Label();
+            this.grpImportMode = new System.Windows.Forms.GroupBox();
+            this.rdbDraftMode = new System.Windows.Forms.RadioButton();
+            this.rdbFinalMode = new System.Windows.Forms.RadioButton();
             this.textProgress = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -48,7 +49,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblWarning = new System.Windows.Forms.Label();
             this.lblWarningMessage = new System.Windows.Forms.Label();
-            this.chkIncremental = new System.Windows.Forms.CheckBox();
             this.groupImportInfo.SuspendLayout();
             this.grpImportMode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -84,6 +84,32 @@
             this.groupImportInfo.Name = "groupImportInfo";
             this.groupImportInfo.TabStop = false;
             // 
+            // chkIncremental
+            // 
+            resources.ApplyResources(this.chkIncremental, "chkIncremental");
+            this.chkIncremental.Name = "chkIncremental";
+            this.chkIncremental.UseVisualStyleBackColor = true;
+            // 
+            // textOrganization
+            // 
+            resources.ApplyResources(this.textOrganization, "textOrganization");
+            this.textOrganization.Name = "textOrganization";
+            // 
+            // lblOrganization
+            // 
+            resources.ApplyResources(this.lblOrganization, "lblOrganization");
+            this.lblOrganization.Name = "lblOrganization";
+            // 
+            // textData
+            // 
+            resources.ApplyResources(this.textData, "textData");
+            this.textData.Name = "textData";
+            // 
+            // lblDataGUID
+            // 
+            resources.ApplyResources(this.lblDataGUID, "lblDataGUID");
+            this.lblDataGUID.Name = "lblDataGUID";
+            // 
             // grpImportMode
             // 
             this.grpImportMode.Controls.Add(this.rdbDraftMode);
@@ -105,26 +131,6 @@
             this.rdbFinalMode.Name = "rdbFinalMode";
             this.rdbFinalMode.TabStop = true;
             this.rdbFinalMode.UseVisualStyleBackColor = true;
-            // 
-            // textOrganization
-            // 
-            resources.ApplyResources(this.textOrganization, "textOrganization");
-            this.textOrganization.Name = "textOrganization";
-            // 
-            // lblOrganization
-            // 
-            resources.ApplyResources(this.lblOrganization, "lblOrganization");
-            this.lblOrganization.Name = "lblOrganization";
-            // 
-            // textData
-            // 
-            resources.ApplyResources(this.textData, "textData");
-            this.textData.Name = "textData";
-            // 
-            // lblDataGUID
-            // 
-            resources.ApplyResources(this.lblDataGUID, "lblDataGUID");
-            this.lblDataGUID.Name = "lblDataGUID";
             // 
             // textProgress
             // 
@@ -176,12 +182,6 @@
             // 
             resources.ApplyResources(this.lblWarningMessage, "lblWarningMessage");
             this.lblWarningMessage.Name = "lblWarningMessage";
-            // 
-            // chkIncremental
-            // 
-            resources.ApplyResources(this.chkIncremental, "chkIncremental");
-            this.chkIncremental.Name = "chkIncremental";
-            this.chkIncremental.UseVisualStyleBackColor = true;
             // 
             // ImportWebEnterDataForm
             // 
