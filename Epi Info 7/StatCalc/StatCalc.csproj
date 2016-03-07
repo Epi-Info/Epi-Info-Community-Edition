@@ -88,7 +88,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="StatCalcSharedStrings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>StatCalcSharedStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="StatCalc.resx" />

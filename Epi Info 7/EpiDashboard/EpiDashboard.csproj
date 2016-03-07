@@ -1605,6 +1605,9 @@
     <Resource Include="Images\choropleth.png" />
     <Resource Include="Images\dotdensity.png" />
     <Resource Include="Images\Edit1.png" />
+    <Resource Include="Images\ei_logomark_256px.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Images\labels.png" />
     <Resource Include="Images\saveHTML.png" />
     <Resource Include="Images\watermark_logo.png" />

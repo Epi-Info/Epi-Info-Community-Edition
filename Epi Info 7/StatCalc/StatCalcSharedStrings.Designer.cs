@@ -22,7 +22,7 @@ namespace StatCalc {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class StatCalcSharedStrings {
+    public class StatCalcSharedStrings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace StatCalc {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("StatCalc.StatCalcSharedStrings", typeof(StatCalcSharedStrings).Assembly);
@@ -51,7 +51,7 @@ namespace StatCalc {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -64,7 +64,7 @@ namespace StatCalc {
         ///   Looks up a localized string similar to CHI SQUARE
         ///FOR TREND.
         /// </summary>
-        internal static string STATCALC_CHI_SQUARE {
+        public static string STATCALC_CHI_SQUARE {
             get {
                 return ResourceManager.GetString("STATCALC_CHI_SQUARE", resourceCulture);
             }
@@ -74,7 +74,7 @@ namespace StatCalc {
         ///   Looks up a localized string similar to COHORT OR
         ///CROSS-SECTIONAL.
         /// </summary>
-        internal static string STATCALC_COHORT_CROSS {
+        public static string STATCALC_COHORT_CROSS {
             get {
                 return ResourceManager.GetString("STATCALC_COHORT_CROSS", resourceCulture);
             }
@@ -83,7 +83,7 @@ namespace StatCalc {
         /// <summary>
         ///   Looks up a localized string similar to LANGUAGE:.
         /// </summary>
-        internal static string STATCALC_LANGUAGE {
+        public static string STATCALC_LANGUAGE {
             get {
                 return ResourceManager.GetString("STATCALC_LANGUAGE", resourceCulture);
             }
@@ -93,7 +93,7 @@ namespace StatCalc {
         ///   Looks up a localized string similar to MATCHED PAIR
         ///CASE CONTROL STUDY.
         /// </summary>
-        internal static string STATCALC_MATCHED_PAIR_CASE {
+        public static string STATCALC_MATCHED_PAIR_CASE {
             get {
                 return ResourceManager.GetString("STATCALC_MATCHED_PAIR_CASE", resourceCulture);
             }
@@ -103,7 +103,7 @@ namespace StatCalc {
         ///   Looks up a localized string similar to POISSON
         ///(RARE EVENT VS. STD).
         /// </summary>
-        internal static string STATCALC_POISSON_RARE {
+        public static string STATCALC_POISSON_RARE {
             get {
                 return ResourceManager.GetString("STATCALC_POISSON_RARE", resourceCulture);
             }
@@ -113,7 +113,7 @@ namespace StatCalc {
         ///   Looks up a localized string similar to POPULATION BINOMIAL
         ///(PROPORTION VS. STD.).
         /// </summary>
-        internal static string STATCALC_POPULATION_BINOMIAL {
+        public static string STATCALC_POPULATION_BINOMIAL {
             get {
                 return ResourceManager.GetString("STATCALC_POPULATION_BINOMIAL", resourceCulture);
             }
@@ -122,7 +122,7 @@ namespace StatCalc {
         /// <summary>
         ///   Looks up a localized string similar to POPULATION SURVEY.
         /// </summary>
-        internal static string STATCALC_POPULATION_SURVEY {
+        public static string STATCALC_POPULATION_SURVEY {
             get {
                 return ResourceManager.GetString("STATCALC_POPULATION_SURVEY", resourceCulture);
             }
@@ -131,7 +131,7 @@ namespace StatCalc {
         /// <summary>
         ///   Looks up a localized string similar to TABLES (2 x 2 x N).
         /// </summary>
-        internal static string STATCALC_TABLES_22N {
+        public static string STATCALC_TABLES_22N {
             get {
                 return ResourceManager.GetString("STATCALC_TABLES_22N", resourceCulture);
             }
@@ -141,7 +141,7 @@ namespace StatCalc {
         ///   Looks up a localized string similar to UNMATCHED
         ///CASE-CONTROL.
         /// </summary>
-        internal static string STATCALC_UNMATCHED_CASE {
+        public static string STATCALC_UNMATCHED_CASE {
             get {
                 return ResourceManager.GetString("STATCALC_UNMATCHED_CASE", resourceCulture);
             }
@@ -150,7 +150,7 @@ namespace StatCalc {
         /// <summary>
         ///   Looks up a localized string similar to VERSION:.
         /// </summary>
-        internal static string STATCALC_VERSION {
+        public static string STATCALC_VERSION {
             get {
                 return ResourceManager.GetString("STATCALC_VERSION", resourceCulture);
             }

@@ -253,7 +253,7 @@
         
         <Controls:NotificationPanel Visibility="Visible" IsHitTestVisible="False" x:Name="panelNotification" Grid.Row="3" Height="52" MinWidth="720" VerticalAlignment="Bottom"></Controls:NotificationPanel>
 
-        <Image Margin="0, 10, 30, 0" Opacity="0.15" Width="79" Height="77" Source="Images/watermark_logo.png" Visibility="Visible" IsHitTestVisible="False" x:Name="imageWatermark" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <Image Margin="0, 10, 30, 0" Opacity="0.15" Width="79" Height="77" Source="Images/ei_logomark_256px.png"  Visibility="Visible" IsHitTestVisible="False" x:Name="imageWatermark" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
         <ScrollViewer Grid.Row="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" x:Name="scrollViewer">
             <ScrollViewer.ContextMenu>
