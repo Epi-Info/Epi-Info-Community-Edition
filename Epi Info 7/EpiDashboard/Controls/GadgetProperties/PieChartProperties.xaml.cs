@@ -458,7 +458,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.ShowAnnotationValue = (bool)checkboxAnnotationValue.IsChecked;
             Parameters.ShowAnnotationPercent = (bool)checkboxAnnotationPercent.IsChecked;
 
-            if (cmbChartKind.SelectedIndex > 0)
+            if (cmbChartKind.SelectedIndex > -1)
             {
                 switch (cmbChartKind.SelectedIndex)
                 {
