@@ -946,13 +946,18 @@ namespace Epi.Windows.MakeView
                     if (kvp.Key.Field is TableBasedDropDownField)
                     {
                         TableBasedDropDownField field = ((TableBasedDropDownField)kvp.Key.Field);
-                        DataTable table = metadata.GetCodeTableData(field.SourceTableName);
 
-                        if (table != null)
+                        try
                         {
-                            table.TableName = field.SourceTableName;
-                            InsertSourceTable(table, writer);
+                            DataTable table = metadata.GetCodeTableData(field.SourceTableName);
+
+                            if (table != null)
+                            {
+                                table.TableName = field.SourceTableName;
+                                InsertSourceTable(table, writer);
+                            }
                         }
+                        catch { }
                     }
                 }
             }
