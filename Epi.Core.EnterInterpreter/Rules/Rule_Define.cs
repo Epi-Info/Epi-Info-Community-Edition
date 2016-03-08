@@ -40,14 +40,17 @@ namespace Epi.Core.EnterInterpreter.Rules
             //DEFINE Identifier '=' <Expression>
 
             Identifier = GetCommandElement(pToken.Tokens, 1);
-            if (!string.IsNullOrEmpty(Identifier))
+            if (pContext.IsVariableValidationEnable)
             {
-
-                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (!string.IsNullOrEmpty(Identifier))
                 {
-                    this.Context.CommandVariableCheck.Add(Identifier, "define");
-                }
 
+                    if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                    {
+                        this.Context.CommandVariableCheck.Add(Identifier, "define");
+                    }
+
+                }
             }
             if (GetCommandElement(pToken.Tokens, 2) == "=")
             {

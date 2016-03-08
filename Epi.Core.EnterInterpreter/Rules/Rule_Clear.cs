@@ -13,15 +13,18 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             //<Clear_Statement>	::= CLEAR <IdentifierList>
             this.IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' ');
-            if (IdentifierList.Length >0)
+             if (pContext.IsVariableValidationEnable)
             {
-                foreach (var item in IdentifierList)
+                if (IdentifierList.Length > 0)
                 {
-                    if (!this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
-                {
-                    this.Context.CommandVariableCheck.Add(item, "clear");
+                    foreach (var item in IdentifierList)
+                    {
+                        if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                        {
+                            this.Context.CommandVariableCheck.Add(item, "clear");
+                        }
+                    }
                 }
-            }
             }
         }
 

@@ -26,18 +26,20 @@ namespace Epi.Core.EnterInterpreter.Rules
                 //<Hide_Some_Statement> ::= HIDE <IdentifierList>
                 this.IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' ');
             }
-            if (IdentifierList.Length > 0)
+            if (pContext.IsVariableValidationEnable)
             {
-                foreach (var item in IdentifierList)
+                if (IdentifierList.Length > 0)
                 {
-                    if (!this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                    foreach (var item in IdentifierList)
                     {
-                        this.Context.CommandVariableCheck.Add(item, "highlight");
+                        if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                        {
+                            this.Context.CommandVariableCheck.Add(item, "highlight");
+                        }
                     }
                 }
             }
         }
-
 
         /// <summary>
         /// performs execution of the HIDE command via the EnterCheckCodeInterface.Hide method

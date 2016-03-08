@@ -20,20 +20,8 @@ namespace Epi.Core.EnterInterpreter.Rules
 
 
             this.ParameterList = EnterRule.GetFunctionParameters(pContext, pToken);
-            if (ParameterList.Count > 0)
-            {
-                foreach (var item in ParameterList)
-                {
-                    if (item is Rule_Value)
-                    {
-                        var id = ((Epi.Core.EnterInterpreter.Rules.Rule_Value)(item)).Id;
-                        if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLower()))
-                        {
-                            this.Context.CommandVariableCheck.Add(id.ToLower(), "days");
-                        }
-                    }
-                }
-            }
+            AddCommandVariableCheckValue(ParameterList, "days");
+            
         }
 
         /// <summary>

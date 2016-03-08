@@ -24,16 +24,19 @@ namespace Epi.Core.EnterInterpreter.Rules
                     {
                         _form = this.GetCommandElement(pToken.Tokens, 1);
                     }
-                    if (!string.IsNullOrEmpty(_form))
+                    if (pContext.IsVariableValidationEnable)
                     {
-
-                        int number;
-                        bool isNumeric = int.TryParse(_destination, out number);
-                        if (!this.Context.CommandVariableCheck.ContainsKey(_destination.ToLower()) && !isNumeric)
+                        if (!string.IsNullOrEmpty(_form))
                         {
-                            this.Context.CommandVariableCheck.Add(_form.ToLower(), "gototform");
-                        }
 
+                            int number;
+                            bool isNumeric = int.TryParse(_destination, out number);
+                            if (!string.IsNullOrEmpty(_destination) && !this.Context.CommandVariableCheck.ContainsKey(_destination.ToLower()) && !isNumeric)
+                            {
+                                this.Context.CommandVariableCheck.Add(_form.ToLower(), "gototform");
+                            }
+
+                        }
                     }
                     break;
 
@@ -56,16 +59,19 @@ namespace Epi.Core.EnterInterpreter.Rules
                     {
                         _destination = this.GetCommandElement(pToken.Tokens, 1) + this.GetCommandElement(pToken.Tokens, 2);
                     }
-                    if (!string.IsNullOrEmpty(_destination))
+                    if (pContext.IsVariableValidationEnable)
                     {
-
-                        int number;
-                        bool isNumeric = int.TryParse(_destination, out number);
-                        if (!this.Context.CommandVariableCheck.ContainsKey(_destination.ToLower()) && !isNumeric)
+                        if (!string.IsNullOrEmpty(_destination))
                         {
-                            this.Context.CommandVariableCheck.Add(_destination.ToLower(), "gototpage");
-                        }
 
+                            int number;
+                            bool isNumeric = int.TryParse(_destination, out number);
+                            if (!string.IsNullOrEmpty(_destination) && !this.Context.CommandVariableCheck.ContainsKey(_destination.ToLower()) && !isNumeric)
+                            {
+                                this.Context.CommandVariableCheck.Add(_destination.ToLower(), "gototpage");
+                            }
+
+                        }
                     }
                     break;
 
@@ -95,15 +101,18 @@ namespace Epi.Core.EnterInterpreter.Rules
                     {
                         _destination = this.GetCommandElement(pToken.Tokens, 1) + this.GetCommandElement(pToken.Tokens, 2);
                     }
-                    if (!string.IsNullOrEmpty(_destination))
+                    if (pContext.IsVariableValidationEnable)
                     {
-                        int number;
-                        bool isNumeric = int.TryParse(_destination, out number);
-                        if (!this.Context.CommandVariableCheck.ContainsKey(_destination.ToLower()) && !isNumeric)
+                        if (!string.IsNullOrEmpty(_destination))
                         {
-                            this.Context.CommandVariableCheck.Add(_destination.ToLower(), "gotot");
-                        }
+                            int number;
+                            bool isNumeric = int.TryParse(_destination, out number);
+                            if (!string.IsNullOrEmpty(_destination) && !this.Context.CommandVariableCheck.ContainsKey(_destination.ToLower()) && !isNumeric)
+                            {
+                                this.Context.CommandVariableCheck.Add(_destination.ToLower(), "gotot");
+                            }
 
+                        }
                     }
                     break;
             }

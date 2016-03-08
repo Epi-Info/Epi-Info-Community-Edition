@@ -22,33 +22,35 @@ namespace Epi.Core.EnterInterpreter.Rules
             this.address_field_name = this.GetCommandElement(pToken.Tokens, 1);
             this.latitude_field_name = this.GetCommandElement(pToken.Tokens, 3);
             this.longitude_field_name = this.GetCommandElement(pToken.Tokens, 5);
-
-            if (!string.IsNullOrEmpty(address_field_name))
+            if (pContext.IsVariableValidationEnable)
             {
-
-                if (!this.Context.CommandVariableCheck.ContainsKey(address_field_name.ToLower()))
+                if (!string.IsNullOrEmpty(address_field_name))
                 {
-                    this.Context.CommandVariableCheck.Add(address_field_name, "Geocode");
+
+                    if (!this.Context.CommandVariableCheck.ContainsKey(address_field_name.ToLower()))
+                    {
+                        this.Context.CommandVariableCheck.Add(address_field_name, "Geocode");
+                    }
+
                 }
-
-            }
-            if (!string.IsNullOrEmpty(latitude_field_name))
-            {
-
-                if (!this.Context.CommandVariableCheck.ContainsKey(latitude_field_name.ToLower()))
+                if (!string.IsNullOrEmpty(latitude_field_name))
                 {
-                    this.Context.CommandVariableCheck.Add(latitude_field_name, "Geocode");
+
+                    if (!this.Context.CommandVariableCheck.ContainsKey(latitude_field_name.ToLower()))
+                    {
+                        this.Context.CommandVariableCheck.Add(latitude_field_name, "Geocode");
+                    }
+
                 }
-
-            }
-            if (!string.IsNullOrEmpty(longitude_field_name))
-            {
-
-                if (!this.Context.CommandVariableCheck.ContainsKey(longitude_field_name.ToLower()))
+                if (!string.IsNullOrEmpty(longitude_field_name))
                 {
-                    this.Context.CommandVariableCheck.Add(longitude_field_name, "Geocode");
-                }
 
+                    if (!this.Context.CommandVariableCheck.ContainsKey(longitude_field_name.ToLower()))
+                    {
+                        this.Context.CommandVariableCheck.Add(longitude_field_name, "Geocode");
+                    }
+
+                }
             }
         }
 

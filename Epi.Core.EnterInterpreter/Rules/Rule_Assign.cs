@@ -45,9 +45,10 @@ namespace Epi.Core.EnterInterpreter.Rules
                         this.QualifiedId = this.GetCommandElement(T.Tokens, 0);
                     }
                     this.value = EnterRule.BuildStatments(pContext, pTokens.Tokens[3]);
-                     
 
 
+                    if (pContext.IsVariableValidationEnable)
+                    {
                     for (int i = 0; pTokens.Tokens.Length > i; i++)
                     {
                         var IdentifierList = this.GetCommandElement(pTokens.Tokens, i).ToString().Split(' ');
@@ -57,14 +58,14 @@ namespace Epi.Core.EnterInterpreter.Rules
                             foreach (var Identifier in IdentifierList)
                              {
                                  isNumeric = int.TryParse(Identifier, out number);
-                                 if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()) && !isNumeric)
+                                 if (!string.IsNullOrEmpty(Identifier) && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()) && !isNumeric)
                                     {
                                         this.Context.CommandVariableCheck.Add(Identifier, "assign");
                                     }
                              }
                          }
                      }
-                    
+                    }
 
                     
                     break;
@@ -83,19 +84,21 @@ namespace Epi.Core.EnterInterpreter.Rules
 
                     
                     this.value = EnterRule.BuildStatments(pContext, pTokens.Tokens[3]);
-
-                    for (int i = 0; pTokens.Tokens.Length > i; i++)
+                    if (pContext.IsVariableValidationEnable)
                     {
-                        var IdentifierList = this.GetCommandElement(pTokens.Tokens, i).ToString().Split(' ');
-                        IdentifierList = RemoveOp(IdentifierList);
-                        if (IdentifierList.Length > 0)
+                        for (int i = 0; pTokens.Tokens.Length > i; i++)
                         {
-                            foreach (var Identifier in IdentifierList)
+                            var IdentifierList = this.GetCommandElement(pTokens.Tokens, i).ToString().Split(' ');
+                            IdentifierList = RemoveOp(IdentifierList);
+                            if (IdentifierList.Length > 0)
                             {
-                                isNumeric = int.TryParse(Identifier, out number);
-                                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()) && !isNumeric)
+                                foreach (var Identifier in IdentifierList)
                                 {
-                                    this.Context.CommandVariableCheck.Add(Identifier, "assign");
+                                    isNumeric = int.TryParse(Identifier, out number);
+                                    if (!string.IsNullOrEmpty(Identifier) && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()) && !isNumeric)
+                                    {
+                                        this.Context.CommandVariableCheck.Add(Identifier, "assign");
+                                    }
                                 }
                             }
                         }
@@ -145,9 +148,12 @@ namespace Epi.Core.EnterInterpreter.Rules
 
                     
                     this.value = EnterRule.BuildStatments(pContext, pTokens.Tokens[2]);
-                    if (!this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
+                    if (pContext.IsVariableValidationEnable)
                     {
-                        this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
+                        if (!string.IsNullOrEmpty(this.QualifiedId) && !this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
+                        {
+                            this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
+                        }
                     }
                     break;
 

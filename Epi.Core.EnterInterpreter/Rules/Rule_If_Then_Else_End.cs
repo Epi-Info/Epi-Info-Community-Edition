@@ -24,20 +24,24 @@ namespace Epi.Core.EnterInterpreter.Rules
              */
 
             IfClause = EnterRule.BuildStatments(pContext, pToken.Tokens[1]);
-            var IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' ');
-            IdentifierList = RemoveOp(IdentifierList);
 
-            if (IdentifierList.Length > 0)
+            if (pContext.IsVariableValidationEnable)
             {
-                foreach (var item in IdentifierList)
+                var IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' ');
+
+                IdentifierList = RemoveOp(IdentifierList);
+
+                if (IdentifierList.Length > 0)
                 {
-                    if (!this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                    foreach (var item in IdentifierList)
                     {
-                        this.Context.CommandVariableCheck.Add(item, "If");
+                        if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                        {
+                            this.Context.CommandVariableCheck.Add(item, "If");
+                        }
                     }
                 }
             }
-
 
 
 

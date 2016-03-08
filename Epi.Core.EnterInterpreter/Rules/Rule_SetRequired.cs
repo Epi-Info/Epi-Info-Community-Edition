@@ -12,7 +12,20 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         public Rule_SetRequired(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
         {
-            this.IdentifierList = this.IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' '); 
+            this.IdentifierList = this.IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' ');
+            if (pContext.IsVariableValidationEnable)
+            {
+                if (IdentifierList.Length > 0)
+                {
+                    foreach (var item in IdentifierList)
+                    {
+                        if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                        {
+                            this.Context.CommandVariableCheck.Add(item, "SetRequired");
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -31,16 +44,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                     this.IdentifierList[i] = field.Name.ToLower();
                     i++;
                 }
-                if (IdentifierList.Length > 0)
-                {
-                    foreach (var item in IdentifierList)
-                    {
-                        if (!this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
-                        {
-                            this.Context.CommandVariableCheck.Add(item, "SetRequired");
-                        }
-                    }
-                }
+               
             }
 
             this.Context.EnterCheckCodeInterface.SetRequired(this.IdentifierList);
