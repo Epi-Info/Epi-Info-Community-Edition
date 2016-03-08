@@ -29,16 +29,20 @@ namespace Epi.Windows.Menu
                 this.MaximumSize = new System.Drawing.Size(700, 599);
                 this.MinimumSize = new System.Drawing.Size(450, 400);
             }
-          
+                     
             host = new ElementHost();
             host.Dock = DockStyle.Fill;
-           // host.AutoSize = true;
-            form = new MainWindow();
- 
+            host.AutoSize = true;
+            form = new MainWindow();       
             host.Child = form;
+            host.Width = this.Width;
+            host.Height = this.Height;
             this.Controls.Add(host);
+           
         }
 
+        
+       
         
 
        
