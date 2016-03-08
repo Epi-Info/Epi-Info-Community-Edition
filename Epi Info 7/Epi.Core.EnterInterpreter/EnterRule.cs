@@ -600,7 +600,7 @@ namespace Epi.Core.EnterInterpreter
             if (commandVariableCheckValue == null) return;
             if (this.Context == null) return;
             if (this.Context.CommandVariableCheck == null) return;
-
+            if (this.Context.IsVariableValidationEnable == false) return;
             try
             {
                 if (ParameterList.Count > 0)

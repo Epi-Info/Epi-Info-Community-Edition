@@ -15,14 +15,17 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             //<Call_Statement> ::= CALL Identifier
             this.Identifier = this.GetCommandElement(pToken.Tokens, 1);
-            if (!string.IsNullOrEmpty(Identifier))
+            if (pContext.IsVariableValidationEnable)
             {
+                if (!string.IsNullOrEmpty(Identifier))
+                {
 
-                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                    if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
                     {
                         this.Context.CommandVariableCheck.Add(Identifier, "call");
                     }
-                 
+
+                }
             }
         }
 

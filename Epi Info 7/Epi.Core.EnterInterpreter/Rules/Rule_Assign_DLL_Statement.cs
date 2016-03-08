@@ -24,9 +24,12 @@ namespace Epi.Core.EnterInterpreter.Rules
             
             //this.ParameterList = new Rule_FunctionParameterList(pContext, (NonterminalToken)pToken.Tokens[7]);
             this.ParameterList = EnterRule.GetFunctionParameters(pContext, (NonterminalToken)pToken.Tokens[7]);
-            if (!this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
+            if (pContext.IsVariableValidationEnable)
             {
-                this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
+                if (!string.IsNullOrEmpty(this.QualifiedId) && !this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
+                {
+                    this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
+                }
             }
         }
 

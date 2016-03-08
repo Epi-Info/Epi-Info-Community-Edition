@@ -343,6 +343,7 @@ namespace Epi.Core.EnterInterpreter
             FieldAfterCheckCode = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
             FieldClickCheckCode = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
             Subroutine = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
+            _IsVariableValidationEnable = false;
             SelectCommandList.Add(CommandNames.ABS);
             SelectCommandList.Add(CommandNames.AND);
             SelectCommandList.Add(CommandNames.ALWAYS);
@@ -618,7 +619,7 @@ namespace Epi.Core.EnterInterpreter
                         {
 
 
-                            if (!name.Contains("\"") && !SelectCommandList.Contains(name.ToUpper()) 
+                            if (!string.IsNullOrEmpty(name) &&!name.Contains("\"") && !SelectCommandList.Contains(name.ToUpper()) 
                                 && !this.Subroutine.ContainsKey(name) 
                                 && !this.CommandButtonFieldList.Contains(name)
                                 && !this.GroupBoxFieldList.Contains(name)
