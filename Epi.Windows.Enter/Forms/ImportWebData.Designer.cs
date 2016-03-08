@@ -149,7 +149,6 @@
             // 
             // cmsStatus
             // 
-            this.cmsStatus.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_Copy});
             this.cmsStatus.Name = "cmsStatus";
