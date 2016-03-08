@@ -594,8 +594,31 @@ namespace Epi.Core.EnterInterpreter
             return result;
         }
 
+        public void AddCommandVariableCheckValue(List<EnterRule> ParameterList, string commandVariableCheckValue)
+        {
+            if (ParameterList == null) return;
+            if (commandVariableCheckValue == null) return;
+            if (this.Context == null) return;
+            if (this.Context.CommandVariableCheck == null) return;
 
-
+            try
+            {
+                if (ParameterList.Count > 0)
+                {
+                    foreach (var item in ParameterList)
+                    {
+                        if (item is Rule_Value)
+                        {
+                            var id = ((Epi.Core.EnterInterpreter.Rules.Rule_Value)(item)).Id;
+                            if (id != null && !this.Context.CommandVariableCheck.ContainsKey(id.ToLower()))
+                            {
+                                this.Context.CommandVariableCheck.Add(id.ToLower(), commandVariableCheckValue);
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
+        }
     }
-
 }
