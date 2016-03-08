@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Epi;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,7 @@ namespace StatCalc
         private ElementHost host;
         public StatCalcForm()
         {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(Configuration.GetNewInstance().Settings.Language);
             InitializeComponent();
             //this.MaximumSize = new System.Drawing.Size(680, 500);
             //this.MinimumSize = new System.Drawing.Size(680, 500);
