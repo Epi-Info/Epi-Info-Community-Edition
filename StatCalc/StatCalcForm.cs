@@ -32,6 +32,9 @@ namespace StatCalc
             //this.MinimumSize = new System.Drawing.Size(680, 500);
             host = new ElementHost();
             host.Dock = DockStyle.Fill;
+            host.AutoSize = true;
+            host.Width = this.Width;
+            host.Height = this.Height;
             StatCalcMenu form = new StatCalcMenu();
             host.Child = form;
             this.Controls.Add(host);
