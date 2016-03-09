@@ -1981,17 +1981,52 @@ namespace Epi.Windows.MakeView.Forms
             dialog.ShowDialog();
             Configuration config = Configuration.GetNewInstance();
 
-            if (config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress)))
+
+            ShowHideWebButtons(config);
+             
+
+            //if (config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress)))
+            //{
+            //    QuickPublishtoolStripButton.Visible = true;
+            //    ChangeModetoolStripDropDownButton.Visible = true;
+            //    toolStripSeparator10.Visible = true;
+            //}
+
+            //if (config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress)))
+            //{
+            //    QuickPublishtoolStripButton.Visible = true;
+            //    ChangeModetoolStripDropDownButton.Visible = true;
+            //    toolStripSeparator11.Visible = true;
+            //}
+            //else
+            //{
+            //    QuickPublishtoolStripButton.Visible = false;
+            //    ChangeModetoolStripDropDownButton.Visible = false;
+            //    toolStripSeparator10.Visible = false;
+            //    toolStripSeparator11.Visible = false;
+
+            //}
+        }
+
+        private void ShowHideWebButtons(Configuration config)
+        {
+            if (config.Settings.Republish_IsRepbulishable)
             {
-                QuickPublishtoolStripButton.Visible = true;
-                ChangeModetoolStripDropDownButton.Visible = true;
-                toolStripSeparator10.Visible = true;
-            }
-            if (config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress)))
-            {
-                QuickPublishtoolStripButton.Visible = true;
-                ChangeModetoolStripDropDownButton.Visible = true;
-                toolStripSeparator11.Visible = true;
+                if ((!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress.Trim())) || (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress.Trim())))
+                {
+                    QuickPublishtoolStripButton.Visible = true;
+                    ChangeModetoolStripDropDownButton.Visible = true;
+                    toolStripSeparator10.Visible = true;
+                    toolStripSeparator11.Visible = true;
+                }
+                else
+                {
+                    QuickPublishtoolStripButton.Visible = false;
+                    ChangeModetoolStripDropDownButton.Visible = false;
+                    toolStripSeparator10.Visible = false;
+                    toolStripSeparator11.Visible = false;
+
+                }
             }
             else
             {
@@ -3013,7 +3048,7 @@ namespace Epi.Windows.MakeView.Forms
                         }
                         else
                         {
-                            if (!string.IsNullOrEmpty(this.OrganizationKey))
+                            if (!string.IsNullOrEmpty(this.OrganizationKey) && (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress.Trim())))
                             {
                                 WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
                                 dialog.ShowDialog();
@@ -3042,6 +3077,8 @@ namespace Epi.Windows.MakeView.Forms
                                     DialogResult result3 = dialog2.ShowDialog();
                                     if (result3 == System.Windows.Forms.DialogResult.OK)
                                     {
+                                        Configuration Newconfig = Configuration.GetNewInstance();
+                                        ShowHideWebButtons(Newconfig);
                                         WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
                                         DialogResult result = dialog.ShowDialog();
                                         if (result == System.Windows.Forms.DialogResult.Cancel)
@@ -3173,11 +3210,12 @@ namespace Epi.Windows.MakeView.Forms
 
             try
             {
+                ShowHideWebButtons(config);
                 if (config.Settings.Republish_IsRepbulishable == true)
                 {
                     QuickPublishtoolStripButton.Enabled = true;
                     ChangeModetoolStripDropDownButton.Enabled = true;
-
+                    
                     if (!string.IsNullOrWhiteSpace(pView.WebSurveyId))
                     {
                         mnuPublishToWeb.Text = SharedStrings.WEBFORM_MENU_REPUB_WEB;
@@ -3251,8 +3289,8 @@ namespace Epi.Windows.MakeView.Forms
                 mnuPublishToWeb.Enabled = true;
                 toolStripPublishToWebEnter.Text = SharedStrings.WEBFORM_MENU_PUB_WEBENTER;
                 toolStripPublishToWebEnter.Enabled = true;
-                QuickPublishtoolStripButton.Enabled = false;
-                ChangeModetoolStripDropDownButton.Enabled = false;
+                //QuickPublishtoolStripButton.Enabled = false;
+                //ChangeModetoolStripDropDownButton.Enabled = false;
 
             }
         }
@@ -4812,10 +4850,33 @@ namespace Epi.Windows.MakeView.Forms
             ////    }
             //return IsValidUser;
             // }
+            if (!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress.Trim()))
+            {
+                IsValidUser = ValidateUserDialog(IsValidUser, ISWindowAuthMode);
+            }
+            else 
+            {
+
+                 WebEnterOptions dialog1 = new WebEnterOptions();
+                 DialogResult result1 = dialog1.ShowDialog();
+                 if (result1 == System.Windows.Forms.DialogResult.OK)
+                 {
+                     config = Configuration.GetNewInstance();
+                     ShowHideWebButtons(config);
+                     IsValidUser = ValidateUserDialog(IsValidUser, ISWindowAuthMode);
+                 }
+            
+            
+            }
+            return IsValidUser;
 
 
 
 
+        }
+
+        private bool ValidateUserDialog(bool IsValidUser, int ISWindowAuthMode)
+        {
             if (ISWindowAuthMode == 0)
             {
                 if (LoginInfo.UserID == -1)
@@ -4837,12 +4898,7 @@ namespace Epi.Windows.MakeView.Forms
                 }
 
             }
-
             return IsValidUser;
-
-
-
-
         }
         public UserPrincipal GetUser(string UserName)
         {
