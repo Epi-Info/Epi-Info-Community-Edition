@@ -1031,6 +1031,7 @@ namespace Epi.Windows.MakeView.Forms
            // Configuration config = Configuration.GetNewInstance();
             LoadConfiguration();
             Configuration _config = ConfigFile;
+         
             string EWEServiceEndpointAddress ="";
             try
             {
@@ -1065,26 +1066,28 @@ namespace Epi.Windows.MakeView.Forms
                     recentProjectsToolStripMenuItem.DropDownItems.Add(recentProjectItem);
                 }
                 recentProjectsToolStripMenuItem.Enabled = (recentProjectsToolStripMenuItem.DropDownItems.Count > 0);
-                if (_config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(_config.Settings.WebServiceEndpointAddress)))
-                {
-                    QuickPublishtoolStripButton.Visible = true;
-                    ChangeModetoolStripDropDownButton.Visible = true;
-                    toolStripSeparator10.Visible = true;
-                }
-                else if (_config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(EWEServiceEndpointAddress)))
-                {
-                    QuickPublishtoolStripButton.Visible = true;
-                    ChangeModetoolStripDropDownButton.Visible = true;
-                    toolStripSeparator11.Visible = true;
-                }
-                else
-                {
-                    QuickPublishtoolStripButton.Visible = false;
-                    ChangeModetoolStripDropDownButton.Visible = false;
-                    toolStripSeparator10.Visible = false;
-                    toolStripSeparator11.Visible = false;
 
-                }
+              
+                //if (_config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(_config.Settings.WebServiceEndpointAddress)))
+                //{
+                //    QuickPublishtoolStripButton.Visible = true;
+                //    ChangeModetoolStripDropDownButton.Visible = true;
+                //    toolStripSeparator10.Visible = true;
+                //}
+                //else if (_config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(EWEServiceEndpointAddress)))
+                //{
+                //    QuickPublishtoolStripButton.Visible = true;
+                //    ChangeModetoolStripDropDownButton.Visible = true;
+                //    toolStripSeparator11.Visible = true;
+                //}
+                //else
+                //{
+                //    QuickPublishtoolStripButton.Visible = false;
+                //    ChangeModetoolStripDropDownButton.Visible = false;
+                //    toolStripSeparator10.Visible = false;
+                //    toolStripSeparator11.Visible = false;
+
+                //}
             }
             finally
             {
@@ -1558,6 +1561,8 @@ namespace Epi.Windows.MakeView.Forms
             {
                 Project project = new Project(((ToolStripMenuItem)sender).Text.Substring(3));
                 OpenProject(project);
+                config = Configuration.GetNewInstance();
+                ShowHideWebButtons(config);
             }
             catch (Exception ex)
             {
@@ -4865,7 +4870,10 @@ namespace Epi.Windows.MakeView.Forms
                      ShowHideWebButtons(config);
                      IsValidUser = ValidateUserDialog(IsValidUser, ISWindowAuthMode);
                  }
-            
+                 if (result1 == System.Windows.Forms.DialogResult.Cancel)
+                 {
+                     return false;
+                 }
             
             }
             return IsValidUser;
