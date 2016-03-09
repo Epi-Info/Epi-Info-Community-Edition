@@ -7,7 +7,6 @@ namespace Updater
 {
     static class Program
     {
-        // test comment
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
