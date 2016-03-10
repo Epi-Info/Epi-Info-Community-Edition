@@ -41,39 +41,62 @@ namespace Epi.Windows.ImportExport.Dialogs
             // 
             // grpProject
             // 
+            this.grpProject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.grpProject.Location = new System.Drawing.Point(7, 92);
+            this.grpProject.Size = new System.Drawing.Size(475, 184);
+            // 
+            // btnBrowseProjectLocation
+            // 
+            this.btnBrowseProjectLocation.Location = new System.Drawing.Point(372, 73);
             // 
             // grpData
             // 
+            this.grpData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.grpData.Location = new System.Drawing.Point(7, 290);
+            this.grpData.Size = new System.Drawing.Size(475, 95);
             // 
             // grpView
             // 
             this.grpView.Location = new System.Drawing.Point(9, 435);
+            this.grpView.Size = new System.Drawing.Size(581, 77);
+            // 
+            // txtViewName
+            // 
+            this.txtViewName.Size = new System.Drawing.Size(554, 20);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(135, 373);
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnOk.Location = new System.Drawing.Point(191, 391);
+            this.btnOk.Size = new System.Drawing.Size(93, 23);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(216, 373);
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCancel.Location = new System.Drawing.Point(290, 391);
+            this.btnCancel.Size = new System.Drawing.Size(93, 23);
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(297, 373);
+            this.btnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnHelp.Location = new System.Drawing.Point(389, 391);
+            this.btnHelp.Size = new System.Drawing.Size(93, 23);
+            // 
+            // btnBuildCollectedDataConnectionString
+            // 
+            this.btnBuildCollectedDataConnectionString.Location = new System.Drawing.Point(372, 32);
             // 
             // cbxMetadataDriver
             // 
-            this.cbxMetadataDriver.Size = new System.Drawing.Size(133, 21);
+            this.cbxMetadataDriver.Size = new System.Drawing.Size(242, 21);
             // 
             // txtMetadata
             // 
-            this.txtMetadata.Size = new System.Drawing.Size(58, 20);
+            this.txtMetadata.Size = new System.Drawing.Size(167, 20);
             // 
             // btnBuildMetadataConnectionString
             // 
-            this.btnBuildMetadataConnectionString.Location = new System.Drawing.Point(308, 597);
+            this.btnBuildMetadataConnectionString.Location = new System.Drawing.Point(417, 597);
             // 
             // baseImageList
             // 
@@ -165,19 +188,19 @@ namespace Epi.Windows.ImportExport.Dialogs
             this.grpSourceProject.Controls.Add(this.lblSourceProject);
             this.grpSourceProject.Location = new System.Drawing.Point(7, 12);
             this.grpSourceProject.Name = "grpSourceProject";
-            this.grpSourceProject.Size = new System.Drawing.Size(365, 74);
+            this.grpSourceProject.Size = new System.Drawing.Size(476, 74);
             this.grpSourceProject.TabIndex = 8;
             this.grpSourceProject.TabStop = false;
             this.grpSourceProject.Text = "Source Project";
             // 
             // txtSourceProject
             // 
-            this.txtSourceProject.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSourceProject.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSourceProject.Enabled = false;
             this.txtSourceProject.Location = new System.Drawing.Point(15, 37);
             this.txtSourceProject.Name = "txtSourceProject";
-            this.txtSourceProject.Size = new System.Drawing.Size(336, 20);
+            this.txtSourceProject.Size = new System.Drawing.Size(447, 20);
             this.txtSourceProject.TabIndex = 5;
             // 
             // lblSourceProject
@@ -190,11 +213,11 @@ namespace Epi.Windows.ImportExport.Dialogs
             this.lblSourceProject.TabIndex = 4;
             this.lblSourceProject.Text = "Source Name";
             // 
-            // ProjectImportDialog
+            // ProjectUpgradeDialog
             // 
-            this.ClientSize = new System.Drawing.Size(384, 406);
+            this.ClientSize = new System.Drawing.Size(493, 427);
             this.Controls.Add(this.grpSourceProject);
-            this.Name = "ProjectImportDialog";
+            this.Name = "ProjectUpgradeDialog";
             this.Text = "Import Project";
             this.Load += new System.EventHandler(this.ProjectImportDialog_Load);
             this.Controls.SetChildIndex(this.btnOk, 0);
