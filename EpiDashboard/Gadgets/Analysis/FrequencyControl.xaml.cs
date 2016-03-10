@@ -1124,9 +1124,11 @@ namespace EpiDashboard
             element.Attributes.Append(collapsed);
             element.Attributes.Append(type);
             element.Attributes.Append(id);
-            element.Attributes.Append(actualHeight);
 
-
+            if (IsCollapsed == false)
+            {
+                element.Attributes.Append(actualHeight);
+            }
 
             WordBuilder wb = new WordBuilder(",");          
             if (freqParameters.ShowFrequencyCol) wb.Add("1");
