@@ -7547,8 +7547,12 @@ namespace EpiDashboard
                     foreach (DataColumn dc in mainTable.Columns)
                     {
                         if (!TableColumnNames.ContainsKey(dc.ColumnName) && !dc.ColumnName.Equals("RECSTATUS"))
-                        {                           
-                            if (View.Fields.Contains(dc.ColumnName))
+                        {
+                            if (dc.ColumnName.Equals("SYSTEMDATE") || dc.ColumnName.Equals("OldUniqueKey"))
+                            {
+                                TableColumnNames.Add(dc.ColumnName, dc.DataType.ToString());
+                            }
+                            else if (View.Fields.Contains(dc.ColumnName))
                             {
                                 TableColumnNames.Add(dc.ColumnName, dc.DataType.ToString());
                                 FieldTable.Rows.Add(dc.ColumnName, dc.DataType.ToString(), page.TableName, View.Name, View.Fields[dc.ColumnName]);                                
