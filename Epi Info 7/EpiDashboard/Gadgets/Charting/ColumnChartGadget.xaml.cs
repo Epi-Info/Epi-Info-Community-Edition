@@ -959,7 +959,10 @@ namespace EpiDashboard.Gadgets.Charting
                 element.Attributes.Append(collapsed);
                 element.Attributes.Append(type);
                 element.Attributes.Append(id);
-                element.Attributes.Append(actualHeight);
+                if (IsCollapsed == false)
+                {
+                    element.Attributes.Append(actualHeight);
+                }
 
                 CustomOutputHeading = headerPanel.Text;
                 CustomOutputDescription = descriptionPanel.Text;

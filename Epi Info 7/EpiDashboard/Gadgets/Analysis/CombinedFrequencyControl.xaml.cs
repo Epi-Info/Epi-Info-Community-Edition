@@ -669,7 +669,10 @@ namespace EpiDashboard
             element.Attributes.Append(collapsed);
             element.Attributes.Append(type);
             element.Attributes.Append(id);
-            element.Attributes.Append(actualHeight);
+            if (IsCollapsed == false)
+            {
+                element.Attributes.Append(actualHeight);
+            }
             
             XmlElement combineModeElement = doc.CreateElement("combineMode");
             combineModeElement.InnerText = combFreqParameters.CombineMode.ToString();

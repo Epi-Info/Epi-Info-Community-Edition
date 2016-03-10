@@ -862,7 +862,10 @@ namespace EpiDashboard.Gadgets.Analysis
             element.Attributes.Append(collapsed);
             element.Attributes.Append(type);
             element.Attributes.Append(id);
-            element.Attributes.Append(actualHeight);
+            if (IsCollapsed == false)
+            {
+                element.Attributes.Append(actualHeight);
+            }
 
             string groupVar1 = String.Empty;
             string groupVar2 = String.Empty;
