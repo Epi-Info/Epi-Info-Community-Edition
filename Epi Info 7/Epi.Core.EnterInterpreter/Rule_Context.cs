@@ -345,6 +345,8 @@ namespace Epi.Core.EnterInterpreter
             Subroutine = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
             _IsVariableValidationEnable = false;
             SelectCommandList.Add(CommandNames.ABS);
+            SelectCommandList.Add(CommandNames.ASSIGN);
+            SelectCommandList.Add(CommandNames.ASCENDING);
             SelectCommandList.Add(CommandNames.AND);
             SelectCommandList.Add(CommandNames.ALWAYS);
             SelectCommandList.Add(CommandNames.APPEND);
