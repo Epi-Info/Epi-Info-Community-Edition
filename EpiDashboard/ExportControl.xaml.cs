@@ -118,7 +118,7 @@ namespace EpiDashboard
 
             if (cmbDataFormats.SelectedIndex >= 0)
             {
-                if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii"))
+                if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLower().Contains("csv file"))
                 {
                     tblockDestinationTable.Text = "File name";
                 }
@@ -1093,7 +1093,7 @@ namespace EpiDashboard
                 useTabOrder = false;
 
             bool writeToFlatFile = false;
-            if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii"))
+            if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLower().Contains("csv file"))
             {
                 writeToFlatFile = true;
             }
