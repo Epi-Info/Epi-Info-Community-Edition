@@ -144,7 +144,7 @@
     <value>8</value>
   </data>
   <data name="lblProjectFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 24</value>
+    <value>6, 63</value>
   </data>
   <data name="lblProjectFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>460, 13</value>
@@ -168,7 +168,7 @@
     <value>6</value>
   </data>
   <data name="textProject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 40</value>
+    <value>9, 79</value>
   </data>
   <data name="textProject.Size" type="System.Drawing.Size, System.Drawing">
     <value>487, 20</value>
@@ -189,7 +189,7 @@
     <value>5</value>
   </data>
   <data name="chkIncremental.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 157</value>
+    <value>159, 162</value>
   </data>
   <data name="chkIncremental.Size" type="System.Drawing.Size, System.Drawing">
     <value>337, 39</value>
@@ -213,7 +213,7 @@
     <value>0</value>
   </data>
   <data name="textOrganization.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 79</value>
+    <value>9, 40</value>
   </data>
   <data name="textOrganization.Size" type="System.Drawing.Size, System.Drawing">
     <value>487, 20</value>
@@ -234,7 +234,7 @@
     <value>1</value>
   </data>
   <data name="lblOrganization.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 63</value>
+    <value>6, 24</value>
   </data>
   <data name="lblOrganization.Size" type="System.Drawing.Size, System.Drawing">
     <value>460, 13</value>
@@ -310,7 +310,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdbDraftMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 20</value>
+    <value>12, 76</value>
   </data>
   <data name="rdbDraftMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 32</value>
@@ -337,7 +337,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdbFinalMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 69</value>
+    <value>12, 20</value>
   </data>
   <data name="rdbFinalMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 32</value>

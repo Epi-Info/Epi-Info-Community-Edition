@@ -144,7 +144,7 @@
     <value>11</value>
   </data>
   <data name="lblProjectFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 24</value>
+    <value>6, 55</value>
   </data>
   <data name="lblProjectFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>490, 13</value>
@@ -168,7 +168,7 @@
     <value>5</value>
   </data>
   <data name="textProject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 40</value>
+    <value>6, 71</value>
   </data>
   <data name="textProject.Size" type="System.Drawing.Size, System.Drawing">
     <value>487, 20</value>
@@ -189,7 +189,7 @@
     <value>4</value>
   </data>
   <data name="textOrganization.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 79</value>
+    <value>6, 32</value>
   </data>
   <data name="textOrganization.Size" type="System.Drawing.Size, System.Drawing">
     <value>487, 20</value>
@@ -210,7 +210,7 @@
     <value>0</value>
   </data>
   <data name="lblOrganization.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 63</value>
+    <value>6, 16</value>
   </data>
   <data name="lblOrganization.Size" type="System.Drawing.Size, System.Drawing">
     <value>490, 13</value>
@@ -234,7 +234,7 @@
     <value>1</value>
   </data>
   <data name="textData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 118</value>
+    <value>6, 110</value>
   </data>
   <data name="textData.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
     <value>*</value>
@@ -262,7 +262,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDataGUID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 102</value>
+    <value>6, 94</value>
   </data>
   <data name="lblDataGUID.Size" type="System.Drawing.Size, System.Drawing">
     <value>490, 13</value>
@@ -541,7 +541,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdbFinalMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 78</value>
+    <value>9, 20</value>
   </data>
   <data name="rdbFinalMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 36</value>
@@ -562,13 +562,13 @@
     <value>grpImportMode</value>
   </data>
   <data name="&gt;&gt;rdbFinalMode.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="rdbDraftMode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="rdbDraftMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 31</value>
+    <value>9, 80</value>
   </data>
   <data name="rdbDraftMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 32</value>
@@ -589,7 +589,7 @@
     <value>grpImportMode</value>
   </data>
   <data name="&gt;&gt;rdbDraftMode.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="rdbAllRecords.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
