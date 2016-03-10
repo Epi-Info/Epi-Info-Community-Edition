@@ -116,7 +116,7 @@ namespace Epi.Enter.Forms
 
                 this.IsBatchImport = false;
 
-                this.rdbDraftMode.Checked = true;
+                this.rdbFinalMode.Checked = true;
                 this.chkIncremental.Checked = true;
 
                 if (config.Settings.WebServiceAuthMode == 1) // Windows Authentication

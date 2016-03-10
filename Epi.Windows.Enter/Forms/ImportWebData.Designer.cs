@@ -207,8 +207,8 @@
             // 
             // grpImportMode
             // 
-            this.grpImportMode.Controls.Add(this.rdbDraftMode);
             this.grpImportMode.Controls.Add(this.rdbFinalMode);
+            this.grpImportMode.Controls.Add(this.rdbDraftMode);
             resources.ApplyResources(this.grpImportMode, "grpImportMode");
             this.grpImportMode.Name = "grpImportMode";
             this.grpImportMode.TabStop = false;

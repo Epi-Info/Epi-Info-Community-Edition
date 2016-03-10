@@ -114,7 +114,8 @@ namespace Epi.Enter.Forms
 
             this.IsBatchImport = false;
 
-            rdbDraftMode.Checked = true;
+            rdbFinalMode.Checked = true;
+            
             rdbSubmittedIncremental.Checked = true;
 
             if (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress.ToLower()) && (
