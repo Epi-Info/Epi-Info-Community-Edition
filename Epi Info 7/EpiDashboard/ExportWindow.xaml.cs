@@ -131,7 +131,7 @@ namespace EpiDashboard
 
             if (cmbDataFormats.SelectedIndex >= 0)
             {
-                if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii"))
+                if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLower().Contains("csv file")) // CSV File
                 {
                     tblockDestinationTable.Text = DashboardSharedStrings.EXPORT_DEST_FILENAME;
                 }
@@ -1043,14 +1043,14 @@ namespace EpiDashboard
             }            
 
             string fileName = db.DataSource + "\\" + tableName;
-            bool writeToFlatFile = false;
+            
             if (!fileName.ToLower().EndsWith(".csv") && !fileName.ToLower().EndsWith(".txt"))
             {
                 fileName = fileName + ".csv";
-                writeToFlatFile = true;
             }
-           
-            if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii"))
+
+            bool writeToFlatFile = false;
+            if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLower().Contains("csv file"))
             {
                 writeToFlatFile = true;
             }
