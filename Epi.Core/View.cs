@@ -705,6 +705,7 @@ namespace Epi
         {
             DataTable fieldSysVars = GetMetadata().GetSystemFields(this.id);
             bool FlagColumnExists = false;
+            GetMetadata().SynchronizeMetaFieldtypes(this);
             //check table for fields
             foreach (DataRow row in fieldSysVars.Rows)
             {
@@ -715,8 +716,7 @@ namespace Epi
                 }
             }
             if (FlagColumnExists == false)
-            {
-                GetMetadata().SynchronizeMetaFieldtypes(this);
+            {               
                 FirstSaveTimeField firstsavetimeField = new FirstSaveTimeField(this);
                 firstsavetimeField.SaveToDb();
                 LastSaveTimeField lastsavetimeField = new LastSaveTimeField(this);
