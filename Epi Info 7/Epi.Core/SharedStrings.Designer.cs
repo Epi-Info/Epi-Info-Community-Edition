@@ -84,6 +84,7 @@ namespace Epi {
         ///
         ///Sachin Agnihotri
         ///José Aponte
+        ///Raj Basavaraju
         ///David Brown
         ///Harold Collins
         ///John Copeland
@@ -96,6 +97,7 @@ namespace Epi {
         ///Estrilita Jones
         ///Gerald Jones
         ///Pallavi Karanam
+        ///Jayshreema Khoosal
         ///Erik Knudsen
         ///Mohammed Lamtahri
         ///Matthew Lantinga
@@ -106,9 +108,7 @@ namespace Epi {
         ///Victor Natick
         ///Chelsea Navo
         ///David Nitschke
-        ///Sumalatha Paritala
-        ///Julio Rodriguez Estevez
-        ///Uma Shanm [rest of string was truncated]&quot;;.
+        ///Sumalatha Paritala [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ABOUT_EPIINFO_LINE3 {
             get {
