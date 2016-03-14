@@ -481,6 +481,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
         private void CascadePermanentDelete(Epi.Data.Services.CollectedDataProvider OutputDriver, View pView, List<int> pIDList)
         {
+            if(pIDList.Count < 1)
+            {
+                return;
+            }
+
             Dictionary<string, bool> VisitedViews = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
             string SQL = null;
             StringBuilder InSQL = new StringBuilder();
