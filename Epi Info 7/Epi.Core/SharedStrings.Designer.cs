@@ -8755,7 +8755,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to URL to log in to Epi Info Web Enter..
+        ///   Looks up a localized string similar to URL to log in to Epi Info Cloud Data Capture..
         /// </summary>
         public static string WEBENTER_URLTOLOGIN {
             get {
@@ -8809,7 +8809,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Publish Form to Web Survey.
+        ///   Looks up a localized string similar to Publish form as a web survey.
         /// </summary>
         public static string WEBFORM_MENU_PUB_WEB {
             get {
@@ -8818,7 +8818,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Publish Form to Web Enter.
+        ///   Looks up a localized string similar to Publish form for cloud data capture.
         /// </summary>
         public static string WEBFORM_MENU_PUB_WEBENTER {
             get {
@@ -8827,7 +8827,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Republish Form to Web Survey.
+        ///   Looks up a localized string similar to Republish form as a web survey.
         /// </summary>
         public static string WEBFORM_MENU_REPUB_WEB {
             get {
@@ -8836,7 +8836,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Republish Form to Web Enter.
+        ///   Looks up a localized string similar to Republish form for cloud data capture.
         /// </summary>
         public static string WEBFORM_MENU_REPUB_WEBENTER {
             get {

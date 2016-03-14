@@ -3018,16 +3018,16 @@ Do you wish to proceed with the import and overwrite these tables? This action c
     <value>Field data exceeds 255 characters and has been shortened for the following field and record:</value>
   </data>
   <data name="WEBFORM_MENU_PUB_WEB" xml:space="preserve">
-    <value>Publish Form to Web Survey</value>
+    <value>Publish form as a web survey</value>
   </data>
   <data name="WEBFORM_MENU_PUB_WEBENTER" xml:space="preserve">
-    <value>Publish Form to Web Enter</value>
+    <value>Publish form for cloud data capture</value>
   </data>
   <data name="WEBFORM_MENU_REPUB_WEB" xml:space="preserve">
-    <value>Republish Form to Web Survey</value>
+    <value>Republish form as a web survey</value>
   </data>
   <data name="WEBFORM_MENU_REPUB_WEBENTER" xml:space="preserve">
-    <value>Republish Form to Web Enter</value>
+    <value>Republish form for cloud data capture</value>
   </data>
   <data name="WEBFORM_ORG_KEY_REPUBLISH" xml:space="preserve">
     <value>The organization key is required for security purposes before you can republish this survey.</value>
@@ -3090,7 +3090,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
     <value>Form ID needed to access the form.</value>
   </data>
   <data name="WEBENTER_URLTOLOGIN" xml:space="preserve">
-    <value>URL to log in to Epi Info Web Enter.</value>
+    <value>URL to log in to Epi Info Cloud Data Capture.</value>
   </data>
   <data name="DASHBOARD_GADGET_PROCESSING" xml:space="preserve">
     <value>processing</value>

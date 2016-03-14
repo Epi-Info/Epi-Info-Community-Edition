@@ -2285,7 +2285,7 @@
     <value>8</value>
   </data>
   <data name="tabPageWebEnter.Text" xml:space="preserve">
-    <value>Web Enter</value>
+    <value>Cloud Data Capture</value>
   </data>
   <data name="&gt;&gt;tabPageWebEnter.Name" xml:space="preserve">
     <value>tabPageWebEnter</value>
@@ -3668,6 +3668,6 @@
     <value>OptionsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5906.24126, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.5917.27948, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

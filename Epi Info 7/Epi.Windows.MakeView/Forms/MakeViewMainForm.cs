@@ -4373,7 +4373,7 @@ namespace Epi.Windows.MakeView.Forms
                              }
                          else 
                              {
-                                MessageBox.Show("You are not authorized to quick publish this form to Epi Web Enter system. Please contact system admin for more info.");
+                                MessageBox.Show("You are not authorized to quick publish this form to Epi Info Cloud Data Capture system. Please contact system admin for more info.");
                             
                              }
                                    
@@ -4761,7 +4761,7 @@ namespace Epi.Windows.MakeView.Forms
 
                         else
                         {
-                            MessageBox.Show("You are not authorized to publish this form to Epi Web Enter system. Please contact system admin for more info.");
+                            MessageBox.Show("You are not authorized to publish this form to Epi Info Cloud Data Capture system. Please contact system admin for more info.");
 
 
 
