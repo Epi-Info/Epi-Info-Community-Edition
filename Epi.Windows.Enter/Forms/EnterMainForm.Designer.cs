@@ -59,9 +59,9 @@ namespace Epi.Windows.Enter
             this.importDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportFromPhone = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportFromWeb = new System.Windows.Forms.ToolStripMenuItem();
+            this.fromWebEnterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportFromForm = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportFromDataPackage = new System.Windows.Forms.ToolStripMenuItem();
-            this.fromWebEnterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPackageForTransport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -247,8 +247,8 @@ namespace Epi.Windows.Enter
             // toolStripContainer1.TopToolStripPanel
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip2);
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip2);
             // 
             // enterDockManager
             // 
@@ -355,6 +355,12 @@ namespace Epi.Windows.Enter
             this.mnuImportFromWeb.Name = "mnuImportFromWeb";
             this.mnuImportFromWeb.Click += new System.EventHandler(this.mnuImportFromWebToolStripMenuItem_Click);
             // 
+            // fromWebEnterToolStripMenuItem
+            // 
+            resources.ApplyResources(this.fromWebEnterToolStripMenuItem, "fromWebEnterToolStripMenuItem");
+            this.fromWebEnterToolStripMenuItem.Name = "fromWebEnterToolStripMenuItem";
+            this.fromWebEnterToolStripMenuItem.Click += new System.EventHandler(this.fromWebEnterToolStripMenuItem_Click);
+            // 
             // mnuImportFromForm
             // 
             resources.ApplyResources(this.mnuImportFromForm, "mnuImportFromForm");
@@ -366,12 +372,6 @@ namespace Epi.Windows.Enter
             resources.ApplyResources(this.mnuImportFromDataPackage, "mnuImportFromDataPackage");
             this.mnuImportFromDataPackage.Name = "mnuImportFromDataPackage";
             this.mnuImportFromDataPackage.Click += new System.EventHandler(this.mnuImportFromDataPackage_Click);
-            // 
-            // fromWebEnterToolStripMenuItem
-            // 
-            resources.ApplyResources(this.fromWebEnterToolStripMenuItem, "fromWebEnterToolStripMenuItem");
-            this.fromWebEnterToolStripMenuItem.Name = "fromWebEnterToolStripMenuItem";
-            this.fromWebEnterToolStripMenuItem.Click += new System.EventHandler(this.fromWebEnterToolStripMenuItem_Click);
             // 
             // mnuPackageForTransport
             // 

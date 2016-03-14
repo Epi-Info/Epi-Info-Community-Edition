@@ -119,14 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PassWordTextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 190</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PassWordTextBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>23, 154</value>
   </data>
   <data name="PassWordTextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 22</value>
+    <value>331, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PassWordTextBox1.TabIndex" type="System.Int32, mscorlib">
@@ -145,13 +141,10 @@
     <value>6</value>
   </data>
   <data name="lblPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 166</value>
-  </data>
-  <data name="lblPassword.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>19, 135</value>
   </data>
   <data name="lblPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 25</value>
+    <value>331, 20</value>
   </data>
   <data name="lblPassword.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -172,13 +165,10 @@
     <value>5</value>
   </data>
   <data name="LoginButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>189, 222</value>
-  </data>
-  <data name="LoginButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>142, 180</value>
   </data>
   <data name="LoginButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 28</value>
+    <value>95, 23</value>
   </data>
   <data name="LoginButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -199,13 +189,10 @@
     <value>4</value>
   </data>
   <data name="lblEmailAddress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 116</value>
-  </data>
-  <data name="lblEmailAddress.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>19, 94</value>
   </data>
   <data name="lblEmailAddress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 25</value>
+    <value>331, 20</value>
   </data>
   <data name="lblEmailAddress.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -226,13 +213,10 @@
     <value>3</value>
   </data>
   <data name="EmailAddresstextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 137</value>
-  </data>
-  <data name="EmailAddresstextBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>23, 111</value>
   </data>
   <data name="EmailAddresstextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 22</value>
+    <value>331, 20</value>
   </data>
   <data name="EmailAddresstextBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -256,25 +240,22 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>504, 257</value>
+    <value>378, 209</value>
   </data>
   <data name="lblWebEnterLoginInstructions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 59</value>
-  </data>
-  <data name="lblWebEnterLoginInstructions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>19, 48</value>
   </data>
   <data name="lblWebEnterLoginInstructions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>447, 42</value>
+    <value>347, 34</value>
   </data>
   <data name="lblWebEnterLoginInstructions.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="lblWebEnterLoginInstructions.Text" xml:space="preserve">
-    <value>Enter your email address and password to log in to Web Enter.</value>
+    <value>Enter your email address and password to log in to Cloud Data Capture.</value>
   </data>
   <data name="&gt;&gt;lblWebEnterLoginInstructions.Name" xml:space="preserve">
     <value>lblWebEnterLoginInstructions</value>
@@ -292,19 +273,16 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="lblWebEnterLoginTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 22</value>
-  </data>
-  <data name="lblWebEnterLoginTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>19, 18</value>
   </data>
   <data name="lblWebEnterLoginTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>447, 25</value>
+    <value>335, 20</value>
   </data>
   <data name="lblWebEnterLoginTitle.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="lblWebEnterLoginTitle.Text" xml:space="preserve">
-    <value>Web Enter - Log In</value>
+    <value>Cloud Data Capture - Log In</value>
   </data>
   <data name="&gt;&gt;lblWebEnterLoginTitle.Name" xml:space="preserve">
     <value>lblWebEnterLoginTitle</value>
@@ -4113,9 +4091,7 @@
         AAAAAD//////////AAAAAP//////////4AAAB////////////wAA//////////////////////8=
 </value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>

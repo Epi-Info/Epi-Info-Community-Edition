@@ -136,13 +136,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 8</value>
+    <value>12, 6</value>
   </data>
   <data name="lblError.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="lblError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>910, 29</value>
+    <value>796, 22</value>
   </data>
   <data name="lblError.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -169,19 +169,16 @@
     <value>Fill</value>
   </data>
   <data name="pnlError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 4</value>
-  </data>
-  <data name="pnlError.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>3, 3</value>
   </data>
   <data name="pnlError.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>711, 47</value>
+    <value>622, 35</value>
   </data>
   <data name="pnlError.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 12, 10, 12</value>
+    <value>9, 9, 9, 9</value>
   </data>
   <data name="pnlError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>934, 49</value>
+    <value>817, 37</value>
   </data>
   <data name="pnlError.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -202,13 +199,10 @@
     <value>0</value>
   </data>
   <data name="CancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>824, 281</value>
-  </data>
-  <data name="CancelButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>721, 211</value>
   </data>
   <data name="CancelButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 31</value>
+    <value>90, 23</value>
   </data>
   <data name="CancelButton.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -229,13 +223,10 @@
     <value>0</value>
   </data>
   <data name="OkButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>631, 281</value>
-  </data>
-  <data name="OkButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>552, 211</value>
   </data>
   <data name="OkButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 31</value>
+    <value>163, 23</value>
   </data>
   <data name="OkButton.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -259,13 +250,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="BasicRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 24</value>
-  </data>
-  <data name="BasicRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>22, 18</value>
   </data>
   <data name="BasicRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 45</value>
+    <value>97, 34</value>
   </data>
   <data name="BasicRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -289,13 +277,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="WsHTTpRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 24</value>
-  </data>
-  <data name="WsHTTpRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>136, 18</value>
   </data>
   <data name="WsHTTpRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 45</value>
+    <value>114, 34</value>
   </data>
   <data name="WsHTTpRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -319,16 +304,10 @@
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>631, 191</value>
-  </data>
-  <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
-  <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>552, 143</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>293, 77</value>
+    <value>256, 58</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -352,13 +331,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="YesRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 24</value>
-  </data>
-  <data name="YesRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>23, 18</value>
   </data>
   <data name="YesRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 45</value>
+    <value>268, 34</value>
   </data>
   <data name="YesRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -382,13 +358,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="NoRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 24</value>
-  </data>
-  <data name="NoRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>307, 18</value>
   </data>
   <data name="NoRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 45</value>
+    <value>218, 34</value>
   </data>
   <data name="NoRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -412,16 +385,10 @@
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 191</value>
-  </data>
-  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
-  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>15, 143</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 77</value>
+    <value>531, 58</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -442,16 +409,13 @@
     <value>3</value>
   </data>
   <data name="EndPointTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 115</value>
-  </data>
-  <data name="EndPointTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>15, 86</value>
   </data>
   <data name="EndPointTextBox.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="EndPointTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>906, 67</value>
+    <value>793, 51</value>
   </data>
   <data name="EndPointTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -472,16 +436,16 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="lblWebEnterInstructions2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 55</value>
+    <value>15, 41</value>
   </data>
   <data name="lblWebEnterInstructions2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>910, 37</value>
+    <value>796, 28</value>
   </data>
   <data name="lblWebEnterInstructions2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="lblWebEnterInstructions2.Text" xml:space="preserve">
-    <value>You can also update this information by clicking the ‘Web Enter’ tab under the Tools &gt; Options.</value>
+    <value>You can also update this information by clicking the ‘Cloud Data Capture’ tab under the Tools &gt; Options.</value>
   </data>
   <data name="lblWebEnterInstructions2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -502,10 +466,10 @@
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
   <data name="lblWebEnterEndPtAddr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 91</value>
+    <value>15, 68</value>
   </data>
   <data name="lblWebEnterEndPtAddr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>906, 20</value>
+    <value>793, 15</value>
   </data>
   <data name="lblWebEnterEndPtAddr.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -529,16 +493,16 @@
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
   <data name="lblWebEnterInstructions1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 0</value>
+    <value>15, 0</value>
   </data>
   <data name="lblWebEnterInstructions1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>910, 37</value>
+    <value>796, 28</value>
   </data>
   <data name="lblWebEnterInstructions1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="lblWebEnterInstructions1.Text" xml:space="preserve">
-    <value>Contact the system administrator to provide the settings to publish forms to Web Enter.</value>
+    <value>Contact the system administrator to provide the settings to publish forms to Cloud Data Capture.</value>
   </data>
   <data name="lblWebEnterInstructions1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -556,16 +520,13 @@
     <value>7</value>
   </data>
   <data name="pnlOrgKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 61</value>
-  </data>
-  <data name="pnlOrgKey.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>3, 46</value>
   </data>
   <data name="pnlOrgKey.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>711, 0</value>
+    <value>622, 0</value>
   </data>
   <data name="pnlOrgKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>934, 316</value>
+    <value>817, 237</value>
   </data>
   <data name="pnlOrgKey.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -591,11 +552,8 @@
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="flowLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>944, 392</value>
+    <value>826, 294</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -616,7 +574,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 20</value>
+    <value>7, 15</value>
   </data>
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -625,7 +583,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>944, 392</value>
+    <value>826, 294</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -4425,14 +4383,11 @@
         AAAAAD//////////AAAAAP//////////4AAAB////////////wAA//////////////////////8=
 </value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Web Enter Options</value>
+    <value>Cloud Data Capture Options</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>WebEnterOptions</value>
