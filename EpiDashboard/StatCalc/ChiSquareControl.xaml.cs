@@ -408,7 +408,7 @@ namespace EpiDashboard.StatCalc
             
         }
 
-        public string ToHTML(string htmlFileName = "", int count = 0)
+        public string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
         {
             return string.Empty;
         }

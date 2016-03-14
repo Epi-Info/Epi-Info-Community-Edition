@@ -1293,7 +1293,7 @@ namespace EpiDashboard
         /// Converts the gadget's output to Html
         /// </summary>
         /// <returns></returns>
-        public override string ToHTML(string htmlFileName = "", int count = 0)
+        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
         {
             if (IsCollapsed) return string.Empty;
             String groupField = (Parameters as EpiDashboard.LineListParameters).PrimaryGroupField;
@@ -1404,7 +1404,7 @@ namespace EpiDashboard
                             {
                                 sdvTable.Columns.Remove(groupField);
                             }
-                            htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sdvTable.DefaultView));
+                            htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sdvTable.DefaultView, useAlternatingColors));
                         }
                         else
                         {
@@ -1419,7 +1419,7 @@ namespace EpiDashboard
                                 }
 //                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView));
                             }
-                            htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView));
+                            htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView, useAlternatingColors));
                         }
                     }
                     else if (dg.ItemsSource is ListCollectionView)
@@ -1439,11 +1439,11 @@ namespace EpiDashboard
                                 {
                                     sdvTable.Columns.Remove(groupField);
                                 }
-                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sdvTable.DefaultView));
+                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sdvTable.DefaultView, useAlternatingColors));
                             }
                             else
                             {
-                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(lcv.SourceCollection as DataView));
+                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(lcv.SourceCollection as DataView, useAlternatingColors));
                             }
                         }
 

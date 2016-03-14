@@ -250,7 +250,7 @@ namespace EpiDashboard
 
             SetAttributesFromXml(element);
         }
-        public virtual string ToHTML(string htmlFileName = "", int count = 0) { return string.Empty; }
+        public virtual string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false) { return string.Empty; }
         public virtual void UpdateVariableNames() { }
 
         public virtual void CopyGadgetParameters(UserControl Gadget) 

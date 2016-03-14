@@ -1197,7 +1197,7 @@ namespace EpiDashboard.Gadgets.Charting
         /// Converts the gadget's output to Html
         /// </summary>
         /// <returns></returns>
-        public override string ToHTML(string htmlFileName = "", int count = 0)
+        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
         {
             AreaChartParameters chtParameters = (AreaChartParameters)Parameters;
             StringBuilder sb = new StringBuilder();

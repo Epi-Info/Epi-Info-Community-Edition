@@ -3944,7 +3944,7 @@ namespace EpiDashboard
                     IGadget gadget = kvp.Value;
                     if (gadget.IsProcessing == false)
                     {
-                        htmlBuilder.Append(gadget.ToHTML(htmlFileName, count));
+                        htmlBuilder.Append(gadget.ToHTML(htmlFileName, count, UseAlternatingColorsInOutput));
                         htmlBuilder.AppendLine("");
                         htmlBuilder.AppendLine("<p>&nbsp;</p>");
                         count++;
@@ -3961,7 +3961,7 @@ namespace EpiDashboard
                         IGadget gadget = control as IGadget;
                         if (gadget != null)
                         {
-                            htmlBuilder.Append(gadget.ToHTML(htmlFileName, count));
+                            htmlBuilder.Append(gadget.ToHTML(htmlFileName, count, UseAlternatingColorsInOutput));
                             htmlBuilder.AppendLine("");
                             htmlBuilder.AppendLine("<p>&nbsp;</p>");
                             count++;
