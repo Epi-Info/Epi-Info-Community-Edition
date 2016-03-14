@@ -103,12 +103,13 @@ namespace EpiDashboard
             Clipboard.SetText(sb.ToString());
         }
 
-        public static string ConvertDataViewToHtmlString(DataView dv)
+        public static string ConvertDataViewToHtmlString(DataView dv, bool useAlternatingColors = false)
         {
             StringBuilder sb = new StringBuilder();
             DataTable dt = dv.Table;
 
             sb.AppendLine(" <tr>");
+
             foreach (DataColumn dc in dt.Columns)
             {
                 sb.AppendLine("  <th style=\"width: auto;\">");
@@ -117,9 +118,21 @@ namespace EpiDashboard
             }
             sb.AppendLine("</tr>");
 
+            int rowNumber = 0;
+
             foreach (DataRow row in dt.Rows)
             {
-                sb.AppendLine(" <tr>");
+                if (((double)rowNumber) % 2.0 == 1 && useAlternatingColors)
+                {
+                    sb.AppendLine("<tr class=\"altcolor\">");
+                }
+                else
+                {
+                    sb.AppendLine("<tr>");
+                }
+               
+                rowNumber++;
+
                 foreach (DataColumn dc in dt.Columns)
                 {
                     sb.AppendLine("  <td class=\"value\">");

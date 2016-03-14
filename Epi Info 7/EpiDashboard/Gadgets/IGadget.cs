@@ -30,7 +30,7 @@ namespace EpiDashboard
         void RefreshResults();
         XmlNode Serialize(XmlDocument doc);
         void CreateFromXml(XmlElement element);
-        string ToHTML(string htmlFileName = "", int count = 0);
+        string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false);
         bool IsProcessing { get; set; }
         void SetGadgetToProcessingState();
         void SetGadgetToFinishedState();

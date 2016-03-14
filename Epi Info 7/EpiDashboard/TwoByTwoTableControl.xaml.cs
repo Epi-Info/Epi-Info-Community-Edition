@@ -2632,7 +2632,7 @@ namespace EpiDashboard
         /// Converts the gadget's output to Html
         /// </summary>
         /// <returns></returns>
-        public string ToHTML(string htmlFileName = "", int count = 0)
+        public string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
         {
             StringBuilder htmlBuilder = new StringBuilder();
 

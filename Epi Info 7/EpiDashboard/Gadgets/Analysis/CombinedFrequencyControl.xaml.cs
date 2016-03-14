@@ -844,7 +844,7 @@ namespace EpiDashboard
         /// Converts the gadget's output to Html
         /// </summary>
         /// <returns></returns>
-        public override string ToHTML(string htmlFileName = "", int count = 0)
+        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
         {
             if (IsCollapsed) return string.Empty;
 
@@ -899,7 +899,7 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
                 htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
 
-                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView));
+                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView, useAlternatingColors));
 
                 htmlBuilder.AppendLine("</table>");
             }
