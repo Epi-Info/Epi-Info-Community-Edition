@@ -7522,7 +7522,7 @@ namespace EpiDashboard
             keyColumns[0] = FieldTable.Columns[0];
             FieldTable.PrimaryKey = keyColumns;
 
-            this.TableColumnNames = new Dictionary<string, string>(); // This dictionary stores the table column names and their associated data type.             
+            this.TableColumnNames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase); // This dictionary stores the table column names and their associated data type.             
         }
 
         /// <summary>
@@ -7532,7 +7532,7 @@ namespace EpiDashboard
         {
             if (IsUsingEpiProject)
             {
-                TableColumnNames = new Dictionary<string, string>();
+                TableColumnNames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
                 FieldTable.Rows.Clear();
 
                 TableColumnNames.Add("UniqueKey", "System.Int32");
@@ -7577,17 +7577,17 @@ namespace EpiDashboard
                 {
                     if (!TableColumnNames.ContainsKey(dc.ColumnName))
                     {
-                        if (dc.ColumnName.ToLower().Equals("recstatus") && !TableColumnNames.ContainsKey(dc.ColumnName.ToUpper()))
+                        if (dc.ColumnName.ToLower().Equals("recstatus") && !TableColumnNames.ContainsKey(dc.ColumnName))
                         {
                             TableColumnNames.Add("RecStatus", dc.DataType.ToString());
                             FieldTable.Rows.Add("RecStatus", dc.DataType.ToString(), TableName, string.Empty, null);
                         }
-                        else if (dc.ColumnName.ToLower().Equals("uniquekey"))
+                        else if (dc.ColumnName.ToLower().Equals("uniquekey") && !TableColumnNames.ContainsKey(dc.ColumnName))
                         {
                             TableColumnNames.Add("UniqueKey", dc.DataType.ToString());
                             FieldTable.Rows.Add("UniqueKey", dc.DataType.ToString(), TableName, string.Empty, null);
                         }
-                        else
+                        else if(!TableColumnNames.ContainsKey(dc.ColumnName))
                         {
                             TableColumnNames.Add(dc.ColumnName, dc.DataType.ToString());
                             FieldTable.Rows.Add(dc.ColumnName, dc.DataType.ToString(), TableName, string.Empty, null);
