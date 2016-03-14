@@ -74,9 +74,14 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             object result = null;
 
-            bool firstParamExecutable = firstParam.ToLower().EndsWith(".exe")
+            bool firstParamExecutable = false;
+
+            if(string.IsNullOrEmpty(firstParam) == false)
+            {
+                firstParamExecutable = firstParam.ToLower().EndsWith(".exe")
                 || firstParam.ToLower().EndsWith(".bat")
                 || firstParam.ToLower().EndsWith(".cmd");
+            }
 
             string fileName = firstParam;
             string workingDirectory = "";
