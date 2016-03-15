@@ -34,20 +34,20 @@ namespace Epi.Core.EnterInterpreter.Rules
                     }
                 }
                 this.IdentifierList = tokensInTree.Split(',');
-                if (pContext.IsVariableValidationEnable)
-                {
-                    if (IdentifierList.Length > 0)
-                    {
-                        foreach (var item in IdentifierList)
-                        {
+                //if (pContext.IsVariableValidationEnable)
+                //{
+                //    if (IdentifierList.Length > 0)
+                //    {
+                //        foreach (var item in IdentifierList)
+                //        {
 
-                            if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
-                            {
-                                this.Context.CommandVariableCheck.Add(item.ToLower(), "isunique");
-                            }
-                        }
-                    }
-                }
+                //            if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                //            {
+                //                this.Context.CommandVariableCheck.Add(item.ToLower(), "isunique");
+                //            }
+                //        }
+                //    }
+                //}
             }
         }
 
