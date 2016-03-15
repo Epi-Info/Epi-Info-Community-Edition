@@ -76,6 +76,11 @@ namespace Epi.Windows.Dialogs
                 valid = false;
             }
 
+            if (query.EndsWith(" from"))
+            {
+                valid = false;
+            }
+
             if (query.Contains(";") && !query.EndsWith(";"))
             {
                 valid = false;
