@@ -649,7 +649,7 @@ namespace EpiDashboard.Controls
 
                 tblockTotalPercent.Text = "n/a";
 
-                grdGraph.Visibility = System.Windows.Visibility.Collapsed;
+                grdGraph.Visibility = System.Windows.Visibility.Hidden;
             }
         }
 

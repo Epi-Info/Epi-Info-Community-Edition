@@ -13,7 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>        
+    <Grid>
         <Border Name="borderAll" Style="{DynamicResource mainGadgetBorder}" >
 
             <Grid x:Name="grdMain">
@@ -28,9 +28,9 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>-->
                 </Grid.RowDefinitions>
-                
-                <Controls:CloseButton x:Name="closeButton" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" MouseLeftButtonUp="CloseButton_MouseLeftButtonUp"></Controls:CloseButton>
-                
+
+                <Controls:CloseButton x:Name="closeButton" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,5,5,0" MouseLeftButtonUp="CloseButton_MouseLeftButtonUp" Height="25"></Controls:CloseButton>
+
                 <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                     <TextBlock HorizontalAlignment="Center" FontSize="24" Margin="5" FontWeight="Bold">Pair-Matched Case-Control Study</TextBlock>
                     <Controls:StatCalcMatchedCaseControlPanel Margin="5" Orientation="Horizontal"></Controls:StatCalcMatchedCaseControlPanel>
@@ -76,6 +76,6 @@
                     </Grid>
                 </StackPanel>-->
             </Grid>
-        </Border>        
+        </Border>
     </Grid>
 </StatCalc:StatCalcGadgetBase>
