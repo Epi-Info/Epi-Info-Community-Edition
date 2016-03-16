@@ -2176,4 +2176,7 @@ of records or select fewer fields for the group.</value>
   <data name="CMENU_WHO_REFERENCE_2007" xml:space="preserve">
     <value>WHO Reference 2007</value>
   </data>
+  <data name="GADGETS_YAXIS_HEADER" xml:space="preserve">
+    <value>Y2-Axis</value>
+  </data>
 </root>

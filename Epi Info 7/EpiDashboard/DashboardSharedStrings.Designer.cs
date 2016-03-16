@@ -5316,6 +5316,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Y2-Axis.
+        /// </summary>
+        public static string GADGETS_YAXIS_HEADER {
+            get {
+                return ResourceManager.GetString("GADGETS_YAXIS_HEADER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Right-click on canvas to add content..
         /// </summary>
         public static string INSTRUCTIONS {
