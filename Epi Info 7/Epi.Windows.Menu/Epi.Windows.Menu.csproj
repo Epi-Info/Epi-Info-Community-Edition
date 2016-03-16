@@ -244,6 +244,10 @@
       <Project>{20C12C97-52CE-45C3-B563-3C15330C2A98}</Project>
       <Name>EpiInfo.Plugin</Name>
     </ProjectReference>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationClientsideProviders" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>

@@ -50,42 +50,42 @@ namespace StatCalc
 
         }
 
-        private void populationSurveyControl_Click(object sender, MouseButtonEventArgs e)
+        private void populationSurveyControl_Click(object sender, RoutedEventArgs e)
         {
             new StatCalc(StatCalc.Calculators.PopulationSurvey).Show();
         }
 
-        private void cohortCrossControl_Click(object sender, MouseButtonEventArgs e)
+        private void cohortCrossControl_Click(object sender, RoutedEventArgs e)
         {
             new StatCalc(StatCalc.Calculators.Cohort).Show();
         }
 
-        private void unmatchedControl_Click(object sender, MouseButtonEventArgs e)
+        private void unmatchedControl_Click(object sender, RoutedEventArgs e)
         {
             new StatCalc(StatCalc.Calculators.UnmatchedCaseControl).Show();
         }
 
-        private void tables2x2Control_Click(object sender, MouseButtonEventArgs e)
+        private void tables2x2Control_Click(object sender, RoutedEventArgs e)
         {
             new StatCalc(StatCalc.Calculators.TwoByTwo).Show();
         }
 
-        private void poissonControl_Click(object sender, MouseButtonEventArgs e)
+        private void poissonControl_Click(object sender, RoutedEventArgs e)
         {
             new StatCalc(StatCalc.Calculators.Poisson).Show();
         }
 
-        private void populationBinomial_Click(object sender, MouseButtonEventArgs e)
+        private void populationBinomial_Click(object sender, RoutedEventArgs e)
         {
             new StatCalc(StatCalc.Calculators.Binomial).Show();
         }
 
-        private void matchedPairControl_Click(object sender, MouseButtonEventArgs e)
+        private void matchedPairControl_Click(object sender, RoutedEventArgs e)
         {
             new StatCalc(StatCalc.Calculators.MatchedPairCaseControl).Show();
         }
 
-        private void chiSquareTrend_Click(object sender, MouseButtonEventArgs e)
+        private void chiSquareTrend_Click(object sender, RoutedEventArgs e)
         {
             new StatCalc(StatCalc.Calculators.ChiSquareForTrend).Show();
         }
@@ -102,7 +102,7 @@ namespace StatCalc
             AboutEpiInfoDialog dlg = new AboutEpiInfoDialog(mainform);
             dlg.ShowDialog();
         }
-        private void aboutEpiInfo_click(object sender, MouseEventArgs e)
+        private void aboutEpiInfo_click(object sender, RoutedEventArgs e)
         {
             OnAboutClicked();
         }
@@ -137,6 +137,102 @@ namespace StatCalc
         private void btnLocaleClick(object sender, RoutedEventArgs e)
         {
             OnOptionsClicked(OptionsDialog.OptionsTabIndex.Language);
+        }
+
+        private void populationSurveyControl_Keyup(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                new StatCalc(StatCalc.Calculators.PopulationSurvey).Show();
+            }
+        }
+
+        private void cohortCrossControl_Keyup(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                new StatCalc(StatCalc.Calculators.Cohort).Show();
+            }
+        }
+
+        private void unmatchedControl_Keyup(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                new StatCalc(StatCalc.Calculators.UnmatchedCaseControl).Show();
+            }
+        }
+
+        private void chiSquareTrend_Keyup(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                new StatCalc(StatCalc.Calculators.ChiSquareForTrend).Show();
+            }
+        }
+
+        private void tables2x2Control_Keyup(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                new StatCalc(StatCalc.Calculators.TwoByTwo).Show();
+            }
+        }
+
+        private void poissonControl_Keyup(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                new StatCalc(StatCalc.Calculators.Poisson).Show();
+            }
+        }
+
+        private void populationBinomial_Keyup(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                new StatCalc(StatCalc.Calculators.Binomial).Show();
+            }
+        }
+
+        private void matchedPairControl_Keyup(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                new StatCalc(StatCalc.Calculators.MatchedPairCaseControl).Show();
+            }
+        }
+
+        private void epiInfoWebsite_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+               
+                System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/");
+            }
+        }
+
+        private void aboutEpiInfo_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+               
+                OnAboutClicked();
+            }
+        }
+
+        private void language_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                
+                OnOptionsClicked(OptionsDialog.OptionsTabIndex.Language);
+            }
+        }
+        private void epiInfoWebsite_Click(object sender, EventArgs e)
+        {
+            
+            System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/");
         }
     }
 }

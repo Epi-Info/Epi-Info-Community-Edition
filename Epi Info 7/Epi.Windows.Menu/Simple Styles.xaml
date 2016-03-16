@@ -9,13 +9,21 @@
 	If you want to change the color of a control you can just chnage the brush; if you want to add a new shape or change arrangement then also edit the template -->
 
     <!-- NormalBrush is used as the Background for SimpleButton, SimpleRepeatButton -->
-
+    <!--<Style TargetType="ContentControl">
+        <Setter Property="Selector.IsSelected" Value="False"></Setter>
+        <Style.Triggers>
+            <Trigger Property="Selector.IsSelected" Value="True">
+                <Setter Property="Background" Value="Red" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>-->
 
     <Style TargetType="TextBlock" x:Key="sectionTitle">
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Foreground" Value="#1d60ac" />
         <Setter Property="FontWeight" Value="SemiBold" />
+        
     </Style>
 
     <Style TargetType="TextBlock" x:Key="sectionDescp">
@@ -24,6 +32,103 @@
         <Setter Property="Foreground" Value="#58595b" />
         <Setter Property="Width" Value="220" />
         <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    
+    <Style TargetType="Button" x:Key="buttonStyle">
+        <Setter Property="Foreground" Value="Transparent" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="mainButtonBackground" CornerRadius="0" Background="White" BorderBrush="#58595b" BorderThickness="1.5,1.5,1.5,1.5" >
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="mainButtonBackground" Property="Background"  >
+                                <Setter.Value>#f3f3f3</Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin"  Value="True">
+                            <Setter Property="Background" Value="#f3f3f3" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+
+    <Style TargetType="Button" x:Key="buttonMenuRight">
+        <Setter Property="Foreground" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border  CornerRadius="0" Background="Transparent" BorderThickness="0" >
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="buttonMenuItemsRight">
+        <Setter Property="Foreground" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Height" Value="23" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="MyBackgroundElement" CornerRadius="0" Background="Transparent" BorderThickness="0" >
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MyBackgroundElement" Property="Background"  >
+                                <Setter.Value>#4a80bd</Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin"  Value="True">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Trigger>
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+       
+    </Style>
+
+    <Style TargetType="Button" x:Key="buttonfooterLinks">
+        <Setter Property="Foreground" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="MyBackgroundElement" CornerRadius="0" Background="Transparent" BorderThickness="0" >
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        
+                        <Trigger Property="IsKeyboardFocusWithin"  Value="True">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
     </Style>
 
     <LinearGradientBrush x:Key="NormalBrush" EndPoint="0,1" StartPoint="0,0">
@@ -110,14 +215,9 @@
         <Setter Property="Width" Value="170" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#4a80bd" />
-                <Setter Property="Foreground" Value="#ffffff" />
-            </Trigger>
-            <Trigger Property="IsKeyboardFocusWithin"  Value="True">
-                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="White"/>
             </Trigger>
         </Style.Triggers>
-
     </Style>
 
     <!-- Simple Button - This control sets brushes on each state. Note that these brushes must be listed above since they are static resources -->

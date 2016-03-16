@@ -16,6 +16,11 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Automation;
+using System.Windows.Automation.Text;
+
+
+
 
 namespace Epi.Windows.Menu
 {
@@ -39,6 +44,7 @@ namespace Epi.Windows.Menu
                 this.tsslLocale.Text = Thread.CurrentThread.CurrentUICulture.Name;
                 this.tsslVersion.Text = appId.Version;
                 mainform = new MainForm();
+            
 
             #region Translation
             
@@ -69,10 +75,13 @@ namespace Epi.Windows.Menu
 
 
             #endregion 
+
         }
 
+       
+        
         #endregion
-
+        
         private void button_MouseOver(object sender, EventArgs e)
         {         
         }
@@ -102,10 +111,16 @@ namespace Epi.Windows.Menu
             LoadModule("DASHBOARD");
         }
 
-        private void createForms_Click(object sender, MouseButtonEventArgs e)
+        private void createForms_Click(object sender, EventArgs e)
         {
+           
             LoadModule("MAKEVIEW");
+
+        
+
         }
+
+        
 
         private void createForms_hover(object sender, EventArgs e)
         {
@@ -179,16 +194,22 @@ namespace Epi.Windows.Menu
 
 
         //Link for Epi Info Website - located in footer
-        private void Hyperlink_epiInfoWebsite(object sender, RequestNavigateEventArgs e)
-        {
-            HideStoryBoard();
-            System.Diagnostics.Process.Start(e.Uri.ToString());
-        }
+        //private void Hyperlink_epiInfoWebsite(object sender, RequestNavigateEventArgs e)
+        //{
+        //    HideStoryBoard();
+        //    System.Diagnostics.Process.Start(e.Uri.ToString());
+        //}
 
         private void contents_Click(object sender, EventArgs e)
         {
             HideStoryBoard();
             System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/index.htm");
+        }
+
+        private void epiInfoWebsite_Click(object sender, EventArgs e)
+        {
+            HideStoryBoard();
+            System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/");
         }
 
         private void howToVideo_Click(object sender, EventArgs e)
@@ -354,6 +375,8 @@ namespace Epi.Windows.Menu
             }
         }
 
+      
+
         public void BeginBusy(string str)
         {
             UpdateStatus(str, false);
@@ -435,7 +458,7 @@ namespace Epi.Windows.Menu
         {
         }
 
-        private void aboutEpiInfo_click(object sender, MouseEventArgs e)
+        private void aboutEpiInfo_click(object sender, EventArgs e)
         {
             HideStoryBoard();
             OnAboutClicked();
@@ -483,6 +506,12 @@ namespace Epi.Windows.Menu
         
         }
 
+        private void tabEvent() { 
+        
+
+        
+        }
+
         private void Other_EpiResource_Click(object sender, EventArgs e)
         {
             var submenuEpiResoucesHeight = submenuEpiResouces.Height.ToString();
@@ -502,6 +531,240 @@ namespace Epi.Windows.Menu
             }
         }
 
+        private void createForms_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.Key == Key.Space)
+            {
+                LoadModule("MAKEVIEW");
+            }
+           
+
+        }
+
+        private void enterData_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                LoadModule("ENTER");
+            }
+        }
+
+        private void createMaps_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                LoadModule("EPIMAP");
+            }
+        }
+
+        private void statCalc_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                LoadModule("StatCalc");
+            }
+        }
+
+        private void classic_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                LoadModule("ANALYSIS");
+            }
+        }
+
+        private void visualDashboard_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                LoadModule("DASHBOARD");
+            }
+        }
+
+        private void epiInfoWebsite_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                HideStoryBoard();
+                System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/");
+            }
+        }
+
+        private void aboutEpiInfo_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                HideStoryBoard();
+                OnAboutClicked();
+            }
+        }
+
+        private void language_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                HideStoryBoard();
+                OnOptionsClicked(OptionsDialog.OptionsTabIndex.Language);
+            }
+        }
+
+        private void rightMenu_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                var pnlRightMenuHeight = pnlRightMenu.Height.ToString();
+
+                if (pnlRightMenuHeight == "0")
+                {
+                    this.BeginStoryboard(FindResource("sbShowRightMenu") as Storyboard);
+                }
+                else if (pnlRightMenuHeight == "163")
+                {
+                    this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
+
+                }
+                else if (pnlRightMenuHeight == "220")
+                {
+                    this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
+
+                }
+            }
+        }
+
+        private void options_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                HideStoryBoard();
+                OnOptionsClicked(OptionsDialog.OptionsTabIndex.General);
+            }
+        }
+
+        private void contents_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                HideStoryBoard();
+                System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/index.htm");
+            }
+        }
+
+        private void howToVideo_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                HideStoryBoard();
+                try
+                {
+                    System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+                    doc.Load("http://ftp.cdc.gov/pub/software/epi_info/sites.xml");
+                    List<System.Xml.XmlElement> elements = new List<System.Xml.XmlElement>();
+                    foreach (System.Xml.XmlElement element in doc.DocumentElement.ChildNodes)
+                    {
+                        if (element.Name.Equals("videos"))
+                        {
+                            string url = element.InnerText;
+                            System.Diagnostics.Process.Start(url);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //
+                }
+            }
+        }
+
+        private void epiInfoQA_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                HideStoryBoard();
+                System.Diagnostics.Process.Start("https://epiinfo.atlassian.net/wiki/questions");
+            }
+        }
+
+        private void contactHelpDesk_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                HideStoryBoard();
+                Epi.Windows.MsgBox.ShowInformation(SharedStrings.HELPDESK_LOGIN);
+                System.Diagnostics.Process.Start("https://epiinfo.atlassian.net/servicedesk/customer/portal/1");
+            }
+        }
+
+        private void otherEpiResource_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                var submenuEpiResoucesHeight = submenuEpiResouces.Height.ToString();
+
+                if (submenuEpiResoucesHeight == "0")
+                {
+                    this.BeginStoryboard(FindResource("showEpiResource") as Storyboard);
+
+
+                }
+                else if (submenuEpiResoucesHeight == "50")
+                {
+                    this.BeginStoryboard(FindResource("hideEpiResource") as Storyboard);
+
+
+
+                }
+            }
+        }
+
+        private void activeEpi_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                HideStoryBoard();
+                System.Diagnostics.Process.Start("http://activepi.com");
+            }
+        }
+
+        private void openEpi_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                HideStoryBoard();
+                System.Diagnostics.Process.Start("http://openepi.com");
+            }
+        }
+
+        private void epiInfoLogs_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                HideStoryBoard();
+                string logFilePath = Logger.GetLogFilePath();
+                //WinUtil.OpenTextFile(Logger.GetLogFilePath());
+
+                if (File.Exists(logFilePath))
+                {
+                    string containingFolder = System.IO.Path.GetDirectoryName(logFilePath);
+                    System.Diagnostics.Process.Start(containingFolder);
+                }
+                else if (Directory.Exists(logFilePath))
+                {
+                    System.Diagnostics.Process.Start(logFilePath);
+                }
+            }
+        }
+
+       
+
+        
+        
+
+
+       
+        
+
+       
       
 
         

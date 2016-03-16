@@ -25,71 +25,63 @@
 
             <StackPanel DockPanel.Dock="Top" Margin="20 20 0 0 ">
                 <WrapPanel Margin="25 0 0 0" Orientation="Horizontal">
-                    <ContentControl Cursor="Hand" MouseDown="populationSurveyControl_Click" >
-                        <Border Background="White"  BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 40 10">
-                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 0">
-                                <TextBlock x:Name="txtPopulationSurvey" Style="{StaticResource sectionTitle}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"><Run Text="POPULATION SURVEY"/></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ContentControl>
-                    <ContentControl Cursor="Hand" MouseDown="cohortCrossControl_Click">
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 0 10"  HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
-                                <TextBlock x:Name="txtCohortorCross" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="COHORT OR&#10;CROSS-SECTIONAL"/></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ContentControl>
+
+                    <Button TabIndex="0" Style="{StaticResource buttonStyle}" KeyUp="populationSurveyControl_Keyup"  Click="populationSurveyControl_Click" Width="200" Height="50" Margin="0 0 40 10">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 0">
+                            <TextBlock x:Name="txtPopulationSurvey" Style="{StaticResource sectionTitle}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"><Run Text="POPULATION SURVEY"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Button TabIndex="1" Style="{StaticResource buttonStyle}" KeyUp="cohortCrossControl_Keyup" Click="cohortCrossControl_Click" Width="200" Height="50" Margin="0 0 0 10"  HorizontalAlignment="Left">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                            <TextBlock x:Name="txtCohortorCross" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="COHORT OR&#10;CROSS-SECTIONAL"/></TextBlock>
+                        </StackPanel>
+                    </Button>
                 </WrapPanel>
 
                 <WrapPanel Margin="25 0 0 0" Orientation="Horizontal">
-                    <ContentControl Cursor="Hand" MouseDown="unmatchedControl_Click" >
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 40 10" HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
-                                <TextBlock x:Name="unmatchedCaseControl" Style="{StaticResource sectionTitle}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" ><Run Text="UNMATCHED&#10;CASE-CONTROL"/></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ContentControl>
-                    <ContentControl Cursor="Hand" MouseDown="chiSquareTrend_Click">
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 0 10"  HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
-                                <TextBlock x:Name="txtChiSquare" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="CHI SQUARE&#10;FOR TREND"/></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ContentControl>
+
+                    <Button TabIndex="2" Style="{StaticResource buttonStyle}" KeyUp="unmatchedControl_Keyup"  Click="unmatchedControl_Click" Width="200" Height="50" Margin="0 0 40 10" HorizontalAlignment="Left">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                            <TextBlock x:Name="unmatchedCaseControl" Style="{StaticResource sectionTitle}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" ><Run Text="UNMATCHED&#10;CASE-CONTROL"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Button TabIndex="3" Style="{StaticResource buttonStyle}" KeyUp="chiSquareTrend_Keyup" Click="chiSquareTrend_Click" Width="200" Height="50" Margin="0 0 0 10"  HorizontalAlignment="Left">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                            <TextBlock x:Name="txtChiSquare" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="CHI SQUARE&#10;FOR TREND"/></TextBlock>
+                        </StackPanel>
+                    </Button>
                 </WrapPanel>
 
                 <WrapPanel Margin="25 0 0 0" Orientation="Horizontal">
-                    <ContentControl Cursor="Hand" MouseDown="tables2x2Control_Click" >
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 40 10" HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
-                                <TextBlock x:Name="txtTables22N" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center" ><Run Text="TABLES (2 x 2 x N)"/></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ContentControl>
-                    <ContentControl Cursor="Hand" MouseDown="poissonControl_Click">
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 0 10"  HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
-                                <TextBlock x:Name="txtPoisson" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="POISSON&#10;(RARE EVENT VS. STD)"/></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ContentControl>
+
+                    <Button TabIndex="4" Style="{StaticResource buttonStyle}" KeyUp="tables2x2Control_Keyup"  Click="tables2x2Control_Click"  Width="200" Height="50" Margin="0 0 40 10" HorizontalAlignment="Left">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                            <TextBlock x:Name="txtTables22N" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center" ><Run Text="TABLES (2 x 2 x N)"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Button TabIndex="5" Style="{StaticResource buttonStyle}" KeyUp="poissonControl_Keyup" Click="poissonControl_Click" Width="200" Height="50" Margin="0 0 0 10"  HorizontalAlignment="Left">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                            <TextBlock x:Name="txtPoisson" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="POISSON&#10;(RARE EVENT VS. STD)"/></TextBlock>
+                        </StackPanel>
+                    </Button>
                 </WrapPanel>
 
                 <WrapPanel Margin="25 0 0 0" Orientation="Horizontal">
-                    <ContentControl Cursor="Hand" MouseDown="populationBinomial_Click" >
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 40 10" HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
-                                <TextBlock x:Name="txtPopulationBinomial" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center" ><Run Text="POPULATION BINOMIAL&#10;(PROPORTION VS. STD.)"/></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ContentControl>
-                    <ContentControl Cursor="Hand" MouseDown="matchedPairControl_Click">
-                        <Border Background="White" BorderBrush="#58595b" BorderThickness="1.5" Width="200" Height="50" Margin="0 0 0 10"  HorizontalAlignment="Left">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
-                                <TextBlock x:Name="txtMatchedPairCase" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="MATCHED PAIR&#10;CASE CONTROL STUDY"/></TextBlock>
-                            </StackPanel>
-                        </Border>
-                    </ContentControl>
+
+                    <Button TabIndex="6" Style="{StaticResource buttonStyle}" KeyUp="populationBinomial_Keyup"  Click="populationBinomial_Click"  Width="200" Height="50" Margin="0 0 40 10" HorizontalAlignment="Left">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                            <TextBlock x:Name="txtPopulationBinomial" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center" ><Run Text="POPULATION BINOMIAL&#10;(PROPORTION VS. STD.)"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Button TabIndex="7" Style="{StaticResource buttonStyle}" KeyUp="matchedPairControl_Keyup" Click="matchedPairControl_Click" Width="200" Height="50" Margin="0 0 0 10"  HorizontalAlignment="Left">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                            <TextBlock x:Name="txtMatchedPairCase" Style="{StaticResource sectionTitle}" TextAlignment="Center" HorizontalAlignment="Center"><Run Text="MATCHED PAIR&#10;CASE CONTROL STUDY"/></TextBlock>
+                        </StackPanel>
+                    </Button>
                 </WrapPanel>
 
             </StackPanel>
@@ -97,20 +89,32 @@
             <StackPanel  Background="#123b6a" Height="28" Margin="0 17 0 0">
                 <StackPanel Orientation="Horizontal" Margin="15 7 15 0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <TextBlock ><Hyperlink Foreground="#d2dfee" TextDecorations="None" RequestNavigate="Hyperlink_epiInfoWebsite" NavigateUri="http://wwwn.cdc.gov/epiinfo/"> EPI INFO™ WEBSITE</Hyperlink></TextBlock>
+
+                        <Button TabIndex="8" Style="{StaticResource buttonfooterLinks}" KeyUp="epiInfoWebsite_Keydown" Click="epiInfoWebsite_Click" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Foreground="#d2dfee " >
+                            <Button.ToolTip>
+                                <ToolTip Visibility="Hidden">EPI INFO™ WEBSITE</ToolTip>
+                            </Button.ToolTip>
+                            EPI INFO™ WEBSITE
+                        </Button>
                         <TextBlock Foreground="#d2dfee" Padding="10 0 10 0">|</TextBlock>
-                        <ContentControl Cursor="Hand" MouseDown="aboutEpiInfo_click">
+                        <Button TabIndex="9" Style="{StaticResource buttonfooterLinks}"  KeyUp="aboutEpiInfo_Keydown" Cursor="Hand" Click="aboutEpiInfo_click">
+                            <Button.ToolTip>
+                                <ToolTip Visibility="Hidden">ABOUT EPI INFO™</ToolTip>
+                            </Button.ToolTip>
                             <TextBlock Foreground="#d2dfee">ABOUT EPI INFO™</TextBlock>
-                        </ContentControl>
+                        </Button>
                     </StackPanel>
 
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="80 0 0 0">
-                        <ContentControl  Cursor="Hand" MouseDown="btnLocaleClick">
+                        <Button TabIndex="10" Style="{StaticResource buttonfooterLinks}"  KeyDown="language_Keydown"  Cursor="Hand" Click="btnLocaleClick">
+                            <Button.ToolTip>
+                                <ToolTip Visibility="Hidden">LANGUAGE</ToolTip>
+                            </Button.ToolTip>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock x:Name="txtLanguage" Foreground="#d2dfee" Padding="0 0 5 0">LANGUAGE:</TextBlock>
-                                <TextBlock Foreground="#d2dfee" x:Name="tsslLocale"></TextBlock>
+                                <TextBlock Foreground="#d2dfee" x:Name="tsslLocale" Padding="0 0 5 0"></TextBlock>
                             </StackPanel>
-                        </ContentControl>
+                        </Button>
                         <StackPanel Orientation="Horizontal" Margin="15 0 5 0">
                             <TextBlock x:Name="txtVersion" Foreground="#8eafd5">VERSION:</TextBlock>
                             <TextBlock Foreground="#8eafd5" x:Name="tsslVersion"></TextBlock>
