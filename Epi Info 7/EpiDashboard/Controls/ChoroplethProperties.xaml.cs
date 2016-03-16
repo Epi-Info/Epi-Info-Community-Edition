@@ -1928,6 +1928,8 @@ namespace EpiDashboard.Controls
         {
             try
             {
+                OnQuintileOptionChanged();
+
                 this.datafilters = rowFilterControl.DataFilters;
 
                 if (radShapeFile.IsChecked == true && this.choroplethShapeLayerProperties != null) 
