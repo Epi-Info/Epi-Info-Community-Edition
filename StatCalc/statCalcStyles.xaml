@@ -20,5 +20,56 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
+    
+    
+    <Style TargetType="Button" x:Key="buttonStyle">
+        <Setter Property="Foreground" Value="Transparent" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="mainButtonBackground" CornerRadius="0" Background="White" BorderBrush="#58595b" BorderThickness="1.5,1.5,1.5,1.5" >
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="mainButtonBackground" Property="Background"  >
+                                <Setter.Value>#f3f3f3</Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin"  Value="True">
+                            <Setter Property="Background" Value="#f3f3f3" />
+                        </Trigger>
 
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style TargetType="Button" x:Key="buttonfooterLinks">
+        <Setter Property="Foreground" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="MyBackgroundElement" CornerRadius="0" Background="Transparent" BorderThickness="0" >
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsKeyboardFocusWithin"  Value="True">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
 </ResourceDictionary>
