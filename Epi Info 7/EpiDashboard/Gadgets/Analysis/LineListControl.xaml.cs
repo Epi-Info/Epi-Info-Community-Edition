@@ -1021,14 +1021,19 @@ namespace EpiDashboard
             customMaxColumnElement.InnerText = listParameters.MaxColumnLength.ToString(); // CustomOutputHeading.Replace("<", "&lt;");
             element.AppendChild(customMaxColumnElement);
 
+            if (listParameters.Width != null)
+            {
+                XmlElement customMaxWidthElement = doc.CreateElement("maxWidth");
+                customMaxWidthElement.InnerText = listParameters.Width.ToString(); // CustomOutputHeading.Replace("<", "&lt;");
+                element.AppendChild(customMaxWidthElement);
+            }
 
-            XmlElement customMaxWidthElement = doc.CreateElement("maxWidth");
-            customMaxWidthElement.InnerText = listParameters.Width.ToString(); // CustomOutputHeading.Replace("<", "&lt;");
-            element.AppendChild(customMaxWidthElement);
-
-            XmlElement customMaxHeightElement = doc.CreateElement("maxHeight");
-            customMaxHeightElement.InnerText = listParameters.Height.ToString(); // CustomOutputHeading.Replace("<", "&lt;");
-            element.AppendChild(customMaxHeightElement);
+            if (listParameters.Height != null)
+            {
+                XmlElement customMaxHeightElement = doc.CreateElement("maxHeight");
+                customMaxHeightElement.InnerText = listParameters.Height.ToString(); // CustomOutputHeading.Replace("<", "&lt;");
+                element.AppendChild(customMaxHeightElement);
+            }
 
 
             SerializeAnchors(element);
