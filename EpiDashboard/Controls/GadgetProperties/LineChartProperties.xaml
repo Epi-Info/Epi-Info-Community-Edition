@@ -367,7 +367,7 @@
                             </ComboBox>
                         </StackPanel>
                         <StackPanel>
-                            <TextBlock x:Name="tblockSecondYAxisVariable" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,12,0,0" Text="Second y-axis variable:__xfe" Visibility="Visible" />
+                            <TextBlock x:Name="tblockSecondYAxisVariable" HorizontalAlignment="Left"  Margin="0,12,0,0" Text="Second y-axis variable:__xfe" Visibility="Visible" />
                             <ComboBox x:Name="cmbSecondYAxisVariable" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Visibility="Visible" SelectionChanged="cmbSecondYAxisVariable_SelectionChanged" />
                         </StackPanel>
 

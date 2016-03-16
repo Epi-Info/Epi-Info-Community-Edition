@@ -207,6 +207,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockLineThickness.Text = DashboardSharedStrings.GADGET_LINE_THICKNESS;
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
+            tblockY2AxisSubheader.Content = DashboardSharedStrings.GADGETS_YAXIS_HEADER;
             #endregion // Translation
 
         }
@@ -1267,7 +1268,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             if (cmbSecondYAxis.SelectedIndex == 0)  //Second Y-axis type = None
             {
-                tblockSecondYAxisVariable.Text = "Second y-axis variable:";
+                tblockSecondYAxisVariable.Text = DashboardSharedStrings.GADGET_SECOND_YAXIS_VARIABLE;
                 //tblockSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
                 //cmbSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
                 cmbSecondYAxisVariable.IsEnabled = false;
