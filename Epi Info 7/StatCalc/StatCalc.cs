@@ -86,7 +86,7 @@ namespace StatCalc
                     this.Width = ((EpiDashboard.Gadgets.IStatCalcControl)control).PreferredUIWidth;
                     this.Height = ((EpiDashboard.Gadgets.IStatCalcControl)control).PreferredUIHeight + 10;
                 }
-            }
+            }           
         }
 
         private void InitializeComponent()
@@ -96,9 +96,12 @@ namespace StatCalc
             // 
             // StatCalc
             // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoSize = true; 
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;                              
             this.ClientSize = new System.Drawing.Size(682, 555);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "StatCalc";
+            this.Name = "StatCalc";           
             this.ResumeLayout(false);
 
         }
