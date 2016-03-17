@@ -23,7 +23,7 @@
 
             </StackPanel>
 
-            <StackPanel DockPanel.Dock="Top" Margin="20 20 0 0 ">
+            <StackPanel DockPanel.Dock="Top" Margin="20 20 40 0 ">
                 <WrapPanel Margin="25 0 0 0" Orientation="Horizontal">
 
                     <Button TabIndex="0" Style="{StaticResource buttonStyle}" KeyUp="populationSurveyControl_Keyup"  Click="populationSurveyControl_Click" Width="200" Height="50" Margin="0 0 40 10">
@@ -116,7 +116,7 @@
                             </StackPanel>
                         </Button>
                         <StackPanel Orientation="Horizontal" Margin="15 0 5 0">
-                            <TextBlock x:Name="txtVersion" Foreground="#8eafd5">VERSION:</TextBlock>
+                            <TextBlock x:Name="txtVersion" Foreground="#8eafd5">VERSION: </TextBlock>
                             <TextBlock Foreground="#8eafd5" x:Name="tsslVersion"></TextBlock>
                         </StackPanel>
                     </StackPanel>

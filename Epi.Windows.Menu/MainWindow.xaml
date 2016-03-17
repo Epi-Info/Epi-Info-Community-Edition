@@ -297,7 +297,7 @@
                                         <TextBlock Foreground="#d2dfee">ABOUT EPI INFO™</TextBlock>
                                     </Button>
                                 </StackPanel>
-                                <StackPanel x:Name="LangandVer"  HorizontalAlignment="Right" Orientation="Horizontal" Margin="210 0 0 0">
+                                <StackPanel x:Name="LangandVer"  HorizontalAlignment="Right" Orientation="Horizontal" Margin="245 0 0 0">
                                     <Button  Style="{StaticResource buttonfooterLinks}" TabIndex="8" KeyDown="language_Keydown"  Cursor="Hand" Click="btnLocaleClick">
                                         <Button.ToolTip>
                                             <ToolTip Visibility="Hidden">LANGUAGE</ToolTip>
