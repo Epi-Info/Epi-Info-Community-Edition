@@ -38,6 +38,7 @@ namespace StatCalc
 
             host = new ElementHost();
             host.Dock = DockStyle.Fill;
+            host.AutoSize = true;
             switch (calculator)
             {
                 case Calculators.TwoByTwo:
@@ -78,6 +79,8 @@ namespace StatCalc
                     this.Width = ((EpiDashboard.StatCalc.IStatCalcControl)control).PreferredUIWidth;
                     this.Height = ((EpiDashboard.StatCalc.IStatCalcControl)control).PreferredUIHeight + 10;
                     ((EpiDashboard.StatCalc.IStatCalcControl)control).HideCloseIcon();
+                    host.Width = this.Width;
+                    host.Height = this.Height;
                 }
                 else if (control is EpiDashboard.Gadgets.IStatCalcControl)
                 {
@@ -85,6 +88,8 @@ namespace StatCalc
                     this.Controls.Add(host);
                     this.Width = ((EpiDashboard.Gadgets.IStatCalcControl)control).PreferredUIWidth;
                     this.Height = ((EpiDashboard.Gadgets.IStatCalcControl)control).PreferredUIHeight + 10;
+                    host.Width = this.Width;
+                    host.Height = this.Height;
                 }
             }           
         }
