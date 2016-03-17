@@ -172,7 +172,7 @@
 
                             <StackPanel Panel.ZIndex="1" >
 
-                                <WrapPanel  Margin="85 0 0 0" Orientation="Horizontal">
+                                <WrapPanel  Margin="85 0 85 0" Orientation="Horizontal">
                                     <!--<ContentControl  MouseDown="createForms_Click" AutomationProperties.HelpText="Create Forms - Create surveys and questionnaires with field validation and skip logic." TabIndex="1" Name="createFormContainer" Cursor="Hand"  >-->
                                     <!--<ContentControl   Cursor="Hand"  >-->
 
