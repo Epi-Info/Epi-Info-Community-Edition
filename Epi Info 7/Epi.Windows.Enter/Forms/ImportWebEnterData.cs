@@ -1298,7 +1298,7 @@ namespace Epi.Enter.Forms
                         {
                         Request.Criteria.PageNumber = i; // batch index
                         Request.Criteria.PageSize = PageSize; // number of records per batch
-
+                        Request.Criteria.StatusId = SurveyStatus;
                         Result = null;
 
                         try
