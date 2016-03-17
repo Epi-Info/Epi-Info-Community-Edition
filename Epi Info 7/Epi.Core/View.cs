@@ -140,7 +140,7 @@ namespace Epi
             }
             this.fieldLockToken = new ArrayList();
             //--123
-            VerifyandUpdateViewSystemVars();
+            //VerifyandUpdateViewSystemVars();
             //--
         }
 
@@ -703,20 +703,33 @@ namespace Epi
         /// </summary>
         private void VerifyandUpdateViewSystemVars()
         {
-            DataTable fieldSysVars = GetMetadata().GetSystemFields(this.id);
-            bool FlagColumnExists = false;
-            GetMetadata().SynchronizeMetaFieldtypes(this);
-            //check table for fields
-            foreach (DataRow row in fieldSysVars.Rows)
+            //DataTable fieldSysVars = GetMetadata().GetSystemFields(this.id);
+            //bool FlagColumnExists = false;
+            //GetMetadata().SynchronizeMetaFieldtypes(this);
+            ////check table for fields
+            //foreach (DataRow row in fieldSysVars.Rows)
+            //{
+            //    if (row[ColumnNames.NAME].ToString() == ColumnNames.RECORD_FIRST_SAVE_TIME)
+            //    {
+            //        FlagColumnExists = true;
+            //        return;
+            //    }
+            //}
+            //if (FlagColumnExists == false)
+            //{               
+            //    FirstSaveTimeField firstsavetimeField = new FirstSaveTimeField(this);
+            //    firstsavetimeField.SaveToDb();
+            //    LastSaveTimeField lastsavetimeField = new LastSaveTimeField(this);
+            //    lastsavetimeField.SaveToDb();
+            //}
+
+            try
             {
-                if (row[ColumnNames.NAME].ToString() == ColumnNames.RECORD_FIRST_SAVE_TIME)
-                {
-                    FlagColumnExists = true;
-                    return;
-                }
+                GetMetadata().GetFieldIdByNameAsDataRow(name, ColumnNames.RECORD_FIRST_SAVE_TIME);
             }
-            if (FlagColumnExists == false)
-            {               
+            catch
+            {
+                GetMetadata().SynchronizeMetaFieldtypes(this);
                 FirstSaveTimeField firstsavetimeField = new FirstSaveTimeField(this);
                 firstsavetimeField.SaveToDb();
                 LastSaveTimeField lastsavetimeField = new LastSaveTimeField(this);
