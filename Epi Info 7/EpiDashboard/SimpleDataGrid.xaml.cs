@@ -69,7 +69,8 @@ namespace EpiDashboard
             {
                 scrollViewer.Width = grdMain.ActualWidth - 100;
             }
-            
+            dashboardHelper.ResizedWidth = e.NewSize.Width;
+            dashboardHelper.ResizedHeight = e.NewSize.Height;
             scrollViewer.Height = grdMain.ActualHeight;
         }
 
