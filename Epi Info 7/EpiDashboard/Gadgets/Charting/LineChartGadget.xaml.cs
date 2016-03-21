@@ -574,8 +574,10 @@ namespace EpiDashboard.Gadgets.Charting
                                 }
                                 break;
                             case "secondyvartype":
-                                Y2Type y2Type = ((Y2Type)Int32.Parse(child.InnerText));
-                                ((LineChartParameters)Parameters).Y2AxisType = int.Parse(child.InnerText.Replace("&lt;", "<"));
+//                                Y2Type y2Type = ((Y2Type)Int32.Parse(child.InnerText));
+                                Y2Type y2Type = ((Y2Type)Int32.Parse("0"));
+//                                ((LineChartParameters)Parameters).Y2AxisType = int.Parse(child.InnerText.Replace("&lt;", "<"));
+                                ((LineChartParameters)Parameters).Y2AxisType = int.Parse("0");
                                 break;
                             case "sort":
                                 if (child.InnerText.ToLower().Equals("highlow") || child.InnerText.ToLower().Equals("hightolow"))
