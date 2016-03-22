@@ -139,9 +139,6 @@ namespace Epi
                 this.GetParent(Id);
             }
             this.fieldLockToken = new ArrayList();
-            //--123
-            VerifyandUpdateViewSystemVars();
-            //--
         }
 
         #endregion Constructors
