@@ -2247,13 +2247,6 @@ namespace Epi.Data.Services
                 UniqueKeyField uniqueKeyField = new UniqueKeyField(view);
                 GlobalRecordIdField globalRecordIdField = new GlobalRecordIdField(view);
 
-                //---123
-                FirstSaveTimeField firstsavetimeField = new FirstSaveTimeField(view);
-                firstsavetimeField.SaveToDb();
-                LastSaveTimeField lastsavetimeField = new LastSaveTimeField(view);
-                lastsavetimeField.SaveToDb();
-                //---
-
                 uniqueKeyField.SaveToDb();
                 recStatusField.SaveToDb();
                 globalRecordIdField.SaveToDb();
