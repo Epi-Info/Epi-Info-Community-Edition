@@ -116,10 +116,6 @@ namespace Epi.Windows.Enter.Dialogs
                 lbxSearchFields.Items.Add(new SearchListBoxItem(recstatus.Name.ToString(), recstatus.Id, recstatus.FieldType.ToString(), string.Empty, string.Empty));
                 GlobalRecordIdField globalfld = new GlobalRecordIdField(view);
                 lbxSearchFields.Items.Add(new SearchListBoxItem(globalfld.Name.ToString(), globalfld.Id, globalfld.FieldType.ToString(), string.Empty, string.Empty));
-                FirstSaveTimeField firstsavetime = new FirstSaveTimeField(view);
-                lbxSearchFields.Items.Add(new SearchListBoxItem(firstsavetime.Name.ToString(), firstsavetime.Id, firstsavetime.FieldType.ToString(), string.Empty, string.Empty));
-                LastSaveTimeField lastsavetime = new LastSaveTimeField(view);
-                lbxSearchFields.Items.Add(new SearchListBoxItem(lastsavetime.Name.ToString(), lastsavetime.Id, lastsavetime.FieldType.ToString(), string.Empty, string.Empty));
                 //--
               }
         }
